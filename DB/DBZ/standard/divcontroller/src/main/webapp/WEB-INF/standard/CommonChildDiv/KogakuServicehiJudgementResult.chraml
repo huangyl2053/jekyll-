@@ -1,0 +1,2119 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-is-composite-control="true" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KogakuServicehiJudgementResult&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;originalProperty&quot;:[{&quot;publicChildFieldName&quot;:&quot;KogakuServicehiJudgementResult&quot;,&quot;publicChildProperty&quot;:&quot;title&quot;,&quot;newPropertyName&quot;:&quot;title&quot;},{&quot;publicChildFieldName&quot;:&quot;KogakuServicehiJudgementResult&quot;,&quot;publicChildProperty&quot;:&quot;eraseBorder&quot;,&quot;newPropertyName&quot;:&quot;eraseBorder&quot;},{&quot;publicChildFieldName&quot;:&quot;KogakuServicehiJudgementResult&quot;,&quot;publicChildProperty&quot;:&quot;panelDisplay&quot;,&quot;newPropertyName&quot;:&quot;panelDisplay&quot;}],&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;canTransferEvent&quot;:true,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginRight-XS marginTop-Default marginBottom-Default UzCommonChildDivPanel" id="KogakuServicehiJudgementResult" style="width: 993px; margin-top: 0px; margin-bottom: 0px; margin-left: 0em;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KogakuServicehiJudgementResult&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;993px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;KogakuServicehiJudgementResult&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;判定結果&quot;,&quot;marginTop&quot;:&quot;Default&quot;,&quot;marginBottom&quot;:&quot;Default&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:true,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KogakuServicehiJudgementResult&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:false,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:0,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KogakuServicehiJudgementResult_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">判定結果</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="KogakuServicehiJudgementResult_panel_body_area"><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS Height-S" id="dgJudgementResult" style="width: 980px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgJudgementResult&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;980px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;dgJudgementResult&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;S&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:1},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;事業者&quot;,&quot;dataName&quot;:&quot;txtJigyosha&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:295,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtJigyosha&quot;},{&quot;columnName&quot;:&quot;サービス種類&quot;,&quot;dataName&quot;:&quot;txtServiceShurui&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:190,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtServiceShurui&quot;},{&quot;columnName&quot;:&quot;サービス<br>費用合計&quot;,&quot;dataName&quot;:&quot;txtServiceHiyoTotal&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:95,&quot;visible&quot;:true,&quot;cellType&quot;:5,&quot;cellDetails&quot;:{&quot;cellType&quot;:5,&quot;maxLength&quot;:&quot;1000000000000&quot;,&quot;minLength&quot;:&quot;0&quot;,&quot;maxValue&quot;:&quot;1.7976931348623157e+308&quot;,&quot;minValue&quot;:&quot;0&quot;,&quot;isCurrency&quot;:false,&quot;isComma&quot;:true,&quot;decimalPointLength&quot;:&quot;0&quot;,&quot;onChange&quot;:&quot;&quot;},&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtServiceHiyoTotal&quot;},{&quot;columnName&quot;:&quot;利用者<br>負担額合計&quot;,&quot;dataName&quot;:&quot;txtRiyoshaFutanTotalAmount&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:5,&quot;cellDetails&quot;:{&quot;cellType&quot;:5,&quot;maxLength&quot;:&quot;1000000000000&quot;,&quot;minLength&quot;:&quot;0&quot;,&quot;maxValue&quot;:&quot;1.7976931348623157e+308&quot;,&quot;minValue&quot;:&quot;0&quot;,&quot;isCurrency&quot;:false,&quot;isComma&quot;:true,&quot;decimalPointLength&quot;:&quot;0&quot;,&quot;onChange&quot;:&quot;&quot;},&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtRiyoshaFutanTotalAmount&quot;},{&quot;columnName&quot;:&quot;算定<br>基準額&quot;,&quot;dataName&quot;:&quot;txtSanteiKijunAmount&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:5,&quot;cellDetails&quot;:{&quot;cellType&quot;:5,&quot;maxLength&quot;:&quot;1000000000000&quot;,&quot;minLength&quot;:&quot;0&quot;,&quot;maxValue&quot;:&quot;1.7976931348623157e+308&quot;,&quot;minValue&quot;:&quot;0&quot;,&quot;isCurrency&quot;:false,&quot;isComma&quot;:true,&quot;decimalPointLength&quot;:&quot;0&quot;,&quot;onChange&quot;:&quot;&quot;},&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtSanteiKijunAmount&quot;},{&quot;columnName&quot;:&quot;支払済<br>金額&quot;,&quot;dataName&quot;:&quot;txtShiharaizumiAmount&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:5,&quot;cellDetails&quot;:{&quot;cellType&quot;:5,&quot;maxLength&quot;:&quot;1000000000000&quot;,&quot;minLength&quot;:&quot;0&quot;,&quot;maxValue&quot;:&quot;1.7976931348623157e+308&quot;,&quot;minValue&quot;:&quot;0&quot;,&quot;isCurrency&quot;:false,&quot;isComma&quot;:true,&quot;decimalPointLength&quot;:&quot;0&quot;,&quot;onChange&quot;:&quot;&quot;},&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtShiharaizumiAmount&quot;},{&quot;columnName&quot;:&quot;高額<br>支給額&quot;,&quot;dataName&quot;:&quot;txtKogakuShikyuAmount&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:5,&quot;cellDetails&quot;:{&quot;cellType&quot;:5,&quot;maxLength&quot;:&quot;1000000000000&quot;,&quot;minLength&quot;:&quot;0&quot;,&quot;maxValue&quot;:&quot;1.7976931348623157e+308&quot;,&quot;minValue&quot;:&quot;0&quot;,&quot;isCurrency&quot;:false,&quot;isComma&quot;:true,&quot;decimalPointLength&quot;:&quot;0&quot;,&quot;onChange&quot;:&quot;&quot;},&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtKogakuShikyuAmount&quot;}]},&quot;onSort&quot;:&quot;&quot;,&quot;onSelect&quot;:&quot;&quot;,&quot;onSelectByDblClick&quot;:&quot;&quot;,&quot;onSelectBySelectButton&quot;:&quot;&quot;,&quot;onSelectByModifyButton&quot;:&quot;&quot;,&quot;onSelectByDeleteButton&quot;:&quot;&quot;,&quot;onAfterRequest&quot;:&quot;&quot;,&quot;onAfterRequestByDblClick&quot;:&quot;&quot;,&quot;onAfterRequestBySelectButton&quot;:&quot;&quot;,&quot;onAfterRequestByModifyButton&quot;:&quot;&quot;,&quot;onAfterRequestByDeleteButton&quot;:&quot;&quot;,&quot;onOnlyRow&quot;:&quot;&quot;,&quot;onNoRow&quot;:&quot;&quot;,&quot;onMultiRows&quot;:&quot;&quot;,&quot;dataSource&quot;:[],&quot;sortOrder&quot;:&quot;txtKogakuShikyuAmount&quot;,&quot;isAscending&quot;:true,&quot;filterList&quot;:[],&quot;activeRowId&quot;:-1,&quot;gridAction&quot;:[]}"><div id="dgJudgementResult_grid_table" role="" style="width: 980px; height: 176px; position: relative;"></div><div id="dgJudgementResult_footer" style="width: 980px; height: 25px;"></div></div><div title="" class="UzPanel FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default" id="KogakuServicehiJudgementResultDetail1" style="width: 485px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KogakuServicehiJudgementResultDetail1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;485px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;KogakuServicehiJudgementResultDetail1&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;Default&quot;,&quot;marginBottom&quot;:&quot;Default&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:true,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KogakuServicehiJudgementResultDetail1&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:0,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KogakuServicehiJudgementResultDetail1_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="KogakuServicehiJudgementResultDetail1_panel_body_area"><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS" id="txtUketsukeDate" style="width: 193px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtUketsukeDate&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtUketsukeDate_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;受付日&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;96px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;./_-&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtUketsukeDate_labelL" style="width: 96px;"><span>受付日</span></span><input class="UzTextBox CoreElement" id="txtUketsukeDate_core" style="width: 90px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate=""></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="txtHonninPaymentAmount" style="width: 199px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtHonninPaymentAmount&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;S&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtHonninPaymentAmount_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;本人支払額&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;isComboBox&quot;:false,&quot;suggest&quot;:[],&quot;maxValue&quot;:1.7976931348623157e+308,&quot;minValue&quot;:0,&quot;isCurrency&quot;:false,&quot;isComma&quot;:true,&quot;decimalPointLength&quot;:0,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHonninPaymentAmount_labelL" style="width: 80px;"><span>本人支払額</span></span><input class="UzTextBox CoreElement Width-S text-align-right ime-mode-Off ui-autocomplete-input" id="txtHonninPaymentAmount_core" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS" id="txtKetteiDate" style="width: 193px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtKetteiDate&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtKetteiDate_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;決定日&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;96px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;./_-&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtKetteiDate_labelL" style="width: 96px;"><span>決定日</span></span><input class="UzTextBox CoreElement" id="txtKetteiDate_core" style="width: 90px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate=""></div><div title="" class="UzRadioButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="radShikyuKubun" style="width: 233px; height: 19px;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;radShikyuKubun&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;radShikyuKubun_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;shikyu&quot;,&quot;value&quot;:&quot;支給&quot;},{&quot;key&quot;:&quot;Fushikyu&quot;,&quot;value&quot;:&quot;不支給&quot;}],&quot;onChange&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;支給区分&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;,&quot;labelLAlign&quot;:2,&quot;selectedItem&quot;:&quot;shikyu&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;newLineItemNumber&quot;:2,&quot;spaceSize&quot;:&quot;S&quot;,&quot;disabledItem&quot;:[],&quot;icon&quot;:[]}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right" id="radShikyuKubun_labelL" style="width: 80px;"><span>支給区分</span></span><span class="buttonSpan FloatLeft" id="radShikyuKubun_core" style="width: 150px;"><input name="radShikyuKubun_group" id="radShikyuKubun_shikyu" type="radio" value="支給" data-key="shikyu"><label for="radShikyuKubun_shikyu" data-key="shikyu">支給</label><input name="radShikyuKubun_group" class="spaceSize-S" id="radShikyuKubun_Fushikyu" type="radio" value="不支給" data-key="Fushikyu"><label for="radShikyuKubun_Fushikyu" data-key="Fushikyu">不支給</label></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS" id="txtsetaiShuyakuNo" style="width: 183px; height: 21px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtsetaiShuyakuNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtsetaiShuyakuNo_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;世帯集約番号&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;96px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:0,&quot;textKind&quot;:2,&quot;isComboBox&quot;:false,&quot;suggest&quot;:[],&quot;permitCharactor&quot;:&quot;&quot;,&quot;formatLength&quot;:&quot;10&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtsetaiShuyakuNo_labelL" style="width: 96px;"><span>世帯集約番号</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input" id="txtsetaiShuyakuNo_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum FloatLeft JSControl controlMargin-M marginLeft-M marginRight-XS" id="txtShikyuAmount" style="width: 199px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtShikyuAmount&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;S&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;M&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtShikyuAmount_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;支給金額&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;isComboBox&quot;:false,&quot;suggest&quot;:[],&quot;maxValue&quot;:1.7976931348623157e+308,&quot;minValue&quot;:0,&quot;isCurrency&quot;:false,&quot;isComma&quot;:true,&quot;decimalPointLength&quot;:0,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShikyuAmount_labelL" style="width: 80px;"><span>支給金額</span></span><input class="UzTextBox CoreElement Width-S text-align-right ime-mode-Off ui-autocomplete-input" id="txtShikyuAmount_core" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzRadioButton FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS" id="radIsKogakuAutoShokan" style="width: 347px; height: 19px;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;radIsKogakuAutoShokan&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;M&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;radIsKogakuAutoShokan_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;ari&quot;,&quot;value&quot;:&quot;あり&quot;},{&quot;key&quot;:&quot;nashi&quot;,&quot;value&quot;:&quot;なし&quot;}],&quot;onChange&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;高額自動償還&quot;,&quot;labelLWidth&quot;:&quot;96px&quot;,&quot;labelLAlign&quot;:2,&quot;selectedItem&quot;:&quot;ari&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;newLineItemNumber&quot;:2,&quot;spaceSize&quot;:&quot;M&quot;,&quot;disabledItem&quot;:[],&quot;icon&quot;:[]}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right" id="radIsKogakuAutoShokan_labelL" style="width: 96px;"><span>高額自動償還</span></span><span class="buttonSpan FloatLeft Width-M" id="radIsKogakuAutoShokan_core"><input name="radIsKogakuAutoShokan_group" id="radIsKogakuAutoShokan_ari" type="radio" value="あり" data-key="ari"><label for="radIsKogakuAutoShokan_ari" data-key="ari">あり</label><input name="radIsKogakuAutoShokan_group" class="spaceSize-M" id="radIsKogakuAutoShokan_nashi" type="radio" value="なし" data-key="nashi"><label for="radIsKogakuAutoShokan_nashi" data-key="nashi">なし</label></span></div></div></div><div title="" class="UzPanel JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable FloatRight marginRight-XS marginTop-Default marginBottom-Default" id="KogakuServicehiJudgementResultDetail2" style="width: 490px; margin-top: 0px; margin-bottom: 0px; margin-left: -1.6em;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KogakuServicehiJudgementResultDetail2&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;490px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:2,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;-1.6em&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;KogakuServicehiJudgementResultDetail2&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;Default&quot;,&quot;marginBottom&quot;:&quot;Default&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:true,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KogakuServicehiJudgementResultDetail2&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:0,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KogakuServicehiJudgementResultDetail2_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="KogakuServicehiJudgementResultDetail2_panel_body_area"><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="txtBiko" style="width: 467px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtBiko&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;380px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtBiko_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;備考&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:0,&quot;textKind&quot;:0,&quot;isComboBox&quot;:false,&quot;suggest&quot;:[],&quot;permitCharactor&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtBiko_labelL" style="width: 80px;"><span>備考</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtBiko_core" style="width: 380px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzRadioButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="radJudgementMethod" style="width: 263px; height: 36px;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;radJudgementMethod&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;180px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;radJudgementMethod_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;mishinsa&quot;,&quot;value&quot;:&quot;審査依頼&quot;},{&quot;key&quot;:&quot;shinsaZumi&quot;,&quot;value&quot;:&quot;審査済み&quot;}],&quot;onChange&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;審査方法&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;,&quot;labelLAlign&quot;:2,&quot;selectedItem&quot;:&quot;shinsaZumi&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;newLineItemNumber&quot;:2,&quot;spaceSize&quot;:&quot;S&quot;,&quot;disabledItem&quot;:[],&quot;icon&quot;:[]}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right" id="radJudgementMethod_labelL" style="width: 80px;"><span>審査方法</span></span><span class="buttonSpan FloatLeft" id="radJudgementMethod_core" style="width: 180px;"><input name="radJudgementMethod_group" id="radJudgementMethod_mishinsa" type="radio" value="審査依頼" data-key="mishinsa"><label for="radJudgementMethod_mishinsa" data-key="mishinsa">審査依頼</label><input name="radJudgementMethod_group" class="spaceSize-S" id="radJudgementMethod_shinsaZumi" type="radio" value="審査済み" data-key="shinsaZumi"><label for="radJudgementMethod_shinsaZumi" data-key="shinsaZumi">審査済み</label></span></div><div title="" class="UzTextBoxMultiLine TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS Height-XS" id="txtFushikyuRiyu" style="width: 467px; height: 51px;" data-control-type="TextBoxMultiLine" data-obj="{&quot;fieldName&quot;:&quot;txtFushikyuRiyu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxMultiLine&quot;,&quot;width&quot;:&quot;380px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtFushikyuRiyu_text_area&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;XS&quot;,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;不支給理由&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;maxLength&quot;:&quot;10000000000&quot;,&quot;minLength&quot;:0,&quot;textKind&quot;:0,&quot;limitLength&quot;:&quot;100&quot;,&quot;countDisp&quot;:false}"><span class="word-wrap-break-word Label-L text-align-right" id="txtFushikyuRiyu_labelL" style="width: 80px; vertical-align: top;"><span>不支給理由</span></span><span class="CoreElement UzTextBox" id="txtFushikyuRiyu_core" style="width: 380px;"><textarea class="UzTextBox UzTextBoxMultiLine Height-XS NoneJcountLine" id="txtFushikyuRiyu_text_area" style="width: 384px;" placeholder="" type="text" data-control-type="TextBoxMultiLine"></textarea></span><div id="txtFushikyuRiyu_text_countDiv"><span class="word-wrap-break-word Label-L text-align-right" id="txtFushikyuRiyu_labelL_count" style="width: 80px;"></span></div></div></div></div></div></div> <script type='text/javascript' class='RamlConvert'>var DBZ= DBZ? DBZ: {};DBZ['DEFAULT'] = {};DBZ['DEFAULT'].KogakuServicehiJudgementResultRequest = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KogakuServicehiJudgementResult').getProperty();parameter0.dgJudgementResult = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgJudgementResult').getProperty();parameter0.KogakuServicehiJudgementResultDetail1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KogakuServicehiJudgementResultDetail1').getProperty();parameter0.KogakuServicehiJudgementResultDetail1.txtUketsukeDate = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtUketsukeDate').getProperty();parameter0.KogakuServicehiJudgementResultDetail1.txtHonninPaymentAmount = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHonninPaymentAmount').getProperty();parameter0.KogakuServicehiJudgementResultDetail1.txtKetteiDate = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKetteiDate').getProperty();parameter0.KogakuServicehiJudgementResultDetail1.radShikyuKubun = Uz.JSControlUtil.getJSControl(parentFieldName + '_radShikyuKubun').getProperty();parameter0.KogakuServicehiJudgementResultDetail1.txtsetaiShuyakuNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtsetaiShuyakuNo').getProperty();parameter0.KogakuServicehiJudgementResultDetail1.txtShikyuAmount = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShikyuAmount').getProperty();parameter0.KogakuServicehiJudgementResultDetail1.radIsKogakuAutoShokan = Uz.JSControlUtil.getJSControl(parentFieldName + '_radIsKogakuAutoShokan').getProperty();parameter0.KogakuServicehiJudgementResultDetail2 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KogakuServicehiJudgementResultDetail2').getProperty();parameter0.KogakuServicehiJudgementResultDetail2.txtBiko = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtBiko').getProperty();parameter0.KogakuServicehiJudgementResultDetail2.radJudgementMethod = Uz.JSControlUtil.getJSControl(parentFieldName + '_radJudgementMethod').getProperty();parameter0.KogakuServicehiJudgementResultDetail2.txtFushikyuRiyu = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtFushikyuRiyu').getProperty();paramArray.push(parameter0);return paramArray; };DBZ['DEFAULT'].KogakuServicehiJudgementResultDetail1Request = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KogakuServicehiJudgementResultDetail1').getProperty();parameter0.txtUketsukeDate = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtUketsukeDate').getProperty();parameter0.txtHonninPaymentAmount = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHonninPaymentAmount').getProperty();parameter0.txtKetteiDate = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKetteiDate').getProperty();parameter0.radShikyuKubun = Uz.JSControlUtil.getJSControl(parentFieldName + '_radShikyuKubun').getProperty();parameter0.txtsetaiShuyakuNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtsetaiShuyakuNo').getProperty();parameter0.txtShikyuAmount = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShikyuAmount').getProperty();parameter0.radIsKogakuAutoShokan = Uz.JSControlUtil.getJSControl(parentFieldName + '_radIsKogakuAutoShokan').getProperty();paramArray.push(parameter0);return paramArray; };DBZ['DEFAULT'].KogakuServicehiJudgementResultDetail2Request = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KogakuServicehiJudgementResultDetail2').getProperty();parameter0.txtBiko = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtBiko').getProperty();parameter0.radJudgementMethod = Uz.JSControlUtil.getJSControl(parentFieldName + '_radJudgementMethod').getProperty();parameter0.txtFushikyuRiyu = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtFushikyuRiyu').getProperty();paramArray.push(parameter0);return paramArray; };</script>
+<script type='text/javascript'>var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    var KogakuServicehiJudgementResult_Design = (function (_super) {
+        __extends(KogakuServicehiJudgementResult_Design, _super);
+        function KogakuServicehiJudgementResult_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, KogakuServicehiJudgementResult_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(KogakuServicehiJudgementResult_Design.prototype, "title", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"] = value;
+                } else {
+                    this.layout.items[0]["title"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KogakuServicehiJudgementResult_Design.prototype, "eraseBorder", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
+                } else {
+                    this.layout.items[0]["eraseBorder"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KogakuServicehiJudgementResult_Design.prototype, "panelDisplay", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"] = value;
+                } else {
+                    this.layout.items[0]["panelDisplay"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        KogakuServicehiJudgementResult_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("title");
+            Uz.JSControlUtil.registProperty("eraseBorder");
+            Uz.JSControlUtil.registProperty("panelDisplay");
+        };
+
+        KogakuServicehiJudgementResult_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
+            editablePropertyInfo["eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
+            editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
+
+            return editablePropertyInfo;
+        };
+        KogakuServicehiJudgementResult_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "KogakuServicehiJudgementResult",
+                    "items": [
+                        {
+                            "fieldName": "dgJudgementResult",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "980px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "dgJudgementResult",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "S",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": false,
+                                "isShowHeader": true,
+                                "isShowFooter": true,
+                                "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": false,
+                                "isShowSelectButtonColumn": false,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "",
+                                    "headerHeight": 1
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "事業者",
+                                        "dataName": "txtJigyosha",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 295,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtJigyosha"
+                                    },
+                                    {
+                                        "columnName": "サービス種類",
+                                        "dataName": "txtServiceShurui",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 190,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtServiceShurui"
+                                    },
+                                    {
+                                        "columnName": "サービス<br>費用合計",
+                                        "dataName": "txtServiceHiyoTotal",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 95,
+                                        "visible": true,
+                                        "cellType": 5,
+                                        "cellDetails": {
+                                            "cellType": 5,
+                                            "maxLength": "1000000000000",
+                                            "minLength": "0",
+                                            "maxValue": "1.7976931348623157e+308",
+                                            "minValue": "0",
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": "0",
+                                            "onChange": ""
+                                        },
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtServiceHiyoTotal"
+                                    },
+                                    {
+                                        "columnName": "利用者<br>負担額合計",
+                                        "dataName": "txtRiyoshaFutanTotalAmount",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 5,
+                                        "cellDetails": {
+                                            "cellType": 5,
+                                            "maxLength": "1000000000000",
+                                            "minLength": "0",
+                                            "maxValue": "1.7976931348623157e+308",
+                                            "minValue": "0",
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": "0",
+                                            "onChange": ""
+                                        },
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtRiyoshaFutanTotalAmount"
+                                    },
+                                    {
+                                        "columnName": "算定<br>基準額",
+                                        "dataName": "txtSanteiKijunAmount",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 5,
+                                        "cellDetails": {
+                                            "cellType": 5,
+                                            "maxLength": "1000000000000",
+                                            "minLength": "0",
+                                            "maxValue": "1.7976931348623157e+308",
+                                            "minValue": "0",
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": "0",
+                                            "onChange": ""
+                                        },
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtSanteiKijunAmount"
+                                    },
+                                    {
+                                        "columnName": "支払済<br>金額",
+                                        "dataName": "txtShiharaizumiAmount",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 5,
+                                        "cellDetails": {
+                                            "cellType": 5,
+                                            "maxLength": "1000000000000",
+                                            "minLength": "0",
+                                            "maxValue": "1.7976931348623157e+308",
+                                            "minValue": "0",
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": "0",
+                                            "onChange": ""
+                                        },
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtShiharaizumiAmount"
+                                    },
+                                    {
+                                        "columnName": "高額<br>支給額",
+                                        "dataName": "txtKogakuShikyuAmount",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 5,
+                                        "cellDetails": {
+                                            "cellType": 5,
+                                            "maxLength": "1000000000000",
+                                            "minLength": "0",
+                                            "maxValue": "1.7976931348623157e+308",
+                                            "minValue": "0",
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": "0",
+                                            "onChange": ""
+                                        },
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtKogakuShikyuAmount"
+                                    }
+                                ]
+                            },
+                            "onSort": "",
+                            "onSelect": "",
+                            "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "txtKogakuShikyuAmount",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1,
+                            "gridAction": []
+                        },
+                        {
+                            "fieldName": "KogakuServicehiJudgementResultDetail1",
+                            "items": [
+                                {
+                                    "fieldName": "txtUketsukeDate",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "90px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtUketsukeDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "value": "",
+                                    "labelLText": "受付日",
+                                    "labelRText": "",
+                                    "labelLWidth": "96px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "txtHonninPaymentAmount",
+                                    "items": [],
+                                    "controlType": "TextBoxNum",
+                                    "width": "S",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtHonninPaymentAmount_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 2,
+                                    "placeHolder": "",
+                                    "textKind": 2,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "labelLText": "本人支払額",
+                                    "labelRText": "",
+                                    "labelLWidth": "80px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "permitCharactor": "+-,.\\",
+                                    "maxValue": 1.7976931348623157e+308,
+                                    "minValue": 0,
+                                    "isCurrency": false,
+                                    "isComma": true,
+                                    "decimalPointLength": 0
+                                },
+                                {
+                                    "fieldName": "txtKetteiDate",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "90px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtKetteiDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "value": "",
+                                    "labelLText": "決定日",
+                                    "labelRText": "",
+                                    "labelLWidth": "96px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "radShikyuKubun",
+                                    "items": [],
+                                    "controlType": "RadioButton",
+                                    "width": "150px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "radShikyuKubun_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "onChange": "",
+                                    "labelLText": "支給区分",
+                                    "labelLWidth": "80px",
+                                    "labelLAlign": 2,
+                                    "onClick": "",
+                                    "icon": [],
+                                    "dataSource": [
+                                        {
+                                            "key": "shikyu",
+                                            "value": "支給"
+                                        },
+                                        {
+                                            "key": "Fushikyu",
+                                            "value": "不支給"
+                                        }
+                                    ],
+                                    "selectedItem": "shikyu",
+                                    "newLineItemNumber": 2,
+                                    "spaceSize": "S",
+                                    "disabledItem": []
+                                },
+                                {
+                                    "fieldName": "txtsetaiShuyakuNo",
+                                    "items": [],
+                                    "controlType": "TextBoxCode",
+                                    "width": "80px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtsetaiShuyakuNo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "placeHolder": "",
+                                    "textKind": 2,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "labelLText": "世帯集約番号",
+                                    "labelRText": "",
+                                    "labelLWidth": "96px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "permitCharactor": "",
+                                    "formatLength": "10"
+                                },
+                                {
+                                    "fieldName": "txtShikyuAmount",
+                                    "items": [],
+                                    "controlType": "TextBoxNum",
+                                    "width": "S",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "M",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShikyuAmount_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 2,
+                                    "placeHolder": "",
+                                    "textKind": 2,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "labelLText": "支給金額",
+                                    "labelRText": "",
+                                    "labelLWidth": "80px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "permitCharactor": "+-,.\\",
+                                    "maxValue": 1.7976931348623157e+308,
+                                    "minValue": 0,
+                                    "isCurrency": false,
+                                    "isComma": true,
+                                    "decimalPointLength": 0
+                                },
+                                {
+                                    "fieldName": "radIsKogakuAutoShokan",
+                                    "items": [],
+                                    "controlType": "RadioButton",
+                                    "width": "M",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "radIsKogakuAutoShokan_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "onChange": "",
+                                    "labelLText": "高額自動償還",
+                                    "labelLWidth": "96px",
+                                    "labelLAlign": 2,
+                                    "onClick": "",
+                                    "icon": [],
+                                    "dataSource": [
+                                        {
+                                            "key": "ari",
+                                            "value": "あり"
+                                        },
+                                        {
+                                            "key": "nashi",
+                                            "value": "なし"
+                                        }
+                                    ],
+                                    "selectedItem": "ari",
+                                    "newLineItemNumber": 2,
+                                    "spaceSize": "M",
+                                    "disabledItem": []
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "485px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "KogakuServicehiJudgementResultDetail1",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": true,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "KogakuServicehiJudgementResultDetail1"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": true,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 0,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto",
+                            "canPost": true
+                        },
+                        {
+                            "fieldName": "KogakuServicehiJudgementResultDetail2",
+                            "items": [
+                                {
+                                    "fieldName": "txtBiko",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "380px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtBiko_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "placeHolder": "",
+                                    "textKind": 0,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "labelLText": "備考",
+                                    "labelRText": "",
+                                    "labelLWidth": "80px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "radJudgementMethod",
+                                    "items": [],
+                                    "controlType": "RadioButton",
+                                    "width": "180px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "radJudgementMethod_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "onChange": "",
+                                    "labelLText": "審査方法",
+                                    "labelLWidth": "80px",
+                                    "labelLAlign": 2,
+                                    "onClick": "",
+                                    "icon": [],
+                                    "dataSource": [
+                                        {
+                                            "key": "mishinsa",
+                                            "value": "審査依頼"
+                                        },
+                                        {
+                                            "key": "shinsaZumi",
+                                            "value": "審査済み"
+                                        }
+                                    ],
+                                    "selectedItem": "shinsaZumi",
+                                    "newLineItemNumber": 2,
+                                    "spaceSize": "S",
+                                    "disabledItem": []
+                                },
+                                {
+                                    "fieldName": "txtFushikyuRiyu",
+                                    "items": [],
+                                    "controlType": "TextBoxMultiLine",
+                                    "width": "380px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtFushikyuRiyu_text_area",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "height": "XS",
+                                    "required": false,
+                                    "maxLength": "10000000000",
+                                    "minLength": 0,
+                                    "placeHolder": "",
+                                    "textKind": 0,
+                                    "isPrivateInfo": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "value": "",
+                                    "labelLText": "不支給理由",
+                                    "labelRText": "",
+                                    "labelLWidth": "80px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "limitLength": "100",
+                                    "countDisp": false
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "490px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "-1.6em",
+                            "marginRight": "XS",
+                            "selectControlID": "KogakuServicehiJudgementResultDetail2",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": true,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "KogakuServicehiJudgementResultDetail2"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": true,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 0,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto",
+                            "canPost": true
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "993px",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0em",
+                    "marginRight": "XS",
+                    "selectControlID": "KogakuServicehiJudgementResult",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "判定結果",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "KogakuServicehiJudgementResult"
+                        }
+                    ],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": true
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0em",
+            "marginRight": "0em",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBZ",
+            "controlName": "KogakuServicehiJudgementResult",
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "KogakuServicehiJudgementResult",
+                    "publicChildProperty": "title",
+                    "newPropertyName": "title"
+                },
+                {
+                    "publicChildFieldName": "KogakuServicehiJudgementResult",
+                    "publicChildProperty": "eraseBorder",
+                    "newPropertyName": "eraseBorder"
+                },
+                {
+                    "publicChildFieldName": "KogakuServicehiJudgementResult",
+                    "publicChildProperty": "panelDisplay",
+                    "newPropertyName": "panelDisplay"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
+        };
+        return KogakuServicehiJudgementResult_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.KogakuServicehiJudgementResult_Design = KogakuServicehiJudgementResult_Design;
+
+    (function (KogakuServicehiJudgementResult) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KogakuServicehiJudgementResult.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KogakuServicehiJudgementResult";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KogakuServicehiJudgementResult.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.KogakuServicehiJudgementResult.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KogakuServicehiJudgementResult = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgJudgementResult = function () {
+                return new UZA.DataGrid(this.convFiledName("dgJudgementResult"));
+            };
+
+            Controls.prototype.KogakuServicehiJudgementResultDetail1 = function () {
+                return new UZA.Panel(this.convFiledName("KogakuServicehiJudgementResultDetail1"));
+            };
+
+            Controls.prototype.txtUketsukeDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtUketsukeDate"));
+            };
+
+            Controls.prototype.txtHonninPaymentAmount = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHonninPaymentAmount"));
+            };
+
+            Controls.prototype.txtKetteiDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKetteiDate"));
+            };
+
+            Controls.prototype.radShikyuKubun = function () {
+                return new UZA.RadioButton(this.convFiledName("radShikyuKubun"));
+            };
+
+            Controls.prototype.txtsetaiShuyakuNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtsetaiShuyakuNo"));
+            };
+
+            Controls.prototype.txtShikyuAmount = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtShikyuAmount"));
+            };
+
+            Controls.prototype.radIsKogakuAutoShokan = function () {
+                return new UZA.RadioButton(this.convFiledName("radIsKogakuAutoShokan"));
+            };
+
+            Controls.prototype.KogakuServicehiJudgementResultDetail2 = function () {
+                return new UZA.Panel(this.convFiledName("KogakuServicehiJudgementResultDetail2"));
+            };
+
+            Controls.prototype.txtBiko = function () {
+                return new UZA.TextBox(this.convFiledName("txtBiko"));
+            };
+
+            Controls.prototype.radJudgementMethod = function () {
+                return new UZA.RadioButton(this.convFiledName("radJudgementMethod"));
+            };
+
+            Controls.prototype.txtFushikyuRiyu = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtFushikyuRiyu"));
+            };
+            return Controls;
+        })();
+        KogakuServicehiJudgementResult.Controls = Controls;
+    })(DBZ.KogakuServicehiJudgementResult || (DBZ.KogakuServicehiJudgementResult = {}));
+    var KogakuServicehiJudgementResult = DBZ.KogakuServicehiJudgementResult;
+})(DBZ || (DBZ = {}));
+
+﻿var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    var KogakuServicehiJudgementResult_Design = (function (_super) {
+        __extends(KogakuServicehiJudgementResult_Design, _super);
+        function KogakuServicehiJudgementResult_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, KogakuServicehiJudgementResult_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(KogakuServicehiJudgementResult_Design.prototype, "title", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"] = value;
+                } else {
+                    this.layout.items[0]["title"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KogakuServicehiJudgementResult_Design.prototype, "eraseBorder", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
+                } else {
+                    this.layout.items[0]["eraseBorder"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KogakuServicehiJudgementResult_Design.prototype, "panelDisplay", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"] = value;
+                } else {
+                    this.layout.items[0]["panelDisplay"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        KogakuServicehiJudgementResult_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("title");
+            Uz.JSControlUtil.registProperty("eraseBorder");
+            Uz.JSControlUtil.registProperty("panelDisplay");
+        };
+
+        KogakuServicehiJudgementResult_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
+            editablePropertyInfo["eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
+            editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
+
+            return editablePropertyInfo;
+        };
+        KogakuServicehiJudgementResult_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "KogakuServicehiJudgementResult",
+                    "items": [
+                        {
+                            "fieldName": "dgJudgementResult",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "980px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "dgJudgementResult",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "S",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": false,
+                                "isShowHeader": true,
+                                "isShowFooter": true,
+                                "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": false,
+                                "isShowSelectButtonColumn": false,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "",
+                                    "headerHeight": 1
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "事業者",
+                                        "dataName": "txtJigyosha",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 295,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtJigyosha"
+                                    },
+                                    {
+                                        "columnName": "サービス種類",
+                                        "dataName": "txtServiceShurui",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 190,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtServiceShurui"
+                                    },
+                                    {
+                                        "columnName": "サービス<br>費用合計",
+                                        "dataName": "txtServiceHiyoTotal",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 95,
+                                        "visible": true,
+                                        "cellType": 5,
+                                        "cellDetails": {
+                                            "cellType": 5,
+                                            "maxLength": "1000000000000",
+                                            "minLength": "0",
+                                            "maxValue": "1.7976931348623157e+308",
+                                            "minValue": "0",
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": "0",
+                                            "onChange": ""
+                                        },
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtServiceHiyoTotal"
+                                    },
+                                    {
+                                        "columnName": "利用者<br>負担額合計",
+                                        "dataName": "txtRiyoshaFutanTotalAmount",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 5,
+                                        "cellDetails": {
+                                            "cellType": 5,
+                                            "maxLength": "1000000000000",
+                                            "minLength": "0",
+                                            "maxValue": "1.7976931348623157e+308",
+                                            "minValue": "0",
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": "0",
+                                            "onChange": ""
+                                        },
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtRiyoshaFutanTotalAmount"
+                                    },
+                                    {
+                                        "columnName": "算定<br>基準額",
+                                        "dataName": "txtSanteiKijunAmount",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 5,
+                                        "cellDetails": {
+                                            "cellType": 5,
+                                            "maxLength": "1000000000000",
+                                            "minLength": "0",
+                                            "maxValue": "1.7976931348623157e+308",
+                                            "minValue": "0",
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": "0",
+                                            "onChange": ""
+                                        },
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtSanteiKijunAmount"
+                                    },
+                                    {
+                                        "columnName": "支払済<br>金額",
+                                        "dataName": "txtShiharaizumiAmount",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 5,
+                                        "cellDetails": {
+                                            "cellType": 5,
+                                            "maxLength": "1000000000000",
+                                            "minLength": "0",
+                                            "maxValue": "1.7976931348623157e+308",
+                                            "minValue": "0",
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": "0",
+                                            "onChange": ""
+                                        },
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtShiharaizumiAmount"
+                                    },
+                                    {
+                                        "columnName": "高額<br>支給額",
+                                        "dataName": "txtKogakuShikyuAmount",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 5,
+                                        "cellDetails": {
+                                            "cellType": 5,
+                                            "maxLength": "1000000000000",
+                                            "minLength": "0",
+                                            "maxValue": "1.7976931348623157e+308",
+                                            "minValue": "0",
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": "0",
+                                            "onChange": ""
+                                        },
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtKogakuShikyuAmount"
+                                    }
+                                ]
+                            },
+                            "onSort": "",
+                            "onSelect": "",
+                            "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "txtKogakuShikyuAmount",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1,
+                            "gridAction": []
+                        },
+                        {
+                            "fieldName": "KogakuServicehiJudgementResultDetail1",
+                            "items": [
+                                {
+                                    "fieldName": "txtUketsukeDate",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "90px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtUketsukeDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "value": "",
+                                    "labelLText": "受付日",
+                                    "labelRText": "",
+                                    "labelLWidth": "96px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "txtHonninPaymentAmount",
+                                    "items": [],
+                                    "controlType": "TextBoxNum",
+                                    "width": "S",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtHonninPaymentAmount_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 2,
+                                    "placeHolder": "",
+                                    "textKind": 2,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "labelLText": "本人支払額",
+                                    "labelRText": "",
+                                    "labelLWidth": "80px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "permitCharactor": "+-,.\\",
+                                    "maxValue": 1.7976931348623157e+308,
+                                    "minValue": 0,
+                                    "isCurrency": false,
+                                    "isComma": true,
+                                    "decimalPointLength": 0
+                                },
+                                {
+                                    "fieldName": "txtKetteiDate",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "90px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtKetteiDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "value": "",
+                                    "labelLText": "決定日",
+                                    "labelRText": "",
+                                    "labelLWidth": "96px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "radShikyuKubun",
+                                    "items": [],
+                                    "controlType": "RadioButton",
+                                    "width": "150px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "radShikyuKubun_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "onChange": "",
+                                    "labelLText": "支給区分",
+                                    "labelLWidth": "80px",
+                                    "labelLAlign": 2,
+                                    "onClick": "",
+                                    "icon": [],
+                                    "dataSource": [
+                                        {
+                                            "key": "shikyu",
+                                            "value": "支給"
+                                        },
+                                        {
+                                            "key": "Fushikyu",
+                                            "value": "不支給"
+                                        }
+                                    ],
+                                    "selectedItem": "shikyu",
+                                    "newLineItemNumber": 2,
+                                    "spaceSize": "S",
+                                    "disabledItem": []
+                                },
+                                {
+                                    "fieldName": "txtsetaiShuyakuNo",
+                                    "items": [],
+                                    "controlType": "TextBoxCode",
+                                    "width": "80px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtsetaiShuyakuNo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "placeHolder": "",
+                                    "textKind": 2,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "labelLText": "世帯集約番号",
+                                    "labelRText": "",
+                                    "labelLWidth": "96px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "permitCharactor": "",
+                                    "formatLength": "10"
+                                },
+                                {
+                                    "fieldName": "txtShikyuAmount",
+                                    "items": [],
+                                    "controlType": "TextBoxNum",
+                                    "width": "S",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "M",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShikyuAmount_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 2,
+                                    "placeHolder": "",
+                                    "textKind": 2,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "labelLText": "支給金額",
+                                    "labelRText": "",
+                                    "labelLWidth": "80px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "permitCharactor": "+-,.\\",
+                                    "maxValue": 1.7976931348623157e+308,
+                                    "minValue": 0,
+                                    "isCurrency": false,
+                                    "isComma": true,
+                                    "decimalPointLength": 0
+                                },
+                                {
+                                    "fieldName": "radIsKogakuAutoShokan",
+                                    "items": [],
+                                    "controlType": "RadioButton",
+                                    "width": "M",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "radIsKogakuAutoShokan_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "onChange": "",
+                                    "labelLText": "高額自動償還",
+                                    "labelLWidth": "96px",
+                                    "labelLAlign": 2,
+                                    "onClick": "",
+                                    "icon": [],
+                                    "dataSource": [
+                                        {
+                                            "key": "ari",
+                                            "value": "あり"
+                                        },
+                                        {
+                                            "key": "nashi",
+                                            "value": "なし"
+                                        }
+                                    ],
+                                    "selectedItem": "ari",
+                                    "newLineItemNumber": 2,
+                                    "spaceSize": "M",
+                                    "disabledItem": []
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "485px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "KogakuServicehiJudgementResultDetail1",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": true,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "KogakuServicehiJudgementResultDetail1"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": true,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 0,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto",
+                            "canPost": true
+                        },
+                        {
+                            "fieldName": "KogakuServicehiJudgementResultDetail2",
+                            "items": [
+                                {
+                                    "fieldName": "txtBiko",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "380px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtBiko_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "placeHolder": "",
+                                    "textKind": 0,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "labelLText": "備考",
+                                    "labelRText": "",
+                                    "labelLWidth": "80px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "radJudgementMethod",
+                                    "items": [],
+                                    "controlType": "RadioButton",
+                                    "width": "180px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "radJudgementMethod_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "onChange": "",
+                                    "labelLText": "審査方法",
+                                    "labelLWidth": "80px",
+                                    "labelLAlign": 2,
+                                    "onClick": "",
+                                    "icon": [],
+                                    "dataSource": [
+                                        {
+                                            "key": "mishinsa",
+                                            "value": "審査依頼"
+                                        },
+                                        {
+                                            "key": "shinsaZumi",
+                                            "value": "審査済み"
+                                        }
+                                    ],
+                                    "selectedItem": "shinsaZumi",
+                                    "newLineItemNumber": 2,
+                                    "spaceSize": "S",
+                                    "disabledItem": []
+                                },
+                                {
+                                    "fieldName": "txtFushikyuRiyu",
+                                    "items": [],
+                                    "controlType": "TextBoxMultiLine",
+                                    "width": "380px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtFushikyuRiyu_text_area",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "height": "XS",
+                                    "required": false,
+                                    "maxLength": "10000000000",
+                                    "minLength": 0,
+                                    "placeHolder": "",
+                                    "textKind": 0,
+                                    "isPrivateInfo": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "value": "",
+                                    "labelLText": "不支給理由",
+                                    "labelRText": "",
+                                    "labelLWidth": "80px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "limitLength": "100",
+                                    "countDisp": false
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "490px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "-1.6em",
+                            "marginRight": "XS",
+                            "selectControlID": "KogakuServicehiJudgementResultDetail2",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": true,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "KogakuServicehiJudgementResultDetail2"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": true,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 0,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto",
+                            "canPost": true
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "993px",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0em",
+                    "marginRight": "XS",
+                    "selectControlID": "KogakuServicehiJudgementResult",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "判定結果",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "KogakuServicehiJudgementResult"
+                        }
+                    ],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": true
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0em",
+            "marginRight": "0em",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBZ",
+            "controlName": "KogakuServicehiJudgementResult",
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "KogakuServicehiJudgementResult",
+                    "publicChildProperty": "title",
+                    "newPropertyName": "title"
+                },
+                {
+                    "publicChildFieldName": "KogakuServicehiJudgementResult",
+                    "publicChildProperty": "eraseBorder",
+                    "newPropertyName": "eraseBorder"
+                },
+                {
+                    "publicChildFieldName": "KogakuServicehiJudgementResult",
+                    "publicChildProperty": "panelDisplay",
+                    "newPropertyName": "panelDisplay"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
+        };
+        return KogakuServicehiJudgementResult_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.KogakuServicehiJudgementResult_Design = KogakuServicehiJudgementResult_Design;
+
+    (function (KogakuServicehiJudgementResult) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KogakuServicehiJudgementResult.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KogakuServicehiJudgementResult";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KogakuServicehiJudgementResult.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.KogakuServicehiJudgementResult.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KogakuServicehiJudgementResult = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgJudgementResult = function () {
+                return new UZA.DataGrid(this.convFiledName("dgJudgementResult"));
+            };
+
+            Controls.prototype.KogakuServicehiJudgementResultDetail1 = function () {
+                return new UZA.Panel(this.convFiledName("KogakuServicehiJudgementResultDetail1"));
+            };
+
+            Controls.prototype.txtUketsukeDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtUketsukeDate"));
+            };
+
+            Controls.prototype.txtHonninPaymentAmount = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtHonninPaymentAmount"));
+            };
+
+            Controls.prototype.txtKetteiDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKetteiDate"));
+            };
+
+            Controls.prototype.radShikyuKubun = function () {
+                return new UZA.RadioButton(this.convFiledName("radShikyuKubun"));
+            };
+
+            Controls.prototype.txtsetaiShuyakuNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtsetaiShuyakuNo"));
+            };
+
+            Controls.prototype.txtShikyuAmount = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtShikyuAmount"));
+            };
+
+            Controls.prototype.radIsKogakuAutoShokan = function () {
+                return new UZA.RadioButton(this.convFiledName("radIsKogakuAutoShokan"));
+            };
+
+            Controls.prototype.KogakuServicehiJudgementResultDetail2 = function () {
+                return new UZA.Panel(this.convFiledName("KogakuServicehiJudgementResultDetail2"));
+            };
+
+            Controls.prototype.txtBiko = function () {
+                return new UZA.TextBox(this.convFiledName("txtBiko"));
+            };
+
+            Controls.prototype.radJudgementMethod = function () {
+                return new UZA.RadioButton(this.convFiledName("radJudgementMethod"));
+            };
+
+            Controls.prototype.txtFushikyuRiyu = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtFushikyuRiyu"));
+            };
+            return Controls;
+        })();
+        KogakuServicehiJudgementResult.Controls = Controls;
+    })(DBZ.KogakuServicehiJudgementResult || (DBZ.KogakuServicehiJudgementResult = {}));
+    var KogakuServicehiJudgementResult = DBZ.KogakuServicehiJudgementResult;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (KogakuServicehiJudgementResult) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KogakuServicehiJudgementResult.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KogakuServicehiJudgementResult.ModeController = ModeController;
+    })(DBZ.KogakuServicehiJudgementResult || (DBZ.KogakuServicehiJudgementResult = {}));
+    var KogakuServicehiJudgementResult = DBZ.KogakuServicehiJudgementResult;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KogakuServicehiJudgementResult) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new KogakuServicehiJudgementResult.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("title", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("eraseBorder", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("panelDisplay", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.gettitle = function () {
+                return this.controls.KogakuServicehiJudgementResult().title;
+            };
+
+            PublicProperties.prototype.settitle = function (value) {
+                this.controls.KogakuServicehiJudgementResult().title = value;
+            };
+
+            PublicProperties.prototype.geteraseBorder = function () {
+                return this.controls.KogakuServicehiJudgementResult().eraseBorder;
+            };
+
+            PublicProperties.prototype.seteraseBorder = function (value) {
+                this.controls.KogakuServicehiJudgementResult().eraseBorder = value;
+            };
+
+            PublicProperties.prototype.getpanelDisplay = function () {
+                return this.controls.KogakuServicehiJudgementResult().panelDisplay;
+            };
+
+            PublicProperties.prototype.setpanelDisplay = function (value) {
+                this.controls.KogakuServicehiJudgementResult().panelDisplay = value;
+            };
+            return PublicProperties;
+        })();
+        KogakuServicehiJudgementResult.PublicProperties = PublicProperties;
+    })(DBZ.KogakuServicehiJudgementResult || (DBZ.KogakuServicehiJudgementResult = {}));
+    var KogakuServicehiJudgementResult = DBZ.KogakuServicehiJudgementResult;
+})(DBZ || (DBZ = {}));
+</script>
+</div>

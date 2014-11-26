@@ -1,0 +1,2184 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-is-composite-control="true" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ShinseishaInfo&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;originalProperty&quot;:[{&quot;publicChildFieldName&quot;:&quot;btnJigyoshaInputGuide&quot;,&quot;publicChildProperty&quot;:&quot;displayNone&quot;,&quot;newPropertyName&quot;:&quot;btnJigyoshaInputGuide_displayNone&quot;},{&quot;publicChildFieldName&quot;:&quot;txtUketsukeDate&quot;,&quot;publicChildProperty&quot;:&quot;displayNone&quot;,&quot;newPropertyName&quot;:&quot;txtUkestukeDate_displayNone&quot;},{&quot;publicChildFieldName&quot;:&quot;ShinseishaInfo&quot;,&quot;publicChildProperty&quot;:&quot;title&quot;,&quot;newPropertyName&quot;:&quot;title&quot;},{&quot;publicChildFieldName&quot;:&quot;ShinseishaInfo&quot;,&quot;publicChildProperty&quot;:&quot;panelDisplay&quot;,&quot;newPropertyName&quot;:&quot;panelDisplay&quot;},{&quot;publicChildFieldName&quot;:&quot;txtJigyoshaNo&quot;,&quot;publicChildProperty&quot;:&quot;disabled&quot;,&quot;newPropertyName&quot;:&quot;txtJigyoshaNo_disabled&quot;},{&quot;publicChildFieldName&quot;:&quot;txtShinseishaNameKana&quot;,&quot;publicChildProperty&quot;:&quot;labelLText&quot;,&quot;newPropertyName&quot;:&quot;txtShinseishaName_labelLText&quot;},{&quot;publicChildFieldName&quot;:&quot;txtYubinNo&quot;,&quot;publicChildProperty&quot;:&quot;displayNone&quot;,&quot;newPropertyName&quot;:&quot;txtYubinNo_displayNone&quot;},{&quot;publicChildFieldName&quot;:&quot;txtAddress&quot;,&quot;publicChildProperty&quot;:&quot;displayNone&quot;,&quot;newPropertyName&quot;:&quot;txtAddress_displayNone&quot;},{&quot;publicChildFieldName&quot;:&quot;btnJigyoshaInputGuide&quot;,&quot;publicChildProperty&quot;:&quot;disabled&quot;,&quot;newPropertyName&quot;:&quot;btnJigyoshaInputGuide_disabled&quot;},{&quot;publicChildFieldName&quot;:&quot;ShinseishaInfo&quot;,&quot;publicChildProperty&quot;:&quot;eraseBorder&quot;,&quot;newPropertyName&quot;:&quot;shinseishaInfo_eraseBorder&quot;}],&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;canTransferEvent&quot;:true,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}"><div title="" class="UzPanel FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginRight-XS marginTop-Default marginBottom-Default UzCommonChildDivPanel" id="ShinseishaInfo" style="width: 645px; margin-top: 0px; margin-bottom: 0px; margin-left: 0em;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ShinseishaInfo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;645px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;ShinseishaInfo&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;申請者情報&quot;,&quot;marginTop&quot;:&quot;Default&quot;,&quot;marginBottom&quot;:&quot;Default&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:false,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:1,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader clearBackground" id="ShinseishaInfo_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">申請者情報</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M Panel-GroupBox ui-droppable ui-sortable" id="ShinseishaInfo_panel_body_area"><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="txtShinseiDate" style="width: 157px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtShinseiDate&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;85px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtShinseiDate_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;申請日&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;65px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;textKind&quot;:0,&quot;permitCharactor&quot;:&quot;./_-&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShinseiDate_labelL" style="width: 65px;"><span>申請日</span></span><input class="UzTextBox CoreElement" id="txtShinseiDate_core" style="width: 85px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate=""></div><div title="" class="UzDropDownList WithLabel FloatLeft JSControl controlMargin-M marginRight-XS" id="ddlShinseishaKubun" style="width: 243px; height: 21px; margin-left: 0em;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlShinseishaKubun&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;ddlShinseishaKubun_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;required&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;onChange_ddlShinseishaKubun&quot;,&quot;labelLText&quot;:&quot;申請者区分&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;90px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;selectedItem&quot;:&quot;myself&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;myself&quot;,&quot;value&quot;:&quot;本人&quot;},{&quot;key&quot;:&quot;family&quot;,&quot;value&quot;:&quot;家族&quot;},{&quot;key&quot;:&quot;serviceJigyosha&quot;,&quot;value&quot;:&quot;サービス事業者&quot;},{&quot;key&quot;:&quot;other&quot;,&quot;value&quot;:&quot;その他&quot;},{&quot;key&quot;:&quot;blank&quot;,&quot;value&quot;:&quot;&quot;}],&quot;isBlankLine&quot;:false}"><span class="word-wrap-break-word Label-L text-align-right" id="ddlShinseishaKubun_labelL" style="width: 90px;"><span>申請者区分</span></span><select class="CoreElement" id="ddlShinseishaKubun_core" style="width: 150px;"><option value="myself">本人</option><option value="family">家族</option><option value="serviceJigyosha">サービス事業者</option><option value="other">その他</option><option value="blank"></option></select></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="txtUketsukeDate" style="width: 152px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtUketsukeDate&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:true,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtUketsukeDate_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;受付日&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;55px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;textKind&quot;:0,&quot;permitCharactor&quot;:&quot;./_-&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtUketsukeDate_labelL" style="width: 55px;"><span>受付日</span></span><input class="UzTextBox CoreElement" id="txtUketsukeDate_core" style="width: 90px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate=""></div><div title="" class="UzTextBoxMultiLine TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS Height-S" id="txtShinseiRiyu" style="width: 632px; height: 86px;" data-control-type="TextBoxMultiLine" data-obj="{&quot;fieldName&quot;:&quot;txtShinseiRiyu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxMultiLine&quot;,&quot;width&quot;:&quot;560px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtShinseiRiyu_text_area&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;S&quot;,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;申請理由&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;65px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textKind&quot;:0,&quot;limitLength&quot;:&quot;200&quot;,&quot;countDisp&quot;:true}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShinseiRiyu_labelL" style="width: 65px; vertical-align: top;"><span>申請理由</span></span><span class="CoreElement UzTextBox" id="txtShinseiRiyu_core" style="width: 560px;"><textarea class="UzTextBox UzTextBoxMultiLine DispJcountLine Height-S" id="txtShinseiRiyu_text_area" style="width: 564px;" placeholder="" type="text" data-control-type="TextBoxMultiLine"></textarea></span><div id="txtShinseiRiyu_text_countDiv"><span class="word-wrap-break-word Label-L text-align-right" id="txtShinseiRiyu_labelL_count" style="width: 65px;"></span><span class="UzTextBoxMultiLine" id="txtShinseiRiyu_text_count">残り200文字</span></div></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS" id="txtJigyoshaNo" style="width: 157px; height: 21px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtJigyoshaNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;85px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtJigyoshaNo_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;事業者&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;65px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textKind&quot;:2,&quot;textAlign&quot;:0,&quot;isComboBox&quot;:false,&quot;suggest&quot;:[],&quot;permitCharactor&quot;:&quot;&quot;,&quot;formatLength&quot;:&quot;10&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtJigyoshaNo_labelL" style="width: 65px;"><span>事業者</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input" id="txtJigyoshaNo_core" style="width: 85px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><input title="" class="UzButtonDialog FloatLeft JSControl controlMargin-M heightTextBoxMatchesFlag HeightTextBoxMatchesForImage" id="btnJigyoshaInputGuide" style="width: 20px; height: 20px; margin-right: 0em; margin-left: 0em;" type="image" alt="image" src="/uz/uza/image/UZ_Search.png" data-control-type="ButtonDialog" data-obj="{&quot;fieldName&quot;:&quot;btnJigyoshaInputGuide&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;ButtonDialog&quot;,&quot;width&quot;:&quot;S&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;btnJigyoshaInputGuide&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;text&quot;:&quot;ButtonDialog1&quot;,&quot;onBeforeClick&quot;:&quot;&quot;,&quot;onAfterClick&quot;:&quot;&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;appearance&quot;:2,&quot;imageFileUrl&quot;:&quot;/uz/uza/image/UZ_Search.png&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;,&quot;icon&quot;:0,&quot;heightTextBoxMatches&quot;:true,&quot;displayChildDivName&quot;:&quot;DBZ.JigyoshaInputGuide&quot;,&quot;dataPassing&quot;:[{&quot;key&quot;:&quot;jigyoshaCode&quot;,&quot;controlName&quot;:&quot;txtJigyoshaNo&quot;},{&quot;key&quot;:&quot;jigyoshaMeisho&quot;,&quot;controlName&quot;:&quot;txtShinseishaName&quot;}],&quot;visibleCloseButton&quot;:true,&quot;onOkClose&quot;:&quot;&quot;,&quot;onBeforeOpenDialog&quot;:&quot;&quot;,&quot;onCancelClose&quot;:&quot;&quot;}"><button title="" class="UzButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS heightTextBoxMatchesFlag heightTextBoxMatches" id="btnHonninJohoCopy" style="width: 200px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnHonninJohoCopy&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;200px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;btnHonninJohoCopy&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;text&quot;:&quot;本人情報をコピーする&quot;,&quot;onBeforeClick&quot;:&quot;&quot;,&quot;onAfterClick&quot;:&quot;&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;appearance&quot;:0,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;,&quot;icon&quot;:0,&quot;heightTextBoxMatches&quot;:true}"><span>本人情報をコピーする</span></button><div title="" class="UzDropDownList WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="ddlHokensha" style="width: 193px; height: 21px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlHokensha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;120px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:true,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;ddlHokensha_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;保険者&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;value0&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;value1&quot;}],&quot;isBlankLine&quot;:false}"><span class="word-wrap-break-word Label-L text-align-right" id="ddlHokensha_labelL" style="width: 70px;"><span>保険者</span></span><select class="CoreElement" id="ddlHokensha_core" style="width: 120px;"><option value="key0">value0</option><option value="key1">value1</option></select></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS" id="txtShinseishaNameKana" style="width: 427px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShinseishaNameKana&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;355px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtShinseishaNameKana_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;氏名&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;65px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textKind&quot;:0,&quot;textAlign&quot;:0,&quot;isComboBox&quot;:false,&quot;suggest&quot;:[],&quot;permitCharactor&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShinseishaNameKana_labelL" style="width: 65px;"><span>氏名</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtShinseishaNameKana_core" style="width: 355px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M ClearFloat marginRight-XS" id="txtShinseishaName" style="width: 360px; height: 21px; margin-left: 73px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShinseishaName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;355px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;73px&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtShinseishaName_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textKind&quot;:0,&quot;textAlign&quot;:0,&quot;isComboBox&quot;:false,&quot;suggest&quot;:[],&quot;permitCharactor&quot;:&quot;&quot;}"><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtShinseishaName_core" style="width: 355px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginRight-XS" id="txtTelNo" style="width: 189px; height: 21px; margin-left: 0.3em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtTelNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;S&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0.3em&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtTelNo_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;電話番号&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textKind&quot;:0,&quot;textAlign&quot;:0,&quot;isComboBox&quot;:false,&quot;suggest&quot;:[],&quot;permitCharactor&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtTelNo_labelL" style="width: 70px;"><span>電話番号</span></span><input class="UzTextBox CoreElement Width-S text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtTelNo_core" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxYubinNo FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS" id="txtYubinNo" style="width: 137px; height: 21px;" data-control-type="TextBoxYubinNo" data-obj="{&quot;fieldName&quot;:&quot;txtYubinNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxYubinNo&quot;,&quot;width&quot;:&quot;65px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtYubinNo_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;住所&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;65px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textKind&quot;:2,&quot;textAlign&quot;:0,&quot;isComboBox&quot;:false,&quot;suggest&quot;:[],&quot;permitCharactor&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtYubinNo_labelL" style="width: 65px;"><span>住所</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input" id="txtYubinNo_core" style="width: 65px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginRight-XS" id="txtAddress" style="width: 486px; height: 21px; margin-left: -0.2em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtAddress&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;481px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;-0.2em&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtAddress_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;S&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textKind&quot;:0,&quot;textAlign&quot;:0,&quot;isComboBox&quot;:false,&quot;suggest&quot;:[],&quot;permitCharactor&quot;:&quot;&quot;}"><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtAddress_core" style="width: 481px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></div> <script type='text/javascript' class='RamlConvert'>var DBZ= DBZ? DBZ: {};DBZ['DEFAULT'] = {};DBZ['DEFAULT'].ShinseishaInfoRequest = function(parentFieldName){ var paramArray = [];return paramArray; };</script>
+<script type='text/javascript'>var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    (function (ShinseishaInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onChange_ddlShinseishaKubun", {
+                get: function () {
+                    return "onChange_ddlShinseishaKubun";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        ShinseishaInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ShinseishaInfo";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ShinseishaInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtShinseiDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShinseiDate"));
+            };
+
+            Controls.prototype.ddlShinseishaKubun = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlShinseishaKubun"));
+            };
+
+            Controls.prototype.txtUketsukeDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtUketsukeDate"));
+            };
+
+            Controls.prototype.txtShinseiRiyu = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtShinseiRiyu"));
+            };
+
+            Controls.prototype.txtJigyoshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtJigyoshaNo"));
+            };
+
+            Controls.prototype.btnJigyoshaInputGuide = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnJigyoshaInputGuide"));
+            };
+
+            Controls.prototype.btnHonninJohoCopy = function () {
+                return new UZA.Button(this.convFiledName("btnHonninJohoCopy"));
+            };
+
+            Controls.prototype.ddlHokensha = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlHokensha"));
+            };
+
+            Controls.prototype.txtShinseishaNameKana = function () {
+                return new UZA.TextBox(this.convFiledName("txtShinseishaNameKana"));
+            };
+
+            Controls.prototype.txtShinseishaName = function () {
+                return new UZA.TextBox(this.convFiledName("txtShinseishaName"));
+            };
+
+            Controls.prototype.txtTelNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtTelNo"));
+            };
+
+            Controls.prototype.txtYubinNo = function () {
+                return new UZA.TextBoxYubinNo(this.convFiledName("txtYubinNo"));
+            };
+
+            Controls.prototype.txtAddress = function () {
+                return new UZA.TextBox(this.convFiledName("txtAddress"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ShinseishaInfo.Controls = Controls;
+    })(DBZ.ShinseishaInfo || (DBZ.ShinseishaInfo = {}));
+    var ShinseishaInfo = DBZ.ShinseishaInfo;
+
+    var ShinseishaInfo_Design = (function (_super) {
+        __extends(ShinseishaInfo_Design, _super);
+        function ShinseishaInfo_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, ShinseishaInfo_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "btnJigyoshaInputGuide_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[5]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "txtUkestukeDate_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[2]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "title", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"] = value;
+                } else {
+                    this.layout.items[0]["title"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "panelDisplay", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"] = value;
+                } else {
+                    this.layout.items[0]["panelDisplay"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "txtJigyoshaNo_disabled", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["disabled"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["disabled"] = value;
+                } else {
+                    this.layout.items[0].items[4]["disabled"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "txtShinseishaName_labelLText", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["labelLText"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["labelLText"] = value;
+                } else {
+                    this.layout.items[0].items[8]["labelLText"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "txtYubinNo_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[11]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "txtAddress_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[12]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "btnJigyoshaInputGuide_disabled", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["disabled"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["disabled"] = value;
+                } else {
+                    this.layout.items[0].items[5]["disabled"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "shinseishaInfo_eraseBorder", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
+                } else {
+                    this.layout.items[0]["eraseBorder"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        ShinseishaInfo_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("btnJigyoshaInputGuide_displayNone");
+            Uz.JSControlUtil.registProperty("txtUkestukeDate_displayNone");
+            Uz.JSControlUtil.registProperty("title");
+            Uz.JSControlUtil.registProperty("panelDisplay");
+            Uz.JSControlUtil.registProperty("txtJigyoshaNo_disabled");
+            Uz.JSControlUtil.registProperty("txtShinseishaName_labelLText");
+            Uz.JSControlUtil.registProperty("txtYubinNo_displayNone");
+            Uz.JSControlUtil.registProperty("txtAddress_displayNone");
+            Uz.JSControlUtil.registProperty("btnJigyoshaInputGuide_disabled");
+            Uz.JSControlUtil.registProperty("shinseishaInfo_eraseBorder");
+        };
+
+        ShinseishaInfo_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["btnJigyoshaInputGuide_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["txtUkestukeDate_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
+            editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
+            editablePropertyInfo["txtJigyoshaNo_disabled"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["disabled"];
+            editablePropertyInfo["txtShinseishaName_labelLText"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).getEditablePropertyInfo()["labelLText"];
+            editablePropertyInfo["txtYubinNo_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["txtAddress_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["btnJigyoshaInputGuide_disabled"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["disabled"];
+            editablePropertyInfo["shinseishaInfo_eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
+
+            return editablePropertyInfo;
+        };
+        ShinseishaInfo_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "ShinseishaInfo",
+                    "items": [
+                        {
+                            "fieldName": "txtShinseiDate",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "85px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtShinseiDate_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "申請日",
+                            "labelRText": "",
+                            "labelLWidth": "65px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "textKind": 0,
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "ddlShinseishaKubun",
+                            "items": [],
+                            "controlType": "DropDownList",
+                            "width": "150px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0em",
+                            "marginRight": "XS",
+                            "selectControlID": "ddlShinseishaKubun_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "dataSource": [
+                                {
+                                    "key": "myself",
+                                    "value": "本人"
+                                },
+                                {
+                                    "key": "family",
+                                    "value": "家族"
+                                },
+                                {
+                                    "key": "serviceJigyosha",
+                                    "value": "サービス事業者"
+                                },
+                                {
+                                    "key": "other",
+                                    "value": "その他"
+                                },
+                                {
+                                    "key": "blank",
+                                    "value": ""
+                                }
+                            ],
+                            "required": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "onChange_ddlShinseishaKubun",
+                            "labelLText": "申請者区分",
+                            "labelRText": "",
+                            "labelLWidth": "90px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "selectedItem": "myself",
+                            "isBlankLine": false,
+                            "disabledItem": []
+                        },
+                        {
+                            "fieldName": "txtUketsukeDate",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "90px",
+                            "visible": true,
+                            "displayNone": true,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtUketsukeDate_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "受付日",
+                            "labelRText": "",
+                            "labelLWidth": "55px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "textKind": 0,
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtShinseiRiyu",
+                            "items": [],
+                            "controlType": "TextBoxMultiLine",
+                            "width": "560px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtShinseiRiyu_text_area",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "S",
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "申請理由",
+                            "labelRText": "",
+                            "labelLWidth": "65px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textKind": 0,
+                            "limitLength": "200",
+                            "countDisp": true
+                        },
+                        {
+                            "fieldName": "txtJigyoshaNo",
+                            "items": [],
+                            "controlType": "TextBoxCode",
+                            "width": "85px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtJigyoshaNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "事業者",
+                            "labelRText": "",
+                            "labelLWidth": "65px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 2,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "permitCharactor": "",
+                            "formatLength": "10"
+                        },
+                        {
+                            "fieldName": "btnJigyoshaInputGuide",
+                            "items": [],
+                            "controlType": "ButtonDialog",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
+                            "selectControlID": "btnJigyoshaInputGuide",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "ButtonDialog1",
+                            "onClick": "",
+                            "icon": 0,
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
+                            "appearance": 2,
+                            "imageFileUrl": "/uz/uza/image/UZ_Search.png",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "heightTextBoxMatches": true,
+                            "displayChildDivName": "DBZ.JigyoshaInputGuide",
+                            "dataPassing": [
+                                {
+                                    "key": "jigyoshaCode",
+                                    "controlName": "txtJigyoshaNo"
+                                },
+                                {
+                                    "key": "jigyoshaMeisho",
+                                    "controlName": "txtShinseishaName"
+                                }
+                            ],
+                            "visibleCloseButton": true,
+                            "onOkClose": "",
+                            "onBeforeOpenDialog": ""
+                        },
+                        {
+                            "fieldName": "btnHonninJohoCopy",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "200px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnHonninJohoCopy",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "本人情報をコピーする",
+                            "onClick": "",
+                            "icon": 0,
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "heightTextBoxMatches": true
+                        },
+                        {
+                            "fieldName": "ddlHokensha",
+                            "items": [],
+                            "controlType": "DropDownList",
+                            "width": "120px",
+                            "visible": true,
+                            "displayNone": true,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "ddlHokensha_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "dataSource": [
+                                {
+                                    "key": "key0",
+                                    "value": "value0"
+                                },
+                                {
+                                    "key": "key1",
+                                    "value": "value1"
+                                }
+                            ],
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "labelLText": "保険者",
+                            "labelRText": "",
+                            "labelLWidth": "70px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "selectedItem": "key0",
+                            "isBlankLine": false,
+                            "disabledItem": []
+                        },
+                        {
+                            "fieldName": "txtShinseishaNameKana",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "355px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtShinseishaNameKana_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "氏名",
+                            "labelRText": "",
+                            "labelLWidth": "65px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtShinseishaName",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "355px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "73px",
+                            "marginRight": "XS",
+                            "selectControlID": "txtShinseishaName_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "",
+                            "labelRText": "",
+                            "labelLWidth": "80px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtTelNo",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0.3em",
+                            "marginRight": "XS",
+                            "selectControlID": "txtTelNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "電話番号",
+                            "labelRText": "",
+                            "labelLWidth": "70px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtYubinNo",
+                            "items": [],
+                            "controlType": "TextBoxYubinNo",
+                            "width": "65px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtYubinNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "住所",
+                            "labelRText": "",
+                            "labelLWidth": "65px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 2,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtAddress",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "481px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "-0.2em",
+                            "marginRight": "XS",
+                            "selectControlID": "txtAddress_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "permitCharactor": ""
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "645px",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0em",
+                    "marginRight": "XS",
+                    "selectControlID": "ShinseishaInfo",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "申請者情報",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": false,
+                    "postParameterPanelNames": [],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 1,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": true
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0em",
+            "marginRight": "0em",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBZ",
+            "controlName": "ShinseishaInfo",
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "btnJigyoshaInputGuide",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "btnJigyoshaInputGuide_displayNone"
+                },
+                {
+                    "publicChildFieldName": "txtUketsukeDate",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "txtUkestukeDate_displayNone"
+                },
+                {
+                    "publicChildFieldName": "ShinseishaInfo",
+                    "publicChildProperty": "title",
+                    "newPropertyName": "title"
+                },
+                {
+                    "publicChildFieldName": "ShinseishaInfo",
+                    "publicChildProperty": "panelDisplay",
+                    "newPropertyName": "panelDisplay"
+                },
+                {
+                    "publicChildFieldName": "txtJigyoshaNo",
+                    "publicChildProperty": "disabled",
+                    "newPropertyName": "txtJigyoshaNo_disabled"
+                },
+                {
+                    "publicChildFieldName": "txtShinseishaNameKana",
+                    "publicChildProperty": "labelLText",
+                    "newPropertyName": "txtShinseishaName_labelLText"
+                },
+                {
+                    "publicChildFieldName": "txtYubinNo",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "txtYubinNo_displayNone"
+                },
+                {
+                    "publicChildFieldName": "txtAddress",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "txtAddress_displayNone"
+                },
+                {
+                    "publicChildFieldName": "btnJigyoshaInputGuide",
+                    "publicChildProperty": "disabled",
+                    "newPropertyName": "btnJigyoshaInputGuide_disabled"
+                },
+                {
+                    "publicChildFieldName": "ShinseishaInfo",
+                    "publicChildProperty": "eraseBorder",
+                    "newPropertyName": "shinseishaInfo_eraseBorder"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": ""
+        };
+        return ShinseishaInfo_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.ShinseishaInfo_Design = ShinseishaInfo_Design;
+})(DBZ || (DBZ = {}));
+
+﻿var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    (function (ShinseishaInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onChange_ddlShinseishaKubun", {
+                get: function () {
+                    return "onChange_ddlShinseishaKubun";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        ShinseishaInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ShinseishaInfo";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ShinseishaInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtShinseiDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShinseiDate"));
+            };
+
+            Controls.prototype.ddlShinseishaKubun = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlShinseishaKubun"));
+            };
+
+            Controls.prototype.txtUketsukeDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtUketsukeDate"));
+            };
+
+            Controls.prototype.txtShinseiRiyu = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtShinseiRiyu"));
+            };
+
+            Controls.prototype.txtJigyoshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtJigyoshaNo"));
+            };
+
+            Controls.prototype.btnJigyoshaInputGuide = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnJigyoshaInputGuide"));
+            };
+
+            Controls.prototype.btnHonninJohoCopy = function () {
+                return new UZA.Button(this.convFiledName("btnHonninJohoCopy"));
+            };
+
+            Controls.prototype.ddlHokensha = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlHokensha"));
+            };
+
+            Controls.prototype.txtShinseishaNameKana = function () {
+                return new UZA.TextBox(this.convFiledName("txtShinseishaNameKana"));
+            };
+
+            Controls.prototype.txtShinseishaName = function () {
+                return new UZA.TextBox(this.convFiledName("txtShinseishaName"));
+            };
+
+            Controls.prototype.txtTelNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtTelNo"));
+            };
+
+            Controls.prototype.txtYubinNo = function () {
+                return new UZA.TextBoxYubinNo(this.convFiledName("txtYubinNo"));
+            };
+
+            Controls.prototype.txtAddress = function () {
+                return new UZA.TextBox(this.convFiledName("txtAddress"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ShinseishaInfo.Controls = Controls;
+    })(DBZ.ShinseishaInfo || (DBZ.ShinseishaInfo = {}));
+    var ShinseishaInfo = DBZ.ShinseishaInfo;
+
+    var ShinseishaInfo_Design = (function (_super) {
+        __extends(ShinseishaInfo_Design, _super);
+        function ShinseishaInfo_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, ShinseishaInfo_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "btnJigyoshaInputGuide_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[5]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "txtUkestukeDate_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[2]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "title", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"] = value;
+                } else {
+                    this.layout.items[0]["title"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "panelDisplay", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"] = value;
+                } else {
+                    this.layout.items[0]["panelDisplay"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "txtJigyoshaNo_disabled", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["disabled"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["disabled"] = value;
+                } else {
+                    this.layout.items[0].items[4]["disabled"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "txtShinseishaName_labelLText", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["labelLText"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["labelLText"] = value;
+                } else {
+                    this.layout.items[0].items[8]["labelLText"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "txtYubinNo_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[11]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "txtAddress_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[12]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "btnJigyoshaInputGuide_disabled", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["disabled"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["disabled"] = value;
+                } else {
+                    this.layout.items[0].items[5]["disabled"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ShinseishaInfo_Design.prototype, "shinseishaInfo_eraseBorder", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
+                } else {
+                    this.layout.items[0]["eraseBorder"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        ShinseishaInfo_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("btnJigyoshaInputGuide_displayNone");
+            Uz.JSControlUtil.registProperty("txtUkestukeDate_displayNone");
+            Uz.JSControlUtil.registProperty("title");
+            Uz.JSControlUtil.registProperty("panelDisplay");
+            Uz.JSControlUtil.registProperty("txtJigyoshaNo_disabled");
+            Uz.JSControlUtil.registProperty("txtShinseishaName_labelLText");
+            Uz.JSControlUtil.registProperty("txtYubinNo_displayNone");
+            Uz.JSControlUtil.registProperty("txtAddress_displayNone");
+            Uz.JSControlUtil.registProperty("btnJigyoshaInputGuide_disabled");
+            Uz.JSControlUtil.registProperty("shinseishaInfo_eraseBorder");
+        };
+
+        ShinseishaInfo_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["btnJigyoshaInputGuide_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["txtUkestukeDate_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
+            editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
+            editablePropertyInfo["txtJigyoshaNo_disabled"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["disabled"];
+            editablePropertyInfo["txtShinseishaName_labelLText"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).getEditablePropertyInfo()["labelLText"];
+            editablePropertyInfo["txtYubinNo_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[11]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["txtAddress_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[12]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["btnJigyoshaInputGuide_disabled"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["disabled"];
+            editablePropertyInfo["shinseishaInfo_eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
+
+            return editablePropertyInfo;
+        };
+        ShinseishaInfo_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "ShinseishaInfo",
+                    "items": [
+                        {
+                            "fieldName": "txtShinseiDate",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "85px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtShinseiDate_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "申請日",
+                            "labelRText": "",
+                            "labelLWidth": "65px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "textKind": 0,
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "ddlShinseishaKubun",
+                            "items": [],
+                            "controlType": "DropDownList",
+                            "width": "150px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0em",
+                            "marginRight": "XS",
+                            "selectControlID": "ddlShinseishaKubun_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "dataSource": [
+                                {
+                                    "key": "myself",
+                                    "value": "本人"
+                                },
+                                {
+                                    "key": "family",
+                                    "value": "家族"
+                                },
+                                {
+                                    "key": "serviceJigyosha",
+                                    "value": "サービス事業者"
+                                },
+                                {
+                                    "key": "other",
+                                    "value": "その他"
+                                },
+                                {
+                                    "key": "blank",
+                                    "value": ""
+                                }
+                            ],
+                            "required": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "onChange_ddlShinseishaKubun",
+                            "labelLText": "申請者区分",
+                            "labelRText": "",
+                            "labelLWidth": "90px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "selectedItem": "myself",
+                            "isBlankLine": false,
+                            "disabledItem": []
+                        },
+                        {
+                            "fieldName": "txtUketsukeDate",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "90px",
+                            "visible": true,
+                            "displayNone": true,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtUketsukeDate_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "受付日",
+                            "labelRText": "",
+                            "labelLWidth": "55px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "textKind": 0,
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtShinseiRiyu",
+                            "items": [],
+                            "controlType": "TextBoxMultiLine",
+                            "width": "560px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtShinseiRiyu_text_area",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "S",
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "申請理由",
+                            "labelRText": "",
+                            "labelLWidth": "65px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textKind": 0,
+                            "limitLength": "200",
+                            "countDisp": true
+                        },
+                        {
+                            "fieldName": "txtJigyoshaNo",
+                            "items": [],
+                            "controlType": "TextBoxCode",
+                            "width": "85px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtJigyoshaNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "事業者",
+                            "labelRText": "",
+                            "labelLWidth": "65px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 2,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "permitCharactor": "",
+                            "formatLength": "10"
+                        },
+                        {
+                            "fieldName": "btnJigyoshaInputGuide",
+                            "items": [],
+                            "controlType": "ButtonDialog",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
+                            "selectControlID": "btnJigyoshaInputGuide",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "ButtonDialog1",
+                            "onClick": "",
+                            "icon": 0,
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
+                            "appearance": 2,
+                            "imageFileUrl": "/uz/uza/image/UZ_Search.png",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "heightTextBoxMatches": true,
+                            "displayChildDivName": "DBZ.JigyoshaInputGuide",
+                            "dataPassing": [
+                                {
+                                    "key": "jigyoshaCode",
+                                    "controlName": "txtJigyoshaNo"
+                                },
+                                {
+                                    "key": "jigyoshaMeisho",
+                                    "controlName": "txtShinseishaName"
+                                }
+                            ],
+                            "visibleCloseButton": true,
+                            "onOkClose": "",
+                            "onBeforeOpenDialog": ""
+                        },
+                        {
+                            "fieldName": "btnHonninJohoCopy",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "200px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnHonninJohoCopy",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "本人情報をコピーする",
+                            "onClick": "",
+                            "icon": 0,
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "heightTextBoxMatches": true
+                        },
+                        {
+                            "fieldName": "ddlHokensha",
+                            "items": [],
+                            "controlType": "DropDownList",
+                            "width": "120px",
+                            "visible": true,
+                            "displayNone": true,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "ddlHokensha_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "dataSource": [
+                                {
+                                    "key": "key0",
+                                    "value": "value0"
+                                },
+                                {
+                                    "key": "key1",
+                                    "value": "value1"
+                                }
+                            ],
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "labelLText": "保険者",
+                            "labelRText": "",
+                            "labelLWidth": "70px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "selectedItem": "key0",
+                            "isBlankLine": false,
+                            "disabledItem": []
+                        },
+                        {
+                            "fieldName": "txtShinseishaNameKana",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "355px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtShinseishaNameKana_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "氏名",
+                            "labelRText": "",
+                            "labelLWidth": "65px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtShinseishaName",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "355px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "73px",
+                            "marginRight": "XS",
+                            "selectControlID": "txtShinseishaName_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "",
+                            "labelRText": "",
+                            "labelLWidth": "80px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtTelNo",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0.3em",
+                            "marginRight": "XS",
+                            "selectControlID": "txtTelNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "電話番号",
+                            "labelRText": "",
+                            "labelLWidth": "70px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtYubinNo",
+                            "items": [],
+                            "controlType": "TextBoxYubinNo",
+                            "width": "65px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtYubinNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "住所",
+                            "labelRText": "",
+                            "labelLWidth": "65px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 2,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtAddress",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "481px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "-0.2em",
+                            "marginRight": "XS",
+                            "selectControlID": "txtAddress_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "decorationClass": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "permitCharactor": ""
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "645px",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0em",
+                    "marginRight": "XS",
+                    "selectControlID": "ShinseishaInfo",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "申請者情報",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": false,
+                    "postParameterPanelNames": [],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 1,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": true
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0em",
+            "marginRight": "0em",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBZ",
+            "controlName": "ShinseishaInfo",
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "btnJigyoshaInputGuide",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "btnJigyoshaInputGuide_displayNone"
+                },
+                {
+                    "publicChildFieldName": "txtUketsukeDate",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "txtUkestukeDate_displayNone"
+                },
+                {
+                    "publicChildFieldName": "ShinseishaInfo",
+                    "publicChildProperty": "title",
+                    "newPropertyName": "title"
+                },
+                {
+                    "publicChildFieldName": "ShinseishaInfo",
+                    "publicChildProperty": "panelDisplay",
+                    "newPropertyName": "panelDisplay"
+                },
+                {
+                    "publicChildFieldName": "txtJigyoshaNo",
+                    "publicChildProperty": "disabled",
+                    "newPropertyName": "txtJigyoshaNo_disabled"
+                },
+                {
+                    "publicChildFieldName": "txtShinseishaNameKana",
+                    "publicChildProperty": "labelLText",
+                    "newPropertyName": "txtShinseishaName_labelLText"
+                },
+                {
+                    "publicChildFieldName": "txtYubinNo",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "txtYubinNo_displayNone"
+                },
+                {
+                    "publicChildFieldName": "txtAddress",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "txtAddress_displayNone"
+                },
+                {
+                    "publicChildFieldName": "btnJigyoshaInputGuide",
+                    "publicChildProperty": "disabled",
+                    "newPropertyName": "btnJigyoshaInputGuide_disabled"
+                },
+                {
+                    "publicChildFieldName": "ShinseishaInfo",
+                    "publicChildProperty": "eraseBorder",
+                    "newPropertyName": "shinseishaInfo_eraseBorder"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": ""
+        };
+        return ShinseishaInfo_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.ShinseishaInfo_Design = ShinseishaInfo_Design;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (ShinseishaInfo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShinseishaInfo.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ShinseishaInfo.ModeController = ModeController;
+    })(DBZ.ShinseishaInfo || (DBZ.ShinseishaInfo = {}));
+    var ShinseishaInfo = DBZ.ShinseishaInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (ShinseishaInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ShinseishaInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("btnJigyoshaInputGuide_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("txtUkestukeDate_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("title", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("panelDisplay", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("txtJigyoshaNo_disabled", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("txtShinseishaName_labelLText", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("txtYubinNo_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("txtAddress_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("btnJigyoshaInputGuide_disabled", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("shinseishaInfo_eraseBorder", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getbtnJigyoshaInputGuide_displayNone = function () {
+                return this.controls.btnJigyoshaInputGuide().displayNone;
+            };
+
+            PublicProperties.prototype.setbtnJigyoshaInputGuide_displayNone = function (value) {
+                this.controls.btnJigyoshaInputGuide().displayNone = value;
+            };
+
+            PublicProperties.prototype.gettxtUkestukeDate_displayNone = function () {
+                return this.controls.txtUketsukeDate().displayNone;
+            };
+
+            PublicProperties.prototype.settxtUkestukeDate_displayNone = function (value) {
+                this.controls.txtUketsukeDate().displayNone = value;
+            };
+
+            PublicProperties.prototype.gettitle = function () {
+                return this.controls.ShinseishaInfo().title;
+            };
+
+            PublicProperties.prototype.settitle = function (value) {
+                this.controls.ShinseishaInfo().title = value;
+            };
+
+            PublicProperties.prototype.getpanelDisplay = function () {
+                return this.controls.ShinseishaInfo().panelDisplay;
+            };
+
+            PublicProperties.prototype.setpanelDisplay = function (value) {
+                this.controls.ShinseishaInfo().panelDisplay = value;
+            };
+
+            PublicProperties.prototype.gettxtJigyoshaNo_disabled = function () {
+                return this.controls.txtJigyoshaNo().disabled;
+            };
+
+            PublicProperties.prototype.settxtJigyoshaNo_disabled = function (value) {
+                this.controls.txtJigyoshaNo().disabled = value;
+            };
+
+            PublicProperties.prototype.gettxtShinseishaName_labelLText = function () {
+                return this.controls.txtShinseishaNameKana().labelLText;
+            };
+
+            PublicProperties.prototype.settxtShinseishaName_labelLText = function (value) {
+                this.controls.txtShinseishaNameKana().labelLText = value;
+            };
+
+            PublicProperties.prototype.gettxtYubinNo_displayNone = function () {
+                return this.controls.txtYubinNo().displayNone;
+            };
+
+            PublicProperties.prototype.settxtYubinNo_displayNone = function (value) {
+                this.controls.txtYubinNo().displayNone = value;
+            };
+
+            PublicProperties.prototype.gettxtAddress_displayNone = function () {
+                return this.controls.txtAddress().displayNone;
+            };
+
+            PublicProperties.prototype.settxtAddress_displayNone = function (value) {
+                this.controls.txtAddress().displayNone = value;
+            };
+
+            PublicProperties.prototype.getbtnJigyoshaInputGuide_disabled = function () {
+                return this.controls.btnJigyoshaInputGuide().disabled;
+            };
+
+            PublicProperties.prototype.setbtnJigyoshaInputGuide_disabled = function (value) {
+                this.controls.btnJigyoshaInputGuide().disabled = value;
+            };
+
+            PublicProperties.prototype.getshinseishaInfo_eraseBorder = function () {
+                return this.controls.ShinseishaInfo().eraseBorder;
+            };
+
+            PublicProperties.prototype.setshinseishaInfo_eraseBorder = function (value) {
+                this.controls.ShinseishaInfo().eraseBorder = value;
+            };
+            return PublicProperties;
+        })();
+        ShinseishaInfo.PublicProperties = PublicProperties;
+    })(DBZ.ShinseishaInfo || (DBZ.ShinseishaInfo = {}));
+    var ShinseishaInfo = DBZ.ShinseishaInfo;
+})(DBZ || (DBZ = {}));
+</script>
+</div>

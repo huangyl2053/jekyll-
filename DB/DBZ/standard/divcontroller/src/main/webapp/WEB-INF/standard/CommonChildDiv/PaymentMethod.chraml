@@ -1,0 +1,3116 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-is-composite-control="true" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;PaymentMethod&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;originalProperty&quot;:[{&quot;publicChildFieldName&quot;:&quot;PaymentMethod&quot;,&quot;publicChildProperty&quot;:&quot;title&quot;,&quot;newPropertyName&quot;:&quot;title&quot;},{&quot;publicChildFieldName&quot;:&quot;PaymentMethod&quot;,&quot;publicChildProperty&quot;:&quot;panelDisplay&quot;,&quot;newPropertyName&quot;:&quot;panelDisplay&quot;},{&quot;publicChildFieldName&quot;:&quot;KozaPayment&quot;,&quot;publicChildProperty&quot;:&quot;title&quot;,&quot;newPropertyName&quot;:&quot;KozaPayment_title&quot;},{&quot;publicChildFieldName&quot;:&quot;radPayMethod1&quot;,&quot;publicChildProperty&quot;:&quot;onClick&quot;,&quot;newPropertyName&quot;:&quot;onClick_radPayMethod&quot;},{&quot;publicChildFieldName&quot;:&quot;JuryoininJoho&quot;,&quot;publicChildProperty&quot;:&quot;displayNone&quot;,&quot;newPropertyName&quot;:&quot;Juryoinin_displayNone&quot;},{&quot;publicChildFieldName&quot;:&quot;MadoguchiPayment&quot;,&quot;publicChildProperty&quot;:&quot;displayNone&quot;,&quot;newPropertyName&quot;:&quot;Madoguchi_displayNone&quot;},{&quot;publicChildFieldName&quot;:&quot;KozaPayment&quot;,&quot;publicChildProperty&quot;:&quot;displayNone&quot;,&quot;newPropertyName&quot;:&quot;Koza_displayNone&quot;},{&quot;publicChildFieldName&quot;:&quot;PaymentMethod&quot;,&quot;publicChildProperty&quot;:&quot;eraseBorder&quot;,&quot;newPropertyName&quot;:&quot;eraseBorder&quot;}],&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;canTransferEvent&quot;:true,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}"><div title="" class="UzPanel FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginRight-XS marginTop-Default marginBottom-Default UzCommonChildDivPanel" id="PaymentMethod" style="width: 1040px; margin-top: 0px; margin-bottom: 0px; margin-left: 0em;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;PaymentMethod&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1040px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;PaymentMethod&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;支払方法&quot;,&quot;marginTop&quot;:&quot;Default&quot;,&quot;marginBottom&quot;:&quot;Default&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:false,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:1,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true,&quot;eraseBorderTop&quot;:false,&quot;eraseBorderBottom&quot;:false,&quot;eraseBorderRight&quot;:false,&quot;eraseBorderLeft&quot;:false}"><div class="UzPanelHeader clearBackground" id="PaymentMethod_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">支払方法</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M Panel-GroupBox ui-droppable ui-sortable" id="PaymentMethod_panel_body_area"><div title="" class="UzRadioButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="radPayMethod1" style="width: 153px; height: 19px;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;radPayMethod1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;radPayMethod1_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onChange&quot;:&quot;&quot;,&quot;selectedItem&quot;:&quot;payToJuryoinin&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;payToJuryoinin&quot;,&quot;value&quot;:&quot;受領委任払い&quot;}],&quot;onClick&quot;:&quot;&quot;,&quot;newLineItemNumber&quot;:3,&quot;spaceSize&quot;:&quot;M&quot;,&quot;labelLText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;disabledItem&quot;:[],&quot;icon&quot;:[]}"><span class="buttonSpan FloatLeft" id="radPayMethod1_core" style="width: 150px;"><input name="radPayMethod1_group" id="radPayMethod1_payToJuryoinin" type="radio" value="受領委任払い" data-key="payToJuryoinin"><label for="radPayMethod1_payToJuryoinin" data-key="payToJuryoinin">受領委任払い</label></span></div><div title="" class="UzPanel FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable ClearFloat marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default" id="JuryoininJoho" style="width: 845px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;JuryoininJoho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;845px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;JuryoininJoho&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;Default&quot;,&quot;marginBottom&quot;:&quot;Default&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;JuryoininJoho&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:false,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:2,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true,&quot;eraseBorderTop&quot;:false,&quot;eraseBorderBottom&quot;:false,&quot;eraseBorderRight&quot;:false,&quot;eraseBorderLeft&quot;:false}"><div class="UzPanelHeader DetailHeader" id="JuryoininJoho_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon iconSpan-Detail-Open" style="visibility: hidden;"></span><span class="textSpan textSpan-Detail">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-Detail ui-droppable ui-sortable" id="JuryoininJoho_panel_body_area"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="txtJuryoininKeiyakuNo" style="width: 157px; height: 21px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtJuryoininKeiyakuNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtJuryoininKeiyakuNo_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onChange&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;labelLText&quot;:&quot;契約番号&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;labelLAlign&quot;:2,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:0,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:2,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;&quot;,&quot;formatLength&quot;:&quot;10&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtJuryoininKeiyakuNo_labelL" style="width: 70px;"><span>契約番号</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input" id="txtJuryoininKeiyakuNo_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="txtJigyoshaNo" style="width: 142px; height: 21px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtJigyoshaNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtJigyoshaNo_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onChange&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;labelLText&quot;:&quot;事業者&quot;,&quot;labelLWidth&quot;:&quot;55px&quot;,&quot;labelLAlign&quot;:2,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:0,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:2,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;&quot;,&quot;formatLength&quot;:&quot;10&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtJigyoshaNo_labelL" style="width: 55px;"><span>事業者</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input" id="txtJigyoshaNo_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginRight-XS" id="txtJigyoshaName" style="width: 511px; height: 21px; margin-left: -0.2em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtJigyoshaName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;L&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;-0.2em&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtJigyoshaName_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onChange&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;labelLText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:0,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:0,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;&quot;}"><input class="UzTextBox CoreElement Width-L text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtJigyoshaName_core" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginRight-XS" id="txtJigyoshaNameKana" style="width: 511px; height: 21px; margin-left: 20.1em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtJigyoshaNameKana&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;L&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;20.1em&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtJigyoshaNameKana_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onChange&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;labelLText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:0,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:0,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;&quot;}"><input class="UzTextBox CoreElement Width-L text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtJigyoshaNameKana_core" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></div><div title="" class="UzRadioButton FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS" id="radPayMethod2" style="width: 153px; height: 19px;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;radPayMethod2&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;radPayMethod2_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onChange&quot;:&quot;&quot;,&quot;selectedItem&quot;:null,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;payToKoza&quot;,&quot;value&quot;:&quot;口座払い&quot;}],&quot;onClick&quot;:&quot;&quot;,&quot;newLineItemNumber&quot;:3,&quot;spaceSize&quot;:&quot;M&quot;,&quot;labelLText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;disabledItem&quot;:[],&quot;icon&quot;:[]}"><span class="buttonSpan FloatLeft" id="radPayMethod2_core" style="width: 150px;"><input name="radPayMethod2_group" id="radPayMethod2_payToKoza" type="radio" value="口座払い" data-key="payToKoza"><label for="radPayMethod2_payToKoza" data-key="payToKoza">口座払い</label></span></div><div title="" class="JSControl UzCompositeControl FloatLeft Width-XS marginLeft-XS" id="KozaPayment" style="margin-top: 0em; margin-right: 0em; margin-bottom: 0em;" data-control-type="CommonChildDiv" data-is-composite-control="true" data-obj="{&quot;fieldName&quot;:&quot;KozaPayment&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;KozaPayment&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KozaPayment&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;originalProperty&quot;:[],&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;canTransferEvent&quot;:true,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;panelDisplay&quot;:2,&quot;eraseBorderTop&quot;:false,&quot;eraseBorderBottom&quot;:false,&quot;eraseBorderRight&quot;:false,&quot;eraseBorderLeft&quot;:false}" data-control-name="DBZ.KozaPayment"></div><div title="" class="UzRadioButton FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS" id="radPayMethod3" style="width: 153px; height: 19px;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;radPayMethod3&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;radPayMethod3_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onChange&quot;:&quot;&quot;,&quot;selectedItem&quot;:null,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;payToMadoguchi&quot;,&quot;value&quot;:&quot;窓口払い&quot;}],&quot;onClick&quot;:&quot;&quot;,&quot;newLineItemNumber&quot;:3,&quot;spaceSize&quot;:&quot;M&quot;,&quot;labelLText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;disabledItem&quot;:[],&quot;icon&quot;:[]}"><span class="buttonSpan FloatLeft" id="radPayMethod3_core" style="width: 150px;"><input name="radPayMethod3_group" id="radPayMethod3_payToMadoguchi" type="radio" value="窓口払い" data-key="payToMadoguchi"><label for="radPayMethod3_payToMadoguchi" data-key="payToMadoguchi">窓口払い</label></span></div><div title="" class="UzPanel FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable ClearFloat marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default Width-G2" id="MadoguchiPayment" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;MadoguchiPayment&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;MadoguchiPayment&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;Default&quot;,&quot;marginBottom&quot;:&quot;Default&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;MadoguchiPayment&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:false,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:true,&quot;panelDisplay&quot;:2,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true,&quot;eraseBorderTop&quot;:false,&quot;eraseBorderBottom&quot;:false,&quot;eraseBorderRight&quot;:false,&quot;eraseBorderLeft&quot;:false}"><div class="UzPanelHeader DetailHeader" id="MadoguchiPayment_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon iconSpan-Detail-Open" style="visibility: hidden;"></span><span class="textSpan textSpan-Detail">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-Detail ui-droppable ui-sortable" id="MadoguchiPayment_panel_body_area"><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="txtShiharaiBasho" style="width: 522px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShiharaiBasho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;445px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtShiharaiBasho_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onChange&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;labelLText&quot;:&quot;支払場所&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;labelLAlign&quot;:2,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:0,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:0,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShiharaiBasho_labelL" style="width: 70px;"><span>支払場所</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtShiharaiBasho_core" style="width: 445px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS" id="txtShiharaiKaishiDate" style="width: 167px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtShiharaiKaishiDate&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtShiharaiKaishiDate_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onChange&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;labelLText&quot;:&quot;開始日&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;labelLAlign&quot;:2,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;value&quot;:&quot;&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;./_-&quot;,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShiharaiKaishiDate_labelL" style="width: 70px;"><span>開始日</span></span><input class="UzTextBox CoreElement" id="txtShiharaiKaishiDate_core" style="width: 90px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate=""></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginRight-XS" id="txtShiharaiKaishiDay" style="width: 64px; height: 21px; margin-left: -0.5em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShiharaiKaishiDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;30px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;-0.5em&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtShiharaiKaishiDay_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onChange&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;labelLText&quot;:&quot;（&quot;,&quot;labelLWidth&quot;:&quot;13px&quot;,&quot;labelLAlign&quot;:2,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:1,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:0,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelRText&quot;:&quot;）&quot;,&quot;labelRWidth&quot;:&quot;13px&quot;,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShiharaiKaishiDay_labelL" style="width: 13px;"><span>（</span></span><input class="UzTextBox CoreElement text-align-center ime-mode-Hiragana ui-autocomplete-input" id="txtShiharaiKaishiDay_core" style="width: 30px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span><span class="word-wrap-break-word Label-R text-align-left" id="txtShiharaiKaishiDay_labelR" style="width: 13px;"><span>）</span></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxTime FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="txtShiharaiKaishiTime" style="width: 127px; height: 21px;" data-control-type="TextBoxTime" data-obj="{&quot;fieldName&quot;:&quot;txtShiharaiKaishiTime&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxTime&quot;,&quot;width&quot;:&quot;50px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtShiharaiKaishiTime_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onChange&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;labelLText&quot;:&quot;開始時間&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;labelLAlign&quot;:2,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:0,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:0,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;&quot;,&quot;displayFormat&quot;:1,&quot;timeKubun&quot;:1}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShiharaiKaishiTime_labelL" style="width: 70px;"><span>開始時間</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtShiharaiKaishiTime_core" style="width: 50px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS" id="txtShiharaiShuryoDate" style="width: 167px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtShiharaiShuryoDate&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtShiharaiShuryoDate_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onChange&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;labelLText&quot;:&quot;終了日&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;labelLAlign&quot;:2,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;value&quot;:&quot;&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;./_-&quot;,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShiharaiShuryoDate_labelL" style="width: 70px;"><span>終了日</span></span><input class="UzTextBox CoreElement" id="txtShiharaiShuryoDate_core" style="width: 90px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate=""></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginRight-XS" id="txtShiharaiShuryoDay" style="width: 64px; height: 21px; margin-left: -0.5em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShiharaiShuryoDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;30px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;-0.5em&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtShiharaiShuryoDay_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onChange&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;labelLText&quot;:&quot;（&quot;,&quot;labelLWidth&quot;:&quot;13px&quot;,&quot;labelLAlign&quot;:2,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:1,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:0,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelRText&quot;:&quot;）&quot;,&quot;labelRWidth&quot;:&quot;13px&quot;,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShiharaiShuryoDay_labelL" style="width: 13px;"><span>（</span></span><input class="UzTextBox CoreElement text-align-center ime-mode-Hiragana ui-autocomplete-input" id="txtShiharaiShuryoDay_core" style="width: 30px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span><span class="word-wrap-break-word Label-R text-align-left" id="txtShiharaiShuryoDay_labelR" style="width: 13px;"><span>）</span></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxTime FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="txtShiharaiShuryoTime" style="width: 127px; height: 21px;" data-control-type="TextBoxTime" data-obj="{&quot;fieldName&quot;:&quot;txtShiharaiShuryoTime&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxTime&quot;,&quot;width&quot;:&quot;50px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtShiharaiShuryoTime_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onChange&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;labelLText&quot;:&quot;終了時間&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;labelLAlign&quot;:2,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:0,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:0,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;&quot;,&quot;displayFormat&quot;:1,&quot;timeKubun&quot;:1}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShiharaiShuryoTime_labelL" style="width: 70px;"><span>終了時間</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtShiharaiShuryoTime_core" style="width: 50px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></div></div></div> <script type='text/javascript' class='RamlConvert'>var DBZ= DBZ? DBZ: {};DBZ['DEFAULT'] = {};DBZ['DEFAULT'].PaymentMethodRequest = function(parentFieldName){ var paramArray = [];return paramArray; };DBZ['DEFAULT'].JuryoininJohoRequest = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_JuryoininJoho').getProperty();parameter0.txtJuryoininKeiyakuNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtJuryoininKeiyakuNo').getProperty();parameter0.txtJigyoshaNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtJigyoshaNo').getProperty();parameter0.txtJigyoshaName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtJigyoshaName').getProperty();parameter0.txtJigyoshaNameKana = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtJigyoshaNameKana').getProperty();paramArray.push(parameter0);return paramArray; };DBZ['DEFAULT'].MadoguchiPaymentRequest = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_MadoguchiPayment').getProperty();parameter0.txtShiharaiBasho = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShiharaiBasho').getProperty();parameter0.txtShiharaiKaishiDate = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShiharaiKaishiDate').getProperty();parameter0.txtShiharaiKaishiDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShiharaiKaishiDay').getProperty();parameter0.txtShiharaiKaishiTime = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShiharaiKaishiTime').getProperty();parameter0.txtShiharaiShuryoDate = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShiharaiShuryoDate').getProperty();parameter0.txtShiharaiShuryoDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShiharaiShuryoDay').getProperty();parameter0.txtShiharaiShuryoTime = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShiharaiShuryoTime').getProperty();paramArray.push(parameter0);return paramArray; };</script>
+<script type='text/javascript'>var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    (function (PaymentMethod) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        PaymentMethod.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "PaymentMethod";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.KozaPayment = function () {
+                return new DBZ.KozaPayment.ModeController("KozaPayment");
+            };
+
+            Controls.prototype.PaymentMethod = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.radPayMethod1 = function () {
+                return new UZA.RadioButton(this.convFiledName("radPayMethod1"));
+            };
+
+            Controls.prototype.JuryoininJoho = function () {
+                return new UZA.Panel(this.convFiledName("JuryoininJoho"));
+            };
+
+            Controls.prototype.txtJuryoininKeiyakuNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtJuryoininKeiyakuNo"));
+            };
+
+            Controls.prototype.txtJigyoshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtJigyoshaNo"));
+            };
+
+            Controls.prototype.txtJigyoshaName = function () {
+                return new UZA.TextBox(this.convFiledName("txtJigyoshaName"));
+            };
+
+            Controls.prototype.txtJigyoshaNameKana = function () {
+                return new UZA.TextBox(this.convFiledName("txtJigyoshaNameKana"));
+            };
+
+            Controls.prototype.radPayMethod2 = function () {
+                return new UZA.RadioButton(this.convFiledName("radPayMethod2"));
+            };
+
+            Controls.prototype.radPayMethod3 = function () {
+                return new UZA.RadioButton(this.convFiledName("radPayMethod3"));
+            };
+
+            Controls.prototype.MadoguchiPayment = function () {
+                return new UZA.Panel(this.convFiledName("MadoguchiPayment"));
+            };
+
+            Controls.prototype.txtShiharaiBasho = function () {
+                return new UZA.TextBox(this.convFiledName("txtShiharaiBasho"));
+            };
+
+            Controls.prototype.txtShiharaiKaishiDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShiharaiKaishiDate"));
+            };
+
+            Controls.prototype.txtShiharaiKaishiDay = function () {
+                return new UZA.TextBox(this.convFiledName("txtShiharaiKaishiDay"));
+            };
+
+            Controls.prototype.txtShiharaiKaishiTime = function () {
+                return new UZA.TextBoxTime(this.convFiledName("txtShiharaiKaishiTime"));
+            };
+
+            Controls.prototype.txtShiharaiShuryoDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShiharaiShuryoDate"));
+            };
+
+            Controls.prototype.txtShiharaiShuryoDay = function () {
+                return new UZA.TextBox(this.convFiledName("txtShiharaiShuryoDay"));
+            };
+
+            Controls.prototype.txtShiharaiShuryoTime = function () {
+                return new UZA.TextBoxTime(this.convFiledName("txtShiharaiShuryoTime"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        PaymentMethod.Controls = Controls;
+    })(DBZ.PaymentMethod || (DBZ.PaymentMethod = {}));
+    var PaymentMethod = DBZ.PaymentMethod;
+
+    var PaymentMethod_Design = (function (_super) {
+        __extends(PaymentMethod_Design, _super);
+        function PaymentMethod_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, PaymentMethod_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(PaymentMethod_Design.prototype, "title", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"] = value;
+                } else {
+                    this.layout.items[0]["title"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(PaymentMethod_Design.prototype, "panelDisplay", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"] = value;
+                } else {
+                    this.layout.items[0]["panelDisplay"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(PaymentMethod_Design.prototype, "KozaPayment_title", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["title"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["title"] = value;
+                } else {
+                    this.layout.items[0].items[3]["title"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(PaymentMethod_Design.prototype, "onClick_radPayMethod", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onClick"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onClick"] = value;
+                } else {
+                    this.layout.items[0].items[0]["onClick"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(PaymentMethod_Design.prototype, "Juryoinin_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[1]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(PaymentMethod_Design.prototype, "Madoguchi_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[5]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(PaymentMethod_Design.prototype, "Koza_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[3]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(PaymentMethod_Design.prototype, "eraseBorder", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
+                } else {
+                    this.layout.items[0]["eraseBorder"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        PaymentMethod_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("title");
+            Uz.JSControlUtil.registProperty("panelDisplay");
+            Uz.JSControlUtil.registProperty("KozaPayment_title");
+            Uz.JSControlUtil.registProperty("onClick_radPayMethod");
+            Uz.JSControlUtil.registProperty("Juryoinin_displayNone");
+            Uz.JSControlUtil.registProperty("Madoguchi_displayNone");
+            Uz.JSControlUtil.registProperty("Koza_displayNone");
+            Uz.JSControlUtil.registProperty("eraseBorder");
+        };
+
+        PaymentMethod_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
+            editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
+            editablePropertyInfo["KozaPayment_title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["title"];
+            editablePropertyInfo["onClick_radPayMethod"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["Juryoinin_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["Madoguchi_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["Koza_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
+
+            return editablePropertyInfo;
+        };
+        PaymentMethod_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "PaymentMethod",
+                    "items": [
+                        {
+                            "fieldName": "radPayMethod1",
+                            "items": [],
+                            "controlType": "RadioButton",
+                            "width": "150px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "radPayMethod1_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "dataSource": [
+                                {
+                                    "key": "payToJuryoinin",
+                                    "value": "受領委任払い"
+                                }
+                            ],
+                            "onChange": "",
+                            "labelLText": "",
+                            "labelLWidth": "S",
+                            "labelLAlign": 2,
+                            "selectedItem": "payToJuryoinin",
+                            "onClick": "",
+                            "newLineItemNumber": 3,
+                            "spaceSize": "M",
+                            "disabledItem": [],
+                            "icon": []
+                        },
+                        {
+                            "fieldName": "JuryoininJoho",
+                            "items": [
+                                {
+                                    "fieldName": "txtJuryoininKeiyakuNo",
+                                    "items": [],
+                                    "controlType": "TextBoxCode",
+                                    "width": "80px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtJuryoininKeiyakuNo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "契約番号",
+                                    "labelRText": "",
+                                    "labelLWidth": "70px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 2,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": "",
+                                    "formatLength": "10"
+                                },
+                                {
+                                    "fieldName": "txtJigyoshaNo",
+                                    "items": [],
+                                    "controlType": "TextBoxCode",
+                                    "width": "80px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtJigyoshaNo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "事業者",
+                                    "labelRText": "",
+                                    "labelLWidth": "55px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 2,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": "",
+                                    "formatLength": "10"
+                                },
+                                {
+                                    "fieldName": "txtJigyoshaName",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "L",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "-0.2em",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtJigyoshaName_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "txtJigyoshaNameKana",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "L",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "20.1em",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtJigyoshaNameKana_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": ""
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "845px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "JuryoininJoho",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": false,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "JuryoininJoho"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": false,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 2,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto",
+                            "canPost": true,
+                            "eraseBorderTop": false,
+                            "eraseBorderBottom": false,
+                            "eraseBorderRight": false,
+                            "eraseBorderLeft": false
+                        },
+                        {
+                            "fieldName": "radPayMethod2",
+                            "items": [],
+                            "controlType": "RadioButton",
+                            "width": "150px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "radPayMethod2_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "dataSource": [
+                                {
+                                    "key": "payToKoza",
+                                    "value": "口座払い"
+                                }
+                            ],
+                            "onChange": "",
+                            "labelLText": "",
+                            "labelLWidth": "S",
+                            "labelLAlign": 2,
+                            "selectedItem": null,
+                            "onClick": "",
+                            "newLineItemNumber": 3,
+                            "spaceSize": "M",
+                            "disabledItem": [],
+                            "icon": []
+                        },
+                        {
+                            "fieldName": "KozaPayment",
+                            "items": [],
+                            "controlType": "CommonChildDiv",
+                            "width": "XS",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "0em",
+                            "selectControlID": "KozaPayment",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "title": "",
+                            "relation": [],
+                            "packageName": "",
+                            "businessId": "DBZ",
+                            "controlName": "KozaPayment",
+                            "marginTop": "0em",
+                            "marginBottom": "0em",
+                            "originalProperty": [],
+                            "dataPassingForDialog": [],
+                            "dialogOkEventNameForDialog": "",
+                            "dialogCancelEventNameForDialog": "",
+                            "canTransferEvent": true,
+                            "heightForDialog": "M",
+                            "firstFocusFieldName": "",
+                            "lastFocusFieldName": "",
+                            "panelDisplay": 2,
+                            "eraseBorderTop": false,
+                            "eraseBorderBottom": false,
+                            "eraseBorderRight": false,
+                            "eraseBorderLeft": false
+                        },
+                        {
+                            "fieldName": "radPayMethod3",
+                            "items": [],
+                            "controlType": "RadioButton",
+                            "width": "150px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "radPayMethod3_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "dataSource": [
+                                {
+                                    "key": "payToMadoguchi",
+                                    "value": "窓口払い"
+                                }
+                            ],
+                            "onChange": "",
+                            "labelLText": "",
+                            "labelLWidth": "S",
+                            "labelLAlign": 2,
+                            "selectedItem": null,
+                            "onClick": "",
+                            "newLineItemNumber": 3,
+                            "spaceSize": "M",
+                            "disabledItem": [],
+                            "icon": []
+                        },
+                        {
+                            "fieldName": "MadoguchiPayment",
+                            "items": [
+                                {
+                                    "fieldName": "txtShiharaiBasho",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "445px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShiharaiBasho_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "支払場所",
+                                    "labelRText": "",
+                                    "labelLWidth": "70px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "txtShiharaiKaishiDate",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "90px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShiharaiKaishiDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "開始日",
+                                    "labelRText": "",
+                                    "labelLWidth": "70px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "txtShiharaiKaishiDay",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "30px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "-0.5em",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShiharaiKaishiDay_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "（",
+                                    "labelRText": "）",
+                                    "labelLWidth": "13px",
+                                    "labelRWidth": "13px",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 1,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "txtShiharaiKaishiTime",
+                                    "items": [],
+                                    "controlType": "TextBoxTime",
+                                    "width": "50px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShiharaiKaishiTime_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "開始時間",
+                                    "labelRText": "",
+                                    "labelLWidth": "70px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "displayFormat": 1,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": "",
+                                    "timeKubun": 1
+                                },
+                                {
+                                    "fieldName": "txtShiharaiShuryoDate",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "90px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShiharaiShuryoDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "終了日",
+                                    "labelRText": "",
+                                    "labelLWidth": "70px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "txtShiharaiShuryoDay",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "30px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "-0.5em",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShiharaiShuryoDay_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "（",
+                                    "labelRText": "）",
+                                    "labelLWidth": "13px",
+                                    "labelRWidth": "13px",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 1,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "txtShiharaiShuryoTime",
+                                    "items": [],
+                                    "controlType": "TextBoxTime",
+                                    "width": "50px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShiharaiShuryoTime_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "終了時間",
+                                    "labelRText": "",
+                                    "labelLWidth": "70px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "displayFormat": 1,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": "",
+                                    "timeKubun": 1
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "G2",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "MadoguchiPayment",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": false,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "MadoguchiPayment"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": false,
+                            "backgroundColor": 0,
+                            "widthAuto": true,
+                            "panelDisplay": 2,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto",
+                            "canPost": true,
+                            "eraseBorderTop": false,
+                            "eraseBorderBottom": false,
+                            "eraseBorderRight": false,
+                            "eraseBorderLeft": false
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "1040px",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0em",
+                    "marginRight": "XS",
+                    "selectControlID": "PaymentMethod",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "支払方法",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": false,
+                    "postParameterPanelNames": [],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 1,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": true,
+                    "eraseBorderTop": false,
+                    "eraseBorderBottom": false,
+                    "eraseBorderRight": false,
+                    "eraseBorderLeft": false
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0em",
+            "marginRight": "0em",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBZ",
+            "controlName": "PaymentMethod",
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "PaymentMethod",
+                    "publicChildProperty": "title",
+                    "newPropertyName": "title"
+                },
+                {
+                    "publicChildFieldName": "PaymentMethod",
+                    "publicChildProperty": "panelDisplay",
+                    "newPropertyName": "panelDisplay"
+                },
+                {
+                    "publicChildFieldName": "KozaPayment",
+                    "publicChildProperty": "title",
+                    "newPropertyName": "KozaPayment_title"
+                },
+                {
+                    "publicChildFieldName": "radPayMethod1",
+                    "publicChildProperty": "onClick",
+                    "newPropertyName": "onClick_radPayMethod"
+                },
+                {
+                    "publicChildFieldName": "JuryoininJoho",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "Juryoinin_displayNone"
+                },
+                {
+                    "publicChildFieldName": "MadoguchiPayment",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "Madoguchi_displayNone"
+                },
+                {
+                    "publicChildFieldName": "KozaPayment",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "Koza_displayNone"
+                },
+                {
+                    "publicChildFieldName": "PaymentMethod",
+                    "publicChildProperty": "eraseBorder",
+                    "newPropertyName": "eraseBorder"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": ""
+        };
+        return PaymentMethod_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.PaymentMethod_Design = PaymentMethod_Design;
+})(DBZ || (DBZ = {}));
+
+﻿var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    var KozaPayment_Design = (function (_super) {
+        __extends(KozaPayment_Design, _super);
+        function KozaPayment_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, KozaPayment_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(KozaPayment_Design.prototype, "title", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"] = value;
+                } else {
+                    this.layout.items[0]["title"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KozaPayment_Design.prototype, "eraseBorder", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
+                } else {
+                    this.layout.items[0]["eraseBorder"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(KozaPayment_Design.prototype, "panelDisplay", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"] = value;
+                } else {
+                    this.layout.items[0]["panelDisplay"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        KozaPayment_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("title");
+            Uz.JSControlUtil.registProperty("eraseBorder");
+            Uz.JSControlUtil.registProperty("panelDisplay");
+        };
+
+        KozaPayment_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
+            editablePropertyInfo["eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
+            editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
+
+            return editablePropertyInfo;
+        };
+        KozaPayment_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "KozaPayment",
+                    "items": [
+                        {
+                            "fieldName": "txtKinyuKikanCode",
+                            "items": [],
+                            "controlType": "TextBoxCode",
+                            "width": "32px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKinyuKikanCode_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 2,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "金融機関",
+                            "labelRText": "",
+                            "labelLWidth": "70px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": "",
+                            "formatLength": "4"
+                        },
+                        {
+                            "fieldName": "txtKinyuKikanName",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "220px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "-0.2em",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKinyuKikanName_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "radKozaShubetsu",
+                            "items": [],
+                            "controlType": "RadioButton",
+                            "width": "210px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "radKozaShubetsu_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "onChange": "",
+                            "labelLText": "口座種別",
+                            "labelLWidth": "70px",
+                            "labelLAlign": 2,
+                            "onClick": "",
+                            "icon": [],
+                            "dataSource": [
+                                {
+                                    "key": "futsu",
+                                    "value": "普通"
+                                },
+                                {
+                                    "key": "toza",
+                                    "value": "当座"
+                                },
+                                {
+                                    "key": "other",
+                                    "value": "その他"
+                                }
+                            ],
+                            "selectedItem": null,
+                            "newLineItemNumber": 3,
+                            "spaceSize": "S",
+                            "disabledItem": []
+                        },
+                        {
+                            "fieldName": "txtKozaMeigininKana",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "250px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0em",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKozaMeigininKana_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "口座名義人",
+                            "labelRText": "",
+                            "labelLWidth": "90px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtKinyuKikanBrunchCode",
+                            "items": [],
+                            "controlType": "TextBoxCode",
+                            "width": "32px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKinyuKikanBrunchCode_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 2,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "支店",
+                            "labelRText": "",
+                            "labelLWidth": "70px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": "",
+                            "formatLength": "3"
+                        },
+                        {
+                            "fieldName": "txtKinyuKikanBrunchName",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "220px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "-0.2em",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKinyuKikanBrunchName_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtKozaNo",
+                            "items": [],
+                            "controlType": "TextBoxCode",
+                            "width": "60px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKozaNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 2,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "口座番号",
+                            "labelRText": "",
+                            "labelLWidth": "70px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": "",
+                            "formatLength": "7"
+                        },
+                        {
+                            "fieldName": "txtKozaMeiginin",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "250px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "14.8em",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKozaMeiginin_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "",
+                            "labelRText": "",
+                            "labelLWidth": "80px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "1013px",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0em",
+                    "marginRight": "0em",
+                    "selectControlID": "KozaPayment",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "口座払い",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": false,
+                    "postParameterPanelNames": [],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": true
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0em",
+            "marginRight": "0em",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBZ",
+            "controlName": "KozaPayment",
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "KozaPayment",
+                    "publicChildProperty": "title",
+                    "newPropertyName": "title"
+                },
+                {
+                    "publicChildFieldName": "KozaPayment",
+                    "publicChildProperty": "eraseBorder",
+                    "newPropertyName": "eraseBorder"
+                },
+                {
+                    "publicChildFieldName": "KozaPayment",
+                    "publicChildProperty": "panelDisplay",
+                    "newPropertyName": "panelDisplay"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
+        };
+        return KozaPayment_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.KozaPayment_Design = KozaPayment_Design;
+
+    (function (KozaPayment) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KozaPayment.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KozaPayment";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KozaPayment.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.KozaPayment.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KozaPayment = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtKinyuKikanCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtKinyuKikanCode"));
+            };
+
+            Controls.prototype.txtKinyuKikanName = function () {
+                return new UZA.TextBox(this.convFiledName("txtKinyuKikanName"));
+            };
+
+            Controls.prototype.radKozaShubetsu = function () {
+                return new UZA.RadioButton(this.convFiledName("radKozaShubetsu"));
+            };
+
+            Controls.prototype.txtKozaMeigininKana = function () {
+                return new UZA.TextBox(this.convFiledName("txtKozaMeigininKana"));
+            };
+
+            Controls.prototype.txtKinyuKikanBrunchCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtKinyuKikanBrunchCode"));
+            };
+
+            Controls.prototype.txtKinyuKikanBrunchName = function () {
+                return new UZA.TextBox(this.convFiledName("txtKinyuKikanBrunchName"));
+            };
+
+            Controls.prototype.txtKozaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtKozaNo"));
+            };
+
+            Controls.prototype.txtKozaMeiginin = function () {
+                return new UZA.TextBox(this.convFiledName("txtKozaMeiginin"));
+            };
+            return Controls;
+        })();
+        KozaPayment.Controls = Controls;
+    })(DBZ.KozaPayment || (DBZ.KozaPayment = {}));
+    var KozaPayment = DBZ.KozaPayment;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (KozaPayment) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KozaPayment.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KozaPayment.ModeController = ModeController;
+    })(DBZ.KozaPayment || (DBZ.KozaPayment = {}));
+    var KozaPayment = DBZ.KozaPayment;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KozaPayment) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new KozaPayment.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("title", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("eraseBorder", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("panelDisplay", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.gettitle = function () {
+                return this.controls.KozaPayment().title;
+            };
+
+            PublicProperties.prototype.settitle = function (value) {
+                this.controls.KozaPayment().title = value;
+            };
+
+            PublicProperties.prototype.geteraseBorder = function () {
+                return this.controls.KozaPayment().eraseBorder;
+            };
+
+            PublicProperties.prototype.seteraseBorder = function (value) {
+                this.controls.KozaPayment().eraseBorder = value;
+            };
+
+            PublicProperties.prototype.getpanelDisplay = function () {
+                return this.controls.KozaPayment().panelDisplay;
+            };
+
+            PublicProperties.prototype.setpanelDisplay = function (value) {
+                this.controls.KozaPayment().panelDisplay = value;
+            };
+            return PublicProperties;
+        })();
+        KozaPayment.PublicProperties = PublicProperties;
+    })(DBZ.KozaPayment || (DBZ.KozaPayment = {}));
+    var KozaPayment = DBZ.KozaPayment;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (PaymentMethod) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        PaymentMethod.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "PaymentMethod";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.KozaPayment = function () {
+                return new DBZ.KozaPayment.ModeController("KozaPayment");
+            };
+
+            Controls.prototype.PaymentMethod = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.radPayMethod1 = function () {
+                return new UZA.RadioButton(this.convFiledName("radPayMethod1"));
+            };
+
+            Controls.prototype.JuryoininJoho = function () {
+                return new UZA.Panel(this.convFiledName("JuryoininJoho"));
+            };
+
+            Controls.prototype.txtJuryoininKeiyakuNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtJuryoininKeiyakuNo"));
+            };
+
+            Controls.prototype.txtJigyoshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtJigyoshaNo"));
+            };
+
+            Controls.prototype.txtJigyoshaName = function () {
+                return new UZA.TextBox(this.convFiledName("txtJigyoshaName"));
+            };
+
+            Controls.prototype.txtJigyoshaNameKana = function () {
+                return new UZA.TextBox(this.convFiledName("txtJigyoshaNameKana"));
+            };
+
+            Controls.prototype.radPayMethod2 = function () {
+                return new UZA.RadioButton(this.convFiledName("radPayMethod2"));
+            };
+
+            Controls.prototype.radPayMethod3 = function () {
+                return new UZA.RadioButton(this.convFiledName("radPayMethod3"));
+            };
+
+            Controls.prototype.MadoguchiPayment = function () {
+                return new UZA.Panel(this.convFiledName("MadoguchiPayment"));
+            };
+
+            Controls.prototype.txtShiharaiBasho = function () {
+                return new UZA.TextBox(this.convFiledName("txtShiharaiBasho"));
+            };
+
+            Controls.prototype.txtShiharaiKaishiDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShiharaiKaishiDate"));
+            };
+
+            Controls.prototype.txtShiharaiKaishiDay = function () {
+                return new UZA.TextBox(this.convFiledName("txtShiharaiKaishiDay"));
+            };
+
+            Controls.prototype.txtShiharaiKaishiTime = function () {
+                return new UZA.TextBoxTime(this.convFiledName("txtShiharaiKaishiTime"));
+            };
+
+            Controls.prototype.txtShiharaiShuryoDate = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShiharaiShuryoDate"));
+            };
+
+            Controls.prototype.txtShiharaiShuryoDay = function () {
+                return new UZA.TextBox(this.convFiledName("txtShiharaiShuryoDay"));
+            };
+
+            Controls.prototype.txtShiharaiShuryoTime = function () {
+                return new UZA.TextBoxTime(this.convFiledName("txtShiharaiShuryoTime"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        PaymentMethod.Controls = Controls;
+    })(DBZ.PaymentMethod || (DBZ.PaymentMethod = {}));
+    var PaymentMethod = DBZ.PaymentMethod;
+
+    var PaymentMethod_Design = (function (_super) {
+        __extends(PaymentMethod_Design, _super);
+        function PaymentMethod_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, PaymentMethod_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(PaymentMethod_Design.prototype, "title", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["title"] = value;
+                } else {
+                    this.layout.items[0]["title"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(PaymentMethod_Design.prototype, "panelDisplay", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["panelDisplay"] = value;
+                } else {
+                    this.layout.items[0]["panelDisplay"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(PaymentMethod_Design.prototype, "KozaPayment_title", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["title"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["title"] = value;
+                } else {
+                    this.layout.items[0].items[3]["title"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(PaymentMethod_Design.prototype, "onClick_radPayMethod", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onClick"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onClick"] = value;
+                } else {
+                    this.layout.items[0].items[0]["onClick"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(PaymentMethod_Design.prototype, "Juryoinin_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[1]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(PaymentMethod_Design.prototype, "Madoguchi_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[5]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(PaymentMethod_Design.prototype, "Koza_displayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[3]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(PaymentMethod_Design.prototype, "eraseBorder", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["eraseBorder"] = value;
+                } else {
+                    this.layout.items[0]["eraseBorder"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        PaymentMethod_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("title");
+            Uz.JSControlUtil.registProperty("panelDisplay");
+            Uz.JSControlUtil.registProperty("KozaPayment_title");
+            Uz.JSControlUtil.registProperty("onClick_radPayMethod");
+            Uz.JSControlUtil.registProperty("Juryoinin_displayNone");
+            Uz.JSControlUtil.registProperty("Madoguchi_displayNone");
+            Uz.JSControlUtil.registProperty("Koza_displayNone");
+            Uz.JSControlUtil.registProperty("eraseBorder");
+        };
+
+        PaymentMethod_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["title"];
+            editablePropertyInfo["panelDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["panelDisplay"];
+            editablePropertyInfo["KozaPayment_title"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["title"];
+            editablePropertyInfo["onClick_radPayMethod"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["Juryoinin_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["Madoguchi_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["Koza_displayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["eraseBorder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["eraseBorder"];
+
+            return editablePropertyInfo;
+        };
+        PaymentMethod_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "PaymentMethod",
+                    "items": [
+                        {
+                            "fieldName": "radPayMethod1",
+                            "items": [],
+                            "controlType": "RadioButton",
+                            "width": "150px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "radPayMethod1_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "dataSource": [
+                                {
+                                    "key": "payToJuryoinin",
+                                    "value": "受領委任払い"
+                                }
+                            ],
+                            "onChange": "",
+                            "labelLText": "",
+                            "labelLWidth": "S",
+                            "labelLAlign": 2,
+                            "selectedItem": "payToJuryoinin",
+                            "onClick": "",
+                            "newLineItemNumber": 3,
+                            "spaceSize": "M",
+                            "disabledItem": [],
+                            "icon": []
+                        },
+                        {
+                            "fieldName": "JuryoininJoho",
+                            "items": [
+                                {
+                                    "fieldName": "txtJuryoininKeiyakuNo",
+                                    "items": [],
+                                    "controlType": "TextBoxCode",
+                                    "width": "80px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtJuryoininKeiyakuNo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "契約番号",
+                                    "labelRText": "",
+                                    "labelLWidth": "70px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 2,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": "",
+                                    "formatLength": "10"
+                                },
+                                {
+                                    "fieldName": "txtJigyoshaNo",
+                                    "items": [],
+                                    "controlType": "TextBoxCode",
+                                    "width": "80px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtJigyoshaNo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "事業者",
+                                    "labelRText": "",
+                                    "labelLWidth": "55px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 2,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": "",
+                                    "formatLength": "10"
+                                },
+                                {
+                                    "fieldName": "txtJigyoshaName",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "L",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "-0.2em",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtJigyoshaName_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "txtJigyoshaNameKana",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "L",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "20.1em",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtJigyoshaNameKana_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": ""
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "845px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "JuryoininJoho",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": false,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "JuryoininJoho"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": false,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 2,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto",
+                            "canPost": true,
+                            "eraseBorderTop": false,
+                            "eraseBorderBottom": false,
+                            "eraseBorderRight": false,
+                            "eraseBorderLeft": false
+                        },
+                        {
+                            "fieldName": "radPayMethod2",
+                            "items": [],
+                            "controlType": "RadioButton",
+                            "width": "150px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "radPayMethod2_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "dataSource": [
+                                {
+                                    "key": "payToKoza",
+                                    "value": "口座払い"
+                                }
+                            ],
+                            "onChange": "",
+                            "labelLText": "",
+                            "labelLWidth": "S",
+                            "labelLAlign": 2,
+                            "selectedItem": null,
+                            "onClick": "",
+                            "newLineItemNumber": 3,
+                            "spaceSize": "M",
+                            "disabledItem": [],
+                            "icon": []
+                        },
+                        {
+                            "fieldName": "KozaPayment",
+                            "items": [],
+                            "controlType": "CommonChildDiv",
+                            "width": "XS",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "0em",
+                            "selectControlID": "KozaPayment",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "title": "",
+                            "relation": [],
+                            "packageName": "",
+                            "businessId": "DBZ",
+                            "controlName": "KozaPayment",
+                            "marginTop": "0em",
+                            "marginBottom": "0em",
+                            "originalProperty": [],
+                            "dataPassingForDialog": [],
+                            "dialogOkEventNameForDialog": "",
+                            "dialogCancelEventNameForDialog": "",
+                            "canTransferEvent": true,
+                            "heightForDialog": "M",
+                            "firstFocusFieldName": "",
+                            "lastFocusFieldName": "",
+                            "panelDisplay": 2,
+                            "eraseBorderTop": false,
+                            "eraseBorderBottom": false,
+                            "eraseBorderRight": false,
+                            "eraseBorderLeft": false
+                        },
+                        {
+                            "fieldName": "radPayMethod3",
+                            "items": [],
+                            "controlType": "RadioButton",
+                            "width": "150px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "radPayMethod3_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "dataSource": [
+                                {
+                                    "key": "payToMadoguchi",
+                                    "value": "窓口払い"
+                                }
+                            ],
+                            "onChange": "",
+                            "labelLText": "",
+                            "labelLWidth": "S",
+                            "labelLAlign": 2,
+                            "selectedItem": null,
+                            "onClick": "",
+                            "newLineItemNumber": 3,
+                            "spaceSize": "M",
+                            "disabledItem": [],
+                            "icon": []
+                        },
+                        {
+                            "fieldName": "MadoguchiPayment",
+                            "items": [
+                                {
+                                    "fieldName": "txtShiharaiBasho",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "445px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShiharaiBasho_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "支払場所",
+                                    "labelRText": "",
+                                    "labelLWidth": "70px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "txtShiharaiKaishiDate",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "90px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShiharaiKaishiDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "開始日",
+                                    "labelRText": "",
+                                    "labelLWidth": "70px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "txtShiharaiKaishiDay",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "30px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "-0.5em",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShiharaiKaishiDay_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "（",
+                                    "labelRText": "）",
+                                    "labelLWidth": "13px",
+                                    "labelRWidth": "13px",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 1,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "txtShiharaiKaishiTime",
+                                    "items": [],
+                                    "controlType": "TextBoxTime",
+                                    "width": "50px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShiharaiKaishiTime_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "開始時間",
+                                    "labelRText": "",
+                                    "labelLWidth": "70px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "displayFormat": 1,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": "",
+                                    "timeKubun": 1
+                                },
+                                {
+                                    "fieldName": "txtShiharaiShuryoDate",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "90px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShiharaiShuryoDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "終了日",
+                                    "labelRText": "",
+                                    "labelLWidth": "70px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "txtShiharaiShuryoDay",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "30px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "-0.5em",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShiharaiShuryoDay_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "（",
+                                    "labelRText": "）",
+                                    "labelLWidth": "13px",
+                                    "labelRWidth": "13px",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 1,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "txtShiharaiShuryoTime",
+                                    "items": [],
+                                    "controlType": "TextBoxTime",
+                                    "width": "50px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShiharaiShuryoTime_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "終了時間",
+                                    "labelRText": "",
+                                    "labelLWidth": "70px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "displayFormat": 1,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": "",
+                                    "timeKubun": 1
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "G2",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "MadoguchiPayment",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": false,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "MadoguchiPayment"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": false,
+                            "backgroundColor": 0,
+                            "widthAuto": true,
+                            "panelDisplay": 2,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto",
+                            "canPost": true,
+                            "eraseBorderTop": false,
+                            "eraseBorderBottom": false,
+                            "eraseBorderRight": false,
+                            "eraseBorderLeft": false
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "1040px",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0em",
+                    "marginRight": "XS",
+                    "selectControlID": "PaymentMethod",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "支払方法",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": false,
+                    "postParameterPanelNames": [],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 1,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": true,
+                    "eraseBorderTop": false,
+                    "eraseBorderBottom": false,
+                    "eraseBorderRight": false,
+                    "eraseBorderLeft": false
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0em",
+            "marginRight": "0em",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBZ",
+            "controlName": "PaymentMethod",
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "PaymentMethod",
+                    "publicChildProperty": "title",
+                    "newPropertyName": "title"
+                },
+                {
+                    "publicChildFieldName": "PaymentMethod",
+                    "publicChildProperty": "panelDisplay",
+                    "newPropertyName": "panelDisplay"
+                },
+                {
+                    "publicChildFieldName": "KozaPayment",
+                    "publicChildProperty": "title",
+                    "newPropertyName": "KozaPayment_title"
+                },
+                {
+                    "publicChildFieldName": "radPayMethod1",
+                    "publicChildProperty": "onClick",
+                    "newPropertyName": "onClick_radPayMethod"
+                },
+                {
+                    "publicChildFieldName": "JuryoininJoho",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "Juryoinin_displayNone"
+                },
+                {
+                    "publicChildFieldName": "MadoguchiPayment",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "Madoguchi_displayNone"
+                },
+                {
+                    "publicChildFieldName": "KozaPayment",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "Koza_displayNone"
+                },
+                {
+                    "publicChildFieldName": "PaymentMethod",
+                    "publicChildProperty": "eraseBorder",
+                    "newPropertyName": "eraseBorder"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": ""
+        };
+        return PaymentMethod_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.PaymentMethod_Design = PaymentMethod_Design;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (PaymentMethod) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new PaymentMethod.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        PaymentMethod.ModeController = ModeController;
+    })(DBZ.PaymentMethod || (DBZ.PaymentMethod = {}));
+    var PaymentMethod = DBZ.PaymentMethod;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (PaymentMethod) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new PaymentMethod.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("title", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("panelDisplay", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("KozaPayment_title", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("onClick_radPayMethod", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("Juryoinin_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("Madoguchi_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("Koza_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("eraseBorder", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.gettitle = function () {
+                return this.controls.PaymentMethod().title;
+            };
+
+            PublicProperties.prototype.settitle = function (value) {
+                this.controls.PaymentMethod().title = value;
+            };
+
+            PublicProperties.prototype.getpanelDisplay = function () {
+                return this.controls.PaymentMethod().panelDisplay;
+            };
+
+            PublicProperties.prototype.setpanelDisplay = function (value) {
+                this.controls.PaymentMethod().panelDisplay = value;
+            };
+
+            PublicProperties.prototype.getonClick_radPayMethod = function () {
+                return this.controls.radPayMethod1().onClick;
+            };
+
+            PublicProperties.prototype.setonClick_radPayMethod = function (value) {
+                this.controls.radPayMethod1().onClick = value;
+            };
+
+            PublicProperties.prototype.getJuryoinin_displayNone = function () {
+                return this.controls.JuryoininJoho().displayNone;
+            };
+
+            PublicProperties.prototype.setJuryoinin_displayNone = function (value) {
+                this.controls.JuryoininJoho().displayNone = value;
+            };
+
+            PublicProperties.prototype.getMadoguchi_displayNone = function () {
+                return this.controls.MadoguchiPayment().displayNone;
+            };
+
+            PublicProperties.prototype.setMadoguchi_displayNone = function (value) {
+                this.controls.MadoguchiPayment().displayNone = value;
+            };
+
+            PublicProperties.prototype.getKoza_displayNone = function () {
+                return this.controls.KozaPayment().Properties().displayNone;
+            };
+
+            PublicProperties.prototype.setKoza_displayNone = function (value) {
+                this.controls.KozaPayment().Properties().displayNone = value;
+            };
+
+            PublicProperties.prototype.geteraseBorder = function () {
+                return this.controls.PaymentMethod().eraseBorder;
+            };
+
+            PublicProperties.prototype.seteraseBorder = function (value) {
+                this.controls.PaymentMethod().eraseBorder = value;
+            };
+            return PublicProperties;
+        })();
+        PaymentMethod.PublicProperties = PublicProperties;
+    })(DBZ.PaymentMethod || (DBZ.PaymentMethod = {}));
+    var PaymentMethod = DBZ.PaymentMethod;
+})(DBZ || (DBZ = {}));
+</script>
+</div>

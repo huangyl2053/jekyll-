@@ -1,0 +1,1765 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-is-composite-control="true" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;SetaiShotokuIchiran&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;originalProperty&quot;:[{&quot;publicChildFieldName&quot;:&quot;txtSetaiIchiranKijunYMD&quot;,&quot;publicChildProperty&quot;:&quot;visible&quot;,&quot;newPropertyName&quot;:&quot;txtKijunYmdVisible&quot;},{&quot;publicChildFieldName&quot;:&quot;txtSetaiIchiranKijunYMD&quot;,&quot;publicChildProperty&quot;:&quot;readOnly&quot;,&quot;newPropertyName&quot;:&quot;txtKijunYmdReadOnly&quot;},{&quot;publicChildFieldName&quot;:&quot;txtSetaiIchiranKazeiNendo&quot;,&quot;publicChildProperty&quot;:&quot;visible&quot;,&quot;newPropertyName&quot;:&quot;txtKazeiNendoVisible&quot;},{&quot;publicChildFieldName&quot;:&quot;txtSetaiIchiranKazeiNendo&quot;,&quot;publicChildProperty&quot;:&quot;readOnly&quot;,&quot;newPropertyName&quot;:&quot;txtKazeiNendoReadOnly&quot;},{&quot;publicChildFieldName&quot;:&quot;ddlSetaiIchiranKazeiNendo&quot;,&quot;publicChildProperty&quot;:&quot;visible&quot;,&quot;newPropertyName&quot;:&quot;ddlKazeiNendoVisible&quot;},{&quot;publicChildFieldName&quot;:&quot;ddlSetaiIchiranKazeiNendo&quot;,&quot;publicChildProperty&quot;:&quot;dataSource&quot;,&quot;newPropertyName&quot;:&quot;ddlKazeiNendoDataSource&quot;},{&quot;publicChildFieldName&quot;:&quot;btnSaiHyoji&quot;,&quot;publicChildProperty&quot;:&quot;visible&quot;,&quot;newPropertyName&quot;:&quot;btnSaihyojiVisible&quot;},{&quot;publicChildFieldName&quot;:&quot;btnSaiHyoji&quot;,&quot;publicChildProperty&quot;:&quot;onClick&quot;,&quot;newPropertyName&quot;:&quot;btnSaihyojiOnClick&quot;},{&quot;publicChildFieldName&quot;:&quot;chkSetaiIchiranAll&quot;,&quot;publicChildProperty&quot;:&quot;onClick&quot;,&quot;newPropertyName&quot;:&quot;chkIchiranAllOnClick&quot;},{&quot;publicChildFieldName&quot;:&quot;btnNarabeteHyoji&quot;,&quot;publicChildProperty&quot;:&quot;visible&quot;,&quot;newPropertyName&quot;:&quot;btnNarabeteHyojuVisible&quot;},{&quot;publicChildFieldName&quot;:&quot;btnNarabeteHyoji&quot;,&quot;publicChildProperty&quot;:&quot;onClick&quot;,&quot;newPropertyName&quot;:&quot;btnNarabeteHyojuOnClick&quot;},{&quot;publicChildFieldName&quot;:&quot;dgSetaiShotoku&quot;,&quot;publicChildProperty&quot;:&quot;gridSetting&quot;,&quot;newPropertyName&quot;:&quot;dgSetaishotokuGridSetting&quot;},{&quot;publicChildFieldName&quot;:&quot;dgSetaiShotoku&quot;,&quot;publicChildProperty&quot;:&quot;width&quot;,&quot;newPropertyName&quot;:&quot;dgSetaishotokuWidth&quot;},{&quot;publicChildFieldName&quot;:&quot;dgSetaiShotoku&quot;,&quot;publicChildProperty&quot;:&quot;onSelect&quot;,&quot;newPropertyName&quot;:&quot;dgSetaishotokuOnSelect&quot;},{&quot;publicChildFieldName&quot;:&quot;dgSetaiShotoku&quot;,&quot;publicChildProperty&quot;:&quot;onSelectByDblClick&quot;,&quot;newPropertyName&quot;:&quot;dgSetaishotokuDbClick&quot;},{&quot;publicChildFieldName&quot;:&quot;dgSetaiShotoku&quot;,&quot;publicChildProperty&quot;:&quot;onSelectBySelectButton&quot;,&quot;newPropertyName&quot;:&quot;dgSetaishotokuBySelectButton&quot;},{&quot;publicChildFieldName&quot;:&quot;ddlSetaiIchiranKazeiNendo&quot;,&quot;publicChildProperty&quot;:&quot;displayNone&quot;,&quot;newPropertyName&quot;:&quot;ddlKazeiNendoDisplayNone&quot;},{&quot;publicChildFieldName&quot;:&quot;btnNarabeteHyoji&quot;,&quot;publicChildProperty&quot;:&quot;displayNone&quot;,&quot;newPropertyName&quot;:&quot;btnNarabeteHyoJiDisplayNone&quot;},{&quot;publicChildFieldName&quot;:&quot;txtSetaiIchiranSetaiCode&quot;,&quot;publicChildProperty&quot;:&quot;displayNone&quot;,&quot;newPropertyName&quot;:&quot;txtSetaiCodeDisyplayNone&quot;},{&quot;publicChildFieldName&quot;:&quot;btnSaiHyoji&quot;,&quot;publicChildProperty&quot;:&quot;displayNone&quot;,&quot;newPropertyName&quot;:&quot;btnSaihyojiDisplayNone&quot;},{&quot;publicChildFieldName&quot;:&quot;lblSetaiIchiranMsg&quot;,&quot;publicChildProperty&quot;:&quot;visible&quot;,&quot;newPropertyName&quot;:&quot;lblKijunYMDMsgVisible&quot;},{&quot;publicChildFieldName&quot;:&quot;lblSetaiIchiranMsg&quot;,&quot;publicChildProperty&quot;:&quot;displayNone&quot;,&quot;newPropertyName&quot;:&quot;lblKijunYMDMsgDisplayNone&quot;},{&quot;publicChildFieldName&quot;:&quot;txtSetaiIchiranKazeiNendo&quot;,&quot;publicChildProperty&quot;:&quot;displayNone&quot;,&quot;newPropertyName&quot;:&quot;txtSetaiIchiranKazeiNendoDisplayNone&quot;}],&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;canTransferEvent&quot;:true,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}"><div title="" class="UzPanel FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G4" id="SetaiShotokuIchiran" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;SetaiShotokuIchiran&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G4&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;SetaiShotokuIchiran&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;Default&quot;,&quot;marginBottom&quot;:&quot;Default&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:true,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;SetaiShotokuIchiran&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:true,&quot;panelDisplay&quot;:0,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="SetaiShotokuIchiran_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="SetaiShotokuIchiran_panel_body_area"><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginRight-XS" id="txtSetaiIchiranKijunYMD" style="width: 142px; height: 21px; margin-left: 0em;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtSetaiIchiranKijunYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;85px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtSetaiIchiranKijunYMD_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;基準日&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;50px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;./_-&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSetaiIchiranKijunYMD_labelL" style="width: 50px;"><span>基準日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtSetaiIchiranKijunYMD_core" style="width: 85px;" type="text" readonly="readonly" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate=""></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="txtSetaiIchiranKazeiNendo" style="width: 157px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtSetaiIchiranKazeiNendo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;35px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtSetaiIchiranKazeiNendo_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;住民税課税年度&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;115px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:0,&quot;textKind&quot;:0,&quot;isComboBox&quot;:false,&quot;suggest&quot;:[],&quot;permitCharactor&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSetaiIchiranKazeiNendo_labelL" style="width: 115px;"><span>住民税課税年度</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtSetaiIchiranKazeiNendo_core" style="width: 35px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzDropDownList WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="ddlSetaiIchiranKazeiNendo" style="width: 178px; height: 21px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlSetaiIchiranKazeiNendo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;60px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;ddlSetaiIchiranKazeiNendo_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;住民税課税年度&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;115px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;平26&quot;}],&quot;isBlankLine&quot;:false,&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="ddlSetaiIchiranKazeiNendo_labelL" style="width: 115px;"><span>住民税課税年度</span></span><select class="CoreElement" id="ddlSetaiIchiranKazeiNendo_core" style="width: 60px;"><option value="key0">平26</option></select></div><button title="" class="UzButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="btnSaiHyoji" style="width: 160px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnSaiHyoji&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;160px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;btnSaiHyoji&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;text&quot;:&quot;再表示する&quot;,&quot;onBeforeClick&quot;:&quot;&quot;,&quot;onAfterClick&quot;:&quot;&quot;,&quot;onClick&quot;:&quot;onClick_Saihyoji&quot;,&quot;appearance&quot;:0,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;,&quot;icon&quot;:0,&quot;heightTextBoxMatches&quot;:false}"><span>再表示する</span></button><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="txtSetaiIchiranSetaiCode" style="width: 212px; height: 21px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtSetaiIchiranSetaiCode&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;120px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtSetaiIchiranSetaiCode_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;placeHolder&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;世帯コード&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;85px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;value&quot;:&quot;&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;maxLength&quot;:&quot;15&quot;,&quot;minLength&quot;:0,&quot;textAlign&quot;:0,&quot;textKind&quot;:2,&quot;isComboBox&quot;:false,&quot;suggest&quot;:[],&quot;permitCharactor&quot;:&quot;&quot;,&quot;formatLength&quot;:&quot;15&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSetaiIchiranSetaiCode_labelL" style="width: 85px;"><span>世帯コード</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor text-align-left ime-mode-Off ui-autocomplete-input" id="txtSetaiIchiranSetaiCode_core" style="width: 120px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzCheckBoxList FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="chkSetaiIchiranAll" style="width: 207px; height: 19px;" data-control-type="CheckBoxList" data-obj="{&quot;fieldName&quot;:&quot;chkSetaiIchiranAll&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CheckBoxList&quot;,&quot;width&quot;:&quot;200px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;chkSetaiIchiranAll_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onChange&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;selectedItem&quot;:null,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;最新の世帯員を表示する&quot;}],&quot;onClick&quot;:&quot;&quot;,&quot;icon&quot;:[],&quot;selectedItems&quot;:[],&quot;newLineItemNumber&quot;:1,&quot;minCheckedItem&quot;:0,&quot;maxCheckedItem&quot;:2,&quot;spaceSize&quot;:&quot;M&quot;,&quot;isAllSelectable&quot;:false,&quot;isAllSelectableBreakLine&quot;:false,&quot;disabledItem&quot;:[]}"><span class="checkBoxSpan FloatLeft" id="chkSetaiIchiranAll_core" style="width: 200px;"><input id="chkSetaiIchiranAll_key0" type="checkbox" value="最新の世帯員を表示する" data-key="key0"><label for="chkSetaiIchiranAll_key0" data-key="key0">最新の世帯員を表示する</label></span></div><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M Width-L ClearFloat marginRight-XS text-align-left" id="lblSetaiIchiranMsg" style="margin-left: 0em;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblSetaiIchiranMsg&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;L&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;lblSetaiIchiranMsg&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;text&quot;:&quot;※基準日時点の世帯員を表示しています。&quot;,&quot;decorationClass&quot;:&quot;&quot;,&quot;align&quot;:0}"><span>※基準日時点の世帯員を表示しています。</span></span><button title="" class="UzButton FloatLeft JSControl controlMargin-M ClearFloat marginRight-XS" id="btnNarabeteHyoji" style="width: 160px; margin-left: 0em;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnNarabeteHyoji&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;160px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;btnNarabeteHyoji&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;text&quot;:&quot;並べて表示する&quot;,&quot;onBeforeClick&quot;:&quot;&quot;,&quot;onAfterClick&quot;:&quot;&quot;,&quot;onClick&quot;:&quot;onClick_Hikaku&quot;,&quot;appearance&quot;:0,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;,&quot;icon&quot;:0,&quot;heightTextBoxMatches&quot;:false}"><span>並べて表示する</span></button><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M ClearFloat Height-Auto" id="dgSetaiShotoku" style="width: 1040px; margin-right: 0em; margin-left: 0em;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgSetaiShotoku&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;1040px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;dgSetaiShotoku&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;dataSource&quot;:[],&quot;selectedItems&quot;:[],&quot;gridSetting&quot;:{&quot;rowHeight&quot;:40,&quot;isMultiSelectable&quot;:true,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:true,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[{&quot;combineColumnName&quot;:&quot;識別コード&quot;,&quot;combineItem&quot;:[&quot;txtKetsugo01&quot;]},{&quot;combineColumnName&quot;:&quot;氏名&quot;,&quot;combineItem&quot;:[&quot;txtShimei&quot;]},{&quot;combineColumnName&quot;:&quot;メモ&quot;,&quot;combineItem&quot;:[&quot;btnMemo&quot;]},{&quot;combineColumnName&quot;:&quot;同一世帯&quot;,&quot;combineItem&quot;:[&quot;txtSonzaiUmuKijunbi&quot;,&quot;txtSonzaiUmuChokkin&quot;]},{&quot;combineColumnName&quot;:&quot;生年月日・性別&quot;,&quot;combineItem&quot;:[&quot;txtKetsugo02&quot;]},{&quot;combineColumnName&quot;:&quot;種別&quot;,&quot;combineItem&quot;:[&quot;txtShubetsu&quot;]},{&quot;combineColumnName&quot;:&quot;異動日&quot;,&quot;combineItem&quot;:[&quot;txtIdoYMD&quot;]},{&quot;combineColumnName&quot;:&quot;把握&quot;,&quot;combineItem&quot;:[&quot;txtHaaku&quot;]},{&quot;combineColumnName&quot;:&quot;住民税&quot;,&quot;combineItem&quot;:[&quot;txtJuminzei&quot;]},{&quot;combineColumnName&quot;:&quot;合計所得金額&quot;,&quot;combineItem&quot;:[&quot;txtKetsugo03&quot;]},{&quot;combineColumnName&quot;:&quot;同月ｻｰﾋﾞｽ&quot;,&quot;combineItem&quot;:[&quot;txtDougetsuService&quot;]},{&quot;combineColumnName&quot;:&quot;住基情報&quot;,&quot;combineItem&quot;:[&quot;txtJukiIdoYMD&quot;,&quot;txtJuteiYMD&quot;,&quot;txtJukiIdoJiyu&quot;]}],&quot;frozenColumn&quot;:&quot;txtShimei&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;識別コード&quot;,&quot;dataName&quot;:&quot;txtShikibetsuCode&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtShikibetsuCode&quot;},{&quot;columnName&quot;:&quot;被保番号&quot;,&quot;dataName&quot;:&quot;txtHihokenshaNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtHihokenshaNo&quot;},{&quot;columnName&quot;:&quot;被保番号&quot;,&quot;dataName&quot;:&quot;txtKetsugo01&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;txtShimei&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;btnMemo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:50,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;imageFileUrl&quot;:&quot;/ur/urz/image/UR_Memo_Nashi.png&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;基準日&quot;,&quot;dataName&quot;:&quot;txtSonzaiUmuKijunbi&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:65,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;直近&quot;,&quot;dataName&quot;:&quot;txtSonzaiUmuChokkin&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:50,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;生年月日・性別&quot;,&quot;dataName&quot;:&quot;txtSeinenGappi&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:130,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtSeinenGappi&quot;},{&quot;columnName&quot;:&quot;続柄&quot;,&quot;dataName&quot;:&quot;txtZokugara&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:130,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;続柄&quot;,&quot;dataName&quot;:&quot;txtKetsugo02&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:130,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;txtShubetsu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:70,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;txtIdoYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;txtHaaku&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;txtJuminzei&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;合計所得金額&quot;,&quot;dataName&quot;:&quot;txtGoukeiShotoku&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:110,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;年金収入額&quot;,&quot;dataName&quot;:&quot;txtNenkinShunyu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:110,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;年金収入額&quot;,&quot;dataName&quot;:&quot;txtKetsugo03&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:110,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;データNo&quot;,&quot;dataName&quot;:&quot;txtDataNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:0,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;性別&quot;,&quot;dataName&quot;:&quot;txtSeibetsu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:0,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;txtDougetsuService&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;異動日&quot;,&quot;dataName&quot;:&quot;txtJukiIdoYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;住定日&quot;,&quot;dataName&quot;:&quot;txtJuteiYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;異動事由&quot;,&quot;dataName&quot;:&quot;txtJukiIdoJiyu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;}]},&quot;onSort&quot;:&quot;&quot;,&quot;onSelect&quot;:&quot;onClick_SetaiKakunin&quot;,&quot;onSelectByDblClick&quot;:&quot;onClick_SetaiKakunin&quot;,&quot;onSelectBySelectButton&quot;:&quot;&quot;,&quot;onSelectByModifyButton&quot;:&quot;&quot;,&quot;onSelectByDeleteButton&quot;:&quot;&quot;,&quot;onAfterRequest&quot;:&quot;&quot;,&quot;onAfterRequestByDblClick&quot;:&quot;&quot;,&quot;onAfterRequestBySelectButton&quot;:&quot;&quot;,&quot;onAfterRequestByModifyButton&quot;:&quot;&quot;,&quot;onAfterRequestByDeleteButton&quot;:&quot;&quot;,&quot;onOnlyRow&quot;:&quot;&quot;,&quot;onNoRow&quot;:&quot;&quot;,&quot;onMultiRows&quot;:&quot;&quot;,&quot;sortOrder&quot;:&quot;&quot;,&quot;isAscending&quot;:true,&quot;filterList&quot;:[],&quot;activeRowId&quot;:-1,&quot;gridAction&quot;:[]}"><div id="dgSetaiShotoku_grid_table" role="" style="width: 1040px; height: 467px; position: relative;"></div><div id="dgSetaiShotoku_footer" style="width: 1040px; height: 25px;"></div></div></div></div> <script type='text/javascript' class='RamlConvert'>var DBZ= DBZ? DBZ: {};DBZ['DEFAULT'] = {};DBZ['DEFAULT'].SetaiShotokuIchiranRequest = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_SetaiShotokuIchiran').getProperty();parameter0.txtSetaiIchiranKijunYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSetaiIchiranKijunYMD').getProperty();parameter0.txtSetaiIchiranKazeiNendo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSetaiIchiranKazeiNendo').getProperty();parameter0.ddlSetaiIchiranKazeiNendo = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlSetaiIchiranKazeiNendo').getProperty();parameter0.btnSaiHyoji = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnSaiHyoji').getProperty();parameter0.txtSetaiIchiranSetaiCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSetaiIchiranSetaiCode').getProperty();parameter0.chkSetaiIchiranAll = Uz.JSControlUtil.getJSControl(parentFieldName + '_chkSetaiIchiranAll').getProperty();parameter0.lblSetaiIchiranMsg = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblSetaiIchiranMsg').getProperty();parameter0.btnNarabeteHyoji = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnNarabeteHyoji').getProperty();parameter0.dgSetaiShotoku = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgSetaiShotoku').getProperty();paramArray.push(parameter0);return paramArray; };</script>
+<script type='text/javascript'>var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    (function (SetaiShotokuIchiran) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_Saihyoji", {
+                get: function () {
+                    return "onClick_Saihyoji";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_SetaiKakunin", {
+                get: function () {
+                    return "onClick_SetaiKakunin";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_Hikaku", {
+                get: function () {
+                    return "onClick_Hikaku";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        SetaiShotokuIchiran.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "SetaiShotokuIchiran";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.SetaiShotokuIchiran = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtSetaiIchiranKijunYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSetaiIchiranKijunYMD"));
+            };
+
+            Controls.prototype.txtSetaiIchiranKazeiNendo = function () {
+                return new UZA.TextBox(this.convFiledName("txtSetaiIchiranKazeiNendo"));
+            };
+
+            Controls.prototype.ddlSetaiIchiranKazeiNendo = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlSetaiIchiranKazeiNendo"));
+            };
+
+            Controls.prototype.btnSaiHyoji = function () {
+                return new UZA.Button(this.convFiledName("btnSaiHyoji"));
+            };
+
+            Controls.prototype.txtSetaiIchiranSetaiCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtSetaiIchiranSetaiCode"));
+            };
+
+            Controls.prototype.chkSetaiIchiranAll = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkSetaiIchiranAll"));
+            };
+
+            Controls.prototype.lblSetaiIchiranMsg = function () {
+                return new UZA.Label(this.convFiledName("lblSetaiIchiranMsg"));
+            };
+
+            Controls.prototype.btnNarabeteHyoji = function () {
+                return new UZA.Button(this.convFiledName("btnNarabeteHyoji"));
+            };
+
+            Controls.prototype.dgSetaiShotoku = function () {
+                return new UZA.DataGrid(this.convFiledName("dgSetaiShotoku"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        SetaiShotokuIchiran.Controls = Controls;
+    })(DBZ.SetaiShotokuIchiran || (DBZ.SetaiShotokuIchiran = {}));
+    var SetaiShotokuIchiran = DBZ.SetaiShotokuIchiran;
+
+    var SetaiShotokuIchiran_Design = (function (_super) {
+        __extends(SetaiShotokuIchiran_Design, _super);
+        function SetaiShotokuIchiran_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, SetaiShotokuIchiran_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "txtKijunYmdVisible", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["visible"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["visible"] = value;
+                } else {
+                    this.layout.items[0].items[0]["visible"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "txtKijunYmdReadOnly", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["readOnly"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["readOnly"] = value;
+                } else {
+                    this.layout.items[0].items[0]["readOnly"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "txtKazeiNendoVisible", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["visible"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["visible"] = value;
+                } else {
+                    this.layout.items[0].items[1]["visible"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "txtKazeiNendoReadOnly", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["readOnly"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["readOnly"] = value;
+                } else {
+                    this.layout.items[0].items[1]["readOnly"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "ddlKazeiNendoVisible", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["visible"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["visible"] = value;
+                } else {
+                    this.layout.items[0].items[2]["visible"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "ddlKazeiNendoDataSource", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["dataSource"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["dataSource"] = value;
+                } else {
+                    this.layout.items[0].items[2]["dataSource"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "btnSaihyojiVisible", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["visible"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["visible"] = value;
+                } else {
+                    this.layout.items[0].items[3]["visible"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "btnSaihyojiOnClick", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["onClick"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["onClick"] = value;
+                } else {
+                    this.layout.items[0].items[3]["onClick"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "chkIchiranAllOnClick", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["onClick"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"])["onClick"] = value;
+                } else {
+                    this.layout.items[0].items[5]["onClick"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "btnNarabeteHyojuVisible", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["visible"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["visible"] = value;
+                } else {
+                    this.layout.items[0].items[7]["visible"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "btnNarabeteHyojuOnClick", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["onClick"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["onClick"] = value;
+                } else {
+                    this.layout.items[0].items[7]["onClick"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "dgSetaishotokuGridSetting", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["gridSetting"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["gridSetting"] = value;
+                } else {
+                    this.layout.items[0].items[8]["gridSetting"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "dgSetaishotokuWidth", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["width"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["width"] = value;
+                } else {
+                    this.layout.items[0].items[8]["width"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "dgSetaishotokuOnSelect", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["onSelect"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["onSelect"] = value;
+                } else {
+                    this.layout.items[0].items[8]["onSelect"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "dgSetaishotokuDbClick", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["onSelectByDblClick"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["onSelectByDblClick"] = value;
+                } else {
+                    this.layout.items[0].items[8]["onSelectByDblClick"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "dgSetaishotokuBySelectButton", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["onSelectBySelectButton"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"])["onSelectBySelectButton"] = value;
+                } else {
+                    this.layout.items[0].items[8]["onSelectBySelectButton"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "ddlKazeiNendoDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[2]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "btnNarabeteHyoJiDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[7]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "txtSetaiCodeDisyplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[4]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "btnSaihyojiDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[3]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "lblKijunYMDMsgVisible", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["visible"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["visible"] = value;
+                } else {
+                    this.layout.items[0].items[6]["visible"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "lblKijunYMDMsgDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[6]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(SetaiShotokuIchiran_Design.prototype, "txtSetaiIchiranKazeiNendoDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[1]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        SetaiShotokuIchiran_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("txtKijunYmdVisible");
+            Uz.JSControlUtil.registProperty("txtKijunYmdReadOnly");
+            Uz.JSControlUtil.registProperty("txtKazeiNendoVisible");
+            Uz.JSControlUtil.registProperty("txtKazeiNendoReadOnly");
+            Uz.JSControlUtil.registProperty("ddlKazeiNendoVisible");
+            Uz.JSControlUtil.registProperty("ddlKazeiNendoDataSource");
+            Uz.JSControlUtil.registProperty("btnSaihyojiVisible");
+            Uz.JSControlUtil.registProperty("btnSaihyojiOnClick");
+            Uz.JSControlUtil.registProperty("chkIchiranAllOnClick");
+            Uz.JSControlUtil.registProperty("btnNarabeteHyojuVisible");
+            Uz.JSControlUtil.registProperty("btnNarabeteHyojuOnClick");
+            Uz.JSControlUtil.registProperty("dgSetaishotokuGridSetting");
+            Uz.JSControlUtil.registProperty("dgSetaishotokuWidth");
+            Uz.JSControlUtil.registProperty("dgSetaishotokuOnSelect");
+            Uz.JSControlUtil.registProperty("dgSetaishotokuDbClick");
+            Uz.JSControlUtil.registProperty("dgSetaishotokuBySelectButton");
+            Uz.JSControlUtil.registProperty("ddlKazeiNendoDisplayNone");
+            Uz.JSControlUtil.registProperty("btnNarabeteHyoJiDisplayNone");
+            Uz.JSControlUtil.registProperty("txtSetaiCodeDisyplayNone");
+            Uz.JSControlUtil.registProperty("btnSaihyojiDisplayNone");
+            Uz.JSControlUtil.registProperty("lblKijunYMDMsgVisible");
+            Uz.JSControlUtil.registProperty("lblKijunYMDMsgDisplayNone");
+            Uz.JSControlUtil.registProperty("txtSetaiIchiranKazeiNendoDisplayNone");
+        };
+
+        SetaiShotokuIchiran_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["txtKijunYmdVisible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["visible"];
+            editablePropertyInfo["txtKijunYmdReadOnly"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["readOnly"];
+            editablePropertyInfo["txtKazeiNendoVisible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["visible"];
+            editablePropertyInfo["txtKazeiNendoReadOnly"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["readOnly"];
+            editablePropertyInfo["ddlKazeiNendoVisible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["visible"];
+            editablePropertyInfo["ddlKazeiNendoDataSource"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["dataSource"];
+            editablePropertyInfo["btnSaihyojiVisible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["visible"];
+            editablePropertyInfo["btnSaihyojiOnClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["chkIchiranAllOnClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[5]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["btnNarabeteHyojuVisible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["visible"];
+            editablePropertyInfo["btnNarabeteHyojuOnClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["dgSetaishotokuGridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
+            editablePropertyInfo["dgSetaishotokuWidth"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).getEditablePropertyInfo()["width"];
+            editablePropertyInfo["dgSetaishotokuOnSelect"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).getEditablePropertyInfo()["onSelect"];
+            editablePropertyInfo["dgSetaishotokuDbClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).getEditablePropertyInfo()["onSelectByDblClick"];
+            editablePropertyInfo["dgSetaishotokuBySelectButton"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[8]["fieldName"]).getEditablePropertyInfo()["onSelectBySelectButton"];
+            editablePropertyInfo["ddlKazeiNendoDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["btnNarabeteHyoJiDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[7]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["txtSetaiCodeDisyplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[4]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["btnSaihyojiDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["lblKijunYMDMsgVisible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["visible"];
+            editablePropertyInfo["lblKijunYMDMsgDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[6]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["txtSetaiIchiranKazeiNendoDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+
+            return editablePropertyInfo;
+        };
+        SetaiShotokuIchiran_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "SetaiShotokuIchiran",
+                    "items": [
+                        {
+                            "fieldName": "txtSetaiIchiranKijunYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "85",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSetaiIchiranKijunYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "value": "",
+                            "labelLText": "基準日",
+                            "labelRText": "",
+                            "labelLWidth": "50",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "permitCharactor": "./_-",
+                            "ymdKubun": 2,
+                            "displayFormat": 0
+                        },
+                        {
+                            "fieldName": "txtSetaiIchiranKazeiNendo",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "35",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSetaiIchiranKazeiNendo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "住民税課税年度",
+                            "labelRText": "",
+                            "labelLWidth": "115",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "ddlSetaiIchiranKazeiNendo",
+                            "items": [],
+                            "controlType": "DropDownList",
+                            "width": "60",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "ddlSetaiIchiranKazeiNendo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "labelLText": "住民税課税年度",
+                            "labelRText": "",
+                            "labelLWidth": "115",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "dataSource": [
+                                {
+                                    "key": "key0",
+                                    "value": "平26"
+                                }
+                            ],
+                            "selectedItem": "key0",
+                            "disabledItem": []
+                        },
+                        {
+                            "fieldName": "btnSaiHyoji",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "160",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnSaiHyoji",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "再表示する",
+                            "onClick": "onClick_Saihyoji",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        },
+                        {
+                            "fieldName": "txtSetaiIchiranSetaiCode",
+                            "items": [],
+                            "controlType": "TextBoxCode",
+                            "width": "120",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSetaiIchiranSetaiCode_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "maxLength": "15",
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 2,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "世帯コード",
+                            "labelRText": "",
+                            "labelLWidth": "85",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": "",
+                            "formatLength": "15"
+                        },
+                        {
+                            "fieldName": "chkSetaiIchiranAll",
+                            "items": [],
+                            "controlType": "CheckBoxList",
+                            "width": "200",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "chkSetaiIchiranAll_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "onChange": "",
+                            "labelLText": "",
+                            "labelLWidth": "S",
+                            "labelLAlign": 2,
+                            "onClick": "",
+                            "icon": [],
+                            "dataSource": [
+                                {
+                                    "key": "key0",
+                                    "value": "最新の世帯員を表示する"
+                                }
+                            ],
+                            "selectedItem": null,
+                            "selectedItems": [],
+                            "newLineItemNumber": 1,
+                            "minCheckedItem": 0,
+                            "maxCheckedItem": 2,
+                            "spaceSize": "M",
+                            "isAllSelectable": false,
+                            "isAllSelectableBreakLine": false,
+                            "disabledItem": []
+                        },
+                        {
+                            "fieldName": "lblSetaiIchiranMsg",
+                            "items": [],
+                            "controlType": "Label",
+                            "width": "L",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0",
+                            "marginRight": "XS",
+                            "selectControlID": "lblSetaiIchiranMsg",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "required": false,
+                            "isPrivateInfo": false,
+                            "text": "※基準日時点の世帯員を表示しています。",
+                            "decorationClass": "",
+                            "align": 0
+                        },
+                        {
+                            "fieldName": "btnNarabeteHyoji",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "160",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0",
+                            "marginRight": "XS",
+                            "selectControlID": "btnNarabeteHyoji",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "並べて表示する",
+                            "onClick": "onClick_Hikaku",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        },
+                        {
+                            "fieldName": "dgSetaiShotoku",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "1040",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0",
+                            "marginRight": "0",
+                            "selectControlID": "dgSetaiShotoku",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "Auto",
+                            "gridSetting": {
+                                "rowHeight": 40,
+                                "isMultiSelectable": true,
+                                "isShowHeader": true,
+                                "isShowFooter": true,
+                                "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": false,
+                                "isShowSelectButtonColumn": true,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
+                                "header": {
+                                    "combineColumns": [
+                                        {
+                                            "combineColumnName": "識別コード",
+                                            "combineItem": [
+                                                "txtKetsugo01"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "氏名",
+                                            "combineItem": [
+                                                "txtShimei"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "メモ",
+                                            "combineItem": [
+                                                "btnMemo"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "同一世帯",
+                                            "combineItem": [
+                                                "txtSonzaiUmuKijunbi",
+                                                "txtSonzaiUmuChokkin"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "生年月日・性別",
+                                            "combineItem": [
+                                                "txtKetsugo02"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "種別",
+                                            "combineItem": [
+                                                "txtShubetsu"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "異動日",
+                                            "combineItem": [
+                                                "txtIdoYMD"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "把握",
+                                            "combineItem": [
+                                                "txtHaaku"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "住民税",
+                                            "combineItem": [
+                                                "txtJuminzei"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "合計所得金額",
+                                            "combineItem": [
+                                                "txtKetsugo03"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "同月ｻｰﾋﾞｽ",
+                                            "combineItem": [
+                                                "txtDougetsuService"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "住基情報",
+                                            "combineItem": [
+                                                "txtJukiIdoYMD",
+                                                "txtJuteiYMD",
+                                                "txtJukiIdoJiyu"
+                                            ]
+                                        }
+                                    ],
+                                    "frozenColumn": "txtShimei",
+                                    "headerHeight": 0
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "識別コード",
+                                        "dataName": "txtShikibetsuCode",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 120,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtShikibetsuCode"
+                                    },
+                                    {
+                                        "columnName": "被保番号",
+                                        "dataName": "txtHihokenshaNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 120,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtHihokenshaNo"
+                                    },
+                                    {
+                                        "columnName": "被保番号",
+                                        "dataName": "txtKetsugo01",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 120,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "",
+                                        "dataName": "txtShimei",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 150,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "",
+                                        "dataName": "btnMemo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 50,
+                                        "visible": true,
+                                        "cellType": 8,
+                                        "cellDetails": {
+                                            "cellType": 8,
+                                            "text": "",
+                                            "onClick": "",
+                                            "imageFileUrl": "/ur/urz/image/UR_Memo_Nashi.png",
+                                            "imageWidth": "",
+                                            "imageHeight": ""
+                                        },
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "基準日",
+                                        "dataName": "txtSonzaiUmuKijunbi",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 65,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "直近",
+                                        "dataName": "txtSonzaiUmuChokkin",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 50,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "生年月日・性別",
+                                        "dataName": "txtSeinenGappi",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 130,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtSeinenGappi"
+                                    },
+                                    {
+                                        "columnName": "続柄",
+                                        "dataName": "txtZokugara",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 130,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "続柄",
+                                        "dataName": "txtKetsugo02",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 130,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "",
+                                        "dataName": "txtShubetsu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 70,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "",
+                                        "dataName": "txtIdoYMD",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "",
+                                        "dataName": "txtHaaku",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "",
+                                        "dataName": "txtJuminzei",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "合計所得金額",
+                                        "dataName": "txtGoukeiShotoku",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 110,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 2,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "年金収入額",
+                                        "dataName": "txtNenkinShunyu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 110,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 2,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "年金収入額",
+                                        "dataName": "txtKetsugo03",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 110,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 2,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "データNo",
+                                        "dataName": "txtDataNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "性別",
+                                        "dataName": "txtSeibetsu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "",
+                                        "dataName": "txtDougetsuService",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "異動日",
+                                        "dataName": "txtJukiIdoYMD",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "住定日",
+                                        "dataName": "txtJuteiYMD",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
+                                    {
+                                        "columnName": "異動事由",
+                                        "dataName": "txtJukiIdoJiyu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 150,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    }
+                                ]
+                            },
+                            "onSort": "",
+                            "onSelect": "onClick_SetaiKakunin",
+                            "onSelectByDblClick": "onClick_SetaiKakunin",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1,
+                            "selectedItems": []
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G4",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "XS",
+                    "marginRight": "XS",
+                    "selectControlID": "SetaiShotokuIchiran",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "SetaiShotokuIchiran"
+                        }
+                    ],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": true,
+                    "backgroundColor": 0,
+                    "widthAuto": true,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto"
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "businessId": "DBZ",
+            "controlName": "SetaiShotokuIchiran",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "txtSetaiIchiranKijunYMD",
+                    "publicChildProperty": "visible",
+                    "newPropertyName": "txtKijunYmdVisible"
+                },
+                {
+                    "publicChildFieldName": "txtSetaiIchiranKijunYMD",
+                    "publicChildProperty": "readOnly",
+                    "newPropertyName": "txtKijunYmdReadOnly"
+                },
+                {
+                    "publicChildFieldName": "txtSetaiIchiranKazeiNendo",
+                    "publicChildProperty": "visible",
+                    "newPropertyName": "txtKazeiNendoVisible"
+                },
+                {
+                    "publicChildFieldName": "txtSetaiIchiranKazeiNendo",
+                    "publicChildProperty": "readOnly",
+                    "newPropertyName": "txtKazeiNendoReadOnly"
+                },
+                {
+                    "publicChildFieldName": "ddlSetaiIchiranKazeiNendo",
+                    "publicChildProperty": "visible",
+                    "newPropertyName": "ddlKazeiNendoVisible"
+                },
+                {
+                    "publicChildFieldName": "ddlSetaiIchiranKazeiNendo",
+                    "publicChildProperty": "dataSource",
+                    "newPropertyName": "ddlKazeiNendoDataSource"
+                },
+                {
+                    "publicChildFieldName": "btnSaiHyoji",
+                    "publicChildProperty": "visible",
+                    "newPropertyName": "btnSaihyojiVisible"
+                },
+                {
+                    "publicChildFieldName": "btnSaiHyoji",
+                    "publicChildProperty": "onClick",
+                    "newPropertyName": "btnSaihyojiOnClick"
+                },
+                {
+                    "publicChildFieldName": "chkSetaiIchiranAll",
+                    "publicChildProperty": "onClick",
+                    "newPropertyName": "chkIchiranAllOnClick"
+                },
+                {
+                    "publicChildFieldName": "btnNarabeteHyoji",
+                    "publicChildProperty": "visible",
+                    "newPropertyName": "btnNarabeteHyojuVisible"
+                },
+                {
+                    "publicChildFieldName": "btnNarabeteHyoji",
+                    "publicChildProperty": "onClick",
+                    "newPropertyName": "btnNarabeteHyojuOnClick"
+                },
+                {
+                    "publicChildFieldName": "dgSetaiShotoku",
+                    "publicChildProperty": "gridSetting",
+                    "newPropertyName": "dgSetaishotokuGridSetting"
+                },
+                {
+                    "publicChildFieldName": "dgSetaiShotoku",
+                    "publicChildProperty": "width",
+                    "newPropertyName": "dgSetaishotokuWidth"
+                },
+                {
+                    "publicChildFieldName": "dgSetaiShotoku",
+                    "publicChildProperty": "onSelect",
+                    "newPropertyName": "dgSetaishotokuOnSelect"
+                },
+                {
+                    "publicChildFieldName": "dgSetaiShotoku",
+                    "publicChildProperty": "onSelectByDblClick",
+                    "newPropertyName": "dgSetaishotokuDbClick"
+                },
+                {
+                    "publicChildFieldName": "dgSetaiShotoku",
+                    "publicChildProperty": "onSelectBySelectButton",
+                    "newPropertyName": "dgSetaishotokuBySelectButton"
+                },
+                {
+                    "publicChildFieldName": "ddlSetaiIchiranKazeiNendo",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "ddlKazeiNendoDisplayNone"
+                },
+                {
+                    "publicChildFieldName": "btnNarabeteHyoji",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "btnNarabeteHyoJiDisplayNone"
+                },
+                {
+                    "publicChildFieldName": "txtSetaiIchiranSetaiCode",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "txtSetaiCodeDisyplayNone"
+                },
+                {
+                    "publicChildFieldName": "btnSaiHyoji",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "btnSaihyojiDisplayNone"
+                },
+                {
+                    "publicChildFieldName": "lblSetaiIchiranMsg",
+                    "publicChildProperty": "visible",
+                    "newPropertyName": "lblKijunYMDMsgVisible"
+                },
+                {
+                    "publicChildFieldName": "lblSetaiIchiranMsg",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "lblKijunYMDMsgDisplayNone"
+                },
+                {
+                    "publicChildFieldName": "txtSetaiIchiranKazeiNendo",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "txtSetaiIchiranKazeiNendoDisplayNone"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
+        };
+        return SetaiShotokuIchiran_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.SetaiShotokuIchiran_Design = SetaiShotokuIchiran_Design;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (SetaiShotokuIchiran) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new SetaiShotokuIchiran.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        SetaiShotokuIchiran.ModeController = ModeController;
+    })(DBZ.SetaiShotokuIchiran || (DBZ.SetaiShotokuIchiran = {}));
+    var SetaiShotokuIchiran = DBZ.SetaiShotokuIchiran;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (SetaiShotokuIchiran) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new SetaiShotokuIchiran.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("txtKijunYmdVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("txtKijunYmdReadOnly", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("txtKazeiNendoVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("txtKazeiNendoReadOnly", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("ddlKazeiNendoVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("ddlKazeiNendoDataSource", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("btnSaihyojiVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("btnSaihyojiOnClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("chkIchiranAllOnClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("btnNarabeteHyojuVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("btnNarabeteHyojuOnClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("dgSetaishotokuGridSetting", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("dgSetaishotokuWidth", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("dgSetaishotokuOnSelect", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("dgSetaishotokuDbClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("dgSetaishotokuBySelectButton", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("ddlKazeiNendoDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("btnNarabeteHyoJiDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("txtSetaiCodeDisyplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("btnSaihyojiDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("lblKijunYMDMsgVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("lblKijunYMDMsgDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("txtSetaiIchiranKazeiNendoDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.gettxtKijunYmdVisible = function () {
+                return this.controls.txtSetaiIchiranKijunYMD().visible;
+            };
+
+            PublicProperties.prototype.settxtKijunYmdVisible = function (value) {
+                this.controls.txtSetaiIchiranKijunYMD().visible = value;
+            };
+
+            PublicProperties.prototype.gettxtKijunYmdReadOnly = function () {
+                return this.controls.txtSetaiIchiranKijunYMD().readOnly;
+            };
+
+            PublicProperties.prototype.settxtKijunYmdReadOnly = function (value) {
+                this.controls.txtSetaiIchiranKijunYMD().readOnly = value;
+            };
+
+            PublicProperties.prototype.gettxtKazeiNendoVisible = function () {
+                return this.controls.txtSetaiIchiranKazeiNendo().visible;
+            };
+
+            PublicProperties.prototype.settxtKazeiNendoVisible = function (value) {
+                this.controls.txtSetaiIchiranKazeiNendo().visible = value;
+            };
+
+            PublicProperties.prototype.gettxtKazeiNendoReadOnly = function () {
+                return this.controls.txtSetaiIchiranKazeiNendo().readOnly;
+            };
+
+            PublicProperties.prototype.settxtKazeiNendoReadOnly = function (value) {
+                this.controls.txtSetaiIchiranKazeiNendo().readOnly = value;
+            };
+
+            PublicProperties.prototype.getddlKazeiNendoVisible = function () {
+                return this.controls.ddlSetaiIchiranKazeiNendo().visible;
+            };
+
+            PublicProperties.prototype.setddlKazeiNendoVisible = function (value) {
+                this.controls.ddlSetaiIchiranKazeiNendo().visible = value;
+            };
+
+            PublicProperties.prototype.getbtnSaihyojiVisible = function () {
+                return this.controls.btnSaiHyoji().visible;
+            };
+
+            PublicProperties.prototype.setbtnSaihyojiVisible = function (value) {
+                this.controls.btnSaiHyoji().visible = value;
+            };
+
+            PublicProperties.prototype.getbtnSaihyojiOnClick = function () {
+                return this.controls.btnSaiHyoji().onClick;
+            };
+
+            PublicProperties.prototype.setbtnSaihyojiOnClick = function (value) {
+                this.controls.btnSaiHyoji().onClick = value;
+            };
+
+            PublicProperties.prototype.getchkIchiranAllOnClick = function () {
+                return this.controls.chkSetaiIchiranAll().onClick;
+            };
+
+            PublicProperties.prototype.setchkIchiranAllOnClick = function (value) {
+                this.controls.chkSetaiIchiranAll().onClick = value;
+            };
+
+            PublicProperties.prototype.getbtnNarabeteHyojuVisible = function () {
+                return this.controls.btnNarabeteHyoji().visible;
+            };
+
+            PublicProperties.prototype.setbtnNarabeteHyojuVisible = function (value) {
+                this.controls.btnNarabeteHyoji().visible = value;
+            };
+
+            PublicProperties.prototype.getbtnNarabeteHyojuOnClick = function () {
+                return this.controls.btnNarabeteHyoji().onClick;
+            };
+
+            PublicProperties.prototype.setbtnNarabeteHyojuOnClick = function (value) {
+                this.controls.btnNarabeteHyoji().onClick = value;
+            };
+
+            PublicProperties.prototype.getdgSetaishotokuWidth = function () {
+                return this.controls.dgSetaiShotoku().width;
+            };
+
+            PublicProperties.prototype.setdgSetaishotokuWidth = function (value) {
+                this.controls.dgSetaiShotoku().width = value;
+            };
+
+            PublicProperties.prototype.getdgSetaishotokuOnSelect = function () {
+                return this.controls.dgSetaiShotoku().onSelect;
+            };
+
+            PublicProperties.prototype.setdgSetaishotokuOnSelect = function (value) {
+                this.controls.dgSetaiShotoku().onSelect = value;
+            };
+
+            PublicProperties.prototype.getdgSetaishotokuDbClick = function () {
+                return this.controls.dgSetaiShotoku().onSelectByDblClick;
+            };
+
+            PublicProperties.prototype.setdgSetaishotokuDbClick = function (value) {
+                this.controls.dgSetaiShotoku().onSelectByDblClick = value;
+            };
+
+            PublicProperties.prototype.getdgSetaishotokuBySelectButton = function () {
+                return this.controls.dgSetaiShotoku().onSelectBySelectButton;
+            };
+
+            PublicProperties.prototype.setdgSetaishotokuBySelectButton = function (value) {
+                this.controls.dgSetaiShotoku().onSelectBySelectButton = value;
+            };
+
+            PublicProperties.prototype.getddlKazeiNendoDisplayNone = function () {
+                return this.controls.ddlSetaiIchiranKazeiNendo().displayNone;
+            };
+
+            PublicProperties.prototype.setddlKazeiNendoDisplayNone = function (value) {
+                this.controls.ddlSetaiIchiranKazeiNendo().displayNone = value;
+            };
+
+            PublicProperties.prototype.getbtnNarabeteHyoJiDisplayNone = function () {
+                return this.controls.btnNarabeteHyoji().displayNone;
+            };
+
+            PublicProperties.prototype.setbtnNarabeteHyoJiDisplayNone = function (value) {
+                this.controls.btnNarabeteHyoji().displayNone = value;
+            };
+
+            PublicProperties.prototype.gettxtSetaiCodeDisyplayNone = function () {
+                return this.controls.txtSetaiIchiranSetaiCode().displayNone;
+            };
+
+            PublicProperties.prototype.settxtSetaiCodeDisyplayNone = function (value) {
+                this.controls.txtSetaiIchiranSetaiCode().displayNone = value;
+            };
+
+            PublicProperties.prototype.getbtnSaihyojiDisplayNone = function () {
+                return this.controls.btnSaiHyoji().displayNone;
+            };
+
+            PublicProperties.prototype.setbtnSaihyojiDisplayNone = function (value) {
+                this.controls.btnSaiHyoji().displayNone = value;
+            };
+
+            PublicProperties.prototype.getlblKijunYMDMsgVisible = function () {
+                return this.controls.lblSetaiIchiranMsg().visible;
+            };
+
+            PublicProperties.prototype.setlblKijunYMDMsgVisible = function (value) {
+                this.controls.lblSetaiIchiranMsg().visible = value;
+            };
+
+            PublicProperties.prototype.getlblKijunYMDMsgDisplayNone = function () {
+                return this.controls.lblSetaiIchiranMsg().displayNone;
+            };
+
+            PublicProperties.prototype.setlblKijunYMDMsgDisplayNone = function (value) {
+                this.controls.lblSetaiIchiranMsg().displayNone = value;
+            };
+
+            PublicProperties.prototype.gettxtSetaiIchiranKazeiNendoDisplayNone = function () {
+                return this.controls.txtSetaiIchiranKazeiNendo().displayNone;
+            };
+
+            PublicProperties.prototype.settxtSetaiIchiranKazeiNendoDisplayNone = function (value) {
+                this.controls.txtSetaiIchiranKazeiNendo().displayNone = value;
+            };
+            return PublicProperties;
+        })();
+        SetaiShotokuIchiran.PublicProperties = PublicProperties;
+    })(DBZ.SetaiShotokuIchiran || (DBZ.SetaiShotokuIchiran = {}));
+    var SetaiShotokuIchiran = DBZ.SetaiShotokuIchiran;
+})(DBZ || (DBZ = {}));
+</script>
+</div>
