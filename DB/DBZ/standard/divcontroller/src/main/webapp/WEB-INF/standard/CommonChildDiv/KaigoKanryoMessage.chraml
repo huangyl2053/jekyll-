@@ -1,5 +1,5 @@
-<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-is-composite-control="true" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KaigoKanryoMessage&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;originalProperty&quot;:[{&quot;publicChildFieldName&quot;:&quot;KanryoMessage&quot;,&quot;publicChildProperty&quot;:&quot;KanryoMessage_width&quot;,&quot;newPropertyName&quot;:&quot;KanryoMessage_width&quot;}],&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;canTransferEvent&quot;:true,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-Default marginRight-Default marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G12" id="KaigoKanryoMessage" style="margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KaigoKanryoMessage&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G12&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;KaigoKanryoMessage&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;Default&quot;,&quot;marginBottom&quot;:&quot;Default&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KaigoKanryoMessage&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:false,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:0,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KaigoKanryoMessage_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete ui-droppable ui-sortable" id="KaigoKanryoMessage_panel_body_area"><div title="" class="JSControl UzCompositeControl FloatLeft Width-XS" id="KanryoMessage" style="margin: 0em;" data-control-type="CommonChildDiv" data-is-composite-control="true" data-obj="{&quot;fieldName&quot;:&quot;KanryoMessage&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;KanryoMessage&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;URZ&quot;,&quot;controlName&quot;:&quot;KanryoMessage&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;originalProperty&quot;:[],&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;canTransferEvent&quot;:true,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;KanryoMessage_width&quot;:&quot;G12&quot;}" data-control-name="URZ.KanryoMessage"></div></div></div> <script type='text/javascript' class='RamlConvert'>var DBZ= DBZ? DBZ: {};DBZ['DEFAULT'] = {};DBZ['DEFAULT'].KaigoKanryoMessageRequest = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KaigoKanryoMessage').getProperty();parameter0.KanryoMessage = Uz.JSControlUtil.getJSControl(parentFieldName + '_KanryoMessage').getPostParameter();paramArray.push(parameter0);return paramArray; };</script>
-<script type='text/javascript'>var __extends = this.__extends || function (d, b) {
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KaigoKanryoMessage&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;KanryoMessage_width&quot;,&quot;editType&quot;:0}]},&quot;KanryoMessage_width&quot;:&quot;G12&quot;}" data-is-composite-control="true" data-control-name="DBZ.KaigoKanryoMessage"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-Default marginRight-Default marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G12 UzCompositeChild" id="KaigoKanryoMessage" style="margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KaigoKanryoMessage&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G12&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;KaigoKanryoMessage&quot;,&quot;title&quot;:&quot;&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KaigoKanryoMessage&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KaigoKanryoMessage_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete ui-droppable ui-sortable" id="KaigoKanryoMessage_panel_body_area"><div title="" class="JSControl UzCompositeControl FloatLeft Width-XS" id="ccdKanryoMessage" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdKanryoMessage&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;ccdKanryoMessage&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;URZ&quot;,&quot;controlName&quot;:&quot;KanryoMessage&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;KanryoMessage_width&quot;:&quot;G12&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;KanryoMessage_width&quot;,&quot;editType&quot;:0}]}}" data-is-composite-control="true" data-control-name="URZ.KanryoMessage"></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -240,11 +240,11 @@ var DBZ;
             };
 
             PublicProperties.prototype.getKanryoMessage_width = function () {
-                return this.controls.KanryoMessage().PublicProperties().KanryoMessage_width;
+                return this.controls.KanryoMessage().Properties().width;
             };
 
             PublicProperties.prototype.setKanryoMessage_width = function (value) {
-                this.controls.KanryoMessage().PublicProperties().KanryoMessage_width = value;
+                this.controls.KanryoMessage().Properties().width = value;
             };
             return PublicProperties;
         })();
@@ -253,4 +253,104 @@ var DBZ;
     var KaigoKanryoMessage = DBZ.KaigoKanryoMessage;
 })(DBZ || (DBZ = {}));
 </script>
-</div>
+              <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['KAIGOKANRYOMESSAGE'] = {};
+DBZ['KAIGOKANRYOMESSAGE'].KaigoKanryoMessageRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KaigoKanryoMessage').getProperty();parameter0.ccdKanryoMessage = Uz.JSControlUtil.getJSControl(parentFieldName + '_ccdKanryoMessage').getPostParameter();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (KaigoKanryoMessage) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KaigoKanryoMessage.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KaigoKanryoMessage";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KaigoKanryoMessage.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.KaigoKanryoMessage.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KaigoKanryoMessage = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ccdKanryoMessage = function () {
+                return new URZ.KanryoMessage.ModeController(this.convFiledName("ccdKanryoMessage"));
+            };
+            return Controls;
+        })();
+        KaigoKanryoMessage.Controls = Controls;
+    })(DBZ.KaigoKanryoMessage || (DBZ.KaigoKanryoMessage = {}));
+    var KaigoKanryoMessage = DBZ.KaigoKanryoMessage;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (KaigoKanryoMessage) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KaigoKanryoMessage.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new KaigoKanryoMessage.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KaigoKanryoMessage.ModeController = ModeController;
+    })(DBZ.KaigoKanryoMessage || (DBZ.KaigoKanryoMessage = {}));
+    var KaigoKanryoMessage = DBZ.KaigoKanryoMessage;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KaigoKanryoMessage) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KaigoKanryoMessage.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("KanryoMessage_width", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getKanryoMessage_width = function () {
+                return this.controls.ccdKanryoMessage().Properties().width;
+            };
+
+            PublicProperties.prototype.setKanryoMessage_width = function (value) {
+                this.controls.ccdKanryoMessage().Properties().width = value;
+            };
+            return PublicProperties;
+        })();
+        KaigoKanryoMessage.PublicProperties = PublicProperties;
+    })(DBZ.KaigoKanryoMessage || (DBZ.KaigoKanryoMessage = {}));
+    var KaigoKanryoMessage = DBZ.KaigoKanryoMessage;
+})(DBZ || (DBZ = {}));
+</script></div>

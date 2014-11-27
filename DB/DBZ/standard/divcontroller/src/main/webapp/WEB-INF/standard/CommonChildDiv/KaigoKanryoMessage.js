@@ -13,6 +13,10 @@ var DBZ;
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new KaigoKanryoMessage.PublicProperties(this.fieldName);
+            };
             return ModeController;
         })();
         KaigoKanryoMessage.ModeController = ModeController;
@@ -36,11 +40,11 @@ var DBZ;
             };
 
             PublicProperties.prototype.getKanryoMessage_width = function () {
-                return this.controls.KanryoMessage().PublicProperties().KanryoMessage_width;
+                return this.controls.ccdKanryoMessage().Properties().width;
             };
 
             PublicProperties.prototype.setKanryoMessage_width = function (value) {
-                this.controls.KanryoMessage().PublicProperties().KanryoMessage_width = value;
+                this.controls.ccdKanryoMessage().Properties().width = value;
             };
             return PublicProperties;
         })();

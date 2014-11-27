@@ -23,6 +23,10 @@ module DBZ
             public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
             }
+
+            public PublicProperties() {
+                return new PublicProperties(this.fieldName);
+            }
         }
 
     }
@@ -36,8 +40,10 @@ module DBZ {
 
         export class PublicProperties {
             private controls: Controls;
+            private fieldName: string;
 
             constructor(fieldName: string) {
+                this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
             }
 
@@ -47,17 +53,18 @@ module DBZ {
                 editTypes.addEditType("KanryoMessage_width", UZA.EditTypeEnumForPublicProperty.StringType);
                 return editTypes;
             }
-            /*
+
             //TODO n8178 城間篤人 PublicPropertyへの参照が見えない。確認が必要。
             public getKanryoMessage_width() {
-                return this.controls.KanryoMessage().PublicProperties().KanryoMessage_width;
+                //return this.controls.ccdKanryoMessage().PublicProperties().KanryoMessage_width;
+                return this.controls.ccdKanryoMessage().Properties().width;
             }
 
             public setKanryoMessage_width(value) {
-                this.controls.KanryoMessage().PublicProperties().KanryoMessage_width = value;
+                //this.controls.ccdKanryoMessage().PublicProperties().KanryoMessage_width = value;
+                this.controls.ccdKanryoMessage().Properties().width = value;
+                
             }
-            */
-
         }
     }
 }

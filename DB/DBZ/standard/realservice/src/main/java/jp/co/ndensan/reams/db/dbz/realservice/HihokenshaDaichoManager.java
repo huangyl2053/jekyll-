@@ -127,7 +127,7 @@ public class HihokenshaDaichoManager {
         if (entity.getHihokenshaNo() == HihokenshaNo.EMPTY) {
             //TODO n3327 三浦凌 テスト用にいらない判定処理を設けている。採番APIの正しい使い方がわかり次第、修正する。
             if (this.sequencer == null) {
-                this.sequencer = createSequencer(ShikakuHihokenshaKubun.toValue(被保険者資格.get被保険者区分().getCode().getColumnValue()));
+                //this.sequencer = createSequencer(ShikakuHihokenshaKubun.toValue(被保険者資格.get被保険者区分().getCode().getColumnValue()));
             }
             HihokenshaNo hihokenshaNo = this.sequencer.number();
             assert hihokenshaNo != null;

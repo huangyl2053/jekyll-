@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ISogoShokaiKogakuKaigoServicehiInfoDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SogoShokaiKogakuFurikomiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SogoShokaiKogakuKokuhorenKetteiDiv;
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * 
  * @author 自動生成
  */
-public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel {
+public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel implements ISogoShokaiKogakuKaigoServicehiInfoDiv {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -294,5 +295,7 @@ public class SogoShokaiKogakuKaigoServicehiInfoDiv extends Panel {
     public void setBtnClose(Button btnClose) {
         this.btnClose=btnClose;
     }
+
+    //--------------- この行より下にコードを追加してください -------------------
 
 }
