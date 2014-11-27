@@ -10,12 +10,11 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.kogakuservicehidetail.tab
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.kogakuservicehidetail.tplJudgementResultDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.kogakuservicehidetail.tplKozaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.kogakuservicehidetail.tplShinseishaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResultDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResult.KogakuServicehiJudgementResultDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PaymentMethod.PaymentMethodDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * KogakuServicehiDetail のクラスファイル

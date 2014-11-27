@@ -1,17 +1,16 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.OutputOrderAndNewpageDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PrintContentsSettingDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.printcontentssetting.PrintContentsSettingDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 
 /**
- * YoguKonyuhiShikyuKetteishaList のクラスファイル 
- * 
+ * YoguKonyuhiShikyuKetteishaList のクラスファイル
+ *
  * @author 自動生成
  */
 public class YoguKonyuhiShikyuKetteishaListDiv extends PanelPublish {
@@ -21,6 +20,7 @@ public class YoguKonyuhiShikyuKetteishaListDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("YoguKonyuhiShikyuKetteishaListHakkoDate")
     private PrintContentsSettingDiv YoguKonyuhiShikyuKetteishaListHakkoDate;
     @JsonProperty("OutputOrderForKetteishaList")
@@ -39,7 +39,7 @@ public class YoguKonyuhiShikyuKetteishaListDiv extends PanelPublish {
 
     @JsonProperty("YoguKonyuhiShikyuKetteishaListHakkoDate")
     public void setYoguKonyuhiShikyuKetteishaListHakkoDate(PrintContentsSettingDiv YoguKonyuhiShikyuKetteishaListHakkoDate) {
-        this.YoguKonyuhiShikyuKetteishaListHakkoDate=YoguKonyuhiShikyuKetteishaListHakkoDate;
+        this.YoguKonyuhiShikyuKetteishaListHakkoDate = YoguKonyuhiShikyuKetteishaListHakkoDate;
     }
 
     @JsonProperty("OutputOrderForKetteishaList")
@@ -49,7 +49,7 @@ public class YoguKonyuhiShikyuKetteishaListDiv extends PanelPublish {
 
     @JsonProperty("OutputOrderForKetteishaList")
     public void setOutputOrderForKetteishaList(OutputOrderAndNewpageDiv OutputOrderForKetteishaList) {
-        this.OutputOrderForKetteishaList=OutputOrderForKetteishaList;
+        this.OutputOrderForKetteishaList = OutputOrderForKetteishaList;
     }
 
 }

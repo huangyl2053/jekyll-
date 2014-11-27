@@ -19,4 +19,5 @@ public interface IKogakuServicehiJudgementResultDiv {
     KogakuServicehiJudgementResultDetail2Div getKogakuServicehiJudgementResultDetail2();
 
     void setKogakuServicehiJudgementResultDetail2(KogakuServicehiJudgementResultDetail2Div KogakuServicehiJudgementResultDetail2);
+
 }
