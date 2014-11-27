@@ -1,5 +1,5 @@
-<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-is-composite-control="true" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;JushochiTokureiRireki&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;originalProperty&quot;:[],&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;canTransferEvent&quot;:true,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[{&quot;eventName&quot;:&quot;onClick_btnAdd&quot;},{&quot;eventName&quot;:&quot;onSelect_dgJushochiTokureiRireki&quot;},{&quot;eventName&quot;:&quot;onSelectByDblClick_dgJushochiTokureiRireki&quot;},{&quot;eventName&quot;:&quot;onSelectBySelectButton_dgJushochiTokureiRireki&quot;},{&quot;eventName&quot;:&quot;onSelectByModifyButton_dgJushochiTokureiRireki&quot;},{&quot;eventName&quot;:&quot;onSelectByDeleteButton_dgJushochiTokureiRireki&quot;}],&quot;publicEventsAlias&quot;:[]}"><div title="" class="UzPanel FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-Default marginRight-Default marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G2" id="JushochiTokureiRireki" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;JushochiTokureiRireki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;JushochiTokureiRireki&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;Default&quot;,&quot;marginBottom&quot;:&quot;Default&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:true,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:true,&quot;panelDisplay&quot;:0,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="JushochiTokureiRireki_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="JushochiTokureiRireki_panel_body_area"><button title="" class="UzButton FloatLeft JSControl controlMargin-M Width-S" id="btnAdd" style="margin-right: 0px; margin-left: 0px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnAdd&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;btnAdd&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onBeforeClick&quot;:&quot;&quot;,&quot;onAfterClick&quot;:&quot;&quot;,&quot;onClick&quot;:&quot;onClick_btnAdd&quot;,&quot;text&quot;:&quot;追加する&quot;,&quot;appearance&quot;:0,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;,&quot;icon&quot;:0,&quot;heightTextBoxMatches&quot;:false}"><span>追加する</span></button><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M ClearFloat" id="dgJushochiTokureiRireki" style="width: 1098px; height: 192px; margin-right: 0px; margin-left: 0px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgJushochiTokureiRireki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;1098px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;dgJushochiTokureiRireki&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;192px&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:true,&quot;isShowModifyButtonColumn&quot;:true,&quot;isShowDeleteButtonColumn&quot;:true,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[{&quot;combineColumnName&quot;:&quot;適用&quot;,&quot;combineItem&quot;:[&quot;tekiyoDate&quot;,&quot;tekiyoTodokedeDate&quot;,&quot;tekiyoJiyu&quot;]},{&quot;combineColumnName&quot;:&quot;解除&quot;,&quot;combineItem&quot;:[&quot;kaijoDate&quot;,&quot;kaijoTodokedeDate&quot;,&quot;kaijoJiyu&quot;]},{&quot;combineColumnName&quot;:&quot;措置元情報&quot;,&quot;combineItem&quot;:[&quot;sochiHokenshaMeisho&quot;,&quot;sochiHihokenshaNo&quot;]},{&quot;combineColumnName&quot;:&quot;施設情報&quot;,&quot;combineItem&quot;:[&quot;nyushoDate&quot;,&quot;taishoDate&quot;,&quot;shisetsuShurui&quot;,&quot;nyushoShisetsu&quot;]}],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;適用日&quot;,&quot;dataName&quot;:&quot;tekiyoDate&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:6,&quot;cellDetails&quot;:{&quot;cellType&quot;:6,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;tekiyoDate&quot;},{&quot;columnName&quot;:&quot;届出日&quot;,&quot;dataName&quot;:&quot;tekiyoTodokedeDate&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:6,&quot;cellDetails&quot;:{&quot;cellType&quot;:6,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;tekiyoTodokedeDate&quot;},{&quot;columnName&quot;:&quot;適用事由&quot;,&quot;dataName&quot;:&quot;tekiyoJiyu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;tekiyoJiyu&quot;},{&quot;columnName&quot;:&quot;解除日&quot;,&quot;dataName&quot;:&quot;kaijoDate&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:6,&quot;cellDetails&quot;:{&quot;cellType&quot;:6,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;kaijoDate&quot;},{&quot;columnName&quot;:&quot;届出日&quot;,&quot;dataName&quot;:&quot;kaijoTodokedeDate&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:6,&quot;cellDetails&quot;:{&quot;cellType&quot;:6,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;kaijoTodokedeDate&quot;},{&quot;columnName&quot;:&quot;解除事由&quot;,&quot;dataName&quot;:&quot;kaijoJiyu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;kaijoJiyu&quot;},{&quot;columnName&quot;:&quot;保険者&quot;,&quot;dataName&quot;:&quot;sochiHokenshaMeisho&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;sochiHokenshaMeisho&quot;},{&quot;columnName&quot;:&quot;被保番号&quot;,&quot;dataName&quot;:&quot;sochiHihokenshaNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:4,&quot;cellDetails&quot;:{&quot;cellType&quot;:4,&quot;maxLength&quot;:&quot;100000000&quot;,&quot;minLength&quot;:&quot;0&quot;,&quot;formatLength&quot;:&quot;10&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;sochiHihokenshaNo&quot;},{&quot;columnName&quot;:&quot;入所日&quot;,&quot;dataName&quot;:&quot;nyushoDate&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:6,&quot;cellDetails&quot;:{&quot;cellType&quot;:6,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;nyushoDate&quot;},{&quot;columnName&quot;:&quot;退所日&quot;,&quot;dataName&quot;:&quot;taishoDate&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:6,&quot;cellDetails&quot;:{&quot;cellType&quot;:6,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;taishoDate&quot;},{&quot;columnName&quot;:&quot;施設種類&quot;,&quot;dataName&quot;:&quot;shisetsuShurui&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;shisetsuShurui&quot;},{&quot;columnName&quot;:&quot;入所施設&quot;,&quot;dataName&quot;:&quot;nyushoShisetsu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:250,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;nyushoShisetsu&quot;}]},&quot;onSort&quot;:&quot;&quot;,&quot;onSelect&quot;:&quot;onSelect_dgJushochiTokureiRireki&quot;,&quot;onSelectByDblClick&quot;:&quot;onSelectByDblClick_dgJushochiTokureiRireki&quot;,&quot;onSelectBySelectButton&quot;:&quot;onSelectBySelectButton_dgJushochiTokureiRireki&quot;,&quot;onSelectByModifyButton&quot;:&quot;onSelectByModifyButton_dgJushochiTokureiRireki&quot;,&quot;onSelectByDeleteButton&quot;:&quot;onSelectByDeleteButton_dgJushochiTokureiRireki&quot;,&quot;onAfterRequest&quot;:&quot;&quot;,&quot;onAfterRequestByDblClick&quot;:&quot;&quot;,&quot;onAfterRequestBySelectButton&quot;:&quot;&quot;,&quot;onAfterRequestByModifyButton&quot;:&quot;&quot;,&quot;onAfterRequestByDeleteButton&quot;:&quot;&quot;,&quot;onOnlyRow&quot;:&quot;&quot;,&quot;onNoRow&quot;:&quot;&quot;,&quot;onMultiRows&quot;:&quot;&quot;,&quot;dataSource&quot;:[],&quot;sortOrder&quot;:&quot;sochiHihokenshaNo&quot;,&quot;isAscending&quot;:true,&quot;filterList&quot;:[],&quot;activeRowId&quot;:-1,&quot;gridAction&quot;:[]}"><div id="dgJushochiTokureiRireki_grid_table" role="" style="width: 1098px; height: 167px; position: relative;"></div><div id="dgJushochiTokureiRireki_footer" style="width: 1098px; height: 25px;"></div></div></div></div> <script type='text/javascript' class='RamlConvert'>var DBZ= DBZ? DBZ: {};DBZ['DEFAULT'] = {};</script>
-<script type='text/javascript'>var __extends = this.__extends || function (d, b) {
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;JushochiTokureiRireki&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[{&quot;eventName&quot;:&quot;onClick_btnAdd&quot;},{&quot;eventName&quot;:&quot;onSelect_dgJushochiTokureiRireki&quot;},{&quot;eventName&quot;:&quot;onSelectByDblClick_dgJushochiTokureiRireki&quot;},{&quot;eventName&quot;:&quot;onSelectBySelectButton_dgJushochiTokureiRireki&quot;},{&quot;eventName&quot;:&quot;onSelectByModifyButton_dgJushochiTokureiRireki&quot;},{&quot;eventName&quot;:&quot;onSelectByDeleteButton_dgJushochiTokureiRireki&quot;}],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.JushochiTokureiRireki"><div title="" class="UzPanel FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-Default marginRight-Default marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G2 UzCompositeChild" id="JushochiTokureiRireki" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;JushochiTokureiRireki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;JushochiTokureiRireki&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="JushochiTokureiRireki_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="JushochiTokureiRireki_panel_body_area"><button title="" class="UzButton FloatLeft JSControl controlMargin-M Width-S UzCompositeChild" id="btnAdd" style="margin-right: 0px; margin-left: 0px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnAdd&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;btnAdd&quot;,&quot;onClick&quot;:&quot;onClick_btnAdd&quot;,&quot;text&quot;:&quot;追加する&quot;}"><span>追加する</span></button><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M ClearFloat UzCompositeChild" id="dgJushochiTokureiRireki" style="width: 1098px; height: 192px; margin-right: 0px; margin-left: 0px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgJushochiTokureiRireki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;1098px&quot;,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;dgJushochiTokureiRireki&quot;,&quot;height&quot;:&quot;192px&quot;,&quot;dataSource&quot;:[],&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:true,&quot;isShowModifyButtonColumn&quot;:true,&quot;isShowDeleteButtonColumn&quot;:true,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[{&quot;combineColumnName&quot;:&quot;適用&quot;,&quot;combineItem&quot;:[&quot;tekiyoDate&quot;,&quot;tekiyoTodokedeDate&quot;,&quot;tekiyoJiyu&quot;]},{&quot;combineColumnName&quot;:&quot;解除&quot;,&quot;combineItem&quot;:[&quot;kaijoDate&quot;,&quot;kaijoTodokedeDate&quot;,&quot;kaijoJiyu&quot;]},{&quot;combineColumnName&quot;:&quot;措置元情報&quot;,&quot;combineItem&quot;:[&quot;sochiHokenshaMeisho&quot;,&quot;sochiHihokenshaNo&quot;]},{&quot;combineColumnName&quot;:&quot;施設情報&quot;,&quot;combineItem&quot;:[&quot;nyushoDate&quot;,&quot;taishoDate&quot;,&quot;shisetsuShurui&quot;,&quot;nyushoShisetsu&quot;]}],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;適用日&quot;,&quot;dataName&quot;:&quot;tekiyoDate&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:6,&quot;cellDetails&quot;:{&quot;cellType&quot;:6,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;tekiyoDate&quot;},{&quot;columnName&quot;:&quot;届出日&quot;,&quot;dataName&quot;:&quot;tekiyoTodokedeDate&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:6,&quot;cellDetails&quot;:{&quot;cellType&quot;:6,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;tekiyoTodokedeDate&quot;},{&quot;columnName&quot;:&quot;適用事由&quot;,&quot;dataName&quot;:&quot;tekiyoJiyu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;tekiyoJiyu&quot;},{&quot;columnName&quot;:&quot;解除日&quot;,&quot;dataName&quot;:&quot;kaijoDate&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:6,&quot;cellDetails&quot;:{&quot;cellType&quot;:6,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;kaijoDate&quot;},{&quot;columnName&quot;:&quot;届出日&quot;,&quot;dataName&quot;:&quot;kaijoTodokedeDate&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:6,&quot;cellDetails&quot;:{&quot;cellType&quot;:6,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;kaijoTodokedeDate&quot;},{&quot;columnName&quot;:&quot;解除事由&quot;,&quot;dataName&quot;:&quot;kaijoJiyu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;kaijoJiyu&quot;},{&quot;columnName&quot;:&quot;保険者&quot;,&quot;dataName&quot;:&quot;sochiHokenshaMeisho&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;sochiHokenshaMeisho&quot;},{&quot;columnName&quot;:&quot;被保番号&quot;,&quot;dataName&quot;:&quot;sochiHihokenshaNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:4,&quot;cellDetails&quot;:{&quot;cellType&quot;:4,&quot;maxLength&quot;:&quot;100000000&quot;,&quot;minLength&quot;:&quot;0&quot;,&quot;formatLength&quot;:&quot;10&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;sochiHihokenshaNo&quot;},{&quot;columnName&quot;:&quot;入所日&quot;,&quot;dataName&quot;:&quot;nyushoDate&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:6,&quot;cellDetails&quot;:{&quot;cellType&quot;:6,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;nyushoDate&quot;},{&quot;columnName&quot;:&quot;退所日&quot;,&quot;dataName&quot;:&quot;taishoDate&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:6,&quot;cellDetails&quot;:{&quot;cellType&quot;:6,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;taishoDate&quot;},{&quot;columnName&quot;:&quot;施設種類&quot;,&quot;dataName&quot;:&quot;shisetsuShurui&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;shisetsuShurui&quot;},{&quot;columnName&quot;:&quot;入所施設&quot;,&quot;dataName&quot;:&quot;nyushoShisetsu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:250,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;nyushoShisetsu&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;onSelect&quot;:&quot;onSelect_dgJushochiTokureiRireki&quot;,&quot;onSelectByDblClick&quot;:&quot;onSelectByDblClick_dgJushochiTokureiRireki&quot;,&quot;onSelectBySelectButton&quot;:&quot;onSelectBySelectButton_dgJushochiTokureiRireki&quot;,&quot;onSelectByModifyButton&quot;:&quot;onSelectByModifyButton_dgJushochiTokureiRireki&quot;,&quot;onSelectByDeleteButton&quot;:&quot;onSelectByDeleteButton_dgJushochiTokureiRireki&quot;,&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgJushochiTokureiRireki_grid_table" role="" style="width: 1098px; height: 167px; position: relative;"></div><div id="dgJushochiTokureiRireki_footer" style="width: 1098px; height: 25px;"></div></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -520,7 +520,7 @@ var DBZ;
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBZ.JushochiTokureiRireki.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + fieldName;
             };
 
             Controls.prototype.JushochiTokureiRireki = function () {
@@ -1062,7 +1062,7 @@ var DBZ;
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBZ.JushochiTokureiRireki.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + fieldName;
             };
 
             Controls.prototype.JushochiTokureiRireki = function () {
@@ -1362,4 +1362,353 @@ var DBZ;
     var JushochiTokureiRireki = DBZ.JushochiTokureiRireki;
 })(DBZ || (DBZ = {}));
 </script>
-</div>
+  
+  <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['JUSHOCHITOKUREIRIREKI'] = {};
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (JushochiTokureiRireki) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnAdd = function () {
+                return "onClick_btnAdd";
+            };
+
+            Events.onSelect_dgJushochiTokureiRireki = function () {
+                return "onSelect_dgJushochiTokureiRireki";
+            };
+
+            Events.onSelectByDblClick_dgJushochiTokureiRireki = function () {
+                return "onSelectByDblClick_dgJushochiTokureiRireki";
+            };
+
+            Events.onSelectBySelectButton_dgJushochiTokureiRireki = function () {
+                return "onSelectBySelectButton_dgJushochiTokureiRireki";
+            };
+
+            Events.onSelectByModifyButton_dgJushochiTokureiRireki = function () {
+                return "onSelectByModifyButton_dgJushochiTokureiRireki";
+            };
+
+            Events.onSelectByDeleteButton_dgJushochiTokureiRireki = function () {
+                return "onSelectByDeleteButton_dgJushochiTokureiRireki";
+            };
+            return Events;
+        })();
+        JushochiTokureiRireki.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "JushochiTokureiRireki";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.JushochiTokureiRireki.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.JushochiTokureiRireki.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.JushochiTokureiRireki = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.dgJushochiTokureiRireki = function () {
+                return new UZA.DataGrid(this.convFiledName("dgJushochiTokureiRireki"));
+            };
+            return Controls;
+        })();
+        JushochiTokureiRireki.Controls = Controls;
+    })(DBZ.JushochiTokureiRireki || (DBZ.JushochiTokureiRireki = {}));
+    var JushochiTokureiRireki = DBZ.JushochiTokureiRireki;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (JushochiTokureiRireki) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.controls = new JushochiTokureiRireki.Controls(fieldName);
+            }
+            ModeController.prototype.TashichosonDisplayMode = function () {
+                return new Modes.TashichosonDisplayMode(this.controls);
+            };
+
+            ModeController.prototype.TashichosonTeiseiDisplayMode = function () {
+                return new Modes.TashichosonTeiseiDisplayMode(this.controls);
+            };
+
+            ModeController.prototype.TekiyoJogaiDisplayMode = function () {
+                return new Modes.TekiyoJogaiDisplayMode(this.controls);
+            };
+
+            ModeController.prototype.TekiyoJogaiTeiseiDisplayMode = function () {
+                return new Modes.TekiyoJogaiTeiseiDisplayMode(this.controls);
+            };
+            return ModeController;
+        })();
+        JushochiTokureiRireki.ModeController = ModeController;
+        (function (Modes) {
+            var TashichosonDisplayMode = (function () {
+                function TashichosonDisplayMode(controls) {
+                    this.controls = controls;
+                }
+                TashichosonDisplayMode.prototype.Shokai = function () {
+                    this.controls.btnAdd().visible = false;
+                    this.controls.btnAdd().displayNone = true;
+                    this.controls.dgJushochiTokureiRireki().readOnly = true;
+
+                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowModifyButtonColumn = false;
+                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowDeleteButtonColumn = false;
+                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
+                };
+
+                TashichosonDisplayMode.prototype.IdoToroku = function () {
+                    this.controls.btnAdd().visible = true;
+                    this.controls.btnAdd().displayNone = false;
+                    this.controls.dgJushochiTokureiRireki().readOnly = false;
+
+                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowModifyButtonColumn = false;
+                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowDeleteButtonColumn = false;
+                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
+                };
+                return TashichosonDisplayMode;
+            })();
+            Modes.TashichosonDisplayMode = TashichosonDisplayMode;
+
+            var TashichosonTeiseiDisplayMode = (function () {
+                function TashichosonTeiseiDisplayMode(controls) {
+                    this.controls = controls;
+                }
+                TashichosonTeiseiDisplayMode.prototype.Shokai = function () {
+                    this.controls.btnAdd().displayNone = true;
+                    this.controls.dgJushochiTokureiRireki().readOnly = true;
+
+                    var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowDeleteButtonColumn = false;
+
+                    this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
+                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
+                };
+
+                TashichosonTeiseiDisplayMode.prototype.IdoToroku = function () {
+                    this.controls.btnAdd().displayNone = false;
+                    this.controls.dgJushochiTokureiRireki().readOnly = false;
+
+                    var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
+
+                    this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
+                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
+                };
+
+                TashichosonTeiseiDisplayMode.prototype.IdoToroku_SelectButton = function () {
+                    this.controls.btnAdd().displayNone = true;
+                    this.controls.dgJushochiTokureiRireki().readOnly = false;
+
+                    var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowDeleteButtonColumn = false;
+
+                    this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
+                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
+                };
+                return TashichosonTeiseiDisplayMode;
+            })();
+            Modes.TashichosonTeiseiDisplayMode = TashichosonTeiseiDisplayMode;
+
+            var TekiyoJogaiDisplayMode = (function () {
+                function TekiyoJogaiDisplayMode(controls) {
+                    this.controls = controls;
+                }
+                TekiyoJogaiDisplayMode.prototype.Shokai = function () {
+                    this.controls.btnAdd().visible = false;
+                    this.controls.btnAdd().displayNone = true;
+                    this.controls.dgJushochiTokureiRireki().readOnly = true;
+
+                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowModifyButtonColumn = false;
+                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowDeleteButtonColumn = false;
+
+                    var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
+                    var columns = gridSetting.columns;
+
+                    columns[6].visible = false;
+
+                    columns[7].visible = false;
+
+                    columns[10].visible = false;
+
+                    columns[11].width = 560;
+
+                    gridSetting.columns = columns;
+
+                    this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
+
+                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
+                };
+
+                TekiyoJogaiDisplayMode.prototype.IdoToroku = function () {
+                    this.controls.btnAdd().visible = true;
+                    this.controls.btnAdd().displayNone = false;
+                    this.controls.dgJushochiTokureiRireki().readOnly = false;
+
+                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowSelectButtonColumn = false;
+                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowModifyButtonColumn = false;
+                    this.controls.dgJushochiTokureiRireki().gridSetting.isShowDeleteButtonColumn = false;
+
+                    var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
+                    var columns = gridSetting.columns;
+
+                    columns[6].visible = false;
+
+                    columns[7].visible = false;
+
+                    columns[10].visible = false;
+
+                    columns[11].width = 560;
+
+                    gridSetting.columns = columns;
+
+                    this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
+
+                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
+                };
+                return TekiyoJogaiDisplayMode;
+            })();
+            Modes.TekiyoJogaiDisplayMode = TekiyoJogaiDisplayMode;
+
+            var TekiyoJogaiTeiseiDisplayMode = (function () {
+                function TekiyoJogaiTeiseiDisplayMode(controls) {
+                    this.controls = controls;
+                }
+                TekiyoJogaiTeiseiDisplayMode.prototype.Shokai = function () {
+                    this.controls.btnAdd().displayNone = true;
+
+                    this.controls.dgJushochiTokureiRireki().readOnly = true;
+
+                    var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowDeleteButtonColumn = false;
+
+                    var columns = gridSetting.columns;
+
+                    columns[6].visible = false;
+
+                    columns[7].visible = false;
+
+                    columns[10].visible = false;
+
+                    columns[11].width = 560;
+
+                    gridSetting.columns = columns;
+
+                    this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
+
+                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
+                };
+
+                TekiyoJogaiTeiseiDisplayMode.prototype.IdoToroku = function () {
+                    this.controls.btnAdd().displayNone = false;
+
+                    this.controls.dgJushochiTokureiRireki().readOnly = false;
+
+                    var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
+
+                    var columns = gridSetting.columns;
+
+                    columns[6].visible = false;
+
+                    columns[7].visible = false;
+
+                    columns[10].visible = false;
+
+                    columns[11].width = 560;
+
+                    gridSetting.columns = columns;
+
+                    this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
+
+                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
+                };
+
+                TekiyoJogaiTeiseiDisplayMode.prototype.IdoToroku_SelectButton = function () {
+                    this.controls.btnAdd().displayNone = true;
+
+                    this.controls.dgJushochiTokureiRireki().readOnly = false;
+
+                    var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowDeleteButtonColumn = false;
+
+                    var columns = gridSetting.columns;
+
+                    columns[6].visible = false;
+
+                    columns[7].visible = false;
+
+                    columns[10].visible = false;
+
+                    columns[11].width = 560;
+
+                    gridSetting.columns = columns;
+
+                    this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
+
+                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
+                };
+                return TekiyoJogaiTeiseiDisplayMode;
+            })();
+            Modes.TekiyoJogaiTeiseiDisplayMode = TekiyoJogaiTeiseiDisplayMode;
+        })(JushochiTokureiRireki.Modes || (JushochiTokureiRireki.Modes = {}));
+        var Modes = JushochiTokureiRireki.Modes;
+    })(DBZ.JushochiTokureiRireki || (DBZ.JushochiTokureiRireki = {}));
+    var JushochiTokureiRireki = DBZ.JushochiTokureiRireki;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (JushochiTokureiRireki) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new JushochiTokureiRireki.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        JushochiTokureiRireki.PublicProperties = PublicProperties;
+    })(DBZ.JushochiTokureiRireki || (DBZ.JushochiTokureiRireki = {}));
+    var JushochiTokureiRireki = DBZ.JushochiTokureiRireki;
+})(DBZ || (DBZ = {}));
+</script></div>

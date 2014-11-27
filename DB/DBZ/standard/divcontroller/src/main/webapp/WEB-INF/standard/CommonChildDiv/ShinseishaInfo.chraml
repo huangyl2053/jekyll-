@@ -2181,7 +2181,7 @@ var DBZ;
     var ShinseishaInfo = DBZ.ShinseishaInfo;
 })(DBZ || (DBZ = {}));
 </script>
-      <script class="RamlConvert" type="text/javascript">
+<script class="RamlConvert" type="text/javascript">
 var DBZ= DBZ? DBZ: {};
 DBZ['SHINSEISHAINFO'] = {};
 DBZ['SHINSEISHAINFO'].ShinseishaInfoRequest = function(parentFieldName){ 
