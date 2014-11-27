@@ -1,5 +1,5 @@
-<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-is-composite-control="true" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;CompleteProcess&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;originalProperty&quot;:[{&quot;publicChildFieldName&quot;:&quot;lblCompleteMessage&quot;,&quot;publicChildProperty&quot;:&quot;text&quot;,&quot;newPropertyName&quot;:&quot;lblCompleteMessage_text&quot;},{&quot;publicChildFieldName&quot;:&quot;CompleteProcess&quot;,&quot;publicChildProperty&quot;:&quot;width&quot;,&quot;newPropertyName&quot;:&quot;CompleteProcess_width&quot;}],&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;canTransferEvent&quot;:true,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}"><div title="" class="UzPanel FloatLeft JSControl Panel StateChangable UzCommonChildDivPanel" id="CompleteProcess" style="margin: 0em; width: 1100px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;CompleteProcess&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1100px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;CompleteProcess&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;CompleteProcess&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:false,&quot;backgroundColor&quot;:4,&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:1,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader clearBackground" id="CompleteProcess_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">タイトル</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete BgSuccess Panel-GroupBoxWithoutHeader ui-droppable ui-sortable" id="CompleteProcess_panel_body_area"><div title="" class="UzPanel Panel-Shadow JSControl Panel StateChangable ClearFloat FloatCenter" id="CompleteProssessPadding" style="width: 950px; margin-top: 10em; margin-bottom: 10em;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;CompleteProssessPadding&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;950px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:1,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;CompleteProssessPadding&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;10em&quot;,&quot;marginBottom&quot;:&quot;10em&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:true,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;CompleteProssessPadding&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:false,&quot;backgroundColor&quot;:4,&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:0,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="CompleteProssessPadding_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete BgSuccess ui-droppable ui-sortable" id="CompleteProssessPadding_panel_body_area" style="width: auto !important;"><span title="" class="UzLabel word-wrap-break-word JSControl controlMargin-M ClearFloat FloatCenter text-align-center" id="lblCompleteMessage" style="width: 900px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblCompleteMessage&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;900px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:1,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;lblCompleteMessage&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;align&quot;:1,&quot;text&quot;:&quot;処理が完了しました。&quot;,&quot;isPrivateInfo&quot;:false,&quot;decorationClass&quot;:&quot;&quot;}"><span>処理が完了しました。</span></span></div></div></div></div> <script type='text/javascript' class='RamlConvert'>var DBZ= DBZ? DBZ: {};DBZ['DEFAULT'] = {};DBZ['DEFAULT'].CompleteProcessRequest = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_CompleteProcess').getProperty();parameter0.CompleteProssessPadding = Uz.JSControlUtil.getJSControl(parentFieldName + '_CompleteProssessPadding').getProperty();parameter0.CompleteProssessPadding.lblCompleteMessage = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblCompleteMessage').getProperty();paramArray.push(parameter0);return paramArray; };DBZ['DEFAULT'].CompleteProssessPaddingRequest = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_CompleteProssessPadding').getProperty();parameter0.lblCompleteMessage = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblCompleteMessage').getProperty();paramArray.push(parameter0);return paramArray; };</script>
-<script type='text/javascript'>var __extends = this.__extends || function (d, b) {
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;CompleteProcess&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;lblCompleteMessage_text&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;CompleteProcess_width&quot;,&quot;editType&quot;:0}]},&quot;lblCompleteMessage_text&quot;:&quot;処理が完了しました。&quot;,&quot;CompleteProcess_width&quot;:&quot;1100px&quot;}" data-is-composite-control="true" data-control-name="DBZ.CompleteProcess"><div title="" class="UzPanel FloatLeft JSControl Panel StateChangable UzCommonChildDivPanel UzCompositeChild" id="CompleteProcess" style="margin: 0em; width: 1100px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;CompleteProcess&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1100px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;CompleteProcess&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;CompleteProcess&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;backgroundColor&quot;:4,&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:1,&quot;canPost&quot;:true}"><div class="UzPanelHeader clearBackground" id="CompleteProcess_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">タイトル</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete BgSuccess Panel-GroupBoxWithoutHeader ui-droppable ui-sortable" id="CompleteProcess_panel_body_area"><div title="" class="UzPanel Panel-Shadow JSControl Panel StateChangable ClearFloat FloatCenter UzCompositeChild" id="CompleteProssessPadding" style="width: 950px; margin-top: 10em; margin-bottom: 10em;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;CompleteProssessPadding&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;950px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;CompleteProssessPadding&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;10em&quot;,&quot;marginBottom&quot;:&quot;10em&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;CompleteProssessPadding&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;backgroundColor&quot;:4,&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="CompleteProssessPadding_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete BgSuccess ui-droppable ui-sortable" id="CompleteProssessPadding_panel_body_area" style="width: auto !important;"><span title="" class="UzLabel word-wrap-break-word JSControl controlMargin-M ClearFloat FloatCenter text-align-center UzCompositeChild" id="lblCompleteMessage" style="width: 900px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblCompleteMessage&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;900px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;lblCompleteMessage&quot;,&quot;text&quot;:&quot;処理が完了しました。&quot;,&quot;align&quot;:1}"><span>処理が完了しました。</span></span></div></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -321,4 +321,117 @@ var DBZ;
     var CompleteProcess = DBZ.CompleteProcess;
 })(DBZ || (DBZ = {}));
 </script>
-</div>
+  
+  <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['COMPLETEPROCESS'] = {};
+DBZ['COMPLETEPROCESS'].CompleteProcessRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_CompleteProcess').getProperty();parameter0.CompleteProssessPadding = Uz.JSControlUtil.getJSControl(parentFieldName + '_CompleteProssessPadding').getProperty();parameter0.CompleteProssessPadding.lblCompleteMessage = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblCompleteMessage').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+DBZ['COMPLETEPROCESS'].CompleteProssessPaddingRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_CompleteProssessPadding').getProperty();parameter0.lblCompleteMessage = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblCompleteMessage').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (CompleteProcess) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        CompleteProcess.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "CompleteProcess";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.CompleteProcess.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.CompleteProcess.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.CompleteProcess = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.CompleteProssessPadding = function () {
+                return new UZA.Panel(this.convFiledName("CompleteProssessPadding"));
+            };
+
+            Controls.prototype.lblCompleteMessage = function () {
+                return new UZA.Label(this.convFiledName("lblCompleteMessage"));
+            };
+            return Controls;
+        })();
+        CompleteProcess.Controls = Controls;
+    })(DBZ.CompleteProcess || (DBZ.CompleteProcess = {}));
+    var CompleteProcess = DBZ.CompleteProcess;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (CompleteProcess) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new CompleteProcess.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        CompleteProcess.ModeController = ModeController;
+    })(DBZ.CompleteProcess || (DBZ.CompleteProcess = {}));
+    var CompleteProcess = DBZ.CompleteProcess;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (CompleteProcess) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new CompleteProcess.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("lblCompleteMessage_text", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("CompleteProcess_width", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getlblCompleteMessage_text = function () {
+                return this.controls.lblCompleteMessage().text;
+            };
+
+            PublicProperties.prototype.setlblCompleteMessage_text = function (value) {
+                this.controls.lblCompleteMessage().text = value;
+            };
+
+            PublicProperties.prototype.getCompleteProcess_width = function () {
+                return this.controls.CompleteProcess().width;
+            };
+
+            PublicProperties.prototype.setCompleteProcess_width = function (value) {
+                this.controls.CompleteProcess().width = value;
+            };
+            return PublicProperties;
+        })();
+        CompleteProcess.PublicProperties = PublicProperties;
+    })(DBZ.CompleteProcess || (DBZ.CompleteProcess = {}));
+    var CompleteProcess = DBZ.CompleteProcess;
+})(DBZ || (DBZ = {}));
+</script></div>

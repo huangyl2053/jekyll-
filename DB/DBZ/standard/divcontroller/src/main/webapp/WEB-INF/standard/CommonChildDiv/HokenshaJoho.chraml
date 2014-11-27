@@ -1,5 +1,5 @@
-<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-is-composite-control="true" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;HokenshaJoho&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;originalProperty&quot;:[],&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;canTransferEvent&quot;:true,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}"><div title="" class="UzPanel FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-Default marginRight-Default marginTop-Default marginBottom-Default UzCommonChildDivPanel" id="HokenshaJoho" style="width: 400px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;HokenshaJoho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;400px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;HokenshaJoho&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;Default&quot;,&quot;marginBottom&quot;:&quot;Default&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:true,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;HokenshaJoho&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onBlur_txtHokenshaNo&quot;,&quot;requestUrl&quot;:&quot;dbz/db/dbz/HokenshaJoho/onBlur_txtHokenshaNo&quot;}],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:0,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;XS&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="HokenshaJoho_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder PanelHeight-XS ui-droppable ui-sortable" id="HokenshaJoho_panel_body_area"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="txtHokenshaNo" style="width: 112px; height: 21px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtHokenshaNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;50px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtHokenshaNo_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;required&quot;:false,&quot;maxLength&quot;:&quot;999999&quot;,&quot;minLength&quot;:&quot;000000&quot;,&quot;textAlign&quot;:0,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:2,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;onBlur_txtHokenshaNo&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;保険者&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;55px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;&quot;,&quot;formatLength&quot;:&quot;6&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHokenshaNo_labelL" style="width: 55px;"><span>保険者</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input" id="txtHokenshaNo_core" style="width: 50px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><input title="" class="UzButtonDialog FloatLeft JSControl controlMargin-M" id="btnHokenshaSelect" style="width: 20px; height: 15px; margin-right: 0em; margin-left: 0em;" type="image" alt="image" src="/uz/uza/css/Link.jpg" data-control-type="ButtonDialog" data-obj="{&quot;fieldName&quot;:&quot;btnHokenshaSelect&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;ButtonDialog&quot;,&quot;width&quot;:&quot;10px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;btnHokenshaSelect&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;onBeforeClick&quot;:&quot;&quot;,&quot;onAfterClick&quot;:&quot;&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;appearance&quot;:2,&quot;imageFileUrl&quot;:&quot;/uz/uza/css/Link.jpg&quot;,&quot;imageWidth&quot;:&quot;20px&quot;,&quot;imageHeight&quot;:&quot;15px&quot;,&quot;icon&quot;:0,&quot;heightTextBoxMatches&quot;:false,&quot;displayChildDivName&quot;:&quot;DBZ.HokenshaInputGuide&quot;,&quot;dataPassing&quot;:[{&quot;key&quot;:&quot;hokenshaMeisho&quot;,&quot;controlName&quot;:&quot;txtHokenshaMeisho&quot;},{&quot;key&quot;:&quot;hokenshaNo&quot;,&quot;controlName&quot;:&quot;txtHokenshaNo&quot;}],&quot;visibleCloseButton&quot;:true,&quot;onOkClose&quot;:&quot;&quot;,&quot;onBeforeOpenDialog&quot;:&quot;&quot;,&quot;onCancelClose&quot;:&quot;&quot;}"><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="txtHokenshaMeisho" style="width: 235px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtHokenshaMeisho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;230px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtHokenshaMeisho_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;maxLength&quot;:&quot;10&quot;,&quot;minLength&quot;:0,&quot;textAlign&quot;:0,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:0,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;text&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;S&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;,&quot;permitCharactor&quot;:&quot;&quot;}"><input tabindex="-1" class="UzTextBox CoreElement readonlyColor text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtHokenshaMeisho_core" style="width: 230px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></div> <script type='text/javascript' class='RamlConvert'>var DBZ= DBZ? DBZ: {};DBZ['DEFAULT'] = {};DBZ['DEFAULT'].HokenshaJohoRequest = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_HokenshaJoho').getProperty();parameter0.txtHokenshaNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHokenshaNo').getProperty();parameter0.btnHokenshaSelect = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnHokenshaSelect').getProperty();parameter0.txtHokenshaMeisho = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHokenshaMeisho').getProperty();paramArray.push(parameter0);return paramArray; };</script>
-<script type='text/javascript'>var __extends = this.__extends || function (d, b) {
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;HokenshaJoho&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.HokenshaJoho"><div title="" class="UzPanel FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-Default marginRight-Default marginTop-Default marginBottom-Default UzCommonChildDivPanel UzCompositeChild" id="HokenshaJoho" style="width: 400px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;HokenshaJoho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;400px&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;HokenshaJoho&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;HokenshaJoho&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onBlur_txtHokenshaNo&quot;,&quot;requestUrl&quot;:&quot;dbz/db/dbz/HokenshaJoho/onBlur_txtHokenshaNo&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;widthAuto&quot;:false,&quot;height&quot;:&quot;XS&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="HokenshaJoho_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder PanelHeight-XS ui-droppable ui-sortable" id="HokenshaJoho_panel_body_area"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtHokenshaNo" style="width: 112px; height: 21px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtHokenshaNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;50px&quot;,&quot;selectControlID&quot;:&quot;txtHokenshaNo_core&quot;,&quot;labelLText&quot;:&quot;保険者&quot;,&quot;labelLWidth&quot;:&quot;55px&quot;,&quot;onBlur&quot;:&quot;onBlur_txtHokenshaNo&quot;,&quot;maxLength&quot;:&quot;999999&quot;,&quot;minLength&quot;:&quot;000000&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHokenshaNo_labelL" style="width: 55px;"><span>保険者</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input" id="txtHokenshaNo_core" style="width: 50px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><input title="" class="UzButtonDialog FloatLeft JSControl controlMargin-M UzCompositeChild" id="btnHokenshaSelect" style="width: 20px; height: 15px; margin-right: 0em; margin-left: 0em;" type="image" alt="image" src="/uz/uza/css/Link.jpg" data-control-type="ButtonDialog" data-obj="{&quot;fieldName&quot;:&quot;btnHokenshaSelect&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;ButtonDialog&quot;,&quot;width&quot;:&quot;10px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;btnHokenshaSelect&quot;,&quot;appearance&quot;:2,&quot;imageFileUrl&quot;:&quot;/uz/uza/css/Link.jpg&quot;,&quot;imageWidth&quot;:&quot;20px&quot;,&quot;imageHeight&quot;:&quot;15px&quot;,&quot;displayChildDivName&quot;:&quot;DBZ.HokenshaInputGuide&quot;,&quot;dataPassing&quot;:[{&quot;key&quot;:&quot;hokenshaMeisho&quot;,&quot;controlName&quot;:&quot;txtHokenshaMeisho&quot;},{&quot;key&quot;:&quot;hokenshaNo&quot;,&quot;controlName&quot;:&quot;txtHokenshaNo&quot;}]}"><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtHokenshaMeisho" style="width: 235px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtHokenshaMeisho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;230px&quot;,&quot;selectControlID&quot;:&quot;txtHokenshaMeisho_core&quot;,&quot;readOnly&quot;:true,&quot;maxLength&quot;:&quot;10&quot;,&quot;suggest&quot;:[]}"><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtHokenshaMeisho_core" style="width: 230px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -346,4 +346,101 @@ var DBZ;
     var HokenshaJoho = DBZ.HokenshaJoho;
 })(DBZ || (DBZ = {}));
 </script>
-</div>
+  <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['HOKENSHAJOHO'] = {};
+DBZ['HOKENSHAJOHO'].HokenshaJohoRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_HokenshaJoho').getProperty();parameter0.txtHokenshaNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHokenshaNo').getProperty();parameter0.btnHokenshaSelect = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnHokenshaSelect').getProperty();parameter0.txtHokenshaMeisho = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHokenshaMeisho').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (HokenshaJoho) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onBlur_txtHokenshaNo = function () {
+                return "onBlur_txtHokenshaNo";
+            };
+            return Events;
+        })();
+        HokenshaJoho.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "HokenshaJoho";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.HokenshaJoho.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.HokenshaJoho.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.HokenshaJoho = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtHokenshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtHokenshaNo"));
+            };
+
+            Controls.prototype.btnHokenshaSelect = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnHokenshaSelect"));
+            };
+
+            Controls.prototype.txtHokenshaMeisho = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokenshaMeisho"));
+            };
+            return Controls;
+        })();
+        HokenshaJoho.Controls = Controls;
+    })(DBZ.HokenshaJoho || (DBZ.HokenshaJoho = {}));
+    var HokenshaJoho = DBZ.HokenshaJoho;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (HokenshaJoho) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new HokenshaJoho.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        HokenshaJoho.ModeController = ModeController;
+    })(DBZ.HokenshaJoho || (DBZ.HokenshaJoho = {}));
+    var HokenshaJoho = DBZ.HokenshaJoho;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (HokenshaJoho) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new HokenshaJoho.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        HokenshaJoho.PublicProperties = PublicProperties;
+    })(DBZ.HokenshaJoho || (DBZ.HokenshaJoho = {}));
+    var HokenshaJoho = DBZ.HokenshaJoho;
+})(DBZ || (DBZ = {}));
+</script></div>

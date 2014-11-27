@@ -1,22 +1,26 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IIryoHokenRirekiDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgIryoHokenRireki_Row;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.Dba3030011IryoHokenRirekiHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IIryoHokenRirekiDiv;
 
 /**
- * IryoHokenRireki のクラスファイル
- *
+ * IryoHokenRireki のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class IryoHokenRirekiDiv extends Panel implements IIryoHokenRirekiDiv {
@@ -26,7 +30,8 @@ public class IryoHokenRirekiDiv extends Panel implements IIryoHokenRirekiDiv {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
+    @JsonProperty("btnAddIryoHoken")
+    private Button btnAddIryoHoken;
     @JsonProperty("dgIryoHokenRireki")
     private DataGrid<dgIryoHokenRireki_Row> dgIryoHokenRireki;
     @JsonProperty("mode")
@@ -38,16 +43,24 @@ public class IryoHokenRirekiDiv extends Panel implements IIryoHokenRirekiDiv {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("btnAddIryoHoken")
+    public Button getBtnAddIryoHoken() {
+        return btnAddIryoHoken;
+    }
+
+    @JsonProperty("btnAddIryoHoken")
+    public void setBtnAddIryoHoken(Button btnAddIryoHoken) {
+        this.btnAddIryoHoken=btnAddIryoHoken;
+    }
+
     @JsonProperty("dgIryoHokenRireki")
-    @Override
     public DataGrid<dgIryoHokenRireki_Row> getDgIryoHokenRireki() {
         return dgIryoHokenRireki;
     }
 
     @JsonProperty("dgIryoHokenRireki")
-    @Override
     public void setDgIryoHokenRireki(DataGrid<dgIryoHokenRireki_Row> dgIryoHokenRireki) {
-        this.dgIryoHokenRireki = dgIryoHokenRireki;
+        this.dgIryoHokenRireki=dgIryoHokenRireki;
     }
 
     @JsonProperty("mode")
@@ -57,7 +70,7 @@ public class IryoHokenRirekiDiv extends Panel implements IIryoHokenRirekiDiv {
 
     @JsonProperty("mode")
     public void setMode(RString mode) {
-        this.mode = mode;
+        this.mode=mode;
     }
 
     /*
@@ -69,7 +82,8 @@ public class IryoHokenRirekiDiv extends Panel implements IIryoHokenRirekiDiv {
     public static enum DisplayMode implements ICommonChildDivMode {
 
         Shokai("Shokai"),
-        Toroku("Toroku");
+        Toroku("Toroku"),
+        ShikakuIdo("ShikakuIdo");
 
         private final String name;
 
@@ -81,7 +95,7 @@ public class IryoHokenRirekiDiv extends Panel implements IIryoHokenRirekiDiv {
             DisplayMode[] enumArray = DisplayMode.values();
 
             for (DisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -95,14 +109,12 @@ public class IryoHokenRirekiDiv extends Panel implements IIryoHokenRirekiDiv {
 
     }
 
-    @Override
     public DisplayMode getMode_DisplayMode() {
-        return (DisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DisplayMode.class);
+        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
     }
 
-    @Override
-    public void setMode_DisplayMode(DisplayMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DisplayMode.class, value);
+    public void setMode_DisplayMode( DisplayMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
     }
 
     public static enum WidthMode implements ICommonChildDivMode {
@@ -120,7 +132,7 @@ public class IryoHokenRirekiDiv extends Panel implements IIryoHokenRirekiDiv {
             WidthMode[] enumArray = WidthMode.values();
 
             for (WidthMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -134,14 +146,12 @@ public class IryoHokenRirekiDiv extends Panel implements IIryoHokenRirekiDiv {
 
     }
 
-    @Override
     public WidthMode getMode_WidthMode() {
-        return (WidthMode) _CommonChildDivModeUtil.getMode(this.modes, WidthMode.class);
+        return (WidthMode) _CommonChildDivModeUtil.getMode( this.modes, WidthMode.class );
     }
 
-    @Override
-    public void setMode_WidthMode(WidthMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, WidthMode.class, value);
+    public void setMode_WidthMode( WidthMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, WidthMode.class , value );
     }
 
     //--------------- この行より下にコードを追加してください -------------------
