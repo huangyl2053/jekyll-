@@ -1,7 +1,7 @@
-/// <reference path='TainoInfo_Design.ts' />
+/// <reference path='GenGakuInfo_Design.ts' />
 module DBZ
 {
-    export module TainoInfo
+    export module GenGakuInfo
     {
         export class ModeController {
             private controls: Controls;

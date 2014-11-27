@@ -13,7 +13,6 @@ var DBZ;
         }
         TainoInfo_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
-            Uz.JSControlUtil.registProperty("");
         };
 
         TainoInfo_Design.prototype.getEditablePropertyInfo = function () {
@@ -31,7 +30,7 @@ var DBZ;
                             "fieldName": "txtHanteiKijunYMD",
                             "items": [],
                             "controlType": "TextBoxDate",
-                            "width": "80",
+                            "width": "80px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -59,13 +58,14 @@ var DBZ;
                             "text": "",
                             "labelLText": "滞納判定基準日",
                             "labelRText": "",
-                            "labelLWidth": "120",
+                            "labelLWidth": "120px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "ymdKubun": 2,
                             "displayFormat": 0,
                             "value": "",
+                            "decorationClass": "",
                             "permitCharactor": "./_-"
                         },
                         {
@@ -89,35 +89,8 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "text": "基準日で検索する",
-                            "onClick": "",
-                            "appearance": 0,
-                            "imageFileUrl": "",
-                            "imageWidth": "",
-                            "imageHeight": "",
-                            "icon": 0,
-                            "heightTextBoxMatches": true
-                        },
-                        {
-                            "fieldName": "btnGengakuJoho",
-                            "items": [],
-                            "controlType": "Button",
-                            "width": "M",
-                            "visible": true,
-                            "displayNone": false,
-                            "disabled": false,
-                            "accessKey": "",
-                            "nextFocusFieldName": "",
-                            "wrap": false,
-                            "dependencies": [],
-                            "float": 0,
-                            "toolTip": "",
-                            "authorityMode": 0,
-                            "marginLeft": "XS",
-                            "marginRight": "XS",
-                            "selectControlID": "btnGengakuJoho",
-                            "helpMessageID": "",
-                            "jpControlName": "",
-                            "text": "減額情報を表示する",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
                             "onClick": "",
                             "appearance": 0,
                             "imageFileUrl": "",
@@ -130,7 +103,7 @@ var DBZ;
                             "fieldName": "txtSaikoNokigen",
                             "items": [],
                             "controlType": "TextBoxDate",
-                            "width": "80",
+                            "width": "80px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -158,20 +131,21 @@ var DBZ;
                             "text": "",
                             "labelLText": "最古滞納納期限",
                             "labelRText": "",
-                            "labelLWidth": "120",
+                            "labelLWidth": "120px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "ymdKubun": 2,
                             "displayFormat": 0,
                             "value": "",
+                            "decorationClass": "",
                             "permitCharactor": "./_-"
                         },
                         {
                             "fieldName": "txtKeikaNen",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "20",
+                            "width": "20px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -183,7 +157,7 @@ var DBZ;
                             "toolTip": "",
                             "authorityMode": 0,
                             "marginLeft": "XS",
-                            "marginRight": "0",
+                            "marginRight": "0em",
                             "selectControlID": "txtKeikaNen_core",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -199,25 +173,25 @@ var DBZ;
                             "text": "",
                             "labelLText": "最古の保険料納期限からの経過月数",
                             "labelRText": "",
-                            "labelLWidth": "260",
+                            "labelLWidth": "260px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "value": "",
+                            "decorationClass": "",
                             "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 2,
                             "textKind": 0,
                             "isComboBox": false,
                             "suggest": [],
-                            "decorationClass": "",
                             "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtKeikaTsuki",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "20",
+                            "width": "20px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -228,7 +202,7 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
+                            "marginLeft": "0em",
                             "marginRight": "XS",
                             "selectControlID": "txtKeikaTsuki_core",
                             "helpMessageID": "",
@@ -245,18 +219,18 @@ var DBZ;
                             "text": "",
                             "labelLText": "年",
                             "labelRText": "ヵ月",
-                            "labelLWidth": "20",
-                            "labelRWidth": "50",
+                            "labelLWidth": "20px",
+                            "labelRWidth": "50px",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "value": "",
+                            "decorationClass": "",
                             "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 2,
                             "textKind": 0,
                             "isComboBox": false,
                             "suggest": [],
-                            "decorationClass": "",
                             "permitCharactor": ""
                         },
                         {
@@ -283,7 +257,7 @@ var DBZ;
                             "fieldName": "txtHokenryoNendo1",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "35",
+                            "width": "35px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -311,25 +285,25 @@ var DBZ;
                             "text": "",
                             "labelLText": "保険料年度",
                             "labelRText": "",
-                            "labelLWidth": "90",
+                            "labelLWidth": "90px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "value": "",
+                            "decorationClass": "",
                             "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 0,
                             "textKind": 0,
                             "isComboBox": false,
                             "suggest": [],
-                            "decorationClass": "",
                             "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtHokenryoNendo2",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "35",
+                            "width": "35px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -357,25 +331,25 @@ var DBZ;
                             "text": "",
                             "labelLText": "保険料年度",
                             "labelRText": "",
-                            "labelLWidth": "310",
+                            "labelLWidth": "310px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "value": "",
+                            "decorationClass": "",
                             "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 0,
                             "textKind": 0,
                             "isComboBox": false,
                             "suggest": [],
-                            "decorationClass": "",
                             "permitCharactor": ""
                         },
                         {
                             "fieldName": "txtHokenryoNendo3",
                             "items": [],
                             "controlType": "TextBox",
-                            "width": "35",
+                            "width": "35px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -403,25 +377,25 @@ var DBZ;
                             "text": "",
                             "labelLText": "保険料年度",
                             "labelRText": "",
-                            "labelLWidth": "310",
+                            "labelLWidth": "310px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "value": "",
+                            "decorationClass": "",
                             "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 0,
                             "textKind": 0,
                             "isComboBox": false,
                             "suggest": [],
-                            "decorationClass": "",
                             "permitCharactor": ""
                         },
                         {
                             "fieldName": "dgTainoJokyo1",
                             "items": [],
                             "controlType": "DataGrid",
-                            "width": "350",
+                            "width": "350px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -433,14 +407,14 @@ var DBZ;
                             "toolTip": "",
                             "authorityMode": 0,
                             "marginLeft": "XS",
-                            "marginRight": "0",
+                            "marginRight": "0em",
                             "selectControlID": "dgTainoJokyo1",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
-                            "height": "Auto",
+                            "height": "373px",
                             "gridSetting": {
-                                "rowHeight": 25,
+                                "rowHeight": 22,
                                 "isMultiSelectable": false,
                                 "isShowHeader": true,
                                 "isShowFooter": false,
@@ -452,10 +426,11 @@ var DBZ;
                                 "isShowDeleteButtonColumn": false,
                                 "limitRowCount": 0,
                                 "selectedRowCount": 0,
+                                "selectLimitRowCount": 0,
                                 "header": {
                                     "combineColumns": [],
                                     "frozenColumn": "txtKi",
-                                    "headerHeight": 1
+                                    "headerHeight": 0
                                 },
                                 "columns": [
                                     {
@@ -572,13 +547,14 @@ var DBZ;
                             "sortOrder": "",
                             "isAscending": true,
                             "filterList": [],
-                            "activeRowId": -1
+                            "activeRowId": -1,
+                            "gridAction": []
                         },
                         {
                             "fieldName": "dgTainoJokyo2",
                             "items": [],
                             "controlType": "DataGrid",
-                            "width": "350",
+                            "width": "350px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -590,14 +566,14 @@ var DBZ;
                             "toolTip": "",
                             "authorityMode": 0,
                             "marginLeft": "XS",
-                            "marginRight": "0",
+                            "marginRight": "0em",
                             "selectControlID": "dgTainoJokyo2",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
-                            "height": "Auto",
+                            "height": "373px",
                             "gridSetting": {
-                                "rowHeight": 25,
+                                "rowHeight": 22,
                                 "isMultiSelectable": false,
                                 "isShowHeader": true,
                                 "isShowFooter": false,
@@ -609,10 +585,11 @@ var DBZ;
                                 "isShowDeleteButtonColumn": false,
                                 "limitRowCount": 0,
                                 "selectedRowCount": 0,
+                                "selectLimitRowCount": 0,
                                 "header": {
                                     "combineColumns": [],
                                     "frozenColumn": "txtKi",
-                                    "headerHeight": 1
+                                    "headerHeight": 0
                                 },
                                 "columns": [
                                     {
@@ -729,13 +706,14 @@ var DBZ;
                             "sortOrder": "",
                             "isAscending": true,
                             "filterList": [],
-                            "activeRowId": -1
+                            "activeRowId": -1,
+                            "gridAction": []
                         },
                         {
                             "fieldName": "dgTainoJokyo3",
                             "items": [],
                             "controlType": "DataGrid",
-                            "width": "350",
+                            "width": "350px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -747,14 +725,14 @@ var DBZ;
                             "toolTip": "",
                             "authorityMode": 0,
                             "marginLeft": "XS",
-                            "marginRight": "0",
+                            "marginRight": "0em",
                             "selectControlID": "dgTainoJokyo3",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
-                            "height": "Auto",
+                            "height": "373px",
                             "gridSetting": {
-                                "rowHeight": 25,
+                                "rowHeight": 22,
                                 "isMultiSelectable": false,
                                 "isShowHeader": true,
                                 "isShowFooter": false,
@@ -766,10 +744,11 @@ var DBZ;
                                 "isShowDeleteButtonColumn": false,
                                 "limitRowCount": 0,
                                 "selectedRowCount": 0,
+                                "selectLimitRowCount": 0,
                                 "header": {
                                     "combineColumns": [],
                                     "frozenColumn": "txtKi",
-                                    "headerHeight": 1
+                                    "headerHeight": 0
                                 },
                                 "columns": [
                                     {
@@ -886,25 +865,26 @@ var DBZ;
                             "sortOrder": "",
                             "isAscending": true,
                             "filterList": [],
-                            "activeRowId": -1
+                            "activeRowId": -1,
+                            "gridAction": []
                         },
                         {
                             "fieldName": "txtSonotaHokenryo",
                             "items": [],
                             "controlType": "TextBoxNum",
-                            "width": "90",
+                            "width": "90px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
                             "accessKey": "",
                             "nextFocusFieldName": "",
-                            "wrap": false,
+                            "wrap": true,
                             "dependencies": [],
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
                             "marginLeft": "XS",
-                            "marginRight": "0",
+                            "marginRight": "0em",
                             "selectControlID": "txtSonotaHokenryo_core",
                             "helpMessageID": "",
                             "jpControlName": "",
@@ -920,19 +900,19 @@ var DBZ;
                             "text": "",
                             "labelLText": "表示年度以前の滞納状況　保険料額",
                             "labelRText": "",
-                            "labelLWidth": "260",
+                            "labelLWidth": "260px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "value": "",
-                            "maxLength": 100000000,
+                            "decorationClass": "",
+                            "maxLength": "10",
                             "minLength": 0,
                             "textAlign": 2,
                             "textKind": 2,
                             "isComboBox": false,
                             "suggest": [],
-                            "decorationClass": "",
-                            "maxValue": 1.7976931348623157e+308,
+                            "maxValue": "99999999",
                             "minValue": 0,
                             "isCurrency": false,
                             "isComma": false,
@@ -943,7 +923,7 @@ var DBZ;
                             "fieldName": "txtSonotatainoGaku",
                             "items": [],
                             "controlType": "TextBoxNum",
-                            "width": "90",
+                            "width": "90px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -971,18 +951,18 @@ var DBZ;
                             "text": "",
                             "labelLText": "うち滞納額",
                             "labelRText": "",
-                            "labelLWidth": "80",
+                            "labelLWidth": "80px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
                             "value": "",
-                            "maxLength": 100000000,
+                            "decorationClass": "",
+                            "maxLength": "10",
                             "minLength": 0,
                             "textAlign": 2,
                             "textKind": 2,
                             "isComboBox": false,
                             "suggest": [],
-                            "decorationClass": "",
                             "maxValue": 1.7976931348623157e+308,
                             "minValue": 0,
                             "isCurrency": false,
@@ -1006,7 +986,7 @@ var DBZ;
                                                             "fieldName": "lblDummyWhite",
                                                             "items": [],
                                                             "controlType": "Label",
-                                                            "width": "64",
+                                                            "width": "64px",
                                                             "visible": false,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1041,8 +1021,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "WhiteCell",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1078,7 +1058,7 @@ var DBZ;
                                                             "fieldName": "lblDummyRed",
                                                             "items": [],
                                                             "controlType": "Label",
-                                                            "width": "64",
+                                                            "width": "64px",
                                                             "visible": false,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1113,8 +1093,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "RedCell",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1153,8 +1133,8 @@ var DBZ;
                                     "float": 0,
                                     "toolTip": "",
                                     "authorityMode": 0,
-                                    "marginLeft": "0",
-                                    "marginRight": "0",
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
                                     "selectControlID": "celTainoSetsumei1",
                                     "helpMessageID": "",
                                     "jpControlName": "",
@@ -1167,7 +1147,7 @@ var DBZ;
                                             "fieldName": "lblMassage1",
                                             "items": [],
                                             "controlType": "Label",
-                                            "width": "120",
+                                            "width": "120px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -1193,7 +1173,7 @@ var DBZ;
                                             "fieldName": "lblMassage2",
                                             "items": [],
                                             "controlType": "Label",
-                                            "width": "120",
+                                            "width": "120px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -1228,8 +1208,8 @@ var DBZ;
                                     "float": 0,
                                     "toolTip": "",
                                     "authorityMode": 0,
-                                    "marginLeft": "0",
-                                    "marginRight": "0",
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
                                     "selectControlID": "celTainoSetsumei2",
                                     "helpMessageID": "",
                                     "jpControlName": "",
@@ -1248,7 +1228,7 @@ var DBZ;
                                                             "fieldName": "lblDummyYellow",
                                                             "items": [],
                                                             "controlType": "Label",
-                                                            "width": "64",
+                                                            "width": "64px",
                                                             "visible": false,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1283,8 +1263,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "YellowCell",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1320,7 +1300,7 @@ var DBZ;
                                                             "fieldName": "lblDummyGreen",
                                                             "items": [],
                                                             "controlType": "Label",
-                                                            "width": "64",
+                                                            "width": "64px",
                                                             "visible": false,
                                                             "displayNone": false,
                                                             "disabled": false,
@@ -1355,8 +1335,8 @@ var DBZ;
                                                     "float": 0,
                                                     "toolTip": "",
                                                     "authorityMode": 0,
-                                                    "marginLeft": "0",
-                                                    "marginRight": "0",
+                                                    "marginLeft": "0em",
+                                                    "marginRight": "0em",
                                                     "selectControlID": "GreenCell1",
                                                     "helpMessageID": "",
                                                     "jpControlName": "",
@@ -1395,8 +1375,8 @@ var DBZ;
                                     "float": 0,
                                     "toolTip": "",
                                     "authorityMode": 0,
-                                    "marginLeft": "0",
-                                    "marginRight": "0",
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
                                     "selectControlID": "celTainoSetsumei3",
                                     "helpMessageID": "",
                                     "jpControlName": "",
@@ -1409,7 +1389,7 @@ var DBZ;
                                             "fieldName": "lblMassage3",
                                             "items": [],
                                             "controlType": "Label",
-                                            "width": "130",
+                                            "width": "130px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -1435,7 +1415,7 @@ var DBZ;
                                             "fieldName": "lblMassage4",
                                             "items": [],
                                             "controlType": "Label",
-                                            "width": "130",
+                                            "width": "130px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -1470,8 +1450,8 @@ var DBZ;
                                     "float": 0,
                                     "toolTip": "",
                                     "authorityMode": 0,
-                                    "marginLeft": "0",
-                                    "marginRight": "0",
+                                    "marginLeft": "0em",
+                                    "marginRight": "0em",
                                     "selectControlID": "celTainoSetsumei4",
                                     "helpMessageID": "",
                                     "jpControlName": "",
@@ -1496,10 +1476,72 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "html": "<table cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td></tr>\n  </tbody>\n</table>\n"
+                        },
+                        {
+                            "fieldName": "btnReturn",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "100px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnReturn",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "閉じる",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
+                            "onClick": "onClick_btnReturn",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        },
+                        {
+                            "fieldName": "btnKakutei",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "100px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnKakutei",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "確定する",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
+                            "onClick": "",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "1090",
+                    "width": "1090px",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -1516,11 +1558,11 @@ var DBZ;
                     "helpMessageID": "",
                     "jpControlName": "",
                     "onLoad": "",
-                    "title": "滞納情報",
-                    "marginTop": "Default",
+                    "title": "滞納状況",
+                    "marginTop": "1px",
                     "marginBottom": "Default",
                     "isOpen": true,
-                    "canOpenAndClose": true,
+                    "canOpenAndClose": false,
                     "postParameterPanelNames": [
                         {
                             "postParameterPanelNames": "TainoInfo"
@@ -1538,7 +1580,8 @@ var DBZ;
                     "isGroupBox": false,
                     "readOnly": false,
                     "height": "Auto",
-                    "focusPositionID": "createFile"
+                    "focusPositionID": "createFile",
+                    "canPost": true
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -1553,30 +1596,214 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": "0",
-            "marginRight": "0",
+            "marginLeft": "0em",
+            "marginRight": "0em",
             "selectControlID": "defaultLayout",
             "helpMessageID": "",
             "jpControlName": "",
             "relation": [],
+            "packageName": "",
             "businessId": "DBZ",
             "controlName": "TainoInfo",
-            "marginTop": 0,
-            "marginBottom": 0,
-            "originalProperty": [
-                {
-                    "publicChildFieldName": "",
-                    "publicChildProperty": "",
-                    "newPropertyName": ""
-                }
-            ],
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": "",
             "canTransferEvent": true,
-            "heightForDialog": "M"
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
         };
         return TainoInfo_Design;
     })(Uz.CommonChildDiv);
     DBZ.TainoInfo_Design = TainoInfo_Design;
+
+    (function (TainoInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnReturn = function () {
+                return "onClick_btnReturn";
+            };
+            return Events;
+        })();
+        TainoInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "TainoInfo";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.TainoInfo.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.TainoInfo.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.TainoInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtHanteiKijunYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtHanteiKijunYMD"));
+            };
+
+            Controls.prototype.btnKensaku = function () {
+                return new UZA.Button(this.convFiledName("btnKensaku"));
+            };
+
+            Controls.prototype.txtSaikoNokigen = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSaikoNokigen"));
+            };
+
+            Controls.prototype.txtKeikaNen = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikaNen"));
+            };
+
+            Controls.prototype.txtKeikaTsuki = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikaTsuki"));
+            };
+
+            Controls.prototype.linTaino1 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("linTaino1"));
+            };
+
+            Controls.prototype.txtHokenryoNendo1 = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokenryoNendo1"));
+            };
+
+            Controls.prototype.txtHokenryoNendo2 = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokenryoNendo2"));
+            };
+
+            Controls.prototype.txtHokenryoNendo3 = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokenryoNendo3"));
+            };
+
+            Controls.prototype.dgTainoJokyo1 = function () {
+                return new UZA.DataGrid(this.convFiledName("dgTainoJokyo1"));
+            };
+
+            Controls.prototype.dgTainoJokyo2 = function () {
+                return new UZA.DataGrid(this.convFiledName("dgTainoJokyo2"));
+            };
+
+            Controls.prototype.dgTainoJokyo3 = function () {
+                return new UZA.DataGrid(this.convFiledName("dgTainoJokyo3"));
+            };
+
+            Controls.prototype.txtSonotaHokenryo = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtSonotaHokenryo"));
+            };
+
+            Controls.prototype.txtSonotatainoGaku = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtSonotatainoGaku"));
+            };
+
+            Controls.prototype.TainoSetsumei = function () {
+                return new UZA.TablePanel(this.convFiledName("TainoSetsumei"));
+            };
+
+            Controls.prototype.celTainoSetsumei1 = function () {
+                return new UZA.TableCell(this.convFiledName("celTainoSetsumei1"));
+            };
+
+            Controls.prototype.TainocolorKanno = function () {
+                return new UZA.TablePanel(this.convFiledName("TainocolorKanno"));
+            };
+
+            Controls.prototype.WhiteCell = function () {
+                return new UZA.TableCell(this.convFiledName("WhiteCell"));
+            };
+
+            Controls.prototype.lblDummyWhite = function () {
+                return new UZA.Label(this.convFiledName("lblDummyWhite"));
+            };
+
+            Controls.prototype.TainocolorMino = function () {
+                return new UZA.TablePanel(this.convFiledName("TainocolorMino"));
+            };
+
+            Controls.prototype.RedCell = function () {
+                return new UZA.TableCell(this.convFiledName("RedCell"));
+            };
+
+            Controls.prototype.lblDummyRed = function () {
+                return new UZA.Label(this.convFiledName("lblDummyRed"));
+            };
+
+            Controls.prototype.celTainoSetsumei2 = function () {
+                return new UZA.TableCell(this.convFiledName("celTainoSetsumei2"));
+            };
+
+            Controls.prototype.lblMassage1 = function () {
+                return new UZA.Label(this.convFiledName("lblMassage1"));
+            };
+
+            Controls.prototype.lblMassage2 = function () {
+                return new UZA.Label(this.convFiledName("lblMassage2"));
+            };
+
+            Controls.prototype.celTainoSetsumei3 = function () {
+                return new UZA.TableCell(this.convFiledName("celTainoSetsumei3"));
+            };
+
+            Controls.prototype.TainocolorMitorai = function () {
+                return new UZA.TablePanel(this.convFiledName("TainocolorMitorai"));
+            };
+
+            Controls.prototype.YellowCell = function () {
+                return new UZA.TableCell(this.convFiledName("YellowCell"));
+            };
+
+            Controls.prototype.lblDummyYellow = function () {
+                return new UZA.Label(this.convFiledName("lblDummyYellow"));
+            };
+
+            Controls.prototype.TainocolorKano = function () {
+                return new UZA.TablePanel(this.convFiledName("TainocolorKano"));
+            };
+
+            Controls.prototype.GreenCell1 = function () {
+                return new UZA.TableCell(this.convFiledName("GreenCell1"));
+            };
+
+            Controls.prototype.lblDummyGreen = function () {
+                return new UZA.Label(this.convFiledName("lblDummyGreen"));
+            };
+
+            Controls.prototype.celTainoSetsumei4 = function () {
+                return new UZA.TableCell(this.convFiledName("celTainoSetsumei4"));
+            };
+
+            Controls.prototype.lblMassage3 = function () {
+                return new UZA.Label(this.convFiledName("lblMassage3"));
+            };
+
+            Controls.prototype.lblMassage4 = function () {
+                return new UZA.Label(this.convFiledName("lblMassage4"));
+            };
+
+            Controls.prototype.btnReturn = function () {
+                return new UZA.Button(this.convFiledName("btnReturn"));
+            };
+
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
+            };
+            return Controls;
+        })();
+        TainoInfo.Controls = Controls;
+    })(DBZ.TainoInfo || (DBZ.TainoInfo = {}));
+    var TainoInfo = DBZ.TainoInfo;
 })(DBZ || (DBZ = {}));
