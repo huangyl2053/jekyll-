@@ -219,7 +219,7 @@
           },
           {
            "modeKey": "DataGridHeight",
-           "modeValue": "Size3"
+           "modeValue": "Size300"
           }
          ],
          "publicEvents": [
@@ -267,7 +267,8 @@
        "jpControlName": "",
        "title": "被保履歴",
        "onActive": "",
-       "onFirstActive": ""
+       "onFirstActive": "",
+       "lazyLoadingControls": {}
       },
       {
        "fieldName": "tplSetaiShokai",
@@ -318,7 +319,8 @@
        "jpControlName": "",
        "title": "世帯照会",
        "onActive": "",
-       "onFirstActive": ""
+       "onFirstActive": "",
+       "lazyLoadingControls": {}
       },
       {
        "fieldName": "tplIryoHoken",
@@ -416,7 +418,8 @@
        "jpControlName": "",
        "title": "医療保険",
        "onActive": "",
-       "onFirstActive": ""
+       "onFirstActive": "",
+       "lazyLoadingControls": {}
       },
       {
        "fieldName": "tplSeikatsuHogo",
@@ -467,7 +470,8 @@
        "jpControlName": "",
        "title": "生活保護",
        "onActive": "",
-       "onFirstActive": ""
+       "onFirstActive": "",
+       "lazyLoadingControls": {}
       },
       {
        "fieldName": "tplRofukuNenkin",
@@ -518,7 +522,8 @@
        "jpControlName": "",
        "title": "老福年金",
        "onActive": "",
-       "onFirstActive": ""
+       "onFirstActive": "",
+       "lazyLoadingControls": {}
       },
       {
        "fieldName": "tplShisetsuNyutaisho",
@@ -612,7 +617,8 @@
        "jpControlName": "",
        "title": "施設入退所",
        "onActive": "",
-       "onFirstActive": ""
+       "onFirstActive": "",
+       "lazyLoadingControls": {}
       },
       {
        "fieldName": "tplShoKofuKaishu",
@@ -652,11 +658,11 @@
          "lastFocusFieldName": "",
          "modes": [
           {
-           "modeKey": "DataGridのisShowSelectButtonColumn",
-           "modeValue": "表示しない"
+           "modeKey": "グリッド表示モード",
+           "modeValue": "shokai"
           },
           {
-           "modeKey": "DataGridのheight",
+           "modeKey": "一覧パネル高さ",
            "modeValue": "サイズ350"
           }
          ],
@@ -693,7 +699,8 @@
        "jpControlName": "",
        "title": "証交付回収",
        "onActive": "",
-       "onFirstActive": ""
+       "onFirstActive": "",
+       "lazyLoadingControls": {}
       }
      ],
      "controlType": "TabContainer",
@@ -725,7 +732,7 @@
       "tplShoKofuKaishu"
      ],
      "isDraggable": false,
-     "selectedItemFieldName": "tplSetaiShokai",
+     "selectedItemFieldName": "tplShoKofuKaishu",
      "initialTab": 0,
      "isLazyLoading": false
     }
