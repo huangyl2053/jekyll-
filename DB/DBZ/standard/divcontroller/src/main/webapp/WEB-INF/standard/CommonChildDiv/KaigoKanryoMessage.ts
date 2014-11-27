@@ -54,7 +54,7 @@ module DBZ {
                 return editTypes;
             }
 
-            //TODO n8178 城間篤人 PublicPropertyへの参照が見えない。確認が必要。
+            //TODO n8178 城間篤人 PublicPropertyへの参照が見えない。今後のURリリースで対応された後に参照可能になる。
             public getKanryoMessage_width() {
                 //return this.controls.ccdKanryoMessage().PublicProperties().KanryoMessage_width;
                 return this.controls.ccdKanryoMessage().Properties().width;
