@@ -59,19 +59,19 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" />
   <ItemGroup>
-    <TypeScriptCompile Include="..\CommonChildDiv\ShisetsuJoho.ts" />
-    <TypeScriptCompile Include="..\CommonChildDiv\ShikakuHenkoRireki.ts" />
-    <TypeScriptCompile Include="..\CommonChildDiv\IryoHokenRireki.ts" />
-    <TypeScriptCompile Include="..\CommonChildDiv\JushochiTokureiRireki.ts" />
-    <TypeScriptCompile Include="..\CommonChildDiv\JushochiTokureiRirekiList.ts" />
-    <TypeScriptCompile Include="..\CommonChildDiv\ShikakuTokusoRireki.ts" />
-    <TypeScriptCompile Include="..\CommonChildDiv\ShisetsuNyutaishoRirekiKanri.ts" />
-    <TypeScriptCompile Include="..\CommonChildDiv\ShoKaishuJokyoList.ts" />
-    <TypeScriptCompile Include="..\CommonChildDiv\ShoKaishuJokyoShosai.ts" />
-    <TypeScriptCompile Include="..\CommonChildDiv\ShoKaishuKirokuKanri.ts" />
-    <TypeScriptCompile Include="..\CommonChildDiv\ShinseishaInfo.ts" />
-    <TypeScriptCompile Include="..\CommonChildDiv\PaymentMethod.ts" />
-    <TypeScriptCompile Include="..\CommonChildDiv\KogakuServicehiJudgementResult.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShisetsuJoho.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShikakuHenkoRireki.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\IryoHokenRireki.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\JushochiTokureiRireki.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\JushochiTokureiRirekiList.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShikakuTokusoRireki.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShisetsuNyutaishoRirekiKanri.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShoKaishuJokyoList.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShoKaishuJokyoShosai.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShoKaishuKirokuKanri.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShinseishaInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\PaymentMethod.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KogakuServicehiJudgementResult.ts" />
   </ItemGroup>
   <ItemGroup/>
   <Target Name="AfterBuild">
