@@ -1,5 +1,5 @@
-<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft marginLeft-XS marginRight-XS" id="defaultLayout" style="margin-top: 0em; margin-bottom: 0em;" data-control-type="CommonChildDiv" data-is-composite-control="true" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBE&quot;,&quot;controlName&quot;:&quot;ServiceWithCountCom&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;originalProperty&quot;:[{&quot;publicChildProperty&quot;:&quot;text&quot;,&quot;publicChildFieldName&quot;:&quot;lblServiceName&quot;,&quot;newPropertyName&quot;:&quot;text_ServiceName&quot;},{&quot;publicChildProperty&quot;:&quot;labelLText&quot;,&quot;publicChildFieldName&quot;:&quot;txtNum&quot;,&quot;newPropertyName&quot;:&quot;text_Frequency&quot;},{&quot;publicChildProperty&quot;:&quot;labelRText&quot;,&quot;publicChildFieldName&quot;:&quot;txtNum&quot;,&quot;newPropertyName&quot;:&quot;text_Unit&quot;},{&quot;publicChildProperty&quot;:&quot;selectedItem&quot;,&quot;publicChildFieldName&quot;:&quot;radKaigoOrYobo&quot;,&quot;newPropertyName&quot;:&quot;radKaigoOrYobo_dataSource&quot;}],&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;canTransferEvent&quot;:true,&quot;heightForDialog&quot;:&quot;&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}"><div title="" class="UzPanel FloatLeft JSControl Panel StateChangable marginLeft-XS marginRight-XS marginTop-XS marginBottom-XS UzCommonChildDivPanel Width-G2" id="ServiceWithCountCom" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ServiceWithCountCom&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;ServiceWithCountCom&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;XS&quot;,&quot;marginBottom&quot;:&quot;XS&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;&quot;}],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:true,&quot;panelDisplay&quot;:0,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="ServiceWithCountCom_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="ServiceWithCountCom_panel_body_area"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M marginLeft-XS marginRight- text-align-right" id="lblServiceName" style="width: 400px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblServiceName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;400px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;&quot;,&quot;selectControlID&quot;:&quot;lblServiceName&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;align&quot;:2,&quot;text&quot;:&quot;サービス名称&quot;,&quot;isPrivateInfo&quot;:false,&quot;decorationClass&quot;:&quot;&quot;}"><span>サービス名称</span></span><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum FloatLeft JSControl controlMargin-M marginLeft-XS" id="txtNum" style="width: 94px; height: 21px; margin-right: 0em;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtNum&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;24px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtNum_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;required&quot;:false,&quot;text&quot;:&quot;&quot;,&quot;isPrivateInfo&quot;:false,&quot;decorationClass&quot;:&quot;&quot;,&quot;maxLength&quot;:&quot;3&quot;,&quot;minLength&quot;:0,&quot;textAlign&quot;:2,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:2,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;月&quot;,&quot;labelRText&quot;:&quot;単位&quot;,&quot;labelLWidth&quot;:&quot;30px&quot;,&quot;labelRWidth&quot;:&quot;32px&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;maxValue&quot;:&quot;999&quot;,&quot;minValue&quot;:0,&quot;isCurrency&quot;:false,&quot;isComma&quot;:false,&quot;decimalPointLength&quot;:0,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtNum_labelL" style="width: 30px;"><span>月</span></span><input class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input" id="txtNum_core" style="width: 24px;" type="text" placeholder="" autocomplete="off"><span class="word-wrap-break-word Label-R text-align-left" id="txtNum_labelR" style="width: 32px;"><span>単位</span></span><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzRadioButton FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS" id="radKaigoOrYobo" style="width: 328px; height: 19px;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;radKaigoOrYobo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;325px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:true,&quot;disabled&quot;:true,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;radKaigoOrYobo_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;onChange&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;selectedItem&quot;:null,&quot;dataSource&quot;:[{&quot;value&quot;:&quot;介護&quot;,&quot;key&quot;:&quot;1&quot;},{&quot;value&quot;:&quot;予防&quot;,&quot;key&quot;:&quot;2&quot;}],&quot;onClick&quot;:&quot;&quot;,&quot;newLineItemNumber&quot;:2,&quot;spaceSize&quot;:&quot;M&quot;,&quot;disabledItem&quot;:[],&quot;icon&quot;:[]}"><span class="buttonSpan FloatLeft" id="radKaigoOrYobo_core" style="width: 325px;"><input name="radKaigoOrYobo_group" class="AsIfDisabled" id="radKaigoOrYobo_1" type="radio" value="介護" data-key="1"><label for="radKaigoOrYobo_1" data-key="1">介護</label><input name="radKaigoOrYobo_group" class="AsIfDisabled spaceSize-M" id="radKaigoOrYobo_2" type="radio" value="予防" data-key="2"><label for="radKaigoOrYobo_2" data-key="2">予防</label></span></div></div></div> <script type='text/javascript' class='RamlConvert'>var DBZ= DBZ? DBZ: {};DBZ['DEFAULT'] = {};</script>
-<script type='text/javascript'>var __extends = this.__extends || function (d, b) {
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft marginLeft-XS marginRight-XS" id="defaultLayout" style="margin-top: 0em; margin-bottom: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBE&quot;,&quot;controlName&quot;:&quot;ServiceWithCountCom&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;text_ServiceName&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;text_Frequency&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;text_Unit&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;radKaigoOrYobo_dataSource&quot;,&quot;editType&quot;:0}]},&quot;text_ServiceName&quot;:&quot;サービス名称&quot;,&quot;text_Frequency&quot;:&quot;月&quot;,&quot;text_Unit&quot;:&quot;単位&quot;,&quot;radKaigoOrYobo_dataSource&quot;:null}" data-is-composite-control="true" data-control-name="DBE.ServiceWithCountCom"><div title="" class="UzPanel FloatLeft JSControl Panel StateChangable marginLeft-XS marginRight-XS marginTop-XS marginBottom-XS UzCommonChildDivPanel Width-G2 UzCompositeChild" id="ServiceWithCountCom" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ServiceWithCountCom&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;selectControlID&quot;:&quot;ServiceWithCountCom&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;XS&quot;,&quot;marginBottom&quot;:&quot;XS&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="ServiceWithCountCom_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="ServiceWithCountCom_panel_body_area"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M marginLeft-XS marginRight- text-align-right UzCompositeChild" id="lblServiceName" style="width: 400px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblServiceName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;400px&quot;,&quot;marginRight&quot;:&quot;&quot;,&quot;selectControlID&quot;:&quot;lblServiceName&quot;,&quot;text&quot;:&quot;サービス名称&quot;}"><span>サービス名称</span></span><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum FloatLeft JSControl controlMargin-M marginLeft-XS UzCompositeChild" id="txtNum" style="width: 94px; height: 21px; margin-right: 0em;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtNum&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;24px&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtNum_core&quot;,&quot;maxLength&quot;:&quot;3&quot;,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;月&quot;,&quot;labelRText&quot;:&quot;単位&quot;,&quot;labelLWidth&quot;:&quot;30px&quot;,&quot;labelRWidth&quot;:&quot;32px&quot;,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;,&quot;maxValue&quot;:&quot;999&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtNum_labelL" style="width: 30px;"><span>月</span></span><input class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input" id="txtNum_core" style="width: 24px;" type="text" placeholder="" autocomplete="off"><span class="word-wrap-break-word Label-R text-align-left" id="txtNum_labelR" style="width: 32px;"><span>単位</span></span><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzRadioButton FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="radKaigoOrYobo" style="width: 328px; height: 19px;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;radKaigoOrYobo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;325px&quot;,&quot;displayNone&quot;:true,&quot;disabled&quot;:true,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;radKaigoOrYobo_core&quot;,&quot;icon&quot;:[],&quot;dataSource&quot;:[{&quot;value&quot;:&quot;介護&quot;,&quot;key&quot;:&quot;1&quot;},{&quot;value&quot;:&quot;予防&quot;,&quot;key&quot;:&quot;2&quot;}],&quot;selectedItem&quot;:null,&quot;disabledItem&quot;:[]}"><span tabindex="-1" class="buttonSpan FloatLeft" id="radKaigoOrYobo_core" style="width: 325px;"><input name="radKaigoOrYobo_group" class="AsIfDisabled" id="radKaigoOrYobo_1" type="radio" value="介護" data-key="1"><label for="radKaigoOrYobo_1" data-key="1">介護</label><input name="radKaigoOrYobo_group" class="AsIfDisabled spaceSize-M" id="radKaigoOrYobo_2" type="radio" value="予防" data-key="2"><label for="radKaigoOrYobo_2" data-key="2">予防</label></span></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -348,7 +348,7 @@ var DBE;
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBE.ServiceWithCountCom.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + fieldName;
             };
 
             Controls.prototype.ServiceWithCountCom = function () {
@@ -446,4 +446,126 @@ var DBE;
     var ServiceWithCountCom = DBE.ServiceWithCountCom;
 })(DBE || (DBE = {}));
 </script>
-</div>
+  <script class="RamlConvert" type="text/javascript">
+var DBE= DBE? DBE: {};
+DBE['SERVICEWITHCOUNTCOM'] = {};
+</script><script>var DBE;
+(function (DBE) {
+    (function (ServiceWithCountCom) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ServiceWithCountCom.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ServiceWithCountCom";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBE.ServiceWithCountCom.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBE.ServiceWithCountCom.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ServiceWithCountCom = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.lblServiceName = function () {
+                return new UZA.Label(this.convFiledName("lblServiceName"));
+            };
+
+            Controls.prototype.txtNum = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtNum"));
+            };
+
+            Controls.prototype.radKaigoOrYobo = function () {
+                return new UZA.RadioButton(this.convFiledName("radKaigoOrYobo"));
+            };
+            return Controls;
+        })();
+        ServiceWithCountCom.Controls = Controls;
+    })(DBE.ServiceWithCountCom || (DBE.ServiceWithCountCom = {}));
+    var ServiceWithCountCom = DBE.ServiceWithCountCom;
+})(DBE || (DBE = {}));
+var DBE;
+(function (DBE) {
+    (function (ServiceWithCountCom) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ServiceWithCountCom.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ServiceWithCountCom.ModeController = ModeController;
+    })(DBE.ServiceWithCountCom || (DBE.ServiceWithCountCom = {}));
+    var ServiceWithCountCom = DBE.ServiceWithCountCom;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (ServiceWithCountCom) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ServiceWithCountCom.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("text_ServiceName", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("text_Frequency", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("text_Unit", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("radKaigoOrYobo_dataSource", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.gettext_ServiceName = function () {
+                return this.controls.lblServiceName().text;
+            };
+
+            PublicProperties.prototype.settext_ServiceName = function (value) {
+                this.controls.lblServiceName().text = value;
+            };
+
+            PublicProperties.prototype.gettext_Frequency = function () {
+                return this.controls.txtNum().labelLText;
+            };
+
+            PublicProperties.prototype.settext_Frequency = function (value) {
+                this.controls.txtNum().labelLText = value;
+            };
+
+            PublicProperties.prototype.gettext_Unit = function () {
+                return this.controls.txtNum().labelRText;
+            };
+
+            PublicProperties.prototype.settext_Unit = function (value) {
+                this.controls.txtNum().labelRText = value;
+            };
+
+            PublicProperties.prototype.getradKaigoOrYobo_dataSource = function () {
+                return this.controls.radKaigoOrYobo().selectedItem;
+            };
+
+            PublicProperties.prototype.setradKaigoOrYobo_dataSource = function (value) {
+                this.controls.radKaigoOrYobo().selectedItem = value;
+            };
+            return PublicProperties;
+        })();
+        ServiceWithCountCom.PublicProperties = PublicProperties;
+    })(DBE.ServiceWithCountCom || (DBE.ServiceWithCountCom = {}));
+    var ServiceWithCountCom = DBE.ServiceWithCountCom;
+})(DBE || (DBE = {}));
+</script></div>
