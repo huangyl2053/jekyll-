@@ -23,6 +23,8 @@ public class JukyushaIdoRenrakuhyoKyotakuServicePlanDiv extends Panel {
      */
     @JsonProperty("radPlanSakuseiKubun")
     private RadioButton radPlanSakuseiKubun;
+    @JsonProperty("Button4")
+    private Button Button4;
     @JsonProperty("txtShienJigyoshaNo")
     private TextBoxCode txtShienJigyoshaNo;
     @JsonProperty("txtShienJigyoshaName")
@@ -46,6 +48,16 @@ public class JukyushaIdoRenrakuhyoKyotakuServicePlanDiv extends Panel {
     @JsonProperty("radPlanSakuseiKubun")
     public void setRadPlanSakuseiKubun(RadioButton radPlanSakuseiKubun) {
         this.radPlanSakuseiKubun=radPlanSakuseiKubun;
+    }
+
+    @JsonProperty("Button4")
+    public Button getButton4() {
+        return Button4;
+    }
+
+    @JsonProperty("Button4")
+    public void setButton4(Button Button4) {
+        this.Button4=Button4;
     }
 
     @JsonProperty("txtShienJigyoshaNo")

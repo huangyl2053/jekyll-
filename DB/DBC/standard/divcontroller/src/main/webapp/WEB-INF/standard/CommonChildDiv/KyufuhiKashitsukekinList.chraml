@@ -1,5 +1,5 @@
-<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-is-composite-control="true" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBC&quot;,&quot;controlName&quot;:&quot;KyufuhiKashitsukekinList&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;originalProperty&quot;:[{&quot;publicChildFieldName&quot;:&quot;btnAdd&quot;,&quot;publicChildProperty&quot;:&quot;visible&quot;,&quot;newPropertyName&quot;:&quot;AddButtonVisible&quot;},{&quot;publicChildFieldName&quot;:&quot;btnAdd&quot;,&quot;publicChildProperty&quot;:&quot;displayNone&quot;,&quot;newPropertyName&quot;:&quot;AddButtonDisplayNone&quot;},{&quot;publicChildFieldName&quot;:&quot;dgKyufuhiKashitsukekinList&quot;,&quot;publicChildProperty&quot;:&quot;gridSetting&quot;,&quot;newPropertyName&quot;:&quot;ListGridSetting&quot;},{&quot;publicChildFieldName&quot;:&quot;dgKyufuhiKashitsukekinList&quot;,&quot;publicChildProperty&quot;:&quot;height&quot;,&quot;newPropertyName&quot;:&quot;ListHeight&quot;},{&quot;publicChildFieldName&quot;:&quot;dgKyufuhiKashitsukekinList&quot;,&quot;publicChildProperty&quot;:&quot;onSelect&quot;,&quot;newPropertyName&quot;:&quot;ListOnSelect&quot;},{&quot;publicChildFieldName&quot;:&quot;dgKyufuhiKashitsukekinList&quot;,&quot;publicChildProperty&quot;:&quot;onSelectByDblClick&quot;,&quot;newPropertyName&quot;:&quot;ListOnSelectByDblClick&quot;},{&quot;publicChildFieldName&quot;:&quot;btnAdd&quot;,&quot;publicChildProperty&quot;:&quot;onClick&quot;,&quot;newPropertyName&quot;:&quot;onClickAddButton&quot;},{&quot;publicChildFieldName&quot;:&quot;dgKyufuhiKashitsukekinList&quot;,&quot;publicChildProperty&quot;:&quot;onSelectBySelectButton&quot;,&quot;newPropertyName&quot;:&quot;ListOnSelectBySelectButton&quot;},{&quot;publicChildFieldName&quot;:&quot;dgKyufuhiKashitsukekinList&quot;,&quot;publicChildProperty&quot;:&quot;onSelectByModifyButton&quot;,&quot;newPropertyName&quot;:&quot;ListOnSelectByModifyButton&quot;},{&quot;publicChildFieldName&quot;:&quot;dgKyufuhiKashitsukekinList&quot;,&quot;publicChildProperty&quot;:&quot;onSelectByDeleteButton&quot;,&quot;newPropertyName&quot;:&quot;ListOnSelectByDeleteButton&quot;}],&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;canTransferEvent&quot;:true,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}"><div title="" class="UzPanel FloatLeft JSControl Panel StateChangable UzCommonChildDivPanel Width-G2" id="KyufuhiKashitsukekinList" style="margin: 0em; width: auto;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KyufuhiKashitsukekinList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;KyufuhiKashitsukekinList&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:true,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KyufuhiKashitsukekinList&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:true,&quot;panelDisplay&quot;:0,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KyufuhiKashitsukekinList_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="KyufuhiKashitsukekinList_panel_body_area"><button title="" class="UzButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="btnAdd" style="width: 160px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnAdd&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;160px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;btnAdd&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onBeforeClick&quot;:&quot;&quot;,&quot;onAfterClick&quot;:&quot;&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;text&quot;:&quot;申請情報を追加する&quot;,&quot;appearance&quot;:0,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;,&quot;icon&quot;:0,&quot;heightTextBoxMatches&quot;:false}"><span>申請情報を追加する</span></button><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS" id="dgKyufuhiKashitsukekinList" style="width: 1095px; height: 209px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgKyufuhiKashitsukekinList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;1095px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;dgKyufuhiKashitsukekinList&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;209px&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:true,&quot;isShowSelectButtonColumn&quot;:true,&quot;isShowModifyButtonColumn&quot;:true,&quot;isShowDeleteButtonColumn&quot;:true,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:1},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;被保番号&quot;,&quot;dataName&quot;:&quot;txtHihoNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtHihoNo&quot;},{&quot;columnName&quot;:&quot;被保険者氏名&quot;,&quot;dataName&quot;:&quot;txtHihokenshaName&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:200,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtHihokenshaName&quot;},{&quot;columnName&quot;:&quot;被保険者カナ&quot;,&quot;dataName&quot;:&quot;txtHihokenshaKana&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:200,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtHihokenshaKana&quot;},{&quot;columnName&quot;:&quot;借入<br>受付日&quot;,&quot;dataName&quot;:&quot;txtUketsukeYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtUketsukeYMD&quot;},{&quot;columnName&quot;:&quot;借入<br>申請日&quot;,&quot;dataName&quot;:&quot;txtShinseiYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtShinseiYMD&quot;},{&quot;columnName&quot;:&quot;借入利用<br>開始日&quot;,&quot;dataName&quot;:&quot;txtKaishiYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtKaishiYMD&quot;},{&quot;columnName&quot;:&quot;借入利用<br>終了日&quot;,&quot;dataName&quot;:&quot;txtShuryoYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtShuryoYMD&quot;},{&quot;columnName&quot;:&quot;貸付対象<br>サービス種類&quot;,&quot;dataName&quot;:&quot;txtServiceShurui&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:170,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtServiceShurui&quot;},{&quot;columnName&quot;:&quot;事業者の<br>支払請求額&quot;,&quot;dataName&quot;:&quot;txtSeikyugaku&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtSeikyugaku&quot;},{&quot;columnName&quot;:&quot;申請金額&quot;,&quot;dataName&quot;:&quot;txtShinseigaku&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtShinseigaku&quot;},{&quot;columnName&quot;:&quot;貸付審査<br>決定日&quot;,&quot;dataName&quot;:&quot;txtKetteiYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtKetteiYMD&quot;},{&quot;columnName&quot;:&quot;貸付承認<br>不承認&quot;,&quot;dataName&quot;:&quot;txtShonin&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtShonin&quot;},{&quot;columnName&quot;:&quot;借受日&quot;,&quot;dataName&quot;:&quot;txtKariukeYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtKariukeYMD&quot;},{&quot;columnName&quot;:&quot;償還期限<br>延長申請日&quot;,&quot;dataName&quot;:&quot;txtEnchoShinseiYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:110,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtEnchoShinseiYMD&quot;}]},&quot;onSort&quot;:&quot;&quot;,&quot;onSelect&quot;:&quot;&quot;,&quot;onSelectByDblClick&quot;:&quot;&quot;,&quot;onSelectBySelectButton&quot;:&quot;&quot;,&quot;onSelectByModifyButton&quot;:&quot;&quot;,&quot;onSelectByDeleteButton&quot;:&quot;&quot;,&quot;onAfterRequest&quot;:&quot;&quot;,&quot;onAfterRequestByDblClick&quot;:&quot;&quot;,&quot;onAfterRequestBySelectButton&quot;:&quot;&quot;,&quot;onAfterRequestByModifyButton&quot;:&quot;&quot;,&quot;onAfterRequestByDeleteButton&quot;:&quot;&quot;,&quot;onOnlyRow&quot;:&quot;&quot;,&quot;onNoRow&quot;:&quot;&quot;,&quot;onMultiRows&quot;:&quot;&quot;,&quot;dataSource&quot;:[],&quot;sortOrder&quot;:&quot;&quot;,&quot;isAscending&quot;:true,&quot;filterList&quot;:[],&quot;activeRowId&quot;:-1,&quot;gridAction&quot;:[]}"><div id="dgKyufuhiKashitsukekinList_grid_table" role="" style="width: 1095px; height: 184px; position: relative;"></div><div id="dgKyufuhiKashitsukekinList_footer" style="width: 1095px; height: 25px;"></div></div></div></div> <script type='text/javascript' class='RamlConvert'>var DBZ= DBZ? DBZ: {};DBZ['DEFAULT'] = {};DBZ['DEFAULT'].KyufuhiKashitsukekinListRequest = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KyufuhiKashitsukekinList').getProperty();parameter0.btnAdd = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnAdd').getProperty();parameter0.dgKyufuhiKashitsukekinList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgKyufuhiKashitsukekinList').getProperty();paramArray.push(parameter0);return paramArray; };</script>
-<script type='text/javascript'>var __extends = this.__extends || function (d, b) {
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBC&quot;,&quot;controlName&quot;:&quot;KyufuhiKashitsukekinList&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;AddButtonVisible&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;AddButtonDisplayNone&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;ListHeight&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;ListOnSelect&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;ListOnSelectByDblClick&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;onClickAddButton&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;ListOnSelectBySelectButton&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;ListOnSelectByModifyButton&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;ListOnSelectByDeleteButton&quot;,&quot;editType&quot;:0}]},&quot;AddButtonVisible&quot;:true,&quot;AddButtonDisplayNone&quot;:false,&quot;ListHeight&quot;:&quot;209px&quot;,&quot;ListOnSelect&quot;:&quot;&quot;,&quot;ListOnSelectByDblClick&quot;:&quot;&quot;,&quot;onClickAddButton&quot;:&quot;&quot;,&quot;ListOnSelectBySelectButton&quot;:&quot;&quot;,&quot;ListOnSelectByModifyButton&quot;:&quot;&quot;,&quot;ListOnSelectByDeleteButton&quot;:&quot;&quot;}" data-is-composite-control="true" data-control-name="DBC.KyufuhiKashitsukekinList"><div title="" class="UzPanel FloatLeft JSControl Panel StateChangable UzCommonChildDivPanel Width-G2 UzCompositeChild" id="KyufuhiKashitsukekinList" style="margin: 0em; width: auto;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KyufuhiKashitsukekinList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;KyufuhiKashitsukekinList&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KyufuhiKashitsukekinList&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KyufuhiKashitsukekinList_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="KyufuhiKashitsukekinList_panel_body_area"><button title="" class="UzButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="btnAdd" style="width: 160px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnAdd&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;160px&quot;,&quot;selectControlID&quot;:&quot;btnAdd&quot;,&quot;text&quot;:&quot;申請情報を追加する&quot;}"><span>申請情報を追加する</span></button><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="dgKyufuhiKashitsukekinList" style="width: 1095px; height: 209px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgKyufuhiKashitsukekinList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;1095px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;dgKyufuhiKashitsukekinList&quot;,&quot;height&quot;:&quot;209px&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:true,&quot;isShowSelectButtonColumn&quot;:true,&quot;isShowModifyButtonColumn&quot;:true,&quot;isShowDeleteButtonColumn&quot;:true,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:1},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;被保番号&quot;,&quot;dataName&quot;:&quot;txtHihoNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtHihoNo&quot;},{&quot;columnName&quot;:&quot;被保険者氏名&quot;,&quot;dataName&quot;:&quot;txtHihokenshaName&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:200,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtHihokenshaName&quot;},{&quot;columnName&quot;:&quot;被保険者カナ&quot;,&quot;dataName&quot;:&quot;txtHihokenshaKana&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:200,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtHihokenshaKana&quot;},{&quot;columnName&quot;:&quot;借入<br>受付日&quot;,&quot;dataName&quot;:&quot;txtUketsukeYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtUketsukeYMD&quot;},{&quot;columnName&quot;:&quot;借入<br>申請日&quot;,&quot;dataName&quot;:&quot;txtShinseiYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtShinseiYMD&quot;},{&quot;columnName&quot;:&quot;借入利用<br>開始日&quot;,&quot;dataName&quot;:&quot;txtKaishiYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtKaishiYMD&quot;},{&quot;columnName&quot;:&quot;借入利用<br>終了日&quot;,&quot;dataName&quot;:&quot;txtShuryoYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtShuryoYMD&quot;},{&quot;columnName&quot;:&quot;貸付対象<br>サービス種類&quot;,&quot;dataName&quot;:&quot;txtServiceShurui&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:170,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtServiceShurui&quot;},{&quot;columnName&quot;:&quot;事業者の<br>支払請求額&quot;,&quot;dataName&quot;:&quot;txtSeikyugaku&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtSeikyugaku&quot;},{&quot;columnName&quot;:&quot;申請金額&quot;,&quot;dataName&quot;:&quot;txtShinseigaku&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtShinseigaku&quot;},{&quot;columnName&quot;:&quot;貸付審査<br>決定日&quot;,&quot;dataName&quot;:&quot;txtKetteiYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtKetteiYMD&quot;},{&quot;columnName&quot;:&quot;貸付承認<br>不承認&quot;,&quot;dataName&quot;:&quot;txtShonin&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtShonin&quot;},{&quot;columnName&quot;:&quot;借受日&quot;,&quot;dataName&quot;:&quot;txtKariukeYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtKariukeYMD&quot;},{&quot;columnName&quot;:&quot;償還期限<br>延長申請日&quot;,&quot;dataName&quot;:&quot;txtEnchoShinseiYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:110,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtEnchoShinseiYMD&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgKyufuhiKashitsukekinList_grid_table" role="" style="width: 1095px; height: 184px; position: relative;"></div><div id="dgKyufuhiKashitsukekinList_footer" style="width: 1095px; height: 25px;"></div></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -806,4 +806,175 @@ var DBC;
     var KyufuhiKashitsukekinList = DBC.KyufuhiKashitsukekinList;
 })(DBC || (DBC = {}));
 </script>
-</div>
+  <script class="RamlConvert" type="text/javascript">
+var DBC= DBC? DBC: {};
+DBC['KYUFUHIKASHITSUKEKINLIST'] = {};
+DBC['KYUFUHIKASHITSUKEKINLIST'].KyufuhiKashitsukekinListRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KyufuhiKashitsukekinList').getProperty();parameter0.btnAdd = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnAdd').getProperty();parameter0.dgKyufuhiKashitsukekinList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgKyufuhiKashitsukekinList').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBC;
+(function (DBC) {
+    (function (KyufuhiKashitsukekinList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KyufuhiKashitsukekinList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KyufuhiKashitsukekinList";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBC.KyufuhiKashitsukekinList.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBC.KyufuhiKashitsukekinList.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KyufuhiKashitsukekinList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.dgKyufuhiKashitsukekinList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgKyufuhiKashitsukekinList"));
+            };
+            return Controls;
+        })();
+        KyufuhiKashitsukekinList.Controls = Controls;
+    })(DBC.KyufuhiKashitsukekinList || (DBC.KyufuhiKashitsukekinList = {}));
+    var KyufuhiKashitsukekinList = DBC.KyufuhiKashitsukekinList;
+})(DBC || (DBC = {}));
+var DBC;
+(function (DBC) {
+    (function (KyufuhiKashitsukekinList) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KyufuhiKashitsukekinList.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KyufuhiKashitsukekinList.ModeController = ModeController;
+    })(DBC.KyufuhiKashitsukekinList || (DBC.KyufuhiKashitsukekinList = {}));
+    var KyufuhiKashitsukekinList = DBC.KyufuhiKashitsukekinList;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (KyufuhiKashitsukekinList) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new KyufuhiKashitsukekinList.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("AddButtonVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("AddButtonDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("ListHeight", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("ListOnSelect", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("ListOnSelectByDblClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("onClickAddButton", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("ListOnSelectBySelectButton", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("ListOnSelectByModifyButton", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("ListOnSelectByDeleteButton", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getAddButtonVisible = function () {
+                return this.controls.btnAdd().visible;
+            };
+
+            PublicProperties.prototype.setAddButtonVisible = function (value) {
+                this.controls.btnAdd().visible = value;
+            };
+
+            PublicProperties.prototype.getAddButtonDisplayNone = function () {
+                return this.controls.btnAdd().displayNone;
+            };
+
+            PublicProperties.prototype.setAddButtonDisplayNone = function (value) {
+                this.controls.btnAdd().displayNone = value;
+            };
+
+            PublicProperties.prototype.getListHeight = function () {
+                return this.controls.dgKyufuhiKashitsukekinList().height;
+            };
+
+            PublicProperties.prototype.setListHeight = function (value) {
+                this.controls.dgKyufuhiKashitsukekinList().height = value;
+            };
+
+            PublicProperties.prototype.getListOnSelect = function () {
+                return this.controls.dgKyufuhiKashitsukekinList().onSelect;
+            };
+
+            PublicProperties.prototype.setListOnSelect = function (value) {
+                this.controls.dgKyufuhiKashitsukekinList().onSelect = value;
+            };
+
+            PublicProperties.prototype.getListOnSelectByDblClick = function () {
+                return this.controls.dgKyufuhiKashitsukekinList().onSelectByDblClick;
+            };
+
+            PublicProperties.prototype.setListOnSelectByDblClick = function (value) {
+                this.controls.dgKyufuhiKashitsukekinList().onSelectByDblClick = value;
+            };
+
+            PublicProperties.prototype.getonClickAddButton = function () {
+                return this.controls.btnAdd().onClick;
+            };
+
+            PublicProperties.prototype.setonClickAddButton = function (value) {
+                this.controls.btnAdd().onClick = value;
+            };
+
+            PublicProperties.prototype.getListOnSelectBySelectButton = function () {
+                return this.controls.dgKyufuhiKashitsukekinList().onSelectBySelectButton;
+            };
+
+            PublicProperties.prototype.setListOnSelectBySelectButton = function (value) {
+                this.controls.dgKyufuhiKashitsukekinList().onSelectBySelectButton = value;
+            };
+
+            PublicProperties.prototype.getListOnSelectByModifyButton = function () {
+                return this.controls.dgKyufuhiKashitsukekinList().onSelectByModifyButton;
+            };
+
+            PublicProperties.prototype.setListOnSelectByModifyButton = function (value) {
+                this.controls.dgKyufuhiKashitsukekinList().onSelectByModifyButton = value;
+            };
+
+            PublicProperties.prototype.getListOnSelectByDeleteButton = function () {
+                return this.controls.dgKyufuhiKashitsukekinList().onSelectByDeleteButton;
+            };
+
+            PublicProperties.prototype.setListOnSelectByDeleteButton = function (value) {
+                this.controls.dgKyufuhiKashitsukekinList().onSelectByDeleteButton = value;
+            };
+            return PublicProperties;
+        })();
+        KyufuhiKashitsukekinList.PublicProperties = PublicProperties;
+    })(DBC.KyufuhiKashitsukekinList || (DBC.KyufuhiKashitsukekinList = {}));
+    var KyufuhiKashitsukekinList = DBC.KyufuhiKashitsukekinList;
+})(DBC || (DBC = {}));
+</script></div>

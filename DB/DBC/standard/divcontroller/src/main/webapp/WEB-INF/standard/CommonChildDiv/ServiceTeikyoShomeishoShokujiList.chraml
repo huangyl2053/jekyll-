@@ -1,5 +1,5 @@
-<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-is-composite-control="true" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBC&quot;,&quot;controlName&quot;:&quot;ServiceTeikyoShomeishoShokujiList&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;originalProperty&quot;:[{&quot;publicChildFieldName&quot;:&quot;btnAdd&quot;,&quot;publicChildProperty&quot;:&quot;visible&quot;,&quot;newPropertyName&quot;:&quot;AddButtonVisible&quot;},{&quot;publicChildFieldName&quot;:&quot;btnAdd&quot;,&quot;publicChildProperty&quot;:&quot;displayNone&quot;,&quot;newPropertyName&quot;:&quot;AddButtonDisplayNone&quot;},{&quot;publicChildFieldName&quot;:&quot;btnAdd&quot;,&quot;publicChildProperty&quot;:&quot;onClick&quot;,&quot;newPropertyName&quot;:&quot;AddButtonOnClick&quot;},{&quot;publicChildFieldName&quot;:&quot;dgServiceTeikyoShomeishoShokujiList&quot;,&quot;publicChildProperty&quot;:&quot;gridSetting&quot;,&quot;newPropertyName&quot;:&quot;MeisaiListGridSetting&quot;},{&quot;publicChildFieldName&quot;:&quot;dgServiceTeikyoShomeishoShokujiList&quot;,&quot;publicChildProperty&quot;:&quot;height&quot;,&quot;newPropertyName&quot;:&quot;MeisaiListHeight&quot;},{&quot;publicChildFieldName&quot;:&quot;dgServiceTeikyoShomeishoShokujiList&quot;,&quot;publicChildProperty&quot;:&quot;onSelect&quot;,&quot;newPropertyName&quot;:&quot;MeisaiListOnSelect&quot;},{&quot;publicChildFieldName&quot;:&quot;dgServiceTeikyoShomeishoShokujiList&quot;,&quot;publicChildProperty&quot;:&quot;onSelectByDblClick&quot;,&quot;newPropertyName&quot;:&quot;MeisaiListOnSelectByDblClick&quot;}],&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;canTransferEvent&quot;:true,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel StateChangable UzCommonChildDivPanel Width-G2" id="ServiceTeikyoShomeishoShokujiList" style="margin: 0em; width: auto;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ServiceTeikyoShomeishoShokujiList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;ServiceTeikyoShomeishoShokujiList&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:true,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ServiceTeikyoShomeishoShokujiList&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:false,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:true,&quot;panelDisplay&quot;:0,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;Auto&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ServiceTeikyoShomeishoShokujiList_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete ui-droppable ui-sortable" id="ServiceTeikyoShomeishoShokujiList_panel_body_area"><button title="" class="UzButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="btnAdd" style="width: 150px;" type="button" data-control-type="Button" value="undefined" data-obj="{&quot;fieldName&quot;:&quot;btnAdd&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;btnAdd&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onBeforeClick&quot;:&quot;&quot;,&quot;onAfterClick&quot;:&quot;&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;text&quot;:&quot;明細情報を追加する&quot;,&quot;appearance&quot;:0,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;,&quot;icon&quot;:0,&quot;heightTextBoxMatches&quot;:false}"><span>明細情報を追加する</span></button><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS" id="dgServiceTeikyoShomeishoShokujiList" style="width: 950px; height: 175px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgServiceTeikyoShomeishoShokujiList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;950px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;dgServiceTeikyoShomeishoShokujiList&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;175px&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:true,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;btnSelect&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:35,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;選&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;btnSelect&quot;},{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;btnEdit&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:35,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;修&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;btnEdit&quot;},{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;btnDelete&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:35,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;削&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;btnDelete&quot;},{&quot;columnName&quot;:&quot;サービス&quot;,&quot;dataName&quot;:&quot;txtService&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:350,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtService&quot;},{&quot;columnName&quot;:&quot;単位数&quot;,&quot;dataName&quot;:&quot;txtTanisu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtTanisu&quot;},{&quot;columnName&quot;:&quot;日数・回数&quot;,&quot;dataName&quot;:&quot;txtNissuKaisu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtNissuKaisu&quot;},{&quot;columnName&quot;:&quot;金額&quot;,&quot;dataName&quot;:&quot;txtKingaku&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtKingaku&quot;}]},&quot;onSort&quot;:&quot;&quot;,&quot;onSelect&quot;:&quot;&quot;,&quot;onSelectByDblClick&quot;:&quot;&quot;,&quot;onSelectBySelectButton&quot;:&quot;&quot;,&quot;onSelectByModifyButton&quot;:&quot;&quot;,&quot;onSelectByDeleteButton&quot;:&quot;&quot;,&quot;onAfterRequest&quot;:&quot;&quot;,&quot;onAfterRequestByDblClick&quot;:&quot;&quot;,&quot;onAfterRequestBySelectButton&quot;:&quot;&quot;,&quot;onAfterRequestByModifyButton&quot;:&quot;&quot;,&quot;onAfterRequestByDeleteButton&quot;:&quot;&quot;,&quot;onOnlyRow&quot;:&quot;&quot;,&quot;onNoRow&quot;:&quot;&quot;,&quot;onMultiRows&quot;:&quot;&quot;,&quot;dataSource&quot;:[],&quot;sortOrder&quot;:&quot;&quot;,&quot;isAscending&quot;:true,&quot;filterList&quot;:[],&quot;activeRowId&quot;:-1,&quot;gridAction&quot;:[]}"><div id="dgServiceTeikyoShomeishoShokujiList_grid_table" role="" style="width: 950px; height: 150px; position: relative;"></div><div id="dgServiceTeikyoShomeishoShokujiList_footer" style="width: 950px; height: 25px;"></div></div></div></div> <script type='text/javascript' class='RamlConvert'>var DBZ= DBZ? DBZ: {};DBZ['DEFAULT'] = {};DBZ['DEFAULT'].ServiceTeikyoShomeishoShokujiListRequest = function(parentFieldName){ var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ServiceTeikyoShomeishoShokujiList').getProperty();parameter0.btnAdd = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnAdd').getProperty();parameter0.dgServiceTeikyoShomeishoShokujiList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgServiceTeikyoShomeishoShokujiList').getProperty();paramArray.push(parameter0);return paramArray; };</script>
-<script type='text/javascript'>var __extends = this.__extends || function (d, b) {
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBC&quot;,&quot;controlName&quot;:&quot;ServiceTeikyoShomeishoShokujiList&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;AddButtonVisible&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;AddButtonDisplayNone&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;AddButtonOnClick&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;MeisaiListHeight&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;MeisaiListOnSelect&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;MeisaiListOnSelectByDblClick&quot;,&quot;editType&quot;:0}]},&quot;AddButtonVisible&quot;:true,&quot;AddButtonDisplayNone&quot;:false,&quot;AddButtonOnClick&quot;:&quot;&quot;,&quot;MeisaiListHeight&quot;:&quot;175px&quot;,&quot;MeisaiListOnSelect&quot;:&quot;&quot;,&quot;MeisaiListOnSelectByDblClick&quot;:&quot;&quot;}" data-is-composite-control="true" data-control-name="DBC.ServiceTeikyoShomeishoShokujiList"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel StateChangable UzCommonChildDivPanel Width-G2 UzCompositeChild" id="ServiceTeikyoShomeishoShokujiList" style="margin: 0em; width: auto;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ServiceTeikyoShomeishoShokujiList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;ServiceTeikyoShomeishoShokujiList&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ServiceTeikyoShomeishoShokujiList&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ServiceTeikyoShomeishoShokujiList_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete ui-droppable ui-sortable" id="ServiceTeikyoShomeishoShokujiList_panel_body_area"><button title="" class="UzButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="btnAdd" style="width: 150px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnAdd&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;selectControlID&quot;:&quot;btnAdd&quot;,&quot;text&quot;:&quot;明細情報を追加する&quot;}" value="undefined"><span>明細情報を追加する</span></button><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="dgServiceTeikyoShomeishoShokujiList" style="width: 950px; height: 175px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgServiceTeikyoShomeishoShokujiList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;950px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;dgServiceTeikyoShomeishoShokujiList&quot;,&quot;height&quot;:&quot;175px&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:true,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;btnSelect&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:35,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;選&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;btnSelect&quot;},{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;btnEdit&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:35,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;修&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;btnEdit&quot;},{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;btnDelete&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:35,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;削&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;btnDelete&quot;},{&quot;columnName&quot;:&quot;サービス&quot;,&quot;dataName&quot;:&quot;txtService&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:350,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtService&quot;},{&quot;columnName&quot;:&quot;単位数&quot;,&quot;dataName&quot;:&quot;txtTanisu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtTanisu&quot;},{&quot;columnName&quot;:&quot;日数・回数&quot;,&quot;dataName&quot;:&quot;txtNissuKaisu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtNissuKaisu&quot;},{&quot;columnName&quot;:&quot;金額&quot;,&quot;dataName&quot;:&quot;txtKingaku&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtKingaku&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgServiceTeikyoShomeishoShokujiList_grid_table" role="" style="width: 950px; height: 150px; position: relative;"></div><div id="dgServiceTeikyoShomeishoShokujiList_footer" style="width: 950px; height: 25px;"></div></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -599,4 +599,148 @@ var DBC;
     var ServiceTeikyoShomeishoShokujiList = DBC.ServiceTeikyoShomeishoShokujiList;
 })(DBC || (DBC = {}));
 </script>
-</div>
+  <script class="RamlConvert" type="text/javascript">
+var DBC= DBC? DBC: {};
+DBC['SERVICETEIKYOSHOMEISHOSHOKUJILIST'] = {};
+DBC['SERVICETEIKYOSHOMEISHOSHOKUJILIST'].ServiceTeikyoShomeishoShokujiListRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ServiceTeikyoShomeishoShokujiList').getProperty();parameter0.btnAdd = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnAdd').getProperty();parameter0.dgServiceTeikyoShomeishoShokujiList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgServiceTeikyoShomeishoShokujiList').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBC;
+(function (DBC) {
+    (function (ServiceTeikyoShomeishoShokujiList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ServiceTeikyoShomeishoShokujiList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ServiceTeikyoShomeishoShokujiList";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBC.ServiceTeikyoShomeishoShokujiList.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBC.ServiceTeikyoShomeishoShokujiList.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ServiceTeikyoShomeishoShokujiList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.dgServiceTeikyoShomeishoShokujiList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceTeikyoShomeishoShokujiList"));
+            };
+            return Controls;
+        })();
+        ServiceTeikyoShomeishoShokujiList.Controls = Controls;
+    })(DBC.ServiceTeikyoShomeishoShokujiList || (DBC.ServiceTeikyoShomeishoShokujiList = {}));
+    var ServiceTeikyoShomeishoShokujiList = DBC.ServiceTeikyoShomeishoShokujiList;
+})(DBC || (DBC = {}));
+var DBC;
+(function (DBC) {
+    (function (ServiceTeikyoShomeishoShokujiList) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ServiceTeikyoShomeishoShokujiList.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ServiceTeikyoShomeishoShokujiList.ModeController = ModeController;
+    })(DBC.ServiceTeikyoShomeishoShokujiList || (DBC.ServiceTeikyoShomeishoShokujiList = {}));
+    var ServiceTeikyoShomeishoShokujiList = DBC.ServiceTeikyoShomeishoShokujiList;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (ServiceTeikyoShomeishoShokujiList) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ServiceTeikyoShomeishoShokujiList.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("AddButtonVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("AddButtonDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("AddButtonOnClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("MeisaiListHeight", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("MeisaiListOnSelect", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("MeisaiListOnSelectByDblClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getAddButtonVisible = function () {
+                return this.controls.btnAdd().visible;
+            };
+
+            PublicProperties.prototype.setAddButtonVisible = function (value) {
+                this.controls.btnAdd().visible = value;
+            };
+
+            PublicProperties.prototype.getAddButtonDisplayNone = function () {
+                return this.controls.btnAdd().displayNone;
+            };
+
+            PublicProperties.prototype.setAddButtonDisplayNone = function (value) {
+                this.controls.btnAdd().displayNone = value;
+            };
+
+            PublicProperties.prototype.getAddButtonOnClick = function () {
+                return this.controls.btnAdd().onClick;
+            };
+
+            PublicProperties.prototype.setAddButtonOnClick = function (value) {
+                this.controls.btnAdd().onClick = value;
+            };
+
+            PublicProperties.prototype.getMeisaiListHeight = function () {
+                return this.controls.dgServiceTeikyoShomeishoShokujiList().height;
+            };
+
+            PublicProperties.prototype.setMeisaiListHeight = function (value) {
+                this.controls.dgServiceTeikyoShomeishoShokujiList().height = value;
+            };
+
+            PublicProperties.prototype.getMeisaiListOnSelect = function () {
+                return this.controls.dgServiceTeikyoShomeishoShokujiList().onSelect;
+            };
+
+            PublicProperties.prototype.setMeisaiListOnSelect = function (value) {
+                this.controls.dgServiceTeikyoShomeishoShokujiList().onSelect = value;
+            };
+
+            PublicProperties.prototype.getMeisaiListOnSelectByDblClick = function () {
+                return this.controls.dgServiceTeikyoShomeishoShokujiList().onSelectByDblClick;
+            };
+
+            PublicProperties.prototype.setMeisaiListOnSelectByDblClick = function (value) {
+                this.controls.dgServiceTeikyoShomeishoShokujiList().onSelectByDblClick = value;
+            };
+            return PublicProperties;
+        })();
+        ServiceTeikyoShomeishoShokujiList.PublicProperties = PublicProperties;
+    })(DBC.ServiceTeikyoShomeishoShokujiList || (DBC.ServiceTeikyoShomeishoShokujiList = {}));
+    var ServiceTeikyoShomeishoShokujiList = DBC.ServiceTeikyoShomeishoShokujiList;
+})(DBC || (DBC = {}));
+</script></div>

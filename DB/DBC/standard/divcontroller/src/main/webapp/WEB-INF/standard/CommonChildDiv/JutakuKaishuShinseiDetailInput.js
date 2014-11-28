@@ -34,7 +34,6 @@ var DBC;
                 editTypes.addEditType("txtKanseiDate_lableLText", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("onClick_btnModifyDetail", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("btnModify_text", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("dg_gridSetting", UZA.EditTypeEnumForPublicProperty.StringType);
                 return editTypes;
             };
 
@@ -68,14 +67,6 @@ var DBC;
 
             PublicProperties.prototype.setbtnModify_text = function (value) {
                 this.controls.btnModifyDetail().text = value;
-            };
-
-            PublicProperties.prototype.getdg_gridSetting = function () {
-                return this.controls.dgJutakuKaishuDetail().gridSetting;
-            };
-
-            PublicProperties.prototype.setdg_gridSetting = function (value) {
-                this.controls.dgJutakuKaishuDetail().gridSetting = value;
             };
             return PublicProperties;
         })();

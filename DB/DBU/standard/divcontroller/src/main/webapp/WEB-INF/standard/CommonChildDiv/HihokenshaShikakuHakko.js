@@ -13,6 +13,9 @@ var DBU;
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
+            ModeController.prototype.PublicProperties = function () {
+                return new HihokenshaShikakuHakko.PublicProperties(this.fieldName);
+            };
             return ModeController;
         })();
         HihokenshaShikakuHakko.ModeController = ModeController;
@@ -25,6 +28,7 @@ var DBU;
     (function (HihokenshaShikakuHakko) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
                 this.controls = new HihokenshaShikakuHakko.Controls(fieldName);
             }
             PublicProperties.prototype.getEditTypes = function () {
