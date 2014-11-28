@@ -5,11 +5,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.kogakuservicehidetail.tplKetteiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tplJudgementResultDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiDetail.tplKetteiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tplKozaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tplShinseishaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResult.IKogakuServicehiJudgementResultDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IPaymentMethodDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IShinseishaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResultDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
@@ -85,7 +87,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public ShinseishaInfoDiv getShinseisha() {
+    public IShinseishaInfoDiv getShinseisha() {
         return this.getTplShinseisha().getShinseisha();
     }
 
@@ -110,12 +112,12 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public PaymentMethodDiv getPaymentMethod() {
+    public IPaymentMethodDiv getPaymentMethod() {
         return this.getTplKoza().getPaymentMethod();
     }
 
     @JsonIgnore
-    public IKogakuServicehiJudgementResultDiv getJudgementResult() {
+    public KogakuServicehiJudgementResultDiv getJudgementResult() {
         return this.getTplJudgementResult().getJudgementResult();
     }
 

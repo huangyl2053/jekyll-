@@ -9,10 +9,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PaymentMethodDiv;
 
 /**
  * このコードはツールによって生成されました。
  */
+
 public interface IJutakuKaishuJizenShinseiTabDiv {
 
     tabJizenShinseiDiv getTabJizenShinsei();
