@@ -15,12 +15,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetail
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetailInput.dgJutakuKaishuDetail_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiInfoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiListDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiContentsPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiShinsaResultPanelDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KozaPayment;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShinseishaInfo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -116,8 +113,7 @@ public class JutakuKaishuShinseiInfoPanel {
     }
 
     /**
-     * 住宅改修費事前申請登録
-     * 申請を追加するボタン押下後、事前申請内容の情報を表示する（明細を追加するボタン押下後、住宅改修明細を表示し、改修内容などは、クリア処理が行う）
+     * 住宅改修費事前申請登録 申請を追加するボタン押下後、事前申請内容の情報を表示する（明細を追加するボタン押下後、住宅改修明細を表示し、改修内容などは、クリア処理が行う）
      *
      * @param panel JutakuKaishuShinseiInfoPanelDiv
      * @param panel1 JutakuKaishuShinseiListDiv
@@ -400,28 +396,26 @@ public class JutakuKaishuShinseiInfoPanel {
         //TO DO  JutakuData.xml Write　③
         //初期値を設定したいものに値を入れる。値をセットしなければ空欄
         //前回
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-                getTxtHiyoTotalMae().setValue(new Decimal(payTotalMae));
-
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-                getTxtHokenTaishoHiyoMae().setValue(new Decimal(hokenSeikyuAmountMae));
-
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-                getTxtHokenKyufuAmountMae().setValue(new Decimal(riyoshaFutanAmountMae));
-
+//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+//                getTxtHiyoTotalMae().setValue(new Decimal(payTotalMae));
+//
+//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+//                getTxtHokenTaishoHiyoMae().setValue(new Decimal(hokenSeikyuAmountMae));
+//
+//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+//                getTxtHokenKyufuAmountMae().setValue(new Decimal(riyoshaFutanAmountMae));
         panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
                 getTxtRiyoshaFutanAmountMae().setValue(new Decimal(limitOverAmountMae));
 
         //今回
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-                getTxtHiyoTotalNow().setValue(new Decimal(payTotalNow));
-
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-                getTxtHokenTaishoHiyoNow().setValue(new Decimal(hokenSeikyuAmountNow));
-
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-                getTxtHokenKyufuAmountNow().setValue(new Decimal(riyoshaFutanAmountNow));
-
+//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+//                getTxtHiyoTotalNow().setValue(new Decimal(payTotalNow));
+//
+//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+//                getTxtHokenTaishoHiyoNow().setValue(new Decimal(hokenSeikyuAmountNow));
+//
+//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+//                getTxtHokenKyufuAmountNow().setValue(new Decimal(riyoshaFutanAmountNow));
         panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
                 getTxtRiyoshaFutanAmountNow().setValue(new Decimal(limitOverAmountNow));
 
@@ -558,12 +552,12 @@ public class JutakuKaishuShinseiInfoPanel {
         String riyoshaFutanAmountNow = ymlData.get(1).get("riyoshaFutanAmountNow").toString();
         String limitOverAmountNow = ymlData.get(1).get("limitOverAmountNow").toString();
 
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary()
-                .getTxtHiyoTotalNow().setValue(new Decimal(payTotalNow));
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary()
-                .getTxtHokenTaishoHiyoNow().setValue(new Decimal(hokenSeikyuAmountNow));
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-                getTxtHokenKyufuAmountNow().setValue(new Decimal(riyoshaFutanAmountNow));
+//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary()
+//                .getTxtHiyoTotalNow().setValue(new Decimal(payTotalNow));
+//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary()
+//                .getTxtHokenTaishoHiyoNow().setValue(new Decimal(hokenSeikyuAmountNow));
+//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+//                getTxtHokenKyufuAmountNow().setValue(new Decimal(riyoshaFutanAmountNow));
         panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
                 getTxtRiyoshaFutanAmountNow().setValue(new Decimal(limitOverAmountNow));
 
@@ -640,28 +634,26 @@ public class JutakuKaishuShinseiInfoPanel {
                 .clearValue();
 
         //前回   clear
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-                getTxtHiyoTotalMae().clearValue();
-
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-                getTxtHokenTaishoHiyoMae().clearValue();
-
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-                getTxtHokenKyufuAmountMae().clearValue();
-
+//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+//                getTxtHiyoTotalMae().clearValue();
+//
+//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+//                getTxtHokenTaishoHiyoMae().clearValue();
+//
+//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+//                getTxtHokenKyufuAmountMae().clearValue();
         panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
                 getTxtRiyoshaFutanAmountMae().clearValue();
 
         //今回 clear
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-                getTxtHiyoTotalNow().clearValue();
-
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-                getTxtHokenTaishoHiyoNow().clearValue();
-
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-                getTxtHokenKyufuAmountNow().clearValue();
-
+//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+//                getTxtHiyoTotalNow().clearValue();
+//
+//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+//                getTxtHokenTaishoHiyoNow().clearValue();
+//
+//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+//                getTxtHokenKyufuAmountNow().clearValue();
         panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
                 getTxtRiyoshaFutanAmountNow().clearValue();
 

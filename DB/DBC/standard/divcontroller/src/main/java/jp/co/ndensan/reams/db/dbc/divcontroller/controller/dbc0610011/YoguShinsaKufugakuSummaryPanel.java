@@ -40,14 +40,14 @@ public class YoguShinsaKufugakuSummaryPanel {
         List<HashMap> targetSource = YamlLoader.DBC.loadAsList(new RString("dbc0610011/YoguShinseiShinsa.yml"));
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
 
-        panel.getYoguShinsaKufugakuSummarySub().getKyufugakuSummary().getTblSeikyuSummary().getTxtHiyoTotalMae().setValue(cg.getAsDecimal("費用額前"));
-        panel.getYoguShinsaKufugakuSummarySub().getKyufugakuSummary().getTblSeikyuSummary().getTxtHokenTaishoHiyoMae().setValue(cg.getAsDecimal("保険対象額前"));
-        panel.getYoguShinsaKufugakuSummarySub().getKyufugakuSummary().getTblSeikyuSummary().getTxtHokenKyufuAmountMae().setValue(cg.getAsDecimal("給付額前"));
+//        panel.getYoguShinsaKufugakuSummarySub().getKyufugakuSummary().getTblSeikyuSummary().getTxtHiyoTotalMae().setValue(cg.getAsDecimal("費用額前"));
+//        panel.getYoguShinsaKufugakuSummarySub().getKyufugakuSummary().getTblSeikyuSummary().getTxtHokenTaishoHiyoMae().setValue(cg.getAsDecimal("保険対象額前"));
+//        panel.getYoguShinsaKufugakuSummarySub().getKyufugakuSummary().getTblSeikyuSummary().getTxtHokenKyufuAmountMae().setValue(cg.getAsDecimal("給付額前"));
         panel.getYoguShinsaKufugakuSummarySub().getKyufugakuSummary().getTblSeikyuSummary().getTxtRiyoshaFutanAmountMae().setValue(cg.getAsDecimal("利用者負担額前"));
 
-        panel.getYoguShinsaKufugakuSummarySub().getKyufugakuSummary().getTblSeikyuSummary().getTxtHiyoTotalNow().setValue(cg.getAsDecimal("費用額後"));
-        panel.getYoguShinsaKufugakuSummarySub().getKyufugakuSummary().getTblSeikyuSummary().getTxtHokenTaishoHiyoNow().setValue(cg.getAsDecimal("保険対象額後"));
-        panel.getYoguShinsaKufugakuSummarySub().getKyufugakuSummary().getTblSeikyuSummary().getTxtHokenKyufuAmountNow().setValue(cg.getAsDecimal("給付額後"));
+//        panel.getYoguShinsaKufugakuSummarySub().getKyufugakuSummary().getTblSeikyuSummary().getTxtHiyoTotalNow().setValue(cg.getAsDecimal("費用額後"));
+//        panel.getYoguShinsaKufugakuSummarySub().getKyufugakuSummary().getTblSeikyuSummary().getTxtHokenTaishoHiyoNow().setValue(cg.getAsDecimal("保険対象額後"));
+//        panel.getYoguShinsaKufugakuSummarySub().getKyufugakuSummary().getTblSeikyuSummary().getTxtHokenKyufuAmountNow().setValue(cg.getAsDecimal("給付額後"));
         panel.getYoguShinsaKufugakuSummarySub().getKyufugakuSummary().getTblSeikyuSummary().getTxtRiyoshaFutanAmountNow().setValue(cg.getAsDecimal("利用者負担額後"));
     }
 }

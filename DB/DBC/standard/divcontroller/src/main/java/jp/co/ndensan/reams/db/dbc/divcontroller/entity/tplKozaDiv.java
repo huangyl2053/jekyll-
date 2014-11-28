@@ -1,15 +1,17 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.PaymentMethodDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IPaymentMethodDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PaymentMethodDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * tplKoza のクラスファイル
- *
+ * tplKoza のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class tplKozaDiv extends TabPanel {
@@ -19,7 +21,6 @@ public class tplKozaDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("PaymentMethod")
     private PaymentMethodDiv PaymentMethod;
 
@@ -30,7 +31,7 @@ public class tplKozaDiv extends TabPanel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("PaymentMethod")
-    public PaymentMethodDiv getPaymentMethod() {
+    public IPaymentMethodDiv getPaymentMethod() {
         return PaymentMethod;
     }
 

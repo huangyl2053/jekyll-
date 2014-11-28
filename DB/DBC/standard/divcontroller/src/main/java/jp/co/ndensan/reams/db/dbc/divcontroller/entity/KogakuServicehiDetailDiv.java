@@ -10,17 +10,19 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tabKogakuServicehiDetailD
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tplJudgementResultDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tplKozaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tplShinseishaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResult.IKogakuServicehiJudgementResultDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShinseishaInfoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.kogakuservicehidetail.tplKetteiJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IPaymentMethodDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IShinseishaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResultDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiDetail.tplKetteiJohoDiv;
 
 /**
  * KogakuServicehiDetail のクラスファイル
  *
  * @author 自動生成
  */
+
 public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiDetailDiv {
     /*
      * [ private の作成 ]
@@ -74,7 +76,7 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
     }
 
     @JsonIgnore
-    public ShinseishaInfoDiv getShinseisha() {
+    public IShinseishaInfoDiv getShinseisha() {
         return this.getTabKogakuServicehiDetail().getTplShinseisha().getShinseisha();
     }
 
@@ -109,7 +111,7 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
     }
 
     @JsonIgnore
-    public PaymentMethodDiv getPaymentMethod() {
+    public IPaymentMethodDiv getPaymentMethod() {
         return this.getTabKogakuServicehiDetail().getTplKoza().getPaymentMethod();
     }
 
@@ -124,12 +126,12 @@ public class KogakuServicehiDetailDiv extends Panel implements IKogakuServicehiD
     }
 
     @JsonIgnore
-    public IKogakuServicehiJudgementResultDiv getJudgementResult() {
+    public KogakuServicehiJudgementResultDiv getJudgementResult() {
         return this.getTabKogakuServicehiDetail().getTplJudgementResult().getJudgementResult();
     }
 
     @JsonIgnore
-    public tplKetteiJohoDiv getTplKetteiJoho() {
+    public jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiDetail.tplKetteiJohoDiv getTplKetteiJoho() {
         return this.getTabKogakuServicehiDetail().getTplKetteiJoho();
     }
 
