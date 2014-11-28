@@ -1,8 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IShoKaishuKirokuKanriDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -12,11 +11,10 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoK
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShoKaishuKirokuKanri のクラスファイル 
- * 
+ * ShoKaishuKirokuKanri のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKanriDiv {
@@ -26,6 +24,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ShoKaishuJokyoList")
     private ShoKaishuJokyoListDiv ShoKaishuJokyoList;
     @JsonProperty("ShoKaishuJokyoShosai")
@@ -49,7 +48,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     }
 
     @JsonProperty("ShoKaishuJokyoShosai")
-    public IShoKaishuJokyoShosaiDiv getShoKaishuJokyoShosai() {
+    public ShoKaishuJokyoShosaiDiv getShoKaishuJokyoShosai() {
         return ShoKaishuJokyoShosai;
     }
 
@@ -60,7 +59,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
 
     @JsonProperty("btnUpdateShoKaishuJokyo")
     public void setBtnUpdateShoKaishuJokyo(Button btnUpdateShoKaishuJokyo) {
-        this.btnUpdateShoKaishuJokyo=btnUpdateShoKaishuJokyo;
+        this.btnUpdateShoKaishuJokyo = btnUpdateShoKaishuJokyo;
     }
 
     @JsonProperty("mode")
@@ -70,7 +69,7 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
 
     @JsonProperty("mode")
     public void setMode(RString mode) {
-        this.mode=mode;
+        this.mode = mode;
     }
 
     @JsonProperty("selectRow")
@@ -80,9 +79,8 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
 
     @JsonProperty("selectRow")
     public void setSelectRow(RString selectRow) {
-        this.selectRow=selectRow;
+        this.selectRow = selectRow;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }
