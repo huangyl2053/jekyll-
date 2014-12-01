@@ -567,7 +567,7 @@ var DBZ;
             };
 
             Controls.prototype.ShoKaishuJokyoShosai = function () {
-                return new UZA.Panel(this.convFiledName("ShoKaishuJokyoShosai"));
+                return new UZA.Panel(this.convFiledNameSelf());
             };
 
             Controls.prototype.txtShoKofuShurui = function () {

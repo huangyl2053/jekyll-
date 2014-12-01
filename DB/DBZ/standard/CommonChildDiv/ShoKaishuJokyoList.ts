@@ -13,6 +13,7 @@ module DBZ
 
             public priorities(): Array {
                 return [
+                    "グリッド表示モード",
                     "一覧パネル高さ"
                 ];
             }
@@ -21,12 +22,57 @@ module DBZ
                 return new UZA.CommonChildDiv(this.fieldName);
             }
 
+            public グリッド表示モード() {
+                return new Modes.グリッド表示モード(this.controls);
+            }
+
             public 一覧パネル高さ() {
                 return new Modes.一覧パネル高さ(this.controls);
             }
         }
 
         export module Modes {
+
+            export class グリッド表示モード {
+                private controls: Controls;
+
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                public shokai(): void {
+                    var gridSetting = this.controls.dgShoKaishuJokyo().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.columns[0].visible = false;
+
+                    this.controls.dgShoKaishuJokyo().gridSetting = gridSetting;
+
+                    this.controls.dgShoKaishuJokyo()._control.afterPropertiesSet();
+                }
+
+                public toroku(): void {
+                    var gridSetting = this.controls.dgShoKaishuJokyo().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.columns[0].visible = true;
+
+                    this.controls.dgShoKaishuJokyo().gridSetting = gridSetting;
+
+                    this.controls.dgShoKaishuJokyo()._control.afterPropertiesSet();
+                }
+
+                public select(): void {
+                    var gridSetting = this.controls.dgShoKaishuJokyo().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.columns[0].visible = false;
+
+                    this.controls.dgShoKaishuJokyo().gridSetting = gridSetting;
+
+                    this.controls.dgShoKaishuJokyo()._control.afterPropertiesSet();
+                }
+            }
 
             export class 一覧パネル高さ {
                 private controls: Controls;

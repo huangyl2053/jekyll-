@@ -281,10 +281,455 @@ module DBZ {
      "filterList": [],
      "activeRowId": -1,
      "gridAction": []
+    },
+    {
+     "fieldName": "HenkoInput",
+     "items": [
+      {
+       "fieldName": "txtHenkoDate",
+       "items": [],
+       "controlType": "TextBoxFlexibleDate",
+       "width": "80px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "txtHenkoDate_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "text": "",
+       "required": false,
+       "placeHolder": "",
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "labelLText": "変更日",
+       "labelRText": "",
+       "labelLWidth": "70px",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "ymdKubun": 2,
+       "displayFormat": 0,
+       "value": "",
+       "decorationClass": ""
+      },
+      {
+       "fieldName": "txtHenkoTodokedeDate",
+       "items": [],
+       "controlType": "TextBoxFlexibleDate",
+       "width": "80px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "txtHenkoTodokedeDate_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "text": "",
+       "required": false,
+       "placeHolder": "",
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "onKeyPress": "",
+       "labelLText": "変更届出日",
+       "labelRText": "",
+       "labelLWidth": "80px",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "ymdKubun": 2,
+       "displayFormat": 0,
+       "value": "",
+       "decorationClass": ""
+      },
+      {
+       "fieldName": "ddlHenkoJiyu",
+       "items": [],
+       "controlType": "DropDownList",
+       "width": "150px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "ddlHenkoJiyu_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "dataSource": [
+        {
+         "key": "key0",
+         "value": "value0"
+        },
+        {
+         "key": "key1",
+         "value": "value1"
+        }
+       ],
+       "onFocus": "",
+       "onBlur": "",
+       "onChange": "",
+       "labelLText": "変更事由",
+       "labelRText": "",
+       "labelLWidth": "70px",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "selectedItem": "",
+       "isBlankLine": true
+      },
+      {
+       "fieldName": "HenkoHokenshaJoho",
+       "items": [
+        {
+         "fieldName": "ddlHenkoShozaiHokensha",
+         "items": [],
+         "controlType": "DropDownList",
+         "width": "150px",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": true,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "ddlHenkoShozaiHokensha_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
+         "dataSource": [
+          {
+           "key": "key0",
+           "value": "value0"
+          },
+          {
+           "key": "key1",
+           "value": "value1"
+          }
+         ],
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
+         "labelLText": "所在保険者",
+         "labelRText": "",
+         "labelLWidth": "80px",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
+         "selectedItem": "",
+         "isBlankLine": true
+        },
+        {
+         "fieldName": "ddlHenkoSochimotoHokensha",
+         "items": [],
+         "controlType": "DropDownList",
+         "width": "150px",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "ddlHenkoSochimotoHokensha_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
+         "dataSource": [
+          {
+           "key": "key0",
+           "value": "value0"
+          },
+          {
+           "key": "key1",
+           "value": "value1"
+          }
+         ],
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
+         "labelLText": "措置元保険者",
+         "labelRText": "",
+         "labelLWidth": "100px",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
+         "selectedItem": "",
+         "isBlankLine": true
+        },
+        {
+         "fieldName": "ddlHenkoKyuHokensha",
+         "items": [],
+         "controlType": "DropDownList",
+         "width": "150px",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "ddlHenkoKyuHokensha_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
+         "dataSource": [
+          {
+           "key": "key0",
+           "value": "value0"
+          },
+          {
+           "key": "key1",
+           "value": "value1"
+          }
+         ],
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
+         "labelLText": "旧保険者",
+         "labelRText": "",
+         "labelLWidth": "70px",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
+         "selectedItem": "",
+         "isBlankLine": true
+        },
+        {
+         "fieldName": "ddlJuminJoho",
+         "items": [],
+         "controlType": "DropDownList",
+         "width": "750px",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": true,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "ddlJuminJoho_core",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
+         "dataSource": [
+          {
+           "key": "key0",
+           "value": "value0"
+          },
+          {
+           "key": "key1",
+           "value": "value1"
+          }
+         ],
+         "onFocus": "",
+         "onBlur": "",
+         "onChange": "",
+         "labelLText": "住民情報",
+         "labelRText": "",
+         "labelLWidth": "80px",
+         "labelRWidth": "S",
+         "labelLAlign": 2,
+         "labelRAlign": 0,
+         "selectedItem": "",
+         "isBlankLine": true
+        }
+       ],
+       "controlType": "Panel",
+       "width": "G2",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": true,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "HenkoHokenshaJoho",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "onLoad": "",
+       "title": "保険者",
+       "marginTop": "Default",
+       "marginBottom": "Default",
+       "isOpen": true,
+       "canOpenAndClose": false,
+       "postParameterPanelNames": [],
+       "requestSettings": [],
+       "hiddenInput": [],
+       "onOpen": "",
+       "onClose": "",
+       "session": {},
+       "eraseBorder": false,
+       "backgroundColor": 0,
+       "widthAuto": true,
+       "panelDisplay": 1,
+       "isGroupBox": false,
+       "readOnly": false,
+       "height": "Auto",
+       "focusPositionID": "labelRTextProperty",
+       "canPost": false
+      },
+      {
+       "fieldName": "btnHenkoKakutei",
+       "items": [],
+       "controlType": "Button",
+       "width": "110px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnHenkoKakutei",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "onClick": "onClick_btnHenkoKakutei",
+       "text": "確定する",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "icon": 0,
+       "heightTextBoxMatches": true
+      },
+      {
+       "fieldName": "btnHenkoTorikeshi",
+       "items": [],
+       "controlType": "Button",
+       "width": "110px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 2,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnHenkoTorikeshi",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "onClick": "onClick_btnHenkoTorikeshi",
+       "text": "取消する",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "icon": 0,
+       "heightTextBoxMatches": true
+      }
+     ],
+     "controlType": "Panel",
+     "width": "870px",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": true,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0px",
+     "marginRight": "0px",
+     "selectControlID": "HenkoInput",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onLoad": "",
+     "title": "資格変更入力",
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "isOpen": true,
+     "canOpenAndClose": false,
+     "postParameterPanelNames": [],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "eraseBorder": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": true,
+     "height": "Auto",
+     "focusPositionID": "restoreLayoutButton",
+     "canPost": false
     }
    ],
    "controlType": "Panel",
-   "width": "G2",
+   "width": "880px",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -399,6 +844,14 @@ module DBZ {
                 return "onSelectByDeleteButton_dgHenko";
             }
 
+            public static onClick_btnHenkoKakutei(): string {
+                return "onClick_btnHenkoKakutei";
+            }
+
+            public static onClick_btnHenkoTorikeshi(): string {
+                return "onClick_btnHenkoTorikeshi";
+            }
+
         }
 
         export class Controls {
@@ -421,7 +874,7 @@ module DBZ {
             }
 
             public ShikakuHenkoRireki(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("ShikakuHenkoRireki"));
+                return new UZA.Panel(this.convFiledNameSelf());
             }
 
             public btnAdd(): UZA.Button {
@@ -430,6 +883,50 @@ module DBZ {
 
             public dgHenko(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgHenko"));
+            }
+
+            public HenkoInput(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("HenkoInput"));
+            }
+
+            public txtHenkoDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtHenkoDate"));
+            }
+
+            public txtHenkoTodokedeDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtHenkoTodokedeDate"));
+            }
+
+            public ddlHenkoJiyu(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlHenkoJiyu"));
+            }
+
+            public HenkoHokenshaJoho(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("HenkoInput_HenkoHokenshaJoho"));
+            }
+
+            public ddlHenkoShozaiHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlHenkoShozaiHokensha"));
+            }
+
+            public ddlHenkoSochimotoHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlHenkoSochimotoHokensha"));
+            }
+
+            public ddlHenkoKyuHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlHenkoKyuHokensha"));
+            }
+
+            public ddlJuminJoho(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlJuminJoho"));
+            }
+
+            public btnHenkoKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnHenkoKakutei"));
+            }
+
+            public btnHenkoTorikeshi(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnHenkoTorikeshi"));
             }
 
         }

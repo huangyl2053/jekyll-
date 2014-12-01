@@ -30,7 +30,7 @@ var DBZ;
                             "fieldName": "dgShoKaishuJokyo",
                             "items": [],
                             "controlType": "DataGrid",
-                            "width": "910px",
+                            "width": "960px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -68,6 +68,20 @@ var DBZ;
                                     "headerHeight": 0
                                 },
                                 "columns": [
+                                    {
+                                        "columnName": "状態",
+                                        "dataName": "state",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 50,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
                                     {
                                         "columnName": "交付証種類",
                                         "dataName": "kofushoShurui",
@@ -234,9 +248,9 @@ var DBZ;
                                 ]
                             },
                             "onSort": "",
-                            "onSelect": "",
+                            "onSelect": "onSelect_dgShoKaishuJokyo",
                             "onSelectByDblClick": "",
-                            "onSelectBySelectButton": "",
+                            "onSelectBySelectButton": "onSelectBySelectButton_dgShoKaishuJokyo",
                             "onSelectByModifyButton": "",
                             "onSelectByDeleteButton": "",
                             "onAfterRequest": "",
@@ -256,7 +270,7 @@ var DBZ;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "945px",
+                    "width": "965px",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -335,7 +349,14 @@ var DBZ;
             "firstFocusFieldName": "",
             "lastFocusFieldName": "",
             "modes": [],
-            "publicEvents": [],
+            "publicEvents": [
+                {
+                    "eventName": "onSelect_dgShoKaishuJokyo"
+                },
+                {
+                    "eventName": "onSelectBySelectButton_dgShoKaishuJokyo"
+                }
+            ],
             "publicEventsAlias": []
         };
         return ShoKaishuJokyoList_Design;
@@ -346,6 +367,13 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onSelect_dgShoKaishuJokyo = function () {
+                return "onSelect_dgShoKaishuJokyo";
+            };
+
+            Events.onSelectBySelectButton_dgShoKaishuJokyo = function () {
+                return "onSelectBySelectButton_dgShoKaishuJokyo";
+            };
             return Events;
         })();
         ShoKaishuJokyoList.Events = Events;
@@ -367,7 +395,7 @@ var DBZ;
             };
 
             Controls.prototype.ShoKaishuJokyoList = function () {
-                return new UZA.Panel(this.convFiledName("ShoKaishuJokyoList"));
+                return new UZA.Panel(this.convFiledNameSelf());
             };
 
             Controls.prototype.dgShoKaishuJokyo = function () {

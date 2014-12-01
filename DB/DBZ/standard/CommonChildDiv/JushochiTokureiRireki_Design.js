@@ -523,7 +523,7 @@ var DBZ;
             };
 
             Controls.prototype.JushochiTokureiRireki = function () {
-                return new UZA.Panel(this.convFiledName("JushochiTokureiRireki"));
+                return new UZA.Panel(this.convFiledNameSelf());
             };
 
             Controls.prototype.btnAdd = function () {
