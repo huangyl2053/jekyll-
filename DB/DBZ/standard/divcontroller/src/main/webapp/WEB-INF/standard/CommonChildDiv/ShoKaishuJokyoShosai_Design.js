@@ -4,6 +4,17 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onBlur_txtKaishuDate = function () {
+                return "onBlur_txtKaishuDate";
+            };
+
+            Events.onChange_ddlKaishuJiyu = function () {
+                return "onChange_ddlKaishuJiyu";
+            };
+
+            Events.onBlur_txtKaishuRiyu = function () {
+                return "onBlur_txtKaishuRiyu";
+            };
             return Events;
         })();
         ShoKaishuJokyoShosai.Events = Events;

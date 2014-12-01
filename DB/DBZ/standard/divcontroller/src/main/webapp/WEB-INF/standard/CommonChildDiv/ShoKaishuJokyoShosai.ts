@@ -26,6 +26,10 @@ module DBZ
                 return new UZA.CommonChildDiv(this.fieldName);
             }
 
+            public PublicProperties() {
+                return new PublicProperties(this.fieldName);
+            }
+
             public 表示方法() {
                 return new Modes.表示方法(this.controls);
             }
@@ -57,18 +61,38 @@ module DBZ
 module DBZ {
 
     export module ShoKaishuJokyoShosai {
-
+        
         export class PublicProperties {
             private controls: Controls;
+            private fieldName: string;
 
             constructor(fieldName: string) {
+                this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
             }
 
             public getEditTypes(): UZA.EditTypeForPublicProperty {
                 var editTypes = new UZA.EditTypeForPublicProperty();
 
+                editTypes.addEditType("ShoKaishuJokyoShosai_panelDisplay", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("ShoKaishuJokyoShosai_canOpenAndClose", UZA.EditTypeEnumForPublicProperty.StringType);
                 return editTypes;
+            }
+
+            public getShoKaishuJokyoShosai_panelDisplay() {
+                return this.controls.ShoKaishuJokyoShosai().panelDisplay;
+            }
+
+            public setShoKaishuJokyoShosai_panelDisplay(value) {
+                this.controls.ShoKaishuJokyoShosai().panelDisplay = value;
+            }
+
+            public getShoKaishuJokyoShosai_canOpenAndClose() {
+                return this.controls.ShoKaishuJokyoShosai().canOpenAndClose;
+            }
+
+            public setShoKaishuJokyoShosai_canOpenAndClose(value) {
+                this.controls.ShoKaishuJokyoShosai().canOpenAndClose = value;
             }
 
         }

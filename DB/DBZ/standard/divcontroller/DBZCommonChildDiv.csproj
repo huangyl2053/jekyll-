@@ -72,6 +72,51 @@
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShinseishaInfo.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\PaymentMethod.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KogakuServicehiJudgementResult.ts" />
+
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\CompleteProcess.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\HihokenshaFinder.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\HihokenshaInputGuide.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\HihokenshaShikakuHakko.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\HokenshaInputGuide.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\HokenshaJoho.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\JigyoshaInputGuide.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\JukyuShikakuShomeishoHakko.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KagoMoshitate.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KaigoAtenaInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KaigoChohyoShutsuryokujun.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KaigoFukaKihon.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KaigoKanryoMessage.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KaigoRenrakusakiInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KaigoSaikinShorishaRireki.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KaigoShikakuKihon.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KaigoTeikeibun.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KogakuServicehiDetail.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KoshinKakuninDialog.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KozaPayment.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\NenReiTotatsuSrchConInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\OtherTokureiShisetsuInputGuide.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\PrintContentsSetting.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SearchResultOfHihokensha.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SeikatsuhogoDetail.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SeikatsuhogoRireki.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ServiceInputGuide.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SetaiShotokuIchiran.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShichosonSelector.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiFukaInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiFukushiYoguKonyuhiInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiGenmenGengakuInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiIryoHokenKanyuInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiJutakuKaishuhiInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiKagoMoushitateInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiKogakuKaigoServicehiInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiKyotakuServiceKeikakuInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiKyufuSeigenInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiNinteiInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiSaishinsaMoushitateInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiShisetsuNyushoInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\TainoInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\TekiyoJogaiShisetsuInputGuide.ts" />
+
   </ItemGroup>
   <ItemGroup/>
   <Target Name="AfterBuild">
