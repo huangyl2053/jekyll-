@@ -27,6 +27,10 @@ var DBZ;
             Controls.prototype.KaigoChohyoShutsuryokujun = function () {
                 return new UZA.Panel(this.convFiledNameSelf());
             };
+
+            Controls.prototype.kaigoChohyoShutsuryokujun = function () {
+                return new URZ.ChohyoShutsuryokujun.ModeController(this.convFiledName("kaigoChohyoShutsuryokujun"));
+            };
             return Controls;
         })();
         KaigoChohyoShutsuryokujun.Controls = Controls;

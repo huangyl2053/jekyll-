@@ -1,10 +1,10 @@
-/// <reference path="HihokenshaFinder_Design.ts" />
+/// <reference path="HihokenshaShikakuHakko_Design.ts" />
 
 // 共有子Divモード記述TypeScriptソースです。
 
 module DBZ
 {
-    export module HihokenshaFinder {
+    export module HihokenshaShikakuHakko {
 
         export class ModeController{
             private controls: Controls;
@@ -14,7 +14,7 @@ module DBZ
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
             }
- 
+
             public priorities(): Array<string> {
                 return [];
             }
@@ -35,7 +35,7 @@ module DBZ
 
 module DBZ {
 
-    export module HihokenshaFinder {
+    export module HihokenshaShikakuHakko {
 
         export class PublicProperties {
             private controls: Controls;
@@ -47,79 +47,43 @@ module DBZ {
             public getEditTypes(): UZA.EditTypeForPublicProperty {
                 var editTypes = new UZA.EditTypeForPublicProperty();
 
-                editTypes.addEditType("onClick_BtnToSearch", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("displayNone_txtTsuchishoNo", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("displayNone_ddlFukaNendo", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("displayNone_SearchCriteriaDetail", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("canOpenAndClose_HihokenshaFinder", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("displayNone_saikinShorisha", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("displayNone_ddlHokensha", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("displayNone_chkMinashiNigo", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("txtYukoKigen_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("radInjiIchi_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("onBlur_txtKofuDate", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("onChange_ddlKofuJiyu", UZA.EditTypeEnumForPublicProperty.StringType);
                 return editTypes;
             }
 
-            public getonClick_BtnToSearch() {
-                return this.controls.btnToSearch().onClick;
+            public gettxtYukoKigen_displayNone() {
+                return this.controls.txtYukoKigen().displayNone;
             }
 
-            public setonClick_BtnToSearch(value) {
-                this.controls.btnToSearch().onClick = value;
+            public settxtYukoKigen_displayNone(value) {
+                this.controls.txtYukoKigen().displayNone = value;
             }
 
-            public getdisplayNone_txtTsuchishoNo() {
-                return this.controls.txtTuchishoNo().displayNone;
+            public getradInjiIchi_displayNone() {
+                return this.controls.radInjiIchi().displayNone;
             }
 
-            public setdisplayNone_txtTsuchishoNo(value) {
-                this.controls.txtTuchishoNo().displayNone = value;
+            public setradInjiIchi_displayNone(value) {
+                this.controls.radInjiIchi().displayNone = value;
             }
 
-            public getdisplayNone_ddlFukaNendo() {
-                return this.controls.ddlFukaNendo().displayNone;
+            public getonBlur_txtKofuDate() {
+                return this.controls.txtKofuDate().onBlur;
             }
 
-            public setdisplayNone_ddlFukaNendo(value) {
-                this.controls.ddlFukaNendo().displayNone = value;
+            public setonBlur_txtKofuDate(value) {
+                this.controls.txtKofuDate().onBlur = value;
             }
 
-            public getdisplayNone_SearchCriteriaDetail() {
-                return this.controls.SearchCriteriaDetail().displayNone;
+            public getonChange_ddlKofuJiyu() {
+                return this.controls.ddlKofuJiyu().onChange;
             }
 
-            public setdisplayNone_SearchCriteriaDetail(value) {
-                this.controls.SearchCriteriaDetail().displayNone = value;
-            }
-
-            public getcanOpenAndClose_HihokenshaFinder() {
-                return this.controls.HihokenshaFinder().canOpenAndClose;
-            }
-
-            public setcanOpenAndClose_HihokenshaFinder(value) {
-                this.controls.HihokenshaFinder().canOpenAndClose = value;
-            }
-
-            //public getdisplayNone_saikinShorisha() {
-            //    return this.controls.saikinShorisha().Properties().displayNone;
-            //}
-
-            //public setdisplayNone_saikinShorisha(value) {
-            //    this.controls.saikinShorisha().Properties().displayNone = value;
-            //}
-
-            public getdisplayNone_ddlHokensha() {
-                return this.controls.ddlHokensha().displayNone;
-            }
-
-            public setdisplayNone_ddlHokensha(value) {
-                this.controls.ddlHokensha().displayNone = value;
-            }
-
-            public getdisplayNone_chkMinashiNigo() {
-                return this.controls.chkMinashiNigo().displayNone;
-            }
-
-            public setdisplayNone_chkMinashiNigo(value) {
-                this.controls.chkMinashiNigo().displayNone = value;
+            public setonChange_ddlKofuJiyu(value) {
+                this.controls.ddlKofuJiyu().onChange = value;
             }
 
         }

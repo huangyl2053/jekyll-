@@ -23,7 +23,7 @@ module DBZ
                 return new PublicProperties(this.fieldName);
             }
 
-            public priorities(): Array {
+            public priorities(): Array<string> {
                 return [
                     "DisplayType",
                     "BtnDainoninDisplay",
@@ -209,7 +209,6 @@ module DBZ {
 
                 return editTypes;
             }
-
         }
     }
 }
