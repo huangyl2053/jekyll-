@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IHihokenshaFinderDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ButtonsForHihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IKaigoSaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoSaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SearchCriteriaOfHihokenshaDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaFinderDiv;
