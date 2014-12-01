@@ -1,3 +1,42 @@
+﻿var DBZ;
+(function (DBZ) {
+    (function (KaigoAtenaInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KaigoAtenaInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KaigoAtenaInfo";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KaigoAtenaInfo.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.KaigoAtenaInfo.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KaigoAtenaInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.atenaInfo = function () {
+                return new URA.AtenaShokaiSimple.ModeController(this.convFiledName("atenaInfo"));
+            };
+            return Controls;
+        })();
+        KaigoAtenaInfo.Controls = Controls;
+    })(DBZ.KaigoAtenaInfo || (DBZ.KaigoAtenaInfo = {}));
+    var KaigoAtenaInfo = DBZ.KaigoAtenaInfo;
+})(DBZ || (DBZ = {}));
 var DBZ;
 (function (DBZ) {
     (function (KaigoAtenaInfo) {
@@ -6,29 +45,15 @@ var DBZ;
                 this.fieldName = fieldName;
                 this.controls = new KaigoAtenaInfo.Controls(fieldName);
             }
-            ModeController.prototype.priorities = function () {
-                return [];
-            };
-
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
-            return ModeController;
-        })();
-        KaigoAtenaInfo.ModeController = ModeController;
-    })(DBZ.KaigoAtenaInfo || (DBZ.KaigoAtenaInfo = {}));
-    var KaigoAtenaInfo = DBZ.KaigoAtenaInfo;
-})(DBZ || (DBZ = {}));
 
-var DBZ;
-(function (DBZ) {
-    (function (KaigoAtenaInfo) {
-        var PublicProperties = (function () {
-            function PublicProperties(fieldName) {
-                this.fieldName = fieldName;
-                this.controls = new KaigoAtenaInfo.Controls(fieldName);
-            }
-            PublicProperties.prototype.priorities = function () {
+            ModeController.prototype.PublicProperties = function () {
+                return new KaigoAtenaInfo.PublicProperties(this.fieldName);
+            };
+
+            ModeController.prototype.priorities = function () {
                 return [
                     "DisplayType",
                     "BtnDainoninDisplay",
@@ -40,36 +65,36 @@ var DBZ;
                 ];
             };
 
-            PublicProperties.prototype.DisplayType = function () {
+            ModeController.prototype.DisplayType = function () {
                 return new Modes.DisplayType(this.controls);
             };
 
-            PublicProperties.prototype.BtnDainoninDisplay = function () {
+            ModeController.prototype.BtnDainoninDisplay = function () {
                 return new Modes.BtnDainoninDisplay(this.controls);
             };
 
-            PublicProperties.prototype.BtnSofusakiDisplay = function () {
+            ModeController.prototype.BtnSofusakiDisplay = function () {
                 return new Modes.BtnSofusakiDisplay(this.controls);
             };
 
-            PublicProperties.prototype.BtnKozaDisplay = function () {
+            ModeController.prototype.BtnKozaDisplay = function () {
                 return new Modes.BtnKozaDisplay(this.controls);
             };
 
-            PublicProperties.prototype.BtnSetaiDisplay = function () {
+            ModeController.prototype.BtnSetaiDisplay = function () {
                 return new Modes.BtnSetaiDisplay(this.controls);
             };
 
-            PublicProperties.prototype.BtnEltaxDisplay = function () {
+            ModeController.prototype.BtnEltaxDisplay = function () {
                 return new Modes.BtnEltaxDisplay(this.controls);
             };
 
-            PublicProperties.prototype.BtnAtesakiDisplay = function () {
+            ModeController.prototype.BtnAtesakiDisplay = function () {
                 return new Modes.BtnAtesakiDisplay(this.controls);
             };
-            return PublicProperties;
+            return ModeController;
         })();
-        KaigoAtenaInfo.PublicProperties = PublicProperties;
+        KaigoAtenaInfo.ModeController = ModeController;
 
         (function (Modes) {
             var DisplayType = (function () {
@@ -176,6 +201,26 @@ var DBZ;
             Modes.BtnAtesakiDisplay = BtnAtesakiDisplay;
         })(KaigoAtenaInfo.Modes || (KaigoAtenaInfo.Modes = {}));
         var Modes = KaigoAtenaInfo.Modes;
+    })(DBZ.KaigoAtenaInfo || (DBZ.KaigoAtenaInfo = {}));
+    var KaigoAtenaInfo = DBZ.KaigoAtenaInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KaigoAtenaInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KaigoAtenaInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        KaigoAtenaInfo.PublicProperties = PublicProperties;
     })(DBZ.KaigoAtenaInfo || (DBZ.KaigoAtenaInfo = {}));
     var KaigoAtenaInfo = DBZ.KaigoAtenaInfo;
 })(DBZ || (DBZ = {}));

@@ -12,7 +12,15 @@ module DBZ
                 this.controls = new Controls(fieldName);
             }
 
-            public priorities(): Array {
+            public Properties() {
+                return new UZA.CommonChildDiv(this.fieldName);
+            }
+
+            public PublicProperties() {
+                return new PublicProperties(this.fieldName);
+            }
+
+            public priorities(): Array<string> {
                 return [
                     "DisplayType",
                     "BtnDisplayMode",

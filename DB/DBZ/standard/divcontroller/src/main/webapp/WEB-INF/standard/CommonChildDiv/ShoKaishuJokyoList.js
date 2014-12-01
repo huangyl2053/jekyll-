@@ -1,6 +1,45 @@
 ﻿var DBZ;
 (function (DBZ) {
     (function (ShoKaishuJokyoList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ShoKaishuJokyoList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ShoKaishuJokyoList";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.ShoKaishuJokyoList.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.ShoKaishuJokyoList.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ShoKaishuJokyoList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgShoKaishuJokyo = function () {
+                return new UZA.DataGrid(this.convFiledName("dgShoKaishuJokyo"));
+            };
+            return Controls;
+        })();
+        ShoKaishuJokyoList.Controls = Controls;
+    })(DBZ.ShoKaishuJokyoList || (DBZ.ShoKaishuJokyoList = {}));
+    var ShoKaishuJokyoList = DBZ.ShoKaishuJokyoList;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (ShoKaishuJokyoList) {
         var ModeController = (function () {
             function ModeController(fieldName) {
                 this.fieldName = fieldName;
@@ -14,6 +53,10 @@
 
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new ShoKaishuJokyoList.PublicProperties(this.fieldName);
             };
 
             ModeController.prototype.一覧パネル高さ = function () {

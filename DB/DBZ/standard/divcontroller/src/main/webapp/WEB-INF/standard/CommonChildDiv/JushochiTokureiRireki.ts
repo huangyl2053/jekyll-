@@ -9,6 +9,23 @@ module DBZ {
                 this.controls = new Controls(fieldName);
             }
 
+            public Properties() {
+                return new UZA.CommonChildDiv(this.fieldName);
+            }
+
+            public PublicProperties() {
+                return new PublicProperties(this.fieldName);
+            }
+ 
+            public priorities(): Array<string> {
+                return [
+                	"TashichosonDisplayMode",
+                	"TashichosonTeiseiDisplayMode",
+                	"TekiyoJogaiDisplayMode",
+                	"TekiyoJogaiTeiseiDisplayMode"
+                ];
+            }
+
             public TashichosonDisplayMode() {
                 return new Modes.TashichosonDisplayMode(this.controls);
             }

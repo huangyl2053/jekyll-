@@ -22,6 +22,10 @@ module DBZ
             public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
             }
+
+            public PublicProperties() {
+                return new PublicProperties(this.fieldName);
+            }
         }
 
     }
@@ -35,8 +39,10 @@ module DBZ {
 
         export class PublicProperties {
             private controls: Controls;
+            private fieldName: string;
 
             constructor(fieldName: string) {
+                this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
             }
 
@@ -46,17 +52,17 @@ module DBZ {
                 editTypes.addEditType("ChohyoShutsuryokujun_width", UZA.EditTypeEnumForPublicProperty.StringType);
                 return editTypes;
             }
-
-            /*
-            //PublicPropertyへの参照が見えないため設定不可
+            
+            //TODO n8178 城間篤人 PublicPropertyへの参照が見えないため、入れ子になっているUR共有子Divのプロパティを取得できない
             public getChohyoShutsuryokujun_width() {
-                return this.controls.kaigoChohyoShutsuryokujun().ChohyoShutsuryokujun_width;
+                //return this.controls.kaigoChohyoShutsuryokujun().ChohyoShutsuryokujun_width;
+                return this.controls.convFiledName;
             }
 
             public setChohyoShutsuryokujun_width(value) {
-                this.controls.kaigoChohyoShutsuryokujun().ChohyoShutsuryokujun_width = value;
+                //return this.controls.kaigoChohyoShutsuryokujun().ChohyoShutsuryokujun_width=value;
+                return this.controls.convFiledName = value;
             }
-            */
 
         }
     }

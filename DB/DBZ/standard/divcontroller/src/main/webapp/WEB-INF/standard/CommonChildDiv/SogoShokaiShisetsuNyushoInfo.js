@@ -13,6 +13,10 @@ var DBZ;
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new SogoShokaiShisetsuNyushoInfo.PublicProperties(this.fieldName);
+            };
             return ModeController;
         })();
         SogoShokaiShisetsuNyushoInfo.ModeController = ModeController;

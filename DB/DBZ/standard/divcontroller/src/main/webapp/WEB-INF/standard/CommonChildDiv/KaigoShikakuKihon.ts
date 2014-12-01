@@ -9,9 +9,27 @@ module DBZ {
 
         export class ModeController {
             private controls: Controls;
+            private fieldName: string;
 
             constructor(fieldName: string) {
+                this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
+            }
+
+            public Properties() {
+                return new UZA.CommonChildDiv(this.fieldName);
+            }
+
+            public PublicProperties() {
+                return new PublicProperties(this.fieldName);
+            }
+ 
+            public priorities(): Array<string> {
+                return [
+                	"RenrakusakiAriMode",
+                	"HihokenrirekiNashiMode",
+                	"NinteirirekiNashiMode"
+                ];
             }
 
             public RenrakusakiAriMode() {

@@ -14,16 +14,20 @@ module DBZ {
                 this.controls = new Controls(fieldName);
             }
 
-            public priorities(): Array {
+            public Properties() {
+                return new UZA.CommonChildDiv(this.fieldName);
+            }
+
+            public PublicProperties() {
+                return new PublicProperties(this.fieldName);
+            }
+
+            public priorities(): Array<string> {
                 return [
                     "台帳種別",
                     "施設種類",
                     "入力補助"
                 ];
-            }
-
-            public Properties() {
-                return new UZA.CommonChildDiv(this.fieldName);
             }
 
             public 台帳種別() {

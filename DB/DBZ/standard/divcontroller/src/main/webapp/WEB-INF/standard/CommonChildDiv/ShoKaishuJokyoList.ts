@@ -11,7 +11,7 @@ module DBZ
                 this.controls = new Controls(fieldName);
             }
 
-            public priorities(): Array {
+            public priorities(): Array<string> {
                 return [
                     "一覧パネル高さ"
                 ];
@@ -19,6 +19,10 @@ module DBZ
 
             public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
+            }
+
+            public PublicProperties() {
+                return new PublicProperties(this.fieldName);
             }
 
             public 一覧パネル高さ() {

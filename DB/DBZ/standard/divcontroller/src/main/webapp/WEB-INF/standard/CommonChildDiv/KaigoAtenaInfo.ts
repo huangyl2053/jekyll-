@@ -6,7 +6,7 @@ module DBZ
 {
     export module KaigoAtenaInfo {
 
-        export class ModeController{
+        export class ModeController {
             private controls: Controls;
             private fieldName: string;
 
@@ -14,32 +14,13 @@ module DBZ
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
             }
- 
-            public priorities(): Array<string> {
-                return [];
-            }
-
+            
             public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
             }
-        }
 
-    }
-}
-
-
-
-module DBZ {
-
-    export module KaigoAtenaInfo {
-
-        export class PublicProperties {
-            private controls: Controls;
-            private fieldName: string;
-
-            constructor(fieldName: string) {
-                this.fieldName = fieldName;
-                this.controls = new Controls(fieldName);
+            public PublicProperties() {
+                return new PublicProperties(this.fieldName);
             }
 
             public priorities(): Array {
@@ -209,3 +190,30 @@ module DBZ {
         }
     }
 }
+
+module DBZ {
+
+    export module KaigoAtenaInfo {
+
+        export class PublicProperties {
+            private controls: Controls;
+            private fieldName: string;
+
+            constructor(fieldName: string) {
+                this.fieldName = fieldName;
+                this.controls = new Controls(fieldName);
+            }
+
+            public getEditTypes(): UZA.EditTypeForPublicProperty {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            }
+
+        }
+    }
+}
+
+
+
+
