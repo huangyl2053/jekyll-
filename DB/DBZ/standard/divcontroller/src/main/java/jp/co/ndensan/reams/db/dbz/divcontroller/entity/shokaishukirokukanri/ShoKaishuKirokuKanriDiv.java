@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyoshosai.ShoK
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
-
 import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbz.model.shokofukaishu.ShoKofuKaishuModel;
 import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;

@@ -112,7 +112,7 @@ public class ShisetsuNyutaishoIdo {
     }
 
     private dgShisetsuNyutaishoRireki_Row createIdoRirekiRow(HashMap gaitosha) {
-        dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row(new TextBoxFlexibleDate(),
+        dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(),
                 new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
         row.getNyushoDate().setValue(new FlexibleDate(gaitosha.get("入所日").toString()));
 //        if (gaitosha.get("退所日") != null) {
