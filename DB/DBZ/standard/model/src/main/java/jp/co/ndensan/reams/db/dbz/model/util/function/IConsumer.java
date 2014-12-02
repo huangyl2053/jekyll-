@@ -14,9 +14,9 @@ package jp.co.ndensan.reams.db.dbz.model.util.function;
 public interface IConsumer<T> {
 
     /**
-     * 指定の引数で処理を実行します。
+     * 指定の値で処理を実行します。
      *
-     * @param t 入力
+     * @param t 入力値
      */
     void accept(T t);
 }
