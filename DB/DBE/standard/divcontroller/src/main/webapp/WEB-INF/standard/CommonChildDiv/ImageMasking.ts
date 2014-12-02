@@ -1,6 +1,9 @@
-/// <reference path='ImageMasking_Design.ts' />
+/// <reference path='./ImageMasking_Design.ts' />
 /// <reference path='../d.ts/UzViewControls.d.ts' />
 /// <reference path='../d.ts/jquery.d.ts' />
+
+/*
+//TODO n8178 城間篤人 元々あったスクリプトだが、not exist on value of type 'ImageMasking'.とのエラーが保存時に発生するため一時的にコメントアウト。
 module DBE {
     export module ImageMasking {
         export class ImageMasking extends ImageMasking_Design {
@@ -13,7 +16,31 @@ module DBE {
         }
     }
 }
+*/
 
+module DBE {
+    export module ImageMasking {
+
+        export class ModeController {
+            private controls: Controls;
+            private fieldName: string;
+
+            constructor(fieldName: string) {
+                this.fieldName = fieldName;
+                this.controls = new Controls(fieldName);
+            }
+            
+            public priorities(): Array<string> {
+                return [];
+            }
+
+            public Properties() {
+                return new UZA.CommonChildDiv(this.fieldName);
+            }
+        }
+
+    }
+}
 
 
 module DBE {
