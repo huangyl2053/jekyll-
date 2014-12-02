@@ -1,24 +1,18 @@
-package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0130002;
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.dbb0130002;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
- * コードが再生成されるときに損失したりします。
- * Thu Nov 27 20:32:52 JST 2014 
+ * このコードはツールによって生成されました。 このファイルへの変更は、以下の状況下で不正な動作の原因になったり、 コードが再生成されるときに損失したりします。 Thu Nov 27 20:32:52 JST 2014
  */
-
-
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
-
 /**
- * dgHeijunkaKakutei_Row のクラスファイル 
- * 
+ * dgHeijunkaKakutei_Row のクラスファイル
+ *
  * @author 自動生成
  */
-
 public class dgHeijunkaKakutei_Row extends DataRow {
 
     private RString txtHokenryoDankai;
