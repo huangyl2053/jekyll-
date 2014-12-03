@@ -12,9 +12,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 /**
  * 施設情報を入力する共有子Divのコントローラです。<br />
  *
- * 【重要】この共有子Divを使用する親Divは、必ず以下の処理を行ってください。<br />
- * 1 UIデザイナ画面のmodes設定で「利用機能」のモードを設定する。<br />
- * 2 親Divでこの共有子Divのinitializeメソッドを実行する。
+ * 【重要】この共有子Divを使用する親Divは、必ずUIデザイナ画面のmodes設定で「利用機能」のモードを設定して下さい。
  *
  * @author n8178 城間篤人
  * @author N8211 田辺 紘一

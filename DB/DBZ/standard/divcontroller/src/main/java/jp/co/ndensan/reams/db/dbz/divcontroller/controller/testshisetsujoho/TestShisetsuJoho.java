@@ -22,7 +22,7 @@ public class TestShisetsuJoho {
      * @param div テスト施設情報Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnSetDaicho(TestShisetsuJohoDiv div) {
+    public ResponseData<TestShisetsuJohoDiv> onClick_btnSetDaicho(TestShisetsuJohoDiv div) {
         RString key = div.getRadSetDaicho().getSelectedKey();
         div.getCcdShisetsuJoho().set台帳種別(key);
 
@@ -35,7 +35,7 @@ public class TestShisetsuJoho {
      * @param div テスト施設情報Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnSetShisetsu(TestShisetsuJohoDiv div) {
+    public ResponseData<TestShisetsuJohoDiv> onClick_btnSetShisetsu(TestShisetsuJohoDiv div) {
         RString key = div.getRadSetShisetsu().getSelectedKey();
         div.getCcdShisetsuJoho().set施設種類(key);
 
@@ -48,7 +48,7 @@ public class TestShisetsuJoho {
      * @param div テスト施設情報Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnSetCode(TestShisetsuJohoDiv div) {
+    public ResponseData<TestShisetsuJohoDiv> onClick_btnSetCode(TestShisetsuJohoDiv div) {
         RString code = div.getTxtSetCode().getValue();
         div.getCcdShisetsuJoho().set入所施設コード(code);
 
@@ -61,7 +61,7 @@ public class TestShisetsuJoho {
      * @param div テスト施設情報Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnSetMeisho(TestShisetsuJohoDiv div) {
+    public ResponseData<TestShisetsuJohoDiv> onClick_btnSetMeisho(TestShisetsuJohoDiv div) {
         RString meisho = div.getTxtSetMeisho().getValue();
         div.getCcdShisetsuJoho().set施設名称(meisho);
 
@@ -74,7 +74,7 @@ public class TestShisetsuJoho {
      * @param div テスト施設情報Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnGetDaicho(TestShisetsuJohoDiv div) {
+    public ResponseData<TestShisetsuJohoDiv> onClick_btnGetDaicho(TestShisetsuJohoDiv div) {
         RString result = div.getCcdShisetsuJoho().get台帳種別();
         div.getTxtDaicho().setValue(result);
 
@@ -87,7 +87,7 @@ public class TestShisetsuJoho {
      * @param div テスト施設情報Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnGetDaichoKey(TestShisetsuJohoDiv div) {
+    public ResponseData<TestShisetsuJohoDiv> onClick_btnGetDaichoKey(TestShisetsuJohoDiv div) {
         RString result = div.getCcdShisetsuJoho().get台帳種別キー();
         div.getTxtDaichoKey().setValue(result);
 
@@ -100,7 +100,7 @@ public class TestShisetsuJoho {
      * @param div テスト施設情報Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnGetShisetsu(TestShisetsuJohoDiv div) {
+    public ResponseData<TestShisetsuJohoDiv> onClick_btnGetShisetsu(TestShisetsuJohoDiv div) {
         RString result = div.getCcdShisetsuJoho().get施設種類();
         div.getTxtShisetsu().setValue(result);
 
@@ -113,7 +113,7 @@ public class TestShisetsuJoho {
      * @param div テスト施設情報Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnGetShisetsuKey(TestShisetsuJohoDiv div) {
+    public ResponseData<TestShisetsuJohoDiv> onClick_btnGetShisetsuKey(TestShisetsuJohoDiv div) {
         RString result = div.getCcdShisetsuJoho().get施設種類キー();
         div.getTxtShisetsuKey().setValue(result);
 
@@ -126,7 +126,7 @@ public class TestShisetsuJoho {
      * @param div テスト施設情報Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnGetCode(TestShisetsuJohoDiv div) {
+    public ResponseData<TestShisetsuJohoDiv> onClick_btnGetCode(TestShisetsuJohoDiv div) {
         RString result = div.getCcdShisetsuJoho().get入所施設コード();
         div.getTxtCode().setValue(result);
 
@@ -139,7 +139,7 @@ public class TestShisetsuJoho {
      * @param div テスト施設情報Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnGetMeisho(TestShisetsuJohoDiv div) {
+    public ResponseData<TestShisetsuJohoDiv> onClick_btnGetMeisho(TestShisetsuJohoDiv div) {
         RString result = div.getCcdShisetsuJoho().get施設名称();
         div.getTxtMeisho().setValue(result);
 
@@ -152,7 +152,7 @@ public class TestShisetsuJoho {
      * @param div テスト施設情報Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnInitialize(TestShisetsuJohoDiv div) {
+    public ResponseData<TestShisetsuJohoDiv> onClick_btnInitialize(TestShisetsuJohoDiv div) {
         div.getCcdShisetsuJoho().initialize();
 
         return createResponse(div);
@@ -164,7 +164,7 @@ public class TestShisetsuJoho {
      * @param div テスト施設情報Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnClear(TestShisetsuJohoDiv div) {
+    public ResponseData<TestShisetsuJohoDiv> onClick_btnClear(TestShisetsuJohoDiv div) {
         div.getCcdShisetsuJoho().clear();
 
         return createResponse(div);
@@ -176,7 +176,7 @@ public class TestShisetsuJoho {
      * @param div テスト施設情報Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnSetInputEnable(TestShisetsuJohoDiv div) {
+    public ResponseData<TestShisetsuJohoDiv> onClick_btnSetInputEnable(TestShisetsuJohoDiv div) {
         div.getCcdShisetsuJoho().set入力可();
 
         return createResponse(div);
@@ -188,7 +188,7 @@ public class TestShisetsuJoho {
      * @param div テスト施設情報Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnSetInputDisable(TestShisetsuJohoDiv div) {
+    public ResponseData<TestShisetsuJohoDiv> onClick_btnSetInputDisable(TestShisetsuJohoDiv div) {
         div.getCcdShisetsuJoho().set入力不可();
 
         return createResponse(div);
