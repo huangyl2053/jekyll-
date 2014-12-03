@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.入力補助;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.利用機能;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.台帳種別;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.施設種類;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.表示モード;
@@ -49,39 +48,42 @@ public class ShisetsuJohoHandler {
      * 初期化処理です。
      */
     public void initialize() {
-        if (div.getMode_利用機能().equals(利用機能.台帳種別表示機能)) {
-            div.setMode_台帳種別(台帳種別.台帳種別表示する);
-            div.setMode_施設種類(施設種類.施設種類を表示する);
-            div.getRadShisetsuShurui().setDataSource(createRadDataSource2());
-            div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01Key);
-            select施設種類();
-
-        } else if (div.getMode_利用機能().equals(利用機能.全施設対象機能)) {
-            div.setMode_台帳種別(台帳種別.台帳種別非表示する);
-            div.setMode_施設種類(施設種類.施設種類を表示する);
-            div.getRadShisetsuShurui().setDataSource(createRadDataSource3());
-            div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01Key);
-            select施設種類();
-
-        } else if (div.getMode_利用機能().equals(利用機能.被保険者対象機能)) {
-            div.setMode_台帳種別(台帳種別.台帳種別非表示する);
-            div.getDdlDaichoShubetsu().setSelectedKey(ddlDaichoShubetsu01Key);
-            div.getRadShisetsuShurui().setDataSource(createRadDataSource2());
-            div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01Key);
-            select台帳種別();
-
-        } else if (div.getMode_利用機能().equals(利用機能.他市町村住所地特例者対象機能)) {
-            div.setMode_台帳種別(台帳種別.台帳種別非表示する);
-            div.getDdlDaichoShubetsu().setSelectedKey(ddlDaichoShubetsu02Key);
-            div.getRadShisetsuShurui().setDataSource(createRadDataSource2());
-            div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui02Key);
-            select台帳種別();
-
-        } else if (div.getMode_利用機能().equals(利用機能.適用除外者対象機能)) {
-            div.setMode_台帳種別(台帳種別.台帳種別非表示する);
-            div.getDdlDaichoShubetsu().setSelectedKey(ddlDaichoShubetsu03Key);
-            select台帳種別();
-
+        switch (div.getMode_利用機能()) {
+            case 台帳種別表示機能:
+                div.setMode_台帳種別(台帳種別.台帳種別表示する);
+                div.setMode_施設種類(施設種類.施設種類を表示する);
+                div.getRadShisetsuShurui().setDataSource(createRadDataSource2());
+                div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01Key);
+                select施設種類();
+                break;
+            case 全施設対象機能:
+                div.setMode_台帳種別(台帳種別.台帳種別非表示する);
+                div.setMode_施設種類(施設種類.施設種類を表示する);
+                div.getRadShisetsuShurui().setDataSource(createRadDataSource3());
+                div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01Key);
+                select施設種類();
+                break;
+            case 被保険者対象機能:
+                div.setMode_台帳種別(台帳種別.台帳種別非表示する);
+                div.getDdlDaichoShubetsu().setSelectedKey(ddlDaichoShubetsu01Key);
+                div.getRadShisetsuShurui().setDataSource(createRadDataSource2());
+                div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01Key);
+                select台帳種別();
+                break;
+            case 他市町村住所地特例者対象機能:
+                div.setMode_台帳種別(台帳種別.台帳種別非表示する);
+                div.getDdlDaichoShubetsu().setSelectedKey(ddlDaichoShubetsu02Key);
+                div.getRadShisetsuShurui().setDataSource(createRadDataSource2());
+                div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui02Key);
+                select台帳種別();
+                break;
+            case 適用除外者対象機能:
+                div.setMode_台帳種別(台帳種別.台帳種別非表示する);
+                div.getDdlDaichoShubetsu().setSelectedKey(ddlDaichoShubetsu03Key);
+                select台帳種別();
+                break;
+            default:
+                break;
         }
 
         clearTxt();
@@ -144,14 +146,18 @@ public class ShisetsuJohoHandler {
     public RString get施設種類() {
 
         RString 施設種類 = RString.EMPTY;
-        if (div.getMode_入力補助().equals(入力補助.事業者を表示する)) {
-            施設種類 = radShisetsuShurui01Value;
-
-        } else if (div.getMode_入力補助().equals(入力補助.他特例施設を表示する)) {
-            施設種類 = radShisetsuShurui02Value;
-
-        } else if (div.getMode_入力補助().equals(入力補助.除外施設を表示する)) {
-            施設種類 = radShisetsuShurui03Value;
+        switch (div.getMode_入力補助()) {
+            case 事業者を表示する:
+                施設種類 = radShisetsuShurui01Value;
+                break;
+            case 他特例施設を表示する:
+                施設種類 = radShisetsuShurui02Value;
+                break;
+            case 除外施設を表示する:
+                施設種類 = radShisetsuShurui03Value;
+                break;
+            default:
+                break;
         }
 
         return 施設種類;
@@ -165,14 +171,18 @@ public class ShisetsuJohoHandler {
     public RString get施設種類キー() {
 
         RString 施設種類キー = RString.EMPTY;
-        if (div.getMode_入力補助().equals(入力補助.事業者を表示する)) {
-            施設種類キー = radShisetsuShurui01Key;
-
-        } else if (div.getMode_入力補助().equals(入力補助.他特例施設を表示する)) {
-            施設種類キー = radShisetsuShurui02Key;
-
-        } else if (div.getMode_入力補助().equals(入力補助.除外施設を表示する)) {
-            施設種類キー = radShisetsuShurui03Key;
+        switch (div.getMode_入力補助()) {
+            case 事業者を表示する:
+                施設種類キー = radShisetsuShurui01Key;
+                break;
+            case 他特例施設を表示する:
+                施設種類キー = radShisetsuShurui02Key;
+                break;
+            case 除外施設を表示する:
+                施設種類キー = radShisetsuShurui03Key;
+                break;
+            default:
+                break;
         }
 
         return 施設種類キー;
@@ -185,20 +195,24 @@ public class ShisetsuJohoHandler {
         RString code = div.getTxtShisetsuCode().getValue();
         RString meisho = RString.EMPTY;
         if (!code.isEmpty()) {
-            if (div.getMode_入力補助().equals(入力補助.事業者を表示する)) {
-                // TODO N8187 久保田 事業者入力ガイド(JigyoshaInputGuide)の施設名称取得機能を使用して、施設名称を取得する。2014/12/31期限。
-                meisho = new RString("テスト事業者");
-
-            } else if (div.getMode_入力補助().equals(入力補助.他特例施設を表示する)) {
-                // TODO N8187 久保田 その他特例施設入力ガイド(OtherTokureiShisetsuInputGuide)の施設名称取得機能を使用して、施設名称を取得する。2014/12/31期限。
-                meisho = new RString("テスト他特例施設");
-
-            } else if (div.getMode_入力補助().equals(入力補助.除外施設を表示する)) {
-                // TODO N8187 久保田 適用除外施設入力ガイド(TekiyoJogaiShisetsuInputGuide)の施設名称取得機能を使用して、施設名称を取得する。2014/12/31期限。
-                meisho = new RString("テスト除外施設");
-
+            switch (div.getMode_入力補助()) {
+                case 事業者を表示する:
+                    // TODO N8187 久保田 事業者入力ガイド(JigyoshaInputGuide)の施設名称取得機能を使用して、施設名称を取得する。2014/12/31期限。
+                    meisho = new RString("テスト事業者");
+                    break;
+                case 他特例施設を表示する:
+                    // TODO N8187 久保田 その他特例施設入力ガイド(OtherTokureiShisetsuInputGuide)の施設名称取得機能を使用して、施設名称を取得する。2014/12/31期限。
+                    meisho = new RString("テスト他特例施設");
+                    break;
+                case 除外施設を表示する:
+                    // TODO N8187 久保田 適用除外施設入力ガイド(TekiyoJogaiShisetsuInputGuide)の施設名称取得機能を使用して、施設名称を取得する。2014/12/31期限。
+                    meisho = new RString("テスト除外施設");
+                    break;
+                default:
+                    break;
             }
         }
+
         div.getTxtShisetsuMeisho().setValue(meisho);
     }
 
