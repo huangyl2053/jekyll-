@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.shisetsujoho;
 
-import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
@@ -20,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
  * @author N8211 田辺 紘一
  * @author N8187 久保田 英男
  */
-public class ShisetsuJoho implements Serializable {
+public class ShisetsuJoho {
 
     /**
      * 共有子Divのロード時に行う処理です。
