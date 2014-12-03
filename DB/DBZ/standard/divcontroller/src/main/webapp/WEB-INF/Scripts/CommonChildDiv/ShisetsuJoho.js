@@ -1,4 +1,4 @@
-var __extends = this.__extends || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
@@ -47,30 +47,30 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
-                            "onChange": "onChange_ddlDaichoShubetsu",
-                            "selectedItem": null,
                             "dataSource": [
                                 {
-                                    "key": "1",
+                                    "key": "hihokenshaDaicho",
                                     "value": "被保険者台帳"
                                 },
                                 {
-                                    "key": "3",
-                                    "value": "他市町村住所地特例者台帳"
+                                    "key": "tekiyoJogaishaDaicho",
+                                    "value": "適用除外者台帳"
                                 },
                                 {
-                                    "key": "2",
-                                    "value": "適用除外者台帳"
+                                    "key": "tashichosonJushochiTokureishaDaicho",
+                                    "value": "他市町村住所地特例者台帳"
                                 }
                             ],
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
                             "labelLText": "台帳種別",
                             "labelRText": "",
                             "labelLWidth": "70px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "onFocus": "",
-                            "onBlur": "",
+                            "selectedItem": null,
                             "isBlankLine": false,
                             "disabledItem": []
                         },
@@ -95,31 +95,31 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
-                            "onChange": "onChange_radShisetsuShurui",
-                            "selectedItem": null,
                             "dataSource": [
                                 {
-                                    "key": "11",
+                                    "key": "kaigoHokenShisetsu",
                                     "value": "介護保険施設"
                                 },
                                 {
-                                    "key": "12",
+                                    "key": "other",
                                     "value": "その他特例施設"
                                 },
                                 {
-                                    "key": "21",
+                                    "key": "tekiyojogaishisetsu",
                                     "value": "適用除外施設"
                                 }
                             ],
+                            "onClick": "",
+                            "icon": [],
                             "required": false,
+                            "onChange": "onChange_radShisetsuShurui",
                             "labelLText": "施設種類",
                             "labelLWidth": "70px",
                             "labelLAlign": 2,
-                            "onClick": "",
+                            "selectedItem": null,
                             "newLineItemNumber": 3,
                             "spaceSize": "S",
-                            "disabledItem": [],
-                            "icon": []
+                            "disabledItem": []
                         },
                         {
                             "fieldName": "txtShisetsuCode",
@@ -142,29 +142,29 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": false,
-                            "onChange": "",
+                            "text": "",
                             "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
                             "labelLText": "入所施設",
                             "labelRText": "",
                             "labelLWidth": "70px",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "onFocus": "",
-                            "onBlur": "onBlur_txtShisetsuCode",
+                            "value": "",
+                            "decorationClass": "",
                             "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 0,
-                            "placeHolder": "",
                             "textKind": 2,
-                            "isPrivateInfo": false,
-                            "isPassword": false,
                             "isComboBox": false,
-                            "onKeyPress": "",
-                            "text": "",
                             "suggest": [],
-                            "value": "",
-                            "decorationClass": "",
                             "permitCharactor": "",
                             "formatLength": "10"
                         },
@@ -188,15 +188,15 @@ var DBZ;
                             "selectControlID": "btnJigyoshaInputGuide",
                             "helpMessageID": "",
                             "jpControlName": "",
-                            "onClick": "",
-                            "icon": 0,
-                            "text": "",
                             "onBeforeClick": "",
                             "onAfterClick": "",
+                            "onClick": "",
+                            "text": "",
                             "appearance": 2,
                             "imageFileUrl": "/uz/uza/image/UZ_Search.png",
                             "imageWidth": "",
                             "imageHeight": "",
+                            "icon": 0,
                             "heightTextBoxMatches": true,
                             "displayChildDivName": "DBZ.JigyoshaInputGuide",
                             "dataPassing": [
@@ -233,15 +233,15 @@ var DBZ;
                             "selectControlID": "btnOtherTokureiShisetsuInputGuide",
                             "helpMessageID": "",
                             "jpControlName": "",
-                            "onClick": "",
-                            "icon": 0,
-                            "text": "■",
                             "onBeforeClick": "",
                             "onAfterClick": "",
+                            "onClick": "",
+                            "text": "■",
                             "appearance": 2,
                             "imageFileUrl": "/uz/uza/image/UZ_Search.png",
                             "imageWidth": "20px",
                             "imageHeight": "15px",
+                            "icon": 0,
                             "heightTextBoxMatches": true,
                             "displayChildDivName": "DBZ.OtherTokureiShisetsuInputGuide",
                             "dataPassing": [
@@ -282,15 +282,15 @@ var DBZ;
                             "selectControlID": "btnJogaiShisetsuInputGuide",
                             "helpMessageID": "",
                             "jpControlName": "",
-                            "onClick": "",
-                            "icon": 0,
-                            "text": "■",
                             "onBeforeClick": "",
                             "onAfterClick": "",
+                            "onClick": "",
+                            "text": "■",
                             "appearance": 2,
                             "imageFileUrl": "/uz/uza/image/UZ_Search.png",
                             "imageWidth": "20px",
                             "imageHeight": "15px",
+                            "icon": 0,
                             "heightTextBoxMatches": true,
                             "displayChildDivName": "DBZ.TekiyoJogaiShisetsuInputGuide",
                             "dataPassing": [
@@ -328,29 +328,29 @@ var DBZ;
                             "helpMessageID": "",
                             "jpControlName": "",
                             "readOnly": true,
-                            "onChange": "",
+                            "text": "",
                             "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
                             "labelLText": "",
                             "labelRText": "",
                             "labelLWidth": "S",
                             "labelRWidth": "S",
                             "labelLAlign": 2,
                             "labelRAlign": 0,
-                            "onFocus": "",
-                            "onBlur": "",
+                            "value": "",
+                            "decorationClass": "",
                             "maxLength": 100000000,
                             "minLength": 0,
                             "textAlign": 0,
-                            "placeHolder": "",
                             "textKind": 0,
-                            "isPrivateInfo": false,
-                            "isPassword": false,
                             "isComboBox": false,
-                            "onKeyPress": "",
-                            "text": "",
                             "suggest": [],
-                            "value": "",
-                            "decorationClass": "",
                             "permitCharactor": ""
                         }
                     ],
@@ -382,24 +382,7 @@ var DBZ;
                             "postParameterPanelNames": "ShisetsuJoho"
                         }
                     ],
-                    "requestSettings": [
-                        {
-                            "eventName": "onLoad",
-                            "requestUrl": "dbz/db/dbz/ShisetsuJoho/onLoad"
-                        },
-                        {
-                            "eventName": "onChange_ddlDaichoShubetsu",
-                            "requestUrl": "dbz/db/dbz/ShisetsuJoho/onChange_ddlDaichoShubetsu"
-                        },
-                        {
-                            "eventName": "onChange_radShisetsuShurui",
-                            "requestUrl": "dbz/db/dbz/ShisetsuJoho/onChange_radShisetsuShurui"
-                        },
-                        {
-                            "eventName": "onBlur_txtShisetsuCode",
-                            "requestUrl": "dbz/db/dbz/ShisetsuJoho/onBlur_txtShisetsuCode"
-                        }
-                    ],
+                    "requestSettings": [],
                     "hiddenInput": [
                         {
                             "propertyName": "selectRow",
@@ -471,16 +454,8 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onChange_ddlDaichoShubetsu = function () {
-                return "onChange_ddlDaichoShubetsu";
-            };
-
             Events.onChange_radShisetsuShurui = function () {
                 return "onChange_radShisetsuShurui";
-            };
-
-            Events.onBlur_txtShisetsuCode = function () {
-                return "onBlur_txtShisetsuCode";
             };
             return Events;
         })();
@@ -536,6 +511,155 @@ var DBZ;
             return Controls;
         })();
         ShisetsuJoho.Controls = Controls;
+    })(DBZ.ShisetsuJoho || (DBZ.ShisetsuJoho = {}));
+    var ShisetsuJoho = DBZ.ShisetsuJoho;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (ShisetsuJoho) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShisetsuJoho.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [
+                    "利用機能",
+                    "台帳種別",
+                    "施設種類",
+                    "入力補助",
+                    "表示モード"
+                ];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.利用機能 = function () {
+                return new Modes.利用機能(this.controls);
+            };
+
+            ModeController.prototype.台帳種別 = function () {
+                return new Modes.台帳種別(this.controls);
+            };
+
+            ModeController.prototype.施設種類 = function () {
+                return new Modes.施設種類(this.controls);
+            };
+
+            ModeController.prototype.入力補助 = function () {
+                return new Modes.入力補助(this.controls);
+            };
+
+            ModeController.prototype.表示モード = function () {
+                return new Modes.表示モード(this.controls);
+            };
+            return ModeController;
+        })();
+        ShisetsuJoho.ModeController = ModeController;
+
+        (function (Modes) {
+            var 利用機能 = (function () {
+                function 利用機能(controls) {
+                    this.controls = controls;
+                }
+                利用機能.prototype.台帳種別表示機能 = function () {
+                };
+
+                利用機能.prototype.全施設対象機能 = function () {
+                };
+
+                利用機能.prototype.被保険者対象機能 = function () {
+                };
+
+                利用機能.prototype.他市町村住所地特例者対象機能 = function () {
+                };
+
+                利用機能.prototype.適用除外者対象機能 = function () {
+                };
+                return 利用機能;
+            })();
+            Modes.利用機能 = 利用機能;
+
+            var 台帳種別 = (function () {
+                function 台帳種別(controls) {
+                    this.controls = controls;
+                }
+                台帳種別.prototype.台帳種別表示する = function () {
+                    this.controls.ddlDaichoShubetsu().displayNone = false;
+                };
+
+                台帳種別.prototype.台帳種別非表示する = function () {
+                    this.controls.ddlDaichoShubetsu().displayNone = true;
+                };
+                return 台帳種別;
+            })();
+            Modes.台帳種別 = 台帳種別;
+
+            var 施設種類 = (function () {
+                function 施設種類(controls) {
+                    this.controls = controls;
+                }
+                施設種類.prototype.施設種類を表示する = function () {
+                    this.controls.radShisetsuShurui().displayNone = false;
+                };
+
+                施設種類.prototype.施設種類を表示しない = function () {
+                    this.controls.radShisetsuShurui().displayNone = true;
+                };
+                return 施設種類;
+            })();
+            Modes.施設種類 = 施設種類;
+
+            var 入力補助 = (function () {
+                function 入力補助(controls) {
+                    this.controls = controls;
+                }
+                入力補助.prototype.事業者を表示する = function () {
+                    this.controls.btnJigyoshaInputGuide().displayNone = false;
+                    this.controls.btnOtherTokureiShisetsuInputGuide().displayNone = true;
+                    this.controls.btnJogaiShisetsuInputGuide().displayNone = true;
+                };
+
+                入力補助.prototype.他特例施設を表示する = function () {
+                    this.controls.btnJigyoshaInputGuide().displayNone = true;
+                    this.controls.btnOtherTokureiShisetsuInputGuide().displayNone = false;
+                    this.controls.btnJogaiShisetsuInputGuide().displayNone = true;
+                };
+
+                入力補助.prototype.除外施設を表示する = function () {
+                    this.controls.btnJigyoshaInputGuide().displayNone = true;
+                    this.controls.btnOtherTokureiShisetsuInputGuide().displayNone = true;
+                    this.controls.btnJogaiShisetsuInputGuide().displayNone = false;
+                };
+                return 入力補助;
+            })();
+            Modes.入力補助 = 入力補助;
+
+            var 表示モード = (function () {
+                function 表示モード(controls) {
+                    this.controls = controls;
+                }
+                表示モード.prototype.defaultView = function () {
+                    this.controls.ShisetsuJoho().readOnly = false;
+                    this.controls.ShisetsuJoho().displayNone = false;
+                };
+
+                表示モード.prototype.readOnly = function () {
+                    this.controls.ShisetsuJoho().readOnly = true;
+                    this.controls.ShisetsuJoho().displayNone = false;
+                };
+
+                表示モード.prototype.displayNone = function () {
+                    this.controls.ShisetsuJoho().readOnly = true;
+                    this.controls.ShisetsuJoho().displayNone = true;
+                };
+                return 表示モード;
+            })();
+            Modes.表示モード = 表示モード;
+        })(ShisetsuJoho.Modes || (ShisetsuJoho.Modes = {}));
+        var Modes = ShisetsuJoho.Modes;
     })(DBZ.ShisetsuJoho || (DBZ.ShisetsuJoho = {}));
     var ShisetsuJoho = DBZ.ShisetsuJoho;
 })(DBZ || (DBZ = {}));

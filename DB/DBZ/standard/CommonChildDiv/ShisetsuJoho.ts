@@ -15,7 +15,8 @@ module DBZ {
             }
 
             public priorities(): Array {
-                return [
+				return [
+					"利用機能",
                     "台帳種別",
                     "施設種類",
                     "入力補助",
@@ -26,6 +27,10 @@ module DBZ {
             public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
             }
+
+			public 利用機能() {
+				return new Modes.利用機能(this.controls);
+			}
 
             public 台帳種別() {
                 return new Modes.台帳種別(this.controls);
@@ -47,6 +52,29 @@ module DBZ {
 
         export module Modes {
 
+
+			export class 利用機能 {
+				private controls: Controls;
+
+				constructor(controls: Controls) {
+					this.controls = controls;
+				}
+
+				public 台帳種別表示機能(): void {
+				}
+
+				public 全施設対象機能(): void {
+				}
+
+				public 被保険者対象機能(): void {
+				}
+
+				public 他市町村住所地特例者対象機能(): void {
+				}
+
+				public 適用除外者対象機能(): void {
+				}
+			}
 
             export class 台帳種別 {
                 private controls: Controls;
