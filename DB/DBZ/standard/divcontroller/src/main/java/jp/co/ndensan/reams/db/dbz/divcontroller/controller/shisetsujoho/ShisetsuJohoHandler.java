@@ -21,17 +21,17 @@ public class ShisetsuJohoHandler {
 
     private final ShisetsuJohoDiv div;
 
-    private static final RString ddlDaichoShubetsu01Key = new RString("1");
-    private static final RString ddlDaichoShubetsu02Key = new RString("3");
-    private static final RString ddlDaichoShubetsu03Key = new RString("2");
+    private final RString ddlDaichoShubetsu01Key = new RString("1");
+    private final RString ddlDaichoShubetsu02Key = new RString("3");
+    private final RString ddlDaichoShubetsu03Key = new RString("2");
 
-    private static final RString radShisetsuShurui01Key = new RString("11");
-    private static final RString radShisetsuShurui02Key = new RString("12");
-    private static final RString radShisetsuShurui03Key = new RString("21");
+    private final RString radShisetsuShurui01Key = new RString("11");
+    private final RString radShisetsuShurui02Key = new RString("12");
+    private final RString radShisetsuShurui03Key = new RString("21");
 
-    private static final RString radShisetsuShurui01Value = new RString("介護保険施設");
-    private static final RString radShisetsuShurui02Value = new RString("その他特例施設");
-    private static final RString radShisetsuShurui03Value = new RString("適用除外施設");
+    private final RString radShisetsuShurui01Value = new RString("介護保険施設");
+    private final RString radShisetsuShurui02Value = new RString("その他特例施設");
+    private final RString radShisetsuShurui03Value = new RString("適用除外施設");
 
     /**
      * コンストラクタです。
