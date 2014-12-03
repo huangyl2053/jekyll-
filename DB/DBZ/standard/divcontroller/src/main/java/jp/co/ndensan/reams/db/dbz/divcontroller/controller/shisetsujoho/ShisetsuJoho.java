@@ -27,7 +27,7 @@ public class ShisetsuJoho {
      * @param div 施設情報Div
      * @return レスポンス
      */
-    public ResponseData onLoad(ShisetsuJohoDiv div) {
+    public ResponseData<ShisetsuJohoDiv> onLoad(ShisetsuJohoDiv div) {
 
         createHandlerOf(div).initialize();
         return createResponse(div);
@@ -41,7 +41,7 @@ public class ShisetsuJoho {
      * @param div 施設情報Div
      * @return レスポンス
      */
-    public ResponseData onChange_ddlDaichoShubetsu(ShisetsuJohoDiv div) {
+    public ResponseData<ShisetsuJohoDiv> onChange_ddlDaichoShubetsu(ShisetsuJohoDiv div) {
 
         createHandlerOf(div).select台帳種別();
         return createResponse(div);
@@ -55,7 +55,7 @@ public class ShisetsuJoho {
      * @param div 施設情報Div
      * @return レスポンス
      */
-    public ResponseData onChange_radShisetsuShurui(ShisetsuJohoDiv div) {
+    public ResponseData<ShisetsuJohoDiv> onChange_radShisetsuShurui(ShisetsuJohoDiv div) {
 
         createHandlerOf(div).select施設種類();
         return createResponse(div);
@@ -68,7 +68,7 @@ public class ShisetsuJoho {
      * @param div 施設情報Div
      * @return レスポンス
      */
-    public ResponseData onBlur_txtShisetsuCode(ShisetsuJohoDiv div) {
+    public ResponseData<ShisetsuJohoDiv> onBlur_txtShisetsuCode(ShisetsuJohoDiv div) {
 
         createHandlerOf(div).get施設名称();
         return createResponse(div);
