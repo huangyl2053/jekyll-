@@ -21,17 +21,17 @@ public class ShisetsuJohoHandler {
 
     private final ShisetsuJohoDiv div;
 
-    private static final RString ddlDaichoShubetsu01被保険者台帳Key = new RString("1");
-    private static final RString ddlDaichoShubetsu02他市町村住所地特例者台帳Key = new RString("3");
-    private static final RString ddlDaichoShubetsu03適用除外者台帳Key = new RString("2");
+    private static final RString ddlDaichoShubetsu01Key = new RString("1");
+    private static final RString ddlDaichoShubetsu02Key = new RString("3");
+    private static final RString ddlDaichoShubetsu03Key = new RString("2");
 
-    private static final RString radShisetsuShurui01介護保険施設Key = new RString("11");
-    private static final RString radShisetsuShurui02その他特例施設Key = new RString("12");
-    private static final RString radShisetsuShurui03適用除外施設Key = new RString("21");
+    private static final RString radShisetsuShurui01Key = new RString("11");
+    private static final RString radShisetsuShurui02Key = new RString("12");
+    private static final RString radShisetsuShurui03Key = new RString("21");
 
-    private static final RString radShisetsuShurui01介護保険施設Value = new RString("介護保険施設");
-    private static final RString radShisetsuShurui02その他特例施設Value = new RString("その他特例施設");
-    private static final RString radShisetsuShurui03適用除外施設Value = new RString("適用除外施設");
+    private static final RString radShisetsuShurui01Value = new RString("介護保険施設");
+    private static final RString radShisetsuShurui02Value = new RString("その他特例施設");
+    private static final RString radShisetsuShurui03Value = new RString("適用除外施設");
 
     /**
      * コンストラクタです。
@@ -50,33 +50,33 @@ public class ShisetsuJohoHandler {
             div.setMode_台帳種別(ShisetsuJohoDiv.台帳種別.台帳種別表示する);
             div.setMode_施設種類(ShisetsuJohoDiv.施設種類.施設種類を表示する);
             div.getRadShisetsuShurui().setDataSource(createRadDataSource2());
-            div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01介護保険施設Key);
+            div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01Key);
             select施設種類();
 
         } else if (div.getMode_利用機能().equals(ShisetsuJohoDiv.利用機能.全施設対象機能)) {
             div.setMode_台帳種別(ShisetsuJohoDiv.台帳種別.台帳種別非表示する);
             div.setMode_施設種類(ShisetsuJohoDiv.施設種類.施設種類を表示する);
             div.getRadShisetsuShurui().setDataSource(createRadDataSource3());
-            div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01介護保険施設Key);
+            div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01Key);
             select施設種類();
 
         } else if (div.getMode_利用機能().equals(ShisetsuJohoDiv.利用機能.被保険者対象機能)) {
             div.setMode_台帳種別(ShisetsuJohoDiv.台帳種別.台帳種別非表示する);
-            div.getDdlDaichoShubetsu().setSelectedKey(ddlDaichoShubetsu01被保険者台帳Key);
+            div.getDdlDaichoShubetsu().setSelectedKey(ddlDaichoShubetsu01Key);
             div.getRadShisetsuShurui().setDataSource(createRadDataSource2());
-            div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01介護保険施設Key);
+            div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01Key);
             select台帳種別();
 
         } else if (div.getMode_利用機能().equals(ShisetsuJohoDiv.利用機能.他市町村住所地特例者対象機能)) {
             div.setMode_台帳種別(ShisetsuJohoDiv.台帳種別.台帳種別非表示する);
-            div.getDdlDaichoShubetsu().setSelectedKey(ddlDaichoShubetsu02他市町村住所地特例者台帳Key);
+            div.getDdlDaichoShubetsu().setSelectedKey(ddlDaichoShubetsu02Key);
             div.getRadShisetsuShurui().setDataSource(createRadDataSource2());
-            div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui02その他特例施設Key);
+            div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui02Key);
             select台帳種別();
 
         } else if (div.getMode_利用機能().equals(ShisetsuJohoDiv.利用機能.適用除外者対象機能)) {
             div.setMode_台帳種別(ShisetsuJohoDiv.台帳種別.台帳種別非表示する);
-            div.getDdlDaichoShubetsu().setSelectedKey(ddlDaichoShubetsu03適用除外者台帳Key);
+            div.getDdlDaichoShubetsu().setSelectedKey(ddlDaichoShubetsu03Key);
             select台帳種別();
 
         }
@@ -91,17 +91,17 @@ public class ShisetsuJohoHandler {
 
         RString selectedKey = div.getDdlDaichoShubetsu().getSelectedKey();
         if (selectedKey != null) {
-            if (selectedKey.equals(ddlDaichoShubetsu01被保険者台帳Key)) {
-                div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01介護保険施設Key);
+            if (selectedKey.equals(ddlDaichoShubetsu01Key)) {
+                div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01Key);
                 div.setMode_施設種類(ShisetsuJohoDiv.施設種類.施設種類を表示する);
                 div.setMode_入力補助(ShisetsuJohoDiv.入力補助.事業者を表示する);
 
-            } else if (selectedKey.equals(ddlDaichoShubetsu02他市町村住所地特例者台帳Key)) {
-                div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui02その他特例施設Key);
+            } else if (selectedKey.equals(ddlDaichoShubetsu02Key)) {
+                div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui02Key);
                 div.setMode_施設種類(ShisetsuJohoDiv.施設種類.施設種類を表示する);
                 div.setMode_入力補助(ShisetsuJohoDiv.入力補助.他特例施設を表示する);
 
-            } else if (selectedKey.equals(ddlDaichoShubetsu03適用除外者台帳Key)) {
+            } else if (selectedKey.equals(ddlDaichoShubetsu03Key)) {
                 div.setMode_施設種類(ShisetsuJohoDiv.施設種類.施設種類を表示しない);
                 div.setMode_入力補助(ShisetsuJohoDiv.入力補助.除外施設を表示する);
 
@@ -118,13 +118,13 @@ public class ShisetsuJohoHandler {
 
         RString selectedKey = div.getRadShisetsuShurui().getSelectedKey();
         if (selectedKey != null) {
-            if (selectedKey.equals(radShisetsuShurui01介護保険施設Key)) {
+            if (selectedKey.equals(radShisetsuShurui01Key)) {
                 div.setMode_入力補助(ShisetsuJohoDiv.入力補助.事業者を表示する);
 
-            } else if (selectedKey.equals(radShisetsuShurui02その他特例施設Key)) {
+            } else if (selectedKey.equals(radShisetsuShurui02Key)) {
                 div.setMode_入力補助(ShisetsuJohoDiv.入力補助.他特例施設を表示する);
 
-            } else if (selectedKey.equals(radShisetsuShurui03適用除外施設Key)) {
+            } else if (selectedKey.equals(radShisetsuShurui03Key)) {
                 div.setMode_入力補助(ShisetsuJohoDiv.入力補助.除外施設を表示する);
 
             }
@@ -142,13 +142,13 @@ public class ShisetsuJohoHandler {
 
         RString 施設種類 = RString.EMPTY;
         if (div.getMode_入力補助().equals(入力補助.事業者を表示する)) {
-            施設種類 = radShisetsuShurui01介護保険施設Value;
+            施設種類 = radShisetsuShurui01Value;
 
         } else if (div.getMode_入力補助().equals(入力補助.他特例施設を表示する)) {
-            施設種類 = radShisetsuShurui02その他特例施設Value;
+            施設種類 = radShisetsuShurui02Value;
 
         } else if (div.getMode_入力補助().equals(入力補助.除外施設を表示する)) {
-            施設種類 = radShisetsuShurui03適用除外施設Value;
+            施設種類 = radShisetsuShurui03Value;
         }
 
         return 施設種類;
@@ -163,13 +163,13 @@ public class ShisetsuJohoHandler {
 
         RString 施設種類キー = RString.EMPTY;
         if (div.getMode_入力補助().equals(入力補助.事業者を表示する)) {
-            施設種類キー = radShisetsuShurui01介護保険施設Key;
+            施設種類キー = radShisetsuShurui01Key;
 
         } else if (div.getMode_入力補助().equals(入力補助.他特例施設を表示する)) {
-            施設種類キー = radShisetsuShurui02その他特例施設Key;
+            施設種類キー = radShisetsuShurui02Key;
 
         } else if (div.getMode_入力補助().equals(入力補助.除外施設を表示する)) {
-            施設種類キー = radShisetsuShurui03適用除外施設Key;
+            施設種類キー = radShisetsuShurui03Key;
         }
 
         return 施設種類キー;
@@ -223,8 +223,8 @@ public class ShisetsuJohoHandler {
 
     private List<KeyValueDataSource> createRadDataSource2() {
 
-        KeyValueDataSource kaigoHokenShisetsu = new KeyValueDataSource(radShisetsuShurui01介護保険施設Key, radShisetsuShurui01介護保険施設Value);
-        KeyValueDataSource other = new KeyValueDataSource(radShisetsuShurui02その他特例施設Key, radShisetsuShurui02その他特例施設Value);
+        KeyValueDataSource kaigoHokenShisetsu = new KeyValueDataSource(radShisetsuShurui01Key, radShisetsuShurui01Value);
+        KeyValueDataSource other = new KeyValueDataSource(radShisetsuShurui02Key, radShisetsuShurui02Value);
 
         List<KeyValueDataSource> src = new ArrayList<>();
         src.add(kaigoHokenShisetsu);
@@ -235,9 +235,9 @@ public class ShisetsuJohoHandler {
 
     private List<KeyValueDataSource> createRadDataSource3() {
 
-        KeyValueDataSource kaigoHokenShisetsu = new KeyValueDataSource(radShisetsuShurui01介護保険施設Key, radShisetsuShurui01介護保険施設Value);
-        KeyValueDataSource other = new KeyValueDataSource(radShisetsuShurui02その他特例施設Key, radShisetsuShurui02その他特例施設Value);
-        KeyValueDataSource tekiyoJogaiShisetsu = new KeyValueDataSource(radShisetsuShurui03適用除外施設Key, radShisetsuShurui03適用除外施設Value);
+        KeyValueDataSource kaigoHokenShisetsu = new KeyValueDataSource(radShisetsuShurui01Key, radShisetsuShurui01Value);
+        KeyValueDataSource other = new KeyValueDataSource(radShisetsuShurui02Key, radShisetsuShurui02Value);
+        KeyValueDataSource tekiyoJogaiShisetsu = new KeyValueDataSource(radShisetsuShurui03Key, radShisetsuShurui03Value);
 
         List<KeyValueDataSource> src = new ArrayList<>();
         src.add(kaigoHokenShisetsu);

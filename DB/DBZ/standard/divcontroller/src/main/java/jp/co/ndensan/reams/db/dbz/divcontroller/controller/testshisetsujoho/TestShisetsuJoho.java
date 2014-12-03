@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.controller.TestShisetsuJoho;
+package jp.co.ndensan.reams.db.dbz.divcontroller.controller.testshisetsujoho;
 
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.TestShisetsuJoho.TestShisetsuJohoDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
