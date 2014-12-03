@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.controller.shisetsujoho;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.入力補助;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.利用機能;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.台帳種別;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.施設種類;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.表示モード;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -46,36 +49,36 @@ public class ShisetsuJohoHandler {
      * 初期化処理です。
      */
     public void initialize() {
-        if (div.getMode_利用機能().equals(ShisetsuJohoDiv.利用機能.台帳種別表示機能)) {
-            div.setMode_台帳種別(ShisetsuJohoDiv.台帳種別.台帳種別表示する);
-            div.setMode_施設種類(ShisetsuJohoDiv.施設種類.施設種類を表示する);
+        if (div.getMode_利用機能().equals(利用機能.台帳種別表示機能)) {
+            div.setMode_台帳種別(台帳種別.台帳種別表示する);
+            div.setMode_施設種類(施設種類.施設種類を表示する);
             div.getRadShisetsuShurui().setDataSource(createRadDataSource2());
             div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01Key);
             select施設種類();
 
-        } else if (div.getMode_利用機能().equals(ShisetsuJohoDiv.利用機能.全施設対象機能)) {
-            div.setMode_台帳種別(ShisetsuJohoDiv.台帳種別.台帳種別非表示する);
-            div.setMode_施設種類(ShisetsuJohoDiv.施設種類.施設種類を表示する);
+        } else if (div.getMode_利用機能().equals(利用機能.全施設対象機能)) {
+            div.setMode_台帳種別(台帳種別.台帳種別非表示する);
+            div.setMode_施設種類(施設種類.施設種類を表示する);
             div.getRadShisetsuShurui().setDataSource(createRadDataSource3());
             div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01Key);
             select施設種類();
 
-        } else if (div.getMode_利用機能().equals(ShisetsuJohoDiv.利用機能.被保険者対象機能)) {
-            div.setMode_台帳種別(ShisetsuJohoDiv.台帳種別.台帳種別非表示する);
+        } else if (div.getMode_利用機能().equals(利用機能.被保険者対象機能)) {
+            div.setMode_台帳種別(台帳種別.台帳種別非表示する);
             div.getDdlDaichoShubetsu().setSelectedKey(ddlDaichoShubetsu01Key);
             div.getRadShisetsuShurui().setDataSource(createRadDataSource2());
             div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01Key);
             select台帳種別();
 
-        } else if (div.getMode_利用機能().equals(ShisetsuJohoDiv.利用機能.他市町村住所地特例者対象機能)) {
-            div.setMode_台帳種別(ShisetsuJohoDiv.台帳種別.台帳種別非表示する);
+        } else if (div.getMode_利用機能().equals(利用機能.他市町村住所地特例者対象機能)) {
+            div.setMode_台帳種別(台帳種別.台帳種別非表示する);
             div.getDdlDaichoShubetsu().setSelectedKey(ddlDaichoShubetsu02Key);
             div.getRadShisetsuShurui().setDataSource(createRadDataSource2());
             div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui02Key);
             select台帳種別();
 
-        } else if (div.getMode_利用機能().equals(ShisetsuJohoDiv.利用機能.適用除外者対象機能)) {
-            div.setMode_台帳種別(ShisetsuJohoDiv.台帳種別.台帳種別非表示する);
+        } else if (div.getMode_利用機能().equals(利用機能.適用除外者対象機能)) {
+            div.setMode_台帳種別(台帳種別.台帳種別非表示する);
             div.getDdlDaichoShubetsu().setSelectedKey(ddlDaichoShubetsu03Key);
             select台帳種別();
 
@@ -93,17 +96,17 @@ public class ShisetsuJohoHandler {
         if (selectedKey != null) {
             if (selectedKey.equals(ddlDaichoShubetsu01Key)) {
                 div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui01Key);
-                div.setMode_施設種類(ShisetsuJohoDiv.施設種類.施設種類を表示する);
-                div.setMode_入力補助(ShisetsuJohoDiv.入力補助.事業者を表示する);
+                div.setMode_施設種類(施設種類.施設種類を表示する);
+                div.setMode_入力補助(入力補助.事業者を表示する);
 
             } else if (selectedKey.equals(ddlDaichoShubetsu02Key)) {
                 div.getRadShisetsuShurui().setSelectedKey(radShisetsuShurui02Key);
-                div.setMode_施設種類(ShisetsuJohoDiv.施設種類.施設種類を表示する);
-                div.setMode_入力補助(ShisetsuJohoDiv.入力補助.他特例施設を表示する);
+                div.setMode_施設種類(施設種類.施設種類を表示する);
+                div.setMode_入力補助(入力補助.他特例施設を表示する);
 
             } else if (selectedKey.equals(ddlDaichoShubetsu03Key)) {
-                div.setMode_施設種類(ShisetsuJohoDiv.施設種類.施設種類を表示しない);
-                div.setMode_入力補助(ShisetsuJohoDiv.入力補助.除外施設を表示する);
+                div.setMode_施設種類(施設種類.施設種類を表示しない);
+                div.setMode_入力補助(入力補助.除外施設を表示する);
 
             }
         }
@@ -119,13 +122,13 @@ public class ShisetsuJohoHandler {
         RString selectedKey = div.getRadShisetsuShurui().getSelectedKey();
         if (selectedKey != null) {
             if (selectedKey.equals(radShisetsuShurui01Key)) {
-                div.setMode_入力補助(ShisetsuJohoDiv.入力補助.事業者を表示する);
+                div.setMode_入力補助(入力補助.事業者を表示する);
 
             } else if (selectedKey.equals(radShisetsuShurui02Key)) {
-                div.setMode_入力補助(ShisetsuJohoDiv.入力補助.他特例施設を表示する);
+                div.setMode_入力補助(入力補助.他特例施設を表示する);
 
             } else if (selectedKey.equals(radShisetsuShurui03Key)) {
-                div.setMode_入力補助(ShisetsuJohoDiv.入力補助.除外施設を表示する);
+                div.setMode_入力補助(入力補助.除外施設を表示する);
 
             }
         }
@@ -203,14 +206,14 @@ public class ShisetsuJohoHandler {
      * 施設情報共有子Divを入力可の状態にします。
      */
     public void set入力可() {
-        div.setMode_表示モード(ShisetsuJohoDiv.表示モード.defaultView);
+        div.setMode_表示モード(表示モード.defaultView);
     }
 
     /**
      * 施設情報共有子Divを入力不可の状態にします。
      */
     public void set入力不可() {
-        div.setMode_表示モード(ShisetsuJohoDiv.表示モード.readOnly);
+        div.setMode_表示モード(表示モード.readOnly);
     }
 
     /**

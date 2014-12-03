@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.shisetsujoho;
 
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 

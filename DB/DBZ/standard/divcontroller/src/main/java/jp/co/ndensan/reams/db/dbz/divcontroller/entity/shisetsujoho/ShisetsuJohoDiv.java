@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.shisetsujoho.ShisetsuJohoHandler;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
