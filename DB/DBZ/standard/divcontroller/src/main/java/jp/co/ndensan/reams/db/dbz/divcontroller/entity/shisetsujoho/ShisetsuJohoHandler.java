@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.入力補助;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.利用機能;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.台帳種別;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.施設種類;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.表示モード;
@@ -129,28 +130,28 @@ public class ShisetsuJohoHandler {
             case 台帳種別表示機能:
                 div.setMode_台帳種別(台帳種別.台帳種別表示する);
                 div.setMode_施設種類(施設種類.施設種類を表示する);
-                div.getRadShisetsuShurui().setDataSource(createRadDataSource2());
+                div.getRadShisetsuShurui().setDataSource(createRad施設情報DataSource());
                 div.getRadShisetsuShurui().setSelectedKey(rad施設種類key.radShisetsuShurui01Key.getKey());
                 select施設種類();
                 break;
             case 全施設対象機能:
                 div.setMode_台帳種別(台帳種別.台帳種別非表示する);
                 div.setMode_施設種類(施設種類.施設種類を表示する);
-                div.getRadShisetsuShurui().setDataSource(createRadDataSource3());
+                div.getRadShisetsuShurui().setDataSource(createRad施設情報DataSource());
                 div.getRadShisetsuShurui().setSelectedKey(rad施設種類key.radShisetsuShurui01Key.getKey());
                 select施設種類();
                 break;
             case 被保険者対象機能:
                 div.setMode_台帳種別(台帳種別.台帳種別非表示する);
                 div.getDdlDaichoShubetsu().setSelectedKey(ddl台帳種別key.ddlDaichoShubetsu01Key.getKey());
-                div.getRadShisetsuShurui().setDataSource(createRadDataSource2());
+                div.getRadShisetsuShurui().setDataSource(createRad施設情報DataSource());
                 div.getRadShisetsuShurui().setSelectedKey(rad施設種類key.radShisetsuShurui01Key.getKey());
                 select台帳種別();
                 break;
             case 他市町村住所地特例者対象機能:
                 div.setMode_台帳種別(台帳種別.台帳種別非表示する);
                 div.getDdlDaichoShubetsu().setSelectedKey(ddl台帳種別key.ddlDaichoShubetsu02Key.getKey());
-                div.getRadShisetsuShurui().setDataSource(createRadDataSource2());
+                div.getRadShisetsuShurui().setDataSource(createRad施設情報DataSource());
                 div.getRadShisetsuShurui().setSelectedKey(rad施設種類key.radShisetsuShurui02Key.getKey());
                 select台帳種別();
                 break;
@@ -322,21 +323,7 @@ public class ShisetsuJohoHandler {
         return src;
     }
 
-    private List<KeyValueDataSource> createRadDataSource2() {
-
-        KeyValueDataSource kaigoHokenShisetsu = new KeyValueDataSource(rad施設種類key.radShisetsuShurui01Key.getKey(),
-                rad施設種類value.radShisetsuShurui01Value.getValue());
-        KeyValueDataSource other = new KeyValueDataSource(rad施設種類key.radShisetsuShurui02Key.getKey(),
-                rad施設種類value.radShisetsuShurui02Value.getValue());
-
-        List<KeyValueDataSource> src = new ArrayList<>();
-        src.add(kaigoHokenShisetsu);
-        src.add(other);
-
-        return src;
-    }
-
-    private List<KeyValueDataSource> createRadDataSource3() {
+    private List<KeyValueDataSource> createRad施設情報DataSource() {
 
         KeyValueDataSource kaigoHokenShisetsu = new KeyValueDataSource(rad施設種類key.radShisetsuShurui01Key.getKey(),
                 rad施設種類value.radShisetsuShurui01Value.getValue());
@@ -348,7 +335,9 @@ public class ShisetsuJohoHandler {
         List<KeyValueDataSource> src = new ArrayList<>();
         src.add(kaigoHokenShisetsu);
         src.add(other);
-        src.add(tekiyoJogaiShisetsu);
+        if (div.getMode_利用機能() == 利用機能.全施設対象機能) {
+            src.add(tekiyoJogaiShisetsu);
+        }
 
         return src;
     }
