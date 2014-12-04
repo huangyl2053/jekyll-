@@ -1367,7 +1367,7 @@
  "helpMessageID": "",
  "jpControlName": "",
  "onLoad": "",
- "title": "被保険者証発行管理リスト作成",
+ "title": "証発行管理リスト作成",
  "jsPathCollection": [],
  "relation": [],
  "stateTransition": [
