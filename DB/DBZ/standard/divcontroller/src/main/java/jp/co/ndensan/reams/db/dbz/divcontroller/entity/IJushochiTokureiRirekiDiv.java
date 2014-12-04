@@ -8,6 +8,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  */
 public interface IJushochiTokureiRirekiDiv {
 
+    /**
+     * 住所地特例履歴Gridを取得します。
+     *
+     * @return 住所地特例履歴Grid
+     */
     DataGrid<dgJushochiTokureiRireki_Row> getDgJushochiTokureiRireki();
 
     void setDgJushochiTokureiRireki(DataGrid<dgJushochiTokureiRireki_Row> dgJushochiTokureiRireki);
