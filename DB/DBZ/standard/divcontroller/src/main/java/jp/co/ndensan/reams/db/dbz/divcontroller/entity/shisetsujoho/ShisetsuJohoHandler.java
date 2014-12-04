@@ -225,23 +225,16 @@ public class ShisetsuJohoHandler {
      * @return 施設種類
      */
     public RString get施設種類() {
-
-        RString 施設種類 = RString.EMPTY;
         switch (div.getMode_入力補助()) {
             case 事業者を表示する:
-                施設種類 = rad施設種類value.radShisetsuShurui01Value.getValue();
-                break;
+                return rad施設種類value.radShisetsuShurui01Value.getValue();
             case 他特例施設を表示する:
-                施設種類 = rad施設種類value.radShisetsuShurui02Value.getValue();
-                break;
+                return rad施設種類value.radShisetsuShurui02Value.getValue();
             case 除外施設を表示する:
-                施設種類 = rad施設種類value.radShisetsuShurui03Value.getValue();
-                break;
+                return rad施設種類value.radShisetsuShurui03Value.getValue();
             default:
-                break;
+                return RString.EMPTY;
         }
-
-        return 施設種類;
     }
 
     /**
@@ -250,23 +243,16 @@ public class ShisetsuJohoHandler {
      * @return 施設種類キー
      */
     public RString get施設種類キー() {
-
-        RString 施設種類キー = RString.EMPTY;
         switch (div.getMode_入力補助()) {
             case 事業者を表示する:
-                施設種類キー = rad施設種類key.radShisetsuShurui01Key.getKey();
-                break;
+                return rad施設種類key.radShisetsuShurui01Key.getKey();
             case 他特例施設を表示する:
-                施設種類キー = rad施設種類key.radShisetsuShurui02Key.getKey();
-                break;
+                return rad施設種類key.radShisetsuShurui02Key.getKey();
             case 除外施設を表示する:
-                施設種類キー = rad施設種類key.radShisetsuShurui03Key.getKey();
-                break;
+                return rad施設種類key.radShisetsuShurui03Key.getKey();
             default:
-                break;
+                return RString.EMPTY;
         }
-
-        return 施設種類キー;
     }
 
     /**
