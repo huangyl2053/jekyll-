@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Nov 14 10:11:05 JST 2014 
+ * Wed Dec 03 21:00:23 JST 2014 
  */
 
 

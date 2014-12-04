@@ -1,0 +1,388 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KoshinKakuninDialog&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;CloseOK&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;CloseCancel&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.KoshinKakuninDialog"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G2 UzCompositeChild" id="KoshinKakuninDialog" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KoshinKakuninDialog&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;selectControlID&quot;:&quot;KoshinKakuninDialog&quot;,&quot;title&quot;:&quot;更新確認&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KoshinKakuninDialog&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dbz/db/dbz/KoshinKakunin/onLoad&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KoshinKakuninDialog_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">更新確認</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="KoshinKakuninDialog_panel_body_area"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS text-align-left UzCompositeChild" id="lblKoshinMassage" style="width: 280px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblKoshinMassage&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;280px&quot;,&quot;selectControlID&quot;:&quot;lblKoshinMassage&quot;,&quot;align&quot;:0,&quot;text&quot;:&quot;入力した資格情報で更新しますか？&quot;}"><span>入力した資格情報で更新しますか？</span></span><button title="" class="UzButton FloatLeft JSControl controlMargin-M ClearFloat marginRight-XS Width-S UzCompositeChild" id="btnYes" style="margin-left: 3em;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnYes&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;3em&quot;,&quot;selectControlID&quot;:&quot;btnYes&quot;,&quot;text&quot;:&quot;はい&quot;,&quot;onClick&quot;:&quot;CloseOK&quot;}"><span>はい</span></button><button title="" class="UzButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnNo" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;btnNo&quot;,&quot;text&quot;:&quot;いいえ&quot;,&quot;onClick&quot;:&quot;CloseCancel&quot;}"><span>いいえ</span></button></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    (function (KoshinKakuninDialog) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "CloseOK", {
+                get: function () {
+                    return "CloseOK";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "CloseCancel", {
+                get: function () {
+                    return "CloseCancel";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        KoshinKakuninDialog.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "KoshinKakuninDialog";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.KoshinKakuninDialog = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.lblKoshinMassage = function () {
+                return new UZA.Label(this.convFiledName("lblKoshinMassage"));
+            };
+
+            Controls.prototype.btnYes = function () {
+                return new UZA.Button(this.convFiledName("btnYes"));
+            };
+
+            Controls.prototype.btnNo = function () {
+                return new UZA.Button(this.convFiledName("btnNo"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        KoshinKakuninDialog.Controls = Controls;
+    })(DBZ.KoshinKakuninDialog || (DBZ.KoshinKakuninDialog = {}));
+    var KoshinKakuninDialog = DBZ.KoshinKakuninDialog;
+
+    var KoshinKakuninDialog_Design = (function (_super) {
+        __extends(KoshinKakuninDialog_Design, _super);
+        function KoshinKakuninDialog_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, KoshinKakuninDialog_Design.myLayout, fieldName);
+        }
+        KoshinKakuninDialog_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        KoshinKakuninDialog_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        KoshinKakuninDialog_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "KoshinKakuninDialog",
+                    "items": [
+                        {
+                            "fieldName": "lblKoshinMassage",
+                            "items": [],
+                            "controlType": "Label",
+                            "width": "280",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "lblKoshinMassage",
+                            "required": false,
+                            "align": 0,
+                            "text": "入力した資格情報で更新しますか？",
+                            "isPrivateInfo": false
+                        },
+                        {
+                            "fieldName": "btnYes",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "3",
+                            "marginRight": "XS",
+                            "selectControlID": "btnYes",
+                            "text": "はい",
+                            "onClick": "CloseOK",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0
+                        },
+                        {
+                            "fieldName": "btnNo",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnNo",
+                            "text": "いいえ",
+                            "onClick": "CloseCancel",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G2",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "XS",
+                    "marginRight": "XS",
+                    "selectControlID": "KoshinKakuninDialog",
+                    "onLoad": "",
+                    "title": "更新確認",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "KoshinKakuninDialog"
+                        }
+                    ],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": "dbz/db/dbz/KoshinKakunin/onLoad"
+                        }
+                    ],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorderTop": false,
+                    "eraseBorderBottom": false,
+                    "eraseBorderRight": false,
+                    "eraseBorderLeft": false,
+                    "backgroundColor": 0,
+                    "widthAuto": true,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "selectControlID": "defaultLayout",
+            "relation": [],
+            "businessId": "DBZ",
+            "controlName": "KoshinKakuninDialog",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "CloseOK",
+            "dialogCancelEventNameForDialog": "CloseCancel"
+        };
+        return KoshinKakuninDialog_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.KoshinKakuninDialog_Design = KoshinKakuninDialog_Design;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KoshinKakuninDialog) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KoshinKakuninDialog.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KoshinKakuninDialog.ModeController = ModeController;
+    })(DBZ.KoshinKakuninDialog || (DBZ.KoshinKakuninDialog = {}));
+    var KoshinKakuninDialog = DBZ.KoshinKakuninDialog;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KoshinKakuninDialog) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new KoshinKakuninDialog.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        KoshinKakuninDialog.PublicProperties = PublicProperties;
+    })(DBZ.KoshinKakuninDialog || (DBZ.KoshinKakuninDialog = {}));
+    var KoshinKakuninDialog = DBZ.KoshinKakuninDialog;
+})(DBZ || (DBZ = {}));
+</script>
+  <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['KOSHINKAKUNINDIALOG'] = {};
+DBZ['KOSHINKAKUNINDIALOG'].KoshinKakuninDialogRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KoshinKakuninDialog').getProperty();parameter0.lblKoshinMassage = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblKoshinMassage').getProperty();parameter0.btnYes = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnYes').getProperty();parameter0.btnNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnNo').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (KoshinKakuninDialog) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.CloseOK = function () {
+                return "CloseOK";
+            };
+
+            Events.CloseCancel = function () {
+                return "CloseCancel";
+            };
+            return Events;
+        })();
+        KoshinKakuninDialog.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KoshinKakuninDialog";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KoshinKakuninDialog.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.KoshinKakuninDialog.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KoshinKakuninDialog = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.lblKoshinMassage = function () {
+                return new UZA.Label(this.convFiledName("lblKoshinMassage"));
+            };
+
+            Controls.prototype.btnYes = function () {
+                return new UZA.Button(this.convFiledName("btnYes"));
+            };
+
+            Controls.prototype.btnNo = function () {
+                return new UZA.Button(this.convFiledName("btnNo"));
+            };
+            return Controls;
+        })();
+        KoshinKakuninDialog.Controls = Controls;
+    })(DBZ.KoshinKakuninDialog || (DBZ.KoshinKakuninDialog = {}));
+    var KoshinKakuninDialog = DBZ.KoshinKakuninDialog;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (KoshinKakuninDialog) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KoshinKakuninDialog.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KoshinKakuninDialog.ModeController = ModeController;
+    })(DBZ.KoshinKakuninDialog || (DBZ.KoshinKakuninDialog = {}));
+    var KoshinKakuninDialog = DBZ.KoshinKakuninDialog;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KoshinKakuninDialog) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new KoshinKakuninDialog.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        KoshinKakuninDialog.PublicProperties = PublicProperties;
+    })(DBZ.KoshinKakuninDialog || (DBZ.KoshinKakuninDialog = {}));
+    var KoshinKakuninDialog = DBZ.KoshinKakuninDialog;
+})(DBZ || (DBZ = {}));
+</script></div>

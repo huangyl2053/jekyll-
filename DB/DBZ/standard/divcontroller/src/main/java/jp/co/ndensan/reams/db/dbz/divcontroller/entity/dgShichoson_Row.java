@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed May 28 16:53:47 JST 2014 
+ * Thu Nov 27 13:50:05 JST 2014 
  */
 
 
@@ -26,6 +26,9 @@ public class dgShichoson_Row extends DataRow {
 
     public dgShichoson_Row() {
         super();
+        this.shichosonCode = RString.EMPTY;
+        this.shichosonMeisho = RString.EMPTY;
+        this.shichoson = RString.EMPTY;
     }
 
     public dgShichoson_Row(RString shichosonCode, RString shichosonMeisho, RString shichoson) {

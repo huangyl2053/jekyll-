@@ -3,11 +3,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResult.IKogakuServicehiJudgementResultDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tplJudgementResultDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiDetail.tplKetteiJohoDiv;
+//import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tplKetteiJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tplKozaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tplShinseishaDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
 /**
@@ -29,8 +32,8 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
     private tplKozaDiv tplKoza;
     @JsonProperty("tplJudgementResult")
     private tplJudgementResultDiv tplJudgementResult;
-    @JsonProperty("tplKetteiJoho")
-    private tplKetteiJohoDiv tplKetteiJoho;
+//    @JsonProperty("tplKetteiJoho")
+//    private tplKetteiJohoDiv tplKetteiJoho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -68,14 +71,52 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
         this.tplJudgementResult = tplJudgementResult;
     }
 
-    @JsonProperty("tplKetteiJoho")
-    public tplKetteiJohoDiv getTplKetteiJoho() {
-        return tplKetteiJoho;
+//    @JsonProperty("tplKetteiJoho")
+//    public tplKetteiJohoDiv getTplKetteiJoho() {
+//        return tplKetteiJoho;
+//    }
+//
+//    @JsonProperty("tplKetteiJoho")
+//    public void setTplKetteiJoho(tplKetteiJohoDiv tplKetteiJoho) {
+//        this.tplKetteiJoho = tplKetteiJoho;
+//    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public IShinseishaInfoDiv getShinseisha() {
+        return this.getTplShinseisha().getShinseisha();
     }
 
-    @JsonProperty("tplKetteiJoho")
-    public void setTplKetteiJoho(tplKetteiJohoDiv tplKetteiJoho) {
-        this.tplKetteiJoho = tplKetteiJoho;
+    @JsonIgnore
+    public TextBoxNum getTxtShiharaiTotalAmount() {
+        return this.getTplShinseisha().getTxtShiharaiTotalAmount();
+    }
+
+    @JsonIgnore
+    public void setTxtShiharaiTotalAmount(TextBoxNum txtShiharaiTotalAmount) {
+        this.getTplShinseisha().setTxtShiharaiTotalAmount(txtShiharaiTotalAmount);
+    }
+
+    @JsonIgnore
+    public TextBoxMultiLine getTxtShinseiRiyu() {
+        return this.getTplShinseisha().getTxtShinseiRiyu();
+    }
+
+    @JsonIgnore
+    public void setTxtShinseiRiyu(TextBoxMultiLine txtShinseiRiyu) {
+        this.getTplShinseisha().setTxtShinseiRiyu(txtShinseiRiyu);
+    }
+
+    @JsonIgnore
+    public IPaymentMethodDiv getPaymentMethod() {
+        return this.getTplKoza().getPaymentMethod();
+    }
+
+    @JsonIgnore
+    public IKogakuServicehiJudgementResultDiv getJudgementResult() {
+        return this.getTplJudgementResult().getJudgementResult();
     }
 
 }

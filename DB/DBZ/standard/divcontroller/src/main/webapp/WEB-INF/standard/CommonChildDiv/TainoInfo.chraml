@@ -1,0 +1,2033 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;TainoInfo&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.TainoInfo"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-Default marginRight-Default marginTop-Default marginBottom-Default UzCommonChildDivPanel UzCompositeChild" id="TainoInfo" style="width: 1090px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;TainoInfo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1090px&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;TainoInfo&quot;,&quot;title&quot;:&quot;滞納情報&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;TainoInfo&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;focusPositionID&quot;:&quot;createFile&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="TainoInfo_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">滞納情報</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="TainoInfo_panel_body_area"><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtHanteiKijunYMD" style="width: 207px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtHanteiKijunYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtHanteiKijunYMD_core&quot;,&quot;labelLText&quot;:&quot;滞納判定基準日&quot;,&quot;labelLWidth&quot;:&quot;120px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHanteiKijunYMD_labelL" style="width: 120px;"><span>滞納判定基準日</span></span><input class="UzTextBox CoreElement" id="txtHanteiKijunYMD_core" style="width: 80px;" type="text" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><button title="" class="UzButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS Width-M heightTextBoxMatchesFlag heightTextBoxMatches UzCompositeChild" id="btnKensaku" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnKensaku&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;M&quot;,&quot;selectControlID&quot;:&quot;btnKensaku&quot;,&quot;text&quot;:&quot;基準日で検索する&quot;,&quot;heightTextBoxMatches&quot;:true}"><span>基準日で検索する</span></button><button title="" class="UzButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS Width-M heightTextBoxMatchesFlag heightTextBoxMatches UzCompositeChild" id="btnGengakuJoho" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnGengakuJoho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;M&quot;,&quot;selectControlID&quot;:&quot;btnGengakuJoho&quot;,&quot;text&quot;:&quot;減額情報を表示する&quot;,&quot;heightTextBoxMatches&quot;:true}"><span>減額情報を表示する</span></button><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtSaikoNokigen" style="width: 207px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtSaikoNokigen&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtSaikoNokigen_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;最古滞納納期限&quot;,&quot;labelLWidth&quot;:&quot;120px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSaikoNokigen_labelL" style="width: 120px;"><span>最古滞納納期限</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtSaikoNokigen_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS UzCompositeChild" id="txtKeikaNen" style="width: 287px; height: 21px; margin-right: 0em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtKeikaNen&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;20px&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtKeikaNen_core&quot;,&quot;readOnly&quot;:true,&quot;textAlign&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;最古の保険料納期限からの経過月数&quot;,&quot;labelLWidth&quot;:&quot;260px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtKeikaNen_labelL" style="width: 260px;"><span>最古の保険料納期限からの経過月数</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-right ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtKeikaNen_core" style="width: 20px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginRight-XS UzCompositeChild" id="txtKeikaTsuki" style="width: 98px; height: 21px; margin-left: 0em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtKeikaTsuki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;20px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtKeikaTsuki_core&quot;,&quot;readOnly&quot;:true,&quot;textAlign&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;年&quot;,&quot;labelRText&quot;:&quot;ヵ月&quot;,&quot;labelLWidth&quot;:&quot;20px&quot;,&quot;labelRWidth&quot;:&quot;50px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtKeikaTsuki_labelL" style="width: 20px;"><span>年</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-right ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtKeikaTsuki_core" style="width: 20px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span><span class="word-wrap-break-word Label-R text-align-left" id="txtKeikaTsuki_labelR" style="width: 50px;"><span>ヵ月</span></span></div><div title="" class="UzHorizontalLine JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="linTaino1" data-control-type="HorizontalLine" data-obj="{&quot;fieldName&quot;:&quot;linTaino1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;HorizontalLine&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;linTaino1&quot;}"></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtHokenryoNendo1" style="width: 132px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtHokenryoNendo1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;35px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtHokenryoNendo1_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;保険料年度&quot;,&quot;labelLWidth&quot;:&quot;90px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHokenryoNendo1_labelL" style="width: 90px;"><span>保険料年度</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtHokenryoNendo1_core" style="width: 35px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtHokenryoNendo2" style="width: 352px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtHokenryoNendo2&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;35px&quot;,&quot;selectControlID&quot;:&quot;txtHokenryoNendo2_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;保険料年度&quot;,&quot;labelLWidth&quot;:&quot;310px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHokenryoNendo2_labelL" style="width: 310px;"><span>保険料年度</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtHokenryoNendo2_core" style="width: 35px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtHokenryoNendo3" style="width: 352px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtHokenryoNendo3&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;35px&quot;,&quot;selectControlID&quot;:&quot;txtHokenryoNendo3_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;保険料年度&quot;,&quot;labelLWidth&quot;:&quot;310px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHokenryoNendo3_labelL" style="width: 310px;"><span>保険料年度</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtHokenryoNendo3_core" style="width: 35px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS Height-Auto UzCompositeChild" id="dgTainoJokyo1" style="width: 350px; margin-right: 0em;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgTainoJokyo1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;350px&quot;,&quot;wrap&quot;:true,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;dgTainoJokyo1&quot;,&quot;height&quot;:&quot;Auto&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:false,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;txtKi&quot;,&quot;headerHeight&quot;:1},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;期&quot;,&quot;dataName&quot;:&quot;txtKi&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:40,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtKi&quot;},{&quot;columnName&quot;:&quot;保険料&quot;,&quot;dataName&quot;:&quot;txtHokenryo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:2,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtHokenryo&quot;},{&quot;columnName&quot;:&quot;納期限&quot;,&quot;dataName&quot;:&quot;txtNokigen&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtNokigen&quot;},{&quot;columnName&quot;:&quot;滞納&quot;,&quot;dataName&quot;:&quot;txtTaino&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:40,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtTaino&quot;},{&quot;columnName&quot;:&quot;時効起算日&quot;,&quot;dataName&quot;:&quot;txtJikoKisanYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtJikoKisanYMD&quot;},{&quot;columnName&quot;:&quot;時効起算日<br>区分&quot;,&quot;dataName&quot;:&quot;txtJikoKisanbiKbn&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtJikoKisanbiKbn&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgTainoJokyo1_grid_table" role="" style="width: 350px; height: 308px; position: relative;"></div><div id="dgTainoJokyo1_footer" style="width: 350px; height: 0px;"></div></div><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M marginLeft-XS Height-Auto UzCompositeChild" id="dgTainoJokyo2" style="width: 350px; margin-right: 0em;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgTainoJokyo2&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;350px&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;dgTainoJokyo2&quot;,&quot;height&quot;:&quot;Auto&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:false,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;txtKi&quot;,&quot;headerHeight&quot;:1},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;期&quot;,&quot;dataName&quot;:&quot;txtKi&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:40,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtKi&quot;},{&quot;columnName&quot;:&quot;保険料&quot;,&quot;dataName&quot;:&quot;txtHokenryo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:2,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtHokenryo&quot;},{&quot;columnName&quot;:&quot;納期限&quot;,&quot;dataName&quot;:&quot;txtNokigen&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtNokigen&quot;},{&quot;columnName&quot;:&quot;滞納&quot;,&quot;dataName&quot;:&quot;txtTaino&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:40,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtTaino&quot;},{&quot;columnName&quot;:&quot;時効起算日&quot;,&quot;dataName&quot;:&quot;txtJikoKisanYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtJikoKisanYMD&quot;},{&quot;columnName&quot;:&quot;時効起算日<br>区分&quot;,&quot;dataName&quot;:&quot;txtJikoKisanbiKbn&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtJikoKisanbiKbn&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgTainoJokyo2_grid_table" role="" style="width: 350px; height: 308px; position: relative;"></div><div id="dgTainoJokyo2_footer" style="width: 350px; height: 0px;"></div></div><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M marginLeft-XS Height-Auto UzCompositeChild" id="dgTainoJokyo3" style="width: 350px; margin-right: 0em;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgTainoJokyo3&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;350px&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;dgTainoJokyo3&quot;,&quot;height&quot;:&quot;Auto&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:false,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;txtKi&quot;,&quot;headerHeight&quot;:1},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;期&quot;,&quot;dataName&quot;:&quot;txtKi&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:40,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtKi&quot;},{&quot;columnName&quot;:&quot;保険料&quot;,&quot;dataName&quot;:&quot;txtHokenryo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:2,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtHokenryo&quot;},{&quot;columnName&quot;:&quot;納期限&quot;,&quot;dataName&quot;:&quot;txtNokigen&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtNokigen&quot;},{&quot;columnName&quot;:&quot;滞納&quot;,&quot;dataName&quot;:&quot;txtTaino&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:40,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtTaino&quot;},{&quot;columnName&quot;:&quot;時効起算日&quot;,&quot;dataName&quot;:&quot;txtJikoKisanYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtJikoKisanYMD&quot;},{&quot;columnName&quot;:&quot;時効起算日<br>区分&quot;,&quot;dataName&quot;:&quot;txtJikoKisanbiKbn&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtJikoKisanbiKbn&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgTainoJokyo3_grid_table" role="" style="width: 350px; height: 308px; position: relative;"></div><div id="dgTainoJokyo3_footer" style="width: 350px; height: 0px;"></div></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum FloatLeft JSControl controlMargin-M marginLeft-XS UzCompositeChild" id="txtSonotaHokenryo" style="width: 357px; height: 21px; margin-right: 0em;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtSonotaHokenryo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtSonotaHokenryo_core&quot;,&quot;readOnly&quot;:true,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;表示年度以前の滞納状況　保険料額&quot;,&quot;labelLWidth&quot;:&quot;260px&quot;,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSonotaHokenryo_labelL" style="width: 260px;"><span>表示年度以前の滞納状況　保険料額</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input readonlyColor" id="txtSonotaHokenryo_core" style="width: 90px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSonotatainoGaku" style="width: 177px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtSonotatainoGaku&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;selectControlID&quot;:&quot;txtSonotatainoGaku_core&quot;,&quot;readOnly&quot;:true,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;うち滞納額&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSonotatainoGaku_labelL" style="width: 80px;"><span>うち滞納額</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input readonlyColor" id="txtSonotatainoGaku_core" style="width: 90px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzTablePanel JSControl controlMargin-M Width-XS FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="TainoSetsumei" data-control-type="TablePanel" data-obj="{&quot;fieldName&quot;:&quot;TainoSetsumei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TablePanel&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;TainoSetsumei&quot;,&quot;html&quot;:&quot;<table cellspacing=0 cellpadding=0 span style=\&quot;font-size:11pt\&quot;>\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td></tr>\n  </tbody>\n</table>\n&quot;}"><div id="tempDiv"></div><table style="font-size: 11pt;" cellspacing="0" cellpadding="0" span="">  <tbody>    <tr><td id="R1C1" data-connect-tablepanel="TainoSetsumei"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celTainoSetsumei1" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTainoSetsumei1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTainoSetsumei1&quot;,&quot;connectTd&quot;:&quot;R1C1&quot;}" data-connect-tablepanel="TainoSetsumei" data-connect-td="R1C1"><div title="" class="UzTablePanel FloatLeft JSControl controlMargin-M Width-XS ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="TainocolorKanno" data-control-type="TablePanel" data-obj="{&quot;fieldName&quot;:&quot;TainocolorKanno&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TablePanel&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;TainocolorKanno&quot;,&quot;html&quot;:&quot;<table border=\&quot;1\&quot; cellspacing=0 cellpadding=0 span style=\&quot;font-size:4pt\&quot;>\n  <tbody>\n    <tr><td id='R1C1' bgcolor='white'></td></tr>\n  </tbody>\n</table>\n&quot;}"><div id="tempDiv"></div><table style="font-size: 4pt;" border="1" cellspacing="0" cellpadding="0" span="">  <tbody>    <tr><td id="R1C1" bgcolor="white" data-connect-tablepanel="TainocolorKanno"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="WhiteCell" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;WhiteCell&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;WhiteCell&quot;,&quot;connectTd&quot;:&quot;R1C1&quot;}" data-connect-tablepanel="TainocolorKanno" data-connect-td="R1C1"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS text-align-right UzCompositeChild" id="lblDummyWhite" style="width: 64px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblDummyWhite&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;64px&quot;,&quot;visible&quot;:false,&quot;selectControlID&quot;:&quot;lblDummyWhite&quot;,&quot;text&quot;:&quot;label&quot;}"><span>label</span></span></div></td></tr>  </tbody></table></div><div title="" class="UzTablePanel FloatLeft JSControl controlMargin-M Width-XS ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="TainocolorMino" data-control-type="TablePanel" data-obj="{&quot;fieldName&quot;:&quot;TainocolorMino&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TablePanel&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;TainocolorMino&quot;,&quot;html&quot;:&quot;<table border=\&quot;1\&quot; cellspacing=0 cellpadding=0 span style=\&quot;font-size:4pt\&quot;>\n  <tbody>\n    <tr><td id='R1C1' bgcolor='red'></td></tr>\n  </tbody>\n</table>\n&quot;}"><div id="tempDiv"></div><table style="font-size: 4pt;" border="1" cellspacing="0" cellpadding="0" span="">  <tbody>    <tr><td id="R1C1" bgcolor="red" data-connect-tablepanel="TainocolorMino"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="RedCell" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;RedCell&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;RedCell&quot;,&quot;connectTd&quot;:&quot;R1C1&quot;}" data-connect-tablepanel="TainocolorMino" data-connect-td="R1C1"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS text-align-right UzCompositeChild" id="lblDummyRed" style="width: 64px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblDummyRed&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;64px&quot;,&quot;visible&quot;:false,&quot;selectControlID&quot;:&quot;lblDummyRed&quot;,&quot;text&quot;:&quot;label&quot;}"><span>label</span></span></div></td></tr>  </tbody></table></div></div></td><td id="R1C2" data-connect-tablepanel="TainoSetsumei"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celTainoSetsumei2" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTainoSetsumei2&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTainoSetsumei2&quot;,&quot;connectTd&quot;:&quot;R1C2&quot;}" data-connect-tablepanel="TainoSetsumei" data-connect-td="R1C2"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS text-align-left UzCompositeChild" id="lblMassage1" style="width: 120px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblMassage1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;120px&quot;,&quot;selectControlID&quot;:&quot;lblMassage1&quot;,&quot;text&quot;:&quot;完納／未来納期&quot;,&quot;align&quot;:0}"><span>完納／未来納期</span></span><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS text-align-left UzCompositeChild" id="lblMassage2" style="width: 120px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblMassage2&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;120px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;lblMassage2&quot;,&quot;text&quot;:&quot;未納・時効到来&quot;,&quot;align&quot;:0}"><span>未納・時効到来</span></span></div></td><td id="R1C3" data-connect-tablepanel="TainoSetsumei"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celTainoSetsumei3" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTainoSetsumei3&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTainoSetsumei3&quot;,&quot;connectTd&quot;:&quot;R1C3&quot;}" data-connect-tablepanel="TainoSetsumei" data-connect-td="R1C3"><div title="" class="UzTablePanel FloatLeft JSControl controlMargin-M Width-XS ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="TainocolorMitorai" data-control-type="TablePanel" data-obj="{&quot;fieldName&quot;:&quot;TainocolorMitorai&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TablePanel&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;TainocolorMitorai&quot;,&quot;html&quot;:&quot;<table border=\&quot;1\&quot; cellspacing=0 cellpadding=0 span style=\&quot;font-size:4pt\&quot;>\n  <tbody>\n    <tr><td id='R1C1' bgcolor='yellow'></td></tr>\n  </tbody>\n</table>\n&quot;}"><div id="tempDiv"></div><table style="font-size: 4pt;" border="1" cellspacing="0" cellpadding="0" span="">  <tbody>    <tr><td id="R1C1" bgcolor="yellow" data-connect-tablepanel="TainocolorMitorai"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="YellowCell" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;YellowCell&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;YellowCell&quot;,&quot;connectTd&quot;:&quot;R1C1&quot;}" data-connect-tablepanel="TainocolorMitorai" data-connect-td="R1C1"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS text-align-right UzCompositeChild" id="lblDummyYellow" style="width: 64px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblDummyYellow&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;64px&quot;,&quot;visible&quot;:false,&quot;selectControlID&quot;:&quot;lblDummyYellow&quot;,&quot;text&quot;:&quot;label&quot;}"><span>label</span></span></div></td></tr>  </tbody></table></div><div title="" class="UzTablePanel FloatLeft JSControl controlMargin-M Width-XS ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="TainocolorKano" data-control-type="TablePanel" data-obj="{&quot;fieldName&quot;:&quot;TainocolorKano&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TablePanel&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;TainocolorKano&quot;,&quot;html&quot;:&quot;<table border=\&quot;1\&quot; cellspacing=0 cellpadding=0 span style=\&quot;font-size:4pt\&quot;>\n  <tbody>\n    <tr><td id='R1C1' bgcolor='lightGreen'></td></tr>\n  </tbody>\n</table>\n&quot;}"><div id="tempDiv"></div><table style="font-size: 4pt;" border="1" cellspacing="0" cellpadding="0" span="">  <tbody>    <tr><td id="R1C1" bgcolor="lightgreen" data-connect-tablepanel="TainocolorKano"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="GreenCell1" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;GreenCell1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;GreenCell1&quot;,&quot;connectTd&quot;:&quot;R1C1&quot;}" data-connect-tablepanel="TainocolorKano" data-connect-td="R1C1"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS text-align-right UzCompositeChild" id="lblDummyGreen" style="width: 64px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblDummyGreen&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;64px&quot;,&quot;visible&quot;:false,&quot;selectControlID&quot;:&quot;lblDummyGreen&quot;,&quot;text&quot;:&quot;label&quot;}"><span>label</span></span></div></td></tr>  </tbody></table></div></div></td><td id="R1C4" data-connect-tablepanel="TainoSetsumei"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celTainoSetsumei4" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTainoSetsumei4&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTainoSetsumei4&quot;,&quot;connectTd&quot;:&quot;R1C4&quot;}" data-connect-tablepanel="TainoSetsumei" data-connect-td="R1C4"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS text-align-left UzCompositeChild" id="lblMassage3" style="width: 130px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblMassage3&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;130px&quot;,&quot;selectControlID&quot;:&quot;lblMassage3&quot;,&quot;text&quot;:&quot;未納・時効未到来&quot;,&quot;align&quot;:0}"><span>未納・時効未到来</span></span><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS text-align-left UzCompositeChild" id="lblMassage4" style="width: 130px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblMassage4&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;130px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;lblMassage4&quot;,&quot;text&quot;:&quot;過納&quot;,&quot;align&quot;:0}"><span>過納</span></span></div></td></tr>  </tbody></table></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    (function (TainoInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        TainoInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "TainoInfo";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.TainoInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtHanteiKijunYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtHanteiKijunYMD"));
+            };
+
+            Controls.prototype.btnKensaku = function () {
+                return new UZA.Button(this.convFiledName("btnKensaku"));
+            };
+
+            Controls.prototype.btnGengakuJoho = function () {
+                return new UZA.Button(this.convFiledName("btnGengakuJoho"));
+            };
+
+            Controls.prototype.txtSaikoNokigen = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSaikoNokigen"));
+            };
+
+            Controls.prototype.txtKeikaNen = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikaNen"));
+            };
+
+            Controls.prototype.txtKeikaTsuki = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikaTsuki"));
+            };
+
+            Controls.prototype.linTaino1 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("linTaino1"));
+            };
+
+            Controls.prototype.txtHokenryoNendo1 = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokenryoNendo1"));
+            };
+
+            Controls.prototype.txtHokenryoNendo2 = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokenryoNendo2"));
+            };
+
+            Controls.prototype.txtHokenryoNendo3 = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokenryoNendo3"));
+            };
+
+            Controls.prototype.dgTainoJokyo1 = function () {
+                return new UZA.DataGrid(this.convFiledName("dgTainoJokyo1"));
+            };
+
+            Controls.prototype.dgTainoJokyo2 = function () {
+                return new UZA.DataGrid(this.convFiledName("dgTainoJokyo2"));
+            };
+
+            Controls.prototype.dgTainoJokyo3 = function () {
+                return new UZA.DataGrid(this.convFiledName("dgTainoJokyo3"));
+            };
+
+            Controls.prototype.txtSonotaHokenryo = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtSonotaHokenryo"));
+            };
+
+            Controls.prototype.txtSonotatainoGaku = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtSonotatainoGaku"));
+            };
+
+            Controls.prototype.TainoSetsumei = function () {
+                return new UZA.TablePanel(this.convFiledName("TainoSetsumei"));
+            };
+
+            Controls.prototype.celTainoSetsumei1 = function () {
+                return new UZA.TableCell(this.convFiledName("celTainoSetsumei1"));
+            };
+
+            Controls.prototype.TainocolorKanno = function () {
+                return new UZA.TablePanel(this.convFiledName("TainocolorKanno"));
+            };
+
+            Controls.prototype.WhiteCell = function () {
+                return new UZA.TableCell(this.convFiledName("WhiteCell"));
+            };
+
+            Controls.prototype.lblDummyWhite = function () {
+                return new UZA.Label(this.convFiledName("lblDummyWhite"));
+            };
+
+            Controls.prototype.TainocolorMino = function () {
+                return new UZA.TablePanel(this.convFiledName("TainocolorMino"));
+            };
+
+            Controls.prototype.RedCell = function () {
+                return new UZA.TableCell(this.convFiledName("RedCell"));
+            };
+
+            Controls.prototype.lblDummyRed = function () {
+                return new UZA.Label(this.convFiledName("lblDummyRed"));
+            };
+
+            Controls.prototype.celTainoSetsumei2 = function () {
+                return new UZA.TableCell(this.convFiledName("celTainoSetsumei2"));
+            };
+
+            Controls.prototype.lblMassage1 = function () {
+                return new UZA.Label(this.convFiledName("lblMassage1"));
+            };
+
+            Controls.prototype.lblMassage2 = function () {
+                return new UZA.Label(this.convFiledName("lblMassage2"));
+            };
+
+            Controls.prototype.celTainoSetsumei3 = function () {
+                return new UZA.TableCell(this.convFiledName("celTainoSetsumei3"));
+            };
+
+            Controls.prototype.TainocolorMitorai = function () {
+                return new UZA.TablePanel(this.convFiledName("TainocolorMitorai"));
+            };
+
+            Controls.prototype.YellowCell = function () {
+                return new UZA.TableCell(this.convFiledName("YellowCell"));
+            };
+
+            Controls.prototype.lblDummyYellow = function () {
+                return new UZA.Label(this.convFiledName("lblDummyYellow"));
+            };
+
+            Controls.prototype.TainocolorKano = function () {
+                return new UZA.TablePanel(this.convFiledName("TainocolorKano"));
+            };
+
+            Controls.prototype.GreenCell1 = function () {
+                return new UZA.TableCell(this.convFiledName("GreenCell1"));
+            };
+
+            Controls.prototype.lblDummyGreen = function () {
+                return new UZA.Label(this.convFiledName("lblDummyGreen"));
+            };
+
+            Controls.prototype.celTainoSetsumei4 = function () {
+                return new UZA.TableCell(this.convFiledName("celTainoSetsumei4"));
+            };
+
+            Controls.prototype.lblMassage3 = function () {
+                return new UZA.Label(this.convFiledName("lblMassage3"));
+            };
+
+            Controls.prototype.lblMassage4 = function () {
+                return new UZA.Label(this.convFiledName("lblMassage4"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        TainoInfo.Controls = Controls;
+    })(DBZ.TainoInfo || (DBZ.TainoInfo = {}));
+    var TainoInfo = DBZ.TainoInfo;
+
+    var TainoInfo_Design = (function (_super) {
+        __extends(TainoInfo_Design, _super);
+        function TainoInfo_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, TainoInfo_Design.myLayout, fieldName);
+        }
+        TainoInfo_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("");
+        };
+
+        TainoInfo_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        TainoInfo_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "TainoInfo",
+                    "items": [
+                        {
+                            "fieldName": "txtHanteiKijunYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtHanteiKijunYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "滞納判定基準日",
+                            "labelRText": "",
+                            "labelLWidth": "120",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "btnKensaku",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "M",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnKensaku",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "基準日で検索する",
+                            "onClick": "",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": true
+                        },
+                        {
+                            "fieldName": "btnGengakuJoho",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "M",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnGengakuJoho",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "減額情報を表示する",
+                            "onClick": "",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": true
+                        },
+                        {
+                            "fieldName": "txtSaikoNokigen",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSaikoNokigen_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "最古滞納納期限",
+                            "labelRText": "",
+                            "labelLWidth": "120",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 2,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtKeikaNen",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "20",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "0",
+                            "selectControlID": "txtKeikaNen_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "最古の保険料納期限からの経過月数",
+                            "labelRText": "",
+                            "labelLWidth": "260",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 2,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtKeikaTsuki",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "20",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKeikaTsuki_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "年",
+                            "labelRText": "ヵ月",
+                            "labelLWidth": "20",
+                            "labelRWidth": "50",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 2,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "linTaino1",
+                            "items": [],
+                            "controlType": "HorizontalLine",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "linTaino1",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "size": "Default"
+                        },
+                        {
+                            "fieldName": "txtHokenryoNendo1",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "35",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtHokenryoNendo1_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "保険料年度",
+                            "labelRText": "",
+                            "labelLWidth": "90",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtHokenryoNendo2",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "35",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtHokenryoNendo2_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "保険料年度",
+                            "labelRText": "",
+                            "labelLWidth": "310",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtHokenryoNendo3",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "35",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtHokenryoNendo3_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "保険料年度",
+                            "labelRText": "",
+                            "labelLWidth": "310",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 0,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "dgTainoJokyo1",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "350",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "0",
+                            "selectControlID": "dgTainoJokyo1",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "Auto",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": false,
+                                "isShowHeader": true,
+                                "isShowFooter": false,
+                                "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": false,
+                                "isShowSelectButtonColumn": false,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "txtKi",
+                                    "headerHeight": 1
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "期",
+                                        "dataName": "txtKi",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 40,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtKi"
+                                    },
+                                    {
+                                        "columnName": "保険料",
+                                        "dataName": "txtHokenryo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 2,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtHokenryo"
+                                    },
+                                    {
+                                        "columnName": "納期限",
+                                        "dataName": "txtNokigen",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtNokigen"
+                                    },
+                                    {
+                                        "columnName": "滞納",
+                                        "dataName": "txtTaino",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 40,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtTaino"
+                                    },
+                                    {
+                                        "columnName": "時効起算日",
+                                        "dataName": "txtJikoKisanYMD",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtJikoKisanYMD"
+                                    },
+                                    {
+                                        "columnName": "時効起算日<br>区分",
+                                        "dataName": "txtJikoKisanbiKbn",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtJikoKisanbiKbn"
+                                    }
+                                ]
+                            },
+                            "onSort": "",
+                            "onSelect": "",
+                            "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1
+                        },
+                        {
+                            "fieldName": "dgTainoJokyo2",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "350",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "0",
+                            "selectControlID": "dgTainoJokyo2",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "Auto",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": false,
+                                "isShowHeader": true,
+                                "isShowFooter": false,
+                                "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": false,
+                                "isShowSelectButtonColumn": false,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "txtKi",
+                                    "headerHeight": 1
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "期",
+                                        "dataName": "txtKi",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 40,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtKi"
+                                    },
+                                    {
+                                        "columnName": "保険料",
+                                        "dataName": "txtHokenryo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 2,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtHokenryo"
+                                    },
+                                    {
+                                        "columnName": "納期限",
+                                        "dataName": "txtNokigen",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtNokigen"
+                                    },
+                                    {
+                                        "columnName": "滞納",
+                                        "dataName": "txtTaino",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 40,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtTaino"
+                                    },
+                                    {
+                                        "columnName": "時効起算日",
+                                        "dataName": "txtJikoKisanYMD",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtJikoKisanYMD"
+                                    },
+                                    {
+                                        "columnName": "時効起算日<br>区分",
+                                        "dataName": "txtJikoKisanbiKbn",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtJikoKisanbiKbn"
+                                    }
+                                ]
+                            },
+                            "onSort": "",
+                            "onSelect": "",
+                            "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1
+                        },
+                        {
+                            "fieldName": "dgTainoJokyo3",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "350",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "0",
+                            "selectControlID": "dgTainoJokyo3",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "Auto",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": false,
+                                "isShowHeader": true,
+                                "isShowFooter": false,
+                                "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": false,
+                                "isShowSelectButtonColumn": false,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "txtKi",
+                                    "headerHeight": 1
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "期",
+                                        "dataName": "txtKi",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 40,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtKi"
+                                    },
+                                    {
+                                        "columnName": "保険料",
+                                        "dataName": "txtHokenryo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 2,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtHokenryo"
+                                    },
+                                    {
+                                        "columnName": "納期限",
+                                        "dataName": "txtNokigen",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtNokigen"
+                                    },
+                                    {
+                                        "columnName": "滞納",
+                                        "dataName": "txtTaino",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 40,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtTaino"
+                                    },
+                                    {
+                                        "columnName": "時効起算日",
+                                        "dataName": "txtJikoKisanYMD",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtJikoKisanYMD"
+                                    },
+                                    {
+                                        "columnName": "時効起算日<br>区分",
+                                        "dataName": "txtJikoKisanbiKbn",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtJikoKisanbiKbn"
+                                    }
+                                ]
+                            },
+                            "onSort": "",
+                            "onSelect": "",
+                            "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1
+                        },
+                        {
+                            "fieldName": "txtSonotaHokenryo",
+                            "items": [],
+                            "controlType": "TextBoxNum",
+                            "width": "90",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "0",
+                            "selectControlID": "txtSonotaHokenryo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "表示年度以前の滞納状況　保険料額",
+                            "labelRText": "",
+                            "labelLWidth": "260",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 2,
+                            "textKind": 2,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "maxValue": 1.7976931348623157e+308,
+                            "minValue": 0,
+                            "isCurrency": false,
+                            "isComma": false,
+                            "decimalPointLength": 0,
+                            "permitCharactor": "+-,.\\"
+                        },
+                        {
+                            "fieldName": "txtSonotatainoGaku",
+                            "items": [],
+                            "controlType": "TextBoxNum",
+                            "width": "90",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSonotatainoGaku_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "うち滞納額",
+                            "labelRText": "",
+                            "labelLWidth": "80",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 2,
+                            "textKind": 2,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "maxValue": 1.7976931348623157e+308,
+                            "minValue": 0,
+                            "isCurrency": false,
+                            "isComma": false,
+                            "decimalPointLength": 0,
+                            "permitCharactor": "+-,.\\"
+                        },
+                        {
+                            "fieldName": "TainoSetsumei",
+                            "items": [
+                                {
+                                    "fieldName": "celTainoSetsumei1",
+                                    "items": [
+                                        {
+                                            "fieldName": "TainocolorKanno",
+                                            "items": [
+                                                {
+                                                    "fieldName": "WhiteCell",
+                                                    "items": [
+                                                        {
+                                                            "fieldName": "lblDummyWhite",
+                                                            "items": [],
+                                                            "controlType": "Label",
+                                                            "width": "64",
+                                                            "visible": false,
+                                                            "displayNone": false,
+                                                            "disabled": false,
+                                                            "accessKey": "",
+                                                            "nextFocusFieldName": "",
+                                                            "wrap": false,
+                                                            "dependencies": [],
+                                                            "float": 0,
+                                                            "toolTip": "",
+                                                            "authorityMode": 0,
+                                                            "marginLeft": "XS",
+                                                            "marginRight": "XS",
+                                                            "selectControlID": "lblDummyWhite",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
+                                                            "required": false,
+                                                            "isPrivateInfo": false,
+                                                            "text": "label",
+                                                            "decorationClass": "",
+                                                            "align": 2
+                                                        }
+                                                    ],
+                                                    "controlType": "TableCell",
+                                                    "width": "XS",
+                                                    "visible": true,
+                                                    "displayNone": false,
+                                                    "disabled": false,
+                                                    "accessKey": "",
+                                                    "nextFocusFieldName": "",
+                                                    "wrap": false,
+                                                    "dependencies": [],
+                                                    "float": 0,
+                                                    "toolTip": "",
+                                                    "authorityMode": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
+                                                    "selectControlID": "WhiteCell",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
+                                                    "connectTd": "R1C1"
+                                                }
+                                            ],
+                                            "controlType": "TablePanel",
+                                            "width": "XS",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "TainocolorKanno",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "html": "<table border=\"1\" cellspacing=0 cellpadding=0 span style=\"font-size:4pt\">\n  <tbody>\n    <tr><td id='R1C1' bgcolor='white'></td></tr>\n  </tbody>\n</table>\n"
+                                        },
+                                        {
+                                            "fieldName": "TainocolorMino",
+                                            "items": [
+                                                {
+                                                    "fieldName": "RedCell",
+                                                    "items": [
+                                                        {
+                                                            "fieldName": "lblDummyRed",
+                                                            "items": [],
+                                                            "controlType": "Label",
+                                                            "width": "64",
+                                                            "visible": false,
+                                                            "displayNone": false,
+                                                            "disabled": false,
+                                                            "accessKey": "",
+                                                            "nextFocusFieldName": "",
+                                                            "wrap": false,
+                                                            "dependencies": [],
+                                                            "float": 0,
+                                                            "toolTip": "",
+                                                            "authorityMode": 0,
+                                                            "marginLeft": "XS",
+                                                            "marginRight": "XS",
+                                                            "selectControlID": "lblDummyRed",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
+                                                            "required": false,
+                                                            "isPrivateInfo": false,
+                                                            "text": "label",
+                                                            "decorationClass": "",
+                                                            "align": 2
+                                                        }
+                                                    ],
+                                                    "controlType": "TableCell",
+                                                    "width": "XS",
+                                                    "visible": true,
+                                                    "displayNone": false,
+                                                    "disabled": false,
+                                                    "accessKey": "",
+                                                    "nextFocusFieldName": "",
+                                                    "wrap": false,
+                                                    "dependencies": [],
+                                                    "float": 0,
+                                                    "toolTip": "",
+                                                    "authorityMode": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
+                                                    "selectControlID": "RedCell",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
+                                                    "connectTd": "R1C1"
+                                                }
+                                            ],
+                                            "controlType": "TablePanel",
+                                            "width": "XS",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "TainocolorMino",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "html": "<table border=\"1\" cellspacing=0 cellpadding=0 span style=\"font-size:4pt\">\n  <tbody>\n    <tr><td id='R1C1' bgcolor='red'></td></tr>\n  </tbody>\n</table>\n"
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celTainoSetsumei1",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R1C1"
+                                },
+                                {
+                                    "fieldName": "celTainoSetsumei2",
+                                    "items": [
+                                        {
+                                            "fieldName": "lblMassage1",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "120",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblMassage1",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "完納／未来納期",
+                                            "decorationClass": "",
+                                            "align": 0
+                                        },
+                                        {
+                                            "fieldName": "lblMassage2",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "120",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblMassage2",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "未納・時効到来",
+                                            "decorationClass": "",
+                                            "align": 0
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celTainoSetsumei2",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R1C2"
+                                },
+                                {
+                                    "fieldName": "celTainoSetsumei3",
+                                    "items": [
+                                        {
+                                            "fieldName": "TainocolorMitorai",
+                                            "items": [
+                                                {
+                                                    "fieldName": "YellowCell",
+                                                    "items": [
+                                                        {
+                                                            "fieldName": "lblDummyYellow",
+                                                            "items": [],
+                                                            "controlType": "Label",
+                                                            "width": "64",
+                                                            "visible": false,
+                                                            "displayNone": false,
+                                                            "disabled": false,
+                                                            "accessKey": "",
+                                                            "nextFocusFieldName": "",
+                                                            "wrap": false,
+                                                            "dependencies": [],
+                                                            "float": 0,
+                                                            "toolTip": "",
+                                                            "authorityMode": 0,
+                                                            "marginLeft": "XS",
+                                                            "marginRight": "XS",
+                                                            "selectControlID": "lblDummyYellow",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
+                                                            "required": false,
+                                                            "isPrivateInfo": false,
+                                                            "text": "label",
+                                                            "decorationClass": "",
+                                                            "align": 2
+                                                        }
+                                                    ],
+                                                    "controlType": "TableCell",
+                                                    "width": "XS",
+                                                    "visible": true,
+                                                    "displayNone": false,
+                                                    "disabled": false,
+                                                    "accessKey": "",
+                                                    "nextFocusFieldName": "",
+                                                    "wrap": false,
+                                                    "dependencies": [],
+                                                    "float": 0,
+                                                    "toolTip": "",
+                                                    "authorityMode": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
+                                                    "selectControlID": "YellowCell",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
+                                                    "connectTd": "R1C1"
+                                                }
+                                            ],
+                                            "controlType": "TablePanel",
+                                            "width": "XS",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "TainocolorMitorai",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "html": "<table border=\"1\" cellspacing=0 cellpadding=0 span style=\"font-size:4pt\">\n  <tbody>\n    <tr><td id='R1C1' bgcolor='yellow'></td></tr>\n  </tbody>\n</table>\n"
+                                        },
+                                        {
+                                            "fieldName": "TainocolorKano",
+                                            "items": [
+                                                {
+                                                    "fieldName": "GreenCell1",
+                                                    "items": [
+                                                        {
+                                                            "fieldName": "lblDummyGreen",
+                                                            "items": [],
+                                                            "controlType": "Label",
+                                                            "width": "64",
+                                                            "visible": false,
+                                                            "displayNone": false,
+                                                            "disabled": false,
+                                                            "accessKey": "",
+                                                            "nextFocusFieldName": "",
+                                                            "wrap": false,
+                                                            "dependencies": [],
+                                                            "float": 0,
+                                                            "toolTip": "",
+                                                            "authorityMode": 0,
+                                                            "marginLeft": "XS",
+                                                            "marginRight": "XS",
+                                                            "selectControlID": "lblDummyGreen",
+                                                            "helpMessageID": "",
+                                                            "jpControlName": "",
+                                                            "required": false,
+                                                            "isPrivateInfo": false,
+                                                            "text": "label",
+                                                            "decorationClass": "",
+                                                            "align": 2
+                                                        }
+                                                    ],
+                                                    "controlType": "TableCell",
+                                                    "width": "XS",
+                                                    "visible": true,
+                                                    "displayNone": false,
+                                                    "disabled": false,
+                                                    "accessKey": "",
+                                                    "nextFocusFieldName": "",
+                                                    "wrap": false,
+                                                    "dependencies": [],
+                                                    "float": 0,
+                                                    "toolTip": "",
+                                                    "authorityMode": 0,
+                                                    "marginLeft": "0",
+                                                    "marginRight": "0",
+                                                    "selectControlID": "GreenCell1",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
+                                                    "connectTd": "R1C1"
+                                                }
+                                            ],
+                                            "controlType": "TablePanel",
+                                            "width": "XS",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "TainocolorKano",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "html": "<table border=\"1\" cellspacing=0 cellpadding=0 span style=\"font-size:4pt\">\n  <tbody>\n    <tr><td id='R1C1' bgcolor='lightGreen'></td></tr>\n  </tbody>\n</table>\n"
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celTainoSetsumei3",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R1C3"
+                                },
+                                {
+                                    "fieldName": "celTainoSetsumei4",
+                                    "items": [
+                                        {
+                                            "fieldName": "lblMassage3",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "130",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblMassage3",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "未納・時効未到来",
+                                            "decorationClass": "",
+                                            "align": 0
+                                        },
+                                        {
+                                            "fieldName": "lblMassage4",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "130",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblMassage4",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "過納",
+                                            "decorationClass": "",
+                                            "align": 0
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celTainoSetsumei4",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R1C4"
+                                }
+                            ],
+                            "controlType": "TablePanel",
+                            "width": "XS",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "TainoSetsumei",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "html": "<table cellspacing=0 cellpadding=0 span style=\"font-size:11pt\">\n  <tbody>\n    <tr><td id='R1C1'></td><td id='R1C2'></td><td id='R1C3'></td><td id='R1C4'></td></tr>\n  </tbody>\n</table>\n"
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "1090",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "Default",
+                    "marginRight": "Default",
+                    "selectControlID": "TainoInfo",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "滞納情報",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "TainoInfo"
+                        }
+                    ],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "focusPositionID": "createFile"
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "businessId": "DBZ",
+            "controlName": "TainoInfo",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "",
+                    "publicChildProperty": "",
+                    "newPropertyName": ""
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
+        };
+        return TainoInfo_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.TainoInfo_Design = TainoInfo_Design;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (TainoInfo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new TainoInfo.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        TainoInfo.ModeController = ModeController;
+    })(DBZ.TainoInfo || (DBZ.TainoInfo = {}));
+    var TainoInfo = DBZ.TainoInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (TainoInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new TainoInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        TainoInfo.PublicProperties = PublicProperties;
+    })(DBZ.TainoInfo || (DBZ.TainoInfo = {}));
+    var TainoInfo = DBZ.TainoInfo;
+})(DBZ || (DBZ = {}));
+</script>
+  <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['TAINOINFO'] = {};
+DBZ['TAINOINFO'].TainoInfoRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_TainoInfo').getProperty();parameter0.txtHanteiKijunYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHanteiKijunYMD').getProperty();parameter0.btnKensaku = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnKensaku').getProperty();parameter0.btnGengakuJoho = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnGengakuJoho').getProperty();parameter0.txtSaikoNokigen = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSaikoNokigen').getProperty();parameter0.txtKeikaNen = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKeikaNen').getProperty();parameter0.txtKeikaTsuki = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKeikaTsuki').getProperty();parameter0.linTaino1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_linTaino1').getProperty();parameter0.txtHokenryoNendo1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHokenryoNendo1').getProperty();parameter0.txtHokenryoNendo2 = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHokenryoNendo2').getProperty();parameter0.txtHokenryoNendo3 = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHokenryoNendo3').getProperty();parameter0.dgTainoJokyo1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgTainoJokyo1').getProperty();parameter0.dgTainoJokyo2 = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgTainoJokyo2').getProperty();parameter0.dgTainoJokyo3 = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgTainoJokyo3').getProperty();parameter0.txtSonotaHokenryo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSonotaHokenryo').getProperty();parameter0.txtSonotatainoGaku = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSonotatainoGaku').getProperty();parameter0.TainoSetsumei = Uz.JSControlUtil.getJSControl(parentFieldName + '_TainoSetsumei').getProperty();parameter0.TainoSetsumei.celTainoSetsumei1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTainoSetsumei1').getProperty();parameter0.TainoSetsumei.celTainoSetsumei1.TainocolorKanno = Uz.JSControlUtil.getJSControl(parentFieldName + '_TainocolorKanno').getProperty();parameter0.TainoSetsumei.celTainoSetsumei1.TainocolorKanno.WhiteCell = Uz.JSControlUtil.getJSControl(parentFieldName + '_WhiteCell').getProperty();parameter0.TainoSetsumei.celTainoSetsumei1.TainocolorKanno.WhiteCell.lblDummyWhite = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblDummyWhite').getProperty();parameter0.TainoSetsumei.celTainoSetsumei1.TainocolorMino = Uz.JSControlUtil.getJSControl(parentFieldName + '_TainocolorMino').getProperty();parameter0.TainoSetsumei.celTainoSetsumei1.TainocolorMino.RedCell = Uz.JSControlUtil.getJSControl(parentFieldName + '_RedCell').getProperty();parameter0.TainoSetsumei.celTainoSetsumei1.TainocolorMino.RedCell.lblDummyRed = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblDummyRed').getProperty();parameter0.TainoSetsumei.celTainoSetsumei2 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTainoSetsumei2').getProperty();parameter0.TainoSetsumei.celTainoSetsumei2.lblMassage1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblMassage1').getProperty();parameter0.TainoSetsumei.celTainoSetsumei2.lblMassage2 = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblMassage2').getProperty();parameter0.TainoSetsumei.celTainoSetsumei3 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTainoSetsumei3').getProperty();parameter0.TainoSetsumei.celTainoSetsumei3.TainocolorMitorai = Uz.JSControlUtil.getJSControl(parentFieldName + '_TainocolorMitorai').getProperty();parameter0.TainoSetsumei.celTainoSetsumei3.TainocolorMitorai.YellowCell = Uz.JSControlUtil.getJSControl(parentFieldName + '_YellowCell').getProperty();parameter0.TainoSetsumei.celTainoSetsumei3.TainocolorMitorai.YellowCell.lblDummyYellow = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblDummyYellow').getProperty();parameter0.TainoSetsumei.celTainoSetsumei3.TainocolorKano = Uz.JSControlUtil.getJSControl(parentFieldName + '_TainocolorKano').getProperty();parameter0.TainoSetsumei.celTainoSetsumei3.TainocolorKano.GreenCell1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_GreenCell1').getProperty();parameter0.TainoSetsumei.celTainoSetsumei3.TainocolorKano.GreenCell1.lblDummyGreen = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblDummyGreen').getProperty();parameter0.TainoSetsumei.celTainoSetsumei4 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTainoSetsumei4').getProperty();parameter0.TainoSetsumei.celTainoSetsumei4.lblMassage3 = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblMassage3').getProperty();parameter0.TainoSetsumei.celTainoSetsumei4.lblMassage4 = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblMassage4').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (TainoInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        TainoInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "TainoInfo";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.TainoInfo.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.TainoInfo.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.TainoInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtHanteiKijunYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtHanteiKijunYMD"));
+            };
+
+            Controls.prototype.btnKensaku = function () {
+                return new UZA.Button(this.convFiledName("btnKensaku"));
+            };
+
+            Controls.prototype.btnGengakuJoho = function () {
+                return new UZA.Button(this.convFiledName("btnGengakuJoho"));
+            };
+
+            Controls.prototype.txtSaikoNokigen = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSaikoNokigen"));
+            };
+
+            Controls.prototype.txtKeikaNen = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikaNen"));
+            };
+
+            Controls.prototype.txtKeikaTsuki = function () {
+                return new UZA.TextBox(this.convFiledName("txtKeikaTsuki"));
+            };
+
+            Controls.prototype.linTaino1 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("linTaino1"));
+            };
+
+            Controls.prototype.txtHokenryoNendo1 = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokenryoNendo1"));
+            };
+
+            Controls.prototype.txtHokenryoNendo2 = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokenryoNendo2"));
+            };
+
+            Controls.prototype.txtHokenryoNendo3 = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokenryoNendo3"));
+            };
+
+            Controls.prototype.dgTainoJokyo1 = function () {
+                return new UZA.DataGrid(this.convFiledName("dgTainoJokyo1"));
+            };
+
+            Controls.prototype.dgTainoJokyo2 = function () {
+                return new UZA.DataGrid(this.convFiledName("dgTainoJokyo2"));
+            };
+
+            Controls.prototype.dgTainoJokyo3 = function () {
+                return new UZA.DataGrid(this.convFiledName("dgTainoJokyo3"));
+            };
+
+            Controls.prototype.txtSonotaHokenryo = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtSonotaHokenryo"));
+            };
+
+            Controls.prototype.txtSonotatainoGaku = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtSonotatainoGaku"));
+            };
+
+            Controls.prototype.TainoSetsumei = function () {
+                return new UZA.TablePanel(this.convFiledName("TainoSetsumei"));
+            };
+
+            Controls.prototype.celTainoSetsumei1 = function () {
+                return new UZA.TableCell(this.convFiledName("celTainoSetsumei1"));
+            };
+
+            Controls.prototype.TainocolorKanno = function () {
+                return new UZA.TablePanel(this.convFiledName("TainocolorKanno"));
+            };
+
+            Controls.prototype.WhiteCell = function () {
+                return new UZA.TableCell(this.convFiledName("WhiteCell"));
+            };
+
+            Controls.prototype.lblDummyWhite = function () {
+                return new UZA.Label(this.convFiledName("lblDummyWhite"));
+            };
+
+            Controls.prototype.TainocolorMino = function () {
+                return new UZA.TablePanel(this.convFiledName("TainocolorMino"));
+            };
+
+            Controls.prototype.RedCell = function () {
+                return new UZA.TableCell(this.convFiledName("RedCell"));
+            };
+
+            Controls.prototype.lblDummyRed = function () {
+                return new UZA.Label(this.convFiledName("lblDummyRed"));
+            };
+
+            Controls.prototype.celTainoSetsumei2 = function () {
+                return new UZA.TableCell(this.convFiledName("celTainoSetsumei2"));
+            };
+
+            Controls.prototype.lblMassage1 = function () {
+                return new UZA.Label(this.convFiledName("lblMassage1"));
+            };
+
+            Controls.prototype.lblMassage2 = function () {
+                return new UZA.Label(this.convFiledName("lblMassage2"));
+            };
+
+            Controls.prototype.celTainoSetsumei3 = function () {
+                return new UZA.TableCell(this.convFiledName("celTainoSetsumei3"));
+            };
+
+            Controls.prototype.TainocolorMitorai = function () {
+                return new UZA.TablePanel(this.convFiledName("TainocolorMitorai"));
+            };
+
+            Controls.prototype.YellowCell = function () {
+                return new UZA.TableCell(this.convFiledName("YellowCell"));
+            };
+
+            Controls.prototype.lblDummyYellow = function () {
+                return new UZA.Label(this.convFiledName("lblDummyYellow"));
+            };
+
+            Controls.prototype.TainocolorKano = function () {
+                return new UZA.TablePanel(this.convFiledName("TainocolorKano"));
+            };
+
+            Controls.prototype.GreenCell1 = function () {
+                return new UZA.TableCell(this.convFiledName("GreenCell1"));
+            };
+
+            Controls.prototype.lblDummyGreen = function () {
+                return new UZA.Label(this.convFiledName("lblDummyGreen"));
+            };
+
+            Controls.prototype.celTainoSetsumei4 = function () {
+                return new UZA.TableCell(this.convFiledName("celTainoSetsumei4"));
+            };
+
+            Controls.prototype.lblMassage3 = function () {
+                return new UZA.Label(this.convFiledName("lblMassage3"));
+            };
+
+            Controls.prototype.lblMassage4 = function () {
+                return new UZA.Label(this.convFiledName("lblMassage4"));
+            };
+            return Controls;
+        })();
+        TainoInfo.Controls = Controls;
+    })(DBZ.TainoInfo || (DBZ.TainoInfo = {}));
+    var TainoInfo = DBZ.TainoInfo;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (TainoInfo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new TainoInfo.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        TainoInfo.ModeController = ModeController;
+    })(DBZ.TainoInfo || (DBZ.TainoInfo = {}));
+    var TainoInfo = DBZ.TainoInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (TainoInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new TainoInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        TainoInfo.PublicProperties = PublicProperties;
+    })(DBZ.TainoInfo || (DBZ.TainoInfo = {}));
+    var TainoInfo = DBZ.TainoInfo;
+})(DBZ || (DBZ = {}));
+</script></div>
