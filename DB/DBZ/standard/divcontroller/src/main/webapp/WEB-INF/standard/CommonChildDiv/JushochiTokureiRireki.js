@@ -145,10 +145,19 @@ var DBZ;
                     this.controls.dgJushochiTokureiRireki().readOnly = true;
 
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
+                    var columns = gridSetting.columns;
 
                     gridSetting.isShowSelectButtonColumn = false;
                     gridSetting.isShowModifyButtonColumn = false;
                     gridSetting.isShowDeleteButtonColumn = false;
+
+                    columns[6].visible = true;
+
+                    columns[7].visible = true;
+
+                    columns[10].visible = true;
+
+                    columns[11].width = 250;
 
                     this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
                     this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
@@ -159,10 +168,19 @@ var DBZ;
                     this.controls.dgJushochiTokureiRireki().readOnly = false;
 
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
+                    var columns = gridSetting.columns;
 
                     gridSetting.isShowSelectButtonColumn = false;
                     gridSetting.isShowModifyButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = true;
+
+                    columns[6].visible = true;
+
+                    columns[7].visible = true;
+
+                    columns[10].visible = true;
+
+                    columns[11].width = 250;
 
                     this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
                     this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
@@ -207,7 +225,7 @@ var DBZ;
 
                     columns[10].visible = false;
 
-                    columns[11].width = 560;
+                    columns[11].width = 370;
 
                     gridSetting.columns = columns;
 
@@ -234,7 +252,7 @@ var DBZ;
 
                     columns[10].visible = false;
 
-                    columns[11].width = 560;
+                    columns[11].width = 370;
 
                     gridSetting.columns = columns;
 
@@ -269,7 +287,7 @@ var DBZ;
 
                     columns[10].visible = false;
 
-                    columns[11].width = 560;
+                    columns[11].width = 370;
 
                     gridSetting.columns = columns;
 
@@ -297,7 +315,7 @@ var DBZ;
 
                     columns[10].visible = false;
 
-                    columns[11].width = 560;
+                    columns[11].width = 370;
 
                     gridSetting.columns = columns;
 
@@ -325,7 +343,7 @@ var DBZ;
 
                     columns[10].visible = false;
 
-                    columns[11].width = 560;
+                    columns[11].width = 370;
 
                     gridSetting.columns = columns;
 

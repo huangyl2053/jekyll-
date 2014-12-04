@@ -23,6 +23,14 @@
             Events.onSelectByDeleteButton_dgHenko = function () {
                 return "onSelectByDeleteButton_dgHenko";
             };
+
+            Events.onClick_btnHenkoKakutei = function () {
+                return "onClick_btnHenkoKakutei";
+            };
+
+            Events.onClick_btnHenkoTorikeshi = function () {
+                return "onClick_btnHenkoTorikeshi";
+            };
             return Events;
         })();
         ShikakuHenkoRireki.Events = Events;
@@ -54,6 +62,50 @@
             Controls.prototype.dgHenko = function () {
                 return new UZA.DataGrid(this.convFiledName("dgHenko"));
             };
+
+            Controls.prototype.HenkoInput = function () {
+                return new UZA.Panel(this.convFiledName("HenkoInput"));
+            };
+
+            Controls.prototype.txtHenkoDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtHenkoDate"));
+            };
+
+            Controls.prototype.txtHenkoTodokedeDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtHenkoTodokedeDate"));
+            };
+
+            Controls.prototype.ddlHenkoJiyu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlHenkoJiyu"));
+            };
+
+            Controls.prototype.HenkoHokenshaJoho = function () {
+                return new UZA.Panel(this.convFiledName("HenkoInput_HenkoHokenshaJoho"));
+            };
+
+            Controls.prototype.ddlHenkoShozaiHokensha = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlHenkoShozaiHokensha"));
+            };
+
+            Controls.prototype.ddlHenkoSochimotoHokensha = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlHenkoSochimotoHokensha"));
+            };
+
+            Controls.prototype.ddlHenkoKyuHokensha = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlHenkoKyuHokensha"));
+            };
+
+            Controls.prototype.ddlJuminJoho = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlJuminJoho"));
+            };
+
+            Controls.prototype.btnHenkoKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnHenkoKakutei"));
+            };
+
+            Controls.prototype.btnHenkoTorikeshi = function () {
+                return new UZA.Button(this.convFiledName("btnHenkoTorikeshi"));
+            };
             return Controls;
         })();
         ShikakuHenkoRireki.Controls = Controls;
@@ -82,6 +134,7 @@ var DBZ;
                     "BtnDisplayMode",
                     "HokenshaJohoDisplayMode",
                     "ShoriNichijiDisplayMode",
+                    "MeisaiMode",
                     "DataGridWidth",
                     "DataGridHeight"
                 ];
@@ -101,6 +154,10 @@ var DBZ;
 
             ModeController.prototype.ShoriNichijiDisplayMode = function () {
                 return new Modes.ShoriNichijiDisplayMode(this.controls);
+            };
+
+            ModeController.prototype.MeisaiMode = function () {
+                return new Modes.MeisaiMode(this.controls);
             };
 
             ModeController.prototype.DataGridWidth = function () {
@@ -192,6 +249,12 @@ var DBZ;
 
                     this.controls.dgHenko().gridSetting = gridSetting;
 
+                    this.controls.HenkoHokenshaJoho().displayNone = true;
+                    this.controls.ddlHenkoShozaiHokensha().displayNone = true;
+                    this.controls.ddlHenkoSochimotoHokensha().displayNone = true;
+                    this.controls.ddlHenkoKyuHokensha().displayNone = true;
+                    this.controls.ddlJuminJoho().displayNone = true;
+
                     this.controls.dgHenko()._control.afterPropertiesSet();
                 };
 
@@ -203,6 +266,12 @@ var DBZ;
                     gridSetting.columns[7].visible = true;
 
                     this.controls.dgHenko().gridSetting = gridSetting;
+
+                    this.controls.HenkoHokenshaJoho().displayNone = false;
+                    this.controls.ddlHenkoShozaiHokensha().displayNone = true;
+                    this.controls.ddlHenkoSochimotoHokensha().displayNone = true;
+                    this.controls.ddlHenkoKyuHokensha().displayNone = false;
+                    this.controls.ddlJuminJoho().displayNone = true;
 
                     this.controls.dgHenko()._control.afterPropertiesSet();
                 };
@@ -216,6 +285,12 @@ var DBZ;
 
                     this.controls.dgHenko().gridSetting = gridSetting;
 
+                    this.controls.HenkoHokenshaJoho().displayNone = false;
+                    this.controls.ddlHenkoShozaiHokensha().displayNone = false;
+                    this.controls.ddlHenkoSochimotoHokensha().displayNone = false;
+                    this.controls.ddlHenkoKyuHokensha().displayNone = true;
+                    this.controls.ddlJuminJoho().displayNone = false;
+
                     this.controls.dgHenko()._control.afterPropertiesSet();
                 };
 
@@ -227,6 +302,12 @@ var DBZ;
                     gridSetting.columns[7].visible = true;
 
                     this.controls.dgHenko().gridSetting = gridSetting;
+
+                    this.controls.HenkoHokenshaJoho().displayNone = false;
+                    this.controls.ddlHenkoShozaiHokensha().displayNone = false;
+                    this.controls.ddlHenkoSochimotoHokensha().displayNone = false;
+                    this.controls.ddlHenkoKyuHokensha().displayNone = false;
+                    this.controls.ddlJuminJoho().displayNone = false;
 
                     this.controls.dgHenko()._control.afterPropertiesSet();
                 };
@@ -260,6 +341,66 @@ var DBZ;
                 return ShoriNichijiDisplayMode;
             })();
             Modes.ShoriNichijiDisplayMode = ShoriNichijiDisplayMode;
+
+            var MeisaiMode = (function () {
+                function MeisaiMode(controls) {
+                    this.controls = controls;
+                }
+                MeisaiMode.prototype.shokai = function () {
+                    this.controls.HenkoInput().readOnly = true;
+                    this.controls.HenkoInput().displayNone = false;
+
+                    this.controls.txtHenkoDate().readOnly = true;
+                    this.controls.txtHenkoTodokedeDate().readOnly = true;
+                    this.controls.ddlHenkoJiyu().readOnly = true;
+                    this.controls.ddlHenkoShozaiHokensha().readOnly = true;
+                    this.controls.ddlHenkoSochimotoHokensha().readOnly = true;
+                    this.controls.ddlHenkoKyuHokensha().readOnly = true;
+                    this.controls.ddlJuminJoho().readOnly = true;
+
+                    this.controls.btnHenkoKakutei().displayNone = true;
+                    this.controls.btnHenkoTorikeshi().displayNone = true;
+                };
+
+                MeisaiMode.prototype.toroku = function () {
+                    this.controls.HenkoInput().readOnly = false;
+                    this.controls.HenkoInput().displayNone = false;
+
+                    this.controls.txtHenkoDate().readOnly = false;
+                    this.controls.txtHenkoTodokedeDate().readOnly = false;
+                    this.controls.ddlHenkoJiyu().readOnly = false;
+                    this.controls.ddlHenkoShozaiHokensha().readOnly = false;
+                    this.controls.ddlHenkoSochimotoHokensha().readOnly = false;
+                    this.controls.ddlHenkoKyuHokensha().readOnly = false;
+                    this.controls.ddlJuminJoho().readOnly = false;
+
+                    this.controls.btnHenkoKakutei().displayNone = false;
+                    this.controls.btnHenkoTorikeshi().displayNone = false;
+                };
+
+                MeisaiMode.prototype.sakujo = function () {
+                    this.controls.HenkoInput().readOnly = false;
+                    this.controls.HenkoInput().displayNone = false;
+
+                    this.controls.txtHenkoDate().readOnly = true;
+                    this.controls.txtHenkoTodokedeDate().readOnly = true;
+                    this.controls.ddlHenkoJiyu().readOnly = true;
+                    this.controls.ddlHenkoShozaiHokensha().readOnly = true;
+                    this.controls.ddlHenkoSochimotoHokensha().readOnly = true;
+                    this.controls.ddlHenkoKyuHokensha().readOnly = true;
+                    this.controls.ddlJuminJoho().readOnly = true;
+
+                    this.controls.btnHenkoKakutei().displayNone = false;
+                    this.controls.btnHenkoTorikeshi().displayNone = false;
+                };
+
+                MeisaiMode.prototype.setDisplayNone = function () {
+                    this.controls.HenkoInput().readOnly = true;
+                    this.controls.HenkoInput().displayNone = true;
+                };
+                return MeisaiMode;
+            })();
+            Modes.MeisaiMode = MeisaiMode;
 
             var DataGridWidth = (function () {
                 function DataGridWidth(controls) {

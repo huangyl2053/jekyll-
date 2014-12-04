@@ -4,16 +4,16 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onSelectByDblClick_dgShoKaishuJokyo = function () {
-                return "onSelectByDblClick_dgShoKaishuJokyo";
+            Events.onBeforeClick_btnShoKaishuKakutei = function () {
+                return "onBeforeClick_btnShoKaishuKakutei";
             };
 
-            Events.onSelectBySelectButton_dgShoKaishuJokyo = function () {
-                return "onSelectBySelectButton_dgShoKaishuJokyo";
+            Events.onClick_btnShoKaishuKakutei = function () {
+                return "onClick_btnShoKaishuKakutei";
             };
 
-            Events.onClick_btnUpdateShoKaishuJokyo = function () {
-                return "onClick_btnUpdateShoKaishuJokyo";
+            Events.onClick_btnShoKaishuTorikeshi = function () {
+                return "onClick_btnShoKaishuTorikeshi";
             };
             return Events;
         })();
@@ -39,16 +39,20 @@ var DBZ;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.ShoKaishuJokyoList = function () {
-                return new DBZ.ShoKaishuJokyoList.ModeController(this.convFiledName("ShoKaishuJokyoList"));
+            Controls.prototype.ccdShoKaishuJokyoList = function () {
+                return new DBZ.ShoKaishuJokyoList.ModeController(this.convFiledName("ccdShoKaishuJokyoList"));
             };
 
-            Controls.prototype.ShoKaishuJokyoShosai = function () {
-                return new DBZ.ShoKaishuJokyoShosai.ModeController(this.convFiledName("ShoKaishuJokyoShosai"));
+            Controls.prototype.ccdShoKaishuJokyoShosai = function () {
+                return new DBZ.ShoKaishuJokyoShosai.ModeController(this.convFiledName("ccdShoKaishuJokyoShosai"));
             };
 
-            Controls.prototype.btnUpdateShoKaishuJokyo = function () {
-                return new UZA.Button(this.convFiledName("btnUpdateShoKaishuJokyo"));
+            Controls.prototype.btnShoKaishuKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnShoKaishuKakutei"));
+            };
+
+            Controls.prototype.btnShoKaishuTorikeshi = function () {
+                return new UZA.Button(this.convFiledName("btnShoKaishuTorikeshi"));
             };
             return Controls;
         })();

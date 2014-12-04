@@ -142,7 +142,7 @@ public interface IItemList<E> extends Iterable<E> {
 
     /**
      * 保持する要素を自然順序順にソートした結果から構成される、新しい{@link IItemList IItemList}を返します。
-     * ただし、保持する要素が{@link Comparable Comparable}でない、{@link ClassCastException}がスローされる可能性があります。
+     * ただし、保持する要素が{@link Comparable Comparable}でない場合、{@link ClassCastException}がスローされる可能性があります。
      *
      * @return ソート結果から構成される{@link IItemList IItemList}
      */
@@ -150,7 +150,7 @@ public interface IItemList<E> extends Iterable<E> {
 
     /**
      * 保持する要素を自然順序の逆順にソートした結果から構成される、新しい{@link IItemList IItemList}を返します。
-     * ただし、保持する要素が{@link Comparable Comparable}でない、{@link ClassCastException}がスローされる可能性があります。
+     * ただし、保持する要素が{@link Comparable Comparable}でない場合、{@link ClassCastException}がスローされる可能性があります。
      *
      * @return ソート結果から構成される{@link IItemList IItemList}
      */

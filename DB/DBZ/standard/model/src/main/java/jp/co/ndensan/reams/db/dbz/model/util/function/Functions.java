@@ -55,7 +55,7 @@ public final class Functions {
 
     /**
      * あるオブジェクトを親のオブジェクトへ変換する{@link IFunction IFunction}を返します。
-     * {@link #childToParent() toParent()}との違いは、変換後の型だけを明確にすれば問題ない時に、
+     * {@link #childToParent() childToParent()}との違いは、変換後の型だけを明確にすれば問題ない場合に、
      * 変換元の型の指定を省略することができる点です。
      *
      * @param <C> 子オブジェクトの型

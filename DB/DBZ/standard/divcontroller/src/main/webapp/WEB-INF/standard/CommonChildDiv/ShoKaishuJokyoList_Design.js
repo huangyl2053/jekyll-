@@ -4,6 +4,13 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onSelect_dgShoKaishuJokyo = function () {
+                return "onSelect_dgShoKaishuJokyo";
+            };
+
+            Events.onSelectBySelectButton_dgShoKaishuJokyo = function () {
+                return "onSelectBySelectButton_dgShoKaishuJokyo";
+            };
             return Events;
         })();
         ShoKaishuJokyoList.Events = Events;

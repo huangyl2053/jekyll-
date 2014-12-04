@@ -27,6 +27,14 @@ var DBZ;
             Events.onSelectByDeleteButton_dgShisetsuNyutaishoRireki = function () {
                 return "onSelectByDeleteButton_dgShisetsuNyutaishoRireki";
             };
+
+            Events.onClick_btnShisetsuNyutaishoKakutei = function () {
+                return "onClick_btnShisetsuNyutaishoKakutei";
+            };
+
+            Events.onClick_btnShisetsuNyutaishoTorikeshi = function () {
+                return "onClick_btnShisetsuNyutaishoTorikeshi";
+            };
             return Events;
         })();
         ShisetsuNyutaishoRirekiKanri.Events = Events;
@@ -57,6 +65,30 @@ var DBZ;
 
             Controls.prototype.dgShisetsuNyutaishoRireki = function () {
                 return new UZA.DataGrid(this.convFiledName("dgShisetsuNyutaishoRireki"));
+            };
+
+            Controls.prototype.ShisetsuNyutaishoInput = function () {
+                return new UZA.Panel(this.convFiledName("ShisetsuNyutaishoInput"));
+            };
+
+            Controls.prototype.txtNyushoDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNyushoDate"));
+            };
+
+            Controls.prototype.txtTaishoDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTaishoDate"));
+            };
+
+            Controls.prototype.ccdShisetsuJoho = function () {
+                return new DBZ.ShisetsuJoho.ModeController(this.convFiledName("ccdShisetsuJoho"));
+            };
+
+            Controls.prototype.btnShisetsuNyutaishoKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnShisetsuNyutaishoKakutei"));
+            };
+
+            Controls.prototype.btnShisetsuNyutaishoTorikeshi = function () {
+                return new UZA.Button(this.convFiledName("btnShisetsuNyutaishoTorikeshi"));
             };
             return Controls;
         })();

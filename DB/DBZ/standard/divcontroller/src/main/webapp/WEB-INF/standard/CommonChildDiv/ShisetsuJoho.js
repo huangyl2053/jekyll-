@@ -84,7 +84,8 @@ var DBZ;
                 return [
                     "台帳種別",
                     "施設種類",
-                    "入力補助"
+                    "入力補助",
+                    "表示モード"
                 ];
             };
 
@@ -98,6 +99,10 @@ var DBZ;
 
             ModeController.prototype.入力補助 = function () {
                 return new Modes.入力補助(this.controls);
+            };
+
+            ModeController.prototype.表示モード = function () {
+                return new Modes.表示モード(this.controls);
             };
             return ModeController;
         })();
@@ -158,6 +163,28 @@ var DBZ;
                 return 入力補助;
             })();
             Modes.入力補助 = 入力補助;
+
+            var 表示モード = (function () {
+                function 表示モード(controls) {
+                    this.controls = controls;
+                }
+                表示モード.prototype.defaultView = function () {
+                    this.controls.ShisetsuJoho().readOnly = false;
+                    this.controls.ShisetsuJoho().displayNone = false;
+                };
+
+                表示モード.prototype.readOnly = function () {
+                    this.controls.ShisetsuJoho().readOnly = true;
+                    this.controls.ShisetsuJoho().displayNone = false;
+                };
+
+                表示モード.prototype.displayNone = function () {
+                    this.controls.ShisetsuJoho().readOnly = true;
+                    this.controls.ShisetsuJoho().displayNone = true;
+                };
+                return 表示モード;
+            })();
+            Modes.表示モード = 表示モード;
         })(ShisetsuJoho.Modes || (ShisetsuJoho.Modes = {}));
         var Modes = ShisetsuJoho.Modes;
     })(DBZ.ShisetsuJoho || (DBZ.ShisetsuJoho = {}));

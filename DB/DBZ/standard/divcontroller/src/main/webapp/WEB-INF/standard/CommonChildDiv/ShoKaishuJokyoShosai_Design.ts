@@ -8,18 +8,6 @@ module DBZ {
 
         export class Events {
 
-            public static onBlur_txtKaishuDate(): string {
-                return "onBlur_txtKaishuDate";
-            }
-
-            public static onChange_ddlKaishuJiyu(): string {
-                return "onChange_ddlKaishuJiyu";
-            }
-
-            public static onBlur_txtKaishuRiyu(): string {
-                return "onBlur_txtKaishuRiyu";
-            }
-
         }
 
         export class Controls {

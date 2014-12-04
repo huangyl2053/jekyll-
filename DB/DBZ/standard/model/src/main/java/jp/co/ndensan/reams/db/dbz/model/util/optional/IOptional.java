@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.model.util.optional;
 
 import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
+import jp.co.ndensan.reams.db.dbz.model.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
 
@@ -32,6 +33,14 @@ public interface IOptional<T> {
      * @return 保持する値があれば{@literal true}、emptyなら{@literal false}
      */
     boolean isPresent();
+
+    /**
+     * 保持する値があれば、指定の{@code consumer}に定義された処理を実行します。
+     *
+     * @param consumer 保持する値があるときに実行する、指定の処理
+     * @throws NullPointerException 保持する値が存在していて、かつ、引数の{@code consumer}がnullの時
+     */
+    void ifPresent(IConsumer<? super T> consumer) throws NullPointerException;
 
     /**
      * 保持する値があればその値、emptyなら引数の値を返します。

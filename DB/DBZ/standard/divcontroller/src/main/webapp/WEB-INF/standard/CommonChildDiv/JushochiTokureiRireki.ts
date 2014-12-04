@@ -17,7 +17,7 @@ module DBZ {
                 return new PublicProperties(this.fieldName);
             }
  
-            public priorities(): Array<string> {
+            public priorities(): Array < string > {
                 return [
                 	"TashichosonDisplayMode",
                 	"TashichosonTeiseiDisplayMode",
@@ -91,10 +91,19 @@ module DBZ {
                     this.controls.dgJushochiTokureiRireki().readOnly = true;
 
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
+                    var columns = gridSetting.columns;
 
                     gridSetting.isShowSelectButtonColumn = false
                     gridSetting.isShowModifyButtonColumn = false;
                     gridSetting.isShowDeleteButtonColumn = false;
+                    //•ÛŒ¯Ò sochiHokenshaMeisho
+                    columns[6].visible = true;
+                    //”í•Û”Ô† sochiHihokenshaNo
+                    columns[7].visible = true;
+                    //{İí—Ş ShisetsuShurui
+                    columns[10].visible = true;
+                    //“üŠ{İ •\¦ Äİ’è250 (ShisetsuShurui(120) + NyushoShisetsu(250))
+                    columns[11].width = 250;
       
                     this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
                     this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
@@ -106,12 +115,21 @@ module DBZ {
 
                     this.controls.btnAdd().displayNone = false;
                     this.controls.dgJushochiTokureiRireki().readOnly = false;
-                   
+                    
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
+                    var columns = gridSetting.columns;
 
                     gridSetting.isShowSelectButtonColumn = false;
                     gridSetting.isShowModifyButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = true;
+                    //•ÛŒ¯Ò sochiHokenshaMeisho
+                    columns[6].visible = true;
+                    //”í•Û”Ô† sochiHihokenshaNo
+                    columns[7].visible = true;
+                    //{İí—Ş ShisetsuShurui
+                    columns[10].visible = true;
+                    //“üŠ{İ •\¦ Äİ’è250 (ShisetsuShurui(120) + NyushoShisetsu(250))
+                    columns[11].width = 250;
 
                     this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
                     this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
@@ -154,18 +172,18 @@ module DBZ {
                     this.controls.dgJushochiTokureiRireki().gridSetting.isShowDeleteButtonColumn = false;
                     
 
-                    //ï¿½[ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+                    //‘[’uŒ³î•ñ”ñ•\¦‚·‚é 
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
                     var columns = gridSetting.columns;
 
-                    //ï¿½ÛŒï¿½ï¿½ï¿½ sochiHokenshaMeisho
+                    //•ÛŒ¯Ò sochiHokenshaMeisho
                     columns[6].visible = false;
-                    //ï¿½ï¿½Û”Ôï¿½ sochiHihokenshaNo
+                    //”í•Û”Ô† sochiHihokenshaNo
                     columns[7].visible = false;
-                    //ï¿½{ï¿½İï¿½ï¿½ shisetsuShurui
+                    //{İí—Ş ShisetsuShurui
                     columns[10].visible = false;
-                    //ï¿½ï¿½{ï¿½ï¿½ ï¿½\ï¿½ï¿½ ï¿½Äİ’ï¿½560 nyushoShisetsu
-                    columns[11].width = 560;
+                    //“üŠ{İ •\¦ Äİ’è370 (ShisetsuShurui(120) + NyushoShisetsu(250))
+                    columns[11].width = 370;
 
 
                     gridSetting.columns = columns;
@@ -186,18 +204,18 @@ module DBZ {
                     this.controls.dgJushochiTokureiRireki().gridSetting.isShowModifyButtonColumn = false;
                     this.controls.dgJushochiTokureiRireki().gridSetting.isShowDeleteButtonColumn = false;
 
-                    //ï¿½[ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+                    //‘[’uŒ³î•ñ”ñ•\¦‚·‚é 
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
                     var columns = gridSetting.columns
 
-                    //ï¿½ÛŒï¿½ï¿½ï¿½
+                    //•ÛŒ¯Ò
                     columns[6].visible = false;
-                    //ï¿½ï¿½Û”Ôï¿½
+                    //”í•Û”Ô†
                     columns[7].visible = false;
-                    //ï¿½{ï¿½İï¿½ï¿½
+                    //{İí—Ş ShisetsuShurui
                     columns[10].visible = false;
-                    //ï¿½ï¿½{ï¿½ï¿½ ï¿½\ï¿½ï¿½ ï¿½Äİ’ï¿½560
-                    columns[11].width = 560;
+                    //“üŠ{İ •\¦ Äİ’è370 (ShisetsuShurui(120) + NyushoShisetsu(250))
+                    columns[11].width = 370;
 
 
                     gridSetting.columns = columns;
@@ -221,7 +239,7 @@ module DBZ {
 
                     this.controls.dgJushochiTokureiRireki().readOnly = true;
 
-                    //ï¿½[ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+                    //‘[’uŒ³î•ñ”ñ•\¦‚·‚é 
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
 
                     gridSetting.isShowSelectButtonColumn = false
@@ -230,14 +248,14 @@ module DBZ {
 
                     var columns = gridSetting.columns;
 
-                    //ï¿½ÛŒï¿½ï¿½ï¿½ sochiHokenshaMeisho
+                    //•ÛŒ¯Ò sochiHokenshaMeisho
                     columns[6].visible = false;
-                    //ï¿½ï¿½Û”Ôï¿½ sochiHihokenshaNo
+                    //”í•Û”Ô† sochiHihokenshaNo
                     columns[7].visible = false;
-                    //ï¿½{ï¿½İï¿½ï¿½ shisetsuShurui
+                    //{İí—Ş ShisetsuShurui
                     columns[10].visible = false;
-                    //ï¿½ï¿½{ï¿½ï¿½ ï¿½\ï¿½ï¿½ ï¿½Äİ’ï¿½560 nyushoShisetsu
-                    columns[11].width = 560;
+                    //“üŠ{İ •\¦ Äİ’è370 (ShisetsuShurui(120) + NyushoShisetsu(250))
+                    columns[11].width = 370;
 
 
                     gridSetting.columns = columns;
@@ -255,7 +273,7 @@ module DBZ {
 
                     this.controls.dgJushochiTokureiRireki().readOnly = false;
 
-                    //ï¿½[ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+                    //‘[’uŒ³î•ñ”ñ•\¦‚·‚é 
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
 
                     gridSetting.isShowSelectButtonColumn = false;
@@ -264,14 +282,14 @@ module DBZ {
 
                     var columns = gridSetting.columns
 
-                    //ï¿½ÛŒï¿½ï¿½ï¿½
+                    //•ÛŒ¯Ò
                     columns[6].visible = false;
-                    //ï¿½ï¿½Û”Ôï¿½
+                    //”í•Û”Ô†
                     columns[7].visible = false;
-                    //ï¿½{ï¿½İï¿½ï¿½
+                    //{İí—Ş ShisetsuShurui
                     columns[10].visible = false;
-                    //ï¿½ï¿½{ï¿½ï¿½ ï¿½\ï¿½ï¿½ ï¿½Äİ’ï¿½560
-                    columns[11].width = 560;
+                    //“üŠ{İ •\¦ Äİ’è370 (ShisetsuShurui(120) + NyushoShisetsu(250))
+                    columns[11].width = 370;
 
                     gridSetting.columns = columns;
 
@@ -287,7 +305,7 @@ module DBZ {
 
                     this.controls.dgJushochiTokureiRireki().readOnly = false;
 
-                    //ï¿½[ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+                    //‘[’uŒ³î•ñ”ñ•\¦‚·‚é 
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
 
                     gridSetting.isShowSelectButtonColumn = true;
@@ -296,14 +314,14 @@ module DBZ {
 
                     var columns = gridSetting.columns
 
-                    //ï¿½ÛŒï¿½ï¿½ï¿½
+                    //•ÛŒ¯Ò
                     columns[6].visible = false;
-                    //ï¿½ï¿½Û”Ôï¿½
+                    //”í•Û”Ô†
                     columns[7].visible = false;
-                    //ï¿½{ï¿½İï¿½ï¿½
+                    //{İí—Ş ShisetsuShurui
                     columns[10].visible = false;
-                    //ï¿½ï¿½{ï¿½ï¿½ ï¿½\ï¿½ï¿½ ï¿½Äİ’ï¿½560
-                    columns[11].width = 560;
+                    //“üŠ{İ •\¦ Äİ’è370 (ShisetsuShurui(120) + NyushoShisetsu(250))
+                    columns[11].width = 370;
 
                     gridSetting.columns = columns;
 
@@ -340,7 +358,5 @@ module DBZ {
         }
     }
 }
-
-
 
 

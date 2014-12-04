@@ -19,13 +19,15 @@ module DBZ
             public PublicProperties() {
                 return new PublicProperties(this.fieldName);
             }
+            
 
-            public priorities(): Array<string> {
+            public priorities(): Array {
                 return [
                     "DisplayType",
                     "BtnDisplayMode",
                     "HokenshaJohoDisplayMode",
                     "ShoriNichijiDisplayMode",
+                    "MeisaiMode",
                     "DataGridWidth",
                     "DataGridHeight"
                 ];
@@ -45,6 +47,10 @@ module DBZ
 
             public ShoriNichijiDisplayMode() {
                 return new Modes.ShoriNichijiDisplayMode(this.controls);
+            }
+
+            public MeisaiMode() {
+                return new Modes.MeisaiMode(this.controls);
             }
 
             public DataGridWidth() {
@@ -141,6 +147,12 @@ module DBZ
                     gridSetting.columns[7].visible = false;
 
                     this.controls.dgHenko().gridSetting = gridSetting;
+                    
+                    this.controls.HenkoHokenshaJoho().displayNone = true;
+                    this.controls.ddlHenkoShozaiHokensha().displayNone = true;
+                    this.controls.ddlHenkoSochimotoHokensha().displayNone = true;
+                    this.controls.ddlHenkoKyuHokensha().displayNone = true;
+                    this.controls.ddlJuminJoho().displayNone = true;
 
                     this.controls.dgHenko()._control.afterPropertiesSet();
 
@@ -153,7 +165,14 @@ module DBZ
                     gridSetting.columns[6].visible = false;
                     gridSetting.columns[7].visible = true;
 
+
                     this.controls.dgHenko().gridSetting = gridSetting;
+                    
+                    this.controls.HenkoHokenshaJoho().displayNone = false;
+                    this.controls.ddlHenkoShozaiHokensha().displayNone = true;
+                    this.controls.ddlHenkoSochimotoHokensha().displayNone = true;
+                    this.controls.ddlHenkoKyuHokensha().displayNone = false;
+                    this.controls.ddlJuminJoho().displayNone = true;
 
                     this.controls.dgHenko()._control.afterPropertiesSet();
 
@@ -167,6 +186,12 @@ module DBZ
                     gridSetting.columns[7].visible = false;
 
                     this.controls.dgHenko().gridSetting = gridSetting;
+                    
+                    this.controls.HenkoHokenshaJoho().displayNone = false;
+                    this.controls.ddlHenkoShozaiHokensha().displayNone = false;
+                    this.controls.ddlHenkoSochimotoHokensha().displayNone = false;
+                    this.controls.ddlHenkoKyuHokensha().displayNone = true;
+                    this.controls.ddlJuminJoho().displayNone = false;
 
                     this.controls.dgHenko()._control.afterPropertiesSet();
 
@@ -180,6 +205,12 @@ module DBZ
                     gridSetting.columns[7].visible = true;
 
                     this.controls.dgHenko().gridSetting = gridSetting;
+                    
+                    this.controls.HenkoHokenshaJoho().displayNone = false;
+                    this.controls.ddlHenkoShozaiHokensha().displayNone = false;
+                    this.controls.ddlHenkoSochimotoHokensha().displayNone = false;
+                    this.controls.ddlHenkoKyuHokensha().displayNone = false;
+                    this.controls.ddlJuminJoho().displayNone = false;
 
                     this.controls.dgHenko()._control.afterPropertiesSet();
 
@@ -214,6 +245,67 @@ module DBZ
 
                     this.controls.dgHenko()._control.afterPropertiesSet();
 
+                }
+            }
+            
+            export class MeisaiMode {
+                private controls: Controls;
+
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                public shokai(): void {
+                    this.controls.HenkoInput().readOnly = true;
+                    this.controls.HenkoInput().displayNone = false;
+
+                    this.controls.txtHenkoDate().readOnly = true;
+                    this.controls.txtHenkoTodokedeDate().readOnly = true;
+                    this.controls.ddlHenkoJiyu().readOnly = true;
+                    this.controls.ddlHenkoShozaiHokensha().readOnly = true;
+                    this.controls.ddlHenkoSochimotoHokensha().readOnly = true;
+                    this.controls.ddlHenkoKyuHokensha().readOnly = true;
+                    this.controls.ddlJuminJoho().readOnly = true;
+                    
+                    this.controls.btnHenkoKakutei().displayNone = true;
+                    this.controls.btnHenkoTorikeshi().displayNone = true;
+                }
+
+                public toroku(): void {
+                    this.controls.HenkoInput().readOnly = false;
+                    this.controls.HenkoInput().displayNone = false;
+
+                    this.controls.txtHenkoDate().readOnly = false;
+                    this.controls.txtHenkoTodokedeDate().readOnly = false;
+                    this.controls.ddlHenkoJiyu().readOnly = false;
+                    this.controls.ddlHenkoShozaiHokensha().readOnly = false;
+                    this.controls.ddlHenkoSochimotoHokensha().readOnly = false;
+                    this.controls.ddlHenkoKyuHokensha().readOnly = false;
+                    this.controls.ddlJuminJoho().readOnly = false;
+                    
+                    this.controls.btnHenkoKakutei().displayNone = false;
+                    this.controls.btnHenkoTorikeshi().displayNone = false;
+                }
+
+                public sakujo(): void {
+                    this.controls.HenkoInput().readOnly = false;
+                    this.controls.HenkoInput().displayNone = false;
+
+                    this.controls.txtHenkoDate().readOnly = true;
+                    this.controls.txtHenkoTodokedeDate().readOnly = true;
+                    this.controls.ddlHenkoJiyu().readOnly = true;
+                    this.controls.ddlHenkoShozaiHokensha().readOnly = true;
+                    this.controls.ddlHenkoSochimotoHokensha().readOnly = true;
+                    this.controls.ddlHenkoKyuHokensha().readOnly = true;
+                    this.controls.ddlJuminJoho().readOnly = true;
+
+                    this.controls.btnHenkoKakutei().displayNone = false;
+                    this.controls.btnHenkoTorikeshi().displayNone = false;
+                }
+
+                public setDisplayNone(): void {
+                    this.controls.HenkoInput().readOnly = true;
+                    this.controls.HenkoInput().displayNone = true;
                 }
             }
 
@@ -384,7 +476,4 @@ module DBZ {
         }
     }
 }
-
-
-
 

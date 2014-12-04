@@ -23,6 +23,18 @@ var DBZ;
             Events.onSelectByDeleteButton_dgIryoHokenRireki = function () {
                 return "onSelectByDeleteButton_dgIryoHokenRireki";
             };
+
+            Events.onBlur_txtIryoHokenHokenshaNo = function () {
+                return "onBlur_txtIryoHokenHokenshaNo";
+            };
+
+            Events.onClick_btnIryoHokenKakutei = function () {
+                return "onClick_btnIryoHokenKakutei";
+            };
+
+            Events.onClick_btnIryoHokenTorikeshi = function () {
+                return "onClick_btnIryoHokenTorikeshi";
+            };
             return Events;
         })();
         IryoHokenRireki.Events = Events;
@@ -53,6 +65,42 @@ var DBZ;
 
             Controls.prototype.dgIryoHokenRireki = function () {
                 return new UZA.DataGrid(this.convFiledName("dgIryoHokenRireki"));
+            };
+
+            Controls.prototype.IryoHokenInput = function () {
+                return new UZA.Panel(this.convFiledName("IryoHokenInput"));
+            };
+
+            Controls.prototype.txtIryoHokenKanyuDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIryoHokenKanyuDate"));
+            };
+
+            Controls.prototype.txtIryoHokenDattaiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIryoHokenDattaiDate"));
+            };
+
+            Controls.prototype.ddlIryoHokenShubetsu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlIryoHokenShubetsu"));
+            };
+
+            Controls.prototype.txtIryoHokenHokenshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtIryoHokenHokenshaNo"));
+            };
+
+            Controls.prototype.txtIryoHokenHokenshaMeisho = function () {
+                return new UZA.TextBox(this.convFiledName("txtIryoHokenHokenshaMeisho"));
+            };
+
+            Controls.prototype.txtIryoHokenKigoNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtIryoHokenKigoNo"));
+            };
+
+            Controls.prototype.btnIryoHokenKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnIryoHokenKakutei"));
+            };
+
+            Controls.prototype.btnIryoHokenTorikeshi = function () {
+                return new UZA.Button(this.convFiledName("btnIryoHokenTorikeshi"));
             };
             return Controls;
         })();

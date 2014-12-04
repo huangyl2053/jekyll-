@@ -4,12 +4,8 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onLoad_ShikakuShutokuTaishoshaJoho = function () {
-                return "onLoad_ShikakuShutokuTaishoshaJoho";
-            };
-
-            Events.onClick_btnAdd = function () {
-                return "onClick_btnAdd";
+            Events.onClick_btnAddShikakuShutoku = function () {
+                return "onClick_btnAddShikakuShutoku";
             };
 
             Events.onSelect_dgShikakuShutokuRireki = function () {
@@ -51,8 +47,8 @@ var DBZ;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.btnAdd = function () {
-                return new UZA.Button(this.convFiledName("btnAdd"));
+            Controls.prototype.btnAddShikakuShutoku = function () {
+                return new UZA.Button(this.convFiledName("btnAddShikakuShutoku"));
             };
 
             Controls.prototype.dgShikakuShutokuRireki = function () {

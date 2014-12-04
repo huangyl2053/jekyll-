@@ -1,4 +1,4 @@
-<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ShoKaishuKirokuKanri&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}" data-is-composite-control="true" data-control-name="DBZ.ShoKaishuKirokuKanri"><div title="" class="UzPanel FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default UzCommonChildDivPanel UzCompositeChild" id="ShoKaishuKirokuKanri" style="width: 1030px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ShoKaishuKirokuKanri&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1030px&quot;,&quot;selectControlID&quot;:&quot;ShoKaishuKirokuKanri&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ShoKaishuKirokuKanri&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onClick_btnSelect&quot;,&quot;requestUrl&quot;:&quot;dbz/db/dbz/ShoKaishuKirokuKanri/onClick_btnSelect&quot;},{&quot;eventName&quot;:&quot;onClick_btnUpdateShoKaishuJokyo&quot;,&quot;requestUrl&quot;:&quot;dbz/db/dbz/ShoKaishuKirokuKanri/onClick_btnUpdateShoKaishuJokyo&quot;}],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;mode&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;selectRow&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ShoKaishuKirokuKanri_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="ShoKaishuKirokuKanri_panel_body_area"><div title="" class="JSControl UzCompositeControl FloatLeft Width-XS ClearFloat" id="ShoKaishuJokyoList" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ShoKaishuJokyoList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:true,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;ShoKaishuJokyoList&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ShoKaishuJokyoList&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[{&quot;eventName&quot;:&quot;onSelect_dgShoKaishuJokyo&quot;},{&quot;eventName&quot;:&quot;onSelectBySelectButton_dgShoKaishuJokyo&quot;}],&quot;publicEventsAlias&quot;:[],&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:true,&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;選択&quot;,&quot;dataName&quot;:&quot;btnSelect&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:40,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;&quot;,&quot;onClick&quot;:&quot;onClick_btnSelect&quot;,&quot;imageFileUrl&quot;:&quot;/uz/uza/image/UZ_RowSelect_On.png&quot;,&quot;imageWidth&quot;:&quot;20&quot;,&quot;imageHeight&quot;:&quot;20&quot;},&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;交付証種類&quot;,&quot;dataName&quot;:&quot;kofushoShurui&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:180,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;交付日&quot;,&quot;dataName&quot;:&quot;kofuDate&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;交付事由Key&quot;,&quot;dataName&quot;:&quot;kofuJiyuKey&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:0,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;交付事由&quot;,&quot;dataName&quot;:&quot;kofuJiyu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:200,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;交付理由&quot;,&quot;dataName&quot;:&quot;kofuRiyu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:0,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;回収日&quot;,&quot;dataName&quot;:&quot;kaishuDate&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;回収事由Key&quot;,&quot;dataName&quot;:&quot;kaishuJiyuKey&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:0,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;回収事由&quot;,&quot;dataName&quot;:&quot;kaishuJiyu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:200,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;回収理由&quot;,&quot;dataName&quot;:&quot;kaishuRiyu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:0,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;},{&quot;columnName&quot;:&quot;有効期限&quot;,&quot;dataName&quot;:&quot;yukoKigen&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;&quot;}]},&quot;onSelectByDblClick&quot;:&quot;onSelectByDblClick_dgShoKaishuJokyo&quot;,&quot;onSelectBySelectButton&quot;:&quot;onSelectBySelectButton_dgShoKaishuJokyo&quot;,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.ShoKaishuJokyoList"></div><div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="ShoKaishuJokyoShosai" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ShoKaishuJokyoShosai&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;ShoKaishuJokyoShosai&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ShoKaishuJokyoShosai&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[{&quot;eventName&quot;:&quot;onBlur_txtKaishuDate&quot;},{&quot;eventName&quot;:&quot;onChange_ddlKaishuJiyu&quot;},{&quot;eventName&quot;:&quot;onBlur_txtKaishuRiyu&quot;}],&quot;publicEventsAlias&quot;:[],&quot;ShoKaishuJokyoShosai_panelDisplay&quot;:2,&quot;ShoKaishuJokyoShosai_canOpenAndClose&quot;:false,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;ShoKaishuJokyoShosai_panelDisplay&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;ShoKaishuJokyoShosai_canOpenAndClose&quot;,&quot;editType&quot;:0}]}}" data-is-composite-control="true" data-control-name="DBZ.ShoKaishuJokyoShosai"></div><button title="" class="UzButton JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnUpdateShoKaishuJokyo" style="width: 150px; opacity: 0.8;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnUpdateShoKaishuJokyo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnUpdateShoKaishuJokyo&quot;,&quot;text&quot;:&quot;交付情報を確定する&quot;,&quot;onClick&quot;:&quot;onClick_btnUpdateShoKaishuJokyo&quot;}"><span>交付情報を確定する</span></button></div></div> 
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ShoKaishuKirokuKanri&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;ShoKaishuJokyoShosai_canOpenAndClose&quot;,&quot;editType&quot;:0}]}}" data-is-composite-control="true" data-control-name="DBZ.ShoKaishuKirokuKanri"><div title="" class="UzPanel FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-Default marginRight-Default marginTop-Default marginBottom-Default UzCommonChildDivPanel UzCompositeChild" id="ShoKaishuKirokuKanri" style="width: 970px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ShoKaishuKirokuKanri&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;970px&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;ShoKaishuKirokuKanri&quot;,&quot;title&quot;:&quot;&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;widthAuto&quot;:false,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="ShoKaishuKirokuKanri_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="ShoKaishuKirokuKanri_panel_body_area"><div title="" class="JSControl UzCompositeControl FloatLeft Width-XS" id="ccdShoKaishuJokyoList" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdShoKaishuJokyoList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ccdShoKaishuJokyoList&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ShoKaishuJokyoList&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.ShoKaishuJokyoList"></div><div title="" class="JSControl UzCompositeControl  FloatLeft Width-XS" id="ccdShoKaishuJokyoShosai" style="margin: 0em; opacity: 1;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdShoKaishuJokyoShosai&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;ccdShoKaishuJokyoShosai&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ShoKaishuJokyoShosai&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;ShoKaishuJokyoShosai_panelDisplay&quot;:2,&quot;ShoKaishuJokyoShosai_canOpenAndClose&quot;:false,&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;ShoKaishuJokyoShosai_panelDisplay&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;ShoKaishuJokyoShosai_canOpenAndClose&quot;,&quot;editType&quot;:0}]}}" data-is-composite-control="true" data-control-name="DBZ.ShoKaishuJokyoShosai"></div><button title="" class="UzButton JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnShoKaishuKakutei" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnShoKaishuKakutei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnShoKaishuKakutei&quot;,&quot;onBeforeClick&quot;:&quot;onBeforeClick_btnShoKaishuKakutei&quot;,&quot;onClick&quot;:&quot;onClick_btnShoKaishuKakutei&quot;,&quot;text&quot;:&quot;確定する&quot;}"><span>確定する</span></button><button title="" class="UzButton JSControl controlMargin-M FloatRight marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnShoKaishuTorikeshi" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnShoKaishuTorikeshi&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnShoKaishuTorikeshi&quot;,&quot;onClick&quot;:&quot;onClick_btnShoKaishuTorikeshi&quot;,&quot;text&quot;:&quot;取消する&quot;}"><span>取消する</span></button></div></div> 
 <script type="text/javascript">var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -7,182 +7,17 @@
 };
 var DBZ;
 (function (DBZ) {
-    (function (ShoKaishuKirokuKanri) {
-        var Events = (function () {
-            function Events() {
-            }
-            Object.defineProperty(Events, "onSelectByDblClick_dgShoKaishuJokyo", {
-                get: function () {
-                    return "onSelectByDblClick_dgShoKaishuJokyo";
-                },
-                enumerable: true,
-                configurable: true
-            });
-            Object.defineProperty(Events, "onClick_btnUpdateShoKaishuJokyo", {
-                get: function () {
-                    return "onClick_btnUpdateShoKaishuJokyo";
-                },
-                enumerable: true,
-                configurable: true
-            });
-            Object.defineProperty(Events, "onSelectBySelectButton_dgShoKaishuJokyo", {
-                get: function () {
-                    return "onSelectBySelectButton_dgShoKaishuJokyo";
-                },
-                enumerable: true,
-                configurable: true
-            });
-            return Events;
-        })();
-        ShoKaishuKirokuKanri.Events = Events;
-
-        var Controls = (function () {
-            function Controls(fieldName) {
-                this._myName = fieldName;
-            }
-            Object.defineProperty(Controls, "MyType", {
-                get: function () {
-                    return "ShoKaishuKirokuKanri";
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Controls.prototype.ShoKaishuJokyoList = function () {
-                return new DBZ.ShoKaishuJokyoList.ModeController("ShoKaishuJokyoList");
-            };
-
-            Controls.prototype.ShoKaishuJokyoShosai = function () {
-                return new DBZ.ShoKaishuJokyoShosai.ModeController("ShoKaishuJokyoShosai");
-            };
-
-            Controls.prototype.ShoKaishuKirokuKanri = function () {
-                return new UZA.Panel(this.convFiledNameSelf());
-            };
-
-            Controls.prototype.btnUpdateShoKaishuJokyo = function () {
-                return new UZA.Button(this.convFiledName("btnUpdateShoKaishuJokyo"));
-            };
-
-            Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + Controls.MyType;
-            };
-
-            Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + Controls.MyType + "_" + fieldName;
-            };
-            return Controls;
-        })();
-        ShoKaishuKirokuKanri.Controls = Controls;
-    })(DBZ.ShoKaishuKirokuKanri || (DBZ.ShoKaishuKirokuKanri = {}));
-    var ShoKaishuKirokuKanri = DBZ.ShoKaishuKirokuKanri;
-
     var ShoKaishuKirokuKanri_Design = (function (_super) {
         __extends(ShoKaishuKirokuKanri_Design, _super);
         function ShoKaishuKirokuKanri_Design($parentElement, isDesignMode, fieldName) {
             _super.call(this, $parentElement, isDesignMode, ShoKaishuKirokuKanri_Design.myLayout, fieldName);
         }
-        Object.defineProperty(ShoKaishuKirokuKanri_Design.prototype, "onBlur_txtKaishuDate", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onBlur_txtKaishuDate"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onBlur_txtKaishuDate"] = value;
-                } else {
-                    this.layout.items[0].items[1]["onBlur_txtKaishuDate"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(ShoKaishuKirokuKanri_Design.prototype, "onChange_ddlKaishuJiyu", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onChange_ddlKaishuJiyu"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onChange_ddlKaishuJiyu"] = value;
-                } else {
-                    this.layout.items[0].items[1]["onChange_ddlKaishuJiyu"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(ShoKaishuKirokuKanri_Design.prototype, "onBlur_txtKaishuRiyu", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onBlur_txtKaishuRiyu"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onBlur_txtKaishuRiyu"] = value;
-                } else {
-                    this.layout.items[0].items[1]["onBlur_txtKaishuRiyu"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(ShoKaishuKirokuKanri_Design.prototype, "ShoKaishuJokyoShosai_panalDisplay", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["ShoKaishuJokyoShosai_panelDisplay"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["ShoKaishuJokyoShosai_panelDisplay"] = value;
-                } else {
-                    this.layout.items[0].items[1]["ShoKaishuJokyoShosai_panelDisplay"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(ShoKaishuKirokuKanri_Design.prototype, "ShoKaishuJokyoShosai_canOpenAndClose", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["ShoKaishuJokyoShosai_canOpenAndClose"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["ShoKaishuJokyoShosai_canOpenAndClose"] = value;
-                } else {
-                    this.layout.items[0].items[1]["ShoKaishuJokyoShosai_canOpenAndClose"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
         ShoKaishuKirokuKanri_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
-            Uz.JSControlUtil.registProperty("onBlur_txtKaishuDate");
-            Uz.JSControlUtil.registProperty("onChange_ddlKaishuJiyu");
-            Uz.JSControlUtil.registProperty("onBlur_txtKaishuRiyu");
-            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_panalDisplay");
-            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_canOpenAndClose");
         };
 
         ShoKaishuKirokuKanri_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
-            editablePropertyInfo["onBlur_txtKaishuDate"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onBlur_txtKaishuDate"];
-            editablePropertyInfo["onChange_ddlKaishuJiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onChange_ddlKaishuJiyu"];
-            editablePropertyInfo["onBlur_txtKaishuRiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onBlur_txtKaishuRiyu"];
-            editablePropertyInfo["ShoKaishuJokyoShosai_panalDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["ShoKaishuJokyoShosai_panelDisplay"];
-            editablePropertyInfo["ShoKaishuJokyoShosai_canOpenAndClose"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["ShoKaishuJokyoShosai_canOpenAndClose"];
 
             return editablePropertyInfo;
         };
@@ -193,240 +28,7 @@ var DBZ;
                     "fieldName": "ShoKaishuKirokuKanri",
                     "items": [
                         {
-                            "fieldName": "ShoKaishuJokyoList",
-                            "items": [],
-                            "controlType": "CommonChildDiv",
-                            "width": "XS",
-                            "visible": true,
-                            "displayNone": false,
-                            "disabled": false,
-                            "accessKey": "",
-                            "nextFocusFieldName": "",
-                            "wrap": true,
-                            "dependencies": [],
-                            "float": 0,
-                            "toolTip": "",
-                            "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
-                            "selectControlID": "ShoKaishuJokyoList",
-                            "helpMessageID": "",
-                            "jpControlName": "",
-                            "relation": [],
-                            "businessId": "DBZ",
-                            "controlName": "ShoKaishuJokyoList",
-                            "marginTop": 0,
-                            "marginBottom": 0,
-                            "originalProperty": [],
-                            "dataPassingForDialog": [],
-                            "dialogOkEventNameForDialog": "",
-                            "dialogCancelEventNameForDialog": "",
-                            "canTransferEvent": true,
-                            "heightForDialog": "M",
-                            "gridSetting": {
-                                "rowHeight": 25,
-                                "isMultiSelectable": false,
-                                "isShowHeader": true,
-                                "isShowFooter": true,
-                                "isShowFilter": false,
-                                "isShowFilterButton": false,
-                                "isShowRowState": true,
-                                "isShowSelectButtonColumn": false,
-                                "isShowModifyButtonColumn": false,
-                                "isShowDeleteButtonColumn": false,
-                                "limitRowCount": 0,
-                                "selectedRowCount": 0,
-                                "header": {
-                                    "combineColumns": [],
-                                    "frozenColumn": "",
-                                    "headerHeight": 0
-                                },
-                                "columns": [
-                                    {
-                                        "columnName": "選択",
-                                        "dataName": "btnSelect",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 40,
-                                        "visible": true,
-                                        "cellType": 8,
-                                        "cellDetails": {
-                                            "cellType": 8,
-                                            "text": "",
-                                            "onClick": "onClick_btnSelect",
-                                            "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
-                                            "imageWidth": "20",
-                                            "imageHeight": "20"
-                                        },
-                                        "align": 1,
-                                        "resize": false,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "交付証種類",
-                                        "dataName": "kofushoShurui",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 180,
-                                        "visible": true,
-                                        "cellType": 0,
-                                        "cellDetails": {
-                                            "cellType": 0
-                                        },
-                                        "align": 0,
-                                        "resize": true,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "交付日",
-                                        "dataName": "kofuDate",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 90,
-                                        "visible": true,
-                                        "cellType": 7,
-                                        "cellDetails": {
-                                            "cellType": 7,
-                                            "ymdKubun": 2,
-                                            "displayFormat": 0,
-                                            "onChange": ""
-                                        },
-                                        "align": 1,
-                                        "resize": true,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "交付事由Key",
-                                        "dataName": "kofuJiyuKey",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 0,
-                                        "visible": false,
-                                        "cellType": 0,
-                                        "cellDetails": null,
-                                        "align": 0,
-                                        "resize": false,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "交付事由",
-                                        "dataName": "kofuJiyu",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 200,
-                                        "visible": true,
-                                        "cellType": 0,
-                                        "cellDetails": null,
-                                        "align": 0,
-                                        "resize": true,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "交付理由",
-                                        "dataName": "kofuRiyu",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 0,
-                                        "visible": false,
-                                        "cellType": 0,
-                                        "cellDetails": null,
-                                        "align": 0,
-                                        "resize": false,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "回収日",
-                                        "dataName": "kaishuDate",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 90,
-                                        "visible": true,
-                                        "cellType": 7,
-                                        "cellDetails": {
-                                            "cellType": 7,
-                                            "ymdKubun": 2,
-                                            "displayFormat": 0,
-                                            "onChange": ""
-                                        },
-                                        "align": 1,
-                                        "resize": true,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "回収事由Key",
-                                        "dataName": "kaishuJiyuKey",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 0,
-                                        "visible": false,
-                                        "cellType": 0,
-                                        "cellDetails": null,
-                                        "align": 0,
-                                        "resize": false,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "回収事由",
-                                        "dataName": "kaishuJiyu",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 200,
-                                        "visible": true,
-                                        "cellType": 0,
-                                        "cellDetails": null,
-                                        "align": 0,
-                                        "resize": true,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "回収理由",
-                                        "dataName": "kaishuRiyu",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 0,
-                                        "visible": false,
-                                        "cellType": 0,
-                                        "cellDetails": null,
-                                        "align": 0,
-                                        "resize": false,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "有効期限",
-                                        "dataName": "yukoKigen",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 90,
-                                        "visible": true,
-                                        "cellType": 7,
-                                        "cellDetails": {
-                                            "cellType": 7,
-                                            "ymdKubun": 2,
-                                            "displayFormat": 0,
-                                            "onChange": ""
-                                        },
-                                        "align": 1,
-                                        "resize": false,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    }
-                                ]
-                            },
-                            "onSelectByDblClick": "onSelectByDblClick_dgShoKaishuJokyo",
-                            "onSelectBySelectButton": "onSelectBySelectButton_dgShoKaishuJokyo"
-                        },
-                        {
-                            "fieldName": "ShoKaishuJokyoShosai",
+                            "fieldName": "ccdShoKaishuJokyoList",
                             "items": [],
                             "controlType": "CommonChildDiv",
                             "width": "XS",
@@ -440,33 +42,72 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
-                            "selectControlID": "ShoKaishuJokyoShosai",
+                            "marginLeft": "0px",
+                            "marginRight": "0px",
+                            "selectControlID": "ccdShoKaishuJokyoList",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "relation": [],
+                            "packageName": "",
                             "businessId": "DBZ",
-                            "controlName": "ShoKaishuJokyoShosai",
-                            "marginTop": 0,
-                            "marginBottom": 0,
+                            "controlName": "ShoKaishuJokyoList",
+                            "marginTop": "0px",
+                            "marginBottom": "0px",
                             "originalProperty": [],
                             "dataPassingForDialog": [],
                             "dialogOkEventNameForDialog": "",
                             "dialogCancelEventNameForDialog": "",
                             "canTransferEvent": true,
                             "heightForDialog": "M",
-                            "onBlur_txtKaishuDate": "",
-                            "onChange_ddlKaishuJiyu": "",
-                            "onBlur_txtKaishuRiyu": "",
-                            "ShoKaishuJokyoShosai_panelDisplay": 0,
-                            "ShoKaishuJokyoShosai_canOpenAndClose": true
+                            "firstFocusFieldName": "",
+                            "lastFocusFieldName": "",
+                            "modes": [],
+                            "publicEvents": [],
+                            "publicEventsAlias": []
                         },
                         {
-                            "fieldName": "btnUpdateShoKaishuJokyo",
+                            "fieldName": "ccdShoKaishuJokyoShosai",
+                            "items": [],
+                            "controlType": "CommonChildDiv",
+                            "width": "XS",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0px",
+                            "marginRight": "0px",
+                            "selectControlID": "ccdShoKaishuJokyoShosai",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "relation": [],
+                            "packageName": "",
+                            "businessId": "DBZ",
+                            "controlName": "ShoKaishuJokyoShosai",
+                            "marginTop": "0px",
+                            "marginBottom": "0px",
+                            "originalProperty": [],
+                            "dataPassingForDialog": [],
+                            "dialogOkEventNameForDialog": "",
+                            "dialogCancelEventNameForDialog": "",
+                            "canTransferEvent": true,
+                            "heightForDialog": "M",
+                            "firstFocusFieldName": "",
+                            "lastFocusFieldName": "",
+                            "modes": [],
+                            "publicEvents": [],
+                            "publicEventsAlias": []
+                        },
+                        {
+                            "fieldName": "btnShoKaishuKakutei",
                             "items": [],
                             "controlType": "Button",
-                            "width": "150",
+                            "width": "S",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -479,11 +120,44 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
-                            "selectControlID": "btnUpdateShoKaishuJokyo",
+                            "selectControlID": "btnShoKaishuKakutei",
                             "helpMessageID": "",
                             "jpControlName": "",
-                            "onClick": "onClick_btnUpdateShoKaishuJokyo",
-                            "text": "交付情報を確定する",
+                            "onBeforeClick": "onBeforeClick_btnShoKaishuKakutei",
+                            "onAfterClick": "",
+                            "onClick": "onClick_btnShoKaishuKakutei",
+                            "text": "確定する",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        },
+                        {
+                            "fieldName": "btnShoKaishuTorikeshi",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnShoKaishuTorikeshi",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
+                            "onClick": "onClick_btnShoKaishuTorikeshi",
+                            "text": "取消する",
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
@@ -493,7 +167,7 @@ var DBZ;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "1030",
+                    "width": "970px",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -504,8 +178,8 @@ var DBZ;
                     "float": 0,
                     "toolTip": "",
                     "authorityMode": 0,
-                    "marginLeft": "XS",
-                    "marginRight": "XS",
+                    "marginLeft": "Default",
+                    "marginRight": "Default",
                     "selectControlID": "ShoKaishuKirokuKanri",
                     "helpMessageID": "",
                     "jpControlName": "",
@@ -514,36 +188,10 @@ var DBZ;
                     "marginTop": "Default",
                     "marginBottom": "Default",
                     "isOpen": true,
-                    "canOpenAndClose": true,
-                    "postParameterPanelNames": [
-                        {
-                            "postParameterPanelNames": "ShoKaishuKirokuKanri"
-                        }
-                    ],
-                    "requestSettings": [
-                        {
-                            "eventName": "onLoad",
-                            "requestUrl": ""
-                        },
-                        {
-                            "eventName": "onClick_btnSelect",
-                            "requestUrl": "dbz/db/dbz/ShoKaishuKirokuKanri/onClick_btnSelect"
-                        },
-                        {
-                            "eventName": "onClick_btnUpdateShoKaishuJokyo",
-                            "requestUrl": "dbz/db/dbz/ShoKaishuKirokuKanri/onClick_btnUpdateShoKaishuJokyo"
-                        }
-                    ],
-                    "hiddenInput": [
-                        {
-                            "propertyName": "mode",
-                            "value": ""
-                        },
-                        {
-                            "propertyName": "selectRow",
-                            "value": ""
-                        }
-                    ],
+                    "canOpenAndClose": false,
+                    "postParameterPanelNames": [],
+                    "requestSettings": [],
+                    "hiddenInput": [],
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
@@ -553,7 +201,8 @@ var DBZ;
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "Auto"
+                    "height": "Auto",
+                    "canPost": false
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -568,52 +217,92 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": "0",
-            "marginRight": "0",
+            "marginLeft": "0px",
+            "marginRight": "0px",
             "selectControlID": "defaultLayout",
             "helpMessageID": "",
             "jpControlName": "",
             "relation": [],
+            "packageName": "",
             "businessId": "DBZ",
             "controlName": "ShoKaishuKirokuKanri",
-            "marginTop": 0,
-            "marginBottom": 0,
-            "originalProperty": [
-                {
-                    "publicChildFieldName": "ShoKaishuJokyoShosai",
-                    "publicChildProperty": "onBlur_txtKaishuDate",
-                    "newPropertyName": "onBlur_txtKaishuDate"
-                },
-                {
-                    "publicChildFieldName": "ShoKaishuJokyoShosai",
-                    "publicChildProperty": "onChange_ddlKaishuJiyu",
-                    "newPropertyName": "onChange_ddlKaishuJiyu"
-                },
-                {
-                    "publicChildFieldName": "ShoKaishuJokyoShosai",
-                    "publicChildProperty": "onBlur_txtKaishuRiyu",
-                    "newPropertyName": "onBlur_txtKaishuRiyu"
-                },
-                {
-                    "publicChildFieldName": "ShoKaishuJokyoShosai",
-                    "publicChildProperty": "ShoKaishuJokyoShosai_panelDisplay",
-                    "newPropertyName": "ShoKaishuJokyoShosai_panalDisplay"
-                },
-                {
-                    "publicChildFieldName": "ShoKaishuJokyoShosai",
-                    "publicChildProperty": "ShoKaishuJokyoShosai_canOpenAndClose",
-                    "newPropertyName": "ShoKaishuJokyoShosai_canOpenAndClose"
-                }
-            ],
+            "marginTop": "0px",
+            "marginBottom": "0px",
+            "originalProperty": [],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": "",
             "canTransferEvent": true,
-            "heightForDialog": "M"
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
         };
         return ShoKaishuKirokuKanri_Design;
     })(Uz.CommonChildDiv);
     DBZ.ShoKaishuKirokuKanri_Design = ShoKaishuKirokuKanri_Design;
+
+    (function (ShoKaishuKirokuKanri) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onBeforeClick_btnShoKaishuKakutei = function () {
+                return "onBeforeClick_btnShoKaishuKakutei";
+            };
+
+            Events.onClick_btnShoKaishuKakutei = function () {
+                return "onClick_btnShoKaishuKakutei";
+            };
+
+            Events.onClick_btnShoKaishuTorikeshi = function () {
+                return "onClick_btnShoKaishuTorikeshi";
+            };
+            return Events;
+        })();
+        ShoKaishuKirokuKanri.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ShoKaishuKirokuKanri";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.ShoKaishuKirokuKanri.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + fieldName;
+            };
+
+            Controls.prototype.ShoKaishuKirokuKanri = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ccdShoKaishuJokyoList = function () {
+                return new DBZ.ShoKaishuJokyoList.ModeController("ccdShoKaishuJokyoList");
+            };
+
+            Controls.prototype.ccdShoKaishuJokyoShosai = function () {
+                return new DBZ.ShoKaishuJokyoShosai.ModeController("ccdShoKaishuJokyoShosai");
+            };
+
+            Controls.prototype.btnShoKaishuKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnShoKaishuKakutei"));
+            };
+
+            Controls.prototype.btnShoKaishuTorikeshi = function () {
+                return new UZA.Button(this.convFiledName("btnShoKaishuTorikeshi"));
+            };
+            return Controls;
+        })();
+        ShoKaishuKirokuKanri.Controls = Controls;
+    })(DBZ.ShoKaishuKirokuKanri || (DBZ.ShoKaishuKirokuKanri = {}));
+    var ShoKaishuKirokuKanri = DBZ.ShoKaishuKirokuKanri;
 })(DBZ || (DBZ = {}));
 
 ﻿var __extends = this.__extends || function (d, b) {
@@ -648,7 +337,7 @@ var DBZ;
                             "fieldName": "dgShoKaishuJokyo",
                             "items": [],
                             "controlType": "DataGrid",
-                            "width": "910px",
+                            "width": "960px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -686,6 +375,20 @@ var DBZ;
                                     "headerHeight": 0
                                 },
                                 "columns": [
+                                    {
+                                        "columnName": "状態",
+                                        "dataName": "state",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 50,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": ""
+                                    },
                                     {
                                         "columnName": "交付証種類",
                                         "dataName": "kofushoShurui",
@@ -852,9 +555,9 @@ var DBZ;
                                 ]
                             },
                             "onSort": "",
-                            "onSelect": "",
+                            "onSelect": "onSelect_dgShoKaishuJokyo",
                             "onSelectByDblClick": "",
-                            "onSelectBySelectButton": "",
+                            "onSelectBySelectButton": "onSelectBySelectButton_dgShoKaishuJokyo",
                             "onSelectByModifyButton": "",
                             "onSelectByDeleteButton": "",
                             "onAfterRequest": "",
@@ -874,7 +577,7 @@ var DBZ;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "945px",
+                    "width": "965px",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -953,7 +656,14 @@ var DBZ;
             "firstFocusFieldName": "",
             "lastFocusFieldName": "",
             "modes": [],
-            "publicEvents": [],
+            "publicEvents": [
+                {
+                    "eventName": "onSelect_dgShoKaishuJokyo"
+                },
+                {
+                    "eventName": "onSelectBySelectButton_dgShoKaishuJokyo"
+                }
+            ],
             "publicEventsAlias": []
         };
         return ShoKaishuJokyoList_Design;
@@ -964,6 +674,13 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onSelect_dgShoKaishuJokyo = function () {
+                return "onSelect_dgShoKaishuJokyo";
+            };
+
+            Events.onSelectBySelectButton_dgShoKaishuJokyo = function () {
+                return "onSelectBySelectButton_dgShoKaishuJokyo";
+            };
             return Events;
         })();
         ShoKaishuJokyoList.Events = Events;
@@ -985,7 +702,7 @@ var DBZ;
             };
 
             Controls.prototype.ShoKaishuJokyoList = function () {
-                return new UZA.Panel(this.convFiledName("ShoKaishuJokyoList"));
+                return new UZA.Panel(this.convFiledNameSelf());
             };
 
             Controls.prototype.dgShoKaishuJokyo = function () {
@@ -1007,12 +724,17 @@ var DBZ;
             }
             ModeController.prototype.priorities = function () {
                 return [
+                    "グリッド表示モード",
                     "一覧パネル高さ"
                 ];
             };
 
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.グリッド表示モード = function () {
+                return new Modes.グリッド表示モード(this.controls);
             };
 
             ModeController.prototype.一覧パネル高さ = function () {
@@ -1023,6 +745,46 @@ var DBZ;
         ShoKaishuJokyoList.ModeController = ModeController;
 
         (function (Modes) {
+            var グリッド表示モード = (function () {
+                function グリッド表示モード(controls) {
+                    this.controls = controls;
+                }
+                グリッド表示モード.prototype.shokai = function () {
+                    var gridSetting = this.controls.dgShoKaishuJokyo().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.columns[0].visible = false;
+
+                    this.controls.dgShoKaishuJokyo().gridSetting = gridSetting;
+
+                    this.controls.dgShoKaishuJokyo()._control.afterPropertiesSet();
+                };
+
+                グリッド表示モード.prototype.toroku = function () {
+                    var gridSetting = this.controls.dgShoKaishuJokyo().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.columns[0].visible = true;
+
+                    this.controls.dgShoKaishuJokyo().gridSetting = gridSetting;
+
+                    this.controls.dgShoKaishuJokyo()._control.afterPropertiesSet();
+                };
+
+                グリッド表示モード.prototype.select = function () {
+                    var gridSetting = this.controls.dgShoKaishuJokyo().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.columns[0].visible = false;
+
+                    this.controls.dgShoKaishuJokyo().gridSetting = gridSetting;
+
+                    this.controls.dgShoKaishuJokyo()._control.afterPropertiesSet();
+                };
+                return グリッド表示モード;
+            })();
+            Modes.グリッド表示モード = グリッド表示モード;
+
             var 一覧パネル高さ = (function () {
                 function 一覧パネル高さ(controls) {
                     this.controls = controls;
@@ -1059,25 +821,6 @@ var DBZ;
             Modes.一覧パネル高さ = 一覧パネル高さ;
         })(ShoKaishuJokyoList.Modes || (ShoKaishuJokyoList.Modes = {}));
         var Modes = ShoKaishuJokyoList.Modes;
-    })(DBZ.ShoKaishuJokyoList || (DBZ.ShoKaishuJokyoList = {}));
-    var ShoKaishuJokyoList = DBZ.ShoKaishuJokyoList;
-})(DBZ || (DBZ = {}));
-
-var DBZ;
-(function (DBZ) {
-    (function (ShoKaishuJokyoList) {
-        var PublicProperties = (function () {
-            function PublicProperties(fieldName) {
-                this.controls = new ShoKaishuJokyoList.Controls(fieldName);
-            }
-            PublicProperties.prototype.getEditTypes = function () {
-                var editTypes = new UZA.EditTypeForPublicProperty();
-
-                return editTypes;
-            };
-            return PublicProperties;
-        })();
-        ShoKaishuJokyoList.PublicProperties = PublicProperties;
     })(DBZ.ShoKaishuJokyoList || (DBZ.ShoKaishuJokyoList = {}));
     var ShoKaishuJokyoList = DBZ.ShoKaishuJokyoList;
 })(DBZ || (DBZ = {}));
@@ -1644,7 +1387,7 @@ var DBZ;
             };
 
             Controls.prototype.ShoKaishuJokyoShosai = function () {
-                return new UZA.Panel(this.convFiledName("ShoKaishuJokyoShosai"));
+                return new UZA.Panel(this.convFiledNameSelf());
             };
 
             Controls.prototype.txtShoKofuShurui = function () {
@@ -1715,11 +1458,18 @@ var DBZ;
                     this.controls = controls;
                 }
                 表示方法.prototype.照会 = function () {
-                    this.controls.ShoKaishuJokyoShosai().disabled = true;
+                    this.controls.ShoKaishuJokyoShosai().readOnly = true;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = false;
                 };
 
                 表示方法.prototype.入力 = function () {
-                    this.controls.ShoKaishuJokyoShosai().disabled = false;
+                    this.controls.ShoKaishuJokyoShosai().readOnly = false;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = false;
+                };
+
+                表示方法.prototype.非表示 = function () {
+                    this.controls.ShoKaishuJokyoShosai().readOnly = true;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = true;
                 };
                 return 表示方法;
             })();
@@ -1729,203 +1479,19 @@ var DBZ;
     })(DBZ.ShoKaishuJokyoShosai || (DBZ.ShoKaishuJokyoShosai = {}));
     var ShoKaishuJokyoShosai = DBZ.ShoKaishuJokyoShosai;
 })(DBZ || (DBZ = {}));
-
 var DBZ;
 (function (DBZ) {
-    (function (ShoKaishuJokyoShosai) {
-        var PublicProperties = (function () {
-            function PublicProperties(fieldName) {
-                this.controls = new ShoKaishuJokyoShosai.Controls(fieldName);
-            }
-            PublicProperties.prototype.getEditTypes = function () {
-                var editTypes = new UZA.EditTypeForPublicProperty();
-
-                return editTypes;
-            };
-            return PublicProperties;
-        })();
-        ShoKaishuJokyoShosai.PublicProperties = PublicProperties;
-    })(DBZ.ShoKaishuJokyoShosai || (DBZ.ShoKaishuJokyoShosai = {}));
-    var ShoKaishuJokyoShosai = DBZ.ShoKaishuJokyoShosai;
-})(DBZ || (DBZ = {}));
-var DBZ;
-(function (DBZ) {
-    (function (ShoKaishuKirokuKanri) {
-        var Events = (function () {
-            function Events() {
-            }
-            Object.defineProperty(Events, "onSelectByDblClick_dgShoKaishuJokyo", {
-                get: function () {
-                    return "onSelectByDblClick_dgShoKaishuJokyo";
-                },
-                enumerable: true,
-                configurable: true
-            });
-            Object.defineProperty(Events, "onClick_btnUpdateShoKaishuJokyo", {
-                get: function () {
-                    return "onClick_btnUpdateShoKaishuJokyo";
-                },
-                enumerable: true,
-                configurable: true
-            });
-            Object.defineProperty(Events, "onSelectBySelectButton_dgShoKaishuJokyo", {
-                get: function () {
-                    return "onSelectBySelectButton_dgShoKaishuJokyo";
-                },
-                enumerable: true,
-                configurable: true
-            });
-            return Events;
-        })();
-        ShoKaishuKirokuKanri.Events = Events;
-
-        var Controls = (function () {
-            function Controls(fieldName) {
-                this._myName = fieldName;
-            }
-            Object.defineProperty(Controls, "MyType", {
-                get: function () {
-                    return "ShoKaishuKirokuKanri";
-                },
-                enumerable: true,
-                configurable: true
-            });
-
-            Controls.prototype.ShoKaishuJokyoList = function () {
-                return new DBZ.ShoKaishuJokyoList.ModeController("ShoKaishuJokyoList");
-            };
-
-            Controls.prototype.ShoKaishuJokyoShosai = function () {
-                return new DBZ.ShoKaishuJokyoShosai.ModeController("ShoKaishuJokyoShosai");
-            };
-
-            Controls.prototype.ShoKaishuKirokuKanri = function () {
-                return new UZA.Panel(this.convFiledNameSelf());
-            };
-
-            Controls.prototype.btnUpdateShoKaishuJokyo = function () {
-                return new UZA.Button(this.convFiledName("btnUpdateShoKaishuJokyo"));
-            };
-
-            Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + Controls.MyType;
-            };
-
-            Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + Controls.MyType + "_" + fieldName;
-            };
-            return Controls;
-        })();
-        ShoKaishuKirokuKanri.Controls = Controls;
-    })(DBZ.ShoKaishuKirokuKanri || (DBZ.ShoKaishuKirokuKanri = {}));
-    var ShoKaishuKirokuKanri = DBZ.ShoKaishuKirokuKanri;
-
     var ShoKaishuKirokuKanri_Design = (function (_super) {
         __extends(ShoKaishuKirokuKanri_Design, _super);
         function ShoKaishuKirokuKanri_Design($parentElement, isDesignMode, fieldName) {
             _super.call(this, $parentElement, isDesignMode, ShoKaishuKirokuKanri_Design.myLayout, fieldName);
         }
-        Object.defineProperty(ShoKaishuKirokuKanri_Design.prototype, "onBlur_txtKaishuDate", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onBlur_txtKaishuDate"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onBlur_txtKaishuDate"] = value;
-                } else {
-                    this.layout.items[0].items[1]["onBlur_txtKaishuDate"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(ShoKaishuKirokuKanri_Design.prototype, "onChange_ddlKaishuJiyu", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onChange_ddlKaishuJiyu"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onChange_ddlKaishuJiyu"] = value;
-                } else {
-                    this.layout.items[0].items[1]["onChange_ddlKaishuJiyu"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(ShoKaishuKirokuKanri_Design.prototype, "onBlur_txtKaishuRiyu", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onBlur_txtKaishuRiyu"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onBlur_txtKaishuRiyu"] = value;
-                } else {
-                    this.layout.items[0].items[1]["onBlur_txtKaishuRiyu"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(ShoKaishuKirokuKanri_Design.prototype, "ShoKaishuJokyoShosai_panalDisplay", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["ShoKaishuJokyoShosai_panelDisplay"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["ShoKaishuJokyoShosai_panelDisplay"] = value;
-                } else {
-                    this.layout.items[0].items[1]["ShoKaishuJokyoShosai_panelDisplay"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(ShoKaishuKirokuKanri_Design.prototype, "ShoKaishuJokyoShosai_canOpenAndClose", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["ShoKaishuJokyoShosai_canOpenAndClose"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["ShoKaishuJokyoShosai_canOpenAndClose"] = value;
-                } else {
-                    this.layout.items[0].items[1]["ShoKaishuJokyoShosai_canOpenAndClose"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
         ShoKaishuKirokuKanri_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
-            Uz.JSControlUtil.registProperty("onBlur_txtKaishuDate");
-            Uz.JSControlUtil.registProperty("onChange_ddlKaishuJiyu");
-            Uz.JSControlUtil.registProperty("onBlur_txtKaishuRiyu");
-            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_panalDisplay");
-            Uz.JSControlUtil.registProperty("ShoKaishuJokyoShosai_canOpenAndClose");
         };
 
         ShoKaishuKirokuKanri_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
-            editablePropertyInfo["onBlur_txtKaishuDate"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onBlur_txtKaishuDate"];
-            editablePropertyInfo["onChange_ddlKaishuJiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onChange_ddlKaishuJiyu"];
-            editablePropertyInfo["onBlur_txtKaishuRiyu"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onBlur_txtKaishuRiyu"];
-            editablePropertyInfo["ShoKaishuJokyoShosai_panalDisplay"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["ShoKaishuJokyoShosai_panelDisplay"];
-            editablePropertyInfo["ShoKaishuJokyoShosai_canOpenAndClose"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["ShoKaishuJokyoShosai_canOpenAndClose"];
 
             return editablePropertyInfo;
         };
@@ -1936,240 +1502,7 @@ var DBZ;
                     "fieldName": "ShoKaishuKirokuKanri",
                     "items": [
                         {
-                            "fieldName": "ShoKaishuJokyoList",
-                            "items": [],
-                            "controlType": "CommonChildDiv",
-                            "width": "XS",
-                            "visible": true,
-                            "displayNone": false,
-                            "disabled": false,
-                            "accessKey": "",
-                            "nextFocusFieldName": "",
-                            "wrap": true,
-                            "dependencies": [],
-                            "float": 0,
-                            "toolTip": "",
-                            "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
-                            "selectControlID": "ShoKaishuJokyoList",
-                            "helpMessageID": "",
-                            "jpControlName": "",
-                            "relation": [],
-                            "businessId": "DBZ",
-                            "controlName": "ShoKaishuJokyoList",
-                            "marginTop": 0,
-                            "marginBottom": 0,
-                            "originalProperty": [],
-                            "dataPassingForDialog": [],
-                            "dialogOkEventNameForDialog": "",
-                            "dialogCancelEventNameForDialog": "",
-                            "canTransferEvent": true,
-                            "heightForDialog": "M",
-                            "gridSetting": {
-                                "rowHeight": 25,
-                                "isMultiSelectable": false,
-                                "isShowHeader": true,
-                                "isShowFooter": true,
-                                "isShowFilter": false,
-                                "isShowFilterButton": false,
-                                "isShowRowState": true,
-                                "isShowSelectButtonColumn": false,
-                                "isShowModifyButtonColumn": false,
-                                "isShowDeleteButtonColumn": false,
-                                "limitRowCount": 0,
-                                "selectedRowCount": 0,
-                                "header": {
-                                    "combineColumns": [],
-                                    "frozenColumn": "",
-                                    "headerHeight": 0
-                                },
-                                "columns": [
-                                    {
-                                        "columnName": "選択",
-                                        "dataName": "btnSelect",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 40,
-                                        "visible": true,
-                                        "cellType": 8,
-                                        "cellDetails": {
-                                            "cellType": 8,
-                                            "text": "",
-                                            "onClick": "onClick_btnSelect",
-                                            "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
-                                            "imageWidth": "20",
-                                            "imageHeight": "20"
-                                        },
-                                        "align": 1,
-                                        "resize": false,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "交付証種類",
-                                        "dataName": "kofushoShurui",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 180,
-                                        "visible": true,
-                                        "cellType": 0,
-                                        "cellDetails": {
-                                            "cellType": 0
-                                        },
-                                        "align": 0,
-                                        "resize": true,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "交付日",
-                                        "dataName": "kofuDate",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 90,
-                                        "visible": true,
-                                        "cellType": 7,
-                                        "cellDetails": {
-                                            "cellType": 7,
-                                            "ymdKubun": 2,
-                                            "displayFormat": 0,
-                                            "onChange": ""
-                                        },
-                                        "align": 1,
-                                        "resize": true,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "交付事由Key",
-                                        "dataName": "kofuJiyuKey",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 0,
-                                        "visible": false,
-                                        "cellType": 0,
-                                        "cellDetails": null,
-                                        "align": 0,
-                                        "resize": false,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "交付事由",
-                                        "dataName": "kofuJiyu",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 200,
-                                        "visible": true,
-                                        "cellType": 0,
-                                        "cellDetails": null,
-                                        "align": 0,
-                                        "resize": true,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "交付理由",
-                                        "dataName": "kofuRiyu",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 0,
-                                        "visible": false,
-                                        "cellType": 0,
-                                        "cellDetails": null,
-                                        "align": 0,
-                                        "resize": false,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "回収日",
-                                        "dataName": "kaishuDate",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 90,
-                                        "visible": true,
-                                        "cellType": 7,
-                                        "cellDetails": {
-                                            "cellType": 7,
-                                            "ymdKubun": 2,
-                                            "displayFormat": 0,
-                                            "onChange": ""
-                                        },
-                                        "align": 1,
-                                        "resize": true,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "回収事由Key",
-                                        "dataName": "kaishuJiyuKey",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 0,
-                                        "visible": false,
-                                        "cellType": 0,
-                                        "cellDetails": null,
-                                        "align": 0,
-                                        "resize": false,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "回収事由",
-                                        "dataName": "kaishuJiyu",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 200,
-                                        "visible": true,
-                                        "cellType": 0,
-                                        "cellDetails": null,
-                                        "align": 0,
-                                        "resize": true,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "回収理由",
-                                        "dataName": "kaishuRiyu",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 0,
-                                        "visible": false,
-                                        "cellType": 0,
-                                        "cellDetails": null,
-                                        "align": 0,
-                                        "resize": false,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    },
-                                    {
-                                        "columnName": "有効期限",
-                                        "dataName": "yukoKigen",
-                                        "toolTip": "",
-                                        "bgColor": 0,
-                                        "width": 90,
-                                        "visible": true,
-                                        "cellType": 7,
-                                        "cellDetails": {
-                                            "cellType": 7,
-                                            "ymdKubun": 2,
-                                            "displayFormat": 0,
-                                            "onChange": ""
-                                        },
-                                        "align": 1,
-                                        "resize": false,
-                                        "isPrivateInfo": false,
-                                        "sortKey": ""
-                                    }
-                                ]
-                            },
-                            "onSelectByDblClick": "onSelectByDblClick_dgShoKaishuJokyo",
-                            "onSelectBySelectButton": "onSelectBySelectButton_dgShoKaishuJokyo"
-                        },
-                        {
-                            "fieldName": "ShoKaishuJokyoShosai",
+                            "fieldName": "ccdShoKaishuJokyoList",
                             "items": [],
                             "controlType": "CommonChildDiv",
                             "width": "XS",
@@ -2183,33 +1516,72 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
-                            "selectControlID": "ShoKaishuJokyoShosai",
+                            "marginLeft": "0px",
+                            "marginRight": "0px",
+                            "selectControlID": "ccdShoKaishuJokyoList",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "relation": [],
+                            "packageName": "",
                             "businessId": "DBZ",
-                            "controlName": "ShoKaishuJokyoShosai",
-                            "marginTop": 0,
-                            "marginBottom": 0,
+                            "controlName": "ShoKaishuJokyoList",
+                            "marginTop": "0px",
+                            "marginBottom": "0px",
                             "originalProperty": [],
                             "dataPassingForDialog": [],
                             "dialogOkEventNameForDialog": "",
                             "dialogCancelEventNameForDialog": "",
                             "canTransferEvent": true,
                             "heightForDialog": "M",
-                            "onBlur_txtKaishuDate": "",
-                            "onChange_ddlKaishuJiyu": "",
-                            "onBlur_txtKaishuRiyu": "",
-                            "ShoKaishuJokyoShosai_panelDisplay": 0,
-                            "ShoKaishuJokyoShosai_canOpenAndClose": true
+                            "firstFocusFieldName": "",
+                            "lastFocusFieldName": "",
+                            "modes": [],
+                            "publicEvents": [],
+                            "publicEventsAlias": []
                         },
                         {
-                            "fieldName": "btnUpdateShoKaishuJokyo",
+                            "fieldName": "ccdShoKaishuJokyoShosai",
+                            "items": [],
+                            "controlType": "CommonChildDiv",
+                            "width": "XS",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0px",
+                            "marginRight": "0px",
+                            "selectControlID": "ccdShoKaishuJokyoShosai",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "relation": [],
+                            "packageName": "",
+                            "businessId": "DBZ",
+                            "controlName": "ShoKaishuJokyoShosai",
+                            "marginTop": "0px",
+                            "marginBottom": "0px",
+                            "originalProperty": [],
+                            "dataPassingForDialog": [],
+                            "dialogOkEventNameForDialog": "",
+                            "dialogCancelEventNameForDialog": "",
+                            "canTransferEvent": true,
+                            "heightForDialog": "M",
+                            "firstFocusFieldName": "",
+                            "lastFocusFieldName": "",
+                            "modes": [],
+                            "publicEvents": [],
+                            "publicEventsAlias": []
+                        },
+                        {
+                            "fieldName": "btnShoKaishuKakutei",
                             "items": [],
                             "controlType": "Button",
-                            "width": "150",
+                            "width": "S",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -2222,11 +1594,44 @@ var DBZ;
                             "authorityMode": 0,
                             "marginLeft": "XS",
                             "marginRight": "XS",
-                            "selectControlID": "btnUpdateShoKaishuJokyo",
+                            "selectControlID": "btnShoKaishuKakutei",
                             "helpMessageID": "",
                             "jpControlName": "",
-                            "onClick": "onClick_btnUpdateShoKaishuJokyo",
-                            "text": "交付情報を確定する",
+                            "onBeforeClick": "onBeforeClick_btnShoKaishuKakutei",
+                            "onAfterClick": "",
+                            "onClick": "onClick_btnShoKaishuKakutei",
+                            "text": "確定する",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        },
+                        {
+                            "fieldName": "btnShoKaishuTorikeshi",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnShoKaishuTorikeshi",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
+                            "onClick": "onClick_btnShoKaishuTorikeshi",
+                            "text": "取消する",
                             "appearance": 0,
                             "imageFileUrl": "",
                             "imageWidth": "",
@@ -2236,7 +1641,7 @@ var DBZ;
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "1030",
+                    "width": "970px",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -2247,8 +1652,8 @@ var DBZ;
                     "float": 0,
                     "toolTip": "",
                     "authorityMode": 0,
-                    "marginLeft": "XS",
-                    "marginRight": "XS",
+                    "marginLeft": "Default",
+                    "marginRight": "Default",
                     "selectControlID": "ShoKaishuKirokuKanri",
                     "helpMessageID": "",
                     "jpControlName": "",
@@ -2257,36 +1662,10 @@ var DBZ;
                     "marginTop": "Default",
                     "marginBottom": "Default",
                     "isOpen": true,
-                    "canOpenAndClose": true,
-                    "postParameterPanelNames": [
-                        {
-                            "postParameterPanelNames": "ShoKaishuKirokuKanri"
-                        }
-                    ],
-                    "requestSettings": [
-                        {
-                            "eventName": "onLoad",
-                            "requestUrl": ""
-                        },
-                        {
-                            "eventName": "onClick_btnSelect",
-                            "requestUrl": "dbz/db/dbz/ShoKaishuKirokuKanri/onClick_btnSelect"
-                        },
-                        {
-                            "eventName": "onClick_btnUpdateShoKaishuJokyo",
-                            "requestUrl": "dbz/db/dbz/ShoKaishuKirokuKanri/onClick_btnUpdateShoKaishuJokyo"
-                        }
-                    ],
-                    "hiddenInput": [
-                        {
-                            "propertyName": "mode",
-                            "value": ""
-                        },
-                        {
-                            "propertyName": "selectRow",
-                            "value": ""
-                        }
-                    ],
+                    "canOpenAndClose": false,
+                    "postParameterPanelNames": [],
+                    "requestSettings": [],
+                    "hiddenInput": [],
                     "onOpen": "",
                     "onClose": "",
                     "session": {},
@@ -2296,7 +1675,8 @@ var DBZ;
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "Auto"
+                    "height": "Auto",
+                    "canPost": false
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -2311,52 +1691,92 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": "0",
-            "marginRight": "0",
+            "marginLeft": "0px",
+            "marginRight": "0px",
             "selectControlID": "defaultLayout",
             "helpMessageID": "",
             "jpControlName": "",
             "relation": [],
+            "packageName": "",
             "businessId": "DBZ",
             "controlName": "ShoKaishuKirokuKanri",
-            "marginTop": 0,
-            "marginBottom": 0,
-            "originalProperty": [
-                {
-                    "publicChildFieldName": "ShoKaishuJokyoShosai",
-                    "publicChildProperty": "onBlur_txtKaishuDate",
-                    "newPropertyName": "onBlur_txtKaishuDate"
-                },
-                {
-                    "publicChildFieldName": "ShoKaishuJokyoShosai",
-                    "publicChildProperty": "onChange_ddlKaishuJiyu",
-                    "newPropertyName": "onChange_ddlKaishuJiyu"
-                },
-                {
-                    "publicChildFieldName": "ShoKaishuJokyoShosai",
-                    "publicChildProperty": "onBlur_txtKaishuRiyu",
-                    "newPropertyName": "onBlur_txtKaishuRiyu"
-                },
-                {
-                    "publicChildFieldName": "ShoKaishuJokyoShosai",
-                    "publicChildProperty": "ShoKaishuJokyoShosai_panelDisplay",
-                    "newPropertyName": "ShoKaishuJokyoShosai_panalDisplay"
-                },
-                {
-                    "publicChildFieldName": "ShoKaishuJokyoShosai",
-                    "publicChildProperty": "ShoKaishuJokyoShosai_canOpenAndClose",
-                    "newPropertyName": "ShoKaishuJokyoShosai_canOpenAndClose"
-                }
-            ],
+            "marginTop": "0px",
+            "marginBottom": "0px",
+            "originalProperty": [],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": "",
             "canTransferEvent": true,
-            "heightForDialog": "M"
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
         };
         return ShoKaishuKirokuKanri_Design;
     })(Uz.CommonChildDiv);
     DBZ.ShoKaishuKirokuKanri_Design = ShoKaishuKirokuKanri_Design;
+
+    (function (ShoKaishuKirokuKanri) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onBeforeClick_btnShoKaishuKakutei = function () {
+                return "onBeforeClick_btnShoKaishuKakutei";
+            };
+
+            Events.onClick_btnShoKaishuKakutei = function () {
+                return "onClick_btnShoKaishuKakutei";
+            };
+
+            Events.onClick_btnShoKaishuTorikeshi = function () {
+                return "onClick_btnShoKaishuTorikeshi";
+            };
+            return Events;
+        })();
+        ShoKaishuKirokuKanri.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ShoKaishuKirokuKanri";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.ShoKaishuKirokuKanri.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + fieldName;
+            };
+
+            Controls.prototype.ShoKaishuKirokuKanri = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ccdShoKaishuJokyoList = function () {
+                return new DBZ.ShoKaishuJokyoList.ModeController("ccdShoKaishuJokyoList");
+            };
+
+            Controls.prototype.ccdShoKaishuJokyoShosai = function () {
+                return new DBZ.ShoKaishuJokyoShosai.ModeController("ccdShoKaishuJokyoShosai");
+            };
+
+            Controls.prototype.btnShoKaishuKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnShoKaishuKakutei"));
+            };
+
+            Controls.prototype.btnShoKaishuTorikeshi = function () {
+                return new UZA.Button(this.convFiledName("btnShoKaishuTorikeshi"));
+            };
+            return Controls;
+        })();
+        ShoKaishuKirokuKanri.Controls = Controls;
+    })(DBZ.ShoKaishuKirokuKanri || (DBZ.ShoKaishuKirokuKanri = {}));
+    var ShoKaishuKirokuKanri = DBZ.ShoKaishuKirokuKanri;
 })(DBZ || (DBZ = {}));
 var DBZ;
 (function (DBZ) {
@@ -2367,56 +1787,141 @@ var DBZ;
                 this.controls = new ShoKaishuKirokuKanri.Controls(fieldName);
             }
             ModeController.prototype.priorities = function () {
-                return [];
+                return [
+                    "表示方法",
+                    "グリッド表示モード",
+                    "一覧パネル高さ"
+                ];
             };
 
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
+
+            ModeController.prototype.表示方法 = function () {
+                return new Modes.表示方法(this.controls);
+            };
+
+            ModeController.prototype.グリッド表示モード = function () {
+                return new Modes.グリッド表示モード(this.controls);
+            };
+
+            ModeController.prototype.一覧パネル高さ = function () {
+                return new Modes.一覧パネル高さ(this.controls);
+            };
             return ModeController;
         })();
         ShoKaishuKirokuKanri.ModeController = ModeController;
-    })(DBZ.ShoKaishuKirokuKanri || (DBZ.ShoKaishuKirokuKanri = {}));
-    var ShoKaishuKirokuKanri = DBZ.ShoKaishuKirokuKanri;
-})(DBZ || (DBZ = {}));
 
-var DBZ;
-(function (DBZ) {
-    (function (ShoKaishuKirokuKanri) {
-        var PublicProperties = (function () {
-            function PublicProperties(fieldName) {
-                this.controls = new ShoKaishuKirokuKanri.Controls(fieldName);
-            }
-            return PublicProperties;
-        })();
-        ShoKaishuKirokuKanri.PublicProperties = PublicProperties;
+        (function (Modes) {
+            var 表示方法 = (function () {
+                function 表示方法(controls) {
+                    this.controls = controls;
+                }
+                表示方法.prototype.照会 = function () {
+                    this.controls.ccdShoKaishuJokyoShosai().表示方法().照会();
+                    this.controls.btnShoKaishuKakutei().disabled = true;
+                    this.controls.btnShoKaishuTorikeshi().disabled = true;
+                    this.controls.btnShoKaishuKakutei().displayNone = false;
+                    this.controls.btnShoKaishuTorikeshi().displayNone = false;
+                };
+
+                表示方法.prototype.入力 = function () {
+                    this.controls.ccdShoKaishuJokyoShosai().表示方法().入力();
+                    this.controls.btnShoKaishuKakutei().disabled = false;
+                    this.controls.btnShoKaishuTorikeshi().disabled = false;
+                    this.controls.btnShoKaishuKakutei().displayNone = false;
+                    this.controls.btnShoKaishuTorikeshi().displayNone = false;
+                };
+
+                表示方法.prototype.非表示 = function () {
+                    this.controls.ccdShoKaishuJokyoShosai().表示方法().非表示();
+                    this.controls.btnShoKaishuKakutei().displayNone = true;
+                    this.controls.btnShoKaishuTorikeshi().displayNone = true;
+                };
+                return 表示方法;
+            })();
+            Modes.表示方法 = 表示方法;
+
+            var グリッド表示モード = (function () {
+                function グリッド表示モード(controls) {
+                    this.controls = controls;
+                }
+                グリッド表示モード.prototype.shokai = function () {
+                    this.controls.ccdShoKaishuJokyoList().グリッド表示モード().shokai();
+                };
+
+                グリッド表示モード.prototype.toroku = function () {
+                    this.controls.ccdShoKaishuJokyoList().グリッド表示モード().toroku();
+                };
+
+                グリッド表示モード.prototype.select = function () {
+                    this.controls.ccdShoKaishuJokyoList().グリッド表示モード().select();
+                };
+                return グリッド表示モード;
+            })();
+            Modes.グリッド表示モード = グリッド表示モード;
+
+            var 一覧パネル高さ = (function () {
+                function 一覧パネル高さ(controls) {
+                    this.controls = controls;
+                }
+                一覧パネル高さ.prototype.サイズ200 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ200();
+                };
+
+                一覧パネル高さ.prototype.サイズ250 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ250();
+                };
+
+                一覧パネル高さ.prototype.サイズ300 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ300();
+                };
+
+                一覧パネル高さ.prototype.サイズ350 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ350();
+                };
+
+                一覧パネル高さ.prototype.サイズ400 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ400();
+                };
+
+                一覧パネル高さ.prototype.サイズ450 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ450();
+                };
+
+                一覧パネル高さ.prototype.サイズ500 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ500();
+                };
+                return 一覧パネル高さ;
+            })();
+            Modes.一覧パネル高さ = 一覧パネル高さ;
+        })(ShoKaishuKirokuKanri.Modes || (ShoKaishuKirokuKanri.Modes = {}));
+        var Modes = ShoKaishuKirokuKanri.Modes;
     })(DBZ.ShoKaishuKirokuKanri || (DBZ.ShoKaishuKirokuKanri = {}));
     var ShoKaishuKirokuKanri = DBZ.ShoKaishuKirokuKanri;
 })(DBZ || (DBZ = {}));
 </script>
-  <script class="RamlConvert" type="text/javascript">
+      
+    <script class="RamlConvert" type="text/javascript">
 var DBZ= DBZ? DBZ: {};
 DBZ['SHOKAISHUKIROKUKANRI'] = {};
-DBZ['SHOKAISHUKIROKUKANRI'].ShoKaishuKirokuKanriRequest = function(parentFieldName){ 
-var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShoKaishuKirokuKanri').getProperty();parameter0.ShoKaishuJokyoList = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShoKaishuJokyoList').getPostParameter();parameter0.ShoKaishuJokyoShosai = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShoKaishuJokyoShosai').getPostParameter();parameter0.btnUpdateShoKaishuJokyo = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnUpdateShoKaishuJokyo').getProperty();paramArray.push(parameter0);
-return paramArray;
- };
 </script><script>var DBZ;
 (function (DBZ) {
     (function (ShoKaishuKirokuKanri) {
         var Events = (function () {
             function Events() {
             }
-            Events.onSelectByDblClick_dgShoKaishuJokyo = function () {
-                return "onSelectByDblClick_dgShoKaishuJokyo";
+            Events.onBeforeClick_btnShoKaishuKakutei = function () {
+                return "onBeforeClick_btnShoKaishuKakutei";
             };
 
-            Events.onSelectBySelectButton_dgShoKaishuJokyo = function () {
-                return "onSelectBySelectButton_dgShoKaishuJokyo";
+            Events.onClick_btnShoKaishuKakutei = function () {
+                return "onClick_btnShoKaishuKakutei";
             };
 
-            Events.onClick_btnUpdateShoKaishuJokyo = function () {
-                return "onClick_btnUpdateShoKaishuJokyo";
+            Events.onClick_btnShoKaishuTorikeshi = function () {
+                return "onClick_btnShoKaishuTorikeshi";
             };
             return Events;
         })();
@@ -2442,16 +1947,20 @@ return paramArray;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.ShoKaishuJokyoList = function () {
-                return new DBZ.ShoKaishuJokyoList.ModeController(this.convFiledName("ShoKaishuJokyoList"));
+            Controls.prototype.ccdShoKaishuJokyoList = function () {
+                return new DBZ.ShoKaishuJokyoList.ModeController(this.convFiledName("ccdShoKaishuJokyoList"));
             };
 
-            Controls.prototype.ShoKaishuJokyoShosai = function () {
-                return new DBZ.ShoKaishuJokyoShosai.ModeController(this.convFiledName("ShoKaishuJokyoShosai"));
+            Controls.prototype.ccdShoKaishuJokyoShosai = function () {
+                return new DBZ.ShoKaishuJokyoShosai.ModeController(this.convFiledName("ccdShoKaishuJokyoShosai"));
             };
 
-            Controls.prototype.btnUpdateShoKaishuJokyo = function () {
-                return new UZA.Button(this.convFiledName("btnUpdateShoKaishuJokyo"));
+            Controls.prototype.btnShoKaishuKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnShoKaishuKakutei"));
+            };
+
+            Controls.prototype.btnShoKaishuTorikeshi = function () {
+                return new UZA.Button(this.convFiledName("btnShoKaishuTorikeshi"));
             };
             return Controls;
         })();
@@ -2468,15 +1977,121 @@ var DBZ;
                 this.controls = new ShoKaishuKirokuKanri.Controls(fieldName);
             }
             ModeController.prototype.priorities = function () {
-                return [];
+                return [
+                    "表示方法",
+                    "グリッド表示モード",
+                    "一覧パネル高さ"
+                ];
             };
 
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new ShoKaishuKirokuKanri.PublicProperties(this.fieldName);
+            };
+
+            ModeController.prototype.表示方法 = function () {
+                return new Modes.表示方法(this.controls);
+            };
+
+            ModeController.prototype.グリッド表示モード = function () {
+                return new Modes.グリッド表示モード(this.controls);
+            };
+
+            ModeController.prototype.一覧パネル高さ = function () {
+                return new Modes.一覧パネル高さ(this.controls);
+            };
             return ModeController;
         })();
         ShoKaishuKirokuKanri.ModeController = ModeController;
+
+        (function (Modes) {
+            var 表示方法 = (function () {
+                function 表示方法(controls) {
+                    this.controls = controls;
+                }
+                表示方法.prototype.照会 = function () {
+                    this.controls.ccdShoKaishuJokyoShosai().表示方法().照会();
+                    this.controls.btnShoKaishuKakutei().disabled = true;
+                    this.controls.btnShoKaishuTorikeshi().disabled = true;
+                    this.controls.btnShoKaishuKakutei().displayNone = false;
+                    this.controls.btnShoKaishuTorikeshi().displayNone = false;
+                };
+
+                表示方法.prototype.入力 = function () {
+                    this.controls.ccdShoKaishuJokyoShosai().表示方法().入力();
+                    this.controls.btnShoKaishuKakutei().disabled = false;
+                    this.controls.btnShoKaishuTorikeshi().disabled = false;
+                    this.controls.btnShoKaishuKakutei().displayNone = false;
+                    this.controls.btnShoKaishuTorikeshi().displayNone = false;
+                };
+
+                表示方法.prototype.非表示 = function () {
+                    this.controls.ccdShoKaishuJokyoShosai().表示方法().非表示();
+                    this.controls.btnShoKaishuKakutei().displayNone = true;
+                    this.controls.btnShoKaishuTorikeshi().displayNone = true;
+                };
+                return 表示方法;
+            })();
+            Modes.表示方法 = 表示方法;
+
+            var グリッド表示モード = (function () {
+                function グリッド表示モード(controls) {
+                    this.controls = controls;
+                }
+                グリッド表示モード.prototype.shokai = function () {
+                    this.controls.ccdShoKaishuJokyoList().グリッド表示モード().shokai();
+                };
+
+                グリッド表示モード.prototype.toroku = function () {
+                    this.controls.ccdShoKaishuJokyoList().グリッド表示モード().toroku();
+                };
+
+                グリッド表示モード.prototype.select = function () {
+                    this.controls.ccdShoKaishuJokyoList().グリッド表示モード().select();
+                };
+                return グリッド表示モード;
+            })();
+            Modes.グリッド表示モード = グリッド表示モード;
+
+            var 一覧パネル高さ = (function () {
+                function 一覧パネル高さ(controls) {
+                    this.controls = controls;
+                }
+                一覧パネル高さ.prototype.サイズ200 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ200();
+                };
+
+                一覧パネル高さ.prototype.サイズ250 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ250();
+                };
+
+                一覧パネル高さ.prototype.サイズ300 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ300();
+                };
+
+                一覧パネル高さ.prototype.サイズ350 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ350();
+                };
+
+                一覧パネル高さ.prototype.サイズ400 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ400();
+                };
+
+                一覧パネル高さ.prototype.サイズ450 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ450();
+                };
+
+                一覧パネル高さ.prototype.サイズ500 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ500();
+                };
+                return 一覧パネル高さ;
+            })();
+            Modes.一覧パネル高さ = 一覧パネル高さ;
+        })(ShoKaishuKirokuKanri.Modes || (ShoKaishuKirokuKanri.Modes = {}));
+        var Modes = ShoKaishuKirokuKanri.Modes;
     })(DBZ.ShoKaishuKirokuKanri || (DBZ.ShoKaishuKirokuKanri = {}));
     var ShoKaishuKirokuKanri = DBZ.ShoKaishuKirokuKanri;
 })(DBZ || (DBZ = {}));
@@ -2497,21 +2112,22 @@ var DBZ;
                 return editTypes;
             };
 
-            PublicProperties.prototype.getShoKaishuJokyoShosai_penalDisplay = function () {
-                return this.controls.ShoKaishuJokyoShosai().PublicProperties().getShoKaishuJokyoShosai_panelDisplay;
+            PublicProperties.prototype.getShoKaishuJokyoShosai_panelDisplay = function () {
+                return this.controls.ccdShoKaishuJokyoShosai().PublicProperties().getShoKaishuJokyoShosai_panelDisplay;
             };
 
-            PublicProperties.prototype.setShoKaishuJokyoShosai_penalDisplay = function (value) {
-                this.controls.ShoKaishuJokyoShosai().PublicProperties().setShoKaishuJokyoShosai_panelDisplay = value;
+            PublicProperties.prototype.setShoKaishuJokyoShosai_panelDisplay = function (value) {
+                this.controls.ccdShoKaishuJokyoShosai().PublicProperties().setShoKaishuJokyoShosai_panelDisplay = value;
             };
 
             PublicProperties.prototype.getShoKaishuJokyoShosai_canOpenAndClose = function () {
-                return this.controls.ShoKaishuJokyoShosai().PublicProperties().getShoKaishuJokyoShosai_canOpenAndClose;
+                return this.controls.ccdShoKaishuJokyoShosai().PublicProperties().getShoKaishuJokyoShosai_canOpenAndClose;
             };
 
             PublicProperties.prototype.setShoKaishuJokyoShosai_canOpenAndClose = function (value) {
-                this.controls.ShoKaishuJokyoShosai().PublicProperties().setShoKaishuJokyoShosai_canOpenAndClose = value;
+                this.controls.ccdShoKaishuJokyoShosai().PublicProperties().setShoKaishuJokyoShosai_canOpenAndClose = value;
             };
+            
             return PublicProperties;
         })();
         ShoKaishuKirokuKanri.PublicProperties = PublicProperties;

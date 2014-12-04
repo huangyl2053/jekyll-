@@ -1,6 +1,7 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
 /// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="./ShisetsuJoho.ts" />
 
 module DBZ {
 
@@ -30,6 +31,14 @@ module DBZ {
 
             public static onSelectByDeleteButton_dgShisetsuNyutaishoRireki(): string {
                 return "onSelectByDeleteButton_dgShisetsuNyutaishoRireki";
+            }
+
+            public static onClick_btnShisetsuNyutaishoKakutei(): string {
+                return "onClick_btnShisetsuNyutaishoKakutei";
+            }
+
+            public static onClick_btnShisetsuNyutaishoTorikeshi(): string {
+                return "onClick_btnShisetsuNyutaishoTorikeshi";
             }
 
         }
@@ -63,6 +72,30 @@ module DBZ {
 
             public dgShisetsuNyutaishoRireki(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgShisetsuNyutaishoRireki"));
+            }
+
+            public ShisetsuNyutaishoInput(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("ShisetsuNyutaishoInput"));
+            }
+
+            public txtNyushoDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNyushoDate"));
+            }
+
+            public txtTaishoDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTaishoDate"));
+            }
+
+            public ccdShisetsuJoho(): DBZ.ShisetsuJoho.ModeController {
+                return new DBZ.ShisetsuJoho.ModeController(this.convFiledName("ccdShisetsuJoho"));
+            }
+
+            public btnShisetsuNyutaishoKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnShisetsuNyutaishoKakutei"));
+            }
+
+            public btnShisetsuNyutaishoTorikeshi(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnShisetsuNyutaishoTorikeshi"));
             }
 
         }

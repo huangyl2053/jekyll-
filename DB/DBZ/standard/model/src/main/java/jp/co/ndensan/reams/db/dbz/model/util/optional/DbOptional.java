@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.model.util.optional;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
+import jp.co.ndensan.reams.db.dbz.model.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
 
@@ -152,5 +153,12 @@ public final class DbOptional<T> implements IOptional<T> {
             return this;
         }
         return empty();
+    }
+
+    @Override
+    public void ifPresent(IConsumer<? super T> consumer) {
+        if (this.value != null) {
+            consumer.accept(value);
+        }
     }
 }

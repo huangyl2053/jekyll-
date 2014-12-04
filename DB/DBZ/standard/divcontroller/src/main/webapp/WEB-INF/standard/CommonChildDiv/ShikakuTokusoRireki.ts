@@ -8,16 +8,25 @@ module DBZ
 {
     export module ShikakuTokusoRireki {
 
-            export class ModeController {
-                private controls: Controls;
-                private fieldName: string;
-                
-                constructor(fieldName: string) {
-                    this.fieldName = fieldName;
-                    this.controls = new Controls(fieldName);
-                }
+        export class ModeController {
+            private controls: Controls;
+            private fieldName: string;
+            
+            constructor(fieldName: string) {
+                this.fieldName = fieldName;
+                this.controls = new Controls(fieldName);
+            }
 
-                public priorities(): Array<string> {
+             public Properties() {
+                 return new UZA.CommonChildDiv(this.fieldName);
+             }
+    
+             public PublicProperties() {
+                 return new PublicProperties(this.fieldName);
+               }
+
+
+                public priorities(): Array {
                 return [
                     "DisplayType",
                     "BtnDisplayMode",
@@ -26,14 +35,6 @@ module DBZ
                     "DataGridHeight"
                     ];
                 }
-
-            	public Properties() {
-                	return new UZA.CommonChildDiv(this.fieldName);
-            	}
-
-            	public PublicProperties() {
-                	return new PublicProperties(this.fieldName);
-            	}
 
                 public DisplayType() {
                     return new Modes.DisplayType(this.controls);
@@ -70,11 +71,13 @@ module DBZ
                         this.controls.dgShikakuShutokuRireki().readOnly = false;
                         
                         var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
-                        
                         gridSetting.columns[0].visible = false;
                         gridSetting.isShowModifyButtonColumn = false;
                         gridSetting.isShowDeleteButtonColumn = false;
 
+                        //TODO 幅の設定
+                        this.controls.dgShikakuShutokuRireki().width;
+                        
                         this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
                         this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
@@ -88,6 +91,8 @@ module DBZ
                         gridSetting.columns[0].visible = true;
                         gridSetting.isShowModifyButtonColumn = false;
                         gridSetting.isShowDeleteButtonColumn = false;
+                        //TODO 幅の設定をどのようにするか
+                        this.controls.dgShikakuShutokuRireki().width;
 
                         this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
@@ -102,6 +107,8 @@ module DBZ
                         gridSetting.columns[0].visible = true;
                         gridSetting.isShowModifyButtonColumn = true;
                         gridSetting.isShowDeleteButtonColumn = true;
+                        //TODO 幅の設定
+                        this.controls.dgShikakuShutokuRireki().width;
 
                         this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
@@ -118,12 +125,12 @@ module DBZ
                     }
 
                     public SetDisplay(): void {
-                        this.controls.btnAdd().displayNone = false;
+                        this.controls.btnAddShikakuShutoku().displayNone = false;
 
                     }
 
                     public SetDisplayNone(): void {
-                        this.controls.btnAdd().displayNone = true;
+                        this.controls.btnAddShikakuShutoku().displayNone = true;
                     }
                 }
 
@@ -245,51 +252,25 @@ module DBZ
                         this.controls = controls;
                     }
 
-                    public Size1(): void {
-                        this.controls.dgShikakuShutokuRireki().height = 450;
+                    public SizeDefault(): void {
+                        this.controls.dgShikakuShutokuRireki().height = 217;
 
                         this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
 
                     }
 
-                    public Size2(): void {
-                        this.controls.dgShikakuShutokuRireki().height = 400;
-
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
-
-                    }
-
-                    public Size3(): void {
-                        this.controls.dgShikakuShutokuRireki().height = 350;
-
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
-
-                    }
-
-                    public Size4(): void {
+                    public Size300(): void {
                         this.controls.dgShikakuShutokuRireki().height = 300;
 
                         this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
 
                     }
 
-                    public Size5(): void {
-                        this.controls.dgShikakuShutokuRireki().height = 250;
-
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
-
-                    }
-
-                    public Size6(): void {
-                        this.controls.dgShikakuShutokuRireki().height = 200;
-
-                        this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
-
-                    }
                 }
             }
         }
 }
+
 
 
 module DBZ {
@@ -312,7 +293,4 @@ module DBZ {
         }
     }
 }
-
-
-
 

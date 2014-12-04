@@ -4,12 +4,8 @@
         var Events = (function () {
             function Events() {
             }
-            Events.onLoad_ShikakuShutokuTaishoshaJoho = function () {
-                return "onLoad_ShikakuShutokuTaishoshaJoho";
-            };
-
-            Events.onClick_btnAdd = function () {
-                return "onClick_btnAdd";
+            Events.onClick_btnAddShikakuShutoku = function () {
+                return "onClick_btnAddShikakuShutoku";
             };
 
             Events.onSelect_dgShikakuShutokuRireki = function () {
@@ -51,8 +47,8 @@
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.btnAdd = function () {
-                return new UZA.Button(this.convFiledName("btnAdd"));
+            Controls.prototype.btnAddShikakuShutoku = function () {
+                return new UZA.Button(this.convFiledName("btnAddShikakuShutoku"));
             };
 
             Controls.prototype.dgShikakuShutokuRireki = function () {
@@ -72,6 +68,14 @@ var DBZ;
                 this.fieldName = fieldName;
                 this.controls = new ShikakuTokusoRireki.Controls(fieldName);
             }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new ShikakuTokusoRireki.PublicProperties(this.fieldName);
+            };
+
             ModeController.prototype.priorities = function () {
                 return [
                     "DisplayType",
@@ -80,14 +84,6 @@ var DBZ;
                     "DataGridWidth",
                     "DataGridHeight"
                 ];
-            };
-
-            ModeController.prototype.Properties = function () {
-                return new UZA.CommonChildDiv(this.fieldName);
-            };
-
-            ModeController.prototype.PublicProperties = function () {
-                return new ShikakuTokusoRireki.PublicProperties(this.fieldName);
             };
 
             ModeController.prototype.DisplayType = function () {
@@ -122,10 +118,11 @@ var DBZ;
                     this.controls.dgShikakuShutokuRireki().readOnly = false;
 
                     var gridSetting = this.controls.dgShikakuShutokuRireki().gridSetting;
-
                     gridSetting.columns[0].visible = false;
                     gridSetting.isShowModifyButtonColumn = false;
                     gridSetting.isShowDeleteButtonColumn = false;
+
+                    this.controls.dgShikakuShutokuRireki().width;
 
                     this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
@@ -141,6 +138,8 @@ var DBZ;
                     gridSetting.isShowModifyButtonColumn = false;
                     gridSetting.isShowDeleteButtonColumn = false;
 
+                    this.controls.dgShikakuShutokuRireki().width;
+
                     this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
                     this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
@@ -155,6 +154,8 @@ var DBZ;
                     gridSetting.isShowModifyButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = true;
 
+                    this.controls.dgShikakuShutokuRireki().width;
+
                     this.controls.dgShikakuShutokuRireki().gridSetting = gridSetting;
 
                     this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
@@ -168,11 +169,11 @@ var DBZ;
                     this.controls = controls;
                 }
                 BtnDisplayMode.prototype.SetDisplay = function () {
-                    this.controls.btnAdd().displayNone = false;
+                    this.controls.btnAddShikakuShutoku().displayNone = false;
                 };
 
                 BtnDisplayMode.prototype.SetDisplayNone = function () {
-                    this.controls.btnAdd().displayNone = true;
+                    this.controls.btnAddShikakuShutoku().displayNone = true;
                 };
                 return BtnDisplayMode;
             })();
@@ -280,38 +281,14 @@ var DBZ;
                 function DataGridHeight(controls) {
                     this.controls = controls;
                 }
-                DataGridHeight.prototype.Size1 = function () {
-                    this.controls.dgShikakuShutokuRireki().height = 450;
+                DataGridHeight.prototype.SizeDefault = function () {
+                    this.controls.dgShikakuShutokuRireki().height = 217;
 
                     this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };
 
-                DataGridHeight.prototype.Size2 = function () {
-                    this.controls.dgShikakuShutokuRireki().height = 400;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
-                };
-
-                DataGridHeight.prototype.Size3 = function () {
-                    this.controls.dgShikakuShutokuRireki().height = 350;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
-                };
-
-                DataGridHeight.prototype.Size4 = function () {
+                DataGridHeight.prototype.Size300 = function () {
                     this.controls.dgShikakuShutokuRireki().height = 300;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
-                };
-
-                DataGridHeight.prototype.Size5 = function () {
-                    this.controls.dgShikakuShutokuRireki().height = 250;
-
-                    this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
-                };
-
-                DataGridHeight.prototype.Size6 = function () {
-                    this.controls.dgShikakuShutokuRireki().height = 200;
 
                     this.controls.dgShikakuShutokuRireki()._control.afterPropertiesSet();
                 };

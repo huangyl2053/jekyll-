@@ -4,6 +4,13 @@
         var Events = (function () {
             function Events() {
             }
+            Events.onSelect_dgShoKaishuJokyo = function () {
+                return "onSelect_dgShoKaishuJokyo";
+            };
+
+            Events.onSelectBySelectButton_dgShoKaishuJokyo = function () {
+                return "onSelectBySelectButton_dgShoKaishuJokyo";
+            };
             return Events;
         })();
         ShoKaishuJokyoList.Events = Events;
@@ -47,6 +54,7 @@ var DBZ;
             }
             ModeController.prototype.priorities = function () {
                 return [
+                    "グリッド表示モード",
                     "一覧パネル高さ"
                 ];
             };
@@ -59,6 +67,10 @@ var DBZ;
                 return new ShoKaishuJokyoList.PublicProperties(this.fieldName);
             };
 
+            ModeController.prototype.グリッド表示モード = function () {
+                return new Modes.グリッド表示モード(this.controls);
+            };
+
             ModeController.prototype.一覧パネル高さ = function () {
                 return new Modes.一覧パネル高さ(this.controls);
             };
@@ -67,6 +79,46 @@ var DBZ;
         ShoKaishuJokyoList.ModeController = ModeController;
 
         (function (Modes) {
+            var グリッド表示モード = (function () {
+                function グリッド表示モード(controls) {
+                    this.controls = controls;
+                }
+                グリッド表示モード.prototype.shokai = function () {
+                    var gridSetting = this.controls.dgShoKaishuJokyo().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = false;
+                    gridSetting.columns[0].visible = false;
+
+                    this.controls.dgShoKaishuJokyo().gridSetting = gridSetting;
+
+                    this.controls.dgShoKaishuJokyo()._control.afterPropertiesSet();
+                };
+
+                グリッド表示モード.prototype.toroku = function () {
+                    var gridSetting = this.controls.dgShoKaishuJokyo().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.columns[0].visible = true;
+
+                    this.controls.dgShoKaishuJokyo().gridSetting = gridSetting;
+
+                    this.controls.dgShoKaishuJokyo()._control.afterPropertiesSet();
+                };
+
+                グリッド表示モード.prototype.select = function () {
+                    var gridSetting = this.controls.dgShoKaishuJokyo().gridSetting;
+
+                    gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.columns[0].visible = false;
+
+                    this.controls.dgShoKaishuJokyo().gridSetting = gridSetting;
+
+                    this.controls.dgShoKaishuJokyo()._control.afterPropertiesSet();
+                };
+                return グリッド表示モード;
+            })();
+            Modes.グリッド表示モード = グリッド表示モード;
+
             var 一覧パネル高さ = (function () {
                 function 一覧パネル高さ(controls) {
                     this.controls = controls;
@@ -131,17 +183,6 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onBlur_txtKaishuDate = function () {
-                return "onBlur_txtKaishuDate";
-            };
-
-            Events.onChange_ddlKaishuJiyu = function () {
-                return "onChange_ddlKaishuJiyu";
-            };
-
-            Events.onBlur_txtKaishuRiyu = function () {
-                return "onBlur_txtKaishuRiyu";
-            };
             return Events;
         })();
         ShoKaishuJokyoShosai.Events = Events;
@@ -238,11 +279,18 @@ var DBZ;
                     this.controls = controls;
                 }
                 表示方法.prototype.照会 = function () {
-                    this.controls.ShoKaishuJokyoShosai().disabled = true;
+                    this.controls.ShoKaishuJokyoShosai().readOnly = true;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = false;
                 };
 
                 表示方法.prototype.入力 = function () {
-                    this.controls.ShoKaishuJokyoShosai().disabled = false;
+                    this.controls.ShoKaishuJokyoShosai().readOnly = false;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = false;
+                };
+
+                表示方法.prototype.非表示 = function () {
+                    this.controls.ShoKaishuJokyoShosai().readOnly = true;
+                    this.controls.ShoKaishuJokyoShosai().displayNone = true;
                 };
                 return 表示方法;
             })();
@@ -296,16 +344,16 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onSelectByDblClick_dgShoKaishuJokyo = function () {
-                return "onSelectByDblClick_dgShoKaishuJokyo";
+            Events.onBeforeClick_btnShoKaishuKakutei = function () {
+                return "onBeforeClick_btnShoKaishuKakutei";
             };
 
-            Events.onSelectBySelectButton_dgShoKaishuJokyo = function () {
-                return "onSelectBySelectButton_dgShoKaishuJokyo";
+            Events.onClick_btnShoKaishuKakutei = function () {
+                return "onClick_btnShoKaishuKakutei";
             };
 
-            Events.onClick_btnUpdateShoKaishuJokyo = function () {
-                return "onClick_btnUpdateShoKaishuJokyo";
+            Events.onClick_btnShoKaishuTorikeshi = function () {
+                return "onClick_btnShoKaishuTorikeshi";
             };
             return Events;
         })();
@@ -331,16 +379,20 @@ var DBZ;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.ShoKaishuJokyoList = function () {
-                return new DBZ.ShoKaishuJokyoList.ModeController(this.convFiledName("ShoKaishuJokyoList"));
+            Controls.prototype.ccdShoKaishuJokyoList = function () {
+                return new DBZ.ShoKaishuJokyoList.ModeController(this.convFiledName("ccdShoKaishuJokyoList"));
             };
 
-            Controls.prototype.ShoKaishuJokyoShosai = function () {
-                return new DBZ.ShoKaishuJokyoShosai.ModeController(this.convFiledName("ShoKaishuJokyoShosai"));
+            Controls.prototype.ccdShoKaishuJokyoShosai = function () {
+                return new DBZ.ShoKaishuJokyoShosai.ModeController(this.convFiledName("ccdShoKaishuJokyoShosai"));
             };
 
-            Controls.prototype.btnUpdateShoKaishuJokyo = function () {
-                return new UZA.Button(this.convFiledName("btnUpdateShoKaishuJokyo"));
+            Controls.prototype.btnShoKaishuKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnShoKaishuKakutei"));
+            };
+
+            Controls.prototype.btnShoKaishuTorikeshi = function () {
+                return new UZA.Button(this.convFiledName("btnShoKaishuTorikeshi"));
             };
             return Controls;
         })();
@@ -357,7 +409,11 @@ var DBZ;
                 this.controls = new ShoKaishuKirokuKanri.Controls(fieldName);
             }
             ModeController.prototype.priorities = function () {
-                return [];
+                return [
+                    "表示方法",
+                    "グリッド表示モード",
+                    "一覧パネル高さ"
+                ];
             };
 
             ModeController.prototype.Properties = function () {
@@ -367,9 +423,107 @@ var DBZ;
             ModeController.prototype.PublicProperties = function () {
                 return new ShoKaishuKirokuKanri.PublicProperties(this.fieldName);
             };
+
+            ModeController.prototype.表示方法 = function () {
+                return new Modes.表示方法(this.controls);
+            };
+
+            ModeController.prototype.グリッド表示モード = function () {
+                return new Modes.グリッド表示モード(this.controls);
+            };
+
+            ModeController.prototype.一覧パネル高さ = function () {
+                return new Modes.一覧パネル高さ(this.controls);
+            };
             return ModeController;
         })();
         ShoKaishuKirokuKanri.ModeController = ModeController;
+
+        (function (Modes) {
+            var 表示方法 = (function () {
+                function 表示方法(controls) {
+                    this.controls = controls;
+                }
+                表示方法.prototype.照会 = function () {
+                    this.controls.ccdShoKaishuJokyoShosai().表示方法().照会();
+                    this.controls.btnShoKaishuKakutei().disabled = true;
+                    this.controls.btnShoKaishuTorikeshi().disabled = true;
+                    this.controls.btnShoKaishuKakutei().displayNone = false;
+                    this.controls.btnShoKaishuTorikeshi().displayNone = false;
+                };
+
+                表示方法.prototype.入力 = function () {
+                    this.controls.ccdShoKaishuJokyoShosai().表示方法().入力();
+                    this.controls.btnShoKaishuKakutei().disabled = false;
+                    this.controls.btnShoKaishuTorikeshi().disabled = false;
+                    this.controls.btnShoKaishuKakutei().displayNone = false;
+                    this.controls.btnShoKaishuTorikeshi().displayNone = false;
+                };
+
+                表示方法.prototype.非表示 = function () {
+                    this.controls.ccdShoKaishuJokyoShosai().表示方法().非表示();
+                    this.controls.btnShoKaishuKakutei().displayNone = true;
+                    this.controls.btnShoKaishuTorikeshi().displayNone = true;
+                };
+                return 表示方法;
+            })();
+            Modes.表示方法 = 表示方法;
+
+            var グリッド表示モード = (function () {
+                function グリッド表示モード(controls) {
+                    this.controls = controls;
+                }
+                グリッド表示モード.prototype.shokai = function () {
+                    this.controls.ccdShoKaishuJokyoList().グリッド表示モード().shokai();
+                };
+
+                グリッド表示モード.prototype.toroku = function () {
+                    this.controls.ccdShoKaishuJokyoList().グリッド表示モード().toroku();
+                };
+
+                グリッド表示モード.prototype.select = function () {
+                    this.controls.ccdShoKaishuJokyoList().グリッド表示モード().select();
+                };
+                return グリッド表示モード;
+            })();
+            Modes.グリッド表示モード = グリッド表示モード;
+
+            var 一覧パネル高さ = (function () {
+                function 一覧パネル高さ(controls) {
+                    this.controls = controls;
+                }
+                一覧パネル高さ.prototype.サイズ200 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ200();
+                };
+
+                一覧パネル高さ.prototype.サイズ250 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ250();
+                };
+
+                一覧パネル高さ.prototype.サイズ300 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ300();
+                };
+
+                一覧パネル高さ.prototype.サイズ350 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ350();
+                };
+
+                一覧パネル高さ.prototype.サイズ400 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ400();
+                };
+
+                一覧パネル高さ.prototype.サイズ450 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ450();
+                };
+
+                一覧パネル高さ.prototype.サイズ500 = function () {
+                    this.controls.ccdShoKaishuJokyoList().一覧パネル高さ().サイズ500();
+                };
+                return 一覧パネル高さ;
+            })();
+            Modes.一覧パネル高さ = 一覧パネル高さ;
+        })(ShoKaishuKirokuKanri.Modes || (ShoKaishuKirokuKanri.Modes = {}));
+        var Modes = ShoKaishuKirokuKanri.Modes;
     })(DBZ.ShoKaishuKirokuKanri || (DBZ.ShoKaishuKirokuKanri = {}));
     var ShoKaishuKirokuKanri = DBZ.ShoKaishuKirokuKanri;
 })(DBZ || (DBZ = {}));
@@ -390,20 +544,20 @@ var DBZ;
                 return editTypes;
             };
 
-            PublicProperties.prototype.getShoKaishuJokyoShosai_penalDisplay = function () {
-                return this.controls.ShoKaishuJokyoShosai().PublicProperties().getShoKaishuJokyoShosai_panelDisplay;
+            PublicProperties.prototype.getShoKaishuJokyoShosai_panelDisplay = function () {
+                return this.controls.ccdShoKaishuJokyoShosai().PublicProperties().getShoKaishuJokyoShosai_panelDisplay;
             };
 
-            PublicProperties.prototype.setShoKaishuJokyoShosai_penalDisplay = function (value) {
-                this.controls.ShoKaishuJokyoShosai().PublicProperties().setShoKaishuJokyoShosai_panelDisplay = value;
+            PublicProperties.prototype.setShoKaishuJokyoShosai_panelDisplay = function (value) {
+                this.controls.ccdShoKaishuJokyoShosai().PublicProperties().setShoKaishuJokyoShosai_panelDisplay = value;
             };
 
             PublicProperties.prototype.getShoKaishuJokyoShosai_canOpenAndClose = function () {
-                return this.controls.ShoKaishuJokyoShosai().PublicProperties().getShoKaishuJokyoShosai_canOpenAndClose;
+                return this.controls.ccdShoKaishuJokyoShosai().PublicProperties().getShoKaishuJokyoShosai_canOpenAndClose;
             };
 
             PublicProperties.prototype.setShoKaishuJokyoShosai_canOpenAndClose = function (value) {
-                this.controls.ShoKaishuJokyoShosai().PublicProperties().setShoKaishuJokyoShosai_canOpenAndClose = value;
+                this.controls.ccdShoKaishuJokyoShosai().PublicProperties().setShoKaishuJokyoShosai_canOpenAndClose = value;
             };
             return PublicProperties;
         })();

@@ -28,6 +28,14 @@ module DBZ {
                 return "onSelectByDeleteButton_dgHenko";
             }
 
+            public static onClick_btnHenkoKakutei(): string {
+                return "onClick_btnHenkoKakutei";
+            }
+
+            public static onClick_btnHenkoTorikeshi(): string {
+                return "onClick_btnHenkoTorikeshi";
+            }
+
         }
 
         export class Controls {
@@ -59,6 +67,50 @@ module DBZ {
 
             public dgHenko(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgHenko"));
+            }
+
+            public HenkoInput(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("HenkoInput"));
+            }
+
+            public txtHenkoDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtHenkoDate"));
+            }
+
+            public txtHenkoTodokedeDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtHenkoTodokedeDate"));
+            }
+
+            public ddlHenkoJiyu(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlHenkoJiyu"));
+            }
+
+            public HenkoHokenshaJoho(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("HenkoInput_HenkoHokenshaJoho"));
+            }
+
+            public ddlHenkoShozaiHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlHenkoShozaiHokensha"));
+            }
+
+            public ddlHenkoSochimotoHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlHenkoSochimotoHokensha"));
+            }
+
+            public ddlHenkoKyuHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlHenkoKyuHokensha"));
+            }
+
+            public ddlJuminJoho(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlJuminJoho"));
+            }
+
+            public btnHenkoKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnHenkoKakutei"));
+            }
+
+            public btnHenkoTorikeshi(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnHenkoTorikeshi"));
             }
 
         }

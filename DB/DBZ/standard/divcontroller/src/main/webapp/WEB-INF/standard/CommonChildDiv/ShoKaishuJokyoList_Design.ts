@@ -8,6 +8,14 @@ module DBZ {
 
         export class Events {
 
+            public static onSelect_dgShoKaishuJokyo(): string {
+                return "onSelect_dgShoKaishuJokyo";
+            }
+
+            public static onSelectBySelectButton_dgShoKaishuJokyo(): string {
+                return "onSelectBySelectButton_dgShoKaishuJokyo";
+            }
+
         }
 
         export class Controls {

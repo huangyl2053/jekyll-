@@ -2571,11 +2571,11 @@ var DBZ;
                 return editTypes;
             };
 
-            PublicProperties.prototype.getShoKaishuJokyoShosai_penalDisplay = function () {
+            PublicProperties.prototype.getShoKaishuJokyoShosai_panelDisplay = function () {
                 return this.controls.ShoKaishuJokyoShosai().PublicProperties().getShoKaishuJokyoShosai_panelDisplay;
             };
 
-            PublicProperties.prototype.setShoKaishuJokyoShosai_penalDisplay = function (value) {
+            PublicProperties.prototype.setShoKaishuJokyoShosai_panelDisplay = function (value) {
                 this.controls.ShoKaishuJokyoShosai().PublicProperties().setShoKaishuJokyoShosai_panelDisplay = value;
             };
 

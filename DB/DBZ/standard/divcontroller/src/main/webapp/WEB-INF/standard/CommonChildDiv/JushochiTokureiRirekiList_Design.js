@@ -23,6 +23,14 @@ var DBZ;
             Events.onSelectByDeleteButton_dgJutoku = function () {
                 return "onSelectByDeleteButton_dgJutoku";
             };
+
+            Events.onClick_btnJutokuKakutei = function () {
+                return "onClick_btnJutokuKakutei";
+            };
+
+            Events.onClick_btnJutokuTorikeshi = function () {
+                return "onClick_btnJutokuTorikeshi";
+            };
             return Events;
         })();
         JushochiTokureiRirekiList.Events = Events;
@@ -53,6 +61,90 @@ var DBZ;
 
             Controls.prototype.dgJutoku = function () {
                 return new UZA.DataGrid(this.convFiledName("dgJutoku"));
+            };
+
+            Controls.prototype.JutokuInput = function () {
+                return new UZA.Panel(this.convFiledName("JutokuInput"));
+            };
+
+            Controls.prototype.JutokuTekiyoInput = function () {
+                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuTekiyoInput"));
+            };
+
+            Controls.prototype.txtTekiyoDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoDate"));
+            };
+
+            Controls.prototype.txtTekiyoTodokedeDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoTodokedeDate"));
+            };
+
+            Controls.prototype.ddlTekiyoJiyu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlTekiyoJiyu"));
+            };
+
+            Controls.prototype.tekiyojiHokenshaJoho = function () {
+                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuTekiyoInput_tekiyojiHokenshaJoho"));
+            };
+
+            Controls.prototype.ddlTekiyojiShozaiHokensha = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiShozaiHokensha"));
+            };
+
+            Controls.prototype.ddlTekiyojiSochimotoHokensha = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiSochimotoHokensha"));
+            };
+
+            Controls.prototype.ddlTekiyojiKyuHokensha = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiKyuHokensha"));
+            };
+
+            Controls.prototype.ddlTekiyojiJuminJoho = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiJuminJoho"));
+            };
+
+            Controls.prototype.JutokuKaijoInput = function () {
+                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuKaijoInput"));
+            };
+
+            Controls.prototype.txtKaijoDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKaijoDate"));
+            };
+
+            Controls.prototype.txtKaijoTodokedeDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKaijoTodokedeDate"));
+            };
+
+            Controls.prototype.ddlKaijoJiyu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlKaijoJiyu"));
+            };
+
+            Controls.prototype.kaijojiHokenshaJoho = function () {
+                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuKaijoInput_kaijojiHokenshaJoho"));
+            };
+
+            Controls.prototype.ddlKaijojiShozaiHokensha = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlKaijojiShozaiHokensha"));
+            };
+
+            Controls.prototype.ddlKaijojiSochimotoHokensha = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlKaijojiSochimotoHokensha"));
+            };
+
+            Controls.prototype.ddlKaijojiKyuHokensha = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlKaijojiKyuHokensha"));
+            };
+
+            Controls.prototype.ddlKaijojiJuminJono = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlKaijojiJuminJono"));
+            };
+
+            Controls.prototype.btnJutokuKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnJutokuKakutei"));
+            };
+
+            Controls.prototype.btnJutokuTorikeshi = function () {
+                return new UZA.Button(this.convFiledName("btnJutokuTorikeshi"));
             };
             return Controls;
         })();

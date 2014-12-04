@@ -112,7 +112,6 @@
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiKogakuKaigoServicehiInfo.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiKyotakuServiceKeikakuInfo.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiKyufuSeigenInfo.ts" />
-
   </ItemGroup>
   <ItemGroup/>
   <Target Name="AfterBuild">

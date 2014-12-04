@@ -28,6 +28,14 @@ module DBZ {
                 return "onSelectByDeleteButton_dgJutoku";
             }
 
+            public static onClick_btnJutokuKakutei(): string {
+                return "onClick_btnJutokuKakutei";
+            }
+
+            public static onClick_btnJutokuTorikeshi(): string {
+                return "onClick_btnJutokuTorikeshi";
+            }
+
         }
 
         export class Controls {
@@ -59,6 +67,90 @@ module DBZ {
 
             public dgJutoku(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgJutoku"));
+            }
+
+            public JutokuInput(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("JutokuInput"));
+            }
+
+            public JutokuTekiyoInput(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuTekiyoInput"));
+            }
+
+            public txtTekiyoDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoDate"));
+            }
+
+            public txtTekiyoTodokedeDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoTodokedeDate"));
+            }
+
+            public ddlTekiyoJiyu(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlTekiyoJiyu"));
+            }
+
+            public tekiyojiHokenshaJoho(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuTekiyoInput_tekiyojiHokenshaJoho"));
+            }
+
+            public ddlTekiyojiShozaiHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiShozaiHokensha"));
+            }
+
+            public ddlTekiyojiSochimotoHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiSochimotoHokensha"));
+            }
+
+            public ddlTekiyojiKyuHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiKyuHokensha"));
+            }
+
+            public ddlTekiyojiJuminJoho(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiJuminJoho"));
+            }
+
+            public JutokuKaijoInput(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuKaijoInput"));
+            }
+
+            public txtKaijoDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKaijoDate"));
+            }
+
+            public txtKaijoTodokedeDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKaijoTodokedeDate"));
+            }
+
+            public ddlKaijoJiyu(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlKaijoJiyu"));
+            }
+
+            public kaijojiHokenshaJoho(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuKaijoInput_kaijojiHokenshaJoho"));
+            }
+
+            public ddlKaijojiShozaiHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlKaijojiShozaiHokensha"));
+            }
+
+            public ddlKaijojiSochimotoHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlKaijojiSochimotoHokensha"));
+            }
+
+            public ddlKaijojiKyuHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlKaijojiKyuHokensha"));
+            }
+
+            public ddlKaijojiJuminJono(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlKaijojiJuminJono"));
+            }
+
+            public btnJutokuKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnJutokuKakutei"));
+            }
+
+            public btnJutokuTorikeshi(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnJutokuTorikeshi"));
             }
 
         }

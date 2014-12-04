@@ -10,16 +10,16 @@ module DBZ {
 
         export class Events {
 
-            public static onSelectByDblClick_dgShoKaishuJokyo(): string {
-                return "onSelectByDblClick_dgShoKaishuJokyo";
+            public static onBeforeClick_btnShoKaishuKakutei(): string {
+                return "onBeforeClick_btnShoKaishuKakutei";
             }
 
-            public static onSelectBySelectButton_dgShoKaishuJokyo(): string {
-                return "onSelectBySelectButton_dgShoKaishuJokyo";
+            public static onClick_btnShoKaishuKakutei(): string {
+                return "onClick_btnShoKaishuKakutei";
             }
 
-            public static onClick_btnUpdateShoKaishuJokyo(): string {
-                return "onClick_btnUpdateShoKaishuJokyo";
+            public static onClick_btnShoKaishuTorikeshi(): string {
+                return "onClick_btnShoKaishuTorikeshi";
             }
 
         }
@@ -47,16 +47,20 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public ShoKaishuJokyoList(): DBZ.ShoKaishuJokyoList.ModeController {
-                return new DBZ.ShoKaishuJokyoList.ModeController(this.convFiledName("ShoKaishuJokyoList"));
+            public ccdShoKaishuJokyoList(): DBZ.ShoKaishuJokyoList.ModeController {
+                return new DBZ.ShoKaishuJokyoList.ModeController(this.convFiledName("ccdShoKaishuJokyoList"));
             }
 
-            public ShoKaishuJokyoShosai(): DBZ.ShoKaishuJokyoShosai.ModeController {
-                return new DBZ.ShoKaishuJokyoShosai.ModeController(this.convFiledName("ShoKaishuJokyoShosai"));
+            public ccdShoKaishuJokyoShosai(): DBZ.ShoKaishuJokyoShosai.ModeController {
+                return new DBZ.ShoKaishuJokyoShosai.ModeController(this.convFiledName("ccdShoKaishuJokyoShosai"));
             }
 
-            public btnUpdateShoKaishuJokyo(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnUpdateShoKaishuJokyo"));
+            public btnShoKaishuKakutei(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnShoKaishuKakutei"));
+            }
+
+            public btnShoKaishuTorikeshi(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnShoKaishuTorikeshi"));
             }
 
         }

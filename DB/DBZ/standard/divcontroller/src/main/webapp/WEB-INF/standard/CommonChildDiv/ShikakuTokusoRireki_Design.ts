@@ -8,12 +8,8 @@ module DBZ {
 
         export class Events {
 
-            public static onLoad_ShikakuShutokuTaishoshaJoho(): string {
-                return "onLoad_ShikakuShutokuTaishoshaJoho";
-            }
-
-            public static onClick_btnAdd(): string {
-                return "onClick_btnAdd";
+            public static onClick_btnAddShikakuShutoku(): string {
+                return "onClick_btnAddShikakuShutoku";
             }
 
             public static onSelect_dgShikakuShutokuRireki(): string {
@@ -57,8 +53,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public btnAdd(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnAdd"));
+            public btnAddShikakuShutoku(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnAddShikakuShutoku"));
             }
 
             public dgShikakuShutokuRireki(): UZA.DataGrid {
