@@ -81,7 +81,7 @@ public class ShisetsuJohoHandler {
      * 初期化処理です。
      */
     public void initialize() {
-        div.getDdlDaichoShubetsu().setDataSource(createDdl台帳種別DataSource());
+        div.getDdlDaichoShubetsu().setDataSource(createDdl台帳種別DataSource(DaichoShubetsu.values()));
         switch (div.getMode_利用機能()) {
             case 台帳種別表示機能:
                 div.setMode_台帳種別(台帳種別.台帳種別表示する);
@@ -262,40 +262,30 @@ public class ShisetsuJohoHandler {
         div.getTxtShisetsuMeisho().clearValue();
     }
 
-    private List<KeyValueDataSource> createDdl台帳種別DataSource() {
+    private List<KeyValueDataSource> createDdl台帳種別DataSource(DaichoShubetsu[] items) {
 
-        KeyValueDataSource hihokenshaDaicho = new KeyValueDataSource(DaichoShubetsu.被保台帳.getKey(),
-                DaichoShubetsu.被保台帳.getValue());
-        KeyValueDataSource taTokurei = new KeyValueDataSource(DaichoShubetsu.他市町村住所地特例者.getKey(),
-                DaichoShubetsu.他市町村住所地特例者.getValue());
-        KeyValueDataSource tekiyoJogai = new KeyValueDataSource(DaichoShubetsu.適用除外者.getKey(),
-                DaichoShubetsu.適用除外者.getValue());
+        List<KeyValueDataSource> list = new ArrayList<>();
+        for (DaichoShubetsu item : items) {
+            list.add(new KeyValueDataSource(item.getKey(), item.getValue()));
+        }
 
-        List<KeyValueDataSource> src = new ArrayList<>();
-        src.add(hihokenshaDaicho);
-        src.add(taTokurei);
-        src.add(tekiyoJogai);
-
-        return src;
+        return list;
     }
 
     private List<KeyValueDataSource> createRad施設情報DataSource() {
 
-        KeyValueDataSource kaigoHokenShisetsu = new KeyValueDataSource(ShisetsuShurui.介護保険施設.getKey(),
-                ShisetsuShurui.介護保険施設.getValue());
-        KeyValueDataSource other = new KeyValueDataSource(ShisetsuShurui.その他特例施設.getKey(),
-                ShisetsuShurui.その他特例施設.getValue());
-        KeyValueDataSource tekiyoJogaiShisetsu = new KeyValueDataSource(ShisetsuShurui.適用除外施設.getKey(),
-                ShisetsuShurui.適用除外施設.getValue());
+        List<KeyValueDataSource> list = new ArrayList<>();
 
-        List<KeyValueDataSource> src = new ArrayList<>();
-        src.add(kaigoHokenShisetsu);
-        src.add(other);
+        list.add(new KeyValueDataSource(ShisetsuShurui.介護保険施設.getKey(),
+                ShisetsuShurui.介護保険施設.getValue()));
+        list.add(new KeyValueDataSource(ShisetsuShurui.その他特例施設.getKey(),
+                ShisetsuShurui.その他特例施設.getValue()));
         if (div.getMode_利用機能() == 利用機能.全施設対象機能) {
-            src.add(tekiyoJogaiShisetsu);
+            list.add(new KeyValueDataSource(ShisetsuShurui.適用除外施設.getKey(),
+                    ShisetsuShurui.適用除外施設.getValue()));
         }
 
-        return src;
+        return list;
     }
 
 }
