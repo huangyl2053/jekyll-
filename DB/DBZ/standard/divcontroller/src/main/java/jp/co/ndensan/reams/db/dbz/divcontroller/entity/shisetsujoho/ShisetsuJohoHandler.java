@@ -171,26 +171,28 @@ public class ShisetsuJohoHandler {
      */
     public void select台帳種別() {
 
+        clearTxt();
+
         RString selectedKey = div.getDdlDaichoShubetsu().getSelectedKey();
-        if (selectedKey != null) {
-            if (selectedKey.equals(ddl台帳種別key.ddlDaichoShubetsu01Key.getKey())) {
-                div.getRadShisetsuShurui().setSelectedKey(rad施設種類key.radShisetsuShurui01Key.getKey());
-                div.setMode_施設種類(施設種類.施設種類を表示する);
-                div.setMode_入力補助(入力補助.事業者を表示する);
-
-            } else if (selectedKey.equals(ddl台帳種別key.ddlDaichoShubetsu02Key.getKey())) {
-                div.getRadShisetsuShurui().setSelectedKey(rad施設種類key.radShisetsuShurui02Key.getKey());
-                div.setMode_施設種類(施設種類.施設種類を表示する);
-                div.setMode_入力補助(入力補助.他特例施設を表示する);
-
-            } else if (selectedKey.equals(ddl台帳種別key.ddlDaichoShubetsu03Key.getKey())) {
-                div.setMode_施設種類(施設種類.施設種類を表示しない);
-                div.setMode_入力補助(入力補助.除外施設を表示する);
-
-            }
+        if (selectedKey == null) {
+            return;
         }
 
-        clearTxt();
+        if (selectedKey.equals(ddl台帳種別key.ddlDaichoShubetsu01Key.getKey())) {
+            div.getRadShisetsuShurui().setSelectedKey(rad施設種類key.radShisetsuShurui01Key.getKey());
+            div.setMode_施設種類(施設種類.施設種類を表示する);
+            div.setMode_入力補助(入力補助.事業者を表示する);
+
+        } else if (selectedKey.equals(ddl台帳種別key.ddlDaichoShubetsu02Key.getKey())) {
+            div.getRadShisetsuShurui().setSelectedKey(rad施設種類key.radShisetsuShurui02Key.getKey());
+            div.setMode_施設種類(施設種類.施設種類を表示する);
+            div.setMode_入力補助(入力補助.他特例施設を表示する);
+
+        } else if (selectedKey.equals(ddl台帳種別key.ddlDaichoShubetsu03Key.getKey())) {
+            div.setMode_施設種類(施設種類.施設種類を表示しない);
+            div.setMode_入力補助(入力補助.除外施設を表示する);
+
+        }
     }
 
     /**
@@ -198,21 +200,23 @@ public class ShisetsuJohoHandler {
      */
     public void select施設種類() {
 
+        clearTxt();
+
         RString selectedKey = div.getRadShisetsuShurui().getSelectedKey();
-        if (selectedKey != null) {
-            if (selectedKey.equals(rad施設種類key.radShisetsuShurui01Key.getKey())) {
-                div.setMode_入力補助(入力補助.事業者を表示する);
-
-            } else if (selectedKey.equals(rad施設種類key.radShisetsuShurui02Key.getKey())) {
-                div.setMode_入力補助(入力補助.他特例施設を表示する);
-
-            } else if (selectedKey.equals(rad施設種類key.radShisetsuShurui03Key.getKey())) {
-                div.setMode_入力補助(入力補助.除外施設を表示する);
-
-            }
+        if (selectedKey == null) {
+            return;
         }
 
-        clearTxt();
+        if (selectedKey.equals(rad施設種類key.radShisetsuShurui01Key.getKey())) {
+            div.setMode_入力補助(入力補助.事業者を表示する);
+
+        } else if (selectedKey.equals(rad施設種類key.radShisetsuShurui02Key.getKey())) {
+            div.setMode_入力補助(入力補助.他特例施設を表示する);
+
+        } else if (selectedKey.equals(rad施設種類key.radShisetsuShurui03Key.getKey())) {
+            div.setMode_入力補助(入力補助.除外施設を表示する);
+
+        }
     }
 
     /**
