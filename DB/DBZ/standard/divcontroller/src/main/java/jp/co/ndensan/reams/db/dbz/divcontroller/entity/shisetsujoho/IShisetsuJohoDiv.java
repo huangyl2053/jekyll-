@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -59,7 +60,7 @@ public interface IShisetsuJohoDiv {
      *
      * @return 入所施設コード
      */
-    RString get入所施設コード();
+    ShisetsuCode get入所施設コード();
 
     /**
      * 施設名称を返します。

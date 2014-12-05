@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.testshisetsujoho;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.TestShisetsuJoho.TestShisetsuJohoDiv;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -131,8 +132,8 @@ public class TestShisetsuJoho {
      * @return レスポンス
      */
     public ResponseData<TestShisetsuJohoDiv> onClick_btnGetCode(TestShisetsuJohoDiv div) {
-        RString result = div.getCcdShisetsuJoho().get入所施設コード();
-        div.getTxtCode().setValue(result);
+        ShisetsuCode result = div.getCcdShisetsuJoho().get入所施設コード();
+        div.getTxtCode().setValue(result.value());
 
         return createResponse(div);
     }

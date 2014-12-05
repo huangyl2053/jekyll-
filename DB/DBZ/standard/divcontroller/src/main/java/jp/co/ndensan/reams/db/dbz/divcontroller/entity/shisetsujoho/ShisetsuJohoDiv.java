@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
@@ -374,9 +375,10 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
         return getHandler().get施設種類();
     }
 
+    @JsonIgnore
     @Override
-    public RString get入所施設コード() {
-        return txtShisetsuCode.getValue();
+    public ShisetsuCode get入所施設コード() {
+        return new ShisetsuCode(txtShisetsuCode.getValue());
     }
 
     @Override
