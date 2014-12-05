@@ -31,9 +31,11 @@ public enum DaichoType {
      */
     適用除外者("2");
     private final RString code;
+    private final RString name;
 
     private DaichoType(String code) {
         this.code = new RString(code);
+        this.name = new RString(name());
     }
 
     /**
@@ -51,7 +53,7 @@ public enum DaichoType {
      * @return 台帳種別名称
      */
     public RString getName() {
-        return new RString(name());
+        return name;
     }
 
     /**

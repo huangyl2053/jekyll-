@@ -31,9 +31,11 @@ public enum ShisetsuType {
      */
     適用除外施設("21");
     private final RString code;
+    private final RString name;
 
     private ShisetsuType(String code) {
         this.code = new RString(code);
+        this.name = new RString(name());
     }
 
     /**
@@ -51,7 +53,7 @@ public enum ShisetsuType {
      * @return 施設種類名称
      */
     public RString getName() {
-        return new RString(name());
+        return name;
     }
 
     /**
