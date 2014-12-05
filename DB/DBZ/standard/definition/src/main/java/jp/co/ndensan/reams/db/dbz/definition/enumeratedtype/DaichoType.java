@@ -22,14 +22,14 @@ public enum DaichoType {
     被保険者("1"),
     /**
      * 台帳種別が「他市町村住所地特例者」であることを表します。 <br />
-     * コード：2
-     */
-    他市町村住所地特例者("2"),
-    /**
-     * 台帳種別が「適用除外者」であることを表します。 <br />
      * コード：3
      */
-    適用除外者("3");
+    他市町村住所地特例者("3"),
+    /**
+     * 台帳種別が「適用除外者」であることを表します。 <br />
+     * コード：2
+     */
+    適用除外者("2");
     private final RString code;
 
     private DaichoType(String code) {
@@ -43,6 +43,15 @@ public enum DaichoType {
      */
     public RString getCode() {
         return code;
+    }
+
+    /**
+     * RString型の台帳種別名称を返します。
+     *
+     * @return 台帳種別名称
+     */
+    public RString getName() {
+        return new RString(name());
     }
 
     /**

@@ -30,7 +30,7 @@ var DBZ;
                             "fieldName": "ddlDaichoShubetsu",
                             "items": [],
                             "controlType": "DropDownList",
-                            "width": "200px",
+                            "width": "180px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -52,15 +52,15 @@ var DBZ;
                             "dataSource": [
                                 {
                                     "key": "1",
-                                    "value": "被保険者台帳"
+                                    "value": "被保険者"
                                 },
                                 {
                                     "key": "3",
-                                    "value": "他市町村住所地特例者台帳"
+                                    "value": "他市町村住所地特例者"
                                 },
                                 {
                                     "key": "2",
-                                    "value": "適用除外者台帳"
+                                    "value": "適用除外者"
                                 }
                             ],
                             "labelLText": "台帳種別",
@@ -78,7 +78,7 @@ var DBZ;
                             "fieldName": "radShisetsuShurui",
                             "items": [],
                             "controlType": "RadioButton",
-                            "width": "380px",
+                            "width": "410px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -104,7 +104,7 @@ var DBZ;
                                 },
                                 {
                                     "key": "12",
-                                    "value": "その他特例施設"
+                                    "value": "住所地特例対象施設"
                                 },
                                 {
                                     "key": "21",

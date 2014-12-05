@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.入力補助;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.利用機能;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.台帳種別;
@@ -24,50 +26,6 @@ public class ShisetsuJohoHandler {
 
     private final ShisetsuJohoDiv div;
 
-    private enum DaichoShubetsu {
-
-        被保台帳("1"),
-        他市町村住所地特例者("3"),
-        適用除外者("2");
-        private final RString key;
-        private final RString value;
-
-        private DaichoShubetsu(String key) {
-            this.key = new RString(key);
-            this.value = new RString(name());
-        }
-
-        RString getKey() {
-            return this.key;
-        }
-
-        RString getValue() {
-            return this.value;
-        }
-    }
-
-    private enum ShisetsuShurui {
-
-        介護保険施設("11"),
-        その他特例施設("12"),
-        適用除外施設("21");
-        private final RString key;
-        private final RString value;
-
-        private ShisetsuShurui(String key) {
-            this.key = new RString(key);
-            this.value = new RString(name());
-        }
-
-        RString getKey() {
-            return this.key;
-        }
-
-        RString getValue() {
-            return this.value;
-        }
-    }
-
     /**
      * コンストラクタです。
      *
@@ -81,39 +39,39 @@ public class ShisetsuJohoHandler {
      * 初期化処理です。
      */
     public void initialize() {
-        div.getDdlDaichoShubetsu().setDataSource(createDdl台帳種別DataSource(DaichoShubetsu.values()));
+        div.getDdlDaichoShubetsu().setDataSource(createDdl台帳種別DataSource());
         switch (div.getMode_利用機能()) {
             case 台帳種別表示機能:
                 div.setMode_台帳種別(台帳種別.台帳種別表示する);
                 div.setMode_施設種類(施設種類.施設種類を表示する);
                 div.getRadShisetsuShurui().setDataSource(createRad施設情報DataSource());
-                div.getRadShisetsuShurui().setSelectedKey(ShisetsuShurui.介護保険施設.getKey());
+                div.getRadShisetsuShurui().setSelectedKey(ShisetsuType.介護保険施設.getCode());
                 select施設種類();
                 break;
             case 全施設対象機能:
                 div.setMode_台帳種別(台帳種別.台帳種別非表示する);
                 div.setMode_施設種類(施設種類.施設種類を表示する);
                 div.getRadShisetsuShurui().setDataSource(createRad施設情報DataSource());
-                div.getRadShisetsuShurui().setSelectedKey(ShisetsuShurui.介護保険施設.getKey());
+                div.getRadShisetsuShurui().setSelectedKey(ShisetsuType.介護保険施設.getCode());
                 select施設種類();
                 break;
             case 被保険者対象機能:
                 div.setMode_台帳種別(台帳種別.台帳種別非表示する);
-                div.getDdlDaichoShubetsu().setSelectedKey(DaichoShubetsu.被保台帳.getKey());
+                div.getDdlDaichoShubetsu().setSelectedKey(DaichoType.被保険者.getCode());
                 div.getRadShisetsuShurui().setDataSource(createRad施設情報DataSource());
-                div.getRadShisetsuShurui().setSelectedKey(ShisetsuShurui.介護保険施設.getKey());
+                div.getRadShisetsuShurui().setSelectedKey(ShisetsuType.介護保険施設.getCode());
                 select台帳種別();
                 break;
             case 他市町村住所地特例者対象機能:
                 div.setMode_台帳種別(台帳種別.台帳種別非表示する);
-                div.getDdlDaichoShubetsu().setSelectedKey(DaichoShubetsu.他市町村住所地特例者.getKey());
+                div.getDdlDaichoShubetsu().setSelectedKey(DaichoType.他市町村住所地特例者.getCode());
                 div.getRadShisetsuShurui().setDataSource(createRad施設情報DataSource());
-                div.getRadShisetsuShurui().setSelectedKey(ShisetsuShurui.その他特例施設.getKey());
+                div.getRadShisetsuShurui().setSelectedKey(ShisetsuType.住所地特例対象施設.getCode());
                 select台帳種別();
                 break;
             case 適用除外者対象機能:
                 div.setMode_台帳種別(台帳種別.台帳種別非表示する);
-                div.getDdlDaichoShubetsu().setSelectedKey(DaichoShubetsu.適用除外者.getKey());
+                div.getDdlDaichoShubetsu().setSelectedKey(DaichoType.適用除外者.getCode());
                 select台帳種別();
                 break;
             default:
@@ -135,17 +93,17 @@ public class ShisetsuJohoHandler {
             return;
         }
 
-        if (selectedKey.equals(DaichoShubetsu.被保台帳.getKey())) {
-            div.getRadShisetsuShurui().setSelectedKey(ShisetsuShurui.介護保険施設.getKey());
+        if (selectedKey.equals(DaichoType.被保険者.getCode())) {
+            div.getRadShisetsuShurui().setSelectedKey(ShisetsuType.介護保険施設.getCode());
             div.setMode_施設種類(施設種類.施設種類を表示する);
             div.setMode_入力補助(入力補助.事業者を表示する);
 
-        } else if (selectedKey.equals(DaichoShubetsu.他市町村住所地特例者.getKey())) {
-            div.getRadShisetsuShurui().setSelectedKey(ShisetsuShurui.その他特例施設.getKey());
+        } else if (selectedKey.equals(DaichoType.他市町村住所地特例者.getCode())) {
+            div.getRadShisetsuShurui().setSelectedKey(ShisetsuType.住所地特例対象施設.getCode());
             div.setMode_施設種類(施設種類.施設種類を表示する);
             div.setMode_入力補助(入力補助.他特例施設を表示する);
 
-        } else if (selectedKey.equals(DaichoShubetsu.適用除外者.getKey())) {
+        } else if (selectedKey.equals(DaichoType.適用除外者.getCode())) {
             div.setMode_施設種類(施設種類.施設種類を表示しない);
             div.setMode_入力補助(入力補助.除外施設を表示する);
 
@@ -164,13 +122,13 @@ public class ShisetsuJohoHandler {
             return;
         }
 
-        if (selectedKey.equals(ShisetsuShurui.介護保険施設.getKey())) {
+        if (selectedKey.equals(ShisetsuType.介護保険施設.getCode())) {
             div.setMode_入力補助(入力補助.事業者を表示する);
 
-        } else if (selectedKey.equals(ShisetsuShurui.その他特例施設.getKey())) {
+        } else if (selectedKey.equals(ShisetsuType.住所地特例対象施設.getCode())) {
             div.setMode_入力補助(入力補助.他特例施設を表示する);
 
-        } else if (selectedKey.equals(ShisetsuShurui.適用除外施設.getKey())) {
+        } else if (selectedKey.equals(ShisetsuType.適用除外施設.getCode())) {
             div.setMode_入力補助(入力補助.除外施設を表示する);
 
         }
@@ -184,11 +142,11 @@ public class ShisetsuJohoHandler {
     public RString get施設種類() {
         switch (div.getMode_入力補助()) {
             case 事業者を表示する:
-                return ShisetsuShurui.介護保険施設.getValue();
+                return ShisetsuType.介護保険施設.getName();
             case 他特例施設を表示する:
-                return ShisetsuShurui.その他特例施設.getValue();
+                return ShisetsuType.住所地特例対象施設.getName();
             case 除外施設を表示する:
-                return ShisetsuShurui.適用除外施設.getValue();
+                return ShisetsuType.適用除外施設.getName();
             default:
                 return RString.EMPTY;
         }
@@ -202,11 +160,11 @@ public class ShisetsuJohoHandler {
     public RString get施設種類キー() {
         switch (div.getMode_入力補助()) {
             case 事業者を表示する:
-                return ShisetsuShurui.介護保険施設.getKey();
+                return ShisetsuType.介護保険施設.getCode();
             case 他特例施設を表示する:
-                return ShisetsuShurui.その他特例施設.getKey();
+                return ShisetsuType.住所地特例対象施設.getCode();
             case 除外施設を表示する:
-                return ShisetsuShurui.適用除外施設.getKey();
+                return ShisetsuType.適用除外施設.getCode();
             default:
                 return RString.EMPTY;
         }
@@ -262,12 +220,16 @@ public class ShisetsuJohoHandler {
         div.getTxtShisetsuMeisho().clearValue();
     }
 
-    private List<KeyValueDataSource> createDdl台帳種別DataSource(DaichoShubetsu[] items) {
+    private List<KeyValueDataSource> createDdl台帳種別DataSource() {
 
         List<KeyValueDataSource> list = new ArrayList<>();
-        for (DaichoShubetsu item : items) {
-            list.add(new KeyValueDataSource(item.getKey(), item.getValue()));
-        }
+
+        list.add(new KeyValueDataSource(DaichoType.被保険者.getCode(),
+                DaichoType.被保険者.getName()));
+        list.add(new KeyValueDataSource(DaichoType.他市町村住所地特例者.getCode(),
+                DaichoType.他市町村住所地特例者.getName()));
+        list.add(new KeyValueDataSource(DaichoType.適用除外者.getCode(),
+                DaichoType.適用除外者.getName()));
 
         return list;
     }
@@ -276,13 +238,13 @@ public class ShisetsuJohoHandler {
 
         List<KeyValueDataSource> list = new ArrayList<>();
 
-        list.add(new KeyValueDataSource(ShisetsuShurui.介護保険施設.getKey(),
-                ShisetsuShurui.介護保険施設.getValue()));
-        list.add(new KeyValueDataSource(ShisetsuShurui.その他特例施設.getKey(),
-                ShisetsuShurui.その他特例施設.getValue()));
+        list.add(new KeyValueDataSource(ShisetsuType.介護保険施設.getCode(),
+                ShisetsuType.介護保険施設.getName()));
+        list.add(new KeyValueDataSource(ShisetsuType.住所地特例対象施設.getCode(),
+                ShisetsuType.住所地特例対象施設.getName()));
         if (div.getMode_利用機能() == 利用機能.全施設対象機能) {
-            list.add(new KeyValueDataSource(ShisetsuShurui.適用除外施設.getKey(),
-                    ShisetsuShurui.適用除外施設.getValue()));
+            list.add(new KeyValueDataSource(ShisetsuType.適用除外施設.getCode(),
+                    ShisetsuType.適用除外施設.getName()));
         }
 
         return list;

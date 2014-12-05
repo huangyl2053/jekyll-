@@ -46,6 +46,15 @@ public enum ShisetsuType {
     }
 
     /**
+     * RString型の施設種類名称を返します。
+     *
+     * @return 施設種類名称
+     */
+    public RString getName() {
+        return new RString(name());
+    }
+
+    /**
      * RString型の施設種類コードをもらい、コードに対応するShisetsuType型のenumを返します。
      *
      * @param code 施設種類コード
