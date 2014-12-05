@@ -172,7 +172,7 @@ public class ShisetsuJohoHandler {
     /**
      * 施設コードを元に施設名称を取得します。
      */
-    public void get施設名称() {
+    public void find施設名称() {
         RString code = div.getTxtShisetsuCode().getValue();
         RString meisho = RString.EMPTY;
         if (!code.isEmpty()) {

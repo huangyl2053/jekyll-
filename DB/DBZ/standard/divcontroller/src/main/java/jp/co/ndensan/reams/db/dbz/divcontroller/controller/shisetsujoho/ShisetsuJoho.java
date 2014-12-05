@@ -69,7 +69,7 @@ public class ShisetsuJoho {
      */
     public ResponseData<ShisetsuJohoDiv> onBlur_txtShisetsuCode(ShisetsuJohoDiv div) {
 
-        createHandlerOf(div).get施設名称();
+        createHandlerOf(div).find施設名称();
         return createResponse(div);
     }
 
