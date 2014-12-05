@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.testshisetsujoho;
 
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.TestShisetsuJoho.TestShisetsuJohoDiv;
+import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -75,8 +77,10 @@ public class TestShisetsuJoho {
      * @return レスポンス
      */
     public ResponseData<TestShisetsuJohoDiv> onClick_btnGetDaicho(TestShisetsuJohoDiv div) {
-        RString result = div.getCcdShisetsuJoho().get台帳種別();
-        div.getTxtDaicho().setValue(result);
+        IOptional<DaichoType> daichoType = div.getCcdShisetsuJoho().get台帳種別();
+        if (daichoType.isPresent()) {
+            div.getTxtDaicho().setValue(daichoType.get().getName());
+        }
 
         return createResponse(div);
     }
@@ -88,8 +92,10 @@ public class TestShisetsuJoho {
      * @return レスポンス
      */
     public ResponseData<TestShisetsuJohoDiv> onClick_btnGetDaichoKey(TestShisetsuJohoDiv div) {
-        RString result = div.getCcdShisetsuJoho().get台帳種別キー();
-        div.getTxtDaichoKey().setValue(result);
+        IOptional<DaichoType> daichoType = div.getCcdShisetsuJoho().get台帳種別();
+        if (daichoType.isPresent()) {
+            div.getTxtDaichoKey().setValue(daichoType.get().getCode());
+        }
 
         return createResponse(div);
     }
@@ -101,8 +107,7 @@ public class TestShisetsuJoho {
      * @return レスポンス
      */
     public ResponseData<TestShisetsuJohoDiv> onClick_btnGetShisetsu(TestShisetsuJohoDiv div) {
-        RString result = div.getCcdShisetsuJoho().get施設種類();
-        div.getTxtShisetsu().setValue(result);
+        div.getTxtShisetsu().setValue(div.getCcdShisetsuJoho().get施設種類().getName());
 
         return createResponse(div);
     }
@@ -114,8 +119,7 @@ public class TestShisetsuJoho {
      * @return レスポンス
      */
     public ResponseData<TestShisetsuJohoDiv> onClick_btnGetShisetsuKey(TestShisetsuJohoDiv div) {
-        RString result = div.getCcdShisetsuJoho().get施設種類キー();
-        div.getTxtShisetsuKey().setValue(result);
+        div.getTxtShisetsuKey().setValue(div.getCcdShisetsuJoho().get施設種類().getCode());
 
         return createResponse(div);
     }

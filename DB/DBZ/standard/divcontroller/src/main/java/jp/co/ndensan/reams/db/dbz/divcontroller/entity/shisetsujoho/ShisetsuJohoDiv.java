@@ -11,6 +11,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
@@ -362,23 +365,13 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
     }
 
     @Override
-    public RString get台帳種別() {
-        return ddlDaichoShubetsu.getSelectedValue();
+    public IOptional<DaichoType> get台帳種別() {
+        return getHandler().get台帳種別();
     }
 
     @Override
-    public RString get台帳種別キー() {
-        return ddlDaichoShubetsu.getSelectedKey();
-    }
-
-    @Override
-    public RString get施設種類() {
+    public ShisetsuType get施設種類() {
         return getHandler().get施設種類();
-    }
-
-    @Override
-    public RString get施設種類キー() {
-        return getHandler().get施設種類キー();
     }
 
     @Override

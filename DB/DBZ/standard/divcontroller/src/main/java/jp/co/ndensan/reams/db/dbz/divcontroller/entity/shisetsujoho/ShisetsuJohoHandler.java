@@ -9,11 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.入力補助;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.利用機能;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.台帳種別;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.施設種類;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.表示モード;
+import jp.co.ndensan.reams.db.dbz.model.util.optional.DbOptional;
+import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -135,38 +139,33 @@ public class ShisetsuJohoHandler {
     }
 
     /**
-     * 施設種類を返します。
+     * 台帳種別を返します。
      *
-     * @return 施設種類
+     * @return 台帳種別
      */
-    public RString get施設種類() {
-        switch (div.getMode_入力補助()) {
-            case 事業者を表示する:
-                return ShisetsuType.介護保険施設.getName();
-            case 他特例施設を表示する:
-                return ShisetsuType.住所地特例対象施設.getName();
-            case 除外施設を表示する:
-                return ShisetsuType.適用除外施設.getName();
-            default:
-                return RString.EMPTY;
+    public IOptional<DaichoType> get台帳種別() {
+        try {
+            return DbOptional.of(DaichoType.toValue(div.getDdlDaichoShubetsu().getSelectedKey()));
+        } catch (IllegalArgumentException ex) {
+            return DbOptional.empty();
         }
     }
 
     /**
-     * 施設種類キーを返します。
+     * 施設種類を返します。
      *
-     * @return 施設種類キー
+     * @return 施設種類
      */
-    public RString get施設種類キー() {
+    public ShisetsuType get施設種類() {
         switch (div.getMode_入力補助()) {
             case 事業者を表示する:
-                return ShisetsuType.介護保険施設.getCode();
+                return ShisetsuType.介護保険施設;
             case 他特例施設を表示する:
-                return ShisetsuType.住所地特例対象施設.getCode();
+                return ShisetsuType.住所地特例対象施設;
             case 除外施設を表示する:
-                return ShisetsuType.適用除外施設.getCode();
+                return ShisetsuType.適用除外施設;
             default:
-                return RString.EMPTY;
+                throw new ApplicationException(DbzErrorMessages.選択されていない.getMessage().replace("施設種類").evaluate());
         }
     }
 

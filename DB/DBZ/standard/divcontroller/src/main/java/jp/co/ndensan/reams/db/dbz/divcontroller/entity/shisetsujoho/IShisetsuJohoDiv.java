@@ -1,5 +1,8 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho;
 
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -42,28 +45,14 @@ public interface IShisetsuJohoDiv {
      *
      * @return 台帳種別
      */
-    RString get台帳種別();
-
-    /**
-     * 台帳種別キーを返します。
-     *
-     * @return 台帳種別キー
-     */
-    RString get台帳種別キー();
+    IOptional<DaichoType> get台帳種別();
 
     /**
      * 施設種類を返します。
      *
      * @return 施設種類
      */
-    RString get施設種類();
-
-    /**
-     * 施設種類キーを返します。
-     *
-     * @return 施設種類キー
-     */
-    RString get施設種類キー();
+    ShisetsuType get施設種類();
 
     /**
      * 入所施設コードを返します。
