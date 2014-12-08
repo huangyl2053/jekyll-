@@ -4,9 +4,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufugakuSummary.tblSeikyuSummaryDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.tblSeikyuSummaryDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * SeikyuSummary のクラスファイル 
@@ -37,6 +40,89 @@ public class SeikyuSummaryDiv extends Panel {
     @JsonProperty("tblSeikyuSummary")
     public void setTblSeikyuSummary(tblSeikyuSummaryDiv tblSeikyuSummary) {
         this.tblSeikyuSummary=tblSeikyuSummary;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public Label getLblSummary() {
+        return this.getTblSeikyuSummary().getLblSummary();
+    }
+
+    @JsonIgnore
+    public Label getLblPayTotal() {
+        return this.getTblSeikyuSummary().getLblPayTotal();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenSeikyuAmount() {
+        return this.getTblSeikyuSummary().getLblHokenSeikyuAmount();
+    }
+
+    @JsonIgnore
+    public Label getLblRiyoshaFutanAmount() {
+        return this.getTblSeikyuSummary().getLblRiyoshaFutanAmount();
+    }
+
+    @JsonIgnore
+    public Label getLblLimitOverAmount() {
+        return this.getTblSeikyuSummary().getLblLimitOverAmount();
+    }
+
+    @JsonIgnore
+    public Label getLblSummaryMae() {
+        return this.getTblSeikyuSummary().getLblSummaryMae();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtPayTotalMae() {
+        return this.getTblSeikyuSummary().getTxtPayTotalMae();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtHokenSeikyuAmountMae() {
+        return this.getTblSeikyuSummary().getTxtHokenSeikyuAmountMae();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtRiyoshaFutanAmountMae() {
+        return this.getTblSeikyuSummary().getTxtRiyoshaFutanAmountMae();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtLimitOverAmountMae() {
+        return this.getTblSeikyuSummary().getTxtLimitOverAmountMae();
+    }
+
+    @JsonIgnore
+    public Label getLblSummaryNow() {
+        return this.getTblSeikyuSummary().getLblSummaryNow();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtPayTotalNow() {
+        return this.getTblSeikyuSummary().getTxtPayTotalNow();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtHokenSeikyuAmountNow() {
+        return this.getTblSeikyuSummary().getTxtHokenSeikyuAmountNow();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtRiyoshaFutanAmountNow() {
+        return this.getTblSeikyuSummary().getTxtRiyoshaFutanAmountNow();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtLimitOverAmountNow() {
+        return this.getTblSeikyuSummary().getTxtLimitOverAmountNow();
+    }
+
+    @JsonIgnore
+    public Button getBtnLimitOverCheck() {
+        return this.getTblSeikyuSummary().getBtnLimitOverCheck();
     }
 
 }

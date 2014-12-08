@@ -5,8 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IIryoHokenRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.IIryoHokenRirekiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA3030011.Dba3030011IryoHokenIchiranDiv;
+import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -23,7 +26,7 @@ public class Dba3030011IryoHokenIchiran {
      */
     public ResponseData<Dba3030011IryoHokenIchiranDiv> onLoad(Dba3030011IryoHokenIchiranDiv panel) {
         IIryoHokenRirekiDiv iryoHokenRireki = panel.getCcdryoHokenRireki();
-        iryoHokenRireki.initialize();
+        iryoHokenRireki.load(LasdecCode.EMPTY, ShikibetsuCode.EMPTY);
         return Response(panel);
     }
 
@@ -35,7 +38,7 @@ public class Dba3030011IryoHokenIchiran {
      */
     public ResponseData<Dba3030011IryoHokenIchiranDiv> onClick_btnAddIryoHoken(Dba3030011IryoHokenIchiranDiv panel) {
         IIryoHokenRirekiDiv iryoHokenRireki = panel.getCcdryoHokenRireki();
-        iryoHokenRireki.onClick_btnAddIryoHoken();
+        iryoHokenRireki.clearInputData();
         return Response(panel);
     }
 
@@ -48,7 +51,7 @@ public class Dba3030011IryoHokenIchiran {
      */
     public ResponseData<Dba3030011IryoHokenIchiranDiv> onClick_btnAddUpdate(Dba3030011IryoHokenIchiranDiv panel) {
         IIryoHokenRirekiDiv iryoHokenRireki = panel.getCcdryoHokenRireki();
-        iryoHokenRireki.onClick_btnAddUpdate();
+        iryoHokenRireki.clearInputData();
         return Response(panel);
     }
 

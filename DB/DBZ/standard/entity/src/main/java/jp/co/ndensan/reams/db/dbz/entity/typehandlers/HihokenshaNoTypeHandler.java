@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class HihokenshaNoTypeHandler extends BaseTypeHandler<HihokenshaNo> {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, HihokenshaNo parameter, JdbcType jdbcType) throws SQLException {
         ps.setString(i, parameter == null ? null : parameter.getColumnValue().toString());

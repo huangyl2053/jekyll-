@@ -3,14 +3,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekik
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Sep 30 19:39:42 JST 2014 
+ * Fri Nov 14 13:05:24 JST 2014 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 
 /**
@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class dgShisetsuNyutaishoRireki_Row extends DataRow {
 
+    private RString state;
     private TextBoxFlexibleDate nyushoDate;
     private TextBoxFlexibleDate taishoDate;
     private RString shisetsuCode;
@@ -33,6 +34,7 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
 
     public dgShisetsuNyutaishoRireki_Row() {
         super();
+        this.state = RString.EMPTY;
         this.nyushoDate = new TextBoxFlexibleDate();
         this.taishoDate = new TextBoxFlexibleDate();
         this.shisetsuCode = RString.EMPTY;
@@ -44,8 +46,9 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         this.shisetsuShurui = RString.EMPTY;
     }
 
-    public dgShisetsuNyutaishoRireki_Row(TextBoxFlexibleDate nyushoDate, TextBoxFlexibleDate taishoDate, RString shisetsuCode, RString shisetsuMeisho, RString shisetsu, RString daichoShubetsuKey, RString daichoShubetsu, RString shisetsuShuruiKey, RString shisetsuShurui) {
+    public dgShisetsuNyutaishoRireki_Row(RString state, TextBoxFlexibleDate nyushoDate, TextBoxFlexibleDate taishoDate, RString shisetsuCode, RString shisetsuMeisho, RString shisetsu, RString daichoShubetsuKey, RString daichoShubetsu, RString shisetsuShuruiKey, RString shisetsuShurui) {
         super();
+        this.setOriginalData("state", state);
         this.setOriginalData("nyushoDate", nyushoDate);
         this.setOriginalData("taishoDate", taishoDate);
         this.setOriginalData("shisetsuCode", shisetsuCode);
@@ -55,6 +58,7 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         this.setOriginalData("daichoShubetsu", daichoShubetsu);
         this.setOriginalData("shisetsuShuruiKey", shisetsuShuruiKey);
         this.setOriginalData("shisetsuShurui", shisetsuShurui);
+        this.state = state;
         this.nyushoDate = nyushoDate;
         this.taishoDate = taishoDate;
         this.shisetsuCode = shisetsuCode;
@@ -64,6 +68,10 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
         this.daichoShubetsu = daichoShubetsu;
         this.shisetsuShuruiKey = shisetsuShuruiKey;
         this.shisetsuShurui = shisetsuShurui;
+    }
+
+    public RString getState() {
+        return state;
     }
 
     public TextBoxFlexibleDate getNyushoDate() {
@@ -100,6 +108,11 @@ public class dgShisetsuNyutaishoRireki_Row extends DataRow {
 
     public RString getShisetsuShurui() {
         return shisetsuShurui;
+    }
+
+    public void setState(RString state) {
+        this.setOriginalData("state", state);
+        this.state = state;
     }
 
     public void setNyushoDate(TextBoxFlexibleDate nyushoDate) {

@@ -4,8 +4,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgement
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResult.IKogakuServicehiJudgementResultDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResult.dgJudgementResult_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResult.KogakuServicehiJudgementResultDetail1Div;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResult.KogakuServicehiJudgementResultDetail2Div;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgJudgementResult_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgJudgementResult_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -15,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * 
  * @author 自動生成
  */
-public class KogakuServicehiJudgementResultDiv extends Panel {
+public class KogakuServicehiJudgementResultDiv extends Panel implements IKogakuServicehiJudgementResultDiv {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -64,5 +68,7 @@ public class KogakuServicehiJudgementResultDiv extends Panel {
     public void setKogakuServicehiJudgementResultDetail2(KogakuServicehiJudgementResultDetail2Div KogakuServicehiJudgementResultDetail2) {
         this.KogakuServicehiJudgementResultDetail2=KogakuServicehiJudgementResultDetail2;
     }
+
+    //--------------- この行より下にコードを追加してください -------------------
 
 }

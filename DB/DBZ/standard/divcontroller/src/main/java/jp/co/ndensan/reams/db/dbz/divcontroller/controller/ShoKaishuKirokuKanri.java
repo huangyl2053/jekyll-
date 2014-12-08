@@ -5,12 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuJokyoShosaiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuKirokuKanriDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.dgShoKaishuJokyo_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyolist.dgShoKaishuJokyo_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyoshosai.IShoKaishuJokyoShosaiDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 
@@ -22,24 +20,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 public class ShoKaishuKirokuKanri {
 
     /**
-     * 入力モードに合わせて、コントロールの表示非表示を切り替えます。
-     *
-     * @param kanriDiv 証回収記録管理Div
-     * @param mode モード
-     */
-    public static void setMode(ShoKaishuKirokuKanriDiv kanriDiv, ModeType mode) {
-
-        kanriDiv.setMode(mode.toValue());
-        if (ModeType.SHOKAI_MODE.toValue().equals(kanriDiv.getMode())) {
-            kanriDiv.getBtnUpdateShoKaishuJokyo().setDisplayNone(true);
-            kanriDiv.getShoKaishuJokyoShosai().setDisplayNone(true);
-            kanriDiv.getShoKaishuJokyoList().getDgShoKaishuJokyo().getGridSetting().getColumn("btnSelect").setVisible(false);
-        } else {
-
-        }
-    }
-
-    /**
      * グリッドから対象を選び、その詳細を表示します。
      *
      * @param kanriDiv 証回収記録管理Div
@@ -48,15 +28,14 @@ public class ShoKaishuKirokuKanri {
     public ResponseData onClick_btnSelect(ShoKaishuKirokuKanriDiv kanriDiv) {
         ResponseData<ShoKaishuKirokuKanriDiv> response = new ResponseData<>();
 
-        DataGrid<dgShoKaishuJokyo_Row> grid = kanriDiv.getShoKaishuJokyoList().getDgShoKaishuJokyo();
-        kanriDiv.setSelectRow(new RString(Integer.toString(grid.getClickedRowId())));
-        setShosaiDiv(kanriDiv.getShoKaishuJokyoShosai(), grid.getClickedItem());
+        DataGrid<dgShoKaishuJokyo_Row> grid = kanriDiv.getCcdShoKaishuJokyoList().getDgShoKaishuJokyo();
+        setShosaiDiv(kanriDiv.getCcdShoKaishuJokyoShosai(), grid.getClickedItem());
 
         response.data = kanriDiv;
         return response;
     }
 
-    private void setShosaiDiv(ShoKaishuJokyoShosaiDiv shosaiDiv, dgShoKaishuJokyo_Row row) {
+    private void setShosaiDiv(IShoKaishuJokyoShosaiDiv shosaiDiv, dgShoKaishuJokyo_Row row) {
         shosaiDiv.getTxtShoKofuShurui().setValue(row.getKofushoShurui());
         shosaiDiv.getTxtKofuDate().setValue(row.getKofuDate().getValue());
         shosaiDiv.getTxtYukoKigen().setValue(row.getYukoKigen().getValue());
@@ -76,15 +55,16 @@ public class ShoKaishuKirokuKanri {
     public ResponseData onClick_btnUpdateShoKaishuJokyo(ShoKaishuKirokuKanriDiv kanriDiv) {
         ResponseData<ShoKaishuKirokuKanriDiv> response = new ResponseData<>();
 
-        int selectRowNum = Integer.parseInt(kanriDiv.getSelectRow().toString());
-        DataGrid<dgShoKaishuJokyo_Row> grid = kanriDiv.getShoKaishuJokyoList().getDgShoKaishuJokyo();
-        setUpdateRow(grid.getDataSource().get(selectRowNum), kanriDiv.getShoKaishuJokyoShosai());
+        DataGrid<dgShoKaishuJokyo_Row> grid = kanriDiv.getCcdShoKaishuJokyoList().getDgShoKaishuJokyo();
+        //TODO n8178 入力を確定して、明細情報をグリッドに反映する際、選択していた行を見つける実装法が決定した後に修正が必要。　2014年12月
+        int index = grid.getClickedRowId();
+        setUpdateRow(grid.getDataSource().get(index), kanriDiv.getCcdShoKaishuJokyoShosai());
 
         response.data = kanriDiv;
         return response;
     }
 
-    private void setUpdateRow(dgShoKaishuJokyo_Row row, ShoKaishuJokyoShosaiDiv shosaiDiv) {
+    private void setUpdateRow(dgShoKaishuJokyo_Row row, IShoKaishuJokyoShosaiDiv shosaiDiv) {
 
         row.setRowState(RowState.Modified);
         row.setKofushoShurui(shosaiDiv.getTxtShoKofuShurui().getValue());

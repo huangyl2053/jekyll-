@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Oct 09 10:39:12 JST 2014 
+ * Fri Nov 14 13:27:48 JST 2014 
  */
 
 

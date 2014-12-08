@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IJukyuShikakuShomeishoHakkoDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * 
  * @author 自動生成
  */
-public class JukyuShikakuShomeishoHakkoDiv extends Panel {
+public class JukyuShikakuShomeishoHakkoDiv extends Panel implements IJukyuShikakuShomeishoHakkoDiv {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -147,5 +148,7 @@ public class JukyuShikakuShomeishoHakkoDiv extends Panel {
     public void setChkJushoHihyoji(CheckBoxList chkJushoHihyoji) {
         this.chkJushoHihyoji=chkJushoHihyoji;
     }
+
+    //--------------- この行より下にコードを追加してください -------------------
 
 }

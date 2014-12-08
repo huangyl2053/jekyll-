@@ -1,25 +1,20 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.futanGendogakuNintei;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
- * コードが再生成されるときに損失したりします。
- * Thu Jun 26 11:58:12 JST 2014 
+ * このコードはツールによって生成されました。 このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
+ * コードが再生成されるときに損失したりします。 Tue Nov 25 10:15:00 JST 2014
  */
-
-
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
-
 /**
- * dgFutanGendogakuNinteiList_Row のクラスファイル 
- * 
+ * dgFutanGendogakuNinteiList_Row のクラスファイル
+ *
  * @author 自動生成
  */
-
 public class dgFutanGendogakuNinteiList_Row extends DataRow {
 
     private TextBoxFlexibleDate shinseiDate;

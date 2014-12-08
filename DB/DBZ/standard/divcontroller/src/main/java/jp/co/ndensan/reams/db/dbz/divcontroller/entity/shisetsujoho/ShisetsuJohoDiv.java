@@ -3,15 +3,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho;
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import java.util.HashSet;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.IShisetsuJohoDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShisetsuJohoHandler;
+
+import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
@@ -53,8 +52,8 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ddlDaichoShubetsu")
     @Override
+    @JsonProperty("ddlDaichoShubetsu")
     public DropDownList getDdlDaichoShubetsu() {
         return ddlDaichoShubetsu;
     }
@@ -64,8 +63,8 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
         this.ddlDaichoShubetsu = ddlDaichoShubetsu;
     }
 
-    @JsonProperty("radShisetsuShurui")
     @Override
+    @JsonProperty("radShisetsuShurui")
     public RadioButton getRadShisetsuShurui() {
         return radShisetsuShurui;
     }
@@ -75,8 +74,8 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
         this.radShisetsuShurui = radShisetsuShurui;
     }
 
-    @JsonProperty("txtShisetsuCode")
     @Override
+    @JsonProperty("txtShisetsuCode")
     public TextBoxCode getTxtShisetsuCode() {
         return txtShisetsuCode;
     }
@@ -87,7 +86,6 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
     }
 
     @JsonProperty("btnJigyoshaInputGuide")
-    @Override
     public ButtonDialog getBtnJigyoshaInputGuide() {
         return btnJigyoshaInputGuide;
     }
@@ -98,7 +96,6 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
     }
 
     @JsonProperty("btnOtherTokureiShisetsuInputGuide")
-    @Override
     public ButtonDialog getBtnOtherTokureiShisetsuInputGuide() {
         return btnOtherTokureiShisetsuInputGuide;
     }
@@ -109,7 +106,6 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
     }
 
     @JsonProperty("btnJogaiShisetsuInputGuide")
-    @Override
     public ButtonDialog getBtnJogaiShisetsuInputGuide() {
         return btnJogaiShisetsuInputGuide;
     }
@@ -119,8 +115,8 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
         this.btnJogaiShisetsuInputGuide = btnJogaiShisetsuInputGuide;
     }
 
-    @JsonProperty("txtShisetsuMeisho")
     @Override
+    @JsonProperty("txtShisetsuMeisho")
     public TextBox getTxtShisetsuMeisho() {
         return txtShisetsuMeisho;
     }
@@ -131,7 +127,6 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
     }
 
     @JsonProperty("selectRow")
-    @Override
     public RString getSelectRow() {
         return selectRow;
     }
@@ -142,7 +137,6 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
     }
 
     @JsonProperty("inputMode")
-    @Override
     public RString getInputMode() {
         return inputMode;
     }
@@ -187,12 +181,10 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
     }
 
-    @Override
     public 台帳種別 getMode_台帳種別() {
         return (台帳種別) _CommonChildDivModeUtil.getMode(this.modes, 台帳種別.class);
     }
 
-    @Override
     public void setMode_台帳種別(台帳種別 value) {
         _CommonChildDivModeUtil.setMode(this.modes, 台帳種別.class, value);
     }
@@ -226,12 +218,10 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
     }
 
-    @Override
     public 施設種類 getMode_施設種類() {
         return (施設種類) _CommonChildDivModeUtil.getMode(this.modes, 施設種類.class);
     }
 
-    @Override
     public void setMode_施設種類(施設種類 value) {
         _CommonChildDivModeUtil.setMode(this.modes, 施設種類.class, value);
     }
@@ -266,33 +256,54 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
     }
 
-    @Override
     public 入力補助 getMode_入力補助() {
         return (入力補助) _CommonChildDivModeUtil.getMode(this.modes, 入力補助.class);
     }
 
-    @Override
     public void setMode_入力補助(入力補助 value) {
         _CommonChildDivModeUtil.setMode(this.modes, 入力補助.class, value);
     }
 
-    //--------------- この行より下にコードを追加してください -------------------
-    /**
-     * divの状態を変更する処理をハンドラクラスに委譲します。
-     */
-    @Override
-    public void onChange_radShisetsuShurui() {
-        getHandler().onChange_radShisetsuShurui();
+    public static enum 表示モード implements ICommonChildDivMode {
+
+        defaultView("defaultView"),
+        readOnly("readOnly"),
+        displayNone("displayNone");
+
+        private final String name;
+
+        private 表示モード(final String name) {
+            this.name = name;
+        }
+
+        public static 表示モード getEnum(String str) {
+            表示モード[] enumArray = 表示モード.values();
+
+            for (表示モード enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
     }
 
-//    メソッドが存在しないのでコメントアウト。
-//    @Override
-//    public void onChange_ddlDaichoShubetsu() {
-//        getHandler().onChange_ddlDaichoShubetsu();
-//    }
-//
-// 以下のメソッドはインタフェースに定義していないので業務には公開されません。
-    @JsonIgnore
+    public 表示モード getMode_表示モード() {
+        return (表示モード) _CommonChildDivModeUtil.getMode(this.modes, 表示モード.class);
+    }
+
+    public void setMode_表示モード(表示モード value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 表示モード.class, value);
+    }
+
+    //--------------- この行より下にコードを追加してください -------------------
+    @Override
     public ShisetsuJohoHandler getHandler() {
         return new ShisetsuJohoHandler(this);
     }
