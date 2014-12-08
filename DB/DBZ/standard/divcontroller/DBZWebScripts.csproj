@@ -59,11 +59,7 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" />
   <ItemGroup>
-<<<<<<< HEAD
     <!--<TypeScriptCompile Include="..\WebScripts\WebScriptDummy.ts" />-->
-=======
-    <TypeScriptCompile Include="..\WebScripts\WebScriptDummy.ts" />
->>>>>>> b378f2416192970a75c69cb68ba37c5e5e70acd0
   </ItemGroup>
   <ItemGroup />
   <Target Name="AfterBuild">
