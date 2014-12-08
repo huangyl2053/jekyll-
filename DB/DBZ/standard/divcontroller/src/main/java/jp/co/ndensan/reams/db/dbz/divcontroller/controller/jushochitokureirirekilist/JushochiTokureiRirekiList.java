@@ -30,6 +30,7 @@ public class JushochiTokureiRirekiList {
         //３）住所地特例入力明細エリアの項目をクリアし、入力可にする。
         //３－１）明細エリアのクリアは、JushochiTokureiRirekiListDivで公開されている、clearInputDataを使用する。
         //３－２）MeisaiDisplayModeにtekiyoInputを設定する。
+        //４）処理判定区分に、追加を設定する。
 
         return createSettingData(jutokuRirekiDiv);
     }
@@ -48,13 +49,55 @@ public class JushochiTokureiRirekiList {
         //２）「住所地特例履歴一覧」をreadOnlyにする。
         //３）住所地特例入力明細エリアに選択行の内容を表示する。
         //４）選択行の状態によって、以下のように処理を行う。
-        //４－１）追加行・修正行を選択している場合、明細エリアの項目を入力可にする。
+        //４－１）状態が「追加」・「修正」である行を選択している場合、明細エリアの項目を入力可にして「確定する」ボタンを押下可能にする。
         //４－１－１）選択している行が適用の行である場合、MeisaiDisplayModeにtekiyoInputを設定する。
         //４－１－２）選択している行が解除の行である場合、MeisaiDisplayModeにkaijoInputを設定する。
-        //４－２）４－１以外の状態の行を選択した場合、明細エリアの項目を入力不可にして「確定する」ボタンを押下不可にする。
+        //４－２）状態が「削除」である行を選択した場合、明細エリアの項目を入力不可にして「確定する」ボタンを押下可能にする。
         //４－２－１）選択している行が適用の行である場合、MeisaiDisplayModeにtekiyoShokaiを設定する。
         //４－２－２）選択している行が解除の行である場合、MeisaiDisplayModeにkaijoShokaiを設定する。
+        //４－３）状態が空白である行を選択した場合、明細エリアの項目を入力不可にして「確定する」ボタンを押下不可にする。
+        //４－３－１）選択している行が適用の行である場合、MeisaiDisplayModeにtekiyoShokaiを設定する。
+        //４－３－２）選択している行が解除の行である場合、MeisaiDisplayModeにkaijoShokaiを設定する。
 
+        return createSettingData(jutokuRirekiDiv);
+    }
+
+    /**
+     * 住所地特例履歴上の修正ボタンを押下した際に実行されます。<br/>
+     * 選択行の内容を明細エリアに表示し、選択行の状態に応じて、住所地特例情報を修正するための前処理を行います。
+     *
+     * @param jutokuRirekiDiv
+     * {@link JushochiTokureiRirekiListDiv 住所地特例履歴ListDiv}
+     * @return 住所地特例履歴ListDivを持つResponseData
+     */
+    public ResponseData<JushochiTokureiRirekiListDiv> onSelectByModifyButton_dgJutoku(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
+        //TODO
+        //１）「追加する」ボタンを押下不可にする。
+        //２）「住所地特例履歴一覧」をreadOnlyにする。
+        //３）住所地特例入力明細エリアに選択行の内容を表示する。
+        //４）
+        //４－２）MeisaiDisplayModeにtekiyoInputを設定する。
+        //５）処理判定区分に、修正を設定する。
+        jutokuRirekiDiv.setMode_BtnDisplayMode(JushochiTokureiRirekiListDiv.BtnDisplayMode.SetDisplay);
+        return createSettingData(jutokuRirekiDiv);
+    }
+
+    /**
+     * 住所地特例履歴上の削除ボタンを押下した際に実行されます。<br/>
+     * 選択行の内容を明細エリアに表示し、選択行の状態に応じて、住所地特例情報を削除するための前処理を行います。
+     *
+     * @param jutokuRirekiDiv
+     * {@link JushochiTokureiRirekiListDiv 住所地特例履歴ListDiv}
+     * @return 住所地特例履歴ListDivを持つResponseData
+     */
+    public ResponseData<JushochiTokureiRirekiListDiv> onSelectByDeleteButton_dgJutoku(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
+        //TODO
+        //１）「追加する」ボタンを押下不可にする。
+        //２）「住所地特例履歴一覧」をreadOnlyにする。
+        //３）住所地特例入力明細エリアに選択行の内容を表示する。
+        //４）
+        //３－２）MeisaiDisplayModeにtekiyoShokaiを設定する。
+        //５）処理判定区分に、削除を設定する。
         return createSettingData(jutokuRirekiDiv);
     }
 

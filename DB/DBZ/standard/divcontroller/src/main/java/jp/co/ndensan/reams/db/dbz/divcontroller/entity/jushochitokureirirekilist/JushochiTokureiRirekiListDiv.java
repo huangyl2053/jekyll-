@@ -569,20 +569,9 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
 
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void load(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
-
-        //TODO
-        //1)、引数から渡されたキーを元に、被保険者台帳情報を検索する。
-        //2)、検索結果として取得する被保険者台帳Listから、住所地特例の履歴を表現するために必要な情報を抽出する。
-        //3)、取得した情報をPanelSessionAccessorに登録する。
-        //4)、抽出した住所地特例履歴Listを、グリッドにマッピングする。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public IItemList<HihokenshaDaichoModel> get住所地特例異動履歴() {
 
-        //TODO
+        //TODO #55509
         //1)、PanelSessionAccessorに登録されている情報を取得し、戻り値として返却する。
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -590,7 +579,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     @Override
     public void set住所地特例異動履歴(IItemList<HihokenshaDaichoModel> 被保険者台帳List) {
 
-        //TODO
+        //TODO #55509
         //1)、引数から渡された情報を、PanelSessionAccessorに登録する。
         //2)、登録した情報を、グリッドにマッピングする。
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -598,30 +587,51 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
 
     @Override
     public void clearInputData() {
-        //TODO
+        //TODO #55509
         //1)、入力明細パネル上のコントロールに対して、空白やnullなどを設定する。
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void initialize(LasdecCode 市町村コード) {
-        //TODO
+    public void initializeTanitsuGappeiNashi() {
+        //TODO #55509
         //1)、引数から受け取った市町村コードを元に、保険者情報を取得する。
-        //2)、取得した保険者情報を元に、以下のように処理を分岐する。
-        //2-1)、保険者が「単一保険者」で「合併なし」の保険者である場合
-        //      HikenshaJohoDisplayModeに、TanitsuGappeiNashiを設定する。
-        //2-2)、保険者が「単一保険者」で「合併あり」の保険者である場合
-        //      HikenshaJohoDisplayModeに、TanitshGappeiAriを設定する。
-        //      保険者情報を元に、旧保険者DDLの選択項目を設定する。
-        //2-3)、保険者が「広域保険者」で「合併なし」の保険者である場合
-        //      HikenshaJohoDisplayModeに、KoikiGappeiNashiを設定する。
-        //      保険者情報を元に、所在保険者DDL・措置元保険者DDLを選択項目を設定する。
-        //2-4)、保険者が「広域保険者」で「合併あり」の保険者である場合
-        //      HikenshaJohoDisplayModeに、KoikiGappeiAriを設定する。
-        //      保険者情報を元に、所在保険者DDL・措置元保険者DDL・旧保険者DDLの選択項目を設定する。
-        //
+        //2)、HikenshaJohoDisplayModeに、TanitsuGappeiNashiを設定する。
         //3)、コードマスタから住特適用（コードマスタ:0127）、住適解除（コードマスタ:0128）の情報を取得する。
         //4)、コードマスタから取得した情報を、適用事由DDL、解除事由DDLに設定する。
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void initializeTanitsuGappeiAri() {
+        //TODO #55509
+        //1)、引数から受け取った市町村コードを元に、保険者情報を取得する。
+        //2)、HikenshaJohoDisplayModeに、TanitsuGappeiAriを設定する。
+        //3)、保険者情報を元に、旧保険者DDLの選択項目を設定する。
+        //4)、コードマスタから住特適用（コードマスタ:0127）、住適解除（コードマスタ:0128）の情報を取得する。
+        //5)、コードマスタから取得した情報を、適用事由DDL、解除事由DDLに設定する。
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void initializeKoikiGappeiNashi() {
+        //TODO #55509
+        //1)、引数から受け取った市町村コードを元に、保険者情報を取得する。
+        //2)、HikenshaJohoDisplayModeに、KoikiGappeiNashiを設定する。
+        //3)、保険者情報を元に、措置元保険者DDLを選択項目を設定する。
+        //4)、コードマスタから住特適用（コードマスタ:0127）、住適解除（コードマスタ:0128）の情報を取得する。
+        //5)、コードマスタから取得した情報を、適用事由DDL、解除事由DDLに設定する。
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void initializeKoikiGappeiAri() {
+        //TODO #55509
+        //1)、引数から受け取った市町村コードを元に、保険者情報を取得する。
+        //2)、HikenshaJohoDisplayModeに、KoikiGappeiAriを設定する。
+        //3)、措置元保険者DDL・旧保険者DDLの選択項目を設定する。
+        //4)、コードマスタから住特適用（コードマスタ:0127）、住適解除（コードマスタ:0128）の情報を取得する。
+        //5)、コードマスタから取得した情報を、適用事由DDL、解除事由DDLに設定する。
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
