@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryokikanCode;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.IryoKikanIdoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaiinKubun;
 import jp.co.ndensan.reams.ur.urz.entity.basic.UrT0516IryokikanEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -62,12 +64,16 @@ public final class KaigoIryoKikanTestHelper {
 //        entity.setYubinNo(郵便番号);
 //        entity.setJusho(住所);
 //        entity.setKanaJusho(カナ住所);
-        entity.setKaiinKubunCode(new Code(会員区分));
+        KaiinKubun kaiinKubun = mock(KaiinKubun.class);
+        when(kaiinKubun.value()).thenReturn(new Code(会員区分));
+        entity.setKaiinKubunCode(kaiinKubun);
         entity.setJiritsushienFlag(指定自立支援医療機関flag);
         entity.setShinsetsuYMD(new FlexibleDate(新設年月日.toDateString()));
         entity.setHaishiYMD(new FlexibleDate(廃止年月日.toDateString()));
         entity.setKyushiFlag(休止flag);
-        entity.setIdoJiyuCode(new Code(異動事由));
+        IryoKikanIdoJiyu idoJiyu = mock(IryoKikanIdoJiyu.class);
+        when(idoJiyu.value()).thenReturn(new Code(異動事由));
+        entity.setIdoJiyuCode(idoJiyu);
         entity.setIdoYMD(new FlexibleDate(異動年月日.toDateString()));
         return entity;
     }

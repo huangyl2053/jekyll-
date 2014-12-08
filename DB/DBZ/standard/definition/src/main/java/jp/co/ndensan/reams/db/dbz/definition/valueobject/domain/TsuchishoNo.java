@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators.NaturalOrderComparator;
+import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -60,7 +60,7 @@ public final class TsuchishoNo implements IValueObject<RString>, Comparable<Tsuc
 
     @Override
     public int compareTo(TsuchishoNo target) {
-        return Objects.compare(this.theValue, target.theValue, NaturalOrderComparator.ASC.getInstance());
+        return Objects.compare(this.theValue, target.theValue, Comparators.naturalOrder());
     }
 
     /**

@@ -23,6 +23,8 @@ public class JukyushaIdoRenrakuhyoKyufuSeigenDiv extends Panel {
      */
     @JsonProperty("radKohiFutanJogengakuGengakuUmu")
     private RadioButton radKohiFutanJogengakuGengakuUmu;
+    @JsonProperty("Button6")
+    private Button Button6;
     @JsonProperty("txtKyufuritsuHikisageDateRange")
     private TextBoxDateRange txtKyufuritsuHikisageDateRange;
     @JsonProperty("txtShokanBaraikaDateRange")
@@ -42,6 +44,16 @@ public class JukyushaIdoRenrakuhyoKyufuSeigenDiv extends Panel {
     @JsonProperty("radKohiFutanJogengakuGengakuUmu")
     public void setRadKohiFutanJogengakuGengakuUmu(RadioButton radKohiFutanJogengakuGengakuUmu) {
         this.radKohiFutanJogengakuGengakuUmu=radKohiFutanJogengakuGengakuUmu;
+    }
+
+    @JsonProperty("Button6")
+    public Button getButton6() {
+        return Button6;
+    }
+
+    @JsonProperty("Button6")
+    public void setButton6(Button Button6) {
+        this.Button6=Button6;
     }
 
     @JsonProperty("txtKyufuritsuHikisageDateRange")

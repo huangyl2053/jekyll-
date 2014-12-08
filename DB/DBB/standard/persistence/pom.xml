@@ -9,12 +9,10 @@
     <artifactId>DbbPersistence</artifactId>
     <packaging>jar</packaging>
     <name>DbbPersistence</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -41,6 +39,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbbModel</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

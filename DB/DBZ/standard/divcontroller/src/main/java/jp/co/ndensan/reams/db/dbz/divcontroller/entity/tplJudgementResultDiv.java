@@ -5,7 +5,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResultDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResult.IKogakuServicehiJudgementResultDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResult.KogakuServicehiJudgementResultDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
@@ -30,13 +31,8 @@ public class tplJudgementResultDiv extends TabPanel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("JudgementResult")
-    public KogakuServicehiJudgementResultDiv getJudgementResult() {
+    public IKogakuServicehiJudgementResultDiv getJudgementResult() {
         return JudgementResult;
-    }
-
-    @JsonProperty("JudgementResult")
-    public void setJudgementResult(KogakuServicehiJudgementResultDiv JudgementResult) {
-        this.JudgementResult=JudgementResult;
     }
 
 }

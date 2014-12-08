@@ -1,18 +1,16 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufugakuSummaryDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tplJizenShinseiResult のクラスファイル 
- * 
+ * tplJizenShinseiResult のクラスファイル
+ *
  * @author 自動生成
  */
 public class tplJizenShinseiResultDiv extends TabPanel {
@@ -22,6 +20,7 @@ public class tplJizenShinseiResultDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("JutakuKaishuJizenShinseiKyufugakuSummary")
     private KyufugakuSummaryDiv JutakuKaishuJizenShinseiKyufugakuSummary;
     @JsonProperty("hl")
@@ -48,11 +47,6 @@ public class tplJizenShinseiResultDiv extends TabPanel {
         return JutakuKaishuJizenShinseiKyufugakuSummary;
     }
 
-    @JsonProperty("JutakuKaishuJizenShinseiKyufugakuSummary")
-    public void setJutakuKaishuJizenShinseiKyufugakuSummary(KyufugakuSummaryDiv JutakuKaishuJizenShinseiKyufugakuSummary) {
-        this.JutakuKaishuJizenShinseiKyufugakuSummary=JutakuKaishuJizenShinseiKyufugakuSummary;
-    }
-
     @JsonProperty("hl")
     public HorizontalLine getHl() {
         return hl;
@@ -60,7 +54,7 @@ public class tplJizenShinseiResultDiv extends TabPanel {
 
     @JsonProperty("hl")
     public void setHl(HorizontalLine hl) {
-        this.hl=hl;
+        this.hl = hl;
     }
 
     @JsonProperty("txtJudgeDate")
@@ -70,7 +64,7 @@ public class tplJizenShinseiResultDiv extends TabPanel {
 
     @JsonProperty("txtJudgeDate")
     public void setTxtJudgeDate(TextBoxDate txtJudgeDate) {
-        this.txtJudgeDate=txtJudgeDate;
+        this.txtJudgeDate = txtJudgeDate;
     }
 
     @JsonProperty("radJudgeKubun")
@@ -80,7 +74,7 @@ public class tplJizenShinseiResultDiv extends TabPanel {
 
     @JsonProperty("radJudgeKubun")
     public void setRadJudgeKubun(RadioButton radJudgeKubun) {
-        this.radJudgeKubun=radJudgeKubun;
+        this.radJudgeKubun = radJudgeKubun;
     }
 
     @JsonProperty("txtShoninCondition")
@@ -90,7 +84,7 @@ public class tplJizenShinseiResultDiv extends TabPanel {
 
     @JsonProperty("txtShoninCondition")
     public void setTxtShoninCondition(TextBoxMultiLine txtShoninCondition) {
-        this.txtShoninCondition=txtShoninCondition;
+        this.txtShoninCondition = txtShoninCondition;
     }
 
     @JsonProperty("txtFushoninReason")
@@ -100,7 +94,7 @@ public class tplJizenShinseiResultDiv extends TabPanel {
 
     @JsonProperty("txtFushoninReason")
     public void setTxtFushoninReason(TextBoxMultiLine txtFushoninReason) {
-        this.txtFushoninReason=txtFushoninReason;
+        this.txtFushoninReason = txtFushoninReason;
     }
 
     @JsonProperty("chkResetInfo")
@@ -110,7 +104,7 @@ public class tplJizenShinseiResultDiv extends TabPanel {
 
     @JsonProperty("chkResetInfo")
     public void setChkResetInfo(CheckBoxList chkResetInfo) {
-        this.chkResetInfo=chkResetInfo;
+        this.chkResetInfo = chkResetInfo;
     }
 
 }

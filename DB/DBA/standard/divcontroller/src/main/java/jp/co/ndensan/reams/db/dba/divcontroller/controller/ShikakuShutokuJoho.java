@@ -215,7 +215,7 @@ public class ShikakuShutokuJoho {
     }
 
     private dgIryoHokenRireki_Row createDgIryoHokenRirekiRowFrowHashMap(HashMap hihokenshaDaichoData) {
-        dgIryoHokenRireki_Row row = new dgIryoHokenRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
+        dgIryoHokenRireki_Row row = new dgIryoHokenRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
 
         ControlGenerator generator = new ControlGenerator(hihokenshaDaichoData);
@@ -376,7 +376,7 @@ public class ShikakuShutokuJoho {
     }
 
     private dgShisetsuNyutaishoRireki_Row createShisetsuNyutaishoRowFromHashMap(HashMap seikatsuHogoData) {
-        dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row(new TextBoxFlexibleDate(),
+        dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(),
                 new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY);
 
@@ -713,7 +713,7 @@ public class ShikakuShutokuJoho {
     }
 
     private dgIryoHokenRireki_Row createDgIryoHokenRirekiRowFrowInputValue(tplIryoHokenDiv tplIryoHoken) {
-        dgIryoHokenRireki_Row row = new dgIryoHokenRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
+        dgIryoHokenRireki_Row row = new dgIryoHokenRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
 
         setDgIryoHokenRirekiRowFrowInputValue(tplIryoHoken, row);

@@ -34,9 +34,4 @@ public class tplKozaDiv extends TabPanel {
         return PaymentMethod;
     }
 
-    @JsonProperty("PaymentMethod")
-    public void setPaymentMethod(PaymentMethodDiv PaymentMethod) {
-        this.PaymentMethod = PaymentMethod;
-    }
-
 }

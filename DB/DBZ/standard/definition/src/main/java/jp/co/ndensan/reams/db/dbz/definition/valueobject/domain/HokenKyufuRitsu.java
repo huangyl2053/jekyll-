@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators.NaturalOrderComparator;
+import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -52,7 +52,7 @@ public final class HokenKyufuRitsu implements IValueObject<Decimal>, Comparable<
 
     @Override
     public int compareTo(HokenKyufuRitsu 比較対象) {
-        return Objects.compare(this.給付率, 比較対象.給付率, NaturalOrderComparator.ASC.getInstance());
+        return Objects.compare(this.給付率, 比較対象.給付率, Comparators.naturalOrder());
     }
 
     @Override

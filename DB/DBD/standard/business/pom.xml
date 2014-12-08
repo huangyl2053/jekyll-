@@ -9,12 +9,10 @@
     <artifactId>DbdBusiness</artifactId>
     <packaging>jar</packaging>
     <name>DbdBusiness</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
@@ -37,6 +35,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbdModel</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

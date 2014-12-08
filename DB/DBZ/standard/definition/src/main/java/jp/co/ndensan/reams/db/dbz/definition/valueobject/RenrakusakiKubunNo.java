@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.Comparators.NaturalOrderComparator;
+import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -55,7 +55,7 @@ public final class RenrakusakiKubunNo implements IValueObject<RString>, Comparab
 
     @Override
     public int compareTo(RenrakusakiKubunNo o) {
-        return Objects.compare(this.theValue, o.theValue, NaturalOrderComparator.ASC.getInstance());
+        return Objects.compare(this.theValue, o.theValue, Comparators.naturalOrder());
     }
 
     @Override
