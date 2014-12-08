@@ -1,9 +1,221 @@
-var __extends = this.__extends || function (d, b) {
+﻿var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
+var DBZ;
+(function (DBZ) {
+    var KaigoSaikinShorishaRireki_Design = (function (_super) {
+        __extends(KaigoSaikinShorishaRireki_Design, _super);
+        function KaigoSaikinShorishaRireki_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, KaigoSaikinShorishaRireki_Design.myLayout, fieldName);
+        }
+        KaigoSaikinShorishaRireki_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        KaigoSaikinShorishaRireki_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        KaigoSaikinShorishaRireki_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "KaigoSaikinShorishaRireki",
+                    "items": [
+                        {
+                            "fieldName": "wrappedSaikinShorishaRireki",
+                            "items": [],
+                            "controlType": "CommonChildDiv",
+                            "width": "XS",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
+                            "selectControlID": "wrappedSaikinShorishaRireki",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "relation": [],
+                            "packageName": "",
+                            "businessId": "URZ",
+                            "controlName": "SaikinShorishaRireki",
+                            "marginTop": "0em",
+                            "marginBottom": "0em",
+                            "originalProperty": [],
+                            "dataPassingForDialog": [],
+                            "dialogOkEventNameForDialog": "",
+                            "dialogCancelEventNameForDialog": "",
+                            "canTransferEvent": true,
+                            "heightForDialog": "M",
+                            "firstFocusFieldName": "",
+                            "lastFocusFieldName": "",
+                            "modes": [],
+                            "publicEvents": [
+                                {
+                                    "eventName": "onClick_btnSaikinShorishaHyoji"
+                                },
+                                {
+                                    "eventName": "onBeforeClick_btnSaikinShorishaHyoji"
+                                },
+                                {
+                                    "eventName": "onAfterClick_btnSaikinShorishaHyoji"
+                                }
+                            ],
+                            "publicEventsAlias": [],
+                            "isOneCondition": "0",
+                            "SaikinShorishaRireki_width": "1100px",
+                            "SaikinShorishaRireki_marginLeft": "0em",
+                            "ddlSaikinShorisha_marginLeft": "XL",
+                            "btnSaikinShorishaHyoji_width": "M"
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "1100px",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0em",
+                    "marginRight": "0em",
+                    "selectControlID": "KaigoSaikinShorishaRireki",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "",
+                    "marginTop": "0em",
+                    "marginBottom": "0em",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "KaigoSaikinShorishaRireki"
+                        }
+                    ],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": true,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": true
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0em",
+            "marginRight": "0em",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBZ",
+            "controlName": "KaigoSaikinShorishaRireki",
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
+        };
+        return KaigoSaikinShorishaRireki_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.KaigoSaikinShorishaRireki_Design = KaigoSaikinShorishaRireki_Design;
+
+    (function (KaigoSaikinShorishaRireki) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KaigoSaikinShorishaRireki.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KaigoSaikinShorishaRireki";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KaigoSaikinShorishaRireki.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.KaigoSaikinShorishaRireki.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KaigoSaikinShorishaRireki = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.wrappedSaikinShorishaRireki = function () {
+                return new URZ.SaikinShorishaRireki.ModeController("wrappedSaikinShorishaRireki");
+            };
+            return Controls;
+        })();
+        KaigoSaikinShorishaRireki.Controls = Controls;
+    })(DBZ.KaigoSaikinShorishaRireki || (DBZ.KaigoSaikinShorishaRireki = {}));
+    var KaigoSaikinShorishaRireki = DBZ.KaigoSaikinShorishaRireki;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (KaigoSaikinShorishaRireki) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KaigoSaikinShorishaRireki.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KaigoSaikinShorishaRireki.ModeController = ModeController;
+    })(DBZ.KaigoSaikinShorishaRireki || (DBZ.KaigoSaikinShorishaRireki = {}));
+    var KaigoSaikinShorishaRireki = DBZ.KaigoSaikinShorishaRireki;
+})(DBZ || (DBZ = {}));
 var DBZ;
 (function (DBZ) {
     var HihokenshaFinder_Design = (function (_super) {
@@ -191,23 +403,15 @@ var DBZ;
                                     "jpControlName": "",
                                     "readOnly": false,
                                     "onChange": "",
-                                    "selectedItem": null,
+                                    "selectedItem": "key0",
                                     "dataSource": [
                                         {
-                                            "key": "9999",
+                                            "key": "key0",
                                             "value": "全年度"
                                         },
                                         {
-                                            "key": "2014",
+                                            "key": "key1",
                                             "value": "平26"
-                                        },
-                                        {
-                                            "key": "2013",
-                                            "value": "平25"
-                                        },
-                                        {
-                                            "key": "2014",
-                                            "value": "平24"
                                         }
                                     ],
                                     "labelLText": "賦課年度　",
@@ -593,78 +797,6 @@ var DBZ;
                                 {
                                     "modeKey": "JuminShubetsuMode",
                                     "modeValue": "個人のみ"
-                                },
-                                {
-                                    "modeKey": "ShosaiJokenRiyoMode",
-                                    "modeValue": "詳細条件あり"
-                                },
-                                {
-                                    "modeKey": "KojinNoHyoji",
-                                    "modeValue": "優先エリアに表示する"
-                                },
-                                {
-                                    "modeKey": "HojinNoHyoji",
-                                    "modeValue": "表示しない"
-                                },
-                                {
-                                    "modeKey": "UketsukeNoHyoji",
-                                    "modeValue": "表示しない"
-                                },
-                                {
-                                    "modeKey": "SeinengappiHyoji",
-                                    "modeValue": "基本エリアに表示する"
-                                },
-                                {
-                                    "modeKey": "ShikibetsuCodeHyoji",
-                                    "modeValue": "基本エリアに表示する"
-                                },
-                                {
-                                    "modeKey": "SetaiCodeHyoji",
-                                    "modeValue": "詳細エリアに表示する"
-                                },
-                                {
-                                    "modeKey": "JuminhyoCodeHyoji",
-                                    "modeValue": "表示しない"
-                                },
-                                {
-                                    "modeKey": "ZairyuCardCodeHyoji",
-                                    "modeValue": "表示しない"
-                                },
-                                {
-                                    "modeKey": "KokuhoNoHyoji",
-                                    "modeValue": "表示しない"
-                                },
-                                {
-                                    "modeKey": "KokiKoreiHihokenshaNoHyoji",
-                                    "modeValue": "表示しない"
-                                },
-                                {
-                                    "modeKey": "KaigoHihokenshaNoHyoji",
-                                    "modeValue": "表示しない"
-                                },
-                                {
-                                    "modeKey": "KisoNenkinNoHyoji",
-                                    "modeValue": "表示しない"
-                                },
-                                {
-                                    "modeKey": "InkanNoHyoji",
-                                    "modeValue": "表示しない"
-                                },
-                                {
-                                    "modeKey": "GyoseikuHyoji",
-                                    "modeValue": "詳細エリアに表示する"
-                                },
-                                {
-                                    "modeKey": "RenrakusakiHyoji",
-                                    "modeValue": "詳細エリアに表示する"
-                                },
-                                {
-                                    "modeKey": "MeishoUpLineHyoji",
-                                    "modeValue": "表示する"
-                                },
-                                {
-                                    "modeKey": "JushoDownLineHyoji",
-                                    "modeValue": "表示する"
                                 }
                             ],
                             "publicEvents": [],
@@ -906,7 +1038,7 @@ var DBZ;
                     "requestSettings": [
                         {
                             "eventName": "onLoad",
-                            "requestUrl": "dbz/db/dbz/HihokenshaFinder/onLoad"
+                            "requestUrl": ""
                         },
                         {
                             "eventName": "onClick_btnClear",
@@ -1079,6 +1211,91 @@ var DBZ;
             return Controls;
         })();
         HihokenshaFinder.Controls = Controls;
+    })(DBZ.HihokenshaFinder || (DBZ.HihokenshaFinder = {}));
+    var HihokenshaFinder = DBZ.HihokenshaFinder;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (HihokenshaFinder) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new HihokenshaFinder.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.priorities = function () {
+                return [
+                    "表示モード",
+                    "保険者"
+                ];
+            };
+
+            ModeController.prototype.表示モード = function () {
+                return new Modes.表示モード(this.controls);
+            };
+
+            ModeController.prototype.保険者 = function () {
+                return new Modes.保険者(this.controls);
+            };
+            return ModeController;
+        })();
+        HihokenshaFinder.ModeController = ModeController;
+
+        (function (Modes) {
+            var 表示モード = (function () {
+                function 表示モード(controls) {
+                    this.controls = controls;
+                }
+                表示モード.prototype.資格系 = function () {
+                    this.controls.txtTuchishoNo().visible = false;
+                    this.controls.txtTuchishoNo().displayNone = true;
+                    this.controls.ddlFukaNendo().visible = false;
+                    this.controls.ddlFukaNendo().displayNone = true;
+                    this.controls.chkJukyushaDaicho().visible = true;
+                    this.controls.chkJukyushaDaicho().displayNone = false;
+                    this.controls.chkJushochiTokureisha().visible = true;
+                    this.controls.chkJushochiTokureisha().displayNone = false;
+                    this.controls.radMinashiNigo().visible = true;
+                    this.controls.radMinashiNigo().displayNone = false;
+                };
+
+                表示モード.prototype.賦課系 = function () {
+                    this.controls.txtTuchishoNo().visible = true;
+                    this.controls.txtTuchishoNo().displayNone = false;
+                    this.controls.ddlFukaNendo().visible = true;
+                    this.controls.ddlFukaNendo().displayNone = false;
+                    this.controls.chkJukyushaDaicho().visible = false;
+                    this.controls.chkJukyushaDaicho().displayNone = true;
+                    this.controls.chkJushochiTokureisha().visible = false;
+                    this.controls.chkJushochiTokureisha().displayNone = true;
+                    this.controls.radMinashiNigo().visible = false;
+                    this.controls.radMinashiNigo().displayNone = true;
+                };
+                return 表示モード;
+            })();
+            Modes.表示モード = 表示モード;
+
+            var 保険者 = (function () {
+                function 保険者(controls) {
+                    this.controls = controls;
+                }
+                保険者.prototype.表示する = function () {
+                    this.controls.ddlHokensha().visible = true;
+                    this.controls.ddlHokensha().displayNone = false;
+                };
+
+                保険者.prototype.表示しない = function () {
+                    this.controls.ddlHokensha().visible = false;
+                    this.controls.ddlHokensha().displayNone = true;
+                };
+                return 保険者;
+            })();
+            Modes.保険者 = 保険者;
+        })(HihokenshaFinder.Modes || (HihokenshaFinder.Modes = {}));
+        var Modes = HihokenshaFinder.Modes;
     })(DBZ.HihokenshaFinder || (DBZ.HihokenshaFinder = {}));
     var HihokenshaFinder = DBZ.HihokenshaFinder;
 })(DBZ || (DBZ = {}));

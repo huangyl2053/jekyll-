@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.AtenaJohoDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.dgdGaitoushaIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.AtenaShokaiSimpleAdapter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoFukaKihonDiv;

@@ -21,10 +21,10 @@ public class ButtonsForHihokenshaFinderDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnToClear")
-    private Button btnToClear;
-    @JsonProperty("btnToSearch")
-    private Button btnToSearch;
+    @JsonProperty("btnClear")
+    private Button btnClear;
+    @JsonProperty("btnSearch")
+    private Button btnSearch;
     @JsonProperty("txtMaxNumber")
     private TextBoxNum txtMaxNumber;
 
@@ -34,24 +34,24 @@ public class ButtonsForHihokenshaFinderDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("btnToClear")
-    public Button getBtnToClear() {
-        return btnToClear;
+    @JsonProperty("btnClear")
+    public Button getBtnClear() {
+        return btnClear;
     }
 
-    @JsonProperty("btnToClear")
-    public void setBtnToClear(Button btnToClear) {
-        this.btnToClear=btnToClear;
+    @JsonProperty("btnClear")
+    public void setBtnClear(Button btnClear) {
+        this.btnClear=btnClear;
     }
 
-    @JsonProperty("btnToSearch")
-    public Button getBtnToSearch() {
-        return btnToSearch;
+    @JsonProperty("btnSearch")
+    public Button getBtnSearch() {
+        return btnSearch;
     }
 
-    @JsonProperty("btnToSearch")
-    public void setBtnToSearch(Button btnToSearch) {
-        this.btnToSearch=btnToSearch;
+    @JsonProperty("btnSearch")
+    public void setBtnSearch(Button btnSearch) {
+        this.btnSearch=btnSearch;
     }
 
     @JsonProperty("txtMaxNumber")

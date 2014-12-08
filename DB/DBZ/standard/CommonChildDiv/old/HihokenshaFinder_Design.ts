@@ -204,23 +204,15 @@ module DBZ {
        "jpControlName": "",
        "readOnly": false,
        "onChange": "",
-       "selectedItem": null,
+       "selectedItem": "key0",
        "dataSource": [
         {
-         "key": "9999",
+         "key": "key0",
          "value": "全年度"
         },
         {
-         "key": "2014",
+         "key": "key1",
          "value": "平26"
-        },
-        {
-         "key": "2013",
-         "value": "平25"
-        },
-        {
-         "key": "2014",
-         "value": "平24"
         }
        ],
        "labelLText": "賦課年度　",
@@ -636,6 +628,10 @@ module DBZ {
        "modeValue": "詳細エリアに表示する"
       },
       {
+       "modeKey": "HojinKeitaiHyoji",
+       "modeValue": "表示しない"
+      },
+      {
        "modeKey": "JuminhyoCodeHyoji",
        "modeValue": "表示しない"
       },
@@ -919,7 +915,7 @@ module DBZ {
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": "dbz/db/dbz/HihokenshaFinder/onLoad"
+     "requestUrl": ""
     },
     {
      "eventName": "onClick_btnClear",
