@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tblKyuhuSeigenDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tblKyuhuSeigenDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;

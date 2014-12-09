@@ -1,6 +1,6 @@
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/jquery.d.ts" />
+/// <reference path="../../d.ts/UzViewControls.d.ts" />
+/// <reference path="../../d.ts/UzaConverter.d.ts" />
 
 module DBZ {
 
@@ -33,32 +33,48 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public radInjiIchi(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radInjiIchi"));
+            public YukoKigenInfo(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("YukoKigenInfo"));
+            }
+
+            public txtYukoKigen(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtYukoKigen"));
             }
 
             public txtKofuDate(): UZA.TextBoxFlexibleDate {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKofuDate"));
             }
 
+            public txtHokensha(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtHokensha"));
+            }
+
             public ddlKofuJiyu(): UZA.DropDownList {
                 return new UZA.DropDownList(this.convFiledName("ddlKofuJiyu"));
             }
 
-            public txtYukoKigen(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoKigen"));
-            }
-
-            public txtHokensha(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtHokensha"));
+            public NinteiInfo(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("NinteiInfo"));
             }
 
             public txtYokaigodo(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtYokaigodo"));
             }
 
-            public txtNinteiYukoKikan(): UZA.TextBoxDateRange {
-                return new UZA.TextBoxDateRange(this.convFiledName("txtNinteiYukoKikan"));
+            public txtNinteiYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiYMD"));
+            }
+
+            public txtNinteiYukoFromYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiYukoFromYMD"));
+            }
+
+            public lblKara1(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblKara1"));
+            }
+
+            public txtNinteiYukoToYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiYukoToYMD"));
             }
 
             public txtShinseiDate(): UZA.TextBoxFlexibleDate {
@@ -73,16 +89,36 @@ module DBZ {
                 return new UZA.TabPanel(this.convFiledName("tplGendoGaku"));
             }
 
-            public lblKubunShikyuGendoGaku(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblKubunShikyuGendoGaku"));
+            public tblGendoGaku(): UZA.TablePanel {
+                return new UZA.TablePanel(this.convFiledName("tblGendoGaku"));
+            }
+
+            public celKubunGendoGaku(): UZA.TableCell {
+                return new UZA.TableCell(this.convFiledName("celKubunGendoGaku"));
+            }
+
+            public KubunGendoGaku(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KubunGendoGaku"));
             }
 
             public txtKubunShikyuGendoKijunGaku(): UZA.TextBoxNum {
                 return new UZA.TextBoxNum(this.convFiledName("txtKubunShikyuGendoKijunGaku"));
             }
 
-            public txtKyuhuYukoKikan(): UZA.TextBoxDateRange {
-                return new UZA.TextBoxDateRange(this.convFiledName("txtKyuhuYukoKikan"));
+            public txtYukoFromYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtYukoFromYMD"));
+            }
+
+            public lblKara(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblKara"));
+            }
+
+            public txtYukoToYMD(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtYukoToYMD"));
+            }
+
+            public celShuruiGendoKijungaku(): UZA.TableCell {
+                return new UZA.TableCell(this.convFiledName("celShuruiGendoKijungaku"));
             }
 
             public ShuruiShikyuGendoKijungaku(): UZA.Panel {
@@ -209,6 +245,14 @@ module DBZ {
                 return new UZA.Label(this.convFiledName("lblTodokedeDate"));
             }
 
+            public celTekiyoStYMD(): UZA.TableCell {
+                return new UZA.TableCell(this.convFiledName("celTekiyoStYMD"));
+            }
+
+            public lblTekiyoStYMD(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblTekiyoStYMD"));
+            }
+
             public celJigyosha1(): UZA.TableCell {
                 return new UZA.TableCell(this.convFiledName("celJigyosha1"));
             }
@@ -221,8 +265,16 @@ module DBZ {
                 return new UZA.TableCell(this.convFiledName("celTodokedeDate1"));
             }
 
-            public txtTodokedeDate1(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTodokedeDate1"));
+            public txtTodokedeYMD1(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTodokedeYMD1"));
+            }
+
+            public celTekiyoStYMD1(): UZA.TableCell {
+                return new UZA.TableCell(this.convFiledName("celTekiyoStYMD1"));
+            }
+
+            public txtTekiyoStYMD1(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoStYMD1"));
             }
 
             public celJigyosha2(): UZA.TableCell {
@@ -237,8 +289,16 @@ module DBZ {
                 return new UZA.TableCell(this.convFiledName("celTodokedeDate2"));
             }
 
-            public txtTodokedeDate2(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTodokedeDate2"));
+            public txtTodokedeYMD2(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTodokedeYMD2"));
+            }
+
+            public celTekiyoStYMD2(): UZA.TableCell {
+                return new UZA.TableCell(this.convFiledName("celTekiyoStYMD2"));
+            }
+
+            public txtTekiyoStYMD2(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoStYMD2"));
             }
 
             public celJigyosha3(): UZA.TableCell {
@@ -253,8 +313,16 @@ module DBZ {
                 return new UZA.TableCell(this.convFiledName("celTodokedeDate3"));
             }
 
-            public txtTodokedeDate3(): UZA.TextBoxFlexibleDate {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTodokedeDate3"));
+            public txtTodokedeYMD3(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTodokedeYMD3"));
+            }
+
+            public celTekiyoStYMD3(): UZA.TableCell {
+                return new UZA.TableCell(this.convFiledName("celTekiyoStYMD3"));
+            }
+
+            public txtTekiyoStYMD3(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoStYMD3"));
             }
 
             public tplShisetsuNyutaisho(): UZA.TabPanel {
@@ -267,14 +335,6 @@ module DBZ {
 
             public tblShisetsuNyutaisho(): UZA.TablePanel {
                 return new UZA.TablePanel(this.convFiledName("tblShisetsuNyutaisho"));
-            }
-
-            public celShisetsuShuruiTitle(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celShisetsuShuruiTitle"));
-            }
-
-            public lblShisetsuShurui(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblShisetsuShurui"));
             }
 
             public celNyushoShisetsuTitle(): UZA.TableCell {
@@ -301,14 +361,6 @@ module DBZ {
                 return new UZA.Label(this.convFiledName("lblShisetsuTaishoDate"));
             }
 
-            public celShisetsuShurui1(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celShisetsuShurui1"));
-            }
-
-            public txtShisetsuShurui1(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtShisetsuShurui1"));
-            }
-
             public celNyushoShisetsu1(): UZA.TableCell {
                 return new UZA.TableCell(this.convFiledName("celNyushoShisetsu1"));
             }
@@ -333,14 +385,6 @@ module DBZ {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShisetsuTaishoDate1"));
             }
 
-            public celShisetsuShurui2(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celShisetsuShurui2"));
-            }
-
-            public txtShisetsuShurui2(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtShisetsuShurui2"));
-            }
-
             public celNyushoShisetsu2(): UZA.TableCell {
                 return new UZA.TableCell(this.convFiledName("celNyushoShisetsu2"));
             }
@@ -363,14 +407,6 @@ module DBZ {
 
             public txtShisetsuTaishoDate2(): UZA.TextBoxFlexibleDate {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShisetsuTaishoDate2"));
-            }
-
-            public celShisetsuShurui3(): UZA.TableCell {
-                return new UZA.TableCell(this.convFiledName("celShisetsuShurui3"));
-            }
-
-            public txtShisetsuShurui3(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtShisetsuShurui3"));
             }
 
             public celNyushoShisetsu3(): UZA.TableCell {

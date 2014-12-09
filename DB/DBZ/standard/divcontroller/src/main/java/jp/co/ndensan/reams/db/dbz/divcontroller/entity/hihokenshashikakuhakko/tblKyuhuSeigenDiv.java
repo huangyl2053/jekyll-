@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため

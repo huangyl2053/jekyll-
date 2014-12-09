@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tblShisetsuNyutaishoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tblShisetsuNyutaishoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -58,11 +58,6 @@ public class tplShisetsuNyutaishoDiv extends TabPanel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public Label getLblShisetsuShurui() {
-        return this.getTblShisetsuNyutaisho().getLblShisetsuShurui();
-    }
-
-    @JsonIgnore
     public Label getLblNyushoShisetsu() {
         return this.getTblShisetsuNyutaisho().getLblNyushoShisetsu();
     }
@@ -75,11 +70,6 @@ public class tplShisetsuNyutaishoDiv extends TabPanel {
     @JsonIgnore
     public Label getLblShisetsuTaishoDate() {
         return this.getTblShisetsuNyutaisho().getLblShisetsuTaishoDate();
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShisetsuShurui1() {
-        return this.getTblShisetsuNyutaisho().getTxtShisetsuShurui1();
     }
 
     @JsonIgnore
@@ -98,11 +88,6 @@ public class tplShisetsuNyutaishoDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public TextBox getTxtShisetsuShurui2() {
-        return this.getTblShisetsuNyutaisho().getTxtShisetsuShurui2();
-    }
-
-    @JsonIgnore
     public TextBox getTxtNyushoShisetsu2() {
         return this.getTblShisetsuNyutaisho().getTxtNyushoShisetsu2();
     }
@@ -115,11 +100,6 @@ public class tplShisetsuNyutaishoDiv extends TabPanel {
     @JsonIgnore
     public TextBoxFlexibleDate getTxtShisetsuTaishoDate2() {
         return this.getTblShisetsuNyutaisho().getTxtShisetsuTaishoDate2();
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShisetsuShurui3() {
-        return this.getTblShisetsuNyutaisho().getTxtShisetsuShurui3();
     }
 
     @JsonIgnore

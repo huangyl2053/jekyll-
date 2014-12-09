@@ -24,7 +24,7 @@ module DBZ
             }
 
             public PublicProperties() {
-                return new PublicProperties(this.fieldName);
+                return new DBZ.HihokenshaShikakuHakko.PublicProperties(this.fieldName);
             }
         }
 
@@ -48,7 +48,6 @@ module DBZ {
                 var editTypes = new UZA.EditTypeForPublicProperty();
 
                 editTypes.addEditType("txtYukoKigen_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("radInjiIchi_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 editTypes.addEditType("onBlur_txtKofuDate", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("onChange_ddlKofuJiyu", UZA.EditTypeEnumForPublicProperty.StringType);
                 return editTypes;
@@ -60,14 +59,6 @@ module DBZ {
 
             public settxtYukoKigen_displayNone(value) {
                 this.controls.txtYukoKigen().displayNone = value;
-            }
-
-            public getradInjiIchi_displayNone() {
-                return this.controls.radInjiIchi().displayNone;
-            }
-
-            public setradInjiIchi_displayNone(value) {
-                this.controls.radInjiIchi().displayNone = value;
             }
 
             public getonBlur_txtKofuDate() {

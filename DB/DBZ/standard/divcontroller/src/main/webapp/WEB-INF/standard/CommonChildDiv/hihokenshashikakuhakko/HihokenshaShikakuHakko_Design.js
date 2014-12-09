@@ -1,4 +1,4 @@
-﻿var DBZ;
+var DBZ;
 (function (DBZ) {
     (function (HihokenshaShikakuHakko) {
         var Events = (function () {
@@ -28,32 +28,48 @@
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.radInjiIchi = function () {
-                return new UZA.RadioButton(this.convFiledName("radInjiIchi"));
+            Controls.prototype.YukoKigenInfo = function () {
+                return new UZA.Panel(this.convFiledName("YukoKigenInfo"));
+            };
+
+            Controls.prototype.txtYukoKigen = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtYukoKigen"));
             };
 
             Controls.prototype.txtKofuDate = function () {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtKofuDate"));
             };
 
+            Controls.prototype.txtHokensha = function () {
+                return new UZA.TextBox(this.convFiledName("txtHokensha"));
+            };
+
             Controls.prototype.ddlKofuJiyu = function () {
                 return new UZA.DropDownList(this.convFiledName("ddlKofuJiyu"));
             };
 
-            Controls.prototype.txtYukoKigen = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoKigen"));
-            };
-
-            Controls.prototype.txtHokensha = function () {
-                return new UZA.TextBox(this.convFiledName("txtHokensha"));
+            Controls.prototype.NinteiInfo = function () {
+                return new UZA.Panel(this.convFiledName("NinteiInfo"));
             };
 
             Controls.prototype.txtYokaigodo = function () {
                 return new UZA.TextBox(this.convFiledName("txtYokaigodo"));
             };
 
-            Controls.prototype.txtNinteiYukoKikan = function () {
-                return new UZA.TextBoxDateRange(this.convFiledName("txtNinteiYukoKikan"));
+            Controls.prototype.txtNinteiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiYMD"));
+            };
+
+            Controls.prototype.txtNinteiYukoFromYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiYukoFromYMD"));
+            };
+
+            Controls.prototype.lblKara1 = function () {
+                return new UZA.Label(this.convFiledName("lblKara1"));
+            };
+
+            Controls.prototype.txtNinteiYukoToYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiYukoToYMD"));
             };
 
             Controls.prototype.txtShinseiDate = function () {
@@ -68,16 +84,36 @@
                 return new UZA.TabPanel(this.convFiledName("tplGendoGaku"));
             };
 
-            Controls.prototype.lblKubunShikyuGendoGaku = function () {
-                return new UZA.Label(this.convFiledName("lblKubunShikyuGendoGaku"));
+            Controls.prototype.tblGendoGaku = function () {
+                return new UZA.TablePanel(this.convFiledName("tblGendoGaku"));
+            };
+
+            Controls.prototype.celKubunGendoGaku = function () {
+                return new UZA.TableCell(this.convFiledName("celKubunGendoGaku"));
+            };
+
+            Controls.prototype.KubunGendoGaku = function () {
+                return new UZA.Panel(this.convFiledName("KubunGendoGaku"));
             };
 
             Controls.prototype.txtKubunShikyuGendoKijunGaku = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtKubunShikyuGendoKijunGaku"));
             };
 
-            Controls.prototype.txtKyuhuYukoKikan = function () {
-                return new UZA.TextBoxDateRange(this.convFiledName("txtKyuhuYukoKikan"));
+            Controls.prototype.txtYukoFromYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtYukoFromYMD"));
+            };
+
+            Controls.prototype.lblKara = function () {
+                return new UZA.Label(this.convFiledName("lblKara"));
+            };
+
+            Controls.prototype.txtYukoToYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtYukoToYMD"));
+            };
+
+            Controls.prototype.celShuruiGendoKijungaku = function () {
+                return new UZA.TableCell(this.convFiledName("celShuruiGendoKijungaku"));
             };
 
             Controls.prototype.ShuruiShikyuGendoKijungaku = function () {
@@ -204,6 +240,14 @@
                 return new UZA.Label(this.convFiledName("lblTodokedeDate"));
             };
 
+            Controls.prototype.celTekiyoStYMD = function () {
+                return new UZA.TableCell(this.convFiledName("celTekiyoStYMD"));
+            };
+
+            Controls.prototype.lblTekiyoStYMD = function () {
+                return new UZA.Label(this.convFiledName("lblTekiyoStYMD"));
+            };
+
             Controls.prototype.celJigyosha1 = function () {
                 return new UZA.TableCell(this.convFiledName("celJigyosha1"));
             };
@@ -216,8 +260,16 @@
                 return new UZA.TableCell(this.convFiledName("celTodokedeDate1"));
             };
 
-            Controls.prototype.txtTodokedeDate1 = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTodokedeDate1"));
+            Controls.prototype.txtTodokedeYMD1 = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTodokedeYMD1"));
+            };
+
+            Controls.prototype.celTekiyoStYMD1 = function () {
+                return new UZA.TableCell(this.convFiledName("celTekiyoStYMD1"));
+            };
+
+            Controls.prototype.txtTekiyoStYMD1 = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoStYMD1"));
             };
 
             Controls.prototype.celJigyosha2 = function () {
@@ -232,8 +284,16 @@
                 return new UZA.TableCell(this.convFiledName("celTodokedeDate2"));
             };
 
-            Controls.prototype.txtTodokedeDate2 = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTodokedeDate2"));
+            Controls.prototype.txtTodokedeYMD2 = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTodokedeYMD2"));
+            };
+
+            Controls.prototype.celTekiyoStYMD2 = function () {
+                return new UZA.TableCell(this.convFiledName("celTekiyoStYMD2"));
+            };
+
+            Controls.prototype.txtTekiyoStYMD2 = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoStYMD2"));
             };
 
             Controls.prototype.celJigyosha3 = function () {
@@ -248,8 +308,16 @@
                 return new UZA.TableCell(this.convFiledName("celTodokedeDate3"));
             };
 
-            Controls.prototype.txtTodokedeDate3 = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTodokedeDate3"));
+            Controls.prototype.txtTodokedeYMD3 = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTodokedeYMD3"));
+            };
+
+            Controls.prototype.celTekiyoStYMD3 = function () {
+                return new UZA.TableCell(this.convFiledName("celTekiyoStYMD3"));
+            };
+
+            Controls.prototype.txtTekiyoStYMD3 = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTekiyoStYMD3"));
             };
 
             Controls.prototype.tplShisetsuNyutaisho = function () {
@@ -262,14 +330,6 @@
 
             Controls.prototype.tblShisetsuNyutaisho = function () {
                 return new UZA.TablePanel(this.convFiledName("tblShisetsuNyutaisho"));
-            };
-
-            Controls.prototype.celShisetsuShuruiTitle = function () {
-                return new UZA.TableCell(this.convFiledName("celShisetsuShuruiTitle"));
-            };
-
-            Controls.prototype.lblShisetsuShurui = function () {
-                return new UZA.Label(this.convFiledName("lblShisetsuShurui"));
             };
 
             Controls.prototype.celNyushoShisetsuTitle = function () {
@@ -296,14 +356,6 @@
                 return new UZA.Label(this.convFiledName("lblShisetsuTaishoDate"));
             };
 
-            Controls.prototype.celShisetsuShurui1 = function () {
-                return new UZA.TableCell(this.convFiledName("celShisetsuShurui1"));
-            };
-
-            Controls.prototype.txtShisetsuShurui1 = function () {
-                return new UZA.TextBox(this.convFiledName("txtShisetsuShurui1"));
-            };
-
             Controls.prototype.celNyushoShisetsu1 = function () {
                 return new UZA.TableCell(this.convFiledName("celNyushoShisetsu1"));
             };
@@ -328,14 +380,6 @@
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShisetsuTaishoDate1"));
             };
 
-            Controls.prototype.celShisetsuShurui2 = function () {
-                return new UZA.TableCell(this.convFiledName("celShisetsuShurui2"));
-            };
-
-            Controls.prototype.txtShisetsuShurui2 = function () {
-                return new UZA.TextBox(this.convFiledName("txtShisetsuShurui2"));
-            };
-
             Controls.prototype.celNyushoShisetsu2 = function () {
                 return new UZA.TableCell(this.convFiledName("celNyushoShisetsu2"));
             };
@@ -358,14 +402,6 @@
 
             Controls.prototype.txtShisetsuTaishoDate2 = function () {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShisetsuTaishoDate2"));
-            };
-
-            Controls.prototype.celShisetsuShurui3 = function () {
-                return new UZA.TableCell(this.convFiledName("celShisetsuShurui3"));
-            };
-
-            Controls.prototype.txtShisetsuShurui3 = function () {
-                return new UZA.TextBox(this.convFiledName("txtShisetsuShurui3"));
             };
 
             Controls.prototype.celNyushoShisetsu3 = function () {
@@ -394,86 +430,6 @@
             return Controls;
         })();
         HihokenshaShikakuHakko.Controls = Controls;
-    })(DBZ.HihokenshaShikakuHakko || (DBZ.HihokenshaShikakuHakko = {}));
-    var HihokenshaShikakuHakko = DBZ.HihokenshaShikakuHakko;
-})(DBZ || (DBZ = {}));
-var DBZ;
-(function (DBZ) {
-    (function (HihokenshaShikakuHakko) {
-        var ModeController = (function () {
-            function ModeController(fieldName) {
-                this.fieldName = fieldName;
-                this.controls = new HihokenshaShikakuHakko.Controls(fieldName);
-            }
-            ModeController.prototype.priorities = function () {
-                return [];
-            };
-
-            ModeController.prototype.Properties = function () {
-                return new UZA.CommonChildDiv(this.fieldName);
-            };
-
-            ModeController.prototype.PublicProperties = function () {
-                return new HihokenshaShikakuHakko.PublicProperties(this.fieldName);
-            };
-            return ModeController;
-        })();
-        HihokenshaShikakuHakko.ModeController = ModeController;
-    })(DBZ.HihokenshaShikakuHakko || (DBZ.HihokenshaShikakuHakko = {}));
-    var HihokenshaShikakuHakko = DBZ.HihokenshaShikakuHakko;
-})(DBZ || (DBZ = {}));
-
-var DBZ;
-(function (DBZ) {
-    (function (HihokenshaShikakuHakko) {
-        var PublicProperties = (function () {
-            function PublicProperties(fieldName) {
-                this.controls = new HihokenshaShikakuHakko.Controls(fieldName);
-            }
-            PublicProperties.prototype.getEditTypes = function () {
-                var editTypes = new UZA.EditTypeForPublicProperty();
-
-                editTypes.addEditType("txtYukoKigen_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("radInjiIchi_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
-                editTypes.addEditType("onBlur_txtKofuDate", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("onChange_ddlKofuJiyu", UZA.EditTypeEnumForPublicProperty.StringType);
-                return editTypes;
-            };
-
-            PublicProperties.prototype.gettxtYukoKigen_displayNone = function () {
-                return this.controls.txtYukoKigen().displayNone;
-            };
-
-            PublicProperties.prototype.settxtYukoKigen_displayNone = function (value) {
-                this.controls.txtYukoKigen().displayNone = value;
-            };
-
-            PublicProperties.prototype.getradInjiIchi_displayNone = function () {
-                return this.controls.radInjiIchi().displayNone;
-            };
-
-            PublicProperties.prototype.setradInjiIchi_displayNone = function (value) {
-                this.controls.radInjiIchi().displayNone = value;
-            };
-
-            PublicProperties.prototype.getonBlur_txtKofuDate = function () {
-                return this.controls.txtKofuDate().onBlur;
-            };
-
-            PublicProperties.prototype.setonBlur_txtKofuDate = function (value) {
-                this.controls.txtKofuDate().onBlur = value;
-            };
-
-            PublicProperties.prototype.getonChange_ddlKofuJiyu = function () {
-                return this.controls.ddlKofuJiyu().onChange;
-            };
-
-            PublicProperties.prototype.setonChange_ddlKofuJiyu = function (value) {
-                this.controls.ddlKofuJiyu().onChange = value;
-            };
-            return PublicProperties;
-        })();
-        HihokenshaShikakuHakko.PublicProperties = PublicProperties;
     })(DBZ.HihokenshaShikakuHakko || (DBZ.HihokenshaShikakuHakko = {}));
     var HihokenshaShikakuHakko = DBZ.HihokenshaShikakuHakko;
 })(DBZ || (DBZ = {}));

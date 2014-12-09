@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tblJigyoshaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tblJigyoshaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -68,13 +68,23 @@ public class tplShienJigyoshaDiv extends TabPanel {
     }
 
     @JsonIgnore
+    public Label getLblTekiyoStYMD() {
+        return this.getTblJigyosha().getLblTekiyoStYMD();
+    }
+
+    @JsonIgnore
     public TextBox getTxtJigyosha1() {
         return this.getTblJigyosha().getTxtJigyosha1();
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtTodokedeDate1() {
-        return this.getTblJigyosha().getTxtTodokedeDate1();
+    public TextBoxFlexibleDate getTxtTodokedeYMD1() {
+        return this.getTblJigyosha().getTxtTodokedeYMD1();
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtTekiyoStYMD1() {
+        return this.getTblJigyosha().getTxtTekiyoStYMD1();
     }
 
     @JsonIgnore
@@ -83,8 +93,13 @@ public class tplShienJigyoshaDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtTodokedeDate2() {
-        return this.getTblJigyosha().getTxtTodokedeDate2();
+    public TextBoxFlexibleDate getTxtTodokedeYMD2() {
+        return this.getTblJigyosha().getTxtTodokedeYMD2();
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtTekiyoStYMD2() {
+        return this.getTblJigyosha().getTxtTekiyoStYMD2();
     }
 
     @JsonIgnore
@@ -93,8 +108,13 @@ public class tplShienJigyoshaDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtTodokedeDate3() {
-        return this.getTblJigyosha().getTxtTodokedeDate3();
+    public TextBoxFlexibleDate getTxtTodokedeYMD3() {
+        return this.getTblJigyosha().getTxtTodokedeYMD3();
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtTekiyoStYMD3() {
+        return this.getTblJigyosha().getTxtTekiyoStYMD3();
     }
 
 }

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -27,18 +27,26 @@ public class tblJigyoshaDiv extends TablePanel {
     private celJigyoshaTitleAttblJigyosha celJigyoshaTitle;
     @JsonProperty("celTodokedeDateTitle")
     private celTodokedeDateTitleAttblJigyosha celTodokedeDateTitle;
+    @JsonProperty("celTekiyoStYMD")
+    private celTekiyoStYMDAttblJigyosha celTekiyoStYMD;
     @JsonProperty("celJigyosha1")
     private celJigyosha1AttblJigyosha celJigyosha1;
     @JsonProperty("celTodokedeDate1")
     private celTodokedeDate1AttblJigyosha celTodokedeDate1;
+    @JsonProperty("celTekiyoStYMD1")
+    private celTekiyoStYMD1AttblJigyosha celTekiyoStYMD1;
     @JsonProperty("celJigyosha2")
     private celJigyosha2AttblJigyosha celJigyosha2;
     @JsonProperty("celTodokedeDate2")
     private celTodokedeDate2AttblJigyosha celTodokedeDate2;
+    @JsonProperty("celTekiyoStYMD2")
+    private celTekiyoStYMD2AttblJigyosha celTekiyoStYMD2;
     @JsonProperty("celJigyosha3")
     private celJigyosha3AttblJigyosha celJigyosha3;
     @JsonProperty("celTodokedeDate3")
     private celTodokedeDate3AttblJigyosha celTodokedeDate3;
+    @JsonProperty("celTekiyoStYMD3")
+    private celTekiyoStYMD3AttblJigyosha celTekiyoStYMD3;
 
     /*
      * [ Helperの作成 ]
@@ -55,13 +63,23 @@ public class tblJigyoshaDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Label getLblTekiyoStYMD() {
+        return this.celTekiyoStYMD.getLblTekiyoStYMD();
+    }
+
+    @JsonIgnore
     public TextBox getTxtJigyosha1() {
         return this.celJigyosha1.getTxtJigyosha1();
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtTodokedeDate1() {
-        return this.celTodokedeDate1.getTxtTodokedeDate1();
+    public TextBoxFlexibleDate getTxtTodokedeYMD1() {
+        return this.celTodokedeDate1.getTxtTodokedeYMD1();
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtTekiyoStYMD1() {
+        return this.celTekiyoStYMD1.getTxtTekiyoStYMD1();
     }
 
     @JsonIgnore
@@ -70,8 +88,13 @@ public class tblJigyoshaDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtTodokedeDate2() {
-        return this.celTodokedeDate2.getTxtTodokedeDate2();
+    public TextBoxFlexibleDate getTxtTodokedeYMD2() {
+        return this.celTodokedeDate2.getTxtTodokedeYMD2();
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtTekiyoStYMD2() {
+        return this.celTekiyoStYMD2.getTxtTekiyoStYMD2();
     }
 
     @JsonIgnore
@@ -80,8 +103,13 @@ public class tblJigyoshaDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtTodokedeDate3() {
-        return this.celTodokedeDate3.getTxtTodokedeDate3();
+    public TextBoxFlexibleDate getTxtTodokedeYMD3() {
+        return this.celTodokedeDate3.getTxtTodokedeYMD3();
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtTekiyoStYMD3() {
+        return this.celTekiyoStYMD3.getTxtTekiyoStYMD3();
     }
 
     /*
@@ -110,6 +138,16 @@ public class tblJigyoshaDiv extends TablePanel {
         this.celTodokedeDateTitle=celTodokedeDateTitle;
     }
 
+    @JsonProperty("celTekiyoStYMD")
+    private celTekiyoStYMDAttblJigyosha getCelTekiyoStYMD() {
+        return celTekiyoStYMD;
+    }
+
+    @JsonProperty("celTekiyoStYMD")
+    private void setCelTekiyoStYMD(celTekiyoStYMDAttblJigyosha celTekiyoStYMD) {
+        this.celTekiyoStYMD=celTekiyoStYMD;
+    }
+
     @JsonProperty("celJigyosha1")
     private celJigyosha1AttblJigyosha getCelJigyosha1() {
         return celJigyosha1;
@@ -128,6 +166,16 @@ public class tblJigyoshaDiv extends TablePanel {
     @JsonProperty("celTodokedeDate1")
     private void setCelTodokedeDate1(celTodokedeDate1AttblJigyosha celTodokedeDate1) {
         this.celTodokedeDate1=celTodokedeDate1;
+    }
+
+    @JsonProperty("celTekiyoStYMD1")
+    private celTekiyoStYMD1AttblJigyosha getCelTekiyoStYMD1() {
+        return celTekiyoStYMD1;
+    }
+
+    @JsonProperty("celTekiyoStYMD1")
+    private void setCelTekiyoStYMD1(celTekiyoStYMD1AttblJigyosha celTekiyoStYMD1) {
+        this.celTekiyoStYMD1=celTekiyoStYMD1;
     }
 
     @JsonProperty("celJigyosha2")
@@ -150,6 +198,16 @@ public class tblJigyoshaDiv extends TablePanel {
         this.celTodokedeDate2=celTodokedeDate2;
     }
 
+    @JsonProperty("celTekiyoStYMD2")
+    private celTekiyoStYMD2AttblJigyosha getCelTekiyoStYMD2() {
+        return celTekiyoStYMD2;
+    }
+
+    @JsonProperty("celTekiyoStYMD2")
+    private void setCelTekiyoStYMD2(celTekiyoStYMD2AttblJigyosha celTekiyoStYMD2) {
+        this.celTekiyoStYMD2=celTekiyoStYMD2;
+    }
+
     @JsonProperty("celJigyosha3")
     private celJigyosha3AttblJigyosha getCelJigyosha3() {
         return celJigyosha3;
@@ -168,6 +226,16 @@ public class tblJigyoshaDiv extends TablePanel {
     @JsonProperty("celTodokedeDate3")
     private void setCelTodokedeDate3(celTodokedeDate3AttblJigyosha celTodokedeDate3) {
         this.celTodokedeDate3=celTodokedeDate3;
+    }
+
+    @JsonProperty("celTekiyoStYMD3")
+    private celTekiyoStYMD3AttblJigyosha getCelTekiyoStYMD3() {
+        return celTekiyoStYMD3;
+    }
+
+    @JsonProperty("celTekiyoStYMD3")
+    private void setCelTekiyoStYMD3(celTekiyoStYMD3AttblJigyosha celTekiyoStYMD3) {
+        this.celTekiyoStYMD3=celTekiyoStYMD3;
     }
 
 }
@@ -212,6 +280,26 @@ class celTodokedeDateTitleAttblJigyosha extends TableCell {
 
 }
 /**
+ * celTekiyoStYMD のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celTekiyoStYMDAttblJigyosha extends TableCell {
+    @JsonProperty("lblTekiyoStYMD")
+    private Label lblTekiyoStYMD;
+
+    @JsonProperty("lblTekiyoStYMD")
+    public Label getLblTekiyoStYMD() {
+        return lblTekiyoStYMD;
+    }
+
+    @JsonProperty("lblTekiyoStYMD")
+    public void setLblTekiyoStYMD(Label lblTekiyoStYMD) {
+        this.lblTekiyoStYMD=lblTekiyoStYMD;
+    }
+
+}
+/**
  * celJigyosha1 のクラスファイル 
  * 
  * @author 自動生成
@@ -237,17 +325,37 @@ class celJigyosha1AttblJigyosha extends TableCell {
  * @author 自動生成
  */
 class celTodokedeDate1AttblJigyosha extends TableCell {
-    @JsonProperty("txtTodokedeDate1")
-    private TextBoxFlexibleDate txtTodokedeDate1;
+    @JsonProperty("txtTodokedeYMD1")
+    private TextBoxFlexibleDate txtTodokedeYMD1;
 
-    @JsonProperty("txtTodokedeDate1")
-    public TextBoxFlexibleDate getTxtTodokedeDate1() {
-        return txtTodokedeDate1;
+    @JsonProperty("txtTodokedeYMD1")
+    public TextBoxFlexibleDate getTxtTodokedeYMD1() {
+        return txtTodokedeYMD1;
     }
 
-    @JsonProperty("txtTodokedeDate1")
-    public void setTxtTodokedeDate1(TextBoxFlexibleDate txtTodokedeDate1) {
-        this.txtTodokedeDate1=txtTodokedeDate1;
+    @JsonProperty("txtTodokedeYMD1")
+    public void setTxtTodokedeYMD1(TextBoxFlexibleDate txtTodokedeYMD1) {
+        this.txtTodokedeYMD1=txtTodokedeYMD1;
+    }
+
+}
+/**
+ * celTekiyoStYMD1 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celTekiyoStYMD1AttblJigyosha extends TableCell {
+    @JsonProperty("txtTekiyoStYMD1")
+    private TextBoxFlexibleDate txtTekiyoStYMD1;
+
+    @JsonProperty("txtTekiyoStYMD1")
+    public TextBoxFlexibleDate getTxtTekiyoStYMD1() {
+        return txtTekiyoStYMD1;
+    }
+
+    @JsonProperty("txtTekiyoStYMD1")
+    public void setTxtTekiyoStYMD1(TextBoxFlexibleDate txtTekiyoStYMD1) {
+        this.txtTekiyoStYMD1=txtTekiyoStYMD1;
     }
 
 }
@@ -277,17 +385,37 @@ class celJigyosha2AttblJigyosha extends TableCell {
  * @author 自動生成
  */
 class celTodokedeDate2AttblJigyosha extends TableCell {
-    @JsonProperty("txtTodokedeDate2")
-    private TextBoxFlexibleDate txtTodokedeDate2;
+    @JsonProperty("txtTodokedeYMD2")
+    private TextBoxFlexibleDate txtTodokedeYMD2;
 
-    @JsonProperty("txtTodokedeDate2")
-    public TextBoxFlexibleDate getTxtTodokedeDate2() {
-        return txtTodokedeDate2;
+    @JsonProperty("txtTodokedeYMD2")
+    public TextBoxFlexibleDate getTxtTodokedeYMD2() {
+        return txtTodokedeYMD2;
     }
 
-    @JsonProperty("txtTodokedeDate2")
-    public void setTxtTodokedeDate2(TextBoxFlexibleDate txtTodokedeDate2) {
-        this.txtTodokedeDate2=txtTodokedeDate2;
+    @JsonProperty("txtTodokedeYMD2")
+    public void setTxtTodokedeYMD2(TextBoxFlexibleDate txtTodokedeYMD2) {
+        this.txtTodokedeYMD2=txtTodokedeYMD2;
+    }
+
+}
+/**
+ * celTekiyoStYMD2 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celTekiyoStYMD2AttblJigyosha extends TableCell {
+    @JsonProperty("txtTekiyoStYMD2")
+    private TextBoxFlexibleDate txtTekiyoStYMD2;
+
+    @JsonProperty("txtTekiyoStYMD2")
+    public TextBoxFlexibleDate getTxtTekiyoStYMD2() {
+        return txtTekiyoStYMD2;
+    }
+
+    @JsonProperty("txtTekiyoStYMD2")
+    public void setTxtTekiyoStYMD2(TextBoxFlexibleDate txtTekiyoStYMD2) {
+        this.txtTekiyoStYMD2=txtTekiyoStYMD2;
     }
 
 }
@@ -317,17 +445,37 @@ class celJigyosha3AttblJigyosha extends TableCell {
  * @author 自動生成
  */
 class celTodokedeDate3AttblJigyosha extends TableCell {
-    @JsonProperty("txtTodokedeDate3")
-    private TextBoxFlexibleDate txtTodokedeDate3;
+    @JsonProperty("txtTodokedeYMD3")
+    private TextBoxFlexibleDate txtTodokedeYMD3;
 
-    @JsonProperty("txtTodokedeDate3")
-    public TextBoxFlexibleDate getTxtTodokedeDate3() {
-        return txtTodokedeDate3;
+    @JsonProperty("txtTodokedeYMD3")
+    public TextBoxFlexibleDate getTxtTodokedeYMD3() {
+        return txtTodokedeYMD3;
     }
 
-    @JsonProperty("txtTodokedeDate3")
-    public void setTxtTodokedeDate3(TextBoxFlexibleDate txtTodokedeDate3) {
-        this.txtTodokedeDate3=txtTodokedeDate3;
+    @JsonProperty("txtTodokedeYMD3")
+    public void setTxtTodokedeYMD3(TextBoxFlexibleDate txtTodokedeYMD3) {
+        this.txtTodokedeYMD3=txtTodokedeYMD3;
+    }
+
+}
+/**
+ * celTekiyoStYMD3 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celTekiyoStYMD3AttblJigyosha extends TableCell {
+    @JsonProperty("txtTekiyoStYMD3")
+    private TextBoxFlexibleDate txtTekiyoStYMD3;
+
+    @JsonProperty("txtTekiyoStYMD3")
+    public TextBoxFlexibleDate getTxtTekiyoStYMD3() {
+        return txtTekiyoStYMD3;
+    }
+
+    @JsonProperty("txtTekiyoStYMD3")
+    public void setTxtTekiyoStYMD3(TextBoxFlexibleDate txtTekiyoStYMD3) {
+        this.txtTekiyoStYMD3=txtTekiyoStYMD3;
     }
 
 }

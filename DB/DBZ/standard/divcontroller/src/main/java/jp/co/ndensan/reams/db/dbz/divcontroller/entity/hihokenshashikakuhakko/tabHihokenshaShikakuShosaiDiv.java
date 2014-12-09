@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -6,15 +6,17 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShuruiShikyuGendoKijungakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tblJigyoshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tblKyuhuSeigenDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tblShisetsuNyutaishoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tplGendoGakuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tplKyufuSeigenDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tplShienJigyoshaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tplShinsakaiIkenDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tplShisetsuNyutaishoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.KubunGendoGakuDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.ShuruiShikyuGendoKijungakuDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tblGendoGakuDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tblJigyoshaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tblKyuhuSeigenDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tblShisetsuNyutaishoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tplGendoGakuDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tplKyufuSeigenDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tplShienJigyoshaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tplShinsakaiIkenDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tplShisetsuNyutaishoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -102,43 +104,63 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public Label getLblKubunShikyuGendoGaku() {
-        return this.getTplGendoGaku().getLblKubunShikyuGendoGaku();
+    public tblGendoGakuDiv getTblGendoGaku() {
+        return this.getTplGendoGaku().getTblGendoGaku();
     }
 
     @JsonIgnore
-    public void  setLblKubunShikyuGendoGaku(Label lblKubunShikyuGendoGaku) {
-        this.getTplGendoGaku().setLblKubunShikyuGendoGaku(lblKubunShikyuGendoGaku);
+    public void  setTblGendoGaku(tblGendoGakuDiv tblGendoGaku) {
+        this.getTplGendoGaku().setTblGendoGaku(tblGendoGaku);
+    }
+
+    @JsonIgnore
+    public KubunGendoGakuDiv getKubunGendoGaku() {
+        return this.getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku();
     }
 
     @JsonIgnore
     public TextBoxNum getTxtKubunShikyuGendoKijunGaku() {
-        return this.getTplGendoGaku().getTxtKubunShikyuGendoKijunGaku();
+        return this.getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().getTxtKubunShikyuGendoKijunGaku();
     }
 
     @JsonIgnore
     public void  setTxtKubunShikyuGendoKijunGaku(TextBoxNum txtKubunShikyuGendoKijunGaku) {
-        this.getTplGendoGaku().setTxtKubunShikyuGendoKijunGaku(txtKubunShikyuGendoKijunGaku);
+        this.getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().setTxtKubunShikyuGendoKijunGaku(txtKubunShikyuGendoKijunGaku);
     }
 
     @JsonIgnore
-    public TextBoxDateRange getTxtKyuhuYukoKikan() {
-        return this.getTplGendoGaku().getTxtKyuhuYukoKikan();
+    public TextBoxDate getTxtYukoFromYMD() {
+        return this.getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().getTxtYukoFromYMD();
     }
 
     @JsonIgnore
-    public void  setTxtKyuhuYukoKikan(TextBoxDateRange txtKyuhuYukoKikan) {
-        this.getTplGendoGaku().setTxtKyuhuYukoKikan(txtKyuhuYukoKikan);
+    public void  setTxtYukoFromYMD(TextBoxDate txtYukoFromYMD) {
+        this.getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().setTxtYukoFromYMD(txtYukoFromYMD);
+    }
+
+    @JsonIgnore
+    public Label getLblKara() {
+        return this.getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().getLblKara();
+    }
+
+    @JsonIgnore
+    public void  setLblKara(Label lblKara) {
+        this.getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().setLblKara(lblKara);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtYukoToYMD() {
+        return this.getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().getTxtYukoToYMD();
+    }
+
+    @JsonIgnore
+    public void  setTxtYukoToYMD(TextBoxDate txtYukoToYMD) {
+        this.getTplGendoGaku().getTblGendoGaku().getKubunGendoGaku().setTxtYukoToYMD(txtYukoToYMD);
     }
 
     @JsonIgnore
     public ShuruiShikyuGendoKijungakuDiv getShuruiShikyuGendoKijungaku() {
-        return this.getTplGendoGaku().getShuruiShikyuGendoKijungaku();
-    }
-
-    @JsonIgnore
-    public void  setShuruiShikyuGendoKijungaku(ShuruiShikyuGendoKijungakuDiv ShuruiShikyuGendoKijungaku) {
-        this.getTplGendoGaku().setShuruiShikyuGendoKijungaku(ShuruiShikyuGendoKijungaku);
+        return this.getTplGendoGaku().getTblGendoGaku().getShuruiShikyuGendoKijungaku();
     }
 
     @JsonIgnore
@@ -252,13 +274,23 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
+    public Label getLblTekiyoStYMD() {
+        return this.getTplShienJigyosha().getTblJigyosha().getLblTekiyoStYMD();
+    }
+
+    @JsonIgnore
     public TextBox getTxtJigyosha1() {
         return this.getTplShienJigyosha().getTblJigyosha().getTxtJigyosha1();
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtTodokedeDate1() {
-        return this.getTplShienJigyosha().getTblJigyosha().getTxtTodokedeDate1();
+    public TextBoxFlexibleDate getTxtTodokedeYMD1() {
+        return this.getTplShienJigyosha().getTblJigyosha().getTxtTodokedeYMD1();
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtTekiyoStYMD1() {
+        return this.getTplShienJigyosha().getTblJigyosha().getTxtTekiyoStYMD1();
     }
 
     @JsonIgnore
@@ -267,8 +299,13 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtTodokedeDate2() {
-        return this.getTplShienJigyosha().getTblJigyosha().getTxtTodokedeDate2();
+    public TextBoxFlexibleDate getTxtTodokedeYMD2() {
+        return this.getTplShienJigyosha().getTblJigyosha().getTxtTodokedeYMD2();
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtTekiyoStYMD2() {
+        return this.getTplShienJigyosha().getTblJigyosha().getTxtTekiyoStYMD2();
     }
 
     @JsonIgnore
@@ -277,8 +314,13 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtTodokedeDate3() {
-        return this.getTplShienJigyosha().getTblJigyosha().getTxtTodokedeDate3();
+    public TextBoxFlexibleDate getTxtTodokedeYMD3() {
+        return this.getTplShienJigyosha().getTblJigyosha().getTxtTodokedeYMD3();
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtTekiyoStYMD3() {
+        return this.getTplShienJigyosha().getTblJigyosha().getTxtTekiyoStYMD3();
     }
 
     @JsonIgnore
@@ -302,11 +344,6 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public Label getLblShisetsuShurui() {
-        return this.getTplShisetsuNyutaisho().getTblShisetsuNyutaisho().getLblShisetsuShurui();
-    }
-
-    @JsonIgnore
     public Label getLblNyushoShisetsu() {
         return this.getTplShisetsuNyutaisho().getTblShisetsuNyutaisho().getLblNyushoShisetsu();
     }
@@ -319,11 +356,6 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     @JsonIgnore
     public Label getLblShisetsuTaishoDate() {
         return this.getTplShisetsuNyutaisho().getTblShisetsuNyutaisho().getLblShisetsuTaishoDate();
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShisetsuShurui1() {
-        return this.getTplShisetsuNyutaisho().getTblShisetsuNyutaisho().getTxtShisetsuShurui1();
     }
 
     @JsonIgnore
@@ -342,11 +374,6 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public TextBox getTxtShisetsuShurui2() {
-        return this.getTplShisetsuNyutaisho().getTblShisetsuNyutaisho().getTxtShisetsuShurui2();
-    }
-
-    @JsonIgnore
     public TextBox getTxtNyushoShisetsu2() {
         return this.getTplShisetsuNyutaisho().getTblShisetsuNyutaisho().getTxtNyushoShisetsu2();
     }
@@ -359,11 +386,6 @@ public class tabHihokenshaShikakuShosaiDiv extends TabContainer {
     @JsonIgnore
     public TextBoxFlexibleDate getTxtShisetsuTaishoDate2() {
         return this.getTplShisetsuNyutaisho().getTblShisetsuNyutaisho().getTxtShisetsuTaishoDate2();
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShisetsuShurui3() {
-        return this.getTplShisetsuNyutaisho().getTblShisetsuNyutaisho().getTxtShisetsuShurui3();
     }
 
     @JsonIgnore
