@@ -16,17 +16,46 @@ module DBZ
             }
 
             public priorities(): Array<string> {
-                return [];
+				return [
+				"発行証タイプ"];
             }
 
             public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
             }
 
+			public 発行証タイプ() {
+				return new Modes.発行証タイプ(this.controls);
+			}
+
             public PublicProperties() {
                 return new DBZ.HihokenshaShikakuHakko.PublicProperties(this.fieldName);
-            }
-        }
+			}
+		}
+
+
+		export module Modes {
+			export class 発行証タイプ {
+				private controls: Controls;
+				
+				constructor(controls: Controls) {
+					this.controls = controls;
+				}
+				
+				public 被保険者証(): void {
+					this.controls.txtYukoKigen().displayNone = true;
+					this.controls.txtShinsakaiIken().maxLength = 198;
+					this.controls.txtShinsakaiIken().limitLength = 198;
+				}
+				
+				public 資格者証(): void {
+					this.controls.txtYukoKigen().displayNone = false;
+					this.controls.txtShinsakaiIken().maxLength = 175;
+					this.controls.txtShinsakaiIken().limitLength = 175;
+				}
+				
+			}
+		}
 
     }
 }

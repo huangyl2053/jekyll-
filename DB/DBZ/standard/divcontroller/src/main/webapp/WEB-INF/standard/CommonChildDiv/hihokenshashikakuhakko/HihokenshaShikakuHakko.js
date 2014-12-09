@@ -7,11 +7,17 @@ var DBZ;
                 this.controls = new HihokenshaShikakuHakko.Controls(fieldName);
             }
             ModeController.prototype.priorities = function () {
-                return [];
+                return [
+                    "発行証タイプ"
+                ];
             };
 
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.発行証タイプ = function () {
+                return new Modes.発行証タイプ(this.controls);
             };
 
             ModeController.prototype.PublicProperties = function () {
@@ -20,6 +26,28 @@ var DBZ;
             return ModeController;
         })();
         HihokenshaShikakuHakko.ModeController = ModeController;
+
+        (function (Modes) {
+            var 発行証タイプ = (function () {
+                function 発行証タイプ(controls) {
+                    this.controls = controls;
+                }
+                発行証タイプ.prototype.被保険者証 = function () {
+                    this.controls.txtYukoKigen().displayNone = true;
+                    this.controls.txtShinsakaiIken().maxLength = 198;
+                    this.controls.txtShinsakaiIken().limitLength = 198;
+                };
+
+                発行証タイプ.prototype.資格者証 = function () {
+                    this.controls.txtYukoKigen().displayNone = false;
+                    this.controls.txtShinsakaiIken().maxLength = 175;
+                    this.controls.txtShinsakaiIken().limitLength = 175;
+                };
+                return 発行証タイプ;
+            })();
+            Modes.発行証タイプ = 発行証タイプ;
+        })(HihokenshaShikakuHakko.Modes || (HihokenshaShikakuHakko.Modes = {}));
+        var Modes = HihokenshaShikakuHakko.Modes;
     })(DBZ.HihokenshaShikakuHakko || (DBZ.HihokenshaShikakuHakko = {}));
     var HihokenshaShikakuHakko = DBZ.HihokenshaShikakuHakko;
 })(DBZ || (DBZ = {}));
