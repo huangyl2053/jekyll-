@@ -16,9 +16,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum ViewExecutionStatus {
 
+    /**
+     * 追加状態を表します。
+     */
     Add("Add"),
+    /**
+     * 修正状態を表します。
+     */
     Modify("Modify"),
+    /**
+     * 削除状態を表します。
+     */
     Delete("Delete"),
+    /**
+     * 初期状態、もしくはいずれの操作も行っていない状態を表します。
+     */
     None("None");
     private final RString statusValue;
 
@@ -47,7 +59,7 @@ public enum ViewExecutionStatus {
      * @return 画面処理ステータス
      * @throws IllegalArgumentException 対応するステータスが存在しない文字列を渡した場合
      */
-    public static ViewExecutionStatus toValue(RString value) {
+    public static ViewExecutionStatus toValue(RString value) throws IllegalArgumentException {
         for (ViewExecutionStatus status : values()) {
             if (status.getValue().equals(value)) {
                 return status;
