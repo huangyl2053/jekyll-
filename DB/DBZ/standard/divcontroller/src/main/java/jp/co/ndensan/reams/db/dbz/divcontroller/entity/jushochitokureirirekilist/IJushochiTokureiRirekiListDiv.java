@@ -71,4 +71,20 @@ public interface IJushochiTokureiRirekiListDiv {
      * </ul>
      */
     void initializeKoikiGappeiAri();
+
+    /**
+     * 明細パネルが変更されたかどうかを判定します。 <br/>
+     * 追加を行う場合は、明細行の内容が全て空白で無ければtrueを返します。<br/>
+     * 修正を行う場合は、明細行の内容が書き換えられている場合にtrueを返します。
+     *
+     * @return 明細パネルの内容が変更されていたらtrue
+     */
+    boolean isChangedMeisai();
+
+    /**
+     * 明細パネルに入力されている情報と、自身が持つ住所地特例情報の最新履歴を元に、登録データを生成します。
+     *
+     * @return 登録データ
+     */
+    HihokenshaDaichoModel createEntryData();
 }

@@ -571,7 +571,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     @Override
     public IItemList<HihokenshaDaichoModel> get住所地特例異動履歴() {
 
-        //TODO #55509
+        //TODO #55852
         //1)、PanelSessionAccessorに登録されている情報を取得し、戻り値として返却する。
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -579,7 +579,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     @Override
     public void set住所地特例異動履歴(IItemList<HihokenshaDaichoModel> 被保険者台帳List) {
 
-        //TODO #55509
+        //TODO #55852
         //1)、引数から渡された情報を、PanelSessionAccessorに登録する。
         //2)、登録した情報を、グリッドにマッピングする。
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -587,14 +587,14 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
 
     @Override
     public void clearInputData() {
-        //TODO #55509
+        //TODO #55852
         //1)、入力明細パネル上のコントロールに対して、空白やnullなどを設定する。
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void initializeTanitsuGappeiNashi() {
-        //TODO #55509
+        //TODO #55852
         //1)、引数から受け取った市町村コードを元に、保険者情報を取得する。
         //2)、HikenshaJohoDisplayModeに、TanitsuGappeiNashiを設定する。
         //3)、コードマスタから住特適用（コードマスタ:0127）、住適解除（コードマスタ:0128）の情報を取得する。
@@ -604,7 +604,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
 
     @Override
     public void initializeTanitsuGappeiAri() {
-        //TODO #55509
+        //TODO #55852
         //1)、引数から受け取った市町村コードを元に、保険者情報を取得する。
         //2)、HikenshaJohoDisplayModeに、TanitsuGappeiAriを設定する。
         //3)、保険者情報を元に、旧保険者DDLの選択項目を設定する。
@@ -615,7 +615,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
 
     @Override
     public void initializeKoikiGappeiNashi() {
-        //TODO #55509
+        //TODO #55852
         //1)、引数から受け取った市町村コードを元に、保険者情報を取得する。
         //2)、HikenshaJohoDisplayModeに、KoikiGappeiNashiを設定する。
         //3)、保険者情報を元に、措置元保険者DDLを選択項目を設定する。
@@ -626,12 +626,31 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
 
     @Override
     public void initializeKoikiGappeiAri() {
-        //TODO #55509
+        //TODO #55852
         //1)、引数から受け取った市町村コードを元に、保険者情報を取得する。
         //2)、HikenshaJohoDisplayModeに、KoikiGappeiAriを設定する。
         //3)、措置元保険者DDL・旧保険者DDLの選択項目を設定する。
         //4)、コードマスタから住特適用（コードマスタ:0127）、住適解除（コードマスタ:0128）の情報を取得する。
         //5)、コードマスタから取得した情報を、適用事由DDL、解除事由DDLに設定する。
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean isChangedMeisai() {
+        //TODO #55852
+        //1)、明細に入力した内容を元に、被保険者台帳Modelを新規に生成する。
+        //2)、getRowIdを用いて、共有子Divが持つ被保険者台帳Listから、明細に入力されている元々の情報を取得する。
+        //3)、1)と2)で作成されたModelを比較して、変更点が一つでもあればtureを返す。
+        //3-1)、1)で生成した被保険者台帳Modelが、履歴上に新しく追加されるModelである場合は、履歴の最新情報を比較する。
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public HihokenshaDaichoModel createEntryData() {
+        //TODO #55852
+        //1)、履歴の最新情報を元に、被保険者台帳Modelを作成する。
+        //2)、明細に入力した内容で、1)で作成した被保険者台帳Modelを更新する。
+        //3)、生成したModelを返却する。
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
