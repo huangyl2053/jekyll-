@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.dba4010012;
 
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010012.KihonJohoDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA4010012.KihonJohoDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 

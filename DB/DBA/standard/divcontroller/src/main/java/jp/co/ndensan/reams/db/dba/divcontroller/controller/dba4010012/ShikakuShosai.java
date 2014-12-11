@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.dba4010012;
 
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010012.KihonJohoDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA4010012.KihonJohoDiv;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoList;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010012.ShikakuShosaiDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA4010012.ShikakuShosaiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
