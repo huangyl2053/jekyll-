@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011;
 
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010012.*;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA4010012.*;
 
 /**
  *
