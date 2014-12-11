@@ -1,0 +1,11 @@
+﻿gyomuCode,UDD002GyomuCode,GyomuCode,,,,,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+batchID,varchar,RString,,,,,A
+batchIDEdaban,varchar,RString,,,,,A
+nendo,UDD012YSeireki,FlexibleYear,,,,,A
+nendoNaiRenban,varchar,RString,,,,,A
+kijunYMD,UDD015YMD,FlexibleDate,,,,,A
+taishoKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+taishoShuryoYMD,UDD015YMD,FlexibleDate,,,,,A
+taishoKaishiTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+taishoShuryoTimestamp,UDD018YMDHMS,YMDHMS,,,,,A

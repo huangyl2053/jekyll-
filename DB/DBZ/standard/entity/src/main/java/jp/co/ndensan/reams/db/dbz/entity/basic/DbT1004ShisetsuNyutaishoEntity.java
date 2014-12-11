@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -8,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
 
@@ -15,13 +17,12 @@ import java.util.Objects;
  * DbT1004ShisetsuNyutaishoの項目定義クラスです
  *
  */
-public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004ShisetsuNyutaishoEntity> implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1004ShisetsuNyutaisho");
 
     private RString insertDantaiCd;
-    @PrimaryKey
     private RDateTime insertTimestamp;
     private RString insertReamsLoginId;
     private UUID insertContextId;
@@ -34,7 +35,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
     @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
-    private RDateTime shoriTimestamp;
+    private YMDHMS shoriTimestamp;
     private RString daichoShubetsu;
     private RString nyushoShisetsuShurui;
     private RString nyushoShisetsuCode;
@@ -120,7 +121,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
      * getShoriTimestamp
      * @return shoriTimestamp
      */
-    public RDateTime getShoriTimestamp() {
+    public YMDHMS getShoriTimestamp() {
         return shoriTimestamp;
     }
 
@@ -128,7 +129,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
      * setShoriTimestamp
      * @param shoriTimestamp shoriTimestamp
      */
-    public void setShoriTimestamp(RDateTime shoriTimestamp) {
+    public void setShoriTimestamp(YMDHMS shoriTimestamp) {
         this.shoriTimestamp = shoriTimestamp;
     }
 
@@ -251,11 +252,9 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
      * @@return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT1004ShisetsuNyutaishoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
+    @Override
     public boolean equalsPrimaryKeys(DbT1004ShisetsuNyutaishoEntity other) {
         if (other == null) {
-            return false;
-        }
-        if (!Objects.equals(this.insertTimestamp, other.insertTimestamp)) {
             return false;
         }
         if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
@@ -270,6 +269,33 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void shallowCopy(DbT1004ShisetsuNyutaishoEntity entity) {
+        this.shichosonCode = entity.shichosonCode;
+        this.shikibetsuCode = entity.shikibetsuCode;
+        this.shoriTimestamp = entity.shoriTimestamp;
+        this.daichoShubetsu = entity.daichoShubetsu;
+        this.nyushoShisetsuShurui = entity.nyushoShisetsuShurui;
+        this.nyushoShisetsuCode = entity.nyushoShisetsuCode;
+        this.nyushoYMD = entity.nyushoYMD;
+        this.taishoYMD = entity.taishoYMD;
+        this.nyushoShoriYMD = entity.nyushoShoriYMD;
+        this.taishoShoriYMD = entity.taishoShoriYMD;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Override
+    public RString getMd5() {
+        return super.toMd5(shichosonCode, shikibetsuCode, shoriTimestamp, daichoShubetsu, nyushoShisetsuShurui, nyushoShisetsuCode, nyushoYMD, taishoYMD, nyushoShoriYMD, taishoShoriYMD);
+    }
+
 // </editor-fold>
+
 
 }

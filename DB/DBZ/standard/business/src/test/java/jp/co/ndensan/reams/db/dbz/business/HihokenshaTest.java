@@ -100,13 +100,6 @@ public class HihokenshaTest extends DbzTestBase {
             }
 
             @Test
-            public void get証記載保険者番号は_コンストラクタ引数のIHihokenshaShikakuの_get証記載保険者番号と_同じ値を返す() {
-                ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("000001"));
-                when(shikaku.get証記載保険者番号()).thenReturn(shoKisaiHokenshaNo);
-                assertThat(sut.get証記載保険者番号(), is(shoKisaiHokenshaNo));
-            }
-
-            @Test
             public void get識別コードは_コンストラクタ引数のIHihokenshaShikakuの_get識別コードと_同じ値を返す() {
                 ShikibetsuCode shikibetsuCode = new ShikibetsuCode("0000000001");
                 when(shikaku.get識別コード()).thenReturn(shikibetsuCode);

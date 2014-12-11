@@ -1,0 +1,15 @@
+﻿hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,A
+seiriNo,varchar,RString,,,,,A
+jigyoshaNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,A
+yoshikiNo,varchar,RString,,,,,A
+junjiNo,varchar,RString,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+serviceCode,DbUDD007ServiceCode,DbUDD007ServiceCode,,,,,A
+jutakuKaishuChakkoYMD,UDD015YMD,FlexibleDate,,,,,A
+jutakuKaishuJigyoshaName,varchar,RString,,,,,A
+jutakuKaishuJutakuAddress,varchar,RString,,,,,A
+kaishuKingaku,int4,int,,,,,A
+shinsaHohoKubunCode,varchar,RString,,,,,A
+jutakuKaishuKanseiYMD,UDD015YMD,FlexibleDate,,,,,A
+sagakuKingaku,int4,int,,,,,A
