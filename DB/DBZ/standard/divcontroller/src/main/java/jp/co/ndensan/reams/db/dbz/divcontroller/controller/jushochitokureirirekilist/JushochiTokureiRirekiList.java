@@ -6,7 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.jushochitokureirirekilist;
 
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.ViewExecutionStatus;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 共有子Div「住所地特例履歴List」のイベントを定義したDivControllerです。
@@ -27,9 +30,17 @@ public class JushochiTokureiRirekiList {
         //TODO #55852
         //１）「追加する」ボタンを押下不可にする。
         //２）「住所地特例履歴一覧」をreadOnlyにする。
-        //３）住所地特例入力明細エリアの項目をクリアし、入力可にする。
+        //３）住所地特例入力明細エリアの項目をクリアし
+        //3.5),入力可にする。
         //４）共有子Divが持つ処理判定区分に、追加を設定する。
+        jutokuRirekiDiv.getBtnAdd().setDisabled(true);
+        jutokuRirekiDiv.getDgJutoku().setReadOnly(true);
 
+        jutokuRirekiDiv.clearInputData();
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
+        handler.setMeisaiInputMode();
+
+        jutokuRirekiDiv.setExecutionStatus(ViewExecutionStatus.Add.getValue());
         return createSettingData(jutokuRirekiDiv);
     }
 
@@ -45,6 +56,8 @@ public class JushochiTokureiRirekiList {
         //TODO #55852
         //１）「追加する」ボタンを押下不可にする。
         //２）「住所地特例履歴一覧」をreadOnlyにする。
+        jutokuRirekiDiv.getBtnAdd().setDisabled(true);
+        jutokuRirekiDiv.getDgJutoku().setReadOnly(true);
         //３）住所地特例入力明細エリアに選択行の内容を表示する。
         //４）選択行の状態によって、以下のように処理を行う。
         //４－１）状態が「追加」・「修正」である行を選択している場合、明細エリアの項目を入力可にして「確定する」ボタンを押下可能にする。
@@ -82,6 +95,9 @@ public class JushochiTokureiRirekiList {
         //４－２）選択している行が解除の行である場合、MeisaiDisplayModeにkaijoInputを設定する。
         //４－３）訂正処理を行っている場合は、MeisaiDisplayModeにteiseiInputを設定する。
         //５）共有子Divが持つ処理判定区分に、修正を設定する。
+        jutokuRirekiDiv.getBtnAdd().setDisabled(true);
+        jutokuRirekiDiv.getDgJutoku().setReadOnly(true);
+
         jutokuRirekiDiv.setMode_BtnDisplayMode(JushochiTokureiRirekiListDiv.BtnDisplayMode.SetDisplay);
         return createSettingData(jutokuRirekiDiv);
     }
@@ -196,4 +212,5 @@ public class JushochiTokureiRirekiList {
         response.data = settingData;
         return response;
     }
+
 }

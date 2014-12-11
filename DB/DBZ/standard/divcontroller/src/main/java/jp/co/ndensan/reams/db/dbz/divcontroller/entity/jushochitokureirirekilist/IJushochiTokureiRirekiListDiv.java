@@ -81,10 +81,4 @@ public interface IJushochiTokureiRirekiListDiv {
      */
     boolean isChangedMeisai();
 
-    /**
-     * 明細パネルに入力されている情報と、自身が持つ住所地特例情報の最新履歴を元に、登録データを生成します。
-     *
-     * @return 登録データ
-     */
-    HihokenshaDaichoModel createEntryData();
 }

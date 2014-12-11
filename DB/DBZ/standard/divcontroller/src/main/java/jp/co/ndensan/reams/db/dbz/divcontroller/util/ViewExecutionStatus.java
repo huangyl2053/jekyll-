@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErro
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 画面から処理を実行する際に、現在何の処理を行おうとしているのかを判断するための区分です<br/>
+ * 画面から処理を実行する際に、現在何の処理を実行しようとしているのかを判断するために使用する、共通的な区分です<br/>
  * 一つの画面で追加・修正・削除を行う場合や、共有子Divが持つグリッドに対して操作を行うときの分岐条件として利用します。
  *
  * @author n8178 城間篤人

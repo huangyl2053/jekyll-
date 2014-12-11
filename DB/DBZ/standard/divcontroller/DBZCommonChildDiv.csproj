@@ -63,7 +63,7 @@
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShikakuHenkoRireki.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\IryoHokenRireki.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\JushochiTokureiRireki.ts" />
-    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\JushochiTokureiRirekiList.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\jushochitokureirirekilist\JushochiTokureiRirekiList.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShikakuTokusoRireki.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShisetsuNyutaishoRirekiKanri.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShoKaishuJokyoList.ts" />

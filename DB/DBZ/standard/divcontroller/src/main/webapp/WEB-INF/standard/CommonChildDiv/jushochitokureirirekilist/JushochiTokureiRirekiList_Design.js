@@ -24,6 +24,10 @@ var DBZ;
                 return "onSelectByDeleteButton_dgJutoku";
             };
 
+            Events.onBeforeClick_btnJutokuKakutei = function () {
+                return "onBeforeClick_btnJutokuKakutei";
+            };
+
             Events.onClick_btnJutokuKakutei = function () {
                 return "onClick_btnJutokuKakutei";
             };
@@ -83,12 +87,8 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlTekiyoJiyu"));
             };
 
-            Controls.prototype.tekiyojiHokenshaJoho = function () {
-                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuTekiyoInput_tekiyojiHokenshaJoho"));
-            };
-
-            Controls.prototype.ddlTekiyojiShozaiHokensha = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiShozaiHokensha"));
+            Controls.prototype.TekiyojiHokenshaJoho = function () {
+                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuTekiyoInput_TekiyojiHokenshaJoho"));
             };
 
             Controls.prototype.ddlTekiyojiSochimotoHokensha = function () {
@@ -119,12 +119,8 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlKaijoJiyu"));
             };
 
-            Controls.prototype.kaijojiHokenshaJoho = function () {
-                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuKaijoInput_kaijojiHokenshaJoho"));
-            };
-
-            Controls.prototype.ddlKaijojiShozaiHokensha = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlKaijojiShozaiHokensha"));
+            Controls.prototype.KaijojiHokenshaJoho = function () {
+                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuKaijoInput_KaijojiHokenshaJoho"));
             };
 
             Controls.prototype.ddlKaijojiSochimotoHokensha = function () {
