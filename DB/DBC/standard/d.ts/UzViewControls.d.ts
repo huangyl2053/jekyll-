@@ -5,12 +5,15 @@
         TextBoxCode,
         TextBoxNum,
         TextBoxNumRange,
+        TextBoxNumSpinner,
         TextBoxDate,
         TextBoxDateRange,
         TextBoxFlexibleDate,
         TextBoxDateRangeSlider,
         TextBoxYubinNo,
         TextBoxTime,
+        TextBoxTimeRange,
+        TextBoxDateTimeRange,
         TextBoxKana,
         Button,
         ButtonPublish,
@@ -20,16 +23,18 @@
         ButtonPrinter,
         ButtonPrinterList,
         ButtonReportPublish,
-        ButtonSubmit,
         ButtonDownLoad,
         ButtonDialog,
         ButtonBatchParameterRestore,
         ButtonBatchParameterSave,
         ButtonBatchRegister,
         ButtonBatchReserve,
+        CharacterFontLabel,
+        CharacterHelperButtonDialog,
         DropDownList,
         CheckBoxList,
         RadioButton,
+        SegmentedControl,
         SortableList,
         ControlRepeater,
         TabContainer,
@@ -38,6 +43,7 @@
         Label,
         UploadPanel,
         StaticImage,
+        ImageDialog,
         DynamicImage,
         TreeView,
         Panel,
@@ -80,6 +86,7 @@
         TextBoxFlexibleYear,
         TextBoxFlexibleYearMonth,
         Space,
+        Calendar,
     }
     enum _CommonButtonType {
         CommonButtonNext,
@@ -91,7 +98,6 @@
         CommonButtonUpdate,
         CommonButtonFree,
         CommonButtonReportPublish,
-        CommonButtonSubmitForDemo,
         CommonButtonCreate,
         CommonButtonExecute,
         CommonButtonSearchResult,
@@ -103,6 +109,9 @@
         CommonButtonSend,
         CommonButtonReceive,
         CommonButtonImport,
+        CommonButtonBatchRegister,
+        CommonButtonBatchReserve,
+        CommonButtonDownload,
     }
 }
 declare module Uz {
@@ -117,6 +126,9 @@ declare module Uz {
         static getProperties(): any[];
         static registProperty(value: any): void;
         static getJSONInfo(control): {};
+        static getJSONInfoAll(control): {};
+        private static DefaultControlList;
+        private static createDefaultControl(control);
         static initHelpButton(state: boolean): void;
         static moveHelpIcon(): void;
         static removeHelpIcon(): void;
@@ -130,13 +142,18 @@ declare module Uz {
         static getHelpRelationControl(): any[];
         static getHelpRelationControlMain(selector): any[];
         static getHelpRelationControlOnDisplay(): any[];
+        static beforeCapture(): void;
+        private static drawMaskEntryPoint();
+        private static drawMask(selector);
+        static afterCapture(): void;
         static getTextBoxTypeEditableProperty(value: string, enabled?: boolean): {};
         static getSelectTypeEditableProperty(selectedValue: string, eNum: any, enabled?: boolean): {};
+        static getSelectTypeEditablePropertyForSelectNum(selectedValue: string, eNum: any, enabled?: boolean): {};
         static getSelectTypeEditablePropertyForDynamicData(selectedValue: string, data: string[], enabled?: boolean): {};
         static getComboboxTypeEditableProperty(selectedValue: string, eNum: any, enabled?: boolean): {};
         static getCheckBoxTypeEditableProperty(value: boolean, enabled?: boolean): {};
         static getButtonTypeEditableProperty(buttonText: string, callBackFunction: Function): {};
-        static getGridTypeEditableProperty(columnInfos: any[], rowData: any[], enabled?: boolean): {};
+        static getGridTypeEditableProperty(columnInfos: any[], rowData: any[], enabled?: boolean, validation?: Function, customFunc?: Function, canAddDelete?: boolean): {};
         static getPropertyColumnInfo(name: string, editType: PropertyEditType, editOptions?: any, width?: number, editable?: boolean, frozen?: boolean, defaultVal?: any): {};
         private static getDefaultValString(editType, editOptions, defaultVal);
         static getUniqueId(): string;
@@ -144,16 +161,19 @@ declare module Uz {
         static removeControlAll(jsControl: Uz._JSControl): void;
         static getJSControlParent(ancestorControl: Uz._JSControl, fieldName: string): Uz._JSControl;
         static getJSControl(fieldName: string): Uz._JSControl;
+        private static searchLazyLoadingJSControl(targetFieldName, lazyLoadingControls);
+        private static getJSControlElementFromDistal(splitedFieldName, searchFieldName, distalCounter);
         static setJSControl(element: Element, jsControl: Uz._JSControl): void;
         static removeLinkedData(element: Element): void;
-        static getJSControlForType(ancestorControl: Uz._JSControl, controlType: string): Uz._JSControl[];
+        static getJSControlForType(ancestorControl: Uz._JSControl, controlType: string, searchInCommon?: boolean): Uz._JSControl[];
         static getTargetControlItemsIndex(parentControl: Uz._JSControl, targetControlFieldName: string);
         static getCompositeRoot(control: Uz._JSControl): Uz._JSControl;
+        static getCompositeRootExcludeArgumentControl(control: Uz._JSControl): Uz._JSControl;
         static isPropertyPublishing(compositeControl: any, controlName: string, propertyName: string): boolean;
         static getDomIdFromCompositeFieldName(rootControl: any, fieldName: string): string;
-        private static appendCompositeDomID(currentControl, fieldName, domId);
         static getCompositeFieldNameFromDomId(domId: string): string;
-        private static searchFieldNameFromDomId(currentLayout, parentId, searchFileName);
+        static setFocus(setFocusId: string): void;
+        static forEachItemsRecursively(control: Uz._JSControl, iterator: Function, applyBefore?: boolean): void;
     }
 }
 declare module Uz {
@@ -165,6 +185,7 @@ declare module Uz {
         MinNumber,
         Regex,
         Overlap,
+        Custom,
     }
     class ValidationTextBoxInDesign {
         public validateTextBox(propertyName: string, propertyValue: string, rule: any, JSONTextArea: string, changedJSON: boolean, propertyValueOnJson: string): string[];
@@ -175,6 +196,7 @@ declare module Uz {
         private createMinNumberErrorMessage(rule, propertyName, propertyValue);
         private createRegexErrorMessage(rule, propertyName, propertyValue);
         private createOverlapErrorMessage(rule, propertyName, propertyValue, JSONTextArea, changedJSON, propertyValueOnJson);
+        private createCustomErrorMessage(rule, propertyName, propertyValue);
         private pushErrorMessage(errorMessage, errorMessageArray);
     }
 }
@@ -184,10 +206,15 @@ declare module Uz {
         registProperty(): void;
     }
     class _JSControl implements _IJSControlsInDesign {
+        private _isInit;
         private _fieldName;
         private _items;
         private _controlType;
         private _rules;
+        private _saveDesignItem;
+        private _designObj;
+        public designObj : any;
+        public isInit : boolean;
         public fieldName : string;
         public fieldNameChanged(beforeFieldName, newFieldName): void;
         public items : _JSControl[];
@@ -195,11 +222,24 @@ declare module Uz {
         public rules : Object;
         constructor();
         public getJQueryElement(isCoreElement?: boolean): JQuery;
+        public getJQueryRangeElement(val: string): JQuery;
+        public getJQueryFieldNameAddElement(val: string): JQuery;
+        public getFromAreaID(): string;
+        public getToAreaID(): string;
+        public getFieldNameAddID(val: string): string;
         public registProperty(): void;
         public getEditablePropertyInfo(): any;
         public validateControl(): any;
         public afterPropertiesSet(): void;
         public resizeControl(): void;
+        public setProperty(properties, parentCommonChildDivFieldName?: string): void;
+        public setPropertyItem(property: string, data): void;
+        public initRuntime($element: JQuery): void;
+        public initRules(): void;
+        public getProperty(): any;
+        public beforeSaveDesign(): any;
+        public afterSaveDesign(): void;
+        public saveDesignItem : any;
     }
 }
 declare module Uz {
@@ -231,7 +271,7 @@ declare module Uz {
         XL,
         Auto,
     }
-    enum SizeForPanel {
+    enum SizeForMargin {
         XS,
         S,
         M,
@@ -271,6 +311,41 @@ declare module Uz {
         G11,
         G12,
     }
+    enum SizeForSpaceHeight {
+        XS,
+        S,
+        M,
+        L,
+        XL,
+    }
+    enum SizeForSpaceWidth {
+        XS,
+        S,
+        M,
+        L,
+        XL,
+        Default,
+    }
+    enum SizeForTabContainer {
+        S,
+        M,
+        L,
+        G1,
+        G2,
+        G3,
+        G4,
+        G5,
+        G6,
+        G7,
+        G8,
+        G9,
+        G10,
+        G11,
+        G12,
+    }
+    enum SizeForTabContainerHeight {
+        Auto,
+    }
     enum Align {
         left,
         center,
@@ -305,6 +380,7 @@ declare module Uz {
         Off,
         Katakana,
         KatakanaHalf,
+        Number,
     }
     enum TextKind {
         "All",
@@ -312,6 +388,7 @@ declare module Uz {
         "英数字のみ",
         "カナすべて(全半角)",
         "半角カナ",
+        "数字のみ",
     }
     enum TimeKubun {
         "時",
@@ -319,6 +396,12 @@ declare module Uz {
         "時分秒",
     }
     enum DisplayFormat {
+        "24hh:mm",
+        "24hh時mm分",
+        "午前hh時mm分",
+        "AMhh:mm",
+    }
+    enum befoerDisplayFormat {
         "12hh:mm",
         "24hh:mm",
         "12hh時mm分",
@@ -343,6 +426,7 @@ declare module Uz {
         "平成YY年MM月DD日",
         "YYYY年M月D日",
         "YYYYMMDD",
+        "YYYY.MM.DD",
     }
     enum AuthorityMode {
         ALL_PERMISSION,
@@ -383,6 +467,7 @@ declare module Uz {
         Person_Jutogai,
         Person_Japanese,
         Person_Foreigner,
+        SuccessCompletion,
     }
     enum IconJapaneaseName {
         "インフォメーション",
@@ -404,6 +489,7 @@ declare module Uz {
         "住登外",
         "日本人",
         "外国人",
+        "緑レ点",
     }
     enum IconButton {
         NONE,
@@ -426,6 +512,7 @@ declare module Uz {
         Person_Jutogai,
         Person_Japanese,
         Person_Foreigner,
+        SuccessCompletion,
     }
     enum IconButtonJapaneaseName {
         "NONE",
@@ -448,6 +535,7 @@ declare module Uz {
         "住登外",
         "日本人",
         "外国人",
+        "緑レ点",
     }
     enum Appearance {
         Default,
@@ -464,6 +552,12 @@ declare module Uz {
         Enable,
         ReadOnly,
     }
+    enum FileListDisplayNumber {
+        Auto,
+        "1件",
+        "5件",
+        "10件",
+    }
 }
 declare module Uz {
     class GyomuJSHelper {
@@ -473,6 +567,7 @@ declare module Uz {
         static isDesignMode(): boolean;
         static getJSControl(fieldName: string): Uz._JSControl;
         static getCompositeChildControl(compositeControlFieldName: string, compositeControlName: string, childControlFieldName: string): Uz._JSControl;
+        static setPankuzuReadOnly(stateName: string, layoutName: string, subGyomuCode: string, isReadOnly: boolean): void;
     }
 }
 declare module Uz {
@@ -485,7 +580,6 @@ declare module Uz {
         private _accessKey;
         private _nextFocusFiledName;
         private _wrap;
-        private _dependencies;
         private _float;
         private _toolTip;
         private _authorityMode;
@@ -497,25 +591,27 @@ declare module Uz {
         private static DEFAULT_SELECTEDSOURCELISTSORTBUTTON_ID;
         private static DEFAULT_TABPANEL_ID;
         public _isDesignMode: boolean;
+        public nextFocusFiledName : string;
         public helpMessageID : string;
         public width : any;
+        public convertWidth(value): any;
         public changeWidth(): void;
         public changeWidthParameter(oldWidth, newWidth): void;
         public bindWidth(value): void;
         public visible : boolean;
         public displayNone : boolean;
         public changedDisplayNone(oldValue): void;
-        private addDisplayRelatedClass();
+        public addDisplayRelatedClass(): void;
         public disabled : boolean;
         public parentState : Uz.ParentState;
         public accessKey : string;
         public nextFocusFieldName : string;
         public wrap : boolean;
         public wrapChanged(beforeValue, afterValue): void;
-        public dependencies : Dependency[];
         public float : Uz.Float;
         public toolTip : string;
         public authorityMode : Uz.AuthorityMode;
+        public _onAuthoritySet(): void;
         public marginLeft : any;
         public marginRight : any;
         private checkValidMarginLeftRight();
@@ -526,7 +622,7 @@ declare module Uz {
         private changeFieldName(beforeFieldName, newFieldName);
         public selectControlID : string;
         public jpControlName : string;
-        constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc: Function);
+        constructor($parentElement?: JQuery, isDesignMode?: boolean, createDomElementFunc?: Function);
         public initToolTip(element: HTMLElement): void;
         public getJQueryElement(isCoreElement?: boolean): JQuery;
         public registProperty(): void;
@@ -535,9 +631,23 @@ declare module Uz {
         static createViewControl(controlType: Uz._ViewControlType, $parentElement: JQuery, isDesignMode: boolean): Uz._JSControl;
         private static isUzControl(controlTypeName);
         public moveNextField(element: HTMLElement): void;
-        private isNextField(element);
+        public setNextFocus(shiftKey: boolean): boolean;
+        public canAcceptFocus(): boolean;
+        public setFocus(shiftKey: boolean): boolean;
+        private getNextFocusFieldName();
+        private getPrevFocusFieldName();
+        private findNextFocusFieldName(target);
+        public handlesDefaultNextFocus(shiftKey: boolean): boolean;
         public fireEvent(eventName: string, triggerControlInfo?: any): void;
+        private fireUploadEvent(eventName);
+        private static mergeLoadSequence(fireEventPanels, fireEventPanelsParent, loadSequencePanelNames, eventName, aliasEventName);
+        private static searchInLoadSequenceByFireEventPanelName(fireEventPanelNames, loadSequencePanelNames);
+        private static moveLoadSequencePanel(loadSequencePanelNames, fireEventPanelParentFieldName, foundIndex);
+        private static selectTargetLoadSequencePanelNamesIndex(loadSequencePanelNames, fireEventPanelParent, foundIndexes);
+        private getParentCommonChildDiv(target);
         private executeGyomuFunction(eventName);
+        private executeGridActionFunction(actionName);
+        private static raiseCallBackIfNoEventFired(triggerControlInfo, fireEventPanels);
         public getRequestUrl(eventName: string): string;
         public bindData(data: any): void;
         public receivedResponse(triggerControlInfo: any): void;
@@ -550,12 +660,29 @@ declare module Uz {
         public changeStateOfControl(): void;
         public hasDisabled(): boolean;
         public changeTabIndex(): void;
+        public initRuntime($element: JQuery): void;
+        public createDomElement($parentElement: JQuery, isDesignMode: boolean): HTMLElement;
+        public createDOMElement($parentElement: JQuery, isDesignMode: boolean): HTMLElement;
+        public initDesign($parentElement: JQuery): void;
+        public getProperty(): any;
+        public getElementForFocus(): JQuery;
+    }
+    class PanelWithEventName {
+        private _panel;
+        private _eventName;
+        constructor(_panel: Uz._IStateChangable, _eventName);
+        public panel : Uz._IStateChangable;
+        public eventName : any;
     }
     class Dependency {
         public dependTo: string;
         public dependValue: string;
         public expression: Uz.Expression;
         public myCondition: Uz.Constraint;
+    }
+    class TriggerControlInfo {
+        public fieldName: string;
+        public fireEventPropertyName: string;
     }
 }
 declare module Uz {
@@ -592,10 +719,10 @@ declare module Uz {
 }
 declare module Uz {
     class _Panel extends Uz._ViewControl implements Uz._IStateChangable {
-        private static DEFAULT_BODYAREA_ID;
-        private static DEFAULT_HEADERAREA_ID;
-        private _panelBodyDom;
-        private _panelHeaderDom;
+        static DEFAULT_BODYAREA_ID: string;
+        static DEFAULT_HEADERAREA_ID: string;
+        public _panelBodyDom: HTMLElement;
+        public _panelHeaderDom: HTMLElement;
         private _title;
         private _isOpen;
         private _canOpenAndClose;
@@ -618,6 +745,7 @@ declare module Uz {
         private _height;
         private _focusPositionID;
         private _canPost;
+        private _decorationClass;
         private _closingNow;
         public isFirstLoadFinished : boolean;
         public title : string;
@@ -625,7 +753,7 @@ declare module Uz {
         public canOpenAndClose : boolean;
         private keepHeaderWidth(beforeWidth);
         private changePanelHeaderIcon();
-        private changePanelBodyVisible();
+        public changePanelBodyVisible(): void;
         private changePanelHeaderBorderRadius();
         private changePanelHeaderIconVisible();
         public postParameterPanelNames : Object[];
@@ -650,113 +778,38 @@ declare module Uz {
         public isGroupBox : boolean;
         public focusPositionID : any;
         public canPost : boolean;
+        public decorationClass : string;
         public fieldNameChanged(beforeFieldName, newFieldName): void;
         constructor($parentElement: JQuery, isDesignMode: boolean);
         public changeWidth(): void;
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
-        public getEditablePropertyInfo(): any;
         public createCheckBoxTypeDisabledProperty(editablePropertyInfo: any, keyName: string, value: boolean, enabled?: boolean);
         public afterPropertiesSet(): void;
-        private childDivAutoMakeSelect();
-        private childDivAutoMakeSelectElement(fieldName);
         public showLoading(): void;
         public hideLoading(): void;
+        public childInChildDivOnLoad(): void;
         public setFocusForPanel(focusId: string): void;
         public bindData(data: any): void;
+        public setPropertyItemForHiddenInput(data): void;
         private getPanelBodyAreaID();
         private getPanelHeaderAreaID();
         public resetChildControl(): void;
         public layoutedChildControl(): void;
         private panelSetMinWidth(bodyAreaID);
         public changeStateOfControl(): void;
+        public changeStateOfControlPanel(): void;
         public setDisabledWidthAuto(isDisabled: boolean): void;
         private isSizeEnum(width);
-        private getSizeEnumToGridSizeEnum(width);
+        public getSizeEnumToGridSizeEnum(width: any): any;
+        public _onAuthoritySet(): void;
+        private initPanelOpener($element);
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement: JQuery): HTMLDivElement;
+        public isSelectedInDesignPanel(): void;
     }
     class RequestSettings {
         public eventName: string;
         public requestUrl: string;
-    }
-}
-declare module Uz {
-    interface _IPostable {
-        url: string;
-        targetPostParamFieldNames: string[];
-        relation: string[];
-    }
-}
-declare module Uz {
-    class _Button extends Uz._ViewControl {
-        private static DEFAULT_IMG_TEMP_ID;
-        private static DEFAULT_BTN_TEMP_ID;
-        private static DEFAULT_ICON_HEADER;
-        private static DEFAULT_ICON_TRALER_PNG;
-        private static DEFAULT_ICON_TRALER_GIF;
-        private static HEIGTH_MATCHES_TEXTBOX;
-        private static WIDTH_MATCHES_TEXTBOX;
-        private _text;
-        private _appearance;
-        private _imageFileUrl;
-        private _onClick;
-        private _imageWidth;
-        private _imageHeight;
-        private _icon;
-        private _iconFileUrl;
-        private _iconDirs;
-        private _heightTextBoxMatches;
-        private _onBeforeClick;
-        private _onAfterClick;
-        public onClick : string;
-        public onBeforeClick : string;
-        public onAfterClick : string;
-        public text : string;
-        public appearance : Uz.Appearance;
-        public imageFileUrl : string;
-        public imageHeight : any;
-        public imageWidth : any;
-        public icon : any;
-        public heightTextBoxMatches : boolean;
-        private setHeightTextBoxMatchesForButton();
-        private setHeightTextBoxMatchesForImage(isChange);
-        public setMargin(): void;
-        public setWidth(): void;
-        public changeWidth(): void;
-        constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc?: Function);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLButtonElement;
-        public recreateDomElement(isImage: boolean): void;
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
-        public receivedResponse(triggerControlInfo: any): void;
-        private checkValidateInputError();
-        private checkValidateServerError();
-        private onClickRequest();
-        public changeStateOfControl(): void;
-        public reSizeHeightImage(isHeightValue: boolean): void;
-        public reSizeWidthImage(isWidthValue: boolean): void;
-        private setDisabledImageProperty(isDisabled);
-        private setDisabledImageHeightAndWidth(isDisabled);
-        private setDisabledTextProperty(isDisabled);
-    }
-}
-declare module Uz {
-    class _ButtonSubmit extends Uz._Button {
-        private _postParameterPanelNames;
-        private _validateUrl;
-        private _submitUrl;
-        private _onAfterRequest;
-        public postParameterPanelNames : Object[];
-        public validateUrl : string;
-        public submitUrl : string;
-        public onAfterRequest : string;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLButtonElement;
-        public recreateDomElement(isImage: boolean): void;
-        public getEditablePropertyInfo(): any;
-        private submitRequest();
-        public bindData(data: any): void;
     }
 }
 declare module Uz {
@@ -778,11 +831,13 @@ declare module Uz {
         public onBeforeClick : string;
         public postParameterPanelNames : Object[];
         constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc?: Function);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLButtonElement;
         public recreateDomElement(isImage: boolean): void;
-        public getEditablePropertyInfo(): any;
         public bindData(data: any): void;
+        public initRuntime($element: JQuery): void;
+        public clickButtonHandler(): void;
+        public startDownload(postParameter: any): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement): HTMLButtonElement;
     }
 }
 declare module Uz {
@@ -810,9 +865,6 @@ declare module Uz {
         public progressVisible : boolean;
         public printButtonVisible : boolean;
         constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc?: Function);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode: boolean): any;
-        public getEditablePropertyInfo(): any;
         public bindData(data: any): void;
         public createQueryStrings(type: number, subGyomuCode: string, reportId: string, reportIndex: number): string;
         public createPrintButtonVisibleQueryStrings(): string;
@@ -821,6 +873,9 @@ declare module Uz {
         public createOptions(width: number, height: number, resizable: string, scroll: string): string;
         public concatArrays(options: string[]): string;
         public getPrintType(): any;
+        static getPostParamter(postParameterPanelNames: any[]): any[];
+        public initRuntime($element: JQuery): void;
+        public createDOMElement($parentElement, isDesignMode: boolean): HTMLButtonElement;
     }
     enum _PrintType {
         DIRECT,
@@ -828,6 +883,16 @@ declare module Uz {
         PRINT_SETTING,
         PRINT,
         HIDE_VIEW_XBAP_CALLING,
+    }
+    class _ReportPublishResponseUserData {
+        public data: _ReportSourceData[];
+    }
+    class _ReportSourceData {
+        public subGyomuCode: string;
+        public reportId: string;
+        public reportIndex: {
+            reportIndex: string;
+        };
     }
 }
 declare module Uz {
@@ -838,20 +903,19 @@ declare module Uz {
         public sourceCreateUrl : string;
         public afterPrintUrl : string;
         constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc?: Function);
-        public createDomElement($parentElement, isDesignMode: boolean): any;
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
         private onClick_btnReportPublish();
         private validateCallBack(response);
         private validateFailedCallBack(response);
-        private publishCallBack(response);
-        private showDialogMultiple(sourceDataInfoList);
-        private validSourceDataInfo(sourceDataInfoList);
+        public publishCallBack(response: any): void;
+        private showDialogMultiple(sourceDataList);
+        private validSourceDataInfo(sourceData);
         private publishFailedCallBack(response);
         private doAfterPrintCallBack(response);
         private doAfterPrintFailedCallBack(response);
         private showDialog(sourceDataInfoList);
         public getPrintType(): number;
+        public initRuntime($element: JQuery): void;
+        public createDOMElement($parentElement): HTMLButtonElement;
     }
 }
 declare module Uz {
@@ -864,14 +928,79 @@ declare module Uz {
         public reportId : string;
         public printerNameCallBack : (value: string) => void;
         constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc?: Function);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode: boolean): any;
-        public getEditablePropertyInfo(): any;
         private onClick_btnPrinter();
         private validateCallBack(response);
         private validateFailedCallBack(response);
         private showDialog(subGyomuCode, reportId);
         public getPrintType(): number;
+        public initRuntime($element: JQuery): void;
+        public createDOMElement($parentElement, isDesignMode: boolean): HTMLButtonElement;
+    }
+}
+declare module Uz {
+    interface _IPostable {
+        url: string;
+        targetPostParamFieldNames: string[];
+        relation: string[];
+    }
+}
+declare module Uz {
+    class _Button extends Uz._ViewControl {
+        private static DEFAULT_IMG_TEMP_ID;
+        private static DEFAULT_BTN_TEMP_ID;
+        private static DEFAULT_ICON_HEADER;
+        private static DEFAULT_ICON_TRALER_PNG;
+        private static DEFAULT_ICON_TRALER_GIF;
+        private static HEIGTH_MATCHES_TEXTBOX;
+        private static WIDTH_MATCHES_TEXTBOX;
+        private static DEFAULT_ICONSPAN_PADDING;
+        private _text;
+        private _appearance;
+        private _imageFileUrl;
+        private _onClick;
+        private _imageWidth;
+        private _imageHeight;
+        private _icon;
+        private _iconFileUrl;
+        private _iconDirs;
+        private _heightTextBoxMatches;
+        private _onBeforeClick;
+        private _onAfterClick;
+        public onClick : string;
+        public onBeforeClick : string;
+        public onAfterClick : string;
+        public text : string;
+        public changeText(): void;
+        public appearance : Uz.Appearance;
+        public imageFileUrl : string;
+        public imageHeight : any;
+        public imageWidth : any;
+        public icon : any;
+        private iconSpanWidth(status);
+        public heightTextBoxMatches : boolean;
+        private setHeightTextBoxMatchesForButton();
+        private setHeightTextBoxMatchesForImage(isChange);
+        public setMargin(): void;
+        public setWidth(): void;
+        public changeWidth(): void;
+        constructor($parentElement?: JQuery, isDesignMode?: boolean, createDomElementFunc?: Function);
+        public recreateDomElement(isImage: boolean): void;
+        public bindData(data: any): void;
+        public receivedResponse(triggerControlInfo: Uz.TriggerControlInfo): void;
+        private checkValidateInputError();
+        private checkValidateServerError();
+        private isDialogCancelButton();
+        public clickRequest(): void;
+        public changeStateOfControl(): void;
+        public reSizeHeightImage(isHeightValue: boolean): void;
+        public reSizeWidthImage(isWidthValue: boolean): void;
+        private setDisabledImageProperty(isDisabled);
+        private setDisabledImageHeightAndWidth(isDisabled);
+        private setDisabledTextProperty(isDisabled);
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public applyCommonButtonData(properties: any): void;
+        public createDOMElement($parentElement): HTMLButtonElement;
     }
 }
 declare module Uz {
@@ -880,52 +1009,48 @@ declare module Uz {
         private _dataPassing;
         private _visibleCloseButton;
         private _onOkClose;
+        private _onCancelClose;
         private _onBeforeOpenDialog;
         public displayChildDivName : string;
         public dataPassing : Object[];
         public visibleCloseButton : boolean;
         public onOkClose : string;
         public onBeforeOpenDialog : string;
-        constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc?: Function);
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
+        public onCancelClose : string;
+        constructor($parentElement?: JQuery, isDesignMode?: boolean, createDomElementFunc?: Function);
         public createDomElement($parentElement, isDesignMode: boolean): HTMLButtonElement;
         public bindData(data: any): void;
         public waitLoadingForButtonDialog(thisInstance): void;
         public recreateDomElement(isImage: boolean): void;
+        public bindRuntimeForButtonDialog(): void;
+        public initRuntime($element: JQuery): void;
+        public createDOMElement($parentElement): HTMLButtonElement;
     }
 }
 declare module Uz {
     class _ButtonPrinterList extends Uz._ButtonDialog {
         private static PRINTER_LIST_DIV_NAME;
-        private static PRINTER_LIST_DIV_REQUEST_NAME_GETREPORTLIST;
-        private static PRINTERLISTDIV_EVENT_ONLOADLIST;
-        private static PRINTERLISTDIV_POSTPARAMETERPANELNAMES;
-        private static PRINTERLISTDIV_REQUESTSETTINGS;
+        private static PRINTERLISTDIV_EVENT_DATAPASSINGCOMPLETE;
         private _getReportListUrl;
         private _postParameterPanelNames;
         public getReportListUrl : string;
         public postParameterPanelNames : Object[];
-        constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc?: Function);
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLButtonElement;
+        constructor($parentElement?: JQuery, isDesignMode?: boolean, createDomElementFunc?: Function);
         public recreateDomElement(isImage: boolean): void;
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
         public bindData(data: any): void;
         private bindClickEvent();
         private onClick_buttonPrinterList(data);
         private onClick_PrinterListButton();
         private openPrinterListCommonChildDiv(closeFunction);
+        private waitDialogOpen(data, closeFunction);
         private executeAfterPrinterListDivClose(closeFunction);
         private validateResponceData(response);
         private setPrinterListDivParameter(response);
-        private setHiddenValueForPrinterListDiv(fieldName, value);
-        private setOriginalPropertyForPrinterListDiv(propertyName, value);
         private fireEventLoadPrinterList();
-        private getPrinterListDivDomId();
-        private getDialogDomId(businessId, controlName);
-        private getDialogBusinessId(displayChildDivName);
-        private getDialogControlName(displayChildDivName);
+        private getPrinterSettingList();
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement): HTMLButtonElement;
     }
 }
 declare module Uz {
@@ -938,20 +1063,19 @@ declare module Uz {
         public sourceCreateUrl : string;
         public afterPrintUrl : string;
         constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc?: Function);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode: boolean): any;
-        public getEditablePropertyInfo(): any;
         private onClick_btnPrint();
         private validateCallBack(response);
         private validateFailedCallBack(response);
         private publishCallBack(response);
-        private showDialogMultiple(sourceDataInfoList);
-        private validSourceDataInfo(sourceDataInfoList);
+        private showDialogMultiple(sourceDataList);
+        private validSourceDataInfo(sourceData);
         private publishFailedCallBack(response);
         private doAfterPrintCallBack(response);
         private doAfterPrintFailedCallBack(response);
         private showDialog(sourceDataInfoList);
         public getPrintType(): number;
+        public initRuntime($element: JQuery): void;
+        public createDOMElement($parentElement, isDesignMode: boolean): HTMLButtonElement;
     }
 }
 declare module Uz {
@@ -972,34 +1096,189 @@ declare module Uz {
         constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc?: Function);
         private isNumber(value);
         private toInt(value);
-        public createDomElement($parentElement, isDesignMode: boolean): any;
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
         private createPreviewOptions(top, left, width, height, resizable, scroll);
         private onClick_btnPreview();
         private validateCallBack(response);
         private validateFailedCallBack(response);
         private publishCallBack(response);
         private showDialogMultiple(sourceDataInfoList);
-        private validSourceDataInfo(sourceDataInfoList);
+        private validSourceDataInfo(sourceData);
         private publishFailedCallBack(response);
         private doAfterPrintCallBack(response);
         private doAfterPrintFailedCallBack(response);
         private showDialog(sourceDataInfoList, top, left, width, height);
         public getPrintType(): number;
+        public initRuntime($element: JQuery): void;
+        public createDOMElement($parentElement, isDesignMode: boolean): HTMLButtonElement;
     }
 }
 declare module Uz {
-    class _CommonButtonSubmitForDemo extends Uz._ButtonSubmit {
-        private _prefixText;
-        private _suffixText;
-        public prefixText : string;
-        public suffixText : string;
+    class _ButtonBatchRegister extends Uz._ButtonDialog {
+        private static REGISTER_DIV_NAME;
+        private static GET_BATCH_INFO_URL;
+        private static OK_CLOSE_EVENT_NAME;
+        private _batchId;
+        private _subGyomuCode;
+        private _batchName;
+        private _repeatable;
+        private _confirmMessage;
+        private _onSetBatchParameterURL;
+        private _postParameterPanelNames;
+        private _isProcessing;
+        private _registerConfirmObject;
+        private _batchParameter;
+        public batchId : string;
+        public subGyomuCode : string;
+        public repeatable : boolean;
+        public isProcessing : boolean;
+        public onSetBatchParameterURL : string;
+        public postParameterPanelNames : Object[];
+        constructor($parentElement?: JQuery, isDesignMode?: boolean);
+        public waitLoadingForButtonDialog(thisInstance): void;
         public recreateDomElement(isImage: boolean): void;
-        public changeWidthParameter(oldWidth, newWidth): void;
-        public registProperty(): void;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public getEditablePropertyInfo(): any;
+        public bindData(data: any): void;
+        private getBatchParameter();
+        private getBatchInformation(batchParameter);
+        private waitOpenDialog(thisInstance);
+        private createPostData(batchId, subGyomuCode);
+        private setPassingData(data, batchParameter);
+        private getChildDivElement(childDiv, type, id);
+        private createSpanElement(text);
+        public initRuntime($element: JQuery): void;
+        public bindRuntimeForButtonDialog(): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement): HTMLButtonElement;
+    }
+}
+declare module Uz {
+    class CommonChildDiv extends Uz._ViewControl {
+        private _layout;
+        private _businessId;
+        private _controlName;
+        private _isCommonChildDivEditMode;
+        private _originalProperty;
+        private _marginTop;
+        private _marginBottom;
+        private _canTransferEvent;
+        private _isAfterOriginalPropertiesSet;
+        private _dataPassingForDialog;
+        private _dialogOkEventNameForDialog;
+        private _dialogCancelEventNameForDialog;
+        private _heightForDialog;
+        private _firstFocusFieldName;
+        private _lastFocusFieldName;
+        private _packageName;
+        private _publicEvents;
+        private _publicEventsAlias;
+        private _initPublicPropertyFunctions;
+        private _parentButtonDialog;
+        private _modes;
+        public layout : any;
+        public businessId : string;
+        public controlName : string;
+        public changeControlName(value): void;
+        public isCommonChildDivEditMode : boolean;
+        public originalProperty : Object[];
+        public marginTop : any;
+        public marginBottom : any;
+        public dataPassingForDialog : Object[];
+        public dialogOkEventNameForDialog : string;
+        public dialogCancelEventNameForDialog : string;
+        public canTransferEvent : boolean;
+        public heightForDialog : string;
+        public firstFocusFieldName : string;
+        public lastFocusFieldName : string;
+        public modes : Object[];
+        private static existsModeController(businessId, controlName);
+        private applyMode(modes, modesBeforeChange);
+        private applyModeByPriority(modes, priorities, modesBeforeChange);
+        private static hasModeChanged(modesBeforeChange, modeKey, modeValue);
+        public packageName : string;
+        public publicEvents : Object[];
+        public publicEventsAlias : Object[];
+        public initPublicPropertyFunctions : Object[];
+        private static defaultLayout;
+        constructor($parentElement: JQuery, isDesignMode: boolean, staticLayout: any, fieldName: string);
+        public afterPropertiesSet(): void;
+        public fieldNameChanged(beforeFieldName, newFieldName): void;
+        public renderCompleted(): void;
+        private static getCommonChildDivFieldName($parentElement, fieldName);
+        private initLayout(staticLayout);
+        public setProperty(properties, parentCommonChildDivFieldName?: string): void;
+        public raisePropertyChanged(layout): void;
+        private copyPropertyFromLayout();
+        private initChildControls($childDivParentElement, childDivFieldName);
+        private changeChildControlsFieldNames(parentLayout, beforeFieldName, newFieldName);
+        private static addFieldNameForCommonChildDivChildren(parentFieldName, childControl);
+        static createCommonChildDiv(childdivFieldName: string, businessId: string, controlName: string, $parentElement: JQuery, isDesignMode: boolean, isCommonChildDivEditMode: boolean): Uz._JSControl;
+        private setElementId();
+        public bindData(data: any): void;
+        public initDefaultOriginalProperty(basePanelName: string): void;
+        public fireCloseEventForDialog(eventName: string): void;
+        public setParentButtonDialog(control: any): void;
+        public getParentButtonDialog();
+        private waitLoadingForDialog(thisInstance);
+        public changedDisabled(): void;
+        public changedParentState(): void;
+        public changedDisplayNone(oldValue): void;
+        public handlesDefaultNextFocus(shiftKey: boolean): boolean;
+        public setFocus(shiftKey: boolean): boolean;
+        private getChildElementDOMIDFromFieldName(fieldName);
+        public initRuntime($element: JQuery): void;
+        public initPublicProperty(): void;
+        public getProperty(): any;
+        public getPostParameter(): any;
+        public createDOMElement($parentElement): HTMLDivElement;
+    }
+}
+declare module Uz {
+    class _BatchUtil {
+        static getCommonChildDiv(divName: string): Uz.CommonChildDiv;
+        static getCommonChildDivPanel(divName: string): Uz._Panel;
+        private static getDialogDomId(businessId, controlName);
+        private static getDialogPanelDomId(businessId, controlName);
+        private static getDialogBusinessId(displayChildDivName);
+        private static getDialogControlName(displayChildDivName);
+        static setHiddenValue(targetPanel: Uz._Panel, propertyName: string, value: string): void;
+        static getHiddenValue(targetPanel: Uz._Panel, propertyName: string): string;
+    }
+}
+declare module Uz {
+    class _ButtonBatchReserve extends Uz._ButtonDialog {
+        private static RESERVE_DIV_NAME;
+        private static GET_BATCH_INFO_URL;
+        private static OK_CLOSE_EVENT_NAME;
+        private _batchId;
+        private _subGyomuCode;
+        private _onSetBatchParameterURL;
+        private _postParameterPanelNames;
+        private _isProcessing;
+        private _registerConfirmObject;
+        private _batchParameter;
+        public batchId : string;
+        public subGyomuCode : string;
+        public isProcessing : boolean;
+        public onSetBatchParameterURL : string;
+        public postParameterPanelNames : Object[];
+        constructor($parentElement?: JQuery, isDesignMode?: boolean);
+        public waitLoadingForButtonDialog(thisInstance): void;
+        private getBatchParameter();
+        private getBatchInformation(batchParameter);
+        private waitOpenDialog(thisInstance);
+        private createPostData(batchId, subGyomuCode);
+        public recreateDomElement(isImage: boolean): void;
+        public bindData(data: any): void;
+        private setPassingData(data, batchParameter);
+        private createItemString(data);
+        private getDateTimeString(dateTime);
+        private getChildDivElement(type, id);
+        private getDialogDomId(businessId, controlName);
+        private getDialogBusinessId(displayChildDivName);
+        private getDialogControlName(displayChildDivName);
+        public initRuntime($element: JQuery): void;
+        public bindRuntimeForButtonDialog(): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement): HTMLButtonElement;
     }
 }
 declare module Uz {
@@ -1009,58 +1288,213 @@ declare module Uz {
         private static DEFAULT_DROPAREA_ID;
         private static DEFAULT_UPLOADEFILETABLE_ID;
         private static DEFAULT_UPLOADBUTTON_ID;
+        private static DEFAULT_COUNTDISPLAYAREA_ID;
+        private static DEFAULT_SCROLLAREA_ID;
+        private static DEFAULT_SIMPLESELECTFILEAREA_ID;
+        private static UPLOADEFILETABLE_ROW_HEIGHT;
+        private static UPLOADEFILETABLE_BORDER_HEIGHT;
         private static ANIMATION_SPEED;
         private _multiSelect;
         private _extension;
         private _url;
+        private _fileListDisplayNumber;
+        private _isSimpleMode;
         private _uploadFiles;
-        private _selectButton;
-        private _hideFile;
-        private _dropArea;
-        private _uploadFileTable;
-        private _uploadButton;
+        private _uploadEventName;
+        private _onAfterUploaded;
         private _postParameterPanelNames;
         public multiSelect : boolean;
         public extension : string;
+        private createAddDotExtension();
         public url : string;
         public uploadFiles : File[];
-        private selectButton;
-        private hideFile;
-        private dropArea;
-        private uploadFileTable;
-        private uploadButton;
+        public fileListDisplayNumber : string;
+        public isSimpleMode : boolean;
         public postParameterPanelNames : Object[];
+        public uploadEventName : string;
+        public onAfterUploaded : string;
         public fieldNameChanged(beforeFieldName, newFieldName): void;
+        public getHideFileElement(): JQuery;
+        public getSelectButtonElement(): JQuery;
+        public getDropAreaElement(): JQuery;
+        public getUploadFileTableElement(): JQuery;
+        public getScrollAreaElement(): JQuery;
+        public getCountDisplayAreaElement(): JQuery;
+        public getSimpleSelectFileListAreaElement(): JQuery;
         constructor($parentElement: JQuery, isDesignMode: boolean);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLDivElement;
         private createOuterDiv();
         private createButton(elementName, id, text);
         private createHideFile();
         private createDropArea();
-        private createTable(isDesignMode);
+        private createTable();
+        private createCountDisplayArea();
+        private createSimpleSelectFileArea();
         private bindEvent();
         private openExplorer();
-        private addUpdateFilesTo(selectFiles);
-        private canUploadFile(selectFile);
-        private serchSameFileIndex(selectFileName);
+        private addUploadFiles(selectFiles);
+        private addUploadFilesForSimpleMode(selectFile);
+        private canUploadFile(selectFile, errorFileName);
+        private createErrorMessage(errorFileName);
         private addRowtoUploadFileTable(addTargetFileNames);
-        private appendRow(table, fileName, fieldName);
+        public appendRow(table: JQuery, fileName: string, fieldName: string): void;
         private bindDeleteEvent();
-        private fileUpload();
-        public getEditablePropertyInfo(): any;
+        public fileUpload(): void;
         public bindData(data: any): void;
         public changeStateOfControl(): void;
+        private refreshCountDisplayArea();
+        private showDialogMessage(message, width);
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public getElementForFocus(): JQuery;
+        public createDOMElement($parentElement): HTMLDivElement;
+        private recreateDOMElement();
+        private recreateSimpleDOMElement();
+        public setDefaultData(thisControl: any): void;
+    }
+}
+declare module Uz {
+    class _ListControl extends Uz._ViewControl {
+        static DEFAULT_CORE_ID: string;
+        static DEFAULT_LABELL_ID: string;
+        private _dataSource;
+        private _disabledItem;
+        private _selectedItem;
+        private _onChange;
+        private _readOnly;
+        private _required;
+        private _labelLText;
+        private _labelLWidth;
+        private _labelLAlign;
+        public dataSource : ListControlDataPair[];
+        public updateUIforDataSource(): void;
+        public changeSelectedItem(dataSource: ListControlDataPair[]): void;
+        public onChange : string;
+        public disabledItem : ListControlDataPair[];
+        public selectedItem : string;
+        public _getSelectedItemCore(): ListControlDataPair;
+        private __selectedItemForBeforeBindingDataSource;
+        private existDataSource(value);
+        public listDisabledItem(): void;
+        public updateUIForSelectedItem(value: string): void;
+        public readOnly : boolean;
+        public changedReadOnly(): void;
+        public required : boolean;
+        public labelLText : string;
+        public updateLabelLText(value: string): void;
+        public createLabelElement(className: string): HTMLElement;
+        public labelLWidth : any;
+        public decideWidth(element: JQuery, beforeWidth, afterWidth): void;
+        public labelLAlign : Uz.Align;
+        public getCoreID(): string;
+        public getLabelLID(): string;
+        public getJQueryLabelLElement(): JQuery;
+        constructor($parentElement?: JQuery, isDesignMode?: boolean, createDomElementFunc?: Function);
+        public fieldNameChanged(beforeFieldName, newFieldName): void;
+        public getJQueryElement(isCoreElement?: boolean): JQuery;
+        public changeWidth(): void;
+        public createIDWithKey(key: string): string;
+        public getOutputParameter(): any;
+        public setOutputParameter(value: any): void;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+    }
+    class ListControlDataPair {
+        public key: string;
+        public value: string;
+        constructor(key: string, value: string);
+    }
+}
+declare module Uz {
+    class _ListControlUtil {
+        static createLabelFor(htmlElement, key): HTMLLabelElement;
+        static createIDForItemInDiv(divID: string, itemKey: string): string;
+        static createTextIcon($list: JQuery, textIcon: TextIcon[]): void;
+        static createIconColumnInfo(dataSource: Uz.ListControlDataPair[]): any[];
+        static textIconJapaneaseNameToEnglishName(textIcon: TextIcon[]): any;
+        private static iconJapaneaseNameToEnglishName(iconName);
+        private static getIconJapaneaseNameObject();
+    }
+    class TextIcon {
+        public key: string;
+        public icon: Uz.Icon;
+        constructor(key: string, icon: Uz.Icon);
+    }
+}
+declare module Uz {
+    class _RadioButton extends Uz._ListControl {
+        private _groupName;
+        private _onClick;
+        private _newLineItemNumber;
+        private _spaceSize;
+        private _icon;
+        public changedReadOnly(): void;
+        public groupName : string;
+        private updateUIForGroupName();
+        public onClick : string;
+        public newLineItemNumber : number;
+        public spaceSize : any;
+        private changeSpaceSize(before, after);
+        public icon : Uz.TextIcon[];
+        public fieldNameChanged(beforeFieldName, newFieldName): void;
+        private getGroupName();
+        constructor($parentElement?: JQuery, isDesignMode?: boolean);
+        public changeWidth(): void;
+        public updateUIForSelectedItem(selectedItem: string): void;
+        public updateUIforDataSource(): void;
+        public createRadioButtonEvent(): void;
+        public createRadioButton(): void;
+        public createRdaioButtonDom(key: string, value: string): HTMLInputElement;
+        private createButtonSpan(className);
+        public bindData(properties: any): void;
+        public validateControl(): any;
+        public validateRequired(): any;
+        public getJQueryElement(isCoreElement?: boolean): JQuery;
+        public changeStateOfControl(): void;
+        public changedDisabled(): void;
+        public resizeControl(): void;
+        public canAcceptFocus(): boolean;
+        public setFocus(shiftKey: boolean): boolean;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public getElementForFocus(): JQuery;
+        public createDOMElement($parentElement, isDesignMode: boolean): HTMLDivElement;
+    }
+}
+declare module Uz {
+    class _SegmentedControl extends Uz._RadioButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public changeWidth(): void;
+        public createRadioButtonEvent(): void;
+        public createRadioButton(): void;
+        private initializeSegmentedControl($element);
+        private segmentedControlWidth($element);
+        public changeSelectedItem(dataSource: Uz.ListControlDataPair[]): void;
+        public updateUIForSelectedItem(selectedItem: string): void;
+        public changeStateOfControl(): void;
+        public bindData(properties: any): void;
+        public initRuntime($element: JQuery): void;
+        public createDOMElement($parentElement, isDesignMode: boolean): HTMLDivElement;
     }
 }
 declare module Uz {
     class _DateControlUtil {
+        static CALENDAR_OPENER_ICON_URL: string;
+        static CALENDAR_OPENER_ICON_CLASS: string;
         private static FORMAT_BASE;
         private static DEFAULT_DISPLAY_FORMAT;
         private static DEFAULT_FORMAT_ERROR;
+        private static DATETIME_RANGE_FROM;
+        private static DATETIME_RANGE_TO;
         static initializeRegion(): void;
-        static datepickerForGrid(inputElement: JQuery, displayFormat: any, ymdKubun: any): void;
-        static monthpickerForGrid(inputElement: any, displayFormat: any, ymdKubun: any): void;
+        static initializeCalendarForGrid($inputElement: JQuery, cellDetails: {
+            ymdKubun: any;
+            displayFormat: any;
+            isShowCalendarOpenerIcon: any;
+        }): {
+            show(): void;
+        };
+        static datepickerForGrid(inputElement: JQuery, displayFormat: any, ymdKubun: any, isShowCalendarOpenerIcon: any): void;
+        static monthpickerForGrid(inputElement: any, displayFormat: any, ymdKubun: any, isShowCalendarOpenerIcon: any): void;
         static yearpickerForGrid(inputElement: any, displayFormat: any, ymdKubun: any): void;
         private static formatOnBlurForGrid(element, displayFormat, ymdKubun, flexibleStatus?);
         static onSelectForDate($element: JQuery, inst: any, displayFormat: any, ymdKubun: any);
@@ -1070,20 +1504,23 @@ declare module Uz {
         static getOrgTextForDate(targetObj: JQuery, displayFormat: any, ymdKubun: any): string;
         static getFormatText(targetText: string, displayFormat: any, ymdKubun: any, $element?: any, gridFormatter?: string): string;
         private static monthDateEndCheck(strYear, strMonth);
-        static displayFormatPropertyCheck(displayFormat: Uz.DisplayFormat, ymdKubun: Uz.YmdKubun): number;
+        static displayFormatPropertyCheck(displayFormat: any, ymdKubun: Uz.YmdKubun): number;
         static suggestYearList($element: JQuery, displayFormat, ymdKubun): any;
         private static format2digit(value);
         private static warekiGanNenConvert(strDate);
         static getDateInfoStruct(strDateValueTmp, flexibleStatus?: boolean, $element?: any): DateStruct;
         private static ymdCheckNot(ymd, flexibleStatus, $element);
         private static ymdCheckNotAll(a_strReturn, flexibleStatus, $element);
+        private static getEraCode(fieldSelector, value);
         private static warekiInputDataCheck(genYear);
+        private static seirekiInputDataCheck(year);
         private static convDateSeireki(targetDate, formatType, flexibleStatus?, $element?, gridFormatter?);
         private static displayFormatInputCheck(resultString);
         private static isYearRange(targetValue);
         private static formatDateSeireki(date, fmt, ymd);
         private static formatDateWareki(date, fmt, ymd, flexibleStatus?, $element?, gridFormatter?);
         private static getEraTable();
+        private static getDefaultEraTable();
         private static getEraFromDate(targetValue, flexibleStatus?, $element?, gridFormatter?);
         private static analyzeDateString(strDateValue, flexibleStatus?, $element?);
         private static getDateInfoFromWareki(eraType, strYM, flexibleStatus?);
@@ -1096,8 +1533,15 @@ declare module Uz {
         private static yearKeepWarekiSet(targetValue, $element?);
         private static yearKeepWarekiGet($element, val?);
         private static getDaysInMonthWareki(strGYYMM, flexibleStatus?);
-        private static convDateWareki(TargetDate, flexibleStatus?);
+        private static convDateWareki(TargetDate, flexibleStatus?, returnValue?);
         static ymdKubunChage($element: JQuery, ymdKubunAfter: any, ymdKubunBefore: any): void;
+        static resetDateFormat(inst: any, displayFormat, ymdKubun, $element: JQuery): any;
+        static validateRequired(element: JQuery, isFrom: boolean, validateParameter: any): any;
+        static validateTextKind(element: JQuery, validateParameter: DateValidateParameter): any;
+        private static getDefaultAllowEraCharactors(fieldSelector);
+        static validateInputDate(element: JQuery, validateParameter: any): any;
+        static validateDateRange(element: JQuery, isFrom: boolean, validateParameter: any): any;
+        static removeInitialCalenderIcon($icon: JQuery, ymdKubun: any): void;
     }
     class DateStruct {
         private _eraNumber;
@@ -1137,6 +1581,11 @@ declare module Uz {
         public fjryaku : string;
         constructor(fcode, fename, fjname, foffset, fdstart, fdend, fjryaku);
     }
+    class DateValidateParameter {
+        public jpControlName: string;
+        public displayFormat: Uz.DisplayDateFormat;
+        public permitCharactor: string;
+    }
 }
 declare module Uz {
     class _TextBoxDateRange extends Uz._ViewControl {
@@ -1148,6 +1597,8 @@ declare module Uz {
         private static DEFAULT_CORE_ID;
         private static DEFAULT_LABELL_ID;
         private static DEFAULT_LABELR_ID;
+        private static DEFAULT_FROM;
+        private static DEFAULT_TO;
         private _coreDom;
         private _labelLDom;
         private _labelRDom;
@@ -1184,8 +1635,12 @@ declare module Uz {
         private _labelRWidth;
         private _labelLAlign;
         private _labelRAlign;
+        private _decorationClass;
         private _defaultPermitCharactor;
         private _suggestSourceYear;
+        private _autoRangeTo;
+        private _isShowCalendarOpenerIcon;
+        public autoRangeTo : any;
         public suggestSourceYear : any;
         public isDesignModeLocal : boolean;
         public rangeWidth : string;
@@ -1194,7 +1649,7 @@ declare module Uz {
         public arrow : HTMLElement;
         public toDate : HTMLElement;
         public ymdKubun : Uz.YmdKubun;
-        public displayFormat : Uz.DisplayFormat;
+        public displayFormat : Uz.DisplayDateFormat;
         public minDate : string;
         public maxDate : string;
         public fromValue : string;
@@ -1226,44 +1681,47 @@ declare module Uz {
         public defaultPermitCharactor : string;
         public fromSelectControlID : string;
         public toSelectControlID : string;
+        public isShowCalendarOpenerIcon : boolean;
+        public changeIsShowCalendarOpenerIcon(): void;
+        private static createCalendarOpenerDOMElement();
         public fieldNameChanged(beforeFieldName, newFieldName): void;
         private getCoreID();
         private getLabelLID();
         private getLabelRID();
-        constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc: Function);
+        public decorationClass : string;
+        constructor($parentElement?: JQuery, isDesignMode?: boolean, createDomElementFunc?: Function);
         public formatValidation(): boolean;
         public changeFormat(): void;
-        public registProperty(): void;
         public changeWidthParameter(oldWidth, newWidth): void;
         public rangeChangeWidth(oldWidth, newWidth): void;
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
-        public createDomElementRange($parentElement): HTMLSpanElement;
-        public createFromToDateChange(): void;
-        private dateRangeTrigger(from, to);
+        public changedDisplayNone(oldValue): void;
+        private createDomElementRange($parentElement);
+        private createFromToDateChange();
+        private bindEvent();
+        private bindRangeEvent(selector, staus);
+        private copyAutoRangeTo($elementTo);
         public createFromToDate(element): HTMLInputElement;
         public createArrow(): HTMLSpanElement;
-        public getEditablePropertyInfo(): any;
         public getJQueryElement(isCoreElement?: boolean): JQuery;
         private getJQueryLabelLElement();
         private getJQueryLabelRElement();
         public minMaxDateProperty(minMaxDate): Date;
+        private initializeCalendar($element);
+        private showCalendar($element);
         public initializeDatepickerProperty(): void;
-        public initializeDatepicker(fromToStats): boolean;
+        public initializeDatepicker($element: JQuery): boolean;
         public initializeYearList($element, format, ymd, beforeValue): void;
-        public initializeMonthPicker(fromToStats): boolean;
+        public initializeMonthPicker($element: JQuery): boolean;
         public initializeMonthPickerSet($element): void;
         public initializeDatepickerSet(element, elementChg): void;
         public datepickerOnSelect(element): void;
-        public datepickerOnClose(element, beforeValue): void;
+        public datepickerOnClose(element: JQuery, beforeValue): void;
         public beforeShowMinMaxSet(element, elementChg, filedName, maxMin): void;
         public inputTextDateConvert(element): void;
-        public getDateRangeElement(val: string): JQuery;
+        private getDateRangeIdCheck(element, val);
         public bindData(data: any): void;
-        private getFromDateAreaID();
-        private getToDateAreaID();
         public validateControlDateRange(element: JQuery, isFrom: boolean): any;
         public validateRequired(element: JQuery, isFrom: boolean): any;
-        public validateTextKind(element: JQuery): any;
         public validateInputDate(element: JQuery): any;
         public validateDateRange(element: JQuery, isFrom: boolean): any;
         public getOutputParameter(): any;
@@ -1273,6 +1731,18 @@ declare module Uz {
         public changeStateOfControl(): void;
         public changeTabIndex(): void;
         public resizeControl(): void;
+        public canAcceptFocus(): boolean;
+        public handlesDefaultNextFocus(shiftKey: boolean): boolean;
+        public setFocus(shiftKey: boolean): boolean;
+        private addCssClass(cssClasName);
+        private removeCssClass(cssClasName);
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public getElementForFocus(): JQuery;
+        public createDOMElement($parentElement): HTMLDivElement;
+        private getFormatText(value);
+        public changedReadOnlyForRunTime(): void;
+        public getMaskControl(): any[];
     }
 }
 declare module Uz {
@@ -1284,8 +1754,6 @@ declare module Uz {
         private static DEFAULT_LABELL_ID;
         private static DEFAULT_LABELR_ID;
         private _coreDom;
-        private _labelLDom;
-        private _labelRDom;
         private _fromNum;
         private _arrow;
         private _toNum;
@@ -1319,12 +1787,15 @@ declare module Uz {
         private _labelLAlign;
         private _labelRAlign;
         private _permitCharactor;
+        private _decorationClass;
         private _maxValue;
         private _minValue;
         private _isCurrency;
         private _isComma;
         private _decimalPointLength;
         private _defaultPermitCharactor;
+        private _autoRangeTo;
+        public autoRangeTo : any;
         public isDesignModeLocal : boolean;
         public rangeWidth : string;
         public coreDom : HTMLElement;
@@ -1369,22 +1840,25 @@ declare module Uz {
         public isCurrency : boolean;
         public isComma : boolean;
         public decimalPointLength : number;
+        public decorationClass : string;
         public fieldNameChanged(beforeFieldName, newFieldName): void;
         private getCoreID();
         private getLabelLID();
         private getLabelRID();
         constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc: Function);
-        private bindKeyPressEvent();
         private isValidKeyCode(code);
+        private isValidMaxLength(code, element);
         public formatValidation(): boolean;
         public changeFormat(): void;
         public registProperty(): void;
         public changeWidthParameter(oldWidth, newWidth): void;
         public rangeChangeWidth(oldWidth, newWidth): void;
+        public changedDisplayNone(oldValue): void;
         public createDomElement($parentElement, isDesignMode): HTMLDivElement;
         public createDomElementRange($parentElement): HTMLSpanElement;
         public createFromToNumChange(): void;
         private bindEvent();
+        private changeEventHander(myIns, validation, $eventElement);
         private bindEventSideElement($sideElement);
         public createFromToNum(element): HTMLInputElement;
         public createArrow(): HTMLSpanElement;
@@ -1393,11 +1867,15 @@ declare module Uz {
         private getJQueryLabelLElement();
         private getJQueryLabelRElement();
         static getNoFormatText(text, decimalPointLength): string;
+        private static removeFormat(text);
         static getFormatText(value: string, isCurrency: any, isComma: any): string;
         private static getPointNumber(num, point);
+        private static getFloorValue(num, point);
         private static repeatText(s, num);
         public getNumRangeElement(val: string): JQuery;
         public bindData(data: any): void;
+        private addCssClass(cssClasName);
+        private removeCssClass(cssClasName);
         private getFromNumAreaID();
         private getToNumAreaID();
         public validateControlFrom(): any;
@@ -1417,6 +1895,255 @@ declare module Uz {
         public changeStateOfControl(): void;
         public changeTabIndex(): void;
         public resizeControl(): void;
+        public canAcceptFocus(): boolean;
+        public handlesDefaultNextFocus(shiftKey: boolean): boolean;
+        public setFocus(shiftKey: boolean): boolean;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public getElementForFocus(): JQuery;
+        public createDOMElement($parentElement): HTMLDivElement;
+        private getFormatText(value, orgText);
+        public changedReadOnlyForRunTime(): void;
+        public getMaskControl(): any[];
+    }
+}
+declare module Uz {
+    class _TextBoxTimeRange extends Uz._ViewControl {
+        static PERMITCHARACTER_GRID: string;
+        private static DEFAULT_FROM_TIME_ID;
+        private static DEFAULT_ARROW_ID;
+        private static DEFAULT_TO_TIME_ID;
+        private static DEFAULT_CORE_ID;
+        private static DEFAULT_LABELL_ID;
+        private static DEFAULT_LABELR_ID;
+        private static DEFAULT_FROM;
+        private static DEFAULT_TO;
+        private _coreDom;
+        private _labelLDom;
+        private _labelRDom;
+        private _fromTime;
+        private _arrow;
+        private _toTime;
+        private _rangeWidth;
+        private _fromSelectControlID;
+        private _toSelectControlID;
+        private _fromText;
+        private _toText;
+        private _fromValue;
+        private _toValue;
+        private _fromRequired;
+        private _toRequired;
+        private _isHolizontal;
+        private _fromPlaceHolder;
+        private _toPlaceHolder;
+        private _readOnly;
+        private _isPassword;
+        private _isComboBox;
+        private _isPrivateInfo;
+        private _onFocus;
+        private _onBlur;
+        private _onChange;
+        private _onKeyPress;
+        private _labelLText;
+        private _labelRText;
+        private _labelLWidth;
+        private _labelRWidth;
+        private _labelLAlign;
+        private _labelRAlign;
+        private _fromSuggest;
+        private _toSuggest;
+        private _permitCharactor;
+        private _defaultPermitCharactor;
+        private _displayFormat;
+        private _timeKubun;
+        private _autoRangeTo;
+        public autoRangeTo : any;
+        public isDesignModeLocal : boolean;
+        public rangeWidth : string;
+        public coreDom : HTMLElement;
+        public fromTime : HTMLElement;
+        public arrow : HTMLElement;
+        public toTime : HTMLElement;
+        public fromValue : string;
+        public toValue : string;
+        public isHolizontal : boolean;
+        public fromRequired : boolean;
+        public fromPlaceHolder : string;
+        public toRequired : boolean;
+        public toPlaceHolder : string;
+        public readOnly : boolean;
+        public changedReadOnly(): void;
+        public isPrivateInfo : boolean;
+        public isPassword : boolean;
+        public onFocus : string;
+        public onBlur : string;
+        public onChange : string;
+        public onKeyPress : string;
+        public fromText : string;
+        public toText : string;
+        public labelLText : string;
+        public labelRText : string;
+        private createLabelElement(className);
+        public labelLWidth : any;
+        public labelRWidth : any;
+        private decideWidth(element, beforeWidth, afterWidth);
+        public labelLAlign : Uz.Align;
+        public labelRAlign : Uz.Align;
+        public fromSuggest : string[];
+        public toSuggest : string[];
+        public permitCharactor : string;
+        public defaultPermitCharactor : string;
+        public fromSelectControlID : string;
+        public toSelectControlID : string;
+        public displayFormat : Uz.DisplayFormat;
+        public timeKubun : Uz.TimeKubun;
+        public fieldNameChanged(beforeFieldName, newFieldName): void;
+        private getCoreID();
+        public getLabelLID(): string;
+        public getLabelRID(): string;
+        public isComboBox : boolean;
+        private isComboBoxChanged(value);
+        public createComboBoxChanged(): void;
+        constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc: Function);
+        public formatValidation(): boolean;
+        public changeFormat(): void;
+        public changeWidthParameter(oldWidth, newWidth): void;
+        private rangeChangeWidthTime(oldWidth, newWidth);
+        public changedDisplayNone(oldValue): void;
+        public createDomElementRange($parentElement): HTMLSpanElement;
+        public createFromToTimeChange(): void;
+        private bindEvent();
+        private bindRangeEvent(selector, staus);
+        private changeEventValidate(element);
+        private copyAutoRangeTo();
+        public createFromToTime(element): HTMLInputElement;
+        public createArrow(): HTMLSpanElement;
+        private createSelectDomElement();
+        private createComboBoxDomElement($text, fieldName);
+        private createNormalDomElement();
+        private createOption($parent, suggest);
+        public getJQueryElement(isCoreElement?: boolean): JQuery;
+        public getJQueryLabelLElement(): JQuery;
+        public getJQueryLabelRElement(): JQuery;
+        public bindData(data: any): void;
+        public validateControlFrom(): any;
+        public validateControlTo(): any;
+        public validateControlSide(id: string, text: string, required: boolean): any;
+        public validateTimeRangeCheck(validateMessage): any;
+        public getOutputParameter(): any;
+        public setOutputParameter(value: any): void;
+        public changedDisabled(): void;
+        public changedParentState(): void;
+        public changeStateOfControl(): void;
+        public changeTabIndex(): void;
+        public resizeControl(): void;
+        public canAcceptFocus(): boolean;
+        public handlesDefaultNextFocus(shiftKey: boolean): boolean;
+        public setFocus(shiftKey: boolean): boolean;
+        public initRuntime($element: JQuery): void;
+        public getProperty();
+        public getElementForFocus(): JQuery;
+        public createDOMElement($parentElement): HTMLDivElement;
+        public changedReadOnlyForRunTime(): void;
+        private getFormatText(value);
+        public getMaskControl(): any[];
+    }
+}
+declare module Uz {
+    class _TextBoxDateTimeRange extends Uz._TextBoxTimeRange {
+        private static DEFAULT_YMDKUBUN;
+        private static DEFAULT_DISPLAY_DATE_FORMAT;
+        private static DEFAULT_FROMDATE_ID;
+        private static DEFAULT_ARROW_ID;
+        private static DEFAULT_TODATE_ID;
+        private static DATETIME_RANGE_FROM;
+        private static DATETIME_RANGE_TO;
+        private _fromDate;
+        private _toDate;
+        private _fromDateSelectControlID;
+        private _toDateSelectControlID;
+        private _ymdKubun;
+        private _displayDateFormat;
+        private _fromDateText;
+        private _toDateText;
+        private _fromDateValue;
+        private _toDateValue;
+        private _fromDatePlaceHolder;
+        private _toDatePlaceHolder;
+        private _minDate;
+        private _maxDate;
+        private _suggestSourceYear;
+        private _isShowCalendarOpenerIcon;
+        public suggestSourceYear : any;
+        public fromDate : HTMLElement;
+        public toDate : HTMLElement;
+        public ymdKubun : Uz.YmdKubun;
+        public displayDateFormat : Uz.DisplayDateFormat;
+        private propertyFormatChange();
+        public minDate : string;
+        public maxDate : string;
+        public fromDateValue : string;
+        public toDateValue : string;
+        public fromDateText : string;
+        public toDateText : string;
+        public fromDateSelectControlID : string;
+        public toDateSelectControlID : string;
+        public fromDatePlaceHolder : string;
+        public toDatePlaceHolder : string;
+        public isShowCalendarOpenerIcon : boolean;
+        public changeIsShowCalendarOpenerIcon(): void;
+        private static createCalendarOpenerDOMElement();
+        public fieldNameChanged(beforeFieldName, newFieldName): void;
+        constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc: Function);
+        public formatValidation(): boolean;
+        public changeFormat(): void;
+        public changeWidthParameter(oldWidth, newWidth): void;
+        private rangeChangeWidthDate(oldWidth, newWidth);
+        public changedDisplayNone(oldValue): void;
+        public createComboBoxChanged(): void;
+        private createDomElementDateRange();
+        public createFromToDateChange(): void;
+        private bindDateEvent();
+        private bindDateRangeEvent(selector, staus);
+        public copyAutoDateRangeTo(): void;
+        private createFromToDate(element);
+        public minMaxDateProperty(minMaxDate): Date;
+        private initializeCalendar($element);
+        private showCalendar($element);
+        public initializeDatepicker($element: JQuery): boolean;
+        public initializeYearList($element, format, ymd, beforeValue): void;
+        public initializeMonthPicker($element: JQuery): boolean;
+        public initializeMonthPickerSet($element): void;
+        public initializeDatepickerSet(element, elementChg): void;
+        public datepickerOnSelect(element): void;
+        public datepickerOnClose(element: JQuery, beforeValue): void;
+        public beforeShowMinMaxSet(element, elementChg, filedName, maxMin): void;
+        public inputTextDateConvert(element): void;
+        private getDateRangeIdCheck(element, val);
+        private getUtilParameter();
+        public bindData(data: any): void;
+        public getDateTimeFromAreaID(): string;
+        public getDateTimeToAreaID(): string;
+        public validateControlDateRange(element: JQuery, isFrom: boolean): any;
+        public validateTimeRangeCheck(validateMessage: string): any;
+        private getUtilValidateParameter();
+        public getOutputParameter(): any;
+        public setOutputParameter(value: any): void;
+        public changedDisabled(): void;
+        public changedParentState(): void;
+        public changedReadOnly(): void;
+        public changeStateOfControlDate(): void;
+        public changeTabIndex(): void;
+        public resizeControl(): void;
+        public canAcceptFocus(): boolean;
+        public handlesDefaultNextFocus(shiftKey: boolean): boolean;
+        public setFocus(shiftKey: boolean): boolean;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public getElementForFocus(): JQuery;
+        public createDOMElement($parentElement): HTMLDivElement;
+        private getFormatDateText(value);
+        public changedReadOnlyForRunTime(): void;
     }
 }
 declare module Uz {
@@ -1424,7 +2151,9 @@ declare module Uz {
         private static DEFAULT_CORE_ID;
         private static DEFAULT_LABELL_ID;
         private static DEFAULT_LABELR_ID;
-        private _coreDom;
+        private static LOWERCASE_SIZE;
+        private static ELLIPSIS_SIZE;
+        private static ELLIPSIS;
         private _labelLDom;
         private _labelRDom;
         private _required;
@@ -1454,12 +2183,14 @@ declare module Uz {
         private _permitCharactor;
         private _value;
         private _decorationClass;
+        private _ellipsis;
         public required : boolean;
         public maxLength : number;
         public minLength : number;
         public textAlign : Uz.Align;
         public readOnly : boolean;
-        private changedReadOnly();
+        public labelRDom : HTMLElement;
+        public changedReadOnly(): void;
         public placeHolder : string;
         public imeMode : Uz.ImeMode;
         public textKind : Uz.TextKind;
@@ -1472,6 +2203,7 @@ declare module Uz {
         public text : string;
         public labelLText : string;
         public labelRText : string;
+        public addLabelRDom(): void;
         private createLabelElement(className);
         public labelLWidth : any;
         public labelRWidth : any;
@@ -1488,21 +2220,27 @@ declare module Uz {
         private getLabelLID();
         private getLabelRID();
         public isComboBox : boolean;
-        private isComboBoxChanged(value);
+        public isComboBoxChanged(value): void;
+        public ellipsis : boolean;
         constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc: Function);
-        private bindEvent();
+        public bindEvent(): void;
+        private setEllipsisValue(value);
+        private setToolTip(str);
+        private static getByte(str);
+        private static getByteArray(str);
+        private static createEllipsisText(text, width);
+        private static getLimitIndex(text, width);
         public changeWidth(): void;
         private addCssClass(cssClasName);
         private removeCssClass(cssClasName);
         public resizeWidthOfCharacters(): void;
         public formatValidation(): boolean;
+        public getFormatText(value): string;
         public changeFormat(): void;
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
         private createInputDomElement(fieldName, $parent);
         private createSelectDomElement(fieldName, $parent);
+        private setupCombobox($select);
         private createOption($parent);
-        public getEditablePropertyInfo(): any;
         public getJQueryElement(isCoreElement?: boolean): JQuery;
         private getJQueryLabelLElement();
         private getJQueryLabelRElement();
@@ -1520,24 +2258,28 @@ declare module Uz {
         public changeStateOfControl(): void;
         public changeTabIndex(): void;
         public resizeControl(): void;
+        public canAcceptFocus(): boolean;
+        public changedDisplayNone(oldValue): void;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public getMaskControl(): any[];
+        public createDOMElement($parentElement: JQuery): HTMLDivElement;
     }
 }
 declare module Uz {
     class _TextBoxCode extends Uz._TextBox {
-        private _formatLength;
-        public formatLength : number;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
-        public getEditablePropertyInfo(): any;
+        constructor($parentElement?: JQuery, isDesignMode?: boolean);
+        public bindEvent(): void;
+        private isValidMaxLength(code);
         public bindData(data: any): void;
         public formatValidation(): boolean;
+        public getFormatText(value): string;
         public changeFormat(): void;
-        static getFormatText(text: string, formatLength: any): string;
+        static getFormatText(text: string, maxLength: any): string;
         static particularValidation(formatText: string): boolean;
         public validateControl(): any;
         static validateTextKindForCode(text: string, permitCharactor: string, id: string, jpControlName: string): any;
-        public updateValidationRule(propertyName: String): void;
+        public createDOMElement($parentElement: JQuery): HTMLDivElement;
     }
 }
 declare module Uz {
@@ -1549,22 +2291,27 @@ declare module Uz {
         private _isComma;
         private _decimalPointLength;
         public maxValue : number;
+        public changedMaxValue(): void;
         public minValue : number;
+        public changedMinValue(): void;
         public isCurrency : boolean;
         public isComma : boolean;
         public decimalPointLength : number;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        private bindKeyPressEvent();
+        public isComboBox : boolean;
+        public isComboBoxChanged(value): void;
+        constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc: Function);
+        public bindEvent(): void;
         private isValidKeyCode(code);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
-        public getEditablePropertyInfo(): any;
+        private isValidMaxLength(code);
         public bindData(data: any): void;
         public formatValidation(): boolean;
         public changeFormat(): void;
         private static getPointNumber(num, point);
+        private static getFloorValue(num, point);
         private static repeatText(s, num);
         static getNoFormatText(text, decimalPointLength): string;
+        private static removeFormat(text);
+        public getFormatText(value): string;
         static getFormatText(value: string, isCurrency: any, isComma: any): string;
         static particularValidation(text: string): boolean;
         public validateControl(): any;
@@ -1574,6 +2321,7 @@ declare module Uz {
         static validateMinValue(text: string, minValue: number, decimalPointLength: number, id: string, jpControlName: string): any;
         static validateTextKindForNum(text: string, permitCharactor: string, decimalPointLength: number, id: string, jpControlName: string): any;
         static validateDecimalPartValue(text: string, decimalPointLength: number, id: string, jpControlName: string): any;
+        public createDOMElement($parentElement: JQuery): HTMLDivElement;
     }
 }
 declare module Uz {
@@ -1583,6 +2331,9 @@ declare module Uz {
         private static DEFAULT_CORE_ID;
         private static DEFAULT_LABELL_ID;
         private static DEFAULT_LABELR_ID;
+        private static KEY_TAB;
+        private static KEY_ENTER;
+        private static KEY_SPACE;
         private _coreDom;
         private _labelLDom;
         private _labelRDom;
@@ -1609,12 +2360,14 @@ declare module Uz {
         private _displayFormat;
         private _value;
         private _suggestSourceYear;
+        private _decorationClass;
+        private _isShowCalendarOpenerIcon;
         public suggestSourceYear : any;
         public ymdKubun : Uz.YmdKubun;
-        public displayFormat : Uz.DisplayFormat;
+        public displayFormat : Uz.DisplayDateFormat;
         public required : boolean;
         public readOnly : boolean;
-        private changedReadOnly();
+        public changedReadOnly(): void;
         public placeHolder : string;
         public imeMode : Uz.ImeMode;
         public isPrivateInfo : boolean;
@@ -1635,17 +2388,24 @@ declare module Uz {
         public permitCharactor : string;
         public defaultPermitCharactor : string;
         public value : string;
+        public decorationClass : string;
+        public isShowCalendarOpenerIcon : boolean;
+        public changeIsShowCalendarOpenerIcon(): void;
+        private static createCalendarOpenerDOMElement();
         public fieldNameChanged(beforeFieldName, newFieldName): void;
         public getCoreID(): string;
         private getLabelLID();
         private getLabelRID();
-        constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc: Function);
+        constructor($parentElement?: JQuery, isDesignMode?: boolean, createDomElementFunc?: Function);
+        private bindEvent();
+        private initializeCalendar();
+        private showCalendar();
         public changeWidth(): void;
         public formatValidation(): boolean;
         public changeFormat(): void;
         public registProperty(): void;
+        public changedDisplayNone(oldValue): void;
         public createDomElement($parentElement, isDesignMode): HTMLDivElement;
-        public getEditablePropertyInfo(): any;
         public getJQueryElement(isCoreElement?: boolean): JQuery;
         private getJQueryLabelLElement();
         private getJQueryLabelRElement();
@@ -1665,16 +2425,26 @@ declare module Uz {
         public changedDisabled(): void;
         public changedParentState(): void;
         public changeStateOfControl(): void;
+        private addCssClass(cssClasName);
+        private removeCssClass(cssClasName);
         public changeTabIndex(): void;
         public resizeControl(): void;
+        public canAcceptFocus(): boolean;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement): HTMLDivElement;
+        private getFormatText(value);
+        public changedReadOnlyForRuntime(): void;
+        public getMaskControl(): any[];
     }
 }
 declare module Uz {
     class _TextBoxFlexibleDate extends Uz._TextBoxDate {
-        constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc: Function);
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
+        constructor($parentElement?: JQuery, isDesignMode?: boolean, createDomElementFunc?: Function);
         public validateControl(): any;
         static validateInputDateForFlexibleDate($element: JQuery, id: string, jpControlName: string): any;
+        public initRuntime($element: JQuery): void;
+        public createDOMElement($parentElement): HTMLDivElement;
     }
 }
 declare module Uz {
@@ -1685,25 +2455,9 @@ declare module Uz {
         public displayFormat : Uz.DisplayFormat;
         public timeKubun : Uz.TimeKubun;
         constructor($parentElement: JQuery, isDesignMode: boolean);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
-        public getEditablePropertyInfo(): any;
         public bindData(data: any): void;
         public formatValidation(): boolean;
-        private createEasyFormat();
-        private changeDateTypeStringCommaSeparateMillis(easyFormat);
-        private changeDateTypeStringCommaSeparate(easyFormat);
-        private changeDateTypeString1or2DigitNumber(easyFormat);
-        private changeDateTypeString4DigitNumber(easyFormat);
-        private changeDateTypeString6DigitNumber(easyFormat);
-        private changeDateTypeStringJapanFormat(easyFormat);
-        private change24Format(text, hourSeparatPosition);
-        private changeSeparators(text);
-        private searchMinuteAndSecond(text, mySeparatPosition, frontSeparatPosition);
         public changeFormat(): void;
-        private setSeparators();
-        private createHour(date, separators);
-        private change2Digit(value);
         public validateControl(): any;
         static validateTextKindForTime(text: string, permitCharactor: string, id: string, jpControlName: string): any[];
         static validateUniqueCharactorForTime(text: string, id: string, jpControlName: string): any[];
@@ -1712,11 +2466,16 @@ declare module Uz {
         private static checkTimeValue(timeArray, timeKubun);
         public getOutputParameter(): any;
         public setOutputParameter(value: any): void;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public getFormatText(value): string;
+        public createDOMElement($parentElement: JQuery): HTMLDivElement;
     }
 }
 declare module Uz {
     class _TabPanel extends Uz._ViewControl {
         private $_parentTabContainer;
+        public parentTabContainer : JQuery;
         private _title;
         private _titleHref;
         private _onActive;
@@ -1724,24 +2483,31 @@ declare module Uz {
         private _isFirstActivated;
         private _lazyEvalProperties;
         private _lazyBoundData;
+        private _lazyLoadingControls;
         public title : string;
         private getTabATag();
         private getTabList();
-        private titleHref;
+        public titleHref : string;
         public onActive : string;
         public onFirstActive : string;
+        public lazyLoadingControls : any;
         constructor($parentElement: JQuery, isDesignMode: boolean);
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLDivElement;
         public fieldNameChanged(beforeFieldName, newFieldName): void;
-        private appendLiTitle();
+        public appendLiTitle(): void;
         private createLiTitle();
         private createATag();
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
         public changedVisible(): void;
         public bindData(data: any): void;
         public changeStateOfControl(): void;
         public lazyEvalProperties : any;
+        public _onAuthoritySet(): void;
+        static cancelCommentOut(tabPanelElement: HTMLElement): void;
+        public bindLazyLoadingControls(): void;
+        static getOriginalFieldName($tabPanelElement: JQuery, fieldName: string): string;
+        public initRuntime($element: JQuery): void;
+        public createLazyLoadingControls(lazyLoadingControls: any): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement): HTMLDivElement;
     }
 }
 declare module Uz {
@@ -1752,29 +2518,31 @@ declare module Uz {
         private _onChange;
         private _containerWidth;
         private _initialTab;
+        private _height;
         private _isLazyLoading;
         public containerWidth : any;
         public onChange : string;
         public selectedItem : Uz._TabPanel;
+        public selectedItemCore(): Uz._TabPanel;
         private isInvalidPanel(value);
         private activeTab(selectedItem);
         private static getTabListItems($tabContainer);
         public tabpanelPosition : string[];
         public isDraggable : boolean;
         public initialTab : number;
+        public initialTabActiveTab(): void;
+        public height : any;
+        private changeTabHeight();
         public selectedItemFieldName : string;
         public isLazyLoading : boolean;
         constructor($parentElement: JQuery, isDesignMode: boolean);
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLElement;
         private createTabContainer();
         private appendTabList(tabs);
         private alignTabTitlesHeight();
         private static findMaxTitleLineNum(tabContainer);
         private static appendBlankLinesToTitles(tabContainer, maxLineNum);
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
-        private addNewTab(selectedControl);
-        private removeTab(selectedControl);
+        public addNewTab(selectedControl): void;
+        public removeTab(selectedControl): void;
         static saveTabState(): void;
         static refreshTabState(element?: JQuery): void;
         static refreshTabStateByPanel($panel: JQuery): void;
@@ -1783,25 +2551,32 @@ declare module Uz {
         private static resizeTabPanel(anyTabs);
         private static reloadActiveTab();
         private initSortableTabs();
-        private sortableTabs();
+        public sortableTabs(): void;
         private getOrderOfTabpanel();
         public refreshTabOrder(): void;
         private createTabpanelPosition(tabpanelPosition);
         private isAllStringInArray(tabpanelPosition);
         private sortTabpanelByTabpanelPosition();
         private createEditablePropertyTabpanelPosition();
-        private getFirstTabInDisplayed();
+        public getFirstTabInDisplayed(): Uz._TabPanel;
         private getTabPanelByFieldName(tabFieldName);
         public resetSelectItem(): void;
         public bindData(data: any): void;
         public changeStateOfControl(): void;
-        public afterPropertiesSet(): void;
         private activeInitialTab();
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public setProperty(properties, parentCommonChildDivFieldName?: string): void;
+        public getElementForFocus(): JQuery;
+        public createDOMElement($parentElement): HTMLElement;
     }
 }
 declare module Uz {
     class _TimeControlUtil {
         static formatValidation(value: string): boolean;
+        static formatValidationDateTime(dateValue: string, timeValue: string): any;
+        static changeFormat(value: string, displayFormat: Uz.DisplayFormat, timeKubun: Uz.TimeKubun): string;
+        static displayFormatEnumConvert(format: any): Uz.DisplayFormat;
         private static createEasyFormat(value);
         private static changeDateTypeStringCommaSeparateMillis(value, easyFormat);
         private static changeDateTypeString1or2DigitNumber(value, easyFormat);
@@ -1819,6 +2594,13 @@ declare module Uz {
         private static createHour(date, separators, displayFormat);
         private static change2Digit(value);
         private static getTimeRemoveSeparater(value);
+        static validateRequired(text: string, required: boolean, id: string, jpControlName: string): any;
+        static validateTextKindForTime(text: string, permitCharactor: string, id: string, jpControlName: string): {};
+        static validateUniqueCharactorForTime(text: string, id: string, jpControlName: string): {};
+        static validateTime(text: string, id: string, timeKubun: Uz.TimeKubun, displayFormat: Uz.DisplayFormat, jpControlName: string): any;
+        static validateTimeRange(fromValue: string, toValue: string, id: string, jpControlName: string): any;
+        private static getValidateValue(value, displayFormat);
+        private static checkTimeValue(timeArray, timeKubun);
     }
 }
 declare module Uz {
@@ -1830,12 +2612,13 @@ declare module Uz {
         private _iconSize;
         public icon : any;
         public iconSize : any;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
+        constructor($parentElement?: JQuery, isDesignMode?: boolean);
         public createDomElement($parentElement, isDesignMode: boolean): HTMLImageElement;
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
+        public bindData(properties: any): void;
         public hasDisabled(): boolean;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement: JQuery): HTMLImageElement;
     }
 }
 declare module Uz {
@@ -1845,6 +2628,8 @@ declare module Uz {
         static LabelFormatter(row, cell, value, columnDef, dataContext): string;
         static TextBoxFormatter(row, cell, value, columnDef, dataContext, gridId): string;
         static CheckBoxFormatter(row, cell, value, columnDef, dataContext): string;
+        static CheckBoxListFormatter(row, cell, value, columnDef, dataContext, gridId): string;
+        private static getCheckBoxState(selectedItems, key, state);
         static DropDownListFormatter(row, cell, value, columnDef, dataContext): string;
         static RowStateFormatter(row, cell, value, columnDef, dataContext): string;
         static SelectActionButtonFormatter(row, cell, value, columnDef, dataContext): string;
@@ -1855,10 +2640,17 @@ declare module Uz {
         static ImageFormatter(row, cell, value, columnDef, dataContext): string;
         static IconFormatter(row, cell, value, columnDef, dataContext): string;
         static DynamicImageFormatter(row, cell, value, columnDef, dataContext): string;
+        private static getAlignClass(columnDef);
+        private static getCustomAttrStringForDateControl(value, columnDef, data, wareki);
         private static getCustomAttrString(columnDef, dataContext);
-        private static getCellContorlId(columnDef, dataContext, gridId);
+        private static getSizeStyleAttrString(width?, height?, useStyleAttributeName?);
+        private static getTitleAttrString(title);
+        private static getCellControlId(columnDef, dataContext, gridId);
         static ButtonDialogFormatter(row, cell, value, columnDef, dataContext): string;
+        private static checkValue(value, columnDef);
+        private static getOptionHtml(suggest);
         static TextBoxMultiLineFormatter(row, cell, value, columnDef, dataContext, gridId): string;
+        static ComboBoxAfterFormatter(cellNode, row, dataContext, columnDef): void;
         private static IsHide(value);
         private static getControlState(value, columnDef);
     }
@@ -1874,63 +2666,114 @@ declare module Uz {
         Enable,
         ReadOnly,
     }
-}
-declare module Uz {
-    class CommonChildDiv extends Uz._ViewControl {
-        private _layout;
-        private _businessId;
-        private _controlName;
-        private _isCommonChildDivEditMode;
-        private _relation;
-        private _originalProperty;
-        private _marginTop;
-        private _marginBottom;
-        private _canTransferEvent;
-        private _isAfterOriginalPropertiesSet;
-        private _dataPassingForDialog;
-        private _dialogOkEventNameForDialog;
-        private _dialogCancelEventNameForDialog;
-        private _heightForDialog;
-        private _parentButtonDialog;
-        public layout : any;
-        public businessId : string;
-        public controlName : string;
-        public isCommonChildDivEditMode : boolean;
-        public relation : string[];
-        public originalProperty : Object[];
-        public marginTop : any;
-        public marginBottom : any;
-        public dataPassingForDialog : Object[];
-        public dialogOkEventNameForDialog : string;
-        public dialogCancelEventNameForDialog : string;
-        public canTransferEvent : boolean;
-        public heightForDialog : string;
-        private static defaultLayout;
-        constructor($parentElement: JQuery, isDesignMode: boolean, staticLayout: any, fieldName: string);
-        public afterPropertiesSet(): void;
-        public fieldNameChanged(beforeFieldName, newFieldName): void;
-        public renderCompleted(): void;
-        private static getCommonChildDivFieldName($parentElement, fieldName);
-        private initLayout(staticLayout);
-        public raisePropertyChanged(layout): void;
-        private copyPropertyFromLayout();
-        private initChildControls($childDivParentElement, childDivFieldName);
-        private static addFieldNameForCommonChildDivChildren(parentFieldName, childControl);
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLDivElement;
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
-        private createOriginalPropertyColumnInfos();
-        static createCommonChildDiv(childdivFieldName: string, businessId: string, controlName: string, $parentElement: JQuery, isDesignMode: boolean, isCommonChildDivEditMode: boolean): Uz._JSControl;
-        private static getChildFieldNames(control, fieldNames);
-        private setElementId();
-        public bindData(data: any): void;
-        public initDefaultOriginalProperty(basePanelName: string): void;
-        public fireCloseEventForDialog(eventName: string): void;
-        public setParentButtonDialog(control: any): void;
-        private waitLoadingForDialog(thisInstance);
-        public changedDisabled(): void;
-        public changedParentState(): void;
-        public changedDisplayNone(oldValue): void;
+    class DataGridColumnCellDetailsString {
+        public isSetValueToToolTip: Boolean;
+    }
+    class DataGridColumnCellDetailsTextBox {
+        public maxLength: string;
+        public minLength: string;
+        public textAlign: Uz.Align;
+        public onChange: string;
+        public textKind: Uz.TextKind;
+        public isSetValueToToolTip: Boolean;
+        public readOnly: Boolean;
+    }
+    class DataGridColumnCellDetailsCheckBox {
+        public disabled: Boolean;
+        public onChange: string;
+    }
+    class DataGridColumnCellDetailsDropDownList {
+        public onChange: string;
+        public selectedItem: string;
+        public isBlankLine: Boolean;
+        public dataSource: Uz.ListControlDataPair[];
+        public readOnly: Boolean;
+        public disabled: Boolean;
+    }
+    class DataGridColumnCellDetailsTextBoxCode {
+        public maxLength: string;
+        public minLength: string;
+        public onChange: string;
+        public isSetValueToToolTip: Boolean;
+        public readOnly: Boolean;
+    }
+    class DataGridColumnCellDetailsTextBoxNum {
+        public maxLength: string;
+        public minLength: string;
+        public maxValue: string;
+        public minValue: string;
+        public isCurrency: Boolean;
+        public isComma: Boolean;
+        public decimalPointLength: string;
+        public onChange: string;
+        public isSetValueToToolTip: Boolean;
+        public readOnly: Boolean;
+    }
+    class DataGridColumnCellDetailsTextBoxDate {
+        public ymdKubun: Uz.YmdKubun;
+        public displayFormat: Uz.DisplayDateFormat;
+        public onChange: string;
+        public isSetValueToToolTip: Boolean;
+        public readOnly: Boolean;
+    }
+    class DataGridColumnCellDetailsTextBoxFlexibleDate {
+        public ymdKubun: Uz.YmdKubun;
+        public displayFormat: Uz.DisplayDateFormat;
+        public onChange: string;
+        public isSetValueToToolTip: Boolean;
+        public readOnly: Boolean;
+    }
+    class DataGridColumnCellDetailsButton {
+        public text: string;
+        public onClick: string;
+        public imageFileUrl: string;
+        public imageWidth: string;
+        public imageHeigh: string;
+    }
+    class DataGridColumnCellDetailsStaticImage {
+        public labelRWidth: string;
+        public labelRAlign: Uz.Align;
+        public imageWidth: string;
+        public imageHeight: string;
+    }
+    class DataGridColumnCellDetailsDynamicImage {
+        public imageWidth: string;
+        public imageHeight: string;
+    }
+    class DataGridColumnCellDetailsButtonDialog {
+        public text: string;
+        public imageFileUrl: string;
+        public imageWidth: string;
+        public imageHeight: string;
+        public displayChildDivName: string;
+        public visibleCloseButton: Boolean;
+        public onBeforeOpenDialog: string;
+        public onOkClose: string;
+        public onCancelClose: string;
+        public dataPassing: Object[];
+    }
+    class DataGridColumnCellDetailsTextBoxMultiLine {
+        public maxLength: string;
+        public minLength: string;
+        public onChange: string;
+        public textKind: Uz.TextKind;
+        public isSetValueToToolTip: Boolean;
+        public readOnly: Boolean;
+    }
+    class DataGridColumnCellDetailsTextBoxTime {
+        public timeKubun: Uz.TimeKubun;
+        public displayFormat: Uz.DisplayFormat;
+        public onChange: string;
+        public isSetValueToToolTip: Boolean;
+        public readOnly: Boolean;
+    }
+    class DataGridColumnCellDetailsIcon {
+        public icon: Uz.Icon;
+        public iconSize: Uz.SizeOfSML;
+    }
+    class DataGridColumnCellDetailsDataGridColumnCheckBox {
+        public disabled: Boolean;
+        public onChange: string;
     }
 }
 declare module Uz {
@@ -1939,30 +2782,31 @@ declare module Uz {
         private _dataPassing;
         private _visibleCloseButton;
         private _onOkClose;
+        private _onCancelClose;
         private _parentControl;
         private _$overlay;
         public displayChildDivName : string;
         public dataPassing : Object[];
         public visibleCloseButton : boolean;
         public onOkClose : string;
+        public onCancelClose : string;
         public parentControl : Uz._ViewControl;
-        constructor(parentControl: Uz._ViewControl, displayChildDivName: string, dataPassing: any, visibleCloseButton: boolean, onOkClose: string);
-        public openDialog(): void;
+        constructor(parentControl: Uz._ViewControl, displayChildDivName: string, dataPassing: any, visibleCloseButton: boolean, onOkClose: string, onCancelClose: string);
+        public openDialog(isLoading?: boolean): void;
         public closeDialog(isCancel: boolean): void;
-        private showDialog();
+        private loadDialog();
+        private buildItems(control);
+        private showDialog(isLoading);
         private showOverlay(overlayCount);
         private hideDialog();
-        private resetIsFirstLoadFinished(control);
+        private resetIsFirstLoadFinished();
+        private setInitializeDataForControls();
         private getDialogDomId();
         private getDialogBaseDomId();
-        private getDialogBusinessId();
-        private getDialogControlName();
         private bindParentToDialog();
         private bindDialogToParent();
         private getBindControlFromPage(controlName);
         private getBindControlFromDialog(controlName);
-        private searchControl(currentControl, controlName, parentFieldName);
-        private searchControlForLayout(currentControl, controlName, parentFieldName, parentLayoutName);
         private isHiddenInput(controlName);
         private isDataGridColumn(controlName);
         private getPassingDataForHidden(panel, hiddenInputName);
@@ -1977,33 +2821,21 @@ declare module Uz {
 }
 declare module Uz {
     class _DataGrid extends Uz._ViewControl {
-        private static DEFAULT_GRID_ID;
-        private static DEFAULT_PAGER_ID;
-        private static DEFAULT_GRID_COLUMNS;
-        private static DEFAULT_GRID_ROWS;
+        private static GRID_ID_SUFFIX;
+        private static PAGER_ID_SUFFIX;
         private static DEFAULT_GRID_FOOTER_HEIGHT;
-        private _grid;
-        private _dataView;
-        private _options;
-        private _footer;
-        private _gridDiv;
-        private _footerDiv;
-        private _outerDiv;
-        private _editable;
-        private _binding;
         private _columnFilters;
-        private _checkboxSelector;
-        private _nextFocusRow;
-        private _nextFocusCol;
-        private _viewportPosition;
-        private _gridSetting;
-        private _height;
         private _dataSource;
         private _sortOrder;
         private _isAscending;
         private _filterList;
         private _activeRowId;
         private _passingDataRowId;
+        private _nextFocusRow;
+        private _nextFocusCol;
+        private _viewportPosition;
+        private _fireBeforeOpenDialog;
+        private _height;
         private _onSort;
         private _onSelect;
         private _onSelectByDblClick;
@@ -2018,15 +2850,39 @@ declare module Uz {
         private _onOnlyRow;
         private _onNoRow;
         private _onMultiRows;
+        private _marginTop;
+        private _marginBottom;
         private _readOnly;
+        private _gridAction;
         private _cellControlValidateError;
+        private _isTriggerEventOnNoRow;
+        private _isTriggerEventOnOnlyRow;
+        private _isTriggerEventOnMultiRow;
+        private _gridSetting;
+        private _confirmDialog;
+        private _grid;
+        private _dataView;
+        private _options;
+        private _footer;
+        private _gridDiv;
+        private _footerDiv;
+        private _checkboxSelector;
+        public getGridElement(): JQuery;
+        public getPagerElement(): JQuery;
+        public getGridDivSelector(): string;
         public gridSetting : _GridSetting;
+        public changeGridSettingForRuntime(value: _GridSetting): void;
+        public changeGridSetting(value: _GridSetting): void;
+        public confirmDialog : _ConfirmDialog[];
         private getCellDetailsObject(cellDetails);
         public height : any;
         private static convertOldValue(value);
+        public marginTop : any;
+        public marginBottom : any;
         public dataSource : any[];
+        public getDataSourceForRuntime(): any[];
         public sortOrder : string;
-        public isAscending : any;
+        public isAscending : boolean;
         public filterList : any[];
         public activeRowId : number;
         public passingDataRowId : number;
@@ -2045,12 +2901,14 @@ declare module Uz {
         public onNoRow : string;
         public onMultiRows : string;
         public readOnly : boolean;
-        public changeWidth(): void;
+        public gridAction : _gridAction[];
+        public isTriggerEventOnNoRow : boolean;
+        public isTriggerEventOnOnlyRow : boolean;
+        public isTriggerEventOnMultiRow : boolean;
         public changeHeight(): void;
         public changedDisabled(): void;
         public changedReadOnly(): void;
         constructor($parentElement: JQuery, isDesignMode: boolean);
-        private createDefaultGridSetting();
         private createGrid();
         private getDispRowStateColumnDefinition(headerHeightClass);
         private getSelectButtonColumnDefinition(headerHeightClass);
@@ -2058,13 +2916,20 @@ declare module Uz {
         private getDeleteButtonColumnDefinition(headerHeightClass);
         private getHeaderHeightClass();
         private getColModel(columns, header);
-        private getGroupedColModel(colModel, combines);
+        private getGroupedColModel(colModel, combines, groupHeaderHeight);
         private getGroupSetting(colModel, combines);
+        public initSlickGridDataForRuntime(): void;
+        public initSlickGridEventForRuntime(): void;
+        private initGridRowHoverEvent();
         private initSlickGrid(colModel);
+        private initGridAction();
         private initFilterEvent();
+        private hideValidateError();
         private initGridEvent();
         private getNextFocusElement(self, shiftKey);
         private initGridCellClickEvent();
+        private setSelectedRowById(id);
+        private clickActionButtonEventTrigger(id, dataName);
         private initGridCellFocusEvent();
         private initGridCellChangeEvent();
         private validateGridCell($element, cellDetails, text, value, result);
@@ -2079,34 +2944,32 @@ declare module Uz {
         private getColumnDefinition(columnId);
         private initFilterToolbar();
         private initFrozenColumn(colModel);
-        private fillWithEmptyRows();
         private initDataView();
         private initGridFooter();
         public fieldNameChanged(beforeFieldName, newFieldName): void;
-        public afterPropertiesSet(): void;
-        private changeGrid();
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLDivElement;
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
-        private static getDialogTypeEditableProperty(gridSetting);
+        public changedFieldNameForRuntime(): void;
+        public changeGrid(): void;
+        public createDOMElement($parentElement, isDesignMode: boolean): HTMLDivElement;
+        private compareDataSource(targetSource);
         public bindData(data: any): void;
-        public receivedResponse(triggerControlInfo: any): void;
+        public receivedResponse(triggerControlInfo: Uz.TriggerControlInfo): void;
+        private clearTriggerEvent();
         private saveScrollPosition();
         private setScrollPosition();
         private setFocusPosition(isAutoScroll?, isClearNextFocusRowCol?);
-        private setCellBgColor();
+        private reflectCellBgColor();
         private setSelectedRows();
         private setSortColumn();
         private getComparerFunc(sortOrder);
         private convertDataSource(data, colModel, activeRowId);
         private convertDataForClient(rowId, data, colModel);
         private convertDataForServer(data, colModel);
-        private denyControlClickEvent();
         public getOutputParameter(): any;
         public setOutputParameter(value: any): void;
         private getOutputParameterGridSetting(value);
         public getShowFilterState(): boolean;
         public getOutputParameterForDialog(rowId: number, dataName: string): any;
+        private isSelectedItems(selectedItems, key);
         public setOutputParameterForDialog(rowId: number, dataName: string, value: any): void;
         private getConvertValueForCheckBox(value);
         private waitLoadingForDialog(thisInstance, column);
@@ -2114,7 +2977,27 @@ declare module Uz {
         public resizeControl(): void;
         public changedParentState(): void;
         public changeStateOfControl(): void;
-        public addNewRow(): void;
+        public addNewRow(): number;
+        public deleteActiveRow(): void;
+        public deleteSelectedRows(): void;
+        public deleteAllRows(): void;
+        public moveUpActiveRow(): void;
+        public moveDownActiveRow(): void;
+        public getIdxById(id: any): number;
+        public getTotalRecords(): number;
+        public setRowBgColor(id: any, color: string): void;
+        public setCellBgColor(id: any, dataName: string, color: string): void;
+        public clearRowBgColor(id: any): void;
+        public setFilter(filterList: any[]): void;
+        public clearFilter(): void;
+        public runFilter(): void;
+        private exchangeRow(currentRowIdx, targetRowIdx);
+        public setData(data: any): void;
+        public canAcceptFocus(): boolean;
+        public setSortableMode(enable: boolean): void;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        private afterBindData();
     }
     enum _GridRowNum {
         rows_5,
@@ -2129,6 +3012,14 @@ declare module Uz {
         M,
         L,
         XL,
+    }
+    enum _GridSelectLimitRowCount {
+        "none",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
     }
     enum _GridCellType {
         String,
@@ -2147,6 +3038,7 @@ declare module Uz {
         TextBoxTime,
         Icon,
         DataGridColumnCheckBox,
+        CheckBoxList,
     }
     enum _GridAlign {
         left,
@@ -2173,15 +3065,20 @@ declare module Uz {
         static DEFAULT_GRID_IS_SHOW_FOOTER: boolean;
         static DEFAULT_GRID_IS_SHOW_FILTER: boolean;
         static DEFAULT_GRID_IS_SHOW_FILTER_BUTTON: boolean;
+        static DEFAULT_GRID_IS_SHOW_CLEAR_SORT_BUTTON: boolean;
         static DEFAULT_GRID_IS_SHOW_ROWSTATE: boolean;
+        static DEFAULT_GRID_IS_SHOW_SELECTED_ROW_COUNT: boolean;
         static DEFAULT_GRID_IS_SHOW_SELECT_BUTTON_COLUMN: boolean;
         static DEFAULT_GRID_IS_SHOW_MODIFY_BUTTON_COLUMN: boolean;
         static DEFAULT_GRID_IS_SHOW_DELETE_BUTTON_COLUMN: boolean;
+        static DEFAULT_GRID_SELECT_LIMIT_ROW_COUNT: _GridSelectLimitRowCount;
         public rowHeight: number;
         public isMultiSelectable: boolean;
+        public isShowHeader: boolean;
         public isShowFilter: boolean;
         public isShowFilterButton: boolean;
-        public isShowHeader: boolean;
+        public isShowClearSortButton: boolean;
+        public isShowSelectedRowCount: boolean;
         public isShowFooter: boolean;
         public isShowRowState: boolean;
         public columns: _GridColumn[];
@@ -2191,6 +3088,7 @@ declare module Uz {
         public isShowDeleteButtonColumn: boolean;
         public limitRowCount: number;
         public selectedRowCount: number;
+        public selectLimitRowCount: _GridSelectLimitRowCount;
         constructor();
     }
     class _GridColumn {
@@ -2202,16 +3100,17 @@ declare module Uz {
         static DEFAULT_GRID_COLUMN_IS_PRIVATE_INFO: boolean;
         static DEFAULT_GRID_COLUMN_BGCOLOR: _GridCellBgColor;
         public columnName: string;
+        public headerHtml: string;
         public dataName;
-        public string;
-        public sortKey: string;
+        public string: string;
         public toolTip: string;
-        public bgColor;
-        public width;
+        public sortKey: string;
+        public bgColor: any;
+        public width: _GridColumnWidth;
         public visible: boolean;
-        public cellType;
+        public cellType: any;
         public cellDetails: any;
-        public align;
+        public align: any;
         public resize: boolean;
         public isPrivateInfo: boolean;
         constructor();
@@ -2221,12 +3120,42 @@ declare module Uz {
         public combineColumns: _GridCombineColumn[];
         public frozenColumn: string;
         public headerHeight: Uz.Size;
+        public groupHeaderHeight: Uz.Size;
         constructor();
     }
     class _GridCombineColumn {
         public combineColumnName: string;
+        public combineHeaderHtml: string;
         public combineItem: string[];
         constructor();
+    }
+    class _ConfirmDialog {
+        public button: string;
+        public showDialog: boolean;
+        public title: string;
+        public messageBody: string;
+        public okButtonValue: string;
+        public cancelButtonValue: string;
+        constructor(buttonType: string);
+        static place(self: _ConfirmDialog, title, message, okButtonValue, cancelButtonValue): _ConfirmDialog;
+        static openConfirmDialog(self: _ConfirmDialog, callbackOkButtonHandler?: Function, callbackCancelButtonHandler?: Function): void;
+    }
+    class _gridAction {
+        public actionName: string;
+        public actionType: _GridActionType;
+        constructor();
+    }
+    enum _GridActionType {
+        addNewRow,
+        deleteActiveRow,
+        deleteSelectedRows,
+        deleteAllRows,
+        moveUpActiveRow,
+        moveDownActiveRow,
+    }
+    class GridActionHelper {
+        static gridActionList: any[];
+        static registGridAction(fieldName: string, actionName: string, actionType: _GridActionType): void;
     }
 }
 declare module Uz {
@@ -2240,6 +3169,9 @@ declare module Uz {
         private _relation;
         private _originalProperty;
         private _isAfterOriginalPropertiesSet;
+        private _firstFocusFieldName;
+        private _lastFocusFieldName;
+        private _packageName;
         public url : string;
         public targetPostParamFieldNames : string[];
         public layout : any;
@@ -2248,6 +3180,9 @@ declare module Uz {
         public isCompositeEditMode : boolean;
         public relation : string[];
         public originalProperty : Object[];
+        public firstFocusFieldName : string;
+        public lastFocusFieldName : string;
+        public packageName : string;
         private static defaultLayout;
         constructor($parentElement: JQuery, isDesignMode: boolean, staticLayout: any, fieldName: string);
         public afterPropertiesSet(): void;
@@ -2258,8 +3193,9 @@ declare module Uz {
         public raisePropertyChanged(layout): void;
         private copyPropertyFromLayout();
         private initChildControls($compositeParentElement, compositeControlFieldName);
+        private changeChildControlsFieldNames(parentLayout, beforeFieldName, newFieldName);
         private static addFieldNameForCompositeControlChildren(parentFieldName, childControl);
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLDivElement;
+        public createDOMElement($parentElement): HTMLDivElement;
         public registProperty(): void;
         public getEditablePropertyInfo(): any;
         private createOriginalPropertyColumnInfos();
@@ -2269,25 +3205,1031 @@ declare module Uz {
         public bindData(data: any): void;
         public changeStateOfControl(): void;
         public changedDisplayNone(oldValue): void;
+        public handlesDefaultNextFocus(shiftKey: boolean): boolean;
+        public setFocus(shiftKey: boolean): boolean;
+        public initRuntime($element: JQuery): void;
+        public initDesign($parentElement: JQuery): void;
+    }
+}
+declare module Uz {
+    class _CheckBoxList extends Uz._ListControl {
+        private _onClick;
+        private _newLineItemNumber;
+        private _minCheckedItem;
+        private _maxCheckedItem;
+        private _selectedItems;
+        private _spaceSize;
+        private _isAllSelectable;
+        private _isAllSelectableBreakLine;
+        private _isAllSelectStatus;
+        private _isIndeterminateStatus;
+        private _icon;
+        public changedReadOnly(): void;
+        public removeClientError(): void;
+        public selectedItems : Uz.ListControlDataPair[];
+        private addIsAllSelect(items);
+        public onClick : string;
+        public newLineItemNumber : number;
+        public minCheckedItem : number;
+        public maxCheckedItem : number;
+        public spaceSize : any;
+        public isAllSelectable : boolean;
+        public isAllSelectableBreakLine : boolean;
+        public isAllSelectStatus : boolean;
+        public isIndeterminateStatus : boolean;
+        public icon : Uz.TextIcon[];
+        public fieldNameChanged(beforeFieldName, newFieldName): void;
+        constructor($parentElement?: JQuery, isDesignMode?: boolean);
+        public changeWidth(): void;
+        public updateUIForSelectedItem(value: string): void;
+        private updateSelectedItems();
+        private unCheckOfDisable();
+        private updateSelectedItemsAll();
+        private updateOfIsAllSelectStatusNoChange();
+        private isIndeterminateTrueToFalse();
+        private setIndeterminate(isIndeterminate);
+        private setAllSelect(isAllSelect, $Element);
+        public updateUIforDataSource(): void;
+        public createCheckBoxListEvent(): void;
+        private createCheckBoxList();
+        private crieateAllSelectCheckBox(element);
+        private createCheckBox(key, value);
+        private createCheckBoxSpan(className);
+        public bindData(properties: any): void;
+        public validateControl(): any;
+        public validateRequired(): any;
+        public validateMaxSelect(): any;
+        public validateMinSelect(): any;
+        public getOutputParameter(): any;
+        public setOutputParameter(value: any): void;
+        public getJQueryElement(isCoreElement?: boolean): JQuery;
+        public changeStateOfControl(): void;
+        public changedDisabled(): void;
+        public resizeControl(): void;
+        private resizeOuterDiv();
+        public canAcceptFocus(): boolean;
+        public handlesDefaultNextFocus(shiftKey: boolean): boolean;
+        public setFocus(shiftKey: boolean): boolean;
+        private getFocusElement(shiftKey);
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public getElementForFocus(): JQuery;
+        public createDOMElement($parentElement, isDesignMode: boolean): HTMLDivElement;
+    }
+}
+declare module Uz {
+    class _DropDownList extends Uz._ListControl {
+        private static DEFAULT_LABELR_ID;
+        private _labelRText;
+        private _labelRWidth;
+        private _labelRAlign;
+        private _onFocus;
+        private _onBlur;
+        private _isBlankLine;
+        public changedReadOnly(): void;
+        public removeClientError(): void;
+        public onFocus : string;
+        public onBlur : string;
+        public labelRText : string;
+        public createLabelElement(className: string): HTMLElement;
+        public labelRAlign : Uz.Align;
+        public labelRWidth : any;
+        public changeSelectedItem(dataSource: Uz.ListControlDataPair[]): void;
+        public isBlankLine : boolean;
+        public clearSelectedItem(): void;
+        public fieldNameChanged(beforeFieldName, newFieldName): void;
+        constructor($parentElement?: JQuery, isDesignMode?: boolean);
+        public changeWidth(): void;
+        public getJQueryElement(isCoreElement?: boolean): JQuery;
+        private getJQueryLabelRElement();
+        private getLabelRID();
+        public updateUIForSelectedItem(selectedItem: string): void;
+        public updateUIforDataSource(): void;
+        public _getSelectedItemCore(): Uz.ListControlDataPair;
+        public createDropDownList(): void;
+        private createOption(key, value);
+        public bindData(properties: any): void;
+        public validateControl(): any;
+        public validateRequired(): any;
+        public changedDisabled(): void;
+        public changedParentState(): void;
+        public changeStateOfControl(): void;
+        public resizeControl(): void;
+        public changeTabIndex(): void;
+        public canAcceptFocus(): boolean;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement, isDesignMode: boolean): HTMLDivElement;
+    }
+}
+declare module Uz {
+    class _ControlRepeater extends Uz._ViewControl {
+        private _repeateData;
+        private _height;
+        public height : any;
+        public repeateData : any;
+        public createRepeateData(): any[];
+        private getCommonChildDivRepeateData($children, parentProperty);
+        private bindCommonChildDiv(control, childrenElements, targetRepeateData);
+        private repeateControl();
+        private createNewJSControl(templateControl, createCount, idCount);
+        private createCloneFieldName(templateControl, originElement, firstFieldName, idCount);
+        private createNewCommonChildDiv($templateElement, createCount, idCount);
+        private replaceTemplateFieldName(cloneHtml, cloneFieldName, templateFieldName, replaceKeyword);
+        private reduceControl(templateControl, reduceCount, idCount);
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public bindData(data: any): void;
+        public changeStateOfControl(): void;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement: JQuery): HTMLDivElement;
+        public removeClonedControl(): void;
+    }
+}
+declare module Uz {
+    class _DynamicImage extends Uz._ViewControl {
+        private _src;
+        private _imageWidth;
+        private _imageHeight;
+        public src : string;
+        public imageHeight : any;
+        public imageWidth : any;
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public bindData(data: any): void;
+        public hasDisabled(): boolean;
+        public initRuntime($element: JQuery): void;
+        public setProperty(properties, parentCommonChildDivFieldName?: string): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement: JQuery): HTMLImageElement;
+    }
+}
+declare module Uz {
+    class _HorizontalLine extends Uz._ViewControl {
+        private _size;
+        public width : any;
+        public float : Uz.Float;
+        public size : any;
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public bindData(properties: any): void;
+        public hasDisabled(): boolean;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement): HTMLDivElement;
+    }
+}
+declare module Uz {
+    class _Label extends Uz._ViewControl {
+        private _align;
+        private _text;
+        private _isPrivateInfo;
+        private _required;
+        private _decorationClass;
+        public required : boolean;
+        public text : string;
+        public align : Uz.Align;
+        public isPrivateInfo : boolean;
+        public decorationClass : string;
+        constructor($parentElement?: JQuery, isDesignMode?: boolean);
+        public bindData(data: any): void;
+        public getOutputParameter(): any;
+        public setOutputParameter(value: any): void;
+        public hasDisabled(): boolean;
+        public getProperty(): any;
+        public getMaskControl(): any[];
+        public createDOMElement($parentElement): HTMLSpanElement;
+    }
+}
+declare module Uz {
+    class _PanelPublish extends Uz._Panel {
+        private static DEFAULT_CHECKBOX_ID;
+        private _checkboxDom;
+        private _isPublish;
+        private _isEmptyControl;
+        public isPublish : boolean;
+        public isEmptyControl : boolean;
+        public isEmptyControlAtRuntime(): void;
+        public setIsEmptyControlFalse(): void;
+        public fieldNameChanged(beforeFieldName, newFieldName): void;
+        constructor($parentElement?: JQuery, isDesignMode?: boolean);
+        private getCheckBoxID();
+        private bindEvent();
+        public bindData(data: any): void;
+        public setDisabledCanOpenAndClose(isDisabled: boolean): void;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public getElementForFocus(): JQuery;
+        public createDOMElement($parentElement): HTMLDivElement;
+        public setProperty(properties, parentCommonChildDivFieldName?: string): void;
+    }
+}
+declare module Uz {
+    class _SortableList extends Uz._ViewControl {
+        private static DEFAULT_DATASOURCETITLE_ID;
+        private static DEFAULT_SELECTEDSOURCETITLE_ID;
+        private static DEFAULT_DATASOURCELIST_ID;
+        private static DEFAULT_SELECTEDSOURCELIST_ID;
+        private static DEFAULT_SELECTBUTTON_ID;
+        private static DEFAULT_REMOVEBUTTON_ID;
+        private static DEFAULT_DATASOURCELISTALLRELEASEBUTTON_ID;
+        private static DEFAULT_DATASOURCELISTALLSELECTBUTTON_ID;
+        private static DEFAULT_SELECTEDSOURCELISTALLSELECTBUTTON_ID;
+        private static DEFAULT_SELECTEDSOURCELISTALLRELEASEBUTTON_ID;
+        private static DEFAULT_SELECTEDSOURCELISTSORTBUTTON_ID;
+        private _onChange;
+        private _required;
+        private _contentValueAlign;
+        private _selectedSourceTitle;
+        private _dataSourceTitle;
+        private _minSelectedItem;
+        private _maxSelectedItem;
+        private _dataSource;
+        private _selectedItems;
+        public selectedSourceTitle : string;
+        public dataSourceTitle : string;
+        public minSelectedItem : number;
+        public maxSelectedItem : number;
+        public dataSource : SortableListDataItem[];
+        public selectedItems : SortableListDataItem[];
+        private getSortableListDataItemInList(targetElement);
+        public setListHeight(): void;
+        public onChange : string;
+        public required : boolean;
+        public contentValueAlign : Uz.Align;
+        public fieldNameChanged(beforeFieldName, newFieldName): void;
+        public bindEvent(): void;
+        private getDataSourceTitleElement();
+        private getSelectedSourceTitleElement();
+        private getDataSourceListElement();
+        private getSelectedSourceListElement();
+        private getSelectButtonElement();
+        private getRemoveButtonElement();
+        private getDataSourceListAllSelectButtonElement();
+        private getDataSourceListAllReleaseButtonElement();
+        private getSelectedSourceListAllSelectButtonElement();
+        private getSelectedSourceListAllReleaseButtonElement();
+        private getSelectedSourceListSortButtonElement();
+        private getSelectButtonId();
+        private getRemoveButtonId();
+        private getDataSourceListAllSelectButtonId();
+        private getDataSourceListAllReleaseButtonId();
+        private getSelectedSourceListAllSelectButtonId();
+        private getSelectedSourceListAllReleaseButtonId();
+        private getSelectedSourceListSortButtonId();
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        private bindSortableAndSelectable(sourceList, connectListId);
+        private bindMoveNode();
+        private moveNode(sourceList, connectList);
+        private bindAllSelectAndAllRelease();
+        private allSelect(tagetList);
+        private allRelease(tagetList);
+        private bindSort();
+        private sortList(tagetList);
+        private createTitleArea();
+        private createListArea();
+        private createDataSourceListArea();
+        private createButtonArea();
+        private createSelectedSourceListArea();
+        private createOuterDiv();
+        private createInnerDiv(className);
+        private createTitle(id);
+        private createList(id);
+        private createButton(id, text);
+        private createListContent(targetList, source);
+        private createLi(key, value, sortKey);
+        public bindData(data: any): void;
+        public validateControl(): any;
+        public validateMaxSelect(): any;
+        public validateMinSelect(): any;
+        public getOutputParameter(): any;
+        public setOutputParameter(value: any): void;
+        public changeStateOfControl(): void;
+        public addDisabled(): void;
+        public removeDisabled(): void;
+        public addAsIfDisabledClass(): void;
+        public removeAsIfDisabledClass(): void;
+        public handlesDefaultNextFocus(shiftKey: boolean): boolean;
+        public setFocus(shiftKey: boolean): boolean;
+        private getFocusElement(shiftKey);
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public setProperty(properties, parentCommonChildDivFieldName?: string): void;
+        public getElementForFocus(): JQuery;
+        public createDOMElement($parentElement: JQuery): HTMLElement;
+    }
+    class SortableListDataItem {
+        public key: string;
+        public value: string;
+        public sortKey: string;
+        constructor(key: string, value: string, sortKey: string);
+    }
+}
+declare module Uz {
+    class _Space extends Uz._ViewControl {
+        private _height;
+        private _SpaceCount;
+        public float : Uz.Float;
+        public spaceCount : any;
+        public height : any;
+        private changeHeight(beforeHeight, afterHeight);
+        public changeWidth(): void;
+        public wrapChanged(beforeValue, afterValue): void;
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
+        public bindData(data: any): void;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement: JQuery): HTMLDivElement;
+        public beforeSaveDesign(): void;
+        public afterSaveDesign(): void;
+    }
+}
+declare module Uz {
+    class _StaticImage extends Uz._ViewControl {
+        private static DEFAULT_CORE_ID;
+        private static DEFAULT_LABELR_ID;
+        private _src;
+        private _imageWidth;
+        private _imageHeight;
+        private _labelRText;
+        private _labelRWidth;
+        private _labelRAlign;
+        public src : string;
+        public imageHeight : any;
+        public imageWidth : any;
+        public labelRText : string;
+        private labelRHeight();
+        private createLabelRElement();
+        public labelRWidth : any;
+        private decideWidth(beforeWidth, afterWidth);
+        public labelRAlign : Uz.Align;
+        private addLabelRAlignClass(newAlign, beforeAlign);
+        public fieldNameChanged(beforeFieldName, newFieldName): void;
+        public getCoreID(): string;
+        private getLabelRID();
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        private createImgDomElement(fieldName, $parent);
+        public registProperty(): void;
+        public getEditablePropertyInfo(): any;
+        public bindData(data: any): void;
+        public hasDisabled(): boolean;
+        public initRuntime($element: JQuery): void;
+        public setProperty(properties, parentCommonChildDivFieldName?: string): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement: JQuery): HTMLDivElement;
+        private createImgDOMElement(fieldName, $parent);
+    }
+}
+declare module Uz {
+    class _TableCell extends Uz._ViewControl {
+        private _connectTd;
+        public connectTd : string;
+        public fieldNameChanged(beforeFieldName, newFieldName): void;
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public createDOMElement($parentElement, isDesignMode: boolean): HTMLDivElement;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+    }
+}
+declare module Uz {
+    class _TablePanel extends Uz._ViewControl {
+        static DEFAULT_HTML: string;
+        private _html;
+        public html : string;
+        public fieldNameChanged(beforeFieldName, newFieldName): void;
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public getTempDivJQueryElement(): JQuery;
+        public getTableAreaJQueryElement(): JQuery;
+        public createDOMElement($parentElement, isDesignMode): HTMLDivElement;
+        public bindData(data: any): void;
+        public changeStateOfControl(): void;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+    }
+}
+declare module Uz {
+    class _TextBoxKana extends Uz._TextBox {
+        private static DEFAULT_KANATYPE;
+        private static DEFAULT_KANJI_IN_TEXTBOX_ID;
+        private _kanaType;
+        private _kanjiInField;
+        public kanaType : Uz.KanaType;
+        public kanjiInField : string;
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public getKanjiInFeildInfo(): any;
+        public bindData(data: any): void;
+        public initConvertKana(): void;
+        private static getKanaTypeString(value);
+        public formatValidation(): boolean;
+        static particularValidation(formatText: string): boolean;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement: JQuery): HTMLDivElement;
+    }
+}
+declare module Uz {
+    class _TextBoxNumSpinner extends Uz._TextBoxNum {
+        private static AUTO_COUNT_START_TIME;
+        private static UP_BUTTON_NAME_SUFFIX;
+        private static DOWN_BUTTON_NAME_SUFFIX;
+        private _onCountUp;
+        private _onCountDown;
+        public onCountUp : string;
+        public onCountDown : string;
+        public changedMaxValue(): void;
+        public changedMinValue(): void;
+        private getMaxLength();
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public fieldNameChanged(beforeFieldName, newFieldName): void;
+        public addLabelRDom(): void;
+        private bindSpinnerEvent(targetButtonName, countFunction);
+        public changeWidth(): void;
+        private fireUpDownEvent(upOrDown);
+        private countUp(beforeResult);
+        private countDown(beforeResult);
+        private createSpinnerButtonArea();
+        private createSpinnerButton(str);
+        public bindData(data: any): void;
+        public changeStateOfControl(): void;
+        public changedReadOnly(): void;
+        public validateControl(): any;
+        public isComboBoxChanged(value): void;
+        public initRuntime($element: JQuery): void;
+        public createDOMElement($parentElement): HTMLDivElement;
+        public changedReadOnlyForRuntime(): void;
+    }
+}
+declare module Uz {
+    class _TextBoxYubinNo extends Uz._TextBox {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public bindData(data: any): void;
+        public formatValidation(): boolean;
+        public getFormatText(value): string;
+        static getFormatText(value: string): string;
+        public changeFormat(): void;
+        public validateControl(): any;
+        public validateTextKind(): any;
+        public createDOMElement($parentElement: JQuery): HTMLDivElement;
+    }
+}
+declare module Uz {
+    class _TreeView extends Uz._ViewControl {
+        private _iconType;
+        private _isDraggable;
+        private _beforeData;
+        private _selectedItems;
+        private _dataSource;
+        private _onClick;
+        private _onDropped;
+        private _treeViewJson;
+        private _selectedItemsId;
+        public iconType : Uz.IconType;
+        public changeIconType(): void;
+        public isDraggable : boolean;
+        public selectedItems : TreeItem[];
+        private getSelectedItemsId(data);
+        private getSelectItemsFromData(selectItemsId, dataSource, selectedItems);
+        private getSelectedItems(selectItemsId, nodeData, selectedItems);
+        private serchSelectNodeItems(selectNodeItem, dataSource);
+        private addSelectedItemsId(selectNodeItem, nodeItem);
+        public dataSource : TreeItem[];
+        private createDataSource(nodeJsonArray, parentTreeItem, dataSource);
+        private createTreeItem(nodeJson, parentNodeText);
+        private createTreeViewJson(dataSource, parentId, parentJson);
+        private createNodeJson(treeItem, id);
+        public beforeData : TreeItem[];
+        public onClick : string;
+        public onDropped : string;
+        public treeViewJson : Object[];
+        public selectedItemsId : string[];
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public bindJstree(): void;
+        public bindSelectNodeEvent(): void;
+        private createJstreeOption();
+        public bindDropEvent(option: any): any;
+        public bindData(data: any): void;
+        public getOutputParameter(): any;
+        public setOutputParameter(value: any): void;
+        public hasDisabled(): boolean;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public setProperty(properties, parentCommonChildDivFieldName?: string): void;
+        private bindTreeView();
+        public getElementForFocus(): JQuery;
+        public createDOMElement($parentElement: JQuery): HTMLDivElement;
+    }
+    class TreeItem {
+        public childNodes: TreeItem[];
+        public text: string;
+        public isOpen: boolean;
+        public hasChildNode: boolean;
+        public parent: string;
+        public id: string;
+        constructor();
+        public setTreeeItem(treeItem): void;
+        public treeItemEquals(targetTreeItem: TreeItem): boolean;
+    }
+}
+declare module Uz {
+    class _VerticalLine extends Uz._ViewControl {
+        private _size;
+        public width : any;
+        public size : any;
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public bindData(data: any): void;
+        public hasDisabled(): boolean;
+        public initRuntime($element: JQuery): void;
+        public initDesign($parentElement?: JQuery, isDesignMode?: boolean, createDomElementFunc?: Function): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement): HTMLDivElement;
+    }
+}
+declare module Uz {
+    class _TextBoxDateRangeSlider extends Uz._TextBoxDateRange {
+        private static DEFAULT_SLIDER_ID;
+        private static DEFAULT_SLIDER_RANGE_DATE_MIN;
+        private static DEFAULT_SLIDER_RANGE_DATE_MAX;
+        private static SLIDER_SIZE;
+        private _sliderDate;
+        private _sliderRangeDateMin;
+        private _sliderRangeDateMax;
+        public sliderDate : HTMLElement;
+        public sliderRangeDateMin : string;
+        public sliderRangeDateMax : string;
+        public fieldNameChanged(beforeFieldName, newFieldName): void;
+        constructor($parentElement?: JQuery, isDesignMode?: boolean, createDomElementFunc?: Function);
+        public changeWidthParameter(oldWidth, newWidth): void;
+        public rangeChangeWidthArrow(oldWidth, newWidth): void;
+        public rangeChangeWidthArrowFree(oldWidth, newWidth): void;
+        public createFromToDateSliderChange(): void;
+        public createFromToDate(element): HTMLInputElement;
+        public createArrow(): HTMLSpanElement;
+        public createSliderDate(element, elementTop);
+        public initializeSlider(fieldName: string): void;
+        public dateRangemSliderBase(): void;
+        public rangeSliderDataSize(range1: number, range2: number, range3: number, range4: number): number[];
+        public rangeSliderDataVal(fieldName, minDate, maxDate): number;
+        public datepickerOnClose(element, beforeValue): void;
+        public createSliderDisplaySize(element);
+        public sliderDisplaySize();
+        public initRuntime($element: JQuery): void;
+        public createDOMElement($parentElement): HTMLDivElement;
+    }
+}
+declare module Uz {
+    class _ButtonBatchParameterRestore extends Uz._ButtonDialog {
+        private static RESTORE_DIV_NAME;
+        private _batchId;
+        private _subGyomuCode;
+        private _onRestoreBatchParameter;
+        private _selectedRestoreParameter;
+        public batchId : string;
+        public subGyomuCode : string;
+        public onRestoreBatchParameter : string;
+        public selectedRestoreParameter : string;
+        constructor($parentElement?: JQuery, isDesignMode?: boolean);
+        public recreateDomElement(isImage: boolean): void;
+        public bindData(data: any): void;
+        private waitOpenDialog(thisInstance);
+        private setPassingData();
+        private setHiddenValue(targetPanel, propertyName, value);
+        public initRuntime($element: JQuery): void;
+        public bindRuntimeForButtonDialog(): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement): HTMLButtonElement;
+    }
+}
+declare module Uz {
+    class _ButtonBatchParameterSave extends Uz._ButtonDialog {
+        private static SAVE_DIV_NAME;
+        private _batchId;
+        private _subGyomuCode;
+        private _getSaveBatchParameterURL;
+        private _postParameterPanelNames;
+        private _selectedParameterKey;
+        private _beforeSaveName;
+        private _beforePublicationRange;
+        private _existsBeforeParameter;
+        private _isProcessing;
+        public batchId : string;
+        public subGyomuCode : string;
+        public getSaveBatchParameterURL : string;
+        public postParameterPanelNames : Object[];
+        public isProcessing : boolean;
+        public beforeSaveName : string;
+        public beforePublicationRange : string;
+        public existsBeforeParameter : boolean;
+        constructor($parentElement?: JQuery, isDesignMode?: boolean);
+        public recreateDomElement(isImage: boolean): void;
+        public waitLoadingForButtonDialog(thisInstance): void;
+        public bindData(data: any): void;
+        private getSaveBatchParameter();
+        private openSaveDialog(saveBatchParameter);
+        private waitOpenDialog(thisInstance, saveBatchParameter);
+        private setPassingData(saveBatchParameter);
+        private setHiddenValue(targetPanel, propertyName, value);
+        public initRuntime($element: JQuery): void;
+        public bindRuntimeForButtonDialog(): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement): HTMLButtonElement;
+    }
+}
+declare module Uz {
+    class _PanelBatchParameter extends Uz._Panel {
+        constructor($parentElement?: JQuery, isDesignMode?: boolean);
+        public initRuntime($element: JQuery): void;
+        public createDOMElement($parentElement): HTMLDivElement;
+    }
+}
+declare module Uz {
+    class _CommonButton extends Uz._Button {
+        private _additionalText;
+        public additionalText : string;
+        public recreateDomElement(isImage: boolean): void;
+        public convertWidth(value): any;
+        public changeWidthParameter(oldWidth, newWidth): void;
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public applyCommonButtonData(properties: any): void;
+    }
+}
+declare module Uz {
+    class _CommonButtonAccept extends Uz._CommonButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+    }
+}
+declare module Uz {
+    class _CommonButtonApprovalRequest extends Uz._CommonButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+    }
+}
+declare module Uz {
+    class _CommonButtonApprove extends Uz._CommonButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+    }
+}
+declare module Uz {
+    class _CommonButtonBack extends Uz._CommonButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+    }
+}
+declare module Uz {
+    class _CommonButtonBatchRegister extends Uz._ButtonBatchRegister {
+        private static REGISTER_DIV_NAME;
+        static CLASS: string;
+        private _additionalText;
+        public additionalText : string;
+        public convertWidth(value): any;
+        public changeWidthParameter(oldWidth, newWidth): void;
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public applyCommonButtonData(properties: any): void;
+    }
+}
+declare module Uz {
+    class _CommonButtonBatchReserve extends Uz._ButtonBatchReserve {
+        private static REGISTER_DIV_NAME;
+        static CLASS: string;
+        private _additionalText;
+        public additionalText : string;
+        public convertWidth(value): any;
+        public changeWidthParameter(oldWidth, newWidth): void;
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public applyCommonButtonData(properties: any): void;
+    }
+}
+declare module Uz {
+    class _CommonButtonComplete extends Uz._CommonButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+    }
+}
+declare module Uz {
+    class _CommonButtonConfirm extends Uz._CommonButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+    }
+}
+declare module Uz {
+    class _CommonButtonCreate extends Uz._CommonButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+    }
+}
+declare module Uz {
+    class _CommonButtonDownload extends Uz._CommonButton {
+        private static BUTTONDOWNLOAD_TEMP_ID;
+        private _buttonDownload;
+        private _url;
+        private _postParameterPanelNames;
+        public url : string;
+        public postParameterPanelNames : Object[];
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public applyCommonButtonData(properties: any): void;
+        public initRuntime($element: JQuery): void;
+    }
+}
+declare module Uz {
+    class _CommonButtonExecute extends Uz._CommonButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+    }
+}
+declare module Uz {
+    class _CommonButtonFree extends Uz._CommonButton {
+        private DEFAULT_ICON_HEADER_COMMON;
+        private DEFAULT_ICON_TRALER_COMMON;
+        private _prefixText;
+        private _suffixText;
+        private _commonButtonIcon;
+        public additionalText : string;
+        public prefixText : string;
+        public suffixText : string;
+        public recreateDomElement(isImage: boolean): void;
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public changeText(): void;
+        public applyCommonButtonData(properties: any): void;
+    }
+}
+declare module Uz {
+    class _CommonButtonImport extends Uz._CommonButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+    }
+}
+declare module Uz {
+    class _CommonButtonNext extends Uz._CommonButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+    }
+}
+declare module Uz {
+    class _CommonButtonReceive extends Uz._CommonButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+    }
+}
+declare module Uz {
+    class _CommonButtonReject extends Uz._CommonButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+    }
+}
+declare module Uz {
+    class _CommonButtonReportPublish extends Uz._ButtonReportPublish {
+        private _additionalText;
+        public additionalText : string;
+        public convertWidth(value): any;
+        public changeWidthParameter(oldWidth, newWidth): void;
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public applyCommonButtonData(properties: any): void;
+        public initRuntime($element: JQuery): void;
+        private onClick();
+    }
+}
+declare module Uz {
+    class _CommonButtonReSearch extends Uz._CommonButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public getEditablePropertyInfo(): any;
+    }
+}
+declare module Uz {
+    class _CommonButtonSearch extends Uz._CommonButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+    }
+}
+declare module Uz {
+    class _CommonButtonSearchResult extends Uz._CommonButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        public getEditablePropertyInfo(): any;
+    }
+}
+declare module Uz {
+    class _CommonButtonSelectableComplete extends Uz._CommonButton {
+        private _message;
+        private _textOfYes;
+        private _textOfNo;
+        public message : string;
+        public textOfYes : string;
+        public textOfNo : string;
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+        private dialogDiv();
+        private createDialog();
+        public registProperty(): void;
+        public getEditablePropertyInfo(): any;
+        private static call(extension);
+        private static requestFinishFlow(extension, subGyomuCD, flowInstanceId, currentTaskId, wfParameter, callBack);
+        private static displayGyomuScreen(url);
+        public initRuntime($element: JQuery): void;
+        public applyCommonButtonData(property: any): void;
+    }
+}
+declare module Uz {
+    class _CommonButtonSend extends Uz._CommonButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+    }
+}
+declare module Uz {
+    class _CommonButtonUpdate extends Uz._CommonButton {
+        constructor($parentElement: JQuery, isDesignMode: boolean);
+    }
+}
+declare module Uz {
+    class _ButtonPublish extends Uz._ViewControl {
+        private static DEFAULT_TEXT;
+        private static DEFAULT_PRINTDIALOGURL;
+        private _text;
+        private _postParameterPanelNames;
+        private _validateUrl;
+        private _sourceCreateUrl;
+        private _afterPrintUrl;
+        private _isPreview;
+        private _onAfterPrint;
+        public text : string;
+        public postParameterPanelNames : Object[];
+        public validateUrl : string;
+        public sourceCreateUrl : string;
+        public afterPrintUrl : string;
+        public isPreview : boolean;
+        public onAfterPrint : string;
+        constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc?: Function);
+        private printDialog();
+        public bindData(data: any): void;
+        public initRuntime($element: JQuery): void;
+        public createDOMElement($parentElement, isDesignMode: boolean): HTMLButtonElement;
+    }
+}
+declare module Uz {
+    class _ButtonControlUtil {
+        private static DEFAULT_IMG_TEMP_ID;
+        private static DEFAULT_BTN_TEMP_ID;
+        private static DEFAULT_ICON_HEADER;
+        private static DEFAULT_ICON_TRALER_PNG;
+        private static DEFAULT_ICON_TRALER_GIF;
+        private static HEIGTH_MATCHES_TEXTBOX;
+        private static WIDTH_MATCHES_TEXTBOX;
+        private static DEFAULT_ICONSPAN_PADDING;
+        static buttonImageReSizeHeight($imageElement: JQuery, imageWidth: string, imageHeight: string, isHeightValue: boolean): void;
+        static buttonImageReSizeWidth($imageElement: JQuery, imageWidth: string, imageHeight: string, isWidthValue: boolean): void;
+    }
+}
+declare module Uz {
+    class _ImageDialog extends Uz._ButtonDialog {
+        private static DEFAULT_CORE_ID;
+        private static DEFAULT_LABELR_ID;
+        private static DEFAULT_IMG_TEMP_ID;
+        private _src;
+        private _labelRText;
+        private _labelRWidth;
+        private _labelRAlign;
+        public src : string;
+        public labelRText : string;
+        private labelRHeight();
+        private createLabelRElement();
+        public labelRWidth : any;
+        private decideWidth(beforeWidth, afterWidth);
+        private addLabelRAlignClass(newAlign, beforeAlign);
+        public changeText(): void;
+        public fieldNameChanged(beforeFieldName, newFieldName): void;
+        constructor($parentElement?: JQuery, isDesignMode?: boolean);
+        public reSizeHeightImage(isHeightValue: boolean): void;
+        public reSizeWidthImage(isWidthValue: boolean): void;
+        public changeStateOfControl(): void;
+        public recreateDomElement(isImage: boolean): void;
+        public bindRuntimeForButtonDialog(): void;
+        public getJQueryElement(isCoreElement?: boolean): JQuery;
+        public bindData(data: any): void;
+        public hasDisabled(): boolean;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement: JQuery): HTMLButtonElement;
+        private createInputDOMElement(fieldName);
+    }
+}
+declare module Uz {
+    class _Calendar extends Uz._ViewControl {
+        private _onDayClick;
+        private _onEventClick;
+        private _dayClickParam_date;
+        private _dayClickParam_allDay;
+        private _eventClickParam_eventId;
+        private fullCalendarObj;
+        public onDayClick : string;
+        public onEventClick : string;
+        constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc: Function);
+        public bindData(data: any): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement, isDesignMode: boolean): HTMLDivElement;
+        private makeFullCalendar($targetElement, fullCalendarObj);
+        private setCalendarEvents(events);
+    }
+}
+declare module Uz {
+    class _CharacterFontLabel extends Uz._ViewControl {
+        private _reamsUnicode;
+        private _reamsCharacter;
+        private _availableType;
+        private _title;
+        private _base64BmpString;
+        private _onClick;
+        private _characterAttributes;
+        public availableType : _AvailableType;
+        public reamsUnicode : string;
+        public reamsCharacter : string;
+        public title : string;
+        public base64BmpString : string;
+        public onClick : string;
+        constructor();
+        public createALinkDomElement(): HTMLElement;
+        private createAnchorClass(type);
+        private createDivDomElement();
+        public bindData(data: any): void;
+        private bindEvent();
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement: JQuery): HTMLElement;
+    }
+    enum _AvailableType {
+        AVAILABLE,
+        JUKI_NET_TOUITSU_NAIJI,
+        OTHER_CHARACTER,
+    }
+    class _CharacterAttributes {
+        private _reamsUnicode;
+        private _totalStrokes;
+        private _yomi1;
+        private _yomi2;
+        private _yomi3;
+        private _yomi4;
+        private _busyu1;
+        private _busyu2;
+        private _busyu3;
+        private _busyu4;
+        private _kanjiKind;
+    }
+    enum _CharacterKindType {
+        JIS_X_0201,
+        JIS_X_0208,
+        JIS_X_0212,
+        JIS_X_0213,
+        IBM_EXTEND,
+        NEC_SPECIAL,
+        MJ_VARIATION,
+        JIS_X_0213_COMBINE,
+        SJIS,
+        SJIS_RUIJI,
+        JUKI_NET_TOUITSU_MOJI,
+        NYUKAN_SEIJI,
+        NYUKAN_GAIJI,
+    }
+    enum _KanjiKindType {
+        KANJI,
+        NOT_KANJI_RUSSIA,
+        NOT_KANJI_GREEK,
+        NOT_KANJI_KATAKANA,
+        NOT_KANJI_KANA,
+        NOT_KANJI_NUMERIC,
+        NOT_KANJI_ALPHABET,
+        NOT_KANJI_SPECIAL,
+        NOT_KANJI_HENTAIKANA,
+        NOT_KANJI_OTHER,
+    }
+}
+declare module Uz {
+    class _CharacterHelperButtonDialog extends Uz._ButtonDialog {
+        static CHARACTER_HELPER_IMAGE: string;
+        static DIV_CHARACTER_SEARCH: string;
+        private static DIV_ID_CHARACTER_HELPER;
+        private static DIV_FIRE_EVENT_METHOD;
+        private _searchKind;
+        private _sortKey;
+        public searchKind : string;
+        private setDisabledSortKey(isDisabled);
+        public sortKey : string;
+        constructor($parentElement?: JQuery, isDesignMode?: boolean, createDomElementFunc?: Function);
+        private execOnLoadCharacterHelper(searchKind, sortKey);
+        public bindData(data: any): void;
+        public waitLoadingForButtonDialog(thisInstance): void;
+        public waitForDialogOpen(): void;
+        public recreateDomElement(isImage: boolean): void;
+        public bindRuntimeForButtonDialog(): void;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public createDOMElement($parentElement: JQuery): HTMLButtonElement;
+    }
+    enum SearchKindJapaneseName {
+        "単漢字検索",
+        "氏名検索",
+    }
+    enum SortKeyJapaneseName {
+        "使用頻度が直近のものでソートする",
+        "出生のトレンドでソートする",
     }
 }
 declare module Uz {
     class _ViewControlUtil {
-        static applyLayoutInfo(control: Uz._JSControl, layoutInfo: any, $ancestorElement: JQuery, isDesignMode: boolean, forceBind?: Boolean): Uz._JSControl;
-        static applyLayoutInfoForDesign(control: Uz._JSControl, layoutInfo: any, $ancestorElement: JQuery, isDesignMode: boolean): Uz._JSControl;
+        static applyLayoutInfo(control?: Uz._JSControl, layoutInfo?: any, $ancestorElement?: JQuery, isDesignMode?: boolean, forceBind?: Boolean, selecter?: string): Uz._JSControl;
+        static applyLayoutInfoForDesign(selector?: string, parentCommonChildDivFieldName?: string): void;
+        private static buildItems(control);
         private static getTargetPanelNames(state);
         private static getTargetLayoutInfo(layoutInfo, targetPanelName);
-        private static applyLayoutInfoForDesignCore(control, layoutInfo, $ancestorElement, isDesignMode);
         static createInitialControl(control: Uz._JSControl, layoutInfo: any, $ancestorElement: JQuery, isDesignMode: boolean): Uz._JSControl;
         private static isCompositeControlType(controlType);
         private static isCompositeEditMode(control, layoutInfo);
         static adjustmentViewPageHeight(isDesignMode: boolean): void;
         private static resizeViewPageHeight();
-        static applyDependencies(myControl: Uz._ViewControl): void;
-        private static applyDependency(dependentControl, myCondition, myControl, expression, targetProperty, targetValue);
-        private static applyDependencyForSelectableControl(myControl, dependencyIndex, myCondition, isSelected);
-        private static changeMyConditionFromDependency(myCondition, controlProperties, isDepend);
         static getPanelFieldNames(parentControl: Uz._ViewControl, panelFieldNames: string[]): string[];
+        static getPanelBatchParameterFieldNames(parentControl: Uz._ViewControl, panelFieldNames: string[]): string[];
+        static getPanelFieldNamesAll(parentControl: Uz._ViewControl): string[];
         static serializeArrayForGrid(array: string[]): string;
         static getFirstState(page: Uz._ViewPage): string;
         static getNextState(page: Uz._ViewPage, fieldName: string, eventName: string): string;
@@ -2305,7 +4247,9 @@ declare module Uz {
         static splitStringByBreak(str: string): string[];
         static appendNewLinetText(element: JQuery, strArray: string[]): void;
         static getUniqueIdForViewControl(controlType: any);
+        static getGyomuCD(): string;
         static createPostParameter(instance: Uz._JSControl): any;
+        static createPostParameterByPostParameterPanelNames(postParameterPanelNames: any[]): any;
         static createPostParameterCore(postParameterPanelNames, keyName): any[];
         static getLayoutByFieldName(rootControl: Uz._JSControl, fieldName: string): any;
         private static searchLayoutByFieldName(currnetControl, fieldName);
@@ -2327,8 +4271,10 @@ declare module Uz {
         static setSerializedOutputParameter(ioInfo: any, serializedParameter: any): void;
         static setOutputParameter(ioInfo: any, parameter: any): void;
         private static setOutputParameterForHidden(dataPassing, parameter);
-        static loadSequencePanel(loadPanelInstance: any, loadSequence: any, eventName?: string, triggerControlInfo?: any): void;
-        private static loadDivs(instances, loadSequence, eventName, triggerControlInfo?);
+        static loadSequencePanel(loadPanelInstance: Uz.PanelWithEventName[], loadSequence: string[][], triggerControlInfo?: any, completeFunc?: Function): void;
+        private static executeLoad(sequenceLoad, triggerControlInfo);
+        static getLoadOrderTree(instances: Uz.PanelWithEventName[]): Uz.PanelWithEventName[][][];
+        private static loadDivs(instances, loadSequence, triggerControlInfo?, completeFunc?, failFunc?);
         static getFieldNamesForDialog(searchControl: Uz._JSControl): string[];
         private static searchFieldNamesForDialog(control, fieldNames);
         static setInitializeDataForControls(control: Uz._JSControl, initlayout: any): void;
@@ -2345,15 +4291,30 @@ declare module Uz {
         static showValidateErrorMessage(validateMessages: any): void;
         static changeControlColor(controlId: string): void;
         static removeClientError(controlId: string): void;
-        static isValidateError(validateFrom: string): boolean;
+        static isValidateError(validateFrom?: string): boolean;
         static isValidateWarningMessage(): boolean;
         static resizeOuterDiv(targetControl: any): void;
         private static getOuterDivWidthOfCenter(targetControl);
         private static isImageButton(control);
         static isControlOnDialog(control: Uz._JSControl): boolean;
-        static changeCommonButtonDisabled(page: Uz._ViewPage, currentCommonButtonDisabled: any): void;
+        static changeCommonButtonPropertyFromServerSide(page: Uz._ViewPage, pDisabled: any, pVisible: any, pDisplayNone: any, pAdditionalText: any, pPrefixText: any, pSuffixText: any): void;
         static resizeOuterDivForComposite(targetControl: any): void;
         private static setSizeComposite(rootControl, layout);
+        static openModelessWindow(param: any);
+        static isInReamsBrowser(): Boolean;
+        static appendSizeUnit(value: any, unit: string): any;
+        static getEventValues(searchControl: Uz._JSControl): string[];
+        private static searchEventValue(control, events);
+        static getPublicEventName(targetControl: Uz.CommonChildDiv, eventName: string): string;
+        static requiredStateControl(required: boolean, targetControl: any, ControlElement?: any): void;
+        static requireMarkControl(required: boolean, targetControl: any, ControlElement?: any): void;
+        static rangeRequireMarkControl(targetRequired: boolean, targetControl: any, targetName: string, required: boolean, ControlElement?: any): void;
+        static activesParentTabPanel(target: Uz._ViewControl): boolean;
+        private static findParentTabPanelsForLazyLoadingControl(tabPanel, targetFieldName);
+        static getControlInfo(fullControlName): any;
+        private static getBusinessId(fullName);
+        private static getControlName(fullName);
+        static setPrivateInfo(value: boolean, control: Uz._JSControl): void;
     }
     class Console {
         private static timeCounters;
@@ -2366,9 +4327,25 @@ declare module Uz {
     class StateTransitionRow {
         public order: string;
         public showWizard: Boolean;
+        public showPankuzu: Boolean;
         public stateName: string;
+        public wizardName: string;
         public id: string;
-        public subGyomuCode;
+        public subGyomuCode: string;
+        public visibleDivs: {
+            visibleDiv: string;
+            panelState: string;
+            fixedDiv: string;
+        }[];
+        public validation: {
+            url?: string;
+            parameters?: string[];
+        };
+        public events: {
+            fieldName: string;
+            event: string;
+            transition: string;
+        }[];
     }
     class _ViewPage extends Uz._ViewControl {
         private _onLoad;
@@ -2390,8 +4367,17 @@ declare module Uz {
         private _commonButtonAreaData;
         private _isOpenSupplementWindow;
         private _supplementWindow;
+        private _isOpenStaticManualWindow;
+        private _staticManualWindow;
+        private _gyomuCode;
         private _subGyomuCode;
         private _currentCommonButtonDisabled;
+        private _currentCommonButtonVisible;
+        private _currentCommonButtonDisplayNone;
+        private _currentCommonButtonAdditionalText;
+        private _currentCommonButtonPrefixText;
+        private _currentCommonButtonSuffixText;
+        private _packageName;
         private _isSupplementLocationChange;
         private static _helpTabWidth;
         private static _helpTabHeight;
@@ -2404,18 +4390,22 @@ declare module Uz {
         public onLoad : string;
         public title : string;
         public jsPathCollection : string[];
-        private getScriptFile(path);
+        public getScriptFile(path): void;
         public relation : string[];
         public stateTransition : StateTransitionRow[];
         public currentState : string;
         public currentSupplementInfoPostParam : string;
         public overrideStateTransition(stateTransition): void;
         private static updateStateTransition(targetStateTransition, sourceStateTransition, layoutName, subGyomuCode);
+        public cleanStateTransition(): void;
+        public getStateTransitionTargetPanelNames(): string[];
+        public changeFieldNameInStateTransition(beforeFieldName: string, newFieldName: string): void;
         public id : string;
+        public gyomuCode : string;
         public subGyomuCode : string;
         public WFParameter : string[];
         public UIContainerEventMapping : UIContainerMappingRow[];
-        public loadSequencePanelNames : string[];
+        public loadSequencePanelNames : string[][];
         public panelMargin : Uz.LumpSizeForPanel;
         public controlMargin : Uz.LumpSizeForContorol;
         public supplementInfoAllSet : string;
@@ -2423,16 +4413,35 @@ declare module Uz {
         public currentSupplementInfoByState : string;
         public commonButtonAreaData : string[];
         public isOpenSupplementWindow : boolean;
-        public supplementWindow : any;
+        private supplementWindow;
+        public isOpenStaticManualWindow : boolean;
+        private staticManualWindow;
+        public getCurrentCommonButtonProperty();
         public currentCommonButtonDisabled : any;
-        constructor($parentElement: JQuery, isDesignMode: boolean, isDialogPage: boolean);
+        public currentCommonButtonVisible : any;
+        public currentCommonButtonDisplayNone : any;
+        public currentCommonButtonAdditionalText : any;
+        public currentCommonButtonSuffixText : any;
+        public currentCommonButtonPrefixText : any;
+        public packageName : string;
+        private _uiContainerEventAlias;
+        public uiContainerEventAlias : string;
+        constructor($parentElement: JQuery, isDesignMode: boolean);
         private initUnLoadEvent();
-        private initSupplementButtonClickEvent();
+        public initSupplementButtonClickEvent(): void;
         private redirectSupplementInfoPage();
         public getSupplementInfoUrl(supplementInfo: String): string;
+        public addStateChangableCss(): void;
+        public initTitle(): void;
+        public initCommonButtonData(isAll?: boolean): void;
+        private initTitleAreaButtonToolTip();
+        public initManualButtonClickEvent(): void;
+        private getAuthData();
+        private createManualWindowBizEntryPoint();
+        private createManualWindow(sendAuthData, sendStaticManualData);
         public changeCommonButtonArea(isAll?: boolean): void;
-        private applyCommonButtonData(button, buttonProperty);
-        private searchButtonSetting(isAll?);
+        public applyCommonButtonData(button, buttonProperty): void;
+        public searchButtonSetting(isAll?: boolean);
         private searchIsFinishButtonOnTheRight();
         private searchFinishButtonVisible();
         private searchSuspendButtonVisible();
@@ -2448,9 +4457,6 @@ declare module Uz {
         public createDomElement($parentElement, isDesignMode): HTMLDivElement;
         private createFloatErrorAndWarningDiv($parentElement);
         private createErrorAndWarningDiv(errorWarningDiv);
-        public getEditablePropertyInfo(): any;
-        private static getFieldNames(control, fieldNames);
-        private getStateNames();
         public bindStateTransitionEvent(): void;
         public changeState(fieldName: string, eventName: string): void;
         private changePage(eventName);
@@ -2459,14 +4465,16 @@ declare module Uz {
         public getEventName(eventAliasName: string): string;
         public fireUIContainerToEvent(eventNameAlias: string): void;
         private changeVisibleDiv(isAll);
+        public changeDisplayCss(element): void;
+        public addChangeInstance(element, changeInstance: Uz.PanelWithEventName[]): Uz.PanelWithEventName[];
         public rePositioningFixedDiv(): void;
         public resizeChildControls($parentsPanel: JQuery): void;
         private setParentsPanleMinWidth($parentsPanel);
         private returnOriginalLocation(element);
-        private changeStateDiv(changeInstance);
-        private loadDivs(instances, loadSequence);
         private changeControlMargin(value);
         private changePanelMargin(value);
+        public initRuntime($element: JQuery): void;
+        public createDOMElement($parentElement: JQuery): HTMLDivElement;
     }
     class CommonButtonAreaData {
         public commonButtonAreaId: string;
@@ -2494,13 +4502,6 @@ declare module Uz {
         private static DEFAULT_CORE_ID;
         private static DEFAULT_LABELL_ID;
         private static DEFAULT_LABELR_ID;
-        private _coreDom;
-        private _labelLDom;
-        private _labelRDom;
-        private _textareaDom;
-        private _textcountDom;
-        private _textcountDivDom;
-        private _outerDiv;
         private _required;
         private _maxLength;
         private _minLength;
@@ -2524,6 +4525,7 @@ declare module Uz {
         private _labelRWidth;
         private _labelLAlign;
         private _labelRAlign;
+        private _decorationClass;
         public fieldNameChanged(beforeFieldName, newFieldName): void;
         private getCoreID();
         private getLabelLID();
@@ -2533,6 +4535,7 @@ declare module Uz {
         public minLength : number;
         public readOnly : boolean;
         private changedReadOnly();
+        public setReadOnlyStyle($element: JQuery, readOnly: boolean): void;
         public placeHolder : string;
         public isPrivateInfo : boolean;
         public imeMode : Uz.ImeMode;
@@ -2551,22 +4554,24 @@ declare module Uz {
         private decideWidth(element, beforeWidth, afterWidth);
         public labelLAlign : Uz.Align;
         public labelRAlign : Uz.Align;
-        private height;
+        public height : any;
         public limitLength : number;
         public countDisp : boolean;
         public value : string;
+        public decorationClass : string;
         constructor($parentElement: JQuery, isDesignMode: boolean);
         public changeWidthParameter(oldWidth, newWidth): void;
         public multiLineChangeWidth(oldWidth, newWidth): void;
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
         public createDomElementMultiLine(): HTMLSpanElement;
         public createDomElementCount(): HTMLDivElement;
         public getEditablePropertyInfo(): any;
         public getJQueryElement(isCoreElement?: boolean): JQuery;
+        public getTextAreaElement(): JQuery;
         private getJQueryLabelLElement();
         private getJQueryLabelRElement();
         private getJQueryLabelCountElement();
+        private addCssClass(cssClasName);
+        private removeCssClass(cssClasName);
         public bindData(data: any): void;
         private initEvent();
         private initJcountJS();
@@ -2582,919 +4587,11 @@ declare module Uz {
         private heightConvert(value);
         public changeTabIndex(): void;
         public resizeControl(): void;
-    }
-}
-declare module Uz {
-    class _TextBoxYubinNo extends Uz._TextBox {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
-        public formatValidation(): boolean;
-        public changeFormat(): void;
-        public validateControl(): any;
-        public validateTextKind(): any;
-    }
-}
-declare module Uz {
-    class _TextBoxDateRangeSlider extends Uz._TextBoxDateRange {
-        private static DEFAULT_SLIDER_ID;
-        private static DEFAULT_SLIDER_RANGE_DATE_MIN;
-        private static DEFAULT_SLIDER_RANGE_DATE_MAX;
-        private _sliderDate;
-        private _sliderRangeDateMin;
-        private _sliderRangeDateMax;
-        public sliderDate : HTMLElement;
-        public sliderRangeDateMin : string;
-        public sliderRangeDateMax : string;
-        public fieldNameChanged(beforeFieldName, newFieldName): void;
-        constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc: Function);
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
-        public changeWidthParameter(oldWidth, newWidth): void;
-        public rangeChangeWidthArrow(oldWidth, newWidth): void;
-        public rangeChangeWidthArrowFree(oldWidth, newWidth): void;
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
-        public createFromToDateSliderChange(): void;
-        public createFromToDate(element): HTMLInputElement;
-        public createArrow(): HTMLSpanElement;
-        public createSliderDate(element, elementTop);
-        public initializeSlider(fieldName): void;
-        public dateRangemSliderBase(): void;
-        public rangeSliderDataSize(range1, range2, range3, range4): any[];
-        public rangeSliderDataVal(fieldName, minDate, maxDate);
-        public datepickerOnClose(element, beforeValue): void;
-        public createSliderDisplaySize(element);
-        public sliderDisplaySize();
-    }
-}
-declare module Uz {
-    class _TreeView extends Uz._ViewControl {
-        private _iconType;
-        private _isDraggable;
-        private _beforeData;
-        private _selectedItems;
-        private _dataSource;
-        private _onClick;
-        private _onDropped;
-        private _treeViewJson;
-        private _selectedItemsId;
-        public iconType : Uz.IconType;
-        public isDraggable : boolean;
-        public selectedItems : TreeItem[];
-        private getSelectedItemsId(data);
-        private getSelectItemsFromData(selectItemsId, dataSource, selectedItems);
-        private getSelectedItems(selectItemsId, nodeData, selectedItems);
-        private serchSelectNodeItems(selectNodeItem, dataSource);
-        private addSelectedItemsId(selectNodeItem, nodeItem);
-        public dataSource : TreeItem[];
-        private createDataSource(nodeJsonArray, parentTreeItem, dataSource);
-        private createTreeItem(nodeJson, parentNodeText);
-        private createDefaultDataSource();
-        private createTreeViewJson(dataSource, parentId, parentJson);
-        private createNodeJson(treeItem, id);
-        public beforeData : TreeItem[];
-        public onClick : string;
-        public onDropped : string;
-        public treeViewJson : Object[];
-        public selectedItemsId : string[];
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        private bindJstree();
-        private createJstreeOption();
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLDivElement;
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
-        public getOutputParameter(): any;
-        public setOutputParameter(value: any): void;
-        public hasDisabled(): boolean;
-    }
-    class TreeItem {
-        public childNodes: TreeItem[];
-        public text: string;
-        public isOpen: boolean;
-        public hasChildNode: boolean;
-        public parent: string;
-        public id: string;
-        constructor();
-        public setTreeeItem(treeItem): void;
-        public treeItemEquals(targetTreeItem: TreeItem): boolean;
-    }
-}
-declare module Uz {
-    class _SortableList extends Uz._ViewControl {
-        private static DEFAULT_DATASOURCETITLE_ID;
-        private static DEFAULT_SELECTEDSOURCETITLE_ID;
-        private static DEFAULT_DATASOURCELIST_ID;
-        private static DEFAULT_SELECTEDSOURCELIST_ID;
-        private static DEFAULT_SELECTBUTTON_ID;
-        private static DEFAULT_REMOVEBUTTON_ID;
-        private static DEFAULT_DATASOURCELISTALLRELEASEBUTTON_ID;
-        private static DEFAULT_DATASOURCELISTALLSELECTBUTTON_ID;
-        private static DEFAULT_SELECTEDSOURCELISTALLSELECTBUTTON_ID;
-        private static DEFAULT_SELECTEDSOURCELISTALLRELEASEBUTTON_ID;
-        private static DEFAULT_SELECTEDSOURCELISTSORTBUTTON_ID;
-        private _onChange;
-        private _required;
-        private _contentValueAlign;
-        private _selectedSourceTitle;
-        private _dataSourceTitle;
-        private _minSelectedItem;
-        private _maxSelectedItem;
-        private _dataSource;
-        private _selectedItems;
-        private _dataSourceTitleElement;
-        private _selectedSourceTitleElement;
-        private _dataSourceListElement;
-        private _selectedSourceListElement;
-        private _selectButtonElement;
-        private _removeButtonElement;
-        private _dataSourceListAllSelectButtonElement;
-        private _dataSourceListAllReleaseButtonElement;
-        private _selectedSourceListAllSelectButtonElement;
-        private _selectedSourceListAllReleaseButtonElement;
-        private _selectedSourceListSortButtonElement;
-        public selectedSourceTitle : string;
-        public dataSourceTitle : string;
-        public minSelectedItem : number;
-        public maxSelectedItem : number;
-        private addDefaultDataSource(dataSource);
-        public dataSource : SortableListDataItem[];
-        public selectedItems : SortableListDataItem[];
-        private getSortableListDataItemInList(targetElement);
-        private setListHeight();
-        public onChange : string;
-        public required : boolean;
-        public contentValueAlign : Uz.Align;
-        public fieldNameChanged(beforeFieldName, newFieldName): void;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        private bindSortableAndSelectable(sourceList, connectListId);
-        private bindMoveNode();
-        private moveNode(sourceList, connectList);
-        private bindAllSelectAndAllRelease();
-        private allSelect(tagetList);
-        private allRelease(tagetList);
-        private bindSort();
-        private sortList(tagetList);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLElement;
-        private createTitleArea();
-        private createListArea();
-        private createDataSourceListArea();
-        private createButtonArea();
-        private createSelectedSourceListArea();
-        private createOuterDiv();
-        private createInnerDiv(className);
-        private createTitle(id);
-        private createList(id);
-        private createButton(id, text);
-        private createListContent(targetList, source);
-        private createLi(key, value, sortKey);
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
-        public validateControl(): any;
-        public validateMaxSelect(): any;
-        public validateMinSelect(): any;
-        public getOutputParameter(): any;
-        public setOutputParameter(value: any): void;
-        public changeStateOfControl(): void;
-        private addAsIfDisabledClass();
-        private removeAsIfDisabledClass();
-    }
-    class SortableListDataItem {
-        public key: string;
-        public value: string;
-        public sortKey: string;
-        constructor(key: string, value: string, sortKey: string);
-    }
-}
-declare module Uz {
-    class _ControlRepeater extends Uz._ViewControl {
-        private _repeateData;
-        public repeateData : any;
-        private setCompositeControlJson(templateControlJson, templateControlFieldName);
-        private bindCompositeControl(control, childrenElements, targetRepeateData);
-        private repeateJScontrol(repeateData);
-        private createNewCompositeControl(templateControl, createCount, idCount);
-        private createNewJSControl(templateControl, createCount, idCount);
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
-        public changeStateOfControl(): void;
-    }
-}
-declare module Uz {
-    class _DynamicImage extends Uz._ViewControl {
-        private _src;
-        private _imageWidth;
-        private _imageHeight;
-        public src : string;
-        public imageHeight : any;
-        public imageWidth : any;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLImageElement;
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
-        public hasDisabled(): boolean;
-    }
-}
-declare module Uz {
-    class _StaticImage extends Uz._ViewControl {
-        private static DEFAULT_CORE_ID;
-        private static DEFAULT_LABELR_ID;
-        private $coreElement;
-        private $labelRElemnt;
-        private _src;
-        private _imageWidth;
-        private _imageHeight;
-        private _labelRText;
-        private _labelRWidth;
-        private _labelRAlign;
-        public src : string;
-        public imageHeight : any;
-        public imageWidth : any;
-        public labelRText : string;
-        private createLabelRElement();
-        public labelRWidth : any;
-        private decideWidth(beforeWidth, afterWidth);
-        public labelRAlign : Uz.Align;
-        private addLabelRAlignClass(newAlign, beforeAlign);
-        public fieldNameChanged(beforeFieldName, newFieldName): void;
-        public getCoreID(): string;
-        private getLabelRID();
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
-        private createImgDomElement(fieldName, $parent);
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
-        public hasDisabled(): boolean;
-    }
-}
-declare module Uz {
-    class _TableCell extends Uz._ViewControl {
-        private _connectTd;
-        public connectTd : string;
-        public fieldNameChanged(beforeFieldName, newFieldName): void;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLDivElement;
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
-        private selectParentTablePanel(selectedControl);
-        public bindData(data: any): void;
-    }
-}
-declare module Uz {
-    class _TablePanel extends Uz._ViewControl {
-        static DEFAULT_HTML: string;
-        private _html;
-        public html : string;
-        public fieldNameChanged(beforeFieldName, newFieldName): void;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        private getTempDivJQueryElement();
-        private getTableAreaJQueryElement();
-        private createTableHtml();
-        private backupTableCell();
-        private restoreTableCell();
-        private rebuildTableCell();
-        private revmoveDisusedTableCell();
-        private addNewTableCell();
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
-        public getEditablePropertyInfo(): any;
-        static checkHtml(inputText: string): string;
-        public bindData(data: any): void;
-        public changeStateOfControl(): void;
-    }
-}
-declare module Uz {
-    class _TextBoxKana extends Uz._TextBox {
-        private static DEFAULT_KANATYPE;
-        private static DEFAULT_KANJI_IN_TEXTBOX_ID;
-        private _kanaType;
-        private _kanjiInField;
-        public kanaType : Uz.KanaType;
-        public kanjiInField : string;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
-        public getEditablePropertyInfo(): any;
-        public getKanjiInFeildInfo(): any;
-        public bindData(data: any): void;
-        static initConvertKanaAll(): void;
-        public formatValidation(): boolean;
-        static particularValidation(formatText: string): boolean;
-    }
-}
-declare module Uz {
-    class _HorizontalLine extends Uz._ViewControl {
-        private _size;
-        public width : any;
-        public float : Uz.Float;
-        public size : any;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
-        public hasDisabled(): boolean;
-    }
-}
-declare module Uz {
-    class _VerticalLine extends Uz._ViewControl {
-        private _size;
-        public width : any;
-        public size : any;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
-        public hasDisabled(): boolean;
-    }
-}
-declare module Uz {
-    class _Label extends Uz._ViewControl {
-        private _align;
-        private _text;
-        private _isPrivateInfo;
-        private _required;
-        private _decorationClass;
-        public required : boolean;
-        public text : string;
-        public align : Uz.Align;
-        public isPrivateInfo : boolean;
-        public decorationClass : string;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode): HTMLSpanElement;
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
-        public getOutputParameter(): any;
-        public setOutputParameter(value: any): void;
-        public hasDisabled(): boolean;
-    }
-}
-declare module Uz {
-    class _PanelPublish extends Uz._Panel {
-        private static DEFAULT_CHECKBOX_ID;
-        private _checkboxDom;
-        private _isPublish;
-        private _isEmptyControl;
-        public isPublish : boolean;
-        public isEmptyControl : boolean;
-        public fieldNameChanged(beforeFieldName, newFieldName): void;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        private getCheckBoxID();
-        private bindEvent();
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
-        public setDisabledCanOpenAndClose(isDisabled: boolean): void;
-    }
-}
-declare module Uz {
-    class _ButtonPublish extends Uz._ViewControl {
-        private static DEFAULT_TEXT;
-        private static DEFAULT_PRINTDIALOGURL;
-        private _text;
-        private _postParameterPanelNames;
-        private _validateUrl;
-        private _sourceCreateUrl;
-        private _afterPrintUrl;
-        private _isPreview;
-        private _onAfterPrint;
-        public text : string;
-        public postParameterPanelNames : Object[];
-        public validateUrl : string;
-        public sourceCreateUrl : string;
-        public afterPrintUrl : string;
-        public isPreview : boolean;
-        public onAfterPrint : string;
-        constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc?: Function);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLButtonElement;
-        public getEditablePropertyInfo(): any;
-        private printDialog();
-        public bindData(data: any): void;
-    }
-}
-declare module Uz {
-    class _ListControl extends Uz._ViewControl {
-        private _dataSource;
-        private _disabledItem;
-        private _selectedItem;
-        private _onChange;
-        public dataSource : ListControlDataPair[];
-        public updateUIforDataSource(): void;
-        private addDefaultDataSource();
-        public changeSelectedItem(dataSource: ListControlDataPair[]): void;
-        public onChange : string;
-        public disabledItem : ListControlDataPair[];
-        public selectedItem : string;
-        public _getSelectedItemCore(): ListControlDataPair;
-        private __selectedItemForBeforeBindingDataSource;
-        private existDataSource(value);
-        public listDisabledItem(): void;
-        public updateUIForSelectedItem(value: string): void;
-        constructor($parentElement: JQuery, isDesignMode: boolean, createDomElementFunc: Function);
-        public fieldNameChanged(beforeFieldName, newFieldName): void;
-        public getJQueryElement(isCoreElement?: boolean): JQuery;
-        public changeWidth(): void;
-        public registProperty(): void;
-        public createIDWithKey(key: string): string;
-        public getEditablePropertyInfo(): any;
-        private createDataSourceColumnInfo();
-        public getOutputParameter(): any;
-        public setOutputParameter(value: any): void;
-    }
-    class ListControlDataPair {
-        public key: string;
-        public value: string;
-        constructor(key: string, value: string);
-    }
-}
-declare module Uz {
-    class _ListControlUtil {
-        static createLabelFor(htmlElement, key): HTMLLabelElement;
-        static createIDForItemInDiv(divID: string, itemKey: string): string;
-        static createTextIcon($list: JQuery, textIcon: TextIcon[]): void;
-        static createIconColumnInfo(dataSource: Uz.ListControlDataPair[]): any[];
-        static textIconJapaneaseNameToEnglishName(textIcon: TextIcon[]): any;
-        private static iconJapaneaseNameToEnglishName(iconName);
-        private static getIconJapaneaseNameObject();
-    }
-    class TextIcon {
-        public key: string;
-        public icon: Uz.Icon;
-        constructor(key: string, icon: Uz.Icon);
-    }
-}
-declare module Uz {
-    class _DropDownList extends Uz._ListControl {
-        private static DEFAULT_CORE_ID;
-        private static DEFAULT_LABELL_ID;
-        private static DEFAULT_LABELR_ID;
-        private _coreDom;
-        private _labelLDom;
-        private _labelRDom;
-        private _readOnly;
-        private _required;
-        private _labelLText;
-        private _labelRText;
-        private _labelLWidth;
-        private _labelRWidth;
-        private _labelLAlign;
-        private _labelRAlign;
-        private _onFocus;
-        private _onBlur;
-        public readOnly : boolean;
-        private changedReadOnly();
-        public required : boolean;
-        public onFocus : string;
-        public onBlur : string;
-        public labelLText : string;
-        public labelRText : string;
-        private createLabelElement(className);
-        public labelLWidth : any;
-        public labelRWidth : any;
-        private decideWidth(element, beforeWidth, afterWidth);
-        public labelLAlign : Uz.Align;
-        public labelRAlign : Uz.Align;
-        public changeSelectedItem(dataSource: Uz.ListControlDataPair[]): void;
-        public fieldNameChanged(beforeFieldName, newFieldName): void;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public changeWidth(): void;
-        private getCoreID();
-        private getLabelLID();
-        private getLabelRID();
-        public updateUIForSelectedItem(selectedItem: string): void;
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLDivElement;
-        public updateUIforDataSource(): void;
-        public _getSelectedItemCore(): Uz.ListControlDataPair;
-        private createDropDownList();
-        private createOption(key, value);
-        public getEditablePropertyInfo(): any;
-        public getJQueryElement(isCoreElement?: boolean): JQuery;
-        private getJQueryLabelLElement();
-        private getJQueryLabelRElement();
-        public bindData(data: any): void;
-        public validateControl(): any;
-        public validateRequired(): any;
-        public changedDisabled(): void;
-        public changedParentState(): void;
-        public changeStateOfControl(): void;
-        public resizeControl(): void;
-    }
-}
-declare module Uz {
-    class _CheckBoxList extends Uz._ListControl {
-        private static DEFAULT_CORE_ID;
-        private static DEFAULT_LABELL_ID;
-        private _coreDom;
-        private _labelLDom;
-        private _required;
-        private _readOnly;
-        private _labelLText;
-        private _labelLWidth;
-        private _labelLAlign;
-        private _onClick;
-        private _newLineItemNumber;
-        private _minCheckedItem;
-        private _maxCheckedItem;
-        private _selectedItems;
-        private _spaceSize;
-        private _isAllSelectable;
-        private _isAllSelectableBreakLine;
-        private _isAllSelectStatus;
-        private _isIndeterminateStatus;
-        private _icon;
-        public required : boolean;
-        public readOnly : boolean;
-        private changedReadOnly();
-        public selectedItems : Uz.ListControlDataPair[];
-        private addIsAllSelect(items);
-        public onClick : string;
-        public newLineItemNumber : number;
-        public minCheckedItem : number;
-        public maxCheckedItem : number;
-        public fieldNameChanged(beforeFieldName, newFieldName): void;
-        public spaceSize : any;
-        public labelLText : string;
-        private updateLabelLText(value);
-        private createLabelElement(className);
-        public labelLWidth : any;
-        private decideWidth(element, beforeWidth, afterWidth);
-        public labelLAlign : Uz.Align;
-        private getLabelLID();
-        public isAllSelectable : boolean;
-        public isAllSelectableBreakLine : boolean;
-        public isAllSelectStatus : boolean;
-        public isIndeterminateStatus : boolean;
-        public icon : Uz.TextIcon[];
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        private getJQueryLabelLElement();
-        public updateUIForSelectedItem(value: string): void;
-        private updateSelectedItems();
-        private unCheckOfDisable();
-        private updateSelectedItemsAll();
-        private updateOfIsAllSelectStatusNoChange();
-        private isIndeterminateTrueToFalse();
-        private setIndeterminate(isIndeterminate);
-        private setAllSelect(isAllSelect, $Element);
-        public registProperty(): void;
-        public changeWidth(): void;
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLDivElement;
-        public updateUIforDataSource(): void;
-        private createCheckBoxListEvent();
-        private createCheckBoxList();
-        private crieateAllSelectCheckBox(element);
-        private createCheckBox(key, value);
-        private createCheckBoxSpan(className);
-        public getEditablePropertyInfo(): any;
-        private createTextBoxDisabledProperty(editablePropertyInfo, keyName, value, enabled?);
-        private createSelectedItemsColumnInfo();
-        public bindData(data: any): void;
-        public validateControl(): any;
-        public validateRequired(): any;
-        public validateMaxSelect(): any;
-        public validateMinSelect(): any;
-        public getOutputParameter(): any;
-        public setOutputParameter(value: any): void;
-        private getCoreID();
-        public getJQueryElement(isCoreElement?: boolean): JQuery;
-        public changeStateOfControl(): void;
-        public changedDisabled(): void;
-        public resizeControl(): void;
-        private resizeOuterDiv();
-    }
-}
-declare module Uz {
-    class _RadioButton extends Uz._ListControl {
-        private static DEFAULT_CORE_ID;
-        private static DEFAULT_LABELL_ID;
-        private _coreDom;
-        private _labelLDom;
-        private _readOnly;
-        private _required;
-        private _labelLText;
-        private _labelLWidth;
-        private _labelLAlign;
-        private _groupName;
-        private _onClick;
-        private _newLineItemNumber;
-        private _spaceSize;
-        private _icon;
-        public required : boolean;
-        public readOnly : boolean;
-        private changedReadOnly();
-        public fieldNameChanged(beforeFieldName, newFieldName): void;
-        public groupName : string;
-        private updateUIForGroupName();
-        public onClick : string;
-        public newLineItemNumber : number;
-        public spaceSize : any;
-        public labelLText : string;
-        private updateLabelLText(value);
-        private createLabelElement(className);
-        public labelLWidth : any;
-        private decideWidth(element, beforeWidth, afterWidth);
-        public labelLAlign : Uz.Align;
-        private getLabelLID();
-        public icon : Uz.TextIcon[];
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        private getGroupName();
-        private getJQueryLabelLElement();
-        public registProperty(): void;
-        public updateUIForSelectedItem(selectedItem: string): void;
-        public _getSelectedItemCore(): Uz.ListControlDataPair;
-        public changeWidth(): void;
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLDivElement;
-        public updateUIforDataSource(): void;
-        private createRadioButtonEvent();
-        private createRadioButton();
-        private createRdaioButtonDom(key, value);
-        private createButtonSpan(className);
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
-        public validateControl(): any;
-        public validateRequired(): any;
-        private getCoreID();
-        public getJQueryElement(isCoreElement?: boolean): JQuery;
-        public changeStateOfControl(): void;
-        public changedDisabled(): void;
-        public resizeControl(): void;
-    }
-}
-declare module Uz {
-    class _ButtonBatchReserve extends Uz._ButtonDialog {
-        private static PROPERTY_BATCHID;
-        private static PROPERTY_SUBGYOMUCODE;
-        private static RESERVE_DIV_NAME;
-        private static GET_BATCH_INFO_URL;
-        private static OK_CLOSE_EVENT_NAME;
-        private _batchId;
-        private _subGyomuCode;
-        public batchId : string;
-        public subGyomuCode : string;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        private initPropery();
-        private getBatchInformation();
-        private createPostData(batchId, subGyomuCode);
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLButtonElement;
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
-        private showLoading();
-        private hideLoading();
-        private getParentPanel();
-        public bindData(data: any): void;
-        private getParameter();
-        private setPassingData(data);
-        private createItemString(data);
-        private getDateTimeString(dateTime);
-        private getChildDivElement(type, id);
-        private getDialogDomId(businessId, controlName);
-        private getDialogBusinessId(displayChildDivName);
-        private getDialogControlName(displayChildDivName);
-    }
-}
-declare module Uz {
-    class _PanelBatchParameter extends Uz._Panel {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public createDomElement($parentElement: JQuery, isDesignMode: boolean): HTMLDivElement;
-    }
-}
-declare module Uz {
-    class _ButtonBatchParameterRestore extends Uz._ButtonDialog {
-        private static BUTTON_TEXT;
-        private static PROPERTY_BATCHID;
-        private static PROPERTY_SUBGYOMUCODE;
-        private _batchId;
-        private _subGyomuCode;
-        public batchId : string;
-        public subGyomuCode : string;
-        public text : string;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLButtonElement;
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
-    }
-}
-declare module Uz {
-    class _ButtonBatchParameterSave extends Uz._ButtonDialog {
-        private static BUTTON_TEXT;
-        private static PROPERTY_BATCHID;
-        private static PROPERTY_SUBGYOMUCODE;
-        private _batchId;
-        private _subGyomuCode;
-        public batchId : string;
-        public subGyomuCode : string;
-        public text : string;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLButtonElement;
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
-    }
-}
-declare module Uz {
-    class _ButtonBatchRegister extends Uz._ButtonDialog {
-        private static PROPERTY_BATCHID;
-        private static PROPERTY_SUBGYOMUCODE;
-        private static PROPERTY_REPEATABLE;
-        private static REGISTER_DIV_NAME;
-        private static GET_BATCH_INFO_URL;
-        private static OK_CLOSE_EVENT_NAME;
-        private _batchId;
-        private _subGyomuCode;
-        private _batchName;
-        private _repeatable;
-        private _confirmMessage;
-        public batchId : string;
-        public subGyomuCode : string;
-        public repeatable : boolean;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        private initPropery();
-        public createDomElement($parentElement, isDesignMode: boolean): HTMLButtonElement;
-        public recreateDomElement(isImage: boolean): void;
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
-        private getParameter();
-        private showLoading();
-        private hideLoading();
-        private getParentPanel();
-        private getBatchInformation();
-        private createPostData(batchId, subGyomuCode);
-        private setPassingData(data);
-        private getChildDivElement(type, id);
-        private createSpanElement(text);
-        private getDialogDomId(businessId, controlName);
-        private getDialogBusinessId(displayChildDivName);
-        private getDialogControlName(displayChildDivName);
-    }
-}
-declare module Uz {
-    class _CommonButton extends Uz._Button {
-        private _additionalText;
-        public additionalText : string;
-        public recreateDomElement(isImage: boolean): void;
-        public changeWidthParameter(oldWidth, newWidth): void;
-        public registProperty(): void;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public getEditablePropertyInfo(): any;
-    }
-}
-declare module Uz {
-    class _CommonButtonNext extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonBack extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonComplete extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonSelectableComplete extends Uz._CommonButton {
-        private _message;
-        private _textOfYes;
-        private _textOfNo;
-        public message : string;
-        public textOfYes : string;
-        public textOfNo : string;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        private dialogDiv();
-        private createDialog();
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
-        private static call(extension);
-        private static requestFinishFlow(extension, subGyomuCD, flowInstanceId, currentTaskId, wfParameter, callBack);
-        private static displayGyomuScreen(url);
-    }
-}
-declare module Uz {
-    class _CommonButtonConfirm extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonSearch extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonUpdate extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonFree extends Uz._CommonButton {
-        private DEFAULT_ICON_HEADER_COMMON;
-        private DEFAULT_ICON_TRALER_COMMON;
-        private _prefixText;
-        private _suffixText;
-        private _commonButtonIcon;
-        public additionalText : string;
-        public prefixText : string;
-        public suffixText : string;
-        public recreateDomElement(isImage: boolean): void;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public registProperty(): void;
-        public getEditablePropertyInfo(): any;
-    }
-}
-declare module Uz {
-    class _CommonButtonReportPublish extends Uz._ButtonReportPublish {
-        private _additionalText;
-        public additionalText : string;
-        public changeWidthParameter(oldWidth, newWidth): void;
-        public registProperty(): void;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public getEditablePropertyInfo(): any;
-    }
-}
-declare module Uz {
-    class _CommonButtonCreate extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonExecute extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonSearchResult extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public getEditablePropertyInfo(): any;
-    }
-}
-declare module Uz {
-    class _CommonButtonReSearch extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public getEditablePropertyInfo(): any;
-    }
-}
-declare module Uz {
-    class _CommonButtonApprovalRequest extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public getEditablePropertyInfo(): any;
-    }
-}
-declare module Uz {
-    class _CommonButtonReject extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonApprove extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonAccept extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonSend extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonReceive extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _CommonButtonImport extends Uz._CommonButton {
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-    }
-}
-declare module Uz {
-    class _Space extends Uz._ViewControl {
-        private _SpaceCount;
-        public width : any;
-        public float : Uz.Float;
-        public size : any;
-        public spaceCount : any;
-        constructor($parentElement: JQuery, isDesignMode: boolean);
-        public registProperty(): void;
-        public createDomElement($parentElement, isDesignMode): HTMLDivElement;
-        public getEditablePropertyInfo(): any;
-        public bindData(data: any): void;
+        public canAcceptFocus(): boolean;
+        public initRuntime($element: JQuery): void;
+        public getProperty(): any;
+        public getElementForFocus(): JQuery;
+        public createDOMElement($parentElement: JQuery): HTMLDivElement;
+        public getMaskControl(): any[];
     }
 }

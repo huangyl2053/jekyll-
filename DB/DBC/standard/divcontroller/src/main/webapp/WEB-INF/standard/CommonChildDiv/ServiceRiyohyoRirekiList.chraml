@@ -1,0 +1,555 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBC&quot;,&quot;controlName&quot;:&quot;ServiceRiyohyoRirekiList&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;RirekiListHeight&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;RirekiListWidth&quot;,&quot;editType&quot;:0}]},&quot;RirekiListHeight&quot;:&quot;175px&quot;,&quot;RirekiListWidth&quot;:&quot;1090px&quot;}" data-is-composite-control="true" data-control-name="DBC.ServiceRiyohyoRirekiList"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel StateChangable UzCommonChildDivPanel Width-G2 UzCompositeChild" id="ServiceRiyohyoRirekiList" style="margin: 0em; width: auto;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ServiceRiyohyoRirekiList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;ServiceRiyohyoRirekiList&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ServiceRiyohyoRirekiList&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ServiceRiyohyoRirekiList_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete ui-droppable ui-sortable" id="ServiceRiyohyoRirekiList_panel_body_area"><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="dgServiceRiyohyoRirekiList" style="width: 1090px; height: 175px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgServiceRiyohyoRirekiList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;1090px&quot;,&quot;selectControlID&quot;:&quot;dgServiceRiyohyoRirekiList&quot;,&quot;height&quot;:&quot;175px&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;btnSelect&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:35,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;選&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;btnSelect&quot;},{&quot;columnName&quot;:&quot;状態&quot;,&quot;dataName&quot;:&quot;txtJotai&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:60,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtJotai&quot;},{&quot;columnName&quot;:&quot;届出日&quot;,&quot;dataName&quot;:&quot;txtTodokedeYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:70,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtTodokedeYMD&quot;},{&quot;columnName&quot;:&quot;届出区分&quot;,&quot;dataName&quot;:&quot;txtTodokedeKubun&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtTodokedeKubun&quot;},{&quot;columnName&quot;:&quot;計画適用開始日&quot;,&quot;dataName&quot;:&quot;txtTekiyoKaishiYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:130,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtTekiyoKaishiYMD&quot;},{&quot;columnName&quot;:&quot;計画適用終了日&quot;,&quot;dataName&quot;:&quot;txtTekiyoShuryoYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:130,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtTekiyoShuryoYMD&quot;},{&quot;columnName&quot;:&quot;計画依頼事業者&quot;,&quot;dataName&quot;:&quot;txtIraiJigyosha&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:550,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtIraiJigyosha&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgServiceRiyohyoRirekiList_grid_table" role="" style="width: 1090px; height: 150px; position: relative;"></div><div id="dgServiceRiyohyoRirekiList_footer" style="width: 1090px; height: 25px;"></div></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBC;
+(function (DBC) {
+    (function (ServiceRiyohyoRirekiList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ServiceRiyohyoRirekiList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ServiceRiyohyoRirekiList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ServiceRiyohyoRirekiList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgServiceRiyohyoRirekiList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceRiyohyoRirekiList"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ServiceRiyohyoRirekiList.Controls = Controls;
+    })(DBC.ServiceRiyohyoRirekiList || (DBC.ServiceRiyohyoRirekiList = {}));
+    var ServiceRiyohyoRirekiList = DBC.ServiceRiyohyoRirekiList;
+
+    var ServiceRiyohyoRirekiList_Design = (function (_super) {
+        __extends(ServiceRiyohyoRirekiList_Design, _super);
+        function ServiceRiyohyoRirekiList_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, ServiceRiyohyoRirekiList_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(ServiceRiyohyoRirekiList_Design.prototype, "RirekiListGridSetting", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["gridSetting"] = value;
+                } else {
+                    this.layout.items[0].items[0]["gridSetting"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ServiceRiyohyoRirekiList_Design.prototype, "RirekiListHeight", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["height"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["height"] = value;
+                } else {
+                    this.layout.items[0].items[0]["height"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ServiceRiyohyoRirekiList_Design.prototype, "RirekiListWidth", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["width"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["width"] = value;
+                } else {
+                    this.layout.items[0].items[0]["width"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        ServiceRiyohyoRirekiList_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("RirekiListGridSetting");
+            Uz.JSControlUtil.registProperty("RirekiListHeight");
+            Uz.JSControlUtil.registProperty("RirekiListWidth");
+        };
+
+        ServiceRiyohyoRirekiList_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["RirekiListGridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
+            editablePropertyInfo["RirekiListHeight"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["height"];
+            editablePropertyInfo["RirekiListWidth"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["width"];
+
+            return editablePropertyInfo;
+        };
+        ServiceRiyohyoRirekiList_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "ServiceRiyohyoRirekiList",
+                    "items": [
+                        {
+                            "fieldName": "dgServiceRiyohyoRirekiList",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "1090",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "dgServiceRiyohyoRirekiList",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "height": "175",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": false,
+                                "isShowHeader": true,
+                                "isShowFooter": true,
+                                "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": false,
+                                "isShowSelectButtonColumn": false,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "",
+                                    "headerHeight": 0
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "",
+                                        "dataName": "btnSelect",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 35,
+                                        "visible": true,
+                                        "cellType": 8,
+                                        "cellDetails": {
+                                            "cellType": 8,
+                                            "text": "選",
+                                            "onClick": "",
+                                            "imageFileUrl": "",
+                                            "imageWidth": "",
+                                            "imageHeight": ""
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "btnSelect"
+                                    },
+                                    {
+                                        "columnName": "状態",
+                                        "dataName": "txtJotai",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 60,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtJotai"
+                                    },
+                                    {
+                                        "columnName": "届出日",
+                                        "dataName": "txtTodokedeYMD",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 70,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtTodokedeYMD"
+                                    },
+                                    {
+                                        "columnName": "届出区分",
+                                        "dataName": "txtTodokedeKubun",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtTodokedeKubun"
+                                    },
+                                    {
+                                        "columnName": "計画適用開始日",
+                                        "dataName": "txtTekiyoKaishiYMD",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 130,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtTekiyoKaishiYMD"
+                                    },
+                                    {
+                                        "columnName": "計画適用終了日",
+                                        "dataName": "txtTekiyoShuryoYMD",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 130,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtTekiyoShuryoYMD"
+                                    },
+                                    {
+                                        "columnName": "計画依頼事業者",
+                                        "dataName": "txtIraiJigyosha",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 550,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtIraiJigyosha"
+                                    }
+                                ]
+                            },
+                            "onSort": "",
+                            "onSelect": "",
+                            "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "txtIraiJigyosha",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G2",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0",
+                    "marginRight": "0",
+                    "selectControlID": "ServiceRiyohyoRirekiList",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "",
+                    "marginTop": "0",
+                    "marginBottom": "0",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "ServiceRiyohyoRirekiList"
+                        }
+                    ],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorderTop": true,
+                    "eraseBorderBottom": true,
+                    "eraseBorderRight": true,
+                    "eraseBorderLeft": true,
+                    "backgroundColor": 0,
+                    "widthAuto": true,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto"
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "businessId": "DBC",
+            "controlName": "ServiceRiyohyoRirekiList",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "dgServiceRiyohyoRirekiList",
+                    "publicChildProperty": "gridSetting",
+                    "newPropertyName": "RirekiListGridSetting"
+                },
+                {
+                    "publicChildFieldName": "dgServiceRiyohyoRirekiList",
+                    "publicChildProperty": "height",
+                    "newPropertyName": "RirekiListHeight"
+                },
+                {
+                    "publicChildFieldName": "dgServiceRiyohyoRirekiList",
+                    "publicChildProperty": "width",
+                    "newPropertyName": "RirekiListWidth"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": ""
+        };
+        return ServiceRiyohyoRirekiList_Design;
+    })(Uz.CommonChildDiv);
+    DBC.ServiceRiyohyoRirekiList_Design = ServiceRiyohyoRirekiList_Design;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (ServiceRiyohyoRirekiList) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ServiceRiyohyoRirekiList.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ServiceRiyohyoRirekiList.ModeController = ModeController;
+    })(DBC.ServiceRiyohyoRirekiList || (DBC.ServiceRiyohyoRirekiList = {}));
+    var ServiceRiyohyoRirekiList = DBC.ServiceRiyohyoRirekiList;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (ServiceRiyohyoRirekiList) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ServiceRiyohyoRirekiList.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("RirekiListHeight", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("RirekiListWidth", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getRirekiListHeight = function () {
+                return this.controls.dgServiceRiyohyoRirekiList().height;
+            };
+
+            PublicProperties.prototype.setRirekiListHeight = function (value) {
+                this.controls.dgServiceRiyohyoRirekiList().height = value;
+            };
+
+            PublicProperties.prototype.getRirekiListWidth = function () {
+                return this.controls.dgServiceRiyohyoRirekiList().width;
+            };
+
+            PublicProperties.prototype.setRirekiListWidth = function (value) {
+                this.controls.dgServiceRiyohyoRirekiList().width = value;
+            };
+            return PublicProperties;
+        })();
+        ServiceRiyohyoRirekiList.PublicProperties = PublicProperties;
+    })(DBC.ServiceRiyohyoRirekiList || (DBC.ServiceRiyohyoRirekiList = {}));
+    var ServiceRiyohyoRirekiList = DBC.ServiceRiyohyoRirekiList;
+})(DBC || (DBC = {}));
+</script>
+  <script class="RamlConvert" type="text/javascript">
+var DBC= DBC? DBC: {};
+DBC['SERVICERIYOHYORIREKILIST'] = {};
+DBC['SERVICERIYOHYORIREKILIST'].ServiceRiyohyoRirekiListRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ServiceRiyohyoRirekiList').getProperty();parameter0.dgServiceRiyohyoRirekiList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgServiceRiyohyoRirekiList').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBC;
+(function (DBC) {
+    (function (ServiceRiyohyoRirekiList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ServiceRiyohyoRirekiList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ServiceRiyohyoRirekiList";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBC.ServiceRiyohyoRirekiList.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBC.ServiceRiyohyoRirekiList.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ServiceRiyohyoRirekiList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgServiceRiyohyoRirekiList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceRiyohyoRirekiList"));
+            };
+            return Controls;
+        })();
+        ServiceRiyohyoRirekiList.Controls = Controls;
+    })(DBC.ServiceRiyohyoRirekiList || (DBC.ServiceRiyohyoRirekiList = {}));
+    var ServiceRiyohyoRirekiList = DBC.ServiceRiyohyoRirekiList;
+})(DBC || (DBC = {}));
+var DBC;
+(function (DBC) {
+    (function (ServiceRiyohyoRirekiList) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ServiceRiyohyoRirekiList.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ServiceRiyohyoRirekiList.ModeController = ModeController;
+    })(DBC.ServiceRiyohyoRirekiList || (DBC.ServiceRiyohyoRirekiList = {}));
+    var ServiceRiyohyoRirekiList = DBC.ServiceRiyohyoRirekiList;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (ServiceRiyohyoRirekiList) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ServiceRiyohyoRirekiList.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("RirekiListHeight", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("RirekiListWidth", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getRirekiListHeight = function () {
+                return this.controls.dgServiceRiyohyoRirekiList().height;
+            };
+
+            PublicProperties.prototype.setRirekiListHeight = function (value) {
+                this.controls.dgServiceRiyohyoRirekiList().height = value;
+            };
+
+            PublicProperties.prototype.getRirekiListWidth = function () {
+                return this.controls.dgServiceRiyohyoRirekiList().width;
+            };
+
+            PublicProperties.prototype.setRirekiListWidth = function (value) {
+                this.controls.dgServiceRiyohyoRirekiList().width = value;
+            };
+            return PublicProperties;
+        })();
+        ServiceRiyohyoRirekiList.PublicProperties = PublicProperties;
+    })(DBC.ServiceRiyohyoRirekiList || (DBC.ServiceRiyohyoRirekiList = {}));
+    var ServiceRiyohyoRirekiList = DBC.ServiceRiyohyoRirekiList;
+})(DBC || (DBC = {}));
+</script></div>

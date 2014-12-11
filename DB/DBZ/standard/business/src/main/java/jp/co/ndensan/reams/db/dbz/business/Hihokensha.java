@@ -52,11 +52,6 @@ public class Hihokensha implements IHihokenshaShikaku, INinteiShinseiTaishosha {
     }
 
     @Override
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return this.shikaku.get証記載保険者番号();
-    }
-
-    @Override
     public ShikibetsuCode get識別コード() {
         return this.shikaku.get識別コード();
     }

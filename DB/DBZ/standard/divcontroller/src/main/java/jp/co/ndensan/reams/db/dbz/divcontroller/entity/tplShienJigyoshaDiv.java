@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tblJigyoshaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -51,6 +52,49 @@ public class tplShienJigyoshaDiv extends TabPanel {
     @JsonProperty("tblJigyosha")
     public void setTblJigyosha(tblJigyoshaDiv tblJigyosha) {
         this.tblJigyosha=tblJigyosha;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public Label getLblJigyosha() {
+        return this.getTblJigyosha().getLblJigyosha();
+    }
+
+    @JsonIgnore
+    public Label getLblTodokedeDate() {
+        return this.getTblJigyosha().getLblTodokedeDate();
+    }
+
+    @JsonIgnore
+    public TextBox getTxtJigyosha1() {
+        return this.getTblJigyosha().getTxtJigyosha1();
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtTodokedeDate1() {
+        return this.getTblJigyosha().getTxtTodokedeDate1();
+    }
+
+    @JsonIgnore
+    public TextBox getTxtJigyosha2() {
+        return this.getTblJigyosha().getTxtJigyosha2();
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtTodokedeDate2() {
+        return this.getTblJigyosha().getTxtTodokedeDate2();
+    }
+
+    @JsonIgnore
+    public TextBox getTxtJigyosha3() {
+        return this.getTblJigyosha().getTxtJigyosha3();
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtTodokedeDate3() {
+        return this.getTblJigyosha().getTxtTodokedeDate3();
     }
 
 }

@@ -1,0 +1,1019 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "KihonJoho",
+   "items": [
+    {
+     "fieldName": "ccdKaigoAtenaInfo",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0em",
+     "marginRight": "0em",
+     "selectControlID": "ccdKaigoAtenaInfo",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "packageName": "",
+     "marginTop": "0em",
+     "marginBottom": "0em",
+     "businessId": "DBZ",
+     "controlName": "KaigoAtenaInfo",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "modes": [],
+     "publicEvents": [],
+     "publicEventsAlias": [],
+     "atenaInfo_title": "",
+     "atenaInfo_canOpenAndClose": true,
+     "AtenaShokaiSimple_eraseBorder": true,
+     "AtenaKanaMeisho_visible": true,
+     "AtenaMisho_visible": true,
+     "SeinengappiYMD_visible": true,
+     "Nenrei_visible": true,
+     "Seibetsu_visible": true,
+     "JuminShubetsu_Visible": true,
+     "JuminJotai_visible": true,
+     "YubinNo_visible": true,
+     "Jusho_visible": true,
+     "Gyoseiku_visible": true,
+     "ShikibetsuCode_visible": true,
+     "KojinHojinCode_visible": true,
+     "SetaiCode_visible": true,
+     "lblButtonMargin_displayNone": false,
+     "btnDainosha_displayNone": true,
+     "btnSofusaki_displayNone": false,
+     "btnDainoSofusakiKakunin_displayNone": false,
+     "btnKoza_displayNone": true,
+     "btnRenrakusaki_displayNone": false,
+     "btnShosai_displayNone": false,
+     "btnAtenaRireki_displayNone": false,
+     "btnSetaiIchiran_displayNone": false,
+     "btnDoitsunin_displayNone": false,
+     "btnToriatsukaiChui_displayNone": false,
+     "btnEltax_displayNone": false,
+     "btnShiyoJokyo_displayNone": false,
+     "btnAtesakiKakunin_displayNone": false,
+     "SubGyomuCode": "DBA",
+     "JukiYusennKubun": "1",
+     "AgeArrivalDay": "1",
+     "SubGyomuUmu": "0",
+     "SubGyomuSearchUmu": "0",
+     "DainoninHyojiUmu": "1"
+    },
+    {
+     "fieldName": "ccdKaigoShikakuKihon",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0em",
+     "marginRight": "0em",
+     "selectControlID": "ccdKaigoShikakuKihon",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "title": "",
+     "relation": [],
+     "packageName": "",
+     "canOpenAndClose": false,
+     "marginTop": "0em",
+     "marginBottom": "0em",
+     "eraseBorder": true,
+     "businessId": "DBZ",
+     "controlName": "KaigoShikakuKihon",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "modes": [],
+     "publicEvents": [],
+     "publicEventsAlias": [],
+     "btnRenrakusaki_displayNone": true
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0px",
+   "marginRight": "0px",
+   "selectControlID": "KihonJoho",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "KihonJoho"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "0px",
+   "marginBottom": "0px",
+   "eraseBorder": true,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "canPost": true
+  },
+  {
+   "fieldName": "HihokenshaShokaiPanel",
+   "items": [
+    {
+     "fieldName": "tabHihokenshaShokai",
+     "items": [
+      {
+       "fieldName": "tplHihokenshaRireki",
+       "items": [
+        {
+         "fieldName": "ccdShikakuTokusoRireki",
+         "items": [],
+         "controlType": "CommonChildDiv",
+         "width": "XS",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "0em",
+         "selectControlID": "ccdShikakuTokusoRireki",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "relation": [],
+         "packageName": "",
+         "marginTop": "0em",
+         "marginBottom": "0em",
+         "businessId": "DBZ",
+         "controlName": "ShikakuTokusoRireki",
+         "dataPassingForDialog": [],
+         "dialogOkEventNameForDialog": "",
+         "dialogCancelEventNameForDialog": "",
+         "canTransferEvent": true,
+         "heightForDialog": "M",
+         "firstFocusFieldName": "",
+         "lastFocusFieldName": "",
+         "modes": [
+          {
+           "modeKey": "DisplayType",
+           "modeValue": "shokai"
+          },
+          {
+           "modeKey": "BtnDisplayMode",
+           "modeValue": "SetDisplayNone"
+          },
+          {
+           "modeKey": "DataGridHeight",
+           "modeValue": "Size300"
+          }
+         ],
+         "publicEvents": [
+          {
+           "eventName": "onSelect_dgShikakuShutokuRireki"
+          },
+          {
+           "eventName": "onSelectByDblClick_dgShikakuShutokuRireki"
+          },
+          {
+           "eventName": "onSelectByModifyButton_dgShikakuShutokuRireki"
+          },
+          {
+           "eventName": "onSelectByDeleteButton_dgShikakuShutokuRireki"
+          },
+          {
+           "eventName": "onClickShosaiButton_dgShikakuShutokuRireki"
+          },
+          {
+           "eventName": "onClick_btnAdd"
+          }
+         ],
+         "publicEventsAlias": [],
+         "onSelectByDblClick": "",
+         "onSelectByModifyButton": "onSelectByModifyButton_dgShikakuShutokuRireki",
+         "onSelectByDeleteButton": "onSelectByDeleteButton_dgShikakuShutokuRireki"
+        }
+       ],
+       "controlType": "TabPanel",
+       "width": "1080px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "tplHihokenshaRireki",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "title": "被保履歴",
+       "onActive": "",
+       "onFirstActive": "",
+       "lazyLoadingControls": {}
+      },
+      {
+       "fieldName": "tplSetaiShokai",
+       "items": [
+        {
+         "fieldName": "lblSetaiShokai",
+         "items": [],
+         "controlType": "Label",
+         "width": "L",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "lblSetaiShokai",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "required": false,
+         "isPrivateInfo": false,
+         "text": "世帯一覧(所得照会)共有子Divに後日置き換え",
+         "decorationClass": "",
+         "align": 0
+        }
+       ],
+       "controlType": "TabPanel",
+       "width": "1080px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "tplSetaiShokai",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "title": "世帯照会",
+       "onActive": "",
+       "onFirstActive": "",
+       "lazyLoadingControls": {}
+      },
+      {
+       "fieldName": "tplIryoHoken",
+       "items": [
+        {
+         "fieldName": "ccdIryoHokenRireki",
+         "items": [],
+         "controlType": "CommonChildDiv",
+         "width": "XS",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "0em",
+         "marginRight": "0em",
+         "selectControlID": "ccdIryoHokenRireki",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "relation": [],
+         "packageName": "",
+         "marginTop": "0em",
+         "marginBottom": "0em",
+         "businessId": "DBZ",
+         "controlName": "IryoHokenRireki",
+         "dataPassingForDialog": [
+          {
+           "key": "",
+           "controlName": ""
+          },
+          {
+           "key": "",
+           "controlName": ""
+          },
+          {
+           "key": "",
+           "controlName": ""
+          }
+         ],
+         "dialogOkEventNameForDialog": "",
+         "dialogCancelEventNameForDialog": "",
+         "canTransferEvent": true,
+         "heightForDialog": "M",
+         "firstFocusFieldName": "",
+         "lastFocusFieldName": "",
+         "modes": [
+          {
+           "modeKey": "DisplayMode",
+           "modeValue": "Shokai"
+          }
+         ],
+         "publicEvents": [
+          {
+           "eventName": "onSelectByModifyButton_dgIryoHokenRireki"
+          },
+          {
+           "eventName": "onSelectByDeleteButton_dgIryoHokenRireki"
+          },
+          {
+           "eventName": "onSelect_dgIryoHokenRireki"
+          },
+          {
+           "eventName": "onSelectByDbClick_dgIryoHokenRireki"
+          },
+          {
+           "eventName": "onClick_btnAddIryoHoken"
+          }
+         ],
+         "publicEventsAlias": [],
+         "onSelectByModifyButton": "onSelectByModifyButton_dgIryoHokenRireki",
+         "onSelectByDeleteButton": "onSelectByDeleteButton_dgIryoHokenRireki"
+        }
+       ],
+       "controlType": "TabPanel",
+       "width": "1080px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "tplIryoHoken",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "title": "医療保険",
+       "onActive": "",
+       "onFirstActive": "",
+       "lazyLoadingControls": {}
+      },
+      {
+       "fieldName": "tplSeikatsuHogo",
+       "items": [
+        {
+         "fieldName": "lblSeikatsuHogo",
+         "items": [],
+         "controlType": "Label",
+         "width": "L",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "lblSeikatsuHogo",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "required": false,
+         "isPrivateInfo": false,
+         "text": "URから提供される機能に後日置き換え",
+         "decorationClass": "",
+         "align": 0
+        }
+       ],
+       "controlType": "TabPanel",
+       "width": "1080px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "tplSeikatsuHogo",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "title": "生活保護",
+       "onActive": "",
+       "onFirstActive": "",
+       "lazyLoadingControls": {}
+      },
+      {
+       "fieldName": "tplRofukuNenkin",
+       "items": [
+        {
+         "fieldName": "lblRofukuNenkin",
+         "items": [],
+         "controlType": "Label",
+         "width": "L",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "lblRofukuNenkin",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "required": false,
+         "isPrivateInfo": false,
+         "text": "URから提供される機能に後日置き換え",
+         "decorationClass": "",
+         "align": 0
+        }
+       ],
+       "controlType": "TabPanel",
+       "width": "1080px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "tplRofukuNenkin",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "title": "老福年金",
+       "onActive": "",
+       "onFirstActive": "",
+       "lazyLoadingControls": {}
+      },
+      {
+       "fieldName": "tplShisetsuNyutaisho",
+       "items": [
+        {
+         "fieldName": "ccdShisetsuNyutaishoRireki",
+         "items": [],
+         "controlType": "CommonChildDiv",
+         "width": "XS",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "ccdShisetsuNyutaishoRireki",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "relation": [],
+         "packageName": "",
+         "marginTop": "0em",
+         "marginBottom": "0em",
+         "businessId": "DBZ",
+         "controlName": "ShisetsuNyutaishoRirekiKanri",
+         "dataPassingForDialog": [],
+         "dialogOkEventNameForDialog": "",
+         "dialogCancelEventNameForDialog": "",
+         "canTransferEvent": true,
+         "heightForDialog": "M",
+         "firstFocusFieldName": "",
+         "lastFocusFieldName": "",
+         "modes": [
+          {
+           "modeKey": "表示モード",
+           "modeValue": "照会"
+          },
+          {
+           "modeKey": "表示widthサイズ",
+           "modeValue": "モード3"
+          },
+          {
+           "modeKey": "表示Heightサイズ",
+           "modeValue": "サイズ350"
+          }
+         ],
+         "publicEvents": [
+          {
+           "eventName": "onClick_btnAddShisetsuNyutaisho"
+          },
+          {
+           "eventName": "onSelect_dgShisetsuNyutaishoRireki"
+          },
+          {
+           "eventName": "onSelectByDblClick_dgShisetsuNyutaishoRireki"
+          },
+          {
+           "eventName": "onSelectBySelectButton_dgShisetsuNyutaishoRireki"
+          },
+          {
+           "eventName": "onSelectByModifyButton_dgShisetsuNyutaishoRireki"
+          },
+          {
+           "eventName": "onSelectByDeleteButton_dgShisetsuNyutaishoRireki"
+          }
+         ],
+         "publicEventsAlias": []
+        }
+       ],
+       "controlType": "TabPanel",
+       "width": "1080px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "tplShisetsuNyutaisho",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "title": "施設入退所",
+       "onActive": "",
+       "onFirstActive": "",
+       "lazyLoadingControls": {}
+      },
+      {
+       "fieldName": "tplShoKofuKaishu",
+       "items": [
+        {
+         "fieldName": "ccdShoKaishuJokyoList",
+         "items": [],
+         "controlType": "CommonChildDiv",
+         "width": "XS",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "0px",
+         "marginRight": "0px",
+         "selectControlID": "ccdShoKaishuJokyoList",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "relation": [],
+         "packageName": "",
+         "marginTop": "0px",
+         "marginBottom": "0px",
+         "businessId": "DBZ",
+         "controlName": "ShoKaishuJokyoList",
+         "dataPassingForDialog": [],
+         "dialogOkEventNameForDialog": "",
+         "dialogCancelEventNameForDialog": "",
+         "canTransferEvent": true,
+         "heightForDialog": "M",
+         "firstFocusFieldName": "",
+         "lastFocusFieldName": "",
+         "modes": [
+          {
+           "modeKey": "グリッド表示モード",
+           "modeValue": "shokai"
+          },
+          {
+           "modeKey": "一覧パネル高さ",
+           "modeValue": "サイズ350"
+          }
+         ],
+         "publicEvents": [
+          {
+           "eventName": "onSelect"
+          },
+          {
+           "eventName": "onSelectByDblClick"
+          },
+          {
+           "eventName": "onSelectBySelectButton"
+          }
+         ],
+         "publicEventsAlias": []
+        }
+       ],
+       "controlType": "TabPanel",
+       "width": "1080px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "tplShoKofuKaishu",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "title": "証交付回収",
+       "onActive": "",
+       "onFirstActive": "",
+       "lazyLoadingControls": {}
+      }
+     ],
+     "controlType": "TabContainer",
+     "width": "1090px",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "tabHihokenshaShokai",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onChange": "",
+     "selectedItem": null,
+     "tabpanelPosition": [
+      "tplHihokenshaRireki",
+      "tplSetaiShokai",
+      "tplIryoHoken",
+      "tplSeikatsuHogo",
+      "tplRofukuNenkin",
+      "tplShisetsuNyutaisho",
+      "tplShoKofuKaishu"
+     ],
+     "isDraggable": false,
+     "selectedItemFieldName": "tplShoKofuKaishu",
+     "initialTab": 0,
+     "isLazyLoading": false
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0em",
+   "marginRight": "0em",
+   "selectControlID": "HihokenshaShokaiPanel",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "HihokenshaShokaiPanel"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "",
+     "requestUrl": ""
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "0em",
+   "marginBottom": "0em",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "canPost": true
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
+ "onLoad": "",
+ "title": "被保険者照会",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "被保険者照会",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "ccdKaigoAtenaInfo",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdKaigoShikakuKihon",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "HihokenshaShokaiPanel",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdShikakuTokusoRireki",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "KihonJoho",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnToDecide",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  }
+ ],
+ "currentState": "All",
+ "id": "DBA4010011",
+ "WFParameter": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "decide",
+   "eventName": "btnToDecide.onClick"
+  },
+  {
+   "alias": "research",
+   "eventName": "btnResearch.onClick"
+  },
+  {
+   "alias": "searchResult",
+   "eventName": "btnBackSearchResult.onClick"
+  }
+ ],
+ "loadSequencePanelNames": [
+  [
+   "HihokenshaShokaiTaishoSearch",
+   "HihokenshaShikaiTaishoshaJoho",
+   "HihokenshaShokaiPanelSelect"
+  ],
+  [
+   "HihokenshaShokaiCommonJoho"
+  ],
+  [
+   "HihokenshaShokaiDbJoho"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "HihokenshaShokai",
+   "buttonSetting": [
+    {
+     "buttonKind": "CommonButtonReportPublish",
+     "buttonProperty": {
+      "fieldName": "btnPublish",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnPublish",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "postParameterPanelNames": [],
+      "onClick": "",
+      "text": "戻る",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "被保険者台帳を",
+      "validateUrl": "",
+      "sourceCreateUrl": "",
+      "afterPrintUrl": "",
+      "isModal": true,
+      "isInstruction": true,
+      "isPreview": false,
+      "printable": false,
+      "copiesChangeable": false,
+      "progressVisible": false
+     }
+    },
+    {
+     "buttonKind": "CommonButtonBack",
+     "buttonProperty": {
+      "fieldName": "btnBackSearchResult",
+      "items": [],
+      "controlType": "CommonButtonNext",
+      "width": 2,
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnBackSearchResult",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onClick": "",
+      "text": "戻る",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": "該当者一覧に"
+     }
+    },
+    {
+     "buttonKind": "CommonButtonReSearch",
+     "buttonProperty": {
+      "fieldName": "btnReSearch",
+      "items": [],
+      "controlType": "CommonButtonReSearch",
+      "width": "1px",
+      "visible": true,
+      "displayNone": false,
+      "disabled": false,
+      "accessKey": "",
+      "nextFocusFieldName": "",
+      "wrap": false,
+      "dependencies": [],
+      "float": 0,
+      "toolTip": "",
+      "authorityMode": 0,
+      "marginLeft": "XS",
+      "marginRight": "XS",
+      "selectControlID": "btnReSearch",
+      "helpMessageID": "",
+      "jpControlName": "",
+      "onBeforeClick": "",
+      "onAfterClick": "",
+      "onClick": "",
+      "text": "再検索",
+      "appearance": 0,
+      "imageFileUrl": "",
+      "imageWidth": "",
+      "imageHeight": "",
+      "icon": 0,
+      "heightTextBoxMatches": false,
+      "additionalText": ""
+     }
+    }
+   ],
+   "states": [
+    {
+     "state": "被保険者照会"
+    }
+   ],
+   "isFinishButtonOnTheRight": false,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  }
+ ],
+ "packageName": ""
+}

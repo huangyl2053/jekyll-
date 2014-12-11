@@ -1,20 +1,18 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiReasonForTabDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgJutakuKaishuJizenShinseiDetail_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfo.ShinseishaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tplJizenShinseiContents のクラスファイル 
- * 
+ * tplJizenShinseiContents のクラスファイル
+ *
  * @author 自動生成
  */
 public class tplJizenShinseiContentsDiv extends TabPanel {
@@ -24,6 +22,7 @@ public class tplJizenShinseiContentsDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtJutakuOwner")
     private TextBox txtJutakuOwner;
     @JsonProperty("txtRelationWithHihokensha")
@@ -48,7 +47,7 @@ public class tplJizenShinseiContentsDiv extends TabPanel {
 
     @JsonProperty("txtJutakuOwner")
     public void setTxtJutakuOwner(TextBox txtJutakuOwner) {
-        this.txtJutakuOwner=txtJutakuOwner;
+        this.txtJutakuOwner = txtJutakuOwner;
     }
 
     @JsonProperty("txtRelationWithHihokensha")
@@ -58,7 +57,7 @@ public class tplJizenShinseiContentsDiv extends TabPanel {
 
     @JsonProperty("txtRelationWithHihokensha")
     public void setTxtRelationWithHihokensha(TextBox txtRelationWithHihokensha) {
-        this.txtRelationWithHihokensha=txtRelationWithHihokensha;
+        this.txtRelationWithHihokensha = txtRelationWithHihokensha;
     }
 
     @JsonProperty("dgJutakuKaishuJizenShinseiDetail")
@@ -68,17 +67,12 @@ public class tplJizenShinseiContentsDiv extends TabPanel {
 
     @JsonProperty("dgJutakuKaishuJizenShinseiDetail")
     public void setDgJutakuKaishuJizenShinseiDetail(DataGrid<dgJutakuKaishuJizenShinseiDetail_Row> dgJutakuKaishuJizenShinseiDetail) {
-        this.dgJutakuKaishuJizenShinseiDetail=dgJutakuKaishuJizenShinseiDetail;
+        this.dgJutakuKaishuJizenShinseiDetail = dgJutakuKaishuJizenShinseiDetail;
     }
 
     @JsonProperty("JutakuKaishuJizenShinseisha")
     public ShinseishaInfoDiv getJutakuKaishuJizenShinseisha() {
         return JutakuKaishuJizenShinseisha;
-    }
-
-    @JsonProperty("JutakuKaishuJizenShinseisha")
-    public void setJutakuKaishuJizenShinseisha(ShinseishaInfoDiv JutakuKaishuJizenShinseisha) {
-        this.JutakuKaishuJizenShinseisha=JutakuKaishuJizenShinseisha;
     }
 
     @JsonProperty("JutakuKaishuJizenShinseiReasonForTab")
@@ -88,7 +82,7 @@ public class tplJizenShinseiContentsDiv extends TabPanel {
 
     @JsonProperty("JutakuKaishuJizenShinseiReasonForTab")
     public void setJutakuKaishuJizenShinseiReasonForTab(JutakuKaishuJizenShinseiReasonForTabDiv JutakuKaishuJizenShinseiReasonForTab) {
-        this.JutakuKaishuJizenShinseiReasonForTab=JutakuKaishuJizenShinseiReasonForTab;
+        this.JutakuKaishuJizenShinseiReasonForTab = JutakuKaishuJizenShinseiReasonForTab;
     }
 
 }

@@ -1,18 +1,16 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1000000;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PrintContentsSettingDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.printcontentssetting.PrintContentsSettingDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 
 /**
- * ShokanShikyuKetteiTsuchishoSetting のクラスファイル 
- * 
+ * ShokanShikyuKetteiTsuchishoSetting のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShokanShikyuKetteiTsuchishoSettingDiv extends PanelPublish {
@@ -22,6 +20,7 @@ public class ShokanShikyuKetteiTsuchishoSettingDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ShokanShikyuKetteiTsuchishoPrintSetting")
     private PrintContentsSettingDiv ShokanShikyuKetteiTsuchishoPrintSetting;
     @JsonProperty("ShokanShikyuKetteiTsuchishoSettingOuputOrder")
@@ -40,7 +39,7 @@ public class ShokanShikyuKetteiTsuchishoSettingDiv extends PanelPublish {
 
     @JsonProperty("ShokanShikyuKetteiTsuchishoPrintSetting")
     public void setShokanShikyuKetteiTsuchishoPrintSetting(PrintContentsSettingDiv ShokanShikyuKetteiTsuchishoPrintSetting) {
-        this.ShokanShikyuKetteiTsuchishoPrintSetting=ShokanShikyuKetteiTsuchishoPrintSetting;
+        this.ShokanShikyuKetteiTsuchishoPrintSetting = ShokanShikyuKetteiTsuchishoPrintSetting;
     }
 
     @JsonProperty("ShokanShikyuKetteiTsuchishoSettingOuputOrder")
@@ -50,7 +49,7 @@ public class ShokanShikyuKetteiTsuchishoSettingDiv extends PanelPublish {
 
     @JsonProperty("ShokanShikyuKetteiTsuchishoSettingOuputOrder")
     public void setShokanShikyuKetteiTsuchishoSettingOuputOrder(ChohyoShutsuryokujunDiv ShokanShikyuKetteiTsuchishoSettingOuputOrder) {
-        this.ShokanShikyuKetteiTsuchishoSettingOuputOrder=ShokanShikyuKetteiTsuchishoSettingOuputOrder;
+        this.ShokanShikyuKetteiTsuchishoSettingOuputOrder = ShokanShikyuKetteiTsuchishoSettingOuputOrder;
     }
 
 }

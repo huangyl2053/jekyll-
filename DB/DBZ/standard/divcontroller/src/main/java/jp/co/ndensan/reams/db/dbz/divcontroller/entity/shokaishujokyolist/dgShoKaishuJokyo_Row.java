@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyolist;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Oct 02 20:22:31 JST 2014 
+ * Fri Nov 14 20:15:01 JST 2014 
  */
 
 
@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 public class dgShoKaishuJokyo_Row extends DataRow {
 
+    private RString state;
     private RString kofushoShurui;
     private TextBoxFlexibleDate kofuDate;
     private RString kofuJiyuKey;
@@ -34,6 +35,7 @@ public class dgShoKaishuJokyo_Row extends DataRow {
 
     public dgShoKaishuJokyo_Row() {
         super();
+        this.state = RString.EMPTY;
         this.kofushoShurui = RString.EMPTY;
         this.kofuDate = new TextBoxFlexibleDate();
         this.kofuJiyuKey = RString.EMPTY;
@@ -46,8 +48,9 @@ public class dgShoKaishuJokyo_Row extends DataRow {
         this.yukoKigen = new TextBoxFlexibleDate();
     }
 
-    public dgShoKaishuJokyo_Row(RString kofushoShurui, TextBoxFlexibleDate kofuDate, RString kofuJiyuKey, RString kofuJiyu, RString kofuRiyu, TextBoxFlexibleDate kaishuDate, RString kaishuJiyuKey, RString kaishuJiyu, RString kaishuRiyu, TextBoxFlexibleDate yukoKigen) {
+    public dgShoKaishuJokyo_Row(RString state, RString kofushoShurui, TextBoxFlexibleDate kofuDate, RString kofuJiyuKey, RString kofuJiyu, RString kofuRiyu, TextBoxFlexibleDate kaishuDate, RString kaishuJiyuKey, RString kaishuJiyu, RString kaishuRiyu, TextBoxFlexibleDate yukoKigen) {
         super();
+        this.setOriginalData("state", state);
         this.setOriginalData("kofushoShurui", kofushoShurui);
         this.setOriginalData("kofuDate", kofuDate);
         this.setOriginalData("kofuJiyuKey", kofuJiyuKey);
@@ -58,6 +61,7 @@ public class dgShoKaishuJokyo_Row extends DataRow {
         this.setOriginalData("kaishuJiyu", kaishuJiyu);
         this.setOriginalData("kaishuRiyu", kaishuRiyu);
         this.setOriginalData("yukoKigen", yukoKigen);
+        this.state = state;
         this.kofushoShurui = kofushoShurui;
         this.kofuDate = kofuDate;
         this.kofuJiyuKey = kofuJiyuKey;
@@ -68,6 +72,10 @@ public class dgShoKaishuJokyo_Row extends DataRow {
         this.kaishuJiyu = kaishuJiyu;
         this.kaishuRiyu = kaishuRiyu;
         this.yukoKigen = yukoKigen;
+    }
+
+    public RString getState() {
+        return state;
     }
 
     public RString getKofushoShurui() {
@@ -108,6 +116,11 @@ public class dgShoKaishuJokyo_Row extends DataRow {
 
     public TextBoxFlexibleDate getYukoKigen() {
         return yukoKigen;
+    }
+
+    public void setState(RString state) {
+        this.setOriginalData("state", state);
+        this.state = state;
     }
 
     public void setKofushoShurui(RString kofushoShurui) {

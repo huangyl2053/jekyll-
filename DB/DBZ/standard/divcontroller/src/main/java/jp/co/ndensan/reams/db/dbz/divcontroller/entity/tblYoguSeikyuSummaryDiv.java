@@ -29,26 +29,26 @@ public class tblYoguSeikyuSummaryDiv extends TablePanel {
     private celYogu12AttblYoguSeikyuSummary celYogu12;
     @JsonProperty("celYogu13")
     private celYogu13AttblYoguSeikyuSummary celYogu13;
+    @JsonProperty("celYogu14")
+    private celYogu14AttblYoguSeikyuSummary celYogu14;
+    @JsonProperty("celYogu15")
+    private celYogu15AttblYoguSeikyuSummary celYogu15;
     @JsonProperty("celYogu21")
     private celYogu21AttblYoguSeikyuSummary celYogu21;
     @JsonProperty("celYogu22")
     private celYogu22AttblYoguSeikyuSummary celYogu22;
     @JsonProperty("celYogu23")
     private celYogu23AttblYoguSeikyuSummary celYogu23;
+    @JsonProperty("celYogu24")
+    private celYogu24AttblYoguSeikyuSummary celYogu24;
+    @JsonProperty("celYogu25")
+    private celYogu25AttblYoguSeikyuSummary celYogu25;
     @JsonProperty("celYogu31")
     private celYogu31AttblYoguSeikyuSummary celYogu31;
     @JsonProperty("celYogu32")
     private celYogu32AttblYoguSeikyuSummary celYogu32;
     @JsonProperty("celYogu33")
     private celYogu33AttblYoguSeikyuSummary celYogu33;
-    @JsonProperty("celYogu14")
-    private celYogu14AttblYoguSeikyuSummary celYogu14;
-    @JsonProperty("celYogu15")
-    private celYogu15AttblYoguSeikyuSummary celYogu15;
-    @JsonProperty("celYogu24")
-    private celYogu24AttblYoguSeikyuSummary celYogu24;
-    @JsonProperty("celYogu25")
-    private celYogu25AttblYoguSeikyuSummary celYogu25;
     @JsonProperty("celYogu34")
     private celYogu34AttblYoguSeikyuSummary celYogu34;
     @JsonProperty("celYogu35")
@@ -74,6 +74,16 @@ public class tblYoguSeikyuSummaryDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Label getLblYoguRiyoshaFutanAmount() {
+        return this.celYogu14.getLblYoguRiyoshaFutanAmount();
+    }
+
+    @JsonIgnore
+    public Label getLblYoguLimitOverAmount() {
+        return this.celYogu15.getLblYoguLimitOverAmount();
+    }
+
+    @JsonIgnore
     public Label getLblYoguSummaryMae() {
         return this.celYogu21.getLblYoguSummaryMae();
     }
@@ -89,6 +99,16 @@ public class tblYoguSeikyuSummaryDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtYoguRiyoshaFutanAmountMae() {
+        return this.celYogu24.getTxtYoguRiyoshaFutanAmountMae();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtYoguLimitOverAmountMae() {
+        return this.celYogu25.getTxtYoguLimitOverAmountMae();
+    }
+
+    @JsonIgnore
     public Label getLblYoguSummaryNow() {
         return this.celYogu31.getLblYoguSummaryNow();
     }
@@ -101,26 +121,6 @@ public class tblYoguSeikyuSummaryDiv extends TablePanel {
     @JsonIgnore
     public TextBoxNum getTxtYoguHokenSeikyuAmountNow() {
         return this.celYogu33.getTxtYoguHokenSeikyuAmountNow();
-    }
-
-    @JsonIgnore
-    public Label getLblYoguRiyoshaFutanAmount() {
-        return this.celYogu14.getLblYoguRiyoshaFutanAmount();
-    }
-
-    @JsonIgnore
-    public Label getLblYoguLimitOverAmount() {
-        return this.celYogu15.getLblYoguLimitOverAmount();
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtYoguRiyoshaFutanAmountMae() {
-        return this.celYogu24.getTxtYoguRiyoshaFutanAmountMae();
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtYoguLimitOverAmountMae() {
-        return this.celYogu25.getTxtYoguLimitOverAmountMae();
     }
 
     @JsonIgnore
@@ -169,6 +169,26 @@ public class tblYoguSeikyuSummaryDiv extends TablePanel {
         this.celYogu13=celYogu13;
     }
 
+    @JsonProperty("celYogu14")
+    private celYogu14AttblYoguSeikyuSummary getCelYogu14() {
+        return celYogu14;
+    }
+
+    @JsonProperty("celYogu14")
+    private void setCelYogu14(celYogu14AttblYoguSeikyuSummary celYogu14) {
+        this.celYogu14=celYogu14;
+    }
+
+    @JsonProperty("celYogu15")
+    private celYogu15AttblYoguSeikyuSummary getCelYogu15() {
+        return celYogu15;
+    }
+
+    @JsonProperty("celYogu15")
+    private void setCelYogu15(celYogu15AttblYoguSeikyuSummary celYogu15) {
+        this.celYogu15=celYogu15;
+    }
+
     @JsonProperty("celYogu21")
     private celYogu21AttblYoguSeikyuSummary getCelYogu21() {
         return celYogu21;
@@ -199,6 +219,26 @@ public class tblYoguSeikyuSummaryDiv extends TablePanel {
         this.celYogu23=celYogu23;
     }
 
+    @JsonProperty("celYogu24")
+    private celYogu24AttblYoguSeikyuSummary getCelYogu24() {
+        return celYogu24;
+    }
+
+    @JsonProperty("celYogu24")
+    private void setCelYogu24(celYogu24AttblYoguSeikyuSummary celYogu24) {
+        this.celYogu24=celYogu24;
+    }
+
+    @JsonProperty("celYogu25")
+    private celYogu25AttblYoguSeikyuSummary getCelYogu25() {
+        return celYogu25;
+    }
+
+    @JsonProperty("celYogu25")
+    private void setCelYogu25(celYogu25AttblYoguSeikyuSummary celYogu25) {
+        this.celYogu25=celYogu25;
+    }
+
     @JsonProperty("celYogu31")
     private celYogu31AttblYoguSeikyuSummary getCelYogu31() {
         return celYogu31;
@@ -227,46 +267,6 @@ public class tblYoguSeikyuSummaryDiv extends TablePanel {
     @JsonProperty("celYogu33")
     private void setCelYogu33(celYogu33AttblYoguSeikyuSummary celYogu33) {
         this.celYogu33=celYogu33;
-    }
-
-    @JsonProperty("celYogu14")
-    private celYogu14AttblYoguSeikyuSummary getCelYogu14() {
-        return celYogu14;
-    }
-
-    @JsonProperty("celYogu14")
-    private void setCelYogu14(celYogu14AttblYoguSeikyuSummary celYogu14) {
-        this.celYogu14=celYogu14;
-    }
-
-    @JsonProperty("celYogu15")
-    private celYogu15AttblYoguSeikyuSummary getCelYogu15() {
-        return celYogu15;
-    }
-
-    @JsonProperty("celYogu15")
-    private void setCelYogu15(celYogu15AttblYoguSeikyuSummary celYogu15) {
-        this.celYogu15=celYogu15;
-    }
-
-    @JsonProperty("celYogu24")
-    private celYogu24AttblYoguSeikyuSummary getCelYogu24() {
-        return celYogu24;
-    }
-
-    @JsonProperty("celYogu24")
-    private void setCelYogu24(celYogu24AttblYoguSeikyuSummary celYogu24) {
-        this.celYogu24=celYogu24;
-    }
-
-    @JsonProperty("celYogu25")
-    private celYogu25AttblYoguSeikyuSummary getCelYogu25() {
-        return celYogu25;
-    }
-
-    @JsonProperty("celYogu25")
-    private void setCelYogu25(celYogu25AttblYoguSeikyuSummary celYogu25) {
-        this.celYogu25=celYogu25;
     }
 
     @JsonProperty("celYogu34")
@@ -351,6 +351,46 @@ class celYogu13AttblYoguSeikyuSummary extends TableCell {
 
 }
 /**
+ * celYogu14 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celYogu14AttblYoguSeikyuSummary extends TableCell {
+    @JsonProperty("lblYoguRiyoshaFutanAmount")
+    private Label lblYoguRiyoshaFutanAmount;
+
+    @JsonProperty("lblYoguRiyoshaFutanAmount")
+    public Label getLblYoguRiyoshaFutanAmount() {
+        return lblYoguRiyoshaFutanAmount;
+    }
+
+    @JsonProperty("lblYoguRiyoshaFutanAmount")
+    public void setLblYoguRiyoshaFutanAmount(Label lblYoguRiyoshaFutanAmount) {
+        this.lblYoguRiyoshaFutanAmount=lblYoguRiyoshaFutanAmount;
+    }
+
+}
+/**
+ * celYogu15 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celYogu15AttblYoguSeikyuSummary extends TableCell {
+    @JsonProperty("lblYoguLimitOverAmount")
+    private Label lblYoguLimitOverAmount;
+
+    @JsonProperty("lblYoguLimitOverAmount")
+    public Label getLblYoguLimitOverAmount() {
+        return lblYoguLimitOverAmount;
+    }
+
+    @JsonProperty("lblYoguLimitOverAmount")
+    public void setLblYoguLimitOverAmount(Label lblYoguLimitOverAmount) {
+        this.lblYoguLimitOverAmount=lblYoguLimitOverAmount;
+    }
+
+}
+/**
  * celYogu21 のクラスファイル 
  * 
  * @author 自動生成
@@ -411,6 +451,46 @@ class celYogu23AttblYoguSeikyuSummary extends TableCell {
 
 }
 /**
+ * celYogu24 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celYogu24AttblYoguSeikyuSummary extends TableCell {
+    @JsonProperty("txtYoguRiyoshaFutanAmountMae")
+    private TextBoxNum txtYoguRiyoshaFutanAmountMae;
+
+    @JsonProperty("txtYoguRiyoshaFutanAmountMae")
+    public TextBoxNum getTxtYoguRiyoshaFutanAmountMae() {
+        return txtYoguRiyoshaFutanAmountMae;
+    }
+
+    @JsonProperty("txtYoguRiyoshaFutanAmountMae")
+    public void setTxtYoguRiyoshaFutanAmountMae(TextBoxNum txtYoguRiyoshaFutanAmountMae) {
+        this.txtYoguRiyoshaFutanAmountMae=txtYoguRiyoshaFutanAmountMae;
+    }
+
+}
+/**
+ * celYogu25 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celYogu25AttblYoguSeikyuSummary extends TableCell {
+    @JsonProperty("txtYoguLimitOverAmountMae")
+    private TextBoxNum txtYoguLimitOverAmountMae;
+
+    @JsonProperty("txtYoguLimitOverAmountMae")
+    public TextBoxNum getTxtYoguLimitOverAmountMae() {
+        return txtYoguLimitOverAmountMae;
+    }
+
+    @JsonProperty("txtYoguLimitOverAmountMae")
+    public void setTxtYoguLimitOverAmountMae(TextBoxNum txtYoguLimitOverAmountMae) {
+        this.txtYoguLimitOverAmountMae=txtYoguLimitOverAmountMae;
+    }
+
+}
+/**
  * celYogu31 のクラスファイル 
  * 
  * @author 自動生成
@@ -467,86 +547,6 @@ class celYogu33AttblYoguSeikyuSummary extends TableCell {
     @JsonProperty("txtYoguHokenSeikyuAmountNow")
     public void setTxtYoguHokenSeikyuAmountNow(TextBoxNum txtYoguHokenSeikyuAmountNow) {
         this.txtYoguHokenSeikyuAmountNow=txtYoguHokenSeikyuAmountNow;
-    }
-
-}
-/**
- * celYogu14 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celYogu14AttblYoguSeikyuSummary extends TableCell {
-    @JsonProperty("lblYoguRiyoshaFutanAmount")
-    private Label lblYoguRiyoshaFutanAmount;
-
-    @JsonProperty("lblYoguRiyoshaFutanAmount")
-    public Label getLblYoguRiyoshaFutanAmount() {
-        return lblYoguRiyoshaFutanAmount;
-    }
-
-    @JsonProperty("lblYoguRiyoshaFutanAmount")
-    public void setLblYoguRiyoshaFutanAmount(Label lblYoguRiyoshaFutanAmount) {
-        this.lblYoguRiyoshaFutanAmount=lblYoguRiyoshaFutanAmount;
-    }
-
-}
-/**
- * celYogu15 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celYogu15AttblYoguSeikyuSummary extends TableCell {
-    @JsonProperty("lblYoguLimitOverAmount")
-    private Label lblYoguLimitOverAmount;
-
-    @JsonProperty("lblYoguLimitOverAmount")
-    public Label getLblYoguLimitOverAmount() {
-        return lblYoguLimitOverAmount;
-    }
-
-    @JsonProperty("lblYoguLimitOverAmount")
-    public void setLblYoguLimitOverAmount(Label lblYoguLimitOverAmount) {
-        this.lblYoguLimitOverAmount=lblYoguLimitOverAmount;
-    }
-
-}
-/**
- * celYogu24 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celYogu24AttblYoguSeikyuSummary extends TableCell {
-    @JsonProperty("txtYoguRiyoshaFutanAmountMae")
-    private TextBoxNum txtYoguRiyoshaFutanAmountMae;
-
-    @JsonProperty("txtYoguRiyoshaFutanAmountMae")
-    public TextBoxNum getTxtYoguRiyoshaFutanAmountMae() {
-        return txtYoguRiyoshaFutanAmountMae;
-    }
-
-    @JsonProperty("txtYoguRiyoshaFutanAmountMae")
-    public void setTxtYoguRiyoshaFutanAmountMae(TextBoxNum txtYoguRiyoshaFutanAmountMae) {
-        this.txtYoguRiyoshaFutanAmountMae=txtYoguRiyoshaFutanAmountMae;
-    }
-
-}
-/**
- * celYogu25 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celYogu25AttblYoguSeikyuSummary extends TableCell {
-    @JsonProperty("txtYoguLimitOverAmountMae")
-    private TextBoxNum txtYoguLimitOverAmountMae;
-
-    @JsonProperty("txtYoguLimitOverAmountMae")
-    public TextBoxNum getTxtYoguLimitOverAmountMae() {
-        return txtYoguLimitOverAmountMae;
-    }
-
-    @JsonProperty("txtYoguLimitOverAmountMae")
-    public void setTxtYoguLimitOverAmountMae(TextBoxNum txtYoguLimitOverAmountMae) {
-        this.txtYoguLimitOverAmountMae=txtYoguLimitOverAmountMae;
     }
 
 }

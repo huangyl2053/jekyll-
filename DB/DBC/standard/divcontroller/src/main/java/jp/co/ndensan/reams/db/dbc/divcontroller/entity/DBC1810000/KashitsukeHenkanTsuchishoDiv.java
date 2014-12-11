@@ -1,18 +1,16 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1810000;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PrintContentsSettingDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KashitsukeHenkanTsuchisho のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.printcontentssetting.PrintContentsSettingDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
+
+/**
+ * KashitsukeHenkanTsuchisho のクラスファイル
+ *
  * @author 自動生成
  */
 public class KashitsukeHenkanTsuchishoDiv extends PanelPublish {
@@ -22,6 +20,7 @@ public class KashitsukeHenkanTsuchishoDiv extends PanelPublish {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("KashitsukeHenkanTsuchishoPrintSetting")
     private PrintContentsSettingDiv KashitsukeHenkanTsuchishoPrintSetting;
     @JsonProperty("txtNofuKigen")
@@ -42,7 +41,7 @@ public class KashitsukeHenkanTsuchishoDiv extends PanelPublish {
 
     @JsonProperty("KashitsukeHenkanTsuchishoPrintSetting")
     public void setKashitsukeHenkanTsuchishoPrintSetting(PrintContentsSettingDiv KashitsukeHenkanTsuchishoPrintSetting) {
-        this.KashitsukeHenkanTsuchishoPrintSetting=KashitsukeHenkanTsuchishoPrintSetting;
+        this.KashitsukeHenkanTsuchishoPrintSetting = KashitsukeHenkanTsuchishoPrintSetting;
     }
 
     @JsonProperty("txtNofuKigen")
@@ -52,7 +51,7 @@ public class KashitsukeHenkanTsuchishoDiv extends PanelPublish {
 
     @JsonProperty("txtNofuKigen")
     public void setTxtNofuKigen(TextBoxDate txtNofuKigen) {
-        this.txtNofuKigen=txtNofuKigen;
+        this.txtNofuKigen = txtNofuKigen;
     }
 
     @JsonProperty("txtShiharaiKigen")
@@ -62,7 +61,7 @@ public class KashitsukeHenkanTsuchishoDiv extends PanelPublish {
 
     @JsonProperty("txtShiharaiKigen")
     public void setTxtShiharaiKigen(TextBoxDate txtShiharaiKigen) {
-        this.txtShiharaiKigen=txtShiharaiKigen;
+        this.txtShiharaiKigen = txtShiharaiKigen;
     }
 
 }

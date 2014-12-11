@@ -27,6 +27,8 @@ public class JukyushaIdoRenrakuhyoRojinHokenDiv extends Panel {
     private TextBoxCode RokenJukyushaNo;
     @JsonProperty("RokenKohiFutanshaNo")
     private TextBoxCode RokenKohiFutanshaNo;
+    @JsonProperty("Button8")
+    private Button Button8;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -62,6 +64,16 @@ public class JukyushaIdoRenrakuhyoRojinHokenDiv extends Panel {
     @JsonProperty("RokenKohiFutanshaNo")
     public void setRokenKohiFutanshaNo(TextBoxCode RokenKohiFutanshaNo) {
         this.RokenKohiFutanshaNo=RokenKohiFutanshaNo;
+    }
+
+    @JsonProperty("Button8")
+    public Button getButton8() {
+        return Button8;
+    }
+
+    @JsonProperty("Button8")
+    public void setButton8(Button Button8) {
+        this.Button8=Button8;
     }
 
 }

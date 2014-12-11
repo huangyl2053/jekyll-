@@ -27,6 +27,8 @@ public class JukyushaIdoRenrakuhyoKihonJohoDiv extends Panel {
     private RadioButton radRenrakuhyoIdoKubun;
     @JsonProperty("ddlIdoJiyu")
     private DropDownList ddlIdoJiyu;
+    @JsonProperty("Button1")
+    private Button Button1;
     @JsonProperty("txtRenrakuhyoHihoNo")
     private TextBoxCode txtRenrakuhyoHihoNo;
     @JsonProperty("txtRenrakuhyoHihoName")
@@ -80,6 +82,16 @@ public class JukyushaIdoRenrakuhyoKihonJohoDiv extends Panel {
     @JsonProperty("ddlIdoJiyu")
     public void setDdlIdoJiyu(DropDownList ddlIdoJiyu) {
         this.ddlIdoJiyu=ddlIdoJiyu;
+    }
+
+    @JsonProperty("Button1")
+    public Button getButton1() {
+        return Button1;
+    }
+
+    @JsonProperty("Button1")
+    public void setButton1(Button Button1) {
+        this.Button1=Button1;
     }
 
     @JsonProperty("txtRenrakuhyoHihoNo")
