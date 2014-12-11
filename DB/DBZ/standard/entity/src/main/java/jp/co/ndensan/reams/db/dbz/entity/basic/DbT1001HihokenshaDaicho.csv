@@ -1,7 +1,6 @@
 ﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
-hihokenshaNo,varchar,RString,,,,,A
+hihokenshaNo,varchar,HihokenshaNo,,,,,A
 shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
-shoKisaiHokenshaNo,varchar,RString,,,,,A
 shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
 shikakuShutokuJiyuCode,varchar,RString,,,,,A
 shikakuShutokuYMD,UDD015YMD,FlexibleDate,,,,,A

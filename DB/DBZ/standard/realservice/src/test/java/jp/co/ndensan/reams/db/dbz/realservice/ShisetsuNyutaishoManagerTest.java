@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.helper.ShisetsuNyutaishoEntityMock;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1004ShisetsuNyutaishoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -60,6 +60,10 @@ public class ShisetsuNyutaishoManagerTest extends DbzTestBase {
             sut = createManager(AS_成功);
             assertThat(sut.save(ShisetsuNyutaishoMock.create施設入退所()), is(true));
         }
+    }
+
+    private static DbT1004ShisetsuNyutaishoEntity create施設入退所() {
+        return DbT1004ShisetsuNyutaishoEntityGenerator.createDbT1004ShisetsuNyutaishoEntity();
     }
 
     public static class remove {
@@ -162,7 +166,7 @@ public class ShisetsuNyutaishoManagerTest extends DbzTestBase {
     }
 
     private static DbT1004ShisetsuNyutaishoEntity createEntity(int flg) {
-        return flg == 0 ? null : ShisetsuNyutaishoEntityMock.create施設入退所Entity();
+        return flg == 0 ? null : DbT1004ShisetsuNyutaishoEntityGenerator.createDbT1004ShisetsuNyutaishoEntity();
     }
 
     private static List<DbT1004ShisetsuNyutaishoEntity> createEntities(int entitiesSize) {
@@ -171,7 +175,7 @@ public class ShisetsuNyutaishoManagerTest extends DbzTestBase {
         }
         List<DbT1004ShisetsuNyutaishoEntity> entities = new ArrayList<>();
         for (int i = 0; i < entitiesSize; i++) {
-            entities.add(ShisetsuNyutaishoEntityMock.create施設入退所Entity());
+            entities.add(DbT1004ShisetsuNyutaishoEntityGenerator.createDbT1004ShisetsuNyutaishoEntity());
         }
         return entities;
     }

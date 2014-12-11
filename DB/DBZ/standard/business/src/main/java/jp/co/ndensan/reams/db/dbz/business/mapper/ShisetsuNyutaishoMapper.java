@@ -13,7 +13,11 @@ import jp.co.ndensan.reams.db.dbz.business.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.ShisetsuNyutaishoList;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
@@ -47,7 +51,7 @@ public final class ShisetsuNyutaishoMapper {
         return new ShisetsuNyutaisho(
                 entity.getShichosonCode(),
                 entity.getShikibetsuCode(),
-                entity.getShoriTimestamp(),
+                entity.getShoriTimestamp().getRDateTime(),
                 DaichoType.toValue(entity.getDaichoShubetsu()),
                 create入所期間(entity),
                 入所施設,
@@ -97,7 +101,7 @@ public final class ShisetsuNyutaishoMapper {
         DbT1004ShisetsuNyutaishoEntity entity = new DbT1004ShisetsuNyutaishoEntity();
         entity.setShichosonCode(施設入退所.get市町村コード());
         entity.setShikibetsuCode(施設入退所.get個人識別コード());
-        entity.setShoriTimestamp(施設入退所.get処理日時());
+        entity.setShoriTimestamp(toYMDHMS(施設入退所.get処理日時()));
         entity.setDaichoShubetsu(施設入退所.get台帳種別().getCode());
         entity.setNyushoShisetsuShurui(施設入退所.get入所施設().get施設種類().getCode());
         entity.setNyushoShisetsuCode(施設入退所.get入所施設().get施設コード().value());
@@ -107,6 +111,25 @@ public final class ShisetsuNyutaishoMapper {
         entity.setTaishoYMD(施設入退所.get入所期間().getTo());
 
         return entity;
+    }
+
+    private static YMDHMS toYMDHMS(RDateTime rDateTime) {
+        return new YMDHMS(
+                new RStringBuilder()
+                .append(rDateTime.getDate().toDateString())
+                .append(to2桁(rDateTime.getTime().getHour()))
+                .append(to2桁(rDateTime.getTime().getMinute()))
+                .append(to2桁(rDateTime.getTime().getSecond()))
+                .toRString()
+        );
+    }
+
+    private static RString to2桁(int value) {
+        RStringBuilder builder = new RStringBuilder();
+        if (value < 10) {
+            builder.append("0");
+        }
+        return builder.append(value).toRString();
     }
 
     private static Range<FlexibleDate> create入所期間(DbT1004ShisetsuNyutaishoEntity entity) {

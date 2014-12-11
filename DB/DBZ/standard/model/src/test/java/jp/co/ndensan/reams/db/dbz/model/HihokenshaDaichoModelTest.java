@@ -50,12 +50,6 @@ public class HihokenshaDaichoModelTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
-            sut.set証記載保険者番号(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_証記載保険者番号);
-            assertThat(sut.get証記載保険者番号(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_証記載保険者番号));
-        }
-
-        @Test
         public void 戻り値の識別コードは_設定した値と同じ識別コードを返す() {
             sut.set識別コード(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_識別コード);
             assertThat(sut.get識別コード(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_識別コード));

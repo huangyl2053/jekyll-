@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.model;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -73,7 +74,7 @@ public class HihokenshaDaichoModel implements Serializable {
      *
      * @return 被保険者番号
      */
-    public RString get被保険者番号() {
+    public HihokenshaNo get被保険者番号() {
         return entity.getHihokenshaNo();
     }
 
@@ -84,15 +85,6 @@ public class HihokenshaDaichoModel implements Serializable {
      */
     public YMDHMS get処理日時() {
         return entity.getShoriTimestamp();
-    }
-
-    /**
-     * 証記載保険者番号を返します。
-     *
-     * @return 証記載保険者番号
-     */
-    public RString get証記載保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
     }
 
     /**
@@ -335,7 +327,7 @@ public class HihokenshaDaichoModel implements Serializable {
      *
      * @param 被保険者番号 被保険者番号
      */
-    public void set被保険者番号(RString 被保険者番号) {
+    public void set被保険者番号(HihokenshaNo 被保険者番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         entity.setHihokenshaNo(被保険者番号);
     }
@@ -348,16 +340,6 @@ public class HihokenshaDaichoModel implements Serializable {
     public void set処理日時(YMDHMS 処理日時) {
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
         entity.setShoriTimestamp(処理日時);
-    }
-
-    /**
-     * 証記載保険者番号を設定します。
-     *
-     * @param 証記載保険者番号 証記載保険者番号
-     */
-    public void set証記載保険者番号(RString 証記載保険者番号) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
     }
 
     /**
