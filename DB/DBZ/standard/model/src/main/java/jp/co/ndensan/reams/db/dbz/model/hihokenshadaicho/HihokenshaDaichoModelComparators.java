@@ -3,38 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.comparator;
+package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 
 import java.util.Collections;
 import java.util.Comparator;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 
 /**
  * {@link jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel 被保険者台帳Model}をソートするためのComparatorを提供します。
  *
  * @author n8178 城間篤人
  */
-public enum HihokenshaDaichoModelComparators {
+public enum HihokenshaDaichoModelComparators implements Comparator<HihokenshaDaichoModel> {
 
     /**
      * orderBy資格取得日で被保険者台帳Modelをソートする機能を持ちます。
      */
-    orderBy資格取得日(
-            new Comparator<HihokenshaDaichoModel>() {
+    orderBy資格取得日 {
                 @Override
                 public int compare(HihokenshaDaichoModel model1, HihokenshaDaichoModel model2) {
                     return model1.get資格取得日().compareTo(model2.get資格取得日());
                 }
-            }
-    );
-
-    private final Comparator<HihokenshaDaichoModel> asc;
-    private final Comparator<HihokenshaDaichoModel> desc;
-
-    private HihokenshaDaichoModelComparators(Comparator<HihokenshaDaichoModel> comparator) {
-        asc = comparator;
-        desc = Collections.reverseOrder(comparator);
-    }
+            };
 
     /**
      * 昇順でソートする{@link Comparator}を返します。
@@ -42,7 +31,7 @@ public enum HihokenshaDaichoModelComparators {
      * @return 昇順ソート
      */
     public Comparator<HihokenshaDaichoModel> asc() {
-        return this.asc;
+        return this;
     }
 
     /**
@@ -51,7 +40,7 @@ public enum HihokenshaDaichoModelComparators {
      * @return 降順ソート
      */
     public Comparator<HihokenshaDaichoModel> desc() {
-        return this.desc;
+        return Collections.reverseOrder(this);
     }
 
 }
