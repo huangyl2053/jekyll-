@@ -29,7 +29,7 @@ public class ShikakuShutokuKanrenJohoDac {
      */
     @Transaction
     public int insertOrUpdateOrDelete(ShikakuShutokuKanrenJohoModel model) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        //DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         int saveNum = 0;
 
         //TODO #52997

@@ -50,16 +50,16 @@ public final class ShikakuTokusoDateValidetor {
 
     private static class _ShikakuTokusoDateValidetor implements IShikakuTosusoDateValidetor, IValidatable {
 
-        private final HihokenshaDaichoModel previous;
-        private HihokenshaDaichoModel next;
+        private final HihokenshaDaichoModel previousModel;
+        private HihokenshaDaichoModel nextModel;
 
         public _ShikakuTokusoDateValidetor(HihokenshaDaichoModel previous) {
-            this.previous = previous;
+            this.previousModel = previous;
         }
 
         @Override
         public IValidatable next(HihokenshaDaichoModel next) {
-            this.next = next;
+            this.nextModel = next;
             return this;
         }
 
