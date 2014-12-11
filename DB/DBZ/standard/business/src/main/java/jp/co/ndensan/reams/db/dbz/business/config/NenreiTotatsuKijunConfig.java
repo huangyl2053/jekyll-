@@ -48,6 +48,12 @@ public class NenreiTotatsuKijunConfig {
         return Collections.unmodifiableMap(map);
     }
 
+    /**
+     * 年齢到達の基準を示す業務コンフィグキーを受け取り、対応した値を返却します。
+     *
+     * @param key 年齢到達基準を示す業務コンフィグキー
+     * @return コンフィグキーに対応した値
+     */
     public int get(ConfigKeysNenreiTotatsuKijunJoho key) {
         return configs.get(key);
     }

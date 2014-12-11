@@ -38,7 +38,7 @@ public class ShikakuShutokuKanrenJohoModel {
      * @param 老齢福祉ModelList 老齢福祉ModelList
      * @param 施設入退所ModelList 施設入退所ModelList
      */
-    public ShikakuShutokuKanrenJohoModel(List<HihokenshaDaichoModel> 被保険者台帳ModelList) {// List 医療保険加入状況ModelList ... ) {
+    public ShikakuShutokuKanrenJohoModel(List<HihokenshaDaichoModel> 被保険者台帳ModelList) { // List 医療保険加入状況ModelList ... ) {
         //TODO #52997
         //1), コンストラクタで、各メンバの値を引数から受け取るように実装してください。
         //    受け取る引数は、全てnullチェックをお願いします。

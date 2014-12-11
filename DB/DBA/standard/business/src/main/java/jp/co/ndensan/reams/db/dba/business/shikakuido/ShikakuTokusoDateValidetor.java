@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
  *
  * @author n8178 城間篤人
  */
-public class ShikakuTokusoDateValidetor {
+public final class ShikakuTokusoDateValidetor {
 
     /**
      * インスタンス化防止のためのパッケージプライベートのコンストラクタです。
