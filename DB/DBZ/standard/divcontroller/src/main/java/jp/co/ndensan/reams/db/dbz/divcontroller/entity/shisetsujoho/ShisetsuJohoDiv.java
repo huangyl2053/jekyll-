@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho;
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.IShisetsuJohoDiv;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -11,6 +11,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
+import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
@@ -52,7 +56,6 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @Override
     @JsonProperty("ddlDaichoShubetsu")
     public DropDownList getDdlDaichoShubetsu() {
         return ddlDaichoShubetsu;
@@ -63,7 +66,6 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
         this.ddlDaichoShubetsu = ddlDaichoShubetsu;
     }
 
-    @Override
     @JsonProperty("radShisetsuShurui")
     public RadioButton getRadShisetsuShurui() {
         return radShisetsuShurui;
@@ -74,7 +76,6 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
         this.radShisetsuShurui = radShisetsuShurui;
     }
 
-    @Override
     @JsonProperty("txtShisetsuCode")
     public TextBoxCode getTxtShisetsuCode() {
         return txtShisetsuCode;
@@ -115,7 +116,6 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
         this.btnJogaiShisetsuInputGuide = btnJogaiShisetsuInputGuide;
     }
 
-    @Override
     @JsonProperty("txtShisetsuMeisho")
     public TextBox getTxtShisetsuMeisho() {
         return txtShisetsuMeisho;
@@ -187,6 +187,46 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
     public void setMode_台帳種別(台帳種別 value) {
         _CommonChildDivModeUtil.setMode(this.modes, 台帳種別.class, value);
+    }
+
+    public static enum 利用機能 implements ICommonChildDivMode {
+
+        台帳種別表示機能("台帳種別表示機能"),
+        全施設対象機能("全施設対象機能"),
+        被保険者対象機能("被保険者対象機能"),
+        他市町村住所地特例者対象機能("他市町村住所地特例者対象機能"),
+        適用除外者対象機能("適用除外者対象機能");
+
+        private final String name;
+
+        private 利用機能(final String name) {
+            this.name = name;
+        }
+
+        public static 利用機能 getEnum(String str) {
+            利用機能[] enumArray = 利用機能.values();
+
+            for (利用機能 enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public 利用機能 getMode_利用機能() {
+        return (利用機能) _CommonChildDivModeUtil.getMode(this.modes, 利用機能.class);
+    }
+
+    public void setMode_利用機能(利用機能 value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 利用機能.class, value);
     }
 
     public static enum 施設種類 implements ICommonChildDivMode {
@@ -304,7 +344,71 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public ShisetsuJohoHandler getHandler() {
+    public void set台帳種別(RString 台帳種別キー) {
+        ddlDaichoShubetsu.setSelectedKey(台帳種別キー);
+        getHandler().select台帳種別();
+    }
+
+    @Override
+    public void set施設種類(RString 施設種類キー) {
+        radShisetsuShurui.setSelectedKey(施設種類キー);
+        getHandler().select施設種類();
+    }
+
+    @Override
+    public void set入所施設コード(RString 入所施設コード) {
+        txtShisetsuCode.setValue(入所施設コード);
+    }
+
+    @Override
+    public void set施設名称(RString 施設名称) {
+        txtShisetsuMeisho.setValue(施設名称);
+    }
+
+    @Override
+    public IOptional<DaichoType> get台帳種別() {
+        return getHandler().get台帳種別();
+    }
+
+    @Override
+    public ShisetsuType get施設種類() {
+        return getHandler().get施設種類();
+    }
+
+    @JsonIgnore
+    @Override
+    public ShisetsuCode get入所施設コード() {
+        return new ShisetsuCode(txtShisetsuCode.getValue());
+    }
+
+    @Override
+    public RString get施設名称() {
+        return txtShisetsuMeisho.getValue();
+    }
+
+    @Override
+    public void set入力可() {
+        getHandler().set入力可();
+    }
+
+    @Override
+    public void set入力不可() {
+        getHandler().set入力不可();
+    }
+
+    @Override
+    public void initialize() {
+        getHandler().initialize();
+    }
+
+    @Override
+    public void clear() {
+        getHandler().clearTxt();
+    }
+
+// 以下のメソッドはインタフェースに定義していないので業務には公開されません。
+    @JsonIgnore
+    private ShisetsuJohoHandler getHandler() {
         return new ShisetsuJohoHandler(this);
     }
 }
