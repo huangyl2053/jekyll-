@@ -1,0 +1,16 @@
+﻿shoKisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,A
+hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+serviceCode,DbUDD007ServiceCode,DbUDD007ServiceCode,,,,,A
+jutakuKaishuJigyoshaMeisho,UDD042AtenaMeisho,AtenaMeisho,,,,,A
+jutakuKaishuChakkoYMD,UDD015YMD,FlexibleDate,,,,,A
+jutakuKaishuJushoShozaisha,UDD042AtenaMeisho,AtenaMeisho,,,,,A
+kaishuTaishoJutakuJusho,varchar,RString,,,,,A
+kaishuNaiyo_kasho_Kibo,varchar,RString,,,,,A
+riyushoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,A
+riyushoSakuseiJigyoshaNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,A
+riyushoSakuseishaMei,UDD042AtenaMeisho,AtenaMeisho,,,,,A
+riyushoSakuseishaShikaku,varchar,RString,,,,,A
+riyushoSakuseiShinseiYMD,UDD015YMD,FlexibleDate,,,,,A
+riyushoSakuseiUketsukeYMD,UDD015YMD,FlexibleDate,,,,,A

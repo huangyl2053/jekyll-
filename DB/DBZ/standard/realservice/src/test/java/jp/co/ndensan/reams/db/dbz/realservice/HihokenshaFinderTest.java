@@ -323,7 +323,7 @@ public class HihokenshaFinderTest extends DbzTestBase {
 
     private static IHihokenshaShikaku createHihokenshaShikaku(LasdecCode lasdecCode, ShikibetsuCode shikibetsuCode,
             YMDHMS shoriTimestamp, HihokenshaNo hihokenshaNo) {
-        return new HihokenshaShikaku.Builder(lasdecCode, shikibetsuCode, shoriTimestamp, new ShoKisaiHokenshaNo(lasdecCode.getColumnValue()),
+        return new HihokenshaShikaku.Builder(lasdecCode, shikibetsuCode, shoriTimestamp,
                 new HihokenshaKubun(new Code("1"), new RString("第1号")),
                 FlexibleDate.MAX, ShikakuShutoku.NOTHING).hihokenshaNo(hihokenshaNo).build();
     }

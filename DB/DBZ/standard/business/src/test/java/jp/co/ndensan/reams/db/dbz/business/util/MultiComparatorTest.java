@@ -105,11 +105,11 @@ public class MultiComparatorTest extends DbzTestBase {
 
         private List<Hihokensha> createHihokenshaList() {
             List<Hihokensha> list = new ArrayList<>();
-            list.add(HihokenshaMock.createHihokensha(l000002, s0000000003, rt2014_04_07_00_00, s000002, hn0000000003));
-            list.add(HihokenshaMock.createHihokensha(l000001, s0000000001, rt2014_04_07_00_00, s000001, hn0000000002));
-            list.add(HihokenshaMock.createHihokensha(l000002, s0000000003, rt2014_04_07_00_00, s000002, hn0000000001));
-            list.add(HihokenshaMock.createHihokensha(l000001, s0000000002, rt2014_04_07_00_00, s000001, hn0000000004));
-            list.add(HihokenshaMock.createHihokensha(l000001, s0000000002, rt2014_04_08_00_00, s000001, hn0000000005));
+            list.add(HihokenshaMock.createHihokensha(l000002, s0000000003, rt2014_04_07_00_00, hn0000000003));
+            list.add(HihokenshaMock.createHihokensha(l000001, s0000000001, rt2014_04_07_00_00, hn0000000002));
+            list.add(HihokenshaMock.createHihokensha(l000002, s0000000003, rt2014_04_07_00_00, hn0000000001));
+            list.add(HihokenshaMock.createHihokensha(l000001, s0000000002, rt2014_04_07_00_00, hn0000000004));
+            list.add(HihokenshaMock.createHihokensha(l000001, s0000000002, rt2014_04_08_00_00, hn0000000005));
             return list;
         }
     }

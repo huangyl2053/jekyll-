@@ -31,16 +31,15 @@ public final class HihokenshaMock {
         LasdecCode lasdecCode = new LasdecCode("123456");
         ShikibetsuCode shikibetsuCode = new ShikibetsuCode("1234567890");
         YMDHMS shoriTimeStamp = new YMDHMS("20110912012345");
-        ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("123456"));
         HihokenshaNo hihokenshaNo = new HihokenshaNo(new RString("12134567890"));
-        Hihokensha hihokensha = createHihokensha(lasdecCode, shikibetsuCode, shoriTimeStamp, shoKisaiHokenshaNo, hihokenshaNo);
+        Hihokensha hihokensha = createHihokensha(lasdecCode, shikibetsuCode, shoriTimeStamp, hihokenshaNo);
         return spy(hihokensha);
     }
 
     public static Hihokensha createHihokensha(LasdecCode lasdecCode, ShikibetsuCode shikibetsuCode, YMDHMS shoriTimeStamp,
-            ShoKisaiHokenshaNo shoKisaiHokenshaNo, HihokenshaNo hihokenshaNo) {
+            HihokenshaNo hihokenshaNo) {
         IHihokenshaShikaku shikaku = new HihokenshaShikaku.Builder(lasdecCode, shikibetsuCode, shoriTimeStamp,
-                shoKisaiHokenshaNo, new HihokenshaKubun(new Code("1"), new RString("第1号")), FlexibleDate.MAX, ShikakuShutoku.NOTHING)
+                new HihokenshaKubun(new Code("1"), new RString("第1号")), FlexibleDate.MAX, ShikakuShutoku.NOTHING)
                 .hihokenshaNo(hihokenshaNo).build();
 
         IKojin profile = mock(IKojin.class);

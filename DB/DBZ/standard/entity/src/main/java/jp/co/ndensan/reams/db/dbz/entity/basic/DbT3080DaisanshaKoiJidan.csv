@@ -1,0 +1,11 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+todokedeKanriNo,varchar,RString,,,,,A
+jidanHokokushoUketukeYMD,UDD015YMD,FlexibleDate,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+kyushoKyogiKubun,varchar,RString,,,,,A
+jidanHokokushoTeishutsuYMD,UDD015YMD,FlexibleDate,,,,,A
+jidanSeiritsuYMD,UDD015YMD,FlexibleDate,,,,,A
+kyufuKaishiYMD,UDD014YM,FlexibleYearMonth,,,,,A
+kyufuShuryoYMD,UDD014YM,FlexibleYearMonth,,,,,A
+kashitsuWariai_Kagaisha,varchar,RString,,,,,A
+kashitsuWariai_Higaisha,varchar,RString,,,,,A
