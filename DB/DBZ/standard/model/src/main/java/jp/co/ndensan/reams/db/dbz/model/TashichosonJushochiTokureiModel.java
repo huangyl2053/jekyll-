@@ -71,11 +71,11 @@ public class TashichosonJushochiTokureiModel implements Serializable {
     }
 
     /**
-     * 識別コードコードを返します。
+     * 識別コードを返します。
      *
-     * @return 識別コードコード
+     * @return 識別コード
      */
-    public ShikibetsuCode get識別コードコード() {
+    public ShikibetsuCode get識別コード() {
         return entity.getShikibetsuCode();
     }
 
@@ -216,13 +216,13 @@ public class TashichosonJushochiTokureiModel implements Serializable {
     }
 
     /**
-     * 識別コードコードを設定します。
+     * 識別コードを設定します。
      *
-     * @param 識別コードコード 識別コードコード
+     * @param 識別コード 識別コード
      */
-    public void set識別コードコード(ShikibetsuCode 識別コードコード) {
-        requireNonNull(識別コードコード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コードコード"));
-        entity.setShikibetsuCode(識別コードコード);
+    public void set識別コード(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        entity.setShikibetsuCode(識別コード);
     }
 
     /**

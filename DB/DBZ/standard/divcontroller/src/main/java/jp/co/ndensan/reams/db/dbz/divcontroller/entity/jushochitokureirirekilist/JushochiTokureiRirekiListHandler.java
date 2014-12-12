@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilis
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
@@ -131,7 +132,7 @@ public class JushochiTokureiRirekiListHandler {
      */
     public void mapping住所地特例履歴() {
         IItemList<HihokenshaDaichoModel> 被保険者台帳List = get被保険者台帳情報();
-//        IItemList<HihokenshaDaichoModel> 住所地特例List = new HihokenshaDaichoList().get住所地特例List();
+        IItemList<HihokenshaDaichoModel> 住所地特例List = new HihokenshaDaichoList(被保険者台帳List).to住所地特例List();
 
         List<dgJutoku_Row> dataSource = new ArrayList<>();
         for (HihokenshaDaichoModel model : 被保険者台帳List) {
@@ -143,8 +144,8 @@ public class JushochiTokureiRirekiListHandler {
             row.setShichosonCode(model.get市町村コード().getColumnValue());
             row.setHihokenshaNo(model.get被保険者番号().getColumnValue());
             row.setShoriTimestamp(model.get処理日時().toDateString());
-            row.getTekiyoDate().setValue(model.get適用年月日());
-            row.getTekiyoTodokedeDate().setValue(model.get適用届出年月日());
+            row.getTekiyoDate().setValue(model.get住所地特例適用年月日());
+            row.getTekiyoTodokedeDate().setValue(model.get住所地特例適用届出年月日());
             row.setTekiyoJiyuKey(model.get住所地特例適用事由コード().getColumnValue().value());
             row.setTekiyoJiyu(model.get住所地特例適用事由コード().getRyakusho());
             row.getKaijoDate().setValue(FlexibleDate.MAX);
@@ -186,8 +187,8 @@ public class JushochiTokureiRirekiListHandler {
     }
 
     private void setTekiyoInputMeisai(HihokenshaDaichoModel model) {
-        jutokuRirekiDiv.getTxtTekiyoDate().setValue(model.get適用年月日());
-        jutokuRirekiDiv.getTxtTekiyoTodokedeDate().setValue(model.get適用届出年月日());
+        jutokuRirekiDiv.getTxtTekiyoDate().setValue(model.get住所地特例適用年月日());
+        jutokuRirekiDiv.getTxtTekiyoTodokedeDate().setValue(model.get住所地特例適用届出年月日());
         jutokuRirekiDiv.getDdlTekiyoJiyu().setSelectedItem(model.get住所地特例適用事由コード().value().getColumnValue());
         jutokuRirekiDiv.getDdlTekiyojiSochimotoHokensha().setSelectedItem(model.get広住特措置元市町村コード().value());
         jutokuRirekiDiv.getDdlTekiyojiKyuHokensha().setSelectedItem(model.get旧市町村コード().value());
@@ -196,8 +197,8 @@ public class JushochiTokureiRirekiListHandler {
     }
 
     private void setKaijoInputMeisai(HihokenshaDaichoModel model) {
-        jutokuRirekiDiv.getTxtKaijoDate().setValue(model.get解除年月日());
-        jutokuRirekiDiv.getTxtKaijoTodokedeDate().setValue(model.get解除届出年月日());
+        jutokuRirekiDiv.getTxtKaijoDate().setValue(model.get住所地特例解除年月日());
+        jutokuRirekiDiv.getTxtKaijoTodokedeDate().setValue(model.get住所地特例解除届出年月日());
         jutokuRirekiDiv.getDdlKaijoJiyu().setSelectedItem(model.get住所地特例解除事由コード().value().getColumnValue());
         jutokuRirekiDiv.getDdlKaijojiSochimotoHokensha().setSelectedItem(model.get広住特措置元市町村コード().getColumnValue());
         jutokuRirekiDiv.getDdlKaijojiKyuHokensha().setSelectedItem(model.get旧市町村コード().getColumnValue());

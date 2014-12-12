@@ -1,0 +1,8 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+shinChosaItakusakiNo,varchar,RString,,,,,A
+shinChosainNo,varchar,RString,,,,,A
+kyuChosaItakusakiNo,varchar,RString,,,,,A
+kyuChosainNo,varchar,RString,,,,,A
+shichosonCode2,UDD023LasdecCode,LasdecCode,,,,,A
+kyuChosaItakusakiNo2,varchar,RString,,,,,A
+kyuChosainNo2,varchar,RString,,,,,A

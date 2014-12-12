@@ -160,29 +160,29 @@ public class TekiyoJogaishaModel implements Serializable {
     }
 
     /**
-     * 入所通知発効日を返します。
+     * 入所通知発行日を返します。
      *
-     * @return 入所通知発効日
+     * @return 入所通知発行日
      */
-    public FlexibleDate get入所通知発効日() {
+    public FlexibleDate get入所通知発行日() {
         return entity.getNyushoTsuchiHakkoYMD();
     }
 
     /**
-     * 退所通知発効日を返します。
+     * 退所通知発行日を返します。
      *
-     * @return 退所通知発効日
+     * @return 退所通知発行日
      */
-    public FlexibleDate get退所通知発効日() {
+    public FlexibleDate get退所通知発行日() {
         return entity.getTaishoTsuchiHakkoYMD();
     }
 
     /**
-     * 変更通知発効日を返します。
+     * 変更通知発行日を返します。
      *
-     * @return 変更通知発効日
+     * @return 変更通知発行日
      */
-    public FlexibleDate get変更通知発効日() {
+    public FlexibleDate get変更通知発行日() {
         return entity.getHenkoTsuchiHakkoYMD();
     }
 
@@ -297,33 +297,33 @@ public class TekiyoJogaishaModel implements Serializable {
     }
 
     /**
-     * 入所通知発効日を設定します。
+     * 入所通知発行日を設定します。
      *
-     * @param 入所通知発効日 入所通知発効日
+     * @param 入所通知発行日 入所通知発行日
      */
-    public void set入所通知発効日(FlexibleDate 入所通知発効日) {
-        requireNonNull(入所通知発効日, UrSystemErrorMessages.値がnull.getReplacedMessage("入所通知発効日"));
-        entity.setNyushoTsuchiHakkoYMD(入所通知発効日);
+    public void set入所通知発行日(FlexibleDate 入所通知発行日) {
+        requireNonNull(入所通知発行日, UrSystemErrorMessages.値がnull.getReplacedMessage("入所通知発行日"));
+        entity.setNyushoTsuchiHakkoYMD(入所通知発行日);
     }
 
     /**
-     * 退所通知発効日を設定します。
+     * 退所通知発行日を設定します。
      *
-     * @param 退所通知発効日 退所通知発効日
+     * @param 退所通知発行日 退所通知発行日
      */
-    public void set退所通知発効日(FlexibleDate 退所通知発効日) {
-        requireNonNull(退所通知発効日, UrSystemErrorMessages.値がnull.getReplacedMessage("退所通知発効日"));
-        entity.setTaishoTsuchiHakkoYMD(退所通知発効日);
+    public void set退所通知発行日(FlexibleDate 退所通知発行日) {
+        requireNonNull(退所通知発行日, UrSystemErrorMessages.値がnull.getReplacedMessage("退所通知発行日"));
+        entity.setTaishoTsuchiHakkoYMD(退所通知発行日);
     }
 
     /**
-     * 変更通知発効日を設定します。
+     * 変更通知発行日を設定します。
      *
-     * @param 変更通知発効日 変更通知発効日
+     * @param 変更通知発行日 変更通知発行日
      */
-    public void set変更通知発効日(FlexibleDate 変更通知発効日) {
-        requireNonNull(変更通知発効日, UrSystemErrorMessages.値がnull.getReplacedMessage("変更通知発効日"));
-        entity.setHenkoTsuchiHakkoYMD(変更通知発効日);
+    public void set変更通知発行日(FlexibleDate 変更通知発行日) {
+        requireNonNull(変更通知発行日, UrSystemErrorMessages.値がnull.getReplacedMessage("変更通知発行日"));
+        entity.setHenkoTsuchiHakkoYMD(変更通知発行日)
     }
 
     /**

@@ -30,13 +30,6 @@ public interface IHihokenshaShikaku extends IHihokenshaNoGettable, IShikibetsuCo
     public LasdecCode get市町村コード();
 
     /**
-     * 被保険者の証記載保険者番号を返します。
-     *
-     * @return {@link ShoKisaiHokenshaNo 地方公共団体コード}
-     */
-    ShoKisaiHokenshaNo get証記載保険者番号();
-
-    /**
      * 被保険者の識別コードを返します。
      *
      * @return {@link ShikibetsuCode 識別コード}

@@ -57,9 +57,9 @@ public class RenrakusakiInfo {
                 div.setHokenshaNo(hokenshaNo);
             }
 
-            list = new RenrakusakiInfoFinder().getRenrakusakiList(
-                    new ShoKisaiHokenshaNo(div.getHokenshaNo()),
-                    new HihokenshaNo(div.getHihokenshaNo()));
+//            list = new RenrakusakiInfoFinder().getRenrakusakiList(
+//                    new ShoKisaiHokenshaNo(div.getHokenshaNo()),
+//                    new HihokenshaNo(div.getHihokenshaNo()));
         }
 
         if (list.isEmpty()) {
