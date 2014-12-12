@@ -76,6 +76,10 @@ var DBZ;
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinseiDate"));
             };
 
+            Controls.prototype.chkSeidoitsuseiShogai = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkSeidoitsuseiShogai"));
+            };
+
             Controls.prototype.tabHihokenshaShikakuShosai = function () {
                 return new UZA.TabContainer(this.convFiledName("tabHihokenshaShikakuShosai"));
             };

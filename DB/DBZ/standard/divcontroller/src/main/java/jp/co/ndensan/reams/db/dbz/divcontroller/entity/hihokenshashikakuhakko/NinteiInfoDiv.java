@@ -33,6 +33,8 @@ public class NinteiInfoDiv extends Panel {
     private TextBoxDate txtNinteiYukoToYMD;
     @JsonProperty("txtShinseiDate")
     private TextBoxFlexibleDate txtShinseiDate;
+    @JsonProperty("chkSeidoitsuseiShogai")
+    private CheckBoxList chkSeidoitsuseiShogai;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -98,6 +100,16 @@ public class NinteiInfoDiv extends Panel {
     @JsonProperty("txtShinseiDate")
     public void setTxtShinseiDate(TextBoxFlexibleDate txtShinseiDate) {
         this.txtShinseiDate=txtShinseiDate;
+    }
+
+    @JsonProperty("chkSeidoitsuseiShogai")
+    public CheckBoxList getChkSeidoitsuseiShogai() {
+        return chkSeidoitsuseiShogai;
+    }
+
+    @JsonProperty("chkSeidoitsuseiShogai")
+    public void setChkSeidoitsuseiShogai(CheckBoxList chkSeidoitsuseiShogai) {
+        this.chkSeidoitsuseiShogai=chkSeidoitsuseiShogai;
     }
 
 }

@@ -231,6 +231,16 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @JsonIgnore
+    public CheckBoxList getChkSeidoitsuseiShogai() {
+        return this.getNinteiInfo().getChkSeidoitsuseiShogai();
+    }
+
+    @JsonIgnore
+    public void  setChkSeidoitsuseiShogai(CheckBoxList chkSeidoitsuseiShogai) {
+        this.getNinteiInfo().setChkSeidoitsuseiShogai(chkSeidoitsuseiShogai);
+    }
+
+    @JsonIgnore
     public tplGendoGakuDiv getTplGendoGaku() {
         return this.getTabHihokenshaShikakuShosai().getTplGendoGaku();
     }

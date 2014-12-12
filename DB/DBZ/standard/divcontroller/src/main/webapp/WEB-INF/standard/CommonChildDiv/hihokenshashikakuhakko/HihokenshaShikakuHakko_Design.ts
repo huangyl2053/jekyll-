@@ -81,6 +81,10 @@ module DBZ {
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinseiDate"));
             }
 
+            public chkSeidoitsuseiShogai(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkSeidoitsuseiShogai"));
+            }
+
             public tabHihokenshaShikakuShosai(): UZA.TabContainer {
                 return new UZA.TabContainer(this.convFiledName("tabHihokenshaShikakuShosai"));
             }
