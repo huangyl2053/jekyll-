@@ -1,0 +1,14 @@
+﻿motoShichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+sakiShichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+shubetsu,varchar,RString,,,,,A
+yukoKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+yukoShuryoYMD,UDD015YMD,FlexibleDate,,,,,A
+rendoKeitaiCode,varchar,RString,,,,,A
+motoFormatVersion,varchar,RString,,,,,A
+motoEncodeKeitai,varchar,RString,,,,,A
+sakiFormatVersion,varchar,RString,,,,,A
+sakiEncodeKeitai,varchar,RString,,,,,A
+codeHenkanKubun,varchar,RString,,,,,A
+gaijiHenkanKubun,varchar,RString,,,,,A
+zenkenRendoKubun,varchar,RString,,,,,A
+rendoKubun,varchar,RString,,,,,A

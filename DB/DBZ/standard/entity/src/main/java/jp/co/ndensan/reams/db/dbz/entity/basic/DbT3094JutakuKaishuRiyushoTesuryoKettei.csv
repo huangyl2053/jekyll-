@@ -1,0 +1,7 @@
+﻿riyushoSakuseiJigyoshaNo,JigyoshaNo,JigyoshaNo,,,,,A
+ketteiYMD,UDD015YMD,FlexibleDate,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+shikyu_FushikyuKetteiYMD,UDD015YMD,FlexibleDate,,,,,A
+shikyu_FushikyuKubun,varchar,RString,,,,,A
+fushikyuRiyu,varchar,RString,,,,,A
+tesuryoShiharaiYoteiYMD,UDD015YMD,FlexibleDate,,,,,A
