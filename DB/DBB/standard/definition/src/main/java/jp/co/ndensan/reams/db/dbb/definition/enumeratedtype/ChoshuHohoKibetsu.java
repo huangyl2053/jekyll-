@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -52,6 +52,6 @@ public enum ChoshuHohoKibetsu {
                 return data;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("該当する徴収方法").getMessage());
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("徴収方法"));
     }
 }
