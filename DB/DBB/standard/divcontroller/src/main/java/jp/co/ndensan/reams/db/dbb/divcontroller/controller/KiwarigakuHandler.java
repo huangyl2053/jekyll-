@@ -35,16 +35,16 @@ public class KiwarigakuHandler {
     private final KiwarigakuDiv div;
     private final KiwarigakuFinder finder;
 
-    private final Label[][] 期割額テーブル;
-    private static final int TABLE_SIZE = 15;
+    private enum TableItem {
 
-    private static final int COL_NO_月 = 0;
-    private static final int COL_NO_特徴期 = 1;
-    private static final int COL_NO_特徴期別額 = 2;
-    private static final int COL_NO_特徴納付額 = 3;
-    private static final int COL_NO_普徴期 = 4;
-    private static final int COL_NO_普徴期別額 = 5;
-    private static final int COL_NO_普徴納付額 = 6;
+        月, 特徴期, 特徴期別額, 特徴納付額, 普徴期, 普徴期別額, 普徴納付額;
+    };
+
+    private final Map<RString, Label> 期割額テーブル = new HashMap<>();
+    private TableItem tableItem;
+    private int tableRowNo;
+
+    private static final int TABLE_SIZE = 15;
 
     private static final RString SUFFIX_月 = new RString("月");
     private static final RString SUFFIX_期 = new RString("期");
@@ -66,12 +66,12 @@ public class KiwarigakuHandler {
     public KiwarigakuHandler(KiwarigakuDiv div) {
         this.div = div;
         this.finder = new KiwarigakuFinder();
-        this.期割額テーブル = getTable();
         this.賦課計算Config = new FukaKeisanConfig();
         this.日付Config = new HizukeConfig();
         this.普徴Config = new FuchoConfig();
         this.特徴Config = new TokuchoConfig();
         this.過年度Config = new KanendoConfig();
+        initTable();
     }
 
     /**
@@ -89,12 +89,12 @@ public class KiwarigakuHandler {
             FukaKeisanConfig 賦課計算Config, HizukeConfig 日付Config, FuchoConfig 普徴Config, TokuchoConfig 特徴Config, KanendoConfig 過年度Config) {
         this.div = div;
         this.finder = finder;
-        this.期割額テーブル = getTable();
         this.賦課計算Config = 賦課計算Config;
         this.日付Config = 日付Config;
         this.普徴Config = 普徴Config;
         this.特徴Config = 特徴Config;
         this.過年度Config = 過年度Config;
+        initTable();
     }
 
     /**
@@ -113,9 +113,9 @@ public class KiwarigakuHandler {
 
         setDisplayMode(賦課年度, 普徴期列.length);
 
-        setTableData(COL_NO_月, 月列, SUFFIX_月);
-        setTableData(COL_NO_特徴期, 特徴期列, SUFFIX_期);
-        setTableData(COL_NO_普徴期, 普徴期列, SUFFIX_期);
+        setTableData(TableItem.月, 月列, SUFFIX_月);
+        setTableData(TableItem.特徴期, 特徴期列, SUFFIX_期);
+        setTableData(TableItem.普徴期, 普徴期列, SUFFIX_期);
 
         setKiwarigaku(finder.get期割額(調定年度, 賦課年度, 通知書番号, 処理日時), createIndexMap(特徴期列), createIndexMap(普徴期列));
     }
@@ -158,17 +158,19 @@ public class KiwarigakuHandler {
         div.getLblTokuchoKiGokei().setVisible(!is月列表示);
     }
 
-    private void setTableData(int itemNo, RString[] dataList, RString suffix) {
+    private void setTableData(TableItem itemNo, RString[] dataList, RString suffix) {
         for (int index = 0; index < dataList.length; index++) {
             RString data = dataList[index];
-            期割額テーブル[itemNo][index].setText((data != null) ? new RStringBuilder(data).append(suffix).toRString() : RString.EMPTY);
+            Label label = 期割額テーブル.get(getTableKey(itemNo, index + 1));
+            label.setText((data != null) ? new RStringBuilder(data).append(suffix).toRString() : RString.EMPTY);
         }
     }
 
-    private void setTableData(int itemNo, Decimal[] dataList) {
+    private void setTableData(TableItem itemNo, Decimal[] dataList) {
         for (int index = 0; index < dataList.length; index++) {
             Decimal data = dataList[index];
-            期割額テーブル[itemNo][index].setText((data != null) ? new RString(data.toString("#,##0")) : RString.EMPTY);
+            Label label = 期割額テーブル.get(getTableKey(itemNo, index + 1));
+            label.setText((data != null) ? new RString(data.toString("#,##0")) : RString.EMPTY);
         }
     }
 
@@ -211,136 +213,145 @@ public class KiwarigakuHandler {
             }
         }
 
-        setTableData(COL_NO_特徴期別額, 特徴期別額列);
-        setTableData(COL_NO_特徴納付額, 特徴納付額列);
-        setTableData(COL_NO_普徴期別額, 普徴期別額列);
-        setTableData(COL_NO_普徴納付額, 普徴納付額列);
+        setTableData(TableItem.特徴期別額, 特徴期別額列);
+        setTableData(TableItem.特徴納付額, 特徴納付額列);
+        setTableData(TableItem.普徴期別額, 普徴期別額列);
+        setTableData(TableItem.普徴納付額, 普徴納付額列);
     }
 
-    private Label[][] getTable() {
+    private void initTable() {
 
-        Label[][] table = {
-            {
-                div.getLblTsuki1(),
-                div.getLblTsuki2(),
-                div.getLblTsuki3(),
-                div.getLblTsuki4(),
-                div.getLblTsuki5(),
-                div.getLblTsuki6(),
-                div.getLblTsuki7(),
-                div.getLblTsuki8(),
-                div.getLblTsuki9(),
-                div.getLblTsuki10(),
-                div.getLblTsuki11(),
-                div.getLblTsuki12(),
-                div.getLblTsuki13(),
-                div.getLblTsuki14(),
-                div.getLblTsukiGokei()
-            },
-            {
-                div.getLblTokuchoKi1(),
-                div.getLblTokuchoKi2(),
-                div.getLblTokuchoKi3(),
-                div.getLblTokuchoKi4(),
-                div.getLblTokuchoKi5(),
-                div.getLblTokuchoKi6(),
-                div.getLblTokuchoKi7(),
-                div.getLblTokuchoKi8(),
-                div.getLblTokuchoKi9(),
-                div.getLblTokuchoKi10(),
-                div.getLblTokuchoKi11(),
-                div.getLblTokuchoKi12(),
-                div.getLblTokuchoKi13(),
-                div.getLblTokuchoKi14(),
-                div.getLblTokuchoKiGokei()
-            },
-            {
-                div.getLblTokuKibetsuGaku1(),
-                div.getLblTokuKibetsuGaku2(),
-                div.getLblTokuKibetsuGaku3(),
-                div.getLblTokuKibetsuGaku4(),
-                div.getLblTokuKibetsuGaku5(),
-                div.getLblTokuKibetsuGaku6(),
-                div.getLblTokuKibetsuGaku7(),
-                div.getLblTokuKibetsuGaku8(),
-                div.getLblTokuKibetsuGaku9(),
-                div.getLblTokuKibetsuGaku10(),
-                div.getLblTokuKibetsuGaku11(),
-                div.getLblTokuKibetsuGaku12(),
-                div.getLblTokuKibetsuGaku13(),
-                div.getLblTokuKibetsuGaku14(),
-                div.getLblTokuKibetsuGakuGokei()
-            },
-            {
-                div.getLblTokuNofuGaku1(),
-                div.getLblTokuNofuGaku2(),
-                div.getLblTokuNofuGaku3(),
-                div.getLblTokuNofuGaku4(),
-                div.getLblTokuNofuGaku5(),
-                div.getLblTokuNofuGaku6(),
-                div.getLblTokuNofuGaku7(),
-                div.getLblTokuNofuGaku8(),
-                div.getLblTokuNofuGaku9(),
-                div.getLblTokuNofuGaku10(),
-                div.getLblTokuNofuGaku11(),
-                div.getLblTokuNofuGaku12(),
-                div.getLblTokuNofuGaku13(),
-                div.getLblTokuNofuGaku14(),
-                div.getLblTokuNofuGakuGokei()
-            },
-            {
-                div.getLblFuchoKi1(),
-                div.getLblFuchoKi2(),
-                div.getLblFuchoKi3(),
-                div.getLblFuchoKi4(),
-                div.getLblFuchoKi5(),
-                div.getLblFuchoKi6(),
-                div.getLblFuchoKi7(),
-                div.getLblFuchoKi8(),
-                div.getLblFuchoKi9(),
-                div.getLblFuchoKi10(),
-                div.getLblFuchoKi11(),
-                div.getLblFuchoKi12(),
-                div.getLblFuchoKi13(),
-                div.getLblFuchoKi14(),
-                div.getLblFuchoKiGokei()
-            },
-            {
-                div.getLblFuchoKibetsuGaku1(),
-                div.getLblFuchoKibetsuGaku2(),
-                div.getLblFuchoKibetsuGaku3(),
-                div.getLblFuchoKibetsuGaku4(),
-                div.getLblFuchoKibetsuGaku5(),
-                div.getLblFuchoKibetsuGaku6(),
-                div.getLblFuchoKibetsuGaku7(),
-                div.getLblFuchoKibetsuGaku8(),
-                div.getLblFuchoKibetsuGaku9(),
-                div.getLblFuchoKibetsuGaku10(),
-                div.getLblFuchoKibetsuGaku11(),
-                div.getLblFuchoKibetsuGaku12(),
-                div.getLblFuchoKibetsuGaku13(),
-                div.getLblFuchoKibetsuGaku14(),
-                div.getLblFuchoKibetsuGakuGokei()
-            },
-            {
-                div.getLblFuchoNofuGaku1(),
-                div.getLblFuchoNofuGaku2(),
-                div.getLblFuchoNofuGaku3(),
-                div.getLblFuchoNofuGaku4(),
-                div.getLblFuchoNofuGaku5(),
-                div.getLblFuchoNofuGaku6(),
-                div.getLblFuchoNofuGaku7(),
-                div.getLblFuchoNofuGaku8(),
-                div.getLblFuchoNofuGaku9(),
-                div.getLblFuchoNofuGaku10(),
-                div.getLblFuchoNofuGaku11(),
-                div.getLblFuchoNofuGaku12(),
-                div.getLblFuchoNofuGaku13(),
-                div.getLblFuchoNofuGaku14(),
-                div.getLblFuchoNofuGakuGokei()
-            }
-        };
+        setTableItem(TableItem.月);
+        putTableData(div.getLblTsuki1());
+        putTableData(div.getLblTsuki2());
+        putTableData(div.getLblTsuki3());
+        putTableData(div.getLblTsuki4());
+        putTableData(div.getLblTsuki5());
+        putTableData(div.getLblTsuki6());
+        putTableData(div.getLblTsuki7());
+        putTableData(div.getLblTsuki8());
+        putTableData(div.getLblTsuki9());
+        putTableData(div.getLblTsuki10());
+        putTableData(div.getLblTsuki11());
+        putTableData(div.getLblTsuki12());
+        putTableData(div.getLblTsuki13());
+        putTableData(div.getLblTsuki14());
+        putTableData(div.getLblTsukiGokei());
 
-        return table;
+        setTableItem(TableItem.特徴期);
+        putTableData(div.getLblTokuchoKi1());
+        putTableData(div.getLblTokuchoKi2());
+        putTableData(div.getLblTokuchoKi3());
+        putTableData(div.getLblTokuchoKi4());
+        putTableData(div.getLblTokuchoKi5());
+        putTableData(div.getLblTokuchoKi6());
+        putTableData(div.getLblTokuchoKi7());
+        putTableData(div.getLblTokuchoKi8());
+        putTableData(div.getLblTokuchoKi9());
+        putTableData(div.getLblTokuchoKi10());
+        putTableData(div.getLblTokuchoKi11());
+        putTableData(div.getLblTokuchoKi12());
+        putTableData(div.getLblTokuchoKi13());
+        putTableData(div.getLblTokuchoKi14());
+        putTableData(div.getLblTokuchoKiGokei());
+
+        setTableItem(TableItem.特徴期別額);
+        putTableData(div.getLblTokuKibetsuGaku1());
+        putTableData(div.getLblTokuKibetsuGaku2());
+        putTableData(div.getLblTokuKibetsuGaku3());
+        putTableData(div.getLblTokuKibetsuGaku4());
+        putTableData(div.getLblTokuKibetsuGaku5());
+        putTableData(div.getLblTokuKibetsuGaku6());
+        putTableData(div.getLblTokuKibetsuGaku7());
+        putTableData(div.getLblTokuKibetsuGaku8());
+        putTableData(div.getLblTokuKibetsuGaku9());
+        putTableData(div.getLblTokuKibetsuGaku10());
+        putTableData(div.getLblTokuKibetsuGaku11());
+        putTableData(div.getLblTokuKibetsuGaku12());
+        putTableData(div.getLblTokuKibetsuGaku13());
+        putTableData(div.getLblTokuKibetsuGaku14());
+        putTableData(div.getLblTokuKibetsuGakuGokei());
+
+        setTableItem(TableItem.特徴納付額);
+        putTableData(div.getLblTokuNofuGaku1());
+        putTableData(div.getLblTokuNofuGaku2());
+        putTableData(div.getLblTokuNofuGaku3());
+        putTableData(div.getLblTokuNofuGaku4());
+        putTableData(div.getLblTokuNofuGaku5());
+        putTableData(div.getLblTokuNofuGaku6());
+        putTableData(div.getLblTokuNofuGaku7());
+        putTableData(div.getLblTokuNofuGaku8());
+        putTableData(div.getLblTokuNofuGaku9());
+        putTableData(div.getLblTokuNofuGaku10());
+        putTableData(div.getLblTokuNofuGaku11());
+        putTableData(div.getLblTokuNofuGaku12());
+        putTableData(div.getLblTokuNofuGaku13());
+        putTableData(div.getLblTokuNofuGaku14());
+        putTableData(div.getLblTokuNofuGakuGokei());
+
+        setTableItem(TableItem.普徴期);
+        putTableData(div.getLblTokuNofuGaku1());
+        putTableData(div.getLblTokuNofuGaku2());
+        putTableData(div.getLblTokuNofuGaku3());
+        putTableData(div.getLblTokuNofuGaku4());
+        putTableData(div.getLblTokuNofuGaku5());
+        putTableData(div.getLblTokuNofuGaku6());
+        putTableData(div.getLblTokuNofuGaku7());
+        putTableData(div.getLblTokuNofuGaku8());
+        putTableData(div.getLblTokuNofuGaku9());
+        putTableData(div.getLblTokuNofuGaku10());
+        putTableData(div.getLblTokuNofuGaku11());
+        putTableData(div.getLblTokuNofuGaku12());
+        putTableData(div.getLblTokuNofuGaku13());
+        putTableData(div.getLblTokuNofuGaku14());
+        putTableData(div.getLblFuchoKiGokei());
+
+        setTableItem(TableItem.普徴期別額);
+        putTableData(div.getLblFuchoKibetsuGaku1());
+        putTableData(div.getLblFuchoKibetsuGaku2());
+        putTableData(div.getLblFuchoKibetsuGaku3());
+        putTableData(div.getLblFuchoKibetsuGaku4());
+        putTableData(div.getLblFuchoKibetsuGaku5());
+        putTableData(div.getLblFuchoKibetsuGaku6());
+        putTableData(div.getLblFuchoKibetsuGaku7());
+        putTableData(div.getLblFuchoKibetsuGaku8());
+        putTableData(div.getLblFuchoKibetsuGaku9());
+        putTableData(div.getLblFuchoKibetsuGaku10());
+        putTableData(div.getLblFuchoKibetsuGaku11());
+        putTableData(div.getLblFuchoKibetsuGaku12());
+        putTableData(div.getLblFuchoKibetsuGaku13());
+        putTableData(div.getLblFuchoKibetsuGaku14());
+        putTableData(div.getLblFuchoKibetsuGakuGokei());
+
+        setTableItem(TableItem.普徴納付額);
+        putTableData(div.getLblFuchoNofuGaku1());
+        putTableData(div.getLblFuchoNofuGaku2());
+        putTableData(div.getLblFuchoNofuGaku3());
+        putTableData(div.getLblFuchoNofuGaku4());
+        putTableData(div.getLblFuchoNofuGaku5());
+        putTableData(div.getLblFuchoNofuGaku6());
+        putTableData(div.getLblFuchoNofuGaku7());
+        putTableData(div.getLblFuchoNofuGaku8());
+        putTableData(div.getLblFuchoNofuGaku9());
+        putTableData(div.getLblFuchoNofuGaku10());
+        putTableData(div.getLblFuchoNofuGaku11());
+        putTableData(div.getLblFuchoNofuGaku12());
+        putTableData(div.getLblFuchoNofuGaku13());
+        putTableData(div.getLblFuchoNofuGaku14());
+        putTableData(div.getLblFuchoNofuGakuGokei());
+    }
+
+    private void setTableItem(TableItem item) {
+        tableItem = item;
+        tableRowNo = 1;
+    }
+
+    private void putTableData(Label label) {
+        期割額テーブル.put(getTableKey(tableItem, tableRowNo), label);
+        tableRowNo++;
+    }
+
+    private RString getTableKey(TableItem item, Integer rowNo) {
+        return new RStringBuilder(item.toString()).append(rowNo.toString()).toRString();
     }
 }
