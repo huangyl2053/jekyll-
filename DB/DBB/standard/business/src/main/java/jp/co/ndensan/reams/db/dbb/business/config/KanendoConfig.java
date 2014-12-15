@@ -28,8 +28,9 @@ public class KanendoConfig {
     public KanendoConfig() {
         IUrBusinessConfig businessConfig = UrBusinessConfigFactory.createInstance();
         configs = new HashMap<>();
+        RDate nowDate = RDate.getNowDate();
         for (ConfigKeysKanendo target : ConfigKeysKanendo.values()) {
-            this.configs.put(target, businessConfig.get(target, RDate.getNowDate()));
+            this.configs.put(target, businessConfig.get(target, nowDate));
         }
     }
 

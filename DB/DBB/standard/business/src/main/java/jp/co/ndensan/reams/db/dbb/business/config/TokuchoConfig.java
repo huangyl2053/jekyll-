@@ -28,8 +28,9 @@ public class TokuchoConfig {
     public TokuchoConfig() {
         IUrBusinessConfig businessConfig = UrBusinessConfigFactory.createInstance();
         configs = new HashMap<>();
+        RDate nowDate = RDate.getNowDate();
         for (ConfigKeysTokucho target : ConfigKeysTokucho.values()) {
-            this.configs.put(target, businessConfig.get(target, RDate.getNowDate()));
+            this.configs.put(target, businessConfig.get(target, nowDate));
         }
     }
 

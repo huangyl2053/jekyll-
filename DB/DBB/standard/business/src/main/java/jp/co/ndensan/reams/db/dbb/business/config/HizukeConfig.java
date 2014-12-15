@@ -28,8 +28,9 @@ public class HizukeConfig {
     public HizukeConfig() {
         IUrBusinessConfig businessConfig = UrBusinessConfigFactory.createInstance();
         configs = new HashMap<>();
+        RDate nowDate = RDate.getNowDate();
         for (ConfigKeysHizuke target : ConfigKeysHizuke.values()) {
-            this.configs.put(target, businessConfig.get(target, RDate.getNowDate()));
+            this.configs.put(target, businessConfig.get(target, nowDate));
         }
     }
 

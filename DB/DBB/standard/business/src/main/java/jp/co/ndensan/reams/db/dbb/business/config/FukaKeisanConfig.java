@@ -28,8 +28,9 @@ public class FukaKeisanConfig {
     public FukaKeisanConfig() {
         IUrBusinessConfig businessConfig = UrBusinessConfigFactory.createInstance();
         configs = new HashMap<>();
+        RDate nowDate = RDate.getNowDate();
         for (ConfigKeysFukaKeisan target : ConfigKeysFukaKeisan.values()) {
-            this.configs.put(target, businessConfig.get(target, RDate.getNowDate()));
+            this.configs.put(target, businessConfig.get(target, nowDate));
         }
     }
 

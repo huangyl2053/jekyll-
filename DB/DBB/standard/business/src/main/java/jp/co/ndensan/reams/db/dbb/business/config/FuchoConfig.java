@@ -28,8 +28,9 @@ public class FuchoConfig {
     public FuchoConfig() {
         IUrBusinessConfig businessConfig = UrBusinessConfigFactory.createInstance();
         configs = new HashMap<>();
+        RDate nowDate = RDate.getNowDate();
         for (ConfigKeysFucho target : ConfigKeysFucho.values()) {
-            this.configs.put(target, businessConfig.get(target, RDate.getNowDate()));
+            this.configs.put(target, businessConfig.get(target, nowDate));
         }
     }
 
