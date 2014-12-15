@@ -401,7 +401,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
             new RString("14"),
             new RString("15")
         };
-        when(mock.get月別ﾃｰﾌﾞﾙ()).thenReturn(data);
+        when(mock.get月別テーブル()).thenReturn(data);
         return mock;
     }
 

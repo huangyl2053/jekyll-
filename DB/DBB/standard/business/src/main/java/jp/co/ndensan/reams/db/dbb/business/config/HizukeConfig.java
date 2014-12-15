@@ -54,153 +54,153 @@ public class HizukeConfig {
     }
 
     /**
-     * 日付関連_月別ﾃｰﾌﾞﾙ1を返します。
+     * 日付関連_月別テーブル1を返します。
      *
-     * @return 日付関連_月別ﾃｰﾌﾞﾙ1
+     * @return 日付関連_月別テーブル1
      */
-    public RString get月別ﾃｰﾌﾞﾙ1() {
-        return get(ConfigKeysHizuke.日付関連_月別ﾃｰﾌﾞﾙ1);
+    public RString get月別テーブル1() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル1);
     }
 
     /**
-     * 日付関連_月別ﾃｰﾌﾞﾙ2を返します。
+     * 日付関連_月別テーブル2を返します。
      *
-     * @return 日付関連_月別ﾃｰﾌﾞﾙ2
+     * @return 日付関連_月別テーブル2
      */
-    public RString get月別ﾃｰﾌﾞﾙ2() {
-        return get(ConfigKeysHizuke.日付関連_月別ﾃｰﾌﾞﾙ2);
+    public RString get月別テーブル2() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル2);
     }
 
     /**
-     * 日付関連_月別ﾃｰﾌﾞﾙ3を返します。
+     * 日付関連_月別テーブル3を返します。
      *
-     * @return 日付関連_月別ﾃｰﾌﾞﾙ3
+     * @return 日付関連_月別テーブル3
      */
-    public RString get月別ﾃｰﾌﾞﾙ3() {
-        return get(ConfigKeysHizuke.日付関連_月別ﾃｰﾌﾞﾙ3);
+    public RString get月別テーブル3() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル3);
     }
 
     /**
-     * 日付関連_月別ﾃｰﾌﾞﾙ4を返します。
+     * 日付関連_月別テーブル4を返します。
      *
-     * @return 日付関連_月別ﾃｰﾌﾞﾙ4
+     * @return 日付関連_月別テーブル4
      */
-    public RString get月別ﾃｰﾌﾞﾙ4() {
-        return get(ConfigKeysHizuke.日付関連_月別ﾃｰﾌﾞﾙ4);
+    public RString get月別テーブル4() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル4);
     }
 
     /**
-     * 日付関連_月別ﾃｰﾌﾞﾙ5を返します。
+     * 日付関連_月別テーブル5を返します。
      *
-     * @return 日付関連_月別ﾃｰﾌﾞﾙ5
+     * @return 日付関連_月別テーブル5
      */
-    public RString get月別ﾃｰﾌﾞﾙ5() {
-        return get(ConfigKeysHizuke.日付関連_月別ﾃｰﾌﾞﾙ5);
+    public RString get月別テーブル5() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル5);
     }
 
     /**
-     * 日付関連_月別ﾃｰﾌﾞﾙ6を返します。
+     * 日付関連_月別テーブル6を返します。
      *
-     * @return 日付関連_月別ﾃｰﾌﾞﾙ6
+     * @return 日付関連_月別テーブル6
      */
-    public RString get月別ﾃｰﾌﾞﾙ6() {
-        return get(ConfigKeysHizuke.日付関連_月別ﾃｰﾌﾞﾙ6);
+    public RString get月別テーブル6() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル6);
     }
 
     /**
-     * 日付関連_月別ﾃｰﾌﾞﾙ7を返します。
+     * 日付関連_月別テーブル7を返します。
      *
-     * @return 日付関連_月別ﾃｰﾌﾞﾙ7
+     * @return 日付関連_月別テーブル7
      */
-    public RString get月別ﾃｰﾌﾞﾙ7() {
-        return get(ConfigKeysHizuke.日付関連_月別ﾃｰﾌﾞﾙ7);
+    public RString get月別テーブル7() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル7);
     }
 
     /**
-     * 日付関連_月別ﾃｰﾌﾞﾙ8を返します。
+     * 日付関連_月別テーブル8を返します。
      *
-     * @return 日付関連_月別ﾃｰﾌﾞﾙ8
+     * @return 日付関連_月別テーブル8
      */
-    public RString get月別ﾃｰﾌﾞﾙ8() {
-        return get(ConfigKeysHizuke.日付関連_月別ﾃｰﾌﾞﾙ8);
+    public RString get月別テーブル8() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル8);
     }
 
     /**
-     * 日付関連_月別ﾃｰﾌﾞﾙ9を返します。
+     * 日付関連_月別テーブル9を返します。
      *
-     * @return 日付関連_月別ﾃｰﾌﾞﾙ9
+     * @return 日付関連_月別テーブル9
      */
-    public RString get月別ﾃｰﾌﾞﾙ9() {
-        return get(ConfigKeysHizuke.日付関連_月別ﾃｰﾌﾞﾙ9);
+    public RString get月別テーブル9() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル9);
     }
 
     /**
-     * 日付関連_月別ﾃｰﾌﾞﾙ10を返します。
+     * 日付関連_月別テーブル10を返します。
      *
-     * @return 日付関連_月別ﾃｰﾌﾞﾙ10
+     * @return 日付関連_月別テーブル10
      */
-    public RString get月別ﾃｰﾌﾞﾙ10() {
-        return get(ConfigKeysHizuke.日付関連_月別ﾃｰﾌﾞﾙ10);
+    public RString get月別テーブル10() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル10);
     }
 
     /**
-     * 日付関連_月別ﾃｰﾌﾞﾙ11を返します。
+     * 日付関連_月別テーブル11を返します。
      *
-     * @return 日付関連_月別ﾃｰﾌﾞﾙ11
+     * @return 日付関連_月別テーブル11
      */
-    public RString get月別ﾃｰﾌﾞﾙ11() {
-        return get(ConfigKeysHizuke.日付関連_月別ﾃｰﾌﾞﾙ11);
+    public RString get月別テーブル11() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル11);
     }
 
     /**
-     * 日付関連_月別ﾃｰﾌﾞﾙ12を返します。
+     * 日付関連_月別テーブル12を返します。
      *
-     * @return 日付関連_月別ﾃｰﾌﾞﾙ12
+     * @return 日付関連_月別テーブル12
      */
-    public RString get月別ﾃｰﾌﾞﾙ12() {
-        return get(ConfigKeysHizuke.日付関連_月別ﾃｰﾌﾞﾙ12);
+    public RString get月別テーブル12() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル12);
     }
 
     /**
-     * 日付関連_月別ﾃｰﾌﾞﾙ13を返します。
+     * 日付関連_月別テーブル13を返します。
      *
-     * @return 日付関連_月別ﾃｰﾌﾞﾙ13
+     * @return 日付関連_月別テーブル13
      */
-    public RString get月別ﾃｰﾌﾞﾙ13() {
-        return get(ConfigKeysHizuke.日付関連_月別ﾃｰﾌﾞﾙ13);
+    public RString get月別テーブル13() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル13);
     }
 
     /**
-     * 日付関連_月別ﾃｰﾌﾞﾙ14を返します。
+     * 日付関連_月別テーブル14を返します。
      *
-     * @return 日付関連_月別ﾃｰﾌﾞﾙ14
+     * @return 日付関連_月別テーブル14
      */
-    public RString get月別ﾃｰﾌﾞﾙ14() {
-        return get(ConfigKeysHizuke.日付関連_月別ﾃｰﾌﾞﾙ14);
+    public RString get月別テーブル14() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル14);
     }
 
     /**
-     * 日付関連_月別ﾃｰﾌﾞﾙを配列で返します。
+     * 日付関連_月別テーブルを配列で返します。
      *
-     * @return 日付関連_月別ﾃｰﾌﾞﾙ
+     * @return 日付関連_月別テーブル
      */
-    public RString[] get月別ﾃｰﾌﾞﾙ() {
-        RString[] 月別ﾃｰﾌﾞﾙ = {
-            get月別ﾃｰﾌﾞﾙ1(),
-            get月別ﾃｰﾌﾞﾙ2(),
-            get月別ﾃｰﾌﾞﾙ3(),
-            get月別ﾃｰﾌﾞﾙ4(),
-            get月別ﾃｰﾌﾞﾙ5(),
-            get月別ﾃｰﾌﾞﾙ6(),
-            get月別ﾃｰﾌﾞﾙ7(),
-            get月別ﾃｰﾌﾞﾙ8(),
-            get月別ﾃｰﾌﾞﾙ9(),
-            get月別ﾃｰﾌﾞﾙ10(),
-            get月別ﾃｰﾌﾞﾙ11(),
-            get月別ﾃｰﾌﾞﾙ12(),
-            get月別ﾃｰﾌﾞﾙ13(),
-            get月別ﾃｰﾌﾞﾙ14()
+    public RString[] get月別テーブル() {
+        RString[] 月別テーブル = {
+            get月別テーブル1(),
+            get月別テーブル2(),
+            get月別テーブル3(),
+            get月別テーブル4(),
+            get月別テーブル5(),
+            get月別テーブル6(),
+            get月別テーブル7(),
+            get月別テーブル8(),
+            get月別テーブル9(),
+            get月別テーブル10(),
+            get月別テーブル11(),
+            get月別テーブル12(),
+            get月別テーブル13(),
+            get月別テーブル14()
         };
-        return 月別ﾃｰﾌﾞﾙ;
+        return 月別テーブル;
     }
 }

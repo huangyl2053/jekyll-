@@ -107,7 +107,7 @@ public class KiwarigakuHandler {
      */
     public void load(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時) {
 
-        RString[] 月列 = 日付Config.get月別ﾃｰﾌﾞﾙ();
+        RString[] 月列 = 日付Config.get月別テーブル();
         RString[] 特徴期列 = 特徴Config.get月の期();
         RString[] 普徴期列 = (調定年度.equals(賦課年度)) ? 普徴Config.get月の期() : 過年度Config.get月の期();
 
