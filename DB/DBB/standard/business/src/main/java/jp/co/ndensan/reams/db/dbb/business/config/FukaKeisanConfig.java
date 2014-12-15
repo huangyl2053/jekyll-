@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.config;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.ConfigKeysFukaKeisan;
@@ -26,21 +27,25 @@ public class FukaKeisanConfig {
      * コンストラクタです。
      */
     public FukaKeisanConfig() {
-        IUrBusinessConfig businessConfig = UrBusinessConfigFactory.createInstance();
-        configs = new HashMap<>();
-        RDate nowDate = RDate.getNowDate();
-        for (ConfigKeysFukaKeisan target : ConfigKeysFukaKeisan.values()) {
-            this.configs.put(target, businessConfig.get(target, nowDate));
-        }
+        this.configs = createMap(UrBusinessConfigFactory.createInstance());
     }
 
     /**
      * モックを使用するテスト用コンストラクタです。
      *
-     * @param configs 賦課計算のコンフィグ情報を格納したMap
+     * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    public FukaKeisanConfig(Map<ConfigKeysFukaKeisan, RString> configs) {
-        this.configs = configs;
+    public FukaKeisanConfig(IUrBusinessConfig businessConfig) {
+        this.configs = createMap(businessConfig);
+    }
+
+    private Map<ConfigKeysFukaKeisan, RString> createMap(IUrBusinessConfig businessConfig) {
+        Map<ConfigKeysFukaKeisan, RString> map = new HashMap<>();
+        RDate nowDate = RDate.getNowDate();
+        for (ConfigKeysFukaKeisan target : ConfigKeysFukaKeisan.values()) {
+            map.put(target, businessConfig.get(target, nowDate));
+        }
+        return Collections.unmodifiableMap(map);
     }
 
     /**

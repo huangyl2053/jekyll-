@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.config;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.ConfigKeysFucho;
@@ -26,21 +27,25 @@ public class FuchoConfig {
      * コンストラクタです。
      */
     public FuchoConfig() {
-        IUrBusinessConfig businessConfig = UrBusinessConfigFactory.createInstance();
-        configs = new HashMap<>();
-        RDate nowDate = RDate.getNowDate();
-        for (ConfigKeysFucho target : ConfigKeysFucho.values()) {
-            this.configs.put(target, businessConfig.get(target, nowDate));
-        }
+        this.configs = createMap(UrBusinessConfigFactory.createInstance());
     }
 
     /**
      * モックを使用するテスト用コンストラクタです。
      *
-     * @param configs 普通徴収のコンフィグ情報を格納したMap
+     * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    public FuchoConfig(Map<ConfigKeysFucho, RString> configs) {
-        this.configs = configs;
+    public FuchoConfig(IUrBusinessConfig businessConfig) {
+        this.configs = createMap(businessConfig);
+    }
+
+    private Map<ConfigKeysFucho, RString> createMap(IUrBusinessConfig businessConfig) {
+        Map<ConfigKeysFucho, RString> map = new HashMap<>();
+        RDate nowDate = RDate.getNowDate();
+        for (ConfigKeysFucho target : ConfigKeysFucho.values()) {
+            map.put(target, businessConfig.get(target, nowDate));
+        }
+        return Collections.unmodifiableMap(map);
     }
 
     /**

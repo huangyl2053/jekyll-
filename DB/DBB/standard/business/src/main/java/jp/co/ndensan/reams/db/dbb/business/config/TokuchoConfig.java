@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.config;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.ConfigKeysTokucho;
@@ -26,21 +27,25 @@ public class TokuchoConfig {
      * コンストラクタです。
      */
     public TokuchoConfig() {
-        IUrBusinessConfig businessConfig = UrBusinessConfigFactory.createInstance();
-        configs = new HashMap<>();
-        RDate nowDate = RDate.getNowDate();
-        for (ConfigKeysTokucho target : ConfigKeysTokucho.values()) {
-            this.configs.put(target, businessConfig.get(target, nowDate));
-        }
+        this.configs = createMap(UrBusinessConfigFactory.createInstance());
     }
 
     /**
      * モックを使用するテスト用コンストラクタです。
      *
-     * @param configs 特別徴収のコンフィグ情報を格納したMap
+     * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    public TokuchoConfig(Map<ConfigKeysTokucho, RString> configs) {
-        this.configs = configs;
+    public TokuchoConfig(IUrBusinessConfig businessConfig) {
+        this.configs = createMap(businessConfig);
+    }
+
+    private Map<ConfigKeysTokucho, RString> createMap(IUrBusinessConfig businessConfig) {
+        Map<ConfigKeysTokucho, RString> map = new HashMap<>();
+        RDate nowDate = RDate.getNowDate();
+        for (ConfigKeysTokucho target : ConfigKeysTokucho.values()) {
+            map.put(target, businessConfig.get(target, nowDate));
+        }
+        return Collections.unmodifiableMap(map);
     }
 
     /**

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.config;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.ConfigKeysKanendo;
@@ -26,21 +27,25 @@ public class KanendoConfig {
      * コンストラクタです。
      */
     public KanendoConfig() {
-        IUrBusinessConfig businessConfig = UrBusinessConfigFactory.createInstance();
-        configs = new HashMap<>();
-        RDate nowDate = RDate.getNowDate();
-        for (ConfigKeysKanendo target : ConfigKeysKanendo.values()) {
-            this.configs.put(target, businessConfig.get(target, nowDate));
-        }
+        this.configs = createMap(UrBusinessConfigFactory.createInstance());
     }
 
     /**
      * モックを使用するテスト用コンストラクタです。
      *
-     * @param configs 過年度のコンフィグ情報を格納したMap
+     * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    public KanendoConfig(Map<ConfigKeysKanendo, RString> configs) {
-        this.configs = configs;
+    public KanendoConfig(IUrBusinessConfig businessConfig) {
+        this.configs = createMap(businessConfig);
+    }
+
+    private Map<ConfigKeysKanendo, RString> createMap(IUrBusinessConfig businessConfig) {
+        Map<ConfigKeysKanendo, RString> map = new HashMap<>();
+        RDate nowDate = RDate.getNowDate();
+        for (ConfigKeysKanendo target : ConfigKeysKanendo.values()) {
+            map.put(target, businessConfig.get(target, nowDate));
+        }
+        return Collections.unmodifiableMap(map);
     }
 
     /**
