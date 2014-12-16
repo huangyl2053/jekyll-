@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
  *
  * @author n8178 城間篤人
  */
-@RunWith(Enclosed.class)
+//@RunWith(Enclosed.class)
 public class NenreiTotatsuValidetorTest {
 
     public static class validate extends DbaTestBase {
