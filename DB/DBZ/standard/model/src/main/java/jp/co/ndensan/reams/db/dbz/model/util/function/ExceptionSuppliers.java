@@ -5,9 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.util.function;
 
+import java.util.Objects;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
+
 /**
- * {@link Throwable Throwable}なオブジェクトを生成するsupplierを提供します。<br/>
- * 他のexceptionを追加する場合は、{@link #nullPointerException() nullPointerException()}を参考にしてください。
+ * {@link Throwable Throwable}なオブジェクトを生成するsupplierを提供します。
  *
  * @author N3327 三浦 凌
  */
@@ -17,44 +21,64 @@ public final class ExceptionSuppliers {
     }
 
     /**
-     * {@link Throwable Throwable}用のsupplierを生成できます。
+     * {@link NullPointerException}のsupplierを返します。
      *
-     * @param <X> 生成するexceptionの型
+     * @return {@link NullPointerException}のsupplier
      */
-    public interface IExceptionSupplier<X extends Throwable> extends ISupplier<X> {
-
-        /**
-         * 指定のメッセージを出力するexceptionを生成します。
-         *
-         * @param message exceptionが出力するメッセージ
-         * @return 指定のメッセージを出力するexception
-         */
-        ISupplier<X> withMessage(String message);
-    }
-
-    /**
-     * NullPointerExceptionのsupplierを返します。
-     *
-     * @return NullPointerExceptionのsupplier
-     */
-    public static IExceptionSupplier<NullPointerException> nullPointerException() {
-        //<editor-fold defaultstate="collapsed" desc="return supplier for NullPointerException">
-        return new IExceptionSupplier<NullPointerException>() {
+    public static ISupplier<NullPointerException> nullPointerException() {
+        return new ISupplier<NullPointerException>() {
             @Override
             public NullPointerException get() {
                 return new NullPointerException();
             }
+        };
+    }
 
+    /**
+     * {@link NullPointerException}のsupplierを返します。
+     *
+     * @param message メッセージ
+     * @return {@link NullPointerException}のsupplier
+     */
+    public static ISupplier<NullPointerException> nullPointerException(final String message) {
+        Objects.requireNonNull(message, UrSystemErrorMessages.値がnull.getReplacedMessage("message"));
+        return new ISupplier<NullPointerException>() {
             @Override
-            public ISupplier<NullPointerException> withMessage(final String message) {
-                return new ISupplier<NullPointerException>() {
-                    @Override
-                    public NullPointerException get() {
-                        return new NullPointerException(message);
-                    }
-                };
+            public NullPointerException get() {
+                return new NullPointerException(message);
             }
         };
-        //</editor-fold>
+    }
+
+    /**
+     * 指定のメッセージを持った{@link ApplicationException}を提供するsupplierを返します。
+     *
+     * @param message メッセージ
+     * @return {@link ApplicationException}のsupplier
+     */
+    public static ISupplier<ApplicationException> applicationException(final String message) {
+        Objects.requireNonNull(message, UrSystemErrorMessages.値がnull.getReplacedMessage("message"));
+        return new ISupplier<ApplicationException>() {
+            @Override
+            public ApplicationException get() {
+                return new ApplicationException(message);
+            }
+        };
+    }
+
+    /**
+     * 指定のメッセージを持った{@link SystemException}を提供するsupplierを返します。
+     *
+     * @param message メッセージ
+     * @return {@link SystemException}を提供するsupplier
+     */
+    public static ISupplier<SystemException> systemException(final String message) {
+        Objects.requireNonNull(message, UrSystemErrorMessages.値がnull.getReplacedMessage("message"));
+        return new ISupplier<SystemException>() {
+            @Override
+            public SystemException get() {
+                return new SystemException(message);
+            }
+        };
     }
 }

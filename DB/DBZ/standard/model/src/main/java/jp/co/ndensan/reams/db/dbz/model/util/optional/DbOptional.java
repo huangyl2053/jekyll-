@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.model.util.optional;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
+import jp.co.ndensan.reams.db.dbz.model.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
 /**
  * {@link IOptional IOptional}を生成します。
  *
- * @param <T> {@link IOptional I_DbOptional}が保持する値
+ * @param <T> Optional が保持する値
  * @author N3327 三浦 凌
  */
 public final class DbOptional<T> implements IOptional<T> {
@@ -144,12 +144,12 @@ public final class DbOptional<T> implements IOptional<T> {
     }
 
     @Override
-    public IOptional<T> filter(ICondition<? super T> condtion) {
-        Objects.requireNonNull(condtion);
+    public IOptional<T> filter(IPredicate<? super T> predicate) {
+        Objects.requireNonNull(predicate);
         if (!isPresent()) {
             return this;
         }
-        if (condtion.check(this.value)) {
+        if (predicate.evaluate(this.value)) {
             return this;
         }
         return empty();

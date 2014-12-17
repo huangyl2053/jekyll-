@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
+import jp.co.ndensan.reams.db.dbz.model.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -120,18 +120,18 @@ public class ItemListTest extends DbzTestBase {
 
         @Test
         public void asList_の結果のlistのsizeは_生成時に渡したlistのsizeと_一致する() {
-            assertThat(sut.asList().size(), is(input.size()));
+            assertThat(sut.toList().size(), is(input.size()));
         }
 
         @Test
         public void asList_の結果のlistは_生成時に渡したlistの要素を_すべて含む() {
-            assertThat(sut.asList().containsAll(input), is(true));
+            assertThat(sut.toList().containsAll(input), is(true));
         }
 
         @Test
         public void asList_の結果のlistは_生成時に渡したlistが空の時_空である() {
             sut = ItemList.of(Collections.<RString>emptyList());
-            assertThat(sut.asList().isEmpty(), is(true));
+            assertThat(sut.toList().isEmpty(), is(true));
         }
     }
 
@@ -150,10 +150,10 @@ public class ItemListTest extends DbzTestBase {
             result = sut.filter(return_true());
         }
 
-        private ICondition<IValue> return_true() {
-            return new ICondition<IValue>() {
+        private IPredicate<IValue> return_true() {
+            return new IPredicate<IValue>() {
                 @Override
-                public boolean check(IValue t) {
+                public boolean evaluate(IValue t) {
                     return t.tureOrFalse();
                 }
             };
@@ -171,7 +171,7 @@ public class ItemListTest extends DbzTestBase {
 
         @Test
         public void filterの結果は_該当する要素が存在するとき_先頭の要素が条件に該当する() {
-            assertThat(return_true().check(result.findFirst().get()), is(true));
+            assertThat(return_true().evaluate(result.findFirst().get()), is(true));
         }
 
         private IValue initValue(boolean trueOrFalse) {
@@ -329,173 +329,173 @@ public class ItemListTest extends DbzTestBase {
         public void iteratorは_Iteratorを返す() {
             assertThat(sut.iterator(), isA(Iterator.class));
         }
+    }
 
-        public static class contains extends DbzTestBase {
+    public static class contains extends DbzTestBase {
 
-            private ItemList<RString> sut;
-            private List<RString> input;
+        private ItemList<RString> sut;
+        private List<RString> input;
 
-            @Before
-            public void setUp() {
-                input = asList(VAL1, VAL2, VAL3);
-                sut = ItemList.of(input);
-            }
-
-            @Test
-            public void containsは_生成時に渡したlistに引数のオブジェクトが含まれるとき_trueを返す() {
-                assertThat(sut.contains(VAL1), is(true));
-            }
+        @Before
+        public void setUp() {
+            input = asList(VAL1, VAL2, VAL3);
+            sut = ItemList.of(input);
         }
 
-        public static class containsAllItems extends DbzTestBase {
+        @Test
+        public void containsは_生成時に渡したlistに引数のオブジェクトが含まれるとき_trueを返す() {
+            assertThat(sut.contains(VAL1), is(true));
+        }
+    }
 
-            private ItemList<RString> sut;
-            private ItemList<RString> target;
-            private List<RString> input;
+    public static class containsAllItems extends DbzTestBase {
 
-            @Before
-            public void setUp() {
-                sut = ItemList.of(asList(VAL1, VAL2, VAL3));
-            }
+        private ItemList<RString> sut;
+        private ItemList<RString> target;
+        private List<RString> input;
 
-            @Test
-            public void containsAllItemsは_生成時に渡したlistに引数のitemsが保持する要素がすべて含まれる時_trueを返す() {
-                target = ItemList.of(asList(VAL1, VAL2, VAL3, VAL1));
-                assertThat(sut.containsAll(target), is(true));
-            }
+        @Before
+        public void setUp() {
+            sut = ItemList.of(asList(VAL1, VAL2, VAL3));
         }
 
-        public static class anyMatch extends DbzTestBase {
+        @Test
+        public void containsAllItemsは_生成時に渡したlistに引数のitemsが保持する要素がすべて含まれる時_trueを返す() {
+            target = ItemList.of(asList(VAL1, VAL2, VAL3, VAL1));
+            assertThat(sut.containsAll(target), is(true));
+        }
+    }
 
-            private ItemList<RString> sut;
+    public static class anyMatch extends DbzTestBase {
 
-            @Before
-            public void setUp() {
-                sut = ItemList.of(asList(VAL1, VAL2, VAL3));
-            }
+        private ItemList<RString> sut;
 
-            @Test
-            public void anyMatchは_引数の条件に当てはまるオブジェクトがある時_trueを返す() {
-                assertThat(sut.anyMatch(equalsVAL1()), is(true));
-            }
-
-            private ICondition<RString> equalsVAL1() {
-                return new ICondition<RString>() {
-                    @Override
-                    public boolean check(RString t) {
-                        return t.equals(VAL1);
-                    }
-                };
-            }
-
-            @Test
-            public void anyMatchは_引数の条件に当てはまるオブジェクトが無い時_falseを返す() {
-                assertThat(sut.anyMatch(lengthIsFive()), is(false));
-            }
-
-            private ICondition<RString> lengthIsFive() {
-                return new ICondition<RString>() {
-                    @Override
-                    public boolean check(RString t) {
-                        return t.length() == 5;
-                    }
-                };
-            }
+        @Before
+        public void setUp() {
+            sut = ItemList.of(asList(VAL1, VAL2, VAL3));
         }
 
-        public static class allMatch extends DbzTestBase {
-
-            @Test
-            public void allMatchは_全ての要素が条件に当てはまるとき_trueを返す() {
-                ItemList<RString> sut = ItemList.of(asList(VAL1, VAL2, VAL3));
-                assertThat(sut.allMatch(lengthIsOne()), is(true));
-            }
-
-            @Test
-            public void allMatchは_条件に当てはまらない要素を含むとき_falseを返す() {
-                ItemList<RString> sut = ItemList.of(asList(VAL1, VAL2, VAL3, new RString("12")));
-                assertThat(sut.allMatch(lengthIsOne()), is(false));
-            }
-
-            private ICondition<RString> lengthIsOne() {
-                return new ICondition<RString>() {
-                    @Override
-                    public boolean check(RString t) {
-                        return t.length() == 1;
-                    }
-                };
-            }
+        @Test
+        public void anyMatchは_引数の条件に当てはまるオブジェクトがある時_trueを返す() {
+            assertThat(sut.anyMatch(equalsVAL1()), is(true));
         }
 
-        public static class noneMatch extends DbzTestBase {
-
-            @Test
-            public void noneMatchは_全ての要素が条件に当てはまらないとき_trueを返す() {
-                ItemList<RString> sut = ItemList.of(asList(VAL1, VAL2, VAL3));
-                assertThat(sut.noneMatch(lengthIsTwo()), is(true));
-            }
-
-            @Test
-            public void noneMatchは_条件に当てはまる要素を含むとき_falseを返す() {
-                ItemList<RString> sut = ItemList.of(asList(VAL1, VAL2, VAL3, new RString("12")));
-                assertThat(sut.noneMatch(lengthIsTwo()), is(false));
-            }
-
-            private ICondition<RString> lengthIsTwo() {
-                return new ICondition<RString>() {
-                    @Override
-                    public boolean check(RString t) {
-                        return t.length() == 2;
-                    }
-                };
-            }
+        private IPredicate<RString> equalsVAL1() {
+            return new IPredicate<RString>() {
+                @Override
+                public boolean evaluate(RString t) {
+                    return t.equals(VAL1);
+                }
+            };
         }
 
-        public static class added extends DbzTestBase {
-
-            private ItemList<String> sut;
-
-            @Before
-            public void setUp() {
-                sut = ItemList.of("1", "2", "3");
-            }
-
-            @Test(expected = NullPointerException.class)
-            public void addedは_引数がnullの時_NullPointerExceptionをスローする() {
-                sut.added((String) null);
-            }
-
-            @Test
-            public void addedは_sizeを1増やした_IItemListを返す() {
-                int beforeSize = sut.size();
-                assertThat(sut.added("4").size(), is(beforeSize + 1));
-            }
+        @Test
+        public void anyMatchは_引数の条件に当てはまるオブジェクトが無い時_falseを返す() {
+            assertThat(sut.anyMatch(lengthIsFive()), is(false));
         }
 
-        public static class added_array extends DbzTestBase {
+        private IPredicate<RString> lengthIsFive() {
+            return new IPredicate<RString>() {
+                @Override
+                public boolean evaluate(RString t) {
+                    return t.length() == 5;
+                }
+            };
+        }
+    }
 
-            private ItemList<String> sut;
+    public static class allMatch extends DbzTestBase {
 
-            @Before
-            public void setUp() {
-                sut = ItemList.of("1", "2", "3");
-            }
+        @Test
+        public void allMatchは_全ての要素が条件に当てはまるとき_trueを返す() {
+            ItemList<RString> sut = ItemList.of(asList(VAL1, VAL2, VAL3));
+            assertThat(sut.allMatch(lengthIsOne()), is(true));
+        }
 
-            @Test(expected = NullPointerException.class)
-            public void added_array指定は_引数がnullの時_NullPointerExceptionをスローする() {
-                sut.added((String[]) null);
-            }
+        @Test
+        public void allMatchは_条件に当てはまらない要素を含むとき_falseを返す() {
+            ItemList<RString> sut = ItemList.of(asList(VAL1, VAL2, VAL3, new RString("12")));
+            assertThat(sut.allMatch(lengthIsOne()), is(false));
+        }
 
-            @Test(expected = IllegalArgumentException.class)
-            public void added_array指定は_引数にnullを含むとき_IllegalArgumentExceptionをスローする() {
-                sut.added("4", null, "5");
-            }
+        private IPredicate<RString> lengthIsOne() {
+            return new IPredicate<RString>() {
+                @Override
+                public boolean evaluate(RString t) {
+                    return t.length() == 1;
+                }
+            };
+        }
+    }
 
-            @Test
-            public void addedは_引数に2個の要素を指定したとき_sizeを2増やした_IItemListを返す() {
-                int beforeSize = sut.size();
-                assertThat(sut.added("4", "5").size(), is(beforeSize + 2));
-            }
+    public static class noneMatch extends DbzTestBase {
+
+        @Test
+        public void noneMatchは_全ての要素が条件に当てはまらないとき_trueを返す() {
+            ItemList<RString> sut = ItemList.of(asList(VAL1, VAL2, VAL3));
+            assertThat(sut.noneMatch(lengthIsTwo()), is(true));
+        }
+
+        @Test
+        public void noneMatchは_条件に当てはまる要素を含むとき_falseを返す() {
+            ItemList<RString> sut = ItemList.of(asList(VAL1, VAL2, VAL3, new RString("12")));
+            assertThat(sut.noneMatch(lengthIsTwo()), is(false));
+        }
+
+        private IPredicate<RString> lengthIsTwo() {
+            return new IPredicate<RString>() {
+                @Override
+                public boolean evaluate(RString t) {
+                    return t.length() == 2;
+                }
+            };
+        }
+    }
+
+    public static class added extends DbzTestBase {
+
+        private ItemList<String> sut;
+
+        @Before
+        public void setUp() {
+            sut = ItemList.of("1", "2", "3");
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void addedは_引数がnullの時_NullPointerExceptionをスローする() {
+            sut.added((String) null);
+        }
+
+        @Test
+        public void addedは_sizeを1増やした_IItemListを返す() {
+            int beforeSize = sut.size();
+            assertThat(sut.added("4").size(), is(beforeSize + 1));
+        }
+    }
+
+    public static class added_array extends DbzTestBase {
+
+        private ItemList<String> sut;
+
+        @Before
+        public void setUp() {
+            sut = ItemList.of("1", "2", "3");
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void added_array指定は_引数がnullの時_NullPointerExceptionをスローする() {
+            sut.added((String[]) null);
+        }
+
+        @Test(expected = IllegalArgumentException.class)
+        public void added_array指定は_引数にnullを含むとき_IllegalArgumentExceptionをスローする() {
+            sut.added("4", null, "5");
+        }
+
+        @Test
+        public void addedは_引数に2個の要素を指定したとき_sizeを2増やした_IItemListを返す() {
+            int beforeSize = sut.size();
+            assertThat(sut.added("4", "5").size(), is(beforeSize + 2));
         }
     }
 }

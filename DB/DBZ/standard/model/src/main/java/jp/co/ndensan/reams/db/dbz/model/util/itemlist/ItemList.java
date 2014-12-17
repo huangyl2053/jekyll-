@@ -15,7 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
-import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
+import jp.co.ndensan.reams.db.dbz.model.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.DbOptional;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
@@ -51,7 +51,7 @@ public final class ItemList<E> implements IItemList<E>, Serializable {
      * 指定の{@link IItemList IItemList}から生成した、新しい{@link IItemList IItemList}
      */
     public static <T> ItemList<T> newItemList(IItemList<? extends T> items) {
-        return new ItemList<>(items.asList());
+        return new ItemList<>(items.toList());
     }
 
     /**
@@ -102,15 +102,15 @@ public final class ItemList<E> implements IItemList<E>, Serializable {
     }
 
     @Override
-    public List<E> asList() {
+    public List<E> toList() {
         return new ArrayList<>(elements);
     }
 
     @Override
-    public IItemList<E> filter(ICondition<? super E> condition) {
+    public IItemList<E> filter(IPredicate<? super E> predicate) {
         List<E> list = new ArrayList<>();
         for (E item : this.elements) {
-            if (condition.check(item)) {
+            if (predicate.evaluate(item)) {
                 list.add(item);
             }
         }
@@ -177,13 +177,13 @@ public final class ItemList<E> implements IItemList<E>, Serializable {
 
     @Override
     public boolean containsAll(IItemList<?> items) {
-        return this.elements.containsAll(items.asList());
+        return this.elements.containsAll(items.toList());
     }
 
     @Override
-    public boolean anyMatch(ICondition<? super E> condition) {
+    public boolean anyMatch(IPredicate<? super E> condition) {
         for (E element : elements) {
-            if (condition.check(element)) {
+            if (condition.evaluate(element)) {
                 return true;
             }
         }
@@ -191,9 +191,9 @@ public final class ItemList<E> implements IItemList<E>, Serializable {
     }
 
     @Override
-    public boolean allMatch(ICondition<? super E> condition) {
+    public boolean allMatch(IPredicate<? super E> condition) {
         for (E element : elements) {
-            if (!(condition.check(element))) {
+            if (!(condition.evaluate(element))) {
                 return false;
             }
         }
@@ -201,9 +201,9 @@ public final class ItemList<E> implements IItemList<E>, Serializable {
     }
 
     @Override
-    public boolean noneMatch(ICondition<? super E> condition) {
+    public boolean noneMatch(IPredicate<? super E> condition) {
         for (E element : elements) {
-            if (condition.check(element)) {
+            if (condition.evaluate(element)) {
                 return false;
             }
         }

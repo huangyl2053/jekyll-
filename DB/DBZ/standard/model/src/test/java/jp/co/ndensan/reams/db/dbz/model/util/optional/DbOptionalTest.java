@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.model.util.optional;
 import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ExceptionSuppliers;
-import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
+import jp.co.ndensan.reams.db.dbz.model.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -242,7 +242,7 @@ public class DbOptionalTest {
 
         @Before
         public void setUp() {
-            exceptionSupplier = ExceptionSuppliers.nullPointerException().withMessage("test");
+            exceptionSupplier = ExceptionSuppliers.nullPointerException("test");
         }
 
         @Test(expected = NullPointerException.class)
@@ -332,9 +332,9 @@ public class DbOptionalTest {
 
         @Test
         public void filterは_引数のIConditon$checkに対して_自身が保持する値を渡すと_trueが返る時_空でないIOptionalを返す() {
-            assertThat(sut.filter(new ICondition<String>() {
+            assertThat(sut.filter(new IPredicate<String>() {
                 @Override
-                public boolean check(String t) {
+                public boolean evaluate(String t) {
                     return true;
                 }
             }).isPresent(), is(true));
@@ -342,9 +342,9 @@ public class DbOptionalTest {
 
         @Test
         public void filterは_引数のIConditon$checkに対して_自身が保持する値を渡すと_falseが返る時_空のIOptionalを返す() {
-            assertThat(sut.filter(new ICondition<String>() {
+            assertThat(sut.filter(new IPredicate<String>() {
                 @Override
-                public boolean check(String t) {
+                public boolean evaluate(String t) {
                     return false;
                 }
             }).isPresent(), is(false));
@@ -352,15 +352,15 @@ public class DbOptionalTest {
 
         @Test
         public void filterは_自身が値を保持していないとき_引数のIConditionにかかわらず_空のIOptionalを返す() {
-            assertThat(DbOptional.<String>empty().filter(new ICondition<String>() {
+            assertThat(DbOptional.<String>empty().filter(new IPredicate<String>() {
                 @Override
-                public boolean check(String t) {
+                public boolean evaluate(String t) {
                     return true;
                 }
             }).isPresent(), is(false));
-            assertThat(DbOptional.<String>empty().filter(new ICondition<String>() {
+            assertThat(DbOptional.<String>empty().filter(new IPredicate<String>() {
                 @Override
-                public boolean check(String t) {
+                public boolean evaluate(String t) {
                     return false;
                 }
             }).isPresent(), is(false));

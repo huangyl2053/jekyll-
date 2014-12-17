@@ -6,10 +6,13 @@
 package jp.co.ndensan.reams.db.dbz.model.util.function;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.isA;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -29,15 +32,57 @@ public class ExceptionSuppliersTest extends DbzTestBase {
     public static class nullPointerException extends DbzTestBase {
 
         @Test
-        public void nullPointerException_で生成したsupplierは_NullPointerExceptionを生成する() {
+        public void nullPointerException_で生成したsupplierからは_NullPointerExceptionを取得できる() {
             assertThat(sut.nullPointerException().get(), isA(NullPointerException.class));
         }
 
         @Test
-        public void nullPointerException$withMessage_で生成したsupplierは_withMessageの引数を持った_NullPointerExceptionを生成する() {
+        public void nullPointerException_引数有り_で生成したsupplierからは_引数の文字列をメッセージに持った_NullPointerExceptionを取得できる() {
             String message = "message";
-            NullPointerException created = sut.nullPointerException().withMessage(message).get();
+            NullPointerException created = sut.nullPointerException(message).get();
             assertThat(created.getMessage(), is(message));
+        }
+    }
+
+    public static class applicationException extends DbzTestBase {
+
+        private final String MESSAGE = "message";
+        private ISupplier<ApplicationException> created;
+
+        @Before
+        public void setUp() {
+            created = sut.applicationException(MESSAGE);
+        }
+
+        @Test
+        public void applicationException_で生成したsupplierからは_ApplicationExceptionを取得できる() {
+            assertThat(created.get(), isA(ApplicationException.class));
+        }
+
+        @Test
+        public void applicationException_で生成したsupplierから取得したApplicationExceptionは_引数の文字列をメッセージに持つ() {
+            assertThat(created.get().getMessage(), is(MESSAGE));
+        }
+    }
+
+    public static class systemException extends DbzTestBase {
+
+        private final String MESSAGE = "message";
+        private ISupplier<SystemException> created;
+
+        @Before
+        public void setUp() {
+            created = sut.systemException(MESSAGE);
+        }
+
+        @Test
+        public void systemException_で生成したsupplierからは_SystemExceptionを取得できる() {
+            assertThat(created.get(), isA(SystemException.class));
+        }
+
+        @Test
+        public void systemException_で生成したsupplierから取得したSystemExceptionは_引数の文字列をメッセージに持つ() {
+            assertThat(created.get().getMessage(), is(MESSAGE));
         }
     }
 }

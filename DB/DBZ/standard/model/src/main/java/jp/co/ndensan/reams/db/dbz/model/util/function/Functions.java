@@ -19,6 +19,7 @@ public final class Functions {
     static {
         WITHOUT_CHANGE = new _WithOutChange<>();
         CHILD_TO_PARENT = new _ChildToParent<>();
+
     }
 
     private Functions() {
@@ -28,6 +29,14 @@ public final class Functions {
 
         @Override
         public A apply(A t) {
+            return t;
+        }
+    }
+
+    private static class _ChildToParent<C extends P, P> implements IFunction<C, P> {
+
+        @Override
+        public P apply(C t) {
             return t;
         }
     }
@@ -43,14 +52,7 @@ public final class Functions {
      */
     public static <T> IFunction<T, T> to(Class<T> clazz) {
         return (_WithOutChange<T>) WITHOUT_CHANGE;
-    }
 
-    private static class _ChildToParent<C extends P, P> implements IFunction<C, P> {
-
-        @Override
-        public P apply(C t) {
-            return t;
-        }
     }
 
     /**
