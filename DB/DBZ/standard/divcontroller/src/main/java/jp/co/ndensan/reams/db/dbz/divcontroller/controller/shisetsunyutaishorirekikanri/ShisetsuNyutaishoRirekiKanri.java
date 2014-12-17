@@ -182,11 +182,12 @@ public class ShisetsuNyutaishoRirekiKanri {
         //　　　　%2：退所日
         //model 入所日 退所日
         IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
+        //※ 現在のリストにmodelへいれる。そして、stateによって「追加・変更・削除」をもとにバリデーションチェックを行います。※
         ShisetsuNyutaishoRelateModel model = new ShisetsuNyutaishoRelateModel();
-
+        // 明細の入所年月日・退所年月日
         model.get介護保険施設入退所モデル().set入所年月日(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue());
         model.get介護保険施設入退所モデル().set退所年月日(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue());
-
+        //バリデーションチェック
         validationMessages.add(model.get介護保険施設入退所モデル().validate());
 
         if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.日付の前後関係逆転)) {
@@ -194,20 +195,20 @@ public class ShisetsuNyutaishoRirekiKanri {
             ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
         }
         int rowIndex = Integer.valueOf(shisetsuNyutaishoRirekiDiv.getSelectRow().toString()).intValue();
-
+        int rdx, dgSize;
         //２）修正時のみ
         //：退所日 ≧ 次の履歴データの入所日 のとき、エラーメッセージを表示する。
         //       メッセージID：URZE00025（期間が重複しています。）
-        //退所日
+        //明細の退所日
         model.get介護保険施設入退所モデル().set退所年月日(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue());
 
         if (rowIndex != 0) {
-            if (rowIndex - 1 <= 0) {
-                //次の履歴データの入所日
-                dgShisetsuNyutaishoRireki_Row row = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rowIndex);
-
+            rdx = rowIndex - 1;
+            if (rdx <= 0) {
+                dgShisetsuNyutaishoRireki_Row row = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rdx);
+                //一覧の次の履歴データの入所日を取得する。
                 model.get介護保険施設入退所モデル().set入所年月日(row.getNyushoDate().getValue());
-
+                //バリデーションチェック
                 validationMessages.add(model.get介護保険施設入退所モデル().validate());
                 if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複)) {
                     //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
@@ -218,20 +219,22 @@ public class ShisetsuNyutaishoRirekiKanri {
         //３）追加時・修正時のみ
         //：入所日 ≦ 前の履歴データの退所日 のとき、エラーメッセージを表示する。
         //       メッセージID：URZE00025（期間が重複しています。）
-        //入所日
+        //明細の入所日
         model.get介護保険施設入退所モデル().set入所年月日(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue());
 
         if (rowIndex != 0) {
-            rowIndex = rowIndex + 1;
-            //前の履歴データの退所日
-            dgShisetsuNyutaishoRireki_Row row = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rowIndex);
-
-            model.get介護保険施設入退所モデル().set入所年月日(row.getNyushoDate().getValue());
-
-            validationMessages.add(model.get介護保険施設入退所モデル().validate());
-            if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複)) {
-                //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
-                ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+            rdx = rowIndex + 1;
+            dgSize = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().size();
+            if (rdx <= dgSize) {
+                dgShisetsuNyutaishoRireki_Row row = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rdx);
+                //一覧の前の履歴データの退所日を取得する。
+                model.get介護保険施設入退所モデル().set入所年月日(row.getNyushoDate().getValue());
+                //バリデーションチェック
+                validationMessages.add(model.get介護保険施設入退所モデル().validate());
+                if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複)) {
+                    //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+                    ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+                }
             }
         }
         //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
