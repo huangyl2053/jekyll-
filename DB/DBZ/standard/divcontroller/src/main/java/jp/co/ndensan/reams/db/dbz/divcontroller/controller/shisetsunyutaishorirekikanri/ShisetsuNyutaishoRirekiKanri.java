@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekika
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
-import jp.co.ndensan.reams.db.dbz.model.util.validation.ShisetsuNyutaishoValidationMessage;
+import jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage;
 import jp.co.ndensan.reams.db.dbz.divcontroller.messagemapping.ShisetsuNyutaishoValidationMessageMapping;
 import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationHelper;
