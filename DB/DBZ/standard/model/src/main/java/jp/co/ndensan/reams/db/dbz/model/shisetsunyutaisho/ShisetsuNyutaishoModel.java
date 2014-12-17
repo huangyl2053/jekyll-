@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 //mport jp.co.ndensan.reams.fc.dbz.model.validations.validators.DzValidationMessage;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidatable;
+import jp.co.ndensan.reams.ur.urz.model.validations.IValidatableWithContext;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
 
@@ -26,7 +28,7 @@ import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
  *
  * @author n8223 朴義一
  */
-public class ShisetsuNyutaishoModel implements Serializable, IValidatable {
+public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IValidatableWithContext<ShisetsuNyutaishoRirekiKanriContext> {
 
     private DbT1004ShisetsuNyutaishoEntity entity;
 
@@ -317,5 +319,39 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable {
 
     private boolean is前の履歴データの退所日と重複() {
         return get退所年月日().isBeforeOrEquals(get入所年月日());
+    }
+
+    @Override
+    public IValidationMessages validateIn(ShisetsuNyutaishoRirekiKanriContext context) {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        if (is入所年月日より前()) {
+            messages.add(ShisetsuNyutaishoValidationMessage.日付の前後関係逆転, "退所年月日が入所年月日以降でない");
+        }
+        if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複)) {
+            if (is前の履歴データの退所日と重複2(context.get前履歴())) {
+                messages.add(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複, "入所日と前の履歴データの退所日と重複");
+            }
+        }
+        if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複)) {
+            if (is次の履歴データの入所日と重複2(context.get次履歴())) {
+                messages.add(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複, "入所日と前の履歴データの退所日と重複");
+            }
+        }
+        return messages;
+    }
+
+    private boolean is前の履歴データの退所日と重複2(IOptional<ShisetsuNyutaishoModel> optional) {
+        ShisetsuNyutaishoModel 前履歴 = optional.orElse(null);
+        if (前履歴 == null || this.get入所年月日() == null) {
+            return false;
+        }
+        return 前履歴.get退所年月日().isBeforeOrEquals(this.get入所年月日());
+    }
+
+    private boolean is次の履歴データの入所日と重複2(IOptional<ShisetsuNyutaishoModel> 次履歴) {
+        if (!次履歴.isPresent() || this.get入所年月日() == null) {
+            return false;
+        }
+        return this.get退所年月日().isBeforeOrEquals(次履歴.get().get入所年月日());
     }
 }
