@@ -51,37 +51,6 @@ public class ShisetsuNyutaishoMapper {
         };
     }
 
-//******************************************************************************************************************************
-    static IConsumer<ShisetsuNyutaishoRelateModel> setValues(final ShisetsuNyutaishoRirekiKanriDiv div) {
-        return new IConsumer<ShisetsuNyutaishoRelateModel>() {
-            @Override
-            public void accept(ShisetsuNyutaishoRelateModel t) {
-                t.get介護保険施設入退所モデル().set入所年月日(div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue());
-                t.get介護保険施設入退所モデル().get退所年月日();
-                t.get介護保険施設入退所モデル().get退所年月日();
-                t.get介護保険施設入退所モデル().get退所年月日();
-                t.get介護保険施設入退所モデル().get退所年月日();
-                t.get介護保険施設入退所モデル().get退所年月日();
-                t.get介護保険施設入退所モデル().get退所年月日();
-                t.get介護保険施設入退所モデル().get退所年月日();
-                t.get介護保険施設入退所モデル().get退所年月日();
-                t.get介護保険施設入退所モデル().get退所年月日();
-                t.get介護保険施設入退所モデル().get退所年月日();
-                t.get介護保険施設入退所モデル().get退所年月日();
-            }
-        };
-    }
-
-    static IConsumer<ShisetsuNyutaishoRelateModel> setDeleteState() {
-        return new IConsumer<ShisetsuNyutaishoRelateModel>() {
-            @Override
-            public void accept(ShisetsuNyutaishoRelateModel t) {
-                t.get介護保険施設入退所モデル().setDeletedState(true);
-            }
-        };
-    }
-
-//******************************************************************************************************************************
     static IConsumer<ShisetsuNyutaishoRelateModel> merge(final ShisetsuNyutaishoRelateModel model) {
         return new IConsumer<ShisetsuNyutaishoRelateModel>() {
             @Override
@@ -102,7 +71,6 @@ public class ShisetsuNyutaishoMapper {
             }
         };
     }
-//******************************************************************************************************************************
 
     /**
      *
