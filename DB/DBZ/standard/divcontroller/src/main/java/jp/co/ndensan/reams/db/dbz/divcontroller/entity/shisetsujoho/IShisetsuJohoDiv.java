@@ -14,6 +14,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public interface IShisetsuJohoDiv {
 
     /**
+     * 利用機能を設定します。
+     *
+     * @param 利用機能 利用機能
+     */
+    void set利用機能(int 利用機能);
+
+    /**
      * 台帳種別を設定します。
      *
      * @param 台帳種別キー 台帳種別キー

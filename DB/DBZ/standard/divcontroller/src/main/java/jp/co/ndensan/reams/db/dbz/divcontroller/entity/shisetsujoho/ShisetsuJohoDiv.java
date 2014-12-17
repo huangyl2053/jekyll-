@@ -344,6 +344,11 @@ public class ShisetsuJohoDiv extends Panel implements IShisetsuJohoDiv {
 
     //--------------- この行より下にコードを追加してください -------------------
     @Override
+    public void set利用機能(int 利用機能) {
+        getHandler().set利用機能(利用機能);
+    }
+
+    @Override
     public void set台帳種別(RString 台帳種別キー) {
         ddlDaichoShubetsu.setSelectedKey(台帳種別キー);
         getHandler().select台帳種別();

@@ -28,7 +28,7 @@ public class ShisetsuJoho {
      */
     public ResponseData<ShisetsuJohoDiv> onLoad(ShisetsuJohoDiv div) {
 
-        createHandlerOf(div).initialize();
+//        createHandlerOf(div).initialize();
         return createResponse(div);
     }
 

@@ -3,17 +3,13 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekik
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.IShisetsuNyutaishoRirekiKanriDiv;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
-
 import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaishorireki.ShisetsuNyutaishoModel;
+import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
 import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -23,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * ShisetsuNyutaishoRirekiKanri のクラスファイル
  *
- * @author 自動生成
+ * @author n8223 朴義一
  */
 public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuNyutaishoRirekiKanriDiv {
     /*
@@ -106,6 +102,45 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
+    public static enum 利用 implements ICommonChildDivMode {
+
+        台帳種別表示機能("台帳種別表示機能"),
+        被保険者対象機能("被保険者対象機能"),
+        他市町村住所地特例者対象機能("他市町村住所地特例者対象機能"),
+        適用除外者対象機能("適用除外者対象機能");
+
+        private final String name;
+
+        private 利用(final String name) {
+            this.name = name;
+        }
+
+        public static 利用 getEnum(String str) {
+            利用[] enumArray = 利用.values();
+
+            for (利用 enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public 利用 getMode_利用() {
+        return (利用) _CommonChildDivModeUtil.getMode(this.modes, 利用.class);
+    }
+
+    public void setMode_利用(利用 value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 利用.class, value);
+    }
+
     public static enum 表示widthサイズ implements ICommonChildDivMode {
 
         モード1("モード1"),
@@ -144,6 +179,43 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
 
     public void setMode_表示widthサイズ(表示widthサイズ value) {
         _CommonChildDivModeUtil.setMode(this.modes, 表示widthサイズ.class, value);
+    }
+
+    public static enum 施設種類の列を implements ICommonChildDivMode {
+
+        表示しない("表示しない"),
+        表示する("表示する");
+
+        private final String name;
+
+        private 施設種類の列を(final String name) {
+            this.name = name;
+        }
+
+        public static 施設種類の列を getEnum(String str) {
+            施設種類の列を[] enumArray = 施設種類の列を.values();
+
+            for (施設種類の列を enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public 施設種類の列を getMode_施設種類の列を() {
+        return (施設種類の列を) _CommonChildDivModeUtil.getMode(this.modes, 施設種類の列を.class);
+    }
+
+    public void setMode_施設種類の列を(施設種類の列を value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 施設種類の列を.class, value);
     }
 
     public static enum 表示heightサイズ implements ICommonChildDivMode {
@@ -309,29 +381,46 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
         //1)、引数から渡されたキーを元に、被保険者台帳情報を検索する。
         //2)、取得した情報をPanelSessionAccessorに登録する。
         //3)、取得した情報をグリッドにマッピングする。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void clearInputData() {
         //TODO
-        //1)、Panel;SessionAccessorに登録されている情報を取得し、戻り値として返却する。
-        //2)、もし値が存在しない場合は、空のListを返す。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //1)、入力明細パネル上のコントロールに対して、空白やnullを設定する。
+
+        getHandler().clearInputData();
+
     }
 
     @Override
-    public IItemList<ShisetsuNyutaishoModel> get施設入退所履歴() {
+    public IItemList<ShisetsuNyutaishoRelateModel> get施設入退所履歴() {
+        //TODO
+        //1)、Panel;SessionAccessorに登録されている情報を取得し、戻り値として返却する。
+        //2)、もし値が存在しない場合は、空のListを返す
+
+        return getHandler().get施設入退所履歴();
+
+    }
+
+    @Override
+    public void set施設入退所履歴(IItemList<ShisetsuNyutaishoRelateModel> 施設入退所履歴) {
         //TODO
         //1)、引数から渡された情報を、PanelSessionAccessorに登録する。
         //2)、登録した情報を、グリッドにマッピングする。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        getHandler().set施設入退所履歴(施設入退所履歴);
     }
 
     @Override
-    public void set施設入退所履歴(IItemList<ShisetsuNyutaishoModel> 施設入退所履歴) {
+    public void initialize() {
         //TODO
-        //1)、入力明細パネル上のコントロールに対して、空白やnullを設定する。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getHandler().initialize();
     }
+
+    // 以下のメソッドはインタフェースに定義していないので業務には公開されません。
+    @JsonIgnore
+    private ShisetsuNyutaishoRirekiKanriHandler getHandler() {
+        return new ShisetsuNyutaishoRirekiKanriHandler(this);
+    }
+
 }
