@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.shisetsuNyutaisho;
+package jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;

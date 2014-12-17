@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.model.relate;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.model.shisetsuNyutaisho.ShisetsuNyutaishoModel;
+import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoModel;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
