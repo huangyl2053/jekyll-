@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.function;
+package jp.co.ndensan.reams.db.dbz.definition.util.function;
 
+import jp.co.ndensan.reams.db.dbz.definition.util.function.ExceptionSuppliers;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;

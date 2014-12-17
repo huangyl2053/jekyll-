@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.function;
+package jp.co.ndensan.reams.db.dbz.definition.util.function;
 
+import jp.co.ndensan.reams.db.dbz.definition.util.function.Predicate;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.aspectj.lang.JoinPoint;

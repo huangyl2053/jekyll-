@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.function;
+package jp.co.ndensan.reams.db.dbz.definition.util.function;
 
 /**
  * ひとつの引数を受け取って結果を返さない処理を表します。
