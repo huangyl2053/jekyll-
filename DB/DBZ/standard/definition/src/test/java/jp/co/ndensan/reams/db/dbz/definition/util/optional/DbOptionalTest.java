@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.optional;
+package jp.co.ndensan.reams.db.dbz.definition.util.optional;
 
 import java.util.NoSuchElementException;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
@@ -257,6 +257,66 @@ public class DbOptionalTest {
             RString value = new RString("value");
             sut = DbOptional.of(value);
             assertThat(sut.orElseThrow(exceptionSupplier), is(value));
+        }
+    }
+
+    public static class map extends DbzTestBase {
+
+        private IOptional<RString> sut;
+        private IOptional<String> mapped;
+        private RString input;
+
+        private IFunction<RString, String> createMapper() {
+            return new IFunction<RString, String>() {
+                @Override
+                public String apply(RString t) {
+                    return t.toString();
+                }
+            };
+        }
+
+        @Test
+        public void map_の戻り値は_保持する値が引数のIFuntionにより変換された結果を_持つ() {
+            sut = DbOptional.of(new RString("input"));
+            mapped = sut.map(createMapper());
+            assertThat(mapped.get(), is(createMapper().apply(sut.get())));
+        }
+
+        @Test
+        public void map_の戻り値は_emptyの時_emptyである() {
+            sut = DbOptional.empty();
+            mapped = sut.map(createMapper());
+            assertThat(mapped.isPresent(), is(false));
+        }
+    }
+
+    public static class flatMap extends DbzTestBase {
+
+        private IOptional<RString> sut;
+        private IOptional<String> mapped;
+        private RString input;
+
+        private IFunction<RString, IOptional<String>> createMapper() {
+            return new IFunction<RString, IOptional<String>>() {
+                @Override
+                public IOptional<String> apply(RString t) {
+                    return DbOptional.of(t.toString());
+                }
+            };
+        }
+
+        @Test
+        public void flatMap_の戻り値は_保持する値を引数のIFuntionにより変換した値をもつ_IOptionalである() {
+            sut = DbOptional.of(new RString("input"));
+            mapped = sut.flatMap(createMapper());
+            assertThat(mapped.get(), is(createMapper().apply(sut.get()).get()));
+        }
+
+        @Test
+        public void flatMap_の戻り値は_emptyの時_emptyである() {
+            sut = DbOptional.empty();
+            mapped = sut.flatMap(createMapper());
+            assertThat(mapped.isPresent(), is(false));
         }
     }
 

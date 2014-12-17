@@ -3,25 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.itemlist;
+package jp.co.ndensan.reams.db.dbz.definition.util.itemlist;
 
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 
 /**
  * オブジェクトの集合であることを表します。
  *
  * @author N3327 三浦 凌
  * @param <E> 保持する要素の型
- * @deprecated
- * {@link jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList}を使用して下さい。
  */
-@Deprecated
-public interface IItemList<E> extends jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList<E> {
+public interface IItemList<E> extends Iterable<E> {
 
     /**
      * 保持するすべての値をListとして返します。

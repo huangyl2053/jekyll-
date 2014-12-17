@@ -22,8 +22,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * 被保険者台帳を管理するためのクラスです。
  *
  * @author N3327 三浦 凌
+ * @deprecated {@link HihokenshaDaichoFinder}を使用して下さい。
  */
-public class HihokenshaDaichoManager {
+@Deprecated
+public class _HihokenshaDaichoManager {
 
     private final HihokenshaDaichoDac dac;
     private IKaigoSaiban<HihokenshaNo> sequencer;
@@ -31,7 +33,7 @@ public class HihokenshaDaichoManager {
     /**
      * 新しいHihokenshaDaichoManagerのインスタンスを生成します。
      */
-    public HihokenshaDaichoManager() {
+    public _HihokenshaDaichoManager() {
         this.dac = InstanceProvider.create(HihokenshaDaichoDac.class);
         this.sequencer = null;
     }
@@ -42,7 +44,7 @@ public class HihokenshaDaichoManager {
      * @param dac {@link HihokenshaDiachoDac 被保険者台帳DAC}
      * @param sequencer 被保険者番号採番用のオブジェクト
      */
-    public HihokenshaDaichoManager(HihokenshaDaichoDac dac, IKaigoSaiban<HihokenshaNo> sequencer) {
+    public _HihokenshaDaichoManager(HihokenshaDaichoDac dac, IKaigoSaiban<HihokenshaNo> sequencer) {
         this.dac = dac;
         this.sequencer = sequencer;
     }
