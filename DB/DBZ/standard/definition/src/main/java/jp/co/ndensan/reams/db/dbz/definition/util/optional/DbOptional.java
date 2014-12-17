@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.optional;
+package jp.co.ndensan.reams.db.dbz.definition.util.optional;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
@@ -16,10 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
  *
  * @param <T> Optional が保持する値
  * @author N3327 三浦 凌
- * @deprecated
- * {@link jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional}を使用して下さい。
  */
-@Deprecated
 public final class DbOptional<T> implements IOptional<T> {
 
     private static final IOptional<?> THE_EMPTY;
@@ -127,13 +124,22 @@ public final class DbOptional<T> implements IOptional<T> {
     }
 
     @Override
-    public <R> jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional<R>
-            map(IFunction<? super T, ? extends R> mapper) {
+    public <R> IOptional<R> map(IFunction<? super T, ? extends R> mapper) {
         Objects.requireNonNull(mapper);
         if (!isPresent()) {
             return empty();
         } else {
             return DbOptional.ofNullable(mapper.apply(this.value));
+        }
+    }
+
+    @Override
+    public <R> IOptional<R> flatMap(IFunction<? super T, IOptional<R>> mapper) {
+        Objects.requireNonNull(mapper);
+        if (!isPresent()) {
+            return empty();
+        } else {
+            return Objects.requireNonNull(mapper.apply(this.value));
         }
     }
 
@@ -153,17 +159,6 @@ public final class DbOptional<T> implements IOptional<T> {
     public void ifPresent(IConsumer<? super T> consumer) {
         if (this.value != null) {
             consumer.accept(value);
-        }
-    }
-
-    @Override
-    public <R> jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional<R>
-            flatMap(IFunction<? super T, jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional<R>> mapper) {
-        Objects.requireNonNull(mapper);
-        if (!isPresent()) {
-            return empty();
-        } else {
-            return Objects.requireNonNull(mapper.apply(this.value));
         }
     }
 }
