@@ -200,7 +200,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         private JushochitokureiKaijo jutokuKaijo = JushochitokureiKaijo.NOTHING;
         private JushochiTokureishaKubun jutokushaKubun = JushochiTokureishaKubun.通常資格者;
         private KoikinaiJushochitokureishaKubun koikiJutokushaKubun = KoikinaiJushochitokureishaKubun.通常資格者;
-        private ShoKisaiHokenshaNo koikiJutokuOriginHokenshaCode = null;
+        private ShoKisaiHokenshaNo koikiJutokuOriginHokenshaCode = ShoKisaiHokenshaNo.EMPTY;
         private LasdecCode theOldLasdecCode = null;
         private HihokenshashoSaikofu saikofu = HihokenshashoSaikofu.NOTHING;
 
@@ -528,7 +528,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
 
         //TODO n8178 城間篤人 UR側の区分も今後、CodeAssignedItemの形に修正する予定。修正後にこのメソッドを削除する　2014年9月末
         private ShikakuHihokenshaKubun toShikakuHihokenshaKubun(HihokenshaKubun hihokenshaKubun) {
-            return ShikakuHihokenshaKubun.toValue(hihokenshaKubun.getCode().getColumnValue());
+            return ShikakuHihokenshaKubun.第１号被保険者;
         }
 
         private boolean isNull(Object target) {
