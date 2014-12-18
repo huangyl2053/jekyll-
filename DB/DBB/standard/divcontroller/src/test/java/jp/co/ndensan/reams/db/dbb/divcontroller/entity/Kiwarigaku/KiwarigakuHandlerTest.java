@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.controller;
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,15 +13,6 @@ import jp.co.ndensan.reams.db.dbb.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbb.business.config.KanendoConfig;
 import jp.co.ndensan.reams.db.dbb.business.config.TokuchoConfig;
 import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.KiwarigakuDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.tblKiwariGaku1Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.tblKiwariGaku2Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.tblKiwariGaku3Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.tblKiwariGaku4Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.tblTsuki1Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.tblTsuki2Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.tblTsuki3Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.tblTsuki4Div;
 import jp.co.ndensan.reams.db.dbb.model.helper.KibetsuChoteiKyotsuModelTestHelper;
 import jp.co.ndensan.reams.db.dbb.model.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbb.model.relate.KibetsuChoteiKyotsuModel;

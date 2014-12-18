@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.controller;
+package jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbb.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbb.business.config.KanendoConfig;
 import jp.co.ndensan.reams.db.dbb.business.config.TokuchoConfig;
 import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.KiwarigakuDiv;
 import jp.co.ndensan.reams.db.dbb.model.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbb.realservice.KiwarigakuFinder;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
