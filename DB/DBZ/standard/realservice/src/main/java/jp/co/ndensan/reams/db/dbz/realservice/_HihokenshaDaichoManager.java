@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 被保険者台帳を管理するためのクラスです。
  *
+ * @deprecated
+ * jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoManagerを使用してください。
  * @author N3327 三浦 凌
  * @deprecated {@link HihokenshaDaichoFinder}を使用して下さい。
  */

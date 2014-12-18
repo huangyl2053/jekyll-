@@ -26,7 +26,7 @@ public final class DbT1001HihokenshaDaichoEntityGenerator {
     public static final RString DEFAULT_資格取得事由コード = new RString("1");
     public static final FlexibleDate DEFAULT_資格取得年月日 = new FlexibleDate("20140402");
     public static final FlexibleDate DEFAULT_資格取得届出年月日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_第1号被保険者年齢到達年月日 = new FlexibleDate("20140402");
+    public static final FlexibleDate DEFAULT_第一号資格取得年月日 = new FlexibleDate("20140402");
     public static final RString DEFAULT_被保険者区分コード = new RString("1");
     public static final RString DEFAULT_資格喪失事由コード = new RString("1");
     public static final FlexibleDate DEFAULT_資格喪失年月日 = new FlexibleDate("20140402");
@@ -63,7 +63,7 @@ public final class DbT1001HihokenshaDaichoEntityGenerator {
         entity.setShikakuShutokuJiyuCode(DEFAULT_資格取得事由コード);
         entity.setShikakuShutokuYMD(DEFAULT_資格取得年月日);
         entity.setShikakuShutokuTodokedeYMD(DEFAULT_資格取得届出年月日);
-        entity.setIchigoHihokenshaNenreiTotatsuYMD(DEFAULT_第1号被保険者年齢到達年月日);
+        entity.setIchigoShikakuShutokuYMD(DEFAULT_第一号資格取得年月日);
         entity.setHihokennshaKubunCode(DEFAULT_被保険者区分コード);
         entity.setShikakuSoshitsuJiyuCode(DEFAULT_資格喪失事由コード);
         entity.setShikakuSoshitsuYMD(DEFAULT_資格喪失年月日);

@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoDac;
+//import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.persistence.relate.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -25,7 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @param <T>
  * {@link jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho IHihokenshaDaicho}を実装したクラス
  */
-public class HihokenshaDaichoFinderBase<T extends IHihokenshaDaicho> {
+//public class HihokenshaDaichoFinderBase<T extends IHihokenshaDaicho> {
+public class HihokenshaDaichoFinderBase<T extends HihokenshaDaichoModel> {
 
     private final HihokenshaDaichoDac dac;
 
@@ -113,6 +114,16 @@ public class HihokenshaDaichoFinderBase<T extends IHihokenshaDaicho> {
         //   Dacから返る検索結果は、IItemListを利用して受け取ってください。
         //2, 検索結果をModelのListにしてreturnします。
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    /**
+     * 被保険者番号を指定して、該当する直近の被保険者台帳を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return 被保険者台帳
+     */
+    public IOptional<HihokenshaDaichoModel> find直近被保険者台帳(HihokenshaNo 被保険者番号) {
+        return dac.select直近被保険者台帳(被保険者番号);
     }
 
 }

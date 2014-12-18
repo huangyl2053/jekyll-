@@ -69,7 +69,7 @@ public final class HihokenshaShikakuMapper {
         entity.setShikibetsuCode(shikaku.get識別コード());
         entity.setShoriTimestamp(shikaku.get処理日時());
         entity.setHihokennshaKubunCode(shikaku.get被保険者区分().getCode().value());
-        entity.setIchigoHihokenshaNenreiTotatsuYMD(shikaku.get第一号年齢到達日());
+        entity.setIchigoShikakuShutokuYMD(shikaku.get第一号年齢到達日());
         entity.setShikakuShutokuJiyuCode(shikaku.get資格取得().getReason().getCode());
         entity.setShikakuShutokuTodokedeYMD(shikaku.get資格取得().getNoticeDate());
         entity.setShikakuShutokuYMD(shikaku.get資格取得().getActionDate());
@@ -183,7 +183,7 @@ public final class HihokenshaShikakuMapper {
                 toShikakuSoshitsuJiyu(entity.getShikakuSoshitsuJiyuCode()),
                 toValue(entity.getHihokenshaNo()),
                 entity.getKoikinaiTokureiSochimotoShichosonCode().value(),
-                toRDateOrMax(entity.getIchigoHihokenshaNenreiTotatsuYMD()),
+                toRDateOrMax(entity.getIchigoShikakuShutokuYMD()),
                 ShikakuHihokenshaKubun.toValue(entity.getHihokennshaKubunCode()),
                 JushochiTokureishaKubun.toValue(entity.getJushochiTokureiFlag()));
 

@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.model;
 
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -75,8 +76,8 @@ public class HihokenshaDaichoModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の第1号被保険者年齢到達年月日は_設定した値と同じ第1号被保険者年齢到達年月日を返す() {
-            sut.set第1号被保険者年齢到達年月日(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_第1号被保険者年齢到達年月日);
-            assertThat(sut.get第1号被保険者年齢到達年月日(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_第1号被保険者年齢到達年月日));
+            sut.set第１号資格取得年月日(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_第一号資格取得年月日);
+            assertThat(sut.get第１号資格取得年月日(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_第一号資格取得年月日));
         }
 
         @Test

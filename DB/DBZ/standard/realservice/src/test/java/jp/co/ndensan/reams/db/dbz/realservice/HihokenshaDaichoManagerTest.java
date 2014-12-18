@@ -42,6 +42,8 @@ import org.junit.BeforeClass;
 /**
  * HihokenshaDaichoManagerのテストです。
  *
+ * @deprecated
+ * jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoManagerTestを使用してください。
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
