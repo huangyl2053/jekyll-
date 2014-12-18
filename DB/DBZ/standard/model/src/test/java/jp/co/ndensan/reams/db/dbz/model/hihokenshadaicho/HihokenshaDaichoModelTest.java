@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
@@ -63,8 +62,8 @@ public class HihokenshaDaichoModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の資格取得事由コードは_設定した値と同じ資格取得事由コードを返す() {
-            sut.set資格取得事由コード(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格取得事由コード);
-            assertThat(sut.get資格取得事由コード(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格取得事由コード));
+            sut.set資格取得事由(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格取得事由コード);
+            assertThat(sut.get資格取得事由(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格取得事由コード));
         }
 
         @Test
@@ -81,20 +80,20 @@ public class HihokenshaDaichoModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の第1号被保険者年齢到達年月日は_設定した値と同じ第1号被保険者年齢到達年月日を返す() {
-            sut.set第1号被保険者年齢到達年月日(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_第1号被保険者年齢到達年月日);
-            assertThat(sut.get第1号被保険者年齢到達年月日(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_第1号被保険者年齢到達年月日));
+            sut.set第1号資格取得年月日(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_第1号被保険者年齢到達年月日);
+            assertThat(sut.get第1号資格取得年月日(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_第1号被保険者年齢到達年月日));
         }
 
         @Test
         public void 戻り値の被保険者区分コードは_設定した値と同じ被保険者区分コードを返す() {
-            sut.set被保険者区分コード(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者区分コード);
-            assertThat(sut.get被保険者区分コード(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者区分コード));
+            sut.set被保険者区分(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者区分コード);
+            assertThat(sut.get被保険者区分().getコード(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者区分コード.getColumnValue()));
         }
 
         @Test
         public void 戻り値の資格喪失事由コードは_設定した値と同じ資格喪失事由コードを返す() {
-            sut.set資格喪失事由コード(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格喪失事由コード);
-            assertThat(sut.get資格喪失事由コード(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格喪失事由コード));
+            sut.set資格喪失事由(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格喪失事由コード);
+            assertThat(sut.get資格喪失事由(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格喪失事由コード));
         }
 
         @Test
@@ -112,13 +111,13 @@ public class HihokenshaDaichoModelTest extends DbzTestBase {
         @Test
         public void 戻り値の住所地特例フラグは_設定した値と同じ住所地特例フラグを返す() {
             sut.set住所地特例フラグ(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例フラグ);
-            assertThat(sut.get住所地特例フラグ(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例フラグ));
+            assertThat(sut.get住所地特例フラグ().getコード(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例フラグ));
         }
 
         @Test
         public void 戻り値の資格変更事由コードは_設定した値と同じ資格変更事由コードを返す() {
-            sut.set資格変更事由コード(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格変更事由コード);
-            assertThat(sut.get資格変更事由コード(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格変更事由コード));
+            sut.set資格変更事由(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格変更事由コード);
+            assertThat(sut.get資格変更事由(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格変更事由コード));
         }
 
         @Test
@@ -135,44 +134,44 @@ public class HihokenshaDaichoModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の住所地特例適用事由コードは_設定した値と同じ住所地特例適用事由コードを返す() {
-            sut.set住所地特例適用事由コード(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例適用事由コード);
-            assertThat(sut.get住所地特例適用事由コード(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例適用事由コード));
+            sut.set住所地特例適用事由(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例適用事由コード);
+            assertThat(sut.get住所地特例適用事由(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例適用事由コード));
         }
 
         @Test
         public void 戻り値の適用年月日は_設定した値と同じ適用年月日を返す() {
-            sut.set適用年月日(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_適用年月日);
+            sut.set住所地特例適用年月日(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_適用年月日);
             assertThat(sut.get住所地特例適用年月日(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_適用年月日));
         }
 
         @Test
         public void 戻り値の適用届出年月日は_設定した値と同じ適用届出年月日を返す() {
-            sut.set適用届出年月日(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_適用届出年月日);
+            sut.set住所地特例適用届出年月日(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_適用届出年月日);
             assertThat(sut.get住所地特例適用届出年月日(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_適用届出年月日));
         }
 
         @Test
         public void 戻り値の住所地特例解除事由コードは_設定した値と同じ住所地特例解除事由コードを返す() {
-            sut.set住所地特例解除事由コード(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例解除事由コード);
+            sut.set住所地特例解除事由(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例解除事由コード);
             assertThat(sut.get住所地特例解除事由コード(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例解除事由コード));
         }
 
         @Test
         public void 戻り値の解除年月日は_設定した値と同じ解除年月日を返す() {
-            sut.set解除年月日(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_解除年月日);
+            sut.set住所地特例解除年月日(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_解除年月日);
             assertThat(sut.get住所地特例解除年月日(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_解除年月日));
         }
 
         @Test
         public void 戻り値の解除届出年月日は_設定した値と同じ解除届出年月日を返す() {
-            sut.set解除届出年月日(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_解除届出年月日);
+            sut.set住所地特例解除届出年月日(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_解除届出年月日);
             assertThat(sut.get住所地特例解除届出年月日(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_解除届出年月日));
         }
 
         @Test
         public void 戻り値の広域内住所地特例フラグは_設定した値と同じ広域内住所地特例フラグを返す() {
             sut.set広域内住所地特例フラグ(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_広域内住所地特例フラグ);
-            assertThat(sut.get広域内住所地特例区分(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_広域内住所地特例フラグ));
+            assertThat(sut.get広域内住所地特例区分().getCode(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_広域内住所地特例フラグ));
         }
 
         @Test
@@ -195,7 +194,7 @@ public class HihokenshaDaichoModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の再交付事由コードは_設定した値と同じ再交付事由コードを返す() {
-            sut.set再交付事由コード(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_再交付事由コード);
+            sut.set再交付事由(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_再交付事由コード);
             assertThat(sut.get再交付事由コード(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_再交付事由コード));
         }
 

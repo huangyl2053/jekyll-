@@ -44,8 +44,8 @@ public class TashichosonJushochiTokureiModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の識別コードコードは_設定した値と同じ識別コードコードを返す() {
-            sut.set識別コードコード(DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_識別コード);
-            assertThat(sut.get識別コードコード(), is(DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_識別コード));
+            sut.set識別コード(DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_識別コード);
+            assertThat(sut.get識別コード(), is(DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_識別コード));
         }
 
         @Test

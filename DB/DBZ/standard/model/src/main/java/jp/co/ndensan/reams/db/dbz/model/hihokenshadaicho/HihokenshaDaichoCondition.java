@@ -8,6 +8,10 @@ package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 被保険者台帳Modelの{@link jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList}から、
@@ -21,7 +25,7 @@ public class HihokenshaDaichoCondition implements ICondition<HihokenshaDaichoMod
     private final HihokenshaDaichoModel conditionModel;
 
     /**
-     * コンストラクタです。
+     * コンストラクタです。引数から、検索条件となるModelを受け取ります。
      *
      * @param conditionModel IItemListを検索する際の条件となる被保険者台帳Model
      */
@@ -29,6 +33,27 @@ public class HihokenshaDaichoCondition implements ICondition<HihokenshaDaichoMod
         requireNonNull(conditionModel, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("検索条件に使用する被保険者台帳Model", getClass().getName()));
         this.conditionModel = conditionModel;
+    }
+
+    /**
+     * コンストラクタです。引数から、被保険者台帳情報のキー項目を受け取ります。
+     *
+     * @param shichosonCode 市町村コード
+     * @param hihokenshaNo 被保険者番号
+     * @param shoriTimestamp 処理日時
+     */
+    public HihokenshaDaichoCondition(LasdecCode shichosonCode, HihokenshaNo hihokenshaNo, YMDHMS shoriTimestamp) {
+        requireNonNull(shichosonCode, UrSystemErrorMessages.引数がnullのため生成不可
+                .getReplacedMessage("市町村コード", getClass().getName()));
+        requireNonNull(hihokenshaNo, UrSystemErrorMessages.引数がnullのため生成不可
+                .getReplacedMessage("被保険者番号", getClass().getName()));
+        requireNonNull(shoriTimestamp, UrSystemErrorMessages.引数がnullのため生成不可
+                .getReplacedMessage("処理日時", getClass().getName()));
+
+        this.conditionModel = new HihokenshaDaichoModel();
+        conditionModel.set市町村コード(shichosonCode);
+        conditionModel.set被保険者番号(hihokenshaNo);
+        conditionModel.set処理日時(shoriTimestamp);
     }
 
     @Override

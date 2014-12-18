@@ -7,9 +7,26 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.jushochitokureirirek
 
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.ViewExecutionStatus;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.dgJutoku_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.KaigoRowState;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.model.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrQuestionMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.DivcontrollerMethod;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICallbackMethod;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.SingleButtonType;
 
 /**
  * 共有子Div「住所地特例履歴List」のイベントを定義したDivControllerです。
@@ -27,21 +44,12 @@ public class JushochiTokureiRirekiList {
      * @return 住所地特例履歴ListDivを持つResponseData
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onClick_btnAdd(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
-        //TODO #55852
-        //１）「追加する」ボタンを押下不可にする。
-        //２）「住所地特例履歴一覧」をreadOnlyにする。
-        //３）住所地特例入力明細エリアの項目をクリアし
-        //3.5),入力可にする。
-        //４）共有子Divが持つ処理判定区分に、追加を設定する。
-        jutokuRirekiDiv.getBtnAdd().setDisabled(true);
-        jutokuRirekiDiv.getDgJutoku().setReadOnly(true);
-
-        jutokuRirekiDiv.clearInputData();
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
+        handler.setupToBeforeInput();
+        handler.clearInputData();
         handler.setMeisaiInputMode();
-
-        jutokuRirekiDiv.setExecutionStatus(ViewExecutionStatus.Add.getValue());
-        return createSettingData(jutokuRirekiDiv);
+        handler.setExecutionStatus(ViewExecutionStatus.Add);
+        return ResponseDatas.createSettingDataTo(jutokuRirekiDiv);
     }
 
     /**
@@ -53,28 +61,29 @@ public class JushochiTokureiRirekiList {
      * @return 住所地特例履歴ListDivを持つResponseData
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onSelect_dgJutoku(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
-        //TODO #55852
-        //１）「追加する」ボタンを押下不可にする。
-        //２）「住所地特例履歴一覧」をreadOnlyにする。
-        jutokuRirekiDiv.getBtnAdd().setDisabled(true);
-        jutokuRirekiDiv.getDgJutoku().setReadOnly(true);
-        //３）住所地特例入力明細エリアに選択行の内容を表示する。
-        //４）選択行の状態によって、以下のように処理を行う。
-        //４－１）状態が「追加」・「修正」である行を選択している場合、明細エリアの項目を入力可にして「確定する」ボタンを押下可能にする。
-        //４－１－１）選択行と処理内容によって以下の処理に分岐する。
-        //４－１－１－１）選択している行が適用の行である場合、MeisaiDisplayModeにtekiyoInputを設定する。
-        //４－１－１－２）選択している行が解除の行である場合、MeisaiDisplayModeにkaijoInputを設定する。
-        //４－１－１－３）訂正処理を行っている場合は、MeisaiDisplayModeにteiseiInputを設定する。
-        //４－１－２）共有子Divが持つ処理判定区分に、修正を設定する。
-        //４－２）状態が「削除」である行を選択した場合、明細エリアの項目を入力不可にして「確定する」ボタンを押下可能にする。
-        //４－２－１）訂正処理を行っている場合は、MeisaiDisplayModeにteiseiShokaiを設定する。
-        //４－２－２）共有子Divが持つ処理判定区分に、削除を設定する。
-        //４－３）状態が空白である行を選択した場合、明細エリアの項目を入力不可にして「確定する」ボタンを押下不可にする。
-        //４－３－１）選択している行が適用の行である場合、MeisaiDisplayModeにtekiyoShokaiを設定する。
-        //４－３－２）選択している行が解除の行である場合、MeisaiDisplayModeにkaijoShokaiを設定する。
-        //４－３－２）訂正処理を行っている場合は、MeisaiDisplayModeにteiseiShokaiを設定する。
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
+        handler.setupToBeforeInput();
+        handler.showSelectedData();
 
-        return createSettingData(jutokuRirekiDiv);
+        dgJutoku_Row clickedRow = jutokuRirekiDiv.getDgJutoku().getClickedItem();
+        switch (clickedRow.getRowState()) {
+            case Added:
+            case Modified:
+                handler.showSelectedData();
+                handler.setMeisaiInputMode();
+                break;
+            case Deleted:
+                handler.showSelectedData();
+                handler.setMeisaiDeleteMode();
+                break;
+            case Unchanged:
+            default:
+                handler.showSelectedData();
+                handler.setMeisaiShokaiMode();
+                break;
+        }
+
+        return ResponseDatas.createSettingDataTo(jutokuRirekiDiv);
     }
 
     /**
@@ -86,20 +95,12 @@ public class JushochiTokureiRirekiList {
      * @return 住所地特例履歴ListDivを持つResponseData
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onSelectByModifyButton_dgJutoku(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
-        //TODO #55852
-        //１）「追加する」ボタンを押下不可にする。
-        //２）「住所地特例履歴一覧」をreadOnlyにする。
-        //３）住所地特例入力明細エリアに選択行の内容を表示する。
-        //４）選択行と処理内容によって以下の処理に分岐する。
-        //４－１）選択している行が適用の行である場合、MeisaiDisplayModeにtekiyoInputを設定する。
-        //４－２）選択している行が解除の行である場合、MeisaiDisplayModeにkaijoInputを設定する。
-        //４－３）訂正処理を行っている場合は、MeisaiDisplayModeにteiseiInputを設定する。
-        //５）共有子Divが持つ処理判定区分に、修正を設定する。
-        jutokuRirekiDiv.getBtnAdd().setDisabled(true);
-        jutokuRirekiDiv.getDgJutoku().setReadOnly(true);
-
-        jutokuRirekiDiv.setMode_BtnDisplayMode(JushochiTokureiRirekiListDiv.BtnDisplayMode.SetDisplay);
-        return createSettingData(jutokuRirekiDiv);
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
+        handler.setupToBeforeInput();
+        handler.showSelectedData();
+        handler.setMeisaiInputMode();
+        handler.setExecutionStatus(ViewExecutionStatus.Modify);
+        return ResponseDatas.createSettingDataTo(jutokuRirekiDiv);
     }
 
     /**
@@ -111,16 +112,12 @@ public class JushochiTokureiRirekiList {
      * @return 住所地特例履歴ListDivを持つResponseData
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onSelectByDeleteButton_dgJutoku(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
-        //TODO #55852
-        //１）「追加する」ボタンを押下不可にする。
-        //２）「住所地特例履歴一覧」をreadOnlyにする。
-        //３）住所地特例入力明細エリアに選択行の内容を表示する。
-        //４）選択行と処理内容によって以下の処理に分岐する。
-        //４－１）選択している行が適用の行である場合、MeisaiDisplayModeにtekiyoShokaiを設定する。
-        //４－２）選択している行が解除の行である場合、MeisaiDisplayModeにkaijoShokaiを設定する。
-        //４－３）訂正処理を行っている場合は、MeisaiDisplayModeにteiseiShokaiを設定する。
-        //５）共有子Divが持つ処理判定区分に、削除を設定する。
-        return createSettingData(jutokuRirekiDiv);
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
+        handler.setupToBeforeInput();
+        handler.showSelectedData();
+        handler.setMeisaiInputMode();
+        handler.setExecutionStatus(ViewExecutionStatus.Delete);
+        return ResponseDatas.createSettingDataTo(jutokuRirekiDiv);
     }
 
     /**
@@ -132,15 +129,29 @@ public class JushochiTokureiRirekiList {
      * @return 住所地特例履歴ListDivを持つResponseData
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onClick_btnJutokuTorikeshi(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
-        //TODO #55852
         //１）明細エリアの情報が変更されているかを確認する。
         //１－１）変更がない場合は、onClick_btnJutokuTorikeshi_onYesの処理を実行する。
         //１－２）変更が存在する場合は、２）の処理を実行する。
         //メッセージID：URZQ00007（入力された値を破棄します。よろしいですか？）
         //      Yes：２の処理に進む。（明細エリアの値を破棄する）
         //      No : ダイアログを閉じる
+        ResponseData<JushochiTokureiRirekiListDiv> response = new ResponseData<>();
 
-        return createSettingData(jutokuRirekiDiv);
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
+        if (!handler.hasChangedInMeisai()) {
+            return this.onClick_btnJutokuTorikeshi_onYes(jutokuRirekiDiv);
+        }
+
+        ICallbackMethod methodYes = DivcontrollerMethod.method(SingleButtonType.Free, "onClick_btnJutokuTorikeshi_onYes");
+        QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                UrQuestionMessages.入力内容の破棄.getMessage().toString(), "はい", "いいえ");
+
+        ICallbackMethod[] methods = {methodYes}; //ユーザー選択時の動作を規定する
+        message.addInvokeMethod(methods);
+        response.addMessage(message);
+
+        response.data = jutokuRirekiDiv;
+        return response;
     }
 
     /**
@@ -152,12 +163,11 @@ public class JushochiTokureiRirekiList {
      * @return 住所地特例履歴ListDivを持つResponseData
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onClick_btnJutokuTorikeshi_onYes(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
-        //TODO #55852
-        //１）住所地特例入力明細エリアの各項目の値をクリアする。
-        //２）「住所地特例履歴一覧」のReadOnlyを外す。
-        //３）共有子Divが持つ処理判定区分に、処理無しを設定する。
-
-        return createSettingData(jutokuRirekiDiv);
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
+        handler.clearInputData();
+        handler.setupToAfterInput();
+        handler.setExecutionStatus(ViewExecutionStatus.None);
+        return ResponseDatas.createSettingDataTo(jutokuRirekiDiv);
     }
 
     /**
@@ -170,7 +180,7 @@ public class JushochiTokureiRirekiList {
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onBeforeClick_btnJutokuKakutei(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
         ResponseData<JushochiTokureiRirekiListDiv> response = new ResponseData<>();
-        //TODO #55852
+        //TODO #55852 n8178 城間篤人 バリデーション実装時に回収が必要 2014/12/24
         //１）JuchochiTokureiValidatorを用いて、バリデーションをチェックする。
         //２）適用処理を行う場合、さらにJuchochiTokureiTekiyoTorokuValidatorを用いてチェックを行う。
         //３）解除処理を行う場合、さらにJuchochiTokureiKaijoTorokuValidatorを用いてチェックを行う。
@@ -188,29 +198,17 @@ public class JushochiTokureiRirekiList {
      * @param jutokuRirekiDiv
      * {@link JushochiTokureiRirekiListDiv 住所地特例履歴ListDiv}
      * @return 住所地特例履歴ListDivを持つResponseData
+     *
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onClick_btnJutokuKakutei(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
         //TODO #55852
-        //１）明細エリアの入力内容を住所地特例履歴一覧に反映させる。
-        //２）追加を確定する場合は、以下のように処理を行う。
-        //    入力した内容を元に、新規行を作成してグリッドに追加する。
-        //    状態列には「追加」を設定する。
-        //３）修正を確定する場合は、以下の処理を行う。
-        //    選択している行に対して、明細に入力した内容を反映させる。
-        //    修正対象の状態行が「追加」だった場合は「追加」、それ以外の場合は「修正」を設定する。
-        //４）削除を確定する場合は、以下の処理を行う。
-        //    選択している行の状態列を「削除」に変更する。
-        //    新規に追加した行に対して削除する場合は、追加行をグリッドから取り除く。
-        //５）明細に設定されている内容をクリアする。
-        //６）明細をReadOnlyにする。
-        //７）「住所地特例履歴一覧」のReadOnlyを外す。
-        return createSettingData(jutokuRirekiDiv);
-    }
-
-    private <T> ResponseData<T> createSettingData(T settingData) {
-        ResponseData<T> response = new ResponseData<>();
-        response.data = settingData;
-        return response;
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
+        handler.updateEntryData();
+        handler.clearInputData();
+        handler.setMeisaiShokaiMode();
+        handler.setupToAfterInput();
+        handler.setExecutionStatus(ViewExecutionStatus.None);
+        return ResponseDatas.createSettingDataTo(jutokuRirekiDiv);
     }
 
 }

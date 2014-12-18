@@ -323,7 +323,7 @@ public class TekiyoJogaishaModel implements Serializable {
      */
     public void set変更通知発行日(FlexibleDate 変更通知発行日) {
         requireNonNull(変更通知発行日, UrSystemErrorMessages.値がnull.getReplacedMessage("変更通知発行日"));
-        entity.setHenkoTsuchiHakkoYMD(変更通知発行日)
+        entity.setHenkoTsuchiHakkoYMD(変更通知発行日);
     }
 
     /**

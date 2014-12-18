@@ -65,7 +65,7 @@ public class JushochiTokureiTekiyoDateConditionTest {
 
     private static HihokenshaDaichoModel createModel(String tekiyoDate) {
         HihokenshaDaichoModel model = new HihokenshaDaichoModel();
-        model.set適用年月日(new FlexibleDate(tekiyoDate));
+        model.set住所地特例適用年月日(new FlexibleDate(tekiyoDate));
         return model;
     }
 }

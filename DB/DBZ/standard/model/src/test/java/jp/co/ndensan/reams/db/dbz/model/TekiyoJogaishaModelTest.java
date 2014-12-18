@@ -103,21 +103,21 @@ public class TekiyoJogaishaModelTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の入所通知発効日は_設定した値と同じ入所通知発効日を返す() {
-            sut.set入所通知発効日(DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_入所通知発効日);
-            assertThat(sut.get入所通知発効日(), is(DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_入所通知発効日));
+        public void 戻り値の入所通知発行日は_設定した値と同じ入所通知発行日を返す() {
+            sut.set入所通知発行日(DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_入所通知発行日);
+            assertThat(sut.get入所通知発行日(), is(DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_入所通知発行日));
         }
 
         @Test
-        public void 戻り値の退所通知発効日は_設定した値と同じ退所通知発効日を返す() {
-            sut.set退所通知発効日(DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_退所通知発効日);
-            assertThat(sut.get退所通知発効日(), is(DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_退所通知発効日));
+        public void 戻り値の退所通知発行日は_設定した値と同じ退所通知発行日を返す() {
+            sut.set退所通知発行日(DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_退所通知発行日);
+            assertThat(sut.get退所通知発行日(), is(DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_退所通知発行日));
         }
 
         @Test
-        public void 戻り値の変更通知発効日は_設定した値と同じ変更通知発効日を返す() {
-            sut.set変更通知発効日(DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_変更通知発効日);
-            assertThat(sut.get変更通知発効日(), is(DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_変更通知発効日));
+        public void 戻り値の変更通知発行日は_設定した値と同じ変更通知発行日を返す() {
+            sut.set変更通知発行日(DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_変更通知発行日);
+            assertThat(sut.get変更通知発行日(), is(DbT1002TekiyoJogaishaEntityGenerator.DEFAULT_変更通知発行日));
         }
     }
 

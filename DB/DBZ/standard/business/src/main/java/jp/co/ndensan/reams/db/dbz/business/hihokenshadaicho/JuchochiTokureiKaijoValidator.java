@@ -74,7 +74,7 @@ public final class JuchochiTokureiKaijoValidator {
         @Override
         public IValidationMessages validate() {
             //TODO #55852
-            //１）解除処理を行い場合、以下のバリデーションチェックを行う。
+            //１）解除処理を行う場合、以下のバリデーションチェックを行う。
             //解除日 ＜ 最新履歴データの資格取得日
             //解除日 ＜ 最新履歴データの資格変更日
             //解除日 ＜ 最新履歴データの住所地特例適用日

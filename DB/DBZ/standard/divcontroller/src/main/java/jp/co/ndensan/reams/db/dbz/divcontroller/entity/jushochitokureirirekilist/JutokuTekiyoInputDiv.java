@@ -34,8 +34,8 @@ public class JutokuTekiyoInputDiv extends Panel {
     private TekiyojiHokenshaJohoDiv TekiyojiHokenshaJoho;
     @JsonProperty("tekiyojiShichosonCode")
     private RString tekiyojiShichosonCode;
-    @JsonProperty("tekiyojiHokenshaNo")
-    private RString tekiyojiHokenshaNo;
+    @JsonProperty("tekiyojiHihokenshaNo")
+    private RString tekiyojiHihokenshaNo;
     @JsonProperty("tekiyojiShoriDatetime")
     private RString tekiyojiShoriDatetime;
 
@@ -95,14 +95,14 @@ public class JutokuTekiyoInputDiv extends Panel {
         this.tekiyojiShichosonCode=tekiyojiShichosonCode;
     }
 
-    @JsonProperty("tekiyojiHokenshaNo")
-    public RString getTekiyojiHokenshaNo() {
-        return tekiyojiHokenshaNo;
+    @JsonProperty("tekiyojiHihokenshaNo")
+    public RString getTekiyojiHihokenshaNo() {
+        return tekiyojiHihokenshaNo;
     }
 
-    @JsonProperty("tekiyojiHokenshaNo")
-    public void setTekiyojiHokenshaNo(RString tekiyojiHokenshaNo) {
-        this.tekiyojiHokenshaNo=tekiyojiHokenshaNo;
+    @JsonProperty("tekiyojiHihokenshaNo")
+    public void setTekiyojiHihokenshaNo(RString tekiyojiHihokenshaNo) {
+        this.tekiyojiHihokenshaNo=tekiyojiHihokenshaNo;
     }
 
     @JsonProperty("tekiyojiShoriDatetime")

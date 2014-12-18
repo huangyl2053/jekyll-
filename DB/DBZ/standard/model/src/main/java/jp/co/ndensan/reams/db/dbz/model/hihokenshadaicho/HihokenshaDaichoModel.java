@@ -112,12 +112,12 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
     }
 
     /**
-     * 資格取得事由コードを返します。
+     * 資格取得事由を返します。
      *
-     * @return 資格取得事由コード
+     * @return 資格取得事由
      */
     @Override
-    public KaigoshikakuShutokuJiyuHihokensha get資格取得事由コード() {
+    public KaigoshikakuShutokuJiyuHihokensha get資格取得事由() {
         return entity.getShikakuShutokuJiyuCode();
     }
 
@@ -142,32 +142,32 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
     }
 
     /**
-     * 第1号被保険者年齢到達年月日を返します。
+     * 第1号資格取得年月日を返します。
      *
-     * @return 第1号被保険者年齢到達年月日
+     * @return 第1号資格取得年月日
      */
     @Override
-    public FlexibleDate get第1号被保険者年齢到達年月日() {
-        return entity.getIchigoHihokenshaNenreiTotatsuYMD();
+    public FlexibleDate get第1号資格取得年月日() {
+        return entity.getIchigoShikakuShutokuYMD();
     }
 
     /**
-     * 被保険者区分コードを返します。
+     * 被保険者区分を返します。
      *
-     * @return 被保険者区分コード
+     * @return 被保険者区分
      */
     @Override
-    public ShikakuHihokenshaKubun get被保険者区分コード() {
+    public ShikakuHihokenshaKubun get被保険者区分() {
         return ShikakuHihokenshaKubun.toValue(entity.getHihokennshaKubunCode().getColumnValue());
     }
 
     /**
-     * 資格喪失事由コードを返します。
+     * 資格喪失事由を返します。
      *
-     * @return 資格喪失事由コード
+     * @return 資格喪失事由
      */
     @Override
-    public KaigoshikakuSoshitsuJiyuHihokennsha get資格喪失事由コード() {
+    public KaigoshikakuSoshitsuJiyuHihokennsha get資格喪失事由() {
         return entity.getShikakuSoshitsuJiyuCode();
     }
 
@@ -202,12 +202,12 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
     }
 
     /**
-     * 資格変更事由コードを返します。
+     * 資格変更事由を返します。
      *
-     * @return 資格変更事由コード
+     * @return 資格変更事由
      */
     @Override
-    public KaigoshikakuHenkoJiyuHihokensha get資格変更事由コード() {
+    public KaigoshikakuHenkoJiyuHihokensha get資格変更事由() {
         return entity.getShikakuHenkoJiyuCode();
     }
 
@@ -237,7 +237,7 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      * @return 住所地特例適用事由コード
      */
     @Override
-    public KaigoshikakuJutokuTekiyo get住所地特例適用事由コード() {
+    public KaigoshikakuJutokuTekiyo get住所地特例適用事由() {
         return entity.getJushochitokureiTekiyoJiyuCode();
     }
 
@@ -262,9 +262,9 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
     }
 
     /**
-     * 住所地特例解除事由コードを返します。
+     * 住所地特例解除事由を返します。
      *
-     * @return 住所地特例解除事由コード
+     * @return 住所地特例解除事由
      */
     public KaigoshikakuJutokuKaijo get住所地特例解除事由コード() {
         return entity.getJushochitokureiKaijoJiyuCode();
@@ -391,13 +391,13 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
     }
 
     /**
-     * 資格取得事由コードを設定します。
+     * 資格取得事由を設定します。
      *
-     * @param 資格取得事由コード 資格取得事由コード
+     * @param 資格取得事由 資格取得事由
      */
-    public void set資格取得事由コード(KaigoshikakuShutokuJiyuHihokensha 資格取得事由コード) {
-        requireNonNull(資格取得事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得事由コード"));
-        entity.setShikakuShutokuJiyuCode(資格取得事由コード);
+    public void set資格取得事由(KaigoshikakuShutokuJiyuHihokensha 資格取得事由) {
+        requireNonNull(資格取得事由, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得事由"));
+        entity.setShikakuShutokuJiyuCode(資格取得事由);
     }
 
     /**
@@ -423,31 +423,31 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
     /**
      * 第1号被保険者年齢到達年月日を設定します。
      *
-     * @param 第1号被保険者年齢到達年月日 第1号被保険者年齢到達年月日
+     * @param 第1号資格取得年月日 第1号資格取得年月日
      */
-    public void set第1号被保険者年齢到達年月日(FlexibleDate 第1号被保険者年齢到達年月日) {
-        requireNonNull(第1号被保険者年齢到達年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("第1号被保険者年齢到達年月日"));
-        entity.setIchigoHihokenshaNenreiTotatsuYMD(第1号被保険者年齢到達年月日);
+    public void set第1号資格取得年月日(FlexibleDate 第1号資格取得年月日) {
+        requireNonNull(第1号資格取得年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("第1号資格取得年月日"));
+        entity.setIchigoShikakuShutokuYMD(第1号資格取得年月日);
     }
 
     /**
-     * 被保険者区分コードを設定します。
+     * 被保険者区分を設定します。
      *
-     * @param 被保険者区分コード 被保険者区分コード
+     * @param 被保険者区分 被保険者区分
      */
-    public void set被保険者区分コード(Code 被保険者区分コード) {
-        requireNonNull(被保険者区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者区分コード"));
-        entity.setHihokennshaKubunCode(被保険者区分コード);
+    public void set被保険者区分(Code 被保険者区分) {
+        requireNonNull(被保険者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者区分"));
+        entity.setHihokennshaKubunCode(被保険者区分);
     }
 
     /**
-     * 資格喪失事由コードを設定します。
+     * 資格喪失事由を設定します。
      *
-     * @param 資格喪失事由コード 資格喪失事由コード
+     * @param 資格喪失事由 資格喪失事由
      */
-    public void set資格喪失事由コード(KaigoshikakuSoshitsuJiyuHihokennsha 資格喪失事由コード) {
-        requireNonNull(資格喪失事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("資格喪失事由コード"));
-        entity.setShikakuSoshitsuJiyuCode(資格喪失事由コード);
+    public void set資格喪失事由(KaigoshikakuSoshitsuJiyuHihokennsha 資格喪失事由) {
+        requireNonNull(資格喪失事由, UrSystemErrorMessages.値がnull.getReplacedMessage("資格喪失事由"));
+        entity.setShikakuSoshitsuJiyuCode(資格喪失事由);
     }
 
     /**
@@ -481,13 +481,13 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
     }
 
     /**
-     * 資格変更事由コードを設定します。
+     * 資格変更事由を設定します。
      *
-     * @param 資格変更事由コード 資格変更事由コード
+     * @param 資格変更事由 資格変更事由
      */
-    public void set資格変更事由コード(KaigoshikakuHenkoJiyuHihokensha 資格変更事由コード) {
-        requireNonNull(資格変更事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("資格変更事由コード"));
-        entity.setShikakuHenkoJiyuCode(資格変更事由コード);
+    public void set資格変更事由(KaigoshikakuHenkoJiyuHihokensha 資格変更事由) {
+        requireNonNull(資格変更事由, UrSystemErrorMessages.値がnull.getReplacedMessage("資格変更事由"));
+        entity.setShikakuHenkoJiyuCode(資格変更事由);
     }
 
     /**
@@ -511,13 +511,13 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
     }
 
     /**
-     * 住所地特例適用事由コードを設定します。
+     * 住所地特例適用事由を設定します。
      *
-     * @param 住所地特例適用事由コード 住所地特例適用事由コード
+     * @param 住所地特例適用事由 住所地特例適用事由
      */
-    public void set住所地特例適用事由コード(KaigoshikakuJutokuTekiyo 住所地特例適用事由コード) {
-        requireNonNull(住所地特例適用事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例適用事由コード"));
-        entity.setJushochitokureiTekiyoJiyuCode(住所地特例適用事由コード);
+    public void set住所地特例適用事由(KaigoshikakuJutokuTekiyo 住所地特例適用事由) {
+        requireNonNull(住所地特例適用事由, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例適用事由"));
+        entity.setJushochitokureiTekiyoJiyuCode(住所地特例適用事由);
     }
 
     /**
@@ -525,7 +525,7 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @param 適用年月日 適用年月日
      */
-    public void set適用年月日(FlexibleDate 適用年月日) {
+    public void set住所地特例適用年月日(FlexibleDate 適用年月日) {
         requireNonNull(適用年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用年月日"));
         entity.setJushochitokureiTekiyoYMD(適用年月日);
     }
@@ -535,19 +535,19 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @param 適用届出年月日 適用届出年月日
      */
-    public void set適用届出年月日(FlexibleDate 適用届出年月日) {
+    public void set住所地特例適用届出年月日(FlexibleDate 適用届出年月日) {
         requireNonNull(適用届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用届出年月日"));
         entity.setJushochitokureiTekiyoTodokedeYMD(適用届出年月日);
     }
 
     /**
-     * 住所地特例解除事由コードを設定します。
+     * 住所地特例解除事由を設定します。
      *
-     * @param 住所地特例解除事由コード 住所地特例解除事由コード
+     * @param 住所地特例解除事由 住所地特例解除事由
      */
-    public void set住所地特例解除事由コード(KaigoshikakuJutokuKaijo 住所地特例解除事由コード) {
-        requireNonNull(住所地特例解除事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例解除事由コード"));
-        entity.setJushochitokureiKaijoJiyuCode(住所地特例解除事由コード);
+    public void set住所地特例解除事由(KaigoshikakuJutokuKaijo 住所地特例解除事由) {
+        requireNonNull(住所地特例解除事由, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例解除事由"));
+        entity.setJushochitokureiKaijoJiyuCode(住所地特例解除事由);
     }
 
     /**
@@ -555,7 +555,7 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @param 解除年月日 解除年月日
      */
-    public void set解除年月日(FlexibleDate 解除年月日) {
+    public void set住所地特例解除年月日(FlexibleDate 解除年月日) {
         requireNonNull(解除年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("解除年月日"));
         entity.setJushochitokureiKaijoYMD(解除年月日);
     }
@@ -565,7 +565,7 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @param 解除届出年月日 解除届出年月日
      */
-    public void set解除届出年月日(FlexibleDate 解除届出年月日) {
+    public void set住所地特例解除届出年月日(FlexibleDate 解除届出年月日) {
         requireNonNull(解除届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("解除届出年月日"));
         entity.setJushochitokureiKaijoTodokedeYMD(解除届出年月日);
     }
@@ -611,13 +611,13 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
     }
 
     /**
-     * 再交付事由コードを設定します。
+     * 再交付事由を設定します。
      *
-     * @param 再交付事由コード 再交付事由コード
+     * @param 再交付事由 再交付事由
      */
-    public void set再交付事由コード(KofuJiyu 再交付事由コード) {
-        requireNonNull(再交付事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("再交付事由コード"));
-        entity.setSaikofuJiyuCode(再交付事由コード);
+    public void set再交付事由(KofuJiyu 再交付事由) {
+        requireNonNull(再交付事由, UrSystemErrorMessages.値がnull.getReplacedMessage("再交付事由"));
+        entity.setSaikofuJiyuCode(再交付事由);
     }
 
     /**

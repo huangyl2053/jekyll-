@@ -39,9 +39,9 @@ public final class DbT1002TekiyoJogaishaEntityGenerator {
     public static final FlexibleDate DEFAULT_解除年月日 = new FlexibleDate("20170130");
     public static final FlexibleDate DEFAULT_解除届出年月日 = new FlexibleDate("20170130");
     public static final FlexibleDate DEFAULT_解除受付年月日 = new FlexibleDate("20170130");
-    public static final FlexibleDate DEFAULT_入所通知発効日 = new FlexibleDate("20160713");
-    public static final FlexibleDate DEFAULT_退所通知発効日 = new FlexibleDate("20170202");
-    public static final FlexibleDate DEFAULT_変更通知発効日 = new FlexibleDate("20161201");
+    public static final FlexibleDate DEFAULT_入所通知発行日 = new FlexibleDate("20160713");
+    public static final FlexibleDate DEFAULT_退所通知発行日 = new FlexibleDate("20170202");
+    public static final FlexibleDate DEFAULT_変更通知発行日 = new FlexibleDate("20161201");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -62,9 +62,9 @@ public final class DbT1002TekiyoJogaishaEntityGenerator {
         entity.setKaijoYMD(DEFAULT_解除年月日);
         entity.setKaijoTodokedeYMD(DEFAULT_解除届出年月日);
         entity.setKaijoUketsukeYMD(DEFAULT_解除受付年月日);
-        entity.setNyushoTsuchiHakkoYMD(DEFAULT_入所通知発効日);
-        entity.setTaishoTsuchiHakkoYMD(DEFAULT_退所通知発効日);
-        entity.setHenkoTsuchiHakkoYMD(DEFAULT_変更通知発効日);
+        entity.setNyushoTsuchiHakkoYMD(DEFAULT_入所通知発行日);
+        entity.setTaishoTsuchiHakkoYMD(DEFAULT_退所通知発行日);
+        entity.setHenkoTsuchiHakkoYMD(DEFAULT_変更通知発行日);
         return entity;
     }
 }

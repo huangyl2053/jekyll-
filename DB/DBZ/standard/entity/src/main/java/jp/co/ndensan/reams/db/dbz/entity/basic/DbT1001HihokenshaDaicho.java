@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT1001HihokenshaDaicho implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
     insertReamsLoginId(2147483647, 0),
@@ -23,7 +23,7 @@ public enum DbT1001HihokenshaDaicho implements IColumnDefinition {
     shikakuShutokuJiyuCode(2, 0),
     shikakuShutokuYMD(2147483647, 0),
     shikakuShutokuTodokedeYMD(2147483647, 0),
-    ichigoHihokenshaNenreiTotatsuYMD(2147483647, 0),
+    ichigoShikakuShutokuYMD(2147483647, 0),
     hihokennshaKubunCode(1, 0),
     shikakuSoshitsuJiyuCode(2, 0),
     shikakuSoshitsuYMD(2147483647, 0),

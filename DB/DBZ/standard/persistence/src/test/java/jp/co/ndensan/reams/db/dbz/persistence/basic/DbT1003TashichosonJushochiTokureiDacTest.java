@@ -199,7 +199,7 @@ public class DbT1003TashichosonJushochiTokureiDacTest extends DbzTestDacBase {
             DbT1003TashichosonJushochiTokureiEntity entity = DbT1003TashichosonJushochiTokureiEntityGenerator.createDbT1003TashichosonJushochiTokureiEntity();
             entity.setShichosonCode(市町村コード);
             entity.setShikibetsuCode(識別コード);
-            entity.setShoriTimeStamp(処理日時);
+            entity.setShoriTimestamp(処理日時);
             sut.insert(entity);
         }
     }

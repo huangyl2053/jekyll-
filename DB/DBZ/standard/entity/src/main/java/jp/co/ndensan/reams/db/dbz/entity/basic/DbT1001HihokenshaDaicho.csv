@@ -5,7 +5,7 @@ shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
 shikakuShutokuJiyuCode,varchar,KaigoshikakuShutokuJiyuHihokensha,,,,,A
 shikakuShutokuYMD,UDD015YMD,FlexibleDate,,,,,A
 shikakuShutokuTodokedeYMD,UDD015YMD,FlexibleDate,,,,,A
-ichigoHihokenshaNenreiTotatsuYMD,UDD015YMD,FlexibleDate,,,,,A
+ichigoShikakuShutokuYMD,UDD015YMD,FlexibleDate,,,,,A
 hihokennshaKubunCode,varchar,Code,,,,,A
 shikakuSoshitsuJiyuCode,varchar,KaigoshikakuSoshitsuJiyuHihokennsha,,,,,A
 shikakuSoshitsuYMD,UDD015YMD,FlexibleDate,,,,,A

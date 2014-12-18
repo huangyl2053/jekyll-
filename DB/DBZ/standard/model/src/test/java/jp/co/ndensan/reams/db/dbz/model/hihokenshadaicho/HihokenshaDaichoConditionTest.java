@@ -17,8 +17,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * {@link jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoCondition}
- * のテストです。
+ * {@link jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoCondition}のテストです。
  *
  * @author n8178 城間篤人
  */
@@ -27,11 +26,43 @@ public class HihokenshaDaichoConditionTest {
 
     private static HihokenshaDaichoCondition sut;
 
-    public static class constructor extends DbzTestBase {
+    public static class constructor_引数にHihokenshaDaichoModelを渡す場合 extends DbzTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 引数にnullが渡された場合_NullPointerExceptionが発生する() {
             sut = new HihokenshaDaichoCondition(null);
+            fail();
+        }
+    }
+
+    public static class constructor_引数に市町村コード_被保険者番号_処理日時を渡す場合 extends DbzTestBase {
+
+        private LasdecCode 市町村コード;
+        private HihokenshaNo 被保険者番号;
+        private YMDHMS 処理日時;
+
+        @Before
+        public void setUp() {
+            市町村コード = new LasdecCode("202010");
+            被保険者番号 = new HihokenshaNo("1234500001");
+            処理日時 = new YMDHMS("20141231020506");
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 市町村コードにnullが渡された場合_NullPointerExceptionが発生する() {
+            sut = new HihokenshaDaichoCondition(null, 被保険者番号, 処理日時);
+            fail();
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 被保険者番号にnullが渡された場合_NullPointerExceptionが発生する() {
+            sut = new HihokenshaDaichoCondition(市町村コード, null, 処理日時);
+            fail();
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 処理日時にnullが渡された場合_NullPointerExceptionが発生する() {
+            sut = new HihokenshaDaichoCondition(市町村コード, 被保険者番号, null);
             fail();
         }
     }
