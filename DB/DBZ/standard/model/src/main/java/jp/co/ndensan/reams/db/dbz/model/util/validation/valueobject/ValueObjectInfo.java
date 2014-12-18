@@ -16,6 +16,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class ValueObjectInfo {
 
+    private ValueObjectInfo() {
+    }
+
     /**
      * valueObjectの名前を指定し、{@link IValueObjectInfoBuilder Builder}を生成します。
      *
@@ -97,7 +100,7 @@ public final class ValueObjectInfo {
         }
     }
 
-    private static class _ValueObjectInfo implements IValueObjectInfo {
+    private static final class _ValueObjectInfo implements IValueObjectInfo {
 
         private final RString theName;
         private final Unit theUnit;

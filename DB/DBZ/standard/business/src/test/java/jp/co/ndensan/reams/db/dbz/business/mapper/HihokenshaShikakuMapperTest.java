@@ -64,7 +64,6 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
     private static final LasdecCode lasdecCode;
     private static final ShikibetsuCode shikibetsuCode;
     private static final YMDHMS shoriTimestamp;
-    private static final ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private static final HihokenshaNo hihokenshaNo;
     private static final RDate ichigoGaitoDate;
     private static final IKaigoShikaku kaigoShikaku;
@@ -72,7 +71,6 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
     static {
         lasdecCode = new LasdecCode("123456");
-        shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("123456"));
         shikibetsuCode = new ShikibetsuCode("1020304050");
         shoriTimestamp = new YMDHMS("20140402154700");
         hihokenshaNo = new HihokenshaNo(new RString("1234567890"));

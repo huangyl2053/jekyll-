@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.itemlist;
+package jp.co.ndensan.reams.db.dbz.definition.util.itemlist;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -17,18 +17,15 @@ import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 
 /**
  * {@link IItemList}の実装です。<br/>
  *
  * @author N3327 三浦 凌
  * @param <E> 保持するオブジェクトの型
- * @deprecated
- * {@link jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList}を使用して下さい。
  */
-@Deprecated
 public final class ItemList<E> implements IItemList<E>, Serializable {
 
     private final ArrayList<E> elements;
@@ -253,10 +250,5 @@ public final class ItemList<E> implements IItemList<E>, Serializable {
             list.add(item);
         }
         return new ItemList<>(list);
-    }
-
-    @Override
-    public boolean containsAll(jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList<?> items) {
-        return this.elements.containsAll(items.toList());
     }
 }

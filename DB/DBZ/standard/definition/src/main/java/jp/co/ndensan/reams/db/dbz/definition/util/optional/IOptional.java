@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.optional;
+package jp.co.ndensan.reams.db.dbz.definition.util.optional;
 
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IConsumer;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
 
 /**
@@ -15,11 +16,8 @@ import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
  *
  * @author N3327 三浦 凌
  * @param <T> nullかもしれないオブジェクトの型
- * @deprecated
- * {@link jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional}を使用して下さい。
  */
-@Deprecated
-public interface IOptional<T> extends jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional<T> {
+public interface IOptional<T> {
 
     /**
      * 保持する値を返します。<br/>
@@ -61,6 +59,28 @@ public interface IOptional<T> extends jp.co.ndensan.reams.db.dbz.definition.util
      * @throws X emptyの時
      */
     <X extends Throwable> T orElseThrow(ISupplier<X> exceptionSupplier) throws X;
+
+    /**
+     * 保持する値を指定の{@link IFunction mapper}により変換し、その結果を持った新しい{@link IOptional IOptional}として返します。
+     * emptyの場合は、戻り値の{@link IOptional IOptional}もemptyになります。
+     *
+     * @param <R> 変換後の{@link IOptional IOptional}が保持する型
+     * @param mapper 変換に用いる{@link IFunction mapper}
+     * @return 保持する値を変換した結果を持った{@link IOptional IOptional},
+     * emptyの場合はemptyな{@link IOptional IOptional}
+     */
+    <R> IOptional<R> map(IFunction<? super T, ? extends R> mapper);
+
+    /**
+     * 保持する値を指定の{@link IFunction mapper}により、別の{@link IOptional IOptional}として返します。
+     * emptyの場合は、戻り値の{@link IOptional IOptional}もemptyになります。
+     *
+     * @param <R> 変換後の{@link IOptional IOptional}が保持する型
+     * @param mapper 変換に用いる{@link IFunction mapper}
+     * @return 保持する値を変換した結果を持った{@link IOptional IOptional},
+     * emptyの場合はemptyな{@link IOptional IOptional}
+     */
+    <R> IOptional<R> flatMap(IFunction<? super T, IOptional<R>> mapper);
 
     /**
      * 保持する値が指定の{@link IPredicate IConditon}に当てはまるときは自身を、
