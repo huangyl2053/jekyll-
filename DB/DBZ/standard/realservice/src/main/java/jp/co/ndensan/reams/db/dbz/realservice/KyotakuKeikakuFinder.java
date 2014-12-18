@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.relate.KyotakuKeikakuRelateModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.persistence.relate.KyotakuKeikakuRelateDac;
+import jp.co.ndensan.reams.db.dbz.persistence.relate.KyotakuKeikakuDac;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -16,21 +16,21 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8187 久保田 英男
  */
-public class KyotakuKeikakuRelateFinder {
+public class KyotakuKeikakuFinder {
 
-    private final KyotakuKeikakuRelateDac dac;
+    private final KyotakuKeikakuDac dac;
 
     /**
      * コンストラクタです。
      */
-    public KyotakuKeikakuRelateFinder() {
-        dac = InstanceProvider.create(KyotakuKeikakuRelateDac.class);
+    public KyotakuKeikakuFinder() {
+        dac = InstanceProvider.create(KyotakuKeikakuDac.class);
     }
 
     /**
      * 単体テスト用のコンストラクタです。
      */
-    KyotakuKeikakuRelateFinder(KyotakuKeikakuRelateDac dac) {
+    KyotakuKeikakuFinder(KyotakuKeikakuDac dac) {
         this.dac = dac;
     }
 

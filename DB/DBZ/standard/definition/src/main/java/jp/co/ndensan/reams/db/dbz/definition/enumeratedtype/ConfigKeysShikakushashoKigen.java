@@ -10,7 +10,7 @@ package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
  *
  * @author N8187 久保田 英男
  */
-public enum ConfigKeysConfigKeysShikakushashoKigen {
+public enum ConfigKeysShikakushashoKigen {
 
     /**
      * コンフィグキーが「資格者証期限_有効期限加算値」であることを表します。

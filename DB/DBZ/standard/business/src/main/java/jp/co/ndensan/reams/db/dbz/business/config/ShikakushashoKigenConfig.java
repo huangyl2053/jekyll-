@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbz.business.config;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysConfigKeysShikakushashoKigen;
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysConfigKeysShikakushashoKigen.資格者証期限_有効期限初期表示;
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysConfigKeysShikakushashoKigen.資格者証期限_有効期限加算値;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysShikakushashoKigen;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysShikakushashoKigen.資格者証期限_有効期限初期表示;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysShikakushashoKigen.資格者証期限_有効期限加算値;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class ShikakushashoKigenConfig {
 
-    private final Map<ConfigKeysConfigKeysShikakushashoKigen, Integer> configs;
+    private final Map<ConfigKeysShikakushashoKigen, Integer> configs;
 
     /**
      * コンストラクタです。
@@ -42,10 +42,10 @@ public class ShikakushashoKigenConfig {
         this.configs = createMap(businessConfig);
     }
 
-    private Map<ConfigKeysConfigKeysShikakushashoKigen, Integer> createMap(IUrBusinessConfig businessConfig) {
-        Map<ConfigKeysConfigKeysShikakushashoKigen, Integer> map = new EnumMap<>(ConfigKeysConfigKeysShikakushashoKigen.class);
+    private Map<ConfigKeysShikakushashoKigen, Integer> createMap(IUrBusinessConfig businessConfig) {
+        Map<ConfigKeysShikakushashoKigen, Integer> map = new EnumMap<>(ConfigKeysShikakushashoKigen.class);
         RDate nowDate = RDate.getNowDate();
-        for (ConfigKeysConfigKeysShikakushashoKigen target : ConfigKeysConfigKeysShikakushashoKigen.values()) {
+        for (ConfigKeysShikakushashoKigen target : ConfigKeysShikakushashoKigen.values()) {
             Integer value = Integer.valueOf(businessConfig.get(target, nowDate).toString());
             map.put(target, value);
         }

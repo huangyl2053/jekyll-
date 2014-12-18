@@ -126,33 +126,33 @@ public class KyotakuKeikakuJikoSakuseiDacTest {
 
         @Test(expected = NullPointerException.class)
         public void 引数の被保険者番号にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select直近居宅給付計画自己作成ByKey(null, 証記載保険者番号1, 識別コード1, 対象年月1);
+            sut.select直近居宅給付計画自己作成(null, 証記載保険者番号1, 識別コード1, 対象年月1);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の証記載保険者番号にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select直近居宅給付計画自己作成ByKey(被保険者番号1, null, 識別コード1, 対象年月1);
+            sut.select直近居宅給付計画自己作成(被保険者番号1, null, 識別コード1, 対象年月1);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の識別コードにnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select直近居宅給付計画自己作成ByKey(被保険者番号1, 証記載保険者番号1, null, 対象年月1);
+            sut.select直近居宅給付計画自己作成(被保険者番号1, 証記載保険者番号1, null, 対象年月1);
         }
 
         @Test(expected = NullPointerException.class)
         public void 引数の対象年月にnullを指定した場合_NullPointerExceptionが発生する() {
-            sut.select直近居宅給付計画自己作成ByKey(被保険者番号1, 証記載保険者番号1, 識別コード1, null);
+            sut.select直近居宅給付計画自己作成(被保険者番号1, 証記載保険者番号1, 識別コード1, null);
         }
 
         @Test
         public void データが見つかる検索条件を渡すと_居宅給付計画自己作成モデル返す() {
-            assertThat(sut.select直近居宅給付計画自己作成ByKey(被保険者番号1, 証記載保険者番号1, 識別コード1, 対象年月1).get被保険者番号(), is(被保険者番号1));
+            assertThat(sut.select直近居宅給付計画自己作成(被保険者番号1, 証記載保険者番号1, 識別コード1, 対象年月1).get被保険者番号(), is(被保険者番号1));
         }
 
         // データが見つからない値を指定するように修正してください。
         @Test
         public void データが見つかない検索条件を渡すと_nullを返す() {
-            assertThat(sut.select直近居宅給付計画自己作成ByKey(被保険者番号2, 証記載保険者番号2, 識別コード1, 対象年月1), is(nullValue()));
+            assertThat(sut.select直近居宅給付計画自己作成(被保険者番号2, 証記載保険者番号2, 識別コード1, 対象年月1), is(nullValue()));
         }
     }
 

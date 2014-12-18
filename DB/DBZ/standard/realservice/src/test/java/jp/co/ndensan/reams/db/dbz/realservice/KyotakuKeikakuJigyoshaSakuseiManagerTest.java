@@ -97,7 +97,7 @@ public class KyotakuKeikakuJigyoshaSakuseiManagerTest {
 
             KyotakuKeikakuJigyoshaSakuseiModel 居宅給付計画事業者作成モデル = createModel();
 
-            when(dac.select直近居宅給付計画事業者作成ByKey(any(RString.class), any(RString.class), any(ShikibetsuCode.class),
+            when(dac.select直近居宅給付計画事業者作成(any(RString.class), any(RString.class), any(ShikibetsuCode.class),
                     any(FlexibleYearMonth.class))).thenReturn(居宅給付計画事業者作成モデル);
 
             KyotakuKeikakuJigyoshaSakuseiModel 居宅給付計画事業者作成 = sut.get直近居宅計画事業者作成(

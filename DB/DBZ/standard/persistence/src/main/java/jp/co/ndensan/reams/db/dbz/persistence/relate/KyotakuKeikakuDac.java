@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8187 久保田 英男
  */
-public class KyotakuKeikakuRelateDac {
+public class KyotakuKeikakuDac {
 
     private final KyotakuKeikakuTodokedeDac 居宅給付計画届出Dac = InstanceProvider.create(KyotakuKeikakuTodokedeDac.class);
     private final KyotakuKeikakuJigyoshaSakuseiDac 居宅給付計画事業者作成Dac = InstanceProvider.create(KyotakuKeikakuJigyoshaSakuseiDac.class);
@@ -97,7 +97,7 @@ public class KyotakuKeikakuRelateDac {
             RString 証記載保険者番号,
             ShikibetsuCode 識別コード,
             FlexibleYearMonth 対象年月) {
-        KyotakuKeikakuJigyoshaSakuseiModel model = 居宅給付計画事業者作成Dac.select直近居宅給付計画事業者作成ByKey(被保険者番号,
+        KyotakuKeikakuJigyoshaSakuseiModel model = 居宅給付計画事業者作成Dac.select直近居宅給付計画事業者作成(被保険者番号,
                 証記載保険者番号,
                 識別コード,
                 対象年月);
@@ -109,7 +109,7 @@ public class KyotakuKeikakuRelateDac {
             HokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             FlexibleYearMonth 対象年月) {
-        KyotakuKeikakuJikoSakuseiModel model = 居宅給付計画自己作成Dac.select直近居宅給付計画自己作成ByKey(被保険者番号,
+        KyotakuKeikakuJikoSakuseiModel model = 居宅給付計画自己作成Dac.select直近居宅給付計画自己作成(被保険者番号,
                 証記載保険者番号,
                 識別コード,
                 対象年月);

@@ -86,7 +86,7 @@ public class KyotakuKeikakuJikoSakuseiManager {
             HokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             FlexibleYearMonth 対象年月) {
-        return dac.select直近居宅給付計画自己作成ByKey(被保険者番号, 証記載保険者番号, 識別コード, 対象年月);
+        return dac.select直近居宅給付計画自己作成(被保険者番号, 証記載保険者番号, 識別コード, 対象年月);
     }
 
     /**

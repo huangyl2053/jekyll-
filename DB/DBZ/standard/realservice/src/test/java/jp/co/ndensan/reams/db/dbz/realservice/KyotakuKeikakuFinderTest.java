@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbz.model.relate.KyotakuKeikakuRelateModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.persistence.relate.KyotakuKeikakuRelateDac;
+import jp.co.ndensan.reams.db.dbz.persistence.relate.KyotakuKeikakuDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
@@ -31,20 +31,20 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * {link KyotakuKeikakuRelateFinder}のテストクラスです。
+ * {link KyotakuKeikakuFinder}のテストクラスです。
  *
  * @author n8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class KyotakuKeikakuRelateFinderTest {
+public class KyotakuKeikakuFinderTest {
 
-    private static KyotakuKeikakuRelateDac dac;
-    private static KyotakuKeikakuRelateFinder sut;
+    private static KyotakuKeikakuDac dac;
+    private static KyotakuKeikakuFinder sut;
 
     @BeforeClass
     public static void test() {
-        dac = mock(KyotakuKeikakuRelateDac.class);
-        sut = new KyotakuKeikakuRelateFinder(dac);
+        dac = mock(KyotakuKeikakuDac.class);
+        sut = new KyotakuKeikakuFinder(dac);
     }
 
     public static class find居宅計画履歴一覧Test extends DbzTestBase {

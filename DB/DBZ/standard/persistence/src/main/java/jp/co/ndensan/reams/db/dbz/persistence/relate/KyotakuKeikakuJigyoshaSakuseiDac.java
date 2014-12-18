@@ -96,7 +96,7 @@ public class KyotakuKeikakuJigyoshaSakuseiDac implements IModifiable<KyotakuKeik
      * @return KyotakuKeikakuJigyoshaSakuseiModel
      */
     @Transaction
-    public KyotakuKeikakuJigyoshaSakuseiModel select直近居宅給付計画事業者作成ByKey(RString 被保険者番号,
+    public KyotakuKeikakuJigyoshaSakuseiModel select直近居宅給付計画事業者作成(RString 被保険者番号,
             RString 証記載保険者番号,
             ShikibetsuCode 識別コード,
             FlexibleYearMonth 対象年月) {

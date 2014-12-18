@@ -33,14 +33,14 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * {@link KyotakuKeikakuRelateDac}のテストクラスです。
+ * {@link KyotakuKeikakuDac}のテストクラスです。
  *
  * @author n8187 久保田 英男
  */
 @RunWith(Enclosed.class)
-public class KyotakuKeikakuRelateDacTest {
+public class KyotakuKeikakuDacTest {
 
-    private static KyotakuKeikakuRelateDac sut;
+    private static KyotakuKeikakuDac sut;
     private static DbT3005KyotakuKeikakuTodokedeDac 居宅給付計画届出Dac;
     private static DbT3006KyotakuKeikakuJigyoshaSakuseiDac 居宅給付計画事業者作成Dac;
     private static DbT3007KyotakuKeikakuJikoSakuseiDac 居宅給付計画自己作成Dac;
@@ -83,7 +83,7 @@ public class KyotakuKeikakuRelateDacTest {
 
     @BeforeClass
     public static void setUpClass() {
-        sut = InstanceProvider.create(KyotakuKeikakuRelateDac.class);
+        sut = InstanceProvider.create(KyotakuKeikakuDac.class);
         居宅給付計画届出Dac = InstanceProvider.create(DbT3005KyotakuKeikakuTodokedeDac.class);
         居宅給付計画事業者作成Dac = InstanceProvider.create(DbT3006KyotakuKeikakuJigyoshaSakuseiDac.class);
         居宅給付計画自己作成Dac = InstanceProvider.create(DbT3007KyotakuKeikakuJikoSakuseiDac.class);

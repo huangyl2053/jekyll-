@@ -22,6 +22,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -92,6 +94,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
         List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(eq(DbT1001HihokenshaDaicho.hihokenshaNo, 被保険者番号)).
+                order(by(DbT1001HihokenshaDaicho.shoriTimestamp, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
 
         if (被保険者台帳List.isEmpty()) {

@@ -97,7 +97,7 @@ public class JukyushaDaichoDac implements IModifiable<JukyushaDaichoModel> {
         List<DbT4001JukyushaDaichoEntity> 受給者台帳List = accessor.select().
                 table(DbT4001JukyushaDaicho.class).
                 where(eq(DbT4001JukyushaDaicho.hihokenshaNo, 被保険者番号)).
-                order(by(DbT4001JukyushaDaicho.shoriTimeStamp, Order.DESC)).
+                order(by(DbT4001JukyushaDaicho.shinseishoKanriNo, Order.DESC)).
                 toList(DbT4001JukyushaDaichoEntity.class);
 
         List<JukyushaDaichoModel> list = new ArrayList<>();
