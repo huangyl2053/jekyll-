@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GunNamePrin
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.KatagakiPrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ShichosonNamePrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushoEditPattern;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -55,33 +55,33 @@ public interface IHokensha {
      *
      * @return 群名を印字するかどうかの区分
      */
-    GunNamePrint get群名表示有無();
+    GunNamePrint get群名印字有無();
 
     /**
      * 都道府県名を印字するかどうかの区分を返します。
      *
      * @return 都道府県名を印字するかどうかの区分
      */
-    TodofukenNamePrint get都道府県名表示有無();
+    TodofukenNamePrint get都道府名印字有無();
 
     /**
      * 市町村名を印字するかどうかの区分を返します。
      *
      * @return 市町村名を印字するかどうかの区分
      */
-    ShichosonNamePrint get市町村名表示有無();
+    ShichosonNamePrint get市町村名印字有無();
 
     /**
      * 方書を印字するかどうかの区分を返します。
      *
      * @return 方書を印字するかどうかの区分
      */
-    KatagakiPrint get方書表示有無();
+    KatagakiPrint get方書印字有無();
 
     /**
-     * 住所の編集方法を返します。
+     * 帳票に印字する住所の編集方法を返します。
      *
      * @return 住所の編集方法
      */
-    JushoEditPattern get住所編集方法();
+    JushoEditPattern get印字住所編集方法();
 }

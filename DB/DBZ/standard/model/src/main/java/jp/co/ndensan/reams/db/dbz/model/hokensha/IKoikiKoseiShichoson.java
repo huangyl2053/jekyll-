@@ -3,21 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.koiki;
+package jp.co.ndensan.reams.db.dbz.model.hokensha;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ForeignersNameOutput;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TopPriorityArea;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.koiki.GappeiKyuShichosonKubun;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.koiki.GappeiKyuShichosonOutput;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.koiki.RokenJukyushaNoTaikei;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.koiki.UnyoKeitaiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.koiki.ShichosonShikibetsuID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.koiki.GappeiLinkNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.koiki.KokuhorenKoikiShichosonNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.koiki.RokenShichosonNo;
-import jp.co.ndensan.reams.db.dbz.model.hokensha.IHokensha;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GappeiKyuShichosonKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GappeiKyuShichosonHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.RokenJukyushaNoTaikei;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.UnyoKeitaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.ShichosonShikibetsuID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.GappeiChiikiNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.KokuhorenKoikiShichosonNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.RokenShichosonNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -36,11 +35,11 @@ public interface IKoikiKoseiShichoson extends IHokensha {
     ShichosonShikibetsuID get市町村識別ID();
 
     /**
-     * 市町村コード(5桁)を返します。
+     * 市町村コードを返します。
      *
-     * @return {@link ShichosonCode 市町村コード}
+     * @return {@link LasdecCode 市町村コード}
      */
-    ShichosonCode get市町村コード();
+    LasdecCode get市町村コード();
 
     /**
      * 国保連広域内市町村番号を返します。
@@ -129,16 +128,16 @@ public interface IKoikiKoseiShichoson extends IHokensha {
     /**
      * 合併旧市町村で表示をする必要がある市町村かどうかを返します。
      *
-     * @return {@link GappeiKyuShichosonOutput 合併旧市町村表示有無}
+     * @return {@link GappeiKyuShichosonHyoji 合併旧市町村表示有無}
      */
-    public GappeiKyuShichosonOutput get合併旧市町村表示有無();
+    public GappeiKyuShichosonHyoji get合併旧市町村表示有無();
 
     /**
-     * 合併情報地域番号を返します。
+     * 合併地域番号を返します。
      *
-     * @return {@link GappeiLinkNo 合併情報地域番号}
+     * @return {@link GappeiChiikiNo get合併情報リンク番号}
      */
-    public GappeiLinkNo get合併情報地域番号();
+    public GappeiChiikiNo get合併地域番号();
 
     /**
      * 運用保険者番号を返します。

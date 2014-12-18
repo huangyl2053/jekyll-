@@ -3,12 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model;
+package jp.co.ndensan.reams.db.dbz.model.hokensha;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ForeignersNameOutput;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GunNamePrint;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.KatagakiPrint;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ShichosonNamePrint;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNamePrint;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TopPriorityArea;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GappeiKyuShichosonHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GappeiKyuShichosonKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.RokenJukyushaNoTaikei;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.UnyoKeitaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.GappeiChiikiNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.KokuhorenKoikiShichosonNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.RokenShichosonNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushoEditPattern;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -22,10 +37,26 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * 構成市町村マスタのモデルクラスです。
  *
  * @author LDNS 宋文娟
+ * @author N3327 三浦 凌
  */
-public class KoseiShichosonMasterModel implements Serializable {
+public class KoseiShichosonMasterModel implements IKoikiKoseiShichoson, Serializable {
 
     private DbT7051KoseiShichosonMasterEntity entity;
+    private transient ShichosonShikibetsuID shichosonShikibetsuId;
+    private transient KokuhorenKoikiShichosonNo kokuhorenKoikiShichosonNo;
+    private transient TopPriorityArea topPriorityArea;
+    private transient TodofukenNamePrint todofukenNamePrint;
+    private transient GunNamePrint gunNamePrint;
+    private transient ShichosonNamePrint shichosonNamePrint;
+    private transient JushoEditPattern jushoEditPattern;
+    private transient KatagakiPrint katagakiPrint;
+    private transient ForeignersNameOutput foreignersNameOutput;
+    private transient RokenShichosonNo rokenShichosonNo;
+    private transient RokenJukyushaNoTaikei rokenJukyushaNoTaikei;
+    private transient GappeiKyuShichosonKubun gappeiKyuShichosonKubun;
+    private transient GappeiKyuShichosonHyoji gappeiShichosonHyoji;
+    private transient GappeiChiikiNo gappeiChiikiNo;
+    private transient UnyoKeitaiKubun unyoKeitaiKubun;
 
     /**
      * コンストラクタです。
@@ -61,265 +92,191 @@ public class KoseiShichosonMasterModel implements Serializable {
         this.entity = entity;
     }
 
-    /**
-     * 市町村識別IDを返します。
-     *
-     * @return 市町村識別ID
-     */
-    public RString get市町村識別ID() {
-        return entity.getShichosonShokibetsuID();
+    @Override
+    public ShichosonShikibetsuID get市町村識別ID() {
+        if (shichosonShikibetsuId == null) {
+            shichosonShikibetsuId = new ShichosonShikibetsuID(entity.getShichosonShokibetsuID());
+        }
+        return shichosonShikibetsuId;
     }
 
-    /**
-     * 市町村コードを返します。
-     *
-     * @return 市町村コード
-     */
+    @Override
     public LasdecCode get市町村コード() {
         return entity.getShichosonCode();
     }
 
-    /**
-     * 証記載保険者番号を返します。
-     *
-     * @return 証記載保険者番号
-     */
+    @Override
     public ShoKisaiHokenshaNo get証記載保険者番号() {
         return entity.getShoKisaiHokenshaNo();
     }
 
-    /**
-     * 国保連広域内市町村番号を返します。
-     *
-     * @return 国保連広域内市町村番号
-     */
-    public RString get国保連広域内市町村番号() {
-        return entity.getKokuhorenKoikiShichosonNo();
+    @Override
+    public KokuhorenKoikiShichosonNo get国保連広域内市町村番号() {
+        if (kokuhorenKoikiShichosonNo == null) {
+            kokuhorenKoikiShichosonNo = new KokuhorenKoikiShichosonNo(entity.getKokuhorenKoikiShichosonNo());
+        }
+        return kokuhorenKoikiShichosonNo;
     }
 
-    /**
-     * 市町村名称を返します。
-     *
-     * @return 市町村名称
-     */
-    public RString get市町村名称() {
+    @Override
+    public RString get市町村名() {
         return entity.getShichosonMeisho();
     }
 
-    /**
-     * 都道府県名称を返します。
-     *
-     * @return 都道府県名称
-     */
-    public RString get都道府県名称() {
+    @Override
+    public RString get都道府県名() {
         return entity.getTodofukenMeisho();
     }
 
-    /**
-     * 郡名称を返します。
-     *
-     * @return 郡名称
-     */
-    public RString get郡名称() {
+    @Override
+    public RString get郡名() {
         return entity.getGunMeisho();
     }
 
-    /**
-     * 郵便番号を返します。
-     *
-     * @return 郵便番号
-     */
+    @Override
     public YubinNo get郵便番号() {
         return entity.getYubinNo();
     }
 
-    /**
-     * 住所を返します。
-     *
-     * @return 住所
-     */
+    @Override
     public AtenaJusho get住所() {
         return entity.getJusho();
     }
 
-    /**
-     * 電話番号を返します。
-     *
-     * @return 電話番号
-     */
+    @Override
     public TelNo get電話番号() {
         return entity.getTelNo();
     }
 
-    /**
-     * 最優先地区コードを返します。
-     *
-     * @return 最優先地区コード
-     */
-    public RString get最優先地区コード() {
-        return entity.getYusenChikuCode();
+    @Override
+    public TopPriorityArea get最優先地区() {
+        if (topPriorityArea == null) {
+            topPriorityArea = TopPriorityArea.toValue(entity.getYusenChikuCode());
+        }
+        return topPriorityArea;
     }
 
-    /**
-     * 帳票用都道府県名称表示有無を返します。
-     *
-     * @return 帳票用都道府県名称表示有無
-     */
-    public RString get帳票用都道府県名称表示有無() {
-        return entity.getTyohyoTodoufukenHyojiUmu();
+    @Override
+    public JushoEditPattern get印字住所編集方法() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /**
-     * 帳票用郡名称表示有無を返します。
-     *
-     * @return 帳票用郡名称表示有無
-     */
-    public RString get帳票用郡名称表示有無() {
-        return entity.getTyohyoGunHyojiUmu();
+    @Override
+    public TodofukenNamePrint get都道府名印字有無() {
+        if (todofukenNamePrint == null) {
+            todofukenNamePrint = TodofukenNamePrint.toValue(entity.getTyohyoTodoufukenHyojiUmu());
+        }
+        return todofukenNamePrint;
     }
 
-    /**
-     * 帳票用市町村名称表示有無を返します。
-     *
-     * @return 帳票用市町村名称表示有無
-     */
-    public RString get帳票用市町村名称表示有無() {
-        return entity.getTyohyoShichosonHyojiUmu();
+    @Override
+    public GunNamePrint get群名印字有無() {
+        if (gunNamePrint == null) {
+            gunNamePrint = GunNamePrint.toValue(entity.getTyohyoGunHyojiUmu());
+        }
+        return gunNamePrint;
     }
 
-    /**
-     * 帳票用住所編集方法を返します。
-     *
-     * @return 帳票用住所編集方法
-     */
-    public RString get帳票用住所編集方法() {
-        return entity.getTyohyoJushoHenshuHouhou();
+    @Override
+    public ShichosonNamePrint get市町村名印字有無() {
+        if (shichosonNamePrint == null) {
+            shichosonNamePrint = ShichosonNamePrint.toValue(entity.getTyohyoShichosonHyojiUmu());
+        }
+        return shichosonNamePrint;
     }
 
-    /**
-     * 帳票用方書表示有無を返します。
-     *
-     * @return 帳票用方書表示有無
-     */
-    public RString get帳票用方書表示有無() {
-        return entity.getTyohyoKatagakiHyojiUmu();
+    @Override
+    public KatagakiPrint get方書印字有無() {
+        if (katagakiPrint == null) {
+            katagakiPrint = KatagakiPrint.toValue(entity.getTyohyoKatagakiHyojiUmu());
+        }
+        return katagakiPrint;
     }
 
-    /**
-     * 外国人氏名表示方法を返します。
-     *
-     * @return 外国人氏名表示方法
-     */
-    public RString get外国人氏名表示方法() {
-        return entity.getGaikokujinHyojiHouhou();
+    @Override
+    public ForeignersNameOutput get外国人氏名表示方法() {
+        if (foreignersNameOutput == null) {
+            foreignersNameOutput = ForeignersNameOutput.toValue(entity.getGaikokujinHyojiHouhou());
+        }
+        return foreignersNameOutput;
     }
 
-    /**
-     * 老人保健市町村番号を返します。
-     *
-     * @return 老人保健市町村番号
-     */
-    public RString get老人保健市町村番号() {
-        return entity.getRojinhokenShichosonNo();
+    @Override
+    public RokenShichosonNo get老人保健市町村番号() {
+        if (rokenShichosonNo == null) {
+            rokenShichosonNo = new RokenShichosonNo(entity.getRojinhokenShichosonNo());
+        }
+        return rokenShichosonNo;
     }
 
-    /**
-     * 老人保健受給者番号体系を返します。
-     *
-     * @return 老人保健受給者番号体系
-     */
-    public RString get老人保健受給者番号体系() {
-        return entity.getRokenJukyushaNoTaikei();
+    @Override
+    public RokenJukyushaNoTaikei get老人保健受給者番号体系() {
+        if (rokenJukyushaNoTaikei == null) {
+            rokenJukyushaNoTaikei = RokenJukyushaNoTaikei.toValue(entity.getRokenJukyushaNoTaikei());
+        }
+        return rokenJukyushaNoTaikei;
     }
 
-    /**
-     * 移行日を返します。
-     *
-     * @return 移行日
-     */
+    @Override
     public FlexibleDate get移行日() {
         return entity.getIkoYMD();
     }
 
-    /**
-     * 加入日を返します。
-     *
-     * @return 加入日
-     */
+    @Override
     public FlexibleDate get加入日() {
         return entity.getKanyuYMD();
     }
 
-    /**
-     * 離脱日を返します。
-     *
-     * @return 離脱日
-     */
+    @Override
     public FlexibleDate get離脱日() {
         return entity.getRidatsuYMD();
     }
 
-    /**
-     * 合併旧市町村区分を返します。
-     *
-     * @return 合併旧市町村区分
-     */
-    public RString get合併旧市町村区分() {
-        return entity.getGappeiKyuShichosonKubun();
+    @Override
+    public GappeiKyuShichosonKubun get合併旧市町村区分() {
+        if (gappeiKyuShichosonKubun == null) {
+            gappeiKyuShichosonKubun = GappeiKyuShichosonKubun.toValue(entity.getGappeiKyuShichosonKubun());
+        }
+        return gappeiKyuShichosonKubun;
     }
 
-    /**
-     * 合併旧市町村表示有無を返します。
-     *
-     * @return 合併旧市町村表示有無
-     */
-    public RString get合併旧市町村表示有無() {
-        return entity.getGappeiKyuShichosonHyojiUmu();
+    @Override
+    public GappeiKyuShichosonHyoji get合併旧市町村表示有無() {
+        if (gappeiShichosonHyoji == null) {
+            gappeiShichosonHyoji = GappeiKyuShichosonHyoji.toValue(entity.getGappeiKyuShichosonHyojiUmu());
+        }
+        return gappeiShichosonHyoji;
     }
 
-    /**
-     * 合併情報リンク番号を返します。
-     *
-     * @return 合併情報リンク番号
-     */
-    public RString get合併情報リンク番号() {
-        return entity.getGappeiChiikiNo();
+    @Override
+    public GappeiChiikiNo get合併地域番号() {
+        if (gappeiChiikiNo == null) {
+            gappeiChiikiNo = new GappeiChiikiNo(entity.getGappeiChiikiNo());
+        }
+        return gappeiChiikiNo;
     }
 
-    /**
-     * 運用保険者番号を返します。
-     *
-     * @return 運用保険者番号
-     */
+    @Override
     public ShoKisaiHokenshaNo get運用保険者番号() {
         return entity.getUnyoHokenshaNo();
     }
 
-    /**
-     * 運用開始日を返します。
-     *
-     * @return 運用開始日
-     */
+    @Override
     public FlexibleDate get運用開始日() {
         return entity.getUnyoKaishiYMD();
     }
 
-    /**
-     * 運用終了日を返します。
-     *
-     * @return 運用終了日
-     */
+    @Override
     public FlexibleDate get運用終了日() {
         return entity.getUnyoShuryoYMD();
     }
 
-    /**
-     * 運用形態区分を返します。
-     *
-     * @return 運用形態区分
-     */
-    public RString get運用形態区分() {
-        return entity.getUnyoKeitaiKubun();
+    @Override
+    public UnyoKeitaiKubun get運用形態区分() {
+        if (unyoKeitaiKubun == null) {
+            unyoKeitaiKubun = UnyoKeitaiKubun.toValue(entity.getUnyoKeitaiKubun());
+        }
+        return unyoKeitaiKubun;
     }
 
     /**
@@ -327,9 +284,10 @@ public class KoseiShichosonMasterModel implements Serializable {
      *
      * @param 市町村識別ID 市町村識別ID
      */
-    public void set市町村識別ID(RString 市町村識別ID) {
+    public void set市町村識別ID(ShichosonShikibetsuID 市町村識別ID) {
         requireNonNull(市町村識別ID, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村識別ID"));
-        entity.setShichosonShokibetsuID(市町村識別ID);
+        entity.setShichosonShokibetsuID(市町村識別ID.value());
+        this.shichosonShikibetsuId = 市町村識別ID;
     }
 
     /**
@@ -357,9 +315,10 @@ public class KoseiShichosonMasterModel implements Serializable {
      *
      * @param 国保連広域内市町村番号 国保連広域内市町村番号
      */
-    public void set国保連広域内市町村番号(RString 国保連広域内市町村番号) {
+    public void set国保連広域内市町村番号(KokuhorenKoikiShichosonNo 国保連広域内市町村番号) {
         requireNonNull(国保連広域内市町村番号, UrSystemErrorMessages.値がnull.getReplacedMessage("国保連広域内市町村番号"));
-        entity.setKokuhorenKoikiShichosonNo(国保連広域内市町村番号);
+        entity.setKokuhorenKoikiShichosonNo(国保連広域内市町村番号.value());
+        this.kokuhorenKoikiShichosonNo = 国保連広域内市町村番号;
     }
 
     /**
@@ -423,13 +382,14 @@ public class KoseiShichosonMasterModel implements Serializable {
     }
 
     /**
-     * 最優先地区コードを設定します。
+     * 最優先地区を設定します。
      *
-     * @param 最優先地区コード 最優先地区コード
+     * @param 最優先地区 最優先地区
      */
-    public void set最優先地区コード(RString 最優先地区コード) {
-        requireNonNull(最優先地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("最優先地区コード"));
-        entity.setYusenChikuCode(最優先地区コード);
+    public void set最優先地区(TopPriorityArea 最優先地区) {
+        requireNonNull(最優先地区, UrSystemErrorMessages.値がnull.getReplacedMessage("最優先地区"));
+        entity.setYusenChikuCode(最優先地区.code());
+        this.topPriorityArea = 最優先地区;
     }
 
     /**
@@ -437,9 +397,10 @@ public class KoseiShichosonMasterModel implements Serializable {
      *
      * @param 帳票用都道府県名称表示有無 帳票用都道府県名称表示有無
      */
-    public void set帳票用都道府県名称表示有無(RString 帳票用都道府県名称表示有無) {
+    public void set都道府県名印字有無(TodofukenNamePrint 帳票用都道府県名称表示有無) {
         requireNonNull(帳票用都道府県名称表示有無, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票用都道府県名称表示有無"));
-        entity.setTyohyoTodoufukenHyojiUmu(帳票用都道府県名称表示有無);
+        entity.setTyohyoTodoufukenHyojiUmu(帳票用都道府県名称表示有無.code());
+        this.todofukenNamePrint = 帳票用都道府県名称表示有無;
     }
 
     /**
@@ -447,9 +408,10 @@ public class KoseiShichosonMasterModel implements Serializable {
      *
      * @param 帳票用郡名称表示有無 帳票用郡名称表示有無
      */
-    public void set帳票用郡名称表示有無(RString 帳票用郡名称表示有無) {
+    public void set郡名印字有無(GunNamePrint 帳票用郡名称表示有無) {
         requireNonNull(帳票用郡名称表示有無, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票用郡名称表示有無"));
-        entity.setTyohyoGunHyojiUmu(帳票用郡名称表示有無);
+        entity.setTyohyoGunHyojiUmu(帳票用郡名称表示有無.code());
+        this.gunNamePrint = 帳票用郡名称表示有無;
     }
 
     /**
@@ -457,9 +419,10 @@ public class KoseiShichosonMasterModel implements Serializable {
      *
      * @param 帳票用市町村名称表示有無 帳票用市町村名称表示有無
      */
-    public void set帳票用市町村名称表示有無(RString 帳票用市町村名称表示有無) {
+    public void set市町村名印字有無(ShichosonNamePrint 帳票用市町村名称表示有無) {
         requireNonNull(帳票用市町村名称表示有無, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票用市町村名称表示有無"));
-        entity.setTyohyoShichosonHyojiUmu(帳票用市町村名称表示有無);
+        entity.setTyohyoShichosonHyojiUmu(帳票用市町村名称表示有無.code());
+        this.shichosonNamePrint = 帳票用市町村名称表示有無;
     }
 
     /**
@@ -467,7 +430,7 @@ public class KoseiShichosonMasterModel implements Serializable {
      *
      * @param 帳票用住所編集方法 帳票用住所編集方法
      */
-    public void set帳票用住所編集方法(RString 帳票用住所編集方法) {
+    public void set印字住所編集方法(RString 帳票用住所編集方法) {
         requireNonNull(帳票用住所編集方法, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票用住所編集方法"));
         entity.setTyohyoJushoHenshuHouhou(帳票用住所編集方法);
     }
@@ -477,9 +440,10 @@ public class KoseiShichosonMasterModel implements Serializable {
      *
      * @param 帳票用方書表示有無 帳票用方書表示有無
      */
-    public void set帳票用方書表示有無(RString 帳票用方書表示有無) {
+    public void set方書印字有無(KatagakiPrint 帳票用方書表示有無) {
         requireNonNull(帳票用方書表示有無, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票用方書表示有無"));
-        entity.setTyohyoKatagakiHyojiUmu(帳票用方書表示有無);
+        entity.setTyohyoKatagakiHyojiUmu(帳票用方書表示有無.code());
+        this.katagakiPrint = 帳票用方書表示有無;
     }
 
     /**
@@ -487,9 +451,10 @@ public class KoseiShichosonMasterModel implements Serializable {
      *
      * @param 外国人氏名表示方法 外国人氏名表示方法
      */
-    public void set外国人氏名表示方法(RString 外国人氏名表示方法) {
+    public void set外国人氏名表示方法(ForeignersNameOutput 外国人氏名表示方法) {
         requireNonNull(外国人氏名表示方法, UrSystemErrorMessages.値がnull.getReplacedMessage("外国人氏名表示方法"));
-        entity.setGaikokujinHyojiHouhou(外国人氏名表示方法);
+        entity.setGaikokujinHyojiHouhou(外国人氏名表示方法.code());
+        this.foreignersNameOutput = 外国人氏名表示方法;
     }
 
     /**
@@ -497,9 +462,10 @@ public class KoseiShichosonMasterModel implements Serializable {
      *
      * @param 老人保健市町村番号 老人保健市町村番号
      */
-    public void set老人保健市町村番号(RString 老人保健市町村番号) {
+    public void set老人保健市町村番号(RokenShichosonNo 老人保健市町村番号) {
         requireNonNull(老人保健市町村番号, UrSystemErrorMessages.値がnull.getReplacedMessage("老人保健市町村番号"));
-        entity.setRojinhokenShichosonNo(老人保健市町村番号);
+        entity.setRojinhokenShichosonNo(老人保健市町村番号.value());
+        this.rokenShichosonNo = 老人保健市町村番号;
     }
 
     /**
@@ -507,9 +473,10 @@ public class KoseiShichosonMasterModel implements Serializable {
      *
      * @param 老人保健受給者番号体系 老人保健受給者番号体系
      */
-    public void set老人保健受給者番号体系(RString 老人保健受給者番号体系) {
+    public void set老人保健受給者番号体系(RokenJukyushaNoTaikei 老人保健受給者番号体系) {
         requireNonNull(老人保健受給者番号体系, UrSystemErrorMessages.値がnull.getReplacedMessage("老人保健受給者番号体系"));
-        entity.setRokenJukyushaNoTaikei(老人保健受給者番号体系);
+        entity.setRokenJukyushaNoTaikei(老人保健受給者番号体系.code());
+        this.rokenJukyushaNoTaikei = 老人保健受給者番号体系;
     }
 
     /**
@@ -547,9 +514,10 @@ public class KoseiShichosonMasterModel implements Serializable {
      *
      * @param 合併旧市町村区分 合併旧市町村区分
      */
-    public void set合併旧市町村区分(RString 合併旧市町村区分) {
+    public void set合併旧市町村区分(GappeiKyuShichosonKubun 合併旧市町村区分) {
         requireNonNull(合併旧市町村区分, UrSystemErrorMessages.値がnull.getReplacedMessage("合併旧市町村区分"));
-        entity.setGappeiKyuShichosonKubun(合併旧市町村区分);
+        entity.setGappeiKyuShichosonKubun(合併旧市町村区分.code());
+        this.gappeiKyuShichosonKubun = 合併旧市町村区分;
     }
 
     /**
@@ -557,19 +525,21 @@ public class KoseiShichosonMasterModel implements Serializable {
      *
      * @param 合併旧市町村表示有無 合併旧市町村表示有無
      */
-    public void set合併旧市町村表示有無(RString 合併旧市町村表示有無) {
+    public void set合併旧市町村表示有無(GappeiKyuShichosonHyoji 合併旧市町村表示有無) {
         requireNonNull(合併旧市町村表示有無, UrSystemErrorMessages.値がnull.getReplacedMessage("合併旧市町村表示有無"));
-        entity.setGappeiKyuShichosonHyojiUmu(合併旧市町村表示有無);
+        entity.setGappeiKyuShichosonHyojiUmu(合併旧市町村表示有無.code());
+        this.gappeiShichosonHyoji = 合併旧市町村表示有無;
     }
 
     /**
-     * 合併情報リンク番号を設定します。
+     * 合併地域番号を設定します。
      *
-     * @param 合併情報リンク番号 合併情報リンク番号
+     * @param 合併地域番号 合併地域番号
      */
-    public void set合併情報リンク番号(RString 合併情報リンク番号) {
-        requireNonNull(合併情報リンク番号, UrSystemErrorMessages.値がnull.getReplacedMessage("合併情報リンク番号"));
-        entity.setGappeiChiikiNo(合併情報リンク番号);
+    public void set合併地域番号(GappeiChiikiNo 合併地域番号) {
+        requireNonNull(合併地域番号, UrSystemErrorMessages.値がnull.getReplacedMessage("合併情報リンク番号"));
+        entity.setGappeiChiikiNo(合併地域番号.value());
+        this.gappeiChiikiNo = 合併地域番号;
     }
 
     /**
@@ -607,9 +577,10 @@ public class KoseiShichosonMasterModel implements Serializable {
      *
      * @param 運用形態区分 運用形態区分
      */
-    public void set運用形態区分(RString 運用形態区分) {
+    public void set運用形態区分(UnyoKeitaiKubun 運用形態区分) {
         requireNonNull(運用形態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("運用形態区分"));
-        entity.setUnyoKeitaiKubun(運用形態区分);
+        entity.setUnyoKeitaiKubun(運用形態区分.code());
+        this.unyoKeitaiKubun = 運用形態区分;
     }
 
     /**
