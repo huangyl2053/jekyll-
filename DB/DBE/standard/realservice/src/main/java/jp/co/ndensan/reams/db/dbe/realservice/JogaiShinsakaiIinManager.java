@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbe.business.mapper.JogaiShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.JogaiShinsakaiIinEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.ShinsakaiIinJogaiJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.JogaiShinsakaiIinDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -53,7 +53,7 @@ public class JogaiShinsakaiIinManager {
      * @param 被保険者番号 被保険者番号
      * @return 除外対象審査会委員List
      */
-    public JogaiShinsakaiIinList get除外審査会委員List(ShoKisaiHokenshaNo 証記載保険者番号, KaigoHihokenshaNo 被保険者番号) {
+    public JogaiShinsakaiIinList get除外審査会委員List(ShoKisaiHokenshaNo 証記載保険者番号, HihokenshaNo 被保険者番号) {
         List<JogaiShinsakaiIinEntity> entities = jogaiShinsakaiIinDac.select(証記載保険者番号, 被保険者番号);
         return JogaiShinsakaiIinMapper.toJogaiShinsakaiIinList(entities);
     }

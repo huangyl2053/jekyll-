@@ -6,12 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.entity.helper;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceKomokuCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -51,7 +51,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityMock {
         entity.setInputShikibetsuNo(new RString("0001"));
         entity.setRecodeShubetsuCode(new RString("02"));
         entity.setShokisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("00000003")));
-        entity.setHiHokenshaNo(new KaigoHihokenshaNo(new RString("0000000004")));
+        entity.setHiHokenshaNo(new HihokenshaNo(new RString("0000000004")));
         entity.setServiceTeikyoYM(new FlexibleYearMonth("201401"));
         entity.setJigyoshoNo(new JigyoshaNo(new RString("0000000005")));
         entity.setToshiNo(new ToshiNo(new RString("0000000006")));

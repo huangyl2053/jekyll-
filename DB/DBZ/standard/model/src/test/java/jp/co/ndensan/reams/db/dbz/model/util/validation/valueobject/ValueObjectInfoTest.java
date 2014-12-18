@@ -26,31 +26,23 @@ public class ValueObjectInfoTest extends DbzTestBase {
     }
 
     @RunWith(Enclosed.class)
-    public static class Builder extends DbzTestBase {
+    public static class staticMethods extends DbzTestBase {
 
         public static class nullCheck extends DbzTestBase {
 
-            private ValueObjectInfo.Builder sut;
+            private ValueObjectInfo sut;
 
             @Test(expected = NullPointerException.class)
-            public void Builderは_コンストラクタ引数にnullのStringを受け取ったとき_NullPointerExceptionをスローする() {
-                sut = new ValueObjectInfo.Builder((String) null);
-            }
-
-            @Test(expected = NullPointerException.class)
-            public void Builderは_コンストラクタ引数にnullのRStringを受け取ったとき_NullPointerExceptionをスローする() {
-                sut = new ValueObjectInfo.Builder((RString) null);
-            }
-
-            @Test(expected = NullPointerException.class)
-            public void setUnitは_引数にnullを受け取ったとき_NullPointerExceptionをスローする() {
-                sut = new ValueObjectInfo.Builder(RString.EMPTY).setUnit(null);
-            }
-
-            @Test
-            public void testGetUnit() {
+            public void nameは_コンストラクタ引数にnullのStringを受け取ったとき_NullPointerExceptionをスローする() {
+                sut.displayName((String) null);
             }
         }
+    }
+
+    @RunWith(Enclosed.class)
+    public static class Builder extends DbzTestBase {
+
+        private static ValueObjectInfo sut;
 
         public static class build_setUnitを呼ばない extends DbzTestBase {
 
@@ -60,12 +52,12 @@ public class ValueObjectInfoTest extends DbzTestBase {
             @Before
             public void setUp() {
                 name = new RString("被保番号");
-                created = new ValueObjectInfo.Builder(name).build();
+                created = sut.displayName(name).build();
             }
 
             @Test
             public void setUnitを呼んでいないとき_buildは_getNameでコンストラクタ引数と同じ値を返す_IValueObjectInfoを生成する() {
-                assertThat(created.getName(), is(name));
+                assertThat(created.getDisplayName(), is(name));
             }
 
             @Test
@@ -84,12 +76,12 @@ public class ValueObjectInfoTest extends DbzTestBase {
             public void setUp() {
                 name = new RString("被保番号");
                 unit = Unit.文字;
-                created = new ValueObjectInfo.Builder(name).setUnit(unit).build();
+                created = sut.displayName(name).unit(unit).build();
             }
 
             @Test
             public void setUnitを呼んだとき_buildは_getNameでコンストラクタ引数と同じ値を返す_IValueObjectInfoを生成する() {
-                assertThat(created.getName(), is(name));
+                assertThat(created.getDisplayName(), is(name));
             }
 
             @Test

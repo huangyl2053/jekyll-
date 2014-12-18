@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbu.divcontroller;
 
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.SearchResultShoKaishuKanriDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.ShoKaishuJokyoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuJokyoShosaiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.dgShoKaishuJokyo_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyoshosai.ShoKaishuJokyoShosaiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyolist.dgShoKaishuJokyo_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;

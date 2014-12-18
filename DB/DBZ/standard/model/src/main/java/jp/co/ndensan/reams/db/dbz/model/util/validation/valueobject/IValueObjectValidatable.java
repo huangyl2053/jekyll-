@@ -12,9 +12,9 @@ import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
  * ValueObjectに対するバリデーションができることを表します。
  *
  * @author N3327 三浦 凌
- * @param <T> ValueObject
+ * @param <V>
  */
-public interface IValueObjectValidatable<T extends IValueObject> {
+public interface IValueObjectValidatable<V extends IValueObject> {
 
     /**
      * 引数のValueObjectをチェックして、{@link IValidationMessages バリデーションメッセージ}を返します。
@@ -22,5 +22,5 @@ public interface IValueObjectValidatable<T extends IValueObject> {
      * @param v ValueObject
      * @return バリデーションメッセージ
      */
-    IValidationMessages validate(T v);
+    IValidationMessages validate(V v);
 }

@@ -5,7 +5,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.PaymentDateDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PrintContentsSettingDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.printcontentssetting.PrintContentsSettingDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoChohyoShutsuryokujun.KaigoChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelPublish;
 

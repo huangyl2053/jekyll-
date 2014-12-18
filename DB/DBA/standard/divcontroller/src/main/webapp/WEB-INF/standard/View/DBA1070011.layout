@@ -1,0 +1,1558 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "TennyuTensyutsuHoryuTaishosha",
+   "items": [
+    {
+     "fieldName": "tabHoryuTaishosha",
+     "items": [
+      {
+       "fieldName": "tplTenshutsu",
+       "items": [
+        {
+         "fieldName": "dgTenshutsu",
+         "items": [],
+         "controlType": "DataGrid",
+         "width": "1080px",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "dgTenshutsu",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
+         "height": "490px",
+         "gridSetting": {
+          "rowHeight": 50,
+          "isMultiSelectable": false,
+          "isShowHeader": true,
+          "isShowFooter": true,
+          "isShowFilter": true,
+          "isShowFilterButton": true,
+          "isShowRowState": false,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": false,
+          "isShowDeleteButtonColumn": false,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
+          "selectLimitRowCount": 0,
+          "header": {
+           "combineColumns": [
+            {
+             "combineColumnName": "次の作業",
+             "combineItem": [
+              "nextWork"
+             ]
+            },
+            {
+             "combineColumnName": "選択",
+             "combineItem": [
+              "btnNext"
+             ]
+            },
+            {
+             "combineColumnName": "市町村",
+             "combineItem": [
+              "shichosonCodeAndshichosonMei"
+             ]
+            },
+            {
+             "combineColumnName": "被保番号",
+             "combineItem": [
+              "hihokenshaNoAndShikibetsuCode"
+             ]
+            },
+            {
+             "combineColumnName": "氏名",
+             "combineItem": [
+              "shimeiAndKanaShimei"
+             ]
+            },
+            {
+             "combineColumnName": "性別",
+             "combineItem": [
+              "gender"
+             ]
+            },
+            {
+             "combineColumnName": "住民種別",
+             "combineItem": [
+              "juminShubetsuAndDateOfBirth"
+             ]
+            },
+            {
+             "combineColumnName": "異動日",
+             "combineItem": [
+              "idoDateAndIdoJiyu"
+             ]
+            },
+            {
+             "combineColumnName": "転出予定住所",
+             "combineItem": [
+              "tennyuTenshutsuYoteiJusho"
+             ]
+            },
+            {
+             "combineColumnName": "転出予定全国住所コード",
+             "combineItem": [
+              "tennyuTenshutsuZenkokuJushoCode"
+             ]
+            }
+           ],
+           "frozenColumn": "hihokenshaNoAndShikibetsuCode",
+           "headerHeight": 0
+          },
+          "columns": [
+           {
+            "columnName": "",
+            "dataName": "nextWork",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 140,
+            "visible": true,
+            "cellType": 3,
+            "cellDetails": {
+             "cellType": 3,
+             "onChange": "",
+             "selectedItem": "1",
+             "dataSource": [
+              {
+               "key": "1",
+               "value": "資格喪失"
+              },
+              {
+               "key": "2",
+               "value": "住所地特例適用"
+              },
+              {
+               "key": "3",
+               "value": "保留の取消"
+              }
+             ]
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "nextWork"
+           },
+           {
+            "columnName": "",
+            "dataName": "btnNext",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 40,
+            "visible": true,
+            "cellType": 8,
+            "cellDetails": {
+             "cellType": 8,
+             "text": "...",
+             "onClick": "",
+             "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
+             "imageWidth": "20",
+             "imageHeight": "20"
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "btnNext"
+           },
+           {
+            "columnName": "",
+            "dataName": "shichosonCode",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0,
+             "isSetValueToToolTip": false
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shichosonCode"
+           },
+           {
+            "columnName": "",
+            "dataName": "shichosonCodeAndshichosonMei",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shichosonCodeAndshichosonMei"
+           },
+           {
+            "columnName": "被保番号",
+            "dataName": "hihokenshaNo",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "hihokenshaNo"
+           },
+           {
+            "columnName": "識別コード",
+            "dataName": "shikibetsuCode",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 100,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shikibetsuCode"
+           },
+           {
+            "columnName": "識別コード",
+            "dataName": "hihokenshaNoAndShikibetsuCode",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "hihokenshaNoAndShikibetsuCode"
+           },
+           {
+            "columnName": "氏名",
+            "dataName": "shimei",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 200,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0
+            },
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shimei"
+           },
+           {
+            "columnName": "カナ氏名",
+            "dataName": "kanaShimei",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 200,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0
+            },
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "kanaShimei"
+           },
+           {
+            "columnName": "",
+            "dataName": "shimeiAndKanaShimei",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 200,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shimeiAndKanaShimei"
+           },
+           {
+            "columnName": "",
+            "dataName": "gender",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 40,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "gender"
+           },
+           {
+            "columnName": "住民種別",
+            "dataName": "juminShubetsu",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "juminShubetsu"
+           },
+           {
+            "columnName": "生年月日",
+            "dataName": "dateOfBirth",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": false,
+            "cellType": 7,
+            "cellDetails": {
+             "cellType": 7,
+             "ymdKubun": 2,
+             "displayFormat": 0,
+             "onChange": "",
+             "isSetValueToToolTip": false,
+             "readOnly": true
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "dateOfBirth"
+           },
+           {
+            "columnName": "生年月日",
+            "dataName": "juminShubetsuAndDateOfBirth",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "juminShubetsuAndDateOfBirth"
+           },
+           {
+            "columnName": "異動日",
+            "dataName": "idoDate",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": false,
+            "cellType": 7,
+            "cellDetails": {
+             "cellType": 7,
+             "ymdKubun": 2,
+             "displayFormat": 0,
+             "onChange": "",
+             "isSetValueToToolTip": false,
+             "readOnly": true
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "idoDate"
+           },
+           {
+            "columnName": "異動事由",
+            "dataName": "idoJiyu",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "idoJiyu"
+           },
+           {
+            "columnName": "異動事由",
+            "dataName": "idoDateAndIdoJiyu",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 140,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "idoDateAndIdoJiyu"
+           },
+           {
+            "columnName": "",
+            "dataName": "tennyuTenshutsuYoteiJusho",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 220,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "tennyuTenshutsuYoteiJusho"
+           },
+           {
+            "columnName": "",
+            "dataName": "tennyuTenshutsuZenkokuJushoCode",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 220,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "tennyuTenshutsuZenkokuJushoCode"
+           }
+          ]
+         },
+         "onSort": "",
+         "onSelect": "",
+         "onSelectByDblClick": "",
+         "onSelectBySelectButton": "onSelectBySelectButton_dgTenshutsu",
+         "onSelectByModifyButton": "",
+         "onSelectByDeleteButton": "",
+         "onAfterRequest": "",
+         "onAfterRequestByDblClick": "",
+         "onAfterRequestBySelectButton": "",
+         "onAfterRequestByModifyButton": "",
+         "onAfterRequestByDeleteButton": "",
+         "onOnlyRow": "",
+         "onNoRow": "",
+         "onMultiRows": "",
+         "dataSource": [],
+         "sortOrder": "horyuJiyu",
+         "isAscending": true,
+         "filterList": [],
+         "activeRowId": -1,
+         "gridAction": []
+        }
+       ],
+       "controlType": "TabPanel",
+       "width": "XS",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "tplTenshutsu",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "title": "転出",
+       "onActive": "",
+       "onFirstActive": ""
+      },
+      {
+       "fieldName": "tplTennyu",
+       "items": [
+        {
+         "fieldName": "dgTennyu",
+         "items": [],
+         "controlType": "DataGrid",
+         "width": "1080px",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "dgTennyu",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
+         "height": "490px",
+         "gridSetting": {
+          "rowHeight": 50,
+          "isMultiSelectable": false,
+          "isShowHeader": true,
+          "isShowFooter": true,
+          "isShowFilter": true,
+          "isShowFilterButton": true,
+          "isShowRowState": false,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": false,
+          "isShowDeleteButtonColumn": false,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
+          "selectLimitRowCount": 0,
+          "header": {
+           "combineColumns": [
+            {
+             "combineColumnName": "次の作業",
+             "combineItem": [
+              "nextWork"
+             ]
+            },
+            {
+             "combineColumnName": "選択",
+             "combineItem": [
+              "btnNext"
+             ]
+            },
+            {
+             "combineColumnName": "市町村",
+             "combineItem": [
+              "shichosonCodeAndshichosonMei"
+             ]
+            },
+            {
+             "combineColumnName": "被保番号",
+             "combineItem": [
+              "hihokenshaNoAndShikibetsuCode"
+             ]
+            },
+            {
+             "combineColumnName": "氏名",
+             "combineItem": [
+              "shimeiAndKanaShimei"
+             ]
+            },
+            {
+             "combineColumnName": "性別",
+             "combineItem": [
+              "gender"
+             ]
+            },
+            {
+             "combineColumnName": "住民種別",
+             "combineItem": [
+              "juminShubetsuAndDateOfBirth"
+             ]
+            },
+            {
+             "combineColumnName": "異動日",
+             "combineItem": [
+              "idoDateAndIdoJiyu"
+             ]
+            },
+            {
+             "combineColumnName": "転入前住所",
+             "combineItem": [
+              "tennyuTenshutsuYoteiJusho"
+             ]
+            },
+            {
+             "combineColumnName": "転入前全国住所コード",
+             "combineItem": [
+              "tennyuTenshutsuZenkokuJushoCode"
+             ]
+            }
+           ],
+           "frozenColumn": "hihokenshaNoAndShikibetsuCode",
+           "headerHeight": 0
+          },
+          "columns": [
+           {
+            "columnName": "",
+            "dataName": "nextWork",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 140,
+            "visible": true,
+            "cellType": 3,
+            "cellDetails": {
+             "cellType": 3,
+             "onChange": "",
+             "selectedItem": "1",
+             "dataSource": [
+              {
+               "key": "1",
+               "value": "資格取得"
+              },
+              {
+               "key": "2",
+               "value": "他特例適用"
+              },
+              {
+               "key": "3",
+               "value": "除外者適用"
+              },
+              {
+               "key": "4",
+               "value": "保留の取消"
+              }
+             ]
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "nextWork"
+           },
+           {
+            "columnName": "",
+            "dataName": "btnNext",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 40,
+            "visible": true,
+            "cellType": 8,
+            "cellDetails": {
+             "cellType": 8,
+             "text": "...",
+             "onClick": "",
+             "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
+             "imageWidth": "20",
+             "imageHeight": "20"
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "btnNext"
+           },
+           {
+            "columnName": "市町村コード",
+            "dataName": "shichosonCode",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0,
+             "isSetValueToToolTip": false
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shichosonCode"
+           },
+           {
+            "columnName": "",
+            "dataName": "shichosonCodeAndshichosonMei",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shichosonCodeAndshichosonMei"
+           },
+           {
+            "columnName": "被保番号",
+            "dataName": "hihokenshaNo",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "hihokenshaNo"
+           },
+           {
+            "columnName": "識別コード",
+            "dataName": "shikibetsuCode",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 100,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shikibetsuCode"
+           },
+           {
+            "columnName": "識別コード",
+            "dataName": "hihokenshaNoAndShikibetsuCode",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "hihokenshaNoAndShikibetsuCode"
+           },
+           {
+            "columnName": "氏名",
+            "dataName": "shimei",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 200,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0
+            },
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shimei"
+           },
+           {
+            "columnName": "カナ氏名",
+            "dataName": "kanaShimei",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 200,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0
+            },
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "kanaShimei"
+           },
+           {
+            "columnName": "",
+            "dataName": "shimeiAndKanaShimei",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 200,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shimeiAndKanaShimei"
+           },
+           {
+            "columnName": "",
+            "dataName": "gender",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 40,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "gender"
+           },
+           {
+            "columnName": "住民種別",
+            "dataName": "juminShubetsu",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "juminShubetsu"
+           },
+           {
+            "columnName": "生年月日",
+            "dataName": "dateOfBirth",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": false,
+            "cellType": 7,
+            "cellDetails": {
+             "cellType": 7,
+             "ymdKubun": 2,
+             "displayFormat": 0,
+             "onChange": "",
+             "isSetValueToToolTip": false,
+             "readOnly": true
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "dateOfBirth"
+           },
+           {
+            "columnName": "生年月日",
+            "dataName": "juminShubetsuAndDateOfBirth",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "juminShubetsuAndDateOfBirth"
+           },
+           {
+            "columnName": "異動日",
+            "dataName": "idoDate",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": false,
+            "cellType": 7,
+            "cellDetails": {
+             "cellType": 7,
+             "ymdKubun": 2,
+             "displayFormat": 0,
+             "onChange": "",
+             "isSetValueToToolTip": false,
+             "readOnly": true
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "idoDate"
+           },
+           {
+            "columnName": "異動事由",
+            "dataName": "idoJiyu",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "idoJiyu"
+           },
+           {
+            "columnName": "異動事由",
+            "dataName": "idoDateAndIdoJiyu",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 140,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "idoDateAndIdoJiyu"
+           },
+           {
+            "columnName": "",
+            "dataName": "tennyuTenshutsuYoteiJusho",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 220,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "tennyuTenshutsuYoteiJusho"
+           },
+           {
+            "columnName": "",
+            "dataName": "tennyuTenshutsuZenkokuJushoCode",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 220,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "tennyuTenshutsuZenkokuJushoCode"
+           }
+          ]
+         },
+         "onSort": "",
+         "onSelect": "",
+         "onSelectByDblClick": "",
+         "onSelectBySelectButton": "onSelectBySelectButton_dgTennyu",
+         "onSelectByModifyButton": "",
+         "onSelectByDeleteButton": "",
+         "onAfterRequest": "",
+         "onAfterRequestByDblClick": "",
+         "onAfterRequestBySelectButton": "",
+         "onAfterRequestByModifyButton": "",
+         "onAfterRequestByDeleteButton": "",
+         "onOnlyRow": "",
+         "onNoRow": "",
+         "onMultiRows": "",
+         "dataSource": [],
+         "sortOrder": "horyuJiyu",
+         "isAscending": true,
+         "filterList": [],
+         "activeRowId": -1,
+         "gridAction": []
+        }
+       ],
+       "controlType": "TabPanel",
+       "width": "XS",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "tplTennyu",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "title": "転入",
+       "onActive": "",
+       "onFirstActive": ""
+      },
+      {
+       "fieldName": "tplKoiki",
+       "items": [
+        {
+         "fieldName": "dgKoiki",
+         "items": [],
+         "controlType": "DataGrid",
+         "width": "1080px",
+         "visible": true,
+         "displayNone": false,
+         "disabled": false,
+         "accessKey": "",
+         "nextFocusFieldName": "",
+         "wrap": false,
+         "dependencies": [],
+         "float": 0,
+         "toolTip": "",
+         "authorityMode": 0,
+         "marginLeft": "XS",
+         "marginRight": "XS",
+         "selectControlID": "dgKoiki",
+         "helpMessageID": "",
+         "jpControlName": "",
+         "readOnly": false,
+         "height": "490px",
+         "gridSetting": {
+          "rowHeight": 50,
+          "isMultiSelectable": false,
+          "isShowHeader": true,
+          "isShowFooter": true,
+          "isShowFilter": true,
+          "isShowFilterButton": true,
+          "isShowRowState": false,
+          "isShowSelectButtonColumn": false,
+          "isShowModifyButtonColumn": false,
+          "isShowDeleteButtonColumn": false,
+          "limitRowCount": 0,
+          "selectedRowCount": 0,
+          "selectLimitRowCount": 0,
+          "header": {
+           "combineColumns": [
+            {
+             "combineColumnName": "次の作業",
+             "combineItem": [
+              "nextWork"
+             ]
+            },
+            {
+             "combineColumnName": "選択",
+             "combineItem": [
+              "btnNext"
+             ]
+            },
+            {
+             "combineColumnName": "市町村",
+             "combineItem": [
+              "shichosonCodeAndshichosonMei"
+             ]
+            },
+            {
+             "combineColumnName": "被保険者番号",
+             "combineItem": [
+              "hihokenshaNoAndShikibetsuCode"
+             ]
+            },
+            {
+             "combineColumnName": "氏名",
+             "combineItem": [
+              "shimeiAndKanaShimei"
+             ]
+            },
+            {
+             "combineColumnName": "性別",
+             "combineItem": [
+              "gender"
+             ]
+            },
+            {
+             "combineColumnName": "住民種別",
+             "combineItem": [
+              "juminShubetsuAndDateOfBirth"
+             ]
+            },
+            {
+             "combineColumnName": "異動日",
+             "combineItem": [
+              "idoDateAndIdoJiyu"
+             ]
+            },
+            {
+             "combineColumnName": "転入転出予定住所",
+             "combineItem": [
+              "tennyuTenshutsuYoteiJusho"
+             ]
+            },
+            {
+             "combineColumnName": "転入前／転出後全国住所コード",
+             "combineItem": [
+              "tennyuTenshutsuZenkokuJushoCode"
+             ]
+            }
+           ],
+           "frozenColumn": "hihokenshaNoAndShikibetsuCode",
+           "headerHeight": 0
+          },
+          "columns": [
+           {
+            "columnName": "",
+            "dataName": "nextWork",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 140,
+            "visible": true,
+            "cellType": 3,
+            "cellDetails": {
+             "cellType": 3,
+             "onChange": "",
+             "selectedItem": "1",
+             "dataSource": [
+              {
+               "key": "1",
+               "value": "広域内転居"
+              },
+              {
+               "key": "2",
+               "value": "広域内住所地特例"
+              },
+              {
+               "key": "3",
+               "value": "保留の取消"
+              }
+             ]
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "nextWork"
+           },
+           {
+            "columnName": "",
+            "dataName": "btnNext",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 40,
+            "visible": true,
+            "cellType": 8,
+            "cellDetails": {
+             "cellType": 8,
+             "text": "...",
+             "onClick": "",
+             "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
+             "imageWidth": "20",
+             "imageHeight": "20"
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "btnNext"
+           },
+           {
+            "columnName": "市町村コード",
+            "dataName": "shichosonCode",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0,
+             "isSetValueToToolTip": false
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shichosonCode"
+           },
+           {
+            "columnName": "",
+            "dataName": "shichosonCodeAndshichosonMei",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shichosonCodeAndshichosonMei"
+           },
+           {
+            "columnName": "被保番号",
+            "dataName": "hihokenshaNo",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "hihokenshaNo"
+           },
+           {
+            "columnName": "識別コード",
+            "dataName": "shikibetsuCode",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 100,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shikibetsuCode"
+           },
+           {
+            "columnName": "識別コード",
+            "dataName": "hihokenshaNoAndShikibetsuCode",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "hihokenshaNoAndShikibetsuCode"
+           },
+           {
+            "columnName": "氏名",
+            "dataName": "shimei",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 200,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0
+            },
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shimei"
+           },
+           {
+            "columnName": "カナ氏名",
+            "dataName": "kanaShimei",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 200,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0
+            },
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "kanaShimei"
+           },
+           {
+            "columnName": "",
+            "dataName": "shimeiAndKanaShimei",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 200,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "shimeiAndKanaShimei"
+           },
+           {
+            "columnName": "",
+            "dataName": "gender",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 40,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "gender"
+           },
+           {
+            "columnName": "住民種別",
+            "dataName": "juminShubetsu",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": {
+             "cellType": 0
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "juminShubetsu"
+           },
+           {
+            "columnName": "生年月日",
+            "dataName": "dateOfBirth",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": false,
+            "cellType": 7,
+            "cellDetails": {
+             "cellType": 7,
+             "ymdKubun": 2,
+             "displayFormat": 0,
+             "onChange": "",
+             "isSetValueToToolTip": false,
+             "readOnly": true
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "dateOfBirth"
+           },
+           {
+            "columnName": "生年月日",
+            "dataName": "juminShubetsuAndDateOfBirth",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 120,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "juminShubetsuAndDateOfBirth"
+           },
+           {
+            "columnName": "異動日",
+            "dataName": "idoDate",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": false,
+            "cellType": 7,
+            "cellDetails": {
+             "cellType": 7,
+             "ymdKubun": 2,
+             "displayFormat": 0,
+             "onChange": "",
+             "isSetValueToToolTip": false,
+             "readOnly": true
+            },
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "idoDate"
+           },
+           {
+            "columnName": "異動事由",
+            "dataName": "idoJiyu",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 80,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "idoJiyu"
+           },
+           {
+            "columnName": "異動事由",
+            "dataName": "idoDateAndIdoJiyu",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 140,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "idoDateAndIdoJiyu"
+           },
+           {
+            "columnName": "",
+            "dataName": "tennyuTenshutsuYoteiJusho",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 220,
+            "visible": true,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 0,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "tennyuTenshutsuYoteiJusho"
+           },
+           {
+            "columnName": "",
+            "dataName": "tennyuTenshutsuZenkokuJushoCode",
+            "toolTip": "",
+            "bgColor": 0,
+            "width": 220,
+            "visible": false,
+            "cellType": 0,
+            "cellDetails": null,
+            "align": 1,
+            "resize": false,
+            "isPrivateInfo": false,
+            "sortKey": "tennyuTenshutsuZenkokuJushoCode"
+           }
+          ]
+         },
+         "onSort": "",
+         "onSelect": "",
+         "onSelectByDblClick": "",
+         "onSelectBySelectButton": "onSelectBySelectButton_dgKoiki",
+         "onSelectByModifyButton": "",
+         "onSelectByDeleteButton": "",
+         "onAfterRequest": "",
+         "onAfterRequestByDblClick": "",
+         "onAfterRequestBySelectButton": "",
+         "onAfterRequestByModifyButton": "",
+         "onAfterRequestByDeleteButton": "",
+         "onOnlyRow": "",
+         "onNoRow": "",
+         "onMultiRows": "",
+         "dataSource": [],
+         "sortOrder": "horyuJiyu",
+         "isAscending": true,
+         "filterList": [],
+         "activeRowId": -1,
+         "gridAction": []
+        }
+       ],
+       "controlType": "TabPanel",
+       "width": "XS",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "tplKoiki",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "title": "広域",
+       "onActive": "",
+       "onFirstActive": ""
+      }
+     ],
+     "controlType": "TabContainer",
+     "width": "1090px",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "tabHoryuTaishosha",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onChange": "",
+     "selectedItem": null,
+     "tabpanelPosition": [
+      "tplTenshutsu",
+      "tplTennyu",
+      "tplKoiki"
+     ],
+     "isDraggable": false,
+     "selectedItemFieldName": "tplKoiki",
+     "initialTab": 0,
+     "isLazyLoading": false
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0px",
+   "marginRight": "0px",
+   "selectControlID": "TennyuTensyutsuHoryuTaishosha",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "転入転出保留対象者一覧",
+   "isOpen": true,
+   "canOpenAndClose": false,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "TennyuTensyutsuHoryuTaishosha"
+    }
+   ],
+   "requestSettings": [],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorder": false,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "focusPositionID": "Page",
+   "canPost": true
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
+ "onLoad": "",
+ "title": "転入転出保留対象者管理",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "転入転出保留対象者管理",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "TennyuTensyutsuHoryuTaishosha",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": []
+  }
+ ],
+ "currentState": "転入転出保留対象者管理",
+ "id": "DBA1070011",
+ "WFParameter": [],
+ "UIContainerEventMapping": [],
+ "loadSequencePanelNames": [
+  [
+   "TennyuTensyutsuHoryuTaishosha"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": [
+  {
+   "commonButtonAreaId": "HoryuTaishoshaKanri",
+   "buttonSetting": "",
+   "states": [
+    {
+     "state": "転入転出保留対象者管理"
+    }
+   ],
+   "isFinishButtonOnTheRight": true,
+   "FinishButtonVisible": false,
+   "SuspendButtonVisible": false
+  }
+ ],
+ "packageName": ""
+}

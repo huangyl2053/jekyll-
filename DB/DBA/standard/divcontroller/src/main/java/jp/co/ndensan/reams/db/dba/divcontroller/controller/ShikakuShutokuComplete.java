@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.ShikakuShutokuCompleteDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.ShikakuShutokuTaishoshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoKanryoMessage;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
+//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoKanryoMessage;
+//import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+//import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 資格取得処理の完了を行うDivControllerです。
@@ -29,11 +29,11 @@ public class ShikakuShutokuComplete {
     public ResponseData onClick_btnSave(ShikakuShutokuCompleteDiv completeDiv, ShikakuShutokuTaishoshaJohoDiv taishoshaJohoDiv) {
         ResponseData<ShikakuShutokuCompleteDiv> response = new ResponseData<>();
 
-        AtenaShokaiSimpleDiv atena = taishoshaJohoDiv.getShikakuShutokuCommonJoho().getAtenaInfo();
-
-        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("資格取得登録を更新しました。"),
-                atena.getTxtShikibetsuCode().getValue(), atena.getTxtAtenaMeisho().getValue());
-
+//        AtenaShokaiSimpleDiv atena = taishoshaJohoDiv.getShikakuShutokuCommonJoho().getAtenaInfo();
+//
+//        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("資格取得登録を更新しました。"),
+//                atena.getTxtShikibetsuCode().getValue(), atena.getTxtAtenaMeisho().getValue());
+//
         response.data = completeDiv;
         return response;
     }

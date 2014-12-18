@@ -1,0 +1,165 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "YoguShinsaKanryoPanel",
+   "items": [
+    {
+     "fieldName": "KanryoMessage",
+     "items": [],
+     "controlType": "CommonChildDiv",
+     "width": "XS",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0em",
+     "marginRight": "0em",
+     "selectControlID": "KanryoMessage",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "relation": [],
+     "packageName": "",
+     "marginTop": "0em",
+     "marginBottom": "0em",
+     "businessId": "DBZ",
+     "controlName": "KaigoKanryoMessage",
+     "dataPassingForDialog": [],
+     "dialogOkEventNameForDialog": "",
+     "dialogCancelEventNameForDialog": "",
+     "canTransferEvent": true,
+     "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "KanryoMessage_width": "G12"
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": false,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "Default",
+   "marginRight": "Default",
+   "selectControlID": "YoguShinsaKanryoPanel",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "YoguShinsaKanryoPanel"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorder": true,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "focusPositionID": "Page",
+   "canPost": true
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
+ "onLoad": "",
+ "title": "福祉用具購入費支給申請一括審査・決定",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "更新完了",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "KanryoMessage",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "YoguShinsaKanryoPanel",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "supplementInfoPostParamData": [],
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "btnComplete",
+     "event": "onClick",
+     "transition": "終了"
+    }
+   ]
+  }
+ ],
+ "currentState": "All",
+ "id": "DBC0610013",
+ "WFParameter": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "complete",
+   "eventName": "YoguShinsaKanryoPanel.onLoad"
+  }
+ ],
+ "loadSequencePanelNames": [
+  [
+   "YoguShinsaKanryoPanel"
+  ],
+  [
+   "KanryoMessage"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": [],
+ "packageName": ""
+}

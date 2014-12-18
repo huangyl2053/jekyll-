@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.business.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
-import jp.co.ndensan.reams.ur.urz.business.jusho.IJusho;
+import jp.co.ndensan.reams.ur.urz.model.IJusho;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -35,7 +35,7 @@ public class ShisetsuNyutaishoMock {
                 new LasdecCode(new RString("123456")),
                 new ShikibetsuCode(new RString("1234567890")),
                 RDateTime.of(2014, 1, 10, 11, 12),
-                DaichoType.他市町村住所地特例者台帳,
+                DaichoType.他市町村住所地特例者,
                 create期間(),
                 create入所施設(),
                 new FlexibleDate("20110703"),

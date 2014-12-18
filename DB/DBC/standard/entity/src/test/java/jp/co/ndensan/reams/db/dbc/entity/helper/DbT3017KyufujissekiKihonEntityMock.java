@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.entity.helper;
 
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3017KyufujissekiKihonEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.HokenKyufuRitsu;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -53,7 +53,7 @@ public class DbT3017KyufujissekiKihonEntityMock {
         entity.setRecodeShubetsuCode(new RString("02"));
         entity.setKyufuSakuseiKubunCode(new RString("1"));
         entity.setHokenshaNo(new ShoKisaiHokenshaNo(new RString("00000003")));
-        entity.setHiHokenshaNo(new KaigoHihokenshaNo(new RString("0000000004")));
+        entity.setHiHokenshaNo(new HihokenshaNo(new RString("0000000004")));
         entity.setServiceTeikyoYM(new FlexibleYearMonth("201401"));
         entity.setKyufuJissekiKubunCode(new RString("2"));
         entity.setJigyoshoNo(new JigyoshaNo(new RString("0000000005")));

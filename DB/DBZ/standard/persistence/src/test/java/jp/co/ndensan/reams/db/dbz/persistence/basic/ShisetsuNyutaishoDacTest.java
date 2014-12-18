@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.helper.ShisetsuNyutaishoEntityMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -115,7 +116,7 @@ public class ShisetsuNyutaishoDacTest extends DbzTestDacBase {
         @Test
         public void 指定するデータがあり履歴もある時_select個人識別コード_基準日は_履歴最新の一件を返す() {
             DbT1004ShisetsuNyutaishoEntity result = sut.select(個人識別コード, 入所日);
-            DaichoType newest台帳種別 = DaichoType.適用除外者台帳;
+            DaichoType newest台帳種別 = DaichoType.適用除外者;
             assertThat(result.getDaichoShubetsu(), is(newest台帳種別.getCode()));
         }
 
@@ -124,11 +125,11 @@ public class ShisetsuNyutaishoDacTest extends DbzTestDacBase {
                     = ShisetsuNyutaishoEntityMock.create施設入退所Entity();
 
             entity.setShikibetsuCode(個人識別コード);
-            entity.setDaichoShubetsu(DaichoType.被保険者台帳.getCode());
+            entity.setDaichoShubetsu(DaichoType.被保険者.getCode());
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード);
-            entity.setDaichoShubetsu(DaichoType.適用除外者台帳.getCode());
+            entity.setDaichoShubetsu(DaichoType.適用除外者.getCode());
             sut.insert(entity);
         }
     }
@@ -167,23 +168,23 @@ public class ShisetsuNyutaishoDacTest extends DbzTestDacBase {
                     = ShisetsuNyutaishoEntityMock.create施設入退所Entity();
 
             entity.setShikibetsuCode(個人識別コード1);
-            entity.setShoriTimestamp(RDateTime.of(2010, 1, 10, 11, 12));
+            entity.setShoriTimestamp(new YMDHMS("20100110111200"));
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード2);
-            entity.setShoriTimestamp(RDateTime.of(2011, 1, 10, 11, 12));
+            entity.setShoriTimestamp(new YMDHMS("20110110111200"));
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード2);
-            entity.setShoriTimestamp(RDateTime.of(2012, 1, 10, 11, 12));
+            entity.setShoriTimestamp(new YMDHMS("20120110111200"));
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード1);
-            entity.setShoriTimestamp(RDateTime.of(2013, 1, 10, 11, 12));
+            entity.setShoriTimestamp(new YMDHMS("20130110111200"));
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード2);
-            entity.setShoriTimestamp(RDateTime.of(2014, 1, 10, 11, 12));
+            entity.setShoriTimestamp(new YMDHMS("20140110111200"));
             sut.insert(entity);
         }
     }
@@ -192,8 +193,8 @@ public class ShisetsuNyutaishoDacTest extends DbzTestDacBase {
 
         private static final ShikibetsuCode 個人識別コード1 = new ShikibetsuCode(new RString("1111111111"));
         private static final ShikibetsuCode 個人識別コード2 = new ShikibetsuCode(new RString("2222222222"));
-        private static final DaichoType 台帳種別1 = DaichoType.他市町村住所地特例者台帳;
-        private static final DaichoType 台帳種別2 = DaichoType.被保険者台帳;
+        private static final DaichoType 台帳種別1 = DaichoType.他市町村住所地特例者;
+        private static final DaichoType 台帳種別2 = DaichoType.被保険者;
 
         @Before
         public void setUp() {
@@ -203,13 +204,13 @@ public class ShisetsuNyutaishoDacTest extends DbzTestDacBase {
         @Test
         public void 指定する識別コードに対応するデータがない時_select個人識別コード_台帳種別は_空のリストを返す() {
             ShikibetsuCode notFound識別コード = new ShikibetsuCode(new RString("9999999999"));
-            List<DbT1004ShisetsuNyutaishoEntity> result = sut.select(notFound識別コード, DaichoType.被保険者台帳);
+            List<DbT1004ShisetsuNyutaishoEntity> result = sut.select(notFound識別コード, DaichoType.被保険者);
             assertThat(result, is(Collections.EMPTY_LIST));
         }
 
         @Test
         public void 指定する台帳種別に対応するデータがない時_select個人識別コード_台帳種別は_空のリストを返す() {
-            DaichoType notFound台帳種別 = DaichoType.適用除外者台帳;
+            DaichoType notFound台帳種別 = DaichoType.適用除外者;
             List<DbT1004ShisetsuNyutaishoEntity> result = sut.select(個人識別コード1, notFound台帳種別);
             assertThat(result, is(Collections.EMPTY_LIST));
         }
@@ -231,28 +232,28 @@ public class ShisetsuNyutaishoDacTest extends DbzTestDacBase {
                     = ShisetsuNyutaishoEntityMock.create施設入退所Entity();
 
             entity.setShikibetsuCode(個人識別コード1);
-            entity.setShoriTimestamp(RDateTime.of(2010, 1, 10, 11, 12));
-            entity.setDaichoShubetsu(DaichoType.他市町村住所地特例者台帳.getCode());
+            entity.setShoriTimestamp(new YMDHMS("20100110111200"));
+            entity.setDaichoShubetsu(DaichoType.他市町村住所地特例者.getCode());
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード2);
-            entity.setShoriTimestamp(RDateTime.of(2011, 1, 10, 11, 12));
-            entity.setDaichoShubetsu(DaichoType.被保険者台帳.getCode());
+            entity.setShoriTimestamp(new YMDHMS("20110110111200"));
+            entity.setDaichoShubetsu(DaichoType.被保険者.getCode());
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード2);
-            entity.setShoriTimestamp(RDateTime.of(2012, 1, 10, 11, 12));
-            entity.setDaichoShubetsu(DaichoType.被保険者台帳.getCode());
+            entity.setShoriTimestamp(new YMDHMS("20120110111200"));
+            entity.setDaichoShubetsu(DaichoType.被保険者.getCode());
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード1);
-            entity.setShoriTimestamp(RDateTime.of(2013, 1, 10, 11, 12));
-            entity.setDaichoShubetsu(DaichoType.被保険者台帳.getCode());
+            entity.setShoriTimestamp(new YMDHMS("20130110111200"));
+            entity.setDaichoShubetsu(DaichoType.被保険者.getCode());
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード2);
-            entity.setShoriTimestamp(RDateTime.of(2014, 1, 10, 11, 12));
-            entity.setDaichoShubetsu(DaichoType.適用除外者台帳.getCode());
+            entity.setShoriTimestamp(new YMDHMS("20140110111200"));
+            entity.setDaichoShubetsu(DaichoType.適用除外者.getCode());
             sut.insert(entity);
         }
     }

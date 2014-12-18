@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaicho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -60,11 +60,11 @@ public class Minashi2GoshaDaichoDacTest extends DbeTestDacBase {
 
     public static class insertのテスト extends DbeTestDacBase {
 
-        private KaigoHihokenshaNo 被保険者番号;
+        private HihokenshaNo 被保険者番号;
 
         @Test
         public void insert成功したら1を返す() {
-            被保険者番号 = new KaigoHihokenshaNo(new RString("0123400002"));
+            被保険者番号 = new HihokenshaNo(new RString("0123400002"));
             assertThat(sut.insert(createEntity(被保険者番号)), is(1));
         }
 
@@ -72,20 +72,20 @@ public class Minashi2GoshaDaichoDacTest extends DbeTestDacBase {
 
     public static class selectのテスト extends DbeTestDacBase {
 
-        private KaigoHihokenshaNo 被保険者番号1;
-        private KaigoHihokenshaNo 被保険者番号2;
-        private KaigoHihokenshaNo 被保険者番号3;
-        private KaigoHihokenshaNo 被保険者番号4;
-        private KaigoHihokenshaNo 被保険者番号5;
+        private HihokenshaNo 被保険者番号1;
+        private HihokenshaNo 被保険者番号2;
+        private HihokenshaNo 被保険者番号3;
+        private HihokenshaNo 被保険者番号4;
+        private HihokenshaNo 被保険者番号5;
 
         @Before
         public void setUp() {
 
-            被保険者番号1 = new KaigoHihokenshaNo(new RString("0123400000"));
-            被保険者番号2 = new KaigoHihokenshaNo(new RString("0123400002"));
-            被保険者番号3 = new KaigoHihokenshaNo(new RString("0123400003"));
-            被保険者番号4 = new KaigoHihokenshaNo(new RString("0123400004"));
-            被保険者番号5 = new KaigoHihokenshaNo(new RString("0123400005"));
+            被保険者番号1 = new HihokenshaNo(new RString("0123400000"));
+            被保険者番号2 = new HihokenshaNo(new RString("0123400002"));
+            被保険者番号3 = new HihokenshaNo(new RString("0123400003"));
+            被保険者番号4 = new HihokenshaNo(new RString("0123400004"));
+            被保険者番号5 = new HihokenshaNo(new RString("0123400005"));
 
             sut.insert(createEntity(被保険者番号1));
             sut.insert(createEntity(被保険者番号2));
@@ -109,7 +109,7 @@ public class Minashi2GoshaDaichoDacTest extends DbeTestDacBase {
         }
     }
 
-    private static DbT1012Minashi2GoshaDaichoEntity createEntity(KaigoHihokenshaNo 被保険者番号) {
+    private static DbT1012Minashi2GoshaDaichoEntity createEntity(HihokenshaNo 被保険者番号) {
 
         DbT1012Minashi2GoshaDaichoEntity entity = new DbT1012Minashi2GoshaDaichoEntity();
 

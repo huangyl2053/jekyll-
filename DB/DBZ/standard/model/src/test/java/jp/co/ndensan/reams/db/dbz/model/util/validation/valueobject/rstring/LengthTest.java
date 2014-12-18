@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.isA;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -29,7 +28,7 @@ import static org.mockito.Mockito.when;
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class LengthTest {
+public class LengthTest extends DbzTestBase {
 
     private static Length sut;
 
@@ -90,7 +89,7 @@ public class LengthTest {
         public void setUp() {
             length = 10;
             checker = sut.lessOrEqual(length);
-            info = new ValueObjectInfo.Builder("テスト").build();
+            info = ValueObjectInfo.displayName("テスト").build();
         }
 
         @Test
@@ -171,7 +170,7 @@ public class LengthTest {
         public void setUp() {
             length = 10;
             checker = sut.lessThan(length);
-            info = new ValueObjectInfo.Builder("テスト").build();
+            info = ValueObjectInfo.displayName("テスト").build();
         }
 
         @Test
@@ -240,7 +239,7 @@ public class LengthTest {
         public void setUp() {
             length = 10;
             checker = sut.equal(length);
-            info = new ValueObjectInfo.Builder("テスト").build();
+            info = ValueObjectInfo.displayName("テスト").build();
         }
 
         @Test
@@ -309,7 +308,7 @@ public class LengthTest {
         public void setUp() {
             length = 10;
             checker = sut.greaterOrEqual(length);
-            info = new ValueObjectInfo.Builder("テスト").build();
+            info = ValueObjectInfo.displayName("テスト").build();
         }
 
         @Test

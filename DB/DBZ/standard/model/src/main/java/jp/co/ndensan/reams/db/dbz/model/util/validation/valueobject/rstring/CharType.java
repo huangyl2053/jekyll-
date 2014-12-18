@@ -36,7 +36,7 @@ public enum CharType implements IValueObjectCheckable<RString> {
                 public IValidationMessages check(IValueObject<RString> value, IValueObjectInfo objInfo) {
                     IValidationMessages messages = ValidationMessagesFactory.createInstance();
                     if (!isValid(value)) {
-                        messages.add(getMessage(), objInfo.getName().toString(), "半角数字のみ");
+                        messages.add(getMessage(), objInfo.getDisplayName().toString(), "半角数字のみ");
                     }
                     return messages;
                 }
@@ -55,7 +55,7 @@ public enum CharType implements IValueObjectCheckable<RString> {
                 public IValidationMessages check(IValueObject<RString> value, IValueObjectInfo objInfo) {
                     IValidationMessages messages = ValidationMessagesFactory.createInstance();
                     if (!isValid(value)) {
-                        messages.add(getMessage(), objInfo.getName().toString(), "半角英数のみ");
+                        messages.add(getMessage(), objInfo.getDisplayName().toString(), "半角英数のみ");
                     }
                     return messages;
                 }

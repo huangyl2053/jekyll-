@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.definition.HikiwatashiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.NinteiShinseijiKubun;
@@ -25,7 +25,7 @@ public class RenkeiyoDataSofuKiroku {
 
     private final ShinseishoKanriNo 申請書管理番号;
     private final YMDHMS 処理日時;
-    private final KaigoHihokenshaNo 被保険者番号;
+    private final HihokenshaNo 被保険者番号;
     private final NinteiShinseijiKubun 認定申請時区分;
     private final HikiwatashiKubun 引渡し区分;
     private final RDateTime 引渡し日時;
@@ -48,7 +48,7 @@ public class RenkeiyoDataSofuKiroku {
      * @throws NullPointerException 引数がnullの場合
      */
     public RenkeiyoDataSofuKiroku(ShinseishoKanriNo 申請書管理番号, YMDHMS 処理日時,
-            KaigoHihokenshaNo 被保険者番号, NinteiShinseijiKubun 認定申請時区分,
+            HihokenshaNo 被保険者番号, NinteiShinseijiKubun 認定申請時区分,
             HikiwatashiKubun 引渡し区分, RDateTime 引渡し日時,
             SaiSoufuKubun 再送付区分, SaiChousaSoufuKubun 再調査送付区分,
             SaiIkenshoSoufuKubun 再意見書送付区分) throws NullPointerException {
@@ -94,7 +94,7 @@ public class RenkeiyoDataSofuKiroku {
      *
      * @return 被保険者番号
      */
-    public KaigoHihokenshaNo get被保険者番号() {
+    public HihokenshaNo get被保険者番号() {
         return 被保険者番号;
     }
 

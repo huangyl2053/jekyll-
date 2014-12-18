@@ -1,0 +1,2360 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;SogoShokaiFukushiYoguKonyuhiInfo&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;onClick_btnClose&quot;,&quot;heightForDialog&quot;:&quot;Auto&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.SogoShokaiFukushiYoguKonyuhiInfo"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G2 UzCompositeChild" id="SogoShokaiFukushiYoguKonyuhiInfo" style="margin: 0px 0em; width: auto;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;SogoShokaiFukushiYoguKonyuhiInfo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;SogoShokaiFukushiYoguKonyuhiInfo&quot;,&quot;title&quot;:&quot;福祉用具購入費情報&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;SogoShokaiFukushiYoguKonyuhiInfo&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dbu/db/dbu/SogoShokaiInfo/onLoad_FukushiYoguKonyuhiInfo&quot;},{&quot;eventName&quot;:&quot;onClick_btnSelectYoguKonyuhi&quot;,&quot;requestUrl&quot;:&quot;dbu/db/dbu/SogoShokaiInfo/onClick_btnSelectYoguKonyuhi&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="SogoShokaiFukushiYoguKonyuhiInfo_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">福祉用具購入費情報</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="SogoShokaiFukushiYoguKonyuhiInfo_panel_body_area"><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtTeikyoYM" style="width: 137px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtTeikyoYM&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;60px&quot;,&quot;selectControlID&quot;:&quot;txtTeikyoYM_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;提供年月&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;ymdKubun&quot;:1}"><span class="word-wrap-break-word Label-L text-align-right" id="txtTeikyoYM_labelL" style="width: 70px;"><span>提供年月</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtTeikyoYM_core" style="width: 60px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSeiriNo" style="width: 157px; height: 21px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtSeiriNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtSeiriNo_core&quot;,&quot;readOnly&quot;:true,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;整理番号&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeiriNo_labelL" style="width: 70px;"><span>整理番号</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input readonlyColor" id="txtSeiriNo_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtKyufuritsu" style="width: 118px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtKyufuritsu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;40px&quot;,&quot;selectControlID&quot;:&quot;txtKyufuritsu_core&quot;,&quot;readOnly&quot;:true,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;給付率&quot;,&quot;labelRText&quot;:&quot;％&quot;,&quot;labelLWidth&quot;:&quot;55px&quot;,&quot;labelRWidth&quot;:&quot;15px&quot;,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtKyufuritsu_labelL" style="width: 55px;"><span>給付率</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input readonlyColor" id="txtKyufuritsu_core" style="width: 40px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span><span class="word-wrap-break-word Label-R text-align-left" id="txtKyufuritsu_labelR" style="width: 15px;"><span>％</span></span></div><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="dgYoguSeikyuDetail" style="width: 450px; height: 175px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgYoguSeikyuDetail&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;450px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;dgYoguSeikyuDetail&quot;,&quot;height&quot;:&quot;175px&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;btnSelect&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:35,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;&quot;,&quot;onClick&quot;:&quot;onClick_btnSelectYoguKonyuhi&quot;,&quot;imageFileUrl&quot;:&quot;/uz/uza/image/UZ_RowSelect_On.png&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;btnSelect&quot;},{&quot;columnName&quot;:&quot;購入日&quot;,&quot;dataName&quot;:&quot;txtBuyYMD&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtBuyYMD&quot;},{&quot;columnName&quot;:&quot;種目&quot;,&quot;dataName&quot;:&quot;txtShumoku&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtShumoku&quot;},{&quot;columnName&quot;:&quot;商品名&quot;,&quot;dataName&quot;:&quot;txtShohinName&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:210,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtShohinName&quot;},{&quot;columnName&quot;:&quot;購入金額&quot;,&quot;dataName&quot;:&quot;txtBuyAmount&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtBuyAmount&quot;},{&quot;columnName&quot;:&quot;審査方法&quot;,&quot;dataName&quot;:&quot;txtShinsaMethod&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtShinsaMethod&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgYoguSeikyuDetail_grid_table" role="" style="width: 450px; height: 150px; position: relative;"></div><div id="dgYoguSeikyuDetail_footer" style="width: 450px; height: 25px;"></div></div><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default UzCompositeChild" id="YoguKonyuhiShikyuShinseiSeikyuDetail" style="width: 405px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;YoguKonyuhiShikyuShinseiSeikyuDetail&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;405px&quot;,&quot;selectControlID&quot;:&quot;YoguKonyuhiShikyuShinseiSeikyuDetail&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;YoguKonyuhiShikyuShinseiSeikyuDetail&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="YoguKonyuhiShikyuShinseiSeikyuDetail_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete ui-droppable ui-sortable" id="YoguKonyuhiShikyuShinseiSeikyuDetail_panel_body_area"><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtBuyYMD" style="width: 172px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtBuyYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtBuyYMD_core&quot;,&quot;readOnly&quot;:true,&quot;textKind&quot;:0,&quot;labelLText&quot;:&quot;購入日&quot;,&quot;labelLWidth&quot;:&quot;85px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtBuyYMD_labelL" style="width: 85px;"><span>購入日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtBuyYMD_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtShumoku" style="width: 342px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShumoku&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;250px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtShumoku_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;種目&quot;,&quot;labelLWidth&quot;:&quot;85px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShumoku_labelL" style="width: 85px;"><span>種目</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtShumoku_core" style="width: 250px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtShohinName" style="width: 392px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShohinName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;300px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtShohinName_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;商品名&quot;,&quot;labelLWidth&quot;:&quot;85px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShohinName_labelL" style="width: 85px;"><span>商品名</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtShohinName_core" style="width: 300px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtSeizoJigyosha" style="width: 392px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtSeizoJigyosha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;300px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtSeizoJigyosha_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;製造事業者&quot;,&quot;labelLWidth&quot;:&quot;85px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSeizoJigyosha_labelL" style="width: 85px;"><span>製造事業者</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtSeizoJigyosha_core" style="width: 300px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtHanbaiJigyosha" style="width: 392px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtHanbaiJigyosha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;300px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtHanbaiJigyosha_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;販売事業者&quot;,&quot;labelLWidth&quot;:&quot;85px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHanbaiJigyosha_labelL" style="width: 85px;"><span>販売事業者</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtHanbaiJigyosha_core" style="width: 300px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtBuyAmount" style="width: 172px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtBuyAmount&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtBuyAmount_core&quot;,&quot;readOnly&quot;:true,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;購入金額&quot;,&quot;labelLWidth&quot;:&quot;85px&quot;,&quot;isComma&quot;:true,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtBuyAmount_labelL" style="width: 85px;"><span>購入金額</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input readonlyColor" id="txtBuyAmount_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtHinmokuCode" style="width: 392px; height: 21px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtHinmokuCode&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;300px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtHinmokuCode_core&quot;,&quot;readOnly&quot;:true,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;品目コード&quot;,&quot;labelLWidth&quot;:&quot;85px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHinmokuCode_labelL" style="width: 85px;"><span>品目コード</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input readonlyColor" id="txtHinmokuCode_core" style="width: 300px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtShinsaMethod" style="width: 172px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShinsaMethod&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtShinsaMethod_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;審査方法&quot;,&quot;labelLWidth&quot;:&quot;85px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShinsaMethod_labelL" style="width: 85px;"><span>審査方法</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtShinsaMethod_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></div><div title="" class="UzTablePanel FloatLeft JSControl controlMargin-M Width-XS ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="tblYoguSeikyuSummary" data-control-type="TablePanel" data-obj="{&quot;fieldName&quot;:&quot;tblYoguSeikyuSummary&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TablePanel&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;tblYoguSeikyuSummary&quot;,&quot;html&quot;:&quot;<table border='1'>\n  <tbody>\n    <tr><td id='R1C1' bgcolor=\&quot;#d7ebf6\&quot;></td><td id='R1C2' bgcolor=\&quot;#d7ebf6\&quot;></td><td id='R1C3' bgcolor=\&quot;#d7ebf6\&quot;></td><td id='R1C4' bgcolor=\&quot;#d7ebf6\&quot;></td><td id='R1C5' bgcolor=\&quot;#d7ebf6\&quot;></td></tr>\n    <tr><td id='R2C1' bgcolor=\&quot;#d7ebf6\&quot;></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td></tr>\n    <tr><td id='R3C1' bgcolor=\&quot;#d7ebf6\&quot;></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td></tr>\n  </tbody>\n</table>\n&quot;}"><div id="tempDiv"></div><table border="1">  <tbody>    <tr><td id="R1C1" bgcolor="#d7ebf6" data-connect-tablepanel="tblYoguSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celYogu11" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celYogu11&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celYogu11&quot;,&quot;connectTd&quot;:&quot;R1C1&quot;}" data-connect-tablepanel="tblYoguSeikyuSummary" data-connect-td="R1C1"><span title="" class="UzLabel word-wrap-break-word JSControl controlMargin-M Width-XS ClearFloat FloatCenter text-align-center UzCompositeChild" id="lblYoguSummary" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblYoguSummary&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;displayNone&quot;:true,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;lblYoguSummary&quot;,&quot;text&quot;:&quot;集計&quot;,&quot;align&quot;:1}"><span>集計</span></span></div></td><td id="R1C2" bgcolor="#d7ebf6" data-connect-tablepanel="tblYoguSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celYogu12" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celYogu12&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celYogu12&quot;,&quot;connectTd&quot;:&quot;R1C2&quot;}" data-connect-tablepanel="tblYoguSeikyuSummary" data-connect-td="R1C2"><span title="" class="UzLabel word-wrap-break-word JSControl controlMargin-M ClearFloat FloatCenter text-align-center UzCompositeChild" id="lblYoguPayTotal" style="width: 115px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblYoguPayTotal&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;115px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;lblYoguPayTotal&quot;,&quot;text&quot;:&quot;支払金額合計&quot;,&quot;align&quot;:1}"><span>支払金額合計</span></span></div></td><td id="R1C3" bgcolor="#d7ebf6" data-connect-tablepanel="tblYoguSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celYogu13" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celYogu13&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celYogu13&quot;,&quot;connectTd&quot;:&quot;R1C3&quot;}" data-connect-tablepanel="tblYoguSeikyuSummary" data-connect-td="R1C3"><span title="" class="UzLabel word-wrap-break-word JSControl controlMargin-M ClearFloat FloatCenter text-align-center UzCompositeChild" id="lblYoguHokenSeikyuAmount" style="width: 115px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblYoguHokenSeikyuAmount&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;115px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;lblYoguHokenSeikyuAmount&quot;,&quot;text&quot;:&quot;保険請求額&quot;,&quot;align&quot;:1}"><span>保険請求額</span></span></div></td><td id="R1C4" bgcolor="#d7ebf6" data-connect-tablepanel="tblYoguSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celYogu14" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celYogu14&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celYogu14&quot;,&quot;connectTd&quot;:&quot;R1C4&quot;}" data-connect-tablepanel="tblYoguSeikyuSummary" data-connect-td="R1C4"><span title="" class="UzLabel word-wrap-break-word JSControl controlMargin-M ClearFloat FloatCenter text-align-center UzCompositeChild" id="lblYoguRiyoshaFutanAmount" style="width: 115px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblYoguRiyoshaFutanAmount&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;115px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;lblYoguRiyoshaFutanAmount&quot;,&quot;text&quot;:&quot;利用者負担額&quot;,&quot;align&quot;:1}"><span>利用者負担額</span></span></div></td><td id="R1C5" bgcolor="#d7ebf6" data-connect-tablepanel="tblYoguSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celYogu15" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celYogu15&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celYogu15&quot;,&quot;connectTd&quot;:&quot;R1C5&quot;}" data-connect-tablepanel="tblYoguSeikyuSummary" data-connect-td="R1C5"><span title="" class="UzLabel word-wrap-break-word JSControl controlMargin-M ClearFloat FloatCenter text-align-center UzCompositeChild" id="lblYoguLimitOverAmount" style="width: 115px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblYoguLimitOverAmount&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;115px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;lblYoguLimitOverAmount&quot;,&quot;text&quot;:&quot;限度超過額&quot;,&quot;align&quot;:1}"><span>限度超過額</span></span></div></td></tr>    <tr><td id="R2C1" bgcolor="#d7ebf6" data-connect-tablepanel="tblYoguSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celYogu21" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celYogu21&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celYogu21&quot;,&quot;connectTd&quot;:&quot;R2C1&quot;}" data-connect-tablepanel="tblYoguSeikyuSummary" data-connect-td="R2C1"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS text-align-right UzCompositeChild" id="lblYoguSummaryMae" style="width: 150px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblYoguSummaryMae&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;selectControlID&quot;:&quot;lblYoguSummaryMae&quot;,&quot;text&quot;:&quot;前回までの支払結果&quot;}"><span>前回までの支払結果</span></span></div></td><td id="R2C2" data-connect-tablepanel="tblYoguSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celYogu22" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celYogu22&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celYogu22&quot;,&quot;connectTd&quot;:&quot;R2C2&quot;}" data-connect-tablepanel="tblYoguSeikyuSummary" data-connect-td="R2C2"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl controlMargin-M ClearFloat FloatCenter UzCompositeChild" id="txtYoguPayTotalMae" style="width: 121px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtYoguPayTotalMae&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;txtYoguPayTotalMae_core&quot;,&quot;readOnly&quot;:true,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;90px&quot;,&quot;labelRWidth&quot;:&quot;15px&quot;,&quot;isComma&quot;:true,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><input tabindex="-1" class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input readonlyColor" id="txtYoguPayTotalMae_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></td><td id="R2C3" data-connect-tablepanel="tblYoguSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celYogu23" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celYogu23&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celYogu23&quot;,&quot;connectTd&quot;:&quot;R2C3&quot;}" data-connect-tablepanel="tblYoguSeikyuSummary" data-connect-td="R2C3"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl controlMargin-M ClearFloat FloatCenter UzCompositeChild" id="txtYoguHokenSeikyuAmountMae" style="width: 121px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtYoguHokenSeikyuAmountMae&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;txtYoguHokenSeikyuAmountMae_core&quot;,&quot;readOnly&quot;:true,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;90px&quot;,&quot;labelRWidth&quot;:&quot;15px&quot;,&quot;isComma&quot;:true,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><input tabindex="-1" class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input readonlyColor" id="txtYoguHokenSeikyuAmountMae_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></td><td id="R2C4" data-connect-tablepanel="tblYoguSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celYogu24" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celYogu24&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celYogu24&quot;,&quot;connectTd&quot;:&quot;R2C4&quot;}" data-connect-tablepanel="tblYoguSeikyuSummary" data-connect-td="R2C4"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl controlMargin-M ClearFloat FloatCenter UzCompositeChild" id="txtYoguRiyoshaFutanAmountMae" style="width: 121px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtYoguRiyoshaFutanAmountMae&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;txtYoguRiyoshaFutanAmountMae_core&quot;,&quot;readOnly&quot;:true,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;90px&quot;,&quot;labelRWidth&quot;:&quot;15px&quot;,&quot;isComma&quot;:true,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><input tabindex="-1" class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input readonlyColor" id="txtYoguRiyoshaFutanAmountMae_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></td><td id="R2C5" data-connect-tablepanel="tblYoguSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celYogu25" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celYogu25&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celYogu25&quot;,&quot;connectTd&quot;:&quot;R2C5&quot;}" data-connect-tablepanel="tblYoguSeikyuSummary" data-connect-td="R2C5"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl controlMargin-M ClearFloat FloatCenter UzCompositeChild" id="txtYoguLimitOverAmountMae" style="width: 121px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtYoguLimitOverAmountMae&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;txtYoguLimitOverAmountMae_core&quot;,&quot;readOnly&quot;:true,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;90px&quot;,&quot;labelRWidth&quot;:&quot;15px&quot;,&quot;isComma&quot;:true,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><input tabindex="-1" class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input readonlyColor" id="txtYoguLimitOverAmountMae_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></td></tr>    <tr><td id="R3C1" bgcolor="#d7ebf6" data-connect-tablepanel="tblYoguSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celYogu31" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celYogu31&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celYogu31&quot;,&quot;connectTd&quot;:&quot;R3C1&quot;}" data-connect-tablepanel="tblYoguSeikyuSummary" data-connect-td="R3C1"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS text-align-right UzCompositeChild" id="lblYoguSummaryNow" style="width: 150px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblYoguSummaryNow&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;selectControlID&quot;:&quot;lblYoguSummaryNow&quot;,&quot;text&quot;:&quot;今回の支払状況&quot;}"><span>今回の支払状況</span></span></div></td><td id="R3C2" data-connect-tablepanel="tblYoguSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celYogu32" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celYogu32&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celYogu32&quot;,&quot;connectTd&quot;:&quot;R3C2&quot;}" data-connect-tablepanel="tblYoguSeikyuSummary" data-connect-td="R3C2"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl controlMargin-M ClearFloat FloatCenter UzCompositeChild" id="txtYoguPayTotalNow" style="width: 118px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtYoguPayTotalNow&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;txtYoguPayTotalNow_core&quot;,&quot;readOnly&quot;:true,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;90px&quot;,&quot;labelRWidth&quot;:&quot;15px&quot;,&quot;isComma&quot;:true,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><input tabindex="-1" class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input readonlyColor" id="txtYoguPayTotalNow_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></td><td id="R3C3" data-connect-tablepanel="tblYoguSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celYogu33" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celYogu33&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celYogu33&quot;,&quot;connectTd&quot;:&quot;R3C3&quot;}" data-connect-tablepanel="tblYoguSeikyuSummary" data-connect-td="R3C3"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl controlMargin-M ClearFloat FloatCenter UzCompositeChild" id="txtYoguHokenSeikyuAmountNow" style="width: 118px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtYoguHokenSeikyuAmountNow&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;txtYoguHokenSeikyuAmountNow_core&quot;,&quot;readOnly&quot;:true,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;90px&quot;,&quot;labelRWidth&quot;:&quot;15px&quot;,&quot;isComma&quot;:true,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><input tabindex="-1" class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input readonlyColor" id="txtYoguHokenSeikyuAmountNow_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></td><td id="R3C4" data-connect-tablepanel="tblYoguSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celYogu34" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celYogu34&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celYogu34&quot;,&quot;connectTd&quot;:&quot;R3C4&quot;}" data-connect-tablepanel="tblYoguSeikyuSummary" data-connect-td="R3C4"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl controlMargin-M ClearFloat FloatCenter UzCompositeChild" id="txtYoguRiyoshaFutanAmountNow" style="width: 118px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtYoguRiyoshaFutanAmountNow&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;txtYoguRiyoshaFutanAmountNow_core&quot;,&quot;readOnly&quot;:true,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;90px&quot;,&quot;labelRWidth&quot;:&quot;15px&quot;,&quot;isComma&quot;:true,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><input tabindex="-1" class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input readonlyColor" id="txtYoguRiyoshaFutanAmountNow_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></td><td id="R3C5" data-connect-tablepanel="tblYoguSeikyuSummary"><div title="" class="UzTableCell FloatLeft JSControl controlMargin-M Width-XS ui-droppable ui-sortable UzCompositeChild" id="celYogu35" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celYogu35&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celYogu35&quot;,&quot;connectTd&quot;:&quot;R3C5&quot;}" data-connect-tablepanel="tblYoguSeikyuSummary" data-connect-td="R3C5"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl controlMargin-M ClearFloat FloatCenter UzCompositeChild" id="txtYoguLimitOverAmountNow" style="width: 118px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtYoguLimitOverAmountNow&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;txtYoguLimitOverAmountNow_core&quot;,&quot;readOnly&quot;:true,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLWidth&quot;:&quot;90px&quot;,&quot;labelRWidth&quot;:&quot;15px&quot;,&quot;isComma&quot;:true,&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><input tabindex="-1" class="UzTextBox CoreElement text-align-right ime-mode-Off ui-autocomplete-input readonlyColor" id="txtYoguLimitOverAmountNow_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></td></tr>  </tbody></table></div><button title="" class="UzButton JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnClose" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnClose&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnClose&quot;,&quot;onClick&quot;:&quot;onClick_btnClose&quot;,&quot;text&quot;:&quot;閉じる&quot;}"><span>閉じる</span></button></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiFukushiYoguKonyuhiInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnClose", {
+                get: function () {
+                    return "onClick_btnClose";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        SogoShokaiFukushiYoguKonyuhiInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "SogoShokaiFukushiYoguKonyuhiInfo";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.SogoShokaiFukushiYoguKonyuhiInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtTeikyoYM = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtTeikyoYM"));
+            };
+
+            Controls.prototype.txtSeiriNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtSeiriNo"));
+            };
+
+            Controls.prototype.txtKyufuritsu = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtKyufuritsu"));
+            };
+
+            Controls.prototype.dgYoguSeikyuDetail = function () {
+                return new UZA.DataGrid(this.convFiledName("dgYoguSeikyuDetail"));
+            };
+
+            Controls.prototype.YoguKonyuhiShikyuShinseiSeikyuDetail = function () {
+                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseiSeikyuDetail"));
+            };
+
+            Controls.prototype.txtBuyYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtBuyYMD"));
+            };
+
+            Controls.prototype.txtShumoku = function () {
+                return new UZA.TextBox(this.convFiledName("txtShumoku"));
+            };
+
+            Controls.prototype.txtShohinName = function () {
+                return new UZA.TextBox(this.convFiledName("txtShohinName"));
+            };
+
+            Controls.prototype.txtSeizoJigyosha = function () {
+                return new UZA.TextBox(this.convFiledName("txtSeizoJigyosha"));
+            };
+
+            Controls.prototype.txtHanbaiJigyosha = function () {
+                return new UZA.TextBox(this.convFiledName("txtHanbaiJigyosha"));
+            };
+
+            Controls.prototype.txtBuyAmount = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtBuyAmount"));
+            };
+
+            Controls.prototype.txtHinmokuCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtHinmokuCode"));
+            };
+
+            Controls.prototype.txtShinsaMethod = function () {
+                return new UZA.TextBox(this.convFiledName("txtShinsaMethod"));
+            };
+
+            Controls.prototype.tblYoguSeikyuSummary = function () {
+                return new UZA.TablePanel(this.convFiledName("tblYoguSeikyuSummary"));
+            };
+
+            Controls.prototype.celYogu11 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu11"));
+            };
+
+            Controls.prototype.lblYoguSummary = function () {
+                return new UZA.Label(this.convFiledName("lblYoguSummary"));
+            };
+
+            Controls.prototype.celYogu12 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu12"));
+            };
+
+            Controls.prototype.lblYoguPayTotal = function () {
+                return new UZA.Label(this.convFiledName("lblYoguPayTotal"));
+            };
+
+            Controls.prototype.celYogu13 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu13"));
+            };
+
+            Controls.prototype.lblYoguHokenSeikyuAmount = function () {
+                return new UZA.Label(this.convFiledName("lblYoguHokenSeikyuAmount"));
+            };
+
+            Controls.prototype.celYogu21 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu21"));
+            };
+
+            Controls.prototype.lblYoguSummaryMae = function () {
+                return new UZA.Label(this.convFiledName("lblYoguSummaryMae"));
+            };
+
+            Controls.prototype.celYogu22 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu22"));
+            };
+
+            Controls.prototype.txtYoguPayTotalMae = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtYoguPayTotalMae"));
+            };
+
+            Controls.prototype.celYogu23 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu23"));
+            };
+
+            Controls.prototype.txtYoguHokenSeikyuAmountMae = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtYoguHokenSeikyuAmountMae"));
+            };
+
+            Controls.prototype.celYogu31 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu31"));
+            };
+
+            Controls.prototype.lblYoguSummaryNow = function () {
+                return new UZA.Label(this.convFiledName("lblYoguSummaryNow"));
+            };
+
+            Controls.prototype.celYogu32 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu32"));
+            };
+
+            Controls.prototype.txtYoguPayTotalNow = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtYoguPayTotalNow"));
+            };
+
+            Controls.prototype.celYogu33 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu33"));
+            };
+
+            Controls.prototype.txtYoguHokenSeikyuAmountNow = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtYoguHokenSeikyuAmountNow"));
+            };
+
+            Controls.prototype.celYogu14 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu14"));
+            };
+
+            Controls.prototype.lblYoguRiyoshaFutanAmount = function () {
+                return new UZA.Label(this.convFiledName("lblYoguRiyoshaFutanAmount"));
+            };
+
+            Controls.prototype.celYogu15 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu15"));
+            };
+
+            Controls.prototype.lblYoguLimitOverAmount = function () {
+                return new UZA.Label(this.convFiledName("lblYoguLimitOverAmount"));
+            };
+
+            Controls.prototype.celYogu24 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu24"));
+            };
+
+            Controls.prototype.txtYoguRiyoshaFutanAmountMae = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtYoguRiyoshaFutanAmountMae"));
+            };
+
+            Controls.prototype.celYogu25 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu25"));
+            };
+
+            Controls.prototype.txtYoguLimitOverAmountMae = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtYoguLimitOverAmountMae"));
+            };
+
+            Controls.prototype.celYogu34 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu34"));
+            };
+
+            Controls.prototype.txtYoguRiyoshaFutanAmountNow = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtYoguRiyoshaFutanAmountNow"));
+            };
+
+            Controls.prototype.celYogu35 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu35"));
+            };
+
+            Controls.prototype.txtYoguLimitOverAmountNow = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtYoguLimitOverAmountNow"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        SogoShokaiFukushiYoguKonyuhiInfo.Controls = Controls;
+    })(DBZ.SogoShokaiFukushiYoguKonyuhiInfo || (DBZ.SogoShokaiFukushiYoguKonyuhiInfo = {}));
+    var SogoShokaiFukushiYoguKonyuhiInfo = DBZ.SogoShokaiFukushiYoguKonyuhiInfo;
+
+    var SogoShokaiFukushiYoguKonyuhiInfo_Design = (function (_super) {
+        __extends(SogoShokaiFukushiYoguKonyuhiInfo_Design, _super);
+        function SogoShokaiFukushiYoguKonyuhiInfo_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, SogoShokaiFukushiYoguKonyuhiInfo_Design.myLayout, fieldName);
+        }
+        SogoShokaiFukushiYoguKonyuhiInfo_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        SogoShokaiFukushiYoguKonyuhiInfo_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        SogoShokaiFukushiYoguKonyuhiInfo_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "SogoShokaiFukushiYoguKonyuhiInfo",
+                    "items": [
+                        {
+                            "fieldName": "txtTeikyoYM",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "60",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtTeikyoYM_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "提供年月",
+                            "labelRText": "",
+                            "labelLWidth": "70",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "ymdKubun": 1,
+                            "displayFormat": 0,
+                            "value": "",
+                            "permitCharactor": "./_-"
+                        },
+                        {
+                            "fieldName": "txtSeiriNo",
+                            "items": [],
+                            "controlType": "TextBoxCode",
+                            "width": "80",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSeiriNo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "整理番号",
+                            "labelRText": "",
+                            "labelLWidth": "70",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "textKind": 2,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": "",
+                            "formatLength": "10"
+                        },
+                        {
+                            "fieldName": "txtKyufuritsu",
+                            "items": [],
+                            "controlType": "TextBoxNum",
+                            "width": "40",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKyufuritsu_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "labelLText": "給付率",
+                            "labelRText": "％",
+                            "labelLWidth": "55",
+                            "labelRWidth": "15",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "value": "",
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 2,
+                            "textKind": 2,
+                            "isComboBox": false,
+                            "suggest": [],
+                            "decorationClass": "",
+                            "permitCharactor": "+-,.\\",
+                            "maxValue": 1.7976931348623157e+308,
+                            "minValue": 0,
+                            "isCurrency": false,
+                            "isComma": false,
+                            "decimalPointLength": 0
+                        },
+                        {
+                            "fieldName": "dgYoguSeikyuDetail",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "450",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "dgYoguSeikyuDetail",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "175",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": false,
+                                "isShowHeader": true,
+                                "isShowFooter": true,
+                                "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": false,
+                                "isShowSelectButtonColumn": false,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "",
+                                    "headerHeight": 0
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "",
+                                        "dataName": "btnSelect",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 35,
+                                        "visible": true,
+                                        "cellType": 8,
+                                        "cellDetails": {
+                                            "cellType": 8,
+                                            "text": "",
+                                            "onClick": "onClick_btnSelectYoguKonyuhi",
+                                            "imageFileUrl": "/uz/uza/image/UZ_RowSelect_On.png",
+                                            "imageWidth": "",
+                                            "imageHeight": ""
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "btnSelect"
+                                    },
+                                    {
+                                        "columnName": "購入日",
+                                        "dataName": "txtBuyYMD",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtBuyYMD"
+                                    },
+                                    {
+                                        "columnName": "種目",
+                                        "dataName": "txtShumoku",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 120,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtShumoku"
+                                    },
+                                    {
+                                        "columnName": "商品名",
+                                        "dataName": "txtShohinName",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 210,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtShohinName"
+                                    },
+                                    {
+                                        "columnName": "購入金額",
+                                        "dataName": "txtBuyAmount",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtBuyAmount"
+                                    },
+                                    {
+                                        "columnName": "審査方法",
+                                        "dataName": "txtShinsaMethod",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtShinsaMethod"
+                                    }
+                                ]
+                            },
+                            "onSort": "",
+                            "onSelect": "",
+                            "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "txtBuyAmount",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1
+                        },
+                        {
+                            "fieldName": "YoguKonyuhiShikyuShinseiSeikyuDetail",
+                            "items": [
+                                {
+                                    "fieldName": "txtBuyYMD",
+                                    "items": [],
+                                    "controlType": "TextBoxDate",
+                                    "width": "80",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtBuyYMD_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "購入日",
+                                    "labelRText": "",
+                                    "labelLWidth": "85",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "textKind": 0,
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "txtShumoku",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "250",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShumoku_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "種目",
+                                    "labelRText": "",
+                                    "labelLWidth": "85",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "decorationClass": "",
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "txtShohinName",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "300",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShohinName_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "商品名",
+                                    "labelRText": "",
+                                    "labelLWidth": "85",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "decorationClass": "",
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "txtSeizoJigyosha",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "300",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtSeizoJigyosha_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "製造事業者",
+                                    "labelRText": "",
+                                    "labelLWidth": "85",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "decorationClass": "",
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "txtHanbaiJigyosha",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "300",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtHanbaiJigyosha_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "販売事業者",
+                                    "labelRText": "",
+                                    "labelLWidth": "85",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "decorationClass": "",
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "txtBuyAmount",
+                                    "items": [],
+                                    "controlType": "TextBoxNum",
+                                    "width": "80",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtBuyAmount_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "購入金額",
+                                    "labelRText": "",
+                                    "labelLWidth": "85",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 2,
+                                    "textKind": 2,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "decorationClass": "",
+                                    "permitCharactor": "+-,.\\",
+                                    "maxValue": 1.7976931348623157e+308,
+                                    "minValue": 0,
+                                    "isCurrency": false,
+                                    "isComma": true,
+                                    "decimalPointLength": 0
+                                },
+                                {
+                                    "fieldName": "txtHinmokuCode",
+                                    "items": [],
+                                    "controlType": "TextBoxCode",
+                                    "width": "300",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtHinmokuCode_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "品目コード",
+                                    "labelRText": "",
+                                    "labelLWidth": "85",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 2,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "decorationClass": "",
+                                    "permitCharactor": "",
+                                    "formatLength": "16"
+                                },
+                                {
+                                    "fieldName": "txtShinsaMethod",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "80",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtShinsaMethod_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "labelLText": "審査方法",
+                                    "labelRText": "",
+                                    "labelLWidth": "85",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "decorationClass": "",
+                                    "permitCharactor": ""
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "405",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "YoguKonyuhiShikyuShinseiSeikyuDetail",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": true,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "YoguKonyuhiShikyuShinseiSeikyuDetail"
+                                }
+                            ],
+                            "requestSettings": [
+                                {
+                                    "eventName": "onLoad",
+                                    "requestUrl": ""
+                                }
+                            ],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": false,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 0,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto"
+                        },
+                        {
+                            "fieldName": "tblYoguSeikyuSummary",
+                            "items": [
+                                {
+                                    "fieldName": "celYogu11",
+                                    "items": [
+                                        {
+                                            "fieldName": "lblYoguSummary",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "XS",
+                                            "visible": true,
+                                            "displayNone": true,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblYoguSummary",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "集計",
+                                            "decorationClass": "",
+                                            "align": 1
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celYogu11",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R1C1"
+                                },
+                                {
+                                    "fieldName": "celYogu12",
+                                    "items": [
+                                        {
+                                            "fieldName": "lblYoguPayTotal",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "115",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblYoguPayTotal",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "支払金額合計",
+                                            "decorationClass": "",
+                                            "align": 1
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celYogu12",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R1C2"
+                                },
+                                {
+                                    "fieldName": "celYogu13",
+                                    "items": [
+                                        {
+                                            "fieldName": "lblYoguHokenSeikyuAmount",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "115",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblYoguHokenSeikyuAmount",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "保険請求額",
+                                            "decorationClass": "",
+                                            "align": 1
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celYogu13",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R1C3"
+                                },
+                                {
+                                    "fieldName": "celYogu21",
+                                    "items": [
+                                        {
+                                            "fieldName": "lblYoguSummaryMae",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "150",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblYoguSummaryMae",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "前回までの支払結果",
+                                            "decorationClass": "",
+                                            "align": 2
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celYogu21",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R2C1"
+                                },
+                                {
+                                    "fieldName": "celYogu22",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtYoguPayTotalMae",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "80",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtYoguPayTotalMae_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "labelLText": "",
+                                            "labelRText": "",
+                                            "labelLWidth": "90",
+                                            "labelRWidth": "15",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "value": "",
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "textKind": 2,
+                                            "isComboBox": false,
+                                            "suggest": [],
+                                            "decorationClass": "",
+                                            "permitCharactor": "+-,.\\",
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": 0
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celYogu22",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R2C2"
+                                },
+                                {
+                                    "fieldName": "celYogu23",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtYoguHokenSeikyuAmountMae",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "80",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtYoguHokenSeikyuAmountMae_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "labelLText": "",
+                                            "labelRText": "",
+                                            "labelLWidth": "90",
+                                            "labelRWidth": "15",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "value": "",
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "textKind": 2,
+                                            "isComboBox": false,
+                                            "suggest": [],
+                                            "decorationClass": "",
+                                            "permitCharactor": "+-,.\\",
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": 0
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celYogu23",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R2C3"
+                                },
+                                {
+                                    "fieldName": "celYogu31",
+                                    "items": [
+                                        {
+                                            "fieldName": "lblYoguSummaryNow",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "150",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblYoguSummaryNow",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "今回の支払状況",
+                                            "decorationClass": "",
+                                            "align": 2
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celYogu31",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R3C1"
+                                },
+                                {
+                                    "fieldName": "celYogu32",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtYoguPayTotalNow",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "80",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtYoguPayTotalNow_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "labelLText": "",
+                                            "labelRText": "",
+                                            "labelLWidth": "90",
+                                            "labelRWidth": "15",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "value": "",
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "textKind": 2,
+                                            "isComboBox": false,
+                                            "suggest": [],
+                                            "decorationClass": "",
+                                            "permitCharactor": "+-,.\\",
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": 0
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celYogu32",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R3C2"
+                                },
+                                {
+                                    "fieldName": "celYogu33",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtYoguHokenSeikyuAmountNow",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "80",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtYoguHokenSeikyuAmountNow_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "labelLText": "",
+                                            "labelRText": "",
+                                            "labelLWidth": "90",
+                                            "labelRWidth": "15",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "value": "",
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "textKind": 2,
+                                            "isComboBox": false,
+                                            "suggest": [],
+                                            "decorationClass": "",
+                                            "permitCharactor": "+-,.\\",
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": 0
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celYogu33",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R3C3"
+                                },
+                                {
+                                    "fieldName": "celYogu14",
+                                    "items": [
+                                        {
+                                            "fieldName": "lblYoguRiyoshaFutanAmount",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "115",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblYoguRiyoshaFutanAmount",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "利用者負担額",
+                                            "decorationClass": "",
+                                            "align": 1
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celYogu14",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R1C4"
+                                },
+                                {
+                                    "fieldName": "celYogu15",
+                                    "items": [
+                                        {
+                                            "fieldName": "lblYoguLimitOverAmount",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "115",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "lblYoguLimitOverAmount",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "限度超過額",
+                                            "decorationClass": "",
+                                            "align": 1
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celYogu15",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R1C5"
+                                },
+                                {
+                                    "fieldName": "celYogu24",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtYoguRiyoshaFutanAmountMae",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "80",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtYoguRiyoshaFutanAmountMae_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "labelLText": "",
+                                            "labelRText": "",
+                                            "labelLWidth": "90",
+                                            "labelRWidth": "15",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "value": "",
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "textKind": 2,
+                                            "isComboBox": false,
+                                            "suggest": [],
+                                            "decorationClass": "",
+                                            "permitCharactor": "+-,.\\",
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": 0
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celYogu24",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R2C4"
+                                },
+                                {
+                                    "fieldName": "celYogu25",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtYoguLimitOverAmountMae",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "80",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtYoguLimitOverAmountMae_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "labelLText": "",
+                                            "labelRText": "",
+                                            "labelLWidth": "90",
+                                            "labelRWidth": "15",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "value": "",
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "textKind": 2,
+                                            "isComboBox": false,
+                                            "suggest": [],
+                                            "decorationClass": "",
+                                            "permitCharactor": "+-,.\\",
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": 0
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celYogu25",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R2C5"
+                                },
+                                {
+                                    "fieldName": "celYogu34",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtYoguRiyoshaFutanAmountNow",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "80",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtYoguRiyoshaFutanAmountNow_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "labelLText": "",
+                                            "labelRText": "",
+                                            "labelLWidth": "90",
+                                            "labelRWidth": "15",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "value": "",
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "textKind": 2,
+                                            "isComboBox": false,
+                                            "suggest": [],
+                                            "decorationClass": "",
+                                            "permitCharactor": "+-,.\\",
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": 0
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celYogu34",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R3C4"
+                                },
+                                {
+                                    "fieldName": "celYogu35",
+                                    "items": [
+                                        {
+                                            "fieldName": "txtYoguLimitOverAmountNow",
+                                            "items": [],
+                                            "controlType": "TextBoxNum",
+                                            "width": "80",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 1,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "txtYoguLimitOverAmountNow_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": true,
+                                            "required": false,
+                                            "placeHolder": "",
+                                            "isPrivateInfo": false,
+                                            "isPassword": false,
+                                            "onFocus": "",
+                                            "onBlur": "",
+                                            "onChange": "",
+                                            "onKeyPress": "",
+                                            "text": "",
+                                            "labelLText": "",
+                                            "labelRText": "",
+                                            "labelLWidth": "90",
+                                            "labelRWidth": "15",
+                                            "labelLAlign": 2,
+                                            "labelRAlign": 0,
+                                            "value": "",
+                                            "maxLength": 100000000,
+                                            "minLength": 0,
+                                            "textAlign": 2,
+                                            "textKind": 2,
+                                            "isComboBox": false,
+                                            "suggest": [],
+                                            "decorationClass": "",
+                                            "permitCharactor": "+-,.\\",
+                                            "maxValue": 1.7976931348623157e+308,
+                                            "minValue": 0,
+                                            "isCurrency": false,
+                                            "isComma": true,
+                                            "decimalPointLength": 0
+                                        }
+                                    ],
+                                    "controlType": "TableCell",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "celYogu35",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "connectTd": "R3C5"
+                                }
+                            ],
+                            "controlType": "TablePanel",
+                            "width": "XS",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "tblYoguSeikyuSummary",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "html": "<table border='1'>\n  <tbody>\n    <tr><td id='R1C1' bgcolor=\"#d7ebf6\"></td><td id='R1C2' bgcolor=\"#d7ebf6\"></td><td id='R1C3' bgcolor=\"#d7ebf6\"></td><td id='R1C4' bgcolor=\"#d7ebf6\"></td><td id='R1C5' bgcolor=\"#d7ebf6\"></td></tr>\n    <tr><td id='R2C1' bgcolor=\"#d7ebf6\"></td><td id='R2C2'></td><td id='R2C3'></td><td id='R2C4'></td><td id='R2C5'></td></tr>\n    <tr><td id='R3C1' bgcolor=\"#d7ebf6\"></td><td id='R3C2'></td><td id='R3C3'></td><td id='R3C4'></td><td id='R3C5'></td></tr>\n  </tbody>\n</table>\n"
+                        },
+                        {
+                            "fieldName": "btnClose",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnClose",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "text": "閉じる",
+                            "onClick": "onClick_btnClose",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G2",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0",
+                    "marginRight": "0",
+                    "selectControlID": "SogoShokaiFukushiYoguKonyuhiInfo",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "福祉用具購入費情報",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "SogoShokaiFukushiYoguKonyuhiInfo"
+                        }
+                    ],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": "dbu/db/dbu/SogoShokaiInfo/onLoad_FukushiYoguKonyuhiInfo"
+                        },
+                        {
+                            "eventName": "onClick_btnSelectYoguKonyuhi",
+                            "requestUrl": "dbu/db/dbu/SogoShokaiInfo/onClick_btnSelectYoguKonyuhi"
+                        }
+                    ],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": true,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto"
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "businessId": "DBZ",
+            "controlName": "SogoShokaiFukushiYoguKonyuhiInfo",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "onClick_btnClose",
+            "canTransferEvent": true,
+            "heightForDialog": "Auto"
+        };
+        return SogoShokaiFukushiYoguKonyuhiInfo_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.SogoShokaiFukushiYoguKonyuhiInfo_Design = SogoShokaiFukushiYoguKonyuhiInfo_Design;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiFukushiYoguKonyuhiInfo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new SogoShokaiFukushiYoguKonyuhiInfo.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        SogoShokaiFukushiYoguKonyuhiInfo.ModeController = ModeController;
+    })(DBZ.SogoShokaiFukushiYoguKonyuhiInfo || (DBZ.SogoShokaiFukushiYoguKonyuhiInfo = {}));
+    var SogoShokaiFukushiYoguKonyuhiInfo = DBZ.SogoShokaiFukushiYoguKonyuhiInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiFukushiYoguKonyuhiInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new SogoShokaiFukushiYoguKonyuhiInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        SogoShokaiFukushiYoguKonyuhiInfo.PublicProperties = PublicProperties;
+    })(DBZ.SogoShokaiFukushiYoguKonyuhiInfo || (DBZ.SogoShokaiFukushiYoguKonyuhiInfo = {}));
+    var SogoShokaiFukushiYoguKonyuhiInfo = DBZ.SogoShokaiFukushiYoguKonyuhiInfo;
+})(DBZ || (DBZ = {}));
+</script>
+  <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['SOGOSHOKAIFUKUSHIYOGUKONYUHIINFO'] = {};
+DBZ['SOGOSHOKAIFUKUSHIYOGUKONYUHIINFO'].SogoShokaiFukushiYoguKonyuhiInfoRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_SogoShokaiFukushiYoguKonyuhiInfo').getProperty();parameter0.txtTeikyoYM = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtTeikyoYM').getProperty();parameter0.txtSeiriNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeiriNo').getProperty();parameter0.txtKyufuritsu = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKyufuritsu').getProperty();parameter0.dgYoguSeikyuDetail = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgYoguSeikyuDetail').getProperty();parameter0.YoguKonyuhiShikyuShinseiSeikyuDetail = Uz.JSControlUtil.getJSControl(parentFieldName + '_YoguKonyuhiShikyuShinseiSeikyuDetail').getProperty();parameter0.YoguKonyuhiShikyuShinseiSeikyuDetail.txtBuyYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtBuyYMD').getProperty();parameter0.YoguKonyuhiShikyuShinseiSeikyuDetail.txtShumoku = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShumoku').getProperty();parameter0.YoguKonyuhiShikyuShinseiSeikyuDetail.txtShohinName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShohinName').getProperty();parameter0.YoguKonyuhiShikyuShinseiSeikyuDetail.txtSeizoJigyosha = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeizoJigyosha').getProperty();parameter0.YoguKonyuhiShikyuShinseiSeikyuDetail.txtHanbaiJigyosha = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHanbaiJigyosha').getProperty();parameter0.YoguKonyuhiShikyuShinseiSeikyuDetail.txtBuyAmount = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtBuyAmount').getProperty();parameter0.YoguKonyuhiShikyuShinseiSeikyuDetail.txtHinmokuCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHinmokuCode').getProperty();parameter0.YoguKonyuhiShikyuShinseiSeikyuDetail.txtShinsaMethod = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShinsaMethod').getProperty();parameter0.tblYoguSeikyuSummary = Uz.JSControlUtil.getJSControl(parentFieldName + '_tblYoguSeikyuSummary').getProperty();parameter0.tblYoguSeikyuSummary.celYogu11 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celYogu11').getProperty();parameter0.tblYoguSeikyuSummary.celYogu11.lblYoguSummary = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblYoguSummary').getProperty();parameter0.tblYoguSeikyuSummary.celYogu12 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celYogu12').getProperty();parameter0.tblYoguSeikyuSummary.celYogu12.lblYoguPayTotal = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblYoguPayTotal').getProperty();parameter0.tblYoguSeikyuSummary.celYogu13 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celYogu13').getProperty();parameter0.tblYoguSeikyuSummary.celYogu13.lblYoguHokenSeikyuAmount = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblYoguHokenSeikyuAmount').getProperty();parameter0.tblYoguSeikyuSummary.celYogu14 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celYogu14').getProperty();parameter0.tblYoguSeikyuSummary.celYogu14.lblYoguRiyoshaFutanAmount = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblYoguRiyoshaFutanAmount').getProperty();parameter0.tblYoguSeikyuSummary.celYogu15 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celYogu15').getProperty();parameter0.tblYoguSeikyuSummary.celYogu15.lblYoguLimitOverAmount = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblYoguLimitOverAmount').getProperty();parameter0.tblYoguSeikyuSummary.celYogu21 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celYogu21').getProperty();parameter0.tblYoguSeikyuSummary.celYogu21.lblYoguSummaryMae = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblYoguSummaryMae').getProperty();parameter0.tblYoguSeikyuSummary.celYogu22 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celYogu22').getProperty();parameter0.tblYoguSeikyuSummary.celYogu22.txtYoguPayTotalMae = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtYoguPayTotalMae').getProperty();parameter0.tblYoguSeikyuSummary.celYogu23 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celYogu23').getProperty();parameter0.tblYoguSeikyuSummary.celYogu23.txtYoguHokenSeikyuAmountMae = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtYoguHokenSeikyuAmountMae').getProperty();parameter0.tblYoguSeikyuSummary.celYogu24 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celYogu24').getProperty();parameter0.tblYoguSeikyuSummary.celYogu24.txtYoguRiyoshaFutanAmountMae = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtYoguRiyoshaFutanAmountMae').getProperty();parameter0.tblYoguSeikyuSummary.celYogu25 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celYogu25').getProperty();parameter0.tblYoguSeikyuSummary.celYogu25.txtYoguLimitOverAmountMae = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtYoguLimitOverAmountMae').getProperty();parameter0.tblYoguSeikyuSummary.celYogu31 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celYogu31').getProperty();parameter0.tblYoguSeikyuSummary.celYogu31.lblYoguSummaryNow = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblYoguSummaryNow').getProperty();parameter0.tblYoguSeikyuSummary.celYogu32 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celYogu32').getProperty();parameter0.tblYoguSeikyuSummary.celYogu32.txtYoguPayTotalNow = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtYoguPayTotalNow').getProperty();parameter0.tblYoguSeikyuSummary.celYogu33 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celYogu33').getProperty();parameter0.tblYoguSeikyuSummary.celYogu33.txtYoguHokenSeikyuAmountNow = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtYoguHokenSeikyuAmountNow').getProperty();parameter0.tblYoguSeikyuSummary.celYogu34 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celYogu34').getProperty();parameter0.tblYoguSeikyuSummary.celYogu34.txtYoguRiyoshaFutanAmountNow = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtYoguRiyoshaFutanAmountNow').getProperty();parameter0.tblYoguSeikyuSummary.celYogu35 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celYogu35').getProperty();parameter0.tblYoguSeikyuSummary.celYogu35.txtYoguLimitOverAmountNow = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtYoguLimitOverAmountNow').getProperty();parameter0.btnClose = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnClose').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+DBZ['SOGOSHOKAIFUKUSHIYOGUKONYUHIINFO'].YoguKonyuhiShikyuShinseiSeikyuDetailRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_YoguKonyuhiShikyuShinseiSeikyuDetail').getProperty();parameter0.txtBuyYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtBuyYMD').getProperty();parameter0.txtShumoku = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShumoku').getProperty();parameter0.txtShohinName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShohinName').getProperty();parameter0.txtSeizoJigyosha = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSeizoJigyosha').getProperty();parameter0.txtHanbaiJigyosha = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHanbaiJigyosha').getProperty();parameter0.txtBuyAmount = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtBuyAmount').getProperty();parameter0.txtHinmokuCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHinmokuCode').getProperty();parameter0.txtShinsaMethod = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShinsaMethod').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiFukushiYoguKonyuhiInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnClose = function () {
+                return "onClick_btnClose";
+            };
+            return Events;
+        })();
+        SogoShokaiFukushiYoguKonyuhiInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "SogoShokaiFukushiYoguKonyuhiInfo";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.SogoShokaiFukushiYoguKonyuhiInfo.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.SogoShokaiFukushiYoguKonyuhiInfo.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.SogoShokaiFukushiYoguKonyuhiInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtTeikyoYM = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtTeikyoYM"));
+            };
+
+            Controls.prototype.txtSeiriNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtSeiriNo"));
+            };
+
+            Controls.prototype.txtKyufuritsu = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtKyufuritsu"));
+            };
+
+            Controls.prototype.dgYoguSeikyuDetail = function () {
+                return new UZA.DataGrid(this.convFiledName("dgYoguSeikyuDetail"));
+            };
+
+            Controls.prototype.YoguKonyuhiShikyuShinseiSeikyuDetail = function () {
+                return new UZA.Panel(this.convFiledName("YoguKonyuhiShikyuShinseiSeikyuDetail"));
+            };
+
+            Controls.prototype.txtBuyYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtBuyYMD"));
+            };
+
+            Controls.prototype.txtShumoku = function () {
+                return new UZA.TextBox(this.convFiledName("txtShumoku"));
+            };
+
+            Controls.prototype.txtShohinName = function () {
+                return new UZA.TextBox(this.convFiledName("txtShohinName"));
+            };
+
+            Controls.prototype.txtSeizoJigyosha = function () {
+                return new UZA.TextBox(this.convFiledName("txtSeizoJigyosha"));
+            };
+
+            Controls.prototype.txtHanbaiJigyosha = function () {
+                return new UZA.TextBox(this.convFiledName("txtHanbaiJigyosha"));
+            };
+
+            Controls.prototype.txtBuyAmount = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtBuyAmount"));
+            };
+
+            Controls.prototype.txtHinmokuCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtHinmokuCode"));
+            };
+
+            Controls.prototype.txtShinsaMethod = function () {
+                return new UZA.TextBox(this.convFiledName("txtShinsaMethod"));
+            };
+
+            Controls.prototype.tblYoguSeikyuSummary = function () {
+                return new UZA.TablePanel(this.convFiledName("tblYoguSeikyuSummary"));
+            };
+
+            Controls.prototype.celYogu11 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu11"));
+            };
+
+            Controls.prototype.lblYoguSummary = function () {
+                return new UZA.Label(this.convFiledName("lblYoguSummary"));
+            };
+
+            Controls.prototype.celYogu12 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu12"));
+            };
+
+            Controls.prototype.lblYoguPayTotal = function () {
+                return new UZA.Label(this.convFiledName("lblYoguPayTotal"));
+            };
+
+            Controls.prototype.celYogu13 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu13"));
+            };
+
+            Controls.prototype.lblYoguHokenSeikyuAmount = function () {
+                return new UZA.Label(this.convFiledName("lblYoguHokenSeikyuAmount"));
+            };
+
+            Controls.prototype.celYogu14 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu14"));
+            };
+
+            Controls.prototype.lblYoguRiyoshaFutanAmount = function () {
+                return new UZA.Label(this.convFiledName("lblYoguRiyoshaFutanAmount"));
+            };
+
+            Controls.prototype.celYogu15 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu15"));
+            };
+
+            Controls.prototype.lblYoguLimitOverAmount = function () {
+                return new UZA.Label(this.convFiledName("lblYoguLimitOverAmount"));
+            };
+
+            Controls.prototype.celYogu21 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu21"));
+            };
+
+            Controls.prototype.lblYoguSummaryMae = function () {
+                return new UZA.Label(this.convFiledName("lblYoguSummaryMae"));
+            };
+
+            Controls.prototype.celYogu22 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu22"));
+            };
+
+            Controls.prototype.txtYoguPayTotalMae = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtYoguPayTotalMae"));
+            };
+
+            Controls.prototype.celYogu23 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu23"));
+            };
+
+            Controls.prototype.txtYoguHokenSeikyuAmountMae = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtYoguHokenSeikyuAmountMae"));
+            };
+
+            Controls.prototype.celYogu24 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu24"));
+            };
+
+            Controls.prototype.txtYoguRiyoshaFutanAmountMae = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtYoguRiyoshaFutanAmountMae"));
+            };
+
+            Controls.prototype.celYogu25 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu25"));
+            };
+
+            Controls.prototype.txtYoguLimitOverAmountMae = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtYoguLimitOverAmountMae"));
+            };
+
+            Controls.prototype.celYogu31 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu31"));
+            };
+
+            Controls.prototype.lblYoguSummaryNow = function () {
+                return new UZA.Label(this.convFiledName("lblYoguSummaryNow"));
+            };
+
+            Controls.prototype.celYogu32 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu32"));
+            };
+
+            Controls.prototype.txtYoguPayTotalNow = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtYoguPayTotalNow"));
+            };
+
+            Controls.prototype.celYogu33 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu33"));
+            };
+
+            Controls.prototype.txtYoguHokenSeikyuAmountNow = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtYoguHokenSeikyuAmountNow"));
+            };
+
+            Controls.prototype.celYogu34 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu34"));
+            };
+
+            Controls.prototype.txtYoguRiyoshaFutanAmountNow = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtYoguRiyoshaFutanAmountNow"));
+            };
+
+            Controls.prototype.celYogu35 = function () {
+                return new UZA.TableCell(this.convFiledName("celYogu35"));
+            };
+
+            Controls.prototype.txtYoguLimitOverAmountNow = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtYoguLimitOverAmountNow"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+            return Controls;
+        })();
+        SogoShokaiFukushiYoguKonyuhiInfo.Controls = Controls;
+    })(DBZ.SogoShokaiFukushiYoguKonyuhiInfo || (DBZ.SogoShokaiFukushiYoguKonyuhiInfo = {}));
+    var SogoShokaiFukushiYoguKonyuhiInfo = DBZ.SogoShokaiFukushiYoguKonyuhiInfo;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiFukushiYoguKonyuhiInfo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new SogoShokaiFukushiYoguKonyuhiInfo.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        SogoShokaiFukushiYoguKonyuhiInfo.ModeController = ModeController;
+    })(DBZ.SogoShokaiFukushiYoguKonyuhiInfo || (DBZ.SogoShokaiFukushiYoguKonyuhiInfo = {}));
+    var SogoShokaiFukushiYoguKonyuhiInfo = DBZ.SogoShokaiFukushiYoguKonyuhiInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (SogoShokaiFukushiYoguKonyuhiInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new SogoShokaiFukushiYoguKonyuhiInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        SogoShokaiFukushiYoguKonyuhiInfo.PublicProperties = PublicProperties;
+    })(DBZ.SogoShokaiFukushiYoguKonyuhiInfo || (DBZ.SogoShokaiFukushiYoguKonyuhiInfo = {}));
+    var SogoShokaiFukushiYoguKonyuhiInfo = DBZ.SogoShokaiFukushiYoguKonyuhiInfo;
+})(DBZ || (DBZ = {}));
+</script></div>

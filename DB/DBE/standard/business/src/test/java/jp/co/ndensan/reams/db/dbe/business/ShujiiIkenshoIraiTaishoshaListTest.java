@@ -6,9 +6,9 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
@@ -38,7 +38,7 @@ public class ShujiiIkenshoIraiTaishoshaListTest extends DbeTestBase {
     private static final ShinseishoKanriNo 申請書管理番号登録なし = new ShinseishoKanriNo((new RString("99999")));
     private static final ShoKisaiHokenshaNo 証記載保険者番号登録あり = new ShoKisaiHokenshaNo((new RString("123456")));
     private static final ShoKisaiHokenshaNo 証記載保険者番号登録なし = new ShoKisaiHokenshaNo(new RString("999999"));
-    private static final KaigoHihokenshaNo 被保険者番号 = new KaigoHihokenshaNo(new RString("1234567890"));
+    private static final HihokenshaNo 被保険者番号 = new HihokenshaNo(new RString("1234567890"));
     private static final FlexibleDate 認定申請年月日 = new FlexibleDate(new RString("20140101"));
     private static final Code 認定申請区分 = new Code(String.valueOf(NinteiShinseiKubunShinsei.新規申請.コード()));
     private static final IKojin 個人情報 = mock(IKojin.class);

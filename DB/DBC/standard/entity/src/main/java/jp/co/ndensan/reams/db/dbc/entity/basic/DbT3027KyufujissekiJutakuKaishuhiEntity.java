@@ -6,11 +6,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -42,7 +42,7 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
     @PrimaryKey
     private ShoKisaiHokenshaNo shokisaiHokenshaNo;
     @PrimaryKey
-    private KaigoHihokenshaNo hiHokenshaNo;
+    private HihokenshaNo hiHokenshaNo;
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
@@ -169,7 +169,7 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
      * getHiHokenshaNo
      * @return hiHokenshaNo
      */
-    public KaigoHihokenshaNo getHiHokenshaNo() {
+    public HihokenshaNo getHiHokenshaNo() {
         return hiHokenshaNo;
     }
 
@@ -177,7 +177,7 @@ public class DbT3027KyufujissekiJutakuKaishuhiEntity implements IDbAccessable {
      * setHiHokenshaNo
      * @param hiHokenshaNo hiHokenshaNo
      */
-    public void setHiHokenshaNo(KaigoHihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 

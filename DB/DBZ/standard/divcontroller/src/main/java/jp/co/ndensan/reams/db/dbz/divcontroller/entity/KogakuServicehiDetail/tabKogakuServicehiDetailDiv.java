@@ -1,19 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiDetail;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiDetail.tplJudgementResultDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiDetail.tplKetteiJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiDetail.tplKozaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiDetail.tplShinseishaDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
 
 /**
- * tabKogakuServicehiDetail のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResult.IKogakuServicehiJudgementResultDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResult.KogakuServicehiJudgementResultDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PaymentMethod.PaymentMethodDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResult.tplJudgementResultDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KogakuServicehiJudgementResult.tplJudgementResultDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TabContainer;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+
+/**
+ * tabKogakuServicehiDetail のクラスファイル
+ *
  * @author 自動生成
  */
 public class tabKogakuServicehiDetailDiv extends TabContainer {
@@ -23,6 +27,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("tplShinseisha")
     private tplShinseishaDiv tplShinseisha;
     @JsonProperty("tplKoza")
@@ -45,7 +50,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
 
     @JsonProperty("tplShinseisha")
     public void setTplShinseisha(tplShinseishaDiv tplShinseisha) {
-        this.tplShinseisha=tplShinseisha;
+        this.tplShinseisha = tplShinseisha;
     }
 
     @JsonProperty("tplKoza")
@@ -55,7 +60,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
 
     @JsonProperty("tplKoza")
     public void setTplKoza(tplKozaDiv tplKoza) {
-        this.tplKoza=tplKoza;
+        this.tplKoza = tplKoza;
     }
 
     @JsonProperty("tplJudgementResult")
@@ -65,7 +70,7 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
 
     @JsonProperty("tplJudgementResult")
     public void setTplJudgementResult(tplJudgementResultDiv tplJudgementResult) {
-        this.tplJudgementResult=tplJudgementResult;
+        this.tplJudgementResult = tplJudgementResult;
     }
 
     @JsonProperty("tplKetteiJoho")
@@ -75,7 +80,45 @@ public class tabKogakuServicehiDetailDiv extends TabContainer {
 
     @JsonProperty("tplKetteiJoho")
     public void setTplKetteiJoho(tplKetteiJohoDiv tplKetteiJoho) {
-        this.tplKetteiJoho=tplKetteiJoho;
+        this.tplKetteiJoho = tplKetteiJoho;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public ShinseishaInfoDiv getShinseisha() {
+        return this.getTplShinseisha().getShinseisha();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtShiharaiTotalAmount() {
+        return this.getTplShinseisha().getTxtShiharaiTotalAmount();
+    }
+
+    @JsonIgnore
+    public void setTxtShiharaiTotalAmount(TextBoxNum txtShiharaiTotalAmount) {
+        this.getTplShinseisha().setTxtShiharaiTotalAmount(txtShiharaiTotalAmount);
+    }
+
+    @JsonIgnore
+    public TextBoxMultiLine getTxtShinseiRiyu() {
+        return this.getTplShinseisha().getTxtShinseiRiyu();
+    }
+
+    @JsonIgnore
+    public void setTxtShinseiRiyu(TextBoxMultiLine txtShinseiRiyu) {
+        this.getTplShinseisha().setTxtShinseiRiyu(txtShinseiRiyu);
+    }
+
+    @JsonIgnore
+    public PaymentMethodDiv getPaymentMethod() {
+        return this.getTplKoza().getPaymentMethod();
+    }
+
+    @JsonIgnore
+    public IKogakuServicehiJudgementResultDiv getJudgementResult() {
+        return this.getTplJudgementResult().getJudgementResult();
     }
 
 }

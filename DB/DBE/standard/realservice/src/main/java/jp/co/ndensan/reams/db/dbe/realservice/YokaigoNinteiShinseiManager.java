@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.realservice;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.mapper.YokaigoNinteiShinseiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.YokaigoNinteiShinseiDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**

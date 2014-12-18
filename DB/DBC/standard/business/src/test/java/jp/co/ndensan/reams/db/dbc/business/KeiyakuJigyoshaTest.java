@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business;
 
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.EigyoKeitai;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;

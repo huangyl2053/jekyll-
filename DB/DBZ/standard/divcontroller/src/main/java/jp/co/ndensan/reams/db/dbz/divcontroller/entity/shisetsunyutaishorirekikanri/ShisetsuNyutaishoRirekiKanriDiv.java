@@ -1,9 +1,9 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.IShisetsuNyutaishoRirekiKanriDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
@@ -12,26 +12,33 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
+import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaishorireki.ShisetsuNyutaishoModel;
+import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+
 /**
- * ShisetsuNyutaishoRirekiKanri のクラスファイル 
- * 
+ * ShisetsuNyutaishoRirekiKanri のクラスファイル
+ *
  * @author 自動生成
  */
-public class ShisetsuNyutaishoRirekiKanriDiv extends Panel {
+public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuNyutaishoRirekiKanriDiv {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("btnAddShisetsuNyutaisho")
     private Button btnAddShisetsuNyutaisho;
     @JsonProperty("dgShisetsuNyutaishoRireki")
     private DataGrid<dgShisetsuNyutaishoRireki_Row> dgShisetsuNyutaishoRireki;
     @JsonProperty("ShisetsuNyutaishoInput")
     private ShisetsuNyutaishoInputDiv ShisetsuNyutaishoInput;
-    @JsonProperty("btnUpdateShisetsuNyutaisho")
-    private Button btnUpdateShisetsuNyutaisho;
     @JsonProperty("selectRow")
     private RString selectRow;
     @JsonProperty("inputMode")
@@ -50,7 +57,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel {
 
     @JsonProperty("btnAddShisetsuNyutaisho")
     public void setBtnAddShisetsuNyutaisho(Button btnAddShisetsuNyutaisho) {
-        this.btnAddShisetsuNyutaisho=btnAddShisetsuNyutaisho;
+        this.btnAddShisetsuNyutaisho = btnAddShisetsuNyutaisho;
     }
 
     @JsonProperty("dgShisetsuNyutaishoRireki")
@@ -60,7 +67,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel {
 
     @JsonProperty("dgShisetsuNyutaishoRireki")
     public void setDgShisetsuNyutaishoRireki(DataGrid<dgShisetsuNyutaishoRireki_Row> dgShisetsuNyutaishoRireki) {
-        this.dgShisetsuNyutaishoRireki=dgShisetsuNyutaishoRireki;
+        this.dgShisetsuNyutaishoRireki = dgShisetsuNyutaishoRireki;
     }
 
     @JsonProperty("ShisetsuNyutaishoInput")
@@ -70,17 +77,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel {
 
     @JsonProperty("ShisetsuNyutaishoInput")
     public void setShisetsuNyutaishoInput(ShisetsuNyutaishoInputDiv ShisetsuNyutaishoInput) {
-        this.ShisetsuNyutaishoInput=ShisetsuNyutaishoInput;
-    }
-
-    @JsonProperty("btnUpdateShisetsuNyutaisho")
-    public Button getBtnUpdateShisetsuNyutaisho() {
-        return btnUpdateShisetsuNyutaisho;
-    }
-
-    @JsonProperty("btnUpdateShisetsuNyutaisho")
-    public void setBtnUpdateShisetsuNyutaisho(Button btnUpdateShisetsuNyutaisho) {
-        this.btnUpdateShisetsuNyutaisho=btnUpdateShisetsuNyutaisho;
+        this.ShisetsuNyutaishoInput = ShisetsuNyutaishoInput;
     }
 
     @JsonProperty("selectRow")
@@ -90,7 +87,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel {
 
     @JsonProperty("selectRow")
     public void setSelectRow(RString selectRow) {
-        this.selectRow=selectRow;
+        this.selectRow = selectRow;
     }
 
     @JsonProperty("inputMode")
@@ -100,7 +97,241 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel {
 
     @JsonProperty("inputMode")
     public void setInputMode(RString inputMode) {
-        this.inputMode=inputMode;
+        this.inputMode = inputMode;
     }
 
+    /*
+     * [共有子DIVモード]
+     */
+    @JsonProperty("modes")
+    private HashSet<Mode> modes;
+
+    public static enum 表示widthサイズ implements ICommonChildDivMode {
+
+        モード1("モード1"),
+        モード2("モード2"),
+        モード3("モード3"),
+        モード4("モード4"),
+        モード5("モード5");
+
+        private final String name;
+
+        private 表示widthサイズ(final String name) {
+            this.name = name;
+        }
+
+        public static 表示widthサイズ getEnum(String str) {
+            表示widthサイズ[] enumArray = 表示widthサイズ.values();
+
+            for (表示widthサイズ enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public 表示widthサイズ getMode_表示widthサイズ() {
+        return (表示widthサイズ) _CommonChildDivModeUtil.getMode(this.modes, 表示widthサイズ.class);
+    }
+
+    public void setMode_表示widthサイズ(表示widthサイズ value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 表示widthサイズ.class, value);
+    }
+
+    public static enum 表示heightサイズ implements ICommonChildDivMode {
+
+        サイズ200("サイズ200"),
+        サイズ250("サイズ250"),
+        サイズ300("サイズ300"),
+        サイズ350("サイズ350"),
+        サイズ400("サイズ400"),
+        サイズ450("サイズ450"),
+        サイズ500("サイズ500");
+
+        private final String name;
+
+        private 表示heightサイズ(final String name) {
+            this.name = name;
+        }
+
+        public static 表示heightサイズ getEnum(String str) {
+            表示heightサイズ[] enumArray = 表示heightサイズ.values();
+
+            for (表示heightサイズ enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public 表示heightサイズ getMode_表示heightサイズ() {
+        return (表示heightサイズ) _CommonChildDivModeUtil.getMode(this.modes, 表示heightサイズ.class);
+    }
+
+    public void setMode_表示heightサイズ(表示heightサイズ value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 表示heightサイズ.class, value);
+    }
+
+    public static enum 表示モード implements ICommonChildDivMode {
+
+        登録("登録"),
+        照会("照会"),
+        資格異動("資格異動");
+
+        private final String name;
+
+        private 表示モード(final String name) {
+            this.name = name;
+        }
+
+        public static 表示モード getEnum(String str) {
+            表示モード[] enumArray = 表示モード.values();
+
+            for (表示モード enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public 表示モード getMode_表示モード() {
+        return (表示モード) _CommonChildDivModeUtil.getMode(this.modes, 表示モード.class);
+    }
+
+    public void setMode_表示モード(表示モード value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 表示モード.class, value);
+    }
+
+    public static enum 台帳種別の列を implements ICommonChildDivMode {
+
+        表示しない("表示しない"),
+        表示する("表示する");
+
+        private final String name;
+
+        private 台帳種別の列を(final String name) {
+            this.name = name;
+        }
+
+        public static 台帳種別の列を getEnum(String str) {
+            台帳種別の列を[] enumArray = 台帳種別の列を.values();
+
+            for (台帳種別の列を enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public 台帳種別の列を getMode_台帳種別の列を() {
+        return (台帳種別の列を) _CommonChildDivModeUtil.getMode(this.modes, 台帳種別の列を.class);
+    }
+
+    public void setMode_台帳種別の列を(台帳種別の列を value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 台帳種別の列を.class, value);
+    }
+
+    public static enum 明細表示モード implements ICommonChildDivMode {
+
+        追加_修正("追加_修正"),
+        削除("削除"),
+        選択不可("選択不可"),
+        非表示("非表示");
+
+        private final String name;
+
+        private 明細表示モード(final String name) {
+            this.name = name;
+        }
+
+        public static 明細表示モード getEnum(String str) {
+            明細表示モード[] enumArray = 明細表示モード.values();
+
+            for (明細表示モード enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public 明細表示モード getMode_明細表示モード() {
+        return (明細表示モード) _CommonChildDivModeUtil.getMode(this.modes, 明細表示モード.class);
+    }
+
+    public void setMode_明細表示モード(明細表示モード value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 明細表示モード.class, value);
+    }
+
+    //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void load(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+        //TODO
+        //1)、引数から渡されたキーを元に、被保険者台帳情報を検索する。
+        //2)、取得した情報をPanelSessionAccessorに登録する。
+        //3)、取得した情報をグリッドにマッピングする。
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void clearInputData() {
+        //TODO
+        //1)、Panel;SessionAccessorに登録されている情報を取得し、戻り値として返却する。
+        //2)、もし値が存在しない場合は、空のListを返す。
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public IItemList<ShisetsuNyutaishoModel> get施設入退所履歴() {
+        //TODO
+        //1)、引数から渡された情報を、PanelSessionAccessorに登録する。
+        //2)、登録した情報を、グリッドにマッピングする。
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void set施設入退所履歴(IItemList<ShisetsuNyutaishoModel> 施設入退所履歴) {
+        //TODO
+        //1)、入力明細パネル上のコントロールに対して、空白やnullを設定する。
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

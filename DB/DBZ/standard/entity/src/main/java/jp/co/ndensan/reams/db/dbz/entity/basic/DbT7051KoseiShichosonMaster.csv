@@ -1,6 +1,6 @@
 ﻿shichosonShokibetsuID,bpchar,RString,,,,,A
-shichosonCode,DbUDD001ShichosonCode,ShichosonCode,,,,,A
-shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,ShoKisaiHokenshaNo,,,,,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,A
 kokuhorenKoikiShichosonNo,varchar,RString,,,,,A
 shichosonMeisho,varchar,RString,,,,,A
 todofukenMeisho,varchar,RString,,,,,A
@@ -17,13 +17,14 @@ tyohyoKatagakiHyojiUmu,bpchar,RString,,,,,A
 gaikokujinHyojiHouhou,bpchar,RString,,,,,A
 rojinhokenShichosonNo,varchar,RString,,,,,A
 rokenJukyushaNoTaikei,varchar,RString,,,,,A
+tokuchoBunpaishuyaku,varchar,RString,,,,,A
 ikoYMD,UDD015YMD,FlexibleDate,,,,,A
 kanyuYMD,UDD015YMD,FlexibleDate,,,,,A
 ridatsuYMD,UDD015YMD,FlexibleDate,,,,,A
 gappeiKyuShichosonKubun,varchar,RString,,,,,A
 gappeiKyuShichosonHyojiUmu,varchar,RString,,,,,A
-gappeiLinkNo,varchar,RString,,,,,A
-unyoHokenshaNo,DbUDD015ShoKisaiHokenshaNo,ShoKisaiHokenshaNo,,,,,A
+gappeiChiikiNo,varchar,RString,,,,,A
+unyoHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,A
 unyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
 unyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,A
 unyoKeitaiKubun,varchar,RString,,,,,A

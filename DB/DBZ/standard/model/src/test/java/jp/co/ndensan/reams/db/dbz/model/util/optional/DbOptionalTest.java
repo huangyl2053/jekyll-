@@ -5,13 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.util.optional;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
-import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
-import jp.co.ndensan.reams.db.dbz.model.util.items.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.items.ItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.function.supplier.ExceptionSuppliers;
+import java.util.NoSuchElementException;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.ExceptionSuppliers;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -182,8 +180,8 @@ public class DbOptionalTest {
 
         private IOptional<RString> sut;
 
-        @Test(expected = Throwable.class)
-        public void get_はコンストラクタで受け取った値がnullの時_Exceptionをスローする() {
+        @Test(expected = NoSuchElementException.class)
+        public void get_はコンストラクタで受け取った値がnullの時_NoSuchElementExceptionをスローする() {
             sut = DbOptional.empty();
             sut.get();
         }
@@ -245,7 +243,7 @@ public class DbOptionalTest {
 
         @Before
         public void setUp() {
-            exceptionSupplier = ExceptionSuppliers.nullPointerException().withMessage("test");
+            exceptionSupplier = ExceptionSuppliers.nullPointerException("test");
         }
 
         @Test(expected = NullPointerException.class)
@@ -262,33 +260,51 @@ public class DbOptionalTest {
         }
     }
 
-    public static class map extends DbzTestBase {
+    public static class filter extends DbzTestBase {
 
-        private IOptional<RString> sut;
-        private IOptional<String> mapped;
-        private RString input;
+        private String value;
+        private IOptional<String> sut;
 
-        private IFunction<RString, String> createMapper() {
-            return new IFunction<RString, String>() {
+        @Before
+        public void setUp() {
+            value = "test";
+            sut = DbOptional.of(value);
+        }
+
+        @Test
+        public void filterは_引数のIConditon$checkに対して_自身が保持する値を渡すと_trueが返る時_空でないIOptionalを返す() {
+            assertThat(sut.filter(new IPredicate<String>() {
                 @Override
-                public String apply(RString t) {
-                    return t.toString();
+                public boolean evaluate(String t) {
+                    return true;
                 }
-            };
+            }).isPresent(), is(true));
         }
 
         @Test
-        public void map_の戻り値は_保持する値が引数のIFuntionにより変換された結果を_持つ() {
-            sut = DbOptional.of(new RString("input"));
-            mapped = sut.map(createMapper());
-            assertThat(mapped.get(), is(createMapper().apply(sut.get())));
+        public void filterは_引数のIConditon$checkに対して_自身が保持する値を渡すと_falseが返る時_空のIOptionalを返す() {
+            assertThat(sut.filter(new IPredicate<String>() {
+                @Override
+                public boolean evaluate(String t) {
+                    return false;
+                }
+            }).isPresent(), is(false));
         }
 
         @Test
-        public void map_の戻り値は_emptyの時_emptyである() {
-            sut = DbOptional.empty();
-            mapped = sut.map(createMapper());
-            assertThat(mapped.isPresent(), is(false));
+        public void filterは_自身が値を保持していないとき_引数のIConditionにかかわらず_空のIOptionalを返す() {
+            assertThat(DbOptional.<String>empty().filter(new IPredicate<String>() {
+                @Override
+                public boolean evaluate(String t) {
+                    return true;
+                }
+            }).isPresent(), is(false));
+            assertThat(DbOptional.<String>empty().filter(new IPredicate<String>() {
+                @Override
+                public boolean evaluate(String t) {
+                    return false;
+                }
+            }).isPresent(), is(false));
         }
     }
 }

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryokikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
@@ -36,7 +36,7 @@ public interface IShujiiIryoKikan {
      *
      * @return 医療機関コード
      */
-    IIryoKikanCode get医療機関コード();
+    IryokikanCode get医療機関コード();
 
     /**
      * 医療機関の状況を返します。

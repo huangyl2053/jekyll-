@@ -29,5 +29,9 @@
             <artifactId>DbzDefinition</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
+        </dependency>
     </dependencies>
 </project>

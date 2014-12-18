@@ -6,15 +6,20 @@
 package jp.co.ndensan.reams.db.dbz.model.util.optional;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
-import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IConsumer;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
 
 /**
  * {@link IOptional IOptional}を生成します。
  *
- * @param <T> {@link IOptional I_DbOptional}が保持する値
+ * @param <T> Optional が保持する値
  * @author N3327 三浦 凌
+ * @deprecated
+ * {@link jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional}を使用して下さい。
  */
+@Deprecated
 public final class DbOptional<T> implements IOptional<T> {
 
     private static final IOptional<?> THE_EMPTY;
@@ -73,7 +78,7 @@ public final class DbOptional<T> implements IOptional<T> {
     @Override
     public T get() {
         if (this.value == null) {
-            throw new RuntimeException("value is not present.");
+            throw new java.util.NoSuchElementException("value is not present.");
         }
         return value;
     }
@@ -100,13 +105,13 @@ public final class DbOptional<T> implements IOptional<T> {
     @Override
     public String toString() {
         return this.value != null
-                ? String.format("IOptional[%s]", value)
+                ? String.format("IOptional[%s]", this.value)
                 : "empty";
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(value);
+        return Objects.hashCode(this.value);
     }
 
     @Override
@@ -118,16 +123,47 @@ public final class DbOptional<T> implements IOptional<T> {
             return false;
         }
         DbOptional<?> other = (DbOptional<?>) obj;
-        return Objects.equals(value, other.value);
+        return Objects.equals(this.value, other.value);
     }
 
     @Override
-    public <R> IOptional<R> map(IFunction<? super T, ? extends R> mapper) {
+    public <R> jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional<R>
+            map(IFunction<? super T, ? extends R> mapper) {
         Objects.requireNonNull(mapper);
         if (!isPresent()) {
             return empty();
         } else {
-            return DbOptional.ofNullable(mapper.apply(value));
+            return DbOptional.ofNullable(mapper.apply(this.value));
+        }
+    }
+
+    @Override
+    public IOptional<T> filter(IPredicate<? super T> predicate) {
+        Objects.requireNonNull(predicate);
+        if (!isPresent()) {
+            return this;
+        }
+        if (predicate.evaluate(this.value)) {
+            return this;
+        }
+        return empty();
+    }
+
+    @Override
+    public void ifPresent(IConsumer<? super T> consumer) {
+        if (this.value != null) {
+            consumer.accept(value);
+        }
+    }
+
+    @Override
+    public <R> jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional<R>
+            flatMap(IFunction<? super T, jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional<R>> mapper) {
+        Objects.requireNonNull(mapper);
+        if (!isPresent()) {
+            return empty();
+        } else {
+            return Objects.requireNonNull(mapper.apply(this.value));
         }
     }
 }

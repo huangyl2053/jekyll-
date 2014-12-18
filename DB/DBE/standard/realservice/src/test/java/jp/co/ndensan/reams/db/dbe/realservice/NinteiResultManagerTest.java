@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5002NinteiKekkaJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.business.helper.NinteiResultMock;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteiKekkaJohoDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;

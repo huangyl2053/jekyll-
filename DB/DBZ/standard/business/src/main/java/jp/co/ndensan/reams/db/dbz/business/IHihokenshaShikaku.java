@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbz.business;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -30,13 +30,6 @@ public interface IHihokenshaShikaku extends IHihokenshaNoGettable, IShikibetsuCo
     public LasdecCode get市町村コード();
 
     /**
-     * 被保険者の証記載保険者番号を返します。
-     *
-     * @return {@link ShoKisaiHokenshaNo 地方公共団体コード}
-     */
-    ShoKisaiHokenshaNo get証記載保険者番号();
-
-    /**
      * 被保険者の識別コードを返します。
      *
      * @return {@link ShikibetsuCode 識別コード}
@@ -55,10 +48,10 @@ public interface IHihokenshaShikaku extends IHihokenshaNoGettable, IShikibetsuCo
      * 被保険者の被保険者番号を返します。 <br />
      * 被保険者番号がないとき、nullを返します。
      *
-     * @return {@link KaigoHihokenshaNo 被保険者番号}。もしくは、null。
+     * @return {@link HihokenshaNo 被保険者番号}。もしくは、null。
      */
     @Override
-    KaigoHihokenshaNo get被保険者番号();
+    HihokenshaNo get被保険者番号();
 
     /**
      * 資格取得に関する結果を取得します。

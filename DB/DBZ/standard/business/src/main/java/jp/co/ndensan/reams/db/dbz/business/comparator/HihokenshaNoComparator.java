@@ -28,7 +28,7 @@ public final class HihokenshaNoComparator implements Comparator<IHihokenshaNoGet
         ASC = new HihokenshaNoComparator(SortOrder.ASC);
         DESC = new HihokenshaNoComparator(SortOrder.DESC);
     }
-    private SortOrder order;
+    private final SortOrder order;
 
     /**
      * ソート順を指定して、HihokenshaNoComparatorを生成します。<br />
@@ -43,6 +43,6 @@ public final class HihokenshaNoComparator implements Comparator<IHihokenshaNoGet
 
     @Override
     public int compare(IHihokenshaNoGettable o1, IHihokenshaNoGettable o2) {
-        return o1.get被保険者番号().compareTo(o2.get被保険者番号()) * order.getRate();
+        return o1.get被保険者番号().compareTo(o2.get被保険者番号()) * order.rate();
     }
 }

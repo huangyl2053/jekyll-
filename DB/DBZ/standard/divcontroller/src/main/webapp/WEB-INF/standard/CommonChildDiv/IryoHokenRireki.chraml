@@ -1,0 +1,2310 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;IryoHokenRireki&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[{&quot;key&quot;:&quot;&quot;,&quot;controlName&quot;:&quot;&quot;},{&quot;key&quot;:&quot;&quot;,&quot;controlName&quot;:&quot;&quot;},{&quot;key&quot;:&quot;&quot;,&quot;controlName&quot;:&quot;&quot;}],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[{&quot;eventName&quot;:&quot;onSelectByModifyButton_dgIryoHokenRireki&quot;},{&quot;eventName&quot;:&quot;onSelectByDeleteButton_dgIryoHokenRireki&quot;},{&quot;eventName&quot;:&quot;onSelect_dgIryoHokenRireki&quot;},{&quot;eventName&quot;:&quot;onSelectByDbClick_dgIryoHokenRireki&quot;},{&quot;eventName&quot;:&quot;onClick_btnAddIryoHoken&quot;}],&quot;publicEventsAlias&quot;:[]}" data-is-composite-control="true" data-control-name="DBZ.IryoHokenRireki"><div title="" class="UzPanel FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-Default marginRight-Default marginTop-Default marginBottom-Default UzCommonChildDivPanel UzCompositeChild" id="IryoHokenRireki" style="width: 1015px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;IryoHokenRireki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1015px&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;IryoHokenRireki&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;IryoHokenRireki&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;&quot;}],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;mode&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="IryoHokenRireki_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="IryoHokenRireki_panel_body_area"><button title="" class="UzButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS Width-S heightTextBoxMatchesFlag heightTextBoxMatches UzCompositeChild" id="btnAddIryoHoken" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnAddIryoHoken&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;btnAddIryoHoken&quot;,&quot;onClick&quot;:&quot;onClick_btnAddIryoHoken&quot;,&quot;text&quot;:&quot;追加する&quot;,&quot;heightTextBoxMatches&quot;:true}"><span>追加する</span></button><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M ClearFloat Height-S UzCompositeChild" id="dgIryoHokenRireki" style="width: 980px; margin-right: 0em; margin-left: 0em;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgIryoHokenRireki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;980px&quot;,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;dgIryoHokenRireki&quot;,&quot;height&quot;:&quot;S&quot;,&quot;dataSource&quot;:[],&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:true,&quot;isShowDeleteButtonColumn&quot;:true,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;状態&quot;,&quot;dataName&quot;:&quot;state&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:50,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;state&quot;},{&quot;columnName&quot;:&quot;加入日&quot;,&quot;dataName&quot;:&quot;kanyuDate&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;kanyuDate&quot;},{&quot;columnName&quot;:&quot;脱退日&quot;,&quot;dataName&quot;:&quot;dattaiDate&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;dattaiDate&quot;},{&quot;columnName&quot;:&quot;種別key&quot;,&quot;dataName&quot;:&quot;iryoHokenShubetsuKey&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:0,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;iryoHokenShubetsuKey&quot;},{&quot;columnName&quot;:&quot;種別&quot;,&quot;dataName&quot;:&quot;iryoHokenShubetsu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;iryoHokenShubetsu&quot;},{&quot;columnName&quot;:&quot;保険者番号&quot;,&quot;dataName&quot;:&quot;hokenshaNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:90,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;hokenshaNo&quot;},{&quot;columnName&quot;:&quot;保険者名称&quot;,&quot;dataName&quot;:&quot;hokenshaMeisho&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:200,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;hokenshaMeisho&quot;},{&quot;columnName&quot;:&quot;保険者&quot;,&quot;dataName&quot;:&quot;hokensha&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:300,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;hokensha&quot;},{&quot;columnName&quot;:&quot;記号番号&quot;,&quot;dataName&quot;:&quot;kigoNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:270,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;kigoNo&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;onSelect&quot;:&quot;onSelect_dgIryoHokenRireki&quot;,&quot;onSelectByDblClick&quot;:&quot;onSelectByDbClick_dgIryoHokenRireki&quot;,&quot;onSelectByModifyButton&quot;:&quot;onSelectByModifyButton_dgIryoHokenRireki&quot;,&quot;onSelectByDeleteButton&quot;:&quot;onSelectByDeleteButton_dgIryoHokenRireki&quot;,&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgIryoHokenRireki_grid_table" role="" style="width: 980px; height: 176px; position: relative;"></div><div id="dgIryoHokenRireki_footer" style="width: 980px; height: 25px;"></div></div><div title="" class="UzPanel FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable ClearFloat marginLeft-Default marginRight-Default marginTop-Default marginBottom-Default UzCompositeChild" id="IryoHokenInput" style="width: 980px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;IryoHokenInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;980px&quot;,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;IryoHokenInput&quot;,&quot;title&quot;:&quot;医療保険&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:1,&quot;readOnly&quot;:true,&quot;canPost&quot;:true}"><div class="UzPanelHeader clearBackground" id="IryoHokenInput_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">医療保険</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M Panel-GroupBox ui-droppable ui-sortable" id="IryoHokenInput_panel_body_area"><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtIryoHokenKanyuDate" style="width: 137px; height: 21px;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtIryoHokenKanyuDate&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtIryoHokenKanyuDate_core&quot;,&quot;labelLText&quot;:&quot;加入日&quot;,&quot;labelLWidth&quot;:&quot;50px&quot;,&quot;labelRWidth&quot;:&quot;0px&quot;,&quot;textKind&quot;:0}"><span class="word-wrap-break-word Label-L text-align-right" id="txtIryoHokenKanyuDate_labelL" style="width: 50px;"><span>加入日</span></span><input class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtIryoHokenKanyuDate_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-orgtext="" data-seireki="" data-setcount="0" data-wareki=""></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtIryoHokenDattaiDate" style="width: 137px; height: 21px;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtIryoHokenDattaiDate&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtIryoHokenDattaiDate_core&quot;,&quot;labelLText&quot;:&quot;脱退日&quot;,&quot;labelLWidth&quot;:&quot;50px&quot;,&quot;textKind&quot;:0}"><span class="word-wrap-break-word Label-L text-align-right" id="txtIryoHokenDattaiDate_labelL" style="width: 50px;"><span>脱退日</span></span><input class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtIryoHokenDattaiDate_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-orgtext="" data-seireki="" data-setcount="0" data-wareki=""></div><div title="" class="UzDropDownList WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="ddlIryoHokenShubetsu" style="width: 198px; height: 21px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlIryoHokenShubetsu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;160px&quot;,&quot;selectControlID&quot;:&quot;ddlIryoHokenShubetsu_core&quot;,&quot;selectedItem&quot;:&quot;kyokai&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;kyokai&quot;,&quot;value&quot;:&quot;協会健康保険&quot;},{&quot;key&quot;:&quot;kumiai&quot;,&quot;value&quot;:&quot;組合健康保険&quot;},{&quot;key&quot;:&quot;hiyatoi&quot;,&quot;value&quot;:&quot;日雇い健康保険&quot;},{&quot;key&quot;:&quot;senin&quot;,&quot;value&quot;:&quot;船員健康保険&quot;},{&quot;key&quot;:&quot;kyousai&quot;,&quot;value&quot;:&quot;共済組合保険&quot;},{&quot;key&quot;:&quot;ippanKokuminn&quot;,&quot;value&quot;:&quot;一般国民健康保険&quot;},{&quot;key&quot;:&quot;taishokuKokumin&quot;,&quot;value&quot;:&quot;退職国民健康保険&quot;},{&quot;key&quot;:&quot;kukmiaiKokumin&quot;,&quot;value&quot;:&quot;組合国民健康保険&quot;}],&quot;labelLText&quot;:&quot;種別&quot;,&quot;labelLWidth&quot;:&quot;35px&quot;,&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="ddlIryoHokenShubetsu_labelL" style="width: 35px;"><span>種別</span></span><select class="CoreElement AsIfDisabled readonlyColor" id="ddlIryoHokenShubetsu_core" style="width: 160px;"><option value="kyokai">協会健康保険</option><option disabled="disabled" value="kumiai">組合健康保険</option><option disabled="disabled" value="hiyatoi">日雇い健康保険</option><option disabled="disabled" value="senin">船員健康保険</option><option disabled="disabled" value="kyousai">共済組合保険</option><option disabled="disabled" value="ippanKokuminn">一般国民健康保険</option><option disabled="disabled" value="taishokuKokumin">退職国民健康保険</option><option disabled="disabled" value="kukmiaiKokumin">組合国民健康保険</option></select></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtIryoHokenHokenshaNo" style="width: 137px; height: 21px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtIryoHokenHokenshaNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtIryoHokenHokenshaNo_core&quot;,&quot;labelLText&quot;:&quot;保険者&quot;,&quot;labelLWidth&quot;:&quot;50px&quot;,&quot;onBlur&quot;:&quot;onBlur_txtIryoHokenHokenshaNo&quot;,&quot;minLength&quot;:&quot;0000000000&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="txtIryoHokenHokenshaNo_labelL" style="width: 50px;"><span>保険者</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input readonlyColor" id="txtIryoHokenHokenshaNo_core" style="width: 80px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginRight-XS UzCompositeChild" id="txtIryoHokenHokenshaMeisho" style="width: 255px; height: 21px; margin-left: 0em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtIryoHokenHokenshaMeisho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;250px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtIryoHokenHokenshaMeisho_core&quot;,&quot;suggest&quot;:[]}"><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtIryoHokenHokenshaMeisho_core" style="width: 250px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtIryoHokenKigoNo" style="width: 514px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtIryoHokenKigoNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;440px&quot;,&quot;selectControlID&quot;:&quot;txtIryoHokenKigoNo_core&quot;,&quot;labelLText&quot;:&quot;記号番号&quot;,&quot;labelLWidth&quot;:&quot;67px&quot;,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="txtIryoHokenKigoNo_labelL" style="width: 67px;"><span>記号番号</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtIryoHokenKigoNo_core" style="width: 440px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><button title="" class="UzButton JSControl controlMargin-M FloatRight marginLeft-XS marginRight-XS heightTextBoxMatchesFlag heightTextBoxMatches AsIfDisabled UzCompositeChild" id="btnIryoHokenKakutei" style="width: 110px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnIryoHokenKakutei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;110px&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnIryoHokenKakutei&quot;,&quot;onClick&quot;:&quot;onClick_btnIryoHokenKakutei&quot;,&quot;text&quot;:&quot;確定する&quot;,&quot;heightTextBoxMatches&quot;:true}"><span>確定する</span></button><button title="" class="UzButton JSControl controlMargin-M FloatRight marginLeft-XS heightTextBoxMatchesFlag heightTextBoxMatches AsIfDisabled UzCompositeChild" id="btnIryoHokenTorikeshi" style="width: 110px; margin-right: 0em;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnIryoHokenTorikeshi&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;110px&quot;,&quot;float&quot;:2,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;btnIryoHokenTorikeshi&quot;,&quot;onClick&quot;:&quot;onClick_btnIryoHokenTorikeshi&quot;,&quot;text&quot;:&quot;取消する&quot;,&quot;heightTextBoxMatches&quot;:true}"><span>取消する</span></button></div></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    var IryoHokenRireki_Design = (function (_super) {
+        __extends(IryoHokenRireki_Design, _super);
+        function IryoHokenRireki_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, IryoHokenRireki_Design.myLayout, fieldName);
+        }
+        IryoHokenRireki_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        IryoHokenRireki_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        IryoHokenRireki_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "IryoHokenRireki",
+                    "items": [
+                        {
+                            "fieldName": "btnAddIryoHoken",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnAddIryoHoken",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
+                            "onClick": "onClick_btnAddIryoHoken",
+                            "text": "追加する",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": true
+                        },
+                        {
+                            "fieldName": "dgIryoHokenRireki",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "980px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
+                            "selectControlID": "dgIryoHokenRireki",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "S",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": false,
+                                "isShowHeader": true,
+                                "isShowFooter": true,
+                                "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": false,
+                                "isShowSelectButtonColumn": false,
+                                "isShowModifyButtonColumn": true,
+                                "isShowDeleteButtonColumn": true,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
+                                "selectLimitRowCount": 0,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "",
+                                    "headerHeight": 0
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "状態",
+                                        "dataName": "state",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 50,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "state"
+                                    },
+                                    {
+                                        "columnName": "加入日",
+                                        "dataName": "kanyuDate",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "kanyuDate"
+                                    },
+                                    {
+                                        "columnName": "脱退日",
+                                        "dataName": "dattaiDate",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "dattaiDate"
+                                    },
+                                    {
+                                        "columnName": "種別key",
+                                        "dataName": "iryoHokenShubetsuKey",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "iryoHokenShubetsuKey"
+                                    },
+                                    {
+                                        "columnName": "種別",
+                                        "dataName": "iryoHokenShubetsu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 150,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "iryoHokenShubetsu"
+                                    },
+                                    {
+                                        "columnName": "保険者番号",
+                                        "dataName": "hokenshaNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "hokenshaNo"
+                                    },
+                                    {
+                                        "columnName": "保険者名称",
+                                        "dataName": "hokenshaMeisho",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 200,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "hokenshaMeisho"
+                                    },
+                                    {
+                                        "columnName": "保険者",
+                                        "dataName": "hokensha",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 300,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "hokensha"
+                                    },
+                                    {
+                                        "columnName": "記号番号",
+                                        "dataName": "kigoNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 270,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "kigoNo"
+                                    }
+                                ]
+                            },
+                            "onSort": "",
+                            "onSelect": "onSelect_dgIryoHokenRireki",
+                            "onSelectByDblClick": "onSelectByDbClick_dgIryoHokenRireki",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "onSelectByModifyButton_dgIryoHokenRireki",
+                            "onSelectByDeleteButton": "onSelectByDeleteButton_dgIryoHokenRireki",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "hokensha",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1,
+                            "gridAction": []
+                        },
+                        {
+                            "fieldName": "IryoHokenInput",
+                            "items": [
+                                {
+                                    "fieldName": "txtIryoHokenKanyuDate",
+                                    "items": [],
+                                    "controlType": "TextBoxFlexibleDate",
+                                    "width": "80px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtIryoHokenKanyuDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "text": "",
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "labelLText": "加入日",
+                                    "labelRText": "",
+                                    "labelLWidth": "50px",
+                                    "labelRWidth": "0px",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "textKind": 0,
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "txtIryoHokenDattaiDate",
+                                    "items": [],
+                                    "controlType": "TextBoxFlexibleDate",
+                                    "width": "80px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtIryoHokenDattaiDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "text": "",
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "labelLText": "脱退日",
+                                    "labelRText": "",
+                                    "labelLWidth": "50px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "textKind": 0,
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "ddlIryoHokenShubetsu",
+                                    "items": [],
+                                    "controlType": "DropDownList",
+                                    "width": "160px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "ddlIryoHokenShubetsu_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "dataSource": [
+                                        {
+                                            "key": "kyokai",
+                                            "value": "協会健康保険"
+                                        },
+                                        {
+                                            "key": "kumiai",
+                                            "value": "組合健康保険"
+                                        },
+                                        {
+                                            "key": "hiyatoi",
+                                            "value": "日雇い健康保険"
+                                        },
+                                        {
+                                            "key": "senin",
+                                            "value": "船員健康保険"
+                                        },
+                                        {
+                                            "key": "kyousai",
+                                            "value": "共済組合保険"
+                                        },
+                                        {
+                                            "key": "ippanKokuminn",
+                                            "value": "一般国民健康保険"
+                                        },
+                                        {
+                                            "key": "taishokuKokumin",
+                                            "value": "退職国民健康保険"
+                                        },
+                                        {
+                                            "key": "kukmiaiKokumin",
+                                            "value": "組合国民健康保険"
+                                        }
+                                    ],
+                                    "required": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "labelLText": "種別",
+                                    "labelRText": "",
+                                    "labelLWidth": "35px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "selectedItem": "kyokai",
+                                    "isBlankLine": false
+                                },
+                                {
+                                    "fieldName": "txtIryoHokenHokenshaNo",
+                                    "items": [],
+                                    "controlType": "TextBoxCode",
+                                    "width": "80px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtIryoHokenHokenshaNo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "text": "",
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "onBlur_txtIryoHokenHokenshaNo",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "labelLText": "保険者",
+                                    "labelRText": "",
+                                    "labelLWidth": "50px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": "0000000000",
+                                    "textAlign": 0,
+                                    "textKind": 2,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": "",
+                                    "formatLength": "10"
+                                },
+                                {
+                                    "fieldName": "txtIryoHokenHokenshaMeisho",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "250px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtIryoHokenHokenshaMeisho_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "text": "",
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "labelLText": "",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "txtIryoHokenKigoNo",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "440px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtIryoHokenKigoNo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "text": "",
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "labelLText": "記号番号",
+                                    "labelRText": "",
+                                    "labelLWidth": "67px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "btnIryoHokenKakutei",
+                                    "items": [],
+                                    "controlType": "Button",
+                                    "width": "110px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 2,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "btnIryoHokenKakutei",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "onBeforeClick": "",
+                                    "onAfterClick": "",
+                                    "onClick": "onClick_btnIryoHokenKakutei",
+                                    "text": "確定する",
+                                    "appearance": 0,
+                                    "imageFileUrl": "",
+                                    "imageWidth": "",
+                                    "imageHeight": "",
+                                    "icon": 0,
+                                    "heightTextBoxMatches": true
+                                },
+                                {
+                                    "fieldName": "btnIryoHokenTorikeshi",
+                                    "items": [],
+                                    "controlType": "Button",
+                                    "width": "110px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 2,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "0em",
+                                    "selectControlID": "btnIryoHokenTorikeshi",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "onBeforeClick": "",
+                                    "onAfterClick": "",
+                                    "onClick": "onClick_btnIryoHokenTorikeshi",
+                                    "text": "取消する",
+                                    "appearance": 0,
+                                    "imageFileUrl": "",
+                                    "imageWidth": "",
+                                    "imageHeight": "",
+                                    "icon": 0,
+                                    "heightTextBoxMatches": true
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "980px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "Default",
+                            "marginRight": "Default",
+                            "selectControlID": "IryoHokenInput",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "医療保険",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": false,
+                            "postParameterPanelNames": [],
+                            "requestSettings": [
+                                {
+                                    "eventName": "onLoad",
+                                    "requestUrl": ""
+                                }
+                            ],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": false,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 1,
+                            "isGroupBox": false,
+                            "readOnly": true,
+                            "height": "Auto",
+                            "canPost": true
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "1015px",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "Default",
+                    "marginRight": "Default",
+                    "selectControlID": "IryoHokenRireki",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "IryoHokenRireki"
+                        }
+                    ],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": ""
+                        }
+                    ],
+                    "hiddenInput": [
+                        {
+                            "propertyName": "mode",
+                            "value": ""
+                        }
+                    ],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": true,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": true
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0em",
+            "marginRight": "0em",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBZ",
+            "controlName": "IryoHokenRireki",
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [],
+            "dataPassingForDialog": [
+                {
+                    "key": "",
+                    "controlName": ""
+                },
+                {
+                    "key": "",
+                    "controlName": ""
+                },
+                {
+                    "key": "",
+                    "controlName": ""
+                }
+            ],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [
+                {
+                    "eventName": "onSelectByModifyButton_dgIryoHokenRireki"
+                },
+                {
+                    "eventName": "onSelectByDeleteButton_dgIryoHokenRireki"
+                },
+                {
+                    "eventName": "onSelect_dgIryoHokenRireki"
+                },
+                {
+                    "eventName": "onSelectByDbClick_dgIryoHokenRireki"
+                },
+                {
+                    "eventName": "onClick_btnAddIryoHoken"
+                }
+            ],
+            "publicEventsAlias": []
+        };
+        return IryoHokenRireki_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.IryoHokenRireki_Design = IryoHokenRireki_Design;
+
+    (function (IryoHokenRireki) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnAddIryoHoken = function () {
+                return "onClick_btnAddIryoHoken";
+            };
+
+            Events.onSelect_dgIryoHokenRireki = function () {
+                return "onSelect_dgIryoHokenRireki";
+            };
+
+            Events.onSelectByDbClick_dgIryoHokenRireki = function () {
+                return "onSelectByDbClick_dgIryoHokenRireki";
+            };
+
+            Events.onSelectByModifyButton_dgIryoHokenRireki = function () {
+                return "onSelectByModifyButton_dgIryoHokenRireki";
+            };
+
+            Events.onSelectByDeleteButton_dgIryoHokenRireki = function () {
+                return "onSelectByDeleteButton_dgIryoHokenRireki";
+            };
+
+            Events.onBlur_txtIryoHokenHokenshaNo = function () {
+                return "onBlur_txtIryoHokenHokenshaNo";
+            };
+
+            Events.onClick_btnIryoHokenKakutei = function () {
+                return "onClick_btnIryoHokenKakutei";
+            };
+
+            Events.onClick_btnIryoHokenTorikeshi = function () {
+                return "onClick_btnIryoHokenTorikeshi";
+            };
+            return Events;
+        })();
+        IryoHokenRireki.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "IryoHokenRireki";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.IryoHokenRireki.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + fieldName;
+            };
+
+            Controls.prototype.IryoHokenRireki = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAddIryoHoken = function () {
+                return new UZA.Button(this.convFiledName("btnAddIryoHoken"));
+            };
+
+            Controls.prototype.dgIryoHokenRireki = function () {
+                return new UZA.DataGrid(this.convFiledName("dgIryoHokenRireki"));
+            };
+
+            Controls.prototype.IryoHokenInput = function () {
+                return new UZA.Panel(this.convFiledName("IryoHokenInput"));
+            };
+
+            Controls.prototype.txtIryoHokenKanyuDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIryoHokenKanyuDate"));
+            };
+
+            Controls.prototype.txtIryoHokenDattaiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIryoHokenDattaiDate"));
+            };
+
+            Controls.prototype.ddlIryoHokenShubetsu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlIryoHokenShubetsu"));
+            };
+
+            Controls.prototype.txtIryoHokenHokenshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtIryoHokenHokenshaNo"));
+            };
+
+            Controls.prototype.txtIryoHokenHokenshaMeisho = function () {
+                return new UZA.TextBox(this.convFiledName("txtIryoHokenHokenshaMeisho"));
+            };
+
+            Controls.prototype.txtIryoHokenKigoNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtIryoHokenKigoNo"));
+            };
+
+            Controls.prototype.btnIryoHokenKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnIryoHokenKakutei"));
+            };
+
+            Controls.prototype.btnIryoHokenTorikeshi = function () {
+                return new UZA.Button(this.convFiledName("btnIryoHokenTorikeshi"));
+            };
+            return Controls;
+        })();
+        IryoHokenRireki.Controls = Controls;
+    })(DBZ.IryoHokenRireki || (DBZ.IryoHokenRireki = {}));
+    var IryoHokenRireki = DBZ.IryoHokenRireki;
+})(DBZ || (DBZ = {}));
+
+﻿var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    var IryoHokenRireki_Design = (function (_super) {
+        __extends(IryoHokenRireki_Design, _super);
+        function IryoHokenRireki_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, IryoHokenRireki_Design.myLayout, fieldName);
+        }
+        IryoHokenRireki_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        IryoHokenRireki_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        IryoHokenRireki_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "IryoHokenRireki",
+                    "items": [
+                        {
+                            "fieldName": "btnAddIryoHoken",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnAddIryoHoken",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
+                            "onClick": "onClick_btnAddIryoHoken",
+                            "text": "追加する",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": true
+                        },
+                        {
+                            "fieldName": "dgIryoHokenRireki",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "980px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
+                            "selectControlID": "dgIryoHokenRireki",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "S",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": false,
+                                "isShowHeader": true,
+                                "isShowFooter": true,
+                                "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": false,
+                                "isShowSelectButtonColumn": false,
+                                "isShowModifyButtonColumn": true,
+                                "isShowDeleteButtonColumn": true,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
+                                "selectLimitRowCount": 0,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "",
+                                    "headerHeight": 0
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "状態",
+                                        "dataName": "state",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 50,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "state"
+                                    },
+                                    {
+                                        "columnName": "加入日",
+                                        "dataName": "kanyuDate",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "kanyuDate"
+                                    },
+                                    {
+                                        "columnName": "脱退日",
+                                        "dataName": "dattaiDate",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "dattaiDate"
+                                    },
+                                    {
+                                        "columnName": "種別key",
+                                        "dataName": "iryoHokenShubetsuKey",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "iryoHokenShubetsuKey"
+                                    },
+                                    {
+                                        "columnName": "種別",
+                                        "dataName": "iryoHokenShubetsu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 150,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "iryoHokenShubetsu"
+                                    },
+                                    {
+                                        "columnName": "保険者番号",
+                                        "dataName": "hokenshaNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 90,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "hokenshaNo"
+                                    },
+                                    {
+                                        "columnName": "保険者名称",
+                                        "dataName": "hokenshaMeisho",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 200,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "hokenshaMeisho"
+                                    },
+                                    {
+                                        "columnName": "保険者",
+                                        "dataName": "hokensha",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 300,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "hokensha"
+                                    },
+                                    {
+                                        "columnName": "記号番号",
+                                        "dataName": "kigoNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 270,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "kigoNo"
+                                    }
+                                ]
+                            },
+                            "onSort": "",
+                            "onSelect": "onSelect_dgIryoHokenRireki",
+                            "onSelectByDblClick": "onSelectByDbClick_dgIryoHokenRireki",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "onSelectByModifyButton_dgIryoHokenRireki",
+                            "onSelectByDeleteButton": "onSelectByDeleteButton_dgIryoHokenRireki",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "hokensha",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1,
+                            "gridAction": []
+                        },
+                        {
+                            "fieldName": "IryoHokenInput",
+                            "items": [
+                                {
+                                    "fieldName": "txtIryoHokenKanyuDate",
+                                    "items": [],
+                                    "controlType": "TextBoxFlexibleDate",
+                                    "width": "80px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtIryoHokenKanyuDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "text": "",
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "labelLText": "加入日",
+                                    "labelRText": "",
+                                    "labelLWidth": "50px",
+                                    "labelRWidth": "0px",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "textKind": 0,
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "txtIryoHokenDattaiDate",
+                                    "items": [],
+                                    "controlType": "TextBoxFlexibleDate",
+                                    "width": "80px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtIryoHokenDattaiDate_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "text": "",
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "labelLText": "脱退日",
+                                    "labelRText": "",
+                                    "labelLWidth": "50px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "ymdKubun": 2,
+                                    "displayFormat": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "textKind": 0,
+                                    "permitCharactor": "./_-"
+                                },
+                                {
+                                    "fieldName": "ddlIryoHokenShubetsu",
+                                    "items": [],
+                                    "controlType": "DropDownList",
+                                    "width": "160px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "ddlIryoHokenShubetsu_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "dataSource": [
+                                        {
+                                            "key": "kyokai",
+                                            "value": "協会健康保険"
+                                        },
+                                        {
+                                            "key": "kumiai",
+                                            "value": "組合健康保険"
+                                        },
+                                        {
+                                            "key": "hiyatoi",
+                                            "value": "日雇い健康保険"
+                                        },
+                                        {
+                                            "key": "senin",
+                                            "value": "船員健康保険"
+                                        },
+                                        {
+                                            "key": "kyousai",
+                                            "value": "共済組合保険"
+                                        },
+                                        {
+                                            "key": "ippanKokuminn",
+                                            "value": "一般国民健康保険"
+                                        },
+                                        {
+                                            "key": "taishokuKokumin",
+                                            "value": "退職国民健康保険"
+                                        },
+                                        {
+                                            "key": "kukmiaiKokumin",
+                                            "value": "組合国民健康保険"
+                                        }
+                                    ],
+                                    "required": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "labelLText": "種別",
+                                    "labelRText": "",
+                                    "labelLWidth": "35px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "selectedItem": "kyokai",
+                                    "isBlankLine": false
+                                },
+                                {
+                                    "fieldName": "txtIryoHokenHokenshaNo",
+                                    "items": [],
+                                    "controlType": "TextBoxCode",
+                                    "width": "80px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtIryoHokenHokenshaNo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "text": "",
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "onBlur_txtIryoHokenHokenshaNo",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "labelLText": "保険者",
+                                    "labelRText": "",
+                                    "labelLWidth": "50px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": "0000000000",
+                                    "textAlign": 0,
+                                    "textKind": 2,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": "",
+                                    "formatLength": "10"
+                                },
+                                {
+                                    "fieldName": "txtIryoHokenHokenshaMeisho",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "250px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0em",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtIryoHokenHokenshaMeisho_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "text": "",
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "labelLText": "",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "txtIryoHokenKigoNo",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "440px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtIryoHokenKigoNo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "text": "",
+                                    "required": false,
+                                    "placeHolder": "",
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "labelLText": "記号番号",
+                                    "labelRText": "",
+                                    "labelLWidth": "67px",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "textKind": 0,
+                                    "isComboBox": false,
+                                    "suggest": [],
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "btnIryoHokenKakutei",
+                                    "items": [],
+                                    "controlType": "Button",
+                                    "width": "110px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 2,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "btnIryoHokenKakutei",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "onBeforeClick": "",
+                                    "onAfterClick": "",
+                                    "onClick": "onClick_btnIryoHokenKakutei",
+                                    "text": "確定する",
+                                    "appearance": 0,
+                                    "imageFileUrl": "",
+                                    "imageWidth": "",
+                                    "imageHeight": "",
+                                    "icon": 0,
+                                    "heightTextBoxMatches": true
+                                },
+                                {
+                                    "fieldName": "btnIryoHokenTorikeshi",
+                                    "items": [],
+                                    "controlType": "Button",
+                                    "width": "110px",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 2,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "0em",
+                                    "selectControlID": "btnIryoHokenTorikeshi",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "onBeforeClick": "",
+                                    "onAfterClick": "",
+                                    "onClick": "onClick_btnIryoHokenTorikeshi",
+                                    "text": "取消する",
+                                    "appearance": 0,
+                                    "imageFileUrl": "",
+                                    "imageWidth": "",
+                                    "imageHeight": "",
+                                    "icon": 0,
+                                    "heightTextBoxMatches": true
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "980px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "Default",
+                            "marginRight": "Default",
+                            "selectControlID": "IryoHokenInput",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "医療保険",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": false,
+                            "postParameterPanelNames": [],
+                            "requestSettings": [
+                                {
+                                    "eventName": "onLoad",
+                                    "requestUrl": ""
+                                }
+                            ],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": false,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 1,
+                            "isGroupBox": false,
+                            "readOnly": true,
+                            "height": "Auto",
+                            "canPost": true
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "1015px",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "Default",
+                    "marginRight": "Default",
+                    "selectControlID": "IryoHokenRireki",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "IryoHokenRireki"
+                        }
+                    ],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": ""
+                        }
+                    ],
+                    "hiddenInput": [
+                        {
+                            "propertyName": "mode",
+                            "value": ""
+                        }
+                    ],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": true,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": true
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0em",
+            "marginRight": "0em",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBZ",
+            "controlName": "IryoHokenRireki",
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [],
+            "dataPassingForDialog": [
+                {
+                    "key": "",
+                    "controlName": ""
+                },
+                {
+                    "key": "",
+                    "controlName": ""
+                },
+                {
+                    "key": "",
+                    "controlName": ""
+                }
+            ],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [
+                {
+                    "eventName": "onSelectByModifyButton_dgIryoHokenRireki"
+                },
+                {
+                    "eventName": "onSelectByDeleteButton_dgIryoHokenRireki"
+                },
+                {
+                    "eventName": "onSelect_dgIryoHokenRireki"
+                },
+                {
+                    "eventName": "onSelectByDbClick_dgIryoHokenRireki"
+                },
+                {
+                    "eventName": "onClick_btnAddIryoHoken"
+                }
+            ],
+            "publicEventsAlias": []
+        };
+        return IryoHokenRireki_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.IryoHokenRireki_Design = IryoHokenRireki_Design;
+
+    (function (IryoHokenRireki) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnAddIryoHoken = function () {
+                return "onClick_btnAddIryoHoken";
+            };
+
+            Events.onSelect_dgIryoHokenRireki = function () {
+                return "onSelect_dgIryoHokenRireki";
+            };
+
+            Events.onSelectByDbClick_dgIryoHokenRireki = function () {
+                return "onSelectByDbClick_dgIryoHokenRireki";
+            };
+
+            Events.onSelectByModifyButton_dgIryoHokenRireki = function () {
+                return "onSelectByModifyButton_dgIryoHokenRireki";
+            };
+
+            Events.onSelectByDeleteButton_dgIryoHokenRireki = function () {
+                return "onSelectByDeleteButton_dgIryoHokenRireki";
+            };
+
+            Events.onBlur_txtIryoHokenHokenshaNo = function () {
+                return "onBlur_txtIryoHokenHokenshaNo";
+            };
+
+            Events.onClick_btnIryoHokenKakutei = function () {
+                return "onClick_btnIryoHokenKakutei";
+            };
+
+            Events.onClick_btnIryoHokenTorikeshi = function () {
+                return "onClick_btnIryoHokenTorikeshi";
+            };
+            return Events;
+        })();
+        IryoHokenRireki.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "IryoHokenRireki";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.IryoHokenRireki.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + fieldName;
+            };
+
+            Controls.prototype.IryoHokenRireki = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAddIryoHoken = function () {
+                return new UZA.Button(this.convFiledName("btnAddIryoHoken"));
+            };
+
+            Controls.prototype.dgIryoHokenRireki = function () {
+                return new UZA.DataGrid(this.convFiledName("dgIryoHokenRireki"));
+            };
+
+            Controls.prototype.IryoHokenInput = function () {
+                return new UZA.Panel(this.convFiledName("IryoHokenInput"));
+            };
+
+            Controls.prototype.txtIryoHokenKanyuDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIryoHokenKanyuDate"));
+            };
+
+            Controls.prototype.txtIryoHokenDattaiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIryoHokenDattaiDate"));
+            };
+
+            Controls.prototype.ddlIryoHokenShubetsu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlIryoHokenShubetsu"));
+            };
+
+            Controls.prototype.txtIryoHokenHokenshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtIryoHokenHokenshaNo"));
+            };
+
+            Controls.prototype.txtIryoHokenHokenshaMeisho = function () {
+                return new UZA.TextBox(this.convFiledName("txtIryoHokenHokenshaMeisho"));
+            };
+
+            Controls.prototype.txtIryoHokenKigoNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtIryoHokenKigoNo"));
+            };
+
+            Controls.prototype.btnIryoHokenKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnIryoHokenKakutei"));
+            };
+
+            Controls.prototype.btnIryoHokenTorikeshi = function () {
+                return new UZA.Button(this.convFiledName("btnIryoHokenTorikeshi"));
+            };
+            return Controls;
+        })();
+        IryoHokenRireki.Controls = Controls;
+    })(DBZ.IryoHokenRireki || (DBZ.IryoHokenRireki = {}));
+    var IryoHokenRireki = DBZ.IryoHokenRireki;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (IryoHokenRireki) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new IryoHokenRireki.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [
+                    "DisplayMode",
+                    "WidthMode",
+                    "MeisaiMode"
+                ];
+            };
+
+            ModeController.prototype.DisplayMode = function () {
+                return new Modes.DisplayMode(this.controls);
+            };
+
+            ModeController.prototype.WidthMode = function () {
+                return new Modes.WidthMode(this.controls);
+            };
+
+            ModeController.prototype.MeisaiMode = function () {
+                return new Modes.MeisaiMode(this.controls);
+            };
+            return ModeController;
+        })();
+        IryoHokenRireki.ModeController = ModeController;
+
+        (function (Modes) {
+            var DisplayMode = (function () {
+                function DisplayMode(controls) {
+                    this.controls = controls;
+                }
+                DisplayMode.prototype.Toroku = function () {
+                    this.controls.dgIryoHokenRireki().readOnly = false;
+                    this.controls.btnAddIryoHoken().displayNone = false;
+
+                    var gridSetting = this.controls.dgIryoHokenRireki().gridSetting;
+                    gridSetting.isShowDeleteButtonColumn = true;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.columns[0].visible = false;
+
+                    this.controls.dgIryoHokenRireki().gridSetting = gridSetting;
+
+                    this.controls.dgIryoHokenRireki().width = 980;
+
+                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
+                };
+
+                DisplayMode.prototype.Shokai = function () {
+                    this.controls.dgIryoHokenRireki().readOnly = true;
+                    this.controls.btnAddIryoHoken().displayNone = true;
+
+                    var gridSetting = this.controls.dgIryoHokenRireki().gridSetting;
+                    gridSetting.isShowDeleteButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.columns[0].visible = false;
+
+                    this.controls.dgIryoHokenRireki().gridSetting = gridSetting;
+
+                    this.controls.dgIryoHokenRireki().width = 940;
+
+                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
+                };
+
+                DisplayMode.prototype.ShikakuIdo = function () {
+                    this.controls.dgIryoHokenRireki().readOnly = false;
+                    this.controls.btnAddIryoHoken().displayNone = false;
+
+                    var gridSetting = this.controls.dgIryoHokenRireki().gridSetting;
+                    gridSetting.isShowDeleteButtonColumn = true;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.columns[0].visible = true;
+
+                    this.controls.dgIryoHokenRireki().gridSetting = gridSetting;
+
+                    this.controls.dgIryoHokenRireki().width = 980;
+
+                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
+                };
+                return DisplayMode;
+            })();
+            Modes.DisplayMode = DisplayMode;
+
+            var WidthMode = (function () {
+                function WidthMode(controls) {
+                    this.controls = controls;
+                }
+                WidthMode.prototype.Width1 = function () {
+                    this.controls.dgIryoHokenRireki().width = 800;
+                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
+                };
+
+                WidthMode.prototype.Width2 = function () {
+                    this.controls.dgIryoHokenRireki().width = 700;
+                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
+                };
+                return WidthMode;
+            })();
+            Modes.WidthMode = WidthMode;
+
+            var MeisaiMode = (function () {
+                function MeisaiMode(controls) {
+                    this.controls = controls;
+                }
+                MeisaiMode.prototype.toroku = function () {
+                    this.controls.IryoHokenInput().readOnly = false;
+                    this.controls.IryoHokenInput().displayNone = false;
+
+                    this.controls.txtIryoHokenKanyuDate().readOnly = false;
+                    this.controls.txtIryoHokenKanyuDate().displayNone = false;
+                    this.controls.txtIryoHokenDattaiDate().readOnly = false;
+                    this.controls.txtIryoHokenDattaiDate().displayNone = false;
+                    this.controls.ddlIryoHokenShubetsu().readOnly = false;
+                    this.controls.ddlIryoHokenShubetsu().displayNone = false;
+                    this.controls.txtIryoHokenHokenshaNo().readOnly = false;
+                    this.controls.txtIryoHokenHokenshaNo().displayNone = false;
+                    this.controls.txtIryoHokenHokenshaMeisho().readOnly = false;
+                    this.controls.txtIryoHokenHokenshaMeisho().displayNone = false;
+                    this.controls.txtIryoHokenKigoNo().readOnly = false;
+                    this.controls.txtIryoHokenKigoNo().displayNone = false;
+
+                    this.controls.btnIryoHokenKakutei().disabled = false;
+                    this.controls.btnIryoHokenKakutei().displayNone = false;
+                    this.controls.btnIryoHokenTorikeshi().disabled = false;
+                    this.controls.btnIryoHokenTorikeshi().displayNone = false;
+                };
+
+                MeisaiMode.prototype.sakujo = function () {
+                    this.controls.IryoHokenInput().readOnly = false;
+                    this.controls.IryoHokenInput().displayNone = false;
+
+                    this.controls.txtIryoHokenKanyuDate().readOnly = true;
+                    this.controls.txtIryoHokenKanyuDate().displayNone = false;
+                    this.controls.txtIryoHokenDattaiDate().readOnly = true;
+                    this.controls.txtIryoHokenDattaiDate().displayNone = false;
+                    this.controls.ddlIryoHokenShubetsu().readOnly = true;
+                    this.controls.ddlIryoHokenShubetsu().displayNone = false;
+                    this.controls.txtIryoHokenHokenshaNo().readOnly = true;
+                    this.controls.txtIryoHokenHokenshaNo().displayNone = false;
+                    this.controls.txtIryoHokenHokenshaMeisho().readOnly = true;
+                    this.controls.txtIryoHokenHokenshaMeisho().displayNone = false;
+                    this.controls.txtIryoHokenKigoNo().readOnly = true;
+                    this.controls.txtIryoHokenKigoNo().displayNone = false;
+
+                    this.controls.btnIryoHokenKakutei().disabled = false;
+                    this.controls.btnIryoHokenKakutei().displayNone = false;
+                    this.controls.btnIryoHokenTorikeshi().disabled = false;
+                    this.controls.btnIryoHokenTorikeshi().displayNone = false;
+                };
+
+                MeisaiMode.prototype.setReadOnly = function () {
+                    this.controls.IryoHokenInput().readOnly = true;
+                    this.controls.IryoHokenInput().displayNone = false;
+
+                    this.controls.txtIryoHokenKanyuDate().displayNone = false;
+                    this.controls.txtIryoHokenDattaiDate().displayNone = false;
+                    this.controls.ddlIryoHokenShubetsu().displayNone = false;
+                    this.controls.txtIryoHokenHokenshaNo().displayNone = false;
+                    this.controls.txtIryoHokenHokenshaMeisho().displayNone = false;
+                    this.controls.txtIryoHokenKigoNo().displayNone = false;
+
+                    this.controls.btnIryoHokenKakutei().displayNone = true;
+                    this.controls.btnIryoHokenTorikeshi().displayNone = true;
+                };
+
+                MeisaiMode.prototype.setDisplayNone = function () {
+                    this.controls.IryoHokenInput().readOnly = true;
+                    this.controls.IryoHokenInput().displayNone = true;
+                };
+                return MeisaiMode;
+            })();
+            Modes.MeisaiMode = MeisaiMode;
+        })(IryoHokenRireki.Modes || (IryoHokenRireki.Modes = {}));
+        var Modes = IryoHokenRireki.Modes;
+    })(DBZ.IryoHokenRireki || (DBZ.IryoHokenRireki = {}));
+    var IryoHokenRireki = DBZ.IryoHokenRireki;
+})(DBZ || (DBZ = {}));
+</script>
+      <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['IRYOHOKENRIREKI'] = {};
+DBZ['IRYOHOKENRIREKI'].IryoHokenRirekiRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_IryoHokenRireki').getProperty();parameter0.btnAddIryoHoken = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnAddIryoHoken').getProperty();parameter0.dgIryoHokenRireki = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgIryoHokenRireki').getProperty();parameter0.IryoHokenInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_IryoHokenInput').getProperty();parameter0.IryoHokenInput.txtIryoHokenKanyuDate = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtIryoHokenKanyuDate').getProperty();parameter0.IryoHokenInput.txtIryoHokenDattaiDate = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtIryoHokenDattaiDate').getProperty();parameter0.IryoHokenInput.ddlIryoHokenShubetsu = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlIryoHokenShubetsu').getProperty();parameter0.IryoHokenInput.txtIryoHokenHokenshaNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtIryoHokenHokenshaNo').getProperty();parameter0.IryoHokenInput.txtIryoHokenHokenshaMeisho = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtIryoHokenHokenshaMeisho').getProperty();parameter0.IryoHokenInput.txtIryoHokenKigoNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtIryoHokenKigoNo').getProperty();parameter0.IryoHokenInput.btnIryoHokenKakutei = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnIryoHokenKakutei').getProperty();parameter0.IryoHokenInput.btnIryoHokenTorikeshi = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnIryoHokenTorikeshi').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+DBZ['IRYOHOKENRIREKI'].IryoHokenInputRequest = function(parentFieldName){ 
+var paramArray = [];
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (IryoHokenRireki) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnAddIryoHoken = function () {
+                return "onClick_btnAddIryoHoken";
+            };
+
+            Events.onSelect_dgIryoHokenRireki = function () {
+                return "onSelect_dgIryoHokenRireki";
+            };
+
+            Events.onSelectByDbClick_dgIryoHokenRireki = function () {
+                return "onSelectByDbClick_dgIryoHokenRireki";
+            };
+
+            Events.onSelectByModifyButton_dgIryoHokenRireki = function () {
+                return "onSelectByModifyButton_dgIryoHokenRireki";
+            };
+
+            Events.onSelectByDeleteButton_dgIryoHokenRireki = function () {
+                return "onSelectByDeleteButton_dgIryoHokenRireki";
+            };
+
+            Events.onBlur_txtIryoHokenHokenshaNo = function () {
+                return "onBlur_txtIryoHokenHokenshaNo";
+            };
+
+            Events.onClick_btnIryoHokenKakutei = function () {
+                return "onClick_btnIryoHokenKakutei";
+            };
+
+            Events.onClick_btnIryoHokenTorikeshi = function () {
+                return "onClick_btnIryoHokenTorikeshi";
+            };
+            return Events;
+        })();
+        IryoHokenRireki.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "IryoHokenRireki";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.IryoHokenRireki.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.IryoHokenRireki.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.IryoHokenRireki = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAddIryoHoken = function () {
+                return new UZA.Button(this.convFiledName("btnAddIryoHoken"));
+            };
+
+            Controls.prototype.dgIryoHokenRireki = function () {
+                return new UZA.DataGrid(this.convFiledName("dgIryoHokenRireki"));
+            };
+
+            Controls.prototype.IryoHokenInput = function () {
+                return new UZA.Panel(this.convFiledName("IryoHokenInput"));
+            };
+
+            Controls.prototype.txtIryoHokenKanyuDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIryoHokenKanyuDate"));
+            };
+
+            Controls.prototype.txtIryoHokenDattaiDate = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtIryoHokenDattaiDate"));
+            };
+
+            Controls.prototype.ddlIryoHokenShubetsu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlIryoHokenShubetsu"));
+            };
+
+            Controls.prototype.txtIryoHokenHokenshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtIryoHokenHokenshaNo"));
+            };
+
+            Controls.prototype.txtIryoHokenHokenshaMeisho = function () {
+                return new UZA.TextBox(this.convFiledName("txtIryoHokenHokenshaMeisho"));
+            };
+
+            Controls.prototype.txtIryoHokenKigoNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtIryoHokenKigoNo"));
+            };
+
+            Controls.prototype.btnIryoHokenKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnIryoHokenKakutei"));
+            };
+
+            Controls.prototype.btnIryoHokenTorikeshi = function () {
+                return new UZA.Button(this.convFiledName("btnIryoHokenTorikeshi"));
+            };
+            return Controls;
+        })();
+        IryoHokenRireki.Controls = Controls;
+    })(DBZ.IryoHokenRireki || (DBZ.IryoHokenRireki = {}));
+    var IryoHokenRireki = DBZ.IryoHokenRireki;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (IryoHokenRireki) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new IryoHokenRireki.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new IryoHokenRireki.PublicProperties(this.fieldName);
+            };
+
+            ModeController.prototype.priorities = function () {
+                return [
+                    "DisplayMode",
+                    "WidthMode",
+                    "MeisaiMode"
+                ];
+            };
+
+            ModeController.prototype.DisplayMode = function () {
+                return new Modes.DisplayMode(this.controls);
+            };
+
+            ModeController.prototype.WidthMode = function () {
+                return new Modes.WidthMode(this.controls);
+            };
+
+            ModeController.prototype.MeisaiMode = function () {
+                return new Modes.MeisaiMode(this.controls);
+            };
+            return ModeController;
+        })();
+        IryoHokenRireki.ModeController = ModeController;
+
+        (function (Modes) {
+            var DisplayMode = (function () {
+                function DisplayMode(controls) {
+                    this.controls = controls;
+                }
+                DisplayMode.prototype.Toroku = function () {
+                    this.controls.dgIryoHokenRireki().readOnly = false;
+                    this.controls.btnAddIryoHoken().displayNone = false;
+
+                    var gridSetting = this.controls.dgIryoHokenRireki().gridSetting;
+                    gridSetting.isShowDeleteButtonColumn = true;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.columns[0].visible = false;
+
+                    this.controls.dgIryoHokenRireki().gridSetting = gridSetting;
+
+                    this.controls.dgIryoHokenRireki().width = 980;
+
+                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
+                };
+
+                DisplayMode.prototype.Shokai = function () {
+                    this.controls.dgIryoHokenRireki().readOnly = true;
+                    this.controls.btnAddIryoHoken().displayNone = true;
+
+                    var gridSetting = this.controls.dgIryoHokenRireki().gridSetting;
+                    gridSetting.isShowDeleteButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.columns[0].visible = false;
+
+                    this.controls.dgIryoHokenRireki().gridSetting = gridSetting;
+
+                    this.controls.dgIryoHokenRireki().width = 940;
+
+                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
+                };
+
+                DisplayMode.prototype.ShikakuIdo = function () {
+                    this.controls.dgIryoHokenRireki().readOnly = false;
+                    this.controls.btnAddIryoHoken().displayNone = false;
+
+                    var gridSetting = this.controls.dgIryoHokenRireki().gridSetting;
+                    gridSetting.isShowDeleteButtonColumn = true;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.columns[0].visible = true;
+
+                    this.controls.dgIryoHokenRireki().gridSetting = gridSetting;
+
+                    this.controls.dgIryoHokenRireki().width = 980;
+
+                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
+                };
+                return DisplayMode;
+            })();
+            Modes.DisplayMode = DisplayMode;
+
+            var WidthMode = (function () {
+                function WidthMode(controls) {
+                    this.controls = controls;
+                }
+                WidthMode.prototype.Width1 = function () {
+                    this.controls.dgIryoHokenRireki().width = 800;
+                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
+                };
+
+                WidthMode.prototype.Width2 = function () {
+                    this.controls.dgIryoHokenRireki().width = 700;
+                    this.controls.dgIryoHokenRireki()._control.afterPropertiesSet();
+                };
+                return WidthMode;
+            })();
+            Modes.WidthMode = WidthMode;
+
+            var MeisaiMode = (function () {
+                function MeisaiMode(controls) {
+                    this.controls = controls;
+                }
+                MeisaiMode.prototype.toroku = function () {
+                    this.controls.IryoHokenInput().readOnly = false;
+                    this.controls.IryoHokenInput().displayNone = false;
+
+                    this.controls.txtIryoHokenKanyuDate().readOnly = false;
+                    this.controls.txtIryoHokenKanyuDate().displayNone = false;
+                    this.controls.txtIryoHokenDattaiDate().readOnly = false;
+                    this.controls.txtIryoHokenDattaiDate().displayNone = false;
+                    this.controls.ddlIryoHokenShubetsu().readOnly = false;
+                    this.controls.ddlIryoHokenShubetsu().displayNone = false;
+                    this.controls.txtIryoHokenHokenshaNo().readOnly = false;
+                    this.controls.txtIryoHokenHokenshaNo().displayNone = false;
+                    this.controls.txtIryoHokenHokenshaMeisho().readOnly = false;
+                    this.controls.txtIryoHokenHokenshaMeisho().displayNone = false;
+                    this.controls.txtIryoHokenKigoNo().readOnly = false;
+                    this.controls.txtIryoHokenKigoNo().displayNone = false;
+
+                    this.controls.btnIryoHokenKakutei().disabled = false;
+                    this.controls.btnIryoHokenKakutei().displayNone = false;
+                    this.controls.btnIryoHokenTorikeshi().disabled = false;
+                    this.controls.btnIryoHokenTorikeshi().displayNone = false;
+                };
+
+                MeisaiMode.prototype.sakujo = function () {
+                    this.controls.IryoHokenInput().readOnly = false;
+                    this.controls.IryoHokenInput().displayNone = false;
+
+                    this.controls.txtIryoHokenKanyuDate().readOnly = true;
+                    this.controls.txtIryoHokenKanyuDate().displayNone = false;
+                    this.controls.txtIryoHokenDattaiDate().readOnly = true;
+                    this.controls.txtIryoHokenDattaiDate().displayNone = false;
+                    this.controls.ddlIryoHokenShubetsu().readOnly = true;
+                    this.controls.ddlIryoHokenShubetsu().displayNone = false;
+                    this.controls.txtIryoHokenHokenshaNo().readOnly = true;
+                    this.controls.txtIryoHokenHokenshaNo().displayNone = false;
+                    this.controls.txtIryoHokenHokenshaMeisho().readOnly = true;
+                    this.controls.txtIryoHokenHokenshaMeisho().displayNone = false;
+                    this.controls.txtIryoHokenKigoNo().readOnly = true;
+                    this.controls.txtIryoHokenKigoNo().displayNone = false;
+
+                    this.controls.btnIryoHokenKakutei().disabled = false;
+                    this.controls.btnIryoHokenKakutei().displayNone = false;
+                    this.controls.btnIryoHokenTorikeshi().disabled = false;
+                    this.controls.btnIryoHokenTorikeshi().displayNone = false;
+                };
+
+                MeisaiMode.prototype.setReadOnly = function () {
+                    this.controls.IryoHokenInput().readOnly = true;
+                    this.controls.IryoHokenInput().displayNone = false;
+
+                    this.controls.txtIryoHokenKanyuDate().displayNone = false;
+                    this.controls.txtIryoHokenDattaiDate().displayNone = false;
+                    this.controls.ddlIryoHokenShubetsu().displayNone = false;
+                    this.controls.txtIryoHokenHokenshaNo().displayNone = false;
+                    this.controls.txtIryoHokenHokenshaMeisho().displayNone = false;
+                    this.controls.txtIryoHokenKigoNo().displayNone = false;
+
+                    this.controls.btnIryoHokenKakutei().displayNone = true;
+                    this.controls.btnIryoHokenTorikeshi().displayNone = true;
+                };
+
+                MeisaiMode.prototype.setDisplayNone = function () {
+                    this.controls.IryoHokenInput().readOnly = true;
+                    this.controls.IryoHokenInput().displayNone = true;
+                };
+                return MeisaiMode;
+            })();
+            Modes.MeisaiMode = MeisaiMode;
+        })(IryoHokenRireki.Modes || (IryoHokenRireki.Modes = {}));
+        var Modes = IryoHokenRireki.Modes;
+    })(DBZ.IryoHokenRireki || (DBZ.IryoHokenRireki = {}));
+    var IryoHokenRireki = DBZ.IryoHokenRireki;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (IryoHokenRireki) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new IryoHokenRireki.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        IryoHokenRireki.PublicProperties = PublicProperties;
+    })(DBZ.IryoHokenRireki || (DBZ.IryoHokenRireki = {}));
+    var IryoHokenRireki = DBZ.IryoHokenRireki;
+})(DBZ || (DBZ = {}));
+</script></div>

@@ -9,10 +9,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.InputShikibetsuNoCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -37,7 +37,7 @@ public class KyufuJissekiTokuteiNyushohiDac implements IKyufuJissekiTokuteiNyush
             KokanShikibetsuNo 交換情報識別番号,
             InputShikibetsuNoCode 入力識別番号,
             ShoKisaiHokenshaNo 証記載保険者番号,
-            KaigoHihokenshaNo 被保番号,
+            HihokenshaNo 被保番号,
             FlexibleYearMonth サービス提供年月,
             JigyoshaNo 事業所番号,
             ToshiNo 通番) {

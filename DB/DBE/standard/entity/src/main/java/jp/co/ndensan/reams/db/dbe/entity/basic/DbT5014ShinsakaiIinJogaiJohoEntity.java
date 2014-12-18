@@ -6,8 +6,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import java.util.Objects;
 
 /**
@@ -31,7 +31,7 @@ public class DbT5014ShinsakaiIinJogaiJohoEntity implements IDbAccessable {
     @PrimaryKey
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
-    private KaigoHihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private int kanriNo;
     private RString jogaiTaishoShinsakaiIinCode;
@@ -104,7 +104,7 @@ public class DbT5014ShinsakaiIinJogaiJohoEntity implements IDbAccessable {
      *
      * @return hihokenshaNo
      */
-    public KaigoHihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
@@ -113,7 +113,7 @@ public class DbT5014ShinsakaiIinJogaiJohoEntity implements IDbAccessable {
      *
      * @param hihokenshaNo hihokenshaNo
      */
-    public void setHihokenshaNo(KaigoHihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 

@@ -25,6 +25,8 @@ public class JukyushaIdoRenrakuhyoGemmenGengakuDiv extends Panel {
      */
     @JsonProperty("radGemmenShinseichuKubun")
     private RadioButton radGemmenShinseichuKubun;
+    @JsonProperty("Button5")
+    private Button Button5;
     @JsonProperty("JukyushaIdoRenrakuhyoGemmenGengakuSub")
     private JukyushaIdoRenrakuhyoGemmenGengakuSubDiv JukyushaIdoRenrakuhyoGemmenGengakuSub;
     @JsonProperty("JukyushaIdoRenrakuhyoTokuteiNyushoshaServiceHi")
@@ -44,6 +46,16 @@ public class JukyushaIdoRenrakuhyoGemmenGengakuDiv extends Panel {
     @JsonProperty("radGemmenShinseichuKubun")
     public void setRadGemmenShinseichuKubun(RadioButton radGemmenShinseichuKubun) {
         this.radGemmenShinseichuKubun=radGemmenShinseichuKubun;
+    }
+
+    @JsonProperty("Button5")
+    public Button getButton5() {
+        return Button5;
+    }
+
+    @JsonProperty("Button5")
+    public void setButton5(Button Button5) {
+        this.Button5=Button5;
     }
 
     @JsonProperty("JukyushaIdoRenrakuhyoGemmenGengakuSub")

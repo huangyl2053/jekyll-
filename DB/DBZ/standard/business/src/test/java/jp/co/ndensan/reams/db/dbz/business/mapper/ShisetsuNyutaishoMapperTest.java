@@ -60,11 +60,6 @@ public class ShisetsuNyutaishoMapperTest extends DbzTestBase {
         }
 
         @Test
-        public void get処理日時が_Entityの処理日時と同一になる() {
-            assertThat(sut.get処理日時(), is(entity.getShoriTimestamp()));
-        }
-
-        @Test
         public void get台帳種別のコードが_Entityの台帳種別と同一になる() {
             assertThat(sut.get台帳種別().getCode(), is(entity.getDaichoShubetsu()));
         }
@@ -177,11 +172,6 @@ public class ShisetsuNyutaishoMapperTest extends DbzTestBase {
         @Test
         public void Entityの識別コードと_施設入退所の個人識別コードが同一になる() {
             assertThat(sut.getShikibetsuCode(), is(施設入退所.get個人識別コード()));
-        }
-
-        @Test
-        public void Entityの処理日時と_施設入退所の処理日時が同一になる() {
-            assertThat(sut.getShoriTimestamp(), is(施設入退所.get処理日時()));
         }
 
         @Test

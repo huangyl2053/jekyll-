@@ -17,6 +17,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzModel</artifactId>
+        </dependency>
+        <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzModel</artifactId>
         </dependency>
@@ -24,6 +28,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbeEntity</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5022RenkeiyoDataSofuKirokuEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -25,7 +25,7 @@ public class RenkeiyoDataSofuKirokuEntityMock {
 
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("100000001")));
         entity.setShoriTimestamp(new YMDHMS(new RString("20140808102030")));
-        entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("H00000001")));
+        entity.setHihokenshaNo(new HihokenshaNo(new RString("H00000001")));
         entity.setNinteiShinseiShinseijiKubun(new RString("01"));
         entity.setHikiwatashiKubun(new RString("0"));
         entity.setHikiwatashiNichiji(RDateTime.of(2014, 03, 14, 18, 45, 59));

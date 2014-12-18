@@ -44,7 +44,7 @@ public class ShisetsuNyutaishoTest extends DbzTestBase {
         市町村コード = mock(LasdecCode.class);
         個人識別コード = mock(ShikibetsuCode.class);
         処理日時 = mock(RDateTime.class);
-        台帳種別 = DaichoType.他市町村住所地特例者台帳;
+        台帳種別 = DaichoType.他市町村住所地特例者;
         入所期間 = create期間();
         入所施設 = mock(NyushoShisetsu.class);
         入所処理年月日 = mock(FlexibleDate.class);

@@ -308,8 +308,7 @@ public enum TeikeibunShubetsuTokki implements IRStringConvertable {
      * @return 引数のコードに対応するTeikeibunShubetsu型のenum
      * @throws IllegalArgumentException 実在しない定型文種別コードの場合
      */
-    public static TeikeibunShubetsuTokki toValue(RString code) throws NullPointerException, IllegalArgumentException {
-
+    public static TeikeibunShubetsuTokki toValue(RString code) throws IllegalArgumentException {
         for (TeikeibunShubetsuTokki item : TeikeibunShubetsuTokki.values()) {
             if (item.code.equals(code)) {
                 return item;

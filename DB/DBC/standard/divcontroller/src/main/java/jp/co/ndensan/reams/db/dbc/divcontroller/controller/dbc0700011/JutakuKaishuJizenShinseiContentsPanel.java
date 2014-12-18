@@ -91,10 +91,10 @@ public class JutakuKaishuJizenShinseiContentsPanel {
             JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
         ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
 
-        panel.getJutakuJizenShinseiDetailInput().getJutakuKaishuDetailInput()
-                .getTxtKaishuTaishoAddress().setValue(
-                        hihoPanel.getKaigoAtena().getAtenaInfo().getTxtJusho().getValue());
-
+//        panel.getJutakuJizenShinseiDetailInput().getJutakuKaishuDetailInput()
+//                .getTxtKaishuTaishoAddress().setValue(
+//                        hihoPanel.getKaigoAtena().getAtenaInfo().getTxtJusho().getValue());
+//
         response.data = panel;
         return response;
     }
@@ -168,7 +168,6 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 //        div.getTxtShinseishaName().setReadOnly(false);
 //        div.getTxtShinseishaNameKana().setReadOnly(false);
 //    }
-
 //    private void ableJigyosha(ShinseishaInfoDiv div) {
 //        div.getTxtJigyoshaNo().setDisabled(false);
 //        div.getBtnJigyoshaInputGuide().setDisabled(false);
@@ -176,7 +175,6 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 //        div.getTxtShinseishaName().setReadOnly(true);
 //        div.getTxtShinseishaNameKana().setReadOnly(true);
 //    }
-
     private void setHonninInfo(ShinseishaInfoDiv shinseishaDiv, AtenaShokaiSimpleDiv atenaDiv) {
         shinseishaDiv.getTxtShinseishaNameKana().setValue(atenaDiv.getTxtAtenaKanaMeisho().getValue());
         shinseishaDiv.getTxtShinseishaName().setValue(atenaDiv.getTxtAtenaMeisho().getValue());
@@ -191,7 +189,7 @@ public class JutakuKaishuJizenShinseiContentsPanel {
         panel.getJutakuKaishuJizenShinseiKoza().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
         panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getRadKozaShubetsu().setSelectedItem(new RString("futsu"));
 
-        setHonninInfo(panel.getJutakuKaishuJizenShinseisha(), hihoPanel.getKaigoAtena().getAtenaInfo());
+//        setHonninInfo(panel.getJutakuKaishuJizenShinseisha(), hihoPanel.getKaigoAtena().getAtenaInfo());
     }
     /*
      住宅所有者・被保険者との関係　の初期値をセットします。

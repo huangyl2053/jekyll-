@@ -11,10 +11,10 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.comparator.HihokenshaComparators.ShichosonCodeComparator;
 import jp.co.ndensan.reams.db.dbz.business.comparator.HihokenshaComparators.RegisterDateTimeComparator;
-import jp.co.ndensan.reams.db.dbz.business.comparator.MultiComparator;
+import jp.co.ndensan.reams.db.dbz.business.util.MultiComparator;
 import jp.co.ndensan.reams.db.dbz.business.comparator.ShikibetsuCodeComparator;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -61,7 +61,7 @@ public class HihokenshaList implements Iterable<Hihokensha> {
     }
 
     /**
-     * {@link KaigoHihokenshaNo 被保険者番号}が一致する、{@link Hihokensha hihokensha}を返します。
+     * {@link HihokenshaNo 被保険者番号}が一致する、{@link Hihokensha hihokensha}を返します。
      * 複数のHihokenshaが該当する可能性もありますが、 その場合、
      * 地方公共団体コードの昇順、識別コードの昇順、被保険者台帳登録日時の降順に優先され、1件を返します。
      *
@@ -69,18 +69,18 @@ public class HihokenshaList implements Iterable<Hihokensha> {
      * {@link #subHihokenshaList(jp.co.ndensan.reams.uz.uza.biz.LasdecCode) subHihokenshaList()}により、
      * 市町村を指定することで、希望のHihokenshaを得ることができます。
      *
-     * @param 被保険者番号 {@link KaigoHihokenshaNo 被保険者番号}
+     * @param 被保険者番号 {@link HihokenshaNo 被保険者番号}
      * @return 指定の被保険者番号に該当するHihokensha
      * @throws IllegalArgumentException 指定の被保険者番号に該当するHihokenshaがいないとき。
      */
-    public Hihokensha getHihokensha(KaigoHihokenshaNo 被保険者番号) throws IllegalArgumentException {
+    public Hihokensha getHihokensha(HihokenshaNo 被保険者番号) throws IllegalArgumentException {
         for (Hihokensha hihokensha : list) {
             if (isHihokenshawhoseHihokenshaNoIs(被保険者番号, hihokensha)) {
                 return hihokensha;
             }
         }
         throw new IllegalArgumentException(errorMessageForMethod("指定の"
-                + nameWithClassName("被保険者番号", simpleNameOf(KaigoHihokenshaNo.class))));
+                + nameWithClassName("被保険者番号", simpleNameOf(HihokenshaNo.class))));
     }
 
     /**
@@ -133,7 +133,7 @@ public class HihokenshaList implements Iterable<Hihokensha> {
         return lasdecCode.equals(hihokensha.get市町村コード());
     }
 
-    private boolean isHihokenshawhoseHihokenshaNoIs(KaigoHihokenshaNo hihokenshaNo, Hihokensha hihokensha) {
+    private boolean isHihokenshawhoseHihokenshaNoIs(HihokenshaNo hihokenshaNo, Hihokensha hihokensha) {
         return hihokenshaNo.equals(hihokensha.get被保険者番号());
     }
 

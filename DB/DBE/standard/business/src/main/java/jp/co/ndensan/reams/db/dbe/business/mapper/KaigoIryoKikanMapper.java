@@ -4,13 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.mapper;
 
-import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
-import jp.co.ndensan.reams.ur.urz.business.IKoza;
-import jp.co.ndensan.reams.ur.urz.business.mapper.IryoKikanMapper;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.model.IryokikanModel;
 
 /**
  * 介護医療機関エンティティを介護医療機関クラスにマッピングします。
@@ -33,10 +31,10 @@ public final class KaigoIryoKikanMapper {
      * @return 介護医療機関クラス
      * @throws NullPointerException 引数にNULLが渡された場合
      */
-    public static KaigoIryoKikan toKaigoIryoKikan(KaigoIryoKikanEntity entity, List<IKoza> 口座List) throws NullPointerException {
+    public static KaigoIryoKikan toKaigoIryoKikan(KaigoIryoKikanEntity entity) throws NullPointerException {
         requireNonNull(entity, Messages.E00003.replace("介護医療機関エンティティ", "介護医療機関").getMessage());
 
-        return new KaigoIryoKikan(IryoKikanMapper.to医療機関(entity.getIryoKikanEntity(), 口座List),
+        return new KaigoIryoKikan(new IryokikanModel(entity.getIryoKikanEntity()),
                 ShujiiIryoKikanMapper.toShujiiIryoKikan(entity.getDbT7011ShujiiIryoKikanJohoEntity()));
     }
 }

@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiResult;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.business.mapper.NinteiKekkaMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteiKekkaJohoDac;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
 import jp.co.ndensan.reams.ur.urz.realservice.IKaigoServiceManager;

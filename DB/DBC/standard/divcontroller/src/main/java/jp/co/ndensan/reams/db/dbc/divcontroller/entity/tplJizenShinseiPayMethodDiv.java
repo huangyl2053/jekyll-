@@ -1,16 +1,15 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PaymentMethod.PaymentMethodDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.PaymentMethodDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * tplJizenShinseiPayMethod のクラスファイル 
- * 
+ * tplJizenShinseiPayMethod のクラスファイル
+ *
  * @author 自動生成
  */
 public class tplJizenShinseiPayMethodDiv extends TabPanel {
@@ -20,6 +19,7 @@ public class tplJizenShinseiPayMethodDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("PaymentMethod")
     private PaymentMethodDiv PaymentMethod;
 
@@ -32,11 +32,6 @@ public class tplJizenShinseiPayMethodDiv extends TabPanel {
     @JsonProperty("PaymentMethod")
     public PaymentMethodDiv getPaymentMethod() {
         return PaymentMethod;
-    }
-
-    @JsonProperty("PaymentMethod")
-    public void setPaymentMethod(PaymentMethodDiv PaymentMethod) {
-        this.PaymentMethod=PaymentMethod;
     }
 
 }

@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.helper;
 
-import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.Shujii;
@@ -26,27 +25,20 @@ import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.business._Doctor;
-import jp.co.ndensan.reams.ur.urz.business._Doctors;
-import jp.co.ndensan.reams.ur.urz.business._IryoKikan;
 import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.business.IDoctor;
-import jp.co.ndensan.reams.ur.urz.business.IKoza;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Name;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.Range;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.*;
 import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun.*;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryokikanCode;
+import jp.co.ndensan.reams.ur.urz.model.IryokikanModel;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import static org.mockito.Mockito.spy;
 
@@ -111,26 +103,11 @@ public class ShujiiIkenshoResultMock {
                         new TelNo("電話番号"),
                         new RString("FAX番号")),
                 new KaigoIryoKikan(
-                        new _IryoKikan(
-                                new _IryoKikanCode(new RString("1234567890")),
-                                new ShikibetsuCode(new RString("123456")),
-                                new _Name(new AtenaMeisho(new RString("医療機関名称")), new AtenaKanaMeisho(RString.EMPTY)),
-                                new _Name(new AtenaMeisho(new RString("医療機関略称")), new AtenaKanaMeisho(RString.EMPTY)),
-                                new RString("所在地郵便番号"),
-                                new RString("所在地住所"),
-                                new RString("所在地カナ住所"),
-                                new Range(RDate.MIN, RDate.MAX),
-                                new _Doctors(new ArrayList<IDoctor>()),
-                                new ArrayList<IKoza>(),
-                                FlexibleDate.MIN,
-                                new RString("休止区分"),
-                                new RString("異動事由"),
-                                new RString("会員区分"),
-                                true),
+                        new IryokikanModel(KaigoIryoKikanTestHelper.create医療機関Entity()),
                         new ShujiiIryoKikan(
                                 new LasdecCode(new RString("202052")),
                                 new KaigoIryoKikanCode(new RString("1234567890")),
-                                new _IryoKikanCode(new RString("1234567890")),
+                                new IryokikanCode("1234567890"),
                                 IryoKikanJokyo.有効,
                                 new IryoKikanKubun(new RString("医療機関の区分"), RString.EMPTY, RString.EMPTY))));
     }

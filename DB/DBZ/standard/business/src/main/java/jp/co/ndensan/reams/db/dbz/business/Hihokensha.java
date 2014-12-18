@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbz.business;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
@@ -52,11 +52,6 @@ public class Hihokensha implements IHihokenshaShikaku, INinteiShinseiTaishosha {
     }
 
     @Override
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return this.shikaku.get証記載保険者番号();
-    }
-
-    @Override
     public ShikibetsuCode get識別コード() {
         return this.shikaku.get識別コード();
     }
@@ -67,7 +62,7 @@ public class Hihokensha implements IHihokenshaShikaku, INinteiShinseiTaishosha {
     }
 
     @Override
-    public KaigoHihokenshaNo get被保険者番号() {
+    public HihokenshaNo get被保険者番号() {
         return this.shikaku.get被保険者番号();
     }
 

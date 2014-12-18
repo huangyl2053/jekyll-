@@ -38,13 +38,13 @@ import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3029KyufujissekiTokuteiNyusho
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3033KyufujissekiShukeiEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.KyufujissekiShuruiDetailEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.HokenKyufuRitsu;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
@@ -77,7 +77,7 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
         private static final InputShikibetsuNo 入力識別番号
                 = new InputShikibetsuNo(new Code(new RString("7131")), new RString("居宅介護サービス"), new RString("居宅介護サービス"));
         private static final ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("00135985"));
-        private static final KaigoHihokenshaNo 被保番号 = new KaigoHihokenshaNo(new RString("0000000019"));
+        private static final HihokenshaNo 被保番号 = new HihokenshaNo(new RString("0000000019"));
         private static final ServiceTeikyoYM サービス提供年月 = new ServiceTeikyoYM(new FlexibleYearMonth("201407"));
         private static final JigyoshaNo 事業所番号 = new JigyoshaNo(new RString("1258743695"));
         private static final ToshiNo 通番 = new ToshiNo(new RString("568"));
@@ -1028,7 +1028,7 @@ public class KyufuJissekiMapperTest extends DbcTestBase {
 
     private static KyufuJissekiKeyInfo create給付実績キー情報() {
         return new KyufuJissekiKeyInfo(
-                new KaigoHihokenshaNo(new RString("0000000019")),
+                new HihokenshaNo(new RString("0000000019")),
                 new Range<>(new ServiceTeikyoYM(new FlexibleYearMonth("201401")), new ServiceTeikyoYM(new FlexibleYearMonth("201412"))),
                 new InputShikibetsuNo(new Code(new RString("7131")), new RString("居宅介護サービス"), new RString("居宅介護サービス")),
                 new ServiceShuruiCode(new RString("11")),

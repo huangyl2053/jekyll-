@@ -1,87 +1,79 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 連絡先区分番号です。<br />
- * ひとりの被保険者に対して複数件連絡の情報がある場合に、その中からひとつを特定するための番号です。
+ * 連絡先区分番号です。<br/>
+ * ひとりの被保険者に対して複数件の連絡の情報がある場合に、その中のひとつを特定するための番号です。
  *
  * @author N3327 三浦 凌
  */
-public class RenrakusakiKubunNo implements IValueObject<RString>, Comparable<RenrakusakiKubunNo> {
+public final class RenrakusakiKubunNo implements IValueObject<RString>, Comparable<RenrakusakiKubunNo> {
 
-    private static final int PERMISSIBLE_LENGTH = 8;
     /**
-     * 連絡先区分番号がないことを表す値です。
+     * 空の RenrakusakiKubunNo です。
+     * {@link #value() value()}で{@link RString#EMPTY}を返します。
      */
-    public static final RenrakusakiKubunNo NULL_VALUE;
+    public static final RenrakusakiKubunNo EMPTY;
 
     static {
-        NULL_VALUE = new RenrakusakiKubunNo(new RString("        "));
+        EMPTY = new RenrakusakiKubunNo(RString.EMPTY);
     }
-    private final RString 連絡先区分番号;
+
+    private final RString theValue;
 
     /**
-     * 指定の値を持った、RenrakusakiKubunNoを生成します。
+     * 指定の値をもった RenrakusakiKubunNo を生成します。
      *
-     * @param value 連絡先区分番号に相当するRString
-     * @throws NullPointerException 指定のRStringがnullのとき
-     * @throws IllegalArgumentException 指定のRStringが8桁でないとき
+     * @param value 値
      */
-    public RenrakusakiKubunNo(RString value) throws NullPointerException, IllegalArgumentException {
-        requireNonNull(value, Messages.E00003.replace("value", getClass().getName()).getMessage());
-        validate(value);
-        this.連絡先区分番号 = value;
+    public RenrakusakiKubunNo(String value) {
+        this.theValue = (value == null) ? null : new RString(value);
+    }
+
+    /**
+     * 指定の値をもった RenrakusakiKubunNo を生成します。
+     *
+     * @param value 値
+     */
+    public RenrakusakiKubunNo(RString value) {
+        this.theValue = value;
     }
 
     @Override
     public RString value() {
-        return this.連絡先区分番号;
+        return this.theValue;
     }
 
     @Override
-    public int compareTo(RenrakusakiKubunNo target) {
-        return this.連絡先区分番号.compareTo(target.value());
+    public int compareTo(RenrakusakiKubunNo o) {
+        return Objects.compare(this.theValue, o.theValue, Comparators.naturalOrder());
     }
 
     @Override
-    public boolean equals(Object target) {
-        if (isNull(target) || isNotSameClass(target.getClass())) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof RenrakusakiKubunNo)) {
             return false;
         }
-        return hasSameValue((RenrakusakiKubunNo) target);
+        RenrakusakiKubunNo other = (RenrakusakiKubunNo) obj;
+        return Objects.equals(this.theValue, other.theValue);
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 73 * hash + Objects.hashCode(this.連絡先区分番号);
+        int hash = 3;
+        hash = 47 * hash + Objects.hashCode(this.theValue);
         return hash;
-    }
-
-    private void validate(RString value) throws IllegalArgumentException {
-        if (value.length() != PERMISSIBLE_LENGTH) {
-            throw new IllegalArgumentException(Messages.E00013.replace("連絡先区分番号", PERMISSIBLE_LENGTH + "桁").getMessage());
-        }
-    }
-
-    private boolean isNull(Object target) {
-        return target == null;
-    }
-
-    private boolean isNotSameClass(Class clazz) {
-        return clazz != this.getClass();
-    }
-
-    private boolean hasSameValue(RenrakusakiKubunNo target) {
-        return target.value().equals(this.連絡先区分番号);
     }
 }

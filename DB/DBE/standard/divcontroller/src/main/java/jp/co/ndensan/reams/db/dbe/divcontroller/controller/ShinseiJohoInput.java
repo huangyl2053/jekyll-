@@ -40,9 +40,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.dbe1010002.SinseiRiyuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.mapper.YokaigoNinteiShinseiDivMapper;
 import jp.co.ndensan.reams.db.dbe.realservice.JogaiShinsakaiIinManager;
 import jp.co.ndensan.reams.db.dbe.realservice.YokaigoNinteiShinseiManager;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.TeikeibunKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.TeikeibunShubetsuElseTokki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
@@ -802,7 +802,7 @@ public class ShinseiJohoInput {
 
         //TODO n8178 城間篤人 固定値で必要な項目を用意。本来は基本情報から取得すべきで、修正が必要 2014年9月
         private final ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("012345"));
-        private final KaigoHihokenshaNo kaigoHihokenshaNo = new KaigoHihokenshaNo(new RString("0123456789"));
+        private final HihokenshaNo kaigoHihokenshaNo = new HihokenshaNo(new RString("0123456789"));
 
         private enum KankeiIinDecideFlag {
 

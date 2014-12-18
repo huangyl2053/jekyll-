@@ -9,12 +9,10 @@
     <artifactId>DbaModel</artifactId>
     <packaging>jar</packaging>
     <name>DbaModel</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -22,11 +20,21 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbaEntity</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzModel</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

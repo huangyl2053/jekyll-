@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirek
 import jp.co.ndensan.reams.db.dbe.entity.relate.ShujiiIkenshoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoDac;
 import jp.co.ndensan.reams.db.dbe.realservice.helper.ShujiiIkenshoEntityMock;
-import jp.co.ndensan.reams.db.dbe.realservice.helper.ShujiiIkenshoResultMock;
-import jp.co.ndensan.reams.db.dbe.realservice.helper.ShujiiIkenshoSakuseiIraiMock;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiIkenshoResultMock;
+import jp.co.ndensan.reams.db.dbe.business.helper.ShujiiIkenshoSakuseiIraiMock;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

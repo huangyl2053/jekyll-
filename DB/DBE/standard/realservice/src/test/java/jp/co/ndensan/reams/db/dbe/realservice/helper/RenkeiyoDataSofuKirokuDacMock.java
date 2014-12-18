@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbe.definition.NinteiShinseijiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiChousaSoufuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiIkenshoSoufuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiSoufuKubun;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5022RenkeiyoDataSofuKirokuEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IRenkeiyoDataSofuKirokuDac;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -33,7 +33,7 @@ public class RenkeiyoDataSofuKirokuDacMock implements IRenkeiyoDataSofuKirokuDac
     public static RString 削除可能な申請書管理番号 = new RString("削除可能");
     public static RString 登録可能な申請書管理番号 = new RString("更新可能");
     public static ShinseishoKanriNo shinseishokanriNo;
-    public static KaigoHihokenshaNo hihokennshaNo;
+    public static HihokenshaNo hihokennshaNo;
     public static YMDHMS shoriTimestamp;
 
     public static DbT5022RenkeiyoDataSofuKirokuEntity getSpiedInstance() {
@@ -46,12 +46,12 @@ public class RenkeiyoDataSofuKirokuDacMock implements IRenkeiyoDataSofuKirokuDac
         shoriTimestamp = mock(YMDHMS.class);
         shoriTimestamp = new YMDHMS(new RString("20140808102030"));
 
-        hihokennshaNo = mock(KaigoHihokenshaNo.class);
-        hihokennshaNo = new KaigoHihokenshaNo(new RString("1234567890"));
+        hihokennshaNo = mock(HihokenshaNo.class);
+        hihokennshaNo = new HihokenshaNo(new RString("1234567890"));
 
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("100000001")));
         entity.setShoriTimestamp(new YMDHMS(new RString("20140808102030")));
-        entity.setHihokenshaNo(new KaigoHihokenshaNo(new RString("1234567890")));
+        entity.setHihokenshaNo(new HihokenshaNo(new RString("1234567890")));
         entity.setNinteiShinseiShinseijiKubun(new RString("01"));
         entity.setHikiwatashiKubun(new RString("0"));
         entity.setHikiwatashiNichiji(RDateTime.of(2014, 03, 14, 18, 45, 05));

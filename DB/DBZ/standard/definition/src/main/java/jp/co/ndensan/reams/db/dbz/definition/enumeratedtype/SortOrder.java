@@ -19,10 +19,10 @@ public enum SortOrder {
      * 降順
      */
     DESC(-1);
-    private int rate;
+    private final int theRate;
 
     private SortOrder(int rate) {
-        this.rate = rate;
+        this.theRate = rate;
     }
 
     /**
@@ -30,7 +30,7 @@ public enum SortOrder {
      *
      * @return {@link SortOrder#ASC ASC}のとき1, {@link SortOrder#DESC DESC}のとき-1。
      */
-    public int getRate() {
-        return rate;
+    public int rate() {
+        return theRate;
     }
 }

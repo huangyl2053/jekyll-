@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.ShunoJoho;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Jun 25 10:25:13 JST 2014 
+ * Fri Nov 21 19:40:03 JST 2014 
  */
 
 

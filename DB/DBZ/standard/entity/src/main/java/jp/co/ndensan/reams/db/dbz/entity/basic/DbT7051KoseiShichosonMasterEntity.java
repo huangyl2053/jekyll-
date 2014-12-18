@@ -1,19 +1,19 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
 
 /**
  * DbT7051KoseiShichosonMasterの項目定義クラスです
@@ -21,6 +21,7 @@ import java.util.Objects;
  */
 public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051KoseiShichosonMasterEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7051KoseiShichosonMaster");
 
@@ -35,7 +36,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     @PrimaryKey
     private RString shichosonShokibetsuID;
     @PrimaryKey
-    private ShichosonCode shichosonCode;
+    private LasdecCode shichosonCode;
     @PrimaryKey
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private RString kokuhorenKoikiShichosonNo;
@@ -54,12 +55,13 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     private RString gaikokujinHyojiHouhou;
     private RString rojinhokenShichosonNo;
     private RString rokenJukyushaNoTaikei;
+    private RString tokuchoBunpaishuyaku;
     private FlexibleDate ikoYMD;
     private FlexibleDate kanyuYMD;
     private FlexibleDate ridatsuYMD;
     private RString gappeiKyuShichosonKubun;
     private RString gappeiKyuShichosonHyojiUmu;
-    private RString gappeiLinkNo;
+    private RString gappeiChiikiNo;
     private ShoKisaiHokenshaNo unyoHokenshaNo;
     private FlexibleDate unyoKaishiYMD;
     private FlexibleDate unyoShuryoYMD;
@@ -67,6 +69,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getInsertDantaiCd
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -75,6 +78,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setInsertDantaiCd
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -83,6 +87,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getIsDeleted
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -91,15 +96,16 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setIsDeleted
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * setLastUpdateReamsLoginId
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -108,6 +114,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getShichosonShokibetsuID
+     *
      * @return shichosonShokibetsuID
      */
     public RString getShichosonShokibetsuID() {
@@ -116,6 +123,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setShichosonShokibetsuID
+     *
      * @param shichosonShokibetsuID shichosonShokibetsuID
      */
     public void setShichosonShokibetsuID(RString shichosonShokibetsuID) {
@@ -124,22 +132,25 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getShichosonCode
+     *
      * @return shichosonCode
      */
-    public ShichosonCode getShichosonCode() {
+    public LasdecCode getShichosonCode() {
         return shichosonCode;
     }
 
     /**
      * setShichosonCode
+     *
      * @param shichosonCode shichosonCode
      */
-    public void setShichosonCode(ShichosonCode shichosonCode) {
+    public void setShichosonCode(LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
     /**
      * getShoKisaiHokenshaNo
+     *
      * @return shoKisaiHokenshaNo
      */
     public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
@@ -148,6 +159,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setShoKisaiHokenshaNo
+     *
      * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
      */
     public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
@@ -156,6 +168,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getKokuhorenKoikiShichosonNo
+     *
      * @return kokuhorenKoikiShichosonNo
      */
     public RString getKokuhorenKoikiShichosonNo() {
@@ -164,6 +177,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setKokuhorenKoikiShichosonNo
+     *
      * @param kokuhorenKoikiShichosonNo kokuhorenKoikiShichosonNo
      */
     public void setKokuhorenKoikiShichosonNo(RString kokuhorenKoikiShichosonNo) {
@@ -172,6 +186,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getShichosonMeisho
+     *
      * @return shichosonMeisho
      */
     public RString getShichosonMeisho() {
@@ -180,6 +195,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setShichosonMeisho
+     *
      * @param shichosonMeisho shichosonMeisho
      */
     public void setShichosonMeisho(RString shichosonMeisho) {
@@ -188,6 +204,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getTodofukenMeisho
+     *
      * @return todofukenMeisho
      */
     public RString getTodofukenMeisho() {
@@ -196,6 +213,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setTodofukenMeisho
+     *
      * @param todofukenMeisho todofukenMeisho
      */
     public void setTodofukenMeisho(RString todofukenMeisho) {
@@ -204,6 +222,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getGunMeisho
+     *
      * @return gunMeisho
      */
     public RString getGunMeisho() {
@@ -212,6 +231,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setGunMeisho
+     *
      * @param gunMeisho gunMeisho
      */
     public void setGunMeisho(RString gunMeisho) {
@@ -220,6 +240,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getYubinNo
+     *
      * @return yubinNo
      */
     public YubinNo getYubinNo() {
@@ -228,6 +249,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setYubinNo
+     *
      * @param yubinNo yubinNo
      */
     public void setYubinNo(YubinNo yubinNo) {
@@ -236,6 +258,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getJusho
+     *
      * @return jusho
      */
     public AtenaJusho getJusho() {
@@ -244,6 +267,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setJusho
+     *
      * @param jusho jusho
      */
     public void setJusho(AtenaJusho jusho) {
@@ -252,6 +276,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getTelNo
+     *
      * @return telNo
      */
     public TelNo getTelNo() {
@@ -260,6 +285,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setTelNo
+     *
      * @param telNo telNo
      */
     public void setTelNo(TelNo telNo) {
@@ -268,6 +294,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getYusenChikuCode
+     *
      * @return yusenChikuCode
      */
     public RString getYusenChikuCode() {
@@ -276,6 +303,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setYusenChikuCode
+     *
      * @param yusenChikuCode yusenChikuCode
      */
     public void setYusenChikuCode(RString yusenChikuCode) {
@@ -284,6 +312,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getTyohyoTodoufukenHyojiUmu
+     *
      * @return tyohyoTodoufukenHyojiUmu
      */
     public RString getTyohyoTodoufukenHyojiUmu() {
@@ -292,6 +321,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setTyohyoTodoufukenHyojiUmu
+     *
      * @param tyohyoTodoufukenHyojiUmu tyohyoTodoufukenHyojiUmu
      */
     public void setTyohyoTodoufukenHyojiUmu(RString tyohyoTodoufukenHyojiUmu) {
@@ -300,6 +330,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getTyohyoGunHyojiUmu
+     *
      * @return tyohyoGunHyojiUmu
      */
     public RString getTyohyoGunHyojiUmu() {
@@ -308,6 +339,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setTyohyoGunHyojiUmu
+     *
      * @param tyohyoGunHyojiUmu tyohyoGunHyojiUmu
      */
     public void setTyohyoGunHyojiUmu(RString tyohyoGunHyojiUmu) {
@@ -316,6 +348,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getTyohyoShichosonHyojiUmu
+     *
      * @return tyohyoShichosonHyojiUmu
      */
     public RString getTyohyoShichosonHyojiUmu() {
@@ -324,6 +357,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setTyohyoShichosonHyojiUmu
+     *
      * @param tyohyoShichosonHyojiUmu tyohyoShichosonHyojiUmu
      */
     public void setTyohyoShichosonHyojiUmu(RString tyohyoShichosonHyojiUmu) {
@@ -332,6 +366,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getTyohyoJushoHenshuHouhou
+     *
      * @return tyohyoJushoHenshuHouhou
      */
     public RString getTyohyoJushoHenshuHouhou() {
@@ -340,6 +375,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setTyohyoJushoHenshuHouhou
+     *
      * @param tyohyoJushoHenshuHouhou tyohyoJushoHenshuHouhou
      */
     public void setTyohyoJushoHenshuHouhou(RString tyohyoJushoHenshuHouhou) {
@@ -348,6 +384,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getTyohyoKatagakiHyojiUmu
+     *
      * @return tyohyoKatagakiHyojiUmu
      */
     public RString getTyohyoKatagakiHyojiUmu() {
@@ -356,6 +393,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setTyohyoKatagakiHyojiUmu
+     *
      * @param tyohyoKatagakiHyojiUmu tyohyoKatagakiHyojiUmu
      */
     public void setTyohyoKatagakiHyojiUmu(RString tyohyoKatagakiHyojiUmu) {
@@ -364,6 +402,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getGaikokujinHyojiHouhou
+     *
      * @return gaikokujinHyojiHouhou
      */
     public RString getGaikokujinHyojiHouhou() {
@@ -372,6 +411,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setGaikokujinHyojiHouhou
+     *
      * @param gaikokujinHyojiHouhou gaikokujinHyojiHouhou
      */
     public void setGaikokujinHyojiHouhou(RString gaikokujinHyojiHouhou) {
@@ -380,6 +420,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getRojinhokenShichosonNo
+     *
      * @return rojinhokenShichosonNo
      */
     public RString getRojinhokenShichosonNo() {
@@ -388,6 +429,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setRojinhokenShichosonNo
+     *
      * @param rojinhokenShichosonNo rojinhokenShichosonNo
      */
     public void setRojinhokenShichosonNo(RString rojinhokenShichosonNo) {
@@ -396,6 +438,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getRokenJukyushaNoTaikei
+     *
      * @return rokenJukyushaNoTaikei
      */
     public RString getRokenJukyushaNoTaikei() {
@@ -404,6 +447,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setRokenJukyushaNoTaikei
+     *
      * @param rokenJukyushaNoTaikei rokenJukyushaNoTaikei
      */
     public void setRokenJukyushaNoTaikei(RString rokenJukyushaNoTaikei) {
@@ -411,7 +455,26 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     }
 
     /**
+     * getTokuchoBunpaishuyaku
+     *
+     * @return tokuchoBunpaishuyaku
+     */
+    public RString getTokuchoBunpaishuyaku() {
+        return tokuchoBunpaishuyaku;
+    }
+
+    /**
+     * setTokuchoBunpaishuyaku
+     *
+     * @param tokuchoBunpaishuyaku tokuchoBunpaishuyaku
+     */
+    public void setTokuchoBunpaishuyaku(RString tokuchoBunpaishuyaku) {
+        this.tokuchoBunpaishuyaku = tokuchoBunpaishuyaku;
+    }
+
+    /**
      * getIkoYMD
+     *
      * @return ikoYMD
      */
     public FlexibleDate getIkoYMD() {
@@ -420,6 +483,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setIkoYMD
+     *
      * @param ikoYMD ikoYMD
      */
     public void setIkoYMD(FlexibleDate ikoYMD) {
@@ -428,6 +492,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getKanyuYMD
+     *
      * @return kanyuYMD
      */
     public FlexibleDate getKanyuYMD() {
@@ -436,6 +501,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setKanyuYMD
+     *
      * @param kanyuYMD kanyuYMD
      */
     public void setKanyuYMD(FlexibleDate kanyuYMD) {
@@ -444,6 +510,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getRidatsuYMD
+     *
      * @return ridatsuYMD
      */
     public FlexibleDate getRidatsuYMD() {
@@ -452,6 +519,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setRidatsuYMD
+     *
      * @param ridatsuYMD ridatsuYMD
      */
     public void setRidatsuYMD(FlexibleDate ridatsuYMD) {
@@ -460,6 +528,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getGappeiKyuShichosonKubun
+     *
      * @return gappeiKyuShichosonKubun
      */
     public RString getGappeiKyuShichosonKubun() {
@@ -468,6 +537,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setGappeiKyuShichosonKubun
+     *
      * @param gappeiKyuShichosonKubun gappeiKyuShichosonKubun
      */
     public void setGappeiKyuShichosonKubun(RString gappeiKyuShichosonKubun) {
@@ -476,6 +546,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getGappeiKyuShichosonHyojiUmu
+     *
      * @return gappeiKyuShichosonHyojiUmu
      */
     public RString getGappeiKyuShichosonHyojiUmu() {
@@ -484,6 +555,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setGappeiKyuShichosonHyojiUmu
+     *
      * @param gappeiKyuShichosonHyojiUmu gappeiKyuShichosonHyojiUmu
      */
     public void setGappeiKyuShichosonHyojiUmu(RString gappeiKyuShichosonHyojiUmu) {
@@ -491,23 +563,26 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     }
 
     /**
-     * getGappeiLinkNo
-     * @return gappeiLinkNo
+     * getGappeiChiikiNo
+     *
+     * @return gappeiChiikiNo
      */
-    public RString getGappeiLinkNo() {
-        return gappeiLinkNo;
+    public RString getGappeiChiikiNo() {
+        return gappeiChiikiNo;
     }
 
     /**
-     * setGappeiLinkNo
-     * @param gappeiLinkNo gappeiLinkNo
+     * setGappeiChiikiNo
+     *
+     * @param gappeiChiikiNo gappeiChiikiNo
      */
-    public void setGappeiLinkNo(RString gappeiLinkNo) {
-        this.gappeiLinkNo = gappeiLinkNo;
+    public void setGappeiChiikiNo(RString gappeiChiikiNo) {
+        this.gappeiChiikiNo = gappeiChiikiNo;
     }
 
     /**
      * getUnyoHokenshaNo
+     *
      * @return unyoHokenshaNo
      */
     public ShoKisaiHokenshaNo getUnyoHokenshaNo() {
@@ -516,6 +591,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setUnyoHokenshaNo
+     *
      * @param unyoHokenshaNo unyoHokenshaNo
      */
     public void setUnyoHokenshaNo(ShoKisaiHokenshaNo unyoHokenshaNo) {
@@ -524,6 +600,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getUnyoKaishiYMD
+     *
      * @return unyoKaishiYMD
      */
     public FlexibleDate getUnyoKaishiYMD() {
@@ -532,6 +609,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setUnyoKaishiYMD
+     *
      * @param unyoKaishiYMD unyoKaishiYMD
      */
     public void setUnyoKaishiYMD(FlexibleDate unyoKaishiYMD) {
@@ -540,6 +618,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getUnyoShuryoYMD
+     *
      * @return unyoShuryoYMD
      */
     public FlexibleDate getUnyoShuryoYMD() {
@@ -548,6 +627,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setUnyoShuryoYMD
+     *
      * @param unyoShuryoYMD unyoShuryoYMD
      */
     public void setUnyoShuryoYMD(FlexibleDate unyoShuryoYMD) {
@@ -556,6 +636,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * getUnyoKeitaiKubun
+     *
      * @return unyoKeitaiKubun
      */
     public RString getUnyoKeitaiKubun() {
@@ -564,6 +645,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * setUnyoKeitaiKubun
+     *
      * @param unyoKeitaiKubun unyoKeitaiKubun
      */
     public void setUnyoKeitaiKubun(RString unyoKeitaiKubun) {
@@ -572,9 +654,9 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * このエンティティの主キーが他の{@literal DbT7051KoseiShichosonMasterEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7051KoseiShichosonMasterEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -618,12 +700,13 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
         this.gaikokujinHyojiHouhou = entity.gaikokujinHyojiHouhou;
         this.rojinhokenShichosonNo = entity.rojinhokenShichosonNo;
         this.rokenJukyushaNoTaikei = entity.rokenJukyushaNoTaikei;
+        this.tokuchoBunpaishuyaku = entity.tokuchoBunpaishuyaku;
         this.ikoYMD = entity.ikoYMD;
         this.kanyuYMD = entity.kanyuYMD;
         this.ridatsuYMD = entity.ridatsuYMD;
         this.gappeiKyuShichosonKubun = entity.gappeiKyuShichosonKubun;
         this.gappeiKyuShichosonHyojiUmu = entity.gappeiKyuShichosonHyojiUmu;
-        this.gappeiLinkNo = entity.gappeiLinkNo;
+        this.gappeiChiikiNo = entity.gappeiChiikiNo;
         this.unyoHokenshaNo = entity.unyoHokenshaNo;
         this.unyoKaishiYMD = entity.unyoKaishiYMD;
         this.unyoShuryoYMD = entity.unyoShuryoYMD;
@@ -632,13 +715,13 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shichosonShokibetsuID, shichosonCode, shoKisaiHokenshaNo, kokuhorenKoikiShichosonNo, shichosonMeisho, todofukenMeisho, gunMeisho, yubinNo, jusho, telNo, yusenChikuCode, tyohyoTodoufukenHyojiUmu, tyohyoGunHyojiUmu, tyohyoShichosonHyojiUmu, tyohyoJushoHenshuHouhou, tyohyoKatagakiHyojiUmu, gaikokujinHyojiHouhou, rojinhokenShichosonNo, rokenJukyushaNoTaikei, ikoYMD, kanyuYMD, ridatsuYMD, gappeiKyuShichosonKubun, gappeiKyuShichosonHyojiUmu, gappeiLinkNo, unyoHokenshaNo, unyoKaishiYMD, unyoShuryoYMD, unyoKeitaiKubun);
+        return super.toMd5(shichosonShokibetsuID, shichosonCode, shoKisaiHokenshaNo, kokuhorenKoikiShichosonNo, shichosonMeisho, todofukenMeisho, gunMeisho, yubinNo, jusho, telNo, yusenChikuCode, tyohyoTodoufukenHyojiUmu, tyohyoGunHyojiUmu, tyohyoShichosonHyojiUmu, tyohyoJushoHenshuHouhou, tyohyoKatagakiHyojiUmu, gaikokujinHyojiHouhou, rojinhokenShichosonNo, rokenJukyushaNoTaikei, tokuchoBunpaishuyaku, ikoYMD, kanyuYMD, ridatsuYMD, gappeiKyuShichosonKubun, gappeiKyuShichosonHyojiUmu, gappeiChiikiNo, unyoHokenshaNo, unyoKaishiYMD, unyoShuryoYMD, unyoKeitaiKubun);
     }
 
 // </editor-fold>
-
 }

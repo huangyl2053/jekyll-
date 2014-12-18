@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekik
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.IShisetsuJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -22,14 +23,16 @@ public class ShisetsuNyutaishoInputDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlTaishoJoho")
-    private DropDownList ddlTaishoJoho;
     @JsonProperty("txtNyushoDate")
     private TextBoxFlexibleDate txtNyushoDate;
     @JsonProperty("txtTaishoDate")
     private TextBoxFlexibleDate txtTaishoDate;
-    @JsonProperty("ShisetsuJoho")
-    private ShisetsuJohoDiv ShisetsuJoho;
+    @JsonProperty("ccdShisetsuJoho")
+    private ShisetsuJohoDiv ccdShisetsuJoho;
+    @JsonProperty("btnShisetsuNyutaishoKakutei")
+    private Button btnShisetsuNyutaishoKakutei;
+    @JsonProperty("btnShisetsuNyutaishoTorikeshi")
+    private Button btnShisetsuNyutaishoTorikeshi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -37,16 +40,6 @@ public class ShisetsuNyutaishoInputDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ddlTaishoJoho")
-    public DropDownList getDdlTaishoJoho() {
-        return ddlTaishoJoho;
-    }
-
-    @JsonProperty("ddlTaishoJoho")
-    public void setDdlTaishoJoho(DropDownList ddlTaishoJoho) {
-        this.ddlTaishoJoho=ddlTaishoJoho;
-    }
-
     @JsonProperty("txtNyushoDate")
     public TextBoxFlexibleDate getTxtNyushoDate() {
         return txtNyushoDate;
@@ -67,14 +60,29 @@ public class ShisetsuNyutaishoInputDiv extends Panel {
         this.txtTaishoDate=txtTaishoDate;
     }
 
-    @JsonProperty("ShisetsuJoho")
-    public ShisetsuJohoDiv getShisetsuJoho() {
-        return ShisetsuJoho;
+    @JsonProperty("ccdShisetsuJoho")
+    public IShisetsuJohoDiv getCcdShisetsuJoho() {
+        return ccdShisetsuJoho;
     }
 
-    @JsonProperty("ShisetsuJoho")
-    public void setShisetsuJoho(ShisetsuJohoDiv ShisetsuJoho) {
-        this.ShisetsuJoho=ShisetsuJoho;
+    @JsonProperty("btnShisetsuNyutaishoKakutei")
+    public Button getBtnShisetsuNyutaishoKakutei() {
+        return btnShisetsuNyutaishoKakutei;
+    }
+
+    @JsonProperty("btnShisetsuNyutaishoKakutei")
+    public void setBtnShisetsuNyutaishoKakutei(Button btnShisetsuNyutaishoKakutei) {
+        this.btnShisetsuNyutaishoKakutei=btnShisetsuNyutaishoKakutei;
+    }
+
+    @JsonProperty("btnShisetsuNyutaishoTorikeshi")
+    public Button getBtnShisetsuNyutaishoTorikeshi() {
+        return btnShisetsuNyutaishoTorikeshi;
+    }
+
+    @JsonProperty("btnShisetsuNyutaishoTorikeshi")
+    public void setBtnShisetsuNyutaishoTorikeshi(Button btnShisetsuNyutaishoTorikeshi) {
+        this.btnShisetsuNyutaishoTorikeshi=btnShisetsuNyutaishoTorikeshi;
     }
 
 }

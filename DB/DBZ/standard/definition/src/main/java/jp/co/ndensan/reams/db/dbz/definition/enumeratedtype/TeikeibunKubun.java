@@ -37,8 +37,7 @@ public enum TeikeibunKubun implements IRStringConvertable {
      * @return 引数のコードに対応するTeikeibunKubun型のenum
      * @throws IllegalArgumentException 実在しない定型文区分コードの場合
      */
-    public static TeikeibunKubun toValue(RString kubun) throws NullPointerException, IllegalArgumentException {
-
+    public static TeikeibunKubun toValue(RString kubun) throws IllegalArgumentException {
         for (TeikeibunKubun item : TeikeibunKubun.values()) {
             if (item.code.equals(kubun)) {
                 return item;

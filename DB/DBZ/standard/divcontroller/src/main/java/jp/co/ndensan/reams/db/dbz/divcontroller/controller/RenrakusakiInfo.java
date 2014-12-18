@@ -19,8 +19,8 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RenrakusakiKubunNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -57,9 +57,9 @@ public class RenrakusakiInfo {
                 div.setHokenshaNo(hokenshaNo);
             }
 
-            list = new RenrakusakiInfoFinder().getRenrakusakiList(
-                    new ShoKisaiHokenshaNo(div.getHokenshaNo()),
-                    new KaigoHihokenshaNo(div.getHihokenshaNo()));
+//            list = new RenrakusakiInfoFinder().getRenrakusakiList(
+//                    new ShoKisaiHokenshaNo(div.getHokenshaNo()),
+//                    new HihokenshaNo(div.getHihokenshaNo()));
         }
 
         if (list.isEmpty()) {
@@ -213,7 +213,7 @@ public class RenrakusakiInfo {
                                                     div.getDgRenrakusaki().getSelectedItems().get(0).
                                                     getRenrakusakiKbnNo().toString())))),
                     new ShoKisaiHokenshaNo(div.getHokenshaNo()),
-                    new KaigoHihokenshaNo(div.getHihokenshaNo()),
+                    new HihokenshaNo(div.getHihokenshaNo()),
                     shishoCode);
 
             result = new RenrakusakiInfoManager().remove(renrakusakiJoho);
@@ -285,7 +285,7 @@ public class RenrakusakiInfo {
                                                         div.getSelectedContents().
                                                         getTxtRenrakusakiKbnNo().getValue().toString())))),
                         new ShoKisaiHokenshaNo(div.getHokenshaNo()),
-                        new KaigoHihokenshaNo(div.getHihokenshaNo()),
+                        new HihokenshaNo(div.getHihokenshaNo()),
                         shishoCode);
 
                 result = new RenrakusakiInfoManager().save(renrakusakiJoho);

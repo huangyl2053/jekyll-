@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoHihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RenrakusakiKubunNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -42,7 +42,7 @@ public class KaigoRenrakusakiTest extends DbzTestBase {
     private static RString 続柄;
     private static RenrakusakiKubunNo 連絡先区分番号;
     private static ShoKisaiHokenshaNo 保険者番号;
-    private static KaigoHihokenshaNo 被保険者番号;
+    private static HihokenshaNo 被保険者番号;
     private static RString 支所コード;
 
     @BeforeClass
@@ -54,9 +54,9 @@ public class KaigoRenrakusakiTest extends DbzTestBase {
         郵便番号 = mock(YubinNo.class);
         住所 = mock(AtenaJusho.class);
         続柄 = new RString("父");
-        連絡先区分番号 = mock(RenrakusakiKubunNo.class);
-        保険者番号 = mock(ShoKisaiHokenshaNo.class);
-        被保険者番号 = mock(KaigoHihokenshaNo.class);
+        連絡先区分番号 = new RenrakusakiKubunNo("1");
+        保険者番号 = new ShoKisaiHokenshaNo("123456");
+        被保険者番号 = new HihokenshaNo("1234567890");
         支所コード = new RString("01");
     }
 

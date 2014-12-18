@@ -24,15 +24,16 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplSetaiShokai
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplShinseiTodokedeDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplShisetsuNyutaishoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplShoKofuKaishuDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IryoHokenRireki;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.dgShikakuShutokuRireki_Row;
+//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IryoHokenRireki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShisetsuNyutaishoRirekiKanri;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShoKaishuKirokuKanri;
 //import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IryoHokenRireki;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShikakuTokusoRireki;
+//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShikakuTokusoRireki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.dgIryoHokenRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.dgShikakuShutokuRireki_Row;
+//import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.dgShoKaishuJokyo_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyolist.dgShoKaishuJokyo_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
@@ -42,7 +43,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 被保険者照会画面で、表示したい情報を選択するためのパネルに対応するコントローラです。
@@ -73,11 +73,11 @@ public class HihokenshaShokaiPanelSelect {
         setShinseiTodokedeDiv(selectDiv.getTplShinseiTodokede(), searchDiv);
 
         setStateButtonDisabled(selectDiv);
-
-        ShoKaishuKirokuKanri.setMode(selectDiv.getTplShoKofuKaishu().getShoKofuKaishuKiroku(), ModeType.SHOKAI_MODE);
-        ShisetsuNyutaishoRirekiKanri.setMode(selectDiv.getTplShisetsuNyutaisho().getShisetsuNyutaishoRireki(), ModeType.SHOKAI_MODE);
-        ShikakuTokusoRireki.setMode(selectDiv.getTplHihokenshaRireki().getShikakuTokusoRireki(), ModeType.SHOKAI_MODE);
-        IryoHokenRireki.setMode(selectDiv.getTplIryoHoken().getIryoHokenRireki(), ModeType.SHOKAI_MODE);
+//
+//        ShoKaishuKirokuKanri.setMode(selectDiv.getTplShoKofuKaishu().getShoKofuKaishuKiroku(), ModeType.SHOKAI_MODE);
+//        ShisetsuNyutaishoRirekiKanri.setMode(selectDiv.getTplShisetsuNyutaisho().getShisetsuNyutaishoRireki(), ModeType.SHOKAI_MODE);
+//        ShikakuTokusoRireki.setMode(selectDiv.getTplHihokenshaRireki().getShikakuTokusoRireki(), ModeType.SHOKAI_MODE);
+//        IryoHokenRireki.setMode(selectDiv.getTplIryoHoken().getIryoHokenRireki(), ModeType.SHOKAI_MODE);
         response.data = selectDiv;
         return response;
     }
@@ -96,7 +96,7 @@ public class HihokenshaShokaiPanelSelect {
 
         DemoKojin demoKojin = new DemoKojin("第1号");
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
-        setShikakuTokusoJoho(shikakuDiv.getShikakuTokusoRireki().getDgShikakuShutokuRireki(), hihokenshaNo);
+//        setShikakuTokusoJoho(shikakuDiv.getShikakuTokusoRireki().getDgShikakuShutokuRireki(), hihokenshaNo);
     }
 
     private void setShikakuTokusoJoho(DataGrid<dgShikakuShutokuRireki_Row> dgShikakuShutokuRireki, RString hihokenshaNo) {
@@ -118,11 +118,11 @@ public class HihokenshaShokaiPanelSelect {
     }
 
     private dgShikakuShutokuRireki_Row createShikakuTokusoRirekiRow(ControlGenerator generator) {
-        dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row(new Button(), new TextBoxFlexibleDate(),
+        dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row(RString.EMPTY, new Button(), new TextBoxFlexibleDate(),
                 new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
-                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
-                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                //                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                //                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+                //                new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
                 new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
                 new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
 
@@ -136,19 +136,19 @@ public class HihokenshaShokaiPanelSelect {
         row.setSoshitsuJiyuKey(generator.getAsRString("喪失事由Key"));
         row.setHihokenshaKubunKey(generator.getAsRString("被保区分Key"));
         row.setHihokenshaKubun(generator.getAsRString("被保区分"));
-        row.getJutokuKaijoTodokedeDate().setValue(generator.getAsFlexibleDate("解除届出日"));
-        row.getJutokuKaijoDate().setValue(generator.getAsFlexibleDate("解除日"));
-        row.setJutokuKaijoJiyu(generator.getAsRString("解除事由"));
-        row.setJutokuKaijoJiyuKey(generator.getAsRString("解除事由Key"));
-        row.getJutokuTekiyoTodokedeDate().setValue(generator.getAsFlexibleDate("適用届出日"));
-        row.getJutokuTekiyoDate().setValue(generator.getAsFlexibleDate("適用日"));
-        row.setJutokuTekiyoJiyu(generator.getAsRString("適用事由"));
-        row.setJutokuTekiyoJiyuKey(generator.getAsRString("適用事由Key"));
-        row.getHenkoTodokedeDate().setValue(generator.getAsFlexibleDate("変更届出日"));
-        row.getHenkoDate().setValue(generator.getAsFlexibleDate("変更日"));
-        row.setHenkoJiyu(generator.getAsRString("変更事由"));
-        row.setHenkoJiyuKey(generator.getAsRString("変更事由Key"));
-        row.getNenreiTotatsuDate().setValue(generator.getAsFlexibleDate("1号年齢到達日"));
+//        row.getJutokuKaijoTodokedeDate().setValue(generator.getAsFlexibleDate("解除届出日"));
+//        row.getJutokuKaijoDate().setValue(generator.getAsFlexibleDate("解除日"));
+//        row.setJutokuKaijoJiyu(generator.getAsRString("解除事由"));
+//        row.setJutokuKaijoJiyuKey(generator.getAsRString("解除事由Key"));
+//        row.getJutokuTekiyoTodokedeDate().setValue(generator.getAsFlexibleDate("適用届出日"));
+//        row.getJutokuTekiyoDate().setValue(generator.getAsFlexibleDate("適用日"));
+//        row.setJutokuTekiyoJiyu(generator.getAsRString("適用事由"));
+//        row.setJutokuTekiyoJiyuKey(generator.getAsRString("適用事由Key"));
+//        row.getHenkoTodokedeDate().setValue(generator.getAsFlexibleDate("変更届出日"));
+//        row.getHenkoDate().setValue(generator.getAsFlexibleDate("変更日"));
+//        row.setHenkoJiyu(generator.getAsRString("変更事由"));
+//        row.setHenkoJiyuKey(generator.getAsRString("変更事由Key"));
+//        row.getNenreiTotatsuDate().setValue(generator.getAsFlexibleDate("1号年齢到達日"));
         row.setKyuHokensha(generator.getAsRString("旧保険者"));
         row.setShikibetsuCode(generator.getAsRString("識別コード"));
         return row;
@@ -323,7 +323,7 @@ public class HihokenshaShokaiPanelSelect {
     }
 
     private dgIryoHokenRireki_Row createIryoHokenRow(ControlGenerator generator) {
-        dgIryoHokenRireki_Row row = new dgIryoHokenRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
+        dgIryoHokenRireki_Row row = new dgIryoHokenRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(), RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
 
         row.setKanyuDate(generator.getAsTextBoxFlexibleDate("加入日"));
@@ -373,15 +373,15 @@ public class HihokenshaShokaiPanelSelect {
     }
 
     private dgShisetsuNyutaishoRireki_Row createNyutaishoRow(ControlGenerator generator) {
-        dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
+        dgShisetsuNyutaishoRireki_Row row = new dgShisetsuNyutaishoRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
 
         row.getNyushoDate().setValue(generator.getAsFlexibleDate("入所日"));
         row.getTaishoDate().setValue(generator.getAsFlexibleDate("退所日"));
         row.setShisetsuShuruiKey(generator.getAsRString("施設種類Key"));
         row.setShisetsuShurui(generator.getAsRString("施設種類"));
-        row.setTaishoJohoKey(generator.getAsRString("対象情報Key"));
-        row.setTaishoJoho(generator.getAsRString("対象情報"));
+//        row.setTaishoJohoKey(generator.getAsRString("対象情報Key"));
+//        row.setTaishoJoho(generator.getAsRString("対象情報"));
         row.setShisetsuCode(generator.getAsRString("施設コード"));
         row.setShisetsuMeisho(generator.getAsRString("施設名称"));
         row.setShisetsu(row.getShisetsuCode().concat(":").concat(row.getShisetsuMeisho()));
@@ -403,7 +403,7 @@ public class HihokenshaShokaiPanelSelect {
 
         DemoKojin demoKojin = new DemoKojin("第1号");
         RString hihokenshaNo = demoKojin.getHihokenshaNo();
-        setShoKofuKaishuJoho(nyutaishoDiv.getShoKofuKaishuKiroku().getShoKaishuJokyoList().getDgShoKaishuJokyo(), hihokenshaNo);
+        setShoKofuKaishuJoho(nyutaishoDiv.getShoKofuKaishuKiroku().getCcdShoKaishuJokyoList().getDgShoKaishuJokyo(), hihokenshaNo);
     }
 
     private void setShoKofuKaishuJoho(DataGrid<dgShoKaishuJokyo_Row> dgShoKofu, RString hihokenshaNo) {
@@ -425,7 +425,7 @@ public class HihokenshaShokaiPanelSelect {
     }
 
     private dgShoKaishuJokyo_Row createShoKofuData(ControlGenerator generator) {
-        dgShoKaishuJokyo_Row row = new dgShoKaishuJokyo_Row(new Button(), RString.EMPTY, new TextBoxFlexibleDate(),
+        dgShoKaishuJokyo_Row row = new dgShoKaishuJokyo_Row(RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, new TextBoxFlexibleDate());
 
@@ -526,11 +526,11 @@ public class HihokenshaShokaiPanelSelect {
         } else {
             selectDiv.getTplSetaiShokai().setDisabled(false);
         }
-        if (isEmptyToDataGrid(selectDiv.getTplHihokenshaRireki().getShikakuTokusoRireki().getDgShikakuShutokuRireki())) {
-            selectDiv.getTplHihokenshaRireki().setDisabled(true);
-        } else {
-            selectDiv.getTplHihokenshaRireki().setDisabled(false);
-        }
+//        if (isEmptyToDataGrid(selectDiv.getTplHihokenshaRireki().getShikakuTokusoRireki().getDgShikakuShutokuRireki())) {
+//            selectDiv.getTplHihokenshaRireki().setDisabled(true);
+//        } else {
+//            selectDiv.getTplHihokenshaRireki().setDisabled(false);
+//        }
         if (isEmptyToDataGrid(selectDiv.getTplShinseiTodokede().getDgShinseishoTodokede())) {
             selectDiv.getTplShinseiTodokede().setDisabled(true);
         } else {
@@ -541,7 +541,7 @@ public class HihokenshaShokaiPanelSelect {
         } else {
             selectDiv.getTplShisetsuNyutaisho().setDisabled(false);
         }
-        if (isEmptyToDataGrid(selectDiv.getTplShoKofuKaishu().getShoKofuKaishuKiroku().getShoKaishuJokyoList().getDgShoKaishuJokyo())) {
+        if (isEmptyToDataGrid(selectDiv.getTplShoKofuKaishu().getShoKofuKaishuKiroku().getCcdShoKaishuJokyoList().getDgShoKaishuJokyo())) {
             selectDiv.getTplShoKofuKaishu().setDisabled(true);
         } else {
             selectDiv.getTplShoKofuKaishu().setDisabled(false);

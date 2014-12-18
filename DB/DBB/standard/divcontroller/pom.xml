@@ -9,17 +9,18 @@
     <artifactId>DbbDivController</artifactId>
     <packaging>war</packaging>
     <name>DbbDivController</name>
-
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzDivController</artifactId>
-            <version>${project.version}</version>
             <classifier>classes</classifier>
         </dependency>
         <dependency>
@@ -30,7 +31,6 @@
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzRealService</artifactId>
         </dependency>
-
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbbPersistence</artifactId>
