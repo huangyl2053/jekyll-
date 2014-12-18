@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject.koiki;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.IllegalInitialValueException;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.isA;
 import static org.hamcrest.CoreMatchers.not;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -22,69 +20,27 @@ import org.junit.runner.RunWith;
  *
  * @author N3327 三浦 凌
  */
-public class KokuhorenKoikiShichosonNoTest {
+@RunWith(Enclosed.class)
+public class KokuhorenKoikiShichosonNoTest extends DbzTestBase {
 
-    @RunWith(Enclosed.class)
-    public static class Constructor extends DbzTestBase {
+    public static class hasValidLength extends DbzTestBase {
 
-        public static class Constructor_String extends DbzTestBase {
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数がnullの時_IllegalInitialValueExceptionをスローする() {
-                KokuhorenKoikiShichosonNo sut = new KokuhorenKoikiShichosonNo((String) null);
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数に半角数字以外を含む時_IllegalInitialValueExceptionをスローする() {
-                KokuhorenKoikiShichosonNo sut = new KokuhorenKoikiShichosonNo("a11");
-                assertThat(sut, isA(KokuhorenKoikiShichosonNo.class));
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数が2桁の時_IllegalInitialValueExceptionをスローする() {
-                KokuhorenKoikiShichosonNo sut = new KokuhorenKoikiShichosonNo("12");
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数が4桁の時_IllegalInitialValueExceptionをスローする() {
-                KokuhorenKoikiShichosonNo sut = new KokuhorenKoikiShichosonNo("1234");
-            }
-
-            @Test
-            public void コンストラクタは_引数が2桁の時_KokuhorenKoikiShichosonNoのインスタンスを生成する() {
-                KokuhorenKoikiShichosonNo sut = new KokuhorenKoikiShichosonNo("123");
-                assertThat(sut, isA(KokuhorenKoikiShichosonNo.class));
-            }
+        @Test
+        public void hasValidLengthは_コンストラクタ引数がnullの時_trueを返す() {
+            KokuhorenKoikiShichosonNo sut = new KokuhorenKoikiShichosonNo((RString) null);
+            assertThat(sut.hasValidLength(), is(true));
         }
 
-        public static class Constructor_RString extends DbzTestBase {
+        @Test
+        public void hasValidLengthは_コンストラクタ引数が3桁の時_trueを返す() {
+            KokuhorenKoikiShichosonNo sut = new KokuhorenKoikiShichosonNo("123");
+            assertThat(sut.hasValidLength(), is(true));
+        }
 
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数がnullの時_IllegalInitialValueExceptionをスローする() {
-                KokuhorenKoikiShichosonNo sut = new KokuhorenKoikiShichosonNo((RString) null);
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数に半角数字以外を含む時_IllegalInitialValueExceptionをスローする() {
-                KokuhorenKoikiShichosonNo sut = new KokuhorenKoikiShichosonNo(new RString("a12"));
-                assertThat(sut, isA(KokuhorenKoikiShichosonNo.class));
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数が2桁の時_IllegalInitialValueExceptionをスローする() {
-                KokuhorenKoikiShichosonNo sut = new KokuhorenKoikiShichosonNo(new RString("12"));
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数が4桁の時_IllegalInitialValueExceptionをスローする() {
-                KokuhorenKoikiShichosonNo sut = new KokuhorenKoikiShichosonNo(new RString("1234"));
-            }
-
-            @Test
-            public void コンストラクタは_引数が3桁の時_KokuhorenKoikiShichosonNoのインスタンスを生成する() {
-                KokuhorenKoikiShichosonNo sut = new KokuhorenKoikiShichosonNo(new RString("123"));
-                assertThat(sut, isA(KokuhorenKoikiShichosonNo.class));
-            }
+        @Test
+        public void hasValidLengthは_コンストラクタは_引数が4桁の時_falseを返す() {
+            KokuhorenKoikiShichosonNo sut = new KokuhorenKoikiShichosonNo("1234");
+            assertThat(sut.hasValidLength(), is(false));
         }
     }
 

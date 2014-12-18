@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.koiki;
+package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,31 +11,35 @@ import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 合併市町村を表示するか表示しないかの区分です。
+ * 老人保険受給者番号の体系です。
  *
  * @author N3327 三浦 凌
  */
-public enum GappeiKyuShichosonOutput {
+public enum RokenJukyushaNoTaikei {
 
     /**
-     * 表示する<br/>
+     * 住民コード<br/>
      * コード:"1"
      */
-    表示する("1"),
+    住民コード("1"),
     /**
-     * 表示しない<br/>
+     * 医療給付サブシステム<br/>
      * コード:"2"
      */
-    表示しない("0"),
+    医療給付サブシステム("2"),
+    /**
+     * 市町村独自<br/>
+     * コード:"3"
+     */
+    市町村独自("3"),
     /**
      * 設定なし<br/>
      * コード:"" (空文字)
      */
     設定なし("");
-
     private final RString theCode;
 
-    private GappeiKyuShichosonOutput(String code) {
+    private RokenJukyushaNoTaikei(String code) {
         this.theCode = new RString(code);
     }
 
@@ -49,14 +53,14 @@ public enum GappeiKyuShichosonOutput {
     }
 
     /**
-     * 引数のコードに対応する GappeiKyuShichosonOutput を返します。
+     * 引数のコードに対応する RokenJukyushaNoTaikei を返します。
      *
      * @param code コード
-     * @return コードに対応する GappeiKyuShichosonOutput
-     * @throws IllegalArgumentException コードに対応する GappeiKyuShichosonOutput が無い時
+     * @return コードに対応する RokenJukyushaNoTaikei
+     * @throws IllegalArgumentException コードに対応する RokenJukyushaNoTaikei が無い時
      */
-    public static GappeiKyuShichosonOutput toValue(RString code) throws IllegalArgumentException {
-        GappeiKyuShichosonOutput value = CodeToValue.get(code);
+    public static RokenJukyushaNoTaikei toValue(RString code) throws IllegalArgumentException {
+        RokenJukyushaNoTaikei value = CodeToValue.get(code);
         if (value != null) {
             return value;
         }
@@ -66,17 +70,17 @@ public enum GappeiKyuShichosonOutput {
     //<editor-fold defaultstate="collapsed" desc="CodeToValue">
     private static final class CodeToValue {
 
-        private static final Map<RString, GappeiKyuShichosonOutput> DICTHIONARY;
+        private static final Map<RString, RokenJukyushaNoTaikei> DICTHIONARY;
 
         static {
-            Map<RString, GappeiKyuShichosonOutput> map = new HashMap<>();
-            for (GappeiKyuShichosonOutput value : values()) {
+            Map<RString, RokenJukyushaNoTaikei> map = new HashMap<>();
+            for (RokenJukyushaNoTaikei value : values()) {
                 map.put(value.code(), value);
             }
             DICTHIONARY = Collections.unmodifiableMap(map);
         }
 
-        static GappeiKyuShichosonOutput get(RString code) {
+        static RokenJukyushaNoTaikei get(RString code) {
             return DICTHIONARY.get(code);
         }
     }

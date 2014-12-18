@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.koiki;
+package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,35 +11,30 @@ import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 老人保険受給者番号の体系です。
+ * 広域保険者の運用形態の区分です。
  *
  * @author N3327 三浦 凌
  */
-public enum RokenJukyushaNoTaikei {
+public enum UnyoKeitaiKubun {
 
     /**
-     * 住民コード<br/>
+     * 単独<br/>
      * コード:"1"
      */
-    住民コード("1"),
+    単独("1"),
     /**
-     * 医療給付サブシステム<br/>
+     * 広域連合<br/>
      * コード:"2"
      */
-    医療給付サブシステム("2"),
+    広域連合("2"),
     /**
-     * 市町村独自<br/>
+     * 一部事務組合<br/>
      * コード:"3"
      */
-    市町村独自("3"),
-    /**
-     * 設定なし<br/>
-     * コード:"" (空文字)
-     */
-    設定なし("");
+    一部事務組合("3");
     private final RString theCode;
 
-    private RokenJukyushaNoTaikei(String code) {
+    private UnyoKeitaiKubun(String code) {
         this.theCode = new RString(code);
     }
 
@@ -53,14 +48,14 @@ public enum RokenJukyushaNoTaikei {
     }
 
     /**
-     * 引数のコードに対応する RokenJukyushaNoTaikei を返します。
+     * 引数のコードに対応する UnyoKeitaiKubun を返します。
      *
      * @param code コード
-     * @return コードに対応する RokenJukyushaNoTaikei
-     * @throws IllegalArgumentException コードに対応する RokenJukyushaNoTaikei が無い時
+     * @return コードに対応する UnyoKeitaiKubun
+     * @throws IllegalArgumentException コードに対応する UnyoKeitaiKubun が無い時
      */
-    public static RokenJukyushaNoTaikei toValue(RString code) throws IllegalArgumentException {
-        RokenJukyushaNoTaikei value = CodeToValue.get(code);
+    public static UnyoKeitaiKubun toValue(RString code) throws IllegalArgumentException {
+        UnyoKeitaiKubun value = CodeToValue.get(code);
         if (value != null) {
             return value;
         }
@@ -70,17 +65,17 @@ public enum RokenJukyushaNoTaikei {
     //<editor-fold defaultstate="collapsed" desc="CodeToValue">
     private static final class CodeToValue {
 
-        private static final Map<RString, RokenJukyushaNoTaikei> DICTHIONARY;
+        private static final Map<RString, UnyoKeitaiKubun> DICTHIONARY;
 
         static {
-            Map<RString, RokenJukyushaNoTaikei> map = new HashMap<>();
-            for (RokenJukyushaNoTaikei value : values()) {
+            Map<RString, UnyoKeitaiKubun> map = new HashMap<>();
+            for (UnyoKeitaiKubun value : values()) {
                 map.put(value.code(), value);
             }
             DICTHIONARY = Collections.unmodifiableMap(map);
         }
 
-        static RokenJukyushaNoTaikei get(RString code) {
+        static UnyoKeitaiKubun get(RString code) {
             return DICTHIONARY.get(code);
         }
     }

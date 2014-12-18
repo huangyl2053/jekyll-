@@ -5,30 +5,49 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha;
 
+import java.io.Serializable;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.IllegalInitialValueException;
+import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 保険者の名称です。
+ * 合併市町村同士を結びつけるための番号です。
  *
  * @author N3327 三浦 凌
  */
-public final class HokenshaName implements IValueObject<RString>, Comparable<HokenshaName> {
+public final class GappeiChiikiNo implements IValueObject<RString>, Comparable<GappeiChiikiNo>, Serializable {
 
     /**
-     * 最大長です。
+     * 空の GappeiLinkNo です。
+     * {@link #value() value()}で{@link RString#EMPTY RString.EMPTY}を返します。
      */
-    public static final int MAX_LENGTH = 20;
+    public static final GappeiChiikiNo EMPTY;
+    /**
+     *
+     */
+    public static final int MAX_LENGTH;
+
+    static {
+        EMPTY = new GappeiChiikiNo();
+        MAX_LENGTH = 2;
+    }
+
+    /**
+     * {@link #EMPTY}を生成するためのプライベートコンストラクタです。
+     */
+    private GappeiChiikiNo() {
+        this.theValue = RString.EMPTY;
+    }
+
     private final RString theValue;
 
     /**
-     * 指定の値をもった HokenshaName を生成します。
+     * GappeiLinkNo を生成します。
      *
      * @param value 値
      */
-    public HokenshaName(String value) throws IllegalInitialValueException {
+    public GappeiChiikiNo(String value) {
         if (value == null) {
             this.theValue = null;
         } else {
@@ -37,11 +56,11 @@ public final class HokenshaName implements IValueObject<RString>, Comparable<Hok
     }
 
     /**
-     * 指定の値をもった HokenshaName を生成します。
+     * GappeiLinkNo を生成します。
      *
      * @param value 値
      */
-    public HokenshaName(RString value) throws IllegalInitialValueException {
+    public GappeiChiikiNo(RString value) throws NullPointerException {
         this.theValue = value;
     }
 
@@ -51,8 +70,8 @@ public final class HokenshaName implements IValueObject<RString>, Comparable<Hok
     }
 
     @Override
-    public int compareTo(HokenshaName o) {
-        return this.theValue.compareTo(o.theValue);
+    public int compareTo(GappeiChiikiNo o) {
+        return Objects.compare(this.theValue, o.theValue, Comparators.naturalOrder());
     }
 
     @Override
@@ -60,17 +79,17 @@ public final class HokenshaName implements IValueObject<RString>, Comparable<Hok
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof HokenshaName)) {
+        if (!(obj instanceof GappeiChiikiNo)) {
             return false;
         }
-        HokenshaName other = (HokenshaName) obj;
+        GappeiChiikiNo other = (GappeiChiikiNo) obj;
         return Objects.equals(this.theValue, other.theValue);
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.theValue);
+        int hash = 5;
+        hash = 29 * hash + Objects.hashCode(this.theValue);
         return hash;
     }
 

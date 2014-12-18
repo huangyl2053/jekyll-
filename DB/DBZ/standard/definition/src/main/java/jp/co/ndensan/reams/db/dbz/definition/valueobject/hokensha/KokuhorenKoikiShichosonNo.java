@@ -3,13 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject.koiki;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha;
 
 import java.io.Serializable;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.IllegalInitialValueException;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.ValueObjects;
-import static jp.co.ndensan.reams.db.dbz.definition.valueobject.util.ValueObjects.equal;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -21,39 +18,40 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class KokuhorenKoikiShichosonNo implements IValueObject<RString>, Comparable<KokuhorenKoikiShichosonNo>, Serializable {
 
     /**
-     *
+     * 空の{@link KokuhorenKoikiShichosonNo}です。
      */
     public static final KokuhorenKoikiShichosonNo EMPTY;
+    /**
+     * 最大長です。
+     */
+    public static final int MAX_LENGTH;
 
     static {
         EMPTY = new KokuhorenKoikiShichosonNo(RString.EMPTY);
+        MAX_LENGTH = 3;
     }
 
-    private static final int LENGTH = 3;
     private final RString theValue;
 
     /**
      * 指定の値をもった KokuhorenKoikiShichosonNo を生成します。
      *
      * @param value 値
-     * @throws IllegalInitialValueException 引数がnullの時, 引数が3桁でない時, 引数に半角数字以外を含む時
      */
-    public KokuhorenKoikiShichosonNo(String value) throws IllegalInitialValueException {
-        this(new RString(ValueObjects.requireNonNull(value)));
+    public KokuhorenKoikiShichosonNo(String value) {
+        if (value == null) {
+            this.theValue = null;
+        } else {
+            this.theValue = new RString(value);
+        }
     }
 
     /**
      * 指定の値をもった KokuhorenKoikiShichosonNo を生成します。
      *
      * @param value 値
-     * @throws IllegalInitialValueException 引数がnullの時, 引数が3桁でない時, 引数に半角数字以外を含む時
      */
-    public KokuhorenKoikiShichosonNo(RString value) throws IllegalInitialValueException {
-        ValueObjects.requireNonNull(value);
-        if (!value.isEmpty()) {
-            ValueObjects.requireHalfSizeNumberOnly(value);
-            ValueObjects.requireLength(value, equal(LENGTH));
-        }
+    public KokuhorenKoikiShichosonNo(RString value) {
         this.theValue = value;
     }
 
@@ -84,5 +82,17 @@ public final class KokuhorenKoikiShichosonNo implements IValueObject<RString>, C
         int hash = 7;
         hash = 47 * hash + Objects.hashCode(this.theValue);
         return hash;
+    }
+
+    /**
+     * 最大長以下の値を持つかどうかを返します。
+     *
+     * @return 最大長以下の値を持つ場合、{@code true}。
+     */
+    public boolean hasValidLength() {
+        if (this.theValue == null) {
+            return true;
+        }
+        return this.theValue.length() <= MAX_LENGTH;
     }
 }

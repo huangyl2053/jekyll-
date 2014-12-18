@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject.koiki;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.IllegalInitialValueException;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.isA;
 import static org.hamcrest.CoreMatchers.not;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -28,67 +26,24 @@ public class ShichosonShikibetsuIDTest extends DbzTestBase {
     public ShichosonShikibetsuIDTest() {
     }
 
-    @RunWith(Enclosed.class)
-    public static class Constructor extends DbzTestBase {
+    public static class hasValidLength extends DbzTestBase {
 
-        public static class Constructor_String extends DbzTestBase {
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数がnullの時_IllegalInitialValueExceptionをスローする() {
-                ShichosonShikibetsuID sut = new ShichosonShikibetsuID((String) null);
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数に半角数字以外を含む時_IllegalInitialValueExceptionをスローする() {
-                ShichosonShikibetsuID sut = new ShichosonShikibetsuID("a1");
-                assertThat(sut, isA(ShichosonShikibetsuID.class));
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数が1桁の時_IllegalInitialValueExceptionをスローする() {
-                ShichosonShikibetsuID sut = new ShichosonShikibetsuID("1");
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数が3桁の時_IllegalInitialValueExceptionをスローする() {
-                ShichosonShikibetsuID sut = new ShichosonShikibetsuID("123");
-            }
-
-            @Test
-            public void コンストラクタは_引数が2桁の時_ShichosonShikibetsuIDのインスタンスを生成する() {
-                ShichosonShikibetsuID sut = new ShichosonShikibetsuID("12");
-                assertThat(sut, isA(ShichosonShikibetsuID.class));
-            }
+        @Test
+        public void hasValidLengthは_コンストラクタ引数がnullの時_trueを返す() {
+            ShichosonShikibetsuID sut = new ShichosonShikibetsuID((RString) null);
+            assertThat(sut.hasValidLength(), is(true));
         }
 
-        public static class Constructor_RString extends DbzTestBase {
+        @Test
+        public void hasValidLengthは_コンストラクタ引数が2桁の時_trueを返す() {
+            ShichosonShikibetsuID sut = new ShichosonShikibetsuID("12");
+            assertThat(sut.hasValidLength(), is(true));
+        }
 
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数がnullの時_IllegalInitialValueExceptionをスローする() {
-                ShichosonShikibetsuID sut = new ShichosonShikibetsuID((RString) null);
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数に半角数字以外を含む時_IllegalInitialValueExceptionをスローする() {
-                ShichosonShikibetsuID sut = new ShichosonShikibetsuID(new RString("愛それは愛"));
-                assertThat(sut, isA(ShichosonShikibetsuID.class));
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数が1桁の時_IllegalInitialValueExceptionをスローする() {
-                ShichosonShikibetsuID sut = new ShichosonShikibetsuID(new RString("1"));
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数が3桁の時_IllegalInitialValueExceptionをスローする() {
-                ShichosonShikibetsuID sut = new ShichosonShikibetsuID(new RString("123"));
-            }
-
-            @Test
-            public void コンストラクタは_引数が2桁の時_ShichosonShikibetsuIDのインスタンスを生成する() {
-                ShichosonShikibetsuID sut = new ShichosonShikibetsuID(new RString("12"));
-                assertThat(sut, isA(ShichosonShikibetsuID.class));
-            }
+        @Test
+        public void hasValidLengthは_コンストラクタは_引数が3桁の時_falseを返す() {
+            ShichosonShikibetsuID sut = new ShichosonShikibetsuID("123");
+            assertThat(sut.hasValidLength(), is(false));
         }
     }
 

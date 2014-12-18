@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject.koiki;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.IllegalInitialValueException;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.isA;
 import static org.hamcrest.CoreMatchers.not;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -22,72 +20,30 @@ import org.junit.runner.RunWith;
  *
  * @author N3327 三浦 凌
  */
+@RunWith(Enclosed.class)
 public class RokenShichosonNoTest {
 
     public RokenShichosonNoTest() {
     }
 
-    @RunWith(Enclosed.class)
-    public static class Constructor extends DbzTestBase {
+    public static class hasValidLength extends DbzTestBase {
 
-        public static class Constructor_String extends DbzTestBase {
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数がnullの時_IllegalInitialValueExceptionをスローする() {
-                RokenShichosonNo sut = new RokenShichosonNo((String) null);
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数に半角数字以外を含む時_IllegalInitialValueExceptionをスローする() {
-                RokenShichosonNo sut = new RokenShichosonNo("a123456");
-                assertThat(sut, isA(RokenShichosonNo.class));
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数が7桁の時_IllegalInitialValueExceptionをスローする() {
-                RokenShichosonNo sut = new RokenShichosonNo("1234567");
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数が9桁の時_IllegalInitialValueExceptionをスローする() {
-                RokenShichosonNo sut = new RokenShichosonNo("123456789");
-            }
-
-            @Test
-            public void コンストラクタは_引数が8桁の時_RokenShichosonNoのインスタンスを生成する() {
-                RokenShichosonNo sut = new RokenShichosonNo("12345678");
-                assertThat(sut, isA(RokenShichosonNo.class));
-            }
+        @Test
+        public void hasValidLengthは_コンストラクタ引数がnullの時_trueを返す() {
+            RokenShichosonNo sut = new RokenShichosonNo((RString) null);
+            assertThat(sut.hasValidLength(), is(true));
         }
 
-        public static class Constructor_RString extends DbzTestBase {
+        @Test
+        public void hasValidLengthは_コンストラクタ引数が8桁の時_trueを返す() {
+            RokenShichosonNo sut = new RokenShichosonNo("12345678");
+            assertThat(sut.hasValidLength(), is(true));
+        }
 
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数がnullの時_IllegalInitialValueExceptionをスローする() {
-                RokenShichosonNo sut = new RokenShichosonNo((RString) null);
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数に半角数字以外を含む時_IllegalInitialValueExceptionをスローする() {
-                RokenShichosonNo sut = new RokenShichosonNo(new RString("a123456"));
-                assertThat(sut, isA(RokenShichosonNo.class));
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数が7桁の時_IllegalInitialValueExceptionをスローする() {
-                RokenShichosonNo sut = new RokenShichosonNo(new RString("1234567"));
-            }
-
-            @Test(expected = IllegalInitialValueException.class)
-            public void コンストラクタは_引数が9桁の時_IllegalInitialValueExceptionをスローする() {
-                RokenShichosonNo sut = new RokenShichosonNo(new RString("123456789"));
-            }
-
-            @Test
-            public void コンストラクタは_引数が8桁の時_RokenShichosonNoのインスタンスを生成する() {
-                RokenShichosonNo sut = new RokenShichosonNo(new RString("12345678"));
-                assertThat(sut, isA(RokenShichosonNo.class));
-            }
+        @Test
+        public void hasValidLengthは_コンストラクタは_引数が9桁の時_falseを返す() {
+            RokenShichosonNo sut = new RokenShichosonNo("123456789");
+            assertThat(sut.hasValidLength(), is(false));
         }
     }
 

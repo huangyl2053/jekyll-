@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject.koiki;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha;
 
 import java.io.Serializable;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.IllegalInitialValueException;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.ValueObjects;
-import static jp.co.ndensan.reams.db.dbz.definition.valueobject.util.ValueObjects.equal;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -20,7 +18,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class ShichosonShikibetsuID implements IValueObject<RString>, Comparable<ShichosonShikibetsuID>, Serializable {
 
-    private static final int LENGTH = 2;
+    /**
+     *
+     */
+    public static final ShichosonShikibetsuID EMPTY;
+    /**
+     *
+     */
+    public static final int MAX_LENGTH;
+
+    static {
+        EMPTY = new ShichosonShikibetsuID(RString.EMPTY);
+        MAX_LENGTH = 2;
+    }
     private final RString theValue;
 
     /**
@@ -30,7 +40,11 @@ public final class ShichosonShikibetsuID implements IValueObject<RString>, Compa
      * @throws IllegalInitialValueException 引数がnullの時、引数が半角の数字以外を含む時、引数が2文字でない時
      */
     public ShichosonShikibetsuID(String value) throws IllegalInitialValueException {
-        this(new RString(ValueObjects.requireNonNull(value)));
+        if (value == null) {
+            this.theValue = null;
+        } else {
+            this.theValue = new RString(value);
+        }
     }
 
     /**
@@ -40,9 +54,6 @@ public final class ShichosonShikibetsuID implements IValueObject<RString>, Compa
      * @throws IllegalInitialValueException 引数がnullの時、引数が半角の数字以外を含む時、引数が2文字でない時
      */
     public ShichosonShikibetsuID(RString value) throws IllegalInitialValueException {
-        ValueObjects.requireNonNull(value);
-        ValueObjects.requireHalfSizeNumberOnly(value);
-        ValueObjects.requireLength(value, equal(LENGTH));
         this.theValue = value;
     }
 
@@ -73,5 +84,17 @@ public final class ShichosonShikibetsuID implements IValueObject<RString>, Compa
         int hash = 5;
         hash = 89 * hash + java.util.Objects.hashCode(this.theValue);
         return hash;
+    }
+
+    /**
+     * 最大長以下の値を持つかどうかを返します。
+     *
+     * @return 最大長以下の値を持つ場合、{@code true}。
+     */
+    public boolean hasValidLength() {
+        if (this.theValue == null) {
+            return true;
+        }
+        return this.theValue.length() <= MAX_LENGTH;
     }
 }
