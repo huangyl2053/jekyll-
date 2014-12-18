@@ -7,9 +7,6 @@ package jp.co.ndensan.reams.db.dbz.model;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5002NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -1080,11 +1077,11 @@ public class NinteiKekkaJohoModel implements Serializable {
     /**
      * IF送付年月日を設定します。
      *
-     * @param IF送付年月日 IF送付年月日
+     * @param if送付年月日 IF送付年月日
      */
-    public void setIF送付年月日(FlexibleDate IF送付年月日) {
-        requireNonNull(IF送付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("IF送付年月日"));
-        entity.setIfSofuYMD(IF送付年月日);
+    public void setIF送付年月日(FlexibleDate if送付年月日) {
+        requireNonNull(if送付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("IF送付年月日"));
+        entity.setIfSofuYMD(if送付年月日);
     }
 
     /**

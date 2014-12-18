@@ -152,6 +152,12 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
         return result;
     }
 
+    /**
+     * 物理削除を行います。
+     *
+     * @param data HihokenshaDaichoModel
+     * @return int 件数
+     */
     public int deletePhysical(HihokenshaDaichoModel data) {
         int result = 0;
 

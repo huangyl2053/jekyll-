@@ -46,11 +46,11 @@ public class KyotakuKeikakuTodokedeManager {
     /**
      * 検索条件に合致する居宅給付計画届出を返します。
      *
-     * @param 被保険者番号
-     * @param 証記載保険者番号
-     * @param 識別コード
-     * @param 対象年月
-     * @param 処理日時
+     * @param 被保険者番号 被保険者番号
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 識別コード 識別コード
+     * @param 対象年月 対象年月
+     * @param 処理日時 処理日時
      *
      * @return KyotakuKeikakuTodokedeModel
      */

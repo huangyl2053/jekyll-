@@ -198,6 +198,12 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
         return result;
     }
 
+    /**
+     * 物理削除を行います。
+     *
+     * @param data ServiceShuruiShikyuGendoGakuModel
+     * @return int 件数
+     */
     public int deletePhysical(ServiceShuruiShikyuGendoGakuModel data) {
         int result = 0;
 

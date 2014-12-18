@@ -148,6 +148,12 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
         return result;
     }
 
+    /**
+     * 物理削除を行います。
+     *
+     * @param data NinteiShinseiJohoModel
+     * @return int 件数
+     */
     public int deletePhysical(NinteiShinseiJohoModel data) {
         int result = 0;
 

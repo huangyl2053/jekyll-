@@ -46,9 +46,9 @@ public final class HihokenshaShikakuHakko {
     /**
      * 有効期限の初期値を取得します。
      *
-     * @param 申請区分コード
-     * @param 申請日
-     * @param 有効データ認定終了日
+     * @param 申請区分コード 申請区分コード
+     * @param 申請日 申請日
+     * @param 有効データ認定終了日 有効データ認定終了日
      * @return 有効期限の初期値
      */
     public static FlexibleDate get有効期限初期値(RString 申請区分コード, FlexibleDate 申請日, FlexibleDate 有効データ認定終了日) {
@@ -91,9 +91,9 @@ public final class HihokenshaShikakuHakko {
     /**
      * 被保険者証の支援事業者名称を取得します。
      *
-     * @param 計画事業者番号
-     * @param 委託先事業者番号
-     * @return
+     * @param 計画事業者番号 計画事業者番号
+     * @param 委託先事業者番号 委託先事業者番号
+     * @return 被保険者証支援事業者
      */
     public RString get被保険者証支援事業者名称(JigyoshaNo 計画事業者番号, JigyoshaNo 委託先事業者番号) {
 
@@ -124,9 +124,9 @@ public final class HihokenshaShikakuHakko {
     /**
      * 資格者証の支援事業者名称を取得します。
      *
-     * @param 計画事業者番号
-     * @param 委託先事業者番号
-     * @return
+     * @param 計画事業者番号 計画事業者番号
+     * @param 委託先事業者番号 委託先事業者番号
+     * @return 資格者証支援事業者
      */
     public RString get資格者証支援事業者名称(JigyoshaNo 計画事業者番号, JigyoshaNo 委託先事業者番号) {
         RString 事業者名称;
@@ -156,11 +156,11 @@ public final class HihokenshaShikakuHakko {
     /**
      * 審査会意見を作成します。
      *
-     * @param 審査会意見
-     * @param 介護サービス種類リスト
-     * @param 基準日
-     * @param 最大長
-     * @return
+     * @param 審査会意見 審査会意見
+     * @param 介護サービス種類リスト 介護サービス種類リスト
+     * @param 基準日 基準日
+     * @param 最大長 最大長
+     * @return 審査会意見
      */
     public RString create審査会意見(RString 審査会意見, IItemList<RString> 介護サービス種類リスト, FlexibleDate 基準日, int 最大長) {
 

@@ -43,11 +43,11 @@ public class KyotakuKeikakuTodokedeDac implements IModifiable<KyotakuKeikakuTodo
     /**
      * 居宅給付計画届出情報をキー検索で１件返します。
      *
-     * @param 被保険者番号
-     * @param 証記載保険者番号
-     * @param 識別コード
-     * @param 対象年月
-     * @param 処理日時
+     * @param 被保険者番号 被保険者番号
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 識別コード 識別コード
+     * @param 対象年月 対象年月
+     * @param 処理日時 処理日時
      * @return KyotakuKeikakuTodokedeModel
      */
     @Transaction
@@ -165,6 +165,12 @@ public class KyotakuKeikakuTodokedeDac implements IModifiable<KyotakuKeikakuTodo
         return result;
     }
 
+    /**
+     * 物理削除を行います。
+     *
+     * @param data KyotakuKeikakuTodokedeModel
+     * @return int 件数
+     */
     public int deletePhysical(KyotakuKeikakuTodokedeModel data) {
         int result = 0;
 

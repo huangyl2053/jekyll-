@@ -161,6 +161,12 @@ public class JukyushaDaichoDac implements IModifiable<JukyushaDaichoModel> {
         return result;
     }
 
+    /**
+     * 物理削除を行います。
+     *
+     * @param data JukyushaDaichoModel
+     * @return int 件数
+     */
     public int deletePhysical(JukyushaDaichoModel data) {
         int result = 0;
 

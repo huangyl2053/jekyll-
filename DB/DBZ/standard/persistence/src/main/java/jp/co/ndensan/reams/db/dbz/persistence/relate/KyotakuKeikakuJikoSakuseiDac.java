@@ -176,6 +176,12 @@ public class KyotakuKeikakuJikoSakuseiDac implements IModifiable<KyotakuKeikakuJ
         return result;
     }
 
+    /**
+     * 物理削除を行います。
+     *
+     * @param data KyotakuKeikakuJikoSakuseiModel
+     * @return int 件数
+     */
     public int deletePhysical(KyotakuKeikakuJikoSakuseiModel data) {
         int result = 0;
 

@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.ShiharaiHohoHenkoModel;

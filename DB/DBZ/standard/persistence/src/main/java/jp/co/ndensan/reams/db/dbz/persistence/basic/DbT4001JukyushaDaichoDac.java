@@ -101,6 +101,12 @@ public class DbT4001JukyushaDaichoDac implements IModifiable<DbT4001JukyushaDaic
     }
 
     // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
+    /**
+     * 物理削除を行う。
+     *
+     * @param entity DbT4001JukyushaDaichoEntity
+     * @return int 件数
+     */
     @Transaction
     public int deletePhysical(DbT4001JukyushaDaichoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);

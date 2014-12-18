@@ -23,6 +23,9 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
     private RString 保険者名称;
     private RString 保険者表示;
 
+    /**
+     * コンストラクタです。
+     */
     public HihokenshaShikakuHakkoModel() {
     }
 

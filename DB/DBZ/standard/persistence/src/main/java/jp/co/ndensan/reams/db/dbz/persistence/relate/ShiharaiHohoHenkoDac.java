@@ -223,6 +223,12 @@ public class ShiharaiHohoHenkoDac implements IModifiable<ShiharaiHohoHenkoModel>
         return result;
     }
 
+    /**
+     * 物理削除を行います。
+     *
+     * @param data ShiharaiHohoHenkoModel
+     * @return int 件数
+     */
     public int deletePhysical(ShiharaiHohoHenkoModel data) {
         int result = 0;
 

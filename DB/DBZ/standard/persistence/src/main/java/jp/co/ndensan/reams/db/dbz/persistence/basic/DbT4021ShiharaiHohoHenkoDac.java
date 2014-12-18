@@ -101,6 +101,12 @@ public class DbT4021ShiharaiHohoHenkoDac implements IModifiable<DbT4021ShiharaiH
     }
 
     // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
+    /**
+     * 物理削除を行う。
+     *
+     * @param entity DbT4021ShiharaiHohoHenkoEntity
+     * @return int 件数
+     */
     @Transaction
     public int deletePhysical(DbT4021ShiharaiHohoHenkoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
