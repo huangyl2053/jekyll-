@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.config;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.ConfigKeysTokucho;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
@@ -167,25 +169,24 @@ public class TokuchoConfig {
     }
 
     /**
-     * 特徴期情報_月の期を配列で返します。
+     * 特徴期情報_月の期をリストで返します。
      *
      * @return 特徴期情報_月の期
      */
-    public RString[] get月の期() {
-        RString[] 月の期 = {
-            get月の期1(),
-            get月の期2(),
-            get月の期3(),
-            get月の期4(),
-            get月の期5(),
-            get月の期6(),
-            get月の期7(),
-            get月の期8(),
-            get月の期9(),
-            get月の期10(),
-            get月の期11(),
-            get月の期12()
-        };
-        return 月の期;
+    public List<RString> get月の期() {
+        List<RString> list = new ArrayList<>();
+        list.add(get月の期1());
+        list.add(get月の期2());
+        list.add(get月の期3());
+        list.add(get月の期4());
+        list.add(get月の期5());
+        list.add(get月の期6());
+        list.add(get月の期7());
+        list.add(get月の期8());
+        list.add(get月の期9());
+        list.add(get月の期10());
+        list.add(get月の期11());
+        list.add(get月の期12());
+        return list;
     }
 }

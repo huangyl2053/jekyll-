@@ -385,85 +385,81 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
 
     private static HizukeConfig create日付Config() {
         HizukeConfig mock = mock(HizukeConfig.class);
-        RString data[] = {
-            new RString("04"),
-            new RString("05"),
-            new RString("06"),
-            new RString("07"),
-            new RString("08"),
-            new RString("09"),
-            new RString("10"),
-            new RString("11"),
-            new RString("12"),
-            new RString("01"),
-            new RString("02"),
-            new RString("03"),
-            new RString("14"),
-            new RString("15")
-        };
-        when(mock.get月別テーブル()).thenReturn(data);
+        List<RString> list = new ArrayList<>();
+        list.add(new RString("04"));
+        list.add(new RString("05"));
+        list.add(new RString("06"));
+        list.add(new RString("07"));
+        list.add(new RString("08"));
+        list.add(new RString("09"));
+        list.add(new RString("10"));
+        list.add(new RString("11"));
+        list.add(new RString("12"));
+        list.add(new RString("01"));
+        list.add(new RString("02"));
+        list.add(new RString("03"));
+        list.add(new RString("14"));
+        list.add(new RString("15"));
+        when(mock.get月別テーブル()).thenReturn(list);
         return mock;
     }
 
     private static FuchoConfig create普徴Config() {
         FuchoConfig mock = mock(FuchoConfig.class);
-        RString data[] = {
-            new RString("01"),
-            new RString("02"),
-            new RString("03"),
-            new RString("04"),
-            new RString("05"),
-            new RString("06"),
-            new RString("07"),
-            new RString("08"),
-            new RString("09"),
-            new RString("10"),
-            new RString("11"),
-            new RString("12"),
-            new RString("13"),
-            new RString("14")
-        };
-        when(mock.get月の期()).thenReturn(data);
+        List<RString> list = new ArrayList<>();
+        list.add(new RString("01"));
+        list.add(new RString("02"));
+        list.add(new RString("03"));
+        list.add(new RString("04"));
+        list.add(new RString("05"));
+        list.add(new RString("06"));
+        list.add(new RString("07"));
+        list.add(new RString("08"));
+        list.add(new RString("09"));
+        list.add(new RString("10"));
+        list.add(new RString("11"));
+        list.add(new RString("12"));
+        list.add(new RString("13"));
+        list.add(new RString("14"));
+        when(mock.get月の期()).thenReturn(list);
         return mock;
     }
 
     private static TokuchoConfig create特徴Config() {
         TokuchoConfig mock = mock(TokuchoConfig.class);
-        RString data[] = {
-            new RString("01"),
-            new RString("01"),
-            new RString("02"),
-            new RString("02"),
-            new RString("03"),
-            new RString("03"),
-            new RString("04"),
-            new RString("04"),
-            new RString("05"),
-            new RString("05"),
-            new RString("06"),
-            new RString("06")
-        };
-        when(mock.get月の期()).thenReturn(data);
+        List<RString> list = new ArrayList<>();
+        list.add(new RString("01"));
+        list.add(new RString("01"));
+        list.add(new RString("02"));
+        list.add(new RString("02"));
+        list.add(new RString("03"));
+        list.add(new RString("03"));
+        list.add(new RString("04"));
+        list.add(new RString("04"));
+        list.add(new RString("05"));
+        list.add(new RString("05"));
+        list.add(new RString("06"));
+        list.add(new RString("06"));
+        when(mock.get月の期()).thenReturn(list);
         return mock;
     }
 
     private static KanendoConfig create過年度Config() {
         KanendoConfig mock = mock(KanendoConfig.class);
-        RString data[] = {
-            new RString("01"),
-            new RString("02"),
-            new RString("03"),
-            new RString("04"),
-            new RString("05"),
-            new RString("06"),
-            new RString("07"),
-            new RString("08"),
-            new RString("09"),
-            new RString("10"),
-            new RString("11"),
-            new RString("12")
-        };
-        when(mock.get月の期()).thenReturn(data);
+        List<RString> list = new ArrayList<>();
+        list.add(new RString("01"));
+        list.add(new RString("02"));
+        list.add(new RString("03"));
+        list.add(new RString("04"));
+        list.add(new RString("05"));
+        list.add(new RString("06"));
+        list.add(new RString("07"));
+        list.add(new RString("08"));
+        list.add(new RString("09"));
+        list.add(new RString("10"));
+        list.add(new RString("11"));
+        list.add(new RString("12"));
+        when(mock.get月の期()).thenReturn(list);
         return mock;
     }
 }

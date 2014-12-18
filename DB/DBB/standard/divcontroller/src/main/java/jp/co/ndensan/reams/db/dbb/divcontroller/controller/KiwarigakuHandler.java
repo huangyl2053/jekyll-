@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.config.FuchoConfig;
 import jp.co.ndensan.reams.db.dbb.business.config.FukaKeisanConfig;
@@ -40,10 +42,7 @@ public class KiwarigakuHandler {
         月, 特徴期, 特徴期別額, 特徴納付額, 普徴期, 普徴期別額, 普徴納付額;
     };
 
-    private final Map<RString, Label> 期割額テーブル = new HashMap<>();
-    private TableItem tableItem;
-    private int tableRowNo;
-
+    private Map<RString, Label> 期割額テーブル = new HashMap<>();
     private static final int TABLE_SIZE = 15;
 
     private static final RString SUFFIX_月 = new RString("月");
@@ -71,7 +70,7 @@ public class KiwarigakuHandler {
         this.普徴Config = new FuchoConfig();
         this.特徴Config = new TokuchoConfig();
         this.過年度Config = new KanendoConfig();
-        initTable();
+        this.期割額テーブル = Collections.unmodifiableMap(createTableMap());
     }
 
     /**
@@ -94,7 +93,7 @@ public class KiwarigakuHandler {
         this.普徴Config = 普徴Config;
         this.特徴Config = 特徴Config;
         this.過年度Config = 過年度Config;
-        initTable();
+        this.期割額テーブル = Collections.unmodifiableMap(createTableMap());
     }
 
     /**
@@ -107,11 +106,11 @@ public class KiwarigakuHandler {
      */
     public void load(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時) {
 
-        RString[] 月列 = 日付Config.get月別テーブル();
-        RString[] 特徴期列 = 特徴Config.get月の期();
-        RString[] 普徴期列 = (調定年度.equals(賦課年度)) ? 普徴Config.get月の期() : 過年度Config.get月の期();
+        List<RString> 月列 = 日付Config.get月別テーブル();
+        List<RString> 特徴期列 = 特徴Config.get月の期();
+        List<RString> 普徴期列 = (調定年度.equals(賦課年度)) ? 普徴Config.get月の期() : 過年度Config.get月の期();
 
-        setDisplayMode(賦課年度, 普徴期列.length);
+        setDisplayMode(賦課年度, 普徴期列.size());
 
         setTableData(TableItem.月, 月列, SUFFIX_月);
         setTableData(TableItem.特徴期, 特徴期列, SUFFIX_期);
@@ -120,11 +119,11 @@ public class KiwarigakuHandler {
         setKiwarigaku(finder.get期割額(調定年度, 賦課年度, 通知書番号, 処理日時), createIndexMap(特徴期列), createIndexMap(普徴期列));
     }
 
-    private Map<RString, Integer> createIndexMap(RString[] data) {
+    private Map<RString, Integer> createIndexMap(List<RString> data) {
         Map<RString, Integer> map = new HashMap<>();
-        for (int index = 0; index < data.length; index++) {
-            if (map.get(data[index]) == null) {
-                map.put(data[index], index);
+        for (int index = 0; index < data.size(); index++) {
+            if (map.get(data.get(index)) == null) {
+                map.put(data.get(index), index);
             }
         }
         return map;
@@ -158,10 +157,10 @@ public class KiwarigakuHandler {
         div.getLblTokuchoKiGokei().setVisible(!is月列表示);
     }
 
-    private void setTableData(TableItem itemNo, RString[] dataList, RString suffix) {
-        for (int index = 0; index < dataList.length; index++) {
-            RString data = dataList[index];
-            Label label = 期割額テーブル.get(getTableKey(itemNo, index + 1));
+    private void setTableData(TableItem itemNo, List<RString> dataList, RString suffix) {
+        for (int index = 0; index < dataList.size(); index++) {
+            RString data = dataList.get(index);
+            Label label = 期割額テーブル.get(getTableKey(itemNo, index));
             label.setText((data != null) ? new RStringBuilder(data).append(suffix).toRString() : RString.EMPTY);
         }
     }
@@ -169,7 +168,7 @@ public class KiwarigakuHandler {
     private void setTableData(TableItem itemNo, Decimal[] dataList) {
         for (int index = 0; index < dataList.length; index++) {
             Decimal data = dataList[index];
-            Label label = 期割額テーブル.get(getTableKey(itemNo, index + 1));
+            Label label = 期割額テーブル.get(getTableKey(itemNo, index));
             label.setText((data != null) ? new RString(data.toString("#,##0")) : RString.EMPTY);
         }
     }
@@ -219,136 +218,123 @@ public class KiwarigakuHandler {
         setTableData(TableItem.普徴納付額, 普徴納付額列);
     }
 
-    private void initTable() {
+    private Map<RString, Label> createTableMap() {
 
-        setTableItem(TableItem.月);
-        putTableData(div.getLblTsuki1());
-        putTableData(div.getLblTsuki2());
-        putTableData(div.getLblTsuki3());
-        putTableData(div.getLblTsuki4());
-        putTableData(div.getLblTsuki5());
-        putTableData(div.getLblTsuki6());
-        putTableData(div.getLblTsuki7());
-        putTableData(div.getLblTsuki8());
-        putTableData(div.getLblTsuki9());
-        putTableData(div.getLblTsuki10());
-        putTableData(div.getLblTsuki11());
-        putTableData(div.getLblTsuki12());
-        putTableData(div.getLblTsuki13());
-        putTableData(div.getLblTsuki14());
-        putTableData(div.getLblTsukiGokei());
+        Map<RString, Label> map = new HashMap<>();
 
-        setTableItem(TableItem.特徴期);
-        putTableData(div.getLblTokuchoKi1());
-        putTableData(div.getLblTokuchoKi2());
-        putTableData(div.getLblTokuchoKi3());
-        putTableData(div.getLblTokuchoKi4());
-        putTableData(div.getLblTokuchoKi5());
-        putTableData(div.getLblTokuchoKi6());
-        putTableData(div.getLblTokuchoKi7());
-        putTableData(div.getLblTokuchoKi8());
-        putTableData(div.getLblTokuchoKi9());
-        putTableData(div.getLblTokuchoKi10());
-        putTableData(div.getLblTokuchoKi11());
-        putTableData(div.getLblTokuchoKi12());
-        putTableData(div.getLblTokuchoKi13());
-        putTableData(div.getLblTokuchoKi14());
-        putTableData(div.getLblTokuchoKiGokei());
+        map.put(getTableKey(TableItem.月, 0), div.getLblTsuki1());
+        map.put(getTableKey(TableItem.月, 1), div.getLblTsuki2());
+        map.put(getTableKey(TableItem.月, 2), div.getLblTsuki3());
+        map.put(getTableKey(TableItem.月, 3), div.getLblTsuki4());
+        map.put(getTableKey(TableItem.月, 4), div.getLblTsuki5());
+        map.put(getTableKey(TableItem.月, 5), div.getLblTsuki6());
+        map.put(getTableKey(TableItem.月, 6), div.getLblTsuki7());
+        map.put(getTableKey(TableItem.月, 7), div.getLblTsuki8());
+        map.put(getTableKey(TableItem.月, 8), div.getLblTsuki9());
+        map.put(getTableKey(TableItem.月, 9), div.getLblTsuki10());
+        map.put(getTableKey(TableItem.月, 10), div.getLblTsuki11());
+        map.put(getTableKey(TableItem.月, 11), div.getLblTsuki12());
+        map.put(getTableKey(TableItem.月, 12), div.getLblTsuki13());
+        map.put(getTableKey(TableItem.月, 13), div.getLblTsuki14());
+        map.put(getTableKey(TableItem.月, 14), div.getLblTsukiGokei());
 
-        setTableItem(TableItem.特徴期別額);
-        putTableData(div.getLblTokuKibetsuGaku1());
-        putTableData(div.getLblTokuKibetsuGaku2());
-        putTableData(div.getLblTokuKibetsuGaku3());
-        putTableData(div.getLblTokuKibetsuGaku4());
-        putTableData(div.getLblTokuKibetsuGaku5());
-        putTableData(div.getLblTokuKibetsuGaku6());
-        putTableData(div.getLblTokuKibetsuGaku7());
-        putTableData(div.getLblTokuKibetsuGaku8());
-        putTableData(div.getLblTokuKibetsuGaku9());
-        putTableData(div.getLblTokuKibetsuGaku10());
-        putTableData(div.getLblTokuKibetsuGaku11());
-        putTableData(div.getLblTokuKibetsuGaku12());
-        putTableData(div.getLblTokuKibetsuGaku13());
-        putTableData(div.getLblTokuKibetsuGaku14());
-        putTableData(div.getLblTokuKibetsuGakuGokei());
+        map.put(getTableKey(TableItem.特徴期, 0), div.getLblTokuchoKi1());
+        map.put(getTableKey(TableItem.特徴期, 1), div.getLblTokuchoKi2());
+        map.put(getTableKey(TableItem.特徴期, 2), div.getLblTokuchoKi3());
+        map.put(getTableKey(TableItem.特徴期, 3), div.getLblTokuchoKi4());
+        map.put(getTableKey(TableItem.特徴期, 4), div.getLblTokuchoKi5());
+        map.put(getTableKey(TableItem.特徴期, 5), div.getLblTokuchoKi6());
+        map.put(getTableKey(TableItem.特徴期, 6), div.getLblTokuchoKi7());
+        map.put(getTableKey(TableItem.特徴期, 7), div.getLblTokuchoKi8());
+        map.put(getTableKey(TableItem.特徴期, 8), div.getLblTokuchoKi9());
+        map.put(getTableKey(TableItem.特徴期, 9), div.getLblTokuchoKi10());
+        map.put(getTableKey(TableItem.特徴期, 10), div.getLblTokuchoKi11());
+        map.put(getTableKey(TableItem.特徴期, 11), div.getLblTokuchoKi12());
+        map.put(getTableKey(TableItem.特徴期, 12), div.getLblTokuchoKi13());
+        map.put(getTableKey(TableItem.特徴期, 13), div.getLblTokuchoKi14());
+        map.put(getTableKey(TableItem.特徴期, 14), div.getLblTokuchoKiGokei());
 
-        setTableItem(TableItem.特徴納付額);
-        putTableData(div.getLblTokuNofuGaku1());
-        putTableData(div.getLblTokuNofuGaku2());
-        putTableData(div.getLblTokuNofuGaku3());
-        putTableData(div.getLblTokuNofuGaku4());
-        putTableData(div.getLblTokuNofuGaku5());
-        putTableData(div.getLblTokuNofuGaku6());
-        putTableData(div.getLblTokuNofuGaku7());
-        putTableData(div.getLblTokuNofuGaku8());
-        putTableData(div.getLblTokuNofuGaku9());
-        putTableData(div.getLblTokuNofuGaku10());
-        putTableData(div.getLblTokuNofuGaku11());
-        putTableData(div.getLblTokuNofuGaku12());
-        putTableData(div.getLblTokuNofuGaku13());
-        putTableData(div.getLblTokuNofuGaku14());
-        putTableData(div.getLblTokuNofuGakuGokei());
+        map.put(getTableKey(TableItem.特徴期別額, 0), div.getLblTokuKibetsuGaku1());
+        map.put(getTableKey(TableItem.特徴期別額, 1), div.getLblTokuKibetsuGaku2());
+        map.put(getTableKey(TableItem.特徴期別額, 2), div.getLblTokuKibetsuGaku3());
+        map.put(getTableKey(TableItem.特徴期別額, 3), div.getLblTokuKibetsuGaku4());
+        map.put(getTableKey(TableItem.特徴期別額, 4), div.getLblTokuKibetsuGaku5());
+        map.put(getTableKey(TableItem.特徴期別額, 5), div.getLblTokuKibetsuGaku6());
+        map.put(getTableKey(TableItem.特徴期別額, 6), div.getLblTokuKibetsuGaku7());
+        map.put(getTableKey(TableItem.特徴期別額, 7), div.getLblTokuKibetsuGaku8());
+        map.put(getTableKey(TableItem.特徴期別額, 8), div.getLblTokuKibetsuGaku9());
+        map.put(getTableKey(TableItem.特徴期別額, 9), div.getLblTokuKibetsuGaku10());
+        map.put(getTableKey(TableItem.特徴期別額, 10), div.getLblTokuKibetsuGaku11());
+        map.put(getTableKey(TableItem.特徴期別額, 11), div.getLblTokuKibetsuGaku12());
+        map.put(getTableKey(TableItem.特徴期別額, 12), div.getLblTokuKibetsuGaku13());
+        map.put(getTableKey(TableItem.特徴期別額, 13), div.getLblTokuKibetsuGaku14());
+        map.put(getTableKey(TableItem.特徴期別額, 14), div.getLblTokuKibetsuGakuGokei());
 
-        setTableItem(TableItem.普徴期);
-        putTableData(div.getLblTokuNofuGaku1());
-        putTableData(div.getLblTokuNofuGaku2());
-        putTableData(div.getLblTokuNofuGaku3());
-        putTableData(div.getLblTokuNofuGaku4());
-        putTableData(div.getLblTokuNofuGaku5());
-        putTableData(div.getLblTokuNofuGaku6());
-        putTableData(div.getLblTokuNofuGaku7());
-        putTableData(div.getLblTokuNofuGaku8());
-        putTableData(div.getLblTokuNofuGaku9());
-        putTableData(div.getLblTokuNofuGaku10());
-        putTableData(div.getLblTokuNofuGaku11());
-        putTableData(div.getLblTokuNofuGaku12());
-        putTableData(div.getLblTokuNofuGaku13());
-        putTableData(div.getLblTokuNofuGaku14());
-        putTableData(div.getLblFuchoKiGokei());
+        map.put(getTableKey(TableItem.特徴納付額, 0), div.getLblTokuNofuGaku1());
+        map.put(getTableKey(TableItem.特徴納付額, 1), div.getLblTokuNofuGaku2());
+        map.put(getTableKey(TableItem.特徴納付額, 2), div.getLblTokuNofuGaku3());
+        map.put(getTableKey(TableItem.特徴納付額, 3), div.getLblTokuNofuGaku4());
+        map.put(getTableKey(TableItem.特徴納付額, 4), div.getLblTokuNofuGaku5());
+        map.put(getTableKey(TableItem.特徴納付額, 5), div.getLblTokuNofuGaku6());
+        map.put(getTableKey(TableItem.特徴納付額, 6), div.getLblTokuNofuGaku7());
+        map.put(getTableKey(TableItem.特徴納付額, 7), div.getLblTokuNofuGaku8());
+        map.put(getTableKey(TableItem.特徴納付額, 8), div.getLblTokuNofuGaku9());
+        map.put(getTableKey(TableItem.特徴納付額, 9), div.getLblTokuNofuGaku10());
+        map.put(getTableKey(TableItem.特徴納付額, 10), div.getLblTokuNofuGaku11());
+        map.put(getTableKey(TableItem.特徴納付額, 11), div.getLblTokuNofuGaku12());
+        map.put(getTableKey(TableItem.特徴納付額, 12), div.getLblTokuNofuGaku13());
+        map.put(getTableKey(TableItem.特徴納付額, 13), div.getLblTokuNofuGaku14());
+        map.put(getTableKey(TableItem.特徴納付額, 14), div.getLblTokuNofuGakuGokei());
 
-        setTableItem(TableItem.普徴期別額);
-        putTableData(div.getLblFuchoKibetsuGaku1());
-        putTableData(div.getLblFuchoKibetsuGaku2());
-        putTableData(div.getLblFuchoKibetsuGaku3());
-        putTableData(div.getLblFuchoKibetsuGaku4());
-        putTableData(div.getLblFuchoKibetsuGaku5());
-        putTableData(div.getLblFuchoKibetsuGaku6());
-        putTableData(div.getLblFuchoKibetsuGaku7());
-        putTableData(div.getLblFuchoKibetsuGaku8());
-        putTableData(div.getLblFuchoKibetsuGaku9());
-        putTableData(div.getLblFuchoKibetsuGaku10());
-        putTableData(div.getLblFuchoKibetsuGaku11());
-        putTableData(div.getLblFuchoKibetsuGaku12());
-        putTableData(div.getLblFuchoKibetsuGaku13());
-        putTableData(div.getLblFuchoKibetsuGaku14());
-        putTableData(div.getLblFuchoKibetsuGakuGokei());
+        map.put(getTableKey(TableItem.普徴期, 0), div.getLblTokuNofuGaku1());
+        map.put(getTableKey(TableItem.普徴期, 1), div.getLblTokuNofuGaku2());
+        map.put(getTableKey(TableItem.普徴期, 2), div.getLblTokuNofuGaku3());
+        map.put(getTableKey(TableItem.普徴期, 3), div.getLblTokuNofuGaku4());
+        map.put(getTableKey(TableItem.普徴期, 4), div.getLblTokuNofuGaku5());
+        map.put(getTableKey(TableItem.普徴期, 5), div.getLblTokuNofuGaku6());
+        map.put(getTableKey(TableItem.普徴期, 6), div.getLblTokuNofuGaku7());
+        map.put(getTableKey(TableItem.普徴期, 7), div.getLblTokuNofuGaku8());
+        map.put(getTableKey(TableItem.普徴期, 8), div.getLblTokuNofuGaku9());
+        map.put(getTableKey(TableItem.普徴期, 9), div.getLblTokuNofuGaku10());
+        map.put(getTableKey(TableItem.普徴期, 10), div.getLblTokuNofuGaku11());
+        map.put(getTableKey(TableItem.普徴期, 11), div.getLblTokuNofuGaku12());
+        map.put(getTableKey(TableItem.普徴期, 12), div.getLblTokuNofuGaku13());
+        map.put(getTableKey(TableItem.普徴期, 13), div.getLblTokuNofuGaku14());
+        map.put(getTableKey(TableItem.普徴期, 14), div.getLblTokuNofuGakuGokei());
 
-        setTableItem(TableItem.普徴納付額);
-        putTableData(div.getLblFuchoNofuGaku1());
-        putTableData(div.getLblFuchoNofuGaku2());
-        putTableData(div.getLblFuchoNofuGaku3());
-        putTableData(div.getLblFuchoNofuGaku4());
-        putTableData(div.getLblFuchoNofuGaku5());
-        putTableData(div.getLblFuchoNofuGaku6());
-        putTableData(div.getLblFuchoNofuGaku7());
-        putTableData(div.getLblFuchoNofuGaku8());
-        putTableData(div.getLblFuchoNofuGaku9());
-        putTableData(div.getLblFuchoNofuGaku10());
-        putTableData(div.getLblFuchoNofuGaku11());
-        putTableData(div.getLblFuchoNofuGaku12());
-        putTableData(div.getLblFuchoNofuGaku13());
-        putTableData(div.getLblFuchoNofuGaku14());
-        putTableData(div.getLblFuchoNofuGakuGokei());
-    }
+        map.put(getTableKey(TableItem.普徴期別額, 0), div.getLblFuchoKibetsuGaku1());
+        map.put(getTableKey(TableItem.普徴期別額, 1), div.getLblFuchoKibetsuGaku2());
+        map.put(getTableKey(TableItem.普徴期別額, 2), div.getLblFuchoKibetsuGaku3());
+        map.put(getTableKey(TableItem.普徴期別額, 3), div.getLblFuchoKibetsuGaku4());
+        map.put(getTableKey(TableItem.普徴期別額, 4), div.getLblFuchoKibetsuGaku5());
+        map.put(getTableKey(TableItem.普徴期別額, 5), div.getLblFuchoKibetsuGaku6());
+        map.put(getTableKey(TableItem.普徴期別額, 6), div.getLblFuchoKibetsuGaku7());
+        map.put(getTableKey(TableItem.普徴期別額, 7), div.getLblFuchoKibetsuGaku8());
+        map.put(getTableKey(TableItem.普徴期別額, 8), div.getLblFuchoKibetsuGaku9());
+        map.put(getTableKey(TableItem.普徴期別額, 9), div.getLblFuchoKibetsuGaku10());
+        map.put(getTableKey(TableItem.普徴期別額, 10), div.getLblFuchoKibetsuGaku11());
+        map.put(getTableKey(TableItem.普徴期別額, 11), div.getLblFuchoKibetsuGaku12());
+        map.put(getTableKey(TableItem.普徴期別額, 12), div.getLblFuchoKibetsuGaku13());
+        map.put(getTableKey(TableItem.普徴期別額, 13), div.getLblFuchoKibetsuGaku14());
+        map.put(getTableKey(TableItem.普徴期別額, 14), div.getLblFuchoKibetsuGakuGokei());
 
-    private void setTableItem(TableItem item) {
-        tableItem = item;
-        tableRowNo = 1;
-    }
+        map.put(getTableKey(TableItem.普徴納付額, 0), div.getLblFuchoNofuGaku1());
+        map.put(getTableKey(TableItem.普徴納付額, 1), div.getLblFuchoNofuGaku2());
+        map.put(getTableKey(TableItem.普徴納付額, 2), div.getLblFuchoNofuGaku3());
+        map.put(getTableKey(TableItem.普徴納付額, 3), div.getLblFuchoNofuGaku4());
+        map.put(getTableKey(TableItem.普徴納付額, 4), div.getLblFuchoNofuGaku5());
+        map.put(getTableKey(TableItem.普徴納付額, 5), div.getLblFuchoNofuGaku6());
+        map.put(getTableKey(TableItem.普徴納付額, 6), div.getLblFuchoNofuGaku7());
+        map.put(getTableKey(TableItem.普徴納付額, 7), div.getLblFuchoNofuGaku8());
+        map.put(getTableKey(TableItem.普徴納付額, 8), div.getLblFuchoNofuGaku9());
+        map.put(getTableKey(TableItem.普徴納付額, 9), div.getLblFuchoNofuGaku10());
+        map.put(getTableKey(TableItem.普徴納付額, 10), div.getLblFuchoNofuGaku11());
+        map.put(getTableKey(TableItem.普徴納付額, 11), div.getLblFuchoNofuGaku12());
+        map.put(getTableKey(TableItem.普徴納付額, 12), div.getLblFuchoNofuGaku13());
+        map.put(getTableKey(TableItem.普徴納付額, 13), div.getLblFuchoNofuGaku14());
+        map.put(getTableKey(TableItem.普徴納付額, 14), div.getLblFuchoNofuGakuGokei());
 
-    private void putTableData(Label label) {
-        期割額テーブル.put(getTableKey(tableItem, tableRowNo), label);
-        tableRowNo++;
+        return map;
     }
 
     private RString getTableKey(TableItem item, Integer rowNo) {

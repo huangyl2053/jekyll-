@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.config;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.ConfigKeysHizuke;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
@@ -185,27 +187,26 @@ public class HizukeConfig {
     }
 
     /**
-     * 日付関連_月別テーブルを配列で返します。
+     * 日付関連_月別テーブルをリストで返します。
      *
      * @return 日付関連_月別テーブル
      */
-    public RString[] get月別テーブル() {
-        RString[] 月別テーブル = {
-            get月別テーブル1(),
-            get月別テーブル2(),
-            get月別テーブル3(),
-            get月別テーブル4(),
-            get月別テーブル5(),
-            get月別テーブル6(),
-            get月別テーブル7(),
-            get月別テーブル8(),
-            get月別テーブル9(),
-            get月別テーブル10(),
-            get月別テーブル11(),
-            get月別テーブル12(),
-            get月別テーブル13(),
-            get月別テーブル14()
-        };
-        return 月別テーブル;
+    public List<RString> get月別テーブル() {
+        List<RString> list = new ArrayList<>();
+        list.add(get月別テーブル1());
+        list.add(get月別テーブル2());
+        list.add(get月別テーブル3());
+        list.add(get月別テーブル4());
+        list.add(get月別テーブル5());
+        list.add(get月別テーブル6());
+        list.add(get月別テーブル7());
+        list.add(get月別テーブル8());
+        list.add(get月別テーブル9());
+        list.add(get月別テーブル10());
+        list.add(get月別テーブル11());
+        list.add(get月別テーブル12());
+        list.add(get月別テーブル13());
+        list.add(get月別テーブル14());
+        return list;
     }
 }
