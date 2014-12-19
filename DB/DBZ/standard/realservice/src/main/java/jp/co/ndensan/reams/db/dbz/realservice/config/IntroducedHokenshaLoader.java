@@ -14,8 +14,6 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ShichosonNa
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNamePrint;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.HokenshaName;
-import jp.co.ndensan.reams.ur.urz.business.IAssociation;
-import jp.co.ndensan.reams.ur.urz.realservice.AssociationService;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -26,10 +24,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
  */
 public class IntroducedHokenshaLoader {
 
-    private final IIntroducedHokensha hokensha;
-
     public IntroducedHokenshaLoader() {
-        this.hokensha = new _IntroducedHokensha();
     }
 
     /**
@@ -38,22 +33,20 @@ public class IntroducedHokenshaLoader {
      * @return 導入保険者情報
      */
     public IIntroducedHokensha load() {
-        return this.hokensha;
+        return new _IntroducedHokensha();
     }
 
-    private static class _IntroducedHokensha implements IIntroducedHokensha {
+    private static final class _IntroducedHokensha implements IIntroducedHokensha {
 
-        private final HokenshaJohoConfig config;
-        private final IAssociation association;
+        private final HokenshaJohoConfig hokenshaJoho;
 
         private _IntroducedHokensha() {
-            this.config = new HokenshaJohoConfig();
-            this.association = AssociationService.createAssociationFinder().getAssociation();
+            this.hokenshaJoho = new HokenshaJohoConfig();
         }
 
         @Override
         public HokenshaName get保険者名称() {
-            return this.config.get保険者名称();
+            return this.hokenshaJoho.get保険者名称();
         }
 
         @Override
@@ -63,27 +56,27 @@ public class IntroducedHokenshaLoader {
 
         @Override
         public ShoKisaiHokenshaNo get証記載保険者番号() {
-            return this.config.get証記載保険者番号();
+            return this.hokenshaJoho.get証記載保険者番号();
         }
 
         @Override
         public AtenaJusho get住所() {
-            return this.config.get保険者住所();
+            return this.hokenshaJoho.get保険者住所();
         }
 
         @Override
         public YubinNo get郵便番号() {
-            return this.config.get郵便番号();
+            return this.hokenshaJoho.get郵便番号();
         }
 
         @Override
         public TelNo get電話番号() {
-            return this.config.get電話番号();
+            return this.hokenshaJoho.get電話番号();
         }
 
         @Override
         public GunNamePrint get群名印字有無() {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            return this.get群名印字有無();
         }
 
         @Override

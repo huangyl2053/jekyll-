@@ -145,7 +145,7 @@ public final class Hokensha implements IHokensha {
          * @param telNo {@link TelNo 電話番号}
          * @return {@link Builder}
          */
-        public Builder setTelNo(TelNo telNo) {
+        public Builder telNo(TelNo telNo) {
             this.telNo = telNo;
             return this;
         }
