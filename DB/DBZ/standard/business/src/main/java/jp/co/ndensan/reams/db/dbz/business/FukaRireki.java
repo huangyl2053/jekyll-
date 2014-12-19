@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.business;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +53,7 @@ public class FukaRireki {
                 map.put(key, model);
             }
         }
-        return sort((List) Arrays.asList(map.values().toArray()));
+        return sort(new ArrayList<>(map.values()));
     }
 
     /**
