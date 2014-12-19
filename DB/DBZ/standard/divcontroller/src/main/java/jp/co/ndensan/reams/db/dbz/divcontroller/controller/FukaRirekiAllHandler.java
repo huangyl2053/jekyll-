@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.fukarirekiall.dgFukaRirek
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.fukarirekiall.FukaRirekiAllDiv;
 import jp.co.ndensan.reams.db.dbz.model.FukaModel;
 import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.model.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.realservice.FukaShokaiFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.HokenryoDankaiManager;
@@ -75,7 +76,7 @@ public class FukaRirekiAllHandler {
      */
     public int load(HihokenshaNo 被保険者番号) {
         IItemList<FukaModel> modelList = fukaFinder.get全賦課履歴(被保険者番号);
-        PanelSessionAccessor.put(div, SESSION_NAME, new ArrayList<>(modelList.asList()));
+        PanelSessionAccessor.put(div, SESSION_NAME, ItemList.newItemList(modelList));
         return set全賦課履歴(modelList);
     }
 
@@ -88,7 +89,7 @@ public class FukaRirekiAllHandler {
      */
     public int load(HihokenshaNo 被保険者番号, FlexibleYear 賦課年度) {
         IItemList<FukaModel> modelList = fukaFinder.get全賦課履歴(被保険者番号, 賦課年度);
-        PanelSessionAccessor.put(div, SESSION_NAME, new ArrayList<>(modelList.asList()));
+        PanelSessionAccessor.put(div, SESSION_NAME, ItemList.newItemList(modelList));
         return set全賦課履歴(modelList);
     }
 
@@ -112,7 +113,7 @@ public class FukaRirekiAllHandler {
      * @return 賦課履歴
      */
     public FukaRireki get賦課履歴() {
-        FukaRireki 賦課履歴 = new FukaRireki(PanelSessionAccessor.get(div, SESSION_NAME, ArrayList.class));
+        FukaRireki 賦課履歴 = new FukaRireki(PanelSessionAccessor.get(div, SESSION_NAME, ItemList.class).asList());
         List<dgFukaRirekiAll_Row> rowList = div.getDgFukaRirekiAll().getSelectedItems();
         if (rowList.isEmpty()) {
             return 賦課履歴;
