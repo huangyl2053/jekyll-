@@ -114,7 +114,7 @@ public class HokenryoDankai {
      *
      * @return 表示用の保険料段階
      */
-    public RString get表示用保険料段階() {
+    public RString edit表示用保険料段階() {
 
         RString 段階区分 = 保険料段階.get段階区分();
         int stage = Integer.parseInt(段階区分.substring(0, 2).toString());

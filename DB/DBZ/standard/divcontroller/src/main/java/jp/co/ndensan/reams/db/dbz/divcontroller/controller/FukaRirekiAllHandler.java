@@ -142,7 +142,7 @@ public class FukaRirekiAllHandler {
                     model.get調定年度().toDateString(),
                     model.get賦課年度().toDateString(),
                     model.get通知書番号().value(),
-                    保険料段階.get().get表示用保険料段階(),
+                    保険料段階.get().edit表示用保険料段階(),
                     new RString(model.get減免前介護保険料_年額().toString()),
                     new RString(model.get減免額().toString()),
                     new RString(model.get確定介護保険料_年額().toString()),

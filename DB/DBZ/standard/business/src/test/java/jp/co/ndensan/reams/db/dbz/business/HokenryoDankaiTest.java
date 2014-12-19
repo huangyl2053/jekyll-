@@ -59,30 +59,30 @@ public class HokenryoDankaiTest {
         }
     }
 
-    public static class get表示用保険料段階 extends DbzTestBase {
+    public static class edit表示用保険料段階 extends DbzTestBase {
 
         @Test
-        public void 基本表記の時_get表示用保険料段階は_基本表記の保険料段階を返す() {
+        public void 基本表記の時_edit表示用保険料段階は_基本表記の保険料段階を返す() {
             sut = new HokenryoDankai(createHokenryoDankaiModel(賦課年度_第1期, 段階区分_第1段階, 特例表記無し), createFukaKeisanConfig());
-            assertThat(sut.get表示用保険料段階(), is(new RString("第1段階")));
+            assertThat(sut.edit表示用保険料段階(), is(new RString("第1段階")));
         }
 
         @Test
-        public void 対象外表記の時_get表示用保険料段階は_対象外表記の保険料段階を返す() {
+        public void 対象外表記の時_edit表示用保険料段階は_対象外表記の保険料段階を返す() {
             sut = new HokenryoDankai(createHokenryoDankaiModel(賦課年度_第2期, 段階区分_対象外, 特例表記無し), createFukaKeisanConfig());
-            assertThat(sut.get表示用保険料段階(), is(new RString("-")));
+            assertThat(sut.edit表示用保険料段階(), is(new RString("-")));
         }
 
         @Test
-        public void 改正前表記の時_get表示用保険料段階は_改正前表記の保険料段階を返す() {
+        public void 改正前表記の時_edit表示用保険料段階は_改正前表記の保険料段階を返す() {
             sut = new HokenryoDankai(createHokenryoDankaiModel(賦課年度_第3期, 段階区分_第4段階2, 特例表記無し), createFukaKeisanConfig());
-            assertThat(sut.get表示用保険料段階(), is(new RString("第4段階(改正前2)")));
+            assertThat(sut.edit表示用保険料段階(), is(new RString("第4段階(改正前2)")));
         }
 
         @Test
-        public void 特例表記の時_get表示用保険料段階は_特例表記の保険料段階を返す() {
+        public void 特例表記の時_edit表示用保険料段階は_特例表記の保険料段階を返す() {
             sut = new HokenryoDankai(createHokenryoDankaiModel(賦課年度_第5期, 段階区分_第3段階1, 特例表記有り), createFukaKeisanConfig());
-            assertThat(sut.get表示用保険料段階(), is(new RString("第3段階(特例)")));
+            assertThat(sut.edit表示用保険料段階(), is(new RString("第3段階(特例)")));
         }
     }
 
