@@ -48,13 +48,26 @@ public class FukaRireki {
     public IItemList<FukaModel> get全賦課履歴() {
         Map<RString, FukaModel> map = new HashMap<>();
         for (FukaModel model : 賦課履歴明細) {
-            RString key = getKey(model);
+            RString key = createKey(model);
             FukaModel value = map.get(key);
             if (value == null || value.get処理日時().isBefore(model.get処理日時())) {
                 map.put(key, model);
             }
         }
         return sort(new ArrayList<>(map.values()));
+    }
+
+    private RString createKey(FukaModel model) {
+        return new RStringBuilder(model.get賦課年度().toDateString())
+                .append(model.get調定年度().toDateString())
+                .append(model.get通知書番号()).toRString();
+    }
+
+    private IItemList<FukaModel> sort(List<FukaModel> list) {
+        return ItemList.of(list)
+                .sorted(FukaModelComparators.orderBy通知書番号.desc())
+                .sorted(FukaModelComparators.orderBy調定年度.desc())
+                .sorted(FukaModelComparators.orderBy賦課年度.desc());
     }
 
     /**
@@ -82,18 +95,5 @@ public class FukaRireki {
             }
         }
         return ItemList.of(list);
-    }
-
-    private RString getKey(FukaModel model) {
-        return new RStringBuilder(model.get賦課年度().toDateString())
-                .append(model.get調定年度().toDateString())
-                .append(model.get通知書番号()).toRString();
-    }
-
-    private IItemList<FukaModel> sort(List<FukaModel> list) {
-        return ItemList.of(list)
-                .sorted(FukaModelComparators.orderBy通知書番号.desc())
-                .sorted(FukaModelComparators.orderBy調定年度.desc())
-                .sorted(FukaModelComparators.orderBy賦課年度.desc());
     }
 }
