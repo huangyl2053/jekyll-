@@ -5,10 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.hokensha;
 
+import java.util.Iterator;
+
 /**
  *
- * @author N3327 三浦 凌
+ * @author
  */
-public class KoikiKoseiShichosons {
+public class KoikiKoseiShichosons implements Iterable<IKoikiKoseiShichoson> {
 
+    @Override
+    public Iterator<IKoikiKoseiShichoson> iterator() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
