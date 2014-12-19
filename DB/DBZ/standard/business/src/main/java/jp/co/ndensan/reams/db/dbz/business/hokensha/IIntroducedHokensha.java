@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.hokensha;
 
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.HokenshaName;
 import jp.co.ndensan.reams.db.dbz.model.hokensha.IHokensha;
 
@@ -30,4 +31,10 @@ public interface IIntroducedHokensha extends IHokensha {
      */
     boolean is広域保険者();
 
+    /**
+     * {@link HokenshaKosei 保険者構成}を返します。
+     *
+     * @return {@link HokenshaKosei 保険者構成}
+     */
+    HokenshaKosei get保険者構成();
 }

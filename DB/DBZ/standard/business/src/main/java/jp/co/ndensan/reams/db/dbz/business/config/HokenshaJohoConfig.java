@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 保険者情報のconfigを扱います。
@@ -28,23 +29,24 @@ public class HokenshaJohoConfig {
     private final YubinNo hokenshaYubinNo;
 
     /**
-     * インスタンスを生成します。
+     * インスタンスを生成します。コンフィグ取得時の適用基準日には、{@link RDate#getNowDate()}を用います。
      */
     public HokenshaJohoConfig() {
-        this(UrBusinessConfigFactory.createInstance());
+        this(UrBusinessConfigFactory.createInstance(), RDate.getNowDate());
     }
 
     /**
      * コンストラクタです。{@link IBusinessConfigLoader loader}を指定して、インスタンスを生成します。
      *
      * @param loader {@link IBusinessConfigLoader loader}
+     * @param date 適用基準日
      */
-    protected HokenshaJohoConfig(IUrBusinessConfig loader) {
-        this.shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(loader.get(HokenshaJoho.保険者情報_保険者番号));
-        this.hokenshaName = new HokenshaName(loader.get(HokenshaJoho.保険者情報_保険者名称));
-        this.hokenshaJusho = new AtenaJusho(loader.get(HokenshaJoho.保険者情報_住所));
-        this.hokenshaTelNo = new TelNo(loader.get(HokenshaJoho.保険者情報_電話番号));
-        this.hokenshaYubinNo = new YubinNo(loader.get(HokenshaJoho.保険者情報_郵便番号));
+    protected HokenshaJohoConfig(IUrBusinessConfig loader, RDate date) {
+        this.shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(loader.get(HokenshaJoho.保険者情報_保険者番号, date));
+        this.hokenshaName = new HokenshaName(loader.get(HokenshaJoho.保険者情報_保険者名称, date));
+        this.hokenshaJusho = new AtenaJusho(loader.get(HokenshaJoho.保険者情報_住所, date));
+        this.hokenshaTelNo = new TelNo(loader.get(HokenshaJoho.保険者情報_電話番号, date));
+        this.hokenshaYubinNo = new YubinNo(loader.get(HokenshaJoho.保険者情報_郵便番号, date));
     }
 
     /**

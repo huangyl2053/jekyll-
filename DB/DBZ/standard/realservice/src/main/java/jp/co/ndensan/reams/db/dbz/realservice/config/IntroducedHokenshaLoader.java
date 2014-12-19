@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.realservice.config;
 import jp.co.ndensan.reams.db.dbz.business.config.HokenshaJohoConfig;
 import jp.co.ndensan.reams.db.dbz.business.hokensha.IIntroducedHokensha;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GunNamePrint;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HowToEditJusho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.KatagakiPrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ShichosonNamePrint;
@@ -55,6 +56,11 @@ public class IntroducedHokenshaLoader {
         }
 
         @Override
+        public HokenshaKosei get保険者構成() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
         public ShoKisaiHokenshaNo get証記載保険者番号() {
             return this.hokenshaJoho.get証記載保険者番号();
         }
@@ -98,5 +104,6 @@ public class IntroducedHokenshaLoader {
         public HowToEditJusho get印字住所編集方法() {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
+
     }
 }
