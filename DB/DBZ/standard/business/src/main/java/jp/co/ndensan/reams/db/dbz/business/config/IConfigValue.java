@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config;
 
-import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

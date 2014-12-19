@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNa
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TopPriorityArea;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GappeiKyuShichosonHyoji;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GappeiKyuShichosonKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HowToEditJusho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.RokenJukyushaNoTaikei;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.UnyoKeitaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
@@ -23,7 +24,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.KokuhorenKoiki
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.RokenShichosonNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushoEditPattern;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * @author LDNS 宋文娟
  * @author N3327 三浦 凌
  */
-public class KoseiShichosonMasterModel implements IKoikiKoseiShichoson, Serializable {
+public class KoseiShichosonMasterModel implements IKoikiKoseiShichosonMaster, Serializable {
 
     private DbT7051KoseiShichosonMasterEntity entity;
     private transient ShichosonShikibetsuID shichosonShikibetsuId;
@@ -48,7 +48,7 @@ public class KoseiShichosonMasterModel implements IKoikiKoseiShichoson, Serializ
     private transient TodofukenNamePrint todofukenNamePrint;
     private transient GunNamePrint gunNamePrint;
     private transient ShichosonNamePrint shichosonNamePrint;
-    private transient JushoEditPattern jushoEditPattern;
+    private transient HowToEditJusho howToEditJusho;
     private transient KatagakiPrint katagakiPrint;
     private transient ForeignersNameOutput foreignersNameOutput;
     private transient RokenShichosonNo rokenShichosonNo;
@@ -157,8 +157,11 @@ public class KoseiShichosonMasterModel implements IKoikiKoseiShichoson, Serializ
     }
 
     @Override
-    public JushoEditPattern get印字住所編集方法() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public HowToEditJusho get印字住所編集方法() {
+        if (howToEditJusho == null) {
+            howToEditJusho = HowToEditJusho.toValue(entity.getTyohyoJushoHenshuHouhou());
+        }
+        return howToEditJusho;
     }
 
     @Override

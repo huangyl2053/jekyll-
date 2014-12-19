@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbz.model.hokensha;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GunNamePrint;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HowToEditJusho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.KatagakiPrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ShichosonNamePrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNamePrint;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushoEditPattern;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -31,7 +31,7 @@ public final class Hokensha implements IHokensha {
     private final TodofukenNamePrint todofukenNamePrint;
     private final ShichosonNamePrint shichosonNamePrint;
     private final KatagakiPrint katagakiPrint;
-    private final JushoEditPattern jushoEditPattern;
+    private final HowToEditJusho howToEditJusho;
 
     private Hokensha(Builder builder) {
         this.hokenshaNo = builder.hokenshaNo;
@@ -42,7 +42,7 @@ public final class Hokensha implements IHokensha {
         this.todofukenNamePrint = builder.todofukenNamePrint;
         this.shichosonNamePrint = builder.shichosonNamePrint;
         this.katagakiPrint = builder.katagakiPrint;
-        this.jushoEditPattern = builder.jushoEditPattern;
+        this.howToEditJusho = builder.howToEditJusho;
     }
 
     @Override
@@ -86,8 +86,8 @@ public final class Hokensha implements IHokensha {
     }
 
     @Override
-    public JushoEditPattern get印字住所編集方法() {
-        return this.jushoEditPattern;
+    public HowToEditJusho get印字住所編集方法() {
+        return this.howToEditJusho;
     }
 
     /**
@@ -103,7 +103,7 @@ public final class Hokensha implements IHokensha {
         private TodofukenNamePrint todofukenNamePrint = TodofukenNamePrint.印字する;
         private ShichosonNamePrint shichosonNamePrint = ShichosonNamePrint.印字する;
         private KatagakiPrint katagakiPrint = KatagakiPrint.印字する;
-        private JushoEditPattern jushoEditPattern = JushoEditPattern.町域番地;
+        private HowToEditJusho howToEditJusho = HowToEditJusho.住所と番地;
 
         /**
          * {@link ShoKisaiHokenshaNo 証記載保険者番号}から、ビルダーを生成します。
@@ -199,13 +199,13 @@ public final class Hokensha implements IHokensha {
         }
 
         /**
-         * {@link JushoEditPattern 住所編集方法}を設定します。
+         * {@link HowToEditJusho 住所編集方法}を設定します。
          *
-         * @param jushoEditPattern {@link JushoEditPattern 住所編集方法}
+         * @param howToEditJusho {@link HowToEditJusho 住所編集方法}
          * @return {@link Builder}
          */
-        public Builder jushoEditPattern(JushoEditPattern jushoEditPattern) {
-            this.jushoEditPattern = jushoEditPattern;
+        public Builder howToEditJusho(HowToEditJusho howToEditJusho) {
+            this.howToEditJusho = howToEditJusho;
             return this;
         }
 

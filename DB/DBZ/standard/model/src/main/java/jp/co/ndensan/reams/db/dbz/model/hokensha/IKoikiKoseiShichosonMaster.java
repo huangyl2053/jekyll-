@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
-public interface IKoikiKoseiShichoson extends IHokensha {
+public interface IKoikiKoseiShichosonMaster extends IHokensha {
 
     /**
      * 市町村識別IDを返します。

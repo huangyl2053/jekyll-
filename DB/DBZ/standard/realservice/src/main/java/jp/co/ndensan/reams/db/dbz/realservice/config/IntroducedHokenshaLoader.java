@@ -5,16 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice.config;
 
-import jp.co.ndensan.reams.db.dbz.business.config.HokenshaInfoConfig;
+import jp.co.ndensan.reams.db.dbz.business.config.HokenshaJohoConfig;
 import jp.co.ndensan.reams.db.dbz.business.hokensha.IIntroducedHokensha;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GunNamePrint;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HowToEditJusho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.KatagakiPrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ShichosonNamePrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.HokenshaName;
 import jp.co.ndensan.reams.ur.urz.business.IAssociation;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushoEditPattern;
 import jp.co.ndensan.reams.ur.urz.realservice.AssociationService;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -43,11 +43,11 @@ public class IntroducedHokenshaLoader {
 
     private static class _IntroducedHokensha implements IIntroducedHokensha {
 
-        private final HokenshaInfoConfig config;
+        private final HokenshaJohoConfig config;
         private final IAssociation association;
 
         private _IntroducedHokensha() {
-            this.config = new HokenshaInfoConfig();
+            this.config = new HokenshaJohoConfig();
             this.association = AssociationService.createAssociationFinder().getAssociation();
         }
 
@@ -82,27 +82,27 @@ public class IntroducedHokenshaLoader {
         }
 
         @Override
-        public GunNamePrint get群名表示有無() {
+        public GunNamePrint get群名印字有無() {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
-        public TodofukenNamePrint get都道府県名表示有無() {
+        public TodofukenNamePrint get都道府名印字有無() {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
-        public ShichosonNamePrint get市町村名表示有無() {
+        public ShichosonNamePrint get市町村名印字有無() {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
-        public KatagakiPrint get方書表示有無() {
+        public KatagakiPrint get方書印字有無() {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
-        public JushoEditPattern get住所編集方法() {
+        public HowToEditJusho get印字住所編集方法() {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }

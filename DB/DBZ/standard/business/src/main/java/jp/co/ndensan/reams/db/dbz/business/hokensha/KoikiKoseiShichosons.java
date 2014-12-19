@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.realservice.koiki;
+package jp.co.ndensan.reams.db.dbz.business.hokensha;
 
 /**
- * 広域構成市町村を検索するための条件であることを表します。
  *
  * @author N3327 三浦 凌
  */
-public interface IKoikiKoseiShichosonSearchCondition {
+public class KoikiKoseiShichosons {
 
 }

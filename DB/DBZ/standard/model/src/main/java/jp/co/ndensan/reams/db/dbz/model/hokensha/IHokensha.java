@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.model.hokensha;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GunNamePrint;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HowToEditJusho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.KatagakiPrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ShichosonNamePrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNamePrint;
@@ -83,5 +84,5 @@ public interface IHokensha {
      *
      * @return 住所の編集方法
      */
-    JushoEditPattern get印字住所編集方法();
+    HowToEditJusho get印字住所編集方法();
 }

@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config;
 
-import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
-import jp.co.ndensan.reams.db.dbz.model.util.function.supplier.ExceptionSuppliers;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.ExceptionSuppliers;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -28,12 +28,12 @@ public final class _ConfigValue implements IConfigValue {
     @Override
     public <T> T as(IFunction<RString, T> converter) {
         return this.rawValue.map(converter)
-                .orElseThrow(ExceptionSuppliers.nullPointerException().withMessage(UrSystemErrorMessages.値がnull.getReplacedMessage("取得値")));
+                .orElseThrow(ExceptionSuppliers.nullPointerException(UrSystemErrorMessages.値がnull.getReplacedMessage("取得値")));
     }
 
     @Override
     public RString asRString() {
         return this.rawValue
-                .orElseThrow(ExceptionSuppliers.nullPointerException().withMessage(UrSystemErrorMessages.値がnull.getReplacedMessage("取得値")));
+                .orElseThrow(ExceptionSuppliers.nullPointerException(UrSystemErrorMessages.値がnull.getReplacedMessage("取得値")));
     }
 }

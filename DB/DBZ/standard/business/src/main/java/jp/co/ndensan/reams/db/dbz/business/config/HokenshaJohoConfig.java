@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config;
 
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.config.DbzConfigKeys.HokenshaInfo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.config.HokenshaJoho;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.HokenshaName;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
  *
  * @author N3327 三浦 凌
  */
-public final class HokenshaInfoConfig {
+public class HokenshaJohoConfig {
 
     private final ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private final HokenshaName hokenshaName;
@@ -30,22 +30,21 @@ public final class HokenshaInfoConfig {
     /**
      * インスタンスを生成します。
      */
-    public HokenshaInfoConfig() {
+    public HokenshaJohoConfig() {
         this(UrBusinessConfigFactory.createInstance());
     }
 
     /**
-     * {@link IBusinessConfigLoader loader}を指定して、インスタンスを生成します。<br/>
-     * テストでも利用します。
+     * コンストラクタです。{@link IBusinessConfigLoader loader}を指定して、インスタンスを生成します。
      *
      * @param loader {@link IBusinessConfigLoader loader}
      */
-    HokenshaInfoConfig(IUrBusinessConfig loader) {
-        this.shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(loader.get(HokenshaInfo.保険者情報_保険者番号));
-        this.hokenshaName = new HokenshaName(loader.get(HokenshaInfo.保険者情報_保険者名称));
-        this.hokenshaJusho = new AtenaJusho(loader.get(HokenshaInfo.保険者情報_住所));
-        this.hokenshaTelNo = new TelNo(loader.get(HokenshaInfo.保険者情報_電話番号));
-        this.hokenshaYubinNo = new YubinNo(loader.get(HokenshaInfo.保険者情報_郵便番号));
+    protected HokenshaJohoConfig(IUrBusinessConfig loader) {
+        this.shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(loader.get(HokenshaJoho.保険者情報_保険者番号));
+        this.hokenshaName = new HokenshaName(loader.get(HokenshaJoho.保険者情報_保険者名称));
+        this.hokenshaJusho = new AtenaJusho(loader.get(HokenshaJoho.保険者情報_住所));
+        this.hokenshaTelNo = new TelNo(loader.get(HokenshaJoho.保険者情報_電話番号));
+        this.hokenshaYubinNo = new YubinNo(loader.get(HokenshaJoho.保険者情報_郵便番号));
     }
 
     /**

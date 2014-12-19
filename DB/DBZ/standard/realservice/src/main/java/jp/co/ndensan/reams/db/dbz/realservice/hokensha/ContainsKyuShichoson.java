@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.realservice.koiki;
+package jp.co.ndensan.reams.db.dbz.realservice.hokensha;
 
 /**
  * 旧市町村を含むか、含まないかを選択するための列挙型です。
