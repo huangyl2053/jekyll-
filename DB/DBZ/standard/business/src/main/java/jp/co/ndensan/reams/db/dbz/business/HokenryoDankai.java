@@ -39,7 +39,7 @@ public class HokenryoDankai {
     public HokenryoDankai(HokenryoDankaiModel 保険料段階) throws NullPointerException {
         this.保険料段階 = requireNonNull(保険料段階, UrSystemErrorMessages.値がnull.getReplacedMessage("保険料段階"));
         this.賦課計算Config = new FukaKeisanConfig();
-        this.激変緩和期間 = new Range(賦課計算Config.get激変緩和開始年度(), 賦課計算Config.get激変緩和終了年度());
+        this.激変緩和期間 = 賦課計算Config.get激変緩和期間();
     }
 
     /**
@@ -52,7 +52,7 @@ public class HokenryoDankai {
     public HokenryoDankai(HokenryoDankaiModel 保険料段階, FukaKeisanConfig 賦課計算Config) throws NullPointerException {
         this.保険料段階 = requireNonNull(保険料段階, UrSystemErrorMessages.値がnull.getReplacedMessage("保険料段階"));
         this.賦課計算Config = requireNonNull(賦課計算Config, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課計算Config"));
-        this.激変緩和期間 = new Range(賦課計算Config.get激変緩和開始年度(), 賦課計算Config.get激変緩和終了年度());
+        this.激変緩和期間 = 賦課計算Config.get激変緩和期間();
     }
 
     /**

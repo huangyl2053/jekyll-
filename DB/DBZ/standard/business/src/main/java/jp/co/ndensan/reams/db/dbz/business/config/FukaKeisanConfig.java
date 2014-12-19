@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 // TODO N8156 宮本 康 別ブランチで対応中。マージ時にメソッドを追加する。
 public class FukaKeisanConfig {
@@ -73,6 +74,15 @@ public class FukaKeisanConfig {
      */
     public FlexibleYear get激変緩和終了年度() {
         return new FlexibleYear(get(ConfigKeysFukaKeisan.激変緩和_終了年度));
+    }
+
+    /**
+     * 激変緩和期間を返します。
+     *
+     * @return 激変緩和期間
+     */
+    public Range<FlexibleYear> get激変緩和期間() {
+        return new Range(get激変緩和開始年度(), get激変緩和終了年度());
     }
 
     /**

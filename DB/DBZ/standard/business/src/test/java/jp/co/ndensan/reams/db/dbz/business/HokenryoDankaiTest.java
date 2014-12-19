@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.model.HokenryoDankaiModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
@@ -98,6 +99,7 @@ public class HokenryoDankaiTest {
         FukaKeisanConfig config = mock(FukaKeisanConfig.class);
         when(config.get激変緩和開始年度()).thenReturn(激変緩和開始年度);
         when(config.get激変緩和終了年度()).thenReturn(激変緩和終了年度);
+        when(config.get激変緩和期間()).thenReturn(new Range(激変緩和開始年度, 激変緩和終了年度));
         return config;
     }
 }
