@@ -1,0 +1,15 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+serviceHiyoGokeiGakuGokei,numeric,Decimal,,,,,A
+riyoshaFutanGakuGokei,numeric,Decimal,,,,,A
+santeiKijunGaku,numeric,Decimal,,,,,A
+shiharaiSumiKingakuGokei,numeric,Decimal,,,,,A
+KogakuShikyuGaku,numeric,Decimal,,,,,A
+tashoshaUketoriYM,UDD014YM,FlexibleYearMonth,,,,,A
+taishoshaHanteiShinsaYM,UDD014YM,FlexibleYearMonth,,,,,A
+setaiShuyakuNo,varchar,RString,,,,,A
+kyokaisoTaishoshaFlag,bool,boolean,,,,,A
+hojinKeigenTaishoFlag,bool,boolean,,,,,A
+kogakuTaishoGaiFlag,bool,boolean,,,,,A
+jidoShokanTaishoFlag,bool,boolean,,,,,A

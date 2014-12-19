@@ -1,0 +1,10 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+kaigoIryokikanCode,varchar,RString,,,,,A
+kaigoIshiCode,varchar,RString,,,,,A
+iryokikanCode,varchar,RString,,,,,A
+ishiShikibetsuNo,varchar,RString,,,,,A
+shujiiJokyo,varchar,RString,,,,,A
+yubinNo,UDD003YubinNo,YubinNo,,,,,A
+jusho,UDD046AtenaJusho,AtenaJusho,,,,,A
+telNo,UDD026TelNo,TelNo,,,,,A
+faxNo,UDD026TelNo,TelNo,,,,,A

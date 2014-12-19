@@ -1,0 +1,5 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+shinTekiyoJogaiShisetsuNo,varchar,RString,,,,,A
+kyuTekiyoJogaiShisetsuNo,varchar,RString,,,,,A
+shichosonCode2,UDD023LasdecCode,LasdecCode,,,,,A
+kyuTekiyoJogaiShisetsuNo2,varchar,RString,,,,,A

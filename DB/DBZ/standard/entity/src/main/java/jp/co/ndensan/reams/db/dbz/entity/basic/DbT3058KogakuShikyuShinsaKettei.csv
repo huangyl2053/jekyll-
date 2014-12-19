@@ -1,0 +1,9 @@
+﻿ketteishaUketoriYM,UDD014YM,FlexibleYearMonth,,,,,A
+shoKisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,A
+hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,A
+tsuchishoNo,varchar,RString,,,,,A
+riyoshaFutanGaku,numeric,Decimal,,,,,A
+shikyuKubunCode,varchar,RString,,,,,A
+ketteiYM,UDD014YM,FlexibleYearMonth,,,,,A
+kogakuShikyuGaku,numeric,Decimal,,,,,A
