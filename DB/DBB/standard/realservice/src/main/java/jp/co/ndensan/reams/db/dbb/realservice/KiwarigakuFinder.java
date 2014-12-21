@@ -62,12 +62,12 @@ public class KiwarigakuFinder {
     public IItemList<Kiwarigaku> get期割額(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時) {
         List<Kiwarigaku> 期割額List = new ArrayList<>();
         for (KibetsuChoteiKyotsuModel 期別調定共通 : dac.select介護期別調定共通一覧(調定年度, 賦課年度, 通知書番号, 処理日時)) {
-            期割額List.add(get期割額(期別調定共通));
+            期割額List.add(to期割額(期別調定共通));
         }
         return ItemList.of(期割額List);
     }
 
-    private Kiwarigaku get期割額(KibetsuChoteiKyotsuModel 期別調定共通) {
+    private Kiwarigaku to期割額(KibetsuChoteiKyotsuModel 期別調定共通) {
         return new Kiwarigaku(期別調定共通, get収入額(期別調定共通.get調定共通モデル().get収納ID()));
     }
 
