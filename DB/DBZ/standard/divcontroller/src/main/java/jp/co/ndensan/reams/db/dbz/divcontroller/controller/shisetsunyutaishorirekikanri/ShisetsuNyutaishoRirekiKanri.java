@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.shisetsunyutaishorirekikanri;
 
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
+
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoMapper;
@@ -236,7 +237,7 @@ public class ShisetsuNyutaishoRirekiKanri {
                     次履歴 = DbOptional.empty();
                 }
 
-                if (rowIndex != 0 && rowIndex + 1 <= shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().size() - 1) {
+                if (rowIndex + 1 <= shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().size() - 1) {
                     int rdx = rowIndex + 1;
                     dgShisetsuNyutaishoRireki_Row row = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rdx);
                     前履歴 = createHandlerOf(shisetsuNyutaishoRirekiDiv).get施設入退所履歴()

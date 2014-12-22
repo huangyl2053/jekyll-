@@ -355,7 +355,8 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
             return false;
         }
 
-        return !前履歴.get退所年月日().isBefore(get入所年月日());
+//        return !前履歴.get退所年月日().isBefore(get入所年月日());
+        return !前履歴.get退所年月日().isBeforeOrEquals(get入所年月日());
 
     }
 
@@ -363,9 +364,8 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
         if (!次履歴.isPresent() || get退所年月日().isEmpty() || get退所年月日() == null) {
             return false;
         }
-        boolean a = !get退所年月日().isBefore(次履歴.get().get入所年月日());
-        return !get退所年月日().isBefore(次履歴.get().get入所年月日());
-
+//        return !get退所年月日().isBefore(次履歴.get().get入所年月日());
+        return !get退所年月日().isBeforeOrEquals(次履歴.get().get入所年月日());
     }
 
     private boolean has入所日と期間が重複する履歴In(IItemList<ShisetsuNyutaishoModel> list) {
@@ -376,10 +376,12 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
             if (model.get退所年月日().isEmpty()) {
                 return false;
             }
-            if (OrderValidator.from(model.get入所年月日()).afterOrEquals(this.get入所年月日()).afterOrEquals(model.get退所年月日()).isValid()) {
+//            if (OrderValidator.from(model.get入所年月日()).afterOrEquals(this.get入所年月日()).afterOrEquals(model.get退所年月日()).isValid()) {
+//                return true;
+//            }
+            if (OrderValidator.from(model.get入所年月日()).afterOrEquals(this.get入所年月日()).after(model.get退所年月日()).isValid()) {
                 return true;
             }
-
         }
         return false;
     }

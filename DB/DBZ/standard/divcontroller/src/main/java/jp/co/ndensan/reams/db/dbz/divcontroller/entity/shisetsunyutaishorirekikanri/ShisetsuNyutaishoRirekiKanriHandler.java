@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
@@ -192,6 +191,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      */
     public void set施設入退所履歴(IItemList<ShisetsuNyutaishoRelateModel> 施設入退所履歴List) {
         PanelSessionAccessor.put(div, PANEL_SESSION_ACCESSOR_KEY, ItemList.newItemList(施設入退所履歴List));
+
         施設入退所履歴List = 施設入退所履歴List.sorted(ShisetsuNyutaishoModelComparators.orderBy入所年月日.desc());
         div.getDgShisetsuNyutaishoRireki().setDataSource(施設入退所履歴List.map(ShisetsuNyutaishoMapper.toGridRow()).toList());
     }
