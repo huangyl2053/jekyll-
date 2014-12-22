@@ -171,4 +171,14 @@ public interface IItemList<E> extends Iterable<E> {
      * @return 要素をすべて追加した新しい{@link IItemList IItemList}
      */
     IItemList<E> added(E... items);
+
+    /**
+     * {@link IDbCollector}によって、保持する要素を集積・変換して返します。
+     *
+     * @param <R> 結果の型
+     * @param <A> 集積用の型(結果の型と同じ場合もある)
+     * @param collector {@link IDbCollector}
+     * @return {@link IDbCollector}により、保持する要素を集積・変換した結果
+     */
+    <R, A> R collect(IDbCollector<? super E, A, R> collector);
 }

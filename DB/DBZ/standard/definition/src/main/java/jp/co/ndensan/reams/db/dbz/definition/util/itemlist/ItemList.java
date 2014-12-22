@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IBiConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
@@ -250,5 +251,15 @@ public final class ItemList<E> implements IItemList<E>, Serializable {
             list.add(item);
         }
         return new ItemList<>(list);
+    }
+
+    @Override
+    public <R, A> R collect(IDbCollector<? super E, A, R> collector) {
+        A container = collector.container().get();
+        IBiConsumer<A, ? super E> accumulator = collector.accumulator();
+        for (E element : elements) {
+            accumulator.accept(container, element);
+        }
+        return collector.finisher().apply(container);
     }
 }

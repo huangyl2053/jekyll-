@@ -83,4 +83,21 @@ public final class Functions {
     public static <C extends P, P> IFunction<C, P> childToParent() {
         return (_ChildToParent<C, P>) CHILD_TO_PARENT;
     }
+
+    /**
+     * あるオブジェクトを別のオブジェクトへキャストして返す{@link IFunction IFunction}を返します。<br/>
+     * 使用する際には{@link ClassCastException}に注意してください。
+     *
+     * @param <T> 元の型
+     * @param <R> キャスト後の型
+     * @return あるオブジェクトを別のオブジェクトへキャストして返す{@link IFunction IFunction}
+     */
+    public static <T, R> IFunction<T, R> cast() {
+        return new IFunction<T, R>() {
+            @Override
+            public R apply(T t) {
+                return (R) t;
+            }
+        };
+    }
 }
