@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import static java.util.Objects.requireNonNull;
 
 /**
- * 介護資格基本情報の検索キーを作成するクラスです。
+ * {@link KaigoShikakuKihonSearchKey}を作成するクラスです。
  *
  * @author N8156 宮本 康
  */

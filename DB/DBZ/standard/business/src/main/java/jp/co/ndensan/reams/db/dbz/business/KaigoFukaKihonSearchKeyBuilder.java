@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import static java.util.Objects.requireNonNull;
 
 /**
- * 介護賦課基本情報の検索キーを作成するクラスです。
+ * {@link KaigoFukaKihonSearchKey}を作成するクラスです。
  *
  * @author N8156 宮本 康
  */
