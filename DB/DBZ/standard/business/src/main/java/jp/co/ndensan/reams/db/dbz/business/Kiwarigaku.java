@@ -6,20 +6,19 @@
 package jp.co.ndensan.reams.db.dbz.business;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbz.model.KiwarigakuModel;
+import jp.co.ndensan.reams.db.dbz.model.KiwarigakuMeisai;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static java.util.Objects.requireNonNull;
 
 /**
- * 期割額を扱うクラスです。
+ * 期割額を保持するクラスです。
  *
  * @author N8156 宮本 康
  */
 public class Kiwarigaku {
 
-    private final List<KiwarigakuModel> 期割額明細;
+    private final List<KiwarigakuMeisai> 期割額明細;
     private Decimal 特徴期別額合計 = Decimal.ZERO;
     private Decimal 特徴納付額合計 = Decimal.ZERO;
     private Decimal 普徴期別額合計 = Decimal.ZERO;
@@ -29,22 +28,19 @@ public class Kiwarigaku {
      * コンストラクタです。
      *
      * @param 期割額明細 期割額のリスト
+     * @param 特徴期別額合計 特徴期別額合計
+     * @param 特徴納付額合計 特徴納付額合計
+     * @param 普徴期別額合計 普徴期別額合計
+     * @param 普徴納付額合計 普徴納付額合計
      * @throws NullPointerException 引数がnullの場合
      */
-    public Kiwarigaku(List<KiwarigakuModel> 期割額明細) throws NullPointerException {
+    public Kiwarigaku(List<KiwarigakuMeisai> 期割額明細,
+            Decimal 特徴期別額合計, Decimal 特徴納付額合計, Decimal 普徴期別額合計, Decimal 普徴納付額合計) throws NullPointerException {
         this.期割額明細 = requireNonNull(期割額明細, UrSystemErrorMessages.値がnull.getReplacedMessage("期割額明細"));
-        for (KiwarigakuModel 期割額 : 期割額明細) {
-            ChoshuHohoKibetsu 徴収方法 = ChoshuHohoKibetsu.toValue(期割額.get期別調定共通().get介護期別モデル().get徴収方法());
-            Decimal 期別額 = 期割額.get期別調定共通().get調定共通モデル().get調定額();
-            Decimal 納付額 = 期割額.get収入額();
-            if (徴収方法 == ChoshuHohoKibetsu.特別徴収) {
-                特徴期別額合計 = 特徴期別額合計.add(期別額);
-                特徴納付額合計 = 特徴納付額合計.add(納付額);
-            } else if (徴収方法 == ChoshuHohoKibetsu.普通徴収) {
-                普徴期別額合計 = 普徴期別額合計.add(期別額);
-                普徴納付額合計 = 普徴納付額合計.add(納付額);
-            }
-        }
+        this.特徴期別額合計 = requireNonNull(特徴期別額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("特徴期別額合計"));
+        this.特徴納付額合計 = requireNonNull(特徴納付額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("特徴納付額合計"));
+        this.普徴期別額合計 = requireNonNull(普徴期別額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("期割額明細"));
+        this.普徴納付額合計 = requireNonNull(普徴納付額合計, UrSystemErrorMessages.値がnull.getReplacedMessage("普徴納付額合計"));
     }
 
     /**
@@ -52,7 +48,7 @@ public class Kiwarigaku {
      *
      * @return 期割額明細
      */
-    public List<KiwarigakuModel> get期割額明細() {
+    public List<KiwarigakuMeisai> get期割額明細() {
         return 期割額明細;
     }
 

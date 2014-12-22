@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.Kiwarigaku;
+import jp.co.ndensan.reams.db.dbz.business.KiwarigakuCalculator;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
@@ -23,7 +24,7 @@ import jp.co.ndensan.reams.db.dbz.model.ChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbz.model.FukaModel;
 import jp.co.ndensan.reams.db.dbz.model.HokenryoDankaiModel;
 import jp.co.ndensan.reams.db.dbz.model.KibetsuModel;
-import jp.co.ndensan.reams.db.dbz.model.KiwarigakuModel;
+import jp.co.ndensan.reams.db.dbz.model.KiwarigakuMeisai;
 import jp.co.ndensan.reams.db.dbz.model.relate.KibetsuChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.model.util.itemlist.ItemList;
@@ -37,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import org.junit.BeforeClass;
@@ -170,11 +172,11 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
     }
 
     private static IOptional<Kiwarigaku> createKiwarigaku() {
-        return DbOptional.ofNullable(new Kiwarigaku(createKiwarigakuModelList()));
+        return DbOptional.ofNullable(new KiwarigakuCalculator(createKiwarigakuModelList()).calculate());
     }
 
-    private static List<KiwarigakuModel> createKiwarigakuModelList() {
-        List<KiwarigakuModel> list = new ArrayList<>();
+    private static List<KiwarigakuMeisai> createKiwarigakuModelList() {
+        List<KiwarigakuMeisai> list = new ArrayList<>();
         list.add(createKiwarigakuModel(ChoshuHohoKibetsu.特別徴収, 100, 1000));
         list.add(createKiwarigakuModel(ChoshuHohoKibetsu.特別徴収, 200, 2000));
         list.add(createKiwarigakuModel(ChoshuHohoKibetsu.特別徴収, 300, 3000));
@@ -184,7 +186,7 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
         return list;
     }
 
-    private static KiwarigakuModel createKiwarigakuModel(ChoshuHohoKibetsu 徴収方法, int 調定額, int 収入額) {
+    private static KiwarigakuMeisai createKiwarigakuModel(ChoshuHohoKibetsu 徴収方法, int 調定額, int 収入額) {
         KibetsuModel kibetsuModel = mock(KibetsuModel.class);
         when(kibetsuModel.get徴収方法()).thenReturn(徴収方法.getCode());
 
@@ -195,7 +197,7 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
         when(kibetsuChoteiKyotsuModel.get介護期別モデル()).thenReturn(kibetsuModel);
         when(kibetsuChoteiKyotsuModel.get調定共通モデル()).thenReturn(choteiKyotsuModel);
 
-        KiwarigakuModel kiwarigakuModel = mock(KiwarigakuModel.class);
+        KiwarigakuMeisai kiwarigakuModel = mock(KiwarigakuMeisai.class);
         when(kiwarigakuModel.get期別調定共通()).thenReturn(kibetsuChoteiKyotsuModel);
         when(kiwarigakuModel.get収入額()).thenReturn(new Decimal(収入額));
 
@@ -206,6 +208,7 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
         FukaKeisanConfig config = mock(FukaKeisanConfig.class);
         when(config.get激変緩和開始年度()).thenReturn(激変緩和開始年度);
         when(config.get激変緩和終了年度()).thenReturn(激変緩和終了年度);
+        when(config.get激変緩和期間()).thenReturn(new Range(激変緩和開始年度, 激変緩和終了年度));
         return config;
     }
 }
