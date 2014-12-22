@@ -167,11 +167,11 @@ public class ChoteiKyotsuModel implements Serializable {
     }
 
     /**
-     * 賦課処理状況を返します。
+     * 賦課側が確定した調定かどうかを返します。
      *
-     * @return 賦課処理状況
+     * @return 確定した調定の場合はtrue、それ以外の場合はfalseを返します。
      */
-    public boolean is賦課処理状況() {
+    public boolean is賦課側確定() {
         return entity.getFukaShoriJokyo();
     }
 

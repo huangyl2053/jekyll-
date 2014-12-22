@@ -107,7 +107,7 @@ public class ChoteiKyotsuModelTest extends DbbTestBase {
         @Test
         public void 戻り値の賦課処理状況は_設定した値と同じ賦課処理状況を返す() {
             sut.set賦課処理状況(UrT0705ChoteiKyotsuEntityGenerator.DEFAULT_賦課処理状況);
-            assertThat(sut.is賦課処理状況(), is(UrT0705ChoteiKyotsuEntityGenerator.DEFAULT_賦課処理状況));
+            assertThat(sut.is賦課側確定(), is(UrT0705ChoteiKyotsuEntityGenerator.DEFAULT_賦課処理状況));
         }
     }
 
