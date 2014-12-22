@@ -2,7 +2,7 @@ package jp.co.ndensan.reams.db.dbb.entity.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiJiyuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.ChoteiJiyuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

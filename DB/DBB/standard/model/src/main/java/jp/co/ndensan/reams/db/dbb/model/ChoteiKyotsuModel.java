@@ -7,9 +7,8 @@ package jp.co.ndensan.reams.db.dbb.model;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbb.entity.basic.UrT0705ChoteiKyotsuEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiJiyuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.ChoteiJiyuCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
