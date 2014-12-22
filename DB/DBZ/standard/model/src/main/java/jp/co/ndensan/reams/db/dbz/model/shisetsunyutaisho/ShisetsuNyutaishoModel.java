@@ -376,10 +376,7 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
             if (model.get退所年月日().isEmpty()) {
                 return false;
             }
-//            if (OrderValidator.from(model.get入所年月日()).afterOrEquals(this.get入所年月日()).afterOrEquals(model.get退所年月日()).isValid()) {
-//                return true;
-//            }
-            if (OrderValidator.from(model.get入所年月日()).after(this.get入所年月日()).after(model.get退所年月日()).isValid()) {
+            if (OrderValidator.from(model.get入所年月日()).afterOrEquals(this.get入所年月日()).afterOrEquals(model.get退所年月日()).isValid()) {
                 return true;
             }
 
@@ -395,10 +392,7 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
             if (model.get退所年月日().isEmpty()) {
                 return false;
             }
-//            if (OrderValidator.from(model.get入所年月日()).afterOrEquals(this.get退所年月日()).afterOrEquals(model.get退所年月日()).isValid()) {
-//                return true;
-//            }
-            if (OrderValidator.from(model.get入所年月日()).after(this.get退所年月日()).after(model.get退所年月日()).isValid()) {
+            if (OrderValidator.from(model.get入所年月日()).afterOrEquals(this.get退所年月日()).afterOrEquals(model.get退所年月日()).isValid()) {
                 return true;
             }
         }
