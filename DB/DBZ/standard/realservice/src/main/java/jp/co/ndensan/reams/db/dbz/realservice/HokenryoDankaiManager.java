@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.model.HokenryoDankaiModel;
 import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.model.util.itemlist.ItemList;
@@ -58,7 +60,7 @@ public class HokenryoDankaiManager {
      * @return IOptional<HokenryoDankaiModel>
      */
     @Transaction
-    public IOptional<HokenryoDankaiModel> get保険料段階(FlexibleYear 賦課年度, RString 段階インデックス, RString ランク区分) {
+    public IOptional<HokenryoDankaiModel> get保険料段階(FlexibleYear 賦課年度, DankaiIndex 段階インデックス, RankKubun ランク区分) {
         return DbOptional.ofNullable(dac.select保険料段階ByKey(賦課年度, 段階インデックス, ランク区分));
     }
 

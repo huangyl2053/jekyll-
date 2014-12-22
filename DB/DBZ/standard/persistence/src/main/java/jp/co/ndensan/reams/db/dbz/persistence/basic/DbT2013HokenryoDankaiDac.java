@@ -5,13 +5,14 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2013HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -42,8 +43,8 @@ public class DbT2013HokenryoDankaiDac implements IModifiable<DbT2013HokenryoDank
     @Transaction
     public DbT2013HokenryoDankaiEntity selectByKey(
             FlexibleYear 賦課年度,
-            RString 段階インデックス,
-            RString ランク区分) throws NullPointerException {
+            DankaiIndex 段階インデックス,
+            RankKubun ランク区分) throws NullPointerException {
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(段階インデックス, UrSystemErrorMessages.値がnull.getReplacedMessage("段階インデックス"));
         requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));

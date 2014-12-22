@@ -1,4 +1,4 @@
 ﻿fukaNendo,UDD012YSeireki,FlexibleYear,,,,,A
 shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
-rankKubun,varchar,RString,,,,,A
+rankKubun,varchar,RankKubun,,,,,A
 sokyuNendo,UDD012YSeireki,FlexibleYear,,,,,A

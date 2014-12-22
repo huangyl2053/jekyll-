@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2011RankJoho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2011RankJohoEntity;
 import jp.co.ndensan.reams.db.dbz.model.RankJohoModel;
@@ -14,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -41,7 +41,7 @@ public class RankJohoDac implements IModifiable<RankJohoModel> {
      * @return RankJohoModel
      */
     @Transaction
-    public RankJohoModel selectランク情報ByKey(FlexibleYear 賦課年度, RString ランク区分) {
+    public RankJohoModel selectランク情報ByKey(FlexibleYear 賦課年度, RankKubun ランク区分) {
 
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));

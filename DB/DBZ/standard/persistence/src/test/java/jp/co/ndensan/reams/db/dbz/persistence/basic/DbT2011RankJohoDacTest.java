@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2011RankJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2011RankJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
@@ -164,7 +165,7 @@ public class DbT2011RankJohoDacTest extends DbzTestDacBase {
 
         public static void insert(
                 FlexibleYear 賦課年度,
-                RString ランク区分) {
+                RankKubun ランク区分) {
             DbT2011RankJohoEntity entity = DbT2011RankJohoEntityGenerator.createDbT2011RankJohoEntity();
             entity.setFukaNendo(賦課年度);
             entity.setRankKubun(ランク区分);

@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.model;
 
 import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -71,7 +73,7 @@ public class HokenryoDankaiModel implements Serializable {
      *
      * @return 段階インデックス
      */
-    public RString get段階インデックス() {
+    public DankaiIndex get段階インデックス() {
         return entity.getDankaiIndex();
     }
 
@@ -80,7 +82,7 @@ public class HokenryoDankaiModel implements Serializable {
      *
      * @return ランク区分
      */
-    public RString getランク区分() {
+    public RankKubun getランク区分() {
         return entity.getRankuKubun();
     }
 
@@ -126,7 +128,7 @@ public class HokenryoDankaiModel implements Serializable {
      *
      * @param 段階インデックス 段階インデックス
      */
-    public void set段階インデックス(RString 段階インデックス) {
+    public void set段階インデックス(DankaiIndex 段階インデックス) {
         requireNonNull(段階インデックス, UrSystemErrorMessages.値がnull.getReplacedMessage("段階インデックス"));
         entity.setDankaiIndex(段階インデックス);
     }
@@ -136,7 +138,7 @@ public class HokenryoDankaiModel implements Serializable {
      *
      * @param ランク区分 ランク区分
      */
-    public void setランク区分(RString ランク区分) {
+    public void setランク区分(RankKubun ランク区分) {
         requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));
         entity.setRankuKubun(ランク区分);
     }

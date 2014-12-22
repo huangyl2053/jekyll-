@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -17,8 +19,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public final class DbT2013HokenryoDankaiEntityGenerator {
 
     public static final FlexibleYear DEFAULT_賦課年度 = new FlexibleYear("2009");
-    public static final RString DEFAULT_段階インデックス = new RString("04");
-    public static final RString DEFAULT_ランク区分 = new RString("00");
+    public static final DankaiIndex DEFAULT_段階インデックス = new DankaiIndex(new RString("04"));
+    public static final RankKubun DEFAULT_ランク区分 = new RankKubun(new RString("00"));
     public static final RString DEFAULT_段階区分 = new RString("041");
     public static final Decimal DEFAULT_保険料率 = new Decimal(50500);
     public static final RString DEFAULT_特例表記 = new RString("軽減");

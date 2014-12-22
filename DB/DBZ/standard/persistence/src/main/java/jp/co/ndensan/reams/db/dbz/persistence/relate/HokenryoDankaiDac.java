@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.persistence.relate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2012HokenryoRankEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2013HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2013HokenryoDankaiEntity;
@@ -48,7 +50,7 @@ public class HokenryoDankaiDac implements IModifiable<HokenryoDankaiModel> {
      * @return HokenryoDankaiModel
      */
     @Transaction
-    public HokenryoDankaiModel select保険料段階ByKey(FlexibleYear 賦課年度, RString 段階インデックス, RString ランク区分) {
+    public HokenryoDankaiModel select保険料段階ByKey(FlexibleYear 賦課年度, DankaiIndex 段階インデックス, RankKubun ランク区分) {
 
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(段階インデックス, UrSystemErrorMessages.値がnull.getReplacedMessage("段階インデックス"));

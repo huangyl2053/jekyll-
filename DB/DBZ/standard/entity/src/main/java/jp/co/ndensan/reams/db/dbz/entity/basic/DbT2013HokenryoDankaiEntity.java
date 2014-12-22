@@ -1,15 +1,17 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.util.Objects;
 
 /**
  * DbT2013HokenryoDankaiの項目定義クラスです
@@ -17,6 +19,7 @@ import java.util.Objects;
  */
 public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013HokenryoDankaiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2013HokenryoDankai");
 
@@ -31,15 +34,16 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
     @PrimaryKey
     private FlexibleYear fukaNendo;
     @PrimaryKey
-    private RString dankaiIndex;
+    private DankaiIndex dankaiIndex;
     @PrimaryKey
-    private RString rankuKubun;
+    private RankKubun rankuKubun;
     private RString dankaiKubun;
     private Decimal hokenryoRitsu;
     private RString tokureiHyoki;
 
     /**
      * getInsertDantaiCd
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -48,6 +52,7 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
 
     /**
      * setInsertDantaiCd
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -56,6 +61,7 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
 
     /**
      * getIsDeleted
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -64,15 +70,16 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
 
     /**
      * setIsDeleted
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * setLastUpdateReamsLoginId
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -81,6 +88,7 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
 
     /**
      * getFukaNendo
+     *
      * @return fukaNendo
      */
     public FlexibleYear getFukaNendo() {
@@ -89,6 +97,7 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
 
     /**
      * setFukaNendo
+     *
      * @param fukaNendo fukaNendo
      */
     public void setFukaNendo(FlexibleYear fukaNendo) {
@@ -97,38 +106,43 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
 
     /**
      * getDankaiIndex
+     *
      * @return dankaiIndex
      */
-    public RString getDankaiIndex() {
+    public DankaiIndex getDankaiIndex() {
         return dankaiIndex;
     }
 
     /**
      * setDankaiIndex
+     *
      * @param dankaiIndex dankaiIndex
      */
-    public void setDankaiIndex(RString dankaiIndex) {
+    public void setDankaiIndex(DankaiIndex dankaiIndex) {
         this.dankaiIndex = dankaiIndex;
     }
 
     /**
      * getRankuKubun
+     *
      * @return rankuKubun
      */
-    public RString getRankuKubun() {
+    public RankKubun getRankuKubun() {
         return rankuKubun;
     }
 
     /**
      * setRankuKubun
+     *
      * @param rankuKubun rankuKubun
      */
-    public void setRankuKubun(RString rankuKubun) {
+    public void setRankuKubun(RankKubun rankuKubun) {
         this.rankuKubun = rankuKubun;
     }
 
     /**
      * getDankaiKubun
+     *
      * @return dankaiKubun
      */
     public RString getDankaiKubun() {
@@ -137,6 +151,7 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
 
     /**
      * setDankaiKubun
+     *
      * @param dankaiKubun dankaiKubun
      */
     public void setDankaiKubun(RString dankaiKubun) {
@@ -145,6 +160,7 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
 
     /**
      * getHokenryoRitsu
+     *
      * @return hokenryoRitsu
      */
     public Decimal getHokenryoRitsu() {
@@ -153,6 +169,7 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
 
     /**
      * setHokenryoRitsu
+     *
      * @param hokenryoRitsu hokenryoRitsu
      */
     public void setHokenryoRitsu(Decimal hokenryoRitsu) {
@@ -161,6 +178,7 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
 
     /**
      * getTokureiHyoki
+     *
      * @return tokureiHyoki
      */
     public RString getTokureiHyoki() {
@@ -169,6 +187,7 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
 
     /**
      * setTokureiHyoki
+     *
      * @param tokureiHyoki tokureiHyoki
      */
     public void setTokureiHyoki(RString tokureiHyoki) {
@@ -177,10 +196,9 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
 
     /**
      * このエンティティの主キーが他の{@literal DbT2013HokenryoDankaiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT2013HokenryoDankaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2013HokenryoDankaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2013HokenryoDankaiEntity other) {
@@ -214,6 +232,7 @@ public class DbT2013HokenryoDankaiEntity extends DbTableEntityBase<DbT2013Hokenr
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

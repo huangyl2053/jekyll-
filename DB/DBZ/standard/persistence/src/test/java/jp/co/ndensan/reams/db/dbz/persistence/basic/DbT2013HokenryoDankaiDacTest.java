@@ -5,6 +5,8 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
@@ -188,8 +190,8 @@ public class DbT2013HokenryoDankaiDacTest extends DbzTestDacBase {
 
         public static void insert(
                 FlexibleYear 賦課年度,
-                RString 段階インデックス,
-                RString ランク区分) {
+                DankaiIndex 段階インデックス,
+                RankKubun ランク区分) {
             DbT2013HokenryoDankaiEntity entity = DbT2013HokenryoDankaiEntityGenerator.createDbT2013HokenryoDankaiEntity();
             entity.setFukaNendo(賦課年度);
             entity.setDankaiIndex(段階インデックス);

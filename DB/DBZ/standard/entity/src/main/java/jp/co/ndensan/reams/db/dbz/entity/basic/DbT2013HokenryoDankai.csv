@@ -1,6 +1,6 @@
 ﻿fukaNendo,UDD012YSeireki,FlexibleYear,,,,,A
-dankaiIndex,varchar,RString,,,,,A
-rankuKubun,varchar,RString,,,,,A
+dankaiIndex,varchar,DankaiIndex,,,,,A
+rankuKubun,varchar,RankKubun,,,,,A
 dankaiKubun,varchar,RString,,,,,A
 hokenryoRitsu,numeric,Decimal,,,,,A
 tokureiHyoki,varchar,RString,,,,,A

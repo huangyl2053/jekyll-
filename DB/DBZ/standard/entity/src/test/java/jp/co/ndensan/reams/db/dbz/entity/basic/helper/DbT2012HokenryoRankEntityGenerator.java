@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2012HokenryoRankEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -18,7 +19,7 @@ public final class DbT2012HokenryoRankEntityGenerator {
 
     public static final FlexibleYear DEFAULT_賦課年度 = new FlexibleYear("2000");
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("000006");
-    public static final RString DEFAULT_ランク区分 = new RString("01");
+    public static final RankKubun DEFAULT_ランク区分 = new RankKubun(new RString("01"));
     public static final FlexibleYear DEFAULT_遡及年度 = new FlexibleYear("2001");
 
     /**

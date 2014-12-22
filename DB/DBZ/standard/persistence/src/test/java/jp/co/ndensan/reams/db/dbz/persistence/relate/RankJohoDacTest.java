@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2011RankJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2011RankJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.model.RankJohoModel;
@@ -34,8 +35,8 @@ public class RankJohoDacTest {
     private static DbT2011RankJohoDac ランク情報Dac;
     private static final FlexibleYear 賦課年度1 = DbT2011RankJohoEntityGenerator.DEFAULT_賦課年度;
     private static final FlexibleYear 賦課年度2 = DbT2011RankJohoEntityGenerator.DEFAULT_賦課年度.plusYear(1);
-    private static final RString ランク区分1 = DbT2011RankJohoEntityGenerator.DEFAULT_ランク区分;
-    private static final RString ランク区分2 = new RString("02");
+    private static final RankKubun ランク区分1 = DbT2011RankJohoEntityGenerator.DEFAULT_ランク区分;
+    private static final RankKubun ランク区分2 = new RankKubun(new RString("02"));
 
     @BeforeClass
     public static void setUpClass() {
@@ -179,7 +180,7 @@ public class RankJohoDacTest {
 
         public static void insertDbT2011(
                 FlexibleYear 賦課年度,
-                RString ランク区分) {
+                RankKubun ランク区分) {
             DbT2011RankJohoEntity entity = DbT2011RankJohoEntityGenerator.createDbT2011RankJohoEntity();
             entity.setFukaNendo(賦課年度);
             entity.setRankKubun(ランク区分);
