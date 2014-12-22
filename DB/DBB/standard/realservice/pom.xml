@@ -46,9 +46,9 @@
             <artifactId>DbzTestHelper</artifactId>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbb</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>DbbModel</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
             <type>jar</type>
         </dependency>
         <dependency>
