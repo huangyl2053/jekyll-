@@ -4,9 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import java.util.ArrayList;
 import java.util.List;
-import javax.ejb.ApplicationException;
 import jp.co.ndensan.reams.db.dbz.model.relate.KaigoJogaiTokureiTaishoShisetsuRelateModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.KaigoJogaiTokureiTaishoShisetsuDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;

@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
@@ -14,6 +16,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv.台帳種別の列を;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv.施設種類の列を;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv.表示heightサイズ;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv.表示widthサイズ;
+import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoModelComparators;
+import jp.co.ndensan.reams.db.dbz.realservice.ShisetsuNyutaishoTokureiTaishoRelateManager;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  * 施設履歴情報共有子Divのエンティティに対する操作を行うクラスです。
@@ -24,10 +31,6 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
 
     private final ShisetsuNyutaishoRirekiKanriDiv div;
     protected static final RString PANEL_SESSION_ACCESSOR_KEY = new RString("shisetsuNyutaishoRirekiKanriDiv");
-
-    private static final RString MODE_INSERT = new RString("追加");
-    private static final RString MODE_UPDATE = new RString("修正");
-    private static final RString MODE_DELETE = new RString("削除");
 
     /**
      * コンストラクタです。
@@ -46,24 +49,33 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             case 台帳種別表示機能:
                 div.setMode_台帳種別の列を(台帳種別の列を.表示する);
                 div.setMode_施設種類の列を(施設種類の列を.表示する);
+                div.setMode_表示widthサイズ(表示widthサイズ.モード1);
+                div.setMode_表示heightサイズ(表示heightサイズ.サイズ200);
                 div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set利用機能(0);
                 div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().initialize();
+                div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set台帳種別(DaichoType.被保険者.getCode());
                 break;
             case 被保険者対象機能:
                 div.setMode_台帳種別の列を(台帳種別の列を.表示しない);
                 div.setMode_施設種類の列を(施設種類の列を.表示する);
+                div.setMode_表示widthサイズ(表示widthサイズ.モード3);
+                div.setMode_表示heightサイズ(表示heightサイズ.サイズ200);
                 div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set利用機能(1);
                 div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().initialize();
                 break;
             case 他市町村住所地特例者対象機能:
                 div.setMode_台帳種別の列を(台帳種別の列を.表示しない);
                 div.setMode_施設種類の列を(施設種類の列を.表示する);
+                div.setMode_表示widthサイズ(表示widthサイズ.モード3);
+                div.setMode_表示heightサイズ(表示heightサイズ.サイズ200);
                 div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set利用機能(2);
                 div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().initialize();
                 break;
             case 適用除外者対象機能:
                 div.setMode_台帳種別の列を(台帳種別の列を.表示しない);
                 div.setMode_施設種類の列を(施設種類の列を.表示しない);
+                div.setMode_表示widthサイズ(表示widthサイズ.モード5);
+                div.setMode_表示heightサイズ(表示heightサイズ.サイズ200);
                 div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set利用機能(3);
                 div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().initialize();
                 break;
@@ -73,13 +85,40 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
     }
 
     /**
+     * 施設入退所をロードする処理です。
+     *
+     * @param 識別コード 識別コード
+     */
+    public void load(ShikibetsuCode 識別コード) {
+
+        ShisetsuNyutaishoTokureiTaishoRelateManager manager = new ShisetsuNyutaishoTokureiTaishoRelateManager();
+
+        IItemList<ShisetsuNyutaishoRelateModel> list = manager.get介護保険施設入退所一覧By主キー1(識別コード);
+
+        set施設入退所履歴(list);
+    }
+
+    /**
      * 明細の各項目の値をクリア処理です。
      */
     public void clearInputData() {
-
         div.getShisetsuNyutaishoInput().getTxtNyushoDate().clearValue();
         div.getShisetsuNyutaishoInput().getTxtTaishoDate().clearValue();
         div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().clear();
+
+        switch (div.getMode_利用()) {
+            case 台帳種別表示機能:
+                div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set台帳種別(DaichoType.被保険者.getCode());
+                break;
+            case 被保険者対象機能:
+                break;
+            case 他市町村住所地特例者対象機能:
+                break;
+            case 適用除外者対象機能:
+                break;
+            default:
+                break;
+        }
     }
 
     public void update施設入退所履歴(ShisetsuNyutaishoRelateModel model) {
@@ -103,62 +142,12 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
     private IItemList<ShisetsuNyutaishoRelateModel> update履歴(final ShisetsuNyutaishoRirekiKanriDiv d, IConsumer<ShisetsuNyutaishoRelateModel> consumer) {
         int rowIndex = Integer.valueOf(d.getSelectRow().toString()).intValue();
         dgShisetsuNyutaishoRireki_Row 更新行 = div.getDgShisetsuNyutaishoRireki().getDataSource().get(rowIndex);
+
         IItemList<ShisetsuNyutaishoRelateModel> models = get施設入退所履歴();
         models.filter(ShisetsuNyutaishoMapper.createKey(更新行))
                 .findJustOne()
                 .ifPresent(consumer);
         return models;
-    }
-
-    /**
-     * グリリッドに追加する行データを作ります。
-     */
-    private dgShisetsuNyutaishoRireki_Row create追加行(ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
-
-        dgShisetsuNyutaishoRireki_Row 追加行 = new dgShisetsuNyutaishoRireki_Row();
-
-        追加行.getNyushoDate().setValue(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue());
-        追加行.getTaishoDate().setValue(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue());
-
-        //非表示 入所施設 介護保険施設入退所.入所施設コード 介護保険施設入退所.入所施設名称
-        追加行.setShisetsuCode(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get入所施設コード().value());
-        追加行.setShisetsuMeisho(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設名称());
-        //表示 入所施設名 介護保険施設入退所.入所施設コード : 介護保険施設入退所.入所施設名称
-        追加行.setShisetsu(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get入所施設コード().value().concat(":").concat(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設名称()));
-        //非表示 台帳種別key
-        追加行.setDaichoShubetsuKey(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get台帳種別().get().getCode());
-        //表示 台帳種別名
-        追加行.setDaichoShubetsu((shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get台帳種別().get().getName()));
-        //非表示 施設種類key
-        追加行.setShisetsuShuruiKey(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類().getCode());
-        //表示 施設種類名
-        追加行.setShisetsuShurui(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設名称());
-
-        return 追加行;
-
-    }
-
-    /**
-     * グリッドの更新対象行にデータを設定します。
-     */
-    private void set更新行(ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv, dgShisetsuNyutaishoRireki_Row 更新行) {
-
-        更新行.getNyushoDate().setValue(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue());
-        更新行.getTaishoDate().setValue(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue());
-        //非表示 入所施設 介護保険施設入退所.入所施設コード 介護保険施設入退所.入所施設名称
-        更新行.setShisetsuCode(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get入所施設コード().value());
-        更新行.setShisetsuMeisho(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設名称());
-        //表示 入所施設名 介護保険施設入退所.入所施設コード : 介護保険施設入退所.入所施設名称
-        更新行.setShisetsu(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get入所施設コード().value().concat(":").concat(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設名称()));
-        //非表示 台帳種別key
-        更新行.setDaichoShubetsuKey(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get台帳種別().get().getCode());
-        //表示 台帳種別名
-        更新行.setDaichoShubetsu((shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get台帳種別().get().getName()));
-        //非表示 施設種類key
-        更新行.setShisetsuShuruiKey(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類().getCode());
-        //表示 施設種類名
-        更新行.setShisetsuShurui(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設名称());
-
     }
 
     /**
@@ -202,21 +191,9 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      * @param 施設入退所履歴List 施設入退所履歴List
      */
     public void set施設入退所履歴(IItemList<ShisetsuNyutaishoRelateModel> 施設入退所履歴List) {
-        PanelSessionAccessor.put(div, PANEL_SESSION_ACCESSOR_KEY, ItemList.of(施設入退所履歴List));
+        PanelSessionAccessor.put(div, PANEL_SESSION_ACCESSOR_KEY, ItemList.newItemList(施設入退所履歴List));
+        施設入退所履歴List = 施設入退所履歴List.sorted(ShisetsuNyutaishoModelComparators.orderBy入所年月日.desc());
         div.getDgShisetsuNyutaishoRireki().setDataSource(施設入退所履歴List.map(ShisetsuNyutaishoMapper.toGridRow()).toList());
-    }
-
-    private RString getModelStateValue(ShisetsuNyutaishoRelateModel model) {
-        switch (model.getState()) {
-            case Added:
-                return new RString("追加");
-            case Modified:
-                return new RString("修正");
-            case Deleted:
-                return new RString("削除");
-            default:
-                return new RString("");
-        }
     }
 
 }

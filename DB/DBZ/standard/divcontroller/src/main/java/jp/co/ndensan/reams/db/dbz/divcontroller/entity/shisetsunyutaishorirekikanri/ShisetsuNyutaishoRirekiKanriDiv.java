@@ -385,6 +385,11 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     @Override
+    public void load(ShikibetsuCode 識別コード) {
+        getHandler().load(識別コード);
+    }
+
+    @Override
     public void clearInputData() {
         //TODO
         //1)、入力明細パネル上のコントロールに対して、空白やnullを設定する。

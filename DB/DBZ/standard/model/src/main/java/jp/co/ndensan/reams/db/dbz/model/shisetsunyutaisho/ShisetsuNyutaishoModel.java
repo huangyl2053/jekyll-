@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage;
@@ -22,6 +23,8 @@ import jp.co.ndensan.reams.ur.urz.model.validations.IValidatable;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidatableWithContext;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
 import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
+import jp.co.ndensan.reams.ur.urz.model.validations.validators.OrderValidator;
+import jp.co.ndensan.reams.ur.urz.model.validations.validators.PresenceValidator;
 
 /**
  * 介護保険施設入退所のモデルクラスです。
@@ -280,78 +283,95 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
 
     @Override
     public IValidationMessages validate() {
-        IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
 
-        if (is入所年月日より前()) {
-            validationMessages.add(ShisetsuNyutaishoValidationMessage.日付の前後関係逆転, "退所年月日が入所年月日以降でない");
-
-        } else {
-
-            switch (getState()) {
-                case Added:
-                    if (is前の履歴データの退所日と重複()) {
-                        validationMessages.add(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複, "入所日と前の履歴データの退所日と重複");
-                    }
-                    break;
-
-                case Modified:
-                    if (is前の履歴データの退所日と重複()) {
-                        validationMessages.add(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複, "入所日と前の履歴データの退所日と重複");
-                    }
-                    if (is次の履歴データの入所日と重複()) {
-                        validationMessages.add(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複, "退所年月日が次の履歴データの入所日と重複");
-                    }
-
-                    break;
-                default:
-            }
-        }
-        return validationMessages;
-    }
-
-    private boolean is入所年月日より前() {
-        return get退所年月日().isBefore(get入所年月日());
-    }
-
-    private boolean is次の履歴データの入所日と重複() {
-        return get入所年月日().isBeforeOrEquals(get退所年月日());
-    }
-
-    private boolean is前の履歴データの退所日と重複() {
-        return get退所年月日().isBeforeOrEquals(get入所年月日());
+        return messages;
     }
 
     @Override
     public IValidationMessages validateIn(ShisetsuNyutaishoRirekiKanriContext context) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (is入所年月日より前()) {
-            messages.add(ShisetsuNyutaishoValidationMessage.日付の前後関係逆転, "退所年月日が入所年月日以降でない");
+
+        if (PresenceValidator.isInvalid(this.get入所年月日())) {
+            messages.add(ShisetsuNyutaishoValidationMessage.入所日が未入力, "必須項目の入所日が未入力 ");
+        }
+
+        if (is退所日が入所日より前()) {
+            messages.add(ShisetsuNyutaishoValidationMessage.入所年月日より前, "退所年月日" + this.get退所年月日() + "が入所年月日" + this.get入所年月日() + "以降でない");
         }
         if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複)) {
-            if (is前の履歴データの退所日と重複2(context.get前履歴())) {
-                messages.add(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複, "入所日と前の履歴データの退所日と重複");
+            if (is入所日が前の履歴データの退所日と重複(context.get前履歴())) {
+                messages.add(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複, "入所年月日" + this.get入所年月日() + "と前の履歴データの退所日と重複");
             }
         }
         if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複)) {
-            if (is次の履歴データの入所日と重複2(context.get次履歴())) {
-                messages.add(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複, "入所日と前の履歴データの退所日と重複");
+            if (is退所日が次の履歴データの入所日と重複(context.get次履歴())) {
+                messages.add(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複, "退所年月日" + this.get退所年月日() + "次の履歴データの入所日の期間が重複");
+            }
+        }
+        if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.入所日と期間が重複する履歴がある)) {
+            if (has入所日と期間が重複する履歴In(context.get全履歴())) {
+                messages.add(ShisetsuNyutaishoValidationMessage.入所日と期間が重複する履歴がある, "入所年月日" + this.get入所年月日() + "と期間が重複する履歴がある");
+            }
+        }
+        if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.退所日と期間が重複する履歴がある)) {
+            if (has退所日と期間が重複する履歴In(context.get全履歴())) {
+                messages.add(ShisetsuNyutaishoValidationMessage.退所日と期間が重複する履歴がある, "退所年月日" + this.get退所年月日() + "と期間が重複する履歴がある");
             }
         }
         return messages;
     }
 
-    private boolean is前の履歴データの退所日と重複2(IOptional<ShisetsuNyutaishoModel> optional) {
-        ShisetsuNyutaishoModel 前履歴 = optional.orElse(null);
-        if (前履歴 == null || this.get入所年月日() == null) {
+    private boolean is退所日が入所日より前() {
+        if (get入所年月日().isEmpty() || get退所年月日().isEmpty()) {
             return false;
         }
-        return 前履歴.get退所年月日().isBeforeOrEquals(this.get入所年月日());
+
+        return get退所年月日().isBefore(get入所年月日());
     }
 
-    private boolean is次の履歴データの入所日と重複2(IOptional<ShisetsuNyutaishoModel> 次履歴) {
-        if (!次履歴.isPresent() || this.get入所年月日() == null) {
+    private boolean is入所日が前の履歴データの退所日と重複(IOptional<ShisetsuNyutaishoModel> optional) {
+        ShisetsuNyutaishoModel 前履歴 = optional.orElse(null);
+        if (前履歴 == null || get入所年月日().isEmpty() || get入所年月日() == null) {
+
             return false;
         }
-        return this.get退所年月日().isBeforeOrEquals(次履歴.get().get入所年月日());
+
+        return !前履歴.get退所年月日().isBefore(get入所年月日());
+
+    }
+
+    private boolean is退所日が次の履歴データの入所日と重複(IOptional<ShisetsuNyutaishoModel> 次履歴) {
+        if (!次履歴.isPresent() || get退所年月日().isEmpty() || get退所年月日() == null) {
+
+            return false;
+        }
+        boolean a = !get退所年月日().isBefore(次履歴.get().get入所年月日());
+        return !get退所年月日().isBefore(次履歴.get().get入所年月日());
+
+    }
+
+    private boolean has入所日と期間が重複する履歴In(IItemList<ShisetsuNyutaishoModel> list) {
+        if (this.get入所年月日().isEmpty()) {
+            return false;
+        }
+        for (ShisetsuNyutaishoModel model : list) {
+            if (OrderValidator.from(model.get入所年月日()).afterOrEquals(this.get入所年月日()).afterOrEquals(model.get退所年月日()).isValid()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean has退所日と期間が重複する履歴In(IItemList<ShisetsuNyutaishoModel> list) {
+        if (this.get退所年月日().isEmpty()) {
+            return false;
+        }
+        for (ShisetsuNyutaishoModel model : list) {
+            if (OrderValidator.from(model.get入所年月日()).afterOrEquals(this.get退所年月日()).afterOrEquals(model.get退所年月日()).isValid()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

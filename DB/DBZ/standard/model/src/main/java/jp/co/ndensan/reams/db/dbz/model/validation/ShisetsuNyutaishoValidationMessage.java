@@ -18,17 +18,33 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum ShisetsuNyutaishoValidationMessage implements IValidationMessage {
 
     /**
+     * 入所日
+     */
+    入所日が未入力(DbzErrorMessages.必須項目を入力_追加メッセージあり),
+    /**
+     * 退所日
+     */
+    退所日が未入力(DbzErrorMessages.必須項目を入力_追加メッセージあり),
+    /**
      * 日付の前後関係が逆転
      */
-    日付の前後関係逆転(DbzErrorMessages.入力値が不正_追加メッセージあり),
+    入所年月日より前(DbzErrorMessages.入力値が不正_追加メッセージあり),
     /**
      * 退所日と次の履歴データの入所日の期間が重複
      */
-    退所日と次の履歴データの入所日の期間が重複(DbzErrorMessages.期間が重複),
+    退所日と次の履歴データの入所日の期間が重複(DbzErrorMessages.入力値が不正_追加メッセージあり),
     /**
      * 入所日と前の履歴データの退所日の期間が重複
      */
-    入所日と前の履歴データの退所日の期間が重複(DbzErrorMessages.期間が重複);
+    入所日と前の履歴データの退所日の期間が重複(DbzErrorMessages.入力値が不正_追加メッセージあり),
+    /**
+     * 入所日と期間が重複する履歴がある
+     */
+    入所日と期間が重複する履歴がある(DbzErrorMessages.入力値が不正_追加メッセージあり),
+    /**
+     * 退所日と期間が重複する履歴がある
+     */
+    退所日と期間が重複する履歴がある(DbzErrorMessages.入力値が不正_追加メッセージあり);
 
     private final Message message;
 

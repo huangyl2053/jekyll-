@@ -47,8 +47,7 @@ public final class ItemList<E> implements IItemList<E>, Serializable {
      *
      * @param <T> {@link IItemList IItemList}が保持する要素の型
      * @param items {@link IItemList IItemList}
-     * @return
-     * 指定の{@link IItemList IItemList}から生成した、新しい{@link IItemList IItemList}
+     * @return 指定の{@link IItemList IItemList}から生成した、新しい{@link IItemList IItemList}
      */
     public static <T> ItemList<T> newItemList(IItemList<? extends T> items) {
         return new ItemList<>(items.toList());

@@ -54,7 +54,7 @@ public class ShisetsuNyutaishoDac implements IModifiable<ShisetsuNyutaishoRelate
 
     // TODO 一覧取得に使用する検索項目はテーブル構造に合わせて修正が必要になります。
     /**
-     * 主キー1に合致する介護保険施設入退所のリストを返します。。
+     * 主キー1に合致する介護保険施設入退所のリストを返します。
      *
      * @param 識別コード ShikibetsuCode
      * @return List<ShisetsuNyutaishoRelateModel>

@@ -23,6 +23,13 @@ public interface IShisetsuNyutaishoRirekiKanriDiv {
     void load(LasdecCode 市町村コード, ShikibetsuCode 識別コード);
 
     /**
+     * 引数から渡されたキーを元に施設入退所履歴管理テーブルから情報を取得し、その情報を共有子Divに設定します。
+     *
+     * @param 識別コード 識別コード
+     */
+    void load(ShikibetsuCode 識別コード);
+
+    /**
      * 入力明細エリアのコントロールをクリアします。
      */
     void clearInputData();
