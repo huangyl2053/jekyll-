@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbb.business.config.KanendoConfig;
 import jp.co.ndensan.reams.db.dbb.business.config.TokuchoConfig;
 import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.model.helper.KibetsuChoteiKyotsuModelTestHelper;
-import jp.co.ndensan.reams.db.dbb.model.Kiwarigaku;
+import jp.co.ndensan.reams.db.dbb.model.KiwarigakuMeisai;
 import jp.co.ndensan.reams.db.dbb.model.relate.KibetsuChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbb.realservice.KiwarigakuFinder;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
@@ -338,13 +338,13 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
 
     private static KiwarigakuFinder createFinder() {
         KiwarigakuFinder mock = mock(KiwarigakuFinder.class);
-        IItemList<Kiwarigaku> 期割額List = create期割額List();
+        IItemList<KiwarigakuMeisai> 期割額List = create期割額List();
         when(mock.get期割額(any(FlexibleYear.class), any(FlexibleYear.class), any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(期割額List);
         return mock;
     }
 
-    private static IItemList<Kiwarigaku> create期割額List() {
-        List<Kiwarigaku> list = new ArrayList<>();
+    private static IItemList<KiwarigakuMeisai> create期割額List() {
+        List<KiwarigakuMeisai> list = new ArrayList<>();
         for (int i = 1; i <= 6; i++) {
             int 金額 = (i * 1000);
             list.add(create期割額(ChoshuHohoKibetsu.特別徴収, i, 金額 + 1, 金額 + 2));
@@ -356,8 +356,8 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
         return ItemList.of(list);
     }
 
-    private static Kiwarigaku create期割額(ChoshuHohoKibetsu 徴収方法, int 期, int 期別額, int 納付額) {
-        return new Kiwarigaku(create期別調定共通Model(徴収方法, 期, 期別額), new Decimal(納付額));
+    private static KiwarigakuMeisai create期割額(ChoshuHohoKibetsu 徴収方法, int 期, int 期別額, int 納付額) {
+        return new KiwarigakuMeisai(create期別調定共通Model(徴収方法, 期, 期別額), new Decimal(納付額));
     }
 
     private static KibetsuChoteiKyotsuModel create期別調定共通Model(ChoshuHohoKibetsu 徴収方法, int 期, int 期別額) {

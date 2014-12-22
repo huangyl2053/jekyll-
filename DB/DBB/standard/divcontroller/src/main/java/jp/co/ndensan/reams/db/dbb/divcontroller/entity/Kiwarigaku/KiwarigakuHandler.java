@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbb.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbb.business.config.KanendoConfig;
 import jp.co.ndensan.reams.db.dbb.business.config.TokuchoConfig;
 import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbb.model.Kiwarigaku;
+import jp.co.ndensan.reams.db.dbb.model.KiwarigakuMeisai;
 import jp.co.ndensan.reams.db.dbb.realservice.KiwarigakuFinder;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
@@ -172,7 +172,7 @@ public class KiwarigakuHandler {
         }
     }
 
-    private void setKiwarigaku(IItemList<Kiwarigaku> 期割額List, Map<RString, Integer> 特徴期IndexMap, Map<RString, Integer> 普徴期IndexMap) {
+    private void setKiwarigaku(IItemList<KiwarigakuMeisai> 期割額List, Map<RString, Integer> 特徴期IndexMap, Map<RString, Integer> 普徴期IndexMap) {
 
         Decimal[] 特徴期別額列 = new Decimal[TABLE_SIZE];
         Decimal[] 特徴納付額列 = new Decimal[TABLE_SIZE];
@@ -185,7 +185,7 @@ public class KiwarigakuHandler {
         普徴期別額列[合計Index] = Decimal.ZERO;
         普徴納付額列[合計Index] = Decimal.ZERO;
 
-        for (Kiwarigaku 期割額 : 期割額List) {
+        for (KiwarigakuMeisai 期割額 : 期割額List) {
 
             ChoshuHohoKibetsu 徴収方法 = ChoshuHohoKibetsu.toValue(期割額.get期別調定共通().get介護期別モデル().get徴収方法());
             RString 期 = new RString(String.format("%1$02d", 期割額.get期別調定共通().get介護期別モデル().get期()));
