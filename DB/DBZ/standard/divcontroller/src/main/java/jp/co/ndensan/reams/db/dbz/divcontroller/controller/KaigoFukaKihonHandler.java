@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
 import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
-import jp.co.ndensan.reams.db.dbz.business.KaigoFukaKihonSearchKey;
+import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoFukaKihonDiv;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaFinder;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

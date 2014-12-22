@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbz.business.KaigoFukaKihonSearchKeyBuilder;
-import jp.co.ndensan.reams.db.dbz.business.KaigoShikakuKihonSearchKeyBuilder;
+import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKeyBuilder;
+import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKeyBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoFukaKihonDiv;

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
 
-import jp.co.ndensan.reams.db.dbz.business.KaigoShikakuKihonSearchKey;
+import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
 
 /**
  * 介護資格基本情報Divのインターフェースです。

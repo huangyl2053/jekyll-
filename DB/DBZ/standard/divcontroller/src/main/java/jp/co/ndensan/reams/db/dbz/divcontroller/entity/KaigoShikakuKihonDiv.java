@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbz.business.KaigoShikakuKihonSearchKey;
+import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihonHandler;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;

@@ -1,6 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki;
 
-import jp.co.ndensan.reams.db.dbz.business.KaigoShikakuKihonSearchKey;
+import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv.DataGridWidth;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv.BtnDisplayMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv.DisplayType;

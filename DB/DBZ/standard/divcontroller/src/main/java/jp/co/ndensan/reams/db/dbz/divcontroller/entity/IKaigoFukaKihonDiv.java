@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
 
-import jp.co.ndensan.reams.db.dbz.business.KaigoFukaKihonSearchKey;
+import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 
 /**
  * 介護賦課基本情報Divのインターフェースです。

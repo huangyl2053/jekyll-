@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
-import jp.co.ndensan.reams.db.dbz.business.KaigoShikakuKihonSearchKey;
+import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuSoshitsu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
