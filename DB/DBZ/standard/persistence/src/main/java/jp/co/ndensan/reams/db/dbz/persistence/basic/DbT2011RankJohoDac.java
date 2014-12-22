@@ -90,7 +90,6 @@ public class DbT2011RankJohoDac implements IModifiable<DbT2011RankJohoEntity> {
         return accessor.delete(entity).execute();
     }
 
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
     /**
      * 物理削除を行います。
      *

@@ -90,7 +90,6 @@ public class DbT2012HokenryoRankDac implements IModifiable<DbT2012HokenryoRankEn
         return accessor.delete(entity).execute();
     }
 
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
     /**
      * 物理削除を行います。
      *

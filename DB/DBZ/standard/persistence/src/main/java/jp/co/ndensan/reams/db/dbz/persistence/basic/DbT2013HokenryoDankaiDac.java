@@ -94,7 +94,6 @@ public class DbT2013HokenryoDankaiDac implements IModifiable<DbT2013HokenryoDank
         return accessor.delete(entity).execute();
     }
 
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
     /**
      * 物理削除を行います。
      *
