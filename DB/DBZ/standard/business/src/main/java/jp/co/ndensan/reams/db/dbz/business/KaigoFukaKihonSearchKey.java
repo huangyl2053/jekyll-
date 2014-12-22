@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -19,7 +19,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class KaigoFukaKihonSearchKey {
 
-    private final RString 通知書番号;
+    private final TsuchishoNo 通知書番号;
     private final FlexibleYear 賦課年度;
     private final LasdecCode 市町村コード;
     private final ShikibetsuCode 識別コード;
@@ -43,7 +43,7 @@ public class KaigoFukaKihonSearchKey {
      *
      * @return 通知書番号
      */
-    public RString get通知書番号() {
+    public TsuchishoNo get通知書番号() {
         return 通知書番号;
     }
 

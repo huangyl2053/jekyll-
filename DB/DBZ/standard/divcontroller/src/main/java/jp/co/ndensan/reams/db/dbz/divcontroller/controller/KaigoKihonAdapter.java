@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
 import jp.co.ndensan.reams.db.dbz.business.KaigoFukaKihonSearchKeyBuilder;
 import jp.co.ndensan.reams.db.dbz.business.KaigoShikakuKihonSearchKeyBuilder;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoFukaKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihonDiv;
@@ -20,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 介護基本情報のDivを設定するクラスです。
@@ -101,7 +101,7 @@ public final class KaigoKihonAdapter {
      * @param 識別コード 識別コード
      */
     public static void set介護賦課基本(
-            KaigoFukaKihonDiv div, RString 通知書番号, FlexibleYear 賦課年度, LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+            KaigoFukaKihonDiv div, TsuchishoNo 通知書番号, FlexibleYear 賦課年度, LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
         div.load(new KaigoFukaKihonSearchKeyBuilder(通知書番号, 賦課年度, 市町村コード, 識別コード).build());
     }
 }
