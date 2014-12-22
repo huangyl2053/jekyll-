@@ -5,9 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.messagemapping;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.IValidationMessageMapping;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -20,7 +18,8 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum ShisetsuNyutaishoValidationMessageMapping implements IValidationMessageMapping {
 
     入所日が未入力(ShisetsuNyutaishoValidationMessage.入所日が未入力, "txtNyushoDate"),
-    退所日が未入力(ShisetsuNyutaishoValidationMessage.退所日が未入力, "txtTaishoDate"),
+    終了日設定なし(ShisetsuNyutaishoValidationMessage.終了日設定なし, "taishoDate"),
+    入所施設が未入力(ShisetsuNyutaishoValidationMessage.入所施設が未入力, "txtShisetsuCode"),
     入所年月日より前(ShisetsuNyutaishoValidationMessage.入所年月日より前, "txtTaishoDate"),
     退所日と次の履歴データの入所日の期間が重複(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複, "txtTaishoDate"),
     入所日と前の履歴データの退所日の期間が重複(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複, "txtNyushoDate"),

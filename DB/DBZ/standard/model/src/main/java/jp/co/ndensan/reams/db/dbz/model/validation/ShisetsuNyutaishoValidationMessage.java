@@ -18,13 +18,17 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum ShisetsuNyutaishoValidationMessage implements IValidationMessage {
 
     /**
+     * 終了日（退所日）なし
+     */
+    終了日設定なし(DbzErrorMessages.終了日設定なし),
+    /**
      * 入所日
      */
     入所日が未入力(DbzErrorMessages.必須項目を入力_追加メッセージあり),
     /**
-     * 退所日
+     * 入所施設
      */
-    退所日が未入力(DbzErrorMessages.必須項目を入力_追加メッセージあり),
+    入所施設が未入力(DbzErrorMessages.必須項目を入力_追加メッセージあり),
     /**
      * 日付の前後関係が逆転
      */

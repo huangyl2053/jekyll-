@@ -93,7 +93,6 @@ public class ShisetsuNyutaishoMapper {
                 row.setShisetsuCode(model.get介護保険施設入退所モデル().get入所施設コード());
                 row.setShisetsuMeisho(model.getJigyoshaMeisho());
                 row.setShisetsu(compose施設(model));
-                //row.setShisetsu(model.get介護保険施設入退所モデル().get入所施設コード().concat(":").concat(model.getJigyoshaMeisho()));
                 row.setDaichoShubetsuKey(model.get介護保険施設入退所モデル().get台帳種別());
                 row.setDaichoShubetsu(new RString(DaichoType.toValue(model.get介護保険施設入退所モデル().get台帳種別()).toString()));
                 row.setShisetsuShuruiKey(model.get介護保険施設入退所モデル().get入所施設種類());
@@ -108,8 +107,7 @@ public class ShisetsuNyutaishoMapper {
         RString 施設名 = model.getJigyoshaMeisho();
         return new RStringBuilder()
                 .append((施設コード == null) ? RString.EMPTY : 施設コード)
-                //  .append((施設コード != null && 施設名 != null) ? ":" : RString.EMPTY)
-                .append((施設コード == null) ? RString.EMPTY : ":")
+                .append((施設コード != null) ? "：" : RString.EMPTY)
                 .append((施設名 == null) ? RString.EMPTY : 施設名)
                 .toRString();
     }

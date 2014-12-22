@@ -296,6 +296,10 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
             messages.add(ShisetsuNyutaishoValidationMessage.入所日が未入力, "必須項目の入所日が未入力 ");
         }
 
+        if (PresenceValidator.isInvalid(this.get入所施設コード())) {
+            messages.add(ShisetsuNyutaishoValidationMessage.入所施設が未入力, "必須項目の入所施設が未入力 ");
+        }
+
         if (is退所日が入所日より前()) {
             messages.add(ShisetsuNyutaishoValidationMessage.入所年月日より前, "退所年月日" + this.get退所年月日() + "が入所年月日" + this.get入所年月日() + "以降でない");
         }
@@ -310,8 +314,22 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
             }
         }
         if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.入所日と期間が重複する履歴がある)) {
-            if (has入所日と期間が重複する履歴In(context.get全履歴())) {
-                messages.add(ShisetsuNyutaishoValidationMessage.入所日と期間が重複する履歴がある, "入所年月日" + this.get入所年月日() + "と期間が重複する履歴がある");
+
+            IItemList<ShisetsuNyutaishoModel> list = context.get全履歴();
+            boolean flg = Boolean.FALSE;
+
+            for (ShisetsuNyutaishoModel model : list) {
+                if (model.get退所年月日().isEmpty()) {
+                    messages.add(ShisetsuNyutaishoValidationMessage.終了日設定なし);
+                    flg = Boolean.TRUE;
+                }
+            }
+
+            if (!flg) {
+                if (has入所日と期間が重複する履歴In(context.get全履歴())) {
+                    messages.add(ShisetsuNyutaishoValidationMessage.入所日と期間が重複する履歴がある, "入所年月日" + this.get入所年月日() + "と期間が重複する履歴がある");
+
+                }
             }
         }
         if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.退所日と期間が重複する履歴がある)) {
@@ -343,7 +361,6 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
 
     private boolean is退所日が次の履歴データの入所日と重複(IOptional<ShisetsuNyutaishoModel> 次履歴) {
         if (!次履歴.isPresent() || get退所年月日().isEmpty() || get退所年月日() == null) {
-
             return false;
         }
         boolean a = !get退所年月日().isBefore(次履歴.get().get入所年月日());
@@ -356,9 +373,16 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
             return false;
         }
         for (ShisetsuNyutaishoModel model : list) {
-            if (OrderValidator.from(model.get入所年月日()).afterOrEquals(this.get入所年月日()).afterOrEquals(model.get退所年月日()).isValid()) {
+            if (model.get退所年月日().isEmpty()) {
+                return false;
+            }
+//            if (OrderValidator.from(model.get入所年月日()).afterOrEquals(this.get入所年月日()).afterOrEquals(model.get退所年月日()).isValid()) {
+//                return true;
+//            }
+            if (OrderValidator.from(model.get入所年月日()).after(this.get入所年月日()).after(model.get退所年月日()).isValid()) {
                 return true;
             }
+
         }
         return false;
     }
@@ -368,7 +392,13 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
             return false;
         }
         for (ShisetsuNyutaishoModel model : list) {
-            if (OrderValidator.from(model.get入所年月日()).afterOrEquals(this.get退所年月日()).afterOrEquals(model.get退所年月日()).isValid()) {
+            if (model.get退所年月日().isEmpty()) {
+                return false;
+            }
+//            if (OrderValidator.from(model.get入所年月日()).afterOrEquals(this.get退所年月日()).afterOrEquals(model.get退所年月日()).isValid()) {
+//                return true;
+//            }
+            if (OrderValidator.from(model.get入所年月日()).after(this.get退所年月日()).after(model.get退所年月日()).isValid()) {
                 return true;
             }
         }

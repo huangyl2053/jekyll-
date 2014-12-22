@@ -14,7 +14,8 @@ import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.入所日が未入力;
-import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.退所日が未入力;
+import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.入所施設が未入力;
+import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.終了日設定なし;
 import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.入所年月日より前;
 import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複;
 import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複;
@@ -74,8 +75,8 @@ public class ShisetsuNyutaishoRirekiKanriContext implements IContext {
 
     private enum ValidationSpec {
 
-        追加(ViewExecutionStatus.Add, 入所日が未入力, 入所年月日より前, 入所日と期間が重複する履歴がある, 退所日と期間が重複する履歴がある),
-        修正(ViewExecutionStatus.Modify, 入所日が未入力, 入所年月日より前, 退所日と次の履歴データの入所日の期間が重複, 入所日と前の履歴データの退所日の期間が重複),
+        追加(ViewExecutionStatus.Add, 入所日が未入力, 終了日設定なし, 入所施設が未入力, 入所年月日より前, 入所日と期間が重複する履歴がある, 退所日と期間が重複する履歴がある),
+        修正(ViewExecutionStatus.Modify, 入所日が未入力, 終了日設定なし, 入所施設が未入力, 入所年月日より前, 退所日と次の履歴データの入所日の期間が重複, 入所日と前の履歴データの退所日の期間が重複),
         なし(ViewExecutionStatus.None, null);
 
         private final ViewExecutionStatus state;

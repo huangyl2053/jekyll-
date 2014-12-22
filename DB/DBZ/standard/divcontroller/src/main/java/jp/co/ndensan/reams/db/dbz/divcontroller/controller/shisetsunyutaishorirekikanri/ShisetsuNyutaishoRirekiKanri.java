@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.DivcontrollerMethod;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICallbackMethod;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.SingleButtonType;
@@ -75,6 +74,7 @@ public class ShisetsuNyutaishoRirekiKanri {
         shisetsuNyutaishoRirekiDiv.clearInputData();
         //３－１）明細表示モードに、追加・修正を設定する。
         shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtNyushoDate().setReadOnly(false);
+        shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtNyushoDate().setValue(FlexibleDate.getNowDate());
         shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtTaishoDate().setReadOnly(false);
         shisetsuNyutaishoRirekiDiv.setMode_明細表示モード(ShisetsuNyutaishoRirekiKanriDiv.明細表示モード.追加_修正);
         shisetsuNyutaishoRirekiDiv.setInputMode(ViewExecutionStatus.Add.getValue());
@@ -259,13 +259,20 @@ public class ShisetsuNyutaishoRirekiKanri {
         //バリデーションチェック
         validationMessages.add(model.get介護保険施設入退所モデル().validateIn(context));
         //バリデーションチェック
-        //validationMessages.add(model.get介護保険施設入退所モデル().validate());
-
         if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所日が未入力)) {
             //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
             ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
-
         }
+        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.終了日設定なし)) {
+            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+        }
+
+        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所施設が未入力)) {
+            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+        }
+
         if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所年月日より前)) {
             //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
             ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
