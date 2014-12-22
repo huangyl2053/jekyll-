@@ -1,5 +1,5 @@
-﻿choteiId,int8,long,,,,,A
-shunoId,int8,long,,,,,A
+﻿choteiId,int8,Long,,,,,A
+shunoId,int8,Long,,,,,A
 kaikeiNendo,UDD053Year,RYear,,,,,A
 shoriNendo,UDD053Year,RYear,,,,,A
 shoriNo,int4,int,,,,,A

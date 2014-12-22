@@ -204,7 +204,7 @@ public class KibetsuDacTest extends DbbTestDacBase {
         @Test
         public void 介護期別エンティティを渡すと_updateは_介護期別を更新する() {
             DbT2003KibetsuEntity updateRecord = DbT2003KibetsuEntityGenerator.createDbT2003KibetsuEntity();
-            updateRecord.setChoteiId(99);
+            updateRecord.setChoteiId(99L);
 
             sut.update(updateRecord);
 

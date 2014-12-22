@@ -103,7 +103,7 @@ public class KibetsuChoteiKyotsuDac implements IPersistable<KibetsuChoteiKyotsuM
         return 期別調定共通リスト;
     }
 
-    private ChoteiKyotsuModel select調定共通ByKey(long 調定ID) {
+    private ChoteiKyotsuModel select調定共通ByKey(Long 調定ID) {
         UrT0705ChoteiKyotsuEntity entity = 調定共通Dac.selectByKey(調定ID);
 
         return (entity == null) ? null : new ChoteiKyotsuModel(entity);

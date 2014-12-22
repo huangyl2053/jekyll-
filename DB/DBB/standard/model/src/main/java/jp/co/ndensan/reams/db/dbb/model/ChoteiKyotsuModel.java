@@ -63,7 +63,7 @@ public class ChoteiKyotsuModel implements Serializable {
      *
      * @return 調定ID
      */
-    public long get調定ID() {
+    public Long get調定ID() {
         return entity.getChoteiId();
     }
 
@@ -72,7 +72,7 @@ public class ChoteiKyotsuModel implements Serializable {
      *
      * @return 収納ID
      */
-    public long get収納ID() {
+    public Long get収納ID() {
         return entity.getShunoId();
     }
 
@@ -180,7 +180,7 @@ public class ChoteiKyotsuModel implements Serializable {
      *
      * @param 調定ID 調定ID
      */
-    public void set調定ID(long 調定ID) {
+    public void set調定ID(Long 調定ID) {
         requireNonNull(調定ID, UrSystemErrorMessages.値がnull.getReplacedMessage("調定ID"));
         entity.setChoteiId(調定ID);
     }
@@ -190,7 +190,7 @@ public class ChoteiKyotsuModel implements Serializable {
      *
      * @param 収納ID 収納ID
      */
-    public void set収納ID(long 収納ID) {
+    public void set収納ID(Long 収納ID) {
         requireNonNull(収納ID, UrSystemErrorMessages.値がnull.getReplacedMessage("収納ID"));
         entity.setShunoId(収納ID);
     }

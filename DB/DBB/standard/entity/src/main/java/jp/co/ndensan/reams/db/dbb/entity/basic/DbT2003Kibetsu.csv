@@ -4,4 +4,4 @@ tsuchishoNo,DbUDD008TsuchishoNo,TsuchishoNo,,,,,A
 shoriTimestamp,timestamp,RDateTime,,,,,A
 choshuHoho,varchar,RString,,,,,A
 ki,int4,int,,,,,A
-choteiId,numeric,long,,,,,A
+choteiId,numeric,Long,,,,,A

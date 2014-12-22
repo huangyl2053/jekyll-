@@ -23,7 +23,7 @@ public final class DbT2003KibetsuEntityGenerator {
     public static final RDateTime DEFAULT_処理日時 = RDateTime.MAX;
     public static final RString DEFAULT_徴収方法 = new RString("1");
     public static final int DEFAULT_期 = 1;
-    public static final long DEFAULT_調定ID = 1L;
+    public static final Long DEFAULT_調定ID = 1L;
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

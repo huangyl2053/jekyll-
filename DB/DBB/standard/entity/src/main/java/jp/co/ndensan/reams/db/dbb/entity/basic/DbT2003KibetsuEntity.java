@@ -42,7 +42,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
     private RString choshuHoho;
     @PrimaryKey
     private int ki;
-    private long choteiId;
+    private Long choteiId;
 
     /**
      * getInsertDantaiCd
@@ -202,7 +202,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
      *
      * @return choteiId
      */
-    public long getChoteiId() {
+    public Long getChoteiId() {
         return choteiId;
     }
 
@@ -211,7 +211,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
      *
      * @param choteiId choteiId
      */
-    public void setChoteiId(long choteiId) {
+    public void setChoteiId(Long choteiId) {
         this.choteiId = choteiId;
     }
 

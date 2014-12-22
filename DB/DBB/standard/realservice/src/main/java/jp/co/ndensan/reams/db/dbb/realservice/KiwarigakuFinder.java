@@ -71,7 +71,7 @@ public class KiwarigakuFinder {
         return new Kiwarigaku(期別調定共通, get収入額(期別調定共通.get調定共通モデル().get収納ID()));
     }
 
-    private Decimal get収入額(long 収納ID) {
+    private Decimal get収入額(Long 収納ID) {
         IShuno 収納 = manager.get収納(収納ID);
         return (収納 != null) ? 収納.get収入合計情報().get本税() : null;
     }

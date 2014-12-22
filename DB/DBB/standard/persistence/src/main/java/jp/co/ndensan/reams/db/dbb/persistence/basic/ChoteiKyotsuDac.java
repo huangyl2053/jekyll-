@@ -36,7 +36,7 @@ public class ChoteiKyotsuDac implements IPersistable<UrT0705ChoteiKyotsuEntity> 
      */
     @Transaction
     public UrT0705ChoteiKyotsuEntity selectByKey(
-            long 調定ID) throws NullPointerException {
+            Long 調定ID) throws NullPointerException {
         requireNonNull(調定ID, UrSystemErrorMessages.値がnull.getReplacedMessage("調定ID"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);

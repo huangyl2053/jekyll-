@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public final class UrT0705ChoteiKyotsuEntityGenerator {
 
-    public static final long DEFAULT_調定ID = 1L;
-    public static final long DEFAULT_収納ID = 1L;
+    public static final Long DEFAULT_調定ID = 1L;
+    public static final Long DEFAULT_収納ID = 1L;
     public static final RYear DEFAULT_会計年度 = new RYear("2014");
     public static final RYear DEFAULT_処理年度 = new RYear("2014");
     public static final int DEFAULT_処理番号 = 1;

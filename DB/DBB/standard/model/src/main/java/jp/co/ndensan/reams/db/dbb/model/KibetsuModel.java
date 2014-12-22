@@ -117,7 +117,7 @@ public class KibetsuModel implements Serializable {
      *
      * @return 調定ID
      */
-    public long get調定ID() {
+    public Long get調定ID() {
         return entity.getChoteiId();
     }
 
@@ -186,7 +186,7 @@ public class KibetsuModel implements Serializable {
      *
      * @param 調定ID 調定ID
      */
-    public void set調定ID(long 調定ID) {
+    public void set調定ID(Long 調定ID) {
         requireNonNull(調定ID, UrSystemErrorMessages.値がnull.getReplacedMessage("調定ID"));
         entity.setChoteiId(調定ID);
     }

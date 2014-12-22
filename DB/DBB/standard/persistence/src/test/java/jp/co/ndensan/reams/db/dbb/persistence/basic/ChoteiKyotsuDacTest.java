@@ -52,7 +52,7 @@ public class ChoteiKyotsuDacTest extends DbbTestDacBase {
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
-            UrT0705ChoteiKyotsuEntity insertedRecord = sut.selectByKey(99);
+            UrT0705ChoteiKyotsuEntity insertedRecord = sut.selectByKey(99L);
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -118,7 +118,7 @@ public class ChoteiKyotsuDacTest extends DbbTestDacBase {
 
     private static class TestSupport {
 
-        public static void insert(long 調定ID) {
+        public static void insert(Long 調定ID) {
             UrT0705ChoteiKyotsuEntity entity = UrT0705ChoteiKyotsuEntityGenerator.createUrT0705ChoteiKyotsuEntity();
             entity.setChoteiId(調定ID);
             sut.insert(entity);

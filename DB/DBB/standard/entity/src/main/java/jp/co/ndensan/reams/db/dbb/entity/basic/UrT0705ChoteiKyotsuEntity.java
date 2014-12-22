@@ -31,8 +31,8 @@ public class UrT0705ChoteiKyotsuEntity extends DbTableEntityBase<UrT0705ChoteiKy
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private long choteiId;
-    private long shunoId;
+    private Long choteiId;
+    private Long shunoId;
     private RYear kaikeiNendo;
     private RYear shoriNendo;
     private int shoriNo;
@@ -95,7 +95,7 @@ public class UrT0705ChoteiKyotsuEntity extends DbTableEntityBase<UrT0705ChoteiKy
      *
      * @return choteiId
      */
-    public long getChoteiId() {
+    public Long getChoteiId() {
         return choteiId;
     }
 
@@ -104,7 +104,7 @@ public class UrT0705ChoteiKyotsuEntity extends DbTableEntityBase<UrT0705ChoteiKy
      *
      * @param choteiId choteiId
      */
-    public void setChoteiId(long choteiId) {
+    public void setChoteiId(Long choteiId) {
         this.choteiId = choteiId;
     }
 
@@ -113,7 +113,7 @@ public class UrT0705ChoteiKyotsuEntity extends DbTableEntityBase<UrT0705ChoteiKy
      *
      * @return shunoId
      */
-    public long getShunoId() {
+    public Long getShunoId() {
         return shunoId;
     }
 
@@ -122,7 +122,7 @@ public class UrT0705ChoteiKyotsuEntity extends DbTableEntityBase<UrT0705ChoteiKy
      *
      * @param shunoId shunoId
      */
-    public void setShunoId(long shunoId) {
+    public void setShunoId(Long shunoId) {
         this.shunoId = shunoId;
     }
 

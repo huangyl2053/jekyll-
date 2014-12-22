@@ -75,7 +75,7 @@ public class KiwarigakuFinderTest extends DbzTestBase {
     private static IShunoManager createManager() {
         IShunoManager manager = mock(IShunoManager.class);
         IShuno shuno = createShuno();
-        when(manager.get収納(any(long.class))).thenReturn(shuno);
+        when(manager.get収納(any(Long.class))).thenReturn(shuno);
         return manager;
     }
 

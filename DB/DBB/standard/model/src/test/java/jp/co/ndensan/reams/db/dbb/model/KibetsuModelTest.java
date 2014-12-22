@@ -89,7 +89,7 @@ public class KibetsuModelTest extends DbbTestBase {
             sut.setEntity(DbT2003KibetsuEntityGenerator.createDbT2003KibetsuEntity());
 
             sut.getEntity().initializeMd5();
-            sut.getEntity().setChoteiId(9999);
+            sut.getEntity().setChoteiId(9999L);
 
             assertThat(sut.getState(), is(EntityDataState.Modified));
         }

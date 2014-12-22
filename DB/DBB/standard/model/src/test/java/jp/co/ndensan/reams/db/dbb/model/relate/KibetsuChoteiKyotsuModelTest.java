@@ -31,7 +31,7 @@ public class KibetsuChoteiKyotsuModelTest {
 
             model.get介護期別モデル().getEntity().initializeMd5();
             model.get調定共通モデル().getEntity().initializeMd5();
-            model.get介護期別モデル().set調定ID(9999);
+            model.get介護期別モデル().set調定ID(9999L);
             assertThat(model.getState(), is(EntityDataState.Modified));
 
         }

@@ -48,7 +48,7 @@ public class KibetsuChoteiKyotsuDacTest {
     private static final RDateTime 処理日時 = DbT2003KibetsuEntityGenerator.DEFAULT_処理日時;
     private static final RString 徴収方法 = DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法;
     private static final int 期 = DbT2003KibetsuEntityGenerator.DEFAULT_期;
-    private static final long 調定ID = UrT0705ChoteiKyotsuEntityGenerator.DEFAULT_調定ID;
+    private static final Long 調定ID = UrT0705ChoteiKyotsuEntityGenerator.DEFAULT_調定ID;
 
     @BeforeClass
     public static void setUpClass() {
@@ -224,7 +224,7 @@ public class KibetsuChoteiKyotsuDacTest {
             介護期別Dac.insert(entity);
         }
 
-        public static void insertUrT0705(long 調定ID) {
+        public static void insertUrT0705(Long 調定ID) {
             UrT0705ChoteiKyotsuEntity entity = UrT0705ChoteiKyotsuEntityGenerator.createUrT0705ChoteiKyotsuEntity();
             entity.setChoteiId(調定ID);
             調定共通Dac.insert(entity);
