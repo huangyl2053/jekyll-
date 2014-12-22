@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.model;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbb.entity.basic.UrT0705ChoteiKyotsuEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiJiyuCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -117,7 +118,7 @@ public class ChoteiKyotsuModel implements Serializable {
      *
      * @return 調定事由コード
      */
-    public Code get調定事由コード() {
+    public ChoteiJiyuCode get調定事由コード() {
         return entity.getChoteiJiyuCode();
     }
 
@@ -240,7 +241,7 @@ public class ChoteiKyotsuModel implements Serializable {
      *
      * @param 調定事由コード 調定事由コード
      */
-    public void set調定事由コード(Code 調定事由コード) {
+    public void set調定事由コード(ChoteiJiyuCode 調定事由コード) {
         requireNonNull(調定事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調定事由コード"));
         entity.setChoteiJiyuCode(調定事由コード);
     }

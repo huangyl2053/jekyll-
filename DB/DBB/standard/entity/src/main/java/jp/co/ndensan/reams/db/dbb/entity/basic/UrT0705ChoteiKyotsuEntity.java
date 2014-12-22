@@ -1,7 +1,8 @@
 package jp.co.ndensan.reams.db.dbb.entity.basic;
 
+import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiJiyuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -37,7 +38,7 @@ public class UrT0705ChoteiKyotsuEntity extends DbTableEntityBase<UrT0705ChoteiKy
     private RYear shoriNendo;
     private int shoriNo;
     private int koseiKaisu;
-    private Code choteiJiyuCode;
+    private ChoteiJiyuCode choteiJiyuCode;
     private RDate choteiYMD;
     private Decimal choteigaku;
     private Decimal shohizei;
@@ -203,7 +204,7 @@ public class UrT0705ChoteiKyotsuEntity extends DbTableEntityBase<UrT0705ChoteiKy
      *
      * @return choteiJiyuCode
      */
-    public Code getChoteiJiyuCode() {
+    public ChoteiJiyuCode getChoteiJiyuCode() {
         return choteiJiyuCode;
     }
 
@@ -212,7 +213,7 @@ public class UrT0705ChoteiKyotsuEntity extends DbTableEntityBase<UrT0705ChoteiKy
      *
      * @param choteiJiyuCode choteiJiyuCode
      */
-    public void setChoteiJiyuCode(Code choteiJiyuCode) {
+    public void setChoteiJiyuCode(ChoteiJiyuCode choteiJiyuCode) {
         this.choteiJiyuCode = choteiJiyuCode;
     }
 
@@ -335,7 +336,7 @@ public class UrT0705ChoteiKyotsuEntity extends DbTableEntityBase<UrT0705ChoteiKy
         if (other == null) {
             return false;
         }
-        if (this.choteiId != other.choteiId) {
+        if (!Objects.equals(this.choteiId, other.choteiId)) {
             return false;
         }
         return true;

@@ -4,7 +4,7 @@ kaikeiNendo,UDD053Year,RYear,,,,,A
 shoriNendo,UDD053Year,RYear,,,,,A
 shoriNo,int4,int,,,,,A
 koseiKaisu,int4,int,,,,,A
-choteiJiyuCode,UDD035Code,Code,,,,,A
+choteiJiyuCode,UDD035Code,ChoteiJiyuCode,,,,,A
 choteiYMD,UDD016Date,RDate,,,,,A
 choteigaku,numeric,Decimal,,,,,A
 shohizei,numeric,Decimal,,,,,A

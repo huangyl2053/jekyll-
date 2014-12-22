@@ -5,8 +5,9 @@
 package jp.co.ndensan.reams.db.dbb.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbb.entity.basic.UrT0705ChoteiKyotsuEntity;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiJiyuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -23,7 +24,7 @@ public final class UrT0705ChoteiKyotsuEntityGenerator {
     public static final RYear DEFAULT_処理年度 = new RYear("2014");
     public static final int DEFAULT_処理番号 = 1;
     public static final int DEFAULT_更正回数 = 1;
-    public static final Code DEFAULT_調定事由コード = new Code("1");
+    public static final ChoteiJiyuCode DEFAULT_調定事由コード = new ChoteiJiyuCode(new RString("1"));
     public static final RDate DEFAULT_調定日 = new RDate("20140101");
     public static final Decimal DEFAULT_調定額 = new Decimal("1000");
     public static final Decimal DEFAULT_消費税額 = new Decimal("100");
