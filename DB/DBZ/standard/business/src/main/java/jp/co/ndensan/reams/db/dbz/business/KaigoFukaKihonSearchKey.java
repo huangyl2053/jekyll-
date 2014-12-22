@@ -30,7 +30,7 @@ public class KaigoFukaKihonSearchKey {
      * @param builder 介護賦課基本情報の検索キーBuilder
      * @throws NullPointerException 引数がnullの場合
      */
-    public KaigoFukaKihonSearchKey(KaigoFukaKihonSearchKeyBuilder builder) throws NullPointerException {
+    KaigoFukaKihonSearchKey(KaigoFukaKihonSearchKeyBuilder builder) throws NullPointerException {
         requireNonNull(builder, UrSystemErrorMessages.値がnull.getReplacedMessage("builder"));
         this.通知書番号 = builder.get通知書番号();
         this.賦課年度 = builder.get賦課年度();

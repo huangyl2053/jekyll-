@@ -26,7 +26,7 @@ public class KaigoShikakuKihonSearchKey {
      * @param builder 介護資格基本情報の検索キーBuilder
      * @throws NullPointerException 引数がnullの場合
      */
-    public KaigoShikakuKihonSearchKey(KaigoShikakuKihonSearchKeyBuilder builder) throws NullPointerException {
+    KaigoShikakuKihonSearchKey(KaigoShikakuKihonSearchKeyBuilder builder) throws NullPointerException {
         requireNonNull(builder, UrSystemErrorMessages.値がnull.getReplacedMessage("builder"));
         this.市町村コード = builder.get市町村コード();
         this.識別コード = builder.get識別コード();
