@@ -362,7 +362,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
 
     private static KibetsuChoteiKyotsuModel create期別調定共通Model(ChoshuHohoKibetsu 徴収方法, int 期, int 期別額) {
         KibetsuChoteiKyotsuModel model = KibetsuChoteiKyotsuModelTestHelper.createModel();
-        model.get介護期別モデル().set徴収方法(徴収方法.getCode());
+        model.get介護期別モデル().set徴収方法(徴収方法);
         model.get介護期別モデル().set期(期);
         model.get調定共通モデル().set調定額(new Decimal(期別額));
         return model;

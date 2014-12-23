@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.model;
 
+import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.entity.basic.helper.DbT2003KibetsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -57,8 +58,8 @@ public class KibetsuModelTest extends DbbTestBase {
 
         @Test
         public void 戻り値の徴収方法は_設定した値と同じ徴収方法を返す() {
-            sut.set徴収方法(DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法);
-            assertThat(sut.get徴収方法(), is(DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法));
+            sut.set徴収方法(ChoshuHohoKibetsu.toValue(DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法));
+            assertThat(sut.get徴収方法(), is(ChoshuHohoKibetsu.toValue(DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法)));
         }
 
         @Test
