@@ -169,7 +169,7 @@ public class KibetsuModel implements Serializable {
      */
     public void set徴収方法(ChoshuHohoKibetsu 徴収方法) {
         requireNonNull(徴収方法, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法"));
-        entity.setChoshuHoho(徴収方法.getCode());
+        entity.setChoshuHoho(徴収方法.code());
     }
 
     /**

@@ -36,7 +36,7 @@ public enum ChoshuHohoKibetsu {
      *
      * @return コード
      */
-    public RString getCode() {
+    public RString code() {
         return code;
     }
 
@@ -48,7 +48,7 @@ public enum ChoshuHohoKibetsu {
      */
     public static ChoshuHohoKibetsu toValue(RString code) {
         for (ChoshuHohoKibetsu data : values()) {
-            if (data.getCode().equals(code)) {
+            if (data.code().equals(code)) {
                 return data;
             }
         }
