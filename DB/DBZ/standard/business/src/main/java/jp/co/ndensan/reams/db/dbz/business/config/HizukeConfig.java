@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysHizuke;
@@ -27,20 +28,25 @@ public class HizukeConfig {
      * コンストラクタです。
      */
     public HizukeConfig() {
-        IUrBusinessConfig businessConfig = UrBusinessConfigFactory.createInstance();
-        configs = new HashMap<>();
-        for (ConfigKeysHizuke target : ConfigKeysHizuke.values()) {
-            this.configs.put(target, businessConfig.get(target, RDate.getNowDate()));
-        }
+        this.configs = createMap(UrBusinessConfigFactory.createInstance());
     }
 
     /**
      * モックを使用するテスト用コンストラクタです。
      *
-     * @param configs 日付のコンフィグ情報を格納したMap
+     * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    public HizukeConfig(Map<ConfigKeysHizuke, RString> configs) {
-        this.configs = configs;
+    public HizukeConfig(IUrBusinessConfig businessConfig) {
+        this.configs = createMap(businessConfig);
+    }
+
+    private Map<ConfigKeysHizuke, RString> createMap(IUrBusinessConfig businessConfig) {
+        Map<ConfigKeysHizuke, RString> map = new HashMap<>();
+        RDate nowDate = RDate.getNowDate();
+        for (ConfigKeysHizuke target : ConfigKeysHizuke.values()) {
+            map.put(target, businessConfig.get(target, nowDate));
+        }
+        return Collections.unmodifiableMap(map);
     }
 
     /**
