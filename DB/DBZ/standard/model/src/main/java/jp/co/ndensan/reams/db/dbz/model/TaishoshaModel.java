@@ -68,11 +68,11 @@ public class TaishoshaModel {
     }
 
     /**
-     * 被保険者区分を返します。
+     * 被保区分を返します。
      *
-     * @return 被保険者区分
+     * @return 被保区分
      */
-    public RString get被保険者区分() {
+    public RString get被保区分() {
 
         DbV7901ShikakuSearchEntity shikakuEntity = entity.get資格検索エンティティ();
 

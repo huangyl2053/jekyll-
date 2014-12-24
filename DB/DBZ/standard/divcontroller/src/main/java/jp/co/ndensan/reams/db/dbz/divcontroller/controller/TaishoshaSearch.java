@@ -148,7 +148,7 @@ public class TaishoshaSearch {
             rowList.add(new dgGaitoshaList_Row(
                     対象者.get被保険者番号() != null ? 対象者.get被保険者番号().value() : RString.EMPTY,
                     対象者.get識別コード() != null ? 対象者.get識別コード().value() : RString.EMPTY,
-                    対象者.get被保険者区分(),
+                    対象者.get被保区分(),
                     対象者.get氏名() != null ? 対象者.get氏名().value() : RString.EMPTY,
                     対象者.getカナ氏名() != null ? 対象者.getカナ氏名().value() : RString.EMPTY,
                     (対象者.get氏名() != null && 対象者.getカナ氏名() != null) ? 対象者.get氏名().value().concat(対象者.getカナ氏名().value()) : RString.EMPTY,
