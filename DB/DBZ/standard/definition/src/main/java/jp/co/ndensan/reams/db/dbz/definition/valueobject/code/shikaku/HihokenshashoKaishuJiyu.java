@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject.code;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.ur.urz.definition.code.ICodeValueObject;
@@ -17,18 +17,18 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 医療保険種類を表すドメインクラスです。
+ * 被保険者証回収事由を表すドメインクラスです。
  *
  * @author n8187 久保田 英男
  */
-public class IryoHokenShurui implements ICodeValueObject, IDbColumnMappable, IValueObject<Code> {
+public class HihokenshashoKaishuJiyu implements ICodeValueObject, IDbColumnMappable, IValueObject<Code> {
 
     /**
      * DBA介護資格を表すサブ業務コードです。
      */
     public static final SubGyomuCode SUB_GYOMU_CODE;
     /**
-     * 医療保険種類を表すコード種別です。
+     * 被保険者証回収事由を表すコード種別です。
      */
     public static final CodeShubetsu CODE_SHUBETSU;
 
@@ -36,24 +36,24 @@ public class IryoHokenShurui implements ICodeValueObject, IDbColumnMappable, IVa
 
     static {
         SUB_GYOMU_CODE = SubGyomuCode.DBA介護資格;
-        CODE_SHUBETSU = DBACodeShubetsu.医療保険種類.getCodeShubetsu();
+        CODE_SHUBETSU = DBACodeShubetsu.被保険者証回収事由.getCodeShubetsu();
     }
     
     /**
      * コンストラクタです。
      *
-     * @param code 医療保険種類
+     * @param code 被保険者証回収事由
      */
-    public IryoHokenShurui(Code code) {
+    public HihokenshashoKaishuJiyu(Code code) {
         this.code = code;
     }
 
     /**
      * コンストラクタです。
      *
-     * @param code 医療保険種類を表す文字列
+     * @param code 被保険者証回収事由を表す文字列
      */
-    public IryoHokenShurui(RString code) {
+    public HihokenshashoKaishuJiyu(RString code) {
         this.code = new Code(code);
     }
 
@@ -77,7 +77,7 @@ public class IryoHokenShurui implements ICodeValueObject, IDbColumnMappable, IVa
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final IryoHokenShurui other = (IryoHokenShurui) obj;
+        final HihokenshashoKaishuJiyu other = (HihokenshashoKaishuJiyu) obj;
         return Objects.equals(this.code, other.code);
     }
 

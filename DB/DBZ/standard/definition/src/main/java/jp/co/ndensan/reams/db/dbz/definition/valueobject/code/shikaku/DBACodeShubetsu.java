@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.valueobject.code;
+package jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku;
 
 import jp.co.ndensan.reams.ur.urz.definition.code.ICodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
