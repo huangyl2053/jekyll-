@@ -57,5 +57,4 @@ public class NenreiTotatsuKijunConfig {
     public int get(ConfigKeysNenreiTotatsuKijunJoho key) {
         return configs.get(key);
     }
-
 }
