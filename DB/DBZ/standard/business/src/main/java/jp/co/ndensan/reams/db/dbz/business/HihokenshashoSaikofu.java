@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.definition.Messages;
  *
  * @author N3327 三浦 凌
  */
+@Deprecated
 public class HihokenshashoSaikofu {
 
     /**
