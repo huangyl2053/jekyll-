@@ -46,7 +46,7 @@ public class KaigoFukaKihonSearchKeyBuilder {
      *
      * @return 通知書番号
      */
-    public TsuchishoNo get通知書番号() {
+    TsuchishoNo get通知書番号() {
         return 通知書番号;
     }
 
@@ -55,7 +55,7 @@ public class KaigoFukaKihonSearchKeyBuilder {
      *
      * @return 賦課年度
      */
-    public FlexibleYear get賦課年度() {
+    FlexibleYear get賦課年度() {
         return 賦課年度;
     }
 
@@ -64,7 +64,7 @@ public class KaigoFukaKihonSearchKeyBuilder {
      *
      * @return 市町村コード
      */
-    public LasdecCode get市町村コード() {
+    LasdecCode get市町村コード() {
         return 市町村コード;
     }
 
@@ -73,7 +73,7 @@ public class KaigoFukaKihonSearchKeyBuilder {
      *
      * @return 識別コード
      */
-    public ShikibetsuCode get識別コード() {
+    ShikibetsuCode get識別コード() {
         return 識別コード;
     }
 

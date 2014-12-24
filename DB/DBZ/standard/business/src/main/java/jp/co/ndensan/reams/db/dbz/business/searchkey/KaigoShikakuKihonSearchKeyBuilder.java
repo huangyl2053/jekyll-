@@ -37,7 +37,7 @@ public class KaigoShikakuKihonSearchKeyBuilder {
      *
      * @return 市町村コード
      */
-    public LasdecCode get市町村コード() {
+    LasdecCode get市町村コード() {
         return 市町村コード;
     }
 
@@ -46,7 +46,7 @@ public class KaigoShikakuKihonSearchKeyBuilder {
      *
      * @return 識別コード
      */
-    public ShikibetsuCode get識別コード() {
+    ShikibetsuCode get識別コード() {
         return 識別コード;
     }
 
