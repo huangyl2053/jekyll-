@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0200001.dgGaitoshaList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0200001.TaishoshaSearchDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.IHihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
 import jp.co.ndensan.reams.db.dbz.model.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.model.TaishoshaModel;
 import jp.co.ndensan.reams.db.dbz.realservice.search.ShikakuSearchItem;
@@ -27,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 対象者検索のコントローラークラスです。（資格系）
@@ -36,7 +37,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class TaishoshaSearch {
 
-    private static final RString 対象者キー = new RString("taishoshaKey");
     private static final RString 住所地特例者 = new RString("1");
 
     /**
@@ -79,7 +79,7 @@ public class TaishoshaSearch {
     public ResponseData onSelect_dgGaitoshaList(TaishoshaSearchDiv div) {
         ResponseData<TaishoshaSearchDiv> response = new ResponseData<>();
 
-        ViewStateHolder.put(対象者キー, create対象者Key(div));
+        ViewStates.access().valueAssignedTo(ViewStateKey.資格対象者, TaishoshaKey.class).put(create対象者Key(div));
         save最近処理者(div);
 
         response.data = div;

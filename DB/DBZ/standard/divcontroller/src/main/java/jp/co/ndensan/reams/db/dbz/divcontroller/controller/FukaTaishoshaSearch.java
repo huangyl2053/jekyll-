@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0300001.dgFukaGaitoshaList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0300001.FukaTaishoshaSearchDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.IHihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
 import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaModel;
 import jp.co.ndensan.reams.db.dbz.realservice.search.FukaSearchItem;
@@ -31,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 対象者検索のコントローラークラスです。（賦課系）
@@ -39,8 +40,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @author N8156 宮本 康
  */
 public class FukaTaishoshaSearch {
-
-    private static final RString 対象者キー = new RString("fukaTaishoshaKey");
 
     /**
      * 「検索する」ボタンクリック時に呼び出される処理です。
@@ -83,7 +82,7 @@ public class FukaTaishoshaSearch {
     public ResponseData onSelect_dgGaitoshaList(FukaTaishoshaSearchDiv div) {
         ResponseData<FukaTaishoshaSearchDiv> response = new ResponseData<>();
 
-        ViewStateHolder.put(対象者キー, create対象者Key(div));
+        ViewStates.access().valueAssignedTo(ViewStateKey.賦課対象者, FukaTaishoshaKey.class).put(create対象者Key(div));
         save最近処理者(div);
 
         response.data = div;
