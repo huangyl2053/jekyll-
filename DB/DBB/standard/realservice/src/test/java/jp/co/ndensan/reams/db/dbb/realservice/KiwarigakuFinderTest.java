@@ -40,24 +40,24 @@ public class KiwarigakuFinderTest extends DbzTestBase {
     private static final TsuchishoNo 通知書番号 = TsuchishoNo.EMPTY;
     private static final RDateTime 処理日時 = RDateTime.MAX;
 
-    public static class get期割額 {
+    public static class load期割額 {
 
         @Test
-        public void 期割額が0件の時_get期割額は_0件の情報を返す() {
+        public void 期割額が0件の時_load期割額は_0件の情報を返す() {
             KiwarigakuFinder sut = createFinder(0);
-            assertThat(sut.get期割額(調定年度, 賦課年度, 通知書番号, 処理日時).asList().size(), is(0));
+            assertThat(sut.load期割額(調定年度, 賦課年度, 通知書番号, 処理日時).asList().size(), is(0));
         }
 
         @Test
-        public void 期割額が1件の時_get期割額は_1件の情報を返す() {
+        public void 期割額が1件の時_load期割額は_1件の情報を返す() {
             KiwarigakuFinder sut = createFinder(1);
-            assertThat(sut.get期割額(調定年度, 賦課年度, 通知書番号, 処理日時).asList().size(), is(1));
+            assertThat(sut.load期割額(調定年度, 賦課年度, 通知書番号, 処理日時).asList().size(), is(1));
         }
 
         @Test
-        public void 期割額が2件の時_get期割額は_2件の情報を返す() {
+        public void 期割額が2件の時_load期割額は_2件の情報を返す() {
             KiwarigakuFinder sut = createFinder(2);
-            assertThat(sut.get期割額(調定年度, 賦課年度, 通知書番号, 処理日時).asList().size(), is(2));
+            assertThat(sut.load期割額(調定年度, 賦課年度, 通知書番号, 処理日時).asList().size(), is(2));
         }
     }
 

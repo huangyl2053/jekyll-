@@ -339,7 +339,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
     private static KiwarigakuFinder createFinder() {
         KiwarigakuFinder mock = mock(KiwarigakuFinder.class);
         IItemList<KiwarigakuMeisai> 期割額List = create期割額List();
-        when(mock.get期割額(any(FlexibleYear.class), any(FlexibleYear.class), any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(期割額List);
+        when(mock.load期割額(any(FlexibleYear.class), any(FlexibleYear.class), any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(期割額List);
         return mock;
     }
 

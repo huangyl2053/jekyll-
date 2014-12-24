@@ -115,7 +115,7 @@ public class KiwarigakuHandler {
         setTableData(TableItem.特徴期, 特徴期列, SUFFIX_期);
         setTableData(TableItem.普徴期, 普徴期列, SUFFIX_期);
 
-        setKiwarigaku(finder.get期割額(調定年度, 賦課年度, 通知書番号, 処理日時), createIndexMap(特徴期列), createIndexMap(普徴期列));
+        setKiwarigaku(finder.load期割額(調定年度, 賦課年度, 通知書番号, 処理日時), createIndexMap(特徴期列), createIndexMap(普徴期列));
     }
 
     private Map<RString, Integer> createIndexMap(List<RString> data) {
