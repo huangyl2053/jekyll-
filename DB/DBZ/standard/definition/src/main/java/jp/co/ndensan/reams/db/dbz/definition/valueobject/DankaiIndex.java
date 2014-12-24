@@ -1,69 +1,82 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * 段階インデックスです。
  *
  * @author N8156 宮本 康
  */
-public class DankaiIndex implements IValueObject<RString>, Comparable<DankaiIndex> {
-
-    private final RString 段階インデックス;
+public final class DankaiIndex implements IValueObject<RString>, Comparable<DankaiIndex>, IDbColumnMappable {
 
     /**
-     * 指定の値をもったDankaiIndexを生成します。
-     *
-     * @param value 段階インデックスに相当するRString
-     * @throws NullPointerException 指定のRStringがnullのとき。
+     * 空の DankaiIndex です。{@link #value() value()}で{@link RString#EMPTY}を返します。
      */
-    public DankaiIndex(RString value) throws NullPointerException {
-        requireNonNull(value, UrSystemErrorMessages.値がnull.getReplacedMessage("段階インデックス"));
-        this.段階インデックス = value;
+    public static final DankaiIndex EMPTY;
+
+    static {
+        EMPTY = new DankaiIndex(RString.EMPTY);
+    }
+    private final RString theValue;
+
+    /**
+     * 指定の値をもった DankaiIndex を生成します。
+     *
+     * @param value 値
+     */
+    public DankaiIndex(String value) {
+        this.theValue = (value == null) ? null : new RString(value);
+    }
+
+    /**
+     * 指定の値をもった DankaiIndex を生成します。
+     *
+     * @param value 値
+     */
+    public DankaiIndex(RString value) {
+        this.theValue = value;
     }
 
     @Override
     public RString value() {
-        return this.段階インデックス;
+        return this.theValue;
     }
 
     @Override
-    public boolean equals(Object target) {
-        if (isNull(target) || isNotSameClass(target.getClass())) {
+    public int compareTo(DankaiIndex o) {
+        return Objects.compare(this.theValue, o.theValue, Comparators.naturalOrder());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof DankaiIndex)) {
             return false;
         }
-        return hasSameValue((DankaiIndex) target);
+        DankaiIndex other = (DankaiIndex) obj;
+        return Objects.equals(this.theValue, other.theValue);
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.段階インデックス);
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.theValue);
         return hash;
     }
 
     @Override
-    public int compareTo(DankaiIndex target) {
-        return this.段階インデックス.compareTo(target.value());
-    }
-
-    private boolean isNull(Object target) {
-        return target == null;
-    }
-
-    private boolean isNotSameClass(Class clazz) {
-        return clazz != this.getClass();
-    }
-
-    private boolean hasSameValue(DankaiIndex target) {
-        return target.value().equals(this.段階インデックス);
+    public RString getColumnValue() {
+        return theValue;
     }
 }

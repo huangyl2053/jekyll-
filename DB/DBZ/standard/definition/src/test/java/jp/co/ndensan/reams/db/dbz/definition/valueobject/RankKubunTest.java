@@ -23,14 +23,6 @@ public class RankKubunTest extends DbzTestBase {
     private static final RString ランク区分1 = new RString("010");
     private static final RString ランク区分2 = new RString("020");
 
-    public static class Constructor extends DbzTestBase {
-
-        @Test(expected = NullPointerException.class)
-        public void コンストラクタは_引数がnullのとき_NullPointerExceptionをスローする() {
-            RankKubun sut = new RankKubun((RString) null);
-        }
-    }
-
     @RunWith(Enclosed.class)
     public static class ValueAndComparable extends DbzTestBase {
 

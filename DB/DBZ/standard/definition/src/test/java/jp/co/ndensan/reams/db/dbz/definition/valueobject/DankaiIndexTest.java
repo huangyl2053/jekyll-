@@ -23,14 +23,6 @@ public class DankaiIndexTest extends DbzTestBase {
     private static final RString 段階インデックス1 = new RString("01");
     private static final RString 段階インデックス2 = new RString("02");
 
-    public static class Constructor extends DbzTestBase {
-
-        @Test(expected = NullPointerException.class)
-        public void コンストラクタは_引数がnullのとき_NullPointerExceptionをスローする() {
-            DankaiIndex sut = new DankaiIndex((RString) null);
-        }
-    }
-
     @RunWith(Enclosed.class)
     public static class ValueAndComparable extends DbzTestBase {
 

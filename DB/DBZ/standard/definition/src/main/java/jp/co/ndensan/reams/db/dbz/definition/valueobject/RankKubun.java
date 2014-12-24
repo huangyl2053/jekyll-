@@ -1,69 +1,82 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * ランク区分です。
  *
  * @author N8156 宮本 康
  */
-public class RankKubun implements IValueObject<RString>, Comparable<RankKubun> {
-
-    private final RString ランク区分;
+public final class RankKubun implements IValueObject<RString>, Comparable<RankKubun>, IDbColumnMappable {
 
     /**
-     * 指定の値をもったRankKubunを生成します。
-     *
-     * @param value ランク区分に相当するRString
-     * @throws NullPointerException 指定のRStringがnullのとき。
+     * 空の RankKubun です。{@link #value() value()}で{@link RString#EMPTY}を返します。
      */
-    public RankKubun(RString value) throws NullPointerException {
-        requireNonNull(value, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));
-        this.ランク区分 = value;
+    public static final RankKubun EMPTY;
+
+    static {
+        EMPTY = new RankKubun(RString.EMPTY);
+    }
+    private final RString theValue;
+
+    /**
+     * 指定の値をもった RankKubun を生成します。
+     *
+     * @param value 値
+     */
+    public RankKubun(String value) {
+        this.theValue = (value == null) ? null : new RString(value);
+    }
+
+    /**
+     * 指定の値をもった RankKubun を生成します。
+     *
+     * @param value 値
+     */
+    public RankKubun(RString value) {
+        this.theValue = value;
     }
 
     @Override
     public RString value() {
-        return this.ランク区分;
+        return this.theValue;
     }
 
     @Override
-    public boolean equals(Object target) {
-        if (isNull(target) || isNotSameClass(target.getClass())) {
+    public int compareTo(RankKubun o) {
+        return Objects.compare(this.theValue, o.theValue, Comparators.naturalOrder());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof RankKubun)) {
             return false;
         }
-        return hasSameValue((RankKubun) target);
+        RankKubun other = (RankKubun) obj;
+        return Objects.equals(this.theValue, other.theValue);
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.ランク区分);
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.theValue);
         return hash;
     }
 
     @Override
-    public int compareTo(RankKubun target) {
-        return this.ランク区分.compareTo(target.value());
-    }
-
-    private boolean isNull(Object target) {
-        return target == null;
-    }
-
-    private boolean isNotSameClass(Class clazz) {
-        return clazz != this.getClass();
-    }
-
-    private boolean hasSameValue(RankKubun target) {
-        return target.value().equals(this.ランク区分);
+    public RString getColumnValue() {
+        return theValue;
     }
 }
