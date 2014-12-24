@@ -31,7 +31,7 @@ public class FukaShokaiFinder {
      * @param 被保険者番号 被保険者番号
      * @return 全賦課履歴
      */
-    public IItemList<FukaModel> get全賦課履歴(HihokenshaNo 被保険者番号) {
+    public IItemList<FukaModel> load全賦課履歴(HihokenshaNo 被保険者番号) {
         return dac.select(被保険者番号);
     }
 
@@ -42,7 +42,7 @@ public class FukaShokaiFinder {
      * @param 賦課年度 賦課年度
      * @return 全賦課履歴
      */
-    public IItemList<FukaModel> get全賦課履歴(HihokenshaNo 被保険者番号, FlexibleYear 賦課年度) {
+    public IItemList<FukaModel> load全賦課履歴(HihokenshaNo 被保険者番号, FlexibleYear 賦課年度) {
         return dac.select(被保険者番号, 賦課年度);
     }
 }

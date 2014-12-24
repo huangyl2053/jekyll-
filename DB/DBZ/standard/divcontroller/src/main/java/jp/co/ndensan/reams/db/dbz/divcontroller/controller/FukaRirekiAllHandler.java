@@ -75,7 +75,7 @@ public class FukaRirekiAllHandler {
      * @return 表示件数
      */
     public int load(HihokenshaNo 被保険者番号) {
-        IItemList<FukaModel> modelList = fukaFinder.get全賦課履歴(被保険者番号);
+        IItemList<FukaModel> modelList = fukaFinder.load全賦課履歴(被保険者番号);
         PanelSessionAccessor.put(div, SESSION_NAME, ItemList.newItemList(modelList));
         return set全賦課履歴(modelList);
     }
@@ -88,7 +88,7 @@ public class FukaRirekiAllHandler {
      * @return 表示件数
      */
     public int load(HihokenshaNo 被保険者番号, FlexibleYear 賦課年度) {
-        IItemList<FukaModel> modelList = fukaFinder.get全賦課履歴(被保険者番号, 賦課年度);
+        IItemList<FukaModel> modelList = fukaFinder.load全賦課履歴(被保険者番号, 賦課年度);
         PanelSessionAccessor.put(div, SESSION_NAME, ItemList.newItemList(modelList));
         return set全賦課履歴(modelList);
     }

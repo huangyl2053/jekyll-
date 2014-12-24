@@ -132,8 +132,8 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
     private static FukaShokaiFinder createFukaFinder() {
         FukaShokaiFinder mock = mock(FukaShokaiFinder.class);
         IItemList<FukaModel> modelList = createFukaModelList();
-        when(mock.get全賦課履歴(any(HihokenshaNo.class))).thenReturn(modelList);
-        when(mock.get全賦課履歴(any(HihokenshaNo.class), any(FlexibleYear.class))).thenReturn(modelList);
+        when(mock.load全賦課履歴(any(HihokenshaNo.class))).thenReturn(modelList);
+        when(mock.load全賦課履歴(any(HihokenshaNo.class), any(FlexibleYear.class))).thenReturn(modelList);
         return mock;
     }
 
