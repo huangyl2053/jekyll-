@@ -87,7 +87,7 @@ public final class HihokenshaFinder {
             終了年度 = config.get当初年度();
         }
 
-        List<KeyValueDataSource> 賦課年度List = get賦課年度List(開始年度, 終了年度);
+        List<KeyValueDataSource> 賦課年度List = create賦課年度List(開始年度, 終了年度);
 
         if (menu.is賦課照会()) {
             賦課年度List.add(0, new KeyValueDataSource(FlexibleYear.MAX.toDateString(), 全年度));
@@ -96,7 +96,7 @@ public final class HihokenshaFinder {
         div.getKaigoFinder().getDdlFukaNendo().setDataSource(賦課年度List);
     }
 
-    private List<KeyValueDataSource> get賦課年度List(FlexibleYear 開始年度, FlexibleYear 終了年度) {
+    private List<KeyValueDataSource> create賦課年度List(FlexibleYear 開始年度, FlexibleYear 終了年度) {
 
         int start;
         int end;
