@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N8187 久保田 英男
  */
-public enum YokaigoJotaiKubun09 {
+public enum YokaigoJotaiKubun09 implements IYokaigoJotaiKubun {
 
     /**
      * 要介護状態が「非該当」であることを表します。<br />
@@ -77,13 +77,14 @@ public enum YokaigoJotaiKubun09 {
         this.code = new RString(code);
     }
 
-    /**
-     * RString型の台帳種別コードを返します。
-     *
-     * @return 台帳種別コード
-     */
+    @Override
     public RString getCode() {
         return code;
+    }
+
+    @Override
+    public RString getName() {
+        return new RString(name());
     }
 
     /**

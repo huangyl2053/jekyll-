@@ -8,12 +8,13 @@ package jp.co.ndensan.reams.db.dbz.business.config;
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysShikakushashoItakudaikoHyoji;
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者の表示有無;
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者表示終了文言;
-import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者表示開始文言;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoItakudaikoHyoji;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者の表示有無;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者表示終了文言;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者表示開始文言;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -24,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShikakushashoItakudaikoHyojiConfig {
 
-    private final Map<ConfigKeysShikakushashoItakudaikoHyoji, Integer> configs;
+    private final Map<ConfigKeysShikakushashoItakudaikoHyoji, RString> configs;
 
     /**
      * コンストラクタです。
@@ -42,12 +43,11 @@ public class ShikakushashoItakudaikoHyojiConfig {
         this.configs = createMap(businessConfig);
     }
 
-    private Map<ConfigKeysShikakushashoItakudaikoHyoji, Integer> createMap(IUrBusinessConfig businessConfig) {
-        Map<ConfigKeysShikakushashoItakudaikoHyoji, Integer> map = new EnumMap<>(ConfigKeysShikakushashoItakudaikoHyoji.class);
+    private Map<ConfigKeysShikakushashoItakudaikoHyoji, RString> createMap(IUrBusinessConfig businessConfig) {
+        Map<ConfigKeysShikakushashoItakudaikoHyoji, RString> map = new EnumMap<>(ConfigKeysShikakushashoItakudaikoHyoji.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysShikakushashoItakudaikoHyoji target : ConfigKeysShikakushashoItakudaikoHyoji.values()) {
-            Integer value = Integer.valueOf(businessConfig.get(target, nowDate).toString());
-            map.put(target, value);
+            map.put(target, businessConfig.get(target, nowDate, SubGyomuCode.DBD介護受給));
         }
         return Collections.unmodifiableMap(map);
     }

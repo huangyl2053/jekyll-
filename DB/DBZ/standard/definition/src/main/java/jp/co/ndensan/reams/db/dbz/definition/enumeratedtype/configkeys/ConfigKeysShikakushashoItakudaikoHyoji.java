@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
+package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys;
 
 /**
  * 資格者証証発行における委託代行事業者表示の業務コンフィグに対応した列挙型です。
