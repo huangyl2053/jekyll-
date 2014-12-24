@@ -55,7 +55,6 @@ public class ShuruiShikyuGendoGetConfig {
      * @return 種類支給限度額_取得方法
      */
     public RString get種類支給限度額_取得方法() {
-        return new RString(configs.get(種類支給限度額_取得方法).toString());
+        return configs.get(種類支給限度額_取得方法);
     }
-
 }

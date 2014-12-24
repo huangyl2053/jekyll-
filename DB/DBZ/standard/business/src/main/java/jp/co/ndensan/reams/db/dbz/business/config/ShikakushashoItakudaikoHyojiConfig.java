@@ -58,7 +58,7 @@ public class ShikakushashoItakudaikoHyojiConfig {
      * @return 資格者証表示方法_委託代行業者の表示有無
      */
     public RString get資格者証表示方法_委託代行業者の表示有無() {
-        return new RString(configs.get(資格者証表示方法_委託代行業者の表示有無).toString());
+        return configs.get(資格者証表示方法_委託代行業者の表示有無);
     }
 
     /**
@@ -67,7 +67,7 @@ public class ShikakushashoItakudaikoHyojiConfig {
      * @return 資格者証表示方法_委託代行業者表示開始文言
      */
     public RString get資格者証表示方法_委託代行業者表示開始文言() {
-        return new RString(configs.get(資格者証表示方法_委託代行業者表示開始文言).toString());
+        return configs.get(資格者証表示方法_委託代行業者表示開始文言);
     }
 
     /**
@@ -76,7 +76,7 @@ public class ShikakushashoItakudaikoHyojiConfig {
      * @return 資格者証表示方法_委託代行業者表示終了文言
      */
     public RString get資格者証表示方法_委託代行業者表示終了文言() {
-        return new RString(configs.get(資格者証表示方法_委託代行業者表示終了文言).toString());
+        return configs.get(資格者証表示方法_委託代行業者表示終了文言);
     }
 
 }

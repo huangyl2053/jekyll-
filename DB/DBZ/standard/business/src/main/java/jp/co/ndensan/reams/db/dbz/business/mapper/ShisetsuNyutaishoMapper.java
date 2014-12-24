@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
  *
  * @author N3317 塚田 萌
  */
+@Deprecated
 public final class ShisetsuNyutaishoMapper {
 
     /**
@@ -125,11 +126,7 @@ public final class ShisetsuNyutaishoMapper {
     }
 
     private static RString to2桁(int value) {
-        RStringBuilder builder = new RStringBuilder();
-        if (value < 10) {
-            builder.append("0");
-        }
-        return builder.append(value).toRString();
+        return new RString(String.format("%1$02d", value));
     }
 
     private static Range<FlexibleDate> create入所期間(DbT1004ShisetsuNyutaishoEntity entity) {

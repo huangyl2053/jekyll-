@@ -57,7 +57,7 @@ public class ShikakushashoKigenConfig {
      * @return 資格者証期限_有効期限加算値
      */
     public RString get資格者証期限_有効期限加算値() {
-        return new RString(configs.get(資格者証期限_有効期限加算値).toString());
+        return configs.get(資格者証期限_有効期限加算値);
     }
 
     /**
@@ -66,7 +66,6 @@ public class ShikakushashoKigenConfig {
      * @return 資格者証期限_有効期限初期表示
      */
     public RString get資格者証期限_有効期限初期表示() {
-        return new RString(configs.get(資格者証期限_有効期限初期表示).toString());
+        return configs.get(資格者証期限_有効期限初期表示);
     }
-
 }

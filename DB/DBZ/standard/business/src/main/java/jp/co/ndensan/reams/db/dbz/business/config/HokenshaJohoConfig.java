@@ -13,6 +13,10 @@ import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.Co
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_保険者構成;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_保険者番号;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_最優先地区コード;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TopPriorityArea;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.HokenshaName;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -23,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 保険者情報の業務コンフィグを取得するクラスです。
  *
  * @author N8187 久保田 英男
+ * @author N3327 三浦 凌
  */
 public class HokenshaJohoConfig {
 
@@ -59,7 +64,16 @@ public class HokenshaJohoConfig {
      * @return 保険者情報_保険者構成
      */
     public RString get保険者情報_保険者構成() {
-        return new RString(configs.get(保険者情報_保険者構成).toString());
+        return configs.get(保険者情報_保険者構成);
+    }
+
+    /**
+     * {@link HokenshaKosei 保険者構成}を返します。
+     *
+     * @return {@link HokenshaKosei 保険者構成}
+     */
+    public HokenshaKosei get保険者構成() {
+        return HokenshaKosei.toValue(configs.get(保険者情報_保険者構成));
     }
 
     /**
@@ -68,7 +82,16 @@ public class HokenshaJohoConfig {
      * @return 保険者情報_保険者番号
      */
     public RString get保険者情報_保険者番号() {
-        return new RString(configs.get(保険者情報_保険者番号).toString());
+        return configs.get(保険者情報_保険者番号);
+    }
+
+    /**
+     * {@link HokenshaNo 保険者番号}を返します。
+     *
+     * @return {@link HokenshaNo 保険者番号}
+     */
+    public HokenshaNo get保険者番号() {
+        return new HokenshaNo(configs.get(保険者情報_保険者番号));
     }
 
     /**
@@ -77,7 +100,16 @@ public class HokenshaJohoConfig {
      * @return 保険者情報_保険者名称
      */
     public RString get保険者情報_保険者名称() {
-        return new RString(configs.get(保険者情報_保険者名称).toString());
+        return configs.get(保険者情報_保険者名称);
+    }
+
+    /**
+     * {@link HokenshaName 保険者名}を返します。
+     *
+     * @return {@link HokenshaName 保険者名}
+     */
+    public HokenshaName get保険者名() {
+        return new HokenshaName(configs.get(保険者情報_保険者名称));
     }
 
     /**
@@ -86,7 +118,15 @@ public class HokenshaJohoConfig {
      * @return 保険者情報_最優先地区コード
      */
     public RString get保険者情報_最優先地区コード() {
-        return new RString(configs.get(保険者情報_最優先地区コード).toString());
+        return configs.get(保険者情報_最優先地区コード);
     }
 
+    /**
+     * {@link TopPriorityArea 最優先地区}を返します。
+     *
+     * @return {@link TopPriorityArea 最優先地区}
+     */
+    public TopPriorityArea get最優先地区() {
+        return TopPriorityArea.toValue(configs.get(保険者情報_最優先地区コード));
+    }
 }
