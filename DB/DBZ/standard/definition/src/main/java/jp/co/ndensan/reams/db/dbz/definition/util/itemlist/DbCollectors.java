@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.util.itemlist;
 
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -34,8 +33,8 @@ public final class DbCollectors {
      */
     public static <T, K, V> IDbCollector<T, ?, Map<K, V>> toMap(
             final IFunction<? super T, ? extends K> keyMapper, final IFunction<? super T, ? extends V> valueMapper) {
-        Objects.requireNonNull(keyMapper, UrSystemErrorMessages.値がnull.getReplacedMessage("keyMapper"));
-        Objects.requireNonNull(valueMapper, UrSystemErrorMessages.値がnull.getReplacedMessage("valueMapper"));
+        _requireNonNull(keyMapper, "keyMapper");
+        _requireNonNull(valueMapper, "valueMapper");
         ISupplier<Map<K, V>> container = new ISupplier<Map<K, V>>() {
             @Override
             public Map<K, V> get() {
@@ -51,56 +50,7 @@ public final class DbCollectors {
         return DbCollector.of(container, accumulator);
     }
 
-    /**
-     *
-     * @param <T>
-     * @param <K>
-     * @param keyMapper
-     * @return
-     */
-    public static <T, K> IDbCollector<T, ?, Map<K, IItemList<T>>> groupingBy(final IFunction<T, K> keyMapper) {
-        return groupingBy(keyMapper, null);
-    }
-
-    /**
-     *
-     * @param <T>
-     * @param <K>
-     * @param keyMapper
-     * @param comparator
-     * @return
-     */
-    public static <T, K> IDbCollector<T, ?, Map<K, IItemList<T>>> groupingBy(final IFunction<T, K> keyMapper, final Comparator<? super T> comparator) {
-        Objects.requireNonNull(keyMapper, UrSystemErrorMessages.値がnull.getReplacedMessage("keyMapper"));
-        ISupplier<Map<K, IItemList<T>>> container = new ISupplier<Map<K, IItemList<T>>>() {
-            @Override
-            public Map<K, IItemList<T>> get() {
-                return new HashMap<>();
-            }
-        };
-        IBiConsumer<Map<K, IItemList<T>>, T> accumulator = new IBiConsumer<Map<K, IItemList<T>>, T>() {
-            @Override
-            public void accept(Map<K, IItemList<T>> t, T u) {
-                K key = keyMapper.apply(u);
-                if (!t.containsKey(key)) {
-                    t.put(key, ItemList.<T>empty());
-                }
-                t.put(key, t.get(key).added(u));
-            }
-        };
-        if (comparator == null) {
-            return DbCollector.of(container, accumulator);
-        }
-        IFunction<Map<K, IItemList<T>>, Map<K, IItemList<T>>> finisher = new IFunction<Map<K, IItemList<T>>, Map<K, IItemList<T>>>() {
-            @Override
-            public Map<K, IItemList<T>> apply(Map<K, IItemList<T>> t) {
-                Map<K, IItemList<T>> map = new HashMap<>();
-                for (Map.Entry<K, IItemList<T>> entry : t.entrySet()) {
-                    map.put(entry.getKey(), entry.getValue().sorted(comparator));
-                }
-                return map;
-            }
-        };
-        return DbCollector.of(container, accumulator, finisher);
+    private static void _requireNonNull(Object target, String name) {
+        Objects.requireNonNull(target, UrSystemErrorMessages.値がnull.getReplacedMessage(name));
     }
 }

@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.definition.util.itemlist;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IBiConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
-import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.Test;
@@ -54,41 +53,36 @@ public class DbCollectorsTest extends DbzTestBase {
         }
 
         @Test
-        public void testToMap() {
-            assertThat(result, isA(IDbCollector.class));
-        }
-
-        @Test
-        public void testA() {
+        public void toMapで生成したIDbCollectorは_containerで_Mapを生成する() {
             assertThat(result.container().get(), is(instanceOf(Map.class)));
         }
 
         @Test
-        public void testB() {
+        public void toMapで生成したIDbCollectorは_accumulatorは_toMapの引数のkeyMapperが生成するkeyで_valueMapperにより生成したvalueを_Mapへ格納する() {
             Map<Integer, String> container = (Map<Integer, String>) result.container().get();
             Sample1 item = new Sample1(100, "value");
             ((IBiConsumer<Map<Integer, String>, Sample1>) result.accumulator()).accept(
                     container, item);
             assertThat(container.get(keyMapper.apply(item)), is(valueMapper.apply(item)));
         }
+    }
 
-        private static class Sample1 {
+    private static class Sample1 {
 
-            private final int key;
-            private final String value;
+        private final int key;
+        private final String value;
 
-            public Sample1(int key, String value) {
-                this.key = key;
-                this.value = value;
-            }
+        public Sample1(int key, String value) {
+            this.key = key;
+            this.value = value;
+        }
 
-            int getKey() {
-                return key;
-            }
+        int getKey() {
+            return key;
+        }
 
-            String getValue() {
-                return value;
-            }
+        String getValue() {
+            return value;
         }
     }
 }
