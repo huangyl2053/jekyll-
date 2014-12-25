@@ -60,27 +60,27 @@ public class FukaRirekiTest {
         }
     }
 
-    public static class getグループ化前賦課履歴 extends DbzTestBase {
+    public static class get賦課履歴All extends DbzTestBase {
 
         @Test
-        public void 賦課履歴明細がある時_getグループ化前賦課履歴は_全賦課履歴明細を返す() {
+        public void 賦課履歴明細がある時_get賦課履歴Allは_全賦課履歴明細を返す() {
             sut = new FukaRireki(createFukaModelList());
-            assertThat(sut.getグループ化前賦課履歴().size(), is(8));
+            assertThat(sut.get賦課履歴All().size(), is(8));
         }
     }
 
-    public static class getグループ化前賦課履歴_条件指定 extends DbzTestBase {
+    public static class get賦課履歴 extends DbzTestBase {
 
         @Test
-        public void 条件に該当する賦課履歴明細がある時_getグループ化前賦課履歴は_該当の賦課履歴明細を返す() {
+        public void 条件に該当する賦課履歴明細がある時_get賦課履歴は_該当の賦課履歴明細を返す() {
             sut = new FukaRireki(createFukaModelList());
-            assertThat(sut.getグループ化前賦課履歴(new FlexibleYear("2001"), new FlexibleYear("2002"), new TsuchishoNo("0000000003")).size(), is(2));
+            assertThat(sut.get賦課履歴(new FlexibleYear("2001"), new FlexibleYear("2002"), new TsuchishoNo("0000000003")).size(), is(2));
         }
 
         @Test
-        public void 条件に該当する賦課履歴明細がない時_getグループ化前賦課履歴は_emptyを返す() {
+        public void 条件に該当する賦課履歴明細がない時_get賦課履歴は_emptyを返す() {
             sut = new FukaRireki(createFukaModelList());
-            assertThat(sut.getグループ化前賦課履歴(FlexibleYear.MAX, FlexibleYear.MIN, TsuchishoNo.EMPTY).isEmpty(), is(true));
+            assertThat(sut.get賦課履歴(FlexibleYear.MAX, FlexibleYear.MIN, TsuchishoNo.EMPTY).isEmpty(), is(true));
         }
     }
 

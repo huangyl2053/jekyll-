@@ -122,7 +122,7 @@ public class FukaRirekiAllHandler {
             FlexibleYear 賦課年度 = new FlexibleYear(row.getFukaNendo());
             FlexibleYear 調定年度 = new FlexibleYear(row.getChoteiNendo());
             TsuchishoNo 通知書番号 = new TsuchishoNo(row.getTsuchishoNo());
-            return new FukaRireki(賦課履歴.getグループ化前賦課履歴(賦課年度, 調定年度, 通知書番号).asList());
+            return new FukaRireki(賦課履歴.get賦課履歴(賦課年度, 調定年度, 通知書番号).asList());
         }
     }
 

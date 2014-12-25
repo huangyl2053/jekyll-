@@ -75,7 +75,7 @@ public class FukaRireki {
      *
      * @return グループ化する前の全賦課履歴
      */
-    public IItemList<FukaModel> getグループ化前賦課履歴() {
+    public IItemList<FukaModel> get賦課履歴All() {
         return sort(賦課履歴明細);
     }
 
@@ -87,7 +87,7 @@ public class FukaRireki {
      * @param 通知書番号 通知書番号
      * @return グループ化する前の条件に該当する賦課履歴
      */
-    public IItemList<FukaModel> getグループ化前賦課履歴(FlexibleYear 賦課年度, FlexibleYear 調定年度, TsuchishoNo 通知書番号) {
+    public IItemList<FukaModel> get賦課履歴(FlexibleYear 賦課年度, FlexibleYear 調定年度, TsuchishoNo 通知書番号) {
         List<FukaModel> list = new ArrayList<>();
         for (FukaModel model : 賦課履歴明細) {
             if (model.get賦課年度().equals(賦課年度) && model.get調定年度().equals(調定年度) && model.get通知書番号().equals(通知書番号)) {
