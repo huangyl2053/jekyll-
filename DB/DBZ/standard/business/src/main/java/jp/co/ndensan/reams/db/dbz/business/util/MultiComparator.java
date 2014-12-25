@@ -15,6 +15,7 @@ import java.util.List;
  * @author N3327 三浦 凌
  * @param <T> 複数のcomparatorを適用する対象のオブジェクト
  */
+@Deprecated
 public class MultiComparator<T> implements Comparator<T> {
 
     private final List<Comparator<? super T>> comparatorList = new ArrayList<>();

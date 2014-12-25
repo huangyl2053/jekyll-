@@ -27,5 +27,4 @@ public interface IYokaigoJotaiKubun {
      * @return 名称
      */
     RString getName();
-
 }

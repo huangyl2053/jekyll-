@@ -58,7 +58,7 @@ public class HihokenshashoItakudaikoHyojiConfig {
      * @return 被保険者証表示方法_委託代行業者_表示有無
      */
     public RString get被保険者証表示方法_委託代行業者_表示有無() {
-        return new RString(configs.get(被保険者証表示方法_委託代行業者_表示有無).toString());
+        return configs.get(被保険者証表示方法_委託代行業者_表示有無);
     }
 
     /**
@@ -67,7 +67,7 @@ public class HihokenshashoItakudaikoHyojiConfig {
      * @return 被保険者証表示方法_委託代行業者_表示開始文言
      */
     public RString get被保険者証表示方法_委託代行業者_表示開始文言() {
-        return new RString(configs.get(被保険者証表示方法_委託代行業者_表示開始文言).toString());
+        return configs.get(被保険者証表示方法_委託代行業者_表示開始文言);
     }
 
     /**
@@ -76,7 +76,6 @@ public class HihokenshashoItakudaikoHyojiConfig {
      * @return 被保険者証表示方法_委託代行業者_表示終了文言
      */
     public RString get被保険者証表示方法_委託代行業者_表示終了文言() {
-        return new RString(configs.get(被保険者証表示方法_委託代行業者_表示終了文言).toString());
+        return configs.get(被保険者証表示方法_委託代行業者_表示終了文言);
     }
-
 }

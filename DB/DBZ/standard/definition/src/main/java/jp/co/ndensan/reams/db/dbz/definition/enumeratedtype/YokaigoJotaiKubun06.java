@@ -77,9 +77,11 @@ public enum YokaigoJotaiKubun06 implements IYokaigoJotaiKubun {
     なし("99");
 
     private final RString code;
+    private final RString theName;
 
     private YokaigoJotaiKubun06(String code) {
         this.code = new RString(code);
+        this.theName = new RString(name());
     }
 
     @Override
@@ -89,7 +91,7 @@ public enum YokaigoJotaiKubun06 implements IYokaigoJotaiKubun {
 
     @Override
     public RString getName() {
-        return new RString(name());
+        return theName;
     }
 
     /**
@@ -106,5 +108,4 @@ public enum YokaigoJotaiKubun06 implements IYokaigoJotaiKubun {
         }
         throw new IllegalArgumentException(DbzErrorMessages.データが存在しない.getMessage().toString());
     }
-
 }

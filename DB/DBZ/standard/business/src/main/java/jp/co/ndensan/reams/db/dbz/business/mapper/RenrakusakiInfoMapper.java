@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5050RenrakusakiJohoEntity;
  *
  * @author n9606 漢那 憲作
  */
+@Deprecated
 public final class RenrakusakiInfoMapper {
 
     /**
@@ -28,8 +29,7 @@ public final class RenrakusakiInfoMapper {
      * @param entity 連絡先情報Entity
      * @return 連絡先情報データ
      */
-    public static KaigoRenrakusaki toRenrakusakiInfo(
-            DbT5050RenrakusakiJohoEntity entity) throws NullPointerException {
+    public static KaigoRenrakusaki toRenrakusakiInfo(DbT5050RenrakusakiJohoEntity entity) {
 
         if (entity == null) {
             return null;

@@ -67,7 +67,7 @@ public class ShiharaiHohoHenkoConfig {
      * @return 支払方法変更_証表示支払方法_終了分記載区分
      */
     public RString get支払方法変更_証表示支払方法_終了分記載区分() {
-        return new RString(configs.get(支払方法変更_証表示支払方法_終了分記載区分).toString());
+        return configs.get(支払方法変更_証表示支払方法_終了分記載区分);
     }
 
     /**
@@ -76,7 +76,7 @@ public class ShiharaiHohoHenkoConfig {
      * @return 支払方法変更_証表示支払方法_記載文言
      */
     public RString get支払方法変更_証表示支払方法_記載文言() {
-        return new RString(configs.get(支払方法変更_証表示支払方法_記載文言).toString());
+        return configs.get(支払方法変更_証表示支払方法_記載文言);
     }
 
     /**
@@ -85,7 +85,7 @@ public class ShiharaiHohoHenkoConfig {
      * @return 支払方法変更_証表示差止_終了分記載区分
      */
     public RString get支払方法変更_証表示差止_終了分記載区分() {
-        return new RString(configs.get(支払方法変更_証表示差止_終了分記載区分).toString());
+        return configs.get(支払方法変更_証表示差止_終了分記載区分);
     }
 
     /**
@@ -94,7 +94,7 @@ public class ShiharaiHohoHenkoConfig {
      * @return 支払方法変更_証表示差止_記載文言
      */
     public RString get支払方法変更_証表示差止_記載文言() {
-        return new RString(configs.get(支払方法変更_証表示差止_記載文言).toString());
+        return configs.get(支払方法変更_証表示差止_記載文言);
     }
 
     /**
@@ -103,7 +103,7 @@ public class ShiharaiHohoHenkoConfig {
      * @return 支払方法変更_証表示減額_終了分記載区分
      */
     public RString get支払方法変更_証表示減額_終了分記載区分() {
-        return new RString(configs.get(支払方法変更_証表示減額_終了分記載区分).toString());
+        return configs.get(支払方法変更_証表示減額_終了分記載区分);
     }
 
     /**
@@ -112,7 +112,7 @@ public class ShiharaiHohoHenkoConfig {
      * @return 支払方法変更_証表示減額_記載文言
      */
     public RString get支払方法変更_証表示減額_記載文言() {
-        return new RString(configs.get(支払方法変更_証表示減額_記載文言).toString());
+        return configs.get(支払方法変更_証表示減額_記載文言);
     }
 
     /**
@@ -121,7 +121,7 @@ public class ShiharaiHohoHenkoConfig {
      * @return 支払方法変更_資格者証表示支払方法_終了分記載区分
      */
     public RString get支払方法変更_資格者証表示支払方法_終了分記載区分() {
-        return new RString(configs.get(支払方法変更_資格者証表示支払方法_終了分記載区分).toString());
+        return configs.get(支払方法変更_資格者証表示支払方法_終了分記載区分);
     }
 
     /**
@@ -130,7 +130,7 @@ public class ShiharaiHohoHenkoConfig {
      * @return 支払方法変更_資格者証表示支払方法_記載文言
      */
     public RString get支払方法変更_資格者証表示支払方法_記載文言() {
-        return new RString(configs.get(支払方法変更_資格者証表示支払方法_記載文言).toString());
+        return configs.get(支払方法変更_資格者証表示支払方法_記載文言);
     }
 
     /**
@@ -139,7 +139,7 @@ public class ShiharaiHohoHenkoConfig {
      * @return 支払方法変更_資格者証表示差止_終了分記載区分
      */
     public RString get支払方法変更_資格者証表示差止_終了分記載区分() {
-        return new RString(configs.get(支払方法変更_資格者証表示差止_終了分記載区分).toString());
+        return configs.get(支払方法変更_資格者証表示差止_終了分記載区分);
     }
 
     /**
@@ -148,7 +148,7 @@ public class ShiharaiHohoHenkoConfig {
      * @return 支払方法変更_資格者証表示差止_記載文言
      */
     public RString get支払方法変更_資格者証表示差止_記載文言() {
-        return new RString(configs.get(支払方法変更_資格者証表示差止_記載文言).toString());
+        return configs.get(支払方法変更_資格者証表示差止_記載文言);
     }
 
     /**
@@ -157,7 +157,7 @@ public class ShiharaiHohoHenkoConfig {
      * @return 支払方法変更_資格者証表示減額_終了分記載区分
      */
     public RString get支払方法変更_資格者証表示減額_終了分記載区分() {
-        return new RString(configs.get(支払方法変更_資格者証表示減額_終了分記載区分).toString());
+        return configs.get(支払方法変更_資格者証表示減額_終了分記載区分);
     }
 
     /**
@@ -166,7 +166,6 @@ public class ShiharaiHohoHenkoConfig {
      * @return 支払方法変更_資格者証表示減額_記載文言
      */
     public RString get支払方法変更_資格者証表示減額_記載文言() {
-        return new RString(configs.get(支払方法変更_資格者証表示減額_記載文言).toString());
+        return configs.get(支払方法変更_資格者証表示減額_記載文言);
     }
-
 }

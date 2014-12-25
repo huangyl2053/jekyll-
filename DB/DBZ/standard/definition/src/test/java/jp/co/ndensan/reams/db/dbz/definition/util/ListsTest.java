@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util;
+package jp.co.ndensan.reams.db.dbz.definition.util;
 
+import jp.co.ndensan.reams.db.dbz.definition.util.Lists;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
