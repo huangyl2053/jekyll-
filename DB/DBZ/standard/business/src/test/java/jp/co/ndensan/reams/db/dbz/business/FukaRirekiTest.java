@@ -44,19 +44,19 @@ public class FukaRirekiTest {
         public void 賦課履歴明細がある時_getグループ化賦課履歴は_賦課年度_調定年度_通知書番号でグループ化する() {
             sut = new FukaRireki(createFukaModelList());
             assertThat(sut.getグループ化賦課履歴().size(), is(4));
-            assertThat(sut.getグループ化賦課履歴().asList().get(0).get処理日時(), is(RDateTime.MIN.plusHours(2)));
-            assertThat(sut.getグループ化賦課履歴().asList().get(3).get処理日時(), is(RDateTime.MIN.plusHours(2)));
+            assertThat(sut.getグループ化賦課履歴().toList().get(0).get処理日時(), is(RDateTime.MIN.plusHours(2)));
+            assertThat(sut.getグループ化賦課履歴().toList().get(3).get処理日時(), is(RDateTime.MIN.plusHours(2)));
         }
 
         @Test
         public void 賦課履歴明細がある時_getグループ化賦課履歴は_賦課年度の降順_調定年度の降順_通知書番号の降順でソートする() {
             sut = new FukaRireki(createFukaModelList());
-            assertThat(sut.getグループ化賦課履歴().asList().get(0).get賦課年度(), is(new FlexibleYear("2001")));
-            assertThat(sut.getグループ化賦課履歴().asList().get(0).get調定年度(), is(new FlexibleYear("2002")));
-            assertThat(sut.getグループ化賦課履歴().asList().get(0).get通知書番号(), is(new TsuchishoNo("0000000003")));
-            assertThat(sut.getグループ化賦課履歴().asList().get(3).get賦課年度(), is(new FlexibleYear("2000")));
-            assertThat(sut.getグループ化賦課履歴().asList().get(3).get調定年度(), is(new FlexibleYear("2000")));
-            assertThat(sut.getグループ化賦課履歴().asList().get(3).get通知書番号(), is(new TsuchishoNo("0000000000")));
+            assertThat(sut.getグループ化賦課履歴().toList().get(0).get賦課年度(), is(new FlexibleYear("2001")));
+            assertThat(sut.getグループ化賦課履歴().toList().get(0).get調定年度(), is(new FlexibleYear("2002")));
+            assertThat(sut.getグループ化賦課履歴().toList().get(0).get通知書番号(), is(new TsuchishoNo("0000000003")));
+            assertThat(sut.getグループ化賦課履歴().toList().get(3).get賦課年度(), is(new FlexibleYear("2000")));
+            assertThat(sut.getグループ化賦課履歴().toList().get(3).get調定年度(), is(new FlexibleYear("2000")));
+            assertThat(sut.getグループ化賦課履歴().toList().get(3).get通知書番号(), is(new TsuchishoNo("0000000000")));
         }
     }
 

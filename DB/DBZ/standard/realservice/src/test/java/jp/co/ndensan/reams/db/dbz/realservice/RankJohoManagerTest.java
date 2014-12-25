@@ -78,8 +78,8 @@ public class RankJohoManagerTest {
             IItemList<RankJohoModel> ランク情報リスト = sut.getランク情報一覧(賦課年度1);
 
             assertThat(ランク情報リスト.size(), is(2));
-            assertThat(ランク情報リスト.asList().get(0).getランク区分(), is(ランク区分1));
-            assertThat(ランク情報リスト.asList().get(1).getランク区分(), is(ランク区分2));
+            assertThat(ランク情報リスト.toList().get(0).getランク区分(), is(ランク区分1));
+            assertThat(ランク情報リスト.toList().get(1).getランク区分(), is(ランク区分2));
         }
     }
 

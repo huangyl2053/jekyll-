@@ -99,8 +99,8 @@ public class HokenryoDankaiManagerTest {
             sut = createManager(ランク有り);
             IItemList<HokenryoDankaiModel> 保険料段階リスト = sut.get保険料段階一覧(賦課年度1);
             assertThat(保険料段階リスト.size(), is(2));
-            assertThat(保険料段階リスト.asList().get(0).get段階インデックス(), is(段階インデックス1));
-            assertThat(保険料段階リスト.asList().get(1).get段階インデックス(), is(段階インデックス2));
+            assertThat(保険料段階リスト.toList().get(0).get段階インデックス(), is(段階インデックス1));
+            assertThat(保険料段階リスト.toList().get(1).get段階インデックス(), is(段階インデックス2));
         }
     }
 

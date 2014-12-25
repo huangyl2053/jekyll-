@@ -77,8 +77,8 @@ public class HokenryoRankManagerTest {
             IItemList<HokenryoRankModel> 保険料ランクリスト = sut.get保険料ランク一覧(賦課年度1);
 
             assertThat(保険料ランクリスト.size(), is(2));
-            assertThat(保険料ランクリスト.asList().get(0).get市町村コード(), is(市町村コード1));
-            assertThat(保険料ランクリスト.asList().get(1).get市町村コード(), is(市町村コード2));
+            assertThat(保険料ランクリスト.toList().get(0).get市町村コード(), is(市町村コード1));
+            assertThat(保険料ランクリスト.toList().get(1).get市町村コード(), is(市町村コード2));
         }
     }
 

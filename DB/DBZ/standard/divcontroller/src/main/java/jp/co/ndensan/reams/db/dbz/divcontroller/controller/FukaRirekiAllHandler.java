@@ -113,7 +113,7 @@ public class FukaRirekiAllHandler {
      * @return 賦課履歴
      */
     public FukaRireki get賦課履歴() {
-        FukaRireki 賦課履歴 = new FukaRireki(PanelSessionAccessor.get(div, SESSION_NAME, ItemList.class).asList());
+        FukaRireki 賦課履歴 = new FukaRireki(PanelSessionAccessor.get(div, SESSION_NAME, ItemList.class).toList());
         List<dgFukaRirekiAll_Row> rowList = div.getDgFukaRirekiAll().getSelectedItems();
         if (rowList.isEmpty()) {
             return 賦課履歴;
@@ -122,14 +122,14 @@ public class FukaRirekiAllHandler {
             FlexibleYear 賦課年度 = new FlexibleYear(row.getFukaNendo());
             FlexibleYear 調定年度 = new FlexibleYear(row.getChoteiNendo());
             TsuchishoNo 通知書番号 = new TsuchishoNo(row.getTsuchishoNo());
-            return new FukaRireki(賦課履歴.get賦課履歴(賦課年度, 調定年度, 通知書番号).asList());
+            return new FukaRireki(賦課履歴.get賦課履歴(賦課年度, 調定年度, 通知書番号).toList());
         }
     }
 
     private int set全賦課履歴(IItemList<FukaModel> modelList) {
 
         List<dgFukaRirekiAll_Row> rowList = new ArrayList<>();
-        for (FukaModel model : new FukaRireki(modelList.asList()).getグループ化賦課履歴()) {
+        for (FukaModel model : new FukaRireki(modelList.toList()).getグループ化賦課履歴()) {
 
             // TODO N8156 宮本 康 テーブルに市町村コードが追加され次第、modelから取得するように変更する
             IOptional<HokenryoDankai> 保険料段階 = dankaiManager.get保険料段階(model.get賦課年度(), LasdecCode.EMPTY, model.get保険料段階());

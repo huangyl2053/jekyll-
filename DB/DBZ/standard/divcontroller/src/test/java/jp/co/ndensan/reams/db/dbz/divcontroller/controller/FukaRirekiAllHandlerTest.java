@@ -112,14 +112,14 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
         public void 行が選択されていない時_get賦課履歴は_全賦課履歴を返す() {
             sut.load(HihokenshaNo.EMPTY);
             assertThat(sut.get賦課履歴().get賦課履歴All().size(), is(2));
-            assertThat(sut.get賦課履歴().get賦課履歴All().asList().get(0).get賦課年度(), is(賦課年度2));
+            assertThat(sut.get賦課履歴().get賦課履歴All().toList().get(0).get賦課年度(), is(賦課年度2));
         }
 
         @Test
         public void 行が選択されている時_get賦課履歴は_選択行の賦課履歴を返す() {
             sut.reload(HihokenshaNo.EMPTY, 賦課年度1, 調定年度1, 通知書番号1);
             assertThat(sut.get賦課履歴().get賦課履歴All().size(), is(1));
-            assertThat(sut.get賦課履歴().get賦課履歴All().asList().get(0).get賦課年度(), is(賦課年度1));
+            assertThat(sut.get賦課履歴().get賦課履歴All().toList().get(0).get賦課年度(), is(賦課年度1));
         }
     }
 
