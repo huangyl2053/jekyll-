@@ -16,6 +16,10 @@
     <dependencies>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzTestHelper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzDivController</artifactId>
             <classifier>classes</classifier>
         </dependency>

@@ -1,0 +1,12 @@
+﻿jigyoshoNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,A
+hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+moshitateYMD,UDD015YMD,FlexibleDate,,,,,A
+moshitateshaKubunCode,varchar,RString,,,,,A
+shokisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,A
+moshitateJiyuCode,varchar,RString,,,,,A
+kokuhorenSofuYM,UDD014YM,FlexibleYearMonth,,,,,A
+kokuhirenSaiSofuAriFlag,bool,boolean,,,,,A
+dogetsuShinsaAriFlag,bool,boolean,,,,,A
+moshitateshoKubunCode,varchar,RString,,,,,A

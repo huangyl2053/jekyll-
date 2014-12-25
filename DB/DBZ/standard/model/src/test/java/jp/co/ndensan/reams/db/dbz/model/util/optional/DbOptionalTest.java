@@ -5,10 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.util.optional;
 
-import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
-import jp.co.ndensan.reams.db.dbz.model.util.function.ISupplier;
-import jp.co.ndensan.reams.db.dbz.model.util.function.ExceptionSuppliers;
-import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
+import java.util.NoSuchElementException;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.ExceptionSuppliers;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -242,7 +243,7 @@ public class DbOptionalTest {
 
         @Before
         public void setUp() {
-            exceptionSupplier = ExceptionSuppliers.nullPointerException().withMessage("test");
+            exceptionSupplier = ExceptionSuppliers.nullPointerException("test");
         }
 
         @Test(expected = NullPointerException.class)
@@ -259,66 +260,6 @@ public class DbOptionalTest {
         }
     }
 
-    public static class map extends DbzTestBase {
-
-        private IOptional<RString> sut;
-        private IOptional<String> mapped;
-        private RString input;
-
-        private IFunction<RString, String> createMapper() {
-            return new IFunction<RString, String>() {
-                @Override
-                public String apply(RString t) {
-                    return t.toString();
-                }
-            };
-        }
-
-        @Test
-        public void map_の戻り値は_保持する値が引数のIFuntionにより変換された結果を_持つ() {
-            sut = DbOptional.of(new RString("input"));
-            mapped = sut.map(createMapper());
-            assertThat(mapped.get(), is(createMapper().apply(sut.get())));
-        }
-
-        @Test
-        public void map_の戻り値は_emptyの時_emptyである() {
-            sut = DbOptional.empty();
-            mapped = sut.map(createMapper());
-            assertThat(mapped.isPresent(), is(false));
-        }
-    }
-
-    public static class flatMap extends DbzTestBase {
-
-        private IOptional<RString> sut;
-        private IOptional<String> mapped;
-        private RString input;
-
-        private IFunction<RString, IOptional<String>> createMapper() {
-            return new IFunction<RString, IOptional<String>>() {
-                @Override
-                public IOptional<String> apply(RString t) {
-                    return DbOptional.of(t.toString());
-                }
-            };
-        }
-
-        @Test
-        public void flatMap_の戻り値は_保持する値を引数のIFuntionにより変換した値をもつ_IOptionalである() {
-            sut = DbOptional.of(new RString("input"));
-            mapped = sut.flatMap(createMapper());
-            assertThat(mapped.get(), is(createMapper().apply(sut.get()).get()));
-        }
-
-        @Test
-        public void flatMap_の戻り値は_emptyの時_emptyである() {
-            sut = DbOptional.empty();
-            mapped = sut.flatMap(createMapper());
-            assertThat(mapped.isPresent(), is(false));
-        }
-    }
-
     public static class filter extends DbzTestBase {
 
         private String value;
@@ -332,9 +273,9 @@ public class DbOptionalTest {
 
         @Test
         public void filterは_引数のIConditon$checkに対して_自身が保持する値を渡すと_trueが返る時_空でないIOptionalを返す() {
-            assertThat(sut.filter(new ICondition<String>() {
+            assertThat(sut.filter(new IPredicate<String>() {
                 @Override
-                public boolean check(String t) {
+                public boolean evaluate(String t) {
                     return true;
                 }
             }).isPresent(), is(true));
@@ -342,9 +283,9 @@ public class DbOptionalTest {
 
         @Test
         public void filterは_引数のIConditon$checkに対して_自身が保持する値を渡すと_falseが返る時_空のIOptionalを返す() {
-            assertThat(sut.filter(new ICondition<String>() {
+            assertThat(sut.filter(new IPredicate<String>() {
                 @Override
-                public boolean check(String t) {
+                public boolean evaluate(String t) {
                     return false;
                 }
             }).isPresent(), is(false));
@@ -352,15 +293,15 @@ public class DbOptionalTest {
 
         @Test
         public void filterは_自身が値を保持していないとき_引数のIConditionにかかわらず_空のIOptionalを返す() {
-            assertThat(DbOptional.<String>empty().filter(new ICondition<String>() {
+            assertThat(DbOptional.<String>empty().filter(new IPredicate<String>() {
                 @Override
-                public boolean check(String t) {
+                public boolean evaluate(String t) {
                     return true;
                 }
             }).isPresent(), is(false));
-            assertThat(DbOptional.<String>empty().filter(new ICondition<String>() {
+            assertThat(DbOptional.<String>empty().filter(new IPredicate<String>() {
                 @Override
-                public boolean check(String t) {
+                public boolean evaluate(String t) {
                     return false;
                 }
             }).isPresent(), is(false));

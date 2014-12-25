@@ -1,0 +1,15 @@
+﻿toriatsukaiYM,UDD014YM,FlexibleYearMonth,,,,,A
+hokenshaKubun,varchar,RString,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+kaigoKyufuhiKensu,int4,int,,,,,A
+kaigoKyufuhiTanisu,numeric,Decimal,,,,,A
+kaigoKyufuhiFutangaku,numeric,Decimal,,,,,A
+kogakuServicehiKensu,int4,int,,,,,A
+kogakuServicehiTanisu,numeric,Decimal,,,,,A
+kogakuServicehiFutangaku,numeric,Decimal,,,,,A
+tokuteiNyushoshaServicehiKensu,int4,int,,,,,A
+tokuteiNyushoshaServicehiTanisu,numeric,Decimal,,,,,A
+tokuteiNyushoshaServicehiFutangaku,numeric,Decimal,,,,,A
+kohiFutanshaNo,varchar,RString,,,,,A
+sakuseiYMD,UDD015YMD,FlexibleDate,,,,,A
+torikomiYM,UDD014YM,FlexibleYearMonth,,,,,A
