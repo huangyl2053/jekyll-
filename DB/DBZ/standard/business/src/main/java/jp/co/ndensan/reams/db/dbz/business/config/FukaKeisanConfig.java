@@ -16,7 +16,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
-// TODO N8156 宮本 康 別ブランチで対応中。マージ時にメソッドを追加する。
+/**
+ * 賦課計算のコンフィグを取得するクラスです。
+ *
+ * @author N8156 宮本 康
+ */
 public class FukaKeisanConfig {
 
     private final Map<ConfigKeysFukaKeisan, RString> configs;
@@ -111,5 +115,14 @@ public class FukaKeisanConfig {
     public FlexibleYear getランク終了年度() {
         RString value = get(ConfigKeysFukaKeisan.ランク管理情報_ランク終了年度);
         return !value.isEmpty() ? new FlexibleYear(value) : FlexibleYear.MAX;
+    }
+
+    /**
+     * ランク管理情報_納期統一年度を返します。
+     *
+     * @return ランク管理情報_納期統一年度
+     */
+    public RString get納期統一年度() {
+        return get(ConfigKeysFukaKeisan.ランク管理情報_納期統一年度);
     }
 }

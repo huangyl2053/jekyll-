@@ -80,7 +80,7 @@ public class KiwarigakuCalculatorTest {
 
     private static KiwarigakuMeisai createKiwarigakuModel(ChoshuHohoKibetsu 徴収方法, int 調定額, int 収入額) {
         KibetsuModel kibetsuModel = mock(KibetsuModel.class);
-        when(kibetsuModel.get徴収方法()).thenReturn(徴収方法.getCode());
+        when(kibetsuModel.get徴収方法()).thenReturn(徴収方法);
 
         ChoteiKyotsuModel choteiKyotsuModel = mock(ChoteiKyotsuModel.class);
         when(choteiKyotsuModel.get調定額()).thenReturn(new Decimal(調定額));

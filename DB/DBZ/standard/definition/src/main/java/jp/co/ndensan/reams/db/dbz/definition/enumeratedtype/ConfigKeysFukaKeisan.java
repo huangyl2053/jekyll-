@@ -5,7 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
-// TODO N8156 宮本 康 別ブランチで対応中。マージ時に項目を追加する。
+/**
+ * 賦課計算のコンフィグキーです。
+ *
+ * @author N8156 宮本 康
+ */
 public enum ConfigKeysFukaKeisan {
 
     /**
@@ -27,5 +31,9 @@ public enum ConfigKeysFukaKeisan {
     /**
      * コンフィグキーが「ランク管理情報_ランク終了年度」であることを表します。
      */
-    ランク管理情報_ランク終了年度;
+    ランク管理情報_ランク終了年度,
+    /**
+     * コンフィグキーが「ランク管理情報_納期統一年度」であることを表します。
+     */
+    ランク管理情報_納期統一年度;
 }

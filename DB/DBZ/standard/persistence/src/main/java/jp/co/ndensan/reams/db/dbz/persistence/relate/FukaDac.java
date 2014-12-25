@@ -7,12 +7,12 @@ package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002Fuka;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.model.FukaModel;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.ItemList;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320002.FukakonkyoNeng
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320002.tblFukaKonkyoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320002.tblFukakonkyoMeisaiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320002.tblKikanDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.KiwarigakuDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku.KiwarigakuDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;

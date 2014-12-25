@@ -4,25 +4,26 @@
  */
 package jp.co.ndensan.reams.db.dbz.model;
 
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2003KibetsuEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.junit.Test;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
 
 /**
  * {@link KibetsuModel}のテストクラスです。
  *
- * @author LDNS 鄭雪双
+ * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class KibetsuModelTest extends DbzTestBase {
+public class KibetsuModelTest extends DbbTestBase {
 
-    public static class getterSetterTest extends DbzTestBase {
+    public static class getterSetterTest extends DbbTestBase {
 
         private static KibetsuModel sut;
 
@@ -57,8 +58,8 @@ public class KibetsuModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の徴収方法は_設定した値と同じ徴収方法を返す() {
-            sut.set徴収方法(DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法);
-            assertThat(sut.get徴収方法(), is(DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法));
+            sut.set徴収方法(ChoshuHohoKibetsu.toValue(DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法));
+            assertThat(sut.get徴収方法(), is(ChoshuHohoKibetsu.toValue(DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法)));
         }
 
         @Test
@@ -74,7 +75,7 @@ public class KibetsuModelTest extends DbzTestBase {
         }
     }
 
-    public static class getStateTest extends DbzTestBase {
+    public static class getStateTest extends DbbTestBase {
 
         @Test
         public void 状態Addedの取得確認() {
@@ -89,10 +90,9 @@ public class KibetsuModelTest extends DbzTestBase {
             sut.setEntity(DbT2003KibetsuEntityGenerator.createDbT2003KibetsuEntity());
 
             sut.getEntity().initializeMd5();
+            sut.getEntity().setChoteiId(9999L);
 
-            // 主キー以外の項目を変更してください
-//            sut.getEntity().setXXX(new XXX());
-//            assertThat(sut.getState(), is(EntityDataState.Modified));
+            assertThat(sut.getState(), is(EntityDataState.Modified));
         }
 
         @Test

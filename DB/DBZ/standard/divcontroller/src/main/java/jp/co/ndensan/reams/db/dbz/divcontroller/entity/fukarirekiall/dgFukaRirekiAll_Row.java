@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.fukarirekiall;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Dec 16 16:13:05 JST 2014 
+ * Thu Dec 25 17:20:46 JST 2014 
  */
 
 

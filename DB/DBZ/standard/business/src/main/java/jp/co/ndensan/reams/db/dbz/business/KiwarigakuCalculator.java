@@ -37,7 +37,7 @@ public class KiwarigakuCalculator {
         Decimal 普徴期別額合計 = Decimal.ZERO;
         Decimal 普徴納付額合計 = Decimal.ZERO;
         for (KiwarigakuMeisai 期割額 : 期割額明細) {
-            ChoshuHohoKibetsu 徴収方法 = ChoshuHohoKibetsu.toValue(期割額.get期別調定共通().get介護期別モデル().get徴収方法());
+            ChoshuHohoKibetsu 徴収方法 = 期割額.get期別調定共通().get介護期別モデル().get徴収方法();
             Decimal 期別額 = 期割額.get期別調定共通().get調定共通モデル().get調定額();
             Decimal 納付額 = 期割額.get収入額();
             if (徴収方法 == ChoshuHohoKibetsu.特別徴収) {
