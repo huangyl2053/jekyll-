@@ -55,7 +55,7 @@ public final class HihokenshaShikakuHakko {
         FlexibleDate 有効期限;
 
         ShikakushashoKigenConfig config = new ShikakushashoKigenConfig();
-        Decimal 有効期限加算値 = config.get資格者証期限_有効期限加算値();
+        Decimal 有効期限加算値 = new Decimal(config.get資格者証期限_有効期限加算値().toString());
         if (config.get資格者証期限_有効期限初期表示().equals(SHIKAKUSHAHO_YUKOKIGEN_1)) {
             有効期限 = FlexibleDate.getNowDate().plusDay(有効期限加算値.intValue());
         } else {
