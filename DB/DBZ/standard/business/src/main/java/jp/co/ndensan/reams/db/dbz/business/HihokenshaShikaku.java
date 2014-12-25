@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -33,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
+@Deprecated
 public final class HihokenshaShikaku implements IHihokenshaShikaku {
 
     private final IKaigoShikaku kaigoShikaku;
@@ -200,7 +200,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         private JushochitokureiKaijo jutokuKaijo = JushochitokureiKaijo.NOTHING;
         private JushochiTokureishaKubun jutokushaKubun = JushochiTokureishaKubun.通常資格者;
         private KoikinaiJushochitokureishaKubun koikiJutokushaKubun = KoikinaiJushochitokureishaKubun.通常資格者;
-        private ShoKisaiHokenshaNo koikiJutokuOriginHokenshaCode = null;
+        private ShoKisaiHokenshaNo koikiJutokuOriginHokenshaCode = ShoKisaiHokenshaNo.EMPTY;
         private LasdecCode theOldLasdecCode = null;
         private HihokenshashoSaikofu saikofu = HihokenshashoSaikofu.NOTHING;
 
@@ -236,7 +236,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
          *
          * @param 市町村コード {@link LasdecCode 市町村コード}
          * @param 識別コード {@link ShikibetsuCode 識別コード}
-         * @param 処理日時 {@link RDateTime 被保険者台帳登録日時}
+         * @param 処理日時 {@link YMDHMS 被保険者台帳登録日時}
          * @param 被保険者区分 {@link ShikakuHihokenshaKubun 被保険者区分}
          * @param 第1号年齢到達日 {@link FlexibleDate 第1号年齢到達日}
          * @param 資格取得 {@link ShikakuShutoku 資格取得}
@@ -528,7 +528,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
 
         //TODO n8178 城間篤人 UR側の区分も今後、CodeAssignedItemの形に修正する予定。修正後にこのメソッドを削除する　2014年9月末
         private ShikakuHihokenshaKubun toShikakuHihokenshaKubun(HihokenshaKubun hihokenshaKubun) {
-            return ShikakuHihokenshaKubun.toValue(hihokenshaKubun.getCode().getColumnValue());
+            return ShikakuHihokenshaKubun.第１号被保険者;
         }
 
         private boolean isNull(Object target) {

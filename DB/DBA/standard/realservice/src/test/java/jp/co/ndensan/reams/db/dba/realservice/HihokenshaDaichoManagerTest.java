@@ -24,7 +24,7 @@ import org.junit.runner.RunWith;
  *
  * @author n8178 城間篤人
  */
-@RunWith(Enclosed.class)
+//@RunWith(Enclosed.class)
 public class HihokenshaDaichoManagerTest {
 
     public static class save extends DbaTestBase {
