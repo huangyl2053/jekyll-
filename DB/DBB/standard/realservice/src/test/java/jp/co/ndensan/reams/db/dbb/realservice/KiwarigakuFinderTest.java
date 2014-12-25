@@ -45,19 +45,19 @@ public class KiwarigakuFinderTest extends DbzTestBase {
         @Test
         public void 期割額が0件の時_load期割額は_0件の情報を返す() {
             KiwarigakuFinder sut = createFinder(0);
-            assertThat(sut.load期割額(調定年度, 賦課年度, 通知書番号, 処理日時).asList().size(), is(0));
+            assertThat(sut.load期割額(調定年度, 賦課年度, 通知書番号, 処理日時).toList().size(), is(0));
         }
 
         @Test
         public void 期割額が1件の時_load期割額は_1件の情報を返す() {
             KiwarigakuFinder sut = createFinder(1);
-            assertThat(sut.load期割額(調定年度, 賦課年度, 通知書番号, 処理日時).asList().size(), is(1));
+            assertThat(sut.load期割額(調定年度, 賦課年度, 通知書番号, 処理日時).toList().size(), is(1));
         }
 
         @Test
         public void 期割額が2件の時_load期割額は_2件の情報を返す() {
             KiwarigakuFinder sut = createFinder(2);
-            assertThat(sut.load期割額(調定年度, 賦課年度, 通知書番号, 処理日時).asList().size(), is(2));
+            assertThat(sut.load期割額(調定年度, 賦課年度, 通知書番号, 処理日時).toList().size(), is(2));
         }
     }
 
