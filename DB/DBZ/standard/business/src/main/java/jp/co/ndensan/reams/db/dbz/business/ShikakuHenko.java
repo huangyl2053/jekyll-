@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  *
  * @author N3327 三浦 凌
  */
+@Deprecated
 public class ShikakuHenko extends ShikakuIdoBaseItem<ShikakuHenkoJiyu> {
 
     /**

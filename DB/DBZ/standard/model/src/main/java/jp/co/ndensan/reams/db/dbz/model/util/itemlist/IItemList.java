@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.model.util.itemlist;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
-import jp.co.ndensan.reams.db.dbz.model.util.function.IFunction;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 
 /**
@@ -17,15 +17,18 @@ import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
  *
  * @author N3327 三浦 凌
  * @param <E> 保持する要素の型
+ * @deprecated
+ * {@link jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList}を使用して下さい。
  */
-public interface IItemList<E> extends Iterable<E> {
+@Deprecated
+public interface IItemList<E> extends jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList<E> {
 
     /**
      * 保持するすべての値をListとして返します。
      *
      * @return 保持するすべての値のlist
      */
-    List<E> asList();
+    List<E> toList();
 
     /**
      * 保持する要素をすべて{@link IFunction mapper}により変換し、
@@ -40,10 +43,10 @@ public interface IItemList<E> extends Iterable<E> {
     /**
      * 指定の条件に該当する要素だけを保持する{@link IItemList IItemList}を返します。
      *
-     * @param condition 条件
+     * @param predicate 条件
      * @return 指定の条件に該当する要素だけを保持する{@link IItemList IItemList}
      */
-    IItemList<E> filter(ICondition<? super E> condition);
+    IItemList<E> filter(IPredicate<? super E> predicate);
 
     /**
      * 保持する要素がない空のとき{@code true}を返します。
@@ -84,31 +87,31 @@ public interface IItemList<E> extends Iterable<E> {
     boolean containsAll(IItemList<?> elements);
 
     /**
-     * 指定の{@link ICondition IConditon}に該当する要素があるかどうかを返します。
+     * 指定の{@link IPredicate IConditon}に該当する要素があるかどうかを返します。
      *
      * @param condition 条件
-     * @return {@link ICondition IConditon}に該当する要素があれば{@code true},
+     * @return {@link IPredicate IConditon}に該当する要素があれば{@code true},
      * なければ{@code false}
      */
-    boolean anyMatch(ICondition<? super E> condition);
+    boolean anyMatch(IPredicate<? super E> condition);
 
     /**
-     * 指定の{@link ICondition IConditon}にすべての要素が該当するかどうかを返します。
+     * 指定の{@link IPredicate IConditon}にすべての要素が該当するかどうかを返します。
      *
      * @param condition 条件
-     * @return {@link ICondition IConditon}にすべての要素が該当すれば{@code true},
+     * @return {@link IPredicate IConditon}にすべての要素が該当すれば{@code true},
      * 該当しないものがあれば{@code false}
      */
-    boolean allMatch(ICondition<? super E> condition);
+    boolean allMatch(IPredicate<? super E> condition);
 
     /**
-     * 指定の{@link ICondition IConditon}にすべての要素が該当しないかどうかを返します。
+     * 指定の{@link IPredicate IConditon}にすべての要素が該当しないかどうかを返します。
      *
      * @param condition 条件
-     * @return {@link ICondition IConditon}にすべての要素が該当しなければ{@code true},
+     * @return {@link IPredicate IConditon}にすべての要素が該当しなければ{@code true},
      * 該当するものがあれば{@code false}
      */
-    boolean noneMatch(ICondition<? super E> condition);
+    boolean noneMatch(IPredicate<? super E> condition);
 
     /**
      * 保持する要素が1件の時{@code true}を返します。

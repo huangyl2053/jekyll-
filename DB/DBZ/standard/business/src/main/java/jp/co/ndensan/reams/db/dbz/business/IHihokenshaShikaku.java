@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
  *
  * @author N3327 三浦 凌
  */
+@Deprecated
 public interface IHihokenshaShikaku extends IHihokenshaNoGettable, IShikibetsuCodeGettable {
 
     /**
@@ -27,7 +28,7 @@ public interface IHihokenshaShikaku extends IHihokenshaNoGettable, IShikibetsuCo
      *
      * @return {@link LasdecCode 市町村コード}
      */
-    public LasdecCode get市町村コード();
+    LasdecCode get市町村コード();
 
     /**
      * 被保険者の識別コードを返します。

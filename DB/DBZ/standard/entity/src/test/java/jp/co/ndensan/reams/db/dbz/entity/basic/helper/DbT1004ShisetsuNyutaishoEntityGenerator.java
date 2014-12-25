@@ -22,8 +22,8 @@ public final class DbT1004ShisetsuNyutaishoEntityGenerator {
     public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("000001234567890");
     public static final YMDHMS DEFAULT_処理日時 = new YMDHMS(new RString("20140415102030"));
     public static final RString DEFAULT_台帳種別 = new RString("1");
-    public static final RString DEFAULT_入所施設種類 = new RString("1");
-    public static final RString DEFAULT_入所施設コード = new RString("1");
+    public static final RString DEFAULT_入所施設種類 = new RString("11");
+    public static final RString DEFAULT_入所施設コード = new RString("11");
     public static final FlexibleDate DEFAULT_入所年月日 = new FlexibleDate("20140402");
     public static final FlexibleDate DEFAULT_退所年月日 = new FlexibleDate("20140402");
     public static final FlexibleDate DEFAULT_入所処理年月日 = new FlexibleDate("20140402");

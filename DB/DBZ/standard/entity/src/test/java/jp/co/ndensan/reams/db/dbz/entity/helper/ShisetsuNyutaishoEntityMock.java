@@ -27,7 +27,7 @@ public class ShisetsuNyutaishoEntityMock {
         DbT1004ShisetsuNyutaishoEntity entity = new DbT1004ShisetsuNyutaishoEntity();
         entity.setShichosonCode(new LasdecCode(new RString("123456")));
         entity.setShikibetsuCode(new ShikibetsuCode(new RString("1111111111")));
-//        entity.setShoriTimestamp(RDateTime.of(2014, 1, 10, 11, 12));
+        entity.setShoriTimestamp(new YMDHMS("20140110111200"));
         entity.setDaichoShubetsu(DaichoType.被保険者.getCode());
         entity.setNyushoShisetsuShurui(ShisetsuType.介護保険施設.getCode());
         entity.setNyushoShisetsuCode(new RString("1234567890"));

@@ -28,56 +28,56 @@ public interface INinteiShinseiTaishosha {
      *
      * @return 被保険者番号
      */
-    public HihokenshaNo get被保険者番号();
+    HihokenshaNo get被保険者番号();
 
     /**
      * 識別コードを返します。
      *
      * @return 識別コード
      */
-    public ShikibetsuCode get識別コード();
+    ShikibetsuCode get識別コード();
 
     /**
      * 被保険者区分を返します。
      *
      * @return 被保険者区分
      */
-    public HihokenshaKubun get被保険者区分();
+    HihokenshaKubun get被保険者区分();
 
     /**
      * 氏名を返します。
      *
      * @return 氏名
      */
-    public IName get氏名();
+    IName get氏名();
 
     /**
      * 性別を返します。
      *
      * @return 性別
      */
-    public Gender get性別();
+    Gender get性別();
 
     /**
      * 生年月日を返します。
      *
      * @return 生年月日
      */
-    public IDateOfBirth get生年月日();
+    IDateOfBirth get生年月日();
 
     /**
      * 住所を返します。
      *
      * @return 住所
      */
-    public IJusho get住所();
+    IJusho get住所();
 
     /**
      * 世帯コードを返します。
      *
      * @return 世帯コード
      */
-    public SetaiCode get世帯コード();
+    SetaiCode get世帯コード();
 
     /**
      * 個人番号を返します。

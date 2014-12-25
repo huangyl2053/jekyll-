@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
  *
  * @author n8178 城間篤人
  */
-@RunWith(Enclosed.class)
+//@RunWith(Enclosed.class)
 public class ShikakuTokusoDateValidetorTest {
 
     public static class validate extends DbaTestBase {
@@ -26,5 +26,4 @@ public class ShikakuTokusoDateValidetorTest {
         //2, 上記の条件を満たさない場合、メッセージを返さない。
 
     }
-
 }
