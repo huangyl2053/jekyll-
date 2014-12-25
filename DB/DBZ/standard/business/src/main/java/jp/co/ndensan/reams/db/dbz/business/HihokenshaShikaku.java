@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -33,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
+@Deprecated
 public final class HihokenshaShikaku implements IHihokenshaShikaku {
 
     private final IKaigoShikaku kaigoShikaku;
@@ -236,7 +236,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
          *
          * @param 市町村コード {@link LasdecCode 市町村コード}
          * @param 識別コード {@link ShikibetsuCode 識別コード}
-         * @param 処理日時 {@link RDateTime 被保険者台帳登録日時}
+         * @param 処理日時 {@link YMDHMS 被保険者台帳登録日時}
          * @param 被保険者区分 {@link ShikakuHihokenshaKubun 被保険者区分}
          * @param 第1号年齢到達日 {@link FlexibleDate 第1号年齢到達日}
          * @param 資格取得 {@link ShikakuShutoku 資格取得}
