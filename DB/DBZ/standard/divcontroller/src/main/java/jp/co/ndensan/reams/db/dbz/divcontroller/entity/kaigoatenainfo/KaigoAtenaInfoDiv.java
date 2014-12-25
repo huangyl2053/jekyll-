@@ -1,18 +1,16 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoatenainfo;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IKaigoAtenaInfoDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KaigoAtenaInfo のクラスファイル 
- * 
+ * KaigoAtenaInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoAtenaInfoDiv extends Panel implements IKaigoAtenaInfoDiv {
@@ -22,6 +20,7 @@ public class KaigoAtenaInfoDiv extends Panel implements IKaigoAtenaInfoDiv {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("atenaInfo")
     private AtenaShokaiSimpleDiv atenaInfo;
 
@@ -37,5 +36,4 @@ public class KaigoAtenaInfoDiv extends Panel implements IKaigoAtenaInfoDiv {
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

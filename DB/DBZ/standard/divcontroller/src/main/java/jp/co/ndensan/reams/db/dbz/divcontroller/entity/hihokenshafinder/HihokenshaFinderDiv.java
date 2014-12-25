@@ -1,10 +1,12 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder;
 
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigosaikinshorisharireki.IKaigoSaikinShorishaRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigosaikinshorisharireki.KaigoSaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaFinderDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaFinderDiv;
 import jp.co.ndensan.reams.ur.urz.business.IRecentUsed;
@@ -19,8 +21,11 @@ import jp.co.ndensan.reams.ur.urz.realservice.RecentUsedManagerFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 

@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0200001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.HihokenshaFinderDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.IHihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.HihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.IHihokenshaFinderDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**

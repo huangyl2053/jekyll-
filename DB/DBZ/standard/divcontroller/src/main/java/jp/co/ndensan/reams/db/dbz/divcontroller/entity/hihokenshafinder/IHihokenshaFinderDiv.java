@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder;
 
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;

@@ -27,10 +27,6 @@ var DBZ;
             Controls.prototype.KaigoSaikinShorishaRireki = function () {
                 return new UZA.Panel(this.convFiledNameSelf());
             };
-
-            Controls.prototype.wrappedSaikinShorishaRireki = function () {
-                return new URZ.SaikinShorishaRireki.ModeController(this.convFiledName("wrappedSaikinShorishaRireki"));
-            };
             return Controls;
         })();
         KaigoSaikinShorishaRireki.Controls = Controls;

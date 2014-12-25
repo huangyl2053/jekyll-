@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため

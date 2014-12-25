@@ -1,10 +1,10 @@
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/jquery.d.ts" />
+/// <reference path="../../d.ts/UzViewControls.d.ts" />
+/// <reference path="../../d.ts/UzaConverter.d.ts" />
 
 module DBZ {
 
-     export module KaigoShikakuKihon {
+     export module KaigoFukaKihon {
 
         export class Events {
 
@@ -14,7 +14,7 @@ module DBZ {
             private _myName: string;
 
             public static myType(): string {
-                return "KaigoShikakuKihon";
+                return "KaigoFukaKihon";
             }
 
             constructor(fieldName: string) {
@@ -22,19 +22,27 @@ module DBZ {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBZ.KaigoShikakuKihon.Controls.myType();
+                return this._myName + "_" + DBZ.KaigoFukaKihon.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBZ.KaigoShikakuKihon.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.KaigoFukaKihon.Controls.myType() + "_" + fieldName;
             }
 
-            public KaigoShikakuKihon(): UZA.Panel {
+            public KaigoFukaKihon(): UZA.Panel {
                 return new UZA.Panel(this.convFiledNameSelf());
+            }
+
+            public txtTsuchishoNo(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtTsuchishoNo"));
             }
 
             public txtHihokenshaNo(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaNo"));
+            }
+
+            public txtHokenryoDankai(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtHokenryoDankai"));
             }
 
             public txtShutokuYmd(): UZA.TextBoxDate {
@@ -53,32 +61,8 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtSoshitsuJiyu"));
             }
 
-            public txtJutokuKubun(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtJutokuKubun"));
-            }
-
-            public txtYokaigoJotaiKubun(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtYokaigoJotaiKubun"));
-            }
-
-            public txtNinteiKaishiYmd(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiKaishiYmd"));
-            }
-
-            public txtNinteiShuryoYmd(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiShuryoYmd"));
-            }
-
-            public btnNinteiRireki(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnNinteiRireki"));
-            }
-
             public btnHihoRireki(): UZA.ButtonDialog {
                 return new UZA.ButtonDialog(this.convFiledName("btnHihoRireki"));
-            }
-
-            public btnRenrakusaki(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnRenrakusaki"));
             }
 
         }
