@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5002NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.model.NinteiKekkaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5002NinteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -45,13 +46,13 @@ public class NinteiKekkaJohoDac implements IModifiable<NinteiKekkaJohoModel> {
      * @return NinteiKekkaJohoModel
      */
     @Transaction
-    public NinteiKekkaJohoModel selectByKey(RString 申請書管理番号,
+    public NinteiKekkaJohoModel selectByKey(ShinseishoKanriNo 申請書管理番号,
             YMDHMS 処理日時) {
 
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
-        return createModel(要介護認定結果情報Dac.selectByKey(申請書管理番号, 処理日時));
+        return createModel(要介護認定結果情報Dac.selectByKey(申請書管理番号.value(), 処理日時));
     }
 
     /**
@@ -80,14 +81,14 @@ public class NinteiKekkaJohoDac implements IModifiable<NinteiKekkaJohoModel> {
      * @return NinteiShinseiJohoModel
      */
     @Transaction
-    public NinteiKekkaJohoModel select直近要介護認定結果情報By申請書管理番号(RString 申請書管理番号) {
+    public NinteiKekkaJohoModel select直近要介護認定結果情報By申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
 
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT5002NinteiKekkaJohoEntity> 認定結果情報List = accessor.select().
                 table(DbT5002NinteiKekkaJoho.class).
-                where(eq(DbT5002NinteiKekkaJoho.shinseishoKanriNo, 申請書管理番号)).
+                where(eq(DbT5002NinteiKekkaJoho.shinseishoKanriNo, 申請書管理番号.value())).
                 order(by(DbT5002NinteiKekkaJoho.shoriTimestamp, Order.DESC)).
                 toList(DbT5002NinteiKekkaJohoEntity.class);
 

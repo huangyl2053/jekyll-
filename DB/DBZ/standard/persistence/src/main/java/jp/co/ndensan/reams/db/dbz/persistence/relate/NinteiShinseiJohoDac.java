@@ -12,12 +12,12 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.model.NinteiShinseiJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5001NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
@@ -45,13 +45,14 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
      * @return NinteiShinseiJohoModel
      */
     @Transaction
-    public NinteiShinseiJohoModel selectByKey(RString 申請書管理番号,
+    public NinteiShinseiJohoModel selectByKey(
+            ShinseishoKanriNo 申請書管理番号,
             YMDHMS 処理日時) {
 
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
-        return createModel(要介護認定申請情報Dac.selectByKey(申請書管理番号, 処理日時));
+        return createModel(要介護認定申請情報Dac.selectByKey(申請書管理番号.value(), 処理日時));
     }
 
     /**
@@ -80,14 +81,14 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
      * @return NinteiShinseiJohoModel
      */
     @Transaction
-    public NinteiShinseiJohoModel select要介護認定申請情報By申請書管理番号(RString 申請書管理番号) {
+    public NinteiShinseiJohoModel select要介護認定申請情報By申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
 
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT5001NinteiShinseiJohoEntity> 認定申請情報List = accessor.select().
                 table(DbT5001NinteiShinseiJoho.class).
-                where(eq(DbT5001NinteiShinseiJoho.shinseishoKanriNo, 申請書管理番号)).
+                where(eq(DbT5001NinteiShinseiJoho.shinseishoKanriNo, 申請書管理番号.value())).
                 order(by(DbT5001NinteiShinseiJoho.shoriTimestamp, Order.DESC)).
                 toList(DbT5001NinteiShinseiJohoEntity.class);
 

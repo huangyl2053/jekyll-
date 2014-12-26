@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.model.ServiceShuruiShikyuGendoGakuModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
@@ -52,7 +53,7 @@ public class ServiceShuruiShikyuGendoGakuManager {
      */
     @Transaction
     public ServiceShuruiShikyuGendoGakuModel getサービス種類支給限度額(ServiceShuruiCode サービス種類コード,
-            RString 要介護状態区分,
+            IYokaigoJotaiKubun 要介護状態区分,
             FlexibleYearMonth 適用開始年月,
             YMDHMS 処理日時) {
 
@@ -77,7 +78,7 @@ public class ServiceShuruiShikyuGendoGakuManager {
      * @return IItemList<ServiceShuruiShikyuGendoGakuModel>
      */
     @Transaction
-    public IItemList<ServiceShuruiShikyuGendoGakuModel> getサービス種類支給限度額一覧(RString 要介護状態区分,
+    public IItemList<ServiceShuruiShikyuGendoGakuModel> getサービス種類支給限度額一覧(IYokaigoJotaiKubun 要介護状態区分,
             FlexibleDate 基準日) {
         return dac.selectサービス種類支給限度額リスト(要介護状態区分, 基準日);
     }
@@ -89,7 +90,7 @@ public class ServiceShuruiShikyuGendoGakuManager {
      * @return IItemList<ServiceShuruiShikyuGendoGakuModel>
      */
     @Transaction
-    public IItemList<ServiceShuruiShikyuGendoGakuModel> getサービス種類支給限度額一覧(RString 要介護状態区分) {
+    public IItemList<ServiceShuruiShikyuGendoGakuModel> getサービス種類支給限度額一覧(IYokaigoJotaiKubun 要介護状態区分) {
         return dac.selectサービス種類支給限度額リスト(要介護状態区分);
     }
 

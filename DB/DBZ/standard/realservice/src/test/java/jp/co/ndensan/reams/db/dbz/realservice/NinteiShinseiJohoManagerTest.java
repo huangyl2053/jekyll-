@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5001NinteiShinseiJohoEn
 import jp.co.ndensan.reams.db.dbz.model.NinteiShinseiJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -50,9 +51,10 @@ public class NinteiShinseiJohoManagerTest {
 
             NinteiShinseiJohoModel 要介護認定申請情報モデル = createModel();
 
-            when(dac.selectByKey(any(RString.class), any(YMDHMS.class))).thenReturn(要介護認定申請情報モデル);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(YMDHMS.class))).thenReturn(要介護認定申請情報モデル);
 
-            NinteiShinseiJohoModel 要介護認定申請情報 = sut.get要介護認定申請情報(DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_申請書管理番号,
+            NinteiShinseiJohoModel 要介護認定申請情報 = sut.get要介護認定申請情報(
+                    new ShinseishoKanriNo(DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_申請書管理番号),
                     DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_処理日時);
 
             // 任意の項目が一致するテストケースを記述してください。
@@ -88,9 +90,10 @@ public class NinteiShinseiJohoManagerTest {
 
             NinteiShinseiJohoModel 要介護認定申請情報モデル = createModel();
 
-            when(dac.select要介護認定申請情報By申請書管理番号(any(RString.class))).thenReturn(要介護認定申請情報モデル);
+            when(dac.select要介護認定申請情報By申請書管理番号(any(ShinseishoKanriNo.class))).thenReturn(要介護認定申請情報モデル);
 
-            NinteiShinseiJohoModel 要介護認定申請情報 = sut.get要介護認定申請情報(DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_申請書管理番号);
+            NinteiShinseiJohoModel 要介護認定申請情報 = sut.get要介護認定申請情報(
+                    new ShinseishoKanriNo(DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_申請書管理番号));
 
             // 任意の項目が一致するテストケースを記述してください。
             assertThat(要介護認定申請情報.getみなし要介護区分コード(), is(DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_みなし要介護区分コード));

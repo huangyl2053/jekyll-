@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5002NinteiKekkaJohoEnti
 import jp.co.ndensan.reams.db.dbz.model.NinteiKekkaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.NinteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -50,10 +51,10 @@ public class NinteiKekkaJohoManagerTest {
 
             NinteiKekkaJohoModel 要介護認定結果情報モデル = createModel();
 
-            when(dac.selectByKey(any(RString.class), any(YMDHMS.class))).thenReturn(要介護認定結果情報モデル);
+            when(dac.selectByKey(any(ShinseishoKanriNo.class), any(YMDHMS.class))).thenReturn(要介護認定結果情報モデル);
 
             NinteiKekkaJohoModel 要介護認定結果情報 = sut.get要介護認定結果情報(
-                    DbT5002NinteiKekkaJohoEntityGenerator.DEFAULT_申請書管理番号,
+                    new ShinseishoKanriNo(DbT5002NinteiKekkaJohoEntityGenerator.DEFAULT_申請書管理番号),
                     DbT5002NinteiKekkaJohoEntityGenerator.DEFAULT_処理日時);
 
             // 任意の項目が一致するテストケースを記述してください。
@@ -89,10 +90,10 @@ public class NinteiKekkaJohoManagerTest {
 
             NinteiKekkaJohoModel 要介護認定結果情報モデル = createModel();
 
-            when(dac.select直近要介護認定結果情報By申請書管理番号(any(RString.class))).thenReturn(要介護認定結果情報モデル);
+            when(dac.select直近要介護認定結果情報By申請書管理番号(any(ShinseishoKanriNo.class))).thenReturn(要介護認定結果情報モデル);
 
             NinteiKekkaJohoModel 要介護認定結果情報 = sut.get要介護認定結果情報(
-                    DbT5002NinteiKekkaJohoEntityGenerator.DEFAULT_申請書管理番号);
+                    new ShinseishoKanriNo(DbT5002NinteiKekkaJohoEntityGenerator.DEFAULT_申請書管理番号));
 
             // 任意の項目が一致するテストケースを記述してください。
             assertThat(要介護認定結果情報.get一次判定結果変更理由(), is(DbT5002NinteiKekkaJohoEntityGenerator.DEFAULT_一次判定結果変更理由));

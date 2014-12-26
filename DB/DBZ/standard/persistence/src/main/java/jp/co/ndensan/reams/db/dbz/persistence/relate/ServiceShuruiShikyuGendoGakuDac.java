@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.relate;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7111ServiceShuruiShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
@@ -20,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -53,7 +53,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
      */
     @Transaction
     public ServiceShuruiShikyuGendoGakuModel selectByKey(ServiceShuruiCode サービス種類コード,
-            RString 要介護状態区分,
+            IYokaigoJotaiKubun 要介護状態区分,
             FlexibleYearMonth 適用開始年月,
             YMDHMS 処理日時) {
 
@@ -62,7 +62,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
         requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
-        return createModel(サービス種類支給限度額Dac.selectByKey(サービス種類コード, 要介護状態区分, 適用開始年月, 処理日時));
+        return createModel(サービス種類支給限度額Dac.selectByKey(サービス種類コード, 要介護状態区分.getCode(), 適用開始年月, 処理日時));
     }
 
     /**
@@ -92,7 +92,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
      * @return JukyushaDaichoModel
      */
     @Transaction
-    public IItemList<ServiceShuruiShikyuGendoGakuModel> selectサービス種類支給限度額リスト(RString 要介護状態区分,
+    public IItemList<ServiceShuruiShikyuGendoGakuModel> selectサービス種類支給限度額リスト(IYokaigoJotaiKubun 要介護状態区分,
             FlexibleDate 基準日) {
 
         requireNonNull(要介護状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護状態区分"));
@@ -103,7 +103,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
         サービス種類支給限度額List = accessor.select().
                 table(DbT7111ServiceShuruiShikyuGendoGaku.class).
                 where(and(
-                                eq(DbT7111ServiceShuruiShikyuGendoGaku.yoKaigoJotaiKubun, 要介護状態区分),
+                                eq(DbT7111ServiceShuruiShikyuGendoGaku.yoKaigoJotaiKubun, 要介護状態区分.getCode()),
                                 leq(DbT7111ServiceShuruiShikyuGendoGaku.tekiyoKaishuYM, 基準日.getYearMonth()))).
                 order(by(DbT7111ServiceShuruiShikyuGendoGaku.shoriTimestamp, Order.DESC)).
                 toList(DbT7111ServiceShuruiShikyuGendoGakuEntity.class);
@@ -125,7 +125,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
      * @return JukyushaDaichoModel
      */
     @Transaction
-    public IItemList<ServiceShuruiShikyuGendoGakuModel> selectサービス種類支給限度額リスト(RString 要介護状態区分) {
+    public IItemList<ServiceShuruiShikyuGendoGakuModel> selectサービス種類支給限度額リスト(IYokaigoJotaiKubun 要介護状態区分) {
 
         requireNonNull(要介護状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護状態区分"));
 
@@ -133,7 +133,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
         List<DbT7111ServiceShuruiShikyuGendoGakuEntity> サービス種類支給限度額List;
         サービス種類支給限度額List = accessor.select().
                 table(DbT7111ServiceShuruiShikyuGendoGaku.class).
-                where(eq(DbT7111ServiceShuruiShikyuGendoGaku.yoKaigoJotaiKubun, 要介護状態区分)).
+                where(eq(DbT7111ServiceShuruiShikyuGendoGaku.yoKaigoJotaiKubun, 要介護状態区分.getCode())).
                 order(by(DbT7111ServiceShuruiShikyuGendoGaku.shoriTimestamp, Order.DESC)).
                 toList(DbT7111ServiceShuruiShikyuGendoGakuEntity.class);
 

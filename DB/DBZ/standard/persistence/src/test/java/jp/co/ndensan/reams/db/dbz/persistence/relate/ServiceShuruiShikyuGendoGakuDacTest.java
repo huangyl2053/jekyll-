@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.IYokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator;
@@ -36,12 +38,11 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
 
     private static ServiceShuruiShikyuGendoGakuDac sut;
     private static DbT7111ServiceShuruiShikyuGendoGakuDac サービス種類支給限度額Dac;
-    // TODO 主キー型と変数名と主キー値を適切な値に置換してください
-    // TODO 主キーの数が足りない場合、追加してください。
+
     private static final ServiceShuruiCode サービス種類コード1 = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_サービス種類コード;
     private static final ServiceShuruiCode サービス種類コード2 = new ServiceShuruiCode(new RString("11"));
-    private static final RString 要介護状態区分1 = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分;
-    private static final RString 要介護状態区分2 = new RString("9");
+    private static final YokaigoJotaiKubun09 要介護状態区分1 = YokaigoJotaiKubun09.toValue(DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分);
+    private static final YokaigoJotaiKubun09 要介護状態区分2 = YokaigoJotaiKubun09.toValue(new RString("12"));
     private static final FlexibleYearMonth 適用開始年月1 = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_適用終了年月;
     private static final FlexibleYearMonth 適用開始年月2 = new FlexibleYearMonth(new RString("201501"));
     private static final YMDHMS 処理日時1 = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_処理日時;
@@ -242,12 +243,12 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
 
         public static void insertDbT7111(
                 ServiceShuruiCode サービス種類コード,
-                RString 要介護状態区分,
+                IYokaigoJotaiKubun 要介護状態区分,
                 FlexibleYearMonth 適用開始年月,
                 YMDHMS 処理日時) {
             DbT7111ServiceShuruiShikyuGendoGakuEntity entity = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.createDbT7111ServiceShuruiShikyuGendoGakuEntity();
             entity.setServiceShuruiCode(サービス種類コード);
-            entity.setYoKaigoJotaiKubun(要介護状態区分);
+            entity.setYoKaigoJotaiKubun(要介護状態区分.getCode());
             entity.setTekiyoKaishuYM(適用開始年月);
             entity.setShoriTimestamp(処理日時);
             サービス種類支給限度額Dac.insert(entity);

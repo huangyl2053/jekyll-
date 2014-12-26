@@ -45,8 +45,8 @@ public class NinteiShinseiKekkaDacTest {
     private static DbT5002NinteiKekkaJohoDac 要介護認定結果情報Dac;
     private static final ShoKisaiHokenshaNo 受給者_証記載保険者番号1 = new ShoKisaiHokenshaNo("124560");
     private static final ShoKisaiHokenshaNo 受給者_証記載保険者番号2 = new ShoKisaiHokenshaNo("124561");
-    private static final HihokenshaNo 受給者_被保険者番号1 = new HihokenshaNo("1234567890");
-    private static final HihokenshaNo 受給者_被保険者番号2 = new HihokenshaNo("1234567891");
+    private static final HihokenshaNo 受給者_被保険者番号1 = new HihokenshaNo("9234567890");
+    private static final HihokenshaNo 受給者_被保険者番号2 = new HihokenshaNo("9234567891");
     private static final ShinseishoKanriNo 受給者_申請書管理番号1 = new ShinseishoKanriNo("2234567890");
     private static final ShinseishoKanriNo 受給者_申請書管理番号2 = new ShinseishoKanriNo("2234567891");
     private static final YMDHMS 受給者_処理日時1 = new YMDHMS("20140101102040");
@@ -86,24 +86,24 @@ public class NinteiShinseiKekkaDacTest {
         }
 
         @Test(expected = NullPointerException.class)
-        public void 引数の被保険者番号にnullを指定した場合_NullPointerExceptionが発生する() {
+        public void select要介護認定申請結果ByKeyTest_引数の被保険者番号にnullを指定した場合_NullPointerExceptionが発生する() {
             sut.select要介護認定申請結果履歴By被保険者番号(null);
         }
 
         @Test
-        public void データが見つかる検索条件を渡すと_モデルリストを返す() {
+        public void select要介護認定申請結果ByKeyTest_データが見つかる検索条件を渡すと_モデルリストを返す() {
             IItemList<NinteiShinseiKekkaModel> modelList = sut.select要介護認定申請結果履歴By被保険者番号(受給者_被保険者番号1);
             assertThat(modelList.size(), is(2));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(modelList.toList().get(0).get要介護認定申請情報モデル().get().get申請書管理番号(), is(申請_申請書管理番号1));
-            assertThat(modelList.toList().get(0).get要介護認定結果情報モデル().get().get申請書管理番号(), is(結果_申請書管理番号1));
-            assertThat(modelList.toList().get(1).get要介護認定申請情報モデル().get().get申請書管理番号(), is(申請_申請書管理番号2));
-            assertThat(modelList.toList().get(1).get要介護認定結果情報モデル().get().get申請書管理番号(), is(結果_申請書管理番号2));
+            assertThat(modelList.toList().get(0).get要介護認定申請情報モデル().get().get申請書管理番号(), is(申請_申請書管理番号2));
+            assertThat(modelList.toList().get(0).get要介護認定結果情報モデル().get().get申請書管理番号(), is(結果_申請書管理番号2));
+            assertThat(modelList.toList().get(1).get要介護認定申請情報モデル().get().get申請書管理番号(), is(申請_申請書管理番号1));
+            assertThat(modelList.toList().get(1).get要介護認定結果情報モデル().get().get申請書管理番号(), is(結果_申請書管理番号1));
         }
 
         // データが見つからない値を指定するように修正してください。
         @Test
-        public void データが見つかない検索条件を渡すと_空のリストを返す() {
+        public void select要介護認定申請結果ByKeyTest_データが見つかない検索条件を渡すと_空のリストを返す() {
             assertThat(sut.select要介護認定申請結果履歴By被保険者番号(受給者_被保険者番号2).isEmpty(), is(true));
         }
     }

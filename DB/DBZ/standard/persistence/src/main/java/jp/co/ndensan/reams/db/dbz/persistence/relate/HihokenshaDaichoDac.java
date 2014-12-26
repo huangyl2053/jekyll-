@@ -98,7 +98,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
                 toList(DbT1001HihokenshaDaichoEntity.class);
 
         if (被保険者台帳List.isEmpty()) {
-            return null;
+            return DbOptional.empty();
         }
 
         return DbOptional.of(createModel(被保険者台帳List.get(0)));

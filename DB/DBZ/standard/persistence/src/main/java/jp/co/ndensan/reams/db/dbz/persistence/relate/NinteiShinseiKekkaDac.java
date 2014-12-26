@@ -15,8 +15,8 @@ import jp.co.ndensan.reams.db.dbz.model.relate.NinteiShinseiKekkaModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8187 久保田 英男
  */
-//public class NinteiShinseiKekkaDac implements IModifiable<KaigoNinteiShinseiKekkaModel> {
 public class NinteiShinseiKekkaDac {
 
     private final JukyushaDaichoDac 受給者台帳Dac = InstanceProvider.create(JukyushaDaichoDac.class);
@@ -56,13 +55,13 @@ public class NinteiShinseiKekkaDac {
         return 台帳リスト;
     }
 
-    private NinteiShinseiJohoModel select要介護認定申請情報ByKey(RString 申請書管理番号) {
+    private NinteiShinseiJohoModel select要介護認定申請情報ByKey(ShinseishoKanriNo 申請書管理番号) {
         NinteiShinseiJohoModel model = 要介護認定申請情報Dac.select要介護認定申請情報By申請書管理番号(申請書管理番号);
 
         return (model == null) ? null : model;
     }
 
-    private NinteiKekkaJohoModel select要介護認定結果情報ByKey(RString 申請書管理番号) {
+    private NinteiKekkaJohoModel select要介護認定結果情報ByKey(ShinseishoKanriNo 申請書管理番号) {
         NinteiKekkaJohoModel model = 要介護認定結果情報Dac.select直近要介護認定結果情報By申請書管理番号(申請書管理番号);
 
         return (model == null) ? null : model;
@@ -75,8 +74,8 @@ public class NinteiShinseiKekkaDac {
 
         NinteiShinseiKekkaModel model = new NinteiShinseiKekkaModel(
                 受給者台帳,
-                DbOptional.ofNullable(select要介護認定申請情報ByKey(受給者台帳.get申請書管理番号().value())),
-                DbOptional.ofNullable(select要介護認定結果情報ByKey(受給者台帳.get申請書管理番号().value())));
+                DbOptional.ofNullable(select要介護認定申請情報ByKey(受給者台帳.get申請書管理番号())),
+                DbOptional.ofNullable(select要介護認定結果情報ByKey(受給者台帳.get申請書管理番号())));
 
         if (!model.get要介護認定結果情報モデル().isPresent()) {
             return null;

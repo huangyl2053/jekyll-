@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5001NinteiShinseiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.model.NinteiShinseiJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5001NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -33,8 +34,8 @@ public class NinteiShinseiJohoDacTest {
 
     private static NinteiShinseiJohoDac sut;
     private static DbT5001NinteiShinseiJohoDac 要介護認定申請情報Dac;
-    private static final RString 申請書管理番号1 = DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_申請書管理番号;
-    private static final RString 申請書管理番号2 = new RString("9234567890");
+    private static final ShinseishoKanriNo 申請書管理番号1 = new ShinseishoKanriNo(DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_申請書管理番号);
+    private static final ShinseishoKanriNo 申請書管理番号2 = new ShinseishoKanriNo(new RString("9234567890"));
     private static final YMDHMS 処理日時1 = DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_処理日時;
     private static final YMDHMS 処理日時2 = new YMDHMS("20140101102040");
 
@@ -65,7 +66,7 @@ public class NinteiShinseiJohoDacTest {
         // TODO 個別のMapperのテストクラスで項目単位の転記処理を確認しているため、全項目について確認する必要はありません。
         @Test
         public void データが見つかる検索条件を渡すと_要介護認定申請情報モデル返す() {
-            assertThat(sut.selectByKey(申請書管理番号1, 処理日時1).get申請書管理番号(), is(申請書管理番号1));
+            assertThat(sut.selectByKey(申請書管理番号1, 処理日時1).get申請書管理番号(), is(申請書管理番号1.value()));
         }
 
         // データが見つからない値を指定するように修正してください。
@@ -83,7 +84,7 @@ public class NinteiShinseiJohoDacTest {
             IItemList<NinteiShinseiJohoModel> modelList = sut.selectAll();
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(modelList.toList().get(0).get申請書管理番号(), is(申請書管理番号1));
+            assertThat(modelList.toList().get(0).get申請書管理番号(), is(申請書管理番号1.value()));
         }
 
         @Test
@@ -108,7 +109,7 @@ public class NinteiShinseiJohoDacTest {
         // TODO 個別のMapperのテストクラスで項目単位の転記処理を確認しているため、全項目について確認する必要はありません。
         @Test
         public void データが見つかる検索条件を渡すと_要介護認定申請情報モデル返す() {
-            assertThat(sut.select要介護認定申請情報By申請書管理番号(申請書管理番号1).get申請書管理番号(), is(申請書管理番号1));
+            assertThat(sut.select要介護認定申請情報By申請書管理番号(申請書管理番号1).get申請書管理番号(), is(申請書管理番号1.value()));
         }
 
         // データが見つからない値を指定するように修正してください。
@@ -194,10 +195,10 @@ public class NinteiShinseiJohoDacTest {
     private static class TestSupport {
 
         public static void insertDbT5001(
-                RString 申請書管理番号,
+                ShinseishoKanriNo 申請書管理番号,
                 YMDHMS 処理日時) {
             DbT5001NinteiShinseiJohoEntity entity = DbT5001NinteiShinseiJohoEntityGenerator.createDbT5001NinteiShinseiJohoEntity();
-            entity.setShinseishoKanriNo(申請書管理番号);
+            entity.setShinseishoKanriNo(申請書管理番号.value());
             entity.setShoriTimestamp(処理日時);
             要介護認定申請情報Dac.insert(entity);
         }
