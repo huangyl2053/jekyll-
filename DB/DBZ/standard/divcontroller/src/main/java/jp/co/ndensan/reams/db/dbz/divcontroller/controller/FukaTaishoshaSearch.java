@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.FukaTaishoshaSearchResult;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0300001.dgFukaGaitoshaList_Row;
@@ -109,7 +110,7 @@ public class FukaTaishoshaSearch {
         if (div.get被保険者番号() != null) {
             INewSearchCondition 被保険者番号条件 = SearchConditionFactory.condition(
                     FukaSearchItem.賦課マスタ_被保険者番号, StringOperator.完全一致, div.get被保険者番号());
-            if (menu.is更正計算()) {
+            if (menu.is(FukaSearchMenuGroup.更正計算系)) {
                 被保険者番号条件 = SearchConditionFactory.where(被保険者番号条件.or(SearchConditionFactory.condition(
                         FukaSearchItem.被保険者台帳_被保険者番号, StringOperator.完全一致, div.get被保険者番号())));
             }
@@ -135,7 +136,7 @@ public class FukaTaishoshaSearch {
     private ISearchCondition get介護除外条件(IHihokenshaFinderDiv div, FukaSearchMenu menu) {
         List<INewSearchCondition> 条件List = new ArrayList<>();
 
-        if (menu.is照会()) {
+        if (menu.is(FukaSearchMenuGroup.照会系)) {
             条件List.add(SearchConditionFactory.condition(
                     FukaSearchItem.通知書番号, StringOperator.完全一致, RString.EMPTY));
         }

@@ -5,56 +5,35 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup.照会系;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup.賦課照会系;
 
-// TODO N8156 宮本 康 メニュー、グループ分け等を精査する。
+// TODO N8156 宮本 康 メニューは要精査
 /**
- * 賦課対象者検索のメニュー判定で使用する列挙型です。
+ * 賦課対象者検索用のメニューを定義した列挙型です。
  *
  * @author N8156 宮本 康
  */
 public enum FukaSearchMenu {
 
     /**
-     * メニューが「メニュー1」であることを表します。
+     * メニューが「賦課照会」であることを表します。
      */
-    メニュー1("menu1", true, true, true, true, true, true, true, true),
-    /**
-     * メニューが「メニュー2」であることを表します。
-     */
-    メニュー2("menu2", true, true, true, true, true, true, true, true),
-    /**
-     * メニューが「メニュー3」であることを表します。
-     */
-    メニュー3("menu3", true, true, true, true, true, true, true, true),
-    /**
-     * メニューが「メニュー4」であることを表します。
-     */
-    メニュー4("menu4", true, true, true, true, true, true, true, true),
-    /**
-     * メニューが「不明」であることを表します。
-     */
-    不明("unknown", false, false, false, false, false, false, false, false);
+    賦課照会("DBBMN11001", 照会系, 賦課照会系);
 
     private final RString code;
-    private final Map<Integer, Boolean> map = new HashMap<>();
+    private final Set<FukaSearchMenuGroup> groups;
 
-    private final int 照会 = 0;
-    private final int 賦課照会 = 1;
-    private final int 所得照会 = 2;
-    private final int 更新 = 3;
-    private final int 所得入力 = 4;
-    private final int 更正計算 = 5;
-    private final int 即時更正 = 6;
-    private final int 通知書発行 = 7;
-
-    private FukaSearchMenu(String code, boolean... args) {
+    private FukaSearchMenu(String code, FukaSearchMenuGroup... items) {
         this.code = new RString(code);
-        for (int index = 0; index < args.length; index++) {
-            map.put(index, args[index]);
-        }
+        Set<FukaSearchMenuGroup> set = new HashSet<>();
+        Collections.addAll(set, items);
+        this.groups = Collections.unmodifiableSet(set);
     }
 
     /**
@@ -62,80 +41,18 @@ public enum FukaSearchMenu {
      *
      * @return コード
      */
-    public RString getCode() {
+    public RString code() {
         return code;
     }
 
     /**
-     * 照会かどうか判定します。
+     * 指定したメニューグループかどうか判定します。
      *
-     * @return 照会の場合はtrue、それ以外の場合はfalseを返します。
+     * @param group メニューグループ
+     * @return 指定したメニューグループの場合はtrue、それ以外の場合はfalseを返します。
      */
-    public boolean is照会() {
-        return map.get(照会);
-    }
-
-    /**
-     * 賦課照会かどうか判定します。
-     *
-     * @return 賦課照会の場合はtrue、それ以外の場合はfalseを返します。
-     */
-    public boolean is賦課照会() {
-        return map.get(賦課照会);
-    }
-
-    /**
-     * 所得照会かどうか判定します。
-     *
-     * @return 所得照会の場合はtrue、それ以外の場合はfalseを返します。
-     */
-    public boolean is所得照会() {
-        return map.get(所得照会);
-    }
-
-    /**
-     * 更新かどうか判定します。
-     *
-     * @return 更新の場合はtrue、それ以外の場合はfalseを返します。
-     */
-    public boolean is更新() {
-        return map.get(更新);
-    }
-
-    /**
-     * 所得入力かどうか判定します。
-     *
-     * @return 所得入力の場合はtrue、それ以外の場合はfalseを返します。
-     */
-    public boolean is所得入力() {
-        return map.get(所得入力);
-    }
-
-    /**
-     * 更正計算かどうか判定します。
-     *
-     * @return 更正計算の場合はtrue、それ以外の場合はfalseを返します。
-     */
-    public boolean is更正計算() {
-        return map.get(更正計算);
-    }
-
-    /**
-     * 即時更正かどうか判定します。
-     *
-     * @return 即時更正の場合はtrue、それ以外の場合はfalseを返します。
-     */
-    public boolean is即時更正() {
-        return map.get(即時更正);
-    }
-
-    /**
-     * 通知書発行かどうか判定します。
-     *
-     * @return 通知書発行の場合はtrue、それ以外の場合はfalseを返します。
-     */
-    public boolean is通知書発行() {
-        return map.get(通知書発行);
+    public boolean is(FukaSearchMenuGroup group) {
+        return this.groups.contains(group);
     }
 
     /**
@@ -143,13 +60,14 @@ public enum FukaSearchMenu {
      *
      * @param code コード
      * @return 列挙型
+     * @throws IllegalArgumentException 対応する列挙型がない場合
      */
-    public static FukaSearchMenu toValue(RString code) {
+    public static FukaSearchMenu toValue(RString code) throws IllegalArgumentException {
         for (FukaSearchMenu data : values()) {
-            if (data.getCode().equals(code)) {
+            if (data.code().equals(code)) {
                 return data;
             }
         }
-        return 不明;
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage(" 賦課対象者検索用のメニュー"));
     }
 }

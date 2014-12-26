@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.HihokenshaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.KaigoFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.KaigoFinderDetailDiv;
@@ -73,13 +74,13 @@ public final class HihokenshaFinder {
 
         HizukeConfig config = new HizukeConfig();
         FukaSearchMenu menu = FukaSearchMenu.toValue(UrControlDataFactory.createInstance().getMenuID());
-        if (menu.is更新()) {
+        if (menu.is(FukaSearchMenuGroup.更新系)) {
             開始年度 = config.get調定年度();
             終了年度 = config.get調定年度();
-        } else if (menu.is所得入力()) {
+        } else if (menu.is(FukaSearchMenuGroup.所得入力系)) {
             開始年度 = config.get所得年度();
             終了年度 = config.get当初年度();
-        } else if (menu.is即時更正()) {
+        } else if (menu.is(FukaSearchMenuGroup.即時更正系)) {
             開始年度 = config.get調定年度();
             終了年度 = config.get遡及年度();
         } else {
@@ -89,7 +90,7 @@ public final class HihokenshaFinder {
 
         List<KeyValueDataSource> 賦課年度List = create賦課年度List(開始年度, 終了年度);
 
-        if (menu.is賦課照会()) {
+        if (menu.is(FukaSearchMenuGroup.賦課照会系)) {
             賦課年度List.add(0, new KeyValueDataSource(FlexibleYear.MAX.toDateString(), 全年度));
         }
 

@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.FukaTaishoshaSearchResult;
 import jp.co.ndensan.reams.db.dbz.business.TaishoshaSearchResult;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup;
 import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaModel;
 import jp.co.ndensan.reams.db.dbz.model.TaishoshaModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.TaishoshaRelateDac;
@@ -79,7 +80,7 @@ public class TaishoshaFinder {
         FukaSearchMenu menu = FukaSearchMenu.toValue(UrControlDataFactory.createInstance().getMenuID());
         ITrueFalseCriteria 介護条件 = getCriteria(条件, 除外条件);
         IPsmCriteria 宛名psm = getPsmCriteria(宛名キー);
-        boolean is内部結合 = (menu.is照会() || menu.is更正計算());
+        boolean is内部結合 = (menu.is(FukaSearchMenuGroup.照会系) || menu.is(FukaSearchMenuGroup.更正計算系));
         List<FukaTaishoshaModel> result = dac.select賦課対象者(介護条件, 宛名psm, is内部結合, 最大件数);
         return new FukaTaishoshaSearchResult(result.size(), result);
     }
