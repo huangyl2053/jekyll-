@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.config;
+package jp.co.ndensan.reams.db.dbz.business.config.shikaku;
 
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysHihokenshashoSofusakiInfo;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoSofusakiInfo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -59,18 +60,22 @@ public class HihokenshashoSofusakiInfoConfigTest {
     private static IUrBusinessConfig createBusinessConfigMock() {
         IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
         RDate nowDate = RDate.getNowDate();
+        SubGyomuCode subGyomu = SubGyomuCode.DBA介護資格;
 
         when(mock.get(
                 ConfigKeysHihokenshashoSofusakiInfo.被保険者証_送付先情報_世帯主表示有無,
-                nowDate
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("0"));
         when(mock.get(
                 ConfigKeysHihokenshashoSofusakiInfo.被保険者証_送付先情報_敬称表示方法,
-                nowDate
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("1"));
         when(mock.get(
                 ConfigKeysHihokenshashoSofusakiInfo.被保険者証_外部帳票文字切れ制御方法,
-                nowDate
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("1"));
         return mock;
     }

@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.config;
+package jp.co.ndensan.reams.db.dbz.business.config.shikaku;
 
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysHihokenshashoIndicationMethod;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoPrint;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
@@ -25,15 +26,15 @@ import static org.mockito.Mockito.when;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class HihokenshashoIndicationMethodConfigTest {
+public class HihokenshashoIndicationPrintConfigTest {
 
     public static class get extends DbaTestBase {
 
-        private HihokenshashoIndicationMethodConfig sut;
+        private HihokenshashoPrintConfig sut;
 
         @Before
         public void setUp() {
-            sut = new HihokenshashoIndicationMethodConfig(createBusinessConfigMock());
+            sut = new HihokenshashoPrintConfig(createBusinessConfigMock());
         }
 
         @Test
@@ -113,54 +114,67 @@ public class HihokenshashoIndicationMethodConfigTest {
     private static IUrBusinessConfig createBusinessConfigMock() {
         IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
         RDate nowDate = RDate.getNowDate();
+        SubGyomuCode subGyomu = SubGyomuCode.DBA介護資格;
 
         when(mock.get(
-                ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_氏名カナ表示有無,
-                nowDate
+                ConfigKeysHihokenshashoPrint.被保険者証表示方法_氏名カナ表示有無,
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("1"));
         when(mock.get(
-                ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_証表示タイプ,
-                nowDate
+                ConfigKeysHihokenshashoPrint.被保険者証表示方法_証表示タイプ,
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("21"));
         when(mock.get(
-                ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_被保険者番号表示書式,
-                nowDate
+                ConfigKeysHihokenshashoPrint.被保険者証表示方法_被保険者番号表示書式,
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("2"));
         when(mock.get(
-                ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_郵便番号表示有無,
-                nowDate
+                ConfigKeysHihokenshashoPrint.被保険者証表示方法_郵便番号表示有無,
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("1"));
         when(mock.get(
-                ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_要介護認定期限切れ_表示有無,
-                nowDate
+                ConfigKeysHihokenshashoPrint.被保険者証表示方法_要介護認定期限切れ_表示有無,
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("1"));
         when(mock.get(
-                ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_居宅支援事業者適用切れ_表示有無,
-                nowDate
+                ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者適用切れ_表示有無,
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("1"));
         when(mock.get(
-                ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_居宅支援事業者履歴_表示方法,
-                nowDate
+                ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者履歴_表示方法,
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("0"));
         when(mock.get(
-                ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_合併前印刷時_有効期限,
-                nowDate
+                ConfigKeysHihokenshashoPrint.被保険者証表示方法_合併前印刷時_有効期限,
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("2"));
         when(mock.get(
-                ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_委託代行業者_表示有無,
-                nowDate
+                ConfigKeysHihokenshashoPrint.被保険者証表示方法_委託代行業者_表示有無,
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("0"));
         when(mock.get(
-                ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_委託代行業者_表示開始文言,
-                nowDate
+                ConfigKeysHihokenshashoPrint.被保険者証表示方法_委託代行業者_表示開始文言,
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("(委託先:"));
         when(mock.get(
-                ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_委託代行業者_表示終了文言,
-                nowDate
+                ConfigKeysHihokenshashoPrint.被保険者証表示方法_委託代行業者_表示終了文言,
+                nowDate,
+                subGyomu
         )).thenReturn(new RString(")"));
         when(mock.get(
-                ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_居宅支援事業者届出日_適用開始日切替表示区分,
-                nowDate
+                ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者届出日_適用開始日切替表示区分,
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("0"));
         return mock;
     }

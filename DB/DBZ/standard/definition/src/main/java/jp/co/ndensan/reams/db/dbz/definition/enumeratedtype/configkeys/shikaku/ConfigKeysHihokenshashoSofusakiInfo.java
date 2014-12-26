@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config;
+package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.shikaku;
 
 /**
  * 被保険者証の送付先情報を印字する際に参照される業務コンフィグです。

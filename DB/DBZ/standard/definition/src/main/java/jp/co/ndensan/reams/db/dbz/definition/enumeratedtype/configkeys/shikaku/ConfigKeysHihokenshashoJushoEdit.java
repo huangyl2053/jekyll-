@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config;
+package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.shikaku;
 
 /**
  * 被保険者表示方法に定義されている中の、被保険者証独自の住所編集方法に関連する業務コンフィグです。
