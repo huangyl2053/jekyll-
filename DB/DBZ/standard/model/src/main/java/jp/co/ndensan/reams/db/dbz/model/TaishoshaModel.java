@@ -5,10 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.model;
 
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureishaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV7901ShikakuSearchEntity;
 import jp.co.ndensan.reams.db.dbz.entity.relate.TaishoshaRelateEntity;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.DbOptional;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
@@ -22,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 
 /**
  * 対象者のモデルです。（資格系）
@@ -37,7 +38,6 @@ public class TaishoshaModel {
     private static final RString 他住 = new RString("他住");
     private static final RString 自住 = new RString("自住");
     private static final RString 資格 = new RString("資格");
-    private static final RString 住所地特例者 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -78,7 +78,7 @@ public class TaishoshaModel {
 
         IOptional<RString> 適用除外適用事由コード = DbOptional.ofNullable(shikakuEntity.getTekiyoJogaiTekiyoJiyuCode());
         IOptional<RString> 他市町村住所地特例適用事由コード = DbOptional.ofNullable(shikakuEntity.getTatokureiTekiyoJiyuCode());
-        IOptional<RString> 住所地特例フラグ = DbOptional.ofNullable(shikakuEntity.getJushochiTokureiFlag());
+        JushochitokureishaKubun 住所地特例フラグ = JushochitokureishaKubun.toValue(shikakuEntity.getJushochiTokureiFlag());
         IOptional<HihokenshaNo> 被保険者番号 = DbOptional.ofNullable(shikakuEntity.getHihokenshaNo());
         IOptional<FlexibleDate> 資格喪失日 = DbOptional.ofNullable(shikakuEntity.getShikakuSoshitsuYMD());
 
@@ -86,7 +86,7 @@ public class TaishoshaModel {
             return 適除;
         } else if (他市町村住所地特例適用事由コード.isPresent()) {
             return 他住;
-        } else if (住所地特例フラグ.isPresent() && 住所地特例フラグ.get().equals(住所地特例者)) {
+        } else if (住所地特例フラグ == JushochitokureishaKubun.住所地特例者) {
             return 自住;
         } else if (被保険者番号.isPresent() && !資格喪失日.isPresent()) {
             return 資格;
