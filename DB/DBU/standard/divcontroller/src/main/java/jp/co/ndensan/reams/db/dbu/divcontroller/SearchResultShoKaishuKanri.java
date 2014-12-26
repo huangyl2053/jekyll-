@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.SearchResultShoKaishuKanriDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.SearchShoKaishuKanriDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.dgShoKaishuJokyo_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyolist.dgShoKaishuJokyo_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -118,7 +118,7 @@ public class SearchResultShoKaishuKanri {
     }
 
     private dgShoKaishuJokyo_Row createShoKaishuJokyoRow(ControlGenerator generator) {
-        dgShoKaishuJokyo_Row row = new dgShoKaishuJokyo_Row(new Button(), RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
+        dgShoKaishuJokyo_Row row = new dgShoKaishuJokyo_Row(RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate());
 
         row.setKofushoShurui(generator.getAsRString("証交付種類"));

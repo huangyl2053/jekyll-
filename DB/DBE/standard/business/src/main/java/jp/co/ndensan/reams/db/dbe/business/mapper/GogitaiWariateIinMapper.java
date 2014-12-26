@@ -125,4 +125,5 @@ public final class GogitaiWariateIinMapper {
         entity.setShinsainKubunCode(合議体割当委員.get認定調査員区分().getCode());
         return entity;
     }
+
 }

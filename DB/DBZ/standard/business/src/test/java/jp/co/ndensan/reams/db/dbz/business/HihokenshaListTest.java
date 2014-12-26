@@ -124,10 +124,10 @@ public class HihokenshaListTest extends DbzTestBase {
 
     private static List<Hihokensha> createHihokenshaList() {
         List<Hihokensha> list = new ArrayList<>();
-        list.add(HihokenshaMock.createHihokensha(l000002, s0000000001, rt2014_04_04_00_00, s000002, hn0000000002));
-        list.add(HihokenshaMock.createHihokensha(l000003, s0000000001, rt2014_04_02_00_00, s000003, hn0000000002));
-        list.add(HihokenshaMock.createHihokensha(l000004, s0000000002, rt2014_04_01_00_00, s000004, hn0000000001));
-        list.add(HihokenshaMock.createHihokensha(l000001, s0000000002, rt2014_04_03_00_00, s000001, hn0000000001));
+        list.add(HihokenshaMock.createHihokensha(l000002, s0000000001, rt2014_04_04_00_00, hn0000000002));
+        list.add(HihokenshaMock.createHihokensha(l000003, s0000000001, rt2014_04_02_00_00, hn0000000002));
+        list.add(HihokenshaMock.createHihokensha(l000004, s0000000002, rt2014_04_01_00_00, hn0000000001));
+        list.add(HihokenshaMock.createHihokensha(l000001, s0000000002, rt2014_04_03_00_00, hn0000000001));
         return list;
     }
 }

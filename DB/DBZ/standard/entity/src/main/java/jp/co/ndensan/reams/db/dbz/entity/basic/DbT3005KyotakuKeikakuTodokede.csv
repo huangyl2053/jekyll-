@@ -1,0 +1,14 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+shoKisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+taishoYM,UDD014YM,FlexibleYearMonth,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+todokedeKubun,varchar,RString,,,,,A
+todokedeYMD,UDD015YMD,FlexibleDate,,,,,A
+todokedeshaShimei,UDD042AtenaMeisho,AtenaMeisho,,,,,A
+todokedeshaShimeiKana,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,A
+todokedeshaYubinNo,UDD003YubinNo,YubinNo,,,,,A
+todokedeshaJusho,varchar,RString,,,,,A
+todokedeshaTelNo,UDD026TelNo,TelNo,,,,,A
+todokedeshaKankeiKubun,varchar,RString,,,,,A
+zanteiKubun,varchar,RString,,,,,A

@@ -1,0 +1,17 @@
+﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+kamokuCode,UDD024KamokuCode,KamokuCode,,,,,A
+ketteiYMD,UDD015YMD,FlexibleDate,,,,,A
+hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+shiharaiHohoKubun,bpchar,RString,,,,,A
+madoguchiShiharaiBashoCode,UDD035Code,Code,,,,,A
+madoguchiShiharaiKaishiYMDHM,UDD017YMDHM,YMDHM,,,,,A
+madoguchiShiharaiShuryoYMDHM,UDD017YMDHM,YMDHM,,,,,A
+furikomiYoteiYMD,UDD015YMD,FlexibleDate,,,,,A
+shiharaiKingaku,int4,int,,,,,A
+shubetsuCode,UDD035Code,Code,,,,,A
+yotoKubunCode,UDD035Code,Code,,,,,A
+ninshoYMD1,UDD015YMD,FlexibleDate,,,,,A
+ninshoshaCode1,UDD033NinshoshaCode,NinshoshaCode,,,,,A
+ninshoYMD2,UDD015YMD,FlexibleDate,,,,,A
+ninshoshaCode2,UDD033NinshoshaCode,NinshoshaCode,,,,,A

@@ -1,10 +1,5 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.入力補助;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.台帳種別;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.施設種類;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
@@ -15,43 +10,39 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
  */
 public interface IShisetsuJohoDiv {
 
+    /**
+     * 台帳種別をもつDropDownListを返します。
+     *
+     * @return 台帳種別を持つDropDownList
+     */
     DropDownList getDdlDaichoShubetsu();
 
+    /**
+     * 施設種類を持つRadioButtonを返します。
+     *
+     * @return 施設種類を持つRadioButton
+     */
     RadioButton getRadShisetsuShurui();
 
+    /**
+     * 施設コードをもつTextBoxCodeを返します。
+     *
+     * @return 施設コードをもつTextBoxCode
+     */
     TextBoxCode getTxtShisetsuCode();
 
-    ButtonDialog getBtnJigyoshaInputGuide();
-
-    ButtonDialog getBtnOtherTokureiShisetsuInputGuide();
-
-    ButtonDialog getBtnJogaiShisetsuInputGuide();
-
+    /**
+     * 施設名称をもつTextBoxを返します。
+     *
+     * @return 施設名称をもつTextBox
+     */
     TextBox getTxtShisetsuMeisho();
 
-    RString getSelectRow();
-
-    RString getInputMode();
-
-    台帳種別 getMode_台帳種別();
-
-    void setMode_台帳種別(台帳種別 value);
-
-    施設種類 getMode_施設種類();
-
-    void setMode_施設種類(ShisetsuJohoDiv.施設種類 value);
-
-    入力補助 getMode_入力補助();
-
-    void setMode_入力補助(ShisetsuJohoDiv.入力補助 value);
-
     /**
-     * 施設種類ラジオボタンの選択項目が変更された際に実行します。
+     * 自身のハンドラクラスを返します。
+     *
+     * @return 自身のハンドラ
      */
-    void onChange_radShisetsuShurui();
+    ShisetsuJohoHandler getHandler();
 
-    /**
-     * 台帳種別DropDonwnListの選択項目が変更された際に実行します。
-     */
-//    void onChange_ddlDaichoShubetsu();
 }

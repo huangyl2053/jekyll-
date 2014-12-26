@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba204001t.TaskTajutokuTaishosaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihon.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoshikakukihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;

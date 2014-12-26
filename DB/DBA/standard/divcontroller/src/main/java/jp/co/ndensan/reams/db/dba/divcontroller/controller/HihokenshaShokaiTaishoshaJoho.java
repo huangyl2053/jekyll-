@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShikaiTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.HihokenshaShokaiTaishoSearchDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.RootTitleSetter;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihon.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoshikakukihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;

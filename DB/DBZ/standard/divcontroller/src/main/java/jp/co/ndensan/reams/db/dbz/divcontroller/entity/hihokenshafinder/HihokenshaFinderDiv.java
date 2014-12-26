@@ -1,22 +1,14 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.IHihokenshaFinderDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.ButtonsForHihokenshaFinderDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.KaigoFinderDiv;
+import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigosaikinshorisharireki.IKaigoSaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigosaikinshorisharireki.KaigoSaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaFinderDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaFinderDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
-import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.ur.urz.business.IRecentUsed;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -31,12 +23,15 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 
 /**
- * HihokenshaFinder のクラスファイル 
- * 
+ * HihokenshaFinder のクラスファイル
+ *
  * @author 自動生成
  */
 public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
@@ -46,6 +41,7 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("KaigoFinder")
     private KaigoFinderDiv KaigoFinder;
     @JsonProperty("ccdAtenaFinder")
@@ -68,7 +64,7 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
 
     @JsonProperty("KaigoFinder")
     public void setKaigoFinder(KaigoFinderDiv KaigoFinder) {
-        this.KaigoFinder=KaigoFinder;
+        this.KaigoFinder = KaigoFinder;
     }
 
     @JsonProperty("ccdAtenaFinder")
@@ -83,7 +79,7 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
 
     @JsonProperty("ButtonsForHihokenshaFinder")
     public void setButtonsForHihokenshaFinder(ButtonsForHihokenshaFinderDiv ButtonsForHihokenshaFinder) {
-        this.ButtonsForHihokenshaFinder=ButtonsForHihokenshaFinder;
+        this.ButtonsForHihokenshaFinder = ButtonsForHihokenshaFinder;
     }
 
     @JsonProperty("ccdSaikinShorisha")
@@ -112,7 +108,7 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
             保険者[] enumArray = 保険者.values();
 
             for (保険者 enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -127,11 +123,11 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
     }
 
     public 保険者 getMode_保険者() {
-        return (保険者) _CommonChildDivModeUtil.getMode( this.modes, 保険者.class );
+        return (保険者) _CommonChildDivModeUtil.getMode(this.modes, 保険者.class);
     }
 
-    public void setMode_保険者( 保険者 value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 保険者.class , value );
+    public void setMode_保険者(保険者 value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 保険者.class, value);
     }
 
     public static enum 表示モード implements ICommonChildDivMode {
@@ -149,7 +145,7 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
             表示モード[] enumArray = 表示モード.values();
 
             for (表示モード enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -164,11 +160,11 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
     }
 
     public 表示モード getMode_表示モード() {
-        return (表示モード) _CommonChildDivModeUtil.getMode( this.modes, 表示モード.class );
+        return (表示モード) _CommonChildDivModeUtil.getMode(this.modes, 表示モード.class);
     }
 
-    public void setMode_表示モード( 表示モード value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, 表示モード.class , value );
+    public void setMode_表示モード(表示モード value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 表示モード.class, value);
     }
 
     //--------------- この行より下にコードを追加してください -------------------

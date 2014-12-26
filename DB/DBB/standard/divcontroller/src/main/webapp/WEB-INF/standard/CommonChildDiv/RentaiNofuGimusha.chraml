@@ -1,0 +1,490 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBB&quot;,&quot;controlName&quot;:&quot;RentaiNofuGimusha&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[{&quot;key&quot;:&quot;nushiShikibetsuCode&quot;,&quot;controlName&quot;:&quot;txtShikibetsuCode&quot;},{&quot;key&quot;:&quot;nushiName&quot;,&quot;controlName&quot;:&quot;txtShimei&quot;}],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBB.RentaiNofuGimusha"><div title="" class="UzPanel FloatLeft JSControl Panel UzPanelAndText StateChangable marginLeft-XS marginRight-XS marginTop-XS marginBottom-XS UzCommonChildDivPanel Width-G6 UzCompositeChild" id="RentaiNofuGimusha" style="margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;RentaiNofuGimusha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G6&quot;,&quot;selectControlID&quot;:&quot;RentaiNofuGimusha&quot;,&quot;title&quot;:&quot;連帯納付義務者&quot;,&quot;marginTop&quot;:&quot;XS&quot;,&quot;marginBottom&quot;:&quot;XS&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;RentaiNofuGimusha&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="RentaiNofuGimusha_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">連帯納付義務者</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M Panel-EraseBoder ui-droppable ui-sortable" id="RentaiNofuGimusha_panel_body_area"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M marginLeft-XS UzCompositeChild" id="txtShikibetsuCode" style="width: 187px; height: 21px; margin-right: 0em;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtShikibetsuCode&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;120px&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtShikibetsuCode_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;氏名&quot;,&quot;labelLWidth&quot;:&quot;60px&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShikibetsuCode_labelL" style="width: 60px;"><span>氏名</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input readonlyColor" id="txtShikibetsuCode_core" style="width: 120px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginRight-XS UzCompositeChild" id="txtShimei" style="width: 245px; height: 21px; margin-left: 0.1em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShimei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;240px&quot;,&quot;marginLeft&quot;:&quot;0.1em&quot;,&quot;selectControlID&quot;:&quot;txtShimei_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[]}"><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtShimei_core" style="width: 240px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtKaishiYMD" style="width: 147px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtKaishiYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtKaishiYMD_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;開始日&quot;,&quot;labelLWidth&quot;:&quot;60px&quot;,&quot;displayFormat&quot;:1,&quot;textKind&quot;:0}"><span class="word-wrap-break-word Label-L text-align-right" id="txtKaishiYMD_labelL" style="width: 60px;"><span>開始日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtKaishiYMD_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtSyuryoYMD" style="width: 167px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtSyuryoYMD&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtSyuryoYMD_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;終了日&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;,&quot;displayFormat&quot;:1,&quot;textKind&quot;:0}"><span class="word-wrap-break-word Label-L text-align-right" id="txtSyuryoYMD_labelL" style="width: 80px;"><span>終了日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtSyuryoYMD_core" style="width: 80px;" type="text" readonly="readonly" placeholder="" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBB;
+(function (DBB) {
+    var RentaiNofuGimusha_Design = (function (_super) {
+        __extends(RentaiNofuGimusha_Design, _super);
+        function RentaiNofuGimusha_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, RentaiNofuGimusha_Design.myLayout, fieldName);
+        }
+        RentaiNofuGimusha_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        RentaiNofuGimusha_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        RentaiNofuGimusha_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "RentaiNofuGimusha",
+                    "items": [
+                        {
+                            "fieldName": "txtShikibetsuCode",
+                            "items": [],
+                            "controlType": "TextBoxCode",
+                            "width": "120px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "0em",
+                            "selectControlID": "txtShikibetsuCode_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 2,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "氏名",
+                            "labelRText": "",
+                            "labelLWidth": "60px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": "",
+                            "formatLength": "15"
+                        },
+                        {
+                            "fieldName": "txtShimei",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "240px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0.1em",
+                            "marginRight": "XS",
+                            "selectControlID": "txtShimei_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "",
+                            "labelRText": "",
+                            "labelLWidth": "S",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": ""
+                        },
+                        {
+                            "fieldName": "txtKaishiYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtKaishiYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "value": "",
+                            "labelLText": "開始日",
+                            "labelRText": "",
+                            "labelLWidth": "60px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": "./_-",
+                            "ymdKubun": 2,
+                            "displayFormat": 1
+                        },
+                        {
+                            "fieldName": "txtSyuryoYMD",
+                            "items": [],
+                            "controlType": "TextBoxDate",
+                            "width": "80px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtSyuryoYMD_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": true,
+                            "required": false,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "text": "",
+                            "value": "",
+                            "labelLText": "終了日",
+                            "labelRText": "",
+                            "labelLWidth": "80px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": "",
+                            "permitCharactor": "./_-",
+                            "ymdKubun": 2,
+                            "displayFormat": 1
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G6",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "XS",
+                    "marginRight": "XS",
+                    "selectControlID": "RentaiNofuGimusha",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "連帯納付義務者",
+                    "marginTop": "XS",
+                    "marginBottom": "XS",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "RentaiNofuGimusha"
+                        }
+                    ],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": true,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": true
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0em",
+            "marginRight": "0em",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBB",
+            "controlName": "RentaiNofuGimusha",
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [],
+            "dataPassingForDialog": [
+                {
+                    "key": "nushiShikibetsuCode",
+                    "controlName": "txtShikibetsuCode"
+                },
+                {
+                    "key": "nushiName",
+                    "controlName": "txtShimei"
+                }
+            ],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
+        };
+        return RentaiNofuGimusha_Design;
+    })(Uz.CommonChildDiv);
+    DBB.RentaiNofuGimusha_Design = RentaiNofuGimusha_Design;
+
+    (function (RentaiNofuGimusha) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        RentaiNofuGimusha.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "RentaiNofuGimusha";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBB.RentaiNofuGimusha.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + fieldName;
+            };
+
+            Controls.prototype.RentaiNofuGimusha = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtShikibetsuCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtShikibetsuCode"));
+            };
+
+            Controls.prototype.txtShimei = function () {
+                return new UZA.TextBox(this.convFiledName("txtShimei"));
+            };
+
+            Controls.prototype.txtKaishiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKaishiYMD"));
+            };
+
+            Controls.prototype.txtSyuryoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSyuryoYMD"));
+            };
+            return Controls;
+        })();
+        RentaiNofuGimusha.Controls = Controls;
+    })(DBB.RentaiNofuGimusha || (DBB.RentaiNofuGimusha = {}));
+    var RentaiNofuGimusha = DBB.RentaiNofuGimusha;
+})(DBB || (DBB = {}));
+
+var DBB;
+(function (DBB) {
+    (function (RentaiNofuGimusha) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new RentaiNofuGimusha.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        RentaiNofuGimusha.ModeController = ModeController;
+    })(DBB.RentaiNofuGimusha || (DBB.RentaiNofuGimusha = {}));
+    var RentaiNofuGimusha = DBB.RentaiNofuGimusha;
+})(DBB || (DBB = {}));
+
+var DBB;
+(function (DBB) {
+    (function (RentaiNofuGimusha) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new RentaiNofuGimusha.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        RentaiNofuGimusha.PublicProperties = PublicProperties;
+    })(DBB.RentaiNofuGimusha || (DBB.RentaiNofuGimusha = {}));
+    var RentaiNofuGimusha = DBB.RentaiNofuGimusha;
+})(DBB || (DBB = {}));
+</script>
+  <script class="RamlConvert" type="text/javascript">
+var DBB= DBB? DBB: {};
+DBB['RENTAINOFUGIMUSHA'] = {};
+DBB['RENTAINOFUGIMUSHA'].RentaiNofuGimushaRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_RentaiNofuGimusha').getProperty();parameter0.txtShikibetsuCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShikibetsuCode').getProperty();parameter0.txtShimei = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShimei').getProperty();parameter0.txtKaishiYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKaishiYMD').getProperty();parameter0.txtSyuryoYMD = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSyuryoYMD').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBB;
+(function (DBB) {
+    (function (RentaiNofuGimusha) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        RentaiNofuGimusha.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "RentaiNofuGimusha";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBB.RentaiNofuGimusha.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBB.RentaiNofuGimusha.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.RentaiNofuGimusha = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtShikibetsuCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtShikibetsuCode"));
+            };
+
+            Controls.prototype.txtShimei = function () {
+                return new UZA.TextBox(this.convFiledName("txtShimei"));
+            };
+
+            Controls.prototype.txtKaishiYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKaishiYMD"));
+            };
+
+            Controls.prototype.txtSyuryoYMD = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtSyuryoYMD"));
+            };
+            return Controls;
+        })();
+        RentaiNofuGimusha.Controls = Controls;
+    })(DBB.RentaiNofuGimusha || (DBB.RentaiNofuGimusha = {}));
+    var RentaiNofuGimusha = DBB.RentaiNofuGimusha;
+})(DBB || (DBB = {}));
+var DBB;
+(function (DBB) {
+    (function (RentaiNofuGimusha) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new RentaiNofuGimusha.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        RentaiNofuGimusha.ModeController = ModeController;
+    })(DBB.RentaiNofuGimusha || (DBB.RentaiNofuGimusha = {}));
+    var RentaiNofuGimusha = DBB.RentaiNofuGimusha;
+})(DBB || (DBB = {}));
+
+var DBB;
+(function (DBB) {
+    (function (RentaiNofuGimusha) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new RentaiNofuGimusha.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        RentaiNofuGimusha.PublicProperties = PublicProperties;
+    })(DBB.RentaiNofuGimusha || (DBB.RentaiNofuGimusha = {}));
+    var RentaiNofuGimusha = DBB.RentaiNofuGimusha;
+})(DBB || (DBB = {}));
+</script></div>

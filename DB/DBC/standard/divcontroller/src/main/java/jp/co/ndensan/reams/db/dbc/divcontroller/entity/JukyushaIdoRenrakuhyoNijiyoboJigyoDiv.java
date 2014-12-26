@@ -25,6 +25,8 @@ public class JukyushaIdoRenrakuhyoNijiyoboJigyoDiv extends Panel {
     private RadioButton radNijiyoboJigyoKubun;
     @JsonProperty("txtNijiyoboJigyoYukoDateRange")
     private TextBoxDateRange txtNijiyoboJigyoYukoDateRange;
+    @JsonProperty("Button7")
+    private Button Button7;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -50,6 +52,16 @@ public class JukyushaIdoRenrakuhyoNijiyoboJigyoDiv extends Panel {
     @JsonProperty("txtNijiyoboJigyoYukoDateRange")
     public void setTxtNijiyoboJigyoYukoDateRange(TextBoxDateRange txtNijiyoboJigyoYukoDateRange) {
         this.txtNijiyoboJigyoYukoDateRange=txtNijiyoboJigyoYukoDateRange;
+    }
+
+    @JsonProperty("Button7")
+    public Button getButton7() {
+        return Button7;
+    }
+
+    @JsonProperty("Button7")
+    public void setButton7(Button Button7) {
+        this.Button7=Button7;
     }
 
 }

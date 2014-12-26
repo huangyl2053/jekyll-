@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IryoHokenRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.IryoHokenRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
@@ -19,24 +19,27 @@ public class IryoHokenRireki implements Serializable {
 
     public ResponseData<IryoHokenRirekiDiv> onLoad(IryoHokenRirekiDiv requestDiv) {
 
-        Dba3030011IryoHokenRirekiHandler handler = requestDiv.getHandler();
-        handler.initialize();
+        //TODO n8178 城間篤人 以前作成されたハンドラを削除したため一時的にコメントアウト。対応するハンドラを新規に作成した後に置き換えが必要 2014年12月
+//        Dba3030011IryoHokenRirekiHandler handler = requestDiv.getHandler();
+//        handler.initialize();
         return getResponseData(requestDiv);
 
     }
 
     public ResponseData<IryoHokenRirekiDiv> onClick_btnAddIryoHoken(IryoHokenRirekiDiv requestDiv) {
 
-        Dba3030011IryoHokenRirekiHandler handler = requestDiv.getHandler();
-        handler.onClick_btnAddIryoHoken();
+        //TODO n8178 城間篤人 以前作成されたハンドラを削除したため一時的にコメントアウト。対応するハンドラを新規に作成した後に置き換えが必要 2014年12月
+//        Dba3030011IryoHokenRirekiHandler handler = requestDiv.getHandler();
+//        handler.onClick_btnAddIryoHoken();
         return getResponseData(requestDiv);
 
     }
 
     public ResponseData<IryoHokenRirekiDiv> onClick_btnAddUpdate(IryoHokenRirekiDiv requestDiv) {
 
-        Dba3030011IryoHokenRirekiHandler handler = requestDiv.getHandler();
-        handler.onClick_btnAddUpdate();
+        //TODO n8178 城間篤人 以前作成されたハンドラを削除したため一時的にコメントアウト。対応するハンドラを新規に作成した後に置き換えが必要 2014年12月
+//        Dba3030011IryoHokenRirekiHandler handler = requestDiv.getHandler();
+//        handler.onClick_btnAddUpdate();
         return getResponseData(requestDiv);
 
     }

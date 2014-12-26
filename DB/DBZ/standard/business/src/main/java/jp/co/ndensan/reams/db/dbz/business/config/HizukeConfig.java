@@ -5,17 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysHizuke;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 
 /**
  * 日付のコンフィグを取得するクラスです。
@@ -115,5 +117,155 @@ public class HizukeConfig {
             throw new SystemException(UrSystemErrorMessages.値がnull.getReplacedMessage("日付関連_遡及年度"));
         }
         return new FlexibleYear(data);
+    }
+
+    /**
+     * 日付関連_月別テーブル1を返します。
+     *
+     * @return 日付関連_月別テーブル1
+     */
+    public RString get月別テーブル1() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル1);
+    }
+
+    /**
+     * 日付関連_月別テーブル2を返します。
+     *
+     * @return 日付関連_月別テーブル2
+     */
+    public RString get月別テーブル2() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル2);
+    }
+
+    /**
+     * 日付関連_月別テーブル3を返します。
+     *
+     * @return 日付関連_月別テーブル3
+     */
+    public RString get月別テーブル3() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル3);
+    }
+
+    /**
+     * 日付関連_月別テーブル4を返します。
+     *
+     * @return 日付関連_月別テーブル4
+     */
+    public RString get月別テーブル4() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル4);
+    }
+
+    /**
+     * 日付関連_月別テーブル5を返します。
+     *
+     * @return 日付関連_月別テーブル5
+     */
+    public RString get月別テーブル5() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル5);
+    }
+
+    /**
+     * 日付関連_月別テーブル6を返します。
+     *
+     * @return 日付関連_月別テーブル6
+     */
+    public RString get月別テーブル6() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル6);
+    }
+
+    /**
+     * 日付関連_月別テーブル7を返します。
+     *
+     * @return 日付関連_月別テーブル7
+     */
+    public RString get月別テーブル7() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル7);
+    }
+
+    /**
+     * 日付関連_月別テーブル8を返します。
+     *
+     * @return 日付関連_月別テーブル8
+     */
+    public RString get月別テーブル8() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル8);
+    }
+
+    /**
+     * 日付関連_月別テーブル9を返します。
+     *
+     * @return 日付関連_月別テーブル9
+     */
+    public RString get月別テーブル9() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル9);
+    }
+
+    /**
+     * 日付関連_月別テーブル10を返します。
+     *
+     * @return 日付関連_月別テーブル10
+     */
+    public RString get月別テーブル10() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル10);
+    }
+
+    /**
+     * 日付関連_月別テーブル11を返します。
+     *
+     * @return 日付関連_月別テーブル11
+     */
+    public RString get月別テーブル11() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル11);
+    }
+
+    /**
+     * 日付関連_月別テーブル12を返します。
+     *
+     * @return 日付関連_月別テーブル12
+     */
+    public RString get月別テーブル12() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル12);
+    }
+
+    /**
+     * 日付関連_月別テーブル13を返します。
+     *
+     * @return 日付関連_月別テーブル13
+     */
+    public RString get月別テーブル13() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル13);
+    }
+
+    /**
+     * 日付関連_月別テーブル14を返します。
+     *
+     * @return 日付関連_月別テーブル14
+     */
+    public RString get月別テーブル14() {
+        return get(ConfigKeysHizuke.日付関連_月別テーブル14);
+    }
+
+    /**
+     * 日付関連_月別テーブルをリストで返します。
+     *
+     * @return 日付関連_月別テーブル
+     */
+    public List<RString> get月別テーブル() {
+        List<RString> list = new ArrayList<>();
+        list.add(get月別テーブル1());
+        list.add(get月別テーブル2());
+        list.add(get月別テーブル3());
+        list.add(get月別テーブル4());
+        list.add(get月別テーブル5());
+        list.add(get月別テーブル6());
+        list.add(get月別テーブル7());
+        list.add(get月別テーブル8());
+        list.add(get月別テーブル9());
+        list.add(get月別テーブル10());
+        list.add(get月別テーブル11());
+        list.add(get月別テーブル12());
+        list.add(get月別テーブル13());
+        list.add(get月別テーブル14());
+        return list;
     }
 }

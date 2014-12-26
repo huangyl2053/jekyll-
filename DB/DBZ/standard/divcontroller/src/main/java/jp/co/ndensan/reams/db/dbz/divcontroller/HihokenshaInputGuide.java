@@ -36,10 +36,9 @@ public class HihokenshaInputGuide {
     public ResponseData onLoad(HihokenshaInputGuideDiv inputGuideDiv) {
         ResponseData<HihokenshaInputGuideDiv> response = new ResponseData<>();
 
-        List<HashMap> yamlDataList = YamlLoader.DBZ.loadAsList(HIHOKENSHA_DATA);
-        HashMap hashMap = yamlDataList.get(0);
-        ControlGenerator ymlData = new ControlGenerator(hashMap);
-
+//        List<HashMap> yamlDataList = YamlLoader.DBZ.loadAsList(HIHOKENSHA_DATA);
+//        HashMap hashMap = yamlDataList.get(0);
+//        ControlGenerator ymlData = new ControlGenerator(hashMap);
 //        //検索キー氏名の初期値設定
 //        inputGuideDiv.getHihokenshaFinder().getKaigoAtenaFinder().getTxtAtenaMeisho().
 //                setValue(ymlData.getAsRString("検索条件氏名"));

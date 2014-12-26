@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.IPaymentMethodDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBZJuryoininDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.URKozaDiv;
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * 
  * @author 自動生成
  */
-public class PaymentMethodDiv extends Panel {
+public class PaymentMethodDiv extends Panel implements IPaymentMethodDiv {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -65,5 +66,7 @@ public class PaymentMethodDiv extends Panel {
     public void setDBZJuryoinin(DBZJuryoininDiv DBZJuryoinin) {
         this.DBZJuryoinin=DBZJuryoinin;
     }
+
+    //--------------- この行より下にコードを追加してください -------------------
 
 }

@@ -12,14 +12,12 @@ import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.helper.DbT1001HihokenshaDaichoEntityMock;
 import jp.co.ndensan.reams.db.dbz.business.mapper.HihokenshaShikakuMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.realservice.search.HihokenshaSearchItem;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.realservice.search.BooleanOperator;
 import jp.co.ndensan.reams.ur.urz.realservice.search.INewSearchCondition;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.ur.urz.realservice.search.SearchConditionFactory;
@@ -51,16 +49,16 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
 
     public static class save extends DbzTestBase {
 
-        private HihokenshaDaichoManager sut;
+        private _HihokenshaDaichoManager sut;
         private HihokenshaDaichoDac dac;
         private IHihokenshaShikaku shikaku;
 
         @Before
         public void setUp() {
             dac = mock(HihokenshaDaichoDac.class);
-            sut = new HihokenshaDaichoManager(dac, HihokenshaNoSaibanService.forTestType(new RString("1234567890")));
+            sut = new _HihokenshaDaichoManager(dac, HihokenshaNoSaibanService.forTestType(new RString("1234567890")));
             shikaku = new HihokenshaShikaku.Builder(new LasdecCode("123456"), new ShikibetsuCode("1234567890"),
-                    new YMDHMS("20110912012345"), new ShoKisaiHokenshaNo(new RString("123456")),
+                    new YMDHMS("20110912012345"),
                     new HihokenshaKubun(new Code("1"), new RString("第1号")), FlexibleDate.MAX, ShikakuShutoku.NOTHING)
                     .build();
         }
@@ -80,16 +78,16 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
 
     public static class remove extends DbzTestBase {
 
-        private HihokenshaDaichoManager sut;
+        private _HihokenshaDaichoManager sut;
         private HihokenshaDaichoDac dac;
         private IHihokenshaShikaku shikaku;
 
         @Before
         public void setUp() {
             dac = mock(HihokenshaDaichoDac.class);
-            sut = new HihokenshaDaichoManager(dac, HihokenshaNoSaibanService.forTestType(new RString("1234567890")));
+            sut = new _HihokenshaDaichoManager(dac, HihokenshaNoSaibanService.forTestType(new RString("1234567890")));
             shikaku = new HihokenshaShikaku.Builder(new LasdecCode("123456"), new ShikibetsuCode("1234567890"),
-                    new YMDHMS("20110912012345"), new ShoKisaiHokenshaNo(new RString("123456")),
+                    new YMDHMS("20110912012345"),
                     new HihokenshaKubun(new Code("1"), new RString("第1号")), FlexibleDate.MAX, ShikakuShutoku.NOTHING)
                     .build();
         }
@@ -116,7 +114,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
         private static final YMDHMS shoriTimestamp = new YMDHMS("20140417095900");
         private static final HihokenshaNo hihokenshaNo = new HihokenshaNo(new RString("1562483169"));
         private static IHihokenshaShikaku shikaku;
-        private static HihokenshaDaichoManager sut;
+        private static _HihokenshaDaichoManager sut;
 
         @BeforeClass
         public static void setUpClass() {
@@ -132,7 +130,7 @@ public class HihokenshaDaichoManagerTest extends DbzTestBase {
             when(dac.selectFromKey(lasdecCode, shikibetsuCode, shoriTimestamp))
                     .thenReturn(entity);
 
-            sut = new HihokenshaDaichoManager(dac, HihokenshaNoSaibanService.forTestType(new RString("1234567890")));
+            sut = new _HihokenshaDaichoManager(dac, HihokenshaNoSaibanService.forTestType(new RString("1234567890")));
         }
 
         public static class get直近被保険者資格_ShikibetsuCode版 extends DbzTestBase {

@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuJizenShinseiTabDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgJutakuKaishuJizenShinseiDetail_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KozaPayment;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShinseishaInfo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -43,10 +41,10 @@ public class JutakuKaishuJizenShinseiTab {
 
     private void set住宅改修申請内容(JutakuKaishuJizenShinseiTabDiv panel) {
         int rowId = 0;
-        ShinseishaInfo.setData(panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuJizenShinseisha(), rowId);
-        panel.getTabJizenShinsei().getTplJizenShinseiPayMethod().getPaymentMethod().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
-        KozaPayment.setData(panel.getTabJizenShinsei().getTplJizenShinseiPayMethod().getPaymentMethod().getKozaPayment(), rowId);
-        set住宅改修明細List(panel);
+//        ShinseishaInfo.setData(panel.getTabJizenShinsei().getTplJizenShinseiContents().getJutakuKaishuJizenShinseisha(), rowId);
+//        panel.getTabJizenShinsei().getTplJizenShinseiPayMethod().getPaymentMethod().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
+//        KozaPayment.setData(panel.getTabJizenShinsei().getTplJizenShinseiPayMethod().getPaymentMethod().getKozaPayment(), rowId);
+//        set住宅改修明細List(panel);
 
         List<HashMap> targetSource = YamlLoader.DBC.loadAsList(new RString("JutakuKaishuShinsei.yml"));
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
@@ -70,24 +68,23 @@ public class JutakuKaishuJizenShinseiTab {
         List<HashMap> targetSource = YamlLoader.DBC.loadAsList(new RString("JutakuKaishuShinsei.yml"));
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
 
-        panel.getTabJizenShinsei().getTplJizenShinseiResult().getJutakuKaishuJizenShinseiKyufugakuSummary()
-                .getTblSeikyuSummary().getTxtHiyoTotalMae().setValue(cg.getAsDecimal("費用額合計前"));
-        panel.getTabJizenShinsei().getTplJizenShinseiResult().getJutakuKaishuJizenShinseiKyufugakuSummary()
-                .getTblSeikyuSummary().getTxtHokenTaishoHiyoMae().setValue(cg.getAsDecimal("対象費用額前"));
-        panel.getTabJizenShinsei().getTplJizenShinseiResult().getJutakuKaishuJizenShinseiKyufugakuSummary()
-                .getTblSeikyuSummary().getTxtHokenKyufuAmountMae().setValue(cg.getAsDecimal("給付額前"));
-        panel.getTabJizenShinsei().getTplJizenShinseiResult().getJutakuKaishuJizenShinseiKyufugakuSummary()
-                .getTblSeikyuSummary().getTxtRiyoshaFutanAmountMae().setValue(cg.getAsDecimal("利用者負担額前"));
-
-        panel.getTabJizenShinsei().getTplJizenShinseiResult().getJutakuKaishuJizenShinseiKyufugakuSummary()
-                .getTblSeikyuSummary().getTxtHiyoTotalNow().setValue(cg.getAsDecimal("費用額合計後"));
-        panel.getTabJizenShinsei().getTplJizenShinseiResult().getJutakuKaishuJizenShinseiKyufugakuSummary()
-                .getTblSeikyuSummary().getTxtHokenTaishoHiyoNow().setValue(cg.getAsDecimal("対象費用額後"));
-        panel.getTabJizenShinsei().getTplJizenShinseiResult().getJutakuKaishuJizenShinseiKyufugakuSummary()
-                .getTblSeikyuSummary().getTxtHokenKyufuAmountNow().setValue(cg.getAsDecimal("給付額後"));
-        panel.getTabJizenShinsei().getTplJizenShinseiResult().getJutakuKaishuJizenShinseiKyufugakuSummary()
-                .getTblSeikyuSummary().getTxtRiyoshaFutanAmountNow().setValue(cg.getAsDecimal("利用者負担額後"));
-
+//        panel.getTabJizenShinsei().getTplJizenShinseiResult().getJutakuKaishuJizenShinseiKyufugakuSummary()
+//                .getTblSeikyuSummary().getTxtHiyoTotalMae().setValue(cg.getAsDecimal("費用額合計前"));
+//        panel.getTabJizenShinsei().getTplJizenShinseiResult().getJutakuKaishuJizenShinseiKyufugakuSummary()
+//                .getTblSeikyuSummary().getTxtHokenTaishoHiyoMae().setValue(cg.getAsDecimal("対象費用額前"));
+//        panel.getTabJizenShinsei().getTplJizenShinseiResult().getJutakuKaishuJizenShinseiKyufugakuSummary()
+//                .getTblSeikyuSummary().getTxtHokenKyufuAmountMae().setValue(cg.getAsDecimal("給付額前"));
+//        panel.getTabJizenShinsei().getTplJizenShinseiResult().getJutakuKaishuJizenShinseiKyufugakuSummary()
+//                .getTblSeikyuSummary().getTxtRiyoshaFutanAmountMae().setValue(cg.getAsDecimal("利用者負担額前"));
+//
+//        panel.getTabJizenShinsei().getTplJizenShinseiResult().getJutakuKaishuJizenShinseiKyufugakuSummary()
+//                .getTblSeikyuSummary().getTxtHiyoTotalNow().setValue(cg.getAsDecimal("費用額合計後"));
+//        panel.getTabJizenShinsei().getTplJizenShinseiResult().getJutakuKaishuJizenShinseiKyufugakuSummary()
+//                .getTblSeikyuSummary().getTxtHokenTaishoHiyoNow().setValue(cg.getAsDecimal("対象費用額後"));
+//        panel.getTabJizenShinsei().getTplJizenShinseiResult().getJutakuKaishuJizenShinseiKyufugakuSummary()
+//                .getTblSeikyuSummary().getTxtHokenKyufuAmountNow().setValue(cg.getAsDecimal("給付額後"));
+//        panel.getTabJizenShinsei().getTplJizenShinseiResult().getJutakuKaishuJizenShinseiKyufugakuSummary()
+//                .getTblSeikyuSummary().getTxtRiyoshaFutanAmountNow().setValue(cg.getAsDecimal("利用者負担額後"));
         panel.getTabJizenShinsei().getTplJizenShinseiResult().getTxtJudgeDate().setValue(cg.getAsRDate("judgeDate"));
         panel.getTabJizenShinsei().getTplJizenShinseiResult().getRadJudgeKubun().setSelectedItem(cg.getAsRString("judgeKubun"));
         panel.getTabJizenShinsei().getTplJizenShinseiResult().getTxtShoninCondition().setValue(cg.getAsRString("shoninCondition"));

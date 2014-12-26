@@ -1,0 +1,1256 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBE&quot;,&quot;controlName&quot;:&quot;ChosaItakusakiSelector&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[{&quot;key&quot;:&quot;chosaItakusakiCode&quot;,&quot;controlName&quot;:&quot;ChosaItakusakiSelector.chosaItakusakiCode&quot;},{&quot;key&quot;:&quot;chosaItakusakiName&quot;,&quot;controlName&quot;:&quot;ChosaItakusakiSelector.chosaItakusakiName&quot;},{&quot;key&quot;:&quot;chosainCode&quot;,&quot;controlName&quot;:&quot;ChosaItakusakiSelector.chosainCode&quot;},{&quot;key&quot;:&quot;chosainName&quot;,&quot;controlName&quot;:&quot;ChosaItakusakiSelector.chosainName&quot;}],&quot;dialogOkEventNameForDialog&quot;:&quot;onClick_btnSelectAndClose&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;onClick_btnNonSelectReturn&quot;,&quot;heightForDialog&quot;:&quot;450px&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBE.ChosaItakusakiSelector"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-Default marginRight-Default marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G8 UzCompositeChild" id="ChosaItakusakiSelector" style="margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ChosaItakusakiSelector&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G8&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;ChosaItakusakiSelector&quot;,&quot;title&quot;:&quot;調査委託先選択&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ChosaItakusakiSelector&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/ChosaItakusakiSelector/onLoad&quot;},{&quot;eventName&quot;:&quot;onSelectByDC_ChosaItakusaki&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/ChosaItakusakiSelector/onSelectByDC_ChosaItakusaki&quot;},{&quot;eventName&quot;:&quot;onSelectBySB_ChosaItakusaki&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/ChosaItakusakiSelector/onSelectBySB_ChosaItakusaki&quot;},{&quot;eventName&quot;:&quot;onSelectByDC_Chosain&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/ChosaItakusakiSelector/onSelectByDC_Chosain&quot;},{&quot;eventName&quot;:&quot;onSelectBySB_Chosain&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/ChosaItakusakiSelector/onSelectBySB_Chosain&quot;},{&quot;eventName&quot;:&quot;onClick_btnSelectAndClose&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/ChosaItakusakiSelector/onClick_btnSelectAndClose&quot;},{&quot;eventName&quot;:&quot;onClick_btnNonSelectReturn&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/ChosaItakusakiSelector/onClick_btnNonSelectReturn&quot;}],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;chosaItakusakiCode&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;chosaItakusakiName&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;chosainCode&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;chosainName&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;height&quot;:&quot;410px&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ChosaItakusakiSelector_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">調査委託先選択</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="ChosaItakusakiSelector_panel_body_area" style="height: 410px;"><div title="" class="UzPanel FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default UzCompositeChild" id="ChosaItakusaki" style="width: 720px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ChosaItakusaki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;720px&quot;,&quot;selectControlID&quot;:&quot;ChosaItakusaki&quot;,&quot;title&quot;:&quot;調査委託先&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ChosaItakusaki&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:1,&quot;canPost&quot;:true}"><div class="UzPanelHeader clearBackground" id="ChosaItakusaki_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">調査委託先</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M Panel-GroupBox ui-droppable ui-sortable" id="ChosaItakusaki_panel_body_area"><div title="" class="UzPanel FloatLeft JSControl Panel StateChangable Width-G2 UzCompositeChild" id="ChosaItakusakiList" style="margin: 0em; width: auto;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ChosaItakusakiList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;ChosaItakusakiList&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ChosaItakusakiList&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ChosaItakusakiList_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="ChosaItakusakiList_panel_body_area"><button title="" class="UzButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="btnToMentenanceChosaKikan" style="width: 200px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnToMentenanceChosaKikan&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;200px&quot;,&quot;selectControlID&quot;:&quot;btnToMentenanceChosaKikan&quot;,&quot;text&quot;:&quot;調査委託先情報を修正する&quot;}"><span>調査委託先情報を修正する</span></button><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="dgChosaItakusakiList" style="width: 370px; height: 220px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgChosaItakusakiList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;370px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;dgChosaItakusakiList&quot;,&quot;height&quot;:&quot;220px&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:true,&quot;isShowFilterButton&quot;:true,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:true,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;番号&quot;,&quot;dataName&quot;:&quot;chosaItakusakiNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:82,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosaItakusakiNo&quot;},{&quot;columnName&quot;:&quot;名称&quot;,&quot;dataName&quot;:&quot;chosaItakusakiName&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:230,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosaItakusakiName&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;onSelect&quot;:&quot;onSelect_dgChosaItakusakiList&quot;,&quot;onSelectByDblClick&quot;:&quot;onSelectByDC_ChosaItakusaki&quot;,&quot;onSelectBySelectButton&quot;:&quot;onSelectBySB_ChosaItakusaki&quot;,&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgChosaItakusakiList_grid_table" role="" style="width: 370px; height: 195px; position: relative;"></div><div id="dgChosaItakusakiList_footer" style="width: 370px; height: 25px;"></div></div></div></div><div title="" class="UzPanel FloatLeft JSControl Panel StateChangable marginLeft-XS Width-G2 UzCompositeChild" id="Chosain" style="width: auto; margin-top: 0em; margin-right: 0em; margin-bottom: 0em;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;Chosain&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;Chosain&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;Chosain&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="Chosain_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="Chosain_panel_body_area"><div title="" class="UzSpace JSControl controlMargin-M ClearFloat Width-Default marginLeft-XS marginRight-XS UzCompositeChild" id="spaChosain" style="height: 17px;" data-control-type="Space" data-obj="{&quot;fieldName&quot;:&quot;spaChosain&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Space&quot;,&quot;width&quot;:&quot;Default&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;spaChosain&quot;,&quot;height&quot;:&quot;17px&quot;}"></div><div title="" class="UzPanel FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default Width-G2 UzCompositeChild" id="ChosainList" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ChosainList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;selectControlID&quot;:&quot;ChosainList&quot;,&quot;title&quot;:&quot;所属調査員&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ChosainList&quot;},{&quot;postParameterPanelNames&quot;:&quot;ChosaItakusakiList&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;&quot;},{&quot;eventName&quot;:&quot;onSelect_dgChosaItakusakiList&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/ChosaItakusakiSelector/onSelect_dgChosaItakusakiList&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;panelDisplay&quot;:1,&quot;canPost&quot;:true}"><div class="UzPanelHeader clearBackground" id="ChosainList_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">所属調査員</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M Panel-GroupBox ui-droppable ui-sortable" id="ChosainList_panel_body_area"><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="dgChosainList" style="width: 290px; height: 190px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgChosainList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;290px&quot;,&quot;selectControlID&quot;:&quot;dgChosainList&quot;,&quot;height&quot;:&quot;190px&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:true,&quot;isShowFilterButton&quot;:true,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:true,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;番号&quot;,&quot;dataName&quot;:&quot;chosainNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:82,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosainNo&quot;},{&quot;columnName&quot;:&quot;氏名&quot;,&quot;dataName&quot;:&quot;chosainName&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosainName&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;onSelectByDblClick&quot;:&quot;onSelectByDC_Chosain&quot;,&quot;onSelectBySelectButton&quot;:&quot;onSelectBySB_Chosain&quot;,&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgChosainList_grid_table" role="" style="width: 290px; height: 165px; position: relative;"></div><div id="dgChosainList_footer" style="width: 290px; height: 25px;"></div></div></div></div></div></div></div></div><div title="" class="UzPanel FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default UzCompositeChild" id="SelectedContents" style="width: 720px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;SelectedContents&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;720px&quot;,&quot;selectControlID&quot;:&quot;SelectedContents&quot;,&quot;title&quot;:&quot;選択内容&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;SelectedContents&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:1,&quot;canPost&quot;:true}"><div class="UzPanelHeader clearBackground" id="SelectedContents_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">選択内容</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M Panel-GroupBox ui-droppable ui-sortable" id="SelectedContents_panel_body_area"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtChosaItakusakiCode" style="width: 206px; height: 21px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtChosaItakusakiCode&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;82px&quot;,&quot;selectControlID&quot;:&quot;txtChosaItakusakiCode_core&quot;,&quot;readOnly&quot;:true,&quot;maxLength&quot;:&quot;10&quot;,&quot;minLength&quot;:&quot;10&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;調査委託先&quot;}"><span class="word-wrap-break-word Label-L Width-S text-align-right" id="txtChosaItakusakiCode_labelL"><span>調査委託先</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input readonlyColor" id="txtChosaItakusakiCode_core" style="width: 82px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginRight-XS UzCompositeChild" id="txtChosaItakusakiName" style="width: 255px; height: 21px; margin-left: 0em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtChosaItakusakiName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;250px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtChosaItakusakiName_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[]}"><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtChosaItakusakiName_core" style="width: 250px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtChosainCode" style="width: 189px; height: 21px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtChosainCode&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;65px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtChosainCode_core&quot;,&quot;readOnly&quot;:true,&quot;maxLength&quot;:&quot;8&quot;,&quot;minLength&quot;:&quot;8&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;調査員&quot;}"><span class="word-wrap-break-word Label-L Width-S text-align-right" id="txtChosainCode_labelL"><span>調査員</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input readonlyColor" id="txtChosainCode_core" style="width: 65px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv FloatLeft JSControl controlMargin-M marginRight-XS UzCompositeChild" id="txtChosainName" style="width: 155px; height: 21px; margin-left: 0em;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtChosainName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;txtChosainName_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[]}"><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtChosainName_core" style="width: 150px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></div><button title="" class="UzButton JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-S Width-S UzCompositeChild" id="btnSelectAndClose" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnSelectAndClose&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;marginRight&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;btnSelectAndClose&quot;,&quot;onClick&quot;:&quot;onClick_btnSelectAndClose&quot;,&quot;text&quot;:&quot;確定&quot;}"><span>確定</span></button><button title="" class="UzButton JSControl controlMargin-M FloatRight marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnNonSelectReturn" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnNonSelectReturn&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnNonSelectReturn&quot;,&quot;onClick&quot;:&quot;onClick_btnNonSelectReturn&quot;,&quot;text&quot;:&quot;取消&quot;}"><span>取消</span></button></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBE;
+(function (DBE) {
+    (function (ChosaItakusakiSelector) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onSelect_dgChosaItakusakiList", {
+                get: function () {
+                    return "onSelect_dgChosaItakusakiList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySB_Chosain", {
+                get: function () {
+                    return "onSelectBySB_Chosain";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectByDC_ChosaItakusaki", {
+                get: function () {
+                    return "onSelectByDC_ChosaItakusaki";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectByDC_Chosain", {
+                get: function () {
+                    return "onSelectByDC_Chosain";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelectBySB_ChosaItakusaki", {
+                get: function () {
+                    return "onSelectBySB_ChosaItakusaki";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnNonSelectReturn", {
+                get: function () {
+                    return "onClick_btnNonSelectReturn";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onClick_btnSelectAndClose", {
+                get: function () {
+                    return "onClick_btnSelectAndClose";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        ChosaItakusakiSelector.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ChosaItakusakiSelector";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ChosaItakusakiSelector = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ChosaItakusaki = function () {
+                return new UZA.Panel(this.convFiledName("ChosaItakusaki"));
+            };
+
+            Controls.prototype.ChosaItakusakiList = function () {
+                return new UZA.Panel(this.convFiledName("ChosaItakusakiList"));
+            };
+
+            Controls.prototype.btnToMentenanceChosaKikan = function () {
+                return new UZA.Button(this.convFiledName("btnToMentenanceChosaKikan"));
+            };
+
+            Controls.prototype.dgChosaItakusakiList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgChosaItakusakiList"));
+            };
+
+            Controls.prototype.Chosain = function () {
+                return new UZA.Panel(this.convFiledName("Chosain"));
+            };
+
+            Controls.prototype.spaChosain = function () {
+                return new UZA.Space(this.convFiledName("spaChosain"));
+            };
+
+            Controls.prototype.ChosainList = function () {
+                return new UZA.Panel(this.convFiledName("ChosainList"));
+            };
+
+            Controls.prototype.dgChosainList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgChosainList"));
+            };
+
+            Controls.prototype.SelectedContents = function () {
+                return new UZA.Panel(this.convFiledName("SelectedContents"));
+            };
+
+            Controls.prototype.txtChosaItakusakiCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtChosaItakusakiCode"));
+            };
+
+            Controls.prototype.txtChosaItakusakiName = function () {
+                return new UZA.TextBox(this.convFiledName("txtChosaItakusakiName"));
+            };
+
+            Controls.prototype.txtChosainCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtChosainCode"));
+            };
+
+            Controls.prototype.txtChosainName = function () {
+                return new UZA.TextBox(this.convFiledName("txtChosainName"));
+            };
+
+            Controls.prototype.btnSelectAndClose = function () {
+                return new UZA.Button(this.convFiledName("btnSelectAndClose"));
+            };
+
+            Controls.prototype.btnNonSelectReturn = function () {
+                return new UZA.Button(this.convFiledName("btnNonSelectReturn"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ChosaItakusakiSelector.Controls = Controls;
+    })(DBE.ChosaItakusakiSelector || (DBE.ChosaItakusakiSelector = {}));
+    var ChosaItakusakiSelector = DBE.ChosaItakusakiSelector;
+
+    var ChosaItakusakiSelector_Design = (function (_super) {
+        __extends(ChosaItakusakiSelector_Design, _super);
+        function ChosaItakusakiSelector_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, ChosaItakusakiSelector_Design.myLayout, fieldName);
+        }
+        ChosaItakusakiSelector_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        ChosaItakusakiSelector_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        ChosaItakusakiSelector_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "ChosaItakusakiSelector",
+                    "items": [
+                        {
+                            "fieldName": "ChosaItakusaki",
+                            "items": [
+                                {
+                                    "fieldName": "ChosaItakusakiList",
+                                    "items": [
+                                        {
+                                            "fieldName": "btnToMentenanceChosaKikan",
+                                            "items": [],
+                                            "controlType": "Button",
+                                            "width": "200",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "btnToMentenanceChosaKikan",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "onClick": "",
+                                            "text": "調査委託先情報を修正する",
+                                            "appearance": 0,
+                                            "imageFileUrl": "",
+                                            "imageWidth": "",
+                                            "imageHeight": "",
+                                            "icon": 0,
+                                            "heightTextBoxMatches": false
+                                        },
+                                        {
+                                            "fieldName": "dgChosaItakusakiList",
+                                            "items": [],
+                                            "controlType": "DataGrid",
+                                            "width": "370",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "dgChosaItakusakiList",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": false,
+                                            "height": "220",
+                                            "gridSetting": {
+                                                "rowHeight": 25,
+                                                "isMultiSelectable": false,
+                                                "isShowHeader": true,
+                                                "isShowFooter": true,
+                                                "isShowFilter": true,
+                                                "isShowFilterButton": true,
+                                                "isShowRowState": false,
+                                                "isShowSelectButtonColumn": true,
+                                                "isShowModifyButtonColumn": false,
+                                                "isShowDeleteButtonColumn": false,
+                                                "limitRowCount": 0,
+                                                "selectedRowCount": 0,
+                                                "header": {
+                                                    "combineColumns": [],
+                                                    "frozenColumn": "",
+                                                    "headerHeight": 0
+                                                },
+                                                "columns": [
+                                                    {
+                                                        "columnName": "番号",
+                                                        "dataName": "chosaItakusakiNo",
+                                                        "toolTip": "",
+                                                        "bgColor": 0,
+                                                        "width": 82,
+                                                        "visible": true,
+                                                        "cellType": 0,
+                                                        "cellDetails": {
+                                                            "cellType": 0
+                                                        },
+                                                        "align": 1,
+                                                        "resize": true,
+                                                        "isPrivateInfo": false,
+                                                        "sortKey": "chosaItakusakiNo"
+                                                    },
+                                                    {
+                                                        "columnName": "名称",
+                                                        "dataName": "chosaItakusakiName",
+                                                        "toolTip": "",
+                                                        "bgColor": 0,
+                                                        "width": 230,
+                                                        "visible": true,
+                                                        "cellType": 0,
+                                                        "cellDetails": {
+                                                            "cellType": 0
+                                                        },
+                                                        "align": 0,
+                                                        "resize": true,
+                                                        "isPrivateInfo": false,
+                                                        "sortKey": "chosaItakusakiName"
+                                                    }
+                                                ]
+                                            },
+                                            "onSort": "",
+                                            "onSelect": "onSelect_dgChosaItakusakiList",
+                                            "onSelectByDblClick": "onSelectByDC_ChosaItakusaki",
+                                            "onSelectBySelectButton": "onSelectBySB_ChosaItakusaki",
+                                            "onSelectByModifyButton": "",
+                                            "onSelectByDeleteButton": "",
+                                            "onOnlyRow": "",
+                                            "onNoRow": "",
+                                            "onMultiRows": "",
+                                            "dataSource": [],
+                                            "sortOrder": "chosaItakusakiName",
+                                            "isAscending": true,
+                                            "filterList": [],
+                                            "activeRowId": -1
+                                        }
+                                    ],
+                                    "controlType": "Panel",
+                                    "width": "G2",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "0",
+                                    "selectControlID": "ChosaItakusakiList",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "onLoad": "",
+                                    "title": "",
+                                    "marginTop": "0",
+                                    "marginBottom": "0",
+                                    "isOpen": true,
+                                    "canOpenAndClose": false,
+                                    "postParameterPanelNames": [
+                                        {
+                                            "postParameterPanelNames": "ChosaItakusakiList"
+                                        }
+                                    ],
+                                    "requestSettings": [],
+                                    "hiddenInput": [],
+                                    "onOpen": "",
+                                    "onClose": "",
+                                    "session": {},
+                                    "eraseBorder": true,
+                                    "backgroundColor": 0,
+                                    "widthAuto": true,
+                                    "panelDisplay": 0,
+                                    "isGroupBox": false,
+                                    "readOnly": false,
+                                    "height": "Auto"
+                                },
+                                {
+                                    "fieldName": "Chosain",
+                                    "items": [
+                                        {
+                                            "fieldName": "spaChosain",
+                                            "items": [],
+                                            "controlType": "Space",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "spaChosain",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "spaceCount": 1
+                                        },
+                                        {
+                                            "fieldName": "ChosainList",
+                                            "items": [
+                                                {
+                                                    "fieldName": "dgChosainList",
+                                                    "items": [],
+                                                    "controlType": "DataGrid",
+                                                    "width": "290",
+                                                    "visible": true,
+                                                    "displayNone": false,
+                                                    "disabled": false,
+                                                    "accessKey": "",
+                                                    "nextFocusFieldName": "",
+                                                    "wrap": false,
+                                                    "dependencies": [],
+                                                    "float": 0,
+                                                    "toolTip": "",
+                                                    "authorityMode": 0,
+                                                    "marginLeft": "XS",
+                                                    "marginRight": "XS",
+                                                    "selectControlID": "dgChosainList",
+                                                    "helpMessageID": "",
+                                                    "jpControlName": "",
+                                                    "readOnly": false,
+                                                    "height": "190",
+                                                    "gridSetting": {
+                                                        "rowHeight": 25,
+                                                        "isMultiSelectable": false,
+                                                        "isShowHeader": true,
+                                                        "isShowFooter": true,
+                                                        "isShowFilter": true,
+                                                        "isShowFilterButton": true,
+                                                        "isShowRowState": false,
+                                                        "isShowSelectButtonColumn": true,
+                                                        "isShowModifyButtonColumn": false,
+                                                        "isShowDeleteButtonColumn": false,
+                                                        "limitRowCount": 0,
+                                                        "selectedRowCount": 0,
+                                                        "header": {
+                                                            "combineColumns": [],
+                                                            "frozenColumn": "",
+                                                            "headerHeight": 0
+                                                        },
+                                                        "columns": [
+                                                            {
+                                                                "columnName": "番号",
+                                                                "dataName": "chosainNo",
+                                                                "toolTip": "",
+                                                                "bgColor": 0,
+                                                                "width": 82,
+                                                                "visible": true,
+                                                                "cellType": 0,
+                                                                "cellDetails": {
+                                                                    "cellType": 0
+                                                                },
+                                                                "align": 1,
+                                                                "resize": true,
+                                                                "isPrivateInfo": false,
+                                                                "sortKey": "chosainNo"
+                                                            },
+                                                            {
+                                                                "columnName": "氏名",
+                                                                "dataName": "chosainName",
+                                                                "toolTip": "",
+                                                                "bgColor": 0,
+                                                                "width": 150,
+                                                                "visible": true,
+                                                                "cellType": 0,
+                                                                "cellDetails": {
+                                                                    "cellType": 0
+                                                                },
+                                                                "align": 0,
+                                                                "resize": true,
+                                                                "isPrivateInfo": false,
+                                                                "sortKey": "chosainName"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "onSort": "",
+                                                    "onSelect": "",
+                                                    "onSelectByDblClick": "onSelectByDC_Chosain",
+                                                    "onSelectBySelectButton": "onSelectBySB_Chosain",
+                                                    "onSelectByModifyButton": "",
+                                                    "onSelectByDeleteButton": "",
+                                                    "onOnlyRow": "",
+                                                    "onNoRow": "",
+                                                    "onMultiRows": "",
+                                                    "dataSource": [],
+                                                    "sortOrder": "chosainMeisho",
+                                                    "isAscending": true,
+                                                    "filterList": [],
+                                                    "activeRowId": -1
+                                                }
+                                            ],
+                                            "controlType": "Panel",
+                                            "width": "G2",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "ChosainList",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "onLoad": "",
+                                            "title": "所属調査員",
+                                            "marginTop": "Default",
+                                            "marginBottom": "Default",
+                                            "isOpen": true,
+                                            "canOpenAndClose": false,
+                                            "postParameterPanelNames": [
+                                                {
+                                                    "postParameterPanelNames": "ChosainList"
+                                                },
+                                                {
+                                                    "postParameterPanelNames": "ChosaItakusakiList"
+                                                }
+                                            ],
+                                            "requestSettings": [
+                                                {
+                                                    "eventName": "onLoad",
+                                                    "requestUrl": ""
+                                                },
+                                                {
+                                                    "eventName": "onSelect_dgChosaItakusakiList",
+                                                    "requestUrl": "dbe/db/dbe/ChosaItakusakiSelector/onSelect_dgChosaItakusakiList"
+                                                }
+                                            ],
+                                            "hiddenInput": [],
+                                            "onOpen": "",
+                                            "onClose": "",
+                                            "session": {},
+                                            "eraseBorder": false,
+                                            "backgroundColor": 0,
+                                            "widthAuto": true,
+                                            "panelDisplay": 1,
+                                            "isGroupBox": false,
+                                            "readOnly": false,
+                                            "height": "Auto"
+                                        }
+                                    ],
+                                    "controlType": "Panel",
+                                    "width": "G2",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "0",
+                                    "selectControlID": "Chosain",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "onLoad": "",
+                                    "title": "",
+                                    "marginTop": "0",
+                                    "marginBottom": "0",
+                                    "isOpen": true,
+                                    "canOpenAndClose": true,
+                                    "postParameterPanelNames": [
+                                        {
+                                            "postParameterPanelNames": "Chosain"
+                                        }
+                                    ],
+                                    "requestSettings": [],
+                                    "hiddenInput": [],
+                                    "onOpen": "",
+                                    "onClose": "",
+                                    "session": {},
+                                    "eraseBorder": true,
+                                    "backgroundColor": 0,
+                                    "widthAuto": true,
+                                    "panelDisplay": 0,
+                                    "isGroupBox": false,
+                                    "readOnly": false,
+                                    "height": "Auto"
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "720",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "ChosaItakusaki",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "調査委託先",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": false,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "ChosaItakusaki"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": false,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 1,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto"
+                        },
+                        {
+                            "fieldName": "SelectedContents",
+                            "items": [
+                                {
+                                    "fieldName": "txtChosaItakusakiCode",
+                                    "items": [],
+                                    "controlType": "TextBoxCode",
+                                    "width": "82",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtChosaItakusakiCode_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "text": "",
+                                    "required": false,
+                                    "maxLength": "10",
+                                    "minLength": "10",
+                                    "textAlign": 0,
+                                    "placeHolder": "",
+                                    "textKind": 2,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "labelLText": "調査委託先",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "permitCharactor": "",
+                                    "formatLength": "10"
+                                },
+                                {
+                                    "fieldName": "txtChosaItakusakiName",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "250",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtChosaItakusakiName_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "text": "",
+                                    "required": false,
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "placeHolder": "",
+                                    "textKind": 0,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "labelLText": "",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "permitCharactor": ""
+                                },
+                                {
+                                    "fieldName": "txtChosainCode",
+                                    "items": [],
+                                    "controlType": "TextBoxCode",
+                                    "width": "65",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtChosainCode_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "text": "",
+                                    "required": false,
+                                    "maxLength": "8",
+                                    "minLength": "8",
+                                    "textAlign": 0,
+                                    "placeHolder": "",
+                                    "textKind": 2,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "labelLText": "調査員",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "permitCharactor": "",
+                                    "formatLength": "8"
+                                },
+                                {
+                                    "fieldName": "txtChosainName",
+                                    "items": [],
+                                    "controlType": "TextBox",
+                                    "width": "150",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "0",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtChosainName_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": true,
+                                    "text": "",
+                                    "required": false,
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 0,
+                                    "placeHolder": "",
+                                    "textKind": 0,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "onChange": "",
+                                    "onKeyPress": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "labelLText": "",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "decorationClass": "",
+                                    "permitCharactor": ""
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "720",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "SelectedContents",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "選択内容",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": false,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "SelectedContents"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": false,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 1,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto"
+                        },
+                        {
+                            "fieldName": "btnSelectAndClose",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "S",
+                            "selectControlID": "btnSelectAndClose",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onClick": "onClick_btnSelectAndClose",
+                            "text": "確定",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        },
+                        {
+                            "fieldName": "btnNonSelectReturn",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnNonSelectReturn",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onClick": "onClick_btnNonSelectReturn",
+                            "text": "取消",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G8",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "Default",
+                    "marginRight": "Default",
+                    "selectControlID": "ChosaItakusakiSelector",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "調査委託先選択",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "ChosaItakusakiSelector"
+                        }
+                    ],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": "dbe/db/dbe/ChosaItakusakiSelector/onLoad"
+                        },
+                        {
+                            "eventName": "onSelectByDC_ChosaItakusaki",
+                            "requestUrl": "dbe/db/dbe/ChosaItakusakiSelector/onSelectByDC_ChosaItakusaki"
+                        },
+                        {
+                            "eventName": "onSelectBySB_ChosaItakusaki",
+                            "requestUrl": "dbe/db/dbe/ChosaItakusakiSelector/onSelectBySB_ChosaItakusaki"
+                        },
+                        {
+                            "eventName": "onSelectByDC_Chosain",
+                            "requestUrl": "dbe/db/dbe/ChosaItakusakiSelector/onSelectByDC_Chosain"
+                        },
+                        {
+                            "eventName": "onSelectBySB_Chosain",
+                            "requestUrl": "dbe/db/dbe/ChosaItakusakiSelector/onSelectBySB_Chosain"
+                        },
+                        {
+                            "eventName": "onClick_btnSelectAndClose",
+                            "requestUrl": "dbe/db/dbe/ChosaItakusakiSelector/onClick_btnSelectAndClose"
+                        },
+                        {
+                            "eventName": "onClick_btnNonSelectReturn",
+                            "requestUrl": "dbe/db/dbe/ChosaItakusakiSelector/onClick_btnNonSelectReturn"
+                        }
+                    ],
+                    "hiddenInput": [
+                        {
+                            "propertyName": "chosaItakusakiCode",
+                            "value": ""
+                        },
+                        {
+                            "propertyName": "chosaItakusakiName",
+                            "value": ""
+                        },
+                        {
+                            "propertyName": "chosainCode",
+                            "value": ""
+                        },
+                        {
+                            "propertyName": "chosainName",
+                            "value": ""
+                        }
+                    ],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "410"
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "businessId": "DBE",
+            "controlName": "ChosaItakusakiSelector",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [],
+            "dataPassingForDialog": [
+                {
+                    "key": "chosaItakusakiCode",
+                    "controlName": "ChosaItakusakiSelector.chosaItakusakiCode"
+                },
+                {
+                    "key": "chosaItakusakiName",
+                    "controlName": "ChosaItakusakiSelector.chosaItakusakiName"
+                },
+                {
+                    "key": "chosainCode",
+                    "controlName": "ChosaItakusakiSelector.chosainCode"
+                },
+                {
+                    "key": "chosainName",
+                    "controlName": "ChosaItakusakiSelector.chosainName"
+                }
+            ],
+            "dialogOkEventNameForDialog": "onClick_btnSelectAndClose",
+            "dialogCancelEventNameForDialog": "onClick_btnNonSelectReturn",
+            "canTransferEvent": true,
+            "heightForDialog": "450"
+        };
+        return ChosaItakusakiSelector_Design;
+    })(Uz.CommonChildDiv);
+    DBE.ChosaItakusakiSelector_Design = ChosaItakusakiSelector_Design;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (ChosaItakusakiSelector) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ChosaItakusakiSelector.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ChosaItakusakiSelector.ModeController = ModeController;
+    })(DBE.ChosaItakusakiSelector || (DBE.ChosaItakusakiSelector = {}));
+    var ChosaItakusakiSelector = DBE.ChosaItakusakiSelector;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (ChosaItakusakiSelector) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ChosaItakusakiSelector.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ChosaItakusakiSelector.PublicProperties = PublicProperties;
+    })(DBE.ChosaItakusakiSelector || (DBE.ChosaItakusakiSelector = {}));
+    var ChosaItakusakiSelector = DBE.ChosaItakusakiSelector;
+})(DBE || (DBE = {}));
+</script>
+    <script class="RamlConvert" type="text/javascript">
+var DBE= DBE? DBE: {};
+DBE['CHOSAITAKUSAKISELECTOR'] = {};
+DBE['CHOSAITAKUSAKISELECTOR'].ChosaItakusakiSelectorRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ChosaItakusakiSelector').getProperty();parameter0.ChosaItakusaki = Uz.JSControlUtil.getJSControl(parentFieldName + '_ChosaItakusaki').getProperty();parameter0.ChosaItakusaki.ChosaItakusakiList = Uz.JSControlUtil.getJSControl(parentFieldName + '_ChosaItakusakiList').getProperty();parameter0.ChosaItakusaki.ChosaItakusakiList.btnToMentenanceChosaKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnToMentenanceChosaKikan').getProperty();parameter0.ChosaItakusaki.ChosaItakusakiList.dgChosaItakusakiList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgChosaItakusakiList').getProperty();parameter0.ChosaItakusaki.Chosain = Uz.JSControlUtil.getJSControl(parentFieldName + '_Chosain').getProperty();parameter0.ChosaItakusaki.Chosain.spaChosain = Uz.JSControlUtil.getJSControl(parentFieldName + '_spaChosain').getProperty();parameter0.ChosaItakusaki.Chosain.ChosainList = Uz.JSControlUtil.getJSControl(parentFieldName + '_ChosainList').getProperty();parameter0.ChosaItakusaki.Chosain.ChosainList.dgChosainList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgChosainList').getProperty();parameter0.SelectedContents = Uz.JSControlUtil.getJSControl(parentFieldName + '_SelectedContents').getProperty();parameter0.SelectedContents.txtChosaItakusakiCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtChosaItakusakiCode').getProperty();parameter0.SelectedContents.txtChosaItakusakiName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtChosaItakusakiName').getProperty();parameter0.SelectedContents.txtChosainCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtChosainCode').getProperty();parameter0.SelectedContents.txtChosainName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtChosainName').getProperty();parameter0.btnSelectAndClose = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnSelectAndClose').getProperty();parameter0.btnNonSelectReturn = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnNonSelectReturn').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+DBE['CHOSAITAKUSAKISELECTOR'].ChosaItakusakiRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ChosaItakusaki').getProperty();parameter0.ChosaItakusakiList = Uz.JSControlUtil.getJSControl(parentFieldName + '_ChosaItakusakiList').getProperty();parameter0.ChosaItakusakiList.btnToMentenanceChosaKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnToMentenanceChosaKikan').getProperty();parameter0.ChosaItakusakiList.dgChosaItakusakiList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgChosaItakusakiList').getProperty();parameter0.Chosain = Uz.JSControlUtil.getJSControl(parentFieldName + '_Chosain').getProperty();parameter0.Chosain.spaChosain = Uz.JSControlUtil.getJSControl(parentFieldName + '_spaChosain').getProperty();parameter0.Chosain.ChosainList = Uz.JSControlUtil.getJSControl(parentFieldName + '_ChosainList').getProperty();parameter0.Chosain.ChosainList.dgChosainList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgChosainList').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+DBE['CHOSAITAKUSAKISELECTOR'].ChosaItakusakiListRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ChosaItakusakiList').getProperty();parameter0.btnToMentenanceChosaKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnToMentenanceChosaKikan').getProperty();parameter0.dgChosaItakusakiList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgChosaItakusakiList').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+DBE['CHOSAITAKUSAKISELECTOR'].ChosainRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_Chosain').getProperty();parameter0.spaChosain = Uz.JSControlUtil.getJSControl(parentFieldName + '_spaChosain').getProperty();parameter0.ChosainList = Uz.JSControlUtil.getJSControl(parentFieldName + '_ChosainList').getProperty();parameter0.ChosainList.dgChosainList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgChosainList').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+DBE['CHOSAITAKUSAKISELECTOR'].ChosainListRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ChosainList').getProperty();parameter0.dgChosainList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgChosainList').getProperty();paramArray.push(parameter0);var parameter1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ChosaItakusakiList').getProperty();parameter1.btnToMentenanceChosaKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnToMentenanceChosaKikan').getProperty();parameter1.dgChosaItakusakiList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgChosaItakusakiList').getProperty();paramArray.push(parameter1);
+return paramArray;
+ };
+DBE['CHOSAITAKUSAKISELECTOR'].SelectedContentsRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_SelectedContents').getProperty();parameter0.txtChosaItakusakiCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtChosaItakusakiCode').getProperty();parameter0.txtChosaItakusakiName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtChosaItakusakiName').getProperty();parameter0.txtChosainCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtChosainCode').getProperty();parameter0.txtChosainName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtChosainName').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBE;
+(function (DBE) {
+    (function (ChosaItakusakiSelector) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onSelect_dgChosaItakusakiList = function () {
+                return "onSelect_dgChosaItakusakiList";
+            };
+
+            Events.onSelectByDC_ChosaItakusaki = function () {
+                return "onSelectByDC_ChosaItakusaki";
+            };
+
+            Events.onSelectBySB_ChosaItakusaki = function () {
+                return "onSelectBySB_ChosaItakusaki";
+            };
+
+            Events.onSelectByDC_Chosain = function () {
+                return "onSelectByDC_Chosain";
+            };
+
+            Events.onSelectBySB_Chosain = function () {
+                return "onSelectBySB_Chosain";
+            };
+
+            Events.onClick_btnSelectAndClose = function () {
+                return "onClick_btnSelectAndClose";
+            };
+
+            Events.onClick_btnNonSelectReturn = function () {
+                return "onClick_btnNonSelectReturn";
+            };
+            return Events;
+        })();
+        ChosaItakusakiSelector.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ChosaItakusakiSelector";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBE.ChosaItakusakiSelector.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBE.ChosaItakusakiSelector.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ChosaItakusakiSelector = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ChosaItakusaki = function () {
+                return new UZA.Panel(this.convFiledName("ChosaItakusaki"));
+            };
+
+            Controls.prototype.ChosaItakusakiList = function () {
+                return new UZA.Panel(this.convFiledName("ChosaItakusaki_ChosaItakusakiList"));
+            };
+
+            Controls.prototype.btnToMentenanceChosaKikan = function () {
+                return new UZA.Button(this.convFiledName("btnToMentenanceChosaKikan"));
+            };
+
+            Controls.prototype.dgChosaItakusakiList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgChosaItakusakiList"));
+            };
+
+            Controls.prototype.Chosain = function () {
+                return new UZA.Panel(this.convFiledName("ChosaItakusaki_Chosain"));
+            };
+
+            Controls.prototype.spaChosain = function () {
+                return new UZA.Space(this.convFiledName("spaChosain"));
+            };
+
+            Controls.prototype.ChosainList = function () {
+                return new UZA.Panel(this.convFiledName("ChosaItakusaki_Chosain_ChosainList"));
+            };
+
+            Controls.prototype.dgChosainList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgChosainList"));
+            };
+
+            Controls.prototype.SelectedContents = function () {
+                return new UZA.Panel(this.convFiledName("SelectedContents"));
+            };
+
+            Controls.prototype.txtChosaItakusakiCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtChosaItakusakiCode"));
+            };
+
+            Controls.prototype.txtChosaItakusakiName = function () {
+                return new UZA.TextBox(this.convFiledName("txtChosaItakusakiName"));
+            };
+
+            Controls.prototype.txtChosainCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtChosainCode"));
+            };
+
+            Controls.prototype.txtChosainName = function () {
+                return new UZA.TextBox(this.convFiledName("txtChosainName"));
+            };
+
+            Controls.prototype.btnSelectAndClose = function () {
+                return new UZA.Button(this.convFiledName("btnSelectAndClose"));
+            };
+
+            Controls.prototype.btnNonSelectReturn = function () {
+                return new UZA.Button(this.convFiledName("btnNonSelectReturn"));
+            };
+            return Controls;
+        })();
+        ChosaItakusakiSelector.Controls = Controls;
+    })(DBE.ChosaItakusakiSelector || (DBE.ChosaItakusakiSelector = {}));
+    var ChosaItakusakiSelector = DBE.ChosaItakusakiSelector;
+})(DBE || (DBE = {}));
+var DBE;
+(function (DBE) {
+    (function (ChosaItakusakiSelector) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ChosaItakusakiSelector.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ChosaItakusakiSelector.ModeController = ModeController;
+    })(DBE.ChosaItakusakiSelector || (DBE.ChosaItakusakiSelector = {}));
+    var ChosaItakusakiSelector = DBE.ChosaItakusakiSelector;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (ChosaItakusakiSelector) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ChosaItakusakiSelector.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ChosaItakusakiSelector.PublicProperties = PublicProperties;
+    })(DBE.ChosaItakusakiSelector || (DBE.ChosaItakusakiSelector = {}));
+    var ChosaItakusakiSelector = DBE.ChosaItakusakiSelector;
+})(DBE || (DBE = {}));
+</script></div>

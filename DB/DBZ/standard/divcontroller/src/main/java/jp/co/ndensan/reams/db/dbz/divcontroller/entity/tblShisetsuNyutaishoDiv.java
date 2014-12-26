@@ -23,43 +23,53 @@ public class tblShisetsuNyutaishoDiv extends TablePanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("celShisetsuShuruiTitle")
+    private celShisetsuShuruiTitleAttblShisetsuNyutaisho celShisetsuShuruiTitle;
+    @JsonProperty("celNyushoShisetsuTitle")
+    private celNyushoShisetsuTitleAttblShisetsuNyutaisho celNyushoShisetsuTitle;
     @JsonProperty("celShisetsuNyushoDateTitle")
     private celShisetsuNyushoDateTitleAttblShisetsuNyutaisho celShisetsuNyushoDateTitle;
     @JsonProperty("celShisetsuTaishoDateTitle")
     private celShisetsuTaishoDateTitleAttblShisetsuNyutaisho celShisetsuTaishoDateTitle;
-    @JsonProperty("celNyushoShisetsuTitle")
-    private celNyushoShisetsuTitleAttblShisetsuNyutaisho celNyushoShisetsuTitle;
+    @JsonProperty("celShisetsuShurui1")
+    private celShisetsuShurui1AttblShisetsuNyutaisho celShisetsuShurui1;
+    @JsonProperty("celNyushoShisetsu1")
+    private celNyushoShisetsu1AttblShisetsuNyutaisho celNyushoShisetsu1;
     @JsonProperty("celShisetsuNyushoDate1")
     private celShisetsuNyushoDate1AttblShisetsuNyutaisho celShisetsuNyushoDate1;
     @JsonProperty("celShisetsuTaishoDate1")
     private celShisetsuTaishoDate1AttblShisetsuNyutaisho celShisetsuTaishoDate1;
-    @JsonProperty("celNyushoShisetsu1")
-    private celNyushoShisetsu1AttblShisetsuNyutaisho celNyushoShisetsu1;
+    @JsonProperty("celShisetsuShurui2")
+    private celShisetsuShurui2AttblShisetsuNyutaisho celShisetsuShurui2;
+    @JsonProperty("celNyushoShisetsu2")
+    private celNyushoShisetsu2AttblShisetsuNyutaisho celNyushoShisetsu2;
     @JsonProperty("celShisetsuNyushoDate2")
     private celShisetsuNyushoDate2AttblShisetsuNyutaisho celShisetsuNyushoDate2;
     @JsonProperty("celShisetsuTaishoDate2")
     private celShisetsuTaishoDate2AttblShisetsuNyutaisho celShisetsuTaishoDate2;
-    @JsonProperty("celNyushoShisetsu2")
-    private celNyushoShisetsu2AttblShisetsuNyutaisho celNyushoShisetsu2;
-    @JsonProperty("celShisetsuShuruiTitle")
-    private celShisetsuShuruiTitleAttblShisetsuNyutaisho celShisetsuShuruiTitle;
-    @JsonProperty("celShisetsuShurui1")
-    private celShisetsuShurui1AttblShisetsuNyutaisho celShisetsuShurui1;
-    @JsonProperty("celShisetsuShurui2")
-    private celShisetsuShurui2AttblShisetsuNyutaisho celShisetsuShurui2;
+    @JsonProperty("celShisetsuShurui3")
+    private celShisetsuShurui3AttblShisetsuNyutaisho celShisetsuShurui3;
+    @JsonProperty("celNyushoShisetsu3")
+    private celNyushoShisetsu3AttblShisetsuNyutaisho celNyushoShisetsu3;
     @JsonProperty("celShisetsuNyushoDate3")
     private celShisetsuNyushoDate3AttblShisetsuNyutaisho celShisetsuNyushoDate3;
     @JsonProperty("celShisetsuTaishoDate3")
     private celShisetsuTaishoDate3AttblShisetsuNyutaisho celShisetsuTaishoDate3;
-    @JsonProperty("celNyushoShisetsu3")
-    private celNyushoShisetsu3AttblShisetsuNyutaisho celNyushoShisetsu3;
-    @JsonProperty("celShisetsuShurui3")
-    private celShisetsuShurui3AttblShisetsuNyutaisho celShisetsuShurui3;
 
     /*
      * [ Helperの作成 ]
      * TablePanelコントロールに特化したヘルパーメソッドを作成
      */
+    @JsonIgnore
+    public Label getLblShisetsuShurui() {
+        return this.celShisetsuShuruiTitle.getLblShisetsuShurui();
+    }
+
+    @JsonIgnore
+    public Label getLblNyushoShisetsu() {
+        return this.celNyushoShisetsuTitle.getLblNyushoShisetsu();
+    }
+
     @JsonIgnore
     public Label getLblShisetsuNyushoDate() {
         return this.celShisetsuNyushoDateTitle.getLblShisetsuNyushoDate();
@@ -71,8 +81,13 @@ public class tblShisetsuNyutaishoDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblNyushoShisetsu() {
-        return this.celNyushoShisetsuTitle.getLblNyushoShisetsu();
+    public TextBox getTxtShisetsuShurui1() {
+        return this.celShisetsuShurui1.getTxtShisetsuShurui1();
+    }
+
+    @JsonIgnore
+    public TextBox getTxtNyushoShisetsu1() {
+        return this.celNyushoShisetsu1.getTxtNyushoShisetsu1();
     }
 
     @JsonIgnore
@@ -86,8 +101,13 @@ public class tblShisetsuNyutaishoDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public TextBox getTxtNyushoShisetsu1() {
-        return this.celNyushoShisetsu1.getTxtNyushoShisetsu1();
+    public TextBox getTxtShisetsuShurui2() {
+        return this.celShisetsuShurui2.getTxtShisetsuShurui2();
+    }
+
+    @JsonIgnore
+    public TextBox getTxtNyushoShisetsu2() {
+        return this.celNyushoShisetsu2.getTxtNyushoShisetsu2();
     }
 
     @JsonIgnore
@@ -101,23 +121,13 @@ public class tblShisetsuNyutaishoDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public TextBox getTxtNyushoShisetsu2() {
-        return this.celNyushoShisetsu2.getTxtNyushoShisetsu2();
+    public TextBox getTxtShisetsuShurui3() {
+        return this.celShisetsuShurui3.getTxtShisetsuShurui3();
     }
 
     @JsonIgnore
-    public Label getLblShisetsuShurui() {
-        return this.celShisetsuShuruiTitle.getLblShisetsuShurui();
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShisetsuShurui1() {
-        return this.celShisetsuShurui1.getTxtShisetsuShurui1();
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShisetsuShurui2() {
-        return this.celShisetsuShurui2.getTxtShisetsuShurui2();
+    public TextBox getTxtNyushoShisetsu3() {
+        return this.celNyushoShisetsu3.getTxtNyushoShisetsu3();
     }
 
     @JsonIgnore
@@ -130,22 +140,32 @@ public class tblShisetsuNyutaishoDiv extends TablePanel {
         return this.celShisetsuTaishoDate3.getTxtShisetsuTaishoDate3();
     }
 
-    @JsonIgnore
-    public TextBox getTxtNyushoShisetsu3() {
-        return this.celNyushoShisetsu3.getTxtNyushoShisetsu3();
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShisetsuShurui3() {
-        return this.celShisetsuShurui3.getTxtShisetsuShurui3();
-    }
-
     /*
      * [ GetterとSetterの作成 ]
      * クライアント側から取得した情報を元に検索を行い
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("celShisetsuShuruiTitle")
+    private celShisetsuShuruiTitleAttblShisetsuNyutaisho getCelShisetsuShuruiTitle() {
+        return celShisetsuShuruiTitle;
+    }
+
+    @JsonProperty("celShisetsuShuruiTitle")
+    private void setCelShisetsuShuruiTitle(celShisetsuShuruiTitleAttblShisetsuNyutaisho celShisetsuShuruiTitle) {
+        this.celShisetsuShuruiTitle=celShisetsuShuruiTitle;
+    }
+
+    @JsonProperty("celNyushoShisetsuTitle")
+    private celNyushoShisetsuTitleAttblShisetsuNyutaisho getCelNyushoShisetsuTitle() {
+        return celNyushoShisetsuTitle;
+    }
+
+    @JsonProperty("celNyushoShisetsuTitle")
+    private void setCelNyushoShisetsuTitle(celNyushoShisetsuTitleAttblShisetsuNyutaisho celNyushoShisetsuTitle) {
+        this.celNyushoShisetsuTitle=celNyushoShisetsuTitle;
+    }
+
     @JsonProperty("celShisetsuNyushoDateTitle")
     private celShisetsuNyushoDateTitleAttblShisetsuNyutaisho getCelShisetsuNyushoDateTitle() {
         return celShisetsuNyushoDateTitle;
@@ -166,14 +186,24 @@ public class tblShisetsuNyutaishoDiv extends TablePanel {
         this.celShisetsuTaishoDateTitle=celShisetsuTaishoDateTitle;
     }
 
-    @JsonProperty("celNyushoShisetsuTitle")
-    private celNyushoShisetsuTitleAttblShisetsuNyutaisho getCelNyushoShisetsuTitle() {
-        return celNyushoShisetsuTitle;
+    @JsonProperty("celShisetsuShurui1")
+    private celShisetsuShurui1AttblShisetsuNyutaisho getCelShisetsuShurui1() {
+        return celShisetsuShurui1;
     }
 
-    @JsonProperty("celNyushoShisetsuTitle")
-    private void setCelNyushoShisetsuTitle(celNyushoShisetsuTitleAttblShisetsuNyutaisho celNyushoShisetsuTitle) {
-        this.celNyushoShisetsuTitle=celNyushoShisetsuTitle;
+    @JsonProperty("celShisetsuShurui1")
+    private void setCelShisetsuShurui1(celShisetsuShurui1AttblShisetsuNyutaisho celShisetsuShurui1) {
+        this.celShisetsuShurui1=celShisetsuShurui1;
+    }
+
+    @JsonProperty("celNyushoShisetsu1")
+    private celNyushoShisetsu1AttblShisetsuNyutaisho getCelNyushoShisetsu1() {
+        return celNyushoShisetsu1;
+    }
+
+    @JsonProperty("celNyushoShisetsu1")
+    private void setCelNyushoShisetsu1(celNyushoShisetsu1AttblShisetsuNyutaisho celNyushoShisetsu1) {
+        this.celNyushoShisetsu1=celNyushoShisetsu1;
     }
 
     @JsonProperty("celShisetsuNyushoDate1")
@@ -196,14 +226,24 @@ public class tblShisetsuNyutaishoDiv extends TablePanel {
         this.celShisetsuTaishoDate1=celShisetsuTaishoDate1;
     }
 
-    @JsonProperty("celNyushoShisetsu1")
-    private celNyushoShisetsu1AttblShisetsuNyutaisho getCelNyushoShisetsu1() {
-        return celNyushoShisetsu1;
+    @JsonProperty("celShisetsuShurui2")
+    private celShisetsuShurui2AttblShisetsuNyutaisho getCelShisetsuShurui2() {
+        return celShisetsuShurui2;
     }
 
-    @JsonProperty("celNyushoShisetsu1")
-    private void setCelNyushoShisetsu1(celNyushoShisetsu1AttblShisetsuNyutaisho celNyushoShisetsu1) {
-        this.celNyushoShisetsu1=celNyushoShisetsu1;
+    @JsonProperty("celShisetsuShurui2")
+    private void setCelShisetsuShurui2(celShisetsuShurui2AttblShisetsuNyutaisho celShisetsuShurui2) {
+        this.celShisetsuShurui2=celShisetsuShurui2;
+    }
+
+    @JsonProperty("celNyushoShisetsu2")
+    private celNyushoShisetsu2AttblShisetsuNyutaisho getCelNyushoShisetsu2() {
+        return celNyushoShisetsu2;
+    }
+
+    @JsonProperty("celNyushoShisetsu2")
+    private void setCelNyushoShisetsu2(celNyushoShisetsu2AttblShisetsuNyutaisho celNyushoShisetsu2) {
+        this.celNyushoShisetsu2=celNyushoShisetsu2;
     }
 
     @JsonProperty("celShisetsuNyushoDate2")
@@ -226,44 +266,24 @@ public class tblShisetsuNyutaishoDiv extends TablePanel {
         this.celShisetsuTaishoDate2=celShisetsuTaishoDate2;
     }
 
-    @JsonProperty("celNyushoShisetsu2")
-    private celNyushoShisetsu2AttblShisetsuNyutaisho getCelNyushoShisetsu2() {
-        return celNyushoShisetsu2;
+    @JsonProperty("celShisetsuShurui3")
+    private celShisetsuShurui3AttblShisetsuNyutaisho getCelShisetsuShurui3() {
+        return celShisetsuShurui3;
     }
 
-    @JsonProperty("celNyushoShisetsu2")
-    private void setCelNyushoShisetsu2(celNyushoShisetsu2AttblShisetsuNyutaisho celNyushoShisetsu2) {
-        this.celNyushoShisetsu2=celNyushoShisetsu2;
+    @JsonProperty("celShisetsuShurui3")
+    private void setCelShisetsuShurui3(celShisetsuShurui3AttblShisetsuNyutaisho celShisetsuShurui3) {
+        this.celShisetsuShurui3=celShisetsuShurui3;
     }
 
-    @JsonProperty("celShisetsuShuruiTitle")
-    private celShisetsuShuruiTitleAttblShisetsuNyutaisho getCelShisetsuShuruiTitle() {
-        return celShisetsuShuruiTitle;
+    @JsonProperty("celNyushoShisetsu3")
+    private celNyushoShisetsu3AttblShisetsuNyutaisho getCelNyushoShisetsu3() {
+        return celNyushoShisetsu3;
     }
 
-    @JsonProperty("celShisetsuShuruiTitle")
-    private void setCelShisetsuShuruiTitle(celShisetsuShuruiTitleAttblShisetsuNyutaisho celShisetsuShuruiTitle) {
-        this.celShisetsuShuruiTitle=celShisetsuShuruiTitle;
-    }
-
-    @JsonProperty("celShisetsuShurui1")
-    private celShisetsuShurui1AttblShisetsuNyutaisho getCelShisetsuShurui1() {
-        return celShisetsuShurui1;
-    }
-
-    @JsonProperty("celShisetsuShurui1")
-    private void setCelShisetsuShurui1(celShisetsuShurui1AttblShisetsuNyutaisho celShisetsuShurui1) {
-        this.celShisetsuShurui1=celShisetsuShurui1;
-    }
-
-    @JsonProperty("celShisetsuShurui2")
-    private celShisetsuShurui2AttblShisetsuNyutaisho getCelShisetsuShurui2() {
-        return celShisetsuShurui2;
-    }
-
-    @JsonProperty("celShisetsuShurui2")
-    private void setCelShisetsuShurui2(celShisetsuShurui2AttblShisetsuNyutaisho celShisetsuShurui2) {
-        this.celShisetsuShurui2=celShisetsuShurui2;
+    @JsonProperty("celNyushoShisetsu3")
+    private void setCelNyushoShisetsu3(celNyushoShisetsu3AttblShisetsuNyutaisho celNyushoShisetsu3) {
+        this.celNyushoShisetsu3=celNyushoShisetsu3;
     }
 
     @JsonProperty("celShisetsuNyushoDate3")
@@ -286,24 +306,44 @@ public class tblShisetsuNyutaishoDiv extends TablePanel {
         this.celShisetsuTaishoDate3=celShisetsuTaishoDate3;
     }
 
-    @JsonProperty("celNyushoShisetsu3")
-    private celNyushoShisetsu3AttblShisetsuNyutaisho getCelNyushoShisetsu3() {
-        return celNyushoShisetsu3;
+}
+/**
+ * celShisetsuShuruiTitle のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celShisetsuShuruiTitleAttblShisetsuNyutaisho extends TableCell {
+    @JsonProperty("lblShisetsuShurui")
+    private Label lblShisetsuShurui;
+
+    @JsonProperty("lblShisetsuShurui")
+    public Label getLblShisetsuShurui() {
+        return lblShisetsuShurui;
     }
 
-    @JsonProperty("celNyushoShisetsu3")
-    private void setCelNyushoShisetsu3(celNyushoShisetsu3AttblShisetsuNyutaisho celNyushoShisetsu3) {
-        this.celNyushoShisetsu3=celNyushoShisetsu3;
+    @JsonProperty("lblShisetsuShurui")
+    public void setLblShisetsuShurui(Label lblShisetsuShurui) {
+        this.lblShisetsuShurui=lblShisetsuShurui;
     }
 
-    @JsonProperty("celShisetsuShurui3")
-    private celShisetsuShurui3AttblShisetsuNyutaisho getCelShisetsuShurui3() {
-        return celShisetsuShurui3;
+}
+/**
+ * celNyushoShisetsuTitle のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celNyushoShisetsuTitleAttblShisetsuNyutaisho extends TableCell {
+    @JsonProperty("lblNyushoShisetsu")
+    private Label lblNyushoShisetsu;
+
+    @JsonProperty("lblNyushoShisetsu")
+    public Label getLblNyushoShisetsu() {
+        return lblNyushoShisetsu;
     }
 
-    @JsonProperty("celShisetsuShurui3")
-    private void setCelShisetsuShurui3(celShisetsuShurui3AttblShisetsuNyutaisho celShisetsuShurui3) {
-        this.celShisetsuShurui3=celShisetsuShurui3;
+    @JsonProperty("lblNyushoShisetsu")
+    public void setLblNyushoShisetsu(Label lblNyushoShisetsu) {
+        this.lblNyushoShisetsu=lblNyushoShisetsu;
     }
 
 }
@@ -348,22 +388,42 @@ class celShisetsuTaishoDateTitleAttblShisetsuNyutaisho extends TableCell {
 
 }
 /**
- * celNyushoShisetsuTitle のクラスファイル 
+ * celShisetsuShurui1 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celNyushoShisetsuTitleAttblShisetsuNyutaisho extends TableCell {
-    @JsonProperty("lblNyushoShisetsu")
-    private Label lblNyushoShisetsu;
+class celShisetsuShurui1AttblShisetsuNyutaisho extends TableCell {
+    @JsonProperty("txtShisetsuShurui1")
+    private TextBox txtShisetsuShurui1;
 
-    @JsonProperty("lblNyushoShisetsu")
-    public Label getLblNyushoShisetsu() {
-        return lblNyushoShisetsu;
+    @JsonProperty("txtShisetsuShurui1")
+    public TextBox getTxtShisetsuShurui1() {
+        return txtShisetsuShurui1;
     }
 
-    @JsonProperty("lblNyushoShisetsu")
-    public void setLblNyushoShisetsu(Label lblNyushoShisetsu) {
-        this.lblNyushoShisetsu=lblNyushoShisetsu;
+    @JsonProperty("txtShisetsuShurui1")
+    public void setTxtShisetsuShurui1(TextBox txtShisetsuShurui1) {
+        this.txtShisetsuShurui1=txtShisetsuShurui1;
+    }
+
+}
+/**
+ * celNyushoShisetsu1 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celNyushoShisetsu1AttblShisetsuNyutaisho extends TableCell {
+    @JsonProperty("txtNyushoShisetsu1")
+    private TextBox txtNyushoShisetsu1;
+
+    @JsonProperty("txtNyushoShisetsu1")
+    public TextBox getTxtNyushoShisetsu1() {
+        return txtNyushoShisetsu1;
+    }
+
+    @JsonProperty("txtNyushoShisetsu1")
+    public void setTxtNyushoShisetsu1(TextBox txtNyushoShisetsu1) {
+        this.txtNyushoShisetsu1=txtNyushoShisetsu1;
     }
 
 }
@@ -408,22 +468,42 @@ class celShisetsuTaishoDate1AttblShisetsuNyutaisho extends TableCell {
 
 }
 /**
- * celNyushoShisetsu1 のクラスファイル 
+ * celShisetsuShurui2 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celNyushoShisetsu1AttblShisetsuNyutaisho extends TableCell {
-    @JsonProperty("txtNyushoShisetsu1")
-    private TextBox txtNyushoShisetsu1;
+class celShisetsuShurui2AttblShisetsuNyutaisho extends TableCell {
+    @JsonProperty("txtShisetsuShurui2")
+    private TextBox txtShisetsuShurui2;
 
-    @JsonProperty("txtNyushoShisetsu1")
-    public TextBox getTxtNyushoShisetsu1() {
-        return txtNyushoShisetsu1;
+    @JsonProperty("txtShisetsuShurui2")
+    public TextBox getTxtShisetsuShurui2() {
+        return txtShisetsuShurui2;
     }
 
-    @JsonProperty("txtNyushoShisetsu1")
-    public void setTxtNyushoShisetsu1(TextBox txtNyushoShisetsu1) {
-        this.txtNyushoShisetsu1=txtNyushoShisetsu1;
+    @JsonProperty("txtShisetsuShurui2")
+    public void setTxtShisetsuShurui2(TextBox txtShisetsuShurui2) {
+        this.txtShisetsuShurui2=txtShisetsuShurui2;
+    }
+
+}
+/**
+ * celNyushoShisetsu2 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celNyushoShisetsu2AttblShisetsuNyutaisho extends TableCell {
+    @JsonProperty("txtNyushoShisetsu2")
+    private TextBox txtNyushoShisetsu2;
+
+    @JsonProperty("txtNyushoShisetsu2")
+    public TextBox getTxtNyushoShisetsu2() {
+        return txtNyushoShisetsu2;
+    }
+
+    @JsonProperty("txtNyushoShisetsu2")
+    public void setTxtNyushoShisetsu2(TextBox txtNyushoShisetsu2) {
+        this.txtNyushoShisetsu2=txtNyushoShisetsu2;
     }
 
 }
@@ -468,82 +548,42 @@ class celShisetsuTaishoDate2AttblShisetsuNyutaisho extends TableCell {
 
 }
 /**
- * celNyushoShisetsu2 のクラスファイル 
+ * celShisetsuShurui3 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celNyushoShisetsu2AttblShisetsuNyutaisho extends TableCell {
-    @JsonProperty("txtNyushoShisetsu2")
-    private TextBox txtNyushoShisetsu2;
+class celShisetsuShurui3AttblShisetsuNyutaisho extends TableCell {
+    @JsonProperty("txtShisetsuShurui3")
+    private TextBox txtShisetsuShurui3;
 
-    @JsonProperty("txtNyushoShisetsu2")
-    public TextBox getTxtNyushoShisetsu2() {
-        return txtNyushoShisetsu2;
+    @JsonProperty("txtShisetsuShurui3")
+    public TextBox getTxtShisetsuShurui3() {
+        return txtShisetsuShurui3;
     }
 
-    @JsonProperty("txtNyushoShisetsu2")
-    public void setTxtNyushoShisetsu2(TextBox txtNyushoShisetsu2) {
-        this.txtNyushoShisetsu2=txtNyushoShisetsu2;
+    @JsonProperty("txtShisetsuShurui3")
+    public void setTxtShisetsuShurui3(TextBox txtShisetsuShurui3) {
+        this.txtShisetsuShurui3=txtShisetsuShurui3;
     }
 
 }
 /**
- * celShisetsuShuruiTitle のクラスファイル 
+ * celNyushoShisetsu3 のクラスファイル 
  * 
  * @author 自動生成
  */
-class celShisetsuShuruiTitleAttblShisetsuNyutaisho extends TableCell {
-    @JsonProperty("lblShisetsuShurui")
-    private Label lblShisetsuShurui;
+class celNyushoShisetsu3AttblShisetsuNyutaisho extends TableCell {
+    @JsonProperty("txtNyushoShisetsu3")
+    private TextBox txtNyushoShisetsu3;
 
-    @JsonProperty("lblShisetsuShurui")
-    public Label getLblShisetsuShurui() {
-        return lblShisetsuShurui;
+    @JsonProperty("txtNyushoShisetsu3")
+    public TextBox getTxtNyushoShisetsu3() {
+        return txtNyushoShisetsu3;
     }
 
-    @JsonProperty("lblShisetsuShurui")
-    public void setLblShisetsuShurui(Label lblShisetsuShurui) {
-        this.lblShisetsuShurui=lblShisetsuShurui;
-    }
-
-}
-/**
- * celShisetsuShurui1 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celShisetsuShurui1AttblShisetsuNyutaisho extends TableCell {
-    @JsonProperty("txtShisetsuShurui1")
-    private TextBox txtShisetsuShurui1;
-
-    @JsonProperty("txtShisetsuShurui1")
-    public TextBox getTxtShisetsuShurui1() {
-        return txtShisetsuShurui1;
-    }
-
-    @JsonProperty("txtShisetsuShurui1")
-    public void setTxtShisetsuShurui1(TextBox txtShisetsuShurui1) {
-        this.txtShisetsuShurui1=txtShisetsuShurui1;
-    }
-
-}
-/**
- * celShisetsuShurui2 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celShisetsuShurui2AttblShisetsuNyutaisho extends TableCell {
-    @JsonProperty("txtShisetsuShurui2")
-    private TextBox txtShisetsuShurui2;
-
-    @JsonProperty("txtShisetsuShurui2")
-    public TextBox getTxtShisetsuShurui2() {
-        return txtShisetsuShurui2;
-    }
-
-    @JsonProperty("txtShisetsuShurui2")
-    public void setTxtShisetsuShurui2(TextBox txtShisetsuShurui2) {
-        this.txtShisetsuShurui2=txtShisetsuShurui2;
+    @JsonProperty("txtNyushoShisetsu3")
+    public void setTxtNyushoShisetsu3(TextBox txtNyushoShisetsu3) {
+        this.txtNyushoShisetsu3=txtNyushoShisetsu3;
     }
 
 }
@@ -584,46 +624,6 @@ class celShisetsuTaishoDate3AttblShisetsuNyutaisho extends TableCell {
     @JsonProperty("txtShisetsuTaishoDate3")
     public void setTxtShisetsuTaishoDate3(TextBoxFlexibleDate txtShisetsuTaishoDate3) {
         this.txtShisetsuTaishoDate3=txtShisetsuTaishoDate3;
-    }
-
-}
-/**
- * celNyushoShisetsu3 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celNyushoShisetsu3AttblShisetsuNyutaisho extends TableCell {
-    @JsonProperty("txtNyushoShisetsu3")
-    private TextBox txtNyushoShisetsu3;
-
-    @JsonProperty("txtNyushoShisetsu3")
-    public TextBox getTxtNyushoShisetsu3() {
-        return txtNyushoShisetsu3;
-    }
-
-    @JsonProperty("txtNyushoShisetsu3")
-    public void setTxtNyushoShisetsu3(TextBox txtNyushoShisetsu3) {
-        this.txtNyushoShisetsu3=txtNyushoShisetsu3;
-    }
-
-}
-/**
- * celShisetsuShurui3 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celShisetsuShurui3AttblShisetsuNyutaisho extends TableCell {
-    @JsonProperty("txtShisetsuShurui3")
-    private TextBox txtShisetsuShurui3;
-
-    @JsonProperty("txtShisetsuShurui3")
-    public TextBox getTxtShisetsuShurui3() {
-        return txtShisetsuShurui3;
-    }
-
-    @JsonProperty("txtShisetsuShurui3")
-    public void setTxtShisetsuShurui3(TextBox txtShisetsuShurui3) {
-        this.txtShisetsuShurui3=txtShisetsuShurui3;
     }
 
 }

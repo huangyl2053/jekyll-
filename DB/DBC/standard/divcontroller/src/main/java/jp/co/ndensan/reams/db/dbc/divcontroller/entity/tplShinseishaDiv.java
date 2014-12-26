@@ -5,7 +5,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfo.ShinseishaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IShinseishaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -36,13 +37,8 @@ public class tplShinseishaDiv extends TabPanel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("Shinseisha")
-    public ShinseishaInfoDiv getShinseisha() {
+    public IShinseishaInfoDiv getShinseisha() {
         return Shinseisha;
-    }
-
-    @JsonProperty("Shinseisha")
-    public void setShinseisha(ShinseishaInfoDiv Shinseisha) {
-        this.Shinseisha=Shinseisha;
     }
 
     @JsonProperty("txtShiharaiTotalAmount")
