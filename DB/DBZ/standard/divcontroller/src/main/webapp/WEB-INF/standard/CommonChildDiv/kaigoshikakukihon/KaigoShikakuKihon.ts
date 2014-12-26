@@ -1,8 +1,6 @@
-/// <reference path='KaigoShikakuKihon_Design.ts' />
-module DBZ
-{
-    export module KaigoShikakuKihon
-    {
+﻿/// <reference path='KaigoShikakuKihon_Design.ts' />
+module DBZ {
+    export module KaigoShikakuKihon {
         export class ModeController {
             private controls: Controls;
             private fieldName: string;
@@ -12,39 +10,63 @@ module DBZ
                 this.controls = new Controls(fieldName);
             }
 
-            public Properties() {
-                return new UZA.CommonChildDiv(this.fieldName);
+            public RenrakusakiAriMode() {
+                return new Modes.RenrakusakiAriMode(this.controls);
+            }
+            
+            public HihokenrirekiNashiMode() {
+                return new Modes.HihokenrirekiNashiMode(this.controls);
             }
 
-            public PublicProperties() {
-                return new PublicProperties(this.fieldName);
+            public NinteirirekiNashiMode() {
+                return new Modes.NinteirirekiNashiMode(this.controls);
             }
         }
 
         export module Modes {
-        }
-    }
-}
 
-module DBZ
-{
-    export module KaigoShikakuKihon
-    {
-        export class PublicProperties {
-            private controls: Controls;
-            private fieldName: string;
+            export class RenrakusakiAriMode {
+                private controls: Controls;
 
-            constructor(fieldName: string) {
-                this.fieldName = fieldName;
-                this.controls = new Controls(fieldName);
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                public RenrakusakiAri(): void {
+                    this.controls.btnRenrakusaki().displayNone = false;
+
+                 
+                }
             }
 
-            public getEditTypes(): UZA.EditTypeForPublicProperty {
-                var editTypes = new UZA.EditTypeForPublicProperty();
+            export class HihokenrirekiNashiMode {
+                private controls: Controls;
 
-                return editTypes;
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                public HihokenrirekiNashi(): void {
+                    this.controls.btnHihoRireki().displayNone = true;
+                }
+            }
+
+            export class NinteirirekiNashiMode {
+                private controls: Controls;
+
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                public NinteirirekiAri(): void {
+                    this.controls.btnNinteiRireki().displayNone = true;
+                }
             }
         }
     }
+
 }
+
+
+
 

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoatenainfo.KaigoAtenaInfoDiv;
 //import jp.co.ndensan.reams.ur.urz.business.AtenaSearchKeyBuilder;
 //import jp.co.ndensan.reams.ur.urz.business.IAtenaSearchKey;
 //import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.KensakuYusenKubun;

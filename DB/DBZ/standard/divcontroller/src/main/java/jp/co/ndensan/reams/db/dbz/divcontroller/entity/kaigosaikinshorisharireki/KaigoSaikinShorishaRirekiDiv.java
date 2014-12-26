@@ -1,16 +1,18 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigosaikinshorisharireki;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigosaikinshorisharireki.IKaigoSaikinShorishaRirekiDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.ISaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.SaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KaigoSaikinShorishaRireki のクラスファイル
- *
+ * KaigoSaikinShorishaRireki のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class KaigoSaikinShorishaRirekiDiv extends Panel implements IKaigoSaikinShorishaRirekiDiv {
@@ -20,7 +22,6 @@ public class KaigoSaikinShorishaRirekiDiv extends Panel implements IKaigoSaikinS
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("wrappedSaikinShorishaRireki")
     private SaikinShorishaRirekiDiv wrappedSaikinShorishaRireki;
 
@@ -36,4 +37,5 @@ public class KaigoSaikinShorishaRirekiDiv extends Panel implements IKaigoSaikinS
     }
 
     //--------------- この行より下にコードを追加してください -------------------
+
 }
