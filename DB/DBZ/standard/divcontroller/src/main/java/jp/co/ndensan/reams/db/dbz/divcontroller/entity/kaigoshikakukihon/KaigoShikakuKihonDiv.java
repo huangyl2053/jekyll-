@@ -3,9 +3,15 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoshikakukihon;
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 
 /**
  * KaigoShikakuKihon のクラスファイル
@@ -171,5 +177,128 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
         this.btnRenrakusaki = btnRenrakusaki;
     }
 
+    /*
+     * [共有子DIVモード]
+     */
+    @JsonProperty("modes")
+    private HashSet<Mode> modes;
+
+    public static enum HihokenrirekiNashiMode implements ICommonChildDivMode {
+
+        HihokenrirekiNashi("HihokenrirekiNashi");
+
+        private final String name;
+
+        private HihokenrirekiNashiMode(final String name) {
+            this.name = name;
+        }
+
+        public static HihokenrirekiNashiMode getEnum(String str) {
+            HihokenrirekiNashiMode[] enumArray = HihokenrirekiNashiMode.values();
+
+            for (HihokenrirekiNashiMode enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public HihokenrirekiNashiMode getMode_HihokenrirekiNashiMode() {
+        return (HihokenrirekiNashiMode) _CommonChildDivModeUtil.getMode(this.modes, HihokenrirekiNashiMode.class);
+    }
+
+    public void setMode_HihokenrirekiNashiMode(HihokenrirekiNashiMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, HihokenrirekiNashiMode.class, value);
+    }
+
+    public static enum RenrakusakiAriMode implements ICommonChildDivMode {
+
+        RenrakusakiAri("RenrakusakiAri");
+
+        private final String name;
+
+        private RenrakusakiAriMode(final String name) {
+            this.name = name;
+        }
+
+        public static RenrakusakiAriMode getEnum(String str) {
+            RenrakusakiAriMode[] enumArray = RenrakusakiAriMode.values();
+
+            for (RenrakusakiAriMode enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public RenrakusakiAriMode getMode_RenrakusakiAriMode() {
+        return (RenrakusakiAriMode) _CommonChildDivModeUtil.getMode(this.modes, RenrakusakiAriMode.class);
+    }
+
+    public void setMode_RenrakusakiAriMode(RenrakusakiAriMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, RenrakusakiAriMode.class, value);
+    }
+
+    public static enum NinteirirekiNashiMode implements ICommonChildDivMode {
+
+        NinteirirekiAri("NinteirirekiAri");
+
+        private final String name;
+
+        private NinteirirekiNashiMode(final String name) {
+            this.name = name;
+        }
+
+        public static NinteirirekiNashiMode getEnum(String str) {
+            NinteirirekiNashiMode[] enumArray = NinteirirekiNashiMode.values();
+
+            for (NinteirirekiNashiMode enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public NinteirirekiNashiMode getMode_NinteirirekiNashiMode() {
+        return (NinteirirekiNashiMode) _CommonChildDivModeUtil.getMode(this.modes, NinteirirekiNashiMode.class);
+    }
+
+    public void setMode_NinteirirekiNashiMode(NinteirirekiNashiMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, NinteirirekiNashiMode.class, value);
+    }
+
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void load(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+        getHandler().load(市町村コード, 識別コード);
+    }
+
+    @JsonIgnore
+    public KaigoShikakuKihonHandler getHandler() {
+        return new KaigoShikakuKihonHandler(this);
+    }
 }

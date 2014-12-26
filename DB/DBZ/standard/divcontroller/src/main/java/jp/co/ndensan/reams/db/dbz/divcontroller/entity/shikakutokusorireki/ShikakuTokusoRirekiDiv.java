@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShikakuTokusoRirekiHandler;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -246,8 +246,8 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
 
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void load(KaigoShikakuKihonSearchKey 検索キー) {
-        getHandler().load(検索キー);
+    public void load(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+        getHandler().load(市町村コード, 識別コード);
     }
 
     @JsonIgnore

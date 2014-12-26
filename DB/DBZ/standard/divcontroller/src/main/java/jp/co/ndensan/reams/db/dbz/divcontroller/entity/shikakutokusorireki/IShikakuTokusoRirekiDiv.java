@@ -1,18 +1,20 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki;
 
-import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv.DataGridWidth;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv.BtnDisplayMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv.DisplayType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.ShikakuTokusoRirekiDiv.HokenshaJohoDisplayMode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 
 /**
  * このコードはツールによって生成されました。
  */
-public interface IShikakuTokusoRirekiDiv {
+public interface IShikakuTokusoRirekiDiv extends ICommonChildDivBaseProperties {
 
     public Button getBtnAdd();
 
@@ -45,7 +47,8 @@ public interface IShikakuTokusoRirekiDiv {
     /**
      * 検索キーを元にデータを取得し、Divに設定します。
      *
-     * @param 検索キー 介護資格基本情報の検索キー
+     * @param 市町村コード 市町村コード
+     * @param 識別コード 識別コード
      */
-    void load(KaigoShikakuKihonSearchKey 検索キー);
+    void load(LasdecCode 市町村コード, ShikibetsuCode 識別コード);
 }

@@ -3,7 +3,12 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigofukakihon;
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -124,4 +129,13 @@ public class KaigoFukaKihonDiv extends Panel implements IKaigoFukaKihonDiv {
     }
 
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void load(TsuchishoNo 通知書番号, FlexibleYear 賦課年度, LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+        getHandler().load(通知書番号, 賦課年度, 市町村コード, 識別コード);
+    }
+
+    @JsonIgnore
+    public KaigoFukaKihonHandler getHandler() {
+        return new KaigoFukaKihonHandler(this);
+    }
 }

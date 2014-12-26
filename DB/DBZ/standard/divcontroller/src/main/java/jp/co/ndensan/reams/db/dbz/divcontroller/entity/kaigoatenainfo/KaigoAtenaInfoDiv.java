@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  * KaigoAtenaInfo のクラスファイル
@@ -36,4 +38,23 @@ public class KaigoAtenaInfoDiv extends Panel implements IKaigoAtenaInfoDiv {
     }
 
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void load(ShikibetsuCode 識別コード) {
+        getHandler().load(識別コード);
+    }
+
+    @Override
+    public void set介護宛名資格モード() {
+        getHandler().set介護宛名資格モード();
+    }
+
+    @Override
+    public void set介護宛名賦課モード() {
+        getHandler().set介護宛名賦課モード();
+    }
+
+    @JsonIgnore
+    public KaigoAtenaInfoHandler getHandler() {
+        return new KaigoAtenaInfoHandler(this);
+    }
 }

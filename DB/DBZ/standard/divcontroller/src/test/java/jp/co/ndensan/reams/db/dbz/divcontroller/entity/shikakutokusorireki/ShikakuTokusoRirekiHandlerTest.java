@@ -65,7 +65,7 @@ public class ShikakuTokusoRirekiHandlerTest extends DbzTestBase {
         @Before
         public void setup() {
             result = createNewDiv();
-            new ShikakuTokusoRirekiHandler(result, createHihokenshaFinder()).load(createSearchKey());
+            new ShikakuTokusoRirekiHandler(result, createHihokenshaFinder()).load(市町村コード, 識別コード);
         }
 
         @Test
@@ -140,13 +140,6 @@ public class ShikakuTokusoRirekiHandlerTest extends DbzTestBase {
         ShikakuTokusoRirekiDiv div = new ShikakuTokusoRirekiDiv();
         div.setDgShikakuShutokuRireki(new DataGrid<dgShikakuShutokuRireki_Row>());
         return div;
-    }
-
-    private static KaigoShikakuKihonSearchKey createSearchKey() {
-        KaigoShikakuKihonSearchKey mock = mock(KaigoShikakuKihonSearchKey.class);
-        when(mock.get市町村コード()).thenReturn(市町村コード);
-        when(mock.get識別コード()).thenReturn(識別コード);
-        return mock;
     }
 
     private static HihokenshaList createHihokenshaList() {

@@ -64,7 +64,7 @@ public class KaigoShikakuKihonHandlerTest extends DbzTestBase {
         @Before
         public void setup() {
             result = createNewDiv();
-            new KaigoShikakuKihonHandler(result, createHihokenshaFinder(), createJukyuDaichoFinder()).load(createSearchKey());
+            new KaigoShikakuKihonHandler(result, createHihokenshaFinder(), createJukyuDaichoFinder()).load(市町村コード, 識別コード);
         }
 
         @Test
@@ -139,13 +139,6 @@ public class KaigoShikakuKihonHandlerTest extends DbzTestBase {
         div.setTxtNinteiKaishiYmd(new TextBoxDate());
         div.setTxtNinteiShuryoYmd(new TextBoxDate());
         return div;
-    }
-
-    private static KaigoShikakuKihonSearchKey createSearchKey() {
-        KaigoShikakuKihonSearchKey mock = mock(KaigoShikakuKihonSearchKey.class);
-        when(mock.get市町村コード()).thenReturn(市町村コード);
-        when(mock.get識別コード()).thenReturn(識別コード);
-        return mock;
     }
 
     private static Hihokensha createHihokensha() {
