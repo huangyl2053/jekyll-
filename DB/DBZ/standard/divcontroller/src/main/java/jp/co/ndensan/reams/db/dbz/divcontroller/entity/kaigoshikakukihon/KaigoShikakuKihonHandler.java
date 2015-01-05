@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoshikakukihon;
 
-import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKeyBuilder;
-import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaFinder;
+import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.ur.urz.business.IKobetsuJikoKaigoJukyu;
 import jp.co.ndensan.reams.ur.urz.realservice.IJukyuDaichoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class KaigoShikakuKihonHandler {
 
     private final KaigoShikakuKihonDiv div;
-    private final HihokenshaFinder hihokenshaFinder;
+    private final HihokenshaDaichoManager hihokenshaDaichoManager;
     private final IJukyuDaichoFinder jukyuDaichoFinder;
 
     /**
@@ -35,7 +35,7 @@ public class KaigoShikakuKihonHandler {
      */
     public KaigoShikakuKihonHandler(KaigoShikakuKihonDiv div) {
         this.div = div;
-        hihokenshaFinder = new HihokenshaFinder();
+        hihokenshaDaichoManager = new HihokenshaDaichoManager();
         jukyuDaichoFinder = InstanceProvider.createWithCustomize(IJukyuDaichoFinder.class);
     }
 
@@ -43,12 +43,12 @@ public class KaigoShikakuKihonHandler {
      * モックを使用するテスト用コンストラクタです。
      *
      * @param div 介護資格基本情報Div
-     * @param hihokenshaFinder 被保険者Finder
+     * @param hihokenshaDaichoManager 被保険者台帳Manager
      * @param jukyuDaichoFinder 受給者台帳Finder
      */
-    KaigoShikakuKihonHandler(KaigoShikakuKihonDiv div, HihokenshaFinder hihokenshaFinder, IJukyuDaichoFinder jukyuDaichoFinder) {
+    KaigoShikakuKihonHandler(KaigoShikakuKihonDiv div, HihokenshaDaichoManager hihokenshaDaichoManager, IJukyuDaichoFinder jukyuDaichoFinder) {
         this.div = div;
-        this.hihokenshaFinder = hihokenshaFinder;
+        this.hihokenshaDaichoManager = hihokenshaDaichoManager;
         this.jukyuDaichoFinder = jukyuDaichoFinder;
     }
 
@@ -61,19 +61,19 @@ public class KaigoShikakuKihonHandler {
     public void load(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
 
         KaigoShikakuKihonSearchKey 検索キー = new KaigoShikakuKihonSearchKeyBuilder(市町村コード, 識別コード).build();
-        Hihokensha hihokensha = hihokenshaFinder.get被保険者(検索キー.get市町村コード(), 検索キー.get識別コード());
-        if (hihokensha == null) {
+        HihokenshaDaichoModel hihokenshaDaicho = hihokenshaDaichoManager.get最新被保険者台帳(検索キー.get市町村コード(), 検索キー.get識別コード());
+        if (hihokenshaDaicho == null) {
             return;
         }
 
-        div.getTxtHihokenshaNo().setValue(hihokensha.get被保険者番号().value());
-        div.getTxtShutokuYmd().setValue(new RDate(hihokensha.get資格取得().getActionDate().toString()));
-        div.getTxtShutokuJiyu().setValue(hihokensha.get資格取得().getReason().getName());
-        div.getTxtSoshitsuYmd().setValue(new RDate(hihokensha.get資格喪失().getActionDate().toString()));
-        div.getTxtSoshitsuJiyu().setValue(hihokensha.get資格喪失().getReason().getName());
-        div.getTxtJutokuKubun().setValue(hihokensha.get住所地特例者区分().get名称());
+        div.getTxtHihokenshaNo().setValue(hihokenshaDaicho.get被保険者番号().value());
+        div.getTxtShutokuYmd().setValue(new RDate(hihokenshaDaicho.get資格取得年月日().toString()));
+        div.getTxtShutokuJiyu().setValue(hihokenshaDaicho.get資格取得事由().getName());
+        div.getTxtSoshitsuYmd().setValue(new RDate(hihokenshaDaicho.get資格喪失年月日().toString()));
+        div.getTxtSoshitsuJiyu().setValue(hihokenshaDaicho.get資格喪失事由().getName());
+        div.getTxtJutokuKubun().setValue(new RString(hihokenshaDaicho.get住所地特例者区分().name()));
 
-        IKobetsuJikoKaigoJukyu jukyu = jukyuDaichoFinder.get個別事項介護受給(検索キー.get識別コード(), hihokensha.get処理日時().getDate());
+        IKobetsuJikoKaigoJukyu jukyu = jukyuDaichoFinder.get個別事項介護受給(検索キー.get識別コード(), hihokenshaDaicho.get処理日時().getDate());
 
         if (jukyu != null) {
             div.getTxtYokaigoJotaiKubun().setValue(new RString(jukyu.get要介護状態区分().name()));

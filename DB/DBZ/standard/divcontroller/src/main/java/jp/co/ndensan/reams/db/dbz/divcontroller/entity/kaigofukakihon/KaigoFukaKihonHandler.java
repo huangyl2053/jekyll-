@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigofukakihon;
 
-import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKeyBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaFinder;
+import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 public class KaigoFukaKihonHandler {
 
     private final KaigoFukaKihonDiv div;
-    private final HihokenshaFinder hihokenshaFinder;
+    private final HihokenshaDaichoManager hihokenshaDaichoManager;
 
     /**
      * コンストラクタです。
@@ -32,18 +32,18 @@ public class KaigoFukaKihonHandler {
      */
     public KaigoFukaKihonHandler(KaigoFukaKihonDiv div) {
         this.div = div;
-        hihokenshaFinder = new HihokenshaFinder();
+        hihokenshaDaichoManager = new HihokenshaDaichoManager();
     }
 
     /**
      * モックを使用するテスト用コンストラクタです。
      *
      * @param div 介護賦課基本情報Div
-     * @param hihokenshaFinder 被保険者Finder
+     * @param hihokenshaDaichoManager 被保険者台帳Manager
      */
-    KaigoFukaKihonHandler(KaigoFukaKihonDiv div, HihokenshaFinder hihokenshaFinder) {
+    KaigoFukaKihonHandler(KaigoFukaKihonDiv div, HihokenshaDaichoManager hihokenshaDaichoManager) {
         this.div = div;
-        this.hihokenshaFinder = hihokenshaFinder;
+        this.hihokenshaDaichoManager = hihokenshaDaichoManager;
     }
 
     /**
@@ -58,13 +58,13 @@ public class KaigoFukaKihonHandler {
 
         // TODO N8156 宮本 康 賦課情報の取得処理が実装され次第対応する。（オフショアで対応中）
         KaigoFukaKihonSearchKey 検索キー = new KaigoFukaKihonSearchKeyBuilder(通知書番号, 賦課年度, 市町村コード, 識別コード).build();
-        Hihokensha hihokensha = hihokenshaFinder.get被保険者(検索キー.get市町村コード(), 検索キー.get識別コード());
+        HihokenshaDaichoModel hihokenshaDaicho = hihokenshaDaichoManager.get最新被保険者台帳(検索キー.get市町村コード(), 検索キー.get識別コード());
 
-        if (hihokensha != null) {
-            div.getTxtShutokuYmd().setValue(new RDate(hihokensha.get資格取得().getActionDate().toString()));
-            div.getTxtShutokuJiyu().setValue(hihokensha.get資格取得().getReason().getName());
-            div.getTxtSoshitsuYmd().setValue(new RDate(hihokensha.get資格喪失().getActionDate().toString()));
-            div.getTxtSoshitsuJiyu().setValue(hihokensha.get資格喪失().getReason().getName());
+        if (hihokenshaDaicho != null) {
+            div.getTxtShutokuYmd().setValue(new RDate(hihokenshaDaicho.get資格取得年月日().toString()));
+            div.getTxtShutokuJiyu().setValue(hihokenshaDaicho.get資格取得事由().getName());
+            div.getTxtSoshitsuYmd().setValue(new RDate(hihokenshaDaicho.get資格喪失年月日().toString()));
+            div.getTxtSoshitsuJiyu().setValue(hihokenshaDaicho.get資格喪失事由().getName());
         }
     }
 }

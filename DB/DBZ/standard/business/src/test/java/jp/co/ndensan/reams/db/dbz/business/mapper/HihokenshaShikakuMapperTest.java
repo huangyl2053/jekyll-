@@ -144,7 +144,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
             @Test
             public void toHihokenshaDaichoEntityで変換したとき_結果のgetIchigoHihokenshaNenreiTotatsuYMDは_引数のget第一号年齢到達日と一致する() {
                 result = sut.toHihokenshaDaichoEntity(shikaku);
-                assertThat(result.getIchigoHihokenshaNenreiTotatsuYMD(), is(shikaku.get第一号年齢到達日()));
+                assertThat(result.getIchigoShikakuShutokuYMD(), is(shikaku.get第一号年齢到達日()));
             }
 
             @Test

@@ -5,17 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoshikakukihon;
 
-import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
-import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
-import jp.co.ndensan.reams.db.dbz.business.ShikakuSoshitsu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaFinder;
+import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKobetsuJikoKaigoJukyu;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.YoKaigoJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.realservice.IJukyuDaichoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -46,12 +43,10 @@ public class KaigoShikakuKihonHandlerTest extends DbzTestBase {
     private static final ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000002");
     private static final RString 被保険者番号 = new RString("000003");
     private static final ShikakuShutokuJiyu 資格取得事由 = ShikakuShutokuJiyu.転入;
-    private static final RDate 資格取得届出日 = new RDate("20140101");
     private static final RDate 資格取得日 = new RDate("20140202");
     private static final ShikakuSoshitsuJiyu 資格喪失事由 = ShikakuSoshitsuJiyu.転出;
-    private static final RDate 資格喪失届出日 = new RDate("20140303");
     private static final RDate 資格喪失日 = new RDate("20140404");
-    private static final JushochiTokureishaKubun 住所地特例者区分 = JushochiTokureishaKubun.通常資格者;
+    private static final JushochitokureishaKubun 住所地特例者区分 = JushochitokureishaKubun.通常資格者;
     private static final YMDHMS 処理日時 = new YMDHMS("20140102030405");
     private static final YoKaigoJotaiKubun 要介護状態区分 = YoKaigoJotaiKubun.要介護1;
     private static final RDate 認定有効開始日 = new RDate("20140505");
@@ -64,7 +59,7 @@ public class KaigoShikakuKihonHandlerTest extends DbzTestBase {
         @Before
         public void setup() {
             result = createNewDiv();
-            new KaigoShikakuKihonHandler(result, createHihokenshaFinder(), createJukyuDaichoFinder()).load(市町村コード, 識別コード);
+            new KaigoShikakuKihonHandler(result, createHihokenshaDaichoManager(), createJukyuDaichoFinder()).load(市町村コード, 識別コード);
         }
 
         @Test
@@ -94,7 +89,7 @@ public class KaigoShikakuKihonHandlerTest extends DbzTestBase {
 
         @Test
         public void 住所地特例者区分のデータがある時_loadは_データをDivに設定する() {
-            assertThat(result.getTxtJutokuKubun().getValue(), is(住所地特例者区分.get名称()));
+            assertThat(result.getTxtJutokuKubun().getValue(), is(new RString(住所地特例者区分.name())));
         }
 
         @Test
@@ -113,10 +108,10 @@ public class KaigoShikakuKihonHandlerTest extends DbzTestBase {
         }
     }
 
-    private static HihokenshaFinder createHihokenshaFinder() {
-        HihokenshaFinder mock = mock(HihokenshaFinder.class);
-        Hihokensha hihokensha = createHihokensha();
-        when(mock.get被保険者(any(LasdecCode.class), any(ShikibetsuCode.class))).thenReturn(hihokensha);
+    private static HihokenshaDaichoManager createHihokenshaDaichoManager() {
+        HihokenshaDaichoManager mock = mock(HihokenshaDaichoManager.class);
+        HihokenshaDaichoModel hihokenshaDaicho = createHihokenshaDaicho();
+        when(mock.get最新被保険者台帳(any(LasdecCode.class), any(ShikibetsuCode.class))).thenReturn(hihokenshaDaicho);
         return mock;
     }
 
@@ -141,11 +136,13 @@ public class KaigoShikakuKihonHandlerTest extends DbzTestBase {
         return div;
     }
 
-    private static Hihokensha createHihokensha() {
-        Hihokensha mock = mock(Hihokensha.class);
+    private static HihokenshaDaichoModel createHihokenshaDaicho() {
+        HihokenshaDaichoModel mock = mock(HihokenshaDaichoModel.class);
         when(mock.get被保険者番号()).thenReturn(new HihokenshaNo(被保険者番号));
-        when(mock.get資格取得()).thenReturn(new ShikakuShutoku(資格取得事由, new FlexibleDate(資格取得届出日.toString()), new FlexibleDate(資格取得日.toString())));
-        when(mock.get資格喪失()).thenReturn(new ShikakuSoshitsu(資格喪失事由, new FlexibleDate(資格喪失届出日.toString()), new FlexibleDate(資格喪失日.toString())));
+        when(mock.get資格取得年月日()).thenReturn(new FlexibleDate(資格取得日.toString()));
+        when(mock.get資格取得事由()).thenReturn(資格取得事由);
+        when(mock.get資格喪失年月日()).thenReturn(new FlexibleDate(資格喪失日.toString()));
+        when(mock.get資格喪失事由()).thenReturn(資格喪失事由);
         when(mock.get住所地特例者区分()).thenReturn(住所地特例者区分);
         when(mock.get処理日時()).thenReturn(処理日時);
         return mock;
