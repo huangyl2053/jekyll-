@@ -34,7 +34,7 @@ public class HihokenshaShikakuHakkoValidate implements IValidatable {
     /**
      * 保険者証・資格者証発行のバリデーションチェックを行います。
      *
-     * @param 交付事由
+     * @param 交付事由 RString
      * @return バリデーションメッセージ
      */
     public IValidationMessages validateIn(RString 交付事由) {
