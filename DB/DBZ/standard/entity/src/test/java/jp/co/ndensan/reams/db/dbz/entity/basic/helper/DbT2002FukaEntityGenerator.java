@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHM;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -28,7 +27,7 @@ public final class DbT2002FukaEntityGenerator {
     public static final FlexibleYear DEFAULT_賦課年度 = new FlexibleYear("2014");
     public static final TsuchishoNo DEFAULT_通知書番号 = new TsuchishoNo(new RString("2"));
     public static final RDateTime DEFAULT_処理日時 = RDateTime.of(2014, 9, 01, 10, 20, 30, 123);
-    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("2"));
+    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("0000000002"));
     public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("000001234567890");
     public static final SetaiCode DEFAULT_世帯コード = new SetaiCode(new RString("2"));
     public static final int DEFAULT_世帯員数 = 1;
@@ -46,7 +45,7 @@ public final class DbT2002FukaEntityGenerator {
     public static final Decimal DEFAULT_算定年額保険料2 = new Decimal(1);
     public static final FlexibleYearMonth DEFAULT_月割開始年月2 = new FlexibleYearMonth(new RString("201406"));
     public static final FlexibleYearMonth DEFAULT_月割終了年月2 = new FlexibleYearMonth(new RString("201406"));
-    public static final YMDHM DEFAULT_調定日時 = new YMDHM(new RString("201404151020"));
+    public static final RDateTime DEFAULT_調定日時 = RDateTime.of(2014, 4, 15, 10, 20);
     public static final RString DEFAULT_調定事由1 = new RString("1");
     public static final RString DEFAULT_調定事由2 = new RString("1");
     public static final RString DEFAULT_調定事由3 = new RString("1");
@@ -89,7 +88,7 @@ public final class DbT2002FukaEntityGenerator {
         entity.setNengakuHokenryo2(DEFAULT_算定年額保険料2);
         entity.setTsukiwariStartYM2(DEFAULT_月割開始年月2);
         entity.setTsukiwariEndYM2(DEFAULT_月割終了年月2);
-        entity.setChoteiYMDHM(DEFAULT_調定日時);
+        entity.setChoteiTimestamp(DEFAULT_調定日時);
         entity.setChoteiJiyu1(DEFAULT_調定事由1);
         entity.setChoteiJiyu2(DEFAULT_調定事由2);
         entity.setChoteiJiyu3(DEFAULT_調定事由3);

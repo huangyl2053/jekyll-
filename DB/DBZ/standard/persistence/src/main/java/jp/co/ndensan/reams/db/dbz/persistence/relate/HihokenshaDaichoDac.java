@@ -142,6 +142,12 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
         return 被保険者台帳Dac.delete(data.getEntity());
     }
 
+    /**
+     * 物理削除を行います。
+     *
+     * @param data HihokenshaDaichoModel
+     * @return int 件数
+     */
     public int deletePhysical(HihokenshaDaichoModel data) {
         if (data == null) {
             return 0;
