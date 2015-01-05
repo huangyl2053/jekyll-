@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice.hokensha;
 
-import jp.co.ndensan.reams.db.dbz.definition.ContainsKyuShichoson;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ContainsKyuShichoson;
 import jp.co.ndensan.reams.db.dbz.model.hokensha.IKoikiKoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
@@ -22,7 +22,7 @@ public interface IKoikiKoseiShichosonMasterFinder {
     /**
      * 旧市町村を含むか、含まないかを指定して、広域構成市町村を返します。
      *
-     * @param contains合併旧市町村
+     * @param contains合併旧市町村 contains合併旧市町村
      * @return 広域構成市町村(旧市町村を含む)
      */
     IItemList<IKoikiKoseiShichosonMaster> load広域構成市町村(ContainsKyuShichoson contains合併旧市町村);
@@ -31,7 +31,7 @@ public interface IKoikiKoseiShichosonMasterFinder {
      * 引数に合致する広域構成市町村情報を返します。
      *
      * @param code 市町村コード
-     * @param contains合併旧市町村
+     * @param contains合併旧市町村 contains合併旧市町村
      * @return 広域構成市町村(旧市町村を含む)
      */
     IOptional<IKoikiKoseiShichosonMaster> find構成市町村(LasdecCode code, ContainsKyuShichoson contains合併旧市町村);

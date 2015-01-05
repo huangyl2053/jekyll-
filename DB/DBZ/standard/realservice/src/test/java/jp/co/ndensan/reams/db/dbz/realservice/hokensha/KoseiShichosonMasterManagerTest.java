@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice.hokensha;
 
-import jp.co.ndensan.reams.db.dbz.definition.ContainsKyuShichoson;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ContainsKyuShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.model.hokensha.KoseiShichosonMasterModel;

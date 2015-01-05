@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.ContainsKyuShichoson;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ContainsKyuShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GappeiKyuShichosonKubun;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;

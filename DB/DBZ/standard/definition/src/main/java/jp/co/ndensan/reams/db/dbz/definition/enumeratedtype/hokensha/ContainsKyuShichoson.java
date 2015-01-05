@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.definition;
+package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha;
 
 /**
  * 旧市町村を含むか、含まないかを選択するための列挙型です。
@@ -12,6 +12,12 @@ package jp.co.ndensan.reams.db.dbz.definition;
  */
 public enum ContainsKyuShichoson {
 
+    /**
+     * 旧市町村を含む
+     */
     旧市町村を含む,
+    /**
+     * 旧市町村を含まない
+     */
     旧市町村を含まない;
 }
