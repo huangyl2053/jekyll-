@@ -5,11 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice.hokensha;
 
+import jp.co.ndensan.reams.db.dbz.definition.ContainsKyuShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.Functions;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.model.hokensha.IKoikiKoseiShichosonMaster;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  *
@@ -17,9 +19,9 @@ import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
  */
 public class _KoikiKoseiShichosonMasterFinder implements IKoikiKoseiShichosonMasterFinder {
 
-    private final KoseiShichosonShishoMasterManager manager;
+    private final KoseiShichosonMasterManager manager;
 
-    _KoikiKoseiShichosonMasterFinder(KoseiShichosonShishoMasterManager manager) {
+    _KoikiKoseiShichosonMasterFinder(KoseiShichosonMasterManager manager) {
         this.manager = manager;
     }
 
@@ -29,7 +31,12 @@ public class _KoikiKoseiShichosonMasterFinder implements IKoikiKoseiShichosonMas
     }
 
     @Override
-    public IOptional<IKoikiKoseiShichosonMaster> find構成市町村(ISearchCondition searchCondition) {
+    public IItemList<IKoikiKoseiShichosonMaster> find構成市町村(ISearchCondition searchCondition) {
         return manager.find構成市町村(searchCondition).map(Functions.toParent(IKoikiKoseiShichosonMaster.class));
+    }
+
+    @Override
+    public IOptional<IKoikiKoseiShichosonMaster> find構成市町村(LasdecCode code, ContainsKyuShichoson contains合併旧市町村) {
+        return manager.find構成市町村(code, contains合併旧市町村).map(Functions.toParent(IKoikiKoseiShichosonMaster.class));
     }
 }
