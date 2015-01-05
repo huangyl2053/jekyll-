@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.model.hokensha.KoseiShichosonMasterModel;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7052KoseiShichosonShishoMasterDac;
+import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 
 /**
  * 広域構成市町村を管理します。
@@ -34,16 +35,30 @@ public final class KoseiShichosonShishoMasterManager {
         this.dac = dac;
     }
 
+    /**
+     *
+     * @param contains合併旧市町村
+     * @return
+     */
     public IItemList<KoseiShichosonMasterModel> load広域構成市町村(ContainsKyuShichoson contains合併旧市町村) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public IOptional<KoseiShichosonMasterModel> find構成市町村(IKoikiKoseiShichosonSearchCondition searchCondition) {
+    /**
+     *
+     * @param searchCondition
+     * @return
+     */
+    public IOptional<KoseiShichosonMasterModel> find構成市町村(ISearchCondition searchCondition) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     public int save(KoseiShichosonMasterModel model) {
-        //model の stateによって、処理を返る。
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
