@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.divcontroller.controller.TestHihokenshaShikakuHakko;
+package jp.co.ndensan.reams.db.dbz.divcontroller.controller.testHihokenshaShikakuHakko;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.TestHihokenshaShikakuHakko.TestHihokenshaShikakuHakkoPanelDiv;

@@ -33,7 +33,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
     private RDate 有効期間開始日;
     private RDate 有効期間終了日;
     private FlexibleDate 申請日;
-    private boolean is性同一性障害用;
+    private boolean selected性同一障害用;
     private Decimal 限度基準額;
     private RDate 限度額有効期間開始日;
     private RDate 限度額有効期間終了日;
@@ -49,16 +49,16 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
     private List<RString> 施設名;
     private List<FlexibleDate> 施設入所日;
     private List<FlexibleDate> 施設退所日;
-    private boolean isテスト;
-    private boolean is直前履歴;
+    private boolean selectedテスト;
+    private boolean selected直前履歴;
 
     /**
      * コンストラクタです。
      */
     public HihokenshaShikakuHakkoModel() {
-        this.is性同一性障害用 = false;
-        this.isテスト = false;
-        this.is直前履歴 = false;
+        this.selected性同一障害用 = false;
+        this.selectedテスト = false;
+        this.selected直前履歴 = false;
     }
 
     /**
@@ -278,21 +278,21 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
     }
 
     /**
-     * is性同一性障害用を取得する。
+     * selected性同一障害用を取得する。
      *
-     * @return is性同一性障害用
+     * @return selected性同一障害用
      */
-    public boolean is性同一性障害用() {
-        return is性同一性障害用;
+    public boolean is性同一障害用() {
+        return selected性同一障害用;
     }
 
     /**
-     * is性同一性障害用を設定する。
+     * selected性同一障害用を設定する。
      *
-     * @param is性同一性障害用 is性同一性障害用
+     * @param selected性同一障害用 selected性同一障害用
      */
-    public void setIs性同一性障害用(boolean is性同一性障害用) {
-        this.is性同一性障害用 = is性同一性障害用;
+    public void setSelected性同一障害用(boolean selected性同一障害用) {
+        this.selected性同一障害用 = selected性同一障害用;
     }
 
     /**
@@ -566,38 +566,38 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
     }
 
     /**
-     * isテストを取得する。
+     * selectedテストを取得する。
      *
-     * @return isテスト
+     * @return selectedテスト
      */
     public boolean isテスト() {
-        return isテスト;
+        return selectedテスト;
     }
 
     /**
-     * isテストを設定する。
+     * selectedテストを設定する。
      *
-     * @param isテスト isテスト
+     * @param selectedテスト selectedテスト
      */
-    public void setIsテスト(boolean isテスト) {
-        this.isテスト = isテスト;
+    public void setSelectedテスト(boolean selectedテスト) {
+        this.selectedテスト = selectedテスト;
     }
 
     /**
-     * is直前履歴を取得する。
+     * selected直前履歴を取得する。
      *
-     * @return is直前履歴
+     * @return selected直前履歴
      */
     public boolean is直前履歴() {
-        return is直前履歴;
+        return selected直前履歴;
     }
 
     /**
-     * is直前履歴を設定する。
+     * selected直前履歴を設定する。
      *
-     * @param is直前履歴 is直前履歴
+     * @param selected直前履歴 selected直前履歴
      */
-    public void setIs直前履歴(boolean is直前履歴) {
-        this.is直前履歴 = is直前履歴;
+    public void setSelected直前履歴(boolean selected直前履歴) {
+        this.selected直前履歴 = selected直前履歴;
     }
 }

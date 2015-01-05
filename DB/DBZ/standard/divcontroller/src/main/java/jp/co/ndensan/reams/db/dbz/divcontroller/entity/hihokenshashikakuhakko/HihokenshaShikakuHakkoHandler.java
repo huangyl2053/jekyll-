@@ -66,7 +66,7 @@ public class HihokenshaShikakuHakkoHandler {
     private final HihokenshaShikakuHakkoDiv div;
 
     private static final RString COLLON = new RString(":");
-    private static final RString JIKOSAKUSE = new RString("自己作成");
+    private static final RString JIKOSAKUSEI = new RString("自己作成");
     private static final RString KOFUJIYU_TESTKEY = new RString("testKey");
     private static final RString KOFUJIYU_TEST = new RString("テスト");
     private static final RString KOFUJIYU_CHOKUZENKEY = new RString("chokuzenKey");
@@ -360,7 +360,7 @@ public class HihokenshaShikakuHakkoHandler {
 
     }
 
-    private class KyufuSeigenShutsuryoku {
+    private static class KyufuSeigenShutsuryoku {
 
         private final RString 制限内容;
         private final FlexibleDate 制限期間開始日;
@@ -559,7 +559,7 @@ public class HihokenshaShikakuHakkoHandler {
 
     }
 
-    private class ShienJigyosha {
+    private static class ShienJigyosha {
 
         private final RString 名称;
         private final FlexibleDate 届出日;
@@ -612,7 +612,7 @@ public class HihokenshaShikakuHakkoHandler {
                     }
                     適用開始日 = model.get居宅給付計画事業者作成モデル().get().get適用開始年月日();
                 } else {
-                    名称 = JIKOSAKUSE;
+                    名称 = JIKOSAKUSEI;
                     適用開始日 = model.get居宅給付計画自己作成モデル().get().get適用開始年月日();
                 }
                 list.add(new ShienJigyosha(名称, 届出日, 適用開始日));
@@ -737,9 +737,9 @@ public class HihokenshaShikakuHakkoHandler {
         model.set交付事由コード(div.getYukoKigenInfo().getDdlKofuJiyu().getSelectedKey());
         model.set交付事由(div.getYukoKigenInfo().getDdlKofuJiyu().getSelectedValue());
         if (div.getYukoKigenInfo().getDdlKofuJiyu().getSelectedKey().equals(KOFUJIYU_TESTKEY)) {
-            model.setIsテスト(true);
+            model.setSelectedテスト(true);
         } else if (div.getYukoKigenInfo().getDdlKofuJiyu().getSelectedKey().equals(KOFUJIYU_CHOKUZENKEY)) {
-            model.setIs直前履歴(true);
+            model.setSelected直前履歴(true);
         }
 
         return model;
@@ -753,7 +753,7 @@ public class HihokenshaShikakuHakkoHandler {
         model.set有効期間終了日(div.getNinteiInfo().getTxtNinteiYukoToYMD().getValue());
         model.set申請日(div.getNinteiInfo().getTxtShinseiDate().getValue());
         if (!div.getNinteiInfo().getChkSeidoitsuseiShogai().getSelectedKeys().isEmpty()) {
-            model.setIs性同一性障害用(true);
+            model.setSelected性同一障害用(true);
         }
 
         return model;

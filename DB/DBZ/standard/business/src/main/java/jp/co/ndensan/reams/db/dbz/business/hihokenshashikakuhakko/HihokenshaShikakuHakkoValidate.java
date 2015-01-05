@@ -31,6 +31,12 @@ public class HihokenshaShikakuHakkoValidate implements IValidatable {
         return messages;
     }
 
+    /**
+     * 保険者証・資格者証発行のバリデーションチェックを行います。
+     *
+     * @param 交付事由
+     * @return バリデーションメッセージ
+     */
     public IValidationMessages validateIn(RString 交付事由) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
 
