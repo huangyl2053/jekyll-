@@ -9,14 +9,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.JogaiJushochitokureiTaishoShisetsu;
-import jp.co.ndensan.reams.db.dbz.business.ShisetsuNyutaisho;
-import jp.co.ndensan.reams.db.dbz.business.ShisetsuNyutaishoList;
 import jp.co.ndensan.reams.db.dbz.business.config.HokenshaJohoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.ShiharaiHohoHenkoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.ShuruiShikyuGendoGetConfig;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
@@ -32,19 +27,16 @@ import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikaku
 import jp.co.ndensan.reams.db.dbz.model.relate.KyotakuKeikakuRelateModel;
 import jp.co.ndensan.reams.db.dbz.model.relate.NinteiShinseiKekkaModel;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;
-import jp.co.ndensan.reams.db.dbz.realservice.JogaiJushochitokureiTaishoShisetsuManager;
 import jp.co.ndensan.reams.db.dbz.realservice.KyotakuKeikakuFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.NinteiShinseiKekkaFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.ServiceShuruiShikyuGendoGakuManager;
 import jp.co.ndensan.reams.db.dbz.realservice.ShiharaiHohoHenkoManager;
-import jp.co.ndensan.reams.db.dbz.realservice.ShisetsuNyutaishoManager;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakko;
-import static jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakko.get被保険者証支援事業者名称;
-import static jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakko.get資格者証支援事業者名称;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidate;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidationMessage;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku.HihokenshashoKofuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku.ShikakushashoKofuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
 import jp.co.ndensan.reams.ur.urz.definition.code.CodeMasterHelper;
 import jp.co.ndensan.reams.ur.urz.realservice.IKaigoServiceManager;
@@ -56,8 +48,13 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ViewControl;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 共有子Div「被保険者証資格者証発行」のHandlerクラスです。
@@ -218,8 +215,8 @@ public class HihokenshaShikakuHakkoHandler {
         LasdecCode 広住特措置元市町村コード = 被保険者台帳.get広住特措置元市町村コード();
 
         if (!広住特措置元市町村コード.isEmpty()) {
-            // TODO N8187 久保田 IKoikiKoseiShichosonFinder(仮名)を使用して市町村情報を取得する。
-            // 市町村情報から保険者コード・保険者名称を取得する。保険者コードはget証記載保険者番号：(仮名)で取得する。保険者名称取得メソッドは未定。 2015/01/31
+            // TODO N8187 久保田 IKoikiKoseiShichosonFinder(仮名)を使用して広域構成市町村情報を取得する。
+            // 広域構成市町村情報から保険者コード・保険者名称を取得する。保険者コードはget証記載保険者番号：(仮名)で取得する。保険者名称取得メソッドは未定。 2015/01/31
             保険者コード = new RString("123456");
             保険者名称 = new RString("広住特措置元保険者名称");
         } else {
@@ -609,9 +606,9 @@ public class HihokenshaShikakuHakkoHandler {
                     RString 計画事業者名称 = new RString("計画事業者名称");
                     RString 委託先事業者名称 = new RString("委託先事業者名称");
                     if (div.getMode_発行証タイプ() == 被保険者証) {
-                        名称 = get被保険者証支援事業者名称(計画事業者名称, 委託先事業者名称);
+                        名称 = HihokenshaShikakuHakko.get被保険者証支援事業者名称(計画事業者名称, 委託先事業者名称);
                     } else {
-                        名称 = get資格者証支援事業者名称(計画事業者名称, 委託先事業者名称);
+                        名称 = HihokenshaShikakuHakko.get資格者証支援事業者名称(計画事業者名称, 委託先事業者名称);
                     }
                     適用開始日 = model.get居宅給付計画事業者作成モデル().get().get適用開始年月日();
                 } else {
@@ -642,9 +639,10 @@ public class HihokenshaShikakuHakkoHandler {
 
     private void set施設入退所(ShikibetsuCode 識別コード) {
         // TODO n8187 久保田
-        // DBZ_CCD_ShisetsuNyutaishoRirekiKanri-55509 で作成された 施設入退所履歴取得のManagerを使用して施設入退所情報を取得する。
+        // DBZ_CCD_ShisetsuNyutaishoRirekiKanri-55509 で作成された
+        // 施設入退所履歴取得のManager(ShisetsuNyutaishoTokureiTaishoRelateManager)を使用して施設入退所情報を取得する。
         // 以下にコメントアウトしている処理は、古いShisetsuNyutaishoManagerを使用したときに考えていたロジック。
-        // 上記のManagerを使用するよう対応する時に削除すること。2015/01/31。
+        // 施設入退所履歴取得のManagerを使用する時に削除すること。2015/01/31。
 //// 1 ShisetsuNyutaishoManager.get個人台帳別施設入退所履歴(ShikibetsuCode 個人識別コード, DaichoType 台帳種別)を使用して、履歴を取得する。
 //        ShisetsuNyutaishoManager manager = new ShisetsuNyutaishoManager();
 //        ShisetsuNyutaishoList list = manager.get個人台帳別施設入退所履歴(識別コード, DaichoType.被保険者);
@@ -929,4 +927,21 @@ public class HihokenshaShikakuHakkoHandler {
         div.getTplShisetsuNyutaisho().getTxtShisetsuTaishoDate3().clearValue();
     }
 
+    public ValidationMessageControlPairs validate被保険者証資格者証() {
+
+        ValidationMessageControlPairs controlPairs = new ValidationMessageControlPairs();
+        IValidationMessages messages = new HihokenshaShikakuHakkoValidate().
+                validateIn(div.getYukoKigenInfo().getDdlKofuJiyu().getSelectedValue());
+
+        controlPairs = addValidationMessage(controlPairs, messages, HihokenshaShikakuHakkoValidationMessage.交付事由が未選択, div.getYukoKigenInfo().getDdlKofuJiyu());
+        return controlPairs;
+    }
+
+    private ValidationMessageControlPairs addValidationMessage(ValidationMessageControlPairs controlPairs, IValidationMessages messages, IValidationMessage validationMessage, ViewControl controls) {
+
+        if (messages.contains(validationMessage)) {
+            controlPairs.add(new ValidationMessageControlPair(validationMessage, controls));
+        }
+        return controlPairs;
+    }
 }

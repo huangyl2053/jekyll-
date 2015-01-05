@@ -62,9 +62,12 @@ public class TestHihokenshaShikakuHakkoPanel {
      */
     public ResponseData<TestHihokenshaShikakuHakkoPanelDiv> onClick_btnGetModel(TestHihokenshaShikakuHakkoPanelDiv div) {
 
+        ResponseData<TestHihokenshaShikakuHakkoPanelDiv> response = new ResponseData<>();
+
         HihokenshaShikakuHakkoModel model = div.getCcdHihokenshaShikakuHakko().create証発行情報();
 
-        return createResponseData(div);
+        response.addValidationMessages(div.getCcdHihokenshaShikakuHakko().chkValidate());
+        return response;
     }
 
     private <T> ResponseData<T> createResponseData(T settingData) {

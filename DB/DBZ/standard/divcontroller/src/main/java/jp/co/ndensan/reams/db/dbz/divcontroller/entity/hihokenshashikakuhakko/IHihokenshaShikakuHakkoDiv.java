@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 被保険者証・資格者証 共有子Divと使用者とのインタフェースです。
@@ -24,6 +25,13 @@ public interface IHihokenshaShikakuHakkoDiv {
      * この共有子Divに設定されているデータをクリアします。
      */
     void clear();
+
+    /**
+     * 共有子Divのバリデーションチェックを行います。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    ValidationMessageControlPairs chkValidate();
 
     /**
      * 画面に表示している情報を被保険者証資格者証Modelにセットして返します。
