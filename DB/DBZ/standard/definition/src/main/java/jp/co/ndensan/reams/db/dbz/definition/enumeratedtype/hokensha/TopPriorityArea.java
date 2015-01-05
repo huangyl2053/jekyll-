@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -69,7 +70,7 @@ public enum TopPriorityArea {
         if (value != null) {
             return value;
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage(TopPriorityArea.class.getSimpleName()));
     }
 
     //<editor-fold defaultstate="collapsed" desc="CodeToValue">

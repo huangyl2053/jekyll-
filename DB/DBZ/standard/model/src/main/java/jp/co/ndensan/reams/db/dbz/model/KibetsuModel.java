@@ -6,20 +6,19 @@
 package jp.co.ndensan.reams.db.dbz.model;
 
 import java.io.Serializable;
-import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import static java.util.Objects.requireNonNull;
 
 /**
  * 介護期別のモデルクラスです。
  *
- * @author LDNS 鄭雪双
+ * @author N8156 宮本 康
  */
 public class KibetsuModel implements Serializable {
 
@@ -100,8 +99,8 @@ public class KibetsuModel implements Serializable {
      *
      * @return 徴収方法
      */
-    public RString get徴収方法() {
-        return entity.getChoshuHoho();
+    public ChoshuHohoKibetsu get徴収方法() {
+        return ChoshuHohoKibetsu.toValue(entity.getChoshuHoho());
     }
 
     /**
@@ -118,7 +117,7 @@ public class KibetsuModel implements Serializable {
      *
      * @return 調定ID
      */
-    public Decimal get調定ID() {
+    public Long get調定ID() {
         return entity.getChoteiId();
     }
 
@@ -167,9 +166,9 @@ public class KibetsuModel implements Serializable {
      *
      * @param 徴収方法 徴収方法
      */
-    public void set徴収方法(RString 徴収方法) {
+    public void set徴収方法(ChoshuHohoKibetsu 徴収方法) {
         requireNonNull(徴収方法, UrSystemErrorMessages.値がnull.getReplacedMessage("徴収方法"));
-        entity.setChoshuHoho(徴収方法);
+        entity.setChoshuHoho(徴収方法.code());
     }
 
     /**
@@ -187,7 +186,7 @@ public class KibetsuModel implements Serializable {
      *
      * @param 調定ID 調定ID
      */
-    public void set調定ID(Decimal 調定ID) {
+    public void set調定ID(Long 調定ID) {
         requireNonNull(調定ID, UrSystemErrorMessages.値がnull.getReplacedMessage("調定ID"));
         entity.setChoteiId(調定ID);
     }

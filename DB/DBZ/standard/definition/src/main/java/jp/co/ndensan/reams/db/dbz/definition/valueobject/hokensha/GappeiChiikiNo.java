@@ -24,7 +24,7 @@ public final class GappeiChiikiNo implements IValueObject<RString>, Comparable<G
      */
     public static final GappeiChiikiNo EMPTY;
     /**
-     *
+     * 最大長です。
      */
     public static final int MAX_LENGTH;
 
@@ -48,11 +48,7 @@ public final class GappeiChiikiNo implements IValueObject<RString>, Comparable<G
      * @param value 値
      */
     public GappeiChiikiNo(String value) {
-        if (value == null) {
-            this.theValue = null;
-        } else {
-            this.theValue = new RString(value);
-        }
+        this.theValue = (value == null) ? null : new RString(value);
     }
 
     /**
@@ -60,7 +56,7 @@ public final class GappeiChiikiNo implements IValueObject<RString>, Comparable<G
      *
      * @param value 値
      */
-    public GappeiChiikiNo(RString value) throws NullPointerException {
+    public GappeiChiikiNo(RString value) {
         this.theValue = value;
     }
 

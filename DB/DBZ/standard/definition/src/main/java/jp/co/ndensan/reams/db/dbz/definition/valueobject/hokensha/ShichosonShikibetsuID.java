@@ -19,11 +19,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class ShichosonShikibetsuID implements IValueObject<RString>, Comparable<ShichosonShikibetsuID>, Serializable {
 
     /**
-     *
+     * 空の ShichosonShikibetsuID です。
      */
     public static final ShichosonShikibetsuID EMPTY;
     /**
-     *
+     * 最大長です。
      */
     public static final int MAX_LENGTH;
 
@@ -31,6 +31,7 @@ public final class ShichosonShikibetsuID implements IValueObject<RString>, Compa
         EMPTY = new ShichosonShikibetsuID(RString.EMPTY);
         MAX_LENGTH = 2;
     }
+
     private final RString theValue;
 
     /**
@@ -40,11 +41,7 @@ public final class ShichosonShikibetsuID implements IValueObject<RString>, Compa
      * @throws IllegalInitialValueException 引数がnullの時、引数が半角の数字以外を含む時、引数が2文字でない時
      */
     public ShichosonShikibetsuID(String value) throws IllegalInitialValueException {
-        if (value == null) {
-            this.theValue = null;
-        } else {
-            this.theValue = new RString(value);
-        }
+        this.theValue = (value == null) ? null : new RString(value);
     }
 
     /**

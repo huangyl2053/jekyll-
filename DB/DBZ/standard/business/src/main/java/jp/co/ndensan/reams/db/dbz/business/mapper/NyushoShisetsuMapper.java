@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
  *
  * @author N3317 塚田 萌
  */
+@Deprecated
 public final class NyushoShisetsuMapper {
 
     private NyushoShisetsuMapper() {

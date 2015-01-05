@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320002.FukakonkyoNengakuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320002.tblFukakonkyoMeisaiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320002.tblKikanDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.KiwarigakuDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku.KiwarigakuDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;

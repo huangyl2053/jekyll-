@@ -142,5 +142,4 @@ public final class NenreiTotatsuChecker {
             return nenreiTotatsuDate.isBeforeOrEquals(kijunDate);
         }
     }
-
 }

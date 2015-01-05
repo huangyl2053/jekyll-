@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.IllegalInitialValueException;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -20,7 +19,12 @@ public final class HokenshaName implements IValueObject<RString>, Comparable<Hok
     /**
      * 最大長です。
      */
-    public static final int MAX_LENGTH = 20;
+    public static final int MAX_LENGTH;
+
+    static {
+        MAX_LENGTH = 20;
+    }
+
     private final RString theValue;
 
     /**
@@ -28,12 +32,8 @@ public final class HokenshaName implements IValueObject<RString>, Comparable<Hok
      *
      * @param value 値
      */
-    public HokenshaName(String value) throws IllegalInitialValueException {
-        if (value == null) {
-            this.theValue = null;
-        } else {
-            this.theValue = new RString(value);
-        }
+    public HokenshaName(String value) {
+        this.theValue = (value == null) ? null : new RString(value);
     }
 
     /**
@@ -41,7 +41,7 @@ public final class HokenshaName implements IValueObject<RString>, Comparable<Hok
      *
      * @param value 値
      */
-    public HokenshaName(RString value) throws IllegalInitialValueException {
+    public HokenshaName(RString value) {
         this.theValue = value;
     }
 

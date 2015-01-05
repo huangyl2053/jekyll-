@@ -6,7 +6,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
@@ -17,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  */
 public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2003Kibetsu");
@@ -43,7 +42,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
     private RString choshuHoho;
     @PrimaryKey
     private int ki;
-    private Decimal choteiId;
+    private Long choteiId;
 
     /**
      * getInsertDantaiCd
@@ -203,7 +202,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
      *
      * @return choteiId
      */
-    public Decimal getChoteiId() {
+    public Long getChoteiId() {
         return choteiId;
     }
 
@@ -212,7 +211,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
      *
      * @param choteiId choteiId
      */
-    public void setChoteiId(Decimal choteiId) {
+    public void setChoteiId(Long choteiId) {
         this.choteiId = choteiId;
     }
 

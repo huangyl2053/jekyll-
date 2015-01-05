@@ -39,11 +39,7 @@ public final class KokuhorenKoikiShichosonNo implements IValueObject<RString>, C
      * @param value 値
      */
     public KokuhorenKoikiShichosonNo(String value) {
-        if (value == null) {
-            this.theValue = null;
-        } else {
-            this.theValue = new RString(value);
-        }
+        this.theValue = (value == null) ? null : new RString(value);
     }
 
     /**
