@@ -3,14 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.config;
+package jp.co.ndensan.reams.db.dbz.business.config.shikaku;
 
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysHihokenshashoJushoEdit;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoJushoEdit;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GunNamePrint;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HowToEditJusho;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.KatagakiPrint;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ShichosonNamePrint;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNamePrint;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -43,7 +49,7 @@ public class HihokenshashoJushoEditConfig {
         Map<ConfigKeysHihokenshashoJushoEdit, RString> map = new EnumMap<>(ConfigKeysHihokenshashoJushoEdit.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysHihokenshashoJushoEdit target : ConfigKeysHihokenshashoJushoEdit.values()) {
-            RString value = new RString(businessConfig.get(target, nowDate).toString());
+            RString value = new RString(businessConfig.get(target, nowDate, SubGyomuCode.DBA介護資格).toString());
             map.put(target, value);
         }
         return Collections.unmodifiableMap(map);
@@ -63,8 +69,9 @@ public class HihokenshashoJushoEditConfig {
      *
      * @return 都道府県名付与有無
      */
-    public RString get都道府県名付与有無() {
-        return configs.get(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_都道府県名付与有無);
+    public TodofukenNamePrint get都道府県名付与有無() {
+        RString configKey = configs.get(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_都道府県名付与有無);
+        return TodofukenNamePrint.toValue(configKey);
     }
 
     /**
@@ -72,8 +79,9 @@ public class HihokenshashoJushoEditConfig {
      *
      * @return 郡名付与有無
      */
-    public RString get郡名付与有無() {
-        return configs.get(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_郡名付与有無);
+    public GunNamePrint get郡名付与有無() {
+        RString configKey = configs.get(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_郡名付与有無);
+        return GunNamePrint.toValue(configKey);
     }
 
     /**
@@ -81,8 +89,9 @@ public class HihokenshashoJushoEditConfig {
      *
      * @return 市町村名付与有無
      */
-    public RString get市町村名付与有無() {
-        return configs.get(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_市町村名付与有無);
+    public ShichosonNamePrint get市町村名付与有無() {
+        RString configKey = configs.get(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_市町村名付与有無);
+        return ShichosonNamePrint.toValue(configKey);
     }
 
     /**
@@ -90,8 +99,9 @@ public class HihokenshashoJushoEditConfig {
      *
      * @return 住所編集方法
      */
-    public RString get住所編集方法() {
-        return configs.get(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_編集方法);
+    public HowToEditJusho get住所編集方法() {
+        RString configKey = configs.get(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_編集方法);
+        return HowToEditJusho.toValue(configKey);
     }
 
     /**
@@ -99,8 +109,9 @@ public class HihokenshashoJushoEditConfig {
      *
      * @return 方書表示有無
      */
-    public RString get方書表示有無() {
-        return configs.get(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_住所編集_方書表示有無);
+    public KatagakiPrint get方書表示有無() {
+        RString configKey = configs.get(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_住所編集_方書表示有無);
+        return KatagakiPrint.toValue(configKey);
     }
 
 }

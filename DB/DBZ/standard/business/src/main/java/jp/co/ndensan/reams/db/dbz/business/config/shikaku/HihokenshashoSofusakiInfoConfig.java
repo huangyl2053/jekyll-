@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.config;
+package jp.co.ndensan.reams.db.dbz.business.config.shikaku;
 
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysHihokenshashoSofusakiInfo;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoSofusakiInfo;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -43,7 +44,7 @@ public class HihokenshashoSofusakiInfoConfig {
         Map<ConfigKeysHihokenshashoSofusakiInfo, RString> map = new EnumMap<>(ConfigKeysHihokenshashoSofusakiInfo.class);
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysHihokenshashoSofusakiInfo target : ConfigKeysHihokenshashoSofusakiInfo.values()) {
-            RString value = new RString(businessConfig.get(target, nowDate).toString());
+            RString value = new RString(businessConfig.get(target, nowDate, SubGyomuCode.DBA介護資格).toString());
             map.put(target, value);
         }
         return Collections.unmodifiableMap(map);

@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.config;
+package jp.co.ndensan.reams.db.dbz.business.config.shikaku;
 
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config.ConfigKeysHihokenshashoIndicationMethod;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoPrint;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -19,14 +20,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public class HihokenshashoIndicationMethodConfig {
+public class HihokenshashoPrintConfig {
 
-    private final Map<ConfigKeysHihokenshashoIndicationMethod, RString> configs;
+    private final Map<ConfigKeysHihokenshashoPrint, RString> configs;
 
     /**
      * コンストラクタです。
      */
-    public HihokenshashoIndicationMethodConfig() {
+    public HihokenshashoPrintConfig() {
         this.configs = createMap(UrBusinessConfigFactory.createInstance());
     }
 
@@ -35,15 +36,15 @@ public class HihokenshashoIndicationMethodConfig {
      *
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    HihokenshashoIndicationMethodConfig(IUrBusinessConfig businessConfig) {
+    HihokenshashoPrintConfig(IUrBusinessConfig businessConfig) {
         this.configs = createMap(businessConfig);
     }
 
-    private Map<ConfigKeysHihokenshashoIndicationMethod, RString> createMap(IUrBusinessConfig businessConfig) {
-        Map<ConfigKeysHihokenshashoIndicationMethod, RString> map = new EnumMap<>(ConfigKeysHihokenshashoIndicationMethod.class);
+    private Map<ConfigKeysHihokenshashoPrint, RString> createMap(IUrBusinessConfig businessConfig) {
+        Map<ConfigKeysHihokenshashoPrint, RString> map = new EnumMap<>(ConfigKeysHihokenshashoPrint.class);
         RDate nowDate = RDate.getNowDate();
-        for (ConfigKeysHihokenshashoIndicationMethod target : ConfigKeysHihokenshashoIndicationMethod.values()) {
-            RString value = new RString(businessConfig.get(target, nowDate).toString());
+        for (ConfigKeysHihokenshashoPrint target : ConfigKeysHihokenshashoPrint.values()) {
+            RString value = new RString(businessConfig.get(target, nowDate, SubGyomuCode.DBA介護資格).toString());
             map.put(target, value);
         }
         return Collections.unmodifiableMap(map);
@@ -55,7 +56,7 @@ public class HihokenshashoIndicationMethodConfig {
      * @return 氏名カナ表示有無
      */
     public RString get氏名カナ表示有無() {
-        return configs.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_氏名カナ表示有無);
+        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_氏名カナ表示有無);
     }
 
     /**
@@ -64,7 +65,7 @@ public class HihokenshashoIndicationMethodConfig {
      * @return 証表示タイプ
      */
     public RString get証表示タイプ() {
-        return configs.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_証表示タイプ);
+        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_証表示タイプ);
     }
 
     /**
@@ -73,7 +74,7 @@ public class HihokenshashoIndicationMethodConfig {
      * @return 被保険者番号表示書式
      */
     public RString get被保険者番号表示書式() {
-        return configs.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_被保険者番号表示書式);
+        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_被保険者番号表示書式);
     }
 
     /**
@@ -82,7 +83,7 @@ public class HihokenshashoIndicationMethodConfig {
      * @return 郵便番号表示有無
      */
     public RString get郵便番号表示有無() {
-        return configs.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_郵便番号表示有無);
+        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_郵便番号表示有無);
     }
 
     /**
@@ -91,7 +92,7 @@ public class HihokenshashoIndicationMethodConfig {
      * @return 要介護認定期限切れの表示有無
      */
     public RString get要介護認定期限切れ表示有無() {
-        return configs.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_要介護認定期限切れ_表示有無);
+        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_要介護認定期限切れ_表示有無);
     }
 
     /**
@@ -100,7 +101,7 @@ public class HihokenshashoIndicationMethodConfig {
      * @return 居宅支援事業者適用切れの表示有無
      */
     public RString get居宅支援事業者適用切れ表示有無() {
-        return configs.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_居宅支援事業者適用切れ_表示有無);
+        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者適用切れ_表示有無);
     }
 
     /**
@@ -109,7 +110,7 @@ public class HihokenshashoIndicationMethodConfig {
      * @return 居宅支援事業者履歴の表示方法
      */
     public RString get居宅支援事業者履歴表示方法() {
-        return configs.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_居宅支援事業者履歴_表示方法);
+        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者履歴_表示方法);
     }
 
     /**
@@ -118,7 +119,7 @@ public class HihokenshashoIndicationMethodConfig {
      * @return 有効期限表示方法
      */
     public RString get合併前印刷時_有効期限表示方法() {
-        return configs.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_合併前印刷時_有効期限);
+        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_合併前印刷時_有効期限);
     }
 
     /**
@@ -127,7 +128,7 @@ public class HihokenshashoIndicationMethodConfig {
      * @return 委託代行業者の表示有無
      */
     public RString get委託代行業者表示有無() {
-        return configs.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_委託代行業者_表示有無);
+        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_委託代行業者_表示有無);
     }
 
     /**
@@ -136,7 +137,7 @@ public class HihokenshashoIndicationMethodConfig {
      * @return 表示開始文言
      */
     public RString get委託代行業者表示開始文言() {
-        return configs.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_委託代行業者_表示開始文言);
+        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_委託代行業者_表示開始文言);
     }
 
     /**
@@ -145,7 +146,7 @@ public class HihokenshashoIndicationMethodConfig {
      * @return 表示終了文言
      */
     public RString get委託代行業者_表示終了文言() {
-        return configs.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_委託代行業者_表示終了文言);
+        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_委託代行業者_表示終了文言);
     }
 
     /**
@@ -154,6 +155,6 @@ public class HihokenshashoIndicationMethodConfig {
      * @return 適用開始日と事業者届出日の切替表示区分
      */
     public RString get適用開始日切替表示区分() {
-        return configs.get(ConfigKeysHihokenshashoIndicationMethod.被保険者証表示方法_居宅支援事業者届出日_適用開始日切替表示区分);
+        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者届出日_適用開始日切替表示区分);
     }
 }

@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.definition.enumeratedtype.config;
+package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.shikaku;
 
 /**
  * 被保険者表示方法に関連する業務コンフィグです。
  *
  * @author n8178 城間篤人
  */
-public enum ConfigKeysHihokenshashoIndicationMethod {
+public enum ConfigKeysHihokenshashoPrint {
 
     /**
      * 氏名カナ表示有無を示すコンフィグです。

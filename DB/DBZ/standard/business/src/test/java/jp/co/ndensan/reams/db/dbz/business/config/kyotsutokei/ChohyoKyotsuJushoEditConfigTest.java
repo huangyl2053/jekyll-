@@ -3,11 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.business.config;
+package jp.co.ndensan.reams.db.dbz.business.config.kyotsutokei;
 
-import jp.co.ndensan.reams.db.dbu.definition.enumeratedtype.config.ConfigKeysChohyoKyotsuJushoEdit;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.kyotsutokei.ConfigKeysChohyoKyotsuJushoEdit;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GunNamePrint;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HowToEditJusho;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.KatagakiPrint;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ShichosonNamePrint;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNamePrint;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbuTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
@@ -37,59 +43,65 @@ public class ChohyoKyotsuJushoEditConfigTest {
         }
 
         @Test
-        public void get都道府県名付与有無で_1が返る() {
-            RString result = sut.get都道府県名付与有無();
-            assertThat(result, is(new RString("1")));
+        public void get都道府県名付与有無で_印字するが返る() {
+            TodofukenNamePrint result = sut.get都道府県名付与有無();
+            assertThat(result, is(TodofukenNamePrint.印字する));
         }
 
         @Test
-        public void get郡名付与有無で_1が返る() {
-            RString result = sut.get郡名付与有無();
-            assertThat(result, is(new RString("1")));
+        public void get郡名付与有無で_印字するが返る() {
+            GunNamePrint result = sut.get郡名付与有無();
+            assertThat(result, is(GunNamePrint.印字する));
         }
 
         @Test
-        public void get市町村名付与有無で_1が返る() {
-            RString result = sut.get市町村名付与有無();
-            assertThat(result, is(new RString("1")));
+        public void get市町村名付与有無で_印字するが返る() {
+            ShichosonNamePrint result = sut.get市町村名付与有無();
+            assertThat(result, is(ShichosonNamePrint.印字する));
         }
 
         @Test
-        public void get住所編集方法で_3が返る() {
-            RString result = sut.get住所編集方法();
-            assertThat(result, is(new RString("3")));
+        public void get住所編集方法で_住所と番地_行政区が返る() {
+            HowToEditJusho result = sut.get住所編集方法();
+            assertThat(result, is(HowToEditJusho.住所と番地_行政区));
         }
 
         @Test
-        public void get方書表示有無で_1が返る() {
-            RString result = sut.get方書表示有無();
-            assertThat(result, is(new RString("1")));
+        public void get方書表示有無で_印字するが返る() {
+            KatagakiPrint result = sut.get方書表示有無();
+            assertThat(result, is(KatagakiPrint.印字する));
         }
     }
 
     private static IUrBusinessConfig createBusinessConfigMock() {
         IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
         RDate nowDate = RDate.getNowDate();
+        SubGyomuCode subGyomu = SubGyomuCode.DBU介護統計報告;
 
         when(mock.get(
                 ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_都道府県名付与有無,
-                nowDate
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("1"));
         when(mock.get(
                 ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_郡名付与有無,
-                nowDate
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("1"));
         when(mock.get(
                 ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_市町村名付与有無,
-                nowDate
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("1"));
         when(mock.get(
                 ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_編集方法,
-                nowDate
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("3"));
         when(mock.get(
                 ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_住所編集_方書表示有無,
-                nowDate
+                nowDate,
+                subGyomu
         )).thenReturn(new RString("1"));
         return mock;
     }
