@@ -14,15 +14,14 @@ import jp.co.ndensan.reams.db.dbz.model.hokensha.IHokensha;
  *
  * @author N3327 三浦 凌
  */
-public interface IIntroducedHokensha extends IHokensha {
+public interface IDonyuHokensha extends IHokensha {
 
-    //get保険者構成
     /**
      * 保険者の名称を返します。
      *
      * @return 保険者名称
      */
-    HokenshaName get保険者名称();
+    HokenshaName get保険者名();
 
     /**
      * 広域保険者かどうかを返します。
