@@ -4,7 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.HihokenshaDaichoDac;
@@ -46,11 +47,10 @@ public class HihokenshaDaichoManager {
      * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
      * @param 処理日時 処理日時
-     * @return HihokenshaDaichoModel
+     * @return IOptional<HihokenshaDaichoModel>
      */
     @Transaction
-    public HihokenshaDaichoModel get被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
-
+    public IOptional<HihokenshaDaichoModel> get被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
         return dac.select被保険者台帳ByKey(市町村コード, 被保険者番号, 処理日時);
     }
 
@@ -59,10 +59,10 @@ public class HihokenshaDaichoManager {
      *
      * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
-     * @return List<HihokenshaDaichoModel>
+     * @return IItemList<HihokenshaDaichoModel>
      */
     @Transaction
-    public List<HihokenshaDaichoModel> get被保険者台帳一覧(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+    public IItemList<HihokenshaDaichoModel> get被保険者台帳一覧(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         return dac.select被保険者台帳一覧(市町村コード, 被保険者番号);
     }
 
@@ -71,11 +71,10 @@ public class HihokenshaDaichoManager {
      *
      * @param 市町村コード 市町村コード
      * @param 識別コード 識別コード
-     * @return HihokenshaDaichoModel
+     * @return IOptional<HihokenshaDaichoModel>
      */
     @Transaction
-    public HihokenshaDaichoModel get最新被保険者台帳(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
-
+    public IOptional<HihokenshaDaichoModel> get最新被保険者台帳(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
         return dac.select最新被保険者台帳(市町村コード, 識別コード);
     }
 

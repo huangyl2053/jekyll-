@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
@@ -22,7 +22,6 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.*;
 
 /**
@@ -77,12 +76,12 @@ public class HihokenshaDaichoDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_被保険者台帳モデル返す() {
-            assertThat(sut.select被保険者台帳ByKey(市町村コード1, 被保険者番号1, 処理日時1).get市町村コード(), is(市町村コード1));
+            assertThat(sut.select被保険者台帳ByKey(市町村コード1, 被保険者番号1, 処理日時1).get().get市町村コード(), is(市町村コード1));
         }
 
         @Test
         public void データが見つかない検索条件を渡すと_nullを返す() {
-            assertThat(sut.select被保険者台帳ByKey(new LasdecCode("999999"), 被保険者番号1, 処理日時1), is(nullValue()));
+            assertThat(sut.select被保険者台帳ByKey(new LasdecCode("999999"), 被保険者番号1, 処理日時1).isPresent(), is(false));
         }
     }
 
@@ -103,10 +102,10 @@ public class HihokenshaDaichoDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_被保険者台帳モデルリストを返す() {
-            List<HihokenshaDaichoModel> modelList = sut.select被保険者台帳一覧(市町村コード1, 被保険者番号1);
+            IItemList<HihokenshaDaichoModel> modelList = sut.select被保険者台帳一覧(市町村コード1, 被保険者番号1);
             assertThat(modelList.size(), is(2));
-            assertThat(modelList.get(0).get処理日時(), is(処理日時1));
-            assertThat(modelList.get(1).get処理日時(), is(処理日時2));
+            assertThat(modelList.toList().get(0).get処理日時(), is(処理日時1));
+            assertThat(modelList.toList().get(1).get処理日時(), is(処理日時2));
         }
 
         @Test
@@ -137,12 +136,12 @@ public class HihokenshaDaichoDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_被保険者台帳モデル返す() {
-            assertThat(sut.select最新被保険者台帳(市町村コード1, 識別コード1).get処理日時(), is(処理日時2));
+            assertThat(sut.select最新被保険者台帳(市町村コード1, 識別コード1).get().get処理日時(), is(処理日時2));
         }
 
         @Test
         public void データが見つかない検索条件を渡すと_nullを返す() {
-            assertThat(sut.select最新被保険者台帳(new LasdecCode("999999"), 識別コード1), is(nullValue()));
+            assertThat(sut.select最新被保険者台帳(new LasdecCode("999999"), 識別コード1).isPresent(), is(false));
         }
     }
 

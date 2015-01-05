@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigofukakihon;
 
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKeyBuilder;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoManager;
@@ -58,13 +59,14 @@ public class KaigoFukaKihonHandler {
 
         // TODO N8156 宮本 康 賦課情報の取得処理が実装され次第対応する。（オフショアで対応中）
         KaigoFukaKihonSearchKey 検索キー = new KaigoFukaKihonSearchKeyBuilder(通知書番号, 賦課年度, 市町村コード, 識別コード).build();
-        HihokenshaDaichoModel hihokenshaDaicho = hihokenshaDaichoManager.get最新被保険者台帳(検索キー.get市町村コード(), 検索キー.get識別コード());
+        IOptional<HihokenshaDaichoModel> daicho = hihokenshaDaichoManager.get最新被保険者台帳(検索キー.get市町村コード(), 検索キー.get識別コード());
 
-        if (hihokenshaDaicho != null) {
-            div.getTxtShutokuYmd().setValue(new RDate(hihokenshaDaicho.get資格取得年月日().toString()));
-            div.getTxtShutokuJiyu().setValue(hihokenshaDaicho.get資格取得事由().getName());
-            div.getTxtSoshitsuYmd().setValue(new RDate(hihokenshaDaicho.get資格喪失年月日().toString()));
-            div.getTxtSoshitsuJiyu().setValue(hihokenshaDaicho.get資格喪失事由().getName());
+        if (daicho.isPresent()) {
+            HihokenshaDaichoModel daichoModel = daicho.get();
+            div.getTxtShutokuYmd().setValue(new RDate(daichoModel.get資格取得年月日().toString()));
+            div.getTxtShutokuJiyu().setValue(daichoModel.get資格取得事由().getName());
+            div.getTxtSoshitsuYmd().setValue(new RDate(daichoModel.get資格喪失年月日().toString()));
+            div.getTxtSoshitsuJiyu().setValue(daichoModel.get資格喪失事由().getName());
         }
     }
 }
