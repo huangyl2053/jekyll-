@@ -127,31 +127,43 @@ public class HihokenshaShikakuHakkoHandler {
 
         List<KeyValueDataSource> kofuJiyuList = new ArrayList<>();
         if (div.getMode_発行証タイプ() == 被保険者証) {
-            if (is直前履歴) {
-                kofuJiyuList.add(new KeyValueDataSource(KOFUJIYU_CHOKUZENKEY, KOFUJIYU_CHOKUZEN));
-            } else {
-                List<HihokenshashoKofuJiyu> 被保険者証交付事由List = CodeMasterHelper.getCode(DBACodeShubetsu.被保険者証交付事由);
-                被保険者証交付事由List = sort被保険者証交付事由(被保険者証交付事由List);
-
-                for (HihokenshashoKofuJiyu 交付事由 : 被保険者証交付事由List) {
-                    kofuJiyuList.add(new KeyValueDataSource(交付事由.value().value(), 交付事由.getMeisho()));
-                }
-                kofuJiyuList.add(new KeyValueDataSource(KOFUJIYU_TESTKEY, KOFUJIYU_TEST));
-            }
+            kofuJiyuList = set被保険者証交付事由(is直前履歴);
         } else if (div.getMode_発行証タイプ() == 資格者証) {
-            List<ShikakushashoKofuJiyu> 資格者証交付事由List = CodeMasterHelper.getCode(DBACodeShubetsu.資格者証交付事由);
-            資格者証交付事由List = sort資格者証交付事由(資格者証交付事由List);
-
-            for (ShikakushashoKofuJiyu 交付事由 : 資格者証交付事由List) {
-                kofuJiyuList.add(new KeyValueDataSource(交付事由.value().value(), 交付事由.getMeisho()));
-            }
-            kofuJiyuList.add(new KeyValueDataSource(KOFUJIYU_TESTKEY, KOFUJIYU_TEST));
+            kofuJiyuList = set資格者証交付事由();
         }
         div.getDdlKofuJiyu().setDataSource(kofuJiyuList);
         if ((div.getMode_発行証タイプ() == 被保険者証) && is直前履歴) {
-            div.getYukoKigenInfo().getDdlKofuJiyu().setSelectedKey(KOFUJIYU_CHOKUZENKEY);
-            div.getYukoKigenInfo().getDdlKofuJiyu().setReadOnly(true);
+            div.getDdlKofuJiyu().setSelectedKey(KOFUJIYU_CHOKUZENKEY);
+            div.getDdlKofuJiyu().setReadOnly(true);
         }
+    }
+
+    private List<KeyValueDataSource> set被保険者証交付事由(boolean is直前履歴) {
+        List<KeyValueDataSource> result = new ArrayList<>();
+        if (is直前履歴) {
+            result.add(new KeyValueDataSource(KOFUJIYU_CHOKUZENKEY, KOFUJIYU_CHOKUZEN));
+            return result;
+        }
+        List<HihokenshashoKofuJiyu> 被保険者証交付事由List = CodeMasterHelper.getCode(DBACodeShubetsu.被保険者証交付事由);
+        被保険者証交付事由List = sort被保険者証交付事由(被保険者証交付事由List);
+
+        for (HihokenshashoKofuJiyu 交付事由 : 被保険者証交付事由List) {
+            result.add(new KeyValueDataSource(交付事由.value().value(), 交付事由.getMeisho()));
+        }
+        result.add(new KeyValueDataSource(KOFUJIYU_TESTKEY, KOFUJIYU_TEST));
+        return result;
+    }
+
+    private List<KeyValueDataSource> set資格者証交付事由() {
+        List<KeyValueDataSource> result = new ArrayList<>();
+        List<ShikakushashoKofuJiyu> 資格者証交付事由List = CodeMasterHelper.getCode(DBACodeShubetsu.資格者証交付事由);
+        資格者証交付事由List = sort資格者証交付事由(資格者証交付事由List);
+
+        for (ShikakushashoKofuJiyu 交付事由 : 資格者証交付事由List) {
+            result.add(new KeyValueDataSource(交付事由.value().value(), 交付事由.getMeisho()));
+        }
+        result.add(new KeyValueDataSource(KOFUJIYU_TESTKEY, KOFUJIYU_TEST));
+        return result;
     }
 
     private List<HihokenshashoKofuJiyu> sort被保険者証交付事由(List<HihokenshashoKofuJiyu> 被保険者証交付事由List) {
