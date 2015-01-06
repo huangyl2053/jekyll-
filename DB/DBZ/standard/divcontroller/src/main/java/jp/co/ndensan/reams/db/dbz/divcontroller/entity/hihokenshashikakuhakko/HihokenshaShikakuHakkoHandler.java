@@ -467,14 +467,14 @@ public class HihokenshaShikakuHakkoHandler {
             if (has給付制限期間終了日(給付制限.get(0))) {
                 div.getTxtKyufuSeigenKikan1().setToValue(new RDate(給付制限.get(0).get制限期間終了日().toString()));
             }
-            if (給付制限.size() > 1) {
+            if (1 < 給付制限.size()) {
                 div.getTxtKyufuSeigenNaiyo2().setValue(給付制限.get(1).get制限内容());
                 div.getTxtKyufuSeigenKikan2().setFromValue(new RDate(給付制限.get(1).get制限期間開始日().toString()));
                 if (has給付制限期間終了日(給付制限.get(1))) {
                     div.getTxtKyufuSeigenKikan2().setToValue(new RDate(給付制限.get(1).get制限期間終了日().toString()));
                 }
             }
-            if (給付制限.size() > 2) {
+            if (2 < 給付制限.size()) {
                 div.getTxtKyufuSeigenNaiyo3().setValue(給付制限.get(2).get制限内容());
                 div.getTxtKyufuSeigenKikan3().setFromValue(new RDate(給付制限.get(2).get制限期間開始日().toString()));
                 if (has給付制限期間終了日(給付制限.get(2))) {
@@ -560,12 +560,12 @@ public class HihokenshaShikakuHakkoHandler {
             div.getTxtJigyosha1().setValue(list.get(0).get名称());
             div.getTxtTodokedeYMD1().setValue(list.get(0).get届出日());
             div.getTxtTekiyoStYMD1().setValue(list.get(0).get適用開始日());
-            if (list.size() > 1) {
+            if (1 < list.size()) {
                 div.getTxtJigyosha2().setValue(list.get(1).get名称());
                 div.getTxtTodokedeYMD2().setValue(list.get(1).get届出日());
                 div.getTxtTekiyoStYMD2().setValue(list.get(1).get適用開始日());
             }
-            if (list.size() > 2) {
+            if (2 < list.size()) {
                 div.getTxtJigyosha3().setValue(list.get(2).get名称());
                 div.getTxtTodokedeYMD3().setValue(list.get(2).get届出日());
                 div.getTxtTekiyoStYMD3().setValue(list.get(2).get適用開始日());
