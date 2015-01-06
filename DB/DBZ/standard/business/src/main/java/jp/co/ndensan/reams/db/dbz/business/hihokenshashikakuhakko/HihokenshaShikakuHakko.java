@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 被保険者証発行、資格者証発行で使用するロジックをまとめたクラスです。
@@ -122,13 +121,12 @@ public final class HihokenshaShikakuHakko {
      * 引数の審査会意見＋「介護サービス種類01~30の名称」が最大長を超える場合、介護サービスは略称を使用します。<br />
      * 略称を使用しても最大長を超えた場合は、最大長までの文言を返します。
      *
-     * @param 審査会意見 審査会意見
-     * @param 介護サービスリスト 介護サービスリスト(サービス種類の名称と略称を持つ型に変更する)。
-     * @param 基準日 基準日
-     * @param 最大長 最大長
+     * @param 審査会意見 RString
+     * @param 介護サービスリスト IItemList<IKaigoService>
+     * @param 最大長 int
      * @return 審査会意見
      */
-    public static RString compose審査会意見(RString 審査会意見, IItemList<IKaigoService> 介護サービスリスト, FlexibleDate 基準日, int 最大長) {
+    public static RString compose審査会意見(RString 審査会意見, IItemList<IKaigoService> 介護サービスリスト, int 最大長) {
 
         RString 編集審査会意見 = 審査会意見;
         int 編集審査会意見長 = 編集審査会意見.length();

@@ -292,7 +292,6 @@ public class HihokenshaShikakuHakkoHandler {
         RString 審査会意見 = HihokenshaShikakuHakko.compose審査会意見(
                 認定申請結果.get要介護認定結果情報モデル().get().get介護認定審査会意見(),
                 介護サービス種類リスト,
-                認定申請結果.get受給者台帳モデル().get支給限度有効開始年月日(),
                 最大長);
 
         div.getTxtShinsakaiIken().setValue(審査会意見);

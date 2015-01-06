@@ -147,11 +147,10 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         @Test
         public void 編集された審査会意見が最大長を越えないとき_審査会意見とサービス名称の全文字列が返される() {
             IItemList<IKaigoService> 介護サービスリスト = create介護サービスリスト();
-            FlexibleDate 基準日 = FlexibleDate.getNowDate();
             int 最大長 = 200;
             int 文字列長 = 審査会意見.length() + (create介護サービスリスト().size() * createKaigoServiceShurui().getサービス種類名称().length());
 
-            RString result = sut.compose審査会意見(審査会意見, 介護サービスリスト, 基準日, 最大長);
+            RString result = sut.compose審査会意見(審査会意見, 介護サービスリスト, 最大長);
             assertThat(result.length(), is(文字列長));
         }
 
@@ -161,10 +160,9 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         @Test
         public void 編集された審査会意見が最大長を越えないとき_サービス名称は正式な名称を使用する() {
             IItemList<IKaigoService> 介護サービスリスト = create介護サービスリスト();
-            FlexibleDate 基準日 = FlexibleDate.getNowDate();
             int 最大長 = 200;
 
-            RString result = sut.compose審査会意見(審査会意見, 介護サービスリスト, 基準日, 最大長);
+            RString result = sut.compose審査会意見(審査会意見, 介護サービスリスト, 最大長);
             assertThat(result.substring(審査会意見.length(), 審査会意見.length() + createKaigoServiceShurui().getサービス種類名称().length()),
                     is(createKaigoServiceShurui().getサービス種類名称()));
         }
@@ -175,10 +173,9 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         @Test
         public void 編集された審査会意見が最大長を越えるとき_最大長に丸めた文字列が返される() {
             IItemList<IKaigoService> 介護サービスリスト = create介護サービスリスト();
-            FlexibleDate 基準日 = FlexibleDate.getNowDate();
             int 最大長 = 110;
 
-            RString result = sut.compose審査会意見(審査会意見, 介護サービスリスト, 基準日, 最大長);
+            RString result = sut.compose審査会意見(審査会意見, 介護サービスリスト, 最大長);
             assertThat(result.length(), is(最大長));
         }
 
@@ -188,10 +185,9 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         @Test
         public void 編集された審査会意見が最大長を越えるとき_サービス名称は略称を使用する() {
             IItemList<IKaigoService> 介護サービスリスト = create介護サービスリスト();
-            FlexibleDate 基準日 = FlexibleDate.getNowDate();
             int 最大長 = 110;
 
-            RString result = sut.compose審査会意見(審査会意見, 介護サービスリスト, 基準日, 最大長);
+            RString result = sut.compose審査会意見(審査会意見, 介護サービスリスト, 最大長);
             assertThat(result.substring(審査会意見.length(), 審査会意見.length() + createKaigoServiceShurui().getサービス種類名称略称().length()),
                     is(createKaigoServiceShurui().getサービス種類名称略称()));
         }
