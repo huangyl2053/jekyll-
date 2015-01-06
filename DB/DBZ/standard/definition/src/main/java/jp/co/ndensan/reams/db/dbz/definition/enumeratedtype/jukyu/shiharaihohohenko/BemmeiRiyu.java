@@ -59,6 +59,15 @@ public enum BemmeiRiyu {
     }
 
     /**
+     * {@link #name() name()}を{@link RString}へ変換して返します。
+     *
+     * @return {@link #name() name()}を{@link RString}へ変換した物
+     */
+    public RString toRString() {
+        return new RString(name());
+    }
+
+    /**
      * 引数のコードに対応する{@link BemmeiRiyu}を返します。
      *
      * @param code コード
