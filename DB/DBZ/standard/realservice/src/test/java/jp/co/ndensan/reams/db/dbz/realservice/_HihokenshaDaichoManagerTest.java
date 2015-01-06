@@ -47,7 +47,7 @@ import org.junit.BeforeClass;
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class HihokenshaDaichoManagerTest extends DbzTestBase {
+public class _HihokenshaDaichoManagerTest extends DbzTestBase {
 
     public static class save extends DbzTestBase {
 
