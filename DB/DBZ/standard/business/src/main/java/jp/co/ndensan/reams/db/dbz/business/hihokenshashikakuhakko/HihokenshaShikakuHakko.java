@@ -148,8 +148,7 @@ public class HihokenshaShikakuHakko {
      */
     public RString compose審査会意見(RString 審査会意見, IItemList<IKaigoService> 介護サービスリスト, int 最大長) {
 
-        RString 編集審査会意見 = 審査会意見;
-        int 編集審査会意見長 = 編集審査会意見.length();
+        RString サービス名称 = RString.EMPTY;
         if (!介護サービスリスト.isEmpty()) {
             int 介護サービス長 = 0;
             for (IKaigoService kaigoService : 介護サービスリスト) {
@@ -157,20 +156,23 @@ public class HihokenshaShikakuHakko {
                     介護サービス長 = 介護サービス長 + kaigoService.get介護サービス種類().getサービス種類名称().length();
                 }
             }
-            if (最大長 < (編集審査会意見長 + 介護サービス長)) {
+            if (最大長 < (審査会意見.length() + 介護サービス長)) {
                 for (IKaigoService kaigoService : 介護サービスリスト) {
-                    編集審査会意見 = new RStringBuilder(編集審査会意見)
+                    サービス名称 = new RStringBuilder(サービス名称)
                             .append(kaigoService.get介護サービス種類().getサービス種類名称略称())
                             .toRString();
                 }
             } else {
                 for (IKaigoService kaigoService : 介護サービスリスト) {
-                    編集審査会意見 = new RStringBuilder(編集審査会意見)
+                    サービス名称 = new RStringBuilder(サービス名称)
                             .append(kaigoService.get介護サービス種類().getサービス種類名称())
                             .toRString();
                 }
             }
         }
+        RString 編集審査会意見 = new RStringBuilder(審査会意見)
+                .append(サービス名称)
+                .toRString();
         if (最大長 <= 編集審査会意見.length()) {
             編集審査会意見 = 編集審査会意見.substring(0, 最大長);
         }

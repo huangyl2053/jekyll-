@@ -415,6 +415,18 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
          * 編集された審査会意見が最大長を越えないとき、審査会意見とサービス名称の全文字列が返される。<br />
          */
         @Test
+        public void 介護サービスリストがないとき_審査会意見がそのまま返される() {
+            IItemList<IKaigoService> 介護サービスリスト = ItemList.empty();
+            int 最大長 = 200;
+
+            RString result = sut.compose審査会意見(審査会意見, 介護サービスリスト, 最大長);
+            assertThat(result, is(審査会意見));
+        }
+
+        /**
+         * 編集された審査会意見が最大長を越えないとき、審査会意見とサービス名称の全文字列が返される。<br />
+         */
+        @Test
         public void 編集された審査会意見が最大長を越えないとき_審査会意見とサービス名称の全文字列が返される() {
             IItemList<IKaigoService> 介護サービスリスト = create介護サービスリスト();
             int 最大長 = 200;
