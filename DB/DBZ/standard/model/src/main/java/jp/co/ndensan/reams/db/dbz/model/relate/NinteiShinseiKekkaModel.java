@@ -5,10 +5,13 @@
 package jp.co.ndensan.reams.db.dbz.model.relate;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.model.JukyushaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.NinteiShinseiJohoModel;
 import jp.co.ndensan.reams.db.dbz.model.NinteiKekkaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -69,6 +72,50 @@ public class NinteiShinseiKekkaModel implements Serializable {
      */
     public IOptional<NinteiKekkaJohoModel> get要介護認定結果情報モデル() {
         return 要介護認定結果情報モデル;
+    }
+
+    /**
+     * 要介護認定結果情報が保持している介護サービス種類をリストで返します。
+     *
+     * @return 介護サービス種類のリスト
+     */
+    public List<RString> getサービス種類List() {
+        List<RString> result = new ArrayList<>();
+
+        if (要介護認定結果情報モデル.isPresent()) {
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類01());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類02());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類03());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類04());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類05());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類06());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類07());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類08());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類09());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類10());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類11());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類12());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類13());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類14());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類15());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類16());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類17());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類18());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類19());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類20());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類21());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類22());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類23());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類24());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類25());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類26());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類27());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類28());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類29());
+            result.add(要介護認定結果情報モデル.get().get介護サービス種類30());
+        }
+
+        return result;
     }
 
     /**

@@ -275,7 +275,7 @@ public class HihokenshaShikakuHakkoHandler {
         List<IKaigoService> serviceList = new ArrayList<>();
         IKaigoServiceManager manager = KaigoServiceManagerFactory.createInstance();
         FlexibleYearMonth ServiceYM = 認定申請結果.get要介護認定結果情報モデル().get().get要介護度認定年月日().getYearMonth();
-        List<RString> list = createサービス種類List(認定申請結果);
+        List<RString> list = 認定申請結果.getサービス種類List();
         for (RString サービス種類 : list) {
             if (!サービス種類.isEmpty()) {
                 IKaigoService serviceShurui = manager.get介護サービス(ServiceYM, サービス種類);
@@ -296,44 +296,6 @@ public class HihokenshaShikakuHakkoHandler {
                 最大長);
 
         div.getTxtShinsakaiIken().setValue(審査会意見);
-    }
-
-    private List<RString> createサービス種類List(NinteiShinseiKekkaModel 認定申請結果) {
-
-        List<RString> list = new ArrayList<>();
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類01());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類02());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類03());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類04());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類05());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類06());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類07());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類08());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類09());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類10());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類11());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類12());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類13());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類14());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類15());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類16());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類17());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類18());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類19());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類20());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類21());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類22());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類23());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類24());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類25());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類26());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類27());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類28());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類29());
-        list.add(認定申請結果.get要介護認定結果情報モデル().get().get介護サービス種類30());
-
-        return list;
-
     }
 
     private static class KyufuSeigenShutsuryoku {
