@@ -11,6 +11,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoKigen;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoKigen.資格者証期限_有効期限初期表示;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoKigen.資格者証期限_有効期限加算値;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShikakushashoKigen;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -65,7 +66,7 @@ public class ShikakushashoKigenConfig {
      *
      * @return 資格者証期限_有効期限初期表示
      */
-    public RString get資格者証期限_有効期限初期表示() {
-        return configs.get(資格者証期限_有効期限初期表示);
+    public ConfigValuesShikakushashoKigen get資格者証期限_有効期限初期表示() {
+        return ConfigValuesShikakushashoKigen.toValue(configs.get(資格者証期限_有効期限初期表示));
     }
 }

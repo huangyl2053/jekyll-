@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.business.config;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoKigen;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShikakushashoKigen;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -33,8 +35,7 @@ public class ShikakushashoKigenConfigTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-//            sut = new ShikakushashoKigenConfig(createBusinessConfigMock());
-            sut = new ShikakushashoKigenConfig();
+            sut = new ShikakushashoKigenConfig(createBusinessConfigMock());
         }
 
         @Test
@@ -45,8 +46,8 @@ public class ShikakushashoKigenConfigTest extends DbzTestBase {
 
         @Test
         public void 資格者証期限_有効期限初期表示を指定したとき_業務コンフィグ設定値が返る() {
-            RString result = sut.get資格者証期限_有効期限初期表示();
-            assertThat(result, is(new RString("3")));
+            ConfigValuesShikakushashoKigen result = sut.get資格者証期限_有効期限初期表示();
+            assertThat(result, is(ConfigValuesShikakushashoKigen.toValue(new RString("3"))));
         }
 
     }
@@ -57,11 +58,13 @@ public class ShikakushashoKigenConfigTest extends DbzTestBase {
 
         when(mock.get(
                 ConfigKeysShikakushashoKigen.資格者証期限_有効期限加算値,
-                nowDate
+                nowDate,
+                SubGyomuCode.DBD介護受給
         )).thenReturn(new RString("30"));
         when(mock.get(
                 ConfigKeysShikakushashoKigen.資格者証期限_有効期限初期表示,
-                nowDate
+                nowDate,
+                SubGyomuCode.DBD介護受給
         )).thenReturn(new RString("3"));
         return mock;
     }

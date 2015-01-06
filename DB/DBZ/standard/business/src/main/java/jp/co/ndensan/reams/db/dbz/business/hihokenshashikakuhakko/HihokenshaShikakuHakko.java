@@ -8,6 +8,9 @@ package jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko;
 import jp.co.ndensan.reams.db.dbz.business.config.HihokenshashoItakudaikoHyojiConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.ShikakushashoItakudaikoHyojiConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.ShikakushashoKigenConfig;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesHihokenshashoItakudaikoHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShikakushashoItakudaikoHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShikakushashoKigen;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -23,9 +26,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public final class HihokenshaShikakuHakko {
 
-    private static final RString GYOMUCONFIG_1 = new RString("1");
-    private static final RString GYOMUCONFIG_2 = new RString("2");
-    private static final RString GYOMUCONFIG_3 = new RString("3");
     // TODO N8187 久保田 申請区分(申請時)コード。将来的にenum取得のビジネスクラスが(dbe:認定)に作成される予定なので、それを使用する。
     private static final Code SHINSEIKUBUN_KOSHIN = new Code(new RString("2"));
     private static final Code SHINSEIKUBUN_KUBUNHENKO = new Code(new RString("3"));
@@ -49,14 +49,14 @@ public final class HihokenshaShikakuHakko {
         FlexibleDate 有効期限;
         ShikakushashoKigenConfig config = new ShikakushashoKigenConfig();
         Decimal 有効期限加算値 = new Decimal(config.get資格者証期限_有効期限加算値().toString());
-        if (config.get資格者証期限_有効期限初期表示().equals(GYOMUCONFIG_1)) {
+        if (config.get資格者証期限_有効期限初期表示() == ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_システム日付plus有効期限加算値) {
             有効期限 = FlexibleDate.getNowDate().plusDay(有効期限加算値.intValue());
         } else {
-            if (config.get資格者証期限_有効期限初期表示().equals(GYOMUCONFIG_2)
+            if (config.get資格者証期限_有効期限初期表示() == ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_更新申請時_従前認定終値比較
                     && 申請区分コード.equals(SHINSEIKUBUN_KOSHIN)
                     && 申請日.plusDay(有効期限加算値.intValue()).isBefore(有効データ認定終了日)) {
                 有効期限 = 有効データ認定終了日;
-            } else if (config.get資格者証期限_有効期限初期表示().equals(GYOMUCONFIG_3)
+            } else if (config.get資格者証期限_有効期限初期表示() == ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_更新区分申請時_従前認定終値比較
                     && (申請区分コード.equals(SHINSEIKUBUN_KOSHIN) || 申請区分コード.equals(SHINSEIKUBUN_KUBUNHENKO))
                     && 申請日.plusDay(有効期限加算値.intValue()).isBefore(有効データ認定終了日)) {
                 有効期限 = 有効データ認定終了日;
@@ -81,7 +81,7 @@ public final class HihokenshaShikakuHakko {
         RString 支援事業者名称;
 
         HihokenshashoItakudaikoHyojiConfig config = new HihokenshashoItakudaikoHyojiConfig();
-        if (config.get被保険者証表示方法_委託代行業者_表示有無().equals(GYOMUCONFIG_1)) {
+        if (config.get被保険者証表示方法_委託代行業者_表示有無() == ConfigValuesHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示) {
             RString 表示開始文言 = config.get被保険者証表示方法_委託代行業者_表示開始文言();
             RString 表示終了文言 = config.get被保険者証表示方法_委託代行業者_表示終了文言();
             支援事業者名称 = new RStringBuilder(計画事業者名称).append(表示開始文言).append(委託先事業者名称).append(表示終了文言).toRString();
@@ -105,7 +105,7 @@ public final class HihokenshaShikakuHakko {
         RString 支援事業者名称;
 
         ShikakushashoItakudaikoHyojiConfig config = new ShikakushashoItakudaikoHyojiConfig();
-        if (config.get資格者証表示方法_委託代行業者の表示有無().equals(GYOMUCONFIG_1)) {
+        if (config.get資格者証表示方法_委託代行業者の表示有無() == ConfigValuesShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者_表示) {
             RString 表示開始文言 = config.get資格者証表示方法_委託代行業者表示開始文言();
             RString 表示終了文言 = config.get資格者証表示方法_委託代行業者表示終了文言();
             支援事業者名称 = new RStringBuilder(計画事業者名称).append(表示開始文言).append(委託先事業者名称).append(表示終了文言).toRString();

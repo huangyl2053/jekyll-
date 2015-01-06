@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKey
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者の表示有無;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者表示終了文言;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者表示開始文言;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShikakushashoItakudaikoHyoji;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -57,8 +58,8 @@ public class ShikakushashoItakudaikoHyojiConfig {
      *
      * @return 資格者証表示方法_委託代行業者の表示有無
      */
-    public RString get資格者証表示方法_委託代行業者の表示有無() {
-        return configs.get(資格者証表示方法_委託代行業者の表示有無);
+    public ConfigValuesShikakushashoItakudaikoHyoji get資格者証表示方法_委託代行業者の表示有無() {
+        return ConfigValuesShikakushashoItakudaikoHyoji.toValue(configs.get(資格者証表示方法_委託代行業者の表示有無));
     }
 
     /**

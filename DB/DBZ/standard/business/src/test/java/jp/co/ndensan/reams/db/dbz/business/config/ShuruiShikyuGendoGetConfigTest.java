@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.business.config;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShuruiShikyuGendoGet;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShuruiShikyuGendoGet;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -33,14 +35,13 @@ public class ShuruiShikyuGendoGetConfigTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-//            sut = new ShuruiShikyuGendoGetConfig(createBusinessConfigMock());
-            sut = new ShuruiShikyuGendoGetConfig();
+            sut = new ShuruiShikyuGendoGetConfig(createBusinessConfigMock());
         }
 
         @Test
         public void 種類支給限度額_取得方法を指定したとき_業務コンフィグ設定値が返る() {
-            RString result = sut.get種類支給限度額_取得方法();
-            assertThat(result, is(new RString("1")));
+            ConfigValuesShuruiShikyuGendoGet result = sut.get種類支給限度額_取得方法();
+            assertThat(result, is(ConfigValuesShuruiShikyuGendoGet.toValue(new RString("1"))));
         }
 
     }
@@ -51,7 +52,8 @@ public class ShuruiShikyuGendoGetConfigTest extends DbzTestBase {
 
         when(mock.get(
                 ConfigKeysShuruiShikyuGendoGet.種類支給限度額_取得方法,
-                nowDate
+                nowDate,
+                SubGyomuCode.DBD介護受給
         )).thenReturn(new RString("1"));
         return mock;
     }

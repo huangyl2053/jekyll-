@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.business.config;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHihokenshashoItakudaikoHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesHihokenshashoItakudaikoHyoji;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -33,14 +35,13 @@ public class HihokenshashoItakudaikoHyojiConfigTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-//            sut = new HihokenshashoItakudaikoHyojiConfig(createBusinessConfigMock());
-            sut = new HihokenshashoItakudaikoHyojiConfig();
+            sut = new HihokenshashoItakudaikoHyojiConfig(createBusinessConfigMock());
         }
 
         @Test
         public void 被保険者証表示方法_委託代行業者_表示有無を指定したとき_業務コンフィグ設定値が返る() {
-            RString result = sut.get被保険者証表示方法_委託代行業者_表示有無();
-            assertThat(result, is(new RString("0")));
+            ConfigValuesHihokenshashoItakudaikoHyoji result = sut.get被保険者証表示方法_委託代行業者_表示有無();
+            assertThat(result, is(ConfigValuesHihokenshashoItakudaikoHyoji.toValue(new RString("0"))));
         }
 
         @Test
@@ -62,15 +63,18 @@ public class HihokenshashoItakudaikoHyojiConfigTest extends DbzTestBase {
 
         when(mock.get(
                 ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示有無,
-                nowDate
+                nowDate,
+                SubGyomuCode.DBA介護資格
         )).thenReturn(new RString("0"));
         when(mock.get(
                 ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示開始文言,
-                nowDate
+                nowDate,
+                SubGyomuCode.DBA介護資格
         )).thenReturn(new RString("（委託先："));
         when(mock.get(
                 ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示終了文言,
-                nowDate
+                nowDate,
+                SubGyomuCode.DBA介護資格
         )).thenReturn(new RString("）"));
         return mock;
     }

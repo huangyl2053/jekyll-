@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.business.config;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoItakudaikoHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShikakushashoItakudaikoHyoji;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -33,14 +35,13 @@ public class ShikakushashoItakudaikoHyojiConfigTest extends DbzTestBase {
 
         @Before
         public void setUp() {
-//            sut = new ShikakushashoItakudaikoHyojiConfig(createBusinessConfigMock());
-            sut = new ShikakushashoItakudaikoHyojiConfig();
+            sut = new ShikakushashoItakudaikoHyojiConfig(createBusinessConfigMock());
         }
 
         @Test
         public void 資格者証表示方法_委託代行業者の表示有無を指定したとき_業務コンフィグ設定値が返る() {
-            RString result = sut.get資格者証表示方法_委託代行業者の表示有無();
-            assertThat(result, is(new RString("0")));
+            ConfigValuesShikakushashoItakudaikoHyoji result = sut.get資格者証表示方法_委託代行業者の表示有無();
+            assertThat(result, is(ConfigValuesShikakushashoItakudaikoHyoji.toValue(new RString("0"))));
         }
 
         @Test
@@ -63,15 +64,18 @@ public class ShikakushashoItakudaikoHyojiConfigTest extends DbzTestBase {
 
         when(mock.get(
                 ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者の表示有無,
-                nowDate
+                nowDate,
+                SubGyomuCode.DBD介護受給
         )).thenReturn(new RString("0"));
         when(mock.get(
                 ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者表示開始文言,
-                nowDate
+                nowDate,
+                SubGyomuCode.DBD介護受給
         )).thenReturn(new RString("（委託先："));
         when(mock.get(
                 ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者表示終了文言,
-                nowDate
+                nowDate,
+                SubGyomuCode.DBD介護受給
         )).thenReturn(new RString("）"));
         return mock;
     }

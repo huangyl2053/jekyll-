@@ -34,6 +34,8 @@ import jp.co.ndensan.reams.db.dbz.realservice.ShiharaiHohoHenkoManager;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakko;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidate;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidationMessage;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShiharaiHohoHenko;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShuruiShikyuGendoGet;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku.HihokenshashoKofuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku.ShikakushashoKofuJiyu;
@@ -73,8 +75,6 @@ public class HihokenshaShikakuHakkoHandler {
     private static final RString KOFUJIYU_CHOKUZEN = new RString("直前履歴");
     private static final int SHINSAKAIIKEN_MAX_HIHOKENSHASHO = 198;
     private static final int SHINSAKAIIKEN_MAX_SHIKAKUSHASHO = 175;
-    private final RString 業務コンフィグ定義_0 = new RString("0");
-    private final RString 業務コンフィグ定義_1 = new RString("1");
     private final RString 被保険者区分コード_2 = new RString("2");
 
     /**
@@ -260,10 +260,10 @@ public class HihokenshaShikakuHakkoHandler {
     private void set種類支給限度基準額(NinteiShinseiKekkaModel 認定申請結果) {
 
         ShuruiShikyuGendoGetConfig config = new ShuruiShikyuGendoGetConfig();
-        RString 取得方法 = config.get種類支給限度額_取得方法();
+        ConfigValuesShuruiShikyuGendoGet 取得方法 = config.get種類支給限度額_取得方法();
         IItemList<ServiceShuruiShikyuGendoGakuModel> list;
 
-        if (取得方法.equals(業務コンフィグ定義_0)) {
+        if (取得方法 == ConfigValuesShuruiShikyuGendoGet.種類支給限度額検索時に要介護度を検索キーにしない) {
             list = new ServiceShuruiShikyuGendoGakuManager().getサービス種類支給限度額一覧(
                     YokaigoJotaiKubun09.toValue(認定申請結果.get要介護認定結果情報モデル().get().get要介護状態区分コード().value()),
                     認定申請結果.get受給者台帳モデル().get支給限度有効開始年月日());
@@ -396,7 +396,7 @@ public class HihokenshaShikakuHakkoHandler {
 
         if (被保険者台帳.get被保険者区分コード().equals(被保険者区分コード_2)) {
 
-            RString 終了分記載区分;
+            ConfigValuesShiharaiHohoHenko 終了分記載区分;
             RString 記載文言;
             ShiharaiHohoHenkoConfig config = new ShiharaiHohoHenkoConfig();
             if (div.getMode_発行証タイプ() == 被保険者証) {
@@ -410,7 +410,7 @@ public class HihokenshaShikakuHakkoHandler {
             IItemList<ShiharaiHohoHenkoModel> history = manager.get2号差止履歴(被保険者番号);
 
             int historySize;
-            if (終了分記載区分.equals(業務コンフィグ定義_1)) {
+            if (終了分記載区分 == ConfigValuesShiharaiHohoHenko.支払方法変更_終了分記載区分_終了後も記載する) {
                 historySize = 3;
             } else {
                 historySize = 1;
@@ -425,7 +425,7 @@ public class HihokenshaShikakuHakkoHandler {
             set給付制限to画面(給付制限);
 
         } else {
-            RString 終了分記載区分;
+            ConfigValuesShiharaiHohoHenko 終了分記載区分;
             RString 記載文言;
             ShiharaiHohoHenkoConfig config = new ShiharaiHohoHenkoConfig();
             if (div.getMode_発行証タイプ() == 被保険者証) {
@@ -439,7 +439,7 @@ public class HihokenshaShikakuHakkoHandler {
             IItemList<ShiharaiHohoHenkoModel> history = manager.get1号償還払化履歴(被保険者番号);
 
             int historySize;
-            if (終了分記載区分.equals(業務コンフィグ定義_1)) {
+            if (終了分記載区分 == ConfigValuesShiharaiHohoHenko.支払方法変更_終了分記載区分_終了後も記載する) {
                 historySize = 3;
                 for (int i = 0; i < historySize && i < history.size(); i++) {
                     優先外.add(new KyufuSeigenShutsuryoku(
@@ -467,7 +467,7 @@ public class HihokenshaShikakuHakkoHandler {
             }
 
             history = manager.get1号減額履歴(被保険者番号);
-            if (終了分記載区分.equals(業務コンフィグ定義_1)) {
+            if (終了分記載区分 == ConfigValuesShiharaiHohoHenko.支払方法変更_終了分記載区分_終了後も記載する) {
                 historySize = 3;
                 for (int i = 0; i < historySize && i < history.size(); i++) {
                     優先外.add(new KyufuSeigenShutsuryoku(
