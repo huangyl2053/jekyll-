@@ -217,7 +217,7 @@ public class HihokenshaShikakuHakkoHandler {
         if (is直前履歴) {
             return DbOptional.of(認定申請結果履歴.toList().get(1));
         }
-        return DbOptional.of(認定申請結果履歴.toList().get(0));
+        return 認定申請結果履歴.findFirst();
     }
 
     private void set保険者(HihokenshaDaichoModel 被保険者台帳) {
