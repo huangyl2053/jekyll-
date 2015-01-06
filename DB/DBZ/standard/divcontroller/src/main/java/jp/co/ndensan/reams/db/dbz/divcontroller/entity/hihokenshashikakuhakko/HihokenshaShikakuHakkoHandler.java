@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.db.dbz.realservice.NinteiShinseiKekkaFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.ServiceShuruiShikyuGendoGakuManager;
 import jp.co.ndensan.reams.db.dbz.realservice.ShiharaiHohoHenkoManager;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakko;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidate;
+import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidation;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidationMessage;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShuruiShikyuGendoGet;
@@ -930,7 +930,7 @@ public class HihokenshaShikakuHakkoHandler {
     public ValidationMessageControlPairs validate被保険者証資格者証() {
 
         ValidationMessageControlPairs controlPairs = new ValidationMessageControlPairs();
-        IValidationMessages messages = new HihokenshaShikakuHakkoValidate().
+        IValidationMessages messages = new HihokenshaShikakuHakkoValidation().
                 validateIn(div.getYukoKigenInfo().getDdlKofuJiyu().getSelectedValue());
 
         controlPairs = addValidationMessage(controlPairs, messages, HihokenshaShikakuHakkoValidationMessage.交付事由が未選択, div.getYukoKigenInfo().getDdlKofuJiyu());
