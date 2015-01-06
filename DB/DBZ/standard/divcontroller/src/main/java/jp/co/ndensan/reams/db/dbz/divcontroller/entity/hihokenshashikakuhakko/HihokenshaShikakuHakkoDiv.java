@@ -608,7 +608,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     }
 
     @Override
-    public ValidationMessageControlPairs chkValidate() {
+    public ValidationMessageControlPairs validate() {
         return getHandler().validate被保険者証資格者証();
     }
 

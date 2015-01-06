@@ -31,7 +31,7 @@ public interface IHihokenshaShikakuHakkoDiv {
      *
      * @return ValidationMessageControlPairs
      */
-    ValidationMessageControlPairs chkValidate();
+    ValidationMessageControlPairs validate();
 
     /**
      * 画面に表示している情報を被保険者証資格者証Modelにセットして返します。

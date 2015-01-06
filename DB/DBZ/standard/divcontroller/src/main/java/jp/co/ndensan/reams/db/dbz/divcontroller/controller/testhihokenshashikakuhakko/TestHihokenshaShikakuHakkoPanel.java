@@ -66,7 +66,7 @@ public class TestHihokenshaShikakuHakkoPanel {
 
         HihokenshaShikakuHakkoModel model = div.getCcdHihokenshaShikakuHakko().create証発行情報();
 
-        response.addValidationMessages(div.getCcdHihokenshaShikakuHakko().chkValidate());
+        response.addValidationMessages(div.getCcdHihokenshaShikakuHakko().validate());
         return response;
     }
 
