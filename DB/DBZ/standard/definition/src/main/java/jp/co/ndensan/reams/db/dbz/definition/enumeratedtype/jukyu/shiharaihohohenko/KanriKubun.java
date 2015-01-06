@@ -18,9 +18,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum KanriKubun {
 
-    ニ号差止("1", "2号差止"),
-    一号償還払い化("2", "1号償還払い化"),
-    一号給付額減額("3", "1号給付額減額");
+    /**
+     * ２号差止 です。 コード：'1'
+     */
+    ニ号差止("1", "２号差止"),
+    /**
+     * １号償還払い化 です。 コード：'2'
+     */
+    一号償還払い化("2", "１号償還払い化"),
+    /**
+     * １号給付額減額 です。コード：'3'
+     */
+    一号給付額減額("3", "１号給付額減額");
 
     private final RString theCode;
     private final RString theName;
