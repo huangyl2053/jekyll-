@@ -73,7 +73,9 @@ public class HihokenshaShikakuHakkoHandler {
     private static final RString KOFUJIYU_TEST = new RString("テスト");
     private static final RString KOFUJIYU_CHOKUZENKEY = new RString("chokuzenKey");
     private static final RString KOFUJIYU_CHOKUZEN = new RString("直前履歴");
+    // TODO N8187 久保田 審査会意見の最大長(被保険者証の場合198文字)は被保険者証のソースデータクラスから取得するよう修正する。 2015/03/31。
     private static final int SHINSAKAIIKEN_MAX_HIHOKENSHASHO = 198;
+    // TODO N8187 久保田 審査会意見の最大長(資格者証の場合175文字)は資格者証のソースデータクラスから取得するよう修正する。 2015/03/31。
     private static final int SHINSAKAIIKEN_MAX_SHIKAKUSHASHO = 175;
     private final RString 被保険者区分コード_2 = new RString("2");
 
