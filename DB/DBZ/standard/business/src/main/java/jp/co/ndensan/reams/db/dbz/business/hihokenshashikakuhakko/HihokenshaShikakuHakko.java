@@ -48,20 +48,20 @@ public final class HihokenshaShikakuHakko {
 
         FlexibleDate 有効期限;
         ShikakushashoKigenConfig config = new ShikakushashoKigenConfig();
-        Decimal 有効期限加算値 = new Decimal(config.get資格者証期限_有効期限加算値().toString());
+        int 有効期限加算値 = config.get資格者証期限_有効期限加算値();
         if (config.get資格者証期限_有効期限初期表示() == ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_システム日付plus有効期限加算値) {
-            有効期限 = FlexibleDate.getNowDate().plusDay(有効期限加算値.intValue());
+            有効期限 = FlexibleDate.getNowDate().plusDay(有効期限加算値);
         } else {
             if (config.get資格者証期限_有効期限初期表示() == ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_更新申請時_従前認定終値比較
                     && 申請区分コード.equals(SHINSEIKUBUN_KOSHIN)
-                    && 申請日.plusDay(有効期限加算値.intValue()).isBefore(有効データ認定終了日)) {
+                    && 申請日.plusDay(有効期限加算値).isBefore(有効データ認定終了日)) {
                 有効期限 = 有効データ認定終了日;
             } else if (config.get資格者証期限_有効期限初期表示() == ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_更新区分申請時_従前認定終値比較
                     && (申請区分コード.equals(SHINSEIKUBUN_KOSHIN) || 申請区分コード.equals(SHINSEIKUBUN_KUBUNHENKO))
-                    && 申請日.plusDay(有効期限加算値.intValue()).isBefore(有効データ認定終了日)) {
+                    && 申請日.plusDay(有効期限加算値).isBefore(有効データ認定終了日)) {
                 有効期限 = 有効データ認定終了日;
             } else {
-                有効期限 = 申請日.plusDay(有効期限加算値.intValue());
+                有効期限 = 申請日.plusDay(有効期限加算値);
             }
         }
 

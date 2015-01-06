@@ -40,8 +40,8 @@ public class ShikakushashoKigenConfigTest extends DbzTestBase {
 
         @Test
         public void 資格者証期限_有効期限加算値を指定したとき_業務コンフィグ設定値が返る() {
-            RString result = sut.get資格者証期限_有効期限加算値();
-            assertThat(result, is(new RString("30")));
+            int result = sut.get資格者証期限_有効期限加算値();
+            assertThat(result, is(30));
         }
 
         @Test
