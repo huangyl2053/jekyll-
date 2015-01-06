@@ -93,7 +93,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
 
     }
 
-    public static class get被保険者証支援事業者名称Test {
+    public static class compose被保険者証支援事業者名称Test {
 
         /**
          * 業務コンフィグDBA：被保険者証表示方法_委託代行業者_表示有無 == 0 <br />
@@ -109,7 +109,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         }
     }
 
-    public static class get資格者証支援事業者名称Test {
+    public static class compose資格者証支援事業者名称Test {
 
         /**
          * 業務コンフィグDBD：資格者証表示方法_委託代行業者_表示有無 == 0 <br />
