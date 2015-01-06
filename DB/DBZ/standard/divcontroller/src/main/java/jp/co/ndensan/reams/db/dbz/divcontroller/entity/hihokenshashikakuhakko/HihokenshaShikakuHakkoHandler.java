@@ -208,7 +208,7 @@ public class HihokenshaShikakuHakkoHandler {
     private void set有効期限(NinteiShinseiKekkaModel 認定申請結果) {
         if (div.getMode_発行証タイプ() == 資格者証) {
             div.getTxtYukoKigen().setValue(new RDate(
-                    HihokenshaShikakuHakko.get有効期限初期値(
+                    new HihokenshaShikakuHakko().get有効期限初期値(
                             認定申請結果.get要介護認定申請情報モデル().get().get認定申請区分申請時コード(),
                             認定申請結果.get要介護認定申請情報モデル().get().get認定申請年月日(),
                             認定申請結果.get要介護認定結果情報モデル().get().get認定有効期間終了年月日()).toString()));
@@ -289,7 +289,7 @@ public class HihokenshaShikakuHakkoHandler {
         if (!serviceList.isEmpty()) {
             介護サービス種類リスト = ItemList.of(serviceList);
         }
-        RString 審査会意見 = HihokenshaShikakuHakko.compose審査会意見(
+        RString 審査会意見 = new HihokenshaShikakuHakko().compose審査会意見(
                 認定申請結果.get要介護認定結果情報モデル().get().get介護認定審査会意見(),
                 介護サービス種類リスト,
                 最大長);
@@ -543,9 +543,9 @@ public class HihokenshaShikakuHakkoHandler {
                     RString 計画事業者名称 = new RString("計画事業者名称");
                     RString 委託先事業者名称 = new RString("委託先事業者名称");
                     if (div.getMode_発行証タイプ() == 被保険者証) {
-                        名称 = HihokenshaShikakuHakko.compose被保険者証支援事業者名称(計画事業者名称, 委託先事業者名称);
+                        名称 = new HihokenshaShikakuHakko().compose被保険者証支援事業者名称(計画事業者名称, 委託先事業者名称);
                     } else {
-                        名称 = HihokenshaShikakuHakko.compose資格者証支援事業者名称(計画事業者名称, 委託先事業者名称);
+                        名称 = new HihokenshaShikakuHakko().compose資格者証支援事業者名称(計画事業者名称, 委託先事業者名称);
                     }
                     適用開始日 = model.get居宅給付計画事業者作成モデル().get().get適用開始年月日();
                 } else {

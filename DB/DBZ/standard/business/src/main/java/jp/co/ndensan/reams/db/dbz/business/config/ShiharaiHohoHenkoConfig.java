@@ -49,7 +49,7 @@ public class ShiharaiHohoHenkoConfig {
      *
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    ShiharaiHohoHenkoConfig(IUrBusinessConfig businessConfig) {
+    public ShiharaiHohoHenkoConfig(IUrBusinessConfig businessConfig) {
         this.configs = createMap(businessConfig);
     }
 

@@ -37,7 +37,7 @@ public class ShuruiShikyuGendoGetConfig {
      *
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    ShuruiShikyuGendoGetConfig(IUrBusinessConfig businessConfig) {
+    public ShuruiShikyuGendoGetConfig(IUrBusinessConfig businessConfig) {
         this.configs = createMap(businessConfig);
     }
 

@@ -23,16 +23,39 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  *
  * @author N8187 久保田 英男
  */
-public final class HihokenshaShikakuHakko {
+public class HihokenshaShikakuHakko {
 
     // TODO N8187 久保田 申請区分(申請時)コード。将来的にenum取得のビジネスクラスが(dbe:認定)に作成される予定なので、それを使用する。
     private static final Code SHINSEIKUBUN_KOSHIN = new Code(new RString("2"));
     private static final Code SHINSEIKUBUN_KUBUNHENKO = new Code(new RString("3"));
 
+    private final ShikakushashoKigenConfig 資格者証期限config;
+    private final HihokenshashoItakudaikoHyojiConfig 被保険者証委託代行業者config;
+    private final ShikakushashoItakudaikoHyojiConfig 資格者証委託代行業者config;
+
     /**
-     * インスタンス化を防ぐためのプライベートコンストラクタです。
+     * コンストラクタです。
      */
-    private HihokenshaShikakuHakko() {
+    public HihokenshaShikakuHakko() {
+        資格者証期限config = new ShikakushashoKigenConfig();
+        被保険者証委託代行業者config = new HihokenshashoItakudaikoHyojiConfig();
+        資格者証委託代行業者config = new ShikakushashoItakudaikoHyojiConfig();
+    }
+
+    /**
+     * テスト用のコンストラクタです。
+     *
+     * @param 資格者証期限config ShikakushashoKigenConfig
+     * @param 被保険者証委託代行業者Config HihokenshashoItakudaikoHyojiConfig
+     * @param 資格者証委託代行業者config ShikakushashoItakudaikoHyojiConfig
+     *
+     */
+    public HihokenshaShikakuHakko(ShikakushashoKigenConfig 資格者証期限config,
+            HihokenshashoItakudaikoHyojiConfig 被保険者証委託代行業者Config,
+            ShikakushashoItakudaikoHyojiConfig 資格者証委託代行業者config) {
+        this.資格者証期限config = 資格者証期限config;
+        this.被保険者証委託代行業者config = 被保険者証委託代行業者Config;
+        this.資格者証委託代行業者config = 資格者証委託代行業者config;
     }
 
     /**
@@ -43,19 +66,18 @@ public final class HihokenshaShikakuHakko {
      * @param 有効データ認定終了日 有効データ認定終了日
      * @return 有効期限の初期値
      */
-    public static FlexibleDate get有効期限初期値(Code 申請区分コード, FlexibleDate 申請日, FlexibleDate 有効データ認定終了日) {
+    public FlexibleDate get有効期限初期値(Code 申請区分コード, FlexibleDate 申請日, FlexibleDate 有効データ認定終了日) {
 
         FlexibleDate 有効期限;
-        ShikakushashoKigenConfig config = new ShikakushashoKigenConfig();
-        int 有効期限加算値 = config.get資格者証期限_有効期限加算値();
-        if (config.get資格者証期限_有効期限初期表示() == ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_システム日付plus有効期限加算値) {
+        int 有効期限加算値 = 資格者証期限config.get資格者証期限_有効期限加算値();
+        if (資格者証期限config.get資格者証期限_有効期限初期表示() == ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_システム日付plus有効期限加算値) {
             有効期限 = FlexibleDate.getNowDate().plusDay(有効期限加算値);
         } else {
-            if (config.get資格者証期限_有効期限初期表示() == ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_更新申請時_従前認定終値比較
+            if (資格者証期限config.get資格者証期限_有効期限初期表示() == ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_更新申請時_従前認定終値比較
                     && 申請区分コード.equals(SHINSEIKUBUN_KOSHIN)
                     && 申請日.plusDay(有効期限加算値).isBefore(有効データ認定終了日)) {
                 有効期限 = 有効データ認定終了日;
-            } else if (config.get資格者証期限_有効期限初期表示() == ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_更新区分申請時_従前認定終値比較
+            } else if (資格者証期限config.get資格者証期限_有効期限初期表示() == ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_更新区分申請時_従前認定終値比較
                     && (申請区分コード.equals(SHINSEIKUBUN_KOSHIN) || 申請区分コード.equals(SHINSEIKUBUN_KUBUNHENKO))
                     && 申請日.plusDay(有効期限加算値).isBefore(有効データ認定終了日)) {
                 有効期限 = 有効データ認定終了日;
@@ -75,14 +97,13 @@ public final class HihokenshaShikakuHakko {
      * @param 委託先事業者名称 委託先事業者名称
      * @return 支援事業者名称
      */
-    public static RString compose被保険者証支援事業者名称(RString 計画事業者名称, RString 委託先事業者名称) {
+    public RString compose被保険者証支援事業者名称(RString 計画事業者名称, RString 委託先事業者名称) {
 
         RString 支援事業者名称;
 
-        HihokenshashoItakudaikoHyojiConfig config = new HihokenshashoItakudaikoHyojiConfig();
-        if (config.get被保険者証表示方法_委託代行業者_表示有無() == ConfigValuesHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示) {
-            RString 表示開始文言 = config.get被保険者証表示方法_委託代行業者_表示開始文言();
-            RString 表示終了文言 = config.get被保険者証表示方法_委託代行業者_表示終了文言();
+        if (被保険者証委託代行業者config.get被保険者証表示方法_委託代行業者_表示有無() == ConfigValuesHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示) {
+            RString 表示開始文言 = 被保険者証委託代行業者config.get被保険者証表示方法_委託代行業者_表示開始文言();
+            RString 表示終了文言 = 被保険者証委託代行業者config.get被保険者証表示方法_委託代行業者_表示終了文言();
             支援事業者名称 = new RStringBuilder(計画事業者名称).append(表示開始文言).append(委託先事業者名称).append(表示終了文言).toRString();
         } else {
             支援事業者名称 = 計画事業者名称;
@@ -99,14 +120,13 @@ public final class HihokenshaShikakuHakko {
      * @param 委託先事業者名称 委託先事業者名称
      * @return 支援事業者名称
      */
-    public static RString compose資格者証支援事業者名称(RString 計画事業者名称, RString 委託先事業者名称) {
+    public RString compose資格者証支援事業者名称(RString 計画事業者名称, RString 委託先事業者名称) {
 
         RString 支援事業者名称;
 
-        ShikakushashoItakudaikoHyojiConfig config = new ShikakushashoItakudaikoHyojiConfig();
-        if (config.get資格者証表示方法_委託代行業者の表示有無() == ConfigValuesShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者_表示) {
-            RString 表示開始文言 = config.get資格者証表示方法_委託代行業者表示開始文言();
-            RString 表示終了文言 = config.get資格者証表示方法_委託代行業者表示終了文言();
+        if (資格者証委託代行業者config.get資格者証表示方法_委託代行業者の表示有無() == ConfigValuesShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者_表示) {
+            RString 表示開始文言 = 資格者証委託代行業者config.get資格者証表示方法_委託代行業者表示開始文言();
+            RString 表示終了文言 = 資格者証委託代行業者config.get資格者証表示方法_委託代行業者表示終了文言();
             支援事業者名称 = new RStringBuilder(計画事業者名称).append(表示開始文言).append(委託先事業者名称).append(表示終了文言).toRString();
         } else {
             支援事業者名称 = 計画事業者名称;
@@ -126,7 +146,7 @@ public final class HihokenshaShikakuHakko {
      * @param 最大長 int
      * @return 審査会意見
      */
-    public static RString compose審査会意見(RString 審査会意見, IItemList<IKaigoService> 介護サービスリスト, int 最大長) {
+    public RString compose審査会意見(RString 審査会意見, IItemList<IKaigoService> 介護サービスリスト, int 最大長) {
 
         RString 編集審査会意見 = 審査会意見;
         int 編集審査会意見長 = 編集審査会意見.length();
