@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -21,6 +22,15 @@ import org.junit.runner.RunWith;
 public class ShuryoKubunTest {
 
     public ShuryoKubunTest() {
+    }
+
+    public static class toRString extends DbzTestBase {
+
+        @Test
+        public void toRStringは_nameをRStringへ変換した物を返す() {
+            ShuryoKubun sut = ShuryoKubun.弁明書受理;
+            assertThat(sut.toRString(), is(new RString(sut.name())));
+        }
     }
 
     public static class toValue extends DbzTestBase {
