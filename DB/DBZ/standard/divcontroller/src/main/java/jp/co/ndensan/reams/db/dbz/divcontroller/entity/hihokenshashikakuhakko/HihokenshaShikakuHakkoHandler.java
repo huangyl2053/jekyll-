@@ -147,7 +147,6 @@ public class HihokenshaShikakuHakkoHandler {
             return result;
         }
         List<HihokenshashoKofuJiyu> 被保険者証交付事由List = CodeMasterHelper.getCode(DBACodeShubetsu.被保険者証交付事由);
-        被保険者証交付事由List = sort被保険者証交付事由(被保険者証交付事由List);
 
         for (HihokenshashoKofuJiyu 交付事由 : 被保険者証交付事由List) {
             result.add(new KeyValueDataSource(交付事由.value().value(), 交付事由.getMeisho()));
@@ -159,49 +158,12 @@ public class HihokenshaShikakuHakkoHandler {
     private List<KeyValueDataSource> set資格者証交付事由() {
         List<KeyValueDataSource> result = new ArrayList<>();
         List<ShikakushashoKofuJiyu> 資格者証交付事由List = CodeMasterHelper.getCode(DBACodeShubetsu.資格者証交付事由);
-        資格者証交付事由List = sort資格者証交付事由(資格者証交付事由List);
 
         for (ShikakushashoKofuJiyu 交付事由 : 資格者証交付事由List) {
             result.add(new KeyValueDataSource(交付事由.value().value(), 交付事由.getMeisho()));
         }
         result.add(new KeyValueDataSource(KOFUJIYU_TESTKEY, KOFUJIYU_TEST));
         return result;
-    }
-
-    private List<HihokenshashoKofuJiyu> sort被保険者証交付事由(List<HihokenshashoKofuJiyu> 被保険者証交付事由List) {
-        Collections.sort(被保険者証交付事由List, new Comparator<HihokenshashoKofuJiyu>() {
-            @Override
-            public int compare(HihokenshashoKofuJiyu o1, HihokenshashoKofuJiyu o2) {
-                int sortType = 1;
-                if (o1 == null && o2 == null) {
-                    return 0;
-                } else if (o1 == null) {
-                    return 1 * sortType;
-                } else if (o2 == null) {
-                    return -1 * sortType;
-                }
-                return (Integer.parseInt(o1.value().toString()) - Integer.parseInt(o2.value().toString())) * sortType;
-            }
-        });
-        return 被保険者証交付事由List;
-    }
-
-    private List<ShikakushashoKofuJiyu> sort資格者証交付事由(List<ShikakushashoKofuJiyu> 資格者証交付事由List) {
-        Collections.sort(資格者証交付事由List, new Comparator<ShikakushashoKofuJiyu>() {
-            @Override
-            public int compare(ShikakushashoKofuJiyu o1, ShikakushashoKofuJiyu o2) {
-                int sortType = 1;
-                if (o1 == null && o2 == null) {
-                    return 0;
-                } else if (o1 == null) {
-                    return 1 * sortType;
-                } else if (o2 == null) {
-                    return -1 * sortType;
-                }
-                return (Integer.parseInt(o1.value().toString()) - Integer.parseInt(o2.value().toString())) * sortType;
-            }
-        });
-        return 資格者証交付事由List;
     }
 
     private IOptional<NinteiShinseiKekkaModel> load認定申請結果(HihokenshaNo 被保険者番号, boolean is直前履歴) {
