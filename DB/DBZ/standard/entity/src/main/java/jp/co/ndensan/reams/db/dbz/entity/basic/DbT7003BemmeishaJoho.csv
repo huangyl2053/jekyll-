@@ -1,0 +1,10 @@
+﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+genshobunHihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+shinsaseikyuTodokedeYMD,UDD015YMD,FlexibleDate,,,,,A
+bemmeishoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,A
+bemmeishaEdaban,int2,int,,,,,A
+shokuinCode,UDD035Code,Code,,,,,A
+bushoCode,UDD048BushoCode,BushoCode,,,,,A
+yakushoskuName,varchar,RString,,,,,A
+bemmeishaShimei,UDD042AtenaMeisho,AtenaMeisho,,,,,A

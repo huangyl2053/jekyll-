@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokensha
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class ShoKisaiHokenshaNoTypeHandler extends BaseTypeHandler<ShoKisaiHokenshaNo> {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, ShoKisaiHokenshaNo parameter, JdbcType jdbcType) throws SQLException {
         ps.setString(i, parameter == null ? null : parameter.getColumnValue().toString());

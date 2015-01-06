@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  * @author N3327 三浦 凌
  * @param <E> 資格異動事由を表すEnum
  */
+@Deprecated
 public abstract class ShikakuIdoBaseItem<E extends Enum & IShikakuIdoJiyu> {
 
     private final E reason;

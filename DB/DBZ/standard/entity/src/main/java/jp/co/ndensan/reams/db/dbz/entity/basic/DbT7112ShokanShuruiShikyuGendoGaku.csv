@@ -1,0 +1,5 @@
+﻿serviceShuruiCode,DbUDD005ServiceShuruiCode,ServiceShuruiCode,,,,,A
+tekiyoKaishiYM,UDD014YM,FlexibleYearMonth,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+tekiyoShuryoYM,UDD014YM,FlexibleYearMonth,,,,,A
+shikyuGendoTaniSu,numeric,Decimal,,,,,A
