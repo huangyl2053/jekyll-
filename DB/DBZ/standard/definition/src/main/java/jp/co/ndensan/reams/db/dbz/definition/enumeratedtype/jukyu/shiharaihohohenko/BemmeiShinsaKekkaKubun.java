@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErro
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 支払方法変更で用いる弁明審査結果区分です。
+ * 支払方法変更で用いる弁明審査の結果を表す区分です。
  *
  * @author N3327 三浦 凌
  */
