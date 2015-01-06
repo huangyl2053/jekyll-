@@ -104,7 +104,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
             計画事業者名称 = new RString("計画事業者名称");
             委託先事業者名称 = new RString("委託先事業者名称");
 
-            RString result = sut.get被保険者証支援事業者名称(計画事業者名称, 委託先事業者名称);
+            RString result = sut.compose被保険者証支援事業者名称(計画事業者名称, 委託先事業者名称);
             assertThat(result, is(計画事業者名称));
         }
     }
@@ -120,7 +120,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
             計画事業者名称 = new RString("計画事業者名称");
             委託先事業者名称 = new RString("委託先事業者名称");
 
-            RString result = sut.get資格者証支援事業者名称(計画事業者名称, 委託先事業者名称);
+            RString result = sut.compose資格者証支援事業者名称(計画事業者名称, 委託先事業者名称);
             assertThat(result, is(計画事業者名称));
         }
 

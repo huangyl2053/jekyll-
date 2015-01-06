@@ -606,9 +606,9 @@ public class HihokenshaShikakuHakkoHandler {
                     RString 計画事業者名称 = new RString("計画事業者名称");
                     RString 委託先事業者名称 = new RString("委託先事業者名称");
                     if (div.getMode_発行証タイプ() == 被保険者証) {
-                        名称 = HihokenshaShikakuHakko.get被保険者証支援事業者名称(計画事業者名称, 委託先事業者名称);
+                        名称 = HihokenshaShikakuHakko.compose被保険者証支援事業者名称(計画事業者名称, 委託先事業者名称);
                     } else {
-                        名称 = HihokenshaShikakuHakko.get資格者証支援事業者名称(計画事業者名称, 委託先事業者名称);
+                        名称 = HihokenshaShikakuHakko.compose資格者証支援事業者名称(計画事業者名称, 委託先事業者名称);
                     }
                     適用開始日 = model.get居宅給付計画事業者作成モデル().get().get適用開始年月日();
                 } else {

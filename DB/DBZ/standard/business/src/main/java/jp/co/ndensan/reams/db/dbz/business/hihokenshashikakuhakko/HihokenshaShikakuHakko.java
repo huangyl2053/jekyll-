@@ -76,7 +76,7 @@ public final class HihokenshaShikakuHakko {
      * @param 委託先事業者名称 委託先事業者名称
      * @return 支援事業者名称
      */
-    public static RString get被保険者証支援事業者名称(RString 計画事業者名称, RString 委託先事業者名称) {
+    public static RString compose被保険者証支援事業者名称(RString 計画事業者名称, RString 委託先事業者名称) {
 
         RString 支援事業者名称;
 
@@ -100,7 +100,7 @@ public final class HihokenshaShikakuHakko {
      * @param 委託先事業者名称 委託先事業者名称
      * @return 支援事業者名称
      */
-    public static RString get資格者証支援事業者名称(RString 計画事業者名称, RString 委託先事業者名称) {
+    public static RString compose資格者証支援事業者名称(RString 計画事業者名称, RString 委託先事業者名称) {
 
         RString 支援事業者名称;
 
