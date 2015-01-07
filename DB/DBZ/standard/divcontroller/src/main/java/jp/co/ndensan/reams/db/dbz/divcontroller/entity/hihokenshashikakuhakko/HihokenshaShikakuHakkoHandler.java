@@ -70,6 +70,8 @@ public class HihokenshaShikakuHakkoHandler {
     private static final RString COLLON = new RString(":");
     private static final RString JIKOSAKUSEI = new RString("自己作成");
     private final RString 被保険者区分コード_2 = new RString("2");
+    private final int 終了分記載区分が終了後も記載する場合の給付制限件数 = 3;
+    private final int 終了分記載区分が終了後記載しない場合の給付制限件数 = 1;
 
     /**
      * コンストラクタです。
@@ -297,9 +299,9 @@ public class HihokenshaShikakuHakkoHandler {
 
             int historySize;
             if (差止終了分記載区分 == ConfigValuesShiharaiHohoHenko.支払方法変更_終了分記載区分_終了後も記載する) {
-                historySize = 3;
+                historySize = 終了分記載区分が終了後も記載する場合の給付制限件数;
             } else {
-                historySize = 1;
+                historySize = 終了分記載区分が終了後記載しない場合の給付制限件数;
             }
 
             for (int i = 0; i < historySize && i < history.size(); i++) {
@@ -316,8 +318,7 @@ public class HihokenshaShikakuHakkoHandler {
             history = manager.get1号償還払化履歴(被保険者番号);
 
             if (支払方法終了分記載区分 == ConfigValuesShiharaiHohoHenko.支払方法変更_終了分記載区分_終了後も記載する) {
-                int historySize = 3;
-                for (int i = 0; i < historySize && i < history.size(); i++) {
+                for (int i = 0; i < 終了分記載区分が終了後も記載する場合の給付制限件数 && i < history.size(); i++) {
                     優先外.add(new KyufuSeigenShutsuryoku(
                             支払方法記載文言,
                             history.toList().get(i).get適用開始年月日(),
@@ -325,11 +326,11 @@ public class HihokenshaShikakuHakkoHandler {
                 }
             } else {
                 if (!history.isEmpty()) {
-                    if (history.toList().get(0).get終了区分().isEmpty()) {
+                    if (history.findFirst().get().get終了区分().isEmpty()) {
                         優先的.add(new KyufuSeigenShutsuryoku(
                                 支払方法記載文言,
-                                history.toList().get(0).get適用開始年月日(),
-                                history.toList().get(0).get適用終了年月日()));
+                                history.findFirst().get().get適用開始年月日(),
+                                history.findFirst().get().get適用終了年月日()));
                     }
                 }
             }
@@ -338,8 +339,7 @@ public class HihokenshaShikakuHakkoHandler {
             RString 減額記載文言 = instance.load減額記載文言();
             history = manager.get1号減額履歴(被保険者番号);
             if (減額終了分記載区分 == ConfigValuesShiharaiHohoHenko.支払方法変更_終了分記載区分_終了後も記載する) {
-                int historySize = 3;
-                for (int i = 0; i < historySize && i < history.size(); i++) {
+                for (int i = 0; i < 終了分記載区分が終了後も記載する場合の給付制限件数 && i < history.size(); i++) {
                     優先外.add(new KyufuSeigenShutsuryoku(
                             減額記載文言,
                             history.toList().get(i).get適用開始年月日(),
@@ -347,13 +347,13 @@ public class HihokenshaShikakuHakkoHandler {
                 }
             } else {
                 if (!history.isEmpty()) {
-                    if ((!history.toList().get(0).get終了区分().isEmpty())
-                            || (history.toList().get(0).get終了区分().isEmpty()
-                            && history.toList().get(0).get適用終了年月日().isBefore(FlexibleDate.getNowDate()))) {
+                    if ((!history.findFirst().get().get終了区分().isEmpty())
+                            || (history.findFirst().get().get終了区分().isEmpty()
+                            && history.findFirst().get().get適用終了年月日().isBefore(FlexibleDate.getNowDate()))) {
                         優先的.add(new KyufuSeigenShutsuryoku(
                                 減額記載文言,
-                                history.toList().get(0).get適用開始年月日(),
-                                history.toList().get(0).get適用終了年月日()));
+                                history.findFirst().get().get適用開始年月日(),
+                                history.findFirst().get().get適用終了年月日()));
                     }
                 }
             }
