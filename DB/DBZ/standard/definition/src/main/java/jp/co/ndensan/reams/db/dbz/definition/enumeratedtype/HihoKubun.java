@@ -8,7 +8,8 @@ package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 被保区分の列挙型です。
+ * 被保区分の列挙型です。<br />
+ * 本区分は対象者検索独自の区分であり、被保険者区分（第１号被保険者、第２号被保険者）とは異なります。
  *
  * @author N8156 宮本 康
  */
