@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues;
 
+import jp.co.ndensan.reams.db.dbz.business.config.ConfigValueBoolean;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;

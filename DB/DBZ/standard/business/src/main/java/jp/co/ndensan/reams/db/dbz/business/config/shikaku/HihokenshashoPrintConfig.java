@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoPrint;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValueBoolean;
+import jp.co.ndensan.reams.db.dbz.business.config.ConfigValueBoolean;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshaNoPrintType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshashoPrintType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.KyotakuJigyoshaRirekiPrintType;
