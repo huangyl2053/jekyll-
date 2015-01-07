@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0200001.dgGaitoshaList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0200001.TaishoshaSearchDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.IHihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
 import jp.co.ndensan.reams.db.dbz.model.TaishoshaKey;
@@ -45,13 +46,11 @@ public class TaishoshaSearch {
      * @return ResponseData
      */
     public ResponseData onClick_btnSearch(TaishoshaSearchDiv div) {
-        ResponseData<TaishoshaSearchDiv> response = new ResponseData<>();
 
         TaishoshaSearchResult result = get対象者(div.getSearchCondition().getCcdSearchCondition());
         div.getGaitoshaList().getDgGaitoshaList().setDataSource(toRowList(result));
 
-        response.data = div;
-        return response;
+        return ResponseDatas.createSettingDataTo(div);
     }
 
     /**
@@ -61,12 +60,10 @@ public class TaishoshaSearch {
      * @return ResponseData
      */
     public ResponseData onClick_btnReSearch(TaishoshaSearchDiv div) {
-        ResponseData<TaishoshaSearchDiv> response = new ResponseData<>();
 
         div.getGaitoshaList().getDgGaitoshaList().setDataSource(Collections.EMPTY_LIST);
 
-        response.data = div;
-        return response;
+        return ResponseDatas.createSettingDataTo(div);
     }
 
     /**
@@ -76,13 +73,11 @@ public class TaishoshaSearch {
      * @return ResponseData
      */
     public ResponseData onSelect_dgGaitoshaList(TaishoshaSearchDiv div) {
-        ResponseData<TaishoshaSearchDiv> response = new ResponseData<>();
 
         ViewStates.access().valueAssignedTo(ViewStateKey.資格対象者, TaishoshaKey.class).put(create対象者Key(div));
         save最近処理者(div);
 
-        response.data = div;
-        return response;
+        return ResponseDatas.createSettingDataTo(div);
     }
 
     private TaishoshaSearchResult get対象者(IHihokenshaFinderDiv div) {

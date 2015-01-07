@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0300001.dgFukaGaitoshaList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0300001.FukaTaishoshaSearchDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.IHihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
 import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
@@ -49,14 +50,12 @@ public class FukaTaishoshaSearch {
      * @return ResponseData
      */
     public ResponseData onClick_btnSearch(FukaTaishoshaSearchDiv div) {
-        ResponseData<FukaTaishoshaSearchDiv> response = new ResponseData<>();
 
         set賦課年度(div);
         FukaTaishoshaSearchResult result = get対象者(div.getSearchCondition().getCcdSearchCondition());
         div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(toRowList(result));
 
-        response.data = div;
-        return response;
+        return ResponseDatas.createSettingDataTo(div);
     }
 
     /**
@@ -66,12 +65,10 @@ public class FukaTaishoshaSearch {
      * @return ResponseData
      */
     public ResponseData onClick_btnReSearch(FukaTaishoshaSearchDiv div) {
-        ResponseData<FukaTaishoshaSearchDiv> response = new ResponseData<>();
 
         div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(Collections.EMPTY_LIST);
 
-        response.data = div;
-        return response;
+        return ResponseDatas.createSettingDataTo(div);
     }
 
     /**
@@ -81,13 +78,11 @@ public class FukaTaishoshaSearch {
      * @return ResponseData
      */
     public ResponseData onSelect_dgGaitoshaList(FukaTaishoshaSearchDiv div) {
-        ResponseData<FukaTaishoshaSearchDiv> response = new ResponseData<>();
 
         ViewStates.access().valueAssignedTo(ViewStateKey.賦課対象者, FukaTaishoshaKey.class).put(create対象者Key(div));
         save最近処理者(div);
 
-        response.data = div;
-        return response;
+        return ResponseDatas.createSettingDataTo(div);
     }
 
     private void set賦課年度(FukaTaishoshaSearchDiv div) {
