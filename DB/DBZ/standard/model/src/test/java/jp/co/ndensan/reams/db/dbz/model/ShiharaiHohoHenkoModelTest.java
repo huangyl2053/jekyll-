@@ -100,7 +100,7 @@ public class ShiharaiHohoHenkoModelTest extends DbzTestBase {
         @Test
         public void 戻り値の予告通知書再発行フラグは_設定した値と同じ予告通知書再発行フラグを返す() {
             sut.set予告通知書再発行フラグ(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ);
-            assertThat(sut.get予告通知書再発行フラグ(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
+            assertThat(sut.is予告通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
         }
 
         @Test
@@ -148,7 +148,7 @@ public class ShiharaiHohoHenkoModelTest extends DbzTestBase {
         @Test
         public void 戻り値の償還払化通知書再発行フラグは_設定した値と同じ償還払化通知書再発行フラグを返す() {
             sut.set償還払化通知書再発行フラグ(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_償還払化通知書再発行フラグ);
-            assertThat(sut.get償還払化通知書再発行フラグ(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_償還払化通知書再発行フラグ));
+            assertThat(sut.is償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_償還払化通知書再発行フラグ));
         }
 
         @Test
@@ -160,7 +160,7 @@ public class ShiharaiHohoHenkoModelTest extends DbzTestBase {
         @Test
         public void 戻り値の差止対象フラグは_設定した値と同じ差止対象フラグを返す() {
             sut.set差止対象フラグ(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_差止対象フラグ);
-            assertThat(sut.get差止対象フラグ(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_差止対象フラグ));
+            assertThat(sut.is差止対象(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_差止対象フラグ));
         }
 
         @Test
@@ -190,7 +190,7 @@ public class ShiharaiHohoHenkoModelTest extends DbzTestBase {
         @Test
         public void 戻り値の減額通知書再発行フラグは_設定した値と同じ減額通知書再発行フラグを返す() {
             sut.set減額通知書再発行フラグ(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_減額通知書再発行フラグ);
-            assertThat(sut.get減額通知書再発行フラグ(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_減額通知書再発行フラグ));
+            assertThat(sut.is減額通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_減額通知書再発行フラグ));
         }
 
         @Test
@@ -232,7 +232,7 @@ public class ShiharaiHohoHenkoModelTest extends DbzTestBase {
         @Test
         public void 戻り値の無効区分は_設定した値と同じ無効区分を返す() {
             sut.set無効区分(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_無効区分);
-            assertThat(sut.get無効区分(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_無効区分));
+            assertThat(sut.is無効(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_無効区分));
         }
     }
 

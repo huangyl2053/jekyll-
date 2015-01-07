@@ -151,9 +151,9 @@ public class NinteiKekkaJohoModel implements Serializable {
     /**
      * 施設入所の有無を返します。
      *
-     * @return 施設入所の有無
+     * @return 施設入所の有無 {true:入所有 false:入所無}
      */
-    public boolean get施設入所の有無() {
+    public boolean is施設入所() {
         return entity.getShisetsuNyushoFlag();
     }
 

@@ -162,9 +162,9 @@ public class ShiharaiHohoHenkoModel implements Serializable {
     /**
      * 予告通知書再発行フラグを返します。
      *
-     * @return 予告通知書再発行フラグ
+     * @return 予告通知書再発行フラグ {true:再発行 false:再発行ではない}
      */
-    public boolean get予告通知書再発行フラグ() {
+    public boolean is予告通知書再発行() {
         return entity.getYokoku_TsuchiSaiHakkoFlag();
     }
 
@@ -234,9 +234,9 @@ public class ShiharaiHohoHenkoModel implements Serializable {
     /**
      * 償還払化通知書再発行フラグを返します。
      *
-     * @return 償還払化通知書再発行フラグ
+     * @return 償還払化通知書再発行フラグ {true:再発行 false:再発行ではない}
      */
-    public boolean get償還払化通知書再発行フラグ() {
+    public boolean is償還払化通知書再発行() {
         return entity.getShokan_TsuchiSaiHakkoFlag();
     }
 
@@ -252,9 +252,9 @@ public class ShiharaiHohoHenkoModel implements Serializable {
     /**
      * 差止対象フラグを返します。
      *
-     * @return 差止対象フラグ
+     * @return 差止対象フラグ {true:差止対象 false:差止対象ではない}
      */
-    public boolean get差止対象フラグ() {
+    public boolean is差止対象() {
         return entity.getSashitome_Flag();
     }
 
@@ -297,9 +297,9 @@ public class ShiharaiHohoHenkoModel implements Serializable {
     /**
      * 減額通知書再発行フラグを返します。
      *
-     * @return 減額通知書再発行フラグ
+     * @return 減額通知書再発行フラグ {true:再発行 false:再発行ではない}
      */
-    public boolean get減額通知書再発行フラグ() {
+    public boolean is減額通知書再発行() {
         return entity.getGemmen_TsuchiSaiHakkoFlag();
     }
 
@@ -360,9 +360,9 @@ public class ShiharaiHohoHenkoModel implements Serializable {
     /**
      * 無効区分を返します。
      *
-     * @return 無効区分
+     * @return 無効区分 {true:無効 false:有効}
      */
-    public boolean get無効区分() {
+    public boolean is無効() {
         return entity.getMukoKubun();
     }
 

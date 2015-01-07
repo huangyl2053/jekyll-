@@ -99,7 +99,7 @@ public class NinteiKekkaJohoModelTest extends DbzTestBase {
         @Test
         public void 戻り値の施設入所の有無は_設定した値と同じ施設入所の有無を返す() {
             sut.set施設入所の有無(DbT5002NinteiKekkaJohoEntityGenerator.DEFAULT_施設入所の有無);
-            assertThat(sut.get施設入所の有無(), is(DbT5002NinteiKekkaJohoEntityGenerator.DEFAULT_施設入所の有無));
+            assertThat(sut.is施設入所(), is(DbT5002NinteiKekkaJohoEntityGenerator.DEFAULT_施設入所の有無));
         }
 
         @Test
