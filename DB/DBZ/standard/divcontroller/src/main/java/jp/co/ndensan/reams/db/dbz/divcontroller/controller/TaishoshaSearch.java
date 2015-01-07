@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.TaishoshaSearchResult;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureishaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0200001.dgGaitoshaList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0200001.TaishoshaSearchDiv;
@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
 import jp.co.ndensan.reams.db.dbz.model.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.model.TaishoshaModel;
+import jp.co.ndensan.reams.db.dbz.model.util.SearchResult;
 import jp.co.ndensan.reams.db.dbz.realservice.search.ShikakuSearchItem;
 import jp.co.ndensan.reams.db.dbz.realservice.TaishoshaFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.search.FlexibleDateOperator;
@@ -47,7 +48,7 @@ public class TaishoshaSearch {
      */
     public ResponseData onClick_btnSearch(TaishoshaSearchDiv div) {
 
-        TaishoshaSearchResult result = get対象者(div.getSearchCondition().getCcdSearchCondition());
+        SearchResult result = get対象者(div.getSearchCondition().getCcdSearchCondition());
         div.getGaitoshaList().getDgGaitoshaList().setDataSource(toRowList(result));
 
         return ResponseDatas.createSettingDataTo(div);
@@ -80,7 +81,7 @@ public class TaishoshaSearch {
         return ResponseDatas.createSettingDataTo(div);
     }
 
-    private TaishoshaSearchResult get対象者(IHihokenshaFinderDiv div) {
+    private SearchResult get対象者(IHihokenshaFinderDiv div) {
         TaishoshaFinder finder = new TaishoshaFinder();
         return finder.get資格対象者(get介護条件(div), get介護除外条件(div), div.get宛名条件(), div.get最大表示件数());
     }
@@ -136,9 +137,9 @@ public class TaishoshaSearch {
         div.getSearchCondition().getCcdSearchCondition().save最近処理者(row.getShikibetsuCode(), row.getShimei());
     }
 
-    private List<dgGaitoshaList_Row> toRowList(TaishoshaSearchResult result) {
+    private List<dgGaitoshaList_Row> toRowList(SearchResult result) {
         List<dgGaitoshaList_Row> rowList = new ArrayList<>();
-        for (TaishoshaModel 対象者 : result.getList()) {
+        for (TaishoshaModel 対象者 : (IItemList<TaishoshaModel>) result.records()) {
             rowList.add(new dgGaitoshaList_Row(
                     対象者.get被保険者番号() != null ? 対象者.get被保険者番号().value() : RString.EMPTY,
                     対象者.get識別コード() != null ? 対象者.get識別コード().value() : RString.EMPTY,

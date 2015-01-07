@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaModel;
 import jp.co.ndensan.reams.db.dbz.model.TaishoshaModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.TaishoshaRelateDac;
@@ -49,73 +51,73 @@ public class TaishoshaFinderTest extends DbzTestBase {
         @Test
         public void 対象者が0件の時_get資格対象者は_0件の情報を返す() {
             TaishoshaFinder sut = createFinder(0);
-            assertThat(sut.get資格対象者(介護条件, 介護除外条件, 宛名条件, 最大表示件数).getList().size(), is(0));
+            assertThat(sut.get資格対象者(介護条件, 介護除外条件, 宛名条件, 最大表示件数).totalCount(), is(0));
         }
 
         @Test
         public void 対象者が1件の時_get資格対象者は_1件の情報を返す() {
             TaishoshaFinder sut = createFinder(1);
-            assertThat(sut.get資格対象者(介護条件, 介護除外条件, 宛名条件, 最大表示件数).getList().size(), is(1));
+            assertThat(sut.get資格対象者(介護条件, 介護除外条件, 宛名条件, 最大表示件数).totalCount(), is(1));
         }
 
         @Test
         public void 対象者が2件の時_get資格対象者は_2件の情報を返す() {
             TaishoshaFinder sut = createFinder(2);
-            assertThat(sut.get資格対象者(介護条件, 介護除外条件, 宛名条件, 最大表示件数).getList().size(), is(2));
+            assertThat(sut.get資格対象者(介護条件, 介護除外条件, 宛名条件, 最大表示件数).totalCount(), is(2));
         }
 
         @Test
         public void 介護条件指定無_対象者が0件の時_get資格対象者は_0件の情報を返す() {
             TaishoshaFinder sut = createFinder(0);
-            assertThat(sut.get資格対象者(指定無, 介護除外条件, 宛名条件, 最大表示件数).getList().size(), is(0));
+            assertThat(sut.get資格対象者(指定無, 介護除外条件, 宛名条件, 最大表示件数).totalCount(), is(0));
         }
 
         @Test
         public void 介護条件指定無_対象者が1件の時_get資格対象者は_1件の情報を返す() {
             TaishoshaFinder sut = createFinder(1);
-            assertThat(sut.get資格対象者(指定無, 介護除外条件, 宛名条件, 最大表示件数).getList().size(), is(1));
+            assertThat(sut.get資格対象者(指定無, 介護除外条件, 宛名条件, 最大表示件数).totalCount(), is(1));
         }
 
         @Test
         public void 介護条件指定無_対象者が2件の時_get資格対象者は_2件の情報を返す() {
             TaishoshaFinder sut = createFinder(2);
-            assertThat(sut.get資格対象者(指定無, 介護除外条件, 宛名条件, 最大表示件数).getList().size(), is(2));
+            assertThat(sut.get資格対象者(指定無, 介護除外条件, 宛名条件, 最大表示件数).totalCount(), is(2));
         }
 
         @Test
         public void 介護除外条件指定無_対象者が0件の時_get資格対象者は_0件の情報を返す() {
             TaishoshaFinder sut = createFinder(0);
-            assertThat(sut.get資格対象者(介護条件, 指定無, 宛名条件, 最大表示件数).getList().size(), is(0));
+            assertThat(sut.get資格対象者(介護条件, 指定無, 宛名条件, 最大表示件数).totalCount(), is(0));
         }
 
         @Test
         public void 介護除外条件指定無_対象者が1件の時_get資格対象者は_1件の情報を返す() {
             TaishoshaFinder sut = createFinder(1);
-            assertThat(sut.get資格対象者(介護条件, 指定無, 宛名条件, 最大表示件数).getList().size(), is(1));
+            assertThat(sut.get資格対象者(介護条件, 指定無, 宛名条件, 最大表示件数).totalCount(), is(1));
         }
 
         @Test
         public void 介護除外条件指定無_対象者が2件の時_get資格対象者は_2件の情報を返す() {
             TaishoshaFinder sut = createFinder(2);
-            assertThat(sut.get資格対象者(介護条件, 指定無, 宛名条件, 最大表示件数).getList().size(), is(2));
+            assertThat(sut.get資格対象者(介護条件, 指定無, 宛名条件, 最大表示件数).totalCount(), is(2));
         }
 
         @Test
         public void 介護条件無_介護除外条件指定無_対象者が0件の時_get資格対象者は_0件の情報を返す() {
             TaishoshaFinder sut = createFinder(0);
-            assertThat(sut.get資格対象者(指定無, 指定無, 宛名条件, 最大表示件数).getList().size(), is(0));
+            assertThat(sut.get資格対象者(指定無, 指定無, 宛名条件, 最大表示件数).totalCount(), is(0));
         }
 
         @Test
         public void 介護条件無_介護除外条件指定無_対象者が1件の時_get資格対象者は_1件の情報を返す() {
             TaishoshaFinder sut = createFinder(1);
-            assertThat(sut.get資格対象者(指定無, 指定無, 宛名条件, 最大表示件数).getList().size(), is(1));
+            assertThat(sut.get資格対象者(指定無, 指定無, 宛名条件, 最大表示件数).totalCount(), is(1));
         }
 
         @Test
         public void 介護条件無_介護除外条件指定無_対象者が2件の時_get資格対象者は_2件の情報を返す() {
             TaishoshaFinder sut = createFinder(2);
-            assertThat(sut.get資格対象者(指定無, 指定無, 宛名条件, 最大表示件数).getList().size(), is(2));
+            assertThat(sut.get資格対象者(指定無, 指定無, 宛名条件, 最大表示件数).totalCount(), is(2));
         }
     }
 
@@ -124,73 +126,73 @@ public class TaishoshaFinderTest extends DbzTestBase {
         @Test
         public void 対象者が0件の時_get賦課対象者は_0件の情報を返す() {
             TaishoshaFinder sut = createFinder(0);
-            assertThat(sut.get賦課対象者(介護条件, 介護除外条件, 宛名条件, 最大表示件数).getList().size(), is(0));
+            assertThat(sut.get賦課対象者(介護条件, 介護除外条件, 宛名条件, 最大表示件数).totalCount(), is(0));
         }
 
         @Test
         public void 対象者が1件の時_get賦課対象者は_1件の情報を返す() {
             TaishoshaFinder sut = createFinder(1);
-            assertThat(sut.get賦課対象者(介護条件, 介護除外条件, 宛名条件, 最大表示件数).getList().size(), is(1));
+            assertThat(sut.get賦課対象者(介護条件, 介護除外条件, 宛名条件, 最大表示件数).totalCount(), is(1));
         }
 
         @Test
         public void 対象者が2件の時_get賦課対象者は_2件の情報を返す() {
             TaishoshaFinder sut = createFinder(2);
-            assertThat(sut.get賦課対象者(介護条件, 介護除外条件, 宛名条件, 最大表示件数).getList().size(), is(2));
+            assertThat(sut.get賦課対象者(介護条件, 介護除外条件, 宛名条件, 最大表示件数).totalCount(), is(2));
         }
 
         @Test
         public void 介護条件指定無_対象者が0件の時_get賦課対象者は_0件の情報を返す() {
             TaishoshaFinder sut = createFinder(0);
-            assertThat(sut.get賦課対象者(指定無, 介護除外条件, 宛名条件, 最大表示件数).getList().size(), is(0));
+            assertThat(sut.get賦課対象者(指定無, 介護除外条件, 宛名条件, 最大表示件数).totalCount(), is(0));
         }
 
         @Test
         public void 介護条件指定無_対象者が1件の時_get賦課対象者は_1件の情報を返す() {
             TaishoshaFinder sut = createFinder(1);
-            assertThat(sut.get賦課対象者(指定無, 介護除外条件, 宛名条件, 最大表示件数).getList().size(), is(1));
+            assertThat(sut.get賦課対象者(指定無, 介護除外条件, 宛名条件, 最大表示件数).totalCount(), is(1));
         }
 
         @Test
         public void 介護条件指定無_対象者が2件の時_get賦課対象者は_2件の情報を返す() {
             TaishoshaFinder sut = createFinder(2);
-            assertThat(sut.get賦課対象者(指定無, 介護除外条件, 宛名条件, 最大表示件数).getList().size(), is(2));
+            assertThat(sut.get賦課対象者(指定無, 介護除外条件, 宛名条件, 最大表示件数).totalCount(), is(2));
         }
 
         @Test
         public void 介護除外条件指定無_対象者が0件の時_get賦課対象者は_0件の情報を返す() {
             TaishoshaFinder sut = createFinder(0);
-            assertThat(sut.get賦課対象者(介護条件, 指定無, 宛名条件, 最大表示件数).getList().size(), is(0));
+            assertThat(sut.get賦課対象者(介護条件, 指定無, 宛名条件, 最大表示件数).totalCount(), is(0));
         }
 
         @Test
         public void 介護除外条件指定無_対象者が1件の時_get賦課対象者は_1件の情報を返す() {
             TaishoshaFinder sut = createFinder(1);
-            assertThat(sut.get賦課対象者(介護条件, 指定無, 宛名条件, 最大表示件数).getList().size(), is(1));
+            assertThat(sut.get賦課対象者(介護条件, 指定無, 宛名条件, 最大表示件数).totalCount(), is(1));
         }
 
         @Test
         public void 介護除外条件指定無_対象者が2件の時_get賦課対象者は_2件の情報を返す() {
             TaishoshaFinder sut = createFinder(2);
-            assertThat(sut.get賦課対象者(介護条件, 指定無, 宛名条件, 最大表示件数).getList().size(), is(2));
+            assertThat(sut.get賦課対象者(介護条件, 指定無, 宛名条件, 最大表示件数).totalCount(), is(2));
         }
 
         @Test
         public void 介護条件指定無_介護除外条件指定無_対象者が0件の時_get賦課対象者は_0件の情報を返す() {
             TaishoshaFinder sut = createFinder(0);
-            assertThat(sut.get賦課対象者(指定無, 指定無, 宛名条件, 最大表示件数).getList().size(), is(0));
+            assertThat(sut.get賦課対象者(指定無, 指定無, 宛名条件, 最大表示件数).totalCount(), is(0));
         }
 
         @Test
         public void 介護条件指定無_介護除外条件指定無_対象者が1件の時_get賦課対象者は_1件の情報を返す() {
             TaishoshaFinder sut = createFinder(1);
-            assertThat(sut.get賦課対象者(指定無, 指定無, 宛名条件, 最大表示件数).getList().size(), is(1));
+            assertThat(sut.get賦課対象者(指定無, 指定無, 宛名条件, 最大表示件数).totalCount(), is(1));
         }
 
         @Test
         public void 介護条件指定無_介護除外条件指定無_対象者が2件の時_get賦課対象者は_2件の情報を返す() {
             TaishoshaFinder sut = createFinder(2);
-            assertThat(sut.get賦課対象者(指定無, 指定無, 宛名条件, 最大表示件数).getList().size(), is(2));
+            assertThat(sut.get賦課対象者(指定無, 指定無, 宛名条件, 最大表示件数).totalCount(), is(2));
         }
     }
 
@@ -200,27 +202,27 @@ public class TaishoshaFinderTest extends DbzTestBase {
 
     private static TaishoshaRelateDac createDac(int count) {
         TaishoshaRelateDac dac = mock(TaishoshaRelateDac.class);
-        List<TaishoshaModel> list = createTaishoshaList(count);
-        List<FukaTaishoshaModel> fukaList = createFukaTaishoshaList(count);
+        IItemList<TaishoshaModel> list = createTaishoshaList(count);
+        IItemList<FukaTaishoshaModel> fukaList = createFukaTaishoshaList(count);
         when(dac.select資格対象者(any(ITrueFalseCriteria.class), any(IPsmCriteria.class), any(boolean.class), any(int.class))).thenReturn(list);
         when(dac.select賦課対象者(any(ITrueFalseCriteria.class), any(IPsmCriteria.class), any(boolean.class), any(int.class))).thenReturn(fukaList);
         return dac;
     }
 
-    private static List<TaishoshaModel> createTaishoshaList(int count) {
+    private static IItemList<TaishoshaModel> createTaishoshaList(int count) {
         List<TaishoshaModel> list = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             list.add(mock(TaishoshaModel.class));
         }
-        return list;
+        return ItemList.of(list);
     }
 
-    private static List<FukaTaishoshaModel> createFukaTaishoshaList(int count) {
+    private static IItemList<FukaTaishoshaModel> createFukaTaishoshaList(int count) {
         List<FukaTaishoshaModel> list = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             list.add(mock(FukaTaishoshaModel.class));
         }
-        return list;
+        return ItemList.of(list);
     }
 
     private static IShikibetsuTaishoSearchKey create宛名条件() {
