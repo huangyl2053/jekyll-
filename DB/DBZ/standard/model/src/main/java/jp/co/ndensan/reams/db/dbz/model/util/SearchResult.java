@@ -47,19 +47,19 @@ public final class SearchResult<E> {
      * @param exceesLimit 取得の上限を超えたかどうか
      * @return
      * 指定の{@link #totalCount() totalCount()}, {@link #exceedsLimit() exceedsLimit()}を返す{@link SearchResult}
-     * @throws IllegalArgumentException 引数の{@code totalCount}が1より小さい時
+     * @throws IllegalArgumentException 引数の{@code totalCount}が{@code 0}より小さい時
      * @throws NullPointerException 引数の{@code itemList}が{@code null}の時
      */
     public static <T> SearchResult of(IItemList<? extends T> records, int totalCount, boolean exceesLimit)
             throws IllegalArgumentException, NullPointerException {
-        _requireMoreThanZero(totalCount, ARG_TOTAL_COUNT);
+        _requireZeroAndMore(totalCount, ARG_TOTAL_COUNT);
         _requireNonNull(records, ARG_RECORDS);
         return new SearchResult(ItemList.newItemList(records), totalCount, exceesLimit);
     }
 
-    private static void _requireMoreThanZero(int intValue, RString name) {
-        if (intValue < 1) {
-            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace(name.toString(), "1以上").evaluate());
+    private static void _requireZeroAndMore(int intValue, RString name) {
+        if (intValue < 0) {
+            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace(name.toString(), "0以上").evaluate());
         }
     }
 
@@ -76,12 +76,12 @@ public final class SearchResult<E> {
      * @param exceedsLimit 取得の上限を超えたかどうか
      * @return
      * 指定の{@link #totalCount() totalCount()}, {@link #exceedsLimit() exceedsLimit()}を返す{@link SearchResult}
-     * @throws IllegalArgumentException 引数の{@code totalCount}が1より小さい時
+     * @throws IllegalArgumentException 引数の{@code totalCount}が{@code 0}より小さい時
      * @throws NullPointerException 引数の{@code list}が{@code null}の時
      */
     public static <T> SearchResult of(List<? extends T> records, int totalCount, boolean exceedsLimit)
             throws IllegalArgumentException, NullPointerException {
-        _requireMoreThanZero(totalCount, ARG_TOTAL_COUNT);
+        _requireZeroAndMore(totalCount, ARG_TOTAL_COUNT);
         _requireNonNull(records, ARG_RECORDS);
         return new SearchResult(ItemList.of(records), totalCount, exceedsLimit);
     }
@@ -100,11 +100,11 @@ public final class SearchResult<E> {
      * @param records 検索結果として取得させる要素の{@link IItemList}
      * @param totalCount {@link #totalCount() totalCount()}の戻り値
      * @return 指定の{@link #totalCount()}を返す{@link SearchResult}
-     * @throws IllegalArgumentException 引数の{@code totalCount}が1より小さい時
+     * @throws IllegalArgumentException 引数の{@code totalCount}が{@code 0}より小さい時
      * @throws NullPointerException 引数の{@code itemList}が{@code null}の時
      */
     public static <T> SearchResult of(IItemList<? extends T> records, int totalCount) throws IllegalArgumentException, NullPointerException {
-        _requireMoreThanZero(totalCount, ARG_TOTAL_COUNT);
+        _requireZeroAndMore(totalCount, ARG_TOTAL_COUNT);
         _requireNonNull(records, ARG_RECORDS);
         return new SearchResult(ItemList.newItemList(records), totalCount);
     }
@@ -119,7 +119,7 @@ public final class SearchResult<E> {
      * @param records 検索結果として取得させる要素の{@link List}
      * @param totalCount {@link #totalCount() totalCount()}の戻り値
      * @return 指定の{@link #totalCount()}を返す{@link SearchResult}
-     * @throws IllegalArgumentException 引数の{@code totalCount}が{@code 1}より小さい時
+     * @throws IllegalArgumentException 引数の{@code totalCount}が{@code 0}より小さい時
      * @throws NullPointerException 引数の{@code list}が{@code null}の時
      */
     public static <T> SearchResult of(List<? extends T> records, int totalCount) throws IllegalArgumentException, NullPointerException {
