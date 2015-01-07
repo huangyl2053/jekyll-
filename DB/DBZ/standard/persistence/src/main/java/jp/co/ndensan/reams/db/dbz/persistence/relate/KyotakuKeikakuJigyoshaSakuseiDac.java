@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSaku
 import jp.co.ndensan.reams.db.dbz.model.KyotakuKeikakuJigyoshaSakuseiModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -51,7 +53,7 @@ public class KyotakuKeikakuJigyoshaSakuseiDac implements IModifiable<KyotakuKeik
      * @return KyotakuKeikakuJigyoshaSakuseiModel
      */
     @Transaction
-    public KyotakuKeikakuJigyoshaSakuseiModel selectByKey(RString 被保険者番号,
+    public IOptional<KyotakuKeikakuJigyoshaSakuseiModel> selectByKey(RString 被保険者番号,
             RString 証記載保険者番号,
             ShikibetsuCode 識別コード,
             FlexibleYearMonth 対象年月,
@@ -63,8 +65,8 @@ public class KyotakuKeikakuJigyoshaSakuseiDac implements IModifiable<KyotakuKeik
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
-        return createModel(居宅給付計画事業者作成Dac.selectByKey(被保険者番号, 証記載保険者番号,
-                識別コード, 対象年月, 処理日時));
+        return DbOptional.ofNullable(createModel(居宅給付計画事業者作成Dac.selectByKey(被保険者番号, 証記載保険者番号,
+                識別コード, 対象年月, 処理日時)));
     }
 
     /**
@@ -96,7 +98,7 @@ public class KyotakuKeikakuJigyoshaSakuseiDac implements IModifiable<KyotakuKeik
      * @return KyotakuKeikakuJigyoshaSakuseiModel
      */
     @Transaction
-    public KyotakuKeikakuJigyoshaSakuseiModel select直近居宅給付計画事業者作成(RString 被保険者番号,
+    public IOptional<KyotakuKeikakuJigyoshaSakuseiModel> select直近居宅給付計画事業者作成(RString 被保険者番号,
             RString 証記載保険者番号,
             ShikibetsuCode 識別コード,
             FlexibleYearMonth 対象年月) {
@@ -119,10 +121,10 @@ public class KyotakuKeikakuJigyoshaSakuseiDac implements IModifiable<KyotakuKeik
                 toList(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity.class);
 
         if (居宅給付計画事業者作成List.isEmpty()) {
-            return null;
+            return DbOptional.empty();
         }
 
-        return createModel(居宅給付計画事業者作成List.get(0));
+        return DbOptional.ofNullable(createModel(居宅給付計画事業者作成List.get(0)));
     }
 
     private KyotakuKeikakuJigyoshaSakuseiModel createModel(DbT3006KyotakuKeikakuJigyoshaSakuseiEntity 居宅給付計画事業者作成エンティティ) {

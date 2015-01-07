@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -88,13 +87,13 @@ public class KyotakuKeikakuJigyoshaSakuseiDacTest {
         // TODO 個別のMapperのテストクラスで項目単位の転記処理を確認しているため、全項目について確認する必要はありません。
         @Test
         public void データが見つかる検索条件を渡すと_居宅給付計画事業者作成モデル返す() {
-            assertThat(sut.selectByKey(被保険者番号1, 証記載保険者番号1, 識別コード1, 対象年月1, 処理日時1).get被保険者番号(), is(被保険者番号1));
+            assertThat(sut.selectByKey(被保険者番号1, 証記載保険者番号1, 識別コード1, 対象年月1, 処理日時1).get().get被保険者番号(), is(被保険者番号1));
         }
 
         // データが見つからない値を指定するように修正してください。
         @Test
-        public void データが見つかない検索条件を渡すと_nullを返す() {
-            assertThat(sut.selectByKey(被保険者番号2, 証記載保険者番号1, 識別コード1, 対象年月1, 処理日時1), is(nullValue()));
+        public void データが見つかない検索条件を渡すと_データ無しを返す() {
+            assertThat(sut.selectByKey(被保険者番号2, 証記載保険者番号1, 識別コード1, 対象年月1, 処理日時1).isPresent(), is(false));
         }
     }
 
@@ -144,13 +143,13 @@ public class KyotakuKeikakuJigyoshaSakuseiDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_居宅給付計画事業者作成モデル返す() {
-            assertThat(sut.select直近居宅給付計画事業者作成(被保険者番号1, 証記載保険者番号1, 識別コード1, 対象年月1).get被保険者番号(), is(被保険者番号1));
+            assertThat(sut.select直近居宅給付計画事業者作成(被保険者番号1, 証記載保険者番号1, 識別コード1, 対象年月1).get().get被保険者番号(), is(被保険者番号1));
         }
 
         // データが見つからない値を指定するように修正してください。
         @Test
-        public void データが見つかない検索条件を渡すと_nullを返す() {
-            assertThat(sut.select直近居宅給付計画事業者作成(被保険者番号2, 証記載保険者番号2, 識別コード1, 対象年月1), is(nullValue()));
+        public void データが見つかない検索条件を渡すと_データ無しを返す() {
+            assertThat(sut.select直近居宅給付計画事業者作成(被保険者番号2, 証記載保険者番号2, 識別コード1, 対象年月1).isPresent(), is(false));
         }
 
     }

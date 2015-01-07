@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -81,12 +80,12 @@ public class JukyushaDaichoDacTest {
         // TODO 個別のMapperのテストクラスで項目単位の転記処理を確認しているため、全項目について確認する必要はありません。
         @Test
         public void selectByKeyTest_データが見つかる検索条件を渡すと_受給者台帳モデル返す() {
-            assertThat(sut.selectByKey(証記載保険者番号1, 被保険者番号1, 申請書管理番号1, 処理日時1).get証記載保険者番号(), is(証記載保険者番号1));
+            assertThat(sut.selectByKey(証記載保険者番号1, 被保険者番号1, 申請書管理番号1, 処理日時1).get().get証記載保険者番号(), is(証記載保険者番号1));
         }
 
         @Test
-        public void selectByKeyTest_データが見つかない検索条件を渡すと_nullを返す() {
-            assertThat(sut.selectByKey(証記載保険者番号2, 被保険者番号1, 申請書管理番号1, 処理日時1), is(nullValue()));
+        public void selectByKeyTest_データが見つかない検索条件を渡すと_データ無しを返す() {
+            assertThat(sut.selectByKey(証記載保険者番号2, 被保険者番号1, 申請書管理番号1, 処理日時1).isPresent(), is(false));
         }
     }
 

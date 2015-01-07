@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.KyotakuKeikakuJikoSakuseiModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.KyotakuKeikakuJikoSakuseiDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -52,7 +53,7 @@ public class KyotakuKeikakuJikoSakuseiManager {
      * @return KyotakuKeikakuJikoSakuseiModel
      */
     @Transaction
-    public KyotakuKeikakuJikoSakuseiModel get居宅給付計画自己作成(HihokenshaNo 被保険者番号,
+    public IOptional<KyotakuKeikakuJikoSakuseiModel> get居宅給付計画自己作成(HihokenshaNo 被保険者番号,
             HokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             FlexibleYearMonth 対象年月,
@@ -82,7 +83,7 @@ public class KyotakuKeikakuJikoSakuseiManager {
      * @return KyotakuKeikakuJikoSakuseiModel
      */
     @Transaction
-    public KyotakuKeikakuJikoSakuseiModel get直近居宅給付計画自己作成(HihokenshaNo 被保険者番号,
+    public IOptional<KyotakuKeikakuJikoSakuseiModel> get直近居宅給付計画自己作成(HihokenshaNo 被保険者番号,
             HokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             FlexibleYearMonth 対象年月) {

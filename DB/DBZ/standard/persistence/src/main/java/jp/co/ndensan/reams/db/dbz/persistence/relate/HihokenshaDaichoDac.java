@@ -49,7 +49,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
      * @return HihokenshaDaichoModel
      */
     @Transaction
-    public HihokenshaDaichoModel selectByKey(LasdecCode 市町村コード,
+    public IOptional<HihokenshaDaichoModel> selectByKey(LasdecCode 市町村コード,
             HihokenshaNo 被保険者番号,
             YMDHMS 処理日時) {
 
@@ -57,7 +57,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
-        return createModel(被保険者台帳Dac.selectByKey(市町村コード, 被保険者番号, 処理日時));
+        return DbOptional.ofNullable(createModel(被保険者台帳Dac.selectByKey(市町村コード, 被保険者番号, 処理日時)));
     }
 
     /**
@@ -101,7 +101,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
             return DbOptional.empty();
         }
 
-        return DbOptional.of(createModel(被保険者台帳List.get(0)));
+        return DbOptional.ofNullable(createModel(被保険者台帳List.get(0)));
     }
 
     private HihokenshaDaichoModel createModel(DbT1001HihokenshaDaichoEntity 被保険者台帳エンティティ) {

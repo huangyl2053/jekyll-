@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.model.JukyushaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -49,7 +51,7 @@ public class JukyushaDaichoDac implements IModifiable<JukyushaDaichoModel> {
      * @return JukyushaDaichoModel
      */
     @Transaction
-    public JukyushaDaichoModel selectByKey(ShoKisaiHokenshaNo 証記載保険者番号,
+    public IOptional<JukyushaDaichoModel> selectByKey(ShoKisaiHokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
             ShinseishoKanriNo 申請書管理番号,
             YMDHMS 処理日時) {
@@ -59,7 +61,7 @@ public class JukyushaDaichoDac implements IModifiable<JukyushaDaichoModel> {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
-        return createModel(受給者台帳Dac.selectByKey(証記載保険者番号, 被保険者番号, 申請書管理番号, 処理日時));
+        return DbOptional.ofNullable(createModel(受給者台帳Dac.selectByKey(証記載保険者番号, 被保険者番号, 申請書管理番号, 処理日時)));
     }
 
     /**

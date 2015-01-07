@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriN
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.JukyushaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.JukyushaDaichoDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -50,7 +51,7 @@ public class JukyushaDaichoManager {
      * @return JukyushaDaichoModel
      */
     @Transaction
-    public JukyushaDaichoModel get受給者台帳(ShoKisaiHokenshaNo 証記載保険者番号,
+    public IOptional<JukyushaDaichoModel> get受給者台帳(ShoKisaiHokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
             ShinseishoKanriNo 申請書管理番号,
             YMDHMS 処理日時) {

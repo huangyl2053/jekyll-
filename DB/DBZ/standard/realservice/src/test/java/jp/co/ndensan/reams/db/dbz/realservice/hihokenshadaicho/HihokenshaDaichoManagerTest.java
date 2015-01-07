@@ -52,17 +52,17 @@ public class HihokenshaDaichoManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_被保険者台帳が返る() {
 
-            HihokenshaDaichoModel 被保険者台帳モデル = createModel();
+            IOptional<HihokenshaDaichoModel> 被保険者台帳モデル = DbOptional.ofNullable(createModel());
 
             when(dac.selectByKey(any(LasdecCode.class), any(HihokenshaNo.class), any(YMDHMS.class))).thenReturn(被保険者台帳モデル);
 
-            HihokenshaDaichoModel 被保険者台帳 = sut.get被保険者台帳(
+            IOptional<HihokenshaDaichoModel> 被保険者台帳 = sut.get被保険者台帳(
                     DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_市町村コード,
                     DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号,
                     DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_処理日時);
 
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(被保険者台帳.get被保険者番号(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号));
+            assertThat(被保険者台帳.get().get被保険者番号(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号));
         }
     }
 
@@ -90,7 +90,7 @@ public class HihokenshaDaichoManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_被保険者台帳が返る() {
 
-            IOptional<HihokenshaDaichoModel> 被保険者台帳モデル = DbOptional.of(createModel());
+            IOptional<HihokenshaDaichoModel> 被保険者台帳モデル = DbOptional.ofNullable(createModel());
 
             when(dac.select直近被保険者台帳(any(HihokenshaNo.class))).thenReturn(被保険者台帳モデル);
 

@@ -8,13 +8,13 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.model.ServiceShuruiShikyuGendoGakuModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.ServiceShuruiShikyuGendoGakuDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -52,7 +52,7 @@ public class ServiceShuruiShikyuGendoGakuManager {
      * @return ServiceShuruiShikyuGendoGakuModel
      */
     @Transaction
-    public ServiceShuruiShikyuGendoGakuModel getサービス種類支給限度額(ServiceShuruiCode サービス種類コード,
+    public IOptional<ServiceShuruiShikyuGendoGakuModel> getサービス種類支給限度額(ServiceShuruiCode サービス種類コード,
             IYokaigoJotaiKubun 要介護状態区分,
             FlexibleYearMonth 適用開始年月,
             YMDHMS 処理日時) {

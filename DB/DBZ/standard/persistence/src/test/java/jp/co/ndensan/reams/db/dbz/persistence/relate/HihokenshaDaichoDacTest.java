@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -73,13 +72,13 @@ public class HihokenshaDaichoDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_被保険者台帳モデル返す() {
-            assertThat(sut.selectByKey(市町村コード1, 被保険者番号1, 処理日時1).get市町村コード(), is(市町村コード1));
+            assertThat(sut.selectByKey(市町村コード1, 被保険者番号1, 処理日時1).get().get市町村コード(), is(市町村コード1));
         }
 
         // データが見つからない値を指定するように修正してください。
         @Test
-        public void データが見つかない検索条件を渡すと_nullを返す() {
-            assertThat(sut.selectByKey(市町村コード2, 被保険者番号1, 処理日時1), is(nullValue()));
+        public void データが見つかない検索条件を渡すと_データ無しを返す() {
+            assertThat(sut.selectByKey(市町村コード2, 被保険者番号1, 処理日時1).isPresent(), is(false));
         }
     }
 
@@ -119,8 +118,8 @@ public class HihokenshaDaichoDacTest {
 
         // データが見つからない値を指定するように修正してください。
         @Test
-        public void データが見つかない検索条件を渡すと_nullを返す() {
-            assertThat(sut.select直近被保険者台帳(被保険者番号2), is(nullValue()));
+        public void データが見つかない検索条件を渡すと_データ無しを返す() {
+            assertThat(sut.select直近被保険者台帳(被保険者番号2).isPresent(), is(false));
         }
 
     }

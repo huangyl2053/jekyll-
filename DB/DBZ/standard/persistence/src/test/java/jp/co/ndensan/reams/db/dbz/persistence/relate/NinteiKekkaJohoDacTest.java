@@ -65,13 +65,13 @@ public class NinteiKekkaJohoDacTest {
         // TODO 個別のMapperのテストクラスで項目単位の転記処理を確認しているため、全項目について確認する必要はありません。
         @Test
         public void データが見つかる検索条件を渡すと_要介護認定結果情報モデル返す() {
-            assertThat(sut.selectByKey(申請書管理番号1, 処理日時1).get申請書管理番号(), is(申請書管理番号1.value()));
+            assertThat(sut.selectByKey(申請書管理番号1, 処理日時1).get().get申請書管理番号(), is(申請書管理番号1.value()));
         }
 
         // データが見つからない値を指定するように修正してください。
         @Test
-        public void データが見つかない検索条件を渡すと_nullを返す() {
-            assertThat(sut.selectByKey(申請書管理番号2, 処理日時1), is(nullValue()));
+        public void データが見つかない検索条件を渡すと_データ無しを返す() {
+            assertThat(sut.selectByKey(申請書管理番号2, 処理日時1).isPresent(), is(false));
         }
     }
 
@@ -106,12 +106,12 @@ public class NinteiKekkaJohoDacTest {
 
         @Test
         public void データが見つかる検索条件を渡すと_要介護認定結果情報モデル返す() {
-            assertThat(sut.select直近要介護認定結果情報By申請書管理番号(申請書管理番号1).get申請書管理番号(), is(申請書管理番号1.value()));
+            assertThat(sut.select直近要介護認定結果情報By申請書管理番号(申請書管理番号1).get().get申請書管理番号(), is(申請書管理番号1.value()));
         }
 
         @Test
-        public void データが見つかない検索条件を渡すと_nullを返す() {
-            assertThat(sut.select直近要介護認定結果情報By申請書管理番号(申請書管理番号2), is(nullValue()));
+        public void データが見つかない検索条件を渡すと_データ無しを返す() {
+            assertThat(sut.select直近要介護認定結果情報By申請書管理番号(申請書管理番号2).isPresent(), is(false));
         }
     }
 

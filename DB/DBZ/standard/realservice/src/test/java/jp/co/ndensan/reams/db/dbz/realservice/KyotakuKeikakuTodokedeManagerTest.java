@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3005KyotakuKeikakuTodok
 import jp.co.ndensan.reams.db.dbz.model.KyotakuKeikakuTodokedeModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.KyotakuKeikakuTodokedeDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -52,13 +54,13 @@ public class KyotakuKeikakuTodokedeManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_居宅給付計画届出が返る() {
 
-            KyotakuKeikakuTodokedeModel 居宅給付計画届出モデル = createModel();
+            IOptional<KyotakuKeikakuTodokedeModel> 居宅給付計画届出モデル = DbOptional.ofNullable(createModel());
 
             when(dac.selectByKey(any(HihokenshaNo.class), any(HokenshaNo.class),
                     any(ShikibetsuCode.class), any(FlexibleYearMonth.class), any(YMDHMS.class)))
                     .thenReturn(居宅給付計画届出モデル);
 
-            KyotakuKeikakuTodokedeModel 居宅給付計画届出 = sut.get居宅給付計画届出(
+            IOptional<KyotakuKeikakuTodokedeModel> 居宅給付計画届出 = sut.get居宅給付計画届出(
                     DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_被保険者番号,
                     DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_証記載保険者番号,
                     DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_識別コード,
@@ -66,7 +68,7 @@ public class KyotakuKeikakuTodokedeManagerTest {
                     DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_処理日時);
 
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(居宅給付計画届出.get届出区分(), is(DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_届出区分));
+            assertThat(居宅給付計画届出.get().get届出区分(), is(DbT3005KyotakuKeikakuTodokedeEntityGenerator.DEFAULT_届出区分));
         }
     }
 

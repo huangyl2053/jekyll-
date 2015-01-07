@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.model.NinteiShinseiJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
@@ -46,7 +47,7 @@ public class NinteiShinseiJohoManager {
      * @return NinteiShinseiJohoModel
      */
     @Transaction
-    public NinteiShinseiJohoModel get要介護認定申請情報(ShinseishoKanriNo 申請書管理番号, YMDHMS 処理日時) {
+    public IOptional<NinteiShinseiJohoModel> get要介護認定申請情報(ShinseishoKanriNo 申請書管理番号, YMDHMS 処理日時) {
 
         return dac.selectByKey(申請書管理番号, 処理日時);
     }
@@ -68,7 +69,7 @@ public class NinteiShinseiJohoManager {
      * @return NinteiShinseiJohoModel
      */
     @Transaction
-    public NinteiShinseiJohoModel get要介護認定申請情報(ShinseishoKanriNo 申請書管理番号) {
+    public IOptional<NinteiShinseiJohoModel> get要介護認定申請情報(ShinseishoKanriNo 申請書管理番号) {
 
         return dac.select要介護認定申請情報By申請書管理番号(申請書管理番号);
     }

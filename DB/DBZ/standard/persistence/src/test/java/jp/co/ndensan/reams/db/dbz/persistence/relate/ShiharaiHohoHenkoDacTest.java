@@ -90,13 +90,13 @@ public class ShiharaiHohoHenkoDacTest {
         // TODO 個別のMapperのテストクラスで項目単位の転記処理を確認しているため、全項目について確認する必要はありません。
         @Test
         public void データが見つかる検索条件を渡すと_支払方法変更モデル返す() {
-            assertThat(sut.selectByKey(証記載保険者番号1, 被保険者番号1, 管理区分1, 処理日時1).get証記載保険者番号(), is(証記載保険者番号1));
+            assertThat(sut.selectByKey(証記載保険者番号1, 被保険者番号1, 管理区分1, 処理日時1).get().get証記載保険者番号(), is(証記載保険者番号1));
         }
 
         // データが見つからない値を指定するように修正してください。
         @Test
-        public void データが見つかない検索条件を渡すと_nullを返す() {
-            assertThat(sut.selectByKey(証記載保険者番号2, 被保険者番号1, 管理区分1, 処理日時1), is(nullValue()));
+        public void データが見つかない検索条件を渡すと_データ無しを返す() {
+            assertThat(sut.selectByKey(証記載保険者番号2, 被保険者番号1, 管理区分1, 処理日時1).isPresent(), is(false));
         }
     }
 

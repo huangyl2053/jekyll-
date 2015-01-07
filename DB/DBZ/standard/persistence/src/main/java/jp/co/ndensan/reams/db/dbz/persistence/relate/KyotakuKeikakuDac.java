@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.model.relate.KyotakuKeikakuRelateModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -93,28 +94,28 @@ public class KyotakuKeikakuDac {
         return FlexibleDate.MIN;
     }
 
-    private KyotakuKeikakuJigyoshaSakuseiModel select居宅給付計画事業者作成ByKey(RString 被保険者番号,
+    private IOptional<KyotakuKeikakuJigyoshaSakuseiModel> select居宅給付計画事業者作成ByKey(RString 被保険者番号,
             RString 証記載保険者番号,
             ShikibetsuCode 識別コード,
             FlexibleYearMonth 対象年月) {
-        KyotakuKeikakuJigyoshaSakuseiModel model = 居宅給付計画事業者作成Dac.select直近居宅給付計画事業者作成(被保険者番号,
+        IOptional<KyotakuKeikakuJigyoshaSakuseiModel> model = 居宅給付計画事業者作成Dac.select直近居宅給付計画事業者作成(被保険者番号,
                 証記載保険者番号,
                 識別コード,
                 対象年月);
 
-        return (model == null) ? null : model;
+        return model;
     }
 
-    private KyotakuKeikakuJikoSakuseiModel select居宅給付計画自己作成ByKey(HihokenshaNo 被保険者番号,
+    private IOptional<KyotakuKeikakuJikoSakuseiModel> select居宅給付計画自己作成ByKey(HihokenshaNo 被保険者番号,
             HokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             FlexibleYearMonth 対象年月) {
-        KyotakuKeikakuJikoSakuseiModel model = 居宅給付計画自己作成Dac.select直近居宅給付計画自己作成(被保険者番号,
+        IOptional<KyotakuKeikakuJikoSakuseiModel> model = 居宅給付計画自己作成Dac.select直近居宅給付計画自己作成(被保険者番号,
                 証記載保険者番号,
                 識別コード,
                 対象年月);
 
-        return (model == null) ? null : model;
+        return model;
     }
 
     private KyotakuKeikakuRelateModel createModel(KyotakuKeikakuTodokedeModel 居宅給付計画届出Model) {
@@ -124,14 +125,14 @@ public class KyotakuKeikakuDac {
 
         return new KyotakuKeikakuRelateModel(
                 居宅給付計画届出Model,
-                DbOptional.ofNullable(select居宅給付計画事業者作成ByKey(居宅給付計画届出Model.get被保険者番号().value(),
-                                居宅給付計画届出Model.get証記載保険者番号().value(),
-                                居宅給付計画届出Model.get識別コード(),
-                                居宅給付計画届出Model.get対象年月())),
-                DbOptional.ofNullable(select居宅給付計画自己作成ByKey(居宅給付計画届出Model.get被保険者番号(),
-                                居宅給付計画届出Model.get証記載保険者番号(),
-                                居宅給付計画届出Model.get識別コード(),
-                                居宅給付計画届出Model.get対象年月())));
+                select居宅給付計画事業者作成ByKey(居宅給付計画届出Model.get被保険者番号().value(),
+                        居宅給付計画届出Model.get証記載保険者番号().value(),
+                        居宅給付計画届出Model.get識別コード(),
+                        居宅給付計画届出Model.get対象年月()),
+                select居宅給付計画自己作成ByKey(居宅給付計画届出Model.get被保険者番号(),
+                        居宅給付計画届出Model.get証記載保険者番号(),
+                        居宅給付計画届出Model.get識別コード(),
+                        居宅給付計画届出Model.get対象年月()));
     }
 
 }

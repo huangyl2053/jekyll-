@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbz.model.ShiharaiHohoHenkoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT4021ShiharaiHohoHenkoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -50,7 +52,7 @@ public class ShiharaiHohoHenkoDac implements IModifiable<ShiharaiHohoHenkoModel>
      * @return ShiharaiHohoHenkoModel
      */
     @Transaction
-    public ShiharaiHohoHenkoModel selectByKey(ShoKisaiHokenshaNo 証記載保険者番号,
+    public IOptional<ShiharaiHohoHenkoModel> selectByKey(ShoKisaiHokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
             RString 管理区分,
             YMDHMS 処理日時) {
@@ -59,7 +61,7 @@ public class ShiharaiHohoHenkoDac implements IModifiable<ShiharaiHohoHenkoModel>
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(管理区分, UrSystemErrorMessages.値がnull.getReplacedMessage("管理区分"));
 
-        return createModel(支払方法変更Dac.selectByKey(証記載保険者番号, 被保険者番号, 管理区分, 処理日時));
+        return DbOptional.ofNullable(createModel(支払方法変更Dac.selectByKey(証記載保険者番号, 被保険者番号, 管理区分, 処理日時)));
     }
 
     /**

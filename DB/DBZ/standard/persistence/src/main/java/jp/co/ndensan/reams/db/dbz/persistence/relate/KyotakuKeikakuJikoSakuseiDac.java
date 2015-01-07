@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3007KyotakuKeikakuJikoSakuseiE
 import jp.co.ndensan.reams.db.dbz.model.KyotakuKeikakuJikoSakuseiModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT3007KyotakuKeikakuJikoSakuseiDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -52,7 +54,7 @@ public class KyotakuKeikakuJikoSakuseiDac implements IModifiable<KyotakuKeikakuJ
      * @return KyotakuKeikakuJikoSakuseiModel
      */
     @Transaction
-    public KyotakuKeikakuJikoSakuseiModel selectByKey(HihokenshaNo 被保険者番号,
+    public IOptional<KyotakuKeikakuJikoSakuseiModel> selectByKey(HihokenshaNo 被保険者番号,
             HokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             FlexibleYearMonth 対象年月,
@@ -64,8 +66,8 @@ public class KyotakuKeikakuJikoSakuseiDac implements IModifiable<KyotakuKeikakuJ
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
-        return createModel(居宅給付計画自己作成Dac.selectByKey(被保険者番号, 証記載保険者番号,
-                識別コード, 対象年月, 処理日時));
+        return DbOptional.ofNullable(createModel(居宅給付計画自己作成Dac.selectByKey(被保険者番号, 証記載保険者番号,
+                識別コード, 対象年月, 処理日時)));
     }
 
     /**
@@ -97,7 +99,7 @@ public class KyotakuKeikakuJikoSakuseiDac implements IModifiable<KyotakuKeikakuJ
      * @return KyotakuKeikakuJigyoshaSakuseiModel
      */
     @Transaction
-    public KyotakuKeikakuJikoSakuseiModel select直近居宅給付計画自己作成(HihokenshaNo 被保険者番号,
+    public IOptional<KyotakuKeikakuJikoSakuseiModel> select直近居宅給付計画自己作成(HihokenshaNo 被保険者番号,
             HokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             FlexibleYearMonth 対象年月) {
@@ -119,10 +121,10 @@ public class KyotakuKeikakuJikoSakuseiDac implements IModifiable<KyotakuKeikakuJ
                 toList(DbT3007KyotakuKeikakuJikoSakuseiEntity.class);
 
         if (居宅給付計画自己作成List.isEmpty()) {
-            return null;
+            return DbOptional.empty();
         }
 
-        return createModel(居宅給付計画自己作成List.get(0));
+        return DbOptional.ofNullable(createModel(居宅給付計画自己作成List.get(0)));
     }
 
     private KyotakuKeikakuJikoSakuseiModel createModel(DbT3007KyotakuKeikakuJikoSakuseiEntity 居宅給付計画自己作成エンティティ) {

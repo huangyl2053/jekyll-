@@ -49,7 +49,7 @@ public class HihokenshaDaichoManager {
      * @return HihokenshaDaichoModel
      */
     @Transaction
-    public HihokenshaDaichoModel get被保険者台帳(LasdecCode 市町村コード,
+    public IOptional<HihokenshaDaichoModel> get被保険者台帳(LasdecCode 市町村コード,
             HihokenshaNo 被保険者番号,
             YMDHMS 処理日時) {
 

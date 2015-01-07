@@ -86,13 +86,13 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
         // TODO 個別のMapperのテストクラスで項目単位の転記処理を確認しているため、全項目について確認する必要はありません。
         @Test
         public void データが見つかる検索条件を渡すと_サービス種類支給限度額モデル返す() {
-            assertThat(sut.selectByKey(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 処理日時1).getサービス種類コード(), is(サービス種類コード1));
+            assertThat(sut.selectByKey(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 処理日時1).get().getサービス種類コード(), is(サービス種類コード1));
         }
 
         // データが見つからない値を指定するように修正してください。
         @Test
-        public void データが見つかない検索条件を渡すと_nullを返す() {
-            assertThat(sut.selectByKey(サービス種類コード2, 要介護状態区分1, 適用開始年月1, 処理日時1), is(nullValue()));
+        public void データが見つかない検索条件を渡すと_データ無しを返す() {
+            assertThat(sut.selectByKey(サービス種類コード2, 要介護状態区分1, 適用開始年月1, 処理日時1).isPresent(), is(false));
         }
     }
 
