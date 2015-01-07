@@ -48,9 +48,9 @@ public class FukaTaishoshaSearch {
      * 「検索する」ボタンクリック時に呼び出される処理です。
      *
      * @param div FukaTaishoshaSearchDiv
-     * @return ResponseData
+     * @return ResponseData<FukaTaishoshaSearchDiv>
      */
-    public ResponseData onClick_btnSearch(FukaTaishoshaSearchDiv div) {
+    public ResponseData<FukaTaishoshaSearchDiv> onClick_btnSearch(FukaTaishoshaSearchDiv div) {
 
         set賦課年度(div);
         SearchResult result = get対象者(div.getSearchCondition().getCcdSearchCondition());
@@ -63,9 +63,9 @@ public class FukaTaishoshaSearch {
      * 「再検索する」ボタンクリック時に呼び出される処理です。
      *
      * @param div FukaTaishoshaSearchDiv
-     * @return ResponseData
+     * @return ResponseData<FukaTaishoshaSearchDiv>
      */
-    public ResponseData onClick_btnReSearch(FukaTaishoshaSearchDiv div) {
+    public ResponseData<FukaTaishoshaSearchDiv> onClick_btnReSearch(FukaTaishoshaSearchDiv div) {
 
         div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(Collections.EMPTY_LIST);
 
@@ -76,9 +76,9 @@ public class FukaTaishoshaSearch {
      * 「該当者一覧」選択時に呼び出される処理です。
      *
      * @param div FukaTaishoshaSearchDiv
-     * @return ResponseData
+     * @return ResponseData<FukaTaishoshaSearchDiv>
      */
-    public ResponseData onSelect_dgGaitoshaList(FukaTaishoshaSearchDiv div) {
+    public ResponseData<FukaTaishoshaSearchDiv> onSelect_dgGaitoshaList(FukaTaishoshaSearchDiv div) {
 
         ViewStates.access().valueAssignedTo(ViewStateKey.賦課対象者, FukaTaishoshaKey.class).put(create対象者Key(div));
         save最近処理者(div);

@@ -44,9 +44,9 @@ public class TaishoshaSearch {
      * 「検索する」ボタンクリック時に呼び出される処理です。
      *
      * @param div TaishoshaSearchDiv
-     * @return ResponseData
+     * @return ResponseData<TaishoshaSearchDiv>
      */
-    public ResponseData onClick_btnSearch(TaishoshaSearchDiv div) {
+    public ResponseData<TaishoshaSearchDiv> onClick_btnSearch(TaishoshaSearchDiv div) {
 
         SearchResult result = get対象者(div.getSearchCondition().getCcdSearchCondition());
         div.getGaitoshaList().getDgGaitoshaList().setDataSource(toRowList(result));
@@ -58,9 +58,9 @@ public class TaishoshaSearch {
      * 「再検索する」ボタンクリック時に呼び出される処理です。
      *
      * @param div TaishoshaSearchDiv
-     * @return ResponseData
+     * @return ResponseData<TaishoshaSearchDiv>
      */
-    public ResponseData onClick_btnReSearch(TaishoshaSearchDiv div) {
+    public ResponseData<TaishoshaSearchDiv> onClick_btnReSearch(TaishoshaSearchDiv div) {
 
         div.getGaitoshaList().getDgGaitoshaList().setDataSource(Collections.EMPTY_LIST);
 
@@ -71,9 +71,9 @@ public class TaishoshaSearch {
      * 「該当者一覧」選択時に呼び出される処理です。
      *
      * @param div TaishoshaSearchDiv
-     * @return ResponseData
+     * @return ResponseData<TaishoshaSearchDiv>
      */
-    public ResponseData onSelect_dgGaitoshaList(TaishoshaSearchDiv div) {
+    public ResponseData<TaishoshaSearchDiv> onSelect_dgGaitoshaList(TaishoshaSearchDiv div) {
 
         ViewStates.access().valueAssignedTo(ViewStateKey.資格対象者, TaishoshaKey.class).put(create対象者Key(div));
         save最近処理者(div);
