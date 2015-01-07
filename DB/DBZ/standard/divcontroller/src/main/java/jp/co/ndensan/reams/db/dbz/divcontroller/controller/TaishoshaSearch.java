@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.TaishoshaSearchResult;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0200001.dgGaitoshaList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0200001.TaishoshaSearchDiv;
@@ -36,8 +37,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author N8156 宮本 康
  */
 public class TaishoshaSearch {
-
-    private static final RString 住所地特例者 = new RString("1");
 
     /**
      * 「検索する」ボタンクリック時に呼び出される処理です。
@@ -100,7 +99,7 @@ public class TaishoshaSearch {
         }
         if (div.is住所地特例者()) {
             条件List.add(SearchConditionFactory.condition(
-                    ShikakuSearchItem.住所地特例フラグ, StringOperator.完全一致, 住所地特例者));
+                    ShikakuSearchItem.住所地特例フラグ, StringOperator.完全一致, JushochitokureishaKubun.住所地特例者.code()));
         }
 
         ISearchCondition 介護条件 = null;
