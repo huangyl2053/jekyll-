@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaModel;
 import jp.co.ndensan.reams.db.dbz.model.TaishoshaModel;
 import jp.co.ndensan.reams.db.dbz.model.util.SearchResult;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.TaishoshaRelateDac;
+import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.psm.KojinSearchEntityHolder;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
@@ -30,21 +31,25 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 public class TaishoshaFinder {
 
     private final TaishoshaRelateDac dac;
+    private final IUrControlData ctrlData;
 
     /**
      * コンストラクタです。
      */
     public TaishoshaFinder() {
         this.dac = InstanceProvider.create(TaishoshaRelateDac.class);
+        this.ctrlData = UrControlDataFactory.createInstance();
     }
 
     /**
      * モックを使用するテスト用コンストラクタです。
      *
      * @param dac 被保険者台帳ViewDoc
+     * @param ctrlData コントロールデータ
      */
-    TaishoshaFinder(TaishoshaRelateDac dac) {
+    TaishoshaFinder(TaishoshaRelateDac dac, IUrControlData ctrlData) {
         this.dac = dac;
+        this.ctrlData = ctrlData;
     }
 
     /**
@@ -82,7 +87,7 @@ public class TaishoshaFinder {
      */
     public SearchResult get賦課対象者(ISearchCondition 条件, ISearchCondition 除外条件, IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
 
-        FukaSearchMenu menu = FukaSearchMenu.toValue(UrControlDataFactory.createInstance().getMenuID());
+        FukaSearchMenu menu = FukaSearchMenu.toValue(ctrlData.getMenuID());
         ITrueFalseCriteria 介護条件 = getCriteria(条件, 除外条件);
         IPsmCriteria 宛名psm = getPsmCriteria(宛名キー);
         boolean is内部結合 = (menu.is(FukaSearchMenuGroup.照会系) || menu.is(FukaSearchMenuGroup.更正計算系));

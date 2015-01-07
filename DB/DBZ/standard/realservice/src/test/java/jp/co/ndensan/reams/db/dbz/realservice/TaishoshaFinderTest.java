@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaModel;
 import jp.co.ndensan.reams.db.dbz.model.TaishoshaModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.TaishoshaRelateDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.KensakuYusenKubun;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.ShikibetsuTaisho
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import org.junit.experimental.runners.Enclosed;
@@ -45,6 +47,7 @@ public class TaishoshaFinderTest extends DbzTestBase {
     private static final ISearchCondition 介護除外条件 = mock(ISearchCondition.class);
     private static final IShikibetsuTaishoSearchKey 宛名条件 = create宛名条件();
     private static final int 最大表示件数 = 100;
+    private static final RString メニューID = new RString("DBBMN11001");
 
     public static class get資格対象者 {
 
@@ -197,7 +200,7 @@ public class TaishoshaFinderTest extends DbzTestBase {
     }
 
     private static TaishoshaFinder createFinder(int count) {
-        return new TaishoshaFinder(createDac(count));
+        return new TaishoshaFinder(createDac(count), createControlData());
     }
 
     private static TaishoshaRelateDac createDac(int count) {
@@ -229,5 +232,11 @@ public class TaishoshaFinderTest extends DbzTestBase {
         return new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true)
                 .setShikibetsuCode(識別コード).build();
+    }
+
+    private static IUrControlData createControlData() {
+        IUrControlData ctrlData = mock(IUrControlData.class);
+        when(ctrlData.getMenuID()).thenReturn(メニューID);
+        return ctrlData;
     }
 }
