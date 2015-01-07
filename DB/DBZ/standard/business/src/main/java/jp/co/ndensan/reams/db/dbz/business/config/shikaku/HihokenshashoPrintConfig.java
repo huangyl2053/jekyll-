@@ -9,6 +9,11 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoPrint;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValueBoolean;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshaNoPrintType;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshashoPrintType;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.KyotakuJigyoshaRirekiPrintType;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.YukoKigenPrintType;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -55,8 +60,9 @@ public class HihokenshashoPrintConfig {
      *
      * @return 氏名カナ表示有無
      */
-    public RString get氏名カナ表示有無() {
-        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_氏名カナ表示有無);
+    public boolean is氏名カナ表示有り() {
+        return ConfigValueBoolean.perseBoolean(
+                configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_氏名カナ表示有無));
     }
 
     /**
@@ -64,8 +70,9 @@ public class HihokenshashoPrintConfig {
      *
      * @return 証表示タイプ
      */
-    public RString get証表示タイプ() {
-        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_証表示タイプ);
+    public HihokenshashoPrintType get証表示タイプ() {
+        return HihokenshashoPrintType.toValue(
+                configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_証表示タイプ));
     }
 
     /**
@@ -73,8 +80,9 @@ public class HihokenshashoPrintConfig {
      *
      * @return 被保険者番号表示書式
      */
-    public RString get被保険者番号表示書式() {
-        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_被保険者番号表示書式);
+    public HihokenshaNoPrintType get被保険者番号表示書式() {
+        return HihokenshaNoPrintType.toValue(
+                configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_被保険者番号表示書式));
     }
 
     /**
@@ -82,8 +90,9 @@ public class HihokenshashoPrintConfig {
      *
      * @return 郵便番号表示有無
      */
-    public RString get郵便番号表示有無() {
-        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_郵便番号表示有無);
+    public boolean is郵便番号表示有り() {
+        return ConfigValueBoolean.perseBoolean(
+                configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_郵便番号表示有無));
     }
 
     /**
@@ -91,8 +100,9 @@ public class HihokenshashoPrintConfig {
      *
      * @return 要介護認定期限切れの表示有無
      */
-    public RString get要介護認定期限切れ表示有無() {
-        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_要介護認定期限切れ_表示有無);
+    public boolean is要介護認定期限切れ表示有り() {
+        return ConfigValueBoolean.perseBoolean(
+                configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_要介護認定期限切れ_表示有無));
     }
 
     /**
@@ -100,8 +110,9 @@ public class HihokenshashoPrintConfig {
      *
      * @return 居宅支援事業者適用切れの表示有無
      */
-    public RString get居宅支援事業者適用切れ表示有無() {
-        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者適用切れ_表示有無);
+    public boolean is居宅支援事業者適用切れ表示有り() {
+        return ConfigValueBoolean.perseBoolean(
+                configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者適用切れ_表示有無));
     }
 
     /**
@@ -109,17 +120,19 @@ public class HihokenshashoPrintConfig {
      *
      * @return 居宅支援事業者履歴の表示方法
      */
-    public RString get居宅支援事業者履歴表示方法() {
-        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者履歴_表示方法);
+    public KyotakuJigyoshaRirekiPrintType get居宅支援事業者履歴表示方法() {
+        return KyotakuJigyoshaRirekiPrintType.toValue(
+                configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者履歴_表示方法));
     }
 
     /**
-     * 合併前の被保険者証を印刷印刷する際、有効期限をどのように表示するかを示す値を返します。
+     * 合併前の被保険者証を印刷する際、有効期限をどのように表示するかを示す値を返します。
      *
      * @return 有効期限表示方法
      */
-    public RString get合併前印刷時_有効期限表示方法() {
-        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_合併前印刷時_有効期限);
+    public YukoKigenPrintType get合併前印刷時_有効期限表示方法() {
+        return YukoKigenPrintType.toValue(
+                configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_合併前印刷時_有効期限));
     }
 
     /**
@@ -127,8 +140,9 @@ public class HihokenshashoPrintConfig {
      *
      * @return 委託代行業者の表示有無
      */
-    public RString get委託代行業者表示有無() {
-        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_委託代行業者_表示有無);
+    public boolean is委託代行業者表示有り() {
+        return ConfigValueBoolean.perseBoolean(
+                configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_委託代行業者_表示有無));
     }
 
     /**
@@ -154,7 +168,8 @@ public class HihokenshashoPrintConfig {
      *
      * @return 適用開始日と事業者届出日の切替表示区分
      */
-    public RString get適用開始日切替表示区分() {
-        return configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者届出日_適用開始日切替表示区分);
+    public boolean is届出日の代わりに適用開始日を表示() {
+        return ConfigValueBoolean.perseBoolean(
+                configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者届出日_適用開始日切替表示区分));
     }
 }

@@ -43,9 +43,9 @@ public class HihokenshashoJushoEditConfigTest {
         }
 
         @Test
-        public void get帳票独自区分を指定したとき_1が返る() {
-            RString result = sut.get帳票独自区分();
-            assertThat(result, is(new RString("1")));
+        public void is帳票独自区分を指定したとき_trueが返る() {
+            boolean result = sut.is帳票独自区分を使用();
+            assertThat(result, is(true));
         }
 
         @Test

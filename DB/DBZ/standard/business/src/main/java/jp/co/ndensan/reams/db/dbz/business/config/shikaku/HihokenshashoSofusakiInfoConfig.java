@@ -9,6 +9,8 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoSofusakiInfo;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValueBoolean;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.MojigireControlType;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -55,8 +57,9 @@ public class HihokenshashoSofusakiInfoConfig {
      *
      * @return 世帯主表示有無
      */
-    public RString get世帯主表示有無() {
-        return configs.get(ConfigKeysHihokenshashoSofusakiInfo.被保険者証_送付先情報_世帯主表示有無);
+    public boolean is世帯主表示有り() {
+        return ConfigValueBoolean.perseBoolean(
+                configs.get(ConfigKeysHihokenshashoSofusakiInfo.被保険者証_送付先情報_世帯主表示有無));
     }
 
     /**
@@ -64,8 +67,9 @@ public class HihokenshashoSofusakiInfoConfig {
      *
      * @return 敬称表示方法
      */
-    public RString get敬称表示方法() {
-        return configs.get(ConfigKeysHihokenshashoSofusakiInfo.被保険者証_送付先情報_敬称表示方法);
+    public boolean is敬称表示有り() {
+        return ConfigValueBoolean.perseBoolean(
+                configs.get(ConfigKeysHihokenshashoSofusakiInfo.被保険者証_送付先情報_敬称表示方法));
     }
 
     /**
@@ -73,8 +77,9 @@ public class HihokenshashoSofusakiInfoConfig {
      *
      * @return 外部帳票文字切れ制御方法
      */
-    public RString get外部帳票文字切れ制御方法() {
-        return configs.get(ConfigKeysHihokenshashoSofusakiInfo.被保険者証_外部帳票文字切れ制御方法);
+    public MojigireControlType get外部帳票文字切れ制御方法() {
+        return MojigireControlType.toValue(
+                configs.get(ConfigKeysHihokenshashoSofusakiInfo.被保険者証_外部帳票文字切れ制御方法));
     }
 
 }
