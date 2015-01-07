@@ -147,35 +147,31 @@ public class HihokenshaShikakuHakko {
      * @return 審査会意見
      */
     public RString compose審査会意見(RString 審査会意見, IItemList<IKaigoService> 介護サービスリスト, int 最大長) {
-
-        RString サービス名称 = RString.EMPTY;
+        RStringBuilder 編集審査会意見 = new RStringBuilder(審査会意見);
         if (!介護サービスリスト.isEmpty()) {
-            int 介護サービス長 = 0;
-            for (IKaigoService kaigoService : 介護サービスリスト) {
-                if (kaigoService != null) {
-                    介護サービス長 = 介護サービス長 + kaigoService.get介護サービス種類().getサービス種類名称().length();
-                }
-            }
-            if (最大長 < (審査会意見.length() + 介護サービス長)) {
-                for (IKaigoService kaigoService : 介護サービスリスト) {
-                    サービス名称 = new RStringBuilder(サービス名称)
-                            .append(kaigoService.get介護サービス種類().getサービス種類名称略称())
-                            .toRString();
-                }
-            } else {
-                for (IKaigoService kaigoService : 介護サービスリスト) {
-                    サービス名称 = new RStringBuilder(サービス名称)
-                            .append(kaigoService.get介護サービス種類().getサービス種類名称())
-                            .toRString();
-                }
+            boolean hasToUse略称 = 最大長 < (審査会意見.length() + countLengthOfサービス種類名称(介護サービスリスト));
+            編集審査会意見.append(composeサービス名称(介護サービスリスト, hasToUse略称));
+        }
+        return 最大長 <= 編集審査会意見.length() ? 編集審査会意見.substring(0, 最大長) : 編集審査会意見.toRString();
+    }
+
+    private int countLengthOfサービス種類名称(IItemList<IKaigoService> services) {
+        int count = 0;
+        for (IKaigoService service : services) {
+            if (service != null) {
+                count += service.get介護サービス種類().getサービス種類名称().length();
             }
         }
-        RString 編集審査会意見 = new RStringBuilder(審査会意見)
-                .append(サービス名称)
-                .toRString();
-        if (最大長 <= 編集審査会意見.length()) {
-            編集審査会意見 = 編集審査会意見.substring(0, 最大長);
+        return count;
+    }
+
+    private RString composeサービス名称(IItemList<IKaigoService> services, boolean hasToUse略称) {
+        RStringBuilder サービス名称 = new RStringBuilder();
+        for (IKaigoService service : services) {
+            サービス名称.append(hasToUse略称
+                    ? service.get介護サービス種類().getサービス種類名称略称()
+                    : service.get介護サービス種類().getサービス種類名称());
         }
-        return 編集審査会意見;
+        return サービス名称.toRString();
     }
 }
