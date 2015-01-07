@@ -3,29 +3,18 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder;
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigosaikinshorisharireki.IKaigoSaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigosaikinshorisharireki.KaigoSaikinShorishaRirekiDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaFinderDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaFinderDiv;
-import jp.co.ndensan.reams.ur.urz.business.IRecentUsed;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ScopeCode;
-import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.KensakuYusenKubun;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ur.urz.realservice.ISaikinShorishaManager;
-import jp.co.ndensan.reams.ur.urz.realservice.RecentUsedManagerFactory;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 
@@ -168,81 +157,73 @@ public class HihokenshaFinderDiv extends Panel implements IHihokenshaFinderDiv {
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-    private static final RString みなし２号含む = new RString("含む");
-    private static final int 最大表示件数 = 100;
-
     @Override
     public RString get保険者() {
-        DropDownList item = KaigoFinder.getDdlHokensha();
-        return (item != null && item.isVisible()) ? item.getSelectedKey() : null;
+        return getHandler().get保険者();
     }
 
     @Override
     public RString get被保険者番号() {
-        TextBoxCode item = KaigoFinder.getTxtHihokenshaNo();
-        return (item != null && !item.getValue().trim().isEmpty()) ? item.getValue() : null;
+        return getHandler().get被保険者番号();
     }
 
     @Override
     public RString get通知書番号() {
-        TextBoxCode item = KaigoFinder.getTxtTuchishoNo();
-        return (item != null && !item.getValue().trim().isEmpty()) ? item.getValue() : null;
+        return getHandler().get通知書番号();
     }
 
     @Override
     public FlexibleYear get賦課年度() {
-        DropDownList item = KaigoFinder.getDdlFukaNendo();
-        return (item != null && item.getSelectedKey() != null && !item.getSelectedKey().equals(FlexibleYear.MAX.toDateString()))
-                ? new FlexibleYear(item.getSelectedKey().toString()) : FlexibleYear.MAX;
+        return getHandler().get賦課年度();
     }
 
     @Override
     public boolean is被保険者台帳登録者() {
-        return !KaigoFinder.getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedValues().isEmpty();
+        return getHandler().is被保険者台帳登録者();
     }
 
     @Override
     public boolean is受給者台帳登録者() {
-        return !KaigoFinder.getKaigoFinderDetail().getChkJukyushaDaicho().getSelectedValues().isEmpty();
+        return getHandler().is受給者台帳登録者();
     }
 
     @Override
     public boolean is住所地特例者() {
-        return !KaigoFinder.getKaigoFinderDetail().getChkJushochiTokureisha().getSelectedValues().isEmpty();
+        return getHandler().is住所地特例者();
     }
 
     @Override
     public boolean isみなし２号含む() {
-        return KaigoFinder.getKaigoFinderDetail().getRadMinashiNigo().getSelectedValue().equals(みなし２号含む);
+        return getHandler().isみなし２号含む();
     }
 
     @Override
     public int get最大表示件数() {
-        TextBoxNum item = ButtonsForHihokenshaFinder.getTxtMaxNumber();
-        return (item != null && item.getValue() != null) ? item.getValue().intValue() : 最大表示件数;
+        return getHandler().get最大表示件数();
     }
 
     @Override
     public IShikibetsuTaishoSearchKey get宛名条件() {
-        ccdAtenaFinder.load(ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先));
-        return ccdAtenaFinder.makeShikibetsuTaishoSearchKey(ccdAtenaFinder);
+        return getHandler().get宛名条件();
     }
 
     @Override
     public void load最近処理者() {
-        ccdSaikinShorisha.getWrappedSaikinShorishaRireki().setInitialLoad(ScopeCode.識別対象);
+        getHandler().load最近処理者();
     }
 
     @Override
     public void save最近処理者(RString 識別コード, RString 名称) {
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        ISaikinShorishaManager manager = RecentUsedManagerFactory.createInstance();
-        manager.save(controlData, ScopeCode.識別対象, 識別コード, 名称);
+        getHandler().save最近処理者(識別コード, 名称);
     }
 
     @Override
     public RString get最近処理者() {
-        IRecentUsed 最近処理者 = ccdSaikinShorisha.getWrappedSaikinShorishaRireki().getRecentUsed();
-        return 最近処理者 != null ? 最近処理者.get最近処理対象コード() : null;
+        return getHandler().get最近処理者();
+    }
+
+    @JsonIgnore
+    public HihokenshaFinderHandler getHandler() {
+        return new HihokenshaFinderHandler(this);
     }
 }
