@@ -58,9 +58,9 @@ public class TaskJutokuTekiyoTaishoshaJoho {
 
     private void setDbJoho(KaigoShikakuKihonDiv dbJoho, ControlGenerator generator) {
         dbJoho.getTxtHihokenshaNo().setValue(generator.getAsRString("被保番号"));
-        dbJoho.getTxtShutokuYmd().setValue(generator.getAsRDate("資格取得"));
+        dbJoho.getTxtShutokuYmd().setValue(generator.getAsFlexibleDate("資格取得"));
         dbJoho.getTxtShutokuJiyu().setValue(generator.getAsRString("取得事由"));
-        dbJoho.getTxtSoshitsuYmd().setValue(generator.getAsRDate("資格喪失"));
+        dbJoho.getTxtSoshitsuYmd().setValue(generator.getAsFlexibleDate("資格喪失"));
         dbJoho.getTxtSoshitsuJiyu().setValue(generator.getAsRString("喪失事由"));
         dbJoho.getTxtJutokuKubun().setValue(generator.getAsRString("住特区分"));
         dbJoho.getTxtYokaigoJotaiKubun().setValue(generator.getAsRString("要介護認定"));
