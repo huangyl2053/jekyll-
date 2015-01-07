@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbV7901ShikakuSearch implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
     shikibetsuCode(2147483647, 0),
     shichosonCode(2147483647, 0),
     hihokenshaNo(10, 0),

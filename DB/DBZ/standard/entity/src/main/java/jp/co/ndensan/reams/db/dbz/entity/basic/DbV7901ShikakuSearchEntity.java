@@ -1,22 +1,21 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * DbV7901ShikakuSearchの項目定義クラスです
  *
  */
-public class DbV7901ShikakuSearchEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901ShikakuSearchEntity> implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbV7901ShikakuSearch");
@@ -503,11 +502,54 @@ public class DbV7901ShikakuSearchEntity implements IDbAccessable {
      * @param other 比較するエンティティ
      * @@return 比較するエンティティが同じ主キーを持つ{@literal DbV7901ShikakuSearchEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
+    @Override
     public boolean equalsPrimaryKeys(DbV7901ShikakuSearchEntity other) {
         if (other == null) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void shallowCopy(DbV7901ShikakuSearchEntity entity) {
+        this.shikibetsuCode = entity.shikibetsuCode;
+        this.shichosonCode = entity.shichosonCode;
+        this.hihokenshaNo = entity.hihokenshaNo;
+        this.shikakuShutokuJiyuCode = entity.shikakuShutokuJiyuCode;
+        this.shikakuShutokuYMD = entity.shikakuShutokuYMD;
+        this.hihokennshaKubunCode = entity.hihokennshaKubunCode;
+        this.shikakuSoshitsuJiyuCode = entity.shikakuSoshitsuJiyuCode;
+        this.shikakuSoshitsuYMD = entity.shikakuSoshitsuYMD;
+        this.jushochiTokureiFlag = entity.jushochiTokureiFlag;
+        this.shikakuHenkoJiyuCode = entity.shikakuHenkoJiyuCode;
+        this.shikakuHenkoYMD = entity.shikakuHenkoYMD;
+        this.jushochitokureiTekiyoJiyuCode = entity.jushochitokureiTekiyoJiyuCode;
+        this.jushochitokureiTekiyoYMD = entity.jushochitokureiTekiyoYMD;
+        this.jushochitokureiKaijoJiyuCode = entity.jushochitokureiKaijoJiyuCode;
+        this.jushochitokureiKaijoYMD = entity.jushochitokureiKaijoYMD;
+        this.koikinaiJushochiTokureiFlag = entity.koikinaiJushochiTokureiFlag;
+        this.koikinaiTokureiSochimotoShichosonCode = entity.koikinaiTokureiSochimotoShichosonCode;
+        this.tekiyoJogaiTekiyoJiyuCode = entity.tekiyoJogaiTekiyoJiyuCode;
+        this.tekiyoJogaiTekiyoYMD = entity.tekiyoJogaiTekiyoYMD;
+        this.tekiyoJogaikaijokaijoJiyuCode = entity.tekiyoJogaikaijokaijoJiyuCode;
+        this.tekiyoJogaiKaijoYMD = entity.tekiyoJogaiKaijoYMD;
+        this.tatokureiTekiyoJiyuCode = entity.tatokureiTekiyoJiyuCode;
+        this.tatokureiTekiyoYMD = entity.tatokureiTekiyoYMD;
+        this.tatokureiKaijoJiyuCode = entity.tatokureiKaijoJiyuCode;
+        this.tatokureiKaijoYMD = entity.tatokureiKaijoYMD;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    @Override
+    public RString getMd5() {
+        return super.toMd5(shikibetsuCode, shichosonCode, hihokenshaNo, shikakuShutokuJiyuCode, shikakuShutokuYMD, hihokennshaKubunCode, shikakuSoshitsuJiyuCode, shikakuSoshitsuYMD, jushochiTokureiFlag, shikakuHenkoJiyuCode, shikakuHenkoYMD, jushochitokureiTekiyoJiyuCode, jushochitokureiTekiyoYMD, jushochitokureiKaijoJiyuCode, jushochitokureiKaijoYMD, koikinaiJushochiTokureiFlag, koikinaiTokureiSochimotoShichosonCode, tekiyoJogaiTekiyoJiyuCode, tekiyoJogaiTekiyoYMD, tekiyoJogaikaijokaijoJiyuCode, tekiyoJogaiKaijoYMD, tatokureiTekiyoJiyuCode, tatokureiTekiyoYMD, tatokureiKaijoJiyuCode, tatokureiKaijoYMD);
     }
 
 // </editor-fold>

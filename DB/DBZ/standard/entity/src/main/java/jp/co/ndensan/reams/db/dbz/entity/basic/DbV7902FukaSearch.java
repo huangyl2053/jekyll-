@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbV7902FukaSearch implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
     choteiNendo(2147483647, 0),
     fukaNendo(2147483647, 0),
     tsuchishoNo(2147483647, 0),
