@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.config.HokenshaJohoConfig;
-import jp.co.ndensan.reams.db.dbz.business.config.ShiharaiHohoHenkoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.ShuruiShikyuGendoGetConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
@@ -36,11 +35,8 @@ import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShik
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidationMessage;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShuruiShikyuGendoGet;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku.DBACodeShubetsu;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku.HihokenshashoKofuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku.ShikakushashoKofuJiyu;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HakkoShoTypeBehaviors.IHakkoShoTypeBehavior;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
-import jp.co.ndensan.reams.ur.urz.definition.code.CodeMasterHelper;
 import jp.co.ndensan.reams.ur.urz.realservice.IKaigoServiceManager;
 import jp.co.ndensan.reams.ur.urz.realservice.KaigoServiceManagerFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -67,16 +63,12 @@ public class HihokenshaShikakuHakkoHandler {
 
     private final HihokenshaShikakuHakkoDiv div;
 
+    static final RString KOFUJIYU_TESTKEY = new RString("testKey");
+    static final RString KOFUJIYU_TEST = new RString("テスト");
+    static final RString KOFUJIYU_CHOKUZENKEY = new RString("chokuzenKey");
+    static final RString KOFUJIYU_CHOKUZEN = new RString("直前履歴");
     private static final RString COLLON = new RString(":");
     private static final RString JIKOSAKUSEI = new RString("自己作成");
-    private static final RString KOFUJIYU_TESTKEY = new RString("testKey");
-    private static final RString KOFUJIYU_TEST = new RString("テスト");
-    private static final RString KOFUJIYU_CHOKUZENKEY = new RString("chokuzenKey");
-    private static final RString KOFUJIYU_CHOKUZEN = new RString("直前履歴");
-    // TODO N8187 久保田 審査会意見の最大長(被保険者証の場合198文字)は被保険者証のソースデータクラスから取得するよう修正する。 2015/03/31。
-    private static final int SHINSAKAIIKEN_MAX_HIHOKENSHASHO = 198;
-    // TODO N8187 久保田 審査会意見の最大長(資格者証の場合175文字)は資格者証のソースデータクラスから取得するよう修正する。 2015/03/31。
-    private static final int SHINSAKAIIKEN_MAX_SHIKAKUSHASHO = 175;
     private final RString 被保険者区分コード_2 = new RString("2");
 
     /**
@@ -127,43 +119,12 @@ public class HihokenshaShikakuHakkoHandler {
 
         div.getTxtKofuDate().setValue(FlexibleDate.getNowDate());
 
-        List<KeyValueDataSource> kofuJiyuList = new ArrayList<>();
-        if (div.getMode_発行証タイプ() == 被保険者証) {
-            kofuJiyuList = set被保険者証交付事由(is直前履歴);
-        } else if (div.getMode_発行証タイプ() == 資格者証) {
-            kofuJiyuList = set資格者証交付事由();
-        }
+        List<KeyValueDataSource> kofuJiyuList = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).create交付事由List(is直前履歴);
         div.getDdlKofuJiyu().setDataSource(kofuJiyuList);
         if ((div.getMode_発行証タイプ() == 被保険者証) && is直前履歴) {
             div.getDdlKofuJiyu().setSelectedKey(KOFUJIYU_CHOKUZENKEY);
             div.getDdlKofuJiyu().setReadOnly(true);
         }
-    }
-
-    private List<KeyValueDataSource> set被保険者証交付事由(boolean is直前履歴) {
-        List<KeyValueDataSource> result = new ArrayList<>();
-        if (is直前履歴) {
-            result.add(new KeyValueDataSource(KOFUJIYU_CHOKUZENKEY, KOFUJIYU_CHOKUZEN));
-            return result;
-        }
-        List<HihokenshashoKofuJiyu> 被保険者証交付事由List = CodeMasterHelper.getCode(DBACodeShubetsu.被保険者証交付事由);
-
-        for (HihokenshashoKofuJiyu 交付事由 : 被保険者証交付事由List) {
-            result.add(new KeyValueDataSource(交付事由.value().value(), 交付事由.getMeisho()));
-        }
-        result.add(new KeyValueDataSource(KOFUJIYU_TESTKEY, KOFUJIYU_TEST));
-        return result;
-    }
-
-    private List<KeyValueDataSource> set資格者証交付事由() {
-        List<KeyValueDataSource> result = new ArrayList<>();
-        List<ShikakushashoKofuJiyu> 資格者証交付事由List = CodeMasterHelper.getCode(DBACodeShubetsu.資格者証交付事由);
-
-        for (ShikakushashoKofuJiyu 交付事由 : 資格者証交付事由List) {
-            result.add(new KeyValueDataSource(交付事由.value().value(), 交付事由.getMeisho()));
-        }
-        result.add(new KeyValueDataSource(KOFUJIYU_TESTKEY, KOFUJIYU_TEST));
-        return result;
     }
 
     private IOptional<NinteiShinseiKekkaModel> load認定申請結果(HihokenshaNo 被保険者番号, boolean is直前履歴) {
@@ -235,8 +196,7 @@ public class HihokenshaShikakuHakkoHandler {
 
     private void set種類支給限度基準額(NinteiShinseiKekkaModel 認定申請結果) {
 
-        ShuruiShikyuGendoGetConfig config = new ShuruiShikyuGendoGetConfig();
-        ConfigValuesShuruiShikyuGendoGet 取得方法 = config.get種類支給限度額_取得方法();
+        ConfigValuesShuruiShikyuGendoGet 取得方法 = new ShuruiShikyuGendoGetConfig().get種類支給限度額_取得方法();
         IItemList<ServiceShuruiShikyuGendoGakuModel> list;
 
         if (取得方法 == ConfigValuesShuruiShikyuGendoGet.種類支給限度額検索時に要介護度を検索キーにしない) {
@@ -265,13 +225,7 @@ public class HihokenshaShikakuHakkoHandler {
 
     private void set審査会意見(NinteiShinseiKekkaModel 認定申請結果) {
 
-        int 最大長;
-        if (div.getMode_発行証タイプ() == 被保険者証) {
-            最大長 = SHINSAKAIIKEN_MAX_HIHOKENSHASHO;
-        } else {
-            最大長 = SHINSAKAIIKEN_MAX_SHIKAKUSHASHO;
-        }
-
+        int 最大長 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).get審査会意見最大長();
         List<IKaigoService> serviceList = new ArrayList<>();
         IKaigoServiceManager manager = KaigoServiceManagerFactory.createInstance();
         FlexibleYearMonth ServiceYM = 認定申請結果.get要介護認定結果情報モデル().get().get要介護度認定年月日().getYearMonth();
@@ -331,23 +285,18 @@ public class HihokenshaShikakuHakkoHandler {
         List<KyufuSeigenShutsuryoku> 優先的 = new ArrayList<>();
         List<KyufuSeigenShutsuryoku> 優先外 = new ArrayList<>();
 
+        IHakkoShoTypeBehavior instance = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ());
+        ShiharaiHohoHenkoManager manager = new ShiharaiHohoHenkoManager();
+        IItemList<ShiharaiHohoHenkoModel> history;
+
         if (被保険者台帳.get被保険者区分コード().equals(被保険者区分コード_2)) {
 
-            ConfigValuesShiharaiHohoHenko 終了分記載区分;
-            RString 記載文言;
-            ShiharaiHohoHenkoConfig config = new ShiharaiHohoHenkoConfig();
-            if (div.getMode_発行証タイプ() == 被保険者証) {
-                終了分記載区分 = config.get支払方法変更_証表示差止_終了分記載区分();
-                記載文言 = config.get支払方法変更_証表示差止_記載文言();
-            } else {
-                終了分記載区分 = config.get支払方法変更_資格者証表示差止_終了分記載区分();
-                記載文言 = config.get支払方法変更_資格者証表示差止_記載文言();
-            }
-            ShiharaiHohoHenkoManager manager = new ShiharaiHohoHenkoManager();
-            IItemList<ShiharaiHohoHenkoModel> history = manager.get2号差止履歴(被保険者番号);
+            ConfigValuesShiharaiHohoHenko 差止終了分記載区分 = instance.load差止終了分記載区分();
+            RString 差止記載文言 = instance.load差止記載文言();
+            history = manager.get2号差止履歴(被保険者番号);
 
             int historySize;
-            if (終了分記載区分 == ConfigValuesShiharaiHohoHenko.支払方法変更_終了分記載区分_終了後も記載する) {
+            if (差止終了分記載区分 == ConfigValuesShiharaiHohoHenko.支払方法変更_終了分記載区分_終了後も記載する) {
                 historySize = 3;
             } else {
                 historySize = 1;
@@ -355,32 +304,22 @@ public class HihokenshaShikakuHakkoHandler {
 
             for (int i = 0; i < historySize && i < history.size(); i++) {
                 給付制限.add(new KyufuSeigenShutsuryoku(
-                        記載文言,
+                        差止記載文言,
                         history.toList().get(i).get適用開始年月日(),
                         history.toList().get(i).get適用終了年月日()));
             }
             set給付制限to画面(給付制限);
-
         } else {
-            ConfigValuesShiharaiHohoHenko 終了分記載区分;
-            RString 記載文言;
-            ShiharaiHohoHenkoConfig config = new ShiharaiHohoHenkoConfig();
-            if (div.getMode_発行証タイプ() == 被保険者証) {
-                終了分記載区分 = config.get支払方法変更_証表示支払方法_終了分記載区分();
-                記載文言 = config.get支払方法変更_証表示支払方法_記載文言();
-            } else {
-                終了分記載区分 = config.get支払方法変更_資格者証表示支払方法_終了分記載区分();
-                記載文言 = config.get支払方法変更_資格者証表示支払方法_記載文言();
-            }
-            ShiharaiHohoHenkoManager manager = new ShiharaiHohoHenkoManager();
-            IItemList<ShiharaiHohoHenkoModel> history = manager.get1号償還払化履歴(被保険者番号);
 
-            int historySize;
-            if (終了分記載区分 == ConfigValuesShiharaiHohoHenko.支払方法変更_終了分記載区分_終了後も記載する) {
-                historySize = 3;
+            ConfigValuesShiharaiHohoHenko 支払方法終了分記載区分 = instance.load支払方法終了分記載区分();
+            RString 支払方法記載文言 = instance.load支払方法記載文言();
+            history = manager.get1号償還払化履歴(被保険者番号);
+
+            if (支払方法終了分記載区分 == ConfigValuesShiharaiHohoHenko.支払方法変更_終了分記載区分_終了後も記載する) {
+                int historySize = 3;
                 for (int i = 0; i < historySize && i < history.size(); i++) {
                     優先外.add(new KyufuSeigenShutsuryoku(
-                            記載文言,
+                            支払方法記載文言,
                             history.toList().get(i).get適用開始年月日(),
                             history.toList().get(i).get適用終了年月日()));
                 }
@@ -388,27 +327,21 @@ public class HihokenshaShikakuHakkoHandler {
                 if (!history.isEmpty()) {
                     if (history.toList().get(0).get終了区分().isEmpty()) {
                         優先的.add(new KyufuSeigenShutsuryoku(
-                                記載文言,
+                                支払方法記載文言,
                                 history.toList().get(0).get適用開始年月日(),
                                 history.toList().get(0).get適用終了年月日()));
                     }
                 }
             }
 
-            if (div.getMode_発行証タイプ() == 被保険者証) {
-                終了分記載区分 = config.get支払方法変更_証表示減額_終了分記載区分();
-                記載文言 = config.get支払方法変更_証表示減額_記載文言();
-            } else {
-                終了分記載区分 = config.get支払方法変更_資格者証表示減額_終了分記載区分();
-                記載文言 = config.get支払方法変更_資格者証表示減額_記載文言();
-            }
-
+            ConfigValuesShiharaiHohoHenko 減額終了分記載区分 = instance.load減額終了分記載区分();
+            RString 減額記載文言 = instance.load減額記載文言();
             history = manager.get1号減額履歴(被保険者番号);
-            if (終了分記載区分 == ConfigValuesShiharaiHohoHenko.支払方法変更_終了分記載区分_終了後も記載する) {
-                historySize = 3;
+            if (減額終了分記載区分 == ConfigValuesShiharaiHohoHenko.支払方法変更_終了分記載区分_終了後も記載する) {
+                int historySize = 3;
                 for (int i = 0; i < historySize && i < history.size(); i++) {
                     優先外.add(new KyufuSeigenShutsuryoku(
-                            記載文言,
+                            減額記載文言,
                             history.toList().get(i).get適用開始年月日(),
                             history.toList().get(i).get適用終了年月日()));
                 }
@@ -418,7 +351,7 @@ public class HihokenshaShikakuHakkoHandler {
                             || (history.toList().get(0).get終了区分().isEmpty()
                             && history.toList().get(0).get適用終了年月日().isBefore(FlexibleDate.getNowDate()))) {
                         優先的.add(new KyufuSeigenShutsuryoku(
-                                記載文言,
+                                減額記載文言,
                                 history.toList().get(0).get適用開始年月日(),
                                 history.toList().get(0).get適用終了年月日()));
                     }
@@ -460,7 +393,7 @@ public class HihokenshaShikakuHakkoHandler {
         return 給付制限;
     }
 
-    private void set給付制限to画面(List<KyufuSeigenShutsuryoku> 給付制限) throws IllegalArgumentException {
+    private void set給付制限to画面(List<KyufuSeigenShutsuryoku> 給付制限) {
         if (!給付制限.isEmpty()) {
             div.getTxtKyufuSeigenNaiyo1().setValue(給付制限.get(0).get制限内容());
             div.getTxtKyufuSeigenKikan1().setFromValue(new RDate(給付制限.get(0).get制限期間開始日().toString()));
@@ -525,16 +458,13 @@ public class HihokenshaShikakuHakkoHandler {
 
     private void set支援事業者(HihokenshaNo 被保険者番号) {
 
-        KyotakuKeikakuFinder finder = new KyotakuKeikakuFinder();
-        IItemList<KyotakuKeikakuRelateModel> 居宅計画List = finder.find居宅計画履歴一覧(被保険者番号);
-        RString 名称;
-        FlexibleDate 届出日;
-        FlexibleDate 適用開始日;
-
         List<ShienJigyosha> list = new ArrayList<>();
+        IItemList<KyotakuKeikakuRelateModel> 居宅計画List = new KyotakuKeikakuFinder().find居宅計画履歴一覧(被保険者番号);
         if (!居宅計画List.isEmpty()) {
+            RString 支援事業者名称;
+            FlexibleDate 適用開始日;
             for (KyotakuKeikakuRelateModel model : 居宅計画List) {
-                届出日 = model.get居宅給付計画届出モデル().get届出年月日();
+                FlexibleDate 届出日 = model.get居宅給付計画届出モデル().get届出年月日();
                 if (model.get居宅給付計画事業者作成モデル().isPresent()) {
                     // TODO n8187 久保田 計画事業者、委託先事業者の名称は、URのIKaigoJigyoshaDaichoManager(未実装)の
                     //                  getJigyoshaCurrent(引数＝事業者番号)を使用して取得する。
@@ -542,36 +472,35 @@ public class HihokenshaShikakuHakkoHandler {
                     //                  model.get居宅給付計画事業者作成モデル().get().get委託先事業者番号()を使用する。 2015/01/31。
                     RString 計画事業者名称 = new RString("計画事業者名称");
                     RString 委託先事業者名称 = new RString("委託先事業者名称");
-                    if (div.getMode_発行証タイプ() == 被保険者証) {
-                        名称 = new HihokenshaShikakuHakko().compose被保険者証支援事業者名称(計画事業者名称, 委託先事業者名称);
-                    } else {
-                        名称 = new HihokenshaShikakuHakko().compose資格者証支援事業者名称(計画事業者名称, 委託先事業者名称);
-                    }
+                    支援事業者名称 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).load支援事業者名称(計画事業者名称, 委託先事業者名称);
                     適用開始日 = model.get居宅給付計画事業者作成モデル().get().get適用開始年月日();
                 } else {
-                    名称 = JIKOSAKUSEI;
+                    支援事業者名称 = JIKOSAKUSEI;
                     適用開始日 = model.get居宅給付計画自己作成モデル().get().get適用開始年月日();
                 }
-                list.add(new ShienJigyosha(名称, 届出日, 適用開始日));
+                list.add(new ShienJigyosha(支援事業者名称, 届出日, 適用開始日));
             }
         }
+        set支援事業者to画面(list);
+    }
 
-        if (!list.isEmpty()) {
-            div.getTxtJigyosha1().setValue(list.get(0).get名称());
-            div.getTxtTodokedeYMD1().setValue(list.get(0).get届出日());
-            div.getTxtTekiyoStYMD1().setValue(list.get(0).get適用開始日());
-            if (1 < list.size()) {
-                div.getTxtJigyosha2().setValue(list.get(1).get名称());
-                div.getTxtTodokedeYMD2().setValue(list.get(1).get届出日());
-                div.getTxtTekiyoStYMD2().setValue(list.get(1).get適用開始日());
+    private void set支援事業者to画面(List<ShienJigyosha> 支援事業者List) {
+
+        if (!支援事業者List.isEmpty()) {
+            div.getTxtJigyosha1().setValue(支援事業者List.get(0).get名称());
+            div.getTxtTodokedeYMD1().setValue(支援事業者List.get(0).get届出日());
+            div.getTxtTekiyoStYMD1().setValue(支援事業者List.get(0).get適用開始日());
+            if (1 < 支援事業者List.size()) {
+                div.getTxtJigyosha2().setValue(支援事業者List.get(1).get名称());
+                div.getTxtTodokedeYMD2().setValue(支援事業者List.get(1).get届出日());
+                div.getTxtTekiyoStYMD2().setValue(支援事業者List.get(1).get適用開始日());
             }
-            if (2 < list.size()) {
-                div.getTxtJigyosha3().setValue(list.get(2).get名称());
-                div.getTxtTodokedeYMD3().setValue(list.get(2).get届出日());
-                div.getTxtTekiyoStYMD3().setValue(list.get(2).get適用開始日());
+            if (2 < 支援事業者List.size()) {
+                div.getTxtJigyosha3().setValue(支援事業者List.get(2).get名称());
+                div.getTxtTodokedeYMD3().setValue(支援事業者List.get(2).get届出日());
+                div.getTxtTekiyoStYMD3().setValue(支援事業者List.get(2).get適用開始日());
             }
         }
-
     }
 
     private void set施設入退所(ShikibetsuCode 識別コード) {
@@ -864,6 +793,11 @@ public class HihokenshaShikakuHakkoHandler {
         div.getTplShisetsuNyutaisho().getTxtShisetsuTaishoDate3().clearValue();
     }
 
+    /**
+     * 共有子Div「被保険者証資格者証発行」のバリデーション結果を返します。
+     *
+     * @return ValidationMessageControlPairs
+     */
     public ValidationMessageControlPairs validate被保険者証資格者証() {
 
         ValidationMessageControlPairs controlPairs = new ValidationMessageControlPairs();
