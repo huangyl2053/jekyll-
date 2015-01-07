@@ -22,10 +22,9 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -50,9 +49,9 @@ public class KaigoFukaKihonHandlerTest extends DbzTestBase {
     private static final RString 保険料段階 = new RString("010");
     private static final RString 表示用保険料段階 = new RString("第1段階");
     private static final ShikakuShutokuJiyu 資格取得事由 = ShikakuShutokuJiyu.転入;
-    private static final RDate 資格取得日 = new RDate("20140202");
+    private static final FlexibleDate 資格取得日 = new FlexibleDate("20140202");
     private static final ShikakuSoshitsuJiyu 資格喪失事由 = ShikakuSoshitsuJiyu.転出;
-    private static final RDate 資格喪失日 = new RDate("20140404");
+    private static final FlexibleDate 資格喪失日 = new FlexibleDate("20140404");
 
     public static class load {
 
@@ -126,9 +125,9 @@ public class KaigoFukaKihonHandlerTest extends DbzTestBase {
         div.setTxtTsuchishoNo(new TextBox());
         div.setTxtHihokenshaNo(new TextBox());
         div.setTxtHokenryoDankai(new TextBox());
-        div.setTxtShutokuYmd(new TextBoxDate());
+        div.setTxtShutokuYmd(new TextBoxFlexibleDate());
         div.setTxtShutokuJiyu(new TextBox());
-        div.setTxtSoshitsuYmd(new TextBoxDate());
+        div.setTxtSoshitsuYmd(new TextBoxFlexibleDate());
         div.setTxtSoshitsuJiyu(new TextBox());
         return div;
     }

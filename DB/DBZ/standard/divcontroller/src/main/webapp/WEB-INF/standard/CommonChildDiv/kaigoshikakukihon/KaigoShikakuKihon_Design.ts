@@ -37,16 +37,16 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaNo"));
             }
 
-            public txtShutokuYmd(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtShutokuYmd"));
+            public txtShutokuYmd(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShutokuYmd"));
             }
 
             public txtShutokuJiyu(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtShutokuJiyu"));
             }
 
-            public txtSoshitsuYmd(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtSoshitsuYmd"));
+            public txtSoshitsuYmd(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSoshitsuYmd"));
             }
 
             public txtSoshitsuJiyu(): UZA.TextBox {

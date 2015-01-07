@@ -33,7 +33,7 @@ var DBZ;
             };
 
             Controls.prototype.txtShutokuYmd = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtShutokuYmd"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShutokuYmd"));
             };
 
             Controls.prototype.txtShutokuJiyu = function () {
@@ -41,7 +41,7 @@ var DBZ;
             };
 
             Controls.prototype.txtSoshitsuYmd = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtSoshitsuYmd"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSoshitsuYmd"));
             };
 
             Controls.prototype.txtSoshitsuJiyu = function () {

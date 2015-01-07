@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -45,9 +46,9 @@ public class KaigoShikakuKihonHandlerTest extends DbzTestBase {
     private static final ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000002");
     private static final RString 被保険者番号 = new RString("000003");
     private static final ShikakuShutokuJiyu 資格取得事由 = ShikakuShutokuJiyu.転入;
-    private static final RDate 資格取得日 = new RDate("20140202");
+    private static final FlexibleDate 資格取得日 = new FlexibleDate("20140202");
     private static final ShikakuSoshitsuJiyu 資格喪失事由 = ShikakuSoshitsuJiyu.転出;
-    private static final RDate 資格喪失日 = new RDate("20140404");
+    private static final FlexibleDate 資格喪失日 = new FlexibleDate("20140404");
     private static final JushochitokureishaKubun 住所地特例者区分 = JushochitokureishaKubun.通常資格者;
     private static final YMDHMS 処理日時 = new YMDHMS("20140102030405");
     private static final YoKaigoJotaiKubun 要介護状態区分 = YoKaigoJotaiKubun.要介護1;
@@ -127,9 +128,9 @@ public class KaigoShikakuKihonHandlerTest extends DbzTestBase {
     private static KaigoShikakuKihonDiv createNewDiv() {
         KaigoShikakuKihonDiv div = new KaigoShikakuKihonDiv();
         div.setTxtHihokenshaNo(new TextBox());
-        div.setTxtShutokuYmd(new TextBoxDate());
+        div.setTxtShutokuYmd(new TextBoxFlexibleDate());
         div.setTxtShutokuJiyu(new TextBox());
-        div.setTxtSoshitsuYmd(new TextBoxDate());
+        div.setTxtSoshitsuYmd(new TextBoxFlexibleDate());
         div.setTxtSoshitsuJiyu(new TextBox());
         div.setTxtJutokuKubun(new TextBox());
         div.setTxtYokaigoJotaiKubun(new TextBox());

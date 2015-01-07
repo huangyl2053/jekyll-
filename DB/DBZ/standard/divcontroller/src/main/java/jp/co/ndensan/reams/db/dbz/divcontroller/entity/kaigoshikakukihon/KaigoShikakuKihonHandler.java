@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.ur.urz.business.IKobetsuJikoKaigoJukyu;
 import jp.co.ndensan.reams.ur.urz.realservice.IJukyuDaichoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -69,9 +68,9 @@ public class KaigoShikakuKihonHandler {
 
         HihokenshaDaichoModel daichoModel = daicho.get();
         div.getTxtHihokenshaNo().setValue(daichoModel.get被保険者番号().value());
-        div.getTxtShutokuYmd().setValue(new RDate(daichoModel.get資格取得年月日().toString()));
+        div.getTxtShutokuYmd().setValue(daichoModel.get資格取得年月日());
         div.getTxtShutokuJiyu().setValue(daichoModel.get資格取得事由().getName());
-        div.getTxtSoshitsuYmd().setValue(new RDate(daichoModel.get資格喪失年月日().toString()));
+        div.getTxtSoshitsuYmd().setValue(daichoModel.get資格喪失年月日());
         div.getTxtSoshitsuJiyu().setValue(daichoModel.get資格喪失事由().getName());
         div.getTxtJutokuKubun().setValue(new RString(daichoModel.get住所地特例者区分().name()));
 
@@ -79,8 +78,8 @@ public class KaigoShikakuKihonHandler {
 
         if (jukyu != null) {
             div.getTxtYokaigoJotaiKubun().setValue(new RString(jukyu.get要介護状態区分().name()));
-            div.getTxtNinteiKaishiYmd().setValue(new RDate(jukyu.get認定有効開始日().toString()));
-            div.getTxtNinteiShuryoYmd().setValue(new RDate(jukyu.get認定有効終了日().toString()));
+            div.getTxtNinteiKaishiYmd().setValue(jukyu.get認定有効開始日());
+            div.getTxtNinteiShuryoYmd().setValue(jukyu.get認定有効終了日());
         }
     }
 }

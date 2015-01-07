@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbz.realservice.HokenryoDankaiManager;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 介護賦課基本情報Divの操作を行うクラスです。
@@ -86,9 +85,9 @@ public class KaigoFukaKihonHandler {
         if (daicho.isPresent()) {
             HihokenshaDaichoModel daichoModel = daicho.get();
             div.getTxtHihokenshaNo().setValue(daichoModel.get被保険者番号().value());
-            div.getTxtShutokuYmd().setValue(new RDate(daichoModel.get資格取得年月日().toString()));
+            div.getTxtShutokuYmd().setValue(daichoModel.get資格取得年月日());
             div.getTxtShutokuJiyu().setValue(daichoModel.get資格取得事由().getName());
-            div.getTxtSoshitsuYmd().setValue(new RDate(daichoModel.get資格喪失年月日().toString()));
+            div.getTxtSoshitsuYmd().setValue(daichoModel.get資格喪失年月日());
             div.getTxtSoshitsuJiyu().setValue(daichoModel.get資格喪失事由().getName());
         }
     }
