@@ -6,6 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.business.config.shikaku;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoPrint;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshaNoPrintType;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshashoPrintType;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.KyotakuJigyoshaRirekiPrintType;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.YukoKigenPrintType;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -26,7 +30,7 @@ import static org.mockito.Mockito.when;
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class HihokenshashoIndicationPrintConfigTest {
+public class HihokenshashoPrintConfigTest {
 
     public static class get extends DbaTestBase {
 
@@ -38,57 +42,57 @@ public class HihokenshashoIndicationPrintConfigTest {
         }
 
         @Test
-        public void get氏名カナ表示有無で_1が返る() {
-            RString result = sut.get氏名カナ表示有無();
-            assertThat(result, is(new RString("1")));
+        public void is氏名カナ表示有りで_trueが返る() {
+            boolean result = sut.is氏名カナ表示有り();
+            assertThat(result, is(true));
         }
 
         @Test
-        public void get証表示タイプで_21が返る() {
-            RString result = sut.get証表示タイプ();
-            assertThat(result, is(new RString("21")));
+        public void get証表示タイプで_B4横が返る() {
+            HihokenshashoPrintType result = sut.get証表示タイプ();
+            assertThat(result, is(HihokenshashoPrintType.B4横));
         }
 
         @Test
-        public void get被保険者番号表示書式で_2が返る() {
-            RString result = sut.get被保険者番号表示書式();
-            assertThat(result, is(new RString("2")));
+        public void get被保険者番号表示書式で_そのままが返る() {
+            HihokenshaNoPrintType result = sut.get被保険者番号表示書式();
+            assertThat(result, is(HihokenshaNoPrintType.そのまま));
         }
 
         @Test
-        public void get郵便番号表示有無で_1が返る() {
-            RString result = sut.get郵便番号表示有無();
-            assertThat(result, is(new RString("1")));
+        public void is郵便番号表示有りで_trueが返る() {
+            boolean result = sut.is郵便番号表示有り();
+            assertThat(result, is(true));
         }
 
         @Test
-        public void get要介護認定期限切れ表示有無で_1が返る() {
-            RString result = sut.get要介護認定期限切れ表示有無();
-            assertThat(result, is(new RString("1")));
+        public void is要介護認定期限切れ表示有りで_trueが返る() {
+            boolean result = sut.is要介護認定期限切れ表示有り();
+            assertThat(result, is(true));
         }
 
         @Test
-        public void get居宅支援事業者適用切れ表示有無で_1が返る() {
-            RString result = sut.get居宅支援事業者適用切れ表示有無();
-            assertThat(result, is(new RString("1")));
+        public void is居宅支援事業者適用切れ表示有りで_trueが返る() {
+            boolean result = sut.is居宅支援事業者適用切れ表示有り();
+            assertThat(result, is(true));
         }
 
         @Test
-        public void get居宅支援事業者履歴表示方法で_0が返る() {
-            RString result = sut.get居宅支援事業者履歴表示方法();
-            assertThat(result, is(new RString("0")));
+        public void get居宅支援事業者履歴表示方法で_表示が返る() {
+            KyotakuJigyoshaRirekiPrintType result = sut.get居宅支援事業者履歴表示方法();
+            assertThat(result, is(KyotakuJigyoshaRirekiPrintType.表示));
         }
 
         @Test
-        public void get合併前印刷時_有効期限表示方法で_2が返る() {
-            RString result = sut.get合併前印刷時_有効期限表示方法();
-            assertThat(result, is(new RString("2")));
+        public void get合併前印刷時_有効期限表示方法で_有効期限のみが返る() {
+            YukoKigenPrintType result = sut.get合併前印刷時_有効期限表示方法();
+            assertThat(result, is(YukoKigenPrintType.有効期限のみ));
         }
 
         @Test
-        public void get委託代行業者表示有無で_0が返る() {
-            RString result = sut.get委託代行業者表示有無();
-            assertThat(result, is(new RString("0")));
+        public void is委託代行業者表示有り() {
+            boolean result = sut.is委託代行業者表示有り();
+            assertThat(result, is(false));
         }
 
         @Test
@@ -104,9 +108,9 @@ public class HihokenshashoIndicationPrintConfigTest {
         }
 
         @Test
-        public void get適用開始日切替表示区分で_0が返る() {
-            RString result = sut.get適用開始日切替表示区分();
-            assertThat(result, is(new RString("0")));
+        public void is届出日の代わりに適用開始日を表示で_falseが返る() {
+            boolean result = sut.is届出日の代わりに適用開始日を表示();
+            assertThat(result, is(false));
         }
 
     }

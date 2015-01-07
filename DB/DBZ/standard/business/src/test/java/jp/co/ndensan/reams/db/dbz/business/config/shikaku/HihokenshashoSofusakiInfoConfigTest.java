@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.config.shikaku;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoSofusakiInfo;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.MojigireControlType;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -38,21 +39,21 @@ public class HihokenshashoSofusakiInfoConfigTest {
         }
 
         @Test
-        public void get世帯主表示有無で_0が返る() {
-            RString result = sut.get世帯主表示有無();
-            assertThat(result, is(new RString("0")));
+        public void is世帯主表示有りで_falseが返る() {
+            boolean result = sut.is世帯主表示有り();
+            assertThat(result, is(false));
         }
 
         @Test
-        public void get敬称表示方法で_1が返る() {
-            RString result = sut.get敬称表示方法();
-            assertThat(result, is(new RString("1")));
+        public void is敬称表示有りで_trueが返る() {
+            boolean result = sut.is敬称表示有り();
+            assertThat(result, is(true));
         }
 
         @Test
-        public void get外部帳票文字切れ制御方法で_1が返る() {
-            RString result = sut.get外部帳票文字切れ制御方法();
-            assertThat(result, is(new RString("1")));
+        public void get外部帳票文字切れ制御方法で_印字可能範囲まで印字するが返る() {
+            MojigireControlType result = sut.get外部帳票文字切れ制御方法();
+            assertThat(result, is(MojigireControlType.印字可能範囲まで印字する));
         }
 
     }

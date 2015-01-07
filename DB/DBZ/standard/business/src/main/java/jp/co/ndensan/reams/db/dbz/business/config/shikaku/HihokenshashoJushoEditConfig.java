@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoJushoEdit;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValueBoolean;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GunNamePrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HowToEditJusho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.KatagakiPrint;
@@ -56,12 +57,13 @@ public class HihokenshashoJushoEditConfig {
     }
 
     /**
-     * 帳票独自区分を表す値を返します。
+     * 帳票独自区分を使用するか否かを返します。
      *
-     * @return 帳票独自区分
+     * @return 業務コンフィグの値が帳票独自区分を示す場合true、市町村共通を示す場合false
      */
-    public RString get帳票独自区分() {
-        return configs.get(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_帳票独自区分);
+    public boolean is帳票独自区分を使用() {
+        return ConfigValueBoolean.perseBoolean(
+                configs.get(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_帳票独自区分));
     }
 
     /**
