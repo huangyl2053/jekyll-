@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.config;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShiharaiHohoHenko;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShiharaiHohoHenko;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShiharaiHohoHenkoShuryobunKisaiKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -40,8 +40,8 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
 
         @Test
         public void 支払方法変更_証表示支払方法_終了分記載区分を指定したとき_業務コンフィグ設定値が返る() {
-            ConfigValuesShiharaiHohoHenko result = sut.get支払方法変更_証表示支払方法_終了分記載区分();
-            assertThat(result, is(ConfigValuesShiharaiHohoHenko.toValue(new RString("1"))));
+            ShiharaiHohoHenkoShuryobunKisaiKubun result = sut.get支払方法変更_証表示支払方法_終了分記載区分();
+            assertThat(result, is(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する));
         }
 
         @Test
@@ -52,8 +52,8 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
 
         @Test
         public void 支払方法変更_証表示差止_終了分記載区分を指定したとき_業務コンフィグ設定値が返る() {
-            ConfigValuesShiharaiHohoHenko result = sut.get支払方法変更_証表示差止_終了分記載区分();
-            assertThat(result, is(ConfigValuesShiharaiHohoHenko.toValue(new RString("1"))));
+            ShiharaiHohoHenkoShuryobunKisaiKubun result = sut.get支払方法変更_証表示差止_終了分記載区分();
+            assertThat(result, is(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する));
         }
 
         @Test
@@ -64,8 +64,8 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
 
         @Test
         public void 支払方法変更_証表示減額_終了分記載区分を指定したとき_業務コンフィグ設定値が返る() {
-            ConfigValuesShiharaiHohoHenko result = sut.get支払方法変更_証表示減額_終了分記載区分();
-            assertThat(result, is(ConfigValuesShiharaiHohoHenko.toValue(new RString("0"))));
+            ShiharaiHohoHenkoShuryobunKisaiKubun result = sut.get支払方法変更_証表示減額_終了分記載区分();
+            assertThat(result, is(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後は記載しない));
         }
 
         @Test
@@ -76,8 +76,8 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
 
         @Test
         public void 支払方法変更_資格者証表示支払方法_終了分記載区分を指定したとき_業務コンフィグ設定値が返る() {
-            ConfigValuesShiharaiHohoHenko result = sut.get支払方法変更_資格者証表示支払方法_終了分記載区分();
-            assertThat(result, is(ConfigValuesShiharaiHohoHenko.toValue(new RString("1"))));
+            ShiharaiHohoHenkoShuryobunKisaiKubun result = sut.get支払方法変更_資格者証表示支払方法_終了分記載区分();
+            assertThat(result, is(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する));
         }
 
         @Test
@@ -88,8 +88,8 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
 
         @Test
         public void 支払方法変更_資格者証表示差止_終了分記載区分を指定したとき_業務コンフィグ設定値が返る() {
-            ConfigValuesShiharaiHohoHenko result = sut.get支払方法変更_資格者証表示差止_終了分記載区分();
-            assertThat(result, is(ConfigValuesShiharaiHohoHenko.toValue(new RString("1"))));
+            ShiharaiHohoHenkoShuryobunKisaiKubun result = sut.get支払方法変更_資格者証表示差止_終了分記載区分();
+            assertThat(result, is(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する));
         }
 
         @Test
@@ -100,8 +100,8 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
 
         @Test
         public void 支払方法変更_資格者証表示減額_終了分記載区分を指定したとき_業務コンフィグ設定値が返る() {
-            ConfigValuesShiharaiHohoHenko result = sut.get支払方法変更_資格者証表示減額_終了分記載区分();
-            assertThat(result, is(ConfigValuesShiharaiHohoHenko.toValue(new RString("1"))));
+            ShiharaiHohoHenkoShuryobunKisaiKubun result = sut.get支払方法変更_資格者証表示減額_終了分記載区分();
+            assertThat(result, is(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する));
         }
 
         @Test
@@ -120,7 +120,7 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
                 ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_終了分記載区分,
                 nowDate,
                 SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("1"));
+        )).thenReturn(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する.code());
         when(mock.get(
                 ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言,
                 nowDate,
@@ -130,7 +130,7 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
                 ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_終了分記載区分,
                 nowDate,
                 SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("1"));
+        )).thenReturn(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する.code());
         when(mock.get(
                 ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言,
                 nowDate,
@@ -140,7 +140,7 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
                 ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_終了分記載区分,
                 nowDate,
                 SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("0"));
+        )).thenReturn(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後は記載しない.code());
         when(mock.get(
                 ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言,
                 nowDate,
@@ -150,7 +150,7 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
                 ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_終了分記載区分,
                 nowDate,
                 SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("1"));
+        )).thenReturn(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する.code());
         when(mock.get(
                 ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言,
                 nowDate,
@@ -160,7 +160,7 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
                 ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_終了分記載区分,
                 nowDate,
                 SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("1"));
+        )).thenReturn(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する.code());
         when(mock.get(
                 ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言,
                 nowDate,
@@ -170,7 +170,7 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
                 ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_終了分記載区分,
                 nowDate,
                 SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("1"));
+        )).thenReturn(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する.code());
         when(mock.get(
                 ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言,
                 nowDate,

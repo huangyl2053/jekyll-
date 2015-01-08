@@ -10,9 +10,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.config.HihokenshashoItakudaikoHyojiConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.ShikakushashoItakudaikoHyojiConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.ShikakushashoKigenConfig;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesHihokenshashoItakudaikoHyoji;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShikakushashoItakudaikoHyoji;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShikakushashoKigen;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshashoItakudaikoHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShikakushashoItakudaikoHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.YukoKigenShokiHyoji;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -206,28 +206,28 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
     private static ShikakushashoKigenConfig ShikakushashoKigenConfig初期表示1Mock() {
         ShikakushashoKigenConfig mock = mock(ShikakushashoKigenConfig.class);
         when(mock.get資格者証期限_有効期限加算値()).thenReturn(有効期限加算値);
-        when(mock.get資格者証期限_有効期限初期表示()).thenReturn(ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_システム日付plus有効期限加算値);
+        when(mock.get資格者証期限_有効期限初期表示()).thenReturn(YukoKigenShokiHyoji.システム日付plus有効期限加算値);
         return mock;
     }
 
     private static ShikakushashoKigenConfig ShikakushashoKigenConfig初期表示2Mock() {
         ShikakushashoKigenConfig mock = mock(ShikakushashoKigenConfig.class);
         when(mock.get資格者証期限_有効期限加算値()).thenReturn(有効期限加算値);
-        when(mock.get資格者証期限_有効期限初期表示()).thenReturn(ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_更新申請時_従前認定終値比較);
+        when(mock.get資格者証期限_有効期限初期表示()).thenReturn(YukoKigenShokiHyoji.更新申請時_従前認定終値比較);
         return mock;
     }
 
     private static ShikakushashoKigenConfig ShikakushashoKigenConfig初期表示3Mock() {
         ShikakushashoKigenConfig mock = mock(ShikakushashoKigenConfig.class);
         when(mock.get資格者証期限_有効期限加算値()).thenReturn(有効期限加算値);
-        when(mock.get資格者証期限_有効期限初期表示()).thenReturn(ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_更新区分申請時_従前認定終値比較);
+        when(mock.get資格者証期限_有効期限初期表示()).thenReturn(YukoKigenShokiHyoji.更新区分申請時_従前認定終値比較);
         return mock;
     }
 
     public static class compose被保険者証支援事業者名称Test {
 
         /**
-         * 業務コンフィグDBA：被保険者証表示方法_委託代行業者_表示有無が0(非表示) <br />
+         * 業務コンフィグDBA：表示有無が0(非表示) <br />
          * のとき、支援事業者名称は計画事業者名称を返す。
          */
         @Test
@@ -246,7 +246,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         }
 
         /**
-         * 業務コンフィグDBA：被保険者証表示方法_委託代行業者_表示有無が1(表示) <br />
+         * 業務コンフィグDBA：表示有無が1(表示) <br />
          * のとき、支援事業者名称は計画事業者名称と委託先事業者名称を編集した事業者名称を返す。
          */
         @Test
@@ -267,13 +267,13 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
 
     private static HihokenshashoItakudaikoHyojiConfig HihokenshashoItakudaikoHyojiConfig委託代行業者_非表示Mock() {
         HihokenshashoItakudaikoHyojiConfig mock = mock(HihokenshashoItakudaikoHyojiConfig.class);
-        when(mock.get被保険者証表示方法_委託代行業者_表示有無()).thenReturn(ConfigValuesHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_非表示);
+        when(mock.get被保険者証表示方法_委託代行業者_表示有無()).thenReturn(HihokenshashoItakudaikoHyoji.非表示);
         return mock;
     }
 
     private static HihokenshashoItakudaikoHyojiConfig HihokenshashoItakudaikoHyojiConfig委託代行業者_表示Mock() {
         HihokenshashoItakudaikoHyojiConfig mock = mock(HihokenshashoItakudaikoHyojiConfig.class);
-        when(mock.get被保険者証表示方法_委託代行業者_表示有無()).thenReturn(ConfigValuesHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示);
+        when(mock.get被保険者証表示方法_委託代行業者_表示有無()).thenReturn(HihokenshashoItakudaikoHyoji.表示);
         when(mock.get被保険者証表示方法_委託代行業者_表示開始文言()).thenReturn(委託代行業者表示開始文言);
         when(mock.get被保険者証表示方法_委託代行業者_表示終了文言()).thenReturn(委託代行業者表示終了文言);
         return mock;
@@ -282,7 +282,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
     public static class compose資格者証支援事業者名称Test {
 
         /**
-         * 業務コンフィグDBD：資格者証表示方法_委託代行業者_表示有無が0(非表示) <br />
+         * 業務コンフィグDBD：表示有無が0(非表示) <br />
          * のとき、支援事業者名称は計画事業者名称を返す。
          */
         @Test
@@ -301,7 +301,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         }
 
         /**
-         * 業務コンフィグDBD：資格者証表示方法_委託代行業者_表示有無が1(表示) <br />
+         * 業務コンフィグDBD：表示有無が1(表示) <br />
          * のとき、支援事業者名称は計画事業者名称と委託先事業者名称を編集した事業者名称を返す。
          */
         @Test
@@ -323,13 +323,13 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
 
     private static ShikakushashoItakudaikoHyojiConfig ShikakushashoItakudaikoHyojiConfig委託代行業者_非表示Mock() {
         ShikakushashoItakudaikoHyojiConfig mock = mock(ShikakushashoItakudaikoHyojiConfig.class);
-        when(mock.get資格者証表示方法_委託代行業者の表示有無()).thenReturn(ConfigValuesShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者_非表示);
+        when(mock.get資格者証表示方法_委託代行業者の表示有無()).thenReturn(ShikakushashoItakudaikoHyoji.非表示);
         return mock;
     }
 
     private static ShikakushashoItakudaikoHyojiConfig ShikakushashoItakudaikoHyojiConfig委託代行業者_表示Mock() {
         ShikakushashoItakudaikoHyojiConfig mock = mock(ShikakushashoItakudaikoHyojiConfig.class);
-        when(mock.get資格者証表示方法_委託代行業者の表示有無()).thenReturn(ConfigValuesShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者_表示);
+        when(mock.get資格者証表示方法_委託代行業者の表示有無()).thenReturn(ShikakushashoItakudaikoHyoji.表示);
         when(mock.get資格者証表示方法_委託代行業者表示開始文言()).thenReturn(委託代行業者表示開始文言);
         when(mock.get資格者証表示方法_委託代行業者表示終了文言()).thenReturn(委託代行業者表示終了文言);
         return mock;

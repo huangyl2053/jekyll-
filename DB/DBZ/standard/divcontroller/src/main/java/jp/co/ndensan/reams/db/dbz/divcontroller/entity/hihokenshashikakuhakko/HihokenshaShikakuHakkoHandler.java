@@ -34,8 +34,8 @@ import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShik
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidator;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidationMessage;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShiharaiHohoHenko;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShuruiShikyuGendoGet;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShiharaiHohoHenkoShuryobunKisaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShuruiShikyuGendoGet;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.ShuryoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.util.Comparators.NullComparator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HakkoShoTypeBehaviors.IHakkoShoTypeBehavior;
@@ -198,10 +198,10 @@ public class HihokenshaShikakuHakkoHandler {
 
     private void set種類支給限度基準額(NinteiShinseiKekkaModel 認定申請結果) {
 
-        ConfigValuesShuruiShikyuGendoGet 取得方法 = new ShuruiShikyuGendoGetConfig().get種類支給限度額_取得方法();
+        ShuruiShikyuGendoGet 取得方法 = new ShuruiShikyuGendoGetConfig().get種類支給限度額_取得方法();
         IItemList<ServiceShuruiShikyuGendoGakuModel> list;
 
-        if (取得方法 == ConfigValuesShuruiShikyuGendoGet.種類支給限度額検索時に要介護度を検索キーにしない) {
+        if (取得方法 == ShuruiShikyuGendoGet.要介護度を検索キーにしない) {
             list = new ServiceShuruiShikyuGendoGakuManager().getサービス種類支給限度額一覧(
                     YokaigoJotaiKubun09.toValue(認定申請結果.get要介護認定結果情報モデル().get().get要介護状態区分コード().value()),
                     認定申請結果.get受給者台帳モデル().get支給限度有効開始年月日());
@@ -296,10 +296,10 @@ public class HihokenshaShikakuHakkoHandler {
         IHakkoShoTypeBehavior behaviorByMode = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ());
         ShiharaiHohoHenkoManager manager = new ShiharaiHohoHenkoManager();
 
-        ConfigValuesShiharaiHohoHenko 支払方法終了分記載区分 = behaviorByMode.load支払方法終了分記載区分();
+        ShiharaiHohoHenkoShuryobunKisaiKubun 支払方法終了分記載区分 = behaviorByMode.load支払方法終了分記載区分();
         RString 支払方法記載文言 = behaviorByMode.load支払方法記載文言();
         IItemList<ShiharaiHohoHenkoModel> history = manager.get1号償還払化履歴(被保険者番号);
-        if (支払方法終了分記載区分 == ConfigValuesShiharaiHohoHenko.支払方法変更_終了分記載区分_終了後も記載する) {
+        if (支払方法終了分記載区分 == ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する) {
             優先外.addAll(createKyufuSeigenShutsuryokuList(history, 終了分記載区分が終了後も記載する場合の給付制限件数, 支払方法記載文言));
         } else {
             if (!history.isEmpty()) {
@@ -309,10 +309,10 @@ public class HihokenshaShikakuHakkoHandler {
             }
         }
 
-        ConfigValuesShiharaiHohoHenko 減額終了分記載区分 = behaviorByMode.load減額終了分記載区分();
+        ShiharaiHohoHenkoShuryobunKisaiKubun 減額終了分記載区分 = behaviorByMode.load減額終了分記載区分();
         RString 減額記載文言 = behaviorByMode.load減額記載文言();
         history = manager.get1号減額履歴(被保険者番号);
-        if (減額終了分記載区分 == ConfigValuesShiharaiHohoHenko.支払方法変更_終了分記載区分_終了後も記載する) {
+        if (減額終了分記載区分 == ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する) {
             優先外.addAll(createKyufuSeigenShutsuryokuList(history, 終了分記載区分が終了後も記載する場合の給付制限件数, 減額記載文言));
         } else {
             if (!history.isEmpty()) {
@@ -338,11 +338,11 @@ public class HihokenshaShikakuHakkoHandler {
     private List<KyufuSeigenShutsuryoku> create２号被保険者給付制限(
             HihokenshaNo 被保険者番号) {
         List<KyufuSeigenShutsuryoku> 給付制限 = new ArrayList<>();
-        ConfigValuesShiharaiHohoHenko 差止終了分記載区分 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).load差止終了分記載区分();
+        ShiharaiHohoHenkoShuryobunKisaiKubun 差止終了分記載区分 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).load差止終了分記載区分();
         RString 差止記載文言 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).load差止記載文言();
         IItemList<ShiharaiHohoHenkoModel> history = new ShiharaiHohoHenkoManager().get2号差止履歴(被保険者番号);
 
-        if (差止終了分記載区分 == ConfigValuesShiharaiHohoHenko.支払方法変更_終了分記載区分_終了後も記載する) {
+        if (差止終了分記載区分 == ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する) {
             給付制限.addAll(createKyufuSeigenShutsuryokuList(history, 終了分記載区分が終了後も記載する場合の給付制限件数, 差止記載文言));
         } else {
             給付制限.addAll(createKyufuSeigenShutsuryokuList(history, 終了分記載区分が終了後記載しない場合の給付制限件数, 差止記載文言));

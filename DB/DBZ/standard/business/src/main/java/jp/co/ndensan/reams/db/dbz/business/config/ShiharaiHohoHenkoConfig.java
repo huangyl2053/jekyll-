@@ -21,7 +21,7 @@ import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.Co
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_終了分記載区分;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShiharaiHohoHenko;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShiharaiHohoHenkoShuryobunKisaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -67,8 +67,8 @@ public class ShiharaiHohoHenkoConfig {
      *
      * @return 支払方法変更_証表示支払方法_終了分記載区分
      */
-    public ConfigValuesShiharaiHohoHenko get支払方法変更_証表示支払方法_終了分記載区分() {
-        return ConfigValuesShiharaiHohoHenko.toValue(configs.get(支払方法変更_証表示支払方法_終了分記載区分));
+    public ShiharaiHohoHenkoShuryobunKisaiKubun get支払方法変更_証表示支払方法_終了分記載区分() {
+        return ShiharaiHohoHenkoShuryobunKisaiKubun.toValue(configs.get(支払方法変更_証表示支払方法_終了分記載区分));
     }
 
     /**
@@ -85,8 +85,8 @@ public class ShiharaiHohoHenkoConfig {
      *
      * @return 支払方法変更_証表示差止_終了分記載区分
      */
-    public ConfigValuesShiharaiHohoHenko get支払方法変更_証表示差止_終了分記載区分() {
-        return ConfigValuesShiharaiHohoHenko.toValue(configs.get(支払方法変更_証表示差止_終了分記載区分));
+    public ShiharaiHohoHenkoShuryobunKisaiKubun get支払方法変更_証表示差止_終了分記載区分() {
+        return ShiharaiHohoHenkoShuryobunKisaiKubun.toValue(configs.get(支払方法変更_証表示差止_終了分記載区分));
     }
 
     /**
@@ -103,8 +103,8 @@ public class ShiharaiHohoHenkoConfig {
      *
      * @return 支払方法変更_証表示減額_終了分記載区分
      */
-    public ConfigValuesShiharaiHohoHenko get支払方法変更_証表示減額_終了分記載区分() {
-        return ConfigValuesShiharaiHohoHenko.toValue(configs.get(支払方法変更_証表示減額_終了分記載区分));
+    public ShiharaiHohoHenkoShuryobunKisaiKubun get支払方法変更_証表示減額_終了分記載区分() {
+        return ShiharaiHohoHenkoShuryobunKisaiKubun.toValue(configs.get(支払方法変更_証表示減額_終了分記載区分));
     }
 
     /**
@@ -121,8 +121,8 @@ public class ShiharaiHohoHenkoConfig {
      *
      * @return 支払方法変更_資格者証表示支払方法_終了分記載区分
      */
-    public ConfigValuesShiharaiHohoHenko get支払方法変更_資格者証表示支払方法_終了分記載区分() {
-        return ConfigValuesShiharaiHohoHenko.toValue(configs.get(支払方法変更_資格者証表示支払方法_終了分記載区分));
+    public ShiharaiHohoHenkoShuryobunKisaiKubun get支払方法変更_資格者証表示支払方法_終了分記載区分() {
+        return ShiharaiHohoHenkoShuryobunKisaiKubun.toValue(configs.get(支払方法変更_資格者証表示支払方法_終了分記載区分));
     }
 
     /**
@@ -139,8 +139,8 @@ public class ShiharaiHohoHenkoConfig {
      *
      * @return 支払方法変更_資格者証表示差止_終了分記載区分
      */
-    public ConfigValuesShiharaiHohoHenko get支払方法変更_資格者証表示差止_終了分記載区分() {
-        return ConfigValuesShiharaiHohoHenko.toValue(configs.get(支払方法変更_資格者証表示差止_終了分記載区分));
+    public ShiharaiHohoHenkoShuryobunKisaiKubun get支払方法変更_資格者証表示差止_終了分記載区分() {
+        return ShiharaiHohoHenkoShuryobunKisaiKubun.toValue(configs.get(支払方法変更_資格者証表示差止_終了分記載区分));
     }
 
     /**
@@ -157,8 +157,8 @@ public class ShiharaiHohoHenkoConfig {
      *
      * @return 支払方法変更_資格者証表示減額_終了分記載区分
      */
-    public ConfigValuesShiharaiHohoHenko get支払方法変更_資格者証表示減額_終了分記載区分() {
-        return ConfigValuesShiharaiHohoHenko.toValue(configs.get(支払方法変更_資格者証表示減額_終了分記載区分));
+    public ShiharaiHohoHenkoShuryobunKisaiKubun get支払方法変更_資格者証表示減額_終了分記載区分() {
+        return ShiharaiHohoHenkoShuryobunKisaiKubun.toValue(configs.get(支払方法変更_資格者証表示減額_終了分記載区分));
     }
 
     /**

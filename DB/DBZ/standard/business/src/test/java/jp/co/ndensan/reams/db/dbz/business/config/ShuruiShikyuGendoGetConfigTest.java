@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.config;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShuruiShikyuGendoGet;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShuruiShikyuGendoGet;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShuruiShikyuGendoGet;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -40,8 +40,8 @@ public class ShuruiShikyuGendoGetConfigTest extends DbzTestBase {
 
         @Test
         public void 種類支給限度額_取得方法を指定したとき_業務コンフィグ設定値が返る() {
-            ConfigValuesShuruiShikyuGendoGet result = sut.get種類支給限度額_取得方法();
-            assertThat(result, is(ConfigValuesShuruiShikyuGendoGet.toValue(new RString("1"))));
+            ShuruiShikyuGendoGet result = sut.get種類支給限度額_取得方法();
+            assertThat(result, is(ShuruiShikyuGendoGet.要介護度を検索キーにする));
         }
 
     }
@@ -54,7 +54,7 @@ public class ShuruiShikyuGendoGetConfigTest extends DbzTestBase {
                 ConfigKeysShuruiShikyuGendoGet.種類支給限度額_取得方法,
                 nowDate,
                 SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("1"));
+        )).thenReturn(ShuruiShikyuGendoGet.要介護度を検索キーにする.code());
         return mock;
     }
 }

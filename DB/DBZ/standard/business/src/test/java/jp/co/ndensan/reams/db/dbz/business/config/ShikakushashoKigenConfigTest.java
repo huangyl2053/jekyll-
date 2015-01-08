@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.config;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoKigen;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShikakushashoKigen;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.YukoKigenShokiHyoji;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -46,8 +46,8 @@ public class ShikakushashoKigenConfigTest extends DbzTestBase {
 
         @Test
         public void 資格者証期限_有効期限初期表示を指定したとき_業務コンフィグ設定値が返る() {
-            ConfigValuesShikakushashoKigen result = sut.get資格者証期限_有効期限初期表示();
-            assertThat(result, is(ConfigValuesShikakushashoKigen.toValue(new RString("3"))));
+            YukoKigenShokiHyoji result = sut.get資格者証期限_有効期限初期表示();
+            assertThat(result, is(YukoKigenShokiHyoji.更新区分申請時_従前認定終値比較));
         }
 
     }
@@ -65,7 +65,7 @@ public class ShikakushashoKigenConfigTest extends DbzTestBase {
                 ConfigKeysShikakushashoKigen.資格者証期限_有効期限初期表示,
                 nowDate,
                 SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("3"));
+        )).thenReturn(YukoKigenShokiHyoji.更新区分申請時_従前認定終値比較.code());
         return mock;
     }
 }

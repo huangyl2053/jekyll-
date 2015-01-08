@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.config.ShiharaiHohoHenkoConfig;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakko;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShiharaiHohoHenko;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShiharaiHohoHenkoShuryobunKisaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku.HihokenshashoKofuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku.ShikakushashoKofuJiyu;
@@ -71,15 +71,15 @@ final class HakkoShoTypeBehaviors {
 
         int get審査会意見最大長();
 
-        ConfigValuesShiharaiHohoHenko load差止終了分記載区分();
+        ShiharaiHohoHenkoShuryobunKisaiKubun load差止終了分記載区分();
 
         RString load差止記載文言();
 
-        ConfigValuesShiharaiHohoHenko load支払方法終了分記載区分();
+        ShiharaiHohoHenkoShuryobunKisaiKubun load支払方法終了分記載区分();
 
         RString load支払方法記載文言();
 
-        ConfigValuesShiharaiHohoHenko load減額終了分記載区分();
+        ShiharaiHohoHenkoShuryobunKisaiKubun load減額終了分記載区分();
 
         RString load減額記載文言();
 
@@ -114,7 +114,7 @@ final class HakkoShoTypeBehaviors {
         }
 
         @Override
-        public ConfigValuesShiharaiHohoHenko load差止終了分記載区分() {
+        public ShiharaiHohoHenkoShuryobunKisaiKubun load差止終了分記載区分() {
             return new ShiharaiHohoHenkoConfig().get支払方法変更_証表示差止_終了分記載区分();
         }
 
@@ -124,7 +124,7 @@ final class HakkoShoTypeBehaviors {
         }
 
         @Override
-        public ConfigValuesShiharaiHohoHenko load支払方法終了分記載区分() {
+        public ShiharaiHohoHenkoShuryobunKisaiKubun load支払方法終了分記載区分() {
             return new ShiharaiHohoHenkoConfig().get支払方法変更_証表示支払方法_終了分記載区分();
         }
 
@@ -134,7 +134,7 @@ final class HakkoShoTypeBehaviors {
         }
 
         @Override
-        public ConfigValuesShiharaiHohoHenko load減額終了分記載区分() {
+        public ShiharaiHohoHenkoShuryobunKisaiKubun load減額終了分記載区分() {
             return new ShiharaiHohoHenkoConfig().get支払方法変更_証表示減額_終了分記載区分();
         }
 
@@ -173,7 +173,7 @@ final class HakkoShoTypeBehaviors {
         }
 
         @Override
-        public ConfigValuesShiharaiHohoHenko load差止終了分記載区分() {
+        public ShiharaiHohoHenkoShuryobunKisaiKubun load差止終了分記載区分() {
             return new ShiharaiHohoHenkoConfig().get支払方法変更_資格者証表示差止_終了分記載区分();
         }
 
@@ -183,7 +183,7 @@ final class HakkoShoTypeBehaviors {
         }
 
         @Override
-        public ConfigValuesShiharaiHohoHenko load支払方法終了分記載区分() {
+        public ShiharaiHohoHenkoShuryobunKisaiKubun load支払方法終了分記載区分() {
             return new ShiharaiHohoHenkoConfig().get支払方法変更_資格者証表示支払方法_終了分記載区分();
         }
 
@@ -193,7 +193,7 @@ final class HakkoShoTypeBehaviors {
         }
 
         @Override
-        public ConfigValuesShiharaiHohoHenko load減額終了分記載区分() {
+        public ShiharaiHohoHenkoShuryobunKisaiKubun load減額終了分記載区分() {
             return new ShiharaiHohoHenkoConfig().get支払方法変更_資格者証表示減額_終了分記載区分();
         }
 

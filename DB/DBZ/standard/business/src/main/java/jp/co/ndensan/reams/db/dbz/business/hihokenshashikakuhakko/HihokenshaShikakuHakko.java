@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko;
 import jp.co.ndensan.reams.db.dbz.business.config.HihokenshashoItakudaikoHyojiConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.ShikakushashoItakudaikoHyojiConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.ShikakushashoKigenConfig;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesHihokenshashoItakudaikoHyoji;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShikakushashoItakudaikoHyoji;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShikakushashoKigen;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshashoItakudaikoHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShikakushashoItakudaikoHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.YukoKigenShokiHyoji;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -70,14 +70,14 @@ public class HihokenshaShikakuHakko {
 
         FlexibleDate 有効期限;
         int 有効期限加算値 = 資格者証期限config.get資格者証期限_有効期限加算値();
-        if (資格者証期限config.get資格者証期限_有効期限初期表示() == ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_システム日付plus有効期限加算値) {
+        if (資格者証期限config.get資格者証期限_有効期限初期表示() == YukoKigenShokiHyoji.システム日付plus有効期限加算値) {
             有効期限 = FlexibleDate.getNowDate().plusDay(有効期限加算値);
         } else {
-            if (資格者証期限config.get資格者証期限_有効期限初期表示() == ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_更新申請時_従前認定終値比較
+            if (資格者証期限config.get資格者証期限_有効期限初期表示() == YukoKigenShokiHyoji.更新申請時_従前認定終値比較
                     && 申請区分コード.equals(SHINSEIKUBUN_KOSHIN)
                     && 申請日.plusDay(有効期限加算値).isBefore(有効データ認定終了日)) {
                 有効期限 = 有効データ認定終了日;
-            } else if (資格者証期限config.get資格者証期限_有効期限初期表示() == ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_更新区分申請時_従前認定終値比較
+            } else if (資格者証期限config.get資格者証期限_有効期限初期表示() == YukoKigenShokiHyoji.更新区分申請時_従前認定終値比較
                     && (申請区分コード.equals(SHINSEIKUBUN_KOSHIN) || 申請区分コード.equals(SHINSEIKUBUN_KUBUNHENKO))
                     && 申請日.plusDay(有効期限加算値).isBefore(有効データ認定終了日)) {
                 有効期限 = 有効データ認定終了日;
@@ -101,7 +101,7 @@ public class HihokenshaShikakuHakko {
 
         RString 支援事業者名称;
 
-        if (被保険者証委託代行業者config.get被保険者証表示方法_委託代行業者_表示有無() == ConfigValuesHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示) {
+        if (被保険者証委託代行業者config.get被保険者証表示方法_委託代行業者_表示有無() == HihokenshashoItakudaikoHyoji.表示) {
             RString 表示開始文言 = 被保険者証委託代行業者config.get被保険者証表示方法_委託代行業者_表示開始文言();
             RString 表示終了文言 = 被保険者証委託代行業者config.get被保険者証表示方法_委託代行業者_表示終了文言();
             支援事業者名称 = new RStringBuilder(計画事業者名称).append(表示開始文言).append(委託先事業者名称).append(表示終了文言).toRString();
@@ -124,7 +124,7 @@ public class HihokenshaShikakuHakko {
 
         RString 支援事業者名称;
 
-        if (資格者証委託代行業者config.get資格者証表示方法_委託代行業者の表示有無() == ConfigValuesShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者_表示) {
+        if (資格者証委託代行業者config.get資格者証表示方法_委託代行業者の表示有無() == ShikakushashoItakudaikoHyoji.表示) {
             RString 表示開始文言 = 資格者証委託代行業者config.get資格者証表示方法_委託代行業者表示開始文言();
             RString 表示終了文言 = 資格者証委託代行業者config.get資格者証表示方法_委託代行業者表示終了文言();
             支援事業者名称 = new RStringBuilder(計画事業者名称).append(表示開始文言).append(委託先事業者名称).append(表示終了文言).toRString();

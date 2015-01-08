@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.config;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHihokenshashoItakudaikoHyoji;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesHihokenshashoItakudaikoHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshashoItakudaikoHyoji;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -40,8 +40,8 @@ public class HihokenshashoItakudaikoHyojiConfigTest extends DbzTestBase {
 
         @Test
         public void 被保険者証表示方法_委託代行業者_表示有無を指定したとき_業務コンフィグ設定値が返る() {
-            ConfigValuesHihokenshashoItakudaikoHyoji result = sut.get被保険者証表示方法_委託代行業者_表示有無();
-            assertThat(result, is(ConfigValuesHihokenshashoItakudaikoHyoji.toValue(new RString("0"))));
+            HihokenshashoItakudaikoHyoji result = sut.get被保険者証表示方法_委託代行業者_表示有無();
+            assertThat(result, is(HihokenshashoItakudaikoHyoji.非表示));
         }
 
         @Test
@@ -65,7 +65,7 @@ public class HihokenshashoItakudaikoHyojiConfigTest extends DbzTestBase {
                 ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示有無,
                 nowDate,
                 SubGyomuCode.DBA介護資格
-        )).thenReturn(new RString("0"));
+        )).thenReturn(HihokenshashoItakudaikoHyoji.非表示.code());
         when(mock.get(
                 ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示開始文言,
                 nowDate,

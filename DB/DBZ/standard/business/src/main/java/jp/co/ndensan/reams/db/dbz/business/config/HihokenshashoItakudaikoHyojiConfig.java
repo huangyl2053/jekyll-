@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKey
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示有無;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示終了文言;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示開始文言;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesHihokenshashoItakudaikoHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshashoItakudaikoHyoji;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -58,8 +58,8 @@ public class HihokenshashoItakudaikoHyojiConfig {
      *
      * @return 被保険者証表示方法_委託代行業者_表示有無
      */
-    public ConfigValuesHihokenshashoItakudaikoHyoji get被保険者証表示方法_委託代行業者_表示有無() {
-        return ConfigValuesHihokenshashoItakudaikoHyoji.toValue(configs.get(被保険者証表示方法_委託代行業者_表示有無));
+    public HihokenshashoItakudaikoHyoji get被保険者証表示方法_委託代行業者_表示有無() {
+        return HihokenshashoItakudaikoHyoji.toValue(configs.get(被保険者証表示方法_委託代行業者_表示有無));
     }
 
     /**
