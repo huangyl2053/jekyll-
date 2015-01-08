@@ -50,7 +50,7 @@ public class HihokenshaShikakuHakko {
      * @param 資格者証委託代行業者config ShikakushashoItakudaikoHyojiConfig
      *
      */
-    public HihokenshaShikakuHakko(ShikakushashoKigenConfig 資格者証期限config,
+    HihokenshaShikakuHakko(ShikakushashoKigenConfig 資格者証期限config,
             HihokenshashoItakudaikoHyojiConfig 被保険者証委託代行業者Config,
             ShikakushashoItakudaikoHyojiConfig 資格者証委託代行業者config) {
         this.資格者証期限config = 資格者証期限config;

@@ -40,7 +40,7 @@ public class HihokenshashoItakudaikoHyojiConfig {
      *
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    public HihokenshashoItakudaikoHyojiConfig(IUrBusinessConfig businessConfig) {
+    HihokenshashoItakudaikoHyojiConfig(IUrBusinessConfig businessConfig) {
         this.configs = createMap(businessConfig);
     }
 

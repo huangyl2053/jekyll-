@@ -10,21 +10,18 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.config.HihokenshashoItakudaikoHyojiConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.ShikakushashoItakudaikoHyojiConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.ShikakushashoKigenConfig;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHihokenshashoItakudaikoHyoji;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoItakudaikoHyoji;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoKigen;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesHihokenshashoItakudaikoHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShikakushashoItakudaikoHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShikakushashoKigen;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
 import jp.co.ndensan.reams.ur.urz.business._KaigoServiceShurui;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -46,9 +43,6 @@ import static org.mockito.Mockito.when;
 public class HihokenshaShikakuHakkoTest extends DbzTestBase {
 
     private static HihokenshaShikakuHakko sut = new HihokenshaShikakuHakko();
-    private static final RString SHIKAKUSHAHO_YUKOKIGEN_1 = new RString("1");
-    private static final RString SHIKAKUSHAHO_YUKOKIGEN_2 = new RString("2");
-    private static final RString SHIKAKUSHAHO_YUKOKIGEN_3 = new RString("3");
     private static final Code SHINSEIKUBUN_SHINKI = new Code(new RString("1"));
     private static final Code SHINSEIKUBUN_KOSHIN = new Code(new RString("2"));
     private static final Code SHINSEIKUBUN_KUBUNHENKO = new Code(new RString("3"));
@@ -58,6 +52,8 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
     private static final Integer 有効期限加算値 = 30;
     private static final Integer 有効期限加算値より前 = 20;
     private static final Integer 有効期限加算値より後 = 50;
+    private static final RString 委託代行業者表示開始文言 = new RString("（委託先：");
+    private static final RString 委託代行業者表示終了文言 = new RString("）");
     private static FlexibleDate 申請日;
     private static FlexibleDate 有効データ認定終了日;
     private static FlexibleDate 期待結果日;
@@ -77,7 +73,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
             有効データ認定終了日 = 申請日.plusDay(有効期限加算値より後);
             期待結果日 = 申請日.plusDay(有効期限加算値);
 
-            sut = new HihokenshaShikakuHakko(new ShikakushashoKigenConfig(createBusinessConfig_資格者証期限_初期表示1Mock()),
+            sut = new HihokenshaShikakuHakko(ShikakushashoKigenConfig初期表示1Mock(),
                     mock(HihokenshashoItakudaikoHyojiConfig.class),
                     mock(ShikakushashoItakudaikoHyojiConfig.class));
 
@@ -97,7 +93,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
             有効データ認定終了日 = 申請日.plusDay(有効期限加算値より後);
             期待結果日 = 有効データ認定終了日;
 
-            sut = new HihokenshaShikakuHakko(new ShikakushashoKigenConfig(createBusinessConfig_資格者証期限_初期表示2Mock()),
+            sut = new HihokenshaShikakuHakko(ShikakushashoKigenConfig初期表示2Mock(),
                     mock(HihokenshashoItakudaikoHyojiConfig.class),
                     mock(ShikakushashoItakudaikoHyojiConfig.class));
 
@@ -117,7 +113,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
             有効データ認定終了日 = 申請日.plusDay(有効期限加算値より前);
             期待結果日 = 申請日.plusDay(有効期限加算値);
 
-            sut = new HihokenshaShikakuHakko(new ShikakushashoKigenConfig(createBusinessConfig_資格者証期限_初期表示2Mock()),
+            sut = new HihokenshaShikakuHakko(ShikakushashoKigenConfig初期表示2Mock(),
                     mock(HihokenshashoItakudaikoHyojiConfig.class),
                     mock(ShikakushashoItakudaikoHyojiConfig.class));
 
@@ -137,7 +133,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
             有効データ認定終了日 = 申請日.plusDay(有効期限加算値より後);
             期待結果日 = 有効データ認定終了日;
 
-            sut = new HihokenshaShikakuHakko(new ShikakushashoKigenConfig(createBusinessConfig_資格者証期限_初期表示3Mock()),
+            sut = new HihokenshaShikakuHakko(ShikakushashoKigenConfig初期表示3Mock(),
                     mock(HihokenshashoItakudaikoHyojiConfig.class),
                     mock(ShikakushashoItakudaikoHyojiConfig.class));
 
@@ -157,7 +153,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
             有効データ認定終了日 = 申請日.plusDay(有効期限加算値より前);
             期待結果日 = 申請日.plusDay(有効期限加算値);
 
-            sut = new HihokenshaShikakuHakko(new ShikakushashoKigenConfig(createBusinessConfig_資格者証期限_初期表示3Mock()),
+            sut = new HihokenshaShikakuHakko(ShikakushashoKigenConfig初期表示3Mock(),
                     mock(HihokenshashoItakudaikoHyojiConfig.class),
                     mock(ShikakushashoItakudaikoHyojiConfig.class));
 
@@ -177,7 +173,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
             有効データ認定終了日 = 申請日.plusDay(有効期限加算値より後);
             期待結果日 = 有効データ認定終了日;
 
-            sut = new HihokenshaShikakuHakko(new ShikakushashoKigenConfig(createBusinessConfig_資格者証期限_初期表示3Mock()),
+            sut = new HihokenshaShikakuHakko(ShikakushashoKigenConfig初期表示3Mock(),
                     mock(HihokenshashoItakudaikoHyojiConfig.class),
                     mock(ShikakushashoItakudaikoHyojiConfig.class));
 
@@ -197,7 +193,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
             有効データ認定終了日 = 申請日.plusDay(有効期限加算値より前);
             期待結果日 = 申請日.plusDay(有効期限加算値);
 
-            sut = new HihokenshaShikakuHakko(new ShikakushashoKigenConfig(createBusinessConfig_資格者証期限_初期表示3Mock()),
+            sut = new HihokenshaShikakuHakko(ShikakushashoKigenConfig初期表示3Mock(),
                     mock(HihokenshashoItakudaikoHyojiConfig.class),
                     mock(ShikakushashoItakudaikoHyojiConfig.class));
 
@@ -207,54 +203,24 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
 
     }
 
-    private static IUrBusinessConfig createBusinessConfig_資格者証期限_初期表示1Mock() {
-        IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
-        RDate nowDate = RDate.getNowDate();
-
-        when(mock.get(
-                ConfigKeysShikakushashoKigen.資格者証期限_有効期限加算値,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString(有効期限加算値.toString()));
-        when(mock.get(
-                ConfigKeysShikakushashoKigen.資格者証期限_有効期限初期表示,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("1"));
+    private static ShikakushashoKigenConfig ShikakushashoKigenConfig初期表示1Mock() {
+        ShikakushashoKigenConfig mock = mock(ShikakushashoKigenConfig.class);
+        when(mock.get資格者証期限_有効期限加算値()).thenReturn(有効期限加算値);
+        when(mock.get資格者証期限_有効期限初期表示()).thenReturn(ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_システム日付plus有効期限加算値);
         return mock;
     }
 
-    private static IUrBusinessConfig createBusinessConfig_資格者証期限_初期表示2Mock() {
-        IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
-        RDate nowDate = RDate.getNowDate();
-
-        when(mock.get(
-                ConfigKeysShikakushashoKigen.資格者証期限_有効期限加算値,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString(有効期限加算値.toString()));
-        when(mock.get(
-                ConfigKeysShikakushashoKigen.資格者証期限_有効期限初期表示,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("2"));
+    private static ShikakushashoKigenConfig ShikakushashoKigenConfig初期表示2Mock() {
+        ShikakushashoKigenConfig mock = mock(ShikakushashoKigenConfig.class);
+        when(mock.get資格者証期限_有効期限加算値()).thenReturn(有効期限加算値);
+        when(mock.get資格者証期限_有効期限初期表示()).thenReturn(ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_更新申請時_従前認定終値比較);
         return mock;
     }
 
-    private static IUrBusinessConfig createBusinessConfig_資格者証期限_初期表示3Mock() {
-        IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
-        RDate nowDate = RDate.getNowDate();
-
-        when(mock.get(
-                ConfigKeysShikakushashoKigen.資格者証期限_有効期限加算値,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString(有効期限加算値.toString()));
-        when(mock.get(
-                ConfigKeysShikakushashoKigen.資格者証期限_有効期限初期表示,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("3"));
+    private static ShikakushashoKigenConfig ShikakushashoKigenConfig初期表示3Mock() {
+        ShikakushashoKigenConfig mock = mock(ShikakushashoKigenConfig.class);
+        when(mock.get資格者証期限_有効期限加算値()).thenReturn(有効期限加算値);
+        when(mock.get資格者証期限_有効期限初期表示()).thenReturn(ConfigValuesShikakushashoKigen.資格者証期限_有効期限初期表示_更新区分申請時_従前認定終値比較);
         return mock;
     }
 
@@ -272,7 +238,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
 
             sut = new HihokenshaShikakuHakko(
                     mock(ShikakushashoKigenConfig.class),
-                    new HihokenshashoItakudaikoHyojiConfig(createBusinessConfig_被保険者証表示方法_委託代行業者_非表示Mock()),
+                    HihokenshashoItakudaikoHyojiConfig委託代行業者_非表示Mock(),
                     mock(ShikakushashoItakudaikoHyojiConfig.class));
 
             RString result = sut.compose被保険者証支援事業者名称(計画事業者名称, 委託先事業者名称);
@@ -287,11 +253,11 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         public void 被保険者証表示方法_委託代行業者_表示有無が表示のとき_支援事業者名称は計画事業者名称と委託先事業者名称を編集した事業者名称を返す() {
             計画事業者名称 = new RString("被保険者証計画事業者名称");
             委託先事業者名称 = new RString("被保険者証委託先事業者名称");
-            支援事業者名称 = new RStringBuilder(計画事業者名称).append(new RString("（委託先：")).append(委託先事業者名称).append(new RString("）")).toRString();
+            支援事業者名称 = new RStringBuilder(計画事業者名称).append(委託代行業者表示開始文言).append(委託先事業者名称).append(委託代行業者表示終了文言).toRString();
 
             sut = new HihokenshaShikakuHakko(
                     mock(ShikakushashoKigenConfig.class),
-                    new HihokenshashoItakudaikoHyojiConfig(createBusinessConfig_被保険者証表示方法_委託代行業者_表示Mock()),
+                    HihokenshashoItakudaikoHyojiConfig委託代行業者_表示Mock(),
                     mock(ShikakushashoItakudaikoHyojiConfig.class));
 
             RString result = sut.compose被保険者証支援事業者名称(計画事業者名称, 委託先事業者名称);
@@ -299,37 +265,17 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         }
     }
 
-    private static IUrBusinessConfig createBusinessConfig_被保険者証表示方法_委託代行業者_非表示Mock() {
-        IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
-        RDate nowDate = RDate.getNowDate();
-
-        when(mock.get(
-                ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示有無,
-                nowDate,
-                SubGyomuCode.DBA介護資格
-        )).thenReturn(new RString("0"));
+    private static HihokenshashoItakudaikoHyojiConfig HihokenshashoItakudaikoHyojiConfig委託代行業者_非表示Mock() {
+        HihokenshashoItakudaikoHyojiConfig mock = mock(HihokenshashoItakudaikoHyojiConfig.class);
+        when(mock.get被保険者証表示方法_委託代行業者_表示有無()).thenReturn(ConfigValuesHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_非表示);
         return mock;
     }
 
-    private static IUrBusinessConfig createBusinessConfig_被保険者証表示方法_委託代行業者_表示Mock() {
-        IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
-        RDate nowDate = RDate.getNowDate();
-
-        when(mock.get(
-                ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示有無,
-                nowDate,
-                SubGyomuCode.DBA介護資格
-        )).thenReturn(new RString("1"));
-        when(mock.get(
-                ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示開始文言,
-                nowDate,
-                SubGyomuCode.DBA介護資格
-        )).thenReturn(new RString("（委託先："));
-        when(mock.get(
-                ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示終了文言,
-                nowDate,
-                SubGyomuCode.DBA介護資格
-        )).thenReturn(new RString("）"));
+    private static HihokenshashoItakudaikoHyojiConfig HihokenshashoItakudaikoHyojiConfig委託代行業者_表示Mock() {
+        HihokenshashoItakudaikoHyojiConfig mock = mock(HihokenshashoItakudaikoHyojiConfig.class);
+        when(mock.get被保険者証表示方法_委託代行業者_表示有無()).thenReturn(ConfigValuesHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示);
+        when(mock.get被保険者証表示方法_委託代行業者_表示開始文言()).thenReturn(委託代行業者表示開始文言);
+        when(mock.get被保険者証表示方法_委託代行業者_表示終了文言()).thenReturn(委託代行業者表示終了文言);
         return mock;
     }
 
@@ -348,7 +294,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
             sut = new HihokenshaShikakuHakko(
                     mock(ShikakushashoKigenConfig.class),
                     mock(HihokenshashoItakudaikoHyojiConfig.class),
-                    new ShikakushashoItakudaikoHyojiConfig(createBusinessConfig_資格者証表示方法_委託代行業者_非表示Mock()));
+                    ShikakushashoItakudaikoHyojiConfig委託代行業者_非表示Mock());
 
             RString result = sut.compose資格者証支援事業者名称(計画事業者名称, 委託先事業者名称);
             assertThat(result, is(計画事業者名称));
@@ -362,12 +308,12 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         public void 資格者証表示方法_委託代行業者の表示有無が表示のとき_支援事業者名称は計画事業者名称と委託先事業者名称を編集した事業者名称を返す() {
             計画事業者名称 = new RString("資格者証計画事業者名称");
             委託先事業者名称 = new RString("資格者証委託先事業者名称");
-            支援事業者名称 = new RStringBuilder(計画事業者名称).append(new RString("（委託先：")).append(委託先事業者名称).append(new RString("）")).toRString();
+            支援事業者名称 = new RStringBuilder(計画事業者名称).append(委託代行業者表示開始文言).append(委託先事業者名称).append(委託代行業者表示終了文言).toRString();
 
             sut = new HihokenshaShikakuHakko(
                     mock(ShikakushashoKigenConfig.class),
                     mock(HihokenshashoItakudaikoHyojiConfig.class),
-                    new ShikakushashoItakudaikoHyojiConfig(createBusinessConfig_資格者証表示方法_委託代行業者_表示Mock()));
+                    ShikakushashoItakudaikoHyojiConfig委託代行業者_表示Mock());
 
             RString result = sut.compose資格者証支援事業者名称(計画事業者名称, 委託先事業者名称);
             assertThat(result, is(支援事業者名称));
@@ -375,37 +321,17 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
 
     }
 
-    private static IUrBusinessConfig createBusinessConfig_資格者証表示方法_委託代行業者_非表示Mock() {
-        IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
-        RDate nowDate = RDate.getNowDate();
-
-        when(mock.get(
-                ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者の表示有無,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("0"));
+    private static ShikakushashoItakudaikoHyojiConfig ShikakushashoItakudaikoHyojiConfig委託代行業者_非表示Mock() {
+        ShikakushashoItakudaikoHyojiConfig mock = mock(ShikakushashoItakudaikoHyojiConfig.class);
+        when(mock.get資格者証表示方法_委託代行業者の表示有無()).thenReturn(ConfigValuesShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者_非表示);
         return mock;
     }
 
-    private static IUrBusinessConfig createBusinessConfig_資格者証表示方法_委託代行業者_表示Mock() {
-        IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
-        RDate nowDate = RDate.getNowDate();
-
-        when(mock.get(
-                ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者の表示有無,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("1"));
-        when(mock.get(
-                ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者表示開始文言,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("（委託先："));
-        when(mock.get(
-                ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者表示終了文言,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("）"));
+    private static ShikakushashoItakudaikoHyojiConfig ShikakushashoItakudaikoHyojiConfig委託代行業者_表示Mock() {
+        ShikakushashoItakudaikoHyojiConfig mock = mock(ShikakushashoItakudaikoHyojiConfig.class);
+        when(mock.get資格者証表示方法_委託代行業者の表示有無()).thenReturn(ConfigValuesShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者_表示);
+        when(mock.get資格者証表示方法_委託代行業者表示開始文言()).thenReturn(委託代行業者表示開始文言);
+        when(mock.get資格者証表示方法_委託代行業者表示終了文言()).thenReturn(委託代行業者表示終了文言);
         return mock;
     }
 
