@@ -55,6 +55,9 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
     private static final Code SHINSEIKUBUN_SHOKKEN = new Code(new RString("4"));
     private static final Code SHINSEIKUBUN_TENNYU = new Code(new RString("5"));
     private static final Code SHINSEIKUBUN_SHOSHITSU = new Code(new RString("6"));
+    private static final Integer 有効期限加算値 = 30;
+    private static final Integer 有効期限加算値より前 = 20;
+    private static final Integer 有効期限加算値より後 = 50;
     private static FlexibleDate 申請日;
     private static FlexibleDate 有効データ認定終了日;
     private static FlexibleDate 期待結果日;
@@ -71,8 +74,8 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         @Test
         public void 有効期限初期表示が常にシステム日付足す有効期限加算値のとき_有効期限は申請日と有効期限加算値を足した日付を返す() {
             申請日 = FlexibleDate.getNowDate();
-            有効データ認定終了日 = 申請日.plusDay(50);
-            期待結果日 = 申請日.plusDay(30);
+            有効データ認定終了日 = 申請日.plusDay(有効期限加算値より後);
+            期待結果日 = 申請日.plusDay(有効期限加算値);
 
             sut = new HihokenshaShikakuHakko(new ShikakushashoKigenConfig(createBusinessConfig_資格者証期限_初期表示1Mock()),
                     mock(HihokenshashoItakudaikoHyojiConfig.class),
@@ -91,7 +94,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         @Test
         public void 有効期限初期表示が更新申請時従前認定終値比較で_申請区分コードが更新で_有効データ認定終了日が申請日に有効期限加算値を加算したときよりも後のとき_有効期限は有効データ認定終了日を返す() {
             申請日 = new FlexibleDate("20000101");
-            有効データ認定終了日 = 申請日.plusDay(50);
+            有効データ認定終了日 = 申請日.plusDay(有効期限加算値より後);
             期待結果日 = 有効データ認定終了日;
 
             sut = new HihokenshaShikakuHakko(new ShikakushashoKigenConfig(createBusinessConfig_資格者証期限_初期表示2Mock()),
@@ -111,8 +114,8 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         @Test
         public void 有効期限初期表示が更新申請時従前認定終値比較で_申請区分コードが更新で_有効データ認定終了日が申請日に有効期限加算値を加算したときよりも前のとき_有効期限は申請日と有効期限加算値を足した日付を返す() {
             申請日 = new FlexibleDate("20000101");
-            有効データ認定終了日 = 申請日.plusDay(20);
-            期待結果日 = 申請日.plusDay(30);
+            有効データ認定終了日 = 申請日.plusDay(有効期限加算値より前);
+            期待結果日 = 申請日.plusDay(有効期限加算値);
 
             sut = new HihokenshaShikakuHakko(new ShikakushashoKigenConfig(createBusinessConfig_資格者証期限_初期表示2Mock()),
                     mock(HihokenshashoItakudaikoHyojiConfig.class),
@@ -131,7 +134,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         @Test
         public void 有効期限初期表示が更新区分申請時従前認定終値比較で_申請区分コードが更新で_有効データ認定終了日が申請日に有効期限加算値を加算したときよりも後のとき_有効期限は有効データ認定終了日を返す() {
             申請日 = new FlexibleDate("20000101");
-            有効データ認定終了日 = 申請日.plusDay(50);
+            有効データ認定終了日 = 申請日.plusDay(有効期限加算値より後);
             期待結果日 = 有効データ認定終了日;
 
             sut = new HihokenshaShikakuHakko(new ShikakushashoKigenConfig(createBusinessConfig_資格者証期限_初期表示3Mock()),
@@ -151,8 +154,8 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         @Test
         public void 有効期限初期表示が更新区分申請時従前認定終値比較で_申請区分コードが更新で_有効データ認定終了日が申請日に有効期限加算値を加算したときよりも前のとき_有効期限は申請日と有効期限加算値を足した日付を返す() {
             申請日 = new FlexibleDate("20000101");
-            有効データ認定終了日 = 申請日.plusDay(20);
-            期待結果日 = 申請日.plusDay(30);
+            有効データ認定終了日 = 申請日.plusDay(有効期限加算値より前);
+            期待結果日 = 申請日.plusDay(有効期限加算値);
 
             sut = new HihokenshaShikakuHakko(new ShikakushashoKigenConfig(createBusinessConfig_資格者証期限_初期表示3Mock()),
                     mock(HihokenshashoItakudaikoHyojiConfig.class),
@@ -171,7 +174,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         @Test
         public void 有効期限初期表示が更新区分申請時従前認定終値比較で_申請区分コードが区分変更で_有効データ認定終了日が申請日に有効期限加算値を加算したときよりも後のとき_有効期限は有効データ認定終了日を返す() {
             申請日 = new FlexibleDate("20000101");
-            有効データ認定終了日 = 申請日.plusDay(50);
+            有効データ認定終了日 = 申請日.plusDay(有効期限加算値より後);
             期待結果日 = 有効データ認定終了日;
 
             sut = new HihokenshaShikakuHakko(new ShikakushashoKigenConfig(createBusinessConfig_資格者証期限_初期表示3Mock()),
@@ -191,8 +194,8 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         @Test
         public void 有効期限初期表示が更新区分申請時従前認定終値比較で_申請区分コードが区分変更で_有効データ認定終了日が申請日に有効期限加算値を加算したときよりも前のとき_有効期限は申請日と有効期限加算値を足した日付を返す() {
             申請日 = new FlexibleDate("20000101");
-            有効データ認定終了日 = 申請日.plusDay(50);
-            期待結果日 = 有効データ認定終了日;
+            有効データ認定終了日 = 申請日.plusDay(有効期限加算値より前);
+            期待結果日 = 申請日.plusDay(有効期限加算値);
 
             sut = new HihokenshaShikakuHakko(new ShikakushashoKigenConfig(createBusinessConfig_資格者証期限_初期表示3Mock()),
                     mock(HihokenshashoItakudaikoHyojiConfig.class),
@@ -212,7 +215,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
                 ConfigKeysShikakushashoKigen.資格者証期限_有効期限加算値,
                 nowDate,
                 SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("30"));
+        )).thenReturn(new RString(有効期限加算値.toString()));
         when(mock.get(
                 ConfigKeysShikakushashoKigen.資格者証期限_有効期限初期表示,
                 nowDate,
@@ -229,7 +232,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
                 ConfigKeysShikakushashoKigen.資格者証期限_有効期限加算値,
                 nowDate,
                 SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("30"));
+        )).thenReturn(new RString(有効期限加算値.toString()));
         when(mock.get(
                 ConfigKeysShikakushashoKigen.資格者証期限_有効期限初期表示,
                 nowDate,
@@ -246,7 +249,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
                 ConfigKeysShikakushashoKigen.資格者証期限_有効期限加算値,
                 nowDate,
                 SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("30"));
+        )).thenReturn(new RString(有効期限加算値.toString()));
         when(mock.get(
                 ConfigKeysShikakushashoKigen.資格者証期限_有効期限初期表示,
                 nowDate,
