@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config.shikaku;
 
+import jp.co.ndensan.reams.db.dbz.business.config.ConfigValueBoolean;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoJushoEdit;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GunNamePrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HowToEditJusho;
@@ -18,15 +19,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
 import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
- * {@link jp.co.ndensan.reams.db.dba.business.config.HihokenshashoJushoEditConfig}のテストです。
+ * {@link HihokenshashoJushoEditConfig}のテストです。
  *
  * @author n8178 城間篤人
  */
@@ -43,9 +43,9 @@ public class HihokenshashoJushoEditConfigTest {
         }
 
         @Test
-        public void uese帳票独自区分を指定したとき_trueが返る() {
+        public void uese帳票独自区分を指定したとき_Configの設定値を_ConfigValueBoolean$perseBooleanに渡した結果が返る() {
             boolean result = sut.uses帳票独自区分();
-            assertThat(result, is(true));
+            assertThat(result, is(ConfigValueBoolean.perseBoolean(帳票独自区分)));
         }
 
         @Test
@@ -78,42 +78,44 @@ public class HihokenshashoJushoEditConfigTest {
             assertThat(result, is(KatagakiPrint.印字しない));
         }
     }
+    private static final RString 帳票独自区分;
+
+    static {
+        帳票独自区分 = new RString("1");
+    }
 
     private static IUrBusinessConfig createBusinessConfigMock() {
         IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
-        RDate nowDate = RDate.getNowDate();
-        SubGyomuCode subGyomu = SubGyomuCode.DBA介護資格;
-
         when(mock.get(
-                ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_帳票独自区分,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("1"));
+                eq(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_帳票独自区分),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(帳票独自区分);
         when(mock.get(
-                ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_都道府県名付与有無,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("0"));
+                eq(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_都道府県名付与有無),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(TodofukenNamePrint.印字しない.code());
         when(mock.get(
-                ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_郡名付与有無,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("0"));
+                eq(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_郡名付与有無),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(GunNamePrint.印字しない.code());
         when(mock.get(
-                ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_市町村名付与有無,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("1"));
+                eq(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_市町村名付与有無),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(ShichosonNamePrint.印字する.code());
         when(mock.get(
-                ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_編集方法,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("3"));
+                eq(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_編集方法),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(HowToEditJusho.住所と番地_行政区.code());
         when(mock.get(
-                ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_住所編集_方書表示有無,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("0"));
+                eq(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_住所編集_方書表示有無),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(KatagakiPrint.印字しない.code());
         return mock;
     }
 }

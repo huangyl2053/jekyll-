@@ -15,18 +15,16 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbuTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
 import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
- * {@link jp.co.ndensan.reams.db.dbu.business.config.ChohyoKyotsuJushoEditConfig}のテストです。
+ * {@link ChohyoKyotsuJushoEditConfig}のテストです。
  *
  * @author n8178 城間篤人
  */
@@ -75,34 +73,32 @@ public class ChohyoKyotsuJushoEditConfigTest {
 
     private static IUrBusinessConfig createBusinessConfigMock() {
         IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
-        RDate nowDate = RDate.getNowDate();
         SubGyomuCode subGyomu = SubGyomuCode.DBU介護統計報告;
-
         when(mock.get(
-                ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_都道府県名付与有無,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("1"));
+                eq(ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_都道府県名付与有無),
+                any(RDate.class),
+                eq(subGyomu)
+        )).thenReturn(TodofukenNamePrint.印字する.code());
         when(mock.get(
-                ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_郡名付与有無,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("1"));
+                eq(ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_郡名付与有無),
+                any(RDate.class),
+                eq(subGyomu)
+        )).thenReturn(GunNamePrint.印字する.code());
         when(mock.get(
-                ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_市町村名付与有無,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("1"));
+                eq(ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_市町村名付与有無),
+                any(RDate.class),
+                eq(subGyomu)
+        )).thenReturn(ShichosonNamePrint.印字する.code());
         when(mock.get(
-                ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_編集方法,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("3"));
+                eq(ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_管内住所編集_編集方法),
+                any(RDate.class),
+                eq(subGyomu)
+        )).thenReturn(HowToEditJusho.住所と番地_行政区.code());
         when(mock.get(
-                ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_住所編集_方書表示有無,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("1"));
+                eq(ConfigKeysChohyoKyotsuJushoEdit.帳票共通住所編集方法_住所編集_方書表示有無),
+                any(RDate.class),
+                eq(subGyomu)
+        )).thenReturn(KatagakiPrint.印字する.code());
         return mock;
     }
 }
