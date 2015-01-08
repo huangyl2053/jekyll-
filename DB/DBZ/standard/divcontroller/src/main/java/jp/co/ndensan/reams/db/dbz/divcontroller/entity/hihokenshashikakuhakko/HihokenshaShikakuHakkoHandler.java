@@ -283,7 +283,7 @@ public class HihokenshaShikakuHakkoHandler {
     };
 
     private void set給付制限(HihokenshaNo 被保険者番号, HihokenshaDaichoModel 被保険者台帳) {
-        if (HihokenshaKubun.toValue(被保険者台帳.get被保険者区分コード()) == HihokenshaKubun.被保険者1号) {
+        if (HihokenshaKubun.toValue(被保険者台帳.get被保険者区分コード()) == HihokenshaKubun.第1号被保険者) {
             set給付制限to画面(create１号被保険者給付制限(被保険者番号));
         } else {
             set給付制限to画面(create２号被保険者給付制限(被保険者番号));

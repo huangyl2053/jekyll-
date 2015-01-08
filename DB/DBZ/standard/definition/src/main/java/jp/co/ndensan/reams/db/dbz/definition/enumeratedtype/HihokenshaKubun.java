@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -19,40 +19,51 @@ public enum HihokenshaKubun {
      * 被保険者区分が「1号被保険者」であることを表します。 <br />
      * コード：1
      */
-    被保険者1号("1"),
+    第1号被保険者("1"),
     /**
      * 被保険者区分が「2号被保険者」であることを表します。 <br />
      * コード：2
      */
-    被保険者2号("2");
-    private final RString code;
+    第2号被保険者("2");
+
+    private final RString theCode;
 
     private HihokenshaKubun(String code) {
-        this.code = new RString(code);
+        this.theCode = new RString(code);
     }
 
     /**
-     * RString型の被保険者区分コードを返します。
+     * コードを返します。
      *
      * @return 被保険者区分コード
      */
-    public RString getCode() {
-        return code;
+    public RString code() {
+        return theCode;
     }
 
     /**
-     * RString型の被保険者区分をもらい、コードに対応するHihokenshaKubun型のenumを返します。
+     * {@link #name() name()}を{@link RString}へ変換して返します。
      *
-     * @param code 被保険者区分コード
-     * @return 引数のコードに対応するHihokenshaKubun型のenum
+     * @return {@link #name() name()}を{@link RString}へ変換した物
+     */
+    public RString toRString() {
+        return new RString(name());
+    }
+
+    /**
+     * 引数のコードに対応する{@link HihokenshaKubun}を返します。
+     *
+     * @param code コード
+     * @return コードに対応する{@link HihokenshaKubun}
+     * @throws IllegalArgumentException コードに対応する{@link HihokenshaKubun}が無い時
      */
     public static HihokenshaKubun toValue(RString code) {
         for (HihokenshaKubun data : values()) {
-            if (data.getCode().equals(code)) {
+            if (data.code().equals(code)) {
                 return data;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("指定したコードに対応するHihokenshaKubun").getMessage());
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage(HihokenshaKubun.class.getSimpleName()));
     }
 
 }
