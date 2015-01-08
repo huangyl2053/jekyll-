@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKey
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
@@ -45,7 +46,7 @@ public class GaitoshaKensakuConfig {
         Map<ConfigKeysGaitoshaKensaku, RString> map = new HashMap<>();
         RDate nowDate = RDate.getNowDate();
         for (ConfigKeysGaitoshaKensaku target : ConfigKeysGaitoshaKensaku.values()) {
-            map.put(target, businessConfig.get(target, nowDate));
+            map.put(target, businessConfig.get(target, nowDate, SubGyomuCode.DBU介護統計報告));
         }
         return Collections.unmodifiableMap(map);
     }
