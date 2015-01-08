@@ -58,7 +58,7 @@ public class HihokenshashoSofusakiInfoConfig {
      * @return 世帯主表示有無
      */
     public boolean is世帯主表示有り() {
-        return ConfigValueBoolean.perseBoolean(
+        return ConfigValueBoolean.parseBoolean(
                 configs.get(ConfigKeysHihokenshashoSofusakiInfo.被保険者証_送付先情報_世帯主表示有無));
     }
 
@@ -68,7 +68,7 @@ public class HihokenshashoSofusakiInfoConfig {
      * @return 敬称表示方法
      */
     public boolean is敬称表示有り() {
-        return ConfigValueBoolean.perseBoolean(
+        return ConfigValueBoolean.parseBoolean(
                 configs.get(ConfigKeysHihokenshashoSofusakiInfo.被保険者証_送付先情報_敬称表示方法));
     }
 

@@ -16,8 +16,7 @@ import org.junit.runner.RunWith;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * {@link HizukeConfigTest}のテストです。
@@ -39,107 +38,136 @@ public class HizukeConfigTest {
         @Test
         public void 日付関連_月別テーブル1を指定したとき_01が返る() {
             RString result = sut.get(ConfigKeysHizuke.日付関連_月別テーブル1);
-            assertThat(result, is(new RString("01")));
+            assertThat(result, is(月別テーブル1));
         }
 
         @Test
         public void 日付関連_月別テーブル2を指定したとき_02が返る() {
             RString result = sut.get(ConfigKeysHizuke.日付関連_月別テーブル2);
-            assertThat(result, is(new RString("02")));
+            assertThat(result, is(月別テーブル2));
         }
 
         @Test
         public void 日付関連_月別テーブル3を指定したとき_03が返る() {
             RString result = sut.get(ConfigKeysHizuke.日付関連_月別テーブル3);
-            assertThat(result, is(new RString("03")));
+            assertThat(result, is(月別テーブル3));
         }
 
         @Test
         public void 日付関連_月別テーブル4を指定したとき_04が返る() {
             RString result = sut.get(ConfigKeysHizuke.日付関連_月別テーブル4);
-            assertThat(result, is(new RString("04")));
+            assertThat(result, is(月別テーブル4));
         }
 
         @Test
         public void 日付関連_月別テーブル5を指定したとき_05が返る() {
             RString result = sut.get(ConfigKeysHizuke.日付関連_月別テーブル5);
-            assertThat(result, is(new RString("05")));
+            assertThat(result, is(月別テーブル5));
         }
 
         @Test
         public void 日付関連_月別テーブル6を指定したとき_06が返る() {
             RString result = sut.get(ConfigKeysHizuke.日付関連_月別テーブル6);
-            assertThat(result, is(new RString("06")));
+            assertThat(result, is(月別テーブル6));
         }
 
         @Test
         public void 日付関連_月別テーブル7を指定したとき_07が返る() {
             RString result = sut.get(ConfigKeysHizuke.日付関連_月別テーブル7);
-            assertThat(result, is(new RString("07")));
+            assertThat(result, is(月別テーブル7));
         }
 
         @Test
         public void 日付関連_月別テーブル8を指定したとき_08が返る() {
             RString result = sut.get(ConfigKeysHizuke.日付関連_月別テーブル8);
-            assertThat(result, is(new RString("08")));
+            assertThat(result, is(月別テーブル8));
         }
 
         @Test
         public void 日付関連_月別テーブル9を指定したとき_09が返る() {
             RString result = sut.get(ConfigKeysHizuke.日付関連_月別テーブル9);
-            assertThat(result, is(new RString("09")));
+            assertThat(result, is(月別テーブル9));
         }
 
         @Test
         public void 日付関連_月別テーブル10を指定したとき_10が返る() {
             RString result = sut.get(ConfigKeysHizuke.日付関連_月別テーブル10);
-            assertThat(result, is(new RString("10")));
+            assertThat(result, is(月別テーブル10));
         }
 
         @Test
         public void 日付関連_月別テーブル11を指定したとき_11が返る() {
             RString result = sut.get(ConfigKeysHizuke.日付関連_月別テーブル11);
-            assertThat(result, is(new RString("11")));
+            assertThat(result, is(月別テーブル11));
         }
 
         @Test
         public void 日付関連_月別テーブル12を指定したとき_12が返る() {
             RString result = sut.get(ConfigKeysHizuke.日付関連_月別テーブル12);
-            assertThat(result, is(new RString("12")));
+            assertThat(result, is(月別テーブル12));
         }
 
         @Test
         public void 日付関連_月別テーブル13を指定したとき_13が返る() {
             RString result = sut.get(ConfigKeysHizuke.日付関連_月別テーブル13);
-            assertThat(result, is(new RString("13")));
+            assertThat(result, is(月別テーブル13));
         }
 
         @Test
         public void 日付関連_月別テーブル14を指定したとき_14が返る() {
             RString result = sut.get(ConfigKeysHizuke.日付関連_月別テーブル14);
-            assertThat(result, is(new RString("14")));
+            assertThat(result, is(月別テーブル14));
         }
+    }
+
+    private static final RString 月別テーブル1;
+    private static final RString 月別テーブル2;
+    private static final RString 月別テーブル3;
+    private static final RString 月別テーブル4;
+    private static final RString 月別テーブル5;
+    private static final RString 月別テーブル6;
+    private static final RString 月別テーブル7;
+    private static final RString 月別テーブル8;
+    private static final RString 月別テーブル9;
+    private static final RString 月別テーブル10;
+    private static final RString 月別テーブル11;
+    private static final RString 月別テーブル12;
+    private static final RString 月別テーブル13;
+    private static final RString 月別テーブル14;
+
+    static {
+        月別テーブル1 = new RString("01");
+        月別テーブル2 = new RString("02");
+        月別テーブル3 = new RString("03");
+        月別テーブル4 = new RString("04");
+        月別テーブル5 = new RString("05");
+        月別テーブル6 = new RString("06");
+        月別テーブル7 = new RString("07");
+        月別テーブル8 = new RString("08");
+        月別テーブル9 = new RString("09");
+        月別テーブル10 = new RString("10");
+        月別テーブル11 = new RString("11");
+        月別テーブル12 = new RString("12");
+        月別テーブル13 = new RString("13");
+        月別テーブル14 = new RString("14");
     }
 
     private static IUrBusinessConfig createBusinessConfigMock() {
         IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
-        RDate nowDate = RDate.getNowDate();
-
-        when(mock.get(ConfigKeysHizuke.日付関連_月別テーブル1, nowDate)).thenReturn(new RString("01"));
-        when(mock.get(ConfigKeysHizuke.日付関連_月別テーブル2, nowDate)).thenReturn(new RString("02"));
-        when(mock.get(ConfigKeysHizuke.日付関連_月別テーブル3, nowDate)).thenReturn(new RString("03"));
-        when(mock.get(ConfigKeysHizuke.日付関連_月別テーブル4, nowDate)).thenReturn(new RString("04"));
-        when(mock.get(ConfigKeysHizuke.日付関連_月別テーブル5, nowDate)).thenReturn(new RString("05"));
-        when(mock.get(ConfigKeysHizuke.日付関連_月別テーブル6, nowDate)).thenReturn(new RString("06"));
-        when(mock.get(ConfigKeysHizuke.日付関連_月別テーブル7, nowDate)).thenReturn(new RString("07"));
-        when(mock.get(ConfigKeysHizuke.日付関連_月別テーブル8, nowDate)).thenReturn(new RString("08"));
-        when(mock.get(ConfigKeysHizuke.日付関連_月別テーブル9, nowDate)).thenReturn(new RString("09"));
-        when(mock.get(ConfigKeysHizuke.日付関連_月別テーブル10, nowDate)).thenReturn(new RString("10"));
-        when(mock.get(ConfigKeysHizuke.日付関連_月別テーブル11, nowDate)).thenReturn(new RString("11"));
-        when(mock.get(ConfigKeysHizuke.日付関連_月別テーブル12, nowDate)).thenReturn(new RString("12"));
-        when(mock.get(ConfigKeysHizuke.日付関連_月別テーブル13, nowDate)).thenReturn(new RString("13"));
-        when(mock.get(ConfigKeysHizuke.日付関連_月別テーブル14, nowDate)).thenReturn(new RString("14"));
-
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル1), any(RDate.class))).thenReturn(月別テーブル1);
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル2), any(RDate.class))).thenReturn(月別テーブル2);
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル3), any(RDate.class))).thenReturn(月別テーブル3);
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル4), any(RDate.class))).thenReturn(月別テーブル4);
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル5), any(RDate.class))).thenReturn(月別テーブル5);
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル6), any(RDate.class))).thenReturn(月別テーブル6);
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル7), any(RDate.class))).thenReturn(月別テーブル7);
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル8), any(RDate.class))).thenReturn(月別テーブル8);
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル9), any(RDate.class))).thenReturn(月別テーブル9);
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル10), any(RDate.class))).thenReturn(月別テーブル10);
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル11), any(RDate.class))).thenReturn(月別テーブル11);
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル12), any(RDate.class))).thenReturn(月別テーブル12);
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル13), any(RDate.class))).thenReturn(月別テーブル13);
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル14), any(RDate.class))).thenReturn(月別テーブル14);
         return mock;
     }
 }

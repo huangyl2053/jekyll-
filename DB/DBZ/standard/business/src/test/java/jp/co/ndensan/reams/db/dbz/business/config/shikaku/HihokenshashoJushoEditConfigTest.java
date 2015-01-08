@@ -45,7 +45,7 @@ public class HihokenshashoJushoEditConfigTest {
         @Test
         public void uese帳票独自区分を指定したとき_Configの設定値を_ConfigValueBoolean$perseBooleanに渡した結果が返る() {
             boolean result = sut.uses帳票独自区分();
-            assertThat(result, is(ConfigValueBoolean.perseBoolean(帳票独自区分)));
+            assertThat(result, is(ConfigValueBoolean.parseBoolean(帳票独自区分)));
         }
 
         @Test

@@ -71,7 +71,7 @@ public final class ConfigValueBoolean {
      * @param rstr 比較対象の文字列
      * @return 指定の文字列が{@code true}として扱われるものである時、{@code true}
      */
-    public static boolean perseBoolean(RString rstr) {
+    public static boolean parseBoolean(RString rstr) {
         return Dictionary.INSTANCE.valuesOfTrue.contains(rstr);
     }
 }

@@ -61,7 +61,7 @@ public class HihokenshashoPrintConfig {
      * @return 氏名カナ表示有無
      */
     public boolean is氏名カナ表示有り() {
-        return ConfigValueBoolean.perseBoolean(
+        return ConfigValueBoolean.parseBoolean(
                 configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_氏名カナ表示有無));
     }
 
@@ -91,7 +91,7 @@ public class HihokenshashoPrintConfig {
      * @return 郵便番号表示有無
      */
     public boolean is郵便番号表示有り() {
-        return ConfigValueBoolean.perseBoolean(
+        return ConfigValueBoolean.parseBoolean(
                 configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_郵便番号表示有無));
     }
 
@@ -101,7 +101,7 @@ public class HihokenshashoPrintConfig {
      * @return 要介護認定期限切れの表示有無
      */
     public boolean is要介護認定期限切れ表示有り() {
-        return ConfigValueBoolean.perseBoolean(
+        return ConfigValueBoolean.parseBoolean(
                 configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_要介護認定期限切れ_表示有無));
     }
 
@@ -111,7 +111,7 @@ public class HihokenshashoPrintConfig {
      * @return 居宅支援事業者適用切れの表示有無
      */
     public boolean is居宅支援事業者適用切れ表示有り() {
-        return ConfigValueBoolean.perseBoolean(
+        return ConfigValueBoolean.parseBoolean(
                 configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者適用切れ_表示有無));
     }
 
@@ -141,7 +141,7 @@ public class HihokenshashoPrintConfig {
      * @return 委託代行業者の表示有無
      */
     public boolean is委託代行業者表示有り() {
-        return ConfigValueBoolean.perseBoolean(
+        return ConfigValueBoolean.parseBoolean(
                 configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_委託代行業者_表示有無));
     }
 
@@ -169,7 +169,7 @@ public class HihokenshashoPrintConfig {
      * @return 適用開始日と事業者届出日の切替表示区分
      */
     public boolean is届出日の代わりに適用開始日を表示() {
-        return ConfigValueBoolean.perseBoolean(
+        return ConfigValueBoolean.parseBoolean(
                 configs.get(ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者届出日_適用開始日切替表示区分));
     }
 }

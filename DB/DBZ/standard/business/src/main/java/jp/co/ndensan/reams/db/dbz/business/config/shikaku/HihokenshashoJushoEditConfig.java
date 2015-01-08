@@ -62,7 +62,7 @@ public class HihokenshashoJushoEditConfig {
      * @return 業務コンフィグの値が帳票独自区分を示す場合true、市町村共通を示す場合false
      */
     public boolean uses帳票独自区分() {
-        return ConfigValueBoolean.perseBoolean(
+        return ConfigValueBoolean.parseBoolean(
                 configs.get(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_管内住所編集_帳票独自区分));
     }
 

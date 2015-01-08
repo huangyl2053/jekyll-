@@ -69,7 +69,7 @@ public class ShikakushashoItakudaikoHyojiConfig {
      * @return 表示する場合は{@code true}、しない場合は{@code false}
      */
     public boolean prints委託代行事業者() {
-        return ConfigValueBoolean.perseBoolean(configs.get(資格者証表示方法_委託代行業者の表示有無));
+        return ConfigValueBoolean.parseBoolean(configs.get(資格者証表示方法_委託代行業者の表示有無));
     }
 
     /**

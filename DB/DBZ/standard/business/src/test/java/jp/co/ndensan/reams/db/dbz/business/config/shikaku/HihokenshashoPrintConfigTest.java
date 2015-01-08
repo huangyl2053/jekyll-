@@ -47,7 +47,7 @@ public class HihokenshashoPrintConfigTest {
         @Test
         public void is氏名カナ表示有りで_trueが返る() {
             boolean result = sut.is氏名カナ表示有り();
-            assertThat(result, is(ConfigValueBoolean.perseBoolean(氏名カナ表示有無)));
+            assertThat(result, is(ConfigValueBoolean.parseBoolean(氏名カナ表示有無)));
         }
 
         @Test
@@ -65,19 +65,19 @@ public class HihokenshashoPrintConfigTest {
         @Test
         public void is郵便番号表示有りで_trueが返る() {
             boolean result = sut.is郵便番号表示有り();
-            assertThat(result, is(ConfigValueBoolean.perseBoolean(郵便番号表示有無)));
+            assertThat(result, is(ConfigValueBoolean.parseBoolean(郵便番号表示有無)));
         }
 
         @Test
         public void is要介護認定期限切れ表示有りで_trueが返る() {
             boolean result = sut.is要介護認定期限切れ表示有り();
-            assertThat(result, is(ConfigValueBoolean.perseBoolean(要介護認定期限切れ_表示有無)));
+            assertThat(result, is(ConfigValueBoolean.parseBoolean(要介護認定期限切れ_表示有無)));
         }
 
         @Test
         public void is居宅支援事業者適用切れ表示有りで_trueが返る() {
             boolean result = sut.is居宅支援事業者適用切れ表示有り();
-            assertThat(result, is(ConfigValueBoolean.perseBoolean(居宅支援事業者適用切れ_表示有無)));
+            assertThat(result, is(ConfigValueBoolean.parseBoolean(居宅支援事業者適用切れ_表示有無)));
         }
 
         @Test
@@ -95,7 +95,7 @@ public class HihokenshashoPrintConfigTest {
         @Test
         public void is委託代行業者表示有り() {
             boolean result = sut.is委託代行業者表示有り();
-            assertThat(result, is(ConfigValueBoolean.perseBoolean(委託代行業者_表示有無)));
+            assertThat(result, is(ConfigValueBoolean.parseBoolean(委託代行業者_表示有無)));
         }
 
         @Test
@@ -113,7 +113,7 @@ public class HihokenshashoPrintConfigTest {
         @Test
         public void is届出日の代わりに適用開始日を表示で_falseが返る() {
             boolean result = sut.is届出日の代わりに適用開始日を表示();
-            assertThat(result, is(ConfigValueBoolean.perseBoolean(届出日の代わりに適用開始日を表示)));
+            assertThat(result, is(ConfigValueBoolean.parseBoolean(届出日の代わりに適用開始日を表示)));
         }
     }
     private static final RString 氏名カナ表示有無;

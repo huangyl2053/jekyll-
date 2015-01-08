@@ -28,13 +28,13 @@ public class ConfigValueBooleanTest {
         @Test
         public void 引数に_1_が指定された場合_trueが返る() {
             target = new RString("1");
-            assertThat(ConfigValueBoolean.perseBoolean(target), is(true));
+            assertThat(ConfigValueBoolean.parseBoolean(target), is(true));
         }
 
         @Test
         public void 上記以外の場合_falseが返る() {
             target = new RString("0");
-            assertThat(ConfigValueBoolean.perseBoolean(target), is(false));
+            assertThat(ConfigValueBoolean.parseBoolean(target), is(false));
         }
     }
 }
