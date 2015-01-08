@@ -65,10 +65,8 @@ public class HihokenshaShikakuHakkoHandler {
 
     private final HihokenshaShikakuHakkoDiv div;
 
-    static final RString KOFUJIYU_TESTKEY = new RString("testKey");
-    static final RString KOFUJIYU_TEST = new RString("テスト");
-    static final RString KOFUJIYU_CHOKUZENKEY = new RString("chokuzenKey");
-    static final RString KOFUJIYU_CHOKUZEN = new RString("直前履歴");
+    static final KeyValueDataSource KOFUJIYU_TEST = new KeyValueDataSource(new RString("testKey"), new RString("テスト"));
+    static final KeyValueDataSource KOFUJIYU_CHOKUZEN = new KeyValueDataSource(new RString("chokuzenKey"), new RString("直前履歴"));
     private static final RString COLLON = new RString(":");
     private static final RString JIKOSAKUSEI = new RString("自己作成");
     private final int 終了分記載区分が終了後も記載する場合の給付制限件数 = 3;
@@ -126,7 +124,7 @@ public class HihokenshaShikakuHakkoHandler {
         List<KeyValueDataSource> kofuJiyuList = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).create交付事由List(is直前履歴);
         div.getDdlKofuJiyu().setDataSource(kofuJiyuList);
         if ((div.getMode_発行証タイプ() == 被保険者証) && is直前履歴) {
-            div.getDdlKofuJiyu().setSelectedKey(KOFUJIYU_CHOKUZENKEY);
+            div.getDdlKofuJiyu().setSelectedKey(KOFUJIYU_CHOKUZEN.getKey());
             div.getDdlKofuJiyu().setReadOnly(true);
         }
     }
@@ -592,9 +590,9 @@ public class HihokenshaShikakuHakkoHandler {
         model.set保険者表示(保険者);
         model.set交付事由コード(div.getYukoKigenInfo().getDdlKofuJiyu().getSelectedKey());
         model.set交付事由(div.getYukoKigenInfo().getDdlKofuJiyu().getSelectedValue());
-        if (div.getYukoKigenInfo().getDdlKofuJiyu().getSelectedKey().equals(KOFUJIYU_TESTKEY)) {
+        if (div.getYukoKigenInfo().getDdlKofuJiyu().getSelectedKey().equals(KOFUJIYU_TEST.getKey())) {
             model.setSelectedテスト(true);
-        } else if (div.getYukoKigenInfo().getDdlKofuJiyu().getSelectedKey().equals(KOFUJIYU_CHOKUZENKEY)) {
+        } else if (div.getYukoKigenInfo().getDdlKofuJiyu().getSelectedKey().equals(KOFUJIYU_CHOKUZEN.getKey())) {
             model.setSelected直前履歴(true);
         }
 

@@ -14,9 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku.DBACodeShu
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku.HihokenshashoKofuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku.ShikakushashoKofuJiyu;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HihokenshaShikakuHakkoHandler.KOFUJIYU_CHOKUZEN;
-import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HihokenshaShikakuHakkoHandler.KOFUJIYU_CHOKUZENKEY;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HihokenshaShikakuHakkoHandler.KOFUJIYU_TEST;
-import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HihokenshaShikakuHakkoHandler.KOFUJIYU_TESTKEY;
 import jp.co.ndensan.reams.ur.urz.definition.code.CodeMasterHelper;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
@@ -98,7 +96,7 @@ final class HakkoShoTypeBehaviors {
         public List<KeyValueDataSource> create交付事由List(boolean is直前履歴) {
             List<KeyValueDataSource> result = new ArrayList<>();
             if (is直前履歴) {
-                result.add(new KeyValueDataSource(KOFUJIYU_CHOKUZENKEY, KOFUJIYU_CHOKUZEN));
+                result.add(KOFUJIYU_CHOKUZEN);
                 return result;
             }
             List<HihokenshashoKofuJiyu> 被保険者証交付事由List = CodeMasterHelper.getCode(DBACodeShubetsu.被保険者証交付事由);
@@ -106,7 +104,7 @@ final class HakkoShoTypeBehaviors {
             for (HihokenshashoKofuJiyu 交付事由 : 被保険者証交付事由List) {
                 result.add(new KeyValueDataSource(交付事由.value().value(), 交付事由.getMeisho()));
             }
-            result.add(new KeyValueDataSource(KOFUJIYU_TESTKEY, KOFUJIYU_TEST));
+            result.add(KOFUJIYU_TEST);
             return result;
         }
 
@@ -165,7 +163,7 @@ final class HakkoShoTypeBehaviors {
             for (ShikakushashoKofuJiyu 交付事由 : 資格者証交付事由List) {
                 result.add(new KeyValueDataSource(交付事由.value().value(), 交付事由.getMeisho()));
             }
-            result.add(new KeyValueDataSource(KOFUJIYU_TESTKEY, KOFUJIYU_TEST));
+            result.add(KOFUJIYU_TEST);
             return result;
         }
 
