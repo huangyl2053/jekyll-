@@ -81,5 +81,4 @@ public class HihokenshashoSofusakiInfoConfig {
         return MojigireControlType.toValue(
                 configs.get(ConfigKeysHihokenshashoSofusakiInfo.被保険者証_外部帳票文字切れ制御方法));
     }
-
 }

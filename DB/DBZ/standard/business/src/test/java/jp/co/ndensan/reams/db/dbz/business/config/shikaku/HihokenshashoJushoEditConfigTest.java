@@ -43,8 +43,8 @@ public class HihokenshashoJushoEditConfigTest {
         }
 
         @Test
-        public void is帳票独自区分を指定したとき_trueが返る() {
-            boolean result = sut.is帳票独自区分を使用();
+        public void uese帳票独自区分を指定したとき_trueが返る() {
+            boolean result = sut.uses帳票独自区分();
             assertThat(result, is(true));
         }
 

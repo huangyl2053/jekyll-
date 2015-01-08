@@ -11,8 +11,8 @@ import java.util.Set;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 二値のみ（1と0しか持たない等）の業務コンフィグを、Bool値に変換するためのクラスです。<br/>
- * trueに変換されてほしい値を内部に持ち、それらの値と業務コンフィグの値を比較することでtrue／falseを判定します。
+ * 業務コンフィグに登録されている値が{@code boolean}として扱われるかを判定する機能を持ちます。
+ * {@code true}として扱いたい値を{@link ConfigValueBoolean.Dictionary}に持ち、それらの値と業務コンフィグの値を比較することでtrue／falseを判定します。
  *
  * <pre>
  * 使用例
@@ -37,21 +37,26 @@ public final class ConfigValueBoolean {
     private ConfigValueBoolean() {
     }
 
-    private enum Definitions {
+    /**
+     * {@code true}として扱う文字列を定義するための列挙型です。{@link #INSTANCE}以外の要素を持たせることは禁止します。
+     */
+    private enum Dictionary {
 
         /**
-         * trueであると判定されてほしい文字列を設定します。<br/>
+         * {@code true}であると判定されてほしい文字列を設定します。<br/>
          * 現状1と0が主ですが、他の文字列でもtrue／falseの判定を行いたい場合には、必要な文字列を追加していく必要があります。
+         * <p>
+         * 追加例：
          * <pre>
-         * 追加例
          * INSTANCE("1", "true", "TRUE" ...);
          * </pre>
+         * </p>
          */
         INSTANCE("1");
 
         private final Set<RString> valuesOfTrue;
 
-        private Definitions(String... values) {
+        private Dictionary(String... values) {
             Set<RString> set = new HashSet<>();
             for (String str : values) {
                 set.add(new RString(str));
@@ -61,12 +66,12 @@ public final class ConfigValueBoolean {
     }
 
     /**
-     * 引数から受け取った文字列と、trueであると判定されてほしい文字列の集合を比較して、Bool値に変換します。
+     * 指定の文字列が{@code true}として扱われるものである時、{@code true}を返します。
      *
      * @param rstr 比較対象の文字列
-     * @return 比較対象の文字列と同値の文字列が、trueであると判定される文字列の集合に存在している場合true
+     * @return 指定の文字列が{@code true}として扱われるものである時、{@code true}
      */
     public static boolean perseBoolean(RString rstr) {
-        return Definitions.INSTANCE.valuesOfTrue.contains(rstr);
+        return Dictionary.INSTANCE.valuesOfTrue.contains(rstr);
     }
 }

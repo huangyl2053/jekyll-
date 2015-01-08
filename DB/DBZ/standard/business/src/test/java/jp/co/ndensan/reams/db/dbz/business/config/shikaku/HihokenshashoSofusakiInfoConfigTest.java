@@ -55,7 +55,6 @@ public class HihokenshashoSofusakiInfoConfigTest {
             MojigireControlType result = sut.get外部帳票文字切れ制御方法();
             assertThat(result, is(MojigireControlType.印字可能範囲まで印字する));
         }
-
     }
 
     private static IUrBusinessConfig createBusinessConfigMock() {

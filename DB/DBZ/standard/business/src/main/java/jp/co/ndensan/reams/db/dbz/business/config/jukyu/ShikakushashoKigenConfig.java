@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.config;
+package jp.co.ndensan.reams.db.dbz.business.config.jukyu;
 
 import java.util.Collections;
 import java.util.EnumMap;
@@ -56,8 +56,8 @@ public class ShikakushashoKigenConfig {
      *
      * @return 資格者証期限_有効期限加算値
      */
-    public RString get資格者証期限_有効期限加算値() {
-        return configs.get(資格者証期限_有効期限加算値);
+    public int get資格者証期限_有効期限加算値() {
+        return Integer.parseInt(configs.get(資格者証期限_有効期限加算値).toString());
     }
 
     /**
