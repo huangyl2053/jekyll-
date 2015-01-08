@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0300001.dgFukaGaitoshaList_Row;
@@ -63,7 +62,7 @@ public class FukaTaishoshaSearch {
     public ResponseData<FukaTaishoshaSearchDiv> onClick_btnSearch(FukaTaishoshaSearchDiv div) {
 
         set賦課年度(div);
-        SearchResult result = get対象者(div.getSearchCondition().getCcdSearchCondition());
+        SearchResult<FukaTaishoshaModel> result = get対象者(div.getSearchCondition().getCcdSearchCondition());
         div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(toRowList(result));
 
         return ResponseDatas.createSettingDataTo(div);
@@ -113,10 +112,10 @@ public class FukaTaishoshaSearch {
                 .build();
 
         TaishoshaFinder finder = new TaishoshaFinder();
-        SearchResult 対象者 = finder.get賦課対象者(条件無, 条件無, 検索キー, 最近処理者検索数);
+        SearchResult<FukaTaishoshaModel> 対象者 = finder.get賦課対象者(条件無, 条件無, 検索キー, 最近処理者検索数);
 
         if (!対象者.records().isEmpty()) {
-            put対象者Key(create対象者Key((FukaTaishoshaModel) 対象者.records().findFirst()));
+            put対象者Key(create対象者Key(対象者.records().findFirst().get()));
         }
 
         return ResponseDatas.createSettingDataTo(div);
@@ -129,7 +128,7 @@ public class FukaTaishoshaSearch {
         div.getGaitoshaList().getTxtFukanendo().setValue(new RDate(div.getCcdSearchCondition().get賦課年度().toString()));
     }
 
-    private SearchResult get対象者(IHihokenshaFinderDiv div) {
+    private SearchResult<FukaTaishoshaModel> get対象者(IHihokenshaFinderDiv div) {
         TaishoshaFinder finder = new TaishoshaFinder();
         FukaSearchMenu menu = FukaSearchMenu.toValue(UrControlDataFactory.createInstance().getMenuID());
         return finder.get賦課対象者(get介護条件(div, menu), get介護除外条件(div, menu), div.get宛名条件(), div.get最大表示件数());
@@ -210,9 +209,9 @@ public class FukaTaishoshaSearch {
                 new ShikibetsuCode(row.getTxtShikbetsuCode()), new AtenaMeisho(row.getTxtName()));
     }
 
-    private List<dgFukaGaitoshaList_Row> toRowList(SearchResult result) {
+    private List<dgFukaGaitoshaList_Row> toRowList(SearchResult<FukaTaishoshaModel> result) {
         List<dgFukaGaitoshaList_Row> rowList = new ArrayList<>();
-        for (FukaTaishoshaModel 対象者 : (IItemList<FukaTaishoshaModel>) result.records()) {
+        for (FukaTaishoshaModel 対象者 : result.records()) {
             rowList.add(new dgFukaGaitoshaList_Row(
                     対象者.get調定年度() != null ? 対象者.get調定年度().wareki().toDateString() : RString.EMPTY,
                     対象者.get賦課年度() != null ? 対象者.get賦課年度().wareki().toDateString() : RString.EMPTY,

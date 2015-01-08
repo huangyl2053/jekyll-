@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureishaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0200001.dgGaitoshaList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0200001.TaishoshaSearchDiv;
@@ -58,7 +57,7 @@ public class TaishoshaSearch {
      */
     public ResponseData<TaishoshaSearchDiv> onClick_btnSearch(TaishoshaSearchDiv div) {
 
-        SearchResult result = get対象者(div.getSearchCondition().getCcdSearchCondition());
+        SearchResult<TaishoshaModel> result = get対象者(div.getSearchCondition().getCcdSearchCondition());
         div.getGaitoshaList().getDgGaitoshaList().setDataSource(toRowList(result));
 
         return ResponseDatas.createSettingDataTo(div);
@@ -108,16 +107,16 @@ public class TaishoshaSearch {
                 .build();
 
         TaishoshaFinder finder = new TaishoshaFinder();
-        SearchResult 対象者 = finder.get資格対象者(条件無, 条件無, 検索キー, 最近処理者検索数);
+        SearchResult<TaishoshaModel> 対象者 = finder.get資格対象者(条件無, 条件無, 検索キー, 最近処理者検索数);
 
         if (!対象者.records().isEmpty()) {
-            put対象者Key(create対象者Key((TaishoshaModel) 対象者.records().findFirst()));
+            put対象者Key(create対象者Key(対象者.records().findFirst().get()));
         }
 
         return ResponseDatas.createSettingDataTo(div);
     }
 
-    private SearchResult get対象者(IHihokenshaFinderDiv div) {
+    private SearchResult<TaishoshaModel> get対象者(IHihokenshaFinderDiv div) {
         TaishoshaFinder finder = new TaishoshaFinder();
         return finder.get資格対象者(get介護条件(div), get介護除外条件(div), div.get宛名条件(), div.get最大表示件数());
     }
@@ -185,9 +184,9 @@ public class TaishoshaSearch {
                 new ShikibetsuCode(row.getShikibetsuCode()), new AtenaMeisho(row.getShimei()));
     }
 
-    private List<dgGaitoshaList_Row> toRowList(SearchResult result) {
+    private List<dgGaitoshaList_Row> toRowList(SearchResult<TaishoshaModel> result) {
         List<dgGaitoshaList_Row> rowList = new ArrayList<>();
-        for (TaishoshaModel 対象者 : (IItemList<TaishoshaModel>) result.records()) {
+        for (TaishoshaModel 対象者 : result.records()) {
             rowList.add(new dgGaitoshaList_Row(
                     対象者.get被保険者番号() != null ? 対象者.get被保険者番号().value() : RString.EMPTY,
                     対象者.get識別コード() != null ? 対象者.get識別コード().value() : RString.EMPTY,
