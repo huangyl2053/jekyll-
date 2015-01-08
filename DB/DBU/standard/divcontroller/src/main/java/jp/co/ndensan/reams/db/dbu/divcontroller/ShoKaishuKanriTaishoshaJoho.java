@@ -78,9 +78,9 @@ public class ShoKaishuKanriTaishoshaJoho {
             SearchShoKaishuKanriDiv searchDiv) {
 
         shikakuKihonJoho.getTxtHihokenshaNo().setValue(searchDiv.getTxtSearchHihokenshaNo().getValue());
-        shikakuKihonJoho.getTxtShutokuYmd().setValue(generator.getAsRDate("資格取得日"));
+        shikakuKihonJoho.getTxtShutokuYmd().setValue(generator.getAsFlexibleDate("資格取得日"));
         shikakuKihonJoho.getTxtShutokuJiyu().setValue(generator.getAsRString("取得事由"));
-        shikakuKihonJoho.getTxtSoshitsuYmd().setValue(generator.getAsRDate("資格喪失日"));
+        shikakuKihonJoho.getTxtSoshitsuYmd().setValue(generator.getAsFlexibleDate("資格喪失日"));
         shikakuKihonJoho.getTxtSoshitsuJiyu().setValue(generator.getAsRString("喪失事由"));
         shikakuKihonJoho.getTxtJutokuKubun().setValue(generator.getAsRString("住特区分"));
         shikakuKihonJoho.getTxtYokaigoJotaiKubun().setValue(generator.getAsRString("要介護度"));
