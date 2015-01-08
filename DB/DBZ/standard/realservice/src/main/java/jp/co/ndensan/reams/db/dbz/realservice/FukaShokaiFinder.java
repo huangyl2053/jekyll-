@@ -32,7 +32,7 @@ public class FukaShokaiFinder {
      * @return 全賦課履歴
      */
     public IItemList<FukaModel> load全賦課履歴(HihokenshaNo 被保険者番号) {
-        return dac.select(被保険者番号);
+        return dac.select介護賦課一覧(被保険者番号);
     }
 
     /**
@@ -43,6 +43,6 @@ public class FukaShokaiFinder {
      * @return 全賦課履歴
      */
     public IItemList<FukaModel> load全賦課履歴(HihokenshaNo 被保険者番号, FlexibleYear 賦課年度) {
-        return dac.select(被保険者番号, 賦課年度);
+        return dac.select介護賦課一覧(被保険者番号, 賦課年度);
     }
 }

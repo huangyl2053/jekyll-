@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT2002Fuka implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
     insertReamsLoginId(2147483647, 0),
@@ -24,6 +24,15 @@ public enum DbT2002Fuka implements IColumnDefinition {
     shikibetsuCode(2147483647, 0),
     setaiCode(2147483647, 0),
     setaiInsu(5, 0),
+    shikakuShutokuYMD(2147483647, 0),
+    shikakuShutokuJiyu(2, 0),
+    shikakuSoshitsuYMD(2147483647, 0),
+    shikakuSoshitsuJiyu(2, 0),
+    seihofujoShurui(2, 0),
+    seihoKaishiYMD(2147483647, 0),
+    seihoHaishiYMD(2147483647, 0),
+    ronenKaishiYMD(2147483647, 0),
+    ronenHaishiYMD(2147483647, 0),
     fukaYMD(2147483647, 0),
     kazeiKubun(1, 0),
     setaikazeiKubun(1, 0),
@@ -38,7 +47,7 @@ public enum DbT2002Fuka implements IColumnDefinition {
     nengakuHokenryo2(7, 0),
     tsukiwariStartYM2(2147483647, 0),
     tsukiwariEndYM2(2147483647, 0),
-    choteiYMDHM(2147483647, 0),
+    choteiTimestamp(29, 0),
     choteiJiyu1(2, 0),
     choteiJiyu2(2, 0),
     choteiJiyu3(2, 0),
@@ -49,7 +58,11 @@ public enum DbT2002Fuka implements IColumnDefinition {
     kakuteiHokenryo(7, 0),
     hokenryoDankaiKarisanntei(3, 0),
     choshuHohoShoriTimestamp(29, 0),
-    idoKijunTimestamp(29, 0);
+    idoKijunTimestamp(29, 0),
+    kozaKubun(1, 0),
+    kyokaisoKubun(1, 0),
+    shokkenKubun(1, 0),
+    fukaShichosonCode(2147483647, 0);
 
     private final int maxLength;
     private final int scale;

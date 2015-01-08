@@ -13,6 +13,9 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysHizuke;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -58,6 +61,62 @@ public class HizukeConfig {
      */
     public RString get(ConfigKeysHizuke key) {
         return configs.get(key);
+    }
+
+    /**
+     * 日付関連_調定年度を返します。
+     *
+     * @return 日付関連_調定年度
+     * @throws SystemException 日付関連_調定年度がnullの場合
+     */
+    public FlexibleYear get調定年度() throws SystemException {
+        RString data = get(ConfigKeysHizuke.日付関連_調定年度);
+        if (data == null) {
+            throw new SystemException(UrSystemErrorMessages.値がnull.getReplacedMessage("日付関連_調定年度"));
+        }
+        return new FlexibleYear(data);
+    }
+
+    /**
+     * 日付関連_所得年度を返します。
+     *
+     * @return 日付関連_所得年度
+     * @throws SystemException 日付関連_所得年度がnullの場合
+     */
+    public FlexibleYear get所得年度() throws SystemException {
+        RString data = get(ConfigKeysHizuke.日付関連_所得年度);
+        if (data == null) {
+            throw new SystemException(UrSystemErrorMessages.値がnull.getReplacedMessage("日付関連_所得年度"));
+        }
+        return new FlexibleYear(data);
+    }
+
+    /**
+     * 日付関連_当初年度を返します。
+     *
+     * @return 日付関連_当初年度
+     * @throws SystemException 日付関連_当初年度がnullの場合
+     */
+    public FlexibleYear get当初年度() throws SystemException {
+        RString data = get(ConfigKeysHizuke.日付関連_当初年度);
+        if (data == null) {
+            throw new SystemException(UrSystemErrorMessages.値がnull.getReplacedMessage("日付関連_当初年度"));
+        }
+        return new FlexibleYear(data);
+    }
+
+    /**
+     * 日付関連_遡及年度を返します。
+     *
+     * @return 日付関連_遡及年度
+     * @throws SystemException 日付関連_遡及年度がnullの場合
+     */
+    public FlexibleYear get遡及年度() throws SystemException {
+        RString data = get(ConfigKeysHizuke.日付関連_遡及年度);
+        if (data == null) {
+            throw new SystemException(UrSystemErrorMessages.値がnull.getReplacedMessage("日付関連_遡及年度"));
+        }
+        return new FlexibleYear(data);
     }
 
     /**

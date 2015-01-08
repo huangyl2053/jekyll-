@@ -6,14 +6,12 @@
 package jp.co.ndensan.reams.db.dbz.model;
 
 import java.io.Serializable;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHM;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -21,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import static java.util.Objects.requireNonNull;
 
 /**
  * 介護賦課のモデルクラスです。
@@ -268,8 +267,8 @@ public class FukaModel implements Serializable {
      *
      * @return 調定日時
      */
-    public YMDHM get調定日時() {
-        return entity.getChoteiYMDHM();
+    public RDateTime get調定日時() {
+        return entity.getChoteiTimestamp();
     }
 
     /**
@@ -596,9 +595,9 @@ public class FukaModel implements Serializable {
      *
      * @param 調定日時 調定日時
      */
-    public void set調定日時(YMDHM 調定日時) {
+    public void set調定日時(RDateTime 調定日時) {
         requireNonNull(調定日時, UrSystemErrorMessages.値がnull.getReplacedMessage("調定日時"));
-        entity.setChoteiYMDHM(調定日時);
+        entity.setChoteiTimestamp(調定日時);
     }
 
     /**

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.config;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHihokenshashoItakudaikoHyoji;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
@@ -16,8 +17,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * {@link HihokenshashoItakudaikoHyojiConfig}のテストです。
@@ -27,51 +27,61 @@ import static org.mockito.Mockito.when;
 @RunWith(Enclosed.class)
 public class HihokenshashoItakudaikoHyojiConfigTest extends DbzTestBase {
 
-    public static class get {
+    public static class get extends DbzTestBase {
 
         private HihokenshashoItakudaikoHyojiConfig sut;
 
         @Before
         public void setUp() {
-//            sut = new HihokenshashoItakudaikoHyojiConfig(createBusinessConfigMock());
-            sut = new HihokenshashoItakudaikoHyojiConfig();
+            sut = new HihokenshashoItakudaikoHyojiConfig(createBusinessConfigMock());
         }
 
         @Test
         public void 被保険者証表示方法_委託代行業者_表示有無を指定したとき_業務コンフィグ設定値が返る() {
             RString result = sut.get被保険者証表示方法_委託代行業者_表示有無();
-            assertThat(result, is(new RString("0")));
+            assertThat(result, is(委託代行業者_表示有無));
         }
 
         @Test
         public void 被保険者証表示方法_委託代行業者_表示開始文言を指定したとき_業務コンフィグ設定値が返る() {
             RString result = sut.get被保険者証表示方法_委託代行業者_表示開始文言();
-            assertThat(result, is(new RString("（委託先：")));
+            assertThat(result, is(委託代行業者_表示開始文言));
         }
 
         @Test
         public void 被保険者証表示方法_委託代行業者_表示終了文言を指定したとき_業務コンフィグ設定値が返る() {
             RString result = sut.get被保険者証表示方法_委託代行業者_表示終了文言();
-            assertThat(result, is(new RString("）")));
+            assertThat(result, is(委託代行業者_表示終了文言));
         }
+    }
+
+    private static final RString 委託代行業者_表示有無;
+    private static final RString 委託代行業者_表示開始文言;
+    private static final RString 委託代行業者_表示終了文言;
+
+    static {
+        委託代行業者_表示有無 = new RString("0");
+        委託代行業者_表示開始文言 = new RString("（委託先：");
+        委託代行業者_表示終了文言 = new RString("）");
     }
 
     private static IUrBusinessConfig createBusinessConfigMock() {
         IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
-        RDate nowDate = RDate.getNowDate();
-
         when(mock.get(
-                ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示有無,
-                nowDate
-        )).thenReturn(new RString("0"));
+                eq(ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示有無),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(委託代行業者_表示有無);
         when(mock.get(
-                ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示開始文言,
-                nowDate
-        )).thenReturn(new RString("（委託先："));
+                eq(ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示開始文言),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(委託代行業者_表示開始文言);
         when(mock.get(
-                ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示終了文言,
-                nowDate
-        )).thenReturn(new RString("）"));
+                eq(ConfigKeysHihokenshashoItakudaikoHyoji.被保険者証表示方法_委託代行業者_表示終了文言),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(委託代行業者_表示終了文言);
         return mock;
     }
 }

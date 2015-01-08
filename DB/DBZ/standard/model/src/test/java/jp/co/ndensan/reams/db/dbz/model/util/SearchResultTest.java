@@ -45,13 +45,13 @@ public class SearchResultTest extends DbzTestBase {
             }
 
             @Test(expected = IllegalArgumentException.class)
-            public void ofは_引数のtotalCountが0の時_IllegalArgumentExceptionをスローする() {
-                sut.of(list, 0, true);
+            public void ofは_引数のtotalCountが0より小さい時_IllegalArgumentExceptionをスローする() {
+                sut.of(list, -1, true);
             }
 
             @Test
-            public void ofは_引数のtotalCountが1以上の時_SearchResultを生成する() {
-                assertThat(sut.of(list, 1, false), isA(SearchResult.class));
+            public void ofは_引数のtotalCountが0以上の時_SearchResultを生成する() {
+                assertThat(sut.of(list, 0, false), isA(SearchResult.class));
             }
         }
 
@@ -102,13 +102,13 @@ public class SearchResultTest extends DbzTestBase {
             }
 
             @Test(expected = IllegalArgumentException.class)
-            public void ofは_引数のtotalCountが0の時_IllegalArgumentExceptionをスローする() {
-                sut.of(itemList, 0, true);
+            public void ofは_引数のtotalCountが0より小さい時_IllegalArgumentExceptionをスローする() {
+                sut.of(itemList, -1, true);
             }
 
             @Test
-            public void ofは_引数のtotalCountが1以上の時_SearchResultを生成する() {
-                assertThat(sut.of(itemList, 1, false), isA(SearchResult.class));
+            public void ofは_引数のtotalCountが0以上の時_SearchResultを生成する() {
+                assertThat(sut.of(itemList, 0, false), isA(SearchResult.class));
             }
         }
 
@@ -159,13 +159,13 @@ public class SearchResultTest extends DbzTestBase {
             }
 
             @Test(expected = IllegalArgumentException.class)
-            public void ofは_引数のtotalCountが0の時_IllegalArgumentExceptionをスローする() {
-                sut.of(list, 0);
+            public void ofは_引数のtotalCountが0より小さい時_IllegalArgumentExceptionをスローする() {
+                sut.of(list, -1);
             }
 
             @Test
-            public void ofは_引数のtotalCountが1以上の時_SearchResultを生成する() {
-                assertThat(sut.of(list, 1), isA(SearchResult.class));
+            public void ofは_引数のtotalCountが0以上の時_SearchResultを生成する() {
+                assertThat(sut.of(list, 0), isA(SearchResult.class));
             }
         }
 
@@ -230,13 +230,13 @@ public class SearchResultTest extends DbzTestBase {
             }
 
             @Test(expected = IllegalArgumentException.class)
-            public void ofは_引数のtotalCountが0の時_IllegalArgumentExceptionをスローする() {
-                sut.of(itemList, 0);
+            public void ofは_引数のtotalCountが0より小さい時_IllegalArgumentExceptionをスローする() {
+                sut.of(itemList, -1);
             }
 
             @Test
-            public void ofは_引数のtotalCountが1以上の時_SearchResultを生成する() {
-                assertThat(sut.of(itemList, 1), isA(SearchResult.class));
+            public void ofは_引数のtotalCountが0以上の時_SearchResultを生成する() {
+                assertThat(sut.of(itemList, 0), isA(SearchResult.class));
             }
         }
 
