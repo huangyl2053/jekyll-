@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  * <p>
  * 使用例:
  * <pre>
- *     IHakkoShoTypeBehavior instance = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ());
+ *     IHakkoShoTypeBehavior behaviorByMode = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ());
  *     div.getDdlKofuJiyu().setDataSource(instance.create交付事由List(true));
  * </pre>
  * </p>

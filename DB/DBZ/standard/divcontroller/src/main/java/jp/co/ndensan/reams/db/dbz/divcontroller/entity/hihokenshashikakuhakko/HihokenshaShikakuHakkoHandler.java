@@ -295,11 +295,11 @@ public class HihokenshaShikakuHakkoHandler {
         List<KyufuSeigenShutsuryoku> 給付制限 = new ArrayList<>();
         List<KyufuSeigenShutsuryoku> 優先的 = new ArrayList<>();
         List<KyufuSeigenShutsuryoku> 優先外 = new ArrayList<>();
-        IHakkoShoTypeBehavior instance = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ());
+        IHakkoShoTypeBehavior behaviorByMode = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ());
         ShiharaiHohoHenkoManager manager = new ShiharaiHohoHenkoManager();
 
-        ConfigValuesShiharaiHohoHenko 支払方法終了分記載区分 = instance.load支払方法終了分記載区分();
-        RString 支払方法記載文言 = instance.load支払方法記載文言();
+        ConfigValuesShiharaiHohoHenko 支払方法終了分記載区分 = behaviorByMode.load支払方法終了分記載区分();
+        RString 支払方法記載文言 = behaviorByMode.load支払方法記載文言();
         IItemList<ShiharaiHohoHenkoModel> history = manager.get1号償還払化履歴(被保険者番号);
         if (支払方法終了分記載区分 == ConfigValuesShiharaiHohoHenko.支払方法変更_終了分記載区分_終了後も記載する) {
             優先外.addAll(createKyufuSeigenShutsuryokuList(history, 終了分記載区分が終了後も記載する場合の給付制限件数, 支払方法記載文言));
@@ -311,8 +311,8 @@ public class HihokenshaShikakuHakkoHandler {
             }
         }
 
-        ConfigValuesShiharaiHohoHenko 減額終了分記載区分 = instance.load減額終了分記載区分();
-        RString 減額記載文言 = instance.load減額記載文言();
+        ConfigValuesShiharaiHohoHenko 減額終了分記載区分 = behaviorByMode.load減額終了分記載区分();
+        RString 減額記載文言 = behaviorByMode.load減額記載文言();
         history = manager.get1号減額履歴(被保険者番号);
         if (減額終了分記載区分 == ConfigValuesShiharaiHohoHenko.支払方法変更_終了分記載区分_終了後も記載する) {
             優先外.addAll(createKyufuSeigenShutsuryokuList(history, 終了分記載区分が終了後も記載する場合の給付制限件数, 減額記載文言));
