@@ -16,12 +16,12 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
  *
  * @author N8187 久保田 英男
  */
-public class HihokenshaShikakuHakkoValidation implements IValidatable {
+public class HihokenshaShikakuHakkoValidator implements IValidatable {
 
     /**
      * コンストラクタです。
      */
-    public HihokenshaShikakuHakkoValidation() {
+    public HihokenshaShikakuHakkoValidator() {
     }
 
     @Override
