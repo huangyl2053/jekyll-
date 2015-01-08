@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config.shikaku;
 
+import jp.co.ndensan.reams.db.dbz.business.config.ConfigValueBoolean;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoPrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshaNoPrintType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshashoPrintType;
@@ -23,9 +24,11 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
 
 /**
- * {@link jp.co.ndensan.reams.db.dba.business.config.HihokenshashoIndicationMethodConfig}のテストです。
+ * {@link HihokenshashoIndicationMethodConfig}のテストです。
  *
  * @author n8178 城間篤人
  */
@@ -44,7 +47,7 @@ public class HihokenshashoPrintConfigTest {
         @Test
         public void is氏名カナ表示有りで_trueが返る() {
             boolean result = sut.is氏名カナ表示有り();
-            assertThat(result, is(true));
+            assertThat(result, is(ConfigValueBoolean.perseBoolean(氏名カナ表示有無)));
         }
 
         @Test
@@ -62,19 +65,19 @@ public class HihokenshashoPrintConfigTest {
         @Test
         public void is郵便番号表示有りで_trueが返る() {
             boolean result = sut.is郵便番号表示有り();
-            assertThat(result, is(true));
+            assertThat(result, is(ConfigValueBoolean.perseBoolean(郵便番号表示有無)));
         }
 
         @Test
         public void is要介護認定期限切れ表示有りで_trueが返る() {
             boolean result = sut.is要介護認定期限切れ表示有り();
-            assertThat(result, is(true));
+            assertThat(result, is(ConfigValueBoolean.perseBoolean(要介護認定期限切れ_表示有無)));
         }
 
         @Test
         public void is居宅支援事業者適用切れ表示有りで_trueが返る() {
             boolean result = sut.is居宅支援事業者適用切れ表示有り();
-            assertThat(result, is(true));
+            assertThat(result, is(ConfigValueBoolean.perseBoolean(居宅支援事業者適用切れ_表示有無)));
         }
 
         @Test
@@ -92,94 +95,109 @@ public class HihokenshashoPrintConfigTest {
         @Test
         public void is委託代行業者表示有り() {
             boolean result = sut.is委託代行業者表示有り();
-            assertThat(result, is(false));
+            assertThat(result, is(ConfigValueBoolean.perseBoolean(委託代行業者_表示有無)));
         }
 
         @Test
         public void get委託代行業者表示開始文言で_設定した開始文言が返る() {
             RString result = sut.get委託代行業者表示開始文言();
-            assertThat(result, is(new RString("(委託先:")));
+            assertThat(result, is(委託代行業者_表示開始文言));
         }
 
         @Test
         public void get委託代行業者_表示終了文言で_設定した終了文言が返る() {
             RString result = sut.get委託代行業者_表示終了文言();
-            assertThat(result, is(new RString(")")));
+            assertThat(result, is(委託代行業者_表示終了文言));
         }
 
         @Test
         public void is届出日の代わりに適用開始日を表示で_falseが返る() {
             boolean result = sut.is届出日の代わりに適用開始日を表示();
-            assertThat(result, is(false));
+            assertThat(result, is(ConfigValueBoolean.perseBoolean(届出日の代わりに適用開始日を表示)));
         }
+    }
+    private static final RString 氏名カナ表示有無;
+    private static final RString 郵便番号表示有無;
+    private static final RString 要介護認定期限切れ_表示有無;
+    private static final RString 居宅支援事業者適用切れ_表示有無;
+    private static final RString 委託代行業者_表示有無;
+    private static final RString 委託代行業者_表示開始文言;
+    private static final RString 委託代行業者_表示終了文言;
+    private static final RString 届出日の代わりに適用開始日を表示;
 
+    static {
+        氏名カナ表示有無 = new RString("1");
+        郵便番号表示有無 = new RString("1");
+        要介護認定期限切れ_表示有無 = new RString("1");
+        居宅支援事業者適用切れ_表示有無 = new RString("0");
+        委託代行業者_表示有無 = new RString("0");
+        委託代行業者_表示開始文言 = new RString("(委託先:");
+        委託代行業者_表示終了文言 = new RString(")");
+        届出日の代わりに適用開始日を表示 = new RString("0");
     }
 
     private static IUrBusinessConfig createBusinessConfigMock() {
         IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
-        RDate nowDate = RDate.getNowDate();
-        SubGyomuCode subGyomu = SubGyomuCode.DBA介護資格;
-
         when(mock.get(
-                ConfigKeysHihokenshashoPrint.被保険者証表示方法_氏名カナ表示有無,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("1"));
+                eq(ConfigKeysHihokenshashoPrint.被保険者証表示方法_氏名カナ表示有無),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(氏名カナ表示有無);
         when(mock.get(
-                ConfigKeysHihokenshashoPrint.被保険者証表示方法_証表示タイプ,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("21"));
+                eq(ConfigKeysHihokenshashoPrint.被保険者証表示方法_証表示タイプ),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(HihokenshashoPrintType.B4横.getValue());
         when(mock.get(
-                ConfigKeysHihokenshashoPrint.被保険者証表示方法_被保険者番号表示書式,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("2"));
+                eq(ConfigKeysHihokenshashoPrint.被保険者証表示方法_被保険者番号表示書式),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(HihokenshaNoPrintType.そのまま.getValue());
         when(mock.get(
-                ConfigKeysHihokenshashoPrint.被保険者証表示方法_郵便番号表示有無,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("1"));
+                eq(ConfigKeysHihokenshashoPrint.被保険者証表示方法_郵便番号表示有無),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(郵便番号表示有無);
         when(mock.get(
-                ConfigKeysHihokenshashoPrint.被保険者証表示方法_要介護認定期限切れ_表示有無,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("1"));
+                eq(ConfigKeysHihokenshashoPrint.被保険者証表示方法_要介護認定期限切れ_表示有無),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(要介護認定期限切れ_表示有無);
         when(mock.get(
-                ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者適用切れ_表示有無,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("1"));
+                eq(ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者適用切れ_表示有無),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(KyotakuJigyoshaRirekiPrintType.表示.getValue());
         when(mock.get(
-                ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者履歴_表示方法,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("0"));
+                eq(ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者履歴_表示方法),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(居宅支援事業者適用切れ_表示有無);
         when(mock.get(
-                ConfigKeysHihokenshashoPrint.被保険者証表示方法_合併前印刷時_有効期限,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("2"));
+                eq(ConfigKeysHihokenshashoPrint.被保険者証表示方法_合併前印刷時_有効期限),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(YukoKigenPrintType.有効期限のみ.getValue());
         when(mock.get(
-                ConfigKeysHihokenshashoPrint.被保険者証表示方法_委託代行業者_表示有無,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("0"));
+                eq(ConfigKeysHihokenshashoPrint.被保険者証表示方法_委託代行業者_表示有無),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(委託代行業者_表示有無);
         when(mock.get(
-                ConfigKeysHihokenshashoPrint.被保険者証表示方法_委託代行業者_表示開始文言,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("(委託先:"));
+                eq(ConfigKeysHihokenshashoPrint.被保険者証表示方法_委託代行業者_表示開始文言),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(委託代行業者_表示開始文言);
         when(mock.get(
-                ConfigKeysHihokenshashoPrint.被保険者証表示方法_委託代行業者_表示終了文言,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString(")"));
+                eq(ConfigKeysHihokenshashoPrint.被保険者証表示方法_委託代行業者_表示終了文言),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(委託代行業者_表示終了文言);
         when(mock.get(
-                ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者届出日_適用開始日切替表示区分,
-                nowDate,
-                subGyomu
-        )).thenReturn(new RString("0"));
+                eq(ConfigKeysHihokenshashoPrint.被保険者証表示方法_居宅支援事業者届出日_適用開始日切替表示区分),
+                any(RDate.class),
+                eq(SubGyomuCode.DBA介護資格)
+        )).thenReturn(届出日の代わりに適用開始日を表示);
         return mock;
     }
 }
