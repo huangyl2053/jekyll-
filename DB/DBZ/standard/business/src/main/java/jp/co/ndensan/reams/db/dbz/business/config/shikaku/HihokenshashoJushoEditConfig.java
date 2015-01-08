@@ -115,5 +115,4 @@ public class HihokenshashoJushoEditConfig {
         RString configKey = configs.get(ConfigKeysHihokenshashoJushoEdit.被保険者証表示方法_住所編集_方書表示有無);
         return KatagakiPrint.toValue(configKey);
     }
-
 }
