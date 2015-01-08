@@ -61,7 +61,7 @@ public class TaishoshaFinder {
      * @param 最大件数 最大取得件数
      * @return 資格対象者
      */
-    public SearchResult get資格対象者(ISearchCondition 条件, ISearchCondition 除外条件, IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
+    public SearchResult<TaishoshaModel> get資格対象者(ISearchCondition 条件, ISearchCondition 除外条件, IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
 
         ITrueFalseCriteria 介護条件 = getCriteria(条件, 除外条件);
         IPsmCriteria 宛名psm = getPsmCriteria(宛名キー);
@@ -85,7 +85,7 @@ public class TaishoshaFinder {
      * @param 最大件数 最大取得件数
      * @return 賦課対象者
      */
-    public SearchResult get賦課対象者(ISearchCondition 条件, ISearchCondition 除外条件, IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
+    public SearchResult<FukaTaishoshaModel> get賦課対象者(ISearchCondition 条件, ISearchCondition 除外条件, IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
 
         FukaSearchMenu menu = FukaSearchMenu.toValue(ctrlData.getMenuID());
         ITrueFalseCriteria 介護条件 = getCriteria(条件, 除外条件);
