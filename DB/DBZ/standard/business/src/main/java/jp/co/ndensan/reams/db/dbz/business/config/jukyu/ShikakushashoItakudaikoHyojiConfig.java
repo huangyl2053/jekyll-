@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.config;
+package jp.co.ndensan.reams.db.dbz.business.config.jukyu;
 
 import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbz.business.config.ConfigValueBoolean;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoItakudaikoHyoji;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者の表示有無;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoItakudaikoHyoji.資格者証表示方法_委託代行業者表示終了文言;
@@ -62,6 +63,16 @@ public class ShikakushashoItakudaikoHyojiConfig {
     }
 
     /**
+     * {@link ConfigKeysShikakushashoItakudaikoHyoji#資格者証表示方法_委託代行業者の表示有無}について、
+     * 表示する場合は{@code true}、しない場合は{@code false}を返します。
+     *
+     * @return 表示する場合は{@code true}、しない場合は{@code false}
+     */
+    public boolean prints委託代行事業者() {
+        return ConfigValueBoolean.parseBoolean(configs.get(資格者証表示方法_委託代行業者の表示有無));
+    }
+
+    /**
      * 資格者証表示方法_委託代行業者表示開始文言を取得します。
      *
      * @return 資格者証表示方法_委託代行業者表示開始文言
@@ -78,5 +89,4 @@ public class ShikakushashoItakudaikoHyojiConfig {
     public RString get資格者証表示方法_委託代行業者表示終了文言() {
         return configs.get(資格者証表示方法_委託代行業者表示終了文言);
     }
-
 }
