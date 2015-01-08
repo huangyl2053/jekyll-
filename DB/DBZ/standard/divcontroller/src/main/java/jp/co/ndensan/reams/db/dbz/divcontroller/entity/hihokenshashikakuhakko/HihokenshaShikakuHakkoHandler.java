@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShuruiShikyuGendoGet;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.ShuryoKubun;
+import jp.co.ndensan.reams.db.dbz.definition.util.Comparators.NullComparator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HakkoShoTypeBehaviors.IHakkoShoTypeBehavior;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
@@ -362,20 +363,18 @@ public class HihokenshaShikakuHakkoHandler {
 
     private List<KyufuSeigenShutsuryoku> sortKyufuSeigenShutsuryokuList(List<KyufuSeigenShutsuryoku> kyufuSeigenShutsuryoku) {
 
-        Collections.sort(kyufuSeigenShutsuryoku, new Comparator<KyufuSeigenShutsuryoku>() {
+        Collections.sort(kyufuSeigenShutsuryoku, NullComparator.NullsLast.of(new Comparator<KyufuSeigenShutsuryoku>() {
             @Override
             public int compare(KyufuSeigenShutsuryoku o1, KyufuSeigenShutsuryoku o2) {
-                int sortType = -1;
-                if (o1 == null && o2 == null) {
-                    return 0;
-                } else if (o1 == null) {
-                    return 1 * sortType;
-                } else if (o2 == null) {
-                    return -1 * sortType;
+                if (o1.get制限期間開始日().isEmpty()) {
+                    return 1;
                 }
-                return (Integer.parseInt(o1.get制限期間開始日().toString()) - Integer.parseInt(o2.get制限期間開始日().toString())) * sortType;
+                if (o2.get制限期間開始日().isEmpty()) {
+                    return -1;
+                }
+                return o1.get制限期間開始日().compareTo(o2.get制限期間開始日());
             }
-        });
+        }));
 
         return kyufuSeigenShutsuryoku;
     }
