@@ -6,7 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.config;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysHizuke;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,7 +27,43 @@ import static org.mockito.Mockito.*;
 @RunWith(Enclosed.class)
 public class HizukeConfigTest {
 
-    public static class get extends DbaTestBase {
+    private static final RString 月別テーブル1;
+    private static final RString 月別テーブル2;
+    private static final RString 月別テーブル3;
+    private static final RString 月別テーブル4;
+    private static final RString 月別テーブル5;
+    private static final RString 月別テーブル6;
+    private static final RString 月別テーブル7;
+    private static final RString 月別テーブル8;
+    private static final RString 月別テーブル9;
+    private static final RString 月別テーブル10;
+    private static final RString 月別テーブル11;
+    private static final RString 月別テーブル12;
+    private static final RString 月別テーブル13;
+    private static final RString 月別テーブル14;
+    private static RString 調定年度;
+    private static RString 所得年度;
+    private static RString 当初年度;
+    private static RString 遡及年度;
+
+    static {
+        月別テーブル1 = new RString("01");
+        月別テーブル2 = new RString("02");
+        月別テーブル3 = new RString("03");
+        月別テーブル4 = new RString("04");
+        月別テーブル5 = new RString("05");
+        月別テーブル6 = new RString("06");
+        月別テーブル7 = new RString("07");
+        月別テーブル8 = new RString("08");
+        月別テーブル9 = new RString("09");
+        月別テーブル10 = new RString("10");
+        月別テーブル11 = new RString("11");
+        月別テーブル12 = new RString("12");
+        月別テーブル13 = new RString("13");
+        月別テーブル14 = new RString("14");
+    }
+
+    public static class get extends DbzTestBase {
 
         private HizukeConfig sut;
 
@@ -120,36 +157,80 @@ public class HizukeConfigTest {
         }
     }
 
-    private static final RString 月別テーブル1;
-    private static final RString 月別テーブル2;
-    private static final RString 月別テーブル3;
-    private static final RString 月別テーブル4;
-    private static final RString 月別テーブル5;
-    private static final RString 月別テーブル6;
-    private static final RString 月別テーブル7;
-    private static final RString 月別テーブル8;
-    private static final RString 月別テーブル9;
-    private static final RString 月別テーブル10;
-    private static final RString 月別テーブル11;
-    private static final RString 月別テーブル12;
-    private static final RString 月別テーブル13;
-    private static final RString 月別テーブル14;
+    @RunWith(Enclosed.class)
+    public static class get年度 extends DbzTestBase {
 
-    static {
-        月別テーブル1 = new RString("01");
-        月別テーブル2 = new RString("02");
-        月別テーブル3 = new RString("03");
-        月別テーブル4 = new RString("04");
-        月別テーブル5 = new RString("05");
-        月別テーブル6 = new RString("06");
-        月別テーブル7 = new RString("07");
-        月別テーブル8 = new RString("08");
-        月別テーブル9 = new RString("09");
-        月別テーブル10 = new RString("10");
-        月別テーブル11 = new RString("11");
-        月別テーブル12 = new RString("12");
-        月別テーブル13 = new RString("13");
-        月別テーブル14 = new RString("14");
+        public static class NotNull extends DbzTestBase {
+
+            private HizukeConfig sut;
+
+            @Before
+            public void setUp() {
+                調定年度 = new RString("20110101");
+                所得年度 = new RString("20120202");
+                当初年度 = new RString("20130303");
+                遡及年度 = new RString("20140404");
+                sut = new HizukeConfig(createBusinessConfigMock());
+            }
+
+            @Test
+            public void 日付関連_調定年度を指定したとき_20110101が返る() {
+                RString result = sut.get(ConfigKeysHizuke.日付関連_調定年度);
+                assertThat(result, is(調定年度));
+            }
+
+            @Test
+            public void 日付関連_所得年度を指定したとき_20120202が返る() {
+                RString result = sut.get(ConfigKeysHizuke.日付関連_所得年度);
+                assertThat(result, is(所得年度));
+            }
+
+            @Test
+            public void 日付関連_当初年度を指定したとき_20130303が返る() {
+                RString result = sut.get(ConfigKeysHizuke.日付関連_当初年度);
+                assertThat(result, is(当初年度));
+            }
+
+            @Test
+            public void 日付関連_遡及年度を指定したとき_20140404が返る() {
+                RString result = sut.get(ConfigKeysHizuke.日付関連_遡及年度);
+                assertThat(result, is(遡及年度));
+            }
+        }
+
+        public static class Null extends DbzTestBase {
+
+            private HizukeConfig sut;
+
+            @Before
+            public void setUp() {
+                調定年度 = null;
+                所得年度 = null;
+                当初年度 = null;
+                遡及年度 = null;
+                sut = new HizukeConfig(createBusinessConfigMock());
+            }
+
+            @Test(expected = SystemException.class)
+            public void 日付関連_調定年度がnullのとき_get調定年度は_SystemExceptionを投げる() {
+                sut.get調定年度();
+            }
+
+            @Test(expected = SystemException.class)
+            public void 日付関連_所得年度がnullのとき_get所得年度は_SystemExceptionを投げる() {
+                sut.get所得年度();
+            }
+
+            @Test(expected = SystemException.class)
+            public void 日付関連_当初年度がnullのとき_get当初年度は_SystemExceptionを投げる() {
+                sut.get当初年度();
+            }
+
+            @Test(expected = SystemException.class)
+            public void 日付関連_遡及年度がnullのとき_get遡及年度は_SystemExceptionを投げる() {
+                sut.get遡及年度();
+            }
+        }
     }
 
     private static IUrBusinessConfig createBusinessConfigMock() {
@@ -168,6 +249,10 @@ public class HizukeConfigTest {
         when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル12), any(RDate.class))).thenReturn(月別テーブル12);
         when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル13), any(RDate.class))).thenReturn(月別テーブル13);
         when(mock.get(eq(ConfigKeysHizuke.日付関連_月別テーブル14), any(RDate.class))).thenReturn(月別テーブル14);
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_調定年度), any(RDate.class))).thenReturn(調定年度);
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_所得年度), any(RDate.class))).thenReturn(所得年度);
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_当初年度), any(RDate.class))).thenReturn(当初年度);
+        when(mock.get(eq(ConfigKeysHizuke.日付関連_遡及年度), any(RDate.class))).thenReturn(遡及年度);
         return mock;
     }
 }

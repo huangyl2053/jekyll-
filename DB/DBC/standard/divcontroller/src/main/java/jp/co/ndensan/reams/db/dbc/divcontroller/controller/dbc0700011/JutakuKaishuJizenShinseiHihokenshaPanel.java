@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.dbc0700011;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJizenShinseiHihokenshaPanelDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
+//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
@@ -27,7 +27,7 @@ public class JutakuKaishuJizenShinseiHihokenshaPanel {
 
         ShikibetsuCode 識別コード = new ShikibetsuCode("012345678901234");
         int rowId = 0;
-        KaigoShikakuKihon.setData(panel.getKaigoAtena(), panel.getKaigoShikakuKihon(), 識別コード, rowId);
+//        KaigoShikakuKihon.setData(panel.getKaigoAtena(), panel.getKaigoShikakuKihon(), 識別コード, rowId);
         response.data = panel;
         return response;
     }
