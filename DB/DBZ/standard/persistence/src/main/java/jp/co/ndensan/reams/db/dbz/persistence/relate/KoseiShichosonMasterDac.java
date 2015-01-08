@@ -39,8 +39,10 @@ public class KoseiShichosonMasterDac implements IModifiable<KoseiShichosonMaster
     private final DbT7051KoseiShichosonMasterDac dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
 
     /**
-     * @param containsKyuShichoson {@link ContainsKyuShichoson}
-     * @return KoseiShichosonMasterModels as Itemlist
+     * {@link ContainsKyuShichoson 旧市町村を含むか、含まないか}を指定して、構成市町村の情報を検索し、返します。
+     *
+     * @param containsKyuShichoson {@link ContainsKyuShichoson 旧市町村を含むか、含まないか}
+     * @return {@link KoseiShichosonMasterModel 構成市町村情報}のlist
      */
     @Transaction
     public IItemList<KoseiShichosonMasterModel> selectBy(ContainsKyuShichoson containsKyuShichoson) {
@@ -58,10 +60,22 @@ public class KoseiShichosonMasterDac implements IModifiable<KoseiShichosonMaster
         return ItemList.of(result).map(toModel());
     }
 
+    private IFunction<DbT7051KoseiShichosonMasterEntity, KoseiShichosonMasterModel> toModel() {
+        return new IFunction<DbT7051KoseiShichosonMasterEntity, KoseiShichosonMasterModel>() {
+            @Override
+            public KoseiShichosonMasterModel apply(DbT7051KoseiShichosonMasterEntity t) {
+                return new KoseiShichosonMasterModel(t);
+            }
+        };
+    }
+
     /**
-     * @param code {@link ShichosonCode}
-     * @param containsKyuShichoson {@link ContainsKyuShichoson}
-     * @return KoseiShichosonMasterModels as Itemlist
+     * 指定の{@link LasdecCode}に該当する市町村を検索して、返します。
+     * {@link ContainsKyuShichoson}が{@link ContainsKyuShichoson#旧市町村を含む}の場合、旧市町村も検索対象とします。
+     *
+     * @param code {@link LasdecCode}
+     * @param containsKyuShichoson {@link ContainsKyuShichoson 旧市町村を含むか、含まないか}
+     * @return {@link KoseiShichosonMasterModel 構成市町村情報}のlist
      */
     @Transaction
     public IItemList<KoseiShichosonMasterModel> selectBy(LasdecCode code, ContainsKyuShichoson containsKyuShichoson) {
@@ -85,8 +99,10 @@ public class KoseiShichosonMasterDac implements IModifiable<KoseiShichosonMaster
     }
 
     /**
-     * @param criteria {@link ITrueFalseCriteria}
-     * @return KoseiShichosonMasterModels as Itemlist
+     * {@link ITrueFalseCriteria 検索条件}に該当する構成市町村情報をすべて返します。
+     *
+     * @param criteria {@link ITrueFalseCriteria 検索条件}
+     * @return {@link KoseiShichosonMasterModel 構成市町村情報}のlist
      */
     @Transaction
     public IItemList<KoseiShichosonMasterModel> selectForm(ITrueFalseCriteria criteria) {
@@ -126,14 +142,5 @@ public class KoseiShichosonMasterDac implements IModifiable<KoseiShichosonMaster
         }
         result = dac.delete(model.getEntity());
         return result;
-    }
-
-    private IFunction<DbT7051KoseiShichosonMasterEntity, KoseiShichosonMasterModel> toModel() {
-        return new IFunction<DbT7051KoseiShichosonMasterEntity, KoseiShichosonMasterModel>() {
-            @Override
-            public KoseiShichosonMasterModel apply(DbT7051KoseiShichosonMasterEntity t) {
-                return new KoseiShichosonMasterModel(t);
-            }
-        };
     }
 }
