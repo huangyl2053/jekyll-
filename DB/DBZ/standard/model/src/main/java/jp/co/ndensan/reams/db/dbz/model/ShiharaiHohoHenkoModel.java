@@ -7,6 +7,13 @@ package jp.co.ndensan.reams.db.dbz.model;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.BemmeiRiyu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.BemmeiShinsaKekkaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.KanriKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.ShuryoKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.ShuryoShinseiRiyu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.ShuryoShinseiShinsaKekkaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.TorokuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
@@ -14,7 +21,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -83,8 +89,8 @@ public class ShiharaiHohoHenkoModel implements Serializable {
      *
      * @return 管理区分
      */
-    public RString get管理区分() {
-        return entity.getKanriKubun();
+    public KanriKubun get管理区分() {
+        return KanriKubun.toValue(entity.getKanriKubun());
     }
 
     /**
@@ -101,8 +107,8 @@ public class ShiharaiHohoHenkoModel implements Serializable {
      *
      * @return 登録区分
      */
-    public RString get登録区分() {
-        return entity.getTorokuKubun();
+    public TorokuKubun get登録区分() {
+        return TorokuKubun.toValue(entity.getTorokuKubun());
     }
 
     /**
@@ -128,8 +134,8 @@ public class ShiharaiHohoHenkoModel implements Serializable {
      *
      * @return 終了区分
      */
-    public RString get終了区分() {
-        return entity.getShuryoKubun();
+    public ShuryoKubun get終了区分() {
+        return ShuryoKubun.toValue(entity.getShuryoKubun());
     }
 
     /**
@@ -191,8 +197,8 @@ public class ShiharaiHohoHenkoModel implements Serializable {
      *
      * @return 弁明理由コード
      */
-    public RString get弁明理由コード() {
-        return entity.getBemmei_RiyuCode();
+    public BemmeiRiyu get弁明理由コード() {
+        return BemmeiRiyu.toValue(entity.getBemmei_RiyuCode());
     }
 
     /**
@@ -209,8 +215,8 @@ public class ShiharaiHohoHenkoModel implements Serializable {
      *
      * @return 弁明審査結果区分
      */
-    public RString get弁明審査結果区分() {
-        return entity.getBemmei_ShinsaKekkaKubun();
+    public BemmeiShinsaKekkaKubun get弁明審査結果区分() {
+        return BemmeiShinsaKekkaKubun.toValue(entity.getBemmei_ShinsaKekkaKubun());
     }
 
     /**
@@ -335,8 +341,8 @@ public class ShiharaiHohoHenkoModel implements Serializable {
      *
      * @return 終了申請理由コード
      */
-    public RString get終了申請理由コード() {
-        return entity.getShuryoShinsei_RiyuCode();
+    public ShuryoShinseiRiyu get終了申請理由コード() {
+        return ShuryoShinseiRiyu.toValue(entity.getShuryoShinsei_RiyuCode());
     }
 
     /**
@@ -353,8 +359,8 @@ public class ShiharaiHohoHenkoModel implements Serializable {
      *
      * @return 終了申請審査結果区分
      */
-    public RString get終了申請審査結果区分() {
-        return entity.getShuryoShinsei_ShinsaKekkaKubun();
+    public ShuryoShinseiShinsaKekkaKubun get終了申請審査結果区分() {
+        return ShuryoShinseiShinsaKekkaKubun.toValue(entity.getShuryoShinsei_ShinsaKekkaKubun());
     }
 
     /**
@@ -391,9 +397,9 @@ public class ShiharaiHohoHenkoModel implements Serializable {
      *
      * @param 管理区分 管理区分
      */
-    public void set管理区分(RString 管理区分) {
+    public void set管理区分(KanriKubun 管理区分) {
         requireNonNull(管理区分, UrSystemErrorMessages.値がnull.getReplacedMessage("管理区分"));
-        entity.setKanriKubun(管理区分);
+        entity.setKanriKubun(管理区分.code());
     }
 
     /**
@@ -411,9 +417,9 @@ public class ShiharaiHohoHenkoModel implements Serializable {
      *
      * @param 登録区分 登録区分
      */
-    public void set登録区分(RString 登録区分) {
+    public void set登録区分(TorokuKubun 登録区分) {
         requireNonNull(登録区分, UrSystemErrorMessages.値がnull.getReplacedMessage("登録区分"));
-        entity.setTorokuKubun(登録区分);
+        entity.setTorokuKubun(登録区分.code());
     }
 
     /**
@@ -441,9 +447,13 @@ public class ShiharaiHohoHenkoModel implements Serializable {
      *
      * @param 終了区分 終了区分
      */
-    public void set終了区分(RString 終了区分) {
+    public void set終了区分(ShuryoKubun 終了区分) {
         requireNonNull(終了区分, UrSystemErrorMessages.値がnull.getReplacedMessage("終了区分"));
-        entity.setShuryoKubun(終了区分);
+        if (終了区分 == ShuryoKubun.EMPTY) {
+            entity.setShuryoKubun(null);
+        } else {
+            entity.setShuryoKubun(終了区分.code());
+        }
     }
 
     /**
@@ -511,9 +521,9 @@ public class ShiharaiHohoHenkoModel implements Serializable {
      *
      * @param 弁明理由コード 弁明理由コード
      */
-    public void set弁明理由コード(RString 弁明理由コード) {
+    public void set弁明理由コード(BemmeiRiyu 弁明理由コード) {
         requireNonNull(弁明理由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明理由コード"));
-        entity.setBemmei_RiyuCode(弁明理由コード);
+        entity.setBemmei_RiyuCode(弁明理由コード.code());
     }
 
     /**
@@ -531,9 +541,9 @@ public class ShiharaiHohoHenkoModel implements Serializable {
      *
      * @param 弁明審査結果区分 弁明審査結果区分
      */
-    public void set弁明審査結果区分(RString 弁明審査結果区分) {
+    public void set弁明審査結果区分(BemmeiShinsaKekkaKubun 弁明審査結果区分) {
         requireNonNull(弁明審査結果区分, UrSystemErrorMessages.値がnull.getReplacedMessage("弁明審査結果区分"));
-        entity.setBemmei_ShinsaKekkaKubun(弁明審査結果区分);
+        entity.setBemmei_ShinsaKekkaKubun(弁明審査結果区分.code());
     }
 
     /**
@@ -671,9 +681,9 @@ public class ShiharaiHohoHenkoModel implements Serializable {
      *
      * @param 終了申請理由コード 終了申請理由コード
      */
-    public void set終了申請理由コード(RString 終了申請理由コード) {
+    public void set終了申請理由コード(ShuryoShinseiRiyu 終了申請理由コード) {
         requireNonNull(終了申請理由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("終了申請理由コード"));
-        entity.setShuryoShinsei_RiyuCode(終了申請理由コード);
+        entity.setShuryoShinsei_RiyuCode(終了申請理由コード.code());
     }
 
     /**
@@ -691,9 +701,9 @@ public class ShiharaiHohoHenkoModel implements Serializable {
      *
      * @param 終了申請審査結果区分 終了申請審査結果区分
      */
-    public void set終了申請審査結果区分(RString 終了申請審査結果区分) {
+    public void set終了申請審査結果区分(ShuryoShinseiShinsaKekkaKubun 終了申請審査結果区分) {
         requireNonNull(終了申請審査結果区分, UrSystemErrorMessages.値がnull.getReplacedMessage("終了申請審査結果区分"));
-        entity.setShuryoShinsei_ShinsaKekkaKubun(終了申請審査結果区分);
+        entity.setShuryoShinsei_ShinsaKekkaKubun(終了申請審査結果区分.code());
     }
 
     /**

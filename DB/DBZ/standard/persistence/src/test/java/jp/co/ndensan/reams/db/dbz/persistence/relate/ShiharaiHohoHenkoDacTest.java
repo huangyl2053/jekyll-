@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.KanriKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.TorokuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4021ShiharaiHohoHenkoEntity;
@@ -39,19 +41,16 @@ public class ShiharaiHohoHenkoDacTest {
     private static final ShoKisaiHokenshaNo 証記載保険者番号2 = new ShoKisaiHokenshaNo("124562");
     private static final HihokenshaNo 被保険者番号1 = DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_被保険者番号;
     private static final HihokenshaNo 被保険者番号2 = new HihokenshaNo("987654");
-    private static final RString 管理区分1 = DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_管理区分;
-    private static final RString 管理区分2 = new RString("2");
-    private static final RString 登録区分1 = DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_登録区分;
-    private static final RString 登録区分2 = new RString("02");
+    private static final KanriKubun 管理区分1 = DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_管理区分;
+    private static final TorokuKubun 登録区分1 = DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_登録区分;
     private static final YMDHMS 処理日時1 = DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_処理日時;
-    private static final YMDHMS 処理日時2 = new YMDHMS("20140101102040");
 
-    private static final RString _2号差止管理区分 = new RString("1");
-    private static final RString _2号差止登録区分 = new RString("02");
-    private static final RString _1号償還払化管理区分 = new RString("2");
-    private static final RString _1号償還払化登録区分 = new RString("12");
-    private static final RString _1号減額管理区分 = new RString("3");
-    private static final RString _1号減額登録区分 = new RString("21");
+    private static final KanriKubun _2号差止管理区分 = KanriKubun.ニ号差止;
+    private static final TorokuKubun _2号差止登録区分 = TorokuKubun.二号差止登録;
+    private static final KanriKubun _1号償還払化管理区分 = KanriKubun.一号償還払い化;
+    private static final TorokuKubun _1号償還払化登録区分 = TorokuKubun.一号償還払い化登録;
+    private static final KanriKubun _1号減額管理区分 = KanriKubun.一号給付額減額;
+    private static final TorokuKubun _1号減額登録区分 = TorokuKubun.一号給付額減額登録;
 
     @BeforeClass
     public static void setUpClass() {
@@ -264,14 +263,14 @@ public class ShiharaiHohoHenkoDacTest {
         public static void insertDbT4021(
                 ShoKisaiHokenshaNo 証記載保険者番号,
                 HihokenshaNo 被保険者番号,
-                RString 管理区分,
-                RString 登録区分,
+                KanriKubun 管理区分,
+                TorokuKubun 登録区分,
                 YMDHMS 処理日時) {
             DbT4021ShiharaiHohoHenkoEntity entity = DbT4021ShiharaiHohoHenkoEntityGenerator.createDbT4021ShiharaiHohoHenkoEntity();
             entity.setShoKisaiHokenshaNo(証記載保険者番号);
             entity.setHihokenshaNo(被保険者番号);
-            entity.setKanriKubun(管理区分);
-            entity.setTorokuKubun(登録区分);
+            entity.setKanriKubun(管理区分.code());
+            entity.setTorokuKubun(登録区分.code());
             entity.setShoriTimestamp(処理日時);
             支払方法変更Dac.insert(entity);
         }

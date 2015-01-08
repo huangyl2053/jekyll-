@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.KanriKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.TorokuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4021ShiharaiHohoHenkoEntityGenerator;
@@ -54,7 +56,7 @@ public class ShiharaiHohoHenkoManagerTest {
 
             IOptional<ShiharaiHohoHenkoModel> 支払方法変更モデル = DbOptional.ofNullable(createModel());
 
-            when(dac.selectByKey(any(ShoKisaiHokenshaNo.class), any(HihokenshaNo.class), any(RString.class), any(YMDHMS.class))).thenReturn(支払方法変更モデル);
+            when(dac.selectByKey(any(ShoKisaiHokenshaNo.class), any(HihokenshaNo.class), any(KanriKubun.class), any(YMDHMS.class))).thenReturn(支払方法変更モデル);
 
             IOptional<ShiharaiHohoHenkoModel> 支払方法変更 = sut.get支払方法変更(
                     DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_証記載保険者番号,
@@ -95,8 +97,8 @@ public class ShiharaiHohoHenkoManagerTest {
 
             List<ShiharaiHohoHenkoModel> 支払方法変更モデルリスト = new ArrayList<>();
             ShiharaiHohoHenkoModel model = createModel();
-            model.set管理区分(new RString("1"));
-            model.set登録区分(new RString("02"));
+            model.set管理区分(KanriKubun.ニ号差止);
+            model.set登録区分(TorokuKubun.二号予告登録者);
             支払方法変更モデルリスト.add(model);
             支払方法変更モデルリスト.add(model);
             IItemList<ShiharaiHohoHenkoModel> list = ItemList.of(支払方法変更モデルリスト);
@@ -120,8 +122,8 @@ public class ShiharaiHohoHenkoManagerTest {
 
             List<ShiharaiHohoHenkoModel> 支払方法変更モデルリスト = new ArrayList<>();
             ShiharaiHohoHenkoModel model = createModel();
-            model.set管理区分(new RString("2"));
-            model.set登録区分(new RString("12"));
+            model.set管理区分(KanriKubun.一号償還払い化);
+            model.set登録区分(TorokuKubun.一号償還払い化登録);
             支払方法変更モデルリスト.add(model);
             支払方法変更モデルリスト.add(model);
             IItemList<ShiharaiHohoHenkoModel> list = ItemList.of(支払方法変更モデルリスト);
@@ -145,8 +147,8 @@ public class ShiharaiHohoHenkoManagerTest {
 
             List<ShiharaiHohoHenkoModel> 支払方法変更モデルリスト = new ArrayList<>();
             ShiharaiHohoHenkoModel model = createModel();
-            model.set管理区分(new RString("3"));
-            model.set登録区分(new RString("21"));
+            model.set管理区分(KanriKubun.一号給付額減額);
+            model.set登録区分(TorokuKubun.一号給付額減額登録);
             支払方法変更モデルリスト.add(model);
             支払方法変更モデルリスト.add(model);
             IItemList<ShiharaiHohoHenkoModel> list = ItemList.of(支払方法変更モデルリスト);

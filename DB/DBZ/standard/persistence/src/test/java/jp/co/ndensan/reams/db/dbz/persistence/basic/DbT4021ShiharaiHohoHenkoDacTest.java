@@ -46,7 +46,7 @@ public class DbT4021ShiharaiHohoHenkoDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_証記載保険者番号,
                     DEFAULT_被保険者番号,
-                    DEFAULT_管理区分,
+                    DEFAULT_管理区分.code(),
                     DEFAULT_処理日時);
         }
 
@@ -55,7 +55,7 @@ public class DbT4021ShiharaiHohoHenkoDacTest extends DbzTestDacBase {
             sut.selectByKey(
                     null,
                     DEFAULT_被保険者番号,
-                    DEFAULT_管理区分,
+                    DEFAULT_管理区分.code(),
                     DEFAULT_処理日時);
         }
 
@@ -64,7 +64,7 @@ public class DbT4021ShiharaiHohoHenkoDacTest extends DbzTestDacBase {
             sut.selectByKey(
                     DEFAULT_証記載保険者番号,
                     null,
-                    DEFAULT_管理区分,
+                    DEFAULT_管理区分.code(),
                     DEFAULT_処理日時);
         }
 
@@ -82,7 +82,7 @@ public class DbT4021ShiharaiHohoHenkoDacTest extends DbzTestDacBase {
             sut.selectByKey(
                     DEFAULT_証記載保険者番号,
                     DEFAULT_被保険者番号,
-                    DEFAULT_管理区分,
+                    DEFAULT_管理区分.code(),
                     null);
         }
 
@@ -91,7 +91,7 @@ public class DbT4021ShiharaiHohoHenkoDacTest extends DbzTestDacBase {
             DbT4021ShiharaiHohoHenkoEntity insertedRecord = sut.selectByKey(
                     DEFAULT_証記載保険者番号,
                     DEFAULT_被保険者番号,
-                    DEFAULT_管理区分,
+                    DEFAULT_管理区分.code(),
                     DEFAULT_処理日時);
             assertThat(insertedRecord, is(notNullValue()));
         }
@@ -101,7 +101,7 @@ public class DbT4021ShiharaiHohoHenkoDacTest extends DbzTestDacBase {
             DbT4021ShiharaiHohoHenkoEntity insertedRecord = sut.selectByKey(
                     new ShoKisaiHokenshaNo("123450"),
                     DEFAULT_被保険者番号,
-                    DEFAULT_管理区分,
+                    DEFAULT_管理区分.code(),
                     DEFAULT_処理日時);
             assertThat(insertedRecord, is(nullValue()));
         }
@@ -114,7 +114,7 @@ public class DbT4021ShiharaiHohoHenkoDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_証記載保険者番号,
                     DEFAULT_被保険者番号,
-                    DEFAULT_管理区分,
+                    DEFAULT_管理区分.code(),
                     DEFAULT_処理日時);
             assertThat(sut.selectAll().size(), is(1));
         }
@@ -132,13 +132,13 @@ public class DbT4021ShiharaiHohoHenkoDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_証記載保険者番号,
                     DEFAULT_被保険者番号,
-                    DEFAULT_管理区分,
+                    DEFAULT_管理区分.code(),
                     DEFAULT_処理日時);
 
             assertThat(sut.selectByKey(
                     DEFAULT_証記載保険者番号,
                     DEFAULT_被保険者番号,
-                    DEFAULT_管理区分,
+                    DEFAULT_管理区分.code(),
                     DEFAULT_処理日時), is(notNullValue()));
         }
     }
@@ -150,7 +150,7 @@ public class DbT4021ShiharaiHohoHenkoDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_証記載保険者番号,
                     DEFAULT_被保険者番号,
-                    DEFAULT_管理区分,
+                    DEFAULT_管理区分.code(),
                     DEFAULT_処理日時);
         }
 
@@ -164,7 +164,7 @@ public class DbT4021ShiharaiHohoHenkoDacTest extends DbzTestDacBase {
             DbT4021ShiharaiHohoHenkoEntity updatedRecord = sut.selectByKey(
                     DEFAULT_証記載保険者番号,
                     DEFAULT_被保険者番号,
-                    DEFAULT_管理区分,
+                    DEFAULT_管理区分.code(),
                     DEFAULT_処理日時);
 
             assertThat(updateRecord.getBemmei_RiyuCode(), is(updatedRecord.getBemmei_RiyuCode()));
@@ -178,7 +178,7 @@ public class DbT4021ShiharaiHohoHenkoDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_証記載保険者番号,
                     DEFAULT_被保険者番号,
-                    DEFAULT_管理区分,
+                    DEFAULT_管理区分.code(),
                     DEFAULT_処理日時);
         }
 
@@ -187,12 +187,12 @@ public class DbT4021ShiharaiHohoHenkoDacTest extends DbzTestDacBase {
             sut.delete(sut.selectByKey(
                     DEFAULT_証記載保険者番号,
                     DEFAULT_被保険者番号,
-                    DEFAULT_管理区分,
+                    DEFAULT_管理区分.code(),
                     DEFAULT_処理日時));
             assertThat(sut.selectByKey(
                     DEFAULT_証記載保険者番号,
                     DEFAULT_被保険者番号,
-                    DEFAULT_管理区分,
+                    DEFAULT_管理区分.code(),
                     DEFAULT_処理日時), is(nullValue()));
         }
     }

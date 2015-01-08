@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.KanriKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.ShiharaiHohoHenkoModel;
@@ -13,7 +14,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.relate.ShiharaiHohoHenkoDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -53,7 +53,7 @@ public class ShiharaiHohoHenkoManager {
     @Transaction
     public IOptional<ShiharaiHohoHenkoModel> get支払方法変更(ShoKisaiHokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
-            RString 管理区分,
+            KanriKubun 管理区分,
             YMDHMS 処理日時) {
 
         return dac.selectByKey(証記載保険者番号, 被保険者番号, 管理区分, 処理日時);

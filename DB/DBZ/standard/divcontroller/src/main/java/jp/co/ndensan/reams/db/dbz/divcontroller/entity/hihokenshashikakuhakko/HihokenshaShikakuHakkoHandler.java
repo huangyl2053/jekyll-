@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShik
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigValuesShuruiShikyuGendoGet;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.ShuryoKubun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HakkoShoTypeBehaviors.IHakkoShoTypeBehavior;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
 import jp.co.ndensan.reams.ur.urz.realservice.IKaigoServiceManager;
@@ -304,7 +305,7 @@ public class HihokenshaShikakuHakkoHandler {
             優先外.addAll(createKyufuSeigenShutsuryokuList(history, 終了分記載区分が終了後も記載する場合の給付制限件数, 支払方法記載文言));
         } else {
             if (!history.isEmpty()) {
-                if (history.findFirst().get().get終了区分().isEmpty()) {
+                if (history.findFirst().get().get終了区分() == ShuryoKubun.EMPTY) {
                     優先的.addAll(createKyufuSeigenShutsuryokuList(history, 終了分記載区分が終了後記載しない場合の給付制限件数, 支払方法記載文言));
                 }
             }
@@ -317,8 +318,8 @@ public class HihokenshaShikakuHakkoHandler {
             優先外.addAll(createKyufuSeigenShutsuryokuList(history, 終了分記載区分が終了後も記載する場合の給付制限件数, 減額記載文言));
         } else {
             if (!history.isEmpty()) {
-                if ((!history.findFirst().get().get終了区分().isEmpty())
-                        || (history.findFirst().get().get終了区分().isEmpty()
+                if ((history.findFirst().get().get終了区分() != ShuryoKubun.EMPTY)
+                        || (history.findFirst().get().get終了区分() == ShuryoKubun.EMPTY
                         && history.findFirst().get().get適用終了年月日().isBefore(FlexibleDate.getNowDate()))) {
                     優先的.addAll(createKyufuSeigenShutsuryokuList(history, 終了分記載区分が終了後記載しない場合の給付制限件数, 減額記載文言));
                 }
