@@ -1,0 +1,1460 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;HihokenshaFinder&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;onClick_BtnToSearch&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;displayNone_txtTsuchishoNo&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;displayNone_ddlFukaNendo&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;displayNone_SearchCriteriaDetail&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;canOpenAndClose_HihokenshaFinder&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;displayNone_saikinShorisha&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;displayNone_ddlHokensha&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;displayNone_chkMinashiNigo&quot;,&quot;editType&quot;:1}]},&quot;onClick_BtnToSearch&quot;:&quot;&quot;,&quot;displayNone_txtTsuchishoNo&quot;:true,&quot;displayNone_ddlFukaNendo&quot;:true,&quot;displayNone_SearchCriteriaDetail&quot;:false,&quot;canOpenAndClose_HihokenshaFinder&quot;:true,&quot;displayNone_saikinShorisha&quot;:false,&quot;displayNone_ddlHokensha&quot;:true,&quot;displayNone_chkMinashiNigo&quot;:true}" data-is-composite-control="true" data-control-name="DBZ.HihokenshaFinder"><div title="" class="UzPanel FloatLeft JSControl Panel StateChangable ClearFloat marginRight-XS marginTop-XS marginBottom-XS UzCommonChildDivPanel Width-G12 UzCompositeChild" id="HihokenshaFinder" style="margin-top: 0px; margin-bottom: 0px; margin-left: 0em;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;HihokenshaFinder&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G12&quot;,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;HihokenshaFinder&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;XS&quot;,&quot;marginBottom&quot;:&quot;XS&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;HihokenshaFinder&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dbz/db/dbz/HihokenshaFinder/onLoad&quot;},{&quot;eventName&quot;:&quot;onClick_btnToClear&quot;,&quot;requestUrl&quot;:&quot;dbz/db/dbz/HihokenshaFinder/onClick_btnToClear&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="HihokenshaFinder_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="HihokenshaFinder_panel_body_area"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText StateChangable ClearFloat marginRight-XS marginTop-XS marginBottom-XS Width-G12 UzCompositeChild" id="SearchCriteriaOfHihokensha" style="margin-top: 0px; margin-bottom: 0px; margin-left: 0em;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;SearchCriteriaOfHihokensha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G12&quot;,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;SearchCriteriaOfHihokensha&quot;,&quot;title&quot;:&quot;介護検索条件&quot;,&quot;marginTop&quot;:&quot;XS&quot;,&quot;marginBottom&quot;:&quot;XS&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;SearchCriteriaOfHihokensha&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="SearchCriteriaOfHihokensha_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">介護検索条件</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="SearchCriteriaOfHihokensha_panel_body_area"><div title="" class="UzDropDownList WithLabel FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="ddlHokensha" style="width: 351px; height: 21px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlHokensha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;M&quot;,&quot;displayNone&quot;:true,&quot;selectControlID&quot;:&quot;ddlHokensha_core&quot;,&quot;text&quot;:&quot;&quot;,&quot;selectedItem&quot;:&quot;1&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;1&quot;,&quot;value&quot;:&quot;電算市&quot;},{&quot;key&quot;:&quot;2&quot;,&quot;value&quot;:&quot;南魚沼市&quot;}],&quot;labelLText&quot;:&quot;保険者&quot;,&quot;labelLWidth&quot;:&quot;100px&quot;,&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="ddlHokensha_labelL" style="width: 100px;"><span>保険者</span></span><select class="CoreElement Width-M" id="ddlHokensha_core"><option value="1">電算市</option><option value="2">南魚沼市</option></select></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="txtHihokenshaNo" style="width: 189px; height: 21px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtHihokenshaNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;82px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtHihokenshaNo_core&quot;,&quot;labelLText&quot;:&quot;被保番号&quot;,&quot;labelLWidth&quot;:&quot;100px&quot;,&quot;maxLength&quot;:&quot;10&quot;,&quot;minLength&quot;:&quot;10&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="txtHihokenshaNo_labelL" style="width: 100px;"><span>被保番号</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input" id="txtHihokenshaNo_core" style="width: 82px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtTuchishoNo" style="width: 254px; height: 21px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtTuchishoNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;130px&quot;,&quot;displayNone&quot;:true,&quot;selectControlID&quot;:&quot;txtTuchishoNo_core&quot;,&quot;labelLText&quot;:&quot;通知書番号&quot;,&quot;maxLength&quot;:&quot;16&quot;,&quot;minLength&quot;:&quot;1&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L Width-S text-align-right" id="txtTuchishoNo_labelL"><span>通知書番号</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input" id="txtTuchishoNo_core" style="width: 130px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzDropDownList WithLabel FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="ddlFukaNendo" style="width: 183px; height: 21px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlFukaNendo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;displayNone&quot;:true,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;ddlFukaNendo_core&quot;,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;全年度&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;平26&quot;}],&quot;labelLText&quot;:&quot;賦課年度　&quot;,&quot;labelLWidth&quot;:&quot;100px&quot;,&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="ddlFukaNendo_labelL" style="width: 100px;"><span>賦課年度　</span></span><select class="CoreElement" id="ddlFukaNendo_core" style="width: 80px;"><option value="key0">全年度</option><option value="key1">平26</option></select></div><div title="" class="UzPanel FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default UzCompositeChild" id="SearchCriteriaDetail" style="width: 1100px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;SearchCriteriaDetail&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1100px&quot;,&quot;selectControlID&quot;:&quot;SearchCriteriaDetail&quot;,&quot;title&quot;:&quot;詳細条件&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;SearchCriteriaDetail&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:2,&quot;canPost&quot;:true}"><div class="UzPanelHeader DetailHeader" id="SearchCriteriaDetail_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-s iconSpan-Detail-Open" style="visibility: visible;"></span><span class="textSpan textSpan-Detail">詳細条件</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M Panel-Detail ui-droppable ui-sortable" id="SearchCriteriaDetail_panel_body_area" style="display: block;"><div title="" class="UzCheckBoxList FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="chkHihokensha" style="width: 824px; height: 19px;" data-control-type="CheckBoxList" data-obj="{&quot;fieldName&quot;:&quot;chkHihokensha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CheckBoxList&quot;,&quot;width&quot;:&quot;700px&quot;,&quot;selectControlID&quot;:&quot;chkHihokensha_core&quot;,&quot;icon&quot;:[],&quot;selectedItem&quot;:null,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;1&quot;,&quot;value&quot;:&quot;被保険者台帳登録者&quot;},{&quot;key&quot;:&quot;2&quot;,&quot;value&quot;:&quot;受給者台帳登録者&quot;},{&quot;key&quot;:&quot;3&quot;,&quot;value&quot;:&quot;住所地特例者&quot;}],&quot;labelLText&quot;:&quot;被保険者状態&quot;,&quot;newLineItemNumber&quot;:5,&quot;spaceSize&quot;:&quot;L&quot;,&quot;disabledItem&quot;:[],&quot;selectedItems&quot;:[]}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right Width-S" id="chkHihokensha_labelL"><span>被保険者状態</span></span><span class="checkBoxSpan FloatLeft" id="chkHihokensha_core" style="width: 700px;"><input id="chkHihokensha_1" type="checkbox" value="被保険者台帳登録者" data-key="1"><label for="chkHihokensha_1" data-key="1">被保険者台帳登録者</label><input class="spaceSize-L" id="chkHihokensha_2" type="checkbox" value="受給者台帳登録者" data-key="2"><label for="chkHihokensha_2" data-key="2">受給者台帳登録者</label><input class="spaceSize-L" id="chkHihokensha_3" type="checkbox" value="住所地特例者" data-key="3"><label for="chkHihokensha_3" data-key="3">住所地特例者</label></span></div><div title="" class="UzRadioButton FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="radMinashiNigo" style="width: 368px; height: 19px;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;radMinashiNigo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;M&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;radMinashiNigo_core&quot;,&quot;icon&quot;:[],&quot;selectedItem&quot;:&quot;1&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;1&quot;,&quot;value&quot;:&quot;含む&quot;},{&quot;key&quot;:&quot;2&quot;,&quot;value&quot;:&quot;含まない&quot;}],&quot;labelLText&quot;:&quot;みなし2号&quot;,&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right Width-S" id="radMinashiNigo_labelL"><span>みなし2号</span></span><span class="buttonSpan FloatLeft Width-M" id="radMinashiNigo_core"><input name="radMinashiNigo_group" id="radMinashiNigo_1" type="radio" value="含む" data-key="1"><label for="radMinashiNigo_1" data-key="1">含む</label><input name="radMinashiNigo_group" class="spaceSize-M" id="radMinashiNigo_2" type="radio" value="含まない" data-key="2"><label for="radMinashiNigo_2" data-key="2">含まない</label></span></div><div title="" class="UzCheckBoxList FloatLeft JSControl controlMargin-M ClearFloat marginRight-XS UzCompositeChild" id="chkMinashiNigo" style="width: 255px; height: 19px; margin-left: 8em;" data-control-type="CheckBoxList" data-obj="{&quot;fieldName&quot;:&quot;chkMinashiNigo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CheckBoxList&quot;,&quot;width&quot;:&quot;M&quot;,&quot;displayNone&quot;:true,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;8em&quot;,&quot;selectControlID&quot;:&quot;chkMinashiNigo_core&quot;,&quot;icon&quot;:[],&quot;selectedItem&quot;:null,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;1&quot;,&quot;value&quot;:&quot;みなし2号のみ&quot;}],&quot;disabledItem&quot;:[],&quot;selectedItems&quot;:[]}"><span class="checkBoxSpan FloatLeft Width-M" id="chkMinashiNigo_core"><input id="chkMinashiNigo_1" type="checkbox" value="みなし2号のみ" data-key="1"><label for="chkMinashiNigo_1" data-key="1">みなし2号のみ</label></span></div></div></div></div></div><div title="" class="JSControl UzCompositeControl FloatLeft Width-XS" id="KaigoAtenaFinder" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;KaigoAtenaFinder&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;KaigoAtenaFinder&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;URA&quot;,&quot;controlName&quot;:&quot;AtenaFinder&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;AtenaFinder_title&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;AtenaFinder_canOpenAndClose&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;AtenaFinder_width&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;AtenaFinderShosai_title&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;AtenaFinderShosai_width&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;AtenaFinder_eraseBorder&quot;,&quot;editType&quot;:1}]},&quot;AtenaFinder_title&quot;:&quot;宛名検索条件&quot;,&quot;AtenaFinder_canOpenAndClose&quot;:true,&quot;AtenaFinder_width&quot;:&quot;G12&quot;,&quot;AtenaFinderShosai_title&quot;:&quot;詳細条件&quot;,&quot;AtenaFinderShosai_width&quot;:&quot;1100px&quot;,&quot;AtenaFinder_eraseBorder&quot;:false}" data-is-composite-control="true" data-control-name="URA.AtenaFinder"></div><div title="" class="UzPanel FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginRight-XS marginTop-Default marginBottom-Default UzCompositeChild" id="ButtonsForHihokenshaFinder" style="width: 1110px; margin-top: 0px; margin-bottom: 0px; margin-left: 0em;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ButtonsForHihokenshaFinder&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1110px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;ButtonsForHihokenshaFinder&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ButtonsForHihokenshaFinder&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ButtonsForHihokenshaFinder_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="ButtonsForHihokenshaFinder_panel_body_area"><button title="" class="UzButton FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS Width-M UzCompositeChild" id="btnToClear" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnToClear&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;M&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;btnToClear&quot;,&quot;text&quot;:&quot;条件をクリアする&quot;,&quot;onClick&quot;:&quot;onClick_btnToClear&quot;}"><span>条件をクリアする</span></button><button title="" class="UzButton JSControl controlMargin-M FloatRight marginLeft-XS marginRight-XS Width-M UzCompositeChild" id="btnToSearch" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnToSearch&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;M&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnToSearch&quot;,&quot;text&quot;:&quot;検索する&quot;}"><span>検索する</span></button><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxNum JSControl controlMargin-M ClearFloat FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="txtMaxNumber" style="width: 171px; height: 21px;" data-control-type="TextBoxNum" data-obj="{&quot;fieldName&quot;:&quot;txtMaxNumber&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxNum&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;txtMaxNumber_core&quot;,&quot;labelLText&quot;:&quot;最大表示件数&quot;,&quot;labelLAlign&quot;:1,&quot;textAlign&quot;:2,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;permitCharactor&quot;:&quot;+-,.\\&quot;}"><span class="word-wrap-break-word Label-L Width-S text-align-center" id="txtMaxNumber_labelL"><span>最大表示件数</span></span><input class="UzTextBox CoreElement Width-XS text-align-right ime-mode-Off ui-autocomplete-input" id="txtMaxNumber_core" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div></div></div><div title="" class="JSControl UzCompositeControl FloatLeft Width-XS" id="saikinShorisha" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;saikinShorisha&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;saikinShorisha&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KaigoSaikinShorishaRireki&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.KaigoSaikinShorishaRireki"></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    (function (HihokenshaFinder) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onClick_btnToClear", {
+                get: function () {
+                    return "onClick_btnToClear";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        HihokenshaFinder.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "HihokenshaFinder";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.KaigoAtenaFinder = function () {
+                return new URA.AtenaFinder.ModeController("KaigoAtenaFinder");
+            };
+
+            Controls.prototype.saikinShorisha = function () {
+                return new DBZ.KaigoSaikinShorishaRireki.ModeController("saikinShorisha");
+            };
+
+            Controls.prototype.HihokenshaFinder = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.SearchCriteriaOfHihokensha = function () {
+                return new UZA.Panel(this.convFiledName("SearchCriteriaOfHihokensha"));
+            };
+
+            Controls.prototype.ddlHokensha = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlHokensha"));
+            };
+
+            Controls.prototype.txtHihokenshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtHihokenshaNo"));
+            };
+
+            Controls.prototype.txtTuchishoNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtTuchishoNo"));
+            };
+
+            Controls.prototype.ddlFukaNendo = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlFukaNendo"));
+            };
+
+            Controls.prototype.SearchCriteriaDetail = function () {
+                return new UZA.Panel(this.convFiledName("SearchCriteriaDetail"));
+            };
+
+            Controls.prototype.chkHihokensha = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkHihokensha"));
+            };
+
+            Controls.prototype.radMinashiNigo = function () {
+                return new UZA.RadioButton(this.convFiledName("radMinashiNigo"));
+            };
+
+            Controls.prototype.chkMinashiNigo = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkMinashiNigo"));
+            };
+
+            Controls.prototype.ButtonsForHihokenshaFinder = function () {
+                return new UZA.Panel(this.convFiledName("ButtonsForHihokenshaFinder"));
+            };
+
+            Controls.prototype.btnToClear = function () {
+                return new UZA.Button(this.convFiledName("btnToClear"));
+            };
+
+            Controls.prototype.btnToSearch = function () {
+                return new UZA.Button(this.convFiledName("btnToSearch"));
+            };
+
+            Controls.prototype.txtMaxNumber = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtMaxNumber"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        HihokenshaFinder.Controls = Controls;
+    })(DBZ.HihokenshaFinder || (DBZ.HihokenshaFinder = {}));
+    var HihokenshaFinder = DBZ.HihokenshaFinder;
+
+    var HihokenshaFinder_Design = (function (_super) {
+        __extends(HihokenshaFinder_Design, _super);
+        function HihokenshaFinder_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, HihokenshaFinder_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(HihokenshaFinder_Design.prototype, "onClick_BtnToSearch", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[1]["fieldName"])["onClick"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[1]["fieldName"])["onClick"] = value;
+                } else {
+                    this.layout.items[0].items[2].items[1]["onClick"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(HihokenshaFinder_Design.prototype, "displayNone_txtTsuchishoNo", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[2]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[2]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[2]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[2]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[0].items[2]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(HihokenshaFinder_Design.prototype, "displayNone_ddlFukaNendo", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[3]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[3]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[0].items[3]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(HihokenshaFinder_Design.prototype, "displayNone_SearchCriteriaDetail", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[0].items[4]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(HihokenshaFinder_Design.prototype, "canOpenAndClose_HihokenshaFinder", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"] = value;
+                } else {
+                    this.layout.items[0]["canOpenAndClose"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(HihokenshaFinder_Design.prototype, "displayNone_saikinShorisha", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[3]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(HihokenshaFinder_Design.prototype, "displayNone_ddlHokensha", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[0]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[0]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[0].items[0]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(HihokenshaFinder_Design.prototype, "displayNone_chkMinashiNigo", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[0].items[4].items[2]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[0].items[4].items[2]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[0].items[4].items[2]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[0].items[4].items[2]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[0].items[4].items[2]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        HihokenshaFinder_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("onClick_BtnToSearch");
+            Uz.JSControlUtil.registProperty("displayNone_txtTsuchishoNo");
+            Uz.JSControlUtil.registProperty("displayNone_ddlFukaNendo");
+            Uz.JSControlUtil.registProperty("displayNone_SearchCriteriaDetail");
+            Uz.JSControlUtil.registProperty("canOpenAndClose_HihokenshaFinder");
+            Uz.JSControlUtil.registProperty("displayNone_saikinShorisha");
+            Uz.JSControlUtil.registProperty("displayNone_ddlHokensha");
+            Uz.JSControlUtil.registProperty("displayNone_chkMinashiNigo");
+        };
+
+        HihokenshaFinder_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["onClick_BtnToSearch"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[1]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["displayNone_txtTsuchishoNo"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[2]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["displayNone_ddlFukaNendo"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["displayNone_SearchCriteriaDetail"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["canOpenAndClose_HihokenshaFinder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["canOpenAndClose"];
+            editablePropertyInfo["displayNone_saikinShorisha"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["displayNone_ddlHokensha"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[0]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["displayNone_chkMinashiNigo"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[0].items[4].items[2]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+
+            return editablePropertyInfo;
+        };
+        HihokenshaFinder_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "HihokenshaFinder",
+                    "items": [
+                        {
+                            "fieldName": "SearchCriteriaOfHihokensha",
+                            "items": [
+                                {
+                                    "fieldName": "ddlHokensha",
+                                    "items": [],
+                                    "controlType": "DropDownList",
+                                    "width": "M",
+                                    "visible": true,
+                                    "displayNone": true,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "ddlHokensha_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "onChange": "",
+                                    "selectedItem": "1",
+                                    "dataSource": [
+                                        {
+                                            "key": "1",
+                                            "value": "電算市"
+                                        },
+                                        {
+                                            "key": "2",
+                                            "value": "南魚沼市"
+                                        }
+                                    ],
+                                    "required": false,
+                                    "labelLText": "保険者",
+                                    "labelRText": "",
+                                    "labelLWidth": "100",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "text": "",
+                                    "disabledItem": []
+                                },
+                                {
+                                    "fieldName": "txtHihokenshaNo",
+                                    "items": [],
+                                    "controlType": "TextBoxCode",
+                                    "width": "82",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtHihokenshaNo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "onChange": "",
+                                    "required": false,
+                                    "labelLText": "被保番号",
+                                    "labelRText": "",
+                                    "labelLWidth": "100",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "maxLength": "10",
+                                    "minLength": "10",
+                                    "textAlign": 0,
+                                    "placeHolder": "",
+                                    "textKind": 2,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "permitCharactor": "",
+                                    "formatLength": "10"
+                                },
+                                {
+                                    "fieldName": "txtTuchishoNo",
+                                    "items": [],
+                                    "controlType": "TextBoxCode",
+                                    "width": "130",
+                                    "visible": true,
+                                    "displayNone": true,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtTuchishoNo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "onChange": "",
+                                    "required": false,
+                                    "labelLText": "通知書番号",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "maxLength": "16",
+                                    "minLength": "1",
+                                    "textAlign": 0,
+                                    "placeHolder": "",
+                                    "textKind": 2,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "permitCharactor": "",
+                                    "formatLength": "16"
+                                },
+                                {
+                                    "fieldName": "ddlFukaNendo",
+                                    "items": [],
+                                    "controlType": "DropDownList",
+                                    "width": "80",
+                                    "visible": true,
+                                    "displayNone": true,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "ddlFukaNendo_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "onChange": "",
+                                    "selectedItem": "key0",
+                                    "dataSource": [
+                                        {
+                                            "key": "key0",
+                                            "value": "全年度"
+                                        },
+                                        {
+                                            "key": "key1",
+                                            "value": "平26"
+                                        }
+                                    ],
+                                    "labelLText": "賦課年度　",
+                                    "labelRText": "",
+                                    "labelLWidth": "100",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 2,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "disabledItem": []
+                                },
+                                {
+                                    "fieldName": "SearchCriteriaDetail",
+                                    "items": [
+                                        {
+                                            "fieldName": "chkHihokensha",
+                                            "items": [],
+                                            "controlType": "CheckBoxList",
+                                            "width": "700",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "chkHihokensha_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": false,
+                                            "onChange": "",
+                                            "selectedItem": null,
+                                            "dataSource": [
+                                                {
+                                                    "key": "1",
+                                                    "value": "被保険者台帳登録者"
+                                                },
+                                                {
+                                                    "key": "2",
+                                                    "value": "受給者台帳登録者"
+                                                },
+                                                {
+                                                    "key": "3",
+                                                    "value": "住所地特例者"
+                                                }
+                                            ],
+                                            "labelLText": "被保険者状態",
+                                            "labelLWidth": "S",
+                                            "labelLAlign": 2,
+                                            "onClick": "",
+                                            "selectedItems": [],
+                                            "newLineItemNumber": 5,
+                                            "minCheckedItem": 0,
+                                            "maxCheckedItem": 2,
+                                            "spaceSize": "L",
+                                            "isAllSelectable": false,
+                                            "isAllSelectableBreakLine": false,
+                                            "disabledItem": [],
+                                            "icon": []
+                                        },
+                                        {
+                                            "fieldName": "radMinashiNigo",
+                                            "items": [],
+                                            "controlType": "RadioButton",
+                                            "width": "M",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "XS",
+                                            "selectControlID": "radMinashiNigo_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": false,
+                                            "onChange": "",
+                                            "selectedItem": "1",
+                                            "dataSource": [
+                                                {
+                                                    "key": "1",
+                                                    "value": "含む"
+                                                },
+                                                {
+                                                    "key": "2",
+                                                    "value": "含まない"
+                                                }
+                                            ],
+                                            "labelLText": "みなし2号",
+                                            "labelLWidth": "S",
+                                            "labelLAlign": 2,
+                                            "onClick": "",
+                                            "newLineItemNumber": 2,
+                                            "spaceSize": "M",
+                                            "disabledItem": [],
+                                            "icon": []
+                                        },
+                                        {
+                                            "fieldName": "chkMinashiNigo",
+                                            "items": [],
+                                            "controlType": "CheckBoxList",
+                                            "width": "M",
+                                            "visible": true,
+                                            "displayNone": true,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "8",
+                                            "marginRight": "XS",
+                                            "selectControlID": "chkMinashiNigo_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": false,
+                                            "onChange": "",
+                                            "selectedItem": null,
+                                            "dataSource": [
+                                                {
+                                                    "key": "1",
+                                                    "value": "みなし2号のみ"
+                                                }
+                                            ],
+                                            "labelLText": "",
+                                            "labelLWidth": "S",
+                                            "labelLAlign": 2,
+                                            "onClick": "",
+                                            "selectedItems": [],
+                                            "newLineItemNumber": 2,
+                                            "minCheckedItem": 0,
+                                            "maxCheckedItem": 2,
+                                            "spaceSize": "M",
+                                            "isAllSelectable": false,
+                                            "isAllSelectableBreakLine": false,
+                                            "disabledItem": [],
+                                            "icon": []
+                                        }
+                                    ],
+                                    "controlType": "Panel",
+                                    "width": "1100",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "SearchCriteriaDetail",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "onLoad": "",
+                                    "title": "詳細条件",
+                                    "marginTop": "Default",
+                                    "marginBottom": "Default",
+                                    "isOpen": false,
+                                    "canOpenAndClose": true,
+                                    "postParameterPanelNames": [
+                                        {
+                                            "postParameterPanelNames": "SearchCriteriaDetail"
+                                        }
+                                    ],
+                                    "requestSettings": [],
+                                    "hiddenInput": [],
+                                    "onOpen": "",
+                                    "onClose": "",
+                                    "session": {},
+                                    "eraseBorder": false,
+                                    "backgroundColor": 0,
+                                    "widthAuto": false,
+                                    "panelDisplay": 2,
+                                    "isGroupBox": false,
+                                    "readOnly": false,
+                                    "height": "Auto"
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "G12",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0",
+                            "marginRight": "XS",
+                            "selectControlID": "SearchCriteriaOfHihokensha",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "介護検索条件",
+                            "marginTop": "XS",
+                            "marginBottom": "XS",
+                            "isOpen": true,
+                            "canOpenAndClose": true,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "SearchCriteriaOfHihokensha"
+                                }
+                            ],
+                            "requestSettings": [
+                                {
+                                    "eventName": "onLoad",
+                                    "requestUrl": ""
+                                }
+                            ],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": false,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 0,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto"
+                        },
+                        {
+                            "fieldName": "KaigoAtenaFinder",
+                            "items": [],
+                            "controlType": "CommonChildDiv",
+                            "width": "XS",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0",
+                            "marginRight": "0",
+                            "selectControlID": "KaigoAtenaFinder",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "relation": [],
+                            "businessId": "URA",
+                            "controlName": "AtenaFinder",
+                            "marginTop": 0,
+                            "marginBottom": 0,
+                            "originalProperty": [],
+                            "dataPassingForDialog": [],
+                            "dialogOkEventNameForDialog": "",
+                            "dialogCancelEventNameForDialog": "",
+                            "canTransferEvent": true,
+                            "heightForDialog": "M",
+                            "AtenaFinder_title": "宛名検索条件",
+                            "AtenaFinder_canOpenAndClose": true,
+                            "AtenaFinder_width": "G12",
+                            "txtSeinenGappi_displayNone": false,
+                            "ddlSeibetsu_displayNone": false,
+                            "txtBanchiCode4_displayNone": true,
+                            "txtSetaiCode_displayNone": false,
+                            "txtKojinNo_displayNone": false,
+                            "txtHojinNo_displayNone": true,
+                            "txtHojinKeitaiCode_displayNone": true,
+                            "btnHojinKeitaiGuide_displayNone": true,
+                            "txtHojinKeitaiMeisho_displayNone": true,
+                            "txtJuminhyoCode_displayNone": true,
+                            "txtZairyuCardCode_displayNone": true,
+                            "txtKokuhoNo_displayNone": true,
+                            "txtKokiKoreiHihokenshaNo_displayNone": true,
+                            "txtKaigoHihokenshaNo_displayNone": true,
+                            "txtKisoNenkinNo_displayNone": true,
+                            "txtInkanNo_displayNone": true,
+                            "AtenaFinderShosai_title": "詳細条件",
+                            "AtenaFinderShosai_displayNone": false,
+                            "AtenaFinderShosai_width": "1100",
+                            "chkJuminShubetsu_displayNone": false,
+                            "chkJuminShubetsu_dataSource": [
+                                {
+                                    "key": "key0",
+                                    "value": "住登内個人"
+                                },
+                                {
+                                    "key": "key1",
+                                    "value": "住登外個人"
+                                },
+                                {
+                                    "key": "key2",
+                                    "value": "法人　　　"
+                                },
+                                {
+                                    "key": "key3",
+                                    "value": "共有者　　"
+                                }
+                            ],
+                            "chkJuminShubetsu_isAllSelectable": true,
+                            "chkJuminJotai_displayNone": false,
+                            "chkJuminJotai_dataSource": [
+                                {
+                                    "key": "key0",
+                                    "value": "住民　　　"
+                                },
+                                {
+                                    "key": "key1",
+                                    "value": "未登録住民"
+                                },
+                                {
+                                    "key": "key2",
+                                    "value": "消除者　　"
+                                },
+                                {
+                                    "key": "key3",
+                                    "value": "転出者　　"
+                                },
+                                {
+                                    "key": "key4",
+                                    "value": "死亡者"
+                                }
+                            ],
+                            "chkJuminJotai_isAllSelectable": true,
+                            "radNihonjinKubun_displayNone": false,
+                            "radGaikokujinKubun_displayNone": false,
+                            "txtGyoseikuCode_displayNone": false,
+                            "btnGyoseikuGuide_displayNone": false,
+                            "txtGyoseikuMeisho_displayNone": false,
+                            "txtRenrakusaki_displayNone": false,
+                            "AtenaFinder_eraseBorder": false
+                        },
+                        {
+                            "fieldName": "ButtonsForHihokenshaFinder",
+                            "items": [
+                                {
+                                    "fieldName": "btnToClear",
+                                    "items": [],
+                                    "controlType": "Button",
+                                    "width": "M",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 0,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "btnToClear",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "text": "条件をクリアする",
+                                    "onClick": "onClick_btnToClear",
+                                    "icon": 0,
+                                    "appearance": 0,
+                                    "imageFileUrl": "",
+                                    "imageWidth": "",
+                                    "imageHeight": "",
+                                    "heightTextBoxMatches": false
+                                },
+                                {
+                                    "fieldName": "btnToSearch",
+                                    "items": [],
+                                    "controlType": "Button",
+                                    "width": "M",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": false,
+                                    "dependencies": [],
+                                    "float": 2,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "btnToSearch",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "text": "検索する",
+                                    "onClick": "",
+                                    "icon": 0,
+                                    "appearance": 0,
+                                    "imageFileUrl": "",
+                                    "imageWidth": "",
+                                    "imageHeight": "",
+                                    "heightTextBoxMatches": false
+                                },
+                                {
+                                    "fieldName": "txtMaxNumber",
+                                    "items": [],
+                                    "controlType": "TextBoxNum",
+                                    "width": "XS",
+                                    "visible": true,
+                                    "displayNone": false,
+                                    "disabled": false,
+                                    "accessKey": "",
+                                    "nextFocusFieldName": "",
+                                    "wrap": true,
+                                    "dependencies": [],
+                                    "float": 2,
+                                    "toolTip": "",
+                                    "authorityMode": 0,
+                                    "marginLeft": "XS",
+                                    "marginRight": "XS",
+                                    "selectControlID": "txtMaxNumber_core",
+                                    "helpMessageID": "",
+                                    "jpControlName": "",
+                                    "readOnly": false,
+                                    "onChange": "",
+                                    "required": false,
+                                    "labelLText": "最大表示件数",
+                                    "labelRText": "",
+                                    "labelLWidth": "S",
+                                    "labelRWidth": "S",
+                                    "labelLAlign": 1,
+                                    "labelRAlign": 0,
+                                    "onFocus": "",
+                                    "onBlur": "",
+                                    "maxLength": 100000000,
+                                    "minLength": 0,
+                                    "textAlign": 2,
+                                    "placeHolder": "",
+                                    "textKind": 2,
+                                    "isPrivateInfo": false,
+                                    "isPassword": false,
+                                    "isComboBox": false,
+                                    "onKeyPress": "",
+                                    "text": "",
+                                    "suggest": [],
+                                    "value": "",
+                                    "decorationClass": "",
+                                    "permitCharactor": "+-,.\\",
+                                    "maxValue": 1.7976931348623157e+308,
+                                    "minValue": 0,
+                                    "isCurrency": false,
+                                    "isComma": false,
+                                    "decimalPointLength": 0
+                                }
+                            ],
+                            "controlType": "Panel",
+                            "width": "1110",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0",
+                            "marginRight": "XS",
+                            "selectControlID": "ButtonsForHihokenshaFinder",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onLoad": "",
+                            "title": "",
+                            "marginTop": "Default",
+                            "marginBottom": "Default",
+                            "isOpen": true,
+                            "canOpenAndClose": true,
+                            "postParameterPanelNames": [
+                                {
+                                    "postParameterPanelNames": "ButtonsForHihokenshaFinder"
+                                }
+                            ],
+                            "requestSettings": [],
+                            "hiddenInput": [],
+                            "onOpen": "",
+                            "onClose": "",
+                            "session": {},
+                            "eraseBorder": true,
+                            "backgroundColor": 0,
+                            "widthAuto": false,
+                            "panelDisplay": 0,
+                            "isGroupBox": false,
+                            "readOnly": false,
+                            "height": "Auto"
+                        },
+                        {
+                            "fieldName": "saikinShorisha",
+                            "items": [],
+                            "controlType": "CommonChildDiv",
+                            "width": "XS",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0",
+                            "marginRight": "0",
+                            "selectControlID": "saikinShorisha",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "relation": [],
+                            "businessId": "DBZ",
+                            "controlName": "KaigoSaikinShorishaRireki",
+                            "marginTop": 0,
+                            "marginBottom": 0,
+                            "originalProperty": [],
+                            "dataPassingForDialog": [],
+                            "dialogOkEventNameForDialog": "",
+                            "dialogCancelEventNameForDialog": "",
+                            "canTransferEvent": true,
+                            "heightForDialog": "M"
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G12",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": true,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0",
+                    "marginRight": "XS",
+                    "selectControlID": "HihokenshaFinder",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "",
+                    "marginTop": "XS",
+                    "marginBottom": "XS",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "HihokenshaFinder"
+                        }
+                    ],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": "dbz/db/dbz/HihokenshaFinder/onLoad"
+                        },
+                        {
+                            "eventName": "onClick_btnToClear",
+                            "requestUrl": "dbz/db/dbz/HihokenshaFinder/onClick_btnToClear"
+                        }
+                    ],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": true,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto"
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "businessId": "DBZ",
+            "controlName": "HihokenshaFinder",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "btnToSearch",
+                    "publicChildProperty": "onClick",
+                    "newPropertyName": "onClick_BtnToSearch"
+                },
+                {
+                    "publicChildFieldName": "txtTuchishoNo",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "displayNone_txtTsuchishoNo"
+                },
+                {
+                    "publicChildFieldName": "ddlFukaNendo",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "displayNone_ddlFukaNendo"
+                },
+                {
+                    "publicChildFieldName": "SearchCriteriaDetail",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "displayNone_SearchCriteriaDetail"
+                },
+                {
+                    "publicChildFieldName": "HihokenshaFinder",
+                    "publicChildProperty": "canOpenAndClose",
+                    "newPropertyName": "canOpenAndClose_HihokenshaFinder"
+                },
+                {
+                    "publicChildFieldName": "saikinShorisha",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "displayNone_saikinShorisha"
+                },
+                {
+                    "publicChildFieldName": "ddlHokensha",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "displayNone_ddlHokensha"
+                },
+                {
+                    "publicChildFieldName": "chkMinashiNigo",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "displayNone_chkMinashiNigo"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M"
+        };
+        return HihokenshaFinder_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.HihokenshaFinder_Design = HihokenshaFinder_Design;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (HihokenshaFinder) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new HihokenshaFinder.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        HihokenshaFinder.ModeController = ModeController;
+    })(DBZ.HihokenshaFinder || (DBZ.HihokenshaFinder = {}));
+    var HihokenshaFinder = DBZ.HihokenshaFinder;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (HihokenshaFinder) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new HihokenshaFinder.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("onClick_BtnToSearch", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("displayNone_txtTsuchishoNo", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("displayNone_ddlFukaNendo", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("displayNone_SearchCriteriaDetail", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("canOpenAndClose_HihokenshaFinder", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("displayNone_saikinShorisha", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("displayNone_ddlHokensha", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("displayNone_chkMinashiNigo", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getonClick_BtnToSearch = function () {
+                return this.controls.btnToSearch().onClick;
+            };
+
+            PublicProperties.prototype.setonClick_BtnToSearch = function (value) {
+                this.controls.btnToSearch().onClick = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_txtTsuchishoNo = function () {
+                return this.controls.txtTuchishoNo().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_txtTsuchishoNo = function (value) {
+                this.controls.txtTuchishoNo().displayNone = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_ddlFukaNendo = function () {
+                return this.controls.ddlFukaNendo().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_ddlFukaNendo = function (value) {
+                this.controls.ddlFukaNendo().displayNone = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_SearchCriteriaDetail = function () {
+                return this.controls.SearchCriteriaDetail().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_SearchCriteriaDetail = function (value) {
+                this.controls.SearchCriteriaDetail().displayNone = value;
+            };
+
+            PublicProperties.prototype.getcanOpenAndClose_HihokenshaFinder = function () {
+                return this.controls.HihokenshaFinder().canOpenAndClose;
+            };
+
+            PublicProperties.prototype.setcanOpenAndClose_HihokenshaFinder = function (value) {
+                this.controls.HihokenshaFinder().canOpenAndClose = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_saikinShorisha = function () {
+                return this.controls.saikinShorisha().Properties().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_saikinShorisha = function (value) {
+                this.controls.saikinShorisha().Properties().displayNone = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_ddlHokensha = function () {
+                return this.controls.ddlHokensha().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_ddlHokensha = function (value) {
+                this.controls.ddlHokensha().displayNone = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_chkMinashiNigo = function () {
+                return this.controls.chkMinashiNigo().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_chkMinashiNigo = function (value) {
+                this.controls.chkMinashiNigo().displayNone = value;
+            };
+            return PublicProperties;
+        })();
+        HihokenshaFinder.PublicProperties = PublicProperties;
+    })(DBZ.HihokenshaFinder || (DBZ.HihokenshaFinder = {}));
+    var HihokenshaFinder = DBZ.HihokenshaFinder;
+})(DBZ || (DBZ = {}));
+</script>
+    
+  <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['HIHOKENSHAFINDER'] = {};
+DBZ['HIHOKENSHAFINDER'].HihokenshaFinderRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_HihokenshaFinder').getProperty();parameter0.SearchCriteriaOfHihokensha = Uz.JSControlUtil.getJSControl(parentFieldName + '_SearchCriteriaOfHihokensha').getProperty();parameter0.SearchCriteriaOfHihokensha.ddlHokensha = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlHokensha').getProperty();parameter0.SearchCriteriaOfHihokensha.txtHihokenshaNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHihokenshaNo').getProperty();parameter0.SearchCriteriaOfHihokensha.txtTuchishoNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtTuchishoNo').getProperty();parameter0.SearchCriteriaOfHihokensha.ddlFukaNendo = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlFukaNendo').getProperty();parameter0.SearchCriteriaOfHihokensha.SearchCriteriaDetail = Uz.JSControlUtil.getJSControl(parentFieldName + '_SearchCriteriaDetail').getProperty();parameter0.SearchCriteriaOfHihokensha.SearchCriteriaDetail.chkHihokensha = Uz.JSControlUtil.getJSControl(parentFieldName + '_chkHihokensha').getProperty();parameter0.SearchCriteriaOfHihokensha.SearchCriteriaDetail.radMinashiNigo = Uz.JSControlUtil.getJSControl(parentFieldName + '_radMinashiNigo').getProperty();parameter0.SearchCriteriaOfHihokensha.SearchCriteriaDetail.chkMinashiNigo = Uz.JSControlUtil.getJSControl(parentFieldName + '_chkMinashiNigo').getProperty();parameter0.KaigoAtenaFinder = Uz.JSControlUtil.getJSControl(parentFieldName + '_KaigoAtenaFinder').getPostParameter();parameter0.ButtonsForHihokenshaFinder = Uz.JSControlUtil.getJSControl(parentFieldName + '_ButtonsForHihokenshaFinder').getProperty();parameter0.ButtonsForHihokenshaFinder.btnToClear = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnToClear').getProperty();parameter0.ButtonsForHihokenshaFinder.btnToSearch = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnToSearch').getProperty();parameter0.ButtonsForHihokenshaFinder.txtMaxNumber = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtMaxNumber').getProperty();parameter0.saikinShorisha = Uz.JSControlUtil.getJSControl(parentFieldName + '_saikinShorisha').getPostParameter();paramArray.push(parameter0);
+return paramArray;
+ };
+DBZ['HIHOKENSHAFINDER'].SearchCriteriaOfHihokenshaRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_SearchCriteriaOfHihokensha').getProperty();parameter0.ddlHokensha = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlHokensha').getProperty();parameter0.txtHihokenshaNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtHihokenshaNo').getProperty();parameter0.txtTuchishoNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtTuchishoNo').getProperty();parameter0.ddlFukaNendo = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlFukaNendo').getProperty();parameter0.SearchCriteriaDetail = Uz.JSControlUtil.getJSControl(parentFieldName + '_SearchCriteriaDetail').getProperty();parameter0.SearchCriteriaDetail.chkHihokensha = Uz.JSControlUtil.getJSControl(parentFieldName + '_chkHihokensha').getProperty();parameter0.SearchCriteriaDetail.radMinashiNigo = Uz.JSControlUtil.getJSControl(parentFieldName + '_radMinashiNigo').getProperty();parameter0.SearchCriteriaDetail.chkMinashiNigo = Uz.JSControlUtil.getJSControl(parentFieldName + '_chkMinashiNigo').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+DBZ['HIHOKENSHAFINDER'].SearchCriteriaDetailRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_SearchCriteriaDetail').getProperty();parameter0.chkHihokensha = Uz.JSControlUtil.getJSControl(parentFieldName + '_chkHihokensha').getProperty();parameter0.radMinashiNigo = Uz.JSControlUtil.getJSControl(parentFieldName + '_radMinashiNigo').getProperty();parameter0.chkMinashiNigo = Uz.JSControlUtil.getJSControl(parentFieldName + '_chkMinashiNigo').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+DBZ['HIHOKENSHAFINDER'].ButtonsForHihokenshaFinderRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ButtonsForHihokenshaFinder').getProperty();parameter0.btnToClear = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnToClear').getProperty();parameter0.btnToSearch = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnToSearch').getProperty();parameter0.txtMaxNumber = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtMaxNumber').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (HihokenshaFinder) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnToClear = function () {
+                return "onClick_btnToClear";
+            };
+            return Events;
+        })();
+        HihokenshaFinder.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "HihokenshaFinder";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.HihokenshaFinder.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.HihokenshaFinder.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.HihokenshaFinder = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.SearchCriteriaOfHihokensha = function () {
+                return new UZA.Panel(this.convFiledName("SearchCriteriaOfHihokensha"));
+            };
+
+            Controls.prototype.ddlHokensha = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlHokensha"));
+            };
+
+            Controls.prototype.txtHihokenshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtHihokenshaNo"));
+            };
+
+            Controls.prototype.txtTuchishoNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtTuchishoNo"));
+            };
+
+            Controls.prototype.ddlFukaNendo = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlFukaNendo"));
+            };
+
+            Controls.prototype.SearchCriteriaDetail = function () {
+                return new UZA.Panel(this.convFiledName("SearchCriteriaOfHihokensha_SearchCriteriaDetail"));
+            };
+
+            Controls.prototype.chkHihokensha = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkHihokensha"));
+            };
+
+            Controls.prototype.radMinashiNigo = function () {
+                return new UZA.RadioButton(this.convFiledName("radMinashiNigo"));
+            };
+
+            Controls.prototype.chkMinashiNigo = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkMinashiNigo"));
+            };
+
+            Controls.prototype.KaigoAtenaFinder = function () {
+                return new URA.AtenaFinder.ModeController(this.convFiledName("KaigoAtenaFinder"));
+            };
+
+            Controls.prototype.ButtonsForHihokenshaFinder = function () {
+                return new UZA.Panel(this.convFiledName("ButtonsForHihokenshaFinder"));
+            };
+
+            Controls.prototype.btnToClear = function () {
+                return new UZA.Button(this.convFiledName("btnToClear"));
+            };
+
+            Controls.prototype.btnToSearch = function () {
+                return new UZA.Button(this.convFiledName("btnToSearch"));
+            };
+
+            Controls.prototype.txtMaxNumber = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtMaxNumber"));
+            };
+
+            Controls.prototype.saikinShorisha = function () {
+                return new DBZ.KaigoSaikinShorishaRireki.ModeController(this.convFiledName("saikinShorisha"));
+            };
+            return Controls;
+        })();
+        HihokenshaFinder.Controls = Controls;
+    })(DBZ.HihokenshaFinder || (DBZ.HihokenshaFinder = {}));
+    var HihokenshaFinder = DBZ.HihokenshaFinder;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (HihokenshaFinder) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new HihokenshaFinder.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        HihokenshaFinder.ModeController = ModeController;
+    })(DBZ.HihokenshaFinder || (DBZ.HihokenshaFinder = {}));
+    var HihokenshaFinder = DBZ.HihokenshaFinder;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (HihokenshaFinder) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new HihokenshaFinder.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("onClick_BtnToSearch", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("displayNone_txtTsuchishoNo", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("displayNone_ddlFukaNendo", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("displayNone_SearchCriteriaDetail", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("canOpenAndClose_HihokenshaFinder", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("displayNone_saikinShorisha", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("displayNone_ddlHokensha", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("displayNone_chkMinashiNigo", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getonClick_BtnToSearch = function () {
+                return this.controls.btnToSearch().onClick;
+            };
+
+            PublicProperties.prototype.setonClick_BtnToSearch = function (value) {
+                this.controls.btnToSearch().onClick = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_txtTsuchishoNo = function () {
+                return this.controls.txtTuchishoNo().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_txtTsuchishoNo = function (value) {
+                this.controls.txtTuchishoNo().displayNone = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_ddlFukaNendo = function () {
+                return this.controls.ddlFukaNendo().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_ddlFukaNendo = function (value) {
+                this.controls.ddlFukaNendo().displayNone = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_SearchCriteriaDetail = function () {
+                return this.controls.SearchCriteriaDetail().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_SearchCriteriaDetail = function (value) {
+                this.controls.SearchCriteriaDetail().displayNone = value;
+            };
+
+            PublicProperties.prototype.getcanOpenAndClose_HihokenshaFinder = function () {
+                return this.controls.HihokenshaFinder().canOpenAndClose;
+            };
+
+            PublicProperties.prototype.setcanOpenAndClose_HihokenshaFinder = function (value) {
+                this.controls.HihokenshaFinder().canOpenAndClose = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_saikinShorisha = function () {
+                return this.controls.saikinShorisha().Properties().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_saikinShorisha = function (value) {
+                this.controls.saikinShorisha().Properties().displayNone = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_ddlHokensha = function () {
+                return this.controls.ddlHokensha().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_ddlHokensha = function (value) {
+                this.controls.ddlHokensha().displayNone = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_chkMinashiNigo = function () {
+                return this.controls.chkMinashiNigo().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_chkMinashiNigo = function (value) {
+                this.controls.chkMinashiNigo().displayNone = value;
+            };
+            return PublicProperties;
+        })();
+        HihokenshaFinder.PublicProperties = PublicProperties;
+    })(DBZ.HihokenshaFinder || (DBZ.HihokenshaFinder = {}));
+    var HihokenshaFinder = DBZ.HihokenshaFinder;
+})(DBZ || (DBZ = {}));
+</script></div>

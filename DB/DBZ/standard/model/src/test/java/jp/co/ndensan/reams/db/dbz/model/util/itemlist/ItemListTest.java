@@ -498,4 +498,27 @@ public class ItemListTest extends DbzTestBase {
             assertThat(sut.added("4", "5").size(), is(beforeSize + 2));
         }
     }
+
+    public static class reversed extends DbzTestBase {
+
+        private IItemList<String> sut;
+        private final String first = "1";
+        private final String last = "3";
+
+        @Before
+        public void setUp() {
+            sut = ItemList.of(first, "2", last).reversed();
+        }
+
+        @Test
+        public void reversedの結果_保持するlistの先頭の要素は_生成時に渡したlistの最後の要素になる() {
+            assertThat(sut.toList().get(0), is(last));
+        }
+
+        @Test
+        public void reversedの結果_保持するlistの最後の要素は_生成時に渡したlistの最初の要素になる() {
+            List<String> list = sut.toList();
+            assertThat(list.get(list.size() - 1), is(first));
+        }
+    }
 }
