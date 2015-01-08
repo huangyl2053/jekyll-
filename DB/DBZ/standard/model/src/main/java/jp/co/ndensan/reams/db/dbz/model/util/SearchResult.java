@@ -28,6 +28,7 @@ public final class SearchResult<E> {
         ARG_TOTAL_COUNT = new RString("totalCount");
         ARG_RECORDS = new RString("records");
     }
+
     private final int theTotalCount;
     private final IItemList<E> theRecords;
     private final boolean theExceedsLimit;
