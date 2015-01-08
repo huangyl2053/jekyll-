@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ConfigV
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.ShuryoKubun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HakkoShoTypeBehaviors.IHakkoShoTypeBehavior;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
+import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.ur.urz.realservice.IKaigoServiceManager;
 import jp.co.ndensan.reams.ur.urz.realservice.KaigoServiceManagerFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -48,11 +49,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ViewControl;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -788,19 +787,13 @@ public class HihokenshaShikakuHakkoHandler {
      */
     public ValidationMessageControlPairs validate被保険者証資格者証() {
 
-        ValidationMessageControlPairs controlPairs = new ValidationMessageControlPairs();
         IValidationMessages messages = new HihokenshaShikakuHakkoValidator().
                 validateIn(div.getYukoKigenInfo().getDdlKofuJiyu().getSelectedValue());
 
-        controlPairs = addValidationMessage(controlPairs, messages, HihokenshaShikakuHakkoValidationMessage.交付事由が未選択, div.getYukoKigenInfo().getDdlKofuJiyu());
-        return controlPairs;
+        ValidationMessageControlDictionary dictionay = new ValidationMessageControlDictionary(
+                new ValidationMessageControlPair(HihokenshaShikakuHakkoValidationMessage.交付事由が未選択, div.getYukoKigenInfo().getDdlKofuJiyu())
+        );
+        return dictionay.check(messages);
     }
 
-    private ValidationMessageControlPairs addValidationMessage(ValidationMessageControlPairs controlPairs, IValidationMessages messages, IValidationMessage validationMessage, ViewControl controls) {
-
-        if (messages.contains(validationMessage)) {
-            controlPairs.add(new ValidationMessageControlPair(validationMessage, controls));
-        }
-        return controlPairs;
-    }
 }
