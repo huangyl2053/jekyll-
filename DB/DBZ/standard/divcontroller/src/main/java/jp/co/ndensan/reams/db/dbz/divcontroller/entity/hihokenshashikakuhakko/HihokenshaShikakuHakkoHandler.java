@@ -372,7 +372,7 @@ public class HihokenshaShikakuHakkoHandler {
                 if (o2.get制限期間開始日().isEmpty()) {
                     return -1;
                 }
-                return o1.get制限期間開始日().compareTo(o2.get制限期間開始日());
+                return o2.get制限期間開始日().compareTo(o1.get制限期間開始日());
             }
         }));
 
