@@ -126,7 +126,7 @@ public class NinteiShinseiJohoModelTest extends DbzTestBase {
         @Test
         public void 戻り値の情報提供への同意有無は_設定した値と同じ情報提供への同意有無を返す() {
             sut.set情報提供への同意有無(DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_情報提供への同意有無);
-            assertThat(sut.is情報提供への同意(), is(DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_情報提供への同意有無));
+            assertThat(sut.has情報提供への同意(), is(DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_情報提供への同意有無));
         }
 
         @Test
@@ -168,13 +168,13 @@ public class NinteiShinseiJohoModelTest extends DbzTestBase {
         @Test
         public void 戻り値の認定延期通知発行に対する同意有無は_設定した値と同じ認定延期通知発行に対する同意有無を返す() {
             sut.set認定延期通知発行に対する同意有無(DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_認定延期通知発行に対する同意有無);
-            assertThat(sut.is認定延期通知発行に対する同意(), is(DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_認定延期通知発行に対する同意有無));
+            assertThat(sut.has認定延期通知発行に対する同意(), is(DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_認定延期通知発行に対する同意有無));
         }
 
         @Test
         public void 戻り値の施設入所の有無は_設定した値と同じ施設入所の有無を返す() {
             sut.set施設入所の有無(DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_施設入所の有無);
-            assertThat(sut.is施設入所(), is(DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_施設入所の有無));
+            assertThat(sut.has施設入所(), is(DbT5001NinteiShinseiJohoEntityGenerator.DEFAULT_施設入所の有無));
         }
 
         @Test

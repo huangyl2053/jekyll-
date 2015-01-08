@@ -85,8 +85,8 @@ public class ShiharaiHohoHenkoManagerTest {
 
             assertThat(支払方法変更リスト.size(), is(2));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(支払方法変更リスト.toList().get(0).is償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
-            assertThat(支払方法変更リスト.toList().get(1).is償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
+            assertThat(支払方法変更リスト.toList().get(0).has償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
+            assertThat(支払方法変更リスト.toList().get(1).has償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
         }
     }
 
@@ -110,8 +110,8 @@ public class ShiharaiHohoHenkoManagerTest {
 
             assertThat(支払方法変更リスト.size(), is(2));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(支払方法変更リスト.toList().get(0).is償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
-            assertThat(支払方法変更リスト.toList().get(1).is償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
+            assertThat(支払方法変更リスト.toList().get(0).has償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
+            assertThat(支払方法変更リスト.toList().get(1).has償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
         }
     }
 
@@ -135,8 +135,8 @@ public class ShiharaiHohoHenkoManagerTest {
 
             assertThat(支払方法変更リスト.size(), is(2));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(支払方法変更リスト.toList().get(0).is償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
-            assertThat(支払方法変更リスト.toList().get(1).is償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
+            assertThat(支払方法変更リスト.toList().get(0).has償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
+            assertThat(支払方法変更リスト.toList().get(1).has償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
         }
     }
 
@@ -160,8 +160,8 @@ public class ShiharaiHohoHenkoManagerTest {
 
             assertThat(支払方法変更リスト.size(), is(2));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(支払方法変更リスト.toList().get(0).is償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
-            assertThat(支払方法変更リスト.toList().get(1).is償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
+            assertThat(支払方法変更リスト.toList().get(0).has償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
+            assertThat(支払方法変更リスト.toList().get(1).has償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
         }
     }
 

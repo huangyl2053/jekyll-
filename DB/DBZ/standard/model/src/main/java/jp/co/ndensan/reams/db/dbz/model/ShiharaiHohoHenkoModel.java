@@ -170,7 +170,7 @@ public class ShiharaiHohoHenkoModel implements Serializable {
      *
      * @return 予告通知書再発行フラグ {true:再発行 false:再発行ではない}
      */
-    public boolean is予告通知書再発行() {
+    public boolean has予告通知書再発行() {
         return entity.getYokoku_TsuchiSaiHakkoFlag();
     }
 
@@ -242,7 +242,7 @@ public class ShiharaiHohoHenkoModel implements Serializable {
      *
      * @return 償還払化通知書再発行フラグ {true:再発行 false:再発行ではない}
      */
-    public boolean is償還払化通知書再発行() {
+    public boolean has償還払化通知書再発行() {
         return entity.getShokan_TsuchiSaiHakkoFlag();
     }
 
@@ -305,7 +305,7 @@ public class ShiharaiHohoHenkoModel implements Serializable {
      *
      * @return 減額通知書再発行フラグ {true:再発行 false:再発行ではない}
      */
-    public boolean is減額通知書再発行() {
+    public boolean has減額通知書再発行() {
         return entity.getGemmen_TsuchiSaiHakkoFlag();
     }
 

@@ -200,7 +200,7 @@ public class NinteiShinseiJohoModel implements Serializable {
      *
      * @return 情報提供への同意有無 {true:同意有 false:同意無}
      */
-    public boolean is情報提供への同意() {
+    public boolean has情報提供への同意() {
         return entity.getJohoteikyoDouiUmuKubun();
     }
 
@@ -263,7 +263,7 @@ public class NinteiShinseiJohoModel implements Serializable {
      *
      * @return 認定延期通知発行に対する同意有無 {true:同意有 false:同意無}
      */
-    public boolean is認定延期通知発行に対する同意() {
+    public boolean has認定延期通知発行に対する同意() {
         return entity.getEnkitsuchiDoiUmuKubun();
     }
 
@@ -272,7 +272,7 @@ public class NinteiShinseiJohoModel implements Serializable {
      *
      * @return 施設入所の有無 {true:入所有 false:入所無}
      */
-    public boolean is施設入所() {
+    public boolean has施設入所() {
         return entity.getShisetsuNyushoUmuKubun();
     }
 

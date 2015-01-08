@@ -100,7 +100,7 @@ public class ShiharaiHohoHenkoModelTest extends DbzTestBase {
         @Test
         public void 戻り値の予告通知書再発行フラグは_設定した値と同じ予告通知書再発行フラグを返す() {
             sut.set予告通知書再発行フラグ(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ);
-            assertThat(sut.is予告通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
+            assertThat(sut.has予告通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_予告通知書再発行フラグ));
         }
 
         @Test
@@ -148,7 +148,7 @@ public class ShiharaiHohoHenkoModelTest extends DbzTestBase {
         @Test
         public void 戻り値の償還払化通知書再発行フラグは_設定した値と同じ償還払化通知書再発行フラグを返す() {
             sut.set償還払化通知書再発行フラグ(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_償還払化通知書再発行フラグ);
-            assertThat(sut.is償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_償還払化通知書再発行フラグ));
+            assertThat(sut.has償還払化通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_償還払化通知書再発行フラグ));
         }
 
         @Test
@@ -190,7 +190,7 @@ public class ShiharaiHohoHenkoModelTest extends DbzTestBase {
         @Test
         public void 戻り値の減額通知書再発行フラグは_設定した値と同じ減額通知書再発行フラグを返す() {
             sut.set減額通知書再発行フラグ(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_減額通知書再発行フラグ);
-            assertThat(sut.is減額通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_減額通知書再発行フラグ));
+            assertThat(sut.has減額通知書再発行(), is(DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_減額通知書再発行フラグ));
         }
 
         @Test
