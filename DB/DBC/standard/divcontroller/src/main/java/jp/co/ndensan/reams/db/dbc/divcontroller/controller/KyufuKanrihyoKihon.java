@@ -51,8 +51,8 @@ public class KyufuKanrihyoKihon {
         ControlGenerator cg = new ControlGenerator(getYaml().get(1));
         KaigoShikakuKihonDiv kihon = panel.getKyufuKanrihyoKaigoKihon();
         kihon.getTxtHihokenshaNo().setValue(cg.getAsRString("被保番号"));
-        kihon.getTxtShutokuYmd().setValue(cg.getAsRDate("取得日"));
-        kihon.getTxtSoshitsuYmd().setValue(cg.getAsRDate("喪失日"));
+        kihon.getTxtShutokuYmd().setValue(cg.getAsFlexibleDate("取得日"));
+        kihon.getTxtSoshitsuYmd().setValue(cg.getAsFlexibleDate("喪失日"));
         kihon.getTxtShutokuJiyu().setValue(cg.getAsRString("取得事由"));
         kihon.getTxtSoshitsuJiyu().setValue(cg.getAsRString("喪失事由"));
         kihon.getTxtJutokuKubun().setValue(cg.getAsRString("住特区分"));

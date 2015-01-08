@@ -52,8 +52,8 @@ public class KashitsukeHenkanKihon {
 //        AtenaShokaiSimple.setData(panel.getKashitsukeHenkanKihonInfo().getAtenaInfo(), new ShikibetsuCode(cg.getAsRString("識別コード")));
         KaigoShikakuKihonDiv kaigoKihonDiv = panel.getKashitsukeHenkanKaigoKihonInfo();
         kaigoKihonDiv.getTxtHihokenshaNo().setValue(cg.getAsRString("被保番号"));
-        kaigoKihonDiv.getTxtShutokuYmd().setValue(cg.getAsRDate("取得日"));
-        kaigoKihonDiv.getTxtSoshitsuYmd().setValue(cg.getAsRDate("喪失日"));
+        kaigoKihonDiv.getTxtShutokuYmd().setValue(cg.getAsFlexibleDate("取得日"));
+        kaigoKihonDiv.getTxtSoshitsuYmd().setValue(cg.getAsFlexibleDate("喪失日"));
         kaigoKihonDiv.getTxtShutokuJiyu().setValue(cg.getAsRString("取得事由"));
         kaigoKihonDiv.getTxtSoshitsuJiyu().setValue(cg.getAsRString("喪失事由"));
         kaigoKihonDiv.getTxtJutokuKubun().setValue(cg.getAsRString("住特区分"));
