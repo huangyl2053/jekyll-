@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.config;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysGaitoshaKensaku;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Before;
@@ -16,6 +17,8 @@ import org.junit.runner.RunWith;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -47,8 +50,7 @@ public class GaitoshaKensakuConfigTest {
 
     private static IUrBusinessConfig createBusinessConfigMock() {
         IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
-        RDate nowDate = RDate.getNowDate();
-        when(mock.get(ConfigKeysGaitoshaKensaku.検索制御_最大取得件数, nowDate)).thenReturn(検索制御_最大取得件数);
+        when(mock.get(eq(ConfigKeysGaitoshaKensaku.検索制御_最大取得件数), any(RDate.class), eq(SubGyomuCode.DBU介護統計報告))).thenReturn(検索制御_最大取得件数);
         return mock;
     }
 }
