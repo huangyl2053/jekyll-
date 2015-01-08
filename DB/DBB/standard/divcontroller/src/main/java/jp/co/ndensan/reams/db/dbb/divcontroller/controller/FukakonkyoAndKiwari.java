@@ -16,7 +16,8 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.dgFukaRirekiFu
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.tblFukaKonkyoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.tblFukakonkyoMeisaiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.tblKikanDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.tblKiwariGakuDiv;
+// TODO N8156 宮本 康 期割額Div変更に伴いコメント化
+//import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.tblKiwariGakuDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -384,13 +385,15 @@ public class FukakonkyoAndKiwari {
 
     private void setFukaKonkyo(FukakonkyoAndKiwariDiv div, List formatData) {
         tblFukaKonkyoDiv tFukaKonkyo = div.getTblFukaKonkyo();
-        tblKiwariGakuDiv tKiwariGaku = div.getTblFukaKonkyo().getFukaShokaiKiwarigaku().getTblKiwariGaku();
+// TODO N8156 宮本 康 期割額Div変更に伴いコメント化
+//        tblKiwariGakuDiv tKiwariGaku = div.getTblFukaKonkyo().getFukaShokaiKiwarigaku().getTblKiwariGaku();
 
         setKonkyo(tFukaKonkyo.getTblFukakonkyoMeisai(), (List) formatData.get(0));
-        setFuchoKibetsugaku(tKiwariGaku, (List) formatData.get(1));
-        setFuchoNofugaku(tKiwariGaku, (List) formatData.get(2));
-        setTokuKibetsugaku(tKiwariGaku, (List) formatData.get(3));
-        setTokuNofugaku(tKiwariGaku, (List) formatData.get(4));
+// TODO N8156 宮本 康 期割額Div変更に伴いコメント化
+//        setFuchoKibetsugaku(tKiwariGaku, (List) formatData.get(1));
+//        setFuchoNofugaku(tKiwariGaku, (List) formatData.get(2));
+//        setTokuKibetsugaku(tKiwariGaku, (List) formatData.get(3));
+//        setTokuNofugaku(tKiwariGaku, (List) formatData.get(4));
         setKikan(tFukaKonkyo.getTblKikan(), (List) formatData.get(5));
         setNengaku(tFukaKonkyo.getFukakonkyoNengaku(), (List) formatData.get(6));
         setChoteiJiyu(tFukaKonkyo, (List) formatData.get(7));
@@ -467,60 +470,60 @@ public class FukakonkyoAndKiwari {
         konkyoDiv.getLblHokenryoDankaiValue().setText((RString) formatData.get(13));
     }
 
-    private void setTokuNofugaku(tblKiwariGakuDiv tKiwariGaku, List formatData) {
-
-        tKiwariGaku.getLblTokuNofuGaku1().setText((RString) formatData.get(0));
-        tKiwariGaku.getLblTokuNofuGaku2().setText((RString) formatData.get(1));
-        tKiwariGaku.getLblTokuNofuGaku3().setText((RString) formatData.get(2));
-        tKiwariGaku.getLblTokuNofuGaku4().setText((RString) formatData.get(3));
-        tKiwariGaku.getLblTokuNofuGaku5().setText((RString) formatData.get(4));
-        tKiwariGaku.getLblTokuNofuGaku6().setText((RString) formatData.get(5));
-        tKiwariGaku.getLblTokuNofuGakuKei().setText((RString) formatData.get(6));
-    }
-
-    private void setTokuKibetsugaku(tblKiwariGakuDiv tKiwariGaku, List formatData) {
-        tKiwariGaku.getLblTokuKibetsuGaku1().setText((RString) formatData.get(0));
-        tKiwariGaku.getLblTokuKibetsuGaku2().setText((RString) formatData.get(1));
-        tKiwariGaku.getLblTokuKibetsuGaku3().setText((RString) formatData.get(2));
-        tKiwariGaku.getLblTokuKibetsuGaku4().setText((RString) formatData.get(3));
-        tKiwariGaku.getLblTokuKibetsuGaku5().setText((RString) formatData.get(4));
-        tKiwariGaku.getLblTokuKibetsuGaku6().setText((RString) formatData.get(5));
-    }
-
-    private void setFuchoNofugaku(tblKiwariGakuDiv tKiwariGaku, List formatData) {
-        tKiwariGaku.getLblFuchoNofuGaku1().setText((RString) formatData.get(0));
-        tKiwariGaku.getLblFuchoNofuGaku2().setText((RString) formatData.get(1));
-        tKiwariGaku.getLblFuchoNofuGaku3().setText((RString) formatData.get(2));
-        tKiwariGaku.getLblFuchoNofuGaku4().setText((RString) formatData.get(3));
-        tKiwariGaku.getLblFuchoNofuGaku5().setText((RString) formatData.get(4));
-        tKiwariGaku.getLblFuchoNofuGaku6().setText((RString) formatData.get(5));
-        tKiwariGaku.getLblFuchoNofuGaku7().setText((RString) formatData.get(6));
-        tKiwariGaku.getLblFuchoNofuGaku8().setText((RString) formatData.get(7));
-        tKiwariGaku.getLblFuchoNofuGaku9().setText((RString) formatData.get(8));
-        tKiwariGaku.getLblFuchoNofuGaku10().setText((RString) formatData.get(9));
-        tKiwariGaku.getLblFuchoNofuGaku11().setText((RString) formatData.get(10));
-        tKiwariGaku.getLblFuchoNofuGaku12().setText((RString) formatData.get(11));
-        tKiwariGaku.getLblFuchoNofuGaku13().setText((RString) formatData.get(12));
-        tKiwariGaku.getLblFuchoNofuGaku14().setText((RString) formatData.get(13));
-    }
-
-    private void setFuchoKibetsugaku(tblKiwariGakuDiv tKiwariGaku, List formatData) {
-        tKiwariGaku.getLblFuchoKibetsuGaku1().setText((RString) formatData.get(0));
-        tKiwariGaku.getLblFuchoKibetsuGaku2().setText((RString) formatData.get(1));
-        tKiwariGaku.getLblFuchoKibetsuGaku3().setText((RString) formatData.get(2));
-        tKiwariGaku.getLblFuchoKibetsuGaku4().setText((RString) formatData.get(3));
-        tKiwariGaku.getLblFuchoKibetsuGaku5().setText((RString) formatData.get(4));
-        tKiwariGaku.getLblFuchoKibetsuGaku6().setText((RString) formatData.get(5));
-        tKiwariGaku.getLblFuchoKibetsuGaku7().setText((RString) formatData.get(6));
-        tKiwariGaku.getLblFuchoKibetsuGaku8().setText((RString) formatData.get(7));
-        tKiwariGaku.getLblFuchoKibetsuGaku9().setText((RString) formatData.get(8));
-        tKiwariGaku.getLblFuchoKibetsuGaku10().setText((RString) formatData.get(9));
-        tKiwariGaku.getLblFuchoKibetsuGaku11().setText((RString) formatData.get(10));
-        tKiwariGaku.getLblFuchoKibetsuGaku12().setText((RString) formatData.get(11));
-        tKiwariGaku.getLblFuchoKibetsuGaku13().setText((RString) formatData.get(12));
-        tKiwariGaku.getLblFuchoKibetsuGaku14().setText((RString) formatData.get(13));
-    }
-
+// TODO N8156 宮本 康 期割額Div変更に伴いコメント化
+//    private void setTokuNofugaku(tblKiwariGakuDiv tKiwariGaku, List formatData) {
+//
+//        tKiwariGaku.getLblTokuNofuGaku1().setText((RString) formatData.get(0));
+//        tKiwariGaku.getLblTokuNofuGaku2().setText((RString) formatData.get(1));
+//        tKiwariGaku.getLblTokuNofuGaku3().setText((RString) formatData.get(2));
+//        tKiwariGaku.getLblTokuNofuGaku4().setText((RString) formatData.get(3));
+//        tKiwariGaku.getLblTokuNofuGaku5().setText((RString) formatData.get(4));
+//        tKiwariGaku.getLblTokuNofuGaku6().setText((RString) formatData.get(5));
+//        tKiwariGaku.getLblTokuNofuGakuKei().setText((RString) formatData.get(6));
+//    }
+//
+//    private void setTokuKibetsugaku(tblKiwariGakuDiv tKiwariGaku, List formatData) {
+//        tKiwariGaku.getLblTokuKibetsuGaku1().setText((RString) formatData.get(0));
+//        tKiwariGaku.getLblTokuKibetsuGaku2().setText((RString) formatData.get(1));
+//        tKiwariGaku.getLblTokuKibetsuGaku3().setText((RString) formatData.get(2));
+//        tKiwariGaku.getLblTokuKibetsuGaku4().setText((RString) formatData.get(3));
+//        tKiwariGaku.getLblTokuKibetsuGaku5().setText((RString) formatData.get(4));
+//        tKiwariGaku.getLblTokuKibetsuGaku6().setText((RString) formatData.get(5));
+//    }
+//
+//    private void setFuchoNofugaku(tblKiwariGakuDiv tKiwariGaku, List formatData) {
+//        tKiwariGaku.getLblFuchoNofuGaku1().setText((RString) formatData.get(0));
+//        tKiwariGaku.getLblFuchoNofuGaku2().setText((RString) formatData.get(1));
+//        tKiwariGaku.getLblFuchoNofuGaku3().setText((RString) formatData.get(2));
+//        tKiwariGaku.getLblFuchoNofuGaku4().setText((RString) formatData.get(3));
+//        tKiwariGaku.getLblFuchoNofuGaku5().setText((RString) formatData.get(4));
+//        tKiwariGaku.getLblFuchoNofuGaku6().setText((RString) formatData.get(5));
+//        tKiwariGaku.getLblFuchoNofuGaku7().setText((RString) formatData.get(6));
+//        tKiwariGaku.getLblFuchoNofuGaku8().setText((RString) formatData.get(7));
+//        tKiwariGaku.getLblFuchoNofuGaku9().setText((RString) formatData.get(8));
+//        tKiwariGaku.getLblFuchoNofuGaku10().setText((RString) formatData.get(9));
+//        tKiwariGaku.getLblFuchoNofuGaku11().setText((RString) formatData.get(10));
+//        tKiwariGaku.getLblFuchoNofuGaku12().setText((RString) formatData.get(11));
+//        tKiwariGaku.getLblFuchoNofuGaku13().setText((RString) formatData.get(12));
+//        tKiwariGaku.getLblFuchoNofuGaku14().setText((RString) formatData.get(13));
+//    }
+//
+//    private void setFuchoKibetsugaku(tblKiwariGakuDiv tKiwariGaku, List formatData) {
+//        tKiwariGaku.getLblFuchoKibetsuGaku1().setText((RString) formatData.get(0));
+//        tKiwariGaku.getLblFuchoKibetsuGaku2().setText((RString) formatData.get(1));
+//        tKiwariGaku.getLblFuchoKibetsuGaku3().setText((RString) formatData.get(2));
+//        tKiwariGaku.getLblFuchoKibetsuGaku4().setText((RString) formatData.get(3));
+//        tKiwariGaku.getLblFuchoKibetsuGaku5().setText((RString) formatData.get(4));
+//        tKiwariGaku.getLblFuchoKibetsuGaku6().setText((RString) formatData.get(5));
+//        tKiwariGaku.getLblFuchoKibetsuGaku7().setText((RString) formatData.get(6));
+//        tKiwariGaku.getLblFuchoKibetsuGaku8().setText((RString) formatData.get(7));
+//        tKiwariGaku.getLblFuchoKibetsuGaku9().setText((RString) formatData.get(8));
+//        tKiwariGaku.getLblFuchoKibetsuGaku10().setText((RString) formatData.get(9));
+//        tKiwariGaku.getLblFuchoKibetsuGaku11().setText((RString) formatData.get(10));
+//        tKiwariGaku.getLblFuchoKibetsuGaku12().setText((RString) formatData.get(11));
+//        tKiwariGaku.getLblFuchoKibetsuGaku13().setText((RString) formatData.get(12));
+//        tKiwariGaku.getLblFuchoKibetsuGaku14().setText((RString) formatData.get(13));
+//    }
     private void setKikan(tblKikanDiv tblKikan, List formatData) {
         tblKikan.getLblKikan1().setText((RString) formatData.get(0));
         tblKikan.getLblTsukiSu1().setText((RString) formatData.get(1));

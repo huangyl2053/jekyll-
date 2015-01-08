@@ -9,6 +9,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
  * KaigoFukaKihon のクラスファイル 
@@ -29,11 +34,11 @@ public class KaigoFukaKihonDiv extends Panel implements IKaigoFukaKihonDiv {
     @JsonProperty("txtHokenryoDankai")
     private TextBox txtHokenryoDankai;
     @JsonProperty("txtShutokuYmd")
-    private TextBoxDate txtShutokuYmd;
+    private TextBoxFlexibleDate txtShutokuYmd;
     @JsonProperty("txtShutokuJiyu")
     private TextBox txtShutokuJiyu;
     @JsonProperty("txtSoshitsuYmd")
-    private TextBoxDate txtSoshitsuYmd;
+    private TextBoxFlexibleDate txtSoshitsuYmd;
     @JsonProperty("txtSoshitsuJiyu")
     private TextBox txtSoshitsuJiyu;
     @JsonProperty("btnHihoRireki")
@@ -76,12 +81,12 @@ public class KaigoFukaKihonDiv extends Panel implements IKaigoFukaKihonDiv {
     }
 
     @JsonProperty("txtShutokuYmd")
-    public TextBoxDate getTxtShutokuYmd() {
+    public TextBoxFlexibleDate getTxtShutokuYmd() {
         return txtShutokuYmd;
     }
 
     @JsonProperty("txtShutokuYmd")
-    public void setTxtShutokuYmd(TextBoxDate txtShutokuYmd) {
+    public void setTxtShutokuYmd(TextBoxFlexibleDate txtShutokuYmd) {
         this.txtShutokuYmd=txtShutokuYmd;
     }
 
@@ -96,12 +101,12 @@ public class KaigoFukaKihonDiv extends Panel implements IKaigoFukaKihonDiv {
     }
 
     @JsonProperty("txtSoshitsuYmd")
-    public TextBoxDate getTxtSoshitsuYmd() {
+    public TextBoxFlexibleDate getTxtSoshitsuYmd() {
         return txtSoshitsuYmd;
     }
 
     @JsonProperty("txtSoshitsuYmd")
-    public void setTxtSoshitsuYmd(TextBoxDate txtSoshitsuYmd) {
+    public void setTxtSoshitsuYmd(TextBoxFlexibleDate txtSoshitsuYmd) {
         this.txtSoshitsuYmd=txtSoshitsuYmd;
     }
 
@@ -126,5 +131,13 @@ public class KaigoFukaKihonDiv extends Panel implements IKaigoFukaKihonDiv {
     }
 
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void load(TsuchishoNo 通知書番号, FlexibleYear 賦課年度, LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+        getHandler().load(通知書番号, 賦課年度, 市町村コード, 識別コード);
+    }
 
+    @JsonIgnore
+    public KaigoFukaKihonHandler getHandler() {
+        return new KaigoFukaKihonHandler(this);
+    }
 }

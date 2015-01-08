@@ -149,8 +149,7 @@ public interface IItemList<E> extends Iterable<E> {
     IItemList<E> sorted();
 
     /**
-     * 保持する要素を自然順序の逆順にソートした結果から構成される、新しい{@link IItemList IItemList}を返します。
-     * ただし、保持する要素が{@link Comparable Comparable}でない場合、{@link ClassCastException}がスローされる可能性があります。
+     * 保持する要素を逆順にソートした結果から構成される、新しい{@link IItemList IItemList}を返します。
      *
      * @return ソート結果から構成される{@link IItemList IItemList}
      */

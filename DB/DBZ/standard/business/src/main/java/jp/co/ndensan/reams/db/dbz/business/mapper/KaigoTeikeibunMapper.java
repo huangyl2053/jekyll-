@@ -13,7 +13,8 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7103TeikeibunJohoEntity;
  *
  * @author n9606 漢那 憲作
  */
-public class KaigoTeikeibunMapper {
+@Deprecated
+public final class KaigoTeikeibunMapper {
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -27,8 +28,7 @@ public class KaigoTeikeibunMapper {
      * @param entity 定型文Entity
      * @return 定型文データ
      */
-    public static KaigoTeikeibun toKaigoTeikeibun(
-            DbT7103TeikeibunJohoEntity entity) throws NullPointerException {
+    public static KaigoTeikeibun toKaigoTeikeibun(DbT7103TeikeibunJohoEntity entity) {
 
         if (entity == null) {
             return null;

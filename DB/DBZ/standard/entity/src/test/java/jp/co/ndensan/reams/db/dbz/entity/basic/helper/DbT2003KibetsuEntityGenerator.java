@@ -4,27 +4,26 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 介護期別エンティティのテスト用インスタンスを作成する補助クラスです。
  *
- * @author LDNS 鄭雪双
+ * @author N8156 宮本 康
  */
 public final class DbT2003KibetsuEntityGenerator {
 
     public static final FlexibleYear DEFAULT_調定年度 = new FlexibleYear("2014");
     public static final FlexibleYear DEFAULT_賦課年度 = new FlexibleYear("2014");
-    public static final TsuchishoNo DEFAULT_通知書番号 = new TsuchishoNo(new RString("2"));
-    public static final RDateTime DEFAULT_処理日時 = RDateTime.of(2014, 9, 01, 10, 20, 30, 123);
-    public static final RString DEFAULT_徴収方法 = new RString("2");
+    public static final TsuchishoNo DEFAULT_通知書番号 = new TsuchishoNo("00000000000000000001");
+    public static final RDateTime DEFAULT_処理日時 = RDateTime.MAX;
+    public static final RString DEFAULT_徴収方法 = new RString("1");
     public static final int DEFAULT_期 = 1;
-    public static final Decimal DEFAULT_調定ID = new Decimal(1);
+    public static final Long DEFAULT_調定ID = 1L;
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。

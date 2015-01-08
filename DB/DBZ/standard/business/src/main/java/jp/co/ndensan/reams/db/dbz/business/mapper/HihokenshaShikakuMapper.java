@@ -45,18 +45,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
+@Deprecated
 public final class HihokenshaShikakuMapper {
 
     private HihokenshaShikakuMapper() {
     }
 
     /**
-     * {@link IHihokenshaShikaku IHihokenshaShikaku}を
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}へ変換します。
+     * {@link IHihokenshaShikaku IHihokenshaShikaku}を {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}へ変換します。
      *
      * @param shikaku {@link IHihokenshaShikaku IHihokenshaShikaku}
-     * @return
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}。ただし、引数がnullのときnull。
+     * @return {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}。ただし、引数がnullのときnull。
      */
     public static DbT1001HihokenshaDaichoEntity toHihokenshaDaichoEntity(IHihokenshaShikaku shikaku) {
         return isNull(shikaku) ? null : _toHihokenshaDaichoEntity(shikaku);
@@ -69,7 +68,7 @@ public final class HihokenshaShikakuMapper {
         entity.setShikibetsuCode(shikaku.get識別コード());
         entity.setShoriTimestamp(shikaku.get処理日時());
         entity.setHihokennshaKubunCode(shikaku.get被保険者区分().getCode().value());
-        entity.setIchigoHihokenshaNenreiTotatsuYMD(shikaku.get第一号年齢到達日());
+        entity.setIchigoShikakuShutokuYMD(shikaku.get第一号年齢到達日());
         entity.setShikakuShutokuJiyuCode(shikaku.get資格取得().getReason().getCode());
         entity.setShikakuShutokuTodokedeYMD(shikaku.get資格取得().getNoticeDate());
         entity.setShikakuShutokuYMD(shikaku.get資格取得().getActionDate());
@@ -96,16 +95,13 @@ public final class HihokenshaShikakuMapper {
     }
 
     /**
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の
-     * {@link List list}を、 {@link IHihokenshaShikaku IHihokenshaShikaku}の
+     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の {@link List list}を、 {@link IHihokenshaShikaku IHihokenshaShikaku}の
      * {@link List list}へ変換します。<br />
      *
      * 引数のlistが空だったときは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}を返します。
      *
-     * @param entities
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の{@link List list}
-     * @return
-     * {@link IHihokenshaShikaku IHihokenshaShikaku}の{@link List list}。もしくは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}
+     * @param entities {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の{@link List list}
+     * @return {@link IHihokenshaShikaku IHihokenshaShikaku}の{@link List list}。もしくは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}
      */
     public static List<IHihokenshaShikaku> toListOfHihokenshaShikaku(List<DbT1001HihokenshaDaichoEntity> entities) {
         return entities.isEmpty() ? Collections.EMPTY_LIST : _toListOfHihokenshaShikaku(entities);
@@ -120,11 +116,9 @@ public final class HihokenshaShikakuMapper {
     }
 
     /**
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}を
-     * {@link IHihokenshaShikaku IHihokenshaShikaku}へ変換します。
+     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}を {@link IHihokenshaShikaku IHihokenshaShikaku}へ変換します。
      *
-     * @param entity
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}
+     * @param entity {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}
      * @return {@link IHihokenshaShikaku IHihokenshaShikaku}。ただし、引数がnullのときnull。
      */
     public static IHihokenshaShikaku toHihokenshaShikaku(DbT1001HihokenshaDaichoEntity entity) {
@@ -183,7 +177,7 @@ public final class HihokenshaShikakuMapper {
                 toShikakuSoshitsuJiyu(entity.getShikakuSoshitsuJiyuCode()),
                 toValue(entity.getHihokenshaNo()),
                 entity.getKoikinaiTokureiSochimotoShichosonCode().value(),
-                toRDateOrMax(entity.getIchigoHihokenshaNenreiTotatsuYMD()),
+                toRDateOrMax(entity.getIchigoShikakuShutokuYMD()),
                 ShikakuHihokenshaKubun.toValue(entity.getHihokennshaKubunCode()),
                 JushochiTokureishaKubun.toValue(entity.getJushochiTokureiFlag()));
 

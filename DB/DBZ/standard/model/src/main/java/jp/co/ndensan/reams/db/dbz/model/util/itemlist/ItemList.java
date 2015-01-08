@@ -230,7 +230,7 @@ public final class ItemList<E> implements IItemList<E>, Serializable {
     @Override
     public IItemList<E> reversed() {
         List<E> copied = new ArrayList<>(this.elements);
-        Collections.sort(copied, (Comparator<E>) Comparators.reverseOrder());
+        Collections.reverse(copied);
         return new ItemList<>(copied);
     }
 
