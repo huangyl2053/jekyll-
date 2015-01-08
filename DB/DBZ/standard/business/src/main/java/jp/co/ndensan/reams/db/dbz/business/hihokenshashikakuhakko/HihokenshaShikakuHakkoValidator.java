@@ -18,26 +18,19 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
  */
 public class HihokenshaShikakuHakkoValidator implements IValidatable {
 
+    private final RString 交付事由;
+
     /**
      * コンストラクタです。
+     *
+     * @param 交付事由 RString
      */
-    public HihokenshaShikakuHakkoValidator() {
+    public HihokenshaShikakuHakkoValidator(RString 交付事由) {
+        this.交付事由 = 交付事由;
     }
 
     @Override
     public IValidationMessages validate() {
-        IValidationMessages messages = ValidationMessagesFactory.createInstance();
-
-        return messages;
-    }
-
-    /**
-     * 保険者証・資格者証発行のバリデーションチェックを行います。
-     *
-     * @param 交付事由 RString
-     * @return バリデーションメッセージ
-     */
-    public IValidationMessages validateIn(RString 交付事由) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
 
         if (PresenceValidator.isInvalid(交付事由)) {

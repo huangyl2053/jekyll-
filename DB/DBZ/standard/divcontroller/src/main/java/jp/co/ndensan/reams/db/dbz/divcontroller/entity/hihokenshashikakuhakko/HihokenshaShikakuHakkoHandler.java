@@ -786,8 +786,7 @@ public class HihokenshaShikakuHakkoHandler {
      */
     public ValidationMessageControlPairs validate被保険者証資格者証() {
 
-        IValidationMessages messages = new HihokenshaShikakuHakkoValidator().
-                validateIn(div.getYukoKigenInfo().getDdlKofuJiyu().getSelectedValue());
+        IValidationMessages messages = new HihokenshaShikakuHakkoValidator(div.getYukoKigenInfo().getDdlKofuJiyu().getSelectedValue()).validate();
 
         ValidationMessageControlDictionary dictionay = new ValidationMessageControlDictionary(
                 new ValidationMessageControlPair(HihokenshaShikakuHakkoValidationMessage.交付事由が未選択, div.getYukoKigenInfo().getDdlKofuJiyu())
