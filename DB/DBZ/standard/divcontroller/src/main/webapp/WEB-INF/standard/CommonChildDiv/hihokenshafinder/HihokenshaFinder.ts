@@ -8,6 +8,10 @@ module DBZ {
             constructor(fieldName: string) {
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
+
+                Uz.GyomuJSHelper.registOriginalEvent("onClick_btnKaigoSaikinShorishaHyoji", () => {
+                    (<any>this.controls.btnHihokenshaFinderHyoji()._control).fireEvent("onClick_btnHihokenshaFinderHyoji");
+                });
             }
 
             public Properties() {

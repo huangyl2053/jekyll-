@@ -18,6 +18,10 @@ module DBZ {
                 return "onClick_btnSearch";
             }
 
+            public static onClick_btnHihokenshaFinderHyoji(): string {
+                return "onClick_btnHihokenshaFinderHyoji";
+            }
+
         }
 
         export class Controls {
@@ -114,6 +118,10 @@ module DBZ {
             //public ccdSaikinShorisha(): DBZ.KaigoSaikinShorishaRireki.ModeController {
             //    return new DBZ.KaigoSaikinShorishaRireki.ModeController(this.convFiledName("ccdSaikinShorisha"));
             //}
+
+            public btnHihokenshaFinderHyoji(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnHihokenshaFinderHyoji"));
+            }
 
         }
 

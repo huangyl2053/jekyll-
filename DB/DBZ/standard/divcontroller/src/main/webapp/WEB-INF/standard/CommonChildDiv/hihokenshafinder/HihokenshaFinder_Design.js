@@ -11,6 +11,10 @@ var DBZ;
             Events.onClick_btnSearch = function () {
                 return "onClick_btnSearch";
             };
+
+            Events.onClick_btnHihokenshaFinderHyoji = function () {
+                return "onClick_btnHihokenshaFinderHyoji";
+            };
             return Events;
         })();
         HihokenshaFinder.Events = Events;
@@ -97,6 +101,10 @@ var DBZ;
 
             Controls.prototype.txtMaxNumber = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtMaxNumber"));
+            };
+
+            Controls.prototype.btnHihokenshaFinderHyoji = function () {
+                return new UZA.Button(this.convFiledName("btnHihokenshaFinderHyoji"));
             };
             return Controls;
         })();

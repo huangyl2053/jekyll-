@@ -9,6 +9,10 @@ module DBZ {
 
         export class Events {
 
+            public static onClick_btnKaigoSaikinShorishaHyoji(): string {
+                return "onClick_btnKaigoSaikinShorishaHyoji";
+            }
+
         }
 
         export class Controls {
@@ -37,6 +41,10 @@ module DBZ {
             //public wrappedSaikinShorishaRireki(): URZ.SaikinShorishaRireki.ModeController {
             //    return new URZ.SaikinShorishaRireki.ModeController(this.convFiledName("wrappedSaikinShorishaRireki"));
             //}
+
+            public btnKaigoSaikinShorishaHyoji(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnKaigoSaikinShorishaHyoji"));
+            }
 
         }
 

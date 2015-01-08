@@ -1,6 +1,8 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder;
 
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -92,7 +94,7 @@ public interface IHihokenshaFinderDiv {
      * @param 識別コード 識別コード
      * @param 名称 名称
      */
-    void save最近処理者(RString 識別コード, RString 名称);
+    void save最近処理者(ShikibetsuCode 識別コード, AtenaMeisho 名称);
 
     /**
      * 選択中の最近処理者を返します。

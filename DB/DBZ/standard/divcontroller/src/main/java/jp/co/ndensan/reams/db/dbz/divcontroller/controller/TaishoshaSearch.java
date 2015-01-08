@@ -22,11 +22,18 @@ import jp.co.ndensan.reams.db.dbz.model.TaishoshaModel;
 import jp.co.ndensan.reams.db.dbz.model.util.SearchResult;
 import jp.co.ndensan.reams.db.dbz.realservice.search.ShikakuSearchItem;
 import jp.co.ndensan.reams.db.dbz.realservice.TaishoshaFinder;
+import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.KensakuYusenKubun;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IShikibetsuTaishoGyomuHanteiKey;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ur.urz.realservice.search.FlexibleDateOperator;
 import jp.co.ndensan.reams.ur.urz.realservice.search.INewSearchCondition;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.ur.urz.realservice.search.SearchConditionFactory;
 import jp.co.ndensan.reams.ur.urz.realservice.search.StringOperator;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -39,6 +46,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @author N8156 宮本 康
  */
 public class TaishoshaSearch {
+
+    private static final ISearchCondition 条件無 = null;
+    private static final int 最近処理者検索数 = 1;
 
     /**
      * 「検索する」ボタンクリック時に呼び出される処理です。
@@ -75,8 +85,34 @@ public class TaishoshaSearch {
      */
     public ResponseData<TaishoshaSearchDiv> onSelect_dgGaitoshaList(TaishoshaSearchDiv div) {
 
-        ViewStates.access().valueAssignedTo(ViewStateKey.資格対象者, TaishoshaKey.class).put(create対象者Key(div));
+        put対象者Key(create対象者Key(div));
         save最近処理者(div);
+
+        return ResponseDatas.createSettingDataTo(div);
+    }
+
+    /**
+     * 「表示する」ボタンクリック時に呼び出される処理です。
+     *
+     * @param div TaishoshaSearchDiv
+     * @return ResponseData<TaishoshaSearchDiv>
+     */
+    public ResponseData<TaishoshaSearchDiv> onClick_btnSaikinShorishaHyoji(TaishoshaSearchDiv div) {
+
+        ShikibetsuCode 識別コード = new ShikibetsuCode(div.getSearchCondition().getCcdSearchCondition().get最近処理者());
+
+        IShikibetsuTaishoGyomuHanteiKey 業務判定キー
+                = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
+        IShikibetsuTaishoSearchKey 検索キー = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true)
+                .setShikibetsuCode(識別コード)
+                .build();
+
+        TaishoshaFinder finder = new TaishoshaFinder();
+        SearchResult 対象者 = finder.get資格対象者(条件無, 条件無, 検索キー, 最近処理者検索数);
+
+        if (!対象者.records().isEmpty()) {
+            put対象者Key(create対象者Key((TaishoshaModel) 対象者.records().findFirst()));
+        }
 
         return ResponseDatas.createSettingDataTo(div);
     }
@@ -132,9 +168,21 @@ public class TaishoshaSearch {
                 new SetaiCode(row.getSetaiCode()));
     }
 
+    private TaishoshaKey create対象者Key(TaishoshaModel model) {
+        return new TaishoshaKey(
+                model.get被保険者番号(),
+                model.get識別コード(),
+                model.get世帯コード());
+    }
+
+    private void put対象者Key(TaishoshaKey key) {
+        ViewStates.access().valueAssignedTo(ViewStateKey.資格対象者, TaishoshaKey.class).put(key);
+    }
+
     private void save最近処理者(TaishoshaSearchDiv div) {
         dgGaitoshaList_Row row = div.getGaitoshaList().getDgGaitoshaList().getClickedItem();
-        div.getSearchCondition().getCcdSearchCondition().save最近処理者(row.getShikibetsuCode(), row.getShimei());
+        div.getSearchCondition().getCcdSearchCondition().save最近処理者(
+                new ShikibetsuCode(row.getShikibetsuCode()), new AtenaMeisho(row.getShimei()));
     }
 
     private List<dgGaitoshaList_Row> toRowList(SearchResult result) {

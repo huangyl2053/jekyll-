@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder;
 
+import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
 import jp.co.ndensan.reams.ur.urz.business.IRecentUsed;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -14,7 +15,9 @@ import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IShikibetsuTaish
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ur.urz.realservice.ISaikinShorishaManager;
 import jp.co.ndensan.reams.ur.urz.realservice.RecentUsedManagerFactory;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
@@ -32,7 +35,6 @@ public class HihokenshaFinderHandler {
     private final ISaikinShorishaManager saikinShorishaManager;
 
     private static final RString みなし２号含む = new RString("含む");
-    private static final int 最大表示件数 = 100;
 
     /**
      * コンストラクタです。
@@ -62,7 +64,7 @@ public class HihokenshaFinderHandler {
      */
     RString get保険者() {
         DropDownList item = div.getKaigoFinder().getDdlHokensha();
-        return (item != null && item.isVisible()) ? item.getSelectedKey() : null;
+        return (item != null && item.isVisible()) ? item.getSelectedKey() : RString.EMPTY;
     }
 
     /**
@@ -72,7 +74,7 @@ public class HihokenshaFinderHandler {
      */
     RString get被保険者番号() {
         TextBoxCode item = div.getKaigoFinder().getTxtHihokenshaNo();
-        return (item != null && !item.getValue().trim().isEmpty()) ? item.getValue() : null;
+        return (item != null && !item.getValue().trim().isEmpty()) ? item.getValue() : RString.EMPTY;
     }
 
     /**
@@ -82,7 +84,7 @@ public class HihokenshaFinderHandler {
      */
     RString get通知書番号() {
         TextBoxCode item = div.getKaigoFinder().getTxtTuchishoNo();
-        return (item != null && !item.getValue().trim().isEmpty()) ? item.getValue() : null;
+        return (item != null && !item.getValue().trim().isEmpty()) ? item.getValue() : RString.EMPTY;
     }
 
     /**
@@ -139,7 +141,7 @@ public class HihokenshaFinderHandler {
      */
     int get最大表示件数() {
         TextBoxNum item = div.getButtonsForHihokenshaFinder().getTxtMaxNumber();
-        return (item != null && item.getValue() != null) ? item.getValue().intValue() : 最大表示件数;
+        return (item != null && item.getValue() != null) ? item.getValue().intValue() : new GaitoshaKensakuConfig().get最大取得件数();
     }
 
     /**
@@ -165,9 +167,9 @@ public class HihokenshaFinderHandler {
      * @param 識別コード 識別コード
      * @param 名称 名称
      */
-    void save最近処理者(RString 識別コード, RString 名称) {
+    void save最近処理者(ShikibetsuCode 識別コード, AtenaMeisho 名称) {
         IUrControlData controlData = UrControlDataFactory.createInstance();
-        saikinShorishaManager.save(controlData, ScopeCode.識別対象, 識別コード, 名称);
+        saikinShorishaManager.save(controlData, ScopeCode.識別対象, 識別コード.value(), 名称.value());
     }
 
     /**
@@ -177,6 +179,6 @@ public class HihokenshaFinderHandler {
      */
     RString get最近処理者() {
         IRecentUsed 最近処理者 = div.getCcdSaikinShorisha().getWrappedSaikinShorishaRireki().getRecentUsed();
-        return 最近処理者 != null ? 最近処理者.get最近処理対象コード() : null;
+        return 最近処理者 != null ? 最近処理者.get最近処理対象コード() : RString.EMPTY;
     }
 }

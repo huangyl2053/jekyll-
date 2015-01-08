@@ -4,6 +4,9 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnKaigoSaikinShorishaHyoji = function () {
+                return "onClick_btnKaigoSaikinShorishaHyoji";
+            };
             return Events;
         })();
         KaigoSaikinShorishaRireki.Events = Events;
@@ -26,6 +29,10 @@ var DBZ;
 
             Controls.prototype.KaigoSaikinShorishaRireki = function () {
                 return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnKaigoSaikinShorishaHyoji = function () {
+                return new UZA.Button(this.convFiledName("btnKaigoSaikinShorishaHyoji"));
             };
             return Controls;
         })();

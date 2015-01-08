@@ -3,8 +3,13 @@
     (function (HihokenshaFinder) {
         var ModeController = (function () {
             function ModeController(fieldName) {
+                var _this = this;
                 this.fieldName = fieldName;
                 this.controls = new HihokenshaFinder.Controls(fieldName);
+
+                Uz.GyomuJSHelper.registOriginalEvent("onClick_btnKaigoSaikinShorishaHyoji", function () {
+                    (_this.controls.btnHihokenshaFinderHyoji()._control).fireEvent("onClick_btnHihokenshaFinderHyoji");
+                });
             }
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
