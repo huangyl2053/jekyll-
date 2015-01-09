@@ -33,12 +33,16 @@ import jp.co.ndensan.reams.db.dbz.realservice.ShiharaiHohoHenkoManager;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakko;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidator;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidationMessage;
+import jp.co.ndensan.reams.db.dbz.business.hokensha.IKoikiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShiharaiHohoHenkoShuryobunKisaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShuruiShikyuGendoGet;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ContainsKyuShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.ShuryoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.util.Comparators.NullComparator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HakkoShoTypeBehaviors.IHakkoShoTypeBehavior;
+import jp.co.ndensan.reams.db.dbz.realservice.hokensha.IKoikiKoseiShichosonFinder;
+import jp.co.ndensan.reams.db.dbz.realservice.hokensha.KoikiKoseiShichosonFinderFactory;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.ur.urz.realservice.IKaigoServiceManager;
@@ -149,15 +153,17 @@ public class HihokenshaShikakuHakkoHandler {
 
     private void set保険者(HihokenshaDaichoModel 被保険者台帳) {
 
-        RString 保険者コード;
-        RString 保険者名称;
+        RString 保険者コード = RString.EMPTY;
+        RString 保険者名称 = RString.EMPTY;
         LasdecCode 広住特措置元市町村コード = 被保険者台帳.get広住特措置元市町村コード();
 
         if (!広住特措置元市町村コード.isEmpty()) {
-            // TODO N8187 久保田 IKoikiKoseiShichosonFinder(仮名)を使用して広域構成市町村情報を取得する。
-            // 広域構成市町村情報から保険者コード・保険者名称を取得する。保険者コードはget証記載保険者番号：(仮名)で取得する。保険者名称取得メソッドは未定。 2015/01/31
-            保険者コード = new RString("123456");
-            保険者名称 = new RString("広住特措置元保険者名称");
+            IKoikiKoseiShichosonFinder finder = KoikiKoseiShichosonFinderFactory.createInstance();
+            IOptional<IKoikiKoseiShichoson> koiki = finder.find構成市町村(広住特措置元市町村コード, ContainsKyuShichoson.旧市町村を含まない);
+            if (koiki.isPresent()) {
+                保険者コード = koiki.get().get証記載保険者番号().value();
+                保険者名称 = koiki.get().get市町村名();
+            }
         } else {
             HokenshaJohoConfig config = new HokenshaJohoConfig();
             保険者コード = config.get保険者情報_保険者番号();
