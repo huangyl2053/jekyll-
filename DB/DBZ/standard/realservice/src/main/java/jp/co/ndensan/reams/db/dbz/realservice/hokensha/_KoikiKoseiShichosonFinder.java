@@ -49,8 +49,7 @@ public class _KoikiKoseiShichosonFinder implements IKoikiKoseiShichosonFinder {
         );
     }
 
-    @Override
-    public KoikiKoseiShichosons find構成市町村(ISearchCondition searchCondition) {
+    private KoikiKoseiShichosons find構成市町村(ISearchCondition searchCondition) {
         return _createKoikiKoseiShichosons(this.manager.find構成市町村(searchCondition));
     }
 

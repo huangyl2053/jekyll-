@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.realservice.hokensha;
 
 /**
+ * {@link IKoikiKoseiShichosonFinder}を生成する機能を持ちます。
  *
  * @author N3327 三浦 凌
  */
@@ -15,8 +16,9 @@ public final class KoikiKoseiShichosonFinderFactory {
     }
 
     /**
+     * {@link IKoikiKoseiShichosonFinder}を生成します。
      *
-     * @return
+     * @return {@link IKoikiKoseiShichosonFinder}
      */
     public static IKoikiKoseiShichosonFinder createInstance() {
         return new _KoikiKoseiShichosonFinder(new KoseiShichosonMasterManager());
