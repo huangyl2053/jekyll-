@@ -18,9 +18,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public final class RokenShichosonNo implements IValueObject<RString>, Comparable<RokenShichosonNo>, Serializable {
 
     /**
-     * 空の{@link RokenShichosonNo}です。
+     * 空の{@link RokenShichosonNo } です。
      */
     public static final RokenShichosonNo EMPTY;
+
     /**
      * 最大長です。
      */
@@ -40,6 +41,7 @@ public final class RokenShichosonNo implements IValueObject<RString>, Comparable
      */
     public RokenShichosonNo(String value) {
         this.theValue = (value == null) ? null : new RString(value);
+
     }
 
     /**

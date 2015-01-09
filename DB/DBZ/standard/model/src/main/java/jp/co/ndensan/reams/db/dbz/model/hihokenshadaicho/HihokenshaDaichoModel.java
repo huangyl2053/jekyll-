@@ -133,11 +133,11 @@ public class HihokenshaDaichoModel implements Serializable {
     }
 
     /**
-     * 第１号資格取得年月日を返します。
+     * 第1号資格取得年月日を返します。
      *
-     * @return 第１号資格取得年月日
+     * @return 第1号資格取得年月日
      */
-    public FlexibleDate get第１号資格取得年月日() {
+    public FlexibleDate get第1号資格取得年月日() {
         return entity.getIchigoShikakuShutokuYMD();
     }
 
@@ -392,13 +392,13 @@ public class HihokenshaDaichoModel implements Serializable {
     }
 
     /**
-     * 第１号資格取得年月日を設定します。
+     * 第1号資格取得年月日を設定します。
      *
-     * @param 第１号資格取得年月日 第１号資格取得年月日
+     * @param 第1号資格取得年月日 第1号資格取得年月日
      */
-    public void set第１号資格取得年月日(FlexibleDate 第１号資格取得年月日) {
-        requireNonNull(第１号資格取得年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("第１号資格取得年月日"));
-        entity.setIchigoShikakuShutokuYMD(第１号資格取得年月日);
+    public void set第1号資格取得年月日(FlexibleDate 第1号資格取得年月日) {
+        requireNonNull(第1号資格取得年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("第1号資格取得年月日"));
+        entity.setIchigoShikakuShutokuYMD(第1号資格取得年月日);
     }
 
     /**
