@@ -28,7 +28,7 @@ public class ShuryoKubunTest {
 
         @Test
         public void toRStringは_nameをRStringへ変換した物を返す() {
-            ShuryoKubun sut = ShuryoKubun.弁明書受理;
+            ShuryoKubun sut = ShuryoKubun.終了申請書受理;
             assertThat(sut.toRString(), is(new RString(sut.name())));
         }
 
