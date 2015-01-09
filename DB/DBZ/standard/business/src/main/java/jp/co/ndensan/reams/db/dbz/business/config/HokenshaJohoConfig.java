@@ -13,13 +13,19 @@ import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.Co
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_保険者構成;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_保険者番号;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_最優先地区コード;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_電話番号;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_住所;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysHokenshaJoho.保険者情報_郵便番号;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TopPriorityArea;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.HokenshaName;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -56,6 +62,33 @@ public class HokenshaJohoConfig {
             map.put(target, businessConfig.get(target, nowDate, SubGyomuCode.DBU介護統計報告));
         }
         return Collections.unmodifiableMap(map);
+    }
+
+    /**
+     * 保険者の住所を返します。
+     *
+     * @return 保険者の住所
+     */
+    public AtenaJusho get保険者住所() {
+        return new AtenaJusho(this.configs.get(保険者情報_住所));
+    }
+
+    /**
+     * 保険者の電話番号を返します。
+     *
+     * @return 保険者の電話番号
+     */
+    public TelNo get電話番号() {
+        return new TelNo(this.configs.get(保険者情報_電話番号));
+    }
+
+    /**
+     * 保険者の郵便番号を返します。
+     *
+     * @return 保険者の郵便番号
+     */
+    public YubinNo get郵便番号() {
+        return new YubinNo(this.configs.get(保険者情報_郵便番号));
     }
 
     /**
