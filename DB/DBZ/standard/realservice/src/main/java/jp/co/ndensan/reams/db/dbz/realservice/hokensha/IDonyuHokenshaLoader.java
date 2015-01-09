@@ -48,6 +48,7 @@ public class IDonyuHokenshaLoader {
         private final HokenshaKosei hokenshaKosei;
         private final boolean isKoikiHokensha;
 
+        //TODO GunNamePrint等をConfigから取得するように修正する。
         private _DonyuHokensha() {
             this.hokenshaJoho = new HokenshaJohoConfig();
             this.hokensha = new Hokensha.Builder(ShoKisaiHokenshaNo.EMPTY)

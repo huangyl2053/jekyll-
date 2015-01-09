@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  *
  * @author N3327 三浦 凌
  */
-public final class KoseiShichosonMasterManager {
+public class KoseiShichosonMasterManager {
 
     private final KoseiShichosonMasterDac dac;
 
@@ -57,8 +57,8 @@ public final class KoseiShichosonMasterManager {
      * @param contains合併旧市町村 contains合併旧市町村
      * @return 構成市町村マスタモデル
      */
-    public IOptional<KoseiShichosonMasterModel> find構成市町村(LasdecCode code, ContainsKyuShichoson contains合併旧市町村) {
-        return dac.selectBy(code, contains合併旧市町村).findFirst();
+    public IItemList<KoseiShichosonMasterModel> find構成市町村(LasdecCode code, ContainsKyuShichoson contains合併旧市町村) {
+        return dac.selectBy(code, contains合併旧市町村);
     }
 
     /**
