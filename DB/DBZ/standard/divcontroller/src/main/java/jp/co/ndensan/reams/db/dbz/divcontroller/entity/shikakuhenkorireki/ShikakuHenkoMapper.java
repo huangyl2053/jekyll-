@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki;
 
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuHenkoJiyuHihokensha;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,7 +39,7 @@ public class ShikakuHenkoMapper {
             }
 
             private boolean hasSame資格変更事由(HihokenshaDaichoModel t) {
-                return t.get資格変更事由().getColumnValue().getKey().equals(rowValue.getHenkoJiyuKey());
+                return t.get資格変更事由().getCode().equals(rowValue.getHenkoJiyuKey());
             }
 
             private boolean hasSame資格変更年月日(HihokenshaDaichoModel t) {
@@ -87,8 +87,8 @@ public class ShikakuHenkoMapper {
 
                 row.setState(getModelStateValue(model));
                 row.setShoriDate(shoriDate);
-                row.setHenkoJiyuKey(model.get資格変更事由().getColumnValue().value());
-                row.setHenkoJiyu(model.get資格変更事由().getRyakusho());
+                row.setHenkoJiyuKey(model.get資格変更事由().getCode());
+                row.setHenkoJiyu(model.get資格変更事由().getShortName());
                 row.getHenkoDate().setValue(model.get資格変更年月日());
                 row.getHenkoTodokedeDate().setValue(model.get資格変更届出年月日());
                 //TODO　市町村構成マスタからの取得方法が未確定のため
@@ -115,12 +115,9 @@ public class ShikakuHenkoMapper {
         HihokenshaDaichoModel model = new HihokenshaDaichoModel();
         model.set資格変更年月日(div.getTxtHenkoDate().getValue());
         model.set資格変更届出年月日(div.getTxtHenkoTodokedeDate().getValue());
-        model.set資格変更事由(new KaigoshikakuHenkoJiyuHihokensha(div.getDdlHenkoJiyu().getSelectedKey()));
-        //TODO　市町村コード取得方法確定したら修正。
-        //        model.set広住特措置元市町村コード(new LasdecCode(div.getDdlHenkoSochimotoHokensha().getSelectedKey()));
-
-        model.set広住特措置元市町村コード(new LasdecCode("123546"));
-        model.set旧市町村コード(new LasdecCode("123546"));
+        model.set資格変更事由(ShikakuHenkoJiyu.toValue(div.getDdlHenkoJiyu().getSelectedKey()));
+        model.set広住特措置元市町村コード(new LasdecCode(div.getDdlHenkoSochimotoHokensha().getSelectedKey()));
+        model.set旧市町村コード(new LasdecCode(div.getDdlHenkoKyuHokensha().getSelectedKey()));
 
         return model;
     }

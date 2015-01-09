@@ -39,7 +39,7 @@ public interface IHihokenshaDaichoFinder {
      * @param 被保険者番号 被保険者番号
      * @return 被保険者台帳List
      */
-    IItemList<IHihokenshaDaicho> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号);
+    IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号);
 
     /**
      * 識別コードと市町村コードを指定して、特定の被保険者の台帳情報をListで取得します。<br/>
@@ -69,4 +69,11 @@ public interface IHihokenshaDaichoFinder {
      */
     IOptional<HihokenshaDaichoModel> find直近被保険者台帳(HihokenshaNo 被保険者番号);
 
+    /**
+     * 市町村コードを指定して、ある資格取得期間中の被保険者台帳情報をListで取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return ある資格取得期間中の被保険者台帳List
+     */
+    IItemList<HihokenshaDaichoModel> find直近被保険者台帳一覧(LasdecCode 市町村コード);
 }

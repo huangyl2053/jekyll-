@@ -177,10 +177,10 @@ public class ShikakuHenkoValidator implements IValidatable, IValidatableWithCont
             return false;
         }
         for (HihokenshaDaichoModel model : list) {
-            if (model.get住所地特例適用年月日().isEmpty() || model.get住所地特例解除年月日().isEmpty()) {
+            if (model.get適用年月日().isEmpty() || model.get解除年月日().isEmpty()) {
                 return false;
             }
-            if (OrderValidator.from(model.get住所地特例適用年月日()).afterOrEquals(変更日).after(model.get住所地特例解除年月日()).isValid()) {
+            if (OrderValidator.from(model.get適用年月日()).afterOrEquals(変更日).after(model.get解除年月日()).isValid()) {
                 return true;
             }
         }

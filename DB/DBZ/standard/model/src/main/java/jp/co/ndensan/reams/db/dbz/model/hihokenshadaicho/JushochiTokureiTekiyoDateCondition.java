@@ -32,7 +32,7 @@ public class JushochiTokureiTekiyoDateCondition implements IPredicate<Hihokensha
 
     @Override
     public boolean evaluate(HihokenshaDaichoModel targetModel) {
-        return conditionModel.get住所地特例適用年月日().equals(targetModel.get住所地特例適用年月日());
+        return conditionModel.get適用年月日().equals(targetModel.get適用年月日());
     }
 
 }

@@ -47,8 +47,10 @@ public class ShikakuHenkoRireki {
      */
     public ResponseData<ShikakuHenkoRirekiDiv> load(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
         ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
+        LasdecCode lasdecCode = new LasdecCode("123456");
 
-        handler.load(new LasdecCode("123456"), new HihokenshaNo("1234567892"));
+        handler.load(lasdecCode, new HihokenshaNo("1234567892"));
+        handler.initialize(lasdecCode);
         return createSettingData(henkoRirekiDiv);
 
     }
@@ -66,7 +68,6 @@ public class ShikakuHenkoRireki {
 
         henkoRirekiDiv.getBtnAdd().setDisabled(true);
         henkoRirekiDiv.getDgHenko().setReadOnly(true);
-        henkoRirekiDiv.clearInputData();
         henkoRirekiDiv.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
         henkoRirekiDiv.setInputMode(ViewExecutionStatus.Add.getValue());
         handler.setExecutionStatus(ViewExecutionStatus.Add);
