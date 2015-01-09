@@ -49,6 +49,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
     private List<RString> 施設名;
     private List<FlexibleDate> 施設入所日;
     private List<FlexibleDate> 施設退所日;
+    private List<RString> 入所施設コード;
     private boolean selectedテスト;
     private boolean selected直前履歴;
 
@@ -563,6 +564,24 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      */
     public void set施設退所日(List<FlexibleDate> 施設退所日) {
         this.施設退所日 = 施設退所日;
+    }
+
+    /**
+     * 入所施設コードを取得する。
+     *
+     * @return 入所施設コード
+     */
+    public List<RString> get入所施設コード() {
+        return 入所施設コード;
+    }
+
+    /**
+     * 入所施設コードを設定する。
+     *
+     * @param 入所施設コード List<RString>
+     */
+    public void set入所施設コード(List<RString> 入所施設コード) {
+        this.入所施設コード = 入所施設コード;
     }
 
     /**

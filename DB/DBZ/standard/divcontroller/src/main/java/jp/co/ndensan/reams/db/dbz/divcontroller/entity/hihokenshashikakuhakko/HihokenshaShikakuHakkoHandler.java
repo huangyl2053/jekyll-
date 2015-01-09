@@ -41,9 +41,11 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ContainsKyu
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.ShuryoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.util.Comparators.NullComparator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HakkoShoTypeBehaviors.IHakkoShoTypeBehavior;
+import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaishorireki.ShisetsuNyutaishoModel;
 import jp.co.ndensan.reams.db.dbz.realservice.hokensha.IKoikiKoseiShichosonFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.hokensha.KoikiKoseiShichosonFinderFactory;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
+import jp.co.ndensan.reams.ur.urz.divcontroller.helper.PanelSessionAccessor;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.ur.urz.realservice.IKaigoServiceManager;
 import jp.co.ndensan.reams.ur.urz.realservice.KaigoServiceManagerFactory;
@@ -499,6 +501,23 @@ public class HihokenshaShikakuHakkoHandler {
         // TODO n8187 久保田
         // DBZ_CCD_ShisetsuNyutaishoRirekiKanri-55509 で作成された
         // 施設入退所履歴取得のManager(ShisetsuNyutaishoTokureiTaishoRelateManager)を使用して施設入退所情報を取得する。
+        // 以下にHihokenshaShikakuHakkoModel用に暫定コードを記載する。 2015/01/31。
+        ArrayList<RString> 施設入退所コードList = new ArrayList<>();
+//        IItemList<ShisetsuNyutaishoModel> modelList = ItemList.of(new ArrayList<ShisetsuNyutaishoModel>());
+//        if (!modelList.isEmpty()) {
+//            for (ShisetsuNyutaishoModel model : modelList) {
+//                // 入所施設コードをモデルから取得できる想定。
+//                施設入退所コードList.add(new RString("入所施設コード"));
+//            }
+//        }
+        // 動作確認用
+        施設入退所コードList.add(new RString("入所施設コード1"));
+        施設入退所コードList.add(new RString("入所施設コード2"));
+        施設入退所コードList.add(new RString("入所施設コード3"));
+
+        PanelSessionAccessor.put(div, new RString("施設入退所コードList"), 施設入退所コードList);
+
+        // TODO n8187 久保田
         // 以下にコメントアウトしている処理は、古いShisetsuNyutaishoManagerを使用したときに考えていたロジック。
         // 施設入退所履歴取得のManagerを使用する時に削除すること。2015/01/31。
 //// 1 ShisetsuNyutaishoManager.get個人台帳別施設入退所履歴(ShikibetsuCode 個人識別コード, DaichoType 台帳種別)を使用して、履歴を取得する。
@@ -692,6 +711,7 @@ public class HihokenshaShikakuHakkoHandler {
         List<RString> 施設名 = new ArrayList<>();
         List<FlexibleDate> 施設入所日 = new ArrayList<>();
         List<FlexibleDate> 施設退所日 = new ArrayList<>();
+        List<RString> 入所施設コード = new ArrayList<>();
         施設名.add(div.getTplShisetsuNyutaisho().getTxtNyushoShisetsu1().getValue());
         施設名.add(div.getTplShisetsuNyutaisho().getTxtNyushoShisetsu2().getValue());
         施設名.add(div.getTplShisetsuNyutaisho().getTxtNyushoShisetsu3().getValue());
@@ -701,10 +721,15 @@ public class HihokenshaShikakuHakkoHandler {
         施設退所日.add(div.getTplShisetsuNyutaisho().getTxtShisetsuTaishoDate1().getValue());
         施設退所日.add(div.getTplShisetsuNyutaisho().getTxtShisetsuTaishoDate2().getValue());
         施設退所日.add(div.getTplShisetsuNyutaisho().getTxtShisetsuTaishoDate3().getValue());
+        ArrayList<RString> 施設入退所コードList = PanelSessionAccessor.get(div, new RString("施設入退所コードList"), ArrayList.class);
+        for (RString code : 施設入退所コードList) {
+            入所施設コード.add(code);
+        }
 
         model.set施設名(施設名);
         model.set施設入所日(施設入所日);
         model.set施設退所日(施設退所日);
+        model.set入所施設コード(入所施設コード);
 
         return model;
     }
