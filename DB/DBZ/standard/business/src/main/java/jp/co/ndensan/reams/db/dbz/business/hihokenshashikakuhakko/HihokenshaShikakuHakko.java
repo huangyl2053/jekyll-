@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko;
 
 import jp.co.ndensan.reams.db.dbz.business.config.HihokenshashoItakudaikoHyojiConfig;
-import jp.co.ndensan.reams.db.dbz.business.config.ShikakushashoItakudaikoHyojiConfig;
-import jp.co.ndensan.reams.db.dbz.business.config.ShikakushashoKigenConfig;
+import jp.co.ndensan.reams.db.dbz.business.config.jukyu.ShikakushashoItakudaikoHyojiConfig;
+import jp.co.ndensan.reams.db.dbz.business.config.jukyu.ShikakushashoKigenConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshashoItakudaikoHyoji;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.ShikakushashoItakudaikoHyoji;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.YukoKigenShokiHyoji;

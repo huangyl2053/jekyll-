@@ -5,146 +5,151 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbz.divcontroller.demodata.KoikiKoseiShichosonData;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.HihokenshaFinderDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaDetailDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.SearchCriteriaOfHihokenshaDiv;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.HihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.KaigoFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.KaigoFinderDetailDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaFinderDiv;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * HihokenshaFinderDivのControllerです。
  *
  * @author N3327 三浦 凌
  */
-//TODO デモ版用なのでプロダクト用に書き直す。
 public final class HihokenshaFinder {
 
-    public enum Mode {
-
-        NORMAL("1"),
-        KOIKI("2");
-        private final RString value;
-
-        private Mode(String value) {
-            this.value = new RString(value);
-        }
-
-        public RString value() {
-            return this.value;
-        }
-    }
-    private final Criterias criterias = new Criterias();
+    private static final RString 全年度 = new RString("全年度");
 
     /**
-     * onLoad
+     * 画面表示時に呼び出される処理です。
      *
      * @param div HihokenshaFinderDiv
      * @return ResponseData
      */
     public ResponseData<HihokenshaFinderDiv> onLoad(HihokenshaFinderDiv div) {
+        ResponseData<HihokenshaFinderDiv> response = new ResponseData<>();
+
         init(div);
-        setMode(Mode.NORMAL, div);
-        return _createResponseData(div);
-    }
 
-    private void init(HihokenshaFinderDiv div) {
-        init_ddlHokensha(div);
-        init_SearchCriteriaDetail(div);
-    }
-
-    private void init_ddlHokensha(HihokenshaFinderDiv div) {
-        div.getSearchCriteriaOfHihokensha().getDdlHokensha().
-                setDataSource(new KoikiKoseiShichosonData().get広域構成市町村().asKeyValueDataSources());
-    }
-
-    private void init_SearchCriteriaDetail(HihokenshaFinderDiv div) {
-        div.getSearchCriteriaOfHihokensha().getSearchCriteriaDetail().setIsOpen(false);
+        response.data = div;
+        return response;
     }
 
     /**
-     * onClick btnToClear
+     * 「条件をクリアする」ボタンクリック時に呼び出される処理です。
      *
      * @param div HihokenshaFinderDiv
      * @return ResponseData
      */
-    public ResponseData<HihokenshaFinderDiv> onClick_btnToClear(HihokenshaFinderDiv div) {
-        criterias.clearAll(div);
-        return _createResponseData(div);
-    }
-
-    /**
-     * HihokenshaFiderのモードを切り替えます。
-     *
-     * @param mode Mode
-     * @param div HihokemnshaFinderDiv
-     */
-    public static void setMode(Mode mode, HihokenshaFinderDiv div) {
-        switch (mode) {
-            case NORMAL:
-                changeToNormalMode(div);
-                break;
-            case KOIKI:
-                changeToKoinkiMode(div);
-                break;
-            default:
-                changeToNormalMode(div);
-                break;
-        }
-    }
-
-    private static void changeToNormalMode(HihokenshaFinderDiv div) {
-        div.getSearchCriteriaOfHihokensha().getDdlHokensha().setDisplayNone(true);
-    }
-
-    private static void changeToKoinkiMode(HihokenshaFinderDiv div) {
-        div.getSearchCriteriaOfHihokensha().getDdlHokensha().setDisplayNone(false);
-    }
-
-    /**
-     * 内包する編集可能なUI部品の設定値をクリアします。
-     *
-     * @param div HihokenshaFinderDiv
-     */
-    public static void clear(HihokenshaFinderDiv div) {
-        new Criterias().clearAll(div);
-    }
-
-    private static class Criterias {
-
-        private Criterias() {
-        }
-
-        private void clearAll(HihokenshaFinderDiv div) {
-            clear(div.getSearchCriteriaOfHihokensha());
-            clear(div.getSearchCriteriaOfHihokensha().getSearchCriteriaDetail());
-            clear(div.getKaigoAtenaFinder());
-        }
-
-        private void clear(SearchCriteriaOfHihokenshaDiv div) {
-            div.getDdlHokensha().setSelectedItem(RString.EMPTY);
-            div.getTxtHihokenshaNo().clearValue();
-            div.getTxtTuchishoNo().clearValue();
-            div.getDdlFukaNendo().setSelectedItem(new RString("key0"));
-        }
-
-        private void clear(SearchCriteriaDetailDiv div) {
-            div.getChkHihokensha().setSelectedItems(Collections.EMPTY_LIST);
-            div.getRadMinashiNigo().setSelectedItem(new RString("1"));
-            div.getChkMinashiNigo().setSelectedItems(Collections.EMPTY_LIST);
-        }
-
-        private void clear(IAtenaFinderDiv div) {
-//            div.getTxtAtenaMeisho().clearValue();
-//            div.getTxtSeinenGappi().clearValue();
-        }
-    }
-
-    private ResponseData<HihokenshaFinderDiv> _createResponseData(HihokenshaFinderDiv div) {
+    public ResponseData<HihokenshaFinderDiv> onClick_btnClear(HihokenshaFinderDiv div) {
         ResponseData<HihokenshaFinderDiv> response = new ResponseData<>();
+
+        clear(div);
+
         response.data = div;
         return response;
+    }
+
+    private void init(HihokenshaFinderDiv div) {
+        if (div.getMode_表示モード() == HihokenshaFinderDiv.表示モード.賦課系) {
+            init賦課年度(div);
+        }
+        div.load最近処理者();
+    }
+
+    private void init賦課年度(HihokenshaFinderDiv div) {
+
+        FlexibleYear 開始年度;
+        FlexibleYear 終了年度;
+
+        HizukeConfig config = new HizukeConfig();
+        FukaSearchMenu menu = FukaSearchMenu.toValue(UrControlDataFactory.createInstance().getMenuID());
+        if (menu.is(FukaSearchMenuGroup.更新系)) {
+            開始年度 = config.get調定年度();
+            終了年度 = config.get調定年度();
+        } else if (menu.is(FukaSearchMenuGroup.所得入力系)) {
+            開始年度 = config.get所得年度();
+            終了年度 = config.get当初年度();
+        } else if (menu.is(FukaSearchMenuGroup.即時更正系)) {
+            開始年度 = config.get調定年度();
+            終了年度 = config.get遡及年度();
+        } else {
+            開始年度 = config.get調定年度();
+            終了年度 = config.get当初年度();
+        }
+
+        List<KeyValueDataSource> 賦課年度List = create賦課年度List(開始年度, 終了年度);
+
+        if (menu.is(FukaSearchMenuGroup.賦課照会系)) {
+            賦課年度List.add(0, new KeyValueDataSource(FlexibleYear.MAX.toDateString(), 全年度));
+        }
+
+        div.getKaigoFinder().getDdlFukaNendo().setDataSource(賦課年度List);
+    }
+
+    private List<KeyValueDataSource> create賦課年度List(FlexibleYear 開始年度, FlexibleYear 終了年度) {
+
+        int start;
+        int end;
+
+        if (開始年度 == null && 終了年度 == null) {
+            return Collections.EMPTY_LIST;
+        } else if (開始年度 == null) {
+            start = 終了年度.getYearValue();
+            end = start;
+        } else if (終了年度 == null) {
+            start = 開始年度.getYearValue();
+            end = start;
+        } else {
+            start = 開始年度.getYearValue();
+            end = 終了年度.getYearValue();
+            if (終了年度.isBefore(開始年度)) {
+                start = 終了年度.getYearValue();
+                end = 開始年度.getYearValue();
+            }
+        }
+
+        List<KeyValueDataSource> 賦課年度List = new ArrayList<>();
+        for (int year = start; year <= end; year++) {
+            FlexibleYear 賦課年度 = new FlexibleYear(Integer.toString(year));
+            賦課年度List.add(new KeyValueDataSource(賦課年度.toDateString(), 賦課年度.wareki().toDateString()));
+        }
+
+        return 賦課年度List;
+    }
+
+    private void clear(HihokenshaFinderDiv div) {
+        clear介護条件(div.getKaigoFinder());
+        clear宛名条件(div.getCcdAtenaFinder());
+    }
+
+    private void clear介護条件(KaigoFinderDiv div) {
+        div.getDdlHokensha().setSelectedItem(RString.EMPTY);
+        div.getTxtHihokenshaNo().clearValue();
+        div.getTxtTuchishoNo().clearValue();
+        div.getDdlFukaNendo().setSelectedItem(new RString("key0"));
+        clear介護詳細条件(div.getKaigoFinderDetail());
+    }
+
+    private void clear介護詳細条件(KaigoFinderDetailDiv div) {
+        div.getChkHihokenshaDaicho().setSelectedItems(Collections.EMPTY_LIST);
+        div.getChkJukyushaDaicho().setSelectedItems(Collections.EMPTY_LIST);
+        div.getChkJushochiTokureisha().setSelectedItems(Collections.EMPTY_LIST);
+        div.getRadMinashiNigo().setSelectedItem(new RString("1"));
+        div.getChkMinashiNigo().setSelectedItems(Collections.EMPTY_LIST);
+    }
+
+    private void clear宛名条件(IAtenaFinderDiv div) {
+        div.clear();
     }
 }

@@ -92,9 +92,9 @@ public class HihokenshaDaichoFinderBaseTest {
 
             IOptional<HihokenshaDaichoModel> 被保険者台帳モデル = DbOptional.of(createModel());
 
-            when(dac.select直近被保険者台帳(any(HihokenshaNo.class))).thenReturn(被保険者台帳モデル);
+            when(dac.select最新被保険者台帳(any(HihokenshaNo.class))).thenReturn(被保険者台帳モデル);
 
-            IOptional<HihokenshaDaichoModel> 被保険者台帳 = sut.find直近被保険者台帳(
+            IOptional<HihokenshaDaichoModel> 被保険者台帳 = sut.find最新被保険者台帳(
                     DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号);
 
             // 任意の項目が一致するテストケースを記述してください。

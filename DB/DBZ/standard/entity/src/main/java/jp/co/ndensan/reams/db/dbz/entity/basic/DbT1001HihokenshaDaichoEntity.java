@@ -1,18 +1,18 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
 
 /**
  * DbT1001HihokenshaDaichoの項目定義クラスです
@@ -20,6 +20,7 @@ import java.util.Objects;
  */
 public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001HihokenshaDaichoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1001HihokenshaDaicho");
 
@@ -65,6 +66,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getInsertDantaiCd
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -73,6 +75,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setInsertDantaiCd
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -81,6 +84,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getIsDeleted
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -89,15 +93,16 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setIsDeleted
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * setLastUpdateReamsLoginId
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -106,6 +111,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getShichosonCode
+     *
      * @return shichosonCode
      */
     public LasdecCode getShichosonCode() {
@@ -114,6 +120,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setShichosonCode
+     *
      * @param shichosonCode shichosonCode
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -122,6 +129,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getHihokenshaNo
+     *
      * @return hihokenshaNo
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -130,6 +138,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setHihokenshaNo
+     *
      * @param hihokenshaNo hihokenshaNo
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
@@ -138,6 +147,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getShoriTimestamp
+     *
      * @return shoriTimestamp
      */
     public YMDHMS getShoriTimestamp() {
@@ -146,6 +156,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setShoriTimestamp
+     *
      * @param shoriTimestamp shoriTimestamp
      */
     public void setShoriTimestamp(YMDHMS shoriTimestamp) {
@@ -154,6 +165,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getShikibetsuCode
+     *
      * @return shikibetsuCode
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -162,6 +174,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setShikibetsuCode
+     *
      * @param shikibetsuCode shikibetsuCode
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -170,6 +183,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getShikakuShutokuJiyuCode
+     *
      * @return shikakuShutokuJiyuCode
      */
     public RString getShikakuShutokuJiyuCode() {
@@ -178,6 +192,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setShikakuShutokuJiyuCode
+     *
      * @param shikakuShutokuJiyuCode shikakuShutokuJiyuCode
      */
     public void setShikakuShutokuJiyuCode(RString shikakuShutokuJiyuCode) {
@@ -186,6 +201,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getShikakuShutokuYMD
+     *
      * @return shikakuShutokuYMD
      */
     public FlexibleDate getShikakuShutokuYMD() {
@@ -194,6 +210,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setShikakuShutokuYMD
+     *
      * @param shikakuShutokuYMD shikakuShutokuYMD
      */
     public void setShikakuShutokuYMD(FlexibleDate shikakuShutokuYMD) {
@@ -202,6 +219,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getShikakuShutokuTodokedeYMD
+     *
      * @return shikakuShutokuTodokedeYMD
      */
     public FlexibleDate getShikakuShutokuTodokedeYMD() {
@@ -210,6 +228,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setShikakuShutokuTodokedeYMD
+     *
      * @param shikakuShutokuTodokedeYMD shikakuShutokuTodokedeYMD
      */
     public void setShikakuShutokuTodokedeYMD(FlexibleDate shikakuShutokuTodokedeYMD) {
@@ -218,6 +237,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getIchigoShikakuShutokuYMD
+     *
      * @return ichigoShikakuShutokuYMD
      */
     public FlexibleDate getIchigoShikakuShutokuYMD() {
@@ -226,6 +246,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setIchigoShikakuShutokuYMD
+     *
      * @param ichigoShikakuShutokuYMD ichigoShikakuShutokuYMD
      */
     public void setIchigoShikakuShutokuYMD(FlexibleDate ichigoShikakuShutokuYMD) {
@@ -234,6 +255,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getHihokennshaKubunCode
+     *
      * @return hihokennshaKubunCode
      */
     public RString getHihokennshaKubunCode() {
@@ -242,6 +264,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setHihokennshaKubunCode
+     *
      * @param hihokennshaKubunCode hihokennshaKubunCode
      */
     public void setHihokennshaKubunCode(RString hihokennshaKubunCode) {
@@ -250,6 +273,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getShikakuSoshitsuJiyuCode
+     *
      * @return shikakuSoshitsuJiyuCode
      */
     public RString getShikakuSoshitsuJiyuCode() {
@@ -258,6 +282,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setShikakuSoshitsuJiyuCode
+     *
      * @param shikakuSoshitsuJiyuCode shikakuSoshitsuJiyuCode
      */
     public void setShikakuSoshitsuJiyuCode(RString shikakuSoshitsuJiyuCode) {
@@ -266,6 +291,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getShikakuSoshitsuYMD
+     *
      * @return shikakuSoshitsuYMD
      */
     public FlexibleDate getShikakuSoshitsuYMD() {
@@ -274,6 +300,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setShikakuSoshitsuYMD
+     *
      * @param shikakuSoshitsuYMD shikakuSoshitsuYMD
      */
     public void setShikakuSoshitsuYMD(FlexibleDate shikakuSoshitsuYMD) {
@@ -282,6 +309,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getShikakuSoshitsuTodokedeYMD
+     *
      * @return shikakuSoshitsuTodokedeYMD
      */
     public FlexibleDate getShikakuSoshitsuTodokedeYMD() {
@@ -290,6 +318,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setShikakuSoshitsuTodokedeYMD
+     *
      * @param shikakuSoshitsuTodokedeYMD shikakuSoshitsuTodokedeYMD
      */
     public void setShikakuSoshitsuTodokedeYMD(FlexibleDate shikakuSoshitsuTodokedeYMD) {
@@ -298,6 +327,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getJushochiTokureiFlag
+     *
      * @return jushochiTokureiFlag
      */
     public RString getJushochiTokureiFlag() {
@@ -306,6 +336,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setJushochiTokureiFlag
+     *
      * @param jushochiTokureiFlag jushochiTokureiFlag
      */
     public void setJushochiTokureiFlag(RString jushochiTokureiFlag) {
@@ -314,6 +345,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getShikakuHenkoJiyuCode
+     *
      * @return shikakuHenkoJiyuCode
      */
     public RString getShikakuHenkoJiyuCode() {
@@ -322,6 +354,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setShikakuHenkoJiyuCode
+     *
      * @param shikakuHenkoJiyuCode shikakuHenkoJiyuCode
      */
     public void setShikakuHenkoJiyuCode(RString shikakuHenkoJiyuCode) {
@@ -330,6 +363,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getShikakuHenkoYMD
+     *
      * @return shikakuHenkoYMD
      */
     public FlexibleDate getShikakuHenkoYMD() {
@@ -338,6 +372,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setShikakuHenkoYMD
+     *
      * @param shikakuHenkoYMD shikakuHenkoYMD
      */
     public void setShikakuHenkoYMD(FlexibleDate shikakuHenkoYMD) {
@@ -346,6 +381,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getShikakuHenkoTodokedeYMD
+     *
      * @return shikakuHenkoTodokedeYMD
      */
     public FlexibleDate getShikakuHenkoTodokedeYMD() {
@@ -354,6 +390,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setShikakuHenkoTodokedeYMD
+     *
      * @param shikakuHenkoTodokedeYMD shikakuHenkoTodokedeYMD
      */
     public void setShikakuHenkoTodokedeYMD(FlexibleDate shikakuHenkoTodokedeYMD) {
@@ -362,6 +399,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getJushochitokureiTekiyoJiyuCode
+     *
      * @return jushochitokureiTekiyoJiyuCode
      */
     public RString getJushochitokureiTekiyoJiyuCode() {
@@ -370,6 +408,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setJushochitokureiTekiyoJiyuCode
+     *
      * @param jushochitokureiTekiyoJiyuCode jushochitokureiTekiyoJiyuCode
      */
     public void setJushochitokureiTekiyoJiyuCode(RString jushochitokureiTekiyoJiyuCode) {
@@ -378,6 +417,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getJushochitokureiTekiyoYMD
+     *
      * @return jushochitokureiTekiyoYMD
      */
     public FlexibleDate getJushochitokureiTekiyoYMD() {
@@ -386,6 +426,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setJushochitokureiTekiyoYMD
+     *
      * @param jushochitokureiTekiyoYMD jushochitokureiTekiyoYMD
      */
     public void setJushochitokureiTekiyoYMD(FlexibleDate jushochitokureiTekiyoYMD) {
@@ -394,6 +435,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getJushochitokureiTekiyoTodokedeYMD
+     *
      * @return jushochitokureiTekiyoTodokedeYMD
      */
     public FlexibleDate getJushochitokureiTekiyoTodokedeYMD() {
@@ -402,6 +444,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setJushochitokureiTekiyoTodokedeYMD
+     *
      * @param jushochitokureiTekiyoTodokedeYMD jushochitokureiTekiyoTodokedeYMD
      */
     public void setJushochitokureiTekiyoTodokedeYMD(FlexibleDate jushochitokureiTekiyoTodokedeYMD) {
@@ -410,6 +453,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getJushochitokureiKaijoJiyuCode
+     *
      * @return jushochitokureiKaijoJiyuCode
      */
     public RString getJushochitokureiKaijoJiyuCode() {
@@ -418,6 +462,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setJushochitokureiKaijoJiyuCode
+     *
      * @param jushochitokureiKaijoJiyuCode jushochitokureiKaijoJiyuCode
      */
     public void setJushochitokureiKaijoJiyuCode(RString jushochitokureiKaijoJiyuCode) {
@@ -426,6 +471,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getJushochitokureiKaijoYMD
+     *
      * @return jushochitokureiKaijoYMD
      */
     public FlexibleDate getJushochitokureiKaijoYMD() {
@@ -434,6 +480,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setJushochitokureiKaijoYMD
+     *
      * @param jushochitokureiKaijoYMD jushochitokureiKaijoYMD
      */
     public void setJushochitokureiKaijoYMD(FlexibleDate jushochitokureiKaijoYMD) {
@@ -442,6 +489,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getJushochitokureiKaijoTodokedeYMD
+     *
      * @return jushochitokureiKaijoTodokedeYMD
      */
     public FlexibleDate getJushochitokureiKaijoTodokedeYMD() {
@@ -450,6 +498,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setJushochitokureiKaijoTodokedeYMD
+     *
      * @param jushochitokureiKaijoTodokedeYMD jushochitokureiKaijoTodokedeYMD
      */
     public void setJushochitokureiKaijoTodokedeYMD(FlexibleDate jushochitokureiKaijoTodokedeYMD) {
@@ -458,6 +507,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getKoikinaiJushochiTokureiFlag
+     *
      * @return koikinaiJushochiTokureiFlag
      */
     public RString getKoikinaiJushochiTokureiFlag() {
@@ -466,6 +516,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setKoikinaiJushochiTokureiFlag
+     *
      * @param koikinaiJushochiTokureiFlag koikinaiJushochiTokureiFlag
      */
     public void setKoikinaiJushochiTokureiFlag(RString koikinaiJushochiTokureiFlag) {
@@ -474,6 +525,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getKoikinaiTokureiSochimotoShichosonCode
+     *
      * @return koikinaiTokureiSochimotoShichosonCode
      */
     public LasdecCode getKoikinaiTokureiSochimotoShichosonCode() {
@@ -482,6 +534,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setKoikinaiTokureiSochimotoShichosonCode
+     *
      * @param koikinaiTokureiSochimotoShichosonCode koikinaiTokureiSochimotoShichosonCode
      */
     public void setKoikinaiTokureiSochimotoShichosonCode(LasdecCode koikinaiTokureiSochimotoShichosonCode) {
@@ -490,6 +543,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getKyuShichosonCode
+     *
      * @return kyuShichosonCode
      */
     public LasdecCode getKyuShichosonCode() {
@@ -498,6 +552,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setKyuShichosonCode
+     *
      * @param kyuShichosonCode kyuShichosonCode
      */
     public void setKyuShichosonCode(LasdecCode kyuShichosonCode) {
@@ -506,6 +561,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getSaikofuKubun
+     *
      * @return saikofuKubun
      */
     public RString getSaikofuKubun() {
@@ -514,6 +570,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setSaikofuKubun
+     *
      * @param saikofuKubun saikofuKubun
      */
     public void setSaikofuKubun(RString saikofuKubun) {
@@ -522,6 +579,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getSaikofuJiyuCode
+     *
      * @return saikofuJiyuCode
      */
     public RString getSaikofuJiyuCode() {
@@ -530,6 +588,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setSaikofuJiyuCode
+     *
      * @param saikofuJiyuCode saikofuJiyuCode
      */
     public void setSaikofuJiyuCode(RString saikofuJiyuCode) {
@@ -538,6 +597,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * getChohyoKofuRirekiID
+     *
      * @return chohyoKofuRirekiID
      */
     public RString getChohyoKofuRirekiID() {
@@ -546,6 +606,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * setChohyoKofuRirekiID
+     *
      * @param chohyoKofuRirekiID chohyoKofuRirekiID
      */
     public void setChohyoKofuRirekiID(RString chohyoKofuRirekiID) {
@@ -554,10 +615,9 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * このエンティティの主キーが他の{@literal DbT1001HihokenshaDaichoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT1001HihokenshaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT1001HihokenshaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT1001HihokenshaDaichoEntity other) {
@@ -613,6 +673,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -621,8 +682,4 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
     }
 
 // </editor-fold>
-
-
-
-
 }

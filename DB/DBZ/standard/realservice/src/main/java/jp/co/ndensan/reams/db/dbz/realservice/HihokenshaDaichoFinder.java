@@ -65,7 +65,7 @@ public class HihokenshaDaichoFinder implements IHihokenshaDaichoFinder {
 
     @Override
     public IOptional<HihokenshaDaichoModel> find直近被保険者台帳(HihokenshaNo 被保険者番号) {
-        return finder.find直近被保険者台帳(被保険者番号);
+        return finder.find最新被保険者台帳(被保険者番号);
     }
 
 }

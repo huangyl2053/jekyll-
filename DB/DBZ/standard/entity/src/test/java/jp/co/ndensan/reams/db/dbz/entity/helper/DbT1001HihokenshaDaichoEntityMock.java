@@ -31,8 +31,7 @@ import static org.mockito.Mockito.*;
 public final class DbT1001HihokenshaDaichoEntityMock {
 
     /**
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の
-     * {@link org.mockito.Mockito#spy(java.lang.Object)  スパイインスタンス}を返します。
+     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の {@link org.mockito.Mockito#spy(java.lang.Object)  スパイインスタンス}を返します。
      *
      * @return DbT1001HihokenshaDaichoEntityのスパイ
      */

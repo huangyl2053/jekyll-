@@ -18,8 +18,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 /**
  * {@link ShiharaiHohoHenkoConfig}のテストです。
@@ -29,7 +28,7 @@ import static org.mockito.Mockito.mock;
 @RunWith(Enclosed.class)
 public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
 
-    public static class get {
+    public static class get extends DbzTestBase {
 
         private ShiharaiHohoHenkoConfig sut;
 
@@ -47,7 +46,7 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
         @Test
         public void 支払方法変更_証表示支払方法_記載文言を指定したとき_業務コンフィグ設定値が返る() {
             RString result = sut.get支払方法変更_証表示支払方法_記載文言();
-            assertThat(result, is(new RString("支払方法変更ＭＡＸ１２３")));
+            assertThat(result, is(証表示支払方法_記載文言));
         }
 
         @Test
@@ -59,7 +58,7 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
         @Test
         public void 支払方法変更_証表示差止_記載文言を指定したとき_業務コンフィグ設定値が返る() {
             RString result = sut.get支払方法変更_証表示差止_記載文言();
-            assertThat(result, is(new RString("保険給付の差止Ｍ１Ａ２Ｘ")));
+            assertThat(result, is(証表示差止_記載文言));
         }
 
         @Test
@@ -71,7 +70,7 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
         @Test
         public void 支払方法変更_証表示減額_記載文言を指定したとき_業務コンフィグ設定値が返る() {
             RString result = sut.get支払方法変更_証表示減額_記載文言();
-            assertThat(result, is(new RString("給付額　減額Ｍ１Ａ２Ｘ３")));
+            assertThat(result, is(証表示減額_記載文言));
         }
 
         @Test
@@ -83,7 +82,7 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
         @Test
         public void 支払方法変更_資格者証表示支払方法_記載文言を指定したとき_業務コンフィグ設定値が返る() {
             RString result = sut.get支払方法変更_資格者証表示支払方法_記載文言();
-            assertThat(result, is(new RString("支払方法変更")));
+            assertThat(result, is(資格者証表示支払方法_記載文言));
         }
 
         @Test
@@ -95,7 +94,7 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
         @Test
         public void 支払方法変更_資格者証表示差止_記載文言を指定したとき_業務コンフィグ設定値が返る() {
             RString result = sut.get支払方法変更_資格者証表示差止_記載文言();
-            assertThat(result, is(new RString("保険給付の差止")));
+            assertThat(result, is(資格者証表示差止_記載文言));
         }
 
         @Test
@@ -107,75 +106,101 @@ public class ShiharaiHohoHenkoConfigTest extends DbzTestBase {
         @Test
         public void 支払方法変更_資格者証表示減額_記載文言を指定したとき_業務コンフィグ設定値が返る() {
             RString result = sut.get支払方法変更_資格者証表示減額_記載文言();
-            assertThat(result, is(new RString("給付額減額・高額費不支給")));
+            assertThat(result, is(資格者証表示減額_記載文言));
         }
 
     }
 
+    private static final ShiharaiHohoHenkoShuryobunKisaiKubun 証表示支払方法_終了分記載区分;
+    private static final RString 証表示支払方法_記載文言;
+    private static final ShiharaiHohoHenkoShuryobunKisaiKubun 証表示差止_終了分記載区分;
+    private static final RString 証表示差止_記載文言;
+    private static final ShiharaiHohoHenkoShuryobunKisaiKubun 証表示減額_終了分記載区分;
+    private static final RString 証表示減額_記載文言;
+    private static final ShiharaiHohoHenkoShuryobunKisaiKubun 資格者証表示支払方法_終了分記載区分;
+    private static final RString 資格者証表示支払方法_記載文言;
+    private static final ShiharaiHohoHenkoShuryobunKisaiKubun 資格者証表示差止_終了分記載区分;
+    private static final RString 資格者証表示差止_記載文言;
+    private static final ShiharaiHohoHenkoShuryobunKisaiKubun 資格者証表示減額_終了分記載区分;
+    private static final RString 資格者証表示減額_記載文言;
+
+    static {
+        証表示支払方法_終了分記載区分 = ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する;
+        証表示支払方法_記載文言 = new RString("支払方法変更ＭＡＸ１２３");
+        証表示差止_終了分記載区分 = ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する;
+        証表示差止_記載文言 = new RString("保険給付の差止Ｍ１Ａ２Ｘ");
+        証表示減額_終了分記載区分 = ShiharaiHohoHenkoShuryobunKisaiKubun.終了後は記載しない;
+        証表示減額_記載文言 = new RString("給付額　減額Ｍ１Ａ２Ｘ３");
+        資格者証表示支払方法_終了分記載区分 = ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する;
+        資格者証表示支払方法_記載文言 = new RString("支払方法変更");
+        資格者証表示差止_終了分記載区分 = ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する;
+        資格者証表示差止_記載文言 = new RString("保険給付の差止");
+        資格者証表示減額_終了分記載区分 = ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する;
+        資格者証表示減額_記載文言 = new RString("給付額減額・高額費不支給");
+    }
+
     private static IUrBusinessConfig createBusinessConfigMock() {
         IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
-        RDate nowDate = RDate.getNowDate();
-
         when(mock.get(
-                ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_終了分記載区分,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する.code());
+                eq(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_終了分記載区分),
+                any(RDate.class),
+                eq(SubGyomuCode.DBD介護受給)
+        )).thenReturn(証表示支払方法_終了分記載区分.code());
         when(mock.get(
-                ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("支払方法変更ＭＡＸ１２３"));
+                eq(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示支払方法_記載文言),
+                any(RDate.class),
+                eq(SubGyomuCode.DBD介護受給)
+        )).thenReturn(証表示支払方法_記載文言);
         when(mock.get(
-                ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_終了分記載区分,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する.code());
+                eq(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_終了分記載区分),
+                any(RDate.class),
+                eq(SubGyomuCode.DBD介護受給)
+        )).thenReturn(証表示差止_終了分記載区分.code());
         when(mock.get(
-                ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("保険給付の差止Ｍ１Ａ２Ｘ"));
+                eq(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示差止_記載文言),
+                any(RDate.class),
+                eq(SubGyomuCode.DBD介護受給)
+        )).thenReturn(証表示差止_記載文言);
         when(mock.get(
-                ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_終了分記載区分,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後は記載しない.code());
+                eq(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_終了分記載区分),
+                any(RDate.class),
+                eq(SubGyomuCode.DBD介護受給)
+        )).thenReturn(証表示減額_終了分記載区分.code());
         when(mock.get(
-                ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("給付額　減額Ｍ１Ａ２Ｘ３"));
+                eq(ConfigKeysShiharaiHohoHenko.支払方法変更_証表示減額_記載文言),
+                any(RDate.class),
+                eq(SubGyomuCode.DBD介護受給)
+        )).thenReturn(証表示減額_記載文言);
         when(mock.get(
-                ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_終了分記載区分,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する.code());
+                eq(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_終了分記載区分),
+                any(RDate.class),
+                eq(SubGyomuCode.DBD介護受給)
+        )).thenReturn(資格者証表示支払方法_終了分記載区分.code());
         when(mock.get(
-                ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("支払方法変更"));
+                eq(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示支払方法_記載文言),
+                any(RDate.class),
+                eq(SubGyomuCode.DBD介護受給)
+        )).thenReturn(資格者証表示支払方法_記載文言);
         when(mock.get(
-                ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_終了分記載区分,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する.code());
+                eq(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_終了分記載区分),
+                any(RDate.class),
+                eq(SubGyomuCode.DBD介護受給)
+        )).thenReturn(資格者証表示差止_終了分記載区分.code());
         when(mock.get(
-                ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("保険給付の差止"));
+                eq(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示差止_記載文言),
+                any(RDate.class),
+                eq(SubGyomuCode.DBD介護受給)
+        )).thenReturn(資格者証表示差止_記載文言);
         when(mock.get(
-                ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_終了分記載区分,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する.code());
+                eq(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_終了分記載区分),
+                any(RDate.class),
+                eq(SubGyomuCode.DBD介護受給)
+        )).thenReturn(資格者証表示減額_終了分記載区分.code());
         when(mock.get(
-                ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言,
-                nowDate,
-                SubGyomuCode.DBD介護受給
-        )).thenReturn(new RString("給付額減額・高額費不支給"));
+                eq(ConfigKeysShiharaiHohoHenko.支払方法変更_資格者証表示減額_記載文言),
+                any(RDate.class),
+                eq(SubGyomuCode.DBD介護受給)
+        )).thenReturn(資格者証表示減額_記載文言);
         return mock;
     }
 }

@@ -23,29 +23,29 @@ public final class DbT1001HihokenshaDaichoEntityGenerator {
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("0000000001");
     public static final YMDHMS DEFAULT_処理日時 = new YMDHMS(new RString("20140415102030"));
     public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("000001234567890");
-    public static final RString DEFAULT_資格取得事由コード = new RString("1");
+    public static final RString DEFAULT_資格取得事由コード = new RString("01");
     public static final FlexibleDate DEFAULT_資格取得年月日 = new FlexibleDate("20140402");
     public static final FlexibleDate DEFAULT_資格取得届出年月日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_第一号資格取得年月日 = new FlexibleDate("20140402");
+    public static final FlexibleDate DEFAULT_第1号資格取得年月日 = new FlexibleDate("20140402");
     public static final RString DEFAULT_被保険者区分コード = new RString("1");
-    public static final RString DEFAULT_資格喪失事由コード = new RString("1");
+    public static final RString DEFAULT_資格喪失事由コード = new RString("51");
     public static final FlexibleDate DEFAULT_資格喪失年月日 = new FlexibleDate("20140402");
     public static final FlexibleDate DEFAULT_資格喪失届出年月日 = new FlexibleDate("20140402");
     public static final RString DEFAULT_住所地特例フラグ = new RString("1");
-    public static final RString DEFAULT_資格変更事由コード = new RString("1");
+    public static final RString DEFAULT_資格変更事由コード = new RString("00");
     public static final FlexibleDate DEFAULT_資格変更年月日 = new FlexibleDate("20140402");
     public static final FlexibleDate DEFAULT_資格変更届出年月日 = new FlexibleDate("20140402");
-    public static final RString DEFAULT_住所地特例適用事由コード = new RString("1");
+    public static final RString DEFAULT_住所地特例適用事由コード = new RString("05");
     public static final FlexibleDate DEFAULT_適用年月日 = new FlexibleDate("20140402");
     public static final FlexibleDate DEFAULT_適用届出年月日 = new FlexibleDate("20140402");
-    public static final RString DEFAULT_住所地特例解除事由コード = new RString("1");
+    public static final RString DEFAULT_住所地特例解除事由コード = new RString("54");
     public static final FlexibleDate DEFAULT_解除年月日 = new FlexibleDate("20140402");
     public static final FlexibleDate DEFAULT_解除届出年月日 = new FlexibleDate("20140402");
     public static final RString DEFAULT_広域内住所地特例フラグ = new RString("1");
     public static final LasdecCode DEFAULT_広住特措置元市町村コード = new LasdecCode("202011");
     public static final LasdecCode DEFAULT_旧市町村コード = new LasdecCode("202011");
     public static final RString DEFAULT_再交付区分 = new RString("1");
-    public static final RString DEFAULT_再交付事由コード = new RString("1");
+    public static final RString DEFAULT_再交付事由コード = new RString("00");
     public static final RString DEFAULT_帳票交付履歴ID = new RString("1");
 
     /**
@@ -63,7 +63,7 @@ public final class DbT1001HihokenshaDaichoEntityGenerator {
         entity.setShikakuShutokuJiyuCode(DEFAULT_資格取得事由コード);
         entity.setShikakuShutokuYMD(DEFAULT_資格取得年月日);
         entity.setShikakuShutokuTodokedeYMD(DEFAULT_資格取得届出年月日);
-        entity.setIchigoShikakuShutokuYMD(DEFAULT_第一号資格取得年月日);
+        entity.setIchigoShikakuShutokuYMD(DEFAULT_第1号資格取得年月日);
         entity.setHihokennshaKubunCode(DEFAULT_被保険者区分コード);
         entity.setShikakuSoshitsuJiyuCode(DEFAULT_資格喪失事由コード);
         entity.setShikakuSoshitsuYMD(DEFAULT_資格喪失年月日);

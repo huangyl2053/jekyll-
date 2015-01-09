@@ -117,13 +117,13 @@ public class HihokenshaDaichoFinderBase<T extends HihokenshaDaichoModel> {
     }
 
     /**
-     * 被保険者番号を指定して、該当する直近の被保険者台帳を取得します。
+     * 被保険者番号を指定して、該当する最新の被保険者台帳を取得します。
      *
      * @param 被保険者番号 被保険者番号
      * @return 被保険者台帳
      */
-    public IOptional<HihokenshaDaichoModel> find直近被保険者台帳(HihokenshaNo 被保険者番号) {
-        return dac.select直近被保険者台帳(被保険者番号);
+    public IOptional<HihokenshaDaichoModel> find最新被保険者台帳(HihokenshaNo 被保険者番号) {
+        return dac.select最新被保険者台帳(被保険者番号);
     }
 
 }
