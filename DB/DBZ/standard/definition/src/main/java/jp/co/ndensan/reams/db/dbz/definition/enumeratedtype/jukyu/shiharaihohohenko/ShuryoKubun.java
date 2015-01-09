@@ -41,7 +41,16 @@ public enum ShuryoKubun {
     /**
      * その他です。コード："99"
      */
-    その他("99");
+    その他("99"),
+    /**
+     * コードがnullの時の{@link ShuryoKubun}です。
+     */
+    EMPTY("") {
+                @Override
+                public RString toRString() {
+                    return RString.EMPTY;
+                }
+            };
 
     private final RString theCode;
 

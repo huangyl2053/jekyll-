@@ -31,6 +31,13 @@ public class ShuryoKubunTest {
             ShuryoKubun sut = ShuryoKubun.弁明書受理;
             assertThat(sut.toRString(), is(new RString(sut.name())));
         }
+
+        @Test
+        public void toRStringは_EMPTYの時_RStringEMPTYを返す() {
+            ShuryoKubun sut = ShuryoKubun.EMPTY;
+            assertThat(sut.toRString(), is(RString.EMPTY));
+        }
+
     }
 
     public static class toValue extends DbzTestBase {

@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -27,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -58,6 +58,25 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
         return DbOptional.ofNullable(createModel(被保険者台帳Dac.selectByKey(市町村コード, 被保険者番号, 処理日時)));
+    }
+
+    /**
+     * 被保険者台帳を全件返します。
+     *
+     * @return IItemList<HihokenshaDaichoModel>
+     */
+    @Transaction
+    public IItemList<HihokenshaDaichoModel> selectAll() {
+
+        List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = 被保険者台帳Dac.selectAll();
+        List<HihokenshaDaichoModel> list = new ArrayList<>();
+
+        for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
+            list.add(createModel(被保険者台帳));
+        }
+        IItemList<HihokenshaDaichoModel> 台帳リスト = ItemList.of(list);
+
+        return 台帳リスト;
     }
 
     /**
@@ -105,6 +124,27 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
         List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(eq(DbT1001HihokenshaDaicho.shichosonCode, 市町村コード), eq(DbT1001HihokenshaDaicho.shikibetsuCode, 識別コード))).
+                order(by(DbT1001HihokenshaDaicho.shoriTimestamp, Order.DESC)).
+                toList(DbT1001HihokenshaDaichoEntity.class);
+
+        return DbOptional.ofNullable(!被保険者台帳List.isEmpty() ? createModel(被保険者台帳List.get(0)) : null);
+    }
+
+    /**
+     * 条件に合致する最新被保険者台帳を１件返します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return IOptional<HihokenshaDaichoModel>
+     */
+    @Transaction
+    public IOptional<HihokenshaDaichoModel> select最新被保険者台帳(HihokenshaNo 被保険者番号) {
+
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(eq(DbT1001HihokenshaDaicho.hihokenshaNo, 被保険者番号)).
                 order(by(DbT1001HihokenshaDaicho.shoriTimestamp, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
 
