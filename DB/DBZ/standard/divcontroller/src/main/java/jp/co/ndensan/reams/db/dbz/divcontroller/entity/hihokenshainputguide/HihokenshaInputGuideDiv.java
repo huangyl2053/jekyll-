@@ -1,19 +1,20 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshainputguide;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshainputguide.dgSearchResultOfHihokensha_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.HihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.HihokenshaFinderDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * HihokenshaInputGuide のクラスファイル
- *
+ * HihokenshaInputGuide のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class HihokenshaInputGuideDiv extends Panel {
@@ -23,7 +24,6 @@ public class HihokenshaInputGuideDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("HihokenshaFinder")
     private HihokenshaFinderDiv HihokenshaFinder;
     @JsonProperty("lblSearchResultOfHihokensha")
@@ -50,7 +50,7 @@ public class HihokenshaInputGuideDiv extends Panel {
 
     @JsonProperty("HihokenshaFinder")
     public void setHihokenshaFinder(HihokenshaFinderDiv HihokenshaFinder) {
-        this.HihokenshaFinder = HihokenshaFinder;
+        this.HihokenshaFinder=HihokenshaFinder;
     }
 
     @JsonProperty("lblSearchResultOfHihokensha")
@@ -60,7 +60,7 @@ public class HihokenshaInputGuideDiv extends Panel {
 
     @JsonProperty("lblSearchResultOfHihokensha")
     public void setLblSearchResultOfHihokensha(Label lblSearchResultOfHihokensha) {
-        this.lblSearchResultOfHihokensha = lblSearchResultOfHihokensha;
+        this.lblSearchResultOfHihokensha=lblSearchResultOfHihokensha;
     }
 
     @JsonProperty("dgSearchResultOfHihokensha")
@@ -70,7 +70,7 @@ public class HihokenshaInputGuideDiv extends Panel {
 
     @JsonProperty("dgSearchResultOfHihokensha")
     public void setDgSearchResultOfHihokensha(DataGrid<dgSearchResultOfHihokensha_Row> dgSearchResultOfHihokensha) {
-        this.dgSearchResultOfHihokensha = dgSearchResultOfHihokensha;
+        this.dgSearchResultOfHihokensha=dgSearchResultOfHihokensha;
     }
 
     @JsonProperty("btnReturn")
@@ -80,7 +80,7 @@ public class HihokenshaInputGuideDiv extends Panel {
 
     @JsonProperty("btnReturn")
     public void setBtnReturn(Button btnReturn) {
-        this.btnReturn = btnReturn;
+        this.btnReturn=btnReturn;
     }
 
     @JsonProperty("hihokenshaNo")
@@ -90,7 +90,7 @@ public class HihokenshaInputGuideDiv extends Panel {
 
     @JsonProperty("hihokenshaNo")
     public void setHihokenshaNo(RString hihokenshaNo) {
-        this.hihokenshaNo = hihokenshaNo;
+        this.hihokenshaNo=hihokenshaNo;
     }
 
     @JsonProperty("hihokenshaMeisho")
@@ -100,7 +100,7 @@ public class HihokenshaInputGuideDiv extends Panel {
 
     @JsonProperty("hihokenshaMeisho")
     public void setHihokenshaMeisho(RString hihokenshaMeisho) {
-        this.hihokenshaMeisho = hihokenshaMeisho;
+        this.hihokenshaMeisho=hihokenshaMeisho;
     }
 
 }

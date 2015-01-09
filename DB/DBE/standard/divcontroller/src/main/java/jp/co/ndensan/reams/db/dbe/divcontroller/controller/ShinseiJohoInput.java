@@ -528,20 +528,20 @@ public class ShinseiJohoInput {
         }
 
         private void _init(dgSearchResult_Row hihokensha) {
-//            YokaigoninteiShinseishaData.LatestNinteiResult latestResult
-//                    = new YokaigoninteiShinseishaData().get前回認定結果(hihokensha.getHihokenshaNo());
-//            _setUp(latestResult.yokaigodo().toRString(), latestResult.ninteiDate(),
-//                    latestResult.yukoKikan().getFrom(), latestResult.yukoKikan().getTo());
-//            if (FlexibleDate.EMPTY.equals(latestResult.ninteiDate())) {
-//                setDisplayNone(true);
-//                this.shiseijiKubun.setSelectedItem(YokaigoNinteiShinseiKubun.新規申請.getCode());
-//                setDisplayNone_buttons_toCopyLatest(true);
-//            } else {
-//                setDisplayNone(false);
-//                this.shiseijiKubun.setSelectedItem(YokaigoNinteiShinseiKubun.更新申請.getCode());
-//                HihokenshaShujii.setLatestValue(shujii, hihokensha.getHihokenshaNo());
-//                setDisplayNone_buttons_toCopyLatest(false);
-//            }
+            YokaigoninteiShinseishaData.LatestNinteiResult latestResult
+                    = new YokaigoninteiShinseishaData().get前回認定結果(hihokensha.getHihokenshaNo());
+            _setUp(latestResult.yokaigodo().toRString(), latestResult.ninteiDate(),
+                    latestResult.yukoKikan().getFrom(), latestResult.yukoKikan().getTo());
+            if (FlexibleDate.EMPTY.equals(latestResult.ninteiDate())) {
+                setDisplayNone(true);
+                this.shiseijiKubun.setSelectedItem(YokaigoNinteiShinseiKubun.新規申請.getCode());
+                setDisplayNone_buttons_toCopyLatest(true);
+            } else {
+                setDisplayNone(false);
+                this.shiseijiKubun.setSelectedItem(YokaigoNinteiShinseiKubun.更新申請.getCode());
+                HihokenshaShujii.setLatestValue(shujii, hihokensha.getHihokenshaNo());
+                setDisplayNone_buttons_toCopyLatest(false);
+            }
         }
 
         private void setDisplayNone_buttons_toCopyLatest(boolean displayNone) {
@@ -599,11 +599,11 @@ public class ShinseiJohoInput {
         }
 
         public static void setLatestValue(HihokenshaShujiiDiv shujii, RString hihokenshaNo) {
-//            Doctor doctor = new YokaigoninteiShinseishaData().get前回主治医(hihokenshaNo);
-//            shujii.getTxtIryokikanCode().setValue(doctor.iryoKikan().code());
-//            shujii.getTxtIryokikanName().setValue(doctor.iryoKikan().name());
-//            shujii.getTxtShujiiCode().setValue(doctor.code());
-//            shujii.getTxtShujiiName().setValue(doctor.name());
+            Doctor doctor = new YokaigoninteiShinseishaData().get前回主治医(hihokenshaNo);
+            shujii.getTxtIryokikanCode().setValue(doctor.iryoKikan().code());
+            shujii.getTxtIryokikanName().setValue(doctor.iryoKikan().name());
+            shujii.getTxtShujiiCode().setValue(doctor.code());
+            shujii.getTxtShujiiName().setValue(doctor.name());
         }
 
         @Override
@@ -642,8 +642,8 @@ public class ShinseiJohoInput {
          * @param hihokensha dgSearchResult_Row
          */
         public void onClick_btnToCopyLatestItakusaki(dgSearchResult_Row hihokensha) {
-//            Chosain chosain = new YokaigoninteiShinseishaData().get前回調査員(hihokensha.getHihokenshaNo());
-//            _setUpChosaItankusai(chosain.itakusaki().code(), chosain.itakusaki().name());
+            Chosain chosain = new YokaigoninteiShinseishaData().get前回調査員(hihokensha.getHihokenshaNo());
+            _setUpChosaItankusai(chosain.itakusaki().code(), chosain.itakusaki().name());
         }
 
         private void _setUpChosaItankusai(RString chosaItakusakiCode, RString chosaItakusakiName) {
@@ -658,8 +658,8 @@ public class ShinseiJohoInput {
          * @param hihokensha dgSearchResult_Row
          */
         public void onClick_btnToCopyLatestNinteichosain(dgSearchResult_Row hihokensha) {
-//            Chosain chosain = new YokaigoninteiShinseishaData().get前回調査員(hihokensha.getHihokenshaNo());
-//            _setUpChosain(chosain.code(), chosain.name());
+            Chosain chosain = new YokaigoninteiShinseishaData().get前回調査員(hihokensha.getHihokenshaNo());
+            _setUpChosain(chosain.code(), chosain.name());
         }
 
         private void _setUpChosain(RString ninteichosainCode, RString ninteichosainName) {

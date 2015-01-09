@@ -1,16 +1,17 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0120000;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.HihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.HihokenshaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.SearchResultOfHihokenshaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KyotakuJikoRiyohyoSearch のクラスファイル
- *
+ * KyotakuJikoRiyohyoSearch のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class KyotakuJikoRiyohyoSearchDiv extends Panel {
@@ -20,7 +21,6 @@ public class KyotakuJikoRiyohyoSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("KyotakuJikoRiyohyoHihokenshaFinder")
     private HihokenshaFinderDiv KyotakuJikoRiyohyoHihokenshaFinder;
     @JsonProperty("KyotakuJikoRiyohyoHihokenshaList")
@@ -39,7 +39,7 @@ public class KyotakuJikoRiyohyoSearchDiv extends Panel {
 
     @JsonProperty("KyotakuJikoRiyohyoHihokenshaFinder")
     public void setKyotakuJikoRiyohyoHihokenshaFinder(HihokenshaFinderDiv KyotakuJikoRiyohyoHihokenshaFinder) {
-        this.KyotakuJikoRiyohyoHihokenshaFinder = KyotakuJikoRiyohyoHihokenshaFinder;
+        this.KyotakuJikoRiyohyoHihokenshaFinder=KyotakuJikoRiyohyoHihokenshaFinder;
     }
 
     @JsonProperty("KyotakuJikoRiyohyoHihokenshaList")
@@ -49,7 +49,7 @@ public class KyotakuJikoRiyohyoSearchDiv extends Panel {
 
     @JsonProperty("KyotakuJikoRiyohyoHihokenshaList")
     public void setKyotakuJikoRiyohyoHihokenshaList(SearchResultOfHihokenshaDiv KyotakuJikoRiyohyoHihokenshaList) {
-        this.KyotakuJikoRiyohyoHihokenshaList = KyotakuJikoRiyohyoHihokenshaList;
+        this.KyotakuJikoRiyohyoHihokenshaList=KyotakuJikoRiyohyoHihokenshaList;
     }
 
 }

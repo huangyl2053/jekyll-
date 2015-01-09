@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.dgNinteiRireki_Row;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.HihokenshaForSearchResult;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IHihokenshaForSearchResult;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.HihokenshaForSearchResult;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IHihokenshaForSearchResult;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil;
@@ -39,52 +39,53 @@ public class JukyushaData {
      *
      * @return 全受給者
      */
-//    public IDemoData<IHihokenshaForSearchResult> getAll() {
-//        List<HashMap> dataFromYaml = YamlLoader.DBD.loadAsList(new RString("Jukyusha/Ichiran.yml"));
-//        return new DemoData<>(dataFromYaml, new YamlUtil.Converter.IConverter<IHihokenshaForSearchResult>() {
-//            @Override
-//            public IHihokenshaForSearchResult exec(Map map) {
-//                return toHihokenshaForSearchResult(map);
-//            }
-//
-//            private IHihokenshaForSearchResult toHihokenshaForSearchResult(Map map) {
-//                ControlGenerator cg = new ControlGenerator(map);
-//                return new HihokenshaForSearchResult(
-//                        new HihokenshaNo(cg.getAsRString("被保番号")),
-//                        new ShikibetsuCode(cg.getAsRString("識別コード")),
-//                        cg.getAsRString("被保険者区分"),
-//                        cg.getAsRString("氏名"),
-//                        cg.getAsRString("カナ氏名"),
-//                        toGender(cg.getAsRString("性別")),
-//                        cg.getAsRDate("生年月日"),
-//                        cg.getAsYubinNo("郵便番号"),
-//                        new AtenaJusho(cg.getAsRString("住所")),
-//                        cg.getAsRString("個人番号"),
-//                        toJuminShubetsu(cg.getAsRString("住民種別")),
-//                        new SetaiCode(cg.getAsRString("世帯コード"))
-//                );
-//            }
-//
-//            private Gender toGender(RString rstr) {
-//                for (Gender gender : Gender.values()) {
-//                    if (gender.getCode().equals(rstr) || gender.getCommonName().equals(rstr)
-//                            || gender.getName().equals(GenderName.toValue(rstr))) {
-//                        return gender;
-//                    }
-//                }
-//                return Gender.OTHER;
-//            }
-//
-//            private JuminShubetsu toJuminShubetsu(RString rstr) {
-//                for (JuminShubetsu juminShubetsu : JuminShubetsu.values()) {
-//                    if (juminShubetsu.getCode().equals(rstr) || juminShubetsu.toRString().equals(rstr)) {
-//                        return juminShubetsu;
-//                    }
-//                }
-//                return JuminShubetsu.日本人;
-//            }
-//        });
-//    }
+    public IDemoData<IHihokenshaForSearchResult> getAll() {
+        List<HashMap> dataFromYaml = YamlLoader.DBD.loadAsList(new RString("Jukyusha/Ichiran.yml"));
+        return new DemoData<>(dataFromYaml, new YamlUtil.Converter.IConverter<IHihokenshaForSearchResult>() {
+            @Override
+            public IHihokenshaForSearchResult exec(Map map) {
+                return toHihokenshaForSearchResult(map);
+            }
+
+            private IHihokenshaForSearchResult toHihokenshaForSearchResult(Map map) {
+                ControlGenerator cg = new ControlGenerator(map);
+                return new HihokenshaForSearchResult(
+                        new HihokenshaNo(cg.getAsRString("被保番号")),
+                        new ShikibetsuCode(cg.getAsRString("識別コード")),
+                        cg.getAsRString("被保険者区分"),
+                        cg.getAsRString("氏名"),
+                        cg.getAsRString("カナ氏名"),
+                        toGender(cg.getAsRString("性別")),
+                        cg.getAsRDate("生年月日"),
+                        cg.getAsYubinNo("郵便番号"),
+                        new AtenaJusho(cg.getAsRString("住所")),
+                        cg.getAsRString("個人番号"),
+                        toJuminShubetsu(cg.getAsRString("住民種別")),
+                        new SetaiCode(cg.getAsRString("世帯コード"))
+                );
+            }
+
+            private Gender toGender(RString rstr) {
+                for (Gender gender : Gender.values()) {
+                    if (gender.getCode().equals(rstr) || gender.getCommonName().equals(rstr)
+                            || gender.getName().equals(GenderName.toValue(rstr))) {
+                        return gender;
+                    }
+                }
+                return Gender.OTHER;
+            }
+
+            private JuminShubetsu toJuminShubetsu(RString rstr) {
+                for (JuminShubetsu juminShubetsu : JuminShubetsu.values()) {
+                    if (juminShubetsu.getCode().equals(rstr) || juminShubetsu.toRString().equals(rstr)) {
+                        return juminShubetsu;
+                    }
+                }
+                return JuminShubetsu.日本人;
+            }
+        });
+    }
+
     /**
      * ある受給者の履歴を取得します。
      *

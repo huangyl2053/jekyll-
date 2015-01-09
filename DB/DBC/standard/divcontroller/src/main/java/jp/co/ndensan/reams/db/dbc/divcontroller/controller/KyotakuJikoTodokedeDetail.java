@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.KyotakuJikoTod
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.KyotakuJikoTodokedeshaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.dgKyotakuJikoTodokedeRirekiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.tplKyotakuJikoTodokedeDetailRirekiDiv;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuKirokuKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyolist.dgShoKaishuJokyo_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
@@ -78,7 +78,7 @@ public class KyotakuJikoTodokedeDetail {
         ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
         int rowId = 0;
         KyotakuJikoTodokedeKihonDiv div = panel.getKyotakuJikoTodokedeKihon();
-//        KaigoShikakuKihon.setData(div.getKyotakuJikoTodokedeKihonAtena(), div.getKyotakuJikoTodokedeKaigoKihon(), 識別コード, rowId);
+        KaigoShikakuKihon.setData(div.getKyotakuJikoTodokedeKihonAtena(), div.getKyotakuJikoTodokedeKaigoKihon(), 識別コード, rowId);
     }
 
     private void setRirekiList(KyotakuJikoTodokedeDetailDiv panel) {

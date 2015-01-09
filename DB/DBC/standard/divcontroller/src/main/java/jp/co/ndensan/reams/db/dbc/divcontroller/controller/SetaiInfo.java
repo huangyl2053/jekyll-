@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0030011.SetaiInfoDiv;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.SetaiShotokuIchiran.dgSetaiShotoku_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 世帯情報
- *
  * @author n8223
  */
 public class SetaiInfo {
@@ -35,25 +34,26 @@ public class SetaiInfo {
 
     public ResponseData<SetaiInfoDiv> onClick_btnShowSeteiJoho(SetaiInfoDiv panel) {
         ResponseData<SetaiInfoDiv> response = new ResponseData<>();
-
+                
         //2014.07.04 朴　宛名・介護基本 対応
         ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000019");
 
         int rowId = 0;
-//        KaigoShikakuKihon.setData(panel.getCommonKaigAtenChildDiv1(),
-//                panel.getCommonKaigoShiChildDiv2(), 識別コード, rowId);
+        KaigoShikakuKihon.setData(panel.getCommonKaigAtenChildDiv1(),
+                panel.getCommonKaigoShiChildDiv2(), 識別コード, rowId);
 
+        
         RString mode = new RString("onClick");
         loadSetaiinShotoku(panel, mode);
-
+        
         List<HashMap> other = YamlLoader.DBC.loadAsList(OTHER);
         ControlGenerator cg = new ControlGenerator(other.get(0));
-
+        
         panel.getSetaiinShotoku().getTxtSetaiIchiranKijunYMD().setValue(cg.getAsRDate("基準日"));
-        // panel.getSetaiinShotoku().getTxtSetaiIchiranKazeiNendo().setValue(new RString((String)other.get(0).get("賦課年度")));
-        //2014/.07.07 世帯コード15桁に
+       // panel.getSetaiinShotoku().getTxtSetaiIchiranKazeiNendo().setValue(new RString((String)other.get(0).get("賦課年度")));
+       //2014/.07.07 世帯コード15桁に
         panel.getSetaiinShotoku().getTxtSetaiIchiranSetaiCode().setValue(cg.getAsRString("世帯コード"));
-        // panel.getSetaiinShotoku().getTxtSetaiIchiranSetaiCode().setValue(new RString("1234567890"));
+       // panel.getSetaiinShotoku().getTxtSetaiIchiranSetaiCode().setValue(new RString("1234567890"));
         response.data = panel;
         return response;
 
@@ -112,7 +112,7 @@ public class SetaiInfo {
         buf.append(dataGrid.get(1).toString());
         row.setTxtKetsugo01(new RString(buf.toString()));
         row.setTxtShimei((RString) dataGrid.get(3));
-
+        
         //2014.07.07 個人番号
         row.setTxtHihokenshaNo((RString) dataGrid.get(1));
 
@@ -205,6 +205,7 @@ public class SetaiInfo {
         yamlDatalist.add(cg.getAsRString("異動事由"));
         yamlDatalist.add(cg.getAsRString("同月ｻｰﾋﾞｽ"));
 
+
         return yamlDatalist;
     }
 
@@ -240,14 +241,14 @@ public class SetaiInfo {
     }
 
     //再表示ボタン　2014.07.04
-    public ResponseData<SetaiInfoDiv> onClick_Saihyoji(SetaiInfoDiv panel) {
+    public  ResponseData<SetaiInfoDiv> onClick_Saihyoji(SetaiInfoDiv panel) {
         ResponseData<SetaiInfoDiv> response = new ResponseData<>();
-
-        RString mode = new RString("onClick");
-
+        
+        RString mode = new RString("onClick");  
+        
         panel.getSetaiinShotoku().getDgSetaiShotoku().getDataSource().clear();
-        loadSetaiinShotoku(panel, mode);
-
+        loadSetaiinShotoku(panel, mode);        
+        
         response.data = panel;
         return response;
 
@@ -297,8 +298,8 @@ public class SetaiInfo {
 
         return mode;
     }
-
-    /**
+    
+        /**
      * int をカンマ付で String に変換
      *
      * @param intData
@@ -319,5 +320,7 @@ public class SetaiInfo {
     private boolean intChecker(List checkData) {
         return checkData.get(0).getClass().getName().equals("java.lang.Integer");
     }
-
+    
+    
+    
 }

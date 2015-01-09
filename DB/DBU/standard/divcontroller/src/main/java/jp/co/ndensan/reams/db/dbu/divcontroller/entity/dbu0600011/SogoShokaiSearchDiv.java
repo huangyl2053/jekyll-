@@ -1,16 +1,17 @@
 package jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0600011;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.HihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.HihokenshaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.SearchResultOfHihokenshaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * SogoShokaiSearch のクラスファイル
- *
+ * SogoShokaiSearch のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class SogoShokaiSearchDiv extends Panel {
@@ -20,7 +21,6 @@ public class SogoShokaiSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("SogoShokaiSearchInfo")
     private HihokenshaFinderDiv SogoShokaiSearchInfo;
     @JsonProperty("SogoShokaiGaitoshaListInfo")
@@ -39,7 +39,7 @@ public class SogoShokaiSearchDiv extends Panel {
 
     @JsonProperty("SogoShokaiSearchInfo")
     public void setSogoShokaiSearchInfo(HihokenshaFinderDiv SogoShokaiSearchInfo) {
-        this.SogoShokaiSearchInfo = SogoShokaiSearchInfo;
+        this.SogoShokaiSearchInfo=SogoShokaiSearchInfo;
     }
 
     @JsonProperty("SogoShokaiGaitoshaListInfo")
@@ -49,7 +49,7 @@ public class SogoShokaiSearchDiv extends Panel {
 
     @JsonProperty("SogoShokaiGaitoshaListInfo")
     public void setSogoShokaiGaitoshaListInfo(SearchResultOfHihokenshaDiv SogoShokaiGaitoshaListInfo) {
-        this.SogoShokaiGaitoshaListInfo = SogoShokaiGaitoshaListInfo;
+        this.SogoShokaiGaitoshaListInfo=SogoShokaiGaitoshaListInfo;
     }
 
 }

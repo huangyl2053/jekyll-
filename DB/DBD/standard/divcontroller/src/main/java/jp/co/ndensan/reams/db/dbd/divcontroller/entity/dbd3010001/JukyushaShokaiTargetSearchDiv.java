@@ -1,16 +1,17 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.HihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshaFinder.HihokenshaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.SearchResultOfHihokenshaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * JukyushaShokaiTargetSearch のクラスファイル
- *
+ * JukyushaShokaiTargetSearch のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class JukyushaShokaiTargetSearchDiv extends Panel {
@@ -20,7 +21,6 @@ public class JukyushaShokaiTargetSearchDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("searchCriteria")
     private HihokenshaFinderDiv searchCriteria;
     @JsonProperty("searchResult")
@@ -39,7 +39,7 @@ public class JukyushaShokaiTargetSearchDiv extends Panel {
 
     @JsonProperty("searchCriteria")
     public void setSearchCriteria(HihokenshaFinderDiv searchCriteria) {
-        this.searchCriteria = searchCriteria;
+        this.searchCriteria=searchCriteria;
     }
 
     @JsonProperty("searchResult")
@@ -49,7 +49,7 @@ public class JukyushaShokaiTargetSearchDiv extends Panel {
 
     @JsonProperty("searchResult")
     public void setSearchResult(SearchResultOfHihokenshaDiv searchResult) {
-        this.searchResult = searchResult;
+        this.searchResult=searchResult;
     }
 
 }

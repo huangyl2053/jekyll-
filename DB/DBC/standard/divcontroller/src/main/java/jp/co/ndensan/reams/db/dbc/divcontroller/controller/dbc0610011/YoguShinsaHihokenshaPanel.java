@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinsaHihokenshaPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.YoguShinsaHihokenshaPanelDiv;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -37,7 +37,7 @@ public class YoguShinsaHihokenshaPanel {
 
         ShikibetsuCode 識別コード = new ShikibetsuCode(targetSource.getAsRString("識別コード"));
         int rowId = 0;
-//        KaigoShikakuKihon.setData(panel.getKaigoAtenaInfo(), panel.getKaigoShikakuKihon(), 識別コード, rowId);
+        KaigoShikakuKihon.setData(panel.getKaigoAtenaInfo(), panel.getKaigoShikakuKihon(), 識別コード, rowId);
         response.data = panel;
         return response;
     }

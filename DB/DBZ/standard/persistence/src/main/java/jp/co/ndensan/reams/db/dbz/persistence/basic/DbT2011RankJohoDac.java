@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2011RankJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT2011RankJoho.*;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
@@ -40,7 +40,7 @@ public class DbT2011RankJohoDac implements IModifiable<DbT2011RankJohoEntity> {
      */
     @Transaction
     public DbT2011RankJohoEntity selectByKey(
-            FlexibleYear 賦課年度,
+            FukaNendo 賦課年度,
             RankKubun ランク区分) throws NullPointerException {
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(ランク区分, UrSystemErrorMessages.値がnull.getReplacedMessage("ランク区分"));
@@ -50,7 +50,7 @@ public class DbT2011RankJohoDac implements IModifiable<DbT2011RankJohoEntity> {
         return accessor.select().
                 table(DbT2011RankJoho.class).
                 where(and(
-                                eq(fukaNendo, 賦課年度),
+                                eq(fukaNendo, 賦課年度.value()),
                                 eq(rankKubun, ランク区分))).
                 toObject(DbT2011RankJohoEntity.class);
     }

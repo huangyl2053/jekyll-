@@ -33,11 +33,11 @@ public class SearchHihokensha {
     public ResponseData<SearchHihokenshaDiv> onLoad(SearchHihokenshaDiv panel) {
         ResponseData<SearchHihokenshaDiv> response = new ResponseData<>();
 
-//        panel.getSearchConditionOfHihokensha().getSearchCriteriaOfHihokensha().setIsOpen(false);
+        panel.getSearchConditionOfHihokensha().getSearchCriteriaOfHihokensha().setIsOpen(false);
         List<HashMap> ymlData = ymlData();
 
         String hihokenshaNo = ymlData.get(0).get("hihokenshaNo").toString();
-//        panel.getSearchConditionOfHihokensha().getSearchCriteriaOfHihokensha().getTxtHihokenshaNo().setValue(new RString(hihokenshaNo));
+        panel.getSearchConditionOfHihokensha().getSearchCriteriaOfHihokensha().getTxtHihokenshaNo().setValue(new RString(hihokenshaNo));
 
         response.data = panel;
         return response;

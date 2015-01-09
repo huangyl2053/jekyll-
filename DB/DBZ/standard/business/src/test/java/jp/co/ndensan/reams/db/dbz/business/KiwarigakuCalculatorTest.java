@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbz.business;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbz.model.ChoteiKyotsuModel;
-import jp.co.ndensan.reams.db.dbz.model.KibetsuModel;
-import jp.co.ndensan.reams.db.dbz.model.KiwarigakuMeisai;
-import jp.co.ndensan.reams.db.dbz.model.relate.KibetsuChoteiKyotsuModel;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbz.model.fuka.ChoteiKyotsuModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.KiwarigakuMeisai;
+import jp.co.ndensan.reams.db.dbz.model.relate.fuka.KibetsuChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import org.junit.experimental.runners.Enclosed;

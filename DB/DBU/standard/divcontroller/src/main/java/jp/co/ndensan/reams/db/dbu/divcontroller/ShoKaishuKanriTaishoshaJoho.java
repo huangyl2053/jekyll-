@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller;
 import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.SearchShoKaishuKanriDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0500011.ShoKaishuKanriTaishoshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoshikakukihon.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
@@ -44,7 +44,7 @@ public class ShoKaishuKanriTaishoshaJoho {
         //宛名照会 識別コード設定
 //        AtenaShokaiSimple.setData(taishoshaJohoDiv.getShoKaishuKanriTaishoshaCommonJoho().getAtenaInfo(),
 //                new ShikibetsuCode(generator.getAsRString("識別番号")));
-//
+//        
         setTaishoshaDbData(taishoshaJohoDiv.getCcdKaigoShikakuKihon(), generator, searchDiv);
 
 //        List<HashMap> yamlDataList = YamlLoader.DBU.loadAsList(HIHOKENSHA_DATA);
@@ -78,9 +78,9 @@ public class ShoKaishuKanriTaishoshaJoho {
             SearchShoKaishuKanriDiv searchDiv) {
 
         shikakuKihonJoho.getTxtHihokenshaNo().setValue(searchDiv.getTxtSearchHihokenshaNo().getValue());
-        shikakuKihonJoho.getTxtShutokuYmd().setValue(generator.getAsFlexibleDate("資格取得日"));
+        shikakuKihonJoho.getTxtShutokuYmd().setValue(generator.getAsRDate("資格取得日"));
         shikakuKihonJoho.getTxtShutokuJiyu().setValue(generator.getAsRString("取得事由"));
-        shikakuKihonJoho.getTxtSoshitsuYmd().setValue(generator.getAsFlexibleDate("資格喪失日"));
+        shikakuKihonJoho.getTxtSoshitsuYmd().setValue(generator.getAsRDate("資格喪失日"));
         shikakuKihonJoho.getTxtSoshitsuJiyu().setValue(generator.getAsRString("喪失事由"));
         shikakuKihonJoho.getTxtJutokuKubun().setValue(generator.getAsRString("住特区分"));
         shikakuKihonJoho.getTxtYokaigoJotaiKubun().setValue(generator.getAsRString("要介護度"));

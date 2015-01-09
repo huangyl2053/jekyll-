@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1400011.KagoMoshitatePanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1400011.KyufuJissekiGaitoshaListPanelDiv;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -53,8 +53,8 @@ public class KagoMoshitatePanel {
 
         ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000019");
         int rowId = 0;
-//        KaigoShikakuKihon.setData(panel.getCommonKaigpAtenainfoChildDiv1(),
-//                panel.getCommonKaigoshikakuKihonChildDiv2(), 識別コード, rowId);
+        KaigoShikakuKihon.setData(panel.getCommonKaigpAtenainfoChildDiv1(),
+                panel.getCommonKaigoshikakuKihonChildDiv2(), 識別コード, rowId);
     }
 
     /**

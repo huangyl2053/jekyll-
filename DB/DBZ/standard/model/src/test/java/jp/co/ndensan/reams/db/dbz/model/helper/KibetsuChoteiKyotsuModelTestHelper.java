@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbz.model.helper;
 
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2003KibetsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.UrT0705ChoteiKyotsuEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.KibetsuModel;
-import jp.co.ndensan.reams.db.dbz.model.ChoteiKyotsuModel;
-import jp.co.ndensan.reams.db.dbz.model.relate.KibetsuChoteiKyotsuModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.ChoteiKyotsuModel;
+import jp.co.ndensan.reams.db.dbz.model.relate.fuka.KibetsuChoteiKyotsuModel;
 
 /**
  * KibetsuChoteiKyotsuModelのテストデータ作成クラスです。

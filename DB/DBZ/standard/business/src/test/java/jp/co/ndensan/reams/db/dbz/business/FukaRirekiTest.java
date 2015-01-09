@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbz.business;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.model.FukaModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -51,11 +53,11 @@ public class FukaRirekiTest {
         @Test
         public void 賦課履歴明細がある時_getグループ化賦課履歴は_賦課年度の降順_調定年度の降順_通知書番号の降順でソートする() {
             sut = new FukaRireki(createFukaModelList());
-            assertThat(sut.getグループ化賦課履歴().toList().get(0).get賦課年度(), is(new FlexibleYear("2001")));
-            assertThat(sut.getグループ化賦課履歴().toList().get(0).get調定年度(), is(new FlexibleYear("2002")));
+            assertThat(sut.getグループ化賦課履歴().toList().get(0).get賦課年度().value(), is(new FlexibleYear("2001")));
+            assertThat(sut.getグループ化賦課履歴().toList().get(0).get調定年度().value(), is(new FlexibleYear("2002")));
             assertThat(sut.getグループ化賦課履歴().toList().get(0).get通知書番号(), is(new TsuchishoNo("0000000003")));
-            assertThat(sut.getグループ化賦課履歴().toList().get(3).get賦課年度(), is(new FlexibleYear("2000")));
-            assertThat(sut.getグループ化賦課履歴().toList().get(3).get調定年度(), is(new FlexibleYear("2000")));
+            assertThat(sut.getグループ化賦課履歴().toList().get(3).get賦課年度().value(), is(new FlexibleYear("2000")));
+            assertThat(sut.getグループ化賦課履歴().toList().get(3).get調定年度().value(), is(new FlexibleYear("2000")));
             assertThat(sut.getグループ化賦課履歴().toList().get(3).get通知書番号(), is(new TsuchishoNo("0000000000")));
         }
     }
@@ -74,13 +76,13 @@ public class FukaRirekiTest {
         @Test
         public void 条件に該当する賦課履歴明細がある時_get賦課履歴は_該当の賦課履歴明細を返す() {
             sut = new FukaRireki(createFukaModelList());
-            assertThat(sut.get賦課履歴(new FlexibleYear("2001"), new FlexibleYear("2002"), new TsuchishoNo("0000000003")).size(), is(2));
+            assertThat(sut.get賦課履歴(new FukaNendo("2001"), new ChoteiNendo("2002"), new TsuchishoNo("0000000003")).size(), is(2));
         }
 
         @Test
         public void 条件に該当する賦課履歴明細がない時_get賦課履歴は_emptyを返す() {
             sut = new FukaRireki(createFukaModelList());
-            assertThat(sut.get賦課履歴(FlexibleYear.MAX, FlexibleYear.MIN, TsuchishoNo.EMPTY).isEmpty(), is(true));
+            assertThat(sut.get賦課履歴(FukaNendo.EMPTY, ChoteiNendo.EMPTY, TsuchishoNo.EMPTY).isEmpty(), is(true));
         }
     }
 
@@ -99,8 +101,8 @@ public class FukaRirekiTest {
 
     private static FukaModel createFukaModel(String 賦課年度, String 調定年度, String 通知書番号, int 処理日時差分) {
         FukaModel mock = mock(FukaModel.class);
-        when(mock.get賦課年度()).thenReturn(new FlexibleYear(賦課年度));
-        when(mock.get調定年度()).thenReturn(new FlexibleYear(調定年度));
+        when(mock.get賦課年度()).thenReturn(new FukaNendo(賦課年度));
+        when(mock.get調定年度()).thenReturn(new ChoteiNendo(調定年度));
         when(mock.get通知書番号()).thenReturn(new TsuchishoNo(通知書番号));
         when(mock.get処理日時()).thenReturn(RDateTime.MIN.plusHours(処理日時差分));
         return mock;

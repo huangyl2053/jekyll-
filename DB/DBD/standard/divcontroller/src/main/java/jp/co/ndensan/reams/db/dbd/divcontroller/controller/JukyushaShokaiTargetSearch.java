@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller;
 
 import jp.co.ndensan.reams.db.dbd.divcontroller.demodata.JukyushaData;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010001.JukyushaShokaiTargetSearchDiv;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.SearchResultOfHihokensha;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.SearchResultOfHihokensha;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -34,7 +34,7 @@ public class JukyushaShokaiTargetSearch {
      * @return ResponseData
      */
     public ResponseData<JukyushaShokaiTargetSearchDiv> onClick_btnToSearch(JukyushaShokaiTargetSearchDiv div) {
-//        SearchResultOfHihokensha.setSearchResult(div.getSearchResult(), new JukyushaData().getAll().asConvertedType());
+        SearchResultOfHihokensha.setSearchResult(div.getSearchResult(), new JukyushaData().getAll().asConvertedType());
         return _createResponseData(div);
     }
 

@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd4040011.ShogaishaKojoShinseishaDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd4040011.ShogaishaKojoTaishoshaDetailDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd4040011.ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
@@ -70,7 +70,7 @@ public class ShogaishaKojoTaishoshaNinteishoHakkoPanel {
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
         ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
         int rowId = 0;
-//        KaigoShikakuKihon.setData(panel.getTaishoshaAtena(), panel.getTaishoshaKaigoShikaku(), 識別コード, rowId);
+        KaigoShikakuKihon.setData(panel.getTaishoshaAtena(), panel.getTaishoshaKaigoShikaku(), 識別コード, rowId);
     }
 
     private void set障害者控除明細(ShogaishaKojoTaishoshaNinteishoHakkoPanelDiv panel) {

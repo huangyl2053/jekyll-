@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0030011.KogakuServicehiInfoPanelDiv;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgJudgementResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
@@ -134,8 +134,8 @@ public class KogakuServicehiInfoPanel {
 
         //2014.07.04 朴　KogakuJumin　panel 削除
         int rowId = 0;
-//        KaigoShikakuKihon.setData(panel.getCommonKogakuNushiJuminJohoChildDiv1(),
-//                panel.getCommonKogakuKaigoJuminJohoChildDiv2(), 識別コード, rowId);
+        KaigoShikakuKihon.setData(panel.getCommonKogakuNushiJuminJohoChildDiv1(),
+                panel.getCommonKogakuKaigoJuminJohoChildDiv2(), 識別コード, rowId);
 //
 //
 //         List<HashMap> targetSource = YamlLoader.DBZ.loadAsList(new RString("KaigoShikakuKihon.yml"));

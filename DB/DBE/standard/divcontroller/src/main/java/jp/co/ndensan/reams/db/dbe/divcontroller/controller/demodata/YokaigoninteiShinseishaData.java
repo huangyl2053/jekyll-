@@ -11,8 +11,8 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ChosainData.Chosain;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.demodata.ShujiiData.Doctor;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.HihokenshaForSearchResult;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IHihokenshaForSearchResult;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.HihokenshaForSearchResult;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IHihokenshaForSearchResult;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlUtil.Converter.IConverter;
@@ -40,57 +40,58 @@ public class YokaigoninteiShinseishaData {
      *
      * @return 要介護認定申請者のデモデータ
      */
-//    public IDemoData<IHihokenshaForSearchResult>
-//            get要介護認定申請者List() {
-//        List<HashMap> dataFromYaml = YamlLoader.DBE.loadAsList(FILE_NAME);
-//        return new DemoData(dataFromYaml, new IConverter<IHihokenshaForSearchResult>() {
-//
-//            @Override
-//            public IHihokenshaForSearchResult exec(Map map) {
-//                return toIHihokneshaForSearchResult(map);
-//            }
-//
-//            private IHihokenshaForSearchResult toIHihokneshaForSearchResult(Map map) {
-//                ControlGenerator cg = new ControlGenerator(map);
-//                return new HihokenshaForSearchResult(
-//                        new HihokenshaNo(cg.getAsRString("被保番号")),
-//                        new ShikibetsuCode(cg.getAsRString("識別コード")),
-//                        cg.getAsRString("被保区分"),
-//                        cg.getAsRString("氏名"),
-//                        cg.getAsRString("カナ氏名"),
-//                        toGender(cg.getAsRString("性別")),
-//                        cg.getAsRDate("生年月日"),
-//                        cg.getAsYubinNo("郵便番号"),
-//                        new AtenaJusho(cg.getAsRString("住所")),
-//                        cg.getAsRString("個人番号"),
-//                        toJuminShubetsu(cg.getAsRString("住民種別")),
-//                        new SetaiCode(cg.getAsRString("世帯コード")));
-//            }
-//
-//            private Gender toGender(RString value) {
-//                GenderName genderName;
-//                try {
-//                    genderName = GenderName.toValue(value);
-//                } catch (IllegalArgumentException e) {
-//                    genderName = GenderName.MALE_NAME;
-//                }
-//                if (genderName == GenderName.MALE_NAME) {
-//                    return Gender.MALE;
-//                } else {
-//                    return Gender.FEMALE;
-//                }
-//            }
-//
-//            private JuminShubetsu toJuminShubetsu(RString value) {
-//                for (JuminShubetsu item : JuminShubetsu.values()) {
-//                    if (item.getCode().equals(value) || item.toRString().equals(value)) {
-//                        return item;
-//                    }
-//                }
-//                return JuminShubetsu.日本人;
-//            }
-//        });
-//    }
+    public IDemoData<IHihokenshaForSearchResult>
+            get要介護認定申請者List() {
+        List<HashMap> dataFromYaml = YamlLoader.DBE.loadAsList(FILE_NAME);
+        return new DemoData(dataFromYaml, new IConverter<IHihokenshaForSearchResult>() {
+
+            @Override
+            public IHihokenshaForSearchResult exec(Map map) {
+                return toIHihokneshaForSearchResult(map);
+            }
+
+            private IHihokenshaForSearchResult toIHihokneshaForSearchResult(Map map) {
+                ControlGenerator cg = new ControlGenerator(map);
+                return new HihokenshaForSearchResult(
+                        new HihokenshaNo(cg.getAsRString("被保番号")),
+                        new ShikibetsuCode(cg.getAsRString("識別コード")),
+                        cg.getAsRString("被保区分"),
+                        cg.getAsRString("氏名"),
+                        cg.getAsRString("カナ氏名"),
+                        toGender(cg.getAsRString("性別")),
+                        cg.getAsRDate("生年月日"),
+                        cg.getAsYubinNo("郵便番号"),
+                        new AtenaJusho(cg.getAsRString("住所")),
+                        cg.getAsRString("個人番号"),
+                        toJuminShubetsu(cg.getAsRString("住民種別")),
+                        new SetaiCode(cg.getAsRString("世帯コード")));
+            }
+
+            private Gender toGender(RString value) {
+                GenderName genderName;
+                try {
+                    genderName = GenderName.toValue(value);
+                } catch (IllegalArgumentException e) {
+                    genderName = GenderName.MALE_NAME;
+                }
+                if (genderName == GenderName.MALE_NAME) {
+                    return Gender.MALE;
+                } else {
+                    return Gender.FEMALE;
+                }
+            }
+
+            private JuminShubetsu toJuminShubetsu(RString value) {
+                for (JuminShubetsu item : JuminShubetsu.values()) {
+                    if (item.getCode().equals(value) || item.toRString().equals(value)) {
+                        return item;
+                    }
+                }
+                return JuminShubetsu.日本人;
+            }
+        });
+    }
+
     /**
      * 要介護状態区分です。
      */
@@ -194,42 +195,44 @@ public class YokaigoninteiShinseishaData {
         }
     }
 
-//    public LatestNinteiResult get前回認定結果(RString hihokenshaNo) {
-//        List<HashMap> hihokenshaList = get要介護認定申請者List().asRaw();
-//        for (Map hihokensha : hihokenshaList) {
-//            ControlGenerator cg = new ControlGenerator(hihokensha);
-//            if (hihokenshaNo.equals(cg.getAsRString("被保番号"))) {
-//                FlexibleDate latestNinteiDate = cg.getAsFlexibleDate("前回認定日");
-//                if (FlexibleDate.EMPTY.equals(latestNinteiDate)) {
-//                    return LatestNinteiResult.NOTHING;
-//                }
-//                return new LatestNinteiResult(
-//                        YokaigoJotaiKubun.toValue(cg.getAsRString("前回要介護度")),
-//                        latestNinteiDate,
-//                        cg.getAsFlexibleDate("前回有効期間開始日"),
-//                        cg.getAsDecimal("前回有効期間月数").intValue());
-//            }
-//        }
-//        return LatestNinteiResult.NOTHING;
-//    }
-//    public Doctor get前回主治医(RString hihokenshaNo) {
-//        List<HashMap> hihokenshaList = get要介護認定申請者List().asRaw();
-//        for (Map hihokensha : hihokenshaList) {
-//            ControlGenerator cg = new ControlGenerator(hihokensha);
-//            if (hihokenshaNo.equals(cg.getAsRString("被保番号"))) {
-//                return new ShujiiData().get主治医From(cg.getAsRString("前回主治医コード"));
-//            }
-//        }
-//        return Doctor.EMPTY;
-//    }
-//    public Chosain get前回調査員(RString hihokenshaNo) {
-//        List<HashMap> hihokenshaList = get要介護認定申請者List().asRaw();
-//        for (Map hihokensha : hihokenshaList) {
-//            ControlGenerator cg = new ControlGenerator(hihokensha);
-//            if (hihokenshaNo.equals(cg.getAsRString("被保番号"))) {
-//                return new ChosainData().get調査員From(cg.getAsRString("前回調査員コード"));
-//            }
-//        }
-//        return Chosain.EMPTY;
-//    }
+    public LatestNinteiResult get前回認定結果(RString hihokenshaNo) {
+        List<HashMap> hihokenshaList = get要介護認定申請者List().asRaw();
+        for (Map hihokensha : hihokenshaList) {
+            ControlGenerator cg = new ControlGenerator(hihokensha);
+            if (hihokenshaNo.equals(cg.getAsRString("被保番号"))) {
+                FlexibleDate latestNinteiDate = cg.getAsFlexibleDate("前回認定日");
+                if (FlexibleDate.EMPTY.equals(latestNinteiDate)) {
+                    return LatestNinteiResult.NOTHING;
+                }
+                return new LatestNinteiResult(
+                        YokaigoJotaiKubun.toValue(cg.getAsRString("前回要介護度")),
+                        latestNinteiDate,
+                        cg.getAsFlexibleDate("前回有効期間開始日"),
+                        cg.getAsDecimal("前回有効期間月数").intValue());
+            }
+        }
+        return LatestNinteiResult.NOTHING;
+    }
+
+    public Doctor get前回主治医(RString hihokenshaNo) {
+        List<HashMap> hihokenshaList = get要介護認定申請者List().asRaw();
+        for (Map hihokensha : hihokenshaList) {
+            ControlGenerator cg = new ControlGenerator(hihokensha);
+            if (hihokenshaNo.equals(cg.getAsRString("被保番号"))) {
+                return new ShujiiData().get主治医From(cg.getAsRString("前回主治医コード"));
+            }
+        }
+        return Doctor.EMPTY;
+    }
+
+    public Chosain get前回調査員(RString hihokenshaNo) {
+        List<HashMap> hihokenshaList = get要介護認定申請者List().asRaw();
+        for (Map hihokensha : hihokenshaList) {
+            ControlGenerator cg = new ControlGenerator(hihokensha);
+            if (hihokenshaNo.equals(cg.getAsRString("被保番号"))) {
+                return new ChosainData().get調査員From(cg.getAsRString("前回調査員コード"));
+            }
+        }
+        return Chosain.EMPTY;
+    }
 }

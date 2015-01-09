@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0120000.KyotakuJikoRiyohyoKihonDiv;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -44,6 +44,6 @@ public class KyotakuJikoRiyohyoKihon {
         ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
         int rowId = 0;
 
-//        KaigoShikakuKihon.setData(panel.getKyotakuJikoRiyohyoKihonAtena(), panel.getKyotakuJikoRiyohyoKaigoKihon(), 識別コード, rowId);
+        KaigoShikakuKihon.setData(panel.getKyotakuJikoRiyohyoKihonAtena(), panel.getKyotakuJikoRiyohyoKaigoKihon(), 識別コード, rowId);
     }
 }

@@ -62,7 +62,7 @@ public class ShisetsuNyutaishoMock {
         when(jushoMock.get住所()).thenReturn(new RString("施設住所"));
 
         IHojin hojinMock = mock(IHojin.class);
-        when(hojinMock.get住所()).thenReturn(jushoMock);
+//        when(hojinMock.get住所()).thenReturn(jushoMock);
 
         IName name = mock(IName.class);
         when(name.getName()).thenReturn(new AtenaMeisho("介護太郎"));

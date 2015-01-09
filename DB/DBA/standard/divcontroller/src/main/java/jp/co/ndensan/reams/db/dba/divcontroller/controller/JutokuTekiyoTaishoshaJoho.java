@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2030011.JutokuTekiyoSearchDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2030011.JutokuTekiyoTaishoshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoshikakukihon.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoShikakuKihon.KaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
@@ -60,9 +60,9 @@ public class JutokuTekiyoTaishoshaJoho {
 
     private void setDbJoho(KaigoShikakuKihonDiv dbJoho, ControlGenerator generator) {
         dbJoho.getTxtHihokenshaNo().setValue(generator.getAsRString("被保番号"));
-        dbJoho.getTxtShutokuYmd().setValue(generator.getAsFlexibleDate("資格取得"));
+        dbJoho.getTxtShutokuYmd().setValue(generator.getAsRDate("資格取得"));
         dbJoho.getTxtShutokuJiyu().setValue(generator.getAsRString("取得事由"));
-        dbJoho.getTxtSoshitsuYmd().setValue(generator.getAsFlexibleDate("資格喪失"));
+        dbJoho.getTxtSoshitsuYmd().setValue(generator.getAsRDate("資格喪失"));
         dbJoho.getTxtSoshitsuJiyu().setValue(generator.getAsRString("喪失事由"));
         dbJoho.getTxtJutokuKubun().setValue(generator.getAsRString("住特区分"));
         dbJoho.getTxtYokaigoJotaiKubun().setValue(generator.getAsRString("要介護認定"));
