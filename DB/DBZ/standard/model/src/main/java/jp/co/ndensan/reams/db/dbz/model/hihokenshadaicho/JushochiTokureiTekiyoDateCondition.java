@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 
-import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
 
@@ -15,7 +15,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @author n8178 城間篤人
  */
-public class JushochiTokureiTekiyoDateCondition implements ICondition<HihokenshaDaichoModel> {
+public class JushochiTokureiTekiyoDateCondition implements IPredicate<HihokenshaDaichoModel> {
 
     private final HihokenshaDaichoModel conditionModel;
 
@@ -31,7 +31,7 @@ public class JushochiTokureiTekiyoDateCondition implements ICondition<Hihokensha
     }
 
     @Override
-    public boolean check(HihokenshaDaichoModel targetModel) {
+    public boolean evaluate(HihokenshaDaichoModel targetModel) {
         return conditionModel.get住所地特例適用年月日().equals(targetModel.get住所地特例適用年月日());
     }
 

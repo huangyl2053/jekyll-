@@ -5,13 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 
-import jp.co.ndensan.reams.db.dbz.model.util.function.ICondition;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 被保険者台帳Modelの{@link jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList}から、
@@ -20,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public class HihokenshaDaichoCondition implements ICondition<HihokenshaDaichoModel> {
+public class HihokenshaDaichoCondition implements IPredicate<HihokenshaDaichoModel> {
 
     private final HihokenshaDaichoModel conditionModel;
 
@@ -57,7 +56,7 @@ public class HihokenshaDaichoCondition implements ICondition<HihokenshaDaichoMod
     }
 
     @Override
-    public boolean check(HihokenshaDaichoModel targetModel) {
+    public boolean evaluate(HihokenshaDaichoModel targetModel) {
         return conditionModel.getEntity().equalsPrimaryKeys(targetModel.getEntity());
     }
 

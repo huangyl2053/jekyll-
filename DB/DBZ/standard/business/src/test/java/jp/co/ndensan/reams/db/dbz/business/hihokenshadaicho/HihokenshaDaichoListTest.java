@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -16,10 +15,15 @@ import org.junit.runner.RunWith;
  *
  * @author n8178 城間篤人
  */
-//@RunWith(Enclosed.class)
+@RunWith(Enclosed.class)
 public class HihokenshaDaichoListTest {
 
     public static class constructor extends DbaTestBase {
+
+        @Test(expected = NullPointerException.class)
+        public void コンストラクタは_引数がnullのとき_NullPointerExceptionをスローする() {
+            HihokenshaDaichoList hihokenshaDaichoList = new HihokenshaDaichoList(null);
+        }
         //TODO #52997
         //コンストラクタのテストを実装します。
         //1, nullCheckについてテストします。

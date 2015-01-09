@@ -5,11 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -25,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @param <T>
  * {@link jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho IHihokenshaDaicho}を実装したクラス
  */
-public class HihokenshaDaichoFinderBase<T extends IHihokenshaDaicho> {
+public class HihokenshaDaichoFinderBase<T extends HihokenshaDaichoModel> {
 
     private final HihokenshaDaichoDac dac;
 
@@ -53,7 +56,7 @@ public class HihokenshaDaichoFinderBase<T extends IHihokenshaDaicho> {
      * @param 処理日時 処理日時
      * @return 被保険者台帳
      */
-    public IOptional<T> find被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
+    public IOptional<HihokenshaDaichoModel> find被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
         //TODO #52997
         //1, Dacクラスの、市町村コード・被保険者番号・処理日時を指定するメソッドを呼び出し、DbT1001HihokenshaDaichoEntityを取得します。
         //   Dacに当該メソッドが存在しない場合は追加してください。
@@ -65,16 +68,49 @@ public class HihokenshaDaichoFinderBase<T extends IHihokenshaDaicho> {
      * 被保険者番号と市町村コードを指定して、特定の被保険者の台帳情報をListで取得します。
      *
      * @param 市町村コード 市町村コード
-     * @param 被保険者番号 被保険者番号
      * @return 被保険者台帳List
      */
-    public IItemList<T> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+    public IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード) {
         //TODO #52997
         //1, Dacクラスの、市町村コード・被保険者番号を指定するメソッドを呼び出し、DbT1001HihokenshaDaichoEntityのListを取得します。
+        IItemList<DbT1001HihokenshaDaichoEntity> entityList = dac.selectByKey(市町村コード);
         //   Dacに当該メソッドが存在しない場合は追加してください。Dacが返るListは必ず、取得日の降順になるようにしてください。
         //   Dacから返る検索結果は、IItemListを利用して受け取ってください。
         //2, 検索結果をModelのListにしてreturnします。
-        throw new UnsupportedOperationException("Not supported yet.");
+        ItemList<HihokenshaDaichoModel> modelList = ItemList.empty();
+
+        for (DbT1001HihokenshaDaichoEntity entity : entityList) {
+            modelList.added(createModel(entity));
+        }
+
+        return modelList;
+    }
+
+    /**
+     * 被保険者番号と市町村コードを指定して、特定の被保険者の台帳情報をListで取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 被保険者番号 被保険者番号
+     * @return 被保険者台帳List
+     */
+    public IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+        IItemList<DbT1001HihokenshaDaichoEntity> entityList = dac.selectByKey(市町村コード, 被保険者番号);
+        List<HihokenshaDaichoModel> modelList = new ArrayList<>();
+
+        for (DbT1001HihokenshaDaichoEntity entity : entityList) {
+            modelList.add(createModel(entity));
+
+        }
+
+        return ItemList.of(modelList);
+    }
+
+    private HihokenshaDaichoModel createModel(DbT1001HihokenshaDaichoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+
+        return new HihokenshaDaichoModel(entity);
     }
 
     /**
@@ -85,7 +121,7 @@ public class HihokenshaDaichoFinderBase<T extends IHihokenshaDaicho> {
      * @param 識別コード 被保険者番号
      * @return 被保険者台帳List
      */
-    public IItemList<T> find被保険者台帳List(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+    public IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
         //TODO #52997
         //1, Dacクラスの、市町村コード・識別コードを指定するメソッドを呼び出し、DbT1001HihokenshaDaichoEntityのListを取得します。
         //   Dacに当該メソッドが存在しない場合は追加してください。Dacが返るListは必ず、取得日の降順になるようにしてください。
@@ -106,7 +142,7 @@ public class HihokenshaDaichoFinderBase<T extends IHihokenshaDaicho> {
      * @param 資格取得日 資格取得日
      * @return ある資格取得期間中の被保険者台帳List
      */
-    public IItemList<T> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, FlexibleDate 資格取得日) {
+    public IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, FlexibleDate 資格取得日) {
         //TODO #52997
         //1, Dacクラスの、市町村コード・被保険者番号・資格取得日を指定するメソッドを呼び出し、DbT1001HihokenshaDaichoEntityのListを取得します。
         //   Dacに当該メソッドが存在しない場合は追加してください。Dacが返るListは必ず、取得日の降順になるようにしてください。

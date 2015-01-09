@@ -5,10 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -54,12 +51,12 @@ public class JushochiTokureiTekiyoDateConditionTest {
 
         @Test
         public void 全ての条件を満たすModelが渡された場合_trueが返る() {
-            assertThat(sut.check(target_match), is(true));
+            assertThat(sut.evaluate(target_match), is(true));
         }
 
         @Test
         public void 適用日が一致しない場合_falseを返す() {
-            assertThat(sut.check(target_difTekiyoDate), is(false));
+            assertThat(sut.evaluate(target_difTekiyoDate), is(false));
         }
     }
 

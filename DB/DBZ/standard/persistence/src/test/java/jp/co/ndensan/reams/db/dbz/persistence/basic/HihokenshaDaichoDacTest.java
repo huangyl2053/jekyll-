@@ -5,23 +5,16 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYear;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -30,6 +23,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -54,7 +48,7 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
         sut = InstanceProvider.create(HihokenshaDaichoDac.class);
     }
 
-    public static class selectByKeyのテスト extends DbzTestDacBase {
+    public static class selectByKey_市町村コード_被保険者番号_処理日時のテスト extends DbzTestDacBase {
 
         @Before
         public void setUp() {
@@ -111,27 +105,101 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
         }
     }
 
-    //TODO n8178 城間篤人 既にDB上にデータが入っているため、DB上にデータがない前提のこのテストは通らない。対応が決まり次第修正予定 2015年1月
-//    public static class selectAllのテスト extends DbzTestDacBase {
-//
-//        @Test
-//        public void 被保険者台帳が存在する場合_selectAllは_全件を返す() {
-//            TestSupport.insert(
-//                    DEFAULT_市町村コード,
-//                    DEFAULT_被保険者番号,
-//                    DEFAULT_処理日時);
-//            TestSupport.insert(
-//                    DEFAULT_市町村コード,
-//                    DEFAULT_被保険者番号,
-//                    DEFAULT_処理日時);
-//            assertThat(sut.selectAll().size(), is(2));
-//        }
-//
-//        @Test
-//        public void 被保険者台帳が存在しない場合_selectAllは_空のリストを返す() {
-//            assertThat(sut.selectAll(), is(Collections.EMPTY_LIST));
-//        }
-//    }
+    public static class selectByKey_市町村コード_被保険者番号のテスト extends DbzTestDacBase {
+
+        @Before
+        public void setUp() {
+            TestSupport.insert(
+                    DEFAULT_市町村コード,
+                    DEFAULT_被保険者番号,
+                    DEFAULT_処理日時);
+            TestSupport.insert(
+                    OTHER_市町村コード,
+                    OTHER_被保険者番号,
+                    OTHER_処理日時);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    null,
+                    DEFAULT_被保険者番号);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 被保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_市町村コード,
+                    null);
+        }
+
+        @Test
+        public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
+            IItemList<DbT1001HihokenshaDaichoEntity> selectByKey = sut.selectByKey(
+                    DEFAULT_市町村コード,
+                    DEFAULT_被保険者番号);
+            assertThat(selectByKey, is(notNullValue()));
+        }
+
+        @Test
+        public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
+            IItemList<DbT1001HihokenshaDaichoEntity> selectByKey = sut.selectByKey(
+                    NONE_市町村コード,
+                    NONE_被保険者番号);
+            assertThat(selectByKey.isEmpty(), is(true));
+        }
+    }
+
+    public static class selectByKey_市町村コードのテスト extends DbzTestDacBase {
+
+        @Before
+        public void setUp() {
+            TestSupport.insert(
+                    DEFAULT_市町村コード,
+                    DEFAULT_被保険者番号,
+                    DEFAULT_処理日時);
+            TestSupport.insert(
+                    OTHER_市町村コード,
+                    OTHER_被保険者番号,
+                    OTHER_処理日時);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(null);
+        }
+
+        @Test
+        public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
+            ItemList<DbT1001HihokenshaDaichoEntity> selectByKey = sut.selectByKey(DEFAULT_市町村コード);
+            assertThat(selectByKey, is(notNullValue()));
+        }
+
+        @Test
+        public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
+            ItemList<DbT1001HihokenshaDaichoEntity> selectByKey = sut.selectByKey(NONE_市町村コード);
+            assertThat(selectByKey.isEmpty(), is(true));
+        }
+    }
+
+    @Ignore//テストデータは変更される場合があるため、スキップする。
+    public static class selectAllのテスト extends DbzTestDacBase {
+
+        @Test
+        public void 被保険者台帳が存在する場合_selectAllは_全件を返す() {
+            TestSupport.insert(
+                    DEFAULT_市町村コード,
+                    DEFAULT_被保険者番号,
+                    DEFAULT_処理日時);
+            assertThat(sut.selectAll().size(), is(14));
+        }
+
+        @Test
+        public void 被保険者台帳が存在しない場合_selectAllは_空のリストを返す() {
+            assertThat(sut.selectAll(), is(Collections.EMPTY_LIST));
+        }
+    }
+
     public static class insertのテスト extends DbzTestDacBase {
 
         @Test

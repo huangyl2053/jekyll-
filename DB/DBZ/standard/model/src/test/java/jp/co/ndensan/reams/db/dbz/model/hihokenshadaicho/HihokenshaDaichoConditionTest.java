@@ -88,22 +88,22 @@ public class HihokenshaDaichoConditionTest {
 
         @Test
         public void 全ての条件を満たすModelが渡された場合_trueが返る() {
-            assertThat(sut.check(target_match), is(true));
+            assertThat(sut.evaluate(target_match), is(true));
         }
 
         @Test
         public void 市町村コードが一致しない場合_falseを返す() {
-            assertThat(sut.check(target_difLasdecCode), is(false));
+            assertThat(sut.evaluate(target_difLasdecCode), is(false));
         }
 
         @Test
         public void 被保険者番号が一致しない場合_falseを返す() {
-            assertThat(sut.check(target_difHihokenshaNo), is(false));
+            assertThat(sut.evaluate(target_difHihokenshaNo), is(false));
         }
 
         @Test
         public void 処理日時が一致しない場合_falseを返す() {
-            assertThat(sut.check(target_difShoriDateTime), is(false));
+            assertThat(sut.evaluate(target_difShoriDateTime), is(false));
         }
     }
 

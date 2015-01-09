@@ -266,6 +266,7 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 住所地特例解除事由
      */
+    @Override
     public KaigoshikakuJutokuKaijo get住所地特例解除事由コード() {
         return entity.getJushochitokureiKaijoJiyuCode();
     }
