@@ -11,8 +11,8 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModelComparators;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.model.util.itemlist.ItemList;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
@@ -33,7 +33,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
     public HihokenshaDaichoList(IItemList<HihokenshaDaichoModel> daichoList) {
         requireNonNull(daichoList, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("引数のList", getClass().getSimpleName()));
-        this.daichoList = daichoList.sorted(HihokenshaDaichoModelComparators.orderBy処理日時.desc());
+        this.daichoList = daichoList.sorted(HihokenshaDaichoModelComparators.orderBy資格取得年月日.desc());
     }
 
     /**
@@ -81,22 +81,33 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      */
     public IItemList<HihokenshaDaichoModel> to住所地特例List() {
         List<HihokenshaDaichoModel> list = new ArrayList<>();
-        FlexibleDate tekiyoDate = null;
-        for (HihokenshaDaichoModel daicho : daichoList) {
-            if (!daicho.get住所地特例解除年月日().isEmpty()) {
-                list.add(daicho);
-                continue;
-            }
-
-            if (daicho.get住所地特例適用年月日().isEmpty()) {
-                continue;
-            }
-
-            if (!daicho.get住所地特例適用年月日().equals(tekiyoDate)) {
-                list.add(daicho);
-                tekiyoDate = daicho.get住所地特例適用年月日();
-            }
-        }
+        //TODO #52997
+        //住所地特例を表現するためには、適用情報と解除情報をそれぞれ取得する必要がある。
+        //解除情報を持つ被保険者台帳は、
+        //  a, 被保険者台帳の解除日にデータを持つもの
+        //を抽出することで取得できる。
+        //適用情報を持つ被保険者台帳は、
+        //  b, 被保険者台帳の適用日にデータを持つもの
+        //  c, 前の適用日から、データが更新されているもの
+        //の条件を満たす台帳情報を抽出することで取得できる。
+        //
+        //必要な被保険者台帳情報を、以下の手順で取得する。
+        //
+        //1, 被保険者台帳の適用日を格納する変数tekiyoDateを用意（初期値 = null)。
+        //2, 被保険者台帳Listの各要素daichoに対して以下の処理を繰り返し実行し、対象の情報を抽出する。
+        //  2-1, 次の判定を行う。
+        //      2-1-1, !daicho.get解除日().isEmpty()
+        //  2-2, 2-1の判定結果がtrueの場合、以下の処理を実行する。
+        //      2-2-1, daichoList.add(daicho)
+        //      2-2-2, continueで、以降の処理を省略して次のループ処理に移行する。
+        //  2-3, 解除情報が取得できなかった場合、以下の判定を行う。
+        //      2-3-1, !daicho.get適用日().isEmpty()
+        //  2-4, 2-3の判定結果がtrueの場合、さらに以下の判定を行う。
+        //      2-4-1, !daicho.get適用日().equals(tekiyoDate)
+        //  2-5, 5-1の判定結果がtrueの場合、以下の処理を行う。
+        //      2-5-1, daichoList.add(daicho)
+        //      2-5-2, tekiyoDate = daicho.get変更日()
+        //3, 抽出した結果を戻り値として返す。
         return ItemList.of(list);
     }
 
@@ -107,17 +118,22 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      */
     public IItemList<HihokenshaDaichoModel> to資格関連異動List() {
         List<HihokenshaDaichoModel> list = new ArrayList<>();
-
-        FlexibleDate henkoDate = null;
-        for (HihokenshaDaichoModel daicho : daichoList) {
-            if (daicho.get資格変更年月日().isEmpty()) {
-                continue;
-            }
-            if (!daicho.get資格変更年月日().equals(henkoDate)) {
-                list.add(daicho);
-                henkoDate = daicho.get資格変更年月日();
-            }
-        }
+        //TODO #52997
+        //資格関連異動を表現するためには、被保険者台帳から、
+        //  a, 被保険者台帳の変更日にデータを持つもの
+        //  b, 前の変更日から、データが更新されているもの
+        //の条件を満たす台帳情報を抽出する必要がある。
+        //必要な被保険者台帳情報を、以下の手順で取得する。
+        //
+        //1, 被保険者台帳の変更日を格納する変数henkoDateを用意（初期値 = null)。
+        //2, 被保険者台帳Listの各要素daichoに対して以下の処理を繰り返し実行し、対象の情報を抽出する。
+        //  2-1, 次の判定を行う。
+        //      2-1-1, !daicho.get変更日().isEmpty()
+        //      2-1-2, !daicho.get変更日().equals(henkoDate)
+        //  2-2, 2-1の判定結果が両方ともtrueの場合、以下の処理を行う。
+        //      2-2-1, daichoList.add(daicho)
+        //      2-2-2, henkoDate = daicho.get変更日()
+        //3, 抽出した結果を戻り値として返す。
         return ItemList.of(list);
     }
 

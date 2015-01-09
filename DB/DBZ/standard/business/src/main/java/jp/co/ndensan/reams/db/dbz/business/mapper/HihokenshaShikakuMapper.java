@@ -31,12 +31,6 @@ import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.KaigoShikakuFactory;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuHenkoJiyuHihokensha;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuKaijo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuTekiyo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuHihokensha;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuSoshitsuJiyuHihokennsha;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KofuJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -58,12 +52,10 @@ public final class HihokenshaShikakuMapper {
     }
 
     /**
-     * {@link IHihokenshaShikaku IHihokenshaShikaku}を
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}へ変換します。
+     * {@link IHihokenshaShikaku IHihokenshaShikaku}を {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}へ変換します。
      *
      * @param shikaku {@link IHihokenshaShikaku IHihokenshaShikaku}
-     * @return
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}。ただし、引数がnullのときnull。
+     * @return {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}。ただし、引数がnullのときnull。
      */
     public static DbT1001HihokenshaDaichoEntity toHihokenshaDaichoEntity(IHihokenshaShikaku shikaku) {
         return isNull(shikaku) ? null : _toHihokenshaDaichoEntity(shikaku);
@@ -75,21 +67,21 @@ public final class HihokenshaShikakuMapper {
         entity.setHihokenshaNo(shikaku.get被保険者番号());
         entity.setShikibetsuCode(shikaku.get識別コード());
         entity.setShoriTimestamp(shikaku.get処理日時());
-        entity.setHihokennshaKubunCode(shikaku.get被保険者区分().getCode());
+        entity.setHihokennshaKubunCode(shikaku.get被保険者区分().getCode().value());
         entity.setIchigoShikakuShutokuYMD(shikaku.get第一号年齢到達日());
-        entity.setShikakuShutokuJiyuCode(new KaigoshikakuShutokuJiyuHihokensha(shikaku.get資格取得().getReason().getCode()));
+        entity.setShikakuShutokuJiyuCode(shikaku.get資格取得().getReason().getCode());
         entity.setShikakuShutokuTodokedeYMD(shikaku.get資格取得().getNoticeDate());
         entity.setShikakuShutokuYMD(shikaku.get資格取得().getActionDate());
-        entity.setShikakuSoshitsuJiyuCode(new KaigoshikakuSoshitsuJiyuHihokennsha(shikaku.get資格喪失().getReason().getCode()));
+        entity.setShikakuSoshitsuJiyuCode(shikaku.get資格喪失().getReason().getCode());
         entity.setShikakuSoshitsuTodokedeYMD(shikaku.get資格喪失().getNoticeDate());
         entity.setShikakuSoshitsuYMD(shikaku.get資格喪失().getActionDate());
-        entity.setShikakuHenkoJiyuCode(new KaigoshikakuHenkoJiyuHihokensha(shikaku.get資格変更().getReason().getCode()));
+        entity.setShikakuHenkoJiyuCode(shikaku.get資格変更().getReason().getCode());
         entity.setShikakuHenkoTodokedeYMD(shikaku.get資格変更().getActionDate());
         entity.setShikakuHenkoYMD(shikaku.get資格変更().getNoticeDate());
-        entity.setJushochitokureiTekiyoJiyuCode(new KaigoshikakuJutokuTekiyo(shikaku.get住所地特例適用().getReason().getCode()));
+        entity.setJushochitokureiTekiyoJiyuCode(shikaku.get住所地特例適用().getReason().getCode());
         entity.setJushochitokureiTekiyoTodokedeYMD(shikaku.get住所地特例適用().getNoticeDate());
         entity.setJushochitokureiTekiyoYMD(shikaku.get住所地特例適用().getActionDate());
-        entity.setJushochitokureiKaijoJiyuCode(new KaigoshikakuJutokuKaijo(shikaku.get住所地特例解除().getReason().getCode()));
+        entity.setJushochitokureiKaijoJiyuCode(shikaku.get住所地特例解除().getReason().getCode());
         entity.setJushochitokureiKaijoTodokedeYMD(shikaku.get住所地特例解除().getNoticeDate());
         entity.setJushochitokureiKaijoYMD(shikaku.get住所地特例解除().getActionDate());
         entity.setJushochiTokureiFlag(shikaku.get住所地特例者区分().getコード());
@@ -97,22 +89,19 @@ public final class HihokenshaShikakuMapper {
         entity.setKoikinaiTokureiSochimotoShichosonCode(LasdecCode.EMPTY);
         entity.setKyuShichosonCode(shikaku.get旧市町村コード());
         entity.setSaikofuKubun(shikaku.get被保険者証再交付().get有無区分().getCode());
-        entity.setSaikofuJiyuCode(new KofuJiyu(shikaku.get被保険者証再交付().getReason().getCode()));
+        entity.setSaikofuJiyuCode(shikaku.get被保険者証再交付().getReason().getCode());
         entity.setChohyoKofuRirekiID(toValue(shikaku.get被保険者証再交付().getChohyoKofuRirekiID()));
         return entity;
     }
 
     /**
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の
-     * {@link List list}を、 {@link IHihokenshaShikaku IHihokenshaShikaku}の
+     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の {@link List list}を、 {@link IHihokenshaShikaku IHihokenshaShikaku}の
      * {@link List list}へ変換します。<br />
      *
      * 引数のlistが空だったときは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}を返します。
      *
-     * @param entities
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の{@link List list}
-     * @return
-     * {@link IHihokenshaShikaku IHihokenshaShikaku}の{@link List list}。もしくは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}
+     * @param entities {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の{@link List list}
+     * @return {@link IHihokenshaShikaku IHihokenshaShikaku}の{@link List list}。もしくは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}
      */
     public static List<IHihokenshaShikaku> toListOfHihokenshaShikaku(List<DbT1001HihokenshaDaichoEntity> entities) {
         return entities.isEmpty() ? Collections.EMPTY_LIST : _toListOfHihokenshaShikaku(entities);
@@ -127,11 +116,9 @@ public final class HihokenshaShikakuMapper {
     }
 
     /**
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}を
-     * {@link IHihokenshaShikaku IHihokenshaShikaku}へ変換します。
+     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}を {@link IHihokenshaShikaku IHihokenshaShikaku}へ変換します。
      *
-     * @param entity
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}
+     * @param entity {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}
      * @return {@link IHihokenshaShikaku IHihokenshaShikaku}。ただし、引数がnullのときnull。
      */
     public static IHihokenshaShikaku toHihokenshaShikaku(DbT1001HihokenshaDaichoEntity entity) {
@@ -141,20 +128,20 @@ public final class HihokenshaShikakuMapper {
     private static IHihokenshaShikaku _toHihokenshaShikaku(DbT1001HihokenshaDaichoEntity entity) {
         IKaigoShikaku kaigoShikaku = toKaigoShikaku(entity);
         ShikakuHenko 資格変更 = toShikakuHenko(
-                entity.getShikakuHenkoJiyuCode().toRString(),
+                entity.getShikakuHenkoJiyuCode(),
                 entity.getShikakuHenkoTodokedeYMD(),
                 entity.getShikakuHenkoYMD());
         JushochitokureiTekiyo 住所地特例適用 = toJushochitokureiTekiyo(
-                entity.getJushochitokureiTekiyoJiyuCode().toRString(),
+                entity.getJushochitokureiTekiyoJiyuCode(),
                 entity.getJushochitokureiTekiyoTodokedeYMD(),
                 entity.getJushochitokureiTekiyoYMD());
         JushochitokureiKaijo 住所地特例解除 = toJushochitokureiKaijo(
-                entity.getJushochitokureiKaijoJiyuCode().toRString(),
+                entity.getJushochitokureiKaijoJiyuCode(),
                 entity.getJushochitokureiKaijoTodokedeYMD(),
                 entity.getJushochitokureiKaijoYMD());
         HihokenshashoSaikofu 被保険者証再交付 = toHihokenshashoSaikofu(
                 entity.getSaikofuKubun(),
-                entity.getSaikofuJiyuCode().toRString(),
+                entity.getSaikofuJiyuCode(),
                 entity.getChohyoKofuRirekiID());
 
         LasdecCode lasdecCode = entity.getShichosonCode();
@@ -184,14 +171,14 @@ public final class HihokenshaShikakuMapper {
                 jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.HokenShubetsu.介護保険,
                 toRDateOrMin(entity.getShikakuShutokuTodokedeYMD()),
                 toRDateOrMin(entity.getShikakuShutokuYMD()),
-                toShikakuShutokuJiyu(entity.getShikakuShutokuJiyuCode().toRString()),
+                toShikakuShutokuJiyu(entity.getShikakuShutokuJiyuCode()),
                 toRDateOrMax(entity.getShikakuSoshitsuTodokedeYMD()),
                 toRDateOrMax(entity.getShikakuSoshitsuYMD()),
-                toShikakuSoshitsuJiyu(entity.getShikakuSoshitsuJiyuCode().toRString()),
+                toShikakuSoshitsuJiyu(entity.getShikakuSoshitsuJiyuCode()),
                 toValue(entity.getHihokenshaNo()),
                 entity.getKoikinaiTokureiSochimotoShichosonCode().value(),
                 toRDateOrMax(entity.getIchigoShikakuShutokuYMD()),
-                ShikakuHihokenshaKubun.toValue(entity.getHihokennshaKubunCode().getColumnValue()),
+                ShikakuHihokenshaKubun.toValue(entity.getHihokennshaKubunCode()),
                 JushochiTokureishaKubun.toValue(entity.getJushochiTokureiFlag()));
 
         return kaigoShikaku;

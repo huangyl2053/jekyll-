@@ -7,20 +7,18 @@ package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiKaijoJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureishaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitokureishaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuHenkoJiyuHihokensha;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuKaijo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuTekiyo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuHihokensha;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuSoshitsuJiyuHihokennsha;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KofuJiyu;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -29,11 +27,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
- * 被保険者台帳のモデルクラスです。
+ * 被保険者台帳管理のモデルクラスです。
  *
- * @author n8178 城間篤人
+ * @author LDNS 鄭雪双
  */
-public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
+public class HihokenshaDaichoModel implements Serializable {
 
     private DbT1001HihokenshaDaichoEntity entity;
 
@@ -76,7 +74,6 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 市町村コード
      */
-    @Override
     public LasdecCode get市町村コード() {
         return entity.getShichosonCode();
     }
@@ -86,7 +83,6 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 被保険者番号
      */
-    @Override
     public HihokenshaNo get被保険者番号() {
         return entity.getHihokenshaNo();
     }
@@ -96,7 +92,6 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 処理日時
      */
-    @Override
     public YMDHMS get処理日時() {
         return entity.getShoriTimestamp();
     }
@@ -106,7 +101,6 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 識別コード
      */
-    @Override
     public ShikibetsuCode get識別コード() {
         return entity.getShikibetsuCode();
     }
@@ -116,9 +110,8 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 資格取得事由
      */
-    @Override
-    public KaigoshikakuShutokuJiyuHihokensha get資格取得事由() {
-        return entity.getShikakuShutokuJiyuCode();
+    public ShikakuShutokuJiyu get資格取得事由() {
+        return ShikakuShutokuJiyu.toValue(entity.getShikakuShutokuJiyuCode());
     }
 
     /**
@@ -126,7 +119,6 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 資格取得年月日
      */
-    @Override
     public FlexibleDate get資格取得年月日() {
         return entity.getShikakuShutokuYMD();
     }
@@ -136,7 +128,6 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 資格取得届出年月日
      */
-    @Override
     public FlexibleDate get資格取得届出年月日() {
         return entity.getShikakuShutokuTodokedeYMD();
     }
@@ -146,19 +137,17 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 第1号資格取得年月日
      */
-    @Override
     public FlexibleDate get第1号資格取得年月日() {
         return entity.getIchigoShikakuShutokuYMD();
     }
 
     /**
-     * 被保険者区分を返します。
+     * 被保険者区分コードを返します。
      *
-     * @return 被保険者区分
+     * @return 被保険者区分コード
      */
-    @Override
-    public ShikakuHihokenshaKubun get被保険者区分() {
-        return ShikakuHihokenshaKubun.toValue(entity.getHihokennshaKubunCode().getColumnValue());
+    public RString get被保険者区分コード() {
+        return entity.getHihokennshaKubunCode();
     }
 
     /**
@@ -166,9 +155,8 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 資格喪失事由
      */
-    @Override
-    public KaigoshikakuSoshitsuJiyuHihokennsha get資格喪失事由() {
-        return entity.getShikakuSoshitsuJiyuCode();
+    public ShikakuSoshitsuJiyu get資格喪失事由() {
+        return ShikakuSoshitsuJiyu.toValue(entity.getShikakuSoshitsuJiyuCode());
     }
 
     /**
@@ -176,7 +164,6 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 資格喪失年月日
      */
-    @Override
     public FlexibleDate get資格喪失年月日() {
         return entity.getShikakuSoshitsuYMD();
     }
@@ -186,19 +173,17 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 資格喪失届出年月日
      */
-    @Override
     public FlexibleDate get資格喪失届出年月日() {
         return entity.getShikakuSoshitsuTodokedeYMD();
     }
 
     /**
-     * 住所地特例フラグを返します。
+     * 住所地特例者区分を返します。
      *
-     * @return 住所地特例フラグ
+     * @return 住所地特例者区分
      */
-    @Override
-    public JushochiTokureishaKubun get住所地特例フラグ() {
-        return JushochiTokureishaKubun.toValue(entity.getJushochiTokureiFlag());
+    public JushochitokureishaKubun get住所地特例者区分() {
+        return JushochitokureishaKubun.toValue(entity.getJushochiTokureiFlag());
     }
 
     /**
@@ -206,9 +191,8 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 資格変更事由
      */
-    @Override
-    public KaigoshikakuHenkoJiyuHihokensha get資格変更事由() {
-        return entity.getShikakuHenkoJiyuCode();
+    public ShikakuHenkoJiyu get資格変更事由() {
+        return ShikakuHenkoJiyu.toValue(entity.getShikakuHenkoJiyuCode());
     }
 
     /**
@@ -216,7 +200,6 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 資格変更年月日
      */
-    @Override
     public FlexibleDate get資格変更年月日() {
         return entity.getShikakuHenkoYMD();
     }
@@ -226,19 +209,17 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 資格変更届出年月日
      */
-    @Override
     public FlexibleDate get資格変更届出年月日() {
         return entity.getShikakuHenkoTodokedeYMD();
     }
 
     /**
-     * 住所地特例適用事由コードを返します。
+     * 住所地特例適用事由を返します。
      *
-     * @return 住所地特例適用事由コード
+     * @return 住所地特例適用事由
      */
-    @Override
-    public KaigoshikakuJutokuTekiyo get住所地特例適用事由() {
-        return entity.getJushochitokureiTekiyoJiyuCode();
+    public JushochitokureiTekiyoJiyu get住所地特例適用事由() {
+        return JushochitokureiTekiyoJiyu.toValue(entity.getJushochitokureiTekiyoJiyuCode());
     }
 
     /**
@@ -246,8 +227,7 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 適用年月日
      */
-    @Override
-    public FlexibleDate get住所地特例適用年月日() {
+    public FlexibleDate get適用年月日() {
         return entity.getJushochitokureiTekiyoYMD();
     }
 
@@ -256,8 +236,7 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 適用届出年月日
      */
-    @Override
-    public FlexibleDate get住所地特例適用届出年月日() {
+    public FlexibleDate get適用届出年月日() {
         return entity.getJushochitokureiTekiyoTodokedeYMD();
     }
 
@@ -266,9 +245,8 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 住所地特例解除事由
      */
-    @Override
-    public KaigoshikakuJutokuKaijo get住所地特例解除事由コード() {
-        return entity.getJushochitokureiKaijoJiyuCode();
+    public JushochitokureiKaijoJiyu get住所地特例解除事由() {
+        return JushochitokureiKaijoJiyu.toValue(entity.getJushochitokureiKaijoJiyuCode());
     }
 
     /**
@@ -276,8 +254,7 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 解除年月日
      */
-    @Override
-    public FlexibleDate get住所地特例解除年月日() {
+    public FlexibleDate get解除年月日() {
         return entity.getJushochitokureiKaijoYMD();
     }
 
@@ -286,18 +263,16 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 解除届出年月日
      */
-    @Override
-    public FlexibleDate get住所地特例解除届出年月日() {
+    public FlexibleDate get解除届出年月日() {
         return entity.getJushochitokureiKaijoTodokedeYMD();
     }
 
     /**
-     * 広域内住所地特例フラグを返します。
+     * 広域内住所地特例者区分を返します。
      *
-     * @return 広域内住所地特例フラグ
+     * @return 広域内住所地特例者区分
      */
-    @Override
-    public KoikinaiJushochitokureishaKubun get広域内住所地特例区分() {
+    public KoikinaiJushochitokureishaKubun get広域内住所地特例者区分() {
         return KoikinaiJushochitokureishaKubun.toValue(entity.getKoikinaiJushochiTokureiFlag());
     }
 
@@ -306,7 +281,6 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 広住特措置元市町村コード
      */
-    @Override
     public LasdecCode get広住特措置元市町村コード() {
         return entity.getKoikinaiTokureiSochimotoShichosonCode();
     }
@@ -316,7 +290,6 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 旧市町村コード
      */
-    @Override
     public LasdecCode get旧市町村コード() {
         return entity.getKyuShichosonCode();
     }
@@ -326,19 +299,17 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 再交付区分
      */
-    @Override
     public HihokenshashoSaikofuKubun get再交付区分() {
         return HihokenshashoSaikofuKubun.toValue(entity.getSaikofuKubun());
     }
 
     /**
-     * 再交付事由コードを返します。
+     * 再交付事由を返します。
      *
-     * @return 再交付事由コード
+     * @return 再交付事由
      */
-    @Override
-    public KofuJiyu get再交付事由コード() {
-        return entity.getSaikofuJiyuCode();
+    public HihokenshashoSaikofuJiyu get再交付事由() {
+        return HihokenshashoSaikofuJiyu.toValue(entity.getSaikofuJiyuCode());
     }
 
     /**
@@ -346,7 +317,6 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @return 帳票交付履歴ID
      */
-    @Override
     public RString get帳票交付履歴ID() {
         return entity.getChohyoKofuRirekiID();
     }
@@ -396,9 +366,9 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @param 資格取得事由 資格取得事由
      */
-    public void set資格取得事由(KaigoshikakuShutokuJiyuHihokensha 資格取得事由) {
+    public void set資格取得事由(ShikakuShutokuJiyu 資格取得事由) {
         requireNonNull(資格取得事由, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得事由"));
-        entity.setShikakuShutokuJiyuCode(資格取得事由);
+        entity.setShikakuShutokuJiyuCode(資格取得事由.getCode());
     }
 
     /**
@@ -422,7 +392,7 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
     }
 
     /**
-     * 第1号被保険者年齢到達年月日を設定します。
+     * 第1号資格取得年月日を設定します。
      *
      * @param 第1号資格取得年月日 第1号資格取得年月日
      */
@@ -432,13 +402,13 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
     }
 
     /**
-     * 被保険者区分を設定します。
+     * 被保険者区分コードを設定します。
      *
-     * @param 被保険者区分 被保険者区分
+     * @param 被保険者区分コード 被保険者区分コード
      */
-    public void set被保険者区分(Code 被保険者区分) {
-        requireNonNull(被保険者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者区分"));
-        entity.setHihokennshaKubunCode(被保険者区分);
+    public void set被保険者区分コード(RString 被保険者区分コード) {
+        requireNonNull(被保険者区分コード, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者区分コード"));
+        entity.setHihokennshaKubunCode(被保険者区分コード);
     }
 
     /**
@@ -446,9 +416,9 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @param 資格喪失事由 資格喪失事由
      */
-    public void set資格喪失事由(KaigoshikakuSoshitsuJiyuHihokennsha 資格喪失事由) {
+    public void set資格喪失事由(ShikakuSoshitsuJiyu 資格喪失事由) {
         requireNonNull(資格喪失事由, UrSystemErrorMessages.値がnull.getReplacedMessage("資格喪失事由"));
-        entity.setShikakuSoshitsuJiyuCode(資格喪失事由);
+        entity.setShikakuSoshitsuJiyuCode(資格喪失事由.getCode());
     }
 
     /**
@@ -472,13 +442,13 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
     }
 
     /**
-     * 住所地特例フラグを設定します。
+     * 住所地特例者区分を設定します。
      *
-     * @param 住所地特例フラグ 住所地特例フラグ
+     * @param 住所地特例者区分 住所地特例者区分
      */
-    public void set住所地特例フラグ(RString 住所地特例フラグ) {
-        requireNonNull(住所地特例フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例フラグ"));
-        entity.setJushochiTokureiFlag(住所地特例フラグ);
+    public void set住所地特例者区分(JushochitokureishaKubun 住所地特例者区分) {
+        requireNonNull(住所地特例者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例者区分"));
+        entity.setJushochiTokureiFlag(住所地特例者区分.code());
     }
 
     /**
@@ -486,9 +456,9 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @param 資格変更事由 資格変更事由
      */
-    public void set資格変更事由(KaigoshikakuHenkoJiyuHihokensha 資格変更事由) {
+    public void set資格変更事由(ShikakuHenkoJiyu 資格変更事由) {
         requireNonNull(資格変更事由, UrSystemErrorMessages.値がnull.getReplacedMessage("資格変更事由"));
-        entity.setShikakuHenkoJiyuCode(資格変更事由);
+        entity.setShikakuHenkoJiyuCode(資格変更事由.getCode());
     }
 
     /**
@@ -516,9 +486,9 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @param 住所地特例適用事由 住所地特例適用事由
      */
-    public void set住所地特例適用事由(KaigoshikakuJutokuTekiyo 住所地特例適用事由) {
+    public void set住所地特例適用事由(JushochitokureiTekiyoJiyu 住所地特例適用事由) {
         requireNonNull(住所地特例適用事由, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例適用事由"));
-        entity.setJushochitokureiTekiyoJiyuCode(住所地特例適用事由);
+        entity.setJushochitokureiTekiyoJiyuCode(住所地特例適用事由.getCode());
     }
 
     /**
@@ -526,7 +496,7 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @param 適用年月日 適用年月日
      */
-    public void set住所地特例適用年月日(FlexibleDate 適用年月日) {
+    public void set適用年月日(FlexibleDate 適用年月日) {
         requireNonNull(適用年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用年月日"));
         entity.setJushochitokureiTekiyoYMD(適用年月日);
     }
@@ -536,7 +506,7 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @param 適用届出年月日 適用届出年月日
      */
-    public void set住所地特例適用届出年月日(FlexibleDate 適用届出年月日) {
+    public void set適用届出年月日(FlexibleDate 適用届出年月日) {
         requireNonNull(適用届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("適用届出年月日"));
         entity.setJushochitokureiTekiyoTodokedeYMD(適用届出年月日);
     }
@@ -546,9 +516,9 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @param 住所地特例解除事由 住所地特例解除事由
      */
-    public void set住所地特例解除事由(KaigoshikakuJutokuKaijo 住所地特例解除事由) {
+    public void set住所地特例解除事由(JushochitokureiKaijoJiyu 住所地特例解除事由) {
         requireNonNull(住所地特例解除事由, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例解除事由"));
-        entity.setJushochitokureiKaijoJiyuCode(住所地特例解除事由);
+        entity.setJushochitokureiKaijoJiyuCode(住所地特例解除事由.getCode());
     }
 
     /**
@@ -556,7 +526,7 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @param 解除年月日 解除年月日
      */
-    public void set住所地特例解除年月日(FlexibleDate 解除年月日) {
+    public void set解除年月日(FlexibleDate 解除年月日) {
         requireNonNull(解除年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("解除年月日"));
         entity.setJushochitokureiKaijoYMD(解除年月日);
     }
@@ -566,19 +536,19 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @param 解除届出年月日 解除届出年月日
      */
-    public void set住所地特例解除届出年月日(FlexibleDate 解除届出年月日) {
+    public void set解除届出年月日(FlexibleDate 解除届出年月日) {
         requireNonNull(解除届出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("解除届出年月日"));
         entity.setJushochitokureiKaijoTodokedeYMD(解除届出年月日);
     }
 
     /**
-     * 広域内住所地特例フラグを設定します。
+     * 広域内住所地特例者区分を設定します。
      *
-     * @param 広域内住所地特例フラグ 広域内住所地特例フラグ
+     * @param 広域内住所地特例者区分 広域内住所地特例者区分
      */
-    public void set広域内住所地特例フラグ(RString 広域内住所地特例フラグ) {
-        requireNonNull(広域内住所地特例フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("広域内住所地特例フラグ"));
-        entity.setKoikinaiJushochiTokureiFlag(広域内住所地特例フラグ);
+    public void set広域内住所地特例者区分(KoikinaiJushochitokureishaKubun 広域内住所地特例者区分) {
+        requireNonNull(広域内住所地特例者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("広域内住所地特例者区分"));
+        entity.setKoikinaiJushochiTokureiFlag(広域内住所地特例者区分.getCode());
     }
 
     /**
@@ -606,19 +576,19 @@ public class HihokenshaDaichoModel implements Serializable, IHihokenshaDaicho {
      *
      * @param 再交付区分 再交付区分
      */
-    public void set再交付区分(RString 再交付区分) {
+    public void set再交付区分(HihokenshashoSaikofuKubun 再交付区分) {
         requireNonNull(再交付区分, UrSystemErrorMessages.値がnull.getReplacedMessage("再交付区分"));
-        entity.setSaikofuKubun(再交付区分);
+        entity.setSaikofuKubun(再交付区分.getCode());
     }
 
     /**
-     * 再交付事由を設定します。
+     * 再交付事由コードを設定します。
      *
-     * @param 再交付事由 再交付事由
+     * @param 再交付事由 再交付事由コード
      */
-    public void set再交付事由(KofuJiyu 再交付事由) {
+    public void set再交付事由(HihokenshashoSaikofuJiyu 再交付事由) {
         requireNonNull(再交付事由, UrSystemErrorMessages.値がnull.getReplacedMessage("再交付事由"));
-        entity.setSaikofuJiyuCode(再交付事由);
+        entity.setSaikofuJiyuCode(再交付事由.getCode());
     }
 
     /**

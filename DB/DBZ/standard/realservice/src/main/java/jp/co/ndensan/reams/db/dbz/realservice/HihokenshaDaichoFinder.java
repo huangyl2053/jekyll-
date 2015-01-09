@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -41,30 +42,30 @@ public class HihokenshaDaichoFinder implements IHihokenshaDaichoFinder {
     }
 
     @Override
-    public IOptional<HihokenshaDaichoModel> find被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
+    public IOptional<IHihokenshaDaicho> find被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
         //TODO #52997
         //1, finderで実装している同じメソッドを呼び出して実装してください。
-        return finder.find被保険者台帳(市町村コード, 被保険者番号, 処理日時);
-    }
-
-    @Override
-    public IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード) {
-        return finder.find被保険者台帳List(市町村コード);
-    }
-
-    @Override
-    public IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
-        return finder.find被保険者台帳List(市町村コード, 被保険者番号);
-    }
-
-    @Override
-    public IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, FlexibleDate 資格取得日) {
+    public IItemList<IHihokenshaDaicho> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public IItemList<IHihokenshaDaicho> find被保険者台帳List(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public IItemList<IHihokenshaDaicho> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, FlexibleDate 資格取得日) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public IOptional<HihokenshaDaichoModel> find直近被保険者台帳(HihokenshaNo 被保険者番号) {
+        return finder.find最新被保険者台帳(被保険者番号);
     }
 
 }
