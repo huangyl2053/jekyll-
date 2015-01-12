@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -85,6 +85,23 @@ public class HihokenshaDaichoDacTest {
         }
     }
 
+    public static class selectAll extends DbzTestDacBase {
+
+        @Test
+        public void データが見つかる検索条件を渡すと_モデルリストを返す() {
+            TestSupport.insertDbT1001(市町村コード1, 被保険者番号1, 処理日時1, 識別コード1);
+            IItemList<HihokenshaDaichoModel> modelList = sut.selectAll();
+            assertThat(modelList.size(), is(1));
+            // 任意の項目が一致するテストケースを記述してください。
+            assertThat(modelList.toList().get(0).get市町村コード(), is(市町村コード1));
+        }
+
+        @Test
+        public void データが見つかない検索条件を渡すと_空のリストを返す() {
+            assertThat(sut.selectAll().isEmpty(), is(true));
+        }
+    }
+
     public static class select被保険者台帳一覧Test extends DbzTestDacBase {
 
         @Before
@@ -143,6 +160,31 @@ public class HihokenshaDaichoDacTest {
         public void データが見つかない検索条件を渡すと_nullを返す() {
             assertThat(sut.select最新被保険者台帳(new LasdecCode("999999"), 識別コード1).isPresent(), is(false));
         }
+    }
+
+    public static class select最新被保険者台帳_被保険者番号Test extends DbzTestDacBase {
+
+        @Before
+        public void setUp() {
+            TestSupport.insertDbT1001(市町村コード1, 被保険者番号1, 処理日時1, 識別コード1);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の被保険者番号にnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.select最新被保険者台帳(null);
+        }
+
+        @Test
+        public void データが見つかる検索条件を渡すと_居宅給付計画事業者作成モデル返す() {
+            assertThat(sut.select最新被保険者台帳(被保険者番号1).get().get被保険者番号(), is(被保険者番号1));
+        }
+
+        // データが見つからない値を指定するように修正してください。
+        @Test
+        public void データが見つかない検索条件を渡すと_データ無しを返す() {
+            assertThat(sut.select最新被保険者台帳(被保険者番号2).isPresent(), is(false));
+        }
+
     }
 
     public static class insertTest extends DbzTestDacBase {

@@ -6,9 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -59,5 +60,13 @@ public interface IHihokenshaDaichoFinder {
      * @return ある資格取得期間中の被保険者台帳List
      */
     IItemList<IHihokenshaDaicho> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, FlexibleDate 資格取得日);
+
+    /**
+     * 被保険者番号を指定して、該当する直近の被保険者台帳を取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return 被保険者台帳
+     */
+    IOptional<HihokenshaDaichoModel> find直近被保険者台帳(HihokenshaNo 被保険者番号);
 
 }

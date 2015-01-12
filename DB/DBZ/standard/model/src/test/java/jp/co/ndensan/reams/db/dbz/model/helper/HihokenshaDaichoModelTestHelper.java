@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.model.helper;
 
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 
 /**
  * HihokenshaDaichoModelのテストデータ作成クラスです。

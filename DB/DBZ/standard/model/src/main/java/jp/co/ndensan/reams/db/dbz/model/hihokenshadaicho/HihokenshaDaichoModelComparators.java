@@ -16,12 +16,12 @@ import java.util.Comparator;
 public enum HihokenshaDaichoModelComparators implements Comparator<HihokenshaDaichoModel> {
 
     /**
-     * orderBy資格取得日で被保険者台帳Modelをソートする機能を持ちます。
+     * orderBy資格取得年月日で被保険者台帳Modelをソートする機能を持ちます。
      */
-    orderBy資格取得日 {
+    orderBy資格取得年月日 {
                 @Override
                 public int compare(HihokenshaDaichoModel model1, HihokenshaDaichoModel model2) {
-                    return model1.get資格取得日().compareTo(model2.get資格取得日());
+                    return model1.get資格取得年月日().compareTo(model2.get資格取得年月日());
                 }
             };
 

@@ -75,7 +75,7 @@
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\CompleteProcess.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\hihokenshafinder\HihokenshaFinder.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\HihokenshaInputGuide.ts" />
-    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\HihokenshaShikakuHakko.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\hihokenshashikakuhakko\HihokenshaShikakuHakko.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\HokenshaInputGuide.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\HokenshaJoho.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\JigyoshaInputGuide.ts" />
