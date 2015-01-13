@@ -42,22 +42,22 @@ public class HihokenshaDaichoManager {
     }
 
     /**
-     * 主キーに合致する被保険者台帳を返します。
+     * 主キーに合致する{@link HihokenshaDaichoModel}を返します。
      *
      * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
      * @param 処理日時 処理日時
-     * @return IOptional<HihokenshaDaichoModel>
+     * @return {@link HihokenshaDaichoModel}
      */
     @Transaction
-    public IOptional<HihokenshaDaichoModel> get被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
+    public IOptional<HihokenshaDaichoModel> find被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
         return dac.select被保険者台帳ByKey(市町村コード, 被保険者番号, 処理日時);
     }
 
     /**
      * 被保険者台帳の一覧を返します。
      *
-     * @return IItemList<HihokenshaDaichoModel>
+     * @return 被保険者台帳の一覧
      */
     @Transaction
     public IItemList<HihokenshaDaichoModel> get被保険者台帳一覧() {

@@ -48,7 +48,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
      * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
      * @param 処理日時 処理日時
-     * @return IOptional<HihokenshaDaichoModel>
+     * @return {@code IOptional<HihokenshaDaichoModel>}
      */
     @Transaction
     public IOptional<HihokenshaDaichoModel> select被保険者台帳ByKey(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
@@ -63,7 +63,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
     /**
      * 被保険者台帳を全件返します。
      *
-     * @return IItemList<HihokenshaDaichoModel>
+     * @return {@code IItemList<HihokenshaDaichoModel>}
      */
     @Transaction
     public IItemList<HihokenshaDaichoModel> selectAll() {
@@ -84,7 +84,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
      *
      * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
-     * @return IItemList<HihokenshaDaichoModel>
+     * @return {@code IItemList<HihokenshaDaichoModel>}
      */
     @Transaction
     public IItemList<HihokenshaDaichoModel> select被保険者台帳一覧(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
@@ -112,7 +112,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
      *
      * @param 市町村コード 市町村コード
      * @param 識別コード 識別コード
-     * @return IOptional<HihokenshaDaichoModel>
+     * @return {@code IOptional<HihokenshaDaichoModel>}
      */
     @Transaction
     public IOptional<HihokenshaDaichoModel> select最新被保険者台帳(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
@@ -134,7 +134,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
      * 条件に合致する最新被保険者台帳を１件返します。
      *
      * @param 被保険者番号 被保険者番号
-     * @return IOptional<HihokenshaDaichoModel>
+     * @return {@code IOptional<HihokenshaDaichoModel>}
      */
     @Transaction
     public IOptional<HihokenshaDaichoModel> select最新被保険者台帳(HihokenshaNo 被保険者番号) {

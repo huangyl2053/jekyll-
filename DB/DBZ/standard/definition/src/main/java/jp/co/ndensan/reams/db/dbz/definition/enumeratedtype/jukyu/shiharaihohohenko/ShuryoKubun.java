@@ -43,7 +43,8 @@ public enum ShuryoKubun {
      */
     その他("99"),
     /**
-     * コードがnullの時の{@link ShuryoKubun}です。
+     * 未設定状態を表します。コード："" (空文字) <br/>
+     * nullの時の{@link ShuryoKubun}です。
      */
     EMPTY("") {
                 @Override
@@ -84,6 +85,10 @@ public enum ShuryoKubun {
      * @throws IllegalArgumentException コードに対応する{@link ShuryoKubun}が無い時
      */
     public static ShuryoKubun toValue(RString code) throws IllegalArgumentException {
+        return code == null ? EMPTY : _toValue(code);
+    }
+
+    private static ShuryoKubun _toValue(RString code) {
         ShuryoKubun value = CodeToValue.get(code);
         if (value != null) {
             return value;

@@ -38,5 +38,4 @@ public class SokujiKouseiJumin {
         response.data = sokujiKouseiJuminDiv;
         return response;
     }
-
 }

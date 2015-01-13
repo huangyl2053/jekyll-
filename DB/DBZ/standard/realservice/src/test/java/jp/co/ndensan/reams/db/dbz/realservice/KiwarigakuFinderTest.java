@@ -7,15 +7,16 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.model.helper.KibetsuChoteiKyotsuModelTestHelper;
-import jp.co.ndensan.reams.db.dbz.model.relate.KibetsuChoteiKyotsuModel;
+import jp.co.ndensan.reams.db.dbz.model.relate.fuka.KibetsuChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.KibetsuChoteiKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urc.business.IShuno;
 import jp.co.ndensan.reams.ur.urc.business.IShunoKingakuComponentSupply;
 import jp.co.ndensan.reams.ur.urc.realservice.IShunoManager;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import org.junit.experimental.runners.Enclosed;
@@ -35,8 +36,8 @@ import static org.mockito.Mockito.when;
 @RunWith(Enclosed.class)
 public class KiwarigakuFinderTest extends DbzTestBase {
 
-    private static final FlexibleYear 調定年度 = FlexibleYear.MAX;
-    private static final FlexibleYear 賦課年度 = FlexibleYear.MAX;
+    private static final ChoteiNendo 調定年度 = ChoteiNendo.EMPTY;
+    private static final FukaNendo 賦課年度 = FukaNendo.EMPTY;
     private static final TsuchishoNo 通知書番号 = TsuchishoNo.EMPTY;
     private static final RDateTime 処理日時 = RDateTime.MAX;
 
@@ -68,7 +69,7 @@ public class KiwarigakuFinderTest extends DbzTestBase {
     private static KibetsuChoteiKyotsuDac createDac(int count) {
         KibetsuChoteiKyotsuDac dac = mock(KibetsuChoteiKyotsuDac.class);
         List<KibetsuChoteiKyotsuModel> list = createChoteigakuList(count);
-        when(dac.select介護期別調定共通一覧(any(FlexibleYear.class), any(FlexibleYear.class), any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(list);
+        when(dac.select介護期別調定共通一覧(any(ChoteiNendo.class), any(FukaNendo.class), any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(list);
         return dac;
     }
 

@@ -18,6 +18,11 @@ public final class HihokenshaDaichoModelTestHelper {
     private HihokenshaDaichoModelTestHelper() {
     }
 
+    /**
+     * {@link HihokenshaDaichoModel}を生成して返します。
+     *
+     * @return {@link HihokenshaDaichoModel}
+     */
     public static HihokenshaDaichoModel createModel() {
         return new HihokenshaDaichoModel(DbT1001HihokenshaDaichoEntityGenerator.createDbT1001HihokenshaDaichoEntity());
     }

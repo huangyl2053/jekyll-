@@ -6,17 +6,15 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002Fuka;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002Fuka.choteiNendo;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002Fuka.fukaNendo;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002Fuka.shoriTimestamp;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002Fuka.tsuchishoNo;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002Fuka.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -46,8 +44,8 @@ public class DbT2002FukaDac implements IModifiable<DbT2002FukaEntity> {
      */
     @Transaction
     public DbT2002FukaEntity selectByKey(
-            FlexibleYear 調定年度,
-            FlexibleYear 賦課年度,
+            ChoteiNendo 調定年度,
+            FukaNendo 賦課年度,
             TsuchishoNo 通知書番号,
             RDateTime 処理日時) throws NullPointerException {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
@@ -60,8 +58,8 @@ public class DbT2002FukaDac implements IModifiable<DbT2002FukaEntity> {
         return accessor.select().
                 table(DbT2002Fuka.class).
                 where(and(
-                                eq(choteiNendo, 調定年度),
-                                eq(fukaNendo, 賦課年度),
+                                eq(choteiNendo, 調定年度.value()),
+                                eq(fukaNendo, 賦課年度.value()),
                                 eq(tsuchishoNo, 通知書番号),
                                 eq(shoriTimestamp, 処理日時))).
                 toObject(DbT2002FukaEntity.class);
@@ -100,18 +98,5 @@ public class DbT2002FukaDac implements IModifiable<DbT2002FukaEntity> {
     public int delete(DbT2002FukaEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
-    }
-
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
-    /**
-     * 物理削除を行う。
-     *
-     * @param entity DbT2002FukaEntity
-     * @return int 件数
-     */
-    @Transaction
-    public int deletePhysical(DbT2002FukaEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
     }
 }

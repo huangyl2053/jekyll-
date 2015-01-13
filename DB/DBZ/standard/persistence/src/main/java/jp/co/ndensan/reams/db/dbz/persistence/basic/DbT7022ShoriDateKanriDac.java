@@ -6,17 +6,13 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanri;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanri.batchID;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanri.batchIDEdaban;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanri.gyomuCode;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanri.nendo;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanri.nendoNaiRenban;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanri.shichosonCode;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanri.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -40,10 +36,10 @@ public class DbT7022ShoriDateKanriDac implements IModifiable<DbT7022ShoriDateKan
     /**
      * 主キーで処理日付管理マスタを取得します。
      *
-     * @param 業務コード GyomuCode
+     * @param サブ業務コード SubGyomuCode
      * @param 市町村コード ShichosonCode
-     * @param バッチＩＤ BatchID
-     * @param バッチID枝番 BatchIDEdaban
+     * @param 処理名 ShoriName
+     * @param 処理枝番 ShoriEdaban
      * @param 年度 Nendo
      * @param 年度内連番 NendoNaiRenban
      * @return DbT7022ShoriDateKanriEntity
@@ -51,16 +47,16 @@ public class DbT7022ShoriDateKanriDac implements IModifiable<DbT7022ShoriDateKan
      */
     @Transaction
     public DbT7022ShoriDateKanriEntity selectByKey(
-            GyomuCode 業務コード,
+            SubGyomuCode サブ業務コード,
             LasdecCode 市町村コード,
-            RString バッチＩＤ,
-            RString バッチID枝番,
+            ShoriName 処理名,
+            RString 処理枝番,
             FlexibleYear 年度,
             RString 年度内連番) throws NullPointerException {
-        requireNonNull(業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("業務コード"));
+        requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サブ業務コード"));
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        requireNonNull(バッチＩＤ, UrSystemErrorMessages.値がnull.getReplacedMessage("バッチＩＤ"));
-        requireNonNull(バッチID枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("バッチID枝番"));
+        requireNonNull(処理名, UrSystemErrorMessages.値がnull.getReplacedMessage("処理名"));
+        requireNonNull(処理枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("処理枝番"));
         requireNonNull(年度, UrSystemErrorMessages.値がnull.getReplacedMessage("年度"));
         requireNonNull(年度内連番, UrSystemErrorMessages.値がnull.getReplacedMessage("年度内連番"));
 
@@ -69,10 +65,10 @@ public class DbT7022ShoriDateKanriDac implements IModifiable<DbT7022ShoriDateKan
         return accessor.select().
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
-                                eq(gyomuCode, 業務コード),
+                                eq(subGyomuCode, サブ業務コード),
                                 eq(shichosonCode, 市町村コード),
-                                eq(batchID, バッチＩＤ),
-                                eq(batchIDEdaban, バッチID枝番),
+                                eq(shoriName, 処理名.toRString()),
+                                eq(shoriEdaban, 処理枝番),
                                 eq(nendo, 年度),
                                 eq(nendoNaiRenban, 年度内連番))).
                 toObject(DbT7022ShoriDateKanriEntity.class);
@@ -111,18 +107,5 @@ public class DbT7022ShoriDateKanriDac implements IModifiable<DbT7022ShoriDateKan
     public int delete(DbT7022ShoriDateKanriEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
-    }
-
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
-    /**
-     * 物理削除を行う。
-     *
-     * @param entity DbT7022ShoriDateKanriEntity
-     * @return int 件数
-     */
-    @Transaction
-    public int deletePhysical(DbT7022ShoriDateKanriEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
     }
 }

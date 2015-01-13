@@ -6,11 +6,11 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -48,11 +48,11 @@ public class DbT2013HokenryoDankaiDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_段階インデックス,
                     DEFAULT_ランク区分);
             TestSupport.insert(
-                    DEFAULT_賦課年度.plusYear(1),
+                    new FukaNendo(DEFAULT_賦課年度.plusYear(1)),
                     DEFAULT_段階インデックス,
                     DEFAULT_ランク区分);
         }
@@ -68,7 +68,7 @@ public class DbT2013HokenryoDankaiDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 段階インデックスがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     null,
                     DEFAULT_ランク区分);
         }
@@ -76,7 +76,7 @@ public class DbT2013HokenryoDankaiDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void ランク区分がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_段階インデックス,
                     null);
         }
@@ -84,7 +84,7 @@ public class DbT2013HokenryoDankaiDacTest extends DbzTestDacBase {
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT2013HokenryoDankaiEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_段階インデックス,
                     DEFAULT_ランク区分);
             assertThat(insertedRecord, is(notNullValue()));
@@ -93,7 +93,7 @@ public class DbT2013HokenryoDankaiDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT2013HokenryoDankaiEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_賦課年度.plusYear(10),
+                    new FukaNendo(DEFAULT_賦課年度.plusYear(10)),
                     DEFAULT_段階インデックス,
                     DEFAULT_ランク区分);
             assertThat(insertedRecord, is(nullValue()));
@@ -105,11 +105,11 @@ public class DbT2013HokenryoDankaiDacTest extends DbzTestDacBase {
         @Test
         public void 保険料段階が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_段階インデックス,
                     DEFAULT_ランク区分);
             TestSupport.insert(
-                    DEFAULT_賦課年度.plusYear(1),
+                    new FukaNendo(DEFAULT_賦課年度.plusYear(1)),
                     DEFAULT_段階インデックス,
                     DEFAULT_ランク区分);
             assertThat(sut.selectAll().size(), is(2));
@@ -126,12 +126,12 @@ public class DbT2013HokenryoDankaiDacTest extends DbzTestDacBase {
         @Test
         public void 保険料段階エンティティを渡すと_insertは_保険料段階を追加する() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_段階インデックス,
                     DEFAULT_ランク区分);
 
             assertThat(sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_段階インデックス,
                     DEFAULT_ランク区分), is(notNullValue()));
         }
@@ -142,7 +142,7 @@ public class DbT2013HokenryoDankaiDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_段階インデックス,
                     DEFAULT_ランク区分);
         }
@@ -155,7 +155,7 @@ public class DbT2013HokenryoDankaiDacTest extends DbzTestDacBase {
             sut.update(updateRecord);
 
             DbT2013HokenryoDankaiEntity updatedRecord = sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_段階インデックス,
                     DEFAULT_ランク区分);
 
@@ -168,7 +168,7 @@ public class DbT2013HokenryoDankaiDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_段階インデックス,
                     DEFAULT_ランク区分);
         }
@@ -176,11 +176,11 @@ public class DbT2013HokenryoDankaiDacTest extends DbzTestDacBase {
         @Test
         public void 保険料段階エンティティを渡すと_deleteは_保険料段階を削除する() {
             sut.delete(sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_段階インデックス,
                     DEFAULT_ランク区分));
             assertThat(sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_段階インデックス,
                     DEFAULT_ランク区分), is(nullValue()));
         }
@@ -189,11 +189,11 @@ public class DbT2013HokenryoDankaiDacTest extends DbzTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                FlexibleYear 賦課年度,
+                FukaNendo 賦課年度,
                 DankaiIndex 段階インデックス,
                 RankKubun ランク区分) {
             DbT2013HokenryoDankaiEntity entity = DbT2013HokenryoDankaiEntityGenerator.createDbT2013HokenryoDankaiEntity();
-            entity.setFukaNendo(賦課年度);
+            entity.setFukaNendo(賦課年度.value());
             entity.setDankaiIndex(段階インデックス);
             entity.setRankuKubun(ランク区分);
             sut.insert(entity);

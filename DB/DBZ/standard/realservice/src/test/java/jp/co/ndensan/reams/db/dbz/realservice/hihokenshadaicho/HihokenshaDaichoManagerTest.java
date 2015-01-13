@@ -63,7 +63,7 @@ public class HihokenshaDaichoManagerTest {
 
             when(dac.select被保険者台帳ByKey(any(LasdecCode.class), any(HihokenshaNo.class), any(YMDHMS.class))).thenReturn(被保険者台帳モデル);
 
-            IOptional<HihokenshaDaichoModel> result = sut.get被保険者台帳(市町村コード, 被保険者番号, 処理日時);
+            IOptional<HihokenshaDaichoModel> result = sut.find被保険者台帳(市町村コード, 被保険者番号, 処理日時);
 
             assertThat(result.get().get資格取得事由(), is(被保険者台帳モデル.get().get資格取得事由()));
         }

@@ -11,24 +11,26 @@ import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbz.business.KiwarigakuCalculator;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2002FukaEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.ChoteiKyotsuModel;
-import jp.co.ndensan.reams.db.dbz.model.FukaModel;
-import jp.co.ndensan.reams.db.dbz.model.HokenryoDankaiModel;
-import jp.co.ndensan.reams.db.dbz.model.KibetsuModel;
-import jp.co.ndensan.reams.db.dbz.model.KiwarigakuMeisai;
-import jp.co.ndensan.reams.db.dbz.model.relate.KibetsuChoteiKyotsuModel;
-import jp.co.ndensan.reams.db.dbz.realservice.FukaShokaiFinder;
+import jp.co.ndensan.reams.db.dbz.model.fuka.ChoteiKyotsuModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoDankaiModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.KiwarigakuMeisai;
+import jp.co.ndensan.reams.db.dbz.model.relate.fuka.KibetsuChoteiKyotsuModel;
+import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
 import jp.co.ndensan.reams.db.dbz.realservice.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbz.realservice.KiwarigakuFinder;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -60,17 +62,17 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
 
     private static final FlexibleYear 激変緩和開始年度 = new FlexibleYear("2006");
     private static final FlexibleYear 激変緩和終了年度 = new FlexibleYear("2007");
-    private static final FlexibleYear 賦課年度1 = DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
-    private static final FlexibleYear 賦課年度2 = DbT2002FukaEntityGenerator.DEFAULT_賦課年度.plusYear(1);
-    private static final FlexibleYear 調定年度1 = DbT2002FukaEntityGenerator.DEFAULT_調定年度;
-    private static final FlexibleYear 調定年度2 = DbT2002FukaEntityGenerator.DEFAULT_調定年度.plusYear(1);
+    private static final FukaNendo 賦課年度1 = new FukaNendo(DbT2002FukaEntityGenerator.DEFAULT_賦課年度);
+    private static final FukaNendo 賦課年度2 = new FukaNendo(DbT2002FukaEntityGenerator.DEFAULT_賦課年度.plusYear(1));
+    private static final ChoteiNendo 調定年度1 = new ChoteiNendo(DbT2002FukaEntityGenerator.DEFAULT_調定年度);
+    private static final ChoteiNendo 調定年度2 = new ChoteiNendo(DbT2002FukaEntityGenerator.DEFAULT_調定年度.plusYear(1));
     private static final TsuchishoNo 通知書番号1 = DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
     private static final TsuchishoNo 通知書番号2 = new TsuchishoNo("0000000010");
 
     @BeforeClass
     public static void test() {
         result = createNewDiv();
-        sut = new FukaRirekiAllHandler(result, createFukaFinder(), createDankaiManager(), createKiwariFinder());
+        sut = new FukaRirekiAllHandler(result, createFukaManager(), createDankaiManager(), createKiwariFinder());
     }
 
     public static class load_被保険者番号 {
@@ -79,7 +81,7 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
         public void 全賦課履歴のデータがある時_loadは_データをDivに設定する() {
             int count = sut.load(HihokenshaNo.EMPTY);
             assertThat(count, is(2));
-            assertThat(result.getDgFukaRirekiAll().getDataSource().get(0).getFukaNendo(), is(賦課年度2.toDateString()));
+            assertThat(result.getDgFukaRirekiAll().getDataSource().get(0).getFukaNendo(), is(賦課年度2.value().toDateString()));
         }
     }
 
@@ -87,9 +89,9 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
 
         @Test
         public void 全賦課履歴のデータがある時_loadは_データをDivに設定する() {
-            int count = sut.load(HihokenshaNo.EMPTY, FlexibleYear.EMPTY);
+            int count = sut.load(HihokenshaNo.EMPTY, FukaNendo.EMPTY);
             assertThat(count, is(2));
-            assertThat(result.getDgFukaRirekiAll().getDataSource().get(0).getFukaNendo(), is(賦課年度2.toDateString()));
+            assertThat(result.getDgFukaRirekiAll().getDataSource().get(0).getFukaNendo(), is(賦課年度2.value().toDateString()));
         }
     }
 
@@ -97,10 +99,10 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
 
         @Test
         public void 全賦課履歴のデータがある時_reloadは_データをDivに設定し_指定行を選択状態にする() {
-            int count = sut.reload(HihokenshaNo.EMPTY, 賦課年度1, 調定年度1, 通知書番号1);
+            int count = sut.reload(HihokenshaNo.EMPTY, 調定年度1, 賦課年度1, 通知書番号1);
             assertThat(count, is(2));
-            assertThat(result.getDgFukaRirekiAll().getDataSource().get(0).getFukaNendo(), is(賦課年度2.toDateString()));
-            assertThat(result.getDgFukaRirekiAll().getSelectedItems().get(0).getFukaNendo(), is(賦課年度1.toDateString()));
+            assertThat(result.getDgFukaRirekiAll().getDataSource().get(0).getFukaNendo(), is(賦課年度2.value().toDateString()));
+            assertThat(result.getDgFukaRirekiAll().getSelectedItems().get(0).getFukaNendo(), is(賦課年度1.value().toDateString()));
         }
     }
 
@@ -115,7 +117,7 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
 
         @Test
         public void 行が選択されている時_get賦課履歴は_選択行の賦課履歴を返す() {
-            sut.reload(HihokenshaNo.EMPTY, 賦課年度1, 調定年度1, 通知書番号1);
+            sut.reload(HihokenshaNo.EMPTY, 調定年度1, 賦課年度1, 通知書番号1);
             assertThat(sut.get賦課履歴().get賦課履歴All().size(), is(1));
             assertThat(sut.get賦課履歴().get賦課履歴All().toList().get(0).get賦課年度(), is(賦課年度1));
         }
@@ -127,25 +129,25 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
         return div;
     }
 
-    private static FukaShokaiFinder createFukaFinder() {
-        FukaShokaiFinder mock = mock(FukaShokaiFinder.class);
+    private static FukaManager createFukaManager() {
+        FukaManager mock = mock(FukaManager.class);
         IItemList<FukaModel> modelList = createFukaModelList();
         when(mock.load全賦課履歴(any(HihokenshaNo.class))).thenReturn(modelList);
-        when(mock.load全賦課履歴(any(HihokenshaNo.class), any(FlexibleYear.class))).thenReturn(modelList);
+        when(mock.load全賦課履歴(any(HihokenshaNo.class), any(FukaNendo.class))).thenReturn(modelList);
         return mock;
     }
 
     private static HokenryoDankaiManager createDankaiManager() {
         HokenryoDankaiManager mock = mock(HokenryoDankaiManager.class);
         IOptional<HokenryoDankai> model = createHokenryoDankai();
-        when(mock.get保険料段階(any(FlexibleYear.class), any(LasdecCode.class), any(RString.class))).thenReturn(model);
+        when(mock.get保険料段階(any(FukaNendo.class), any(LasdecCode.class), any(RString.class))).thenReturn(model);
         return mock;
     }
 
     private static KiwarigakuFinder createKiwariFinder() {
         KiwarigakuFinder mock = mock(KiwarigakuFinder.class);
         IOptional<Kiwarigaku> model = createKiwarigaku();
-        when(mock.load期割額(any(FlexibleYear.class), any(FlexibleYear.class), any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(model);
+        when(mock.load期割額(any(ChoteiNendo.class), any(FukaNendo.class), any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(model);
         return mock;
     }
 
@@ -156,10 +158,10 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
         return ItemList.of(modelList);
     }
 
-    private static FukaModel createFukaModel(FlexibleYear 賦課年度, FlexibleYear 調定年度, TsuchishoNo 通知書番号) {
+    private static FukaModel createFukaModel(FukaNendo 賦課年度, ChoteiNendo 調定年度, TsuchishoNo 通知書番号) {
         DbT2002FukaEntity entity = DbT2002FukaEntityGenerator.createDbT2002FukaEntity();
-        entity.setFukaNendo(賦課年度);
-        entity.setChoteiNendo(調定年度);
+        entity.setFukaNendo(賦課年度.value());
+        entity.setChoteiNendo(調定年度.value());
         entity.setTsuchishoNo(通知書番号);
         return new FukaModel(entity);
     }
