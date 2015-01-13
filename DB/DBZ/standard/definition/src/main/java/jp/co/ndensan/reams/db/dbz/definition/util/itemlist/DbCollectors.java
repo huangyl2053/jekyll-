@@ -212,6 +212,17 @@ public final class DbCollectors {
         return DbCollector.of(container, accumulator, finisher);
     }
 
+    /**
+     * 指定の{@link Map}が指定のキーに紐付く値を保持する場合は、その値を返します。
+     * 保持しない場合は、mappingFunctionが生成する値をキーに紐付け、その値を返します。
+     *
+     * @param <K> キーの型
+     * @param <V> キーに紐付く値の型
+     * @param map マップ
+     * @param key キー
+     * @param mappingFunction マッピングする値を生成するfunction
+     * @return キーに紐付く値(あれば)。もしくは、mappingFunctionにより新しく生成した値。
+     */
     private static <K, V> V _computeIfAbsent(Map<K, V> map, K key, IFunction<? super K, ? extends V> mappingFunction) {
         V value = map.get(key);
         if (value != null) {
@@ -247,6 +258,13 @@ public final class DbCollectors {
         public MySuppliers() {
         }
 
+        /**
+         * {@link HashMap}のインスタンスを生成する{@link ISupplier}です。
+         *
+         * @param <K> キーの型
+         * @param <V> 値の型
+         * @return {@link HashMap}のインスタンスを生成する{@link ISupplier}
+         */
         private static <K, V> ISupplier<Map<K, V>> _HashMap$new() {
             return new ISupplier<Map<K, V>>() {
                 @Override
@@ -256,6 +274,12 @@ public final class DbCollectors {
             };
         }
 
+        /**
+         * {@link ArrayList}のインスタンスを生成する{@link ISupplier}です。
+         *
+         * @param <T> 保持する要素の型
+         * @return {@link ArrayList}のインスタンスを生成する{@link ISupplier}
+         */
         private static <T> ISupplier<List<T>> _ArrayList$new() {
             return new ISupplier<List<T>>() {
                 @Override

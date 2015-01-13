@@ -14,12 +14,16 @@ import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 
 /**
+ * {@link DbCollectors}と合わせて用いることを想定したユーティリティです。
+ * 例えば、{@link IFunction}を返すクラスメソッドは
+ * {@link DbCollectors#collectingAndThen(jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IDbCollector, jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction) DbCollectors#collectingAndThen}
+ * の{@code finisher}に渡すことで、任意の事後処理を付加できます。
  *
  * @author N3327 三浦 凌
  */
-public final class CollectorSupports {
+public final class DbCollectorsSupport {
 
-    private CollectorSupports() {
+    private DbCollectorsSupport() {
     }
 
     /**
@@ -74,22 +78,31 @@ public final class CollectorSupports {
     }
 
     /**
+     * {@link IOptional}を保持するMapから{@link IOptional#isPresent() isPresent()}が{@code true}を返す値だけをまとめて、
+     * {@link IItemList}として返す処理を定義した{@link IFunction}です。
+     * {@link #gatheringPresentItems() gatheringPresentItems()}の型指定を引数によって行います。
      *
-     * @param <K>
-     * @param <T>
-     * @param mapKeyType
-     * @param itemsType
+     * @param <K> キーの型
+     * @param <T> Mapの保持する{@link IOptional}がラップしたオブジェクトの型,
+     * 生成される{@link IItemList}が保持する要素の型
+     * @param mapKeyType Mapのキーの型を表す{@link class}
+     * @param itemsType 生成される{@link IItemList}が保持する要素の型を表す{@link class}
      * @return
+     * {@link IOptional#isPresent() isPresent()}が{@code true}を返す値だけをまとめた{@link IItemList}を生成する{@link IFunction}
      */
     public static <K, T> IFunction<Map<K, IOptional<T>>, IItemList<T>> gatheringPresentItems(Class<K> mapKeyType, Class<T> itemsType) {
         return gatheringPresentItems();
     }
 
     /**
+     * {@link IOptional}を保持するMapから{@link IOptional#isPresent() isPresent()}が{@code true}を返す値だけをまとめて、
+     * {@link IItemList}として返す処理を定義した{@link IFunction}です。
      *
-     * @param <K>
-     * @param <T>
+     * @param <K> Mapのキーの型
+     * @param <T> Mapの保持する{@link IOptional}がラップしたオブジェクトの型,
+     * 生成される{@link IItemList}が保持する要素の型
      * @return
+     * {@link IOptional#isPresent() isPresent()}が{@code true}を返す値だけをまとめた{@link IItemList}を生成する{@link IFunction}
      */
     public static <K, T> IFunction<Map<K, IOptional<T>>, IItemList<T>> gatheringPresentItems() {
         return new IFunction<Map<K, IOptional<T>>, IItemList<T>>() {

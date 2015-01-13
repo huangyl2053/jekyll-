@@ -8,10 +8,9 @@ package jp.co.ndensan.reams.db.dbz.definition.util.function;
 /**
  * ふたつの引数を受け取って、結果を返さない処理であることを表します。
  *
- * @author n3327 三浦 凌
+ * @author N3327 三浦 凌
  * @param <T> 第1引数の型
  * @param <U> 第2引数の型
- * @author N3327 三浦 凌
  */
 public interface IBiConsumer<T, U> {
 
