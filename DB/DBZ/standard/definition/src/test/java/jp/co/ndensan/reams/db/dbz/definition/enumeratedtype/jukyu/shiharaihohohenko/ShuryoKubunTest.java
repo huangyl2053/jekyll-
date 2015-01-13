@@ -52,7 +52,7 @@ public class ShuryoKubunTest {
 
         @Test(expected = IllegalArgumentException.class)
         public void toValueは_引数と同じ値のcodeを持つオブジェクトが無い時_IllegalArgumentExceptionをスローする() {
-            sut.toValue(null);
+            sut.toValue(new RString("100"));
         }
     }
 }
