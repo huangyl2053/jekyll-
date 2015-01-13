@@ -3,13 +3,17 @@
   {
    "id": "0",
    "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0040011",
-   "eventName": "",
+   "layoutName": "DBC0410011",
+   "layoutTitle": "国保連情報取込",
+   "eventName": "next",
    "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0040011",
-   "toEventName": ""
+   "toLayoutName": "DBC0410012",
+   "toLayoutTitle": "共同処理用受給者情報更新結果",
+   "toEventName": "onLoad"
   }
  ],
+ "wizardOrderList": [],
  "subGyomuCode": "DBC",
- "uiContainerName": "DBCUC40011"
+ "uiContainerName": "DBCUC40011",
+ "initAfterOnLoadEventAlias": ""
 }
