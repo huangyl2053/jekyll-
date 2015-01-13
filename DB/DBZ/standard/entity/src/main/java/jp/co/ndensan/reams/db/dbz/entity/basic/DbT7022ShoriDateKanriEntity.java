@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -32,13 +32,13 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private GyomuCode gyomuCode;
+    private SubGyomuCode subGyomuCode;
     @PrimaryKey
     private LasdecCode shichosonCode;
     @PrimaryKey
-    private RString batchID;
+    private RString shoriName;
     @PrimaryKey
-    private RString batchIDEdaban;
+    private RString shoriEdaban;
     @PrimaryKey
     private FlexibleYear nendo;
     @PrimaryKey
@@ -91,19 +91,19 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
     }
 
     /**
-     * getGyomuCode
-     * @return gyomuCode
+     * getSubGyomuCode
+     * @return subGyomuCode
      */
-    public GyomuCode getGyomuCode() {
-        return gyomuCode;
+    public SubGyomuCode getSubGyomuCode() {
+        return subGyomuCode;
     }
 
     /**
-     * setGyomuCode
-     * @param gyomuCode gyomuCode
+     * setSubGyomuCode
+     * @param subGyomuCode subGyomuCode
      */
-    public void setGyomuCode(GyomuCode gyomuCode) {
-        this.gyomuCode = gyomuCode;
+    public void setSubGyomuCode(SubGyomuCode subGyomuCode) {
+        this.subGyomuCode = subGyomuCode;
     }
 
     /**
@@ -123,35 +123,35 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
     }
 
     /**
-     * getBatchID
-     * @return batchID
+     * getShoriName
+     * @return shoriName
      */
-    public RString getBatchID() {
-        return batchID;
+    public RString getShoriName() {
+        return shoriName;
     }
 
     /**
-     * setBatchID
-     * @param batchID batchID
+     * setShoriName
+     * @param shoriName shoriName
      */
-    public void setBatchID(RString batchID) {
-        this.batchID = batchID;
+    public void setShoriName(RString shoriName) {
+        this.shoriName = shoriName;
     }
 
     /**
-     * getBatchIDEdaban
-     * @return batchIDEdaban
+     * getShoriEdaban
+     * @return shoriEdaban
      */
-    public RString getBatchIDEdaban() {
-        return batchIDEdaban;
+    public RString getShoriEdaban() {
+        return shoriEdaban;
     }
 
     /**
-     * setBatchIDEdaban
-     * @param batchIDEdaban batchIDEdaban
+     * setShoriEdaban
+     * @param shoriEdaban shoriEdaban
      */
-    public void setBatchIDEdaban(RString batchIDEdaban) {
-        this.batchIDEdaban = batchIDEdaban;
+    public void setShoriEdaban(RString shoriEdaban) {
+        this.shoriEdaban = shoriEdaban;
     }
 
     /**
@@ -278,16 +278,16 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.gyomuCode, other.gyomuCode)) {
+        if (!Objects.equals(this.subGyomuCode, other.subGyomuCode)) {
             return false;
         }
         if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
             return false;
         }
-        if (!Objects.equals(this.batchID, other.batchID)) {
+        if (!Objects.equals(this.shoriName, other.shoriName)) {
             return false;
         }
-        if (!Objects.equals(this.batchIDEdaban, other.batchIDEdaban)) {
+        if (!Objects.equals(this.shoriEdaban, other.shoriEdaban)) {
             return false;
         }
         if (!Objects.equals(this.nendo, other.nendo)) {
@@ -304,10 +304,10 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
      */
     @Override
     public void shallowCopy(DbT7022ShoriDateKanriEntity entity) {
-        this.gyomuCode = entity.gyomuCode;
+        this.subGyomuCode = entity.subGyomuCode;
         this.shichosonCode = entity.shichosonCode;
-        this.batchID = entity.batchID;
-        this.batchIDEdaban = entity.batchIDEdaban;
+        this.shoriName = entity.shoriName;
+        this.shoriEdaban = entity.shoriEdaban;
         this.nendo = entity.nendo;
         this.nendoNaiRenban = entity.nendoNaiRenban;
         this.kijunYMD = entity.kijunYMD;
@@ -323,10 +323,9 @@ public class DbT7022ShoriDateKanriEntity extends DbTableEntityBase<DbT7022ShoriD
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(gyomuCode, shichosonCode, batchID, batchIDEdaban, nendo, nendoNaiRenban, kijunYMD, taishoKaishiYMD, taishoShuryoYMD, taishoKaishiTimestamp, taishoShuryoTimestamp);
+        return super.toMd5(subGyomuCode, shichosonCode, shoriName, shoriEdaban, nendo, nendoNaiRenban, kijunYMD, taishoKaishiYMD, taishoShuryoYMD, taishoKaishiTimestamp, taishoShuryoTimestamp);
     }
 
 // </editor-fold>
-
 
 }

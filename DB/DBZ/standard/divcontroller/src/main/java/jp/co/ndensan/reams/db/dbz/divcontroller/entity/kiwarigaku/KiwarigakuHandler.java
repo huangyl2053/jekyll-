@@ -15,8 +15,10 @@ import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.KanendoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.TokuchoConfig;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbz.model.KiwarigakuMeisai;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbz.model.fuka.KiwarigakuMeisai;
 import jp.co.ndensan.reams.db.dbz.realservice.KiwarigakuFinder;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -103,11 +105,11 @@ public class KiwarigakuHandler {
      * @param 通知書番号 通知書番号
      * @param 処理日時 処理日時
      */
-    public void load(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時) {
+    public void load(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時) {
 
         List<RString> 月列 = 日付Config.get月別テーブル();
         List<RString> 特徴期列 = 特徴Config.get月の期();
-        List<RString> 普徴期列 = (調定年度.equals(賦課年度)) ? 普徴Config.get月の期() : 過年度Config.get月の期();
+        List<RString> 普徴期列 = (調定年度.value().equals(賦課年度.value())) ? 普徴Config.get月の期() : 過年度Config.get月の期();
 
         setDisplayMode(賦課年度, 普徴期列.size());
 
@@ -128,10 +130,10 @@ public class KiwarigakuHandler {
         return map;
     }
 
-    private void setDisplayMode(FlexibleYear 賦課年度, int 普徴期数) {
+    private void setDisplayMode(FukaNendo 賦課年度, int 普徴期数) {
 
         FlexibleYear 納期統一年度 = new FlexibleYear(賦課計算Config.get納期統一年度());
-        boolean is月列表示 = 納期統一年度.isBeforeOrEquals(賦課年度);
+        boolean is月列表示 = 納期統一年度.isBeforeOrEquals(賦課年度.value());
         boolean is追加期1表示 = (追加期1 <= 普徴期数);
         boolean is追加期2表示 = (追加期2 <= 普徴期数);
 

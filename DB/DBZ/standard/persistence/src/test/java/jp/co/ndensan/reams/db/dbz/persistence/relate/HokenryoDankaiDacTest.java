@@ -6,12 +6,13 @@ package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2012HokenryoRankEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.HokenryoDankaiModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoDankaiModel;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2012HokenryoRankDac;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2013HokenryoDankaiDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
@@ -40,8 +41,8 @@ public class HokenryoDankaiDacTest {
     private static HokenryoDankaiDac sut;
     private static DbT2013HokenryoDankaiDac 保険料段階Dac;
     private static DbT2012HokenryoRankDac 保険料ランクDac;
-    private static final FlexibleYear 賦課年度1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度;
-    private static final FlexibleYear 賦課年度2 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度.plusYear(1);
+    private static final FukaNendo 賦課年度1 = new FukaNendo(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度);
+    private static final FukaNendo 賦課年度2 = new FukaNendo(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度.plusYear(1));
     private static final DankaiIndex 段階インデックス1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
     private static final DankaiIndex 段階インデックス2 = new DankaiIndex(new RString("06"));
     private static final RankKubun ランク区分1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
@@ -90,7 +91,7 @@ public class HokenryoDankaiDacTest {
 
         @Test
         public void データが見つかない検索条件を渡すと_nullを返す() {
-            assertThat(sut.select保険料段階ByKey(FlexibleYear.MAX, 段階インデックス1, ランク区分1), is(nullValue()));
+            assertThat(sut.select保険料段階ByKey(FukaNendo.EMPTY, 段階インデックス1, ランク区分1), is(nullValue()));
         }
     }
 
@@ -119,7 +120,7 @@ public class HokenryoDankaiDacTest {
 
         @Test
         public void データが見つかない検索条件を渡すと__空のリストを返す() {
-            assertThat(sut.select保険料段階一覧(FlexibleYear.MIN).isEmpty(), is(true));
+            assertThat(sut.select保険料段階一覧(FukaNendo.EMPTY).isEmpty(), is(true));
         }
     }
 
@@ -153,7 +154,7 @@ public class HokenryoDankaiDacTest {
 
         @Test
         public void データが見つかない検索条件を渡すと__空のリストを返す() {
-            assertThat(sut.select保険料段階一覧(FlexibleYear.MIN, 段階区分1).isEmpty(), is(true));
+            assertThat(sut.select保険料段階一覧(FukaNendo.EMPTY, 段階区分1).isEmpty(), is(true));
         }
     }
 
@@ -193,7 +194,7 @@ public class HokenryoDankaiDacTest {
 
         @Test
         public void データが見つかない検索条件を渡すと__空のリストを返す() {
-            assertThat(sut.select保険料段階一覧(FlexibleYear.MIN, 市町村コード1, 段階区分1).isEmpty(), is(true));
+            assertThat(sut.select保険料段階一覧(FukaNendo.EMPTY, 市町村コード1, 段階区分1).isEmpty(), is(true));
         }
     }
 
@@ -272,12 +273,12 @@ public class HokenryoDankaiDacTest {
     private static class TestSupport {
 
         public static void insertDbT2013(
-                FlexibleYear 賦課年度,
+                FukaNendo 賦課年度,
                 DankaiIndex 段階インデックス,
                 RankKubun ランク区分,
                 RString 段階区分) {
             DbT2013HokenryoDankaiEntity entity = DbT2013HokenryoDankaiEntityGenerator.createDbT2013HokenryoDankaiEntity();
-            entity.setFukaNendo(賦課年度);
+            entity.setFukaNendo(賦課年度.value());
             entity.setDankaiIndex(段階インデックス);
             entity.setRankuKubun(ランク区分);
             entity.setDankaiKubun(段階区分);
@@ -285,15 +286,14 @@ public class HokenryoDankaiDacTest {
         }
 
         public static void insertDbT2012(
-                FlexibleYear 賦課年度,
+                FukaNendo 賦課年度,
                 LasdecCode 市町村コード,
                 RankKubun ランク区分) {
             DbT2012HokenryoRankEntity entity = DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity();
-            entity.setFukaNendo(賦課年度);
+            entity.setFukaNendo(賦課年度.value());
             entity.setShichosonCode(市町村コード);
             entity.setRankKubun(ランク区分);
             保険料ランクDac.insert(entity);
         }
     }
-
 }

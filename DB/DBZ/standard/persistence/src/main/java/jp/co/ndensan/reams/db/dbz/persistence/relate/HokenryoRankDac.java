@@ -8,18 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2012HokenryoRank;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2012HokenryoRankEntity;
-import jp.co.ndensan.reams.db.dbz.model.HokenryoRankModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoRankModel;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2012HokenryoRankDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 
 /**
@@ -41,7 +41,7 @@ public class HokenryoRankDac implements IModifiable<HokenryoRankModel> {
      * @return HokenryoRankModel
      */
     @Transaction
-    public HokenryoRankModel select保険料ランクByKey(FlexibleYear 賦課年度, LasdecCode 市町村コード) {
+    public HokenryoRankModel select保険料ランクByKey(FukaNendo 賦課年度, LasdecCode 市町村コード) {
 
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
@@ -56,14 +56,14 @@ public class HokenryoRankDac implements IModifiable<HokenryoRankModel> {
      * @return List<HokenryoRankModel>
      */
     @Transaction
-    public List<HokenryoRankModel> select保険料ランク一覧(FlexibleYear 賦課年度) {
+    public List<HokenryoRankModel> select保険料ランク一覧(FukaNendo 賦課年度) {
 
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         List<DbT2012HokenryoRankEntity> 保険料ランクList = accessor.select().
                 table(DbT2012HokenryoRank.class).
-                where(eq(DbT2012HokenryoRank.fukaNendo, 賦課年度)).
+                where(eq(DbT2012HokenryoRank.fukaNendo, 賦課年度.value())).
                 toList(DbT2012HokenryoRankEntity.class);
 
         List<HokenryoRankModel> modelList = new ArrayList<>();

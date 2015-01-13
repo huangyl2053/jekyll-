@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
@@ -30,7 +31,7 @@ import static org.junit.Assert.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class HihokenshaDaichoDacTest {
+public class HihokenshaDaichoDacTest extends DbzTestDacBase {
 
     private static HihokenshaDaichoDac sut;
     private static DbT1001HihokenshaDaichoDac 被保険者台帳Dac;
@@ -88,17 +89,15 @@ public class HihokenshaDaichoDacTest {
     public static class selectAll extends DbzTestDacBase {
 
         @Test
-        public void データが見つかる検索条件を渡すと_モデルリストを返す() {
+        public void selectAllは_insertしたデータを保持するモデルのリストを返す() {
             TestSupport.insertDbT1001(市町村コード1, 被保険者番号1, 処理日時1, 識別コード1);
             IItemList<HihokenshaDaichoModel> modelList = sut.selectAll();
-            assertThat(modelList.size(), is(1));
-            // 任意の項目が一致するテストケースを記述してください。
-            assertThat(modelList.toList().get(0).get市町村コード(), is(市町村コード1));
-        }
-
-        @Test
-        public void データが見つかない検索条件を渡すと_空のリストを返す() {
-            assertThat(sut.selectAll().isEmpty(), is(true));
+            assertThat(modelList.anyMatch(new IPredicate<HihokenshaDaichoModel>() {
+                @Override
+                public boolean evaluate(HihokenshaDaichoModel t) {
+                    return t.get市町村コード().equals(市町村コード1);
+                }
+            }), is(true));
         }
     }
 
@@ -179,12 +178,10 @@ public class HihokenshaDaichoDacTest {
             assertThat(sut.select最新被保険者台帳(被保険者番号1).get().get被保険者番号(), is(被保険者番号1));
         }
 
-        // データが見つからない値を指定するように修正してください。
         @Test
         public void データが見つかない検索条件を渡すと_データ無しを返す() {
             assertThat(sut.select最新被保険者台帳(被保険者番号2).isPresent(), is(false));
         }
-
     }
 
     public static class insertTest extends DbzTestDacBase {
@@ -270,5 +267,4 @@ public class HihokenshaDaichoDacTest {
             被保険者台帳Dac.insert(entity);
         }
     }
-
 }

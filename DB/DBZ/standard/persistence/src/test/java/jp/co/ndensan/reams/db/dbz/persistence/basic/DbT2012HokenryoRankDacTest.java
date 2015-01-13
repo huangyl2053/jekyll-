@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2012HokenryoRankEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
@@ -46,10 +47,10 @@ public class DbT2012HokenryoRankDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_市町村コード);
             TestSupport.insert(
-                    DEFAULT_賦課年度.plusYear(1),
+                    new FukaNendo(DEFAULT_賦課年度.plusYear(1)),
                     DEFAULT_市町村コード);
         }
 
@@ -63,14 +64,14 @@ public class DbT2012HokenryoRankDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     null);
         }
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT2012HokenryoRankEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_市町村コード);
             assertThat(insertedRecord, is(notNullValue()));
         }
@@ -78,7 +79,7 @@ public class DbT2012HokenryoRankDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT2012HokenryoRankEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_賦課年度.plusYear(10),
+                    new FukaNendo(DEFAULT_賦課年度.plusYear(10)),
                     DEFAULT_市町村コード);
             assertThat(insertedRecord, is(nullValue()));
         }
@@ -89,10 +90,10 @@ public class DbT2012HokenryoRankDacTest extends DbzTestDacBase {
         @Test
         public void 保険料ランクが存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_市町村コード);
             TestSupport.insert(
-                    DEFAULT_賦課年度.plusYear(1),
+                    new FukaNendo(DEFAULT_賦課年度.plusYear(1)),
                     DEFAULT_市町村コード);
             assertThat(sut.selectAll().size(), is(2));
         }
@@ -108,11 +109,11 @@ public class DbT2012HokenryoRankDacTest extends DbzTestDacBase {
         @Test
         public void 保険料ランクエンティティを渡すと_insertは_保険料ランクを追加する() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_市町村コード);
 
             assertThat(sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_市町村コード), is(notNullValue()));
         }
     }
@@ -122,7 +123,7 @@ public class DbT2012HokenryoRankDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_市町村コード);
         }
 
@@ -134,7 +135,7 @@ public class DbT2012HokenryoRankDacTest extends DbzTestDacBase {
             sut.update(updateRecord);
 
             DbT2012HokenryoRankEntity updatedRecord = sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_市町村コード);
 
             assertThat(updateRecord.getSokyuNendo(), is(updatedRecord.getSokyuNendo()));
@@ -146,17 +147,17 @@ public class DbT2012HokenryoRankDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_市町村コード);
         }
 
         @Test
         public void 保険料ランクエンティティを渡すと_deleteは_保険料ランクを削除する() {
             sut.delete(sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_市町村コード));
             assertThat(sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_市町村コード), is(nullValue()));
         }
     }
@@ -164,10 +165,10 @@ public class DbT2012HokenryoRankDacTest extends DbzTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                FlexibleYear 賦課年度,
+                FukaNendo 賦課年度,
                 LasdecCode 市町村コード) {
             DbT2012HokenryoRankEntity entity = DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity();
-            entity.setFukaNendo(賦課年度);
+            entity.setFukaNendo(賦課年度.value());
             entity.setShichosonCode(市町村コード);
             sut.insert(entity);
         }

@@ -4,7 +4,9 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.KakuteiNengakuDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -21,12 +23,8 @@ public class FukakonkyoNengakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtKeisanjoNenkanHokenryo")
-    private TextBoxNum txtKeisanjoNenkanHokenryo;
-    @JsonProperty("txtGemmen")
-    private TextBoxNum txtGemmen;
-    @JsonProperty("txtNenkanHokenryo")
-    private TextBoxNum txtNenkanHokenryo;
+    @JsonProperty("KakuteiNengaku")
+    private KakuteiNengakuDiv KakuteiNengaku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,34 +32,47 @@ public class FukakonkyoNengakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtKeisanjoNenkanHokenryo")
-    public TextBoxNum getTxtKeisanjoNenkanHokenryo() {
-        return txtKeisanjoNenkanHokenryo;
+    @JsonProperty("KakuteiNengaku")
+    public KakuteiNengakuDiv getKakuteiNengaku() {
+        return KakuteiNengaku;
     }
 
-    @JsonProperty("txtKeisanjoNenkanHokenryo")
-    public void setTxtKeisanjoNenkanHokenryo(TextBoxNum txtKeisanjoNenkanHokenryo) {
-        this.txtKeisanjoNenkanHokenryo=txtKeisanjoNenkanHokenryo;
+    @JsonProperty("KakuteiNengaku")
+    public void setKakuteiNengaku(KakuteiNengakuDiv KakuteiNengaku) {
+        this.KakuteiNengaku=KakuteiNengaku;
     }
 
-    @JsonProperty("txtGemmen")
-    public TextBoxNum getTxtGemmen() {
-        return txtGemmen;
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public TextBoxNum getTxtKeisanjoNenkanHokenryoGaku() {
+        return this.getKakuteiNengaku().getTxtKeisanjoNenkanHokenryoGaku();
     }
 
-    @JsonProperty("txtGemmen")
-    public void setTxtGemmen(TextBoxNum txtGemmen) {
-        this.txtGemmen=txtGemmen;
+    @JsonIgnore
+    public void  setTxtKeisanjoNenkanHokenryoGaku(TextBoxNum txtKeisanjoNenkanHokenryoGaku) {
+        this.getKakuteiNengaku().setTxtKeisanjoNenkanHokenryoGaku(txtKeisanjoNenkanHokenryoGaku);
     }
 
-    @JsonProperty("txtNenkanHokenryo")
-    public TextBoxNum getTxtNenkanHokenryo() {
-        return txtNenkanHokenryo;
+    @JsonIgnore
+    public TextBoxNum getTxtGemmenGaku() {
+        return this.getKakuteiNengaku().getTxtGemmenGaku();
     }
 
-    @JsonProperty("txtNenkanHokenryo")
-    public void setTxtNenkanHokenryo(TextBoxNum txtNenkanHokenryo) {
-        this.txtNenkanHokenryo=txtNenkanHokenryo;
+    @JsonIgnore
+    public void  setTxtGemmenGaku(TextBoxNum txtGemmenGaku) {
+        this.getKakuteiNengaku().setTxtGemmenGaku(txtGemmenGaku);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtNenkanHokenryoGaku() {
+        return this.getKakuteiNengaku().getTxtNenkanHokenryoGaku();
+    }
+
+    @JsonIgnore
+    public void  setTxtNenkanHokenryoGaku(TextBoxNum txtNenkanHokenryoGaku) {
+        this.getKakuteiNengaku().setTxtNenkanHokenryoGaku(txtNenkanHokenryoGaku);
     }
 
 }

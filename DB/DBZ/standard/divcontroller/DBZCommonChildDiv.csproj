@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
+=======
+﻿<?xml version="1.0" encoding="utf-8"?>
+>>>>>>> b378f2416192970a75c69cb68ba37c5e5e70acd0
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -59,6 +63,7 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" />
   <ItemGroup>
+<<<<<<< HEAD
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShisetsuJoho.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShikakuHenkoRireki.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\IryoHokenRireki.ts" />
@@ -73,7 +78,7 @@
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\PaymentMethod.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KogakuServicehiJudgementResult.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\CompleteProcess.ts" />
-    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\hihokenshafinder\HihokenshaFinder.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\HihokenshaFinder.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\HihokenshaInputGuide.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\hihokenshashikakuhakko\HihokenshaShikakuHakko.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\HokenshaInputGuide.ts" />
@@ -81,13 +86,13 @@
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\JigyoshaInputGuide.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\JukyuShikakuShomeishoHakko.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KagoMoshitate.ts" />
-    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\kaigoatenainfo\KaigoAtenaInfo.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KaigoAtenaInfo.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KaigoChohyoShutsuryokujun.ts" />
-    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\kaigofukakihon\KaigoFukaKihon.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KaigoFukaKihon.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KaigoKanryoMessage.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KaigoRenrakusakiInfo.ts" />
-    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\kaigosaikinshorisharireki\KaigoSaikinShorishaRireki.ts" />
-    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\kaigoshikakukihon\KaigoShikakuKihon.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KaigoSaikinShorishaRireki.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KaigoShikakuKihon.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KaigoTeikeibun.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KogakuServicehiDetail.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\KoshinKakuninDialog.ts" />
@@ -112,6 +117,18 @@
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiKogakuKaigoServicehiInfo.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiKyotakuServiceKeikakuInfo.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\SogoShokaiKyufuSeigenInfo.ts" />
+=======
+    <TypeScriptCompile Include="..\CommonChildDiv\ShisetsuJoho.ts" />
+    <TypeScriptCompile Include="..\CommonChildDiv\ShikakuHenkoRireki.ts" />
+    <TypeScriptCompile Include="..\CommonChildDiv\IryoHokenRireki.ts" />
+    <TypeScriptCompile Include="..\CommonChildDiv\JushochiTokureiRireki.ts" />
+    <TypeScriptCompile Include="..\CommonChildDiv\JushochiTokureiRirekiList.ts" />
+    <TypeScriptCompile Include="..\CommonChildDiv\ShikakuTokusoRireki.ts" />
+    <TypeScriptCompile Include="..\CommonChildDiv\ShisetsuNyutaishoRirekiKanri.ts" />
+    <TypeScriptCompile Include="..\CommonChildDiv\ShoKaishuJokyoList.ts" />
+    <TypeScriptCompile Include="..\CommonChildDiv\ShoKaishuJokyoShosai.ts" />
+    <TypeScriptCompile Include="..\CommonChildDiv\ShoKaishuKirokuKanri.ts" />
+>>>>>>> b378f2416192970a75c69cb68ba37c5e5e70acd0
   </ItemGroup>
   <ItemGroup/>
   <Target Name="AfterBuild">

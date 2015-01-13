@@ -57,7 +57,7 @@ public class ChohyoKyotsuJushoEditConfig {
     }
 
     /**
-     * 都道府県名付与有無を表す値を返します。
+     * {@link TodofukenNamePrint 都道府県名付与有無}を返します。
      *
      * @return 都道府県名付与有無
      */
@@ -67,7 +67,7 @@ public class ChohyoKyotsuJushoEditConfig {
     }
 
     /**
-     * 郡名付与有無を表す値を返します。
+     * {@link GunNamePrint 郡名付与有無}を返します。
      *
      * @return 郡名付与有無
      */
@@ -77,7 +77,7 @@ public class ChohyoKyotsuJushoEditConfig {
     }
 
     /**
-     * 市町村名付与有無を示す値を返します。
+     * {@link ShichosonNamePrint 市町村名付与有無}を示す値を返します。
      *
      * @return 市町村名付与有無
      */
@@ -87,7 +87,7 @@ public class ChohyoKyotsuJushoEditConfig {
     }
 
     /**
-     * 住所編集方法を示す値を返します。
+     * {@link HowToEditJusho 住所編集方法}を返します。
      *
      * @return 住所編集方法
      */
@@ -97,7 +97,7 @@ public class ChohyoKyotsuJushoEditConfig {
     }
 
     /**
-     * 方書表示有無を示す値を返します。
+     * {@link KatagakiPrint 方書表示有無}を返します。
      *
      * @return 方書表示有無
      */

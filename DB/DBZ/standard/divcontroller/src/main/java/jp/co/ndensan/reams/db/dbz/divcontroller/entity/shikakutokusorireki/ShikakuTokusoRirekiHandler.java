@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKeyBuilder;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.search.HihokenshaSearchItem;
 import jp.co.ndensan.reams.ur.urz.realservice.search.INewSearchCondition;
@@ -58,7 +57,7 @@ public class ShikakuTokusoRirekiHandler {
      */
     public void load(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
 
-        KaigoShikakuKihonSearchKey 検索キー = new KaigoShikakuKihonSearchKeyBuilder(市町村コード, 識別コード).build();
+        KaigoShikakuKihonSearchKey 検索キー = new KaigoShikakuKihonSearchKey.Builder(市町村コード, 識別コード).build();
         INewSearchCondition 市町村コード検索条件 = SearchConditionFactory.condition(
                 HihokenshaSearchItem.市町村コード, StringOperator.完全一致, 検索キー.get市町村コード().value());
         INewSearchCondition 識別コード検索条件 = SearchConditionFactory.condition(

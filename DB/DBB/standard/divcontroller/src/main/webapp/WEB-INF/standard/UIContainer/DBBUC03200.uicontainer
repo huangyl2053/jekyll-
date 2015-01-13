@@ -1,0 +1,261 @@
+﻿{
+ "transitionList": [
+  {
+   "id": 1,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0010003",
+   "layoutTitle": "賦課対象者検索",
+   "eventName": "onOnlyRow",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320001",
+   "toLayoutTitle": "介護保険料賦課照会",
+   "toEventName": "initialize"
+  },
+  {
+   "id": 2,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0010003",
+   "layoutTitle": "賦課対象者検索",
+   "eventName": "SelectFukaTaishosha",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320001",
+   "toLayoutTitle": "介護保険料賦課照会",
+   "toEventName": "initialize"
+  },
+  {
+   "id": 3,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320001",
+   "layoutTitle": "介護保険料賦課照会",
+   "eventName": "setaiinShotoku",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320002",
+   "toLayoutTitle": "介護保険料賦課照会（世帯員所得）",
+   "toEventName": "initialize"
+  },
+  {
+   "id": 4,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320001",
+   "layoutTitle": "介護保険料賦課照会",
+   "eventName": "tokucho",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320003",
+   "toLayoutTitle": "介護保険料賦課照会（特別徴収）",
+   "toEventName": "initialize"
+  },
+  {
+   "id": 5,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320001",
+   "layoutTitle": "介護保険料賦課照会",
+   "eventName": "gemmen",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320004",
+   "toLayoutTitle": "介護保険料賦課照会（減免・徴収猶予）",
+   "toEventName": "initialize"
+  },
+  {
+   "id": 6,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320001",
+   "layoutTitle": "介護保険料賦課照会",
+   "eventName": "hikaku",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320005",
+   "toLayoutTitle": "介護保険料賦課比較",
+   "toEventName": "initialize"
+  },
+  {
+   "id": 7,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320001",
+   "layoutTitle": "介護保険料賦課照会",
+   "eventName": "reSearch",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0010003",
+   "toLayoutTitle": "賦課対象者検索",
+   "toEventName": "reSearch"
+  },
+  {
+   "id": 8,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320001",
+   "layoutTitle": "介護保険料賦課照会",
+   "eventName": "returnResult",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0010003",
+   "toLayoutTitle": "賦課対象者検索",
+   "toEventName": ""
+  },
+  {
+   "id": 9,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320002",
+   "layoutTitle": "介護保険料賦課照会（世帯員所得）",
+   "eventName": "rireki",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320001",
+   "toLayoutTitle": "介護保険料賦課照会",
+   "toEventName": "reload"
+  },
+  {
+   "id": 10,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320002",
+   "layoutTitle": "介護保険料賦課照会（世帯員所得）",
+   "eventName": "konkyoKiwari",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320001",
+   "toLayoutTitle": "介護保険料賦課照会",
+   "toEventName": "initialize"
+  },
+  {
+   "id": 11,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320002",
+   "layoutTitle": "介護保険料賦課照会（世帯員所得）",
+   "eventName": "tokucho",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320003",
+   "toLayoutTitle": "介護保険料賦課照会（特別徴収）",
+   "toEventName": "initialize"
+  },
+  {
+   "id": 12,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320002",
+   "layoutTitle": "介護保険料賦課照会（世帯員所得）",
+   "eventName": "gemmen",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320004",
+   "toLayoutTitle": "介護保険料賦課照会（減免・徴収猶予）",
+   "toEventName": "initialize"
+  },
+  {
+   "id": 13,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320002",
+   "layoutTitle": "介護保険料賦課照会（世帯員所得）",
+   "eventName": "reSearch",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0010003",
+   "toLayoutTitle": "賦課対象者検索",
+   "toEventName": "reSearch"
+  },
+  {
+   "id": 14,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320002",
+   "layoutTitle": "介護保険料賦課照会（世帯員所得）",
+   "eventName": "returnResult",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0010003",
+   "toLayoutTitle": "賦課対象者検索",
+   "toEventName": ""
+  },
+  {
+   "id": 15,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320003",
+   "layoutTitle": "介護保険料賦課照会（特別徴収）",
+   "eventName": "rireki",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320001",
+   "toLayoutTitle": "介護保険料賦課照会",
+   "toEventName": "reload"
+  },
+  {
+   "id": 16,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320003",
+   "layoutTitle": "介護保険料賦課照会（特別徴収）",
+   "eventName": "konkyoKiwari",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320001",
+   "toLayoutTitle": "介護保険料賦課照会",
+   "toEventName": "initialize"
+  },
+  {
+   "id": 17,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320003",
+   "layoutTitle": "介護保険料賦課照会（特別徴収）",
+   "eventName": "setaiinShotoku",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320002",
+   "toLayoutTitle": "介護保険料賦課照会（世帯員所得）",
+   "toEventName": "initialize"
+  },
+  {
+   "id": 18,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320003",
+   "layoutTitle": "介護保険料賦課照会（特別徴収）",
+   "eventName": "gemmen",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320004",
+   "toLayoutTitle": "介護保険料賦課照会（減免・徴収猶予）",
+   "toEventName": "initialize"
+  },
+  {
+   "id": 19,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320004",
+   "layoutTitle": "介護保険料賦課照会（減免・徴収猶予）",
+   "eventName": "rireki",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320001",
+   "toLayoutTitle": "介護保険料賦課照会",
+   "toEventName": "reload"
+  },
+  {
+   "id": 20,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320004",
+   "layoutTitle": "介護保険料賦課照会（減免・徴収猶予）",
+   "eventName": "konkyoKiwari",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320001",
+   "toLayoutTitle": "介護保険料賦課照会",
+   "toEventName": "initialize"
+  },
+  {
+   "id": 21,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320004",
+   "layoutTitle": "介護保険料賦課照会（減免・徴収猶予）",
+   "eventName": "setaiinShotoku",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320002",
+   "toLayoutTitle": "介護保険料賦課照会（世帯員所得）",
+   "toEventName": "initialize"
+  },
+  {
+   "id": 22,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320004",
+   "layoutTitle": "介護保険料賦課照会（減免・徴収猶予）",
+   "eventName": "tokucho",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320003",
+   "toLayoutTitle": "介護保険料賦課照会（特別徴収）",
+   "toEventName": "initialize"
+  },
+  {
+   "id": 23,
+   "layoutSubGyomuCode": "DBB",
+   "layoutName": "DBB0320005",
+   "layoutTitle": "介護保険料賦課比較",
+   "eventName": "rireki",
+   "toLayoutSubGyomuCode": "DBB",
+   "toLayoutName": "DBB0320001",
+   "toLayoutTitle": "介護保険料賦課照会",
+   "toEventName": "reload"
+  }
+ ],
+ "wizardOrderList": [],
+ "subGyomuCode": "DBB",
+ "uiContainerName": "DBBUC03200",
+ "initAfterOnLoadEventAlias": ""
+}
