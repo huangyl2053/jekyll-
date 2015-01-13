@@ -1,22 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.ChoteiJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 
 /**
  * DbT2002Fukaの項目定義クラスです
@@ -72,10 +73,10 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
     private FlexibleYearMonth tsukiwariStartYM2;
     private FlexibleYearMonth tsukiwariEndYM2;
     private RDateTime choteiTimestamp;
-    private RString choteiJiyu1;
-    private RString choteiJiyu2;
-    private RString choteiJiyu3;
-    private RString choteiJiyu4;
+    private ChoteiJiyu choteiJiyu1;
+    private ChoteiJiyu choteiJiyu2;
+    private ChoteiJiyu choteiJiyu3;
+    private ChoteiJiyu choteiJiyu4;
     private RString koseiM;
     private Decimal gemmenMaeHokenryo;
     private Decimal gemmenGaku;
@@ -714,7 +715,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @return choteiJiyu1
      */
-    public RString getChoteiJiyu1() {
+    public ChoteiJiyu getChoteiJiyu1() {
         return choteiJiyu1;
     }
 
@@ -723,7 +724,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @param choteiJiyu1 choteiJiyu1
      */
-    public void setChoteiJiyu1(RString choteiJiyu1) {
+    public void setChoteiJiyu1(ChoteiJiyu choteiJiyu1) {
         this.choteiJiyu1 = choteiJiyu1;
     }
 
@@ -732,7 +733,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @return choteiJiyu2
      */
-    public RString getChoteiJiyu2() {
+    public ChoteiJiyu getChoteiJiyu2() {
         return choteiJiyu2;
     }
 
@@ -741,7 +742,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @param choteiJiyu2 choteiJiyu2
      */
-    public void setChoteiJiyu2(RString choteiJiyu2) {
+    public void setChoteiJiyu2(ChoteiJiyu choteiJiyu2) {
         this.choteiJiyu2 = choteiJiyu2;
     }
 
@@ -750,7 +751,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @return choteiJiyu3
      */
-    public RString getChoteiJiyu3() {
+    public ChoteiJiyu getChoteiJiyu3() {
         return choteiJiyu3;
     }
 
@@ -759,7 +760,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @param choteiJiyu3 choteiJiyu3
      */
-    public void setChoteiJiyu3(RString choteiJiyu3) {
+    public void setChoteiJiyu3(ChoteiJiyu choteiJiyu3) {
         this.choteiJiyu3 = choteiJiyu3;
     }
 
@@ -768,7 +769,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @return choteiJiyu4
      */
-    public RString getChoteiJiyu4() {
+    public ChoteiJiyu getChoteiJiyu4() {
         return choteiJiyu4;
     }
 
@@ -777,7 +778,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @param choteiJiyu4 choteiJiyu4
      */
-    public void setChoteiJiyu4(RString choteiJiyu4) {
+    public void setChoteiJiyu4(ChoteiJiyu choteiJiyu4) {
         this.choteiJiyu4 = choteiJiyu4;
     }
 
@@ -983,7 +984,8 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * このエンティティの主キーが他の{@literal DbT2002FukaEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2002FukaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT2002FukaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2002FukaEntity other) {

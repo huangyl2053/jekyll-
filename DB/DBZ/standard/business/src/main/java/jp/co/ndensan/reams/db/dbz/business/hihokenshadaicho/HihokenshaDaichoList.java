@@ -33,7 +33,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
     public HihokenshaDaichoList(IItemList<HihokenshaDaichoModel> daichoList) {
         requireNonNull(daichoList, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("引数のList", getClass().getSimpleName()));
-        this.daichoList = daichoList.sorted(HihokenshaDaichoModelComparators.orderBy資格取得日.desc());
+        this.daichoList = daichoList.sorted(HihokenshaDaichoModelComparators.orderBy資格取得年月日.desc());
     }
 
     /**

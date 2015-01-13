@@ -8,9 +8,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbz.business.FukaRireki;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 
 /**
  * FukaRirekiAll のクラスファイル
@@ -51,12 +52,12 @@ public class FukaRirekiAllDiv extends Panel implements IFukaRirekiAllDiv {
     }
 
     @Override
-    public int load(HihokenshaNo 被保険者番号, FlexibleYear 賦課年度) {
+    public int load(HihokenshaNo 被保険者番号, FukaNendo 賦課年度) {
         return getHandler().load(被保険者番号, 賦課年度);
     }
 
     @Override
-    public int reload(HihokenshaNo 被保険者番号, FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
+    public int reload(HihokenshaNo 被保険者番号, ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号) {
         return getHandler().reload(被保険者番号, 調定年度, 賦課年度, 通知書番号);
     }
 

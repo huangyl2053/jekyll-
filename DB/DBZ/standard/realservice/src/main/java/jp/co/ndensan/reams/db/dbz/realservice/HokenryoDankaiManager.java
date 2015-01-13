@@ -12,13 +12,13 @@ import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
-import jp.co.ndensan.reams.db.dbz.model.HokenryoDankaiModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoDankaiModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.HokenryoDankaiDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -60,7 +60,7 @@ public class HokenryoDankaiManager {
      * @return IOptional<HokenryoDankaiModel>
      */
     @Transaction
-    public IOptional<HokenryoDankaiModel> get保険料段階(FlexibleYear 賦課年度, DankaiIndex 段階インデックス, RankKubun ランク区分) {
+    public IOptional<HokenryoDankaiModel> get保険料段階(FukaNendo 賦課年度, DankaiIndex 段階インデックス, RankKubun ランク区分) {
         return DbOptional.ofNullable(dac.select保険料段階ByKey(賦課年度, 段階インデックス, ランク区分));
     }
 
@@ -72,14 +72,14 @@ public class HokenryoDankaiManager {
      * @param 段階区分 段階区分
      * @return IOptional<HokenryoDankai>
      */
-    public IOptional<HokenryoDankai> get保険料段階(FlexibleYear 賦課年度, LasdecCode 市町村コード, RString 段階区分) {
+    public IOptional<HokenryoDankai> get保険料段階(FukaNendo 賦課年度, LasdecCode 市町村コード, RString 段階区分) {
         List<HokenryoDankaiModel> modelList = isランク対象(賦課年度, 市町村コード)
                 ? dac.select保険料段階一覧(賦課年度, 市町村コード, 段階区分)
                 : dac.select保険料段階一覧(賦課年度, 段階区分);
         return DbOptional.ofNullable(!modelList.isEmpty() ? new HokenryoDankai(modelList.get(0), config) : null);
     }
 
-    private boolean isランク対象(FlexibleYear 賦課年度, LasdecCode 市町村コード) {
+    private boolean isランク対象(FukaNendo 賦課年度, LasdecCode 市町村コード) {
         return config.isランク有り() && new Range(config.getランク開始年度(), config.getランク終了年度()).between(賦課年度) && 市町村コード != null;
     }
 
@@ -90,7 +90,7 @@ public class HokenryoDankaiManager {
      * @return IItemList<HokenryoDankaiModel>
      */
     @Transaction
-    public IItemList<HokenryoDankaiModel> get保険料段階一覧(FlexibleYear 賦課年度) {
+    public IItemList<HokenryoDankaiModel> get保険料段階一覧(FukaNendo 賦課年度) {
         return ItemList.of(dac.select保険料段階一覧(賦課年度));
     }
 

@@ -5,11 +5,12 @@
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -30,7 +31,7 @@ import static org.junit.Assert.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class HihokenshaDaichoDacTest {
+public class HihokenshaDaichoDacTest extends DbzTestDacBase {
 
     private static HihokenshaDaichoDac sut;
     private static DbT1001HihokenshaDaichoDac 被保険者台帳Dac;
@@ -82,6 +83,21 @@ public class HihokenshaDaichoDacTest {
         @Test
         public void データが見つかない検索条件を渡すと_nullを返す() {
             assertThat(sut.select被保険者台帳ByKey(new LasdecCode("999999"), 被保険者番号1, 処理日時1).isPresent(), is(false));
+        }
+    }
+
+    public static class selectAll extends DbzTestDacBase {
+
+        @Test
+        public void selectAllは_insertしたデータを保持するモデルのリストを返す() {
+            TestSupport.insertDbT1001(市町村コード1, 被保険者番号1, 処理日時1, 識別コード1);
+            IItemList<HihokenshaDaichoModel> modelList = sut.selectAll();
+            assertThat(modelList.anyMatch(new IPredicate<HihokenshaDaichoModel>() {
+                @Override
+                public boolean evaluate(HihokenshaDaichoModel t) {
+                    return t.get市町村コード().equals(市町村コード1);
+                }
+            }), is(true));
         }
     }
 
@@ -142,6 +158,29 @@ public class HihokenshaDaichoDacTest {
         @Test
         public void データが見つかない検索条件を渡すと_nullを返す() {
             assertThat(sut.select最新被保険者台帳(new LasdecCode("999999"), 識別コード1).isPresent(), is(false));
+        }
+    }
+
+    public static class select最新被保険者台帳_被保険者番号Test extends DbzTestDacBase {
+
+        @Before
+        public void setUp() {
+            TestSupport.insertDbT1001(市町村コード1, 被保険者番号1, 処理日時1, 識別コード1);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の被保険者番号にnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.select最新被保険者台帳(null);
+        }
+
+        @Test
+        public void データが見つかる検索条件を渡すと_居宅給付計画事業者作成モデル返す() {
+            assertThat(sut.select最新被保険者台帳(被保険者番号1).get().get被保険者番号(), is(被保険者番号1));
+        }
+
+        @Test
+        public void データが見つかない検索条件を渡すと_データ無しを返す() {
+            assertThat(sut.select最新被保険者台帳(被保険者番号2).isPresent(), is(false));
         }
     }
 
@@ -228,5 +267,4 @@ public class HihokenshaDaichoDacTest {
             被保険者台帳Dac.insert(entity);
         }
     }
-
 }

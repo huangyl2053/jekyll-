@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.TokubetsuChoshuTeishiJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -51,7 +52,7 @@ public final class DbT2001ChoshuHohoEntityGenerator {
     public static final boolean DEFAULT_依頼情報送付済みフラグ = false;
     public static final boolean DEFAULT_追加依頼情報送付済みフラグ = false;
     public static final YMDHMS DEFAULT_特別徴収停止日時 = new YMDHMS(new RString("20140415102030"));
-    public static final RString DEFAULT_特別徴収停止事由コード = new RString("1");
+    public static final TokubetsuChoshuTeishiJiyu DEFAULT_特別徴収停止事由 = new TokubetsuChoshuTeishiJiyu(new RString("1"));
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -94,7 +95,7 @@ public final class DbT2001ChoshuHohoEntityGenerator {
         entity.setIraiSohuzumiFlag(DEFAULT_依頼情報送付済みフラグ);
         entity.setTsuikaIraiSohuzumiFlag(DEFAULT_追加依頼情報送付済みフラグ);
         entity.setTokuchoTeishiTimestamp(DEFAULT_特別徴収停止日時);
-        entity.setTokuchoTeishiJiyuCode(DEFAULT_特別徴収停止事由コード);
+        entity.setTokuchoTeishiJiyuCode(DEFAULT_特別徴収停止事由);
         return entity;
     }
 }

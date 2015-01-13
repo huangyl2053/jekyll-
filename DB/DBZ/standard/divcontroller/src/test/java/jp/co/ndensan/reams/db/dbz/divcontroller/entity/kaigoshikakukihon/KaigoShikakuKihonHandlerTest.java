@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoManager;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKobetsuJikoKaigoJukyu;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.YoKaigoJotaiKubun;
@@ -42,7 +42,7 @@ import static org.mockito.Mockito.*;
 @RunWith(Enclosed.class)
 public class KaigoShikakuKihonHandlerTest extends DbzTestBase {
 
-    private static final LasdecCode 市町村コード = new LasdecCode("000001");
+    private static final LasdecCode 市町村コード = new LasdecCode("000002");
     private static final ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000002");
     private static final RString 被保険者番号 = new RString("000003");
     private static final ShikakuShutokuJiyu 資格取得事由 = ShikakuShutokuJiyu.転入;

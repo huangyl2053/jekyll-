@@ -10,29 +10,25 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokensha
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class ShoKisaiHokenshaNoTypeHandler extends BaseTypeHandler<ShoKisaiHokenshaNo> {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, ShoKisaiHokenshaNo parameter, JdbcType jdbcType) throws SQLException {
         ps.setString(i, parameter == null ? null : parameter.getColumnValue().toString());
     }
 
     @Override
-    public ShoKisaiHokenshaNo getNullableResult(ResultSet rs, String columnName) throws SQLException {
-        return new ShoKisaiHokenshaNo(getResultRString(rs.getString(columnName)));
+    public ShoKisaiHokenshaNo getNullableResult(ResultSet r, String c) throws SQLException {
+        return r.getString(c) == null ? null : new ShoKisaiHokenshaNo(new RString(r.getString(c)));
     }
 
     @Override
-    public ShoKisaiHokenshaNo getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
-        return new ShoKisaiHokenshaNo(getResultRString(rs.getString(columnIndex)));
+    public ShoKisaiHokenshaNo getNullableResult(ResultSet r, int c) throws SQLException {
+        return r.getString(c) == null ? null : new ShoKisaiHokenshaNo(new RString(r.getString(c)));
     }
 
     @Override
-    public ShoKisaiHokenshaNo getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
-        return new ShoKisaiHokenshaNo(getResultRString(cs.getString(columnIndex)));
-    }
-
-    private RString getResultRString(String result) {
-        return result == null ? null : new RString(result);
+    public ShoKisaiHokenshaNo getNullableResult(CallableStatement r, int c) throws SQLException {
+        return r.getString(c) == null ? null : new ShoKisaiHokenshaNo(new RString(r.getString(c)));
     }
 
 // </editor-fold>

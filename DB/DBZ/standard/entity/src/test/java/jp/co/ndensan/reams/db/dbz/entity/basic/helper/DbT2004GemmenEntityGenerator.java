@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.HokenryoGemmenShurui;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.HokenryoGemmenTorikeshiShurui;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -30,9 +32,9 @@ public final class DbT2004GemmenEntityGenerator {
     public static final RString DEFAULT_減免状態区分 = new RString("1");
     public static final RString DEFAULT_減免作成区分 = new RString("1");
     public static final RString DEFAULT_申請事由 = new RString("1");
-    public static final Code DEFAULT_減免事由ｺｰﾄﾞ = new Code("3");
+    public static final HokenryoGemmenShurui DEFAULT_減免種類 = new HokenryoGemmenShurui(new Code("3"));
     public static final RString DEFAULT_減免事由 = new RString("1");
-    public static final Code DEFAULT_減免取消事由ｺｰﾄﾞ = new Code("3");
+    public static final HokenryoGemmenTorikeshiShurui DEFAULT_減免取消種類 = new HokenryoGemmenTorikeshiShurui(new Code("3"));
     public static final RString DEFAULT_減免取消事由 = new RString("1");
     public static final Decimal DEFAULT_申請減免額 = new Decimal(1);
     public static final Decimal DEFAULT_決定減免額 = new Decimal(1);
@@ -56,9 +58,9 @@ public final class DbT2004GemmenEntityGenerator {
         entity.setJotaiKubun(DEFAULT_減免状態区分);
         entity.setSakuseiKubun(DEFAULT_減免作成区分);
         entity.setShinseiJiyu(DEFAULT_申請事由);
-        entity.setGemmenJiyuCode(DEFAULT_減免事由ｺｰﾄﾞ);
+        entity.setGemmenShuruiCode(DEFAULT_減免種類);
         entity.setGemmenJiyu(DEFAULT_減免事由);
-        entity.setGemmenTorikeshiJiyuCode(DEFAULT_減免取消事由ｺｰﾄﾞ);
+        entity.setGemmenTorikeshiShuruiCode(DEFAULT_減免取消種類);
         entity.setGemmenTorikeshiJiyu(DEFAULT_減免取消事由);
         entity.setShinseiGemmenGaku(DEFAULT_申請減免額);
         entity.setKetteiGemmenGaku(DEFAULT_決定減免額);
