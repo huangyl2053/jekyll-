@@ -27,19 +27,23 @@ public final class DbCollectorsSupport {
     }
 
     /**
+     * {@link List}を{@link Collections#unmodifiableList(java.util.List)}に渡した結果を返す{@link IFunction}を返します。
      *
-     * @param <T>
-     * @param elementType
+     * @param <T> {@link List}が保持する要素の型
+     * @param elementType {@link List}が保持する要素の{@code class}
      * @return
+     * {@link List}を{@link Collections#unmodifiableList(java.util.List)}に渡した結果を返す{@link IFunction}
      */
     public static <T> IFunction<List<T>, List<T>> collections$unmodifiableList(Class<T> elementType) {
         return collections$unmodifiableList();
     }
 
     /**
+     * {@link List}を{@link Collections#unmodifiableList(java.util.List)}に渡した結果を返す{@link IFunction}を返します。
      *
-     * @param <T>
+     * @param <T> {@link List}が保持する要素の型
      * @return
+     * {@link List}を{@link Collections#unmodifiableList(java.util.List)}に渡した結果を返す{@link IFunction}
      */
     public static <T> IFunction<List<T>, List<T>> collections$unmodifiableList() {
         return new IFunction<List<T>, List<T>>() {
@@ -51,22 +55,26 @@ public final class DbCollectorsSupport {
     }
 
     /**
+     * {@link Map}を{@link Collections#unmodifiableMap(java.util.Map)}に渡した結果を返す{@link IFunction}を返します。
      *
-     * @param <K>
-     * @param <V>
-     * @param keyType
-     * @param valueType
+     * @param <K> キーの型
+     * @param <V> 値の型
+     * @param keyType キーの{@code class}
+     * @param valueType 値の{@code class}
      * @return
+     * {@link Map}を{@link Collections#unmodifiableMap(java.util.Map)}に渡した結果を返す{@link IFunction}
      */
     public static <K, V> IFunction<Map<K, V>, Map<K, V>> collections$unmodifiableMap(Class<K> keyType, Class<V> valueType) {
         return collections$unmodifiableMap();
     }
 
     /**
+     * {@link Map}を{@link Collections#unmodifiableMap(java.util.Map)}に渡した結果を返す{@link IFunction}を返します。
      *
-     * @param <K>
-     * @param <V>
+     * @param <K> キーの型
+     * @param <V> 値の型
      * @return
+     * {@link Map}を{@link Collections#unmodifiableMap(java.util.Map)}に渡した結果を返す{@link IFunction}
      */
     public static <K, V> IFunction<Map<K, V>, Map<K, V>> collections$unmodifiableMap() {
         return new IFunction<Map<K, V>, Map<K, V>>() {
@@ -79,7 +87,7 @@ public final class DbCollectorsSupport {
 
     /**
      * {@link IOptional}を保持するMapから{@link IOptional#isPresent() isPresent()}が{@code true}を返す値だけをまとめて、
-     * {@link IItemList}として返す処理を定義した{@link IFunction}です。
+     * {@link IItemList}として返す処理を定義した{@link IFunction}を返します。
      * {@link #gatheringPresentItems() gatheringPresentItems()}の型指定を引数によって行います。
      *
      * @param <K> キーの型
@@ -96,7 +104,7 @@ public final class DbCollectorsSupport {
 
     /**
      * {@link IOptional}を保持するMapから{@link IOptional#isPresent() isPresent()}が{@code true}を返す値だけをまとめて、
-     * {@link IItemList}として返す処理を定義した{@link IFunction}です。
+     * {@link IItemList}として返す処理を定義した{@link IFunction}を返します。
      *
      * @param <K> Mapのキーの型
      * @param <T> Mapの保持する{@link IOptional}がラップしたオブジェクトの型,
