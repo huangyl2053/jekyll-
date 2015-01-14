@@ -23,9 +23,9 @@ import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
  *
  * @author N3327 三浦 凌
  */
-public final class DbCollectorsSupport {
+public final class PlainCollectorsSupport {
 
-    private DbCollectorsSupport() {
+    private PlainCollectorsSupport() {
     }
 
     /**

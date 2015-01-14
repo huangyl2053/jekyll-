@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
  * @param <A> 集積先のオブジェクトの型
  * @param <R> 結果の型
  */
-public interface IDbCollector<T, A, R> {
+public interface IPlainCollector<T, A, R> {
 
     /**
      * 集積用のオブジェクトを生成する supplier を返します。

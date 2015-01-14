@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.util.optional;
 
-import java.util.NoSuchElementException;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IConsumer;
@@ -210,7 +209,7 @@ public final class Optional<T> {
      * @param consumer 保持する値があるときに実行する、指定の処理
      * @throws NullPointerException 保持する値が存在していて、かつ、引数の{@code consumer}がnullの時
      */
-    public void ifPresent(IConsumer<? super T> consumer) {
+    public void ifPresent(IConsumer<? super T> consumer) throws NullPointerException {
         if (this.value != null) {
             consumer.accept(value);
         }

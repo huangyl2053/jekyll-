@@ -16,24 +16,24 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErro
  * @author N3327 三浦 凌
  * @param <T> 検査対象の型
  */
-public final class DbPredicate<T> implements IPredicate<T> {
+public final class MyPredicate<T> implements IPredicate<T> {
 
     private final IPredicate<? super T> condition;
 
-    private DbPredicate(IPredicate<? super T> condition) {
+    private MyPredicate(IPredicate<? super T> condition) {
         this.condition = condition;
     }
 
     /**
-     * 指定の{@link IPredicate}をラップした{@link DbPredicate}を生成します。
+     * 指定の{@link IPredicate}をラップした{@link MyPredicate}を生成します。
      *
      * @param <T> 検査対象の型
      * @param predicate {@link IPredicate}
-     * @return 指定の{@link IPredicate}をラップした{@link DbPredicate}
+     * @return 指定の{@link IPredicate}をラップした{@link MyPredicate}
      */
-    public static <T> DbPredicate<T> of(IPredicate<? super T> predicate) {
+    public static <T> MyPredicate<T> of(IPredicate<? super T> predicate) {
         Objects.requireNonNull(predicate, UrSystemErrorMessages.値がnull.getReplacedMessage("Predicate"));
-        return new DbPredicate<>(predicate);
+        return new MyPredicate<>(predicate);
     }
 
     @Override
@@ -42,15 +42,15 @@ public final class DbPredicate<T> implements IPredicate<T> {
     }
 
     /**
-     * 指定の{@link IPredicate}の否定の結果を返す{@link DbPredicate}を生成します。
+     * 指定の{@link IPredicate}の否定の結果を返す{@link MyPredicate}を生成します。
      *
      * @param <T> 検査対象の型
      * @param predicate {@link IPredicate}
-     * @return 指定の{@link IPredicate}の否定の結果を返す{@link DbPredicate}
+     * @return 指定の{@link IPredicate}の否定の結果を返す{@link MyPredicate}
      */
-    public static <T> DbPredicate<T> not(final IPredicate<? super T> predicate) {
+    public static <T> MyPredicate<T> not(final IPredicate<? super T> predicate) {
         Objects.requireNonNull(predicate, UrSystemErrorMessages.値がnull.getReplacedMessage("Predicate"));
-        return new DbPredicate<>(new IPredicate<T>() {
+        return new MyPredicate<>(new IPredicate<T>() {
             @Override
             public boolean evaluate(T t) {
                 return !predicate.evaluate(t);
@@ -59,24 +59,24 @@ public final class DbPredicate<T> implements IPredicate<T> {
     }
 
     /**
-     * 否定の結果を返す{@link DbPredicate}を返します。
+     * 否定の結果を返す{@link MyPredicate}を返します。
      *
-     * @return 否定の結果を返す{@link DbPredicate}
+     * @return 否定の結果を返す{@link MyPredicate}
      */
-    public DbPredicate<T> negate() {
-        return DbPredicate.not(this);
+    public MyPredicate<T> negate() {
+        return MyPredicate.not(this);
     }
 
     /**
      * 指定の値と{@link Objects#equals(java.lang.Object, java.lang.Object)
-     * }で一致するかどうかを調べることができる{@link DbPredicate}を生成します。
+     * }で一致するかどうかを調べることができる{@link MyPredicate}を生成します。
      *
      * @param <T> 検査対象の型
      * @param target equalかどうかを調べる値
      * @return 指定の値と{@link Objects#equals(java.lang.Object, java.lang.Object)
-     * }で一致するかどうかを調べることができる{@link DbPredicate}
+     * }で一致するかどうかを調べることができる{@link MyPredicate}
      */
-    public static <T> DbPredicate<T> isEqual(final Object target) {
+    public static <T> MyPredicate<T> isEqual(final Object target) {
         IPredicate<T> p = (null == target)
                 ? new IPredicate<T>() {
                     @Override
@@ -90,37 +90,37 @@ public final class DbPredicate<T> implements IPredicate<T> {
                         return target.equals(t);
                     }
                 };
-        return new DbPredicate<>(p);
+        return new MyPredicate<>(p);
     }
 
     /**
      *
      *
      * @param other {@link IPredicate}
-     * @return 指定の{@link IPredicate}との論理和を返す{@link DbPredicate}
+     * @return 指定の{@link IPredicate}との論理和を返す{@link MyPredicate}
      */
-    public DbPredicate<T> or(final IPredicate<? super T> other) {
+    public MyPredicate<T> or(final IPredicate<? super T> other) {
         Objects.requireNonNull(other, UrSystemErrorMessages.値がnull.getReplacedMessage("引数"));
-        return new DbPredicate<>(new IPredicate<T>() {
+        return new MyPredicate<>(new IPredicate<T>() {
             @Override
             public boolean evaluate(T t) {
-                return DbPredicate.this.evaluate(t) || other.evaluate(t);
+                return MyPredicate.this.evaluate(t) || other.evaluate(t);
             }
         });
     }
 
     /**
-     * 指定の{@link IPredicate}との論理積を返す{@link DbPredicate}を返します。
+     * 指定の{@link IPredicate}との論理積を返す{@link MyPredicate}を返します。
      *
      * @param other {@link IPredicate}
-     * @return 指定の{@link IPredicate}との論理積を返す{@link DbPredicate}
+     * @return 指定の{@link IPredicate}との論理積を返す{@link MyPredicate}
      */
-    public DbPredicate<T> and(final IPredicate<? super T> other) {
+    public MyPredicate<T> and(final IPredicate<? super T> other) {
         Objects.requireNonNull(other, UrSystemErrorMessages.値がnull.getReplacedMessage("引数"));
-        return new DbPredicate<>(new IPredicate<T>() {
+        return new MyPredicate<>(new IPredicate<T>() {
             @Override
             public boolean evaluate(T t) {
-                return DbPredicate.this.evaluate(t) && other.evaluate(t);
+                return MyPredicate.this.evaluate(t) && other.evaluate(t);
             }
         });
     }

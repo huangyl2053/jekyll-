@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbz.definition.util.function.IBiConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 
 /**
  * {@link IItemList}の実装です。<br/>
@@ -269,7 +268,7 @@ public final class ItemList<E> implements IItemList<E>, Serializable {
     }
 
     @Override
-    public <R, A> R collect(IDbCollector<? super E, A, R> collector) {
+    public <R, A> R collect(IPlainCollector<? super E, A, R> collector) {
         A container = collector.container().get();
         IBiConsumer<A, ? super E> accumulator = collector.accumulator();
         for (E element : elements) {

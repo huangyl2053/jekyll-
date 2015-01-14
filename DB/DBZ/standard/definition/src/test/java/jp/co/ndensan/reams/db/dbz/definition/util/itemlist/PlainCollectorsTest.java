@@ -13,9 +13,9 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IBiConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
-import static jp.co.ndensan.reams.db.dbz.definition.util.itemlist.DbCollectors.groupingBy;
-import static jp.co.ndensan.reams.db.dbz.definition.util.itemlist.DbCollectors.minBy;
-import static jp.co.ndensan.reams.db.dbz.definition.util.itemlist.DbCollectorsSupport.gatheringPresentItems;
+import static jp.co.ndensan.reams.db.dbz.definition.util.itemlist.PlainCollectors.groupingBy;
+import static jp.co.ndensan.reams.db.dbz.definition.util.itemlist.PlainCollectors.minBy;
+import static jp.co.ndensan.reams.db.dbz.definition.util.itemlist.PlainCollectorsSupport.gatheringPresentItems;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.*;
@@ -26,14 +26,14 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * {@link DbCollectors}のテストです。
+ * {@link PlainCollectors}のテストです。
  *
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class DbCollectorsTest extends DbzTestBase {
+public class PlainCollectorsTest extends DbzTestBase {
 
-    public DbCollectorsTest() {
+    public PlainCollectorsTest() {
     }
 
     private static class TestValue {
@@ -57,14 +57,14 @@ public class DbCollectorsTest extends DbzTestBase {
 
     public static class toList extends DbzTestBase {
 
-        private IDbCollector<TestValue, ?, List<TestValue>> sut;
+        private IPlainCollector<TestValue, ?, List<TestValue>> sut;
         private ISupplier<Object> supplier;
         private IBiConsumer<Object, TestValue> accumulator;
         private IFunction<Object, List<TestValue>> finisher;
 
         @Before
         public void setUp() {
-            sut = DbCollectors.<TestValue>toList();
+            sut = PlainCollectors.<TestValue>toList();
             supplier = (ISupplier<Object>) sut.container();
             accumulator = (IBiConsumer<Object, TestValue>) sut.accumulator();
             finisher = (IFunction<Object, List<TestValue>>) sut.finisher();
@@ -81,7 +81,7 @@ public class DbCollectorsTest extends DbzTestBase {
 
     public static class toMap extends DbzTestBase {
 
-        private IDbCollector<TestValue, ?, Map<Integer, String>> sut;
+        private IPlainCollector<TestValue, ?, Map<Integer, String>> sut;
         private IFunction<TestValue, Integer> keyMapper;
         private IFunction<TestValue, String> valueMapper;
         private ISupplier<Object> supplier;
@@ -102,7 +102,7 @@ public class DbCollectorsTest extends DbzTestBase {
                     return t.getValue();
                 }
             };
-            sut = DbCollectors.toMap(keyMapper, valueMapper);
+            sut = PlainCollectors.toMap(keyMapper, valueMapper);
             supplier = (ISupplier<Object>) sut.container();
             accumulator = (IBiConsumer<Object, TestValue>) sut.accumulator();
             finisher = (IFunction<Object, Map<Integer, String>>) sut.finisher();
@@ -120,14 +120,14 @@ public class DbCollectorsTest extends DbzTestBase {
 
     public static class toIItemList extends DbzTestBase {
 
-        private IDbCollector<TestValue, ?, IItemList<TestValue>> sut;
+        private IPlainCollector<TestValue, ?, IItemList<TestValue>> sut;
         private ISupplier<Object> supplier;
         private IBiConsumer<Object, TestValue> accumulator;
         private IFunction<Object, IItemList<TestValue>> finisher;
 
         @Before
         public void setUp() {
-            sut = DbCollectors.toIItemList();
+            sut = PlainCollectors.toIItemList();
             supplier = (ISupplier<Object>) sut.container();
             accumulator = (IBiConsumer<Object, TestValue>) sut.accumulator();
             finisher = (IFunction<Object, IItemList<TestValue>>) sut.finisher();
@@ -144,7 +144,7 @@ public class DbCollectorsTest extends DbzTestBase {
 
     public static class groupingBy_IFunction extends DbzTestBase {
 
-        private IDbCollector<TestValue, ?, Map<Integer, IItemList<TestValue>>> sut;
+        private IPlainCollector<TestValue, ?, Map<Integer, IItemList<TestValue>>> sut;
         private IFunction<TestValue, Integer> keyMapper;
         private ISupplier<Object> supplier;
         private IBiConsumer<Object, TestValue> accumulator;
@@ -158,7 +158,7 @@ public class DbCollectorsTest extends DbzTestBase {
                     return t.getKey();
                 }
             };
-            sut = DbCollectors.groupingBy(keyMapper);
+            sut = PlainCollectors.groupingBy(keyMapper);
             supplier = (ISupplier<Object>) sut.container();
             accumulator = (IBiConsumer<Object, TestValue>) sut.accumulator();
             finisher = (IFunction<Object, Map<Integer, IItemList<TestValue>>>) sut.finisher();
@@ -191,14 +191,14 @@ public class DbCollectorsTest extends DbzTestBase {
 
     public static class maxBy extends DbzTestBase {
 
-        private IDbCollector<TestValue, ?, Optional<TestValue>> sut;
+        private IPlainCollector<TestValue, ?, Optional<TestValue>> sut;
         private ISupplier<Object> supplier;
         private IBiConsumer<Object, TestValue> accumulator;
         private IFunction<Object, Optional<TestValue>> finisher;
 
         @Before
         public void setUp() {
-            sut = DbCollectors.maxBy(TestValueComparators.Value);
+            sut = PlainCollectors.maxBy(TestValueComparators.Value);
             supplier = (ISupplier<Object>) sut.container();
             accumulator = (IBiConsumer<Object, TestValue>) sut.accumulator();
             finisher = (IFunction<Object, Optional<TestValue>>) sut.finisher();
@@ -232,14 +232,14 @@ public class DbCollectorsTest extends DbzTestBase {
 
     public static class minBy extends DbzTestBase {
 
-        private IDbCollector<TestValue, ?, Optional<TestValue>> sut;
+        private IPlainCollector<TestValue, ?, Optional<TestValue>> sut;
         private ISupplier<Object> supplier;
         private IBiConsumer<Object, TestValue> accumulator;
         private IFunction<Object, Optional<TestValue>> finisher;
 
         @Before
         public void setUp() {
-            sut = DbCollectors.minBy(TestValueComparators.Value);
+            sut = PlainCollectors.minBy(TestValueComparators.Value);
             supplier = (ISupplier<Object>) sut.container();
             accumulator = (IBiConsumer<Object, TestValue>) sut.accumulator();
             finisher = (IFunction<Object, Optional<TestValue>>) sut.finisher();
@@ -272,14 +272,14 @@ public class DbCollectorsTest extends DbzTestBase {
 
     public static class sortBy extends DbzTestBase {
 
-        private IDbCollector<TestValue, ?, IItemList<TestValue>> sut;
+        private IPlainCollector<TestValue, ?, IItemList<TestValue>> sut;
         private ISupplier<Object> supplier;
         private IBiConsumer<Object, TestValue> accumulator;
         private IFunction<Object, IItemList<TestValue>> finisher;
 
         @Before
         public void setUp() {
-            sut = DbCollectors.sortBy(TestValueComparators.Value);
+            sut = PlainCollectors.sortBy(TestValueComparators.Value);
             supplier = (ISupplier<Object>) sut.container();
             accumulator = (IBiConsumer<Object, TestValue>) sut.accumulator();
             finisher = (IFunction<Object, IItemList<TestValue>>) sut.finisher();
@@ -304,7 +304,7 @@ public class DbCollectorsTest extends DbzTestBase {
 
     public static class collectingAndThen_groupingBy_IDbCollector extends DbzTestBase {
 
-        private IDbCollector<TestValue, ?, IItemList<TestValue>> sut;
+        private IPlainCollector<TestValue, ?, IItemList<TestValue>> sut;
         private IFunction<TestValue, Integer> keyMapper;
         private ISupplier<Object> supplier;
         private IBiConsumer<Object, TestValue> accumulator;
@@ -318,7 +318,7 @@ public class DbCollectorsTest extends DbzTestBase {
                     return t.getKey();
                 }
             };
-            sut = DbCollectors.collectingAndThen(
+            sut = PlainCollectors.collectingAndThen(
                     groupingBy(keyMapper, minBy(TestValueComparators.Value)),
                     gatheringPresentItems(Integer.class, TestValue.class)
             );
