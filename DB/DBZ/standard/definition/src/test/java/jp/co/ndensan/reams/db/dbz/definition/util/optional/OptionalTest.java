@@ -264,7 +264,6 @@ public class OptionalTest {
 
         private Optional<RString> sut;
         private Optional<String> mapped;
-        private RString input;
 
         private IFunction<RString, String> createMapper() {
             return new IFunction<RString, String>() {
@@ -294,7 +293,6 @@ public class OptionalTest {
 
         private Optional<RString> sut;
         private Optional<String> mapped;
-        private RString input;
 
         private IFunction<RString, Optional<String>> createMapper() {
             return new IFunction<RString, Optional<String>>() {
