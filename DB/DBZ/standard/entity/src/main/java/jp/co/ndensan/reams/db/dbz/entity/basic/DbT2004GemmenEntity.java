@@ -2,8 +2,9 @@ package jp.co.ndensan.reams.db.dbz.entity.basic;
 
 import java.util.Objects;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.HokenryoGemmenShurui;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.HokenryoGemmenTorikeshiShurui;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -47,9 +48,9 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
     private RString jotaiKubun;
     private RString sakuseiKubun;
     private RString shinseiJiyu;
-    private Code gemmenJiyuCode;
+    private HokenryoGemmenShurui gemmenShuruiCode;
     private RString gemmenJiyu;
-    private Code gemmenTorikeshiJiyuCode;
+    private HokenryoGemmenTorikeshiShurui gemmenTorikeshiShuruiCode;
     private RString gemmenTorikeshiJiyu;
     private Decimal shinseiGemmenGaku;
     private Decimal ketteiGemmenGaku;
@@ -281,21 +282,21 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
     }
 
     /**
-     * getGemmenJiyuCode
+     * getGemmenShuruiCode
      *
-     * @return gemmenJiyuCode
+     * @return gemmenShuruiCode
      */
-    public Code getGemmenJiyuCode() {
-        return gemmenJiyuCode;
+    public HokenryoGemmenShurui getGemmenShuruiCode() {
+        return gemmenShuruiCode;
     }
 
     /**
-     * setGemmenJiyuCode
+     * setGemmenShuruiCode
      *
-     * @param gemmenJiyuCode gemmenJiyuCode
+     * @param gemmenShuruiCode gemmenShuruiCode
      */
-    public void setGemmenJiyuCode(Code gemmenJiyuCode) {
-        this.gemmenJiyuCode = gemmenJiyuCode;
+    public void setGemmenShuruiCode(HokenryoGemmenShurui gemmenShuruiCode) {
+        this.gemmenShuruiCode = gemmenShuruiCode;
     }
 
     /**
@@ -317,21 +318,21 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
     }
 
     /**
-     * getGemmenTorikeshiJiyuCode
+     * getGemmenTorikeshiShuruiCode
      *
-     * @return gemmenTorikeshiJiyuCode
+     * @return gemmenTorikeshiShuruiCode
      */
-    public Code getGemmenTorikeshiJiyuCode() {
-        return gemmenTorikeshiJiyuCode;
+    public HokenryoGemmenTorikeshiShurui getGemmenTorikeshiShuruiCode() {
+        return gemmenTorikeshiShuruiCode;
     }
 
     /**
-     * setGemmenTorikeshiJiyuCode
+     * setGemmenTorikeshiShuruiCode
      *
-     * @param gemmenTorikeshiJiyuCode gemmenTorikeshiJiyuCode
+     * @param gemmenTorikeshiShuruiCode gemmenTorikeshiShuruiCode
      */
-    public void setGemmenTorikeshiJiyuCode(Code gemmenTorikeshiJiyuCode) {
-        this.gemmenTorikeshiJiyuCode = gemmenTorikeshiJiyuCode;
+    public void setGemmenTorikeshiShuruiCode(HokenryoGemmenTorikeshiShurui gemmenTorikeshiShuruiCode) {
+        this.gemmenTorikeshiShuruiCode = gemmenTorikeshiShuruiCode;
     }
 
     /**
@@ -410,7 +411,8 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
      * このエンティティの主キーが他の{@literal DbT2004GemmenEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2004GemmenEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT2004GemmenEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2004GemmenEntity other) {
@@ -450,9 +452,9 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
         this.jotaiKubun = entity.jotaiKubun;
         this.sakuseiKubun = entity.sakuseiKubun;
         this.shinseiJiyu = entity.shinseiJiyu;
-        this.gemmenJiyuCode = entity.gemmenJiyuCode;
+        this.gemmenShuruiCode = entity.gemmenShuruiCode;
         this.gemmenJiyu = entity.gemmenJiyu;
-        this.gemmenTorikeshiJiyuCode = entity.gemmenTorikeshiJiyuCode;
+        this.gemmenTorikeshiShuruiCode = entity.gemmenTorikeshiShuruiCode;
         this.gemmenTorikeshiJiyu = entity.gemmenTorikeshiJiyu;
         this.shinseiGemmenGaku = entity.shinseiGemmenGaku;
         this.ketteiGemmenGaku = entity.ketteiGemmenGaku;
@@ -466,7 +468,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(choteiNendo, fukaNendo, tsuchishoNo, shoriTimestamp, shinseiYMD, ketteiYMD, torikeshiYMD, jotaiKubun, sakuseiKubun, shinseiJiyu, gemmenJiyuCode, gemmenJiyu, gemmenTorikeshiJiyuCode, gemmenTorikeshiJiyu, shinseiGemmenGaku, ketteiGemmenGaku, torikeshiGemmenGaku);
+        return super.toMd5(choteiNendo, fukaNendo, tsuchishoNo, shoriTimestamp, shinseiYMD, ketteiYMD, torikeshiYMD, jotaiKubun, sakuseiKubun, shinseiJiyu, gemmenShuruiCode, gemmenJiyu, gemmenTorikeshiShuruiCode, gemmenTorikeshiJiyu, shinseiGemmenGaku, ketteiGemmenGaku, torikeshiGemmenGaku);
     }
 
 // </editor-fold>

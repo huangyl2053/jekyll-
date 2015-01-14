@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.model.helper;
 
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2002FukaEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.FukaModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
 
 /**
  * FukaModelのテストデータ作成クラスです。

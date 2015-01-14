@@ -8,9 +8,9 @@ torikeshiYMD,UDD015YMD,FlexibleDate,,,,,A
 jotaiKubun,varchar,RString,,,,,A
 sakuseiKubun,varchar,RString,,,,,A
 shinseiJiyu,text,RString,,,,,A
-gemmenJiyuCode,UDD035Code,Code,,,,,A
+gemmenShuruiCode,UDD035Code,Code,,,,,A
 gemmenJiyu,text,RString,,,,,A
-gemmenTorikeshiJiyuCode,UDD035Code,Code,,,,,A
+gemmenTorikeshiShuruiCode,UDD035Code,Code,,,,,A
 gemmenTorikeshiJiyu,text,RString,,,,,A
 shinseiGemmenGaku,numeric,Decimal,,,,,A
 ketteiGemmenGaku,numeric,Decimal,,,,,A

@@ -4,11 +4,14 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005.FukaHikakuFukakijun3Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005.FukaHikakuHokenryo3Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005.FukaHikakuKibetsuGaku3Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005.tblChoteiJiyu3Div;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005.FukakijunHon1Div;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005.HokenryoHon1Div;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005.KibetsugakuHon1Div;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005.tblChoteiJiyuHon1Div;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku.IKiwarigakuDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku.KiwarigakuDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -25,26 +28,28 @@ public class HonSantei1Div extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtChoteiNendo3")
-    private TextBox txtChoteiNendo3;
-    @JsonProperty("txtFukaNendo3")
-    private TextBox txtFukaNendo3;
-    @JsonProperty("txtTsuchiNo3")
-    private TextBox txtTsuchiNo3;
-    @JsonProperty("txtKoseiYMD3")
-    private TextBox txtKoseiYMD3;
-    @JsonProperty("txtKoseiYM3")
-    private TextBox txtKoseiYM3;
-    @JsonProperty("txtShimei3")
-    private TextBox txtShimei3;
-    @JsonProperty("tblChoteiJiyu3")
-    private tblChoteiJiyu3Div tblChoteiJiyu3;
-    @JsonProperty("FukaHikakuFukakijun3")
-    private FukaHikakuFukakijun3Div FukaHikakuFukakijun3;
-    @JsonProperty("FukaHikakuHokenryo3")
-    private FukaHikakuHokenryo3Div FukaHikakuHokenryo3;
-    @JsonProperty("FukaHikakuKibetsuGaku3")
-    private FukaHikakuKibetsuGaku3Div FukaHikakuKibetsuGaku3;
+    @JsonProperty("txtChoteiNendoHon1")
+    private TextBoxYear txtChoteiNendoHon1;
+    @JsonProperty("txtFukaNendoHon1")
+    private TextBoxYear txtFukaNendoHon1;
+    @JsonProperty("txtTsuchiNoHon1")
+    private TextBox txtTsuchiNoHon1;
+    @JsonProperty("txtKoseiYMDHon1")
+    private TextBox txtKoseiYMDHon1;
+    @JsonProperty("txtKoseiTimeHon1")
+    private TextBoxTime txtKoseiTimeHon1;
+    @JsonProperty("txtKoseiYMHon1")
+    private TextBox txtKoseiYMHon1;
+    @JsonProperty("txtShimeiHon1")
+    private TextBox txtShimeiHon1;
+    @JsonProperty("tblChoteiJiyuHon1")
+    private tblChoteiJiyuHon1Div tblChoteiJiyuHon1;
+    @JsonProperty("FukakijunHon1")
+    private FukakijunHon1Div FukakijunHon1;
+    @JsonProperty("HokenryoHon1")
+    private HokenryoHon1Div HokenryoHon1;
+    @JsonProperty("KibetsugakuHon1")
+    private KibetsugakuHon1Div KibetsugakuHon1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -52,104 +57,387 @@ public class HonSantei1Div extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtChoteiNendo3")
-    public TextBox getTxtChoteiNendo3() {
-        return txtChoteiNendo3;
+    @JsonProperty("txtChoteiNendoHon1")
+    public TextBoxYear getTxtChoteiNendoHon1() {
+        return txtChoteiNendoHon1;
     }
 
-    @JsonProperty("txtChoteiNendo3")
-    public void setTxtChoteiNendo3(TextBox txtChoteiNendo3) {
-        this.txtChoteiNendo3=txtChoteiNendo3;
+    @JsonProperty("txtChoteiNendoHon1")
+    public void setTxtChoteiNendoHon1(TextBoxYear txtChoteiNendoHon1) {
+        this.txtChoteiNendoHon1=txtChoteiNendoHon1;
     }
 
-    @JsonProperty("txtFukaNendo3")
-    public TextBox getTxtFukaNendo3() {
-        return txtFukaNendo3;
+    @JsonProperty("txtFukaNendoHon1")
+    public TextBoxYear getTxtFukaNendoHon1() {
+        return txtFukaNendoHon1;
     }
 
-    @JsonProperty("txtFukaNendo3")
-    public void setTxtFukaNendo3(TextBox txtFukaNendo3) {
-        this.txtFukaNendo3=txtFukaNendo3;
+    @JsonProperty("txtFukaNendoHon1")
+    public void setTxtFukaNendoHon1(TextBoxYear txtFukaNendoHon1) {
+        this.txtFukaNendoHon1=txtFukaNendoHon1;
     }
 
-    @JsonProperty("txtTsuchiNo3")
-    public TextBox getTxtTsuchiNo3() {
-        return txtTsuchiNo3;
+    @JsonProperty("txtTsuchiNoHon1")
+    public TextBox getTxtTsuchiNoHon1() {
+        return txtTsuchiNoHon1;
     }
 
-    @JsonProperty("txtTsuchiNo3")
-    public void setTxtTsuchiNo3(TextBox txtTsuchiNo3) {
-        this.txtTsuchiNo3=txtTsuchiNo3;
+    @JsonProperty("txtTsuchiNoHon1")
+    public void setTxtTsuchiNoHon1(TextBox txtTsuchiNoHon1) {
+        this.txtTsuchiNoHon1=txtTsuchiNoHon1;
     }
 
-    @JsonProperty("txtKoseiYMD3")
-    public TextBox getTxtKoseiYMD3() {
-        return txtKoseiYMD3;
+    @JsonProperty("txtKoseiYMDHon1")
+    public TextBox getTxtKoseiYMDHon1() {
+        return txtKoseiYMDHon1;
     }
 
-    @JsonProperty("txtKoseiYMD3")
-    public void setTxtKoseiYMD3(TextBox txtKoseiYMD3) {
-        this.txtKoseiYMD3=txtKoseiYMD3;
+    @JsonProperty("txtKoseiYMDHon1")
+    public void setTxtKoseiYMDHon1(TextBox txtKoseiYMDHon1) {
+        this.txtKoseiYMDHon1=txtKoseiYMDHon1;
     }
 
-    @JsonProperty("txtKoseiYM3")
-    public TextBox getTxtKoseiYM3() {
-        return txtKoseiYM3;
+    @JsonProperty("txtKoseiTimeHon1")
+    public TextBoxTime getTxtKoseiTimeHon1() {
+        return txtKoseiTimeHon1;
     }
 
-    @JsonProperty("txtKoseiYM3")
-    public void setTxtKoseiYM3(TextBox txtKoseiYM3) {
-        this.txtKoseiYM3=txtKoseiYM3;
+    @JsonProperty("txtKoseiTimeHon1")
+    public void setTxtKoseiTimeHon1(TextBoxTime txtKoseiTimeHon1) {
+        this.txtKoseiTimeHon1=txtKoseiTimeHon1;
     }
 
-    @JsonProperty("txtShimei3")
-    public TextBox getTxtShimei3() {
-        return txtShimei3;
+    @JsonProperty("txtKoseiYMHon1")
+    public TextBox getTxtKoseiYMHon1() {
+        return txtKoseiYMHon1;
     }
 
-    @JsonProperty("txtShimei3")
-    public void setTxtShimei3(TextBox txtShimei3) {
-        this.txtShimei3=txtShimei3;
+    @JsonProperty("txtKoseiYMHon1")
+    public void setTxtKoseiYMHon1(TextBox txtKoseiYMHon1) {
+        this.txtKoseiYMHon1=txtKoseiYMHon1;
     }
 
-    @JsonProperty("tblChoteiJiyu3")
-    public tblChoteiJiyu3Div getTblChoteiJiyu3() {
-        return tblChoteiJiyu3;
+    @JsonProperty("txtShimeiHon1")
+    public TextBox getTxtShimeiHon1() {
+        return txtShimeiHon1;
     }
 
-    @JsonProperty("tblChoteiJiyu3")
-    public void setTblChoteiJiyu3(tblChoteiJiyu3Div tblChoteiJiyu3) {
-        this.tblChoteiJiyu3=tblChoteiJiyu3;
+    @JsonProperty("txtShimeiHon1")
+    public void setTxtShimeiHon1(TextBox txtShimeiHon1) {
+        this.txtShimeiHon1=txtShimeiHon1;
     }
 
-    @JsonProperty("FukaHikakuFukakijun3")
-    public FukaHikakuFukakijun3Div getFukaHikakuFukakijun3() {
-        return FukaHikakuFukakijun3;
+    @JsonProperty("tblChoteiJiyuHon1")
+    public tblChoteiJiyuHon1Div getTblChoteiJiyuHon1() {
+        return tblChoteiJiyuHon1;
     }
 
-    @JsonProperty("FukaHikakuFukakijun3")
-    public void setFukaHikakuFukakijun3(FukaHikakuFukakijun3Div FukaHikakuFukakijun3) {
-        this.FukaHikakuFukakijun3=FukaHikakuFukakijun3;
+    @JsonProperty("tblChoteiJiyuHon1")
+    public void setTblChoteiJiyuHon1(tblChoteiJiyuHon1Div tblChoteiJiyuHon1) {
+        this.tblChoteiJiyuHon1=tblChoteiJiyuHon1;
     }
 
-    @JsonProperty("FukaHikakuHokenryo3")
-    public FukaHikakuHokenryo3Div getFukaHikakuHokenryo3() {
-        return FukaHikakuHokenryo3;
+    @JsonProperty("FukakijunHon1")
+    public FukakijunHon1Div getFukakijunHon1() {
+        return FukakijunHon1;
     }
 
-    @JsonProperty("FukaHikakuHokenryo3")
-    public void setFukaHikakuHokenryo3(FukaHikakuHokenryo3Div FukaHikakuHokenryo3) {
-        this.FukaHikakuHokenryo3=FukaHikakuHokenryo3;
+    @JsonProperty("FukakijunHon1")
+    public void setFukakijunHon1(FukakijunHon1Div FukakijunHon1) {
+        this.FukakijunHon1=FukakijunHon1;
     }
 
-    @JsonProperty("FukaHikakuKibetsuGaku3")
-    public FukaHikakuKibetsuGaku3Div getFukaHikakuKibetsuGaku3() {
-        return FukaHikakuKibetsuGaku3;
+    @JsonProperty("HokenryoHon1")
+    public HokenryoHon1Div getHokenryoHon1() {
+        return HokenryoHon1;
     }
 
-    @JsonProperty("FukaHikakuKibetsuGaku3")
-    public void setFukaHikakuKibetsuGaku3(FukaHikakuKibetsuGaku3Div FukaHikakuKibetsuGaku3) {
-        this.FukaHikakuKibetsuGaku3=FukaHikakuKibetsuGaku3;
+    @JsonProperty("HokenryoHon1")
+    public void setHokenryoHon1(HokenryoHon1Div HokenryoHon1) {
+        this.HokenryoHon1=HokenryoHon1;
+    }
+
+    @JsonProperty("KibetsugakuHon1")
+    public KibetsugakuHon1Div getKibetsugakuHon1() {
+        return KibetsugakuHon1;
+    }
+
+    @JsonProperty("KibetsugakuHon1")
+    public void setKibetsugakuHon1(KibetsugakuHon1Div KibetsugakuHon1) {
+        this.KibetsugakuHon1=KibetsugakuHon1;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public Label getLblChoteiJiyuHon1() {
+        return this.getTblChoteiJiyuHon1().getLblChoteiJiyuHon1();
+    }
+
+    @JsonIgnore
+    public TextBox getTxtChoteiJiyuHon11() {
+        return this.getTblChoteiJiyuHon1().getTxtChoteiJiyuHon11();
+    }
+
+    @JsonIgnore
+    public TextBox getTxtChoteiJiyuHon12() {
+        return this.getTblChoteiJiyuHon1().getTxtChoteiJiyuHon12();
+    }
+
+    @JsonIgnore
+    public TextBox getTxtChoteiJiyuHon13() {
+        return this.getTblChoteiJiyuHon1().getTxtChoteiJiyuHon13();
+    }
+
+    @JsonIgnore
+    public TextBox getTxtChoteiJiyuHon14() {
+        return this.getTblChoteiJiyuHon1().getTxtChoteiJiyuHon14();
+    }
+
+    @JsonIgnore
+    public Label getLblShikakushutokuYMDHon1() {
+        return this.getFukakijunHon1().getLblShikakushutokuYMDHon1();
+    }
+
+    @JsonIgnore
+    public void  setLblShikakushutokuYMDHon1(Label lblShikakushutokuYMDHon1) {
+        this.getFukakijunHon1().setLblShikakushutokuYMDHon1(lblShikakushutokuYMDHon1);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtShikakuShutokuYMDHon1() {
+        return this.getFukakijunHon1().getTxtShikakuShutokuYMDHon1();
+    }
+
+    @JsonIgnore
+    public void  setTxtShikakuShutokuYMDHon1(TextBoxDate txtShikakuShutokuYMDHon1) {
+        this.getFukakijunHon1().setTxtShikakuShutokuYMDHon1(txtShikakuShutokuYMDHon1);
+    }
+
+    @JsonIgnore
+    public Label getLblShikakusoshitsuYMDHon1() {
+        return this.getFukakijunHon1().getLblShikakusoshitsuYMDHon1();
+    }
+
+    @JsonIgnore
+    public void  setLblShikakusoshitsuYMDHon1(Label lblShikakusoshitsuYMDHon1) {
+        this.getFukakijunHon1().setLblShikakusoshitsuYMDHon1(lblShikakusoshitsuYMDHon1);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtShikakusoshitsuYMDHon1() {
+        return this.getFukakijunHon1().getTxtShikakusoshitsuYMDHon1();
+    }
+
+    @JsonIgnore
+    public void  setTxtShikakusoshitsuYMDHon1(TextBoxDate txtShikakusoshitsuYMDHon1) {
+        this.getFukakijunHon1().setTxtShikakusoshitsuYMDHon1(txtShikakusoshitsuYMDHon1);
+    }
+
+    @JsonIgnore
+    public Label getLblGoukeiShotokuHon1() {
+        return this.getFukakijunHon1().getLblGoukeiShotokuHon1();
+    }
+
+    @JsonIgnore
+    public void  setLblGoukeiShotokuHon1(Label lblGoukeiShotokuHon1) {
+        this.getFukakijunHon1().setLblGoukeiShotokuHon1(lblGoukeiShotokuHon1);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoukeiShotokuHon1() {
+        return this.getFukakijunHon1().getTxtGoukeiShotokuHon1();
+    }
+
+    @JsonIgnore
+    public void  setTxtGoukeiShotokuHon1(TextBoxNum txtGoukeiShotokuHon1) {
+        this.getFukakijunHon1().setTxtGoukeiShotokuHon1(txtGoukeiShotokuHon1);
+    }
+
+    @JsonIgnore
+    public Label getLblNenkinShunyuHon1() {
+        return this.getFukakijunHon1().getLblNenkinShunyuHon1();
+    }
+
+    @JsonIgnore
+    public void  setLblNenkinShunyuHon1(Label lblNenkinShunyuHon1) {
+        this.getFukakijunHon1().setLblNenkinShunyuHon1(lblNenkinShunyuHon1);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtNenkinShunyuHon1() {
+        return this.getFukakijunHon1().getTxtNenkinShunyuHon1();
+    }
+
+    @JsonIgnore
+    public void  setTxtNenkinShunyuHon1(TextBoxNum txtNenkinShunyuHon1) {
+        this.getFukakijunHon1().setTxtNenkinShunyuHon1(txtNenkinShunyuHon1);
+    }
+
+    @JsonIgnore
+    public Label getLblHonninKazeiHon1() {
+        return this.getFukakijunHon1().getLblHonninKazeiHon1();
+    }
+
+    @JsonIgnore
+    public void  setLblHonninKazeiHon1(Label lblHonninKazeiHon1) {
+        this.getFukakijunHon1().setLblHonninKazeiHon1(lblHonninKazeiHon1);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtHonninKazeiHon1() {
+        return this.getFukakijunHon1().getTxtHonninKazeiHon1();
+    }
+
+    @JsonIgnore
+    public void  setTxtHonninKazeiHon1(TextBox txtHonninKazeiHon1) {
+        this.getFukakijunHon1().setTxtHonninKazeiHon1(txtHonninKazeiHon1);
+    }
+
+    @JsonIgnore
+    public Label getLblSetaiKazeiHon1() {
+        return this.getFukakijunHon1().getLblSetaiKazeiHon1();
+    }
+
+    @JsonIgnore
+    public void  setLblSetaiKazeiHon1(Label lblSetaiKazeiHon1) {
+        this.getFukakijunHon1().setLblSetaiKazeiHon1(lblSetaiKazeiHon1);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtSetaiKazeiHon1() {
+        return this.getFukakijunHon1().getTxtSetaiKazeiHon1();
+    }
+
+    @JsonIgnore
+    public void  setTxtSetaiKazeiHon1(TextBox txtSetaiKazeiHon1) {
+        this.getFukakijunHon1().setTxtSetaiKazeiHon1(txtSetaiKazeiHon1);
+    }
+
+    @JsonIgnore
+    public Label getLblSetaiinSuHon1() {
+        return this.getFukakijunHon1().getLblSetaiinSuHon1();
+    }
+
+    @JsonIgnore
+    public void  setLblSetaiinSuHon1(Label lblSetaiinSuHon1) {
+        this.getFukakijunHon1().setLblSetaiinSuHon1(lblSetaiinSuHon1);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtSetaiinSuHon1() {
+        return this.getFukakijunHon1().getTxtSetaiinSuHon1();
+    }
+
+    @JsonIgnore
+    public void  setTxtSetaiinSuHon1(TextBox txtSetaiinSuHon1) {
+        this.getFukakijunHon1().setTxtSetaiinSuHon1(txtSetaiinSuHon1);
+    }
+
+    @JsonIgnore
+    public Label getLblHokenryoDankaiHon1() {
+        return this.getHokenryoHon1().getLblHokenryoDankaiHon1();
+    }
+
+    @JsonIgnore
+    public void  setLblHokenryoDankaiHon1(Label lblHokenryoDankaiHon1) {
+        this.getHokenryoHon1().setLblHokenryoDankaiHon1(lblHokenryoDankaiHon1);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtHokenryoDankaiHon1() {
+        return this.getHokenryoHon1().getTxtHokenryoDankaiHon1();
+    }
+
+    @JsonIgnore
+    public void  setTxtHokenryoDankaiHon1(TextBox txtHokenryoDankaiHon1) {
+        this.getHokenryoHon1().setTxtHokenryoDankaiHon1(txtHokenryoDankaiHon1);
+    }
+
+    @JsonIgnore
+    public Label getLblKyokaisoHon1() {
+        return this.getHokenryoHon1().getLblKyokaisoHon1();
+    }
+
+    @JsonIgnore
+    public void  setLblKyokaisoHon1(Label lblKyokaisoHon1) {
+        this.getHokenryoHon1().setLblKyokaisoHon1(lblKyokaisoHon1);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtKyokaisoHon1() {
+        return this.getHokenryoHon1().getTxtKyokaisoHon1();
+    }
+
+    @JsonIgnore
+    public void  setTxtKyokaisoHon1(TextBox txtKyokaisoHon1) {
+        this.getHokenryoHon1().setTxtKyokaisoHon1(txtKyokaisoHon1);
+    }
+
+    @JsonIgnore
+    public Label getLblKeisanHokenryogakuHon1() {
+        return this.getHokenryoHon1().getLblKeisanHokenryogakuHon1();
+    }
+
+    @JsonIgnore
+    public void  setLblKeisanHokenryogakuHon1(Label lblKeisanHokenryogakuHon1) {
+        this.getHokenryoHon1().setLblKeisanHokenryogakuHon1(lblKeisanHokenryogakuHon1);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtKeisanHokenryogakuHon1() {
+        return this.getHokenryoHon1().getTxtKeisanHokenryogakuHon1();
+    }
+
+    @JsonIgnore
+    public void  setTxtKeisanHokenryogakuHon1(TextBoxNum txtKeisanHokenryogakuHon1) {
+        this.getHokenryoHon1().setTxtKeisanHokenryogakuHon1(txtKeisanHokenryogakuHon1);
+    }
+
+    @JsonIgnore
+    public Label getLblGemmenGakuHon1() {
+        return this.getHokenryoHon1().getLblGemmenGakuHon1();
+    }
+
+    @JsonIgnore
+    public void  setLblGemmenGakuHon1(Label lblGemmenGakuHon1) {
+        this.getHokenryoHon1().setLblGemmenGakuHon1(lblGemmenGakuHon1);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGemmenGakuHon1() {
+        return this.getHokenryoHon1().getTxtGemmenGakuHon1();
+    }
+
+    @JsonIgnore
+    public void  setTxtGemmenGakuHon1(TextBoxNum txtGemmenGakuHon1) {
+        this.getHokenryoHon1().setTxtGemmenGakuHon1(txtGemmenGakuHon1);
+    }
+
+    @JsonIgnore
+    public Label getLblKakuteiHokenryoHon1() {
+        return this.getHokenryoHon1().getLblKakuteiHokenryoHon1();
+    }
+
+    @JsonIgnore
+    public void  setLblKakuteiHokenryoHon1(Label lblKakuteiHokenryoHon1) {
+        this.getHokenryoHon1().setLblKakuteiHokenryoHon1(lblKakuteiHokenryoHon1);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtKakuteiHokenryoHon1() {
+        return this.getHokenryoHon1().getTxtKakuteiHokenryoHon1();
+    }
+
+    @JsonIgnore
+    public void  setTxtKakuteiHokenryoHon1(TextBoxNum txtKakuteiHokenryoHon1) {
+        this.getHokenryoHon1().setTxtKakuteiHokenryoHon1(txtKakuteiHokenryoHon1);
+    }
+
+    @JsonIgnore
+    public IKiwarigakuDiv getCcdKiwarigakuHon1() {
+        return this.getKibetsugakuHon1().getCcdKiwarigakuHon1();
     }
 
 }

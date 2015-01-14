@@ -10,15 +10,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.model.FukaModel;
-import jp.co.ndensan.reams.db.dbz.model.FukaModelComparators;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModelComparators;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 
 /**
  * 賦課履歴を扱うクラスです。
@@ -58,8 +59,8 @@ public class FukaRireki {
     }
 
     private RString createKey(FukaModel model) {
-        return new RStringBuilder(model.get賦課年度().toDateString())
-                .append(model.get調定年度().toDateString())
+        return new RStringBuilder(model.get賦課年度().value().toDateString())
+                .append(model.get調定年度().value().toDateString())
                 .append(model.get通知書番号()).toRString();
     }
 
@@ -87,7 +88,7 @@ public class FukaRireki {
      * @param 通知書番号 通知書番号
      * @return グループ化する前の条件に該当する賦課履歴
      */
-    public IItemList<FukaModel> get賦課履歴(FlexibleYear 賦課年度, FlexibleYear 調定年度, TsuchishoNo 通知書番号) {
+    public IItemList<FukaModel> get賦課履歴(FukaNendo 賦課年度, ChoteiNendo 調定年度, TsuchishoNo 通知書番号) {
         List<FukaModel> list = new ArrayList<>();
         for (FukaModel model : 賦課履歴明細) {
             if (model.get賦課年度().equals(賦課年度) && model.get調定年度().equals(調定年度) && model.get通知書番号().equals(通知書番号)) {

@@ -22,7 +22,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * {@link jp.co.ndensan.reams.db.dba.business.config.HihokenshashoSofusakiInfoConfig}のテストです。
+ * {@link HihokenshashoSofusakiInfoConfig}のテストです。
  *
  * @author n8178 城間篤人
  */

@@ -20,21 +20,25 @@ public enum DBZCodeShubetsu implements ICodeShubetsu {
      */
     調定事由("0001", ChoteiJiyu.class),
     /**
-     * 保険料減免事由
+     * 保険料減免種類
      */
-    保険料減免事由("0002", HokenryoGemmenJiyu.class),
+    保険料減免種類("0002", HokenryoGemmenShurui.class),
     /**
-     * 保険料徴収猶予事由
+     * 保険料徴収猶予種類
      */
-    保険料徴収猶予事由("0003", HokenryoChoshuYuyoJiyu.class),
+    保険料徴収猶予種類("0003", HokenryoChoshuYuyoShurui.class),
     /**
-     * 保険料減免取消事由
+     * 保険料減免取消種類
      */
-    保険料減免取消事由("0004", HokenryoGemmenTorikeshiJiyu.class),
+    保険料減免取消種類("0004", HokenryoGemmenTorikeshiShurui.class),
     /**
-     * 保険料徴収猶予取消事由
+     * 保険料徴収猶予取消種類
      */
-    保険料徴収猶予取消事由("0005", HokenryoChoshuYuyoTorikeshiJiyu.class);
+    保険料徴収猶予取消種類("0005", HokenryoChoshuYuyoTorikeshiShurui.class),
+    /**
+     * 特別徴収停止事由
+     */
+    特別徴収停止事由("0006", TokubetsuChoshuTeishiJiyu.class);
 
     private final SubGyomuCode subGyomuCode = SubGyomuCode.DBZ介護共通;
     private final CodeShubetsu codeShubetsu;

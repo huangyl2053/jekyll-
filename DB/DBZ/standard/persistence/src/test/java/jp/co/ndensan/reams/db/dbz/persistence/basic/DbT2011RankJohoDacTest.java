@@ -5,11 +5,11 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2011RankJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2011RankJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import org.junit.Before;
@@ -46,10 +46,10 @@ public class DbT2011RankJohoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_ランク区分);
             TestSupport.insert(
-                    DEFAULT_賦課年度.plusYear(1),
+                    new FukaNendo(DEFAULT_賦課年度.plusYear(1)),
                     DEFAULT_ランク区分);
         }
 
@@ -63,14 +63,14 @@ public class DbT2011RankJohoDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void ランク区分がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     null);
         }
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT2011RankJohoEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_ランク区分);
             assertThat(insertedRecord, is(notNullValue()));
         }
@@ -78,7 +78,7 @@ public class DbT2011RankJohoDacTest extends DbzTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT2011RankJohoEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_賦課年度.plusYear(10),
+                    new FukaNendo(DEFAULT_賦課年度.plusYear(10)),
                     DEFAULT_ランク区分);
             assertThat(insertedRecord, is(nullValue()));
         }
@@ -89,10 +89,10 @@ public class DbT2011RankJohoDacTest extends DbzTestDacBase {
         @Test
         public void ランク情報が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_ランク区分);
             TestSupport.insert(
-                    DEFAULT_賦課年度.plusYear(1),
+                    new FukaNendo(DEFAULT_賦課年度.plusYear(1)),
                     DEFAULT_ランク区分);
             assertThat(sut.selectAll().size(), is(2));
         }
@@ -108,11 +108,11 @@ public class DbT2011RankJohoDacTest extends DbzTestDacBase {
         @Test
         public void ランク情報エンティティを渡すと_insertは_ランク情報を追加する() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_ランク区分);
 
             assertThat(sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_ランク区分), is(notNullValue()));
         }
     }
@@ -122,7 +122,7 @@ public class DbT2011RankJohoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_ランク区分);
         }
 
@@ -134,7 +134,7 @@ public class DbT2011RankJohoDacTest extends DbzTestDacBase {
             sut.update(updateRecord);
 
             DbT2011RankJohoEntity updatedRecord = sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_ランク区分);
 
             assertThat(updateRecord.getRankName(), is(updatedRecord.getRankName()));
@@ -146,17 +146,17 @@ public class DbT2011RankJohoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_ランク区分);
         }
 
         @Test
         public void ランク情報エンティティを渡すと_deleteは_ランク情報を削除する() {
             sut.delete(sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_ランク区分));
             assertThat(sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_ランク区分), is(nullValue()));
         }
     }
@@ -164,10 +164,10 @@ public class DbT2011RankJohoDacTest extends DbzTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                FlexibleYear 賦課年度,
+                FukaNendo 賦課年度,
                 RankKubun ランク区分) {
             DbT2011RankJohoEntity entity = DbT2011RankJohoEntityGenerator.createDbT2011RankJohoEntity();
-            entity.setFukaNendo(賦課年度);
+            entity.setFukaNendo(賦課年度.value());
             entity.setRankKubun(ランク区分);
             sut.insert(entity);
         }

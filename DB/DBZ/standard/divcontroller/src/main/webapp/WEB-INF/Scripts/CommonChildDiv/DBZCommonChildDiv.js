@@ -4268,20 +4268,91 @@ var DBZ;
 })(DBZ || (DBZ = {}));
 var DBZ;
 (function (DBZ) {
+    (function (KaigoSaikinShorishaRireki) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KaigoSaikinShorishaRireki.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KaigoSaikinShorishaRireki";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KaigoSaikinShorishaRireki.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.KaigoSaikinShorishaRireki.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KaigoSaikinShorishaRireki = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+            return Controls;
+        })();
+        KaigoSaikinShorishaRireki.Controls = Controls;
+    })(DBZ.KaigoSaikinShorishaRireki || (DBZ.KaigoSaikinShorishaRireki = {}));
+    var KaigoSaikinShorishaRireki = DBZ.KaigoSaikinShorishaRireki;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (KaigoSaikinShorishaRireki) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KaigoSaikinShorishaRireki.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new KaigoSaikinShorishaRireki.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KaigoSaikinShorishaRireki.ModeController = ModeController;
+    })(DBZ.KaigoSaikinShorishaRireki || (DBZ.KaigoSaikinShorishaRireki = {}));
+    var KaigoSaikinShorishaRireki = DBZ.KaigoSaikinShorishaRireki;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KaigoSaikinShorishaRireki) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new KaigoSaikinShorishaRireki.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        KaigoSaikinShorishaRireki.PublicProperties = PublicProperties;
+    })(DBZ.KaigoSaikinShorishaRireki || (DBZ.KaigoSaikinShorishaRireki = {}));
+    var KaigoSaikinShorishaRireki = DBZ.KaigoSaikinShorishaRireki;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
     (function (HihokenshaFinder) {
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_btnClear = function () {
-                return "onClick_btnClear";
-            };
-
-            Events.onClick_btnSearch = function () {
-                return "onClick_btnSearch";
-            };
-
-            Events.onClick_btnHihokenshaFinderHyoji = function () {
-                return "onClick_btnHihokenshaFinderHyoji";
+            Events.onClick_btnToClear = function () {
+                return "onClick_btnToClear";
             };
             return Events;
         })();
@@ -4307,8 +4378,8 @@ var DBZ;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.KaigoFinder = function () {
-                return new UZA.Panel(this.convFiledName("KaigoFinder"));
+            Controls.prototype.SearchCriteriaOfHihokensha = function () {
+                return new UZA.Panel(this.convFiledName("SearchCriteriaOfHihokensha"));
             };
 
             Controls.prototype.ddlHokensha = function () {
@@ -4327,24 +4398,12 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlFukaNendo"));
             };
 
-            Controls.prototype.KaigoFinderDetail = function () {
-                return new UZA.Panel(this.convFiledName("KaigoFinder_KaigoFinderDetail"));
+            Controls.prototype.SearchCriteriaDetail = function () {
+                return new UZA.Panel(this.convFiledName("SearchCriteriaOfHihokensha_SearchCriteriaDetail"));
             };
 
-            Controls.prototype.lblHihokenshaJotai = function () {
-                return new UZA.Label(this.convFiledName("lblHihokenshaJotai"));
-            };
-
-            Controls.prototype.chkHihokenshaDaicho = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkHihokenshaDaicho"));
-            };
-
-            Controls.prototype.chkJukyushaDaicho = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkJukyushaDaicho"));
-            };
-
-            Controls.prototype.chkJushochiTokureisha = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkJushochiTokureisha"));
+            Controls.prototype.chkHihokensha = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkHihokensha"));
             };
 
             Controls.prototype.radMinashiNigo = function () {
@@ -4355,24 +4414,28 @@ var DBZ;
                 return new UZA.CheckBoxList(this.convFiledName("chkMinashiNigo"));
             };
 
+            Controls.prototype.KaigoAtenaFinder = function () {
+                return new URA.AtenaFinder.ModeController(this.convFiledName("KaigoAtenaFinder"));
+            };
+
             Controls.prototype.ButtonsForHihokenshaFinder = function () {
                 return new UZA.Panel(this.convFiledName("ButtonsForHihokenshaFinder"));
             };
 
-            Controls.prototype.btnClear = function () {
-                return new UZA.Button(this.convFiledName("btnClear"));
+            Controls.prototype.btnToClear = function () {
+                return new UZA.Button(this.convFiledName("btnToClear"));
             };
 
-            Controls.prototype.btnSearch = function () {
-                return new UZA.Button(this.convFiledName("btnSearch"));
+            Controls.prototype.btnToSearch = function () {
+                return new UZA.Button(this.convFiledName("btnToSearch"));
             };
 
             Controls.prototype.txtMaxNumber = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtMaxNumber"));
             };
 
-            Controls.prototype.btnHihokenshaFinderHyoji = function () {
-                return new UZA.Button(this.convFiledName("btnHihokenshaFinderHyoji"));
+            Controls.prototype.saikinShorisha = function () {
+                return new DBZ.KaigoSaikinShorishaRireki.ModeController(this.convFiledName("saikinShorisha"));
             };
             return Controls;
         })();
@@ -4388,80 +4451,107 @@ var DBZ;
                 this.fieldName = fieldName;
                 this.controls = new HihokenshaFinder.Controls(fieldName);
             }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
-            };
-
-            ModeController.prototype.priorities = function () {
-                return [
-                    "表示モード",
-                    "保険者"
-                ];
-            };
-
-            ModeController.prototype.表示モード = function () {
-                return new Modes.表示モード(this.controls);
-            };
-
-            ModeController.prototype.保険者 = function () {
-                return new Modes.保険者(this.controls);
             };
             return ModeController;
         })();
         HihokenshaFinder.ModeController = ModeController;
+    })(DBZ.HihokenshaFinder || (DBZ.HihokenshaFinder = {}));
+    var HihokenshaFinder = DBZ.HihokenshaFinder;
+})(DBZ || (DBZ = {}));
 
-        (function (Modes) {
-            var 表示モード = (function () {
-                function 表示モード(controls) {
-                    this.controls = controls;
-                }
-                表示モード.prototype.資格系 = function () {
-                    this.controls.txtTuchishoNo().visible = false;
-                    this.controls.txtTuchishoNo().displayNone = true;
-                    this.controls.ddlFukaNendo().visible = false;
-                    this.controls.ddlFukaNendo().displayNone = true;
-                    this.controls.chkJukyushaDaicho().visible = true;
-                    this.controls.chkJukyushaDaicho().displayNone = false;
-                    this.controls.chkJushochiTokureisha().visible = true;
-                    this.controls.chkJushochiTokureisha().displayNone = false;
-                    this.controls.radMinashiNigo().visible = true;
-                    this.controls.radMinashiNigo().displayNone = false;
-                };
+var DBZ;
+(function (DBZ) {
+    (function (HihokenshaFinder) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new HihokenshaFinder.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
 
-                表示モード.prototype.賦課系 = function () {
-                    this.controls.txtTuchishoNo().visible = true;
-                    this.controls.txtTuchishoNo().displayNone = false;
-                    this.controls.ddlFukaNendo().visible = true;
-                    this.controls.ddlFukaNendo().displayNone = false;
-                    this.controls.chkJukyushaDaicho().visible = false;
-                    this.controls.chkJukyushaDaicho().displayNone = true;
-                    this.controls.chkJushochiTokureisha().visible = false;
-                    this.controls.chkJushochiTokureisha().displayNone = true;
-                    this.controls.radMinashiNigo().visible = false;
-                    this.controls.radMinashiNigo().displayNone = true;
-                };
-                return 表示モード;
-            })();
-            Modes.表示モード = 表示モード;
+                editTypes.addEditType("onClick_BtnToSearch", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("displayNone_txtTsuchishoNo", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("displayNone_ddlFukaNendo", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("displayNone_SearchCriteriaDetail", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("canOpenAndClose_HihokenshaFinder", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("displayNone_saikinShorisha", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("displayNone_ddlHokensha", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("displayNone_chkMinashiNigo", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                return editTypes;
+            };
 
-            var 保険者 = (function () {
-                function 保険者(controls) {
-                    this.controls = controls;
-                }
-                保険者.prototype.表示する = function () {
-                    this.controls.ddlHokensha().visible = true;
-                    this.controls.ddlHokensha().displayNone = false;
-                };
+            PublicProperties.prototype.getonClick_BtnToSearch = function () {
+                return this.controls.btnToSearch().onClick;
+            };
 
-                保険者.prototype.表示しない = function () {
-                    this.controls.ddlHokensha().visible = false;
-                    this.controls.ddlHokensha().displayNone = true;
-                };
-                return 保険者;
-            })();
-            Modes.保険者 = 保険者;
-        })(HihokenshaFinder.Modes || (HihokenshaFinder.Modes = {}));
-        var Modes = HihokenshaFinder.Modes;
+            PublicProperties.prototype.setonClick_BtnToSearch = function (value) {
+                this.controls.btnToSearch().onClick = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_txtTsuchishoNo = function () {
+                return this.controls.txtTuchishoNo().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_txtTsuchishoNo = function (value) {
+                this.controls.txtTuchishoNo().displayNone = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_ddlFukaNendo = function () {
+                return this.controls.ddlFukaNendo().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_ddlFukaNendo = function (value) {
+                this.controls.ddlFukaNendo().displayNone = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_SearchCriteriaDetail = function () {
+                return this.controls.SearchCriteriaDetail().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_SearchCriteriaDetail = function (value) {
+                this.controls.SearchCriteriaDetail().displayNone = value;
+            };
+
+            PublicProperties.prototype.getcanOpenAndClose_HihokenshaFinder = function () {
+                return this.controls.HihokenshaFinder().canOpenAndClose;
+            };
+
+            PublicProperties.prototype.setcanOpenAndClose_HihokenshaFinder = function (value) {
+                this.controls.HihokenshaFinder().canOpenAndClose = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_saikinShorisha = function () {
+                return this.controls.saikinShorisha().Properties().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_saikinShorisha = function (value) {
+                this.controls.saikinShorisha().Properties().displayNone = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_ddlHokensha = function () {
+                return this.controls.ddlHokensha().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_ddlHokensha = function (value) {
+                this.controls.ddlHokensha().displayNone = value;
+            };
+
+            PublicProperties.prototype.getdisplayNone_chkMinashiNigo = function () {
+                return this.controls.chkMinashiNigo().displayNone;
+            };
+
+            PublicProperties.prototype.setdisplayNone_chkMinashiNigo = function (value) {
+                this.controls.chkMinashiNigo().displayNone = value;
+            };
+            return PublicProperties;
+        })();
+        HihokenshaFinder.PublicProperties = PublicProperties;
     })(DBZ.HihokenshaFinder || (DBZ.HihokenshaFinder = {}));
     var HihokenshaFinder = DBZ.HihokenshaFinder;
 })(DBZ || (DBZ = {}));
@@ -5654,6 +5744,10 @@ var DBZ;
             Controls.prototype.KaigoAtenaInfo = function () {
                 return new UZA.Panel(this.convFiledNameSelf());
             };
+
+            Controls.prototype.atenaInfo = function () {
+                return new URA.AtenaShokaiSimple.ModeController(this.convFiledName("atenaInfo"));
+            };
             return Controls;
         })();
         KaigoAtenaInfo.Controls = Controls;
@@ -5675,9 +5769,155 @@ var DBZ;
             ModeController.prototype.PublicProperties = function () {
                 return new KaigoAtenaInfo.PublicProperties(this.fieldName);
             };
+
+            ModeController.prototype.priorities = function () {
+                return [
+                    "DisplayType",
+                    "BtnDainoninDisplay",
+                    "BtnSofusakiDisplay",
+                    "BtnKozaDisplay",
+                    "BtnSetaiDisplay",
+                    "BtnEltaxDisplay",
+                    "BtnAtesakiDisplay"
+                ];
+            };
+
+            ModeController.prototype.DisplayType = function () {
+                return new Modes.DisplayType(this.controls);
+            };
+
+            ModeController.prototype.BtnDainoninDisplay = function () {
+                return new Modes.BtnDainoninDisplay(this.controls);
+            };
+
+            ModeController.prototype.BtnSofusakiDisplay = function () {
+                return new Modes.BtnSofusakiDisplay(this.controls);
+            };
+
+            ModeController.prototype.BtnKozaDisplay = function () {
+                return new Modes.BtnKozaDisplay(this.controls);
+            };
+
+            ModeController.prototype.BtnSetaiDisplay = function () {
+                return new Modes.BtnSetaiDisplay(this.controls);
+            };
+
+            ModeController.prototype.BtnEltaxDisplay = function () {
+                return new Modes.BtnEltaxDisplay(this.controls);
+            };
+
+            ModeController.prototype.BtnAtesakiDisplay = function () {
+                return new Modes.BtnAtesakiDisplay(this.controls);
+            };
             return ModeController;
         })();
         KaigoAtenaInfo.ModeController = ModeController;
+
+        (function (Modes) {
+            var DisplayType = (function () {
+                function DisplayType(controls) {
+                    this.controls = controls;
+                }
+                DisplayType.prototype.一行タイプ = function () {
+                    this.controls.atenaInfo().DisplayType().一行タイプ();
+                };
+
+                DisplayType.prototype.三行タイプ = function () {
+                    this.controls.atenaInfo().DisplayType().三行タイプ();
+                };
+
+                DisplayType.prototype.指定無し = function () {
+                    this.controls.atenaInfo().DisplayType().指定無し();
+                };
+                return DisplayType;
+            })();
+            Modes.DisplayType = DisplayType;
+
+            var BtnDainoninDisplay = (function () {
+                function BtnDainoninDisplay(controls) {
+                    this.controls = controls;
+                }
+                BtnDainoninDisplay.prototype.指定無し = function () {
+                    this.controls.atenaInfo().BtnDainoninDisplay().指定無し();
+                };
+                BtnDainoninDisplay.prototype.表示しない = function () {
+                    this.controls.atenaInfo().BtnDainoninDisplay().表示しない();
+                };
+                return BtnDainoninDisplay;
+            })();
+            Modes.BtnDainoninDisplay = BtnDainoninDisplay;
+
+            var BtnSofusakiDisplay = (function () {
+                function BtnSofusakiDisplay(controls) {
+                    this.controls = controls;
+                }
+                BtnSofusakiDisplay.prototype.指定無し = function () {
+                    this.controls.atenaInfo().BtnSofusakiDisplay().指定無し();
+                };
+                BtnSofusakiDisplay.prototype.表示しない = function () {
+                    this.controls.atenaInfo().BtnSofusakiDisplay().表示しない();
+                };
+                return BtnSofusakiDisplay;
+            })();
+            Modes.BtnSofusakiDisplay = BtnSofusakiDisplay;
+
+            var BtnKozaDisplay = (function () {
+                function BtnKozaDisplay(controls) {
+                    this.controls = controls;
+                }
+                BtnKozaDisplay.prototype.指定無し = function () {
+                    this.controls.atenaInfo().BtnKozaDisplay().指定無し();
+                };
+                BtnKozaDisplay.prototype.表示しない = function () {
+                    this.controls.atenaInfo().BtnKozaDisplay().表示しない();
+                };
+                return BtnKozaDisplay;
+            })();
+            Modes.BtnKozaDisplay = BtnKozaDisplay;
+
+            var BtnSetaiDisplay = (function () {
+                function BtnSetaiDisplay(controls) {
+                    this.controls = controls;
+                }
+                BtnSetaiDisplay.prototype.指定無し = function () {
+                    this.controls.atenaInfo().BtnSetaiDisplay().指定無し();
+                };
+                BtnSetaiDisplay.prototype.表示しない = function () {
+                    this.controls.atenaInfo().BtnSetaiDisplay().表示しない();
+                };
+                return BtnSetaiDisplay;
+            })();
+            Modes.BtnSetaiDisplay = BtnSetaiDisplay;
+
+            var BtnEltaxDisplay = (function () {
+                function BtnEltaxDisplay(controls) {
+                    this.controls = controls;
+                }
+                BtnEltaxDisplay.prototype.指定無し = function () {
+                    this.controls.atenaInfo().BtnEltaxDisplay().指定無し();
+                };
+                BtnEltaxDisplay.prototype.表示しない = function () {
+                    this.controls.atenaInfo().BtnEltaxDisplay().表示しない();
+                };
+                return BtnEltaxDisplay;
+            })();
+            Modes.BtnEltaxDisplay = BtnEltaxDisplay;
+
+            var BtnAtesakiDisplay = (function () {
+                function BtnAtesakiDisplay(controls) {
+                    this.controls = controls;
+                }
+                BtnAtesakiDisplay.prototype.指定無し = function () {
+                    this.controls.atenaInfo().BtnAtesakiDisplay().指定無し();
+                };
+                BtnAtesakiDisplay.prototype.表示しない = function () {
+                    this.controls.atenaInfo().BtnAtesakiDisplay().表示しない();
+                };
+                return BtnAtesakiDisplay;
+            })();
+            Modes.BtnAtesakiDisplay = BtnAtesakiDisplay;
+        })(KaigoAtenaInfo.Modes || (KaigoAtenaInfo.Modes = {}));
+        var Modes = KaigoAtenaInfo.Modes;
     })(DBZ.KaigoAtenaInfo || (DBZ.KaigoAtenaInfo = {}));
     var KaigoAtenaInfo = DBZ.KaigoAtenaInfo;
 })(DBZ || (DBZ = {}));
@@ -5837,7 +6077,7 @@ var DBZ;
             };
 
             Controls.prototype.txtShutokuYmd = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShutokuYmd"));
+                return new UZA.TextBoxDate(this.convFiledName("txtShutokuYmd"));
             };
 
             Controls.prototype.txtShutokuJiyu = function () {
@@ -5845,7 +6085,7 @@ var DBZ;
             };
 
             Controls.prototype.txtSoshitsuYmd = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSoshitsuYmd"));
+                return new UZA.TextBoxDate(this.convFiledName("txtSoshitsuYmd"));
             };
 
             Controls.prototype.txtSoshitsuJiyu = function () {
@@ -5869,6 +6109,10 @@ var DBZ;
                 this.fieldName = fieldName;
                 this.controls = new KaigoFukaKihon.Controls(fieldName);
             }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
@@ -5888,13 +6132,57 @@ var DBZ;
     (function (KaigoFukaKihon) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
-                this.fieldName = fieldName;
                 this.controls = new KaigoFukaKihon.Controls(fieldName);
             }
             PublicProperties.prototype.getEditTypes = function () {
                 var editTypes = new UZA.EditTypeForPublicProperty();
 
+                editTypes.addEditType("title", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("canOpenAndClose", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("eraseBorder", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("backGroundColor", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("btnHihoRireki_visible", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 return editTypes;
+            };
+
+            PublicProperties.prototype.gettitle = function () {
+                return this.controls.KaigoFukaKihon().title;
+            };
+
+            PublicProperties.prototype.settitle = function (value) {
+                this.controls.KaigoFukaKihon().title = value;
+            };
+
+            PublicProperties.prototype.getcanOpenAndClose = function () {
+                return this.controls.KaigoFukaKihon().canOpenAndClose;
+            };
+
+            PublicProperties.prototype.setcanOpenAndClose = function (value) {
+                this.controls.KaigoFukaKihon().canOpenAndClose = value;
+            };
+
+            PublicProperties.prototype.geteraseBorderTop = function () {
+                return this.controls.KaigoFukaKihon().eraseBorder;
+            };
+
+            PublicProperties.prototype.seteraseBorderTop = function (value) {
+                this.controls.KaigoFukaKihon().eraseBorder = value;
+            };
+
+            PublicProperties.prototype.getbackGroundColor = function () {
+                return this.controls.KaigoFukaKihon().backgroundColor;
+            };
+
+            PublicProperties.prototype.setbackGroundColor = function (value) {
+                this.controls.KaigoFukaKihon().backgroundColor = value;
+            };
+
+            PublicProperties.prototype.getbtnHihoRireki_visible = function () {
+                return this.controls.btnHihoRireki().visible;
+            };
+
+            PublicProperties.prototype.setbtnHihoRireki_visible = function (value) {
+                this.controls.btnHihoRireki().visible = value;
             };
             return PublicProperties;
         })();
@@ -6163,93 +6451,6 @@ var DBZ;
 })(DBZ || (DBZ = {}));
 var DBZ;
 (function (DBZ) {
-    (function (KaigoSaikinShorishaRireki) {
-        var Events = (function () {
-            function Events() {
-            }
-            Events.onClick_btnKaigoSaikinShorishaHyoji = function () {
-                return "onClick_btnKaigoSaikinShorishaHyoji";
-            };
-            return Events;
-        })();
-        KaigoSaikinShorishaRireki.Events = Events;
-
-        var Controls = (function () {
-            function Controls(fieldName) {
-                this._myName = fieldName;
-            }
-            Controls.myType = function () {
-                return "KaigoSaikinShorishaRireki";
-            };
-
-            Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBZ.KaigoSaikinShorishaRireki.Controls.myType();
-            };
-
-            Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBZ.KaigoSaikinShorishaRireki.Controls.myType() + "_" + fieldName;
-            };
-
-            Controls.prototype.KaigoSaikinShorishaRireki = function () {
-                return new UZA.Panel(this.convFiledNameSelf());
-            };
-
-            Controls.prototype.wrappedSaikinShorishaRireki = function () {
-                return new URZ.SaikinShorishaRireki.ModeController(this.convFiledName("wrappedSaikinShorishaRireki"));
-            };
-
-            Controls.prototype.btnKaigoSaikinShorishaHyoji = function () {
-                return new UZA.Button(this.convFiledName("btnKaigoSaikinShorishaHyoji"));
-            };
-            return Controls;
-        })();
-        KaigoSaikinShorishaRireki.Controls = Controls;
-    })(DBZ.KaigoSaikinShorishaRireki || (DBZ.KaigoSaikinShorishaRireki = {}));
-    var KaigoSaikinShorishaRireki = DBZ.KaigoSaikinShorishaRireki;
-})(DBZ || (DBZ = {}));
-var DBZ;
-(function (DBZ) {
-    (function (KaigoSaikinShorishaRireki) {
-        var ModeController = (function () {
-            function ModeController(fieldName) {
-                this.fieldName = fieldName;
-                this.controls = new KaigoSaikinShorishaRireki.Controls(fieldName);
-            }
-            ModeController.prototype.Properties = function () {
-                return new UZA.CommonChildDiv(this.fieldName);
-            };
-
-            ModeController.prototype.PublicProperties = function () {
-                return new KaigoSaikinShorishaRireki.PublicProperties(this.fieldName);
-            };
-            return ModeController;
-        })();
-        KaigoSaikinShorishaRireki.ModeController = ModeController;
-    })(DBZ.KaigoSaikinShorishaRireki || (DBZ.KaigoSaikinShorishaRireki = {}));
-    var KaigoSaikinShorishaRireki = DBZ.KaigoSaikinShorishaRireki;
-})(DBZ || (DBZ = {}));
-
-var DBZ;
-(function (DBZ) {
-    (function (KaigoSaikinShorishaRireki) {
-        var PublicProperties = (function () {
-            function PublicProperties(fieldName) {
-                this.fieldName = fieldName;
-                this.controls = new KaigoSaikinShorishaRireki.Controls(fieldName);
-            }
-            PublicProperties.prototype.getEditTypes = function () {
-                var editTypes = new UZA.EditTypeForPublicProperty();
-
-                return editTypes;
-            };
-            return PublicProperties;
-        })();
-        KaigoSaikinShorishaRireki.PublicProperties = PublicProperties;
-    })(DBZ.KaigoSaikinShorishaRireki || (DBZ.KaigoSaikinShorishaRireki = {}));
-    var KaigoSaikinShorishaRireki = DBZ.KaigoSaikinShorishaRireki;
-})(DBZ || (DBZ = {}));
-var DBZ;
-(function (DBZ) {
     (function (KaigoShikakuKihon) {
         var Events = (function () {
             function Events() {
@@ -6283,7 +6484,7 @@ var DBZ;
             };
 
             Controls.prototype.txtShutokuYmd = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShutokuYmd"));
+                return new UZA.TextBoxDate(this.convFiledName("txtShutokuYmd"));
             };
 
             Controls.prototype.txtShutokuJiyu = function () {
@@ -6291,7 +6492,7 @@ var DBZ;
             };
 
             Controls.prototype.txtSoshitsuYmd = function () {
-                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSoshitsuYmd"));
+                return new UZA.TextBoxDate(this.convFiledName("txtSoshitsuYmd"));
             };
 
             Controls.prototype.txtSoshitsuJiyu = function () {
@@ -6339,6 +6540,22 @@ var DBZ;
                 this.fieldName = fieldName;
                 this.controls = new KaigoShikakuKihon.Controls(fieldName);
             }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new KaigoShikakuKihon.PublicProperties(this.fieldName);
+            };
+
+            ModeController.prototype.priorities = function () {
+                return [
+                    "RenrakusakiAriMode",
+                    "HihokenrirekiNashiMode",
+                    "NinteirirekiNashiMode"
+                ];
+            };
+
             ModeController.prototype.RenrakusakiAriMode = function () {
                 return new Modes.RenrakusakiAriMode(this.controls);
             };
@@ -6389,6 +6606,25 @@ var DBZ;
             Modes.NinteirirekiNashiMode = NinteirirekiNashiMode;
         })(KaigoShikakuKihon.Modes || (KaigoShikakuKihon.Modes = {}));
         var Modes = KaigoShikakuKihon.Modes;
+    })(DBZ.KaigoShikakuKihon || (DBZ.KaigoShikakuKihon = {}));
+    var KaigoShikakuKihon = DBZ.KaigoShikakuKihon;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KaigoShikakuKihon) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new KaigoShikakuKihon.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        KaigoShikakuKihon.PublicProperties = PublicProperties;
     })(DBZ.KaigoShikakuKihon || (DBZ.KaigoShikakuKihon = {}));
     var KaigoShikakuKihon = DBZ.KaigoShikakuKihon;
 })(DBZ || (DBZ = {}));

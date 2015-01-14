@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.HokenryoChoshuYuyoShurui;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.HokenryoChoshuYuyoTorikeshiShurui;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2006ChoshuYuyoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -29,9 +31,9 @@ public final class DbT2006ChoshuYuyoEntityGenerator {
     public static final RString DEFAULT_徴収猶予状態区分 = new RString("1");
     public static final RString DEFAULT_徴収猶予作成区分 = new RString("1");
     public static final RString DEFAULT_申請事由 = new RString("1");
-    public static final Code DEFAULT_徴収猶予事由ｺｰﾄﾞ = new Code("3");
+    public static final HokenryoChoshuYuyoShurui DEFAULT_徴収猶予種類 = new HokenryoChoshuYuyoShurui(new Code("3"));
     public static final RString DEFAULT_徴収猶予事由 = new RString("1");
-    public static final Code DEFAULT_徴収猶予取消事由ｺｰﾄﾞ = new Code("3");
+    public static final HokenryoChoshuYuyoTorikeshiShurui DEFAULT_徴収猶予取消種類 = new HokenryoChoshuYuyoTorikeshiShurui(new Code("3"));
     public static final RString DEFAULT_徴収猶予取消事由 = new RString("1");
 
     /**
@@ -52,9 +54,9 @@ public final class DbT2006ChoshuYuyoEntityGenerator {
         entity.setJotaiKubun(DEFAULT_徴収猶予状態区分);
         entity.setSakuseiKubun(DEFAULT_徴収猶予作成区分);
         entity.setShinseiJiyu(DEFAULT_申請事由);
-        entity.setYuyoJiyuCode(DEFAULT_徴収猶予事由ｺｰﾄﾞ);
+        entity.setYuyoShuruiCode(DEFAULT_徴収猶予種類);
         entity.setYuyoJiyu(DEFAULT_徴収猶予事由);
-        entity.setYuyoTorikeshiJiyuCode(DEFAULT_徴収猶予取消事由ｺｰﾄﾞ);
+        entity.setYuyoTorikeshiShuruiCode(DEFAULT_徴収猶予取消種類);
         entity.setYuyoTorikeshiJiyu(DEFAULT_徴収猶予取消事由);
         return entity;
     }

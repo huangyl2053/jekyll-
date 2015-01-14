@@ -1,7 +1,7 @@
-﻿gyomuCode,UDD002GyomuCode,GyomuCode,,,,,A
+﻿subGyomuCode,UDD055SubGyomuCode,SubGyomuCode,,,,,A
 shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
-batchID,varchar,RString,,,,,A
-batchIDEdaban,varchar,RString,,,,,A
+shoriName,varchar,RString,,,,,A
+shoriEdaban,varchar,RString,,,,,A
 nendo,UDD012YSeireki,FlexibleYear,,,,,A
 nendoNaiRenban,varchar,RString,,,,,A
 kijunYMD,UDD015YMD,FlexibleDate,,,,,A

@@ -5,6 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2002FukaEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
@@ -13,12 +18,10 @@ import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2002FukaEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.FukaModel;
 import jp.co.ndensan.reams.db.dbz.model.helper.FukaModelTestHelper;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.FukaDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
@@ -33,7 +36,7 @@ import static org.mockito.Mockito.when;
 /**
  * {link FukaManager}のテストクラスです。
  *
- * @author N8156 宮本 康
+ * @author n3317 塚田 萌
  */
 @RunWith(Enclosed.class)
 public class FukaManagerTest {
@@ -41,8 +44,9 @@ public class FukaManagerTest {
     private static FukaDac dac;
     private static FukaManager sut;
 
-    private static final FlexibleYear 調定年度 = DbT2002FukaEntityGenerator.DEFAULT_調定年度;
-    private static final FlexibleYear 賦課年度 = DbT2002FukaEntityGenerator.DEFAULT_賦課年度;
+    private static final FukaNendo notFound賦課年度 = new FukaNendo("2111");
+    private static final FukaNendo 賦課年度 = new FukaNendo(DEFAULT_賦課年度);
+    private static final ChoteiNendo 調定年度 = new ChoteiNendo(DEFAULT_調定年度);
     private static final TsuchishoNo 通知書番号 = DbT2002FukaEntityGenerator.DEFAULT_通知書番号;
     private static final RDateTime 処理日時 = DbT2002FukaEntityGenerator.DEFAULT_処理日時;
 
@@ -52,21 +56,62 @@ public class FukaManagerTest {
         sut = new FukaManager(dac);
     }
 
-    public static class get介護賦課Test extends DbzTestBase {
+    public static class find賦課 extends DbzTestBase {
 
         @Test
-        public void データが見つかる検索条件を指定した場合_介護賦課が返る() {
+        public void find賦課は_該当の情報がない時_IOptionalのemptyを返す() {
+            IOptional<FukaModel> empty = DbOptional.empty();
 
-            IOptional<FukaModel> 介護賦課モデル = DbOptional.ofNullable(FukaModelTestHelper.createModel());
+            when(dac.select賦課ByKey(any(ChoteiNendo.class), any(FukaNendo.class),
+                    any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(empty);
+            IOptional<FukaModel> result = sut.find賦課(調定年度, notFound賦課年度, DEFAULT_通知書番号, DEFAULT_処理日時);
 
-            when(dac.select介護賦課ByKey(any(FlexibleYear.class), any(FlexibleYear.class), any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(介護賦課モデル);
+            assertThat(result, is(empty));
+        }
 
-            IOptional<FukaModel> result = sut.get介護賦課(調定年度, 賦課年度, 通知書番号, 処理日時);
+        @Test
+        public void find賦課は_該当の情報がある時_該当情報を返す() {
+            IOptional<FukaModel> model = DbOptional.of(
+                    new FukaModel(DbT2002FukaEntityGenerator.createDbT2002FukaEntity()));
 
-            assertThat(result.get().get世帯コード(), is(介護賦課モデル.get().get世帯コード()));
+            when(dac.select賦課ByKey(調定年度, 賦課年度, DEFAULT_通知書番号, DEFAULT_処理日時)).thenReturn(model);
+            IOptional<FukaModel> result = sut.find賦課(調定年度, 賦課年度, DEFAULT_通知書番号, DEFAULT_処理日時);
+
+            assertThat(result.get().get賦課年度(), is(賦課年度));
         }
     }
 
+    public static class find賦課直近 extends DbzTestBase {
+
+        @Test
+        public void find賦課直近は_該当の情報がない時_IOptionalのemptyを返す() {
+            IOptional<FukaModel> empty = DbOptional.empty();
+
+            when(dac.select賦課Recently(any(FukaNendo.class), any(HihokenshaNo.class), any(RDateTime.class))).thenReturn(empty);
+            IOptional<FukaModel> result = sut.find賦課直近(notFound賦課年度, DEFAULT_被保険者番号, DEFAULT_処理日時);
+
+            assertThat(result, is(empty));
+        }
+
+        @Test
+        public void find賦課直近は_該当の情報がある時_該当情報を返す() {
+            IOptional<FukaModel> model = DbOptional.of(
+                    new FukaModel(DbT2002FukaEntityGenerator.createDbT2002FukaEntity()));
+
+            when(dac.select賦課Recently(賦課年度, DEFAULT_被保険者番号, DEFAULT_処理日時)).thenReturn(model);
+
+            IOptional<FukaModel> result = sut.find賦課直近(賦課年度, DEFAULT_被保険者番号, DEFAULT_処理日時);
+
+            assertThat(result.get().get賦課年度(), is(賦課年度));
+        }
+    }
+
+    //TODO 宮本さんがテストを作る
+//    public static class load全賦課履歴_被保険者番号 extends DbzTestBase {
+//
+//    }
+//    public static class load全賦課履歴_被保険者番号_賦課年度 extends DbzTestBase {
+//    }
     public static class get介護賦課一覧Test extends DbzTestBase {
 
         @Test
@@ -77,7 +122,7 @@ public class FukaManagerTest {
             modelList.add(FukaModelTestHelper.createModel());
             IItemList<FukaModel> 介護賦課モデルリスト = ItemList.of(modelList);
 
-            when(dac.select介護賦課一覧(any(FlexibleYear.class), any(FlexibleYear.class), any(TsuchishoNo.class))).thenReturn(介護賦課モデルリスト);
+            when(dac.select介護賦課一覧(any(ChoteiNendo.class), any(FukaNendo.class), any(TsuchishoNo.class))).thenReturn(介護賦課モデルリスト);
 
             IItemList<FukaModel> result = sut.get介護賦課一覧(調定年度, 賦課年度, 通知書番号);
 
@@ -94,7 +139,7 @@ public class FukaManagerTest {
 
             IOptional<FukaModel> 介護賦課モデル = DbOptional.ofNullable(FukaModelTestHelper.createModel());
 
-            when(dac.select最新介護賦課(any(FlexibleYear.class), any(TsuchishoNo.class))).thenReturn(介護賦課モデル);
+            when(dac.select最新介護賦課(any(FukaNendo.class), any(TsuchishoNo.class))).thenReturn(介護賦課モデル);
 
             IOptional<FukaModel> result = sut.get最新介護賦課(賦課年度, 通知書番号);
 

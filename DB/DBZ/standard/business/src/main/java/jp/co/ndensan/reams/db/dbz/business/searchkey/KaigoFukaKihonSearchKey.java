@@ -9,8 +9,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 
 /**
  * 介護賦課基本情報の検索キークラスです。
@@ -20,7 +20,7 @@ import static java.util.Objects.requireNonNull;
 public class KaigoFukaKihonSearchKey {
 
     private final TsuchishoNo 通知書番号;
-    private final FlexibleYear 賦課年度;
+    private final FukaNendo 賦課年度;
     private final LasdecCode 市町村コード;
     private final ShikibetsuCode 識別コード;
 
@@ -30,12 +30,12 @@ public class KaigoFukaKihonSearchKey {
      * @param builder 介護賦課基本情報の検索キーBuilder
      * @throws NullPointerException 引数がnullの場合
      */
-    KaigoFukaKihonSearchKey(KaigoFukaKihonSearchKeyBuilder builder) throws NullPointerException {
+    private KaigoFukaKihonSearchKey(Builder builder) throws NullPointerException {
         requireNonNull(builder, UrSystemErrorMessages.値がnull.getReplacedMessage("builder"));
-        this.通知書番号 = builder.get通知書番号();
-        this.賦課年度 = builder.get賦課年度();
-        this.市町村コード = builder.get市町村コード();
-        this.識別コード = builder.get識別コード();
+        this.通知書番号 = builder.通知書番号;
+        this.賦課年度 = builder.賦課年度;
+        this.市町村コード = builder.市町村コード;
+        this.識別コード = builder.識別コード;
     }
 
     /**
@@ -52,7 +52,7 @@ public class KaigoFukaKihonSearchKey {
      *
      * @return 賦課年度
      */
-    public FlexibleYear get賦課年度() {
+    public FukaNendo get賦課年度() {
         return 賦課年度;
     }
 
@@ -72,5 +72,39 @@ public class KaigoFukaKihonSearchKey {
      */
     public ShikibetsuCode get識別コード() {
         return 識別コード;
+    }
+
+    public static class Builder {
+
+        private final TsuchishoNo 通知書番号;
+        private final FukaNendo 賦課年度;
+        private final LasdecCode 市町村コード;
+        private final ShikibetsuCode 識別コード;
+
+        /**
+         * コンストラクタです。
+         *
+         * @param 通知書番号 通知書番号
+         * @param 賦課年度 賦課年度
+         * @param 市町村コード 市町村コード
+         * @param 識別コード 識別コード
+         * @throws NullPointerException 引数がnullの場合
+         */
+        public Builder(
+                TsuchishoNo 通知書番号, FukaNendo 賦課年度, LasdecCode 市町村コード, ShikibetsuCode 識別コード) throws NullPointerException {
+            this.通知書番号 = requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+            this.賦課年度 = 賦課年度;
+            this.市町村コード = requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+            this.識別コード = requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        }
+
+        /**
+         * 設定値を元に検索キークラスを作成して返します。
+         *
+         * @return 介護賦課基本情報の検索キー
+         */
+        public KaigoFukaKihonSearchKey build() {
+            return new KaigoFukaKihonSearchKey(this);
+        }
     }
 }

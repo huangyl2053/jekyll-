@@ -5,10 +5,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 
 /**
@@ -707,7 +708,7 @@ public class KiwarigakuDiv extends Panel implements IKiwarigakuDiv {
 
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void load(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時) {
+    public void load(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時) {
         getHandler().load(調定年度, 賦課年度, 通知書番号, 処理日時);
     }
 

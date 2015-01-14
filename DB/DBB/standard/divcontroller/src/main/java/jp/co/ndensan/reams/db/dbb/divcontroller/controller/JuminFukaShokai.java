@@ -41,5 +41,4 @@ public class JuminFukaShokai {
         response.data = panel;
         return response;
     }
-
 }
