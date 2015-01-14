@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.util.function;
 
-import jp.co.ndensan.reams.db.dbz.definition.util.function.Predicate;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.DbPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,19 +21,19 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 
 /**
- * Predicateのテストです。
+ * {@link DbPredicate}のテストです。
  *
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class PredicateTest extends DbzTestBase {
+public class DbPredicateTest extends DbzTestBase {
 
-    public PredicateTest() {
+    public DbPredicateTest() {
     }
 
     public static class of extends DbzTestBase {
 
-        private Predicate<RString> sut;
+        private DbPredicate<RString> sut;
 
         @Test(expected = NullPointerException.class)
         public void ofは_引数がnullの時_NullPointerExceptionをスローする() {
@@ -66,7 +66,7 @@ public class PredicateTest extends DbzTestBase {
 
     public static class isEquals extends DbzTestBase {
 
-        private Predicate<RString> sut;
+        private DbPredicate<RString> sut;
 
         @Test
         public void isEqualsの引数がnullの時_生成されるPredicateは_evalueteにnullを受け取ると_trueを返す() {
@@ -107,7 +107,7 @@ public class PredicateTest extends DbzTestBase {
 
     public static class not extends DbzTestBase {
 
-        private Predicate<RString> sut;
+        private DbPredicate<RString> sut;
 
         @Test(expected = NullPointerException.class)
         public void notは_引数のIPredicateがnullの時_NullPointerExceptionをスローする() {
@@ -132,12 +132,12 @@ public class PredicateTest extends DbzTestBase {
     public static class negate extends DbzTestBase {
 
         private IPredicate<String> predicate;
-        private Predicate<String> sut;
+        private DbPredicate<String> sut;
 
         @Before
         public void setUp() {
             predicate = mock(IPredicate.class);
-            sut = Predicate.of(predicate);
+            sut = DbPredicate.of(predicate);
         }
 
         @Test
@@ -157,72 +157,72 @@ public class PredicateTest extends DbzTestBase {
 
     public static class or extends DbzTestBase {
 
-        private Predicate<String> truePredicate;
-        private Predicate<String> falsePredicate;
+        private DbPredicate<String> truePredicate;
+        private DbPredicate<String> falsePredicate;
 
         @Before
         public void setUp() {
-            truePredicate = Predicate.of(newIPredicate(true));
-            falsePredicate = Predicate.of(newIPredicate(false));
+            truePredicate = DbPredicate.of(newIPredicate(true));
+            falsePredicate = DbPredicate.of(newIPredicate(false));
         }
 
         @Test
         public void evaluateでtrueを返すPredicateの_orに_trueを返すPredicateを渡した時_生成されるインスタンスは_evaluateでtrueを返す() {
-            Predicate<String> sut = truePredicate.or(truePredicate);
+            DbPredicate<String> sut = truePredicate.or(truePredicate);
             assertThat(sut.evaluate(""), is(true));
         }
 
         @Test
         public void evaluateでtrueを返すPredicateの_orに_flaseを返すPredicateを渡した時_生成されるインスタンスは_evaluateでtrueを返す() {
-            Predicate<String> sut = truePredicate.or(falsePredicate);
+            DbPredicate<String> sut = truePredicate.or(falsePredicate);
             assertThat(sut.evaluate(""), is(true));
         }
 
         @Test
         public void evaluateでfalseを返すPredicateの_orに_trueを返すPredicateを渡した時_生成されるインスタンスは_evaluateでtrueを返す() {
-            Predicate<String> sut = falsePredicate.or(truePredicate);
+            DbPredicate<String> sut = falsePredicate.or(truePredicate);
             assertThat(sut.evaluate(""), is(true));
         }
 
         @Test
         public void evaluateでfalseを返すPredicateの_orに_flaseを返すPredicateを渡した時_生成されるインスタンスは_evaluateでfalseを返す() {
-            Predicate<String> sut = falsePredicate.or(falsePredicate);
+            DbPredicate<String> sut = falsePredicate.or(falsePredicate);
             assertThat(sut.evaluate(""), is(false));
         }
     }
 
     public static class and extends DbzTestBase {
 
-        private Predicate<String> truePredicate;
-        private Predicate<String> falsePredicate;
+        private DbPredicate<String> truePredicate;
+        private DbPredicate<String> falsePredicate;
 
         @Before
         public void setUp() {
-            truePredicate = Predicate.of(newIPredicate(true));
-            falsePredicate = Predicate.of(newIPredicate(false));
+            truePredicate = DbPredicate.of(newIPredicate(true));
+            falsePredicate = DbPredicate.of(newIPredicate(false));
         }
 
         @Test
         public void evaluateでtrueを返すPredicateの_andに_trueを返すPredicateを渡した時_生成されるインスタンスは_evaluateでtrueを返す() {
-            Predicate<String> sut = truePredicate.and(truePredicate);
+            DbPredicate<String> sut = truePredicate.and(truePredicate);
             assertThat(sut.evaluate(""), is(true));
         }
 
         @Test
         public void evaluateでtrueを返すPredicateの_andに_flaseを返すPredicateを渡した時_生成されるインスタンスは_evaluateでfalseを返す() {
-            Predicate<String> sut = truePredicate.and(falsePredicate);
+            DbPredicate<String> sut = truePredicate.and(falsePredicate);
             assertThat(sut.evaluate(""), is(false));
         }
 
         @Test
         public void evaluateでfalseを返すPredicateの_andに_trueを返すPredicateを渡した時_生成されるインスタンスは_evaluateでfalseを返す() {
-            Predicate<String> sut = falsePredicate.and(truePredicate);
+            DbPredicate<String> sut = falsePredicate.and(truePredicate);
             assertThat(sut.evaluate(""), is(false));
         }
 
         @Test
         public void evaluateでfalseを返すPredicateの_andに_flaseを返すPredicateを渡した時_生成されるインスタンスは_evaluateでfalseを返す() {
-            Predicate<String> sut = falsePredicate.and(falsePredicate);
+            DbPredicate<String> sut = falsePredicate.and(falsePredicate);
             assertThat(sut.evaluate(""), is(false));
         }
     }

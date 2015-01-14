@@ -38,6 +38,18 @@ public interface IItemList<E> extends Iterable<E> {
     <R> IItemList<R> map(IFunction<? super E, ? extends R> mapper);
 
     /**
+     * 保持する要素を{@link Iterable}なオブジェクトへ展開する{@link IFunction mapper}により、
+     * 変換後の{@link Iterable}で参照可能なすべての要素を持った{@link IItemList}を生成し返します。<br/>
+     * つまり、{@link IFunction mapper}に、n個の要素を持った{@link Iterable}への展開が定義されていたとすれば、
+     * {@code n×変換前のIItemListのサイズ }個の要素を持った{@link IItemList}が生成されます。
+     *
+     * @param <R> 変換後の{@link IItemList IItemList}が保持する型
+     * @param mapper 変換に用いる{@link IFunction mapper}
+     * @return mapperにより展開された結果をすべて保持した{@link IItemList IItemList}
+     */
+    <R> IItemList<R> flatMap(IFunction<? super E, ? extends Iterable<? extends R>> mapper);
+
+    /**
      * 指定の条件に該当する要素だけを保持する{@link IItemList IItemList}を返します。
      *
      * @param predicate 条件
@@ -170,4 +182,14 @@ public interface IItemList<E> extends Iterable<E> {
      * @return 要素をすべて追加した新しい{@link IItemList IItemList}
      */
     IItemList<E> added(E... items);
+
+    /**
+     * {@link IDbCollector}によって、保持する要素を集積・変換して返します。
+     *
+     * @param <R> 結果の型
+     * @param <A> 集積用の型(結果の型と同じ場合もある)
+     * @param collector {@link IDbCollector}
+     * @return {@link IDbCollector}により、保持する要素を集積・変換した結果
+     */
+    <R, A> R collect(IDbCollector<? super E, A, R> collector);
 }

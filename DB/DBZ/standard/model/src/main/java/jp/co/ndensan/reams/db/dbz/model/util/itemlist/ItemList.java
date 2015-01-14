@@ -15,8 +15,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IBiConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IDbCollector;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.DbOptional;
 import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
 
@@ -127,6 +129,21 @@ public final class ItemList<E> implements IItemList<E>, Serializable {
             list.add(Objects.requireNonNull(mapper.apply(item)));
         }
         return new ItemList<>(list);
+    }
+
+    @Override
+    public <R> IItemList<R> flatMap(IFunction<? super E, ? extends Iterable<? extends R>> mapper) {
+        List<R> list = new ArrayList<>();
+        for (E item : this.elements) {
+            _addAll(list, mapper.apply(item));
+        }
+        return ItemList.of(list);
+    }
+
+    private <T> void _addAll(List<T> list, Iterable<? extends T> values) {
+        for (T value : values) {
+            list.add(value);
+        }
     }
 
     @Override
@@ -258,5 +275,15 @@ public final class ItemList<E> implements IItemList<E>, Serializable {
     @Override
     public boolean containsAll(jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList<?> items) {
         return this.elements.containsAll(items.toList());
+    }
+
+    @Override
+    public <R, A> R collect(IDbCollector<? super E, A, R> collector) {
+        A container = collector.container().get();
+        IBiConsumer<A, ? super E> accumulator = collector.accumulator();
+        for (E element : elements) {
+            accumulator.accept(container, element);
+        }
+        return collector.finisher().apply(container);
     }
 }

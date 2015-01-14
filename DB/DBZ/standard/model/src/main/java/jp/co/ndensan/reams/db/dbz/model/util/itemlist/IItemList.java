@@ -40,6 +40,9 @@ public interface IItemList<E> extends jp.co.ndensan.reams.db.dbz.definition.util
      */
     <R> IItemList<R> map(IFunction<? super E, ? extends R> mapper);
 
+    @Override
+    public <R> IItemList<R> flatMap(IFunction<? super E, ? extends Iterable<? extends R>> mapper);
+
     /**
      * 指定の条件に該当する要素だけを保持する{@link IItemList IItemList}を返します。
      *
