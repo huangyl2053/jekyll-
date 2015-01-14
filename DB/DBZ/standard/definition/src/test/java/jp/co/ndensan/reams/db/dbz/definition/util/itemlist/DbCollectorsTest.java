@@ -1,3 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbz.definition.util.itemlist;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,12 +13,11 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IBiConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IDbCollector;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import static jp.co.ndensan.reams.db.dbz.definition.util.itemlist.DbCollectors.groupingBy;
 import static jp.co.ndensan.reams.db.dbz.definition.util.itemlist.DbCollectors.minBy;
 import static jp.co.ndensan.reams.db.dbz.definition.util.itemlist.DbCollectorsSupport.gatheringPresentItems;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.DbCollectors;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -26,47 +31,17 @@ import org.junit.runner.RunWith;
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class DbCollectorsTest {
+public class DbCollectorsTest extends DbzTestBase {
 
     public DbCollectorsTest() {
     }
 
-    public static class toList {
-
-        private IDbCollector<Sample1, ?, List<Sample1>> sut;
-        private ISupplier<Object> supplier;
-        private IBiConsumer<Object, Sample1> accumulator;
-        private IFunction<Object, List<Sample1>> finisher;
-
-        @Before
-
-        public void setUp() {
-            sut = DbCollectors.<Sample1>toList();
-            supplier = (ISupplier<Object>) sut.container();
-            accumulator = (IBiConsumer<Object, Sample1>) sut.accumulator();
-            finisher = (IFunction<Object, List<Sample1>>) sut.finisher();
-        }
-
-        @Test
-        public void accumulator() {
-            Object container = supplier.get();
-            Sample1 testValue = new Sample1(10, "value");
-            accumulator.accept(container, testValue);
-            assertThat(finisher.apply(container).contains(testValue), is(true));
-        }
-
-        @Test
-        public void result() {
-            assertThat(finisher.apply(supplier.get()), isA(List.class));
-        }
-    }
-
-    private static class Sample1 {
+    private static class TestValue {
 
         private final int key;
         private final String value;
 
-        public Sample1(int key, String value) {
+        public TestValue(int key, String value) {
             this.key = key;
             this.value = value;
         }
@@ -80,186 +55,292 @@ public class DbCollectorsTest {
         }
     }
 
-    public static class toMap {
+    public static class toList extends DbzTestBase {
 
-        private IDbCollector<Sample1, ?, Map<Integer, String>> sut;
-        private IFunction<Sample1, Integer> keyMapper;
-        private IFunction<Sample1, String> valueMapper;
+        private IDbCollector<TestValue, ?, List<TestValue>> sut;
         private ISupplier<Object> supplier;
-        private IBiConsumer<Object, Sample1> accumulator;
+        private IBiConsumer<Object, TestValue> accumulator;
+        private IFunction<Object, List<TestValue>> finisher;
+
+        @Before
+        public void setUp() {
+            sut = DbCollectors.<TestValue>toList();
+            supplier = (ISupplier<Object>) sut.container();
+            accumulator = (IBiConsumer<Object, TestValue>) sut.accumulator();
+            finisher = (IFunction<Object, List<TestValue>>) sut.finisher();
+        }
+
+        @Test
+        public void toListの結果が返すDbCollectorの生成する各要素について_containerをaccumulatorへ渡した後_finisherで変換すると_accumulatorの第2引数を保持するListを返す_が成立する() {
+            Object container = supplier.get();
+            TestValue testValue = new TestValue(10, "value");
+            accumulator.accept(container, testValue);
+            assertThat(finisher.apply(container).contains(testValue), is(true));
+        }
+    }
+
+    public static class toMap extends DbzTestBase {
+
+        private IDbCollector<TestValue, ?, Map<Integer, String>> sut;
+        private IFunction<TestValue, Integer> keyMapper;
+        private IFunction<TestValue, String> valueMapper;
+        private ISupplier<Object> supplier;
+        private IBiConsumer<Object, TestValue> accumulator;
         private IFunction<Object, Map<Integer, String>> finisher;
 
         @Before
         public void setUp() {
-            keyMapper = new IFunction<Sample1, Integer>() {
+            keyMapper = new IFunction<TestValue, Integer>() {
                 @Override
-                public Integer apply(Sample1 t) {
+                public Integer apply(TestValue t) {
                     return t.getKey();
                 }
             };
-            valueMapper = new IFunction<Sample1, String>() {
+            valueMapper = new IFunction<TestValue, String>() {
                 @Override
-                public String apply(Sample1 t) {
+                public String apply(TestValue t) {
                     return t.getValue();
                 }
             };
             sut = DbCollectors.toMap(keyMapper, valueMapper);
             supplier = (ISupplier<Object>) sut.container();
-            accumulator = (IBiConsumer<Object, Sample1>) sut.accumulator();
+            accumulator = (IBiConsumer<Object, TestValue>) sut.accumulator();
             finisher = (IFunction<Object, Map<Integer, String>>) sut.finisher();
         }
 
         @Test
-        public void accumlate() {
+        public void toMapの結果が返すDbCollectorの生成する各要素について_containerをaccumulatorへ渡した後_finisherで変換すると_accumulatorの第2引数を保持するMapを返す_が成立する() {
             Object container = supplier.get();
-            Sample1 testValue = new Sample1(10, "value");
+            TestValue testValue = new TestValue(10, "value");
             accumulator.accept(container, testValue);
             assertThat(finisher.apply(container).containsKey(keyMapper.apply(testValue)), is(true));
             assertThat(finisher.apply(container).containsValue(valueMapper.apply(testValue)), is(true));
         }
-
-        @Test
-        public void result() {
-            assertThat(finisher.apply(supplier.get()), isA(Map.class));
-        }
     }
 
-    public static class toIItemList {
+    public static class toIItemList extends DbzTestBase {
 
-        private IDbCollector<Sample1, ?, IItemList<Sample1>> sut;
+        private IDbCollector<TestValue, ?, IItemList<TestValue>> sut;
         private ISupplier<Object> supplier;
-        private IBiConsumer<Object, Sample1> accumulator;
-        private IFunction<Object, IItemList<Sample1>> finisher;
+        private IBiConsumer<Object, TestValue> accumulator;
+        private IFunction<Object, IItemList<TestValue>> finisher;
 
         @Before
         public void setUp() {
             sut = DbCollectors.toIItemList();
             supplier = (ISupplier<Object>) sut.container();
-            accumulator = (IBiConsumer<Object, Sample1>) sut.accumulator();
-            finisher = (IFunction<Object, IItemList<Sample1>>) sut.finisher();
+            accumulator = (IBiConsumer<Object, TestValue>) sut.accumulator();
+            finisher = (IFunction<Object, IItemList<TestValue>>) sut.finisher();
         }
 
         @Test
-        public void accumlate() {
+        public void toIItemListの結果が返すDbCollectorの生成する各要素について_containerをaccumulatorへ渡した後_finisherで変換すると_accumulatorの第2引数を保持するIItemListを返す_が成立する() {
             Object container = supplier.get();
-            Sample1 testValue = new Sample1(10, "value");
+            TestValue testValue = new TestValue(10, "value");
             accumulator.accept(container, testValue);
             assertThat(finisher.apply(container).contains(testValue), is(true));
         }
-
-        @Test
-        public void result() {
-            assertThat(finisher.apply(supplier.get()), isA(IItemList.class));
-        }
     }
 
-    public static class groupingBy_keyMapper {
+    public static class groupingBy_IFunction extends DbzTestBase {
 
-        private IDbCollector<Sample1, ?, Map<Integer, IItemList<Sample1>>> sut;
-        private IFunction<Sample1, Integer> keyMapper;
+        private IDbCollector<TestValue, ?, Map<Integer, IItemList<TestValue>>> sut;
+        private IFunction<TestValue, Integer> keyMapper;
         private ISupplier<Object> supplier;
-        private IBiConsumer<Object, Sample1> accumulator;
-        private IFunction<Object, Map<Integer, IItemList<Sample1>>> finisher;
+        private IBiConsumer<Object, TestValue> accumulator;
+        private IFunction<Object, Map<Integer, IItemList<TestValue>>> finisher;
 
         @Before
         public void setUp() {
-            keyMapper = new IFunction<Sample1, Integer>() {
+            keyMapper = new IFunction<TestValue, Integer>() {
                 @Override
-                public Integer apply(Sample1 t) {
+                public Integer apply(TestValue t) {
                     return t.getKey();
                 }
             };
             sut = DbCollectors.groupingBy(keyMapper);
             supplier = (ISupplier<Object>) sut.container();
-            accumulator = (IBiConsumer<Object, Sample1>) sut.accumulator();
-            finisher = (IFunction<Object, Map<Integer, IItemList<Sample1>>>) sut.finisher();
+            accumulator = (IBiConsumer<Object, TestValue>) sut.accumulator();
+            finisher = (IFunction<Object, Map<Integer, IItemList<TestValue>>>) sut.finisher();
         }
 
         @Test
-        public void accumlate() {
+        public void groupingBy_IFunctionの結果が返すDbCollectorの生成する各要素について_containerをaccumulatorへ渡した後_finisherで変換すると_accumulatorの第2引数をIFunctionで変換した値をキーに_accumulatorの第2引数を持ったIItemListを紐付けたMapを返す_が成立する() {
             Object container = supplier.get();
-            Sample1 testValue = new Sample1(10, "value");
+            TestValue testValue = new TestValue(10, "value");
             accumulator.accept(container, testValue);
             assertThat(finisher.apply(container).get(keyMapper.apply(testValue)).contains(testValue), is(true));
         }
-
-        @Test
-        public void accumlate2() {
-            Object container = supplier.get();
-            Sample1 testValue = new Sample1(10, null);
-            Sample1 testValue2 = new Sample1(10, "value2");
-            accumulator.accept(container, testValue);
-            accumulator.accept(container, testValue2);
-            assertThat(finisher.apply(container).get(keyMapper.apply(testValue)).contains(testValue2), is(true));
-        }
-
-        @Test
-        public void result() {
-            assertThat(finisher.apply(supplier.get()), isA(Map.class));
-        }
     }
 
-    public static class collectingAndThen {
-
-        private IDbCollector<Sample1, ?, IItemList<Sample1>> sut;
-        private IFunction<Sample1, Integer> keyMapper;
-        private ISupplier<Object> supplier;
-        private IBiConsumer<Object, Sample1> accumulator;
-        private IFunction<Object, IItemList<Sample1>> finisher;
-
-        @Before
-        public void setUp() {
-            keyMapper = new IFunction<Sample1, Integer>() {
-                @Override
-                public Integer apply(Sample1 t) {
-                    return t.getKey();
-                }
-            };
-            sut = DbCollectors.collectingAndThen(
-                    groupingBy(keyMapper, minBy(Sample1Comparators.Value)),
-                    gatheringPresentItems(Integer.class, Sample1.class)
-            );
-            supplier = (ISupplier<Object>) sut.container();
-            accumulator = (IBiConsumer<Object, Sample1>) sut.accumulator();
-            finisher = (IFunction<Object, IItemList<Sample1>>) sut.finisher();
-        }
-
-        @Test
-        public void collectingAndThen_accumlate() {
-            Object container = supplier.get();
-            Sample1 testValue1 = new Sample1(10, "value1");
-            Sample1 testValue2 = new Sample1(10, "value2");
-            Sample1 testValue3 = new Sample1(10, "value3");
-            Sample1 testValue4 = new Sample1(10, "value4");
-            accumulator.accept(container, testValue1);
-            accumulator.accept(container, testValue2);
-            accumulator.accept(container, testValue3);
-            accumulator.accept(container, testValue4);
-            assertThat(finisher.apply(container).contains(
-                    minOrNull(Sample1Comparators.Value, testValue1, testValue2, testValue3, testValue4)
-            ), is(true));
-        }
-
-        private Sample1 minOrNull(Comparator<Sample1> c, Sample1... values) {
-            List<Sample1> list = Arrays.asList(values);
-            Collections.sort(list, c);
-            return list.isEmpty() ? null : list.get(0);
-        }
-    }
-
-    private enum Sample1Comparators implements Comparator<Sample1> {
+    private enum TestValueComparators implements Comparator<TestValue> {
 
         Key {
                     @Override
-                    public int compare(Sample1 o1, Sample1 o2) {
+                    public int compare(TestValue o1, TestValue o2) {
                         return o1.key - o2.key;
                     }
                 },
         Value {
                     @Override
-                    public int compare(Sample1 o1, Sample1 o2) {
+                    public int compare(TestValue o1, TestValue o2) {
                         return o1.value.compareTo(o2.value);
                     }
                 };
+    }
+
+    public static class maxBy extends DbzTestBase {
+
+        private IDbCollector<TestValue, ?, IOptional<TestValue>> sut;
+        private ISupplier<Object> supplier;
+        private IBiConsumer<Object, TestValue> accumulator;
+        private IFunction<Object, IOptional<TestValue>> finisher;
+
+        @Before
+        public void setUp() {
+            sut = DbCollectors.maxBy(TestValueComparators.Value);
+            supplier = (ISupplier<Object>) sut.container();
+            accumulator = (IBiConsumer<Object, TestValue>) sut.accumulator();
+            finisher = (IFunction<Object, IOptional<TestValue>>) sut.finisher();
+        }
+
+        @Test
+        public void maxByの結果が返すDbCollectorDbCollectorの生成する各要素について_containerを何回か第2引数を変えながらaccumulatorへ渡した後_finisherで変換すると_accumulatorに渡した第2引数の中で最大を保持するIOptionalを返す_が成立する() {
+            Object container = supplier.get();
+            TestValue testValue1 = new TestValue(10, "value1");
+            TestValue testValue2 = new TestValue(11, "value2");
+            TestValue testValue3 = new TestValue(12, "value3");
+            TestValue testValue4 = new TestValue(13, "value4");
+            TestValue testValue5 = new TestValue(14, "value5");
+            accumulator.accept(container, testValue1);
+            accumulator.accept(container, testValue2);
+            accumulator.accept(container, testValue3);
+            accumulator.accept(container, testValue4);
+            accumulator.accept(container, testValue5);
+            assertThat(finisher.apply(container).get().value,
+                    is(maxOf(TestValueComparators.Value, testValue1, testValue2, testValue3, testValue4, testValue5).value)
+            );
+        }
+    }
+
+    private static TestValue maxOf(Comparator<TestValue> c, TestValue... values) {
+        List<TestValue> list = Arrays.asList(values);
+        Collections.sort(list, c);
+        Collections.reverse(list);
+        return list.isEmpty() ? null : list.get(0);
+    }
+
+    public static class minBy extends DbzTestBase {
+
+        private IDbCollector<TestValue, ?, IOptional<TestValue>> sut;
+        private ISupplier<Object> supplier;
+        private IBiConsumer<Object, TestValue> accumulator;
+        private IFunction<Object, IOptional<TestValue>> finisher;
+
+        @Before
+        public void setUp() {
+            sut = DbCollectors.minBy(TestValueComparators.Value);
+            supplier = (ISupplier<Object>) sut.container();
+            accumulator = (IBiConsumer<Object, TestValue>) sut.accumulator();
+            finisher = (IFunction<Object, IOptional<TestValue>>) sut.finisher();
+        }
+
+        @Test
+        public void minByの結果が返すDbCollectorの生成する各要素について_containerを何回か第2引数を変えながらaccumulatorへ渡した後_finisherで変換すると_accumulatorに渡した第2引数の中で最小を保持するIOptionalを返す_が成立する() {
+            Object container = supplier.get();
+            TestValue testValue1 = new TestValue(10, "value1");
+            TestValue testValue2 = new TestValue(11, "value2");
+            TestValue testValue3 = new TestValue(12, "value3");
+            TestValue testValue4 = new TestValue(13, "value4");
+            TestValue testValue5 = new TestValue(14, "value5");
+            accumulator.accept(container, testValue1);
+            accumulator.accept(container, testValue2);
+            accumulator.accept(container, testValue3);
+            accumulator.accept(container, testValue4);
+            accumulator.accept(container, testValue5);
+            assertThat(finisher.apply(container).get().value,
+                    is(minOf(TestValueComparators.Value, testValue1, testValue2, testValue3, testValue4, testValue5).value)
+            );
+        }
+    }
+
+    private static TestValue minOf(Comparator<TestValue> c, TestValue... values) {
+        List<TestValue> list = Arrays.asList(values);
+        Collections.sort(list, c);
+        return list.isEmpty() ? null : list.get(0);
+    }
+
+    public static class sortBy extends DbzTestBase {
+
+        private IDbCollector<TestValue, ?, IItemList<TestValue>> sut;
+        private ISupplier<Object> supplier;
+        private IBiConsumer<Object, TestValue> accumulator;
+        private IFunction<Object, IItemList<TestValue>> finisher;
+
+        @Before
+        public void setUp() {
+            sut = DbCollectors.sortBy(TestValueComparators.Value);
+            supplier = (ISupplier<Object>) sut.container();
+            accumulator = (IBiConsumer<Object, TestValue>) sut.accumulator();
+            finisher = (IFunction<Object, IItemList<TestValue>>) sut.finisher();
+        }
+
+        @Test
+        public void sortByの結果が返すDbCollectorの生成する各要素について_containerを何回か第2引数を変えながらaccumulatorへ渡した後_finisherで変換すると_accumulatorに渡した第2引数の中で最小を保持するIOptionalを返す_が成立する() {
+            Object container = supplier.get();
+            TestValue testValue1 = new TestValue(10, "value1");
+            TestValue testValue2 = new TestValue(11, "value2");
+            TestValue testValue3 = new TestValue(12, "value3");
+            accumulator.accept(container, testValue1);
+            accumulator.accept(container, testValue2);
+            accumulator.accept(container, testValue3);
+            List<TestValue> list = Arrays.asList(testValue1, testValue2, testValue3);
+            Collections.sort(list, TestValueComparators.Value);
+            assertThat(finisher.apply(container).toList().get(0), is(list.get(0)));
+            assertThat(finisher.apply(container).toList().get(1), is(list.get(1)));
+            assertThat(finisher.apply(container).toList().get(2), is(list.get(2)));
+        }
+    }
+
+    public static class collectingAndThen_groupingBy_IDbCollector extends DbzTestBase {
+
+        private IDbCollector<TestValue, ?, IItemList<TestValue>> sut;
+        private IFunction<TestValue, Integer> keyMapper;
+        private ISupplier<Object> supplier;
+        private IBiConsumer<Object, TestValue> accumulator;
+        private IFunction<Object, IItemList<TestValue>> finisher;
+
+        @Before
+        public void setUp() {
+            keyMapper = new IFunction<TestValue, Integer>() {
+                @Override
+                public Integer apply(TestValue t) {
+                    return t.getKey();
+                }
+            };
+            sut = DbCollectors.collectingAndThen(
+                    groupingBy(keyMapper, minBy(TestValueComparators.Value)),
+                    gatheringPresentItems(Integer.class, TestValue.class)
+            );
+            supplier = (ISupplier<Object>) sut.container();
+            accumulator = (IBiConsumer<Object, TestValue>) sut.accumulator();
+            finisher = (IFunction<Object, IItemList<TestValue>>) sut.finisher();
+        }
+
+        @Test
+        public void DbCollectorの生成する各要素について_keyMapperで変換した値をキーにグルーピングし_グループの中での最小値だけを持つMapを生成した後_空でない値だけを集めたIItemListが生成される_が成立する() {
+            Object container = supplier.get();
+            TestValue testValue1 = new TestValue(10, "value1");
+            TestValue testValue2 = new TestValue(10, "value2");
+            TestValue testValue3 = new TestValue(10, "value3");
+            TestValue testValue4 = new TestValue(10, "value4");
+            accumulator.accept(container, testValue1);
+            accumulator.accept(container, testValue2);
+            accumulator.accept(container, testValue3);
+            accumulator.accept(container, testValue4);
+            assertThat(finisher.apply(container).contains(
+                    minOf(TestValueComparators.Value, testValue1, testValue2, testValue3, testValue4)
+            ), is(true));
+        }
     }
 }

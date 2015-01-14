@@ -128,6 +128,21 @@ public final class ItemList<E> implements IItemList<E>, Serializable {
     }
 
     @Override
+    public <R> IItemList<R> flatMap(IFunction<? super E, ? extends Iterable<? extends R>> mapper) {
+        List<R> list = new ArrayList<>();
+        for (E item : this.elements) {
+            _addAll(list, mapper.apply(item));
+        }
+        return ItemList.of(list);
+    }
+
+    private <T> void _addAll(List<T> list, Iterable<? extends T> values) {
+        for (T value : values) {
+            list.add(value);
+        }
+    }
+
+    @Override
     public boolean isEmpty() {
         return this.elements.isEmpty();
     }

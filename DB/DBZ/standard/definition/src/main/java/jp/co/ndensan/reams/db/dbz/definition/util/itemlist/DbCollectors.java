@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.util.function.Function;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.DbFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IBiConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
@@ -49,7 +49,7 @@ public final class DbCollectors {
         return DbCollector.of(
                 downstream.container(),
                 downstream.accumulator(),
-                Function.of(downstream.finisher()).andThen(finisher));
+                DbFunction.of(downstream.finisher()).andThen(finisher));
     }
 
     /**
@@ -60,8 +60,8 @@ public final class DbCollectors {
      */
     public static <T> IDbCollector<T, ?, List<T>> toList() {
         return DbCollector.of(
-                MySuppliers.<T>_ArrayList$new(),
-                MyBiConsumers.<List, T>_Collection$add());
+                MySuppliers.<T>newArrayList(),
+                MyBiConsumers.<List, T>collection_add());
     }
 
     /**
@@ -72,8 +72,8 @@ public final class DbCollectors {
      */
     public static <T> IDbCollector<T, ?, IItemList<T>> toIItemList() {
         return DbCollector.of(
-                MySuppliers.<T>_ArrayList$new(),
-                MyBiConsumers.<List, T>_Collection$add(),
+                MySuppliers.<T>newArrayList(),
+                MyBiConsumers.<List, T>collection_add(),
                 new IFunction<List<T>, IItemList<T>>() {
                     @Override
                     public IItemList<T> apply(List<T> t) {
@@ -91,8 +91,8 @@ public final class DbCollectors {
      */
     public static <T> IDbCollector<T, ?, IItemList<T>> sortBy(final Comparator<? super T> comparator) {
         return DbCollector.of(
-                MySuppliers.<T>_ArrayList$new(),
-                MyBiConsumers.<List, T>_Collection$add(),
+                MySuppliers.<T>newArrayList(),
+                MyBiConsumers.<List, T>collection_add(),
                 new IFunction<List<T>, IItemList<T>>() {
                     @Override
                     public IItemList<T> apply(List<T> t) {
@@ -110,8 +110,8 @@ public final class DbCollectors {
      */
     public static <T> IDbCollector<T, ?, IOptional<T>> minBy(final Comparator<? super T> comparator) {
         return DbCollector.of(
-                MySuppliers.<T>_ArrayList$new(),
-                MyBiConsumers.<List, T>_Collection$add(),
+                MySuppliers.<T>newArrayList(),
+                MyBiConsumers.<List, T>collection_add(),
                 new IFunction<List<T>, IOptional<T>>() {
                     @Override
                     public IOptional<T> apply(List<T> t) {
@@ -129,8 +129,8 @@ public final class DbCollectors {
      */
     public static <T> IDbCollector<T, ?, IOptional<T>> maxBy(final Comparator<? super T> comparator) {
         return DbCollector.of(
-                MySuppliers.<T>_ArrayList$new(),
-                MyBiConsumers.<List, T>_Collection$add(),
+                MySuppliers.<T>newArrayList(),
+                MyBiConsumers.<List, T>collection_add(),
                 new IFunction<List<T>, IOptional<T>>() {
                     @Override
                     public IOptional<T> apply(List<T> t) {
@@ -153,7 +153,7 @@ public final class DbCollectors {
             final IFunction<? super T, ? extends K> keyMapper, final IFunction<? super T, ? extends V> valueMapper) {
         _requireNonNull(keyMapper, "keyMapper");
         _requireNonNull(valueMapper, "valueMapper");
-        ISupplier<Map<K, V>> container = MySuppliers._HashMap$new();
+        ISupplier<Map<K, V>> container = MySuppliers.newHashMap();
         IBiConsumer<Map<K, V>, T> accumulator = new IBiConsumer<Map<K, V>, T>() {
             @Override
             public void accept(Map<K, V> t, T u) {
@@ -189,7 +189,7 @@ public final class DbCollectors {
     public static <T, K, A, D> IDbCollector<T, ?, Map<K, D>> groupingBy(final IFunction<T, K> classifier,
             final IDbCollector<? super T, A, D> downstream) {
         _requireNonNull(classifier, "classifier");
-        ISupplier<Map<K, A>> container = MySuppliers._HashMap$new();
+        ISupplier<Map<K, A>> container = MySuppliers.newHashMap();
         final ISupplier<A> downstreamContainer = downstream.container();
         IBiConsumer<Map<K, A>, T> accumulator = new IBiConsumer<Map<K, A>, T>() {
             @Override
@@ -255,7 +255,7 @@ public final class DbCollectors {
 
     private static final class MySuppliers {
 
-        public MySuppliers() {
+        private MySuppliers() {
         }
 
         /**
@@ -265,7 +265,7 @@ public final class DbCollectors {
          * @param <V> 値の型
          * @return {@link HashMap}のインスタンスを生成する{@link ISupplier}
          */
-        private static <K, V> ISupplier<Map<K, V>> _HashMap$new() {
+        private static <K, V> ISupplier<Map<K, V>> newHashMap() {
             return new ISupplier<Map<K, V>>() {
                 @Override
                 public Map<K, V> get() {
@@ -280,7 +280,7 @@ public final class DbCollectors {
          * @param <T> 保持する要素の型
          * @return {@link ArrayList}のインスタンスを生成する{@link ISupplier}
          */
-        private static <T> ISupplier<List<T>> _ArrayList$new() {
+        private static <T> ISupplier<List<T>> newArrayList() {
             return new ISupplier<List<T>>() {
                 @Override
                 public List<T> get() {
@@ -303,7 +303,7 @@ public final class DbCollectors {
          * @return
          * {@link Collection#add(java.lang.Object) add()}の振る舞いを定義した{@link IBiConsumer}
          */
-        private static <C extends Collection<E>, E> IBiConsumer<? extends C, E> _Collection$add() {
+        private static <C extends Collection<E>, E> IBiConsumer<? extends C, E> collection_add() {
             return new IBiConsumer<C, E>() {
                 @Override
                 public void accept(C t, E u) {

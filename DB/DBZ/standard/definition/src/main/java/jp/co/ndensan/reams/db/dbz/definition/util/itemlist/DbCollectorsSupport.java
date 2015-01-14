@@ -15,9 +15,11 @@ import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 
 /**
  * {@link DbCollectors}と合わせて用いることを想定したユーティリティです。
- * 例えば、{@link IFunction}を返すクラスメソッドは
- * {@link DbCollectors#collectingAndThen(jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IDbCollector, jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction) DbCollectors#collectingAndThen}
- * の{@code finisher}に渡すことで、任意の事後処理を付加できます。
+ *
+ * 例えば、{@link IFunction}を返すクラスメソッドは、{@link DbCollectors#collectingAndThen(
+ *     jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IDbCollector,
+ *     jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction)
+ * DbCollectors#collectingAndThen()}の{@code finisher}に渡すことで、任意の事後処理を付加できます。
  *
  * @author N3327 三浦 凌
  */
@@ -34,8 +36,8 @@ public final class DbCollectorsSupport {
      * @return
      * {@link List}を{@link Collections#unmodifiableList(java.util.List)}に渡した結果を返す{@link IFunction}
      */
-    public static <T> IFunction<List<T>, List<T>> collections$unmodifiableList(Class<T> elementType) {
-        return collections$unmodifiableList();
+    public static <T> IFunction<List<T>, List<T>> unmodifiableList(Class<T> elementType) {
+        return unmodifiableList();
     }
 
     /**
@@ -45,7 +47,7 @@ public final class DbCollectorsSupport {
      * @return
      * {@link List}を{@link Collections#unmodifiableList(java.util.List)}に渡した結果を返す{@link IFunction}
      */
-    public static <T> IFunction<List<T>, List<T>> collections$unmodifiableList() {
+    public static <T> IFunction<List<T>, List<T>> unmodifiableList() {
         return new IFunction<List<T>, List<T>>() {
             @Override
             public List<T> apply(List<T> t) {
@@ -64,8 +66,8 @@ public final class DbCollectorsSupport {
      * @return
      * {@link Map}を{@link Collections#unmodifiableMap(java.util.Map)}に渡した結果を返す{@link IFunction}
      */
-    public static <K, V> IFunction<Map<K, V>, Map<K, V>> collections$unmodifiableMap(Class<K> keyType, Class<V> valueType) {
-        return collections$unmodifiableMap();
+    public static <K, V> IFunction<Map<K, V>, Map<K, V>> unmodifiableMap(Class<K> keyType, Class<V> valueType) {
+        return unmodifiableMap();
     }
 
     /**
@@ -76,7 +78,7 @@ public final class DbCollectorsSupport {
      * @return
      * {@link Map}を{@link Collections#unmodifiableMap(java.util.Map)}に渡した結果を返す{@link IFunction}
      */
-    public static <K, V> IFunction<Map<K, V>, Map<K, V>> collections$unmodifiableMap() {
+    public static <K, V> IFunction<Map<K, V>, Map<K, V>> unmodifiableMap() {
         return new IFunction<Map<K, V>, Map<K, V>>() {
             @Override
             public Map<K, V> apply(Map<K, V> t) {
