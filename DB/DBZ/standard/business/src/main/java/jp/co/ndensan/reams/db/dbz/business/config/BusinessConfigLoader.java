@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config;
 
-import jp.co.ndensan.reams.db.dbz.model.util.optional.DbOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
 
@@ -34,6 +34,6 @@ public final class BusinessConfigLoader implements IBusinessConfigLoader {
 
     @Override
     public IConfigValue load(Enum key) {
-        return new _ConfigValue(DbOptional.ofNullable(urBusinessConfig.get(key)));
+        return new _ConfigValue(Optional.ofNullable(urBusinessConfig.get(key)));
     }
 }

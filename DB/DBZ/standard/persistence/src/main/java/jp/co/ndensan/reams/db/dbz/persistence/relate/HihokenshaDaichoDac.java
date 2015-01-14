@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
@@ -48,16 +48,16 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
      * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
      * @param 処理日時 処理日時
-     * @return {@code IOptional<HihokenshaDaichoModel>}
+     * @return {@code Optional<HihokenshaDaichoModel>}
      */
     @Transaction
-    public IOptional<HihokenshaDaichoModel> select被保険者台帳ByKey(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
+    public Optional<HihokenshaDaichoModel> select被保険者台帳ByKey(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
 
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
-        return DbOptional.ofNullable(createModel(被保険者台帳Dac.selectByKey(市町村コード, 被保険者番号, 処理日時)));
+        return Optional.ofNullable(createModel(被保険者台帳Dac.selectByKey(市町村コード, 被保険者番号, 処理日時)));
     }
 
     /**
@@ -112,10 +112,10 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
      *
      * @param 市町村コード 市町村コード
      * @param 識別コード 識別コード
-     * @return {@code IOptional<HihokenshaDaichoModel>}
+     * @return {@code Optional<HihokenshaDaichoModel>}
      */
     @Transaction
-    public IOptional<HihokenshaDaichoModel> select最新被保険者台帳(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+    public Optional<HihokenshaDaichoModel> select最新被保険者台帳(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
 
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
@@ -127,17 +127,17 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
                 order(by(DbT1001HihokenshaDaicho.shoriTimestamp, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
 
-        return DbOptional.ofNullable(!被保険者台帳List.isEmpty() ? createModel(被保険者台帳List.get(0)) : null);
+        return Optional.ofNullable(!被保険者台帳List.isEmpty() ? createModel(被保険者台帳List.get(0)) : null);
     }
 
     /**
      * 条件に合致する最新被保険者台帳を１件返します。
      *
      * @param 被保険者番号 被保険者番号
-     * @return {@code IOptional<HihokenshaDaichoModel>}
+     * @return {@code Optional<HihokenshaDaichoModel>}
      */
     @Transaction
-    public IOptional<HihokenshaDaichoModel> select最新被保険者台帳(HihokenshaNo 被保険者番号) {
+    public Optional<HihokenshaDaichoModel> select最新被保険者台帳(HihokenshaNo 被保険者番号) {
 
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
 
@@ -148,7 +148,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
                 order(by(DbT1001HihokenshaDaicho.shoriTimestamp, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
 
-        return DbOptional.ofNullable(!被保険者台帳List.isEmpty() ? createModel(被保険者台帳List.get(0)) : null);
+        return Optional.ofNullable(!被保険者台帳List.isEmpty() ? createModel(被保険者台帳List.get(0)) : null);
     }
 
     private HihokenshaDaichoModel createModel(DbT1001HihokenshaDaichoEntity 被保険者台帳エンティティ) {

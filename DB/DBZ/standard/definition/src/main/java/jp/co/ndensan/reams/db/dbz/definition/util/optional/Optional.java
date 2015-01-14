@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.util.optional;
+package jp.co.ndensan.reams.db.dbz.definition.util.optional;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
@@ -12,55 +12,52 @@ import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
 
 /**
- * {@link IOptional IOptional}を生成します。
+ * {@link Optional Optional}を生成します。
  *
  * @param <T> Optional が保持する値
  * @author N3327 三浦 凌
- * @deprecated
- * {@link jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional}を使用して下さい。
  */
-@Deprecated
-public final class DbOptional<T> implements IOptional<T> {
+public final class Optional<T> implements IOptional<T> {
 
-    private static final IOptional<?> THE_EMPTY;
+    private static final Optional<?> THE_EMPTY;
 
     static {
-        THE_EMPTY = new DbOptional<>();
+        THE_EMPTY = new Optional<>();
     }
 
     private final T value;
 
-    private DbOptional() {
+    private Optional() {
         this.value = null;
     }
 
     /**
-     * emptyな{@link IOptional IOptional}を返します。<br/>
+     * emptyな{@link Optional Optional}を返します。<br/>
      * 確実にnullの値を{@link #ofNullable(java.lang.Object) ofNullable()}に渡す様ならば、こちらを使ってください。
      *
      * @param <T> 保持するオブジェクトの型
-     * @return 空の{@link IOptional IOptional}
+     * @return 空の{@link Optional Optional}
      */
-    public static <T> IOptional<T> empty() {
-        return (IOptional<T>) THE_EMPTY;
+    public static <T> Optional<T> empty() {
+        return (Optional<T>) THE_EMPTY;
     }
 
-    private DbOptional(T value) {
+    private Optional(T value) {
         Objects.requireNonNull(value);
         this.value = value;
     }
 
     /**
-     * 引数の値を保持した{@link IOptional IOptional}を生成します。<br/>
+     * 引数の値を保持した{@link Optional Optional}を生成します。<br/>
      * 引数がnullかもしれない場合は、{@link #ofNullable(java.lang.Object) ofNullable()}を使用してください。
      *
      * @param <T> 保持するオブジェクトの型
      * @param value 保持する値
-     * @return 引数の値を保持する{@link IOptional IOptional}
+     * @return 引数の値を保持する{@link Optional Optional}
      * @throws NullPointerException 引数がnullの時
      */
-    public static <T> IOptional<T> of(T value) throws NullPointerException {
-        return new DbOptional<>(value);
+    public static <T> Optional<T> of(T value) throws NullPointerException {
+        return new Optional<>(value);
     }
 
     /**
@@ -69,10 +66,10 @@ public final class DbOptional<T> implements IOptional<T> {
      * @param <T> 保持するオブジェクトの型
      * @param value 保持する値
      * @return
-     * 引数の値を保持する{@link IOptional IOptional}もしくは{@link #empty() empty}な{@link IOptional IOptional}
+     * 引数の値を保持する{@link Optional Optional}もしくは{@link #empty() empty}な{@link Optional Optional}
      */
-    public static <T> IOptional<T> ofNullable(T value) {
-        return null == value ? DbOptional.<T>empty() : of(value);
+    public static <T> Optional<T> ofNullable(T value) {
+        return null == value ? Optional.<T>empty() : of(value);
     }
 
     @Override
@@ -105,7 +102,7 @@ public final class DbOptional<T> implements IOptional<T> {
     @Override
     public String toString() {
         return this.value != null
-                ? String.format("IOptional[%s]", this.value)
+                ? String.format("Optional[%s]", this.value)
                 : "empty";
     }
 
@@ -119,26 +116,35 @@ public final class DbOptional<T> implements IOptional<T> {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof DbOptional)) {
+        if (!(obj instanceof Optional)) {
             return false;
         }
-        DbOptional<?> other = (DbOptional<?>) obj;
+        Optional<?> other = (Optional<?>) obj;
         return Objects.equals(this.value, other.value);
     }
 
     @Override
-    public <R> jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional<R>
-            map(IFunction<? super T, ? extends R> mapper) {
+    public <R> Optional<R> map(IFunction<? super T, ? extends R> mapper) {
         Objects.requireNonNull(mapper);
         if (!isPresent()) {
             return empty();
         } else {
-            return DbOptional.ofNullable(mapper.apply(this.value));
+            return Optional.ofNullable(mapper.apply(this.value));
         }
     }
 
     @Override
-    public IOptional<T> filter(IPredicate<? super T> predicate) {
+    public <R> Optional<R> flatMap(IFunction<? super T, Optional<R>> mapper) {
+        Objects.requireNonNull(mapper);
+        if (!isPresent()) {
+            return empty();
+        } else {
+            return Objects.requireNonNull(mapper.apply(this.value));
+        }
+    }
+
+    @Override
+    public Optional<T> filter(IPredicate<? super T> predicate) {
         Objects.requireNonNull(predicate);
         if (!isPresent()) {
             return this;
@@ -153,17 +159,6 @@ public final class DbOptional<T> implements IOptional<T> {
     public void ifPresent(IConsumer<? super T> consumer) {
         if (this.value != null) {
             consumer.accept(value);
-        }
-    }
-
-    @Override
-    public <R> jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional<R>
-            flatMap(IFunction<? super T, jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional<R>> mapper) {
-        Objects.requireNonNull(mapper);
-        if (!isPresent()) {
-            return empty();
-        } else {
-            return Objects.requireNonNull(mapper.apply(this.value));
         }
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 
 /**
  * {@link DbCollectors}と合わせて用いることを想定したユーティリティです。
@@ -88,38 +88,38 @@ public final class DbCollectorsSupport {
     }
 
     /**
-     * {@link IOptional}を保持するMapから{@link IOptional#isPresent() isPresent()}が{@code true}を返す値だけをまとめて、
+     * {@link Optional}を保持するMapから{@link Optional#isPresent() isPresent()}が{@code true}を返す値だけをまとめて、
      * {@link IItemList}として返す処理を定義した{@link IFunction}を返します。
      * {@link #gatheringPresentItems() gatheringPresentItems()}の型指定を引数によって行います。
      *
      * @param <K> キーの型
-     * @param <T> Mapの保持する{@link IOptional}がラップしたオブジェクトの型,
+     * @param <T> Mapの保持する{@link Optional}がラップしたオブジェクトの型,
      * 生成される{@link IItemList}が保持する要素の型
      * @param mapKeyType Mapのキーの型を表す{@link class}
      * @param itemsType 生成される{@link IItemList}が保持する要素の型を表す{@link class}
      * @return
-     * {@link IOptional#isPresent() isPresent()}が{@code true}を返す値だけをまとめた{@link IItemList}を生成する{@link IFunction}
+     * {@link Optional#isPresent() isPresent()}が{@code true}を返す値だけをまとめた{@link IItemList}を生成する{@link IFunction}
      */
-    public static <K, T> IFunction<Map<K, IOptional<T>>, IItemList<T>> gatheringPresentItems(Class<K> mapKeyType, Class<T> itemsType) {
+    public static <K, T> IFunction<Map<K, Optional<T>>, IItemList<T>> gatheringPresentItems(Class<K> mapKeyType, Class<T> itemsType) {
         return gatheringPresentItems();
     }
 
     /**
-     * {@link IOptional}を保持するMapから{@link IOptional#isPresent() isPresent()}が{@code true}を返す値だけをまとめて、
+     * {@link Optional}を保持するMapから{@link Optional#isPresent() isPresent()}が{@code true}を返す値だけをまとめて、
      * {@link IItemList}として返す処理を定義した{@link IFunction}を返します。
      *
      * @param <K> Mapのキーの型
-     * @param <T> Mapの保持する{@link IOptional}がラップしたオブジェクトの型,
+     * @param <T> Mapの保持する{@link Optional}がラップしたオブジェクトの型,
      * 生成される{@link IItemList}が保持する要素の型
      * @return
-     * {@link IOptional#isPresent() isPresent()}が{@code true}を返す値だけをまとめた{@link IItemList}を生成する{@link IFunction}
+     * {@link Optional#isPresent() isPresent()}が{@code true}を返す値だけをまとめた{@link IItemList}を生成する{@link IFunction}
      */
-    public static <K, T> IFunction<Map<K, IOptional<T>>, IItemList<T>> gatheringPresentItems() {
-        return new IFunction<Map<K, IOptional<T>>, IItemList<T>>() {
+    public static <K, T> IFunction<Map<K, Optional<T>>, IItemList<T>> gatheringPresentItems() {
+        return new IFunction<Map<K, Optional<T>>, IItemList<T>>() {
             @Override
-            public IItemList<T> apply(Map<K, IOptional<T>> t) {
+            public IItemList<T> apply(Map<K, Optional<T>> t) {
                 final List<T> list = new ArrayList<>();
-                for (Map.Entry<? extends K, IOptional<T>> entry : t.entrySet()) {
+                for (Map.Entry<? extends K, Optional<T>> entry : t.entrySet()) {
                     entry.getValue().ifPresent(new IConsumer<T>() {
                         @Override
                         public void accept(T t) {

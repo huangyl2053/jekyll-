@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbz.model.NinteiShinseiJohoModel;
 import jp.co.ndensan.reams.db.dbz.model.relate.NinteiShinseiKekkaModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.NinteiShinseiKekkaDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.is;
@@ -74,8 +74,8 @@ public class NinteiShinseiKekkaFinderTest {
 
         return new NinteiShinseiKekkaModel(
                 new JukyushaDaichoModel(DbT4001JukyushaDaichoEntityGenerator.createDbT4001JukyushaDaichoEntity()),
-                DbOptional.of(new NinteiShinseiJohoModel(DbT5001NinteiShinseiJohoEntityGenerator.createDbT5001NinteiShinseiJohoEntity())),
-                DbOptional.of(new NinteiKekkaJohoModel(DbT5002NinteiKekkaJohoEntityGenerator.createDbT5002NinteiKekkaJohoEntity())));
+                Optional.of(new NinteiShinseiJohoModel(DbT5001NinteiShinseiJohoEntityGenerator.createDbT5001NinteiShinseiJohoEntity())),
+                Optional.of(new NinteiKekkaJohoModel(DbT5002NinteiKekkaJohoEntityGenerator.createDbT5002NinteiKekkaJohoEntity())));
     }
 
 }

@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko;
 
 import java.io.Serializable;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class HihokenshaShikakuHakkoModel implements Serializable {
 
-    private IOptional<RDate> 有効期限;
+    private Optional<RDate> 有効期限;
     private FlexibleDate 交付日;
     private RString 保険者番号;
     private RString 保険者名称;
@@ -66,7 +66,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      *
      * @return 有効期限
      */
-    public IOptional<RDate> get有効期限() {
+    public Optional<RDate> get有効期限() {
         return 有効期限;
     }
 
@@ -76,7 +76,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      * @param 有効期限 有効期限
      */
     public void set有効期限(RDate 有効期限) {
-        this.有効期限 = DbOptional.ofNullable(有効期限);
+        this.有効期限 = Optional.ofNullable(有効期限);
     }
 
     /**

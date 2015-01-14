@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoshikakukihon;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoManager;
@@ -113,7 +113,7 @@ public class KaigoShikakuKihonHandlerTest extends DbzTestBase {
 
     private static HihokenshaDaichoManager createHihokenshaDaichoManager() {
         HihokenshaDaichoManager mock = mock(HihokenshaDaichoManager.class);
-        IOptional<HihokenshaDaichoModel> hihokenshaDaicho = DbOptional.ofNullable(createHihokenshaDaicho());
+        Optional<HihokenshaDaichoModel> hihokenshaDaicho = Optional.ofNullable(createHihokenshaDaicho());
         when(mock.get最新被保険者台帳(any(LasdecCode.class), any(ShikibetsuCode.class))).thenReturn(hihokenshaDaicho);
         return mock;
     }

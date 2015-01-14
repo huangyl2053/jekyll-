@@ -9,8 +9,8 @@ import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
@@ -60,7 +60,7 @@ public class ChoshuYuyoRelateDac implements IModifiable<ChoshuYuyoRelateModel> {
      * @return ChoshuYuyoRelateModel
      */
     @Transaction
-    public IOptional<ChoshuYuyoRelateModel> select徴収猶予RelateByKeyAndState(ChoteiNendo 調定年度, FukaNendo 賦課年度,
+    public Optional<ChoshuYuyoRelateModel> select徴収猶予RelateByKeyAndState(ChoteiNendo 調定年度, FukaNendo 賦課年度,
             TsuchishoNo 通知書番号, RDateTime 処理日時, GemmenChoshuYuyoStateKubun 状態区分) {
 
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
@@ -73,7 +73,7 @@ public class ChoshuYuyoRelateDac implements IModifiable<ChoshuYuyoRelateModel> {
     }
 
     @Transaction
-    private IOptional<ChoshuYuyoModel> select徴収猶予ByKeyAndState(ChoteiNendo 調定年度, FukaNendo 賦課年度,
+    private Optional<ChoshuYuyoModel> select徴収猶予ByKeyAndState(ChoteiNendo 調定年度, FukaNendo 賦課年度,
             TsuchishoNo 通知書番号, RDateTime 処理日時, GemmenChoshuYuyoStateKubun 状態区分) {
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -91,21 +91,21 @@ public class ChoshuYuyoRelateDac implements IModifiable<ChoshuYuyoRelateModel> {
         return createChoshuYuyoModel(entity);
     }
 
-    private IOptional<ChoshuYuyoModel> createChoshuYuyoModel(DbT2006ChoshuYuyoEntity 徴収猶予エンティティ) {
+    private Optional<ChoshuYuyoModel> createChoshuYuyoModel(DbT2006ChoshuYuyoEntity 徴収猶予エンティティ) {
         if (徴収猶予エンティティ == null) {
-            return DbOptional.empty();
+            return Optional.empty();
         }
 
-        return DbOptional.of(new ChoshuYuyoModel(徴収猶予エンティティ));
+        return Optional.of(new ChoshuYuyoModel(徴収猶予エンティティ));
     }
 
-    private IOptional<ChoshuYuyoRelateModel> createRelateModel(IOptional<ChoshuYuyoModel> modeloid) {
+    private Optional<ChoshuYuyoRelateModel> createRelateModel(Optional<ChoshuYuyoModel> modeloid) {
         if (!modeloid.isPresent()) {
-            return DbOptional.empty();
+            return Optional.empty();
         }
         ChoshuYuyoModel model = modeloid.get();
 
-        return DbOptional.of(new ChoshuYuyoRelateModel(
+        return Optional.of(new ChoshuYuyoRelateModel(
                 model,
                 select期別徴収猶予(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get処理日時())));
     }

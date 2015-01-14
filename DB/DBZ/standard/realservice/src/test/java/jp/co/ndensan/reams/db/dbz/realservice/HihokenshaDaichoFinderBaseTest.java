@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -90,11 +90,11 @@ public class HihokenshaDaichoFinderBaseTest {
         @Test
         public void データが見つかる検索条件を指定した場合_被保険者台帳が返る() {
 
-            IOptional<HihokenshaDaichoModel> 被保険者台帳モデル = DbOptional.of(createModel());
+            Optional<HihokenshaDaichoModel> 被保険者台帳モデル = Optional.of(createModel());
 
             when(dac.select最新被保険者台帳(any(HihokenshaNo.class))).thenReturn(被保険者台帳モデル);
 
-            IOptional<HihokenshaDaichoModel> 被保険者台帳 = sut.find最新被保険者台帳(
+            Optional<HihokenshaDaichoModel> 被保険者台帳 = sut.find最新被保険者台帳(
                     DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号);
 
             // 任意の項目が一致するテストケースを記述してください。

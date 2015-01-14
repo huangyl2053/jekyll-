@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2002FukaEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.model.helper.FukaModelTestHelper;
@@ -59,23 +59,23 @@ public class FukaManagerTest {
     public static class find賦課 extends DbzTestBase {
 
         @Test
-        public void find賦課は_該当の情報がない時_IOptionalのemptyを返す() {
-            IOptional<FukaModel> empty = DbOptional.empty();
+        public void find賦課は_該当の情報がない時_Optionalのemptyを返す() {
+            Optional<FukaModel> empty = Optional.empty();
 
             when(dac.select賦課ByKey(any(ChoteiNendo.class), any(FukaNendo.class),
                     any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(empty);
-            IOptional<FukaModel> result = sut.find賦課(調定年度, notFound賦課年度, DEFAULT_通知書番号, DEFAULT_処理日時);
+            Optional<FukaModel> result = sut.find賦課(調定年度, notFound賦課年度, DEFAULT_通知書番号, DEFAULT_処理日時);
 
             assertThat(result, is(empty));
         }
 
         @Test
         public void find賦課は_該当の情報がある時_該当情報を返す() {
-            IOptional<FukaModel> model = DbOptional.of(
+            Optional<FukaModel> model = Optional.of(
                     new FukaModel(DbT2002FukaEntityGenerator.createDbT2002FukaEntity()));
 
             when(dac.select賦課ByKey(調定年度, 賦課年度, DEFAULT_通知書番号, DEFAULT_処理日時)).thenReturn(model);
-            IOptional<FukaModel> result = sut.find賦課(調定年度, 賦課年度, DEFAULT_通知書番号, DEFAULT_処理日時);
+            Optional<FukaModel> result = sut.find賦課(調定年度, 賦課年度, DEFAULT_通知書番号, DEFAULT_処理日時);
 
             assertThat(result.get().get賦課年度(), is(賦課年度));
         }
@@ -84,23 +84,23 @@ public class FukaManagerTest {
     public static class find賦課直近 extends DbzTestBase {
 
         @Test
-        public void find賦課直近は_該当の情報がない時_IOptionalのemptyを返す() {
-            IOptional<FukaModel> empty = DbOptional.empty();
+        public void find賦課直近は_該当の情報がない時_Optionalのemptyを返す() {
+            Optional<FukaModel> empty = Optional.empty();
 
             when(dac.select賦課Recently(any(FukaNendo.class), any(HihokenshaNo.class), any(RDateTime.class))).thenReturn(empty);
-            IOptional<FukaModel> result = sut.find賦課直近(notFound賦課年度, DEFAULT_被保険者番号, DEFAULT_処理日時);
+            Optional<FukaModel> result = sut.find賦課直近(notFound賦課年度, DEFAULT_被保険者番号, DEFAULT_処理日時);
 
             assertThat(result, is(empty));
         }
 
         @Test
         public void find賦課直近は_該当の情報がある時_該当情報を返す() {
-            IOptional<FukaModel> model = DbOptional.of(
+            Optional<FukaModel> model = Optional.of(
                     new FukaModel(DbT2002FukaEntityGenerator.createDbT2002FukaEntity()));
 
             when(dac.select賦課Recently(賦課年度, DEFAULT_被保険者番号, DEFAULT_処理日時)).thenReturn(model);
 
-            IOptional<FukaModel> result = sut.find賦課直近(賦課年度, DEFAULT_被保険者番号, DEFAULT_処理日時);
+            Optional<FukaModel> result = sut.find賦課直近(賦課年度, DEFAULT_被保険者番号, DEFAULT_処理日時);
 
             assertThat(result.get().get賦課年度(), is(賦課年度));
         }
@@ -137,11 +137,11 @@ public class FukaManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_介護賦課が返る() {
 
-            IOptional<FukaModel> 介護賦課モデル = DbOptional.ofNullable(FukaModelTestHelper.createModel());
+            Optional<FukaModel> 介護賦課モデル = Optional.ofNullable(FukaModelTestHelper.createModel());
 
             when(dac.select最新介護賦課(any(FukaNendo.class), any(TsuchishoNo.class))).thenReturn(介護賦課モデル);
 
-            IOptional<FukaModel> result = sut.get最新介護賦課(賦課年度, 通知書番号);
+            Optional<FukaModel> result = sut.get最新介護賦課(賦課年度, 通知書番号);
 
             assertThat(result.get().get世帯コード(), is(介護賦課モデル.get().get世帯コード()));
         }

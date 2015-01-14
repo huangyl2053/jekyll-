@@ -61,35 +61,35 @@ public interface IOptional<T> {
     <X extends Throwable> T orElseThrow(ISupplier<X> exceptionSupplier) throws X;
 
     /**
-     * 保持する値を指定の{@link IFunction mapper}により変換し、その結果を持った新しい{@link IOptional IOptional}として返します。
-     * emptyの場合は、戻り値の{@link IOptional IOptional}もemptyになります。
+     * 保持する値を指定の{@link IFunction mapper}により変換し、その結果を持った新しい{@link Optional Optional}として返します。
+     * emptyの場合は、戻り値の{@link Optional Optional}もemptyになります。
      *
-     * @param <R> 変換後の{@link IOptional IOptional}が保持する型
+     * @param <R> 変換後の{@link Optional Optional}が保持する型
      * @param mapper 変換に用いる{@link IFunction mapper}
-     * @return 保持する値を変換した結果を持った{@link IOptional IOptional},
-     * emptyの場合はemptyな{@link IOptional IOptional}
+     * @return 保持する値を変換した結果を持った{@link Optional Optional},
+     * emptyの場合はemptyな{@link Optional Optional}
      */
-    <R> IOptional<R> map(IFunction<? super T, ? extends R> mapper);
+    <R> Optional<R> map(IFunction<? super T, ? extends R> mapper);
 
     /**
-     * 保持する値を指定の{@link IFunction mapper}により、別の{@link IOptional IOptional}として返します。
-     * emptyの場合は、戻り値の{@link IOptional IOptional}もemptyになります。
+     * 保持する値を指定の{@link IFunction mapper}により、別の{@link Optional Optional}として返します。
+     * emptyの場合は、戻り値の{@link Optional Optional}もemptyになります。
      *
-     * @param <R> 変換後の{@link IOptional IOptional}が保持する型
+     * @param <R> 変換後の{@link Optional Optional}が保持する型
      * @param mapper 変換に用いる{@link IFunction mapper}
-     * @return 保持する値を変換した結果を持った{@link IOptional IOptional},
-     * emptyの場合はemptyな{@link IOptional IOptional}
+     * @return 保持する値を変換した結果を持った{@link Optional Optional},
+     * emptyの場合はemptyな{@link Optional Optional}
      */
-    <R> IOptional<R> flatMap(IFunction<? super T, IOptional<R>> mapper);
+    <R> Optional<R> flatMap(IFunction<? super T, Optional<R>> mapper);
 
     /**
      * 保持する値が指定の{@link IPredicate IConditon}に当てはまるときは自身を、
-     * 当てはまらない時はemptyな{@link IOptional IOptional}を返します。
+     * 当てはまらない時はemptyな{@link Optional Optional}を返します。
      *
      * @param predicate {@link IPredicate IPredicate}に定義される条件
-     * @return 指定の条件にあてはまる時は自身をそのまま、あてはまらない時はemptyな{@link IOptional IOptional}
+     * @return 指定の条件にあてはまる時は自身をそのまま、あてはまらない時はemptyな{@link Optional Optional}
      */
-    IOptional<T> filter(IPredicate<? super T> predicate);
+    Optional<T> filter(IPredicate<? super T> predicate);
 
     /**
      * デバッグ用の文字列を返します。

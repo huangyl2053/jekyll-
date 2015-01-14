@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
@@ -50,7 +50,7 @@ public class GemmenDac implements IModifiable<GemmenModel> {
      * @return GemmenModel
      */
     @Transaction
-    public IOptional<GemmenModel> select減免ByKeyAndState(ChoteiNendo 調定年度, FukaNendo 賦課年度,
+    public Optional<GemmenModel> select減免ByKeyAndState(ChoteiNendo 調定年度, FukaNendo 賦課年度,
             TsuchishoNo 通知書番号, RDateTime 処理日時, GemmenChoshuYuyoStateKubun 状態区分) {
 
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
@@ -74,12 +74,12 @@ public class GemmenDac implements IModifiable<GemmenModel> {
         return createModel(entity);
     }
 
-    private IOptional<GemmenModel> createModel(DbT2004GemmenEntity 減免エンティティ) {
+    private Optional<GemmenModel> createModel(DbT2004GemmenEntity 減免エンティティ) {
         if (減免エンティティ == null) {
-            return DbOptional.empty();
+            return Optional.empty();
         }
 
-        return DbOptional.of(new GemmenModel(減免エンティティ));
+        return Optional.of(new GemmenModel(減免エンティティ));
     }
 
     @Override

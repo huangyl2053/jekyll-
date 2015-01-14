@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbz.business.KiwarigakuCalculator;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.model.fuka.KiwarigakuMeisai;
@@ -62,12 +62,12 @@ public class KiwarigakuFinder {
      * @param 処理日時 処理日時
      * @return 期割額
      */
-    public IOptional<Kiwarigaku> load期割額(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時) {
+    public Optional<Kiwarigaku> load期割額(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時) {
         List<KiwarigakuMeisai> 期割額List = new ArrayList<>();
         for (KibetsuChoteiKyotsuModel 期別調定共通 : dac.select介護期別調定共通一覧(調定年度, 賦課年度, 通知書番号, 処理日時)) {
             期割額List.add(to期割額(期別調定共通));
         }
-        return DbOptional.ofNullable(new KiwarigakuCalculator(期割額List).calculate());
+        return Optional.ofNullable(new KiwarigakuCalculator(期割額List).calculate());
     }
 
     private KiwarigakuMeisai to期割額(KibetsuChoteiKyotsuModel 期別調定共通) {

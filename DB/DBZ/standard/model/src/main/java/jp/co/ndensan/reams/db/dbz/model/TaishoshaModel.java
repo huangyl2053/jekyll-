@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.model;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureishaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV7901ShikakuSearchEntity;
 import jp.co.ndensan.reams.db.dbz.entity.relate.TaishoshaRelateEntity;
@@ -72,11 +72,11 @@ public class TaishoshaModel {
 
         DbV7901ShikakuSearchEntity shikakuEntity = entity.get資格検索エンティティ();
 
-        IOptional<RString> 適用除外適用事由コード = DbOptional.ofNullable(shikakuEntity.getTekiyoJogaiTekiyoJiyuCode());
-        IOptional<RString> 他市町村住所地特例適用事由コード = DbOptional.ofNullable(shikakuEntity.getTatokureiTekiyoJiyuCode());
+        Optional<RString> 適用除外適用事由コード = Optional.ofNullable(shikakuEntity.getTekiyoJogaiTekiyoJiyuCode());
+        Optional<RString> 他市町村住所地特例適用事由コード = Optional.ofNullable(shikakuEntity.getTatokureiTekiyoJiyuCode());
         JushochitokureishaKubun 住所地特例フラグ = JushochitokureishaKubun.toValue(shikakuEntity.getJushochiTokureiFlag());
-        IOptional<HihokenshaNo> 被保険者番号 = DbOptional.ofNullable(shikakuEntity.getHihokenshaNo());
-        IOptional<FlexibleDate> 資格喪失日 = DbOptional.ofNullable(shikakuEntity.getShikakuSoshitsuYMD());
+        Optional<HihokenshaNo> 被保険者番号 = Optional.ofNullable(shikakuEntity.getHihokenshaNo());
+        Optional<FlexibleDate> 資格喪失日 = Optional.ofNullable(shikakuEntity.getShikakuSoshitsuYMD());
 
         if (適用除外適用事由コード.isPresent()) {
             return HihoKubun.適除;

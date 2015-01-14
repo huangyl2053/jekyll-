@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuYuyoModel;
 import jp.co.ndensan.reams.db.dbz.model.fuka.GemmenModel;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.relate.fuka.ChoshuYuyoRelateModel;
 import jp.co.ndensan.reams.db.dbz.realservice.ChoshuYuyoFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.GemmenFinder;
@@ -55,7 +55,7 @@ public class GemmenChoshuYuyo {
     private void setGemmenDiv(GemmenDiv div, FukaShokaiKey key) {
         clearGemmenDiv(div);
 
-        IOptional<GemmenModel> modeloid = new GemmenFinder().find減免(
+        Optional<GemmenModel> modeloid = new GemmenFinder().find減免(
                 key.get調定年度(), key.get賦課年度(),
                 key.get通知書番号(), key.get処理日時(), 状態区分);
 
@@ -90,7 +90,7 @@ public class GemmenChoshuYuyo {
     private void setChoshuYuyoDiv(ChoshuYuyoDiv div, FukaShokaiKey key) {
         clearChoshuYuyoDiv(div);
 
-        IOptional<ChoshuYuyoRelateModel> modeloid = new ChoshuYuyoFinder().find徴収猶予(
+        Optional<ChoshuYuyoRelateModel> modeloid = new ChoshuYuyoFinder().find徴収猶予(
                 key.get調定年度(), key.get賦課年度(),
                 key.get通知書番号(), key.get処理日時(), 状態区分);
 

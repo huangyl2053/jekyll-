@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
@@ -90,8 +90,8 @@ public class GemmenDacTest {
         }
 
         @Test
-        public void データが見つかない検索条件を渡すと_IOptionalのemptyを返す() {
-            IOptional<GemmenModel> empty = DbOptional.empty();
+        public void データが見つかない検索条件を渡すと_Optionalのemptyを返す() {
+            Optional<GemmenModel> empty = Optional.empty();
             assertThat(sut.select減免ByKeyAndState(
                     notFound調定年度, 賦課年度1, 通知書番号1, 処理日時1, 状態区分1), is(empty));
         }

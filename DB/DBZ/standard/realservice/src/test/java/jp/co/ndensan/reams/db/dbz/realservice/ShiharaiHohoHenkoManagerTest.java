@@ -15,8 +15,8 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4021ShiharaiHohoHenkoEn
 import jp.co.ndensan.reams.db.dbz.model.ShiharaiHohoHenkoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.ShiharaiHohoHenkoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -54,11 +54,11 @@ public class ShiharaiHohoHenkoManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_支払方法変更が返る() {
 
-            IOptional<ShiharaiHohoHenkoModel> 支払方法変更モデル = DbOptional.ofNullable(createModel());
+            Optional<ShiharaiHohoHenkoModel> 支払方法変更モデル = Optional.ofNullable(createModel());
 
             when(dac.selectByKey(any(ShoKisaiHokenshaNo.class), any(HihokenshaNo.class), any(KanriKubun.class), any(YMDHMS.class))).thenReturn(支払方法変更モデル);
 
-            IOptional<ShiharaiHohoHenkoModel> 支払方法変更 = sut.get支払方法変更(
+            Optional<ShiharaiHohoHenkoModel> 支払方法変更 = sut.get支払方法変更(
                     DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_証記載保険者番号,
                     DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_被保険者番号,
                     DbT4021ShiharaiHohoHenkoEntityGenerator.DEFAULT_管理区分,

@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7111ServiceShuruiShikyu
 import jp.co.ndensan.reams.db.dbz.model.ServiceShuruiShikyuGendoGakuModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.ServiceShuruiShikyuGendoGakuDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -56,11 +56,11 @@ public class ServiceShuruiShikyuGendoGakuManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_サービス種類支給限度額が返る() {
 
-            IOptional<ServiceShuruiShikyuGendoGakuModel> サービス種類支給限度額モデル = DbOptional.ofNullable(createModel());
+            Optional<ServiceShuruiShikyuGendoGakuModel> サービス種類支給限度額モデル = Optional.ofNullable(createModel());
 
             when(dac.selectByKey(any(ServiceShuruiCode.class), any(IYokaigoJotaiKubun.class), any(FlexibleYearMonth.class), any(YMDHMS.class))).thenReturn(サービス種類支給限度額モデル);
 
-            IOptional<ServiceShuruiShikyuGendoGakuModel> サービス種類支給限度額 = sut.getサービス種類支給限度額(
+            Optional<ServiceShuruiShikyuGendoGakuModel> サービス種類支給限度額 = sut.getサービス種類支給限度額(
                     DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_サービス種類コード,
                     YokaigoJotaiKubun09.toValue(DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分),
                     DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_適用開始年月,

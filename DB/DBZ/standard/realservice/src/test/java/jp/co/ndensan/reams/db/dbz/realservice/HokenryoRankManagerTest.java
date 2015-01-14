@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2012HokenryoRankEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoRankModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.HokenryoRankDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -58,7 +58,7 @@ public class HokenryoRankManagerTest {
 
             when(dac.select保険料ランクByKey(any(FukaNendo.class), any(LasdecCode.class))).thenReturn(保険料ランクモデル);
 
-            IOptional<HokenryoRankModel> 保険料ランク = sut.get保険料ランク(賦課年度1, 市町村コード1);
+            Optional<HokenryoRankModel> 保険料ランク = sut.get保険料ランク(賦課年度1, 市町村コード1);
 
             assertThat(保険料ランク.get().get賦課年度(), is(賦課年度1));
         }

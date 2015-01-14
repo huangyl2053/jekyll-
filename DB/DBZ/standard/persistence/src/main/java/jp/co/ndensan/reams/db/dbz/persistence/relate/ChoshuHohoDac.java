@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2001ChoshuHoho;
@@ -47,7 +47,7 @@ public class ChoshuHohoDac implements IModifiable<ChoshuHohoModel> {
      * @return ChoshuHohoModel
      */
     @Transaction
-    public IOptional<ChoshuHohoModel> select徴収方法Recently(FukaNendo 賦課年度, HihokenshaNo 被保険者番号) {
+    public Optional<ChoshuHohoModel> select徴収方法Recently(FukaNendo 賦課年度, HihokenshaNo 被保険者番号) {
 
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
@@ -66,12 +66,12 @@ public class ChoshuHohoDac implements IModifiable<ChoshuHohoModel> {
         return createModel(entities.isEmpty() ? null : entities.get(0));
     }
 
-    private IOptional<ChoshuHohoModel> createModel(DbT2001ChoshuHohoEntity 徴収方法エンティティ) {
+    private Optional<ChoshuHohoModel> createModel(DbT2001ChoshuHohoEntity 徴収方法エンティティ) {
         if (徴収方法エンティティ == null) {
-            return DbOptional.empty();
+            return Optional.empty();
         }
 
-        return DbOptional.of(new ChoshuHohoModel(徴収方法エンティティ));
+        return Optional.of(new ChoshuHohoModel(徴収方法エンティティ));
     }
 
     @Override

@@ -11,8 +11,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
@@ -84,18 +84,18 @@ public class DbCollectorsSupportTest {
     public static class gatheringPresentItems extends DbzTestBase {
 
         private DbCollectorsSupport sut;
-        private final Map<String, IOptional<String>> INPUT_MAP;
+        private final Map<String, Optional<String>> INPUT_MAP;
         private final List<String> IDEAL_VALUES;
 
         {
-            Map<String, IOptional<String>> map = new HashMap<>();
-            map.put("key1", DbOptional.of("value1"));
-            map.put("key2", DbOptional.<String>empty());
-            map.put("key3", DbOptional.of("value3"));
+            Map<String, Optional<String>> map = new HashMap<>();
+            map.put("key1", Optional.of("value1"));
+            map.put("key2", Optional.<String>empty());
+            map.put("key3", Optional.of("value3"));
             INPUT_MAP = Collections.unmodifiableMap(map);
 
             List<String> list = new ArrayList<>();
-            for (Map.Entry<String, IOptional<String>> entry : map.entrySet()) {
+            for (Map.Entry<String, Optional<String>> entry : map.entrySet()) {
                 if (entry.getValue().isPresent()) {
                     list.add(entry.getValue().get());
                 }
@@ -104,13 +104,13 @@ public class DbCollectorsSupportTest {
         }
 
         @Test
-        public void IOptionalを紐付けたMapに_gatheringPresentItems_Class指定_を適用すると_isPresentでtrueを返す要素だけを集めたIItemListを返す() {
+        public void Optionalを紐付けたMapに_gatheringPresentItems_Class指定_を適用すると_isPresentでtrueを返す要素だけを集めたIItemListを返す() {
             IItemList<String> result = sut.gatheringPresentItems(String.class, String.class).apply(INPUT_MAP);
             assertThat(result.toList(), is(IDEAL_VALUES));
         }
 
         @Test
-        public void IOptionalを紐付けたMapに_gatheringPresentItemsを適用すると_isPresentでtrueを返す要素だけを集めたIItemListを返す() {
+        public void Optionalを紐付けたMapに_gatheringPresentItemsを適用すると_isPresentでtrueを返す要素だけを集めたIItemListを返す() {
             IItemList<String> result = sut.<String, String>gatheringPresentItems().apply(INPUT_MAP);
             assertThat(result.toList(), is(IDEAL_VALUES));
         }

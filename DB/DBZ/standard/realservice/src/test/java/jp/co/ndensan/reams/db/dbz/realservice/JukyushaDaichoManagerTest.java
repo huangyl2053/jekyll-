@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4001JukyushaDaichoEntit
 import jp.co.ndensan.reams.db.dbz.model.JukyushaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -53,11 +53,11 @@ public class JukyushaDaichoManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_受給者台帳が返る() {
 
-            IOptional<JukyushaDaichoModel> 受給者台帳モデル = DbOptional.ofNullable(createModel());
+            Optional<JukyushaDaichoModel> 受給者台帳モデル = Optional.ofNullable(createModel());
 
             when(dac.selectByKey(any(ShoKisaiHokenshaNo.class), any(HihokenshaNo.class), any(ShinseishoKanriNo.class), any(YMDHMS.class))).thenReturn(受給者台帳モデル);
 
-            IOptional<JukyushaDaichoModel> 受給者台帳 = sut.get受給者台帳(
+            Optional<JukyushaDaichoModel> 受給者台帳 = sut.get受給者台帳(
                     DbT4001JukyushaDaichoEntityGenerator.DEFAULT_証記載保険者番号,
                     DbT4001JukyushaDaichoEntityGenerator.DEFAULT_被保険者番号,
                     DbT4001JukyushaDaichoEntityGenerator.DEFAULT_申請書管理番号,

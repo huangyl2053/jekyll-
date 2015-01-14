@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.function.DbFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IBiConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
@@ -102,38 +102,38 @@ public final class DbCollectors {
     }
 
     /**
-     * 指定の{@link Comparator}でソートし先頭の要素を{@link IOptional}で取得するコレクタを生成し、返します。
+     * 指定の{@link Comparator}でソートし先頭の要素を{@link Optional}で取得するコレクタを生成し、返します。
      *
-     * @param <T> 集積元の型,{@link IOptional}が保持する要素の型
+     * @param <T> 集積元の型,{@link Optional}が保持する要素の型
      * @param comparator {@link Comparator}
-     * @return 指定の{@link Comparator}でソートし先頭の要素を{@link IOptional}で取得するコレクタ
+     * @return 指定の{@link Comparator}でソートし先頭の要素を{@link Optional}で取得するコレクタ
      */
-    public static <T> IDbCollector<T, ?, IOptional<T>> minBy(final Comparator<? super T> comparator) {
+    public static <T> IDbCollector<T, ?, Optional<T>> minBy(final Comparator<? super T> comparator) {
         return DbCollector.of(
                 MySuppliers.<T>newArrayList(),
                 MyBiConsumers.<List, T>collection_add(),
-                new IFunction<List<T>, IOptional<T>>() {
+                new IFunction<List<T>, Optional<T>>() {
                     @Override
-                    public IOptional<T> apply(List<T> t) {
+                    public Optional<T> apply(List<T> t) {
                         return ItemList.of(t).sorted(comparator).findFirst();
                     }
                 });
     }
 
     /**
-     * 指定の{@link Comparator}でソートし最後の要素を{@link IOptional}で取得するコレクタを生成し、返します。
+     * 指定の{@link Comparator}でソートし最後の要素を{@link Optional}で取得するコレクタを生成し、返します。
      *
-     * @param <T> 集積元の型,{@link IOptional}が保持する要素の型
+     * @param <T> 集積元の型,{@link Optional}が保持する要素の型
      * @param comparator {@link Comparator}
-     * @return 指定の{@link Comparator}でソートし最後の要素を{@link IOptional}で取得するコレクタ
+     * @return 指定の{@link Comparator}でソートし最後の要素を{@link Optional}で取得するコレクタ
      */
-    public static <T> IDbCollector<T, ?, IOptional<T>> maxBy(final Comparator<? super T> comparator) {
+    public static <T> IDbCollector<T, ?, Optional<T>> maxBy(final Comparator<? super T> comparator) {
         return DbCollector.of(
                 MySuppliers.<T>newArrayList(),
                 MyBiConsumers.<List, T>collection_add(),
-                new IFunction<List<T>, IOptional<T>>() {
+                new IFunction<List<T>, Optional<T>>() {
                     @Override
-                    public IOptional<T> apply(List<T> t) {
+                    public Optional<T> apply(List<T> t) {
                         return ItemList.of(t).sorted(Collections.reverseOrder(comparator)).findFirst();
                     }
                 });

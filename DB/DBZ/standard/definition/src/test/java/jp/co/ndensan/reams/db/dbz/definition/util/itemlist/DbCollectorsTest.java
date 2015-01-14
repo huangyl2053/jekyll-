@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
 import static jp.co.ndensan.reams.db.dbz.definition.util.itemlist.DbCollectors.groupingBy;
 import static jp.co.ndensan.reams.db.dbz.definition.util.itemlist.DbCollectors.minBy;
 import static jp.co.ndensan.reams.db.dbz.definition.util.itemlist.DbCollectorsSupport.gatheringPresentItems;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.Test;
@@ -191,21 +191,21 @@ public class DbCollectorsTest extends DbzTestBase {
 
     public static class maxBy extends DbzTestBase {
 
-        private IDbCollector<TestValue, ?, IOptional<TestValue>> sut;
+        private IDbCollector<TestValue, ?, Optional<TestValue>> sut;
         private ISupplier<Object> supplier;
         private IBiConsumer<Object, TestValue> accumulator;
-        private IFunction<Object, IOptional<TestValue>> finisher;
+        private IFunction<Object, Optional<TestValue>> finisher;
 
         @Before
         public void setUp() {
             sut = DbCollectors.maxBy(TestValueComparators.Value);
             supplier = (ISupplier<Object>) sut.container();
             accumulator = (IBiConsumer<Object, TestValue>) sut.accumulator();
-            finisher = (IFunction<Object, IOptional<TestValue>>) sut.finisher();
+            finisher = (IFunction<Object, Optional<TestValue>>) sut.finisher();
         }
 
         @Test
-        public void maxByの結果が返すDbCollectorDbCollectorの生成する各要素について_containerを何回か第2引数を変えながらaccumulatorへ渡した後_finisherで変換すると_accumulatorに渡した第2引数の中で最大を保持するIOptionalを返す_が成立する() {
+        public void maxByの結果が返すDbCollectorDbCollectorの生成する各要素について_containerを何回か第2引数を変えながらaccumulatorへ渡した後_finisherで変換すると_accumulatorに渡した第2引数の中で最大を保持するOptionalを返す_が成立する() {
             Object container = supplier.get();
             TestValue testValue1 = new TestValue(10, "value1");
             TestValue testValue2 = new TestValue(11, "value2");
@@ -232,21 +232,21 @@ public class DbCollectorsTest extends DbzTestBase {
 
     public static class minBy extends DbzTestBase {
 
-        private IDbCollector<TestValue, ?, IOptional<TestValue>> sut;
+        private IDbCollector<TestValue, ?, Optional<TestValue>> sut;
         private ISupplier<Object> supplier;
         private IBiConsumer<Object, TestValue> accumulator;
-        private IFunction<Object, IOptional<TestValue>> finisher;
+        private IFunction<Object, Optional<TestValue>> finisher;
 
         @Before
         public void setUp() {
             sut = DbCollectors.minBy(TestValueComparators.Value);
             supplier = (ISupplier<Object>) sut.container();
             accumulator = (IBiConsumer<Object, TestValue>) sut.accumulator();
-            finisher = (IFunction<Object, IOptional<TestValue>>) sut.finisher();
+            finisher = (IFunction<Object, Optional<TestValue>>) sut.finisher();
         }
 
         @Test
-        public void minByの結果が返すDbCollectorの生成する各要素について_containerを何回か第2引数を変えながらaccumulatorへ渡した後_finisherで変換すると_accumulatorに渡した第2引数の中で最小を保持するIOptionalを返す_が成立する() {
+        public void minByの結果が返すDbCollectorの生成する各要素について_containerを何回か第2引数を変えながらaccumulatorへ渡した後_finisherで変換すると_accumulatorに渡した第2引数の中で最小を保持するOptionalを返す_が成立する() {
             Object container = supplier.get();
             TestValue testValue1 = new TestValue(10, "value1");
             TestValue testValue2 = new TestValue(11, "value2");
@@ -286,7 +286,7 @@ public class DbCollectorsTest extends DbzTestBase {
         }
 
         @Test
-        public void sortByの結果が返すDbCollectorの生成する各要素について_containerを何回か第2引数を変えながらaccumulatorへ渡した後_finisherで変換すると_accumulatorに渡した第2引数の中で最小を保持するIOptionalを返す_が成立する() {
+        public void sortByの結果が返すDbCollectorの生成する各要素について_containerを何回か第2引数を変えながらaccumulatorへ渡した後_finisherで変換すると_accumulatorに渡した第2引数の中で最小を保持するOptionalを返す_が成立する() {
             Object container = supplier.get();
             TestValue testValue1 = new TestValue(10, "value1");
             TestValue testValue2 = new TestValue(11, "value2");

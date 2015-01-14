@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.model.NinteiKekkaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.NinteiKekkaJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
@@ -47,7 +47,7 @@ public class NinteiKekkaJohoManager {
      * @return NinteiKekkaJohoModel
      */
     @Transaction
-    public IOptional<NinteiKekkaJohoModel> get要介護認定結果情報(ShinseishoKanriNo 申請書管理番号, YMDHMS 処理日時) {
+    public Optional<NinteiKekkaJohoModel> get要介護認定結果情報(ShinseishoKanriNo 申請書管理番号, YMDHMS 処理日時) {
 
         return dac.selectByKey(申請書管理番号, 処理日時);
     }
@@ -69,7 +69,7 @@ public class NinteiKekkaJohoManager {
      * @return NinteiKekkaJohoModel
      */
     @Transaction
-    public IOptional<NinteiKekkaJohoModel> get要介護認定結果情報(ShinseishoKanriNo 申請書管理番号) {
+    public Optional<NinteiKekkaJohoModel> get要介護認定結果情報(ShinseishoKanriNo 申請書管理番号) {
         return dac.select直近要介護認定結果情報By申請書管理番号(申請書管理番号);
     }
 

@@ -8,8 +8,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.model.fuka.RankJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.RankJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
@@ -49,9 +49,9 @@ public class RankJohoManager {
      * @return RankJohoModel
      */
     @Transaction
-    public IOptional<RankJohoModel> getランク情報(FukaNendo 賦課年度, RankKubun ランク区分) {
+    public Optional<RankJohoModel> getランク情報(FukaNendo 賦課年度, RankKubun ランク区分) {
 
-        return DbOptional.ofNullable(dac.selectランク情報ByKey(賦課年度, ランク区分));
+        return Optional.ofNullable(dac.selectランク情報ByKey(賦課年度, ランク区分));
     }
 
     /**

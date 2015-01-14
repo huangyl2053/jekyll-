@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.model.JukyushaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.NinteiShinseiJohoModel;
 import jp.co.ndensan.reams.db.dbz.model.NinteiKekkaJohoModel;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -22,8 +22,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class NinteiShinseiKekkaModel implements Serializable {
 
     private JukyushaDaichoModel 受給者台帳モデル;
-    private IOptional<NinteiShinseiJohoModel> 要介護認定申請情報モデル;
-    private IOptional<NinteiKekkaJohoModel> 要介護認定結果情報モデル;
+    private Optional<NinteiShinseiJohoModel> 要介護認定申請情報モデル;
+    private Optional<NinteiKekkaJohoModel> 要介護認定結果情報モデル;
 
     /**
      * デフォルトコンストラクタです。
@@ -40,8 +40,8 @@ public class NinteiShinseiKekkaModel implements Serializable {
      */
     public NinteiShinseiKekkaModel(
             JukyushaDaichoModel 受給者台帳モデル,
-            IOptional<NinteiShinseiJohoModel> 要介護認定申請情報モデル,
-            IOptional<NinteiKekkaJohoModel> 要介護認定結果情報モデル) {
+            Optional<NinteiShinseiJohoModel> 要介護認定申請情報モデル,
+            Optional<NinteiKekkaJohoModel> 要介護認定結果情報モデル) {
         this.受給者台帳モデル = 受給者台帳モデル;
         this.要介護認定申請情報モデル = 要介護認定申請情報モデル;
         this.要介護認定結果情報モデル = 要介護認定結果情報モデル;
@@ -61,7 +61,7 @@ public class NinteiShinseiKekkaModel implements Serializable {
      *
      * @return 要介護認定申請情報モデル
      */
-    public IOptional<NinteiShinseiJohoModel> get要介護認定申請情報モデル() {
+    public Optional<NinteiShinseiJohoModel> get要介護認定申請情報モデル() {
         return 要介護認定申請情報モデル;
     }
 
@@ -70,7 +70,7 @@ public class NinteiShinseiKekkaModel implements Serializable {
      *
      * @return 要介護認定結果情報モデル
      */
-    public IOptional<NinteiKekkaJohoModel> get要介護認定結果情報モデル() {
+    public Optional<NinteiKekkaJohoModel> get要介護認定結果情報モデル() {
         return 要介護認定結果情報モデル;
     }
 
@@ -132,7 +132,7 @@ public class NinteiShinseiKekkaModel implements Serializable {
      *
      * @param 要介護認定申請情報モデル 要介護認定申請情報モデル
      */
-    public void set要介護認定申請情報モデル(IOptional<NinteiShinseiJohoModel> 要介護認定申請情報モデル) {
+    public void set要介護認定申請情報モデル(Optional<NinteiShinseiJohoModel> 要介護認定申請情報モデル) {
         this.要介護認定申請情報モデル = 要介護認定申請情報モデル;
     }
 
@@ -141,7 +141,7 @@ public class NinteiShinseiKekkaModel implements Serializable {
      *
      * @param 要介護認定結果情報モデル 要介護認定結果情報モデル
      */
-    public void set要介護認定結果情報モデル(IOptional<NinteiKekkaJohoModel> 要介護認定結果情報モデル) {
+    public void set要介護認定結果情報モデル(Optional<NinteiKekkaJohoModel> 要介護認定結果情報モデル) {
         this.要介護認定結果情報モデル = 要介護認定結果情報モデル;
     }
 

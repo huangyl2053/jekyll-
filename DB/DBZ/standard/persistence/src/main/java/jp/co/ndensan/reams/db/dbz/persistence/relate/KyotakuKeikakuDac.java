@@ -19,8 +19,8 @@ import jp.co.ndensan.reams.db.dbz.model.KyotakuKeikakuJikoSakuseiModel;
 import jp.co.ndensan.reams.db.dbz.model.relate.KyotakuKeikakuRelateModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -94,11 +94,11 @@ public class KyotakuKeikakuDac {
         return FlexibleDate.MIN;
     }
 
-    private IOptional<KyotakuKeikakuJigyoshaSakuseiModel> select居宅給付計画事業者作成ByKey(RString 被保険者番号,
+    private Optional<KyotakuKeikakuJigyoshaSakuseiModel> select居宅給付計画事業者作成ByKey(RString 被保険者番号,
             RString 証記載保険者番号,
             ShikibetsuCode 識別コード,
             FlexibleYearMonth 対象年月) {
-        IOptional<KyotakuKeikakuJigyoshaSakuseiModel> model = 居宅給付計画事業者作成Dac.select直近居宅給付計画事業者作成(被保険者番号,
+        Optional<KyotakuKeikakuJigyoshaSakuseiModel> model = 居宅給付計画事業者作成Dac.select直近居宅給付計画事業者作成(被保険者番号,
                 証記載保険者番号,
                 識別コード,
                 対象年月);
@@ -106,11 +106,11 @@ public class KyotakuKeikakuDac {
         return model;
     }
 
-    private IOptional<KyotakuKeikakuJikoSakuseiModel> select居宅給付計画自己作成ByKey(HihokenshaNo 被保険者番号,
+    private Optional<KyotakuKeikakuJikoSakuseiModel> select居宅給付計画自己作成ByKey(HihokenshaNo 被保険者番号,
             HokenshaNo 証記載保険者番号,
             ShikibetsuCode 識別コード,
             FlexibleYearMonth 対象年月) {
-        IOptional<KyotakuKeikakuJikoSakuseiModel> model = 居宅給付計画自己作成Dac.select直近居宅給付計画自己作成(被保険者番号,
+        Optional<KyotakuKeikakuJikoSakuseiModel> model = 居宅給付計画自己作成Dac.select直近居宅給付計画自己作成(被保険者番号,
                 証記載保険者番号,
                 識別コード,
                 対象年月);

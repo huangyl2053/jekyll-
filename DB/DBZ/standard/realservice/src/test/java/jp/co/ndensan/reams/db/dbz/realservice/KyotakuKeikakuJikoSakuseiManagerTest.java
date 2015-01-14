@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3007KyotakuKeikakuJikoS
 import jp.co.ndensan.reams.db.dbz.model.KyotakuKeikakuJikoSakuseiModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.KyotakuKeikakuJikoSakuseiDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -54,12 +54,12 @@ public class KyotakuKeikakuJikoSakuseiManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_居宅給付計画自己作成が返る() {
 
-            IOptional<KyotakuKeikakuJikoSakuseiModel> 居宅給付計画自己作成モデル = DbOptional.ofNullable(createModel());
+            Optional<KyotakuKeikakuJikoSakuseiModel> 居宅給付計画自己作成モデル = Optional.ofNullable(createModel());
 
             when(dac.selectByKey(any(HihokenshaNo.class), any(HokenshaNo.class), any(ShikibetsuCode.class),
                     any(FlexibleYearMonth.class), any(YMDHMS.class))).thenReturn(居宅給付計画自己作成モデル);
 
-            IOptional<KyotakuKeikakuJikoSakuseiModel> 居宅給付計画自己作成 = sut.get居宅給付計画自己作成(
+            Optional<KyotakuKeikakuJikoSakuseiModel> 居宅給付計画自己作成 = sut.get居宅給付計画自己作成(
                     DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_被保険者番号,
                     DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_証記載保険者番号,
                     DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_識別コード,
@@ -97,12 +97,12 @@ public class KyotakuKeikakuJikoSakuseiManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_居宅給付計画自己作成が返る() {
 
-            IOptional<KyotakuKeikakuJikoSakuseiModel> 居宅給付計画自己作成モデル = DbOptional.ofNullable(createModel());
+            Optional<KyotakuKeikakuJikoSakuseiModel> 居宅給付計画自己作成モデル = Optional.ofNullable(createModel());
 
             when(dac.select直近居宅給付計画自己作成(any(HihokenshaNo.class), any(HokenshaNo.class), any(ShikibetsuCode.class),
                     any(FlexibleYearMonth.class))).thenReturn(居宅給付計画自己作成モデル);
 
-            IOptional<KyotakuKeikakuJikoSakuseiModel> 居宅給付計画自己作成 = sut.get直近居宅給付計画自己作成(
+            Optional<KyotakuKeikakuJikoSakuseiModel> 居宅給付計画自己作成 = sut.get直近居宅給付計画自己作成(
                     DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_被保険者番号,
                     DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_証記載保険者番号,
                     DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator.DEFAULT_識別コード,
