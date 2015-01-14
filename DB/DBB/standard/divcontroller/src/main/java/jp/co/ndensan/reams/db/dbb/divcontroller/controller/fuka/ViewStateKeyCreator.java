@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.model.relate.fuka.ChoshuYuyoRelateModel;
 import jp.co.ndensan.reams.db.dbz.realservice.ChoshuYuyoFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.ShoriDateFinder;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -42,9 +43,10 @@ public final class ViewStateKeyCreator {
      * 引数のモデルから賦課照会キーを作成します。
      *
      * @param model 賦課モデル
+     * @param name 対象者氏名
      * @return 賦課照会キー
      */
-    public static FukaShokaiKey createFukaShokaiKey(FukaModel model) {
+    public static FukaShokaiKey createFukaShokaiKey(FukaModel model, AtenaMeisho name) {
         //TODO 賦課期日は今回対象外の世帯員所得取得時に必要
         FlexibleDate 賦課期日 = FlexibleDate.MAX;
 
@@ -59,7 +61,8 @@ public final class ViewStateKeyCreator {
                 model.get調定日時(),
                 checkSanteiState(model),
                 is減免あり(model),
-                is徴収猶予あり(model));
+                is徴収猶予あり(model),
+                name);
 
         return key;
     }
@@ -68,17 +71,18 @@ public final class ViewStateKeyCreator {
      * 引数のモデルから前履歴キーを作成します。
      *
      * @param model 前履歴の賦課モデル
+     * @param name 対象者氏名
      * @return 前履歴キー
      */
-    public static MaeRirekiKey createMaeRirekiKey(FukaModel model) {
+    public static MaeRirekiKey createMaeRirekiKey(FukaModel model, AtenaMeisho name) {
 
         MaeRirekiKey key = new MaeRirekiKey(
                 model.get調定年度(),
                 model.get賦課年度(),
                 model.get通知書番号(),
                 model.get処理日時(),
-                checkSanteiState(model));
-
+                checkSanteiState(model),
+                name);
         return key;
     }
 

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiContro
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.ViewStateKeyCreator;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.FukaRirekiAllPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.FukaRirekiPanelDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.KihonJohoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.dgFukaRirekiFukaRireki_Row;
 import jp.co.ndensan.reams.db.dbz.business.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
@@ -44,9 +45,10 @@ public class FukaRirekiPanel {
      *
      * @param rirekiDiv 賦課履歴Div
      * @param rirekiAllDiv 全賦課履歴Div
+     * @param kihonDiv 宛名・介護基本Div
      * @return レスポンスデータ
      */
-    public ResponseData<FukaRirekiPanelDiv> load(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv) {
+    public ResponseData<FukaRirekiPanelDiv> load(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
 
         rirekiDiv.setDisplayNone(true);
 
@@ -59,9 +61,10 @@ public class FukaRirekiPanel {
      *
      * @param rirekiDiv 賦課履歴Div
      * @param rirekiAllDiv 全賦課履歴Div
+     * @param kihonDiv 宛名・介護基本Div
      * @return レスポンスデータ
      */
-    public ResponseData<FukaRirekiPanelDiv> reload(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv) {
+    public ResponseData<FukaRirekiPanelDiv> reload(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
 
         rirekiDiv.setDisplayNone(false);
 
@@ -79,9 +82,10 @@ public class FukaRirekiPanel {
      *
      * @param rirekiDiv 賦課履歴Div
      * @param rirekiAllDiv 全賦課履歴Div
+     * @param kihonDiv 宛名・介護基本Div
      * @return レスポンスデータ
      */
-    public ResponseData<FukaRirekiPanelDiv> onSelect_dgFukaRirekiAll(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv) {
+    public ResponseData<FukaRirekiPanelDiv> onSelect_dgFukaRirekiAll(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
 
         setDgFukaRireki(rirekiDiv, rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All());
 
@@ -130,15 +134,16 @@ public class FukaRirekiPanel {
      *
      * @param rirekiDiv 賦課履歴Div
      * @param rirekiAllDiv 全賦課履歴Div
+     * @param kihonDiv 宛名・介護基本Div
      * @return レスポンスデータ
      */
-    public ResponseData<FukaRirekiPanelDiv> onSelect_FukaRireki(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv) {
+    public ResponseData<FukaRirekiPanelDiv> onSelect_FukaRireki(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
 
         FukaModel model = findTargetModel(
                 rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All(),
                 rirekiDiv.getDgFukaRirekiFukaRireki().getClickedItem());
 
-        FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model);
+        FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, kihonDiv.getCcdKaigoAtenaInfo().getName());
 
         IViewStateValue<FukaShokaiKey> value = ViewStates.access().valueAssignedToA(FukaShokaiKey.class);
         value.put(key);
@@ -151,9 +156,10 @@ public class FukaRirekiPanel {
      *
      * @param rirekiDiv 賦課履歴Div
      * @param rirekiAllDiv 全賦課履歴Div
+     * @param kihonDiv 宛名・介護基本Div
      * @return レスポンスデータ
      */
-    public ResponseData<FukaRirekiPanelDiv> onClick_MaeHikaku(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv) {
+    public ResponseData<FukaRirekiPanelDiv> onClick_MaeHikaku(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
 
         IItemList list = rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All();
         dgFukaRirekiFukaRireki_Row row = rirekiDiv.getDgFukaRirekiFukaRireki().getClickedItem();
@@ -165,11 +171,11 @@ public class FukaRirekiPanel {
         for (ListIterator<FukaModel> listIterator = list.toList().listIterator(); listIterator.hasNext();) {
             targetModel = listIterator.next();
             if (targetModel.get処理日時().equals(RDateTime.parse(row.getShoriTimestamp()))) {
-                FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(targetModel);
+                FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(targetModel, kihonDiv.getCcdKaigoAtenaInfo().getName());
                 value.put(key);
 
                 if (listIterator.hasPrevious()) {
-                    MaeRirekiKey maeKey = ViewStateKeyCreator.createMaeRirekiKey(listIterator.previous());
+                    MaeRirekiKey maeKey = ViewStateKeyCreator.createMaeRirekiKey(listIterator.previous(), kihonDiv.getCcdKaigoAtenaInfo().getName());
                     maeRirekiValue.put(maeKey);
                 } else {
                     maeRirekiValue.remove();

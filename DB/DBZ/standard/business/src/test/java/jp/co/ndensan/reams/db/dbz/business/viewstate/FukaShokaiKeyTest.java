@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2002FukaEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2002FukaEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -33,6 +34,7 @@ public class FukaShokaiKeyTest extends DbzTestBase {
         private static final SanteiState 算定状態 = SanteiState.仮算定;
         private static final boolean 減免あり = true;
         private static final boolean 徴収猶予あり = true;
+        private static final AtenaMeisho 氏名 = AtenaMeisho.EMPTY;
 
         @BeforeClass
         public static void test() {
@@ -47,7 +49,8 @@ public class FukaShokaiKeyTest extends DbzTestBase {
                     DEFAULT_調定日時,
                     算定状態,
                     減免あり,
-                    徴収猶予あり);
+                    徴収猶予あり,
+                    氏名);
         }
 
         @Test
@@ -104,6 +107,11 @@ public class FukaShokaiKeyTest extends DbzTestBase {
         @Test
         public void 戻り値の徴収猶予ありは_設定した値と同じ徴収猶予ありを返す() {
             assertThat(sut.is徴収猶予あり(), is(徴収猶予あり));
+        }
+
+        @Test
+        public void 戻り値の氏名は_設定した値と同じ氏名を返す() {
+            assertThat(sut.氏名(), is(氏名));
         }
     }
 }

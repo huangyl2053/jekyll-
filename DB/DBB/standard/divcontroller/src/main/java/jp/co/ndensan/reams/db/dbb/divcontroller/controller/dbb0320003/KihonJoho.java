@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320001;
+package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320003;
 
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.KihonJohoDiv;
