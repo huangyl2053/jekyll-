@@ -40,7 +40,7 @@ public interface IItemList<E> extends Iterable<E> {
     /**
      * 保持する要素を{@link Iterable}なオブジェクトへ展開する{@link IFunction mapper}により、
      * 変換後の{@link Iterable}で参照可能なすべての要素を持った{@link IItemList}を生成し返します。<br/>
-     * つまり、{@link IFunction mapper}に、n個の要素を持った{@link Iterable}への展開が定義されていたとすれば、
+     * つまり、{@link IFunction mapper}に、n個の要素を持った{@link Iterable}への展開が定義されているとすれば、
      * {@code n×変換前のIItemListのサイズ }個の要素を持った{@link IItemList}が生成されます。
      *
      * @param <R> 変換後の{@link IItemList IItemList}が保持する型
