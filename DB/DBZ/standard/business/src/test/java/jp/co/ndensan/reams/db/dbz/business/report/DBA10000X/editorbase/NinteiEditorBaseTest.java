@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase;
 
-import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase.NinteiEditorBase;
 import com.google.common.collect.Lists;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoModel;
@@ -15,10 +14,6 @@ import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoCommonEdi
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoPrintConfig;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.IName;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -26,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import static jp.co.ndensan.reams.uz.uza.lang.cast._CastDataTypeFactory.DataType.Decimal;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -90,13 +84,13 @@ public class NinteiEditorBaseTest {
 
     public static class set認定年月日 extends DbzTestBase {
 
-        private RDate ninteiDate;
+        private FlexibleDate ninteiDate;
 
         @Before
         public void setUp() {
             target = createTarget();
 
-            ninteiDate = new RDate("20140101");
+            ninteiDate = new FlexibleDate("20140101");
         }
 
         @Test
@@ -110,7 +104,7 @@ public class NinteiEditorBaseTest {
             assertThat(target.getNinteiymd(), is(ninteiString));
         }
 
-        private HihokenshashoModel createMockModel(RDate ninteiDate) {
+        private HihokenshashoModel createMockModel(FlexibleDate ninteiDate) {
             HihokenshaShikakuHakkoModel shikakuHakko = mock(HihokenshaShikakuHakkoModel.class);
             when(shikakuHakko.get認定日()).thenReturn(ninteiDate);
             HihokenshashoModel hihokenshashoModel = mock(HihokenshashoModel.class);
@@ -122,15 +116,15 @@ public class NinteiEditorBaseTest {
 
     public static class set認定有効期間 extends DbzTestBase {
 
-        private RDate kaishiDate;
-        private RDate shuryoDate;
+        private FlexibleDate kaishiDate;
+        private FlexibleDate shuryoDate;
 
         @Before
         public void setUp() {
             target = createTarget();
 
-            kaishiDate = new RDate("20140101");
-            shuryoDate = new RDate("20141231");
+            kaishiDate = new FlexibleDate("20140101");
+            shuryoDate = new FlexibleDate("20141231");
         }
 
         @Test
@@ -155,7 +149,7 @@ public class NinteiEditorBaseTest {
             assertThat(target.getYukokikaned(), is(shuryoDateString));
         }
 
-        private HihokenshashoModel createMockModel(RDate kaishiDate, RDate shuryoDate) {
+        private HihokenshashoModel createMockModel(FlexibleDate kaishiDate, FlexibleDate shuryoDate) {
             HihokenshaShikakuHakkoModel shikakuHakko = mock(HihokenshaShikakuHakkoModel.class);
             when(shikakuHakko.get有効期間開始日()).thenReturn(kaishiDate);
             when(shikakuHakko.get有効期間終了日()).thenReturn(shuryoDate);
@@ -168,8 +162,8 @@ public class NinteiEditorBaseTest {
 
     public static class set居宅サービス extends DbzTestBase {
 
-        private RDate gendoKaishiDate;
-        private RDate gendoShuryoDate;
+        private FlexibleDate gendoKaishiDate;
+        private FlexibleDate gendoShuryoDate;
         private int gendoKijunGaku;
         private RString gendoKijunGakuStr;
 
@@ -177,8 +171,8 @@ public class NinteiEditorBaseTest {
         public void setUp() {
             target = createTarget();
 
-            gendoKaishiDate = new RDate("20140101");
-            gendoShuryoDate = new RDate("20141231");
+            gendoKaishiDate = new FlexibleDate("20140101");
+            gendoShuryoDate = new FlexibleDate("20141231");
             gendoKijunGaku = 10000;
             gendoKijunGakuStr = new RString("10,000");
         }
@@ -214,7 +208,7 @@ public class NinteiEditorBaseTest {
             assertThat(target.getService1(), is(gendoKijunGakuStr));
         }
 
-        private HihokenshashoModel createMockModel(RDate gendoKaishiDate, RDate gendoShuryoDate, int gendoKijunGaku) {
+        private HihokenshashoModel createMockModel(FlexibleDate gendoKaishiDate, FlexibleDate gendoShuryoDate, int gendoKijunGaku) {
             HihokenshaShikakuHakkoModel shikakuHakko = mock(HihokenshaShikakuHakkoModel.class);
             when(shikakuHakko.get限度額有効期間開始日()).thenReturn(gendoKaishiDate);
             when(shikakuHakko.get限度額有効期間終了日()).thenReturn(gendoShuryoDate);

@@ -83,7 +83,7 @@ public class HihokenshashoA4EditorTest {
     public static class edit extends DbzTestBase {
 
         private RString hihokenshaNo;
-        private RDate ninteiDate;
+        private FlexibleDate ninteiDate;
         private RString shienJigyosha;
         private FlexibleDate todokedeDate;
         private HihokenshashoPrintConfig printConfig;
@@ -93,7 +93,7 @@ public class HihokenshashoA4EditorTest {
         @Before
         public void setUp() {
             hihokenshaNo = new RString("0000012345");
-            ninteiDate = new RDate("20130101");
+            ninteiDate = new FlexibleDate("20130101");
             shienJigyosha = new RString("居宅支援事業者");
             todokedeDate = new FlexibleDate("20140101");
             printConfig = createMockPrintConfig();
@@ -156,7 +156,7 @@ public class HihokenshashoA4EditorTest {
             );
         }
 
-        private HihokenshashoModel createMockModel(RString hihokenshaNo, RDate nintaiDate, HihokenshashoPrintPosition 印字位置,
+        private HihokenshashoModel createMockModel(RString hihokenshaNo, FlexibleDate nintaiDate, HihokenshashoPrintPosition 印字位置,
                 RString shienJigyosha, FlexibleDate todokedeDate) {
             HihokenshaShikakuHakkoModel shikakuHakko = mock(HihokenshaShikakuHakkoModel.class);
             when(shikakuHakko.get認定日()).thenReturn(nintaiDate);
@@ -262,7 +262,7 @@ public class HihokenshashoA4EditorTest {
 
     }
 
-    private static RString toWarekiString(RDate date) {
+    private static RString toWarekiString(FlexibleDate date) {
         return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }

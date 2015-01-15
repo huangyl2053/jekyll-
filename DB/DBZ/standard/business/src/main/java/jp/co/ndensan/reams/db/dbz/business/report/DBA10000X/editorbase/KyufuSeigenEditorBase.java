@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -70,8 +69,8 @@ public class KyufuSeigenEditorBase {
     public void set給付制限(IHihokenshashoCommonEditData source) {
 
         List<RString> kyufuSeigenNames = hihokenshashoModel.getShikakuHakko().get給付制限内容();
-        List<RDate> kyufuSeigenStartDates = hihokenshashoModel.getShikakuHakko().get給付制限開始日();
-        List<RDate> kyufuSeigenEndDates = hihokenshashoModel.getShikakuHakko().get給付制限終了日();
+        List<FlexibleDate> kyufuSeigenStartDates = hihokenshashoModel.getShikakuHakko().get給付制限開始日();
+        List<FlexibleDate> kyufuSeigenEndDates = hihokenshashoModel.getShikakuHakko().get給付制限終了日();
 
         for (int i = 0; i < 3 && i < kyufuSeigenNames.size(); i++) {
             switch (i) {
@@ -91,7 +90,7 @@ public class KyufuSeigenEditorBase {
         }
     }
 
-    private void setKyufuSeigen(IKyufuSeigenSetter setter, RString kyufuSeigenName, Range<RDate> kyufuRange) {
+    private void setKyufuSeigen(IKyufuSeigenSetter setter, RString kyufuSeigenName, Range<FlexibleDate> kyufuRange) {
         int halfIndex;
         if (kyufuSeigenName.length() <= KYUFU_SEIGEN_NAME_LENGTH) {
             halfIndex = KYUFU_SEIGEN_NAME_LENGTH / 2;
@@ -613,11 +612,6 @@ public class KyufuSeigenEditorBase {
             }
 
         };
-    }
-
-    private static RString toWarekiString(RDate date) {
-        return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private static RString toWarekiString(FlexibleDate date) {

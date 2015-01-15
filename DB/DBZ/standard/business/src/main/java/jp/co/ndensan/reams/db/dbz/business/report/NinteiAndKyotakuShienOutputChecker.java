@@ -55,8 +55,8 @@ public class NinteiAndKyotakuShienOutputChecker {
         HihokenshaShikakuHakkoModel shikakuHakko = hihokenshashoModel.getShikakuHakko();
         FlexibleDate kofuDate = shikakuHakko.get交付日();
 
-        FlexibleDate yukoKaishiDate = new FlexibleDate(shikakuHakko.get有効期間開始日().toDateString());
-        FlexibleDate yukoShuryoDate = new FlexibleDate(shikakuHakko.get有効期間終了日().toDateString());
+        FlexibleDate yukoKaishiDate = shikakuHakko.get有効期間開始日();
+        FlexibleDate yukoShuryoDate = shikakuHakko.get有効期間終了日();
         if (yukoShuryoDate.isEmpty()) {
             yukoShuryoDate = FlexibleDate.MAX;
         }

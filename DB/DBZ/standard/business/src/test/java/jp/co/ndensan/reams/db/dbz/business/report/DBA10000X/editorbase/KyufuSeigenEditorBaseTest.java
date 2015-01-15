@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import org.junit.Test;
@@ -68,8 +67,8 @@ public class KyufuSeigenEditorBaseTest {
 
         private static List<RString> kyufuSeigenNames;
         private static List<RString> kyufuSeigenLongNames;
-        private static List<RDate> kyufuSeigenStartDates;
-        private static List<RDate> kyufuSeigenEndDates;
+        private static List<FlexibleDate> kyufuSeigenStartDates;
+        private static List<FlexibleDate> kyufuSeigenEndDates;
 
         private static final int KYUFU_SEIGEN_NAME_LENGTH = 8;
         private static final int KYUFU_SEIGEN_LONG_NAME_LENGTH = 12;
@@ -79,8 +78,8 @@ public class KyufuSeigenEditorBaseTest {
             target = createTarget();
             kyufuSeigenNames = Lists.newArrayList(new RString("AA100001"), new RString("AA100002"), new RString("AA100003"));
             kyufuSeigenLongNames = Lists.newArrayList(new RString("AA1000010001"), new RString("AA1000020002"), new RString("AA1000030003"));
-            kyufuSeigenStartDates = Lists.newArrayList(new RDate("20130101"), new RDate("20120101"), new RDate("20110101"));
-            kyufuSeigenEndDates = Lists.newArrayList(new RDate("20131231"), new RDate("20121231"), new RDate("20111231"));
+            kyufuSeigenStartDates = Lists.newArrayList(new FlexibleDate("20130101"), new FlexibleDate("20120101"), new FlexibleDate("20110101"));
+            kyufuSeigenEndDates = Lists.newArrayList(new FlexibleDate("20131231"), new FlexibleDate("20121231"), new FlexibleDate("20111231"));
 
             printConfig = mock(HihokenshashoPrintConfig.class);
         }
@@ -402,8 +401,8 @@ public class KyufuSeigenEditorBaseTest {
 
                 kyufuSeigenNames = Lists.newArrayList(new RString("AA100001"), new RString("AA100002"), new RString("AA100003"), new RString("AA100004"));
                 kyufuSeigenLongNames = Lists.newArrayList(new RString("AA1000010001"), new RString("AA1000020002"), new RString("AA1000030003"), new RString("AA1000030004"));
-                kyufuSeigenStartDates = Lists.newArrayList(new RDate("20130101"), new RDate("20120101"), new RDate("20110101"), new RDate("20100101"));
-                kyufuSeigenEndDates = Lists.newArrayList(new RDate("20131231"), new RDate("20121231"), new RDate("20111231"), new RDate("20101231"));
+                kyufuSeigenStartDates = Lists.newArrayList(new FlexibleDate("20130101"), new FlexibleDate("20120101"), new FlexibleDate("20110101"), new FlexibleDate("20100101"));
+                kyufuSeigenEndDates = Lists.newArrayList(new FlexibleDate("20131231"), new FlexibleDate("20121231"), new FlexibleDate("20111231"), new FlexibleDate("20101231"));
 
                 hihokenshasho = createMockModel(kyufuSeigenNames, kyufuSeigenStartDates, kyufuSeigenEndDates);
                 sut = new KyufuSeigenEditorBase(hihokenshasho, printConfig);
@@ -415,7 +414,7 @@ public class KyufuSeigenEditorBaseTest {
 
         }
 
-        private static HihokenshashoModel createMockModel(List<RString> kyufuSeigenNames, List<RDate> kyufuSeigenStartDates, List<RDate> kyufuSeigenEndDates) {
+        private static HihokenshashoModel createMockModel(List<RString> kyufuSeigenNames, List<FlexibleDate> kyufuSeigenStartDates, List<FlexibleDate> kyufuSeigenEndDates) {
             HihokenshaShikakuHakkoModel shikakuHakko = mock(HihokenshaShikakuHakkoModel.class);
             when(shikakuHakko.get給付制限内容()).thenReturn(kyufuSeigenNames);
             when(shikakuHakko.get給付制限開始日()).thenReturn(kyufuSeigenStartDates);
@@ -1065,11 +1064,6 @@ public class KyufuSeigenEditorBaseTest {
     private static IHihokenshashoCommonEditData createTarget() {
         HihokenshashoA4 a4 = new HihokenshashoA4();
         return new HihokenshashoA4EditData(a4);
-    }
-
-    private static RString toWarekiString(RDate date) {
-        return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     private static RString toWarekiString(FlexibleDate date) {
