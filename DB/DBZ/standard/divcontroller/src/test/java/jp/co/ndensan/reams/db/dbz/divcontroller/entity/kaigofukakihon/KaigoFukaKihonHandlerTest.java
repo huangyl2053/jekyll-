@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;

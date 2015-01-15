@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate;
 import java.io.Serializable;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateChangeState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 

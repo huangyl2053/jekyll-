@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2002FukaEntityGenerator.*;

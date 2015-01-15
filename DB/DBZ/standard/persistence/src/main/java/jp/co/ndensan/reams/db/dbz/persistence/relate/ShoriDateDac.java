@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.model.ShoriDateModel;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;

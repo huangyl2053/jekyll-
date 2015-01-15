@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbz.business.hokensha.KoikiKoseiShichosons;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ContainsKyuShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import static jp.co.ndensan.reams.db.dbz.model.hokensha.KoikiKoseiShichosonMasterComparator.orderBy加入日;
 import jp.co.ndensan.reams.db.dbz.model.hokensha.KoseiShichosonMasterModel;
 import jp.co.ndensan.reams.db.dbz.model.hokensha.KoseiShichosonModel;

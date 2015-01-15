@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;

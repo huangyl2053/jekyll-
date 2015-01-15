@@ -6,7 +6,6 @@ package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_サブ業務コード;
@@ -16,7 +15,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKan
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_年度;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_年度内連番;
 import jp.co.ndensan.reams.db.dbz.model.ShoriDateModel;
-import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -25,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Before;

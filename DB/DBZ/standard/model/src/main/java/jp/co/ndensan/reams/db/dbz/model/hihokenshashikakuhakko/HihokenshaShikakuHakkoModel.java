@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko;
 import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
