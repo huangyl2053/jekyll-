@@ -9,8 +9,8 @@ import java.util.Objects;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
- * {@link IPredicate}をラップしています。{@link #evaluate(java.lang.Object) evaluate()}では、ラップした
- * {@link IPredicate}と同じ結果を返します。
+ * {@link IPredicate}をラップして拡張します。
+ * {@link #evaluate(java.lang.Object) evaluate()}では、ラップした{@link IPredicate}と同じ結果を返します。
  * さらに、論理和、論理積、否定などの{@link IPredicate}を生成する機能を持ちます。
  *
  * @author N3327 三浦 凌

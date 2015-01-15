@@ -60,8 +60,8 @@ public final class PlainCollectors {
      */
     public static <T> IPlainCollector<T, ?, List<T>> toList() {
         return PlainCollector.of(
-                MySuppliers.<T>newArrayList(),
-                MyBiConsumers.<List, T>collection_add());
+                _Suppliers.<T>newArrayList(),
+                _BiConsumers.<List, T>collection_add());
     }
 
     /**
@@ -72,8 +72,8 @@ public final class PlainCollectors {
      */
     public static <T> IPlainCollector<T, ?, IItemList<T>> toIItemList() {
         return PlainCollector.of(
-                MySuppliers.<T>newArrayList(),
-                MyBiConsumers.<List, T>collection_add(),
+                _Suppliers.<T>newArrayList(),
+                _BiConsumers.<List, T>collection_add(),
                 new IFunction<List<T>, IItemList<T>>() {
                     @Override
                     public IItemList<T> apply(List<T> t) {
@@ -91,8 +91,8 @@ public final class PlainCollectors {
      */
     public static <T> IPlainCollector<T, ?, IItemList<T>> sortBy(final Comparator<? super T> comparator) {
         return PlainCollector.of(
-                MySuppliers.<T>newArrayList(),
-                MyBiConsumers.<List, T>collection_add(),
+                _Suppliers.<T>newArrayList(),
+                _BiConsumers.<List, T>collection_add(),
                 new IFunction<List<T>, IItemList<T>>() {
                     @Override
                     public IItemList<T> apply(List<T> t) {
@@ -110,8 +110,8 @@ public final class PlainCollectors {
      */
     public static <T> IPlainCollector<T, ?, Optional<T>> minBy(final Comparator<? super T> comparator) {
         return PlainCollector.of(
-                MySuppliers.<T>newArrayList(),
-                MyBiConsumers.<List, T>collection_add(),
+                _Suppliers.<T>newArrayList(),
+                _BiConsumers.<List, T>collection_add(),
                 new IFunction<List<T>, Optional<T>>() {
                     @Override
                     public Optional<T> apply(List<T> t) {
@@ -129,8 +129,8 @@ public final class PlainCollectors {
      */
     public static <T> IPlainCollector<T, ?, Optional<T>> maxBy(final Comparator<? super T> comparator) {
         return PlainCollector.of(
-                MySuppliers.<T>newArrayList(),
-                MyBiConsumers.<List, T>collection_add(),
+                _Suppliers.<T>newArrayList(),
+                _BiConsumers.<List, T>collection_add(),
                 new IFunction<List<T>, Optional<T>>() {
                     @Override
                     public Optional<T> apply(List<T> t) {
@@ -153,7 +153,7 @@ public final class PlainCollectors {
             final IFunction<? super T, ? extends K> keyMapper, final IFunction<? super T, ? extends V> valueMapper) {
         _requireNonNull(keyMapper, "keyMapper");
         _requireNonNull(valueMapper, "valueMapper");
-        ISupplier<Map<K, V>> container = MySuppliers.newHashMap();
+        ISupplier<Map<K, V>> container = _Suppliers.newHashMap();
         IBiConsumer<Map<K, V>, T> accumulator = new IBiConsumer<Map<K, V>, T>() {
             @Override
             public void accept(Map<K, V> t, T u) {
@@ -189,7 +189,7 @@ public final class PlainCollectors {
     public static <T, K, A, D> IPlainCollector<T, ?, Map<K, D>> groupingBy(final IFunction<T, K> classifier,
             final IPlainCollector<? super T, A, D> downstream) {
         _requireNonNull(classifier, "classifier");
-        ISupplier<Map<K, A>> container = MySuppliers.newHashMap();
+        ISupplier<Map<K, A>> container = _Suppliers.newHashMap();
         final ISupplier<A> downstreamContainer = downstream.container();
         IBiConsumer<Map<K, A>, T> accumulator = new IBiConsumer<Map<K, A>, T>() {
             @Override
@@ -253,9 +253,9 @@ public final class PlainCollectors {
         };
     }
 
-    private static final class MySuppliers {
+    private static final class _Suppliers {
 
-        private MySuppliers() {
+        private _Suppliers() {
         }
 
         /**
@@ -290,9 +290,9 @@ public final class PlainCollectors {
         }
     }
 
-    private static final class MyBiConsumers {
+    private static final class _BiConsumers {
 
-        private MyBiConsumers() {
+        private _BiConsumers() {
         }
 
         /**

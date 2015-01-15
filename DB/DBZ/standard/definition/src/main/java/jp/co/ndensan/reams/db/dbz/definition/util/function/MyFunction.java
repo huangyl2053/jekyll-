@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.definition.util.function;
 import java.util.Objects;
 
 /**
- * {@link IFunction}のラッパーです。
+ * {@link IFunction}をラップして拡張します。
  *
  * @author n3327 三浦 凌
  * @param <T> 入力の型
