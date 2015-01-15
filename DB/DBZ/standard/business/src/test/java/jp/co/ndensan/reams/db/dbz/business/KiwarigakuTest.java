@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.model.KiwarigakuMeisai;
+import jp.co.ndensan.reams.db.dbz.model.fuka.KiwarigakuMeisai;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import org.junit.experimental.runners.Enclosed;

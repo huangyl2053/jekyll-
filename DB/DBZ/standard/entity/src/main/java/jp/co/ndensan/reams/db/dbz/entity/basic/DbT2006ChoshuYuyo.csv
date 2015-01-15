@@ -8,7 +8,7 @@ torikeshiYMD,UDD015YMD,FlexibleDate,,,,,A
 jotaiKubun,varchar,RString,,,,,A
 sakuseiKubun,varchar,RString,,,,,A
 shinseiJiyu,text,RString,,,,,A
-yuyoJiyuCode,UDD035Code,Code,,,,,A
+yuyoShuruiCode,UDD035Code,Code,,,,,A
 yuyoJiyu,text,RString,,,,,A
-yuyoTorikeshiJiyuCode,UDD035Code,Code,,,,,A
+yuyoTorikeshiShuruiCode,UDD035Code,Code,,,,,A
 yuyoTorikeshiJiyu,text,RString,,,,,A

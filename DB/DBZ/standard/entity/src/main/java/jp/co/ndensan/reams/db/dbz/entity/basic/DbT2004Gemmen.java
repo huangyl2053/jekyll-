@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbT2004Gemmen implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
     insertReamsLoginId(2147483647, 0),
@@ -26,9 +27,9 @@ public enum DbT2004Gemmen implements IColumnDefinition {
     jotaiKubun(1, 0),
     sakuseiKubun(1, 0),
     shinseiJiyu(2147483647, 0),
-    gemmenJiyuCode(2147483647, 0),
+    gemmenShuruiCode(2147483647, 0),
     gemmenJiyu(2147483647, 0),
-    gemmenTorikeshiJiyuCode(2147483647, 0),
+    gemmenTorikeshiShuruiCode(2147483647, 0),
     gemmenTorikeshiJiyu(2147483647, 0),
     shinseiGemmenGaku(131089, 0),
     ketteiGemmenGaku(131089, 0),
@@ -44,6 +45,7 @@ public enum DbT2004Gemmen implements IColumnDefinition {
 
     /**
      * getMaxLength
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -52,6 +54,7 @@ public enum DbT2004Gemmen implements IColumnDefinition {
 
     /**
      * getScale
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

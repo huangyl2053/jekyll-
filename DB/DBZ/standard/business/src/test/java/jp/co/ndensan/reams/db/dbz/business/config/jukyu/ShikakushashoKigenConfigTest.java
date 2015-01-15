@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.config.jukyu;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysShikakushashoKigen;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.YukoKigenShokiHyoji;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -28,11 +29,11 @@ import static org.mockito.Mockito.*;
 public class ShikakushashoKigenConfigTest extends DbzTestBase {
 
     private static final RString 有効期限加算値;
-    private static final RString 有効期限初期表示;
+    private static final YukoKigenShokiHyoji 有効期限初期表示;
 
     static {
         有効期限加算値 = new RString("30");
-        有効期限初期表示 = new RString("3");
+        有効期限初期表示 = YukoKigenShokiHyoji.更新区分申請時_従前認定終値比較;
     }
 
     public static IUrBusinessConfig config() {
@@ -46,7 +47,7 @@ public class ShikakushashoKigenConfigTest extends DbzTestBase {
                 eq(ConfigKeysShikakushashoKigen.資格者証期限_有効期限初期表示),
                 any(RDate.class),
                 eq(SubGyomuCode.DBD介護受給)
-        )).thenReturn(有効期限初期表示);
+        )).thenReturn(有効期限初期表示.code());
         return config;
     }
 
@@ -67,7 +68,7 @@ public class ShikakushashoKigenConfigTest extends DbzTestBase {
 
         @Test
         public void get資格者証期限_有効期限初期表示は_業務コンフィグ設定値を返す() {
-            RString result = sut.get資格者証期限_有効期限初期表示();
+            YukoKigenShokiHyoji result = sut.get資格者証期限_有効期限初期表示();
             assertThat(result, is(有効期限初期表示));
         }
     }

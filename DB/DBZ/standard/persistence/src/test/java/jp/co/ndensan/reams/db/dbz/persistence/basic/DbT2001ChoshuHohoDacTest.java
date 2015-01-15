@@ -5,12 +5,11 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator.DEFAULT_処理日時;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator.DEFAULT_被保険者番号;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator.DEFAULT_賦課年度;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -34,11 +33,8 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class DbT2001ChoshuHohoDacTest extends DbzTestDacBase {
 
-    private static final RString キー_01 = new RString("01");
-    private static final RString キー_02 = new RString("02");
-    private static final RString キー_03 = new RString("03");
-    private static final FlexibleYear 賦課年度2013 = new FlexibleYear("2013");
-    private static final FlexibleYear 賦課年度2015 = new FlexibleYear("2015");
+    private static final FukaNendo 賦課年度2013 = new FukaNendo(new FlexibleYear("2013"));
+    private static final FukaNendo 賦課年度2015 = new FukaNendo(new FlexibleYear("2015"));
     private static DbT2001ChoshuHohoDac sut;
 
     @BeforeClass
@@ -51,7 +47,7 @@ public class DbT2001ChoshuHohoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_被保険者番号,
                     DEFAULT_処理日時);
             TestSupport.insert(
@@ -71,7 +67,7 @@ public class DbT2001ChoshuHohoDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 被保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     null,
                     DEFAULT_処理日時);
         }
@@ -79,7 +75,7 @@ public class DbT2001ChoshuHohoDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 処理日時がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_被保険者番号,
                     null);
         }
@@ -87,7 +83,7 @@ public class DbT2001ChoshuHohoDacTest extends DbzTestDacBase {
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT2001ChoshuHohoEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_被保険者番号,
                     DEFAULT_処理日時);
             assertThat(insertedRecord, is(notNullValue()));
@@ -108,7 +104,7 @@ public class DbT2001ChoshuHohoDacTest extends DbzTestDacBase {
         @Test
         public void 介護徴収方法が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_被保険者番号,
                     DEFAULT_処理日時);
             TestSupport.insert(
@@ -129,12 +125,12 @@ public class DbT2001ChoshuHohoDacTest extends DbzTestDacBase {
         @Test
         public void 介護徴収方法エンティティを渡すと_insertは_介護徴収方法を追加する() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_被保険者番号,
                     DEFAULT_処理日時);
 
             assertThat(sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_被保険者番号,
                     DEFAULT_処理日時), is(notNullValue()));
         }
@@ -145,7 +141,7 @@ public class DbT2001ChoshuHohoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_被保険者番号,
                     DEFAULT_処理日時);
         }
@@ -153,17 +149,17 @@ public class DbT2001ChoshuHohoDacTest extends DbzTestDacBase {
         @Test
         public void 介護徴収方法エンティティを渡すと_updateは_介護徴収方法を更新する() {
             DbT2001ChoshuHohoEntity updateRecord = DbT2001ChoshuHohoEntityGenerator.createDbT2001ChoshuHohoEntity();
-            // TODO 主キー以外の項目を変更してください
-//            updateRecord.set変更したい項目(75);
+
+            updateRecord.setChoshuHoho4gatsu(new RString("9"));
 
             sut.update(updateRecord);
 
             DbT2001ChoshuHohoEntity updatedRecord = sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_被保険者番号,
                     DEFAULT_処理日時);
 
-//            assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getChoshuHoho4gatsu(), is(updatedRecord.getChoshuHoho4gatsu()));
         }
     }
 
@@ -172,7 +168,7 @@ public class DbT2001ChoshuHohoDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_被保険者番号,
                     DEFAULT_処理日時);
         }
@@ -180,11 +176,11 @@ public class DbT2001ChoshuHohoDacTest extends DbzTestDacBase {
         @Test
         public void 介護徴収方法エンティティを渡すと_deleteは_介護徴収方法を削除する() {
             sut.delete(sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_被保険者番号,
                     DEFAULT_処理日時));
             assertThat(sut.selectByKey(
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_被保険者番号,
                     DEFAULT_処理日時), is(nullValue()));
         }
@@ -193,11 +189,12 @@ public class DbT2001ChoshuHohoDacTest extends DbzTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                FlexibleYear 賦課年度,
+                FukaNendo 賦課年度,
                 HihokenshaNo 被保険者番号,
                 RDateTime 処理日時) {
-            DbT2001ChoshuHohoEntity entity = DbT2001ChoshuHohoEntityGenerator.createDbT2001ChoshuHohoEntity();
-            entity.setFukaNendo(賦課年度);
+            DbT2001ChoshuHohoEntity entity
+                    = DbT2001ChoshuHohoEntityGenerator.createDbT2001ChoshuHohoEntity();
+            entity.setFukaNendo(賦課年度.value());
             entity.setHihokenshaNo(被保険者番号);
             entity.setShoriTimestamp(処理日時);
             sut.insert(entity);

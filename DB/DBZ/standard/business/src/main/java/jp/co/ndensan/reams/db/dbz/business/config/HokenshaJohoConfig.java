@@ -51,7 +51,7 @@ public class HokenshaJohoConfig {
      *
      * @param businessConfig 業務コンフィグを取得するインスタンス
      */
-    HokenshaJohoConfig(IUrBusinessConfig businessConfig) {
+    public HokenshaJohoConfig(IUrBusinessConfig businessConfig) {
         this.configs = createMap(businessConfig);
     }
 

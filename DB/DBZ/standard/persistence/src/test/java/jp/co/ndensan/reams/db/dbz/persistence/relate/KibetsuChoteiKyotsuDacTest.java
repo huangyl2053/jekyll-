@@ -5,18 +5,19 @@
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2003KibetsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.UrT0705ChoteiKyotsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.basic.UrT0705ChoteiKyotsuEntity;
-import jp.co.ndensan.reams.db.dbz.model.ChoteiKyotsuModel;
-import jp.co.ndensan.reams.db.dbz.model.KibetsuModel;
-import jp.co.ndensan.reams.db.dbz.model.relate.KibetsuChoteiKyotsuModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.ChoteiKyotsuModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuModel;
+import jp.co.ndensan.reams.db.dbz.model.relate.fuka.KibetsuChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.UrT0705ChoteiKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT2003KibetsuDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestDacBase;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -42,8 +43,8 @@ public class KibetsuChoteiKyotsuDacTest {
     private static DbT2003KibetsuDac 介護期別Dac;
     private static UrT0705ChoteiKyotsuDac 調定共通Dac;
 
-    private static final FlexibleYear 調定年度 = DbT2003KibetsuEntityGenerator.DEFAULT_調定年度;
-    private static final FlexibleYear 賦課年度 = DbT2003KibetsuEntityGenerator.DEFAULT_賦課年度;
+    private static final ChoteiNendo 調定年度 = new ChoteiNendo(DbT2003KibetsuEntityGenerator.DEFAULT_調定年度);
+    private static final FukaNendo 賦課年度 = new FukaNendo(DbT2003KibetsuEntityGenerator.DEFAULT_賦課年度);
     private static final TsuchishoNo 通知書番号 = DbT2003KibetsuEntityGenerator.DEFAULT_通知書番号;
     private static final RDateTime 処理日時 = DbT2003KibetsuEntityGenerator.DEFAULT_処理日時;
     private static final RString 徴収方法 = DbT2003KibetsuEntityGenerator.DEFAULT_徴収方法;
@@ -208,15 +209,15 @@ public class KibetsuChoteiKyotsuDacTest {
     private static class TestSupport {
 
         public static void insertDbT2003(
-                FlexibleYear 調定年度,
-                FlexibleYear 賦課年度,
+                ChoteiNendo 調定年度,
+                FukaNendo 賦課年度,
                 TsuchishoNo 通知書番号,
                 RDateTime 処理日時,
                 RString 徴収方法,
                 int 期) {
             DbT2003KibetsuEntity entity = DbT2003KibetsuEntityGenerator.createDbT2003KibetsuEntity();
-            entity.setChoteiNendo(調定年度);
-            entity.setFukaNendo(賦課年度);
+            entity.setChoteiNendo(調定年度.value());
+            entity.setFukaNendo(賦課年度.value());
             entity.setTsuchishoNo(通知書番号);
             entity.setShoriTimestamp(処理日時);
             entity.setChoshuHoho(徴収方法);
@@ -230,5 +231,4 @@ public class KibetsuChoteiKyotsuDacTest {
             調定共通Dac.insert(entity);
         }
     }
-
 }

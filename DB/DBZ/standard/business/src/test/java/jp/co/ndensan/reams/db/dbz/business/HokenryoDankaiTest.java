@@ -6,7 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business;
 
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
-import jp.co.ndensan.reams.db.dbz.model.HokenryoDankaiModel;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoDankaiModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -31,10 +32,10 @@ public class HokenryoDankaiTest {
 
     private static final FlexibleYear 激変緩和開始年度 = new FlexibleYear("2006");
     private static final FlexibleYear 激変緩和終了年度 = new FlexibleYear("2007");
-    private static final FlexibleYear 賦課年度_第1期 = new FlexibleYear("2000");
-    private static final FlexibleYear 賦課年度_第2期 = new FlexibleYear("2003");
-    private static final FlexibleYear 賦課年度_第3期 = new FlexibleYear("2006");
-    private static final FlexibleYear 賦課年度_第5期 = new FlexibleYear("2012");
+    private static final FukaNendo 賦課年度_第1期 = new FukaNendo("2000");
+    private static final FukaNendo 賦課年度_第2期 = new FukaNendo("2003");
+    private static final FukaNendo 賦課年度_第3期 = new FukaNendo("2006");
+    private static final FukaNendo 賦課年度_第5期 = new FukaNendo("2012");
     private static final RString 段階区分_対象外 = new RString("000");
     private static final RString 段階区分_第1段階 = new RString("010");
     private static final RString 段階区分_第3段階1 = new RString("031");
@@ -87,7 +88,7 @@ public class HokenryoDankaiTest {
         }
     }
 
-    private static HokenryoDankaiModel createHokenryoDankaiModel(FlexibleYear 賦課年度, RString 段階区分, RString 特例表記) {
+    private static HokenryoDankaiModel createHokenryoDankaiModel(FukaNendo 賦課年度, RString 段階区分, RString 特例表記) {
         HokenryoDankaiModel model = mock(HokenryoDankaiModel.class);
         when(model.get賦課年度()).thenReturn(賦課年度);
         when(model.get段階区分()).thenReturn(段階区分);

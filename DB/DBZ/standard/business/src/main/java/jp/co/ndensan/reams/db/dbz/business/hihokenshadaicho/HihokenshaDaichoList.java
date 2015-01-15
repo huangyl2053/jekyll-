@@ -11,8 +11,8 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModelComparators;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
@@ -33,7 +33,7 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
     public HihokenshaDaichoList(IItemList<HihokenshaDaichoModel> daichoList) {
         requireNonNull(daichoList, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("引数のList", getClass().getSimpleName()));
-        this.daichoList = daichoList.sorted(HihokenshaDaichoModelComparators.orderBy資格取得日.desc());
+        this.daichoList = daichoList.sorted(HihokenshaDaichoModelComparators.orderBy資格取得年月日.desc());
     }
 
     /**
