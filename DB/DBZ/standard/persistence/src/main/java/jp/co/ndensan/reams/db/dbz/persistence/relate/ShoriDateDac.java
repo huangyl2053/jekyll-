@@ -6,8 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShoriName;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.model.ShoriDateModel;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
@@ -44,7 +43,7 @@ public class ShoriDateDac implements IModifiable<ShoriDateModel> {
      * @return ShoriDateKanriModel
      */
     @Transaction
-    public IOptional<ShoriDateModel> select処理日付ByKey(SubGyomuCode サブ業務コード,
+    public Optional<ShoriDateModel> select処理日付ByKey(SubGyomuCode サブ業務コード,
             LasdecCode 市町村コード,
             ShoriName 処理名,
             RString 処理枝番,
@@ -55,12 +54,12 @@ public class ShoriDateDac implements IModifiable<ShoriDateModel> {
                 サブ業務コード, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番));
     }
 
-    private IOptional<ShoriDateModel> createModel(DbT7022ShoriDateKanriEntity 処理日付エンティティ) {
+    private Optional<ShoriDateModel> createModel(DbT7022ShoriDateKanriEntity 処理日付エンティティ) {
         if (処理日付エンティティ == null) {
-            return DbOptional.empty();
+            return Optional.empty();
         }
 
-        return DbOptional.of(new ShoriDateModel(処理日付エンティティ));
+        return Optional.of(new ShoriDateModel(処理日付エンティティ));
     }
 
     @Override

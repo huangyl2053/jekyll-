@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuHohoModel;
@@ -44,7 +44,7 @@ public class ChoshuHohoFinder {
      * @param 被保険者番号 被保険者番号
      * @return 徴収方法モデル
      */
-    public IOptional<ChoshuHohoModel> find徴収方法(FukaNendo 賦課年度, HihokenshaNo 被保険者番号) {
+    public Optional<ChoshuHohoModel> find徴収方法(FukaNendo 賦課年度, HihokenshaNo 被保険者番号) {
 
         return dac.select徴収方法Recently(賦課年度, 被保険者番号);
     }

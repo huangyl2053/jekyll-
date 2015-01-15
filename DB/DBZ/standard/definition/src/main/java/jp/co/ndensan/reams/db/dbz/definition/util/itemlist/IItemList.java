@@ -10,7 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 
 /**
  * オブジェクトの集合であることを表します。
@@ -130,19 +130,19 @@ public interface IItemList<E> extends Iterable<E> {
     boolean isJustOne();
 
     /**
-     * 保持する要素が1件の時、そのオブジェクトを保持する{@link IOptional IOptional}を返します。
-     * 複数件の要素を保持する時や何も保持していない空の場合は、emptyな{@link IOptional IOptional}を返します。
+     * 保持する要素が1件の時、そのオブジェクトを保持する{@link Optional Optional}を返します。
+     * 複数件の要素を保持する時や何も保持していない空の場合は、emptyな{@link Optional Optional}を返します。
      *
-     * @return {@link IOptional IOptional}
+     * @return {@link Optional Optional}
      */
-    IOptional<E> findJustOne();
+    Optional<E> findJustOne();
 
     /**
-     * 保持する要素の中で先頭の物を保持する{@link IOptional IOptional}を返します。
+     * 保持する要素の中で先頭の物を保持する{@link Optional Optional}を返します。
      *
-     * @return {@link IOptional IOptional}
+     * @return {@link Optional Optional}
      */
-    IOptional<E> findFirst();
+    Optional<E> findFirst();
 
     /**
      * 引数のcomparatorで保持する要素をソートした結果から構成される、新しい{@link IItemList IItemList}を返します。
@@ -184,12 +184,12 @@ public interface IItemList<E> extends Iterable<E> {
     IItemList<E> added(E... items);
 
     /**
-     * {@link IDbCollector}によって、保持する要素を集積・変換して返します。
+     * {@link IItemCollector}によって、保持する要素を集積・変換して返します。
      *
      * @param <R> 結果の型
      * @param <A> 集積用の型(結果の型と同じ場合もある)
-     * @param collector {@link IDbCollector}
-     * @return {@link IDbCollector}により、保持する要素を集積・変換した結果
+     * @param collector {@link IItemCollector}
+     * @return {@link IItemCollector}により、保持する要素を集積・変換した結果
      */
-    <R, A> R collect(IDbCollector<? super E, A, R> collector);
+    <R, A> R collect(IItemCollector<? super E, A, R> collector);
 }

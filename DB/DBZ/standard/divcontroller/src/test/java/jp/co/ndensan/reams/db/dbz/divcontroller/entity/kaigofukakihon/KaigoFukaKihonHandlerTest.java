@@ -9,8 +9,7 @@ import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
@@ -104,21 +103,21 @@ public class KaigoFukaKihonHandlerTest extends DbzTestBase {
 
     private static HihokenshaDaichoManager createHihokenshaDaichoManager() {
         HihokenshaDaichoManager mock = mock(HihokenshaDaichoManager.class);
-        IOptional<HihokenshaDaichoModel> hihokenshaDaicho = DbOptional.ofNullable(createHihokenshaDaicho());
+        Optional<HihokenshaDaichoModel> hihokenshaDaicho = Optional.ofNullable(createHihokenshaDaicho());
         when(mock.get最新被保険者台帳(any(LasdecCode.class), any(ShikibetsuCode.class))).thenReturn(hihokenshaDaicho);
         return mock;
     }
 
     private static FukaManager createFukaManager() {
         FukaManager mock = mock(FukaManager.class);
-        IOptional<FukaModel> fuka = DbOptional.ofNullable(createFuka());
+        Optional<FukaModel> fuka = Optional.ofNullable(createFuka());
         when(mock.get最新介護賦課(any(FukaNendo.class), any(TsuchishoNo.class))).thenReturn(fuka);
         return mock;
     }
 
     private static HokenryoDankaiManager createHokenryoDankaiManager() {
         HokenryoDankaiManager mock = mock(HokenryoDankaiManager.class);
-        IOptional<HokenryoDankai> hokenryoDankai = DbOptional.ofNullable(createHokenryoDankai());
+        Optional<HokenryoDankai> hokenryoDankai = Optional.ofNullable(createHokenryoDankai());
         when(mock.get保険料段階(any(FukaNendo.class), any(LasdecCode.class), any(RString.class))).thenReturn(hokenryoDankai);
         return mock;
     }

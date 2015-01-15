@@ -18,8 +18,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.Comparators;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IBiConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 
 /**
  * {@link IItemList}の実装です。<br/>
@@ -158,17 +157,17 @@ public final class ItemList<E> implements IItemList<E>, Serializable {
     }
 
     @Override
-    public IOptional<E> findJustOne() {
+    public Optional<E> findJustOne() {
         return this.isJustOne()
-                ? DbOptional.of(_firstItem())
-                : DbOptional.<E>empty();
+                ? Optional.of(_firstItem())
+                : Optional.<E>empty();
     }
 
     @Override
-    public IOptional<E> findFirst() {
+    public Optional<E> findFirst() {
         return this.elements.isEmpty()
-                ? DbOptional.<E>empty()
-                : DbOptional.of(_firstItem());
+                ? Optional.<E>empty()
+                : Optional.of(_firstItem());
     }
 
     @Override
@@ -269,7 +268,7 @@ public final class ItemList<E> implements IItemList<E>, Serializable {
     }
 
     @Override
-    public <R, A> R collect(IDbCollector<? super E, A, R> collector) {
+    public <R, A> R collect(IItemCollector<? super E, A, R> collector) {
         A container = collector.container().get();
         IBiConsumer<A, ? super E> accumulator = collector.accumulator();
         for (E element : elements) {

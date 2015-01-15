@@ -4,8 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2002FukaEntityGenerator.*;
@@ -100,8 +99,8 @@ public class FukaDacTest {
             }
 
             @Test
-            public void データが見つかない検索条件を渡すと_IOptionalのemptyを返す() {
-                IOptional<FukaModel> empty = DbOptional.empty();
+            public void データが見つかない検索条件を渡すと_Optionalのemptyを返す() {
+                Optional<FukaModel> empty = Optional.empty();
                 assertThat(sut.select賦課ByKey(notFound調定年度, 賦課年度1, 通知書番号1, 処理日時1), is(empty));
             }
         }
@@ -182,7 +181,7 @@ public class FukaDacTest {
 
                 @Test
                 public void selectRecentlが返す直近データの調定年度は_調定年度_2002() {
-                    IOptional<FukaModel> insertedRecord = sut.select賦課Recently(
+                    Optional<FukaModel> insertedRecord = sut.select賦課Recently(
                             new FukaNendo(DEFAULT_賦課年度),
                             DEFAULT_被保険者番号,
                             DEFAULT_処理日時);
@@ -191,7 +190,7 @@ public class FukaDacTest {
 
                 @Test
                 public void selectRecentlが返す直近データの通知書番号は_通知書番号_2() {
-                    IOptional<FukaModel> insertedRecord = sut.select賦課Recently(
+                    Optional<FukaModel> insertedRecord = sut.select賦課Recently(
                             new FukaNendo(DEFAULT_賦課年度),
                             DEFAULT_被保険者番号,
                             DEFAULT_処理日時);
@@ -200,7 +199,7 @@ public class FukaDacTest {
 
                 @Test
                 public void selectRecentlが返す直近データの処理日時は_処理日時2002_2_2_2_2_2_2() {
-                    IOptional<FukaModel> insertedRecord = sut.select賦課Recently(
+                    Optional<FukaModel> insertedRecord = sut.select賦課Recently(
                             new FukaNendo(DEFAULT_賦課年度),
                             DEFAULT_被保険者番号,
                             DEFAULT_処理日時);
@@ -210,11 +209,11 @@ public class FukaDacTest {
 
             @Test
             public void 引数に該当する情報がない時_selectRecentlyは_emptyを返す() {
-                IOptional<FukaModel> insertedRecord = sut.select賦課Recently(
+                Optional<FukaModel> insertedRecord = sut.select賦課Recently(
                         notFound賦課年度,
                         DEFAULT_被保険者番号,
                         DEFAULT_処理日時);
-                IOptional<FukaModel> empty = DbOptional.empty();
+                Optional<FukaModel> empty = Optional.empty();
                 assertThat(insertedRecord, is(empty));
             }
         }

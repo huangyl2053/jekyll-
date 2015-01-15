@@ -13,8 +13,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEnt
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.helper.HihokenshaDaichoModelTestHelper;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -59,11 +58,11 @@ public class HihokenshaDaichoManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_被保険者台帳が返る() {
 
-            IOptional<HihokenshaDaichoModel> 被保険者台帳モデル = DbOptional.ofNullable(HihokenshaDaichoModelTestHelper.createModel());
+            Optional<HihokenshaDaichoModel> 被保険者台帳モデル = Optional.ofNullable(HihokenshaDaichoModelTestHelper.createModel());
 
             when(dac.select被保険者台帳ByKey(any(LasdecCode.class), any(HihokenshaNo.class), any(YMDHMS.class))).thenReturn(被保険者台帳モデル);
 
-            IOptional<HihokenshaDaichoModel> result = sut.find被保険者台帳(市町村コード, 被保険者番号, 処理日時);
+            Optional<HihokenshaDaichoModel> result = sut.find被保険者台帳(市町村コード, 被保険者番号, 処理日時);
 
             assertThat(result.get().get資格取得事由(), is(被保険者台帳モデル.get().get資格取得事由()));
         }
@@ -112,11 +111,11 @@ public class HihokenshaDaichoManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_被保険者台帳が返る() {
 
-            IOptional<HihokenshaDaichoModel> 被保険者台帳モデル = DbOptional.ofNullable(HihokenshaDaichoModelTestHelper.createModel());
+            Optional<HihokenshaDaichoModel> 被保険者台帳モデル = Optional.ofNullable(HihokenshaDaichoModelTestHelper.createModel());
 
             when(dac.select最新被保険者台帳(any(LasdecCode.class), any(ShikibetsuCode.class))).thenReturn(被保険者台帳モデル);
 
-            IOptional<HihokenshaDaichoModel> result = sut.get最新被保険者台帳(市町村コード, 識別コード);
+            Optional<HihokenshaDaichoModel> result = sut.get最新被保険者台帳(市町村コード, 識別コード);
 
             assertThat(result.get().get資格取得事由(), is(被保険者台帳モデル.get().get資格取得事由()));
         }
@@ -127,11 +126,11 @@ public class HihokenshaDaichoManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_被保険者台帳が返る() {
 
-            IOptional<HihokenshaDaichoModel> 被保険者台帳モデル = DbOptional.ofNullable(HihokenshaDaichoModelTestHelper.createModel());
+            Optional<HihokenshaDaichoModel> 被保険者台帳モデル = Optional.ofNullable(HihokenshaDaichoModelTestHelper.createModel());
 
             when(dac.select最新被保険者台帳(any(HihokenshaNo.class))).thenReturn(被保険者台帳モデル);
 
-            IOptional<HihokenshaDaichoModel> 被保険者台帳 = sut.get最新被保険者台帳(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号);
+            Optional<HihokenshaDaichoModel> 被保険者台帳 = sut.get最新被保険者台帳(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号);
 
             assertThat(被保険者台帳.get().get被保険者番号(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号));
         }

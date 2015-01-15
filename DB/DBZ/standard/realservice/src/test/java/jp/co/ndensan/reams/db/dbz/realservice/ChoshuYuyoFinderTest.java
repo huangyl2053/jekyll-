@@ -8,8 +8,7 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
@@ -57,12 +56,12 @@ public class ChoshuYuyoFinderTest {
     public static class find徴収猶予 extends DbzTestBase {
 
         @Test
-        public void find徴収猶予は_該当の情報がない時_IOptionalのemptyを返す() {
-            IOptional<ChoshuYuyoRelateModel> empty = DbOptional.empty();
+        public void find徴収猶予は_該当の情報がない時_Optionalのemptyを返す() {
+            Optional<ChoshuYuyoRelateModel> empty = Optional.empty();
 
             when(dac.select徴収猶予RelateByKeyAndState(any(ChoteiNendo.class), any(FukaNendo.class),
                     any(TsuchishoNo.class), any(RDateTime.class), any(GemmenChoshuYuyoStateKubun.class))).thenReturn(empty);
-            IOptional<ChoshuYuyoRelateModel> result = sut.find徴収猶予(
+            Optional<ChoshuYuyoRelateModel> result = sut.find徴収猶予(
                     調定年度, notFound賦課年度, DEFAULT_通知書番号, DEFAULT_処理日時, 状態区分);
 
             assertThat(result, is(empty));
@@ -70,12 +69,12 @@ public class ChoshuYuyoFinderTest {
 
         @Test
         public void find徴収猶予は_該当の情報がある時_該当情報を返す() {
-            IOptional<ChoshuYuyoRelateModel> model = DbOptional.of(createModel());
+            Optional<ChoshuYuyoRelateModel> model = Optional.of(createModel());
 
             when(dac.select徴収猶予RelateByKeyAndState(
                     調定年度, 賦課年度, DEFAULT_通知書番号, DEFAULT_処理日時, 状態区分)).thenReturn(model);
 
-            IOptional<ChoshuYuyoRelateModel> result = sut.find徴収猶予(
+            Optional<ChoshuYuyoRelateModel> result = sut.find徴収猶予(
                     調定年度, 賦課年度, DEFAULT_通知書番号, DEFAULT_処理日時, 状態区分);
 
             assertThat(result.get().get徴収猶予モデル().get賦課年度(), is(賦課年度));

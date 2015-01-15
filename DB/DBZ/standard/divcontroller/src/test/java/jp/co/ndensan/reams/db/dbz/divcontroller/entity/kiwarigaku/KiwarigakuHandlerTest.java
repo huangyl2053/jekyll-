@@ -17,8 +17,7 @@ import jp.co.ndensan.reams.db.dbz.business.config.TokuchoConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.model.helper.KibetsuChoteiKyotsuModelTestHelper;
@@ -344,7 +343,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
 
     private static KiwarigakuFinder createFinder() {
         KiwarigakuFinder mock = mock(KiwarigakuFinder.class);
-        IOptional<Kiwarigaku> 期割額 = DbOptional.ofNullable(new KiwarigakuCalculator(create期割額List().toList()).calculate());
+        Optional<Kiwarigaku> 期割額 = Optional.ofNullable(new KiwarigakuCalculator(create期割額List().toList()).calculate());
         when(mock.load期割額(any(ChoteiNendo.class), any(FukaNendo.class), any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(期割額);
         return mock;
     }

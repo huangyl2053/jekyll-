@@ -5,8 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2001ChoshuHohoEntityGenerator;
@@ -47,22 +46,22 @@ public class ChoshuHohoFinderTest {
     public static class find徴収方法 extends DbzTestBase {
 
         @Test
-        public void find徴収方法は_該当の情報がない時_IOptionalのemptyを返す() {
-            IOptional<ChoshuHohoModel> empty = DbOptional.empty();
+        public void find徴収方法は_該当の情報がない時_Optionalのemptyを返す() {
+            Optional<ChoshuHohoModel> empty = Optional.empty();
 
             when(dac.select徴収方法Recently(any(FukaNendo.class), any(HihokenshaNo.class))).thenReturn(empty);
-            IOptional<ChoshuHohoModel> result = sut.find徴収方法(notFound賦課年度, DEFAULT_被保険者番号);
+            Optional<ChoshuHohoModel> result = sut.find徴収方法(notFound賦課年度, DEFAULT_被保険者番号);
 
             assertThat(result, is(empty));
         }
 
         @Test
         public void find徴収方法は_該当の情報がある時_該当情報を返す() {
-            IOptional<ChoshuHohoModel> model = DbOptional.of(
+            Optional<ChoshuHohoModel> model = Optional.of(
                     new ChoshuHohoModel(DbT2001ChoshuHohoEntityGenerator.createDbT2001ChoshuHohoEntity()));
 
             when(dac.select徴収方法Recently(賦課年度, DEFAULT_被保険者番号)).thenReturn(model);
-            IOptional<ChoshuHohoModel> result = sut.find徴収方法(賦課年度, DEFAULT_被保険者番号);
+            Optional<ChoshuHohoModel> result = sut.find徴収方法(賦課年度, DEFAULT_被保険者番号);
 
             assertThat(result.get().get賦課年度(), is(賦課年度));
         }

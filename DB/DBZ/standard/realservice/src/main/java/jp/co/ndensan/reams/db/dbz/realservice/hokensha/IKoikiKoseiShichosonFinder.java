@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.realservice.hokensha;
 import jp.co.ndensan.reams.db.dbz.business.hokensha.IKoikiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ContainsKyuShichoson;
 import jp.co.ndensan.reams.db.dbz.business.hokensha.KoikiKoseiShichosons;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
@@ -33,5 +33,5 @@ public interface IKoikiKoseiShichosonFinder {
      * @param contains旧市町村 contains合併旧市町村
      * @return 広域構成市町村(旧市町村を含む)
      */
-    IOptional<IKoikiKoseiShichoson> find構成市町村(LasdecCode 市町村コード, ContainsKyuShichoson contains旧市町村);
+    Optional<IKoikiKoseiShichoson> find構成市町村(LasdecCode 市町村コード, ContainsKyuShichoson contains旧市町村);
 }

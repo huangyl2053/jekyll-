@@ -13,21 +13,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.util.function.DbFunction;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.MyFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IBiConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
- * {@link IDbCollector}の実装を集めたユーティリティです。
+ * {@link IItemCollector}の実装を集めたユーティリティです。
  *
  * @author N3327 三浦 凌
  */
-public final class DbCollectors {
+public final class ItemCollectors {
 
-    private DbCollectors() {
+    private ItemCollectors() {
     }
 
     private static void _requireNonNull(Object target, String name) {
@@ -45,11 +45,11 @@ public final class DbCollectors {
      * @param finisher 最後にコレクタの結果を変換するためのfunction
      * @return コレクタに仕上げの変換を付与したもの
      */
-    public static <T, A, R, RR> IDbCollector<T, A, RR> collectingAndThen(IDbCollector<T, A, R> downstream, IFunction<R, RR> finisher) {
-        return DbCollector.of(
+    public static <T, A, R, RR> IItemCollector<T, A, RR> collectingAndThen(IItemCollector<T, A, R> downstream, IFunction<R, RR> finisher) {
+        return ItemCollector.of(
                 downstream.container(),
                 downstream.accumulator(),
-                DbFunction.of(downstream.finisher()).andThen(finisher));
+                MyFunction.of(downstream.finisher()).andThen(finisher));
     }
 
     /**
@@ -58,10 +58,10 @@ public final class DbCollectors {
      * @param <T> 集積元の型, {@link List}が保持する要素の型
      * @return {@link List}へ集積するためのコレクタ
      */
-    public static <T> IDbCollector<T, ?, List<T>> toList() {
-        return DbCollector.of(
-                MySuppliers.<T>newArrayList(),
-                MyBiConsumers.<List, T>collection_add());
+    public static <T> IItemCollector<T, ?, List<T>> toList() {
+        return ItemCollector.of(
+                _Suppliers.<T>newArrayList(),
+                _BiConsumers.<List, T>collection_add());
     }
 
     /**
@@ -70,10 +70,10 @@ public final class DbCollectors {
      * @param <T> 集積元の型,{@link IItemList}が保持する要素の型
      * @return {@link IItemList}へ集積するためのコレクタ
      */
-    public static <T> IDbCollector<T, ?, IItemList<T>> toIItemList() {
-        return DbCollector.of(
-                MySuppliers.<T>newArrayList(),
-                MyBiConsumers.<List, T>collection_add(),
+    public static <T> IItemCollector<T, ?, IItemList<T>> toIItemList() {
+        return ItemCollector.of(
+                _Suppliers.<T>newArrayList(),
+                _BiConsumers.<List, T>collection_add(),
                 new IFunction<List<T>, IItemList<T>>() {
                     @Override
                     public IItemList<T> apply(List<T> t) {
@@ -89,10 +89,10 @@ public final class DbCollectors {
      * @param comparator {@link Comparator}
      * @return 指定の{@link Comparator}でソートした{@link IItemList}へ集積するためのコレクタ
      */
-    public static <T> IDbCollector<T, ?, IItemList<T>> sortBy(final Comparator<? super T> comparator) {
-        return DbCollector.of(
-                MySuppliers.<T>newArrayList(),
-                MyBiConsumers.<List, T>collection_add(),
+    public static <T> IItemCollector<T, ?, IItemList<T>> sortBy(final Comparator<? super T> comparator) {
+        return ItemCollector.of(
+                _Suppliers.<T>newArrayList(),
+                _BiConsumers.<List, T>collection_add(),
                 new IFunction<List<T>, IItemList<T>>() {
                     @Override
                     public IItemList<T> apply(List<T> t) {
@@ -102,38 +102,38 @@ public final class DbCollectors {
     }
 
     /**
-     * 指定の{@link Comparator}でソートし先頭の要素を{@link IOptional}で取得するコレクタを生成し、返します。
+     * 指定の{@link Comparator}でソートし先頭の要素を{@link Optional}で取得するコレクタを生成し、返します。
      *
-     * @param <T> 集積元の型,{@link IOptional}が保持する要素の型
+     * @param <T> 集積元の型,{@link Optional}が保持する要素の型
      * @param comparator {@link Comparator}
-     * @return 指定の{@link Comparator}でソートし先頭の要素を{@link IOptional}で取得するコレクタ
+     * @return 指定の{@link Comparator}でソートし先頭の要素を{@link Optional}で取得するコレクタ
      */
-    public static <T> IDbCollector<T, ?, IOptional<T>> minBy(final Comparator<? super T> comparator) {
-        return DbCollector.of(
-                MySuppliers.<T>newArrayList(),
-                MyBiConsumers.<List, T>collection_add(),
-                new IFunction<List<T>, IOptional<T>>() {
+    public static <T> IItemCollector<T, ?, Optional<T>> minBy(final Comparator<? super T> comparator) {
+        return ItemCollector.of(
+                _Suppliers.<T>newArrayList(),
+                _BiConsumers.<List, T>collection_add(),
+                new IFunction<List<T>, Optional<T>>() {
                     @Override
-                    public IOptional<T> apply(List<T> t) {
+                    public Optional<T> apply(List<T> t) {
                         return ItemList.of(t).sorted(comparator).findFirst();
                     }
                 });
     }
 
     /**
-     * 指定の{@link Comparator}でソートし最後の要素を{@link IOptional}で取得するコレクタを生成し、返します。
+     * 指定の{@link Comparator}でソートし最後の要素を{@link Optional}で取得するコレクタを生成し、返します。
      *
-     * @param <T> 集積元の型,{@link IOptional}が保持する要素の型
+     * @param <T> 集積元の型,{@link Optional}が保持する要素の型
      * @param comparator {@link Comparator}
-     * @return 指定の{@link Comparator}でソートし最後の要素を{@link IOptional}で取得するコレクタ
+     * @return 指定の{@link Comparator}でソートし最後の要素を{@link Optional}で取得するコレクタ
      */
-    public static <T> IDbCollector<T, ?, IOptional<T>> maxBy(final Comparator<? super T> comparator) {
-        return DbCollector.of(
-                MySuppliers.<T>newArrayList(),
-                MyBiConsumers.<List, T>collection_add(),
-                new IFunction<List<T>, IOptional<T>>() {
+    public static <T> IItemCollector<T, ?, Optional<T>> maxBy(final Comparator<? super T> comparator) {
+        return ItemCollector.of(
+                _Suppliers.<T>newArrayList(),
+                _BiConsumers.<List, T>collection_add(),
+                new IFunction<List<T>, Optional<T>>() {
                     @Override
-                    public IOptional<T> apply(List<T> t) {
+                    public Optional<T> apply(List<T> t) {
                         return ItemList.of(t).sorted(Collections.reverseOrder(comparator)).findFirst();
                     }
                 });
@@ -149,18 +149,18 @@ public final class DbCollectors {
      * @param valueMapper 値へマッピングするfunction
      * @return {@link IItemList}へ集積するためのコレクタ
      */
-    public static <T, K, V> IDbCollector<T, ?, Map<K, V>> toMap(
+    public static <T, K, V> IItemCollector<T, ?, Map<K, V>> toMap(
             final IFunction<? super T, ? extends K> keyMapper, final IFunction<? super T, ? extends V> valueMapper) {
         _requireNonNull(keyMapper, "keyMapper");
         _requireNonNull(valueMapper, "valueMapper");
-        ISupplier<Map<K, V>> container = MySuppliers.newHashMap();
+        ISupplier<Map<K, V>> container = _Suppliers.newHashMap();
         IBiConsumer<Map<K, V>, T> accumulator = new IBiConsumer<Map<K, V>, T>() {
             @Override
             public void accept(Map<K, V> t, T u) {
                 t.put(keyMapper.apply(u), valueMapper.apply(u));
             }
         };
-        return DbCollector.of(container, accumulator);
+        return ItemCollector.of(container, accumulator);
     }
 
     /**
@@ -171,8 +171,8 @@ public final class DbCollectors {
      * @param keyMapper キーへマッピングするfunction
      * @return グルーピング用のコレクタ
      */
-    public static <T, K> IDbCollector<T, ?, Map<K, IItemList<T>>> groupingBy(final IFunction<T, K> keyMapper) {
-        return groupingBy(keyMapper, DbCollectors.<T>toIItemList());
+    public static <T, K> IItemCollector<T, ?, Map<K, IItemList<T>>> groupingBy(final IFunction<T, K> keyMapper) {
+        return groupingBy(keyMapper, ItemCollectors.<T>toIItemList());
     }
 
     /**
@@ -186,10 +186,10 @@ public final class DbCollectors {
      * @param downstream 結果を生成するコレクタ
      * @return グルーピング用のコレクタ
      */
-    public static <T, K, A, D> IDbCollector<T, ?, Map<K, D>> groupingBy(final IFunction<T, K> classifier,
-            final IDbCollector<? super T, A, D> downstream) {
+    public static <T, K, A, D> IItemCollector<T, ?, Map<K, D>> groupingBy(final IFunction<T, K> classifier,
+            final IItemCollector<? super T, A, D> downstream) {
         _requireNonNull(classifier, "classifier");
-        ISupplier<Map<K, A>> container = MySuppliers.newHashMap();
+        ISupplier<Map<K, A>> container = _Suppliers.newHashMap();
         final ISupplier<A> downstreamContainer = downstream.container();
         IBiConsumer<Map<K, A>, T> accumulator = new IBiConsumer<Map<K, A>, T>() {
             @Override
@@ -209,7 +209,7 @@ public final class DbCollectors {
                 return map;
             }
         };
-        return DbCollector.of(container, accumulator, finisher);
+        return ItemCollector.of(container, accumulator, finisher);
     }
 
     /**
@@ -253,9 +253,9 @@ public final class DbCollectors {
         };
     }
 
-    private static final class MySuppliers {
+    private static final class _Suppliers {
 
-        private MySuppliers() {
+        private _Suppliers() {
         }
 
         /**
@@ -290,9 +290,9 @@ public final class DbCollectors {
         }
     }
 
-    private static final class MyBiConsumers {
+    private static final class _BiConsumers {
 
-        private MyBiConsumers() {
+        private _BiConsumers() {
         }
 
         /**

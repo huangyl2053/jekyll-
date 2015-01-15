@@ -14,8 +14,7 @@ import jp.co.ndensan.reams.db.dbz.business.config.ShuruiShikyuGendoGetConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HihokenshaShikakuHakkoDiv.発行証タイプ.被保険者証;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HihokenshaShikakuHakkoDiv.発行証タイプ.資格者証;
@@ -95,8 +94,8 @@ public class HihokenshaShikakuHakkoHandler {
 
         set交付日交付事由(is直前履歴);
 
-        IOptional<NinteiShinseiKekkaModel> 認定申請結果optional = load認定申請結果(被保険者番号, is直前履歴);
-        IOptional<HihokenshaDaichoModel> 被保険者台帳optional = new HihokenshaDaichoFinder().find直近被保険者台帳(被保険者番号);
+        Optional<NinteiShinseiKekkaModel> 認定申請結果optional = load認定申請結果(被保険者番号, is直前履歴);
+        Optional<HihokenshaDaichoModel> 被保険者台帳optional = new HihokenshaDaichoFinder().find直近被保険者台帳(被保険者番号);
         if (!認定申請結果optional.isPresent()
                 || !被保険者台帳optional.isPresent()) {
             return;
@@ -129,20 +128,20 @@ public class HihokenshaShikakuHakkoHandler {
         }
     }
 
-    private IOptional<NinteiShinseiKekkaModel> load認定申請結果(HihokenshaNo 被保険者番号, boolean is直前履歴) {
+    private Optional<NinteiShinseiKekkaModel> load認定申請結果(HihokenshaNo 被保険者番号, boolean is直前履歴) {
 
         IItemList<NinteiShinseiKekkaModel> 認定申請結果履歴 = new NinteiShinseiKekkaFinder().find要介護認定申請結果(被保険者番号);
 
         if (認定申請結果履歴.isEmpty()) {
-            return DbOptional.empty();
+            return Optional.empty();
         }
         if (認定申請結果履歴.isJustOne()
                 && is直前履歴) {
-            return DbOptional.empty();
+            return Optional.empty();
         }
 
         if (is直前履歴) {
-            return DbOptional.of(認定申請結果履歴.toList().get(1));
+            return Optional.of(認定申請結果履歴.toList().get(1));
         }
         return 認定申請結果履歴.findFirst();
     }

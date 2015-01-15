@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.KanendoConfig;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320004.ChoshuYuyoKikanDiv;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuChoshuYuyoModel;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -75,7 +75,7 @@ public class KibetsuChoshuYuyo {
         setKibetsu(createIndexMap(期列));
     }
 
-    private boolean are調定年度and賦課年度SameAge(IOptional<KibetsuChoshuYuyoModel> model) {
+    private boolean are調定年度and賦課年度SameAge(Optional<KibetsuChoshuYuyoModel> model) {
         return model.get().get調定年度().value().equals(model.get().get賦課年度().value());
     }
 

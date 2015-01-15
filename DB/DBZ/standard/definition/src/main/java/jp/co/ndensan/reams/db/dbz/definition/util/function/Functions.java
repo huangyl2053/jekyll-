@@ -43,7 +43,7 @@ public final class Functions {
 
     /**
      * あるオブジェクトをそのオブジェクトへ変換する{@link IFunction IFunction}を返します。<br/>
-     * このFunctionは、例えば、{@link IOptional#map(jp.co.ndensan.reams.db.dbz.model.util.function.IFunction) IOptional#map()}などで、
+     * このFunctionは、例えば、{@link Optional#map(jp.co.ndensan.reams.db.dbz.model.util.function.IFunction) Optional#map()}などで、
      * 変換元のオブジェクトを親オブジェクトへ変換する際に用いることができます。
      *
      * @param <T> オブジェクトの型

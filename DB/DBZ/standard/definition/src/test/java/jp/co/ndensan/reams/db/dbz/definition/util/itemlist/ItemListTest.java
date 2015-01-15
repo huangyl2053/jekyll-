@@ -330,19 +330,19 @@ public class ItemListTest extends DbzTestBase {
         private ItemList<RString> sut;
 
         @Test
-        public void findJustOneは_生成時に渡したlistがemptyの時_空のIOptionalを返す() {
+        public void findJustOneは_生成時に渡したlistがemptyの時_空のOptionalを返す() {
             sut = ItemList.of(Collections.<RString>emptyList());
             assertThat(sut.findJustOne().isPresent(), is(false));
         }
 
         @Test
-        public void findJustOneは_生成時に渡したlistのsizeが1の時_その要素を持ったIOptionalを返す() {
+        public void findJustOneは_生成時に渡したlistのsizeが1の時_その要素を持ったOptionalを返す() {
             sut = ItemList.of(asList(VAL1));
             assertThat(sut.findJustOne().get(), is(VAL1));
         }
 
         @Test
-        public void findJustOneは_生成時に渡したlistのsizeが2の時_空のIOptionalを返す() {
+        public void findJustOneは_生成時に渡したlistのsizeが2の時_空のOptionalを返す() {
             sut = ItemList.of(asList(VAL1, VAL2));
             assertThat(sut.findJustOne().isPresent(), is(false));
         }
@@ -353,19 +353,19 @@ public class ItemListTest extends DbzTestBase {
         private ItemList<RString> sut;
 
         @Test
-        public void findFirstは_生成時に渡したlistがemptyの時_空のIOptionalを返す() {
+        public void findFirstは_生成時に渡したlistがemptyの時_空のOptionalを返す() {
             sut = ItemList.of(Collections.<RString>emptyList());
             assertThat(sut.findFirst().isPresent(), is(false));
         }
 
         @Test
-        public void findFirstは_生成時に渡したlistのsizeが1の時_その要素を持ったIOptionalを返す() {
+        public void findFirstは_生成時に渡したlistのsizeが1の時_その要素を持ったOptionalを返す() {
             sut = ItemList.of(asList(VAL1));
             assertThat(sut.findFirst().get(), is(VAL1));
         }
 
         @Test
-        public void findFisrtは_生成時に渡したlistのsizeが2の時_要素を持ったIOptionalを返す() {
+        public void findFisrtは_生成時に渡したlistのsizeが2の時_要素を持ったOptionalを返す() {
             sut = ItemList.of(asList(VAL1, VAL2));
             assertThat(sut.findFirst().isPresent(), is(true));
         }

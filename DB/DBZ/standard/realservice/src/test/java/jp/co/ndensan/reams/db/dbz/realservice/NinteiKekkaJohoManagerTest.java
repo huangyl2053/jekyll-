@@ -11,8 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5002NinteiKekkaJohoEnti
 import jp.co.ndensan.reams.db.dbz.model.NinteiKekkaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.NinteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -51,11 +50,11 @@ public class NinteiKekkaJohoManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_要介護認定結果情報が返る() {
 
-            IOptional<NinteiKekkaJohoModel> 要介護認定結果情報モデル = DbOptional.ofNullable(createModel());
+            Optional<NinteiKekkaJohoModel> 要介護認定結果情報モデル = Optional.ofNullable(createModel());
 
             when(dac.selectByKey(any(ShinseishoKanriNo.class), any(YMDHMS.class))).thenReturn(要介護認定結果情報モデル);
 
-            IOptional<NinteiKekkaJohoModel> 要介護認定結果情報 = sut.get要介護認定結果情報(
+            Optional<NinteiKekkaJohoModel> 要介護認定結果情報 = sut.get要介護認定結果情報(
                     new ShinseishoKanriNo(DbT5002NinteiKekkaJohoEntityGenerator.DEFAULT_申請書管理番号),
                     DbT5002NinteiKekkaJohoEntityGenerator.DEFAULT_処理日時);
 
@@ -90,11 +89,11 @@ public class NinteiKekkaJohoManagerTest {
         @Test
         public void データが見つかる検索条件を指定した場合_要介護認定結果情報が返る() {
 
-            IOptional<NinteiKekkaJohoModel> 要介護認定結果情報モデル = DbOptional.ofNullable(createModel());
+            Optional<NinteiKekkaJohoModel> 要介護認定結果情報モデル = Optional.ofNullable(createModel());
 
             when(dac.select直近要介護認定結果情報By申請書管理番号(any(ShinseishoKanriNo.class))).thenReturn(要介護認定結果情報モデル);
 
-            IOptional<NinteiKekkaJohoModel> 要介護認定結果情報 = sut.get要介護認定結果情報(
+            Optional<NinteiKekkaJohoModel> 要介護認定結果情報 = sut.get要介護認定結果情報(
                     new ShinseishoKanriNo(DbT5002NinteiKekkaJohoEntityGenerator.DEFAULT_申請書管理番号));
 
             // 任意の項目が一致するテストケースを記述してください。

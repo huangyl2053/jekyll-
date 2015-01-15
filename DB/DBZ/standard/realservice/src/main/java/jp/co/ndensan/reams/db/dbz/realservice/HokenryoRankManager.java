@@ -8,8 +8,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoRankModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.HokenryoRankDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -49,9 +48,9 @@ public class HokenryoRankManager {
      * @return HokenryoRankModel
      */
     @Transaction
-    public IOptional<HokenryoRankModel> get保険料ランク(FukaNendo 賦課年度, LasdecCode 市町村コード) {
+    public Optional<HokenryoRankModel> get保険料ランク(FukaNendo 賦課年度, LasdecCode 市町村コード) {
 
-        return DbOptional.ofNullable(dac.select保険料ランクByKey(賦課年度, 市町村コード));
+        return Optional.ofNullable(dac.select保険料ランクByKey(賦課年度, 市町村コード));
     }
 
     /**

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2011RankJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2011RankJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.model.fuka.RankJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.RankJohoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -59,7 +59,7 @@ public class RankJohoManagerTest {
 
             when(dac.selectランク情報ByKey(any(FukaNendo.class), any(RankKubun.class))).thenReturn(ランク情報モデル);
 
-            IOptional<RankJohoModel> ランク情報 = sut.getランク情報(賦課年度1, ランク区分1);
+            Optional<RankJohoModel> ランク情報 = sut.getランク情報(賦課年度1, ランク区分1);
 
             assertThat(ランク情報.get().get賦課年度(), is(賦課年度1));
         }

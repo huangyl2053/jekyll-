@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.business.viewstate.MaeRirekiKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.SanteiState;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.ShoriDateModel;
 import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
 import jp.co.ndensan.reams.db.dbz.model.relate.fuka.ChoshuYuyoRelateModel;
@@ -93,7 +93,7 @@ public final class ViewStateKeyCreator {
     private static SanteiState checkSanteiState(FukaModel fukaModel) {
         final RString SERIAL_NUMBER = new RString("0001");
 
-        IOptional<ShoriDateModel> modeloid = new ShoriDateFinder().find処理日付(
+        Optional<ShoriDateModel> modeloid = new ShoriDateFinder().find処理日付(
                 SubGyomuCode.DBB介護賦課, fukaModel.get賦課市町村コード(), ShoriName.本算定賦課,
                 SERIAL_NUMBER, fukaModel.get賦課年度().value(), SERIAL_NUMBER);
 
@@ -115,7 +115,7 @@ public final class ViewStateKeyCreator {
     }
 
     private static boolean is徴収猶予あり(FukaModel fukaModel) {
-        IOptional<ChoshuYuyoRelateModel> modeloid = new ChoshuYuyoFinder().find徴収猶予(
+        Optional<ChoshuYuyoRelateModel> modeloid = new ChoshuYuyoFinder().find徴収猶予(
                 fukaModel.get調定年度(), fukaModel.get賦課年度(),
                 fukaModel.get通知書番号(), fukaModel.get処理日時(), GemmenChoshuYuyoStateKubun.決定_承認);
 

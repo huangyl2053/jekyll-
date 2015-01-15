@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
@@ -50,7 +50,7 @@ public class ChoshuYuyoFinder {
      * @param 状態区分 状態区分
      * @return 徴収猶予Relateモデル
      */
-    public IOptional<ChoshuYuyoRelateModel> find徴収猶予(ChoteiNendo 調定年度, FukaNendo 賦課年度,
+    public Optional<ChoshuYuyoRelateModel> find徴収猶予(ChoteiNendo 調定年度, FukaNendo 賦課年度,
             TsuchishoNo 通知書番号, RDateTime 処理日時, GemmenChoshuYuyoStateKubun 状態区分) {
 
         return dac.select徴収猶予RelateByKeyAndState(調定年度, 賦課年度, 通知書番号, 処理日時, 状態区分);

@@ -14,8 +14,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7111ServiceShuruiShikyuGendoGa
 import jp.co.ndensan.reams.db.dbz.model.ServiceShuruiShikyuGendoGakuModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7111ServiceShuruiShikyuGendoGakuDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -54,7 +53,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
      * @return ServiceShuruiShikyuGendoGakuModel
      */
     @Transaction
-    public IOptional<ServiceShuruiShikyuGendoGakuModel> selectByKey(ServiceShuruiCode サービス種類コード,
+    public Optional<ServiceShuruiShikyuGendoGakuModel> selectByKey(ServiceShuruiCode サービス種類コード,
             IYokaigoJotaiKubun 要介護状態区分,
             FlexibleYearMonth 適用開始年月,
             YMDHMS 処理日時) {
@@ -64,7 +63,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
         requireNonNull(適用開始年月, UrSystemErrorMessages.値がnull.getReplacedMessage("適用開始年月"));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
-        return DbOptional.ofNullable(createModel(サービス種類支給限度額Dac.selectByKey(サービス種類コード, 要介護状態区分.getCode(), 適用開始年月, 処理日時)));
+        return Optional.ofNullable(createModel(サービス種類支給限度額Dac.selectByKey(サービス種類コード, 要介護状態区分.getCode(), 適用開始年月, 処理日時)));
     }
 
     /**
