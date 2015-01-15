@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbz.model.KiwarigakuMeisai;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbz.model.fuka.KiwarigakuMeisai;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static java.util.Objects.requireNonNull;
@@ -31,6 +31,11 @@ public class KiwarigakuCalculator {
         this.期割額明細 = requireNonNull(期割額明細, UrSystemErrorMessages.値がnull.getReplacedMessage("期割額明細"));
     }
 
+    /**
+     * 期割額を計算して返します。
+     *
+     * @return 期割額
+     */
     public Kiwarigaku calculate() {
         Decimal 特徴期別額合計 = Decimal.ZERO;
         Decimal 特徴納付額合計 = Decimal.ZERO;

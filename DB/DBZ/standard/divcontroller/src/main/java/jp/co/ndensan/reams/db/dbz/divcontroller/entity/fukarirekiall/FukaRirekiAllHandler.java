@@ -12,16 +12,17 @@ import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.model.FukaModel;
-import jp.co.ndensan.reams.db.dbz.realservice.FukaShokaiFinder;
+import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
+import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
 import jp.co.ndensan.reams.db.dbz.realservice.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbz.realservice.KiwarigakuFinder;
 import jp.co.ndensan.reams.ur.urz.divcontroller.helper.PanelSessionAccessor;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -32,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class FukaRirekiAllHandler {
 
     private final FukaRirekiAllDiv div;
-    private final FukaShokaiFinder fukaFinder;
+    private final FukaManager fukaFinder;
     private final HokenryoDankaiManager dankaiManager;
     private final KiwarigakuFinder kiwariFinder;
 
@@ -45,7 +46,7 @@ public class FukaRirekiAllHandler {
      */
     public FukaRirekiAllHandler(FukaRirekiAllDiv div) {
         this.div = div;
-        this.fukaFinder = new FukaShokaiFinder();
+        this.fukaFinder = new FukaManager();
         this.dankaiManager = new HokenryoDankaiManager();
         this.kiwariFinder = new KiwarigakuFinder();
     }
@@ -59,7 +60,7 @@ public class FukaRirekiAllHandler {
      * @param kiwariFinder 期割額Finder
      */
     FukaRirekiAllHandler(
-            FukaRirekiAllDiv div, FukaShokaiFinder fukaShokaiFinder, HokenryoDankaiManager dankaiManager, KiwarigakuFinder kiwariFinder) {
+            FukaRirekiAllDiv div, FukaManager fukaShokaiFinder, HokenryoDankaiManager dankaiManager, KiwarigakuFinder kiwariFinder) {
         this.div = div;
         this.fukaFinder = fukaShokaiFinder;
         this.dankaiManager = dankaiManager;
@@ -85,7 +86,7 @@ public class FukaRirekiAllHandler {
      * @param 賦課年度 賦課年度
      * @return 表示件数
      */
-    public int load(HihokenshaNo 被保険者番号, FlexibleYear 賦課年度) {
+    public int load(HihokenshaNo 被保険者番号, FukaNendo 賦課年度) {
         IItemList<FukaModel> modelList = fukaFinder.load全賦課履歴(被保険者番号, 賦課年度);
         PanelSessionAccessor.put(div, SESSION_NAME, ItemList.newItemList(modelList));
         return set全賦課履歴(modelList);
@@ -100,7 +101,7 @@ public class FukaRirekiAllHandler {
      * @param 通知書番号 通知書番号
      * @return 表示件数
      */
-    public int reload(HihokenshaNo 被保険者番号, FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
+    public int reload(HihokenshaNo 被保険者番号, ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号) {
         load(被保険者番号);
         return setSelectedRow(調定年度, 賦課年度, 通知書番号);
     }
@@ -117,8 +118,8 @@ public class FukaRirekiAllHandler {
             return 賦課履歴;
         } else {
             dgFukaRirekiAll_Row row = rowList.get(0);
-            FlexibleYear 賦課年度 = new FlexibleYear(row.getFukaNendo());
-            FlexibleYear 調定年度 = new FlexibleYear(row.getChoteiNendo());
+            FukaNendo 賦課年度 = new FukaNendo(row.getFukaNendo().toString());
+            ChoteiNendo 調定年度 = new ChoteiNendo(row.getChoteiNendo().toString());
             TsuchishoNo 通知書番号 = new TsuchishoNo(row.getTsuchishoNo());
             return new FukaRireki(賦課履歴.get賦課履歴(賦課年度, 調定年度, 通知書番号).toList());
         }
@@ -130,16 +131,16 @@ public class FukaRirekiAllHandler {
         for (FukaModel model : new FukaRireki(modelList.toList()).getグループ化賦課履歴()) {
 
             // TODO N8156 宮本 康 テーブルに市町村コードが追加され次第、modelから取得するように変更する
-            IOptional<HokenryoDankai> 保険料段階 = dankaiManager.get保険料段階(model.get賦課年度(), LasdecCode.EMPTY, model.get保険料段階());
-            IOptional<Kiwarigaku> 期割額 = kiwariFinder.load期割額(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get処理日時());
+            Optional<HokenryoDankai> 保険料段階 = dankaiManager.get保険料段階(model.get賦課年度(), LasdecCode.EMPTY, model.get保険料段階());
+            Optional<Kiwarigaku> 期割額 = kiwariFinder.load期割額(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get処理日時());
 
             if (!期割額.isPresent()) {
                 continue;
             }
 
             rowList.add(new dgFukaRirekiAll_Row(
-                    model.get調定年度().toDateString(),
-                    model.get賦課年度().toDateString(),
+                    model.get調定年度().value().toDateString(),
+                    model.get賦課年度().value().toDateString(),
                     model.get通知書番号().value(),
                     保険料段階.get().edit表示用保険料段階(),
                     new RString(model.get減免前介護保険料_年額().toString()),
@@ -154,11 +155,11 @@ public class FukaRirekiAllHandler {
         return div.getDgFukaRirekiAll().getDataSource().size();
     }
 
-    private int setSelectedRow(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
+    private int setSelectedRow(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号) {
         List<dgFukaRirekiAll_Row> selectedItem = new ArrayList<>();
         for (dgFukaRirekiAll_Row row : div.getDgFukaRirekiAll().getDataSource()) {
-            if (row.getChoteiNendo().equals(調定年度.toDateString())
-                    && row.getFukaNendo().equals(賦課年度.toDateString())
+            if (row.getChoteiNendo().equals(調定年度.value().toDateString())
+                    && row.getFukaNendo().equals(賦課年度.value().toDateString())
                     && row.getTsuchishoNo().equals(通知書番号.value())) {
                 selectedItem.add(row);
             }

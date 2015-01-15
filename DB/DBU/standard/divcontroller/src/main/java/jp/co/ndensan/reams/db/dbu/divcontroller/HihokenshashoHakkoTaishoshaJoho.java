@@ -95,7 +95,7 @@ public class HihokenshashoHakkoTaishoshaJoho {
             panel.getCcdKaigoShikakuKihon().getTxtShutokuYmd().clearValue();
         } else {
             panel.getCcdKaigoShikakuKihon().getTxtShutokuYmd().
-                    setValue(ymlData.getAsRDate("shutokuymd"));
+                    setValue(ymlData.getAsFlexibleDate("shutokuymd"));
         }
 
         if (ymlData.getAsRString("shutokujiyu").toString().isEmpty()) {
@@ -109,7 +109,7 @@ public class HihokenshashoHakkoTaishoshaJoho {
             panel.getCcdKaigoShikakuKihon().getTxtSoshitsuYmd().clearValue();
         } else {
             panel.getCcdKaigoShikakuKihon().getTxtSoshitsuYmd().
-                    setValue(ymlData.getAsRDate("soshitsuymd"));
+                    setValue(ymlData.getAsFlexibleDate("soshitsuymd"));
         }
 
         if (ymlData.getAsRString("soshitsujiyu").toString().isEmpty()) {

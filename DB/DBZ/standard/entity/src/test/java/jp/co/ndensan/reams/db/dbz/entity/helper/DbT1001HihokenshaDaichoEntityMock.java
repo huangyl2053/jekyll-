@@ -31,8 +31,7 @@ import static org.mockito.Mockito.*;
 public final class DbT1001HihokenshaDaichoEntityMock {
 
     /**
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の
-     * {@link org.mockito.Mockito#spy(java.lang.Object)  スパイインスタンス}を返します。
+     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の {@link org.mockito.Mockito#spy(java.lang.Object)  スパイインスタンス}を返します。
      *
      * @return DbT1001HihokenshaDaichoEntityのスパイ
      */
@@ -53,7 +52,7 @@ public final class DbT1001HihokenshaDaichoEntityMock {
         entity.setShikibetsuCode(new ShikibetsuCode("0000000001"));
         entity.setShoriTimestamp(new YMDHMS("20140328000000"));
         entity.setHihokennshaKubunCode(new Code("1").value());
-        entity.setIchigoHihokenshaNenreiTotatsuYMD(new FlexibleDate("20140328"));
+        entity.setIchigoShikakuShutokuYMD(new FlexibleDate("20140328"));
         entity.setShikakuShutokuJiyuCode(ShikakuShutokuJiyu.年齢到達.getCode());
         entity.setShikakuShutokuTodokedeYMD(new FlexibleDate("20130327"));
         entity.setShikakuShutokuYMD(new FlexibleDate("20130327"));

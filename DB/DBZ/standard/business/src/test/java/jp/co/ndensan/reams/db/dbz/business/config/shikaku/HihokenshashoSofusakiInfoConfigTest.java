@@ -22,7 +22,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * {@link jp.co.ndensan.reams.db.dba.business.config.HihokenshashoSofusakiInfoConfig}のテストです。
+ * {@link HihokenshashoSofusakiInfoConfig}のテストです。
  *
  * @author n8178 城間篤人
  */
@@ -55,7 +55,6 @@ public class HihokenshashoSofusakiInfoConfigTest {
             MojigireControlType result = sut.get外部帳票文字切れ制御方法();
             assertThat(result, is(MojigireControlType.印字可能範囲まで印字する));
         }
-
     }
 
     private static IUrBusinessConfig createBusinessConfigMock() {

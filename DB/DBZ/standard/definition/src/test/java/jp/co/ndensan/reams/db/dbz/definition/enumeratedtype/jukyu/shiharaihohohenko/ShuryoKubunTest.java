@@ -28,9 +28,16 @@ public class ShuryoKubunTest {
 
         @Test
         public void toRStringは_nameをRStringへ変換した物を返す() {
-            ShuryoKubun sut = ShuryoKubun.弁明書受理;
+            ShuryoKubun sut = ShuryoKubun.終了申請書受理;
             assertThat(sut.toRString(), is(new RString(sut.name())));
         }
+
+        @Test
+        public void toRStringは_EMPTYの時_RStringEMPTYを返す() {
+            ShuryoKubun sut = ShuryoKubun.EMPTY;
+            assertThat(sut.toRString(), is(RString.EMPTY));
+        }
+
     }
 
     public static class toValue extends DbzTestBase {
@@ -45,7 +52,7 @@ public class ShuryoKubunTest {
 
         @Test(expected = IllegalArgumentException.class)
         public void toValueは_引数と同じ値のcodeを持つオブジェクトが無い時_IllegalArgumentExceptionをスローする() {
-            sut.toValue(null);
+            sut.toValue(new RString("100"));
         }
     }
 }

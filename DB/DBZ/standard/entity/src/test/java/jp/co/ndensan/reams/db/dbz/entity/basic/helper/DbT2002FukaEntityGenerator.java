@@ -4,12 +4,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.ChoteiJiyu;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHM;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -18,9 +19,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 介護賦課エンティティのテスト用インスタンスを作成する補助クラスです。
+ * 賦課エンティティのテスト用インスタンスを作成する補助クラスです。
  *
- * @author LDNS 鄭雪双
+ * @author n3317 塚田萌
  */
 public final class DbT2002FukaEntityGenerator {
 
@@ -28,10 +29,19 @@ public final class DbT2002FukaEntityGenerator {
     public static final FlexibleYear DEFAULT_賦課年度 = new FlexibleYear("2014");
     public static final TsuchishoNo DEFAULT_通知書番号 = new TsuchishoNo(new RString("2"));
     public static final RDateTime DEFAULT_処理日時 = RDateTime.of(2014, 9, 01, 10, 20, 30, 123);
-    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("2"));
+    public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("0000000002"));
     public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("000001234567890");
     public static final SetaiCode DEFAULT_世帯コード = new SetaiCode(new RString("2"));
     public static final int DEFAULT_世帯員数 = 1;
+    public static final FlexibleDate DEFAULT_資格取得日 = new FlexibleDate("20140402");
+    public static final RString DEFAULT_資格取得事由 = new RString("1");
+    public static final FlexibleDate DEFAULT_資格喪失日 = new FlexibleDate("20140402");
+    public static final RString DEFAULT_資格喪失事由 = new RString("1");
+    public static final RString DEFAULT_生活保護扶助種類 = new RString("1");
+    public static final FlexibleDate DEFAULT_生保開始日 = new FlexibleDate("20140402");
+    public static final FlexibleDate DEFAULT_生保廃止日 = new FlexibleDate("20140402");
+    public static final FlexibleDate DEFAULT_老年開始日 = new FlexibleDate("20140402");
+    public static final FlexibleDate DEFAULT_老年廃止日 = new FlexibleDate("20140402");
     public static final FlexibleDate DEFAULT_賦課期日 = new FlexibleDate("20140402");
     public static final RString DEFAULT_課税区分 = new RString("1");
     public static final RString DEFAULT_世帯課税区分 = new RString("1");
@@ -46,11 +56,11 @@ public final class DbT2002FukaEntityGenerator {
     public static final Decimal DEFAULT_算定年額保険料2 = new Decimal(1);
     public static final FlexibleYearMonth DEFAULT_月割開始年月2 = new FlexibleYearMonth(new RString("201406"));
     public static final FlexibleYearMonth DEFAULT_月割終了年月2 = new FlexibleYearMonth(new RString("201406"));
-    public static final YMDHM DEFAULT_調定日時 = new YMDHM(new RString("201404151020"));
-    public static final RString DEFAULT_調定事由1 = new RString("1");
-    public static final RString DEFAULT_調定事由2 = new RString("1");
-    public static final RString DEFAULT_調定事由3 = new RString("1");
-    public static final RString DEFAULT_調定事由4 = new RString("1");
+    public static final RDateTime DEFAULT_調定日時 = RDateTime.of(2014, 9, 01, 10, 20, 30, 123);
+    public static final ChoteiJiyu DEFAULT_調定事由1 = new ChoteiJiyu(new RString("1"));
+    public static final ChoteiJiyu DEFAULT_調定事由2 = new ChoteiJiyu(new RString("1"));
+    public static final ChoteiJiyu DEFAULT_調定事由3 = new ChoteiJiyu(new RString("1"));
+    public static final ChoteiJiyu DEFAULT_調定事由4 = new ChoteiJiyu(new RString("1"));
     public static final RString DEFAULT_更正月 = new RString("1");
     public static final Decimal DEFAULT_減免前介護保険料_年額 = new Decimal(1);
     public static final Decimal DEFAULT_減免額 = new Decimal(1);
@@ -58,6 +68,10 @@ public final class DbT2002FukaEntityGenerator {
     public static final RString DEFAULT_保険料段階_仮算定時 = new RString("1");
     public static final RDateTime DEFAULT_徴収方法処理日時 = RDateTime.of(2014, 9, 01, 10, 20, 30, 123);
     public static final RDateTime DEFAULT_異動基準日時 = RDateTime.of(2014, 9, 01, 10, 20, 30, 123);
+    public static final RString DEFAULT_口座区分 = new RString("1");
+    public static final RString DEFAULT_境界層区分 = new RString("1");
+    public static final RString DEFAULT_職権区分 = new RString("1");
+    public static final LasdecCode DEFAULT_賦課市町村コード = new LasdecCode("123456");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -75,6 +89,15 @@ public final class DbT2002FukaEntityGenerator {
         entity.setShikibetsuCode(DEFAULT_識別コード);
         entity.setSetaiCode(DEFAULT_世帯コード);
         entity.setSetaiInsu(DEFAULT_世帯員数);
+        entity.setShikakuShutokuYMD(DEFAULT_資格取得日);
+        entity.setShikakuShutokuJiyu(DEFAULT_資格取得事由);
+        entity.setShikakuSoshitsuYMD(DEFAULT_資格喪失日);
+        entity.setShikakuSoshitsuJiyu(DEFAULT_資格喪失事由);
+        entity.setSeihofujoShurui(DEFAULT_生活保護扶助種類);
+        entity.setSeihoKaishiYMD(DEFAULT_生保開始日);
+        entity.setSeihoHaishiYMD(DEFAULT_生保廃止日);
+        entity.setRonenKaishiYMD(DEFAULT_老年開始日);
+        entity.setRonenHaishiYMD(DEFAULT_老年廃止日);
         entity.setFukaYMD(DEFAULT_賦課期日);
         entity.setKazeiKubun(DEFAULT_課税区分);
         entity.setSetaikazeiKubun(DEFAULT_世帯課税区分);
@@ -89,7 +112,7 @@ public final class DbT2002FukaEntityGenerator {
         entity.setNengakuHokenryo2(DEFAULT_算定年額保険料2);
         entity.setTsukiwariStartYM2(DEFAULT_月割開始年月2);
         entity.setTsukiwariEndYM2(DEFAULT_月割終了年月2);
-        entity.setChoteiYMDHM(DEFAULT_調定日時);
+        entity.setChoteiTimestamp(DEFAULT_調定日時);
         entity.setChoteiJiyu1(DEFAULT_調定事由1);
         entity.setChoteiJiyu2(DEFAULT_調定事由2);
         entity.setChoteiJiyu3(DEFAULT_調定事由3);
@@ -101,6 +124,10 @@ public final class DbT2002FukaEntityGenerator {
         entity.setHokenryoDankaiKarisanntei(DEFAULT_保険料段階_仮算定時);
         entity.setChoshuHohoShoriTimestamp(DEFAULT_徴収方法処理日時);
         entity.setIdoKijunTimestamp(DEFAULT_異動基準日時);
+        entity.setKozaKubun(DEFAULT_口座区分);
+        entity.setKyokaisoKubun(DEFAULT_境界層区分);
+        entity.setShokkenKubun(DEFAULT_職権区分);
+        entity.setFukaShichosonCode(DEFAULT_賦課市町村コード);
         return entity;
     }
 }

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
-import jp.co.ndensan.reams.db.dbz.model.HokenryoDankaiModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoDankaiModel;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 
 /**
  * 保険料段階を扱うクラスです。
@@ -60,7 +61,7 @@ public class HokenryoDankai {
      *
      * @return 賦課年度
      */
-    public FlexibleYear get賦課年度() {
+    public FukaNendo get賦課年度() {
         return 保険料段階.get賦課年度();
     }
 
@@ -121,7 +122,7 @@ public class HokenryoDankai {
         int suffix = Integer.parseInt(段階区分.substring(2).toString());
 
         RString 表示用 = !is対象外表記(stage) ? get基本表記(stage) : 対象外表記;
-        表示用 = is改正前表記(保険料段階.get賦課年度(), suffix) ? add改正前表記(表示用, suffix) : 表示用;
+        表示用 = is改正前表記(保険料段階.get賦課年度().value(), suffix) ? add改正前表記(表示用, suffix) : 表示用;
         表示用 = add特例表記(表示用);
 
         return 表示用;

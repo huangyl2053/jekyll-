@@ -1,7 +1,8 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kiwarigaku;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 
 /**
@@ -19,5 +20,5 @@ public interface IKiwarigakuDiv {
      * @param 通知書番号 通知書番号
      * @param 処理日時 処理日時
      */
-    void load(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時);
+    void load(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時);
 }

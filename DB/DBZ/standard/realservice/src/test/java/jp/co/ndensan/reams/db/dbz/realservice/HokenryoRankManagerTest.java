@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2012HokenryoRankEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2012HokenryoRankEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.HokenryoRankModel;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoRankModel;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.HokenryoRankDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -37,8 +38,8 @@ public class HokenryoRankManagerTest {
 
     private static HokenryoRankDac dac;
     private static HokenryoRankManager sut;
-    private static final FlexibleYear 賦課年度1 = DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度;
-    private static final FlexibleYear 賦課年度2 = DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度.plusYear(1);
+    private static final FukaNendo 賦課年度1 = new FukaNendo(DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度);
+    private static final FukaNendo 賦課年度2 = new FukaNendo(DbT2012HokenryoRankEntityGenerator.DEFAULT_賦課年度.plusYear(1));
     private static final LasdecCode 市町村コード1 = DbT2012HokenryoRankEntityGenerator.DEFAULT_市町村コード;
     private static final LasdecCode 市町村コード2 = new LasdecCode("000010");
 
@@ -55,9 +56,9 @@ public class HokenryoRankManagerTest {
 
             HokenryoRankModel 保険料ランクモデル = createHokenryoRankModel(賦課年度1, 市町村コード1);
 
-            when(dac.select保険料ランクByKey(any(FlexibleYear.class), any(LasdecCode.class))).thenReturn(保険料ランクモデル);
+            when(dac.select保険料ランクByKey(any(FukaNendo.class), any(LasdecCode.class))).thenReturn(保険料ランクモデル);
 
-            IOptional<HokenryoRankModel> 保険料ランク = sut.get保険料ランク(賦課年度1, 市町村コード1);
+            Optional<HokenryoRankModel> 保険料ランク = sut.get保険料ランク(賦課年度1, 市町村コード1);
 
             assertThat(保険料ランク.get().get賦課年度(), is(賦課年度1));
         }
@@ -72,7 +73,7 @@ public class HokenryoRankManagerTest {
             保険料ランクモデルリスト.add(createHokenryoRankModel(賦課年度1, 市町村コード1));
             保険料ランクモデルリスト.add(createHokenryoRankModel(賦課年度1, 市町村コード2));
 
-            when(dac.select保険料ランク一覧(any(FlexibleYear.class))).thenReturn(保険料ランクモデルリスト);
+            when(dac.select保険料ランク一覧(any(FukaNendo.class))).thenReturn(保険料ランクモデルリスト);
 
             IItemList<HokenryoRankModel> 保険料ランクリスト = sut.get保険料ランク一覧(賦課年度1);
 
@@ -125,9 +126,9 @@ public class HokenryoRankManagerTest {
         }
     }
 
-    private static HokenryoRankModel createHokenryoRankModel(FlexibleYear 賦課年度, LasdecCode 市町村コード) {
+    private static HokenryoRankModel createHokenryoRankModel(FukaNendo 賦課年度, LasdecCode 市町村コード) {
         DbT2012HokenryoRankEntity entity = DbT2012HokenryoRankEntityGenerator.createDbT2012HokenryoRankEntity();
-        entity.setFukaNendo(賦課年度);
+        entity.setFukaNendo(賦課年度.value());
         entity.setShichosonCode(市町村コード);
         return new HokenryoRankModel(entity);
     }
