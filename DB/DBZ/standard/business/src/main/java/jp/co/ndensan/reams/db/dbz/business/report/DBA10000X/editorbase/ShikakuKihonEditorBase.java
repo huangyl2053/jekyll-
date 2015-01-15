@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HowToEditJu
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.KatagakiPrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ShichosonNamePrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNamePrint;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
 import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoKanji;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -88,7 +88,7 @@ public class ShikakuKihonEditorBase {
      * @param source 被保険者証帳票ソース
      */
     public void set被保険者番号(IHihokenshashoCommonEditData source) {
-        IHihokenshaDaicho hihoDaicho = hihokenshashoModel.getHihokenshaDaicho();
+        HihokenshaDaichoModel hihoDaicho = hihokenshashoModel.getHihokenshaDaicho();
         RString hihoNo = hihoDaicho.get被保険者番号().value();
 
         switch (printConfig.get被保険者番号表示書式()) {
@@ -133,7 +133,7 @@ public class ShikakuKihonEditorBase {
         ShichosonNamePrint shichosonName;
         HowToEditJusho howToEditJusho;
         KatagakiPrint katagaki;
-        if (hihoJushoEdit.is帳票独自区分を使用()) {
+        if (hihoJushoEdit.uses帳票独自区分()) {
             todofuken = hihoJushoEdit.get都道府県名付与有無();
             gunName = hihoJushoEdit.get郡名付与有無();
             shichosonName = hihoJushoEdit.get市町村名付与有無();

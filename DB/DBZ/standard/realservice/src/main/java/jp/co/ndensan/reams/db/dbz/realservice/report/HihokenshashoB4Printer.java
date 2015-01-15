@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoMode
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshasho;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoB4;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.ur.urz.business.ITsuchishoAtesaki;
 import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
@@ -69,7 +69,7 @@ public class HihokenshashoB4Printer {
         RString reportId;
         IReportBuilder<IHihokenshasho> builder;
 
-        IHihokenshaDaicho daichoModel = printerBase.getDaichoModel(hihokenshaNo);
+        HihokenshaDaichoModel daichoModel = printerBase.getDaichoModel(hihokenshaNo);
         IKojin kojin = printerBase.getKojin(daichoModel);
 
         HihokenshashoModel target = new HihokenshashoModel(daichoModel, kojin, shikakuHakkoModel, position);

@@ -367,7 +367,7 @@ public class ShikakuKihonEditorBaseTest {
         private HihokenshashoJushoEditConfig createMockHihoJushoEditConfig(boolean is帳票独自区分を使用, TodofukenNamePrint todofuken,
                 GunNamePrint gunName, ShichosonNamePrint shichosonName, HowToEditJusho howToEditJusho, KatagakiPrint katagaki) {
             HihokenshashoJushoEditConfig editConfig = mock(HihokenshashoJushoEditConfig.class);
-            when(editConfig.is帳票独自区分を使用()).thenReturn(is帳票独自区分を使用);
+            when(editConfig.uses帳票独自区分()).thenReturn(is帳票独自区分を使用);
             when(editConfig.get都道府県名付与有無()).thenReturn(todofuken);
             when(editConfig.get郡名付与有無()).thenReturn(gunName);
             when(editConfig.get市町村名付与有無()).thenReturn(shichosonName);

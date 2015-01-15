@@ -9,7 +9,6 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
 
@@ -20,7 +19,7 @@ import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
  */
 public class HihokenshashoModel implements Serializable {
 
-    private final IHihokenshaDaicho hihokenshaDaicho;
+    private final HihokenshaDaichoModel hihokenshaDaicho;
     private final IKojin kojinJoho;
     private final HihokenshaShikakuHakkoModel shikakuHakko;
     private final HihokenshashoPrintPosition position;
@@ -34,7 +33,7 @@ public class HihokenshashoModel implements Serializable {
      * @param position 印字位置
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
-    public HihokenshashoModel(IHihokenshaDaicho hihokenshaDaicho, IKojin kojinJoho, HihokenshaShikakuHakkoModel shikakuHakko,
+    public HihokenshashoModel(HihokenshaDaichoModel hihokenshaDaicho, IKojin kojinJoho, HihokenshaShikakuHakkoModel shikakuHakko,
             HihokenshashoPrintPosition position) throws NullPointerException {
         requireNonNull(hihokenshaDaicho, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("被保険者台帳情報", getClass().getName()));
@@ -67,7 +66,7 @@ public class HihokenshashoModel implements Serializable {
      *
      * @return 被保険者台帳情報
      */
-    public IHihokenshaDaicho getHihokenshaDaicho() {
+    public HihokenshaDaichoModel getHihokenshaDaicho() {
         return hihokenshaDaicho;
     }
 

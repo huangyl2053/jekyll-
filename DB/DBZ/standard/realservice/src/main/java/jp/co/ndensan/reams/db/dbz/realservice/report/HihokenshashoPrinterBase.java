@@ -10,9 +10,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoModel;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshasho;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;
 import jp.co.ndensan.reams.ur.urz.business.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ur.urz.business.AtesakiPSMSearchKeyBuilder;
@@ -39,7 +38,6 @@ import jp.co.ndensan.reams.ur.urz.realservice.report.core.ReportManagerFactory;
 import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
@@ -100,7 +98,7 @@ public class HihokenshashoPrinterBase {
      * @param daichoModel 被保険者台帳Model
      * @return 対応する個人の情報
      */
-    public IKojin getKojin(IHihokenshaDaicho daichoModel) {
+    public IKojin getKojin(HihokenshaDaichoModel daichoModel) {
         return kojinFinder.get個人(GyomuCode.DB介護保険, daichoModel.get識別コード());
     }
 
@@ -110,10 +108,8 @@ public class HihokenshashoPrinterBase {
      * @param hihokenshaNo 被保険者番号
      * @return 被保険者台帳Model
      */
-    public IHihokenshaDaicho getDaichoModel(HihokenshaNo hihokenshaNo) {
-        LasdecCode lasdecCode = new LasdecCode(controlData.getDonyuDantaiCode().getColumnValue());
-        IItemList<IHihokenshaDaicho> daichoModelList = hihoDaichoFinder.find被保険者台帳List(lasdecCode, hihokenshaNo);
-        return daichoModelList.findFirst().get();
+    public HihokenshaDaichoModel getDaichoModel(HihokenshaNo hihokenshaNo) {
+        return hihoDaichoFinder.find直近被保険者台帳(hihokenshaNo).get();
     }
 
     /**

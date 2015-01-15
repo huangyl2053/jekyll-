@@ -5,40 +5,27 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice.report;
 
-import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoPrintConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoSofusakiInfoConfig;
-import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.HihokenshashoA4Builder;
-import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.HihokenshashoB4Builder;
-import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.HihokenshashoBuilderFactory;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshashoPrintType;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoModel;
-import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoA4;
-import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoB4;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IAtesaki;
 import jp.co.ndensan.reams.ur.urz.business.IAtesakiPSMSearchKey;
-import jp.co.ndensan.reams.ur.urz.business.ITsuchishoAtesaki;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
-import jp.co.ndensan.reams.ur.urz.model.IJusho;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.realservice.IZenkokuJushoManager;
 import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.IAtesakiFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.IKojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReamsDonyuDantaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.report.SourceData;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -82,7 +69,7 @@ public class HihokenshashoPrinterBaseTest {
                     null, null, null, null
             );
 
-            IHihokenshaDaicho daicho = mock(IHihokenshaDaicho.class);
+            HihokenshaDaichoModel daicho = mock(HihokenshaDaichoModel.class);
             when(daicho.get識別コード()).thenReturn(shikibetsuCode);
 
             assertThat(sut.getKojin(daicho).get識別コード(), is(shikibetsuCode));
@@ -123,11 +110,10 @@ public class HihokenshashoPrinterBaseTest {
         }
 
         private HihokenshaDaichoFinder createHihoDaichoFinder(RString dantaiCode, HihokenshaNo hihoNo) {
-            IHihokenshaDaicho daicho = mock(IHihokenshaDaicho.class);
+            HihokenshaDaichoModel daicho = mock(HihokenshaDaichoModel.class);
             when(daicho.get被保険者番号()).thenReturn(hihoNo);
-            IItemList<IHihokenshaDaicho> list = ItemList.of(daicho);
             HihokenshaDaichoFinder hihoDaichoFinder = mock(HihokenshaDaichoFinder.class);
-            when(hihoDaichoFinder.find被保険者台帳List(new LasdecCode(dantaiCode), hihoNo)).thenReturn(list);
+            when(hihoDaichoFinder.find直近被保険者台帳(hihoNo)).thenReturn(Optional.of(daicho));
             return hihoDaichoFinder;
         }
 
