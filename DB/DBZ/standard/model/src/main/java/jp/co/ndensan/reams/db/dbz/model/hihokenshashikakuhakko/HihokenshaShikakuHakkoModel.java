@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -21,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class HihokenshaShikakuHakkoModel implements Serializable {
 
-    private IOptional<RDate> 有効期限;
+    private IOptional<FlexibleDate> 有効期限;
     private FlexibleDate 交付日;
     private RString 保険者番号;
     private RString 保険者名称;
@@ -29,20 +28,20 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
     private RString 交付事由コード;
     private RString 交付事由;
     private RString 要介護状態;
-    private RDate 認定日;
-    private RDate 有効期間開始日;
-    private RDate 有効期間終了日;
+    private FlexibleDate 認定日;
+    private FlexibleDate 有効期間開始日;
+    private FlexibleDate 有効期間終了日;
     private FlexibleDate 申請日;
     private boolean selected性同一障害用;
     private Decimal 限度基準額;
-    private RDate 限度額有効期間開始日;
-    private RDate 限度額有効期間終了日;
+    private FlexibleDate 限度額有効期間開始日;
+    private FlexibleDate 限度額有効期間終了日;
     private List<RString> 限度基準額サービス種類;
     private List<RString> 限度基準額サービス額;
     private RString 審査会意見;
     private List<RString> 給付制限内容;
-    private List<RDate> 給付制限開始日;
-    private List<RDate> 給付制限終了日;
+    private List<FlexibleDate> 給付制限開始日;
+    private List<FlexibleDate> 給付制限終了日;
     private List<RString> 支援事業者名称;
     private List<FlexibleDate> 支援事業者届出日;
     private List<FlexibleDate> 支援事業者適用開始日;
@@ -68,7 +67,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      *
      * @return 有効期限
      */
-    public IOptional<RDate> get有効期限() {
+    public IOptional<FlexibleDate> get有効期限() {
         return 有効期限;
     }
 
@@ -77,7 +76,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      *
      * @param 有効期限 有効期限
      */
-    public void set有効期限(RDate 有効期限) {
+    public void set有効期限(FlexibleDate 有効期限) {
         this.有効期限 = DbOptional.ofNullable(有効期限);
     }
 
@@ -212,7 +211,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      *
      * @return 認定日
      */
-    public RDate get認定日() {
+    public FlexibleDate get認定日() {
         return 認定日;
     }
 
@@ -221,7 +220,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      *
      * @param 認定日 認定日
      */
-    public void set認定日(RDate 認定日) {
+    public void set認定日(FlexibleDate 認定日) {
         this.認定日 = 認定日;
     }
 
@@ -230,7 +229,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      *
      * @return 有効期間開始日
      */
-    public RDate get有効期間開始日() {
+    public FlexibleDate get有効期間開始日() {
         return 有効期間開始日;
     }
 
@@ -239,7 +238,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      *
      * @param 有効期間開始日 有効期間開始日
      */
-    public void set有効期間開始日(RDate 有効期間開始日) {
+    public void set有効期間開始日(FlexibleDate 有効期間開始日) {
         this.有効期間開始日 = 有効期間開始日;
     }
 
@@ -248,7 +247,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      *
      * @return 有効期間終了日
      */
-    public RDate get有効期間終了日() {
+    public FlexibleDate get有効期間終了日() {
         return 有効期間終了日;
     }
 
@@ -257,7 +256,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      *
      * @param 有効期間終了日 有効期間終了日
      */
-    public void set有効期間終了日(RDate 有効期間終了日) {
+    public void set有効期間終了日(FlexibleDate 有効期間終了日) {
         this.有効期間終了日 = 有効期間終了日;
     }
 
@@ -320,7 +319,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      *
      * @return 限度額有効期間開始日
      */
-    public RDate get限度額有効期間開始日() {
+    public FlexibleDate get限度額有効期間開始日() {
         return 限度額有効期間開始日;
     }
 
@@ -329,7 +328,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      *
      * @param 限度額有効期間開始日 限度額有効期間開始日
      */
-    public void set限度額有効期間開始日(RDate 限度額有効期間開始日) {
+    public void set限度額有効期間開始日(FlexibleDate 限度額有効期間開始日) {
         this.限度額有効期間開始日 = 限度額有効期間開始日;
     }
 
@@ -338,7 +337,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      *
      * @return 限度額有効期間終了日
      */
-    public RDate get限度額有効期間終了日() {
+    public FlexibleDate get限度額有効期間終了日() {
         return 限度額有効期間終了日;
     }
 
@@ -347,7 +346,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      *
      * @param 限度額有効期間終了日 限度額有効期間終了日
      */
-    public void set限度額有効期間終了日(RDate 限度額有効期間終了日) {
+    public void set限度額有効期間終了日(FlexibleDate 限度額有効期間終了日) {
         this.限度額有効期間終了日 = 限度額有効期間終了日;
     }
 
@@ -428,7 +427,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      *
      * @return 給付制限開始日
      */
-    public List<RDate> get給付制限開始日() {
+    public List<FlexibleDate> get給付制限開始日() {
         return 給付制限開始日;
     }
 
@@ -437,7 +436,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      *
      * @param 給付制限開始日 給付制限開始日
      */
-    public void set給付制限開始日(List<RDate> 給付制限開始日) {
+    public void set給付制限開始日(List<FlexibleDate> 給付制限開始日) {
         this.給付制限開始日 = 給付制限開始日;
     }
 
@@ -446,7 +445,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      *
      * @return 給付制限終了日
      */
-    public List<RDate> get給付制限終了日() {
+    public List<FlexibleDate> get給付制限終了日() {
         return 給付制限終了日;
     }
 
@@ -455,7 +454,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      *
      * @param 給付制限終了日 給付制限終了日
      */
-    public void set給付制限終了日(List<RDate> 給付制限終了日) {
+    public void set給付制限終了日(List<FlexibleDate> 給付制限終了日) {
         this.給付制限終了日 = 給付制限終了日;
     }
 

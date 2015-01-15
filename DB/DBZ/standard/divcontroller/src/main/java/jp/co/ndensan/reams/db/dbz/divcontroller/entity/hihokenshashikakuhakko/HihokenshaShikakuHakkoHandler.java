@@ -290,16 +290,8 @@ public class HihokenshaShikakuHakkoHandler {
                 FlexibleDate 制限期間開始日,
                 FlexibleDate 制限期間終了日) {
             this.制限内容 = 制限内容;
-            if (制限期間開始日 == null) {
-                this.制限期間開始日 = FlexibleDate.EMPTY;
-            } else {
-                this.制限期間開始日 = 制限期間開始日;
-            }
-            if (制限期間終了日 == null) {
-                this.制限期間終了日 = FlexibleDate.EMPTY;
-            } else {
-                this.制限期間終了日 = 制限期間終了日;
-            }
+            this.制限期間開始日 = 制限期間開始日 == null ? FlexibleDate.EMPTY : 制限期間開始日;
+            this.制限期間終了日 = 制限期間終了日 == null ? FlexibleDate.EMPTY : 制限期間終了日;
         }
 
         RString get制限内容() {
@@ -468,16 +460,8 @@ public class HihokenshaShikakuHakkoHandler {
                 FlexibleDate 適用終了日) {
             this.名称 = 名称;
             this.届出日 = 届出日;
-            if (適用開始日 == null) {
-                this.適用開始日 = FlexibleDate.EMPTY;
-            } else {
-                this.適用開始日 = 適用開始日;
-            }
-            if (適用終了日 == null) {
-                this.適用終了日 = FlexibleDate.EMPTY;
-            } else {
-                this.適用終了日 = 適用終了日;
-            }
+            this.適用開始日 = 適用開始日 == null ? FlexibleDate.EMPTY : 適用開始日;
+            this.適用終了日 = 適用終了日 == null ? FlexibleDate.EMPTY : 適用終了日;
         }
 
         RString get名称() {
@@ -653,7 +637,9 @@ public class HihokenshaShikakuHakkoHandler {
 
     private HihokenshaShikakuHakkoModel set有効期限to証発行情報Model(HihokenshaShikakuHakkoModel model) {
 
-        model.set有効期限(div.getYukoKigenInfo().getTxtYukoKigen().getValue());
+        FlexibleDate 有効期限 = div.getYukoKigenInfo().getTxtYukoKigen().getValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getYukoKigenInfo().getTxtYukoKigen().getValue().toString());
+        model.set有効期限(有効期限);
         model.set交付日(div.getYukoKigenInfo().getTxtKofuDate().getValue());
         RString 保険者 = div.getYukoKigenInfo().getTxtHokensha().getValue();
         RString 保険者番号 = RString.EMPTY;
@@ -680,9 +666,19 @@ public class HihokenshaShikakuHakkoHandler {
     private HihokenshaShikakuHakkoModel set認定情報to証発行情報Model(HihokenshaShikakuHakkoModel model) {
 
         model.set要介護状態(div.getNinteiInfo().getTxtYokaigodo().getValue());
-        model.set認定日(div.getNinteiInfo().getTxtNinteiYMD().getValue());
-        model.set有効期間開始日(div.getNinteiInfo().getTxtNinteiYukoFromYMD().getValue());
-        model.set有効期間終了日(div.getNinteiInfo().getTxtNinteiYukoToYMD().getValue());
+
+        FlexibleDate 認定日 = div.getNinteiInfo().getTxtNinteiYMD().getValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getNinteiInfo().getTxtNinteiYMD().getValue().toString());
+        model.set認定日(認定日);
+
+        FlexibleDate 開始日 = div.getNinteiInfo().getTxtNinteiYukoFromYMD().getValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getNinteiInfo().getTxtNinteiYukoFromYMD().getValue().toString());
+        model.set有効期間開始日(開始日);
+
+        FlexibleDate 終了日 = div.getNinteiInfo().getTxtNinteiYukoToYMD().getValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getNinteiInfo().getTxtNinteiYukoToYMD().getValue().toString());
+        model.set有効期間終了日(終了日);
+
         model.set申請日(div.getNinteiInfo().getTxtShinseiDate().getValue());
         if (!div.getNinteiInfo().getChkSeidoitsuseiShogai().getSelectedKeys().isEmpty()) {
             model.setSelected性同一障害用(true);
@@ -694,8 +690,15 @@ public class HihokenshaShikakuHakkoHandler {
     private HihokenshaShikakuHakkoModel set限度額to証発行情報Model(HihokenshaShikakuHakkoModel model) {
 
         model.set限度基準額(div.getTplGendoGaku().getTxtKubunShikyuGendoKijunGaku().getValue());
-        model.set限度額有効期間開始日(div.getTplGendoGaku().getTxtYukoFromYMD().getValue());
-        model.set限度額有効期間終了日(div.getTplGendoGaku().getTxtYukoToYMD().getValue());
+
+        FlexibleDate 開始日 = div.getTplGendoGaku().getTxtYukoFromYMD().getValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getTplGendoGaku().getTxtYukoFromYMD().getValue().toString());
+        model.set限度額有効期間開始日(開始日);
+
+        FlexibleDate 終了日 = div.getTplGendoGaku().getTxtYukoToYMD().getValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getTplGendoGaku().getTxtYukoToYMD().getValue().toString());
+        model.set限度額有効期間終了日(終了日);
+
         List<RString> 限度基準額サービス種類 = new ArrayList<>();
         List<RString> 限度基準額サービス額 = new ArrayList<>();
         for (dgShuruiShikyuGendoKijunGaku_Row item
@@ -720,17 +723,32 @@ public class HihokenshaShikakuHakkoHandler {
     private HihokenshaShikakuHakkoModel set給付制限to証発行情報Model(HihokenshaShikakuHakkoModel model) {
 
         List<RString> 給付制限内容 = new ArrayList<>();
-        List<RDate> 給付制限開始日 = new ArrayList<>();
-        List<RDate> 給付制限終了日 = new ArrayList<>();
+        List<FlexibleDate> 給付制限開始日 = new ArrayList<>();
+        List<FlexibleDate> 給付制限終了日 = new ArrayList<>();
+
         給付制限内容.add(div.getTplKyufuSeigen().getTxtKyufuSeigenNaiyo1().getValue());
         給付制限内容.add(div.getTplKyufuSeigen().getTxtKyufuSeigenNaiyo2().getValue());
         給付制限内容.add(div.getTplKyufuSeigen().getTxtKyufuSeigenNaiyo3().getValue());
-        給付制限開始日.add(div.getTplKyufuSeigen().getTxtKyufuSeigenKikan1().getFromValue());
-        給付制限開始日.add(div.getTplKyufuSeigen().getTxtKyufuSeigenKikan2().getFromValue());
-        給付制限開始日.add(div.getTplKyufuSeigen().getTxtKyufuSeigenKikan3().getFromValue());
-        給付制限終了日.add(div.getTplKyufuSeigen().getTxtKyufuSeigenKikan1().getToValue());
-        給付制限終了日.add(div.getTplKyufuSeigen().getTxtKyufuSeigenKikan2().getToValue());
-        給付制限終了日.add(div.getTplKyufuSeigen().getTxtKyufuSeigenKikan3().getToValue());
+
+        FlexibleDate 開始日 = div.getTplKyufuSeigen().getTxtKyufuSeigenKikan1().getFromValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getTplKyufuSeigen().getTxtKyufuSeigenKikan1().getFromValue().toString());
+        給付制限開始日.add(開始日);
+        開始日 = div.getTplKyufuSeigen().getTxtKyufuSeigenKikan2().getFromValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getTplKyufuSeigen().getTxtKyufuSeigenKikan2().getFromValue().toString());
+        給付制限開始日.add(開始日);
+        開始日 = div.getTplKyufuSeigen().getTxtKyufuSeigenKikan3().getFromValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getTplKyufuSeigen().getTxtKyufuSeigenKikan3().getFromValue().toString());
+        給付制限開始日.add(開始日);
+
+        FlexibleDate 終了日 = div.getTplKyufuSeigen().getTxtKyufuSeigenKikan1().getToValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getTplKyufuSeigen().getTxtKyufuSeigenKikan1().getToValue().toString());
+        給付制限終了日.add(終了日);
+        終了日 = div.getTplKyufuSeigen().getTxtKyufuSeigenKikan2().getToValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getTplKyufuSeigen().getTxtKyufuSeigenKikan2().getToValue().toString());
+        給付制限終了日.add(終了日);
+        終了日 = div.getTplKyufuSeigen().getTxtKyufuSeigenKikan3().getToValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getTplKyufuSeigen().getTxtKyufuSeigenKikan3().getToValue().toString());
+        給付制限終了日.add(終了日);
 
         model.set給付制限内容(給付制限内容);
         model.set給付制限開始日(給付制限開始日);
