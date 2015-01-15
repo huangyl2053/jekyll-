@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -22,7 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 public interface IHihokenshaDaichoFinder {
 
     /**
-     * 被保険者台帳のキー項目を指定して、該当する被保険者台帳を1件取得します。
+     * 被保険者台帳のキー項目を指定して、該当する被保険者台帳を1件取得します。<br/>
+     * 戻り値は、処理日時の降順で取得されます。
      *
      * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
@@ -32,7 +33,8 @@ public interface IHihokenshaDaichoFinder {
     IOptional<IHihokenshaDaicho> find被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時);
 
     /**
-     * 被保険者番号と市町村コードを指定して、特定の被保険者の台帳情報をListで取得します。
+     * 被保険者番号と市町村コードを指定して、特定の被保険者の台帳情報をListで取得します。<br/>
+     * 戻り値は、処理日時の降順で取得されます。
      *
      * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
@@ -42,7 +44,8 @@ public interface IHihokenshaDaichoFinder {
 
     /**
      * 識別コードと市町村コードを指定して、特定の被保険者の台帳情報をListで取得します。<br/>
-     * 被保険者番号が取得できなかった場合などに利用します。
+     * 被保険者番号が取得できなかった場合などに利用します。<br/>
+     * 戻り値は、処理日時の降順で取得されます。
      *
      * @param 市町村コード 市町村コード
      * @param 識別コード 被保険者番号
@@ -51,7 +54,8 @@ public interface IHihokenshaDaichoFinder {
     IItemList<IHihokenshaDaicho> find被保険者台帳List(LasdecCode 市町村コード, ShikibetsuCode 識別コード);
 
     /**
-     * 市町村コード・被保険者番号・資格取得日を指定して、ある資格取得期間中の被保険者台帳情報をListで取得します。
+     * 市町村コード・被保険者番号・資格取得日を指定して、ある資格取得期間中の被保険者台帳情報をListで取得します。<br/>
+     * 戻り値は、処理日時の降順で取得されます。
      *
      * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号

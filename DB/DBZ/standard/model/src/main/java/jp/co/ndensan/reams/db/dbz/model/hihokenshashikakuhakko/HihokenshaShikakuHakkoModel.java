@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko;
 
 import java.io.Serializable;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class HihokenshaShikakuHakkoModel implements Serializable {
 
-    private RDate 有効期限;
+    private IOptional<RDate> 有効期限;
     private FlexibleDate 交付日;
     private RString 保険者番号;
     private RString 保険者名称;
@@ -31,7 +33,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
     private RDate 有効期間開始日;
     private RDate 有効期間終了日;
     private FlexibleDate 申請日;
-    private boolean is性同一性障害用;
+    private boolean selected性同一障害用;
     private Decimal 限度基準額;
     private RDate 限度額有効期間開始日;
     private RDate 限度額有効期間終了日;
@@ -44,432 +46,596 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
     private List<RString> 支援事業者名称;
     private List<FlexibleDate> 支援事業者届出日;
     private List<FlexibleDate> 支援事業者適用開始日;
+    private List<FlexibleDate> 支援事業者適用終了日;
     private List<RString> 施設名;
     private List<FlexibleDate> 施設入所日;
     private List<FlexibleDate> 施設退所日;
-    private boolean isテスト;
-    private boolean is直前履歴;
+    private List<RString> 入所施設コード;
+    private boolean selectedテスト;
+    private boolean selected直前履歴;
 
+    /**
+     * コンストラクタです。
+     */
     public HihokenshaShikakuHakkoModel() {
+        this.selected性同一障害用 = false;
+        this.selectedテスト = false;
+        this.selected直前履歴 = false;
     }
 
     /**
-     * @return the 有効期限
+     * 有効期限を取得する。
+     *
+     * @return 有効期限
      */
-    public RDate get有効期限() {
+    public IOptional<RDate> get有効期限() {
         return 有効期限;
     }
 
     /**
-     * @param 有効期限 the 有効期限 to set
+     * 有効期限を設定する。
+     *
+     * @param 有効期限 有効期限
      */
     public void set有効期限(RDate 有効期限) {
-        this.有効期限 = 有効期限;
+        this.有効期限 = DbOptional.ofNullable(有効期限);
     }
 
     /**
-     * @return the 交付日
+     * 交付日を取得する。
+     *
+     * @return 交付日
      */
     public FlexibleDate get交付日() {
         return 交付日;
     }
 
     /**
-     * @param 交付日 the 交付日 to set
+     * 交付日を設定する。
+     *
+     * @param 交付日 交付日
      */
     public void set交付日(FlexibleDate 交付日) {
         this.交付日 = 交付日;
     }
 
     /**
-     * @return the 保険者番号
+     * 保険者番号を取得する。
+     *
+     * @return 保険者番号
      */
     public RString get保険者番号() {
         return 保険者番号;
     }
 
     /**
-     * @param 保険者番号 the 保険者番号 to set
+     * 保険者番号を設定する。
+     *
+     * @param 保険者番号 保険者番号
      */
     public void set保険者番号(RString 保険者番号) {
         this.保険者番号 = 保険者番号;
     }
 
     /**
-     * @return the 保険者名称
+     * 保険者名称を取得する。
+     *
+     * @return 保険者名称
      */
     public RString get保険者名称() {
         return 保険者名称;
     }
 
     /**
-     * @param 保険者名称 the 保険者名称 to set
+     * 保険者名称を設定する。
+     *
+     * @param 保険者名称 保険者名称
      */
     public void set保険者名称(RString 保険者名称) {
         this.保険者名称 = 保険者名称;
     }
 
     /**
-     * @return the 保険者表示
+     * 保険者表示を取得する。
+     *
+     * @return 保険者表示
      */
     public RString get保険者表示() {
         return 保険者表示;
     }
 
     /**
-     * @param 保険者表示 the 保険者表示 to set
+     * 保険者表示を設定する。
+     *
+     * @param 保険者表示 保険者表示
      */
     public void set保険者表示(RString 保険者表示) {
         this.保険者表示 = 保険者表示;
     }
 
     /**
-     * @return the 交付事由コード
+     * 交付事由コードを取得する。
+     *
+     * @return 交付事由コード
      */
     public RString get交付事由コード() {
         return 交付事由コード;
     }
 
     /**
-     * @param 交付事由コード the 交付事由コード to set
+     * 交付事由コードを設定する。
+     *
+     * @param 交付事由コード 交付事由コード
      */
     public void set交付事由コード(RString 交付事由コード) {
         this.交付事由コード = 交付事由コード;
     }
 
     /**
-     * @return the 交付事由
+     * 交付事由を取得する。
+     *
+     * @return 交付事由
      */
     public RString get交付事由() {
         return 交付事由;
     }
 
     /**
-     * @param 交付事由 the 交付事由 to set
+     * 交付事由を設定する。
+     *
+     * @param 交付事由 交付事由
      */
     public void set交付事由(RString 交付事由) {
         this.交付事由 = 交付事由;
     }
 
     /**
-     * @return the 要介護状態
+     * 要介護状態を取得する。
+     *
+     * @return 要介護状態
      */
     public RString get要介護状態() {
         return 要介護状態;
     }
 
     /**
-     * @param 要介護状態 the 要介護状態 to set
+     * 要介護状態を設定する。
+     *
+     * @param 要介護状態 要介護状態
      */
     public void set要介護状態(RString 要介護状態) {
         this.要介護状態 = 要介護状態;
     }
 
     /**
-     * @return the 認定日
+     * 認定日を取得する。
+     *
+     * @return 認定日
      */
     public RDate get認定日() {
         return 認定日;
     }
 
     /**
-     * @param 認定日 the 認定日 to set
+     * 認定日を設定する。
+     *
+     * @param 認定日 認定日
      */
     public void set認定日(RDate 認定日) {
         this.認定日 = 認定日;
     }
 
     /**
-     * @return the 有効期間開始日
+     * 有効期間開始日を取得する。
+     *
+     * @return 有効期間開始日
      */
     public RDate get有効期間開始日() {
         return 有効期間開始日;
     }
 
     /**
-     * @param 有効期間開始日 the 有効期間開始日 to set
+     * 有効期間開始日を設定する。
+     *
+     * @param 有効期間開始日 有効期間開始日
      */
     public void set有効期間開始日(RDate 有効期間開始日) {
         this.有効期間開始日 = 有効期間開始日;
     }
 
     /**
-     * @return the 有効期間終了日
+     * 有効期間終了日を取得する。
+     *
+     * @return 有効期間終了日
      */
     public RDate get有効期間終了日() {
         return 有効期間終了日;
     }
 
     /**
-     * @param 有効期間終了日 the 有効期間終了日 to set
+     * 有効期間終了日を設定する。
+     *
+     * @param 有効期間終了日 有効期間終了日
      */
     public void set有効期間終了日(RDate 有効期間終了日) {
         this.有効期間終了日 = 有効期間終了日;
     }
 
     /**
-     * @return the 申請日
+     * 申請日を取得する。
+     *
+     * @return 申請日
      */
     public FlexibleDate get申請日() {
         return 申請日;
     }
 
     /**
-     * @param 申請日 the 申請日 to set
+     * 申請日を設定する。
+     *
+     * @param 申請日 申請日
      */
     public void set申請日(FlexibleDate 申請日) {
         this.申請日 = 申請日;
     }
 
     /**
-     * @return the is性同一性障害用
+     * selected性同一障害用を取得する。
+     *
+     * @return selected性同一障害用
      */
-    public boolean is性同一性障害用() {
-        return is性同一性障害用;
+    public boolean is性同一障害用() {
+        return selected性同一障害用;
     }
 
     /**
-     * @param is性同一性障害用 the is性同一性障害用 to set
+     * selected性同一障害用を設定する。
+     *
+     * @param selected性同一障害用 selected性同一障害用
      */
-    public void setIs性同一性障害用(boolean is性同一性障害用) {
-        this.is性同一性障害用 = is性同一性障害用;
+    public void setSelected性同一障害用(boolean selected性同一障害用) {
+        this.selected性同一障害用 = selected性同一障害用;
     }
 
     /**
-     * @return the 限度基準額
+     * 限度基準額を取得する。
+     *
+     * @return 限度基準額
      */
     public Decimal get限度基準額() {
         return 限度基準額;
     }
 
     /**
-     * @param 限度基準額 the 限度基準額 to set
+     * 限度基準額を設定する。
+     *
+     * @param 限度基準額 限度基準額
      */
     public void set限度基準額(Decimal 限度基準額) {
         this.限度基準額 = 限度基準額;
     }
 
     /**
-     * @return the 限度額有効期間開始日
+     * 限度額有効期間開始日を取得する。
+     *
+     * @return 限度額有効期間開始日
      */
     public RDate get限度額有効期間開始日() {
         return 限度額有効期間開始日;
     }
 
     /**
-     * @param 限度額有効期間開始日 the 限度額有効期間開始日 to set
+     * 限度額有効期間開始日を設定する。
+     *
+     * @param 限度額有効期間開始日 限度額有効期間開始日
      */
     public void set限度額有効期間開始日(RDate 限度額有効期間開始日) {
         this.限度額有効期間開始日 = 限度額有効期間開始日;
     }
 
     /**
-     * @return the 限度額有効期間終了日
+     * 限度額有効期間終了日を取得する。
+     *
+     * @return 限度額有効期間終了日
      */
     public RDate get限度額有効期間終了日() {
         return 限度額有効期間終了日;
     }
 
     /**
-     * @param 限度額有効期間終了日 the 限度額有効期間終了日 to set
+     * 限度額有効期間終了日を設定する。
+     *
+     * @param 限度額有効期間終了日 限度額有効期間終了日
      */
     public void set限度額有効期間終了日(RDate 限度額有効期間終了日) {
         this.限度額有効期間終了日 = 限度額有効期間終了日;
     }
 
     /**
-     * @return the 限度基準額サービス種類
+     * 限度基準額サービス種類を取得する。
+     *
+     * @return 限度基準額サービス種類
      */
     public List<RString> get限度基準額サービス種類() {
         return 限度基準額サービス種類;
     }
 
     /**
-     * @param 限度基準額サービス種類 the 限度基準額サービス種類 to set
+     * 限度基準額サービス種類を設定する。
+     *
+     * @param 限度基準額サービス種類 限度基準額サービス種類
      */
     public void set限度基準額サービス種類(List<RString> 限度基準額サービス種類) {
         this.限度基準額サービス種類 = 限度基準額サービス種類;
     }
 
     /**
-     * @return the 限度基準額サービス額
+     * 限度基準額サービス額を取得する。
+     *
+     * @return 限度基準額サービス額
      */
     public List<RString> get限度基準額サービス額() {
         return 限度基準額サービス額;
     }
 
     /**
-     * @param 限度基準額サービス額 the 限度基準額サービス額 to set
+     * 限度基準額サービス額を設定する。
+     *
+     * @param 限度基準額サービス額 限度基準額サービス額
      */
     public void set限度基準額サービス額(List<RString> 限度基準額サービス額) {
         this.限度基準額サービス額 = 限度基準額サービス額;
     }
 
     /**
-     * @return the 審査会意見
+     * 審査会意見を取得する。
+     *
+     * @return 審査会意見
      */
     public RString get審査会意見() {
         return 審査会意見;
     }
 
     /**
-     * @param 審査会意見 the 審査会意見 to set
+     * 審査会意見を設定する。
+     *
+     * @param 審査会意見 審査会意見
      */
     public void set審査会意見(RString 審査会意見) {
         this.審査会意見 = 審査会意見;
     }
 
     /**
-     * @return the 給付制限内容
+     * 給付制限内容を取得する。
+     *
+     * @return 給付制限内容
      */
     public List<RString> get給付制限内容() {
         return 給付制限内容;
     }
 
     /**
-     * @param 給付制限内容 the 給付制限内容 to set
+     * 給付制限内容を設定する。
+     *
+     * @param 給付制限内容 給付制限内容
      */
     public void set給付制限内容(List<RString> 給付制限内容) {
         this.給付制限内容 = 給付制限内容;
     }
 
     /**
-     * @return the 給付制限開始日
+     * 給付制限開始日を取得する。
+     *
+     * @return 給付制限開始日
      */
     public List<RDate> get給付制限開始日() {
         return 給付制限開始日;
     }
 
     /**
-     * @param 給付制限開始日 the 給付制限開始日 to set
+     * 給付制限開始日を設定する。
+     *
+     * @param 給付制限開始日 給付制限開始日
      */
     public void set給付制限開始日(List<RDate> 給付制限開始日) {
         this.給付制限開始日 = 給付制限開始日;
     }
 
     /**
-     * @return the 給付制限終了日
+     * 給付制限終了日を取得する。
+     *
+     * @return 給付制限終了日
      */
     public List<RDate> get給付制限終了日() {
         return 給付制限終了日;
     }
 
     /**
-     * @param 給付制限終了日 the 給付制限終了日 to set
+     * 給付制限終了日を設定する。
+     *
+     * @param 給付制限終了日 給付制限終了日
      */
     public void set給付制限終了日(List<RDate> 給付制限終了日) {
         this.給付制限終了日 = 給付制限終了日;
     }
 
     /**
-     * @return the 支援事業者名称
+     * 支援事業者名称を取得する。
+     *
+     * @return 支援事業者名称
      */
     public List<RString> get支援事業者名称() {
         return 支援事業者名称;
     }
 
     /**
-     * @param 支援事業者名称 the 支援事業者名称 to set
+     * 支援事業者名称を設定する。
+     *
+     * @param 支援事業者名称 支援事業者名称
      */
     public void set支援事業者名称(List<RString> 支援事業者名称) {
         this.支援事業者名称 = 支援事業者名称;
     }
 
     /**
-     * @return the 支援事業者届出日
+     * 支援事業者届出日を取得する。
+     *
+     * @return 支援事業者届出日
      */
     public List<FlexibleDate> get支援事業者届出日() {
         return 支援事業者届出日;
     }
 
     /**
-     * @param 支援事業者届出日 the 支援事業者届出日 to set
+     * 支援事業者届出日を設定する。
+     *
+     * @param 支援事業者届出日 支援事業者届出日
      */
     public void set支援事業者届出日(List<FlexibleDate> 支援事業者届出日) {
         this.支援事業者届出日 = 支援事業者届出日;
     }
 
     /**
-     * @return the 支援事業者適用開始日
+     * 支援事業者適用開始日を取得する。
+     *
+     * @return 支援事業者適用開始日
      */
     public List<FlexibleDate> get支援事業者適用開始日() {
         return 支援事業者適用開始日;
     }
 
     /**
-     * @param 支援事業者適用開始日 the 支援事業者適用開始日 to set
+     * 支援事業者適用開始日を設定する。
+     *
+     * @param 支援事業者適用開始日 支援事業者適用開始日
      */
     public void set支援事業者適用開始日(List<FlexibleDate> 支援事業者適用開始日) {
         this.支援事業者適用開始日 = 支援事業者適用開始日;
     }
 
     /**
-     * @return the 施設名
+     * 支援事業者適用終了日を取得する。
+     *
+     * @return 支援事業者適用終了日
+     */
+    public List<FlexibleDate> get支援事業者適用終了日() {
+        return 支援事業者適用終了日;
+    }
+
+    /**
+     * 支援事業者適用終了日を設定する。
+     *
+     * @param 支援事業者適用終了日 the 支援事業者適用終了日 to set
+     */
+    public void set支援事業者適用終了日(List<FlexibleDate> 支援事業者適用終了日) {
+        this.支援事業者適用終了日 = 支援事業者適用終了日;
+    }
+
+    /**
+     * 施設名を取得する。
+     *
+     * @return 施設名
      */
     public List<RString> get施設名() {
         return 施設名;
     }
 
     /**
-     * @param 施設名 the 施設名 to set
+     * 施設名を設定する。
+     *
+     * @param 施設名 施設名
      */
     public void set施設名(List<RString> 施設名) {
         this.施設名 = 施設名;
     }
 
     /**
-     * @return the 施設入所日
+     * 施設入所日を取得する。
+     *
+     * @return 施設入所日
      */
     public List<FlexibleDate> get施設入所日() {
         return 施設入所日;
     }
 
     /**
-     * @param 施設入所日 the 施設入所日 to set
+     * 施設入所日を設定する。
+     *
+     * @param 施設入所日 施設入所日
      */
     public void set施設入所日(List<FlexibleDate> 施設入所日) {
         this.施設入所日 = 施設入所日;
     }
 
     /**
-     * @return the 施設退所日
+     * 施設退所日を取得する。
+     *
+     * @return 施設退所日
      */
     public List<FlexibleDate> get施設退所日() {
         return 施設退所日;
     }
 
     /**
-     * @param 施設退所日 the 施設退所日 to set
+     * 施設退所日を設定する。
+     *
+     * @param 施設退所日 施設退所日
      */
     public void set施設退所日(List<FlexibleDate> 施設退所日) {
         this.施設退所日 = 施設退所日;
     }
 
     /**
-     * @return the isテスト
+     * 入所施設コードを取得する。
+     *
+     * @return 入所施設コード
+     */
+    public List<RString> get入所施設コード() {
+        return 入所施設コード;
+    }
+
+    /**
+     * 入所施設コードを設定する。
+     *
+     * @param 入所施設コード List<RString>
+     */
+    public void set入所施設コード(List<RString> 入所施設コード) {
+        this.入所施設コード = 入所施設コード;
+    }
+
+    /**
+     * selectedテストを取得する。
+     *
+     * @return selectedテスト
      */
     public boolean isテスト() {
-        return isテスト;
+        return selectedテスト;
     }
 
     /**
-     * @param isテスト the isテスト to set
+     * selectedテストを設定する。
+     *
+     * @param selectedテスト selectedテスト
      */
-    public void setIsテスト(boolean isテスト) {
-        this.isテスト = isテスト;
+    public void setSelectedテスト(boolean selectedテスト) {
+        this.selectedテスト = selectedテスト;
     }
 
     /**
-     * @return the is直前履歴
+     * selected直前履歴を取得する。
+     *
+     * @return selected直前履歴
      */
     public boolean is直前履歴() {
-        return is直前履歴;
+        return selected直前履歴;
     }
 
     /**
-     * @param is直前履歴 the is直前履歴 to set
+     * selected直前履歴を設定する。
+     *
+     * @param selected直前履歴 selected直前履歴
      */
-    public void setIs直前履歴(boolean is直前履歴) {
-        this.is直前履歴 = is直前履歴;
+    public void setSelected直前履歴(boolean selected直前履歴) {
+        this.selected直前履歴 = selected直前履歴;
     }
 }

@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
