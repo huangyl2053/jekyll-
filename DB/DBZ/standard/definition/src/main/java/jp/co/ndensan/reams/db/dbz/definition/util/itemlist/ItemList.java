@@ -268,7 +268,7 @@ public final class ItemList<E> implements IItemList<E>, Serializable {
     }
 
     @Override
-    public <R, A> R collect(IPlainCollector<? super E, A, R> collector) {
+    public <R, A> R collect(IItemCollector<? super E, A, R> collector) {
         A container = collector.container().get();
         IBiConsumer<A, ? super E> accumulator = collector.accumulator();
         for (E element : elements) {

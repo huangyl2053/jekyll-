@@ -184,12 +184,12 @@ public interface IItemList<E> extends Iterable<E> {
     IItemList<E> added(E... items);
 
     /**
-     * {@link IPlainCollector}によって、保持する要素を集積・変換して返します。
+     * {@link IItemCollector}によって、保持する要素を集積・変換して返します。
      *
      * @param <R> 結果の型
      * @param <A> 集積用の型(結果の型と同じ場合もある)
-     * @param collector {@link IPlainCollector}
-     * @return {@link IPlainCollector}により、保持する要素を集積・変換した結果
+     * @param collector {@link IItemCollector}
+     * @return {@link IItemCollector}により、保持する要素を集積・変換した結果
      */
-    <R, A> R collect(IPlainCollector<? super E, A, R> collector);
+    <R, A> R collect(IItemCollector<? super E, A, R> collector);
 }

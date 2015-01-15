@@ -21,13 +21,13 @@ import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
- * {@link IPlainCollector}の実装を集めたユーティリティです。
+ * {@link IItemCollector}の実装を集めたユーティリティです。
  *
  * @author N3327 三浦 凌
  */
-public final class PlainCollectors {
+public final class ItemCollectors {
 
-    private PlainCollectors() {
+    private ItemCollectors() {
     }
 
     private static void _requireNonNull(Object target, String name) {
@@ -45,8 +45,8 @@ public final class PlainCollectors {
      * @param finisher 最後にコレクタの結果を変換するためのfunction
      * @return コレクタに仕上げの変換を付与したもの
      */
-    public static <T, A, R, RR> IPlainCollector<T, A, RR> collectingAndThen(IPlainCollector<T, A, R> downstream, IFunction<R, RR> finisher) {
-        return PlainCollector.of(
+    public static <T, A, R, RR> IItemCollector<T, A, RR> collectingAndThen(IItemCollector<T, A, R> downstream, IFunction<R, RR> finisher) {
+        return ItemCollector.of(
                 downstream.container(),
                 downstream.accumulator(),
                 MyFunction.of(downstream.finisher()).andThen(finisher));
@@ -58,8 +58,8 @@ public final class PlainCollectors {
      * @param <T> 集積元の型, {@link List}が保持する要素の型
      * @return {@link List}へ集積するためのコレクタ
      */
-    public static <T> IPlainCollector<T, ?, List<T>> toList() {
-        return PlainCollector.of(
+    public static <T> IItemCollector<T, ?, List<T>> toList() {
+        return ItemCollector.of(
                 _Suppliers.<T>newArrayList(),
                 _BiConsumers.<List, T>collection_add());
     }
@@ -70,8 +70,8 @@ public final class PlainCollectors {
      * @param <T> 集積元の型,{@link IItemList}が保持する要素の型
      * @return {@link IItemList}へ集積するためのコレクタ
      */
-    public static <T> IPlainCollector<T, ?, IItemList<T>> toIItemList() {
-        return PlainCollector.of(
+    public static <T> IItemCollector<T, ?, IItemList<T>> toIItemList() {
+        return ItemCollector.of(
                 _Suppliers.<T>newArrayList(),
                 _BiConsumers.<List, T>collection_add(),
                 new IFunction<List<T>, IItemList<T>>() {
@@ -89,8 +89,8 @@ public final class PlainCollectors {
      * @param comparator {@link Comparator}
      * @return 指定の{@link Comparator}でソートした{@link IItemList}へ集積するためのコレクタ
      */
-    public static <T> IPlainCollector<T, ?, IItemList<T>> sortBy(final Comparator<? super T> comparator) {
-        return PlainCollector.of(
+    public static <T> IItemCollector<T, ?, IItemList<T>> sortBy(final Comparator<? super T> comparator) {
+        return ItemCollector.of(
                 _Suppliers.<T>newArrayList(),
                 _BiConsumers.<List, T>collection_add(),
                 new IFunction<List<T>, IItemList<T>>() {
@@ -108,8 +108,8 @@ public final class PlainCollectors {
      * @param comparator {@link Comparator}
      * @return 指定の{@link Comparator}でソートし先頭の要素を{@link Optional}で取得するコレクタ
      */
-    public static <T> IPlainCollector<T, ?, Optional<T>> minBy(final Comparator<? super T> comparator) {
-        return PlainCollector.of(
+    public static <T> IItemCollector<T, ?, Optional<T>> minBy(final Comparator<? super T> comparator) {
+        return ItemCollector.of(
                 _Suppliers.<T>newArrayList(),
                 _BiConsumers.<List, T>collection_add(),
                 new IFunction<List<T>, Optional<T>>() {
@@ -127,8 +127,8 @@ public final class PlainCollectors {
      * @param comparator {@link Comparator}
      * @return 指定の{@link Comparator}でソートし最後の要素を{@link Optional}で取得するコレクタ
      */
-    public static <T> IPlainCollector<T, ?, Optional<T>> maxBy(final Comparator<? super T> comparator) {
-        return PlainCollector.of(
+    public static <T> IItemCollector<T, ?, Optional<T>> maxBy(final Comparator<? super T> comparator) {
+        return ItemCollector.of(
                 _Suppliers.<T>newArrayList(),
                 _BiConsumers.<List, T>collection_add(),
                 new IFunction<List<T>, Optional<T>>() {
@@ -149,7 +149,7 @@ public final class PlainCollectors {
      * @param valueMapper 値へマッピングするfunction
      * @return {@link IItemList}へ集積するためのコレクタ
      */
-    public static <T, K, V> IPlainCollector<T, ?, Map<K, V>> toMap(
+    public static <T, K, V> IItemCollector<T, ?, Map<K, V>> toMap(
             final IFunction<? super T, ? extends K> keyMapper, final IFunction<? super T, ? extends V> valueMapper) {
         _requireNonNull(keyMapper, "keyMapper");
         _requireNonNull(valueMapper, "valueMapper");
@@ -160,7 +160,7 @@ public final class PlainCollectors {
                 t.put(keyMapper.apply(u), valueMapper.apply(u));
             }
         };
-        return PlainCollector.of(container, accumulator);
+        return ItemCollector.of(container, accumulator);
     }
 
     /**
@@ -171,8 +171,8 @@ public final class PlainCollectors {
      * @param keyMapper キーへマッピングするfunction
      * @return グルーピング用のコレクタ
      */
-    public static <T, K> IPlainCollector<T, ?, Map<K, IItemList<T>>> groupingBy(final IFunction<T, K> keyMapper) {
-        return groupingBy(keyMapper, PlainCollectors.<T>toIItemList());
+    public static <T, K> IItemCollector<T, ?, Map<K, IItemList<T>>> groupingBy(final IFunction<T, K> keyMapper) {
+        return groupingBy(keyMapper, ItemCollectors.<T>toIItemList());
     }
 
     /**
@@ -186,8 +186,8 @@ public final class PlainCollectors {
      * @param downstream 結果を生成するコレクタ
      * @return グルーピング用のコレクタ
      */
-    public static <T, K, A, D> IPlainCollector<T, ?, Map<K, D>> groupingBy(final IFunction<T, K> classifier,
-            final IPlainCollector<? super T, A, D> downstream) {
+    public static <T, K, A, D> IItemCollector<T, ?, Map<K, D>> groupingBy(final IFunction<T, K> classifier,
+            final IItemCollector<? super T, A, D> downstream) {
         _requireNonNull(classifier, "classifier");
         ISupplier<Map<K, A>> container = _Suppliers.newHashMap();
         final ISupplier<A> downstreamContainer = downstream.container();
@@ -209,7 +209,7 @@ public final class PlainCollectors {
                 return map;
             }
         };
-        return PlainCollector.of(container, accumulator, finisher);
+        return ItemCollector.of(container, accumulator, finisher);
     }
 
     /**

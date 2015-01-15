@@ -21,19 +21,19 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * {@link PlainCollectorsSupport}のテストです。
+ * {@link ItemCollectorsSupport}のテストです。
  *
  * @author N3327 三浦 凌
  */
 @RunWith(Enclosed.class)
-public class PlainCollectorsSupportTest {
+public class ItemCollectorsSupportTest {
 
-    public PlainCollectorsSupportTest() {
+    public ItemCollectorsSupportTest() {
     }
 
     public static class unmodifiableList extends DbzTestBase {
 
-        private PlainCollectorsSupport sut;
+        private ItemCollectorsSupport sut;
         private List<String> list;
 
         @Before
@@ -56,7 +56,7 @@ public class PlainCollectorsSupportTest {
 
     public static class unmodifiableMap extends DbzTestBase {
 
-        private PlainCollectorsSupport sut;
+        private ItemCollectorsSupport sut;
         private Map<String, String> map;
 
         @Before
@@ -82,7 +82,7 @@ public class PlainCollectorsSupportTest {
 
     public static class gatheringPresentItems extends DbzTestBase {
 
-        private PlainCollectorsSupport sut;
+        private ItemCollectorsSupport sut;
         private final Map<String, Optional<String>> INPUT_MAP;
         private final List<String> IDEAL_VALUES;
 

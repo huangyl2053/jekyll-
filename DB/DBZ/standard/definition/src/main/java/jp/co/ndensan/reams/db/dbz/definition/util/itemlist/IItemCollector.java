@@ -13,8 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
- * ある入力要素の集合を、『コンテナ』と呼ばれる集積用のオブジェクトに集積して、その後、最終的な結果へと変換して返す、という一連の処理の定義であることを表します。<br/>
- * Java SE8 では「可変リダクション操作」と呼ばれます。
+ * ある入力要素の集合を、集積用のオブジェクト(コンテナ)に集積して、その後、最終的な結果へと変換して返す、という一連の処理の定義であることを表します。
  *
  * <p>
  * {@link #container() container()}で、集積用のコンテナを生成します。これは{@link List}や{@link Map}等が担当します。<br/>
@@ -31,7 +30,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  *   }
  *   return collector.finisher().apply(container);
  * }</pre>
- * {@link IPlainCollector}の実装について、{@link RString}の集合を結合して、1つの{@link RString}にしたい場合を例に示します。<br/>
+ *
+ * {@link IItemCollector}の実装について、{@link RString}の集合を結合して、1つの{@link RString}にしたい場合を例に示します。<br/>
  * コンテナには、{@link RStringBuilder}を用います。{@link ISupplier}に、新しい{@link RStringBuilder}のインスタンスを返す処理を定義します。
  * <pre>{@code
  *
@@ -73,7 +73,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  * @param <A> 集積先のオブジェクトの型
  * @param <R> 結果の型
  */
-public interface IPlainCollector<T, A, R> {
+public interface IItemCollector<T, A, R> {
 
     /**
      * 集積用のオブジェクトを生成する{@link ISupplier}を返します。
