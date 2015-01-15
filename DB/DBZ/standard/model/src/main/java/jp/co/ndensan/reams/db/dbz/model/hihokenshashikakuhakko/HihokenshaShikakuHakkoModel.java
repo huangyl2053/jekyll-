@@ -46,6 +46,7 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
     private List<RString> 支援事業者名称;
     private List<FlexibleDate> 支援事業者届出日;
     private List<FlexibleDate> 支援事業者適用開始日;
+    private List<FlexibleDate> 支援事業者適用終了日;
     private List<RString> 施設名;
     private List<FlexibleDate> 施設入所日;
     private List<FlexibleDate> 施設退所日;
@@ -510,6 +511,24 @@ public class HihokenshaShikakuHakkoModel implements Serializable {
      */
     public void set支援事業者適用開始日(List<FlexibleDate> 支援事業者適用開始日) {
         this.支援事業者適用開始日 = 支援事業者適用開始日;
+    }
+
+    /**
+     * 支援事業者適用終了日を取得する。
+     *
+     * @return 支援事業者適用終了日
+     */
+    public List<FlexibleDate> get支援事業者適用終了日() {
+        return 支援事業者適用終了日;
+    }
+
+    /**
+     * 支援事業者適用終了日を設定する。
+     *
+     * @param 支援事業者適用終了日 支援事業者適用終了日
+     */
+    public void set支援事業者適用終了日(List<FlexibleDate> 支援事業者適用終了日) {
+        this.支援事業者適用終了日 = 支援事業者適用終了日;
     }
 
     /**

@@ -178,11 +178,13 @@ public class HihokenshaShikakuHakkoHandler {
 
     private void set有効期限(NinteiShinseiKekkaModel 認定申請結果) {
         if (div.getMode_発行証タイプ() == 資格者証) {
-            div.getTxtYukoKigen().setValue(new RDate(
-                    new HihokenshaShikakuHakko().get有効期限初期値(
-                            認定申請結果.get要介護認定申請情報モデル().get().get認定申請区分申請時コード(),
-                            認定申請結果.get要介護認定申請情報モデル().get().get認定申請年月日(),
-                            認定申請結果.get要介護認定結果情報モデル().get().get認定有効期間終了年月日()).toString()));
+            FlexibleDate 有効期限 = new HihokenshaShikakuHakko().get有効期限初期値(
+                    認定申請結果.get要介護認定申請情報モデル().get().get認定申請区分申請時コード(),
+                    認定申請結果.get要介護認定申請情報モデル().get().get認定申請年月日(),
+                    認定申請結果.get要介護認定結果情報モデル().get().get認定有効期間終了年月日());
+            if (has日付(有効期限)) {
+                div.getTxtYukoKigen().setValue(new RDate(有効期限.toString()));
+            }
         }
     }
 
@@ -190,18 +192,36 @@ public class HihokenshaShikakuHakkoHandler {
 
         //  TODO n8187 久保田 要介護状態のEnumクラスは制度改正年度ごとに増える予定。名称の取得は将来的にビジネスクラスを使用して取得する予定だが未検討。 2015/01/31。
         RString 要介護状態 = YokaigoJotaiKubun09.toValue(認定申請結果.get要介護認定結果情報モデル().get().get要介護状態区分コード().value()).getName();
+        FlexibleDate 認定年月日 = 認定申請結果.get要介護認定結果情報モデル().get().get要介護度認定年月日();
+        FlexibleDate 開始年月日 = 認定申請結果.get要介護認定結果情報モデル().get().get認定有効期間開始年月日();
+        FlexibleDate 終了年月日 = 認定申請結果.get要介護認定結果情報モデル().get().get認定有効期間終了年月日();
+        FlexibleDate 申請年月日 = 認定申請結果.get要介護認定申請情報モデル().get().get認定申請年月日();
         div.getTxtYokaigodo().setValue(要介護状態);
-        div.getTxtNinteiYMD().setValue(new RDate(認定申請結果.get要介護認定結果情報モデル().get().get要介護度認定年月日().toString()));
-        div.getTxtNinteiYukoFromYMD().setValue(new RDate(認定申請結果.get要介護認定結果情報モデル().get().get認定有効期間開始年月日().toString()));
-        div.getTxtNinteiYukoToYMD().setValue(new RDate(認定申請結果.get要介護認定結果情報モデル().get().get認定有効期間終了年月日().toString()));
-        div.getTxtShinseiDate().setValue(認定申請結果.get要介護認定申請情報モデル().get().get認定申請年月日());
+        if (has日付(認定年月日)) {
+            div.getTxtNinteiYMD().setValue(new RDate(認定年月日.toString()));
+        }
+        if (has日付(開始年月日)) {
+            div.getTxtNinteiYukoFromYMD().setValue(new RDate(開始年月日.toString()));
+        }
+        if (has日付(終了年月日)) {
+            div.getTxtNinteiYukoToYMD().setValue(new RDate(終了年月日.toString()));
+        }
+        if (has日付(申請年月日)) {
+            div.getTxtShinseiDate().setValue(申請年月日);
+        }
 
     }
 
     private void set区分支給限度額(NinteiShinseiKekkaModel 認定申請結果) {
         div.getTxtKubunShikyuGendoKijunGaku().setValue(認定申請結果.get受給者台帳モデル().get支給限度単位数());
-        div.getTxtYukoFromYMD().setValue(new RDate(認定申請結果.get受給者台帳モデル().get支給限度有効開始年月日().toString()));
-        div.getTxtYukoToYMD().setValue(new RDate(認定申請結果.get受給者台帳モデル().get支給限度有効終了年月日().toString()));
+        FlexibleDate 開始年月日 = 認定申請結果.get受給者台帳モデル().get支給限度有効開始年月日();
+        FlexibleDate 終了年月日 = 認定申請結果.get受給者台帳モデル().get支給限度有効終了年月日();
+        if (has日付(開始年月日)) {
+            div.getTxtYukoFromYMD().setValue(new RDate(開始年月日.toString()));
+        }
+        if (has日付(終了年月日)) {
+            div.getTxtYukoToYMD().setValue(new RDate(終了年月日.toString()));
+        }
     }
 
     private void set種類支給限度基準額(NinteiShinseiKekkaModel 認定申請結果) {
@@ -270,8 +290,16 @@ public class HihokenshaShikakuHakkoHandler {
                 FlexibleDate 制限期間開始日,
                 FlexibleDate 制限期間終了日) {
             this.制限内容 = 制限内容;
-            this.制限期間開始日 = 制限期間開始日;
-            this.制限期間終了日 = 制限期間終了日;
+            if (制限期間開始日 == null) {
+                this.制限期間開始日 = FlexibleDate.EMPTY;
+            } else {
+                this.制限期間開始日 = 制限期間開始日;
+            }
+            if (制限期間終了日 == null) {
+                this.制限期間終了日 = FlexibleDate.EMPTY;
+            } else {
+                this.制限期間終了日 = 制限期間終了日;
+            }
         }
 
         RString get制限内容() {
@@ -390,37 +418,41 @@ public class HihokenshaShikakuHakkoHandler {
     private void set給付制限to画面(List<KyufuSeigenShutsuryoku> 給付制限) {
         if (!給付制限.isEmpty()) {
             div.getTxtKyufuSeigenNaiyo1().setValue(給付制限.get(0).get制限内容());
-            div.getTxtKyufuSeigenKikan1().setFromValue(new RDate(給付制限.get(0).get制限期間開始日().toString()));
-            if (has給付制限期間終了日(給付制限.get(0))) {
+            if (has日付(給付制限.get(0).get制限期間開始日())) {
+                div.getTxtKyufuSeigenKikan1().setFromValue(new RDate(給付制限.get(0).get制限期間開始日().toString()));
+            }
+            if (has日付(給付制限.get(0).get制限期間終了日())) {
                 div.getTxtKyufuSeigenKikan1().setToValue(new RDate(給付制限.get(0).get制限期間終了日().toString()));
             }
             if (1 < 給付制限.size()) {
                 div.getTxtKyufuSeigenNaiyo2().setValue(給付制限.get(1).get制限内容());
-                div.getTxtKyufuSeigenKikan2().setFromValue(new RDate(給付制限.get(1).get制限期間開始日().toString()));
-                if (has給付制限期間終了日(給付制限.get(1))) {
+                if (has日付(給付制限.get(0).get制限期間開始日())) {
+                    div.getTxtKyufuSeigenKikan2().setFromValue(new RDate(給付制限.get(1).get制限期間開始日().toString()));
+                }
+                if (has日付(給付制限.get(1).get制限期間終了日())) {
                     div.getTxtKyufuSeigenKikan2().setToValue(new RDate(給付制限.get(1).get制限期間終了日().toString()));
                 }
             }
             if (2 < 給付制限.size()) {
                 div.getTxtKyufuSeigenNaiyo3().setValue(給付制限.get(2).get制限内容());
-                div.getTxtKyufuSeigenKikan3().setFromValue(new RDate(給付制限.get(2).get制限期間開始日().toString()));
-                if (has給付制限期間終了日(給付制限.get(2))) {
+                if (has日付(給付制限.get(0).get制限期間開始日())) {
+                    div.getTxtKyufuSeigenKikan3().setFromValue(new RDate(給付制限.get(2).get制限期間開始日().toString()));
+                }
+                if (has日付(給付制限.get(2).get制限期間終了日())) {
                     div.getTxtKyufuSeigenKikan3().setToValue(new RDate(給付制限.get(2).get制限期間終了日().toString()));
                 }
             }
         }
     }
 
-    private boolean has給付制限期間終了日(KyufuSeigenShutsuryoku 給付制限) {
-
-        if (給付制限.get制限期間終了日() == null) {
+    private boolean has日付(FlexibleDate 日付) {
+        if (日付 == null) {
             return false;
         }
-        if (給付制限.get制限期間終了日().equals(FlexibleDate.EMPTY)) {
+        if (日付.equals(FlexibleDate.EMPTY)) {
             return false;
         }
         return true;
-
     }
 
     private static class ShienJigyosha {
@@ -428,13 +460,24 @@ public class HihokenshaShikakuHakkoHandler {
         private final RString 名称;
         private final FlexibleDate 届出日;
         private final FlexibleDate 適用開始日;
+        private final FlexibleDate 適用終了日;
 
         ShienJigyosha(RString 名称,
                 FlexibleDate 届出日,
-                FlexibleDate 適用開始日) {
+                FlexibleDate 適用開始日,
+                FlexibleDate 適用終了日) {
             this.名称 = 名称;
             this.届出日 = 届出日;
-            this.適用開始日 = 適用開始日;
+            if (適用開始日 == null) {
+                this.適用開始日 = FlexibleDate.EMPTY;
+            } else {
+                this.適用開始日 = 適用開始日;
+            }
+            if (適用終了日 == null) {
+                this.適用終了日 = FlexibleDate.EMPTY;
+            } else {
+                this.適用終了日 = 適用終了日;
+            }
         }
 
         RString get名称() {
@@ -448,6 +491,10 @@ public class HihokenshaShikakuHakkoHandler {
         FlexibleDate get適用開始日() {
             return this.適用開始日;
         }
+
+        FlexibleDate get適用終了日() {
+            return this.適用終了日;
+        }
     }
 
     private void set支援事業者(HihokenshaNo 被保険者番号) {
@@ -457,6 +504,7 @@ public class HihokenshaShikakuHakkoHandler {
         if (!居宅計画List.isEmpty()) {
             RString 支援事業者名称;
             FlexibleDate 適用開始日;
+            FlexibleDate 適用終了日;
             for (KyotakuKeikakuRelateModel model : 居宅計画List) {
                 FlexibleDate 届出日 = model.get居宅給付計画届出モデル().get届出年月日();
                 if (model.get居宅給付計画事業者作成モデル().isPresent()) {
@@ -468,11 +516,13 @@ public class HihokenshaShikakuHakkoHandler {
                     RString 委託先事業者名称 = new RString("委託先事業者名称");
                     支援事業者名称 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).load支援事業者名称(計画事業者名称, 委託先事業者名称);
                     適用開始日 = model.get居宅給付計画事業者作成モデル().get().get適用開始年月日();
+                    適用終了日 = model.get居宅給付計画事業者作成モデル().get().get適用終了年月日();
                 } else {
                     支援事業者名称 = JIKOSAKUSEI;
                     適用開始日 = model.get居宅給付計画自己作成モデル().get().get適用開始年月日();
+                    適用終了日 = model.get居宅給付計画自己作成モデル().get().get適用終了年月日();
                 }
-                list.add(new ShienJigyosha(支援事業者名称, 届出日, 適用開始日));
+                list.add(new ShienJigyosha(支援事業者名称, 届出日, 適用開始日, 適用終了日));
             }
         }
         set支援事業者to画面(list);
@@ -480,21 +530,26 @@ public class HihokenshaShikakuHakkoHandler {
 
     private void set支援事業者to画面(List<ShienJigyosha> 支援事業者List) {
 
+        ArrayList<FlexibleDate> 支援事業者適用終了日List = new ArrayList<>();
         if (!支援事業者List.isEmpty()) {
             div.getTxtJigyosha1().setValue(支援事業者List.get(0).get名称());
             div.getTxtTodokedeYMD1().setValue(支援事業者List.get(0).get届出日());
             div.getTxtTekiyoStYMD1().setValue(支援事業者List.get(0).get適用開始日());
+            支援事業者適用終了日List.add(支援事業者List.get(0).get適用終了日());
             if (1 < 支援事業者List.size()) {
                 div.getTxtJigyosha2().setValue(支援事業者List.get(1).get名称());
                 div.getTxtTodokedeYMD2().setValue(支援事業者List.get(1).get届出日());
                 div.getTxtTekiyoStYMD2().setValue(支援事業者List.get(1).get適用開始日());
+                支援事業者適用終了日List.add(支援事業者List.get(1).get適用終了日());
             }
             if (2 < 支援事業者List.size()) {
                 div.getTxtJigyosha3().setValue(支援事業者List.get(2).get名称());
                 div.getTxtTodokedeYMD3().setValue(支援事業者List.get(2).get届出日());
                 div.getTxtTekiyoStYMD3().setValue(支援事業者List.get(2).get適用開始日());
+                支援事業者適用終了日List.add(支援事業者List.get(2).get適用終了日());
             }
         }
+        PanelSessionAccessor.put(div, new RString("支援事業者適用終了日List"), 支援事業者適用終了日List);
     }
 
     private void set施設入退所(ShikibetsuCode 識別コード) {
@@ -640,7 +695,7 @@ public class HihokenshaShikakuHakkoHandler {
 
         model.set限度基準額(div.getTplGendoGaku().getTxtKubunShikyuGendoKijunGaku().getValue());
         model.set限度額有効期間開始日(div.getTplGendoGaku().getTxtYukoFromYMD().getValue());
-        model.set限度額有効期間終了日(div.getTplGendoGaku().getTxtYukoFromYMD().getValue());
+        model.set限度額有効期間終了日(div.getTplGendoGaku().getTxtYukoToYMD().getValue());
         List<RString> 限度基準額サービス種類 = new ArrayList<>();
         List<RString> 限度基準額サービス額 = new ArrayList<>();
         for (dgShuruiShikyuGendoKijunGaku_Row item
@@ -689,6 +744,7 @@ public class HihokenshaShikakuHakkoHandler {
         List<RString> 支援事業者名称 = new ArrayList<>();
         List<FlexibleDate> 支援事業者届出日 = new ArrayList<>();
         List<FlexibleDate> 支援事業者適用開始日 = new ArrayList<>();
+        List<FlexibleDate> 支援事業者適用終了日 = new ArrayList<>();
         支援事業者名称.add(div.getTplShienJigyosha().getTxtJigyosha1().getValue());
         支援事業者名称.add(div.getTplShienJigyosha().getTxtJigyosha2().getValue());
         支援事業者名称.add(div.getTplShienJigyosha().getTxtJigyosha3().getValue());
@@ -698,10 +754,15 @@ public class HihokenshaShikakuHakkoHandler {
         支援事業者適用開始日.add(div.getTplShienJigyosha().getTxtTekiyoStYMD1().getValue());
         支援事業者適用開始日.add(div.getTplShienJigyosha().getTxtTekiyoStYMD2().getValue());
         支援事業者適用開始日.add(div.getTplShienJigyosha().getTxtTekiyoStYMD3().getValue());
+        ArrayList<FlexibleDate> 支援事業者適用終了日List = PanelSessionAccessor.get(div, new RString("支援事業者適用終了日List"), ArrayList.class);
+        for (FlexibleDate date : 支援事業者適用終了日List) {
+            支援事業者適用終了日.add(date);
+        }
 
         model.set支援事業者名称(支援事業者名称);
         model.set支援事業者届出日(支援事業者届出日);
         model.set支援事業者適用開始日(支援事業者適用開始日);
+        model.set支援事業者適用終了日(支援事業者適用終了日);
 
         return model;
     }
