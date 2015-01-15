@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.HihokenshaDaichoDac;
@@ -50,7 +50,7 @@ public class HihokenshaDaichoManager {
      * @return {@link HihokenshaDaichoModel}
      */
     @Transaction
-    public IOptional<HihokenshaDaichoModel> find被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
+    public Optional<HihokenshaDaichoModel> find被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
         return dac.select被保険者台帳ByKey(市町村コード, 被保険者番号, 処理日時);
     }
 
@@ -81,10 +81,10 @@ public class HihokenshaDaichoManager {
      *
      * @param 市町村コード 市町村コード
      * @param 識別コード 識別コード
-     * @return IOptional<HihokenshaDaichoModel>
+     * @return Optional<HihokenshaDaichoModel>
      */
     @Transaction
-    public IOptional<HihokenshaDaichoModel> get最新被保険者台帳(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+    public Optional<HihokenshaDaichoModel> get最新被保険者台帳(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
         return dac.select最新被保険者台帳(市町村コード, 識別コード);
     }
 
@@ -92,10 +92,10 @@ public class HihokenshaDaichoManager {
      * 条件に合致する最新被保険者台帳を返します。
      *
      * @param 被保険者番号 被保険者番号
-     * @return IOptional<HihokenshaDaichoModel>
+     * @return Optional<HihokenshaDaichoModel>
      */
     @Transaction
-    public IOptional<HihokenshaDaichoModel> get最新被保険者台帳(HihokenshaNo 被保険者番号) {
+    public Optional<HihokenshaDaichoModel> get最新被保険者台帳(HihokenshaNo 被保険者番号) {
         return dac.select最新被保険者台帳(被保険者番号);
     }
 

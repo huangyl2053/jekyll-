@@ -43,7 +43,7 @@ public final class Functions {
 
     /**
      * あるオブジェクトをそのオブジェクトへ変換する{@link IFunction IFunction}を返します。<br/>
-     * このFunctionは、例えば、{@link IOptional#map(jp.co.ndensan.reams.db.dbz.model.util.function.IFunction) IOptional#map()}などで、
+     * このFunctionは、例えば、{@link Optional#map(jp.co.ndensan.reams.db.dbz.model.util.function.IFunction) Optional#map()}などで、
      * 変換元のオブジェクトを親オブジェクトへ変換する際に用いることができます。
      *
      * @param <T> オブジェクトの型
@@ -82,5 +82,22 @@ public final class Functions {
      */
     public static <C extends P, P> IFunction<C, P> childToParent() {
         return (_ChildToParent<C, P>) CHILD_TO_PARENT;
+    }
+
+    /**
+     * あるオブジェクトを別のオブジェクトへキャストして返す{@link IFunction IFunction}を返します。<br/>
+     * 使用する際には{@link ClassCastException}に注意してください。
+     *
+     * @param <T> 元の型
+     * @param <R> キャスト後の型
+     * @return あるオブジェクトを別のオブジェクトへキャストして返す{@link IFunction IFunction}
+     */
+    public static <T, R> IFunction<T, R> cast() {
+        return new IFunction<T, R>() {
+            @Override
+            public R apply(T t) {
+                return (R) t;
+            }
+        };
     }
 }

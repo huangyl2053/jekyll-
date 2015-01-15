@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.model.relate;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.KyotakuKeikakuTodokedeModel;
 import jp.co.ndensan.reams.db.dbz.model.KyotakuKeikakuJigyoshaSakuseiModel;
 import jp.co.ndensan.reams.db.dbz.model.KyotakuKeikakuJikoSakuseiModel;
@@ -19,8 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class KyotakuKeikakuRelateModel implements Serializable {
 
     private KyotakuKeikakuTodokedeModel 居宅給付計画届出モデル;
-    private IOptional<KyotakuKeikakuJigyoshaSakuseiModel> 居宅給付計画事業者作成モデル;
-    private IOptional<KyotakuKeikakuJikoSakuseiModel> 居宅給付計画自己作成モデル;
+    private Optional<KyotakuKeikakuJigyoshaSakuseiModel> 居宅給付計画事業者作成モデル;
+    private Optional<KyotakuKeikakuJikoSakuseiModel> 居宅給付計画自己作成モデル;
 
     /**
      * デフォルトコンストラクタです。
@@ -37,8 +37,8 @@ public class KyotakuKeikakuRelateModel implements Serializable {
      */
     public KyotakuKeikakuRelateModel(
             KyotakuKeikakuTodokedeModel 居宅給付計画届出モデル,
-            IOptional<KyotakuKeikakuJigyoshaSakuseiModel> 居宅給付計画事業者作成モデル,
-            IOptional<KyotakuKeikakuJikoSakuseiModel> 居宅給付計画自己作成モデル) {
+            Optional<KyotakuKeikakuJigyoshaSakuseiModel> 居宅給付計画事業者作成モデル,
+            Optional<KyotakuKeikakuJikoSakuseiModel> 居宅給付計画自己作成モデル) {
         this.居宅給付計画届出モデル = 居宅給付計画届出モデル;
         this.居宅給付計画事業者作成モデル = 居宅給付計画事業者作成モデル;
         this.居宅給付計画自己作成モデル = 居宅給付計画自己作成モデル;
@@ -58,7 +58,7 @@ public class KyotakuKeikakuRelateModel implements Serializable {
      *
      * @return 居宅給付計画事業者作成モデル
      */
-    public IOptional<KyotakuKeikakuJigyoshaSakuseiModel> get居宅給付計画事業者作成モデル() {
+    public Optional<KyotakuKeikakuJigyoshaSakuseiModel> get居宅給付計画事業者作成モデル() {
         return 居宅給付計画事業者作成モデル;
     }
 
@@ -67,7 +67,7 @@ public class KyotakuKeikakuRelateModel implements Serializable {
      *
      * @return 居宅給付計画自己作成モデル
      */
-    public IOptional<KyotakuKeikakuJikoSakuseiModel> get居宅給付計画自己作成モデル() {
+    public Optional<KyotakuKeikakuJikoSakuseiModel> get居宅給付計画自己作成モデル() {
         return 居宅給付計画自己作成モデル;
     }
 
@@ -85,7 +85,7 @@ public class KyotakuKeikakuRelateModel implements Serializable {
      *
      * @param 居宅給付計画事業者作成モデル 居宅給付計画事業者作成モデル
      */
-    public void set居宅給付計画事業者作成モデル(IOptional<KyotakuKeikakuJigyoshaSakuseiModel> 居宅給付計画事業者作成モデル) {
+    public void set居宅給付計画事業者作成モデル(Optional<KyotakuKeikakuJigyoshaSakuseiModel> 居宅給付計画事業者作成モデル) {
         this.居宅給付計画事業者作成モデル = 居宅給付計画事業者作成モデル;
     }
 
@@ -94,7 +94,7 @@ public class KyotakuKeikakuRelateModel implements Serializable {
      *
      * @param 居宅給付計画自己作成モデル 居宅給付計画自己作成モデル
      */
-    public void set居宅給付計画自己作成モデル(IOptional<KyotakuKeikakuJikoSakuseiModel> 居宅給付計画自己作成モデル) {
+    public void set居宅給付計画自己作成モデル(Optional<KyotakuKeikakuJikoSakuseiModel> 居宅給付計画自己作成モデル) {
         this.居宅給付計画自己作成モデル = 居宅給付計画自己作成モデル;
     }
 

@@ -14,8 +14,7 @@ import jp.co.ndensan.reams.db.dbz.business.KiwarigakuCalculator;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
@@ -139,14 +138,14 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
 
     private static HokenryoDankaiManager createDankaiManager() {
         HokenryoDankaiManager mock = mock(HokenryoDankaiManager.class);
-        IOptional<HokenryoDankai> model = createHokenryoDankai();
+        Optional<HokenryoDankai> model = createHokenryoDankai();
         when(mock.get保険料段階(any(FukaNendo.class), any(LasdecCode.class), any(RString.class))).thenReturn(model);
         return mock;
     }
 
     private static KiwarigakuFinder createKiwariFinder() {
         KiwarigakuFinder mock = mock(KiwarigakuFinder.class);
-        IOptional<Kiwarigaku> model = createKiwarigaku();
+        Optional<Kiwarigaku> model = createKiwarigaku();
         when(mock.load期割額(any(ChoteiNendo.class), any(FukaNendo.class), any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(model);
         return mock;
     }
@@ -166,13 +165,13 @@ public class FukaRirekiAllHandlerTest extends DbzTestBase {
         return new FukaModel(entity);
     }
 
-    private static IOptional<HokenryoDankai> createHokenryoDankai() {
+    private static Optional<HokenryoDankai> createHokenryoDankai() {
         DbT2013HokenryoDankaiEntity entity = DbT2013HokenryoDankaiEntityGenerator.createDbT2013HokenryoDankaiEntity();
-        return DbOptional.ofNullable(new HokenryoDankai(new HokenryoDankaiModel(entity), createFukaKeisanConfig()));
+        return Optional.ofNullable(new HokenryoDankai(new HokenryoDankaiModel(entity), createFukaKeisanConfig()));
     }
 
-    private static IOptional<Kiwarigaku> createKiwarigaku() {
-        return DbOptional.ofNullable(new KiwarigakuCalculator(createKiwarigakuModelList()).calculate());
+    private static Optional<Kiwarigaku> createKiwarigaku() {
+        return Optional.ofNullable(new KiwarigakuCalculator(createKiwarigakuModelList()).calculate());
     }
 
     private static List<KiwarigakuMeisai> createKiwarigakuModelList() {

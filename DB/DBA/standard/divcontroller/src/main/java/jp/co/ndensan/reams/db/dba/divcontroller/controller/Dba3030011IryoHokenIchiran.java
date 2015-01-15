@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.IIryoHokenRirekiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA3030011.Dba3030011IryoHokenIchiranDiv;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.ShiharaiHohoHenkoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.ShiharaiHohoHenkoDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -51,7 +51,7 @@ public class ShiharaiHohoHenkoManager {
      * @return ShiharaiHohoHenkoModel
      */
     @Transaction
-    public IOptional<ShiharaiHohoHenkoModel> get支払方法変更(ShoKisaiHokenshaNo 証記載保険者番号,
+    public Optional<ShiharaiHohoHenkoModel> get支払方法変更(ShoKisaiHokenshaNo 証記載保険者番号,
             HihokenshaNo 被保険者番号,
             KanriKubun 管理区分,
             YMDHMS 処理日時) {
