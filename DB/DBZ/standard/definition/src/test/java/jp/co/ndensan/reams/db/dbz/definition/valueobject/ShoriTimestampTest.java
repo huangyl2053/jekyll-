@@ -32,7 +32,7 @@ public class ShoriTimestampTest {
         VALUE1 = new YMDHMS("20121101021012");
     }
 
-    public static class Constructor_RDateTime extends DbzTestBase {
+    public static class of_RDateTime extends DbzTestBase {
 
         private RDateTime rDateTime;
         private ShoriTimestamp sut;
@@ -40,26 +40,26 @@ public class ShoriTimestampTest {
         @Before
         public void setUp() {
             rDateTime = RDateTime.now();
-            sut = new ShoriTimestamp(rDateTime);
+            sut = ShoriTimestamp.of(rDateTime);
         }
 
         @Test
-        public void RDateTimeを引数にしたコンストラクタは_指定のRDateTimeをYMDHMSへ変換して保持する_getDateが一致() {
+        public void RDateTimeを引数にしたofは_指定のRDateTimeをYMDHMSへ変換して保持する_getDateが一致() {
             assertThat(sut.value().getRDateTime().getDate(), is(rDateTime.getDate()));
         }
 
         @Test
-        public void RDateTimeを引数にしたコンストラクタは_指定のRDateTimeをYMDHMSへ変換して保持する_getHourが一致() {
+        public void RDateTimeを引数にしたofは_指定のRDateTimeをYMDHMSへ変換して保持する_getHourが一致() {
             assertThat(sut.value().getRDateTime().getHour(), is(rDateTime.getHour()));
         }
 
         @Test
-        public void RDateTimeを引数にしたコンストラクタは_指定のRDateTimeをYMDHMSへ変換して保持する_getMinuteが一致() {
+        public void RDateTimeを引数にしたofは_指定のRDateTimeをYMDHMSへ変換して保持する_getMinuteが一致() {
             assertThat(sut.value().getRDateTime().getMinute(), is(rDateTime.getMinute()));
         }
 
         @Test
-        public void RDateTimeを引数にしたコンストラクタは_指定のRDateTimeをYMDHMSへ変換して保持する_getSecondが一致() {
+        public void RDateTimeを引数にしたofは_指定のRDateTimeをYMDHMSへ変換して保持する_getSecondが一致() {
             assertThat(sut.value().getRDateTime().getSecond(), is(rDateTime.getSecond()));
         }
     }
@@ -72,24 +72,24 @@ public class ShoriTimestampTest {
         @Before
         public void setUp() {
             value = VALUE1;
-            sut = new ShoriTimestamp(value);
+            sut = ShoriTimestamp.of(value);
         }
 
         @Test
         public void compareToは_引数のShoriTimestampが保持する値の方が前の時_0より大きい値を返す() {
-            ShoriTimestamp other = new ShoriTimestamp(value.minusDay(1));
+            ShoriTimestamp other = ShoriTimestamp.of(value.minusDay(1));
             assertThat(0 < sut.compareTo(other), is(true));
         }
 
         @Test
         public void compareToは_引数のShoriTimestampが同じ値を保持する時_0を返す() {
-            ShoriTimestamp other = new ShoriTimestamp(value);
+            ShoriTimestamp other = ShoriTimestamp.of(value);
             assertThat(sut.compareTo(other) == 0, is(true));
         }
 
         @Test
         public void compareToは_引数のShoriTimestampが保持する値の方が後の時_0より小さい値を返す() {
-            ShoriTimestamp other = new ShoriTimestamp(value.plusDay(1));
+            ShoriTimestamp other = ShoriTimestamp.of(value.plusDay(1));
             assertThat(sut.compareTo(other) < 0, is(true));
         }
     }
@@ -102,7 +102,7 @@ public class ShoriTimestampTest {
         @Before
         public void setUp() {
             value = VALUE1;
-            sut = new ShoriTimestamp(value);
+            sut = ShoriTimestamp.of(value);
         }
 
         @Test
@@ -117,7 +117,7 @@ public class ShoriTimestampTest {
 
         @Test
         public void equalsは_同じ値を保持するインスタンスを受け取った時_trueを返す() {
-            ShoriTimestamp other = new ShoriTimestamp(value);
+            ShoriTimestamp other = ShoriTimestamp.of(value);
             assertThat(sut.equals(other), is(true));
         }
     }
@@ -130,12 +130,12 @@ public class ShoriTimestampTest {
         @Before
         public void setUp() {
             value = VALUE1;
-            sut = new ShoriTimestamp(value);
+            sut = ShoriTimestamp.of(value);
         }
 
         @Test
         public void hashCodeは_同じ値を保持するインスタンス同士では_同じ値を返す() {
-            ShoriTimestamp other = new ShoriTimestamp(value);
+            ShoriTimestamp other = ShoriTimestamp.of(value);
             assertThat(sut.hashCode(), is(other.hashCode()));
         }
     }
@@ -148,7 +148,7 @@ public class ShoriTimestampTest {
         @Before
         public void setUp() {
             value = VALUE1;
-            sut = new ShoriTimestamp(value);
+            sut = ShoriTimestamp.of(value);
         }
 
         @Test
@@ -170,7 +170,7 @@ public class ShoriTimestampTest {
         @Before
         public void setUp() {
             value = VALUE1;
-            sut = new ShoriTimestamp(value);
+            sut = ShoriTimestamp.of(value);
         }
 
         @Test
@@ -186,21 +186,21 @@ public class ShoriTimestampTest {
         @Test
         public void getBetweenDaysは_minusDayにより生成したインスタンスが渡されたとき_minusDayの引数と同じ値を返す() {
             int day = 1;
-            ShoriTimestamp other = new ShoriTimestamp(value.minusDay(day));
+            ShoriTimestamp other = ShoriTimestamp.of(value.minusDay(day));
             assertThat(sut.getBetweenDays(other), is(day));
         }
 
         @Test
         public void plusDayで生成されるインスタンスと_保持するYMDHMSのplusDayに同じ値を渡して生成されたYMDHMSを保持するインスタンス同士は_equalsでtrueを返す() {
             int day = 1;
-            ShoriTimestamp other = new ShoriTimestamp(value.plusDay(day));
+            ShoriTimestamp other = ShoriTimestamp.of(value.plusDay(day));
             assertThat(sut.plusDay(day).equals(other), is(true));
         }
 
         @Test
         public void minusDayで生成されるインスタンスと_保持するYMDHMSのminusDayに同じ値を渡して生成されたYMDHMSを保持するインスタンス同士は_equalsでtrueを返す() {
             int day = 1;
-            ShoriTimestamp other = new ShoriTimestamp(value.minusDay(day));
+            ShoriTimestamp other = ShoriTimestamp.of(value.minusDay(day));
             assertThat(sut.minusDay(day), is(other));
         }
     }
@@ -213,7 +213,7 @@ public class ShoriTimestampTest {
         @Before
         public void setUp() {
             value = VALUE1;
-            sut = new ShoriTimestamp(value);
+            sut = ShoriTimestamp.of(value);
         }
 
         @Test
@@ -229,21 +229,21 @@ public class ShoriTimestampTest {
         @Test
         public void getBetweenMonthsは_minusMonthにより生成したインスタンスが渡されたとき_minusMonthの引数と同じ値を返す() {
             int month = 1;
-            ShoriTimestamp other = new ShoriTimestamp(value.minusMonth(month));
+            ShoriTimestamp other = ShoriTimestamp.of(value.minusMonth(month));
             assertThat(sut.getBetweenMonths(other), is(month));
         }
 
         @Test
         public void plusMonthで生成されるインスタンスと_保持するYMDHMSのplusMonthに同じ値を渡して生成されたYMDHMSを保持するインスタンス同士は_equalsでtrueを返す() {
             int month = 1;
-            ShoriTimestamp other = new ShoriTimestamp(value.plusMonth(month));
+            ShoriTimestamp other = ShoriTimestamp.of(value.plusMonth(month));
             assertThat(sut.plusMonth(month).equals(other), is(true));
         }
 
         @Test
         public void minusMonthで生成されるインスタンスと_保持するYMDHMSのminusMonthに同じ値を渡して生成されたYMDHMSを保持するインスタンス同士は_equalsでtrueを返す() {
             int month = 1;
-            ShoriTimestamp other = new ShoriTimestamp(value.minusMonth(month));
+            ShoriTimestamp other = ShoriTimestamp.of(value.minusMonth(month));
             assertThat(sut.minusMonth(month).equals(other), is(true));
         }
     }
@@ -256,7 +256,7 @@ public class ShoriTimestampTest {
         @Before
         public void setUp() {
             value = VALUE1;
-            sut = new ShoriTimestamp(value);
+            sut = ShoriTimestamp.of(value);
         }
 
         @Test
@@ -272,21 +272,21 @@ public class ShoriTimestampTest {
         @Test
         public void getBetweenYearsは_minusYearにより生成したインスタンスが渡されたとき_minusYearの引数と同じ値を返す() {
             int year = 1;
-            ShoriTimestamp other = new ShoriTimestamp(value.minusYear(year));
+            ShoriTimestamp other = ShoriTimestamp.of(value.minusYear(year));
             assertThat(sut.getBetweenYears(other), is(year));
         }
 
         @Test
         public void plusYearで生成されるインスタンスと_保持するYMDHMSのplusYearに同じ値を渡して生成されたYMDHMSを保持するインスタンス同士は_equalsでtrueを返す() {
             int year = 1;
-            ShoriTimestamp other = new ShoriTimestamp(value.plusYear(year));
+            ShoriTimestamp other = ShoriTimestamp.of(value.plusYear(year));
             assertThat(sut.plusYear(year).equals(other), is(true));
         }
 
         @Test
         public void minusYearで生成されるインスタンスと_保持するYMDHMSのminusYearに同じ値を渡して生成されたYMDHMSを保持するインスタンス同士は_equalsでtrueを返す() {
             int year = 1;
-            ShoriTimestamp other = new ShoriTimestamp(value.minusYear(year));
+            ShoriTimestamp other = ShoriTimestamp.of(value.minusYear(year));
             assertThat(sut.minusYear(year).equals(other), is(true));
         }
     }
@@ -299,48 +299,48 @@ public class ShoriTimestampTest {
         @Before
         public void setUp() {
             value = VALUE1;
-            sut = new ShoriTimestamp(value);
+            sut = ShoriTimestamp.of(value);
         }
 
         @Test
         public void getBetweenDuration_getYearは_保持するYMDHMSのplusYearから生成したYMDHMSを保持するインスタンスを渡した時_plusYearの引数と同じ値を返す() {
             int year = 1;
-            ShoriTimestamp other = new ShoriTimestamp(value.plusYear(year));
+            ShoriTimestamp other = ShoriTimestamp.of(value.plusYear(year));
             assertThat(sut.getBetweenDuration(other).getYear(), is(year));
         }
 
         @Test
         public void getBetweenDuration_getYearは_保持するYMDHMSのminusYearから生成したYMDHMSを保持するインスタンスを渡した時_minusYearの引数と同じ値を返す() {
             int year = 1;
-            ShoriTimestamp other = new ShoriTimestamp(value.minusYear(year));
+            ShoriTimestamp other = ShoriTimestamp.of(value.minusYear(year));
             assertThat(sut.getBetweenDuration(other).getYear(), is(year));
         }
 
         @Test
         public void getBetweenDuration_getMonthは_保持するYMDHMSのplusMonthから生成したYMDHMSを保持するインスタンスを渡した時_plusMonthの引数と同じ値を返す() {
             int month = 1;
-            ShoriTimestamp other = new ShoriTimestamp(value.plusMonth(month));
+            ShoriTimestamp other = ShoriTimestamp.of(value.plusMonth(month));
             assertThat(sut.getBetweenDuration(other).getMonth(), is(month));
         }
 
         @Test
         public void getBetweenDuration_getMonthは_保持するYMDHMSのminusMonthから生成したYMDHMSを保持するインスタンスを渡した時_minusMonthの引数と同じ値を返す() {
             int month = 1;
-            ShoriTimestamp other = new ShoriTimestamp(value.minusMonth(month));
+            ShoriTimestamp other = ShoriTimestamp.of(value.minusMonth(month));
             assertThat(sut.getBetweenDuration(other).getMonth(), is(month));
         }
 
         @Test
         public void getBetweenDuration_getDayは_保持するYMDHMSのplusDayから生成したYMDHMSを保持するインスタンスを渡した時_plusDayの引数と同じ値を返す() {
             int day = 1;
-            ShoriTimestamp other = new ShoriTimestamp(value.plusDay(day));
+            ShoriTimestamp other = ShoriTimestamp.of(value.plusDay(day));
             assertThat(sut.getBetweenDuration(other).getDay(), is(day));
         }
 
         @Test
         public void getBetweenDuration_getDayは_保持するYMDHMSのminusDayから生成したYMDHMSを保持するインスタンスを渡した時_minusDayの引数と同じ値を返す() {
             int day = 1;
-            ShoriTimestamp other = new ShoriTimestamp(value.minusDay(day));
+            ShoriTimestamp other = ShoriTimestamp.of(value.minusDay(day));
             assertThat(sut.getBetweenDuration(other).getDay(), is(day));
         }
     }
@@ -353,7 +353,7 @@ public class ShoriTimestampTest {
         @Before
         public void setUp() {
             value = new YMDHMS("20150115230000");
-            sut = new ShoriTimestamp(value);
+            sut = ShoriTimestamp.of(value);
         }
 
         @Test
@@ -403,7 +403,7 @@ public class ShoriTimestampTest {
         @Before
         public void setUp() {
             value = new YMDHMS("20150115230000");
-            sut = new ShoriTimestamp(value);
+            sut = ShoriTimestamp.of(value);
         }
 
         @Test
@@ -449,7 +449,7 @@ public class ShoriTimestampTest {
         @Before
         public void setUp() {
             value = new YMDHMS("20150115230000");
-            sut = new ShoriTimestamp(value);
+            sut = ShoriTimestamp.of(value);
         }
 
         @Test

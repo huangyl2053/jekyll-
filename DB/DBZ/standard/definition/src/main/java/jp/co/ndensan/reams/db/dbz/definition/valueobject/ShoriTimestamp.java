@@ -33,21 +33,37 @@ public final class ShoriTimestamp implements IValueObject<YMDHMS>, Comparable<Sh
      * 指定の値を持った{@link ShoriTimestamp}を生成します。
      *
      * @param value 値
+     * @deprecated 自動生成のTypeHandlerとShoriTimestamp内部でのみ使用可能とします。
      */
+    @Deprecated
     public ShoriTimestamp(YMDHMS value) {
         this.theValue = value;
     }
 
     /**
-     * 指定の{@link RDateTime}を{@link YMDHMS}へ変換した値を保持する{@link ShoriTimestamp}を生成します。
+     * 指定の{@link YMDHMS}を保持する{@link ShoriTimestamp}を生成します。
+     * 引数が{@code null}の時、{@code null}を保持します。
      *
-     * @param value {@link RDateTime}
+     * @param yMDHMS {@link YMDHMS}
+     * @return 指定の{@link YMDHMS}を保持する{@link ShoriTimestamp}
      */
-    public ShoriTimestamp(RDateTime value) {
-        this.theValue = value == null ? null : toYMDHMS(value);
+    public static ShoriTimestamp of(YMDHMS yMDHMS) {
+        return new ShoriTimestamp(yMDHMS);
     }
 
-    public static YMDHMS toYMDHMS(RDateTime rDateTime) {
+    /**
+     * 指定の{@link RDateTime}から変換した{@link YMDHMS}を保持する{@link ShoriTimestamp}を生成します。
+     * 引数が{@code null}の時、{@code null}を保持します。
+     *
+     * @param rDateTime {@link RDateTime}
+     * @return
+     * 指定の{@link RDateTime}から変換した{@link YMDHMS}を保持する{@link ShoriTimestamp}
+     */
+    public static ShoriTimestamp of(RDateTime rDateTime) {
+        return new ShoriTimestamp(rDateTime == null ? null : toYMDHMS(rDateTime));
+    }
+
+    private static YMDHMS toYMDHMS(RDateTime rDateTime) {
         StringBuilder yMDHMS = new StringBuilder();
         yMDHMS.append(rDateTime.getDate().toDateString());
         yMDHMS.append(String.format("%1$02d", rDateTime.getHour()));
@@ -63,7 +79,7 @@ public final class ShoriTimestamp implements IValueObject<YMDHMS>, Comparable<Sh
      * {@link RDateTime#now() RDateTime.now()}を{@link YMDHMS}へ変換した値を保持する{@link ShoriTimestamp}
      */
     public static ShoriTimestamp now() {
-        return new ShoriTimestamp(RDateTime.now());
+        return ShoriTimestamp.of(RDateTime.now());
     }
 
     @Override
@@ -196,7 +212,7 @@ public final class ShoriTimestamp implements IValueObject<YMDHMS>, Comparable<Sh
      * @return 指定の時間を加算した{@link ShoriTimestamp}
      */
     public ShoriTimestamp plusHours(long hours) {
-        return new ShoriTimestamp(this.theValue.getRDateTime().plusHours(hours));
+        return ShoriTimestamp.of(this.theValue.getRDateTime().plusHours(hours));
     }
 
     /**
@@ -206,7 +222,7 @@ public final class ShoriTimestamp implements IValueObject<YMDHMS>, Comparable<Sh
      * @return 指定の時間を引いた{@link ShoriTimestamp}
      */
     public ShoriTimestamp minusHours(long hours) {
-        return new ShoriTimestamp(this.theValue.getRDateTime().minusHours(hours));
+        return ShoriTimestamp.of(this.theValue.getRDateTime().minusHours(hours));
     }
 
     /**
@@ -225,7 +241,7 @@ public final class ShoriTimestamp implements IValueObject<YMDHMS>, Comparable<Sh
      * @return 指定の分を加算した{@link ShoriTimestamp}
      */
     public ShoriTimestamp plusMinutes(long minutes) {
-        return new ShoriTimestamp(this.theValue.getRDateTime().plusMinutes(minutes));
+        return ShoriTimestamp.of(this.theValue.getRDateTime().plusMinutes(minutes));
     }
 
     /**
@@ -235,7 +251,7 @@ public final class ShoriTimestamp implements IValueObject<YMDHMS>, Comparable<Sh
      * @return 指定の分を引いた{@link ShoriTimestamp}
      */
     public ShoriTimestamp minusMinutes(long minutes) {
-        return new ShoriTimestamp(this.theValue.getRDateTime().minusMinutes(minutes));
+        return ShoriTimestamp.of(this.theValue.getRDateTime().minusMinutes(minutes));
     }
 
     /**
@@ -254,7 +270,7 @@ public final class ShoriTimestamp implements IValueObject<YMDHMS>, Comparable<Sh
      * @return 指定の秒を加算した{@link ShoriTimestamp}
      */
     public ShoriTimestamp plusSeconds(long seconds) {
-        return new ShoriTimestamp(this.theValue.getRDateTime().plusSeconds(seconds));
+        return ShoriTimestamp.of(this.theValue.getRDateTime().plusSeconds(seconds));
     }
 
     /**
@@ -264,7 +280,7 @@ public final class ShoriTimestamp implements IValueObject<YMDHMS>, Comparable<Sh
      * @return 指定の秒を引いた{@link ShoriTimestamp}
      */
     public ShoriTimestamp minusSeconds(long seconds) {
-        return new ShoriTimestamp(this.theValue.getRDateTime().minusSeconds(seconds));
+        return ShoriTimestamp.of(this.theValue.getRDateTime().minusSeconds(seconds));
     }
 
     /**
