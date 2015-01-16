@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.ShikakuHenkoRirekiKanriContext;
 import jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage;
-import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
 import jp.co.ndensan.reams.ur.urz.model.validation.IValidatableWithContext;
 import jp.co.ndensan.reams.ur.urz.model.validation.validators.OrderValidator;
 import jp.co.ndensan.reams.ur.urz.model.validation.validators.PresenceValidator;
@@ -24,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
  *
  * @author N8235 船山 洋介
  */
-public class ShikakuHenkoValidator implements IValidatable, IValidatableWithContext<ShikakuHenkoRirekiKanriContext> {
+public class ShikakuHenkoValidator implements IValidatableWithContext<ShikakuHenkoRirekiKanriContext> {
 
     private final FlexibleDate 変更日;
     private final FlexibleDate 取得日;
@@ -58,13 +57,6 @@ public class ShikakuHenkoValidator implements IValidatable, IValidatableWithCont
         this.最新資格喪失日 = 最新資格喪失日;
         this.一号資格取得日 = 一号資格取得日;
         this.最新資格変更日 = 最新資格更新日;
-    }
-
-    @Override
-    public IValidationMessages validate() {
-        IValidationMessages messages = ValidationMessagesFactory.createValidationMessagesInstance();
-
-        return messages;
     }
 
     @Override
