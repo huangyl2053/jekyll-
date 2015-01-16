@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Nov 27 13:49:32 JST 2014 
+ * Fri Jan 09 19:46:09 JST 2015 
  */
 
 
@@ -33,13 +33,17 @@ public class dgSetaiShotoku_Row extends DataRow {
     private RString txtKetsugo02;
     private RString txtShubetsu;
     private RString txtIdoYMD;
-    private RString txtHaaku;
+    private RString txtJuminzeiGenmenMae;
+    private RString txtJuminzeiGenmenAto;
     private RString txtJuminzei;
+    private RString txtGekihenTaishosha;
     private RString txtGoukeiShotoku;
     private RString txtNenkinShunyu;
     private RString txtKetsugo03;
     private RString txtDataNo;
     private RString txtSeibetsu;
+    private RString txtTorokuGyomu;
+    private RString txtKoseiYMD;
     private RString txtDougetsuService;
     private RString txtJukiIdoYMD;
     private RString txtJuteiYMD;
@@ -59,20 +63,24 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.txtKetsugo02 = RString.EMPTY;
         this.txtShubetsu = RString.EMPTY;
         this.txtIdoYMD = RString.EMPTY;
-        this.txtHaaku = RString.EMPTY;
+        this.txtJuminzeiGenmenMae = RString.EMPTY;
+        this.txtJuminzeiGenmenAto = RString.EMPTY;
         this.txtJuminzei = RString.EMPTY;
+        this.txtGekihenTaishosha = RString.EMPTY;
         this.txtGoukeiShotoku = RString.EMPTY;
         this.txtNenkinShunyu = RString.EMPTY;
         this.txtKetsugo03 = RString.EMPTY;
         this.txtDataNo = RString.EMPTY;
         this.txtSeibetsu = RString.EMPTY;
+        this.txtTorokuGyomu = RString.EMPTY;
+        this.txtKoseiYMD = RString.EMPTY;
         this.txtDougetsuService = RString.EMPTY;
         this.txtJukiIdoYMD = RString.EMPTY;
         this.txtJuteiYMD = RString.EMPTY;
         this.txtJukiIdoJiyu = RString.EMPTY;
     }
 
-    public dgSetaiShotoku_Row(RString txtShikibetsuCode, RString txtHihokenshaNo, RString txtKetsugo01, RString txtShimei, Button btnMemo, RString txtSonzaiUmuKijunbi, RString txtSonzaiUmuChokkin, RString txtSeinenGappi, RString txtZokugara, RString txtKetsugo02, RString txtShubetsu, RString txtIdoYMD, RString txtHaaku, RString txtJuminzei, RString txtGoukeiShotoku, RString txtNenkinShunyu, RString txtKetsugo03, RString txtDataNo, RString txtSeibetsu, RString txtDougetsuService, RString txtJukiIdoYMD, RString txtJuteiYMD, RString txtJukiIdoJiyu) {
+    public dgSetaiShotoku_Row(RString txtShikibetsuCode, RString txtHihokenshaNo, RString txtKetsugo01, RString txtShimei, Button btnMemo, RString txtSonzaiUmuKijunbi, RString txtSonzaiUmuChokkin, RString txtSeinenGappi, RString txtZokugara, RString txtKetsugo02, RString txtShubetsu, RString txtIdoYMD, RString txtJuminzeiGenmenMae, RString txtJuminzeiGenmenAto, RString txtJuminzei, RString txtGekihenTaishosha, RString txtGoukeiShotoku, RString txtNenkinShunyu, RString txtKetsugo03, RString txtDataNo, RString txtSeibetsu, RString txtTorokuGyomu, RString txtKoseiYMD, RString txtDougetsuService, RString txtJukiIdoYMD, RString txtJuteiYMD, RString txtJukiIdoJiyu) {
         super();
         this.setOriginalData("txtShikibetsuCode", txtShikibetsuCode);
         this.setOriginalData("txtHihokenshaNo", txtHihokenshaNo);
@@ -86,13 +94,17 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.setOriginalData("txtKetsugo02", txtKetsugo02);
         this.setOriginalData("txtShubetsu", txtShubetsu);
         this.setOriginalData("txtIdoYMD", txtIdoYMD);
-        this.setOriginalData("txtHaaku", txtHaaku);
+        this.setOriginalData("txtJuminzeiGenmenMae", txtJuminzeiGenmenMae);
+        this.setOriginalData("txtJuminzeiGenmenAto", txtJuminzeiGenmenAto);
         this.setOriginalData("txtJuminzei", txtJuminzei);
+        this.setOriginalData("txtGekihenTaishosha", txtGekihenTaishosha);
         this.setOriginalData("txtGoukeiShotoku", txtGoukeiShotoku);
         this.setOriginalData("txtNenkinShunyu", txtNenkinShunyu);
         this.setOriginalData("txtKetsugo03", txtKetsugo03);
         this.setOriginalData("txtDataNo", txtDataNo);
         this.setOriginalData("txtSeibetsu", txtSeibetsu);
+        this.setOriginalData("txtTorokuGyomu", txtTorokuGyomu);
+        this.setOriginalData("txtKoseiYMD", txtKoseiYMD);
         this.setOriginalData("txtDougetsuService", txtDougetsuService);
         this.setOriginalData("txtJukiIdoYMD", txtJukiIdoYMD);
         this.setOriginalData("txtJuteiYMD", txtJuteiYMD);
@@ -109,13 +121,17 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.txtKetsugo02 = txtKetsugo02;
         this.txtShubetsu = txtShubetsu;
         this.txtIdoYMD = txtIdoYMD;
-        this.txtHaaku = txtHaaku;
+        this.txtJuminzeiGenmenMae = txtJuminzeiGenmenMae;
+        this.txtJuminzeiGenmenAto = txtJuminzeiGenmenAto;
         this.txtJuminzei = txtJuminzei;
+        this.txtGekihenTaishosha = txtGekihenTaishosha;
         this.txtGoukeiShotoku = txtGoukeiShotoku;
         this.txtNenkinShunyu = txtNenkinShunyu;
         this.txtKetsugo03 = txtKetsugo03;
         this.txtDataNo = txtDataNo;
         this.txtSeibetsu = txtSeibetsu;
+        this.txtTorokuGyomu = txtTorokuGyomu;
+        this.txtKoseiYMD = txtKoseiYMD;
         this.txtDougetsuService = txtDougetsuService;
         this.txtJukiIdoYMD = txtJukiIdoYMD;
         this.txtJuteiYMD = txtJuteiYMD;
@@ -170,12 +186,20 @@ public class dgSetaiShotoku_Row extends DataRow {
         return txtIdoYMD;
     }
 
-    public RString getTxtHaaku() {
-        return txtHaaku;
+    public RString getTxtJuminzeiGenmenMae() {
+        return txtJuminzeiGenmenMae;
+    }
+
+    public RString getTxtJuminzeiGenmenAto() {
+        return txtJuminzeiGenmenAto;
     }
 
     public RString getTxtJuminzei() {
         return txtJuminzei;
+    }
+
+    public RString getTxtGekihenTaishosha() {
+        return txtGekihenTaishosha;
     }
 
     public RString getTxtGoukeiShotoku() {
@@ -196,6 +220,14 @@ public class dgSetaiShotoku_Row extends DataRow {
 
     public RString getTxtSeibetsu() {
         return txtSeibetsu;
+    }
+
+    public RString getTxtTorokuGyomu() {
+        return txtTorokuGyomu;
+    }
+
+    public RString getTxtKoseiYMD() {
+        return txtKoseiYMD;
     }
 
     public RString getTxtDougetsuService() {
@@ -274,14 +306,24 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.txtIdoYMD = txtIdoYMD;
     }
 
-    public void setTxtHaaku(RString txtHaaku) {
-        this.setOriginalData("txtHaaku", txtHaaku);
-        this.txtHaaku = txtHaaku;
+    public void setTxtJuminzeiGenmenMae(RString txtJuminzeiGenmenMae) {
+        this.setOriginalData("txtJuminzeiGenmenMae", txtJuminzeiGenmenMae);
+        this.txtJuminzeiGenmenMae = txtJuminzeiGenmenMae;
+    }
+
+    public void setTxtJuminzeiGenmenAto(RString txtJuminzeiGenmenAto) {
+        this.setOriginalData("txtJuminzeiGenmenAto", txtJuminzeiGenmenAto);
+        this.txtJuminzeiGenmenAto = txtJuminzeiGenmenAto;
     }
 
     public void setTxtJuminzei(RString txtJuminzei) {
         this.setOriginalData("txtJuminzei", txtJuminzei);
         this.txtJuminzei = txtJuminzei;
+    }
+
+    public void setTxtGekihenTaishosha(RString txtGekihenTaishosha) {
+        this.setOriginalData("txtGekihenTaishosha", txtGekihenTaishosha);
+        this.txtGekihenTaishosha = txtGekihenTaishosha;
     }
 
     public void setTxtGoukeiShotoku(RString txtGoukeiShotoku) {
@@ -307,6 +349,16 @@ public class dgSetaiShotoku_Row extends DataRow {
     public void setTxtSeibetsu(RString txtSeibetsu) {
         this.setOriginalData("txtSeibetsu", txtSeibetsu);
         this.txtSeibetsu = txtSeibetsu;
+    }
+
+    public void setTxtTorokuGyomu(RString txtTorokuGyomu) {
+        this.setOriginalData("txtTorokuGyomu", txtTorokuGyomu);
+        this.txtTorokuGyomu = txtTorokuGyomu;
+    }
+
+    public void setTxtKoseiYMD(RString txtKoseiYMD) {
+        this.setOriginalData("txtKoseiYMD", txtKoseiYMD);
+        this.txtKoseiYMD = txtKoseiYMD;
     }
 
     public void setTxtDougetsuService(RString txtDougetsuService) {
