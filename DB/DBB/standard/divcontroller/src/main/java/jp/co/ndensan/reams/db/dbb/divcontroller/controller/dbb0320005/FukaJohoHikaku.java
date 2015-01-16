@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbz.business.viewstate.MaeRirekiKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.SanteiState;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
@@ -219,7 +219,7 @@ public class FukaJohoHikaku {
         div.getTxtFukaNendoKari1().setDomain(FukaMapper.toRYear(model.get賦課年度().value()));
         div.getTxtGemmenGakuKari1().setValue(model.get減免額());
 
-        IOptional<HokenryoDankai> 前年度保険料段階 = FukaShokaiController.findZennendoHokenryoDankai(model);
+        Optional<HokenryoDankai> 前年度保険料段階 = FukaShokaiController.findZennendoHokenryoDankai(model);
         if (前年度保険料段階.isPresent()) {
             div.getTxtHokenryoDankaiKari1().setValue(前年度保険料段階.get().edit表示用保険料段階());
             div.getTxtHokenryoRitsuKari1().setValue(FukaMapper.toRString(前年度保険料段階.get().get保険料率()));
@@ -268,7 +268,7 @@ public class FukaJohoHikaku {
         div.getKibetsugakuKari2().getCcdKiwarigakuKari2().
                 load(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get処理日時());
 
-        IOptional<HokenryoDankai> 前年度保険料段階 = FukaShokaiController.findZennendoHokenryoDankai(model);
+        Optional<HokenryoDankai> 前年度保険料段階 = FukaShokaiController.findZennendoHokenryoDankai(model);
         if (前年度保険料段階.isPresent()) {
             div.getTxtHokenryoDankaiKari2().setValue(前年度保険料段階.get().edit表示用保険料段階());
             div.getTxtHokenryoRitsuKari2().setValue(FukaMapper.toRString(前年度保険料段階.get().get保険料率()));

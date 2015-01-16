@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigofukakihon;
 
 import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
@@ -63,15 +63,15 @@ public class KaigoFukaKihonHandler {
 
         div.getTxtTsuchishoNo().setValue(searchKey.get通知書番号().value());
 
-        IOptional<FukaModel> fuka = fukaManager.get最新介護賦課(searchKey.get賦課年度(), searchKey.get通知書番号());
+        Optional<FukaModel> fuka = fukaManager.get最新介護賦課(searchKey.get賦課年度(), searchKey.get通知書番号());
         if (fuka.isPresent()) {
-            IOptional<HokenryoDankai> dankai = hokenryoDankaiManager.get保険料段階(searchKey.get賦課年度(), searchKey.get市町村コード(), fuka.get().get保険料段階());
+            Optional<HokenryoDankai> dankai = hokenryoDankaiManager.get保険料段階(searchKey.get賦課年度(), searchKey.get市町村コード(), fuka.get().get保険料段階());
             if (dankai.isPresent()) {
                 div.getTxtHokenryoDankai().setValue(dankai.get().edit表示用保険料段階());
             }
         }
 
-        IOptional<HihokenshaDaichoModel> daicho = hihokenshaDaichoManager.get最新被保険者台帳(searchKey.get市町村コード(), searchKey.get識別コード());
+        Optional<HihokenshaDaichoModel> daicho = hihokenshaDaichoManager.get最新被保険者台帳(searchKey.get市町村コード(), searchKey.get識別コード());
         if (daicho.isPresent()) {
             HihokenshaDaichoModel daichoModel = daicho.get();
             div.getTxtHihokenshaNo().setValue(daichoModel.get被保険者番号().value());

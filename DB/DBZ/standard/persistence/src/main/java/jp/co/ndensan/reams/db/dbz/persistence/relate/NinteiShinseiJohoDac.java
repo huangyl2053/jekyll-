@@ -12,8 +12,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.model.NinteiShinseiJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5001NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
@@ -47,14 +46,14 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
      * @return NinteiShinseiJohoModel
      */
     @Transaction
-    public IOptional<NinteiShinseiJohoModel> selectByKey(
+    public Optional<NinteiShinseiJohoModel> selectByKey(
             ShinseishoKanriNo 申請書管理番号,
             YMDHMS 処理日時) {
 
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
-        return DbOptional.ofNullable(createModel(要介護認定申請情報Dac.selectByKey(申請書管理番号.value(), 処理日時)));
+        return Optional.ofNullable(createModel(要介護認定申請情報Dac.selectByKey(申請書管理番号.value(), 処理日時)));
     }
 
     /**
@@ -83,7 +82,7 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
      * @return NinteiShinseiJohoModel
      */
     @Transaction
-    public IOptional<NinteiShinseiJohoModel> select要介護認定申請情報By申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
+    public Optional<NinteiShinseiJohoModel> select要介護認定申請情報By申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
 
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
 
@@ -95,9 +94,9 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
                 toList(DbT5001NinteiShinseiJohoEntity.class);
 
         if (認定申請情報List.isEmpty()) {
-            return DbOptional.empty();
+            return Optional.empty();
         }
-        return DbOptional.ofNullable(createModel(認定申請情報List.get(0)));
+        return Optional.ofNullable(createModel(認定申請情報List.get(0)));
     }
 
     private NinteiShinseiJohoModel createModel(DbT5001NinteiShinseiJohoEntity 要介護認定申請情報エンティティ) {

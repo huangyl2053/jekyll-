@@ -12,8 +12,7 @@ import jp.co.ndensan.reams.db.dbz.business.hokensha.KoikiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.business.hokensha.KoikiKoseiShichosons;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ContainsKyuShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import static jp.co.ndensan.reams.db.dbz.model.hokensha.KoikiKoseiShichosonMasterComparator.orderBy加入日;
 import jp.co.ndensan.reams.db.dbz.model.hokensha.KoseiShichosonMasterModel;
 import jp.co.ndensan.reams.db.dbz.model.hokensha.KoseiShichosonModel;
@@ -63,7 +62,7 @@ public class _KoikiKoseiShichosonFinder implements IKoikiKoseiShichosonFinder {
      * @return 指定の{@link LasdecCode 市町村コード}を持つ{@link IKoikiKoseiShichoson}
      */
     @Override
-    public IOptional<IKoikiKoseiShichoson> find構成市町村(LasdecCode code, ContainsKyuShichoson contains旧市町村) {
+    public Optional<IKoikiKoseiShichoson> find構成市町村(LasdecCode code, ContainsKyuShichoson contains旧市町村) {
         Objects.requireNonNull(code, UrSystemErrorMessages.値がnull.getReplacedMessage(LasdecCode.class.getSimpleName()));
         Objects.requireNonNull(contains旧市町村, UrSystemErrorMessages.値がnull.getReplacedMessage(ContainsKyuShichoson.class.getSimpleName()));
         return _createIKoikiKoseiShichoson(
@@ -72,16 +71,16 @@ public class _KoikiKoseiShichosonFinder implements IKoikiKoseiShichosonFinder {
         );
     }
 
-    IOptional<IKoikiKoseiShichoson> _createIKoikiKoseiShichoson(IItemList<KoseiShichosonMasterModel> searchResult, ContainsKyuShichoson kubun) {
+    Optional<IKoikiKoseiShichoson> _createIKoikiKoseiShichoson(IItemList<KoseiShichosonMasterModel> searchResult, ContainsKyuShichoson kubun) {
         IItemList<KoseiShichosonModel> models = searchResult.sorted(orderBy加入日.desc()).map(toKoseiShichosonModel());
         switch (kubun) {
             case 旧市町村を含まない:
                 return models.findFirst().<IKoikiKoseiShichoson>map(toKoikiKoseiShichoson());
             case 旧市町村を含む:
-                return DbOptional.<IKoikiKoseiShichoson>of(
+                return Optional.<IKoikiKoseiShichoson>of(
                         new GappeiKoikiKoseiShichoson(models.map(toKoikiKoseiShichoson()))
                 );
         }
-        return DbOptional.empty();
+        return Optional.empty();
     }
 }

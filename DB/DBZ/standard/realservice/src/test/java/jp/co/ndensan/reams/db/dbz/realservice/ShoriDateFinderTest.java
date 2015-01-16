@@ -6,8 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShoriName;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_サブ業務コード;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7022ShoriDateKanriEntityGenerator.DEFAULT_処理名;
@@ -52,14 +51,14 @@ public class ShoriDateFinderTest {
     public static class find処理日付 extends DbzTestBase {
 
         @Test
-        public void find処理日付は_該当の情報がない時_IOptionalのemptyを返す() {
+        public void find処理日付は_該当の情報がない時_Optionalのemptyを返す() {
             SubGyomuCode notFound = new SubGyomuCode("RDD");
-            IOptional<ShoriDateModel> empty = DbOptional.empty();
+            Optional<ShoriDateModel> empty = Optional.empty();
 
             when(dac.select処理日付ByKey(any(SubGyomuCode.class), any(LasdecCode.class),
                     any(ShoriName.class), any(RString.class), any(FlexibleYear.class), any(RString.class))).thenReturn(empty);
 
-            IOptional<ShoriDateModel> result = sut.find処理日付(
+            Optional<ShoriDateModel> result = sut.find処理日付(
                     notFound,
                     DEFAULT_市町村コード,
                     ShoriName.valueOf(DEFAULT_処理名.toString()),
@@ -72,7 +71,7 @@ public class ShoriDateFinderTest {
 
         @Test
         public void find処理日付は_該当の情報がある時_該当情報を返す() {
-            IOptional<ShoriDateModel> model = DbOptional.of(
+            Optional<ShoriDateModel> model = Optional.of(
                     new ShoriDateModel(DbT7022ShoriDateKanriEntityGenerator.createDbT7022ShoriDateKanriEntity()));
 
             when(dac.select処理日付ByKey(
@@ -83,7 +82,7 @@ public class ShoriDateFinderTest {
                     DEFAULT_年度,
                     DEFAULT_年度内連番)).thenReturn(model);
 
-            IOptional<ShoriDateModel> result = sut.find処理日付(
+            Optional<ShoriDateModel> result = sut.find処理日付(
                     DEFAULT_サブ業務コード,
                     DEFAULT_市町村コード,
                     ShoriName.valueOf(DEFAULT_処理名.toString()),

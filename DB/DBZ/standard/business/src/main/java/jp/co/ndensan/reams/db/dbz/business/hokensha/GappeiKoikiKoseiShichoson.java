@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.UnyoKeitaiK
 import static jp.co.ndensan.reams.db.dbz.definition.util.function.ExceptionSuppliers.applicationException;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.GappeiChiikiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.KokuhorenKoikiShichosonNo;
@@ -44,7 +44,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class GappeiKoikiKoseiShichoson implements IKoikiKoseiShichoson {
 
     private final IKoikiKoseiShichoson shichoson;
-    private final IOptional<FlexibleDate> kanyuYMD;
+    private final Optional<FlexibleDate> kanyuYMD;
 
     public GappeiKoikiKoseiShichoson(IItemList<? extends IKoikiKoseiShichoson> shichosons) {
         Objects.requireNonNull(shichosons);

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShoriName;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.ShoriDateModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.ShoriDateDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -51,7 +51,7 @@ public class ShoriDateFinder {
      * @return ShoriDateKanriModel
      */
     @Transaction
-    public IOptional<ShoriDateModel> find処理日付(
+    public Optional<ShoriDateModel> find処理日付(
             SubGyomuCode サブ業務コード,
             LasdecCode 市町村コード,
             ShoriName 処理名,
