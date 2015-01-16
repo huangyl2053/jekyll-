@@ -19,6 +19,11 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuHenkoJiyuHihokensha;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuKaijo;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuTekiyo;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuHihokensha;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuSoshitsuJiyuHihokennsha;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -111,7 +116,7 @@ public class HihokenshaDaichoModel implements Serializable {
      * @return 資格取得事由
      */
     public ShikakuShutokuJiyu get資格取得事由() {
-        return ShikakuShutokuJiyu.toValue(entity.getShikakuShutokuJiyuCode());
+        return ShikakuShutokuJiyu.toValue(entity.getShikakuShutokuJiyuCode().toRString());
     }
 
     /**
@@ -156,7 +161,7 @@ public class HihokenshaDaichoModel implements Serializable {
      * @return 資格喪失事由
      */
     public ShikakuSoshitsuJiyu get資格喪失事由() {
-        return ShikakuSoshitsuJiyu.toValue(entity.getShikakuSoshitsuJiyuCode());
+        return ShikakuSoshitsuJiyu.toValue(entity.getShikakuSoshitsuJiyuCode().toRString());
     }
 
     /**
@@ -192,7 +197,7 @@ public class HihokenshaDaichoModel implements Serializable {
      * @return 資格変更事由
      */
     public ShikakuHenkoJiyu get資格変更事由() {
-        return ShikakuHenkoJiyu.toValue(entity.getShikakuHenkoJiyuCode());
+        return ShikakuHenkoJiyu.toValue(entity.getShikakuHenkoJiyuCode().toRString());
     }
 
     /**
@@ -219,7 +224,7 @@ public class HihokenshaDaichoModel implements Serializable {
      * @return 住所地特例適用事由
      */
     public JushochitokureiTekiyoJiyu get住所地特例適用事由() {
-        return JushochitokureiTekiyoJiyu.toValue(entity.getJushochitokureiTekiyoJiyuCode());
+        return JushochitokureiTekiyoJiyu.toValue(entity.getJushochitokureiTekiyoJiyuCode().toRString());
     }
 
     /**
@@ -246,7 +251,7 @@ public class HihokenshaDaichoModel implements Serializable {
      * @return 住所地特例解除事由
      */
     public JushochitokureiKaijoJiyu get住所地特例解除事由() {
-        return JushochitokureiKaijoJiyu.toValue(entity.getJushochitokureiKaijoJiyuCode());
+        return JushochitokureiKaijoJiyu.toValue(entity.getJushochitokureiKaijoJiyuCode().toRString());
     }
 
     /**
@@ -368,7 +373,7 @@ public class HihokenshaDaichoModel implements Serializable {
      */
     public void set資格取得事由(ShikakuShutokuJiyu 資格取得事由) {
         requireNonNull(資格取得事由, UrSystemErrorMessages.値がnull.getReplacedMessage("資格取得事由"));
-        entity.setShikakuShutokuJiyuCode(資格取得事由.getCode());
+        entity.setShikakuShutokuJiyuCode(new KaigoshikakuShutokuJiyuHihokensha(資格取得事由.getCode()));
     }
 
     /**
@@ -418,7 +423,7 @@ public class HihokenshaDaichoModel implements Serializable {
      */
     public void set資格喪失事由(ShikakuSoshitsuJiyu 資格喪失事由) {
         requireNonNull(資格喪失事由, UrSystemErrorMessages.値がnull.getReplacedMessage("資格喪失事由"));
-        entity.setShikakuSoshitsuJiyuCode(資格喪失事由.getCode());
+        entity.setShikakuSoshitsuJiyuCode(new KaigoshikakuSoshitsuJiyuHihokennsha(資格喪失事由.getCode()));
     }
 
     /**
@@ -458,7 +463,7 @@ public class HihokenshaDaichoModel implements Serializable {
      */
     public void set資格変更事由(ShikakuHenkoJiyu 資格変更事由) {
         requireNonNull(資格変更事由, UrSystemErrorMessages.値がnull.getReplacedMessage("資格変更事由"));
-        entity.setShikakuHenkoJiyuCode(資格変更事由.getCode());
+        entity.setShikakuHenkoJiyuCode(new KaigoshikakuHenkoJiyuHihokensha(資格変更事由.getCode()));
     }
 
     /**
@@ -488,7 +493,7 @@ public class HihokenshaDaichoModel implements Serializable {
      */
     public void set住所地特例適用事由(JushochitokureiTekiyoJiyu 住所地特例適用事由) {
         requireNonNull(住所地特例適用事由, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例適用事由"));
-        entity.setJushochitokureiTekiyoJiyuCode(住所地特例適用事由.getCode());
+        entity.setJushochitokureiTekiyoJiyuCode(new KaigoshikakuJutokuTekiyo(住所地特例適用事由.getCode()));
     }
 
     /**
@@ -518,7 +523,7 @@ public class HihokenshaDaichoModel implements Serializable {
      */
     public void set住所地特例解除事由(JushochitokureiKaijoJiyu 住所地特例解除事由) {
         requireNonNull(住所地特例解除事由, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例解除事由"));
-        entity.setJushochitokureiKaijoJiyuCode(住所地特例解除事由.getCode());
+        entity.setJushochitokureiKaijoJiyuCode(new KaigoshikakuJutokuKaijo(住所地特例解除事由.getCode()));
     }
 
     /**

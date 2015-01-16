@@ -1,6 +1,6 @@
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="../../d.ts/jquery.d.ts" />
+/// <reference path="../../d.ts/UzViewControls.d.ts" />
+/// <reference path="../../d.ts/UzaConverter.d.ts" />
 
 module DBZ {
 
@@ -26,6 +26,10 @@ module DBZ {
 
             public static onSelectByDeleteButton_dgJutoku(): string {
                 return "onSelectByDeleteButton_dgJutoku";
+            }
+
+            public static onBeforeClick_btnJutokuKakutei(): string {
+                return "onBeforeClick_btnJutokuKakutei";
             }
 
             public static onClick_btnJutokuKakutei(): string {
@@ -89,12 +93,8 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlTekiyoJiyu"));
             }
 
-            public tekiyojiHokenshaJoho(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuTekiyoInput_tekiyojiHokenshaJoho"));
-            }
-
-            public ddlTekiyojiShozaiHokensha(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlTekiyojiShozaiHokensha"));
+            public TekiyojiHokenshaJoho(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuTekiyoInput_TekiyojiHokenshaJoho"));
             }
 
             public ddlTekiyojiSochimotoHokensha(): UZA.DropDownList {
@@ -125,12 +125,8 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlKaijoJiyu"));
             }
 
-            public kaijojiHokenshaJoho(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuKaijoInput_kaijojiHokenshaJoho"));
-            }
-
-            public ddlKaijojiShozaiHokensha(): UZA.DropDownList {
-                return new UZA.DropDownList(this.convFiledName("ddlKaijojiShozaiHokensha"));
+            public KaijojiHokenshaJoho(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuKaijoInput_KaijojiHokenshaJoho"));
             }
 
             public ddlKaijojiSochimotoHokensha(): UZA.DropDownList {

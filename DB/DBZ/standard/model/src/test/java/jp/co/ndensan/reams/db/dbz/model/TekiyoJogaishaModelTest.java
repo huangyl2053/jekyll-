@@ -4,20 +4,25 @@
  */
 package jp.co.ndensan.reams.db.dbz.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1002TekiyoJogaishaEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
  * {@link TekiyoJogaishaModel}のテストクラスです。
  *
- * @author LDNS 鄭雪双
+ * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
 public class TekiyoJogaishaModelTest extends DbzTestBase {
@@ -131,10 +136,9 @@ public class TekiyoJogaishaModelTest extends DbzTestBase {
             sut.setEntity(DbT1002TekiyoJogaishaEntityGenerator.createDbT1002TekiyoJogaishaEntity());
 
             sut.getEntity().initializeMd5();
+            sut.getEntity().setTekiyoYMD(new FlexibleDate("20190303"));
 
-            // 主キー以外の項目を変更してください
-//            sut.getEntity().setXXX(new XXX());
-//            assertThat(sut.getState(), is(EntityDataState.Modified));
+            assertThat(sut.getState(), is(EntityDataState.Modified));
         }
 
         @Test

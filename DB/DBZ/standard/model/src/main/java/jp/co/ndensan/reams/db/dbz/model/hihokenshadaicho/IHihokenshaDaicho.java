@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * HihokenshaDaichoの基本要素です。
@@ -58,20 +59,6 @@ public interface IHihokenshaDaicho {
     ShikibetsuCode get識別コード();
 
     /**
-     * 証記載保険者番号を返します。
-     *
-     * @return 証記載保険者番号
-     */
-    ShoKisaiHokenshaNo get証記載保険者番号();
-
-    /**
-     * 広域内住所地特例の、措置元保険者番号を返します。
-     *
-     * @return 広住特措置元保険者番号
-     */
-    ShoKisaiHokenshaNo get広住特措置元保険者番号();
-
-    /**
      * 旧市町村コードを返します。
      *
      * @return 旧市町村コード
@@ -81,16 +68,16 @@ public interface IHihokenshaDaicho {
     /**
      * 資格の取得日を返します。
      *
-     * @return 資格取得日
+     * @return 資格取得年月日
      */
-    FlexibleDate get資格取得日();
+    FlexibleDate get資格取得年月日();
 
     /**
      * 取得届出日を返します。
      *
-     * @return 資格取得届出日
+     * @return 資格取得届出年月日
      */
-    FlexibleDate get資格取得届出日();
+    FlexibleDate get資格取得届出年月日();
 
     /**
      * 資格の取得事由を返します。
@@ -102,28 +89,28 @@ public interface IHihokenshaDaicho {
     /**
      * 資格の喪失日を返します。
      *
-     * @return 資格喪失日
+     * @return 資格喪失年月日
      */
-    FlexibleDate get資格喪失日();
+    FlexibleDate get資格喪失年月日();
 
     /**
      * 喪失届出日を返します。
      *
-     * @return 資格喪失届出日
+     * @return 資格喪失届出年月日
      */
-    FlexibleDate get資格喪失届出日();
+    FlexibleDate get資格喪失届出年月日();
 
     /**
      * 資格の喪失事由を返します。
      *
-     * @return 資格喪失事由
+     * @return 資格喪失事由コード
      */
     KaigoshikakuSoshitsuJiyuHihokennsha get資格喪失事由();
 
     /**
      * 被保険者が第1号被保険者・第2号被保険者のどちらであるかを示す、被保険者区分を返します。
      *
-     * @return 被保険者区分
+     * @return 被保険者区分コード
      */
     ShikakuHihokenshaKubun get被保険者区分();
 
@@ -132,14 +119,14 @@ public interface IHihokenshaDaicho {
      *
      * @return 変更日
      */
-    FlexibleDate get資格変更日();
+    FlexibleDate get資格変更年月日();
 
     /**
      * 変更届出日を返します。
      *
      * @return 変更届出日
      */
-    FlexibleDate get資格変更届出日();
+    FlexibleDate get資格変更届出年月日();
 
     /**
      * 変更事由を返します。
@@ -153,14 +140,14 @@ public interface IHihokenshaDaicho {
      *
      * @return 適用日
      */
-    FlexibleDate get住所地特例適用日();
+    FlexibleDate get住所地特例適用年月日();
 
     /**
      * 適用届出日を返します。
      *
      * @return 適用届出日
      */
-    FlexibleDate get住所地特例適用届出日();
+    FlexibleDate get住所地特例適用届出年月日();
 
     /**
      * 適用事由を返します。
@@ -174,21 +161,21 @@ public interface IHihokenshaDaicho {
      *
      * @return 解除日
      */
-    FlexibleDate get住所地特例解除日();
+    FlexibleDate get住所地特例解除年月日();
 
     /**
      * 解除届出日を返します。
      *
      * @return 解除届出日
      */
-    FlexibleDate get住所地特例解除届出日();
+    FlexibleDate get住所地特例解除届出年月日();
 
     /**
      * 解除事由を返します。
      *
      * @return 解除事由
      */
-    KaigoshikakuJutokuKaijo get住所地特例解除事由();
+    KaigoshikakuJutokuKaijo get住所地特例解除事由コード();
 
     //TODO #52997 以下のgetterの戻り値は、modelの対応する値を返すように実装する。
     /**
@@ -196,14 +183,14 @@ public interface IHihokenshaDaicho {
      *
      * @return 第1号被保険者年齢到達日
      */
-    FlexibleDate get年齢到達日();
+    FlexibleDate get第1号資格取得年月日();
 
     /**
-     * 資格者が住所地特例者か否かを示す、住所地特例区分を返します。
+     * 資格者が住所地特例者か否かを示す、住所地特例フラグを返します。
      *
-     * @return 住所地特例区分
+     * @return 住所地特例フラグ
      */
-    JushochiTokureishaKubun get住所地特例区分();
+    JushochiTokureishaKubun get住所地特例フラグ();
 
     /**
      * 広域内住所地特例者か否かを表す区分を返します。
@@ -222,15 +209,22 @@ public interface IHihokenshaDaicho {
     /**
      * 再交付事由を返します。
      *
-     * @return 再交付事由
+     * @return 再交付事由コード
      */
-    KofuJiyu get再交付事由();
+    KofuJiyu get再交付事由コード();
 
     /**
      * 帳票交付履歴IDを返します。
      *
      * @return 帳票交付履歴ID
      */
-    int get帳票交付履歴ID();
+    RString get帳票交付履歴ID();
+
+    /**
+     * 広住特措置元市町村コードを返します。
+     *
+     * @return 広住特措置元市町村コード
+     */
+    LasdecCode get広住特措置元市町村コード();
 
 }

@@ -18,7 +18,7 @@ module DBZ
             }
 
             public PublicProperties() {
-                return new PublicProperties(this.fieldName);
+                return new DBZ.JushochiTokureiRirekiList.PublicProperties(this.fieldName);
             }
 
             public priorities(): Array {
@@ -132,10 +132,9 @@ module DBZ
                     this.controls.txtTekiyoDate().readOnly = true;
                     this.controls.txtTekiyoTodokedeDate().readOnly = true;
 
-                    this.controls.tekiyojiHokenshaJoho().readOnly = true;
-                    this.controls.tekiyojiHokenshaJoho().displayNone = false;
+                    this.controls.TekiyojiHokenshaJoho().readOnly = true;
+                    this.controls.TekiyojiHokenshaJoho().displayNone = false;
                     this.controls.ddlTekiyoJiyu().readOnly = true;
-                    this.controls.ddlTekiyojiShozaiHokensha().readOnly = true;
                     this.controls.ddlTekiyojiSochimotoHokensha().readOnly = true;
                     this.controls.ddlTekiyojiKyuHokensha().readOnly = true;
                     this.controls.ddlTekiyojiJuminJoho().readOnly = true;
@@ -158,10 +157,9 @@ module DBZ
                     this.controls.txtKaijoDate().readOnly = true;
                     this.controls.txtKaijoTodokedeDate().readOnly = true;
 
-                    this.controls.kaijojiHokenshaJoho().readOnly = true;
-                    this.controls.kaijojiHokenshaJoho().displayNone = false;
+                    this.controls.KaijojiHokenshaJoho().readOnly = true;
+                    this.controls.KaijojiHokenshaJoho().displayNone = false;
                     this.controls.ddlKaijoJiyu().readOnly = true;
-                    this.controls.ddlKaijojiShozaiHokensha().readOnly = true;
                     this.controls.ddlKaijojiSochimotoHokensha().readOnly = true;
                     this.controls.ddlKaijojiKyuHokensha().readOnly = true;
                     this.controls.ddlKaijojiJuminJono().readOnly = true;
@@ -180,10 +178,9 @@ module DBZ
                     this.controls.txtTekiyoDate().readOnly = false;
                     this.controls.txtTekiyoTodokedeDate().readOnly = false;
 
-                    this.controls.tekiyojiHokenshaJoho().readOnly = false;
-                    this.controls.tekiyojiHokenshaJoho().displayNone = false;
+                    this.controls.TekiyojiHokenshaJoho().readOnly = false;
+                    this.controls.TekiyojiHokenshaJoho().displayNone = false;
                     this.controls.ddlTekiyoJiyu().readOnly = false;
-                    this.controls.ddlTekiyojiShozaiHokensha().readOnly = false;
                     this.controls.ddlTekiyojiSochimotoHokensha().readOnly = false;
                     this.controls.ddlTekiyojiKyuHokensha().readOnly = false;
                     this.controls.ddlTekiyojiJuminJoho().readOnly = false;
@@ -205,10 +202,9 @@ module DBZ
                     this.controls.txtKaijoDate().readOnly = false;
                     this.controls.txtKaijoTodokedeDate().readOnly = false;
 
-                    this.controls.kaijojiHokenshaJoho().readOnly = false;
-                    this.controls.kaijojiHokenshaJoho().displayNone = false;
+                    this.controls.KaijojiHokenshaJoho().readOnly = false;
+                    this.controls.KaijojiHokenshaJoho().displayNone = false;
                     this.controls.ddlKaijoJiyu().readOnly = false;
-                    this.controls.ddlKaijojiShozaiHokensha().readOnly = false;
                     this.controls.ddlKaijojiSochimotoHokensha().readOnly = false;
                     this.controls.ddlKaijojiKyuHokensha().readOnly = false;
                     this.controls.ddlKaijojiJuminJono().readOnly = false;
@@ -217,19 +213,18 @@ module DBZ
                     this.controls.btnJutokuTorikeshi().displayNone = false;
                 }
 
-                public TeiseiInput(): void {
+                public teiseiInput(): void {
                     this.controls.JutokuInput().readOnly = false;
                     this.controls.JutokuInput().displayNone = false;
-                    
+
                     this.controls.JutokuTekiyoInput().readOnly = false;
                     this.controls.JutokuTekiyoInput().displayNone = false;
                     this.controls.txtTekiyoDate().readOnly = false;
                     this.controls.txtTekiyoTodokedeDate().readOnly = false;
 
-                    this.controls.tekiyojiHokenshaJoho().readOnly = false;
-                    this.controls.tekiyojiHokenshaJoho().displayNone = false;
+                    this.controls.TekiyojiHokenshaJoho().readOnly = false;
+                    this.controls.TekiyojiHokenshaJoho().displayNone = false;
                     this.controls.ddlTekiyoJiyu().readOnly = false;
-                    this.controls.ddlTekiyojiShozaiHokensha().readOnly = false;
                     this.controls.ddlTekiyojiSochimotoHokensha().readOnly = false;
                     this.controls.ddlTekiyojiKyuHokensha().readOnly = false;
                     this.controls.ddlTekiyojiJuminJoho().readOnly = false;
@@ -239,16 +234,47 @@ module DBZ
                     this.controls.txtKaijoDate().readOnly = false;
                     this.controls.txtKaijoTodokedeDate().readOnly = false;
 
-                    this.controls.kaijojiHokenshaJoho().readOnly = false;
-                    this.controls.kaijojiHokenshaJoho().displayNone = false;
+                    this.controls.KaijojiHokenshaJoho().readOnly = false;
+                    this.controls.KaijojiHokenshaJoho().displayNone = false;
                     this.controls.ddlKaijoJiyu().readOnly = false;
-                    this.controls.ddlKaijojiShozaiHokensha().readOnly = false;
                     this.controls.ddlKaijojiSochimotoHokensha().readOnly = false;
                     this.controls.ddlKaijojiKyuHokensha().readOnly = false;
                     this.controls.ddlKaijojiJuminJono().readOnly = false;
 
                     this.controls.btnJutokuKakutei().displayNone = false;
                     this.controls.btnJutokuTorikeshi().displayNone = false;
+                }
+                
+                public teiseiShokai(): void {
+                    this.controls.JutokuInput().readOnly = true;
+                    this.controls.JutokuInput().displayNone = false;
+
+                    this.controls.JutokuTekiyoInput().readOnly = true;
+                    this.controls.JutokuTekiyoInput().displayNone = false;
+                    this.controls.txtTekiyoDate().readOnly = true;
+                    this.controls.txtTekiyoTodokedeDate().readOnly = true;
+
+                    this.controls.TekiyojiHokenshaJoho().readOnly = true;
+                    this.controls.TekiyojiHokenshaJoho().displayNone = false;
+                    this.controls.ddlTekiyoJiyu().readOnly = true;
+                    this.controls.ddlTekiyojiSochimotoHokensha().readOnly = true;
+                    this.controls.ddlTekiyojiKyuHokensha().readOnly = true;
+                    this.controls.ddlTekiyojiJuminJoho().readOnly = true;
+
+                    this.controls.JutokuKaijoInput().readOnly = true;
+                    this.controls.JutokuKaijoInput().displayNone = false;
+                    this.controls.txtKaijoDate().readOnly = true;
+                    this.controls.txtKaijoTodokedeDate().readOnly = true;
+
+                    this.controls.KaijojiHokenshaJoho().readOnly = true;
+                    this.controls.KaijojiHokenshaJoho().displayNone = false;
+                    this.controls.ddlKaijoJiyu().readOnly = true;
+                    this.controls.ddlKaijojiSochimotoHokensha().readOnly = true;
+                    this.controls.ddlKaijojiKyuHokensha().readOnly = true;
+                    this.controls.ddlKaijojiJuminJono().readOnly = true;
+
+                    this.controls.btnJutokuKakutei().displayNone = true;
+                    this.controls.btnJutokuTorikeshi().displayNone = true;
                 }
 
                 public displayNone(): void {
@@ -273,8 +299,8 @@ module DBZ
 
                     this.controls.dgJutoku().gridSetting = gridSetting;
                     
-                    this.controls.tekiyojiHokenshaJoho().displayNone = true;
-                    this.controls.kaijojiHokenshaJoho().displayNone = true;
+                    this.controls.TekiyojiHokenshaJoho().displayNone = true;
+                    this.controls.KaijojiHokenshaJoho().displayNone = true;
 
                     this.controls.dgJutoku()._control.afterPropertiesSet();
 
@@ -289,15 +315,13 @@ module DBZ
 
                     this.controls.dgJutoku().gridSetting = gridSetting;
 
-                    this.controls.tekiyojiHokenshaJoho().displayNone = false;
-                    this.controls.ddlTekiyojiShozaiHokensha().displayNone = true;
+                    this.controls.TekiyojiHokenshaJoho().displayNone = false;
                     this.controls.ddlTekiyojiSochimotoHokensha().displayNone = true;
                     this.controls.ddlTekiyojiKyuHokensha().displayNone = false;
                     this.controls.ddlTekiyojiKyuHokensha().readOnly = false;
                     this.controls.ddlTekiyojiJuminJoho().displayNone = true;
 
-                    this.controls.kaijojiHokenshaJoho().displayNone = false;
-                    this.controls.ddlKaijojiShozaiHokensha().displayNone = true;
+                    this.controls.KaijojiHokenshaJoho().displayNone = false;
                     this.controls.ddlKaijojiSochimotoHokensha().displayNone = true;
                     this.controls.ddlKaijojiKyuHokensha().displayNone = false;
                     this.controls.ddlKaijojiKyuHokensha().readOnly = false;
@@ -316,18 +340,14 @@ module DBZ
 
                     this.controls.dgJutoku().gridSetting = gridSetting;
 
-                    this.controls.tekiyojiHokenshaJoho().displayNone = false;
-                    this.controls.ddlTekiyojiShozaiHokensha().readOnly = false;
-                    this.controls.ddlTekiyojiShozaiHokensha().displayNone = false;
+                    this.controls.TekiyojiHokenshaJoho().displayNone = false;
                     this.controls.ddlTekiyojiSochimotoHokensha().readOnly = false;
                     this.controls.ddlTekiyojiSochimotoHokensha().displayNone = false;
                     this.controls.ddlTekiyojiKyuHokensha().displayNone = true;
                     this.controls.ddlTekiyojiJuminJoho().readOnly = false;
                     this.controls.ddlTekiyojiJuminJoho().displayNone = false;
 
-                    this.controls.kaijojiHokenshaJoho().displayNone = false;
-                    this.controls.ddlKaijojiShozaiHokensha().readOnly = false;
-                    this.controls.ddlKaijojiShozaiHokensha().displayNone = false;
+                    this.controls.KaijojiHokenshaJoho().displayNone = false;
                     this.controls.ddlKaijojiSochimotoHokensha().readOnly = false;
                     this.controls.ddlKaijojiSochimotoHokensha().displayNone = false;
                     this.controls.ddlKaijojiKyuHokensha().displayNone = true;
@@ -347,9 +367,7 @@ module DBZ
 
                     this.controls.dgJutoku().gridSetting = gridSetting;
 
-                    this.controls.tekiyojiHokenshaJoho().displayNone = false;
-                    this.controls.ddlTekiyojiShozaiHokensha().readOnly = false;
-                    this.controls.ddlTekiyojiShozaiHokensha().displayNone = false;
+                    this.controls.TekiyojiHokenshaJoho().displayNone = false;
                     this.controls.ddlTekiyojiSochimotoHokensha().readOnly = false;
                     this.controls.ddlTekiyojiSochimotoHokensha().displayNone = false;
                     this.controls.ddlTekiyojiKyuHokensha().readOnly = false;
@@ -357,9 +375,7 @@ module DBZ
                     this.controls.ddlTekiyojiJuminJoho().readOnly = false;
                     this.controls.ddlTekiyojiJuminJoho().displayNone = false;
 
-                    this.controls.kaijojiHokenshaJoho().displayNone = false;
-                    this.controls.ddlKaijojiShozaiHokensha().readOnly = false;
-                    this.controls.ddlKaijojiShozaiHokensha().displayNone = false;
+                    this.controls.KaijojiHokenshaJoho().displayNone = false;
                     this.controls.ddlKaijojiSochimotoHokensha().readOnly = false;
                     this.controls.ddlKaijojiSochimotoHokensha().displayNone = false;
                     this.controls.ddlKaijojiKyuHokensha().readOnly = false;
@@ -571,11 +587,57 @@ module DBZ {
             constructor(fieldName: string) {
                 this.controls = new Controls(fieldName);
             }
+            
 
             public getEditTypes(): UZA.EditTypeForPublicProperty {
                 var editTypes = new UZA.EditTypeForPublicProperty();
-
+                
+                editTypes.addEditType("dgJutoku_height", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("btnAdd_displayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("btnAdd_disabled", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("ddlTekiyojiSochimotoHokensha_readOnly", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("ddlKaijojiSochimotoHokenshsa_readOnly", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 return editTypes;
+            }
+
+            public getDgJutoku_height() {
+                return this.controls.dgJutoku().height;
+            }
+
+            public setDgJutoku_height(value) {
+                this.controls.dgJutoku().height = value;
+            }
+
+            public getBtnAdd_displayNone() {
+                return this.controls.btnAdd().displayNone;
+            }
+
+            public setBtnAdd_displayNone(value) {
+                this.controls.btnAdd().displayNone = value;
+            }
+
+            public getBtnAdd_disabled() {
+                return this.controls.btnAdd().disabled;
+            }
+
+            public setBtnAdd_disabled(value) {
+                this.controls.btnAdd().disabled = value;
+            }
+
+            public getDdlTekiyoSochimotoHokensha_readOnly() {
+                return this.controls.ddlTekiyojiSochimotoHokensha().readOnly;
+            }
+
+            public setDdlTekiyoSochimotoHokensha_readOnly(value) {
+                this.controls.ddlTekiyojiSochimotoHokensha().readOnly = value;
+            }
+
+            public getDdlKaijoSochimotoHokenshsa_readOnly() {
+                return this.controls.ddlKaijojiSochimotoHokensha().readOnly;
+            }
+
+            public setDdlKaijoSochimotoHokenshsa_readOnly(value) {
+                this.controls.ddlKaijojiSochimotoHokensha().readOnly = value;
             }
 
         }

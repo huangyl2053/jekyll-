@@ -9,17 +9,18 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuJogaiTekiyo;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuSoshitsuJiyuJogaiTekiyo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 適用除外者のモデルクラスです。
  *
- * @author LDNS 鄭雪双
+ * @author n8178 城間篤人
  */
 public class TekiyoJogaishaModel implements Serializable {
 
@@ -83,7 +84,7 @@ public class TekiyoJogaishaModel implements Serializable {
      * @return 処理日時
      */
     public YMDHMS get処理日時() {
-        return entity.getShoriTimeStamp();
+        return entity.getShoriTimestamp();
     }
 
     /**
@@ -91,7 +92,7 @@ public class TekiyoJogaishaModel implements Serializable {
      *
      * @return 適用除外適用事由コード
      */
-    public RString get適用除外適用事由コード() {
+    public KaigoshikakuShutokuJiyuJogaiTekiyo get適用除外適用事由コード() {
         return entity.getTekiyoJogaiTekiyoJiyuCode();
     }
 
@@ -127,7 +128,7 @@ public class TekiyoJogaishaModel implements Serializable {
      *
      * @return 適用除外解除事由コード
      */
-    public RString get適用除外解除事由コード() {
+    public KaigoshikakuSoshitsuJiyuJogaiTekiyo get適用除外解除事由コード() {
         return entity.getTekiyoJogaikaijokaijoJiyuCode();
     }
 
@@ -212,7 +213,7 @@ public class TekiyoJogaishaModel implements Serializable {
      */
     public void set処理日時(YMDHMS 処理日時) {
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
-        entity.setShoriTimeStamp(処理日時);
+        entity.setShoriTimestamp(処理日時);
     }
 
     /**
@@ -220,7 +221,7 @@ public class TekiyoJogaishaModel implements Serializable {
      *
      * @param 適用除外適用事由コード 適用除外適用事由コード
      */
-    public void set適用除外適用事由コード(RString 適用除外適用事由コード) {
+    public void set適用除外適用事由コード(KaigoshikakuShutokuJiyuJogaiTekiyo 適用除外適用事由コード) {
         requireNonNull(適用除外適用事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("適用除外適用事由コード"));
         entity.setTekiyoJogaiTekiyoJiyuCode(適用除外適用事由コード);
     }
@@ -260,7 +261,7 @@ public class TekiyoJogaishaModel implements Serializable {
      *
      * @param 適用除外解除事由コード 適用除外解除事由コード
      */
-    public void set適用除外解除事由コード(RString 適用除外解除事由コード) {
+    public void set適用除外解除事由コード(KaigoshikakuSoshitsuJiyuJogaiTekiyo 適用除外解除事由コード) {
         requireNonNull(適用除外解除事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("適用除外解除事由コード"));
         entity.setTekiyoJogaikaijokaijoJiyuCode(適用除外解除事由コード);
     }

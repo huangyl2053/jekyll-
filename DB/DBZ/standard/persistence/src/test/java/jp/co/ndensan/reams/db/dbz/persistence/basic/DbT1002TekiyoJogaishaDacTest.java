@@ -199,7 +199,7 @@ public class DbT1002TekiyoJogaishaDacTest extends DbzTestDacBase {
             DbT1002TekiyoJogaishaEntity entity = DbT1002TekiyoJogaishaEntityGenerator.createDbT1002TekiyoJogaishaEntity();
             entity.setShichosonCode(市町村コード);
             entity.setShikibetsuCode(識別コード);
-            entity.setShoriTimeStamp(処理日時);
+            entity.setShoriTimestamp(処理日時);
             sut.insert(entity);
         }
     }

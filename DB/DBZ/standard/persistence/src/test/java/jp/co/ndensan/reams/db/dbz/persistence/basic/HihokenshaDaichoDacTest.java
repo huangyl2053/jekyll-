@@ -4,36 +4,49 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
-import java.util.List;
+import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.helper.DbT1001HihokenshaDaichoEntityMock;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
+import org.junit.Test;
 import static org.junit.Assert.assertThat;
-import static org.hamcrest.CoreMatchers.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 /**
- * HihokenshaDaichoDacのテストです。
+ * {@link HihokenshaDaichoDac}のテストです。
  *
- * @author N3327 三浦 凌
+ * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
 public class HihokenshaDaichoDacTest extends DbzTestDacBase {
 
+    private static final LasdecCode OTHER_市町村コード = new LasdecCode("201010");
+    private static final HihokenshaNo OTHER_被保険者番号 = new HihokenshaNo("1234500001");
+    private static final YMDHMS OTHER_処理日時 = new YMDHMS("20091104134911");
+    private static final LasdecCode NONE_市町村コード = new LasdecCode("999999");
+    private static final HihokenshaNo NONE_被保険者番号 = new HihokenshaNo("9999999999");
+    private static final YMDHMS NONE_処理日時 = new YMDHMS("39990101235959");
     private static HihokenshaDaichoDac sut;
 
     @BeforeClass
@@ -41,267 +54,160 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
         sut = InstanceProvider.create(HihokenshaDaichoDac.class);
     }
 
-    public static class Insert extends DbzTestDacBase {
-
-        DbT1001HihokenshaDaichoEntity entity;
+    public static class selectByKeyのテスト extends DbzTestDacBase {
 
         @Before
         public void setUp() {
-            entity = DbT1001HihokenshaDaichoEntityMock.create();
+            TestSupport.insert(
+                    DEFAULT_市町村コード,
+                    DEFAULT_被保険者番号,
+                    DEFAULT_処理日時);
+            TestSupport.insert(
+                    OTHER_市町村コード,
+                    OTHER_被保険者番号,
+                    OTHER_処理日時);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    null,
+                    DEFAULT_被保険者番号,
+                    DEFAULT_処理日時);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 被保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_市町村コード,
+                    null,
+                    DEFAULT_処理日時);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 処理日時がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_市町村コード,
+                    DEFAULT_被保険者番号,
+                    null);
         }
 
         @Test
-        public void insertは_成功したとき_1を返す() {
-            int result = sut.insert(entity);
-            assertThat(result, is(1));
+        public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
+            DbT1001HihokenshaDaichoEntity insertedRecord = sut.selectByKey(
+                    DEFAULT_市町村コード,
+                    DEFAULT_被保険者番号,
+                    DEFAULT_処理日時);
+            assertThat(insertedRecord, is(notNullValue()));
+        }
+
+        @Test
+        public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
+            DbT1001HihokenshaDaichoEntity insertedRecord = sut.selectByKey(
+                    NONE_市町村コード,
+                    NONE_被保険者番号,
+                    NONE_処理日時);
+            assertThat(insertedRecord, is(nullValue()));
         }
     }
 
-    @RunWith(Enclosed.class)
-    public static class Select extends DbzTestDacBase {
+    //TODO n8178 城間篤人 既にDB上にデータが入っているため、DB上にデータがない前提のこのテストは通らない。対応が決まり次第修正予定 2015年1月
+//    public static class selectAllのテスト extends DbzTestDacBase {
+//
+//        @Test
+//        public void 被保険者台帳が存在する場合_selectAllは_全件を返す() {
+//            TestSupport.insert(
+//                    DEFAULT_市町村コード,
+//                    DEFAULT_被保険者番号,
+//                    DEFAULT_処理日時);
+//            TestSupport.insert(
+//                    DEFAULT_市町村コード,
+//                    DEFAULT_被保険者番号,
+//                    DEFAULT_処理日時);
+//            assertThat(sut.selectAll().size(), is(2));
+//        }
+//
+//        @Test
+//        public void 被保険者台帳が存在しない場合_selectAllは_空のリストを返す() {
+//            assertThat(sut.selectAll(), is(Collections.EMPTY_LIST));
+//        }
+//    }
+    public static class insertのテスト extends DbzTestDacBase {
 
-        public static class select_LasdecCode extends DbzTestDacBase {
+        @Test
+        public void 被保険者台帳エンティティを渡すと_insertは_被保険者台帳を追加する() {
+            TestSupport.insert(
+                    DEFAULT_市町村コード,
+                    DEFAULT_被保険者番号,
+                    DEFAULT_処理日時);
 
-            private final LasdecCode code1 = new LasdecCode("111111");
-            private final LasdecCode code2 = new LasdecCode("222222");
-            private final LasdecCode code3 = new LasdecCode("333333");
-
-            @Before
-            public void setUp() {
-                initializeTable();
-            }
-
-            @Test
-            public void LasecCodeによるselectを用いて_あるLasdecCodeで検索したとき_検索結果のLasdecCodeは_検索条件のものと一致する() {
-                List<DbT1001HihokenshaDaichoEntity> result = sut.selectAll(code1);
-                assertThat(result.get(0).getShichosonCode(), is(code1));
-            }
-
-            @Test
-            public void LasecCodeによるselectを用いて_DB上3件存在するLasecCodeで検索したとき_検索結果のListのsizeは3を返す() {
-                List<DbT1001HihokenshaDaichoEntity> result = sut.selectAll(code1);
-                assertThat(result.size(), is(3));
-            }
-
-            private void initializeTable() {
-                YMDHMS shoriTimeStamp = new YMDHMS("20110912012345");
-                sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code1, new HihokenshaNo(new RString("1234567890")), shoriTimeStamp));
-                sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code1, new HihokenshaNo(new RString("1234567891")), shoriTimeStamp));
-                sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code1, new HihokenshaNo(new RString("1234567892")), shoriTimeStamp));
-                sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code2, new HihokenshaNo(new RString("1234567893")), shoriTimeStamp));
-                sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code2, new HihokenshaNo(new RString("1234567894")), shoriTimeStamp));
-                sut.insert(DbT1001HihokenshaDaichoEntityMock.
-                        createWithKey(code3, new HihokenshaNo(new RString("1234567895")), shoriTimeStamp));
-            }
-        }
-
-        @RunWith(Enclosed.class)
-        public static class selectAll_ITrueFalseCriteria extends DbzTestDacBase {
-
-            private static final LasdecCode code_111111 = new LasdecCode("111111");
-            private static final LasdecCode code_222222 = new LasdecCode("222222");
-            private static final LasdecCode code_333333 = new LasdecCode("333333");
-            private static final HihokenshaNo hihokenshaNo_1234567890 = new HihokenshaNo(new RString("1234567890"));
-
-            public static class LasdecCodeに111111_KaigoHihokenshaNoに1234567890を検索条件として指定した場合 extends DbzTestDacBase {
-
-                private ITrueFalseCriteria criteria;
-
-                @Before
-                public void setUp() {
-                    initializeTable();
-                    criteria = and(eq(shichosonCode, code_111111), eq(hihokenshaNo, hihokenshaNo_1234567890));
-                }
-
-                @Test
-                public void LasdecCodeによるselectを用いて_あるLasdecCodeで検索したとき_検索結果のLasdecCodeは_検索条件のものと一致する() {
-                    List<DbT1001HihokenshaDaichoEntity> result = sut.selectAll(criteria);
-                    assertThat(result.get(0).getShichosonCode(), is(code_111111));
-                }
-
-                @Test
-                public void LasdecCodeによるselectを用いて_あるhihokenshaNoで検索したとき_検索結果のhihokenshaNoは_検索条件のものと一致する() {
-                    List<DbT1001HihokenshaDaichoEntity> result = sut.selectAll(criteria);
-                    assertThat(result.get(0).getHihokenshaNo(), is(hihokenshaNo_1234567890));
-                }
-
-                @Test
-                public void 指定した検索条件に合致する被保険者台帳情報は_1件になる() {
-                    List<DbT1001HihokenshaDaichoEntity> result = sut.selectAll(criteria);
-                    assertThat(result.size(), is(1));
-                }
-            }
-
-            private static void initializeTable() {
-                YMDHMS shoriTimeStamp = new YMDHMS("20110912012345");
-                sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code_111111, new HihokenshaNo(new RString("1234567890")), shoriTimeStamp));
-                sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code_111111, new HihokenshaNo(new RString("1234567891")), shoriTimeStamp));
-                sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code_111111, new HihokenshaNo(new RString("1234567892")), shoriTimeStamp));
-                sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code_222222, new HihokenshaNo(new RString("1234567893")), shoriTimeStamp));
-                sut.insert(DbT1001HihokenshaDaichoEntityMock
-                        .createWithKey(code_222222, new HihokenshaNo(new RString("1234567894")), shoriTimeStamp));
-                sut.insert(DbT1001HihokenshaDaichoEntityMock.
-                        createWithKey(code_333333, new HihokenshaNo(new RString("1234567895")), shoriTimeStamp));
-            }
-        }
-
-        public static class selectLatestOfPerson_shikibetsuCode extends DbzTestDacBase {
-
-            private LasdecCode lasdecCode;
-            private ShikibetsuCode shikibetsuCode;
-            private FlexibleDate latestDate;
-
-            @Before
-            public void setUp() {
-                initializeTable();
-            }
-
-            @Test
-            public void selectLatestOfPerson_LasdecCodeAndShikibetsuCode版は_ある個人に対する_直近の情報を取得する() {
-                DbT1001HihokenshaDaichoEntity result = sut.selectLatestOfPerson(lasdecCode, shikibetsuCode);
-                assertThat(result.getShikakuShutokuYMD(), is(latestDate));
-            }
-
-            private void initializeTable() {
-                lasdecCode = new LasdecCode("111111");
-                shikibetsuCode = new ShikibetsuCode("1234567890");
-                latestDate = new FlexibleDate("20140302");
-
-                sut.insert(createEntityFrom(toYMDHMS(latestDate), latestDate));
-                FlexibleDate oneYearAgo = latestDate.minusYear(1);
-                sut.insert(createEntityFrom(toYMDHMS(oneYearAgo), oneYearAgo));
-                FlexibleDate twoYearAgo = latestDate.minusYear(2);
-                sut.insert(createEntityFrom(toYMDHMS(twoYearAgo), twoYearAgo));
-            }
-
-            private DbT1001HihokenshaDaichoEntity createEntityFrom(YMDHMS 処理日時, FlexibleDate 資格取得年月日) {
-                DbT1001HihokenshaDaichoEntity entity;
-                entity = DbT1001HihokenshaDaichoEntityMock.createWithKey(lasdecCode, shikibetsuCode, 処理日時);
-                entity.setShikakuShutokuYMD(資格取得年月日);
-                return entity;
-            }
-        }
-
-        public static class selectLatestOfPerson_hihokenshaNo extends DbzTestDacBase {
-
-            private LasdecCode lasdecCode;
-            private ShikibetsuCode shikibetsuCode;
-            private YMDHMS latestShoriTimeDate;
-            private HihokenshaNo hihokenshaNo;
-
-            @Before
-            public void setUp() {
-                initializeTable();
-            }
-
-            @Test
-            public void selectLatestOfPerson_LasdecCodeAndKaigoHihokenshaNo版は_ある個人に対する_直近の情報を取得する() {
-                DbT1001HihokenshaDaichoEntity result = sut.selectLatestOfPerson(lasdecCode, hihokenshaNo);
-                assertThat(result.getShoriTimestamp(), is(this.latestShoriTimeDate));
-            }
-
-            private void initializeTable() {
-                this.lasdecCode = new LasdecCode("111111");
-                this.shikibetsuCode = new ShikibetsuCode("1234567890");
-                this.hihokenshaNo = new HihokenshaNo(new RString("0987654321"));
-                FlexibleDate latestDate = new FlexibleDate("20140302");
-
-                this.latestShoriTimeDate = toYMDHMS(latestDate);
-                sut.insert(createEntityFrom(latestShoriTimeDate, latestDate));
-                FlexibleDate oneYearAgo = latestDate.minusYear(1);
-                sut.insert(createEntityFrom(toYMDHMS(oneYearAgo), oneYearAgo));
-                FlexibleDate twoYearAgo = latestDate.minusYear(2);
-                sut.insert(createEntityFrom(toYMDHMS(twoYearAgo), twoYearAgo));
-            }
-
-            private DbT1001HihokenshaDaichoEntity createEntityFrom(YMDHMS 処理日時, FlexibleDate 資格取得年月日) {
-                DbT1001HihokenshaDaichoEntity entity;
-                entity = DbT1001HihokenshaDaichoEntityMock.createWithKey(lasdecCode, shikibetsuCode, 処理日時);
-                entity.setHihokenshaNo(this.hihokenshaNo);
-                entity.setShikakuShutokuYMD(資格取得年月日);
-                return entity;
-            }
-        }
-
-        public static class selectFromKey extends DbzTestDacBase {
-
-            private YMDHMS shoriTimestamp;
-            private LasdecCode lasdecCode;
-            private ShikibetsuCode shikibetsuCode;
-
-            @Before
-            public void setUp() {
-                initializeTable();
-            }
-
-            @Test
-            public void selectFromKeyの検索結果に含まれる要素は_検索条件と一致する() {
-                DbT1001HihokenshaDaichoEntity result = sut.selectFromKey(lasdecCode, shikibetsuCode, shoriTimestamp);
-                assertThat(result.getShichosonCode(), is(lasdecCode));
-                assertThat(result.getShikibetsuCode(), is(shikibetsuCode));
-                assertThat(result.getShoriTimestamp(), is(shoriTimestamp));
-            }
-
-            private void initializeTable() {
-                insertWithSpecifiedKey();
-            }
-
-            private void insertWithSpecifiedKey() {
-                lasdecCode = new LasdecCode("111111");
-                shikibetsuCode = new ShikibetsuCode("1234567890");
-                shoriTimestamp = new YMDHMS("20140402172000");
-                sut.insert(DbT1001HihokenshaDaichoEntityMock.createWithKey(lasdecCode, shikibetsuCode, shoriTimestamp));
-            }
+            assertThat(sut.selectByKey(
+                    DEFAULT_市町村コード,
+                    DEFAULT_被保険者番号,
+                    DEFAULT_処理日時), is(notNullValue()));
         }
     }
 
-    public static class Delete extends DbzTestDacBase {
-
-        private YMDHMS shoriTimestamp;
-        private LasdecCode lasdecCode;
-        private ShikibetsuCode shikibetsuCode;
+    public static class updateのテスト extends DbzTestDacBase {
 
         @Before
         public void setUp() {
-            initializeTable();
+            TestSupport.insert(
+                    DEFAULT_市町村コード,
+                    DEFAULT_被保険者番号,
+                    DEFAULT_処理日時);
         }
 
         @Test
-        public void deleteは_成功したとき_1を返す() {
-            DbT1001HihokenshaDaichoEntity selected = sut.selectFromKey(lasdecCode, shikibetsuCode, shoriTimestamp);
-            int result = sut.delete(selected);
-            assertThat(result, is(1));
-        }
+        public void 被保険者台帳エンティティを渡すと_updateは_被保険者台帳を更新する() {
+            DbT1001HihokenshaDaichoEntity updateRecord = DbT1001HihokenshaDaichoEntityGenerator.createDbT1001HihokenshaDaichoEntity();
+            updateRecord.setShikakuShutokuYMD(new FlexibleDate("20091111"));
 
-        @Test
-        public void deleteは_同じ条件での検索結果に影響し_deleteしたEntityは検索できない() {
-            DbT1001HihokenshaDaichoEntity selected = sut.selectFromKey(lasdecCode, shikibetsuCode, shoriTimestamp);
-            sut.delete(selected);
-            assertThat(sut.selectFromKey(lasdecCode, shikibetsuCode, shoriTimestamp), is(nullValue()));
-        }
+            sut.update(updateRecord);
 
-        private void initializeTable() {
-            insertWithSpecifiedKey();
-        }
+            DbT1001HihokenshaDaichoEntity updatedRecord = sut.selectByKey(
+                    DEFAULT_市町村コード,
+                    DEFAULT_被保険者番号,
+                    DEFAULT_処理日時);
 
-        private void insertWithSpecifiedKey() {
-            lasdecCode = new LasdecCode("111111");
-            shikibetsuCode = new ShikibetsuCode("1234567890");
-            shoriTimestamp = new YMDHMS("20140402172000");
-            sut.insert(DbT1001HihokenshaDaichoEntityMock.createWithKey(lasdecCode, shikibetsuCode, shoriTimestamp));
+            assertThat(updateRecord.getShikakuShutokuYMD(), is(updatedRecord.getShikakuShutokuYMD()));
         }
     }
 
-    private static YMDHMS toYMDHMS(FlexibleDate date) {
-        return new YMDHMS(date.toString() + "000000");
+    public static class deleteのテスト extends DbzTestDacBase {
+
+        @Before
+        public void setUp() {
+            TestSupport.insert(
+                    DEFAULT_市町村コード,
+                    DEFAULT_被保険者番号,
+                    DEFAULT_処理日時);
+        }
+
+        @Test
+        public void 被保険者台帳エンティティを渡すと_deleteは_被保険者台帳を削除する() {
+            sut.delete(sut.selectByKey(
+                    DEFAULT_市町村コード,
+                    DEFAULT_被保険者番号,
+                    DEFAULT_処理日時));
+            assertThat(sut.selectByKey(
+                    DEFAULT_市町村コード,
+                    DEFAULT_被保険者番号,
+                    DEFAULT_処理日時), is(nullValue()));
+        }
+    }
+
+    private static class TestSupport {
+
+        public static void insert(
+                LasdecCode 市町村コード,
+                HihokenshaNo 被保険者番号,
+                YMDHMS 処理日時) {
+            DbT1001HihokenshaDaichoEntity entity = DbT1001HihokenshaDaichoEntityGenerator.createDbT1001HihokenshaDaichoEntity();
+            entity.setShichosonCode(市町村コード);
+            entity.setHihokenshaNo(被保険者番号);
+            entity.setShoriTimestamp(処理日時);
+            sut.insert(entity);
+        }
     }
 }

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model;
+package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuKubun;
@@ -14,8 +14,8 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
@@ -27,7 +27,7 @@ import static org.junit.Assert.assertThat;
 /**
  * {@link HihokenshaDaichoModel}のテストクラスです。
  *
- * @author LDNS 鄭雪双
+ * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
 public class HihokenshaDaichoModelTest extends DbzTestBase {
@@ -67,8 +67,8 @@ public class HihokenshaDaichoModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の資格取得事由は_設定した値と同じ資格取得事由を返す() {
-            sut.set資格取得事由(ShikakuShutokuJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格取得事由コード));
-            assertThat(sut.get資格取得事由(), is(ShikakuShutokuJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格取得事由コード)));
+            sut.set資格取得事由(ShikakuShutokuJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格取得事由コード.toRString()));
+            assertThat(sut.get資格取得事由(), is(ShikakuShutokuJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格取得事由コード.toRString())));
         }
 
         @Test
@@ -97,8 +97,8 @@ public class HihokenshaDaichoModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の資格喪失事由は_設定した値と同じ資格喪失事由を返す() {
-            sut.set資格喪失事由(ShikakuSoshitsuJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格喪失事由コード));
-            assertThat(sut.get資格喪失事由(), is(ShikakuSoshitsuJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格喪失事由コード)));
+            sut.set資格喪失事由(ShikakuSoshitsuJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格喪失事由コード.toRString()));
+            assertThat(sut.get資格喪失事由(), is(ShikakuSoshitsuJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格喪失事由コード.toRString())));
         }
 
         @Test
@@ -121,8 +121,8 @@ public class HihokenshaDaichoModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の資格変更事由は_設定した値と同じ資格変更事由を返す() {
-            sut.set資格変更事由(ShikakuHenkoJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格変更事由コード));
-            assertThat(sut.get資格変更事由(), is(ShikakuHenkoJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格変更事由コード)));
+            sut.set資格変更事由(ShikakuHenkoJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格変更事由コード.toRString()));
+            assertThat(sut.get資格変更事由(), is(ShikakuHenkoJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_資格変更事由コード.toRString())));
         }
 
         @Test
@@ -139,8 +139,8 @@ public class HihokenshaDaichoModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の住所地特例適用事由は_設定した値と同じ住所地特例適用事由を返す() {
-            sut.set住所地特例適用事由(JushochitokureiTekiyoJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例適用事由コード));
-            assertThat(sut.get住所地特例適用事由(), is(JushochitokureiTekiyoJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例適用事由コード)));
+            sut.set住所地特例適用事由(JushochitokureiTekiyoJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例適用事由コード.toRString()));
+            assertThat(sut.get住所地特例適用事由(), is(JushochitokureiTekiyoJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例適用事由コード.toRString())));
         }
 
         @Test
@@ -157,8 +157,8 @@ public class HihokenshaDaichoModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の住所地特例解除事由は_設定した値と同じ住所地特例解除事由を返す() {
-            sut.set住所地特例解除事由(JushochitokureiKaijoJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例解除事由コード));
-            assertThat(sut.get住所地特例解除事由(), is(JushochitokureiKaijoJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例解除事由コード)));
+            sut.set住所地特例解除事由(JushochitokureiKaijoJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例解除事由コード.toRString()));
+            assertThat(sut.get住所地特例解除事由(), is(JushochitokureiKaijoJiyu.toValue(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_住所地特例解除事由コード.toRString())));
         }
 
         @Test
@@ -225,10 +225,9 @@ public class HihokenshaDaichoModelTest extends DbzTestBase {
             sut.setEntity(DbT1001HihokenshaDaichoEntityGenerator.createDbT1001HihokenshaDaichoEntity());
 
             sut.getEntity().initializeMd5();
+            sut.getEntity().setShikakuShutokuYMD(new FlexibleDate("20140712"));
 
-            // 主キー以外の項目を変更してください
-//            sut.getEntity().setXXX(new XXX());
-//            assertThat(sut.getState(), is(EntityDataState.Modified));
+            assertThat(sut.getState(), is(EntityDataState.Modified));
         }
 
         @Test
