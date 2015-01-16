@@ -5,6 +5,8 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2003KibetsuEntityGenerator;
@@ -40,8 +42,8 @@ public class DbT2003KibetsuDacTest extends DbzTestDacBase {
     private static final RString キー_01 = new RString("01");
     private static final RString キー_02 = new RString("02");
     private static final RString キー_03 = new RString("03");
-    private static final FlexibleYear 調定年度2012 = new FlexibleYear("2012");
-    private static final FlexibleYear 調定年度2013 = new FlexibleYear("2013");
+    private static final ChoteiNendo 調定年度2012 = new ChoteiNendo("2012");
+    private static final ChoteiNendo 調定年度2013 = new ChoteiNendo("2013");
     private static DbT2003KibetsuDac sut;
 
     @BeforeClass
@@ -54,15 +56,15 @@ public class DbT2003KibetsuDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_調定年度,
-                    DEFAULT_賦課年度,
+                    new ChoteiNendo(DEFAULT_調定年度),
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
                     DEFAULT_処理日時,
                     DEFAULT_徴収方法,
                     DEFAULT_期);
             TestSupport.insert(
                     調定年度2012,
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
                     DEFAULT_処理日時,
                     DEFAULT_徴収方法,
@@ -73,7 +75,7 @@ public class DbT2003KibetsuDacTest extends DbzTestDacBase {
         public void 調定年度がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     null,
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
                     DEFAULT_処理日時,
                     DEFAULT_徴収方法,
@@ -83,7 +85,7 @@ public class DbT2003KibetsuDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 賦課年度がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_調定年度,
+                    new ChoteiNendo(DEFAULT_調定年度),
                     null,
                     DEFAULT_通知書番号,
                     DEFAULT_処理日時,
@@ -94,8 +96,8 @@ public class DbT2003KibetsuDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 通知書番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_調定年度,
-                    DEFAULT_賦課年度,
+                    new ChoteiNendo(DEFAULT_調定年度),
+                    new FukaNendo(DEFAULT_賦課年度),
                     null,
                     DEFAULT_処理日時,
                     DEFAULT_徴収方法,
@@ -105,8 +107,8 @@ public class DbT2003KibetsuDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 処理日時がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_調定年度,
-                    DEFAULT_賦課年度,
+                    new ChoteiNendo(DEFAULT_調定年度),
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
                     null,
                     DEFAULT_徴収方法,
@@ -116,8 +118,8 @@ public class DbT2003KibetsuDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 徴収方法がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_調定年度,
-                    DEFAULT_賦課年度,
+                    new ChoteiNendo(DEFAULT_調定年度),
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
                     DEFAULT_処理日時,
                     null,
@@ -127,8 +129,8 @@ public class DbT2003KibetsuDacTest extends DbzTestDacBase {
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT2003KibetsuEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_調定年度,
-                    DEFAULT_賦課年度,
+                    new ChoteiNendo(DEFAULT_調定年度),
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
                     DEFAULT_処理日時,
                     DEFAULT_徴収方法,
@@ -140,7 +142,7 @@ public class DbT2003KibetsuDacTest extends DbzTestDacBase {
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT2003KibetsuEntity insertedRecord = sut.selectByKey(
                     調定年度2013,
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
                     DEFAULT_処理日時,
                     DEFAULT_徴収方法,
@@ -154,15 +156,15 @@ public class DbT2003KibetsuDacTest extends DbzTestDacBase {
         @Test
         public void 介護期別が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    DEFAULT_調定年度,
-                    DEFAULT_賦課年度,
+                    new ChoteiNendo(DEFAULT_調定年度),
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
                     DEFAULT_処理日時,
                     DEFAULT_徴収方法,
                     DEFAULT_期);
             TestSupport.insert(
                     調定年度2012,
-                    DEFAULT_賦課年度,
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
                     DEFAULT_処理日時,
                     DEFAULT_徴収方法,
@@ -181,16 +183,16 @@ public class DbT2003KibetsuDacTest extends DbzTestDacBase {
         @Test
         public void 介護期別エンティティを渡すと_insertは_介護期別を追加する() {
             TestSupport.insert(
-                    DEFAULT_調定年度,
-                    DEFAULT_賦課年度,
+                    new ChoteiNendo(DEFAULT_調定年度),
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
                     DEFAULT_処理日時,
                     DEFAULT_徴収方法,
                     DEFAULT_期);
 
             assertThat(sut.selectByKey(
-                    DEFAULT_調定年度,
-                    DEFAULT_賦課年度,
+                    new ChoteiNendo(DEFAULT_調定年度),
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
                     DEFAULT_処理日時,
                     DEFAULT_徴収方法,
@@ -203,8 +205,8 @@ public class DbT2003KibetsuDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_調定年度,
-                    DEFAULT_賦課年度,
+                    new ChoteiNendo(DEFAULT_調定年度),
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
                     DEFAULT_処理日時,
                     DEFAULT_徴収方法,
@@ -220,8 +222,8 @@ public class DbT2003KibetsuDacTest extends DbzTestDacBase {
             sut.update(updateRecord);
 
             DbT2003KibetsuEntity updatedRecord = sut.selectByKey(
-                    DEFAULT_調定年度,
-                    DEFAULT_賦課年度,
+                    new ChoteiNendo(DEFAULT_調定年度),
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
                     DEFAULT_処理日時,
                     DEFAULT_徴収方法,
@@ -236,8 +238,8 @@ public class DbT2003KibetsuDacTest extends DbzTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    DEFAULT_調定年度,
-                    DEFAULT_賦課年度,
+                    new ChoteiNendo(DEFAULT_調定年度),
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
                     DEFAULT_処理日時,
                     DEFAULT_徴収方法,
@@ -247,15 +249,15 @@ public class DbT2003KibetsuDacTest extends DbzTestDacBase {
         @Test
         public void 介護期別エンティティを渡すと_deleteは_介護期別を削除する() {
             sut.delete(sut.selectByKey(
-                    DEFAULT_調定年度,
-                    DEFAULT_賦課年度,
+                    new ChoteiNendo(DEFAULT_調定年度),
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
                     DEFAULT_処理日時,
                     DEFAULT_徴収方法,
                     DEFAULT_期));
             assertThat(sut.selectByKey(
-                    DEFAULT_調定年度,
-                    DEFAULT_賦課年度,
+                    new ChoteiNendo(DEFAULT_調定年度),
+                    new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
                     DEFAULT_処理日時,
                     DEFAULT_徴収方法,
@@ -266,15 +268,15 @@ public class DbT2003KibetsuDacTest extends DbzTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                FlexibleYear 調定年度,
-                FlexibleYear 賦課年度,
+                ChoteiNendo 調定年度,
+                FukaNendo 賦課年度,
                 TsuchishoNo 通知書番号,
                 RDateTime 処理日時,
                 RString 徴収方法,
                 int 期) {
             DbT2003KibetsuEntity entity = DbT2003KibetsuEntityGenerator.createDbT2003KibetsuEntity();
-            entity.setChoteiNendo(調定年度);
-            entity.setFukaNendo(賦課年度);
+            entity.setChoteiNendo(調定年度.value());
+            entity.setFukaNendo(賦課年度.value());
             entity.setTsuchishoNo(通知書番号);
             entity.setShoriTimestamp(処理日時);
             entity.setChoshuHoho(徴収方法);

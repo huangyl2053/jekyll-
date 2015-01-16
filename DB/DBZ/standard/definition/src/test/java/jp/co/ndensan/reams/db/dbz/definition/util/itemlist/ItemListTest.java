@@ -107,7 +107,7 @@ public class ItemListTest extends DbzTestBase {
         }
     }
 
-    public static class asList extends DbzTestBase {
+    public static class toList extends DbzTestBase {
 
         private ItemList<RString> sut;
         private List<RString> input;
@@ -119,17 +119,17 @@ public class ItemListTest extends DbzTestBase {
         }
 
         @Test
-        public void asList_の結果のlistのsizeは_生成時に渡したlistのsizeと_一致する() {
+        public void toList_の結果のlistのsizeは_生成時に渡したlistのsizeと_一致する() {
             assertThat(sut.toList().size(), is(input.size()));
         }
 
         @Test
-        public void asList_の結果のlistは_生成時に渡したlistの要素を_すべて含む() {
+        public void toList_の結果のlistは_生成時に渡したlistの要素を_すべて含む() {
             assertThat(sut.toList().containsAll(input), is(true));
         }
 
         @Test
-        public void asList_の結果のlistは_生成時に渡したlistが空の時_空である() {
+        public void toList_の結果のlistは_生成時に渡したlistが空の時_空である() {
             sut = ItemList.of(Collections.<RString>emptyList());
             assertThat(sut.toList().isEmpty(), is(true));
         }
@@ -218,6 +218,61 @@ public class ItemListTest extends DbzTestBase {
         }
     }
 
+    private static class TestValue {
+
+        private final List<Integer> values;
+
+        public TestValue() {
+            this.values = new ArrayList<>();
+        }
+
+        public void add(int value) {
+            this.values.add(value);
+        }
+    }
+
+    public static class flatMap extends DbzTestBase {
+
+        private IItemList<Integer> result;
+        private TestValue val1, val2;
+        private final IFunction<TestValue, List<Integer>> mapper = new IFunction<TestValue, List<Integer>>() {
+            @Override
+            public List<Integer> apply(TestValue t) {
+                return t.values;
+            }
+        };
+
+        @Before
+        public void setUp() {
+
+            List<TestValue> list = new ArrayList<>();
+            val1 = new TestValue();
+            val1.add(100);
+            val1.add(200);
+            list.add(val1);
+
+            val2 = new TestValue();
+            val2.add(300);
+            val2.add(400);
+            list.add(val2);
+
+            result = ItemList.of(list).flatMap(mapper);
+        }
+
+        @Test
+        public void flatMapの結果のsizeは_IItemListが保持する要素をすべてmapperによりIterableへ変換した結果の_すべてIterableが保持するすべての要素の数の合計と_一致する() {
+            assertThat(result.size(),
+                    is(mapper.apply(val1).size() + mapper.apply(val2).size())
+            );
+        }
+
+        @Test
+        public void flatMapの結果は_IItemListが保持する要素をすべてmapperによりIterableへ変換した結果の_すべてのIterableが保持するすべての要素を_含む() {
+            assertThat(result.containsAll(mapper.apply(val1)), is(true));
+            assertThat(result.containsAll(mapper.apply(val2)), is(true));
+        }
+    }
+
     public static class isEmpty extends DbzTestBase {
 
         private ItemList<RString> sut;
@@ -275,19 +330,19 @@ public class ItemListTest extends DbzTestBase {
         private ItemList<RString> sut;
 
         @Test
-        public void findJustOneは_生成時に渡したlistがemptyの時_空のIOptionalを返す() {
+        public void findJustOneは_生成時に渡したlistがemptyの時_空のOptionalを返す() {
             sut = ItemList.of(Collections.<RString>emptyList());
             assertThat(sut.findJustOne().isPresent(), is(false));
         }
 
         @Test
-        public void findJustOneは_生成時に渡したlistのsizeが1の時_その要素を持ったIOptionalを返す() {
+        public void findJustOneは_生成時に渡したlistのsizeが1の時_その要素を持ったOptionalを返す() {
             sut = ItemList.of(asList(VAL1));
             assertThat(sut.findJustOne().get(), is(VAL1));
         }
 
         @Test
-        public void findJustOneは_生成時に渡したlistのsizeが2の時_空のIOptionalを返す() {
+        public void findJustOneは_生成時に渡したlistのsizeが2の時_空のOptionalを返す() {
             sut = ItemList.of(asList(VAL1, VAL2));
             assertThat(sut.findJustOne().isPresent(), is(false));
         }
@@ -298,19 +353,19 @@ public class ItemListTest extends DbzTestBase {
         private ItemList<RString> sut;
 
         @Test
-        public void findFirstは_生成時に渡したlistがemptyの時_空のIOptionalを返す() {
+        public void findFirstは_生成時に渡したlistがemptyの時_空のOptionalを返す() {
             sut = ItemList.of(Collections.<RString>emptyList());
             assertThat(sut.findFirst().isPresent(), is(false));
         }
 
         @Test
-        public void findFirstは_生成時に渡したlistのsizeが1の時_その要素を持ったIOptionalを返す() {
+        public void findFirstは_生成時に渡したlistのsizeが1の時_その要素を持ったOptionalを返す() {
             sut = ItemList.of(asList(VAL1));
             assertThat(sut.findFirst().get(), is(VAL1));
         }
 
         @Test
-        public void findFisrtは_生成時に渡したlistのsizeが2の時_要素を持ったIOptionalを返す() {
+        public void findFisrtは_生成時に渡したlistのsizeが2の時_要素を持ったOptionalを返す() {
             sut = ItemList.of(asList(VAL1, VAL2));
             assertThat(sut.findFirst().isPresent(), is(true));
         }
@@ -496,6 +551,29 @@ public class ItemListTest extends DbzTestBase {
         public void addedは_引数に2個の要素を指定したとき_sizeを2増やした_IItemListを返す() {
             int beforeSize = sut.size();
             assertThat(sut.added("4", "5").size(), is(beforeSize + 2));
+        }
+    }
+
+    public static class reversed extends DbzTestBase {
+
+        private IItemList<String> sut;
+        private final String first = "1";
+        private final String last = "3";
+
+        @Before
+        public void setUp() {
+            sut = ItemList.of(first, "2", last).reversed();
+        }
+
+        @Test
+        public void reversedの結果_保持するlistの先頭の要素は_生成時に渡したlistの最後の要素になる() {
+            assertThat(sut.toList().get(0), is(last));
+        }
+
+        @Test
+        public void reversedの結果_保持するlistの最後の要素は_生成時に渡したlistの最初の要素になる() {
+            List<String> list = sut.toList();
+            assertThat(list.get(list.size() - 1), is(first));
         }
     }
 }

@@ -1,35 +1,35 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHM;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.ChoteiJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 
 /**
  * DbT2002Fukaの項目定義クラスです
  *
  */
 public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2002Fuka");
 
     private RString insertDantaiCd;
-    @PrimaryKey
     private RDateTime insertTimestamp;
     private RString insertReamsLoginId;
     private UUID insertContextId;
@@ -49,6 +49,15 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
     private ShikibetsuCode shikibetsuCode;
     private SetaiCode setaiCode;
     private int setaiInsu;
+    private FlexibleDate shikakuShutokuYMD;
+    private RString shikakuShutokuJiyu;
+    private FlexibleDate shikakuSoshitsuYMD;
+    private RString shikakuSoshitsuJiyu;
+    private RString seihofujoShurui;
+    private FlexibleDate seihoKaishiYMD;
+    private FlexibleDate seihoHaishiYMD;
+    private FlexibleDate ronenKaishiYMD;
+    private FlexibleDate ronenHaishiYMD;
     private FlexibleDate fukaYMD;
     private RString kazeiKubun;
     private RString setaikazeiKubun;
@@ -63,11 +72,11 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
     private Decimal nengakuHokenryo2;
     private FlexibleYearMonth tsukiwariStartYM2;
     private FlexibleYearMonth tsukiwariEndYM2;
-    private YMDHM choteiYMDHM;
-    private RString choteiJiyu1;
-    private RString choteiJiyu2;
-    private RString choteiJiyu3;
-    private RString choteiJiyu4;
+    private RDateTime choteiTimestamp;
+    private ChoteiJiyu choteiJiyu1;
+    private ChoteiJiyu choteiJiyu2;
+    private ChoteiJiyu choteiJiyu3;
+    private ChoteiJiyu choteiJiyu4;
     private RString koseiM;
     private Decimal gemmenMaeHokenryo;
     private Decimal gemmenGaku;
@@ -75,6 +84,10 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
     private RString hokenryoDankaiKarisanntei;
     private RDateTime choshuHohoShoriTimestamp;
     private RDateTime idoKijunTimestamp;
+    private RString kozaKubun;
+    private RString kyokaisoKubun;
+    private RString shokkenKubun;
+    private LasdecCode fukaShichosonCode;
 
     /**
      * getInsertDantaiCd
@@ -263,6 +276,168 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      */
     public void setSetaiInsu(int setaiInsu) {
         this.setaiInsu = setaiInsu;
+    }
+
+    /**
+     * getShikakuShutokuYMD
+     *
+     * @return shikakuShutokuYMD
+     */
+    public FlexibleDate getShikakuShutokuYMD() {
+        return shikakuShutokuYMD;
+    }
+
+    /**
+     * setShikakuShutokuYMD
+     *
+     * @param shikakuShutokuYMD shikakuShutokuYMD
+     */
+    public void setShikakuShutokuYMD(FlexibleDate shikakuShutokuYMD) {
+        this.shikakuShutokuYMD = shikakuShutokuYMD;
+    }
+
+    /**
+     * getShikakuShutokuJiyu
+     *
+     * @return shikakuShutokuJiyu
+     */
+    public RString getShikakuShutokuJiyu() {
+        return shikakuShutokuJiyu;
+    }
+
+    /**
+     * setShikakuShutokuJiyu
+     *
+     * @param shikakuShutokuJiyu shikakuShutokuJiyu
+     */
+    public void setShikakuShutokuJiyu(RString shikakuShutokuJiyu) {
+        this.shikakuShutokuJiyu = shikakuShutokuJiyu;
+    }
+
+    /**
+     * getShikakuSoshitsuYMD
+     *
+     * @return shikakuSoshitsuYMD
+     */
+    public FlexibleDate getShikakuSoshitsuYMD() {
+        return shikakuSoshitsuYMD;
+    }
+
+    /**
+     * setShikakuSoshitsuYMD
+     *
+     * @param shikakuSoshitsuYMD shikakuSoshitsuYMD
+     */
+    public void setShikakuSoshitsuYMD(FlexibleDate shikakuSoshitsuYMD) {
+        this.shikakuSoshitsuYMD = shikakuSoshitsuYMD;
+    }
+
+    /**
+     * getShikakuSoshitsuJiyu
+     *
+     * @return shikakuSoshitsuJiyu
+     */
+    public RString getShikakuSoshitsuJiyu() {
+        return shikakuSoshitsuJiyu;
+    }
+
+    /**
+     * setShikakuSoshitsuJiyu
+     *
+     * @param shikakuSoshitsuJiyu shikakuSoshitsuJiyu
+     */
+    public void setShikakuSoshitsuJiyu(RString shikakuSoshitsuJiyu) {
+        this.shikakuSoshitsuJiyu = shikakuSoshitsuJiyu;
+    }
+
+    /**
+     * getSeihofujoShurui
+     *
+     * @return seihofujoShurui
+     */
+    public RString getSeihofujoShurui() {
+        return seihofujoShurui;
+    }
+
+    /**
+     * setSeihofujoShurui
+     *
+     * @param seihofujoShurui seihofujoShurui
+     */
+    public void setSeihofujoShurui(RString seihofujoShurui) {
+        this.seihofujoShurui = seihofujoShurui;
+    }
+
+    /**
+     * getSeihoKaishiYMD
+     *
+     * @return seihoKaishiYMD
+     */
+    public FlexibleDate getSeihoKaishiYMD() {
+        return seihoKaishiYMD;
+    }
+
+    /**
+     * setSeihoKaishiYMD
+     *
+     * @param seihoKaishiYMD seihoKaishiYMD
+     */
+    public void setSeihoKaishiYMD(FlexibleDate seihoKaishiYMD) {
+        this.seihoKaishiYMD = seihoKaishiYMD;
+    }
+
+    /**
+     * getSeihoHaishiYMD
+     *
+     * @return seihoHaishiYMD
+     */
+    public FlexibleDate getSeihoHaishiYMD() {
+        return seihoHaishiYMD;
+    }
+
+    /**
+     * setSeihoHaishiYMD
+     *
+     * @param seihoHaishiYMD seihoHaishiYMD
+     */
+    public void setSeihoHaishiYMD(FlexibleDate seihoHaishiYMD) {
+        this.seihoHaishiYMD = seihoHaishiYMD;
+    }
+
+    /**
+     * getRonenKaishiYMD
+     *
+     * @return ronenKaishiYMD
+     */
+    public FlexibleDate getRonenKaishiYMD() {
+        return ronenKaishiYMD;
+    }
+
+    /**
+     * setRonenKaishiYMD
+     *
+     * @param ronenKaishiYMD ronenKaishiYMD
+     */
+    public void setRonenKaishiYMD(FlexibleDate ronenKaishiYMD) {
+        this.ronenKaishiYMD = ronenKaishiYMD;
+    }
+
+    /**
+     * getRonenHaishiYMD
+     *
+     * @return ronenHaishiYMD
+     */
+    public FlexibleDate getRonenHaishiYMD() {
+        return ronenHaishiYMD;
+    }
+
+    /**
+     * setRonenHaishiYMD
+     *
+     * @param ronenHaishiYMD ronenHaishiYMD
+     */
+    public void setRonenHaishiYMD(FlexibleDate ronenHaishiYMD) {
+        this.ronenHaishiYMD = ronenHaishiYMD;
     }
 
     /**
@@ -518,21 +693,21 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
     }
 
     /**
-     * getChoteiYMDHM
+     * getChoteiTimestamp
      *
-     * @return choteiYMDHM
+     * @return choteiTimestamp
      */
-    public YMDHM getChoteiYMDHM() {
-        return choteiYMDHM;
+    public RDateTime getChoteiTimestamp() {
+        return choteiTimestamp;
     }
 
     /**
-     * setChoteiYMDHM
+     * setChoteiTimestamp
      *
-     * @param choteiYMDHM choteiYMDHM
+     * @param choteiTimestamp choteiTimestamp
      */
-    public void setChoteiYMDHM(YMDHM choteiYMDHM) {
-        this.choteiYMDHM = choteiYMDHM;
+    public void setChoteiTimestamp(RDateTime choteiTimestamp) {
+        this.choteiTimestamp = choteiTimestamp;
     }
 
     /**
@@ -540,7 +715,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @return choteiJiyu1
      */
-    public RString getChoteiJiyu1() {
+    public ChoteiJiyu getChoteiJiyu1() {
         return choteiJiyu1;
     }
 
@@ -549,7 +724,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @param choteiJiyu1 choteiJiyu1
      */
-    public void setChoteiJiyu1(RString choteiJiyu1) {
+    public void setChoteiJiyu1(ChoteiJiyu choteiJiyu1) {
         this.choteiJiyu1 = choteiJiyu1;
     }
 
@@ -558,7 +733,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @return choteiJiyu2
      */
-    public RString getChoteiJiyu2() {
+    public ChoteiJiyu getChoteiJiyu2() {
         return choteiJiyu2;
     }
 
@@ -567,7 +742,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @param choteiJiyu2 choteiJiyu2
      */
-    public void setChoteiJiyu2(RString choteiJiyu2) {
+    public void setChoteiJiyu2(ChoteiJiyu choteiJiyu2) {
         this.choteiJiyu2 = choteiJiyu2;
     }
 
@@ -576,7 +751,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @return choteiJiyu3
      */
-    public RString getChoteiJiyu3() {
+    public ChoteiJiyu getChoteiJiyu3() {
         return choteiJiyu3;
     }
 
@@ -585,7 +760,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @param choteiJiyu3 choteiJiyu3
      */
-    public void setChoteiJiyu3(RString choteiJiyu3) {
+    public void setChoteiJiyu3(ChoteiJiyu choteiJiyu3) {
         this.choteiJiyu3 = choteiJiyu3;
     }
 
@@ -594,7 +769,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @return choteiJiyu4
      */
-    public RString getChoteiJiyu4() {
+    public ChoteiJiyu getChoteiJiyu4() {
         return choteiJiyu4;
     }
 
@@ -603,7 +778,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      *
      * @param choteiJiyu4 choteiJiyu4
      */
-    public void setChoteiJiyu4(RString choteiJiyu4) {
+    public void setChoteiJiyu4(ChoteiJiyu choteiJiyu4) {
         this.choteiJiyu4 = choteiJiyu4;
     }
 
@@ -734,17 +909,87 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
     }
 
     /**
+     * getKozaKubun
+     *
+     * @return kozaKubun
+     */
+    public RString getKozaKubun() {
+        return kozaKubun;
+    }
+
+    /**
+     * setKozaKubun
+     *
+     * @param kozaKubun kozaKubun
+     */
+    public void setKozaKubun(RString kozaKubun) {
+        this.kozaKubun = kozaKubun;
+    }
+
+    /**
+     * getKyokaisoKubun
+     *
+     * @return kyokaisoKubun
+     */
+    public RString getKyokaisoKubun() {
+        return kyokaisoKubun;
+    }
+
+    /**
+     * setKyokaisoKubun
+     *
+     * @param kyokaisoKubun kyokaisoKubun
+     */
+    public void setKyokaisoKubun(RString kyokaisoKubun) {
+        this.kyokaisoKubun = kyokaisoKubun;
+    }
+
+    /**
+     * getShokkenKubun
+     *
+     * @return shokkenKubun
+     */
+    public RString getShokkenKubun() {
+        return shokkenKubun;
+    }
+
+    /**
+     * setShokkenKubun
+     *
+     * @param shokkenKubun shokkenKubun
+     */
+    public void setShokkenKubun(RString shokkenKubun) {
+        this.shokkenKubun = shokkenKubun;
+    }
+
+    /**
+     * getFukaShichosonCode
+     *
+     * @return fukaShichosonCode
+     */
+    public LasdecCode getFukaShichosonCode() {
+        return fukaShichosonCode;
+    }
+
+    /**
+     * setFukaShichosonCode
+     *
+     * @param fukaShichosonCode fukaShichosonCode
+     */
+    public void setFukaShichosonCode(LasdecCode fukaShichosonCode) {
+        this.fukaShichosonCode = fukaShichosonCode;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT2002FukaEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2002FukaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT2002FukaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2002FukaEntity other) {
         if (other == null) {
-            return false;
-        }
-        if (!Objects.equals(this.insertTimestamp, other.insertTimestamp)) {
             return false;
         }
         if (!Objects.equals(this.choteiNendo, other.choteiNendo)) {
@@ -775,6 +1020,15 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
         this.shikibetsuCode = entity.shikibetsuCode;
         this.setaiCode = entity.setaiCode;
         this.setaiInsu = entity.setaiInsu;
+        this.shikakuShutokuYMD = entity.shikakuShutokuYMD;
+        this.shikakuShutokuJiyu = entity.shikakuShutokuJiyu;
+        this.shikakuSoshitsuYMD = entity.shikakuSoshitsuYMD;
+        this.shikakuSoshitsuJiyu = entity.shikakuSoshitsuJiyu;
+        this.seihofujoShurui = entity.seihofujoShurui;
+        this.seihoKaishiYMD = entity.seihoKaishiYMD;
+        this.seihoHaishiYMD = entity.seihoHaishiYMD;
+        this.ronenKaishiYMD = entity.ronenKaishiYMD;
+        this.ronenHaishiYMD = entity.ronenHaishiYMD;
         this.fukaYMD = entity.fukaYMD;
         this.kazeiKubun = entity.kazeiKubun;
         this.setaikazeiKubun = entity.setaikazeiKubun;
@@ -789,7 +1043,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
         this.nengakuHokenryo2 = entity.nengakuHokenryo2;
         this.tsukiwariStartYM2 = entity.tsukiwariStartYM2;
         this.tsukiwariEndYM2 = entity.tsukiwariEndYM2;
-        this.choteiYMDHM = entity.choteiYMDHM;
+        this.choteiTimestamp = entity.choteiTimestamp;
         this.choteiJiyu1 = entity.choteiJiyu1;
         this.choteiJiyu2 = entity.choteiJiyu2;
         this.choteiJiyu3 = entity.choteiJiyu3;
@@ -801,6 +1055,10 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
         this.hokenryoDankaiKarisanntei = entity.hokenryoDankaiKarisanntei;
         this.choshuHohoShoriTimestamp = entity.choshuHohoShoriTimestamp;
         this.idoKijunTimestamp = entity.idoKijunTimestamp;
+        this.kozaKubun = entity.kozaKubun;
+        this.kyokaisoKubun = entity.kyokaisoKubun;
+        this.shokkenKubun = entity.shokkenKubun;
+        this.fukaShichosonCode = entity.fukaShichosonCode;
     }
 
     /**
@@ -810,7 +1068,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(choteiNendo, fukaNendo, tsuchishoNo, shoriTimestamp, hihokenshaNo, shikibetsuCode, setaiCode, setaiInsu, fukaYMD, kazeiKubun, setaikazeiKubun, gokeiShotokuGaku, nenkinShunyuGaku, hokenryoDankai, hokenryoDankai1, nengakuHokenryo1, tsukiwariStartYM1, tsukiwariEndYM1, hokenryoDankai2, nengakuHokenryo2, tsukiwariStartYM2, tsukiwariEndYM2, choteiYMDHM, choteiJiyu1, choteiJiyu2, choteiJiyu3, choteiJiyu4, koseiM, gemmenMaeHokenryo, gemmenGaku, kakuteiHokenryo, hokenryoDankaiKarisanntei, choshuHohoShoriTimestamp, idoKijunTimestamp);
+        return super.toMd5(choteiNendo, fukaNendo, tsuchishoNo, shoriTimestamp, hihokenshaNo, shikibetsuCode, setaiCode, setaiInsu, shikakuShutokuYMD, shikakuShutokuJiyu, shikakuSoshitsuYMD, shikakuSoshitsuJiyu, seihofujoShurui, seihoKaishiYMD, seihoHaishiYMD, ronenKaishiYMD, ronenHaishiYMD, fukaYMD, kazeiKubun, setaikazeiKubun, gokeiShotokuGaku, nenkinShunyuGaku, hokenryoDankai, hokenryoDankai1, nengakuHokenryo1, tsukiwariStartYM1, tsukiwariEndYM1, hokenryoDankai2, nengakuHokenryo2, tsukiwariStartYM2, tsukiwariEndYM2, choteiTimestamp, choteiJiyu1, choteiJiyu2, choteiJiyu3, choteiJiyu4, koseiM, gemmenMaeHokenryo, gemmenGaku, kakuteiHokenryo, hokenryoDankaiKarisanntei, choshuHohoShoriTimestamp, idoKijunTimestamp, kozaKubun, kyokaisoKubun, shokkenKubun, fukaShichosonCode);
     }
 
 // </editor-fold>

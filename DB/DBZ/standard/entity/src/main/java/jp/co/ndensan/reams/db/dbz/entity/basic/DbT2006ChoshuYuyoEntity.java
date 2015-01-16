@@ -2,8 +2,9 @@ package jp.co.ndensan.reams.db.dbz.entity.basic;
 
 import java.util.Objects;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.HokenryoChoshuYuyoShurui;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.HokenryoChoshuYuyoTorikeshiShurui;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -46,9 +47,9 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
     private RString jotaiKubun;
     private RString sakuseiKubun;
     private RString shinseiJiyu;
-    private Code yuyoJiyuCode;
+    private HokenryoChoshuYuyoShurui yuyoShuruiCode;
     private RString yuyoJiyu;
-    private Code yuyoTorikeshiJiyuCode;
+    private HokenryoChoshuYuyoTorikeshiShurui yuyoTorikeshiShuruiCode;
     private RString yuyoTorikeshiJiyu;
 
     /**
@@ -277,21 +278,21 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
     }
 
     /**
-     * getYuyoJiyuCode
+     * getYuyoShuruiCode
      *
-     * @return yuyoJiyuCode
+     * @return yuyoShuruiCode
      */
-    public Code getYuyoJiyuCode() {
-        return yuyoJiyuCode;
+    public HokenryoChoshuYuyoShurui getYuyoShuruiCode() {
+        return yuyoShuruiCode;
     }
 
     /**
-     * setYuyoJiyuCode
+     * setYuyoShuruiCode
      *
-     * @param yuyoJiyuCode yuyoJiyuCode
+     * @param yuyoShuruiCode yuyoShuruiCode
      */
-    public void setYuyoJiyuCode(Code yuyoJiyuCode) {
-        this.yuyoJiyuCode = yuyoJiyuCode;
+    public void setYuyoShuruiCode(HokenryoChoshuYuyoShurui yuyoShuruiCode) {
+        this.yuyoShuruiCode = yuyoShuruiCode;
     }
 
     /**
@@ -313,21 +314,21 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
     }
 
     /**
-     * getYuyoTorikeshiJiyuCode
+     * getYuyoTorikeshiShuruiCode
      *
-     * @return yuyoTorikeshiJiyuCode
+     * @return yuyoTorikeshiShuruiCode
      */
-    public Code getYuyoTorikeshiJiyuCode() {
-        return yuyoTorikeshiJiyuCode;
+    public HokenryoChoshuYuyoTorikeshiShurui getYuyoTorikeshiShuruiCode() {
+        return yuyoTorikeshiShuruiCode;
     }
 
     /**
-     * setYuyoTorikeshiJiyuCode
+     * setYuyoTorikeshiShuruiCode
      *
-     * @param yuyoTorikeshiJiyuCode yuyoTorikeshiJiyuCode
+     * @param yuyoTorikeshiShuruiCode yuyoTorikeshiShuruiCode
      */
-    public void setYuyoTorikeshiJiyuCode(Code yuyoTorikeshiJiyuCode) {
-        this.yuyoTorikeshiJiyuCode = yuyoTorikeshiJiyuCode;
+    public void setYuyoTorikeshiShuruiCode(HokenryoChoshuYuyoTorikeshiShurui yuyoTorikeshiShuruiCode) {
+        this.yuyoTorikeshiShuruiCode = yuyoTorikeshiShuruiCode;
     }
 
     /**
@@ -352,7 +353,8 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
      * このエンティティの主キーが他の{@literal DbT2006ChoshuYuyoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2006ChoshuYuyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT2006ChoshuYuyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2006ChoshuYuyoEntity other) {
@@ -392,9 +394,9 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
         this.jotaiKubun = entity.jotaiKubun;
         this.sakuseiKubun = entity.sakuseiKubun;
         this.shinseiJiyu = entity.shinseiJiyu;
-        this.yuyoJiyuCode = entity.yuyoJiyuCode;
+        this.yuyoShuruiCode = entity.yuyoShuruiCode;
         this.yuyoJiyu = entity.yuyoJiyu;
-        this.yuyoTorikeshiJiyuCode = entity.yuyoTorikeshiJiyuCode;
+        this.yuyoTorikeshiShuruiCode = entity.yuyoTorikeshiShuruiCode;
         this.yuyoTorikeshiJiyu = entity.yuyoTorikeshiJiyu;
     }
 
@@ -405,7 +407,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(choteiNendo, fukaNendo, tsuchishoNo, shoriTimestamp, shinseiYMD, ketteiYMD, torikeshiYMD, jotaiKubun, sakuseiKubun, shinseiJiyu, yuyoJiyuCode, yuyoJiyu, yuyoTorikeshiJiyuCode, yuyoTorikeshiJiyu);
+        return super.toMd5(choteiNendo, fukaNendo, tsuchishoNo, shoriTimestamp, shinseiYMD, ketteiYMD, torikeshiYMD, jotaiKubun, sakuseiKubun, shinseiJiyu, yuyoShuruiCode, yuyoJiyu, yuyoTorikeshiShuruiCode, yuyoTorikeshiJiyu);
     }
 
 // </editor-fold>

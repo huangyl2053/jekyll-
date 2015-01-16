@@ -10,7 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 
 /**
  * オブジェクトの集合であることを表します。
@@ -36,6 +36,18 @@ public interface IItemList<E> extends Iterable<E> {
      * @return mapperにより変換された結果を保持した{@link IItemList IItemList}
      */
     <R> IItemList<R> map(IFunction<? super E, ? extends R> mapper);
+
+    /**
+     * 保持する要素を{@link Iterable}なオブジェクトへ展開する{@link IFunction mapper}により、
+     * 変換後の{@link Iterable}で参照可能なすべての要素を持った{@link IItemList}を生成し返します。<br/>
+     * つまり、{@link IFunction mapper}に、n個の要素を持った{@link Iterable}への展開が定義されているとすれば、
+     * {@code n×変換前のIItemListのサイズ }個の要素を持った{@link IItemList}が生成されます。
+     *
+     * @param <R> 変換後の{@link IItemList IItemList}が保持する型
+     * @param mapper 変換に用いる{@link IFunction mapper}
+     * @return mapperにより展開された結果をすべて保持した{@link IItemList IItemList}
+     */
+    <R> IItemList<R> flatMap(IFunction<? super E, ? extends Iterable<? extends R>> mapper);
 
     /**
      * 指定の条件に該当する要素だけを保持する{@link IItemList IItemList}を返します。
@@ -118,19 +130,19 @@ public interface IItemList<E> extends Iterable<E> {
     boolean isJustOne();
 
     /**
-     * 保持する要素が1件の時、そのオブジェクトを保持する{@link IOptional IOptional}を返します。
-     * 複数件の要素を保持する時や何も保持していない空の場合は、emptyな{@link IOptional IOptional}を返します。
+     * 保持する要素が1件の時、そのオブジェクトを保持する{@link Optional Optional}を返します。
+     * 複数件の要素を保持する時や何も保持していない空の場合は、emptyな{@link Optional Optional}を返します。
      *
-     * @return {@link IOptional IOptional}
+     * @return {@link Optional Optional}
      */
-    IOptional<E> findJustOne();
+    Optional<E> findJustOne();
 
     /**
-     * 保持する要素の中で先頭の物を保持する{@link IOptional IOptional}を返します。
+     * 保持する要素の中で先頭の物を保持する{@link Optional Optional}を返します。
      *
-     * @return {@link IOptional IOptional}
+     * @return {@link Optional Optional}
      */
-    IOptional<E> findFirst();
+    Optional<E> findFirst();
 
     /**
      * 引数のcomparatorで保持する要素をソートした結果から構成される、新しい{@link IItemList IItemList}を返します。
@@ -149,8 +161,7 @@ public interface IItemList<E> extends Iterable<E> {
     IItemList<E> sorted();
 
     /**
-     * 保持する要素を自然順序の逆順にソートした結果から構成される、新しい{@link IItemList IItemList}を返します。
-     * ただし、保持する要素が{@link Comparable Comparable}でない場合、{@link ClassCastException}がスローされる可能性があります。
+     * 保持する要素を逆順にソートした結果から構成される、新しい{@link IItemList IItemList}を返します。
      *
      * @return ソート結果から構成される{@link IItemList IItemList}
      */
@@ -171,4 +182,14 @@ public interface IItemList<E> extends Iterable<E> {
      * @return 要素をすべて追加した新しい{@link IItemList IItemList}
      */
     IItemList<E> added(E... items);
+
+    /**
+     * {@link IItemCollector}によって、保持する要素を集積・変換して返します。
+     *
+     * @param <R> 結果の型
+     * @param <A> 集積用の型(結果の型と同じ場合もある)
+     * @param collector {@link IItemCollector}
+     * @return {@link IItemCollector}により、保持する要素を集積・変換した結果
+     */
+    <R, A> R collect(IItemCollector<? super E, A, R> collector);
 }

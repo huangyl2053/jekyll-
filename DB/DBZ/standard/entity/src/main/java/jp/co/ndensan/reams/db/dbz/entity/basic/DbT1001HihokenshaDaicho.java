@@ -23,7 +23,7 @@ public enum DbT1001HihokenshaDaicho implements IColumnDefinition {
     shikakuShutokuJiyuCode(2, 0),
     shikakuShutokuYMD(2147483647, 0),
     shikakuShutokuTodokedeYMD(2147483647, 0),
-    ichigoHihokenshaNenreiTotatsuYMD(2147483647, 0),
+    ichigoShikakuShutokuYMD(2147483647, 0),
     hihokennshaKubunCode(1, 0),
     shikakuSoshitsuJiyuCode(2, 0),
     shikakuSoshitsuYMD(2147483647, 0),

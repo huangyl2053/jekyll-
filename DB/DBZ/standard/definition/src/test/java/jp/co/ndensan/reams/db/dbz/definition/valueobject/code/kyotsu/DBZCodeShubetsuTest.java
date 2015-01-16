@@ -27,25 +27,25 @@ public class DBZCodeShubetsuTest {
         public void 調定事由の場合_getCodeShubetsuは0001を返す() {
             assertThat(DBZCodeShubetsu.調定事由.getCodeShubetsu(), is(new CodeShubetsu("0001")));
         }
-
         @Test
-        public void 保険料減免事由の場合_getCodeShubetsuは0002を返す() {
-            assertThat(DBZCodeShubetsu.保険料減免事由.getCodeShubetsu(), is(new CodeShubetsu("0002")));
+        public void 保険料減免種類の場合_getCodeShubetsuは0002を返す() {
+            assertThat(DBZCodeShubetsu.保険料減免種類.getCodeShubetsu(), is(new CodeShubetsu("0002")));
         }
-
         @Test
-        public void 保険料徴収猶予事由の場合_getCodeShubetsuは0003を返す() {
-            assertThat(DBZCodeShubetsu.保険料徴収猶予事由.getCodeShubetsu(), is(new CodeShubetsu("0003")));
+        public void 保険料徴収猶予種類の場合_getCodeShubetsuは0003を返す() {
+            assertThat(DBZCodeShubetsu.保険料徴収猶予種類.getCodeShubetsu(), is(new CodeShubetsu("0003")));
         }
-
         @Test
-        public void 保険料減免取消事由の場合_getCodeShubetsuは0004を返す() {
-            assertThat(DBZCodeShubetsu.保険料減免取消事由.getCodeShubetsu(), is(new CodeShubetsu("0004")));
+        public void 保険料減免取消種類の場合_getCodeShubetsuは0004を返す() {
+            assertThat(DBZCodeShubetsu.保険料減免取消種類.getCodeShubetsu(), is(new CodeShubetsu("0004")));
         }
-
         @Test
-        public void 保険料徴収猶予取消事由の場合_getCodeShubetsuは0005を返す() {
-            assertThat(DBZCodeShubetsu.保険料徴収猶予取消事由.getCodeShubetsu(), is(new CodeShubetsu("0005")));
+        public void 保険料徴収猶予取消種類の場合_getCodeShubetsuは0005を返す() {
+            assertThat(DBZCodeShubetsu.保険料徴収猶予取消種類.getCodeShubetsu(), is(new CodeShubetsu("0005")));
+        }
+        @Test
+        public void 特別徴収停止事由の場合_getCodeShubetsuは0006を返す() {
+            assertThat(DBZCodeShubetsu.特別徴収停止事由.getCodeShubetsu(), is(new CodeShubetsu("0006")));
         }
     }
 
@@ -58,30 +58,29 @@ public class DBZCodeShubetsuTest {
     }
 
     public static class getReturnTypeTest extends DbzTestBase {
-
         @Test
         public void 調定事由の場合_getReturnTypeはChoteiJiyuを返す() {
             assertThat(DBZCodeShubetsu.調定事由.getReturnType().getName(), is(ChoteiJiyu.class.getName()));
         }
-
         @Test
-        public void 保険料減免事由の場合_getReturnTypeはHokenryoGemmenJiyuを返す() {
-            assertThat(DBZCodeShubetsu.保険料減免事由.getReturnType().getName(), is(HokenryoGemmenJiyu.class.getName()));
+        public void 保険料減免種類の場合_getReturnTypeはHokenryoGemmenShuruiを返す() {
+            assertThat(DBZCodeShubetsu.保険料減免種類.getReturnType().getName(), is(HokenryoGemmenShurui.class.getName()));
         }
-
         @Test
-        public void 保険料徴収猶予事由の場合_getReturnTypeはHokenryoChoshuYuyoJiyuを返す() {
-            assertThat(DBZCodeShubetsu.保険料徴収猶予事由.getReturnType().getName(), is(HokenryoChoshuYuyoJiyu.class.getName()));
+        public void 保険料徴収猶予種類の場合_getReturnTypeはHokenryoChoshuYuyoShuruiを返す() {
+            assertThat(DBZCodeShubetsu.保険料徴収猶予種類.getReturnType().getName(), is(HokenryoChoshuYuyoShurui.class.getName()));
         }
-
         @Test
-        public void 保険料減免取消事由の場合_getReturnTypeはHokenryoGemmenTorikeshiJiyuを返す() {
-            assertThat(DBZCodeShubetsu.保険料減免取消事由.getReturnType().getName(), is(HokenryoGemmenTorikeshiJiyu.class.getName()));
+        public void 保険料減免取消種類の場合_getReturnTypeはHokenryoGemmenTorikeshiShuruiを返す() {
+            assertThat(DBZCodeShubetsu.保険料減免取消種類.getReturnType().getName(), is(HokenryoGemmenTorikeshiShurui.class.getName()));
         }
-
         @Test
-        public void 保険料徴収猶予取消事由の場合_getReturnTypeはHokenryoChoshuYuyoTorikeshiJiyuを返す() {
-            assertThat(DBZCodeShubetsu.保険料徴収猶予取消事由.getReturnType().getName(), is(HokenryoChoshuYuyoTorikeshiJiyu.class.getName()));
+        public void 保険料徴収猶予取消種類の場合_getReturnTypeはHokenryoChoshuYuyoTorikeshiShuruiを返す() {
+            assertThat(DBZCodeShubetsu.保険料徴収猶予取消種類.getReturnType().getName(), is(HokenryoChoshuYuyoTorikeshiShurui.class.getName()));
+        }
+        @Test
+        public void 特別徴収停止事由の場合_getReturnTypeはTokubetsuChoshuTeishiJiyuを返す() {
+            assertThat(DBZCodeShubetsu.特別徴収停止事由.getReturnType().getName(), is(TokubetsuChoshuTeishiJiyu.class.getName()));
         }
     }
 }

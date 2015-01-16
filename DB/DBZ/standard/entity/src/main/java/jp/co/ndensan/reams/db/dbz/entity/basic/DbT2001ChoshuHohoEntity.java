@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbz.entity.basic;
 
 import java.util.Objects;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.TokubetsuChoshuTeishiJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -67,7 +68,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
     private boolean iraiSohuzumiFlag;
     private boolean tsuikaIraiSohuzumiFlag;
     private YMDHMS tokuchoTeishiTimestamp;
-    private RString tokuchoTeishiJiyuCode;
+    private TokubetsuChoshuTeishiJiyu tokuchoTeishiJiyuCode;
 
     /**
      * getInsertDantaiCd
@@ -713,7 +714,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @return tokuchoTeishiJiyuCode
      */
-    public RString getTokuchoTeishiJiyuCode() {
+    public TokubetsuChoshuTeishiJiyu getTokuchoTeishiJiyuCode() {
         return tokuchoTeishiJiyuCode;
     }
 
@@ -722,7 +723,7 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      *
      * @param tokuchoTeishiJiyuCode tokuchoTeishiJiyuCode
      */
-    public void setTokuchoTeishiJiyuCode(RString tokuchoTeishiJiyuCode) {
+    public void setTokuchoTeishiJiyuCode(TokubetsuChoshuTeishiJiyu tokuchoTeishiJiyuCode) {
         this.tokuchoTeishiJiyuCode = tokuchoTeishiJiyuCode;
     }
 
@@ -730,7 +731,8 @@ public class DbT2001ChoshuHohoEntity extends DbTableEntityBase<DbT2001ChoshuHoho
      * このエンティティの主キーが他の{@literal DbT2001ChoshuHohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2001ChoshuHohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT2001ChoshuHohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2001ChoshuHohoEntity other) {
