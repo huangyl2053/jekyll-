@@ -1,29 +1,25 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import java.util.Objects;
 
 /**
  * DbT1001HihokenshaDaichoの項目定義クラスです
  *
  */
-public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001HihokenshaDaichoEntity> implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1001HihokenshaDaicho");
@@ -42,13 +38,12 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private YMDHMS shoriTimestamp;
-    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private ShikibetsuCode shikibetsuCode;
     private RString shikakuShutokuJiyuCode;
     private FlexibleDate shikakuShutokuYMD;
     private FlexibleDate shikakuShutokuTodokedeYMD;
-    private FlexibleDate ichigoHihokenshaNenreiTotatsuYMD;
-    private Code hihokennshaKubunCode;
+    private FlexibleDate ichigoShikakuShutokuYMD;
+    private RString hihokennshaKubunCode;
     private RString shikakuSoshitsuJiyuCode;
     private FlexibleDate shikakuSoshitsuYMD;
     private FlexibleDate shikakuSoshitsuTodokedeYMD;
@@ -63,7 +58,7 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     private FlexibleDate jushochitokureiKaijoYMD;
     private FlexibleDate jushochitokureiKaijoTodokedeYMD;
     private RString koikinaiJushochiTokureiFlag;
-    private ShoKisaiHokenshaNo koikinaiTokureiSochimotoHokenshaNo;
+    private LasdecCode koikinaiTokureiSochimotoShichosonCode;
     private LasdecCode kyuShichosonCode;
     private RString saikofuKubun;
     private RString saikofuJiyuCode;
@@ -169,24 +164,6 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getShoKisaiHokenshaNo
-     *
-     * @return shoKisaiHokenshaNo
-     */
-    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
-        return shoKisaiHokenshaNo;
-    }
-
-    /**
-     * setShoKisaiHokenshaNo
-     *
-     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
-     */
-    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
-        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
-    }
-
-    /**
      * getShikibetsuCode
      *
      * @return shikibetsuCode
@@ -259,21 +236,21 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getIchigoHihokenshaNenreiTotatsuYMD
+     * getIchigoShikakuShutokuYMD
      *
-     * @return ichigoHihokenshaNenreiTotatsuYMD
+     * @return ichigoShikakuShutokuYMD
      */
-    public FlexibleDate getIchigoHihokenshaNenreiTotatsuYMD() {
-        return ichigoHihokenshaNenreiTotatsuYMD;
+    public FlexibleDate getIchigoShikakuShutokuYMD() {
+        return ichigoShikakuShutokuYMD;
     }
 
     /**
-     * setIchigoHihokenshaNenreiTotatsuYMD
+     * setIchigoShikakuShutokuYMD
      *
-     * @param ichigoHihokenshaNenreiTotatsuYMD ichigoHihokenshaNenreiTotatsuYMD
+     * @param ichigoShikakuShutokuYMD ichigoShikakuShutokuYMD
      */
-    public void setIchigoHihokenshaNenreiTotatsuYMD(FlexibleDate ichigoHihokenshaNenreiTotatsuYMD) {
-        this.ichigoHihokenshaNenreiTotatsuYMD = ichigoHihokenshaNenreiTotatsuYMD;
+    public void setIchigoShikakuShutokuYMD(FlexibleDate ichigoShikakuShutokuYMD) {
+        this.ichigoShikakuShutokuYMD = ichigoShikakuShutokuYMD;
     }
 
     /**
@@ -281,7 +258,7 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
      *
      * @return hihokennshaKubunCode
      */
-    public Code getHihokennshaKubunCode() {
+    public RString getHihokennshaKubunCode() {
         return hihokennshaKubunCode;
     }
 
@@ -290,30 +267,8 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
      *
      * @param hihokennshaKubunCode hihokennshaKubunCode
      */
-    public void setHihokennshaKubunCode(Code hihokennshaKubunCode) {
+    public void setHihokennshaKubunCode(RString hihokennshaKubunCode) {
         this.hihokennshaKubunCode = hihokennshaKubunCode;
-    }
-
-    /**
-     * getHihokennshaKubunCodeMeisho
-     *
-     * @return Meisho
-     */
-    public RString getHihokennshaKubunCodeMeisho() {
-        //TODO n8178 城間篤人 コード取得法がわかり次第修正 2014年9月末
-        return new RString("第1号被保険者");
-        //return CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, DbeShubetsuKey.認定審査員区分, hihokennshaKubunCode);
-    }
-
-    /**
-     * getHihokennshaKubunCodeRyakusho
-     *
-     * @return Ryakusho
-     */
-    public RString getHihokennshaKubunCodeRyakusho() {
-        //TODO n8178 城間篤人 コード取得法がわかり次第修正 2014年9月末
-        return new RString("第1号");
-        //return CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, DbeShubetsuKey.認定審査員区分, hihokennshaKubunCode);
     }
 
     /**
@@ -569,22 +524,21 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
     }
 
     /**
-     * getKoikinaiTokureiSochimotoHokenshaNo
+     * getKoikinaiTokureiSochimotoShichosonCode
      *
-     * @return koikinaiTokureiSochimotoHokenshaNo
+     * @return koikinaiTokureiSochimotoShichosonCode
      */
-    public ShoKisaiHokenshaNo getKoikinaiTokureiSochimotoHokenshaNo() {
-        return koikinaiTokureiSochimotoHokenshaNo;
+    public LasdecCode getKoikinaiTokureiSochimotoShichosonCode() {
+        return koikinaiTokureiSochimotoShichosonCode;
     }
 
     /**
-     * setKoikinaiTokureiSochimotoHokenshaNo
+     * setKoikinaiTokureiSochimotoShichosonCode
      *
-     * @param koikinaiTokureiSochimotoHokenshaNo
-     * koikinaiTokureiSochimotoHokenshaNo
+     * @param koikinaiTokureiSochimotoShichosonCode koikinaiTokureiSochimotoShichosonCode
      */
-    public void setKoikinaiTokureiSochimotoHokenshaNo(ShoKisaiHokenshaNo koikinaiTokureiSochimotoHokenshaNo) {
-        this.koikinaiTokureiSochimotoHokenshaNo = koikinaiTokureiSochimotoHokenshaNo;
+    public void setKoikinaiTokureiSochimotoShichosonCode(LasdecCode koikinaiTokureiSochimotoShichosonCode) {
+        this.koikinaiTokureiSochimotoShichosonCode = koikinaiTokureiSochimotoShichosonCode;
     }
 
     /**
@@ -663,9 +617,9 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
      * このエンティティの主キーが他の{@literal DbT1001HihokenshaDaichoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT1001HihokenshaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT1001HihokenshaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
+    @Override
     public boolean equalsPrimaryKeys(DbT1001HihokenshaDaichoEntity other) {
         if (other == null) {
             return false;
@@ -680,6 +634,51 @@ public class DbT1001HihokenshaDaichoEntity implements IDbAccessable {
             return false;
         }
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void shallowCopy(DbT1001HihokenshaDaichoEntity entity) {
+        this.shichosonCode = entity.shichosonCode;
+        this.hihokenshaNo = entity.hihokenshaNo;
+        this.shoriTimestamp = entity.shoriTimestamp;
+        this.shikibetsuCode = entity.shikibetsuCode;
+        this.shikakuShutokuJiyuCode = entity.shikakuShutokuJiyuCode;
+        this.shikakuShutokuYMD = entity.shikakuShutokuYMD;
+        this.shikakuShutokuTodokedeYMD = entity.shikakuShutokuTodokedeYMD;
+        this.ichigoShikakuShutokuYMD = entity.ichigoShikakuShutokuYMD;
+        this.hihokennshaKubunCode = entity.hihokennshaKubunCode;
+        this.shikakuSoshitsuJiyuCode = entity.shikakuSoshitsuJiyuCode;
+        this.shikakuSoshitsuYMD = entity.shikakuSoshitsuYMD;
+        this.shikakuSoshitsuTodokedeYMD = entity.shikakuSoshitsuTodokedeYMD;
+        this.jushochiTokureiFlag = entity.jushochiTokureiFlag;
+        this.shikakuHenkoJiyuCode = entity.shikakuHenkoJiyuCode;
+        this.shikakuHenkoYMD = entity.shikakuHenkoYMD;
+        this.shikakuHenkoTodokedeYMD = entity.shikakuHenkoTodokedeYMD;
+        this.jushochitokureiTekiyoJiyuCode = entity.jushochitokureiTekiyoJiyuCode;
+        this.jushochitokureiTekiyoYMD = entity.jushochitokureiTekiyoYMD;
+        this.jushochitokureiTekiyoTodokedeYMD = entity.jushochitokureiTekiyoTodokedeYMD;
+        this.jushochitokureiKaijoJiyuCode = entity.jushochitokureiKaijoJiyuCode;
+        this.jushochitokureiKaijoYMD = entity.jushochitokureiKaijoYMD;
+        this.jushochitokureiKaijoTodokedeYMD = entity.jushochitokureiKaijoTodokedeYMD;
+        this.koikinaiJushochiTokureiFlag = entity.koikinaiJushochiTokureiFlag;
+        this.koikinaiTokureiSochimotoShichosonCode = entity.koikinaiTokureiSochimotoShichosonCode;
+        this.kyuShichosonCode = entity.kyuShichosonCode;
+        this.saikofuKubun = entity.saikofuKubun;
+        this.saikofuJiyuCode = entity.saikofuJiyuCode;
+        this.chohyoKofuRirekiID = entity.chohyoKofuRirekiID;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    @Override
+    public RString getMd5() {
+        return super.toMd5(shichosonCode, hihokenshaNo, shoriTimestamp, shikibetsuCode, shikakuShutokuJiyuCode, shikakuShutokuYMD, shikakuShutokuTodokedeYMD, ichigoShikakuShutokuYMD, hihokennshaKubunCode, shikakuSoshitsuJiyuCode, shikakuSoshitsuYMD, shikakuSoshitsuTodokedeYMD, jushochiTokureiFlag, shikakuHenkoJiyuCode, shikakuHenkoYMD, shikakuHenkoTodokedeYMD, jushochitokureiTekiyoJiyuCode, jushochitokureiTekiyoYMD, jushochitokureiTekiyoTodokedeYMD, jushochitokureiKaijoJiyuCode, jushochitokureiKaijoYMD, jushochitokureiKaijoTodokedeYMD, koikinaiJushochiTokureiFlag, koikinaiTokureiSochimotoShichosonCode, kyuShichosonCode, saikofuKubun, saikofuJiyuCode, chohyoKofuRirekiID);
     }
 
 // </editor-fold>

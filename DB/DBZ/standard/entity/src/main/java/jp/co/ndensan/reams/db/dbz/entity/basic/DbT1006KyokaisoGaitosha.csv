@@ -1,0 +1,17 @@
+﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,A
+hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+kyokaisoSochiKetteiYMD,UDD015YMD,FlexibleDate,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+tekiyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+tekiyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,A
+kyuufugakuGengakuKisaiKiajoFlag,varchar,RString,,,,,A
+hyojunFutanGengakuGaitoFlag,varchar,RString,,,,,A
+hyojunFutanKeigengoFutangaku,numeric,Decimal,,,,,A
+kyojuhinadoFutangakugengakuGaitoFlag,varchar,RString,,,,,A
+kyojuhiKeigengoKyoshitsuShuruiCode,varchar,RString,,,,,A
+kyojuhiKeigengoHutangaku,numeric,Decimal,,,,,A
+shokuhiKeigengoHutangakuGaitoFlag,varchar,RString,,,,,A
+shokuhiKeigengoHutangaku,numeric,Decimal,,,,,A
+kogakuServicehiJogengakuGengakuGaitoFlag,varchar,RString,,,,,A
+kogakuServicehiJogengakuGengakugoJogengaku,numeric,Decimal,,,,,A
+hokenryoNofuGengakuFlag,varchar,RString,,,,,A
