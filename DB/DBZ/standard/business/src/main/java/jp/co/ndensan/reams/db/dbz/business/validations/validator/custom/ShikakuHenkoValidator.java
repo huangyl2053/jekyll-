@@ -39,7 +39,7 @@ public class ShikakuHenkoValidator implements IValidatableWithContext<ShikakuHen
      *
      * @param 変更日 変更日
      * @param 取得日 取得日
-     * @param 喪失日 祖写し日
+     * @param 喪失日 喪失日
      * @param 変更事由 変更事由
      * @param 最新資格取得日 最新資格取得日
      * @param 最新資格喪失日 最新資格喪失日
