@@ -39,7 +39,9 @@ public class KiwarigakuFinder {
      */
     public KiwarigakuFinder() {
         this.dac = InstanceProvider.create(KibetsuChoteiKyotsuDac.class);
-        this.manager = ShunoService.getShunoManager();
+        //TODO dacが見つからなくてエラーする。収納で修正中。（1月中）
+//        this.manager = ShunoService.getShunoManager();
+        this.manager = null;
     }
 
     /**
@@ -75,7 +77,9 @@ public class KiwarigakuFinder {
     }
 
     private Decimal get収入額(Long 収納ID) {
-        IShuno 収納 = manager.get収納(収納ID);
-        return (収納 != null) ? 収納.get収入合計情報().get本税() : null;
+        //TODO dacが見つからなくてエラーする。収納で修正中。（1月中）
+//        IShuno 収納 = manager.get収納(収納ID);
+        IShuno 収納 = null;
+        return (収納 != null) ? 収納.get収入合計情報().get本税() : Decimal.ZERO;
     }
 }

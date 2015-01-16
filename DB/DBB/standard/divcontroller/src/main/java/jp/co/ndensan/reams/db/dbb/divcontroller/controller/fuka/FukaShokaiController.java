@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
 import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuHohoModel;
 import jp.co.ndensan.reams.db.dbz.realservice.ChoshuHohoFinder;
@@ -43,7 +44,7 @@ public final class FukaShokaiController {
 
     public static FukaTaishoshaKey getFukaTaishoshaKeyInViewState() {
 
-        IViewStateValue<FukaTaishoshaKey> value = ViewStates.access().valueAssignedToA(FukaTaishoshaKey.class);
+        IViewStateValue<FukaTaishoshaKey> value = ViewStates.access().valueAssignedTo(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
         IOptional<FukaTaishoshaKey> keyoid = value.tryToGet();
 
         if (!keyoid.isPresent()) {

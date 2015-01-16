@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
 import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
 import jp.co.ndensan.reams.db.dbz.realservice.KiwarigakuFinder;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -50,8 +51,8 @@ public class FukaRirekiPanel {
      */
     public ResponseData<FukaRirekiPanelDiv> load(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
 
-        rirekiDiv.setDisplayNone(true);
-
+        //TODO 動作確認のため
+//        rirekiDiv.setDisplayNone(true);
         return createResponseData(rirekiDiv);
     }
 
@@ -87,7 +88,7 @@ public class FukaRirekiPanel {
      */
     public ResponseData<FukaRirekiPanelDiv> onSelect_dgFukaRirekiAll(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
 
-        setDgFukaRireki(rirekiDiv, rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All());
+        setDgFukaRireki(rirekiDiv, rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All().reversed());
 
         return createResponseData(rirekiDiv);
     }
@@ -170,7 +171,7 @@ public class FukaRirekiPanel {
 
         for (ListIterator<FukaModel> listIterator = list.toList().listIterator(); listIterator.hasNext();) {
             targetModel = listIterator.next();
-            if (targetModel.get処理日時().equals(RDateTime.parse(row.getShoriTimestamp()))) {
+            if (targetModel.get処理日時().toString().equals(row.getShoriTimestamp().toString())) {
                 FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(targetModel, kihonDiv.getCcdKaigoAtenaInfo().getName());
                 value.put(key);
 
@@ -189,7 +190,7 @@ public class FukaRirekiPanel {
     private FukaModel findTargetModel(IItemList list, dgFukaRirekiFukaRireki_Row row) {
         for (Iterator<FukaModel> iterator = list.iterator(); iterator.hasNext();) {
             FukaModel target = iterator.next();
-            if (target.get処理日時().equals(RDateTime.parse(row.getShoriTimestamp()))) {
+            if (target.get処理日時().toString().equals(row.getShoriTimestamp().toString())) {
                 return target;
             }
         }

@@ -65,7 +65,8 @@ public class Tokucho {
     private void setDivFor仮算定(TokuchoDiv div, ChoshuHohoModel model) {
         div.getTxtKisoNenkinNo2().setValue(model.get仮徴収_基礎年金番号());
         div.getTxtNenkinCode2().setValue(model.get仮徴収_年金コード());
-        div.getTxtHosokuYM().setDomain(FukaMapper.toRYearMonth(model.get仮徴収_捕捉月()));
+        //TODO 取得した特徴回付の処理年度＋捕捉月
+//        div.getTxtHosokuYM().setDomain(FukaMapper.toRYearMonth(model.get仮徴収_捕捉月()));
 //TODO コンフィグから取得
 //        div.getTxtKaishiYM().setDomain();
 
@@ -80,7 +81,8 @@ public class Tokucho {
     private void setDivFor本算定(TokuchoDiv div, ChoshuHohoModel model) {
         div.getTxtKisoNenkinNo2().setValue(model.get本徴収_基礎年金番号());
         div.getTxtNenkinCode2().setValue(model.get本徴収_年金コード());
-        div.getTxtHosokuYM().setDomain(FukaMapper.toRYearMonth(model.get本徴収_捕捉月()));
+        //TODO 取得した特徴回付の処理年度＋捕捉月
+//        div.getTxtHosokuYM().setDomain(FukaMapper.toRYearMonth(model.get本徴収_捕捉月()));
 //TODO コンフィグから取得
 //        div.getTxtKaishiYM().setDomain();
 
@@ -95,7 +97,8 @@ public class Tokucho {
     private void setDivFor翌年度(TokuchoDiv div, ChoshuHohoModel model) {
         div.getTxtKisoNenkinNo2().setValue(model.get翌年度仮徴収_基礎年金番号());
         div.getTxtNenkinCode2().setValue(model.get翌年度仮徴収_年金コード());
-        div.getTxtHosokuYM().setDomain(FukaMapper.toRYearMonth(model.get翌年度仮徴収_捕捉月()));
+        //TODO 取得した特徴回付の処理年度＋捕捉月
+//        div.getTxtHosokuYM().setDomain(FukaMapper.toRYearMonth(model.get翌年度仮徴収_捕捉月()));
 //TODO コンフィグから取得
 //        div.getTxtKaishiYM().setDomain();
 
