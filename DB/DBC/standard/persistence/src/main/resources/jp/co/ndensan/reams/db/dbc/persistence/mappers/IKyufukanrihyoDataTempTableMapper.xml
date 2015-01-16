@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.mappers.IKyufukanrihyoDataTempTableMapper">
+
+    <select id="getTempData" resultType="jp.co.ndensan.reams.db.dbc.entity.basic.DbTKyufukanrihyoDataTempTableEntity" parameterType="java.util.Map" fetchSize="500">
+        select * from "KyufuKanrihyoTorikomiTemp"
+        <if test="sortSequence1 != null">
+            order by
+            "${sortSequence1}" ${sortSequence1Order}
+            <if test="sortSequence2 != null">
+                , "${sortSequence2}" ${sortSequence2Order}
+                <if test="sortSequence3 != null">
+                    ,"${sortSequence3}" ${sortSequence3Order}
+                    <if test="sortSequence4 != null">
+                        ,"${sortSequence4}" ${sortSequence4Order}
+                        <if test="sortSequence5 != null">
+                            ,"${sortSequence5}" ${sortSequence5Order}
+                        </if>
+                    </if>
+                </if>
+            </if>
+        </if>
+    </select>
+
+    <select id="selectCount" resultType="jp.co.ndensan.reams.uz.uza.math.Decimal" parameterType="java.util.Map" fetchSize="500">
+        select count(*) from "KyufuKanrihyoTorikomiTemp"
+    </select>
+
+</mapper>
