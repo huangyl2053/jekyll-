@@ -320,7 +320,8 @@ public class ShikakuHenkoRireki {
 
         pairs.add(ShikakuHenkoRirekiValidationHelper.validate資格変更(
                 henkoRirekiDiv.getTxtHenkoDate(), henkoRirekiDiv.getTxtHenkoTodokedeDate(), selected資格取得日, selected資格喪失日,
-                最新取得日, 最新喪失日, 最新更新日, 一号資格取得日, henkoRirekiDiv.getDdlHenkoJiyu(), context));
+                new FlexibleDate(最新取得日), new FlexibleDate(最新喪失日), new FlexibleDate(最新更新日), new FlexibleDate(一号資格取得日),
+                henkoRirekiDiv.getDdlHenkoJiyu(), context));
 
         ResponseData<ShikakuHenkoRirekiDiv> response = new ResponseData<>();
 

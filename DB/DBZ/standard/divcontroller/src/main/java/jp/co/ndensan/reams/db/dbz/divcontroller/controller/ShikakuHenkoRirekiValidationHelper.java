@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.ShikakuHenkoRirekiKanri
 import jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -44,8 +43,8 @@ public final class ShikakuHenkoRirekiValidationHelper {
      * @return バリデーションメッセージとそれに関係するコントロールのセットを持つコレクション
      */
     public static ValidationMessageControlPairs validate資格変更(TextBoxFlexibleDate 変更日, TextBoxFlexibleDate 変更届出日,
-            FlexibleDate 取得日, FlexibleDate 喪失日, RString 最新取得日, RString 最新喪失日, RString 最新更新日,
-            RString 一号資格取得, DropDownList 変更事由, ShikakuHenkoRirekiKanriContext context) {
+            FlexibleDate 取得日, FlexibleDate 喪失日, FlexibleDate 最新取得日, FlexibleDate 最新喪失日, FlexibleDate 最新更新日,
+            FlexibleDate 一号資格取得, DropDownList 変更事由, ShikakuHenkoRirekiKanriContext context) {
         ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionary(
                 new ValidationMessageControlPair(ShikakuHenkoValidationMessage.変更日が未入力, 変更日),
                 new ValidationMessageControlPair(ShikakuHenkoValidationMessage.変更事由が未入力, 変更事由),

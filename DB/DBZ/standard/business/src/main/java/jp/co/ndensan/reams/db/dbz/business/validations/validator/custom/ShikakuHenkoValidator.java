@@ -29,10 +29,10 @@ public class ShikakuHenkoValidator implements IValidatableWithContext<ShikakuHen
     private final FlexibleDate 取得日;
     private final FlexibleDate 喪失日;
     private final RString 変更事由;
-    private final RString 最新資格取得日;
-    private final RString 最新資格喪失日;
-    private final RString 一号資格取得日;
-    private final RString 最新資格変更日;
+    private final FlexibleDate 最新資格取得日;
+    private final FlexibleDate 最新資格喪失日;
+    private final FlexibleDate 一号資格取得日;
+    private final FlexibleDate 最新資格変更日;
 
     /**
      * コンストラクタです。
@@ -47,7 +47,7 @@ public class ShikakuHenkoValidator implements IValidatableWithContext<ShikakuHen
      * @param 一号資格取得日 一号資格取得日
      */
     public ShikakuHenkoValidator(FlexibleDate 変更日, FlexibleDate 取得日, FlexibleDate 喪失日, RString 変更事由,
-            RString 最新資格取得日, RString 最新資格喪失日, RString 最新資格更新日, RString 一号資格取得日) {
+            FlexibleDate 最新資格取得日, FlexibleDate 最新資格喪失日, FlexibleDate 最新資格更新日, FlexibleDate 一号資格取得日) {
 
         this.変更日 = 変更日;
         this.取得日 = 取得日;
@@ -97,14 +97,12 @@ public class ShikakuHenkoValidator implements IValidatableWithContext<ShikakuHen
         }
 
         if (!context.shouldSkipValidation(ShikakuHenkoValidationMessage.最新の取得日として登録不可)) {
-            FlexibleDate 最新変更日 = new FlexibleDate(最新資格変更日);
-            FlexibleDate 最新取得日 = new FlexibleDate(最新資格取得日);
-            FlexibleDate 最新喪失日 = new FlexibleDate(最新資格喪失日);
-            if (is最新の取得日として登録不可(最新変更日, 最新喪失日, 最新取得日)) {
+
+            if (is最新の取得日として登録不可(最新資格変更日, 最新資格喪失日, 最新資格取得日)) {
                 messages.add(ShikakuHenkoValidationMessage.最新の取得日として登録不可);
             }
 
-            if (!context.shouldSkipValidation(ShikakuHenkoValidationMessage.変更事由が１号到達で年齢が65歳未満) && is一号資格取得日()) {
+            if (!context.shouldSkipValidation(ShikakuHenkoValidationMessage.変更事由が１号到達で年齢が65歳未満) && 変更日.equals(一号資格取得日)) {
                 messages.add(ShikakuHenkoValidationMessage.変更事由が１号到達で年齢が65歳未満);
             }
         }
@@ -175,10 +173,5 @@ public class ShikakuHenkoValidator implements IValidatableWithContext<ShikakuHen
             }
         }
         return false;
-    }
-
-    private boolean is一号資格取得日() {
-        FlexibleDate 一号到達日 = new FlexibleDate(一号資格取得日);
-        return 変更日.equals(一号到達日);
     }
 }
