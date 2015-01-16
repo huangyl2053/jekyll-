@@ -33,7 +33,7 @@ public final class ShoriTimestamp implements IValueObject<YMDHMS>, Comparable<Sh
      * 指定の値を持った{@link ShoriTimestamp}を生成します。
      *
      * @param value 値
-     * @deprecated 自動生成のTypeHandlerとShoriTimestamp内部でのみ使用可能とします。
+     * @deprecated TypeHandlerとShoriTimestamp内部でのみ使用可能とします。
      */
     @Deprecated
     public ShoriTimestamp(YMDHMS value) {
