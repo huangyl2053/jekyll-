@@ -43,11 +43,16 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.Ha
 import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaishorireki.ShisetsuNyutaishoModel;
 import jp.co.ndensan.reams.db.dbz.realservice.hokensha.IKoikiKoseiShichosonFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.hokensha.KoikiKoseiShichosonFinderFactory;
+// TODO N8187 久保田 以下のimportはURF.IKaigoJigyoshaDaichoManager 等が使用可能になったら有効にする。
+//import jp.co.ndensan.reams.ur.urf.model.relate.KaigoJigyoshaRelateModel;
+//import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaDaichoManager;
+//import jp.co.ndensan.reams.ur.urf.realservice.KaigoJigyoshaDaichoManagerFactory;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
 import jp.co.ndensan.reams.ur.urz.divcontroller.helper.PanelSessionAccessor;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.ur.urz.realservice.IKaigoServiceManager;
 import jp.co.ndensan.reams.ur.urz.realservice.KaigoServiceManagerFactory;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -485,19 +490,35 @@ public class HihokenshaShikakuHakkoHandler {
         List<ShienJigyosha> list = new ArrayList<>();
         IItemList<KyotakuKeikakuRelateModel> 居宅計画List = new KyotakuKeikakuFinder().find居宅計画履歴一覧(被保険者番号);
         if (!居宅計画List.isEmpty()) {
-            RString 支援事業者名称;
+            // TODO N8187 久保田 支援事業者名称の初期化はURF.IKaigoJigyoshaDaichoManager が使用可能になったら外すこと。
+            RString 支援事業者名称 = RString.EMPTY;
             FlexibleDate 適用開始日;
             FlexibleDate 適用終了日;
             for (KyotakuKeikakuRelateModel model : 居宅計画List) {
                 FlexibleDate 届出日 = model.get居宅給付計画届出モデル().get届出年月日();
                 if (model.get居宅給付計画事業者作成モデル().isPresent()) {
-                    // TODO n8187 久保田 計画事業者、委託先事業者の名称は、URのIKaigoJigyoshaDaichoManager(未実装)の
-                    //                  getJigyoshaCurrent(引数＝事業者番号)を使用して取得する。
-                    //                  事業者番号は、model.get居宅給付計画事業者作成モデル().get().get計画事業者番号()と、
-                    //                  model.get居宅給付計画事業者作成モデル().get().get委託先事業者番号()を使用する。 2015/01/31。
-                    RString 計画事業者名称 = new RString("計画事業者名称");
-                    RString 委託先事業者名称 = new RString("委託先事業者名称");
-                    支援事業者名称 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).load支援事業者名称(計画事業者名称, 委託先事業者名称);
+                    // TODO N8187 久保田 以下の事業者名称取得処理はURF.IKaigoJigyoshaDaichoManager が使用可能になったら有効にする。
+//                    IKaigoJigyoshaDaichoManager manager = KaigoJigyoshaDaichoManagerFactory.getInstance();
+//
+//                    RString 計画事業者番号 = model.get居宅給付計画事業者作成モデル().get().get計画事業者番号();
+//                    RString 計画事業者名称 = RString.EMPTY;
+//                    if (計画事業者番号 != null) {
+//                        List<KaigoJigyoshaRelateModel> result = manager.findJigyoshaCurrent(new KaigoJigyoshaNo(計画事業者番号));
+//                        if (!result.isEmpty()) {
+//                            計画事業者名称 = result.get(0).get介護事業者モデル().get事業者名称().value();
+//                        }
+//                    }
+//
+//                    RString 委託先事業者番号 = model.get居宅給付計画事業者作成モデル().get().get委託先事業者番号();
+//                    RString 委託先事業者名称 = RString.EMPTY;
+//                    if (委託先事業者番号 != null) {
+//                        List<KaigoJigyoshaRelateModel> result = manager.findJigyoshaCurrent(new KaigoJigyoshaNo(委託先事業者番号));
+//                        if (!result.isEmpty()) {
+//                            委託先事業者名称 = result.get(0).get介護事業者モデル().get事業者名称().value();
+//                        }
+//                    }
+//
+//                    支援事業者名称 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).load支援事業者名称(計画事業者名称, 委託先事業者名称);
                     適用開始日 = model.get居宅給付計画事業者作成モデル().get().get適用開始年月日();
                     適用終了日 = model.get居宅給付計画事業者作成モデル().get().get適用終了年月日();
                 } else {
