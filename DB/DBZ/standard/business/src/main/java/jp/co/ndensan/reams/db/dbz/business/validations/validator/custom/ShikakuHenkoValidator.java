@@ -95,14 +95,12 @@ public class ShikakuHenkoValidator implements IValidatableWithContext<ShikakuHen
 
             messages.add(ShikakuHenkoValidationMessage.変更日と住所地特例履歴の期間が重複する履歴がある);
         }
-        //６）被保履歴一覧の最新履歴を修正している場合：追加時
-        //変更日 ≧ 資格変更履歴一覧 最新履歴.変更日の場合、エラーメッセージを表示する。
-        //メッセージID：DBAE00003（最新の資格変更情報として追加することはできません。）
+
         if (!context.shouldSkipValidation(ShikakuHenkoValidationMessage.最新の取得日として登録不可)) {
             FlexibleDate 最新変更日 = new FlexibleDate(最新資格変更日);
             FlexibleDate 最新取得日 = new FlexibleDate(最新資格取得日);
             FlexibleDate 最新喪失日 = new FlexibleDate(最新資格喪失日);
-            if (has最新の取得日として登録不可(最新変更日, 最新喪失日, 最新取得日)) {
+            if (is最新の取得日として登録不可(最新変更日, 最新喪失日, 最新取得日)) {
                 messages.add(ShikakuHenkoValidationMessage.最新の取得日として登録不可);
             }
 
@@ -114,7 +112,7 @@ public class ShikakuHenkoValidator implements IValidatableWithContext<ShikakuHen
 
     }
 
-    private boolean has最新の取得日として登録不可(FlexibleDate 最新変更日, FlexibleDate 最新喪失日, FlexibleDate 最新取得日) {
+    private boolean is最新の取得日として登録不可(FlexibleDate 最新変更日, FlexibleDate 最新喪失日, FlexibleDate 最新取得日) {
         if (最新資格喪失日.isEmpty()) {
 
             if (変更日.isBefore(最新変更日)) {
