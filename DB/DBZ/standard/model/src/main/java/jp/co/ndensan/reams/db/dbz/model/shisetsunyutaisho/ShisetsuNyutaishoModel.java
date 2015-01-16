@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -348,7 +348,7 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
         return get退所年月日().isBefore(get入所年月日());
     }
 
-    private boolean is入所日が前の履歴データの退所日と重複(IOptional<ShisetsuNyutaishoModel> optional) {
+    private boolean is入所日が前の履歴データの退所日と重複(Optional<ShisetsuNyutaishoModel> optional) {
         ShisetsuNyutaishoModel 前履歴 = optional.orElse(null);
         if (前履歴 == null || get入所年月日().isEmpty() || get入所年月日() == null) {
 
@@ -360,7 +360,7 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
 
     }
 
-    private boolean is退所日が次の履歴データの入所日と重複(IOptional<ShisetsuNyutaishoModel> 次履歴) {
+    private boolean is退所日が次の履歴データの入所日と重複(Optional<ShisetsuNyutaishoModel> 次履歴) {
         if (!次履歴.isPresent() || get退所年月日().isEmpty() || get退所年月日() == null) {
             return false;
         }

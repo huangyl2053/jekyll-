@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.testshisetsujoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.TestShisetsuJoho.TestShisetsuJohoDiv;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -78,7 +78,7 @@ public class TestShisetsuJoho {
      * @return レスポンス
      */
     public ResponseData<TestShisetsuJohoDiv> onClick_btnGetDaicho(TestShisetsuJohoDiv div) {
-        IOptional<DaichoType> daichoType = div.getCcdShisetsuJoho().get台帳種別();
+        Optional<DaichoType> daichoType = div.getCcdShisetsuJoho().get台帳種別();
         if (daichoType.isPresent()) {
             div.getTxtDaicho().setValue(daichoType.get().getName());
         }
@@ -93,7 +93,7 @@ public class TestShisetsuJoho {
      * @return レスポンス
      */
     public ResponseData<TestShisetsuJohoDiv> onClick_btnGetDaichoKey(TestShisetsuJohoDiv div) {
-        IOptional<DaichoType> daichoType = div.getCcdShisetsuJoho().get台帳種別();
+        Optional<DaichoType> daichoType = div.getCcdShisetsuJoho().get台帳種別();
         if (daichoType.isPresent()) {
             div.getTxtDaichoKey().setValue(daichoType.get().getCode());
         }

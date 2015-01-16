@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -53,7 +53,7 @@ public interface IShisetsuJohoDiv {
      *
      * @return 台帳種別
      */
-    IOptional<DaichoType> get台帳種別();
+    Optional<DaichoType> get台帳種別();
 
     /**
      * 施設種類を返します。

@@ -12,7 +12,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.入所日が未入力;
 import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.入所施設が未入力;
 import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.終了日設定なし;
@@ -33,11 +33,11 @@ public class ShisetsuNyutaishoRirekiKanriContext implements IContext {
 
     private final ValidationSpec spec;
     private final ViewExecutionStatus state;
-    private final IOptional<ShisetsuNyutaishoModel> 前履歴;
-    private final IOptional<ShisetsuNyutaishoModel> 次履歴;
+    private final Optional<ShisetsuNyutaishoModel> 前履歴;
+    private final Optional<ShisetsuNyutaishoModel> 次履歴;
     private final IItemList<ShisetsuNyutaishoModel> 全履歴;
 
-    public ShisetsuNyutaishoRirekiKanriContext(ViewExecutionStatus state, IOptional<ShisetsuNyutaishoModel> 前履歴, IOptional<ShisetsuNyutaishoModel> 次履歴, IItemList<ShisetsuNyutaishoModel> 全履歴) {
+    public ShisetsuNyutaishoRirekiKanriContext(ViewExecutionStatus state, Optional<ShisetsuNyutaishoModel> 前履歴, Optional<ShisetsuNyutaishoModel> 次履歴, IItemList<ShisetsuNyutaishoModel> 全履歴) {
         this.state = state;
         this.spec = ValidationSpec.toValue(state);
         this.前履歴 = 前履歴;
@@ -45,7 +45,7 @@ public class ShisetsuNyutaishoRirekiKanriContext implements IContext {
         this.全履歴 = 全履歴;
     }
 
-    public ShisetsuNyutaishoRirekiKanriContext(ViewExecutionStatus state, IOptional<ShisetsuNyutaishoModel> 前履歴, IOptional<ShisetsuNyutaishoModel> 次履歴) {
+    public ShisetsuNyutaishoRirekiKanriContext(ViewExecutionStatus state, Optional<ShisetsuNyutaishoModel> 前履歴, Optional<ShisetsuNyutaishoModel> 次履歴) {
         this.state = state;
         this.spec = ValidationSpec.toValue(state);
         this.前履歴 = 前履歴;
@@ -61,11 +61,11 @@ public class ShisetsuNyutaishoRirekiKanriContext implements IContext {
         return !spec.contains(message);
     }
 
-    public IOptional<ShisetsuNyutaishoModel> get前履歴() {
+    public Optional<ShisetsuNyutaishoModel> get前履歴() {
         return this.前履歴;
     }
 
-    public IOptional<ShisetsuNyutaishoModel> get次履歴() {
+    public Optional<ShisetsuNyutaishoModel> get次履歴() {
         return this.次履歴;
     }
 

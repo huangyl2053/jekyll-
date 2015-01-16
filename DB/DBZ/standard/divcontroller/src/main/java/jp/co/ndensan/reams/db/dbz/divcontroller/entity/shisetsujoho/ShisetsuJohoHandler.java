@@ -15,8 +15,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJoho
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.台帳種別;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.施設種類;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv.表示モード;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -169,11 +168,11 @@ public class ShisetsuJohoHandler {
      *
      * @return 台帳種別
      */
-    public IOptional<DaichoType> get台帳種別() {
+    public Optional<DaichoType> get台帳種別() {
         try {
-            return DbOptional.of(DaichoType.toValue(div.getDdlDaichoShubetsu().getSelectedKey()));
+            return Optional.of(DaichoType.toValue(div.getDdlDaichoShubetsu().getSelectedKey()));
         } catch (IllegalArgumentException ex) {
-            return DbOptional.empty();
+            return Optional.empty();
         }
     }
 
