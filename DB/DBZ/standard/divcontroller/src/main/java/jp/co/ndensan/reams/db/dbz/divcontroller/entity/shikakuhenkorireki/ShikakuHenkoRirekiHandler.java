@@ -316,19 +316,11 @@ public class ShikakuHenkoRirekiHandler {
         dgHenko_Row selRow = shikakuHenkoRirekiDiv.getDgHenko().getClickedItem();
         shikakuHenkoRirekiDiv.setSelectRow(new RString(String.valueOf(selRow.getId())));
         shikakuHenkoRirekiDiv.setSelectIdoYMD(new RString(selRow.getHenkoDate().getValue().toString()));
-        HihokenshaDaichoModel model = new HihokenshaDaichoModel();
-
-        model.set資格変更年月日(selRow.getHenkoDate().getValue());
-        model.set資格変更届出年月日(selRow.getHenkoTodokedeDate().getValue());
-        model.set資格変更事由(ShikakuHenkoJiyu.toValue(selRow.getHenkoJiyuKey()));
-        model.set広住特措置元市町村コード(new LasdecCode(selRow.getSochimotoHokensha()));
-        model.set旧市町村コード(new LasdecCode(selRow.getKyuHokensha()));
-
-        shikakuHenkoRirekiDiv.getTxtHenkoDate().setValue(model.get資格変更年月日());
-        shikakuHenkoRirekiDiv.getTxtHenkoTodokedeDate().setValue(model.get資格変更届出年月日());
-        shikakuHenkoRirekiDiv.getDdlHenkoJiyu().setSelectedKey(model.get資格変更事由().getCode());
-        shikakuHenkoRirekiDiv.getDdlHenkoSochimotoHokensha().setSelectedKey(model.get広住特措置元市町村コード().getColumnValue());
-        shikakuHenkoRirekiDiv.getDdlHenkoKyuHokensha().setSelectedKey(model.get旧市町村コード().getColumnValue());
+        shikakuHenkoRirekiDiv.getTxtHenkoDate().setValue(selRow.getHenkoDate().getValue());
+        shikakuHenkoRirekiDiv.getTxtHenkoTodokedeDate().setValue(selRow.getHenkoTodokedeDate().getValue());
+        shikakuHenkoRirekiDiv.getDdlHenkoJiyu().setSelectedKey(selRow.getHenkoJiyuKey());
+        shikakuHenkoRirekiDiv.getDdlHenkoSochimotoHokensha().setSelectedKey(selRow.getSochimotoHokensha());
+        shikakuHenkoRirekiDiv.getDdlHenkoKyuHokensha().setSelectedKey(selRow.getKyuHokensha());
     }
 
     /**
