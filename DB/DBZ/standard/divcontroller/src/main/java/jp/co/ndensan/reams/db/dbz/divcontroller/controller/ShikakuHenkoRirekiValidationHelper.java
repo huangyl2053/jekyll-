@@ -32,12 +32,12 @@ public final class ShikakuHenkoRirekiValidationHelper {
      *
      * @param 変更日 変更日のコントロール
      * @param 変更届出日 変更届出日のコントロール
-     * @param 取得日 取得日日のコントロール
-     * @param 喪失日 喪失日日のコントロール
-     * @param 最新取得日 hdn最新履歴
-     * @param 最新喪失日 hdn最新喪失日
-     * @param 最新更新日 hdn最新更新日
-     * @param 一号資格取得 hdn一号資格取得
+     * @param 取得日 取得日のコントロール
+     * @param 喪失日 喪失日のコントロール
+     * @param 最新取得日 最新履歴
+     * @param 最新喪失日 最新喪失日
+     * @param 最新更新日 最新更新日
+     * @param 一号資格取得 一号資格取得
      * @param 変更事由 変更事由のコントロール
      * @param context コンテキスト
      * @return バリデーションメッセージとそれに関係するコントロールのセットを持つコレクション
