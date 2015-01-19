@@ -155,7 +155,7 @@ public class ShikakuHenkoRirekiHandler {
         row.getHenkoDate().setValue(model.get資格変更年月日());
         row.getHenkoTodokedeDate().setValue(model.get資格変更届出年月日());
         row.setSochimotoHokensha(model.get広住特措置元市町村コード().getColumnValue());
-        row.setKyuHokensha(model.get旧市町村コード().value());
+        row.setKyuHokensha(Kyuhokensha.toValue(model.get旧市町村コード().getColumnValue()).getName());
         if (model.getEntity().getLastUpdateTimestamp() != null) {
             row.getShoriDate().setValue(new FlexibleDate(model.getEntity().getLastUpdateTimestamp().getDate().toDateString()));
         } else {
@@ -344,7 +344,7 @@ public class ShikakuHenkoRirekiHandler {
      *
      * @return 被保険者台帳List
      */
-    public IItemList<HihokenshaDaichoModel> getUpdate被保険者台帳情報() {
+    public IItemList<HihokenshaDaichoModel> get資格関連異動履歴() {
         IItemList<HihokenshaDaichoModel> baseList
                 = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_KEY, ItemList.class);
         IItemList<HihokenshaDaichoModel> editingList

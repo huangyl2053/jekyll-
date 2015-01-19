@@ -91,6 +91,7 @@ public class ShikakuHenkoMapper {
                 row.setHenkoJiyu(model.get資格変更事由().getShortName());
                 row.getHenkoDate().setValue(model.get資格変更年月日());
                 row.getHenkoTodokedeDate().setValue(model.get資格変更届出年月日());
+                row.setKyuHokensha(Kyuhokensha.toValue(model.get旧市町村コード().getColumnValue()).getName());
                 row.setSochimotoHokensha(model.get広住特措置元市町村コード().getColumnValue());
                 return row;
             }

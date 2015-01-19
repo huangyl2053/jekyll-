@@ -614,7 +614,7 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
         //TODO
         //1)、PanelSessionAccessorに登録されている情報を取得し、戻り値として返却する。
         ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(this);
-        return handler.getUpdate被保険者台帳情報();
+        return handler.get資格関連異動履歴();
     }
 
     @Override
