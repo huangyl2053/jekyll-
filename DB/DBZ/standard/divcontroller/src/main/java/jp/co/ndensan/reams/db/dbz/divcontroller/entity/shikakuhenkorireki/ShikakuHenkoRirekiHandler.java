@@ -103,8 +103,8 @@ public class ShikakuHenkoRirekiHandler {
      * @param 被保険者台帳List 被保険者台帳List
      */
     public void set被保険者台帳情報(IItemList<HihokenshaDaichoModel> 被保険者台帳List) {
-        PanelSessionAccessor.put(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_KEY, (ArrayList<HihokenshaDaichoModel>) 被保険者台帳List.toList());
-        PanelSessionAccessor.put(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_EDITING_KEY, (ArrayList<HihokenshaDaichoModel>) 被保険者台帳List.toList());
+        PanelSessionAccessor.put(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_KEY, ItemList.newItemList(被保険者台帳List));
+        PanelSessionAccessor.put(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_EDITING_KEY, ItemList.newItemList(被保険者台帳List));
         被保険者台帳List = 被保険者台帳List.sorted(HihokenshaDaichoModelComparators.orderBy資格変更年月日.desc());
         shikakuHenkoRirekiDiv.getDgHenko().setDataSource(被保険者台帳List.map(ShikakuHenkoMapper.toGridRow()).toList());
     }
@@ -296,7 +296,7 @@ public class ShikakuHenkoRirekiHandler {
      */
     public IItemList<HihokenshaDaichoModel> get被保険者台帳情報() {
         IItemList<HihokenshaDaichoModel> editing被保険者台帳List
-                = ItemList.of(PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_KEY, ArrayList.class));
+                = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_KEY, ItemList.class);
         return editing被保険者台帳List;
     }
 
@@ -371,9 +371,9 @@ public class ShikakuHenkoRirekiHandler {
      */
     public IItemList<HihokenshaDaichoModel> getUpdate被保険者台帳情報() {
         IItemList<HihokenshaDaichoModel> baseList
-                = ItemList.of(PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_KEY, ArrayList.class));
+                = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_KEY, ItemList.class);
         IItemList<HihokenshaDaichoModel> editingList
-                = ItemList.of(PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_EDITING_KEY, ArrayList.class));
+                = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_EDITING_KEY, ItemList.class);
 
         return mergeTo(baseList, editingList);
     }
@@ -581,8 +581,8 @@ public class ShikakuHenkoRirekiHandler {
     }
 
     public HihokenshaDaichoModel get更新前選択被保険者台帳() {
-        ArrayList<HihokenshaDaichoModel> get = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_KEY, ArrayList.class);
-        return get.get(Integer.parseInt(shikakuHenkoRirekiDiv.getSelectRow().toString()));
+        ItemList<HihokenshaDaichoModel> get = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_KEY, ItemList.class);
+        return get.toList().get(Integer.parseInt(shikakuHenkoRirekiDiv.getSelectRow().toString()));
     }
 
 }
