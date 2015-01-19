@@ -198,7 +198,7 @@ public class ShikakuHenkoRirekiHandler {
 
         switch (ViewExecutionStatus.toValue(shikakuHenkoRirekiDiv.getExecutionStatus())) {
             case Add:
-                addEntryData();
+                modifyEntryData();
                 break;
 
             case Modify:
@@ -210,20 +210,6 @@ public class ShikakuHenkoRirekiHandler {
         }
     }
 
-    private void addEntryData() {
-        HihokenshaDaichoModel model = new HihokenshaDaichoModel();
-        model.set資格変更年月日(shikakuHenkoRirekiDiv.getHenkoInput().getTxtHenkoDate().getValue());
-        model.set資格変更届出年月日(shikakuHenkoRirekiDiv.getHenkoInput().getTxtHenkoTodokedeDate().getValue());
-        model.set資格変更事由(ShikakuHenkoJiyu.toValue(
-                shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoJiyu().getSelectedKey()));
-        model.set被保険者番号(new HihokenshaNo(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiHihokenshaNo()));
-        model.set処理日時(new YMDHMS(toGYYMMDDHHMMSS(RDate.getNowDateTime())));
-        model.set旧市町村コード(new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoKyuHokensha().getSelectedKey()));
-        model.set広住特措置元市町村コード(new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoSochimotoHokensha().getSelectedKey()));
-
-        update資格変更履歴(model);
-    }
-
     private void modifyEntryData() {
         HihokenshaDaichoModel model = new HihokenshaDaichoModel();
         model.set資格変更年月日(shikakuHenkoRirekiDiv.getHenkoInput().getTxtHenkoDate().getValue());
@@ -231,7 +217,7 @@ public class ShikakuHenkoRirekiHandler {
         model.set資格変更事由(ShikakuHenkoJiyu.toValue(
                 shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoJiyu().getSelectedKey()));
         model.set被保険者番号(new HihokenshaNo(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiHihokenshaNo()));
-        model.set処理日時(new YMDHMS(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiShoriDatetime()));
+        model.set処理日時(new YMDHMS(toGYYMMDDHHMMSS(RDate.getNowDateTime())));
         model.set旧市町村コード(new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoKyuHokensha().getSelectedKey()));
         model.set広住特措置元市町村コード(new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoSochimotoHokensha().getSelectedKey()));
 
