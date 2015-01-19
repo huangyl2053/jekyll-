@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoCondition;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokendhaDaichoKey;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModelComparators;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;
@@ -470,7 +470,7 @@ public class ShikakuHenkoRirekiHandler {
         LasdecCode 市町村コード = new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiHihokenshaNo());
         HihokenshaNo 被保険者番号 = new HihokenshaNo(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiHihokenshaNo());
         YMDHMS 処理日時 = new YMDHMS(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiShoriDatetime());
-        IPredicate<HihokenshaDaichoModel> condition = new HihokenshaDaichoCondition(市町村コード, 被保険者番号, 処理日時);
+        IPredicate<HihokenshaDaichoModel> condition = new HihokendhaDaichoKey(市町村コード, 被保険者番号, 処理日時);
         return get被保険者台帳情報().filter(condition).findJustOne().get();
     }
 

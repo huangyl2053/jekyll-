@@ -17,20 +17,20 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * {@link jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoCondition}のテストです。
+ * {@link jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokendhaDaichoKey}のテストです。
  *
  * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
-public class HihokenshaDaichoConditionTest {
+public class HihokendhaDaichoKeyTest {
 
-    private static HihokenshaDaichoCondition sut;
+    private static HihokendhaDaichoKey sut;
 
     public static class constructor_引数にHihokenshaDaichoModelを渡す場合 extends DbzTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 引数にnullが渡された場合_NullPointerExceptionが発生する() {
-            sut = new HihokenshaDaichoCondition(null);
+            sut = new HihokendhaDaichoKey(null);
             fail();
         }
     }
@@ -50,19 +50,19 @@ public class HihokenshaDaichoConditionTest {
 
         @Test(expected = NullPointerException.class)
         public void 市町村コードにnullが渡された場合_NullPointerExceptionが発生する() {
-            sut = new HihokenshaDaichoCondition(null, 被保険者番号, 処理日時);
+            sut = new HihokendhaDaichoKey(null, 被保険者番号, 処理日時);
             fail();
         }
 
         @Test(expected = NullPointerException.class)
         public void 被保険者番号にnullが渡された場合_NullPointerExceptionが発生する() {
-            sut = new HihokenshaDaichoCondition(市町村コード, null, 処理日時);
+            sut = new HihokendhaDaichoKey(市町村コード, null, 処理日時);
             fail();
         }
 
         @Test(expected = NullPointerException.class)
         public void 処理日時にnullが渡された場合_NullPointerExceptionが発生する() {
-            sut = new HihokenshaDaichoCondition(市町村コード, 被保険者番号, null);
+            sut = new HihokendhaDaichoKey(市町村コード, 被保険者番号, null);
             fail();
         }
     }
@@ -83,7 +83,7 @@ public class HihokenshaDaichoConditionTest {
             target_difHihokenshaNo = createModel("202010", "1234500002", "20141231020506");
             target_difShoriDateTime = createModel("202010", "1234500001", "20141231020508");
 
-            sut = new HihokenshaDaichoCondition(condition);
+            sut = new HihokendhaDaichoKey(condition);
         }
 
         @Test
