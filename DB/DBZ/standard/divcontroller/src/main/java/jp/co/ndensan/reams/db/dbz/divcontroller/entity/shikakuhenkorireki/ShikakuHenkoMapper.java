@@ -60,7 +60,7 @@ public class ShikakuHenkoMapper {
                 t.set資格変更年月日(model.get資格変更年月日());
                 t.set資格変更届出年月日(model.get資格変更届出年月日());
                 t.set資格変更事由(model.get資格変更事由());
-//                t.setJigyoshaMeisho(model.getJigyoshaMeisho());
+                t.set旧市町村コード(model.get旧市町村コード());
             }
         };
     }
