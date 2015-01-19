@@ -47,7 +47,7 @@ public class ShisetsuNyutaishoTokureiTaishoRelateManager {
     /**
      * 主キー1に合致する介護保険施設入退所の一覧を返します。
      *
-     * @param 識別コード
+     * @param 識別コード ShikibetsuCode
      * @return IItemList<ShisetsuNyutaishoRelateModel>
      */
     @Transaction

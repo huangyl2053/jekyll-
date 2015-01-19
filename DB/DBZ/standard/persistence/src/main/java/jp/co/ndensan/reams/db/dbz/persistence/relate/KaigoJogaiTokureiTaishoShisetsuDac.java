@@ -34,7 +34,8 @@ public class KaigoJogaiTokureiTaishoShisetsuDac implements IModifiable<KaigoJoga
 
     @InjectSession
     private SqlSession session;
-    private final DbT1005KaigoJogaiTokureiTaishoShisetsuDac 介護除外住所地特例対象施設Dac = InstanceProvider.create(DbT1005KaigoJogaiTokureiTaishoShisetsuDac.class);
+    private final DbT1005KaigoJogaiTokureiTaishoShisetsuDac 介護除外住所地特例対象施設Dac
+            = InstanceProvider.create(DbT1005KaigoJogaiTokureiTaishoShisetsuDac.class);
 
     /**
      * 介護除外住所地特例対象施設情報をキー検索で１件返します。
