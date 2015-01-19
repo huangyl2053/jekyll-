@@ -350,10 +350,10 @@ public class ShikakuHenkoRirekiHandler {
         IItemList<HihokenshaDaichoModel> editingList
                 = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_EDITING_KEY, ItemList.class);
 
-        return mergeTo(baseList, editingList);
+        return merge(baseList, editingList);
     }
 
-    private IItemList<HihokenshaDaichoModel> mergeTo(IItemList<HihokenshaDaichoModel> baseList, IItemList<HihokenshaDaichoModel> editingList) {
+    private IItemList<HihokenshaDaichoModel> merge(IItemList<HihokenshaDaichoModel> baseList, IItemList<HihokenshaDaichoModel> editingList) {
 
         List<HihokenshaDaichoModel> mergedList = new ArrayList<>();
 
