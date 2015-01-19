@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 合併情報管理について定義している業務コンフィグを取得します。
  *
  * @author n8178 城間篤人
  */

@@ -5,13 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config.kyotsutokei;
 
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.kyotsutokei.ConfigKeysChohyoKyotsuJushoEdit;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.kyotsutokei.ConfigKeysGappeiJohoKanri;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GunNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HowToEditJusho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.KatagakiPrint;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ShichosonNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNamePrint;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbuTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
