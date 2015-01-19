@@ -54,10 +54,10 @@ public class ShisetsuNyutaishoTokureiTaishoRelateManager {
         //台帳種別  1:被保険者台帳、2:適用除外者台帳,3:他市町村住所地特例者台帳
         for (ShisetsuNyutaishoRelateModel model : shisetsuNyutaishoIchiranList) {
 
-            if (model.get介護保険施設入退所モデル().get台帳種別() == (DaichoType.被保険者.getCode())) {
+            if (model.get介護保険施設入退所モデル().get台帳種別().equals(DaichoType.被保険者.getCode())) {
 
-            } else if (model.get介護保険施設入退所モデル().get台帳種別() == DaichoType.適用除外者.getCode()
-                    || model.get介護保険施設入退所モデル().get台帳種別() == DaichoType.他市町村住所地特例者.getCode()) {
+            } else if (model.get介護保険施設入退所モデル().get台帳種別().equals(DaichoType.適用除外者.getCode())
+                    || model.get介護保険施設入退所モデル().get台帳種別().equals(DaichoType.他市町村住所地特例者.getCode())) {
                 Optional<KaigoJogaiTokureiTaishoShisetsuModel> result = dac.select介護除外住所地特例対象施設ByKey(
                         model.get介護保険施設入退所モデル().get入所施設種類(),
                         model.get介護保険施設入退所モデル().get入所施設コード(),
