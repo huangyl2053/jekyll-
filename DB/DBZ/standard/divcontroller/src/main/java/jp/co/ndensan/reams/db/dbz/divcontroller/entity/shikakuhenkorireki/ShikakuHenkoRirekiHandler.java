@@ -135,11 +135,9 @@ public class ShikakuHenkoRirekiHandler {
      * Divに登録されている被保険者台帳情報から、資格変更についての情報を抽出してグリッドにマッピングします。
      */
     public void mapping資格変更履歴() {
-        IItemList<HihokenshaDaichoModel> 被保険者台帳List = get被保険者台帳情報();
-        IItemList<HihokenshaDaichoModel> 資格関連異動List = new HihokenshaDaichoList(被保険者台帳List).to資格関連異動List();
-
+        IItemList<HihokenshaDaichoModel> 資格異動List = new HihokenshaDaichoList(get被保険者台帳情報()).to資格関連異動List();
         List<dgHenko_Row> dataSource = new ArrayList<>();
-        for (HihokenshaDaichoModel model : 資格関連異動List) {
+        for (HihokenshaDaichoModel model : 資格異動List) {
             dataSource.add(createRow(model));
         }
         shikakuHenkoRirekiDiv.getDgHenko().setDataSource(dataSource);
