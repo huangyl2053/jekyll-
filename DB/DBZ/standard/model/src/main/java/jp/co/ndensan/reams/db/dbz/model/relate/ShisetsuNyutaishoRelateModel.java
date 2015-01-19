@@ -17,24 +17,24 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class ShisetsuNyutaishoRelateModel implements Serializable {
 
     private ShisetsuNyutaishoModel 介護保険施設入退所モデル;
-    private RString JIGYOSHAMEISHO;
+    private RString 事業者名称;
 
     /**
      * 事業者名称を取得します。
      *
-     * @return
+     * @return 事業者名称
      */
     public RString getJigyoshaMeisho() {
-        return JIGYOSHAMEISHO;
+        return 事業者名称;
     }
 
     /**
      * 事業者名称を設定します。
      *
-     * @param JigyoshaMeisho RString
+     * @param 事業者名称 RString
      */
-    public void setJigyoshaMeisho(RString JigyoshaMeisho) {
-        this.JIGYOSHAMEISHO = JigyoshaMeisho;
+    public void setJigyoshaMeisho(RString 事業者名称) {
+        this.事業者名称 = 事業者名称;
     }
 
     /**
