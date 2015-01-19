@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.KaigoJogaiTokureiTaishoShisetsu.KaigoJogaiTokureiTaishoShisetsuModel;
-import jp.co.ndensan.reams.db.dbz.model.relate.KaigoJogaiTokureiTaishoShisetsuRelateModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.KaigoJogaiTokureiTaishoShisetsuDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -42,8 +44,8 @@ public class KaigoJogaiTokureiTaishoShisetsuManagerTest extends DbzTestBase {
         public void get介護除外住所地特例対象施設() {
 
             sut = createManager();
-            KaigoJogaiTokureiTaishoShisetsuRelateModel result = sut.get介護除外住所地特例対象施設(事業者種別, 事業者番号, 有効開始年月日);
-            assertThat(result.get介護除外住所地特例対象施設モデル().get事業者名称().toString(), is("適用除外施設01"));
+            Optional<KaigoJogaiTokureiTaishoShisetsuModel> result = sut.get介護除外住所地特例対象施設(事業者種別, 事業者番号, 有効開始年月日);
+            assertThat(result.get().get事業者名称().toString(), is("適用除外施設01"));
 
         }
 
@@ -56,67 +58,57 @@ public class KaigoJogaiTokureiTaishoShisetsuManagerTest extends DbzTestBase {
             KaigoJogaiTokureiTaishoShisetsuModel shisetsuModel = mock(KaigoJogaiTokureiTaishoShisetsuModel.class);
             when(shisetsuModel.get事業者名称()).thenReturn(new AtenaMeisho("適用除外施設01"));
 
-            KaigoJogaiTokureiTaishoShisetsuRelateModel shisetsuRelateModel = mock(KaigoJogaiTokureiTaishoShisetsuRelateModel.class);
-
-            when(shisetsuRelateModel.get介護除外住所地特例対象施設モデル()).thenReturn(shisetsuModel);
-
             KaigoJogaiTokureiTaishoShisetsuDac kaigoJogaiTokureiTaishoShisetsuDac = mock(KaigoJogaiTokureiTaishoShisetsuDac.class);
-            when(kaigoJogaiTokureiTaishoShisetsuDac.select介護除外住所地特例対象施設ByKey(事業者種別, 事業者番号, 有効開始年月日)).thenReturn(shisetsuRelateModel);
+            when(kaigoJogaiTokureiTaishoShisetsuDac.select介護除外住所地特例対象施設ByKey(事業者種別, 事業者番号, 有効開始年月日)).thenReturn(Optional.ofNullable(shisetsuModel));
             return kaigoJogaiTokureiTaishoShisetsuDac;
         }
 
         @Test
         public void get介護除外住所地特例対象施設一覧By主キー1() {
 
-            List<KaigoJogaiTokureiTaishoShisetsuRelateModel> selectList = new ArrayList<>();
+            List<KaigoJogaiTokureiTaishoShisetsuModel> selectList = new ArrayList<>();
             selectList.add(createMock1());
             selectList.add(createMock2());
             selectList.add(createMock3());
 
             sut = createManagerMock(事業者番号, selectList);
-            List<KaigoJogaiTokureiTaishoShisetsuRelateModel> result = sut.get介護除外住所地特例対象施設一覧By主キー1(事業者番号);
-            assertThat(result.get(1).get介護除外住所地特例対象施設モデル().get事業者名称().toString(), is("適用除外施設02"));
+            IItemList<KaigoJogaiTokureiTaishoShisetsuModel> result = sut.get介護除外住所地特例対象施設一覧By主キー1(事業者番号);
+            assertThat(result.toList().get(1).get事業者名称().toString(), is("適用除外施設02"));
 
         }
 
-        private static KaigoJogaiTokureiTaishoShisetsuManager createManagerMock(RString 事業者番号, List<KaigoJogaiTokureiTaishoShisetsuRelateModel> selectList) {
+        private static KaigoJogaiTokureiTaishoShisetsuManager createManagerMock(RString 事業者番号, List<KaigoJogaiTokureiTaishoShisetsuModel> selectList) {
             KaigoJogaiTokureiTaishoShisetsuManager mangaer = mock(KaigoJogaiTokureiTaishoShisetsuManager.class);
-            when(mangaer.get介護除外住所地特例対象施設一覧By主キー1(事業者番号)).thenReturn(selectList);
+            when(mangaer.get介護除外住所地特例対象施設一覧By主キー1(事業者番号)).thenReturn(ItemList.of(selectList));
             return mangaer;
         }
 
-        private static KaigoJogaiTokureiTaishoShisetsuRelateModel createMock1() {
+        private static KaigoJogaiTokureiTaishoShisetsuModel createMock1() {
             KaigoJogaiTokureiTaishoShisetsuModel shisetsuModel = mock(KaigoJogaiTokureiTaishoShisetsuModel.class);
             when(shisetsuModel.get事業者名称()).thenReturn(new AtenaMeisho("適用除外施設01"));
-            KaigoJogaiTokureiTaishoShisetsuRelateModel shisetsuRelateModel = mock(KaigoJogaiTokureiTaishoShisetsuRelateModel.class);
-            when(shisetsuRelateModel.get介護除外住所地特例対象施設モデル()).thenReturn(shisetsuModel);
 
-            return shisetsuRelateModel;
+            return shisetsuModel;
         }
 
-        private static KaigoJogaiTokureiTaishoShisetsuRelateModel createMock2() {
+        private static KaigoJogaiTokureiTaishoShisetsuModel createMock2() {
             KaigoJogaiTokureiTaishoShisetsuModel shisetsuModel = mock(KaigoJogaiTokureiTaishoShisetsuModel.class);
             when(shisetsuModel.get事業者名称()).thenReturn(new AtenaMeisho("適用除外施設02"));
-            KaigoJogaiTokureiTaishoShisetsuRelateModel shisetsuRelateModel = mock(KaigoJogaiTokureiTaishoShisetsuRelateModel.class);
-            when(shisetsuRelateModel.get介護除外住所地特例対象施設モデル()).thenReturn(shisetsuModel);
 
-            return shisetsuRelateModel;
+            return shisetsuModel;
         }
 
-        private static KaigoJogaiTokureiTaishoShisetsuRelateModel createMock3() {
+        private static KaigoJogaiTokureiTaishoShisetsuModel createMock3() {
             KaigoJogaiTokureiTaishoShisetsuModel shisetsuModel = mock(KaigoJogaiTokureiTaishoShisetsuModel.class);
             when(shisetsuModel.get事業者名称()).thenReturn(new AtenaMeisho("適用除外施設03"));
-            KaigoJogaiTokureiTaishoShisetsuRelateModel shisetsuRelateModel = mock(KaigoJogaiTokureiTaishoShisetsuRelateModel.class);
-            when(shisetsuRelateModel.get介護除外住所地特例対象施設モデル()).thenReturn(shisetsuModel);
 
-            return shisetsuRelateModel;
+            return shisetsuModel;
         }
 
         @Test
         public void save介護除外住所地特例対象施設_trueを返す() {
 
             KaigoJogaiTokureiTaishoShisetsuManager manager = mock(KaigoJogaiTokureiTaishoShisetsuManager.class);
-            KaigoJogaiTokureiTaishoShisetsuRelateModel shisetsuRelateModel = mock(KaigoJogaiTokureiTaishoShisetsuRelateModel.class);
+            KaigoJogaiTokureiTaishoShisetsuModel shisetsuRelateModel = mock(KaigoJogaiTokureiTaishoShisetsuModel.class);
 
             when(manager.save介護除外住所地特例対象施設(shisetsuRelateModel)).thenReturn(1);
         }
@@ -125,7 +117,7 @@ public class KaigoJogaiTokureiTaishoShisetsuManagerTest extends DbzTestBase {
         public void save介護除外住所地特例対象施設_falseを返す() {
 
             KaigoJogaiTokureiTaishoShisetsuManager manager = mock(KaigoJogaiTokureiTaishoShisetsuManager.class);
-            KaigoJogaiTokureiTaishoShisetsuRelateModel shisetsuRelateModel = mock(KaigoJogaiTokureiTaishoShisetsuRelateModel.class);
+            KaigoJogaiTokureiTaishoShisetsuModel shisetsuRelateModel = mock(KaigoJogaiTokureiTaishoShisetsuModel.class);
 
             when(manager.save介護除外住所地特例対象施設(shisetsuRelateModel)).thenReturn(0);
         }

@@ -5,6 +5,8 @@
 package jp.co.ndensan.reams.db.dbz.realservice;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
@@ -46,20 +48,20 @@ public class ShisetsuNyutaishoManager {
      * @return ShisetsuNyutaishoModel
      */
     @Transaction
-    public ShisetsuNyutaishoRelateModel get介護保険施設入退所(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+    public Optional<ShisetsuNyutaishoRelateModel> get介護保険施設入退所(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
 
         return dac.select介護保険施設入退所ByKey(市町村コード, 識別コード);
     }
 
     /**
-     * 主キー1に合致する介護保険施設入退所の一覧を返します。
+     * 識別コードに合致する介護保険施設入退所の一覧を返します。
      *
-     * @param ShikibetsuCode 識別コード
+     * @param 識別コード ShikibetsuCode
      * @return List<ShisetsuNyutaishoModel>
      */
     @Transaction
-    public List<ShisetsuNyutaishoRelateModel> get介護保険施設入退所一覧By主キー1(ShikibetsuCode 識別コード) {
-        return dac.select介護保険施設入退所一覧By主キー1(識別コード);
+    public IItemList<ShisetsuNyutaishoRelateModel> get介護保険施設入退所一覧By主キー1(ShikibetsuCode 識別コード) {
+        return dac.select介護保険施設入退所一覧By識別コード(識別コード);
     }
 
     /**

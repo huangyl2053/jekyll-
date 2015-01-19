@@ -7,6 +7,9 @@ package jp.co.ndensan.reams.db.dbz.persistence.relate;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoModel;
@@ -34,33 +37,30 @@ public class ShisetsuNyutaishoDac implements IModifiable<ShisetsuNyutaishoRelate
     private SqlSession session;
     private final DbT1004ShisetsuNyutaishoDac 介護保険施設入退所Dac = InstanceProvider.create(DbT1004ShisetsuNyutaishoDac.class);
 
-    // TODO 主キー型と変数名と主キー値を適切な値に置換してください
-    // TODO 主キーの数が足りない場合、追加してください。
     /**
      * 介護保険施設入退所情報をキー検索で１件返します。
      *
      * @param 市町村コード LasdecCode
      * @param 識別コード ShikibetsuCode
-     * @return ShisetsuNyutaishoModel
+     * @return Optional<ShisetsuNyutaishoModel>
      */
     @Transaction
-    public ShisetsuNyutaishoRelateModel select介護保険施設入退所ByKey(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+    public Optional<ShisetsuNyutaishoRelateModel> select介護保険施設入退所ByKey(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
 
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
 
-        return createModel(介護保険施設入退所Dac.selectByKey(市町村コード, 識別コード));
+        return Optional.ofNullable(createModel(介護保険施設入退所Dac.selectByKey(市町村コード, 識別コード)));
     }
 
-    // TODO 一覧取得に使用する検索項目はテーブル構造に合わせて修正が必要になります。
     /**
-     * 主キー1に合致する介護保険施設入退所のリストを返します。
+     * 識別コードに合致する介護保険施設入退所のリストを返します。
      *
      * @param 識別コード ShikibetsuCode
-     * @return List<ShisetsuNyutaishoRelateModel>
+     * @return IItemList<ShisetsuNyutaishoRelateModel>
      */
     @Transaction
-    public List<ShisetsuNyutaishoRelateModel> select介護保険施設入退所一覧By主キー1(ShikibetsuCode 識別コード) {
+    public IItemList<ShisetsuNyutaishoRelateModel> select介護保険施設入退所一覧By識別コード(ShikibetsuCode 識別コード) {
 
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
 
@@ -76,7 +76,7 @@ public class ShisetsuNyutaishoDac implements IModifiable<ShisetsuNyutaishoRelate
             台帳リスト.add(createModel(介護保険施設入退所));
         }
 
-        return 台帳リスト;
+        return ItemList.of(台帳リスト);
     }
 
     private ShisetsuNyutaishoRelateModel createModel(DbT1004ShisetsuNyutaishoEntity 介護保険施設入退所エンティティ) {
@@ -89,44 +89,31 @@ public class ShisetsuNyutaishoDac implements IModifiable<ShisetsuNyutaishoRelate
     @Override
     public int insert(ShisetsuNyutaishoRelateModel data) {
 
-        int result = 0;
-
         if (data == null) {
-            return result;
+            return 0;
         }
 
-        result = 介護保険施設入退所Dac.insert(data.get介護保険施設入退所モデル().getEntity());
-
-        // TODO リストで持っているクラスについては修正が必要になります。
-        return result;
+        return 介護保険施設入退所Dac.insert(data.get介護保険施設入退所モデル().getEntity());
     }
 
     @Override
     public int update(ShisetsuNyutaishoRelateModel data) {
-        int result = 0;
 
         if (data == null) {
-            return result;
+            return 0;
         }
 
-        result = 介護保険施設入退所Dac.update(data.get介護保険施設入退所モデル().getEntity());
-
-        // TODO リストで持っているクラスについては修正が必要になります。
-        return result;
+        return 介護保険施設入退所Dac.update(data.get介護保険施設入退所モデル().getEntity());
     }
 
     @Override
     public int delete(ShisetsuNyutaishoRelateModel data) {
-        int result = 0;
 
         if (data == null) {
-            return result;
+            return 0;
         }
 
-        result = 介護保険施設入退所Dac.delete(data.get介護保険施設入退所モデル().getEntity());
-
-        // TODO リストで持っているクラスについては修正が必要になります。
-        return result;
+        return 介護保険施設入退所Dac.delete(data.get介護保険施設入退所モデル().getEntity());
     }
 
 //    @Override

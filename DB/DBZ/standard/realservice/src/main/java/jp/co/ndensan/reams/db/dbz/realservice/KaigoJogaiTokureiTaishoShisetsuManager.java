@@ -4,8 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dbz.model.relate.KaigoJogaiTokureiTaishoShisetsuRelateModel;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.model.KaigoJogaiTokureiTaishoShisetsu.KaigoJogaiTokureiTaishoShisetsuModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.KaigoJogaiTokureiTaishoShisetsuDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -40,35 +41,36 @@ public class KaigoJogaiTokureiTaishoShisetsuManager {
     /**
      * 主キーに合致する介護除外住所地特例対象施設を返します。
      *
-     * @param 事業者種別 String
-     * @param 事業者番号 String
-     * @return KaigoJogaiTokureiTaishoShisetsuRelateModel
+     * @param 事業者種別 RString
+     * @param 事業者番号 RString
+     * @param 有効開始年月日 FlexibleDate
+     * @return Optional<KaigoJogaiTokureiTaishoShisetsuModel>
      */
     @Transaction
-    public KaigoJogaiTokureiTaishoShisetsuRelateModel get介護除外住所地特例対象施設(RString 事業者種別, RString 事業者番号, FlexibleDate 有効開始年月日) {
+    public Optional<KaigoJogaiTokureiTaishoShisetsuModel> get介護除外住所地特例対象施設(RString 事業者種別, RString 事業者番号, FlexibleDate 有効開始年月日) {
 
         return dac.select介護除外住所地特例対象施設ByKey(事業者種別, 事業者番号, 有効開始年月日);
     }
 
     /**
-     * 主キー1に合致する介護除外住所地特例対象施設の一覧を返します。
+     * 事業者番号に合致する介護除外住所地特例対象施設の一覧を返します。
      *
-     * @param 主キー1 主キー型1
-     * @return List<KaigoJogaiTokureiTaishoShisetsuRelateModel>
+     * @param 事業者番号 RString
+     * @return IItemList<KaigoJogaiTokureiTaishoShisetsuModel>
      */
     @Transaction
-    public List<KaigoJogaiTokureiTaishoShisetsuRelateModel> get介護除外住所地特例対象施設一覧By主キー1(RString 事業者番号) {
-        return dac.select介護除外住所地特例対象施設一覧By主キー1(事業者番号);
+    public IItemList<KaigoJogaiTokureiTaishoShisetsuModel> get介護除外住所地特例対象施設一覧By主キー1(RString 事業者番号) {
+        return dac.select介護除外住所地特例対象施設一覧By事業者種別(事業者番号);
     }
 
     /**
      * 介護除外住所地特例対象施設を登録します。
      *
-     * @param 介護除外住所地特例対象施設モデル KaigoJogaiTokureiTaishoShisetsuRelateModel
+     * @param 介護除外住所地特例対象施設モデル KaigoJogaiTokureiTaishoShisetsuModel
      * @return 登録件数
      */
     @Transaction
-    public int save介護除外住所地特例対象施設(KaigoJogaiTokureiTaishoShisetsuRelateModel 介護除外住所地特例対象施設モデル) {
+    public int save介護除外住所地特例対象施設(KaigoJogaiTokureiTaishoShisetsuModel 介護除外住所地特例対象施設モデル) {
 
         if (介護除外住所地特例対象施設モデル.getState() == EntityDataState.Added) {
             return dac.insert(介護除外住所地特例対象施設モデル);
