@@ -91,8 +91,7 @@ public class ShikakuHenkoMapper {
                 row.setHenkoJiyu(model.get資格変更事由().getShortName());
                 row.getHenkoDate().setValue(model.get資格変更年月日());
                 row.getHenkoTodokedeDate().setValue(model.get資格変更届出年月日());
-                //TODO　市町村構成マスタからの取得方法が未確定のため
-//                row.setSochimotoHokensha(model.get広住特措置元市町村コード().getColumnValue());
+                row.setSochimotoHokensha(model.get広住特措置元市町村コード().getColumnValue());
                 return row;
             }
         };
