@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.model.helper.HihokenshaDaichoModelTestHelper;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -44,7 +45,7 @@ public class HihokenshaDaichoManagerTest {
 
     private static final LasdecCode 市町村コード = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_市町村コード;
     private static final HihokenshaNo 被保険者番号 = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号;
-    private static final YMDHMS 処理日時 = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_処理日時;
+    private static final ShoriTimestamp 処理日時 = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_処理日時;
     private static final ShikibetsuCode 識別コード = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_識別コード;
 
     @BeforeClass
@@ -60,7 +61,7 @@ public class HihokenshaDaichoManagerTest {
 
             Optional<HihokenshaDaichoModel> 被保険者台帳モデル = Optional.ofNullable(HihokenshaDaichoModelTestHelper.createModel());
 
-            when(dac.select被保険者台帳ByKey(any(LasdecCode.class), any(HihokenshaNo.class), any(YMDHMS.class))).thenReturn(被保険者台帳モデル);
+            when(dac.select被保険者台帳ByKey(any(LasdecCode.class), any(HihokenshaNo.class), any(ShoriTimestamp.class))).thenReturn(被保険者台帳モデル);
 
             Optional<HihokenshaDaichoModel> result = sut.find被保険者台帳(市町村コード, 被保険者番号, 処理日時);
 

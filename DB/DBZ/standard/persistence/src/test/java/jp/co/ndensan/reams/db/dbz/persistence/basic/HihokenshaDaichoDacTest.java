@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
@@ -43,10 +44,10 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
 
     private static final LasdecCode OTHER_市町村コード = new LasdecCode("201010");
     private static final HihokenshaNo OTHER_被保険者番号 = new HihokenshaNo("1234500001");
-    private static final YMDHMS OTHER_処理日時 = new YMDHMS("20091104134911");
+    private static final ShoriTimestamp OTHER_処理日時 = ShoriTimestamp.of(new YMDHMS("20091104134911"));
     private static final LasdecCode NONE_市町村コード = new LasdecCode("999999");
     private static final HihokenshaNo NONE_被保険者番号 = new HihokenshaNo("9999999999");
-    private static final YMDHMS NONE_処理日時 = new YMDHMS("39990101235959");
+    private static final ShoriTimestamp NONE_処理日時 = ShoriTimestamp.of(new YMDHMS("39990101235959"));
     private static HihokenshaDaichoDac sut;
 
     @BeforeClass
@@ -202,7 +203,7 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
         public static void insert(
                 LasdecCode 市町村コード,
                 HihokenshaNo 被保険者番号,
-                YMDHMS 処理日時) {
+                ShoriTimestamp 処理日時) {
             DbT1001HihokenshaDaichoEntity entity = DbT1001HihokenshaDaichoEntityGenerator.createDbT1001HihokenshaDaichoEntity();
             entity.setShichosonCode(市町村コード);
             entity.setHihokenshaNo(被保険者番号);

@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.hihokenshaNo;
@@ -46,7 +47,7 @@ public class DbT1001HihokenshaDaichoDac implements IModifiable<DbT1001Hihokensha
     public DbT1001HihokenshaDaichoEntity selectByKey(
             LasdecCode 市町村コード,
             HihokenshaNo 被保険者番号,
-            YMDHMS 処理日時) throws NullPointerException {
+            ShoriTimestamp 処理日時) throws NullPointerException {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));

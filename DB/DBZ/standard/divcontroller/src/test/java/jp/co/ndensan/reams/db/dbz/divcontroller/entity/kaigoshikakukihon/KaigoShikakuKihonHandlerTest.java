@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureishaKu
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoManager;
@@ -49,7 +50,7 @@ public class KaigoShikakuKihonHandlerTest extends DbzTestBase {
     private static final ShikakuSoshitsuJiyu 資格喪失事由 = ShikakuSoshitsuJiyu.転出;
     private static final FlexibleDate 資格喪失日 = new FlexibleDate("20140404");
     private static final JushochitokureishaKubun 住所地特例者区分 = JushochitokureishaKubun.通常資格者;
-    private static final YMDHMS 処理日時 = new YMDHMS("20140102030405");
+    private static final ShoriTimestamp 処理日時 = ShoriTimestamp.of(new YMDHMS("20140102030405"));
     private static final YoKaigoJotaiKubun 要介護状態区分 = YoKaigoJotaiKubun.要介護1;
     private static final RDate 認定有効開始日 = new RDate("20140505");
     private static final RDate 認定有効終了日 = new RDate("20140606");

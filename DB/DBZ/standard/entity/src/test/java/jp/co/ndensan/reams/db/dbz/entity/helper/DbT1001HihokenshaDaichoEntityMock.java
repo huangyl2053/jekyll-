@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitoku
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
@@ -56,7 +57,7 @@ public final class DbT1001HihokenshaDaichoEntityMock {
         entity.setShichosonCode(new LasdecCode(new RString("000000")));
         entity.setHihokenshaNo(new HihokenshaNo("1234567890"));
         entity.setShikibetsuCode(new ShikibetsuCode("0000000001"));
-        entity.setShoriTimestamp(new YMDHMS("20140328000000"));
+        entity.setShoriTimestamp(ShoriTimestamp.of(new YMDHMS("20140328000000")));
         entity.setHihokennshaKubunCode(new Code("1").value());
         entity.setIchigoShikakuShutokuYMD(new FlexibleDate("20140328"));
         entity.setShikakuShutokuJiyuCode(new KaigoshikakuShutokuJiyuHihokensha(ShikakuShutokuJiyu.年齢到達.getCode()));
@@ -98,7 +99,7 @@ public final class DbT1001HihokenshaDaichoEntityMock {
         DbT1001HihokenshaDaichoEntity entity = create();
         entity.setShichosonCode(shichosonCode);
         entity.setShikibetsuCode(shikibetsuCode);
-        entity.setShoriTimestamp(timeStamp);
+        entity.setShoriTimestamp(ShoriTimestamp.of(timeStamp));
         return entity;
     }
 
@@ -115,7 +116,7 @@ public final class DbT1001HihokenshaDaichoEntityMock {
         DbT1001HihokenshaDaichoEntity entity = create();
         entity.setShichosonCode(shichosonCode);
         entity.setHihokenshaNo(hihokenshaNo);
-        entity.setShoriTimestamp(timeStamp);
+        entity.setShoriTimestamp(ShoriTimestamp.of(timeStamp));
         return entity;
     }
 }

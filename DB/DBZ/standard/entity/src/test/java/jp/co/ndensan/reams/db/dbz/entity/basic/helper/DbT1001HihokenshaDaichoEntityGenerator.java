@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -35,7 +36,7 @@ public final class DbT1001HihokenshaDaichoEntityGenerator {
 
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("202011");
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("0000000001");
-    public static final YMDHMS DEFAULT_処理日時 = new YMDHMS(new RString("20140415102030"));
+    public static final ShoriTimestamp DEFAULT_処理日時 = ShoriTimestamp.of(new YMDHMS(new RString("20140415102030")));
     public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("000001234567890");
     public static final KaigoshikakuShutokuJiyuHihokensha DEFAULT_資格取得事由コード = new KaigoshikakuShutokuJiyuHihokensha(new Code("01"));
     public static final FlexibleDate DEFAULT_資格取得年月日 = new FlexibleDate("20140402");

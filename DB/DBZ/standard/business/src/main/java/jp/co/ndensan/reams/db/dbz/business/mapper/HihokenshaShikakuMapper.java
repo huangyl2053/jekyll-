@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
@@ -43,6 +44,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -73,7 +75,7 @@ public final class HihokenshaShikakuMapper {
         entity.setShichosonCode(shikaku.get市町村コード());
         entity.setHihokenshaNo(shikaku.get被保険者番号());
         entity.setShikibetsuCode(shikaku.get識別コード());
-        entity.setShoriTimestamp(shikaku.get処理日時());
+        entity.setShoriTimestamp(ShoriTimestamp.of(shikaku.get処理日時()));
         entity.setHihokennshaKubunCode(shikaku.get被保険者区分().getCode().value());
         entity.setIchigoShikakuShutokuYMD(shikaku.get第一号年齢到達日());
         entity.setShikakuShutokuJiyuCode(new KaigoshikakuShutokuJiyuHihokensha(shikaku.get資格取得().getReason().getCode()));
@@ -158,7 +160,7 @@ public final class HihokenshaShikakuMapper {
 
         LasdecCode lasdecCode = entity.getShichosonCode();
         ShikibetsuCode shikibetsuCode = entity.getShikibetsuCode();
-        YMDHMS shoriTimestamp = entity.getShoriTimestamp();
+        YMDHMS shoriTimestamp = entity.getShoriTimestamp().value();
         HihokenshaKubun hihokenshaKubun = new HihokenshaKubun(Code.EMPTY, RString.EMPTY);
         HihokenshaShikaku shikaku
                 = new HihokenshaShikaku.Builder(kaigoShikaku, lasdecCode, shikibetsuCode, shoriTimestamp,

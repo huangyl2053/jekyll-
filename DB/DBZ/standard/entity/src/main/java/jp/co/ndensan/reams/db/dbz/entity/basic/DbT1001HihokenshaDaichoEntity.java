@@ -4,7 +4,6 @@ import java.util.Objects;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -14,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuHenkoJiyuHihokensha;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuKaijo;
@@ -46,7 +46,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private YMDHMS shoriTimestamp;
+    private ShoriTimestamp shoriTimestamp;
     private ShikibetsuCode shikibetsuCode;
     private KaigoshikakuShutokuJiyuHihokensha shikakuShutokuJiyuCode;
     private FlexibleDate shikakuShutokuYMD;
@@ -159,7 +159,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return shoriTimestamp
      */
-    public YMDHMS getShoriTimestamp() {
+    public ShoriTimestamp getShoriTimestamp() {
         return shoriTimestamp;
     }
 
@@ -168,7 +168,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param shoriTimestamp shoriTimestamp
      */
-    public void setShoriTimestamp(YMDHMS shoriTimestamp) {
+    public void setShoriTimestamp(ShoriTimestamp shoriTimestamp) {
         this.shoriTimestamp = shoriTimestamp;
     }
 

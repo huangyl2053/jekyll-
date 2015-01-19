@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
@@ -25,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
@@ -50,7 +50,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
      * @return {@code Optional<HihokenshaDaichoModel>}
      */
     @Transaction
-    public Optional<HihokenshaDaichoModel> select被保険者台帳ByKey(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
+    public Optional<HihokenshaDaichoModel> select被保険者台帳ByKey(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, ShoriTimestamp 処理日時) {
 
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));

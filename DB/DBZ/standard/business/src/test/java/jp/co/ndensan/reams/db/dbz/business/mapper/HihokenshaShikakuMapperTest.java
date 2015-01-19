@@ -125,7 +125,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
             @Test
             public void toHihokenshaDaichoEntityで変換したとき_結果のgetShoriTimestampは_引数のget被保険者台帳登録日時と一致する() {
                 result = sut.toHihokenshaDaichoEntity(shikaku);
-                assertThat(result.getShoriTimestamp(), is(shikaku.get処理日時()));
+                assertThat(result.getShoriTimestamp().value(), is(shikaku.get処理日時()));
             }
 
             @Test

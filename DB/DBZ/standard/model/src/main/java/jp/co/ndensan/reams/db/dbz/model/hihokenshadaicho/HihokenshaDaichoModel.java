@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitoku
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -26,7 +27,6 @@ import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutok
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuSoshitsuJiyuHihokennsha;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
@@ -97,7 +97,7 @@ public class HihokenshaDaichoModel implements Serializable {
      *
      * @return 処理日時
      */
-    public YMDHMS get処理日時() {
+    public ShoriTimestamp get処理日時() {
         return entity.getShoriTimestamp();
     }
 
@@ -351,7 +351,7 @@ public class HihokenshaDaichoModel implements Serializable {
      *
      * @param 処理日時 処理日時
      */
-    public void set処理日時(YMDHMS 処理日時) {
+    public void set処理日時(ShoriTimestamp 処理日時) {
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
         entity.setShoriTimestamp(処理日時);
     }

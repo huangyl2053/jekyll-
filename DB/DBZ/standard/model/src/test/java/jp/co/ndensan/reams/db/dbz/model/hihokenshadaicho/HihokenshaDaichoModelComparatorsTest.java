@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -127,7 +128,7 @@ public class HihokenshaDaichoModelComparatorsTest {
 
         private HihokenshaDaichoModel createModel(YMDHMS shoriDatetime) {
             HihokenshaDaichoModel model = new HihokenshaDaichoModel();
-            model.set処理日時(shoriDatetime);
+            model.set処理日時(ShoriTimestamp.of(shoriDatetime));
             return model;
         }
     }

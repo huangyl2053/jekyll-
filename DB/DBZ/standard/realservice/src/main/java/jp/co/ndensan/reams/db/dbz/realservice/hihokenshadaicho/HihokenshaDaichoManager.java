@@ -6,13 +6,13 @@ package jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -50,7 +50,7 @@ public class HihokenshaDaichoManager {
      * @return {@link HihokenshaDaichoModel}
      */
     @Transaction
-    public Optional<HihokenshaDaichoModel> find被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
+    public Optional<HihokenshaDaichoModel> find被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, ShoriTimestamp 処理日時) {
         return dac.select被保険者台帳ByKey(市町村コード, 被保険者番号, 処理日時);
     }
 
