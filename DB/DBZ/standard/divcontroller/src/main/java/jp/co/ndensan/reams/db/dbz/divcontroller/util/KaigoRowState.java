@@ -38,7 +38,7 @@ public enum KaigoRowState {
         this.status = new RString(status);
     }
 
-    public RString getValue() {
+    public RString getStateName() {
         return status;
     }
 
@@ -51,7 +51,7 @@ public enum KaigoRowState {
      */
     public static KaigoRowState toValue(RString value) throws IllegalArgumentException {
         for (KaigoRowState rowState : values()) {
-            if (rowState.getValue().equals(value)) {
+            if (rowState.getStateName().equals(value)) {
                 return rowState;
             }
         }
