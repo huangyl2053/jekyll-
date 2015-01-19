@@ -321,7 +321,7 @@ public class ShikakuHenkoRirekiHandler {
         shikakuHenkoRirekiDiv.getTxtHenkoTodokedeDate().setValue(selRow.getHenkoTodokedeDate().getValue());
         shikakuHenkoRirekiDiv.getDdlHenkoJiyu().setSelectedKey(selRow.getHenkoJiyuKey());
         shikakuHenkoRirekiDiv.getDdlHenkoSochimotoHokensha().setSelectedKey(selRow.getSochimotoHokensha());
-        shikakuHenkoRirekiDiv.getDdlHenkoKyuHokensha().setSelectedKey(selRow.getKyuHokensha());
+        shikakuHenkoRirekiDiv.getDdlHenkoKyuHokensha().setSelectedValue(selRow.getKyuHokensha());
     }
 
     /**
