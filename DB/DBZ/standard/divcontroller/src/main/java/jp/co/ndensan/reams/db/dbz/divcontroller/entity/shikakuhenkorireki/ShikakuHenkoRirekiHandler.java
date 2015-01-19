@@ -285,13 +285,12 @@ public class ShikakuHenkoRirekiHandler {
     }
 
     private List<KeyValueDataSource> createRStringKeyValue(List<RString> dataSource) {
-        List<KeyValueDataSource> keyValueDataSourceList = new ArrayList<>();
-        for (int i = 0; i < dataSource.size(); i++) {
-            RString indexStr = new RString(Integer.toString(i));
-            KeyValueDataSource keyValueDataSource = new KeyValueDataSource(indexStr, dataSource.get(i));
-            keyValueDataSourceList.add(keyValueDataSource);
+        List<KeyValueDataSource> list = new ArrayList<>();
+        int key = 0;
+        for (RString rstr : dataSource) {
+            list.add(new KeyValueDataSource(new RString(String.valueOf(++key)), rstr));
         }
-        return keyValueDataSourceList;
+        return list;
     }
 
     private void setTanitsuGappeiAri(HihokenshaDaichoList 被保険者List) {
