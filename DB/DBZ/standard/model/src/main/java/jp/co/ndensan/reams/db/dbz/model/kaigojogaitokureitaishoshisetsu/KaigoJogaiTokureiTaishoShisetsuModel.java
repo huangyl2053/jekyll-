@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.model.KaigoJogaiTokureiTaishoShisetsu;
+package jp.co.ndensan.reams.db.dbz.model.kaigojogaitokureitaishoshisetsu;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
