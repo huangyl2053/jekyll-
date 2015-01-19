@@ -40,7 +40,8 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ContainsKyu
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.jukyu.shiharaihohohenko.ShuryoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.util.Comparators.NullComparator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HakkoShoTypeBehaviors.IHakkoShoTypeBehavior;
-import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaishorireki.ShisetsuNyutaishoModel;
+import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
+import jp.co.ndensan.reams.db.dbz.realservice.ShisetsuNyutaishoTokureiTaishoRelateManager;
 import jp.co.ndensan.reams.db.dbz.realservice.hokensha.IKoikiKoseiShichosonFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.hokensha.KoikiKoseiShichosonFinderFactory;
 // TODO N8187 久保田 以下のimportはURF.IKaigoJigyoshaDaichoManager 等が使用可能になったら有効にする。
@@ -52,7 +53,7 @@ import jp.co.ndensan.reams.ur.urz.divcontroller.helper.PanelSessionAccessor;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.ur.urz.realservice.IKaigoServiceManager;
 import jp.co.ndensan.reams.ur.urz.realservice.KaigoServiceManagerFactory;
-import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
+//import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -557,82 +558,42 @@ public class HihokenshaShikakuHakkoHandler {
     }
 
     private void set施設入退所(ShikibetsuCode 識別コード) {
-        // TODO n8187 久保田
-        // DBZ_CCD_ShisetsuNyutaishoRirekiKanri-55509 で作成された
-        // 施設入退所履歴取得のManager(ShisetsuNyutaishoTokureiTaishoRelateManager)を使用して施設入退所情報を取得する。
-        // 以下にHihokenshaShikakuHakkoModel用に暫定コードを記載する。 2015/01/31。
+        // TODO N8187 久保田 以下の施設入退所情報取得処理はURF.IKaigoJigyoshaDaichoManager が使用可能になったら有効にする。
+//        ShisetsuNyutaishoTokureiTaishoRelateManager manager = new ShisetsuNyutaishoTokureiTaishoRelateManager();
+//        IItemList<ShisetsuNyutaishoRelateModel> modelList = manager.get介護保険施設入退所一覧By主キー1(識別コード);
+//        set施設入退所to画面(modelList);
+
         ArrayList<RString> 施設入退所コードList = new ArrayList<>();
-//        IItemList<ShisetsuNyutaishoModel> modelList = ItemList.of(new ArrayList<ShisetsuNyutaishoModel>());
 //        if (!modelList.isEmpty()) {
-//            for (ShisetsuNyutaishoModel model : modelList) {
-//                // 入所施設コードをモデルから取得できる想定。
-//                施設入退所コードList.add(new RString("入所施設コード"));
+//            for (ShisetsuNyutaishoRelateModel model : modelList) {
+//                施設入退所コードList.add(model.get介護保険施設入退所モデル().get入所施設コード());
 //            }
 //        }
-        // 動作確認用
-        施設入退所コードList.add(new RString("入所施設コード1"));
-        施設入退所コードList.add(new RString("入所施設コード2"));
-        施設入退所コードList.add(new RString("入所施設コード3"));
-
+        // テスト用コード。
+        施設入退所コードList.add(new RString("1234567891"));
+        施設入退所コードList.add(new RString("1234567892"));
+        施設入退所コードList.add(new RString("1234567893"));
         PanelSessionAccessor.put(div, new RString("施設入退所コードList"), 施設入退所コードList);
 
-        // TODO n8187 久保田
-        // 以下にコメントアウトしている処理は、古いShisetsuNyutaishoManagerを使用したときに考えていたロジック。
-        // 施設入退所履歴取得のManagerを使用する時に削除すること。2015/01/31。
-//// 1 ShisetsuNyutaishoManager.get個人台帳別施設入退所履歴(ShikibetsuCode 個人識別コード, DaichoType 台帳種別)を使用して、履歴を取得する。
-//        ShisetsuNyutaishoManager manager = new ShisetsuNyutaishoManager();
-//        ShisetsuNyutaishoList list = manager.get個人台帳別施設入退所履歴(識別コード, DaichoType.被保険者);
-//// 2 入所施設名称を設定する。
-//        RString 施設名称;
-//        ShisetsuNyutaisho 施設入退所;
-//        if (list.iterator().hasNext()) {
-//            施設入退所 = list.iterator().next();
-//            if (施設入退所.get入所施設().get施設種類() == ShisetsuType.介護保険施設) {
-////    2-1 履歴の入所施設種類が介護施設の場合、URのIKaigoJigyoshaDaichoManager(未実装)のgetJigyoshaCurrent(引数＝事業者番号)を使用して施設名を取得する。
-//                施設名称 = new RString("介護保険施設");
-//            } else {
-////    2-2 履歴の入所施設種類が他特例施設・適用除外施設の場合、JogaiJushochitokureiTaishoShisetsuManager.get対象施設(ShisetsuType 施設種類, ShisetsuCode 施設コード)を使用して施設情報を取得し、事業者名称を設定する。
-//                // TODO N8187 久保田 Managerが古いので再作成が必要。 2014/01/31
-//                JogaiJushochitokureiTaishoShisetsuManager shisetsuManager = new JogaiJushochitokureiTaishoShisetsuManager();
-//                JogaiJushochitokureiTaishoShisetsu tokureiShisetsu = shisetsuManager.get対象施設(施設入退所.get入所施設().get施設種類(), 施設入退所.get入所施設().get施設コード());
-//                施設名称 = tokureiShisetsu.get施設略称();
-//            }
-//            div.getTplShisetsuNyutaisho().getTxtNyushoShisetsu1().setValue(施設名称);
-//            div.getTplShisetsuNyutaisho().getTxtShisetsuNyushoDate1().setValue(施設入退所.get入所処理年月日());
-//            div.getTplShisetsuNyutaisho().getTxtShisetsuTaishoDate1().setValue(施設入退所.get退所処理年月日());
-//        }
-//        if (list.iterator().hasNext()) {
-//            施設入退所 = list.iterator().next();
-//            if (施設入退所.get入所施設().get施設種類() == ShisetsuType.介護保険施設) {
-////    2-1 履歴の入所施設種類が介護施設の場合、URのIKaigoJigyoshaDaichoManager(未実装)のgetJigyoshaCurrent(引数＝事業者番号)を使用して施設名を取得する。
-//                施設名称 = new RString("介護保険施設");
-//            } else {
-////    2-2 履歴の入所施設種類が他特例施設・適用除外施設の場合、JogaiJushochitokureiTaishoShisetsuManager.get対象施設(ShisetsuType 施設種類, ShisetsuCode 施設コード)を使用して施設情報を取得し、事業者名称を設定する。
-//                // TODO N8187 久保田 Managerが古いので再作成が必要。 2014/01/31
-//                JogaiJushochitokureiTaishoShisetsuManager shisetsuManager = new JogaiJushochitokureiTaishoShisetsuManager();
-//                JogaiJushochitokureiTaishoShisetsu tokureiShisetsu = shisetsuManager.get対象施設(施設入退所.get入所施設().get施設種類(), 施設入退所.get入所施設().get施設コード());
-//                施設名称 = tokureiShisetsu.get施設略称();
-//            }
-//            div.getTplShisetsuNyutaisho().getTxtNyushoShisetsu2().setValue(施設名称);
-//            div.getTplShisetsuNyutaisho().getTxtShisetsuNyushoDate2().setValue(施設入退所.get入所処理年月日());
-//            div.getTplShisetsuNyutaisho().getTxtShisetsuTaishoDate2().setValue(施設入退所.get退所処理年月日());
-//        }
-//        if (list.iterator().hasNext()) {
-//            施設入退所 = list.iterator().next();
-//            if (施設入退所.get入所施設().get施設種類() == ShisetsuType.介護保険施設) {
-////    2-1 履歴の入所施設種類が介護施設の場合、URのIKaigoJigyoshaDaichoManager(未実装)のgetJigyoshaCurrent(引数＝事業者番号)を使用して施設名を取得する。
-//                施設名称 = new RString("介護保険施設");
-//            } else {
-////    2-2 履歴の入所施設種類が他特例施設・適用除外施設の場合、JogaiJushochitokureiTaishoShisetsuManager.get対象施設(ShisetsuType 施設種類, ShisetsuCode 施設コード)を使用して施設情報を取得し、事業者名称を設定する。
-//                // TODO N8187 久保田 Managerが古いので再作成が必要。 2014/01/31
-//                JogaiJushochitokureiTaishoShisetsuManager shisetsuManager = new JogaiJushochitokureiTaishoShisetsuManager();
-//                JogaiJushochitokureiTaishoShisetsu tokureiShisetsu = shisetsuManager.get対象施設(施設入退所.get入所施設().get施設種類(), 施設入退所.get入所施設().get施設コード());
-//                施設名称 = tokureiShisetsu.get施設略称();
-//            }
-//            div.getTplShisetsuNyutaisho().getTxtNyushoShisetsu3().setValue(施設名称);
-//            div.getTplShisetsuNyutaisho().getTxtShisetsuNyushoDate3().setValue(施設入退所.get入所処理年月日());
-//            div.getTplShisetsuNyutaisho().getTxtShisetsuTaishoDate3().setValue(施設入退所.get退所処理年月日());
-//        }
+    }
+
+    private void set施設入退所to画面(IItemList<ShisetsuNyutaishoRelateModel> 施設入退所List) {
+
+        if (!施設入退所List.isEmpty()) {
+            div.getTxtNyushoShisetsu1().setValue(施設入退所List.toList().get(0).getJigyoshaMeisho());
+            div.getTxtShisetsuNyushoDate1().setValue(施設入退所List.toList().get(0).get介護保険施設入退所モデル().get入所年月日());
+            div.getTxtShisetsuTaishoDate1().setValue(施設入退所List.toList().get(0).get介護保険施設入退所モデル().get退所年月日());
+            if (1 < 施設入退所List.size()) {
+                div.getTxtNyushoShisetsu2().setValue(施設入退所List.toList().get(1).getJigyoshaMeisho());
+                div.getTxtShisetsuNyushoDate2().setValue(施設入退所List.toList().get(1).get介護保険施設入退所モデル().get入所年月日());
+                div.getTxtShisetsuTaishoDate2().setValue(施設入退所List.toList().get(1).get介護保険施設入退所モデル().get退所年月日());
+            }
+            if (2 < 施設入退所List.size()) {
+                div.getTxtNyushoShisetsu3().setValue(施設入退所List.toList().get(2).getJigyoshaMeisho());
+                div.getTxtShisetsuNyushoDate3().setValue(施設入退所List.toList().get(2).get介護保険施設入退所モデル().get入所年月日());
+                div.getTxtShisetsuTaishoDate3().setValue(施設入退所List.toList().get(2).get介護保険施設入退所モデル().get退所年月日());
+            }
+        }
     }
 
     /**
