@@ -4,12 +4,18 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.KaigoJogaiTokureiTaishoShisetsu.KaigoJogaiTokureiTaishoShisetsuModel;
 import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.ShisetsuNyutaishoTokureiTaishoRelateDac;
+// TODO N8187 久保田 以下のimportはURF.IKaigoJigyoshaDaichoManager 等が使用可能になったら有効にする。
+//import jp.co.ndensan.reams.ur.urf.model.relate.KaigoJigyoshaRelateModel;
+//import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaDaichoManager;
+//import jp.co.ndensan.reams.ur.urf.realservice.KaigoJigyoshaDaichoManagerFactory;
+//import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -56,6 +62,14 @@ public class ShisetsuNyutaishoTokureiTaishoRelateManager {
 
             if (model.get介護保険施設入退所モデル().get台帳種別().equals(DaichoType.被保険者.getCode())) {
 
+                // TODO N8187 久保田 以下の施設入退所情報取得処理はURF.IKaigoJigyoshaDaichoManager が使用可能になったら有効にする。
+//                IKaigoJigyoshaDaichoManager manager = KaigoJigyoshaDaichoManagerFactory.getInstance();
+//                List<KaigoJigyoshaRelateModel> list = manager.findJigyoshaCurrent(new KaigoJigyoshaNo(model.get介護保険施設入退所モデル().get入所施設コード()));
+//                if (!list.isEmpty()) {
+//                    model.setJigyoshaMeisho(list.get(0).get介護事業者モデル().get事業者名称().value());
+//                } else {
+//                    model.setJigyoshaMeisho(RString.EMPTY);
+//                }
             } else if (model.get介護保険施設入退所モデル().get台帳種別().equals(DaichoType.適用除外者.getCode())
                     || model.get介護保険施設入退所モデル().get台帳種別().equals(DaichoType.他市町村住所地特例者.getCode())) {
                 Optional<KaigoJogaiTokureiTaishoShisetsuModel> result = dac.select介護除外住所地特例対象施設ByKey(
