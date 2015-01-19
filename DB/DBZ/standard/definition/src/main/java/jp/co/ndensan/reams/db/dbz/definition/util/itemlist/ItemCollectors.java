@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.util.function.MyFunction;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.Func;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IBiConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.ISupplier;
@@ -49,7 +49,7 @@ public final class ItemCollectors {
         return ItemCollector.of(
                 downstream.container(),
                 downstream.accumulator(),
-                MyFunction.of(downstream.finisher()).andThen(finisher));
+                Func.of(downstream.finisher()).andThen(finisher));
     }
 
     /**

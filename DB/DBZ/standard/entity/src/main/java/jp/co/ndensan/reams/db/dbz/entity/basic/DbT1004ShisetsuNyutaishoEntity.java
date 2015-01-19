@@ -19,6 +19,7 @@ import java.util.Objects;
  */
 public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004ShisetsuNyutaishoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1004ShisetsuNyutaisho");
 
@@ -46,6 +47,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * getInsertDantaiCd
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -54,6 +56,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * setInsertDantaiCd
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -62,6 +65,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * getIsDeleted
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -70,15 +74,16 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * setIsDeleted
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * setLastUpdateReamsLoginId
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -87,6 +92,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * getShichosonCode
+     *
      * @return shichosonCode
      */
     public LasdecCode getShichosonCode() {
@@ -95,6 +101,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * setShichosonCode
+     *
      * @param shichosonCode shichosonCode
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -103,6 +110,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * getShikibetsuCode
+     *
      * @return shikibetsuCode
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -111,6 +119,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * setShikibetsuCode
+     *
      * @param shikibetsuCode shikibetsuCode
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -119,6 +128,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * getShoriTimestamp
+     *
      * @return shoriTimestamp
      */
     public YMDHMS getShoriTimestamp() {
@@ -127,6 +137,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * setShoriTimestamp
+     *
      * @param shoriTimestamp shoriTimestamp
      */
     public void setShoriTimestamp(YMDHMS shoriTimestamp) {
@@ -135,6 +146,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * getDaichoShubetsu
+     *
      * @return daichoShubetsu
      */
     public RString getDaichoShubetsu() {
@@ -143,6 +155,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * setDaichoShubetsu
+     *
      * @param daichoShubetsu daichoShubetsu
      */
     public void setDaichoShubetsu(RString daichoShubetsu) {
@@ -151,6 +164,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * getNyushoShisetsuShurui
+     *
      * @return nyushoShisetsuShurui
      */
     public RString getNyushoShisetsuShurui() {
@@ -159,6 +173,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * setNyushoShisetsuShurui
+     *
      * @param nyushoShisetsuShurui nyushoShisetsuShurui
      */
     public void setNyushoShisetsuShurui(RString nyushoShisetsuShurui) {
@@ -167,6 +182,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * getNyushoShisetsuCode
+     *
      * @return nyushoShisetsuCode
      */
     public RString getNyushoShisetsuCode() {
@@ -175,6 +191,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * setNyushoShisetsuCode
+     *
      * @param nyushoShisetsuCode nyushoShisetsuCode
      */
     public void setNyushoShisetsuCode(RString nyushoShisetsuCode) {
@@ -183,6 +200,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * getNyushoYMD
+     *
      * @return nyushoYMD
      */
     public FlexibleDate getNyushoYMD() {
@@ -191,6 +209,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * setNyushoYMD
+     *
      * @param nyushoYMD nyushoYMD
      */
     public void setNyushoYMD(FlexibleDate nyushoYMD) {
@@ -199,6 +218,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * getTaishoYMD
+     *
      * @return taishoYMD
      */
     public FlexibleDate getTaishoYMD() {
@@ -207,6 +227,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * setTaishoYMD
+     *
      * @param taishoYMD taishoYMD
      */
     public void setTaishoYMD(FlexibleDate taishoYMD) {
@@ -215,6 +236,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * getNyushoShoriYMD
+     *
      * @return nyushoShoriYMD
      */
     public FlexibleDate getNyushoShoriYMD() {
@@ -223,6 +245,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * setNyushoShoriYMD
+     *
      * @param nyushoShoriYMD nyushoShoriYMD
      */
     public void setNyushoShoriYMD(FlexibleDate nyushoShoriYMD) {
@@ -231,6 +254,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * getTaishoShoriYMD
+     *
      * @return taishoShoriYMD
      */
     public FlexibleDate getTaishoShoriYMD() {
@@ -239,6 +263,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * setTaishoShoriYMD
+     *
      * @param taishoShoriYMD taishoShoriYMD
      */
     public void setTaishoShoriYMD(FlexibleDate taishoShoriYMD) {
@@ -247,10 +272,9 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * このエンティティの主キーが他の{@literal DbT1004ShisetsuNyutaishoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT1004ShisetsuNyutaishoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT1004ShisetsuNyutaishoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT1004ShisetsuNyutaishoEntity other) {
@@ -271,6 +295,8 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT1004ShisetsuNyutaishoEntity entity) {
@@ -287,15 +313,12 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
     }
 
     /**
-     * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
         return super.toMd5(shichosonCode, shikibetsuCode, shoriTimestamp, daichoShubetsu, nyushoShisetsuShurui, nyushoShisetsuCode, nyushoYMD, taishoYMD, nyushoShoriYMD, taishoShoriYMD);
     }
-
-// </editor-fold>
-
 
 }
