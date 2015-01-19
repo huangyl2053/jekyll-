@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoCondition;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
@@ -358,15 +359,14 @@ public class ShikakuHenkoRirekiHandler {
         List<HihokenshaDaichoModel> mergedList = new ArrayList<>();
 
         for (HihokenshaDaichoModel editingModel : editingList) {
-            IPredicate<HihokenshaDaichoModel> condition = new HihokenshaDaichoCondition(editingModel);
-            IItemList<HihokenshaDaichoModel> justOneList = baseList.filter(condition);
+            IOptional<HihokenshaDaichoModel> justOne = baseList.findJustOne();
 
-            if (justOneList.isEmpty()) {
+            if (!justOne.isPresent()) {
                 mergedList.add(editingModel);
                 continue;
             }
 
-            HihokenshaDaichoModel baseModel = justOneList.findJustOne().get();
+            HihokenshaDaichoModel baseModel = justOne.get();
             if (editingModel.getState().equals(baseModel.getState())) {
                 mergedList.add(editingModel);
                 continue;
