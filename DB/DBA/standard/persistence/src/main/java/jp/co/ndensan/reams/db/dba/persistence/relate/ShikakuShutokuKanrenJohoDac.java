@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.persistence;
+package jp.co.ndensan.reams.db.dba.persistence.relate;
 
-import jp.co.ndensan.reams.db.dba.model.shikakuido.ShikakuShutokuKanrenJohoModel;
+import jp.co.ndensan.reams.db.dba.model.relate.shikakuido.ShikakuShutokuKanrenJohoModel;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
