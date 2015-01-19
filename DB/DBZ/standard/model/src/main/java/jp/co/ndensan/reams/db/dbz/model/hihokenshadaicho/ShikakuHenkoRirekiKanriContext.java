@@ -48,7 +48,8 @@ public class ShikakuHenkoRirekiKanriContext implements IContext {
      * @param 次履歴 次履歴
      * @param 全履歴 全履歴
      */
-    public ShikakuHenkoRirekiKanriContext(ViewExecutionStatus state, IOptional<HihokenshaDaichoModel> 前履歴, IOptional<HihokenshaDaichoModel> 次履歴, IItemList<HihokenshaDaichoModel> 全履歴) {
+    public ShikakuHenkoRirekiKanriContext(ViewExecutionStatus state,
+            IOptional<HihokenshaDaichoModel> 前履歴, IOptional<HihokenshaDaichoModel> 次履歴, IItemList<HihokenshaDaichoModel> 全履歴) {
         this.state = state;
         this.spec = ValidationSpec.toValue(state);
         this.前履歴 = 前履歴;
@@ -83,7 +84,7 @@ public class ShikakuHenkoRirekiKanriContext implements IContext {
     /**
      * バリデーションチェックを行うか判定します。
      *
-     * @param message　バリデーションメッセージ
+     * @param message バリデーションメッセージ
      * @return バリデーションチェックを行う場合：True
      */
     public boolean shouldSkipValidation(IValidationMessage message) {
