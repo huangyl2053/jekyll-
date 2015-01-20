@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErro
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 資格変更履歴のステータスを泡和す列挙クラスです。
+ * 資格変更履歴のステータスを表す列挙クラスです。
  *
  * @author N8235 船山 洋介
  */
