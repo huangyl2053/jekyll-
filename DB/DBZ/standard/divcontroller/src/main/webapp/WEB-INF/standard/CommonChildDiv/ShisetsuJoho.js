@@ -1,72 +1,6 @@
 ﻿var DBZ;
 (function (DBZ) {
     (function (ShisetsuJoho) {
-        var Events = (function () {
-            function Events() {
-            }
-            Events.onChange_radShisetsuShurui = function () {
-                return "onChange_radShisetsuShurui";
-            };
-            return Events;
-        })();
-        ShisetsuJoho.Events = Events;
-
-        var Controls = (function () {
-            function Controls(fieldName) {
-                this._myName = fieldName;
-            }
-            Controls.myType = function () {
-                return "ShisetsuJoho";
-            };
-
-            Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBZ.ShisetsuJoho.Controls.myType();
-            };
-
-            Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBZ.ShisetsuJoho.Controls.myType() + "_" + fieldName;
-            };
-
-            Controls.prototype.ShisetsuJoho = function () {
-                return new UZA.Panel(this.convFiledNameSelf());
-            };
-
-            Controls.prototype.ddlDaichoShubetsu = function () {
-                return new UZA.DropDownList(this.convFiledName("ddlDaichoShubetsu"));
-            };
-
-            Controls.prototype.radShisetsuShurui = function () {
-                return new UZA.RadioButton(this.convFiledName("radShisetsuShurui"));
-            };
-
-            Controls.prototype.txtShisetsuCode = function () {
-                return new UZA.TextBoxCode(this.convFiledName("txtShisetsuCode"));
-            };
-
-            Controls.prototype.btnJigyoshaInputGuide = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnJigyoshaInputGuide"));
-            };
-
-            Controls.prototype.btnOtherTokureiShisetsuInputGuide = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnOtherTokureiShisetsuInputGuide"));
-            };
-
-            Controls.prototype.btnJogaiShisetsuInputGuide = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnJogaiShisetsuInputGuide"));
-            };
-
-            Controls.prototype.txtShisetsuMeisho = function () {
-                return new UZA.TextBox(this.convFiledName("txtShisetsuMeisho"));
-            };
-            return Controls;
-        })();
-        ShisetsuJoho.Controls = Controls;
-    })(DBZ.ShisetsuJoho || (DBZ.ShisetsuJoho = {}));
-    var ShisetsuJoho = DBZ.ShisetsuJoho;
-})(DBZ || (DBZ = {}));
-var DBZ;
-(function (DBZ) {
-    (function (ShisetsuJoho) {
         var ModeController = (function () {
             function ModeController(fieldName) {
                 this.fieldName = fieldName;
@@ -82,11 +16,16 @@ var DBZ;
 
             ModeController.prototype.priorities = function () {
                 return [
+                    "利用機能",
                     "台帳種別",
                     "施設種類",
                     "入力補助",
                     "表示モード"
                 ];
+            };
+
+            ModeController.prototype.利用機能 = function () {
+                return new Modes.利用機能(this.controls);
             };
 
             ModeController.prototype.台帳種別 = function () {
@@ -109,6 +48,28 @@ var DBZ;
         ShisetsuJoho.ModeController = ModeController;
 
         (function (Modes) {
+            var 利用機能 = (function () {
+                function 利用機能(controls) {
+                    this.controls = controls;
+                }
+                利用機能.prototype.台帳種別表示機能 = function () {
+                };
+
+                利用機能.prototype.全施設対象機能 = function () {
+                };
+
+                利用機能.prototype.被保険者対象機能 = function () {
+                };
+
+                利用機能.prototype.他市町村住所地特例者対象機能 = function () {
+                };
+
+                利用機能.prototype.適用除外者対象機能 = function () {
+                };
+                return 利用機能;
+            })();
+            Modes.利用機能 = 利用機能;
+
             var 台帳種別 = (function () {
                 function 台帳種別(controls) {
                     this.controls = controls;
