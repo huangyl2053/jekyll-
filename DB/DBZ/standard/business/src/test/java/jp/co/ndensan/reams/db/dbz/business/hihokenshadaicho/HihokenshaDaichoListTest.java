@@ -138,8 +138,7 @@ public class HihokenshaDaichoListTest {
             arrayList.add(hihokenshaDaichoModel1);
 
             HihokenshaDaichoModel hihokenshaDaichoModel2 = new HihokenshaDaichoModel(createEntity());
-            hihokenshaDaichoModel2.set資格変更年月日(new FlexibleDate("20150102"));
-            arrayList.add(hihokenshaDaichoModel2);
+            hihokenshaDaichoModel2.set資格変更年月日(FlexibleDate.EMPTY);
             arrayList.add(hihokenshaDaichoModel2);
 
             HihokenshaDaichoModel hihokenshaDaichoModel3 = new HihokenshaDaichoModel(createEntity());
