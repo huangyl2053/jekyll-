@@ -1,3 +1,11 @@
 .ColorOrangeTextBox .UzTextBox {
     background-color: Orange;
 }
+
+.ColorBlueLabel .UzLabel {
+    color: orange;
+}
+
+.ColorRedLabel.UzLabel {
+    color: red;
+}
