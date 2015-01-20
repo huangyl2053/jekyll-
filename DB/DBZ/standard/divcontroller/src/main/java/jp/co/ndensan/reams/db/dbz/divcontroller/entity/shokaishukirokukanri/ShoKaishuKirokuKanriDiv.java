@@ -15,7 +15,7 @@ import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyolist.IShoKaishuJokyoListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyoshosai.IShoKaishuJokyoShosaiDiv;
 import jp.co.ndensan.reams.db.dbz.model.shokofukaishu.ShoKofuKaishuModel;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.model.KiwarigakuMeisai;
+import jp.co.ndensan.reams.db.dbz.model.fuka.KiwarigakuMeisai;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static java.util.Objects.requireNonNull;

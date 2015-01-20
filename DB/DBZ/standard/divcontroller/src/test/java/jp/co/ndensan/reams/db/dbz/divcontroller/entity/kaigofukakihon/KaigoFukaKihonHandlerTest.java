@@ -6,13 +6,14 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigofukakihon;
 
 import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.model.FukaModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
 import jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoManager;
@@ -42,7 +43,7 @@ import static org.mockito.Mockito.*;
 public class KaigoFukaKihonHandlerTest extends DbzTestBase {
 
     private static final TsuchishoNo 通知書番号 = new TsuchishoNo("0000000001");
-    private static final FlexibleYear 賦課年度 = new FlexibleYear("2014");
+    private static final FukaNendo 賦課年度 = new FukaNendo("2014");
     private static final LasdecCode 市町村コード = new LasdecCode("000001");
     private static final ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000002");
     private static final RString 被保険者番号 = new RString("000003");
@@ -60,7 +61,8 @@ public class KaigoFukaKihonHandlerTest extends DbzTestBase {
         @Before
         public void setup() {
             result = createNewDiv();
-            new KaigoFukaKihonHandler(result, createHihokenshaDaichoManager(), createFukaManager(), createHokenryoDankaiManager()).load(通知書番号, 賦課年度, 市町村コード, 識別コード);
+            KaigoFukaKihonSearchKey searchKey = new KaigoFukaKihonSearchKey.Builder(通知書番号, 賦課年度, 市町村コード, 識別コード).build();
+            new KaigoFukaKihonHandler(result, createHihokenshaDaichoManager(), createFukaManager(), createHokenryoDankaiManager()).load(searchKey);
         }
 
         @Test
@@ -101,22 +103,22 @@ public class KaigoFukaKihonHandlerTest extends DbzTestBase {
 
     private static HihokenshaDaichoManager createHihokenshaDaichoManager() {
         HihokenshaDaichoManager mock = mock(HihokenshaDaichoManager.class);
-        IOptional<HihokenshaDaichoModel> hihokenshaDaicho = DbOptional.ofNullable(createHihokenshaDaicho());
+        Optional<HihokenshaDaichoModel> hihokenshaDaicho = Optional.ofNullable(createHihokenshaDaicho());
         when(mock.get最新被保険者台帳(any(LasdecCode.class), any(ShikibetsuCode.class))).thenReturn(hihokenshaDaicho);
         return mock;
     }
 
     private static FukaManager createFukaManager() {
         FukaManager mock = mock(FukaManager.class);
-        IOptional<FukaModel> fuka = DbOptional.ofNullable(createFuka());
-        when(mock.get最新介護賦課(any(FlexibleYear.class), any(TsuchishoNo.class))).thenReturn(fuka);
+        Optional<FukaModel> fuka = Optional.ofNullable(createFuka());
+        when(mock.get最新介護賦課(any(FukaNendo.class), any(TsuchishoNo.class))).thenReturn(fuka);
         return mock;
     }
 
     private static HokenryoDankaiManager createHokenryoDankaiManager() {
         HokenryoDankaiManager mock = mock(HokenryoDankaiManager.class);
-        IOptional<HokenryoDankai> hokenryoDankai = DbOptional.ofNullable(createHokenryoDankai());
-        when(mock.get保険料段階(any(FlexibleYear.class), any(LasdecCode.class), any(RString.class))).thenReturn(hokenryoDankai);
+        Optional<HokenryoDankai> hokenryoDankai = Optional.ofNullable(createHokenryoDankai());
+        when(mock.get保険料段階(any(FukaNendo.class), any(LasdecCode.class), any(RString.class))).thenReturn(hokenryoDankai);
         return mock;
     }
 

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba204001t.SochimotoJohoI
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba204001t.TaskTajutokuTekiyoJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba204001t.TekiyoJiyuInputDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba204001t.dgJushochiTokureiRireki_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShisetsuJoho;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.shisetsujoho.ShisetsuJoho;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;

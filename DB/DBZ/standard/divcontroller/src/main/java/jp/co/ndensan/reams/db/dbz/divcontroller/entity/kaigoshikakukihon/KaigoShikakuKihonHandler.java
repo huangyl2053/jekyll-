@@ -6,8 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoshikakukihon;
 
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKeyBuilder;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.ur.urz.business.IKobetsuJikoKaigoJukyu;
@@ -60,8 +59,8 @@ public class KaigoShikakuKihonHandler {
      */
     public void load(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
 
-        KaigoShikakuKihonSearchKey 検索キー = new KaigoShikakuKihonSearchKeyBuilder(市町村コード, 識別コード).build();
-        IOptional<HihokenshaDaichoModel> daicho = hihokenshaDaichoManager.get最新被保険者台帳(検索キー.get市町村コード(), 検索キー.get識別コード());
+        KaigoShikakuKihonSearchKey 検索キー = new KaigoShikakuKihonSearchKey.Builder(市町村コード, 識別コード).build();
+        Optional<HihokenshaDaichoModel> daicho = hihokenshaDaichoManager.get最新被保険者台帳(検索キー.get市町村コード(), 検索キー.get識別コード());
         if (!daicho.isPresent()) {
             return;
         }

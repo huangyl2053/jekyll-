@@ -35,9 +35,6 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class DbT1001HihokenshaDaichoDacTest extends DbzTestDacBase {
 
-    private static final RString キー_01 = new RString("01");
-    private static final RString キー_02 = new RString("02");
-    private static final RString キー_03 = new RString("03");
     private static final LasdecCode 市町村コード202012 = new LasdecCode("202012");
     private static final LasdecCode 市町村コード202013 = new LasdecCode("202013");
     private static DbT1001HihokenshaDaichoDac sut;

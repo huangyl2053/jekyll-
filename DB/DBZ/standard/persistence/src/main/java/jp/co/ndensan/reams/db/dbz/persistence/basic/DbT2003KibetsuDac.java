@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2003Kibetsu;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT2003Kibetsu.choshuHoho;
@@ -18,7 +20,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -51,8 +52,8 @@ public class DbT2003KibetsuDac implements IModifiable<DbT2003KibetsuEntity> {
      */
     @Transaction
     public DbT2003KibetsuEntity selectByKey(
-            FlexibleYear 調定年度,
-            FlexibleYear 賦課年度,
+            ChoteiNendo 調定年度,
+            FukaNendo 賦課年度,
             TsuchishoNo 通知書番号,
             RDateTime 処理日時,
             RString 徴収方法,
@@ -69,8 +70,8 @@ public class DbT2003KibetsuDac implements IModifiable<DbT2003KibetsuEntity> {
         return accessor.select().
                 table(DbT2003Kibetsu.class).
                 where(and(
-                                eq(choteiNendo, 調定年度),
-                                eq(fukaNendo, 賦課年度),
+                                eq(choteiNendo, 調定年度.value()),
+                                eq(fukaNendo, 賦課年度.value()),
                                 eq(tsuchishoNo, 通知書番号),
                                 eq(shoriTimestamp, 処理日時),
                                 eq(choshuHoho, 徴収方法),
@@ -111,18 +112,5 @@ public class DbT2003KibetsuDac implements IModifiable<DbT2003KibetsuEntity> {
     public int delete(DbT2003KibetsuEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
-    }
-
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
-    /**
-     * 物理削除を行う。
-     *
-     * @param entity DbT2003KibetsuEntity
-     * @return int 件数
-     */
-    @Transaction
-    public int deletePhysical(DbT2003KibetsuEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
     }
 }

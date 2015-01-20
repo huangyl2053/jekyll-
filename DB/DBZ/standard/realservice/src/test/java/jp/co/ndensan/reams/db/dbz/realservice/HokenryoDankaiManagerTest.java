@@ -10,10 +10,11 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.DankaiIndex;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RankKubun;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2013HokenryoDankaiEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.HokenryoDankaiModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoDankaiModel;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.HokenryoDankaiDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -40,7 +41,7 @@ import static org.mockito.Mockito.when;
 public class HokenryoDankaiManagerTest {
 
     private static HokenryoDankaiManager sut;
-    private static final FlexibleYear 賦課年度1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度;
+    private static final FukaNendo 賦課年度1 = new FukaNendo(DbT2013HokenryoDankaiEntityGenerator.DEFAULT_賦課年度);
     private static final DankaiIndex 段階インデックス1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_段階インデックス;
     private static final DankaiIndex 段階インデックス2 = new DankaiIndex(new RString("06"));
     private static final RankKubun ランク区分1 = DbT2013HokenryoDankaiEntityGenerator.DEFAULT_ランク区分;
@@ -49,8 +50,8 @@ public class HokenryoDankaiManagerTest {
     private static final boolean ランク有り = true;
     private static final boolean ランク無し = false;
     private static final Range<FlexibleYear> ランク対象期間 = new Range(new FlexibleYear("2000"), new FlexibleYear("2005"));
-    private static final FlexibleYear 賦課年度_ランク対象期間内 = new FlexibleYear("2001");
-    private static final FlexibleYear 賦課年度_ランク対象期間外 = new FlexibleYear("2008");
+    private static final FukaNendo 賦課年度_ランク対象期間内 = new FukaNendo("2001");
+    private static final FukaNendo 賦課年度_ランク対象期間外 = new FukaNendo("2008");
     private static final LasdecCode 市町村コード_指定有り = new LasdecCode("000001");
     private static final LasdecCode 市町村コード_指定無し = null;
     private static final RString 段階区分1 = new RString("010");
@@ -150,20 +151,20 @@ public class HokenryoDankaiManagerTest {
         HokenryoDankaiModel model1 = createModel(賦課年度1, 段階インデックス1, ランク区分1, 段階区分1);
         HokenryoDankaiModel model2 = createModel(賦課年度1, 段階インデックス2, ランク区分2, 段階区分2);
 
-        when(dac.select保険料段階ByKey(any(FlexibleYear.class), any(DankaiIndex.class), any(RankKubun.class))).thenReturn(model1);
+        when(dac.select保険料段階ByKey(any(FukaNendo.class), any(DankaiIndex.class), any(RankKubun.class))).thenReturn(model1);
 
         List<HokenryoDankaiModel> modelList1 = new ArrayList<>();
         modelList1.add(model1);
-        when(dac.select保険料段階一覧(any(FlexibleYear.class), any(LasdecCode.class), any(RString.class))).thenReturn(modelList1);
+        when(dac.select保険料段階一覧(any(FukaNendo.class), any(LasdecCode.class), any(RString.class))).thenReturn(modelList1);
 
         List<HokenryoDankaiModel> modelList2 = new ArrayList<>();
         modelList2.add(model2);
-        when(dac.select保険料段階一覧(any(FlexibleYear.class), any(RString.class))).thenReturn(modelList2);
+        when(dac.select保険料段階一覧(any(FukaNendo.class), any(RString.class))).thenReturn(modelList2);
 
         List<HokenryoDankaiModel> modelList3 = new ArrayList<>();
         modelList3.add(model1);
         modelList3.add(model2);
-        when(dac.select保険料段階一覧(any(FlexibleYear.class))).thenReturn(modelList3);
+        when(dac.select保険料段階一覧(any(FukaNendo.class))).thenReturn(modelList3);
 
         when(dac.insert(any(HokenryoDankaiModel.class))).thenReturn(1);
         when(dac.update(any(HokenryoDankaiModel.class))).thenReturn(1);
@@ -172,9 +173,9 @@ public class HokenryoDankaiManagerTest {
         return dac;
     }
 
-    private static HokenryoDankaiModel createModel(FlexibleYear 賦課年度, DankaiIndex 段階インデックス, RankKubun ランク区分, RString 段階区分) {
+    private static HokenryoDankaiModel createModel(FukaNendo 賦課年度, DankaiIndex 段階インデックス, RankKubun ランク区分, RString 段階区分) {
         DbT2013HokenryoDankaiEntity entity = DbT2013HokenryoDankaiEntityGenerator.createDbT2013HokenryoDankaiEntity();
-        entity.setFukaNendo(賦課年度);
+        entity.setFukaNendo(賦課年度.value());
         entity.setDankaiIndex(段階インデックス);
         entity.setRankuKubun(ランク区分);
         entity.setDankaiKubun(段階区分);

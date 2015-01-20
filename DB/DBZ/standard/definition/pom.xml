@@ -17,6 +17,8 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzDefinition</artifactId>
+            <version>1.2-densan-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

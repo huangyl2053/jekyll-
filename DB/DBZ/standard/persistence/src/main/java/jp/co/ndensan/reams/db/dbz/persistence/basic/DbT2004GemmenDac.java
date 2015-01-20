@@ -6,6 +6,8 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2004Gemmen;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT2004Gemmen.choteiNendo;
@@ -16,7 +18,6 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT2004GemmenEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -46,8 +47,8 @@ public class DbT2004GemmenDac implements IModifiable<DbT2004GemmenEntity> {
      */
     @Transaction
     public DbT2004GemmenEntity selectByKey(
-            FlexibleYear 調定年度,
-            FlexibleYear 賦課年度,
+            ChoteiNendo 調定年度,
+            FukaNendo 賦課年度,
             TsuchishoNo 通知書番号,
             RDateTime 処理日時) throws NullPointerException {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
@@ -60,8 +61,8 @@ public class DbT2004GemmenDac implements IModifiable<DbT2004GemmenEntity> {
         return accessor.select().
                 table(DbT2004Gemmen.class).
                 where(and(
-                                eq(choteiNendo, 調定年度),
-                                eq(fukaNendo, 賦課年度),
+                                eq(choteiNendo, 調定年度.value()),
+                                eq(fukaNendo, 賦課年度.value()),
                                 eq(tsuchishoNo, 通知書番号),
                                 eq(shoriTimestamp, 処理日時))).
                 toObject(DbT2004GemmenEntity.class);
@@ -100,18 +101,5 @@ public class DbT2004GemmenDac implements IModifiable<DbT2004GemmenEntity> {
     public int delete(DbT2004GemmenEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
-    }
-
-    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
-    /**
-     * 物理削除を行う。
-     *
-     * @param entity DbT2004GemmenEntity
-     * @return int 件数
-     */
-    @Transaction
-    public int deletePhysical(DbT2004GemmenEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
     }
 }

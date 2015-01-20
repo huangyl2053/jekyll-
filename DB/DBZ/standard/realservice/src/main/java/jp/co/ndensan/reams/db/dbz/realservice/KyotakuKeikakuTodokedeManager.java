@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.KyotakuKeikakuTodokedeModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.KyotakuKeikakuTodokedeDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -54,7 +54,7 @@ public class KyotakuKeikakuTodokedeManager {
      * @return KyotakuKeikakuTodokedeModel
      */
     @Transaction
-    public IOptional<KyotakuKeikakuTodokedeModel> get居宅給付計画届出(HihokenshaNo 被保険者番号,
+    public Optional<KyotakuKeikakuTodokedeModel> get居宅給付計画届出(HihokenshaNo 被保険者番号,
             HokenshaNo 証記載保険者番号, ShikibetsuCode 識別コード, FlexibleYearMonth 対象年月, YMDHMS 処理日時) {
 
         return dac.selectByKey(被保険者番号, 証記載保険者番号, 識別コード, 対象年月, 処理日時);

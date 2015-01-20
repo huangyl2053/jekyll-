@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 //import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -54,7 +54,7 @@ public class HihokenshaDaichoFinderBase<T extends HihokenshaDaichoModel> {
      * @param 処理日時 処理日時
      * @return 被保険者台帳
      */
-    public IOptional<T> find被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
+    public Optional<T> find被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
         //TODO #52997
         //1, Dacクラスの、市町村コード・被保険者番号・処理日時を指定するメソッドを呼び出し、DbT1001HihokenshaDaichoEntityを取得します。
         //   Dacに当該メソッドが存在しない場合は追加してください。
@@ -128,7 +128,7 @@ public class HihokenshaDaichoFinderBase<T extends HihokenshaDaichoModel> {
      * @param 被保険者番号 被保険者番号
      * @return 被保険者台帳
      */
-    public IOptional<HihokenshaDaichoModel> find最新被保険者台帳(HihokenshaNo 被保険者番号) {
+    public Optional<HihokenshaDaichoModel> find最新被保険者台帳(HihokenshaNo 被保険者番号) {
         return dac.select最新被保険者台帳(被保険者番号);
 
     }

@@ -14,14 +14,15 @@ import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.KanendoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.TokuchoConfig;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ChoshuHohoKibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.model.helper.KibetsuChoteiKyotsuModelTestHelper;
-import jp.co.ndensan.reams.db.dbz.model.KiwarigakuMeisai;
-import jp.co.ndensan.reams.db.dbz.model.relate.KibetsuChoteiKyotsuModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.KiwarigakuMeisai;
+import jp.co.ndensan.reams.db.dbz.model.relate.fuka.KibetsuChoteiKyotsuModel;
 import jp.co.ndensan.reams.db.dbz.realservice.KiwarigakuFinder;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
@@ -48,8 +49,8 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
 
     private static KiwarigakuDiv result;
 
-    private static final FlexibleYear 調定年度 = new FlexibleYear("2014");
-    private static final FlexibleYear 賦課年度 = new FlexibleYear("2014");
+    private static final ChoteiNendo 調定年度 = new ChoteiNendo("2014");
+    private static final FukaNendo 賦課年度 = new FukaNendo("2014");
     private static final FlexibleYear 納期統一年度 = new FlexibleYear("2000");
     private static final TsuchishoNo 通知書番号 = new TsuchishoNo("00000000000000000001");
     private static final RDateTime 処理日時 = RDateTime.MAX;
@@ -124,7 +125,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
             result = createNewDiv();
             new KiwarigakuHandler(result,
                     createFinder(), create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
-                    .load(納期統一年度, 納期統一年度, 通知書番号, 処理日時);
+                    .load(new ChoteiNendo(納期統一年度), new FukaNendo(納期統一年度), 通知書番号, 処理日時);
 
             assertThat(result.getTblTsuki1().isVisible(), is(true));
             assertThat(result.getTblTsuki1().isDisplayNone(), is(false));
@@ -142,7 +143,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
             result = createNewDiv();
             new KiwarigakuHandler(result,
                     createFinder(), create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
-                    .load(納期統一年度.plusYear(1), 納期統一年度.plusYear(1), 通知書番号, 処理日時);
+                    .load(new ChoteiNendo(納期統一年度.plusYear(1)), new FukaNendo(納期統一年度.plusYear(1)), 通知書番号, 処理日時);
 
             assertThat(result.getTblTsuki1().isVisible(), is(true));
             assertThat(result.getTblTsuki1().isDisplayNone(), is(false));
@@ -160,7 +161,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
             result = createNewDiv();
             new KiwarigakuHandler(result,
                     createFinder(), create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
-                    .load(納期統一年度.minusYear(1), 納期統一年度.minusYear(1), 通知書番号, 処理日時);
+                    .load(new ChoteiNendo(納期統一年度.minusYear(1)), new FukaNendo(納期統一年度.minusYear(1)), 通知書番号, 処理日時);
 
             assertThat(result.getTblTsuki1().isVisible(), is(false));
             assertThat(result.getTblTsuki1().isDisplayNone(), is(true));
@@ -198,7 +199,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
             result = createNewDiv();
             new KiwarigakuHandler(result,
                     createFinder(), create賦課計算Config(), create日付Config(), create普徴Config(), create特徴Config(), create過年度Config())
-                    .load(調定年度, 賦課年度.plusYear(1), 通知書番号, 処理日時);
+                    .load(調定年度, new FukaNendo(賦課年度.value().plusYear(1)), 通知書番号, 処理日時);
 
             assertThat(result.getTblTsuki2().isVisible(), is(false));
             assertThat(result.getTblTsuki2().isDisplayNone(), is(true));
@@ -342,8 +343,8 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
 
     private static KiwarigakuFinder createFinder() {
         KiwarigakuFinder mock = mock(KiwarigakuFinder.class);
-        IOptional<Kiwarigaku> 期割額 = DbOptional.ofNullable(new KiwarigakuCalculator(create期割額List().toList()).calculate());
-        when(mock.load期割額(any(FlexibleYear.class), any(FlexibleYear.class), any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(期割額);
+        Optional<Kiwarigaku> 期割額 = Optional.ofNullable(new KiwarigakuCalculator(create期割額List().toList()).calculate());
+        when(mock.load期割額(any(ChoteiNendo.class), any(FukaNendo.class), any(TsuchishoNo.class), any(RDateTime.class))).thenReturn(期割額);
         return mock;
     }
 
