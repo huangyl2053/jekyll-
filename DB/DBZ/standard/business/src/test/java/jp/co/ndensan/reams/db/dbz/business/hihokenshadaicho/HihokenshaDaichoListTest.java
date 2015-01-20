@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -71,17 +70,14 @@ public class HihokenshaDaichoListTest {
 
     public static class to資格関連異動List extends DbaTestBase {
 
-        //TODO #52997
-        @Before
-
         @Test
         public void to資格関連異動Listは_資格変更年月日がnullの場合_空のリストを返す() {
             ArrayList<HihokenshaDaichoModel> arrayList = new ArrayList<>();
             HihokenshaDaichoModel hihokenshaDaichoModel = new HihokenshaDaichoModel(createEntity());
             arrayList.add(hihokenshaDaichoModel);
 
-            IItemList<HihokenshaDaichoModel> to資格関連異動List = new HihokenshaDaichoList(ItemList.of(arrayList)).to資格関連異動List();
-            assertThat(to資格関連異動List.size(), is(0));
+            IItemList<HihokenshaDaichoModel> result = new HihokenshaDaichoList(ItemList.of(arrayList)).to資格関連異動List();
+            assertThat(result.size(), is(0));
         }
 
         @Test
@@ -91,8 +87,8 @@ public class HihokenshaDaichoListTest {
             hihokenshaDaichoModel.set資格変更年月日(new FlexibleDate("20150101"));
             arrayList.add(hihokenshaDaichoModel);
 
-            IItemList<HihokenshaDaichoModel> to資格関連異動List = new HihokenshaDaichoList(ItemList.of(arrayList)).to資格関連異動List();
-            assertThat(to資格関連異動List.size(), is(1));
+            IItemList<HihokenshaDaichoModel> result = new HihokenshaDaichoList(ItemList.of(arrayList)).to資格関連異動List();
+            assertThat(result.size(), is(1));
         }
     }
 
