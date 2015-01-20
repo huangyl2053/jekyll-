@@ -90,6 +90,65 @@ public class HihokenshaDaichoListTest {
             IItemList<HihokenshaDaichoModel> result = new HihokenshaDaichoList(ItemList.of(arrayList)).to資格関連異動List();
             assertThat(result.size(), is(1));
         }
+
+        @Test
+        public void to資格関連異動Listは_異なる資格変更年月日がある情報を_Listのサイズ取得する() {
+            ArrayList<HihokenshaDaichoModel> arrayList = new ArrayList<>();
+            HihokenshaDaichoModel hihokenshaDaichoModel1 = new HihokenshaDaichoModel(createEntity());
+            hihokenshaDaichoModel1.set資格変更年月日(new FlexibleDate("20150101"));
+            arrayList.add(hihokenshaDaichoModel1);
+
+            HihokenshaDaichoModel hihokenshaDaichoModel2 = new HihokenshaDaichoModel(createEntity());
+            hihokenshaDaichoModel2.set資格変更年月日(new FlexibleDate("20150102"));
+            arrayList.add(hihokenshaDaichoModel2);
+
+            HihokenshaDaichoModel hihokenshaDaichoModel3 = new HihokenshaDaichoModel(createEntity());
+            hihokenshaDaichoModel3.set資格変更年月日(new FlexibleDate("20150103"));
+            arrayList.add(hihokenshaDaichoModel3);
+
+            IItemList<HihokenshaDaichoModel> result = new HihokenshaDaichoList(ItemList.of(arrayList)).to資格関連異動List();
+            assertThat(result.size(), is(arrayList.size()));
+        }
+
+        @Test
+        public void to資格関連異動Listは_同じ資格変更年月日を持つ項目があるListの場合_同じ変更日を除いたサイズのItemListを取得する() {
+            ArrayList<HihokenshaDaichoModel> arrayList = new ArrayList<>();
+            HihokenshaDaichoModel hihokenshaDaichoModel1 = new HihokenshaDaichoModel(createEntity());
+            hihokenshaDaichoModel1.set資格変更年月日(new FlexibleDate("20150101"));
+            arrayList.add(hihokenshaDaichoModel1);
+
+            HihokenshaDaichoModel hihokenshaDaichoModel2 = new HihokenshaDaichoModel(createEntity());
+            hihokenshaDaichoModel2.set資格変更年月日(new FlexibleDate("20150102"));
+            arrayList.add(hihokenshaDaichoModel2);
+            arrayList.add(hihokenshaDaichoModel2);
+
+            HihokenshaDaichoModel hihokenshaDaichoModel3 = new HihokenshaDaichoModel(createEntity());
+            hihokenshaDaichoModel3.set資格変更年月日(new FlexibleDate("20150103"));
+            arrayList.add(hihokenshaDaichoModel3);
+
+            IItemList<HihokenshaDaichoModel> result = new HihokenshaDaichoList(ItemList.of(arrayList)).to資格関連異動List();
+            assertThat(result.size(), is(arrayList.size() - 1));
+        }
+
+        @Test
+        public void to資格関連異動Listは_資格変更年月日がemptyの項目があるListの場合_emptyの変更日を除いたサイズのItemListを取得する() {
+            ArrayList<HihokenshaDaichoModel> arrayList = new ArrayList<>();
+            HihokenshaDaichoModel hihokenshaDaichoModel1 = new HihokenshaDaichoModel(createEntity());
+            hihokenshaDaichoModel1.set資格変更年月日(new FlexibleDate("20150101"));
+            arrayList.add(hihokenshaDaichoModel1);
+
+            HihokenshaDaichoModel hihokenshaDaichoModel2 = new HihokenshaDaichoModel(createEntity());
+            hihokenshaDaichoModel2.set資格変更年月日(new FlexibleDate("20150102"));
+            arrayList.add(hihokenshaDaichoModel2);
+            arrayList.add(hihokenshaDaichoModel2);
+
+            HihokenshaDaichoModel hihokenshaDaichoModel3 = new HihokenshaDaichoModel(createEntity());
+            hihokenshaDaichoModel3.set資格変更年月日(new FlexibleDate("20150103"));
+            arrayList.add(hihokenshaDaichoModel3);
+
+            IItemList<HihokenshaDaichoModel> result = new HihokenshaDaichoList(ItemList.of(arrayList)).to資格関連異動List();
+            assertThat(result.size(), is(arrayList.size() - 1));
+        }
     }
 
     public static DbT1001HihokenshaDaichoEntity createEntity() {
