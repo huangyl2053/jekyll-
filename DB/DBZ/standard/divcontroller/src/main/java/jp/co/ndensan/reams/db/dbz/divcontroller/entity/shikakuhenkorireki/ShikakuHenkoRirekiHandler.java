@@ -199,7 +199,7 @@ public class ShikakuHenkoRirekiHandler {
 
         switch (ViewExecutionStatus.toValue(shikakuHenkoRirekiDiv.getExecutionStatus())) {
             case Add:
-                modifyEntryData();
+                addEntryData();
                 break;
 
             case Modify:
@@ -211,19 +211,32 @@ public class ShikakuHenkoRirekiHandler {
         }
     }
 
+    private void addEntryData() {
+        HihokenshaDaichoModel model = createEntryData();
+        model.set処理日時(new YMDHMS(toGYYMMDDHHMMSS(RDate.getNowDateTime())));
+
+        update資格変更履歴(model);
+    }
+
     private void modifyEntryData() {
+        HihokenshaDaichoModel model = createEntryData();
+        model.set処理日時(new YMDHMS(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiShoriDatetime()));
+
+        update資格変更履歴(model);
+    }
+
+    private HihokenshaDaichoModel createEntryData() {
         HihokenshaDaichoModel model = new HihokenshaDaichoModel();
         model.set資格変更年月日(shikakuHenkoRirekiDiv.getHenkoInput().getTxtHenkoDate().getValue());
         model.set資格変更届出年月日(shikakuHenkoRirekiDiv.getHenkoInput().getTxtHenkoTodokedeDate().getValue());
         model.set資格変更事由(ShikakuHenkoJiyu.toValue(
                 shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoJiyu().getSelectedKey()));
         model.set被保険者番号(new HihokenshaNo(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiHihokenshaNo()));
-        model.set処理日時(new YMDHMS(toGYYMMDDHHMMSS(RDate.getNowDateTime())));
         model.set旧市町村コード(new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoKyuHokensha().getSelectedKey()));
         model.set広住特措置元市町村コード(new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoSochimotoHokensha().getSelectedKey()));
-
-        update資格変更履歴(model);
+        return model;
     }
+
     private static final int BEGININDEX = 0;
     private static final int ENDINDEX = 14;
 
