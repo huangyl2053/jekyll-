@@ -20,17 +20,11 @@ import org.junit.runner.RunWith;
 public class JushochiTokureiDuplicateValidatorTest {
 
     public static class setHihokenshaDaichoData extends DbzTestBase {
-
         //TODO #55852
         //１）住所地特例情報にnullが渡された場合のテストを行う。
-        @Test
-        public void dummy() {
-
-        }
     }
 
     public static class validate extends DbzTestBase {
-
         //TODO #55852
         //バリデーション処理のテストを実装する。
         //１）他市町村住所地特例テーブルに対象者の該当データが存在するとき
@@ -47,10 +41,6 @@ public class JushochiTokureiDuplicateValidatorTest {
         //       メッセージを持たない。
         //３）適用除外者テーブルに対象者の該当データが存在しない場合
         //    メッセージを持たない。
-        @Test
-        public void dummy() {
-
-        }
     }
 
 }

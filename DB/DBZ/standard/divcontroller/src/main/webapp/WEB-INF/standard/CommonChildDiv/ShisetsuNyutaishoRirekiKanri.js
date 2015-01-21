@@ -12,7 +12,9 @@
                     "表示Heightサイズ",
                     "表示widthサイズ",
                     "台帳種別の列を",
-                    "明細表示モード"
+                    "明細表示モード",
+                    "施設種類の列を",
+                    "利用"
                 ];
             };
 
@@ -42,6 +44,14 @@
 
             ModeController.prototype.明細表示モード = function () {
                 return new Modes.明細表示モード(this.controls);
+            };
+
+            ModeController.prototype.施設種類の列を = function () {
+                return new Modes.施設種類の列を(this.controls);
+            };
+
+            ModeController.prototype.利用 = function () {
+                return new Modes.利用(this.controls);
             };
             return ModeController;
         })();
@@ -269,6 +279,68 @@
                 return 明細表示モード;
             })();
             Modes.明細表示モード = 明細表示モード;
+
+            var 施設種類の列を = (function () {
+                function 施設種類の列を(controls) {
+                    this.controls = controls;
+                }
+                施設種類の列を.prototype.表示しない = function () {
+                    var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
+
+                    var columns = gridSetting.columns;
+                    for (var i = 0; i < columns.length; i++) {
+                        if (columns[i].dataName === 'shisetsuShurui') {
+                            columns[i].visible = false;
+                        }
+                    }
+                    gridSetting.columns = columns;
+
+                    this.controls.ccdShisetsuJoho().施設種類().施設種類を表示しない();
+
+                    this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
+                    this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                };
+
+                施設種類の列を.prototype.表示する = function () {
+                    var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
+
+                    var columns = gridSetting.columns;
+                    for (var i = 0; i < columns.length; i++) {
+                        if (columns[i].dataName === 'shisetsuShurui') {
+                            columns[i].visible = true;
+                        }
+                    }
+                    gridSetting.columns = columns;
+
+                    this.controls.ccdShisetsuJoho().施設種類().施設種類を表示する();
+                    this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
+                    this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                };
+                return 施設種類の列を;
+            })();
+            Modes.施設種類の列を = 施設種類の列を;
+
+            var 利用 = (function () {
+                function 利用(controls) {
+                    this.controls = controls;
+                }
+                利用.prototype.台帳種別表示機能 = function () {
+                };
+
+                利用.prototype.全施設対象機能 = function () {
+                };
+
+                利用.prototype.被保険者対象機能 = function () {
+                };
+
+                利用.prototype.他市町村住所地特例者対象機能 = function () {
+                };
+
+                利用.prototype.適用除外者対象機能 = function () {
+                };
+                return 利用;
+            })();
+            Modes.利用 = 利用;
         })(ShisetsuNyutaishoRirekiKanri.Modes || (ShisetsuNyutaishoRirekiKanri.Modes = {}));
         var Modes = ShisetsuNyutaishoRirekiKanri.Modes;
     })(DBZ.ShisetsuNyutaishoRirekiKanri || (DBZ.ShisetsuNyutaishoRirekiKanri = {}));

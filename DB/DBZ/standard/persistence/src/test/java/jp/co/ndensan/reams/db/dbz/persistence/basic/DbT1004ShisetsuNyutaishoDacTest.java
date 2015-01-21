@@ -63,42 +63,37 @@ public class DbT1004ShisetsuNyutaishoDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null,
-                    DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    市町村コード202012,
+                    DEFAULT_識別コード);
         }
 
         @Test(expected = NullPointerException.class)
         public void 識別コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_市町村コード,
-                    null,
-                    DEFAULT_処理日時);
+                    市町村コード202012,
+                    DEFAULT_識別コード);
         }
 
         @Test(expected = NullPointerException.class)
         public void 処理日時がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_市町村コード,
-                    DEFAULT_識別コード,
-                    null);
+                    市町村コード202012,
+                    DEFAULT_識別コード);
         }
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT1004ShisetsuNyutaishoEntity insertedRecord = sut.selectByKey(
-                    DEFAULT_市町村コード,
-                    DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    市町村コード202012,
+                    DEFAULT_識別コード);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT1004ShisetsuNyutaishoEntity insertedRecord = sut.selectByKey(
-                    市町村コード202013,
-                    DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    市町村コード202012,
+                    DEFAULT_識別コード);
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -135,8 +130,7 @@ public class DbT1004ShisetsuNyutaishoDacTest extends DbzTestDacBase {
 
             assertThat(sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_識別コード,
-                    DEFAULT_処理日時), is(notNullValue()));
+                    DEFAULT_識別コード), is(notNullValue()));
         }
     }
 
@@ -154,16 +148,15 @@ public class DbT1004ShisetsuNyutaishoDacTest extends DbzTestDacBase {
         public void 介護保険施設入退所エンティティを渡すと_updateは_介護保険施設入退所を更新する() {
             DbT1004ShisetsuNyutaishoEntity updateRecord = DbT1004ShisetsuNyutaishoEntityGenerator.createDbT1004ShisetsuNyutaishoEntity();
             // TODO 主キー以外の項目を変更してください
-//            updateRecord.set変更したい項目(75);
+            //           updateRecord.set変更したい項目(75);
 
             sut.update(updateRecord);
 
             DbT1004ShisetsuNyutaishoEntity updatedRecord = sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    DEFAULT_識別コード);
 
-//            assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            //         assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
         }
     }
 
@@ -181,12 +174,10 @@ public class DbT1004ShisetsuNyutaishoDacTest extends DbzTestDacBase {
         public void 介護保険施設入退所エンティティを渡すと_deleteは_介護保険施設入退所を削除する() {
             sut.delete(sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_識別コード,
-                    DEFAULT_処理日時));
+                    DEFAULT_識別コード));
             assertThat(sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_識別コード,
-                    DEFAULT_処理日時), is(nullValue()));
+                    DEFAULT_識別コード), is(nullValue()));
         }
     }
 

@@ -274,8 +274,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
      * このエンティティの主キーが他の{@literal DbT1004ShisetsuNyutaishoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT1004ShisetsuNyutaishoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT1004ShisetsuNyutaishoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT1004ShisetsuNyutaishoEntity other) {
@@ -296,6 +295,8 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * {@inheritDoc}
+     *
+     * @param entity
      */
     @Override
     public void shallowCopy(DbT1004ShisetsuNyutaishoEntity entity) {
@@ -312,7 +313,6 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
     }
 
     /**
-     * {@inheritDoc}
      *
      * @return {@inheritDoc}
      */
@@ -321,5 +321,4 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
         return super.toMd5(shichosonCode, shikibetsuCode, shoriTimestamp, daichoShubetsu, nyushoShisetsuShurui, nyushoShisetsuCode, nyushoYMD, taishoYMD, nyushoShoriYMD, taishoShoriYMD);
     }
 
-// </editor-fold>
 }

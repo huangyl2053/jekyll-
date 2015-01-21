@@ -60,7 +60,7 @@
   <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" />
   <ItemGroup>
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShisetsuJoho.ts" />
-    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShikakuHenkoRireki.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\shikakuhenkorireki\ShikakuHenkoRireki.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\IryoHokenRireki.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\JushochiTokureiRireki.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\jushochitokureirirekilist\JushochiTokureiRirekiList.ts" />

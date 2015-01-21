@@ -11,11 +11,13 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuHenkoJiyuHihokensha;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuKaijo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuTekiyo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuHihokensha;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuSoshitsuJiyuHihokennsha;
+//TODO n3327 三浦凌 URに作成した以下のクラスがリリースされたらコメントアウトを解除する。
+//import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuHenkoJiyu;
+//import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
+//import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
+//import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuShutokuJiyu;
+//import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KofuJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -84,8 +86,7 @@ public interface IHihokenshaDaicho {
      *
      * @return 資格取得事由
      */
-    KaigoshikakuShutokuJiyuHihokensha get資格取得事由();
-
+//    KaigoShikakuShutokuJiyu get資格取得事由();
     /**
      * 資格の喪失日を返します。
      *
@@ -105,8 +106,7 @@ public interface IHihokenshaDaicho {
      *
      * @return 資格喪失事由コード
      */
-    KaigoshikakuSoshitsuJiyuHihokennsha get資格喪失事由();
-
+//    KaigoShikakuSoshitsuJiyu get資格喪失事由();
     /**
      * 被保険者が第1号被保険者・第2号被保険者のどちらであるかを示す、被保険者区分を返します。
      *
@@ -133,8 +133,7 @@ public interface IHihokenshaDaicho {
      *
      * @return 変更事由
      */
-    KaigoshikakuHenkoJiyuHihokensha get資格変更事由();
-
+//    KaigoShikakuHenkoJiyu get資格変更事由();
     /**
      * 住所地特例が適用された日付を返します。
      *
@@ -154,8 +153,7 @@ public interface IHihokenshaDaicho {
      *
      * @return 適用事由
      */
-    KaigoshikakuJutokuTekiyo get住所地特例適用事由();
-
+//    KaigoShikakuJutokuTekiyoJiyu get住所地特例適用事由();
     /**
      * 住所地特例が解除された日付を返します。
      *
@@ -175,8 +173,7 @@ public interface IHihokenshaDaicho {
      *
      * @return 解除事由
      */
-    KaigoshikakuJutokuKaijo get住所地特例解除事由コード();
-
+//    KaigoShikakuJutokuKaijoJiyu get住所地特例解除事由();
     //TODO #52997 以下のgetterの戻り値は、modelの対応する値を返すように実装する。
     /**
      * 第1号被保険者となる年齢（65歳）に到達する日付を返します。

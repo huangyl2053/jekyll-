@@ -1,48 +1,48 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki;
-
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
-import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
-import jp.co.ndensan.reams.db.dbz.business.ShikakuSoshitsu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaFinder;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
-import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import org.junit.Before;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
-import org.junit.Test;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-/**
- * 資格特喪履歴情報Divの操作を行うクラスのテストクラスです。
- *
- * @author N8156 宮本 康
- */
-@RunWith(Enclosed.class)
-public class ShikakuTokusoRirekiHandlerTest extends DbzTestBase {
+///*
+// * To change this license header, choose License Headers in Project Properties.
+// * To change this template file, choose Tools | Templates
+// * and open the template in the editor.
+// */
+//package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki;
+//
+//import java.util.ArrayList;
+//import java.util.List;
+//import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
+//import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
+//import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
+//import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoShikakuKihonSearchKey;
+//import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
+//import jp.co.ndensan.reams.db.dbz.business.ShikakuSoshitsu;
+//import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
+//import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
+//import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+//import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaFinder;
+//import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+//import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
+//import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
+//import jp.co.ndensan.reams.uz.uza.biz.Code;
+//import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+//import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+//import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+//import jp.co.ndensan.reams.uz.uza.lang.RString;
+//import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+//import org.junit.Before;
+//import org.junit.experimental.runners.Enclosed;
+//import org.junit.runner.RunWith;
+//import org.junit.Test;
+//import static org.hamcrest.CoreMatchers.is;
+//import static org.junit.Assert.*;
+//import static org.mockito.Matchers.any;
+//import static org.mockito.Mockito.mock;
+//import static org.mockito.Mockito.when;
+//
+///**
+// * 資格特喪履歴情報Divの操作を行うクラスのテストクラスです。
+// *
+// * @author N8156 宮本 康
+// */
+//@RunWith(Enclosed.class)
+//public class ShikakuTokusoRirekiHandlerTest extends DbzTestBase {
 //
 //    private static final LasdecCode 市町村コード = new LasdecCode("000001");
 //    private static final ShikibetsuCode 識別コード = new ShikibetsuCode("000000000000002");
@@ -160,4 +160,4 @@ public class ShikakuTokusoRirekiHandlerTest extends DbzTestBase {
 //        when(mock.get識別コード()).thenReturn(識別コード);
 //        return mock;
 //    }
-}
+//}

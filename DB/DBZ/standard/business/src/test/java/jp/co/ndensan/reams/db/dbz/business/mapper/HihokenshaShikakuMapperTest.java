@@ -8,7 +8,6 @@ import jp.co.ndensan.reams.db.dbz.business.mapper.HihokenshaShikakuMapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshashoSaikofu;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
@@ -29,7 +28,6 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.helper.DbT1001HihokenshaDaichoEntityMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
@@ -39,6 +37,7 @@ import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutoku
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuTekiyo;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuHihokensha;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuSoshitsuJiyuHihokennsha;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KofuJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -69,6 +68,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
     private static final LasdecCode lasdecCode;
     private static final ShikibetsuCode shikibetsuCode;
     private static final YMDHMS shoriTimestamp;
+    private static final ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private static final HihokenshaNo hihokenshaNo;
     private static final RDate ichigoGaitoDate;
     private static final IKaigoShikaku kaigoShikaku;
@@ -76,6 +76,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
     static {
         lasdecCode = new LasdecCode("123456");
+        shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("123456"));
         shikibetsuCode = new ShikibetsuCode("1020304050");
         shoriTimestamp = new YMDHMS("20140402154700");
         hihokenshaNo = new HihokenshaNo(new RString("1234567890"));
@@ -143,7 +144,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
             @Test
             public void toHihokenshaDaichoEntityで変換したとき_結果のgetHihokennshaKubunCodeは_引数のget被保険者区分$getコードと一致する() {
                 result = sut.toHihokenshaDaichoEntity(shikaku);
-                assertThat(new Code(result.getHihokennshaKubunCode()), is(shikaku.get被保険者区分().getCode()));
+                assertThat(result.getHihokennshaKubunCode(), is(shikaku.get被保険者区分().getCode().value()));
             }
 
             @Test
@@ -408,9 +409,9 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
         @Before
         public void setUp() {
             entities = new ArrayList<>();
-            entities.add(DbT1001HihokenshaDaichoEntityMock.getSpiedInstance());
-            entities.add(DbT1001HihokenshaDaichoEntityMock.getSpiedInstance());
-            entities.add(DbT1001HihokenshaDaichoEntityMock.getSpiedInstance());
+//            entities.add(DbT1001HihokenshaDaichoEntityMock.getSpiedInstance());
+//            entities.add(DbT1001HihokenshaDaichoEntityMock.getSpiedInstance());
+//            entities.add(DbT1001HihokenshaDaichoEntityMock.getSpiedInstance());
         }
 
         @Test
@@ -434,7 +435,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUp() {
-            entity = DbT1001HihokenshaDaichoEntityMock.getSpiedInstance();
+//            entity = DbT1001HihokenshaDaichoEntityMock.getSpiedInstance();
         }
 
         public static class Other extends DbzTestBase {
@@ -659,7 +660,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
             @Before
             public void setUp() {
                 entity.setSaikofuKubun(kubun.getCode());
-                entity.setSaikofuJiyuCode(reason.getCode());
+                entity.setSaikofuJiyuCode(new KofuJiyu(reason.getCode()).toRString());
                 entity.setChohyoKofuRirekiID(chohyoID.value());
                 converted = sut.toHihokenshaShikaku(entity);
             }

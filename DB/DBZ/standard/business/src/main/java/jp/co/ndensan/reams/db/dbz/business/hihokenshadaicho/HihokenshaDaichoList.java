@@ -107,22 +107,19 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      */
     public IItemList<HihokenshaDaichoModel> to資格関連異動List() {
         List<HihokenshaDaichoModel> list = new ArrayList<>();
-        //TODO #52997
-        //資格関連異動を表現するためには、被保険者台帳から、
-        //  a, 被保険者台帳の変更日にデータを持つもの
-        //  b, 前の変更日から、データが更新されているもの
-        //の条件を満たす台帳情報を抽出する必要がある。
-        //必要な被保険者台帳情報を、以下の手順で取得する。
-        //
-        //1, 被保険者台帳の変更日を格納する変数henkoDateを用意（初期値 = null)。
-        //2, 被保険者台帳Listの各要素daichoに対して以下の処理を繰り返し実行し、対象の情報を抽出する。
-        //  2-1, 次の判定を行う。
-        //      2-1-1, !daicho.get変更日().isEmpty()
-        //      2-1-2, !daicho.get変更日().equals(henkoDate)
-        //  2-2, 2-1の判定結果が両方ともtrueの場合、以下の処理を行う。
-        //      2-2-1, daichoList.add(daicho)
-        //      2-2-2, henkoDate = daicho.get変更日()
-        //3, 抽出した結果を戻り値として返す。
+
+        FlexibleDate henkoDate = null;
+        for (HihokenshaDaichoModel daicho : daichoList) {
+
+            if (daicho.get資格変更年月日().isEmpty()) {
+                continue;
+            }
+            if (!daicho.get資格変更年月日().equals(henkoDate)) {
+                list.add(daicho);
+                henkoDate = daicho.get資格変更年月日();
+            }
+
+        }
         return ItemList.of(list);
     }
 

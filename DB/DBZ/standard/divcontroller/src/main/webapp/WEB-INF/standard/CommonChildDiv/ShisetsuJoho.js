@@ -16,11 +16,16 @@
 
             ModeController.prototype.priorities = function () {
                 return [
+                    "利用機能",
                     "台帳種別",
                     "施設種類",
                     "入力補助",
                     "表示モード"
                 ];
+            };
+
+            ModeController.prototype.利用機能 = function () {
+                return new Modes.利用機能(this.controls);
             };
 
             ModeController.prototype.台帳種別 = function () {
@@ -43,6 +48,28 @@
         ShisetsuJoho.ModeController = ModeController;
 
         (function (Modes) {
+            var 利用機能 = (function () {
+                function 利用機能(controls) {
+                    this.controls = controls;
+                }
+                利用機能.prototype.台帳種別表示機能 = function () {
+                };
+
+                利用機能.prototype.全施設対象機能 = function () {
+                };
+
+                利用機能.prototype.被保険者対象機能 = function () {
+                };
+
+                利用機能.prototype.他市町村住所地特例者対象機能 = function () {
+                };
+
+                利用機能.prototype.適用除外者対象機能 = function () {
+                };
+                return 利用機能;
+            })();
+            Modes.利用機能 = 利用機能;
+
             var 台帳種別 = (function () {
                 function 台帳種別(controls) {
                     this.controls = controls;
