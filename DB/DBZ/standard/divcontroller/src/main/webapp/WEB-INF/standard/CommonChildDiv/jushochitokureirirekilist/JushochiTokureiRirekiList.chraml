@@ -3483,6 +3483,7 @@ var DBZ;
      
    
            
+   
    <script class="RamlConvert" type="text/javascript">
 var DBZ= DBZ? DBZ: {};
 DBZ['JUSHOCHITOKUREIRIREKILIST'] = {};
@@ -3564,7 +3565,7 @@ return paramArray;
             };
 
             Controls.prototype.JutokuTekiyoInput = function () {
-                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuTekiyoInput"));
+                return new UZA.Panel(this.convFiledName("JutokuTekiyoInput"));
             };
 
             Controls.prototype.txtTekiyoDate = function () {
@@ -3580,7 +3581,7 @@ return paramArray;
             };
 
             Controls.prototype.TekiyojiHokenshaJoho = function () {
-                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuTekiyoInput_TekiyojiHokenshaJoho"));
+                return new UZA.Panel(this.convFiledName("TekiyojiHokenshaJoho"));
             };
 
             Controls.prototype.ddlTekiyojiSochimotoHokensha = function () {
@@ -3596,7 +3597,7 @@ return paramArray;
             };
 
             Controls.prototype.JutokuKaijoInput = function () {
-                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuKaijoInput"));
+                return new UZA.Panel(this.convFiledName("JutokuKaijoInput"));
             };
 
             Controls.prototype.txtKaijoDate = function () {
@@ -3612,7 +3613,7 @@ return paramArray;
             };
 
             Controls.prototype.KaijojiHokenshaJoho = function () {
-                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuKaijoInput_KaijojiHokenshaJoho"));
+                return new UZA.Panel(this.convFiledName("KaijojiHokenshaJoho"));
             };
 
             Controls.prototype.ddlKaijojiSochimotoHokensha = function () {

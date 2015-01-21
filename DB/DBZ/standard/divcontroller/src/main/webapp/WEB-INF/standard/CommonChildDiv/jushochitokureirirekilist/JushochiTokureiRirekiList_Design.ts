@@ -78,7 +78,7 @@ module DBZ {
             }
 
             public JutokuTekiyoInput(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuTekiyoInput"));
+                return new UZA.Panel(this.convFiledName("JutokuTekiyoInput"));
             }
 
             public txtTekiyoDate(): UZA.TextBoxFlexibleDate {
@@ -94,7 +94,7 @@ module DBZ {
             }
 
             public TekiyojiHokenshaJoho(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuTekiyoInput_TekiyojiHokenshaJoho"));
+                return new UZA.Panel(this.convFiledName("TekiyojiHokenshaJoho"));
             }
 
             public ddlTekiyojiSochimotoHokensha(): UZA.DropDownList {
@@ -110,7 +110,7 @@ module DBZ {
             }
 
             public JutokuKaijoInput(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuKaijoInput"));
+                return new UZA.Panel(this.convFiledName("JutokuKaijoInput"));
             }
 
             public txtKaijoDate(): UZA.TextBoxFlexibleDate {
@@ -126,7 +126,7 @@ module DBZ {
             }
 
             public KaijojiHokenshaJoho(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuKaijoInput_KaijojiHokenshaJoho"));
+                return new UZA.Panel(this.convFiledName("KaijojiHokenshaJoho"));
             }
 
             public ddlKaijojiSochimotoHokensha(): UZA.DropDownList {

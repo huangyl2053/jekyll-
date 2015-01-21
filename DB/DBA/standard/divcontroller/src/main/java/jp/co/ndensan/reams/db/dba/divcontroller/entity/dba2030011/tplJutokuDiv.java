@@ -6,25 +6,25 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA2030011;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA2030011.ShisetsuNyutaishoRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.IShisetsuNyutaishoRirekiKanriDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA2030011.JutokuDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.IJushochiTokureiRirekiListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 
 /**
- * tplShisetsuNyutaisho のクラスファイル 
+ * tplJutoku のクラスファイル 
  * 
  * @author 自動生成
  */
-public class tplShisetsuNyutaishoDiv extends TabPanel {
+public class tplJutokuDiv extends TabPanel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ShisetsuNyutaishoRireki")
-    private ShisetsuNyutaishoRirekiDiv ShisetsuNyutaishoRireki;
+    @JsonProperty("Jutoku")
+    private JutokuDiv Jutoku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -32,22 +32,22 @@ public class tplShisetsuNyutaishoDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ShisetsuNyutaishoRireki")
-    public ShisetsuNyutaishoRirekiDiv getShisetsuNyutaishoRireki() {
-        return ShisetsuNyutaishoRireki;
+    @JsonProperty("Jutoku")
+    public JutokuDiv getJutoku() {
+        return Jutoku;
     }
 
-    @JsonProperty("ShisetsuNyutaishoRireki")
-    public void setShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiDiv ShisetsuNyutaishoRireki) {
-        this.ShisetsuNyutaishoRireki=ShisetsuNyutaishoRireki;
+    @JsonProperty("Jutoku")
+    public void setJutoku(JutokuDiv Jutoku) {
+        this.Jutoku=Jutoku;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IShisetsuNyutaishoRirekiKanriDiv getCcdShisetsuNyutaishoRirekiKanri() {
-        return this.getShisetsuNyutaishoRireki().getCcdShisetsuNyutaishoRirekiKanri();
+    public IJushochiTokureiRirekiListDiv getCcdJushochiTokureiRirekiList() {
+        return this.getJutoku().getCcdJushochiTokureiRirekiList();
     }
 
 }

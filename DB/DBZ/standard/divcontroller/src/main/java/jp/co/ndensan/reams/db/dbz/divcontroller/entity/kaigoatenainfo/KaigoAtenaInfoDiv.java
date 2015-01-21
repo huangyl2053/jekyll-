@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.IShikibetsuTaishoHistories;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
@@ -56,5 +57,10 @@ public class KaigoAtenaInfoDiv extends Panel implements IKaigoAtenaInfoDiv {
     @JsonIgnore
     public KaigoAtenaInfoHandler getHandler() {
         return new KaigoAtenaInfoHandler(this);
+    }
+
+    @Override
+    public IShikibetsuTaishoHistories getShikibetsuTaishoHisory() {
+        return atenaInfo.getAtenaShokaiSimpleData().getShikibetsuTaishoHisory();
     }
 }

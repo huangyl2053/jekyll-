@@ -1,8 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoshikakukihon;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoshikakukihon.IKaigoShikakuKihonDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,12 +13,13 @@ import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
- * KaigoShikakuKihon のクラスファイル 
- * 
+ * KaigoShikakuKihon のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv {
@@ -29,6 +29,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtHihokenshaNo")
     private TextBox txtHihokenshaNo;
     @JsonProperty("txtShutokuYmd")
@@ -67,7 +68,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     @JsonProperty("txtHihokenshaNo")
     public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
-        this.txtHihokenshaNo=txtHihokenshaNo;
+        this.txtHihokenshaNo = txtHihokenshaNo;
     }
 
     @JsonProperty("txtShutokuYmd")
@@ -77,7 +78,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     @JsonProperty("txtShutokuYmd")
     public void setTxtShutokuYmd(TextBoxFlexibleDate txtShutokuYmd) {
-        this.txtShutokuYmd=txtShutokuYmd;
+        this.txtShutokuYmd = txtShutokuYmd;
     }
 
     @JsonProperty("txtShutokuJiyu")
@@ -87,7 +88,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     @JsonProperty("txtShutokuJiyu")
     public void setTxtShutokuJiyu(TextBox txtShutokuJiyu) {
-        this.txtShutokuJiyu=txtShutokuJiyu;
+        this.txtShutokuJiyu = txtShutokuJiyu;
     }
 
     @JsonProperty("txtSoshitsuYmd")
@@ -97,7 +98,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     @JsonProperty("txtSoshitsuYmd")
     public void setTxtSoshitsuYmd(TextBoxFlexibleDate txtSoshitsuYmd) {
-        this.txtSoshitsuYmd=txtSoshitsuYmd;
+        this.txtSoshitsuYmd = txtSoshitsuYmd;
     }
 
     @JsonProperty("txtSoshitsuJiyu")
@@ -107,7 +108,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     @JsonProperty("txtSoshitsuJiyu")
     public void setTxtSoshitsuJiyu(TextBox txtSoshitsuJiyu) {
-        this.txtSoshitsuJiyu=txtSoshitsuJiyu;
+        this.txtSoshitsuJiyu = txtSoshitsuJiyu;
     }
 
     @JsonProperty("txtJutokuKubun")
@@ -117,7 +118,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     @JsonProperty("txtJutokuKubun")
     public void setTxtJutokuKubun(TextBox txtJutokuKubun) {
-        this.txtJutokuKubun=txtJutokuKubun;
+        this.txtJutokuKubun = txtJutokuKubun;
     }
 
     @JsonProperty("txtYokaigoJotaiKubun")
@@ -127,7 +128,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     @JsonProperty("txtYokaigoJotaiKubun")
     public void setTxtYokaigoJotaiKubun(TextBox txtYokaigoJotaiKubun) {
-        this.txtYokaigoJotaiKubun=txtYokaigoJotaiKubun;
+        this.txtYokaigoJotaiKubun = txtYokaigoJotaiKubun;
     }
 
     @JsonProperty("txtNinteiKaishiYmd")
@@ -137,7 +138,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     @JsonProperty("txtNinteiKaishiYmd")
     public void setTxtNinteiKaishiYmd(TextBoxDate txtNinteiKaishiYmd) {
-        this.txtNinteiKaishiYmd=txtNinteiKaishiYmd;
+        this.txtNinteiKaishiYmd = txtNinteiKaishiYmd;
     }
 
     @JsonProperty("txtNinteiShuryoYmd")
@@ -147,7 +148,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     @JsonProperty("txtNinteiShuryoYmd")
     public void setTxtNinteiShuryoYmd(TextBoxDate txtNinteiShuryoYmd) {
-        this.txtNinteiShuryoYmd=txtNinteiShuryoYmd;
+        this.txtNinteiShuryoYmd = txtNinteiShuryoYmd;
     }
 
     @JsonProperty("btnNinteiRireki")
@@ -157,7 +158,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     @JsonProperty("btnNinteiRireki")
     public void setBtnNinteiRireki(ButtonDialog btnNinteiRireki) {
-        this.btnNinteiRireki=btnNinteiRireki;
+        this.btnNinteiRireki = btnNinteiRireki;
     }
 
     @JsonProperty("btnHihoRireki")
@@ -167,7 +168,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     @JsonProperty("btnHihoRireki")
     public void setBtnHihoRireki(ButtonDialog btnHihoRireki) {
-        this.btnHihoRireki=btnHihoRireki;
+        this.btnHihoRireki = btnHihoRireki;
     }
 
     @JsonProperty("btnRenrakusaki")
@@ -177,7 +178,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
 
     @JsonProperty("btnRenrakusaki")
     public void setBtnRenrakusaki(ButtonDialog btnRenrakusaki) {
-        this.btnRenrakusaki=btnRenrakusaki;
+        this.btnRenrakusaki = btnRenrakusaki;
     }
 
     /*
@@ -200,7 +201,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
             HihokenrirekiNashiMode[] enumArray = HihokenrirekiNashiMode.values();
 
             for (HihokenrirekiNashiMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -215,11 +216,11 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     }
 
     public HihokenrirekiNashiMode getMode_HihokenrirekiNashiMode() {
-        return (HihokenrirekiNashiMode) _CommonChildDivModeUtil.getMode( this.modes, HihokenrirekiNashiMode.class );
+        return (HihokenrirekiNashiMode) _CommonChildDivModeUtil.getMode(this.modes, HihokenrirekiNashiMode.class);
     }
 
-    public void setMode_HihokenrirekiNashiMode( HihokenrirekiNashiMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, HihokenrirekiNashiMode.class , value );
+    public void setMode_HihokenrirekiNashiMode(HihokenrirekiNashiMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, HihokenrirekiNashiMode.class, value);
     }
 
     public static enum RenrakusakiAriMode implements ICommonChildDivMode {
@@ -236,7 +237,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
             RenrakusakiAriMode[] enumArray = RenrakusakiAriMode.values();
 
             for (RenrakusakiAriMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -251,11 +252,11 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     }
 
     public RenrakusakiAriMode getMode_RenrakusakiAriMode() {
-        return (RenrakusakiAriMode) _CommonChildDivModeUtil.getMode( this.modes, RenrakusakiAriMode.class );
+        return (RenrakusakiAriMode) _CommonChildDivModeUtil.getMode(this.modes, RenrakusakiAriMode.class);
     }
 
-    public void setMode_RenrakusakiAriMode( RenrakusakiAriMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, RenrakusakiAriMode.class , value );
+    public void setMode_RenrakusakiAriMode(RenrakusakiAriMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, RenrakusakiAriMode.class, value);
     }
 
     public static enum NinteirirekiNashiMode implements ICommonChildDivMode {
@@ -272,7 +273,7 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
             NinteirirekiNashiMode[] enumArray = NinteirirekiNashiMode.values();
 
             for (NinteirirekiNashiMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -287,11 +288,11 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     }
 
     public NinteirirekiNashiMode getMode_NinteirirekiNashiMode() {
-        return (NinteirirekiNashiMode) _CommonChildDivModeUtil.getMode( this.modes, NinteirirekiNashiMode.class );
+        return (NinteirirekiNashiMode) _CommonChildDivModeUtil.getMode(this.modes, NinteirirekiNashiMode.class);
     }
 
-    public void setMode_NinteirirekiNashiMode( NinteirirekiNashiMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, NinteirirekiNashiMode.class , value );
+    public void setMode_NinteirirekiNashiMode(NinteirirekiNashiMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, NinteirirekiNashiMode.class, value);
     }
 
     //--------------- この行より下にコードを追加してください -------------------
@@ -303,5 +304,10 @@ public class KaigoShikakuKihonDiv extends Panel implements IKaigoShikakuKihonDiv
     @JsonIgnore
     public KaigoShikakuKihonHandler getHandler() {
         return new KaigoShikakuKihonHandler(this);
+    }
+
+    @Override
+    public HihokenshaNo get被保険者番号() {
+        return new HihokenshaNo(txtHihokenshaNo.getValue());
     }
 }
