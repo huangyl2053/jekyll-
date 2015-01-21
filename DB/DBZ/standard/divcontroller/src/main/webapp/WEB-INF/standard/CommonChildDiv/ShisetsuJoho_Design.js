@@ -4,6 +4,10 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_ddlDaichoShubetsu = function () {
+                return "onChange_ddlDaichoShubetsu";
+            };
+
             Events.onChange_radShisetsuShurui = function () {
                 return "onChange_radShisetsuShurui";
             };

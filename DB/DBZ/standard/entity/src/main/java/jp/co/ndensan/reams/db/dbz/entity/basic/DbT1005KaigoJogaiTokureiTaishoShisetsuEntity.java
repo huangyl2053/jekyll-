@@ -20,6 +20,7 @@ import java.util.Objects;
  */
 public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityBase<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1005KaigoJogaiTokureiTaishoShisetsu");
 
@@ -59,6 +60,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getInsertDantaiCd
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -67,6 +69,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setInsertDantaiCd
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -75,6 +78,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getIsDeleted
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -83,15 +87,16 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setIsDeleted
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * setLastUpdateReamsLoginId
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -100,6 +105,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getJigyoshaShubetsu
+     *
      * @return jigyoshaShubetsu
      */
     public RString getJigyoshaShubetsu() {
@@ -108,6 +114,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setJigyoshaShubetsu
+     *
      * @param jigyoshaShubetsu jigyoshaShubetsu
      */
     public void setJigyoshaShubetsu(RString jigyoshaShubetsu) {
@@ -116,6 +123,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getJigyoshaNo
+     *
      * @return jigyoshaNo
      */
     public RString getJigyoshaNo() {
@@ -124,6 +132,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setJigyoshaNo
+     *
      * @param jigyoshaNo jigyoshaNo
      */
     public void setJigyoshaNo(RString jigyoshaNo) {
@@ -132,6 +141,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getYukoKaishiYMD
+     *
      * @return yukoKaishiYMD
      */
     public FlexibleDate getYukoKaishiYMD() {
@@ -140,6 +150,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setYukoKaishiYMD
+     *
      * @param yukoKaishiYMD yukoKaishiYMD
      */
     public void setYukoKaishiYMD(FlexibleDate yukoKaishiYMD) {
@@ -148,6 +159,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getYukoShuryoYMD
+     *
      * @return yukoShuryoYMD
      */
     public FlexibleDate getYukoShuryoYMD() {
@@ -156,6 +168,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setYukoShuryoYMD
+     *
      * @param yukoShuryoYMD yukoShuryoYMD
      */
     public void setYukoShuryoYMD(FlexibleDate yukoShuryoYMD) {
@@ -164,6 +177,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getKannaiKangaiKubun
+     *
      * @return kannaiKangaiKubun
      */
     public RString getKannaiKangaiKubun() {
@@ -172,6 +186,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setKannaiKangaiKubun
+     *
      * @param kannaiKangaiKubun kannaiKangaiKubun
      */
     public void setKannaiKangaiKubun(RString kannaiKangaiKubun) {
@@ -180,6 +195,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getJigyoshaMeisho
+     *
      * @return jigyoshaMeisho
      */
     public AtenaMeisho getJigyoshaMeisho() {
@@ -188,6 +204,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setJigyoshaMeisho
+     *
      * @param jigyoshaMeisho jigyoshaMeisho
      */
     public void setJigyoshaMeisho(AtenaMeisho jigyoshaMeisho) {
@@ -196,6 +213,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getJigyoshaKanaMeisho
+     *
      * @return jigyoshaKanaMeisho
      */
     public AtenaKanaMeisho getJigyoshaKanaMeisho() {
@@ -204,6 +222,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setJigyoshaKanaMeisho
+     *
      * @param jigyoshaKanaMeisho jigyoshaKanaMeisho
      */
     public void setJigyoshaKanaMeisho(AtenaKanaMeisho jigyoshaKanaMeisho) {
@@ -212,6 +231,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getYubinNo
+     *
      * @return yubinNo
      */
     public YubinNo getYubinNo() {
@@ -220,6 +240,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setYubinNo
+     *
      * @param yubinNo yubinNo
      */
     public void setYubinNo(YubinNo yubinNo) {
@@ -228,6 +249,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getJigyoshaJusho
+     *
      * @return jigyoshaJusho
      */
     public RString getJigyoshaJusho() {
@@ -236,6 +258,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setJigyoshaJusho
+     *
      * @param jigyoshaJusho jigyoshaJusho
      */
     public void setJigyoshaJusho(RString jigyoshaJusho) {
@@ -244,6 +267,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getJigyoshaKanaJusho
+     *
      * @return jigyoshaKanaJusho
      */
     public RString getJigyoshaKanaJusho() {
@@ -252,6 +276,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setJigyoshaKanaJusho
+     *
      * @param jigyoshaKanaJusho jigyoshaKanaJusho
      */
     public void setJigyoshaKanaJusho(RString jigyoshaKanaJusho) {
@@ -260,6 +285,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getTelNo
+     *
      * @return telNo
      */
     public TelNo getTelNo() {
@@ -268,6 +294,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setTelNo
+     *
      * @param telNo telNo
      */
     public void setTelNo(TelNo telNo) {
@@ -276,6 +303,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getFaxNo
+     *
      * @return faxNo
      */
     public TelNo getFaxNo() {
@@ -284,6 +312,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setFaxNo
+     *
      * @param faxNo faxNo
      */
     public void setFaxNo(TelNo faxNo) {
@@ -292,6 +321,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getIdoJiyuCode
+     *
      * @return idoJiyuCode
      */
     public RString getIdoJiyuCode() {
@@ -300,6 +330,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setIdoJiyuCode
+     *
      * @param idoJiyuCode idoJiyuCode
      */
     public void setIdoJiyuCode(RString idoJiyuCode) {
@@ -308,6 +339,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getIdoYMD
+     *
      * @return idoYMD
      */
     public FlexibleDate getIdoYMD() {
@@ -316,6 +348,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setIdoYMD
+     *
      * @param idoYMD idoYMD
      */
     public void setIdoYMD(FlexibleDate idoYMD) {
@@ -324,6 +357,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getDaihyoshaMeisho
+     *
      * @return daihyoshaMeisho
      */
     public AtenaMeisho getDaihyoshaMeisho() {
@@ -332,6 +366,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setDaihyoshaMeisho
+     *
      * @param daihyoshaMeisho daihyoshaMeisho
      */
     public void setDaihyoshaMeisho(AtenaMeisho daihyoshaMeisho) {
@@ -340,6 +375,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getDaihyoshaKanaMeisho
+     *
      * @return daihyoshaKanaMeisho
      */
     public AtenaKanaMeisho getDaihyoshaKanaMeisho() {
@@ -348,6 +384,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setDaihyoshaKanaMeisho
+     *
      * @param daihyoshaKanaMeisho daihyoshaKanaMeisho
      */
     public void setDaihyoshaKanaMeisho(AtenaKanaMeisho daihyoshaKanaMeisho) {
@@ -356,6 +393,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getYakushoku
+     *
      * @return yakushoku
      */
     public RString getYakushoku() {
@@ -364,6 +402,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setYakushoku
+     *
      * @param yakushoku yakushoku
      */
     public void setYakushoku(RString yakushoku) {
@@ -372,6 +411,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getBiko
+     *
      * @return biko
      */
     public RString getBiko() {
@@ -380,6 +420,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setBiko
+     *
      * @param biko biko
      */
     public void setBiko(RString biko) {
@@ -388,6 +429,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getJigyoKaishiYMD
+     *
      * @return jigyoKaishiYMD
      */
     public FlexibleDate getJigyoKaishiYMD() {
@@ -396,6 +438,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setJigyoKaishiYMD
+     *
      * @param jigyoKaishiYMD jigyoKaishiYMD
      */
     public void setJigyoKaishiYMD(FlexibleDate jigyoKaishiYMD) {
@@ -404,6 +447,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getJigyoKyushiYMD
+     *
      * @return jigyoKyushiYMD
      */
     public FlexibleDate getJigyoKyushiYMD() {
@@ -412,6 +456,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setJigyoKyushiYMD
+     *
      * @param jigyoKyushiYMD jigyoKyushiYMD
      */
     public void setJigyoKyushiYMD(FlexibleDate jigyoKyushiYMD) {
@@ -420,6 +465,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getJigyoHaishiYMD
+     *
      * @return jigyoHaishiYMD
      */
     public FlexibleDate getJigyoHaishiYMD() {
@@ -428,6 +474,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setJigyoHaishiYMD
+     *
      * @param jigyoHaishiYMD jigyoHaishiYMD
      */
     public void setJigyoHaishiYMD(FlexibleDate jigyoHaishiYMD) {
@@ -436,6 +483,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * getJigyoSaikaiYMD
+     *
      * @return jigyoSaikaiYMD
      */
     public FlexibleDate getJigyoSaikaiYMD() {
@@ -444,6 +492,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * setJigyoSaikaiYMD
+     *
      * @param jigyoSaikaiYMD jigyoSaikaiYMD
      */
     public void setJigyoSaikaiYMD(FlexibleDate jigyoSaikaiYMD) {
@@ -452,10 +501,9 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * このエンティティの主キーが他の{@literal DbT1005KaigoJogaiTokureiTaishoShisetsuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT1005KaigoJogaiTokureiTaishoShisetsuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT1005KaigoJogaiTokureiTaishoShisetsuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT1005KaigoJogaiTokureiTaishoShisetsuEntity other) {
@@ -505,6 +553,7 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuEntity extends DbTableEntityB
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

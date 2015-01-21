@@ -11,7 +11,10 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import java.util.Objects;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuTatokuTekiyo;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuSoshitsuJiyuTatokuTekiyo;
 
 /**
  * DbT1003TashichosonJushochiTokureiの項目定義クラスです
@@ -19,6 +22,7 @@ import java.util.Objects;
  */
 public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<DbT1003TashichosonJushochiTokureiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1003TashichosonJushochiTokurei");
 
@@ -35,23 +39,24 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
     @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
-    private YMDHMS shoriTimeStamp;
-    private RString tekiyoJiyuCode;
+    private YMDHMS shoriTimestamp;
+    private KaigoshikakuShutokuJiyuTatokuTekiyo tekiyoJiyuCode;
     private FlexibleDate tekiyoYMD;
     private FlexibleDate tekiyoTodokedeYMD;
     private FlexibleDate tekiyoUketsukeYMD;
-    private RString kaijoJiyuCode;
+    private KaigoshikakuSoshitsuJiyuTatokuTekiyo kaijoJiyuCode;
     private FlexibleDate kaijoYMD;
     private FlexibleDate kaijoTodokedeYMD;
     private FlexibleDate kaijoUketsukeYMD;
-    private RString sochiHokenshaNo;
-    private RString sochiHihokenshaNo;
+    private LasdecCode sochiHokenshaNo;
+    private HihokenshaNo sochiHihokenshaNo;
     private FlexibleDate tatokuRenrakuhyoHakkoYMD;
     private FlexibleDate shisetsuTaishoTsuchiHakkoYMD;
     private FlexibleDate shisetsuHenkoTsuchiHakkoYMD;
 
     /**
      * getInsertDantaiCd
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -60,6 +65,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * setInsertDantaiCd
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -68,6 +74,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * getIsDeleted
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -76,15 +83,16 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * setIsDeleted
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * setLastUpdateReamsLoginId
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -93,6 +101,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * getShichosonCode
+     *
      * @return shichosonCode
      */
     public LasdecCode getShichosonCode() {
@@ -101,6 +110,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * setShichosonCode
+     *
      * @param shichosonCode shichosonCode
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -109,6 +119,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * getShikibetsuCode
+     *
      * @return shikibetsuCode
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -117,6 +128,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * setShikibetsuCode
+     *
      * @param shikibetsuCode shikibetsuCode
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -124,39 +136,44 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
     }
 
     /**
-     * getShoriTimeStamp
-     * @return shoriTimeStamp
+     * getShoriTimestamp
+     *
+     * @return shoriTimestamp
      */
-    public YMDHMS getShoriTimeStamp() {
-        return shoriTimeStamp;
+    public YMDHMS getShoriTimestamp() {
+        return shoriTimestamp;
     }
 
     /**
-     * setShoriTimeStamp
-     * @param shoriTimeStamp shoriTimeStamp
+     * setShoriTimestamp
+     *
+     * @param shoriTimestamp shoriTimestamp
      */
-    public void setShoriTimeStamp(YMDHMS shoriTimeStamp) {
-        this.shoriTimeStamp = shoriTimeStamp;
+    public void setShoriTimestamp(YMDHMS shoriTimestamp) {
+        this.shoriTimestamp = shoriTimestamp;
     }
 
     /**
      * getTekiyoJiyuCode
+     *
      * @return tekiyoJiyuCode
      */
-    public RString getTekiyoJiyuCode() {
+    public KaigoshikakuShutokuJiyuTatokuTekiyo getTekiyoJiyuCode() {
         return tekiyoJiyuCode;
     }
 
     /**
      * setTekiyoJiyuCode
+     *
      * @param tekiyoJiyuCode tekiyoJiyuCode
      */
-    public void setTekiyoJiyuCode(RString tekiyoJiyuCode) {
+    public void setTekiyoJiyuCode(KaigoshikakuShutokuJiyuTatokuTekiyo tekiyoJiyuCode) {
         this.tekiyoJiyuCode = tekiyoJiyuCode;
     }
 
     /**
      * getTekiyoYMD
+     *
      * @return tekiyoYMD
      */
     public FlexibleDate getTekiyoYMD() {
@@ -165,6 +182,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * setTekiyoYMD
+     *
      * @param tekiyoYMD tekiyoYMD
      */
     public void setTekiyoYMD(FlexibleDate tekiyoYMD) {
@@ -173,6 +191,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * getTekiyoTodokedeYMD
+     *
      * @return tekiyoTodokedeYMD
      */
     public FlexibleDate getTekiyoTodokedeYMD() {
@@ -181,6 +200,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * setTekiyoTodokedeYMD
+     *
      * @param tekiyoTodokedeYMD tekiyoTodokedeYMD
      */
     public void setTekiyoTodokedeYMD(FlexibleDate tekiyoTodokedeYMD) {
@@ -189,6 +209,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * getTekiyoUketsukeYMD
+     *
      * @return tekiyoUketsukeYMD
      */
     public FlexibleDate getTekiyoUketsukeYMD() {
@@ -197,6 +218,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * setTekiyoUketsukeYMD
+     *
      * @param tekiyoUketsukeYMD tekiyoUketsukeYMD
      */
     public void setTekiyoUketsukeYMD(FlexibleDate tekiyoUketsukeYMD) {
@@ -205,22 +227,25 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * getKaijoJiyuCode
+     *
      * @return kaijoJiyuCode
      */
-    public RString getKaijoJiyuCode() {
+    public KaigoshikakuSoshitsuJiyuTatokuTekiyo getKaijoJiyuCode() {
         return kaijoJiyuCode;
     }
 
     /**
      * setKaijoJiyuCode
+     *
      * @param kaijoJiyuCode kaijoJiyuCode
      */
-    public void setKaijoJiyuCode(RString kaijoJiyuCode) {
+    public void setKaijoJiyuCode(KaigoshikakuSoshitsuJiyuTatokuTekiyo kaijoJiyuCode) {
         this.kaijoJiyuCode = kaijoJiyuCode;
     }
 
     /**
      * getKaijoYMD
+     *
      * @return kaijoYMD
      */
     public FlexibleDate getKaijoYMD() {
@@ -229,6 +254,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * setKaijoYMD
+     *
      * @param kaijoYMD kaijoYMD
      */
     public void setKaijoYMD(FlexibleDate kaijoYMD) {
@@ -237,6 +263,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * getKaijoTodokedeYMD
+     *
      * @return kaijoTodokedeYMD
      */
     public FlexibleDate getKaijoTodokedeYMD() {
@@ -245,6 +272,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * setKaijoTodokedeYMD
+     *
      * @param kaijoTodokedeYMD kaijoTodokedeYMD
      */
     public void setKaijoTodokedeYMD(FlexibleDate kaijoTodokedeYMD) {
@@ -253,6 +281,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * getKaijoUketsukeYMD
+     *
      * @return kaijoUketsukeYMD
      */
     public FlexibleDate getKaijoUketsukeYMD() {
@@ -261,6 +290,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * setKaijoUketsukeYMD
+     *
      * @param kaijoUketsukeYMD kaijoUketsukeYMD
      */
     public void setKaijoUketsukeYMD(FlexibleDate kaijoUketsukeYMD) {
@@ -269,38 +299,43 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * getSochiHokenshaNo
+     *
      * @return sochiHokenshaNo
      */
-    public RString getSochiHokenshaNo() {
+    public LasdecCode getSochiHokenshaNo() {
         return sochiHokenshaNo;
     }
 
     /**
      * setSochiHokenshaNo
+     *
      * @param sochiHokenshaNo sochiHokenshaNo
      */
-    public void setSochiHokenshaNo(RString sochiHokenshaNo) {
+    public void setSochiHokenshaNo(LasdecCode sochiHokenshaNo) {
         this.sochiHokenshaNo = sochiHokenshaNo;
     }
 
     /**
      * getSochiHihokenshaNo
+     *
      * @return sochiHihokenshaNo
      */
-    public RString getSochiHihokenshaNo() {
+    public HihokenshaNo getSochiHihokenshaNo() {
         return sochiHihokenshaNo;
     }
 
     /**
      * setSochiHihokenshaNo
+     *
      * @param sochiHihokenshaNo sochiHihokenshaNo
      */
-    public void setSochiHihokenshaNo(RString sochiHihokenshaNo) {
+    public void setSochiHihokenshaNo(HihokenshaNo sochiHihokenshaNo) {
         this.sochiHihokenshaNo = sochiHihokenshaNo;
     }
 
     /**
      * getTatokuRenrakuhyoHakkoYMD
+     *
      * @return tatokuRenrakuhyoHakkoYMD
      */
     public FlexibleDate getTatokuRenrakuhyoHakkoYMD() {
@@ -309,6 +344,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * setTatokuRenrakuhyoHakkoYMD
+     *
      * @param tatokuRenrakuhyoHakkoYMD tatokuRenrakuhyoHakkoYMD
      */
     public void setTatokuRenrakuhyoHakkoYMD(FlexibleDate tatokuRenrakuhyoHakkoYMD) {
@@ -317,6 +353,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * getShisetsuTaishoTsuchiHakkoYMD
+     *
      * @return shisetsuTaishoTsuchiHakkoYMD
      */
     public FlexibleDate getShisetsuTaishoTsuchiHakkoYMD() {
@@ -325,6 +362,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * setShisetsuTaishoTsuchiHakkoYMD
+     *
      * @param shisetsuTaishoTsuchiHakkoYMD shisetsuTaishoTsuchiHakkoYMD
      */
     public void setShisetsuTaishoTsuchiHakkoYMD(FlexibleDate shisetsuTaishoTsuchiHakkoYMD) {
@@ -333,6 +371,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * getShisetsuHenkoTsuchiHakkoYMD
+     *
      * @return shisetsuHenkoTsuchiHakkoYMD
      */
     public FlexibleDate getShisetsuHenkoTsuchiHakkoYMD() {
@@ -341,6 +380,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * setShisetsuHenkoTsuchiHakkoYMD
+     *
      * @param shisetsuHenkoTsuchiHakkoYMD shisetsuHenkoTsuchiHakkoYMD
      */
     public void setShisetsuHenkoTsuchiHakkoYMD(FlexibleDate shisetsuHenkoTsuchiHakkoYMD) {
@@ -349,9 +389,9 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * このエンティティの主キーが他の{@literal DbT1003TashichosonJushochiTokureiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT1003TashichosonJushochiTokureiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -365,7 +405,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
         if (!Objects.equals(this.shikibetsuCode, other.shikibetsuCode)) {
             return false;
         }
-        if (!Objects.equals(this.shoriTimeStamp, other.shoriTimeStamp)) {
+        if (!Objects.equals(this.shoriTimestamp, other.shoriTimestamp)) {
             return false;
         }
         return true;
@@ -378,7 +418,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
     public void shallowCopy(DbT1003TashichosonJushochiTokureiEntity entity) {
         this.shichosonCode = entity.shichosonCode;
         this.shikibetsuCode = entity.shikibetsuCode;
-        this.shoriTimeStamp = entity.shoriTimeStamp;
+        this.shoriTimestamp = entity.shoriTimestamp;
         this.tekiyoJiyuCode = entity.tekiyoJiyuCode;
         this.tekiyoYMD = entity.tekiyoYMD;
         this.tekiyoTodokedeYMD = entity.tekiyoTodokedeYMD;
@@ -396,15 +436,13 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shichosonCode, shikibetsuCode, shoriTimeStamp, tekiyoJiyuCode, tekiyoYMD, tekiyoTodokedeYMD, tekiyoUketsukeYMD, kaijoJiyuCode, kaijoYMD, kaijoTodokedeYMD, kaijoUketsukeYMD, sochiHokenshaNo, sochiHihokenshaNo, tatokuRenrakuhyoHakkoYMD, shisetsuTaishoTsuchiHakkoYMD, shisetsuHenkoTsuchiHakkoYMD);
+        return super.toMd5(shichosonCode, shikibetsuCode, shoriTimestamp, tekiyoJiyuCode, tekiyoYMD, tekiyoTodokedeYMD, tekiyoUketsukeYMD, kaijoJiyuCode, kaijoYMD, kaijoTodokedeYMD, kaijoUketsukeYMD, sochiHokenshaNo, sochiHihokenshaNo, tatokuRenrakuhyoHakkoYMD, shisetsuTaishoTsuchiHakkoYMD, shisetsuHenkoTsuchiHakkoYMD);
     }
 
 // </editor-fold>
-
-
-
 }
