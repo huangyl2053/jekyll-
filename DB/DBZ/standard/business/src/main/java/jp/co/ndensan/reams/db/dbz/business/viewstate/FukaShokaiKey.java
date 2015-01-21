@@ -175,7 +175,7 @@ public class FukaShokaiKey implements Serializable {
      *
      * @return 氏名
      */
-    public AtenaMeisho 氏名() {
+    public AtenaMeisho get氏名() {
         return 氏名;
     }
 }

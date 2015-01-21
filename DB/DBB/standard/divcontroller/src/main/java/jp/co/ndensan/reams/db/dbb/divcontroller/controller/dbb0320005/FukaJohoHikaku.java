@@ -87,9 +87,9 @@ public class FukaJohoHikaku {
         div.getKariSantei2().setDisplayNone(true);
 
         setHonSantei1(div.getHonSantei1(),
-                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().氏名());
+                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().get氏名());
         setKariSantei1(div.getKariSantei1(),
-                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().氏名());
+                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().get氏名());
     }
 
     private void setDivFor仮1_仮2(FukaJohoHikakuDiv div) {
@@ -99,9 +99,9 @@ public class FukaJohoHikaku {
         div.getKariSantei2().setDisplayNone(false);
 
         setKariSantei1(div.getKariSantei1(),
-                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().氏名());
+                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().get氏名());
         setKariSantei2(div.getKariSantei2(),
-                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().氏名());
+                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().get氏名());
     }
 
     private void setDivFor仮1_本2(FukaJohoHikakuDiv div) {
@@ -111,9 +111,9 @@ public class FukaJohoHikaku {
         div.getKariSantei2().setDisplayNone(true);
 
         setKariSantei1(div.getKariSantei1(),
-                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().氏名());
+                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().get氏名());
         setHonSantei2(div.getHonSantei2(),
-                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().氏名());
+                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().get氏名());
     }
 
     private void setDivFor本1_本2(FukaJohoHikakuDiv div) {
@@ -123,9 +123,9 @@ public class FukaJohoHikaku {
         div.getKariSantei2().setDisplayNone(true);
 
         setHonSantei1(div.getHonSantei1(),
-                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().氏名());
+                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().get氏名());
         setHonSantei2(div.getHonSantei2(),
-                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().氏名());
+                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().get氏名());
     }
 
     private void clearKariSantei1(final KariSantei1Div div) {

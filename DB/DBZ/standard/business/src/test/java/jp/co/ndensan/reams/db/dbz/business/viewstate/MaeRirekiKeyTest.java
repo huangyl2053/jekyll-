@@ -73,7 +73,7 @@ public class MaeRirekiKeyTest extends DbzTestBase {
 
         @Test
         public void 戻り値の氏名は_設定した値と同じ氏名を返す() {
-            assertThat(sut.氏名(), is(氏名));
+            assertThat(sut.get氏名(), is(氏名));
         }
     }
 }

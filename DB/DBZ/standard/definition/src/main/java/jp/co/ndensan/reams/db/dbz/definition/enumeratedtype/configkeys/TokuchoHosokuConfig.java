@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
  */
 public class TokuchoHosokuConfig {
 
-    Map<ConfigKeysTokuchoHosoku, RString> configs;
+    private Map<ConfigKeysTokuchoHosoku, RString> configs;
 
     /**
      * コンストラクタです。

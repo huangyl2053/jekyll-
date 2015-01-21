@@ -27,9 +27,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
 import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
 import jp.co.ndensan.reams.db.dbz.realservice.KiwarigakuFinder;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
@@ -88,7 +86,8 @@ public class FukaRirekiPanel {
      * @param kihonDiv 宛名・介護基本Div
      * @return レスポンスデータ
      */
-    public ResponseData<FukaRirekiPanelDiv> onSelect_dgFukaRirekiAll(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
+    public ResponseData<FukaRirekiPanelDiv> onSelect_dgFukaRirekiAll(
+            FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
 
         IItemList<FukaModel> descList = rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All().reversed();
 
@@ -148,7 +147,8 @@ public class FukaRirekiPanel {
      * @param kihonDiv 宛名・介護基本Div
      * @return レスポンスデータ
      */
-    public ResponseData<FukaRirekiPanelDiv> onSelect_FukaRireki(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
+    public ResponseData<FukaRirekiPanelDiv> onSelect_FukaRireki(
+            FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
 
         FukaModel model = findTargetModel(
                 rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All(),
@@ -168,7 +168,8 @@ public class FukaRirekiPanel {
      * @param kihonDiv 宛名・介護基本Div
      * @return レスポンスデータ
      */
-    public ResponseData<FukaRirekiPanelDiv> onClick_MaeHikaku(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
+    public ResponseData<FukaRirekiPanelDiv> onClick_MaeHikaku(
+            FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
 
         IItemList list = rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All();
         dgFukaRirekiFukaRireki_Row row = rirekiDiv.getDgFukaRirekiFukaRireki().getClickedItem();

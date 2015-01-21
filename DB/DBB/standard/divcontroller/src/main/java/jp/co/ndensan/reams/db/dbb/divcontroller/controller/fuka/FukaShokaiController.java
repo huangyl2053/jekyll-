@@ -42,6 +42,11 @@ public final class FukaShokaiController {
 
     }
 
+    /**
+     * viewStateに保持している賦課対象者キーを取得します。
+     *
+     * @return 賦課対象者キー
+     */
     public static FukaTaishoshaKey getFukaTaishoshaKeyInViewState() {
 
         IViewStateValue<FukaTaishoshaKey> value = ViewStates.access().valueAssignedTo(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
@@ -96,7 +101,7 @@ public final class FukaShokaiController {
 
         FukaModel 前年度賦課モデル = modeloid.get();
         IViewStateValue<MaeRirekiKey> maeRirekiValue = ViewStates.access().valueAssignedToA(MaeRirekiKey.class);
-        MaeRirekiKey maeKey = ViewStateKeyCreator.createMaeRirekiKey(前年度賦課モデル, fukaKey.氏名());
+        MaeRirekiKey maeKey = ViewStateKeyCreator.createMaeRirekiKey(前年度賦課モデル, fukaKey.get氏名());
         maeRirekiValue.put(maeKey);
 
         return maeKey;
