@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.persistence.mappers;
+package jp.co.ndensan.reams.db.dbc.batchservice.step;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbTKyufukanrihyoDataTempTableEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.mappers.KyufukanrihyoDataTempTableMapper;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.ur.urz.batchservice.step.writer.BatchWriters;
-import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process._BatchProcessChunkQueryExecutor;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.testhelper.BatchProcessTestHelper;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
-import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.Test;
@@ -24,52 +24,27 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 /**
- * 給付管理票取込一時データエンティティのマッパークラスのテストクラスです。
+ * 給付管理票取込の編集用情報取得処理クラスのテストクラスです。
  *
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class KyufukanrihyoDataTempTableMapperTest extends DbcTestDacBase {
+public class KyufuKanrihyoInBatchRegistGetEditInfoProcessTest extends DbcTestDacBase {
 
-    private static KyufukanrihyoDataTempTableMapper sut;
     private static final RString 一時テーブル = new RString("DbTKyufukanrihyoInData_TempTable");
 
-    @BeforeClass
-    public static void setUpClass() {
-        sut = InstanceProvider.create(KyufukanrihyoDataTempTableMapper.class);
-    }
-
-    public static class update extends DbcTestDacBase {
+    public static class ProcessTest extends DbcTestDacBase {
 
         @Test
-        public void 一時データのupdateが正常終了すること() {
-            createTempTable();
-            Map<String, Object> param = new HashMap<>();
-            sut.updateHihoNoHenkanShichosonCode1(param);
-            sut.updateHihoNoHenkanShichosonCode2(param);
-            sut.updateHihoNoHenkanShichosonCode3(param);
-            sut.updateHihoNoHenkanShichosonCode4(param);
-            sut.updateShinHihokenshaNo1(param);
-            sut.updateShinHihokenshaNo2(param);
-            sut.updateJigyoshoMeisho1(param);
-            sut.updateJigyoshoMeisho2(param);
-            sut.updateShikibetsuCode1(param);
-            sut.updateShikibetsuCode2(param);
-            sut.updateKanjiMeisho(param);
-            sut.updateShichosonCode1(param);
-            sut.updateShichosonCode2(param);
-        }
-    }
+        public void 編集用情報の取得処理が正常終了すること() {
 
-    public static class getTempData extends DbcTestDacBase {
-
-        @Test
-        public void 一時データが2件のとき_getTempDataは2件のデータを返す() {
             createTempTable();
-            List<DbTKyufukanrihyoDataTempTableEntity> result = sut.getTempData(new HashMap<String, Object>());
-            assertThat(result.size(), is(2));
-            assertThat(result.get(0).getRenban(), is(new RString("1")));
-            assertThat(result.get(1).getRenban(), is(new RString("2")));
+            BatchProcessTestHelper.execute(KyufuKanrihyoInBatchRegistGetEditInfoProcess.class, new HashMap<RString, Object>(), sqlSession);
+
+            KyufukanrihyoDataTempTableMapper sut = InstanceProvider.create(KyufukanrihyoDataTempTableMapper.class);
+            List<DbTKyufukanrihyoDataTempTableEntity> entityList = sut.getTempData(new HashMap<String, Object>());
+
+            assertThat(entityList.size(), is(2));
         }
     }
 

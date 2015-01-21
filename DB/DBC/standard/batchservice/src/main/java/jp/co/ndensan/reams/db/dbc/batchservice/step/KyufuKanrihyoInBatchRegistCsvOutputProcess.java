@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchservice.step;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.DbcMapperInterfaces;
@@ -25,15 +24,19 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -43,19 +46,16 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KyufuKanrihyoInBatchRegistCsvOutputProcess extends BatchProcessBase<DbTKyufukanrihyoDataTempTableEntity> {
 
+    public static final RString INPUT_PARAM_KEY_出力順ID = new RString("出力順ID");
+    public static final RString OUTPUT_PARAM_KEY_一覧ファイル = new RString("一覧ファイル");
+    public static final RString OUTPUT_PARAM_KEY_結果ファイル = new RString("結果ファイル");
+
     private static final RString マッパーID = DbcMapperInterfaces.給付管理票取込_一時データ取得.getFullPath();
-
-    private static final RString 一覧ファイル = new RString("KyufuKanrihyoInIchiRan.csv");
-    private static final RString 結果ファイル = new RString("KyufuKanrihyoInKekka.csv");
-
-    private static final RString 支援事業者未登録 = new RString("支援事業者未登録");
-    private static final RString 集計レコード = new RString("99");
-    private static final FlexibleYearMonth サービス単位出力基準 = new FlexibleYearMonth("200604");
-
-    private static IChohyoShutsuryokujunFinder shutsuryokujunFinder;
-    private static final ReportId 帳票ID = new ReportId(new RString("KyufuKanrihyoInIchiRan"));
-    private InputParameter<Long> 出力順ID;
-
+    private static final ReportId 帳票ID = new ReportId(new RString("DBC900001_KyufukanrihyoTorikomiKekkaIchiran"));
+    private static final RString 一覧EUCエンティティID = new RString("KyufuKanrihyoInIchiRanEntity");
+    private static final RString 結果EUCエンティティID = new RString("KyufuKanrihyoInKekkaEntity");
+    private static final RString 一覧ファイル名 = new RString("KyufuKanrihyoInIchiRan.csv");
+    private static final RString 結果ファイル名 = new RString("KyufuKanrihyoInKekka.csv");
     private static final int 出力順数 = 5;
     private static final List<RString> 出力順パラメータ = Arrays.asList(
             new RString("sortSequence1"),
@@ -69,7 +69,19 @@ public class KyufuKanrihyoInBatchRegistCsvOutputProcess extends BatchProcessBase
             new RString("sortSequence3Order"),
             new RString("sortSequence4Order"),
             new RString("sortSequence5Order"));
+    private static final RString 支援事業者未登録 = new RString("支援事業者未登録");
+    private static final RString 集計レコード = new RString("99");
+    private static final FlexibleYearMonth サービス単位出力基準 = new FlexibleYearMonth("200604");
 
+    private InputParameter<Long> 出力順ID;
+    private OutputParameter<RString> 一覧ファイル;
+    private OutputParameter<RString> 結果ファイル;
+
+    private IChohyoShutsuryokujunFinder shutsuryokujunFinder;
+    private FileSpoolManager ichiranSpoolManager;
+    private FileSpoolManager kekkaSpoolManager;
+    private RString 一覧ファイルパス;
+    private RString 結果ファイルパス;
     private int 連番;
     private int 訪問通所サービス件数;
     private int 短期入所サービス件数;
@@ -85,6 +97,10 @@ public class KyufuKanrihyoInBatchRegistCsvOutputProcess extends BatchProcessBase
         super.initialize();
         shutsuryokujunFinder = InstanceProvider.createWithCustomize(IChohyoShutsuryokujunFinder.class);
         setParameter();
+        ichiranSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, 一覧EUCエンティティID, UzUDE0831EucAccesslogFileType.Csv);
+        kekkaSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, 結果EUCエンティティID, UzUDE0831EucAccesslogFileType.Csv);
+        一覧ファイル = new OutputParameter<>();
+        結果ファイル = new OutputParameter<>();
         連番 = 1;
         訪問通所サービス件数 = 0;
         短期入所サービス件数 = 0;
@@ -98,27 +114,33 @@ public class KyufuKanrihyoInBatchRegistCsvOutputProcess extends BatchProcessBase
 
     @Override
     protected void createWriter() {
-        this.ichiranWriter = BatchWriters.csvWriter(KyufuKanrihyoInIchiRanEntity.class).filePath(getFilePath(一覧ファイル)).build();
-        this.kekkaWriter = BatchWriters.csvWriter(KyufuKanrihyoInKekkaEntity.class).filePath(getFilePath(結果ファイル)).build();
+        一覧ファイルパス = Path.combinePath(ichiranSpoolManager.getEucOutputDirectry(), 一覧ファイル名);
+        結果ファイルパス = Path.combinePath(kekkaSpoolManager.getEucOutputDirectry(), 結果ファイル名);
+        this.ichiranWriter = BatchWriters.csvWriter(KyufuKanrihyoInIchiRanEntity.class).filePath(一覧ファイルパス).build();
+        this.kekkaWriter = BatchWriters.csvWriter(KyufuKanrihyoInKekkaEntity.class).filePath(結果ファイルパス).build();
     }
 
     @Override
     protected void beforeExecute() {
-        ichiranWriter.writeLine(create一覧表Header());
+        ichiranWriter.writeLine(create一覧Header());
         kekkaWriter.writeLine(create結果Header());
     }
 
     @Override
     protected void process(DbTKyufukanrihyoDataTempTableEntity entity) {
-        ichiranWriter.writeLine(create一覧表Data(entity));
+        ichiranWriter.writeLine(to一覧Data(entity));
     }
 
     @Override
     protected void afterExecute() {
-        kekkaWriter.writeLine(create結果Data());
+        kekkaWriter.writeLine(to結果Data());
+        ichiranSpoolManager.spool(一覧ファイルパス);
+        kekkaSpoolManager.spool(結果ファイルパス);
+        一覧ファイル.setValue(一覧ファイルパス);
+        結果ファイル.setValue(結果ファイルパス);
     }
 
-    private KyufuKanrihyoInIchiRanEntity create一覧表Header() {
+    private KyufuKanrihyoInIchiRanEntity create一覧Header() {
         KyufuKanrihyoInIchiRanEntity csvEntity = new KyufuKanrihyoInIchiRanEntity();
         csvEntity.set連番(new RString("連番"));
         csvEntity.set対象年月(new RString("対象年月"));
@@ -145,7 +167,7 @@ public class KyufuKanrihyoInBatchRegistCsvOutputProcess extends BatchProcessBase
         return csvEntity;
     }
 
-    private KyufuKanrihyoInIchiRanEntity create一覧表Data(DbTKyufukanrihyoDataTempTableEntity entity) {
+    private KyufuKanrihyoInIchiRanEntity to一覧Data(DbTKyufukanrihyoDataTempTableEntity entity) {
 
         KyufuKanrihyoInIchiRanEntity csvEntity = new KyufuKanrihyoInIchiRanEntity();
 
@@ -226,7 +248,7 @@ public class KyufuKanrihyoInBatchRegistCsvOutputProcess extends BatchProcessBase
         return csvEntity;
     }
 
-    private KyufuKanrihyoInKekkaEntity create結果Data() {
+    private KyufuKanrihyoInKekkaEntity to結果Data() {
 
         KyufuKanrihyoInKekkaEntity csvEntity = new KyufuKanrihyoInKekkaEntity();
 
@@ -252,24 +274,6 @@ public class KyufuKanrihyoInBatchRegistCsvOutputProcess extends BatchProcessBase
         csvEntity.set合計件数(getCommaValue(訪問通所サービス件数 + 短期入所サービス件数 + 居宅サービス件数));
 
         return csvEntity;
-    }
-
-    private static RString getFilePath(RString fileName) {
-        RStringBuilder filePath = new RStringBuilder();
-        filePath.append("src")
-                .append(File.separator).append("main")
-                .append(File.separator).append("resources")
-                .append(File.separator).append("jp")
-                .append(File.separator).append("co")
-                .append(File.separator).append("ndensan")
-                .append(File.separator).append("reams")
-                .append(File.separator).append("db")
-                .append(File.separator).append("dbc")
-                .append(File.separator).append("batchservice")
-                .append(File.separator).append("step")
-                .append(File.separator).append("csv")
-                .append(File.separator).append(fileName);
-        return filePath.toRString();
     }
 
     private RString getCommaValue(RString data) {

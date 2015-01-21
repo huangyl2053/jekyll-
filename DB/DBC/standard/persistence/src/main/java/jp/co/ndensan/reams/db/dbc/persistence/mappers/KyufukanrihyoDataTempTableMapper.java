@@ -22,6 +22,84 @@ public class KyufukanrihyoDataTempTableMapper implements IKyufukanrihyoDataTempT
     SqlSession session;
 
     @Override
+    public void updateHihoNoHenkanShichosonCode1(Map<String, Object> param) {
+        IKyufukanrihyoDataTempTableMapper mapper = session.getMapper(IKyufukanrihyoDataTempTableMapper.class);
+        mapper.updateHihoNoHenkanShichosonCode1(param);
+    }
+
+    @Override
+    public void updateHihoNoHenkanShichosonCode2(Map<String, Object> param) {
+        IKyufukanrihyoDataTempTableMapper mapper = session.getMapper(IKyufukanrihyoDataTempTableMapper.class);
+        mapper.updateHihoNoHenkanShichosonCode2(param);
+    }
+
+    @Override
+    public void updateHihoNoHenkanShichosonCode3(Map<String, Object> param) {
+        IKyufukanrihyoDataTempTableMapper mapper = session.getMapper(IKyufukanrihyoDataTempTableMapper.class);
+        mapper.updateHihoNoHenkanShichosonCode3(param);
+    }
+
+    @Override
+    public void updateHihoNoHenkanShichosonCode4(Map<String, Object> param) {
+        IKyufukanrihyoDataTempTableMapper mapper = session.getMapper(IKyufukanrihyoDataTempTableMapper.class);
+        mapper.updateHihoNoHenkanShichosonCode4(param);
+    }
+
+    @Override
+    public void updateShinHihokenshaNo1(Map<String, Object> param) {
+        IKyufukanrihyoDataTempTableMapper mapper = session.getMapper(IKyufukanrihyoDataTempTableMapper.class);
+        mapper.updateShinHihokenshaNo1(param);
+    }
+
+    @Override
+    public void updateShinHihokenshaNo2(Map<String, Object> param) {
+        IKyufukanrihyoDataTempTableMapper mapper = session.getMapper(IKyufukanrihyoDataTempTableMapper.class);
+        mapper.updateShinHihokenshaNo2(param);
+    }
+
+    @Override
+    public void updateJigyoshoMeisho1(Map<String, Object> param) {
+        IKyufukanrihyoDataTempTableMapper mapper = session.getMapper(IKyufukanrihyoDataTempTableMapper.class);
+        mapper.updateJigyoshoMeisho1(param);
+    }
+
+    @Override
+    public void updateJigyoshoMeisho2(Map<String, Object> param) {
+        IKyufukanrihyoDataTempTableMapper mapper = session.getMapper(IKyufukanrihyoDataTempTableMapper.class);
+        mapper.updateJigyoshoMeisho2(param);
+    }
+
+    @Override
+    public void updateShikibetsuCode1(Map<String, Object> param) {
+        IKyufukanrihyoDataTempTableMapper mapper = session.getMapper(IKyufukanrihyoDataTempTableMapper.class);
+        mapper.updateShikibetsuCode1(param);
+    }
+
+    @Override
+    public void updateShikibetsuCode2(Map<String, Object> param) {
+        IKyufukanrihyoDataTempTableMapper mapper = session.getMapper(IKyufukanrihyoDataTempTableMapper.class);
+        mapper.updateShikibetsuCode2(param);
+    }
+
+    @Override
+    public void updateKanjiMeisho(Map<String, Object> param) {
+        IKyufukanrihyoDataTempTableMapper mapper = session.getMapper(IKyufukanrihyoDataTempTableMapper.class);
+        mapper.updateKanjiMeisho(param);
+    }
+
+    @Override
+    public void updateShichosonCode1(Map<String, Object> param) {
+        IKyufukanrihyoDataTempTableMapper mapper = session.getMapper(IKyufukanrihyoDataTempTableMapper.class);
+        mapper.updateShichosonCode1(param);
+    }
+
+    @Override
+    public void updateShichosonCode2(Map<String, Object> param) {
+        IKyufukanrihyoDataTempTableMapper mapper = session.getMapper(IKyufukanrihyoDataTempTableMapper.class);
+        mapper.updateShichosonCode2(param);
+    }
+
+    @Override
     public List<DbTKyufukanrihyoDataTempTableEntity> getTempData(Map<String, Object> param) {
         IKyufukanrihyoDataTempTableMapper mapper = session.getMapper(IKyufukanrihyoDataTempTableMapper.class);
         return mapper.getTempData(param);

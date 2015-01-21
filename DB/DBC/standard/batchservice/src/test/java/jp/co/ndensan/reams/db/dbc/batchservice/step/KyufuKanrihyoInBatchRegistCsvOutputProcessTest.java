@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchservice.step;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,13 +14,13 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.KyufuKanrihyoInIchiRanEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.KyufuKanrihyoInKekkaEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.ur.urz.batchservice.step.writer.BatchWriters;
+import jp.co.ndensan.reams.uz.uza.batch.flow._StepResult;
 import jp.co.ndensan.reams.uz.uza.batch.process._BatchProcessChunkQueryExecutor;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.testhelper.BatchProcessTestHelper;
 import org.junit.experimental.runners.Enclosed;
@@ -38,10 +37,7 @@ import static org.junit.Assert.*;
 @RunWith(Enclosed.class)
 public class KyufuKanrihyoInBatchRegistCsvOutputProcessTest extends DbcTestDacBase {
 
-    private static final RString 一時テーブル = new RString("KyufuKanrihyoTorikomiTemp");
-    private static final RString 一覧ファイル = new RString("KyufuKanrihyoInIchiRan.csv");
-    private static final RString 結果ファイル = new RString("KyufuKanrihyoInKekka.csv");
-
+    private static final RString 一時テーブル = new RString("DbTKyufukanrihyoInData_TempTable");
     private static final RString 対象年月 = new RString("200412");
     private static final RString 支援事業者番号 = new RString("0001");
     private static final RString 支援事業者名称 = new RString("支援事業者名称1");
@@ -64,81 +60,77 @@ public class KyufuKanrihyoInBatchRegistCsvOutputProcessTest extends DbcTestDacBa
     private static final RString 証記載保険者番号 = new RString("0004");
     private static final RString 備考 = RString.EMPTY;
     private static final RString 支援事業者未登録 = new RString("支援事業者未登録");
-    private static final RString 集計レコード = new RString("99");
-
+    private static final RString 明細行 = new RString("99");
     private static final RString 作成日付 = RDate.getNowDate().seireki().separator(Separator.SLASH).toDateString();
 
     public static class ProcessTest extends DbcTestDacBase {
 
         @Test
-        public void 給付管理票取込結果一覧表のCSVが正しく出力されること() {
+        public void 給付管理票取込のCSVが正しく出力されること() {
 
             createTempTable();
-            BatchProcessTestHelper.execute(KyufuKanrihyoInBatchRegistCsvOutputProcess.class, createSqlParameter(), sqlSession);
+            _StepResult result = BatchProcessTestHelper.execute(KyufuKanrihyoInBatchRegistCsvOutputProcess.class, createSqlParameter(), sqlSession);
 
-            List<KyufuKanrihyoInIchiRanEntity> entityList = readIchiRanCsvFile();
+            List<KyufuKanrihyoInIchiRanEntity> entityList = readIchiRanCsvFile(result);
 
-            KyufuKanrihyoInIchiRanEntity entity = entityList.get(0);
-            assertThat(entity.get連番(), is(new RString("1")));
-            assertThat(entity.get対象年月(), is(対象年月));
-            assertThat(entity.get支援事業者番号(), is(支援事業者番号));
-            assertThat(entity.get支援事業者名称(), is(支援事業者名称));
-            assertThat(entity.get計画作成区分コード(), is(計画作成区分コード));
-            assertThat(entity.get計画作成区分(), is(計画作成区分));
-            assertThat(entity.get作成区分コード(), is(作成区分コード));
-            assertThat(entity.get作成区分(), is(作成区分));
-            assertThat(entity.get被保険者番号(), is(被保険者番号));
-            assertThat(entity.get被保険者氏名(), is(被保険者氏名));
-            assertThat(entity.get作成種別区分コード(), is(作成種別区分コード));
-            assertThat(entity.get作成種別区分(), is(作成種別区分));
-            assertThat(entity.get要介護状態区分コード(), is(要介護状態区分コード));
-            assertThat(entity.get要介護状態区分(), is(要介護状態区分));
-            assertThat(entity.get限度額管理期間_開始(), is(限度額管理期間_開始));
-            assertThat(entity.get限度額管理期間_終了(), is(限度額管理期間_終了));
-            assertThat(entity.get区分支給限度基準額(), is(区分支給限度基準額));
-            assertThat(entity.get指定サービス単位(), is(指定サービス単位));
-            assertThat(entity.get基準該当サービス単位(), is(基準該当サービス単位));
-            assertThat(entity.get合計単位(), is(合計単位));
-            assertThat(entity.get証記載保険者番号(), is(証記載保険者番号));
-            assertThat(entity.get備考(), is(備考));
+            KyufuKanrihyoInIchiRanEntity ichiranEntity = entityList.get(0);
+            assertThat(ichiranEntity.get連番(), is(new RString("1")));
+            assertThat(ichiranEntity.get対象年月(), is(対象年月));
+            assertThat(ichiranEntity.get支援事業者番号(), is(支援事業者番号));
+            assertThat(ichiranEntity.get支援事業者名称(), is(支援事業者名称));
+            assertThat(ichiranEntity.get計画作成区分コード(), is(計画作成区分コード));
+            assertThat(ichiranEntity.get計画作成区分(), is(計画作成区分));
+            assertThat(ichiranEntity.get作成区分コード(), is(作成区分コード));
+            assertThat(ichiranEntity.get作成区分(), is(作成区分));
+            assertThat(ichiranEntity.get被保険者番号(), is(被保険者番号));
+            assertThat(ichiranEntity.get被保険者氏名(), is(被保険者氏名));
+            assertThat(ichiranEntity.get作成種別区分コード(), is(作成種別区分コード));
+            assertThat(ichiranEntity.get作成種別区分(), is(作成種別区分));
+            assertThat(ichiranEntity.get要介護状態区分コード(), is(要介護状態区分コード));
+            assertThat(ichiranEntity.get要介護状態区分(), is(要介護状態区分));
+            assertThat(ichiranEntity.get限度額管理期間_開始(), is(限度額管理期間_開始));
+            assertThat(ichiranEntity.get限度額管理期間_終了(), is(限度額管理期間_終了));
+            assertThat(ichiranEntity.get区分支給限度基準額(), is(区分支給限度基準額));
+            assertThat(ichiranEntity.get指定サービス単位(), is(指定サービス単位));
+            assertThat(ichiranEntity.get基準該当サービス単位(), is(基準該当サービス単位));
+            assertThat(ichiranEntity.get合計単位(), is(合計単位));
+            assertThat(ichiranEntity.get証記載保険者番号(), is(証記載保険者番号));
+            assertThat(ichiranEntity.get備考(), is(備考));
 
-            entity = entityList.get(1);
-            assertThat(entity.get連番(), is(new RString("2")));
-            assertThat(entity.get計画作成区分コード(), is(RString.EMPTY));
-            assertThat(entity.get計画作成区分(), is(RString.EMPTY));
-            assertThat(entity.get作成区分コード(), is(RString.EMPTY));
-            assertThat(entity.get作成区分(), is(RString.EMPTY));
-            assertThat(entity.get作成種別区分コード(), is(RString.EMPTY));
-            assertThat(entity.get作成種別区分(), is(RString.EMPTY));
-            assertThat(entity.get区分支給限度基準額(), is(new RString("-1,000")));
-            assertThat(entity.get指定サービス単位(), is(new RString("-2,000")));
-            assertThat(entity.get基準該当サービス単位(), is(new RString("-3,000")));
-            assertThat(entity.get合計単位(), is(new RString("-4,000")));
-            assertThat(entity.get備考(), is(支援事業者未登録));
+            ichiranEntity = entityList.get(1);
+            assertThat(ichiranEntity.get連番(), is(new RString("2")));
+            assertThat(ichiranEntity.get計画作成区分コード(), is(RString.EMPTY));
+            assertThat(ichiranEntity.get計画作成区分(), is(RString.EMPTY));
+            assertThat(ichiranEntity.get作成区分コード(), is(RString.EMPTY));
+            assertThat(ichiranEntity.get作成区分(), is(RString.EMPTY));
+            assertThat(ichiranEntity.get作成種別区分コード(), is(RString.EMPTY));
+            assertThat(ichiranEntity.get作成種別区分(), is(RString.EMPTY));
+            assertThat(ichiranEntity.get区分支給限度基準額(), is(new RString("-1,000")));
+            assertThat(ichiranEntity.get指定サービス単位(), is(new RString("-2,000")));
+            assertThat(ichiranEntity.get基準該当サービス単位(), is(new RString("-3,000")));
+            assertThat(ichiranEntity.get合計単位(), is(new RString("-4,000")));
+            assertThat(ichiranEntity.get備考(), is(支援事業者未登録));
 
-            entity = entityList.get(2);
-            assertThat(entity.get連番(), is(new RString("3")));
-            assertThat(entity.get指定サービス単位(), is(RString.EMPTY));
-            assertThat(entity.get基準該当サービス単位(), is(RString.EMPTY));
-        }
+            ichiranEntity = entityList.get(2);
+            assertThat(ichiranEntity.get連番(), is(new RString("3")));
+            assertThat(ichiranEntity.get指定サービス単位(), is(RString.EMPTY));
+            assertThat(ichiranEntity.get基準該当サービス単位(), is(RString.EMPTY));
 
-        @Test
-        public void 給付管理票取込結果のCSVが正しく出力されること() {
-
-            KyufuKanrihyoInKekkaEntity entity = readKekkaCsvFile();
-            assertThat(entity.get作成日付(), is(作成日付));
-            assertThat(entity.get作成時間().length(), is(8));
-            assertThat(entity.get作成時間().substring(2, 3), is(new RString(":")));
-            assertThat(entity.get作成時間().substring(5, 6), is(new RString(":")));
-            assertThat(entity.get訪問通所サービス件数(), is(new RString("1")));
-            assertThat(entity.get短期入所サービス件数(), is(new RString("2")));
-            assertThat(entity.get居宅サービス件数(), is(new RString("3")));
-            assertThat(entity.get合計件数(), is(new RString("6")));
+            KyufuKanrihyoInKekkaEntity kekkaEntity = readKekkaCsvFile(result);
+            assertThat(kekkaEntity.get作成日付(), is(作成日付));
+            assertThat(kekkaEntity.get作成時間().length(), is(8));
+            assertThat(kekkaEntity.get作成時間().substring(2, 3), is(new RString(":")));
+            assertThat(kekkaEntity.get作成時間().substring(5, 6), is(new RString(":")));
+            assertThat(kekkaEntity.get訪問通所サービス件数(), is(new RString("1")));
+            assertThat(kekkaEntity.get短期入所サービス件数(), is(new RString("2")));
+            assertThat(kekkaEntity.get居宅サービス件数(), is(new RString("3")));
+            assertThat(kekkaEntity.get合計件数(), is(new RString("6")));
         }
     }
 
-    private static List<KyufuKanrihyoInIchiRanEntity> readIchiRanCsvFile() {
-        CsvReader csvReader = createCsvReader(一覧ファイル, KyufuKanrihyoInIchiRanEntity.class);
+    private static List<KyufuKanrihyoInIchiRanEntity> readIchiRanCsvFile(_StepResult result) {
+        RString filePath = result.getValue(RString.class, KyufuKanrihyoInBatchRegistCsvOutputProcess.OUTPUT_PARAM_KEY_一覧ファイル);
+        CsvReader csvReader = createCsvReader(filePath, KyufuKanrihyoInIchiRanEntity.class);
         List<KyufuKanrihyoInIchiRanEntity> entityList = new ArrayList<>();
         while (true) {
             KyufuKanrihyoInIchiRanEntity entity = (KyufuKanrihyoInIchiRanEntity) csvReader.readLine();
@@ -152,38 +144,21 @@ public class KyufuKanrihyoInBatchRegistCsvOutputProcessTest extends DbcTestDacBa
         return entityList;
     }
 
-    private static KyufuKanrihyoInKekkaEntity readKekkaCsvFile() {
-        CsvReader csvReader = createCsvReader(結果ファイル, KyufuKanrihyoInKekkaEntity.class);
+    private static KyufuKanrihyoInKekkaEntity readKekkaCsvFile(_StepResult result) {
+        RString filePath = result.getValue(RString.class, KyufuKanrihyoInBatchRegistCsvOutputProcess.OUTPUT_PARAM_KEY_結果ファイル);
+        CsvReader csvReader = createCsvReader(filePath, KyufuKanrihyoInKekkaEntity.class);
         KyufuKanrihyoInKekkaEntity entity = (KyufuKanrihyoInKekkaEntity) csvReader.readLine();
         csvReader.close();
         return entity;
     }
 
-    private static CsvReader createCsvReader(RString fileName, Class entity) {
-        return new CsvReader.InstanceBuilder(getFilePath(fileName), entity)
+    private static CsvReader createCsvReader(RString filePath, Class entity) {
+        return new CsvReader.InstanceBuilder(filePath, entity)
                 .setDelimiter(new RString(","))
                 .setEnclosure(new RString("\""))
                 .setEncode(Encode.UTF_8)
                 .hasHeader(true)
                 .build();
-    }
-
-    private static RString getFilePath(RString fileName) {
-        RStringBuilder filePath = new RStringBuilder();
-        filePath.append("src")
-                .append(File.separator).append("main")
-                .append(File.separator).append("resources")
-                .append(File.separator).append("jp")
-                .append(File.separator).append("co")
-                .append(File.separator).append("ndensan")
-                .append(File.separator).append("reams")
-                .append(File.separator).append("db")
-                .append(File.separator).append("dbc")
-                .append(File.separator).append("batchservice")
-                .append(File.separator).append("step")
-                .append(File.separator).append("csv")
-                .append(File.separator).append(fileName);
-        return filePath.toRString();
     }
 
     private static void createTempTable() {
@@ -234,7 +209,7 @@ public class KyufuKanrihyoInBatchRegistCsvOutputProcessTest extends DbcTestDacBa
         entity.setKyufukanrihyoSakuseiKubunCode(new RString(sakuseiKubun));
         entity.setKyufukanrihyoSakuseiYMD(RString.EMPTY);
         entity.setKyufukanrihyoShubetsuKubunCode(new RString(shubetsuKubun));
-        entity.setKyufukanrihyoMeisaigyoNo(集計レコード);
+        entity.setKyufukanrihyoMeisaigyoNo(明細行);
         entity.setHihokenshaNo(RString.EMPTY);
         entity.setSeinengappiYMD(RString.EMPTY);
         entity.setSeibetsuCode(RString.EMPTY);
@@ -268,7 +243,7 @@ public class KyufuKanrihyoInBatchRegistCsvOutputProcessTest extends DbcTestDacBa
 
     private static Map<RString, Object> createSqlParameter() {
         Map<RString, Object> sqlParameter = new HashMap<>();
-        sqlParameter.put(new RString("出力順ID"), 1L);
+        sqlParameter.put(KyufuKanrihyoInBatchRegistCsvOutputProcess.INPUT_PARAM_KEY_出力順ID, 1L);
         return sqlParameter;
     }
 }
