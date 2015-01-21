@@ -11,8 +11,7 @@ import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecution
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus.Modify;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShikakuHenkoRirekiValidationHelper;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.ShikakuHenkoMapper;
@@ -256,8 +255,8 @@ public class ShikakuHenkoRireki {
 
         RString rowState = henkoRirekiDiv.getInputMode();
 
-        IOptional<HihokenshaDaichoModel> 前履歴;
-        IOptional<HihokenshaDaichoModel> 次履歴;
+        Optional<HihokenshaDaichoModel> 前履歴;
+        Optional<HihokenshaDaichoModel> 次履歴;
         IItemList<HihokenshaDaichoModel> 全履歴;
         HihokenshaDaichoModel select最終更新被保険者 = new HihokenshaDaichoModel();
         FlexibleDate selected資格取得日 = FlexibleDate.EMPTY;
@@ -265,8 +264,8 @@ public class ShikakuHenkoRireki {
         switch (ViewExecutionStatus.toValue(rowState)) {
 
             case Add:
-                前履歴 = DbOptional.empty();
-                次履歴 = DbOptional.empty();
+                前履歴 = Optional.empty();
+                次履歴 = Optional.empty();
                 全履歴 = createHandlerOf(henkoRirekiDiv).get被保険者台帳情報();
                 break;
             case Modify:
@@ -279,7 +278,7 @@ public class ShikakuHenkoRireki {
                             .filter(ShikakuHenkoMapper.createKey(row))
                             .findJustOne();
                 } else {
-                    次履歴 = DbOptional.empty();
+                    次履歴 = Optional.empty();
                 }
 
                 if (rowIndex + 1 <= henkoRirekiDiv.getDgHenko().getDataSource().size() - 1) {
@@ -289,7 +288,7 @@ public class ShikakuHenkoRireki {
                             .filter(ShikakuHenkoMapper.createKey(row))
                             .findJustOne();
                 } else {
-                    前履歴 = DbOptional.empty();
+                    前履歴 = Optional.empty();
                 }
 
                 全履歴 = ItemList.empty();
@@ -300,8 +299,8 @@ public class ShikakuHenkoRireki {
                 break;
             case Delete:
             default:
-                前履歴 = DbOptional.empty();
-                次履歴 = DbOptional.empty();
+                前履歴 = Optional.empty();
+                次履歴 = Optional.empty();
                 全履歴 = ItemList.empty();
                 break;
         }

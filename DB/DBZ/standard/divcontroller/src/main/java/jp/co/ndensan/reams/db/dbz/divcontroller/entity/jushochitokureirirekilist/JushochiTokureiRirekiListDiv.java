@@ -5,23 +5,32 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilis
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuKaijoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuTekiyoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.dgJutoku_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.kaijojiHokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.tekiyojiHokenshaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.KaijojiHokenshaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.TekiyojiHokenshaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.ur.urz.definition.code.CodeMasterHelper;
+import jp.co.ndensan.reams.ur.urz.definition.code.ICodeShubetsu;
+import jp.co.ndensan.reams.ur.urz.definition.code.ICodeValueObject;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * JushochiTokureiRirekiList のクラスファイル
@@ -408,24 +417,24 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public tekiyojiHokenshaJohoDiv getTekiyojiHokenshaJoho() {
+    public TekiyojiHokenshaJohoDiv getTekiyojiHokenshaJoho() {
         return this.getJutokuInput().getJutokuTekiyoInput().getTekiyojiHokenshaJoho();
     }
 
     @JsonIgnore
-    public void setTekiyojiHokenshaJoho(tekiyojiHokenshaJohoDiv tekiyojiHokenshaJoho) {
+    public void setTekiyojiHokenshaJoho(TekiyojiHokenshaJohoDiv tekiyojiHokenshaJoho) {
         this.getJutokuInput().getJutokuTekiyoInput().setTekiyojiHokenshaJoho(tekiyojiHokenshaJoho);
     }
-
-    @JsonIgnore
-    public DropDownList getDdlTekiyojiShozaiHokensha() {
-        return this.getJutokuInput().getJutokuTekiyoInput().getTekiyojiHokenshaJoho().getDdlTekiyojiShozaiHokensha();
-    }
-
-    @JsonIgnore
-    public void setDdlTekiyojiShozaiHokensha(DropDownList ddlTekiyojiShozaiHokensha) {
-        this.getJutokuInput().getJutokuTekiyoInput().getTekiyojiHokenshaJoho().setDdlTekiyojiShozaiHokensha(ddlTekiyojiShozaiHokensha);
-    }
+//TODO n3327 三浦凌 削除していいか確認する。
+//    @JsonIgnore
+//    public DropDownList getDdlTekiyojiShozaiHokensha() {
+//        return this.getJutokuInput().getJutokuTekiyoInput().getTekiyojiHokenshaJoho().getDdlTekiyojiShozaiHokensha();
+//    }
+//
+//    @JsonIgnore
+//    public void setDdlTekiyojiShozaiHokensha(DropDownList ddlTekiyojiShozaiHokensha) {
+//        this.getJutokuInput().getJutokuTekiyoInput().getTekiyojiHokenshaJoho().setDdlTekiyojiShozaiHokensha(ddlTekiyojiShozaiHokensha);
+//    }
 
     @JsonIgnore
     public DropDownList getDdlTekiyojiSochimotoHokensha() {
@@ -498,24 +507,24 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public kaijojiHokenshaJohoDiv getKaijojiHokenshaJoho() {
+    public KaijojiHokenshaJohoDiv getKaijojiHokenshaJoho() {
         return this.getJutokuInput().getJutokuKaijoInput().getKaijojiHokenshaJoho();
     }
 
     @JsonIgnore
-    public void setKaijojiHokenshaJoho(kaijojiHokenshaJohoDiv kaijojiHokenshaJoho) {
+    public void setKaijojiHokenshaJoho(KaijojiHokenshaJohoDiv kaijojiHokenshaJoho) {
         this.getJutokuInput().getJutokuKaijoInput().setKaijojiHokenshaJoho(kaijojiHokenshaJoho);
     }
-
-    @JsonIgnore
-    public DropDownList getDdlKaijojiShozaiHokensha() {
-        return this.getJutokuInput().getJutokuKaijoInput().getKaijojiHokenshaJoho().getDdlKaijojiShozaiHokensha();
-    }
-
-    @JsonIgnore
-    public void setDdlKaijojiShozaiHokensha(DropDownList ddlKaijojiShozaiHokensha) {
-        this.getJutokuInput().getJutokuKaijoInput().getKaijojiHokenshaJoho().setDdlKaijojiShozaiHokensha(ddlKaijojiShozaiHokensha);
-    }
+//TODO n3327 三浦凌 削除していいか確認する。
+//    @JsonIgnore
+//    public DropDownList getDdlKaijojiShozaiHokensha() {
+//        return this.getJutokuInput().getJutokuKaijoInput().getKaijojiHokenshaJoho().getDdlKaijojiShozaiHokensha();
+//    }
+//
+//    @JsonIgnore
+//    public void setDdlKaijojiShozaiHokensha(DropDownList ddlKaijojiShozaiHokensha) {
+//        this.getJutokuInput().getJutokuKaijoInput().getKaijojiHokenshaJoho().setDdlKaijojiShozaiHokensha(ddlKaijojiShozaiHokensha);
+//    }
 
     @JsonIgnore
     public DropDownList getDdlKaijojiSochimotoHokensha() {
@@ -624,6 +633,4 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
         //4)、コードマスタから取得した情報を、適用事由DDL、解除事由DDLに設定する。
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 }
->>>>>>> origin/develop

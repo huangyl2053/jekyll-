@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokendhaDaichoKey;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
@@ -372,7 +372,7 @@ public class ShikakuHenkoRirekiHandler {
         List<HihokenshaDaichoModel> mergedList = new ArrayList<>();
 
         for (HihokenshaDaichoModel editingModel : editingList) {
-            IOptional<HihokenshaDaichoModel> justOne = baseList.findJustOne();
+            Optional<HihokenshaDaichoModel> justOne = baseList.findJustOne();
 
             if (!justOne.isPresent()) {
                 mergedList.add(editingModel);
@@ -576,8 +576,7 @@ public class ShikakuHenkoRirekiHandler {
 }
 
 /**
- * 南魚の旧保険者一覧の列挙型クラスです。
- * Manager・Finderが実装されたら削除します。
+ * 南魚の旧保険者一覧の列挙型クラスです。 Manager・Finderが実装されたら削除します。
  *
  * @author N8235 船山 洋介
  */

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.validations.validator.custom;
 
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.ShikakuHenkoRirekiKanriContext;
 import jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage;
@@ -142,7 +142,7 @@ public class ShikakuHenkoValidator implements IValidatableWithContext<ShikakuHen
         return !変更日.isBefore(喪失日);
     }
 
-    private boolean is変更日が前の履歴データの変更日と重複(IOptional<HihokenshaDaichoModel> optional) {
+    private boolean is変更日が前の履歴データの変更日と重複(Optional<HihokenshaDaichoModel> optional) {
         HihokenshaDaichoModel 前履歴 = optional.orElse(null);
 
         if (前履歴 == null || 変更日.isEmpty()) {
@@ -151,7 +151,7 @@ public class ShikakuHenkoValidator implements IValidatableWithContext<ShikakuHen
         return !前履歴.get資格変更年月日().isBefore(変更日);
     }
 
-    private boolean is変更日が次の履歴データの変更日と重複(IOptional<HihokenshaDaichoModel> optional) {
+    private boolean is変更日が次の履歴データの変更日と重複(Optional<HihokenshaDaichoModel> optional) {
         HihokenshaDaichoModel 次履歴 = optional.orElse(null);
 
         if (次履歴 == null || 変更日.isEmpty()) {
