@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.ListIterator;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiDisplayMode;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.ViewStateKeyCreator;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.FukaRirekiAllPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.FukaRirekiPanelDiv;
@@ -51,8 +52,7 @@ public class FukaRirekiPanel {
      */
     public ResponseData<FukaRirekiPanelDiv> load(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
 
-        //TODO 動作確認のため
-//        rirekiDiv.setDisplayNone(true);
+        rirekiDiv.setDisplayNone(true);
         return createResponseData(rirekiDiv);
     }
 
@@ -79,7 +79,9 @@ public class FukaRirekiPanel {
     }
 
     /**
-     * 全賦課履歴の選択ボタンクリック、またはダブルクリック時に選択内容を履歴一覧に表示します。
+     * 全賦課履歴の選択ボタンクリック、またはダブルクリック時の処理です。<br/>
+     * 初回は根拠・期割Divに遷移します。<br/>
+     * 2回目以降は選択内容を履歴一覧に表示します。
      *
      * @param rirekiDiv 賦課履歴Div
      * @param rirekiAllDiv 全賦課履歴Div
@@ -88,7 +90,15 @@ public class FukaRirekiPanel {
      */
     public ResponseData<FukaRirekiPanelDiv> onSelect_dgFukaRirekiAll(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
 
-        setDgFukaRireki(rirekiDiv, rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All().reversed());
+        IItemList<FukaModel> descList = rirekiAllDiv.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All().reversed();
+
+        if (rirekiAllDiv.getLblMode().getText().equals(FukaShokaiDisplayMode.二回目以降.getCode())) {
+            setDgFukaRireki(rirekiDiv, descList);
+        } else {
+            FukaModel model = descList.findFirst().get();
+            FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, kihonDiv.getCcdKaigoAtenaInfo().getName());
+            ViewStates.access().valueAssignedToA(FukaShokaiKey.class).put(key);
+        }
 
         return createResponseData(rirekiDiv);
     }
@@ -145,9 +155,7 @@ public class FukaRirekiPanel {
                 rirekiDiv.getDgFukaRirekiFukaRireki().getClickedItem());
 
         FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, kihonDiv.getCcdKaigoAtenaInfo().getName());
-
-        IViewStateValue<FukaShokaiKey> value = ViewStates.access().valueAssignedToA(FukaShokaiKey.class);
-        value.put(key);
+        ViewStates.access().valueAssignedToA(FukaShokaiKey.class).put(key);
 
         return createResponseData(rirekiDiv);
     }
