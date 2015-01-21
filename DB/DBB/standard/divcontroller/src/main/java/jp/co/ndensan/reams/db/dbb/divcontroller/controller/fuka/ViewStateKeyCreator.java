@@ -59,9 +59,7 @@ public final class ViewStateKeyCreator {
                 賦課期日,
                 model.get更正月(),
                 model.get調定日時(),
-                SanteiState.本算定,
-                //TODO たぶん処理日付にデータがないから取得できない
-                //                checkSanteiState(model),
+                checkSanteiState(model),
                 is減免あり(model),
                 is徴収猶予あり(model),
                 name);
@@ -83,9 +81,7 @@ public final class ViewStateKeyCreator {
                 model.get賦課年度(),
                 model.get通知書番号(),
                 model.get処理日時(),
-                SanteiState.本算定,
-                //TODO たぶん処理日付にデータがないから取得できない
-                //                checkSanteiState(model),
+                checkSanteiState(model),
                 name);
         return key;
     }
