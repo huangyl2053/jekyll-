@@ -18,7 +18,7 @@ public enum DbT1003TashichosonJushochiTokurei implements IColumnDefinition {
     lastUpdateReamsLoginId(2147483647, 0),
     shichosonCode(2147483647, 0),
     shikibetsuCode(2147483647, 0),
-    shoriTimeStamp(2147483647, 0),
+    shoriTimestamp(2147483647, 0),
     tekiyoJiyuCode(2, 0),
     tekiyoYMD(2147483647, 0),
     tekiyoTodokedeYMD(2147483647, 0),

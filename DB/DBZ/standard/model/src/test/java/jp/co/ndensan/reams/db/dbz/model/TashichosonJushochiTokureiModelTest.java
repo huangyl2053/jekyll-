@@ -4,20 +4,25 @@
  */
 package jp.co.ndensan.reams.db.dbz.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1003TashichosonJushochiTokureiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
  * {@link TashichosonJushochiTokureiModel}のテストクラスです。
  *
- * @author LDNS 鄭雪双
+ * @author n8178 城間篤人
  */
 @RunWith(Enclosed.class)
 public class TashichosonJushochiTokureiModelTest extends DbzTestBase {
@@ -38,7 +43,7 @@ public class TashichosonJushochiTokureiModelTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の識別コードは_設定した値と同じ識別コードを返す() {
+        public void 戻り値の識別コードコードは_設定した値と同じ識別コードコードを返す() {
             sut.set識別コード(DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_識別コード);
             assertThat(sut.get識別コード(), is(DbT1003TashichosonJushochiTokureiEntityGenerator.DEFAULT_識別コード));
         }
@@ -143,10 +148,9 @@ public class TashichosonJushochiTokureiModelTest extends DbzTestBase {
             sut.setEntity(DbT1003TashichosonJushochiTokureiEntityGenerator.createDbT1003TashichosonJushochiTokureiEntity());
 
             sut.getEntity().initializeMd5();
+            sut.getEntity().setTekiyoYMD(new FlexibleDate("20151212"));
 
-            // 主キー以外の項目を変更してください
-//            sut.getEntity().setXXX(new XXX());
-//            assertThat(sut.getState(), is(EntityDataState.Modified));
+            assertThat(sut.getState(), is(EntityDataState.Modified));
         }
 
         @Test

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため

@@ -23,6 +23,15 @@ public enum HihokenshaDaichoModelComparators implements Comparator<HihokenshaDai
                 public int compare(HihokenshaDaichoModel model1, HihokenshaDaichoModel model2) {
                     return model1.get資格取得年月日().compareTo(model2.get資格取得年月日());
                 }
+            },
+    /**
+     * orderBy資格変更年月日で被保険者台帳Modelをソートする機能を持ちます。
+     */
+    orderBy資格変更年月日 {
+                @Override
+                public int compare(HihokenshaDaichoModel model1, HihokenshaDaichoModel model2) {
+                    return model1.get資格変更年月日().compareTo(model2.get資格変更年月日());
+                }
             };
 
     /**
