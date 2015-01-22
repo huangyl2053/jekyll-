@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.realservice.gappei;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.GappeiShichosonJoho;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -33,7 +33,7 @@ public interface IGappeiShichosonFinder {
      *
      * @return 旧市町村情報付与終了日
      */
-    IOptional<FlexibleDate> get旧市町村情報付与終了日();
+    Optional<FlexibleDate> get旧市町村情報付与終了日();
 
     /**
      * 条件に該当する合併市町村情報を取得します。
@@ -65,7 +65,7 @@ public interface IGappeiShichosonFinder {
      * @param 市町村コード 市町村コード
      * @return 合併市町村情報
      */
-    IOptional<GappeiShichosonJoho> get最新合併市町村情報(LasdecCode 市町村コード);
+    Optional<GappeiShichosonJoho> get最新合併市町村情報(LasdecCode 市町村コード);
 
     /**
      * 条件に該当する最新合併市町村情報を取得します。
@@ -73,7 +73,7 @@ public interface IGappeiShichosonFinder {
      * @param 保険者番号 保険者番号
      * @return 合併市町村情報
      */
-    IOptional<GappeiShichosonJoho> get最新合併市町村情報(ShoKisaiHokenshaNo 保険者番号);
+    Optional<GappeiShichosonJoho> get最新合併市町村情報(ShoKisaiHokenshaNo 保険者番号);
 
     /**
      * 条件に該当する最新合併市町村情報を取得します。
@@ -82,7 +82,7 @@ public interface IGappeiShichosonFinder {
      * @param 基準年月 基準年月
      * @return 合併市町村情報
      */
-    IOptional<GappeiShichosonJoho> get最新合併市町村情報(ShoKisaiHokenshaNo 保険者番号, FlexibleYearMonth 基準年月);
+    Optional<GappeiShichosonJoho> get最新合併市町村情報(ShoKisaiHokenshaNo 保険者番号, FlexibleYearMonth 基準年月);
 
     /**
      * 条件に該当する最古合併市町村情報を取得します。
@@ -90,7 +90,7 @@ public interface IGappeiShichosonFinder {
      * @param 旧市町村コード 旧市町村コード
      * @return 合併市町村情報
      */
-    IOptional<GappeiShichosonJoho> get最古合併市町村情報(LasdecCode 旧市町村コード);
+    Optional<GappeiShichosonJoho> get最古合併市町村情報(LasdecCode 旧市町村コード);
 
     /**
      * 条件に該当する直近合併市町村情報を取得します。
@@ -98,7 +98,7 @@ public interface IGappeiShichosonFinder {
      * @param 旧保険者番号 旧保険者番号
      * @return 合併市町村情報
      */
-    IOptional<GappeiShichosonJoho> get直近合併市町村情報(ShoKisaiHokenshaNo 旧保険者番号);
+    Optional<GappeiShichosonJoho> get直近合併市町村情報(ShoKisaiHokenshaNo 旧保険者番号);
 
     /**
      * 条件に該当する直近合併市町村情報を取得します。
@@ -107,7 +107,7 @@ public interface IGappeiShichosonFinder {
      * @param 基準年月 基準年月
      * @return 合併市町村情報
      */
-    IOptional<GappeiShichosonJoho> get直近合併市町村情報(ShoKisaiHokenshaNo 旧保険者番号, FlexibleYearMonth 基準年月);
+    Optional<GappeiShichosonJoho> get直近合併市町村情報(ShoKisaiHokenshaNo 旧保険者番号, FlexibleYearMonth 基準年月);
 
     /**
      * 条件に該当する市町村情報を取得します。
@@ -115,7 +115,7 @@ public interface IGappeiShichosonFinder {
      * @param 市町村コード 市町村コード
      * @return 合併市町村情報
      */
-    IOptional<GappeiShichosonJoho> get市町村情報(LasdecCode 市町村コード);
+    Optional<GappeiShichosonJoho> get市町村情報(LasdecCode 市町村コード);
 
     /**
      * 条件に該当する市町村情報を取得します。
@@ -123,7 +123,7 @@ public interface IGappeiShichosonFinder {
      * @param 保険者番号 保険者番号
      * @return 合併市町村情報
      */
-    IOptional<GappeiShichosonJoho> get市町村情報(ShoKisaiHokenshaNo 保険者番号);
+    Optional<GappeiShichosonJoho> get市町村情報(ShoKisaiHokenshaNo 保険者番号);
 
     /**
      * 条件に該当する最古市町村情報を取得します。
@@ -131,7 +131,7 @@ public interface IGappeiShichosonFinder {
      * @param 市町村コード 市町村コード
      * @return 合併市町村情報
      */
-    IOptional<GappeiShichosonJoho> get最古市町村情報(LasdecCode 市町村コード);
+    Optional<GappeiShichosonJoho> get最古市町村情報(LasdecCode 市町村コード);
 
     /**
      * 条件に該当する合併市町村情報を取得します。

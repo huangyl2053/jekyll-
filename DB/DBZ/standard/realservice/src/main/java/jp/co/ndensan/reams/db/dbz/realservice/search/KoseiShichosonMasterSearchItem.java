@@ -31,7 +31,7 @@ public enum KoseiShichosonMasterSearchItem implements ISearchItem {
     /**
      * 検索項目が「合併情報地域番号」であることを表します。
      */
-    合併情報地域番号(gappeiLinkNo);
+    合併情報地域番号(gappeiChiikiNo);
 
     private final IColumnDefinition columnDefinition;
 

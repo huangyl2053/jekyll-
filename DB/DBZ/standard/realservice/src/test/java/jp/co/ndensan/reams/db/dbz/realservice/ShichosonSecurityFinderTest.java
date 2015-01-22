@@ -11,16 +11,18 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.business.config.HokenshaJohoConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysHokenshaJoho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HokenshaKoseiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.model.KoikiShichosonSecurityModel;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.KoikiShichosonSecurityDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.auth.GroupEntity;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.entities.UzT0010SubGyomuCodeEntity;
@@ -31,6 +33,7 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -128,9 +131,9 @@ public class ShichosonSecurityFinderTest extends DbzTestBase {
     }
 
     private static HokenshaJohoConfig createHokenshaJohoConfig(int flg) {
-        Map<ConfigKeysHokenshaJoho, RString> configs = new HashMap<>();
-        configs.put(ConfigKeysHokenshaJoho.保険者情報_保険者構成, createHokenshaKosei(flg).getCode());
-        return new HokenshaJohoConfig(configs);
+        IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
+        when(mock.get(eq(ConfigKeysHokenshaJoho.保険者情報_保険者構成), any(RDate.class))).thenReturn(createHokenshaKosei(flg).code());
+        return new HokenshaJohoConfig(mock);
     }
 
     private static List<GroupEntity> createGroupList(int flg) {
@@ -179,15 +182,15 @@ public class ShichosonSecurityFinderTest extends DbzTestBase {
         return security;
     }
 
-    private static HokenshaKoseiKubun createHokenshaKosei(int flg) {
+    private static HokenshaKosei createHokenshaKosei(int flg) {
         switch (flg) {
             case 単一市町村:
-                return HokenshaKoseiKubun.単一市町村;
+                return HokenshaKosei.単一市町村;
             case 広域保険者:
-                return HokenshaKoseiKubun.広域保険者;
+                return HokenshaKosei.広域市町村;
             default:
                 break;
         }
-        return HokenshaKoseiKubun.UNKNOWN;
+        return HokenshaKosei.単一市町村;
     }
 }

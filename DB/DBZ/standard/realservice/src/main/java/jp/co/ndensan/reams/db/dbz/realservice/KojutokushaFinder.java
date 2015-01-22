@@ -9,11 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoViewModel;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoViewModel;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoViewDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -59,7 +58,7 @@ public class KojutokushaFinder {
      * @param 被保険者番号 被保険者番号
      * @return 識別コード
      */
-    public IOptional<ShikibetsuCode> get広住特者(HihokenshaNo 被保険者番号) {
+    public Optional<ShikibetsuCode> get広住特者(HihokenshaNo 被保険者番号) {
         return get識別コード(被保険者番号);
     }
 
@@ -107,9 +106,9 @@ public class KojutokushaFinder {
         return get識別コードList(市町村コード, 被保険者番号, 措置元先制御あり);
     }
 
-    private IOptional<ShikibetsuCode> get識別コード(HihokenshaNo 被保険者番号) {
+    private Optional<ShikibetsuCode> get識別コード(HihokenshaNo 被保険者番号) {
         IItemList<HihokenshaDaichoViewModel> daichoList = dac.selectBy被保険者番号(被保険者番号);
-        return DbOptional.ofNullable(!daichoList.isEmpty() ? daichoList.asList().get(0).get識別コード() : null);
+        return Optional.ofNullable(!daichoList.isEmpty() ? daichoList.toList().get(0).get識別コード() : null);
     }
 
     private IItemList<ShikibetsuCode> get識別コードList(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, boolean 出力制御) {

@@ -213,7 +213,7 @@ public class HihokenshaDaichoViewDacTest extends DbzTestDacBase {
         entity.setShikibetsuCode(new ShikibetsuCode("000000000000001"));
         entity.setShikakuShutokuJiyuCode(new RString("01"));
         entity.setShikakuShutokuYMD(FlexibleDate.MIN);
-        entity.setHihokennshaKubunCode(new Code("1"));
+        entity.setHihokennshaKubunCode(new RString("1"));
         entity.setKoikinaiTokureiSochimotoShichosonCode(new LasdecCode((措置元市町村コード)));
         return entity;
     }

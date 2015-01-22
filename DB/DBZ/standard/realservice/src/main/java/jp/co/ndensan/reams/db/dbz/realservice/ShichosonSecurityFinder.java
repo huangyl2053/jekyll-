@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.business.config.HokenshaJohoConfig;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.model.KoikiShichosonSecurityModel;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.KoikiShichosonSecurityDac;
 import jp.co.ndensan.reams.db.dbz.realservice.search.KoikiShichosonSecuritySearchItem;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
@@ -84,7 +84,7 @@ public class ShichosonSecurityFinder {
             switch (config.get保険者構成()) {
                 case 単一市町村:
                     return getSecurityOf単一市町村();
-                case 広域保険者:
+                case 広域市町村:
                     return getSecurityOf広域保険者();
                 default:
                     throw new IllegalArgumentException(UrErrorMessages.不正.getMessage().replace("保険者構成").evaluate());
@@ -103,7 +103,7 @@ public class ShichosonSecurityFinder {
         if (!groupList.isEmpty()) {
             IItemList<KoikiShichosonSecurityModel> securityList = get広域市町村SecurityList();
             if (!securityList.isEmpty()) {
-                KoikiShichosonSecurityModel security = securityList.asList().get(0);
+                KoikiShichosonSecurityModel security = securityList.toList().get(0);
                 return new ShichosonSecurity(介護導入あり, security.get市町村識別ID(), security.get市町村コード());
             }
             throw new IllegalArgumentException(UrErrorMessages.不正.getMessage().replace("広域市町村セキュリティ").evaluate());

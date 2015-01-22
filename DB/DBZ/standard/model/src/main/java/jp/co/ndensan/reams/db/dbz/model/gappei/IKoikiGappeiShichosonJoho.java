@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.model.gappei;
 
 import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 
 /**
  * 広域合併市町村情報のインターフェースです。
@@ -21,7 +21,7 @@ public interface IKoikiGappeiShichosonJoho {
      *
      * @return 合併情報
      */
-    IOptional<IGappeiJoho> get合併情報();
+    Optional<IGappeiJoho> get合併情報();
 
     /**
      * 構成市町村を返します。

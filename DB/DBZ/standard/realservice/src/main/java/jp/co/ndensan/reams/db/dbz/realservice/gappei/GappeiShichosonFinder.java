@@ -11,19 +11,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HokenshaKoseiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.GappeiShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.config.GappeiJohoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.HokenshaJohoConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GappeiJohoKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiJoho;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.GappeiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.GappeiShichosonDac;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.KoseiShichosonMasterDac;
@@ -93,12 +92,12 @@ public class GappeiShichosonFinder implements IGappeiShichosonFinder {
     }
 
     @Override
-    public IOptional<FlexibleDate> get旧市町村情報付与終了日() {
+    public Optional<FlexibleDate> get旧市町村情報付与終了日() {
         IItemList<IGappeiJoho> 合併List = gappeiDac.selectAll();
         if (!合併List.isEmpty()) {
-            return DbOptional.of(合併List.asList().get(合併List.size() - 1).get旧市町村情報付与終了日());
+            return Optional.of(合併List.toList().get(合併List.size() - 1).get旧市町村情報付与終了日());
         }
-        return DbOptional.empty();
+        return Optional.empty();
     }
 
     @Override
@@ -107,7 +106,7 @@ public class GappeiShichosonFinder implements IGappeiShichosonFinder {
             return ItemList.empty();
         }
         IItemList<IGappeiJoho> 合併List = gappeiDac.selectAll();
-        List<GappeiShichosonJoho> 合併市町村情報List = get合併市町村情報List(合併List.asList(), 表示対象のみ);
+        List<GappeiShichosonJoho> 合併市町村情報List = get合併市町村情報List(合併List.toList(), 表示対象のみ);
         return ItemList.of(合併市町村情報List);
     }
 
@@ -130,79 +129,79 @@ public class GappeiShichosonFinder implements IGappeiShichosonFinder {
     }
 
     @Override
-    public IOptional<GappeiShichosonJoho> get最新合併市町村情報(LasdecCode 市町村コード) {
+    public Optional<GappeiShichosonJoho> get最新合併市町村情報(LasdecCode 市町村コード) {
         if (!is合併あり()) {
-            return DbOptional.empty();
+            return Optional.empty();
         }
         return get最新合併市町村情報(make合併Key(市町村コード));
     }
 
     @Override
-    public IOptional<GappeiShichosonJoho> get最新合併市町村情報(ShoKisaiHokenshaNo 保険者番号) {
+    public Optional<GappeiShichosonJoho> get最新合併市町村情報(ShoKisaiHokenshaNo 保険者番号) {
         if (!is合併あり()) {
-            return DbOptional.empty();
+            return Optional.empty();
         }
         return get最新合併市町村情報(make合併Key(保険者番号));
     }
 
     @Override
-    public IOptional<GappeiShichosonJoho> get最新合併市町村情報(ShoKisaiHokenshaNo 保険者番号, FlexibleYearMonth 基準年月) {
+    public Optional<GappeiShichosonJoho> get最新合併市町村情報(ShoKisaiHokenshaNo 保険者番号, FlexibleYearMonth 基準年月) {
         if (!is合併あり()) {
-            return DbOptional.empty();
+            return Optional.empty();
         }
         return get最新合併市町村情報(make合併Key(保険者番号, 基準年月));
     }
 
     @Override
-    public IOptional<GappeiShichosonJoho> get最古合併市町村情報(LasdecCode 旧市町村コード) {
+    public Optional<GappeiShichosonJoho> get最古合併市町村情報(LasdecCode 旧市町村コード) {
         if (!is合併あり()) {
-            return DbOptional.empty();
+            return Optional.empty();
         }
         List<GappeiShichosonJoho> 合併市町村情報List = get合併市町村情報List(make単一Key(旧市町村コード), make広域Key(旧市町村コード));
         if (!合併市町村情報List.isEmpty()) {
-            return DbOptional.of(合併市町村情報List.get(0));
+            return Optional.of(合併市町村情報List.get(0));
         }
-        return DbOptional.empty();
+        return Optional.empty();
     }
 
     @Override
-    public IOptional<GappeiShichosonJoho> get直近合併市町村情報(ShoKisaiHokenshaNo 旧保険者番号) {
+    public Optional<GappeiShichosonJoho> get直近合併市町村情報(ShoKisaiHokenshaNo 旧保険者番号) {
         if (!is合併あり()) {
-            return DbOptional.empty();
+            return Optional.empty();
         }
-        List<GappeiShichosonJoho> 合併市町村情報List = get合併市町村情報(旧保険者番号).asList();
+        List<GappeiShichosonJoho> 合併市町村情報List = get合併市町村情報(旧保険者番号).toList();
         if (!合併市町村情報List.isEmpty()) {
-            return DbOptional.of(合併市町村情報List.get(合併市町村情報List.size() - 1));
+            return Optional.of(合併市町村情報List.get(合併市町村情報List.size() - 1));
         }
-        return DbOptional.empty();
+        return Optional.empty();
     }
 
     @Override
-    public IOptional<GappeiShichosonJoho> get直近合併市町村情報(ShoKisaiHokenshaNo 旧保険者番号, FlexibleYearMonth 基準年月) {
+    public Optional<GappeiShichosonJoho> get直近合併市町村情報(ShoKisaiHokenshaNo 旧保険者番号, FlexibleYearMonth 基準年月) {
         if (!is合併あり()) {
-            return DbOptional.empty();
+            return Optional.empty();
         }
-        List<GappeiShichosonJoho> 合併市町村情報List = get合併市町村情報(旧保険者番号).asList();
+        List<GappeiShichosonJoho> 合併市町村情報List = get合併市町村情報(旧保険者番号).toList();
         for (GappeiShichosonJoho 合併市町村情報 : 合併市町村情報List) {
             if (基準年月.isBefore(合併市町村情報.get合併情報().get().get国保連データ連携開始日().getYearMonth())) {
-                return DbOptional.of(合併市町村情報);
+                return Optional.of(合併市町村情報);
             }
         }
-        return DbOptional.empty();
+        return Optional.empty();
     }
 
     @Override
-    public IOptional<GappeiShichosonJoho> get市町村情報(LasdecCode 市町村コード) {
+    public Optional<GappeiShichosonJoho> get市町村情報(LasdecCode 市町村コード) {
         return get合併市町村情報(null, make単一Key(市町村コード), make広域Key(市町村コード), false);
     }
 
     @Override
-    public IOptional<GappeiShichosonJoho> get市町村情報(ShoKisaiHokenshaNo 保険者番号) {
+    public Optional<GappeiShichosonJoho> get市町村情報(ShoKisaiHokenshaNo 保険者番号) {
         return get合併市町村情報(null, make単一Key(保険者番号), make広域Key(保険者番号), false);
     }
 
     @Override
-    public IOptional<GappeiShichosonJoho> get最古市町村情報(LasdecCode 市町村コード) {
+    public Optional<GappeiShichosonJoho> get最古市町村情報(LasdecCode 市町村コード) {
         return get合併市町村情報(null, make単一Key(市町村コード), make広域Key(市町村コード), true);
     }
 
@@ -212,27 +211,27 @@ public class GappeiShichosonFinder implements IGappeiShichosonFinder {
             return ItemList.empty();
         }
         IItemList<IGappeiJoho> 合併List = gappeiDac.select(条件.makeSearchCondition());
-        List<GappeiShichosonJoho> 合併市町村情報List = get合併市町村情報List(合併List.asList(), 表示対象のみ);
+        List<GappeiShichosonJoho> 合併市町村情報List = get合併市町村情報List(合併List.toList(), 表示対象のみ);
         return ItemList.of(合併市町村情報List);
     }
 
     private boolean is単一市町村() {
-        return hokenshaConfig.get保険者構成() == HokenshaKoseiKubun.単一市町村;
+        return hokenshaConfig.get保険者構成() == HokenshaKosei.単一市町村;
     }
 
-    private IOptional<GappeiShichosonJoho> get最新合併市町村情報(ITrueFalseCriteria 条件) {
+    private Optional<GappeiShichosonJoho> get最新合併市町村情報(ITrueFalseCriteria 条件) {
         IGappeiJoho 合併 = get最新合併情報(条件);
         if (合併 == null) {
-            return DbOptional.empty();
+            return Optional.empty();
         }
-        HokenshaKoseiKubun 構成;
+        HokenshaKosei 構成;
         List<IGappeiShichoson> 単一List = new ArrayList<>();
         List<IKoikiKoseiShichoson> 広域List = new ArrayList<>();
         if (is単一市町村()) {
-            構成 = HokenshaKoseiKubun.単一市町村;
+            構成 = HokenshaKosei.単一市町村;
             単一List = get最新合併市町村List(合併);
         } else {
-            構成 = HokenshaKoseiKubun.広域保険者;
+            構成 = HokenshaKosei.広域市町村;
             広域List = get最新構成市町村List(合併);
         }
         return create合併市町村情報(合併, 構成, 単一List, 広域List);
@@ -243,7 +242,7 @@ public class GappeiShichosonFinder implements IGappeiShichosonFinder {
         if (合併List.isEmpty()) {
             return null;
         }
-        return 合併List.asList().get(合併List.size() - 1);
+        return 合併List.toList().get(合併List.size() - 1);
     }
 
     private List<IGappeiShichoson> get最新合併市町村List(IGappeiJoho 合併) {
@@ -251,7 +250,7 @@ public class GappeiShichosonFinder implements IGappeiShichosonFinder {
         ITrueFalseCriteria 条件 = make単一Key(合併.get合併日(), 合併.get地域番号(), 合併.get市町村コード(), false);
         IItemList<IGappeiShichoson> list = tanitsuDac.select(条件);
         if (!list.isEmpty()) {
-            単一List.add(list.asList().get(list.size() - 1));
+            単一List.add(list.toList().get(list.size() - 1));
         }
         return 単一List;
     }
@@ -261,27 +260,27 @@ public class GappeiShichosonFinder implements IGappeiShichosonFinder {
         ITrueFalseCriteria 条件 = make広域Key(合併.get市町村コード());
         IItemList<IKoikiKoseiShichoson> list = koikiDac.select(条件);
         if (!list.isEmpty()) {
-            広域List.add(list.asList().get(list.size() - 1));
+            広域List.add(list.toList().get(list.size() - 1));
         }
         return 広域List;
     }
 
-    private IOptional<GappeiShichosonJoho> get合併市町村情報(
+    private Optional<GappeiShichosonJoho> get合併市町村情報(
             IGappeiJoho 合併, ITrueFalseCriteria 単一条件, ITrueFalseCriteria 広域条件, boolean is最古) {
-        HokenshaKoseiKubun 構成;
+        HokenshaKosei 構成;
         List<IGappeiShichoson> 単一List = new ArrayList<>();
         List<IKoikiKoseiShichoson> 広域List = new ArrayList<>();
         if (is単一市町村()) {
-            構成 = HokenshaKoseiKubun.単一市町村;
-            List<IGappeiShichoson> list = tanitsuDac.select(単一条件).asList();
+            構成 = HokenshaKosei.単一市町村;
+            List<IGappeiShichoson> list = tanitsuDac.select(単一条件).toList();
             if (is最古 && !list.isEmpty()) {
                 単一List.add(list.get(0));
             } else {
                 単一List = list;
             }
         } else {
-            構成 = HokenshaKoseiKubun.広域保険者;
-            List<IKoikiKoseiShichoson> list = koikiDac.select(広域条件).asList();
+            構成 = HokenshaKosei.広域市町村;
+            List<IKoikiKoseiShichoson> list = koikiDac.select(広域条件).toList();
             if (is最古 && !list.isEmpty()) {
                 広域List.add(list.get(0));
             } else {
@@ -294,7 +293,7 @@ public class GappeiShichosonFinder implements IGappeiShichosonFinder {
     private List<GappeiShichosonJoho> get合併市町村情報List(List<IGappeiJoho> 合併List, boolean 表示対象のみ) {
         List<GappeiShichosonJoho> 合併市町村情報List = new ArrayList<>();
         for (IGappeiJoho 合併 : 合併List) {
-            IOptional<GappeiShichosonJoho> 合併市町村情報 = get合併市町村情報(
+            Optional<GappeiShichosonJoho> 合併市町村情報 = get合併市町村情報(
                     合併,
                     make単一Key(合併.get合併日(), 合併.get地域番号(), 合併.get市町村コード(), 表示対象のみ),
                     make広域Key(合併.get地域番号(), 表示対象のみ),
@@ -314,11 +313,11 @@ public class GappeiShichosonFinder implements IGappeiShichosonFinder {
                 if (合併List.isEmpty()) {
                     continue;
                 }
-                IGappeiJoho 合併 = 合併List.asList().get(0);
+                IGappeiJoho 合併 = 合併List.toList().get(0);
                 List<IGappeiShichoson> list = new ArrayList<>();
                 list.add(単一);
-                IOptional<GappeiShichosonJoho> 合併市町村情報 = create合併市町村情報(
-                        合併, HokenshaKoseiKubun.単一市町村, list, Collections.EMPTY_LIST);
+                Optional<GappeiShichosonJoho> 合併市町村情報 = create合併市町村情報(
+                        合併, HokenshaKosei.単一市町村, list, Collections.EMPTY_LIST);
                 map.put(合併.get国保連データ連携開始日(), 合併市町村情報.get());
             }
         } else {
@@ -329,22 +328,22 @@ public class GappeiShichosonFinder implements IGappeiShichosonFinder {
                 if (合併List.isEmpty()) {
                     continue;
                 }
-                IGappeiJoho 合併 = 合併List.asList().get(0);
+                IGappeiJoho 合併 = 合併List.toList().get(0);
                 List<IKoikiKoseiShichoson> list = new ArrayList<>();
                 list.add(広域);
-                IOptional<GappeiShichosonJoho> 合併市町村情報 = create合併市町村情報(
-                        合併, HokenshaKoseiKubun.広域保険者, Collections.EMPTY_LIST, list);
+                Optional<GappeiShichosonJoho> 合併市町村情報 = create合併市町村情報(
+                        合併, HokenshaKosei.広域市町村, Collections.EMPTY_LIST, list);
                 map.put(合併.get国保連データ連携開始日(), 合併市町村情報.get());
             }
         }
         return (List) Arrays.asList(map.values().toArray());
     }
 
-    private IOptional<GappeiShichosonJoho> create合併市町村情報(
-            IGappeiJoho 合併, HokenshaKoseiKubun 構成, List<IGappeiShichoson> 単一List, List<IKoikiKoseiShichoson> 広域List) {
+    private Optional<GappeiShichosonJoho> create合併市町村情報(
+            IGappeiJoho 合併, HokenshaKosei 構成, List<IGappeiShichoson> 単一List, List<IKoikiKoseiShichoson> 広域List) {
         GappeiShichosonJoho 合併市町村情報 = new GappeiShichosonJoho(
-                DbOptional.ofNullable(合併), 構成, ItemList.of(単一List), ItemList.of(広域List));
-        return DbOptional.of(合併市町村情報);
+                Optional.ofNullable(合併), 構成, ItemList.of(単一List), ItemList.of(広域List));
+        return Optional.of(合併市町村情報);
     }
 
     private ITrueFalseCriteria make合併Key(FlexibleDate 合併日, RString 地域番号, LasdecCode 市町村コード) {

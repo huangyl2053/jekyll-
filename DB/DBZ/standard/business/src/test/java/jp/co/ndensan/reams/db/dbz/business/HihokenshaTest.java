@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
@@ -156,9 +157,9 @@ public class HihokenshaTest extends DbzTestBase {
 
             @Test
             public void get広域内住所地特例措置元市町村コードは_コンストラクタ引数のIHihokenshaShikakuのものと_同じ値を返す() {
-                LasdecCode lasdecCode = new LasdecCode("000001");
-                when(shikaku.get広域内住所地特例措置元市町村コード()).thenReturn(lasdecCode);
-                assertThat(sut.get広域内住所地特例措置元市町村コード(), is(lasdecCode));
+                ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo("000001");
+                when(shikaku.get広域内住所地特例措置元保険者番号()).thenReturn(shoKisaiHokenshaNo);
+                assertThat(sut.get広域内住所地特例措置元保険者番号(), is(shoKisaiHokenshaNo));
             }
 
             @Test

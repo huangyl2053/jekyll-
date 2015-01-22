@@ -118,8 +118,8 @@ public class Hihokensha implements IHihokenshaShikaku, INinteiShinseiTaishosha {
     }
 
     @Override
-    public LasdecCode get広域内住所地特例措置元市町村コード() {
-        return this.shikaku.get広域内住所地特例措置元市町村コード();
+    public ShoKisaiHokenshaNo get広域内住所地特例措置元保険者番号() {
+        return this.shikaku.get広域内住所地特例措置元保険者番号();
     }
 
     @Override

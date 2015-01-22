@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.realservice.koiki;
 
 import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
@@ -21,5 +21,5 @@ public interface IKoikiKoseiShichosonFinder {
 
     IItemList<IKoikiKoseiShichoson> find構成市町村(ISearchCondition searchCondition);
 
-    IOptional<IKoikiKoseiShichoson> get最古構成市町村(LasdecCode 市町村コード);
+    Optional<IKoikiKoseiShichoson> get最古構成市町村(LasdecCode 市町村コード);
 }

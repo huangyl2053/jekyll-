@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.model.gappei;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -19,7 +19,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class KoikiGappeiShichosonJohoModel implements Serializable, IKoikiGappeiShichosonJoho {
 
-    private final IOptional<IGappeiJoho> 合併情報;
+    private final Optional<IGappeiJoho> 合併情報;
     private final IItemList<IKoikiKoseiShichoson> 構成市町村;
 
     /**
@@ -29,13 +29,13 @@ public class KoikiGappeiShichosonJohoModel implements Serializable, IKoikiGappei
      * @param 構成市町村 構成市町村
      * @throws NullPointerException 引数がNullの時
      */
-    public KoikiGappeiShichosonJohoModel(IOptional<IGappeiJoho> 合併情報, IItemList<IKoikiKoseiShichoson> 構成市町村) throws NullPointerException {
+    public KoikiGappeiShichosonJohoModel(Optional<IGappeiJoho> 合併情報, IItemList<IKoikiKoseiShichoson> 構成市町村) throws NullPointerException {
         this.合併情報 = requireNonNull(合併情報, UrSystemErrorMessages.値がnull.getReplacedMessage("合併情報"));
         this.構成市町村 = requireNonNull(構成市町村, UrSystemErrorMessages.値がnull.getReplacedMessage("構成市町村"));
     }
 
     @Override
-    public IOptional<IGappeiJoho> get合併情報() {
+    public Optional<IGappeiJoho> get合併情報() {
         return 合併情報;
     }
 

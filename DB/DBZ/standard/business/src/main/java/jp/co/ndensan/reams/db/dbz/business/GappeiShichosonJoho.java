@@ -5,15 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HokenshaKoseiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShinKyuHokenshaNoHenkanKubun;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiJoho;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
 
 /**
  * 合併市町村情報を保持するクラスです。
@@ -22,8 +22,8 @@ import static java.util.Objects.requireNonNull;
  */
 public class GappeiShichosonJoho {
 
-    private final IOptional<IGappeiJoho> 合併情報;
-    private final HokenshaKoseiKubun 保険者構成区分;
+    private final Optional<IGappeiJoho> 合併情報;
+    private final HokenshaKosei 保険者構成区分;
     private final IItemList<IGappeiShichoson> 単一市町村情報;
     private final IItemList<IKoikiKoseiShichoson> 広域市町村情報;
     private final ShinKyuHokenshaNoHenkanKubun 新旧保険者番号変換区分;
@@ -39,8 +39,8 @@ public class GappeiShichosonJoho {
      * @throws NullPointerException 引数がNullの時
      */
     public GappeiShichosonJoho(
-            IOptional<IGappeiJoho> 合併情報,
-            HokenshaKoseiKubun 保険者構成区分,
+            Optional<IGappeiJoho> 合併情報,
+            HokenshaKosei 保険者構成区分,
             IItemList<IGappeiShichoson> 単一市町村情報,
             IItemList<IKoikiKoseiShichoson> 広域市町村情報,
             ShinKyuHokenshaNoHenkanKubun 新旧保険者番号変換区分) throws NullPointerException {
@@ -60,8 +60,8 @@ public class GappeiShichosonJoho {
      * @param 広域市町村情報 広域市町村情報
      */
     public GappeiShichosonJoho(
-            IOptional<IGappeiJoho> 合併情報,
-            HokenshaKoseiKubun 保険者構成区分,
+            Optional<IGappeiJoho> 合併情報,
+            HokenshaKosei 保険者構成区分,
             IItemList<IGappeiShichoson> 単一市町村情報,
             IItemList<IKoikiKoseiShichoson> 広域市町村情報) {
         this(合併情報, 保険者構成区分, 単一市町村情報, 広域市町村情報, ShinKyuHokenshaNoHenkanKubun.UNKNOWN);
@@ -72,7 +72,7 @@ public class GappeiShichosonJoho {
      *
      * @return 合併情報
      */
-    public IOptional<IGappeiJoho> get合併情報() {
+    public Optional<IGappeiJoho> get合併情報() {
         return 合併情報;
     }
 
@@ -81,7 +81,7 @@ public class GappeiShichosonJoho {
      *
      * @return 保険者構成区分
      */
-    public HokenshaKoseiKubun get保険者構成区分() {
+    public HokenshaKosei get保険者構成区分() {
         return 保険者構成区分;
     }
 

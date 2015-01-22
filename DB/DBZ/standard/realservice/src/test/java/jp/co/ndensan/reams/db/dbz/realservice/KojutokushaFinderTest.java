@@ -10,16 +10,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysGaitoshaKensaku;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysGaitoshaKensaku;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SochimotoSochisakiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.HihokenshaDaichoViewModel;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoViewModel;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoViewDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -27,6 +29,7 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -62,19 +65,19 @@ public class KojutokushaFinderTest extends DbzTestBase {
         @Test
         public void 広住特者が0件の時_get広住特者_市町村コードは_0件の情報を返す() {
             KojutokushaFinder sut = createKojutokushaFinder(0);
-            assertThat(sut.get広住特者(市町村コード).asList().size(), is(0));
+            assertThat(sut.get広住特者(市町村コード).toList().size(), is(0));
         }
 
         @Test
         public void 広住特者が1件の時_get広住特者_市町村コードは_1件の情報を返す() {
             KojutokushaFinder sut = createKojutokushaFinder(1);
-            assertThat(sut.get広住特者(市町村コード).asList().size(), is(1));
+            assertThat(sut.get広住特者(市町村コード).toList().size(), is(1));
         }
 
         @Test
         public void 広住特者が2件の時_get広住特者_市町村コードは_2件の情報を返す() {
             KojutokushaFinder sut = createKojutokushaFinder(2);
-            assertThat(sut.get広住特者(市町村コード).asList().size(), is(2));
+            assertThat(sut.get広住特者(市町村コード).toList().size(), is(2));
         }
     }
 
@@ -83,19 +86,19 @@ public class KojutokushaFinderTest extends DbzTestBase {
         @Test
         public void 広住特者が0件の時_get広住特者_措置元先制御あり_市町村コードは_0件の情報を返す() {
             KojutokushaFinder sut = createKojutokushaFinder(0);
-            assertThat(sut.get広住特者_措置元先制御あり(市町村コード).asList().size(), is(0));
+            assertThat(sut.get広住特者_措置元先制御あり(市町村コード).toList().size(), is(0));
         }
 
         @Test
         public void 広住特者が1件の時_get広住特者_措置元先制御あり_市町村コードは_1件の情報を返す() {
             KojutokushaFinder sut = createKojutokushaFinder(1);
-            assertThat(sut.get広住特者_措置元先制御あり(市町村コード).asList().size(), is(1));
+            assertThat(sut.get広住特者_措置元先制御あり(市町村コード).toList().size(), is(1));
         }
 
         @Test
         public void 広住特者が2件の時_get広住特者_措置元先制御あり_市町村コードは_2件の情報を返す() {
             KojutokushaFinder sut = createKojutokushaFinder(2);
-            assertThat(sut.get広住特者_措置元先制御あり(市町村コード).asList().size(), is(2));
+            assertThat(sut.get広住特者_措置元先制御あり(市町村コード).toList().size(), is(2));
         }
     }
 
@@ -104,19 +107,19 @@ public class KojutokushaFinderTest extends DbzTestBase {
         @Test
         public void 広住特者が0件の時_get広住特者_市町村コード_被保険者番号は_0件の情報を返す() {
             KojutokushaFinder sut = createKojutokushaFinder(0);
-            assertThat(sut.get広住特者(市町村コード, 被保険者番号).asList().size(), is(0));
+            assertThat(sut.get広住特者(市町村コード, 被保険者番号).toList().size(), is(0));
         }
 
         @Test
         public void 広住特者が1件の時_get広住特者_市町村コード_被保険者番号は_1件の情報を返す() {
             KojutokushaFinder sut = createKojutokushaFinder(1);
-            assertThat(sut.get広住特者(市町村コード, 被保険者番号).asList().size(), is(1));
+            assertThat(sut.get広住特者(市町村コード, 被保険者番号).toList().size(), is(1));
         }
 
         @Test
         public void 広住特者が2件の時_get広住特者_市町村コード_被保険者番号は_2件の情報を返す() {
             KojutokushaFinder sut = createKojutokushaFinder(2);
-            assertThat(sut.get広住特者(市町村コード, 被保険者番号).asList().size(), is(2));
+            assertThat(sut.get広住特者(市町村コード, 被保険者番号).toList().size(), is(2));
         }
     }
 
@@ -125,19 +128,19 @@ public class KojutokushaFinderTest extends DbzTestBase {
         @Test
         public void 広住特者が0件の時_get広住特者_措置元先制御あり_市町村コード_被保険者番号は_0件の情報を返す() {
             KojutokushaFinder sut = createKojutokushaFinder(0);
-            assertThat(sut.get広住特者_措置元先制御あり(市町村コード, 被保険者番号).asList().size(), is(0));
+            assertThat(sut.get広住特者_措置元先制御あり(市町村コード, 被保険者番号).toList().size(), is(0));
         }
 
         @Test
         public void 広住特者が1件の時_get広住特者_措置元先制御あり_市町村コード_被保険者番号は_1件の情報を返す() {
             KojutokushaFinder sut = createKojutokushaFinder(1);
-            assertThat(sut.get広住特者_措置元先制御あり(市町村コード, 被保険者番号).asList().size(), is(1));
+            assertThat(sut.get広住特者_措置元先制御あり(市町村コード, 被保険者番号).toList().size(), is(1));
         }
 
         @Test
         public void 広住特者が2件の時_get広住特者_措置元先制御あり_市町村コード_被保険者番号は_2件の情報を返す() {
             KojutokushaFinder sut = createKojutokushaFinder(2);
-            assertThat(sut.get広住特者_措置元先制御あり(市町村コード, 被保険者番号).asList().size(), is(2));
+            assertThat(sut.get広住特者_措置元先制御あり(市町村コード, 被保険者番号).toList().size(), is(2));
         }
     }
 
@@ -156,9 +159,9 @@ public class KojutokushaFinderTest extends DbzTestBase {
     }
 
     private static GaitoshaKensakuConfig createGaitoshaKensakuConfig() {
-        Map<ConfigKeysGaitoshaKensaku, RString> configs = new HashMap<>();
-        configs.put(ConfigKeysGaitoshaKensaku.広域内住所地特例者検索制御_措置元_措置先区分_介護資格, SochimotoSochisakiKubun.措置元.getCode());
-        return new GaitoshaKensakuConfig(configs);
+        IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
+        when(mock.get(eq(ConfigKeysGaitoshaKensaku.広域内住所地特例者検索制御_措置元_措置先区分_介護資格), any(RDate.class))).thenReturn(SochimotoSochisakiKubun.措置元.getCode());
+        return new GaitoshaKensakuConfig(mock);
     }
 
     private static IItemList<HihokenshaDaichoViewModel> createHihokenshaDaichoViewList(int count) {
