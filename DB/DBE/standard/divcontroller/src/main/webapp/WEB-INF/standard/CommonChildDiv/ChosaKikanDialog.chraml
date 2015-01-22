@@ -1,0 +1,664 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBE&quot;,&quot;controlName&quot;:&quot;ChosaKikanDialog&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[{&quot;key&quot;:&quot;chosaItakusakiCode&quot;,&quot;controlName&quot;:&quot;ChosaKikanDialog.chosaItakusakiCode&quot;},{&quot;key&quot;:&quot;chosaItakusakiName&quot;,&quot;controlName&quot;:&quot;ChosaKikanDialog.chosaItakusakiName&quot;},{&quot;key&quot;:&quot;chosainCode&quot;,&quot;controlName&quot;:&quot;ChosaKikanDialog.chosainCode&quot;},{&quot;key&quot;:&quot;chosainName&quot;,&quot;controlName&quot;:&quot;ChosaKikanDialog.chosainName&quot;}],&quot;dialogOkEventNameForDialog&quot;:&quot;CloseOK&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;CloseCancel&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBE.ChosaKikanDialog"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable marginLeft-Default marginRight-Default marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G8 UzCompositeChild" id="ChosaKikanDialog" style="margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ChosaKikanDialog&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G8&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;ChosaKikanDialog&quot;,&quot;title&quot;:&quot;認定調査機関&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ChosaKikanDialog&quot;}],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/ChosaKikanDialog/onLoad&quot;},{&quot;eventName&quot;:&quot;CloseOK&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/ChosaKikanDialog/onClick_btnSelectKikan&quot;},{&quot;eventName&quot;:&quot;onSelect_dgKikanIchiran&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/ChosaKikanDialog/onSelect_dgKikanIchiran&quot;},{&quot;eventName&quot;:&quot;onSelect_dgChosainIchiran&quot;,&quot;requestUrl&quot;:&quot;dbe/db/dbe/ChosaKikanDialog/onSelect_dgChosainIchiran&quot;}],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;chosaItakusakiCode&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;chosaItakusakiName&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;chosainCode&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;chosainName&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ChosaKikanDialog_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">認定調査機関</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="ChosaKikanDialog_panel_body_area"><button title="" class="UzButton FloatLeft JSControl controlMargin-M marginLeft-S marginRight-XS UzCompositeChild" id="btnToMentenanceChosaKikan" style="width: 150px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnToMentenanceChosaKikan&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;marginLeft&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;btnToMentenanceChosaKikan&quot;,&quot;text&quot;:&quot;機関情報を修正する&quot;}"><span>機関情報を修正する</span></button><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M ClearFloat marginLeft-S marginRight-XS Height-S UzCompositeChild" id="dgKikanIchiran" style="width: 380px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgKikanIchiran&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;380px&quot;,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;dgKikanIchiran&quot;,&quot;height&quot;:&quot;S&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:true,&quot;isShowFilterButton&quot;:true,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:true,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;機関番号&quot;,&quot;dataName&quot;:&quot;kikanNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;kikanNo&quot;},{&quot;columnName&quot;:&quot;機関名称&quot;,&quot;dataName&quot;:&quot;kikanMeisho&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:250,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;kikanMeisho&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;onSelectBySelectButton&quot;:&quot;onSelect_dgKikanIchiran&quot;,&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgKikanIchiran_grid_table" role="" style="width: 380px; height: 176px; position: relative;"></div><div id="dgKikanIchiran_footer" style="width: 380px; height: 25px;"></div></div><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M marginLeft-M marginRight-XS Height-S UzCompositeChild" id="dgChosainIchiran" style="width: 300px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgChosainIchiran&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;300px&quot;,&quot;marginLeft&quot;:&quot;M&quot;,&quot;selectControlID&quot;:&quot;dgChosainIchiran&quot;,&quot;height&quot;:&quot;S&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:true,&quot;isShowFilterButton&quot;:true,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:true,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;調査員番号&quot;,&quot;dataName&quot;:&quot;chosainNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosainNo&quot;},{&quot;columnName&quot;:&quot;調査員名&quot;,&quot;dataName&quot;:&quot;chosainMeisho&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosainMeisho&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;onSelectBySelectButton&quot;:&quot;onSelect_dgChosainIchiran&quot;,&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgChosainIchiran_grid_table" role="" style="width: 300px; height: 176px; position: relative;"></div><div id="dgChosainIchiran_footer" style="width: 300px; height: 25px;"></div></div><button title="" class="UzButton JSControl controlMargin-M FloatRight marginLeft-XS marginRight-M UzCompositeChild" id="btnSelectKikan" style="width: 120px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnSelectKikan&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;120px&quot;,&quot;float&quot;:2,&quot;marginRight&quot;:&quot;M&quot;,&quot;selectControlID&quot;:&quot;btnSelectKikan&quot;,&quot;onClick&quot;:&quot;CloseOK&quot;,&quot;text&quot;:&quot;選択する&quot;}"><span>選択する</span></button><button title="" class="UzButton JSControl controlMargin-M FloatRight marginLeft-XS marginRight-M UzCompositeChild" id="btnNonSelectReturn" style="width: 120px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnNonSelectReturn&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;120px&quot;,&quot;float&quot;:2,&quot;marginRight&quot;:&quot;M&quot;,&quot;selectControlID&quot;:&quot;btnNonSelectReturn&quot;,&quot;onClick&quot;:&quot;CloseCancel&quot;,&quot;text&quot;:&quot;キャンセルする&quot;}"><span>キャンセルする</span></button></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBE;
+(function (DBE) {
+    (function (ChosaKikanDialog) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "onSelect_dgKikanIchiran", {
+                get: function () {
+                    return "onSelect_dgKikanIchiran";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "CloseOK", {
+                get: function () {
+                    return "CloseOK";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "onSelect_dgChosainIchiran", {
+                get: function () {
+                    return "onSelect_dgChosainIchiran";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(Events, "CloseCancel", {
+                get: function () {
+                    return "CloseCancel";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        ChosaKikanDialog.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ChosaKikanDialog";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ChosaKikanDialog = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnToMentenanceChosaKikan = function () {
+                return new UZA.Button(this.convFiledName("btnToMentenanceChosaKikan"));
+            };
+
+            Controls.prototype.dgKikanIchiran = function () {
+                return new UZA.DataGrid(this.convFiledName("dgKikanIchiran"));
+            };
+
+            Controls.prototype.dgChosainIchiran = function () {
+                return new UZA.DataGrid(this.convFiledName("dgChosainIchiran"));
+            };
+
+            Controls.prototype.btnSelectKikan = function () {
+                return new UZA.Button(this.convFiledName("btnSelectKikan"));
+            };
+
+            Controls.prototype.btnNonSelectReturn = function () {
+                return new UZA.Button(this.convFiledName("btnNonSelectReturn"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ChosaKikanDialog.Controls = Controls;
+    })(DBE.ChosaKikanDialog || (DBE.ChosaKikanDialog = {}));
+    var ChosaKikanDialog = DBE.ChosaKikanDialog;
+
+    var ChosaKikanDialog_Design = (function (_super) {
+        __extends(ChosaKikanDialog_Design, _super);
+        function ChosaKikanDialog_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, ChosaKikanDialog_Design.myLayout, fieldName);
+        }
+        ChosaKikanDialog_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        ChosaKikanDialog_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        ChosaKikanDialog_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "ChosaKikanDialog",
+                    "items": [
+                        {
+                            "fieldName": "btnToMentenanceChosaKikan",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "150",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "S",
+                            "marginRight": "XS",
+                            "selectControlID": "btnToMentenanceChosaKikan",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onClick": "",
+                            "text": "機関情報を修正する",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0
+                        },
+                        {
+                            "fieldName": "dgKikanIchiran",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "380",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "S",
+                            "marginRight": "XS",
+                            "selectControlID": "dgKikanIchiran",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "height": "S",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": false,
+                                "isShowHeader": true,
+                                "isShowFooter": true,
+                                "isShowFilter": true,
+                                "isShowFilterButton": true,
+                                "isShowRowState": false,
+                                "isShowSelectButtonColumn": true,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "",
+                                    "headerHeight": 0
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "機関番号",
+                                        "dataName": "kikanNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "kikanNo"
+                                    },
+                                    {
+                                        "columnName": "機関名称",
+                                        "dataName": "kikanMeisho",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 250,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "kikanMeisho"
+                                    }
+                                ]
+                            },
+                            "onSort": "",
+                            "onSelect": "",
+                            "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "onSelect_dgKikanIchiran",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1
+                        },
+                        {
+                            "fieldName": "dgChosainIchiran",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "300",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "M",
+                            "marginRight": "XS",
+                            "selectControlID": "dgChosainIchiran",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "height": "S",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": false,
+                                "isShowHeader": true,
+                                "isShowFooter": true,
+                                "isShowFilter": true,
+                                "isShowFilterButton": true,
+                                "isShowRowState": false,
+                                "isShowSelectButtonColumn": true,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "",
+                                    "headerHeight": 0
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "調査員番号",
+                                        "dataName": "chosainNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "chosainNo"
+                                    },
+                                    {
+                                        "columnName": "調査員名",
+                                        "dataName": "chosainMeisho",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 150,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "chosainMeisho"
+                                    }
+                                ]
+                            },
+                            "onSort": "",
+                            "onSelect": "",
+                            "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "onSelect_dgChosainIchiran",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "chosainMeisho",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1
+                        },
+                        {
+                            "fieldName": "btnSelectKikan",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "120",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "M",
+                            "selectControlID": "btnSelectKikan",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onClick": "CloseOK",
+                            "text": "選択する",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0
+                        },
+                        {
+                            "fieldName": "btnNonSelectReturn",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "120",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "M",
+                            "selectControlID": "btnNonSelectReturn",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onClick": "CloseCancel",
+                            "text": "キャンセルする",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G8",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "Default",
+                    "marginRight": "Default",
+                    "selectControlID": "ChosaKikanDialog",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "認定調査機関",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "ChosaKikanDialog"
+                        }
+                    ],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": "dbe/db/dbe/ChosaKikanDialog/onLoad"
+                        },
+                        {
+                            "eventName": "CloseOK",
+                            "requestUrl": "dbe/db/dbe/ChosaKikanDialog/onClick_btnSelectKikan"
+                        },
+                        {
+                            "eventName": "onSelect_dgKikanIchiran",
+                            "requestUrl": "dbe/db/dbe/ChosaKikanDialog/onSelect_dgKikanIchiran"
+                        },
+                        {
+                            "eventName": "onSelect_dgChosainIchiran",
+                            "requestUrl": "dbe/db/dbe/ChosaKikanDialog/onSelect_dgChosainIchiran"
+                        }
+                    ],
+                    "hiddenInput": [
+                        {
+                            "propertyName": "chosaItakusakiCode",
+                            "value": ""
+                        },
+                        {
+                            "propertyName": "chosaItakusakiName",
+                            "value": ""
+                        },
+                        {
+                            "propertyName": "chosainCode",
+                            "value": ""
+                        },
+                        {
+                            "propertyName": "chosainName",
+                            "value": ""
+                        }
+                    ],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorderTop": false,
+                    "eraseBorderBottom": false,
+                    "eraseBorderRight": false,
+                    "eraseBorderLeft": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto"
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0",
+            "marginRight": "0",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "businessId": "DBE",
+            "controlName": "ChosaKikanDialog",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [],
+            "dataPassingForDialog": [
+                {
+                    "key": "chosaItakusakiCode",
+                    "controlName": "ChosaKikanDialog.chosaItakusakiCode"
+                },
+                {
+                    "key": "chosaItakusakiName",
+                    "controlName": "ChosaKikanDialog.chosaItakusakiName"
+                },
+                {
+                    "key": "chosainCode",
+                    "controlName": "ChosaKikanDialog.chosainCode"
+                },
+                {
+                    "key": "chosainName",
+                    "controlName": "ChosaKikanDialog.chosainName"
+                }
+            ],
+            "dialogOkEventNameForDialog": "CloseOK",
+            "dialogCancelEventNameForDialog": "CloseCancel"
+        };
+        return ChosaKikanDialog_Design;
+    })(Uz.CommonChildDiv);
+    DBE.ChosaKikanDialog_Design = ChosaKikanDialog_Design;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (ChosaKikanDialog) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ChosaKikanDialog.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ChosaKikanDialog.ModeController = ModeController;
+    })(DBE.ChosaKikanDialog || (DBE.ChosaKikanDialog = {}));
+    var ChosaKikanDialog = DBE.ChosaKikanDialog;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (ChosaKikanDialog) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ChosaKikanDialog.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ChosaKikanDialog.PublicProperties = PublicProperties;
+    })(DBE.ChosaKikanDialog || (DBE.ChosaKikanDialog = {}));
+    var ChosaKikanDialog = DBE.ChosaKikanDialog;
+})(DBE || (DBE = {}));
+</script>
+  <script class="RamlConvert" type="text/javascript">
+var DBE= DBE? DBE: {};
+DBE['CHOSAKIKANDIALOG'] = {};
+DBE['CHOSAKIKANDIALOG'].ChosaKikanDialogRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ChosaKikanDialog').getProperty();parameter0.btnToMentenanceChosaKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnToMentenanceChosaKikan').getProperty();parameter0.dgKikanIchiran = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgKikanIchiran').getProperty();parameter0.dgChosainIchiran = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgChosainIchiran').getProperty();parameter0.btnSelectKikan = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnSelectKikan').getProperty();parameter0.btnNonSelectReturn = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnNonSelectReturn').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBE;
+(function (DBE) {
+    (function (ChosaKikanDialog) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onSelect_dgKikanIchiran = function () {
+                return "onSelect_dgKikanIchiran";
+            };
+
+            Events.onSelect_dgChosainIchiran = function () {
+                return "onSelect_dgChosainIchiran";
+            };
+
+            Events.CloseOK = function () {
+                return "CloseOK";
+            };
+
+            Events.CloseCancel = function () {
+                return "CloseCancel";
+            };
+            return Events;
+        })();
+        ChosaKikanDialog.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ChosaKikanDialog";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBE.ChosaKikanDialog.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBE.ChosaKikanDialog.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ChosaKikanDialog = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnToMentenanceChosaKikan = function () {
+                return new UZA.Button(this.convFiledName("btnToMentenanceChosaKikan"));
+            };
+
+            Controls.prototype.dgKikanIchiran = function () {
+                return new UZA.DataGrid(this.convFiledName("dgKikanIchiran"));
+            };
+
+            Controls.prototype.dgChosainIchiran = function () {
+                return new UZA.DataGrid(this.convFiledName("dgChosainIchiran"));
+            };
+
+            Controls.prototype.btnSelectKikan = function () {
+                return new UZA.Button(this.convFiledName("btnSelectKikan"));
+            };
+
+            Controls.prototype.btnNonSelectReturn = function () {
+                return new UZA.Button(this.convFiledName("btnNonSelectReturn"));
+            };
+            return Controls;
+        })();
+        ChosaKikanDialog.Controls = Controls;
+    })(DBE.ChosaKikanDialog || (DBE.ChosaKikanDialog = {}));
+    var ChosaKikanDialog = DBE.ChosaKikanDialog;
+})(DBE || (DBE = {}));
+var DBE;
+(function (DBE) {
+    (function (ChosaKikanDialog) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ChosaKikanDialog.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ChosaKikanDialog.ModeController = ModeController;
+    })(DBE.ChosaKikanDialog || (DBE.ChosaKikanDialog = {}));
+    var ChosaKikanDialog = DBE.ChosaKikanDialog;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (ChosaKikanDialog) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ChosaKikanDialog.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ChosaKikanDialog.PublicProperties = PublicProperties;
+    })(DBE.ChosaKikanDialog || (DBE.ChosaKikanDialog = {}));
+    var ChosaKikanDialog = DBE.ChosaKikanDialog;
+})(DBE || (DBE = {}));
+</script></div>

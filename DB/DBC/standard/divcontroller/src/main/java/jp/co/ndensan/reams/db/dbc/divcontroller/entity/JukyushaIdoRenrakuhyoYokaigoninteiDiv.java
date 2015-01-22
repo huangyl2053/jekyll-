@@ -25,6 +25,8 @@ public class JukyushaIdoRenrakuhyoYokaigoninteiDiv extends Panel {
     private TextBoxFlexibleDate txtShinseiDate;
     @JsonProperty("radShinseiType")
     private RadioButton radShinseiType;
+    @JsonProperty("Button3")
+    private Button Button3;
     @JsonProperty("ddlYokaigoJotaiKubun")
     private DropDownList ddlYokaigoJotaiKubun;
     @JsonProperty("radHenkoShinseichuKubun")
@@ -58,6 +60,16 @@ public class JukyushaIdoRenrakuhyoYokaigoninteiDiv extends Panel {
     @JsonProperty("radShinseiType")
     public void setRadShinseiType(RadioButton radShinseiType) {
         this.radShinseiType=radShinseiType;
+    }
+
+    @JsonProperty("Button3")
+    public Button getButton3() {
+        return Button3;
+    }
+
+    @JsonProperty("Button3")
+    public void setButton3(Button Button3) {
+        this.Button3=Button3;
     }
 
     @JsonProperty("ddlYokaigoJotaiKubun")

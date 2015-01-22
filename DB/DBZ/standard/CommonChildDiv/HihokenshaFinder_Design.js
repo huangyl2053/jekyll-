@@ -11,164 +11,12 @@ var DBZ;
         function HihokenshaFinder_Design($parentElement, isDesignMode, fieldName) {
             _super.call(this, $parentElement, isDesignMode, HihokenshaFinder_Design.myLayout, fieldName);
         }
-        Object.defineProperty(HihokenshaFinder_Design.prototype, "onClick_BtnToSearch", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[1]["fieldName"])["onClick"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[1]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[1]["fieldName"])["onClick"] = value;
-                } else {
-                    this.layout.items[0].items[2].items[1]["onClick"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(HihokenshaFinder_Design.prototype, "displayNone_txtTsuchishoNo", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[2]["fieldName"])["displayNone"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[2]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[2]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[2]["fieldName"])["displayNone"] = value;
-                } else {
-                    this.layout.items[0].items[0].items[2]["displayNone"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(HihokenshaFinder_Design.prototype, "displayNone_ddlFukaNendo", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[3]["fieldName"])["displayNone"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[3]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[3]["fieldName"])["displayNone"] = value;
-                } else {
-                    this.layout.items[0].items[0].items[3]["displayNone"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(HihokenshaFinder_Design.prototype, "displayNone_SearchCriteriaDetail", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"])["displayNone"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"])["displayNone"] = value;
-                } else {
-                    this.layout.items[0].items[0].items[4]["displayNone"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(HihokenshaFinder_Design.prototype, "canOpenAndClose_HihokenshaFinder", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"])["canOpenAndClose"] = value;
-                } else {
-                    this.layout.items[0]["canOpenAndClose"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(HihokenshaFinder_Design.prototype, "displayNone_saikinShorisha", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"])["displayNone"] = value;
-                } else {
-                    this.layout.items[0].items[3]["displayNone"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(HihokenshaFinder_Design.prototype, "displayNone_ddlHokensha", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[0]["fieldName"])["displayNone"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[0]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[0]["fieldName"])["displayNone"] = value;
-                } else {
-                    this.layout.items[0].items[0].items[0]["displayNone"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
-        Object.defineProperty(HihokenshaFinder_Design.prototype, "displayNone_chkMinashiNigo", {
-            get: function () {
-                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[0].items[4].items[2]["fieldName"])["displayNone"];
-            },
-            set: function (value) {
-                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[0].items[4].items[2]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[0].items[4].items[2]["fieldName"]) != undefined) {
-                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[0].items[4].items[2]["fieldName"])["displayNone"] = value;
-                } else {
-                    this.layout.items[0].items[0].items[4].items[2]["displayNone"] = value;
-                    this.raisePropertyChanged(this.layout);
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
-
-
         HihokenshaFinder_Design.prototype.registProperty = function () {
             _super.prototype.registProperty.call(this);
-            Uz.JSControlUtil.registProperty("onClick_BtnToSearch");
-            Uz.JSControlUtil.registProperty("displayNone_txtTsuchishoNo");
-            Uz.JSControlUtil.registProperty("displayNone_ddlFukaNendo");
-            Uz.JSControlUtil.registProperty("displayNone_SearchCriteriaDetail");
-            Uz.JSControlUtil.registProperty("canOpenAndClose_HihokenshaFinder");
-            Uz.JSControlUtil.registProperty("displayNone_saikinShorisha");
-            Uz.JSControlUtil.registProperty("displayNone_ddlHokensha");
-            Uz.JSControlUtil.registProperty("displayNone_chkMinashiNigo");
         };
 
         HihokenshaFinder_Design.prototype.getEditablePropertyInfo = function () {
             var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
-            editablePropertyInfo["onClick_BtnToSearch"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[2]["fieldName"] + "_" + this.layout.items[0].items[2].items[1]["fieldName"]).getEditablePropertyInfo()["onClick"];
-            editablePropertyInfo["displayNone_txtTsuchishoNo"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[2]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["displayNone_ddlFukaNendo"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["displayNone_SearchCriteriaDetail"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["canOpenAndClose_HihokenshaFinder"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"]).getEditablePropertyInfo()["canOpenAndClose"];
-            editablePropertyInfo["displayNone_saikinShorisha"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[3]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["displayNone_ddlHokensha"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[0]["fieldName"]).getEditablePropertyInfo()["displayNone"];
-            editablePropertyInfo["displayNone_chkMinashiNigo"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"] + "_" + this.layout.items[0].items[0].items[4]["fieldName"] + "_" + this.layout.items[0].items[0].items[4].items[2]["fieldName"]).getEditablePropertyInfo()["displayNone"];
 
             return editablePropertyInfo;
         };
@@ -179,7 +27,7 @@ var DBZ;
                     "fieldName": "HihokenshaFinder",
                     "items": [
                         {
-                            "fieldName": "SearchCriteriaOfHihokensha",
+                            "fieldName": "KaigoFinder",
                             "items": [
                                 {
                                     "fieldName": "ddlHokensha",
@@ -217,12 +65,13 @@ var DBZ;
                                     "required": false,
                                     "labelLText": "保険者",
                                     "labelRText": "",
-                                    "labelLWidth": "100",
+                                    "labelLWidth": "110px",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
                                     "onFocus": "",
                                     "onBlur": "",
+                                    "isBlankLine": false,
                                     "text": "",
                                     "disabledItem": []
                                 },
@@ -230,7 +79,7 @@ var DBZ;
                                     "fieldName": "txtHihokenshaNo",
                                     "items": [],
                                     "controlType": "TextBoxCode",
-                                    "width": "82",
+                                    "width": "82px",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -251,7 +100,7 @@ var DBZ;
                                     "required": false,
                                     "labelLText": "被保番号",
                                     "labelRText": "",
-                                    "labelLWidth": "100",
+                                    "labelLWidth": "110px",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
@@ -277,7 +126,7 @@ var DBZ;
                                     "fieldName": "txtTuchishoNo",
                                     "items": [],
                                     "controlType": "TextBoxCode",
-                                    "width": "130",
+                                    "width": "130px",
                                     "visible": true,
                                     "displayNone": true,
                                     "disabled": false,
@@ -298,7 +147,7 @@ var DBZ;
                                     "required": false,
                                     "labelLText": "通知書番号",
                                     "labelRText": "",
-                                    "labelLWidth": "S",
+                                    "labelLWidth": "90px",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
@@ -324,7 +173,7 @@ var DBZ;
                                     "fieldName": "ddlFukaNendo",
                                     "items": [],
                                     "controlType": "DropDownList",
-                                    "width": "80",
+                                    "width": "88px",
                                     "visible": true,
                                     "displayNone": true,
                                     "disabled": false,
@@ -342,35 +191,70 @@ var DBZ;
                                     "jpControlName": "",
                                     "readOnly": false,
                                     "onChange": "",
-                                    "selectedItem": "key0",
+                                    "selectedItem": null,
                                     "dataSource": [
                                         {
-                                            "key": "key0",
+                                            "key": "9999",
                                             "value": "全年度"
                                         },
                                         {
-                                            "key": "key1",
+                                            "key": "2014",
                                             "value": "平26"
+                                        },
+                                        {
+                                            "key": "2013",
+                                            "value": "平25"
+                                        },
+                                        {
+                                            "key": "2014",
+                                            "value": "平24"
                                         }
                                     ],
                                     "labelLText": "賦課年度　",
                                     "labelRText": "",
-                                    "labelLWidth": "100",
+                                    "labelLWidth": "110px",
                                     "labelRWidth": "S",
                                     "labelLAlign": 2,
                                     "labelRAlign": 0,
                                     "onFocus": "",
                                     "onBlur": "",
+                                    "isBlankLine": false,
                                     "disabledItem": []
                                 },
                                 {
-                                    "fieldName": "SearchCriteriaDetail",
+                                    "fieldName": "KaigoFinderDetail",
                                     "items": [
                                         {
-                                            "fieldName": "chkHihokensha",
+                                            "fieldName": "lblHihokenshaJotai",
+                                            "items": [],
+                                            "controlType": "Label",
+                                            "width": "155px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": true,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "XS",
+                                            "marginRight": "2px",
+                                            "selectControlID": "lblHihokenshaJotai",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "required": false,
+                                            "isPrivateInfo": false,
+                                            "text": "被保険者状態",
+                                            "decorationClass": "",
+                                            "align": 2
+                                        },
+                                        {
+                                            "fieldName": "chkHihokenshaDaicho",
                                             "items": [],
                                             "controlType": "CheckBoxList",
-                                            "width": "700",
+                                            "width": "165px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -381,37 +265,115 @@ var DBZ;
                                             "float": 0,
                                             "toolTip": "",
                                             "authorityMode": 0,
-                                            "marginLeft": "XS",
+                                            "marginLeft": "0px",
                                             "marginRight": "XS",
-                                            "selectControlID": "chkHihokensha_core",
+                                            "selectControlID": "chkHihokenshaDaicho_core",
                                             "helpMessageID": "",
                                             "jpControlName": "",
                                             "readOnly": false,
                                             "onChange": "",
-                                            "selectedItem": null,
+                                            "selectedItem": "",
                                             "dataSource": [
                                                 {
-                                                    "key": "1",
+                                                    "key": "key0",
                                                     "value": "被保険者台帳登録者"
-                                                },
-                                                {
-                                                    "key": "2",
-                                                    "value": "受給者台帳登録者"
-                                                },
-                                                {
-                                                    "key": "3",
-                                                    "value": "住所地特例者"
                                                 }
                                             ],
-                                            "labelLText": "被保険者状態",
+                                            "labelLText": "",
                                             "labelLWidth": "S",
                                             "labelLAlign": 2,
                                             "onClick": "",
                                             "selectedItems": [],
-                                            "newLineItemNumber": 5,
+                                            "newLineItemNumber": 1,
                                             "minCheckedItem": 0,
-                                            "maxCheckedItem": 2,
-                                            "spaceSize": "L",
+                                            "maxCheckedItem": "1",
+                                            "spaceSize": "M",
+                                            "isAllSelectable": false,
+                                            "isAllSelectableBreakLine": false,
+                                            "disabledItem": [],
+                                            "icon": []
+                                        },
+                                        {
+                                            "fieldName": "chkJukyushaDaicho",
+                                            "items": [],
+                                            "controlType": "CheckBoxList",
+                                            "width": "150px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "0px",
+                                            "marginRight": "XS",
+                                            "selectControlID": "chkJukyushaDaicho_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": false,
+                                            "onChange": "",
+                                            "selectedItem": "",
+                                            "dataSource": [
+                                                {
+                                                    "key": "key0",
+                                                    "value": "受給者台帳登録者"
+                                                }
+                                            ],
+                                            "labelLText": "",
+                                            "labelLWidth": "S",
+                                            "labelLAlign": 2,
+                                            "onClick": "",
+                                            "selectedItems": [],
+                                            "newLineItemNumber": 1,
+                                            "minCheckedItem": 0,
+                                            "maxCheckedItem": "1",
+                                            "spaceSize": "M",
+                                            "isAllSelectable": false,
+                                            "isAllSelectableBreakLine": false,
+                                            "disabledItem": [],
+                                            "icon": []
+                                        },
+                                        {
+                                            "fieldName": "chkJushochiTokureisha",
+                                            "items": [],
+                                            "controlType": "CheckBoxList",
+                                            "width": "120px",
+                                            "visible": true,
+                                            "displayNone": false,
+                                            "disabled": false,
+                                            "accessKey": "",
+                                            "nextFocusFieldName": "",
+                                            "wrap": false,
+                                            "dependencies": [],
+                                            "float": 0,
+                                            "toolTip": "",
+                                            "authorityMode": 0,
+                                            "marginLeft": "0px",
+                                            "marginRight": "XS",
+                                            "selectControlID": "chkJushochiTokureisha_core",
+                                            "helpMessageID": "",
+                                            "jpControlName": "",
+                                            "readOnly": false,
+                                            "onChange": "",
+                                            "selectedItem": "",
+                                            "dataSource": [
+                                                {
+                                                    "key": "key0",
+                                                    "value": "住所地特例者"
+                                                }
+                                            ],
+                                            "labelLText": "",
+                                            "labelLWidth": "S",
+                                            "labelLAlign": 2,
+                                            "onClick": "",
+                                            "selectedItems": [],
+                                            "newLineItemNumber": 1,
+                                            "minCheckedItem": 0,
+                                            "maxCheckedItem": "1",
+                                            "spaceSize": "M",
                                             "isAllSelectable": false,
                                             "isAllSelectableBreakLine": false,
                                             "disabledItem": [],
@@ -421,7 +383,7 @@ var DBZ;
                                             "fieldName": "radMinashiNigo",
                                             "items": [],
                                             "controlType": "RadioButton",
-                                            "width": "M",
+                                            "width": "160px",
                                             "visible": true,
                                             "displayNone": false,
                                             "disabled": false,
@@ -451,7 +413,7 @@ var DBZ;
                                                 }
                                             ],
                                             "labelLText": "みなし2号",
-                                            "labelLWidth": "S",
+                                            "labelLWidth": "155px",
                                             "labelLAlign": 2,
                                             "onClick": "",
                                             "newLineItemNumber": 2,
@@ -463,7 +425,7 @@ var DBZ;
                                             "fieldName": "chkMinashiNigo",
                                             "items": [],
                                             "controlType": "CheckBoxList",
-                                            "width": "M",
+                                            "width": "130px",
                                             "visible": true,
                                             "displayNone": true,
                                             "disabled": false,
@@ -474,7 +436,7 @@ var DBZ;
                                             "float": 0,
                                             "toolTip": "",
                                             "authorityMode": 0,
-                                            "marginLeft": "8",
+                                            "marginLeft": "163px",
                                             "marginRight": "XS",
                                             "selectControlID": "chkMinashiNigo_core",
                                             "helpMessageID": "",
@@ -504,7 +466,7 @@ var DBZ;
                                         }
                                     ],
                                     "controlType": "Panel",
-                                    "width": "1100",
+                                    "width": "1085px",
                                     "visible": true,
                                     "displayNone": false,
                                     "disabled": false,
@@ -517,18 +479,18 @@ var DBZ;
                                     "authorityMode": 0,
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
-                                    "selectControlID": "SearchCriteriaDetail",
+                                    "selectControlID": "KaigoFinderDetail",
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "onLoad": "",
                                     "title": "詳細条件",
                                     "marginTop": "Default",
                                     "marginBottom": "Default",
-                                    "isOpen": false,
+                                    "isOpen": true,
                                     "canOpenAndClose": true,
                                     "postParameterPanelNames": [
                                         {
-                                            "postParameterPanelNames": "SearchCriteriaDetail"
+                                            "postParameterPanelNames": "KaigoFinderDetail"
                                         }
                                     ],
                                     "requestSettings": [],
@@ -542,35 +504,36 @@ var DBZ;
                                     "panelDisplay": 2,
                                     "isGroupBox": false,
                                     "readOnly": false,
-                                    "height": "Auto"
+                                    "height": "Auto",
+                                    "canPost": true
                                 }
                             ],
                             "controlType": "Panel",
-                            "width": "G12",
+                            "width": "1100px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
                             "accessKey": "",
                             "nextFocusFieldName": "",
-                            "wrap": true,
+                            "wrap": false,
                             "dependencies": [],
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
+                            "marginLeft": "0em",
                             "marginRight": "XS",
-                            "selectControlID": "SearchCriteriaOfHihokensha",
+                            "selectControlID": "KaigoFinder",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "onLoad": "",
                             "title": "介護検索条件",
-                            "marginTop": "XS",
-                            "marginBottom": "XS",
+                            "marginTop": "0em",
+                            "marginBottom": "Default",
                             "isOpen": true,
-                            "canOpenAndClose": true,
+                            "canOpenAndClose": false,
                             "postParameterPanelNames": [
                                 {
-                                    "postParameterPanelNames": "SearchCriteriaOfHihokensha"
+                                    "postParameterPanelNames": "KaigoFinder"
                                 }
                             ],
                             "requestSettings": [
@@ -589,10 +552,11 @@ var DBZ;
                             "panelDisplay": 0,
                             "isGroupBox": false,
                             "readOnly": false,
-                            "height": "Auto"
+                            "height": "Auto",
+                            "canPost": true
                         },
                         {
-                            "fieldName": "KaigoAtenaFinder",
+                            "fieldName": "ccdAtenaFinder",
                             "items": [],
                             "controlType": "CommonChildDiv",
                             "width": "XS",
@@ -606,101 +570,118 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
-                            "selectControlID": "KaigoAtenaFinder",
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
+                            "selectControlID": "ccdAtenaFinder",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "relation": [],
+                            "packageName": "",
                             "businessId": "URA",
                             "controlName": "AtenaFinder",
-                            "marginTop": 0,
-                            "marginBottom": 0,
+                            "marginTop": "XS",
+                            "marginBottom": "XS",
                             "originalProperty": [],
                             "dataPassingForDialog": [],
                             "dialogOkEventNameForDialog": "",
                             "dialogCancelEventNameForDialog": "",
                             "canTransferEvent": true,
                             "heightForDialog": "M",
+                            "firstFocusFieldName": "",
+                            "lastFocusFieldName": "",
+                            "modes": [
+                                {
+                                    "modeKey": "JuminShubetsuMode",
+                                    "modeValue": "個人のみ"
+                                },
+                                {
+                                    "modeKey": "ShosaiJokenRiyoMode",
+                                    "modeValue": "詳細条件あり"
+                                },
+                                {
+                                    "modeKey": "KojinNoHyoji",
+                                    "modeValue": "優先エリアに表示する"
+                                },
+                                {
+                                    "modeKey": "HojinNoHyoji",
+                                    "modeValue": "表示しない"
+                                },
+                                {
+                                    "modeKey": "UketsukeNoHyoji",
+                                    "modeValue": "表示しない"
+                                },
+                                {
+                                    "modeKey": "SeinengappiHyoji",
+                                    "modeValue": "基本エリアに表示する"
+                                },
+                                {
+                                    "modeKey": "ShikibetsuCodeHyoji",
+                                    "modeValue": "基本エリアに表示する"
+                                },
+                                {
+                                    "modeKey": "SetaiCodeHyoji",
+                                    "modeValue": "詳細エリアに表示する"
+                                },
+                                {
+                                    "modeKey": "JuminhyoCodeHyoji",
+                                    "modeValue": "表示しない"
+                                },
+                                {
+                                    "modeKey": "ZairyuCardCodeHyoji",
+                                    "modeValue": "表示しない"
+                                },
+                                {
+                                    "modeKey": "KokuhoNoHyoji",
+                                    "modeValue": "表示しない"
+                                },
+                                {
+                                    "modeKey": "KokiKoreiHihokenshaNoHyoji",
+                                    "modeValue": "表示しない"
+                                },
+                                {
+                                    "modeKey": "KaigoHihokenshaNoHyoji",
+                                    "modeValue": "表示しない"
+                                },
+                                {
+                                    "modeKey": "KisoNenkinNoHyoji",
+                                    "modeValue": "表示しない"
+                                },
+                                {
+                                    "modeKey": "InkanNoHyoji",
+                                    "modeValue": "表示しない"
+                                },
+                                {
+                                    "modeKey": "GyoseikuHyoji",
+                                    "modeValue": "詳細エリアに表示する"
+                                },
+                                {
+                                    "modeKey": "RenrakusakiHyoji",
+                                    "modeValue": "詳細エリアに表示する"
+                                },
+                                {
+                                    "modeKey": "MeishoUpLineHyoji",
+                                    "modeValue": "表示する"
+                                },
+                                {
+                                    "modeKey": "JushoDownLineHyoji",
+                                    "modeValue": "表示する"
+                                }
+                            ],
+                            "publicEvents": [],
+                            "publicEventsAlias": [],
                             "AtenaFinder_title": "宛名検索条件",
-                            "AtenaFinder_canOpenAndClose": true,
-                            "AtenaFinder_width": "G12",
-                            "txtSeinenGappi_displayNone": false,
-                            "ddlSeibetsu_displayNone": false,
-                            "txtBanchiCode4_displayNone": true,
-                            "txtSetaiCode_displayNone": false,
-                            "txtKojinNo_displayNone": false,
-                            "txtHojinNo_displayNone": true,
-                            "txtHojinKeitaiCode_displayNone": true,
-                            "btnHojinKeitaiGuide_displayNone": true,
-                            "txtHojinKeitaiMeisho_displayNone": true,
-                            "txtJuminhyoCode_displayNone": true,
-                            "txtZairyuCardCode_displayNone": true,
-                            "txtKokuhoNo_displayNone": true,
-                            "txtKokiKoreiHihokenshaNo_displayNone": true,
-                            "txtKaigoHihokenshaNo_displayNone": true,
-                            "txtKisoNenkinNo_displayNone": true,
-                            "txtInkanNo_displayNone": true,
+                            "AtenaFinder_canOpenAndClose": false,
+                            "AtenaFinder_width": "1100px",
                             "AtenaFinderShosai_title": "詳細条件",
-                            "AtenaFinderShosai_displayNone": false,
-                            "AtenaFinderShosai_width": "1100",
-                            "chkJuminShubetsu_displayNone": false,
-                            "chkJuminShubetsu_dataSource": [
-                                {
-                                    "key": "key0",
-                                    "value": "住登内個人"
-                                },
-                                {
-                                    "key": "key1",
-                                    "value": "住登外個人"
-                                },
-                                {
-                                    "key": "key2",
-                                    "value": "法人　　　"
-                                },
-                                {
-                                    "key": "key3",
-                                    "value": "共有者　　"
-                                }
-                            ],
-                            "chkJuminShubetsu_isAllSelectable": true,
-                            "chkJuminJotai_displayNone": false,
-                            "chkJuminJotai_dataSource": [
-                                {
-                                    "key": "key0",
-                                    "value": "住民　　　"
-                                },
-                                {
-                                    "key": "key1",
-                                    "value": "未登録住民"
-                                },
-                                {
-                                    "key": "key2",
-                                    "value": "消除者　　"
-                                },
-                                {
-                                    "key": "key3",
-                                    "value": "転出者　　"
-                                },
-                                {
-                                    "key": "key4",
-                                    "value": "死亡者"
-                                }
-                            ],
-                            "chkJuminJotai_isAllSelectable": true,
-                            "radNihonjinKubun_displayNone": false,
-                            "radGaikokujinKubun_displayNone": false,
-                            "txtGyoseikuCode_displayNone": false,
-                            "btnGyoseikuGuide_displayNone": false,
-                            "txtGyoseikuMeisho_displayNone": false,
-                            "txtRenrakusaki_displayNone": false,
-                            "AtenaFinder_eraseBorder": false
+                            "AtenaFinderShosai_width": "1085px",
+                            "AtenaFinder_eraseBorder": false,
+                            "txtBanchiCode4_displayNone": true
                         },
                         {
                             "fieldName": "ButtonsForHihokenshaFinder",
                             "items": [
                                 {
-                                    "fieldName": "btnToClear",
+                                    "fieldName": "btnClear",
                                     "items": [],
                                     "controlType": "Button",
                                     "width": "M",
@@ -716,12 +697,14 @@ var DBZ;
                                     "authorityMode": 0,
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
-                                    "selectControlID": "btnToClear",
+                                    "selectControlID": "btnClear",
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "text": "条件をクリアする",
-                                    "onClick": "onClick_btnToClear",
+                                    "onClick": "onClick_btnClear",
                                     "icon": 0,
+                                    "onBeforeClick": "",
+                                    "onAfterClick": "",
                                     "appearance": 0,
                                     "imageFileUrl": "",
                                     "imageWidth": "",
@@ -729,7 +712,7 @@ var DBZ;
                                     "heightTextBoxMatches": false
                                 },
                                 {
-                                    "fieldName": "btnToSearch",
+                                    "fieldName": "btnSearch",
                                     "items": [],
                                     "controlType": "Button",
                                     "width": "M",
@@ -745,12 +728,14 @@ var DBZ;
                                     "authorityMode": 0,
                                     "marginLeft": "XS",
                                     "marginRight": "XS",
-                                    "selectControlID": "btnToSearch",
+                                    "selectControlID": "btnSearch",
                                     "helpMessageID": "",
                                     "jpControlName": "",
                                     "text": "検索する",
-                                    "onClick": "",
+                                    "onClick": "onClick_btnSearch",
                                     "icon": 0,
+                                    "onBeforeClick": "",
+                                    "onAfterClick": "",
                                     "appearance": 0,
                                     "imageFileUrl": "",
                                     "imageWidth": "",
@@ -767,7 +752,7 @@ var DBZ;
                                     "disabled": false,
                                     "accessKey": "",
                                     "nextFocusFieldName": "",
-                                    "wrap": true,
+                                    "wrap": false,
                                     "dependencies": [],
                                     "float": 2,
                                     "toolTip": "",
@@ -810,7 +795,7 @@ var DBZ;
                                 }
                             ],
                             "controlType": "Panel",
-                            "width": "1110",
+                            "width": "1100px",
                             "visible": true,
                             "displayNone": false,
                             "disabled": false,
@@ -821,7 +806,7 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
+                            "marginLeft": "0em",
                             "marginRight": "XS",
                             "selectControlID": "ButtonsForHihokenshaFinder",
                             "helpMessageID": "",
@@ -848,10 +833,11 @@ var DBZ;
                             "panelDisplay": 0,
                             "isGroupBox": false,
                             "readOnly": false,
-                            "height": "Auto"
+                            "height": "Auto",
+                            "canPost": true
                         },
                         {
-                            "fieldName": "saikinShorisha",
+                            "fieldName": "ccdSaikinShorisha",
                             "items": [],
                             "controlType": "CommonChildDiv",
                             "width": "XS",
@@ -865,26 +851,32 @@ var DBZ;
                             "float": 0,
                             "toolTip": "",
                             "authorityMode": 0,
-                            "marginLeft": "0",
-                            "marginRight": "0",
-                            "selectControlID": "saikinShorisha",
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
+                            "selectControlID": "ccdSaikinShorisha",
                             "helpMessageID": "",
                             "jpControlName": "",
                             "relation": [],
+                            "packageName": "",
                             "businessId": "DBZ",
                             "controlName": "KaigoSaikinShorishaRireki",
-                            "marginTop": 0,
-                            "marginBottom": 0,
+                            "marginTop": "0em",
+                            "marginBottom": "0em",
                             "originalProperty": [],
                             "dataPassingForDialog": [],
                             "dialogOkEventNameForDialog": "",
                             "dialogCancelEventNameForDialog": "",
                             "canTransferEvent": true,
-                            "heightForDialog": "M"
+                            "heightForDialog": "M",
+                            "firstFocusFieldName": "",
+                            "lastFocusFieldName": "",
+                            "modes": [],
+                            "publicEvents": [],
+                            "publicEventsAlias": []
                         }
                     ],
                     "controlType": "Panel",
-                    "width": "G12",
+                    "width": "1100px",
                     "visible": true,
                     "displayNone": false,
                     "disabled": false,
@@ -895,14 +887,14 @@ var DBZ;
                     "float": 0,
                     "toolTip": "",
                     "authorityMode": 0,
-                    "marginLeft": "0",
-                    "marginRight": "XS",
+                    "marginLeft": "0em",
+                    "marginRight": "0em",
                     "selectControlID": "HihokenshaFinder",
                     "helpMessageID": "",
                     "jpControlName": "",
                     "onLoad": "",
                     "title": "",
-                    "marginTop": "XS",
+                    "marginTop": "0em",
                     "marginBottom": "XS",
                     "isOpen": true,
                     "canOpenAndClose": true,
@@ -917,8 +909,8 @@ var DBZ;
                             "requestUrl": "dbz/db/dbz/HihokenshaFinder/onLoad"
                         },
                         {
-                            "eventName": "onClick_btnToClear",
-                            "requestUrl": "dbz/db/dbz/HihokenshaFinder/onClick_btnToClear"
+                            "eventName": "onClick_btnClear",
+                            "requestUrl": "dbz/db/dbz/HihokenshaFinder/onClick_btnClear"
                         }
                     ],
                     "hiddenInput": [],
@@ -931,7 +923,8 @@ var DBZ;
                     "panelDisplay": 0,
                     "isGroupBox": false,
                     "readOnly": false,
-                    "height": "Auto"
+                    "height": "Auto",
+                    "canPost": true
                 }
             ],
             "controlType": "CommonChildDiv",
@@ -946,65 +939,146 @@ var DBZ;
             "float": 0,
             "toolTip": "",
             "authorityMode": 0,
-            "marginLeft": "0",
-            "marginRight": "0",
+            "marginLeft": "0em",
+            "marginRight": "0em",
             "selectControlID": "defaultLayout",
             "helpMessageID": "",
             "jpControlName": "",
             "relation": [],
+            "packageName": "",
             "businessId": "DBZ",
             "controlName": "HihokenshaFinder",
-            "marginTop": 0,
-            "marginBottom": 0,
-            "originalProperty": [
-                {
-                    "publicChildFieldName": "btnToSearch",
-                    "publicChildProperty": "onClick",
-                    "newPropertyName": "onClick_BtnToSearch"
-                },
-                {
-                    "publicChildFieldName": "txtTuchishoNo",
-                    "publicChildProperty": "displayNone",
-                    "newPropertyName": "displayNone_txtTsuchishoNo"
-                },
-                {
-                    "publicChildFieldName": "ddlFukaNendo",
-                    "publicChildProperty": "displayNone",
-                    "newPropertyName": "displayNone_ddlFukaNendo"
-                },
-                {
-                    "publicChildFieldName": "SearchCriteriaDetail",
-                    "publicChildProperty": "displayNone",
-                    "newPropertyName": "displayNone_SearchCriteriaDetail"
-                },
-                {
-                    "publicChildFieldName": "HihokenshaFinder",
-                    "publicChildProperty": "canOpenAndClose",
-                    "newPropertyName": "canOpenAndClose_HihokenshaFinder"
-                },
-                {
-                    "publicChildFieldName": "saikinShorisha",
-                    "publicChildProperty": "displayNone",
-                    "newPropertyName": "displayNone_saikinShorisha"
-                },
-                {
-                    "publicChildFieldName": "ddlHokensha",
-                    "publicChildProperty": "displayNone",
-                    "newPropertyName": "displayNone_ddlHokensha"
-                },
-                {
-                    "publicChildFieldName": "chkMinashiNigo",
-                    "publicChildProperty": "displayNone",
-                    "newPropertyName": "displayNone_chkMinashiNigo"
-                }
-            ],
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [],
             "dataPassingForDialog": [],
             "dialogOkEventNameForDialog": "",
             "dialogCancelEventNameForDialog": "",
             "canTransferEvent": true,
-            "heightForDialog": "M"
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [
+                {
+                    "eventName": "onClick_btnSearch"
+                }
+            ],
+            "publicEventsAlias": []
         };
         return HihokenshaFinder_Design;
     })(Uz.CommonChildDiv);
     DBZ.HihokenshaFinder_Design = HihokenshaFinder_Design;
+
+    (function (HihokenshaFinder) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnClear = function () {
+                return "onClick_btnClear";
+            };
+
+            Events.onClick_btnSearch = function () {
+                return "onClick_btnSearch";
+            };
+            return Events;
+        })();
+        HihokenshaFinder.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "HihokenshaFinder";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.HihokenshaFinder.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.HihokenshaFinder.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.HihokenshaFinder = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.KaigoFinder = function () {
+                return new UZA.Panel(this.convFiledName("KaigoFinder"));
+            };
+
+            Controls.prototype.ddlHokensha = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlHokensha"));
+            };
+
+            Controls.prototype.txtHihokenshaNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtHihokenshaNo"));
+            };
+
+            Controls.prototype.txtTuchishoNo = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtTuchishoNo"));
+            };
+
+            Controls.prototype.ddlFukaNendo = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlFukaNendo"));
+            };
+
+            Controls.prototype.KaigoFinderDetail = function () {
+                return new UZA.Panel(this.convFiledName("KaigoFinder_KaigoFinderDetail"));
+            };
+
+            Controls.prototype.lblHihokenshaJotai = function () {
+                return new UZA.Label(this.convFiledName("lblHihokenshaJotai"));
+            };
+
+            Controls.prototype.chkHihokenshaDaicho = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkHihokenshaDaicho"));
+            };
+
+            Controls.prototype.chkJukyushaDaicho = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkJukyushaDaicho"));
+            };
+
+            Controls.prototype.chkJushochiTokureisha = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkJushochiTokureisha"));
+            };
+
+            Controls.prototype.radMinashiNigo = function () {
+                return new UZA.RadioButton(this.convFiledName("radMinashiNigo"));
+            };
+
+            Controls.prototype.chkMinashiNigo = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkMinashiNigo"));
+            };
+
+            Controls.prototype.ccdAtenaFinder = function () {
+                return new URA.AtenaFinder.ModeController("ccdAtenaFinder");
+            };
+
+            Controls.prototype.ButtonsForHihokenshaFinder = function () {
+                return new UZA.Panel(this.convFiledName("ButtonsForHihokenshaFinder"));
+            };
+
+            Controls.prototype.btnClear = function () {
+                return new UZA.Button(this.convFiledName("btnClear"));
+            };
+
+            Controls.prototype.btnSearch = function () {
+                return new UZA.Button(this.convFiledName("btnSearch"));
+            };
+
+            Controls.prototype.txtMaxNumber = function () {
+                return new UZA.TextBoxNum(this.convFiledName("txtMaxNumber"));
+            };
+
+            Controls.prototype.ccdSaikinShorisha = function () {
+                return new DBZ.KaigoSaikinShorishaRireki.ModeController("ccdSaikinShorisha");
+            };
+            return Controls;
+        })();
+        HihokenshaFinder.Controls = Controls;
+    })(DBZ.HihokenshaFinder || (DBZ.HihokenshaFinder = {}));
+    var HihokenshaFinder = DBZ.HihokenshaFinder;
 })(DBZ || (DBZ = {}));

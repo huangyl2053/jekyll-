@@ -41,7 +41,7 @@ module DBZ {
      "fieldName": "ddlDaichoShubetsu",
      "items": [],
      "controlType": "DropDownList",
-     "width": "200px",
+     "width": "180px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -58,20 +58,20 @@ module DBZ {
      "helpMessageID": "",
      "jpControlName": "",
      "readOnly": false,
-     "onChange": "",
+     "onChange": "onChange_ddlDaichoShubetsu",
      "selectedItem": null,
      "dataSource": [
       {
-       "key": "hihokenshaDaicho",
-       "value": "被保険者台帳"
+       "key": "1",
+       "value": "被保険者"
       },
       {
-       "key": "tekiyoJogaishaDaicho",
-       "value": "適用除外者台帳"
+       "key": "3",
+       "value": "他市町村住所地特例者"
       },
       {
-       "key": "tashichosonJushochiTokureishaDaicho",
-       "value": "他市町村住所地特例者台帳"
+       "key": "2",
+       "value": "適用除外者"
       }
      ],
      "labelLText": "台帳種別",
@@ -89,7 +89,7 @@ module DBZ {
      "fieldName": "radShisetsuShurui",
      "items": [],
      "controlType": "RadioButton",
-     "width": "380px",
+     "width": "410px",
      "visible": true,
      "displayNone": false,
      "disabled": false,
@@ -110,15 +110,15 @@ module DBZ {
      "selectedItem": null,
      "dataSource": [
       {
-       "key": "kaigoHokenShisetsu",
+       "key": "11",
        "value": "介護保険施設"
       },
       {
-       "key": "other",
-       "value": "その他特例施設"
+       "key": "12",
+       "value": "住所地特例対象施設"
       },
       {
-       "key": "tekiyojogaishisetsu",
+       "key": "21",
        "value": "適用除外施設"
       }
      ],
@@ -162,7 +162,7 @@ module DBZ {
      "labelLAlign": 2,
      "labelRAlign": 0,
      "onFocus": "",
-     "onBlur": "",
+     "onBlur": "onBlur_txtShisetsuCode",
      "maxLength": 100000000,
      "minLength": 0,
      "textAlign": 0,
@@ -396,14 +396,14 @@ module DBZ {
    "requestSettings": [
     {
      "eventName": "onLoad",
-     "requestUrl": ""
+     "requestUrl": "dbz/db/dbz/ShisetsuJoho/onLoad"
     },
     {
      "eventName": "onChange_ddlDaichoShubetsu",
      "requestUrl": "dbz/db/dbz/ShisetsuJoho/onChange_ddlDaichoShubetsu"
     },
     {
-     "eventName": "onChange_onChange_radShisetsuShurui",
+     "eventName": "onChange_radShisetsuShurui",
      "requestUrl": "dbz/db/dbz/ShisetsuJoho/onChange_radShisetsuShurui"
     },
     {
@@ -480,8 +480,16 @@ module DBZ {
 
         export class Events {
 
+            public static onChange_ddlDaichoShubetsu(): string {
+                return "onChange_ddlDaichoShubetsu";
+            }
+
             public static onChange_radShisetsuShurui(): string {
                 return "onChange_radShisetsuShurui";
+            }
+
+            public static onBlur_txtShisetsuCode(): string {
+                return "onBlur_txtShisetsuCode";
             }
 
         }
@@ -506,7 +514,7 @@ module DBZ {
             }
 
             public ShisetsuJoho(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("ShisetsuJoho"));
+                return new UZA.Panel(this.convFiledNameSelf());
             }
 
             public ddlDaichoShubetsu(): UZA.DropDownList {

@@ -4,11 +4,13 @@ import java.util.Objects;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
@@ -17,8 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  * DbT7051KoseiShichosonMasterの項目定義クラスです
  *
  */
-public class DbT7051KoseiShichosonMasterEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051KoseiShichosonMasterEntity> implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7051KoseiShichosonMaster");
@@ -34,7 +36,7 @@ public class DbT7051KoseiShichosonMasterEntity implements IDbAccessable {
     @PrimaryKey
     private RString shichosonShokibetsuID;
     @PrimaryKey
-    private RString shichosonCode;
+    private LasdecCode shichosonCode;
     @PrimaryKey
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private RString kokuhorenKoikiShichosonNo;
@@ -53,12 +55,13 @@ public class DbT7051KoseiShichosonMasterEntity implements IDbAccessable {
     private RString gaikokujinHyojiHouhou;
     private RString rojinhokenShichosonNo;
     private RString rokenJukyushaNoTaikei;
+    private RString tokuchoBunpaishuyaku;
     private FlexibleDate ikoYMD;
     private FlexibleDate kanyuYMD;
     private FlexibleDate ridatsuYMD;
     private RString gappeiKyuShichosonKubun;
     private RString gappeiKyuShichosonHyojiUmu;
-    private RString gappeiLinkNo;
+    private RString gappeiChiikiNo;
     private ShoKisaiHokenshaNo unyoHokenshaNo;
     private FlexibleDate unyoKaishiYMD;
     private FlexibleDate unyoShuryoYMD;
@@ -132,7 +135,7 @@ public class DbT7051KoseiShichosonMasterEntity implements IDbAccessable {
      *
      * @return shichosonCode
      */
-    public RString getShichosonCode() {
+    public LasdecCode getShichosonCode() {
         return shichosonCode;
     }
 
@@ -141,7 +144,7 @@ public class DbT7051KoseiShichosonMasterEntity implements IDbAccessable {
      *
      * @param shichosonCode shichosonCode
      */
-    public void setShichosonCode(RString shichosonCode) {
+    public void setShichosonCode(LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
@@ -452,6 +455,24 @@ public class DbT7051KoseiShichosonMasterEntity implements IDbAccessable {
     }
 
     /**
+     * getTokuchoBunpaishuyaku
+     *
+     * @return tokuchoBunpaishuyaku
+     */
+    public RString getTokuchoBunpaishuyaku() {
+        return tokuchoBunpaishuyaku;
+    }
+
+    /**
+     * setTokuchoBunpaishuyaku
+     *
+     * @param tokuchoBunpaishuyaku tokuchoBunpaishuyaku
+     */
+    public void setTokuchoBunpaishuyaku(RString tokuchoBunpaishuyaku) {
+        this.tokuchoBunpaishuyaku = tokuchoBunpaishuyaku;
+    }
+
+    /**
      * getIkoYMD
      *
      * @return ikoYMD
@@ -542,21 +563,21 @@ public class DbT7051KoseiShichosonMasterEntity implements IDbAccessable {
     }
 
     /**
-     * getGappeiLinkNo
+     * getGappeiChiikiNo
      *
-     * @return gappeiLinkNo
+     * @return gappeiChiikiNo
      */
-    public RString getGappeiLinkNo() {
-        return gappeiLinkNo;
+    public RString getGappeiChiikiNo() {
+        return gappeiChiikiNo;
     }
 
     /**
-     * setGappeiLinkNo
+     * setGappeiChiikiNo
      *
-     * @param gappeiLinkNo gappeiLinkNo
+     * @param gappeiChiikiNo gappeiChiikiNo
      */
-    public void setGappeiLinkNo(RString gappeiLinkNo) {
-        this.gappeiLinkNo = gappeiLinkNo;
+    public void setGappeiChiikiNo(RString gappeiChiikiNo) {
+        this.gappeiChiikiNo = gappeiChiikiNo;
     }
 
     /**
@@ -635,8 +656,10 @@ public class DbT7051KoseiShichosonMasterEntity implements IDbAccessable {
      * このエンティティの主キーが他の{@literal DbT7051KoseiShichosonMasterEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT7051KoseiShichosonMasterEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT7051KoseiShichosonMasterEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
+    @Override
     public boolean equalsPrimaryKeys(DbT7051KoseiShichosonMasterEntity other) {
         if (other == null) {
             return false;
@@ -651,6 +674,53 @@ public class DbT7051KoseiShichosonMasterEntity implements IDbAccessable {
             return false;
         }
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void shallowCopy(DbT7051KoseiShichosonMasterEntity entity) {
+        this.shichosonShokibetsuID = entity.shichosonShokibetsuID;
+        this.shichosonCode = entity.shichosonCode;
+        this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
+        this.kokuhorenKoikiShichosonNo = entity.kokuhorenKoikiShichosonNo;
+        this.shichosonMeisho = entity.shichosonMeisho;
+        this.todofukenMeisho = entity.todofukenMeisho;
+        this.gunMeisho = entity.gunMeisho;
+        this.yubinNo = entity.yubinNo;
+        this.jusho = entity.jusho;
+        this.telNo = entity.telNo;
+        this.yusenChikuCode = entity.yusenChikuCode;
+        this.tyohyoTodoufukenHyojiUmu = entity.tyohyoTodoufukenHyojiUmu;
+        this.tyohyoGunHyojiUmu = entity.tyohyoGunHyojiUmu;
+        this.tyohyoShichosonHyojiUmu = entity.tyohyoShichosonHyojiUmu;
+        this.tyohyoJushoHenshuHouhou = entity.tyohyoJushoHenshuHouhou;
+        this.tyohyoKatagakiHyojiUmu = entity.tyohyoKatagakiHyojiUmu;
+        this.gaikokujinHyojiHouhou = entity.gaikokujinHyojiHouhou;
+        this.rojinhokenShichosonNo = entity.rojinhokenShichosonNo;
+        this.rokenJukyushaNoTaikei = entity.rokenJukyushaNoTaikei;
+        this.tokuchoBunpaishuyaku = entity.tokuchoBunpaishuyaku;
+        this.ikoYMD = entity.ikoYMD;
+        this.kanyuYMD = entity.kanyuYMD;
+        this.ridatsuYMD = entity.ridatsuYMD;
+        this.gappeiKyuShichosonKubun = entity.gappeiKyuShichosonKubun;
+        this.gappeiKyuShichosonHyojiUmu = entity.gappeiKyuShichosonHyojiUmu;
+        this.gappeiChiikiNo = entity.gappeiChiikiNo;
+        this.unyoHokenshaNo = entity.unyoHokenshaNo;
+        this.unyoKaishiYMD = entity.unyoKaishiYMD;
+        this.unyoShuryoYMD = entity.unyoShuryoYMD;
+        this.unyoKeitaiKubun = entity.unyoKeitaiKubun;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    @Override
+    public RString getMd5() {
+        return super.toMd5(shichosonShokibetsuID, shichosonCode, shoKisaiHokenshaNo, kokuhorenKoikiShichosonNo, shichosonMeisho, todofukenMeisho, gunMeisho, yubinNo, jusho, telNo, yusenChikuCode, tyohyoTodoufukenHyojiUmu, tyohyoGunHyojiUmu, tyohyoShichosonHyojiUmu, tyohyoJushoHenshuHouhou, tyohyoKatagakiHyojiUmu, gaikokujinHyojiHouhou, rojinhokenShichosonNo, rokenJukyushaNoTaikei, tokuchoBunpaishuyaku, ikoYMD, kanyuYMD, ridatsuYMD, gappeiKyuShichosonKubun, gappeiKyuShichosonHyojiUmu, gappeiChiikiNo, unyoHokenshaNo, unyoKaishiYMD, unyoShuryoYMD, unyoKeitaiKubun);
     }
 
 // </editor-fold>

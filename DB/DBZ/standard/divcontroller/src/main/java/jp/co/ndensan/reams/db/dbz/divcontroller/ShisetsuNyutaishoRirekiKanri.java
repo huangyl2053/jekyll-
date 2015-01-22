@@ -5,21 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsujoho.ShisetsuJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.IShisetsuNyutaishoRirekiKanriDiv;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
@@ -29,11 +19,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 public class ShisetsuNyutaishoRirekiKanri {
 
-    private static final RString SHUSEI_MODE = new RString("shusei");
-    private static final RString DELETE_MODE = new RString("delete");
-    private static final RString ADD_MODE = new RString("add");
-    private static final RString NONE = RString.EMPTY;
-
+//    private static final RString SHUSEI_MODE = new RString("shusei");
+//    private static final RString DELETE_MODE = new RString("delete");
+//    private static final RString ADD_MODE = new RString("add");
+//    private static final RString NONE = RString.EMPTY;
     /**
      * 入力モードに合わせて、コントロールの表示非表示を切り替えます。
      *
@@ -104,7 +93,7 @@ public class ShisetsuNyutaishoRirekiKanri {
     }
 
     private dgShisetsuNyutaishoRireki_Row createNewRow() {
-        return new dgShisetsuNyutaishoRireki_Row(new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
+        return new dgShisetsuNyutaishoRireki_Row(RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
 

@@ -1,5 +1,7 @@
 /// <reference path="../d.ts/jquery.d.ts" />
 /// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="../d.ts/URZCommonChildDiv.d.ts" />
 
 module DBZ {
     /**
@@ -51,32 +53,47 @@ module DBZ {
      "float": 0,
      "toolTip": "",
      "authorityMode": 0,
-     "marginLeft": "0",
-     "marginRight": "0",
+     "marginLeft": "0em",
+     "marginRight": "0em",
      "selectControlID": "wrappedSaikinShorishaRireki",
      "helpMessageID": "",
      "jpControlName": "",
      "relation": [],
+     "packageName": "",
      "businessId": "URZ",
      "controlName": "SaikinShorishaRireki",
-     "marginTop": 0,
-     "marginBottom": 0,
+     "marginTop": "0em",
+     "marginBottom": "0em",
      "originalProperty": [],
      "dataPassingForDialog": [],
      "dialogOkEventNameForDialog": "",
      "dialogCancelEventNameForDialog": "",
      "canTransferEvent": true,
      "heightForDialog": "M",
+     "firstFocusFieldName": "",
+     "lastFocusFieldName": "",
+     "modes": [],
+     "publicEvents": [
+      {
+       "eventName": "onClick_btnSaikinShorishaHyoji"
+      },
+      {
+       "eventName": "onBeforeClick_btnSaikinShorishaHyoji"
+      },
+      {
+       "eventName": "onAfterClick_btnSaikinShorishaHyoji"
+      }
+     ],
+     "publicEventsAlias": [],
      "isOneCondition": "0",
-     "SaikinShorishaRireki_width": "G8",
-     "SaikinShorishaRireki_marginLeft": "XS",
+     "SaikinShorishaRireki_width": "1100px",
+     "SaikinShorishaRireki_marginLeft": "0em",
      "ddlSaikinShorisha_marginLeft": "XL",
-     "btnSaikinShorishaHyoji_width": "S",
-     "onClick_btnSaikinShorishaHyoji": "onClick_btnSaikinShorishaHyoji"
+     "btnSaikinShorishaHyoji_width": "M"
     }
    ],
    "controlType": "Panel",
-   "width": "G2",
+   "width": "1100px",
    "visible": true,
    "displayNone": false,
    "disabled": false,
@@ -87,15 +104,15 @@ module DBZ {
    "float": 0,
    "toolTip": "",
    "authorityMode": 0,
-   "marginLeft": "0",
-   "marginRight": "0",
+   "marginLeft": "0em",
+   "marginRight": "0em",
    "selectControlID": "KaigoSaikinShorishaRireki",
    "helpMessageID": "",
    "jpControlName": "",
    "onLoad": "",
    "title": "",
-   "marginTop": "0",
-   "marginBottom": "0",
+   "marginTop": "0em",
+   "marginBottom": "0em",
    "isOpen": true,
    "canOpenAndClose": true,
    "postParameterPanelNames": [
@@ -110,11 +127,12 @@ module DBZ {
    "session": {},
    "eraseBorder": true,
    "backgroundColor": 0,
-   "widthAuto": true,
+   "widthAuto": false,
    "panelDisplay": 0,
    "isGroupBox": false,
    "readOnly": false,
-   "height": "Auto"
+   "height": "Auto",
+   "canPost": true
   }
  ],
  "controlType": "CommonChildDiv",
@@ -129,23 +147,67 @@ module DBZ {
  "float": 0,
  "toolTip": "",
  "authorityMode": 0,
- "marginLeft": "0",
- "marginRight": "0",
+ "marginLeft": "0em",
+ "marginRight": "0em",
  "selectControlID": "defaultLayout",
  "helpMessageID": "",
  "jpControlName": "",
  "relation": [],
+ "packageName": "",
  "businessId": "DBZ",
  "controlName": "KaigoSaikinShorishaRireki",
- "marginTop": 0,
- "marginBottom": 0,
+ "marginTop": "0em",
+ "marginBottom": "0em",
  "originalProperty": [],
  "dataPassingForDialog": [],
  "dialogOkEventNameForDialog": "",
  "dialogCancelEventNameForDialog": "",
  "canTransferEvent": true,
- "heightForDialog": "M"
+ "heightForDialog": "M",
+ "firstFocusFieldName": "",
+ "lastFocusFieldName": "",
+ "modes": [],
+ "publicEvents": [],
+ "publicEventsAlias": []
 }        
     }
+
+     export module KaigoSaikinShorishaRireki {
+
+        export class Events {
+
+        }
+
+        export class Controls {
+            private _myName: string;
+
+            public static myType(): string {
+                return "KaigoSaikinShorishaRireki";
+            }
+
+            constructor(fieldName: string) {
+                this._myName = fieldName;
+            }
+
+            public convFiledNameSelf(): string {
+                return this._myName + "_" + DBZ.KaigoSaikinShorishaRireki.Controls.myType();
+            }
+
+            public convFiledName(fieldName: string): string {
+                return this._myName + "_" + DBZ.KaigoSaikinShorishaRireki.Controls.myType() + "_" + fieldName;
+            }
+
+            public KaigoSaikinShorishaRireki(): UZA.Panel {
+                return new UZA.Panel(this.convFiledNameSelf());
+            }
+
+            public wrappedSaikinShorishaRireki(): URZ.SaikinShorishaRireki.ModeController {
+                return new URZ.SaikinShorishaRireki.ModeController("wrappedSaikinShorishaRireki");
+            }
+
+        }
+
+     }
+
 }
 

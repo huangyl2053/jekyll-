@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 
+import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.definition.Messages;
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3317 塚田 萌
  */
-public class ShisetsuCode implements IValueObject<RString>, Comparable<ShisetsuCode> {
+public final class ShisetsuCode implements IValueObject<RString>, Comparable<ShisetsuCode>, Serializable {
 
     private final RString 施設コード;
 

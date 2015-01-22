@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuIdoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
@@ -23,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
+@Deprecated
 public final class HihokenshaShikaku implements IHihokenshaShikaku {
 
     private final IKaigoShikaku kaigoShikaku;
@@ -47,7 +48,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
     private final JushochitokureiKaijo jutokuKaijo;
     private final JushochiTokureishaKubun jutokushaKubun;
     private final KoikinaiJushochitokureishaKubun koikinaiJutokushaKubun;
-    private final LasdecCode koikiJutokuOriginLasdecCode;
+    private final ShoKisaiHokenshaNo koikiJutokuOriginLasdecCode;
     private final LasdecCode oldLasdecCode;
     private final HihokenshashoSaikofu saikofu;
     private final FlexibleDate ichigoGaitoDate;
@@ -66,7 +67,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         this.jutokuKaijo = builder.jutokuKaijo;
         this.jutokushaKubun = builder.jutokushaKubun;
         this.koikinaiJutokushaKubun = builder.koikiJutokushaKubun;
-        this.koikiJutokuOriginLasdecCode = builder.koikiJutokuOriginLasdecCode;
+        this.koikiJutokuOriginLasdecCode = builder.koikiJutokuOriginHokenshaCode;
         this.oldLasdecCode = builder.theOldLasdecCode;
         this.saikofu = builder.saikofu;
         this.ichigoGaitoDate = builder.ichigoGaitoDate;
@@ -143,7 +144,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
     }
 
     @Override
-    public LasdecCode get広域内住所地特例措置元市町村コード() {
+    public ShoKisaiHokenshaNo get広域内住所地特例措置元保険者番号() {
         return this.koikiJutokuOriginLasdecCode;
     }
 
@@ -164,7 +165,8 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
 
     /**
      * 資格異動区分を判定します。<br />
-     * 資格喪失、資格変更がないときは、それぞれの実行日が、{@link FlexibleDate#MAX FlexibleDate.MAX}であることを前提に判定します。 資格変更よりも資格喪失を優先して判定します。
+     * 資格喪失、資格変更がないときは、それぞれの実行日が、{@link FlexibleDate#MAX FlexibleDate.MAX}であることを前提に判定します。
+     * 資格変更よりも資格喪失を優先して判定します。
      *
      * @return 資格異動区分
      */
@@ -198,7 +200,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         private JushochitokureiKaijo jutokuKaijo = JushochitokureiKaijo.NOTHING;
         private JushochiTokureishaKubun jutokushaKubun = JushochiTokureishaKubun.通常資格者;
         private KoikinaiJushochitokureishaKubun koikiJutokushaKubun = KoikinaiJushochitokureishaKubun.通常資格者;
-        private LasdecCode koikiJutokuOriginLasdecCode = null;
+        private ShoKisaiHokenshaNo koikiJutokuOriginHokenshaCode = ShoKisaiHokenshaNo.EMPTY;
         private LasdecCode theOldLasdecCode = null;
         private HihokenshashoSaikofu saikofu = HihokenshashoSaikofu.NOTHING;
 
@@ -224,7 +226,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
             this.jutokuKaijo = 被保険者資格.get住所地特例解除();
             this.jutokushaKubun = 被保険者資格.get住所地特例者区分();
             this.koikiJutokushaKubun = 被保険者資格.get広域内住所地特例者区分();
-            this.koikiJutokuOriginLasdecCode = 被保険者資格.get広域内住所地特例措置元市町村コード();
+            this.koikiJutokuOriginHokenshaCode = 被保険者資格.get広域内住所地特例措置元保険者番号();
             this.theOldLasdecCode = 被保険者資格.get旧市町村コード();
             this.saikofu = 被保険者資格.get被保険者証再交付();
         }
@@ -234,7 +236,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
          *
          * @param 市町村コード {@link LasdecCode 市町村コード}
          * @param 識別コード {@link ShikibetsuCode 識別コード}
-         * @param 処理日時 {@link RDateTime 被保険者台帳登録日時}
+         * @param 処理日時 {@link YMDHMS 被保険者台帳登録日時}
          * @param 被保険者区分 {@link ShikakuHihokenshaKubun 被保険者区分}
          * @param 第1号年齢到達日 {@link FlexibleDate 第1号年齢到達日}
          * @param 資格取得 {@link ShikakuShutoku 資格取得}
@@ -257,8 +259,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
          * @param 被保険者区分 {@link ShikakuHihokenshaKubun 被保険者区分}
          * @throws NullPointerException 引数にnullの項目があるとき。
          */
-        public Builder(IKaigoShikaku 介護資格, LasdecCode 市町村コード,
-                ShikibetsuCode 識別コード, YMDHMS 処理日時,
+        public Builder(IKaigoShikaku 介護資格, LasdecCode 市町村コード, ShikibetsuCode 識別コード, YMDHMS 処理日時,
                 HihokenshaKubun 被保険者区分) throws NullPointerException {
             this(市町村コード, 識別コード, 処理日時, 被保険者区分,
                     toFlexibleDate(requireNonNullForKaigoShikaku(介護資格).get一号該当日()));
@@ -293,7 +294,8 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
          * 生成したHihokenshaShikakuの{@link HihokenshaShikaku#toKaigoShikaku() toKaigoShikaku()}で得られるオブジェクトは、
          * もしBuilderの生成にIKaigoShikakuオブジェクトを渡していたとしても、そのオブジェクトと異なる結果を持つことがあります。
          * それは、Builderによる生成過程で{@link HihokenshaShikaku.Builder#soshitsu shikakuSoshitsu}等のメソッドにより、
-         * コンストラクタが受け取ったIKaigoShikakuが保持する物と異なる値が設定される可能性があるからです。 生整過程での設定内容と生成後のオブジェクトとの整合性をとるために、このメソッドで、IKaigoShikakuは再計算されます。
+         * コンストラクタが受け取ったIKaigoShikakuが保持する物と異なる値が設定される可能性があるからです。
+         * 生整過程での設定内容と生成後のオブジェクトとの整合性をとるために、このメソッドで、IKaigoShikakuは再計算されます。
          *
          * @return {@link HihokenshaShikaku HihokenshaShikaku}
          */
@@ -419,13 +421,13 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         }
 
         /**
-         * 広域内住所地特例措置元市町村コードを設定します。
+         * 広域内住所地特例措置元保険者番号を設定します。
          *
-         * @param lasdecCode {@link LasdecCode 市町村コード}
-         * @return 広域内住所地特例措置元市町村コードを設定したBuilder自身
+         * @param shoKisaiHokenshaNo {@link ShoKisaiHokenshaNo 証記載保険者番号}
+         * @return 広域内住所地特例措置元保険者番号を設定したBuilder自身
          */
-        public Builder koikinaiJutokuSochimotoLasdecCode(LasdecCode lasdecCode) {
-            this.koikiJutokuOriginLasdecCode = lasdecCode;
+        public Builder koikinaiJutokuSochimotoLasdecCode(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+            this.koikiJutokuOriginHokenshaCode = shoKisaiHokenshaNo;
             return this;
         }
 
@@ -517,7 +519,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
                     toRDateOrMax(this.soshitsu.getActionDate()),
                     toIShikakuSoshitsuJiyu(this.soshitsu.getReason().getCode()),
                     this.theHihokenshaNo.value(),
-                    RString.EMPTY,
+                    this.koikiJutokuOriginHokenshaCode.value(),
                     toRDateOrMax(this.ichigoGaitoDate),
                     toShikakuHihokenshaKubun(this.hihokenshaKubun),
                     this.jutokushaKubun);
@@ -526,7 +528,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
 
         //TODO n8178 城間篤人 UR側の区分も今後、CodeAssignedItemの形に修正する予定。修正後にこのメソッドを削除する　2014年9月末
         private ShikakuHihokenshaKubun toShikakuHihokenshaKubun(HihokenshaKubun hihokenshaKubun) {
-            return ShikakuHihokenshaKubun.toValue(hihokenshaKubun.getCode().getColumnValue());
+            return ShikakuHihokenshaKubun.第１号被保険者;
         }
 
         private boolean isNull(Object target) {

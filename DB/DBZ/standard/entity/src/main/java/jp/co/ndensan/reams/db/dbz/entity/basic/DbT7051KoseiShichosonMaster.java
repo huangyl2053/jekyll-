@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  *
  */
 public enum DbT7051KoseiShichosonMaster implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
     insertReamsLoginId(2147483647, 0),
@@ -35,12 +35,13 @@ public enum DbT7051KoseiShichosonMaster implements IColumnDefinition {
     gaikokujinHyojiHouhou(1, 0),
     rojinhokenShichosonNo(8, 0),
     rokenJukyushaNoTaikei(1, 0),
+    tokuchoBunpaishuyaku(1, 0),
     ikoYMD(2147483647, 0),
     kanyuYMD(2147483647, 0),
     ridatsuYMD(2147483647, 0),
     gappeiKyuShichosonKubun(1, 0),
     gappeiKyuShichosonHyojiUmu(1, 0),
-    gappeiLinkNo(2, 0),
+    gappeiChiikiNo(2, 0),
     unyoHokenshaNo(2147483647, 0),
     unyoKaishiYMD(2147483647, 0),
     unyoShuryoYMD(2147483647, 0),

@@ -1,0 +1,774 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBC&quot;,&quot;controlName&quot;:&quot;ServiceTeikyoShomeishoShafukuList&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;AddButtonVisible&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;AddButtonDisplayNone&quot;,&quot;editType&quot;:1},{&quot;propertyName&quot;:&quot;AddButtonOnClick&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;MeisaiListHeight&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;MeisaiListOnSelect&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;MeisaiListOnSelectByDblClick&quot;,&quot;editType&quot;:0}]},&quot;AddButtonVisible&quot;:true,&quot;AddButtonDisplayNone&quot;:false,&quot;AddButtonOnClick&quot;:&quot;&quot;,&quot;MeisaiListHeight&quot;:&quot;192px&quot;,&quot;MeisaiListOnSelect&quot;:&quot;&quot;,&quot;MeisaiListOnSelectByDblClick&quot;:&quot;&quot;}" data-is-composite-control="true" data-control-name="DBC.ServiceTeikyoShomeishoShafukuList"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel StateChangable UzCommonChildDivPanel Width-G2 UzCompositeChild" id="ServiceTeikyoShomeishoShafukuList" style="margin: 0em; width: auto;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ServiceTeikyoShomeishoShafukuList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;ServiceTeikyoShomeishoShafukuList&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ServiceTeikyoShomeishoShafukuList&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ServiceTeikyoShomeishoShafukuList_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete ui-droppable ui-sortable" id="ServiceTeikyoShomeishoShafukuList_panel_body_area"><button title="" class="UzButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="btnAdd" style="width: 150px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnAdd&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;selectControlID&quot;:&quot;btnAdd&quot;,&quot;text&quot;:&quot;明細情報を追加する&quot;}" value="undefined"><span>明細情報を追加する</span></button><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="dgServiceTeikyoShomeishoShafukuList" style="width: 950px; height: 192px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgServiceTeikyoShomeishoShafukuList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;950px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;dgServiceTeikyoShomeishoShafukuList&quot;,&quot;height&quot;:&quot;192px&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:true,&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:1},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;btnSelect&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:35,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;選&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;btnSelect&quot;},{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;btnEdit&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:35,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;修&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;btnEdit&quot;},{&quot;columnName&quot;:&quot;&quot;,&quot;dataName&quot;:&quot;btnDelete&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:35,&quot;visible&quot;:true,&quot;cellType&quot;:8,&quot;cellDetails&quot;:{&quot;cellType&quot;:8,&quot;text&quot;:&quot;削&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;btnDelete&quot;},{&quot;columnName&quot;:&quot;サービス種類&quot;,&quot;dataName&quot;:&quot;txtShurui&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtShurui&quot;},{&quot;columnName&quot;:&quot;軽減率&quot;,&quot;dataName&quot;:&quot;txtKeigenritsu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtKeigenritsu&quot;},{&quot;columnName&quot;:&quot;受領すべき<br>利用者負担の総額&quot;,&quot;dataName&quot;:&quot;txtFutanSogaku&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:160,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtFutanSogaku&quot;},{&quot;columnName&quot;:&quot;軽減額&quot;,&quot;dataName&quot;:&quot;txtKeigengaku&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtKeigengaku&quot;},{&quot;columnName&quot;:&quot;軽減後<br>利用者負担額&quot;,&quot;dataName&quot;:&quot;txtKeigengoRiyoshaFutangaku&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtKeigengoRiyoshaFutangaku&quot;},{&quot;columnName&quot;:&quot;備考&quot;,&quot;dataName&quot;:&quot;txtBiko&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:160,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;txtBiko&quot;}]},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgServiceTeikyoShomeishoShafukuList_grid_table" role="" style="width: 950px; height: 167px; position: relative;"></div><div id="dgServiceTeikyoShomeishoShafukuList_footer" style="width: 950px; height: 25px;"></div></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBC;
+(function (DBC) {
+    (function (ServiceTeikyoShomeishoShafukuList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ServiceTeikyoShomeishoShafukuList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "ServiceTeikyoShomeishoShafukuList";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.ServiceTeikyoShomeishoShafukuList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.dgServiceTeikyoShomeishoShafukuList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceTeikyoShomeishoShafukuList"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        ServiceTeikyoShomeishoShafukuList.Controls = Controls;
+    })(DBC.ServiceTeikyoShomeishoShafukuList || (DBC.ServiceTeikyoShomeishoShafukuList = {}));
+    var ServiceTeikyoShomeishoShafukuList = DBC.ServiceTeikyoShomeishoShafukuList;
+
+    var ServiceTeikyoShomeishoShafukuList_Design = (function (_super) {
+        __extends(ServiceTeikyoShomeishoShafukuList_Design, _super);
+        function ServiceTeikyoShomeishoShafukuList_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, ServiceTeikyoShomeishoShafukuList_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(ServiceTeikyoShomeishoShafukuList_Design.prototype, "AddButtonVisible", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["visible"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["visible"] = value;
+                } else {
+                    this.layout.items[0].items[0]["visible"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ServiceTeikyoShomeishoShafukuList_Design.prototype, "AddButtonDisplayNone", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["displayNone"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["displayNone"] = value;
+                } else {
+                    this.layout.items[0].items[0]["displayNone"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ServiceTeikyoShomeishoShafukuList_Design.prototype, "AddButtonOnClick", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onClick"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onClick"] = value;
+                } else {
+                    this.layout.items[0].items[0]["onClick"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ServiceTeikyoShomeishoShafukuList_Design.prototype, "MeisaiListGridSetting", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["gridSetting"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["gridSetting"] = value;
+                } else {
+                    this.layout.items[0].items[1]["gridSetting"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ServiceTeikyoShomeishoShafukuList_Design.prototype, "MeisaiListHeight", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["height"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["height"] = value;
+                } else {
+                    this.layout.items[0].items[1]["height"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ServiceTeikyoShomeishoShafukuList_Design.prototype, "MeisaiListOnSelect", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelect"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelect"] = value;
+                } else {
+                    this.layout.items[0].items[1]["onSelect"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(ServiceTeikyoShomeishoShafukuList_Design.prototype, "MeisaiListOnSelectByDblClick", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelectByDblClick"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"])["onSelectByDblClick"] = value;
+                } else {
+                    this.layout.items[0].items[1]["onSelectByDblClick"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        ServiceTeikyoShomeishoShafukuList_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("AddButtonVisible");
+            Uz.JSControlUtil.registProperty("AddButtonDisplayNone");
+            Uz.JSControlUtil.registProperty("AddButtonOnClick");
+            Uz.JSControlUtil.registProperty("MeisaiListGridSetting");
+            Uz.JSControlUtil.registProperty("MeisaiListHeight");
+            Uz.JSControlUtil.registProperty("MeisaiListOnSelect");
+            Uz.JSControlUtil.registProperty("MeisaiListOnSelectByDblClick");
+        };
+
+        ServiceTeikyoShomeishoShafukuList_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["AddButtonVisible"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["visible"];
+            editablePropertyInfo["AddButtonDisplayNone"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["displayNone"];
+            editablePropertyInfo["AddButtonOnClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onClick"];
+            editablePropertyInfo["MeisaiListGridSetting"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["gridSetting"];
+            editablePropertyInfo["MeisaiListHeight"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["height"];
+            editablePropertyInfo["MeisaiListOnSelect"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onSelect"];
+            editablePropertyInfo["MeisaiListOnSelectByDblClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[1]["fieldName"]).getEditablePropertyInfo()["onSelectByDblClick"];
+
+            return editablePropertyInfo;
+        };
+        ServiceTeikyoShomeishoShafukuList_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "ServiceTeikyoShomeishoShafukuList",
+                    "items": [
+                        {
+                            "fieldName": "btnAdd",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "150",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "text": "明細情報を追加する",
+                            "onClick": "",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": ""
+                        },
+                        {
+                            "fieldName": "dgServiceTeikyoShomeishoShafukuList",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "950",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": false,
+                                "isShowFooter": true,
+                                "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": true,
+                                "header": {
+                                    "combineColumns": [],
+                                    "frozenColumn": "",
+                                    "headerHeight": 1
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "",
+                                        "dataName": "btnSelect",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 35,
+                                        "visible": true,
+                                        "cellType": 8,
+                                        "cellDetails": {
+                                            "cellType": 8,
+                                            "text": "選",
+                                            "onClick": "",
+                                            "imageFileUrl": "",
+                                            "imageWidth": "",
+                                            "imageHeight": ""
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "btnSelect"
+                                    },
+                                    {
+                                        "columnName": "",
+                                        "dataName": "btnEdit",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 35,
+                                        "visible": true,
+                                        "cellType": 8,
+                                        "cellDetails": {
+                                            "cellType": 8,
+                                            "text": "修",
+                                            "onClick": "",
+                                            "imageFileUrl": "",
+                                            "imageWidth": "",
+                                            "imageHeight": ""
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "btnEdit"
+                                    },
+                                    {
+                                        "columnName": "",
+                                        "dataName": "btnDelete",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 35,
+                                        "visible": true,
+                                        "cellType": 8,
+                                        "cellDetails": {
+                                            "cellType": 8,
+                                            "text": "削",
+                                            "onClick": "",
+                                            "imageFileUrl": "",
+                                            "imageWidth": "",
+                                            "imageHeight": ""
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "btnDelete"
+                                    },
+                                    {
+                                        "columnName": "サービス種類",
+                                        "dataName": "txtShurui",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 150,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtShurui"
+                                    },
+                                    {
+                                        "columnName": "軽減率",
+                                        "dataName": "txtKeigenritsu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtKeigenritsu"
+                                    },
+                                    {
+                                        "columnName": "受領すべき<br>利用者負担の総額",
+                                        "dataName": "txtFutanSogaku",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 160,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtFutanSogaku"
+                                    },
+                                    {
+                                        "columnName": "軽減額",
+                                        "dataName": "txtKeigengaku",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 120,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtKeigengaku"
+                                    },
+                                    {
+                                        "columnName": "軽減後<br>利用者負担額",
+                                        "dataName": "txtKeigengoRiyoshaFutangaku",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 120,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtKeigengoRiyoshaFutangaku"
+                                    },
+                                    {
+                                        "columnName": "備考",
+                                        "dataName": "txtBiko",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 160,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "txtBiko"
+                                    }
+                                ]
+                            },
+                            "height": "192",
+                            "onSort": "",
+                            "onSelect": "",
+                            "onSelectByDblClick": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "M",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0",
+                    "marginRight": "0",
+                    "onLoad": "",
+                    "title": "",
+                    "marginTop": "0",
+                    "marginBottom": "0",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "ServiceTeikyoShomeishoShafukuList"
+                        }
+                    ],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorderTop": true,
+                    "eraseBorderBottom": true,
+                    "eraseBorderRight": true,
+                    "eraseBorderLeft": true,
+                    "backgroundColor": 0,
+                    "widthAuto": true,
+                    "isGroupBox": false
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "relation": [],
+            "businessId": "DBC",
+            "controlName": "ServiceTeikyoShomeishoShafukuList",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [
+                {
+                    "publicChildFieldName": "btnAdd",
+                    "publicChildProperty": "visible",
+                    "newPropertyName": "AddButtonVisible"
+                },
+                {
+                    "publicChildFieldName": "btnAdd",
+                    "publicChildProperty": "displayNone",
+                    "newPropertyName": "AddButtonDisplayNone"
+                },
+                {
+                    "publicChildFieldName": "btnAdd",
+                    "publicChildProperty": "onClick",
+                    "newPropertyName": "AddButtonOnClick"
+                },
+                {
+                    "publicChildFieldName": "dgServiceTeikyoShomeishoShafukuList",
+                    "publicChildProperty": "gridSetting",
+                    "newPropertyName": "MeisaiListGridSetting"
+                },
+                {
+                    "publicChildFieldName": "dgServiceTeikyoShomeishoShafukuList",
+                    "publicChildProperty": "height",
+                    "newPropertyName": "MeisaiListHeight"
+                },
+                {
+                    "publicChildFieldName": "dgServiceTeikyoShomeishoShafukuList",
+                    "publicChildProperty": "onSelect",
+                    "newPropertyName": "MeisaiListOnSelect"
+                },
+                {
+                    "publicChildFieldName": "dgServiceTeikyoShomeishoShafukuList",
+                    "publicChildProperty": "onSelectByDblClick",
+                    "newPropertyName": "MeisaiListOnSelectByDblClick"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": ""
+        };
+        return ServiceTeikyoShomeishoShafukuList_Design;
+    })(Uz.CommonChildDiv);
+    DBC.ServiceTeikyoShomeishoShafukuList_Design = ServiceTeikyoShomeishoShafukuList_Design;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (ServiceTeikyoShomeishoShafukuList) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ServiceTeikyoShomeishoShafukuList.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ServiceTeikyoShomeishoShafukuList.ModeController = ModeController;
+    })(DBC.ServiceTeikyoShomeishoShafukuList || (DBC.ServiceTeikyoShomeishoShafukuList = {}));
+    var ServiceTeikyoShomeishoShafukuList = DBC.ServiceTeikyoShomeishoShafukuList;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (ServiceTeikyoShomeishoShafukuList) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ServiceTeikyoShomeishoShafukuList.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("AddButtonVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("AddButtonDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("AddButtonOnClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("MeisaiListHeight", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("MeisaiListOnSelect", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("MeisaiListOnSelectByDblClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getAddButtonVisible = function () {
+                return this.controls.btnAdd().visible;
+            };
+
+            PublicProperties.prototype.setAddButtonVisible = function (value) {
+                this.controls.btnAdd().visible = value;
+            };
+
+            PublicProperties.prototype.getAddButtonDisplayNone = function () {
+                return this.controls.btnAdd().displayNone;
+            };
+
+            PublicProperties.prototype.setAddButtonDisplayNone = function (value) {
+                this.controls.btnAdd().displayNone = value;
+            };
+
+            PublicProperties.prototype.getAddButtonOnClick = function () {
+                return this.controls.btnAdd().onClick;
+            };
+
+            PublicProperties.prototype.setAddButtonOnClick = function (value) {
+                this.controls.btnAdd().onClick = value;
+            };
+
+            PublicProperties.prototype.getMeisaiListHeight = function () {
+                return this.controls.dgServiceTeikyoShomeishoShafukuList().height;
+            };
+
+            PublicProperties.prototype.setMeisaiListHeight = function (value) {
+                this.controls.dgServiceTeikyoShomeishoShafukuList().height = value;
+            };
+
+            PublicProperties.prototype.getMeisaiListOnSelect = function () {
+                return this.controls.dgServiceTeikyoShomeishoShafukuList().onSelect;
+            };
+
+            PublicProperties.prototype.setMeisaiListOnSelect = function (value) {
+                this.controls.dgServiceTeikyoShomeishoShafukuList().onSelect = value;
+            };
+
+            PublicProperties.prototype.getMeisaiListOnSelectByDblClick = function () {
+                return this.controls.dgServiceTeikyoShomeishoShafukuList().onSelectByDblClick;
+            };
+
+            PublicProperties.prototype.setMeisaiListOnSelectByDblClick = function (value) {
+                this.controls.dgServiceTeikyoShomeishoShafukuList().onSelectByDblClick = value;
+            };
+            return PublicProperties;
+        })();
+        ServiceTeikyoShomeishoShafukuList.PublicProperties = PublicProperties;
+    })(DBC.ServiceTeikyoShomeishoShafukuList || (DBC.ServiceTeikyoShomeishoShafukuList = {}));
+    var ServiceTeikyoShomeishoShafukuList = DBC.ServiceTeikyoShomeishoShafukuList;
+})(DBC || (DBC = {}));
+</script>
+  <script class="RamlConvert" type="text/javascript">
+var DBC= DBC? DBC: {};
+DBC['SERVICETEIKYOSHOMEISHOSHAFUKULIST'] = {};
+DBC['SERVICETEIKYOSHOMEISHOSHAFUKULIST'].ServiceTeikyoShomeishoShafukuListRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ServiceTeikyoShomeishoShafukuList').getProperty();parameter0.btnAdd = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnAdd').getProperty();parameter0.dgServiceTeikyoShomeishoShafukuList = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgServiceTeikyoShomeishoShafukuList').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBC;
+(function (DBC) {
+    (function (ServiceTeikyoShomeishoShafukuList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ServiceTeikyoShomeishoShafukuList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ServiceTeikyoShomeishoShafukuList";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBC.ServiceTeikyoShomeishoShafukuList.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBC.ServiceTeikyoShomeishoShafukuList.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ServiceTeikyoShomeishoShafukuList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnAdd = function () {
+                return new UZA.Button(this.convFiledName("btnAdd"));
+            };
+
+            Controls.prototype.dgServiceTeikyoShomeishoShafukuList = function () {
+                return new UZA.DataGrid(this.convFiledName("dgServiceTeikyoShomeishoShafukuList"));
+            };
+            return Controls;
+        })();
+        ServiceTeikyoShomeishoShafukuList.Controls = Controls;
+    })(DBC.ServiceTeikyoShomeishoShafukuList || (DBC.ServiceTeikyoShomeishoShafukuList = {}));
+    var ServiceTeikyoShomeishoShafukuList = DBC.ServiceTeikyoShomeishoShafukuList;
+})(DBC || (DBC = {}));
+var DBC;
+(function (DBC) {
+    (function (ServiceTeikyoShomeishoShafukuList) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ServiceTeikyoShomeishoShafukuList.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ServiceTeikyoShomeishoShafukuList.ModeController = ModeController;
+    })(DBC.ServiceTeikyoShomeishoShafukuList || (DBC.ServiceTeikyoShomeishoShafukuList = {}));
+    var ServiceTeikyoShomeishoShafukuList = DBC.ServiceTeikyoShomeishoShafukuList;
+})(DBC || (DBC = {}));
+
+var DBC;
+(function (DBC) {
+    (function (ServiceTeikyoShomeishoShafukuList) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new ServiceTeikyoShomeishoShafukuList.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("AddButtonVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("AddButtonDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
+                editTypes.addEditType("AddButtonOnClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("MeisaiListHeight", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("MeisaiListOnSelect", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("MeisaiListOnSelectByDblClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getAddButtonVisible = function () {
+                return this.controls.btnAdd().visible;
+            };
+
+            PublicProperties.prototype.setAddButtonVisible = function (value) {
+                this.controls.btnAdd().visible = value;
+            };
+
+            PublicProperties.prototype.getAddButtonDisplayNone = function () {
+                return this.controls.btnAdd().displayNone;
+            };
+
+            PublicProperties.prototype.setAddButtonDisplayNone = function (value) {
+                this.controls.btnAdd().displayNone = value;
+            };
+
+            PublicProperties.prototype.getAddButtonOnClick = function () {
+                return this.controls.btnAdd().onClick;
+            };
+
+            PublicProperties.prototype.setAddButtonOnClick = function (value) {
+                this.controls.btnAdd().onClick = value;
+            };
+
+            PublicProperties.prototype.getMeisaiListHeight = function () {
+                return this.controls.dgServiceTeikyoShomeishoShafukuList().height;
+            };
+
+            PublicProperties.prototype.setMeisaiListHeight = function (value) {
+                this.controls.dgServiceTeikyoShomeishoShafukuList().height = value;
+            };
+
+            PublicProperties.prototype.getMeisaiListOnSelect = function () {
+                return this.controls.dgServiceTeikyoShomeishoShafukuList().onSelect;
+            };
+
+            PublicProperties.prototype.setMeisaiListOnSelect = function (value) {
+                this.controls.dgServiceTeikyoShomeishoShafukuList().onSelect = value;
+            };
+
+            PublicProperties.prototype.getMeisaiListOnSelectByDblClick = function () {
+                return this.controls.dgServiceTeikyoShomeishoShafukuList().onSelectByDblClick;
+            };
+
+            PublicProperties.prototype.setMeisaiListOnSelectByDblClick = function (value) {
+                this.controls.dgServiceTeikyoShomeishoShafukuList().onSelectByDblClick = value;
+            };
+            return PublicProperties;
+        })();
+        ServiceTeikyoShomeishoShafukuList.PublicProperties = PublicProperties;
+    })(DBC.ServiceTeikyoShomeishoShafukuList || (DBC.ServiceTeikyoShomeishoShafukuList = {}));
+    var ServiceTeikyoShomeishoShafukuList = DBC.ServiceTeikyoShomeishoShafukuList;
+})(DBC || (DBC = {}));
+</script></div>

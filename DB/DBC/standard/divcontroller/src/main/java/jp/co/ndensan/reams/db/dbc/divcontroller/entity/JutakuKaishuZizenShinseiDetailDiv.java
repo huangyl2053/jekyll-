@@ -5,8 +5,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.JutakuKaishuShinseiDetailInput.JutakuKaishuShinseiDetailInputDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufugakuSummaryDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dgJutakuKaishuJizenShinseiDetail_Row;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * JutakuKaishuZizenShinseiDetail のクラスファイル 
@@ -20,8 +23,10 @@ public class JutakuKaishuZizenShinseiDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("JutakuJizenShinseiDetailInput")
-    private JutakuKaishuShinseiDetailInputDiv JutakuJizenShinseiDetailInput;
+    @JsonProperty("dgJutakuKaishuJizenShinseiDetail")
+    private DataGrid<dgJutakuKaishuJizenShinseiDetail_Row> dgJutakuKaishuJizenShinseiDetail;
+    @JsonProperty("JutakuKaishuJizenShinseiKyufugakuSummary")
+    private KyufugakuSummaryDiv JutakuKaishuJizenShinseiKyufugakuSummary;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -29,14 +34,19 @@ public class JutakuKaishuZizenShinseiDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("JutakuJizenShinseiDetailInput")
-    public JutakuKaishuShinseiDetailInputDiv getJutakuJizenShinseiDetailInput() {
-        return JutakuJizenShinseiDetailInput;
+    @JsonProperty("dgJutakuKaishuJizenShinseiDetail")
+    public DataGrid<dgJutakuKaishuJizenShinseiDetail_Row> getDgJutakuKaishuJizenShinseiDetail() {
+        return dgJutakuKaishuJizenShinseiDetail;
     }
 
-    @JsonProperty("JutakuJizenShinseiDetailInput")
-    public void setJutakuJizenShinseiDetailInput(JutakuKaishuShinseiDetailInputDiv JutakuJizenShinseiDetailInput) {
-        this.JutakuJizenShinseiDetailInput=JutakuJizenShinseiDetailInput;
+    @JsonProperty("dgJutakuKaishuJizenShinseiDetail")
+    public void setDgJutakuKaishuJizenShinseiDetail(DataGrid<dgJutakuKaishuJizenShinseiDetail_Row> dgJutakuKaishuJizenShinseiDetail) {
+        this.dgJutakuKaishuJizenShinseiDetail=dgJutakuKaishuJizenShinseiDetail;
+    }
+
+    @JsonProperty("JutakuKaishuJizenShinseiKyufugakuSummary")
+    public IKyufugakuSummaryDiv getJutakuKaishuJizenShinseiKyufugakuSummary() {
+        return JutakuKaishuJizenShinseiKyufugakuSummary;
     }
 
 }

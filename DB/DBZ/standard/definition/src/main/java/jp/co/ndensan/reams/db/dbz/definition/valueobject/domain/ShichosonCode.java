@@ -14,8 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * ドメインのShichosonCodeです。<br/>
- * （※別チケットで対応）
+ * ドメインのShichosonCodeです。
  *
  * @author N3327 三浦 凌
  */

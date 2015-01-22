@@ -1,0 +1,17 @@
+﻿hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,A
+seiriNo,varchar,RString,,,,,A
+jigyoshaNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,A
+yoshikiNo,varchar,RString,,,,,A
+junjiNo,varchar,RString,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+serviceCode,DbUDD007ServiceCode,DbUDD007ServiceCode,,,,,A
+fukushiYoguHanbaiYMD,UDD015YMD,FlexibleDate,,,,,A
+fukushiYoguShohinName,varchar,RString,,,,,A
+fukushiYoguShumokuCode,varchar,RString,,,,,A
+fukushiYoguSeizoJigyoshaName,varchar,RString,,,,,A
+fukushiYoguHanbaiJigyoshaName,varchar,RString,,,,,A
+kounyuKingaku,int4,int,,,,,A
+hinmokuCode,varchar,RString,,,,,A
+shinsaHohoKubunCode,varchar,RString,,,,,A
+sagakuKingaku,int4,int,,,,,A

@@ -5,17 +5,12 @@
 package jp.co.ndensan.reams.db.dbz.business.helper;
 
 import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
-import jp.co.ndensan.reams.db.dbz.business.HihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
-import jp.co.ndensan.reams.db.dbz.business.ShikakuShutoku;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.mockito.Mockito.*;
 
@@ -37,9 +32,11 @@ public final class HihokenshaMock {
 
     public static Hihokensha createHihokensha(LasdecCode lasdecCode, ShikibetsuCode shikibetsuCode, YMDHMS shoriTimeStamp,
             HihokenshaNo hihokenshaNo) {
-        IHihokenshaShikaku shikaku = new HihokenshaShikaku.Builder(lasdecCode, shikibetsuCode, shoriTimeStamp,
-                new HihokenshaKubun(new Code("1"), new RString("第1号")), FlexibleDate.MAX, ShikakuShutoku.NOTHING)
-                .hihokenshaNo(hihokenshaNo).build();
+        IHihokenshaShikaku shikaku = mock(IHihokenshaShikaku.class);
+        when(shikaku.get市町村コード()).thenReturn(lasdecCode);
+        when(shikaku.get識別コード()).thenReturn(shikibetsuCode);
+        when(shikaku.get処理日時()).thenReturn(shoriTimeStamp);
+        when(shikaku.get被保険者番号()).thenReturn(hihokenshaNo);
 
         IKojin profile = mock(IKojin.class);
         return new Hihokensha(profile, shikaku);

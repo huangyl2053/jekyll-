@@ -14,8 +14,6 @@ import jp.co.ndensan.reams.db.dbz.business.comparator.HihokenshaComparators.Regi
 import jp.co.ndensan.reams.db.dbz.business.util.MultiComparator;
 import jp.co.ndensan.reams.db.dbz.business.comparator.ShikibetsuCodeComparator;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -26,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
  *
  * @author N3327 三浦 凌
  */
+@Deprecated
 public class HihokenshaList implements Iterable<Hihokensha> {
 
     private final List<Hihokensha> list;

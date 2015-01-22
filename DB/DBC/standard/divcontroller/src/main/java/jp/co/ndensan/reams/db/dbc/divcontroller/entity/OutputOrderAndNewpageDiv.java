@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.IOutputOrderAndNewpageDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * 
  * @author 自動生成
  */
-public class OutputOrderAndNewpageDiv extends Panel {
+public class OutputOrderAndNewpageDiv extends Panel implements IOutputOrderAndNewpageDiv {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -111,5 +112,7 @@ public class OutputOrderAndNewpageDiv extends Panel {
     public void setTxt5(TextBox txt5) {
         this.txt5=txt5;
     }
+
+    //--------------- この行より下にコードを追加してください -------------------
 
 }

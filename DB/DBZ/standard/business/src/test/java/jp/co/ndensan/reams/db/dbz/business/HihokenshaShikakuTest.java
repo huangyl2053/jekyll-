@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
@@ -45,6 +46,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
     private static final LasdecCode lasdecCode = new LasdecCode("123456");
     private static final ShikibetsuCode shikibetsuCode = new ShikibetsuCode("3327");
     private static final YMDHMS shoriTimestamp = new YMDHMS("20140802153700");
+    private static final ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("123456"));
     private static final HihokenshaNo hihokenshaNo = new HihokenshaNo(new RString("1234567890"));
     private static final HihokenshaKubun hihokenshaKubun = new HihokenshaKubun(new Code("1"), new RString("第1号"));
     private static final RDate ichigoGaitoDate = new RDate("20140403");
@@ -376,19 +378,19 @@ public class HihokenshaShikakuTest extends DbzTestBase {
 
                     private HihokenshaShikaku shikaku;
                     private HihokenshaShikaku.Builder sut;
-                    private LasdecCode code;
+                    private ShoKisaiHokenshaNo code;
 
                     @Before
                     public void setUp() {
                         sut = new HihokenshaShikaku.Builder(lasdecCode,
                                 shikibetsuCode, shoriTimestamp, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
-                        code = new LasdecCode("666666");
+                        code = new ShoKisaiHokenshaNo(new RString("666666"));
                         shikaku = sut.koikinaiJutokuSochimotoLasdecCode(code).build();
                     }
 
                     @Test
                     public void koikiJutokuSochimotoLasdecCodeに渡したLasdecCodeは_生成されたHihokenshaShikakuの_get広域内住所地特例措置元市町村コードと一致する() {
-                        assertThat(shikaku.get広域内住所地特例措置元市町村コード(), is(code));
+                        assertThat(shikaku.get広域内住所地特例措置元保険者番号(), is(code));
                     }
                 }
 
@@ -475,7 +477,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                             shikibetsuCode, HokenShubetsu.介護保険,
                             資格取得届出Date, 資格取得Date, 資格取得事由,
                             資格喪失届出Date, 資格喪失Date, 資格喪失事由,
-                            hihokenshaNo.value(), RString.EMPTY,
+                            hihokenshaNo.value(), shoKisaiHokenshaNo.getColumnValue(),
                             ichigoGaitoDate, ShikakuHihokenshaKubun.toValue(hihokenshaKubun.getCode().getColumnValue()),
                             JushochiTokureishaKubun.通常資格者);
                 }
@@ -640,7 +642,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
 
                 @Test
                 public void 引数のHihokenshaShikakuのget広域内住所地特例措置元市町村コードと_生成後のHihokenshaShikakuのget広域内住所地特例措置元市町村コードは一致する() {
-                    assertThat(created.get広域内住所地特例措置元市町村コード(), is(shikaku.get広域内住所地特例措置元市町村コード()));
+                    assertThat(created.get広域内住所地特例措置元保険者番号(), is(shikaku.get広域内住所地特例措置元保険者番号()));
                 }
 
                 @Test

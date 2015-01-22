@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ISogoShokaiNinteiInfoDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * 
  * @author 自動生成
  */
-public class SogoShokaiNinteiInfoDiv extends Panel {
+public class SogoShokaiNinteiInfoDiv extends Panel implements ISogoShokaiNinteiInfoDiv {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -37,10 +38,10 @@ public class SogoShokaiNinteiInfoDiv extends Panel {
     private TextBox txtNinteiChosaItakusaki;
     @JsonProperty("txtNinteiChosain")
     private TextBox txtNinteiChosain;
-    @JsonProperty("txtNinteiShujii")
-    private TextBox txtNinteiShujii;
     @JsonProperty("txtNinteiShujiiIryoKikan")
     private TextBox txtNinteiShujiiIryoKikan;
+    @JsonProperty("txtNinteiShujii")
+    private TextBox txtNinteiShujii;
     @JsonProperty("txtNinteiIkenshoJuryoYMD")
     private TextBoxDate txtNinteiIkenshoJuryoYMD;
     @JsonProperty("txtNinteiIkenshoKanryoYMD")
@@ -160,16 +161,6 @@ public class SogoShokaiNinteiInfoDiv extends Panel {
         this.txtNinteiChosain=txtNinteiChosain;
     }
 
-    @JsonProperty("txtNinteiShujii")
-    public TextBox getTxtNinteiShujii() {
-        return txtNinteiShujii;
-    }
-
-    @JsonProperty("txtNinteiShujii")
-    public void setTxtNinteiShujii(TextBox txtNinteiShujii) {
-        this.txtNinteiShujii=txtNinteiShujii;
-    }
-
     @JsonProperty("txtNinteiShujiiIryoKikan")
     public TextBox getTxtNinteiShujiiIryoKikan() {
         return txtNinteiShujiiIryoKikan;
@@ -178,6 +169,16 @@ public class SogoShokaiNinteiInfoDiv extends Panel {
     @JsonProperty("txtNinteiShujiiIryoKikan")
     public void setTxtNinteiShujiiIryoKikan(TextBox txtNinteiShujiiIryoKikan) {
         this.txtNinteiShujiiIryoKikan=txtNinteiShujiiIryoKikan;
+    }
+
+    @JsonProperty("txtNinteiShujii")
+    public TextBox getTxtNinteiShujii() {
+        return txtNinteiShujii;
+    }
+
+    @JsonProperty("txtNinteiShujii")
+    public void setTxtNinteiShujii(TextBox txtNinteiShujii) {
+        this.txtNinteiShujii=txtNinteiShujii;
     }
 
     @JsonProperty("txtNinteiIkenshoJuryoYMD")
@@ -339,5 +340,7 @@ public class SogoShokaiNinteiInfoDiv extends Panel {
     public void setBtnClose(Button btnClose) {
         this.btnClose=btnClose;
     }
+
+    //--------------- この行より下にコードを追加してください -------------------
 
 }

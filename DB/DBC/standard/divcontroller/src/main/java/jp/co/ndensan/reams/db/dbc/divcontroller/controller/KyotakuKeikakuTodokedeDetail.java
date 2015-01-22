@@ -18,9 +18,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikaku
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikakuTodokedeshaDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.dgKyotakuKeikakuTodokedeRirekiList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.tplKyotakuKeikakuTodokedeDetailRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
+//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoShikakuKihon;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoKaishuKirokuKanriDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.dgShoKaishuJokyo_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyolist.dgShoKaishuJokyo_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -80,7 +80,7 @@ public class KyotakuKeikakuTodokedeDetail {
         ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
         int rowId = 0;
         KyotakuKeikakuTodokedeKihonDiv div = panel.getKyotakuKeikakuTodokedeKihon();
-        KaigoShikakuKihon.setData(div.getKyotakuKeikakuTodokedeKihonAtena(), div.getKyotakuKeikakuTodokedeKaigoKihon(), 識別コード, rowId);
+//        KaigoShikakuKihon.setData(div.getKyotakuKeikakuTodokedeKihonAtena(), div.getKyotakuKeikakuTodokedeKaigoKihon(), 識別コード, rowId);
     }
 
     private void setRirekiList(KyotakuKeikakuTodokedeDetailDiv panel) {
@@ -630,11 +630,11 @@ public class KyotakuKeikakuTodokedeDetail {
         ShoKaishuKirokuKanriDiv kanri = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
                 getTplKyotakuKeikakuTodokedeDetailShorui().getKyotakuKeikakuTodokedeShoruiJyokyo();
         List<HashMap> yamlData = YamlLoader.DBC.loadAsList(new RString("dbc0100000/KyotakuKeikakuTodokedeShoKofuKaishu.yml"));
-        List<dgShoKaishuJokyo_Row> dgRow = kanri.getShoKaishuJokyoList().getDgShoKaishuJokyo().getDataSource();
+        List<dgShoKaishuJokyo_Row> dgRow = kanri.getCcdShoKaishuJokyoList().getDgShoKaishuJokyo().getDataSource();
         dgRow.clear();
         for (int i = 0; i < 2; i++) {
             ControlGenerator cg = new ControlGenerator(yamlData.get(i));
-            dgShoKaishuJokyo_Row row = new dgShoKaishuJokyo_Row(new Button(), RString.EMPTY, new TextBoxFlexibleDate(),
+            dgShoKaishuJokyo_Row row = new dgShoKaishuJokyo_Row(RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(),
                     RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate(), RString.EMPTY, RString.EMPTY,
                     RString.EMPTY, new TextBoxFlexibleDate());
 

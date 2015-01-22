@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -12,8 +13,8 @@ import java.util.Objects;
  * DbT7103TeikeibunJohoの項目定義クラスです
  *
  */
-public class DbT7103TeikeibunJohoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+public class DbT7103TeikeibunJohoEntity extends DbTableEntityBase<DbT7103TeikeibunJohoEntity> implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7103TeikeibunJoho");
 
@@ -145,6 +146,7 @@ public class DbT7103TeikeibunJohoEntity implements IDbAccessable {
      * @@return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7103TeikeibunJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
+    @Override
     public boolean equalsPrimaryKeys(DbT7103TeikeibunJohoEntity other) {
         if (other == null) {
             return false;
@@ -161,5 +163,26 @@ public class DbT7103TeikeibunJohoEntity implements IDbAccessable {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void shallowCopy(DbT7103TeikeibunJohoEntity entity) {
+        this.teikeiKubun = entity.teikeiKubun;
+        this.shubetsu = entity.shubetsu;
+        this.teikeibunCd = entity.teikeibunCd;
+        this.teikeibunNaiyo = entity.teikeibunNaiyo;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Override
+    public RString getMd5() {
+        return super.toMd5(teikeiKubun, shubetsu, teikeibunCd, teikeibunNaiyo);
+    }
+
 // </editor-fold>
+
 }

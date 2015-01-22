@@ -4,6 +4,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ISogoShokaiJutakuKaishuhiInfoDiv;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.JutakuKaishuDetailDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgJutakuKaishuDetail_Row;
@@ -17,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * 
  * @author 自動生成
  */
-public class SogoShokaiJutakuKaishuhiInfoDiv extends Panel {
+public class SogoShokaiJutakuKaishuhiInfoDiv extends Panel implements ISogoShokaiJutakuKaishuhiInfoDiv {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -102,5 +104,85 @@ public class SogoShokaiJutakuKaishuhiInfoDiv extends Panel {
     public void setBtnClose(Button btnClose) {
         this.btnClose=btnClose;
     }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public Label getLblSummary() {
+        return this.getTblSeikyuSummary().getLblSummary();
+    }
+
+    @JsonIgnore
+    public Label getLblHiyoTotal() {
+        return this.getTblSeikyuSummary().getLblHiyoTotal();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenTaishoHiyo() {
+        return this.getTblSeikyuSummary().getLblHokenTaishoHiyo();
+    }
+
+    @JsonIgnore
+    public Label getLblHokenKyufuAmount() {
+        return this.getTblSeikyuSummary().getLblHokenKyufuAmount();
+    }
+
+    @JsonIgnore
+    public Label getLblRiyoshaFutanAmount() {
+        return this.getTblSeikyuSummary().getLblRiyoshaFutanAmount();
+    }
+
+    @JsonIgnore
+    public Label getLblSummaryMae() {
+        return this.getTblSeikyuSummary().getLblSummaryMae();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtPayTotalMae() {
+        return this.getTblSeikyuSummary().getTxtPayTotalMae();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtHokenSeikyuAmountMae() {
+        return this.getTblSeikyuSummary().getTxtHokenSeikyuAmountMae();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtRiyoshaFutanAmountMae() {
+        return this.getTblSeikyuSummary().getTxtRiyoshaFutanAmountMae();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtLimitOverAmountMae() {
+        return this.getTblSeikyuSummary().getTxtLimitOverAmountMae();
+    }
+
+    @JsonIgnore
+    public Label getLblSummaryNow() {
+        return this.getTblSeikyuSummary().getLblSummaryNow();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtPayTotalNow() {
+        return this.getTblSeikyuSummary().getTxtPayTotalNow();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtHokenSeikyuAmountNow() {
+        return this.getTblSeikyuSummary().getTxtHokenSeikyuAmountNow();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtRiyoshaFutanAmountNow() {
+        return this.getTblSeikyuSummary().getTxtRiyoshaFutanAmountNow();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtLimitOverAmountNow() {
+        return this.getTblSeikyuSummary().getTxtLimitOverAmountNow();
+    }
+
+    //--------------- この行より下にコードを追加してください -------------------
 
 }

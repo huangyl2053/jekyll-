@@ -23,6 +23,11 @@
             <artifactId>UrzRealService</artifactId>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urf</groupId>
+            <artifactId>UrfPersistence</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzDivController</artifactId>
             <classifier>classes</classifier>
@@ -61,6 +66,13 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzModel</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzEntity</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>

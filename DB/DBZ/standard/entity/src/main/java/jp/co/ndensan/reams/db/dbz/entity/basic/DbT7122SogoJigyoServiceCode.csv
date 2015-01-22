@@ -1,0 +1,17 @@
+﻿serviceShuruiCode,DbUDD005ServiceShuruiCode,DbUDD005ServiceShuruiCode,,,,,A
+serviceKomokuCode,DbUDD006ServiceKomokuCode,DbUDD006ServiceKomokuCode,,,,,A
+tekiyoKaishiYM,UDD014YM,FlexibleYearMonth,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+tekiyoShuryoYM,UDD014YM,FlexibleYearMonth,,,,,A
+serviceMeisho,varchar,RString,,,,,A
+taniSu,numeric,Decimal,,,,,A
+gendoGakuTaishogaiFlag,varchar,RString,,,,,A
+taniSuShikibetsuCode,varchar,RString,,,,,A
+gaibuServiceRiyoKubun,varchar,RString,,,,,A
+tokubetsuChiikiKasanFlag,varchar,RString,,,,,A
+teiRitsu_TeiGakuKubun,varchar,RString,,,,,A
+riyoshaFutanGaku,numeric,Decimal,,,,,A
+kyufuRitsu,DbUDD011HokenKyufuRitsu,DbUDD011HokenKyufuRitsu,,,,,A
+nijiYoboTaishosha_JissiKubun,varchar,RString,,,,,A
+yoShien1_JisshiKubun,varchar,RString,,,,,A
+yoShien2_JisshiKubun,varchar,RString,,,,,A

@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
+@Deprecated
 public class Hihokensha implements IHihokenshaShikaku, INinteiShinseiTaishosha {
 
     private final IKojin profile;
