@@ -1,6 +1,6 @@
 ﻿gappeiYMD,UDD015YMD,FlexibleDate,,,,,A
 chiikiNo,varchar,RString,,,,,A
-kyuShichosonCode,DbUDD001ShichosonCode,LasdecCode,,,,,A
+kyuShichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
 unyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
 unyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,A
 kyuHokenshaNo,DbUDD003HokenshaNo,ShoKisaiHokenshaNo,,,,,A

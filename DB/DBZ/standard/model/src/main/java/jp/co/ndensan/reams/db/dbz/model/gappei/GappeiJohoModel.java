@@ -70,7 +70,7 @@ public class GappeiJohoModel implements Serializable, IGappeiJoho {
      *
      * @return DbT7055GappeiJohoEntity DbT7055GappeiJohoEntity
      */
-    public DbT7055GappeiJohoEntity getDbT7055GappeiJoho() {
+    public DbT7055GappeiJohoEntity getEntity() {
         return entity;
     }
 }

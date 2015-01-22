@@ -5,102 +5,172 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJoho;
+import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7055GappeiJohoEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7055GappeiJohoEntityGenerator.DEFAULT_合併年月日;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7055GappeiJohoEntityGenerator.DEFAULT_地域番号;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
-import jp.co.ndensan.reams.uz.uza.util.db.Restrictions;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Test;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 /**
- * 合併情報のデータアクセスクラスのテストクラスです。
+ * {@link DbT7055GappeiJohoDac}のテストです。
  *
- * @author N8156 宮本 康
+ * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
 public class DbT7055GappeiJohoDacTest extends DbzTestDacBase {
 
+    private static final FlexibleDate 合併年月日 = new FlexibleDate("20150101");
+    private static final FlexibleDate 合併年月日2 = new FlexibleDate("20150102");
     private static DbT7055GappeiJohoDac sut;
-
-    private static final ITrueFalseCriteria 検索条件_該当0件 = Restrictions.eq(new RString("99"), DbT7055GappeiJoho.chiikiNo);
-    private static final ITrueFalseCriteria 検索条件_該当1件 = Restrictions.eq(new RString("01"), DbT7055GappeiJoho.chiikiNo);
-    private static final ITrueFalseCriteria 検索条件_該当2件 = Restrictions.eq(new RString("000001"), DbT7055GappeiJoho.shichosonCode);
 
     @BeforeClass
     public static void setUpClass() {
         sut = InstanceProvider.create(DbT7055GappeiJohoDac.class);
     }
 
-    public static class selectAll extends DbzTestDacBase {
-
-        @Test
-        public void 合併情報が0件の時_selectAllは_0件の情報を返す() {
-            initializeEntityData(0);
-            assertThat(sut.selectAll().size(), is(0));
-        }
-
-        @Test
-        public void 合併情報が1件の時_selectAllは_1件の情報を返す() {
-            initializeEntityData(1);
-            assertThat(sut.selectAll().size(), is(1));
-        }
-
-        @Test
-        public void 合併情報が2件の時_selectAllは_2件の情報を返す() {
-            initializeEntityData(2);
-            assertThat(sut.selectAll().size(), is(2));
-        }
-    }
-
-    public static class select extends DbzTestDacBase {
+    public static class selectByKeyのテスト extends DbzTestDacBase {
 
         @Before
-        public void setup() {
-            initializeEntityData(2);
+        public void setUp() {
+            TestSupport.insert(
+                    合併年月日,
+                    DEFAULT_地域番号);
+            TestSupport.insert(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 合併年月日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    null,
+                    DEFAULT_地域番号);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 地域番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_合併年月日,
+                    null);
         }
 
         @Test
-        public void 該当の合併情報が0件の時_selectは_0件の情報を返す() {
-            assertThat(sut.select(検索条件_該当0件).size(), is(0));
+        public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
+            DbT7055GappeiJohoEntity insertedRecord = sut.selectByKey(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号);
+            assertThat(insertedRecord, is(notNullValue()));
         }
 
         @Test
-        public void 該当の合併情報が1件の時_selectは_1件の情報を返す() {
-            assertThat(sut.select(検索条件_該当1件).size(), is(1));
-        }
-
-        @Test
-        public void 該当の合併情報が2件の時_selectは_2件の情報を返す() {
-            assertThat(sut.select(検索条件_該当2件).size(), is(2));
+        public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
+            DbT7055GappeiJohoEntity insertedRecord = sut.selectByKey(
+                    合併年月日2,
+                    DEFAULT_地域番号);
+            assertThat(insertedRecord, is(nullValue()));
         }
     }
 
-    private static void initializeEntityData(int count) {
-        for (int i = 1; i <= count; i++) {
-            sut.insert(createEntity(i));
+    public static class selectAllのテスト extends DbzTestDacBase {
+
+        @Test
+        public void 合併情報が存在する場合_selectAllは_全件を返す() {
+            TestSupport.insert(
+                    合併年月日,
+                    DEFAULT_地域番号);
+            TestSupport.insert(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号);
+            assertThat(sut.selectAll().size(), is(2));
+        }
+
+        @Test
+        public void 合併情報が存在しない場合_selectAllは_空のリストを返す() {
+            assertThat(sut.selectAll(), is(Collections.EMPTY_LIST));
         }
     }
 
-    private static DbT7055GappeiJohoEntity createEntity(int no) {
-        DbT7055GappeiJohoEntity entity = new DbT7055GappeiJohoEntity();
-        entity.setGappeiYMD(new FlexibleDate(String.format("201401%1$02d", no)));
-        entity.setChiikiNo(new RString(String.format("%1$02d", no)));
-        entity.setShichosonCode(new LasdecCode("000001"));
-        entity.setGappeiShurui(new RString("1"));
-        entity.setHokenshaNo(new ShoKisaiHokenshaNo(new RString("000001")));
-        entity.setKyuJohoFuyoToYMD(new FlexibleDate("20140201"));
-        entity.setKokuhorenDataFromYMD(new FlexibleDate("20140301"));
-        return entity;
+    public static class insertのテスト extends DbzTestDacBase {
+
+        @Test
+        public void 合併情報エンティティを渡すと_insertは_合併情報を追加する() {
+            TestSupport.insert(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号);
+
+            assertThat(sut.selectByKey(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号), is(notNullValue()));
+        }
+    }
+
+    public static class updateのテスト extends DbzTestDacBase {
+
+        @Before
+        public void setUp() {
+            TestSupport.insert(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号);
+        }
+
+        @Test
+        public void 合併情報エンティティを渡すと_updateは_合併情報を更新する() {
+            DbT7055GappeiJohoEntity updateRecord = DbT7055GappeiJohoEntityGenerator.createDbT7055GappeiJohoEntity();
+            // TODO 主キー以外の項目を変更してください
+            updateRecord.setGappeiShurui(new RString("2"));
+
+            sut.update(updateRecord);
+
+            DbT7055GappeiJohoEntity updatedRecord = sut.selectByKey(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号);
+
+            assertThat(updateRecord.getGappeiShurui(), is(updatedRecord.getGappeiShurui()));
+        }
+    }
+
+    public static class deleteのテスト extends DbzTestDacBase {
+
+        @Before
+        public void setUp() {
+            TestSupport.insert(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号);
+        }
+
+        @Test
+        public void 合併情報エンティティを渡すと_deleteは_合併情報を削除する() {
+            sut.delete(sut.selectByKey(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号));
+            assertThat(sut.selectByKey(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号), is(nullValue()));
+        }
+    }
+
+    private static class TestSupport {
+
+        public static void insert(
+                FlexibleDate 合併年月日,
+                RString 地域番号) {
+            DbT7055GappeiJohoEntity entity = DbT7055GappeiJohoEntityGenerator.createDbT7055GappeiJohoEntity();
+            entity.setGappeiYMD(合併年月日);
+            entity.setChiikiNo(地域番号);
+            sut.insert(entity);
+        }
     }
 }

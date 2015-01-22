@@ -6,23 +6,18 @@
 package jp.co.ndensan.reams.db.dbz.realservice;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.business.config.HokenshaJohoConfig;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.config.HokenshaJoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonShikibetsuID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbz.model.KoikiShichosonSecurityModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7057KoikiShichosonSecurityDac;
+import jp.co.ndensan.reams.db.dbz.persistence.relate.KoikiShichosonSecurityDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.auth.GroupEntity;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.entities.UzT0010SubGyomuCodeEntity;
@@ -33,7 +28,6 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -49,7 +43,6 @@ public class ShichosonSecurityFinderTest extends DbzTestBase {
     private static final int 介護導入なし = 1;
     private static final int 単一市町村 = 2;
     private static final int 広域保険者 = 3;
-    private static final int 保険者構成不正 = 4;
     private static final int グループリストあり = 5;
     private static final int グループリストなし = 6;
     private static final int セキュリティリストあり = 7;
@@ -58,8 +51,8 @@ public class ShichosonSecurityFinderTest extends DbzTestBase {
 
     private static final ShichosonShikibetsuID 市町村識別ID_デフォルト = new ShichosonShikibetsuID("00");
     private static final ShichosonShikibetsuID 市町村識別ID_DB = new ShichosonShikibetsuID("01");
-    private static final ShichosonCode 市町村コード_コンフィグ = new ShichosonCode("12345");
-    private static final ShichosonCode 市町村コード_DB = new ShichosonCode("00003");
+    private static final LasdecCode 市町村コード_コンフィグ = new LasdecCode("123456");
+    private static final LasdecCode 市町村コード_DB = new LasdecCode("000003");
     private static final RString グループID = new RString("0000000004");
 
     public static class getSecurity {
@@ -100,12 +93,6 @@ public class ShichosonSecurityFinderTest extends DbzTestBase {
             sut.getSecurity();
         }
 
-        @Test(expected = IllegalArgumentException.class)
-        public void 介護導入あり_保険者構成不正の時_getSecurityは_IllegalArgumentExceptionを投げる() {
-            ShichosonSecurityFinder sut = createShichosonSecurityFinder(介護導入あり, 保険者構成不正, 指定なし, 指定なし);
-            sut.getSecurity();
-        }
-
         @Test
         public void 介護導入なしの時_getSecurity_市町村識別IDは_nullを返す() {
             ShichosonSecurityFinder sut = createShichosonSecurityFinder(介護導入なし, 指定なし, 指定なし, 指定なし);
@@ -123,17 +110,17 @@ public class ShichosonSecurityFinderTest extends DbzTestBase {
         return new ShichosonSecurityFinder(createSecurityDac(セキュリティ), createHokenshaJohoConfig(構成), createGroupList(グループ), createGyomuList(導入));
     }
 
-    private static DbT7057KoikiShichosonSecurityDac createSecurityDac(int flg) {
-        DbT7057KoikiShichosonSecurityDac dac = mock(DbT7057KoikiShichosonSecurityDac.class);
+    private static KoikiShichosonSecurityDac createSecurityDac(int flg) {
+        KoikiShichosonSecurityDac dac = mock(KoikiShichosonSecurityDac.class);
         IItemList<KoikiShichosonSecurityModel> list = createKoikiShichosonSecurityList(flg);
         when(dac.select(any(ITrueFalseCriteria.class))).thenReturn(list);
         return dac;
     }
 
     private static HokenshaJohoConfig createHokenshaJohoConfig(int flg) {
-        IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
-        when(mock.get(eq(HokenshaJoho.保険者情報_保険者構成), any(RDate.class))).thenReturn(createHokenshaKosei(flg).code());
-        return new HokenshaJohoConfig(mock);
+        HokenshaJohoConfig mock = mock(HokenshaJohoConfig.class);
+        when(mock.get保険者構成()).thenReturn(createHokenshaKosei(flg));
+        return mock;
     }
 
     private static List<GroupEntity> createGroupList(int flg) {
@@ -175,7 +162,7 @@ public class ShichosonSecurityFinderTest extends DbzTestBase {
         return ItemList.of(list);
     }
 
-    private static KoikiShichosonSecurityModel createKoikiShichosonSecurity(ShichosonShikibetsuID 市町村識別ID, ShichosonCode 市町村コード) {
+    private static KoikiShichosonSecurityModel createKoikiShichosonSecurity(ShichosonShikibetsuID 市町村識別ID, LasdecCode 市町村コード) {
         KoikiShichosonSecurityModel security = mock(KoikiShichosonSecurityModel.class);
         when(security.get市町村識別ID()).thenReturn(市町村識別ID);
         when(security.get市町村コード()).thenReturn(市町村コード);

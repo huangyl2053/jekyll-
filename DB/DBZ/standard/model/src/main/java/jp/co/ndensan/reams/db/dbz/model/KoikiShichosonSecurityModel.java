@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.model;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonShikibetsuID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7057KoikiShichosonSecurityEntity;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -58,7 +58,7 @@ public class KoikiShichosonSecurityModel {
      *
      * @return 市町村コード
      */
-    public ShichosonCode get市町村コード() {
+    public LasdecCode get市町村コード() {
         return entity.getShichosonCode();
     }
 
@@ -67,7 +67,7 @@ public class KoikiShichosonSecurityModel {
      *
      * @return DbT7057KoikiShichosonSecurityEntity
      */
-    public DbT7057KoikiShichosonSecurityEntity getDbT7057KoikiShichosonSecurity() {
+    public DbT7057KoikiShichosonSecurityEntity getEntity() {
         return entity;
     }
 }

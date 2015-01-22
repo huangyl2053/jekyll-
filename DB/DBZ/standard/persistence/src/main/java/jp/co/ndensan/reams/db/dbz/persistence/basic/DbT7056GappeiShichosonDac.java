@@ -5,110 +5,126 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
-import java.util.ArrayList;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichoson;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichoson.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichosonEntity;
-import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonModel;
-import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.persistence.IDeletable;
-import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
+import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
-import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
-import jp.co.ndensan.reams.uz.uza.util.db.Order;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichoson.*;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 
 /**
  * 合併市町村のデータアクセスクラスです。
  *
- * @author N8156 宮本 康
+ * @author N8187 久保田 英男
  */
-public class DbT7056GappeiShichosonDac implements IReplaceable<DbT7056GappeiShichosonEntity>, IDeletable<DbT7056GappeiShichosonEntity> {
+public class DbT7056GappeiShichosonDac implements IModifiable<DbT7056GappeiShichosonEntity> {
 
     @InjectSession
     private SqlSession session;
 
     /**
-     * 全合併市町村を取得します。
+     * 主キーで合併市町村を取得します。
      *
-     * @return 合併市町村リスト
+     * @param 合併年月日 FlexibleDate
+     * @param 地域番号 RString
+     * @param 旧市町村コード LasdecCode
+     * @return DbT7056GappeiShichosonEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public IItemList<IGappeiShichoson> selectAll() {
+    public DbT7056GappeiShichosonEntity selectByKey(
+            FlexibleDate 合併年月日,
+            RString 地域番号,
+            LasdecCode 旧市町村コード) throws NullPointerException {
+        requireNonNull(合併年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("合併年月日"));
+        requireNonNull(地域番号, UrSystemErrorMessages.値がnull.getReplacedMessage("地域番号"));
+        requireNonNull(旧市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("旧市町村コード"));
+
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<DbT7056GappeiShichosonEntity> entityList = accessor.
-                select().
+
+        return accessor.select().
                 table(DbT7056GappeiShichoson.class).
-                order(by(gappeiYMD, Order.ASC)).
-                toList(DbT7056GappeiShichosonEntity.class);
-        return getModelList(entityList);
+                where(and(
+                                eq(gappeiYMD, 合併年月日),
+                                eq(chiikiNo, 地域番号),
+                                eq(kyuShichosonCode, 旧市町村コード))).
+                toObject(DbT7056GappeiShichosonEntity.class);
     }
 
     /**
-     * 指定した検索条件に合致する合併市町村を取得します。
+     * 合併市町村を全件返します。
      *
-     * @param 検索条件 検索条件
-     * @return 合併情報リスト
+     * @return List<DbT7056GappeiShichosonEntity>
      */
     @Transaction
-    public IItemList<IGappeiShichoson> select(ITrueFalseCriteria 検索条件) {
+    public List<DbT7056GappeiShichosonEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        List<DbT7056GappeiShichosonEntity> entityList = accessor.
-                select().
+
+        return accessor.select().
                 table(DbT7056GappeiShichoson.class).
-                where(検索条件).
-                order(by(gappeiYMD, Order.ASC)).
                 toList(DbT7056GappeiShichosonEntity.class);
-        return getModelList(entityList);
     }
 
-    private IItemList<IGappeiShichoson> getModelList(List<DbT7056GappeiShichosonEntity> entityList) {
-        List<IGappeiShichoson> list = new ArrayList<>();
-        for (DbT7056GappeiShichosonEntity entity : entityList) {
-            list.add(new GappeiShichosonModel(entity));
-        }
-        return ItemList.of(list);
-    }
-
-    @Override
-    public int insertOrUpdate(DbT7056GappeiShichosonEntity entity) {
-        return getMatchRowCount(entity) == 0 ? insert(entity) : update(entity);
-    }
-
+    /**
+     * 合併市町村を追加します。
+     *
+     * @param entity 合併市町村
+     * @return 影響行数
+     */
+    @Transaction
     @Override
     public int insert(DbT7056GappeiShichosonEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(entity).execute();
     }
 
+    /**
+     * 合併市町村をDBに更新します。
+     *
+     * @param entity 合併市町村
+     * @return 影響行数
+     */
+    @Transaction
     @Override
     public int update(DbT7056GappeiShichosonEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.update(entity).execute();
     }
 
+    /**
+     * 合併市町村をDBから削除します。（論理削除）
+     *
+     * @param entity 合併市町村
+     * @return 影響行数
+     */
+    @Transaction
     @Override
     public int delete(DbT7056GappeiShichosonEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
     }
 
-    private int getMatchRowCount(DbT7056GappeiShichosonEntity entity) {
+    // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
+    /**
+     * 合併市町村を物理削除。
+     *
+     * @param entity 合併市町村
+     * @return 影響行数
+     */
+    @Transaction
+    public int deletePhysical(DbT7056GappeiShichosonEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.select()
-                .table(DbT7056GappeiShichoson.class)
-                .where(and(
-                                eq(gappeiYMD, entity.getGappeiYMD()),
-                                eq(chiikiNo, entity.getChiikiNo()),
-                                eq(kyuShichosonCode, entity.getKyuShichosonCode())))
-                .getCount();
+        return accessor.deletePhysical(entity).execute();
     }
+
 }

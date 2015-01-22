@@ -8,11 +8,10 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.ShichosonSecurity;
 import jp.co.ndensan.reams.db.dbz.business.config.HokenshaJohoConfig;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonShikibetsuID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbz.model.KoikiShichosonSecurityModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7057KoikiShichosonSecurityDac;
+import jp.co.ndensan.reams.db.dbz.persistence.relate.KoikiShichosonSecurityDac;
 import jp.co.ndensan.reams.db.dbz.realservice.search.KoikiShichosonSecuritySearchItem;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.realservice.search.INewSearchCondition;
@@ -21,6 +20,7 @@ import jp.co.ndensan.reams.ur.urz.realservice.search.SearchConditionFactory;
 import jp.co.ndensan.reams.ur.urz.realservice.search.StringOperator;
 import jp.co.ndensan.reams.uz.uza.auth.AuthGroup;
 import jp.co.ndensan.reams.uz.uza.auth.GroupEntity;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.gyomu.GyomuCodeMaster;
@@ -37,9 +37,9 @@ public class ShichosonSecurityFinder {
     private static final boolean 介護導入なし = false;
     private static final ShichosonShikibetsuID 市町村識別ID_デフォルト = new ShichosonShikibetsuID("00");
     private static final ShichosonShikibetsuID 市町村識別ID_介護未導入 = null;
-    private static final ShichosonCode 市町村コード_介護未導入 = null;
+    private static final LasdecCode 市町村コード_介護未導入 = null;
 
-    private final DbT7057KoikiShichosonSecurityDac dac;
+    private final KoikiShichosonSecurityDac dac;
     private final HokenshaJohoConfig config;
     private final List<GroupEntity> groupList;
     private final IntroductionGyomuWithTanitsuFg[] gyomuList;
@@ -48,7 +48,7 @@ public class ShichosonSecurityFinder {
      * InstanceProviderを用いてDacのインスタンスを生成し、メンバ変数に保持します。
      */
     public ShichosonSecurityFinder() {
-        dac = InstanceProvider.create(DbT7057KoikiShichosonSecurityDac.class);
+        dac = InstanceProvider.create(KoikiShichosonSecurityDac.class);
         config = new HokenshaJohoConfig();
         groupList = AuthGroup.getAllGroups();
         gyomuList = GyomuCodeMaster.getIntroductionGyomuList();
@@ -63,7 +63,7 @@ public class ShichosonSecurityFinder {
      * @param gyomuList 導入業務リスト
      */
     ShichosonSecurityFinder(
-            DbT7057KoikiShichosonSecurityDac dac,
+            KoikiShichosonSecurityDac dac,
             HokenshaJohoConfig config,
             List<GroupEntity> groupList,
             IntroductionGyomuWithTanitsuFg[] gyomuList) {
@@ -95,7 +95,7 @@ public class ShichosonSecurityFinder {
 
     private ShichosonSecurity getSecurityOf単一市町村() {
         // TODO N8156 宮本 康 「業務共通_市町村情報_市町村コード」から取得する。
-        ShichosonCode 市町村コード_コンフィグ = new ShichosonCode("12345");
+        LasdecCode 市町村コード_コンフィグ = new LasdecCode("123456");
         return new ShichosonSecurity(介護導入あり, 市町村識別ID_デフォルト, 市町村コード_コンフィグ);
     }
 

@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.model.gappei;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShinKyuHokenshaNoHenkanKubun;
-import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiJoho;
-import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;

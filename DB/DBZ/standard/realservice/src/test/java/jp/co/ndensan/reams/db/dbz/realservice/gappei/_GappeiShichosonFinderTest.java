@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.model.koiki.KoikiKoseiShichosonModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7055GappeiJohoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7056GappeiShichosonDac;
+import jp.co.ndensan.reams.db.dbz.persistence.relate.GappeiJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.relate.GappeiShichosonDac;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.realservice.search.GappeiJohoSearchItem;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -48,7 +48,7 @@ import static org.mockito.Mockito.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class GappeiShichosonFinderTest extends DbzTestBase {
+public class _GappeiShichosonFinderTest extends DbzTestBase {
 
     private static final LasdecCode 市町村コード = new LasdecCode("000001");
     private static final LasdecCode 旧市町村コード = new LasdecCode("000002");
@@ -65,7 +65,7 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
 
         @Test
         public void 合併情報が複数件の時_get旧市町村情報付与終了日は_最新の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 特殊パターン, 5);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 特殊パターン, 5);
             assertThat(sut.get旧市町村情報付与終了日().get(), is(new FlexibleDate("20140303")));
         }
     }
@@ -74,61 +74,61 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
 
         @Test
         public void 合併なしの時_get合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get合併市町村情報(true).size(), is(合併情報数[0]));
         }
 
         @Test
         public void 合併情報が0件の時_get合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get合併市町村情報(true).size(), is(合併情報数[0]));
         }
 
         @Test
         public void 合併情報が1件の時_get合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
             assertThat(sut.get合併市町村情報(true).size(), is(合併情報数[1]));
         }
 
         @Test
         public void 合併情報が2件の時_get合併市町村情報は_2件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[2], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[2], 市町村数[0]);
             assertThat(sut.get合併市町村情報(true).size(), is(合併情報数[2]));
         }
 
         @Test
         public void 合併市町村が0件の時_get合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
             assertThat(sut.get合併市町村情報(true).toList().get(0).get単一市町村情報().size(), is(市町村数[0]));
         }
 
         @Test
         public void 合併市町村が1件の時_get合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get合併市町村情報(true).toList().get(0).get単一市町村情報().size(), is(市町村数[1]));
         }
 
         @Test
         public void 合併市町村が2件の時_get合併市町村情報は_2件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[2]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[2]);
             assertThat(sut.get合併市町村情報(true).toList().get(0).get単一市町村情報().size(), is(市町村数[2]));
         }
 
         @Test
         public void 構成市町村が0件の時_get合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[0]);
             assertThat(sut.get合併市町村情報(true).toList().get(0).get広域市町村情報().size(), is(市町村数[0]));
         }
 
         @Test
         public void 構成市町村が1件の時_get合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get合併市町村情報(true).toList().get(0).get広域市町村情報().size(), is(市町村数[1]));
         }
 
         @Test
         public void 構成市町村が2件の時_get合併市町村情報は_2件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[2]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[2]);
             assertThat(sut.get合併市町村情報(true).toList().get(0).get広域市町村情報().size(), is(市町村数[2]));
         }
     }
@@ -137,31 +137,31 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
 
         @Test
         public void 合併なしの時_get合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get合併市町村情報(旧市町村コード).size(), is(合併情報数[0]));
         }
 
         @Test
         public void 合併市町村に対する合併情報が0件の時_get合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[1]);
             assertThat(sut.get合併市町村情報(旧市町村コード).size(), is(合併情報数[0]));
         }
 
         @Test
         public void 合併市町村に対する合併情報が1件の時_get合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get合併市町村情報(旧市町村コード).size(), is(合併情報数[1]));
         }
 
         @Test
         public void 構成市町村に対する合併情報が0件の時_get合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[1]);
             assertThat(sut.get合併市町村情報(旧市町村コード).size(), is(合併情報数[0]));
         }
 
         @Test
         public void 構成市町村に対する合併情報が1件の時_get合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get合併市町村情報(旧市町村コード).size(), is(合併情報数[1]));
         }
     }
@@ -170,31 +170,31 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
 
         @Test
         public void 合併なしの時_get合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get合併市町村情報(旧保険者番号).size(), is(合併情報数[0]));
         }
 
         @Test
         public void 合併市町村に対する合併情報が0件の時_get合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[1]);
             assertThat(sut.get合併市町村情報(旧保険者番号).size(), is(合併情報数[0]));
         }
 
         @Test
         public void 合併市町村に対する合併情報が1件の時_get合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get合併市町村情報(旧保険者番号).size(), is(合併情報数[1]));
         }
 
         @Test
         public void 構成市町村に対する合併情報が0件の時_get合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[1]);
             assertThat(sut.get合併市町村情報(旧保険者番号).size(), is(合併情報数[0]));
         }
 
         @Test
         public void 構成市町村に対する合併情報が1件の時_get合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get合併市町村情報(旧保険者番号).size(), is(合併情報数[1]));
         }
     }
@@ -203,43 +203,43 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
 
         @Test
         public void 合併なしの時_get合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get最新合併市町村情報(市町村コード).isPresent(), is(false));
         }
 
         @Test
         public void 合併情報が0件の時_get最新合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get最新合併市町村情報(市町村コード).isPresent(), is(false));
         }
 
         @Test
         public void 合併情報が1件の時_get最新合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
             assertThat(sut.get最新合併市町村情報(市町村コード).isPresent(), is(true));
         }
 
         @Test
         public void 合併市町村が0件の時_get最新合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
             assertThat(sut.get最新合併市町村情報(市町村コード).get().get単一市町村情報().size(), is(市町村数[0]));
         }
 
         @Test
         public void 合併市町村が1件の時_get最新合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get最新合併市町村情報(市町村コード).get().get単一市町村情報().size(), is(市町村数[1]));
         }
 
         @Test
         public void 構成市町村が0件の時_get最新合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[0]);
             assertThat(sut.get最新合併市町村情報(市町村コード).get().get広域市町村情報().size(), is(市町村数[0]));
         }
 
         @Test
         public void 構成市町村が1件の時_get最新合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get最新合併市町村情報(市町村コード).get().get広域市町村情報().size(), is(市町村数[1]));
         }
     }
@@ -248,43 +248,43 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
 
         @Test
         public void 合併なしの時_get合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get最新合併市町村情報(保険者番号).isPresent(), is(false));
         }
 
         @Test
         public void 合併情報が0件の時_get最新合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get最新合併市町村情報(保険者番号).isPresent(), is(false));
         }
 
         @Test
         public void 合併情報が1件の時_get最新合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
             assertThat(sut.get最新合併市町村情報(保険者番号).isPresent(), is(true));
         }
 
         @Test
         public void 合併市町村が0件の時_get最新合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
             assertThat(sut.get最新合併市町村情報(保険者番号).get().get単一市町村情報().size(), is(市町村数[0]));
         }
 
         @Test
         public void 合併市町村が1件の時_get最新合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get最新合併市町村情報(保険者番号).get().get単一市町村情報().size(), is(市町村数[1]));
         }
 
         @Test
         public void 構成市町村が0件の時_get最新合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[0]);
             assertThat(sut.get最新合併市町村情報(保険者番号).get().get広域市町村情報().size(), is(市町村数[0]));
         }
 
         @Test
         public void 構成市町村が1件の時_get最新合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get最新合併市町村情報(保険者番号).get().get広域市町村情報().size(), is(市町村数[1]));
         }
     }
@@ -293,43 +293,43 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
 
         @Test
         public void 合併なしの時_get合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get最新合併市町村情報(保険者番号, 基準年月).isPresent(), is(false));
         }
 
         @Test
         public void 合併情報が0件の時_get最新合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get最新合併市町村情報(保険者番号, 基準年月).isPresent(), is(false));
         }
 
         @Test
         public void 合併情報が1件の時_get最新合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
             assertThat(sut.get最新合併市町村情報(保険者番号, 基準年月).isPresent(), is(true));
         }
 
         @Test
         public void 合併市町村が0件の時_get最新合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
             assertThat(sut.get最新合併市町村情報(保険者番号, 基準年月).get().get単一市町村情報().size(), is(市町村数[0]));
         }
 
         @Test
         public void 合併市町村が1件の時_get最新合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get最新合併市町村情報(保険者番号, 基準年月).get().get単一市町村情報().size(), is(市町村数[1]));
         }
 
         @Test
         public void 構成市町村が0件の時_get最新合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[0]);
             assertThat(sut.get最新合併市町村情報(保険者番号, 基準年月).get().get広域市町村情報().size(), is(市町村数[0]));
         }
 
         @Test
         public void 構成市町村が1件の時_get最新合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get最新合併市町村情報(保険者番号, 基準年月).get().get広域市町村情報().size(), is(市町村数[1]));
         }
     }
@@ -338,31 +338,31 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
 
         @Test
         public void 合併なしの時_get最古合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get最古合併市町村情報(旧市町村コード).isPresent(), is(false));
         }
 
         @Test
         public void 合併市町村に対する合併情報が0件の時_get最古合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[1]);
             assertThat(sut.get最古合併市町村情報(旧市町村コード).isPresent(), is(false));
         }
 
         @Test
         public void 合併市町村に対する合併情報が1件の時_get最古合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get最古合併市町村情報(旧市町村コード).isPresent(), is(true));
         }
 
         @Test
         public void 構成市町村に対する合併情報が0件の時_get最古合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[1]);
             assertThat(sut.get最古合併市町村情報(旧市町村コード).isPresent(), is(false));
         }
 
         @Test
         public void 構成市町村に対する合併情報が1件の時_get最古合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get最古合併市町村情報(旧市町村コード).isPresent(), is(true));
         }
     }
@@ -371,31 +371,31 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
 
         @Test
         public void 合併なしの時_get直近合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get直近合併市町村情報(旧保険者番号).isPresent(), is(false));
         }
 
         @Test
         public void 合併市町村に対する合併情報が0件の時_get直近合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[1]);
             assertThat(sut.get直近合併市町村情報(旧保険者番号).isPresent(), is(false));
         }
 
         @Test
         public void 合併市町村に対する合併情報が1件の時_get直近合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get直近合併市町村情報(旧保険者番号).isPresent(), is(true));
         }
 
         @Test
         public void 構成市町村に対する合併情報が0件の時_get直近合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[1]);
             assertThat(sut.get直近合併市町村情報(旧保険者番号).isPresent(), is(false));
         }
 
         @Test
         public void 構成市町村に対する合併情報が1件の時_get直近合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get直近合併市町村情報(旧保険者番号).isPresent(), is(true));
         }
     }
@@ -404,31 +404,31 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
 
         @Test
         public void 合併なしの時_get直近合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get直近合併市町村情報(旧保険者番号, 基準年月).isPresent(), is(false));
         }
 
         @Test
         public void 合併市町村に対する合併情報が0件の時_get直近合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[1]);
             assertThat(sut.get直近合併市町村情報(旧保険者番号, 基準年月).isPresent(), is(false));
         }
 
         @Test
         public void 合併市町村に対する合併情報が1件の時_get直近合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get直近合併市町村情報(旧保険者番号, 基準年月).isPresent(), is(true));
         }
 
         @Test
         public void 構成市町村に対する合併情報が0件の時_get直近合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[1]);
             assertThat(sut.get直近合併市町村情報(旧保険者番号, 基準年月).isPresent(), is(false));
         }
 
         @Test
         public void 構成市町村に対する合併情報が1件の時_get直近合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.get直近合併市町村情報(旧保険者番号, 基準年月).isPresent(), is(true));
         }
     }
@@ -437,37 +437,37 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
 
         @Test
         public void 合併市町村が0件の時_get市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get市町村情報(市町村コード).get().get単一市町村情報().size(), is(市町村数[0]));
         }
 
         @Test
         public void 合併市町村が1件の時_get市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[1]);
             assertThat(sut.get市町村情報(市町村コード).get().get単一市町村情報().size(), is(市町村数[1]));
         }
 
         @Test
         public void 合併市町村が2件の時_get市町村情報は_2件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[2]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[2]);
             assertThat(sut.get市町村情報(市町村コード).get().get単一市町村情報().size(), is(市町村数[2]));
         }
 
         @Test
         public void 構成市町村が0件の時_get市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get市町村情報(市町村コード).get().get広域市町村情報().size(), is(市町村数[0]));
         }
 
         @Test
         public void 構成市町村が1件の時_get市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[1]);
             assertThat(sut.get市町村情報(市町村コード).get().get広域市町村情報().size(), is(市町村数[1]));
         }
 
         @Test
         public void 構成市町村が2件の時_get市町村情報は_2件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[2]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[2]);
             assertThat(sut.get市町村情報(市町村コード).get().get広域市町村情報().size(), is(市町村数[2]));
         }
     }
@@ -476,37 +476,37 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
 
         @Test
         public void 合併市町村が0件の時_get市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get市町村情報(保険者番号).get().get単一市町村情報().size(), is(市町村数[0]));
         }
 
         @Test
         public void 合併市町村が1件の時_get市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[1]);
             assertThat(sut.get市町村情報(保険者番号).get().get単一市町村情報().size(), is(市町村数[1]));
         }
 
         @Test
         public void 合併市町村が2件の時_get市町村情報は_2件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[2]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[2]);
             assertThat(sut.get市町村情報(保険者番号).get().get単一市町村情報().size(), is(市町村数[2]));
         }
 
         @Test
         public void 構成市町村が0件の時_get市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get市町村情報(保険者番号).get().get広域市町村情報().size(), is(市町村数[0]));
         }
 
         @Test
         public void 構成市町村が1件の時_get市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[1]);
             assertThat(sut.get市町村情報(保険者番号).get().get広域市町村情報().size(), is(市町村数[1]));
         }
 
         @Test
         public void 構成市町村が2件の時_get市町村情報は_2件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[2]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[2]);
             assertThat(sut.get市町村情報(保険者番号).get().get広域市町村情報().size(), is(市町村数[2]));
         }
     }
@@ -515,25 +515,25 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
 
         @Test
         public void 合併市町村が0件の時_get市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get最古市町村情報(市町村コード).get().get単一市町村情報().size(), is(市町村数[0]));
         }
 
         @Test
         public void 合併市町村が1件の時_get市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[1]);
             assertThat(sut.get最古市町村情報(市町村コード).get().get単一市町村情報().size(), is(市町村数[1]));
         }
 
         @Test
         public void 構成市町村が0件の時_get市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.get最古市町村情報(市町村コード).get().get広域市町村情報().size(), is(市町村数[0]));
         }
 
         @Test
         public void 構成市町村が1件の時_get市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[0], 市町村数[1]);
             assertThat(sut.get最古市町村情報(市町村コード).get().get広域市町村情報().size(), is(市町村数[1]));
         }
     }
@@ -542,68 +542,68 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
 
         @Test
         public void 合併なしの時_find合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併なし, HokenshaKosei.単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.find合併市町村情報(createSearchCondition(), true).size(), is(合併情報数[0]));
         }
 
         @Test
         public void 合併情報が0件の時_find合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[0], 市町村数[0]);
             assertThat(sut.find合併市町村情報(createSearchCondition(), true).size(), is(合併情報数[0]));
         }
 
         @Test
         public void 合併情報が1件の時_find合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
             assertThat(sut.find合併市町村情報(createSearchCondition(), true).size(), is(合併情報数[1]));
         }
 
         @Test
         public void 合併情報が2件の時_find合併市町村情報は_2件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[2], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[2], 市町村数[0]);
             assertThat(sut.find合併市町村情報(createSearchCondition(), true).size(), is(合併情報数[2]));
         }
 
         @Test
         public void 合併市町村が0件の時_find合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[0]);
             assertThat(sut.find合併市町村情報(createSearchCondition(), true).toList().get(0).get単一市町村情報().size(), is(市町村数[0]));
         }
 
         @Test
         public void 合併市町村が1件の時_find合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.find合併市町村情報(createSearchCondition(), true).toList().get(0).get単一市町村情報().size(), is(市町村数[1]));
         }
 
         @Test
         public void 合併市町村が2件の時_find合併市町村情報は_2件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[2]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 単一市町村, 合併情報数[1], 市町村数[2]);
             assertThat(sut.find合併市町村情報(createSearchCondition(), true).toList().get(0).get単一市町村情報().size(), is(市町村数[2]));
         }
 
         @Test
         public void 構成市町村が0件の時_find合併市町村情報は_0件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[0]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[0]);
             assertThat(sut.find合併市町村情報(createSearchCondition(), true).toList().get(0).get広域市町村情報().size(), is(市町村数[0]));
         }
 
         @Test
         public void 構成市町村が1件の時_get合併市町村情報は_1件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[1]);
             assertThat(sut.find合併市町村情報(createSearchCondition(), true).toList().get(0).get広域市町村情報().size(), is(市町村数[1]));
         }
 
         @Test
         public void 構成市町村が2件の時_get合併市町村情報は_2件の情報を返す() {
-            GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[2]);
+            _GappeiShichosonFinder sut = createFinder(合併あり, 広域市町村, 合併情報数[1], 市町村数[2]);
             assertThat(sut.find合併市町村情報(createSearchCondition(), true).toList().get(0).get広域市町村情報().size(), is(市町村数[2]));
         }
     }
 
-    private static GappeiShichosonFinder createFinder(
+    private static _GappeiShichosonFinder createFinder(
             GappeiJohoKubun 合併情報区分, HokenshaKosei 保険者構成区分, int 合併情報数, int 市町村情報数) {
-        return new GappeiShichosonFinder(
+        return new _GappeiShichosonFinder(
                 createGappeiDac(合併情報数),
                 createTanitsuDac(保険者構成区分 == 単一市町村 ? 市町村情報数 : 0),
                 createKoikiDac(保険者構成区分 == 広域市町村 ? 市町村情報数 : 0),
@@ -611,16 +611,16 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
                 createHokenshaJohoConfig(保険者構成区分));
     }
 
-    private static DbT7055GappeiJohoDac createGappeiDac(int count) {
-        DbT7055GappeiJohoDac dac = mock(DbT7055GappeiJohoDac.class);
+    private static GappeiJohoDac createGappeiDac(int count) {
+        GappeiJohoDac dac = mock(GappeiJohoDac.class);
         IItemList<IGappeiJoho> list = createGappeiList(count);
         when(dac.selectAll()).thenReturn(list);
         when(dac.select(any(ITrueFalseCriteria.class))).thenReturn(list);
         return dac;
     }
 
-    private static DbT7056GappeiShichosonDac createTanitsuDac(int count) {
-        DbT7056GappeiShichosonDac dac = mock(DbT7056GappeiShichosonDac.class);
+    private static GappeiShichosonDac createTanitsuDac(int count) {
+        GappeiShichosonDac dac = mock(GappeiShichosonDac.class);
         IItemList<IGappeiShichoson> list = createTanitsuList(count);
         when(dac.selectAll()).thenReturn(list);
         when(dac.select(any(ITrueFalseCriteria.class))).thenReturn(list);

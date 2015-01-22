@@ -15,16 +15,15 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokensha
 import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonJohoModel;
 import jp.co.ndensan.reams.db.dbz.business.config.HokenshaJohoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.kyotsutokei.GappeiJohoKanriConfig;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GappeiJohoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
-import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiJoho;
-import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7055GappeiJohoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7056GappeiShichosonDac;
+import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiJoho;
+import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
+import jp.co.ndensan.reams.db.dbz.persistence.relate.GappeiJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.relate.GappeiShichosonDac;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.realservice.search.GappeiJohoSearchItem;
 import jp.co.ndensan.reams.db.dbz.realservice.search.GappeiShichosonSearchItem;
@@ -46,10 +45,10 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @author N8156 宮本 康
  */
-public class GappeiShichosonFinder implements IGappeiShichosonFinder {
+public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
 
-    private final DbT7055GappeiJohoDac gappeiDac;
-    private final DbT7056GappeiShichosonDac tanitsuDac;
+    private final GappeiJohoDac gappeiDac;
+    private final GappeiShichosonDac tanitsuDac;
     private final KoseiShichosonMasterDac koikiDac;
     private final GappeiJohoKanriConfig gappeiConfig;
     private final HokenshaJohoConfig hokenshaConfig;
@@ -59,9 +58,9 @@ public class GappeiShichosonFinder implements IGappeiShichosonFinder {
     /**
      * コンストラクタです。
      */
-    public GappeiShichosonFinder() {
-        gappeiDac = InstanceProvider.create(DbT7055GappeiJohoDac.class);
-        tanitsuDac = InstanceProvider.createWithCustomize(DbT7056GappeiShichosonDac.class);
+    public _GappeiShichosonFinder() {
+        gappeiDac = InstanceProvider.create(GappeiJohoDac.class);
+        tanitsuDac = InstanceProvider.createWithCustomize(GappeiShichosonDac.class);
         koikiDac = InstanceProvider.createWithCustomize(KoseiShichosonMasterDac.class);
         gappeiConfig = new GappeiJohoKanriConfig();
         hokenshaConfig = new HokenshaJohoConfig();
@@ -76,8 +75,8 @@ public class GappeiShichosonFinder implements IGappeiShichosonFinder {
      * @param gappeiConfig 合併情報Config
      * @param hokenshaConfig 保険者情報Config
      */
-    GappeiShichosonFinder(
-            DbT7055GappeiJohoDac gappeiDac, DbT7056GappeiShichosonDac tanitsuDac, KoseiShichosonMasterDac koikiDac,
+    _GappeiShichosonFinder(
+            GappeiJohoDac gappeiDac, GappeiShichosonDac tanitsuDac, KoseiShichosonMasterDac koikiDac,
             GappeiJohoKanriConfig gappeiConfig, HokenshaJohoConfig hokenshaConfig) {
         this.gappeiDac = gappeiDac;
         this.tanitsuDac = tanitsuDac;

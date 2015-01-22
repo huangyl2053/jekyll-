@@ -5,111 +5,202 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichoson;
+import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7056GappeiShichosonEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7056GappeiShichosonEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7056GappeiShichosonEntityGenerator.DEFAULT_合併年月日;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7056GappeiShichosonEntityGenerator.DEFAULT_地域番号;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7056GappeiShichosonEntityGenerator.DEFAULT_旧市町村コード;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
-import jp.co.ndensan.reams.uz.uza.util.db.Restrictions;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.junit.Test;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 /**
- * 合併市町村のデータアクセスクラスのテストクラスです。
+ * {@link DbT7056GappeiShichosonDac}のテストです。
  *
- * @author N8156 宮本 康
+ * @author N8187 久保田 英男
  */
 @RunWith(Enclosed.class)
 public class DbT7056GappeiShichosonDacTest extends DbzTestDacBase {
 
+    private static final FlexibleDate 合併年月日 = new FlexibleDate("20150101");
+    private static final FlexibleDate 合併年月日2 = new FlexibleDate("20150102");
+    private static final RString 地域番号 = new RString("11");
+    private static final LasdecCode 旧市町村コード = new LasdecCode("999999");
     private static DbT7056GappeiShichosonDac sut;
-
-    private static final ITrueFalseCriteria 検索条件_該当0件 = Restrictions.eq(new RString("99"), DbT7056GappeiShichoson.chiikiNo);
-    private static final ITrueFalseCriteria 検索条件_該当1件 = Restrictions.eq(new RString("01"), DbT7056GappeiShichoson.chiikiNo);
-    private static final ITrueFalseCriteria 検索条件_該当2件 = Restrictions.eq(new RString("00000001"), DbT7056GappeiShichoson.kyuHokenshaNo);
 
     @BeforeClass
     public static void setUpClass() {
         sut = InstanceProvider.create(DbT7056GappeiShichosonDac.class);
     }
 
-    public static class selectAll extends DbzTestDacBase {
-
-        @Test
-        public void 合併市町村が0件の時_selectAllは_0件の情報を返す() {
-            initializeEntityData(0);
-            assertThat(sut.selectAll().size(), is(0));
-        }
-
-        @Test
-        public void 合併市町村が1件の時_selectAllは_1件の情報を返す() {
-            initializeEntityData(1);
-            assertThat(sut.selectAll().size(), is(1));
-        }
-
-        @Test
-        public void 合併市町村が2件の時_selectAllは_2件の情報を返す() {
-            initializeEntityData(2);
-            assertThat(sut.selectAll().size(), is(2));
-        }
-    }
-
-    public static class select extends DbzTestDacBase {
+    public static class selectByKeyのテスト extends DbzTestDacBase {
 
         @Before
-        public void setup() {
-            initializeEntityData(2);
+        public void setUp() {
+            TestSupport.insert(
+                    合併年月日,
+                    DEFAULT_地域番号,
+                    DEFAULT_旧市町村コード);
+            TestSupport.insert(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号,
+                    DEFAULT_旧市町村コード);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 合併年月日がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    null,
+                    DEFAULT_地域番号,
+                    DEFAULT_旧市町村コード);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 地域番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_合併年月日,
+                    null,
+                    DEFAULT_旧市町村コード);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 旧市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            sut.selectByKey(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号,
+                    null);
         }
 
         @Test
-        public void 該当の合併市町村が0件の時_selectは_0件の情報を返す() {
-            assertThat(sut.select(検索条件_該当0件).size(), is(0));
+        public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
+            DbT7056GappeiShichosonEntity insertedRecord = sut.selectByKey(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号,
+                    DEFAULT_旧市町村コード);
+            assertThat(insertedRecord, is(notNullValue()));
         }
 
         @Test
-        public void 該当の合併市町村が1件の時_selectは_1件の情報を返す() {
-            assertThat(sut.select(検索条件_該当1件).size(), is(1));
-        }
-
-        @Test
-        public void 該当の合併市町村が2件の時_selectは_2件の情報を返す() {
-            assertThat(sut.select(検索条件_該当2件).size(), is(2));
+        public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
+            DbT7056GappeiShichosonEntity insertedRecord = sut.selectByKey(
+                    合併年月日2,
+                    DEFAULT_地域番号,
+                    DEFAULT_旧市町村コード);
+            assertThat(insertedRecord, is(nullValue()));
         }
     }
 
-    private static void initializeEntityData(int count) {
-        for (int i = 1; i <= count; i++) {
-            sut.insert(createEntity(i));
+    public static class selectAllのテスト extends DbzTestDacBase {
+
+        @Test
+        public void 合併市町村が存在する場合_selectAllは_全件を返す() {
+            TestSupport.insert(
+                    合併年月日,
+                    DEFAULT_地域番号,
+                    DEFAULT_旧市町村コード);
+            TestSupport.insert(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号,
+                    DEFAULT_旧市町村コード);
+            assertThat(sut.selectAll().size(), is(2));
+        }
+
+        @Test
+        public void 合併市町村が存在しない場合_selectAllは_空のリストを返す() {
+            assertThat(sut.selectAll(), is(Collections.EMPTY_LIST));
         }
     }
 
-    private static DbT7056GappeiShichosonEntity createEntity(int no) {
-        DbT7056GappeiShichosonEntity entity = new DbT7056GappeiShichosonEntity();
-        entity.setGappeiYMD(new FlexibleDate(String.format("201401%1$02d", no)));
-        entity.setChiikiNo(new RString(String.format("%1$02d", no)));
-        entity.setKyuShichosonCode(new LasdecCode(String.format("%1$06d", no)));
-        entity.setUnyoKaishiYMD(new FlexibleDate("20140201"));
-        entity.setUnyoShuryoYMD(new FlexibleDate("20140301"));
-        entity.setKyuHokenshaNo(new ShoKisaiHokenshaNo(new RString("00000001")));
-        entity.setKyuShichosonMeisho(new RString("電算市"));
-        entity.setTodofukenMeisho(new RString("電算県"));
-        entity.setGunMeisho(new RString("電算郡"));
-        entity.setYubinNo(new YubinNo("0010001"));
-        entity.setTelNo(new TelNo("0010010001"));
-        entity.setRojinhokenShichosonNo(new RString("00000001"));
-        entity.setRokenJukyushaNoTaikei(new RString("1"));
-        entity.setHyojiUmu(new RString("1"));
-        return entity;
+    public static class insertのテスト extends DbzTestDacBase {
+
+        @Test
+        public void 合併市町村エンティティを渡すと_insertは_合併市町村を追加する() {
+            TestSupport.insert(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号,
+                    DEFAULT_旧市町村コード);
+
+            assertThat(sut.selectByKey(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号,
+                    DEFAULT_旧市町村コード), is(notNullValue()));
+        }
+    }
+
+    public static class updateのテスト extends DbzTestDacBase {
+
+        @Before
+        public void setUp() {
+            TestSupport.insert(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号,
+                    DEFAULT_旧市町村コード);
+        }
+
+        @Test
+        public void 合併市町村エンティティを渡すと_updateは_合併市町村を更新する() {
+            DbT7056GappeiShichosonEntity updateRecord = DbT7056GappeiShichosonEntityGenerator.createDbT7056GappeiShichosonEntity();
+
+            updateRecord.setTelNo(new TelNo("09099991234"));
+
+            sut.update(updateRecord);
+
+            DbT7056GappeiShichosonEntity updatedRecord = sut.selectByKey(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号,
+                    DEFAULT_旧市町村コード);
+
+            assertThat(updateRecord.getTelNo(), is(updatedRecord.getTelNo()));
+        }
+    }
+
+    public static class deleteのテスト extends DbzTestDacBase {
+
+        @Before
+        public void setUp() {
+            TestSupport.insert(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号,
+                    DEFAULT_旧市町村コード);
+        }
+
+        @Test
+        public void 合併市町村エンティティを渡すと_deleteは_合併市町村を削除する() {
+            sut.delete(sut.selectByKey(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号,
+                    DEFAULT_旧市町村コード));
+            assertThat(sut.selectByKey(
+                    DEFAULT_合併年月日,
+                    DEFAULT_地域番号,
+                    DEFAULT_旧市町村コード), is(nullValue()));
+        }
+    }
+
+    private static class TestSupport {
+
+        public static void insert(
+                FlexibleDate 合併年月日,
+                RString 地域番号,
+                LasdecCode 旧市町村コード) {
+            DbT7056GappeiShichosonEntity entity = DbT7056GappeiShichosonEntityGenerator.createDbT7056GappeiShichosonEntity();
+            entity.setGappeiYMD(合併年月日);
+            entity.setChiikiNo(地域番号);
+            entity.setKyuShichosonCode(旧市町村コード);
+            sut.insert(entity);
+        }
     }
 }

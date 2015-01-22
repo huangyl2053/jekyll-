@@ -1,24 +1,25 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import java.util.Objects;
 
 /**
  * DbT7056GappeiShichosonの項目定義クラスです
  *
  */
-public class DbT7056GappeiShichosonEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056GappeiShichosonEntity> implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7056GappeiShichoson");
@@ -350,8 +351,10 @@ public class DbT7056GappeiShichosonEntity implements IDbAccessable {
      * このエンティティの主キーが他の{@literal DbT7056GappeiShichosonEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT7056GappeiShichosonEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT7056GappeiShichosonEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
+    @Override
     public boolean equalsPrimaryKeys(DbT7056GappeiShichosonEntity other) {
         if (other == null) {
             return false;
@@ -366,6 +369,37 @@ public class DbT7056GappeiShichosonEntity implements IDbAccessable {
             return false;
         }
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void shallowCopy(DbT7056GappeiShichosonEntity entity) {
+        this.gappeiYMD = entity.gappeiYMD;
+        this.chiikiNo = entity.chiikiNo;
+        this.kyuShichosonCode = entity.kyuShichosonCode;
+        this.unyoKaishiYMD = entity.unyoKaishiYMD;
+        this.unyoShuryoYMD = entity.unyoShuryoYMD;
+        this.kyuHokenshaNo = entity.kyuHokenshaNo;
+        this.kyuShichosonMeisho = entity.kyuShichosonMeisho;
+        this.todofukenMeisho = entity.todofukenMeisho;
+        this.gunMeisho = entity.gunMeisho;
+        this.yubinNo = entity.yubinNo;
+        this.telNo = entity.telNo;
+        this.rojinhokenShichosonNo = entity.rojinhokenShichosonNo;
+        this.rokenJukyushaNoTaikei = entity.rokenJukyushaNoTaikei;
+        this.hyojiUmu = entity.hyojiUmu;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @return {@inheritDoc}
+     */
+    @Override
+    public RString getMd5() {
+        return super.toMd5(gappeiYMD, chiikiNo, kyuShichosonCode, unyoKaishiYMD, unyoShuryoYMD, kyuHokenshaNo, kyuShichosonMeisho, todofukenMeisho, gunMeisho, yubinNo, telNo, rojinhokenShichosonNo, rokenJukyushaNoTaikei, hyojiUmu);
     }
 
 // </editor-fold>

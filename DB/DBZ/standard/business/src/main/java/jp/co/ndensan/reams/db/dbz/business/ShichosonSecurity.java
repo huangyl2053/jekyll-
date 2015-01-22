@@ -5,8 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.ShichosonShikibetsuID;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 市町村セキュリティの情報を保持するクラスです。
@@ -17,7 +18,7 @@ public class ShichosonSecurity {
 
     private final boolean 介護導入;
     private final ShichosonShikibetsuID 市町村識別ID;
-    private final ShichosonCode 市町村コード;
+    private final LasdecCode 市町村コード;
 
     /**
      * コンストラクタです。
@@ -26,7 +27,7 @@ public class ShichosonSecurity {
      * @param 市町村識別ID 市町村識別ID
      * @param 市町村コード 市町村コード
      */
-    public ShichosonSecurity(boolean 介護導入, ShichosonShikibetsuID 市町村識別ID, ShichosonCode 市町村コード) {
+    public ShichosonSecurity(boolean 介護導入, ShichosonShikibetsuID 市町村識別ID, LasdecCode 市町村コード) {
         this.介護導入 = 介護導入;
         this.市町村識別ID = 市町村識別ID;
         this.市町村コード = 市町村コード;
@@ -55,7 +56,7 @@ public class ShichosonSecurity {
      *
      * @return 市町村コード。介護業務未導入の場合はnullを返します。
      */
-    public ShichosonCode get市町村コード() {
+    public LasdecCode get市町村コード() {
         return 介護導入 ? 市町村コード : null;
     }
 }

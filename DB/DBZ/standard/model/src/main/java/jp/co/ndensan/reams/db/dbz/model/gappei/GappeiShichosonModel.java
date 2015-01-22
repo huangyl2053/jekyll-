@@ -107,7 +107,7 @@ public class GappeiShichosonModel implements Serializable, IGappeiShichoson {
      *
      * @return DbT7056GappeiShichosonEntity DbT7056GappeiShichosonEntity
      */
-    public DbT7056GappeiShichosonEntity getDbT7056GappeiShichoson() {
+    public DbT7056GappeiShichosonEntity getEntity() {
         return entity;
     }
 }

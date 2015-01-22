@@ -1,22 +1,22 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonShikibetsuID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.ShichosonShikibetsuID;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import java.util.Objects;
 
 /**
  * DbT7057KoikiShichosonSecurityの項目定義クラスです
  *
  */
-public class DbT7057KoikiShichosonSecurityEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
-
+public class DbT7057KoikiShichosonSecurityEntity extends DbTableEntityBase<DbT7057KoikiShichosonSecurityEntity> implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7057KoikiShichosonSecurity");
 
@@ -31,11 +31,10 @@ public class DbT7057KoikiShichosonSecurityEntity implements IDbAccessable {
     @PrimaryKey
     private RString groupID;
     private ShichosonShikibetsuID shichosonShikibetsuID;
-    private ShichosonCode shichosonCode;
+    private LasdecCode shichosonCode;
 
     /**
      * getInsertDantaiCd
-     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -44,7 +43,6 @@ public class DbT7057KoikiShichosonSecurityEntity implements IDbAccessable {
 
     /**
      * setInsertDantaiCd
-     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -53,7 +51,6 @@ public class DbT7057KoikiShichosonSecurityEntity implements IDbAccessable {
 
     /**
      * getIsDeleted
-     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -62,16 +59,15 @@ public class DbT7057KoikiShichosonSecurityEntity implements IDbAccessable {
 
     /**
      * setIsDeleted
-     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * setLastUpdateReamsLoginId
-     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -80,7 +76,6 @@ public class DbT7057KoikiShichosonSecurityEntity implements IDbAccessable {
 
     /**
      * getGroupID
-     *
      * @return groupID
      */
     public RString getGroupID() {
@@ -89,7 +84,6 @@ public class DbT7057KoikiShichosonSecurityEntity implements IDbAccessable {
 
     /**
      * setGroupID
-     *
      * @param groupID groupID
      */
     public void setGroupID(RString groupID) {
@@ -98,7 +92,6 @@ public class DbT7057KoikiShichosonSecurityEntity implements IDbAccessable {
 
     /**
      * getShichosonShikibetsuID
-     *
      * @return shichosonShikibetsuID
      */
     public ShichosonShikibetsuID getShichosonShikibetsuID() {
@@ -107,7 +100,6 @@ public class DbT7057KoikiShichosonSecurityEntity implements IDbAccessable {
 
     /**
      * setShichosonShikibetsuID
-     *
      * @param shichosonShikibetsuID shichosonShikibetsuID
      */
     public void setShichosonShikibetsuID(ShichosonShikibetsuID shichosonShikibetsuID) {
@@ -116,28 +108,28 @@ public class DbT7057KoikiShichosonSecurityEntity implements IDbAccessable {
 
     /**
      * getShichosonCode
-     *
      * @return shichosonCode
      */
-    public ShichosonCode getShichosonCode() {
+    public LasdecCode getShichosonCode() {
         return shichosonCode;
     }
 
     /**
      * setShichosonCode
-     *
      * @param shichosonCode shichosonCode
      */
-    public void setShichosonCode(ShichosonCode shichosonCode) {
+    public void setShichosonCode(LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT7057KoikiShichosonSecurityEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT7057KoikiShichosonSecurityEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT7057KoikiShichosonSecurityEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
+    @Override
     public boolean equalsPrimaryKeys(DbT7057KoikiShichosonSecurityEntity other) {
         if (other == null) {
             return false;
@@ -148,5 +140,25 @@ public class DbT7057KoikiShichosonSecurityEntity implements IDbAccessable {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void shallowCopy(DbT7057KoikiShichosonSecurityEntity entity) {
+        this.groupID = entity.groupID;
+        this.shichosonShikibetsuID = entity.shichosonShikibetsuID;
+        this.shichosonCode = entity.shichosonCode;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Override
+    public RString getMd5() {
+        return super.toMd5(groupID, shichosonShikibetsuID, shichosonCode);
+    }
+
 // </editor-fold>
+
 }
