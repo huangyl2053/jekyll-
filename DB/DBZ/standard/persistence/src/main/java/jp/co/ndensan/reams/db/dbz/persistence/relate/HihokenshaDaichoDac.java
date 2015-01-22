@@ -82,6 +82,32 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
      * 条件に合致する被保険者台帳のリストを返します。
      *
      * @param 市町村コード 市町村コード
+     * @return IItemList<HihokenshaDaichoModel>
+     */
+    @Transaction
+    public IItemList<HihokenshaDaichoModel> select被保険者台帳一覧(LasdecCode 市町村コード) {
+
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(eq(DbT1001HihokenshaDaicho.shichosonCode, 市町村コード)).
+                toList(DbT1001HihokenshaDaichoEntity.class);
+
+        List<HihokenshaDaichoModel> list = new ArrayList<>();
+
+        for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
+            list.add(createModel(被保険者台帳));
+        }
+
+        return ItemList.of(list);
+    }
+
+    /**
+     * 条件に合致する被保険者台帳のリストを返します。
+     *
+     * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
      * @return {@code IItemList<HihokenshaDaichoModel>}
      */

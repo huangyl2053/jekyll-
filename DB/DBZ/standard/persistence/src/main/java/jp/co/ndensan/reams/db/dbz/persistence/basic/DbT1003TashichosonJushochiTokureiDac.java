@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokurei;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokurei.shichosonCode;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokurei.shikibetsuCode;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokurei.shoriTimeStamp;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokurei.shoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -58,7 +58,7 @@ public class DbT1003TashichosonJushochiTokureiDac implements IModifiable<DbT1003
                 where(and(
                                 eq(shichosonCode, 市町村コード),
                                 eq(shikibetsuCode, 識別コード),
-                                eq(shoriTimeStamp, 処理日時))).
+                                eq(shoriTimestamp, 処理日時))).
                 toObject(DbT1003TashichosonJushochiTokureiEntity.class);
     }
 

@@ -5,50 +5,124 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.shisetsunyutaishorirekikanri;
 
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
+
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoMapper;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
+import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
+import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
+import jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage;
+import jp.co.ndensan.reams.db.dbz.divcontroller.messagemapping.ShisetsuNyutaishoValidationMessageMapping;
+import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
+import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoModel;
+import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoRirekiKanriContext;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrQuestionMessages;
+import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationHelper;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.DivcontrollerMethod;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICallbackMethod;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.SingleButtonType;
 
 /**
  * 共有子Div「施設入退所履歴管理」のイベントを定義した共有子Divです。
  *
  * @author n8178 城間篤人
+ * @author n8223 朴義一
  */
 public class ShisetsuNyutaishoRirekiKanri {
+
+    private static final RString MODE_INSERT = new RString("追加");
+    private static final RString MODE_UPDATE = new RString("修正");
+    private static final RString MODE_DELETE = new RString("削除");
+
+    /**
+     * 共有子Divのロード時に行う処理です。
+     *
+     * @param shisetsuNyutaishoRirekiDiv
+     * @return レスポンス
+     */
+    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onLoad(ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
+        createHandlerOf(shisetsuNyutaishoRirekiDiv).initialize();
+        return createSettingData(shisetsuNyutaishoRirekiDiv);
+    }
 
     /**
      * 追加ボタンが押下された際に実行します。<br/>
      * 追加処理のための前準備を行います。
      *
-     * @param shisetsuNyutaishoDiv
+     * @param shisetsuNyutaishoRirekiDiv
      * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnAddShisetsuNyutaisho(
-            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoDiv) {
+            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
+
         //TODO
         //１）「追加する」ボタンを押下不可にする。
+        shisetsuNyutaishoRirekiDiv.getBtnAddShisetsuNyutaisho().setDisabled(true);
         //２）「施設入退所履歴一覧」をreadOnlyにする。
+        shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().setReadOnly(true);
         //３）明細エリアの項目を空白で表示する。【入力可】
+        shisetsuNyutaishoRirekiDiv.clearInputData();
         //３－１）明細表示モードに、追加・修正を設定する。
+        shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtNyushoDate().setReadOnly(false);
+        shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtNyushoDate().setValue(FlexibleDate.getNowDate());
+        shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtTaishoDate().setReadOnly(false);
+        shisetsuNyutaishoRirekiDiv.setMode_明細表示モード(ShisetsuNyutaishoRirekiKanriDiv.明細表示モード.追加_修正);
+        shisetsuNyutaishoRirekiDiv.setInputMode(ViewExecutionStatus.Add.getValue());
 
-        return createSettingData(shisetsuNyutaishoDiv);
+        return createSettingData(shisetsuNyutaishoRirekiDiv);
     }
 
     /**
      * 施設入退所履歴上の1行が選択された際に実行します。<br/>
      * 選択行の状態に応じて、修正・照会などの処理のための前準備を行います。
      *
-     * @param shisetsuNyutaishoDiv
+     * @param shisetsuNyutaishoRirekiDiv
      * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelect_dgShisetsuNyutaishoRireki(
-            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoDiv) {
+            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
+
         //TODO
         //１）「追加する」ボタンを押下不可にする。
+        shisetsuNyutaishoRirekiDiv.getBtnAddShisetsuNyutaisho().setDisabled(true);
         //２）「施設入退所履歴一覧」をreadOnlyにする。
-        //３）明細エリアに選択行の内容を表示する。
+        shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().setReadOnly(true);
+
+        //shisetsuNyutaishoRirekiDiv .setInputMode();
         //４）選択行の状態によって、以下のように処理する。
+        RString rowState = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getClickedItem().getState();
+
+        if (MODE_INSERT.equals(rowState) || MODE_UPDATE.equals(rowState)) {
+            shisetsuNyutaishoRirekiDiv.setMode_明細表示モード(ShisetsuNyutaishoRirekiKanriDiv.明細表示モード.追加_修正);
+            shisetsuNyutaishoRirekiDiv.setInputMode(ViewExecutionStatus.Modify.getValue());
+
+        } else if (MODE_DELETE.equals(rowState)) {
+            shisetsuNyutaishoRirekiDiv.setMode_明細表示モード(ShisetsuNyutaishoRirekiKanriDiv.明細表示モード.削除);
+            shisetsuNyutaishoRirekiDiv.setInputMode(ViewExecutionStatus.Delete.getValue());
+
+        } else {
+            shisetsuNyutaishoRirekiDiv.getBtnAddShisetsuNyutaisho().setDisabled(false);
+            shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().setReadOnly(false);
+            shisetsuNyutaishoRirekiDiv.setMode_明細表示モード(ShisetsuNyutaishoRirekiKanriDiv.明細表示モード.選択不可);
+            shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getBtnShisetsuNyutaishoKakutei().setDisabled(true);
+            shisetsuNyutaishoRirekiDiv.setInputMode(ViewExecutionStatus.None.getValue());
+
+        }
+        //３）明細エリアに選択行の内容を表示する。
+        createHandlerOf(shisetsuNyutaishoRirekiDiv).showSelectedData();
+
         //４－１）状態が「追加」の場合、明細エリアの項目を入力可にする。
         //４－１－１）明細表示モードに、追加・修正を設定する。
         //４－２）状態が「修正」の場合、明細エリアの項目を入力可にする。
@@ -57,60 +131,75 @@ public class ShisetsuNyutaishoRirekiKanri {
         //４－３－１）明細表示モードに、削除を設定する。
         //４－４）状態が「空白」の場合、明細エリアの項目を入力不可にして「確定する」ボタンを押下不可にする。
         //４－４－１）明細表示モードに、選択不可を設定する。
-
-        return createSettingData(shisetsuNyutaishoDiv);
+        return createSettingData(shisetsuNyutaishoRirekiDiv);
     }
 
     /**
      * 施設入退所履歴上の修正アイコンが押下された際に実行します。<br/>
      * 修正・変更処理のための前準備を行います。
      *
-     * @param shisetsuNyutaishoDiv
+     * @param shisetsuNyutaishoRirekiDiv
      * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelectByModifyButton_dgShisetsuNyutaishoRireki(
-            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoDiv) {
+            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
+
         //TODO
         //１）「追加する」ボタンを押下不可にする。
+        shisetsuNyutaishoRirekiDiv.getBtnAddShisetsuNyutaisho().setDisabled(true);
         //２）「施設入退所履歴一覧」をreadOnlyにする。
-        //３）明細エリアに選択行の内容を表示する。
-        //３－１）明細表示モードに、追加・修正を設定する。
+        shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().setReadOnly(true);
 
-        return createSettingData(shisetsuNyutaishoDiv);
+        //３－１）明細表示モードに、追加・修正を設定する。
+        shisetsuNyutaishoRirekiDiv.setMode_明細表示モード(ShisetsuNyutaishoRirekiKanriDiv.明細表示モード.追加_修正);
+        //３）明細エリアに選択行の内容を表示する。
+        shisetsuNyutaishoRirekiDiv.setInputMode(ViewExecutionStatus.Modify.getValue());
+        createHandlerOf(shisetsuNyutaishoRirekiDiv).showSelectedData();
+
+        return createSettingData(shisetsuNyutaishoRirekiDiv);
     }
 
     /**
      * 施設入退所履歴上の削除アイコンが押下された際に実行します。<br/>
      * 削除処理のための前準備を行います。
      *
-     * @param shisetsuNyutaishoDiv
+     * @param shisetsuNyutaishoRirekiDiv
      * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelectByDeleteButton_dgShisetsuNyutaishoRireki(
-            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoDiv) {
+            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
+
         //TODO
         //１）「追加する」ボタンを押下不可にする。
+        shisetsuNyutaishoRirekiDiv.getBtnAddShisetsuNyutaisho().setDisabled(true);
         //２）「施設入退所履歴一覧」をreadOnlyにする。
+        shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().setReadOnly(true);
+
         //３）明細エリアに選択行の内容を表示する。
         //４）明細エリア上の、確定ボタンと取消ボタン以外の項目を全て非活性にする
         //４－１）明細表示モードに、削除を設定する。
+        shisetsuNyutaishoRirekiDiv.setMode_明細表示モード(ShisetsuNyutaishoRirekiKanriDiv.明細表示モード.削除);
+        shisetsuNyutaishoRirekiDiv.setInputMode(ViewExecutionStatus.Delete.getValue());
+        shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().setReadOnly(true);
+        createHandlerOf(shisetsuNyutaishoRirekiDiv).showSelectedData();
 
-        return createSettingData(shisetsuNyutaishoDiv);
+        return createSettingData(shisetsuNyutaishoRirekiDiv);
     }
 
     /**
      * 確定ボタンを押下した際に、onClick処理の前に実行されます。<br/>
      * 入力した情報について、バリデーションチェックを行います。
      *
-     * @param shisetsuNyutaishoDiv
+     * @param shisetsuNyutaishoRirekiDiv
      * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onBeforeClick_btnShisetsuNyutaishoKakutei(
-            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoDiv) {
+            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
         ResponseData<ShisetsuNyutaishoRirekiKanriDiv> response = new ResponseData<>();
+
         //TODO
         //１）入所日 ＞ 退所日 のとき、エラーメッセージを表示する。
         //       メッセージID：URZE00027（期間が不正です。%1－%2）
@@ -122,21 +211,123 @@ public class ShisetsuNyutaishoRirekiKanri {
         //３）追加時・修正時のみ
         //：入所日 ≦ 前の履歴データの退所日 のとき、エラーメッセージを表示する。
         //       メッセージID：URZE00025（期間が重複しています。）
+        IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
+
+        //※ 現在のリストにmodelへいれる。そして、stateによって「追加・変更・削除」をもとにバリデーションチェックを行います。※
+        ShisetsuNyutaishoRelateModel model = ShisetsuNyutaishoMapper.toShisetsuNyutaishoRelateModel(shisetsuNyutaishoRirekiDiv);
+        RString rowState = shisetsuNyutaishoRirekiDiv.getInputMode();
+
+        Optional<ShisetsuNyutaishoModel> 前履歴;
+        Optional<ShisetsuNyutaishoModel> 次履歴;
+        IItemList<ShisetsuNyutaishoModel> 全履歴;
+
+        switch (ViewExecutionStatus.toValue(rowState)) {
+
+            case Add:
+                前履歴 = Optional.empty();
+                次履歴 = Optional.empty();
+                全履歴 = createHandlerOf(shisetsuNyutaishoRirekiDiv).get施設入退所履歴().map(toShisetsuNyutaishoModel());
+                break;
+            case Modify:
+                int rowIndex = Integer.valueOf(shisetsuNyutaishoRirekiDiv.getSelectRow().toString()).intValue();
+
+                if (rowIndex != 0) {
+                    int rdx = rowIndex - 1;
+                    dgShisetsuNyutaishoRireki_Row row = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rdx);
+                    次履歴 = createHandlerOf(shisetsuNyutaishoRirekiDiv).get施設入退所履歴()
+                            .filter(ShisetsuNyutaishoMapper.createKey(row))
+                            .findJustOne().map(toShisetsuNyutaishoModel());
+                } else {
+                    次履歴 = Optional.empty();
+                }
+
+                if (rowIndex + 1 <= shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().size() - 1) {
+                    int rdx = rowIndex + 1;
+                    dgShisetsuNyutaishoRireki_Row row = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rdx);
+                    前履歴 = createHandlerOf(shisetsuNyutaishoRirekiDiv).get施設入退所履歴()
+                            .filter(ShisetsuNyutaishoMapper.createKey(row))
+                            .findJustOne().map(toShisetsuNyutaishoModel());
+                } else {
+                    前履歴 = Optional.empty();
+                }
+
+                全履歴 = ItemList.empty();
+                break;
+            case Delete:
+            default:
+                前履歴 = Optional.empty();
+                次履歴 = Optional.empty();
+                全履歴 = ItemList.empty();
+                break;
+        }
+        ShisetsuNyutaishoRirekiKanriContext context = new ShisetsuNyutaishoRirekiKanriContext(ViewExecutionStatus.toValue(rowState), 前履歴, 次履歴, 全履歴);
+        //バリデーションチェック
+        validationMessages.add(model.get介護保険施設入退所モデル().validateIn(context));
+        //バリデーションチェック
+        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所日が未入力)) {
+            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+        }
+        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.終了日設定なし)) {
+            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+        }
+
+        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所施設が未入力)) {
+            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+        }
+
+        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所年月日より前)) {
+            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+
+        }
+        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複)) {
+            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+
+        }
+        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複)) {
+            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+
+        }
+        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所日と期間が重複する履歴がある)) {
+            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+
+        }
+        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.退所日と期間が重複する履歴がある)) {
+            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+
+        }
+
         //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
-        response.data = shisetsuNyutaishoDiv;
+        response.data = shisetsuNyutaishoRirekiDiv;
         return response;
+    }
+
+    private IFunction<ShisetsuNyutaishoRelateModel, ShisetsuNyutaishoModel> toShisetsuNyutaishoModel() {
+        return new IFunction<ShisetsuNyutaishoRelateModel, ShisetsuNyutaishoModel>() {
+            @Override
+            public ShisetsuNyutaishoModel apply(ShisetsuNyutaishoRelateModel t) {
+                return t.get介護保険施設入退所モデル();
+            }
+        };
     }
 
     /**
      * 確定ボタンを押下した時に実行されます。<br/>
      * 明細エリアの入力内容を施設入退所履歴一覧に反映します。
      *
-     * @param shisetsuNyutaishoDiv
+     * @param shisetsuNyutaishoRirekiDiv
      * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
-    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoKakutei(
-            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoDiv) {
+    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoKakutei(ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
+
         //TODO
         //１）追加を確定する場合以下の処理を行う。
         //  →入力した内容を元に、新規行を追加する。新規行に明細エリアの情報を設定し、状態列には「追加」を設定する。
@@ -148,23 +339,34 @@ public class ShisetsuNyutaishoRirekiKanri {
         //３）・削除を確定する場合
         //　→選択している行の状態列を"削除"に変更する。
         //新規に追加した行に対して削除する場合は、追加行をグリッドから取り除く。
-        //４）「施設入退所履歴一覧」のReadOnlyを外す。
-        //５）明細表示モードに選択不可を設定する。
-        //６）「追加する」ボタンを押下可能にする。
+        ShisetsuNyutaishoRelateModel model = ShisetsuNyutaishoMapper.toShisetsuNyutaishoRelateModel(shisetsuNyutaishoRirekiDiv);
 
-        return createSettingData(shisetsuNyutaishoDiv);
+        // 明細の入所年月日・退所年月日
+        createHandlerOf(shisetsuNyutaishoRirekiDiv).update施設入退所履歴(model);
+
+        //４）「施設入退所履歴一覧」のReadOnlyを外す。
+        shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().setReadOnly(false);
+        //５）明細表示モードに選択不可を設定する。
+        shisetsuNyutaishoRirekiDiv.setMode_明細表示モード(ShisetsuNyutaishoRirekiKanriDiv.明細表示モード.選択不可);
+        //６）「追加する」ボタンを押下可能にする。
+        shisetsuNyutaishoRirekiDiv.getBtnAddShisetsuNyutaisho().setDisabled(false);
+        //明細内容クリア
+        createHandlerOf(shisetsuNyutaishoRirekiDiv).clearInputData();
+
+        return createSettingData(shisetsuNyutaishoRirekiDiv);
     }
 
     /**
      * 明細エリアの取消ボタンが押下された際に実行します。<br/>
      * 入力した情報を破棄してもよいかの確認メッセージを表示します。
      *
-     * @param shisetsuNyutaishoDiv
+     * @param shisetsuNyutaishoRirekiDiv
      * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
-    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoTorikeshi(
-            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoDiv) {
+    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoTorikeshi(ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
+
+        ResponseData<ShisetsuNyutaishoRirekiKanriDiv> response = new ResponseData<>();
         //TODO
         //１）明細エリアの情報が変更されているかを確認する。
         //１－１）変更がない場合は、onClick_btnIryoHokenTorikeshi_onYesの処理を実行する。
@@ -174,25 +376,111 @@ public class ShisetsuNyutaishoRirekiKanri {
         //      Yes：onClick_btnIryoHokenTorikeshi_onYesの処理を実行する。
         //      No:ダイアログを閉じる
 
-        return createSettingData(shisetsuNyutaishoDiv);
+        boolean flg = Boolean.FALSE;
+        RString rowState = shisetsuNyutaishoRirekiDiv.getInputMode();
+        switch (ViewExecutionStatus.toValue(rowState)) {
+
+            case Add:
+
+                if (!shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
+                    flg = Boolean.TRUE;
+                } else if (!shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()) {
+                    flg = Boolean.TRUE;
+                } else if (shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().toString().isEmpty()) {
+                    flg = Boolean.TRUE;
+                }
+                break;
+
+            case Modify:
+                int rowIndex = Integer.valueOf(shisetsuNyutaishoRirekiDiv.getSelectRow().toString()).intValue();
+                dgShisetsuNyutaishoRireki_Row 選択行 = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rowIndex);
+
+                RString 入所年月日 = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().toString()));
+                RString 退所年月日 = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().toString()));
+                RString 台帳種別 = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get台帳種別().toString()));
+                RString 入所施設種類 = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類().getCode().toString()));
+                RString 入所施設コード = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get入所施設コード().toString()));
+                RString 施設名称 = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設名称().toString()));
+
+                if (!入所年月日.equals(composeNulltoStr(new RString(選択行.getNyushoDate().getValue().toString())))) {
+                    flg = Boolean.TRUE;
+                } else if (!退所年月日.equals(composeNulltoStr(new RString(選択行.getTaishoDate().getValue().toString())))) {
+                    flg = Boolean.TRUE;
+                } else if (!台帳種別.equals(composeNulltoStr(new RString(選択行.getDaichoShubetsuKey().toString())))) {
+                    flg = Boolean.TRUE;
+                } else if (!入所施設種類.equals(composeNulltoStr(new RString(選択行.getShisetsuShuruiKey().toString())))) {
+                    flg = Boolean.TRUE;
+                } else if (!入所施設コード.equals(composeNulltoStr(new RString(選択行.getShisetsuCode().toString())))) {
+                    flg = Boolean.TRUE;
+                } else if (!施設名称.equals(composeNulltoStr(new RString(選択行.getShisetsuMeisho().toString())))) {
+                    flg = Boolean.TRUE;
+                }
+
+                break;
+
+            case Delete:
+
+                break;
+            default:
+                break;
+        }
+
+        if (!flg) {
+            return this.onClick_btnShisetsuNyutaishoTorikeshi_onYes(shisetsuNyutaishoRirekiDiv);
+        }
+
+        // DivController.onYesメソッドを呼ぶ
+        ICallbackMethod methodYes = DivcontrollerMethod.method(SingleButtonType.Free, "onClick_btnShisetsuNyutaishoTorikeshi_onYes");
+
+        QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                UrQuestionMessages.入力内容の破棄.getMessage().evaluate(), "はい", "いいえ");
+
+        ICallbackMethod[] methods = {methodYes}; //ユーザー選択時の動作を規定する
+        message.addInvokeMethod(methods);
+
+        response.addMessage(message);
+        response.data = shisetsuNyutaishoRirekiDiv;
+        return response;
+    }
+
+    private static RString composeNulltoStr(RString str) {
+        RString afterStr;
+        if (str == null) {
+            afterStr = RString.EMPTY;
+        } else {
+            afterStr = str;
+        }
+        return afterStr;
     }
 
     /**
      * 取消ボタンを押下した際に表示されるダイアログで、はいを選択した際に実行されます。<br/>
      * 明細エリアに入力した情報を破棄し、追加・修正・削除が可能な状態に戻します。
      *
-     * @param shisetsuNyutaishoDiv
+     * @param shisetsuNyutaishoRirekiDiv
      * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoTorikeshi_onYes(
-            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoDiv) {
+            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
+
         //TODO
         //１）明細エリアの各項目の値をクリアする。
-        //２）「施設入退所履歴一覧」のReadOnlyを外す。
-        //３）明細表示モードに選択不可を設定する。
+        // 施設入退所の明細
+        createHandlerOf(shisetsuNyutaishoRirekiDiv).clearInputData();
 
-        return createSettingData(shisetsuNyutaishoDiv);
+        //２）「施設入退所履歴一覧」のReadOnlyを外す。
+        shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().setReadOnly(false);
+        shisetsuNyutaishoRirekiDiv.getBtnAddShisetsuNyutaisho().setDisabled(false);
+
+        //３）明細表示モードに選択不可を設定する。
+        shisetsuNyutaishoRirekiDiv.setMode_明細表示モード(ShisetsuNyutaishoRirekiKanriDiv.明細表示モード.選択不可);
+        return createSettingData(shisetsuNyutaishoRirekiDiv);
+
+    }
+
+    private ShisetsuNyutaishoRirekiKanriHandler createHandlerOf(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
+        return new ShisetsuNyutaishoRirekiKanriHandler(requestDiv);
     }
 
     private <T> ResponseData<T> createSettingData(T settingData) {
@@ -200,4 +488,5 @@ public class ShisetsuNyutaishoRirekiKanri {
         response.data = settingData;
         return response;
     }
+
 }

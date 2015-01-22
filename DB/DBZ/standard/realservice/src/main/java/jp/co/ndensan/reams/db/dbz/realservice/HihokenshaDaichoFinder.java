@@ -49,8 +49,8 @@ public class HihokenshaDaichoFinder implements IHihokenshaDaichoFinder {
     }
 
     @Override
-    public IItemList<IHihokenshaDaicho> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+        return finder.find被保険者台帳List(市町村コード, 被保険者番号);
     }
 
     @Override
@@ -68,4 +68,8 @@ public class HihokenshaDaichoFinder implements IHihokenshaDaichoFinder {
         return finder.find最新被保険者台帳(被保険者番号);
     }
 
+    @Override
+    public IItemList<HihokenshaDaichoModel> find直近被保険者台帳一覧(LasdecCode 市町村コード) {
+        return finder.find被保険者台帳List(市町村コード);
+    }
 }

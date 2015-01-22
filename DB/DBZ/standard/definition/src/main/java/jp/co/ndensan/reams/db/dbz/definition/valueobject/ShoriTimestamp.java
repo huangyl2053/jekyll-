@@ -274,7 +274,7 @@ public final class ShoriTimestamp implements IValueObject<YMDHMS>, Comparable<Sh
     }
 
     /**
-     * 保持する値から指定の秒を引いた{@link ShoriTimestamp}
+     * 保持する値から指定の秒を引いた{@link ShoriTimestamp}を返します。
      *
      * @param seconds 秒
      * @return 指定の秒を引いた{@link ShoriTimestamp}
