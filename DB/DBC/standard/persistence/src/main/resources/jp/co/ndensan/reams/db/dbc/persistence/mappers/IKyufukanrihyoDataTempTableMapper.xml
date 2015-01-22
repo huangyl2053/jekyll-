@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.mappers.IKyufukanrihyoDataTempTableMapper">
+
+    <select id="selectAll" resultType="jp.co.ndensan.reams.db.dbc.entity.basic.DbTKyufukanrihyoDataTempTableEntity"  fetchSize="500">
+        select * from rgdb."DbTKyufukanrihyoDataTempTable"
+    </select>
+    <!--
+    <update id="updateKyufukanrihyoDataTempTable" parameterType="jp.co.ndensan.reams.db.dbc.entity.basic.DbTKyufukanrihyoDataTempTableEntity">
+        update rgdb."DbTKyufukanrihyoDataTempTable" set "shokisaiHokenshaNo" = #{shokisaiHokenshaNo} where "userId" = #{userId}
+    </update>
+    -->
+    
+</mapper>

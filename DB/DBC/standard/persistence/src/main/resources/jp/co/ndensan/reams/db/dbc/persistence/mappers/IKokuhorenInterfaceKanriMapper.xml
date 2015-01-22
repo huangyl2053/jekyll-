@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.mappers.IKokuhorenInterfaceKanriMapper">
+
+    <select id="selectbyKey" parameterType="java.util.Map" resultType="jp.co.ndensan.reams.db.dbc.entity.basic.DbT3104KokuhorenInterfaceKanriEntity"  fetchSize="500">
+        select * from rgdb."DbT3104KokuhorenInterfaceKanri" where "shoriYM" = #{shoriYM} and "kokanShikibetsuNo" = #{kokanShikibetsuNo}
+    </select>
+
+    <update id="torikomiShoriUpdater" parameterType="java.util.Map" >
+        UPDATE rgdb."DbT3104KokuhorenInterfaceKanri"
+        SET
+        "sofuTorikomiKubun"='2',
+        "shoriJotaiKubun"='3',
+        "shoriJisshiTimestamp" = #{shoriNichiji},
+        "saiShoriKahiKubun" = False,
+        "shoriJikkoKaisu" = COALESCE(cast("shoriJikkoKaisu" as int8),0) + 1,
+        "fileName1" = #{fileName},
+        "fileKensu1"= (select count(*) from rgdb."DbTKyufuInCtrlTempTable"),
+        "saiShoriFukaKubun" = False ,
+        "ctrlRecordKensu" = COALESCE((select sum(cast("recordKensu" as decimal)) from rgdb."DbTKyufuInCtrlTempTable"
+        where "fileBunruiCode" != '0111' group by "dataShubetsu", "shoriTaishoYM" ),0),
+        "ctrlShoriYM"= (select "shoriTaishoYM" from rgdb."DbTKyufuInCtrlTempTable"
+        where "fileBunruiCode" != '0111' group by "dataShubetsu", "shoriTaishoYM" ),
+        "kagoCtrlRecordKensu"= COALESCE((select sum(cast("recordKensu" as decimal))from rgdb."DbTKyufuInCtrlTempTable"
+        where "fileBunruiCode" = '0111' group by "dataShubetsu", "shoriTaishoYM"),0) ,
+        "kagoCtrlShoriYM"= (select "shoriTaishoYM" from rgdb."DbTKyufuInCtrlTempTable"
+        where "fileBunruiCode" = '0111' group by "dataShubetsu", "shoriTaishoYM" ),
+        "jissekiDataShinsaYM"= (select "jissekiDataShinsaYM" from rgdb."DbTKyufuInCtrlTempTable"
+        where "jissekiDataShinsaYM" is not null
+        group by "dataShubetsu", "shoriTaishoYM" , "jissekiDataShinsaYM" )
+        WHERE "shoriYM" = #{shoriYM} and "kokanShikibetsuNo" = #{kokanShikibetsuNo}
+    </update>
+
+</mapper>
