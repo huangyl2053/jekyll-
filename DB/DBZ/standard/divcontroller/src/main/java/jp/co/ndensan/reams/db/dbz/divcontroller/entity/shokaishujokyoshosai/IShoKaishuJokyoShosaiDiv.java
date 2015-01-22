@@ -7,7 +7,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
- * 共有子Div「証回収状況詳細」において、外部に公開する処理を定義したインターフェースです。。
+ * 共有子Div「証回収状況詳細」において、外部に公開する処理を定義したインターフェースです。
+ *
+ * @author n8178 城間篤人
  */
 public interface IShoKaishuJokyoShosaiDiv {
 

@@ -1,0 +1,6 @@
+﻿choteiNendo,UDD012YSeireki,FlexibleYear,,,,,A
+fukaNendo,UDD012YSeireki,FlexibleYear,,,,,A
+tsuchishoNo,DbUDD008TsuchishoNo,TsuchishoNo,,,,,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+hihodaichoHihokenshaNo,varchar,HihokenshaNo,,,,,A

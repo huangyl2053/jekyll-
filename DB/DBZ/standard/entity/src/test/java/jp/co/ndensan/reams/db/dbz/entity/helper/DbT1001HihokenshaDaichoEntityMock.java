@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -32,8 +31,7 @@ import static org.mockito.Mockito.*;
 public final class DbT1001HihokenshaDaichoEntityMock {
 
     /**
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の
-     * {@link org.mockito.Mockito#spy(java.lang.Object)  スパイインスタンス}を返します。
+     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の {@link org.mockito.Mockito#spy(java.lang.Object)  スパイインスタンス}を返します。
      *
      * @return DbT1001HihokenshaDaichoEntityのスパイ
      */
@@ -50,12 +48,11 @@ public final class DbT1001HihokenshaDaichoEntityMock {
     public static DbT1001HihokenshaDaichoEntity create() {
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         entity.setShichosonCode(new LasdecCode(new RString("000000")));
-        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("000000")));
-        entity.setHihokenshaNo(new HihokenshaNo(new RString("1234567890")));
+        entity.setHihokenshaNo(new HihokenshaNo("1234567890"));
         entity.setShikibetsuCode(new ShikibetsuCode("0000000001"));
         entity.setShoriTimestamp(new YMDHMS("20140328000000"));
-        entity.setHihokennshaKubunCode(new Code("1"));
-        entity.setIchigoHihokenshaNenreiTotatsuYMD(new FlexibleDate("20140328"));
+        entity.setHihokennshaKubunCode(new Code("1").value());
+        entity.setIchigoShikakuShutokuYMD(new FlexibleDate("20140328"));
         entity.setShikakuShutokuJiyuCode(ShikakuShutokuJiyu.年齢到達.getCode());
         entity.setShikakuShutokuTodokedeYMD(new FlexibleDate("20130327"));
         entity.setShikakuShutokuYMD(new FlexibleDate("20130327"));
@@ -73,7 +70,7 @@ public final class DbT1001HihokenshaDaichoEntityMock {
         entity.setJushochitokureiKaijoYMD(new FlexibleDate("00000000"));
         entity.setJushochiTokureiFlag(JushochiTokureishaKubun.通常資格者.getコード());
         entity.setKoikinaiJushochiTokureiFlag(KoikinaiJushochitokureishaKubun.通常資格者.getCode());
-        entity.setKoikinaiTokureiSochimotoHokenshaNo(null);
+        entity.setKoikinaiTokureiSochimotoShichosonCode(LasdecCode.EMPTY);
         entity.setKyuShichosonCode(null);
         entity.setSaikofuKubun(HihokenshashoSaikofuKubun.なし.getCode());
         entity.setSaikofuJiyuCode(HihokenshashoSaikofuJiyu.なし.getCode());

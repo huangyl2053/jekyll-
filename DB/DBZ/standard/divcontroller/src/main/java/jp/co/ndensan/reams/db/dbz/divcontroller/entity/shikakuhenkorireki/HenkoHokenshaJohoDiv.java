@@ -21,8 +21,6 @@ public class HenkoHokenshaJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlHenkoShozaiHokensha")
-    private DropDownList ddlHenkoShozaiHokensha;
     @JsonProperty("ddlHenkoSochimotoHokensha")
     private DropDownList ddlHenkoSochimotoHokensha;
     @JsonProperty("ddlHenkoKyuHokensha")
@@ -36,16 +34,6 @@ public class HenkoHokenshaJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ddlHenkoShozaiHokensha")
-    public DropDownList getDdlHenkoShozaiHokensha() {
-        return ddlHenkoShozaiHokensha;
-    }
-
-    @JsonProperty("ddlHenkoShozaiHokensha")
-    public void setDdlHenkoShozaiHokensha(DropDownList ddlHenkoShozaiHokensha) {
-        this.ddlHenkoShozaiHokensha=ddlHenkoShozaiHokensha;
-    }
-
     @JsonProperty("ddlHenkoSochimotoHokensha")
     public DropDownList getDdlHenkoSochimotoHokensha() {
         return ddlHenkoSochimotoHokensha;

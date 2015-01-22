@@ -1,0 +1,328 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;kaigosaikinshorisharireki&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KaigoSaikinShorishaRireki&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[{&quot;eventName&quot;:&quot;onClick_btnKaigoSaikinShorishaHyoji&quot;}],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.KaigoSaikinShorishaRireki"><div title="" class="UzPanel FloatLeft JSControl Panel StateChangable UzCommonChildDivPanel UzCompositeChild" id="KaigoSaikinShorishaRireki" style="margin: 0em; width: 1100px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KaigoSaikinShorishaRireki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1100px&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;KaigoSaikinShorishaRireki&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KaigoSaikinShorishaRireki&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KaigoSaikinShorishaRireki_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="KaigoSaikinShorishaRireki_panel_body_area"><div title="" class="JSControl UzCompositeControl FloatLeft Width-XS" id="wrappedSaikinShorishaRireki" style="margin: 0em; opacity: 1;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;wrappedSaikinShorishaRireki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;wrappedSaikinShorishaRireki&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;URZ&quot;,&quot;controlName&quot;:&quot;SaikinShorishaRireki&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[{&quot;eventName&quot;:&quot;onClick_btnSaikinShorishaHyoji&quot;},{&quot;eventName&quot;:&quot;onBeforeClick_btnSaikinShorishaHyoji&quot;},{&quot;eventName&quot;:&quot;onAfterClick_btnSaikinShorishaHyoji&quot;}],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;isOneCondition&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;SaikinShorishaRireki_width&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;SaikinShorishaRireki_marginLeft&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;ddlSaikinShorisha_marginLeft&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;btnSaikinShorishaHyoji_width&quot;,&quot;editType&quot;:0}]},&quot;isOneCondition&quot;:&quot;0&quot;,&quot;SaikinShorishaRireki_width&quot;:&quot;1100px&quot;,&quot;SaikinShorishaRireki_marginLeft&quot;:&quot;0em&quot;,&quot;ddlSaikinShorisha_marginLeft&quot;:&quot;XL&quot;,&quot;btnSaikinShorishaHyoji_width&quot;:&quot;M&quot;}" data-is-composite-control="true" data-control-name="URZ.SaikinShorishaRireki"></div><button class="UzButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnKaigoSaikinShorishaHyoji" style="opacity: 0.8;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnKaigoSaikinShorishaHyoji&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;visible&quot;:false,&quot;displayNone&quot;:true,&quot;selectControlID&quot;:&quot;btnKaigoSaikinShorishaHyoji&quot;,&quot;onClick&quot;:&quot;onClick_btnKaigoSaikinShorishaHyoji&quot;,&quot;text&quot;:&quot;表示する&quot;}"><span>表示する</span></button></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBZ;
+(function (DBZ) {
+    var KaigoSaikinShorishaRireki_Design = (function (_super) {
+        __extends(KaigoSaikinShorishaRireki_Design, _super);
+        function KaigoSaikinShorishaRireki_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, KaigoSaikinShorishaRireki_Design.myLayout, fieldName);
+        }
+        KaigoSaikinShorishaRireki_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        KaigoSaikinShorishaRireki_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        KaigoSaikinShorishaRireki_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "KaigoSaikinShorishaRireki",
+                    "items": [
+                        {
+                            "fieldName": "wrappedSaikinShorishaRireki",
+                            "items": [],
+                            "controlType": "CommonChildDiv",
+                            "width": "XS",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "0em",
+                            "marginRight": "0em",
+                            "selectControlID": "wrappedSaikinShorishaRireki",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "relation": [],
+                            "packageName": "",
+                            "businessId": "URZ",
+                            "controlName": "SaikinShorishaRireki",
+                            "marginTop": "0em",
+                            "marginBottom": "0em",
+                            "originalProperty": [],
+                            "dataPassingForDialog": [],
+                            "dialogOkEventNameForDialog": "",
+                            "dialogCancelEventNameForDialog": "",
+                            "canTransferEvent": true,
+                            "heightForDialog": "M",
+                            "firstFocusFieldName": "",
+                            "lastFocusFieldName": "",
+                            "modes": [],
+                            "publicEvents": [
+                                {
+                                    "eventName": "onClick_btnSaikinShorishaHyoji"
+                                },
+                                {
+                                    "eventName": "onBeforeClick_btnSaikinShorishaHyoji"
+                                },
+                                {
+                                    "eventName": "onAfterClick_btnSaikinShorishaHyoji"
+                                }
+                            ],
+                            "publicEventsAlias": [],
+                            "isOneCondition": "0",
+                            "SaikinShorishaRireki_width": "1100px",
+                            "SaikinShorishaRireki_marginLeft": "0em",
+                            "ddlSaikinShorisha_marginLeft": "XL",
+                            "btnSaikinShorishaHyoji_width": "M"
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "1100px",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0em",
+                    "marginRight": "0em",
+                    "selectControlID": "KaigoSaikinShorishaRireki",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "",
+                    "marginTop": "0em",
+                    "marginBottom": "0em",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "KaigoSaikinShorishaRireki"
+                        }
+                    ],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": true,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": true
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0em",
+            "marginRight": "0em",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBZ",
+            "controlName": "KaigoSaikinShorishaRireki",
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
+        };
+        return KaigoSaikinShorishaRireki_Design;
+    })(Uz.CommonChildDiv);
+    DBZ.KaigoSaikinShorishaRireki_Design = KaigoSaikinShorishaRireki_Design;
+
+    (function (KaigoSaikinShorishaRireki) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KaigoSaikinShorishaRireki.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KaigoSaikinShorishaRireki";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KaigoSaikinShorishaRireki.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + fieldName;
+            };
+
+            Controls.prototype.KaigoSaikinShorishaRireki = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.wrappedSaikinShorishaRireki = function () {
+                return new URZ.SaikinShorishaRireki.ModeController("wrappedSaikinShorishaRireki");
+            };
+            return Controls;
+        })();
+        KaigoSaikinShorishaRireki.Controls = Controls;
+    })(DBZ.KaigoSaikinShorishaRireki || (DBZ.KaigoSaikinShorishaRireki = {}));
+    var KaigoSaikinShorishaRireki = DBZ.KaigoSaikinShorishaRireki;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KaigoSaikinShorishaRireki) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KaigoSaikinShorishaRireki.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KaigoSaikinShorishaRireki.ModeController = ModeController;
+    })(DBZ.KaigoSaikinShorishaRireki || (DBZ.KaigoSaikinShorishaRireki = {}));
+    var KaigoSaikinShorishaRireki = DBZ.KaigoSaikinShorishaRireki;
+})(DBZ || (DBZ = {}));
+</script>
+     
+   
+   
+   
+   
+   
+   
+         
+   
+   
+   
+   
+     <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['KAIGOSAIKINSHORISHARIREKI'] = {};
+DBZ['KAIGOSAIKINSHORISHARIREKI'].KaigoSaikinShorishaRirekiRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KaigoSaikinShorishaRireki').getProperty();parameter0.wrappedSaikinShorishaRireki = Uz.JSControlUtil.getJSControl(parentFieldName + '_wrappedSaikinShorishaRireki').getPostParameter();parameter0.btnKaigoSaikinShorishaHyoji = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnKaigoSaikinShorishaHyoji').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (KaigoSaikinShorishaRireki) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnKaigoSaikinShorishaHyoji = function () {
+                return "onClick_btnKaigoSaikinShorishaHyoji";
+            };
+            return Events;
+        })();
+        KaigoSaikinShorishaRireki.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KaigoSaikinShorishaRireki";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KaigoSaikinShorishaRireki.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.KaigoSaikinShorishaRireki.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KaigoSaikinShorishaRireki = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnKaigoSaikinShorishaHyoji = function () {
+                return new UZA.Button(this.convFiledName("btnKaigoSaikinShorishaHyoji"));
+            };
+            return Controls;
+        })();
+        KaigoSaikinShorishaRireki.Controls = Controls;
+    })(DBZ.KaigoSaikinShorishaRireki || (DBZ.KaigoSaikinShorishaRireki = {}));
+    var KaigoSaikinShorishaRireki = DBZ.KaigoSaikinShorishaRireki;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (KaigoSaikinShorishaRireki) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                var _this = this;
+                this.fieldName = fieldName;
+                this.controls = new KaigoSaikinShorishaRireki.Controls(fieldName);
+
+                Uz.GyomuJSHelper.registOriginalEvent("onClick_btnSaikinShorishaHyoji", function () {
+                    (_this.controls.btnKaigoSaikinShorishaHyoji()._control).fireEvent("onClick_btnKaigoSaikinShorishaHyoji");
+                });
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.priorities = function () {
+                return [
+                    "DummyMode1"
+                ];
+            };
+
+            ModeController.prototype.DummyMode1 = function () {
+                return new Modes.DummyMode1(this.controls);
+            };
+            return ModeController;
+        })();
+        KaigoSaikinShorishaRireki.ModeController = ModeController;
+
+        (function (Modes) {
+            var DummyMode1 = (function () {
+                function DummyMode1(controls) {
+                    this.controls = controls;
+                }
+                DummyMode1.prototype.val1 = function () {
+                };
+                return DummyMode1;
+            })();
+            Modes.DummyMode1 = DummyMode1;
+        })(KaigoSaikinShorishaRireki.Modes || (KaigoSaikinShorishaRireki.Modes = {}));
+        var Modes = KaigoSaikinShorishaRireki.Modes;
+    })(DBZ.KaigoSaikinShorishaRireki || (DBZ.KaigoSaikinShorishaRireki = {}));
+    var KaigoSaikinShorishaRireki = DBZ.KaigoSaikinShorishaRireki;
+})(DBZ || (DBZ = {}));
+</script></div>

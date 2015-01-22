@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
+@Deprecated
 public class Hihokensha implements IHihokenshaShikaku, INinteiShinseiTaishosha {
 
     private final IKojin profile;
@@ -49,11 +50,6 @@ public class Hihokensha implements IHihokenshaShikaku, INinteiShinseiTaishosha {
     @Override
     public LasdecCode get市町村コード() {
         return this.shikaku.get市町村コード();
-    }
-
-    @Override
-    public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return this.shikaku.get証記載保険者番号();
     }
 
     @Override

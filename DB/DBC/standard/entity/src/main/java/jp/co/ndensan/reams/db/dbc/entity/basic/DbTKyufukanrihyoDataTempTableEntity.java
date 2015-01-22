@@ -2,10 +2,9 @@ package jp.co.ndensan.reams.db.dbc.entity.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
  * DbTKyufukanrihyoDataTempTableの項目定義クラスです
@@ -17,45 +16,85 @@ public class DbTKyufukanrihyoDataTempTableEntity extends DbTableEntityBase<DbTKy
     @TableName
     public static final RString TABLE_NAME = new RString("DbTKyufukanrihyoDataTempTable");
 
+    @TempTableColumnOrder(1)
     private RString recordShubetsu;
+    @TempTableColumnOrder(2)
     private RString renban;
+    @TempTableColumnOrder(3)
     private RString kokanjohoShikibetsuNo;
+    @TempTableColumnOrder(4)
     private RString chohyoRecordShubetsu;
+    @TempTableColumnOrder(5)
     private RString shinsaYM;
+    @TempTableColumnOrder(6)
     private RString taishoYM;
+    @TempTableColumnOrder(7)
     private RString hokenshaNo;
+    @TempTableColumnOrder(8)
     private RString KyotakuShienJigyoshoNo;
+    @TempTableColumnOrder(9)
     private RString kyufukanrihyoSakuseiKubunCode;
+    @TempTableColumnOrder(10)
     private RString kyufukanrihyoSakuseiYMD;
+    @TempTableColumnOrder(11)
     private RString kyufukanrihyoShubetsuKubunCode;
+    @TempTableColumnOrder(12)
     private RString kyufukanrihyoMeisaigyoNo;
+    @TempTableColumnOrder(13)
     private RString hihokenshaNo;
+    @TempTableColumnOrder(14)
     private RString seinengappiYMD;
+    @TempTableColumnOrder(15)
     private RString seibetsuCode;
+    @TempTableColumnOrder(16)
     private RString yokaigojotaiKubunCode;
+    @TempTableColumnOrder(17)
     private RString gendogakuTekiyoKaishiYMD;
+    @TempTableColumnOrder(18)
     private RString gendogakuTekiyoShuryoYMD;
+    @TempTableColumnOrder(19)
     private RString kyotakuKaigoyoboShikyugendogaku;
+    @TempTableColumnOrder(20)
     private RString kyotakuKeikakuSakuseiKubunCode;
+    @TempTableColumnOrder(21)
     private RString serviceTeikyoJigyoshoNo;
+    @TempTableColumnOrder(22)
     private RString shiteiKijunGaitoJigyoshoKubunCode;
+    @TempTableColumnOrder(23)
     private RString serviceShuruiCode;
+    @TempTableColumnOrder(24)
     private RString kyufuKeikakuTanisuNissu;
+    @TempTableColumnOrder(25)
     private RString zentsukiMadeKyufuKeikakuNissu;
+    @TempTableColumnOrder(26)
     private RString shiteiServiceShokei;
+    @TempTableColumnOrder(27)
     private RString kijunGaitoServiceShokei;
+    @TempTableColumnOrder(28)
     private RString kyufuKeikakuGokeiTanisuNissu;
+    @TempTableColumnOrder(29)
     private RString kaigoshienSenmoninNo;
+    @TempTableColumnOrder(30)
     private RString itakusakiKyotakuKaigoshienJigyoshoNo;
+    @TempTableColumnOrder(31)
     private RString itakusakiKaigoshienSenmoninNo;
+    @TempTableColumnOrder(32)
     private RString hihoNoHenkanShichosonCode;
+    @TempTableColumnOrder(33)
     private RString shinHihokenshaNo;
+    @TempTableColumnOrder(34)
     private RString shichosonCode;
+    @TempTableColumnOrder(35)
     private RString koikiJutokuSochimotoShichosonCode;
+    @TempTableColumnOrder(36)
     private RString kyoShichosonCode;
+    @TempTableColumnOrder(37)
     private RString shikibetsuCode;
+    @TempTableColumnOrder(38)
     private RString kanjiMeisho;
+    @TempTableColumnOrder(39)
     private RString jigyoshoMeisho;
+    @TempTableColumnOrder(40)
     private RString shokisaiHokenshaNo;
 
     /**
@@ -448,8 +487,7 @@ public class DbTKyufukanrihyoDataTempTableEntity extends DbTableEntityBase<DbTKy
     /**
      * setShiteiKijunGaitoJigyoshoKubunCode
      *
-     * @param shiteiKijunGaitoJigyoshoKubunCode
-     * shiteiKijunGaitoJigyoshoKubunCode
+     * @param shiteiKijunGaitoJigyoshoKubunCode shiteiKijunGaitoJigyoshoKubunCode
      */
     public void setShiteiKijunGaitoJigyoshoKubunCode(RString shiteiKijunGaitoJigyoshoKubunCode) {
         this.shiteiKijunGaitoJigyoshoKubunCode = shiteiKijunGaitoJigyoshoKubunCode;
@@ -593,8 +631,7 @@ public class DbTKyufukanrihyoDataTempTableEntity extends DbTableEntityBase<DbTKy
     /**
      * setItakusakiKyotakuKaigoshienJigyoshoNo
      *
-     * @param itakusakiKyotakuKaigoshienJigyoshoNo
-     * itakusakiKyotakuKaigoshienJigyoshoNo
+     * @param itakusakiKyotakuKaigoshienJigyoshoNo itakusakiKyotakuKaigoshienJigyoshoNo
      */
     public void setItakusakiKyotakuKaigoshienJigyoshoNo(RString itakusakiKyotakuKaigoshienJigyoshoNo) {
         this.itakusakiKyotakuKaigoshienJigyoshoNo = itakusakiKyotakuKaigoshienJigyoshoNo;
@@ -684,8 +721,7 @@ public class DbTKyufukanrihyoDataTempTableEntity extends DbTableEntityBase<DbTKy
     /**
      * setKoikiJutokuSochimotoShichosonCode
      *
-     * @param koikiJutokuSochimotoShichosonCode
-     * koikiJutokuSochimotoShichosonCode
+     * @param koikiJutokuSochimotoShichosonCode koikiJutokuSochimotoShichosonCode
      */
     public void setKoikiJutokuSochimotoShichosonCode(RString koikiJutokuSochimotoShichosonCode) {
         this.koikiJutokuSochimotoShichosonCode = koikiJutokuSochimotoShichosonCode;
@@ -785,8 +821,7 @@ public class DbTKyufukanrihyoDataTempTableEntity extends DbTableEntityBase<DbTKy
      * このエンティティの主キーが他の{@literal DbTKyufukanrihyoDataTempTableEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbTKyufukanrihyoDataTempTableEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbTKyufukanrihyoDataTempTableEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbTKyufukanrihyoDataTempTableEntity other) {

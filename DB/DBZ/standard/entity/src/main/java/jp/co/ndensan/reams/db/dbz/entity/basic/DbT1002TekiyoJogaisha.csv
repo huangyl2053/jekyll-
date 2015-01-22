@@ -1,0 +1,14 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+tekiyoJogaiTekiyoJiyuCode,varchar,KaigoshikakuShutokuJiyuJogaiTekiyo,,,,,A
+tekiyoYMD,UDD015YMD,FlexibleDate,,,,,A
+tekiyoTodokedeYMD,UDD015YMD,FlexibleDate,,,,,A
+tekiyoUketsukeYMD,UDD015YMD,FlexibleDate,,,,,A
+tekiyoJogaikaijokaijoJiyuCode,varchar,KaigoshikakuSoshitsuJiyuJogaiTekiyo,,,,,A
+kaijoYMD,UDD015YMD,FlexibleDate,,,,,A
+kaijoTodokedeYMD,UDD015YMD,FlexibleDate,,,,,A
+kaijoUketsukeYMD,UDD015YMD,FlexibleDate,,,,,A
+nyushoTsuchiHakkoYMD,UDD015YMD,FlexibleDate,,,,,A
+taishoTsuchiHakkoYMD,UDD015YMD,FlexibleDate,,,,,A
+henkoTsuchiHakkoYMD,UDD015YMD,FlexibleDate,,,,,A

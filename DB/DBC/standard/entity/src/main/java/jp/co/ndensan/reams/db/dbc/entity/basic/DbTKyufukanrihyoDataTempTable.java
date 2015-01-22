@@ -8,46 +8,47 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbTKyufukanrihyoDataTempTable implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
-    recordShubetsu(1, 0),
-    renban(9, 0),
-    kokanjohoShikibetsuNo(4, 0),
-    chohyoRecordShubetsu(2, 0),
-    shinsaYM(6, 0),
-    taishoYM(6, 0),
-    hokenshaNo(8, 0),
-    KyotakuShienJigyoshoNo(10, 0),
-    kyufukanrihyoSakuseiKubunCode(1, 0),
-    kyufukanrihyoSakuseiYMD(8, 0),
-    kyufukanrihyoShubetsuKubunCode(1, 0),
-    kyufukanrihyoMeisaigyoNo(2, 0),
-    hihokenshaNo(10, 0),
-    seinengappiYMD(8, 0),
-    seibetsuCode(1, 0),
-    yokaigojotaiKubunCode(2, 0),
-    gendogakuTekiyoKaishiYMD(6, 0),
-    gendogakuTekiyoShuryoYMD(6, 0),
-    kyotakuKaigoyoboShikyugendogaku(6, 0),
-    kyotakuKeikakuSakuseiKubunCode(1, 0),
-    serviceTeikyoJigyoshoNo(10, 0),
-    shiteiKijunGaitoJigyoshoKubunCode(1, 0),
-    serviceShuruiCode(2, 0),
-    kyufuKeikakuTanisuNissu(6, 0),
-    zentsukiMadeKyufuKeikakuNissu(3, 0),
-    shiteiServiceShokei(6, 0),
-    kijunGaitoServiceShokei(6, 0),
-    kyufuKeikakuGokeiTanisuNissu(6, 0),
-    kaigoshienSenmoninNo(8, 0),
-    itakusakiKyotakuKaigoshienJigyoshoNo(10, 0),
-    itakusakiKaigoshienSenmoninNo(8, 0),
-    hihoNoHenkanShichosonCode(6, 0),
-    shinHihokenshaNo(10, 0),
-    shichosonCode(6, 0),
-    koikiJutokuSochimotoShichosonCode(6, 0),
-    kyoShichosonCode(6, 0),
-    shikibetsuCode(15, 0),
-    kanjiMeisho(120, 0),
-    jigyoshoMeisho(120, 0),
-    shokisaiHokenshaNo(6, 0);
+
+    recordShubetsu(2147483647, 0),
+    renban(2147483647, 0),
+    kokanjohoShikibetsuNo(2147483647, 0),
+    chohyoRecordShubetsu(2147483647, 0),
+    shinsaYM(2147483647, 0),
+    taishoYM(2147483647, 0),
+    hokenshaNo(2147483647, 0),
+    KyotakuShienJigyoshoNo(2147483647, 0),
+    kyufukanrihyoSakuseiKubunCode(2147483647, 0),
+    kyufukanrihyoSakuseiYMD(2147483647, 0),
+    kyufukanrihyoShubetsuKubunCode(2147483647, 0),
+    kyufukanrihyoMeisaigyoNo(2147483647, 0),
+    hihokenshaNo(2147483647, 0),
+    seinengappiYMD(2147483647, 0),
+    seibetsuCode(2147483647, 0),
+    yokaigojotaiKubunCode(2147483647, 0),
+    gendogakuTekiyoKaishiYMD(2147483647, 0),
+    gendogakuTekiyoShuryoYMD(2147483647, 0),
+    kyotakuKaigoyoboShikyugendogaku(2147483647, 0),
+    kyotakuKeikakuSakuseiKubunCode(2147483647, 0),
+    serviceTeikyoJigyoshoNo(2147483647, 0),
+    shiteiKijunGaitoJigyoshoKubunCode(2147483647, 0),
+    serviceShuruiCode(2147483647, 0),
+    kyufuKeikakuTanisuNissu(2147483647, 0),
+    zentsukiMadeKyufuKeikakuNissu(2147483647, 0),
+    shiteiServiceShokei(2147483647, 0),
+    kijunGaitoServiceShokei(2147483647, 0),
+    kyufuKeikakuGokeiTanisuNissu(2147483647, 0),
+    kaigoshienSenmoninNo(2147483647, 0),
+    itakusakiKyotakuKaigoshienJigyoshoNo(2147483647, 0),
+    itakusakiKaigoshienSenmoninNo(2147483647, 0),
+    hihoNoHenkanShichosonCode(2147483647, 0),
+    shinHihokenshaNo(2147483647, 0),
+    shichosonCode(2147483647, 0),
+    koikiJutokuSochimotoShichosonCode(2147483647, 0),
+    kyoShichosonCode(2147483647, 0),
+    shikibetsuCode(2147483647, 0),
+    kanjiMeisho(2147483647, 0),
+    jigyoshoMeisho(2147483647, 0),
+    shokisaiHokenshaNo(2147483647, 0);
 
     private final int maxLength;
     private final int scale;
@@ -59,6 +60,7 @@ public enum DbTKyufukanrihyoDataTempTable implements IColumnDefinition {
 
     /**
      * getMaxLength
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -67,6 +69,7 @@ public enum DbTKyufukanrihyoDataTempTable implements IColumnDefinition {
 
     /**
      * getScale
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

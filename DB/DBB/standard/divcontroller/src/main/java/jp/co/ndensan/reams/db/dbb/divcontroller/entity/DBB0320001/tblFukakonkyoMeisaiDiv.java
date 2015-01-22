@@ -23,77 +23,74 @@ public class tblFukakonkyoMeisaiDiv extends TablePanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("celFukashokaiKonkyo")
+    private celFukashokaiKonkyoAttblFukakonkyoMeisai celFukashokaiKonkyo;
     @JsonProperty("celFukashokaiKonkyo11")
     private celFukashokaiKonkyo11AttblFukakonkyoMeisai celFukashokaiKonkyo11;
     @JsonProperty("celFukashokaiKonkyo21")
     private celFukashokaiKonkyo21AttblFukakonkyoMeisai celFukashokaiKonkyo21;
     @JsonProperty("celFukashokaiKonkyo31")
     private celFukashokaiKonkyo31AttblFukakonkyoMeisai celFukashokaiKonkyo31;
+    @JsonProperty("celFukashokaiKonkyo68")
+    private celFukashokaiKonkyo68AttblFukakonkyoMeisai celFukashokaiKonkyo68;
     @JsonProperty("celFukashokaiKonkyo12")
     private celFukashokaiKonkyo12AttblFukakonkyoMeisai celFukashokaiKonkyo12;
     @JsonProperty("celFukashokaiKonkyo22")
     private celFukashokaiKonkyo22AttblFukakonkyoMeisai celFukashokaiKonkyo22;
     @JsonProperty("celFukashokaiKonkyo32")
     private celFukashokaiKonkyo32AttblFukakonkyoMeisai celFukashokaiKonkyo32;
+    @JsonProperty("celFukashokaiKonkyo69")
+    private celFukashokaiKonkyo69AttblFukakonkyoMeisai celFukashokaiKonkyo69;
     @JsonProperty("celFukashokaiKonkyo13")
     private celFukashokaiKonkyo13AttblFukakonkyoMeisai celFukashokaiKonkyo13;
     @JsonProperty("celFukashokaiKonkyo23")
     private celFukashokaiKonkyo23AttblFukakonkyoMeisai celFukashokaiKonkyo23;
     @JsonProperty("celFukashokaiKonkyo33")
     private celFukashokaiKonkyo33AttblFukakonkyoMeisai celFukashokaiKonkyo33;
+    @JsonProperty("celFukashokaiKonkyo70")
+    private celFukashokaiKonkyo70AttblFukakonkyoMeisai celFukashokaiKonkyo70;
     @JsonProperty("celFukashokaiKonkyo14")
     private celFukashokaiKonkyo14AttblFukakonkyoMeisai celFukashokaiKonkyo14;
     @JsonProperty("celFukashokaiKonkyo24")
     private celFukashokaiKonkyo24AttblFukakonkyoMeisai celFukashokaiKonkyo24;
     @JsonProperty("celFukashokaiKonkyo34")
     private celFukashokaiKonkyo34AttblFukakonkyoMeisai celFukashokaiKonkyo34;
+    @JsonProperty("celFukashokaiKonkyo71")
+    private celFukashokaiKonkyo71AttblFukakonkyoMeisai celFukashokaiKonkyo71;
     @JsonProperty("celFukashokaiKonkyo15")
     private celFukashokaiKonkyo15AttblFukakonkyoMeisai celFukashokaiKonkyo15;
     @JsonProperty("celFukashokaiKonkyo25")
     private celFukashokaiKonkyo25AttblFukakonkyoMeisai celFukashokaiKonkyo25;
     @JsonProperty("celFukashokaiKonkyo35")
     private celFukashokaiKonkyo35AttblFukakonkyoMeisai celFukashokaiKonkyo35;
+    @JsonProperty("celFukashokaiKonkyo72")
+    private celFukashokaiKonkyo72AttblFukakonkyoMeisai celFukashokaiKonkyo72;
     @JsonProperty("celFukashokaiKonkyo16")
     private celFukashokaiKonkyo16AttblFukakonkyoMeisai celFukashokaiKonkyo16;
     @JsonProperty("celFukashokaiKonkyo26")
     private celFukashokaiKonkyo26AttblFukakonkyoMeisai celFukashokaiKonkyo26;
     @JsonProperty("celFukashokaiKonkyo36")
     private celFukashokaiKonkyo36AttblFukakonkyoMeisai celFukashokaiKonkyo36;
+    @JsonProperty("celFukashokaiKonkyo73")
+    private celFukashokaiKonkyo73AttblFukakonkyoMeisai celFukashokaiKonkyo73;
     @JsonProperty("celFukashokaiKonkyo17")
     private celFukashokaiKonkyo17AttblFukakonkyoMeisai celFukashokaiKonkyo17;
     @JsonProperty("celFukashokaiKonkyo27")
     private celFukashokaiKonkyo27AttblFukakonkyoMeisai celFukashokaiKonkyo27;
     @JsonProperty("celFukashokaiKonkyo61")
     private celFukashokaiKonkyo61AttblFukakonkyoMeisai celFukashokaiKonkyo61;
-    @JsonProperty("celFukashokaiKonkyo18")
-    private celFukashokaiKonkyo18AttblFukakonkyoMeisai celFukashokaiKonkyo18;
-    @JsonProperty("celFukashokaiKonkyo28")
-    private celFukashokaiKonkyo28AttblFukakonkyoMeisai celFukashokaiKonkyo28;
-    @JsonProperty("celFukashokaiKonkyo64")
-    private celFukashokaiKonkyo64AttblFukakonkyoMeisai celFukashokaiKonkyo64;
-    @JsonProperty("celFukashokaiKonkyo68")
-    private celFukashokaiKonkyo68AttblFukakonkyoMeisai celFukashokaiKonkyo68;
-    @JsonProperty("celFukashokaiKonkyo69")
-    private celFukashokaiKonkyo69AttblFukakonkyoMeisai celFukashokaiKonkyo69;
-    @JsonProperty("celFukashokaiKonkyo70")
-    private celFukashokaiKonkyo70AttblFukakonkyoMeisai celFukashokaiKonkyo70;
-    @JsonProperty("celFukashokaiKonkyo71")
-    private celFukashokaiKonkyo71AttblFukakonkyoMeisai celFukashokaiKonkyo71;
-    @JsonProperty("celFukashokaiKonkyo72")
-    private celFukashokaiKonkyo72AttblFukakonkyoMeisai celFukashokaiKonkyo72;
-    @JsonProperty("celFukashokaiKonkyo73")
-    private celFukashokaiKonkyo73AttblFukakonkyoMeisai celFukashokaiKonkyo73;
     @JsonProperty("celFukashokaiKonkyo74")
     private celFukashokaiKonkyo74AttblFukakonkyoMeisai celFukashokaiKonkyo74;
-    @JsonProperty("celFukashokaiKonkyo75")
-    private celFukashokaiKonkyo75AttblFukakonkyoMeisai celFukashokaiKonkyo75;
-    @JsonProperty("celFukashokaiKonkyo")
-    private celFukashokaiKonkyoAttblFukakonkyoMeisai celFukashokaiKonkyo;
 
     /*
      * [ Helperの作成 ]
      * TablePanelコントロールに特化したヘルパーメソッドを作成
      */
+    @JsonIgnore
+    public Label getLblFukakonkyoMidashi() {
+        return this.celFukashokaiKonkyo.getLblFukakonkyoMidashi();
+    }
+
     @JsonIgnore
     public Label getLblFukakonkyo11() {
         return this.celFukashokaiKonkyo11.getLblFukakonkyo11();
@@ -112,6 +109,16 @@ public class tblFukakonkyoMeisaiDiv extends TablePanel {
     @JsonIgnore
     public Label getLblZenHokenryoDankai() {
         return this.celFukashokaiKonkyo31.getLblZenHokenryoDankai();
+    }
+
+    @JsonIgnore
+    public Label getLblHonninKazeiValue() {
+        return this.celFukashokaiKonkyo68.getLblHonninKazeiValue();
+    }
+
+    @JsonIgnore
+    public Label getLblZenHokenryoDankaiValue() {
+        return this.celFukashokaiKonkyo68.getLblZenHokenryoDankaiValue();
     }
 
     @JsonIgnore
@@ -135,6 +142,16 @@ public class tblFukakonkyoMeisaiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Label getLblSetaiKazeiValue() {
+        return this.celFukashokaiKonkyo69.getLblSetaiKazeiValue();
+    }
+
+    @JsonIgnore
+    public Label getLblZenHokenryoritsuValue() {
+        return this.celFukashokaiKonkyo69.getLblZenHokenryoritsuValue();
+    }
+
+    @JsonIgnore
     public Label getLblFukakonkyo13() {
         return this.celFukashokaiKonkyo13.getLblFukakonkyo13();
     }
@@ -155,6 +172,16 @@ public class tblFukakonkyoMeisaiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Label getLblShotokuSumValue() {
+        return this.celFukashokaiKonkyo70.getLblShotokuSumValue();
+    }
+
+    @JsonIgnore
+    public Label getLblZenNengakuHokenryoValue() {
+        return this.celFukashokaiKonkyo70.getLblZenNengakuHokenryoValue();
+    }
+
+    @JsonIgnore
     public Label getLblFukakonkyo14() {
         return this.celFukashokaiKonkyo14.getLblFukakonkyo14();
     }
@@ -167,6 +194,11 @@ public class tblFukakonkyoMeisaiDiv extends TablePanel {
     @JsonIgnore
     public Label getLblNenkinShunyu() {
         return this.celFukashokaiKonkyo34.getLblNenkinShunyu();
+    }
+
+    @JsonIgnore
+    public Label getLblNenkinShunyuValue() {
+        return this.celFukashokaiKonkyo71.getLblNenkinShunyuValue();
     }
 
     @JsonIgnore
@@ -185,6 +217,11 @@ public class tblFukakonkyoMeisaiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public Label getLblHokenryoDankaiValue() {
+        return this.celFukashokaiKonkyo72.getLblHokenryoDankaiValue();
+    }
+
+    @JsonIgnore
     public Label getLblFukakonkyo16() {
         return this.celFukashokaiKonkyo16.getLblFukakonkyo16();
     }
@@ -192,6 +229,11 @@ public class tblFukakonkyoMeisaiDiv extends TablePanel {
     @JsonIgnore
     public Label getLblRonenKaishiYMD() {
         return this.celFukashokaiKonkyo26.getLblRonenKaishiYMD();
+    }
+
+    @JsonIgnore
+    public Label getLbldamy1() {
+        return this.celFukashokaiKonkyo36.getLbldamy1();
     }
 
     @JsonIgnore
@@ -204,62 +246,22 @@ public class tblFukakonkyoMeisaiDiv extends TablePanel {
         return this.celFukashokaiKonkyo27.getLblRonenShuryoYMD();
     }
 
-    @JsonIgnore
-    public Label getLblFukakonkyo18() {
-        return this.celFukashokaiKonkyo18.getLblFukakonkyo18();
-    }
-
-    @JsonIgnore
-    public Label getLblHonninKazeiValue() {
-        return this.celFukashokaiKonkyo68.getLblHonninKazeiValue();
-    }
-
-    @JsonIgnore
-    public Label getLblZenHokenryoDankaiValue() {
-        return this.celFukashokaiKonkyo68.getLblZenHokenryoDankaiValue();
-    }
-
-    @JsonIgnore
-    public Label getLblSetaiKazeiValue() {
-        return this.celFukashokaiKonkyo69.getLblSetaiKazeiValue();
-    }
-
-    @JsonIgnore
-    public Label getLblZenHokenryoritsuValue() {
-        return this.celFukashokaiKonkyo69.getLblZenHokenryoritsuValue();
-    }
-
-    @JsonIgnore
-    public Label getLblShotokuSumValue() {
-        return this.celFukashokaiKonkyo70.getLblShotokuSumValue();
-    }
-
-    @JsonIgnore
-    public Label getLblZenNengakuHokenryoValue() {
-        return this.celFukashokaiKonkyo70.getLblZenNengakuHokenryoValue();
-    }
-
-    @JsonIgnore
-    public Label getLblNenkinShunyuValue() {
-        return this.celFukashokaiKonkyo71.getLblNenkinShunyuValue();
-    }
-
-    @JsonIgnore
-    public Label getLblHokenryoDankaiValue() {
-        return this.celFukashokaiKonkyo72.getLblHokenryoDankaiValue();
-    }
-
-    @JsonIgnore
-    public Label getLblFukakonkyoMidashi() {
-        return this.celFukashokaiKonkyo.getLblFukakonkyoMidashi();
-    }
-
     /*
      * [ GetterとSetterの作成 ]
      * クライアント側から取得した情報を元に検索を行い
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("celFukashokaiKonkyo")
+    private celFukashokaiKonkyoAttblFukakonkyoMeisai getCelFukashokaiKonkyo() {
+        return celFukashokaiKonkyo;
+    }
+
+    @JsonProperty("celFukashokaiKonkyo")
+    private void setCelFukashokaiKonkyo(celFukashokaiKonkyoAttblFukakonkyoMeisai celFukashokaiKonkyo) {
+        this.celFukashokaiKonkyo=celFukashokaiKonkyo;
+    }
+
     @JsonProperty("celFukashokaiKonkyo11")
     private celFukashokaiKonkyo11AttblFukakonkyoMeisai getCelFukashokaiKonkyo11() {
         return celFukashokaiKonkyo11;
@@ -288,6 +290,16 @@ public class tblFukakonkyoMeisaiDiv extends TablePanel {
     @JsonProperty("celFukashokaiKonkyo31")
     private void setCelFukashokaiKonkyo31(celFukashokaiKonkyo31AttblFukakonkyoMeisai celFukashokaiKonkyo31) {
         this.celFukashokaiKonkyo31=celFukashokaiKonkyo31;
+    }
+
+    @JsonProperty("celFukashokaiKonkyo68")
+    private celFukashokaiKonkyo68AttblFukakonkyoMeisai getCelFukashokaiKonkyo68() {
+        return celFukashokaiKonkyo68;
+    }
+
+    @JsonProperty("celFukashokaiKonkyo68")
+    private void setCelFukashokaiKonkyo68(celFukashokaiKonkyo68AttblFukakonkyoMeisai celFukashokaiKonkyo68) {
+        this.celFukashokaiKonkyo68=celFukashokaiKonkyo68;
     }
 
     @JsonProperty("celFukashokaiKonkyo12")
@@ -320,6 +332,16 @@ public class tblFukakonkyoMeisaiDiv extends TablePanel {
         this.celFukashokaiKonkyo32=celFukashokaiKonkyo32;
     }
 
+    @JsonProperty("celFukashokaiKonkyo69")
+    private celFukashokaiKonkyo69AttblFukakonkyoMeisai getCelFukashokaiKonkyo69() {
+        return celFukashokaiKonkyo69;
+    }
+
+    @JsonProperty("celFukashokaiKonkyo69")
+    private void setCelFukashokaiKonkyo69(celFukashokaiKonkyo69AttblFukakonkyoMeisai celFukashokaiKonkyo69) {
+        this.celFukashokaiKonkyo69=celFukashokaiKonkyo69;
+    }
+
     @JsonProperty("celFukashokaiKonkyo13")
     private celFukashokaiKonkyo13AttblFukakonkyoMeisai getCelFukashokaiKonkyo13() {
         return celFukashokaiKonkyo13;
@@ -348,6 +370,16 @@ public class tblFukakonkyoMeisaiDiv extends TablePanel {
     @JsonProperty("celFukashokaiKonkyo33")
     private void setCelFukashokaiKonkyo33(celFukashokaiKonkyo33AttblFukakonkyoMeisai celFukashokaiKonkyo33) {
         this.celFukashokaiKonkyo33=celFukashokaiKonkyo33;
+    }
+
+    @JsonProperty("celFukashokaiKonkyo70")
+    private celFukashokaiKonkyo70AttblFukakonkyoMeisai getCelFukashokaiKonkyo70() {
+        return celFukashokaiKonkyo70;
+    }
+
+    @JsonProperty("celFukashokaiKonkyo70")
+    private void setCelFukashokaiKonkyo70(celFukashokaiKonkyo70AttblFukakonkyoMeisai celFukashokaiKonkyo70) {
+        this.celFukashokaiKonkyo70=celFukashokaiKonkyo70;
     }
 
     @JsonProperty("celFukashokaiKonkyo14")
@@ -380,6 +412,16 @@ public class tblFukakonkyoMeisaiDiv extends TablePanel {
         this.celFukashokaiKonkyo34=celFukashokaiKonkyo34;
     }
 
+    @JsonProperty("celFukashokaiKonkyo71")
+    private celFukashokaiKonkyo71AttblFukakonkyoMeisai getCelFukashokaiKonkyo71() {
+        return celFukashokaiKonkyo71;
+    }
+
+    @JsonProperty("celFukashokaiKonkyo71")
+    private void setCelFukashokaiKonkyo71(celFukashokaiKonkyo71AttblFukakonkyoMeisai celFukashokaiKonkyo71) {
+        this.celFukashokaiKonkyo71=celFukashokaiKonkyo71;
+    }
+
     @JsonProperty("celFukashokaiKonkyo15")
     private celFukashokaiKonkyo15AttblFukakonkyoMeisai getCelFukashokaiKonkyo15() {
         return celFukashokaiKonkyo15;
@@ -408,6 +450,16 @@ public class tblFukakonkyoMeisaiDiv extends TablePanel {
     @JsonProperty("celFukashokaiKonkyo35")
     private void setCelFukashokaiKonkyo35(celFukashokaiKonkyo35AttblFukakonkyoMeisai celFukashokaiKonkyo35) {
         this.celFukashokaiKonkyo35=celFukashokaiKonkyo35;
+    }
+
+    @JsonProperty("celFukashokaiKonkyo72")
+    private celFukashokaiKonkyo72AttblFukakonkyoMeisai getCelFukashokaiKonkyo72() {
+        return celFukashokaiKonkyo72;
+    }
+
+    @JsonProperty("celFukashokaiKonkyo72")
+    private void setCelFukashokaiKonkyo72(celFukashokaiKonkyo72AttblFukakonkyoMeisai celFukashokaiKonkyo72) {
+        this.celFukashokaiKonkyo72=celFukashokaiKonkyo72;
     }
 
     @JsonProperty("celFukashokaiKonkyo16")
@@ -440,6 +492,16 @@ public class tblFukakonkyoMeisaiDiv extends TablePanel {
         this.celFukashokaiKonkyo36=celFukashokaiKonkyo36;
     }
 
+    @JsonProperty("celFukashokaiKonkyo73")
+    private celFukashokaiKonkyo73AttblFukakonkyoMeisai getCelFukashokaiKonkyo73() {
+        return celFukashokaiKonkyo73;
+    }
+
+    @JsonProperty("celFukashokaiKonkyo73")
+    private void setCelFukashokaiKonkyo73(celFukashokaiKonkyo73AttblFukakonkyoMeisai celFukashokaiKonkyo73) {
+        this.celFukashokaiKonkyo73=celFukashokaiKonkyo73;
+    }
+
     @JsonProperty("celFukashokaiKonkyo17")
     private celFukashokaiKonkyo17AttblFukakonkyoMeisai getCelFukashokaiKonkyo17() {
         return celFukashokaiKonkyo17;
@@ -470,96 +532,6 @@ public class tblFukakonkyoMeisaiDiv extends TablePanel {
         this.celFukashokaiKonkyo61=celFukashokaiKonkyo61;
     }
 
-    @JsonProperty("celFukashokaiKonkyo18")
-    private celFukashokaiKonkyo18AttblFukakonkyoMeisai getCelFukashokaiKonkyo18() {
-        return celFukashokaiKonkyo18;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo18")
-    private void setCelFukashokaiKonkyo18(celFukashokaiKonkyo18AttblFukakonkyoMeisai celFukashokaiKonkyo18) {
-        this.celFukashokaiKonkyo18=celFukashokaiKonkyo18;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo28")
-    private celFukashokaiKonkyo28AttblFukakonkyoMeisai getCelFukashokaiKonkyo28() {
-        return celFukashokaiKonkyo28;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo28")
-    private void setCelFukashokaiKonkyo28(celFukashokaiKonkyo28AttblFukakonkyoMeisai celFukashokaiKonkyo28) {
-        this.celFukashokaiKonkyo28=celFukashokaiKonkyo28;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo64")
-    private celFukashokaiKonkyo64AttblFukakonkyoMeisai getCelFukashokaiKonkyo64() {
-        return celFukashokaiKonkyo64;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo64")
-    private void setCelFukashokaiKonkyo64(celFukashokaiKonkyo64AttblFukakonkyoMeisai celFukashokaiKonkyo64) {
-        this.celFukashokaiKonkyo64=celFukashokaiKonkyo64;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo68")
-    private celFukashokaiKonkyo68AttblFukakonkyoMeisai getCelFukashokaiKonkyo68() {
-        return celFukashokaiKonkyo68;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo68")
-    private void setCelFukashokaiKonkyo68(celFukashokaiKonkyo68AttblFukakonkyoMeisai celFukashokaiKonkyo68) {
-        this.celFukashokaiKonkyo68=celFukashokaiKonkyo68;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo69")
-    private celFukashokaiKonkyo69AttblFukakonkyoMeisai getCelFukashokaiKonkyo69() {
-        return celFukashokaiKonkyo69;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo69")
-    private void setCelFukashokaiKonkyo69(celFukashokaiKonkyo69AttblFukakonkyoMeisai celFukashokaiKonkyo69) {
-        this.celFukashokaiKonkyo69=celFukashokaiKonkyo69;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo70")
-    private celFukashokaiKonkyo70AttblFukakonkyoMeisai getCelFukashokaiKonkyo70() {
-        return celFukashokaiKonkyo70;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo70")
-    private void setCelFukashokaiKonkyo70(celFukashokaiKonkyo70AttblFukakonkyoMeisai celFukashokaiKonkyo70) {
-        this.celFukashokaiKonkyo70=celFukashokaiKonkyo70;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo71")
-    private celFukashokaiKonkyo71AttblFukakonkyoMeisai getCelFukashokaiKonkyo71() {
-        return celFukashokaiKonkyo71;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo71")
-    private void setCelFukashokaiKonkyo71(celFukashokaiKonkyo71AttblFukakonkyoMeisai celFukashokaiKonkyo71) {
-        this.celFukashokaiKonkyo71=celFukashokaiKonkyo71;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo72")
-    private celFukashokaiKonkyo72AttblFukakonkyoMeisai getCelFukashokaiKonkyo72() {
-        return celFukashokaiKonkyo72;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo72")
-    private void setCelFukashokaiKonkyo72(celFukashokaiKonkyo72AttblFukakonkyoMeisai celFukashokaiKonkyo72) {
-        this.celFukashokaiKonkyo72=celFukashokaiKonkyo72;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo73")
-    private celFukashokaiKonkyo73AttblFukakonkyoMeisai getCelFukashokaiKonkyo73() {
-        return celFukashokaiKonkyo73;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo73")
-    private void setCelFukashokaiKonkyo73(celFukashokaiKonkyo73AttblFukakonkyoMeisai celFukashokaiKonkyo73) {
-        this.celFukashokaiKonkyo73=celFukashokaiKonkyo73;
-    }
-
     @JsonProperty("celFukashokaiKonkyo74")
     private celFukashokaiKonkyo74AttblFukakonkyoMeisai getCelFukashokaiKonkyo74() {
         return celFukashokaiKonkyo74;
@@ -570,24 +542,24 @@ public class tblFukakonkyoMeisaiDiv extends TablePanel {
         this.celFukashokaiKonkyo74=celFukashokaiKonkyo74;
     }
 
-    @JsonProperty("celFukashokaiKonkyo75")
-    private celFukashokaiKonkyo75AttblFukakonkyoMeisai getCelFukashokaiKonkyo75() {
-        return celFukashokaiKonkyo75;
+}
+/**
+ * celFukashokaiKonkyo のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celFukashokaiKonkyoAttblFukakonkyoMeisai extends TableCell {
+    @JsonProperty("lblFukakonkyoMidashi")
+    private Label lblFukakonkyoMidashi;
+
+    @JsonProperty("lblFukakonkyoMidashi")
+    public Label getLblFukakonkyoMidashi() {
+        return lblFukakonkyoMidashi;
     }
 
-    @JsonProperty("celFukashokaiKonkyo75")
-    private void setCelFukashokaiKonkyo75(celFukashokaiKonkyo75AttblFukakonkyoMeisai celFukashokaiKonkyo75) {
-        this.celFukashokaiKonkyo75=celFukashokaiKonkyo75;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo")
-    private celFukashokaiKonkyoAttblFukakonkyoMeisai getCelFukashokaiKonkyo() {
-        return celFukashokaiKonkyo;
-    }
-
-    @JsonProperty("celFukashokaiKonkyo")
-    private void setCelFukashokaiKonkyo(celFukashokaiKonkyoAttblFukakonkyoMeisai celFukashokaiKonkyo) {
-        this.celFukashokaiKonkyo=celFukashokaiKonkyo;
+    @JsonProperty("lblFukakonkyoMidashi")
+    public void setLblFukakonkyoMidashi(Label lblFukakonkyoMidashi) {
+        this.lblFukakonkyoMidashi=lblFukakonkyoMidashi;
     }
 
 }
@@ -664,6 +636,38 @@ class celFukashokaiKonkyo31AttblFukakonkyoMeisai extends TableCell {
 
 }
 /**
+ * celFukashokaiKonkyo68 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celFukashokaiKonkyo68AttblFukakonkyoMeisai extends TableCell {
+    @JsonProperty("lblHonninKazeiValue")
+    private Label lblHonninKazeiValue;
+    @JsonProperty("lblZenHokenryoDankaiValue")
+    private Label lblZenHokenryoDankaiValue;
+
+    @JsonProperty("lblHonninKazeiValue")
+    public Label getLblHonninKazeiValue() {
+        return lblHonninKazeiValue;
+    }
+
+    @JsonProperty("lblHonninKazeiValue")
+    public void setLblHonninKazeiValue(Label lblHonninKazeiValue) {
+        this.lblHonninKazeiValue=lblHonninKazeiValue;
+    }
+
+    @JsonProperty("lblZenHokenryoDankaiValue")
+    public Label getLblZenHokenryoDankaiValue() {
+        return lblZenHokenryoDankaiValue;
+    }
+
+    @JsonProperty("lblZenHokenryoDankaiValue")
+    public void setLblZenHokenryoDankaiValue(Label lblZenHokenryoDankaiValue) {
+        this.lblZenHokenryoDankaiValue=lblZenHokenryoDankaiValue;
+    }
+
+}
+/**
  * celFukashokaiKonkyo12 のクラスファイル 
  * 
  * @author 自動生成
@@ -732,6 +736,38 @@ class celFukashokaiKonkyo32AttblFukakonkyoMeisai extends TableCell {
     @JsonProperty("lblZenHokenryoritsu")
     public void setLblZenHokenryoritsu(Label lblZenHokenryoritsu) {
         this.lblZenHokenryoritsu=lblZenHokenryoritsu;
+    }
+
+}
+/**
+ * celFukashokaiKonkyo69 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celFukashokaiKonkyo69AttblFukakonkyoMeisai extends TableCell {
+    @JsonProperty("lblSetaiKazeiValue")
+    private Label lblSetaiKazeiValue;
+    @JsonProperty("lblZenHokenryoritsuValue")
+    private Label lblZenHokenryoritsuValue;
+
+    @JsonProperty("lblSetaiKazeiValue")
+    public Label getLblSetaiKazeiValue() {
+        return lblSetaiKazeiValue;
+    }
+
+    @JsonProperty("lblSetaiKazeiValue")
+    public void setLblSetaiKazeiValue(Label lblSetaiKazeiValue) {
+        this.lblSetaiKazeiValue=lblSetaiKazeiValue;
+    }
+
+    @JsonProperty("lblZenHokenryoritsuValue")
+    public Label getLblZenHokenryoritsuValue() {
+        return lblZenHokenryoritsuValue;
+    }
+
+    @JsonProperty("lblZenHokenryoritsuValue")
+    public void setLblZenHokenryoritsuValue(Label lblZenHokenryoritsuValue) {
+        this.lblZenHokenryoritsuValue=lblZenHokenryoritsuValue;
     }
 
 }
@@ -808,6 +844,38 @@ class celFukashokaiKonkyo33AttblFukakonkyoMeisai extends TableCell {
 
 }
 /**
+ * celFukashokaiKonkyo70 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celFukashokaiKonkyo70AttblFukakonkyoMeisai extends TableCell {
+    @JsonProperty("lblShotokuSumValue")
+    private Label lblShotokuSumValue;
+    @JsonProperty("lblZenNengakuHokenryoValue")
+    private Label lblZenNengakuHokenryoValue;
+
+    @JsonProperty("lblShotokuSumValue")
+    public Label getLblShotokuSumValue() {
+        return lblShotokuSumValue;
+    }
+
+    @JsonProperty("lblShotokuSumValue")
+    public void setLblShotokuSumValue(Label lblShotokuSumValue) {
+        this.lblShotokuSumValue=lblShotokuSumValue;
+    }
+
+    @JsonProperty("lblZenNengakuHokenryoValue")
+    public Label getLblZenNengakuHokenryoValue() {
+        return lblZenNengakuHokenryoValue;
+    }
+
+    @JsonProperty("lblZenNengakuHokenryoValue")
+    public void setLblZenNengakuHokenryoValue(Label lblZenNengakuHokenryoValue) {
+        this.lblZenNengakuHokenryoValue=lblZenNengakuHokenryoValue;
+    }
+
+}
+/**
  * celFukashokaiKonkyo14 のクラスファイル 
  * 
  * @author 自動生成
@@ -864,6 +932,26 @@ class celFukashokaiKonkyo34AttblFukakonkyoMeisai extends TableCell {
     @JsonProperty("lblNenkinShunyu")
     public void setLblNenkinShunyu(Label lblNenkinShunyu) {
         this.lblNenkinShunyu=lblNenkinShunyu;
+    }
+
+}
+/**
+ * celFukashokaiKonkyo71 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celFukashokaiKonkyo71AttblFukakonkyoMeisai extends TableCell {
+    @JsonProperty("lblNenkinShunyuValue")
+    private Label lblNenkinShunyuValue;
+
+    @JsonProperty("lblNenkinShunyuValue")
+    public Label getLblNenkinShunyuValue() {
+        return lblNenkinShunyuValue;
+    }
+
+    @JsonProperty("lblNenkinShunyuValue")
+    public void setLblNenkinShunyuValue(Label lblNenkinShunyuValue) {
+        this.lblNenkinShunyuValue=lblNenkinShunyuValue;
     }
 
 }
@@ -928,6 +1016,26 @@ class celFukashokaiKonkyo35AttblFukakonkyoMeisai extends TableCell {
 
 }
 /**
+ * celFukashokaiKonkyo72 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celFukashokaiKonkyo72AttblFukakonkyoMeisai extends TableCell {
+    @JsonProperty("lblHokenryoDankaiValue")
+    private Label lblHokenryoDankaiValue;
+
+    @JsonProperty("lblHokenryoDankaiValue")
+    public Label getLblHokenryoDankaiValue() {
+        return lblHokenryoDankaiValue;
+    }
+
+    @JsonProperty("lblHokenryoDankaiValue")
+    public void setLblHokenryoDankaiValue(Label lblHokenryoDankaiValue) {
+        this.lblHokenryoDankaiValue=lblHokenryoDankaiValue;
+    }
+
+}
+/**
  * celFukashokaiKonkyo16 のクラスファイル 
  * 
  * @author 自動生成
@@ -973,6 +1081,26 @@ class celFukashokaiKonkyo26AttblFukakonkyoMeisai extends TableCell {
  * @author 自動生成
  */
 class celFukashokaiKonkyo36AttblFukakonkyoMeisai extends TableCell {
+    @JsonProperty("lbldamy1")
+    private Label lbldamy1;
+
+    @JsonProperty("lbldamy1")
+    public Label getLbldamy1() {
+        return lbldamy1;
+    }
+
+    @JsonProperty("lbldamy1")
+    public void setLbldamy1(Label lbldamy1) {
+        this.lbldamy1=lbldamy1;
+    }
+
+}
+/**
+ * celFukashokaiKonkyo73 のクラスファイル 
+ * 
+ * @author 自動生成
+ */
+class celFukashokaiKonkyo73AttblFukakonkyoMeisai extends TableCell {
 
 }
 /**
@@ -1024,218 +1152,10 @@ class celFukashokaiKonkyo61AttblFukakonkyoMeisai extends TableCell {
 
 }
 /**
- * celFukashokaiKonkyo18 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celFukashokaiKonkyo18AttblFukakonkyoMeisai extends TableCell {
-    @JsonProperty("lblFukakonkyo18")
-    private Label lblFukakonkyo18;
-
-    @JsonProperty("lblFukakonkyo18")
-    public Label getLblFukakonkyo18() {
-        return lblFukakonkyo18;
-    }
-
-    @JsonProperty("lblFukakonkyo18")
-    public void setLblFukakonkyo18(Label lblFukakonkyo18) {
-        this.lblFukakonkyo18=lblFukakonkyo18;
-    }
-
-}
-/**
- * celFukashokaiKonkyo28 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celFukashokaiKonkyo28AttblFukakonkyoMeisai extends TableCell {
-
-}
-/**
- * celFukashokaiKonkyo64 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celFukashokaiKonkyo64AttblFukakonkyoMeisai extends TableCell {
-
-}
-/**
- * celFukashokaiKonkyo68 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celFukashokaiKonkyo68AttblFukakonkyoMeisai extends TableCell {
-    @JsonProperty("lblHonninKazeiValue")
-    private Label lblHonninKazeiValue;
-    @JsonProperty("lblZenHokenryoDankaiValue")
-    private Label lblZenHokenryoDankaiValue;
-
-    @JsonProperty("lblHonninKazeiValue")
-    public Label getLblHonninKazeiValue() {
-        return lblHonninKazeiValue;
-    }
-
-    @JsonProperty("lblHonninKazeiValue")
-    public void setLblHonninKazeiValue(Label lblHonninKazeiValue) {
-        this.lblHonninKazeiValue=lblHonninKazeiValue;
-    }
-
-    @JsonProperty("lblZenHokenryoDankaiValue")
-    public Label getLblZenHokenryoDankaiValue() {
-        return lblZenHokenryoDankaiValue;
-    }
-
-    @JsonProperty("lblZenHokenryoDankaiValue")
-    public void setLblZenHokenryoDankaiValue(Label lblZenHokenryoDankaiValue) {
-        this.lblZenHokenryoDankaiValue=lblZenHokenryoDankaiValue;
-    }
-
-}
-/**
- * celFukashokaiKonkyo69 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celFukashokaiKonkyo69AttblFukakonkyoMeisai extends TableCell {
-    @JsonProperty("lblSetaiKazeiValue")
-    private Label lblSetaiKazeiValue;
-    @JsonProperty("lblZenHokenryoritsuValue")
-    private Label lblZenHokenryoritsuValue;
-
-    @JsonProperty("lblSetaiKazeiValue")
-    public Label getLblSetaiKazeiValue() {
-        return lblSetaiKazeiValue;
-    }
-
-    @JsonProperty("lblSetaiKazeiValue")
-    public void setLblSetaiKazeiValue(Label lblSetaiKazeiValue) {
-        this.lblSetaiKazeiValue=lblSetaiKazeiValue;
-    }
-
-    @JsonProperty("lblZenHokenryoritsuValue")
-    public Label getLblZenHokenryoritsuValue() {
-        return lblZenHokenryoritsuValue;
-    }
-
-    @JsonProperty("lblZenHokenryoritsuValue")
-    public void setLblZenHokenryoritsuValue(Label lblZenHokenryoritsuValue) {
-        this.lblZenHokenryoritsuValue=lblZenHokenryoritsuValue;
-    }
-
-}
-/**
- * celFukashokaiKonkyo70 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celFukashokaiKonkyo70AttblFukakonkyoMeisai extends TableCell {
-    @JsonProperty("lblShotokuSumValue")
-    private Label lblShotokuSumValue;
-    @JsonProperty("lblZenNengakuHokenryoValue")
-    private Label lblZenNengakuHokenryoValue;
-
-    @JsonProperty("lblShotokuSumValue")
-    public Label getLblShotokuSumValue() {
-        return lblShotokuSumValue;
-    }
-
-    @JsonProperty("lblShotokuSumValue")
-    public void setLblShotokuSumValue(Label lblShotokuSumValue) {
-        this.lblShotokuSumValue=lblShotokuSumValue;
-    }
-
-    @JsonProperty("lblZenNengakuHokenryoValue")
-    public Label getLblZenNengakuHokenryoValue() {
-        return lblZenNengakuHokenryoValue;
-    }
-
-    @JsonProperty("lblZenNengakuHokenryoValue")
-    public void setLblZenNengakuHokenryoValue(Label lblZenNengakuHokenryoValue) {
-        this.lblZenNengakuHokenryoValue=lblZenNengakuHokenryoValue;
-    }
-
-}
-/**
- * celFukashokaiKonkyo71 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celFukashokaiKonkyo71AttblFukakonkyoMeisai extends TableCell {
-    @JsonProperty("lblNenkinShunyuValue")
-    private Label lblNenkinShunyuValue;
-
-    @JsonProperty("lblNenkinShunyuValue")
-    public Label getLblNenkinShunyuValue() {
-        return lblNenkinShunyuValue;
-    }
-
-    @JsonProperty("lblNenkinShunyuValue")
-    public void setLblNenkinShunyuValue(Label lblNenkinShunyuValue) {
-        this.lblNenkinShunyuValue=lblNenkinShunyuValue;
-    }
-
-}
-/**
- * celFukashokaiKonkyo72 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celFukashokaiKonkyo72AttblFukakonkyoMeisai extends TableCell {
-    @JsonProperty("lblHokenryoDankaiValue")
-    private Label lblHokenryoDankaiValue;
-
-    @JsonProperty("lblHokenryoDankaiValue")
-    public Label getLblHokenryoDankaiValue() {
-        return lblHokenryoDankaiValue;
-    }
-
-    @JsonProperty("lblHokenryoDankaiValue")
-    public void setLblHokenryoDankaiValue(Label lblHokenryoDankaiValue) {
-        this.lblHokenryoDankaiValue=lblHokenryoDankaiValue;
-    }
-
-}
-/**
- * celFukashokaiKonkyo73 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celFukashokaiKonkyo73AttblFukakonkyoMeisai extends TableCell {
-
-}
-/**
  * celFukashokaiKonkyo74 のクラスファイル 
  * 
  * @author 自動生成
  */
 class celFukashokaiKonkyo74AttblFukakonkyoMeisai extends TableCell {
-
-}
-/**
- * celFukashokaiKonkyo75 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celFukashokaiKonkyo75AttblFukakonkyoMeisai extends TableCell {
-
-}
-/**
- * celFukashokaiKonkyo のクラスファイル 
- * 
- * @author 自動生成
- */
-class celFukashokaiKonkyoAttblFukakonkyoMeisai extends TableCell {
-    @JsonProperty("lblFukakonkyoMidashi")
-    private Label lblFukakonkyoMidashi;
-
-    @JsonProperty("lblFukakonkyoMidashi")
-    public Label getLblFukakonkyoMidashi() {
-        return lblFukakonkyoMidashi;
-    }
-
-    @JsonProperty("lblFukakonkyoMidashi")
-    public void setLblFukakonkyoMidashi(Label lblFukakonkyoMidashi) {
-        this.lblFukakonkyoMidashi=lblFukakonkyoMidashi;
-    }
 
 }
