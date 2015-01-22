@@ -29,9 +29,9 @@ import static org.junit.Assert.assertThat;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class GappeiJohoDacTest extends DbzTestDacBase {
+public class DbT7055GappeiJohoDacTest extends DbzTestDacBase {
 
-    private static GappeiJohoDac sut;
+    private static DbT7055GappeiJohoDac sut;
 
     private static final ITrueFalseCriteria 検索条件_該当0件 = Restrictions.eq(new RString("99"), DbT7055GappeiJoho.chiikiNo);
     private static final ITrueFalseCriteria 検索条件_該当1件 = Restrictions.eq(new RString("01"), DbT7055GappeiJoho.chiikiNo);
@@ -39,7 +39,7 @@ public class GappeiJohoDacTest extends DbzTestDacBase {
 
     @BeforeClass
     public static void setUpClass() {
-        sut = InstanceProvider.create(GappeiJohoDac.class);
+        sut = InstanceProvider.create(DbT7055GappeiJohoDac.class);
     }
 
     public static class selectAll extends DbzTestDacBase {

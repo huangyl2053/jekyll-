@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.realservice.gappei;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.config.GappeiJohoConfig;
+import jp.co.ndensan.reams.db.dbz.business.config.kyotsutokei.GappeiJohoKanriConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.HokenshaJohoConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GappeiJohoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.db.dbz.model.koiki.IKoikiKoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.model.koiki.KoikiKoseiShichosonModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.GappeiJohoDac;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.GappeiShichosonDac;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7055GappeiJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7056GappeiShichosonDac;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.realservice.search.GappeiJohoSearchItem;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -607,20 +607,20 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
                 createGappeiDac(合併情報数),
                 createTanitsuDac(保険者構成区分 == 単一市町村 ? 市町村情報数 : 0),
                 createKoikiDac(保険者構成区分 == 広域市町村 ? 市町村情報数 : 0),
-                createGappeiJohoConfig(合併情報区分),
+                createGappeiJohoKanriConfig(合併情報区分),
                 createHokenshaJohoConfig(保険者構成区分));
     }
 
-    private static GappeiJohoDac createGappeiDac(int count) {
-        GappeiJohoDac dac = mock(GappeiJohoDac.class);
+    private static DbT7055GappeiJohoDac createGappeiDac(int count) {
+        DbT7055GappeiJohoDac dac = mock(DbT7055GappeiJohoDac.class);
         IItemList<IGappeiJoho> list = createGappeiList(count);
         when(dac.selectAll()).thenReturn(list);
         when(dac.select(any(ITrueFalseCriteria.class))).thenReturn(list);
         return dac;
     }
 
-    private static GappeiShichosonDac createTanitsuDac(int count) {
-        GappeiShichosonDac dac = mock(GappeiShichosonDac.class);
+    private static DbT7056GappeiShichosonDac createTanitsuDac(int count) {
+        DbT7056GappeiShichosonDac dac = mock(DbT7056GappeiShichosonDac.class);
         IItemList<IGappeiShichoson> list = createTanitsuList(count);
         when(dac.selectAll()).thenReturn(list);
         when(dac.select(any(ITrueFalseCriteria.class))).thenReturn(list);
@@ -634,9 +634,9 @@ public class GappeiShichosonFinderTest extends DbzTestBase {
         return dac;
     }
 
-    private static GappeiJohoConfig createGappeiJohoConfig(GappeiJohoKubun 合併情報区分) {
-        GappeiJohoConfig config = mock(GappeiJohoConfig.class);
-        when(config.get合併情報区分()).thenReturn(合併情報区分);
+    private static GappeiJohoKanriConfig createGappeiJohoKanriConfig(GappeiJohoKubun 合併情報区分) {
+        GappeiJohoKanriConfig config = mock(GappeiJohoKanriConfig.class);
+        when(config.is合併あり()).thenReturn(合併情報区分 == GappeiJohoKubun.合併あり);
         return config;
     }
 

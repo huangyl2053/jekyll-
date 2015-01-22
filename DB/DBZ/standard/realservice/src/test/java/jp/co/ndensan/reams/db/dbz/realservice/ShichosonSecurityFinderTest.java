@@ -10,14 +10,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbz.business.config.HokenshaJohoConfig;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysHokenshaJoho;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.config.HokenshaJoho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.model.KoikiShichosonSecurityModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.KoikiShichosonSecurityDac;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7057KoikiShichosonSecurityDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.auth.GroupEntity;
@@ -123,8 +123,8 @@ public class ShichosonSecurityFinderTest extends DbzTestBase {
         return new ShichosonSecurityFinder(createSecurityDac(セキュリティ), createHokenshaJohoConfig(構成), createGroupList(グループ), createGyomuList(導入));
     }
 
-    private static KoikiShichosonSecurityDac createSecurityDac(int flg) {
-        KoikiShichosonSecurityDac dac = mock(KoikiShichosonSecurityDac.class);
+    private static DbT7057KoikiShichosonSecurityDac createSecurityDac(int flg) {
+        DbT7057KoikiShichosonSecurityDac dac = mock(DbT7057KoikiShichosonSecurityDac.class);
         IItemList<KoikiShichosonSecurityModel> list = createKoikiShichosonSecurityList(flg);
         when(dac.select(any(ITrueFalseCriteria.class))).thenReturn(list);
         return dac;
@@ -132,7 +132,7 @@ public class ShichosonSecurityFinderTest extends DbzTestBase {
 
     private static HokenshaJohoConfig createHokenshaJohoConfig(int flg) {
         IUrBusinessConfig mock = mock(IUrBusinessConfig.class);
-        when(mock.get(eq(ConfigKeysHokenshaJoho.保険者情報_保険者構成), any(RDate.class))).thenReturn(createHokenshaKosei(flg).code());
+        when(mock.get(eq(HokenshaJoho.保険者情報_保険者構成), any(RDate.class))).thenReturn(createHokenshaKosei(flg).code());
         return new HokenshaJohoConfig(mock);
     }
 

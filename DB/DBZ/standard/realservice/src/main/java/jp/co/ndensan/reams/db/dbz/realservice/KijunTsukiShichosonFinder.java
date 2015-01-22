@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.business.KyuShichosonShikaku;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GesshoGetsumatsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShinKyuHokenshaNoHenkanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.GappeiShichosonJoho;
+import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
@@ -58,7 +58,7 @@ public class KijunTsukiShichosonFinder {
      * @param 月初月末区分 月初月末区分
      * @return 合併市町村情報
      */
-    public Optional<GappeiShichosonJoho> get基準月市町村情報(
+    public Optional<GappeiShichosonJohoModel> get基準月市町村情報(
             List<HihokenshaDaichoModel> 被保険者情報List, FlexibleYearMonth 基準年月, GesshoGetsumatsuKubun 月初月末区分) {
 
         KyuShichosonShikaku 旧市町村資格 = new KyuShichosonShikaku(被保険者情報List);
@@ -68,7 +68,7 @@ public class KijunTsukiShichosonFinder {
         }
 
         LasdecCode 市町村コード = 被保険者台帳.get().get市町村コード();
-        Optional<GappeiShichosonJoho> check1 = gappeiFinder.get最新合併市町村情報(市町村コード);
+        Optional<GappeiShichosonJohoModel> check1 = gappeiFinder.get最新合併市町村情報(市町村コード);
         if (!check1.isPresent() || !check1.get().get合併情報().isPresent()) {
             return set新旧被保険者番号変換区分(gappeiFinder.get市町村情報(市町村コード), 基準年月);
         }
@@ -79,14 +79,14 @@ public class KijunTsukiShichosonFinder {
         }
 
         LasdecCode 旧市町村コード = 被保険者台帳.get().get旧市町村コード();
-        Optional<GappeiShichosonJoho> check3 = gappeiFinder.get最古合併市町村情報(旧市町村コード);
+        Optional<GappeiShichosonJohoModel> check3 = gappeiFinder.get最古合併市町村情報(旧市町村コード);
         国保連開始年月 = check3.get().get合併情報().get().get国保連データ連携開始日().getYearMonth();
         if (基準年月.isBefore(国保連開始年月)) {
             return set新旧被保険者番号変換区分(apply月処理(check3, 月初月末区分), 基準年月);
         }
 
-        IItemList<GappeiShichosonJoho> check4List = gappeiFinder.get合併市町村情報(旧市町村コード);
-        for (GappeiShichosonJoho check4 : check4List) {
+        IItemList<GappeiShichosonJohoModel> check4List = gappeiFinder.get合併市町村情報(旧市町村コード);
+        for (GappeiShichosonJohoModel check4 : check4List) {
             国保連開始年月 = check4.get合併情報().get().get国保連データ連携開始日().getYearMonth();
             if (基準年月.isBefore(国保連開始年月)) {
                 return set新旧被保険者番号変換区分(apply月処理(Optional.of(check4), 月初月末区分), 基準年月);
@@ -104,22 +104,22 @@ public class KijunTsukiShichosonFinder {
      * @return 合併市町村情報
      * @throws IllegalArgumentException 基準年月より後に合併した保険者番号を指定した場合
      */
-    public Optional<GappeiShichosonJoho> get基準月市町村情報(
+    public Optional<GappeiShichosonJohoModel> get基準月市町村情報(
             FlexibleYearMonth 基準年月, ShoKisaiHokenshaNo 保険者番号) throws IllegalArgumentException {
 
         if (gappeiFinder.get最新合併市町村情報(保険者番号, 基準年月).isPresent()) {
-            Optional<GappeiShichosonJoho> check2 = gappeiFinder.get直近合併市町村情報(保険者番号, 基準年月);
+            Optional<GappeiShichosonJohoModel> check2 = gappeiFinder.get直近合併市町村情報(保険者番号, 基準年月);
             if (check2.isPresent()) {
                 return set新旧被保険者番号変換区分(check2, 基準年月);
             } else {
                 return set新旧被保険者番号変換区分(gappeiFinder.get市町村情報(保険者番号), 基準年月);
             }
         } else {
-            Optional<GappeiShichosonJoho> check3 = gappeiFinder.get直近合併市町村情報(保険者番号);
+            Optional<GappeiShichosonJohoModel> check3 = gappeiFinder.get直近合併市町村情報(保険者番号);
             if (check3.isPresent()) {
                 return set新旧被保険者番号変換区分(check3, 基準年月);
             } else {
-                Optional<GappeiShichosonJoho> check4 = gappeiFinder.get最新合併市町村情報(保険者番号);
+                Optional<GappeiShichosonJohoModel> check4 = gappeiFinder.get最新合併市町村情報(保険者番号);
                 if (check4.isPresent()) {
                     throw new IllegalArgumentException(UrErrorMessages.不正.getMessage().replace("保険者番号").evaluate());
                 } else {
@@ -130,8 +130,8 @@ public class KijunTsukiShichosonFinder {
 
     }
 
-    private Optional<GappeiShichosonJoho> apply月処理(Optional<GappeiShichosonJoho> 処理前, GesshoGetsumatsuKubun 月初月末区分) {
-        GappeiShichosonJoho 処理後 = new GappeiShichosonJoho(
+    private Optional<GappeiShichosonJohoModel> apply月処理(Optional<GappeiShichosonJohoModel> 処理前, GesshoGetsumatsuKubun 月初月末区分) {
+        GappeiShichosonJohoModel 処理後 = new GappeiShichosonJohoModel(
                 処理前.get().get合併情報(),
                 処理前.get().get保険者構成区分(),
                 apply月処理Of合併市町村(処理前.get().get単一市町村情報(), 月初月末区分),
@@ -181,11 +181,11 @@ public class KijunTsukiShichosonFinder {
         return ItemList.of(処理後List);
     }
 
-    private Optional<GappeiShichosonJoho> set新旧被保険者番号変換区分(Optional<GappeiShichosonJoho> 処理前, FlexibleYearMonth 基準年月) {
+    private Optional<GappeiShichosonJohoModel> set新旧被保険者番号変換区分(Optional<GappeiShichosonJohoModel> 処理前, FlexibleYearMonth 基準年月) {
         if (処理前.get().get保険者構成区分() != HokenshaKosei.広域市町村) {
             return 処理前;
         }
-        Optional<GappeiShichosonJoho> 合併市町村情報 = gappeiFinder.get最古市町村情報(処理前.get().get広域市町村情報().toList().get(0).get市町村コード());
+        Optional<GappeiShichosonJohoModel> 合併市町村情報 = gappeiFinder.get最古市町村情報(処理前.get().get広域市町村情報().toList().get(0).get市町村コード());
         ShinKyuHokenshaNoHenkanKubun 新旧被保険者番号変換区分 = ShinKyuHokenshaNoHenkanKubun.UNKNOWN;
         if (!合併市町村情報.get().get広域市町村情報().isEmpty()) {
             if (合併市町村情報.get().get広域市町村情報().toList().get(0).get加入日().getYearMonth().isBeforeOrEquals(基準年月)) {
@@ -194,7 +194,7 @@ public class KijunTsukiShichosonFinder {
                 新旧被保険者番号変換区分 = ShinKyuHokenshaNoHenkanKubun.変換必要;
             }
         }
-        GappeiShichosonJoho 処理後 = new GappeiShichosonJoho(
+        GappeiShichosonJohoModel 処理後 = new GappeiShichosonJohoModel(
                 処理前.get().get合併情報(), 処理前.get().get保険者構成区分(), 処理前.get().get単一市町村情報(), 処理前.get().get広域市町村情報(), 新旧被保険者番号変換区分);
         return Optional.of(処理後);
     }

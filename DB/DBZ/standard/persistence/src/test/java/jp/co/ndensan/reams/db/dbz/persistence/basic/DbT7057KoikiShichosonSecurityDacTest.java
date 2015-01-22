@@ -28,9 +28,9 @@ import static org.junit.Assert.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
-public class KoikiShichosonSecurityDacTest extends DbzTestDacBase {
+public class DbT7057KoikiShichosonSecurityDacTest extends DbzTestDacBase {
 
-    private static KoikiShichosonSecurityDac sut;
+    private static DbT7057KoikiShichosonSecurityDac sut;
 
     private static final ITrueFalseCriteria 検索条件_該当0件 = Restrictions.eq(new RString("99"), DbT7057KoikiShichosonSecurity.shichosonShikibetsuID);
     private static final ITrueFalseCriteria 検索条件_該当1件 = Restrictions.eq(new RString("01"), DbT7057KoikiShichosonSecurity.shichosonShikibetsuID);
@@ -38,7 +38,7 @@ public class KoikiShichosonSecurityDacTest extends DbzTestDacBase {
 
     @BeforeClass
     public static void setUpClass() {
-        sut = InstanceProvider.create(KoikiShichosonSecurityDac.class);
+        sut = InstanceProvider.create(DbT7057KoikiShichosonSecurityDac.class);
     }
 
     public static class select extends DbzTestDacBase {

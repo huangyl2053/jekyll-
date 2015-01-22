@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business;
+package jp.co.ndensan.reams.db.dbz.model.gappei;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShinKyuHokenshaNoHenkanKubun;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiJoho;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKos
  *
  * @author N8156 宮本 康
  */
-public class GappeiShichosonJoho {
+public class GappeiShichosonJohoModel {
 
     private final Optional<IGappeiJoho> 合併情報;
     private final HokenshaKosei 保険者構成区分;
@@ -38,7 +38,7 @@ public class GappeiShichosonJoho {
      * @param 新旧保険者番号変換区分 新旧保険者番号変換区分
      * @throws NullPointerException 引数がNullの時
      */
-    public GappeiShichosonJoho(
+    public GappeiShichosonJohoModel(
             Optional<IGappeiJoho> 合併情報,
             HokenshaKosei 保険者構成区分,
             IItemList<IGappeiShichoson> 単一市町村情報,
@@ -59,7 +59,7 @@ public class GappeiShichosonJoho {
      * @param 単一市町村情報 単一市町村情報
      * @param 広域市町村情報 広域市町村情報
      */
-    public GappeiShichosonJoho(
+    public GappeiShichosonJohoModel(
             Optional<IGappeiJoho> 合併情報,
             HokenshaKosei 保険者構成区分,
             IItemList<IGappeiShichoson> 単一市町村情報,

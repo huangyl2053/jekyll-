@@ -29,7 +29,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
  *
  * @author N8156 宮本 康
  */
-public class KoikiShichosonSecurityDac
+public class DbT7057KoikiShichosonSecurityDac
         implements IReplaceable<DbT7057KoikiShichosonSecurityEntity>, IDeletable<DbT7057KoikiShichosonSecurityEntity> {
 
     @InjectSession

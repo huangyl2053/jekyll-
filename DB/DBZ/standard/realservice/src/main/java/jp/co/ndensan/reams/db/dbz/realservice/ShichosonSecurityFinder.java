@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.model.KoikiShichosonSecurityModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.KoikiShichosonSecurityDac;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7057KoikiShichosonSecurityDac;
 import jp.co.ndensan.reams.db.dbz.realservice.search.KoikiShichosonSecuritySearchItem;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.realservice.search.INewSearchCondition;
@@ -39,7 +39,7 @@ public class ShichosonSecurityFinder {
     private static final ShichosonShikibetsuID 市町村識別ID_介護未導入 = null;
     private static final ShichosonCode 市町村コード_介護未導入 = null;
 
-    private final KoikiShichosonSecurityDac dac;
+    private final DbT7057KoikiShichosonSecurityDac dac;
     private final HokenshaJohoConfig config;
     private final List<GroupEntity> groupList;
     private final IntroductionGyomuWithTanitsuFg[] gyomuList;
@@ -48,7 +48,7 @@ public class ShichosonSecurityFinder {
      * InstanceProviderを用いてDacのインスタンスを生成し、メンバ変数に保持します。
      */
     public ShichosonSecurityFinder() {
-        dac = InstanceProvider.create(KoikiShichosonSecurityDac.class);
+        dac = InstanceProvider.create(DbT7057KoikiShichosonSecurityDac.class);
         config = new HokenshaJohoConfig();
         groupList = AuthGroup.getAllGroups();
         gyomuList = GyomuCodeMaster.getIntroductionGyomuList();
@@ -63,7 +63,7 @@ public class ShichosonSecurityFinder {
      * @param gyomuList 導入業務リスト
      */
     ShichosonSecurityFinder(
-            KoikiShichosonSecurityDac dac,
+            DbT7057KoikiShichosonSecurityDac dac,
             HokenshaJohoConfig config,
             List<GroupEntity> groupList,
             IntroductionGyomuWithTanitsuFg[] gyomuList) {
