@@ -154,7 +154,7 @@ public class DbT7051KoseiShichosonMasterDacTest extends DbzTestDacBase {
             DbT7051KoseiShichosonMasterEntity updateRecord = DbT7051KoseiShichosonMasterEntityGenerator.createDbT7051KoseiShichosonMasterEntity();
             // TODO 主キー以外の項目を変更してください
             //updateRecord.set変更したい項目(75);
-
+            updateRecord.setShichosonMeisho(new RString("あいうえお"));
             sut.update(updateRecord);
 
             DbT7051KoseiShichosonMasterEntity updatedRecord = sut.selectByKey(
@@ -162,7 +162,7 @@ public class DbT7051KoseiShichosonMasterDacTest extends DbzTestDacBase {
                     DEFAULT_市町村コード,
                     DEFAULT_証記載保険者番号);
 
-            //assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getShichosonMeisho(), is(updatedRecord.getShichosonMeisho()));
         }
     }
 
