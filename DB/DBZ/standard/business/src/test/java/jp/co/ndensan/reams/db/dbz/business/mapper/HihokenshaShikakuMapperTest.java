@@ -32,11 +32,11 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuHenkoJiyuHihokensha;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuKaijo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuTekiyo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuHihokensha;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuSoshitsuJiyuHihokennsha;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuHenkoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuShutokuJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KofuJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -461,7 +461,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Before
             public void setUp() {
-                entity.setShikakuShutokuJiyuCode(new KaigoshikakuShutokuJiyuHihokensha(reason.getCode()).toRString());
+                entity.setShikakuShutokuJiyuCode(new KaigoShikakuShutokuJiyu(reason.getCode()).toRString());
                 entity.setShikakuShutokuTodokedeYMD(noticeDate);
                 entity.setShikakuShutokuYMD(actionDate);
                 result = sut.toHihokenshaShikaku(entity);
@@ -509,7 +509,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Before
             public void setUp() {
-                entity.setShikakuSoshitsuJiyuCode(new KaigoshikakuSoshitsuJiyuHihokennsha(reason.getCode()).toRString());
+                entity.setShikakuSoshitsuJiyuCode(new KaigoShikakuSoshitsuJiyu(reason.getCode()).toRString());
                 entity.setShikakuSoshitsuTodokedeYMD(noticeDate);
                 entity.setShikakuSoshitsuYMD(actionDate);
                 converted = sut.toHihokenshaShikaku(entity);
@@ -557,7 +557,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Before
             public void setUp() {
-                entity.setShikakuHenkoJiyuCode(new KaigoshikakuHenkoJiyuHihokensha(reason.getCode()).toRString());
+                entity.setShikakuHenkoJiyuCode(new KaigoShikakuHenkoJiyu(reason.getCode()).toRString());
                 entity.setShikakuHenkoTodokedeYMD(noticeDate);
                 entity.setShikakuHenkoYMD(actionDate);
                 converted = sut.toHihokenshaShikaku(entity);
@@ -591,7 +591,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Before
             public void setUp() {
-                entity.setJushochitokureiTekiyoJiyuCode(new KaigoshikakuJutokuTekiyo(reason.getCode()).toRString());
+                entity.setJushochitokureiTekiyoJiyuCode(new KaigoShikakuJutokuTekiyoJiyu(reason.getCode()).toRString());
                 entity.setJushochitokureiTekiyoTodokedeYMD(noticeDate);
                 entity.setJushochitokureiTekiyoYMD(actionDate);
                 converted = sut.toHihokenshaShikaku(entity);
@@ -625,7 +625,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Before
             public void setUp() {
-                entity.setJushochitokureiKaijoJiyuCode(new KaigoshikakuJutokuKaijo(reason.getCode()).toRString());
+                entity.setJushochitokureiKaijoJiyuCode(new KaigoShikakuJutokuKaijoJiyu(reason.getCode()).toRString());
                 entity.setJushochitokureiKaijoTodokedeYMD(noticeDate);
                 entity.setJushochitokureiKaijoYMD(actionDate);
                 converted = sut.toHihokenshaShikaku(entity);
