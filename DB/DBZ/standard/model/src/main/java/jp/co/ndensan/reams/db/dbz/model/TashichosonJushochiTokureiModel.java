@@ -7,19 +7,21 @@ package jp.co.ndensan.reams.db.dbz.model;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuTatokuTekiyo;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuSoshitsuJiyuTatokuTekiyo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 他市町村住所地特例のモデルクラスです。
  *
- * @author LDNS 鄭雪双
+ * @author n8178 城間篤人
  */
 public class TashichosonJushochiTokureiModel implements Serializable {
 
@@ -83,7 +85,7 @@ public class TashichosonJushochiTokureiModel implements Serializable {
      * @return 処理日時
      */
     public YMDHMS get処理日時() {
-        return entity.getShoriTimeStamp();
+        return entity.getShoriTimestamp();
     }
 
     /**
@@ -91,7 +93,7 @@ public class TashichosonJushochiTokureiModel implements Serializable {
      *
      * @return 他市町村住所地特例適用事由コード
      */
-    public RString get他市町村住所地特例適用事由コード() {
+    public KaigoshikakuShutokuJiyuTatokuTekiyo get他市町村住所地特例適用事由コード() {
         return entity.getTekiyoJiyuCode();
     }
 
@@ -127,7 +129,7 @@ public class TashichosonJushochiTokureiModel implements Serializable {
      *
      * @return 他市町村住所地特例解除事由コード
      */
-    public RString get他市町村住所地特例解除事由コード() {
+    public KaigoshikakuSoshitsuJiyuTatokuTekiyo get他市町村住所地特例解除事由コード() {
         return entity.getKaijoJiyuCode();
     }
 
@@ -163,7 +165,7 @@ public class TashichosonJushochiTokureiModel implements Serializable {
      *
      * @return 措置保険者番号
      */
-    public RString get措置保険者番号() {
+    public LasdecCode get措置保険者番号() {
         return entity.getSochiHokenshaNo();
     }
 
@@ -172,7 +174,7 @@ public class TashichosonJushochiTokureiModel implements Serializable {
      *
      * @return 措置被保険者番号
      */
-    public RString get措置被保険者番号() {
+    public HihokenshaNo get措置被保険者番号() {
         return entity.getSochiHihokenshaNo();
     }
 
@@ -230,7 +232,7 @@ public class TashichosonJushochiTokureiModel implements Serializable {
      */
     public void set処理日時(YMDHMS 処理日時) {
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
-        entity.setShoriTimeStamp(処理日時);
+        entity.setShoriTimestamp(処理日時);
     }
 
     /**
@@ -238,7 +240,7 @@ public class TashichosonJushochiTokureiModel implements Serializable {
      *
      * @param 他市町村住所地特例適用事由コード 他市町村住所地特例適用事由コード
      */
-    public void set他市町村住所地特例適用事由コード(RString 他市町村住所地特例適用事由コード) {
+    public void set他市町村住所地特例適用事由コード(KaigoshikakuShutokuJiyuTatokuTekiyo 他市町村住所地特例適用事由コード) {
         requireNonNull(他市町村住所地特例適用事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("他市町村住所地特例適用事由コード"));
         entity.setTekiyoJiyuCode(他市町村住所地特例適用事由コード);
     }
@@ -278,7 +280,7 @@ public class TashichosonJushochiTokureiModel implements Serializable {
      *
      * @param 他市町村住所地特例解除事由コード 他市町村住所地特例解除事由コード
      */
-    public void set他市町村住所地特例解除事由コード(RString 他市町村住所地特例解除事由コード) {
+    public void set他市町村住所地特例解除事由コード(KaigoshikakuSoshitsuJiyuTatokuTekiyo 他市町村住所地特例解除事由コード) {
         requireNonNull(他市町村住所地特例解除事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("他市町村住所地特例解除事由コード"));
         entity.setKaijoJiyuCode(他市町村住所地特例解除事由コード);
     }
@@ -318,7 +320,7 @@ public class TashichosonJushochiTokureiModel implements Serializable {
      *
      * @param 措置保険者番号 措置保険者番号
      */
-    public void set措置保険者番号(RString 措置保険者番号) {
+    public void set措置保険者番号(LasdecCode 措置保険者番号) {
         requireNonNull(措置保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("措置保険者番号"));
         entity.setSochiHokenshaNo(措置保険者番号);
     }
@@ -328,7 +330,7 @@ public class TashichosonJushochiTokureiModel implements Serializable {
      *
      * @param 措置被保険者番号 措置被保険者番号
      */
-    public void set措置被保険者番号(RString 措置被保険者番号) {
+    public void set措置被保険者番号(HihokenshaNo 措置被保険者番号) {
         requireNonNull(措置被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("措置被保険者番号"));
         entity.setSochiHihokenshaNo(措置被保険者番号);
     }

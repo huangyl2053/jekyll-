@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 //import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.IHihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -54,7 +54,7 @@ public class HihokenshaDaichoFinderBase<T extends HihokenshaDaichoModel> {
      * @param 処理日時 処理日時
      * @return 被保険者台帳
      */
-    public IOptional<T> find被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
+    public Optional<T> find被保険者台帳(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
         //TODO #52997
         //1, Dacクラスの、市町村コード・被保険者番号・処理日時を指定するメソッドを呼び出し、DbT1001HihokenshaDaichoEntityを取得します。
         //   Dacに当該メソッドが存在しない場合は追加してください。
@@ -66,16 +66,22 @@ public class HihokenshaDaichoFinderBase<T extends HihokenshaDaichoModel> {
      * 被保険者番号と市町村コードを指定して、特定の被保険者の台帳情報をListで取得します。
      *
      * @param 市町村コード 市町村コード
+     * @return 被保険者台帳List
+     */
+    public IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード) {
+        return dac.select被保険者台帳一覧(市町村コード);
+    }
+
+    /**
+     * 被保険者番号と市町村コードを指定して、特定の被保険者の台帳情報をListで取得します。
+     *
+     * @param 市町村コード 市町村コード
      * @param 被保険者番号 被保険者番号
      * @return 被保険者台帳List
      */
-    public IItemList<T> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
-        //TODO #52997
-        //1, Dacクラスの、市町村コード・被保険者番号を指定するメソッドを呼び出し、DbT1001HihokenshaDaichoEntityのListを取得します。
-        //   Dacに当該メソッドが存在しない場合は追加してください。Dacが返るListは必ず、取得日の降順になるようにしてください。
-        //   Dacから返る検索結果は、IItemListを利用して受け取ってください。
-        //2, 検索結果をModelのListにしてreturnします。
-        throw new UnsupportedOperationException("Not supported yet.");
+    public IItemList<HihokenshaDaichoModel> find被保険者台帳List(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+        return dac.select被保険者台帳一覧(市町村コード, 被保険者番号);
+
     }
 
     /**
@@ -122,8 +128,8 @@ public class HihokenshaDaichoFinderBase<T extends HihokenshaDaichoModel> {
      * @param 被保険者番号 被保険者番号
      * @return 被保険者台帳
      */
-    public IOptional<HihokenshaDaichoModel> find最新被保険者台帳(HihokenshaNo 被保険者番号) {
+    public Optional<HihokenshaDaichoModel> find最新被保険者台帳(HihokenshaNo 被保険者番号) {
         return dac.select最新被保険者台帳(被保険者番号);
-    }
 
+    }
 }

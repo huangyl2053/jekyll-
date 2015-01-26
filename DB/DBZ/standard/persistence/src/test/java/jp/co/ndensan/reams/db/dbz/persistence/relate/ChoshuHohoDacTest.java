@@ -5,8 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
@@ -76,8 +75,8 @@ public class ChoshuHohoDacTest {
         }
 
         @Test
-        public void データが見つかない検索条件を渡すと_IOptionalのemptyを返す() {
-            IOptional<ChoshuHohoModel> empty = DbOptional.empty();
+        public void データが見つかない検索条件を渡すと_Optionalのemptyを返す() {
+            Optional<ChoshuHohoModel> empty = Optional.empty();
             assertThat(sut.select徴収方法Recently(notFound賦課年度, 被保険者番号1), is(empty));
         }
     }

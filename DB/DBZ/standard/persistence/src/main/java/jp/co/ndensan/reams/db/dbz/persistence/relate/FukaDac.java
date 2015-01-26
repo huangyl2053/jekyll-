@@ -5,8 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
@@ -56,7 +55,7 @@ public class FukaDac implements IModifiable<FukaModel> {
      * @return FukaModel
      */
     @Transaction
-    public IOptional<FukaModel> select賦課ByKey(ChoteiNendo 調定年度, FukaNendo 賦課年度,
+    public Optional<FukaModel> select賦課ByKey(ChoteiNendo 調定年度, FukaNendo 賦課年度,
             TsuchishoNo 通知書番号, RDateTime 処理日時) {
 
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
@@ -64,7 +63,7 @@ public class FukaDac implements IModifiable<FukaModel> {
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
-        return DbOptional.ofNullable(createModel(介護賦課Dac.selectByKey(
+        return Optional.ofNullable(createModel(介護賦課Dac.selectByKey(
                 調定年度, 賦課年度, 通知書番号, 処理日時)));
     }
 
@@ -80,7 +79,7 @@ public class FukaDac implements IModifiable<FukaModel> {
      * @throws NullPointerException 引数がnullの時
      */
     @Transaction
-    public IOptional<FukaModel> select賦課Recently(
+    public Optional<FukaModel> select賦課Recently(
             FukaNendo 賦課年度,
             HihokenshaNo 被保険者番号,
             RDateTime 処理日時) throws NullPointerException {
@@ -103,7 +102,7 @@ public class FukaDac implements IModifiable<FukaModel> {
                         by(shoriTimestamp, Order.DESC)).
                 toList(DbT2002FukaEntity.class);
 
-        return DbOptional.ofNullable(createModel(entities.isEmpty() ? null : entities.get(0)));
+        return Optional.ofNullable(createModel(entities.isEmpty() ? null : entities.get(0)));
     }
 
     /**
@@ -143,10 +142,10 @@ public class FukaDac implements IModifiable<FukaModel> {
      *
      * @param 賦課年度 賦課年度
      * @param 通知書番号 通知書番号
-     * @return IOptional<FukaModel>
+     * @return Optional<FukaModel>
      */
     @Transaction
-    public IOptional<FukaModel> select最新介護賦課(FukaNendo 賦課年度, TsuchishoNo 通知書番号) {
+    public Optional<FukaModel> select最新介護賦課(FukaNendo 賦課年度, TsuchishoNo 通知書番号) {
 
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
@@ -159,7 +158,7 @@ public class FukaDac implements IModifiable<FukaModel> {
                 order(by(DbT2002Fuka.choteiNendo, Order.DESC), by(DbT2002Fuka.shoriTimestamp, Order.DESC)).
                 toList(DbT2002FukaEntity.class);
 
-        return DbOptional.ofNullable(!介護賦課List.isEmpty() ? createModel(介護賦課List.get(0)) : null);
+        return Optional.ofNullable(!介護賦課List.isEmpty() ? createModel(介護賦課List.get(0)) : null);
     }
 
     /**

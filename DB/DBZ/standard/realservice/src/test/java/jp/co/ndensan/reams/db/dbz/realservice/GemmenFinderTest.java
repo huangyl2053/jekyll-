@@ -6,8 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.realservice;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
@@ -52,12 +51,12 @@ public class GemmenFinderTest {
     public static class find減免 extends DbzTestBase {
 
         @Test
-        public void find減免は_該当の情報がない時_IOptionalのemptyを返す() {
-            IOptional<GemmenModel> empty = DbOptional.empty();
+        public void find減免は_該当の情報がない時_Optionalのemptyを返す() {
+            Optional<GemmenModel> empty = Optional.empty();
 
             when(dac.select減免ByKeyAndState(any(ChoteiNendo.class), any(FukaNendo.class),
                     any(TsuchishoNo.class), any(RDateTime.class), any(GemmenChoshuYuyoStateKubun.class))).thenReturn(empty);
-            IOptional<GemmenModel> result = sut.find減免(
+            Optional<GemmenModel> result = sut.find減免(
                     調定年度, notFound賦課年度, DEFAULT_通知書番号, DEFAULT_処理日時, 状態区分);
 
             assertThat(result, is(empty));
@@ -65,12 +64,12 @@ public class GemmenFinderTest {
 
         @Test
         public void find減免は_該当の情報がある時_該当情報を返す() {
-            IOptional<GemmenModel> model = DbOptional.of(
+            Optional<GemmenModel> model = Optional.of(
                     new GemmenModel(DbT2004GemmenEntityGenerator.createDbT2004GemmenEntity()));
 
             when(dac.select減免ByKeyAndState(
                     調定年度, 賦課年度, DEFAULT_通知書番号, DEFAULT_処理日時, 状態区分)).thenReturn(model);
-            IOptional<GemmenModel> result = sut.find減免(
+            Optional<GemmenModel> result = sut.find減免(
                     調定年度, 賦課年度, DEFAULT_通知書番号, DEFAULT_処理日時, 状態区分);
 
             assertThat(result.get().get賦課年度(), is(賦課年度));

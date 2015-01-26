@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaisha;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaisha.shichosonCode;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaisha.shikibetsuCode;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaisha.shoriTimeStamp;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaisha.shoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -38,7 +38,7 @@ public class DbT1002TekiyoJogaishaDac implements IModifiable<DbT1002TekiyoJogais
      *
      * @param 市町村コード ShichosonCode
      * @param 識別コード ShikibetsuCode
-     * @param 処理日時 ShoriTimeStamp
+     * @param 処理日時 ShoriTimestamp
      * @return DbT1002TekiyoJogaishaEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -58,7 +58,7 @@ public class DbT1002TekiyoJogaishaDac implements IModifiable<DbT1002TekiyoJogais
                 where(and(
                                 eq(shichosonCode, 市町村コード),
                                 eq(shikibetsuCode, 識別コード),
-                                eq(shoriTimeStamp, 処理日時))).
+                                eq(shoriTimestamp, 処理日時))).
                 toObject(DbT1002TekiyoJogaishaEntity.class);
     }
 

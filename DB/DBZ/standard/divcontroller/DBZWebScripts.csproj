@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -59,11 +59,7 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\TypeScript\Microsoft.TypeScript.targets" />
   <ItemGroup>
-<<<<<<< HEAD
     <!--<TypeScriptCompile Include="..\WebScripts\WebScriptDummy.ts" />-->
-=======
-    <TypeScriptCompile Include="..\WebScripts\WebScriptDummy.ts" />
->>>>>>> b378f2416192970a75c69cb68ba37c5e5e70acd0
   </ItemGroup>
   <ItemGroup />
   <Target Name="AfterBuild">

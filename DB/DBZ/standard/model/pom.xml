@@ -19,6 +19,10 @@
             <artifactId>UrzModel</artifactId>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzBusiness</artifactId>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzEntity</artifactId>
             <version>${project.version}</version>

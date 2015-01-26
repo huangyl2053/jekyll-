@@ -15,8 +15,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.tblFukakonkyoM
 import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.SanteiState;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu.ChoteiJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -126,7 +125,7 @@ public class FukakonkyoAndKiwari {
     }
 
     private void set賦課根拠Of仮算定(tblFukakonkyoMeisaiDiv div, FukaModel model) {
-        IOptional<HokenryoDankai> 保険料段階 = FukaShokaiController.findZennendoHokenryoDankai(model);
+        Optional<HokenryoDankai> 保険料段階 = FukaShokaiController.findZennendoHokenryoDankai(model);
         if (保険料段階.isPresent()) {
             div.getLblZenHokenryoDankaiValue().setText(保険料段階.get().edit表示用保険料段階());
             div.getLblZenHokenryoritsuValue().setText(FukaMapper.toRString(保険料段階.get().get保険料率()));
@@ -186,17 +185,10 @@ public class FukakonkyoAndKiwari {
     }
 
     private void set調定事由(tblFukaKonkyoDiv div, FukaModel model) {
-        div.getTxtFukashokaiChoteiJiyu1().setValue(toCodeRyakusho(model.get調定事由1()));
-        div.getTxtFukashokaiChoteiJiyu2().setValue(toCodeRyakusho(model.get調定事由2()));
-        div.getTxtFukashokaiChoteiJiyu3().setValue(toCodeRyakusho(model.get調定事由3()));
-        div.getTxtFukashokaiChoteiJiyu4().setValue(toCodeRyakusho(model.get調定事由4()));
-    }
-
-    private RString toCodeRyakusho(ChoteiJiyu jiyu) {
-        if (jiyu == null) {
-            return RString.EMPTY;
-        }
-        return jiyu.getRyakusho();
+        div.getTxtFukashokaiChoteiJiyu1().setValue(model.get調定事由1().getRyakusho());
+        div.getTxtFukashokaiChoteiJiyu2().setValue(model.get調定事由2().getRyakusho());
+        div.getTxtFukashokaiChoteiJiyu3().setValue(model.get調定事由3().getRyakusho());
+        div.getTxtFukashokaiChoteiJiyu4().setValue(model.get調定事由4().getRyakusho());
     }
 
     private RString toRange(FlexibleYearMonth from, FlexibleYearMonth to) {
