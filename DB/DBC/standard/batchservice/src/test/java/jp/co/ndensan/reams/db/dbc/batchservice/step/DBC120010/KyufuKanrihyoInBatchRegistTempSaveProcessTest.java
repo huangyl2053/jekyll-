@@ -45,20 +45,21 @@ public class KyufuKanrihyoInBatchRegistTempSaveProcessTest extends DbcTestDacBas
 //        private static final RString 実行前状態BackUp用CSV_給付取込コントロールレコード = new RString("bkup_KokuhorenIFUpdateCtrlRecordProcess_DbTKyufuInCtrlTempTable.csv");
 //        private static final RString 想定する実行前状態CSV_国保連ＩＦ管理 = new RString("before_KokuhorenIFUpdateCtrlRecordProcess_DbT3104KokuhorenInterfaceKanri.csv");
 //        private static final RString 想定する実行前状態CSV_給付取込コントロールレコード = new RString("before_KokuhorenIFUpdateCtrlRecordProcess_DbTKyufuInCtrlTempTable.csv");
-        private static final RString 実行結果CSV_コントロールレコード = new RString("KyufuKanrihyoInBatchRegistTempSaveProcessRunResult_DbTKyufuInCtrlTempTable.csv");
-        private static final RString 実行結果CSV_データレコード = new RString("KyufuKanrihyoInBatchRegistTempSaveProcessRunResult_DbTKyufukanrihyoDataTempTable.csv");
-        private static final RString 想定結果CSV_コントロールレコード = new RString("KyufuKanrihyoInBatchRegistTempSaveProcessResult_DbTKyufuInCtrlTempTable.csv");
-        private static final RString 想定結果CSV_データレコード = new RString("KyufuKanrihyoInBatchRegistTempSaveProcessResult_DbTKyufukanrihyoDataTempTable.csv");
+        private static final RString 実行結果CSV_コントロールレコード = new RString("KyufuKanrihyoInBatchRegistTempSaveProcess_RunResult_DbTKyufuInCtrlTempTable.csv");
+        private static final RString 実行結果CSV_データレコード = new RString("KyufuKanrihyoInBatchRegistTempSaveProcess_RunResult_DbTKyufukanrihyoDataTempTable.csv");
+        private static final RString 想定結果CSV_コントロールレコード = new RString("KyufuKanrihyoInBatchRegistTempSaveProcess_Result_DbTKyufuInCtrlTempTable.csv");
+        private static final RString 想定結果CSV_データレコード = new RString("KyufuKanrihyoInBatchRegistTempSaveProcess_Result_DbTKyufukanrihyoDataTempTable.csv");
 
         @BeforeClass
         public static void setUpClass() {
+            DbcTestDacBase.setUpClass();
             dbHelper = new DbTestHelper();
             setUpTestData(dbHelper);
         }
 
         @Test
         public void バッチ処理クラスを実行したとき_実行結果CSVは_想定結果CSVと一致する() {
-
+            createTempTable();
             BatchProcessTestHelper.execute(KyufuKanrihyoInBatchRegistTempSaveProcess.class, createBatchParameter(), DbcTestDacBase.sqlSession);
 
             dbHelper.exportTableData(
@@ -85,7 +86,7 @@ public class KyufuKanrihyoInBatchRegistTempSaveProcessTest extends DbcTestDacBas
 
             HashMap<RString, Object> processParameter = new HashMap<>();
 
-            processParameter.put(KyufuKanrihyoInBatchRegistTempSaveProcess.PARAMETER_FILEPATH, new RString("C:/Users/N2810/shared/out/112old.csv"));
+            processParameter.put(KyufuKanrihyoInBatchRegistTempSaveProcess.PARAMETER_FILEPATH, new RString("C:/Users/N2810/shared/out/1122new.csv"));
 
             return processParameter;
         }
@@ -110,20 +111,28 @@ public class KyufuKanrihyoInBatchRegistTempSaveProcessTest extends DbcTestDacBas
 
         private CsvIgnoreColumns createCsvIgnoreColumunsCtrl() {
             List<RString> ignoreFields = new ArrayList<>();
-            ignoreFields.add(new RString("insertTimestamp"));
-            ignoreFields.add(new RString("lastUpdateTimestamp"));
+//            ignoreFields.add(new RString("insertTimestamp"));
+//            ignoreFields.add(new RString("lastUpdateTimestamp"));
             return new CsvIgnoreColumns(DbTKyufuInCtrlTempTableEntity.class, ignoreFields);
         }
 
         private CsvIgnoreColumns createCsvIgnoreColumunsData() {
             List<RString> ignoreFields = new ArrayList<>();
-            ignoreFields.add(new RString("insertTimestamp"));
-            ignoreFields.add(new RString("lastUpdateTimestamp"));
+//            ignoreFields.add(new RString("insertTimestamp"));
+//            ignoreFields.add(new RString("lastUpdateTimestamp"));
             return new CsvIgnoreColumns(DbTKyufukanrihyoDataTempTableEntity.class, ignoreFields);
         }
 
         private CsvFileOption createCsvFileOption() {
             return new CsvFileOption(new RString(","), new RString("\""), Encode.UTF_8);
+        }
+
+        private static void createTempTable() {
+            DbTKyufuInCtrlTempTableEntity ctrltemporayEntity = new DbTKyufuInCtrlTempTableEntity();
+            dbHelper.createTempTable(sqlSession, DbTKyufuInCtrlTempTableEntity.TABLE_NAME, ctrltemporayEntity);
+            DbTKyufukanrihyoDataTempTableEntity datatemporayEntity = new DbTKyufukanrihyoDataTempTableEntity();
+            dbHelper.createTempTable(sqlSession, DbTKyufukanrihyoDataTempTableEntity.TABLE_NAME, datatemporayEntity);
+
         }
 
     }

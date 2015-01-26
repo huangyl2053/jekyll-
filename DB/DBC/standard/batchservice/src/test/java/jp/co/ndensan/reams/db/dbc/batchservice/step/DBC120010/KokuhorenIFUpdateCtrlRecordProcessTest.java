@@ -11,7 +11,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3104KokuhorenInterfaceKanriEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbTKyufuInCtrlTempTableEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbTKyufukanrihyoDataTempTableEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
+import jp.co.ndensan.reams.ur.urz.batchservice.step.writer.BatchWriters;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process._BatchProcessChunkQueryExecutor;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.testhelper.CsvFileMatcher;
 import jp.co.ndensan.reams.uz.uza.testhelper.CsvFileOption;
 import jp.co.ndensan.reams.uz.uza.testhelper.CsvIgnoreColumns;
 import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -37,22 +43,25 @@ public class KokuhorenIFUpdateCtrlRecordProcessTest extends DbcTestDacBase {
     public static class Test_KokuhorenIFUpdateCtrlRecordProcess extends DbcTestDacBase {
 
         private static DbTestHelper dbHelper;
-        private static final RString 実行前状態BackUp用CSV_国保連ＩＦ管理 = new RString("bkup_KokuhorenIFUpdateCtrlRecordProcess_DbT3104KokuhorenInterfaceKanri.csv");
-        private static final RString 実行前状態BackUp用CSV_給付取込コントロールレコード = new RString("bkup_KokuhorenIFUpdateCtrlRecordProcess_DbTKyufuInCtrlTempTable.csv");
-        private static final RString 想定する実行前状態CSV_国保連ＩＦ管理 = new RString("before_KokuhorenIFUpdateCtrlRecordProcess_DbT3104KokuhorenInterfaceKanri.csv");
-        private static final RString 想定する実行前状態CSV_給付取込コントロールレコード = new RString("before_KokuhorenIFUpdateCtrlRecordProcess_DbTKyufuInCtrlTempTable.csv");
-        private static final RString 実行結果CSV = new RString("KokuhorenIFUpdateCtrlRecordProcessRunResult_DbT3104KokuhorenInterfaceKanri.csv");
-        private static final RString 想定結果CSV = new RString("KokuhorenIFUpdateCtrlRecordProcessResult_DbT3104KokuhorenInterfaceKanri.csv");
+        private static final RString 実行前状態BackUp用CSV_国保連ＩＦ管理 = new RString("KokuhorenIFUpdateCtrlRecordProcess_Bkup_DbT3104KokuhorenInterfaceKanri.csv");
+        private static final RString 実行前状態BackUp用CSV_給付取込コントロールレコード = new RString("KokuhorenIFUpdateCtrlRecordProcess_Bkup_DbTKyufuInCtrlTempTable.csv");
+        private static final RString 想定する実行前状態CSV_国保連ＩＦ管理 = new RString("KokuhorenIFUpdateCtrlRecordProcess_Before_DbT3104KokuhorenInterfaceKanri.csv");
+        private static final RString 想定する実行前状態CSV_給付取込コントロールレコード = new RString("KokuhorenIFUpdateCtrlRecordProcess_Before_DbTKyufuInCtrlTempTable.csv");
+        private static final RString 実行結果CSV = new RString("KokuhorenIFUpdateCtrlRecordProcess_RunResult_DbT3104KokuhorenInterfaceKanri.csv");
+        private static final RString 想定結果CSV = new RString("KokuhorenIFUpdateCtrlRecordProcess_Result_DbT3104KokuhorenInterfaceKanri.csv");
+
+        private static final RString 一時テーブル = new RString("DbTKyufuInCtrlTempTable");
 
         @BeforeClass
         public static void setUpClass() {
+            DbcTestDacBase.setUpClass();
             dbHelper = new DbTestHelper();
             setUpTestData(dbHelper);
         }
 
         @Test
         public void バッチ処理クラスを実行したとき_実行結果CSVは_想定結果CSVと一致する() {
-
+            createTempTable();
             BatchProcessTestHelper.execute(KokuhorenIFUpdateCtrlRecordProcess.class, createBatchParameter(), DbcTestDacBase.sqlSession);
 
             dbHelper.exportTableData(
@@ -67,12 +76,12 @@ public class KokuhorenIFUpdateCtrlRecordProcessTest extends DbcTestDacBase {
         private static void setUpTestData(DbTestHelper dbHelper) {
             dbHelper.exportTableData(
                     GyomuCode.DB介護保険, new RString("DbT3104KokuhorenInterfaceKanri"), getFilePath(実行前状態BackUp用CSV_国保連ＩＦ管理.toString()));
-            dbHelper.exportTableData(
-                    GyomuCode.DB介護保険, new RString("DbTKyufuInCtrlTempTable"), getFilePath(実行前状態BackUp用CSV_給付取込コントロールレコード.toString()));
+//            dbHelper.exportTableData(
+//                    GyomuCode.DB介護保険, new RString("DbTKyufuInCtrlTempTable"), getFilePath(実行前状態BackUp用CSV_給付取込コントロールレコード.toString()));
             dbHelper.cleanInsertTestDataFiles(
                     GyomuCode.DB介護保険, new RString("DbT3104KokuhorenInterfaceKanri"), getFilePath(想定する実行前状態CSV_国保連ＩＦ管理.toString()));
-            dbHelper.cleanInsertTestDataFiles(
-                    GyomuCode.DB介護保険, new RString("DbTKyufuInCtrlTempTable"), getFilePath(想定する実行前状態CSV_給付取込コントロールレコード.toString()));
+//            dbHelper.cleanInsertTestDataFiles(
+//                    GyomuCode.DB介護保険, new RString("DbTKyufuInCtrlTempTable"), getFilePath(想定する実行前状態CSV_給付取込コントロールレコード.toString()));
         }
 
         private HashMap<RString, Object> createBatchParameter() {
@@ -107,13 +116,21 @@ public class KokuhorenIFUpdateCtrlRecordProcessTest extends DbcTestDacBase {
 
         private CsvIgnoreColumns createCsvIgnoreColumuns() {
             List<RString> ignoreFields = new ArrayList<>();
-            ignoreFields.add(new RString("insertTimestamp"));
-            ignoreFields.add(new RString("lastUpdateTimestamp"));
+//            ignoreFields.add(new RString("insertTimestamp"));
+//            ignoreFields.add(new RString("lastUpdateTimestamp"));
             return new CsvIgnoreColumns(DbT3104KokuhorenInterfaceKanriEntity.class, ignoreFields);
         }
 
         private CsvFileOption createCsvFileOption() {
             return new CsvFileOption(new RString(","), new RString("\""), Encode.UTF_8);
+        }
+
+        private static void createTempTable() {
+            DbTKyufuInCtrlTempTableEntity temporayEntity = new DbTKyufuInCtrlTempTableEntity();
+            dbHelper.createTempTable(sqlSession, DbTKyufuInCtrlTempTableEntity.TABLE_NAME, temporayEntity);
+            dbHelper.cleanInsertTestDataFiles(
+                    sqlSession, new RString("DbTKyufuInCtrlTempTable"), getFilePath(想定する実行前状態CSV_給付取込コントロールレコード.toString()));
+
         }
 
     }

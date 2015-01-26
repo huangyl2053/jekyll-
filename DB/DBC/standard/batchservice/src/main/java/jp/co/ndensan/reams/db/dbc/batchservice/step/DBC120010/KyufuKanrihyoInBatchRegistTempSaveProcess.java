@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.KyufuKanrihyoInBatch;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbTKyufuInCtrlTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbTKyufukanrihyoDataTempTableEntity;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
@@ -34,13 +35,13 @@ public class KyufuKanrihyoInBatchRegistTempSaveProcess extends BatchProcessBase<
 
     //IBatchWriterを実装したクラス
     @BatchWriter
-//    BatchEntityCreatedTempTableWriter kyufuInCtrlTempTableWriter;
-    BatchPermanentTableWriter kyufuInCtrlTempTableWriter;
+    BatchEntityCreatedTempTableWriter kyufuInCtrlTempTableWriter;
+//    BatchPermanentTableWriter kyufuInCtrlTempTableWriter;
 
     //IBatchWriterを実装したクラス
     @BatchWriter
-//    BatchEntityCreatedTempTableWriter kyufuKanrihyoDataTempTableWriter;
-    BatchPermanentTableWriter kyufuKanrihyoDataTempTableWriter;
+    BatchEntityCreatedTempTableWriter kyufuKanrihyoDataTempTableWriter;
+//    BatchPermanentTableWriter kyufuKanrihyoDataTempTableWriter;
 
     @Override
     protected IBatchReader createReader() {
@@ -50,13 +51,12 @@ public class KyufuKanrihyoInBatchRegistTempSaveProcess extends BatchProcessBase<
     @Override
     protected void createWriter() {
 
-        // TODO 永続テーブル用のクラスを呼んでいるが、実際は一時テーブル用のクラスを呼ぶようにする
         kyufuInCtrlTempTableWriter
-                = new BatchPermanentTableWriter(DbTKyufuInCtrlTempTableEntity.class);
-//                = new BatchEntityCreatedTempTableWriter(DbTKyufuInCtrlTempTableEntity.TABLE_NAME, DbTKyufuInCtrlTempTableEntity.class);
+                //                = new BatchPermanentTableWriter(DbTKyufuInCtrlTempTableEntity.class);
+                = new BatchEntityCreatedTempTableWriter(DbTKyufuInCtrlTempTableEntity.TABLE_NAME, DbTKyufuInCtrlTempTableEntity.class);
         kyufuKanrihyoDataTempTableWriter
-                = new BatchPermanentTableWriter(DbTKyufukanrihyoDataTempTableEntity.class);
-//                = new BatchEntityCreatedTempTableWriter(DbTKyufukanrihyoDataTempTableEntity.TABLE_NAME, DbTKyufukanrihyoDataTempTableEntity.class);
+                //                = new BatchPermanentTableWriter(DbTKyufukanrihyoDataTempTableEntity.class);
+                = new BatchEntityCreatedTempTableWriter(DbTKyufukanrihyoDataTempTableEntity.TABLE_NAME, DbTKyufukanrihyoDataTempTableEntity.class);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class KyufuKanrihyoInBatchRegistTempSaveProcess extends BatchProcessBase<
         List<RString> data = line.split(区切り文字);
         switch (data.get(レコード種別).toString()) {
             case "1": //コントロールレコード
-                kyufuInCtrlTempTableWriter.insert(business.CreateControlRecord(data));
+                kyufuInCtrlTempTableWriter.insert(business.CreateControlRecord(data, filePath.getValue()));
                 break;
             case "2": //データレコード
                 kyufuKanrihyoDataTempTableWriter.insert(business.CreateDataRecord(data));

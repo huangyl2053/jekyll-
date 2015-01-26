@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchservice.step.DBC120010;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
@@ -38,6 +39,8 @@ public class SharedFileCopy extends SimpleBatchProcessBase {
     //パラメータ引渡変数
     OutputParameter<HashMap<RString, RString>> filePathList;
 
+    public final RString 拡張子CSV = new RString("csv");
+
     @Override
     protected void process() {
 
@@ -52,12 +55,25 @@ public class SharedFileCopy extends SimpleBatchProcessBase {
             if (atoSharedName.compareTo(maeSharedName) == 0) {
             } else {
                 SharedFile.copyToLocal(FilesystemName.fromString(atoSharedName), FilesystemPath.fromString(filePath.getValue()));
-                fileList.put(sharedfile.getSharedFileName(), filePath.getValue().concat(atoSharedName));
+                fileList.put(sharedfile.getSharedFileName(), getFileFullPath(filePath.getValue(), atoSharedName));
                 maeSharedName = atoSharedName;
             }
         }
 
+        filePathList = new OutputParameter<>();
         filePathList.setValue(fileList);
+
+    }
+
+    private RString getFileFullPath(RString checkFilePath, RString checkSharedName) {
+
+        // TODO ファイル指定で共有ファイルに指定できればいいのだが、現状でフォルダ指定でしか出来ないため、その考慮
+        if (checkSharedName.substringReturnAsPossible(checkFilePath.length() - 3, checkFilePath.length()).equalsIgnoreCase(拡張子CSV)) {
+            return checkFilePath.concat(checkSharedName);
+        } else {
+
+            return checkFilePath.concat(checkSharedName).concat("/").concat(checkSharedName).concat(".").concat(拡張子CSV);
+        }
 
     }
 

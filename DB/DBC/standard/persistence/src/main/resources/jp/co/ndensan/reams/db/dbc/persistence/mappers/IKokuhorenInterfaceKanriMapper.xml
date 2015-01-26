@@ -13,26 +13,31 @@ and open the template in the editor.
         select * from rgdb."DbT3104KokuhorenInterfaceKanri" where "shoriYM" = #{shoriYM} and "kokanShikibetsuNo" = #{kokanShikibetsuNo}
     </select>
 
+    <update id="shoriJotaiKubunUpdater" parameterType="java.util.Map" >
+        UPDATE rgdb."DbT3104KokuhorenInterfaceKanri"
+        SET "shoriJotaiKubun" = #{shoriJotaiKubun}
+        WHERE "shoriYM" = #{shoriYM} and "kokanShikibetsuNo" = #{kokanShikibetsuNo}
+    </update>
+
     <update id="torikomiShoriUpdater" parameterType="java.util.Map" >
         UPDATE rgdb."DbT3104KokuhorenInterfaceKanri"
         SET
         "sofuTorikomiKubun"='2',
-        "shoriJotaiKubun"='3',
         "shoriJisshiTimestamp" = #{shoriNichiji},
         "saiShoriKahiKubun" = False,
         "shoriJikkoKaisu" = COALESCE(cast("shoriJikkoKaisu" as int8),0) + 1,
         "fileName1" = #{fileName},
-        "fileKensu1"= (select count(*) from rgdb."DbTKyufuInCtrlTempTable"),
+        "fileKensu1"= (select count(*) from "DbTKyufuInCtrlTempTable"),
         "saiShoriFukaKubun" = False ,
-        "ctrlRecordKensu" = COALESCE((select sum(cast("recordKensu" as decimal)) from rgdb."DbTKyufuInCtrlTempTable"
+        "ctrlRecordKensu" = COALESCE((select sum(cast("recordKensu" as decimal)) from "DbTKyufuInCtrlTempTable"
         where "fileBunruiCode" != '0111' group by "dataShubetsu", "shoriTaishoYM" ),0),
-        "ctrlShoriYM"= (select "shoriTaishoYM" from rgdb."DbTKyufuInCtrlTempTable"
+        "ctrlShoriYM"= (select "shoriTaishoYM" from "DbTKyufuInCtrlTempTable"
         where "fileBunruiCode" != '0111' group by "dataShubetsu", "shoriTaishoYM" ),
-        "kagoCtrlRecordKensu"= COALESCE((select sum(cast("recordKensu" as decimal))from rgdb."DbTKyufuInCtrlTempTable"
+        "kagoCtrlRecordKensu"= COALESCE((select sum(cast("recordKensu" as decimal))from "DbTKyufuInCtrlTempTable"
         where "fileBunruiCode" = '0111' group by "dataShubetsu", "shoriTaishoYM"),0) ,
-        "kagoCtrlShoriYM"= (select "shoriTaishoYM" from rgdb."DbTKyufuInCtrlTempTable"
+        "kagoCtrlShoriYM"= (select "shoriTaishoYM" from "DbTKyufuInCtrlTempTable"
         where "fileBunruiCode" = '0111' group by "dataShubetsu", "shoriTaishoYM" ),
-        "jissekiDataShinsaYM"= (select "jissekiDataShinsaYM" from rgdb."DbTKyufuInCtrlTempTable"
+        "jissekiDataShinsaYM"= (select "jissekiDataShinsaYM" from "DbTKyufuInCtrlTempTable"
         where "jissekiDataShinsaYM" is not null
         group by "dataShubetsu", "shoriTaishoYM" , "jissekiDataShinsaYM" )
         WHERE "shoriYM" = #{shoriYM} and "kokanShikibetsuNo" = #{kokanShikibetsuNo}

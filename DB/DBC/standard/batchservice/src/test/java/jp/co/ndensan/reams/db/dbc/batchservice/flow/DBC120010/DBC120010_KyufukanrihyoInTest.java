@@ -40,19 +40,27 @@ public class DBC120010_KyufukanrihyoInTest extends DbcTestDacBase {
     private static final RString batchID = new RString("DBC120010");
     private static final RString batchName = new RString("給付管理票情報取込");
 
-    private static final RString 実行前状態BackUp用CSV_給付管理票200004 = new RString("bkup_DbT3015KyufuKanrihyo200004.csv");
-    private static final RString 実行前状態BackUp用CSV_給付管理票200604 = new RString("bkup_DbT3015KyufuKanrihyo200604.csv");
-    private static final RString 実行前状態BackUp用CSV_国保連ＩＦ管理 = new RString("bkup_DbT3104KokuhorenInterfaceKanri.csv");
+    private static final RString 実行前状態BackUp用CSV_給付管理票200004 = new RString("DBC120010_Bkup_DbT3014KyufuKanrihyo200004.csv");
+    private static final RString 実行前状態BackUp用CSV_給付管理票200604 = new RString("DBC120010_Bkup_DbT3015KyufuKanrihyo200604.csv");
+    private static final RString 実行前状態BackUp用CSV_国保連ＩＦ管理 = new RString("DBC120010_Bkup_DbT3104KokuhorenInterfaceKanri.csv");
 
-    private static final RString 想定する実行前状態CSV_給付管理票200004 = new RString("before_DbT3015KyufuKanrihyo200004.csv");
-    private static final RString 想定する実行前状態CSV_給付管理票200604 = new RString("before_DbT3015KyufuKanrihyo200604.csv");
-    private static final RString 想定する実行前状態CSV_国保連ＩＦ管理 = new RString("before_DbT3104KokuhorenInterfaceKanri.csv");
+//    private static final RString 想定する実行前状態CSV_給付管理票200004 = new RString("before_DbT3015KyufuKanrihyo200004.csv");
+//    private static final RString 想定する実行前状態CSV_給付管理票200604 = new RString("before_DbT3015KyufuKanrihyo200604.csv");
+    private static final RString 想定する実行前状態CSV_国保連ＩＦ管理 = new RString("DBC120010_Before_DbT3104KokuhorenInterfaceKanri.csv");
+    private static final RString 実行結果CSV_国保連ＩＦ管理 = new RString("DBC120010_RunResult_DbT3104KokuhorenInterfaceKanri.csv");
+    private static final RString 実行結果CSV_給付管理票200004 = new RString("DBC120010_RunResult_DbT3014KyufuKanrihyo200004.csv");
+    private static final RString 実行結果CSV_給付管理票200604 = new RString("DBC120010_RunResult_DbT3015KyufuKanrihyo200604.csv");
 
-    public static class Test_DBC120010_KyufukanrihyoIn extends DbcTestDacBase {
+    private static final RString 想定結果CSV_国保連ＩＦ管理 = new RString("DBC120010_Result_DbT3104KokuhorenInterfaceKanri.csv");
+    private static final RString 想定結果CSV_給付管理票200004 = new RString("DBC120010_Result_DbT3014KyufuKanrihyo200004.csv");
+    private static final RString 想定結果CSV_給付管理票200604 = new RString("DBC120010_Result_DbT3015KyufuKanrihyo200604.csv");
+
+    public static class 給付管理票情報取込バッチ_バッチフローテスト extends DbcTestDacBase {
 
         @BeforeClass
         public static void setUpClass() {
 
+            DbcTestDacBase.setUpClass();
             dbHelper = new DbTestHelper();
             setUpTestData(dbHelper);
 
@@ -62,9 +70,9 @@ public class DBC120010_KyufukanrihyoInTest extends DbcTestDacBase {
         }
 
         @Test
-        public void DBC120010_KyufukanrihyoInのテスト() {
+        public void Resultは_SUCCESSとなる() {
 
-//            createSharedFile();
+            createSharedFile();
             BatchFlowTestHelper testhelper = new BatchFlowTestHelper();
             result = testhelper.executeFlow(batchID, batchName, DBC120010_KyufukanrihyoIn.class, parameter);
             assertThat(result.getStatus(), is(BatchExitStatus.Status.SUCCESS));
@@ -76,42 +84,38 @@ public class DBC120010_KyufukanrihyoInTest extends DbcTestDacBase {
         }
 
         private void createSharedFile() {
-            FilesystemName fileName1 = FilesystemName.fromString("121000");
-            FilesystemName fileName2 = FilesystemName.fromString("121001");
+            FilesystemName fileName1 = FilesystemName.fromString("11210000");
+            FilesystemName fileName2 = FilesystemName.fromString("11220000");
             SharedFile.defineSharedFile(fileName1);
             SharedFile.defineSharedFile(fileName2);
             SharedFile.deleteNewestEntry(new SharedFileDescriptor(fileName1));
             SharedFile.deleteNewestEntry(new SharedFileDescriptor(fileName2));
             SharedFile.copyToSharedFile(FilesystemPath.fromString(System.getenv("USERPROFILE") + "/shared/" + fileName1.toString() + "/"), fileName1);
             SharedFile.copyToSharedFile(FilesystemPath.fromString(System.getenv("USERPROFILE") + "/shared/" + fileName2.toString() + "/"), fileName2);
+
         }
 
         private static void setUpTestData(DbTestHelper dbHelper) {
             dbHelper.exportTableData(
-                    GyomuCode.DB介護保険, new RString("DbT3015KyufuKanrihyo200004"), getFilePath(実行前状態BackUp用CSV_給付管理票200004.toString()));
+                    GyomuCode.DB介護保険, new RString("DbT3014KyufuKanrihyo200004"), getFilePath(実行前状態BackUp用CSV_給付管理票200004.toString()));
             dbHelper.exportTableData(
                     GyomuCode.DB介護保険, new RString("DbT3015KyufuKanrihyo200604"), getFilePath(実行前状態BackUp用CSV_給付管理票200604.toString()));
             dbHelper.exportTableData(
                     GyomuCode.DB介護保険, new RString("DbT3104KokuhorenInterfaceKanri"), getFilePath(実行前状態BackUp用CSV_国保連ＩＦ管理.toString()));
 
-            dbHelper.cleanInsertTestDataFiles(
-                    GyomuCode.DB介護保険, new RString("DbT3015KyufuKanrihyo200004"), getFilePath(想定する実行前状態CSV_給付管理票200004.toString()));
-            dbHelper.cleanInsertTestDataFiles(
-                    GyomuCode.DB介護保険, new RString("DbT3015KyufuKanrihyo200604"), getFilePath(想定する実行前状態CSV_給付管理票200604.toString()));
             dbHelper.cleanInsertTestDataFiles(
                     GyomuCode.DB介護保険, new RString("DbT3104KokuhorenInterfaceKanri"), getFilePath(想定する実行前状態CSV_国保連ＩＦ管理.toString()));
         }
 
         private static void tearDownTestData(DbTestHelper dbHelper) {
-
             dbHelper.cleanInsertTestDataFiles(
-                    GyomuCode.DB介護保険, new RString("DbT3015KyufuKanrihyo200004"), getFilePath(想定する実行前状態CSV_給付管理票200004.toString()));
+                    GyomuCode.DB介護保険, new RString("DbT3014KyufuKanrihyo200004"), getFilePath(実行前状態BackUp用CSV_給付管理票200004.toString()));
             dbHelper.cleanInsertTestDataFiles(
                     GyomuCode.DB介護保険, new RString("DbT3015KyufuKanrihyo200604"), getFilePath(実行前状態BackUp用CSV_給付管理票200604.toString()));
             dbHelper.cleanInsertTestDataFiles(
                     GyomuCode.DB介護保険, new RString("DbT3104KokuhorenInterfaceKanri"), getFilePath(実行前状態BackUp用CSV_国保連ＩＦ管理.toString()));
 
-            new File(getFilePath(想定する実行前状態CSV_給付管理票200004.toString()).toString()).delete();
+            new File(getFilePath(実行前状態BackUp用CSV_給付管理票200004.toString()).toString()).delete();
             new File(getFilePath(実行前状態BackUp用CSV_給付管理票200604.toString()).toString()).delete();
             new File(getFilePath(実行前状態BackUp用CSV_国保連ＩＦ管理.toString()).toString()).delete();
         }
@@ -120,7 +124,7 @@ public class DBC120010_KyufukanrihyoInTest extends DbcTestDacBase {
             parameter.setShoriYM(new RString("201410"));
             parameter.setShoriNichiji(new RString("20000102030405"));
             parameter.setKokanjohoShikibetsuNo(new RString("121"));
-            parameter.setShutsuryokujunID(new RString("521"));
+            parameter.setShutsuryokujunID(new RString("1"));
             parameter.setSaishoriKubun(new RString("1"));
             parameter.setHokenshaKoseiKubun(new RString("2"));
             parameter.setGappeiJohoKubun(new RString("3"));

@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbc.batchservice.step.DBC120010.KyufuKanrihyoDelet
 import jp.co.ndensan.reams.db.dbc.batchservice.step.DBC120010.KyufuKanrihyoInBatchRegistFileReadProcess;
 import jp.co.ndensan.reams.db.dbc.batchservice.step.DBC120010.KyufuKanrihyoInBatchRegistTempSaveProcess;
 import jp.co.ndensan.reams.db.dbc.batchservice.step.DBC120010.SharedFileCopy;
+import jp.co.ndensan.reams.db.dbc.batchservice.step.KyufuKanrihyoInBatchRegistCsvOutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchservice.step.KyufuKanrihyoInBatchRegistGetEditInfoProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.KokuhorenJohoTorikomiBatchParameter;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysKokuhorenTorikomi;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.IcchiJoken;
@@ -40,8 +42,9 @@ public class DBC120010_KyufukanrihyoIn extends BatchFlowBase<KokuhorenJohoToriko
     private static final String KOKUHORENIFKANRI_UPDATE_FINISH = "kokuhorenIFFinishUpdataProcess";
 
     private final RString 再処理 = new RString("1");
+    private final RString sharedFileKey = new RString("112");
+    private RString runFilePath;
 
-//    private List<RString> sharedFileNameList;
     @Override
     protected void defineFlow() {
 
@@ -50,7 +53,13 @@ public class DBC120010_KyufukanrihyoIn extends BatchFlowBase<KokuhorenJohoToriko
             executeStep(new RString(KYUFUKANRIHYO_DELETE));             //再処理の場合、両給付管理票テーブルの該当処理年月のデータを削除する
         }
         executeStep(new RString(SHAREDFILE_COPY));                      //処理対象の共有ファイルをローカルへコピー
-        executeStep(new RString(TEMP_SAVE_PROCESS));                    //コピーしてきたCSVを一時テーブルに格納
+
+        HashMap<RString, RString> filePathList = getResult(HashMap.class, new RString(SHAREDFILE_COPY), SharedFileCopy.PARAMETER_OUT_FILEPATHLIST);
+        for (RString filepath : filePathList.values()) {
+            runFilePath = filepath;
+            executeStep(new RString(TEMP_SAVE_PROCESS));                //コピーしてきたCSVを一時テーブルに格納
+        }
+
         executeStep(new RString(GET_EDIT_INFO));                        //給付管理票テーブル、取込結果一覧ＣＳＶで必要な情報を一時テーブルに設定する
         executeStep(new RString(FILE_READ_PROCESS));                    //給付管理票テーブルにデータを追加する
         executeStep(new RString(CSV_OUTPUT_PROCESS));                   //給付管理票取込結果一覧表とＣＳＶを出力する
@@ -65,7 +74,7 @@ public class DBC120010_KyufukanrihyoIn extends BatchFlowBase<KokuhorenJohoToriko
         processParameter.put(KokuhorenIFUpdataProcess.PARAMETER_SHORIYM, getParameter().getShoriYM());
         processParameter.put(KokuhorenIFUpdataProcess.PARAMETER_KOKANSHIKIBETSUNO, getParameter().getKokanjohoShikibetsuNo());
         processParameter.put(KokuhorenIFUpdataProcess.PARAMETER_SHORIJOTAIKUBUN, KokuhorenIFShoriJotaiKubun.処理中.getKubun());
-        return loopBatch(KokuhorenIFUpdataProcess.class)
+        return simpleBatch(KokuhorenIFUpdataProcess.class)
                 .arguments(processParameter)
                 .define();
     }
@@ -83,46 +92,45 @@ public class DBC120010_KyufukanrihyoIn extends BatchFlowBase<KokuhorenJohoToriko
     @Step(SHAREDFILE_COPY)
     IBatchFlowCommand sharedFileCopy() {
         Map<RString, Object> processParameter = new HashMap<>();
-        processParameter.put(SharedFileCopy.PARAMETER_IN_FILEPATH, new RString(System.getenv("USERPROFILE").replace('\\', '/') + "/shared/test/"));
-        processParameter.put(SharedFileCopy.PARAMETER_IN_SHAREDNAME, ConfigKeysKokuhorenTorikomi.給付管理票情報.getCode());
+        // TODO 業務内共通のフォルダが決まっていない
+        processParameter.put(SharedFileCopy.PARAMETER_IN_FILEPATH, new RString(System.getenv("USERPROFILE").replace('\\', '/') + "/shared/"));
+        processParameter.put(SharedFileCopy.PARAMETER_IN_SHAREDNAME, sharedFileKey);
         processParameter.put(SharedFileCopy.PARAMETER_IN_ICCHIJOKEN, IcchiJoken.前方一致);
 
         return simpleBatch(SharedFileCopy.class)
                 .arguments(processParameter)
                 .define();
-
     }
 
     @Step(TEMP_SAVE_PROCESS)
     IBatchFlowCommand kyufuKanrihyoInBatchRegistTempSaveProcess() {
 
-        IBatchFlowCommand BFC = null;
         Map<RString, Object> processParameter = new HashMap<>();
-        HashMap<RString, RString> filePathList = getResult(HashMap.class, new RString(SHAREDFILE_COPY), SharedFileCopy.PARAMETER_OUT_FILEPATHLIST);
-        for (RString filepath : filePathList.values()) {
-            processParameter.put(KyufuKanrihyoInBatchRegistTempSaveProcess.PARAMETER_FILEPATH, filepath);
+        processParameter.put(KyufuKanrihyoInBatchRegistTempSaveProcess.PARAMETER_FILEPATH, runFilePath);
 
-            BFC = loopBatch(KyufuKanrihyoInBatchRegistTempSaveProcess.class)
-                    .arguments(processParameter)
-                    .define();
-            processParameter.clear();
-        }
+        return loopBatch(KyufuKanrihyoInBatchRegistTempSaveProcess.class)
+                .arguments(processParameter)
+                .define();
+//        }
 
-        return BFC;
-
+//        return BFC;
     }
 
     @Step(GET_EDIT_INFO)
     IBatchFlowCommand kyufuKanrihyoInBatchRegistGetEditInfoProcess() {
-        // TODO 宮本さん作成中
-        return null;
+        Map<RString, Object> processParameter = new HashMap<>();
+
+        return simpleBatch(KyufuKanrihyoInBatchRegistGetEditInfoProcess.class)
+                .arguments(processParameter)
+                .define();
+
     }
 
     @Step(FILE_READ_PROCESS)
     IBatchFlowCommand kyufuKanrihyoInBatchRegistFileReadProcess() {
 
         Map<RString, Object> processParameter = new HashMap<>();
-        processParameter.put(KyufuKanrihyoInBatchRegistFileReadProcess.PARAMETER_SHORIYM, getParameter().getShoriYM());
+        processParameter.put(KyufuKanrihyoInBatchRegistFileReadProcess.PARAMETER_SHORINENGETSU, getParameter().getShoriNichiji());
         return loopBatch(KyufuKanrihyoInBatchRegistFileReadProcess.class)
                 .arguments(processParameter)
                 .define();
@@ -130,8 +138,11 @@ public class DBC120010_KyufukanrihyoIn extends BatchFlowBase<KokuhorenJohoToriko
 
     @Step(CSV_OUTPUT_PROCESS)
     IBatchFlowCommand kyufuKanrihyoInBatchRegistCsvOutputProcess() {
-        //TODO 宮本さん作成中
-        return null;
+        Map<RString, Object> processParameter = new HashMap<>();
+        processParameter.put(KyufuKanrihyoInBatchRegistCsvOutputProcess.INPUT_PARAM_KEY_出力順ID, Long.parseLong(getParameter().getShutsuryokujunID().toString()));
+        return loopBatch(KyufuKanrihyoInBatchRegistCsvOutputProcess.class)
+                .arguments(processParameter)
+                .define();
     }
 
     @Step(KOKUHORENIFKANRI_UPDATE_CTRLRECORD)
@@ -155,7 +166,7 @@ public class DBC120010_KyufukanrihyoIn extends BatchFlowBase<KokuhorenJohoToriko
         processParameter.put(KokuhorenIFUpdataProcess.PARAMETER_SHORIYM, getParameter().getShoriYM());
         processParameter.put(KokuhorenIFUpdataProcess.PARAMETER_KOKANSHIKIBETSUNO, getParameter().getKokanjohoShikibetsuNo());
         processParameter.put(KokuhorenIFUpdataProcess.PARAMETER_SHORIJOTAIKUBUN, KokuhorenIFShoriJotaiKubun.処理済.getKubun());
-        return loopBatch(KokuhorenIFUpdataProcess.class)
+        return simpleBatch(KokuhorenIFUpdataProcess.class)
                 .arguments(processParameter)
                 .define();
     }

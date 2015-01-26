@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3015KyufuKanrihyo200604Entity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.BatchProcessTestHelper;
 import jp.co.ndensan.reams.uz.uza.testhelper.CsvFileMatcher;
@@ -32,22 +33,23 @@ import org.junit.runner.RunWith;
  * @author N2810 久保 里史
  */
 @RunWith(Enclosed.class)
-public class KyufuKanrihyoDeleteProcessTest {
+public class KyufuKanrihyoDeleteProcessTest extends DbcTestDacBase {
 
     public static class Test_KyufuKanrihyoDeleteProcess extends DbcTestDacBase {
 
         private static DbTestHelper dbHelper;
-        private static final RString 実行前状態BackUp用CSV_給付管理票200004 = new RString("bkup_KyufuKanrihyoDeleteProcess_DbT3014KyufuKanrihyo200004.csv");
-        private static final RString 実行前状態BackUp用CSV_給付管理票200604 = new RString("bkup_KyufuKanrihyoDeleteProcess_DbT3015KyufuKanrihyo200604.csv");
-        private static final RString 想定する実行前状態CSV_給付管理票200004 = new RString("before_KyufuKanrihyoDeleteProcess_DbT3014KyufuKanrihyo200004.csv");
-        private static final RString 想定する実行前状態CSV_給付管理票200604 = new RString("before_KyufuKanrihyoDeleteProcess_DbT3015KyufuKanrihyo200604.csv");
-        private static final RString 実行結果CSV_給付管理票200004 = new RString("KyufuKanrihyoDeleteProcessRunResult_DbT3014KyufuKanrihyo200004.csv");
-        private static final RString 実行結果CSV_給付管理票200604 = new RString("KyufuKanrihyoDeleteProcessRunResult_DbT3015KyufuKanrihyo200604.csv");
-        private static final RString 想定結果CSV_給付管理票200004 = new RString("KyufuKanrihyoDeleteProcessResult_DbT3014KyufuKanrihyo200004.csv");
-        private static final RString 想定結果CSV_給付管理票200604 = new RString("KyufuKanrihyoDeleteProcessResult_DbT3015KyufuKanrihyo200604.csv");
+        private static final RString 実行前状態BackUp用CSV_給付管理票200004 = new RString("KyufuKanrihyoDeleteProcess_Bkup_DbT3014KyufuKanrihyo200004.csv");
+        private static final RString 実行前状態BackUp用CSV_給付管理票200604 = new RString("KyufuKanrihyoDeleteProcess_Bkup_DbT3015KyufuKanrihyo200604.csv");
+        private static final RString 想定する実行前状態CSV_給付管理票200004 = new RString("KyufuKanrihyoDeleteProcess_Before_DbT3014KyufuKanrihyo200004.csv");
+        private static final RString 想定する実行前状態CSV_給付管理票200604 = new RString("KyufuKanrihyoDeleteProcess_Before_DbT3015KyufuKanrihyo200604.csv");
+        private static final RString 実行結果CSV_給付管理票200004 = new RString("KyufuKanrihyoDeleteProcess_RunResult_DbT3014KyufuKanrihyo200004.csv");
+        private static final RString 実行結果CSV_給付管理票200604 = new RString("KyufuKanrihyoDeleteProcess_RunResult_DbT3015KyufuKanrihyo200604.csv");
+        private static final RString 想定結果CSV_給付管理票200004 = new RString("KyufuKanrihyoDeleteProcess_Result_DbT3014KyufuKanrihyo200004.csv");
+        private static final RString 想定結果CSV_給付管理票200604 = new RString("KyufuKanrihyoDeleteProcess_Result_DbT3015KyufuKanrihyo200604.csv");
 
         @BeforeClass
         public static void setUpClass() {
+            DbcTestDacBase.setUpClass();
             dbHelper = new DbTestHelper();
             setUpTestData(dbHelper);
         }
@@ -56,6 +58,7 @@ public class KyufuKanrihyoDeleteProcessTest {
         public void バッチ処理クラスを実行したとき_実行結果CSVは_想定結果CSVと一致する() {
 
             BatchProcessTestHelper.execute(KyufuKanrihyoDeleteProcess.class, createBatchParameter(), DbcTestDacBase.sqlSession);
+            DbcTestDacBase.sqlSession.commit();
 
             dbHelper.exportTableData(
                     DbcTestDacBase.sqlSession, DbT3014KyufuKanrihyo200004Entity.TABLE_NAME, getFilePath(実行結果CSV_給付管理票200004.toString()));
@@ -71,7 +74,6 @@ public class KyufuKanrihyoDeleteProcessTest {
             File expected200604 = new File(getFilePath(想定結果CSV_給付管理票200604.toString()).toString());
 
             assertThat(actual200604, is(CsvFileMatcher.sameCsvFileOf(expected200604, createCsvIgnoreColumuns200604(), createCsvFileOption())));
-
         }
 
         private static void setUpTestData(DbTestHelper dbHelper) {
@@ -88,7 +90,7 @@ public class KyufuKanrihyoDeleteProcessTest {
 
         private HashMap<RString, Object> createBatchParameter() {
             HashMap<RString, Object> processParameter = new HashMap<>();
-            processParameter.put(KyufuKanrihyoDeleteProcess.PARAMETER_SHORIYM, new RString("201411"));
+            processParameter.put(KyufuKanrihyoDeleteProcess.PARAMETER_SHORIYM, new RString("201502"));
             return processParameter;
         }
 
@@ -112,15 +114,15 @@ public class KyufuKanrihyoDeleteProcessTest {
 
         private CsvIgnoreColumns createCsvIgnoreColumuns200004() {
             List<RString> ignoreFields = new ArrayList<>();
-            ignoreFields.add(new RString("insertTimestamp"));
-            ignoreFields.add(new RString("lastUpdateTimestamp"));
+//            ignoreFields.add(new RString("insertTimestamp"));
+//            ignoreFields.add(new RString("lastUpdateTimestamp"));
             return new CsvIgnoreColumns(DbT3014KyufuKanrihyo200004Entity.class, ignoreFields);
         }
 
         private CsvIgnoreColumns createCsvIgnoreColumuns200604() {
             List<RString> ignoreFields = new ArrayList<>();
-            ignoreFields.add(new RString("insertTimestamp"));
-            ignoreFields.add(new RString("lastUpdateTimestamp"));
+//            ignoreFields.add(new RString("insertTimestamp"));
+//            ignoreFields.add(new RString("lastUpdateTimestamp"));
             return new CsvIgnoreColumns(DbT3015KyufuKanrihyo200604Entity.class, ignoreFields);
         }
 

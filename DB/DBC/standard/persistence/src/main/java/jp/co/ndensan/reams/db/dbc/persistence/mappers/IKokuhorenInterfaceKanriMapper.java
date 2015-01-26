@@ -19,5 +19,8 @@ public interface IKokuhorenInterfaceKanriMapper {
     List<DbT3104KokuhorenInterfaceKanriEntity> selectbyKey(Map<String, Object> parameter);
 
     //update
+    Integer shoriJotaiKubunUpdater(Map<String, Object> parameter);
+
     Integer torikomiShoriUpdater(Map<String, Object> parameter);
+
 }

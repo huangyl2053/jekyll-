@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class KyufuKanrihyoInBatch {
 
-    public DbTKyufuInCtrlTempTableEntity CreateControlRecord(List<RString> input) {
+    public DbTKyufuInCtrlTempTableEntity CreateControlRecord(List<RString> input, RString filtpath) {
 
         DbTKyufuInCtrlTempTableEntity result = new DbTKyufuInCtrlTempTableEntity();
         KyufuKanrihyoCSVHeaderEntity entity = ListToObjectMappingHelper.toObject(KyufuKanrihyoCSVHeaderEntity.class, input);
@@ -45,6 +45,10 @@ public class KyufuKanrihyoInBatch {
         result.setShoriTaishoYM(trim囲み文字(entity.getShoritaishoYM()));
         result.setFileKanriNo(trim囲み文字(entity.getFilekanriNo()));
 
+        List<RString> filepathlist = filtpath.split("/");
+        RString filename = filepathlist.get(filepathlist.size() - 1);
+        result.setFileBunruiCode(filename.substringReturnAsPossible(0, 4));
+        result.setJissekiDataShinsaYM(RString.EMPTY);
         return result;
     }
 
@@ -88,13 +92,16 @@ public class KyufuKanrihyoInBatch {
         return result;
     }
 
-    public DbT3014KyufuKanrihyo200004Entity CreateKyufuKanrihyo200004Record(DbTKyufukanrihyoDataTempTableEntity input, RString shoriYM) {
+    public DbT3014KyufuKanrihyo200004Entity CreateKyufuKanrihyo200004Record(DbTKyufukanrihyoDataTempTableEntity input, RString shoriNengetsu) {
 
         DbT3014KyufuKanrihyo200004Entity result = new DbT3014KyufuKanrihyo200004Entity();
 
         result.setShinsaYM(new FlexibleYearMonth(input.getShinsaYM()));
         result.setServiceTeikyoYM(new FlexibleYearMonth(input.getTaishoYM()));
-        result.setShokisaiHokenshaNo(input.getShokisaiHokenshaNo());
+
+        // TODO 広域の場合は被保険者番号、給付対象年月時点の証保険者番号を取得し設定する(仕様未決定
+        result.setShokisaiHokenshaNo(input.getHokenshaNo());
+
         result.setKyotakushienJigyoshoNo(input.getKyotakuShienJigyoshoNo());
         result.setKyufuKanrihyoSakuseiKubunCode(input.getKyufukanrihyoSakuseiKubunCode());
         result.setKyufuKanrihyoSakuseiYMD(new FlexibleDate(input.getKyufukanrihyoSakuseiYMD()));
@@ -118,18 +125,21 @@ public class KyufuKanrihyoInBatch {
         result.setKijyunGaitoServiceSubTotal(checkDecimal(input.getKijunGaitoServiceShokei()));
         result.setKyufuKeikakuTotalTanisuNissu(checkDecimal(input.getKyufuKeikakuGokeiTanisuNissu()));
 
-        result.setTorikomiYM(new FlexibleYearMonth(shoriYM));
+        result.setTorikomiYM(new FlexibleYearMonth(shoriNengetsu.substringReturnAsPossible(0, 6)));
 
         return result;
     }
 
-    public DbT3015KyufuKanrihyo200604Entity CreateKyufuKanrihyo200604Record(DbTKyufukanrihyoDataTempTableEntity input, RString shoriYM) {
+    public DbT3015KyufuKanrihyo200604Entity CreateKyufuKanrihyo200604Record(DbTKyufukanrihyoDataTempTableEntity input, RString shoriNengetsu) {
 
         DbT3015KyufuKanrihyo200604Entity result = new DbT3015KyufuKanrihyo200604Entity();
 
         result.setShinsaYM(new FlexibleYearMonth(input.getShinsaYM()));
         result.setServiceTeikyoYM(new FlexibleYearMonth(input.getTaishoYM()));
-        result.setShokisaiHokenshaNo(input.getShokisaiHokenshaNo());
+
+        // TODO 広域の場合は被保険者番号、給付対象年月時点の証保険者番号を取得し設定する(仕様未決定
+        result.setShokisaiHokenshaNo(input.getHokenshaNo());
+
         result.setKyotakushienJigyoshoNo(input.getKyotakuShienJigyoshoNo());
         result.setKyufuSakuseiKubunCode(input.getKyufukanrihyoSakuseiKubunCode());
         result.setKyufuSakuseiYMD(new FlexibleDate(input.getKyufukanrihyoSakuseiYMD()));
@@ -157,7 +167,7 @@ public class KyufuKanrihyoInBatch {
         result.setKaigoShienJigyoshaNo(input.getItakusakiKyotakuKaigoshienJigyoshoNo());
         result.setItakusakiTantoKaigoShienSemmoninNo(input.getItakusakiKaigoshienSenmoninNo());
 
-        result.setTorikomiYM(new FlexibleYearMonth(shoriYM));
+        result.setTorikomiYM(new FlexibleYearMonth(shoriNengetsu.substringReturnAsPossible(0, 6)));
 
         return result;
     }

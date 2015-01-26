@@ -12,7 +12,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.BatchProcessTestHelper;
@@ -20,8 +19,6 @@ import jp.co.ndensan.reams.uz.uza.testhelper.CsvFileMatcher;
 import jp.co.ndensan.reams.uz.uza.testhelper.CsvFileOption;
 import jp.co.ndensan.reams.uz.uza.testhelper.CsvIgnoreColumns;
 import jp.co.ndensan.reams.uz.uza.testhelper.DbTestHelper;
-import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
-import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
@@ -39,18 +36,18 @@ public class KokuhorenIFUpdataProcessTest extends DbcTestDacBase {
     public static class Test_KokuhorenIFUpdataProcess extends DbcTestDacBase {
 
         private static DbTestHelper dbHelper;
-        private static final RString 実行前状態BackUp用CSV = new RString("bkup_KokuhorenIFUpdataProcess_DbT3104KokuhorenInterfaceKanri.csv");
-        private static final RString 想定する実行前状態CSV = new RString("before_KokuhorenIFUpdataProcess_DbT3104KokuhorenInterfaceKanri.csv");
-        private static final RString 実行結果CSV = new RString("KokuhorenIFUpdataProcessRunResult_DbT3104KokuhorenInterfaceKanri.csv");
-        private static final RString 想定結果CSV = new RString("KokuhorenIFUpdataProcessResult_DbT3104KokuhorenInterfaceKanri.csv");
+        private static final RString 実行前状態BackUp用CSV = new RString("KokuhorenIFUpdataProcess_Bkup_DbT3104KokuhorenInterfaceKanri.csv");
+        private static final RString 想定する実行前状態CSV = new RString("KokuhorenIFUpdataProcess_Before_DbT3104KokuhorenInterfaceKanri.csv");
+        private static final RString 実行結果CSV = new RString("KokuhorenIFUpdataProcess_RunResult_DbT3104KokuhorenInterfaceKanri.csv");
+        private static final RString 想定結果CSV = new RString("KokuhorenIFUpdataProcess_Result_DbT3104KokuhorenInterfaceKanri.csv");
 
         @BeforeClass
         public static void setUpClass() {
+            DbcTestDacBase.setUpClass();
             dbHelper = new DbTestHelper();
             setUpTestData(dbHelper);
         }
 
-        @Transaction
         @Test
         public void バッチ処理クラスを実行したとき_実行結果CSVは_想定結果CSVと一致する() {
 
