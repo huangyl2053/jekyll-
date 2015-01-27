@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbz.business.viewstate.MaeRirekiKey;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.ExceptionSuppliers;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.IViewStateValue;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
 import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
