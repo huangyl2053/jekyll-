@@ -26,7 +26,7 @@ public class ShikakuSoshitsuJiyuTest extends DbzTestBase {
 
         @Test
         public void toValueは_指定のコードに対応する列挙子があれば_それを返す() {
-            ShikakuSoshitsuJiyu sut = ShikakuSoshitsuJiyu.年齢到達;
+            ShikakuSoshitsuJiyu sut = ShikakuSoshitsuJiyu.死亡;
             assertThat(ShikakuSoshitsuJiyu.toValue(sut.getCode()), is(sut));
         }
 

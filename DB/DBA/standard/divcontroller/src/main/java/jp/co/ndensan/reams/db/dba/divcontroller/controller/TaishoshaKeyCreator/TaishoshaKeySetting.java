@@ -27,8 +27,8 @@ public class TaishoshaKeySetting {
     public ResponseData<TaishoshaKeySettingDiv> onLoad(TaishoshaKeySettingDiv settingDiv) {
 
         settingDiv.getTxtSetai().setValue(new RString("123450000100001"));
-        settingDiv.getTxtShikibetsu().setValue(new RString("123450000100001"));
-        settingDiv.getTxtHihoNo().setValue(new RString("1234500001"));
+        settingDiv.getTxtShikibetsu().setValue(new RString("000000000000318"));
+        settingDiv.getTxtHihoNo().setValue(new RString("0000001112"));
 
         return ResponseDatas.createSettingDataTo(settingDiv);
     }

@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -54,6 +54,6 @@ public enum KoikinaiJushochitokureishaKubun {
                 return target;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("コード:" + code + " に対応する広域内住所地特例者区分").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("コード:" + code + " に対応する広域内住所地特例者区分").evaluate());
     }
 }

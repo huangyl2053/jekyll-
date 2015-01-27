@@ -196,6 +196,7 @@ public class JushochiTokureiRirekiList {
     public ResponseData<JushochiTokureiRirekiListDiv> onClick_btnJutokuKakutei(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
         handler.updateEntryData();
+        handler.mapping住所地特例履歴();
         handler.clearInputData();
         handler.setMeisaiShokaiMode();
         handler.setupToAfterInput();

@@ -40,12 +40,12 @@ public class HihokenshaHakko {
      * @param hakkoDiv {@link ShikakuShosaiDiv 被保険者証発行Div}
      * @return 被保険者証発行Divを持つResponseData
      */
-    public ResponseData<HihokenshaHakkoDiv> onLoad(HihokenshaHakkoDiv hakkoDiv) {
+    public ResponseData<HihokenshaHakkoDiv> onAfterClick_btnUpdate(HihokenshaHakkoDiv hakkoDiv) {
         HihokenshashoPrintConfig config = new HihokenshashoPrintConfig();
         if (config.get証表示タイプ() == HihokenshashoPrintType.A4横) {
             hakkoDiv.getRadPrintPosition().setDisplayNone(true);
         }
-
+        hakkoDiv.getCcdHihokenshaShikakuHakko().create証発行情報();
         return ResponseDatas.createSettingDataTo(hakkoDiv);
     }
 
@@ -84,7 +84,8 @@ public class HihokenshaHakko {
     }
 
     /**
-     * 被保険者証を発行した際に行う後処理です。
+     * 被保険者証を発行した際に行う後処理です。<br/>
+     * 証交付・送達テーブルの情報を元に証交付回収テーブルの情報を作成して登録します。
      *
      * @param hakkoDiv {@link ShikakuShosaiDiv 被保険者証発行Div}
      * @return 被保険者証発行Divを持つResponseData

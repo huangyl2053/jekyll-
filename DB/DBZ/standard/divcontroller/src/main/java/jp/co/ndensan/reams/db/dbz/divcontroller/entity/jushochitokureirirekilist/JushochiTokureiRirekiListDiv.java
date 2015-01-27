@@ -18,11 +18,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoatenainfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -597,6 +599,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     public void set被保険者台帳情報(IItemList<HihokenshaDaichoModel> 被保険者台帳List) {
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
         handler.set被保険者台帳情報(被保険者台帳List);
+        handler.mapping住所地特例履歴();
     }
 
     @Override
@@ -612,9 +615,10 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @Override
-    public void initialize(HokenshaJohoDisplayMode mode) {
+    public void initialize(ViewExecutionStatus exeStatus, JushochiTokureiExecutionStatus jutokuExeStatsu,
+            JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode mode) {
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
-        handler.initialize(HokenshaJohoDisplayMode.TanitsuGappeiNashi);
+        handler.initialize(exeStatus, jutokuExeStatsu, mode);
     }
 
     @Override

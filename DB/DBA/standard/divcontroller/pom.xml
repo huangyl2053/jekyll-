@@ -36,6 +36,12 @@
             </exclusions>
         </dependency>
         <dependency>
+            <artifactId>DbaPersistence</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
             <groupId>jp.co.ndensan.reams.ur.ura</groupId>
             <artifactId>UraDivController</artifactId>
             <classifier>classes</classifier>

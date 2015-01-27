@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.IShikibetsuTaishoHistories;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
@@ -60,7 +61,12 @@ public class KaigoAtenaInfoDiv extends Panel implements IKaigoAtenaInfoDiv {
     }
 
     @Override
-    public IShikibetsuTaishoHistories getShikibetsuTaishoHisory() {
-        return atenaInfo.getAtenaShokaiSimpleData().getShikibetsuTaishoHisory();
+    public ShikibetsuCode getShikibetsuCode() {
+        return atenaInfo.getTxtShikibetsuCode().getDomain();
+    }
+
+    @Override
+    public AtenaMeisho getMeisho() {
+        return atenaInfo.getTxtAtenaMeisho().getDomain();
     }
 }

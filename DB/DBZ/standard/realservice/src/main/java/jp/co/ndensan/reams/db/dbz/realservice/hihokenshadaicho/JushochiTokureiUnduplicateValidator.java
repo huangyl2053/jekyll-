@@ -115,7 +115,8 @@ public final class JushochiTokureiUnduplicateValidator {
                 if (tatoku.get適用年月日().isBeforeOrEquals(hihoDaicho.get適用年月日())
                         && hihoDaicho.get適用年月日().isBeforeOrEquals(tatoku.get解除年月日())) {
                     validationMessages.add(JushochiTokureiValidationMessage.住所地特例期間と他市町村住所地特例期間が重複する履歴がある);
-                } else if (tatoku.get適用年月日().isBeforeOrEquals(hihoDaicho.get解除年月日())
+                } else if (!(hihoDaicho.get解除年月日() == null || hihoDaicho.get解除年月日().isEmpty())
+                        && tatoku.get適用年月日().isBeforeOrEquals(hihoDaicho.get解除年月日())
                         && hihoDaicho.get解除年月日().isBeforeOrEquals(tatoku.get解除年月日())) {
                     validationMessages.add(JushochiTokureiValidationMessage.住所地特例期間と他市町村住所地特例期間が重複する履歴がある);
                 }

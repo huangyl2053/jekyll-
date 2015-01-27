@@ -28,12 +28,11 @@ public class Complete {
      * @param kihonDiv {@link KihonJohoDiv 基本情報Div}
      * @return 完了メッセージDivを持つResponseData
      */
-    public ResponseData<CompleteDiv> onClick_btnUpdate(CompleteDiv compDiv, KihonJohoDiv kihonDiv) {
+    public ResponseData<CompleteDiv> onAfterClick_btnUpdate(CompleteDiv compDiv, KihonJohoDiv kihonDiv) {
 
         RString messageMain = new RString(UrInformationMessages.保存終了.getMessage().toString());
         RString messageTaishoHihoNo = kihonDiv.getCcdKaigoShikakuKihon().get被保険者番号().getColumnValue();
-        IShikibetsuTaisho taisho = kihonDiv.getCcdKaigoAtenaInfo().getShikibetsuTaishoHisory().getLatest();
-        RString messageTaishoName = taisho.get氏名().getName().getColumnValue();
+        RString messageTaishoName = kihonDiv.getCcdKaigoAtenaInfo().getMeisho().getColumnValue();
 
         compDiv.getCcdKaigoKanryoMessage().setSuccessMessage(messageMain, messageTaishoHihoNo, messageTaishoName);
 

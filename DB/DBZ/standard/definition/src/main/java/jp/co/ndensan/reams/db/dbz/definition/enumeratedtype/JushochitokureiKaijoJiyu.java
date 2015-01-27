@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -16,20 +16,20 @@ public enum JushochitokureiKaijoJiyu implements IShikakuIdoJiyu {
 
     /**
      * なし <br />
-     * 住所地特例解除事由がないこと表す。<br />
+     * 住所地自特例解除事由がないこと表す。<br />
      * コード : 00
      */
     なし("00"),
     /**
-     * 特例転入 <br />
-     * コード : 54
+     * 自特例転入 <br />
+     * コード : 01
      */
-    特例転入("54"),
+    自特例転入("01"),
     /**
-     * 特例解除 <br />
-     * コード : 55
+     * 自特例解除 <br />
+     * コード : 02
      */
-    特例解除("55"),
+    自特例解除("02"),
     /**
      * その他 <br />
      * コード : 99
@@ -70,6 +70,6 @@ public enum JushochitokureiKaijoJiyu implements IShikakuIdoJiyu {
                 return target;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("コード:" + code + " に対応する住所地特例解除事由").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("コード:" + code + " に対応する住所地特例解除事由").evaluate());
     }
 }

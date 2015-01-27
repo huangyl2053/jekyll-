@@ -78,11 +78,19 @@ public class JuchochiTokureiTekiyoValidator {
             IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
 
             if (tekiyoDate.isBefore(newestHihokenshaDaicho.get資格取得年月日())
-                    || tekiyoDate.isBefore(newestHihokenshaDaicho.get資格変更年月日())
-                    || tekiyoDate.isBefore(newestHihokenshaDaicho.get解除年月日())) {
+                    || checkTekiyoDateIsBeforeAndTargetIsNosEmpty(newestHihokenshaDaicho.get資格変更年月日())
+                    || checkTekiyoDateIsBeforeAndTargetIsNosEmpty(newestHihokenshaDaicho.get解除年月日())) {
                 validationMessages.add(JushochiTokureiValidationMessage.住所地特例適用日が_最新履歴の取得日_変更日_住所地特例解除日より前);
             }
             return validationMessages;
+        }
+
+        private boolean checkTekiyoDateIsBeforeAndTargetIsNosEmpty(FlexibleDate target) {
+            if (target == null || target.isEmpty()) {
+                return false;
+            }
+
+            return tekiyoDate.isBefore(target);
         }
     }
 }

@@ -172,7 +172,7 @@ public class HihokenshaDaichoManagerTest {
 
             HihokenshaDaichoModel 被保険者台帳モデル = HihokenshaDaichoModelTestHelper.createModel();
             被保険者台帳モデル.getEntity().initializeMd5();
-            被保険者台帳モデル.set資格取得事由(ShikakuShutokuJiyu.合併);
+            被保険者台帳モデル.set資格取得事由(ShikakuShutokuJiyu.転入);
 
             assertThat(sut.save被保険者台帳(被保険者台帳モデル), is(1));
         }

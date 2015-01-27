@@ -21,11 +21,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @author N8156 宮本 康
  */
+//TODO n8178 城間篤人 IJukyoDaichoFinderが利用しているIKaigoHokenJukyoshaDacの具象クラスがインターフェースと同一パッケージに存在しないためエラーする。
+//urを修正した後にコメントアウトを解除する 2015年2月
 public class KaigoShikakuKihonHandler {
 
     private final KaigoShikakuKihonDiv div;
     private final HihokenshaDaichoManager hihokenshaDaichoManager;
-    private final IJukyuDaichoFinder jukyuDaichoFinder;
+//    private final IJukyuDaichoFinder jukyuDaichoFinder;
 
     /**
      * コンストラクタです。
@@ -35,7 +37,7 @@ public class KaigoShikakuKihonHandler {
     public KaigoShikakuKihonHandler(KaigoShikakuKihonDiv div) {
         this.div = div;
         hihokenshaDaichoManager = new HihokenshaDaichoManager();
-        jukyuDaichoFinder = InstanceProvider.createWithCustomize(IJukyuDaichoFinder.class);
+//        jukyuDaichoFinder = InstanceProvider.createWithCustomize(IJukyuDaichoFinder.class);
     }
 
     /**
@@ -48,7 +50,7 @@ public class KaigoShikakuKihonHandler {
     KaigoShikakuKihonHandler(KaigoShikakuKihonDiv div, HihokenshaDaichoManager hihokenshaDaichoManager, IJukyuDaichoFinder jukyuDaichoFinder) {
         this.div = div;
         this.hihokenshaDaichoManager = hihokenshaDaichoManager;
-        this.jukyuDaichoFinder = jukyuDaichoFinder;
+//        this.jukyuDaichoFinder = jukyuDaichoFinder;
     }
 
     /**
@@ -73,12 +75,12 @@ public class KaigoShikakuKihonHandler {
         div.getTxtSoshitsuJiyu().setValue(daichoModel.get資格喪失事由().getName());
         div.getTxtJutokuKubun().setValue(new RString(daichoModel.get住所地特例者区分().name()));
 
-        IKobetsuJikoKaigoJukyu jukyu = jukyuDaichoFinder.get個別事項介護受給(検索キー.get識別コード(), daichoModel.get処理日時().getColumnValue().getDate());
-
-        if (jukyu != null) {
-            div.getTxtYokaigoJotaiKubun().setValue(new RString(jukyu.get要介護状態区分().name()));
-            div.getTxtNinteiKaishiYmd().setValue(jukyu.get認定有効開始日());
-            div.getTxtNinteiShuryoYmd().setValue(jukyu.get認定有効終了日());
-        }
+//        IKobetsuJikoKaigoJukyu jukyu = jukyuDaichoFinder.get個別事項介護受給(検索キー.get識別コード(), daichoModel.get処理日時().getColumnValue().getDate());
+//
+//        if (jukyu != null) {
+//            div.getTxtYokaigoJotaiKubun().setValue(new RString(jukyu.get要介護状態区分().name()));
+//            div.getTxtNinteiKaishiYmd().setValue(jukyu.get認定有効開始日());
+//            div.getTxtNinteiShuryoYmd().setValue(jukyu.get認定有効終了日());
+//        }
     }
 }

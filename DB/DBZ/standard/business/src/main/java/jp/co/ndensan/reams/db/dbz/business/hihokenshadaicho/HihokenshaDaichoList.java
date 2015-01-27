@@ -43,11 +43,13 @@ public class HihokenshaDaichoList implements Iterable<HihokenshaDaichoModel> {
      * @return 1期間分の被保険者台帳List
      */
     public IItemList<HihokenshaDaichoModel> toOneSeasonList(FlexibleDate 資格取得日) {
-        List<HihokenshaDaichoModel> list = new ArrayList<>();
-        //TODO #52997
-        //1, 被保険者台帳Listの要素の中から、引数から渡された資格取得日に一致するものを抽出します。
-        //2, 抽出した結果をreturnします。
-        return ItemList.of(list);
+        List<HihokenshaDaichoModel> onSeasonList = new ArrayList<>();
+        for (HihokenshaDaichoModel daicho : daichoList) {
+            if (daicho.get資格取得年月日().equals(資格取得日)) {
+                onSeasonList.add(daicho);
+            }
+        }
+        return ItemList.of(onSeasonList);
     }
 
     /**

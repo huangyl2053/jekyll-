@@ -87,11 +87,17 @@ public class ShikakuHenkoMapper {
 
                 row.setState(getModelStateValue(model));
                 row.setShoriDate(shoriDate);
-                row.setHenkoJiyuKey(model.get資格変更事由().getCode());
-                row.setHenkoJiyu(model.get資格変更事由().getShortName());
+
+                //TODO n8178 城間篤人 資格変更事由にはEMPTYが入る可能性があるが、コードがそれを考慮する形になっていないためif文で仮対応。
+                //該当する項目が存在しない場合の動作が決まった後に修正。
+                if (!model.getEntity().getShikakuHenkoJiyuCode().getColumnValue().isEmpty()) {
+                    row.setHenkoJiyuKey(model.get資格変更事由().getCode());
+                    row.setHenkoJiyu(model.get資格変更事由().getShortName());
+                }
                 row.getHenkoDate().setValue(model.get資格変更年月日());
                 row.getHenkoTodokedeDate().setValue(model.get資格変更届出年月日());
-                row.setKyuHokensha(Kyuhokensha.toValue(model.get旧市町村コード().getColumnValue()).getName());
+                //TODO n8178 城間篤人 旧保険者を取得する方法は用意されたため、この代替実装は不要になる。後日置き換えが必要
+                //row.setKyuHokensha(Kyuhokensha.toValue(model.get旧市町村コード().getColumnValue()).getName());
                 row.setSochimotoHokensha(model.get広住特措置元市町村コード().getColumnValue());
                 return row;
             }

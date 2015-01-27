@@ -1,10 +1,12 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist;
 
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListDiv.BtnDisplayMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListDiv.DisplayType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListDiv.MeisaiDisplayMode;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoatenainfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaShokaiSimpleDiv;
 
@@ -44,14 +46,18 @@ public interface IJushochiTokureiRirekiListDiv {
      * 住所地特例履歴Divについて、市町村情報が「広域/合併有り」である場合の初期設定を行います。<br/>
      * 初期設定を行う項目は以下のとおりです。
      * <ul>
+     * <li>処理ステータスの設定</li>
      * <li>保険者情報表示モード（HikenshaJohoDisplayMode）に引数から指定した項目を設定</li>
      * <li>措置元保険者DDL・旧保険者DDLの選択項目の設定（選択項目の候補を市町村情報から取得）</li>
      * <li>適用事由DDL・解除事由DDLの選択項目の設定（コードマスタからの取得）</li>
      * </ul>
      *
+     * @param exeStatus 実行ステータス。Add・Delete・Modifyのうちのいずれかを設定する。
+     * @param jutokuExeStatsu
+     * 住所地特例実行ステータス。実行ステータス（Add・Delete・Modify）とは別に、Tekiyo・Kaijo・Teisei・Shokaiのうちのいずれかを設定する。
      * @param mode 保険者情報表示モード
      */
-    void initialize(JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode mode);
+    void initialize(ViewExecutionStatus exeStatus, JushochiTokureiExecutionStatus jutokuExeStatsu, JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode mode);
 
     /**
      * 明細パネルが変更されたかどうかを判定します。 <br/>

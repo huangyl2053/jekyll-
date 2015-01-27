@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv.台帳種別の列を;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv.施設種類の列を;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv.表示heightサイズ;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv.表示Heightサイズ;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv.表示widthサイズ;
 import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoModelComparators;
 import jp.co.ndensan.reams.db.dbz.realservice.ShisetsuNyutaishoTokureiTaishoRelateManager;
@@ -53,7 +53,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
                 div.setMode_台帳種別の列を(台帳種別の列を.表示する);
                 div.setMode_施設種類の列を(施設種類の列を.表示する);
                 div.setMode_表示widthサイズ(表示widthサイズ.モード1);
-                div.setMode_表示heightサイズ(表示heightサイズ.サイズ200);
+                div.setMode_表示heightサイズ(表示Heightサイズ.サイズ200);
                 div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set利用機能(0);
                 div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().initialize();
                 div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set台帳種別(DaichoType.被保険者.getCode());
@@ -62,7 +62,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
                 div.setMode_台帳種別の列を(台帳種別の列を.表示しない);
                 div.setMode_施設種類の列を(施設種類の列を.表示する);
                 div.setMode_表示widthサイズ(表示widthサイズ.モード3);
-                div.setMode_表示heightサイズ(表示heightサイズ.サイズ200);
+                div.setMode_表示heightサイズ(表示Heightサイズ.サイズ200);
                 div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set利用機能(1);
                 div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().initialize();
                 break;
@@ -70,7 +70,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
                 div.setMode_台帳種別の列を(台帳種別の列を.表示しない);
                 div.setMode_施設種類の列を(施設種類の列を.表示する);
                 div.setMode_表示widthサイズ(表示widthサイズ.モード3);
-                div.setMode_表示heightサイズ(表示heightサイズ.サイズ200);
+                div.setMode_表示heightサイズ(表示Heightサイズ.サイズ200);
                 div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set利用機能(2);
                 div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().initialize();
                 break;
@@ -78,7 +78,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
                 div.setMode_台帳種別の列を(台帳種別の列を.表示しない);
                 div.setMode_施設種類の列を(施設種類の列を.表示しない);
                 div.setMode_表示widthサイズ(表示widthサイズ.モード5);
-                div.setMode_表示heightサイズ(表示heightサイズ.サイズ200);
+                div.setMode_表示heightサイズ(表示Heightサイズ.サイズ200);
                 div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set利用機能(3);
                 div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().initialize();
                 break;

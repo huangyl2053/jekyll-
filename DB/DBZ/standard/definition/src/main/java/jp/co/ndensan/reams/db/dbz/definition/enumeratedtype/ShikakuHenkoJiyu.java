@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -21,53 +21,71 @@ public enum ShikakuHenkoJiyu implements IShikakuIdoJiyu {
      * コード : 00
      */
     なし("00"),
-    /** 転入 <br />
+    /**
+     * 転居 <br />
      * コード : 01
      */
-    転入("01"),
-    /** 年齢到達 <br />
+    転居("01"),
+    /**
+     * 氏名変更 <br />
      * コード : 02
      */
-    年齢到達("02"),
-    /** 外国人 <br />
+    氏名変更("02"),
+    /**
+     * 広域内転居 <br />
      * コード : 03
      */
-    外国人("03"),
+    広域内転居("03"),
     /**
-     * 二号申請 <br />
+     * 広住特適用 <br />
      * コード : 04
      */
-    二号申請("04"),
+    広住特適用("04"),
     /**
-     * 他特例居住 <br />
+     * 広住特転入 <br />
      * コード : 05
      */
-    他特例居住("05"),
+    広住特転入("05"),
     /**
-     * 除外者居住<br />
+     * 広住特居住<br />
      * コード : 06
      */
-    除外者居住("06"),
+    広住特居住("06"),
     /**
-     * 帰化 <br />
+     * 広住特転居<br />
      * コード : 07
      */
-    帰化("07"),
+    広住特転居("07"),
     /**
-     * 国籍取得 <br />
+     * 合併内転居<br />
      * コード : 08
      */
-    国籍取得("08"),
+    合併内転居("08"),
     /**
-     * 職権取得 <br />
+     * 一本化<br />
      * コード : 09
      */
-    職権取得("09"),
+    一本化("09"),
     /**
-     * 施行時取得 <br />
+     * 第1号到達<br />
      * コード : 10
      */
-    施行時取得("10"),
+    第1号到達("10"),
+    /**
+     * 合併<br />
+     * コード : 11
+     */
+    合併("11"),
+    /**
+     * 帰化 <br />
+     * コード : 12
+     */
+    帰化("12"),
+    /**
+     * 国籍取得 <br />
+     * コード : 13
+     */
+    国籍取得("13"),
     /**
      * その他 <br />
      * コード : 99
@@ -107,6 +125,6 @@ public enum ShikakuHenkoJiyu implements IShikakuIdoJiyu {
                 return target;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("コード:" + code + " に対応する資格変更事由").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("コード:" + code + " に対応する資格変更事由").evaluate());
     }
 }

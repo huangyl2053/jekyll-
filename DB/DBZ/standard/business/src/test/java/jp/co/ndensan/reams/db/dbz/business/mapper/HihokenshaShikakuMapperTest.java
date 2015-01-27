@@ -296,7 +296,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Before
             public void setUp() {
-                reason = JushochitokureiTekiyoJiyu.特例転入;
+                reason = JushochitokureiTekiyoJiyu.自特例適用;
                 noticeDate = new FlexibleDate("20130331");
                 actionDate = new FlexibleDate("20130331");
                 jutokuTekiyo = new JushochitokureiTekiyo(reason, noticeDate, actionDate);
@@ -334,7 +334,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Before
             public void setUp() {
-                reason = JushochitokureiKaijoJiyu.特例転入;
+                reason = JushochitokureiKaijoJiyu.自特例転入;
                 noticeDate = new FlexibleDate("20130331");
                 actionDate = new FlexibleDate("20130331");
                 jutokuKaijo = new JushochitokureiKaijo(reason, noticeDate, actionDate);
@@ -614,7 +614,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
         }
 
         /**
-         * 住所地特例解除
+         * 住所地自自特例解除
          */
         public static class _JushochitokureiKaijo extends DbzTestBase {
 

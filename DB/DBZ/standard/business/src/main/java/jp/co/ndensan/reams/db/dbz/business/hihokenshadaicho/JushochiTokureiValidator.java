@@ -98,6 +98,9 @@ public class JushochiTokureiValidator {
 
         private IValidationMessages is住特適用日が資格喪失日以降() {
             IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
+            if (jushochiTokureiData.get資格喪失年月日() == null || jushochiTokureiData.get資格喪失年月日().isEmpty()) {
+                return validationMessages;
+            }
 
             if (jushochiTokureiData.get資格喪失年月日().isBeforeOrEquals(jushochiTokureiData.get適用年月日())) {
                 validationMessages.add(JushochiTokureiValidationMessage.住特適用日が資格喪失日以降);
@@ -120,6 +123,8 @@ public class JushochiTokureiValidator {
         private IValidationMessages is住特解除日が資格喪失日以降() {
             IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
             if (jushochiTokureiData.get解除年月日() == null || jushochiTokureiData.get解除年月日().isEmpty()) {
+                return validationMessages;
+            } else if (jushochiTokureiData.get資格喪失年月日() == null || jushochiTokureiData.get資格喪失年月日().isEmpty()) {
                 return validationMessages;
             }
 

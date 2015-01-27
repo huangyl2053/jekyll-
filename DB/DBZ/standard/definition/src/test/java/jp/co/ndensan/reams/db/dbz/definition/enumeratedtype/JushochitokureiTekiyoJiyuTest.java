@@ -24,7 +24,7 @@ public class JushochitokureiTekiyoJiyuTest extends DbzTestBase {
 
         @Test
         public void toValueは_指定のコードに対応する列挙子があれば_それを返す() {
-            JushochitokureiTekiyoJiyu sut = JushochitokureiTekiyoJiyu.特例転入;
+            JushochitokureiTekiyoJiyu sut = JushochitokureiTekiyoJiyu.自特例適用;
             assertThat(JushochitokureiTekiyoJiyu.toValue(sut.getCode()), is(sut));
         }
 
@@ -38,7 +38,7 @@ public class JushochitokureiTekiyoJiyuTest extends DbzTestBase {
 
         @Test
         public void getNameは_Enumクラスのnameと同じ値を返す() {
-            assertThat(JushochitokureiTekiyoJiyu.特例適用.getName().toString(), is(JushochitokureiTekiyoJiyu.特例適用.name()));
+            assertThat(JushochitokureiTekiyoJiyu.自特例適用.getName().toString(), is(JushochitokureiTekiyoJiyu.自特例適用.name()));
         }
     }
 
@@ -46,7 +46,7 @@ public class JushochitokureiTekiyoJiyuTest extends DbzTestBase {
 
         @Test
         public void getShortNameは_Enumクラスのnameと同じ値を返す() {
-            assertThat(JushochitokureiTekiyoJiyu.特例転入.getShortName().toString(), is(JushochitokureiTekiyoJiyu.特例転入.name()));
+            assertThat(JushochitokureiTekiyoJiyu.自特例適用.getShortName().toString(), is(JushochitokureiTekiyoJiyu.自特例適用.name()));
         }
     }
 }

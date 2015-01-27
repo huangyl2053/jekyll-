@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.business.hokensha.KoikiKoseiShichosons;
 import jp.co.ndensan.reams.db.dbz.business.util.CodeMasterToKeyValueFunction;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ContainsKyuShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.util.Lists;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
@@ -29,6 +30,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.IJushochiTokureiRirekiListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
@@ -99,15 +101,15 @@ public class ShikakuShosai {
         HihokenshaDaichoManager daichoManager = new HihokenshaDaichoManager();
         IItemList<HihokenshaDaichoModel> daichoList = daichoManager.get被保険者台帳一覧DescOrderByShoriTimestamp(
                 lasdecCode, taishoshaKey.get被保険者番号());
-        if (daichoList.isEmpty()) {
+        if (!daichoList.isEmpty()) {
             daichoList = new HihokenshaDaichoList(daichoList).toOneSeasonList(daichoList.findFirst().get().get資格取得年月日());
         }
         ShisetsuNyutaishoTokureiTaishoRelateManager nyutaishoManager = new ShisetsuNyutaishoTokureiTaishoRelateManager();
         IItemList<ShisetsuNyutaishoRelateModel> nyutaishoRelateList
                 = nyutaishoManager.get台帳別施設入退所List(taishoshaKey.get識別コード(), DaichoType.被保険者);
 
-        initializeHokenshaJoho(shikakuShosaiDiv, lasdecCode, donyuHokensha, gappeiConfig);
-        setDataOfShokakuTokuso(shikakuShosaiDiv, daichoList.findFirst(), lasdecCode, donyuHokensha, gappeiConfig);
+        initializeHokenshaJoho(shikakuShosaiDiv, lasdecCode, donyuHokensha, gappeiConfig, controlData);
+        setDataOfShikakuTokuso(shikakuShosaiDiv, daichoList.findFirst(), lasdecCode, donyuHokensha, gappeiConfig);
         setDefaultDataOfCcd(shikakuShosaiDiv, daichoList, nyutaishoRelateList);
 
         setJushochiTokureiView(shikakuShosaiDiv, controlData);
@@ -118,42 +120,73 @@ public class ShikakuShosai {
     }
 
     private void initializeHokenshaJoho(ShikakuShosaiDiv shikakuShosaiDiv, LasdecCode lasdecCode,
-            IDonyuHokensha donyuHokensha, GappeiJohoKanriConfig gappeiConfig) {
+            IDonyuHokensha donyuHokensha, GappeiJohoKanriConfig gappeiConfig, IUrControlData controlData) {
 
         if (!donyuHokensha.is広域保険者() && !gappeiConfig.is合併あり()) {
 
             shikakuShosaiDiv.getDdlShutokuShozaiHokensha().setDisabled(true);
             shikakuShosaiDiv.getDdlShutokuSochimotoHokensha().setDisabled(true);
             shikakuShosaiDiv.getDdlShutokuKyuHokensha().setDisabled(true);
-            shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().initialize(JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.TanitsuGappeiNashi);
+            initializeJushochiTokureiRirekiList(controlData, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
+                    JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.TanitsuGappeiNashi);
             shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiNashi);
         } else if (!donyuHokensha.is広域保険者() && gappeiConfig.is合併あり()) {
 
             shikakuShosaiDiv.getDdlShutokuShozaiHokensha().setDisabled(true);
             shikakuShosaiDiv.getDdlShutokuSochimotoHokensha().setDisabled(true);
             shikakuShosaiDiv.getDdlShutokuKyuHokensha().setDisabled(false);
-            shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().initialize(JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.TanitsuGappeiAri);
+            initializeJushochiTokureiRirekiList(controlData, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
+                    JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.TanitsuGappeiAri);
             shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiAri);
         } else if (donyuHokensha.is広域保険者() && !gappeiConfig.is合併あり()) {
 
             shikakuShosaiDiv.getDdlShutokuShozaiHokensha().setDisabled(false);
             shikakuShosaiDiv.getDdlShutokuSochimotoHokensha().setDisabled(false);
             shikakuShosaiDiv.getDdlShutokuKyuHokensha().setDisabled(true);
-            shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().initialize(JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.KoikiGappeiNashi);
+            initializeJushochiTokureiRirekiList(controlData, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
+                    JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.KoikiGappeiNashi);
             shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.KoikiGappeiNashi);
         } else {
 
             shikakuShosaiDiv.getDdlShutokuShozaiHokensha().setDisabled(false);
             shikakuShosaiDiv.getDdlShutokuSochimotoHokensha().setDisabled(false);
             shikakuShosaiDiv.getDdlShutokuKyuHokensha().setDisabled(false);
-            shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().initialize(JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.KoikiGappeiAri);
+            initializeJushochiTokureiRirekiList(controlData, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
+                    JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.KoikiGappeiAri);
             shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.KoikiGappeiAri);
         }
 
         shikakuShosaiDiv.getCcdShisetsuNyutaishoRirekiKanri().initialize();
     }
 
-    private void setDataOfShokakuTokuso(ShikakuShosaiDiv shikakuShosaiDiv, Optional<HihokenshaDaichoModel> hihoDaicho, LasdecCode lasdecCode,
+    private void initializeJushochiTokureiRirekiList(IUrControlData controlData, IJushochiTokureiRirekiListDiv jutokuDiv,
+            JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode hokenshaMode) {
+        ViewExecutionStatus exeStatus;
+        JushochiTokureiExecutionStatus jutokuExeStatus;
+
+        JushochiTokureiMenuType menuType = JushochiTokureiMenuType.toValue(controlData.getMenuID());
+        switch (menuType) {
+            case DBAMN25001_届出により適用:
+            case DBAMN61002_転入転出保留対象者管理:
+                exeStatus = ViewExecutionStatus.Add;
+                jutokuExeStatus = JushochiTokureiExecutionStatus.Tekiyo;
+                break;
+            case DBAMN25002_届出により解除:
+                exeStatus = ViewExecutionStatus.Modify;
+                jutokuExeStatus = JushochiTokureiExecutionStatus.Kaijo;
+                break;
+            case DBAMN25003_届出により施設変更:
+            case DBAMN52002_合併前の住所地特例措置解除:
+            default:
+                //TODO n8178 城間篤人 動作のために一時的に設定。後日必要な設定を確認した後に修正する。
+                exeStatus = ViewExecutionStatus.Add;
+                jutokuExeStatus = JushochiTokureiExecutionStatus.Tekiyo;
+                break;
+        }
+        jutokuDiv.initialize(exeStatus, jutokuExeStatus, hokenshaMode);
+    }
+
+    private void setDataOfShikakuTokuso(ShikakuShosaiDiv shikakuShosaiDiv, Optional<HihokenshaDaichoModel> hihoDaicho, LasdecCode lasdecCode,
             IDonyuHokensha donyuHokensha, GappeiJohoKanriConfig gappeiConfig) {
         HihokenshaDaichoModel daichoModel = hihoDaicho.get();
         shikakuShosaiDiv.getTxtShutokuDate().setValue(daichoModel.get資格取得年月日());
@@ -162,7 +195,9 @@ public class ShikakuShosai {
 
         shikakuShosaiDiv.getDdlShutokuJiyu().setDataSource(
                 ItemList.of(shutokuJiyuList).map(new CodeMasterToKeyValueFunction()).toList());
-        shikakuShosaiDiv.getDdlShutokuJiyu().setSelectedKey(daichoModel.get資格取得事由().getCode());
+        if (!daichoModel.getEntity().getShikakuShutokuJiyuCode().getColumnValue().isEmpty()) {
+            shikakuShosaiDiv.getDdlShutokuJiyu().setSelectedKey(daichoModel.get資格取得事由().getCode());
+        }
 
         if (donyuHokensha.is広域保険者()) {
             //TODO n8178 城間篤人 生産性評価の対象でないため未実装　今後の回収で実装を行う
@@ -196,7 +231,10 @@ public class ShikakuShosai {
         List<KaigoshikakuSoshitsuJiyuHihokennsha> sositsuJiyuList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格喪失事由_被保険者);
         shikakuShosaiDiv.getDdlSoshitsuJiyu().setDataSource(
                 ItemList.of(sositsuJiyuList).map(new CodeMasterToKeyValueFunction()).toList());
-        shikakuShosaiDiv.getDdlSoshitsuJiyu().setSelectedKey(daichoModel.get資格喪失事由().getCode());
+
+        if (!daichoModel.getEntity().getShikakuSoshitsuJiyuCode().getColumnValue().isEmpty()) {
+            shikakuShosaiDiv.getDdlSoshitsuJiyu().setSelectedKey(daichoModel.get資格喪失事由().getCode());
+        }
 
         shikakuShosaiDiv.getTblShikakuShosai().setDisabled(true);
     }
@@ -217,8 +255,8 @@ public class ShikakuShosai {
 //    }
     private void setDefaultDataOfCcd(ShikakuShosaiDiv shikakuShosaiDiv, IItemList<HihokenshaDaichoModel> daichoList,
             IItemList<ShisetsuNyutaishoRelateModel> nyutaishoRelateList) {
-        shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().set被保険者台帳情報(new HihokenshaDaichoList(daichoList).to住所地特例List());
-        shikakuShosaiDiv.getCcdShikakuHenkoRireki().set資格関連異動履歴(new HihokenshaDaichoList(daichoList).to資格関連異動List());
+        shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().set被保険者台帳情報(daichoList);
+        shikakuShosaiDiv.getCcdShikakuHenkoRireki().set資格関連異動履歴(daichoList);
         shikakuShosaiDiv.getCcdShisetsuNyutaishoRirekiKanri().set施設入退所履歴(nyutaishoRelateList);
     }
 

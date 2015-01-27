@@ -314,7 +314,7 @@ public class HihokenshaTest extends DbzTestBase {
             public void setUp() {
                 FlexibleDate noticeDate = new FlexibleDate("20140326");
                 FlexibleDate actionDate = new FlexibleDate("20140326");
-                shikakuSoshitsu = new JushochitokureiTekiyo(JushochitokureiTekiyoJiyu.特例転入, noticeDate, actionDate);
+                shikakuSoshitsu = new JushochitokureiTekiyo(JushochitokureiTekiyoJiyu.自特例適用, noticeDate, actionDate);
 
                 when(shikaku.get住所地特例適用()).thenReturn(shikakuSoshitsu);
                 sut = new Hihokensha(profile, shikaku);
@@ -345,7 +345,7 @@ public class HihokenshaTest extends DbzTestBase {
             public void setUp() {
                 FlexibleDate noticeDate = new FlexibleDate("20140326");
                 FlexibleDate actionDate = new FlexibleDate("20140326");
-                shikakuSoshitsu = new JushochitokureiKaijo(JushochitokureiKaijoJiyu.特例転入, noticeDate, actionDate);
+                shikakuSoshitsu = new JushochitokureiKaijo(JushochitokureiKaijoJiyu.自特例転入, noticeDate, actionDate);
 
                 when(shikaku.get住所地特例解除()).thenReturn(shikakuSoshitsu);
                 sut = new Hihokensha(profile, shikaku);

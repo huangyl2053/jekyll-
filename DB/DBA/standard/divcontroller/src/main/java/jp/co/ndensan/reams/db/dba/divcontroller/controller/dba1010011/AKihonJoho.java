@@ -14,7 +14,9 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
  *
  * @author n8178 城間篤人
  */
-public class KihonJoho {
+//TODO n8178 城間篤人 FWの仕様（もしくはバグ？）により、別パッケージでも同一名称のDivControllerが存在すると、イベント実行時に動作不良を起こすため一時的に名称の先頭にAを付与
+//仕様に対する対応方法が確定した後、もしくは資格取得異動画面の実装時に、元に戻す必要がある。
+public class AKihonJoho {
 
     /**
      * 基本情報の初期化の際に実行します。<br/>

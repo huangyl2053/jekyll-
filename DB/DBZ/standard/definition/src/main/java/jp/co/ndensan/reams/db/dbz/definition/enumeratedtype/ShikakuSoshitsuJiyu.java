@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -23,79 +23,34 @@ public enum ShikakuSoshitsuJiyu implements IShikakuIdoJiyu {
     なし("00"),
     /**
      * 転出 <br />
-     * コード : 51
+     * コード : 01
      */
-    転出("51"),
+    転出("01"),
     /**
      * 死亡 <br />
-     * コード : 52
+     * コード : 02
      */
-    死亡("52"),
+    死亡("02"),
     /**
      * 除外者 <br />
-     * コード : 53
+     * コード : 03
      */
-    除外者("53"),
-    /**
-     * 帰化 <br />
-     * コード : 56
-     */
-    帰化("56"),
+    除外者("03"),
     /**
      * 国籍喪失 <br />
-     * コード : 57
+     * コード : 04
      */
-    国籍喪失("57"),
+    国籍喪失("04"),
     /**
      * 他特例者 <br />
-     * コード : 58
+     * コード : 05
      */
-    他特例者("58"),
-    /**
-     * 年齢到達 <br />
-     * コード : 59
-     */
-    年齢到達("59"),
-    /**
-     * 広域内転出 <br />
-     * コード : 61
-     */
-    広域内転出("61"),
-    /**
-     * 国籍取得 <br />
-     * コード : 62
-     */
-    国籍取得("62"),
-    /**
-     * 広住特転入 <br />
-     * コード : 64
-     */
-    広住特転入("64"),
-    /**
-     * 広住特解除 <br />
-     * コード : 65
-     */
-    広住特解除("65"),
-    /**
-     * 合併内転居 <br />
-     * コード : 66
-     */
-    合併内転居("66"),
+    他特例者("05"),
     /**
      * 職権喪失 <br />
-     * コード : 67
+     * コード : 06
      */
-    職権喪失("67"),
-    /**
-     * 一本化 <br />
-     * コード : 91
-     */
-    一本化("91"),
-    /**
-     * 合併 <br />
-     * コード : 92
-     */
-    合併("92"),
+    職権喪失("06"),
     /**
      * その他 <br />
      * コード : 99
@@ -135,6 +90,6 @@ public enum ShikakuSoshitsuJiyu implements IShikakuIdoJiyu {
                 return target;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("コード:" + code + " に対応する資格喪失事由").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("コード:" + code + " に対応する資格喪失事由").evaluate());
     }
 }
