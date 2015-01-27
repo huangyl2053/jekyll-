@@ -55,6 +55,17 @@ public class KaigoShikakuKihonHandlerTest extends DbzTestBase {
     private static final RDate 認定有効開始日 = new RDate("20140505");
     private static final RDate 認定有効終了日 = new RDate("20140606");
 
+    public static class constructor extends DbzTestBase {
+
+        KaigoShikakuKihonHandler sut;
+        KaigoShikakuKihonDiv result;
+
+        @Test
+        public void コンストラクタを起動できる() {
+            KaigoShikakuKihonHandler sut = new KaigoShikakuKihonHandler(new KaigoShikakuKihonDiv());
+        }
+    }
+
     public static class load {
 
         private KaigoShikakuKihonDiv result;

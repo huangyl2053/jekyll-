@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.kaigojogaitokureitaishoshisetsu.KaigoJogaiTokureiTaishoShisetsuModel;
 import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
@@ -39,6 +40,8 @@ public class ShisetsuNyutaishoTokureiTaishoRelateManager {
 
     /**
      * 単体テスト用のコンストラクタです。
+     *
+     * @param dac ShisetsuNyutaishoTokureiTaishoRelateDac
      */
     ShisetsuNyutaishoTokureiTaishoRelateManager(ShisetsuNyutaishoTokureiTaishoRelateDac dac) {
         this.dac = dac;
@@ -59,10 +62,37 @@ public class ShisetsuNyutaishoTokureiTaishoRelateManager {
         //介護除外住所地特例対象施設情報　施設入退情報から台帳種別が②他市町村住所地特例③適用除外者（DA)パラメタ（入所施設種類・入所施設コード）をDBに渡して、事業者名を取得する。
         //台帳種別  1:被保険者台帳、2:適用除外者台帳,3:他市町村住所地特例者台帳
         for (ShisetsuNyutaishoRelateModel model : shisetsuNyutaishoIchiranList) {
+            setJigyoshaName(model);
+            shisetsuNyutaishoIchiranList.added(model);
+        }
 
-            if (model.get介護保険施設入退所モデル().get台帳種別().equals(DaichoType.被保険者.getCode())) {
+        return shisetsuNyutaishoIchiranList;
+    }
 
-                // TODO N8187 久保田 以下の施設入退所情報取得処理はURF.IKaigoJigyoshaDaichoManager が使用可能になったら有効にする。
+    /**
+     * 識別コードと台帳種別を指定し、合致する介護保険施設入退所の一覧を返します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @param 台帳種別 DaichoType
+     * @return List<ShisetsuNyutaishoModel>
+     */
+    @Transaction
+    public IItemList<ShisetsuNyutaishoRelateModel> get台帳別施設入退所List(ShikibetsuCode 識別コード, DaichoType 台帳種別) {
+
+        IItemList<ShisetsuNyutaishoRelateModel> shisetsuNyutaishoIchiranList = dac.select台帳別施設入退所一覧(識別コード, 台帳種別);
+
+        for (ShisetsuNyutaishoRelateModel model : shisetsuNyutaishoIchiranList) {
+            setJigyoshaName(model);
+            shisetsuNyutaishoIchiranList.added(model);
+        }
+
+        return shisetsuNyutaishoIchiranList;
+    }
+
+    private void setJigyoshaName(ShisetsuNyutaishoRelateModel model) {
+        if (model.get介護保険施設入退所モデル().get台帳種別().equals(DaichoType.被保険者.getCode())) {
+
+            // TODO N8187 久保田 以下の施設入退所情報取得処理はURF.IKaigoJigyoshaDaichoManager が使用可能になったら有効にする。
 //                IKaigoJigyoshaDaichoManager manager = KaigoJigyoshaDaichoManagerFactory.getInstance();
 //                List<KaigoJigyoshaRelateModel> list = manager.findJigyoshaCurrent(new KaigoJigyoshaNo(model.get介護保険施設入退所モデル().get入所施設コード()));
 //                if (!list.isEmpty()) {
@@ -70,22 +100,18 @@ public class ShisetsuNyutaishoTokureiTaishoRelateManager {
 //                } else {
 //                    model.setJigyoshaMeisho(RString.EMPTY);
 //                }
-            } else if (model.get介護保険施設入退所モデル().get台帳種別().equals(DaichoType.適用除外者.getCode())
-                    || model.get介護保険施設入退所モデル().get台帳種別().equals(DaichoType.他市町村住所地特例者.getCode())) {
-                Optional<KaigoJogaiTokureiTaishoShisetsuModel> result = dac.select介護除外住所地特例対象施設ByKey(
-                        model.get介護保険施設入退所モデル().get入所施設種類(),
-                        model.get介護保険施設入退所モデル().get入所施設コード(),
-                        model.get介護保険施設入退所モデル().get入所年月日());
-                if (result.isPresent()) {
-                    model.setJigyoshaMeisho(result.get().get事業者名称().value());
-                } else {
-                    model.setJigyoshaMeisho(RString.EMPTY);
-                }
+        } else if (model.get介護保険施設入退所モデル().get台帳種別().equals(DaichoType.適用除外者.getCode())
+                || model.get介護保険施設入退所モデル().get台帳種別().equals(DaichoType.他市町村住所地特例者.getCode())) {
+            Optional<KaigoJogaiTokureiTaishoShisetsuModel> result = dac.select介護除外住所地特例対象施設ByKey(
+                    model.get介護保険施設入退所モデル().get入所施設種類(),
+                    model.get介護保険施設入退所モデル().get入所施設コード(),
+                    model.get介護保険施設入退所モデル().get入所年月日());
+            if (result.isPresent()) {
+                model.setJigyoshaMeisho(result.get().get事業者名称().value());
+            } else {
+                model.setJigyoshaMeisho(RString.EMPTY);
             }
-            shisetsuNyutaishoIchiranList.added(model);
         }
-
-        return shisetsuNyutaishoIchiranList;
     }
 
 }

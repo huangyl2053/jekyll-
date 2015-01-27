@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.kaigojogaitokureitaishoshisetsu.KaigoJogaiTokureiTaishoShisetsuModel;
@@ -55,6 +56,18 @@ public class ShisetsuNyutaishoTokureiTaishoRelateDac {
     public Optional<KaigoJogaiTokureiTaishoShisetsuModel> select介護除外住所地特例対象施設ByKey(RString 事業者種別, RString 事業者番号, FlexibleDate 有効開始年月日) {
 
         return 介護除外住所地特例対象施設Dac.select介護除外住所地特例対象施設ByKey(事業者種別, 事業者番号, 有効開始年月日);
+    }
+
+    /**
+     * 指定した識別コードと台帳種別に合致する、介護保険施設入退所のリストを返します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @param 台帳種別 DaichoType
+     * @return IItemList<ShisetsuNyutaishoRelateModel>
+     */
+    @Transaction
+    public IItemList<ShisetsuNyutaishoRelateModel> select台帳別施設入退所一覧(ShikibetsuCode 識別コード, DaichoType 台帳種別) {
+        return 介護保険施設入退所Dac.select台帳別施設入退所一覧(識別コード, 台帳種別);
     }
 
 }

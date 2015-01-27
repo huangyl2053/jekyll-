@@ -13,7 +13,10 @@ import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuHenkoJiyuHihokensha;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuHihokensha;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
@@ -154,10 +157,10 @@ public class HihokenshaDaichoListTest {
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
 
         entity.setIchigoShikakuShutokuYMD(new FlexibleDate("20140328"));
-        entity.setShikakuShutokuJiyuCode(ShikakuShutokuJiyu.年齢到達.getCode());
+        entity.setShikakuShutokuJiyuCode(new KaigoshikakuShutokuJiyuHihokensha(new RString("01")));
         entity.setShikakuShutokuTodokedeYMD(new FlexibleDate("20130327"));
         entity.setShikakuShutokuYMD(new FlexibleDate("20130327"));
-        entity.setShikakuHenkoJiyuCode(ShikakuHenkoJiyu.なし.getCode());
+        entity.setShikakuHenkoJiyuCode(new KaigoshikakuHenkoJiyuHihokensha(new RString("01")));
         entity.setShikakuHenkoTodokedeYMD(FlexibleDate.EMPTY);
         entity.setShikakuHenkoYMD(FlexibleDate.EMPTY);
         return entity;

@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 
 /**
  * 被保険者台帳Modelの{@link jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList}から、
@@ -41,7 +41,7 @@ public class HihokendhaDaichoKey implements IPredicate<HihokenshaDaichoModel> {
      * @param hihokenshaNo 被保険者番号
      * @param shoriTimestamp 処理日時
      */
-    public HihokendhaDaichoKey(LasdecCode shichosonCode, HihokenshaNo hihokenshaNo, YMDHMS shoriTimestamp) {
+    public HihokendhaDaichoKey(LasdecCode shichosonCode, HihokenshaNo hihokenshaNo, ShoriTimestamp shoriTimestamp) {
         requireNonNull(shichosonCode, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("市町村コード", getClass().getName()));
         requireNonNull(hihokenshaNo, UrSystemErrorMessages.引数がnullのため生成不可

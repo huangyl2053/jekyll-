@@ -7,9 +7,11 @@ package jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.model.validation.JushochiTokureiValidationMessage;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidatable;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
+import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
+import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
@@ -73,14 +75,14 @@ public final class JuchochiTokureiKaijoValidator {
 
         @Override
         public IValidationMessages validate() {
-            //TODO #55852
-            //１）解除処理を行う場合、以下のバリデーションチェックを行う。
-            //解除日 ＜ 最新履歴データの資格取得日
-            //解除日 ＜ 最新履歴データの資格変更日
-            //解除日 ＜ 最新履歴データの住所地特例適用日
-            //１－２）チェックに当てはまった場合、以下のメッセージを表示する。
-            //　メッセージID：DBAE00002（最新の住所地特例情報として追加することはできません。）
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
+
+            if (kaijoDate.isBefore(newestHihokenshaDaicho.get資格取得年月日())
+                    || kaijoDate.isBefore(newestHihokenshaDaicho.get資格変更年月日())
+                    || kaijoDate.isBefore(newestHihokenshaDaicho.get適用年月日())) {
+                validationMessages.add(JushochiTokureiValidationMessage.住所地特例解除日が_最新履歴の取得日_変更日_住所地特例適用日より前);
+            }
+            return validationMessages;
         }
     }
 }

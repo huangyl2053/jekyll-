@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.controller.dba2030011;
+package jp.co.ndensan.reams.db.dba.divcontroller.controller.DBA2030011;
 
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.JushochiTokureiMenuType;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA2030011.KihonJohoDiv;
@@ -36,7 +36,7 @@ public class KihonJoho {
      * @param kihonDiv {@link KihonJohoDiv 基本情報Div}
      * @return 基本情報Divを持つResponseData
      */
-    public ResponseData<KihonJohoDiv> onload(KihonJohoDiv kihonDiv) {
+    public ResponseData<KihonJohoDiv> onLoad(KihonJohoDiv kihonDiv) {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
         IUrControlData controlData = UrControlDataFactory.createInstance();
 
@@ -45,14 +45,11 @@ public class KihonJoho {
 
         if (isNot適用対象者(taishoshaKey, controlData)) {
             //TODO n8178 城間篤人 DBAE00004のエラーメッセージを返却するための処理を記述する。
-        } else if (isNot住所地特例適用者(taishoshaKey, controlData)) {
-            //TODO n8178 城間篤人 DBAE00006のエラーメッセージを返却するための処理を記述する。
         }
-
         return ResponseDatas.createSettingDataTo(kihonDiv);
     }
 
-    public boolean isNot適用対象者(TaishoshaKey taishoshaKey, IUrControlData controlData) {
+    private boolean isNot適用対象者(TaishoshaKey taishoshaKey, IUrControlData controlData) {
         JushochiTokureiMenuType menuType = JushochiTokureiMenuType.toValue(controlData.getMenuID());
 
         switch (menuType) {
@@ -73,37 +70,6 @@ public class KihonJoho {
             default:
                 return false;
         }
-    }
-
-    public boolean isNot住所地特例適用者(TaishoshaKey taishoshaKey, IUrControlData controlData) {
-        JushochiTokureiMenuType menuType = JushochiTokureiMenuType.toValue(controlData.getMenuID());
-
-        switch (menuType) {
-            case DBAMN25002_届出により解除:
-            case DBAMN25003_届出により施設変更:
-            case DBAMN52002_合併前の住所地特例措置解除:
-                break;
-            default:
-                return false;
-        }
-
-        HihokenshaDaichoManager daichoManager = new HihokenshaDaichoManager();
-        Optional<HihokenshaDaichoModel> daicho = daichoManager.
-                get最新被保険者台帳(new LasdecCode(controlData.getDonyuDantaiCode().getColumnValue()), taishoshaKey.get識別コード());
-
-        return is住所地特例未適用(daicho.get()) || is住所地特例解除済み(daicho.get());
-    }
-
-    private boolean is住所地特例未適用(HihokenshaDaichoModel daicho) {
-        return daicho.get住所地特例適用事由() == null
-                || daicho.get適用届出年月日() == null
-                || daicho.get適用年月日() == null;
-    }
-
-    private boolean is住所地特例解除済み(HihokenshaDaichoModel daicho) {
-        return daicho.get住所地特例解除事由() != null
-                || daicho.get解除届出年月日() != null
-                || daicho.get解除年月日() != null;
     }
 
 }

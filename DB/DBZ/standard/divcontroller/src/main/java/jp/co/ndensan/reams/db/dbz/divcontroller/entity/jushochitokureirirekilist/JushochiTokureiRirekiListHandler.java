@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoList;
+import jp.co.ndensan.reams.db.dbz.business.util.CodeMasterToKeyValueFunction;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiKaijoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.ur.urz.definition.code.CodeMasterHelper;
 import jp.co.ndensan.reams.ur.urz.definition.code.ICodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.code.ICodeValueObject;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuHenkoJiyuHihokensha;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuKaijo;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuTekiyo;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.URZCodeShubetsu;
@@ -39,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 共有子Div「住所地特例履歴」の状態を変更するクラスです。
@@ -50,7 +53,6 @@ public class JushochiTokureiRirekiListHandler {
     private final JushochiTokureiRirekiListDiv jutokuRirekiDiv;
     private static final RString PANEL_SESSION_ACCESSOR_KEY = new RString("jushochiTokureiRireki");
     private static final RString PANEL_SESSION_ACCESSOR_EDITING_KEY = new RString("jushochiTokureiRireki_Editing");
-    private static final int ONE_SECONDS = 1;
 
     /**
      * コンストラクタです。
@@ -401,36 +403,44 @@ public class JushochiTokureiRirekiListHandler {
 
     private void modifyEntryData() {
 
-        Optional<HihokenshaDaichoModel> baseDataModel;
         IItemList<HihokenshaDaichoModel> sorted被保険者台帳履歴
                 = getEditing被保険者台帳情報().sorted(HihokenshaDaichoModelComparators.orderBy資格取得年月日.desc());
+        List<HihokenshaDaichoModel> sortedList = sorted被保険者台帳履歴.toList();
         HihokenshaDaichoModel mergedTekiyoModel;
         HihokenshaDaichoModel mergedKaijoModel;
 
         JushochiTokureiExecutionStatus jutokuExeStatus = JushochiTokureiExecutionStatus.toValue(jutokuRirekiDiv.getJushochiTokureiExecutionState());
         switch (jutokuExeStatus) {
             case Tekiyo:
-                baseDataModel = sorted被保険者台帳履歴.findFirst();
-                mergedTekiyoModel = mergeTekiyoMeisai(baseDataModel.get());
+                mergedTekiyoModel = mergeTekiyoMeisai(sortedList.get(0));
+                sortedList.set(0, mergedTekiyoModel);
                 set被保険者台帳情報(sorted被保険者台帳履歴);
                 break;
             case Kaijo:
-                baseDataModel = sorted被保険者台帳履歴.findFirst();
-                mergedKaijoModel = mergedKaijoMeisai(baseDataModel.get());
+                mergedKaijoModel = mergedKaijoMeisai(sortedList.get(0));
+                sortedList.set(0, mergedKaijoModel);
                 set被保険者台帳情報(sorted被保険者台帳履歴);
                 break;
             case Teisei:
             default:
-                baseDataModel = Optional.of(getPreviousInputTekiyoDateBy(sorted被保険者台帳履歴));
-                mergedTekiyoModel = mergeTekiyoMeisai(baseDataModel.get());
+                mergedTekiyoModel = mergeTekiyoMeisai(sortedList.get(0));
                 mergedKaijoModel = mergedKaijoMeisai(mergedTekiyoModel);
+                sortedList.set(0, mergedKaijoModel);
                 set被保険者台帳情報(sorted被保険者台帳履歴.added(mergedTekiyoModel, mergedKaijoModel));
                 break;
         }
     }
 
     private void deleteEntryData() {
+        IItemList<HihokenshaDaichoModel> sorted被保険者台帳履歴
+                = getEditing被保険者台帳情報().sorted(HihokenshaDaichoModelComparators.orderBy資格取得年月日.desc());
+        List<HihokenshaDaichoModel> sortedList = sorted被保険者台帳履歴.toList();
+        HihokenshaDaichoModel deleteModel;
 
+        deleteModel = sortedList.get(0);
+        deleteModel.setDeletedState(true);
+        sortedList.set(0, deleteModel);
+        set被保険者台帳情報(ItemList.of(sortedList));
     }
 
     private HihokenshaDaichoModel getPreviousInputTekiyoDateBy(IItemList<HihokenshaDaichoModel> itemList) {
@@ -471,6 +481,31 @@ public class JushochiTokureiRirekiListHandler {
         mergedModel.set広住特措置元市町村コード(new LasdecCode(jutokuRirekiDiv.getDdlKaijojiSochimotoHokensha().getSelectedKey()));
         mergedModel.set旧市町村コード(new LasdecCode(jutokuRirekiDiv.getDdlKaijojiKyuHokensha().getSelectedKey()));
         return mergedModel;
+    }
+
+    /**
+     * 入力されている情報をModelに変換して返します。
+     */
+    public Optional<HihokenshaDaichoModel> createEntryData() {
+
+        Optional<HihokenshaDaichoModel> baseDataModel;
+        IItemList<HihokenshaDaichoModel> sorted被保険者台帳履歴
+                = getEditing被保険者台帳情報().sorted(HihokenshaDaichoModelComparators.orderBy処理日時.desc());
+
+        JushochiTokureiExecutionStatus jutokuExeStatus = JushochiTokureiExecutionStatus.toValue(jutokuRirekiDiv.getJushochiTokureiExecutionState());
+        switch (jutokuExeStatus) {
+            case Tekiyo:
+                baseDataModel = sorted被保険者台帳履歴.findFirst();
+                return Optional.of(mergeTekiyoMeisai(baseDataModel.get()));
+            case Kaijo:
+                baseDataModel = sorted被保険者台帳履歴.findFirst();
+                return Optional.of(mergedKaijoMeisai(baseDataModel.get()));
+            case Teisei:
+            default:
+                baseDataModel = Optional.of(getPreviousInputTekiyoDateBy(sorted被保険者台帳履歴));
+                HihokenshaDaichoModel mergedTekiyoModel = mergeTekiyoMeisai(baseDataModel.get());
+                return Optional.of(mergedKaijoMeisai(mergedTekiyoModel));
+        }
     }
 
     /**
@@ -589,9 +624,8 @@ public class JushochiTokureiRirekiListHandler {
      * 共有子Divの状態を初期化します。
      *
      * @param hokenshaJohoDisplayMode 明細表示モード
-     * @param atenaShokaiSimple 共有子Div「宛名照会Simple」
      */
-    public void initialize(JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode hokenshaJohoDisplayMode, IAtenaShokaiSimpleDiv atenaShokaiSimple) {
+    public void initialize(JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode hokenshaJohoDisplayMode) {
         jutokuRirekiDiv.setMode_HokenshaJohoDisplayMode(hokenshaJohoDisplayMode);
         setTekiyoJiyuDataSource();
         setKaijoJiyuDataSource();
@@ -600,13 +634,15 @@ public class JushochiTokureiRirekiListHandler {
     }
 
     private void setTekiyoJiyuDataSource() {
-        List<KaigoshikakuJutokuTekiyo> jutokuTekiyoList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格住特適用);
-        jutokuRirekiDiv.getDdlTekiyoJiyu().setDataSource(createCodeMasterKeyValue(jutokuTekiyoList));
+        List<KaigoshikakuHenkoJiyuHihokensha> tekiyoList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格住特適用);
+        IItemList<KeyValueDataSource> dataSource = ItemList.of(tekiyoList).map(new CodeMasterToKeyValueFunction());
+        jutokuRirekiDiv.getDdlTekiyoJiyu().setDataSource(dataSource.toList());
     }
 
     private void setKaijoJiyuDataSource() {
-        List<KaigoshikakuJutokuKaijo> jutokuKaijoList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格住特解除);
-        jutokuRirekiDiv.getDdlTekiyoJiyu().setDataSource(createCodeMasterKeyValue(jutokuKaijoList));
+        List<KaigoshikakuJutokuKaijo> kaijoList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格住特解除);
+        IItemList<KeyValueDataSource> dataSource = ItemList.of(kaijoList).map(new CodeMasterToKeyValueFunction());
+        jutokuRirekiDiv.getDdlTekiyoJiyu().setDataSource(dataSource.toList());
     }
 
     private void setShichosonJohoDataSource() {
@@ -628,15 +664,6 @@ public class JushochiTokureiRirekiListHandler {
         List<KeyValueDataSource> juminJohoDataSource = creaateRStringKeyValue(juminJohoList);
         jutokuRirekiDiv.getDdlTekiyojiJuminJoho().setDataSource(juminJohoDataSource);
         jutokuRirekiDiv.getDdlKaijojiJuminJono().setDataSource(juminJohoDataSource);
-    }
-
-    private <T extends ICodeValueObject> List<KeyValueDataSource> createCodeMasterKeyValue(List<T> dataSource) {
-        List<KeyValueDataSource> keyValueDataSourceList = new ArrayList<>();
-        for (T data : dataSource) {
-            KeyValueDataSource keyValueDataSource = new KeyValueDataSource(data.toRString(), data.getMeisho());
-            keyValueDataSourceList.add(keyValueDataSource);
-        }
-        return keyValueDataSourceList;
     }
 
     private List<KeyValueDataSource> creaateRStringKeyValue(List<RString> dataSource) {
@@ -690,6 +717,22 @@ public class JushochiTokureiRirekiListHandler {
      */
     public void setExecutionStatus(ViewExecutionStatus status) {
         jutokuRirekiDiv.setExecutionStatus(status.getValue());
+    }
+
+    /**
+     * 住所地特例履歴Listが内部で持つ、被保険者台帳情報に変更が存在するか否かを判定します。
+     *
+     * @return 被保険者台帳情報に変更が存在するならtrue
+     */
+    public boolean hasChanged() {
+        IItemList<HihokenshaDaichoModel> daichoList = getEditing被保険者台帳情報();
+        for (HihokenshaDaichoModel daicho : daichoList) {
+            if (daicho.getState() == EntityDataState.Unchanged) {
+                continue;
+            }
+            return true;
+        }
+        return false;
     }
 
 }

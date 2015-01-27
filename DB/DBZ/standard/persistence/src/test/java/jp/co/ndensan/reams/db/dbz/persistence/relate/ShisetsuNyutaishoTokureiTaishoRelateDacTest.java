@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1004ShisetsuNyutaishoEntityGenerator;
@@ -18,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1005KaigoJogaiTokureiTais
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -102,6 +105,38 @@ public class ShisetsuNyutaishoTokureiTaishoRelateDacTest extends DbzTestDacBase 
 
     }
 
+    public static class select台帳別施設入退所一覧 extends DbzTestDacBase {
+
+        private final DaichoType type1 = DaichoType.被保険者;
+        private final DaichoType type2 = DaichoType.適用除外者;
+        private final ShoriTimestamp shoriTimestamp = ShoriTimestamp.of(new YMDHMS("20140101000000"));
+
+        @Before
+        public void setup() {
+            TestSupport.insertDbT1004(市町村コード, 識別コード, type1, shoriTimestamp.getColumnValue());
+            TestSupport.insertDbT1004(市町村コード, 識別コード, type1, shoriTimestamp.plusSeconds(1).getColumnValue());
+            TestSupport.insertDbT1004(市町村コード, 識別コード, type2, shoriTimestamp.plusSeconds(2).getColumnValue());
+            TestSupport.insertDbT1004(市町村コード, 識別コード, type2, shoriTimestamp.plusSeconds(3).getColumnValue());
+            TestSupport.insertDbT1004(市町村コード, 識別コード, type2, shoriTimestamp.plusSeconds(4).getColumnValue());
+        }
+
+        @Test
+        public void 台帳種別にtype1を指定したとき_2件のListが返る() {
+
+            IItemList<ShisetsuNyutaishoRelateModel> result = sut1.select台帳別施設入退所一覧(識別コード, type1);
+            assertThat(result.size(), is(2));
+
+        }
+
+        @Test
+        public void 台帳種別にtype2を指定したとき_3件のListが返る() {
+
+            IItemList<ShisetsuNyutaishoRelateModel> result = sut1.select台帳別施設入退所一覧(識別コード, type2);
+            assertThat(result.size(), is(3));
+
+        }
+    }
+
     private static class TestSupport {
 
         public static void insertDbT1004(
@@ -110,6 +145,15 @@ public class ShisetsuNyutaishoTokureiTaishoRelateDacTest extends DbzTestDacBase 
             DbT1004ShisetsuNyutaishoEntity entity = DbT1004ShisetsuNyutaishoEntityGenerator.createDbT1004ShisetsuNyutaishoEntity();
             entity.setShichosonCode(市町村コード);
             entity.setShikibetsuCode(識別コード);
+            介護保険施設入退所Dac.insert(entity);
+        }
+
+        public static void insertDbT1004(LasdecCode 市町村コード, ShikibetsuCode 識別コード, DaichoType 台帳種別, YMDHMS shoriTimestamp) {
+            DbT1004ShisetsuNyutaishoEntity entity = DbT1004ShisetsuNyutaishoEntityGenerator.createDbT1004ShisetsuNyutaishoEntity();
+            entity.setShichosonCode(市町村コード);
+            entity.setShikibetsuCode(識別コード);
+            entity.setDaichoShubetsu(台帳種別.getCode());
+            entity.setShoriTimestamp(shoriTimestamp);
             介護保険施設入退所Dac.insert(entity);
         }
 

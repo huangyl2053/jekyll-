@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -426,6 +427,16 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     @JsonIgnore
     private ShisetsuNyutaishoRirekiKanriHandler getHandler() {
         return new ShisetsuNyutaishoRirekiKanriHandler(this);
+    }
+
+    @Override
+    public boolean hasChanged() {
+        return getHandler().hasChanged();
+    }
+
+    @Override
+    public boolean hasChangedInMeisai() {
+        return getHandler().hasChangedInMeisai();
     }
 
 }

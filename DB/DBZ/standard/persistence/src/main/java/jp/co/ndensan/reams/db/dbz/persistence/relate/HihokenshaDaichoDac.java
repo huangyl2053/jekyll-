@@ -133,6 +133,35 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
     }
 
     /**
+     * 条件に合致する被保険者台帳のリストを返します。返却されるListは処理日時の降順になります。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 被保険者番号 被保険者番号
+     * @return {@code IItemList<HihokenshaDaichoModel>}
+     */
+    @Transaction
+    public IItemList<HihokenshaDaichoModel> select被保険者台帳一覧DescOrderByShoriTimestamp(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(eq(DbT1001HihokenshaDaicho.shichosonCode, 市町村コード), eq(DbT1001HihokenshaDaicho.hihokenshaNo, 被保険者番号))).
+                order(by(DbT1001HihokenshaDaicho.shoriTimestamp, Order.DESC)).
+                toList(DbT1001HihokenshaDaichoEntity.class);
+
+        List<HihokenshaDaichoModel> list = new ArrayList<>();
+
+        for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
+            list.add(createModel(被保険者台帳));
+        }
+
+        return ItemList.of(list);
+    }
+
+    /**
      * 条件に合致する最新被保険者台帳を１件返します。
      *
      * @param 市町村コード 市町村コード

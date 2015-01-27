@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -39,13 +40,13 @@ public class HihokendhaDaichoKeyTest {
 
         private LasdecCode 市町村コード;
         private HihokenshaNo 被保険者番号;
-        private YMDHMS 処理日時;
+        private ShoriTimestamp 処理日時;
 
         @Before
         public void setUp() {
             市町村コード = new LasdecCode("202010");
             被保険者番号 = new HihokenshaNo("1234500001");
-            処理日時 = new YMDHMS("20141231020506");
+            処理日時 = ShoriTimestamp.of(new YMDHMS("20141231020506"));
         }
 
         @Test(expected = NullPointerException.class)
@@ -111,7 +112,7 @@ public class HihokendhaDaichoKeyTest {
         HihokenshaDaichoModel model = new HihokenshaDaichoModel();
         model.set市町村コード(new LasdecCode(lasdecCode));
         model.set被保険者番号(new HihokenshaNo(hihokenshaNo));
-        model.set処理日時(new YMDHMS(shoriDateTime));
+        model.set処理日時(ShoriTimestamp.of(new YMDHMS(shoriDateTime)));
         return model;
     }
 }

@@ -9,24 +9,16 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.dgJutoku_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.KaigoRowState;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.JushochiTokureiRirekiListValidationHelper;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrQuestionMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
-import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.DivcontrollerMethod;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICallbackMethod;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.SingleButtonType;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 共有子Div「住所地特例履歴List」のイベントを定義したDivControllerです。
@@ -129,12 +121,6 @@ public class JushochiTokureiRirekiList {
      * @return 住所地特例履歴ListDivを持つResponseData
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onClick_btnJutokuTorikeshi(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
-        //１）明細エリアの情報が変更されているかを確認する。
-        //１－１）変更がない場合は、onClick_btnJutokuTorikeshi_onYesの処理を実行する。
-        //１－２）変更が存在する場合は、２）の処理を実行する。
-        //メッセージID：URZQ00007（入力された値を破棄します。よろしいですか？）
-        //      Yes：２の処理に進む。（明細エリアの値を破棄する）
-        //      No : ダイアログを閉じる
         ResponseData<JushochiTokureiRirekiListDiv> response = new ResponseData<>();
 
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
@@ -146,7 +132,7 @@ public class JushochiTokureiRirekiList {
         QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                 UrQuestionMessages.入力内容の破棄.getMessage().toString(), "はい", "いいえ");
 
-        ICallbackMethod[] methods = {methodYes}; //ユーザー選択時の動作を規定する
+        ICallbackMethod[] methods = {methodYes};
         message.addInvokeMethod(methods);
         response.addMessage(message);
 
@@ -180,13 +166,20 @@ public class JushochiTokureiRirekiList {
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onBeforeClick_btnJutokuKakutei(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
         ResponseData<JushochiTokureiRirekiListDiv> response = new ResponseData<>();
-        //TODO #55852 n8178 城間篤人 バリデーション実装時に回収が必要 2014/12/24
-        //１）JuchochiTokureiValidatorを用いて、バリデーションをチェックする。
-        //２）適用処理を行う場合、さらにJuchochiTokureiTekiyoTorokuValidatorを用いてチェックを行う。
-        //３）解除処理を行う場合、さらにJuchochiTokureiKaijoTorokuValidatorを用いてチェックを行う。
-        //４）JushochiTokureiDuplicateValidatorを用いて、
-        //    住所地特例情報・他市町村住所地特例・適用除外者それぞれの情報に対して、期間の重複がないかをチェックします。
-        //５）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
+
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        pairs.add(
+                JushochiTokureiRirekiListValidationHelper.validate住所地特例(
+                        handler.createEntryData().get(),
+                        handler.getEditing被保険者台帳情報(),
+                        jutokuRirekiDiv.getTxtTekiyoDate(),
+                        jutokuRirekiDiv.getTxtKaijoDate(),
+                        jutokuRirekiDiv.getDgJutoku(),
+                        JushochiTokureiExecutionStatus.toValue(jutokuRirekiDiv.getJushochiTokureiExecutionState()))
+        );
+
+        response.addValidationMessages(pairs);
         response.data = jutokuRirekiDiv;
         return response;
     }
@@ -201,7 +194,6 @@ public class JushochiTokureiRirekiList {
      *
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onClick_btnJutokuKakutei(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
-        //TODO #55852
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
         handler.updateEntryData();
         handler.clearInputData();

@@ -7,10 +7,12 @@ package jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidatable;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
+import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.model.validation.JushochiTokureiValidationMessage;
+import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
 
 /**
  * 被保険者台帳に対して、最新の住所地特例適用登録を行う際に必要なバリデーションです。
@@ -73,14 +75,14 @@ public class JuchochiTokureiTekiyoValidator {
 
         @Override
         public IValidationMessages validate() {
-            //TODO #55852
-            //１）以下のバリデーションチェックを行う。
-            //適用日 ＜ 最新履歴データの資格取得日
-            //適用日 ＜ 最新履歴データの資格変更日
-            //適用日 ＜ 最新履歴データの住所地特例解除日
-            //２）チェックに当てはまった場合、以下のメッセージを表示する。
-            //　メッセージID：DBAE00002（最新の住所地特例情報として追加することはできません。）
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
+
+            if (tekiyoDate.isBefore(newestHihokenshaDaicho.get資格取得年月日())
+                    || tekiyoDate.isBefore(newestHihokenshaDaicho.get資格変更年月日())
+                    || tekiyoDate.isBefore(newestHihokenshaDaicho.get解除年月日())) {
+                validationMessages.add(JushochiTokureiValidationMessage.住所地特例適用日が_最新履歴の取得日_変更日_住所地特例解除日より前);
+            }
+            return validationMessages;
         }
     }
 }

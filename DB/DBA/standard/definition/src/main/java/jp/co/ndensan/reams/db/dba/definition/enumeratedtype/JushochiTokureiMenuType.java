@@ -16,10 +16,10 @@ public enum JushochiTokureiMenuType {
 
     //TODO n8178 城間篤人 ShoriTypeを実際に使用するか不明。使用しなかった場合削除することを忘れない...
     DBAMN25001_届出により適用("DBAMN25001", ShoriType.適用前),
-    DBAMN61002_転入転出保留対象者管理("DBAMN61002", ShoriType.適用前),
     DBAMN25002_届出により解除("DBAMN25002", ShoriType.適用中),
     DBAMN25003_届出により施設変更("DBAMN25003", ShoriType.適用中),
     DBAMN52002_合併前の住所地特例措置解除("DBAMN52002", ShoriType.適用中),
+    DBAMN61002_転入転出保留対象者管理("DBAMN61002", ShoriType.適用前),
     その他("NONE", ShoriType.その他);
 
     private final RString menuId;

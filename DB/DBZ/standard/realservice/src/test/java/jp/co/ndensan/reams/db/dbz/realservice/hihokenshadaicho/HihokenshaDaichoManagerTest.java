@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.relate.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
@@ -134,6 +133,25 @@ public class HihokenshaDaichoManagerTest {
             Optional<HihokenshaDaichoModel> 被保険者台帳 = sut.get最新被保険者台帳(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号);
 
             assertThat(被保険者台帳.get().get被保険者番号(), is(DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号));
+        }
+    }
+
+    public static class get被保険者台帳一覧DescOrderByShoriTimestamp extends DbzTestBase {
+
+        @Test
+        public void データが3件見つかる検索条件を指定した場合_size3の被保険者台帳Listが返る() {
+
+            HihokenshaDaichoModel hihoModel1 = HihokenshaDaichoModelTestHelper.createModel();
+            HihokenshaDaichoModel hihoModel2 = HihokenshaDaichoModelTestHelper.createModel();
+            HihokenshaDaichoModel hihoModel3 = HihokenshaDaichoModelTestHelper.createModel();
+            IItemList<HihokenshaDaichoModel> hihoList = ItemList.of(hihoModel1, hihoModel2, hihoModel3);
+
+            when(dac.select被保険者台帳一覧DescOrderByShoriTimestamp(any(LasdecCode.class), any(HihokenshaNo.class))).thenReturn(hihoList);
+
+            IItemList<HihokenshaDaichoModel> result = sut.get被保険者台帳一覧DescOrderByShoriTimestamp(
+                    DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_市町村コード, DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号);
+
+            assertThat(result.size(), is(3));
         }
     }
 

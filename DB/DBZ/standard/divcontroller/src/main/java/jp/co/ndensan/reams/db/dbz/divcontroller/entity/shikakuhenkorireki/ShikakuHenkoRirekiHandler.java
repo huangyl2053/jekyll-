@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokendhaDaichoKey;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
@@ -69,13 +70,13 @@ public class ShikakuHenkoRirekiHandler {
         setHenkoJiyuDataSource();
     }
 
-    public void initialize(LasdecCode 市町村コード) {
+    public void initialize(LasdecCode 市町村コード, ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode mode) {
         HihokenshaDaichoFinder hihokenshaFinder = new HihokenshaDaichoFinder();
         HihokenshaDaichoList 被保険者List = new HihokenshaDaichoList(hihokenshaFinder.find直近被保険者台帳一覧(市町村コード));
-        switch (shikakuHenkoRirekiDiv.getMode_HokenshaJohoDisplayMode()) {
 
+        shikakuHenkoRirekiDiv.setMode_HokenshaJohoDisplayMode(mode);
+        switch (shikakuHenkoRirekiDiv.getMode_HokenshaJohoDisplayMode()) {
             case TanitsuGappeiNashi:
-                shikakuHenkoRirekiDiv.setMode_HokenshaJohoDisplayMode(ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiNashi);
                 break;
             case TanitsuGappeiAri:
                 shikakuHenkoRirekiDiv.setMode_HokenshaJohoDisplayMode(ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiAri);
@@ -148,7 +149,7 @@ public class ShikakuHenkoRirekiHandler {
         dgHenko_Row row = new dgHenko_Row(RString.EMPTY, new TextBoxFlexibleDate(), new TextBoxFlexibleDate(),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate());
         TextBoxFlexibleDate shoriDate = new TextBoxFlexibleDate();
-        shoriDate.setValue(new FlexibleDate(model.get処理日時().toDateString()));
+        shoriDate.setValue(new FlexibleDate(model.get処理日時().getColumnValue().toDateString()));
         setRowState(row, model);
         row.setShoriDate(shoriDate);
         row.setHenkoJiyuKey(model.get資格変更事由().getCode());
@@ -213,14 +214,14 @@ public class ShikakuHenkoRirekiHandler {
 
     private void addEntryData() {
         HihokenshaDaichoModel model = createEntryData();
-        model.set処理日時(new YMDHMS(toGYYMMDDHHMMSS(RDate.getNowDateTime())));
+        model.set処理日時(ShoriTimestamp.of(new YMDHMS(toGYYMMDDHHMMSS(RDate.getNowDateTime()))));
 
         update資格変更履歴(model);
     }
 
     private void modifyEntryData() {
         HihokenshaDaichoModel model = createEntryData();
-        model.set処理日時(new YMDHMS(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiShoriDatetime()));
+        model.set処理日時(ShoriTimestamp.of(new YMDHMS(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiShoriDatetime())));
 
         update資格変更履歴(model);
     }
@@ -281,7 +282,7 @@ public class ShikakuHenkoRirekiHandler {
         model.set資格変更事由(ShikakuHenkoJiyu.toValue(
                 shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoJiyu().getSelectedKey()));
         model.set市町村コード(new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiHihokenshaNo()));
-        model.set処理日時(new YMDHMS(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiShoriDatetime()));
+        model.set処理日時(ShoriTimestamp.of(new YMDHMS(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiShoriDatetime())));
         model.set旧市町村コード(new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoKyuHokensha().getSelectedKey()));
         model.set広住特措置元市町村コード(new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoSochimotoHokensha().getSelectedKey()));
         update資格変更履歴(model);
@@ -388,7 +389,7 @@ public class ShikakuHenkoRirekiHandler {
             switch (editingModel.getState()) {
                 case Modified:
                     HihokenshaDaichoModel addingModel = new HihokenshaDaichoModel(editingModel.getEntity());
-                    addingModel.set処理日時(plusOneSeconds(addingModel.get処理日時()));
+                    addingModel.get処理日時().plusSeconds(1);
                     mergedList.add(addingModel);
                 case Deleted:
                     baseModel.setDeletedState(true);
@@ -482,7 +483,7 @@ public class ShikakuHenkoRirekiHandler {
     private HihokenshaDaichoModel findHenkoMeisaiOriginModel() {
         LasdecCode 市町村コード = new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiHihokenshaNo());
         HihokenshaNo 被保険者番号 = new HihokenshaNo(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiHihokenshaNo());
-        YMDHMS 処理日時 = new YMDHMS(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiShoriDatetime());
+        ShoriTimestamp 処理日時 = ShoriTimestamp.of(new YMDHMS(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiShoriDatetime()));
         IPredicate<HihokenshaDaichoModel> condition = new HihokendhaDaichoKey(市町村コード, 被保険者番号, 処理日時);
         return get被保険者台帳情報().filter(condition).findJustOne().get();
     }

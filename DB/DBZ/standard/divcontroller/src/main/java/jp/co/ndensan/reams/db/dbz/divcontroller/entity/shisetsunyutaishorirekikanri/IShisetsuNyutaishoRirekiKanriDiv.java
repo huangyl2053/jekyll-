@@ -52,4 +52,18 @@ public interface IShisetsuNyutaishoRirekiKanriDiv {
      * 利用機能モードの設定を元に初期化します。
      */
     void initialize();
+
+    /**
+     * 自身が持つ施設入退所情報に対して変更が存在した場合に、trueを返します。
+     *
+     * @return 施設入退所情報に変更が有った場合、true
+     */
+    boolean hasChanged();
+
+    /**
+     * 明細パネルが変更されたかどうかを判定します。
+     *
+     * @return 明細パネルの内容が変更されていたらtrue
+     */
+    boolean hasChangedInMeisai();
 }

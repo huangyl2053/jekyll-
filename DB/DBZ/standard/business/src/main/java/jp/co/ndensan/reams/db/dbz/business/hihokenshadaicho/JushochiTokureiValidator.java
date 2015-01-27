@@ -8,8 +8,12 @@ package jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.model.validation.JushochiTokureiValidationMessage;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
+import static jp.co.ndensan.reams.ur.urz.model.validation.ValidationChain.validateFollowingItems;
+import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 
 /**
@@ -66,34 +70,85 @@ public class JushochiTokureiValidator {
 
         @Override
         public IValidatable setJushochiTokureiList(IItemList<HihokenshaDaichoModel> jushochiTokureiList) {
-            requireNonNull(jushochiTokureiData, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例List"));
+            requireNonNull(jushochiTokureiList, UrSystemErrorMessages.値がnull.getReplacedMessage("住所地特例List"));
             this.jushochiTokureiList = jushochiTokureiList;
             return this;
         }
 
         @Override
         public IValidationMessages validate() {
-            //TODO #55852
-            //１）適用日 < 資格得喪情報の取得日 のとき、エラーメッセージを表示する。
-            //    メッセージID：URZE00028（大小関係が不正です。(%1)）
-            //      %1：適用日 － 取得日
-            //２）資格得喪情報の喪失日 ≦ 適用日 のとき、エラーメッセージを表示する。
-            //    メッセージID：URZE00028（大小関係が不正です。(%1)）
-            //      %1：適用日 － 喪失日
-            //３）解除日≠Empty かつ 解除日 < 適用日 のとき、エラーメッセージを表示する。
-            //    メッセージID：URZE00027（期間が不正です。%1－%2）
-            //      %1：適用日
-            //      %2：解除日
-            //４）解除日≠Empty かつ 資格得喪情報の喪失日 < 解除日 のとき、エラーメッセージを表示する。
-            //    メッセージID：URZE00028（大小関係が不正です。(%1)）
-            //      %1：解除日 － 喪失日
+            return validateFollowingItems()
+                    .then(is住所地特例の期間が不正())
+                    .then(is住特適用日が資格取得日より前())
+                    .then(is住特適用日が資格喪失日以降())
+                    .then(is住特解除日が資格取得日より前())
+                    .then(is住特解除日が資格喪失日以降())
+                    .then(is住所地特例期間重複())
+                    .end();
+        }
+
+        private IValidationMessages is住特適用日が資格取得日より前() {
+            IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
+
+            if (jushochiTokureiData.get適用年月日().isBefore(jushochiTokureiData.get資格取得年月日())) {
+                validationMessages.add(JushochiTokureiValidationMessage.住特適用日が資格取得日より前);
+            }
+            return validationMessages;
+        }
+
+        private IValidationMessages is住特適用日が資格喪失日以降() {
+            IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
+
+            if (jushochiTokureiData.get資格喪失年月日().isBeforeOrEquals(jushochiTokureiData.get適用年月日())) {
+                validationMessages.add(JushochiTokureiValidationMessage.住特適用日が資格喪失日以降);
+            }
+            return validationMessages;
+        }
+
+        private IValidationMessages is住特解除日が資格取得日より前() {
+            IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
+            if (jushochiTokureiData.get解除年月日() == null || jushochiTokureiData.get解除年月日().isEmpty()) {
+                return validationMessages;
+            }
+
+            if (jushochiTokureiData.get解除年月日().isBefore(jushochiTokureiData.get資格取得年月日())) {
+                validationMessages.add(JushochiTokureiValidationMessage.住特解除日が資格取得日より前);
+            }
+            return validationMessages;
+        }
+
+        private IValidationMessages is住特解除日が資格喪失日以降() {
+            IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
+            if (jushochiTokureiData.get解除年月日() == null || jushochiTokureiData.get解除年月日().isEmpty()) {
+                return validationMessages;
+            }
+
+            if (jushochiTokureiData.get資格喪失年月日().isBefore(jushochiTokureiData.get解除年月日())) {
+                validationMessages.add(JushochiTokureiValidationMessage.住特解除日が資格喪失日以降);
+            }
+            return validationMessages;
+        }
+
+        private IValidationMessages is住所地特例期間重複() {
+            //TODO n8178 城間篤人 どのようにチェックを行うか考える必要がある。
+            IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
             //５）jushochiTokureiDataが持つ適用日・解除日の期間と、住所地特例履歴一覧内の全データの適用日・解除日との比較で重複が有る場合、
             //   エラーメッセージを表示する。
             //    メッセージID：URZE00025(期間が重複しています。）
             //５－１）もし、jushochiTokureiDataが修正処理によって生成されてものである場合、修正対象のレコードはチェック対象からはずす。
-            //
-            //６）エラーメッセージを返す。
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            return validationMessages;
+        }
+
+        private IValidationMessages is住所地特例の期間が不正() {
+            IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
+            if (jushochiTokureiData.get解除年月日() == null || jushochiTokureiData.get解除年月日().isEmpty()) {
+                return validationMessages;
+            }
+
+            if (jushochiTokureiData.get解除年月日().isBeforeOrEquals(jushochiTokureiData.get適用年月日())) {
+                validationMessages.add(JushochiTokureiValidationMessage.住所地特例期間が不正_適用日が解除日の後);
+            }
+            return validationMessages;
         }
 
     }

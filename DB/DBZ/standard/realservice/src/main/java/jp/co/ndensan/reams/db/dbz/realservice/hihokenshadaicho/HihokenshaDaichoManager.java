@@ -77,6 +77,18 @@ public class HihokenshaDaichoManager {
     }
 
     /**
+     * 条件に合致する被保険者台帳の一覧を返します。返却される被保険者台帳のListは処理日時の降順で返ります。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 被保険者番号 被保険者番号
+     * @return IItemList<HihokenshaDaichoModel>
+     */
+    @Transaction
+    public IItemList<HihokenshaDaichoModel> get被保険者台帳一覧DescOrderByShoriTimestamp(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+        return dac.select被保険者台帳一覧DescOrderByShoriTimestamp(市町村コード, 被保険者番号);
+    }
+
+    /**
      * 条件に合致する最新被保険者台帳を返します。
      *
      * @param 市町村コード 市町村コード

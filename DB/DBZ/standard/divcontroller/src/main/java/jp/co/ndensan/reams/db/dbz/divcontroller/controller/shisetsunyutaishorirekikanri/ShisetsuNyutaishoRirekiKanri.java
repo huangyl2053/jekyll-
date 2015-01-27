@@ -376,55 +376,7 @@ public class ShisetsuNyutaishoRirekiKanri {
         //      Yes：onClick_btnIryoHokenTorikeshi_onYesの処理を実行する。
         //      No:ダイアログを閉じる
 
-        boolean flg = Boolean.FALSE;
-        RString rowState = shisetsuNyutaishoRirekiDiv.getInputMode();
-        switch (ViewExecutionStatus.toValue(rowState)) {
-
-            case Add:
-
-                if (!shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
-                    flg = Boolean.TRUE;
-                } else if (!shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()) {
-                    flg = Boolean.TRUE;
-                } else if (shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().toString().isEmpty()) {
-                    flg = Boolean.TRUE;
-                }
-                break;
-
-            case Modify:
-                int rowIndex = Integer.valueOf(shisetsuNyutaishoRirekiDiv.getSelectRow().toString()).intValue();
-                dgShisetsuNyutaishoRireki_Row 選択行 = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rowIndex);
-
-                RString 入所年月日 = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().toString()));
-                RString 退所年月日 = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().toString()));
-                RString 台帳種別 = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get台帳種別().toString()));
-                RString 入所施設種類 = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類().getCode().toString()));
-                RString 入所施設コード = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get入所施設コード().toString()));
-                RString 施設名称 = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設名称().toString()));
-
-                if (!入所年月日.equals(composeNulltoStr(new RString(選択行.getNyushoDate().getValue().toString())))) {
-                    flg = Boolean.TRUE;
-                } else if (!退所年月日.equals(composeNulltoStr(new RString(選択行.getTaishoDate().getValue().toString())))) {
-                    flg = Boolean.TRUE;
-                } else if (!台帳種別.equals(composeNulltoStr(new RString(選択行.getDaichoShubetsuKey().toString())))) {
-                    flg = Boolean.TRUE;
-                } else if (!入所施設種類.equals(composeNulltoStr(new RString(選択行.getShisetsuShuruiKey().toString())))) {
-                    flg = Boolean.TRUE;
-                } else if (!入所施設コード.equals(composeNulltoStr(new RString(選択行.getShisetsuCode().toString())))) {
-                    flg = Boolean.TRUE;
-                } else if (!施設名称.equals(composeNulltoStr(new RString(選択行.getShisetsuMeisho().toString())))) {
-                    flg = Boolean.TRUE;
-                }
-
-                break;
-
-            case Delete:
-
-                break;
-            default:
-                break;
-        }
-
+        boolean flg = shisetsuNyutaishoRirekiDiv.hasChangedInMeisai();
         if (!flg) {
             return this.onClick_btnShisetsuNyutaishoTorikeshi_onYes(shisetsuNyutaishoRirekiDiv);
         }
@@ -441,16 +393,6 @@ public class ShisetsuNyutaishoRirekiKanri {
         response.addMessage(message);
         response.data = shisetsuNyutaishoRirekiDiv;
         return response;
-    }
-
-    private static RString composeNulltoStr(RString str) {
-        RString afterStr;
-        if (str == null) {
-            afterStr = RString.EMPTY;
-        } else {
-            afterStr = str;
-        }
-        return afterStr;
     }
 
     /**

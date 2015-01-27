@@ -131,6 +131,59 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
         }
     }
 
+    public static class select被保険者台帳一覧DescOrderByShoriTimestamp extends DbzTestDacBase {
+
+        private IItemList<HihokenshaDaichoModel> result;
+
+        private final ShikibetsuCode shikibetsu012345678900001 = new ShikibetsuCode("012345678900001");
+        private final ShikibetsuCode shikibetsu012345678900002 = new ShikibetsuCode("012345678900002");
+        private final ShikibetsuCode shikibetsu012345678900003 = new ShikibetsuCode("012345678900003");
+        private final ShoriTimestamp shoriTime2012 = ShoriTimestamp.of(new YMDHMS("20120101000000"));
+        private final ShoriTimestamp shoriTime2013 = ShoriTimestamp.of(new YMDHMS("20130101000000"));
+        private final ShoriTimestamp shoriTime2014 = ShoriTimestamp.of(new YMDHMS("20140101000000"));
+
+        @Before
+        public void setUp() {
+            TestSupport.insertDbT1001(市町村コード1, 被保険者番号1, shoriTime2012, shikibetsu012345678900002);
+            TestSupport.insertDbT1001(市町村コード1, 被保険者番号1, shoriTime2013, shikibetsu012345678900001);
+            TestSupport.insertDbT1001(市町村コード1, 被保険者番号1, shoriTime2014, shikibetsu012345678900003);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の識別コードにnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.select最新被保険者台帳(null, 識別コード1);
+        }
+
+        @Test(expected = NullPointerException.class)
+        public void 引数の被保険者番号にnullを指定した場合_NullPointerExceptionが発生する() {
+            sut.select最新被保険者台帳(市町村コード1, null);
+        }
+
+        @Test
+        public void 検索した結果_3件のデータが取得できる() {
+            result = sut.select被保険者台帳一覧DescOrderByShoriTimestamp(市町村コード1, 被保険者番号1);
+            assertThat(result.size(), is(3));
+        }
+
+        @Test
+        public void 検索した結果_1件目のデータの識別コードが012345678900003になる() {
+            result = sut.select被保険者台帳一覧DescOrderByShoriTimestamp(市町村コード1, 被保険者番号1);
+            assertThat(result.toList().get(0).get識別コード(), is(shikibetsu012345678900003));
+        }
+
+        @Test
+        public void 検索した結果_2件目のデータの識別コードが012345678900001になる() {
+            result = sut.select被保険者台帳一覧DescOrderByShoriTimestamp(市町村コード1, 被保険者番号1);
+            assertThat(result.toList().get(1).get識別コード(), is(shikibetsu012345678900001));
+        }
+
+        @Test
+        public void 検索した結果_3件目のデータの識別コードが012345678900002になる() {
+            result = sut.select被保険者台帳一覧DescOrderByShoriTimestamp(市町村コード1, 被保険者番号1);
+            assertThat(result.toList().get(2).get識別コード(), is(shikibetsu012345678900002));
+        }
+    }
+
     public static class select最新被保険者台帳 extends DbzTestDacBase {
 
         @Before

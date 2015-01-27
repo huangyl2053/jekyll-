@@ -83,7 +83,7 @@ public class ShikakuHenkoMapper {
                         RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxFlexibleDate());
 
                 TextBoxFlexibleDate shoriDate = new TextBoxFlexibleDate();
-                shoriDate.setValue(new FlexibleDate(model.get処理日時().getDate().toString()));
+                shoriDate.setValue(new FlexibleDate(model.get処理日時().getColumnValue().getDate().toString()));
 
                 row.setState(getModelStateValue(model));
                 row.setShoriDate(shoriDate);
