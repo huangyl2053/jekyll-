@@ -23,6 +23,9 @@ import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuHohoModel;
 import jp.co.ndensan.reams.ur.urz.definition.nenkintokucho.KakushuKubun;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.NenkinCode;
 import jp.co.ndensan.reams.ur.urz.model.NenkinTokuchoKaifuJohoModel;
+import jp.co.ndensan.reams.ur.urz.realservice.INenkinTokuchoKaifuJohoManager;
+import jp.co.ndensan.reams.ur.urz.realservice.NenkinTokuchoKaifuJohoManager;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -156,24 +159,29 @@ public class Tokucho {
     private void set年金保険者突合Div(TokuchoDiv div,
             FukaNendo 賦課年度, RString 基礎年金番号, RString 年金コード, RString 捕捉月) {
 
-        //TODO メソッド1を呼ぶ　get年金特徴対象者情報("DB",) モデル取れたてい
-        NenkinTokuchoKaifuJohoModel model = null;
+        //TODO n3317塚田　本当はファクトリーから生成
+        INenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
+        NenkinTokuchoKaifuJohoModel model = manager.get年金特徴対象者情報(
+                GyomuCode.DB介護保険, 賦課年度.value(), 基礎年金番号, 年金コード, 捕捉月);
 
         div.getTxtHosokuYM().setDomain(new RYearMonth(model.get処理年度().toDateString().concat(捕捉月)));
-        //TODO 特徴義務者名　回付情報から＋コードマスタ 修正がマージされればgetRyakushoが取れるはず
-        div.getTxtTokuChoGimusha().setValue(model.getDT特別徴収義務者コード());
-
+        div.getTxtTokuChoGimusha().setValue(model.getDT特別徴収義務者コード().getRyakusho());
         div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKana().setValue(model.getDTカナ氏名());
         div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKanji().setValue(model.getDT漢字氏名());
         div.getNenkinHokenshaTotsugoJoho().getTxtJushoKana().setValue(model.getDTカナ住所());
         div.getNenkinHokenshaTotsugoJoho().getTxtJushoKanji().setValue(model.getDT漢字住所());
-        div.getNenkinHokenshaTotsugoJoho().getTxtSex().setValue(model.getDT性別());
+        div.getNenkinHokenshaTotsugoJoho().getTxtSex().setValue(model.getDT性別().value().get性別名称());
         div.getNenkinHokenshaTotsugoJoho().getTxtBirthYMD().setValue(model.getDT生年月日());
     }
 
     private void set特徴異動and依頼Div(TokuChoIdoAndIraiDiv div, ChoshuHohoModel model) {
-        //TODO メソッド2を呼ぶ　リスト取れたてい
-        List<NenkinTokuchoKaifuJohoModel> 年金特徴送付List = null;
+        //TODO n3317塚田　本当はファクトリーから生成
+        INenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
+        List<NenkinTokuchoKaifuJohoModel> 年金特徴送付List = manager.get年金特徴送付情報List(
+                GyomuCode.DB介護保険, model.get賦課年度().value(),
+                model.get仮徴収_基礎年金番号(), model.get仮徴収_年金コード(),
+                model.get本徴収_基礎年金番号(), model.get本徴収_年金コード(),
+                model.get翌年度仮徴収_基礎年金番号(), model.get翌年度仮徴収_年金コード());
         List dataSource = new ArrayList();
 
         for (NenkinTokuchoKaifuJohoModel tokuchoKaifuModel : 年金特徴送付List) {
@@ -187,10 +195,9 @@ public class Tokucho {
 
         return new dgTokuChoIdoAndIrai_Row(
                 model.get処理対象年月().wareki().toDateString(),
-                //TODO enumになってるはず
-                model.get通知内容コード(),
-                //TODO 通知内容コードを渡す
-                KakushuKubun.search各種区分名称(model.get通知内容コード(), model.getDT各種区分()).get各種区分名称(),
+                model.get通知内容コード().value().get通知内容名称(),
+                KakushuKubun.search各種区分名称(
+                        model.get通知内容コード().value().get通知内容コード(), model.getDT各種区分()).get各種区分名称(),
                 FukaMapper.addComma(new Decimal(model.getDT各種金額欄１().toString())),
                 FukaMapper.addComma(new Decimal(model.getDT各種金額欄２().toString())),
                 FukaMapper.addComma(new Decimal(model.getDT各種金額欄３().toString())));
@@ -198,8 +205,12 @@ public class Tokucho {
     }
 
     private void set特徴結果Div(TokuChoKekkaDiv div, ChoshuHohoModel model) {
-        //TODO メソッド3を呼ぶ　リスト取れたてい
-        List<NenkinTokuchoKaifuJohoModel> 年金特徴受取List = null;
+        //TODO n3317塚田　本当はファクトリーから生成
+        INenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
+        List<NenkinTokuchoKaifuJohoModel> 年金特徴受取List = manager.get年金特徴受取情報List(
+                GyomuCode.DB介護保険, model.get賦課年度().value(),
+                model.get仮徴収_基礎年金番号(), model.get仮徴収_年金コード(),
+                model.get本徴収_基礎年金番号(), model.get本徴収_年金コード());
         List dataSource = new ArrayList();
 
         for (NenkinTokuchoKaifuJohoModel tokuchoKaifuModel : 年金特徴受取List) {
@@ -213,14 +224,12 @@ public class Tokucho {
 
         return new dgTokuchoKekka_Row(
                 model.get処理対象年月().wareki().toDateString(),
-                //TODO enumになってるはず
-                model.get通知内容コード(),
-                //TODO 通知内容コードを渡す
-                KakushuKubun.search各種区分名称(model.get通知内容コード(), model.getDT各種区分()).get各種区分名称(),
+                model.get通知内容コード().value().get通知内容名称(),
+                KakushuKubun.search各種区分名称(
+                        model.get通知内容コード().value().get通知内容コード(), model.getDT各種区分()).get各種区分名称(),
                 FukaMapper.addComma(new Decimal(model.getDT各種金額欄１().toString())),
                 FukaMapper.addComma(new Decimal(model.getDT各種金額欄２().toString())),
                 FukaMapper.addComma(new Decimal(model.getDT各種金額欄３().toString())),
-                //TODO enumのはず
                 model.getDT処理結果());
     }
 

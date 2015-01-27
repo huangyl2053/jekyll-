@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -26,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class ShoriDateDac implements IModifiable<ShoriDateModel> {
 
-    @InjectSession
     private final DbT7022ShoriDateKanriDac 処理日付Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
 
     /**

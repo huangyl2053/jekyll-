@@ -10,11 +10,11 @@ import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbz.business.viewstate.MaeRirekiKey;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.ExceptionSuppliers;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.DbOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.IViewStateValue;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
 import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
-import jp.co.ndensan.reams.db.dbz.definition.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
@@ -50,7 +50,7 @@ public final class FukaShokaiController {
     public static FukaTaishoshaKey getFukaTaishoshaKeyInViewState() {
 
         IViewStateValue<FukaTaishoshaKey> value = ViewStates.access().valueAssignedTo(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
-        IOptional<FukaTaishoshaKey> keyoid = value.tryToGet();
+        Optional<FukaTaishoshaKey> keyoid = value.tryToGet();
 
         if (!keyoid.isPresent()) {
             throw new SystemException(UrErrorMessages.存在しない.getMessage().replace("賦課対象者キーが").evaluate());
@@ -67,7 +67,7 @@ public final class FukaShokaiController {
     public static FukaShokaiKey getFukaShokaiKeyInViewState() {
 
         IViewStateValue<FukaShokaiKey> value = ViewStates.access().valueAssignedToA(FukaShokaiKey.class);
-        IOptional<FukaShokaiKey> keyoid = value.tryToGet();
+        Optional<FukaShokaiKey> keyoid = value.tryToGet();
 
         if (!keyoid.isPresent()) {
             throw new SystemException(UrErrorMessages.存在しない.getMessage().replace("ViewStateのキーが").evaluate());
@@ -85,7 +85,7 @@ public final class FukaShokaiController {
     public static MaeRirekiKey getMaeRirekiKeyInViewState() {
 
         IViewStateValue<MaeRirekiKey> value = ViewStates.access().valueAssignedToA(MaeRirekiKey.class);
-        IOptional<MaeRirekiKey> keyoid = value.tryToGet();
+        Optional<MaeRirekiKey> keyoid = value.tryToGet();
 
         if (keyoid.isPresent()) {
             return keyoid.get();
@@ -94,7 +94,7 @@ public final class FukaShokaiController {
         FukaShokaiKey fukaKey = getFukaShokaiKeyInViewState();
         FukaNendo 前年度 = new FukaNendo(fukaKey.get賦課年度().value().minusYear(1));
 
-        IOptional<FukaModel> modeloid = new FukaManager().find賦課直近(前年度, fukaKey.get被保険者番号(), fukaKey.get処理日時());
+        Optional<FukaModel> modeloid = new FukaManager().find賦課直近(前年度, fukaKey.get被保険者番号(), fukaKey.get処理日時());
         if (!modeloid.isPresent()) {
             throw new SystemException(DbbErrorMessages.比較対象データなし.getMessage().evaluate());
         }
@@ -116,7 +116,7 @@ public final class FukaShokaiController {
 
         FukaShokaiKey key = getFukaShokaiKeyInViewState();
 
-        IOptional<FukaModel> modeloid = new FukaManager().find賦課(
+        Optional<FukaModel> modeloid = new FukaManager().find賦課(
                 key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get処理日時());
 
         if (!modeloid.isPresent()) {
@@ -135,7 +135,7 @@ public final class FukaShokaiController {
 
         MaeRirekiKey key = getMaeRirekiKeyInViewState();
 
-        IOptional<FukaModel> modeloid = new FukaManager().find賦課(
+        Optional<FukaModel> modeloid = new FukaManager().find賦課(
                 key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get処理日時());
 
         if (!modeloid.isPresent()) {
@@ -154,7 +154,7 @@ public final class FukaShokaiController {
 
         FukaShokaiKey key = getFukaShokaiKeyInViewState();
 
-        IOptional<ChoshuHohoModel> modeloid = new ChoshuHohoFinder().find徴収方法(key.get賦課年度(), key.get被保険者番号());
+        Optional<ChoshuHohoModel> modeloid = new ChoshuHohoFinder().find徴収方法(key.get賦課年度(), key.get被保険者番号());
 
         if (!modeloid.isPresent()) {
             throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
@@ -172,7 +172,7 @@ public final class FukaShokaiController {
      * @return 保険料段階クラス
      */
     public static HokenryoDankai findHokenryoDankai(FukaNendo fukaNendo, LasdecCode lasdecCode, RString hokenryoDankai) {
-        IOptional<HokenryoDankai> rankoid = new HokenryoDankaiManager().get保険料段階(fukaNendo, lasdecCode, hokenryoDankai);
+        Optional<HokenryoDankai> rankoid = new HokenryoDankaiManager().get保険料段階(fukaNendo, lasdecCode, hokenryoDankai);
 
         return rankoid.orElseThrow(
                 ExceptionSuppliers.systemException(UrErrorMessages.対象データなし.getMessage().evaluate()));
@@ -184,21 +184,21 @@ public final class FukaShokaiController {
      * @param model 賦課モデル
      * @return 前年度の保険料段階クラス
      */
-    public static IOptional<HokenryoDankai> findZennendoHokenryoDankai(FukaModel model) {
+    public static Optional<HokenryoDankai> findZennendoHokenryoDankai(FukaModel model) {
         FukaNendo 前年度 = new FukaNendo(model.get賦課年度().value().minusYear(1));
 
-        IOptional<FukaModel> modeloid = new FukaManager().find賦課直近(前年度, model.get被保険者番号(), model.get処理日時());
+        Optional<FukaModel> modeloid = new FukaManager().find賦課直近(前年度, model.get被保険者番号(), model.get処理日時());
         if (!modeloid.isPresent()) {
-            return DbOptional.empty();
+            return Optional.empty();
         }
 
         FukaModel 前年度賦課モデル = modeloid.get();
-        IOptional<HokenryoDankai> rankoid = new HokenryoDankaiManager().get保険料段階(
+        Optional<HokenryoDankai> rankoid = new HokenryoDankaiManager().get保険料段階(
                 前年度賦課モデル.get賦課年度(), 前年度賦課モデル.get賦課市町村コード(), 前年度賦課モデル.get保険料段階());
 
         if (rankoid.isPresent()) {
             return rankoid;
         }
-        return DbOptional.empty();
+        return Optional.empty();
     }
 }
