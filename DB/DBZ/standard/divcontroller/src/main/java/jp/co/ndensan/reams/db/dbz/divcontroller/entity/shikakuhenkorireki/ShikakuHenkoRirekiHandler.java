@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.ur.urz.definition.code.CodeMasterHelper;
 import jp.co.ndensan.reams.ur.urz.definition.code.ICodeValueObject;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuHenkoJiyuHihokensha;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuHenkoJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -120,7 +120,7 @@ public class ShikakuHenkoRirekiHandler {
     }
 
     private void setHenkoJiyuDataSource() {
-        List<KaigoshikakuHenkoJiyuHihokensha> henkoJiyuList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格変更事由_被保険者);
+        List<KaigoShikakuHenkoJiyu> henkoJiyuList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格変更事由);
         shikakuHenkoRirekiDiv.getDdlHenkoJiyu().setDataSource(createCodeMasterKeyValue(henkoJiyuList));
     }
 
