@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
 import jp.co.ndensan.reams.db.dbz.realservice.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbz.realservice.KiwarigakuFinder;
 import jp.co.ndensan.reams.ur.urz.divcontroller.helper.PanelSessionAccessor;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -130,8 +129,7 @@ public class FukaRirekiAllHandler {
         List<dgFukaRirekiAll_Row> rowList = new ArrayList<>();
         for (FukaModel model : new FukaRireki(modelList.toList()).getグループ化賦課履歴()) {
 
-            // TODO N8156 宮本 康 テーブルに市町村コードが追加され次第、modelから取得するように変更する
-            Optional<HokenryoDankai> 保険料段階 = dankaiManager.get保険料段階(model.get賦課年度(), LasdecCode.EMPTY, model.get保険料段階());
+            Optional<HokenryoDankai> 保険料段階 = dankaiManager.get保険料段階(model.get賦課年度(), model.get賦課市町村コード(), model.get保険料段階());
             Optional<Kiwarigaku> 期割額 = kiwariFinder.load期割額(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get処理日時());
 
             if (!期割額.isPresent()) {

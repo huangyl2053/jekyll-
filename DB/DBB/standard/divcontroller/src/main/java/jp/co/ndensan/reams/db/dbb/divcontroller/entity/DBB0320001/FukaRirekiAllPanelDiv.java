@@ -8,7 +8,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.fukarirekiall.FukaRirekiAllDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.fukarirekiall.IFukaRirekiAllDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * FukaRirekiAllPanel のクラスファイル 
@@ -24,6 +26,8 @@ public class FukaRirekiAllPanelDiv extends Panel {
      */
     @JsonProperty("ccdFukaRirekiAll")
     private FukaRirekiAllDiv ccdFukaRirekiAll;
+    @JsonProperty("lblMode")
+    private Label lblMode;
     @JsonProperty("mode")
     private RString mode;
     @JsonProperty("loadShikibetsuCode")
@@ -38,6 +42,16 @@ public class FukaRirekiAllPanelDiv extends Panel {
     @JsonProperty("ccdFukaRirekiAll")
     public IFukaRirekiAllDiv getCcdFukaRirekiAll() {
         return ccdFukaRirekiAll;
+    }
+
+    @JsonProperty("lblMode")
+    public Label getLblMode() {
+        return lblMode;
+    }
+
+    @JsonProperty("lblMode")
+    public void setLblMode(Label lblMode) {
+        this.lblMode=lblMode;
     }
 
     @JsonProperty("mode")
