@@ -28,6 +28,8 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("lblTitle")
+    private Label lblTitle;
     @JsonProperty("pnlChushutsuJoken")
     private pnlChushutsuJokenDiv pnlChushutsuJoken;
     @JsonProperty("pnlShoritaishoJoho")
@@ -41,6 +43,16 @@ public class KokuhorenJohoTorikomiBatchKidoDiv extends PanelBatchParameter {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("lblTitle")
+    public Label getLblTitle() {
+        return lblTitle;
+    }
+
+    @JsonProperty("lblTitle")
+    public void setLblTitle(Label lblTitle) {
+        this.lblTitle=lblTitle;
+    }
+
     @JsonProperty("pnlChushutsuJoken")
     public pnlChushutsuJokenDiv getPnlChushutsuJoken() {
         return pnlChushutsuJoken;

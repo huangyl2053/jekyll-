@@ -12,6 +12,7 @@ package jp.co.ndensan.reams.db.dbc.definition.enumeratedtype;
  */
 public enum ConfigKeysSogoJigyoSeikyugakuTuchi implements IConfigKeysKokuhorenTorikomi {
 
+    国保連取込_総合事業費請求額通知書情報,
     国保連取込_総合事業費請求額通知書情報_バッチID,
     国保連取込_総合事業費請求額通知書情報_一覧表示順,
     国保連取込_総合事業費請求額通知書情報_交換情報識別番号,
@@ -67,4 +68,7 @@ public enum ConfigKeysSogoJigyoSeikyugakuTuchi implements IConfigKeysKokuhorenTo
         return 国保連取込_総合事業費請求額通知書情報_有効区分;
     }
 
+    public static IConfigKeysKokuhorenTorikomi getEnum() {
+        return 国保連取込_総合事業費請求額通知書情報;
+    }
 }

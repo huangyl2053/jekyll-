@@ -12,12 +12,14 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewStateHolderName;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0410012.KokuhorenJohoTorikomiBatchKidoDiv;
 import jp.co.ndensan.reams.db.dbc.model.relate.KokuhorenJohoTorikomiBatchKidoModel;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigNameDBU;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  *
@@ -36,10 +38,8 @@ public class KokuhorenJohoTorikomiBatchKido {
                 = ViewStateHolder.get(ViewStateHolderName.国保連取込情報, KokuhorenJohoTorikomiBatchKidoModel.class);
 
         setDisplay(panel, selectedrow);
-
+        panel.getLblTitle().setText(selectedrow.get処理名());
         response.data = panel;
-        response.setRootTitle(selectedrow.get処理名());
-
         return response;
 
     }
@@ -53,7 +53,11 @@ public class KokuhorenJohoTorikomiBatchKido {
         batchparameter.setSaishoriKubun(business.get再処理フラグコード(panel.getTxtSaishoriKubun().getValue()));
         batchparameter.setShoriYM(panel.getTxtShoriJoken().getValue().seireki().fillType(FillType.NONE).getYearMonth());
         batchparameter.setShutsuryokujunID(new RString(panel.getCommonShutsuryokuJun().get出力順ID().toString()));
+        batchparameter.setHokenshaKoseiKubun(BusinessConfig.get(ConfigNameDBU.保険者情報_保険者構成, SubGyomuCode.DBU介護統計報告));
+        batchparameter.setGappeiJohoKubun(BusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, SubGyomuCode.DBU介護統計報告));
 
+        //バッチは予約で処理される可能性があるため、処理日時はバッチ内で設定する
+//        batchparameter.setShoriNichiji();
         ResponseData<KokuhorenJohoTorikomiBatchParameter> responseData = new ResponseData<>();
         responseData.data = batchparameter;
         return responseData;

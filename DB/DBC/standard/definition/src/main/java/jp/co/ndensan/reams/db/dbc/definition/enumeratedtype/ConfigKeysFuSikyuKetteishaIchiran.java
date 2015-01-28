@@ -12,6 +12,7 @@ package jp.co.ndensan.reams.db.dbc.definition.enumeratedtype;
  */
 public enum ConfigKeysFuSikyuKetteishaIchiran implements IConfigKeysKokuhorenTorikomi {
 
+    国保連取込_償還払不支給決定者一覧情報,
     国保連取込_償還払不支給決定者一覧情報_バッチID,
     国保連取込_償還払不支給決定者一覧情報_一覧表示順,
     国保連取込_償還払不支給決定者一覧情報_交換情報識別番号,
@@ -67,4 +68,7 @@ public enum ConfigKeysFuSikyuKetteishaIchiran implements IConfigKeysKokuhorenTor
         return 国保連取込_償還払不支給決定者一覧情報_有効区分;
     }
 
+    public static IConfigKeysKokuhorenTorikomi getEnum() {
+        return 国保連取込_償還払不支給決定者一覧情報;
+    }
 }

@@ -48,7 +48,11 @@ public class KokuhorenTorikomiJohoManager {
     public RYearMonth get国保連IF管理Max処理年月() {
         DbT3104KokuhorenInterfaceKanriEntity kokuhorenInterfaceKanri;
         kokuhorenInterfaceKanri = kokuhorenInterfaceKanriDac.getMaxShoriYM();
-        return kokuhorenInterfaceKanri == null ? RDate.getNowDate().getYearMonth() : kokuhorenInterfaceKanri.getShoriYM();
+        if (kokuhorenInterfaceKanri == null || kokuhorenInterfaceKanri.getShoriYM() == null) {
+            return RDate.getNowDate().getYearMonth();
+        } else {
+            return kokuhorenInterfaceKanri.getShoriYM();
+        }
     }
 
     /**
@@ -110,15 +114,13 @@ public class KokuhorenTorikomiJohoManager {
     private KokuhorenTorikomiJohoModel find国保連取込コンフィグ(RString 交換識別番号) {
 
         KokuhorenTorikomiJohoModel result = new KokuhorenTorikomiJohoModel();
-        IConfigKeysKokuhorenTorikomi[] configKeys
+        IConfigKeysKokuhorenTorikomi configKeys
                 = KokuhorenTorikomiConfigKeysFactory.getEnumValues(交換識別番号);
 
-        for (IConfigKeysKokuhorenTorikomi keys : configKeys) {
-            result.setバッチID(BusinessConfig.get(keys.getバッチID()));
-            result.set一覧表示順(BusinessConfig.get(keys.get一覧表示順()));
-            result.set処理名(BusinessConfig.get(keys.get処理名称()));
-            break;
-        }
+        result.setバッチID(BusinessConfig.get(configKeys.getバッチID()));
+        result.set一覧表示順(BusinessConfig.get(configKeys.get一覧表示順()));
+        result.set処理名(BusinessConfig.get(configKeys.get処理名称()));
+
         result.set交換識別番号(交換識別番号);
 
         return result;

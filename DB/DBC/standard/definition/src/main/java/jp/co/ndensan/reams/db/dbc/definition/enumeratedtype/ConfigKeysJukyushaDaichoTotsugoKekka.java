@@ -12,6 +12,7 @@ package jp.co.ndensan.reams.db.dbc.definition.enumeratedtype;
  */
 public enum ConfigKeysJukyushaDaichoTotsugoKekka implements IConfigKeysKokuhorenTorikomi {
 
+    国保連取込_受給者台帳突合結果情報随時,
     国保連取込_受給者台帳突合結果情報随時_バッチID,
     国保連取込_受給者台帳突合結果情報随時_一覧表示順,
     国保連取込_受給者台帳突合結果情報随時_交換情報識別番号,
@@ -67,4 +68,7 @@ public enum ConfigKeysJukyushaDaichoTotsugoKekka implements IConfigKeysKokuhoren
         return 国保連取込_受給者台帳突合結果情報随時_有効区分;
     }
 
+    public static IConfigKeysKokuhorenTorikomi getEnum() {
+        return 国保連取込_受給者台帳突合結果情報随時;
+    }
 }

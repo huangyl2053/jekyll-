@@ -19,6 +19,9 @@ public class KokuhorenJohoTorikomiBatchParameter extends BatchParameterBase {
     public final static String SHUTURYOKUJUNID = "shutsuryokujunid";
     public final static String SAISHORIKUBUN = "saishorikubun";
     public final static String KOKANJOHOSHIKIBETSUNO = "kokanjohoshikibetsuno";
+    public final static String SHORINICHIJI = "shorinichiji";
+    public final static String HOKENSHAKOSEIKUBUN = "hokenshakoseikubun";
+    public final static String GAPPEIJOHOKBN = "gappeijohokubun";
 
     @BatchParameter(key = SHORIYM, name = "処理対象年月")
     private RString shoriYM;
@@ -32,9 +35,14 @@ public class KokuhorenJohoTorikomiBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KOKANJOHOSHIKIBETSUNO, name = "交換情報識別番号")
     private RString kokanjohoShikibetsuNo;
 
-    // 制御情報を格納するフィールド
-    @BatchParameter(name = "処理区分")
-    private RString shoriKubun;
+    @BatchParameter(key = SHORINICHIJI, name = "処理日時")
+    private RString shoriNichiji;
+
+    @BatchParameter(key = HOKENSHAKOSEIKUBUN, name = "保険者構成区分")
+    private RString hokenshaKoseiKubun;
+
+    @BatchParameter(key = GAPPEIJOHOKBN, name = "合併情報区分")
+    private RString gappeiJohoKubun;
 
     /**
      * @return the shoriYM
@@ -93,17 +101,44 @@ public class KokuhorenJohoTorikomiBatchParameter extends BatchParameterBase {
     }
 
     /**
-     * @return the shoriKubun
+     * @return the shoriNichiji
      */
-    public RString getShoriKubun() {
-        return shoriKubun;
+    public RString getShoriNichiji() {
+        return shoriNichiji;
     }
 
     /**
-     * @param shoriKubun the shoriKubun to set
+     * @param shoriNichiji the shoriNichiji to set
      */
-    public void setShoriKubun(RString shoriKubun) {
-        this.shoriKubun = shoriKubun;
+    public void setShoriNichiji(RString shoriNichiji) {
+        this.shoriNichiji = shoriNichiji;
     }
 
+    /**
+     * @return the hokenshaKoseiKubun
+     */
+    public RString getHokenshaKoseiKubun() {
+        return hokenshaKoseiKubun;
+    }
+
+    /**
+     * @param hokenshaKoseiKubun the hokenshaKoseiKubun to set
+     */
+    public void setHokenshaKoseiKubun(RString hokenshaKoseiKubun) {
+        this.hokenshaKoseiKubun = hokenshaKoseiKubun;
+    }
+
+    /**
+     * @return the gappeiJohoKubun
+     */
+    public RString getGappeiJohoKubun() {
+        return gappeiJohoKubun;
+    }
+
+    /**
+     * @param gappeiJohoKubun the gappeiJohoKubun to set
+     */
+    public void setGappeiJohoKubun(RString gappeiJohoKubun) {
+        this.gappeiJohoKubun = gappeiJohoKubun;
+    }
 }

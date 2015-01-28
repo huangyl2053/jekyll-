@@ -5,17 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.business;
 
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ConfigKeysShikakuShogohyo;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.IConfigKeysKokuhorenTorikomi;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.hamcrest.CoreMatchers;
 
 /**
- * TODO 不要
  *
  * @author N2810 久保 里史
  */
@@ -30,15 +30,11 @@ public class KokuhorenTorikomiConfigKeysFactoryTest extends DbcTestBase {
     public static class ConstructorTest extends DbcTestBase {
 
         @Test
-        public void getInstanceのテスト() {
-            Integer i = 0;
-            IConfigKeysKokuhorenTorikomi[] a = KokuhorenTorikomiConfigKeysFactory.getEnumValues(new RString(("121")));
-            for (IConfigKeysKokuhorenTorikomi b : a) {
-                i = i + 1;
+        public void getEnumValuesのテスト() {
 
-            }
+            IConfigKeysKokuhorenTorikomi configkey = KokuhorenTorikomiConfigKeysFactory.getEnumValues(new RString(("121")));
 
-            i = i + 1;
+            assertThat(configkey, CoreMatchers.notNullValue());
         }
 
     }

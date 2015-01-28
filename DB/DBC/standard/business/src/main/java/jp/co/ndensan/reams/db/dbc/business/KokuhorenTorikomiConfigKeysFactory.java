@@ -45,73 +45,72 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KokuhorenTorikomiConfigKeysFactory {
 
-    public static IConfigKeysKokuhorenTorikomi[] getEnumValues(RString 交換情報識別番号) {
+    public static IConfigKeysKokuhorenTorikomi getEnumValues(RString 交換情報識別番号) {
 
         switch (交換情報識別番号.toString()) {
 
             case "111": //受給者情報更新結果情報
-                return ConfigKeysJukyushaKoshinKekka.values();
+                return ConfigKeysJukyushaKoshinKekka.getEnum();
             case "112": //共同処理用受給者情報更新結果
-                return ConfigKeysKyodoshoriJukyushaKoshinKekka.values();
+                return ConfigKeysKyodoshoriJukyushaKoshinKekka.getEnum();
             case "114": //給付実績情報
-                return ConfigKeysKyufuJisseki.values();
+                return ConfigKeysKyufuJisseki.getEnum();
             case "121": //給付管理票情報
-                return ConfigKeysKyufuKanrihyo.values();
+                return ConfigKeysKyufuKanrihyo.getEnum();
             case "122": //給付実績更新結果情報
-                return ConfigKeysKyufuJissekiKoshinKekka.values();
+                return ConfigKeysKyufuJissekiKoshinKekka.getEnum();
             case "151": //介護給付費等審査決定請求明細表情報
-                return ConfigKeysShinsaKetteiSeikyuMeisai.values();
+                return ConfigKeysShinsaKetteiSeikyuMeisai.getEnum();
             case "152": //介護給付費過誤決定通知書情報
-                return ConfigKeysKagoKetteiTuchi.values();
+                return ConfigKeysKagoKetteiTuchi.getEnum();
             case "161": //介護給付費再審査決定通知書情報
-                return ConfigKeysSaishinsaKetteiTuchi.values();
+                return ConfigKeysSaishinsaKetteiTuchi.getEnum();
             case "162": //介護給付費等請求額通知書情報
-                return ConfigKeysSeikyugakuTuchi.values();
+                return ConfigKeysSeikyugakuTuchi.getEnum();
             case "171": //介護給付費過誤決定通知書公費情報
-                return ConfigKeysKagoKetteiTuchi_Kohi.values();
+                return ConfigKeysKagoKetteiTuchi_Kohi.getEnum();
             case "172": //介護給付費再審査決定通知書公費情報
-                return ConfigKeysSaishinsaKetteiTuchi_Kohi.values();
+                return ConfigKeysSaishinsaKetteiTuchi_Kohi.getEnum();
             case "175": //介護給付費等請求額通知書公費情報
-                return ConfigKeysSeikyugakuTuchi_Kohi.values();
+                return ConfigKeysSeikyugakuTuchi_Kohi.getEnum();
             case "221": //介護給付費公費受給者別一覧表情報
-                return ConfigKeysKohiJukyushabetsuIchiran.values();
+                return ConfigKeysKohiJukyushabetsuIchiran.getEnum();
             case "222": //償還払支給決定者一覧情報
-                return ConfigKeysSikyuKetteishaIchiran.values();
+                return ConfigKeysSikyuKetteishaIchiran.getEnum();
             case "331": //償還払不支給決定者一覧情報
-                return ConfigKeysFuSikyuKetteishaIchiran.values();
+                return ConfigKeysFuSikyuKetteishaIchiran.getEnum();
             case "351": //高額介護サービス費給付対象者一覧表情報
-                return ConfigKeysKogakuKyufuTaishoshaIchiran.values();
+                return ConfigKeysKogakuKyufuTaishoshaIchiran.getEnum();
             case "386": //高額介護サービス費支給不支給決定者一覧表情報
-                return ConfigKeysKogakuSikyuKetteishaIchiran.values();
+                return ConfigKeysKogakuSikyuKetteishaIchiran.getEnum();
             case "533": //受給者台帳情報一覧
-                return ConfigKeysJukyushaDaichoJohoIchiran.values();
+                return ConfigKeysJukyushaDaichoJohoIchiran.getEnum();
             case "534": //受給者台帳突合結果情報随時
-                return ConfigKeysJukyushaDaichoTotsugoKekka.values();
+                return ConfigKeysJukyushaDaichoTotsugoKekka.getEnum();
             case "537": //共同処理用受給者情報一覧
-                return ConfigKeysKyodoshoriJukyushaJohoIchiran.values();
+                return ConfigKeysKyodoshoriJukyushaJohoIchiran.getEnum();
             case "631": //高額合算自己負担額確認情報
-                return ConfigKeysKogakugassanJikofutangakuKakunin.values();
+                return ConfigKeysKogakugassanJikofutangakuKakunin.getEnum();
             case "641": //高額合算自己負担額証明書情報
-                return ConfigKeysKogakugassanJikofutangakuShomeisho.values();
+                return ConfigKeysKogakugassanJikofutangakuShomeisho.getEnum();
             case "651": //高額合算支給額計算結果連絡票情報
-                return ConfigKeysKogakugassanSikyugakuKeisanKekkaRenrakuhyo.values();
+                return ConfigKeysKogakugassanSikyugakuKeisanKekkaRenrakuhyo.getEnum();
             case "652": //高額合算支給不支給決定通知書情報
-                return ConfigKeysKogakugassanSikyuKetteiTuchi.values();
+                return ConfigKeysKogakugassanSikyuKetteiTuchi.getEnum();
             case "741": //高額合算給付実績情報
-                return ConfigKeysKogakugassanKyufuJisseki.values();
+                return ConfigKeysKogakugassanKyufuJisseki.getEnum();
             case "37H": //総合事業費過誤決定通知書情報
-                return ConfigKeysSogoJigyoKagoKetteiTuchi.values();
+                return ConfigKeysSogoJigyoKagoKetteiTuchi.getEnum();
             case "37J": //総合事業費請求額通知書情報
-                return ConfigKeysSogoJigyoSeikyugakuTuchi.values();
+                return ConfigKeysSogoJigyoSeikyugakuTuchi.getEnum();
             case "38B": //総合事業費審査決定請求明細表情報
-                return ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.values();
+                return ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.getEnum();
             case "38P": //請求明細給付管理票返戻保留一覧表情報
-                return ConfigKeysHenreiIchiranhyo.values();
+                return ConfigKeysHenreiIchiranhyo.getEnum();
             case "5C3": //資格照合表情報
-                return ConfigKeysShikakuShogohyo.values();
+                return ConfigKeysShikakuShogohyo.getEnum();
             case "5C4": //総合事業費資格照合表情報
-                return ConfigKeysSogoJigyoShikakuShogohyo.values();
-
+                return ConfigKeysSogoJigyoShikakuShogohyo.getEnum();
             default:
         }
 

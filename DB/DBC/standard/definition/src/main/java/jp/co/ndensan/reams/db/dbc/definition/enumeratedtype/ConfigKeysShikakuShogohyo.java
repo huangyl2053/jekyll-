@@ -12,6 +12,7 @@ package jp.co.ndensan.reams.db.dbc.definition.enumeratedtype;
  */
 public enum ConfigKeysShikakuShogohyo implements IConfigKeysKokuhorenTorikomi {
 
+    国保連取込_資格照合表情報,
     国保連取込_資格照合表情報_有効区分,
     国保連取込_資格照合表情報_処理サイクル区分,
     国保連取込_資格照合表情報_処理月,
@@ -67,4 +68,7 @@ public enum ConfigKeysShikakuShogohyo implements IConfigKeysKokuhorenTorikomi {
         return 国保連取込_資格照合表情報_有効区分;
     }
 
+    public static IConfigKeysKokuhorenTorikomi getEnum() {
+        return 国保連取込_資格照合表情報;
+    }
 }

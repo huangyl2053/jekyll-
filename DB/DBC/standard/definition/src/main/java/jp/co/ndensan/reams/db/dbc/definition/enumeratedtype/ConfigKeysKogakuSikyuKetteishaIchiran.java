@@ -12,6 +12,7 @@ package jp.co.ndensan.reams.db.dbc.definition.enumeratedtype;
  */
 public enum ConfigKeysKogakuSikyuKetteishaIchiran implements IConfigKeysKokuhorenTorikomi {
 
+    国保連取込_高額介護サービス費支給不支給決定者一覧表情報,
     国保連取込_高額介護サービス費支給不支給決定者一覧表情報_バッチID,
     国保連取込_高額介護サービス費支給不支給決定者一覧表情報_一覧表示順,
     国保連取込_高額介護サービス費支給不支給決定者一覧表情報_交換情報識別番号,
@@ -67,4 +68,7 @@ public enum ConfigKeysKogakuSikyuKetteishaIchiran implements IConfigKeysKokuhore
         return 国保連取込_高額介護サービス費支給不支給決定者一覧表情報_有効区分;
     }
 
+    public static IConfigKeysKokuhorenTorikomi getEnum() {
+        return 国保連取込_高額介護サービス費支給不支給決定者一覧表情報;
+    }
 }
