@@ -10,8 +10,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuTatokuTekiyo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuSoshitsuJiyuTatokuTekiyo;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoTatokuTekiyoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoTatokuKaijoJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -93,7 +93,7 @@ public class TashichosonJushochiTokureiModel implements Serializable {
      *
      * @return 他市町村住所地特例適用事由コード
      */
-    public KaigoshikakuShutokuJiyuTatokuTekiyo get他市町村住所地特例適用事由コード() {
+    public KaigoTatokuTekiyoJiyu get他市町村住所地特例適用事由コード() {
         return entity.getTekiyoJiyuCode();
     }
 
@@ -129,7 +129,7 @@ public class TashichosonJushochiTokureiModel implements Serializable {
      *
      * @return 他市町村住所地特例解除事由コード
      */
-    public KaigoshikakuSoshitsuJiyuTatokuTekiyo get他市町村住所地特例解除事由コード() {
+    public KaigoTatokuKaijoJiyu get他市町村住所地特例解除事由コード() {
         return entity.getKaijoJiyuCode();
     }
 
@@ -240,7 +240,7 @@ public class TashichosonJushochiTokureiModel implements Serializable {
      *
      * @param 他市町村住所地特例適用事由コード 他市町村住所地特例適用事由コード
      */
-    public void set他市町村住所地特例適用事由コード(KaigoshikakuShutokuJiyuTatokuTekiyo 他市町村住所地特例適用事由コード) {
+    public void set他市町村住所地特例適用事由コード(KaigoTatokuTekiyoJiyu 他市町村住所地特例適用事由コード) {
         requireNonNull(他市町村住所地特例適用事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("他市町村住所地特例適用事由コード"));
         entity.setTekiyoJiyuCode(他市町村住所地特例適用事由コード);
     }
@@ -280,7 +280,7 @@ public class TashichosonJushochiTokureiModel implements Serializable {
      *
      * @param 他市町村住所地特例解除事由コード 他市町村住所地特例解除事由コード
      */
-    public void set他市町村住所地特例解除事由コード(KaigoshikakuSoshitsuJiyuTatokuTekiyo 他市町村住所地特例解除事由コード) {
+    public void set他市町村住所地特例解除事由コード(KaigoTatokuKaijoJiyu 他市町村住所地特例解除事由コード) {
         requireNonNull(他市町村住所地特例解除事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("他市町村住所地特例解除事由コード"));
         entity.setKaijoJiyuCode(他市町村住所地特例解除事由コード);
     }

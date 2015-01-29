@@ -9,8 +9,8 @@ import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaishaEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuJogaiTekiyo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuSoshitsuJiyuJogaiTekiyo;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoJogaiTekiyoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoJogaiKaijoJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -92,7 +92,7 @@ public class TekiyoJogaishaModel implements Serializable {
      *
      * @return 適用除外適用事由コード
      */
-    public KaigoshikakuShutokuJiyuJogaiTekiyo get適用除外適用事由コード() {
+    public KaigoJogaiTekiyoJiyu get適用除外適用事由コード() {
         return entity.getTekiyoJogaiTekiyoJiyuCode();
     }
 
@@ -128,7 +128,7 @@ public class TekiyoJogaishaModel implements Serializable {
      *
      * @return 適用除外解除事由コード
      */
-    public KaigoshikakuSoshitsuJiyuJogaiTekiyo get適用除外解除事由コード() {
+    public KaigoJogaiKaijoJiyu get適用除外解除事由コード() {
         return entity.getTekiyoJogaikaijokaijoJiyuCode();
     }
 
@@ -221,7 +221,7 @@ public class TekiyoJogaishaModel implements Serializable {
      *
      * @param 適用除外適用事由コード 適用除外適用事由コード
      */
-    public void set適用除外適用事由コード(KaigoshikakuShutokuJiyuJogaiTekiyo 適用除外適用事由コード) {
+    public void set適用除外適用事由コード(KaigoJogaiTekiyoJiyu 適用除外適用事由コード) {
         requireNonNull(適用除外適用事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("適用除外適用事由コード"));
         entity.setTekiyoJogaiTekiyoJiyuCode(適用除外適用事由コード);
     }
@@ -261,7 +261,7 @@ public class TekiyoJogaishaModel implements Serializable {
      *
      * @param 適用除外解除事由コード 適用除外解除事由コード
      */
-    public void set適用除外解除事由コード(KaigoshikakuSoshitsuJiyuJogaiTekiyo 適用除外解除事由コード) {
+    public void set適用除外解除事由コード(KaigoJogaiKaijoJiyu 適用除外解除事由コード) {
         requireNonNull(適用除外解除事由コード, UrSystemErrorMessages.値がnull.getReplacedMessage("適用除外解除事由コード"));
         entity.setTekiyoJogaikaijokaijoJiyuCode(適用除外解除事由コード);
     }

@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuTatokuTekiyo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuSoshitsuJiyuTatokuTekiyo;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoTatokuTekiyoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoTatokuKaijoJiyu;
 
 /**
  * DbT1003TashichosonJushochiTokureiの項目定義クラスです
@@ -40,11 +40,11 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
     private YMDHMS shoriTimestamp;
-    private KaigoshikakuShutokuJiyuTatokuTekiyo tekiyoJiyuCode;
+    private KaigoTatokuTekiyoJiyu tekiyoJiyuCode;
     private FlexibleDate tekiyoYMD;
     private FlexibleDate tekiyoTodokedeYMD;
     private FlexibleDate tekiyoUketsukeYMD;
-    private KaigoshikakuSoshitsuJiyuTatokuTekiyo kaijoJiyuCode;
+    private KaigoTatokuKaijoJiyu kaijoJiyuCode;
     private FlexibleDate kaijoYMD;
     private FlexibleDate kaijoTodokedeYMD;
     private FlexibleDate kaijoUketsukeYMD;
@@ -158,7 +158,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
      *
      * @return tekiyoJiyuCode
      */
-    public KaigoshikakuShutokuJiyuTatokuTekiyo getTekiyoJiyuCode() {
+    public KaigoTatokuTekiyoJiyu getTekiyoJiyuCode() {
         return tekiyoJiyuCode;
     }
 
@@ -167,7 +167,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
      *
      * @param tekiyoJiyuCode tekiyoJiyuCode
      */
-    public void setTekiyoJiyuCode(KaigoshikakuShutokuJiyuTatokuTekiyo tekiyoJiyuCode) {
+    public void setTekiyoJiyuCode(KaigoTatokuTekiyoJiyu tekiyoJiyuCode) {
         this.tekiyoJiyuCode = tekiyoJiyuCode;
     }
 
@@ -230,7 +230,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
      *
      * @return kaijoJiyuCode
      */
-    public KaigoshikakuSoshitsuJiyuTatokuTekiyo getKaijoJiyuCode() {
+    public KaigoTatokuKaijoJiyu getKaijoJiyuCode() {
         return kaijoJiyuCode;
     }
 
@@ -239,7 +239,7 @@ public class DbT1003TashichosonJushochiTokureiEntity extends DbTableEntityBase<D
      *
      * @param kaijoJiyuCode kaijoJiyuCode
      */
-    public void setKaijoJiyuCode(KaigoshikakuSoshitsuJiyuTatokuTekiyo kaijoJiyuCode) {
+    public void setKaijoJiyuCode(KaigoTatokuKaijoJiyu kaijoJiyuCode) {
         this.kaijoJiyuCode = kaijoJiyuCode;
     }
 

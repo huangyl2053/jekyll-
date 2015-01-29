@@ -1,7 +1,8 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoatenainfo.IKaigoAtenaInfoDiv;
@@ -11,8 +12,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigofukakihon.KaigoFukaK
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KihonJoho のクラスファイル
- *
+ * KihonJoho のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class KihonJohoDiv extends Panel {
@@ -22,11 +23,10 @@ public class KihonJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
-    @JsonProperty("KaigoAtenaInfo")
-    private KaigoAtenaInfoDiv KaigoAtenaInfo;
-    @JsonProperty("KaigoFukaKihon")
-    private KaigoFukaKihonDiv KaigoFukaKihon;
+    @JsonProperty("ccdKaigoFukaKihon")
+    private KaigoFukaKihonDiv ccdKaigoFukaKihon;
+    @JsonProperty("ccdKaigoAtenaInfo")
+    private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,14 +34,14 @@ public class KihonJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("KaigoAtenaInfo")
-    public IKaigoAtenaInfoDiv getKaigoAtenaInfo() {
-        return KaigoAtenaInfo;
+    @JsonProperty("ccdKaigoFukaKihon")
+    public IKaigoFukaKihonDiv getCcdKaigoFukaKihon() {
+        return ccdKaigoFukaKihon;
     }
 
-    @JsonProperty("KaigoFukaKihon")
-    public IKaigoFukaKihonDiv getKaigoFukaKihon() {
-        return KaigoFukaKihon;
+    @JsonProperty("ccdKaigoAtenaInfo")
+    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
+        return ccdKaigoAtenaInfo;
     }
 
 }

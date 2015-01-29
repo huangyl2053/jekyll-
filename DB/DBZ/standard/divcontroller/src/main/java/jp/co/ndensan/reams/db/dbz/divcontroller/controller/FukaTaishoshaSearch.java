@@ -130,7 +130,10 @@ public class FukaTaishoshaSearch {
 
     private SearchResult<FukaTaishoshaModel> get対象者(IHihokenshaFinderDiv div) {
         TaishoshaFinder finder = new TaishoshaFinder();
-        FukaSearchMenu menu = FukaSearchMenu.toValue(UrControlDataFactory.createInstance().getMenuID());
+//TODO メニューから起動しないとメニューIDを取得できないため、動作確認のために定数をセット
+        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
+//        FukaSearchMenu menu = FukaSearchMenu.toValue(UrControlDataFactory.createInstance().getMenuID());
+
         return finder.get賦課対象者(get介護条件(div, menu), get介護除外条件(div, menu), div.get宛名条件(), div.get最大表示件数());
     }
 
@@ -167,11 +170,11 @@ public class FukaTaishoshaSearch {
     private ISearchCondition get介護除外条件(IHihokenshaFinderDiv div, FukaSearchMenu menu) {
         List<INewSearchCondition> 条件List = new ArrayList<>();
 
-        if (menu.is(FukaSearchMenuGroup.照会系)) {
-            条件List.add(SearchConditionFactory.condition(
-                    FukaSearchItem.通知書番号, StringOperator.完全一致, RString.EMPTY));
-        }
-
+        //TODO 検索ボタン押下時にエラーするためコメントアウト　宮本さん対応予定
+//        if (menu.is(FukaSearchMenuGroup.照会系)) {
+//            条件List.add(SearchConditionFactory.condition(
+//                    FukaSearchItem.通知書番号, StringOperator.完全一致, RString.EMPTY));
+//        }
         ISearchCondition 介護条件 = null;
         for (INewSearchCondition 条件 : 条件List) {
             介護条件 = (介護条件 == null) ? 条件 : 条件.or(介護条件);
@@ -213,8 +216,8 @@ public class FukaTaishoshaSearch {
         List<dgFukaGaitoshaList_Row> rowList = new ArrayList<>();
         for (FukaTaishoshaModel 対象者 : result.records()) {
             rowList.add(new dgFukaGaitoshaList_Row(
-                    対象者.get調定年度() != null ? 対象者.get調定年度().wareki().toDateString() : RString.EMPTY,
-                    対象者.get賦課年度() != null ? 対象者.get賦課年度().wareki().toDateString() : RString.EMPTY,
+                    対象者.get調定年度() != null ? 対象者.get調定年度().toDateString() : RString.EMPTY,
+                    対象者.get賦課年度() != null ? 対象者.get賦課年度().toDateString() : RString.EMPTY,
                     対象者.get通知書番号() != null ? 対象者.get通知書番号().value() : RString.EMPTY,
                     対象者.get被保険者番号() != null ? 対象者.get被保険者番号().value() : RString.EMPTY,
                     対象者.get氏名() != null ? 対象者.get氏名().value() : RString.EMPTY,

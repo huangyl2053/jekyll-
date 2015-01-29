@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,6 +35,7 @@ public class FukaShokaiKey implements Serializable {
     private final SanteiState 算定状態;
     private final boolean 減免あり;
     private final boolean 徴収猶予あり;
+    private final AtenaMeisho 氏名;
 
     /**
      * コンストラクタです。
@@ -49,11 +51,12 @@ public class FukaShokaiKey implements Serializable {
      * @param 算定状態 算定状態
      * @param 減免あり 減免あり
      * @param 徴収猶予あり 徴収猶予あり
+     * @param 氏名 氏名
      */
     public FukaShokaiKey(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号,
             RDateTime 処理日時, HihokenshaNo 被保険者番号, FlexibleDate 賦課期日,
             RString 更正月, RDateTime 更正日時, SanteiState 算定状態,
-            boolean 減免あり, boolean 徴収猶予あり) {
+            boolean 減免あり, boolean 徴収猶予あり, AtenaMeisho 氏名) {
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
         this.通知書番号 = 通知書番号;
@@ -65,6 +68,7 @@ public class FukaShokaiKey implements Serializable {
         this.算定状態 = 算定状態;
         this.減免あり = 減免あり;
         this.徴収猶予あり = 徴収猶予あり;
+        this.氏名 = 氏名;
     }
 
     /**
@@ -164,5 +168,14 @@ public class FukaShokaiKey implements Serializable {
      */
     public boolean is徴収猶予あり() {
         return 徴収猶予あり;
+    }
+
+    /**
+     * 氏名を返します。
+     *
+     * @return 氏名
+     */
+    public AtenaMeisho get氏名() {
+        return 氏名;
     }
 }

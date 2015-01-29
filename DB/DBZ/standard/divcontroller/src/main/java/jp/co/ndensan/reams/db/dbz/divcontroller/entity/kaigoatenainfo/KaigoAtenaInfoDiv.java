@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
@@ -51,6 +52,11 @@ public class KaigoAtenaInfoDiv extends Panel implements IKaigoAtenaInfoDiv {
     @Override
     public void set介護宛名賦課モード() {
         getHandler().set介護宛名賦課モード();
+    }
+
+    @Override
+    public AtenaMeisho getName() {
+        return atenaInfo.getTxtAtenaMeisho().getDomain();
     }
 
     @JsonIgnore
