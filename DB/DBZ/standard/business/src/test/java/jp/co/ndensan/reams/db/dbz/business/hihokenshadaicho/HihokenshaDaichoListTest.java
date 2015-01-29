@@ -15,14 +15,21 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuHenkoJiyuHihokensha;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuHihokensha;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuHenkoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuShutokuJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -288,13 +295,13 @@ public class HihokenshaDaichoListTest {
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
 
         entity.setIchigoShikakuShutokuYMD(new FlexibleDate("20140328"));
-        entity.setShikakuShutokuJiyuCode(new KaigoshikakuShutokuJiyuHihokensha(new RString("01")));
+
+        entity.setShikakuShutokuJiyuCode(new KaigoShikakuShutokuJiyu(Code.EMPTY));
         entity.setShikakuShutokuTodokedeYMD(new FlexibleDate("20130327"));
         entity.setShikakuShutokuYMD(new FlexibleDate("20130327"));
-        entity.setShikakuHenkoJiyuCode(new KaigoshikakuHenkoJiyuHihokensha(new RString("01")));
+        entity.setShikakuHenkoJiyuCode(new KaigoShikakuHenkoJiyu(Code.EMPTY));
         entity.setShikakuHenkoTodokedeYMD(FlexibleDate.EMPTY);
         entity.setShikakuHenkoYMD(FlexibleDate.EMPTY);
-        entity.setShoriTimestamp(ShoriTimestamp.of(new YMDHMS("20140101000000")));
         return entity;
     }
 }

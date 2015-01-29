@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -80,7 +81,7 @@ public class DbT1004ShisetsuNyutaishoDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 処理日時がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_市町村コード,
+                    市町村コード202012,
                     DEFAULT_識別コード,
                     null);
         }
@@ -99,7 +100,8 @@ public class DbT1004ShisetsuNyutaishoDacTest extends DbzTestDacBase {
             DbT1004ShisetsuNyutaishoEntity insertedRecord = sut.selectByKey(
                     市町村コード202013,
                     DEFAULT_識別コード,
-                    shoriTimestamp);
+                    shoriTimestamp
+            );
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -137,7 +139,9 @@ public class DbT1004ShisetsuNyutaishoDacTest extends DbzTestDacBase {
             assertThat(sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    shoriTimestamp), is(notNullValue()));
+                    shoriTimestamp
+            ), is(notNullValue())
+            );
         }
     }
 
@@ -154,17 +158,17 @@ public class DbT1004ShisetsuNyutaishoDacTest extends DbzTestDacBase {
         @Test
         public void 介護保険施設入退所エンティティを渡すと_updateは_介護保険施設入退所を更新する() {
             DbT1004ShisetsuNyutaishoEntity updateRecord = DbT1004ShisetsuNyutaishoEntityGenerator.createDbT1004ShisetsuNyutaishoEntity();
-            // TODO 主キー以外の項目を変更してください
-//            updateRecord.set変更したい項目(75);
-
+            FlexibleDate updateDate = new FlexibleDate("20221103");
+            updateRecord.setTaishoYMD(updateDate);
             sut.update(updateRecord);
 
             DbT1004ShisetsuNyutaishoEntity updatedRecord = sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    shoriTimestamp);
+                    shoriTimestamp
+            );
 
-//            assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getTaishoYMD(), is(updateDate));
         }
     }
 
@@ -183,11 +187,13 @@ public class DbT1004ShisetsuNyutaishoDacTest extends DbzTestDacBase {
             sut.delete(sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    shoriTimestamp));
+                    shoriTimestamp
+            ));
             assertThat(sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    shoriTimestamp), is(nullValue()));
+                    shoriTimestamp),
+                    is(nullValue()));
         }
     }
 

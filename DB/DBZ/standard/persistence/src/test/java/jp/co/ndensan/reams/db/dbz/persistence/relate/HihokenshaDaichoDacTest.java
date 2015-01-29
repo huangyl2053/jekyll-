@@ -269,7 +269,7 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
             sut.insert(model);
 
             model.getEntity().initializeMd5();
-            model.set資格取得事由(ShikakuShutokuJiyu.合併);
+            model.set資格取得事由(ShikakuShutokuJiyu.転入);
 
             assertThat(sut.update(model), is(1));
         }

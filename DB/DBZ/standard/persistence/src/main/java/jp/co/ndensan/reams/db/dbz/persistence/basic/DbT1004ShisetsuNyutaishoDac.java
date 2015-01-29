@@ -8,9 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho.shichosonCode;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho.shikibetsuCode;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho.shoriTimestamp;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -104,10 +102,6 @@ public class DbT1004ShisetsuNyutaishoDac implements IModifiable<DbT1004ShisetsuN
     }
 
     void insertDenialRow(DbT1004ShisetsuNyutaishoEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void selectByKey(Object object, ShikibetsuCode DEFAULT_識別コード, YMDHMS DEFAULT_処理日時) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

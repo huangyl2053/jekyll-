@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilis
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.IJushochiTokureiRirekiListDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuKaijoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuTekiyoInputDiv;
@@ -647,5 +648,4 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
         return handler.hasChanged();
     }
-
 }

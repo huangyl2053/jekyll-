@@ -39,11 +39,11 @@ public final class JushochiTokureiUnduplicateValidator {
     /**
      * 住所地特例情報を設定します。
      *
-     * @param hihoDaicho 被保険者台帳Model
+     * @param jushochiTokureiData 住所地特例情報
      * @return バリデーションクラスを扱うインターフェース
      */
-    public static IValidatable setHihokenshaDaichoData(HihokenshaDaichoModel hihoDaicho) {
-        return new _JushochiTokureiDuplicateValidator(hihoDaicho);
+    public static IValidatable setHihokenshaDaichoData(HihokenshaDaichoModel jushochiTokureiData) {
+        return new _JushochiTokureiDuplicateValidator(jushochiTokureiData);
     }
 
     /**
@@ -94,7 +94,6 @@ public final class JushochiTokureiUnduplicateValidator {
 
         @Override
         public IValidationMessages validate() {
-
             return validateFollowingItems()
                     .then(check住所地特例期間が_他市町村住所地特例期間と重複())
                     .then(check住所地特例期間が_適用除外期間と重複())

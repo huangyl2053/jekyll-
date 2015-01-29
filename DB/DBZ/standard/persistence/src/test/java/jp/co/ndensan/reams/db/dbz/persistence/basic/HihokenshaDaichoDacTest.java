@@ -66,26 +66,29 @@ public class HihokenshaDaichoDacTest extends DbzTestDacBase {
 
         @Test(expected = NullPointerException.class)
         public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            LasdecCode nullLasdecCode = null;
             sut.selectByKey(
-                    null,
+                    nullLasdecCode,
                     DEFAULT_被保険者番号,
                     DEFAULT_処理日時);
         }
 
         @Test(expected = NullPointerException.class)
         public void 被保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            HihokenshaNo nullHihokenshaNo = null;
             sut.selectByKey(
                     DEFAULT_市町村コード,
-                    null,
+                    nullHihokenshaNo,
                     DEFAULT_処理日時);
         }
 
         @Test(expected = NullPointerException.class)
         public void 処理日時がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
+            ShoriTimestamp nullTimestamp = null;
             sut.selectByKey(
                     DEFAULT_市町村コード,
                     DEFAULT_被保険者番号,
-                    null);
+                    nullTimestamp);
         }
 
         @Test

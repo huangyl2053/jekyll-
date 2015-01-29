@@ -29,9 +29,9 @@ import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.ur.urz.definition.code.CodeMasterHelper;
 import jp.co.ndensan.reams.ur.urz.definition.code.ICodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.code.ICodeValueObject;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuHenkoJiyuHihokensha;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuKaijo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuJutokuTekiyo;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuHenkoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.URZCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.divcontroller.helper.PanelSessionAccessor;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -243,13 +243,6 @@ public class JushochiTokureiRirekiListHandler {
     private IItemList<HihokenshaDaichoModel> merge(IItemList<HihokenshaDaichoModel> baseList, IItemList<HihokenshaDaichoModel> editingList) {
 
         List<HihokenshaDaichoModel> mergedList = new ArrayList<>();
-
-        for (HihokenshaDaichoModel editingModel : editingList) {
-            System.out.print("-------" + editingModel.get処理日時().getColumnValue().toDateString() + "--------");
-            System.out.print("-------" + editingModel.get市町村コード() + "--------");
-            System.out.println("-------" + editingModel.get被保険者番号() + "--------");
-            System.out.println("------");
-        }
 
         for (HihokenshaDaichoModel editingModel : editingList) {
             IPredicate condition = new HihokenshaDaichoCondition(editingModel);
@@ -635,7 +628,7 @@ public class JushochiTokureiRirekiListHandler {
         if (!targetModel.get適用届出年月日().equals(jutokuRirekiDiv.getTxtTekiyoTodokedeDate().getValue())) {
             return false;
         }
-        if (!targetModel.get住所地特例適用事由().equals(new KaigoshikakuJutokuTekiyo(jutokuRirekiDiv.getDdlTekiyoJiyu().getSelectedKey()))) {
+        if (!targetModel.get住所地特例適用事由().equals(new KaigoShikakuJutokuTekiyoJiyu(jutokuRirekiDiv.getDdlTekiyoJiyu().getSelectedKey()))) {
             return false;
         }
         if (!targetModel.get広住特措置元市町村コード().equals(new LasdecCode(jutokuRirekiDiv.getDdlTekiyojiSochimotoHokensha().getSelectedKey()))) {
@@ -651,7 +644,7 @@ public class JushochiTokureiRirekiListHandler {
         if (!targetModel.get解除届出年月日().equals(jutokuRirekiDiv.getTxtKaijoTodokedeDate().getValue())) {
             return false;
         }
-        if (!targetModel.get住所地特例解除事由().equals(new KaigoshikakuJutokuKaijo(jutokuRirekiDiv.getDdlKaijoJiyu().getSelectedKey()))) {
+        if (!targetModel.get住所地特例解除事由().equals(new KaigoShikakuJutokuKaijoJiyu(jutokuRirekiDiv.getDdlKaijoJiyu().getSelectedKey()))) {
             return false;
         }
         if (!targetModel.get広住特措置元市町村コード().equals(new LasdecCode(jutokuRirekiDiv.getDdlKaijojiSochimotoHokensha().getSelectedKey()))) {
@@ -698,13 +691,13 @@ public class JushochiTokureiRirekiListHandler {
     }
 
     private void setTekiyoJiyuDataSource() {
-        List<KaigoshikakuHenkoJiyuHihokensha> tekiyoList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格住特適用);
+        List<KaigoShikakuHenkoJiyu> tekiyoList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格変更事由);
         IItemList<KeyValueDataSource> dataSource = ItemList.of(tekiyoList).map(new CodeMasterToKeyValueFunction());
         jutokuRirekiDiv.getDdlTekiyoJiyu().setDataSource(dataSource.toList());
     }
 
     private void setKaijoJiyuDataSource() {
-        List<KaigoshikakuJutokuKaijo> kaijoList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格住特解除);
+        List<KaigoShikakuJutokuKaijoJiyu> kaijoList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格住特解除事由);
         IItemList<KeyValueDataSource> dataSource = ItemList.of(kaijoList).map(new CodeMasterToKeyValueFunction());
         jutokuRirekiDiv.getDdlTekiyoJiyu().setDataSource(dataSource.toList());
     }

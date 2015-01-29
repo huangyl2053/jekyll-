@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.ur.urz.definition.code.CodeMasterHelper;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuHenkoJiyuHihokensha;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuHenkoJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 

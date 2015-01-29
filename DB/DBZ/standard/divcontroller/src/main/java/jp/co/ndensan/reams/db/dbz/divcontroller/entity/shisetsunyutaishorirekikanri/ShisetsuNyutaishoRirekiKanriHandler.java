@@ -205,6 +205,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      *
      * @return 施設入退所情報に変更が存在するならtrue
      */
+
     public boolean hasChanged() {
         IItemList<ShisetsuNyutaishoRelateModel> nyutaishoList = get施設入退所履歴();
         for (ShisetsuNyutaishoRelateModel nyutaisho : nyutaishoList) {

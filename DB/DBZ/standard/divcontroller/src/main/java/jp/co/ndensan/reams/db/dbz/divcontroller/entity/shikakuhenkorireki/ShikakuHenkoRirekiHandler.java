@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.ur.urz.definition.code.CodeMasterHelper;
 import jp.co.ndensan.reams.ur.urz.definition.code.ICodeValueObject;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuHenkoJiyuHihokensha;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuHenkoJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -121,7 +121,7 @@ public class ShikakuHenkoRirekiHandler {
     }
 
     private void setHenkoJiyuDataSource() {
-        List<KaigoshikakuHenkoJiyuHihokensha> henkoJiyuList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格変更事由_被保険者);
+        List<KaigoShikakuHenkoJiyu> henkoJiyuList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格変更事由);
         shikakuHenkoRirekiDiv.getDdlHenkoJiyu().setDataSource(createCodeMasterKeyValue(henkoJiyuList));
     }
 
@@ -282,6 +282,7 @@ public class ShikakuHenkoRirekiHandler {
         model.set資格変更事由(ShikakuHenkoJiyu.toValue(
                 shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoJiyu().getSelectedKey()));
         model.set市町村コード(new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiHihokenshaNo()));
+
         model.set処理日時(ShoriTimestamp.of(new YMDHMS(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiShoriDatetime())));
         model.set旧市町村コード(new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoKyuHokensha().getSelectedKey()));
         model.set広住特措置元市町村コード(new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getDdlHenkoSochimotoHokensha().getSelectedKey()));
@@ -483,6 +484,7 @@ public class ShikakuHenkoRirekiHandler {
     private HihokenshaDaichoModel findHenkoMeisaiOriginModel() {
         LasdecCode 市町村コード = new LasdecCode(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiHihokenshaNo());
         HihokenshaNo 被保険者番号 = new HihokenshaNo(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiHihokenshaNo());
+
         ShoriTimestamp 処理日時 = ShoriTimestamp.of(new YMDHMS(shikakuHenkoRirekiDiv.getHenkoInput().getHenkojiShoriDatetime()));
         IPredicate<HihokenshaDaichoModel> condition = new HihokendhaDaichoKey(市町村コード, 被保険者番号, 処理日時);
         return get被保険者台帳情報().filter(condition).findJustOne().get();

@@ -79,6 +79,35 @@ public class HihokenshaDaichoDac implements IPersistable<DbT1001HihokenshaDaicho
     }
 
     /**
+     * 主キーで被保険者台帳を取得します。
+     *
+     * @param 市町村コード LasdecCode
+     * @param 被保険者番号 HihokenshaNo
+     * @param 処理日時 ShoriTimeStamp
+     * @return DbT1001HihokenshaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT1001HihokenshaDaichoEntity selectByKey(
+            LasdecCode 市町村コード,
+            HihokenshaNo 被保険者番号,
+            YMDHMS 処理日時) throws NullPointerException {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(shichosonCode, 市町村コード),
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(shoriTimestamp, 処理日時))).
+                toObject(DbT1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
      * 被保険者台帳を全件返します。
      *
      * @return List<DbT1001HihokenshaDaichoEntity>
@@ -160,7 +189,6 @@ public class HihokenshaDaichoDac implements IPersistable<DbT1001HihokenshaDaicho
         return entities.isEmpty() ? null : entities.get(0);
     }
 
-    @Transaction
     @Override
     public int insert(DbT1001HihokenshaDaichoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
@@ -176,6 +204,7 @@ public class HihokenshaDaichoDac implements IPersistable<DbT1001HihokenshaDaicho
 
     @Transaction
     @Override
+
     public int delete(DbT1001HihokenshaDaichoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();

@@ -5,9 +5,8 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaishaEntity;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuJogaiTekiyo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuSoshitsuJiyuJogaiTekiyo;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoJogaiTekiyoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoJogaiKaijoJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -31,11 +30,11 @@ public final class DbT1002TekiyoJogaishaEntityGenerator {
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("000010");
     public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("000010000100001");
     public static final YMDHMS DEFAULT_処理日時 = new YMDHMS("20160712123456");
-    public static final KaigoshikakuShutokuJiyuJogaiTekiyo DEFAULT_適用除外適用事由コード = new KaigoshikakuShutokuJiyuJogaiTekiyo(new Code("31"));
+    public static final KaigoJogaiTekiyoJiyu DEFAULT_適用除外適用事由コード = new KaigoJogaiTekiyoJiyu(new Code("31"));
     public static final FlexibleDate DEFAULT_適用年月日 = new FlexibleDate("20160712");
     public static final FlexibleDate DEFAULT_適用届出年月日 = new FlexibleDate("20160712");
     public static final FlexibleDate DEFAULT_適用受付年月日 = new FlexibleDate("20160712");
-    public static final KaigoshikakuSoshitsuJiyuJogaiTekiyo DEFAULT_適用除外解除事由コード = new KaigoshikakuSoshitsuJiyuJogaiTekiyo(new Code("81"));
+    public static final KaigoJogaiKaijoJiyu DEFAULT_適用除外解除事由コード = new KaigoJogaiKaijoJiyu(new Code("81"));
     public static final FlexibleDate DEFAULT_解除年月日 = new FlexibleDate("20170130");
     public static final FlexibleDate DEFAULT_解除届出年月日 = new FlexibleDate("20170130");
     public static final FlexibleDate DEFAULT_解除受付年月日 = new FlexibleDate("20170130");
