@@ -31,7 +31,7 @@ import static org.junit.Assert.*;
 @RunWith(Enclosed.class)
 public class KyufuKanrihyoInBatchRegistGetEditInfoProcessTest extends DbcTestDacBase {
 
-    private static final RString 一時テーブル = new RString("DbTKyufukanrihyoInData_TempTable");
+    private static final RString 一時テーブル = new RString("DbTKyufukanrihyoDataTempTable");
 
     public static class ProcessTest extends DbcTestDacBase {
 
