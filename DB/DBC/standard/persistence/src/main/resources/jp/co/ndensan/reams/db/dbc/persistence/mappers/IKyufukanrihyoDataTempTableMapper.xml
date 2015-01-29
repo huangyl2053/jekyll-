@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.mappers.IKyufukanrihyoDataTempTableMapper">
+
+    <!-- 被保険者番号変更用市町村コード更新：チェック1 -->
+    <update id="updateHihoNoHenkanShichosonCode1" parameterType="java.util.Map">
+        UPDATE "DbTKyufukanrihyoDataTempTable" AS A SET "hihoNoHenkanShichosonCode" = (
+        SELECT C1."shichosonCode" FROM (
+        SELECT * FROM (
+        SELECT T7055.*, ROW_NUMBER() OVER (PARTITION BY "hokenshaNo" ORDER BY "kokuhorenDataFromYMD" DESC) AS rrkno
+        FROM rgdb."DbT7055GappeiJoho" AS T7055 WHERE T7055."isDeleted" = FALSE) iv
+        WHERE iv.rrkno = 1) C1
+        WHERE substring(A."hokenshaNo", 3, 6) = C1."hokenshaNo" AND A."taishoYM" <![CDATA[>=]]> substring(C1."kokuhorenDataFromYMD", 1, 6))
+        WHERE (A."hihoNoHenkanShichosonCode" = '' OR A."hihoNoHenkanShichosonCode" IS NULL) AND substring(A."hihokenshaNo", 1, 1) != 'H'
+    </update>
+
+    <!-- 被保険者番号変更用市町村コード更新：チェック2 -->
+    <update id="updateHihoNoHenkanShichosonCode2" parameterType="java.util.Map">
+        UPDATE "DbTKyufukanrihyoDataTempTable" AS A SET "hihoNoHenkanShichosonCode" = (
+        SELECT C2."kyuShichosonCode" FROM (
+        SELECT * FROM (
+        SELECT T7055.*, T7056.*, ROW_NUMBER() OVER (PARTITION BY T7056."gappeiYMD", T7056."chiikiNo", T7056."kyuShichosonCode" ORDER BY T7055."kokuhorenDataFromYMD" ASC) AS rrkno
+        FROM rgdb."DbT7055GappeiJoho" AS T7055
+        JOIN rgdb."DbT7056GappeiShichoson" AS T7056 ON T7055."gappeiYMD" = T7056."gappeiYMD" AND T7055."chiikiNo" = T7056."chiikiNo") iv2
+        WHERE iv2.rrkno = 1) C2
+        WHERE substring(A."hokenshaNo", 3, 6) = C2."kyuHokenshaNo" AND A."taishoYM" <![CDATA[<]]> substring(C2."kokuhorenDataFromYMD", 1, 6))
+        WHERE (A."hihoNoHenkanShichosonCode" = '' OR A."hihoNoHenkanShichosonCode" IS NULL) AND substring(A."hihokenshaNo", 1, 1) != 'H'
+    </update>
+
+    <!-- 被保険者番号変更用市町村コード更新：チェック3 -->
+    <update id="updateHihoNoHenkanShichosonCode3" parameterType="java.util.Map">
+        UPDATE "DbTKyufukanrihyoDataTempTable" AS A SET "hihoNoHenkanShichosonCode" = (
+        SELECT C3."kyuShichosonCode" FROM (
+        SELECT * FROM (
+        SELECT T7055.*, T7056.*, ROW_NUMBER() OVER (PARTITION BY T7056."gappeiYMD", T7056."chiikiNo", T7056."kyuShichosonCode" ORDER BY T7055."kokuhorenDataFromYMD" ASC) AS rrkno
+        FROM rgdb."DbT7055GappeiJoho" AS T7055
+        JOIN rgdb."DbT7056GappeiShichoson" AS T7056 ON T7055."gappeiYMD" = T7056."gappeiYMD" AND T7055."chiikiNo" = T7056."chiikiNo") iv3
+        WHERE iv3.rrkno = 1) C3
+        WHERE substring(A."hokenshaNo", 3, 6) = C3."kyuHokenshaNo")
+        WHERE (A."hihoNoHenkanShichosonCode" = '' OR A."hihoNoHenkanShichosonCode" IS NULL) AND substring(A."hihokenshaNo", 1, 1) != 'H'
+    </update>
+
+    <!-- 被保険者番号変更用市町村コード更新：チェック4 -->
+    <update id="updateHihoNoHenkanShichosonCode4" parameterType="java.util.Map">
+        UPDATE "DbTKyufukanrihyoDataTempTable" AS A SET "hihoNoHenkanShichosonCode" = (
+        SELECT C4."shichosonCode" FROM (
+        SELECT * FROM (
+        SELECT T7055.*, ROW_NUMBER() OVER (PARTITION BY "hokenshaNo" ORDER BY "kokuhorenDataFromYMD" DESC) AS rrkno
+        FROM rgdb."DbT7055GappeiJoho" AS T7055
+        WHERE T7055."isDeleted" = FALSE) iv4
+        WHERE iv4.rrkno = 1) C4
+        WHERE substring(A."hokenshaNo", 3, 6) = C4."hokenshaNo")
+        WHERE (A."hihoNoHenkanShichosonCode" = '' OR A."hihoNoHenkanShichosonCode" IS NULL) AND substring(A."hihokenshaNo", 1, 1) != 'H'
+    </update>
+
+    <!-- 新被保険者番号更新：新旧被保険者番号変換テーブルからの付与 -->
+    <update id="updateShinHihokenshaNo1" parameterType="java.util.Map">
+        UPDATE "DbTKyufukanrihyoDataTempTable" AS A SET "shinHihokenshaNo" = (
+        SELECT "shinNo"
+        FROM rgdb."DbT7026ShinKyuHihokenshaNoHenkan"
+        WHERE "shichosonCode" = A."hihoNoHenkanShichosonCode" AND "kyuNo" = A."hihokenshaNo")
+        WHERE substring(A."hihokenshaNo", 1, 1) != 'H' AND (A."hihoNoHenkanShichosonCode" != '' OR A."hihoNoHenkanShichosonCode" IS NOT NULL) AND (A."shinHihokenshaNo" = '' OR A."shinHihokenshaNo" IS NULL)
+    </update>
+
+    <!-- 新被保険者番号更新：一時テーブル上の被保険者番号をそのまま付与 -->
+    <update id="updateShinHihokenshaNo2" parameterType="java.util.Map">
+        UPDATE "DbTKyufukanrihyoDataTempTable" AS A SET "shinHihokenshaNo" = (
+        SELECT "hihokenshaNo"
+        FROM "DbTKyufukanrihyoDataTempTable"
+        WHERE "taishoYM" = A."taishoYM" AND "hokenshaNo" = A."hokenshaNo" AND "hihokenshaNo" = A."hihokenshaNo" AND "kyufukanrihyoMeisaigyoNo" = A."kyufukanrihyoMeisaigyoNo")
+        WHERE (A."hihoNoHenkanShichosonCode" != '' OR A."hihoNoHenkanShichosonCode" IS NOT NULL) AND (A."shinHihokenshaNo" = '' OR A."shinHihokenshaNo" IS NULL)
+    </update>
+
+    <!-- 事業所名称更新：居宅介護支援事業者名称の取得更新 -->
+    <update id="updateJigyoshoMeisho1" parameterType="java.util.Map">
+        UPDATE "DbTKyufukanrihyoDataTempTable" AS T1 SET "jigyoshoMeisho" = (
+        SELECT T0521."jigyoshaName"
+        FROM rshare."UrT0521KaigoJigyoshaShiteiService" AS T0521
+        WHERE T1."KyotakuShienJigyoshoNo" = T0521."jigyoshaNo"
+        AND ((T1."kyotakuKeikakuSakuseiKubunCode" = '1' AND T0521."serviceShuruiCode" IN ('43', '73')) OR (T1."kyotakuKeikakuSakuseiKubunCode" = '3' AND T0521."serviceShuruiCode" IN ('46', '75'))))
+        WHERE substring(T1."hihokenshaNo", 1, 1) != 'H'
+    </update>
+
+    <!-- 事業所名称更新：居宅介護支援事業者名称が取得できなかったデータの初期化 -->
+    <update id="updateJigyoshoMeisho2" parameterType="java.util.Map">
+        UPDATE "DbTKyufukanrihyoDataTempTable" SET "jigyoshoMeisho" = ''
+        WHERE "jigyoshoMeisho" IS NULL
+    </update>
+
+    <!-- 識別コード更新：被保険者台帳最新Viewの識別コードを設定 -->
+    <update id="updateShikibetsuCode1" parameterType="java.util.Map">
+        UPDATE "DbTKyufukanrihyoDataTempTable" AS T1 SET "shikibetsuCode" = (
+        SELECT V1001."shikibetsuCode"
+        FROM rgdb."DbV1001HihokenshaDaicho" AS V1001
+        WHERE T1."shinHihokenshaNo" = V1001."hihokenshaNo")
+        WHERE substring(T1."shinHihokenshaNo", 1, 1) != 'H'
+    </update>
+
+    <!-- 識別コード更新：識別コードが取得できなかったデータの識別コードを初期化 -->
+    <update id="updateShikibetsuCode2" parameterType="java.util.Map">
+        UPDATE "DbTKyufukanrihyoDataTempTable" SET "shikibetsuCode" = ''
+        WHERE "shikibetsuCode" IS NULL
+    </update>
+
+    <!-- 漢字氏名更新 -->
+    <update id="updateKanjiMeisho" parameterType="java.util.Map">
+        UPDATE "DbTKyufukanrihyoDataTempTable" AS T1 SET "kanjiMeisho" = (
+        SELECT "kanjiShimei" FROM rshare."UrFt204FindShikibetsuTaishoJutogaiYusen"('DB','','','','',TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,'','',TRUE,'','','','','','','','',TRUE,'','','','','','','','','','',TRUE,TRUE)
+        WHERE "shikibetsuCode" = T1."shikibetsuCode")
+    </update>
+
+    <!-- 市町村コード更新：被保険者台帳最新Viewの市町村コードを設定 -->
+    <update id="updateShichosonCode1" parameterType="java.util.Map">
+        UPDATE "DbTKyufukanrihyoDataTempTable" AS T1 SET "shichosonCode" = (
+        SELECT V1001."shichosonCode"
+        FROM rgdb."DbV1001HihokenshaDaicho" AS V1001
+        WHERE T1."shinHihokenshaNo" = V1001."hihokenshaNo")
+        WHERE substring(T1."shinHihokenshaNo", 1, 1) != 'H'
+    </update>
+
+    <!-- 市町村コード更新：市町村コードが取得できなかったデータの市町村コードを初期化 -->
+    <update id="updateShichosonCode2" parameterType="java.util.Map">
+        UPDATE "DbTKyufukanrihyoDataTempTable" SET "shichosonCode" = ''
+        WHERE "shichosonCode" IS NULL
+    </update>
+
+    <!-- 一時データ取得 -->
+    <select id="getTempData" resultType="jp.co.ndensan.reams.db.dbc.entity.basic.DbTKyufukanrihyoDataTempTableEntity" parameterType="java.util.Map" fetchSize="500">
+        SELECT
+        "recordShubetsu",
+        "renban",
+        "kokanjohoShikibetsuNo",
+        "chohyoRecordShubetsu",
+        "shinsaYM",
+        "taishoYM",
+        "hokenshaNo",
+        "KyotakuShienJigyoshoNo",
+        "kyufukanrihyoSakuseiKubunCode",
+        "kyufukanrihyoSakuseiYMD",
+        "kyufukanrihyoShubetsuKubunCode",
+        "kyufukanrihyoMeisaigyoNo",
+        "hihokenshaNo",
+        Temp."seinengappiYMD" AS "tempSeinengappiYMD",
+        Temp."seibetsuCode" AS "tempSeibetsuCode",
+        "yokaigojotaiKubunCode",
+        "gendogakuTekiyoKaishiYMD",
+        "gendogakuTekiyoShuryoYMD",
+        "kyotakuKaigoyoboShikyugendogaku",
+        "kyotakuKeikakuSakuseiKubunCode",
+        "serviceTeikyoJigyoshoNo",
+        "shiteiKijunGaitoJigyoshoKubunCode",
+        "serviceShuruiCode",
+        "kyufuKeikakuTanisuNissu",
+        "zentsukiMadeKyufuKeikakuNissu",
+        "shiteiServiceShokei",
+        "kijunGaitoServiceShokei",
+        "kyufuKeikakuGokeiTanisuNissu",
+        "kaigoshienSenmoninNo",
+        "itakusakiKyotakuKaigoshienJigyoshoNo",
+        "itakusakiKaigoshienSenmoninNo",
+        "hihoNoHenkanShichosonCode",
+        "shinHihokenshaNo",
+        "shichosonCode",
+        "koikiJutokuSochimotoShichosonCode",
+        "kyoShichosonCode",
+        Temp."shikibetsuCode" AS "tempSeibetsuCode",
+        "kanjiMeisho",
+        "jigyoshoMeisho",
+        "shokisaiHokenshaNo"
+        FROM "DbTKyufukanrihyoDataTempTable" AS Temp
+        LEFT JOIN rshare."UrFt204FindShikibetsuTaishoJutogaiYusen"('DB','','','','',TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,'','',TRUE,'','','','','','','','',TRUE,'','','','','','','','','','',TRUE,TRUE) AS JutogaiYusen
+        ON Temp."shikibetsuCode" = JutogaiYusen."shikibetsuCode"
+        WHERE "kyufukanrihyoMeisaigyoNo" = '99'
+        <if test="sortSequence1 != null">
+            ORDER BY
+            "${sortSequence1}" ${sortSequence1Order}
+            <if test="sortSequence2 != null">
+                , "${sortSequence2}" ${sortSequence2Order}
+                <if test="sortSequence3 != null">
+                    ,"${sortSequence3}" ${sortSequence3Order}
+                    <if test="sortSequence4 != null">
+                        ,"${sortSequence4}" ${sortSequence4Order}
+                        <if test="sortSequence5 != null">
+                            ,"${sortSequence5}" ${sortSequence5Order}
+                        </if>
+                    </if>
+                </if>
+            </if>
+        </if>
+        <if test="sortSequence1 == null">
+            ORDER BY "renban"
+        </if>
+    </select>
+
+    <select id="selectAll" resultType="jp.co.ndensan.reams.db.dbc.entity.basic.DbTKyufukanrihyoDataTempTableEntity"  fetchSize="500">
+        select * from "DbTKyufukanrihyoDataTempTable"
+    </select>
+
+</mapper>

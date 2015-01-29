@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SortOrder;
  *
  * @author N3327 三浦 凌
  */
+@Deprecated
 public final class HihokenshaComparators {
 
     /**

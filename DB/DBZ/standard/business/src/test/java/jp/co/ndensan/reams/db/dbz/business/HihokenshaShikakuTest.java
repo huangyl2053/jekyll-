@@ -63,7 +63,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                 @Test(expected = NullPointerException.class)
                 public void Builderのコンストラクタは_引数の_市町村コード_がnullのとき_NullPointerExceptionをスローする() {
                     HihokenshaShikaku.Builder sut = new HihokenshaShikaku.Builder(
-                            null, shikibetsuCode, shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun,
+                            null, shikibetsuCode, shoriTimestamp, hihokenshaKubun,
                             ichigoDate, ShikakuShutoku.NOTHING
                     );
                 }
@@ -71,22 +71,14 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                 @Test(expected = NullPointerException.class)
                 public void Builderのコンストラクタは_引数の_識別コード_がnullのとき_NullPointerExceptionをスローする() {
                     HihokenshaShikaku.Builder sut = new HihokenshaShikaku.Builder(
-                            lasdecCode, null, shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun,
+                            lasdecCode, null, shoriTimestamp, hihokenshaKubun,
                             ichigoDate, ShikakuShutoku.NOTHING);
                 }
 
                 @Test(expected = NullPointerException.class)
                 public void Builderのコンストラクタは_引数の_処理日時_がnullのとき_NullPointerExceptionをスローする() {
                     HihokenshaShikaku.Builder sut = new HihokenshaShikaku.Builder(
-                            lasdecCode, shikibetsuCode, null, shoKisaiHokenshaNo, hihokenshaKubun,
-                            ichigoDate, ShikakuShutoku.NOTHING
-                    );
-                }
-
-                @Test(expected = NullPointerException.class)
-                public void Builderのコンストラクタは_引数の_証記載保険者番号_がnullのとき_NullPointerExceptionをスローする() {
-                    HihokenshaShikaku.Builder sut = new HihokenshaShikaku.Builder(
-                            lasdecCode, shikibetsuCode, shoriTimestamp, null, hihokenshaKubun,
+                            lasdecCode, shikibetsuCode, null, hihokenshaKubun,
                             ichigoDate, ShikakuShutoku.NOTHING
                     );
                 }
@@ -94,7 +86,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                 @Test(expected = NullPointerException.class)
                 public void Builderのコンストラクタは_引数の_被保険者台区分_がnullのとき_NullPointerExceptionをスローする() {
                     HihokenshaShikaku.Builder sut = new HihokenshaShikaku.Builder(
-                            lasdecCode, shikibetsuCode, shoriTimestamp, shoKisaiHokenshaNo, null,
+                            lasdecCode, shikibetsuCode, shoriTimestamp, null,
                             ichigoDate, ShikakuShutoku.NOTHING
                     );
                 }
@@ -102,7 +94,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                 @Test(expected = NullPointerException.class)
                 public void Builderのコンストラクタは_引数の_第1号年齢到達日_がnullのとき_NullPointerExceptionをスローする() {
                     HihokenshaShikaku.Builder sut = new HihokenshaShikaku.Builder(
-                            lasdecCode, shikibetsuCode, shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun,
+                            lasdecCode, shikibetsuCode, shoriTimestamp, hihokenshaKubun,
                             null, ShikakuShutoku.NOTHING
                     );
                 }
@@ -110,7 +102,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                 @Test(expected = NullPointerException.class)
                 public void Builderのコンストラクタは_引数の_資格取得_がnullのとき_NullPointerExceptionをスローする() {
                     HihokenshaShikaku.Builder sut = new HihokenshaShikaku.Builder(
-                            lasdecCode, shikibetsuCode, shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun,
+                            lasdecCode, shikibetsuCode, shoriTimestamp, hihokenshaKubun,
                             ichigoDate, null);
                 }
             }
@@ -132,7 +124,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                     @Before
                     public void setUp() {
                         sut = new HihokenshaShikaku.Builder(lasdecCode,
-                                shikibetsuCode, shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
+                                shikibetsuCode, shoriTimestamp, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
                         shikaku = sut.hihokenshaNo(hihokenshaNo).build();
                     }
 
@@ -158,7 +150,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                     @Before
                     public void setUp() {
                         sut = new HihokenshaShikaku.Builder(lasdecCode,
-                                shikibetsuCode, shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
+                                shikibetsuCode, shoriTimestamp, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
                         shikaku = sut.shikakuShutoku(資格取得).build();
                     }
 
@@ -208,7 +200,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                     @Before
                     public void setUp() {
                         sut = new HihokenshaShikaku.Builder(lasdecCode,
-                                shikibetsuCode, shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
+                                shikibetsuCode, shoriTimestamp, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
                         shikaku = sut.shikakuSoshitsu(資格喪失).build();
                     }
 
@@ -258,7 +250,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                     @Before
                     public void setUp() {
                         sut = new HihokenshaShikaku.Builder(lasdecCode,
-                                shikibetsuCode, shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
+                                shikibetsuCode, shoriTimestamp, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
                         shikaku = sut.shikakuHenko(資格変更).build();
                     }
 
@@ -290,7 +282,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                     @Before
                     public void setUp() {
                         sut = new HihokenshaShikaku.Builder(lasdecCode,
-                                shikibetsuCode, shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
+                                shikibetsuCode, shoriTimestamp, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
                         shikaku = sut.jushochitokureiTekiyo(住所地特例適用).build();
                     }
 
@@ -322,7 +314,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                     @Before
                     public void setUp() {
                         sut = new HihokenshaShikaku.Builder(lasdecCode,
-                                shikibetsuCode, shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
+                                shikibetsuCode, shoriTimestamp, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
                         shikaku = sut.jushochitokureiKaijo(住所地特例解除).build();
                     }
 
@@ -351,7 +343,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                     @Before
                     public void setUp() {
                         sut = new HihokenshaShikaku.Builder(lasdecCode,
-                                shikibetsuCode, shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
+                                shikibetsuCode, shoriTimestamp, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
                         jutokuKubun = JushochiTokureishaKubun.住所地特例者;
                         shikaku = sut.jushochiTokureishaKubun(jutokuKubun).build();
                     }
@@ -371,7 +363,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                     @Before
                     public void setUp() {
                         sut = new HihokenshaShikaku.Builder(lasdecCode,
-                                shikibetsuCode, shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
+                                shikibetsuCode, shoriTimestamp, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
                         koikiJutokuKubun = KoikinaiJushochitokureishaKubun.広域内住所地特例者;
                         shikaku = sut.koikinaiJushochiTokureishaKubun(koikiJutokuKubun).build();
                     }
@@ -391,7 +383,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                     @Before
                     public void setUp() {
                         sut = new HihokenshaShikaku.Builder(lasdecCode,
-                                shikibetsuCode, shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
+                                shikibetsuCode, shoriTimestamp, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
                         code = new ShoKisaiHokenshaNo(new RString("666666"));
                         shikaku = sut.koikinaiJutokuSochimotoLasdecCode(code).build();
                     }
@@ -411,7 +403,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                     @Before
                     public void setUp() {
                         sut = new HihokenshaShikaku.Builder(lasdecCode,
-                                shikibetsuCode, shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
+                                shikibetsuCode, shoriTimestamp, hihokenshaKubun, ichigoDate, shikakuShutokuFirst);
                         code = new LasdecCode("666666");
                         shikaku = sut.oldLasdecCode(code).build();
                     }
@@ -440,38 +432,32 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                 @Test(expected = NullPointerException.class)
                 public void BuilderのIKaigoShikakuを用いるコンストラクタは_引数の_介護資格_がnullのとき_NullPointerExceptionをスローする() {
                     HihokenshaShikaku.Builder sut = new HihokenshaShikaku.Builder(
-                            null, lasdecCode, shikibetsuCode, shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun
+                            null, lasdecCode, shikibetsuCode, shoriTimestamp, hihokenshaKubun
                     );
                 }
 
                 @Test(expected = NullPointerException.class)
                 public void BuilderのIKaigoShikakuを用いるコンストラクタは_引数の_市町村コード_がnullのとき_NullPointerExceptionをスローする() {
                     HihokenshaShikaku.Builder sut = new HihokenshaShikaku.Builder(
-                            kaigoShikaku, null, shikibetsuCode, shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun);
+                            kaigoShikaku, null, shikibetsuCode, shoriTimestamp, hihokenshaKubun);
                 }
 
                 @Test(expected = NullPointerException.class)
                 public void BuilderのIKaigoShikakuを用いるコンストラクタは_引数の_識別コード_がnullのとき_NullPointerExceptionをスローする() {
                     HihokenshaShikaku.Builder sut = new HihokenshaShikaku.Builder(
-                            kaigoShikaku, lasdecCode, null, shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun);
+                            kaigoShikaku, lasdecCode, null, shoriTimestamp, hihokenshaKubun);
                 }
 
                 @Test(expected = NullPointerException.class)
                 public void BuilderのIKaigoShikakuを用いるコンストラクタは_引数の_処理日時_がnullのとき_NullPointerExceptionをスローする() {
                     HihokenshaShikaku.Builder sut = new HihokenshaShikaku.Builder(
-                            kaigoShikaku, lasdecCode, shikibetsuCode, null, shoKisaiHokenshaNo, hihokenshaKubun);
-                }
-
-                @Test(expected = NullPointerException.class)
-                public void BuilderのIKaigoShikakuを用いるコンストラクタは_引数の_証記載被保険者番号_がnullのとき_NullPointerExceptionをスローする() {
-                    HihokenshaShikaku.Builder sut = new HihokenshaShikaku.Builder(
-                            kaigoShikaku, lasdecCode, shikibetsuCode, shoriTimestamp, null, hihokenshaKubun);
+                            kaigoShikaku, lasdecCode, shikibetsuCode, null, hihokenshaKubun);
                 }
 
                 @Test(expected = NullPointerException.class)
                 public void BuilderのIKaigoShikakuを用いるコンストラクタは_引数の_被保険者区分_がnullのとき_NullPointerExceptionをスローする() {
                     HihokenshaShikaku.Builder sut = new HihokenshaShikaku.Builder(
-                            kaigoShikaku, lasdecCode, shikibetsuCode, shoriTimestamp, shoKisaiHokenshaNo, null);
+                            kaigoShikaku, lasdecCode, shikibetsuCode, shoriTimestamp, null);
                 }
             }
 
@@ -503,7 +489,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                     @Before
                     public void setUp() {
                         sut = new HihokenshaShikaku.Builder(kaigoShikaku, lasdecCode, shikibetsuCode,
-                                shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun);
+                                shoriTimestamp, hihokenshaKubun);
                     }
 
                     @Test
@@ -585,14 +571,9 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                 @Before
                 public void setUp() {
                     shikaku = new HihokenshaShikaku.Builder(lasdecCode, shikibetsuCode,
-                            shoriTimestamp, shoKisaiHokenshaNo, hihokenshaKubun, ichigoDate, ShikakuShutoku.NOTHING).build();
+                            shoriTimestamp, hihokenshaKubun, ichigoDate, ShikakuShutoku.NOTHING).build();
                     sut = new HihokenshaShikaku.Builder(shikaku);
                     created = sut.build();
-                }
-
-                @Test
-                public void 引数のHihokenshaShikakuのget地方公共団体コードと_生成後のHihokenshaShikakuのget地方公共団体コードは一致する() {
-                    assertThat(created.get証記載保険者番号(), is(shikaku.get証記載保険者番号()));
                 }
 
                 @Test

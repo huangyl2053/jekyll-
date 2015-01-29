@@ -20,6 +20,9 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokensha
 /**
  * DbT5001NinteiShinseiJohoの項目定義クラスです
  *
+ * @deprecated 共有子Divでこのテーブルを参照するために
+ * {@link DbT5001NinteiShinseiJohoEntity DBZ.DbT5001NinteiShinseiJohoEntity}
+ * を作成したのでそちらを使用してください。
  */
 public class DbT5001NinteiShinseiJohoEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">

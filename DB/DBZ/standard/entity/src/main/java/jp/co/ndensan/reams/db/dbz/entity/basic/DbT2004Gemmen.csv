@@ -1,0 +1,17 @@
+﻿choteiNendo,UDD012YSeireki,FlexibleYear,,,,,A
+fukaNendo,UDD012YSeireki,FlexibleYear,,,,,A
+tsuchishoNo,DbUDD008TsuchishoNo,DbUDD008TsuchishoNo,,,,,A
+shoriTimestamp,timestamp,RDateTime,,,,,A
+shinseiYMD,UDD015YMD,FlexibleDate,,,,,A
+ketteiYMD,UDD015YMD,FlexibleDate,,,,,A
+torikeshiYMD,UDD015YMD,FlexibleDate,,,,,A
+jotaiKubun,varchar,RString,,,,,A
+sakuseiKubun,varchar,RString,,,,,A
+shinseiJiyu,text,RString,,,,,A
+gemmenShuruiCode,UDD035Code,Code,,,,,A
+gemmenJiyu,text,RString,,,,,A
+gemmenTorikeshiShuruiCode,UDD035Code,Code,,,,,A
+gemmenTorikeshiJiyu,text,RString,,,,,A
+shinseiGemmenGaku,numeric,Decimal,,,,,A
+ketteiGemmenGaku,numeric,Decimal,,,,,A
+torikeshiGemmenGaku,numeric,Decimal,,,,,A

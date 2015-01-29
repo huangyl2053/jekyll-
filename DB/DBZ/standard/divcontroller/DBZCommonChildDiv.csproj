@@ -65,10 +65,10 @@
   <ItemGroup>
 <<<<<<< HEAD
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShisetsuJoho.ts" />
-    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShikakuHenkoRireki.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\shikakuhenkorireki\ShikakuHenkoRireki.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\IryoHokenRireki.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\JushochiTokureiRireki.ts" />
-    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\JushochiTokureiRirekiList.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\jushochitokureirirekilist\JushochiTokureiRirekiList.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShikakuTokusoRireki.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShisetsuNyutaishoRirekiKanri.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\ShoKaishuJokyoList.ts" />
@@ -80,7 +80,7 @@
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\CompleteProcess.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\HihokenshaFinder.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\HihokenshaInputGuide.ts" />
-    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\HihokenshaShikakuHakko.ts" />
+    <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\hihokenshashikakuhakko\HihokenshaShikakuHakko.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\HokenshaInputGuide.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\HokenshaJoho.ts" />
     <TypeScriptCompile Include=".\src\main\webapp\WEB-INF\standard\CommonChildDiv\JigyoshaInputGuide.ts" />

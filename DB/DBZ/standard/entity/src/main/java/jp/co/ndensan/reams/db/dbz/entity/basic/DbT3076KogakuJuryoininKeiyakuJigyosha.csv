@@ -1,0 +1,16 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+shoKisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,A
+uketsukeYMD,UDD015YMD,FlexibleDate,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+shinseiYMD,UDD015YMD,FlexibleDate,,,,,A
+jigyoshaNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,A
+ketteiYMD,UDD015YMD,FlexibleDate,,,,,A
+shoninKekkaKubun,varchar,RString,,,,,A
+juryoininKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+juryoininShuryoYMD,UDD015YMD,FlexibleDate,,,,,A
+keiyakuNo,varchar,RString,,,,,A
+fuShoninRiyu,varchar,RString,,,,,A
+riyoshaFutanJogenGaku,numeric,Decimal,,,,,A
+shoninKekkaTsuchiSakuseiYMD,UDD015YMD,FlexibleDate,,,,,A
+shoninKekkaTsuchiSaiHakkoKubun,varchar,RString,,,,,A

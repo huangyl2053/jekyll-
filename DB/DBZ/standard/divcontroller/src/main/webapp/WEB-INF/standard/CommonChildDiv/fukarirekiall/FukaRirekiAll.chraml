@@ -1,0 +1,107 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;fukarirekiall&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;FukaRirekiAll&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[{&quot;eventName&quot;:&quot;onSelectBySelectButton_dgFukaRirekiAll&quot;},{&quot;eventName&quot;:&quot;onSelectByDblClick_dgFukaRirekiAll&quot;},{&quot;eventName&quot;:&quot;onAfterRequestByDblClick_dgFukaRirekiAll&quot;},{&quot;eventName&quot;:&quot;onAfterRequestBySelectButton_dgFukaRirekiAll&quot;}],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.FukaRirekiAll"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText Panel-Shadow UzCommonChildDivPanel Width-G12 UzCompositeChild" id="FukaRirekiAll" style="margin: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;FukaRirekiAll&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G12&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;FukaRirekiAll&quot;,&quot;title&quot;:&quot;全賦課履歴&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;FukaRirekiAll&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="FukaRirekiAll_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">全賦課履歴</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="FukaRirekiAll_panel_body_area"><div class="UzDataGrid JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="dgFukaRirekiAll" style="width: 988px; height: 192px; opacity: 1;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgFukaRirekiAll&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;988px&quot;,&quot;selectControlID&quot;:&quot;dgFukaRirekiAll&quot;,&quot;height&quot;:&quot;192px&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowClearSortButton&quot;:false,&quot;isShowSelectedRowCount&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowRowState&quot;:false,&quot;columns&quot;:[{&quot;columnName&quot;:&quot;調定年度&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;dataName&quot;:&quot;choteiNendo&quot;},{&quot;columnName&quot;:&quot;賦課年度&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;dataName&quot;:&quot;fukaNendo&quot;},{&quot;columnName&quot;:&quot;通知書番号&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;dataName&quot;:&quot;tsuchishoNo&quot;},{&quot;columnName&quot;:&quot;保険料段階&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;dataName&quot;:&quot;hokenryoDankai&quot;},{&quot;columnName&quot;:&quot;保険料額&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;dataName&quot;:&quot;hokenryoGaku&quot;},{&quot;columnName&quot;:&quot;減免額&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;dataName&quot;:&quot;genmenGaku&quot;},{&quot;columnName&quot;:&quot;確定保険料額&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;dataName&quot;:&quot;kakuteiHokenryoGaku&quot;},{&quot;columnName&quot;:&quot;特別徴収額&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;dataName&quot;:&quot;tokubetsuChoshuGaku&quot;},{&quot;columnName&quot;:&quot;普通徴収額&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;dataName&quot;:&quot;futsuChoshuGaku&quot;}],&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:0,&quot;groupHeaderHeight&quot;:0},&quot;isShowSelectButtonColumn&quot;:true,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;onSelectByDblClick&quot;:&quot;onSelectByDblClick_dgFukaRirekiAll&quot;,&quot;onSelectBySelectButton&quot;:&quot;onSelectBySelectButton_dgFukaRirekiAll&quot;,&quot;onAfterRequestByDblClick&quot;:&quot;onAfterRequestByDblClick_dgFukaRirekiAll&quot;,&quot;onAfterRequestBySelectButton&quot;:&quot;onAfterRequestBySelectButton_dgFukaRirekiAll&quot;,&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgFukaRirekiAll_grid_table" role="" style="width: 988px; height: 167px; position: relative;"></div><div id="dgFukaRirekiAll_footer" style="width: 988px; height: 25px;"></div></div></div></div>          
+  
+        
+   
+   <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['FUKARIREKIALL'] = {};
+DBZ['FUKARIREKIALL'].FukaRirekiAllRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_FukaRirekiAll').getProperty();parameter0.dgFukaRirekiAll = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgFukaRirekiAll').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (FukaRirekiAll) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onSelectByDblClick_dgFukaRirekiAll = function () {
+                return "onSelectByDblClick_dgFukaRirekiAll";
+            };
+
+            Events.onSelectBySelectButton_dgFukaRirekiAll = function () {
+                return "onSelectBySelectButton_dgFukaRirekiAll";
+            };
+
+            Events.onAfterRequestByDblClick_dgFukaRirekiAll = function () {
+                return "onAfterRequestByDblClick_dgFukaRirekiAll";
+            };
+
+            Events.onAfterRequestBySelectButton_dgFukaRirekiAll = function () {
+                return "onAfterRequestBySelectButton_dgFukaRirekiAll";
+            };
+            return Events;
+        })();
+        FukaRirekiAll.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "FukaRirekiAll";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.FukaRirekiAll.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.FukaRirekiAll.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.FukaRirekiAll = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgFukaRirekiAll = function () {
+                return new UZA.DataGrid(this.convFiledName("dgFukaRirekiAll"));
+            };
+            return Controls;
+        })();
+        FukaRirekiAll.Controls = Controls;
+    })(DBZ.FukaRirekiAll || (DBZ.FukaRirekiAll = {}));
+    var FukaRirekiAll = DBZ.FukaRirekiAll;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (FukaRirekiAll) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new FukaRirekiAll.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new FukaRirekiAll.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        FukaRirekiAll.ModeController = ModeController;
+    })(DBZ.FukaRirekiAll || (DBZ.FukaRirekiAll = {}));
+    var FukaRirekiAll = DBZ.FukaRirekiAll;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (FukaRirekiAll) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new FukaRirekiAll.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        FukaRirekiAll.PublicProperties = PublicProperties;
+    })(DBZ.FukaRirekiAll || (DBZ.FukaRirekiAll = {}));
+    var FukaRirekiAll = DBZ.FukaRirekiAll;
+})(DBZ || (DBZ = {}));
+</script></div>
