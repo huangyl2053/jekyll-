@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2002FukaEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT2002FukaEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -31,6 +32,7 @@ public class MaeRirekiKeyTest extends DbzTestBase {
         private static MaeRirekiKey sut;
 
         private static final SanteiState 算定状態 = SanteiState.仮算定;
+        private static final AtenaMeisho 氏名 = AtenaMeisho.EMPTY;
 
         @BeforeClass
         public static void test() {
@@ -39,7 +41,9 @@ public class MaeRirekiKeyTest extends DbzTestBase {
                     new FukaNendo(DEFAULT_賦課年度),
                     DEFAULT_通知書番号,
                     DEFAULT_処理日時,
-                    算定状態);
+                    算定状態,
+                    氏名
+            );
         }
 
         @Test
@@ -65,6 +69,11 @@ public class MaeRirekiKeyTest extends DbzTestBase {
         @Test
         public void 戻り値の算定状態は_設定した値と同じ算定状態を返す() {
             assertThat(sut.get算定状態(), is(算定状態));
+        }
+
+        @Test
+        public void 戻り値の氏名は_設定した値と同じ氏名を返す() {
+            assertThat(sut.get氏名(), is(氏名));
         }
     }
 }

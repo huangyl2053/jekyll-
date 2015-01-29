@@ -1,6 +1,5 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoatenainfo;
 
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.IShikibetsuTaishoHistories;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
@@ -28,16 +27,9 @@ public interface IKaigoAtenaInfoDiv extends ICommonChildDivBaseProperties {
     void set介護宛名賦課モード();
 
     /**
-     * 宛名基本情報が持つ、個人の識別番号を取得します。
+     * 対象者氏名を返します。
      *
-     * @return 識別番号
+     * @return 氏名
      */
-    ShikibetsuCode getShikibetsuCode();
-
-    /**
-     * 宛名基本情報が持つ、個人の名称を返します。
-     *
-     * @return 宛名名称
-     */
-    AtenaMeisho getMeisho();
+    AtenaMeisho getName();
 }

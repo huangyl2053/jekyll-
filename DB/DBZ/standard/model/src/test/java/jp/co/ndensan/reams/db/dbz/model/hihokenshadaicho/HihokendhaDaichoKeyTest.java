@@ -63,7 +63,8 @@ public class HihokendhaDaichoKeyTest {
 
         @Test(expected = NullPointerException.class)
         public void 処理日時にnullが渡された場合_NullPointerExceptionが発生する() {
-            sut = new HihokendhaDaichoKey(市町村コード, 被保険者番号, null);
+            処理日時 = null;
+            sut = new HihokendhaDaichoKey(市町村コード, 被保険者番号, 処理日時);
             fail();
         }
     }

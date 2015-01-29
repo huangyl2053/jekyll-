@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
 import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
+import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuHohoModel;
 import jp.co.ndensan.reams.db.dbz.realservice.ChoshuHohoFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
@@ -38,18 +40,24 @@ public final class FukaShokaiController {
     private FukaShokaiController() {
 
     }
-    //TODO 賦課対象者キーを取得する
-//     public static FukaTaishoshaKey getFukaTaishoshaKey() {
-//
-//        IViewStateValue<FukaShokaiKey> value = ViewStates.access().valueAssignedToA(FukaShokaiKey.class);
-//        Optional<FukaShokaiKey> keyoid = value.tryToGet();
-//
-//        if (!keyoid.isPresent()) {
-//            throw new SystemException(UrErrorMessages.存在しない.getMessage().replace("ViewStateのキーが").evaluate());
-//        }
-//
-//        return keyoid.get();
-//    }
+
+    /**
+     * viewStateに保持している賦課対象者キーを取得します。
+     *
+     * @return 賦課対象者キー
+     */
+    public static FukaTaishoshaKey getFukaTaishoshaKeyInViewState() {
+
+        IViewStateValue<FukaTaishoshaKey> value = ViewStates.access().valueAssignedTo(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+        Optional<FukaTaishoshaKey> keyoid = value.tryToGet();
+
+        if (!keyoid.isPresent()) {
+            throw new SystemException(UrErrorMessages.存在しない.getMessage().replace("賦課対象者キーが").evaluate());
+        }
+
+        return keyoid.get();
+    }
+
     /**
      * 賦課照会キーを取得します。
      *
@@ -92,7 +100,7 @@ public final class FukaShokaiController {
 
         FukaModel 前年度賦課モデル = modeloid.get();
         IViewStateValue<MaeRirekiKey> maeRirekiValue = ViewStates.access().valueAssignedToA(MaeRirekiKey.class);
-        MaeRirekiKey maeKey = ViewStateKeyCreator.createMaeRirekiKey(前年度賦課モデル);
+        MaeRirekiKey maeKey = ViewStateKeyCreator.createMaeRirekiKey(前年度賦課モデル, fukaKey.get氏名());
         maeRirekiValue.put(maeKey);
 
         return maeKey;

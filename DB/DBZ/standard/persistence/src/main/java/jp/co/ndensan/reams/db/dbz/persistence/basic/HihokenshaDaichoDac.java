@@ -204,7 +204,6 @@ public class HihokenshaDaichoDac implements IPersistable<DbT1001HihokenshaDaicho
 
     @Transaction
     @Override
-
     public int delete(DbT1001HihokenshaDaichoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();

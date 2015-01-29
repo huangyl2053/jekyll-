@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
@@ -302,6 +303,7 @@ public class HihokenshaDaichoListTest {
         entity.setShikakuHenkoJiyuCode(new KaigoShikakuHenkoJiyu(Code.EMPTY));
         entity.setShikakuHenkoTodokedeYMD(FlexibleDate.EMPTY);
         entity.setShikakuHenkoYMD(FlexibleDate.EMPTY);
+        entity.setShoriTimestamp(ShoriTimestamp.of(RDateTime.MAX));
         return entity;
     }
 }

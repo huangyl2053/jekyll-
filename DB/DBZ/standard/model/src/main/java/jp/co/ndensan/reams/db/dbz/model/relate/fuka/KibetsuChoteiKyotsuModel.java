@@ -5,8 +5,10 @@
 package jp.co.ndensan.reams.db.dbz.model.relate.fuka;
 
 import java.io.Serializable;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.model.fuka.KibetsuModel;
 import jp.co.ndensan.reams.db.dbz.model.fuka.ChoteiKyotsuModel;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -32,6 +34,9 @@ public class KibetsuChoteiKyotsuModel implements Serializable {
      * @param 調定共通モデル 調定共通モデル
      */
     public KibetsuChoteiKyotsuModel(KibetsuModel 介護期別モデル, ChoteiKyotsuModel 調定共通モデル) {
+        requireNonNull(介護期別モデル, UrSystemErrorMessages.値がnull.getReplacedMessage("介護期別モデル"));
+        requireNonNull(調定共通モデル, UrSystemErrorMessages.値がnull.getReplacedMessage("調定共通モデル"));
+
         this.介護期別モデル = 介護期別モデル;
         this.調定共通モデル = 調定共通モデル;
     }

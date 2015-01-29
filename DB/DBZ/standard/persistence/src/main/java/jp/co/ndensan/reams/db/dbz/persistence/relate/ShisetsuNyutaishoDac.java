@@ -52,7 +52,6 @@ public class ShisetsuNyutaishoDac implements IModifiable<ShisetsuNyutaishoRelate
 
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
         return Optional.ofNullable(createModel(介護保険施設入退所Dac.selectByKey(市町村コード, 識別コード, 処理日時)));
     }

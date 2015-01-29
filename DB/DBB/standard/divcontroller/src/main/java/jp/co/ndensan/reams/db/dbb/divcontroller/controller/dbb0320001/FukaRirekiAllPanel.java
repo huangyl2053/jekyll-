@@ -6,13 +6,15 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320001;
 
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiDisplayMode;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.ViewStateKeyCreator;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.FukaRirekiAllPanelDiv;
 import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.IViewStateValue;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
+import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -30,15 +32,19 @@ public class FukaRirekiAllPanel {
      */
     public ResponseData<FukaRirekiAllPanelDiv> initialize(FukaRirekiAllPanelDiv div) {
 
-        //TODO viewStateから対象者キーを取得
-        //TODO 対象者キーに賦課年度が入っているかいないかで分岐する
+        div.getLblMode().setText(FukaShokaiDisplayMode.初回.getCode());
+
         int rirekiSize;
-        rirekiSize = div.getCcdFukaRirekiAll().load(HihokenshaNo.EMPTY, FukaNendo.EMPTY);
-        rirekiSize = div.getCcdFukaRirekiAll().load(HihokenshaNo.EMPTY);
+        FukaTaishoshaKey fukaTaishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
+        if (fukaTaishoshaKey.get賦課年度().isMaxOrMin()) {
+            rirekiSize = div.getCcdFukaRirekiAll().load(fukaTaishoshaKey.get被保険者番号());
+        } else {
+            rirekiSize = div.getCcdFukaRirekiAll().load(fukaTaishoshaKey.get被保険者番号(), new FukaNendo(fukaTaishoshaKey.get賦課年度()));
+        }
 
         if (rirekiSize == 1) {
             FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(
-                    div.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All().findFirst().get());
+                    div.getCcdFukaRirekiAll().get賦課履歴().get賦課履歴All().findFirst().get(), AtenaMeisho.EMPTY);
             IViewStateValue<FukaShokaiKey> value = ViewStates.access().valueAssignedToA(FukaShokaiKey.class);
             value.put(key);
         }
@@ -53,6 +59,8 @@ public class FukaRirekiAllPanel {
      * @return レスポンスデータ
      */
     public ResponseData<FukaRirekiAllPanelDiv> reload(FukaRirekiAllPanelDiv div) {
+
+        div.getLblMode().setText(FukaShokaiDisplayMode.二回目以降.getCode());
 
         FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
 

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.business.code;
 
-import jp.co.ndensan.reams.ur.urz.business.ICodeAssignedHelper;
+import jp.co.ndensan.reams.ur.urz.definition.ICodeAssignedHelper;
 import jp.co.ndensan.reams.db.dba.business.codeassigneditem.*;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 
