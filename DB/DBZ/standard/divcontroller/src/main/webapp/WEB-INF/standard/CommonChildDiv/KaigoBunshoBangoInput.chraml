@@ -1,0 +1,105 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KaigoBunshoBangoInput&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.KaigoBunshoBangoInput"><div class="StateChangable UzPanel JSControl FloatLeft UzCommonChildDivPanel Width-G6 UzCompositeChild" id="KaigoBunshoBangoInput" style="margin: 0px; width: auto;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KaigoBunshoBangoInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G6&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;KaigoBunshoBangoInput&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KaigoBunshoBangoInput&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;focusPositionID&quot;:&quot;createFile&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KaigoBunshoBangoInput_panel_header_area" style="display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">文書番号</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content ui-droppable ui-sortable panelPaddingDelete Panel-EraseBoder" id="KaigoBunshoBangoInput_panel_body_area"><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft controlMargin-M UzCompositeChild" id="txtBunshoShurui" style="width: 257px; height: 21px; margin-right: 0px; margin-left: 0px; position: relative; opacity: 1;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtBunshoShurui&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;180px&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtBunshoShurui_core&quot;,&quot;maxLength&quot;:&quot;10&quot;,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;文書番号&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtBunshoShurui_labelL" style="width: 70px;"><span>文書番号</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana" id="txtBunshoShurui_core" style="width: 180px;" type="text" placeholder=""></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft controlMargin-M UzCompositeChild" id="txtBunshoHeader" style="width: 25px; height: 21px; margin-right: 0px; margin-left: 5px; display: block;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtBunshoHeader&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;20px&quot;,&quot;marginLeft&quot;:&quot;5px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtBunshoHeader_core&quot;,&quot;maxLength&quot;:&quot;1&quot;,&quot;textAlign&quot;:1,&quot;suggest&quot;:[]}"><input class="UzTextBox CoreElement ime-mode-Hiragana text-align-center" id="txtBunshoHeader_core" style="width: 20px;" type="text" placeholder=""></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft controlMargin-M UzCompositeChild" id="txtBunshoNo" style="width: 95px; height: 21px; margin-right: 0px; margin-left: 5px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtBunshoNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;marginLeft&quot;:&quot;5px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtBunshoNo_core&quot;,&quot;maxLength&quot;:&quot;10&quot;,&quot;textAlign&quot;:1,&quot;textKind&quot;:2,&quot;suggest&quot;:[]}"><input class="UzTextBox CoreElement ime-mode-Off text-align-center" id="txtBunshoNo_core" style="width: 90px;" type="text" placeholder=""></div><div title="" class="WithLabel TextBoxOuterDiv JSControl FloatLeft controlMargin-M UzCompositeChild" id="BunshoFoot" style="width: 25px; height: 21px; margin-right: 0px; margin-left: 5px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;BunshoFoot&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;20px&quot;,&quot;marginLeft&quot;:&quot;5px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;BunshoFoot_core&quot;,&quot;maxLength&quot;:&quot;1&quot;,&quot;textAlign&quot;:1,&quot;suggest&quot;:[]}"><input class="UzTextBox CoreElement text-align-center ime-mode-Hiragana ui-autocomplete-input" id="BunshoFoot_core" style="width: 20px;" type="text" placeholder=""><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><button class="UzButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnBunshoNoGet" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnBunshoNoGet&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;btnBunshoNoGet&quot;,&quot;text&quot;:&quot;番号取得&quot;}"><span>番号取得</span></button></div></div>    
+  <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['KAIGOBUNSHOBANGOINPUT'] = {};
+DBZ['KAIGOBUNSHOBANGOINPUT'].KaigoBunshoBangoInputRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KaigoBunshoBangoInput').getProperty();parameter0.txtBunshoShurui = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtBunshoShurui').getProperty();parameter0.txtBunshoHeader = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtBunshoHeader').getProperty();parameter0.txtBunshoNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtBunshoNo').getProperty();parameter0.BunshoFoot = Uz.JSControlUtil.getJSControl(parentFieldName + '_BunshoFoot').getProperty();parameter0.btnBunshoNoGet = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnBunshoNoGet').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (KaigoBunshoBangoInput) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KaigoBunshoBangoInput.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KaigoBunshoBangoInput";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KaigoBunshoBangoInput.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.KaigoBunshoBangoInput.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KaigoBunshoBangoInput = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtBunshoShurui = function () {
+                return new UZA.TextBox(this.convFiledName("txtBunshoShurui"));
+            };
+
+            Controls.prototype.txtBunshoHeader = function () {
+                return new UZA.TextBox(this.convFiledName("txtBunshoHeader"));
+            };
+
+            Controls.prototype.txtBunshoNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtBunshoNo"));
+            };
+
+            Controls.prototype.BunshoFoot = function () {
+                return new UZA.TextBox(this.convFiledName("BunshoFoot"));
+            };
+
+            Controls.prototype.btnBunshoNoGet = function () {
+                return new UZA.Button(this.convFiledName("btnBunshoNoGet"));
+            };
+            return Controls;
+        })();
+        KaigoBunshoBangoInput.Controls = Controls;
+    })(DBZ.KaigoBunshoBangoInput || (DBZ.KaigoBunshoBangoInput = {}));
+    var KaigoBunshoBangoInput = DBZ.KaigoBunshoBangoInput;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (KaigoBunshoBangoInput) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KaigoBunshoBangoInput.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new KaigoBunshoBangoInput.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KaigoBunshoBangoInput.ModeController = ModeController;
+    })(DBZ.KaigoBunshoBangoInput || (DBZ.KaigoBunshoBangoInput = {}));
+    var KaigoBunshoBangoInput = DBZ.KaigoBunshoBangoInput;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KaigoBunshoBangoInput) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KaigoBunshoBangoInput.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        KaigoBunshoBangoInput.PublicProperties = PublicProperties;
+    })(DBZ.KaigoBunshoBangoInput || (DBZ.KaigoBunshoBangoInput = {}));
+    var KaigoBunshoBangoInput = DBZ.KaigoBunshoBangoInput;
+})(DBZ || (DBZ = {}));
+</script></div>
