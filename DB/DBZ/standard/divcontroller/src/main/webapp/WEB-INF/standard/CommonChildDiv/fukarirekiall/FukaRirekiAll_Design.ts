@@ -16,6 +16,14 @@ module DBZ {
                 return "onSelectBySelectButton_dgFukaRirekiAll";
             }
 
+            public static onAfterRequestByDblClick_dgFukaRirekiAll(): string {
+                return "onAfterRequestByDblClick_dgFukaRirekiAll";
+            }
+
+            public static onAfterRequestBySelectButton_dgFukaRirekiAll(): string {
+                return "onAfterRequestBySelectButton_dgFukaRirekiAll";
+            }
+
         }
 
         export class Controls {

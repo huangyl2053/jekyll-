@@ -11,6 +11,14 @@ var DBZ;
             Events.onSelectBySelectButton_dgFukaRirekiAll = function () {
                 return "onSelectBySelectButton_dgFukaRirekiAll";
             };
+
+            Events.onAfterRequestByDblClick_dgFukaRirekiAll = function () {
+                return "onAfterRequestByDblClick_dgFukaRirekiAll";
+            };
+
+            Events.onAfterRequestBySelectButton_dgFukaRirekiAll = function () {
+                return "onAfterRequestBySelectButton_dgFukaRirekiAll";
+            };
             return Events;
         })();
         FukaRirekiAll.Events = Events;

@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.business.viewstate.MaeRirekiKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**
@@ -85,8 +86,10 @@ public class FukaJohoHikaku {
         div.getKariSantei1().setDisplayNone(false);
         div.getKariSantei2().setDisplayNone(true);
 
-        setHonSantei1(div.getHonSantei1(), FukaShokaiController.getFukaModelByFukaShokaiKey());
-        setKariSantei1(div.getKariSantei1(), FukaShokaiController.getFukaModelByMaeRirekiKey());
+        setHonSantei1(div.getHonSantei1(),
+                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().get氏名());
+        setKariSantei1(div.getKariSantei1(),
+                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().get氏名());
     }
 
     private void setDivFor仮1_仮2(FukaJohoHikakuDiv div) {
@@ -95,8 +98,10 @@ public class FukaJohoHikaku {
         div.getKariSantei1().setDisplayNone(false);
         div.getKariSantei2().setDisplayNone(false);
 
-        setKariSantei1(div.getKariSantei1(), FukaShokaiController.getFukaModelByFukaShokaiKey());
-        setKariSantei2(div.getKariSantei2(), FukaShokaiController.getFukaModelByMaeRirekiKey());
+        setKariSantei1(div.getKariSantei1(),
+                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().get氏名());
+        setKariSantei2(div.getKariSantei2(),
+                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().get氏名());
     }
 
     private void setDivFor仮1_本2(FukaJohoHikakuDiv div) {
@@ -105,8 +110,10 @@ public class FukaJohoHikaku {
         div.getKariSantei1().setDisplayNone(false);
         div.getKariSantei2().setDisplayNone(true);
 
-        setKariSantei1(div.getKariSantei1(), FukaShokaiController.getFukaModelByFukaShokaiKey());
-        setHonSantei2(div.getHonSantei2(), FukaShokaiController.getFukaModelByMaeRirekiKey());
+        setKariSantei1(div.getKariSantei1(),
+                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().get氏名());
+        setHonSantei2(div.getHonSantei2(),
+                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().get氏名());
     }
 
     private void setDivFor本1_本2(FukaJohoHikakuDiv div) {
@@ -115,8 +122,10 @@ public class FukaJohoHikaku {
         div.getKariSantei1().setDisplayNone(true);
         div.getKariSantei2().setDisplayNone(true);
 
-        setHonSantei1(div.getHonSantei1(), FukaShokaiController.getFukaModelByFukaShokaiKey());
-        setHonSantei2(div.getHonSantei2(), FukaShokaiController.getFukaModelByMaeRirekiKey());
+        setHonSantei1(div.getHonSantei1(),
+                FukaShokaiController.getFukaModelByFukaShokaiKey(), FukaShokaiController.getFukaShokaiKeyInViewState().get氏名());
+        setHonSantei2(div.getHonSantei2(),
+                FukaShokaiController.getFukaModelByMaeRirekiKey(), FukaShokaiController.getMaeRirekiKeyInViewState().get氏名());
     }
 
     private void clearKariSantei1(final KariSantei1Div div) {
@@ -211,7 +220,7 @@ public class FukaJohoHikaku {
         div.getTxtChoteiNendoHon2().clearDomain();
     }
 
-    private void setKariSantei1(final KariSantei1Div div, FukaModel model) {
+    private void setKariSantei1(final KariSantei1Div div, FukaModel model, AtenaMeisho name) {
         clearKariSantei1(div);
 
         div.getTxtChoteiJiyuKari11().setValue(model.get調定事由1().getRyakusho());
@@ -231,8 +240,7 @@ public class FukaJohoHikaku {
         div.getKibetsugakuKari1().getCcdKiwarigakuKari1().
                 load(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get処理日時());
 
-//TODO 基本情報取得と同様に取る
-//        div.getTxtShimeiKari1().setValue(model.get());
+        div.getTxtShimeiKari1().setValue(name.value());
         div.getTxtKoseiYMKari1().setValue(model.get更正月());
         div.getTxtZanteiGoukeiGakuKari1().setValue(model.get確定介護保険料_年額());
         div.getTxtTsuchiNoKari1().setValue(model.get通知書番号().value());
@@ -244,7 +252,7 @@ public class FukaJohoHikaku {
         div.getTxtShikakuShutokuYMDKari1().setValue(FukaMapper.toRDate(model.get資格取得日()));
     }
 
-    private void setKariSantei2(final KariSantei2Div div, FukaModel model) {
+    private void setKariSantei2(final KariSantei2Div div, FukaModel model, AtenaMeisho name) {
         clearKariSantei2(div);
 
         div.getTxtChoteiJiyuKari23().setValue(model.get調定事由3().getRyakusho());
@@ -256,8 +264,7 @@ public class FukaJohoHikaku {
         div.getTxtZanteiKeisanjoHokenryoKari2().setValue(model.get減免前介護保険料_年額());
         div.getTxtTsuchiNoKari2().setValue(model.get通知書番号().value());
         div.getTxtChoteiJiyuKari22().setValue(model.get調定事由2().getRyakusho());
-        //TODO 基本情報取得と同様に取る
-//        div.getTxtShimeiKari2().setValue(model.get());
+        div.getTxtShimeiKari2().setValue(name.value());
         div.getTxtNengakuHokenryoKari2().setValue(model.get確定介護保険料_年額());
         div.getTxtChoteiNendoKari2().setDomain(FukaMapper.toRYear(model.get調定年度().value()));
         div.getTxtChoteiJiyuKari21().setValue(model.get調定事由1().getRyakusho());
@@ -275,7 +282,7 @@ public class FukaJohoHikaku {
         }
     }
 
-    private void setHonSantei1(final HonSantei1Div div, FukaModel model) {
+    private void setHonSantei1(final HonSantei1Div div, FukaModel model, AtenaMeisho name) {
         clearHonSantei1(div);
 
         div.getTxtKyokaisoHon1().setValue(model.get境界層区分().toRString());
@@ -285,8 +292,7 @@ public class FukaJohoHikaku {
         div.getTxtChoteiNendoHon1().setDomain(FukaMapper.toRYear(model.get調定年度().value()));
         div.getTxtKakuteiHokenryoHon1().setValue(model.get確定介護保険料_年額());
         div.getTxtChoteiJiyuHon13().setValue(model.get調定事由3().getRyakusho());
-        //TODO 基本情報取得と同様に取る
-//        div.getTxtShimeiHon1().setValue(model.get());
+        div.getTxtShimeiHon1().setValue(name.value());
         div.getTxtNenkinShunyuHon1().setValue(model.get公的年金収入額());
         div.getTxtGemmenGakuHon1().setValue(model.get減免額());
         div.getTxtShikakusoshitsuYMDHon1().setValue(FukaMapper.toRDate(model.get資格喪失日()));
@@ -308,7 +314,7 @@ public class FukaJohoHikaku {
         div.getTxtChoteiJiyuHon11().setValue(model.get調定事由1().getRyakusho());
     }
 
-    private void setHonSantei2(final HonSantei2Div div, FukaModel model) {
+    private void setHonSantei2(final HonSantei2Div div, FukaModel model, AtenaMeisho name) {
         clearHonSantei2(div);
 
         div.getTxtKeisanHokenryogakuHon2().setValue(model.get減免前介護保険料_年額());
@@ -323,8 +329,7 @@ public class FukaJohoHikaku {
         div.getTxtShikakuSoshitsuYMDHon2().setValue(FukaMapper.toRDate(model.get資格喪失日()));
         div.getTxtChoteiJiyuHon22().setValue(model.get調定事由2().getRyakusho());
         div.getTxtNenkinShunyuHon2().setValue(model.get公的年金収入額());
-        //TODO 基本情報取得と同様に取る
-//        div.getTxtShimeiHon2().setValue(model.get());
+        div.getTxtShimeiHon2().setValue(name.value());
         div.getTxtShikakuShutokuYMDHon2().setValue(FukaMapper.toRDate(model.get資格取得日()));
         div.getTxtKyokaisoHon2().setValue(model.get境界層区分().toRString());
         div.getKibetsugakuHon2().getCcdKiwarigakuHon2().

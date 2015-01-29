@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.ur.urz.business.psm.KojinSearchEntityHolder;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -87,7 +88,9 @@ public class TaishoshaFinder {
      */
     public SearchResult<FukaTaishoshaModel> get賦課対象者(ISearchCondition 条件, ISearchCondition 除外条件, IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
 
-        FukaSearchMenu menu = FukaSearchMenu.toValue(ctrlData.getMenuID());
+        //TODO メニューから起動しないとメニューIDを取得できないため、動作確認のために定数をセット
+        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
+//        FukaSearchMenu menu = FukaSearchMenu.toValue(ctrlData.getMenuID());
         ITrueFalseCriteria 介護条件 = getCriteria(条件, 除外条件);
         IPsmCriteria 宛名psm = getPsmCriteria(宛名キー);
         boolean is内部結合 = (menu.is(FukaSearchMenuGroup.照会系) || menu.is(FukaSearchMenuGroup.更正計算系));

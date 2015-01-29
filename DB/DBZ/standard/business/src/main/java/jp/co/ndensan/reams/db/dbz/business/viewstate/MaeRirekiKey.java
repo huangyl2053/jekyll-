@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 
 /**
@@ -25,6 +26,7 @@ public class MaeRirekiKey implements Serializable {
     private final TsuchishoNo 通知書番号;
     private final RDateTime 処理日時;
     private final SanteiState 算定状態;
+    private final AtenaMeisho 氏名;
 
     /**
      * コンストラクタです。
@@ -34,14 +36,16 @@ public class MaeRirekiKey implements Serializable {
      * @param 通知書番号 通知書番号
      * @param 処理日時 処理日時
      * @param 算定状態 算定状態
+     * @param 氏名 氏名
      */
     public MaeRirekiKey(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号,
-            RDateTime 処理日時, SanteiState 算定状態) {
+            RDateTime 処理日時, SanteiState 算定状態, AtenaMeisho 氏名) {
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
         this.通知書番号 = 通知書番号;
         this.処理日時 = 処理日時;
         this.算定状態 = 算定状態;
+        this.氏名 = 氏名;
     }
 
     /**
@@ -87,5 +91,14 @@ public class MaeRirekiKey implements Serializable {
      */
     public SanteiState get算定状態() {
         return 算定状態;
+    }
+
+    /**
+     * 氏名を返します。
+     *
+     * @return 氏名
+     */
+    public AtenaMeisho get氏名() {
+        return 氏名;
     }
 }

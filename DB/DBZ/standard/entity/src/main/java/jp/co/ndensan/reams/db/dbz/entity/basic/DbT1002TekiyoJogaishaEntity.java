@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuJogaiTekiyo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuSoshitsuJiyuJogaiTekiyo;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoJogaiTekiyoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoJogaiKaijoJiyu;
 
 /**
  * DbT1002TekiyoJogaishaの項目定義クラスです
@@ -39,11 +39,11 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
     private YMDHMS shoriTimestamp;
-    private KaigoshikakuShutokuJiyuJogaiTekiyo tekiyoJogaiTekiyoJiyuCode;
+    private KaigoJogaiTekiyoJiyu tekiyoJogaiTekiyoJiyuCode;
     private FlexibleDate tekiyoYMD;
     private FlexibleDate tekiyoTodokedeYMD;
     private FlexibleDate tekiyoUketsukeYMD;
-    private KaigoshikakuSoshitsuJiyuJogaiTekiyo tekiyoJogaikaijokaijoJiyuCode;
+    private KaigoJogaiKaijoJiyu tekiyoJogaikaijokaijoJiyuCode;
     private FlexibleDate kaijoYMD;
     private FlexibleDate kaijoTodokedeYMD;
     private FlexibleDate kaijoUketsukeYMD;
@@ -155,7 +155,7 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
      *
      * @return tekiyoJogaiTekiyoJiyuCode
      */
-    public KaigoshikakuShutokuJiyuJogaiTekiyo getTekiyoJogaiTekiyoJiyuCode() {
+    public KaigoJogaiTekiyoJiyu getTekiyoJogaiTekiyoJiyuCode() {
         return tekiyoJogaiTekiyoJiyuCode;
     }
 
@@ -164,7 +164,7 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
      *
      * @param tekiyoJogaiTekiyoJiyuCode tekiyoJogaiTekiyoJiyuCode
      */
-    public void setTekiyoJogaiTekiyoJiyuCode(KaigoshikakuShutokuJiyuJogaiTekiyo tekiyoJogaiTekiyoJiyuCode) {
+    public void setTekiyoJogaiTekiyoJiyuCode(KaigoJogaiTekiyoJiyu tekiyoJogaiTekiyoJiyuCode) {
         this.tekiyoJogaiTekiyoJiyuCode = tekiyoJogaiTekiyoJiyuCode;
     }
 
@@ -227,7 +227,7 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
      *
      * @return tekiyoJogaikaijokaijoJiyuCode
      */
-    public KaigoshikakuSoshitsuJiyuJogaiTekiyo getTekiyoJogaikaijokaijoJiyuCode() {
+    public KaigoJogaiKaijoJiyu getTekiyoJogaikaijokaijoJiyuCode() {
         return tekiyoJogaikaijokaijoJiyuCode;
     }
 
@@ -236,7 +236,7 @@ public class DbT1002TekiyoJogaishaEntity extends DbTableEntityBase<DbT1002Tekiyo
      *
      * @param tekiyoJogaikaijokaijoJiyuCode tekiyoJogaikaijokaijoJiyuCode
      */
-    public void setTekiyoJogaikaijokaijoJiyuCode(KaigoshikakuSoshitsuJiyuJogaiTekiyo tekiyoJogaikaijokaijoJiyuCode) {
+    public void setTekiyoJogaikaijokaijoJiyuCode(KaigoJogaiKaijoJiyu tekiyoJogaikaijokaijoJiyuCode) {
         this.tekiyoJogaikaijokaijoJiyuCode = tekiyoJogaikaijokaijoJiyuCode;
     }
 

@@ -37,7 +37,7 @@ import static org.junit.Assert.*;
 @RunWith(Enclosed.class)
 public class KyufuKanrihyoInBatchRegistCsvOutputProcessTest extends DbcTestDacBase {
 
-    private static final RString 一時テーブル = new RString("DbTKyufukanrihyoInData_TempTable");
+    private static final RString 一時テーブル = new RString("DbTKyufukanrihyoDataTempTable");
     private static final RString 対象年月 = new RString("200412");
     private static final RString 支援事業者番号 = new RString("0001");
     private static final RString 支援事業者名称 = new RString("支援事業者名称1");
