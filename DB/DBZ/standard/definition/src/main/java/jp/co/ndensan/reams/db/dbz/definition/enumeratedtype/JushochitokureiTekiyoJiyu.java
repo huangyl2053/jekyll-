@@ -15,25 +15,27 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum JushochitokureiTekiyoJiyu implements IShikakuIdoJiyu {
 
     /**
-     * なし <br />
+     * EMPTY <br />
      * 住所地自特例解除事由がないこと表す。<br />
-     * コード : 00
+     * コード : EMPTY
      */
-    なし("00"),
+    EMPTY("", ""),
     /**
      * 自特例適用 <br />
      * コード : 01
      */
-    自特例適用("01"),
+    自特例適用("01", "自特例適用"),
     /**
      * その他 <br />
      * コード : 99
      */
-    その他("99");
+    その他("99", "その他");
     private final RString code;
+    private final RString shortName;
 
-    private JushochitokureiTekiyoJiyu(String code) {
+    private JushochitokureiTekiyoJiyu(String code, String shortName) {
         this.code = new RString(code);
+        this.shortName = new RString(shortName);
     }
 
     @Override
@@ -48,11 +50,12 @@ public enum JushochitokureiTekiyoJiyu implements IShikakuIdoJiyu {
 
     @Override
     public RString getShortName() {
-        return new RString(name());
+        return shortName;
     }
 
     /**
      * 指定のコードに対応するJushochitokureiTekiyoJiyuを返します。
+     * 空文字列、もしくはnullを受け取った場合は"EMPTY"を表すJushochitokureiTekiyoJiyuを返します。
      *
      * @param code コード
      * @return 指定のコードに対応するJushochitokureiTekiyoJiyu
@@ -60,6 +63,10 @@ public enum JushochitokureiTekiyoJiyu implements IShikakuIdoJiyu {
      * 指定のコードに対応するJushochitokureiTekiyoJiyuがないとき。
      */
     public static JushochitokureiTekiyoJiyu toValue(RString code) throws IllegalArgumentException {
+        if (code == null || code.isEmpty()) {
+            return EMPTY;
+        }
+
         for (JushochitokureiTekiyoJiyu target : values()) {
             if (target.getCode().equals(code)) {
                 return target;

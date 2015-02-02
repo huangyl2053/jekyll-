@@ -16,6 +16,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum JushochitokureishaKubun {
 
     /**
+     * 住所地特例区分が空であることを示します。<br/>
+     * コード : EMPTY
+     */
+    EMPTY(""),
+    /**
      * 住所地特例者区分が「住所地特例者」であることを表します。 <br />
      * コード：1
      */
@@ -42,12 +47,17 @@ public enum JushochitokureishaKubun {
 
     /**
      * コードに対応する列挙型を返します。
+     * 空文字列、もしくはnullを受け取った場合は"EMPTY"を表すJushochitokureishaKubunを返します。
      *
      * @param code コード
      * @return 列挙型
      * @throws IllegalArgumentException 対応する列挙型がない場合
      */
     public static JushochitokureishaKubun toValue(RString code) throws IllegalArgumentException {
+        if (code == null || code.isEmpty()) {
+            return EMPTY;
+        }
+
         for (JushochitokureishaKubun data : values()) {
             if (data.code().equals(code)) {
                 return data;

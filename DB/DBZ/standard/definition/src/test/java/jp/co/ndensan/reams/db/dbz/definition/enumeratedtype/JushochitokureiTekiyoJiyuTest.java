@@ -28,6 +28,18 @@ public class JushochitokureiTekiyoJiyuTest extends DbzTestBase {
             assertThat(JushochitokureiTekiyoJiyu.toValue(sut.getCode()), is(sut));
         }
 
+        @Test
+        public void toValueは_nullを受け取った場合_EMPTYを返す() {
+            JushochitokureiTekiyoJiyu sut = JushochitokureiTekiyoJiyu.EMPTY;
+            assertThat(JushochitokureiTekiyoJiyu.toValue(null), is(sut));
+        }
+
+        @Test
+        public void toValueは_空の文字列を受け取った場合_EMPTYを返す() {
+            JushochitokureiTekiyoJiyu sut = JushochitokureiTekiyoJiyu.EMPTY;
+            assertThat(JushochitokureiTekiyoJiyu.toValue(RString.EMPTY), is(sut));
+        }
+
         @Test(expected = IllegalArgumentException.class)
         public void toValueは_指定のコードに対応する列挙子がなければ_IllegalArgumentExceptionを返す() {
             JushochitokureiTekiyoJiyu sut = JushochitokureiTekiyoJiyu.toValue(new RString("1000"));
