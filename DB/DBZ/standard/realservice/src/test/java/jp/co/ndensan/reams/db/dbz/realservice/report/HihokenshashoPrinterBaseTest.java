@@ -66,7 +66,7 @@ public class HihokenshashoPrinterBaseTest {
             sut = new HihokenshashoPrinterBase(
                     null,
                     createKojinFinder(shikibetsuCode),
-                    null, null, null, null
+                    null, null
             );
 
             HihokenshaDaichoModel daicho = mock(HihokenshaDaichoModel.class);
@@ -94,19 +94,11 @@ public class HihokenshashoPrinterBaseTest {
         public void 指定した被保険者番号と_戻り値の被保険者台帳が持つ被保険者番号は_同一になる() {
 
             sut = new HihokenshashoPrinterBase(
-                    null, null,
-                    createControlData(dantaiCode),
-                    null, null,
+                    null, null, null,
                     createHihoDaichoFinder(dantaiCode, hihoNo)
             );
 
             assertThat(sut.getDaichoModel(hihoNo).get被保険者番号(), is(hihoNo));
-        }
-
-        private IUrControlData createControlData(RString dantaiCode) {
-            IUrControlData controlData = mock(IUrControlData.class);
-            when(controlData.getDonyuDantaiCode()).thenReturn(new ReamsDonyuDantaiCode(dantaiCode));
-            return controlData;
         }
 
         private HihokenshaDaichoFinder createHihoDaichoFinder(RString dantaiCode, HihokenshaNo hihoNo) {
@@ -127,9 +119,9 @@ public class HihokenshashoPrinterBaseTest {
 
             sut = new HihokenshashoPrinterBase(
                     createSofusakiInfoConfig(),
-                    null, null,
+                    null,
                     createAtesakiFinder(),
-                    null, null
+                    null
             );
         }
 
@@ -147,27 +139,6 @@ public class HihokenshashoPrinterBaseTest {
             return atesakiFinder;
         }
 
-    }
-
-    public static class getZenkokuJusho extends DbzTestBase {
-
-        //TODO n8178 城間篤人 TODO解消後にテストを作成する。
-        @Test
-        public void dummy() {
-
-            sut = new HihokenshashoPrinterBase(
-                    null, null, null, null,
-                    createZenkokuJushoManager(),
-                    null
-            );
-        }
-
-        private IZenkokuJushoManager createZenkokuJushoManager() {
-            IZenkokuJushoItem zenkokuJusho = mock(IZenkokuJushoItem.class);
-            IZenkokuJushoManager zenkokuJushoManager = mock(IZenkokuJushoManager.class);
-            when(zenkokuJushoManager.get全国住所By全国住所コード(any(ZenkokuJushoCode.class))).thenReturn(zenkokuJusho);
-            return zenkokuJushoManager;
-        }
     }
 
 }

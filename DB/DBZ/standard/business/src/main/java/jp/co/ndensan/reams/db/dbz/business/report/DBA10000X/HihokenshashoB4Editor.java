@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoB4LowerEdi
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoB4UpperEditData;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoB4CommonEditData;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoCommonEditData;
+import jp.co.ndensan.reams.ur.urz.business.IAssociation;
 import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
@@ -53,11 +54,11 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
      * コンストラクタです。引数から被保険者の情報を受け取ります。
      *
      * @param hihokenshashoModel 被保険者台帳情報
-     * @param zenkokuJusho 全国住所
+     * @param association 導入団体情報
      * @throws IllegalArgumentException 引数が持つ印字位置が指定無しである場合
      * @throws NullPointerException 引数がnullの場合
      */
-    public HihokenshashoB4Editor(HihokenshashoModel hihokenshashoModel, IZenkokuJushoItem zenkokuJusho) throws NullPointerException, IllegalArgumentException {
+    public HihokenshashoB4Editor(HihokenshashoModel hihokenshashoModel, IAssociation association) throws NullPointerException, IllegalArgumentException {
         requireNonNull(hihokenshashoModel, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("被保険者証情報", getClass().getName()));
         check印字位置(hihokenshashoModel);
@@ -67,7 +68,7 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         kyotsuJushoEditConfig = new ChohyoKyotsuJushoEditConfig();
 
         this.hihokenshashoModel = hihokenshashoModel;
-        this.shikakuKihonEditor = new ShikakuKihonEditorBase(hihokenshashoModel, zenkokuJusho, printConfig, hihoJushoEditConfig, kyotsuJushoEditConfig);
+        this.shikakuKihonEditor = new ShikakuKihonEditorBase(hihokenshashoModel, association, printConfig, hihoJushoEditConfig, kyotsuJushoEditConfig);
         this.ninteiEditor = new NinteiEditorBase(hihokenshashoModel);
         this.kyufuSeigenEditor = new KyufuSeigenEditorBase(hihokenshashoModel, printConfig);
         this.seiDoitsuEditor = new SeiDoitsuShogaiEditorBase(hihokenshashoModel);

@@ -8,19 +8,18 @@ package jp.co.ndensan.reams.db.dbz.realservice.report;
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoSofusakiInfoConfig;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoModel;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshasho;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;
 import jp.co.ndensan.reams.ur.urz.business.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ur.urz.business.AtesakiPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ur.urz.business.IAssociation;
 import jp.co.ndensan.reams.ur.urz.business.IAtesaki;
 import jp.co.ndensan.reams.ur.urz.business.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ur.urz.business.IAtesakiPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.business.ITsuchishoAtesaki;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
 import jp.co.ndensan.reams.ur.urz.business.TsuchishoAtesakiFactory;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.business.report.IReportBuilder;
@@ -29,8 +28,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.KatagakiEditPattern;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.MeishoFuyoType;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.SetainushiRiyoKubun;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.realservice.IZenkokuJushoManager;
-import jp.co.ndensan.reams.ur.urz.realservice.ZenkokuJushoManagerFactory;
+import jp.co.ndensan.reams.ur.urz.realservice.AssociationService;
 import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.IAtesakiFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.report.core.IReportManager;
 import jp.co.ndensan.reams.ur.urz.realservice.report.core.IReportWriter;
@@ -53,9 +51,7 @@ public class HihokenshashoPrinterBase {
     private final HihokenshashoSofusakiInfoConfig sofusakiConfig;
 
     private final IKojinFinder kojinFinder;
-    private final IUrControlData controlData;
     private final IAtesakiFinder atesakiFinder;
-    private final IZenkokuJushoManager zenkokuJushoManager;
     private final HihokenshaDaichoFinder hihoDaichoFinder;
 
     /**
@@ -65,30 +61,23 @@ public class HihokenshashoPrinterBase {
         this.sofusakiConfig = new HihokenshashoSofusakiInfoConfig();
 
         this.kojinFinder = ShikibetsuTaishoService.getKojinFinder();
-        this.controlData = UrControlDataFactory.createInstance();
         this.atesakiFinder = ShikibetsuTaishoService.getAtesakiFinder();
-        this.zenkokuJushoManager = ZenkokuJushoManagerFactory.createInstance();
         this.hihoDaichoFinder = new HihokenshaDaichoFinder();
     }
 
     /**
      * テスト用コンストラクタです。
      *
+     * @param sofusakiConfig 送付先Config
      * @param kojinFinder 個人Finder
-     * @param controlData コントロールデータ
      * @param atesakiFinder 宛先Finder
-     * @param hihokenshashoAtesakiCreator 被保険者証宛先Creator
-     * @param zenkokuJushoManager 全国住所Manager
      * @param hihoDaichoFinder 被保険者台帳Finder
-     * @param hihoBuilderFactory 被保険者台帳BuilderFactory
      */
-    HihokenshashoPrinterBase(HihokenshashoSofusakiInfoConfig sofusakiConfig, IKojinFinder kojinFinder, IUrControlData controlData,
-            IAtesakiFinder atesakiFinder, IZenkokuJushoManager zenkokuJushoManager, HihokenshaDaichoFinder hihoDaichoFinder) {
+    HihokenshashoPrinterBase(HihokenshashoSofusakiInfoConfig sofusakiConfig, IKojinFinder kojinFinder,
+            IAtesakiFinder atesakiFinder, HihokenshaDaichoFinder hihoDaichoFinder) {
         this.sofusakiConfig = sofusakiConfig;
         this.kojinFinder = kojinFinder;
-        this.controlData = controlData;
         this.atesakiFinder = atesakiFinder;
-        this.zenkokuJushoManager = zenkokuJushoManager;
         this.hihoDaichoFinder = hihoDaichoFinder;
     }
 
@@ -148,15 +137,10 @@ public class HihokenshashoPrinterBase {
     }
 
     /**
-     * 被保険者の全国住所を取得します。
-     *
-     * @param target 被保険者証Model
-     * @return 全国住所
+     * 被保険者が属している導入団体の情報を取得します。
      */
-    public IZenkokuJushoItem getZenkokuJusho(HihokenshashoModel target) {
-        IZenkokuJushoItem zenkokuJusho = zenkokuJushoManager
-                .get全国住所By全国住所コード(target.getKojinJoho().get住所().get全国住所コード());
-        return zenkokuJusho;
+    public IAssociation getAssociation() {
+        return AssociationService.createAssociationFinder().getAssociation();
     }
 
     /**

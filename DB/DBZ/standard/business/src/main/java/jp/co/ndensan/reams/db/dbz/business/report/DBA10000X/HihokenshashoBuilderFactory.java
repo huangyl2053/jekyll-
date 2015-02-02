@@ -6,9 +6,11 @@
 package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X;
 
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoModel;
+import jp.co.ndensan.reams.ur.urz.business.IAssociation;
 import jp.co.ndensan.reams.ur.urz.business.ITsuchishoAtesaki;
 import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.tsuchishoatesaki.TsuchishoAtesakiBuilderFactory;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 被保険者証B4版のBuilderを生成するファクトリクラスです。
@@ -27,14 +29,14 @@ public class HihokenshashoBuilderFactory {
      * 単票発行時の被保険者証B4版Builderを生成します。印字位置は、引数の被保険者証Modelが持つ印字位置を元に決定します。
      *
      * @param hihokenshasho 被保険者証Model
-     * @param zenkokuJusho 全国住所
+     * @param association 導入団体情報
      * @param tsuchishoAtesaki 通知書宛先
      * @return 単票発行時の被保険者証B4版
      */
-    public HihokenshashoB4Builder createInstanceForB4(HihokenshashoModel hihokenshasho, IZenkokuJushoItem zenkokuJusho,
+    public HihokenshashoB4Builder createInstanceForB4(HihokenshashoModel hihokenshasho, IAssociation association,
             ITsuchishoAtesaki tsuchishoAtesaki) {
         return new HihokenshashoB4Builder(
-                new HihokenshashoB4SourceBuilder(new HihokenshashoB4Editor(hihokenshasho, zenkokuJusho)),
+                new HihokenshashoB4SourceBuilder(new HihokenshashoB4Editor(hihokenshasho, association)),
                 TsuchishoAtesakiBuilderFactory.createInstance(tsuchishoAtesaki)
         );
     }
@@ -43,14 +45,14 @@ public class HihokenshashoBuilderFactory {
      * 被保険者証A4版Builderを生成します。
      *
      * @param hihokenshasho 被保険者証Model
-     * @param zenkokuJusho 全国住所
+     * @param association 導入団体情報
      * @param tsuchishoAtesaki 通知書宛先
      * @return 単票発行時の被保険者証A4版
      */
-    public HihokenshashoA4Builder createInstanceForA4(HihokenshashoModel hihokenshasho, IZenkokuJushoItem zenkokuJusho,
+    public HihokenshashoA4Builder createInstanceForA4(HihokenshashoModel hihokenshasho, IAssociation association,
             ITsuchishoAtesaki tsuchishoAtesaki) {
         return new HihokenshashoA4Builder(
-                new HihokenshashoA4SourceBuilder(new HihokenshashoA4Editor(hihokenshasho, zenkokuJusho)),
+                new HihokenshashoA4SourceBuilder(new HihokenshashoA4Editor(hihokenshasho, association)),
                 TsuchishoAtesakiBuilderFactory.createInstance(tsuchishoAtesaki)
         );
     }
