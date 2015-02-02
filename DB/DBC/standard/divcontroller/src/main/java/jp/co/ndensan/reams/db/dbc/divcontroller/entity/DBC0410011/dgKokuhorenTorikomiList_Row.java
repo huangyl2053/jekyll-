@@ -1,21 +1,26 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0410011;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
- * コードが再生成されるときに損失したりします。 Wed Jan 07 09:54:06 JST 2015
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
+ * コードが再生成されるときに損失したりします。
+ * Wed Jan 28 13:41:56 JST 2015 
  */
 
-import java.io.Serializable;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
+
 /**
- * dgKokuhorenTorikomiList_Row のクラスファイル
- *
+ * dgKokuhorenTorikomiList_Row のクラスファイル 
+ * 
  * @author 自動生成
  */
-public class dgKokuhorenTorikomiList_Row extends DataRow implements Serializable {
+
+public class dgKokuhorenTorikomiList_Row extends DataRow {
 
     private RString torikomiFlag;
     private RString txtTorikomiJoho;
@@ -25,7 +30,7 @@ public class dgKokuhorenTorikomiList_Row extends DataRow implements Serializable
     private RString txtShoriNichiji;
     private RString saishoriFlag;
     private RString batchID;
-    private RString ichiranHyojijun;
+    private TextBoxNum ichiranHyojijun;
     private TextBoxDate shoriYM;
     private RString kokanShikibetsuNo;
 
@@ -39,12 +44,12 @@ public class dgKokuhorenTorikomiList_Row extends DataRow implements Serializable
         this.txtShoriNichiji = RString.EMPTY;
         this.saishoriFlag = RString.EMPTY;
         this.batchID = RString.EMPTY;
-        this.ichiranHyojijun = RString.EMPTY;
+        this.ichiranHyojijun = new TextBoxNum();
         this.shoriYM = new TextBoxDate();
         this.kokanShikibetsuNo = RString.EMPTY;
     }
 
-    public dgKokuhorenTorikomiList_Row(RString torikomiFlag, RString txtTorikomiJoho, RString txtZenZengetsu, RString txtZengetsu, RString txtTogetsuJotai, RString txtShoriNichiji, RString saishoriFlag, RString batchID, RString ichiranHyojijun, TextBoxDate shoriYM, RString kokanShikibetsuNo) {
+    public dgKokuhorenTorikomiList_Row(RString torikomiFlag, RString txtTorikomiJoho, RString txtZenZengetsu, RString txtZengetsu, RString txtTogetsuJotai, RString txtShoriNichiji, RString saishoriFlag, RString batchID, TextBoxNum ichiranHyojijun, TextBoxDate shoriYM, RString kokanShikibetsuNo) {
         super();
         this.setOriginalData("torikomiFlag", torikomiFlag);
         this.setOriginalData("txtTorikomiJoho", txtTorikomiJoho);
@@ -102,7 +107,7 @@ public class dgKokuhorenTorikomiList_Row extends DataRow implements Serializable
         return batchID;
     }
 
-    public RString getIchiranHyojijun() {
+    public TextBoxNum getIchiranHyojijun() {
         return ichiranHyojijun;
     }
 
@@ -154,7 +159,7 @@ public class dgKokuhorenTorikomiList_Row extends DataRow implements Serializable
         this.batchID = batchID;
     }
 
-    public void setIchiranHyojijun(RString ichiranHyojijun) {
+    public void setIchiranHyojijun(TextBoxNum ichiranHyojijun) {
         this.setOriginalData("ichiranHyojijun", ichiranHyojijun);
         this.ichiranHyojijun = ichiranHyojijun;
     }

@@ -9,13 +9,14 @@ import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 
 /**
  * DBZのエラーメッセージ定義列挙型です。
  *
  * @author N9606 漢那 憲作
  */
-public enum DbzErrorMessages implements IMessageGettable {
+public enum DbzErrorMessages implements IMessageGettable, IValidationMessage {
 
     必須項目を入力(1, "必須項目を入力してください。"),
     必須項目を入力_追加メッセージあり(2, "必須項目を入力してください。：?"),

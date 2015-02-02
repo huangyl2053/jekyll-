@@ -42,7 +42,7 @@ public class DBC120010_KyufukanrihyoIn extends BatchFlowBase<KokuhorenJohoToriko
     private static final String KOKUHORENIFKANRI_UPDATE_FINISH = "kokuhorenIFFinishUpdataProcess";
 
     private final RString 再処理 = new RString("1");
-    private final RString sharedFileKey = new RString("112");
+    private final RString sharedFileKey = new RString("給付管理票情報");
     private RString runFilePath;
 
     @Override
@@ -111,9 +111,6 @@ public class DBC120010_KyufukanrihyoIn extends BatchFlowBase<KokuhorenJohoToriko
         return loopBatch(KyufuKanrihyoInBatchRegistTempSaveProcess.class)
                 .arguments(processParameter)
                 .define();
-//        }
-
-//        return BFC;
     }
 
     @Step(GET_EDIT_INFO)

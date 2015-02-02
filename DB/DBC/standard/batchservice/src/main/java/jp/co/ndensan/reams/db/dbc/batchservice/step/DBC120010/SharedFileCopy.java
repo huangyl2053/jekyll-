@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchservice.step.DBC120010;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
@@ -55,7 +56,7 @@ public class SharedFileCopy extends SimpleBatchProcessBase {
             if (atoSharedName.compareTo(maeSharedName) == 0) {
             } else {
                 SharedFile.copyToLocal(FilesystemName.fromString(atoSharedName), FilesystemPath.fromString(filePath.getValue()));
-                fileList.put(sharedfile.getSharedFileName(), getFileFullPath(filePath.getValue(), atoSharedName));
+                fileList.put(sharedfile.getSharedFileName(), getFileFullPath(filePath.getValue().concat(sharedfile.getLocalFileName()), atoSharedName));
                 maeSharedName = atoSharedName;
             }
         }
@@ -71,10 +72,22 @@ public class SharedFileCopy extends SimpleBatchProcessBase {
         if (checkSharedName.substringReturnAsPossible(checkFilePath.length() - 3, checkFilePath.length()).equalsIgnoreCase(拡張子CSV)) {
             return checkFilePath.concat(checkSharedName);
         } else {
-
-            return checkFilePath.concat(checkSharedName).concat("/").concat(checkSharedName).concat(".").concat(拡張子CSV);
+            String[] fileNameList = new File(checkFilePath.toString()).list(getFileExtensionFilter(".csv"));
+            return checkFilePath.concat(fileNameList[0]);
+//            return checkFilePath.concat(checkSharedName).concat("/").concat(checkSharedName).concat(".").concat(拡張子CSV);
         }
 
+    }
+
+    private FilenameFilter getFileExtensionFilter(String extension) {
+        final String _extension = extension;
+        return new FilenameFilter() {
+            @Override
+            public boolean accept(File file, String name) {
+                boolean ret = name.endsWith(_extension);
+                return ret;
+            }
+        };
     }
 
     private RString getSharedFileNameJoken(RString sharedFileName) {

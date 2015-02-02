@@ -20,7 +20,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -29,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class KokuhorenTorikomiList {
 
-    private final RString グリッドソート条件１ = new RString("一覧表示順");
+    private final RString グリッドソート条件１ = new RString("ichiranHyojijun");
 
     public ResponseData<KokuhorenTorikomiListDiv> onLoad(KokuhorenTorikomiListDiv panel) {
 
@@ -67,7 +69,9 @@ public class KokuhorenTorikomiList {
         for (KokuhorenTorikomiJohoModel model : KokuhorenTorikomiJoho) {
             KokuhorenTorikomiListDataSource.add(createKokuhorenTorikomiRow(model));
         }
+
         panel.getDgKokuhorenTorikomiList().setDataSource(KokuhorenTorikomiListDataSource);
+
         panel.getDgKokuhorenTorikomiList().setSortOrder(グリッドソート条件１);
         return panel;
     }
@@ -90,7 +94,7 @@ public class KokuhorenTorikomiList {
 
     private dgKokuhorenTorikomiList_Row createKokuhorenTorikomiRow(KokuhorenTorikomiJohoModel model) {
 
-        dgKokuhorenTorikomiList_Row row = new dgKokuhorenTorikomiList_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxDate(), RString.EMPTY);
+        dgKokuhorenTorikomiList_Row row = new dgKokuhorenTorikomiList_Row(RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxNum(), new TextBoxDate(), RString.EMPTY);
         KokuhorenJohoTorikomi business = new KokuhorenJohoTorikomi();
         RStringBuilder rsb = new RStringBuilder();
 
@@ -107,7 +111,7 @@ public class KokuhorenTorikomiList {
         row.setTxtShoriNichiji(business.get当月処理日時(model));
 
         row.setSaishoriFlag(business.get再処理フラグ(model));
-        row.setIchiranHyojijun(model.get一覧表示順());
+        row.getIchiranHyojijun().setValue(new Decimal(model.get一覧表示順().toString()));
         row.setBatchID(model.getバッチID());
         row.setKokanShikibetsuNo(model.get交換識別番号());
         row.setSelectButtonState(business.get選択ボタン状態(row.getTorikomiFlag(), row.getTxtTogetsuJotai()));
