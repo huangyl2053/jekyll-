@@ -26,10 +26,12 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ContainsKyuShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.util.Lists;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.IJushochiTokureiRirekiListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListHandler;
@@ -40,9 +42,13 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoModel;
 import jp.co.ndensan.reams.db.dbz.model.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonJohoModel;
+import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonModel;
+import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hokensha.Hokensha;
 import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
+import jp.co.ndensan.reams.db.dbz.realservice.KijunTsukiShichosonFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.ShisetsuNyutaishoManager;
 import jp.co.ndensan.reams.db.dbz.realservice.ShisetsuNyutaishoTokureiTaishoRelateManager;
 import jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoManager;
@@ -63,6 +69,8 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.InformationException;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -94,7 +102,7 @@ public class ShikakuShosai {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         LasdecCode lasdecCode = new LasdecCode(controlData.getDonyuDantaiCode().getColumnValue());
         //TODO n8178 城間篤人 テスト用の市町村コードには何が入るか不明のため、検索に失敗する。テスト用市町村コードで取得できるデータが用意された後に修正する。
-        lasdecCode = new LasdecCode("209007");
+//        lasdecCode = new LasdecCode("209007");
         IDonyuHokensha donyuHokensha = new IDonyuHokenshaLoader().load();
         GappeiJohoKanriConfig gappeiConfig = new GappeiJohoKanriConfig();
 
@@ -238,8 +246,19 @@ public class ShikakuShosai {
         }
 
         if (gappeiConfig.is合併あり()) {
-            //TODO n8178 城間篤人 久保田さんのほうで実装中。完了後Developからソースを取得して使用する。
-            shikakuShosaiDiv.getDdlShutokuKyuHokensha();
+            KijunTsukiShichosonFinder finder = new KijunTsukiShichosonFinder();
+            Optional<GappeiShichosonJohoModel> gappeiInfo = finder.get基準月市町村情報(FlexibleDate.getNowDate().getYearMonth(),
+                    new ShoKisaiHokenshaNo(lasdecCode.getColumnValue()));
+            gappeiInfo.get().get単一市町村情報();
+
+            IFunction function = new IFunction<IGappeiShichoson, KeyValueDataSource>() {
+                @Override
+                public KeyValueDataSource apply(IGappeiShichoson targetModel) {
+                    return new KeyValueDataSource(targetModel.get旧市町村コード().getColumnValue(), targetModel.get旧市町村名称());
+                }
+            };
+            shikakuShosaiDiv.getDdlShutokuKyuHokensha().setDataSource(gappeiInfo.get().get単一市町村情報().map(function).toList());
+            shikakuShosaiDiv.getDdlShutokuKyuHokensha().setSelectedKey(gappeiInfo.get().get合併情報().get().get市町村コード().getColumnValue());
         }
 
         shikakuShosaiDiv.getTxtSoshitsuDate().setValue(daichoModel.get資格喪失年月日());

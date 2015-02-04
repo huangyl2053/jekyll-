@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.hokensha.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 

@@ -48,7 +48,7 @@ public class KihonJoho {
 
         LasdecCode lasdecCode = new LasdecCode(controlData.getDonyuDantaiCode().getColumnValue());
         //TODO n8178 城間篤人 テスト用の市町村コードには何が入るか不明のため、検索に失敗する。テスト用市町村コードで取得できるデータが用意された後に修正する。
-        lasdecCode = new LasdecCode("209007");
+//        lasdecCode = new LasdecCode("209007");
 
         kihonDiv.getCcdKaigoAtenaInfo().load(taishoshaKey.get識別コード());
         kihonDiv.getCcdKaigoShikakuKihon().load(lasdecCode, taishoshaKey.get識別コード());
