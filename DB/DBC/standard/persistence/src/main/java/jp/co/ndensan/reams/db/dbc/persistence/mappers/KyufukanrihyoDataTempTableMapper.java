@@ -104,4 +104,10 @@ public class KyufukanrihyoDataTempTableMapper implements IKyufukanrihyoDataTempT
         IKyufukanrihyoDataTempTableMapper mapper = session.getMapper(IKyufukanrihyoDataTempTableMapper.class);
         return mapper.getTempData(param);
     }
+
+    @Override
+    public List<DbTKyufukanrihyoDataTempTableEntity> selectAll() {
+        IKyufukanrihyoDataTempTableMapper mapper = session.getMapper(IKyufukanrihyoDataTempTableMapper.class);
+        return mapper.selectAll();
+    }
 }

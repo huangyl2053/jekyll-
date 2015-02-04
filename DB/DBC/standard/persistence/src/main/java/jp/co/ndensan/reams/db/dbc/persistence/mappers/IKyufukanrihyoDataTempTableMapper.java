@@ -10,6 +10,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbTKyufukanrihyoDataTempTableEntity;
 
 /**
+ *
  * 給付管理票取込一時データエンティティのマッパーインタフェースです。
  *
  * @author N8156 宮本 康
@@ -126,4 +127,7 @@ public interface IKyufukanrihyoDataTempTableMapper {
      * @return DbTKyufukanrihyoDataTempTableEntity
      */
     List<DbTKyufukanrihyoDataTempTableEntity> getTempData(Map<String, Object> param);
+
+	//select
+    List<DbTKyufukanrihyoDataTempTableEntity> selectAll();
 }

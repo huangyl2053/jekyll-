@@ -10,13 +10,14 @@ import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.util.IllegalInitialValueException;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * 広域構成市町村を識別するための値です。
  *
  * @author N3327 三浦 凌
  */
-public final class ShichosonShikibetsuID implements IValueObject<RString>, Comparable<ShichosonShikibetsuID>, Serializable {
+public final class ShichosonShikibetsuID implements IValueObject<RString>, Comparable<ShichosonShikibetsuID>, IDbColumnMappable, Serializable {
 
     /**
      * 空の ShichosonShikibetsuID です。
@@ -81,6 +82,11 @@ public final class ShichosonShikibetsuID implements IValueObject<RString>, Compa
         int hash = 5;
         hash = 89 * hash + java.util.Objects.hashCode(this.theValue);
         return hash;
+    }
+
+    @Override
+    public RString getColumnValue() {
+        return this.theValue;
     }
 
     /**
