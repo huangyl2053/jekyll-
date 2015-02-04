@@ -1197,6 +1197,6 @@ public class HihokenshashoA4EditData implements IHihokenshashoA4CommonEditData {
 
     @Override
     public void setTsuchishoSofusakiSource(TsuchishoAtesakiSource tsuchishoSofusakiSource) {
-        this.hihokenshasho.tsuchishoSource = tsuchishoSofusakiSource;
+        this.hihokenshasho.sofusakiAtena = tsuchishoSofusakiSource;
     }
 }

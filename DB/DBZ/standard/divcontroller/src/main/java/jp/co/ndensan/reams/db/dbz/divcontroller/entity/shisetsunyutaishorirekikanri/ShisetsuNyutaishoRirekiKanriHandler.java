@@ -155,9 +155,11 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
 
     /**
      * グリッド上から選択した施設入退所履歴の情報を、明細エリアに表示します。
+     *
+     * @param clickedItem グリッド上から選択した要素
      */
-    public void showSelectedData() {
-        dgShisetsuNyutaishoRireki_Row selRow = div.getDgShisetsuNyutaishoRireki().getClickedItem();
+    public void showSelectedData(dgShisetsuNyutaishoRireki_Row clickedItem) {
+        dgShisetsuNyutaishoRireki_Row selRow = clickedItem;
         div.setSelectRow(new RString(String.valueOf(selRow.getId())));
 
         ShisetsuNyutaishoRelateModel model = new ShisetsuNyutaishoRelateModel();
@@ -205,7 +207,6 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      *
      * @return 施設入退所情報に変更が存在するならtrue
      */
-
     public boolean hasChanged() {
         IItemList<ShisetsuNyutaishoRelateModel> nyutaishoList = get施設入退所履歴();
         for (ShisetsuNyutaishoRelateModel nyutaisho : nyutaishoList) {

@@ -21,7 +21,7 @@ public final class ShikakuSoshitsu extends ShikakuIdoBaseItem<ShikakuSoshitsuJiy
     public static final ShikakuSoshitsu NONE;
 
     static {
-        NONE = new ShikakuSoshitsu(ShikakuSoshitsuJiyu.なし, FlexibleDate.MAX, FlexibleDate.MAX);
+        NONE = new ShikakuSoshitsu(ShikakuSoshitsuJiyu.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
     }
 
     /**

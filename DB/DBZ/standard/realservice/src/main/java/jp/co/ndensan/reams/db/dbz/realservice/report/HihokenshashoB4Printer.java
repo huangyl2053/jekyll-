@@ -5,12 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice.report;
 
-import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoJushoEditConfig;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.HihokenshashoBuilderFactory;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.GunNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ShichosonNamePrint;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNamePrint;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoModel;
@@ -21,15 +17,8 @@ import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.ur.urz.business.IAssociation;
 import jp.co.ndensan.reams.ur.urz.business.ITsuchishoAtesaki;
-import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
 import jp.co.ndensan.reams.ur.urz.business.report.IReportBuilder;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushoEditPattern;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushoPrefix;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.KatagakiEditPattern;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.realservice.AssociationService;
-import jp.co.ndensan.reams.ur.urz.realservice.IFormattedJushoBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 被保険者証B4版を発行するために使用するPrinterクラスです。
@@ -44,7 +33,7 @@ public class HihokenshashoB4Printer {
     private static final RString REPORT_ID_B4;
 
     static {
-        REPORT_ID_B4 = new RString("DBA100001");
+        REPORT_ID_B4 = new RString("DBA100001_HihokenshashoB4");
     }
 
     /**

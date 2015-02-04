@@ -62,7 +62,7 @@ public class HihokenshashoB4BuilderTest {
             sut = new HihokenshashoB4Builder(builder, tsuchishoAtesakiBuilder);
 
             result = sut.build();
-            assertThat(result.tsuchishoSource1, is(not(nullValue())));
+            assertThat(result.sofusakiAtena1, is(not(nullValue())));
         }
 
         @Test
@@ -72,7 +72,7 @@ public class HihokenshashoB4BuilderTest {
             sut = new HihokenshashoB4Builder(builder, tsuchishoAtesakiBuilder);
 
             result = sut.build();
-            assertThat(result.tsuchishoSource2, is(nullValue()));
+            assertThat(result.sofusakiAtena2, is(nullValue()));
         }
 
         @Test
@@ -82,7 +82,7 @@ public class HihokenshashoB4BuilderTest {
             sut = new HihokenshashoB4Builder(builder, tsuchishoAtesakiBuilder);
 
             result = sut.build();
-            assertThat(result.tsuchishoSource1, is(nullValue()));
+            assertThat(result.sofusakiAtena1, is(nullValue()));
         }
 
         @Test
@@ -92,7 +92,7 @@ public class HihokenshashoB4BuilderTest {
             sut = new HihokenshashoB4Builder(builder, tsuchishoAtesakiBuilder);
 
             result = sut.build();
-            assertThat(result.tsuchishoSource2, is(not(nullValue())));
+            assertThat(result.sofusakiAtena2, is(not(nullValue())));
         }
 
         private static HihokenshashoB4SourceBuilder createHihoshoBuilder(HihokenshashoPrintPosition position) {

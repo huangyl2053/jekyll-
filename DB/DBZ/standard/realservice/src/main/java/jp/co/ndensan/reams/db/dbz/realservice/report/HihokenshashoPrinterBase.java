@@ -138,6 +138,8 @@ public class HihokenshashoPrinterBase {
 
     /**
      * 被保険者が属している導入団体の情報を取得します。
+     *
+     * @return 導入団体情報 IAssociation
      */
     public IAssociation getAssociation() {
         return AssociationService.createAssociationFinder().getAssociation();

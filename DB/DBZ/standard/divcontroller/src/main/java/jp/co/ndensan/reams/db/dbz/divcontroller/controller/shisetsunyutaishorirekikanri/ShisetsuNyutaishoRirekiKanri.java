@@ -94,6 +94,8 @@ public class ShisetsuNyutaishoRirekiKanri {
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelect_dgShisetsuNyutaishoRireki(
             ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
 
+        dgShisetsuNyutaishoRireki_Row selectedRow = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getClickedItem();
+
         //TODO
         //１）「追加する」ボタンを押下不可にする。
         shisetsuNyutaishoRirekiDiv.getBtnAddShisetsuNyutaisho().setDisabled(true);
@@ -121,7 +123,7 @@ public class ShisetsuNyutaishoRirekiKanri {
 
         }
         //３）明細エリアに選択行の内容を表示する。
-        createHandlerOf(shisetsuNyutaishoRirekiDiv).showSelectedData();
+        createHandlerOf(shisetsuNyutaishoRirekiDiv).showSelectedData(selectedRow);
 
         //４－１）状態が「追加」の場合、明細エリアの項目を入力可にする。
         //４－１－１）明細表示モードに、追加・修正を設定する。
@@ -145,6 +147,8 @@ public class ShisetsuNyutaishoRirekiKanri {
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelectByModifyButton_dgShisetsuNyutaishoRireki(
             ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
 
+        dgShisetsuNyutaishoRireki_Row selectedRow = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getClickedItem();
+
         //TODO
         //１）「追加する」ボタンを押下不可にする。
         shisetsuNyutaishoRirekiDiv.getBtnAddShisetsuNyutaisho().setDisabled(true);
@@ -155,7 +159,7 @@ public class ShisetsuNyutaishoRirekiKanri {
         shisetsuNyutaishoRirekiDiv.setMode_明細表示モード(ShisetsuNyutaishoRirekiKanriDiv.明細表示モード.追加_修正);
         //３）明細エリアに選択行の内容を表示する。
         shisetsuNyutaishoRirekiDiv.setInputMode(ViewExecutionStatus.Modify.getValue());
-        createHandlerOf(shisetsuNyutaishoRirekiDiv).showSelectedData();
+        createHandlerOf(shisetsuNyutaishoRirekiDiv).showSelectedData(selectedRow);
 
         return createSettingData(shisetsuNyutaishoRirekiDiv);
     }
@@ -171,6 +175,8 @@ public class ShisetsuNyutaishoRirekiKanri {
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelectByDeleteButton_dgShisetsuNyutaishoRireki(
             ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
 
+        dgShisetsuNyutaishoRireki_Row selectedRow = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getClickedItem();
+
         //TODO
         //１）「追加する」ボタンを押下不可にする。
         shisetsuNyutaishoRirekiDiv.getBtnAddShisetsuNyutaisho().setDisabled(true);
@@ -183,7 +189,7 @@ public class ShisetsuNyutaishoRirekiKanri {
         shisetsuNyutaishoRirekiDiv.setMode_明細表示モード(ShisetsuNyutaishoRirekiKanriDiv.明細表示モード.削除);
         shisetsuNyutaishoRirekiDiv.setInputMode(ViewExecutionStatus.Delete.getValue());
         shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().setReadOnly(true);
-        createHandlerOf(shisetsuNyutaishoRirekiDiv).showSelectedData();
+        createHandlerOf(shisetsuNyutaishoRirekiDiv).showSelectedData(selectedRow);
 
         return createSettingData(shisetsuNyutaishoRirekiDiv);
     }

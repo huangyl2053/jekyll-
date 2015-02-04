@@ -10,7 +10,11 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IConsumer;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -133,6 +137,10 @@ public class ShisetsuNyutaishoMapper {
         model.setJigyoshaMeisho(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設名称());
         model.get介護保険施設入退所モデル().set台帳種別(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get台帳種別().get().getCode());
         model.get介護保険施設入退所モデル().set入所施設種類(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類().getCode());
+
+        model.get介護保険施設入退所モデル().set識別コード(new ShikibetsuCode(div.getShikibetsuCode()));
+        model.get介護保険施設入退所モデル().set市町村コード(new LasdecCode(div.getShichosonCode()));
+        model.get介護保険施設入退所モデル().set処理日時(ShoriTimestamp.now().getColumnValue());
         return model;
     }
 

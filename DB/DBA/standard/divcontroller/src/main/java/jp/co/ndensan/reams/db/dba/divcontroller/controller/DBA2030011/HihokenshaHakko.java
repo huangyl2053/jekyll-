@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA2030011.HihokenshaHakk
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoPrintConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshashoPrintType;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.model.TaishoshaKey;
@@ -45,7 +46,10 @@ public class HihokenshaHakko {
         if (config.get証表示タイプ() == HihokenshashoPrintType.A4横) {
             hakkoDiv.getRadPrintPosition().setDisplayNone(true);
         }
-        hakkoDiv.getCcdHihokenshaShikakuHakko().create証発行情報();
+
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+
+        hakkoDiv.getCcdHihokenshaShikakuHakko().load(taishoshaKey.get被保険者番号(), taishoshaKey.get識別コード(), true);
         return ResponseDatas.createSettingDataTo(hakkoDiv);
     }
 
@@ -91,18 +95,22 @@ public class HihokenshaHakko {
      * @return 被保険者証発行Divを持つResponseData
      */
     public ResponseData<HihokenshaHakkoDiv> afterPrint_btnReportPublish(HihokenshaHakkoDiv hakkoDiv) {
-        //TODO n8178 被保険者証発行Businessのブランチをマージ後に修正する。
-        //発行した帳票の情報を、交付証回収テーブルに書きこむ処理を行う（証発行テーブルも書きこむ必要があるはずだが、ここはFW側で書き込まれるらしいので実装は不要か？）
-        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
-        IShoKofuKaishuManager kofuKaishuManager = ShoKofuKaishuManagerFactory.createInstance();
-        //TODO n8178 城間篤人 URのコードマスタに対応した介護交付証種類のEnumを作成したら、RStringをnewしている箇所を書き換える。
-        IShoKofuKaishuKiroku kofuKaishu = kofuKaishuManager.get直近証交付回収記録(
-                taishoshaKey.get識別コード(), SubGyomuCode.DBA介護資格, new RString("001"));
-        ShoKofuKaishuModel model = new ShoKofuKaishuModel(new UrT0505ShoKofuKaishuEntity());
 
-        //modelに必要な値を詰める作業。。。
-        //
-        kofuKaishuManager.save(model);
+        //TODO n8178 城間篤人 生産性評価において対象外であることと、UR側のIShoKofuKaishuDacで、カラム名が不一致のDBをjoinするのに失敗して例外を投げるため、ここでの対応を行わない。
+        //joinの修正は朴さんが実装済みだが、開発で使用するrelease-densanにまだ取り込まれていないようである。
+//
+//        //TODO n8178 被保険者証発行Businessのブランチをマージ後に修正する。
+//        //発行した帳票の情報を、交付証回収テーブルに書きこむ処理を行う（証発行テーブルも書きこむ必要があるはずだが、ここはFW側で書き込まれるらしいので実装は不要か？）
+//        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+//        IShoKofuKaishuManager kofuKaishuManager = ShoKofuKaishuManagerFactory.createInstance();
+//        //TODO n8178 城間篤人 URのコードマスタに対応した介護交付証種類のEnumを作成したら、RStringをnewしている箇所を書き換える。
+//        IShoKofuKaishuKiroku kofuKaishu = kofuKaishuManager.get直近証交付回収記録(
+//                taishoshaKey.get識別コード(), SubGyomuCode.DBA介護資格, new RString("001"));
+//        ShoKofuKaishuModel model = new ShoKofuKaishuModel(new UrT0505ShoKofuKaishuEntity());
+//
+//        //modelに必要な値を詰める作業。。。
+//        //
+//        kofuKaishuManager.save(model);
         return ResponseDatas.createSettingDataTo(hakkoDiv);
     }
 }

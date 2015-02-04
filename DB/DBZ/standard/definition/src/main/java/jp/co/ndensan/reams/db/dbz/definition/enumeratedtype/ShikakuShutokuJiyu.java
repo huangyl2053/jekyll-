@@ -91,7 +91,7 @@ public enum ShikakuShutokuJiyu implements IShikakuIdoJiyu {
 
     @Override
     public RString getName() {
-        return new RString(name());
+        return shortName;
     }
 
     @Override

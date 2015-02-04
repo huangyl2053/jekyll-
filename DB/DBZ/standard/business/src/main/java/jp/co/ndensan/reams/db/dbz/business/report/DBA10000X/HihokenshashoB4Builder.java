@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoB4;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.tsuchishoatesaki.ITsuchishoAtesakiBuilder;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.tsuchishoatesaki.TsuchishoAtesakiSource;
 
 /**
  * 被保険者証B4版発行のために必要な情報を元に、帳票ソースを作成するクラスです。
@@ -42,10 +43,12 @@ public class HihokenshashoB4Builder implements IHihokenshashoBuilder {
         HihokenshashoB4 source = hihokenshashoB4.buildSource();
         switch (hihokenshashoB4.get印字位置()) {
             case 上部:
-                source.tsuchishoSource1 = tsuchishoSofusaki.buildSource();
+                source.sofusakiAtena1 = tsuchishoSofusaki.buildSource();
+                source.sofusakiAtena2 = new TsuchishoAtesakiSource();
                 break;
             default:
-                source.tsuchishoSource2 = tsuchishoSofusaki.buildSource();
+                source.sofusakiAtena1 = new TsuchishoAtesakiSource();
+                source.sofusakiAtena2 = tsuchishoSofusaki.buildSource();
                 break;
         }
         return source;

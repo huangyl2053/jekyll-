@@ -2,9 +2,9 @@
  "transitionList": [
   {
    "id": "0",
-   "layoutSubGyomuCode": "DBA",
-   "layoutName": "TaishoshaKeyCreator",
-   "layoutTitle": "テスト用対象者Key作成画面",
+   "layoutSubGyomuCode": "DBZ",
+   "layoutName": "DBZ0200001",
+   "layoutTitle": "対象者検索",
    "eventName": "next",
    "toLayoutSubGyomuCode": "DBA",
    "toLayoutName": "DBA2030011",
@@ -17,9 +17,9 @@
    "layoutName": "DBA2030011",
    "layoutTitle": "住所地特例異動",
    "eventName": "backGaitoshaIchiran",
-   "toLayoutSubGyomuCode": "DBA",
-   "toLayoutName": "TaishoshaKeyCreator",
-   "toLayoutTitle": "テスト用対象者Key作成画面",
+   "toLayoutSubGyomuCode": "DBZ",
+   "toLayoutName": "DBZ0200001",
+   "toLayoutTitle": "対象者検索",
    "toEventName": ""
   },
   {
@@ -28,14 +28,14 @@
    "layoutName": "DBA2030011",
    "layoutTitle": "住所地特例異動",
    "eventName": "backSearch",
-   "toLayoutSubGyomuCode": "DBA",
-   "toLayoutName": "TaishoshaKeyCreator",
-   "toLayoutTitle": "テスト用対象者Key作成画面",
+   "toLayoutSubGyomuCode": "DBZ",
+   "toLayoutName": "DBZ0200001",
+   "toLayoutTitle": "対象者検索",
    "toEventName": "research"
   }
  ],
  "wizardOrderList": [],
  "subGyomuCode": "DBA",
- "uiContainerName": "JushochiTokureiTester",
+ "uiContainerName": "DBAUC23001",
  "initAfterOnLoadEventAlias": ""
 }

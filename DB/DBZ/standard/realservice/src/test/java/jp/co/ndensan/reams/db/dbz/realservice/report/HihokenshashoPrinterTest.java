@@ -86,7 +86,7 @@ public class HihokenshashoPrinterTest {
             SourceDataCollection collection = mock(SourceDataCollection.class);
             when(collection.iterator()).thenReturn(iterator);
             HihokenshashoA4Printer printer = mock(HihokenshashoA4Printer.class);
-            when(printer.print(any(HihokenshaNo.class), any(HihokenshaShikakuHakkoModel.class), any(HihokenshashoPrintPosition.class))).thenReturn(collection);
+//            when(printer.print(any(HihokenshaNo.class), any(HihokenshaShikakuHakkoModel.class), any(HihokenshashoPrintPosition.class))).thenReturn(collection);
             return printer;
         }
 

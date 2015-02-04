@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.model.relate.shikakuido;
 
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.model.ShisetsuNyutaishoModel;
+import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import org.junit.Test;

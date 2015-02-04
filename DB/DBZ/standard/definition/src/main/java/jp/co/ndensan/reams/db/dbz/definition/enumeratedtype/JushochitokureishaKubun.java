@@ -19,21 +19,23 @@ public enum JushochitokureishaKubun {
      * 住所地特例区分が空であることを示します。<br/>
      * コード : EMPTY
      */
-    EMPTY(""),
+    EMPTY("", ""),
     /**
      * 住所地特例者区分が「住所地特例者」であることを表します。 <br />
      * コード：1
      */
-    住所地特例者("1"),
+    住所地特例者("1", "住特適用"),
     /**
      * 住所地特例者区分が「通常資格者」であることを表します。 <br />
      * コード：2
      */
-    通常資格者("2");
+    通常資格者("2", "資格者");
     private final RString code;
+    private final RString name;
 
-    private JushochitokureishaKubun(String code) {
+    private JushochitokureishaKubun(String code, String name) {
         this.code = new RString(code);
+        this.name = new RString(name);
     }
 
     /**
@@ -43,6 +45,15 @@ public enum JushochitokureishaKubun {
      */
     public RString code() {
         return this.code;
+    }
+
+    /**
+     * 項目を表す名称を返します。
+     *
+     * @return 名称
+     */
+    public RString getName() {
+        return name;
     }
 
     /**

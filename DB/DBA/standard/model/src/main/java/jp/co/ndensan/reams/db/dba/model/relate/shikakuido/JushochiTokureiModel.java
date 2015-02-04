@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.model.relate.shikakuido;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.model.ShisetsuNyutaishoModel;
+import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;

@@ -50,7 +50,7 @@ public enum JushochitokureiKaijoJiyu implements IShikakuIdoJiyu {
 
     @Override
     public RString getName() {
-        return new RString(name());
+        return shortName;
     }
 
     @Override

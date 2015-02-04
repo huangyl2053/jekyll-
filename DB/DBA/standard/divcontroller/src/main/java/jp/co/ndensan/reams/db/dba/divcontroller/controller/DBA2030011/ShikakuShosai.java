@@ -56,13 +56,14 @@ import jp.co.ndensan.reams.ur.urz.definition.code.ICodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.code.ICodeValueObject;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrQuestionMessages;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuShutokuJiyuHihokensha;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoshikakuSoshitsuJiyuHihokennsha;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuShutokuJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.InformationException;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.DivcontrollerMethod;
@@ -88,15 +89,14 @@ public class ShikakuShosai {
      * @param kihonDiv {@link KihonJohoDiv 基本情報Div}
      * @return 資格詳細Divを持つResponseData
      */
-    public ResponseData<ShikakuShosaiDiv> onLoad(ShikakuShosaiDiv shikakuShosaiDiv, KihonJohoDiv kihonDiv) {
+    public ResponseData<ShikakuShosaiDiv> initialize(ShikakuShosaiDiv shikakuShosaiDiv, KihonJohoDiv kihonDiv) {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
         IUrControlData controlData = UrControlDataFactory.createInstance();
         LasdecCode lasdecCode = new LasdecCode(controlData.getDonyuDantaiCode().getColumnValue());
-        IDonyuHokensha donyuHokensha = new IDonyuHokenshaLoader().load();
-        GappeiJohoKanriConfig gappeiConfig = new GappeiJohoKanriConfig();
-
         //TODO n8178 城間篤人 テスト用の市町村コードには何が入るか不明のため、検索に失敗する。テスト用市町村コードで取得できるデータが用意された後に修正する。
         lasdecCode = new LasdecCode("209007");
+        IDonyuHokensha donyuHokensha = new IDonyuHokenshaLoader().load();
+        GappeiJohoKanriConfig gappeiConfig = new GappeiJohoKanriConfig();
 
         HihokenshaDaichoManager daichoManager = new HihokenshaDaichoManager();
         IItemList<HihokenshaDaichoModel> daichoList = daichoManager.get被保険者台帳一覧DescOrderByShoriTimestamp(
@@ -108,7 +108,7 @@ public class ShikakuShosai {
         IItemList<ShisetsuNyutaishoRelateModel> nyutaishoRelateList
                 = nyutaishoManager.get台帳別施設入退所List(taishoshaKey.get識別コード(), DaichoType.被保険者);
 
-        initializeHokenshaJoho(shikakuShosaiDiv, lasdecCode, donyuHokensha, gappeiConfig, controlData);
+        initializeHokenshaJoho(shikakuShosaiDiv, lasdecCode, taishoshaKey.get識別コード(), donyuHokensha, gappeiConfig, controlData);
         setDataOfShikakuTokuso(shikakuShosaiDiv, daichoList.findFirst(), lasdecCode, donyuHokensha, gappeiConfig);
         setDefaultDataOfCcd(shikakuShosaiDiv, daichoList, nyutaishoRelateList);
 
@@ -119,44 +119,56 @@ public class ShikakuShosai {
         return ResponseDatas.createSettingDataTo(shikakuShosaiDiv);
     }
 
-    private void initializeHokenshaJoho(ShikakuShosaiDiv shikakuShosaiDiv, LasdecCode lasdecCode,
+    private void initializeHokenshaJoho(ShikakuShosaiDiv shikakuShosaiDiv, LasdecCode lasdecCode, ShikibetsuCode shikibetsuCode,
             IDonyuHokensha donyuHokensha, GappeiJohoKanriConfig gappeiConfig, IUrControlData controlData) {
 
         if (!donyuHokensha.is広域保険者() && !gappeiConfig.is合併あり()) {
 
-            shikakuShosaiDiv.getDdlShutokuShozaiHokensha().setDisabled(true);
-            shikakuShosaiDiv.getDdlShutokuSochimotoHokensha().setDisabled(true);
-            shikakuShosaiDiv.getDdlShutokuKyuHokensha().setDisabled(true);
+            shikakuShosaiDiv.getDdlShutokuShozaiHokensha().setDisplayNone(true);
+            shikakuShosaiDiv.getDdlShutokuSochimotoHokensha().setDisplayNone(true);
+            shikakuShosaiDiv.getDdlShutokuKyuHokensha().setDisplayNone(true);
+            shikakuShosaiDiv.getLblShutokuShozaiHokensha().setDisplayNone(true);
+            shikakuShosaiDiv.getLblShutokuSochimotoHokensha().setDisplayNone(true);
+            shikakuShosaiDiv.getLblKyuHokensha().setDisplayNone(true);
             initializeJushochiTokureiRirekiList(controlData, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
                     JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.TanitsuGappeiNashi);
             shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiNashi);
         } else if (!donyuHokensha.is広域保険者() && gappeiConfig.is合併あり()) {
 
-            shikakuShosaiDiv.getDdlShutokuShozaiHokensha().setDisabled(true);
-            shikakuShosaiDiv.getDdlShutokuSochimotoHokensha().setDisabled(true);
-            shikakuShosaiDiv.getDdlShutokuKyuHokensha().setDisabled(false);
+            shikakuShosaiDiv.getDdlShutokuShozaiHokensha().setDisplayNone(true);
+            shikakuShosaiDiv.getDdlShutokuSochimotoHokensha().setDisplayNone(true);
+            shikakuShosaiDiv.getDdlShutokuKyuHokensha().setDisplayNone(false);
+            shikakuShosaiDiv.getLblShutokuShozaiHokensha().setDisplayNone(true);
+            shikakuShosaiDiv.getLblShutokuSochimotoHokensha().setDisplayNone(true);
+            shikakuShosaiDiv.getLblKyuHokensha().setDisplayNone(false);
             initializeJushochiTokureiRirekiList(controlData, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
                     JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.TanitsuGappeiAri);
             shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiAri);
         } else if (donyuHokensha.is広域保険者() && !gappeiConfig.is合併あり()) {
 
-            shikakuShosaiDiv.getDdlShutokuShozaiHokensha().setDisabled(false);
-            shikakuShosaiDiv.getDdlShutokuSochimotoHokensha().setDisabled(false);
-            shikakuShosaiDiv.getDdlShutokuKyuHokensha().setDisabled(true);
+            shikakuShosaiDiv.getDdlShutokuShozaiHokensha().setDisplayNone(false);
+            shikakuShosaiDiv.getDdlShutokuSochimotoHokensha().setDisplayNone(false);
+            shikakuShosaiDiv.getDdlShutokuKyuHokensha().setDisplayNone(true);
+            shikakuShosaiDiv.getLblShutokuShozaiHokensha().setDisplayNone(false);
+            shikakuShosaiDiv.getLblShutokuSochimotoHokensha().setDisplayNone(false);
+            shikakuShosaiDiv.getLblKyuHokensha().setDisplayNone(true);
             initializeJushochiTokureiRirekiList(controlData, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
                     JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.KoikiGappeiNashi);
             shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.KoikiGappeiNashi);
         } else {
 
-            shikakuShosaiDiv.getDdlShutokuShozaiHokensha().setDisabled(false);
-            shikakuShosaiDiv.getDdlShutokuSochimotoHokensha().setDisabled(false);
-            shikakuShosaiDiv.getDdlShutokuKyuHokensha().setDisabled(false);
+            shikakuShosaiDiv.getDdlShutokuShozaiHokensha().setDisplayNone(false);
+            shikakuShosaiDiv.getDdlShutokuSochimotoHokensha().setDisplayNone(false);
+            shikakuShosaiDiv.getDdlShutokuKyuHokensha().setDisplayNone(false);
+            shikakuShosaiDiv.getLblShutokuShozaiHokensha().setDisplayNone(false);
+            shikakuShosaiDiv.getLblShutokuSochimotoHokensha().setDisplayNone(false);
+            shikakuShosaiDiv.getLblKyuHokensha().setDisplayNone(false);
             initializeJushochiTokureiRirekiList(controlData, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
                     JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.KoikiGappeiAri);
             shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.KoikiGappeiAri);
         }
 
-        shikakuShosaiDiv.getCcdShisetsuNyutaishoRirekiKanri().initialize();
+        shikakuShosaiDiv.getCcdShisetsuNyutaishoRirekiKanri().initialize(lasdecCode, shikibetsuCode);
     }
 
     private void initializeJushochiTokureiRirekiList(IUrControlData controlData, IJushochiTokureiRirekiListDiv jutokuDiv,
@@ -191,13 +203,18 @@ public class ShikakuShosai {
         HihokenshaDaichoModel daichoModel = hihoDaicho.get();
         shikakuShosaiDiv.getTxtShutokuDate().setValue(daichoModel.get資格取得年月日());
         shikakuShosaiDiv.getTxtShutokuTodokedeDate().setValue(daichoModel.get資格取得届出年月日());
-        List<KaigoshikakuShutokuJiyuHihokensha> shutokuJiyuList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格取得事由_被保険者);
+        List<KaigoShikakuShutokuJiyu> shutokuJiyuList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格取得事由);
 
         shikakuShosaiDiv.getDdlShutokuJiyu().setDataSource(
                 ItemList.of(shutokuJiyuList).map(new CodeMasterToKeyValueFunction()).toList());
         if (!daichoModel.getEntity().getShikakuShutokuJiyuCode().getColumnValue().isEmpty()) {
             shikakuShosaiDiv.getDdlShutokuJiyu().setSelectedKey(daichoModel.get資格取得事由().getCode());
         }
+
+        KeyValueDataSource hihoKubun1 = new KeyValueDataSource(HihokenshaKubun.第1号被保険者.code(), HihokenshaKubun.第1号被保険者.get略称());
+        KeyValueDataSource hihoKubun2 = new KeyValueDataSource(HihokenshaKubun.第2号被保険者.code(), HihokenshaKubun.第2号被保険者.get略称());
+        shikakuShosaiDiv.getDdlHihoKubun().setDataSource(Lists.newArrayList(hihoKubun1, hihoKubun2));
+        shikakuShosaiDiv.getDdlHihoKubun().setSelectedKey(daichoModel.get被保険者区分コード());
 
         if (donyuHokensha.is広域保険者()) {
             //TODO n8178 城間篤人 生産性評価の対象でないため未実装　今後の回収で実装を行う
@@ -228,7 +245,7 @@ public class ShikakuShosai {
         shikakuShosaiDiv.getTxtSoshitsuDate().setValue(daichoModel.get資格喪失年月日());
         shikakuShosaiDiv.getTxtSoshitsuTodokedeDate().setValue(daichoModel.get資格喪失届出年月日());
 
-        List<KaigoshikakuSoshitsuJiyuHihokennsha> sositsuJiyuList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格喪失事由_被保険者);
+        List<KaigoShikakuSoshitsuJiyu> sositsuJiyuList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格喪失事由);
         shikakuShosaiDiv.getDdlSoshitsuJiyu().setDataSource(
                 ItemList.of(sositsuJiyuList).map(new CodeMasterToKeyValueFunction()).toList());
 
@@ -316,8 +333,9 @@ public class ShikakuShosai {
             case DBAMN61002_転入転出保留対象者管理:
                 if (is住所地特例適用者(taishoshaKey, controlData)) {
                     shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().setDisplayType(JushochiTokureiRirekiListDiv.DisplayType.shokai);
-                    //TODO n8178 城間篤人 どのようにエラーメッセージを返すのがよいかを考える。throw new ApplicationExceptionはだめかも・・・
-                    DbaErrorMessages.住所地特例として適用済.getMessage();
+
+                    //TODO n8178 城間篤人 ApplicationExceptionでの実装ではメニューに遷移してしまうため問題がある。調査後、適切な処理に置き換える必要がある。 2015年3月
+                    throw new ApplicationException(DbaErrorMessages.住所地特例として適用済.getMessage());
                 }
                 break;
             case DBAMN25002_届出により解除:
@@ -325,8 +343,9 @@ public class ShikakuShosai {
             case DBAMN52002_合併前の住所地特例措置解除:
                 if (!is住所地特例適用者(taishoshaKey, controlData)) {
                     shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().setDisplayType(JushochiTokureiRirekiListDiv.DisplayType.shokai);
-                    //TODO n8178 城間篤人 どのようにエラーメッセージを返すのがよいかを考える。throw new ApplicationExceptionはだめかも・・・
-                    DbaErrorMessages.住所地特例として未適用.getMessage();
+
+                    //TODO n8178 城間篤人 ApplicationExceptionでの実装ではメニューに遷移してしまうため問題がある。調査後、適切な処理に置き換える必要がある。 2015年3月
+                    throw new ApplicationException(DbaErrorMessages.住所地特例として未適用.getMessage());
                 }
                 break;
         }
@@ -426,24 +445,26 @@ public class ShikakuShosai {
      * @param kihonDiv {@link KihonJohoDiv 基本情報Div}
      * @return 資格取得情報Divを持つResponseData
      */
-    public ResponseData<ShikakuShosaiDiv> onClick_btnUpdate(ShikakuShosaiDiv shikakuShosaiDiv, KihonJohoDiv kihonDiv) {
-        if (shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().hasChanged()
-                || shikakuShosaiDiv.getCcdShisetsuNyutaishoRirekiKanri().hasChanged()) {
-            ResponseData<ShikakuShosaiDiv> response = new ResponseData<>();
-            ICallbackMethod methodYes = DivcontrollerMethod.method(SingleButtonType.Free, "onClick_btnUpdate_onYes");
+    public ResponseData<ShikakuShosaiDiv> onClick_btnUpdate(ShikakuShosaiDiv shikakuShosaiDiv, KihonJohoDiv kihonDiv) throws InformationException {
+        if (shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().hasChanged()) {
 
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-                    UrQuestionMessages.保存の確認.getMessage().evaluate(), "はい", "いいえ");
+            return onClick_btnUpdate_onYes(shikakuShosaiDiv, kihonDiv);
 
-            ICallbackMethod[] methods = {methodYes}; //ユーザー選択時の動作を規定する
-            message.addInvokeMethod(methods);
-
-            response.addMessage(message);
-            response.data = shikakuShosaiDiv;
-            return response;
+            //TODO n8178 城間篤人 メッセージの「はい」をクリックする前に、状態遷移が動作してしまうため、確認用メッセージ表示を一時取りやめ。
+//            ResponseData<ShikakuShosaiDiv> response = new ResponseData<>();
+//            ICallbackMethod methodYes = DivcontrollerMethod.method(SingleButtonType.Free, "onClick_btnUpdate_onYes");
+//            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+//                    UrQuestionMessages.保存の確認.getMessage().evaluate(), "はい", "いいえ");
+//            ICallbackMethod[] methods = {methodYes};
+//            message.addInvokeMethod(methods);
+//            response.addMessage(message);
+//            response.data = shikakuShosaiDiv;
+//            return response;
         }
 
+        //TODO n8178 城間篤人 ApplicationExceptionでの実装ではメニューに遷移してしまうため問題がある。調査後、適切な処理に置き換える必要がある。 2015年3月
         throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
+
     }
 
     /**

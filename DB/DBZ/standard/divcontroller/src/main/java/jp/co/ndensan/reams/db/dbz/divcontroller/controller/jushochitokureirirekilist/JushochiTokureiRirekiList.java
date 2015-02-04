@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.jushochitokureirirekilist;
 
+import javax.faces.application.ViewExpiredException;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.dgJutoku_Row;
@@ -61,9 +62,7 @@ public class JushochiTokureiRirekiList {
         switch (clickedRow.getRowState()) {
             case Added:
             case Modified:
-                handler.showSelectedData();
-                handler.setMeisaiInputMode();
-                break;
+                return onSelectByModifyButton_dgJutoku(jutokuRirekiDiv);
             case Deleted:
                 handler.showSelectedData();
                 handler.setMeisaiDeleteMode();
@@ -130,7 +129,7 @@ public class JushochiTokureiRirekiList {
 
         ICallbackMethod methodYes = DivcontrollerMethod.method(SingleButtonType.Free, "onClick_btnJutokuTorikeshi_onYes");
         QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                UrQuestionMessages.入力内容の破棄.getMessage().toString(), "はい", "いいえ");
+                UrQuestionMessages.入力内容の破棄.getMessage().evaluate(), "はい", "いいえ");
 
         ICallbackMethod[] methods = {methodYes};
         message.addInvokeMethod(methods);
@@ -151,6 +150,13 @@ public class JushochiTokureiRirekiList {
     public ResponseData<JushochiTokureiRirekiListDiv> onClick_btnJutokuTorikeshi_onYes(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
         handler.clearInputData();
+
+        if (jutokuRirekiDiv.getMode_BtnDisplayMode() == JushochiTokureiRirekiListDiv.BtnDisplayMode.SetDisplayNone) {
+            if (ViewExecutionStatus.toValue(jutokuRirekiDiv.getExecutionStatus()) == ViewExecutionStatus.Add) {
+                return ResponseDatas.createSettingDataTo(jutokuRirekiDiv);
+            }
+        }
+
         handler.setupToAfterInput();
         handler.setExecutionStatus(ViewExecutionStatus.None);
         return ResponseDatas.createSettingDataTo(jutokuRirekiDiv);

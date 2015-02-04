@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.persistence.relate;
 
 import jp.co.ndensan.reams.db.dba.model.relate.shikakuido.JushochiTokureiModel;
-import jp.co.ndensan.reams.db.dbz.model.ShisetsuNyutaishoModel;
+import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1004ShisetsuNyutaishoDac;

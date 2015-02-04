@@ -11,13 +11,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoModel;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshasho;
-import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoB4;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
+import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoA4;
 import jp.co.ndensan.reams.ur.urz.business.IAssociation;
 import jp.co.ndensan.reams.ur.urz.business.ITsuchishoAtesaki;
-import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
 import jp.co.ndensan.reams.ur.urz.business.report.IReportBuilder;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
 
@@ -34,7 +33,7 @@ public class HihokenshashoA4Printer {
     private static final RString REPORT_ID_A4;
 
     static {
-        REPORT_ID_A4 = new RString("DBA100002");
+        REPORT_ID_A4 = new RString("DBA100002_HihokenshashoA4");
     }
 
     /**
@@ -79,10 +78,10 @@ public class HihokenshashoA4Printer {
                 target.getShikakuHakko().get交付日(), target.getKojinJoho().get識別コード());
         IAssociation assosiation = printerBase.getAssociation();
 
-        formType = HihokenshashoB4.class;
+        formType = HihokenshashoA4.class;
         reportId = REPORT_ID_A4;
         builder = hihoshoBuilderFactory
-                .createInstanceForB4(target, assosiation, tsuchishoAtesaki);
+                .createInstanceForA4(target, assosiation, tsuchishoAtesaki);
 
         return printerBase.print(formType, reportId, builder);
     }

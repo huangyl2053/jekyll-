@@ -40,6 +40,10 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     private RString selectRow;
     @JsonProperty("inputMode")
     private RString inputMode;
+    @JsonProperty("shichosonCode")
+    private RString shichosonCode;
+    @JsonProperty("shikibetsuCode")
+    private RString shikibetsuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -95,6 +99,26 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     @JsonProperty("inputMode")
     public void setInputMode(RString inputMode) {
         this.inputMode = inputMode;
+    }
+
+    @JsonProperty("shichosonCode")
+    public RString getShichosonCode() {
+        return shichosonCode;
+    }
+
+    @JsonProperty("shichosonCode")
+    public void setShichosonCode(RString shichosonCode) {
+        this.shichosonCode = shichosonCode;
+    }
+
+    @JsonProperty("shikibetsuCode")
+    public RString getShikibetsuCode() {
+        return shikibetsuCode;
+    }
+
+    @JsonProperty("shikibetsuCode")
+    public void setShikibetsuCode(RString shikibetsuCode) {
+        this.shikibetsuCode = shikibetsuCode;
     }
 
     /*
@@ -418,8 +442,9 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     @Override
-    public void initialize() {
-        //TODO
+    public void initialize(LasdecCode shichosonCode, ShikibetsuCode shikibetsuCode) {
+        this.shichosonCode = shichosonCode.getColumnValue();
+        this.shikibetsuCode = shikibetsuCode.getColumnValue();
         getHandler().initialize();
     }
 

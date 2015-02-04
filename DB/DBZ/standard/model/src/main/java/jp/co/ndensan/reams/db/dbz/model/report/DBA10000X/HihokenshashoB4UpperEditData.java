@@ -1227,7 +1227,7 @@ public class HihokenshashoB4UpperEditData implements IHihokenshashoB4CommonEditD
 
     @Override
     public void setTsuchishoSofusakiSource(TsuchishoAtesakiSource tsuchishoSofusakiSource) {
-        this.hihokenshasho.tsuchishoSource1 = tsuchishoSofusakiSource;
+        this.hihokenshasho.sofusakiAtena1 = tsuchishoSofusakiSource;
     }
 
     @Override

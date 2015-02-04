@@ -21,6 +21,11 @@ public enum HihokenshashoSaikofuJiyu {
     EMPTY(""),
     /**
      * その他 <br />
+     * コード : 00
+     */
+    なし("00"),
+    /**
+     * その他 <br />
      * コード : 99
      */
     その他("99");

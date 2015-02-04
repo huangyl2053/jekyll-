@@ -21,7 +21,7 @@ public class JushochitokureiKaijo extends ShikakuIdoBaseItem<JushochitokureiKaij
     public static final JushochitokureiKaijo NOTHING;
 
     static {
-        NOTHING = new JushochitokureiKaijo(JushochitokureiKaijoJiyu.なし, FlexibleDate.MAX, FlexibleDate.MAX);
+        NOTHING = new JushochitokureiKaijo(JushochitokureiKaijoJiyu.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
     }
 
     /**

@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA2030011.CompleteDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA2030011.KihonJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrInformationMessages;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -30,9 +29,9 @@ public class Complete {
      */
     public ResponseData<CompleteDiv> onAfterClick_btnUpdate(CompleteDiv compDiv, KihonJohoDiv kihonDiv) {
 
-        RString messageMain = new RString(UrInformationMessages.保存終了.getMessage().toString());
+        RString messageMain = new RString(UrInformationMessages.保存終了.getMessage().evaluate());
         RString messageTaishoHihoNo = kihonDiv.getCcdKaigoShikakuKihon().get被保険者番号().getColumnValue();
-        RString messageTaishoName = kihonDiv.getCcdKaigoAtenaInfo().getMeisho().getColumnValue();
+        RString messageTaishoName = kihonDiv.getCcdKaigoAtenaInfo().getName().getColumnValue();
 
         compDiv.getCcdKaigoKanryoMessage().setSuccessMessage(messageMain, messageTaishoHihoNo, messageTaishoName);
 

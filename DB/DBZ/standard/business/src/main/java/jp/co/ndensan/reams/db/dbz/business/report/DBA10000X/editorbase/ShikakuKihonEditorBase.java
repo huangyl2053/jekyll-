@@ -246,13 +246,16 @@ public class ShikakuKihonEditorBase {
      * @param source 被保険者証帳票ソース
      */
     public void set保険者番号(IHihokenshashoCommonEditData source) {
-        RString HokenshaNo = hihokenshashoModel.getShikakuHakko().get保険者番号();
-        source.setHokenshano1(HokenshaNo.stringAt(0));
-        source.setHokenshano2(HokenshaNo.stringAt(1));
-        source.setHokenshano3(HokenshaNo.stringAt(2));
-        source.setHokenshano4(HokenshaNo.stringAt(3));
-        source.setHokenshano5(HokenshaNo.stringAt(4));
-        source.setHokenshano6(HokenshaNo.stringAt(5));
+        RString hokenshaNo = hihokenshashoModel.getShikakuHakko().get保険者番号();
+        if (hokenshaNo.isEmpty()) {
+            return;
+        }
+        source.setHokenshano1(hokenshaNo.stringAt(0));
+        source.setHokenshano2(hokenshaNo.stringAt(1));
+        source.setHokenshano3(hokenshaNo.stringAt(2));
+        source.setHokenshano4(hokenshaNo.stringAt(3));
+        source.setHokenshano5(hokenshaNo.stringAt(4));
+        source.setHokenshano6(hokenshaNo.stringAt(5));
     }
 
 }

@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoB4UpperEdi
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoB4CommonEditData;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoCommonEditData;
 import jp.co.ndensan.reams.ur.urz.business.IAssociation;
-import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
@@ -139,11 +138,11 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
         if (checker.is認定情報表示()) {
             set認定(editData);
             set給付制限(editData);
+            set1月当たり(editData);
         }
         set性同一障害(editData);
         set性別(editData);
         set生年月日(editData);
-        set1月当たり(editData);
         return editData.getEditData();
     }
 

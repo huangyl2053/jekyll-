@@ -91,7 +91,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
         when(kaigoShikaku.get資格取得届出年月日()).thenReturn(ichigoGaitoDate);
         when(kaigoShikaku.get資格取得年月日()).thenReturn(ichigoGaitoDate);
         IShikakuSoshitsuJiyu soshitsuJiyu = mock(IShikakuSoshitsuJiyu.class);
-        when(soshitsuJiyu.getCode()).thenReturn(ShikakuSoshitsuJiyu.なし.getCode());
+        when(soshitsuJiyu.getCode()).thenReturn(ShikakuSoshitsuJiyu.EMPTY.getCode());
         when(kaigoShikaku.get資格喪失事由()).thenReturn(soshitsuJiyu);
         when(kaigoShikaku.get資格喪失届出年月日()).thenReturn(RDate.MAX);
         when(kaigoShikaku.get資格喪失年月日()).thenReturn(RDate.MAX);

@@ -73,6 +73,21 @@ public class HihokenshaDaichoModelComparatorsTest {
             assertThat(list.get(list.size() - 1).get資格取得年月日(), is(min.get資格取得年月日()));
         }
 
+        @Test
+        public void 配列の先頭にEmpty_2番に2014年12月31日を持つ配列をascでソートした場合_Emptyは後ろにソートされる() {
+            list = new ArrayList<>();
+            HihokenshaDaichoModel empty;
+            HihokenshaDaichoModel date20141231;
+            empty = createModel(FlexibleDate.EMPTY);
+            date20141231 = createModel(new FlexibleDate("20141231"));
+
+            list.add(empty);
+            list.add(date20141231);
+
+            Collections.sort(list, HihokenshaDaichoModelComparators.orderBy資格取得年月日.asc());
+            assertThat(list.get(list.size() - 1).get資格取得年月日(), is(empty.get資格取得年月日()));
+        }
+
         private HihokenshaDaichoModel createModel(FlexibleDate shikakuShutokuDate) {
             HihokenshaDaichoModel model = new HihokenshaDaichoModel();
             model.set資格取得年月日(shikakuShutokuDate);
@@ -129,6 +144,74 @@ public class HihokenshaDaichoModelComparatorsTest {
         private HihokenshaDaichoModel createModel(YMDHMS shoriDatetime) {
             HihokenshaDaichoModel model = new HihokenshaDaichoModel();
             model.set処理日時(ShoriTimestamp.of(shoriDatetime));
+            return model;
+        }
+    }
+
+    public static class 資格変更日によるソート extends DbzTestBase {
+
+        private List<HihokenshaDaichoModel> list;
+        private HihokenshaDaichoModel min;
+        private HihokenshaDaichoModel max;
+
+        @Before
+        public void setUp() {
+            list = new ArrayList<>();
+            min = createModel(new FlexibleDate("19990101"));
+            HihokenshaDaichoModel model1 = createModel(new FlexibleDate("20010717"));
+            HihokenshaDaichoModel model2 = createModel(new FlexibleDate("20061010"));
+            HihokenshaDaichoModel model3 = createModel(new FlexibleDate("20080912"));
+            max = createModel(new FlexibleDate("20141231"));
+
+            list.add(model1);
+            list.add(min);
+            list.add(model2);
+            list.add(max);
+            list.add(model3);
+        }
+
+        @Test
+        public void ascでソートした場合_一番小さい値が先頭に来る() {
+            Collections.sort(list, HihokenshaDaichoModelComparators.orderBy資格変更年月日.asc());
+            assertThat(list.get(0).get資格変更年月日(), is(min.get資格変更年月日()));
+        }
+
+        @Test
+        public void ascでソートした場合_1番大きい値が最後になる() {
+            Collections.sort(list, HihokenshaDaichoModelComparators.orderBy資格変更年月日.asc());
+            assertThat(list.get(list.size() - 1).get資格変更年月日(), is(max.get資格変更年月日()));
+        }
+
+        @Test
+        public void descでソートした場合_一番大きい値が先頭に来る() {
+            Collections.sort(list, HihokenshaDaichoModelComparators.orderBy資格変更年月日.desc());
+            assertThat(list.get(0).get資格変更年月日(), is(max.get資格変更年月日()));
+        }
+
+        @Test
+        public void descでソートした場合_1番小さい値が最後になる() {
+            Collections.sort(list, HihokenshaDaichoModelComparators.orderBy資格変更年月日.desc());
+            assertThat(list.get(list.size() - 1).get資格変更年月日(), is(min.get資格変更年月日()));
+        }
+
+        @Test
+        public void 配列の先頭にEmpty_2番に2014年12月31日を持つ配列をascでソートした場合_Emptyは後ろにソートされる() {
+            list = new ArrayList<>();
+            HihokenshaDaichoModel empty;
+            HihokenshaDaichoModel date20141231;
+            empty = createModel(FlexibleDate.EMPTY);
+            date20141231 = createModel(new FlexibleDate("20141231"));
+
+            list.add(empty);
+            list.add(date20141231);
+
+            Collections.sort(list, HihokenshaDaichoModelComparators.orderBy資格変更年月日.asc());
+            assertThat(list.get(list.size() - 1).get資格変更年月日(), is(empty.get資格変更年月日()));
+        }
+
+        private HihokenshaDaichoModel createModel(FlexibleDate shikakuHenkoDate) {
+            HihokenshaDaichoModel model = new HihokenshaDaichoModel();
+            model.set資格変更年月日(shikakuHenkoDate);
             return model;
         }
     }

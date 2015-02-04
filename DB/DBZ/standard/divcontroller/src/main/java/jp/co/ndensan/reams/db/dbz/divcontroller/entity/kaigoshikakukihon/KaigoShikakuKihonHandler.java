@@ -73,7 +73,7 @@ public class KaigoShikakuKihonHandler {
         div.getTxtShutokuJiyu().setValue(daichoModel.get資格取得事由().getName());
         div.getTxtSoshitsuYmd().setValue(daichoModel.get資格喪失年月日());
         div.getTxtSoshitsuJiyu().setValue(daichoModel.get資格喪失事由().getName());
-        div.getTxtJutokuKubun().setValue(new RString(daichoModel.get住所地特例者区分().name()));
+        div.getTxtJutokuKubun().setValue(daichoModel.get住所地特例者区分().getName());
 
 //        IKobetsuJikoKaigoJukyu jukyu = jukyuDaichoFinder.get個別事項介護受給(検索キー.get識別コード(), daichoModel.get処理日時().getColumnValue().getDate());
 //

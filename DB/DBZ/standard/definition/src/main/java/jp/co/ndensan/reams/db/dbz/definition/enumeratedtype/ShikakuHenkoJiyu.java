@@ -106,12 +106,12 @@ public enum ShikakuHenkoJiyu implements IShikakuIdoJiyu {
 
     @Override
     public RString getName() {
-        return new RString(name());
+        return shortName;
     }
 
     @Override
     public RString getShortName() {
-        return new RString(name());
+        return shortName;
     }
 
     /**
