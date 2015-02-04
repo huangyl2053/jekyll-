@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.helper.HihokenshaMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -40,10 +39,6 @@ public class HihokenshaListTest extends DbzTestBase {
     private static final YMDHMS rt2014_04_02_00_00 = new YMDHMS("20140402000000");
     private static final YMDHMS rt2014_04_03_00_00 = new YMDHMS("20140403000000");
     private static final YMDHMS rt2014_04_04_00_00 = new YMDHMS("20140404000000");
-    private static final ShoKisaiHokenshaNo s000001 = new ShoKisaiHokenshaNo(new RString("000001"));
-    private static final ShoKisaiHokenshaNo s000002 = new ShoKisaiHokenshaNo(new RString("000002"));
-    private static final ShoKisaiHokenshaNo s000003 = new ShoKisaiHokenshaNo(new RString("000003"));
-    private static final ShoKisaiHokenshaNo s000004 = new ShoKisaiHokenshaNo(new RString("000004"));
     private static final HihokenshaNo hn0000000001 = new HihokenshaNo(new RString("0000000001"));
     private static final HihokenshaNo hn0000000002 = new HihokenshaNo(new RString("0000000002"));
 

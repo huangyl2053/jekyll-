@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.config;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.SochimotoSochisakiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.ConfigKeysGaitoshaKensaku;
 import jp.co.ndensan.reams.ur.urz.business.config.IUrBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.config.UrBusinessConfigFactory;
@@ -59,6 +60,15 @@ public class GaitoshaKensakuConfig {
      */
     public RString get(ConfigKeysGaitoshaKensaku key) {
         return configs.get(key);
+    }
+
+    /**
+     * 広域内住所地特例者検索制御_措置元_措置先区分_介護資格を返します。
+     *
+     * @return 広域内住所地特例者検索制御_措置元_措置先区分_介護資格
+     */
+    public SochimotoSochisakiKubun get措置元措置先区分_介護資格() {
+        return SochimotoSochisakiKubun.toValue(get(ConfigKeysGaitoshaKensaku.広域内住所地特例者検索制御_措置元_措置先区分_介護資格));
     }
 
     /**

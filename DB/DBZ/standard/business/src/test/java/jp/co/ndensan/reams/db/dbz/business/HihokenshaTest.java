@@ -157,7 +157,7 @@ public class HihokenshaTest extends DbzTestBase {
 
             @Test
             public void get広域内住所地特例措置元市町村コードは_コンストラクタ引数のIHihokenshaShikakuのものと_同じ値を返す() {
-                ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("000001"));
+                ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo("000001");
                 when(shikaku.get広域内住所地特例措置元保険者番号()).thenReturn(shoKisaiHokenshaNo);
                 assertThat(sut.get広域内住所地特例措置元保険者番号(), is(shoKisaiHokenshaNo));
             }
