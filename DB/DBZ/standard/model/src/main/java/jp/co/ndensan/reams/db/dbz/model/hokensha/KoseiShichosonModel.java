@@ -17,6 +17,11 @@ public class KoseiShichosonModel implements Serializable {
 
     private final KoseiShichosonMasterModel masterModel;
 
+    /**
+     * {@link KoseiShichosonMasterModel}からインスタンスを生成します。
+     *
+     * @param masterModel KoseiShichosonMasterModel
+     */
     public KoseiShichosonModel(KoseiShichosonMasterModel masterModel) {
         this.masterModel = masterModel;
     }
