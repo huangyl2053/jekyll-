@@ -246,6 +246,7 @@ public class ShikakuShosai {
         }
 
         if (gappeiConfig.is合併あり()) {
+            //TODO n8178 城間篤人 複数個所で使用するなら、本来ならクラス化するべき。
             KijunTsukiShichosonFinder finder = new KijunTsukiShichosonFinder();
             Optional<GappeiShichosonJohoModel> gappeiInfo = finder.get基準月市町村情報(FlexibleDate.getNowDate().getYearMonth(),
                     new ShoKisaiHokenshaNo(lasdecCode.getColumnValue()));

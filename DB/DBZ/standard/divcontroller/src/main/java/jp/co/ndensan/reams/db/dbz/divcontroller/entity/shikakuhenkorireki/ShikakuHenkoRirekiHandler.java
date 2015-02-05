@@ -14,16 +14,21 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IConsumer;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonJohoModel;
+import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokendhaDaichoKey;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModelComparators;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;
+import jp.co.ndensan.reams.db.dbz.realservice.KijunTsukiShichosonFinder;
 import jp.co.ndensan.reams.ur.urz.divcontroller.helper.PanelSessionAccessor;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -50,6 +55,7 @@ public class ShikakuHenkoRirekiHandler {
     private final ShikakuHenkoRirekiDiv shikakuHenkoRirekiDiv;
     private static final RString SESSION_ACCESSOR_KEY = new RString("shikakuHenkouRireki");
     private static final RString SESSION_ACCESSOR_EDITING_KEY = new RString("shikakuHenkouRireki_Editing");
+    private static final RString SESSION_KYU_HOKENSHA = new RString("kyuHokensha");
     private static final int ONE_SECONDS = 1;
 
     /**
@@ -81,6 +87,7 @@ public class ShikakuHenkoRirekiHandler {
             case TanitsuGappeiAri:
                 shikakuHenkoRirekiDiv.setMode_HokenshaJohoDisplayMode(ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiAri);
                 setTanitsuGappeiAri(被保険者List);
+                setKyuHokensya(市町村コード);
                 break;
 
             case KoikiGappeiNashi:
@@ -92,11 +99,45 @@ public class ShikakuHenkoRirekiHandler {
                 shikakuHenkoRirekiDiv.setMode_HokenshaJohoDisplayMode(ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiAri);
                 setJuminJohoDataSource();
                 setKoikiGappeiAri(被保険者List);
+                setKyuHokensya(市町村コード);
                 break;
             default:
                 break;
         }
         setHenkoJiyuDataSource();
+    }
+
+    private void setKyuHokensya(LasdecCode lasdecCode) {
+
+        //TODO n8178 城間篤人 複数個所で使用するなら、本来ならクラス化するべき。
+        KijunTsukiShichosonFinder finder = new KijunTsukiShichosonFinder();
+        Optional<GappeiShichosonJohoModel> gappeiInfo = finder.get基準月市町村情報(FlexibleDate.getNowDate().getYearMonth(),
+                new ShoKisaiHokenshaNo(lasdecCode.getColumnValue()));
+        if (gappeiInfo.isPresent()) {
+            PanelSessionAccessor.put(shikakuHenkoRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.newItemList(gappeiInfo.get().get単一市町村情報()));
+        } else {
+            PanelSessionAccessor.put(shikakuHenkoRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.empty());
+        }
+    }
+
+    private RString getKyuHokenshaName(final LasdecCode lasdecCode) {
+
+        IItemList<IGappeiShichoson> kyuHokenshaList
+                = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.class);
+
+        IPredicate<IGappeiShichoson> predicate = new IPredicate<IGappeiShichoson>() {
+            @Override
+            public boolean evaluate(IGappeiShichoson t) {
+                return t.get旧市町村コード().equals(lasdecCode);
+            }
+        };
+
+        IItemList<IGappeiShichoson> kyuHokensha = kyuHokenshaList.filter(predicate);
+        if (kyuHokensha.isJustOne() && kyuHokensha.findFirst().isPresent()) {
+            return kyuHokensha.findJustOne().get().get旧市町村名称();
+        } else {
+            return RString.EMPTY;
+        }
     }
 
     /**
@@ -157,7 +198,7 @@ public class ShikakuHenkoRirekiHandler {
         row.getHenkoDate().setValue(model.get資格変更年月日());
         row.getHenkoTodokedeDate().setValue(model.get資格変更届出年月日());
         row.setSochimotoHokensha(model.get広住特措置元市町村コード().getColumnValue());
-        row.setKyuHokensha(Kyuhokensha.toValue(model.get旧市町村コード().getColumnValue()).getName());
+        row.setKyuHokensha(getKyuHokenshaName(model.get旧市町村コード()));
         if (model.getEntity().getLastUpdateTimestamp() != null) {
             row.getShoriDate().setValue(new FlexibleDate(model.getEntity().getLastUpdateTimestamp().getDate().toDateString()));
         } else {
@@ -558,15 +599,7 @@ public class ShikakuHenkoRirekiHandler {
     private RString get旧市町村名称(LasdecCode 旧保険者コード) {
         //TODO n8235 船山洋介 旧市町村コードより名称を取得できるようになったら修正。
         if (!旧保険者コード.isEmpty()) {
-            return Kyuhokensha.toValue(旧保険者コード.getColumnValue()).getName();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString get旧市町村コード(RString 市町村名称) {
-        //TODO n8235 船山洋介 旧市町村コードより名称を取得できるようになったら修正。
-        if (!市町村名称.isEmpty()) {
-            return Kyuhokensha.toKey(市町村名称).getCode();
+            return getKyuHokenshaName(旧保険者コード);
         }
         return RString.EMPTY;
     }
@@ -574,59 +607,6 @@ public class ShikakuHenkoRirekiHandler {
     public HihokenshaDaichoModel get更新前選択被保険者台帳() {
         ItemList<HihokenshaDaichoModel> get = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_ACCESSOR_KEY, ItemList.class);
         return get.toList().get(Integer.parseInt(shikakuHenkoRirekiDiv.getSelectRow().toString()));
-    }
-
-}
-
-/**
- * 南魚の旧保険者一覧の列挙型クラスです。 Manager・Finderが実装されたら削除します。
- *
- * @author N8235 船山 洋介
- */
-enum Kyuhokensha {
-
-    六日町("000001"),
-    大和町("000002"),
-    塩沢町("000003");
-
-    private final RString code;
-    private final RString oldName;
-
-    private Kyuhokensha(String code) {
-        this.code = new RString(code);
-        this.oldName = new RString(name());
-    }
-
-    public RString getCode() {
-        return code;
-    }
-
-    public RString getName() {
-        return oldName;
-    }
-
-    /**
-     * RString型の要介護状態区分コードをもらい、コードに対応するYokaigoJotaiKubun09型のenumを返します。
-     *
-     * @param code 要介護状態区分コード
-     * @return 引数のコードに対応するYokaigoJotaiKubun09型のenum
-     */
-    public static Kyuhokensha toValue(RString code) {
-        for (Kyuhokensha data : values()) {
-            if (data.getCode().equals(code)) {
-                return data;
-            }
-        }
-        throw new IllegalArgumentException(DbzErrorMessages.データが存在しない.getMessage().toString());
-    }
-
-    public static Kyuhokensha toKey(RString name) {
-        for (Kyuhokensha data : values()) {
-            if (data.getName().equals(name)) {
-                return data;
-            }
-        }
-        throw new IllegalArgumentException(DbzErrorMessages.データが存在しない.getMessage().toString());
     }
 
 }
