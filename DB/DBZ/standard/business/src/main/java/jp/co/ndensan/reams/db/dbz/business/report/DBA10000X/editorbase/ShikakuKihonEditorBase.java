@@ -17,8 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.KatagakiPri
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ShichosonNamePrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNamePrint;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
-import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoKanji;
+import jp.co.ndensan.reams.ur.urz.business.IAssociation;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.KannaiKangai;
 import jp.co.ndensan.reams.ur.urz.model.IJusho;
@@ -40,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Width;
 public class ShikakuKihonEditorBase {
 
     private final HihokenshashoModel hihokenshashoModel;
-    private final IZenkokuJushoItem zenkokuJusho;
+    private final IAssociation association;
     private final HihokenshashoPrintConfig printConfig;
     private final HihokenshashoJushoEditConfig hihoJushoEdit;
     private final ChohyoKyotsuJushoEditConfig kyotsuJushoEdit;
@@ -55,18 +54,18 @@ public class ShikakuKihonEditorBase {
      * コンストラクタです。
      *
      * @param hihokenshashoModel 被保険者証Model
-     * @param zenkokuJusho 全国住所Item
+     * @param association 導入団体情報
      * @param printConfig 被保険者証表示方法コンフィグ
      * @param hihoJushoEdit 被保険者証住所編集コンフィグ
      * @param kyotsuJushoEdit 共通住所編集コンフィグ
      * @throws NullPointerException 引数のいずれかにnullが渡されたとき
      */
-    public ShikakuKihonEditorBase(HihokenshashoModel hihokenshashoModel, IZenkokuJushoItem zenkokuJusho, HihokenshashoPrintConfig printConfig,
+    public ShikakuKihonEditorBase(HihokenshashoModel hihokenshashoModel, IAssociation association, HihokenshashoPrintConfig printConfig,
             HihokenshashoJushoEditConfig hihoJushoEdit, ChohyoKyotsuJushoEditConfig kyotsuJushoEdit) throws NullPointerException {
         requireNonNull(hihokenshashoModel, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("被保険者証情報", getClass().getName()));
-        requireNonNull(zenkokuJusho, UrSystemErrorMessages.引数がnullのため生成不可
-                .getReplacedMessage("全国住所", getClass().getName()));
+        requireNonNull(association, UrSystemErrorMessages.引数がnullのため生成不可
+                .getReplacedMessage("導入団体情報", getClass().getName()));
 
         requireNonNull(printConfig, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("被保険者証表示方法コンフィグ", getClass().getName()));
@@ -76,7 +75,7 @@ public class ShikakuKihonEditorBase {
                 .getReplacedMessage("共通住所編集", getClass().getName()));
 
         this.hihokenshashoModel = hihokenshashoModel;
-        this.zenkokuJusho = zenkokuJusho;
+        this.association = association;
         this.printConfig = printConfig;
         this.hihoJushoEdit = hihoJushoEdit;
         this.kyotsuJushoEdit = kyotsuJushoEdit;
@@ -133,6 +132,7 @@ public class ShikakuKihonEditorBase {
         ShichosonNamePrint shichosonName;
         HowToEditJusho howToEditJusho;
         KatagakiPrint katagaki;
+
         if (hihoJushoEdit.uses帳票独自区分()) {
             todofuken = hihoJushoEdit.get都道府県名付与有無();
             gunName = hihoJushoEdit.get郡名付与有無();
@@ -147,35 +147,32 @@ public class ShikakuKihonEditorBase {
             katagaki = kyotsuJushoEdit.get方書表示有無();
         }
 
-        //TODO n8178 全国住所を取得してきて処理するのは正しくない。対応方法を確認後に、住所の編集処理を修正する。
         if (jusho.get管内管外().equals(KannaiKangai.管内)) {
             setGyoseiku(source, jusho);
 
             RStringBuilder jushoBuilder = new RStringBuilder();
-//            IZenkokuJushoKanji jushoKanji = zenkokuJusho.get全国住所漢字();
             if (todofuken == TodofukenNamePrint.印字する) {
-//                jushoBuilder.append(jushoKanji.get都道府県名());
+                jushoBuilder.append(association.get都道府県名());
             }
             if (gunName == GunNamePrint.印字する) {
-                //TODO n8178 城間篤人 全国住所Itemでは、群名を取得できない？ 取得方法を確認後に修正が必要。
-                //jushoBuilder.append(jushoKanji.get市町村名());
+                jushoBuilder.append(association.get郡名());
             }
             if (shichosonName == ShichosonNamePrint.印字する) {
-//                jushoBuilder.append(jushoKanji.get市町村名());
+                jushoBuilder.append(association.get市町村名());
             }
             switch (howToEditJusho) {
                 case 住所と番地:
                 case 住所と番地_行政区:
-//                    jushoBuilder.append(jusho.get住所());
-//                    jushoBuilder.append(jusho.get番地().getBanchi().getColumnValue());
+                    jushoBuilder.append(jusho.get住所());
+                    jushoBuilder.append(jusho.get番地().getBanchi().getColumnValue());
                     break;
                 case 行政区と番地:
-//                    jushoBuilder.append(jusho.get行政区());
-//                    jushoBuilder.append(jusho.get番地().getBanchi().getColumnValue());
+                    jushoBuilder.append(jusho.get行政区());
+                    jushoBuilder.append(jusho.get番地().getBanchi().getColumnValue());
                     break;
 
                 case 番地のみ:
-//                    jushoBuilder.append(jusho.get番地().getBanchi().getColumnValue());
+                    jushoBuilder.append(jusho.get番地().getBanchi().getColumnValue());
                     break;
                 case 印字しない:
                 default:
@@ -183,8 +180,8 @@ public class ShikakuKihonEditorBase {
             }
 
             if (katagaki == KatagakiPrint.印字する) {
-//                jushoBuilder.append(RString.HALF_SPACE);
-//                jushoBuilder.append(jusho.get方書().value());
+                jushoBuilder.append(RString.HALF_SPACE);
+                jushoBuilder.append(jusho.get方書().value());
             }
 
             source.setHihojusho(jushoBuilder.toRString());
@@ -249,13 +246,16 @@ public class ShikakuKihonEditorBase {
      * @param source 被保険者証帳票ソース
      */
     public void set保険者番号(IHihokenshashoCommonEditData source) {
-        RString HokenshaNo = hihokenshashoModel.getShikakuHakko().get保険者番号();
-        source.setHokenshano1(HokenshaNo.stringAt(0));
-        source.setHokenshano2(HokenshaNo.stringAt(1));
-        source.setHokenshano3(HokenshaNo.stringAt(2));
-        source.setHokenshano4(HokenshaNo.stringAt(3));
-        source.setHokenshano5(HokenshaNo.stringAt(4));
-        source.setHokenshano6(HokenshaNo.stringAt(5));
+        RString hokenshaNo = hihokenshashoModel.getShikakuHakko().get保険者番号();
+        if (hokenshaNo.isEmpty()) {
+            return;
+        }
+        source.setHokenshano1(hokenshaNo.stringAt(0));
+        source.setHokenshano2(hokenshaNo.stringAt(1));
+        source.setHokenshano3(hokenshaNo.stringAt(2));
+        source.setHokenshano4(hokenshaNo.stringAt(3));
+        source.setHokenshano5(hokenshaNo.stringAt(4));
+        source.setHokenshano6(hokenshaNo.stringAt(5));
     }
 
 }

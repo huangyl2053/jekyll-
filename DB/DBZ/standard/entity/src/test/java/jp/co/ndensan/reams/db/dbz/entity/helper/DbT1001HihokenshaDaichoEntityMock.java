@@ -12,9 +12,15 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoikinaiJushochitoku
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuShutokuJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuHenkoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -31,7 +37,8 @@ import static org.mockito.Mockito.*;
 public final class DbT1001HihokenshaDaichoEntityMock {
 
     /**
-     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の {@link org.mockito.Mockito#spy(java.lang.Object)  スパイインスタンス}を返します。
+     * {@link DbT1001HihokenshaDaichoEntity DbT1001HihokenshaDaichoEntity}の
+     * {@link org.mockito.Mockito#spy(java.lang.Object)  スパイインスタンス}を返します。
      *
      * @return DbT1001HihokenshaDaichoEntityのスパイ
      */
@@ -50,22 +57,22 @@ public final class DbT1001HihokenshaDaichoEntityMock {
         entity.setShichosonCode(new LasdecCode(new RString("000000")));
         entity.setHihokenshaNo(new HihokenshaNo("1234567890"));
         entity.setShikibetsuCode(new ShikibetsuCode("0000000001"));
-        entity.setShoriTimestamp(new YMDHMS("20140328000000"));
+        entity.setShoriTimestamp(ShoriTimestamp.of(new YMDHMS("20140328000000")));
         entity.setHihokennshaKubunCode(new Code("1").value());
         entity.setIchigoShikakuShutokuYMD(new FlexibleDate("20140328"));
-        entity.setShikakuShutokuJiyuCode(ShikakuShutokuJiyu.年齢到達.getCode());
+        entity.setShikakuShutokuJiyuCode(new KaigoShikakuShutokuJiyu(ShikakuShutokuJiyu.年齢到達.getCode()));
         entity.setShikakuShutokuTodokedeYMD(new FlexibleDate("20130327"));
         entity.setShikakuShutokuYMD(new FlexibleDate("20130327"));
-        entity.setShikakuSoshitsuJiyuCode(ShikakuSoshitsuJiyu.なし.getCode());
+        entity.setShikakuSoshitsuJiyuCode(new KaigoShikakuSoshitsuJiyu(ShikakuSoshitsuJiyu.EMPTY.getCode()));
         entity.setShikakuSoshitsuTodokedeYMD(new FlexibleDate("00000000"));
         entity.setShikakuSoshitsuYMD(new FlexibleDate("00000000"));
-        entity.setShikakuHenkoJiyuCode(ShikakuHenkoJiyu.なし.getCode());
+        entity.setShikakuHenkoJiyuCode(new KaigoShikakuHenkoJiyu(ShikakuHenkoJiyu.EMPTY.getCode()));
         entity.setShikakuHenkoTodokedeYMD(new FlexibleDate("00000000"));
         entity.setShikakuHenkoYMD(new FlexibleDate("00000000"));
-        entity.setJushochitokureiTekiyoJiyuCode(JushochitokureiTekiyoJiyu.なし.getCode());
+        entity.setJushochitokureiTekiyoJiyuCode(new KaigoShikakuJutokuTekiyoJiyu(JushochitokureiTekiyoJiyu.EMPTY.getCode()));
         entity.setJushochitokureiTekiyoTodokedeYMD(new FlexibleDate("00000000"));
         entity.setJushochitokureiTekiyoYMD(new FlexibleDate("00000000"));
-        entity.setJushochitokureiKaijoJiyuCode(JushochitokureiKaijoJiyu.なし.getCode());
+        entity.setJushochitokureiKaijoJiyuCode(new KaigoShikakuJutokuKaijoJiyu(JushochitokureiKaijoJiyu.EMPTY.getCode()));
         entity.setJushochitokureiKaijoTodokedeYMD(new FlexibleDate("00000000"));
         entity.setJushochitokureiKaijoYMD(new FlexibleDate("00000000"));
         entity.setJushochiTokureiFlag(JushochiTokureishaKubun.通常資格者.getコード());
@@ -92,7 +99,7 @@ public final class DbT1001HihokenshaDaichoEntityMock {
         DbT1001HihokenshaDaichoEntity entity = create();
         entity.setShichosonCode(shichosonCode);
         entity.setShikibetsuCode(shikibetsuCode);
-        entity.setShoriTimestamp(timeStamp);
+        entity.setShoriTimestamp(ShoriTimestamp.of(timeStamp));
         return entity;
     }
 
@@ -109,7 +116,7 @@ public final class DbT1001HihokenshaDaichoEntityMock {
         DbT1001HihokenshaDaichoEntity entity = create();
         entity.setShichosonCode(shichosonCode);
         entity.setHihokenshaNo(hihokenshaNo);
-        entity.setShoriTimestamp(timeStamp);
+        entity.setShoriTimestamp(ShoriTimestamp.of(timeStamp));
         return entity;
     }
 }

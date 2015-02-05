@@ -133,7 +133,7 @@ module DBZ
                     this.controls.txtTekiyoTodokedeDate().readOnly = true;
 
                     this.controls.TekiyojiHokenshaJoho().readOnly = true;
-                    this.controls.TekiyojiHokenshaJoho().displayNone = false;
+                    //this.controls.TekiyojiHokenshaJoho().displayNone = false;
                     this.controls.ddlTekiyoJiyu().readOnly = true;
                     this.controls.ddlTekiyojiSochimotoHokensha().readOnly = true;
                     this.controls.ddlTekiyojiKyuHokensha().readOnly = true;
@@ -158,7 +158,7 @@ module DBZ
                     this.controls.txtKaijoTodokedeDate().readOnly = true;
 
                     this.controls.KaijojiHokenshaJoho().readOnly = true;
-                    this.controls.KaijojiHokenshaJoho().displayNone = false;
+                    //this.controls.KaijojiHokenshaJoho().displayNone = false;
                     this.controls.ddlKaijoJiyu().readOnly = true;
                     this.controls.ddlKaijojiSochimotoHokensha().readOnly = true;
                     this.controls.ddlKaijojiKyuHokensha().readOnly = true;
@@ -179,7 +179,7 @@ module DBZ
                     this.controls.txtTekiyoTodokedeDate().readOnly = false;
 
                     this.controls.TekiyojiHokenshaJoho().readOnly = false;
-                    this.controls.TekiyojiHokenshaJoho().displayNone = false;
+                    //this.controls.TekiyojiHokenshaJoho().displayNone = false;
                     this.controls.ddlTekiyoJiyu().readOnly = false;
                     this.controls.ddlTekiyojiSochimotoHokensha().readOnly = false;
                     this.controls.ddlTekiyojiKyuHokensha().readOnly = false;
@@ -203,7 +203,7 @@ module DBZ
                     this.controls.txtKaijoTodokedeDate().readOnly = false;
 
                     this.controls.KaijojiHokenshaJoho().readOnly = false;
-                    this.controls.KaijojiHokenshaJoho().displayNone = false;
+                    //this.controls.KaijojiHokenshaJoho().displayNone = false;
                     this.controls.ddlKaijoJiyu().readOnly = false;
                     this.controls.ddlKaijojiSochimotoHokensha().readOnly = false;
                     this.controls.ddlKaijojiKyuHokensha().readOnly = false;
@@ -223,7 +223,7 @@ module DBZ
                     this.controls.txtTekiyoTodokedeDate().readOnly = false;
 
                     this.controls.TekiyojiHokenshaJoho().readOnly = false;
-                    this.controls.TekiyojiHokenshaJoho().displayNone = false;
+                    //this.controls.TekiyojiHokenshaJoho().displayNone = false;
                     this.controls.ddlTekiyoJiyu().readOnly = false;
                     this.controls.ddlTekiyojiSochimotoHokensha().readOnly = false;
                     this.controls.ddlTekiyojiKyuHokensha().readOnly = false;
@@ -235,7 +235,7 @@ module DBZ
                     this.controls.txtKaijoTodokedeDate().readOnly = false;
 
                     this.controls.KaijojiHokenshaJoho().readOnly = false;
-                    this.controls.KaijojiHokenshaJoho().displayNone = false;
+                    //this.controls.KaijojiHokenshaJoho().displayNone = false;
                     this.controls.ddlKaijoJiyu().readOnly = false;
                     this.controls.ddlKaijojiSochimotoHokensha().readOnly = false;
                     this.controls.ddlKaijojiKyuHokensha().readOnly = false;
@@ -255,7 +255,7 @@ module DBZ
                     this.controls.txtTekiyoTodokedeDate().readOnly = true;
 
                     this.controls.TekiyojiHokenshaJoho().readOnly = true;
-                    this.controls.TekiyojiHokenshaJoho().displayNone = false;
+                    //this.controls.TekiyojiHokenshaJoho().displayNone = false;
                     this.controls.ddlTekiyoJiyu().readOnly = true;
                     this.controls.ddlTekiyojiSochimotoHokensha().readOnly = true;
                     this.controls.ddlTekiyojiKyuHokensha().readOnly = true;
@@ -267,7 +267,7 @@ module DBZ
                     this.controls.txtKaijoTodokedeDate().readOnly = true;
 
                     this.controls.KaijojiHokenshaJoho().readOnly = true;
-                    this.controls.KaijojiHokenshaJoho().displayNone = false;
+                    //this.controls.KaijojiHokenshaJoho().displayNone = false;
                     this.controls.ddlKaijoJiyu().readOnly = true;
                     this.controls.ddlKaijojiSochimotoHokensha().readOnly = true;
                     this.controls.ddlKaijojiKyuHokensha().readOnly = true;
@@ -293,9 +293,13 @@ module DBZ
                 public TanitsuGappeiNashi(): void {
                     var gridSetting = this.controls.dgJutoku().gridSetting;
 
-                    gridSetting.columns[9].visible = false;
-                    gridSetting.columns[10].visible = false;
-                    gridSetting.columns[11].visible = false;
+                    for (var i = 0; i < gridSetting.columns.length; i++) {
+                        if (gridSetting.columns[i].dataName == 'sochimotoHokensha') {
+                            gridSetting.columns[i].visible = false;
+                        } else if (gridSetting.columns[i].dataName == 'kyuHokensha') {
+                            gridSetting.columns[i].visible = false;
+                        }
+                    }
 
                     this.controls.dgJutoku().gridSetting = gridSetting;
                     
@@ -309,9 +313,13 @@ module DBZ
                 public TanitsuGappeiAri(): void {
                     var gridSetting = this.controls.dgJutoku().gridSetting;
 
-                    gridSetting.columns[9].visible = false;
-                    gridSetting.columns[10].visible = false;
-                    gridSetting.columns[11].visible = true;
+                    for (var i = 0; i < gridSetting.columns.length; i++) {
+                        if (gridSetting.columns[i].dataName == 'sochimotoHokensha') {
+                            gridSetting.columns[i].visible = false;
+                        } else if (gridSetting.columns[i].dataName == 'kyuHokensha') {
+                            gridSetting.columns[i].visible = true;
+                        }
+                    }
 
                     this.controls.dgJutoku().gridSetting = gridSetting;
 
@@ -333,11 +341,15 @@ module DBZ
 
                 public KoikiGappeiNashi(): void {
                     var gridSetting = this.controls.dgJutoku().gridSetting;
-
-                    gridSetting.columns[9].visible = true;
-                    gridSetting.columns[10].visible = true;
-                    gridSetting.columns[11].visible = false;
-
+                                        
+                    for (var i = 0; i < gridSetting.columns.length; i++) {
+                        if (gridSetting.columns[i].dataName == 'sochimotoHokensha') {
+                            gridSetting.columns[i].visible = true;
+                        } else if (gridSetting.columns[i].dataName == 'kyuHokensha') {
+                            gridSetting.columns[i].visible = false;
+                        }
+                    }
+                    
                     this.controls.dgJutoku().gridSetting = gridSetting;
 
                     this.controls.TekiyojiHokenshaJoho().displayNone = false;
@@ -360,10 +372,14 @@ module DBZ
 
                 public KoikiGappeiAri(): void {
                     var gridSetting = this.controls.dgJutoku().gridSetting;
-
-                    gridSetting.columns[9].visible = true;
-                    gridSetting.columns[10].visible = true;
-                    gridSetting.columns[11].visible = true;
+                    
+                    for (var i = 0; i < gridSetting.columns.length; i++) {
+                        if (gridSetting.columns[i].dataName == 'sochimotoHokensha') {
+                            gridSetting.columns[i].visible = true;
+                        } else if (gridSetting.columns[i].dataName == 'kyuHokensha') {
+                            gridSetting.columns[i].visible = true;
+                        }
+                    }
 
                     this.controls.dgJutoku().gridSetting = gridSetting;
 
@@ -399,7 +415,11 @@ module DBZ
                 public VisibleTrue(): void {
                     var gridSetting = this.controls.dgJutoku().gridSetting;
 
-                    gridSetting.columns[12].visible = true;
+                    for (var i = 0; i < gridSetting.columns.length; i++) {
+                        if (gridSetting.columns[i].dataName == 'shoriDate') {
+                            gridSetting.columns[i].visible = true;
+                        }
+                    }
 
                     this.controls.dgJutoku().gridSetting = gridSetting;
 
@@ -410,7 +430,11 @@ module DBZ
                 public VisibleFalse(): void {
                     var gridSetting = this.controls.dgJutoku().gridSetting;
 
-                    gridSetting.columns[12].visible = false;
+                    for (var i = 0; i < gridSetting.columns.length; i++) {
+                        if (gridSetting.columns[i].dataName == 'shoriDate') {
+                            gridSetting.columns[i].visible = false;
+                        }
+                    }
 
                     this.controls.dgJutoku().gridSetting = gridSetting;
 

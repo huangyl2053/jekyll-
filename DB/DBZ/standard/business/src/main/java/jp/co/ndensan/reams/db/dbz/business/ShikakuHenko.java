@@ -21,7 +21,7 @@ public class ShikakuHenko extends ShikakuIdoBaseItem<ShikakuHenkoJiyu> {
     public static final ShikakuHenko NOTHING;
 
     static {
-        NOTHING = new ShikakuHenko(ShikakuHenkoJiyu.なし, FlexibleDate.MAX, FlexibleDate.MAX);
+        NOTHING = new ShikakuHenko(ShikakuHenkoJiyu.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
     }
 
     /**

@@ -1,40 +1,40 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist;
-
 /**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.IJushochiTokureiRirekiListDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuKaijoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuTekiyoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.dgJutoku_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.KaijojiHokenshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.TekiyojiHokenshaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.dgJutoku_Row;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
-import java.util.Map;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import java.util.HashMap;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.ur.urz.definition.code.CodeMasterHelper;
-import jp.co.ndensan.reams.ur.urz.definition.code.ICodeShubetsu;
-import jp.co.ndensan.reams.ur.urz.definition.code.ICodeValueObject;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoatenainfo.IKaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
- * JushochiTokureiRirekiList のクラスファイル
- *
+ * JushochiTokureiRirekiList のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiTokureiRirekiListDiv {
@@ -44,13 +44,16 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("btnAdd")
     private Button btnAdd;
     @JsonProperty("dgJutoku")
     private DataGrid<dgJutoku_Row> dgJutoku;
     @JsonProperty("JutokuInput")
     private JutokuInputDiv JutokuInput;
+    @JsonProperty("executionStatus")
+    private RString executionStatus;
+    @JsonProperty("jushochiTokureiExecutionState")
+    private RString jushochiTokureiExecutionState;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -65,7 +68,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
 
     @JsonProperty("btnAdd")
     public void setBtnAdd(Button btnAdd) {
-        this.btnAdd = btnAdd;
+        this.btnAdd=btnAdd;
     }
 
     @JsonProperty("dgJutoku")
@@ -75,7 +78,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
 
     @JsonProperty("dgJutoku")
     public void setDgJutoku(DataGrid<dgJutoku_Row> dgJutoku) {
-        this.dgJutoku = dgJutoku;
+        this.dgJutoku=dgJutoku;
     }
 
     @JsonProperty("JutokuInput")
@@ -85,7 +88,27 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
 
     @JsonProperty("JutokuInput")
     public void setJutokuInput(JutokuInputDiv JutokuInput) {
-        this.JutokuInput = JutokuInput;
+        this.JutokuInput=JutokuInput;
+    }
+
+    @JsonProperty("executionStatus")
+    public RString getExecutionStatus() {
+        return executionStatus;
+    }
+
+    @JsonProperty("executionStatus")
+    public void setExecutionStatus(RString executionStatus) {
+        this.executionStatus=executionStatus;
+    }
+
+    @JsonProperty("jushochiTokureiExecutionState")
+    public RString getJushochiTokureiExecutionState() {
+        return jushochiTokureiExecutionState;
+    }
+
+    @JsonProperty("jushochiTokureiExecutionState")
+    public void setJushochiTokureiExecutionState(RString jushochiTokureiExecutionState) {
+        this.jushochiTokureiExecutionState=jushochiTokureiExecutionState;
     }
 
     /*
@@ -113,7 +136,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
             DataGridHeight[] enumArray = DataGridHeight.values();
 
             for (DataGridHeight enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -128,11 +151,11 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     public DataGridHeight getMode_DataGridHeight() {
-        return (DataGridHeight) _CommonChildDivModeUtil.getMode(this.modes, DataGridHeight.class);
+        return (DataGridHeight) _CommonChildDivModeUtil.getMode( this.modes, DataGridHeight.class );
     }
 
-    public void setMode_DataGridHeight(DataGridHeight value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DataGridHeight.class, value);
+    public void setMode_DataGridHeight( DataGridHeight value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DataGridHeight.class , value );
     }
 
     public static enum ShoriNichijiDisplayMode implements ICommonChildDivMode {
@@ -150,7 +173,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
             ShoriNichijiDisplayMode[] enumArray = ShoriNichijiDisplayMode.values();
 
             for (ShoriNichijiDisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -165,11 +188,11 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     public ShoriNichijiDisplayMode getMode_ShoriNichijiDisplayMode() {
-        return (ShoriNichijiDisplayMode) _CommonChildDivModeUtil.getMode(this.modes, ShoriNichijiDisplayMode.class);
+        return (ShoriNichijiDisplayMode) _CommonChildDivModeUtil.getMode( this.modes, ShoriNichijiDisplayMode.class );
     }
 
-    public void setMode_ShoriNichijiDisplayMode(ShoriNichijiDisplayMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, ShoriNichijiDisplayMode.class, value);
+    public void setMode_ShoriNichijiDisplayMode( ShoriNichijiDisplayMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, ShoriNichijiDisplayMode.class , value );
     }
 
     public static enum DataGridWidth implements ICommonChildDivMode {
@@ -196,7 +219,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
             DataGridWidth[] enumArray = DataGridWidth.values();
 
             for (DataGridWidth enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -211,11 +234,11 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     public DataGridWidth getMode_DataGridWidth() {
-        return (DataGridWidth) _CommonChildDivModeUtil.getMode(this.modes, DataGridWidth.class);
+        return (DataGridWidth) _CommonChildDivModeUtil.getMode( this.modes, DataGridWidth.class );
     }
 
-    public void setMode_DataGridWidth(DataGridWidth value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DataGridWidth.class, value);
+    public void setMode_DataGridWidth( DataGridWidth value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DataGridWidth.class , value );
     }
 
     public static enum HokenshaJohoDisplayMode implements ICommonChildDivMode {
@@ -235,7 +258,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
             HokenshaJohoDisplayMode[] enumArray = HokenshaJohoDisplayMode.values();
 
             for (HokenshaJohoDisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -250,11 +273,11 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     public HokenshaJohoDisplayMode getMode_HokenshaJohoDisplayMode() {
-        return (HokenshaJohoDisplayMode) _CommonChildDivModeUtil.getMode(this.modes, HokenshaJohoDisplayMode.class);
+        return (HokenshaJohoDisplayMode) _CommonChildDivModeUtil.getMode( this.modes, HokenshaJohoDisplayMode.class );
     }
 
-    public void setMode_HokenshaJohoDisplayMode(HokenshaJohoDisplayMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, HokenshaJohoDisplayMode.class, value);
+    public void setMode_HokenshaJohoDisplayMode( HokenshaJohoDisplayMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, HokenshaJohoDisplayMode.class , value );
     }
 
     public static enum BtnDisplayMode implements ICommonChildDivMode {
@@ -272,7 +295,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
             BtnDisplayMode[] enumArray = BtnDisplayMode.values();
 
             for (BtnDisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -287,11 +310,11 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     public BtnDisplayMode getMode_BtnDisplayMode() {
-        return (BtnDisplayMode) _CommonChildDivModeUtil.getMode(this.modes, BtnDisplayMode.class);
+        return (BtnDisplayMode) _CommonChildDivModeUtil.getMode( this.modes, BtnDisplayMode.class );
     }
 
-    public void setMode_BtnDisplayMode(BtnDisplayMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, BtnDisplayMode.class, value);
+    public void setMode_BtnDisplayMode( BtnDisplayMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, BtnDisplayMode.class , value );
     }
 
     public static enum MeisaiDisplayMode implements ICommonChildDivMode {
@@ -300,7 +323,8 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
         kaijoShokai("kaijoShokai"),
         tekiyoInput("tekiyoInput"),
         kaijoInput("kaijoInput"),
-        TeiseiInput("TeiseiInput"),
+        teiseiInput("teiseiInput"),
+        teiseiShokai("teiseiShokai"),
         displayNone("displayNone");
 
         private final String name;
@@ -313,7 +337,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
             MeisaiDisplayMode[] enumArray = MeisaiDisplayMode.values();
 
             for (MeisaiDisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -328,11 +352,11 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     public MeisaiDisplayMode getMode_MeisaiDisplayMode() {
-        return (MeisaiDisplayMode) _CommonChildDivModeUtil.getMode(this.modes, MeisaiDisplayMode.class);
+        return (MeisaiDisplayMode) _CommonChildDivModeUtil.getMode( this.modes, MeisaiDisplayMode.class );
     }
 
-    public void setMode_MeisaiDisplayMode(MeisaiDisplayMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, MeisaiDisplayMode.class, value);
+    public void setMode_MeisaiDisplayMode( MeisaiDisplayMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, MeisaiDisplayMode.class , value );
     }
 
     public static enum DisplayType implements ICommonChildDivMode {
@@ -351,7 +375,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
             DisplayType[] enumArray = DisplayType.values();
 
             for (DisplayType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -366,11 +390,11 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     public DisplayType getMode_DisplayType() {
-        return (DisplayType) _CommonChildDivModeUtil.getMode(this.modes, DisplayType.class);
+        return (DisplayType) _CommonChildDivModeUtil.getMode( this.modes, DisplayType.class );
     }
 
-    public void setMode_DisplayType(DisplayType value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DisplayType.class, value);
+    public void setMode_DisplayType( DisplayType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DisplayType.class , value );
     }
 
     /*
@@ -382,7 +406,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setJutokuTekiyoInput(JutokuTekiyoInputDiv JutokuTekiyoInput) {
+    public void  setJutokuTekiyoInput(JutokuTekiyoInputDiv JutokuTekiyoInput) {
         this.getJutokuInput().setJutokuTekiyoInput(JutokuTekiyoInput);
     }
 
@@ -392,7 +416,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setTxtTekiyoDate(TextBoxFlexibleDate txtTekiyoDate) {
+    public void  setTxtTekiyoDate(TextBoxFlexibleDate txtTekiyoDate) {
         this.getJutokuInput().getJutokuTekiyoInput().setTxtTekiyoDate(txtTekiyoDate);
     }
 
@@ -402,7 +426,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setTxtTekiyoTodokedeDate(TextBoxFlexibleDate txtTekiyoTodokedeDate) {
+    public void  setTxtTekiyoTodokedeDate(TextBoxFlexibleDate txtTekiyoTodokedeDate) {
         this.getJutokuInput().getJutokuTekiyoInput().setTxtTekiyoTodokedeDate(txtTekiyoTodokedeDate);
     }
 
@@ -412,7 +436,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setDdlTekiyoJiyu(DropDownList ddlTekiyoJiyu) {
+    public void  setDdlTekiyoJiyu(DropDownList ddlTekiyoJiyu) {
         this.getJutokuInput().getJutokuTekiyoInput().setDdlTekiyoJiyu(ddlTekiyoJiyu);
     }
 
@@ -422,19 +446,9 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setTekiyojiHokenshaJoho(TekiyojiHokenshaJohoDiv tekiyojiHokenshaJoho) {
-        this.getJutokuInput().getJutokuTekiyoInput().setTekiyojiHokenshaJoho(tekiyojiHokenshaJoho);
+    public void  setTekiyojiHokenshaJoho(TekiyojiHokenshaJohoDiv TekiyojiHokenshaJoho) {
+        this.getJutokuInput().getJutokuTekiyoInput().setTekiyojiHokenshaJoho(TekiyojiHokenshaJoho);
     }
-//TODO n3327 三浦凌 削除していいか確認する。
-//    @JsonIgnore
-//    public DropDownList getDdlTekiyojiShozaiHokensha() {
-//        return this.getJutokuInput().getJutokuTekiyoInput().getTekiyojiHokenshaJoho().getDdlTekiyojiShozaiHokensha();
-//    }
-//
-//    @JsonIgnore
-//    public void setDdlTekiyojiShozaiHokensha(DropDownList ddlTekiyojiShozaiHokensha) {
-//        this.getJutokuInput().getJutokuTekiyoInput().getTekiyojiHokenshaJoho().setDdlTekiyojiShozaiHokensha(ddlTekiyojiShozaiHokensha);
-//    }
 
     @JsonIgnore
     public DropDownList getDdlTekiyojiSochimotoHokensha() {
@@ -442,7 +456,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setDdlTekiyojiSochimotoHokensha(DropDownList ddlTekiyojiSochimotoHokensha) {
+    public void  setDdlTekiyojiSochimotoHokensha(DropDownList ddlTekiyojiSochimotoHokensha) {
         this.getJutokuInput().getJutokuTekiyoInput().getTekiyojiHokenshaJoho().setDdlTekiyojiSochimotoHokensha(ddlTekiyojiSochimotoHokensha);
     }
 
@@ -452,7 +466,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setDdlTekiyojiKyuHokensha(DropDownList ddlTekiyojiKyuHokensha) {
+    public void  setDdlTekiyojiKyuHokensha(DropDownList ddlTekiyojiKyuHokensha) {
         this.getJutokuInput().getJutokuTekiyoInput().getTekiyojiHokenshaJoho().setDdlTekiyojiKyuHokensha(ddlTekiyojiKyuHokensha);
     }
 
@@ -462,7 +476,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setDdlTekiyojiJuminJoho(DropDownList ddlTekiyojiJuminJoho) {
+    public void  setDdlTekiyojiJuminJoho(DropDownList ddlTekiyojiJuminJoho) {
         this.getJutokuInput().getJutokuTekiyoInput().getTekiyojiHokenshaJoho().setDdlTekiyojiJuminJoho(ddlTekiyojiJuminJoho);
     }
 
@@ -472,7 +486,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setJutokuKaijoInput(JutokuKaijoInputDiv JutokuKaijoInput) {
+    public void  setJutokuKaijoInput(JutokuKaijoInputDiv JutokuKaijoInput) {
         this.getJutokuInput().setJutokuKaijoInput(JutokuKaijoInput);
     }
 
@@ -482,7 +496,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setTxtKaijoDate(TextBoxFlexibleDate txtKaijoDate) {
+    public void  setTxtKaijoDate(TextBoxFlexibleDate txtKaijoDate) {
         this.getJutokuInput().getJutokuKaijoInput().setTxtKaijoDate(txtKaijoDate);
     }
 
@@ -492,7 +506,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setTxtKaijoTodokedeDate(TextBoxFlexibleDate txtKaijoTodokedeDate) {
+    public void  setTxtKaijoTodokedeDate(TextBoxFlexibleDate txtKaijoTodokedeDate) {
         this.getJutokuInput().getJutokuKaijoInput().setTxtKaijoTodokedeDate(txtKaijoTodokedeDate);
     }
 
@@ -502,7 +516,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setDdlKaijoJiyu(DropDownList ddlKaijoJiyu) {
+    public void  setDdlKaijoJiyu(DropDownList ddlKaijoJiyu) {
         this.getJutokuInput().getJutokuKaijoInput().setDdlKaijoJiyu(ddlKaijoJiyu);
     }
 
@@ -512,19 +526,9 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setKaijojiHokenshaJoho(KaijojiHokenshaJohoDiv kaijojiHokenshaJoho) {
-        this.getJutokuInput().getJutokuKaijoInput().setKaijojiHokenshaJoho(kaijojiHokenshaJoho);
+    public void  setKaijojiHokenshaJoho(KaijojiHokenshaJohoDiv KaijojiHokenshaJoho) {
+        this.getJutokuInput().getJutokuKaijoInput().setKaijojiHokenshaJoho(KaijojiHokenshaJoho);
     }
-//TODO n3327 三浦凌 削除していいか確認する。
-//    @JsonIgnore
-//    public DropDownList getDdlKaijojiShozaiHokensha() {
-//        return this.getJutokuInput().getJutokuKaijoInput().getKaijojiHokenshaJoho().getDdlKaijojiShozaiHokensha();
-//    }
-//
-//    @JsonIgnore
-//    public void setDdlKaijojiShozaiHokensha(DropDownList ddlKaijojiShozaiHokensha) {
-//        this.getJutokuInput().getJutokuKaijoInput().getKaijojiHokenshaJoho().setDdlKaijojiShozaiHokensha(ddlKaijojiShozaiHokensha);
-//    }
 
     @JsonIgnore
     public DropDownList getDdlKaijojiSochimotoHokensha() {
@@ -532,7 +536,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setDdlKaijojiSochimotoHokensha(DropDownList ddlKaijojiSochimotoHokensha) {
+    public void  setDdlKaijojiSochimotoHokensha(DropDownList ddlKaijojiSochimotoHokensha) {
         this.getJutokuInput().getJutokuKaijoInput().getKaijojiHokenshaJoho().setDdlKaijojiSochimotoHokensha(ddlKaijojiSochimotoHokensha);
     }
 
@@ -542,7 +546,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setDdlKaijojiKyuHokensha(DropDownList ddlKaijojiKyuHokensha) {
+    public void  setDdlKaijojiKyuHokensha(DropDownList ddlKaijojiKyuHokensha) {
         this.getJutokuInput().getJutokuKaijoInput().getKaijojiHokenshaJoho().setDdlKaijojiKyuHokensha(ddlKaijojiKyuHokensha);
     }
 
@@ -552,7 +556,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setDdlKaijojiJuminJono(DropDownList ddlKaijojiJuminJono) {
+    public void  setDdlKaijojiJuminJono(DropDownList ddlKaijojiJuminJono) {
         this.getJutokuInput().getJutokuKaijoInput().getKaijojiHokenshaJoho().setDdlKaijojiJuminJono(ddlKaijojiJuminJono);
     }
 
@@ -562,7 +566,7 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setBtnJutokuKakutei(Button btnJutokuKakutei) {
+    public void  setBtnJutokuKakutei(Button btnJutokuKakutei) {
         this.getJutokuInput().setBtnJutokuKakutei(btnJutokuKakutei);
     }
 
@@ -572,65 +576,67 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public void setBtnJutokuTorikeshi(Button btnJutokuTorikeshi) {
+    public void  setBtnJutokuTorikeshi(Button btnJutokuTorikeshi) {
         this.getJutokuInput().setBtnJutokuTorikeshi(btnJutokuTorikeshi);
     }
 
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void load(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
-
-        //TODO
-        //1)、引数から渡されたキーを元に、被保険者台帳情報を検索する。
-        //2)、検索結果として取得する被保険者台帳Listから、住所地特例の履歴を表現するために必要な情報を抽出する。
-        //3)、取得した情報をPanelSessionAccessorに登録する。
-        //4)、抽出した住所地特例履歴Listを、グリッドにマッピングする。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public IItemList<HihokenshaDaichoModel> get被保険者台帳情報() {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        return handler.getUpdate被保険者台帳情報();
     }
 
     @Override
-    public IItemList<HihokenshaDaichoModel> get住所地特例異動履歴() {
-
-        //TODO
-        //1)、PanelSessionAccessorに登録されている情報を取得し、戻り値として返却する。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void set被保険者台帳情報(IItemList<HihokenshaDaichoModel> 被保険者台帳List) {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        handler.set被保険者台帳情報(被保険者台帳List);
+        handler.mapping住所地特例履歴();
     }
 
     @Override
-    public void set住所地特例異動履歴(IItemList<HihokenshaDaichoModel> 被保険者台帳List) {
-
-        //TODO
-        //1)、引数から渡された情報を、PanelSessionAccessorに登録する。
-        //2)、登録した情報を、グリッドにマッピングする。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void mapping住所地特例履歴() {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        handler.mapping住所地特例履歴();
     }
 
     @Override
     public void clearInputData() {
-        //TODO
-        //1)、入力明細パネル上のコントロールに対して、空白やnullなどを設定する。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        handler.clearInputData();
     }
 
     @Override
-    public void initialize(LasdecCode 市町村コード) {
-        //TODO
-        //1)、引数から受け取った市町村コードを元に、保険者情報を取得する。
-        //2)、取得した保険者情報を元に、以下のように処理を分岐する。
-        //2-1)、保険者が「単一保険者」で「合併なし」の保険者である場合
-        //      HikenshaJohoDisplayModeに、TanitsuGappeiNashiを設定する。
-        //2-2)、保険者が「単一保険者」で「合併あり」の保険者である場合
-        //      HikenshaJohoDisplayModeに、TanitshGappeiAriを設定する。
-        //      保険者情報を元に、旧保険者DDLの選択項目を設定する。
-        //2-3)、保険者が「広域保険者」で「合併なし」の保険者である場合
-        //      HikenshaJohoDisplayModeに、KoikiGappeiNashiを設定する。
-        //      保険者情報を元に、所在保険者DDL・措置元保険者DDLを選択項目を設定する。
-        //2-4)、保険者が「広域保険者」で「合併あり」の保険者である場合
-        //      HikenshaJohoDisplayModeに、KoikiGappeiAriを設定する。
-        //      保険者情報を元に、所在保険者DDL・措置元保険者DDL・旧保険者DDLの選択項目を設定する。
-        //
-        //3)、コードマスタから住特適用（コードマスタ:0127）、住適解除（コードマスタ:0128）の情報を取得する。
-        //4)、コードマスタから取得した情報を、適用事由DDL、解除事由DDLに設定する。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void initialize(ViewExecutionStatus exeStatus, JushochiTokureiExecutionStatus jutokuExeStatsu,
+            JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode mode) {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        handler.initialize(exeStatus, jutokuExeStatsu, mode);
+    }
+
+    @Override
+    public boolean hasChangedInMeisai() {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        return handler.hasChangedInMeisai();
+    }
+
+    @Override
+    public void setMeisaiDisplayMode(MeisaiDisplayMode displayMode) {
+        setMode_MeisaiDisplayMode(displayMode);
+    }
+
+    @Override
+    public void setAddButtonDisplay(BtnDisplayMode displayMode) {
+        setMode_BtnDisplayMode(displayMode);
+    }
+
+    @Override
+    public void setDisplayType(DisplayType displayType) {
+        setMode_DisplayType(displayType);
+    }
+
+    @Override
+    public boolean hasChanged() {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        return handler.hasChanged();
     }
 }

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShikakuHenkoRirekiValidationHelper;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.ShikakuHenkoMapper;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.ShikakuHenkoRirekiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.ShikakuHenkoRirekiHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.dgHenko_Row;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
@@ -48,8 +49,13 @@ public class ShikakuHenkoRireki {
         ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
         LasdecCode lasdecCode = new LasdecCode("123456");
 
+        HokenshaJohoDisplayMode mode = ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiNashi;
+        if (henkoRirekiDiv.getMode_HokenshaJohoDisplayMode() != null) {
+            mode = henkoRirekiDiv.getMode_HokenshaJohoDisplayMode();
+        }
+
         handler.load(lasdecCode, new HihokenshaNo("1234567892"));
-        handler.initialize(lasdecCode);
+        handler.initialize(lasdecCode, mode);
         return createSettingData(henkoRirekiDiv);
 
     }

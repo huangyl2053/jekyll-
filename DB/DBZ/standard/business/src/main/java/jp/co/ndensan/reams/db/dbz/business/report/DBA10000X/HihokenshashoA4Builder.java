@@ -39,7 +39,7 @@ public class HihokenshashoA4Builder implements IHihokenshashoBuilder {
     @Override
     public HihokenshashoA4 build() {
         HihokenshashoA4 source = hihokenshashoA4.buildSource();
-        source.tsuchishoSource = tsuchishoSofusaki.buildSource();
+        source.sofusakiAtena = tsuchishoSofusaki.buildSource();
         return source;
     }
 

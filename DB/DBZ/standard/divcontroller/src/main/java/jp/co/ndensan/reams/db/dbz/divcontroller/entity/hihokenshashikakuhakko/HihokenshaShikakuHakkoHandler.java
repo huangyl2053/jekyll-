@@ -108,23 +108,22 @@ public class HihokenshaShikakuHakkoHandler {
 
         Optional<NinteiShinseiKekkaModel> 認定申請結果optional = load認定申請結果(被保険者番号, is直前履歴);
         Optional<HihokenshaDaichoModel> 被保険者台帳optional = new HihokenshaDaichoFinder().find直近被保険者台帳(被保険者番号);
-        if (!認定申請結果optional.isPresent()
-                || !被保険者台帳optional.isPresent()) {
-            return;
+
+        if (被保険者台帳optional.isPresent()) {
+            HihokenshaDaichoModel 被保険者台帳 = 被保険者台帳optional.get();
+            set保険者(被保険者台帳);
+            set給付制限(被保険者番号, 被保険者台帳);
+            set施設入退所(識別コード);
         }
-
-        NinteiShinseiKekkaModel 認定申請結果 = 認定申請結果optional.get();
-        HihokenshaDaichoModel 被保険者台帳 = 被保険者台帳optional.get();
-        set保険者(被保険者台帳);
-        set有効期限(認定申請結果);
-        set認定情報(認定申請結果);
-        set区分支給限度額(認定申請結果);
-        set種類支給限度基準額(認定申請結果);
-        set審査会意見(認定申請結果);
-
-        set給付制限(被保険者番号, 被保険者台帳);
-        set支援事業者(被保険者番号);
-        set施設入退所(識別コード);
+        if (認定申請結果optional.isPresent()) {
+            NinteiShinseiKekkaModel 認定申請結果 = 認定申請結果optional.get();
+            set有効期限(認定申請結果);
+            set認定情報(認定申請結果);
+            set区分支給限度額(認定申請結果);
+            set種類支給限度基準額(認定申請結果);
+            set審査会意見(認定申請結果);
+            set支援事業者(被保険者番号);
+        }
 
     }
 
@@ -753,9 +752,12 @@ public class HihokenshaShikakuHakkoHandler {
         支援事業者適用開始日.add(div.getTplShienJigyosha().getTxtTekiyoStYMD1().getValue());
         支援事業者適用開始日.add(div.getTplShienJigyosha().getTxtTekiyoStYMD2().getValue());
         支援事業者適用開始日.add(div.getTplShienJigyosha().getTxtTekiyoStYMD3().getValue());
+
         ArrayList<FlexibleDate> 支援事業者適用終了日List = PanelSessionAccessor.get(div, new RString("支援事業者適用終了日List"), ArrayList.class);
-        for (FlexibleDate date : 支援事業者適用終了日List) {
-            支援事業者適用終了日.add(date);
+        if (支援事業者適用終了日List != null) {
+            for (FlexibleDate date : 支援事業者適用終了日List) {
+                支援事業者適用終了日.add(date);
+            }
         }
 
         model.set支援事業者名称(支援事業者名称);
@@ -782,8 +784,10 @@ public class HihokenshaShikakuHakkoHandler {
         施設退所日.add(div.getTplShisetsuNyutaisho().getTxtShisetsuTaishoDate2().getValue());
         施設退所日.add(div.getTplShisetsuNyutaisho().getTxtShisetsuTaishoDate3().getValue());
         ArrayList<RString> 施設入退所コードList = PanelSessionAccessor.get(div, new RString("施設入退所コードList"), ArrayList.class);
-        for (RString code : 施設入退所コードList) {
-            入所施設コード.add(code);
+        if (施設入退所コードList != null) {
+            for (RString code : 施設入退所コードList) {
+                入所施設コード.add(code);
+            }
         }
 
         model.set施設名(施設名);

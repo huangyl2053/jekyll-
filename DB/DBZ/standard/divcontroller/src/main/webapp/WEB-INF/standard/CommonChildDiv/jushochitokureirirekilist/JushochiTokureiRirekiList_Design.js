@@ -72,7 +72,7 @@ var DBZ;
             };
 
             Controls.prototype.JutokuTekiyoInput = function () {
-                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuTekiyoInput"));
+                return new UZA.Panel(this.convFiledName("JutokuTekiyoInput"));
             };
 
             Controls.prototype.txtTekiyoDate = function () {
@@ -88,7 +88,7 @@ var DBZ;
             };
 
             Controls.prototype.TekiyojiHokenshaJoho = function () {
-                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuTekiyoInput_TekiyojiHokenshaJoho"));
+                return new UZA.Panel(this.convFiledName("TekiyojiHokenshaJoho"));
             };
 
             Controls.prototype.ddlTekiyojiSochimotoHokensha = function () {
@@ -104,7 +104,7 @@ var DBZ;
             };
 
             Controls.prototype.JutokuKaijoInput = function () {
-                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuKaijoInput"));
+                return new UZA.Panel(this.convFiledName("JutokuKaijoInput"));
             };
 
             Controls.prototype.txtKaijoDate = function () {
@@ -120,7 +120,7 @@ var DBZ;
             };
 
             Controls.prototype.KaijojiHokenshaJoho = function () {
-                return new UZA.Panel(this.convFiledName("JutokuInput_JutokuKaijoInput_KaijojiHokenshaJoho"));
+                return new UZA.Panel(this.convFiledName("KaijojiHokenshaJoho"));
             };
 
             Controls.prototype.ddlKaijojiSochimotoHokensha = function () {

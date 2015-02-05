@@ -26,12 +26,11 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
+import jp.co.ndensan.reams.ur.urz.business.IAssociation;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import org.junit.Test;
@@ -60,22 +59,22 @@ public class HihokenshashoB4EditorTest {
 
     public static class constructor extends DbzTestBase {
 
-        HihokenshashoModel model;
-        IZenkokuJushoItem jusho;
+        private HihokenshashoModel model;
+        private IAssociation association;
 
         @Test(expected = NullPointerException.class)
         public void 被保険者証Modelにnullが渡された場合_NullPointerExceptionが発生する() {
             model = null;
-            jusho = mock(IZenkokuJushoItem.class);
-            sut = new HihokenshashoB4Editor(model, jusho);
+            association = mock(IAssociation.class);
+            sut = new HihokenshashoB4Editor(model, association);
             fail();
         }
 
         @Test(expected = NullPointerException.class)
         public void 全国住所にnullが渡された場合_NullPointerExceptionが発生する() {
             model = mock(HihokenshashoModel.class);
-            jusho = null;
-            sut = new HihokenshashoB4Editor(model, jusho);
+            association = null;
+            sut = new HihokenshashoB4Editor(model, association);
             fail();
         }
 
@@ -83,8 +82,8 @@ public class HihokenshashoB4EditorTest {
         public void 被保険者証Modelに設定されている印字位置が_指定無しの場合_IllegalArgumentExceptionが発生する() {
             model = mock(HihokenshashoModel.class);
             when(model.getPosition()).thenReturn(HihokenshashoPrintPosition.指定無し);
-            jusho = null;
-            sut = new HihokenshashoB4Editor(model, jusho);
+            association = null;
+            sut = new HihokenshashoB4Editor(model, association);
             fail();
         }
     }
@@ -215,9 +214,8 @@ public class HihokenshashoB4EditorTest {
 
         private ShikakuKihonEditorBase createMockShikakuKihonEditor(HihokenshashoModel model, HihokenshashoPrintConfig printConfig,
                 HihokenshashoJushoEditConfig hihoJushoEditConfig, ChohyoKyotsuJushoEditConfig kyotsuJushoEditConfig) {
-            IZenkokuJushoItem zenkokuJusho;
-            zenkokuJusho = mock(IZenkokuJushoItem.class);
-            ShikakuKihonEditorBase editorBase = spy(new ShikakuKihonEditorBase(model, zenkokuJusho, printConfig, hihoJushoEditConfig, kyotsuJushoEditConfig));
+            IAssociation association = mock(IAssociation.class);
+            ShikakuKihonEditorBase editorBase = spy(new ShikakuKihonEditorBase(model, association, printConfig, hihoJushoEditConfig, kyotsuJushoEditConfig));
             doCallRealMethod().when(editorBase).set被保険者番号(any(IHihokenshashoCommonEditData.class));
             doNothing().when(editorBase).set住所(any(IHihokenshashoCommonEditData.class));
             doNothing().when(editorBase).set被保険者名(any(IHihokenshashoCommonEditData.class));

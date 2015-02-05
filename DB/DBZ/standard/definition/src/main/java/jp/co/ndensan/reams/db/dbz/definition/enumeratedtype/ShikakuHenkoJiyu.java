@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -16,67 +16,87 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ShikakuHenkoJiyu implements IShikakuIdoJiyu {
 
     /**
-     * なし <br />
+     * EMPTY <br />
      * 資格変更事由がないこと表す。<br />
-     * コード : 00
+     * コード : EMPTY
      */
-    なし("00"),
-    /** 転入 <br />
+    EMPTY("", ""),
+    /**
+     * 転居 <br />
      * コード : 01
      */
-    転入("01"),
-    /** 年齢到達 <br />
+    転居("01", "転居"),
+    /**
+     * 氏名変更 <br />
      * コード : 02
      */
-    年齢到達("02"),
-    /** 外国人 <br />
+    氏名変更("02", "氏名変更"),
+    /**
+     * 広域内転居 <br />
      * コード : 03
      */
-    外国人("03"),
+    広域内転居("03", "広域内転居"),
     /**
-     * 二号申請 <br />
+     * 広住特適用 <br />
      * コード : 04
      */
-    二号申請("04"),
+    広住特適用("04", "広住特適用"),
     /**
-     * 他特例居住 <br />
+     * 広住特転入 <br />
      * コード : 05
      */
-    他特例居住("05"),
+    広住特転入("05", "広住特転入"),
     /**
-     * 除外者居住<br />
+     * 広住特居住<br />
      * コード : 06
      */
-    除外者居住("06"),
+    広住特居住("06", "広住特居住"),
     /**
-     * 帰化 <br />
+     * 広住特転居<br />
      * コード : 07
      */
-    帰化("07"),
+    広住特転居("07", "広住特転居"),
     /**
-     * 国籍取得 <br />
+     * 合併内転居<br />
      * コード : 08
      */
-    国籍取得("08"),
+    合併内転居("08", "合併内転居"),
     /**
-     * 職権取得 <br />
+     * 一本化<br />
      * コード : 09
      */
-    職権取得("09"),
+    一本化("09", "一本化"),
     /**
-     * 施行時取得 <br />
+     * 第1号到達<br />
      * コード : 10
      */
-    施行時取得("10"),
+    第1号到達("10", "第1号到達"),
+    /**
+     * 合併<br />
+     * コード : 11
+     */
+    合併("11", "合併"),
+    /**
+     * 帰化 <br />
+     * コード : 12
+     */
+    帰化("12", "帰化"),
+    /**
+     * 国籍取得 <br />
+     * コード : 13
+     */
+    国籍取得("13", "国籍取得"),
     /**
      * その他 <br />
      * コード : 99
      */
-    その他("99");
+    その他("99", "その他");
     private final RString code;
+    private final RString shortName;
 
-    private ShikakuHenkoJiyu(String code) {
+    private ShikakuHenkoJiyu(String code, String shortName) {
         this.code = new RString(code);
+        this.shortName = new RString(shortName);
     }
 
     @Override
@@ -86,27 +106,32 @@ public enum ShikakuHenkoJiyu implements IShikakuIdoJiyu {
 
     @Override
     public RString getName() {
-        return new RString(name());
+        return shortName;
     }
 
     @Override
     public RString getShortName() {
-        return new RString(name());
+        return shortName;
     }
 
     /**
      * 指定のコードに対応するShikakuHenkoJiyuを返します。
+     * 空文字列、もしくはnullを受け取った場合は"EMPTY"を表すShikakuHenkoJiyuを返します。
      *
      * @param code コード
      * @return 指定のコードに対応するShikakuHenkoJiyu
      * @throws IllegalArgumentException 指定のコードに対応するShikakuHenkoJiyuがないとき。
      */
     public static ShikakuHenkoJiyu toValue(RString code) throws IllegalArgumentException {
+        if (code == null || code.isEmpty()) {
+            return EMPTY;
+        }
+
         for (ShikakuHenkoJiyu target : values()) {
             if (target.getCode().equals(code)) {
                 return target;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("コード:" + code + " に対応する資格変更事由").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("コード:" + code + " に対応する資格変更事由").evaluate());
     }
 }

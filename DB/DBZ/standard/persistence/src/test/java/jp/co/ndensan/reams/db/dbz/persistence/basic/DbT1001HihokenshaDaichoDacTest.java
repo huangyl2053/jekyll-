@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
@@ -193,7 +194,7 @@ public class DbT1001HihokenshaDaichoDacTest extends DbzTestDacBase {
         public static void insert(
                 LasdecCode 市町村コード,
                 HihokenshaNo 被保険者番号,
-                YMDHMS 処理日時) {
+                ShoriTimestamp 処理日時) {
             DbT1001HihokenshaDaichoEntity entity = DbT1001HihokenshaDaichoEntityGenerator.createDbT1001HihokenshaDaichoEntity();
             entity.setShichosonCode(市町村コード);
             entity.setHihokenshaNo(被保険者番号);

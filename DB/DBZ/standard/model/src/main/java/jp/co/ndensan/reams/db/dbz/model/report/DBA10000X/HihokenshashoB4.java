@@ -505,11 +505,11 @@ public class HihokenshashoB4 implements IHihokenshasho {
     public RString kosekiSeibetsu22;
     @ReportItem(name = "kosekiSeibetsu21", length = 4, order = 248)
     public RString kosekiSeibetsu21;
-    @ReportItemGroup(groupName = "tsuchishoSofusaki1", order = 249)
+    @ReportItemGroup(groupName = "sofusakiAtena1", order = 249)
     // TODO n8178 AtesakiSourceをModelパッケージに移動した後変更する。 2014/1/9
-    public TsuchishoAtesakiSource tsuchishoSource1;
-    @ReportItemGroup(groupName = "tsuchishoSofusaki2", order = 250)
-    public TsuchishoAtesakiSource tsuchishoSource2;
+    public TsuchishoAtesakiSource sofusakiAtena1;
+    @ReportItemGroup(groupName = "sofusakiAtena2", order = 250)
+    public TsuchishoAtesakiSource sofusakiAtena2;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

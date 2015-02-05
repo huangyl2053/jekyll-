@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.message;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
-import static jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.message.MessageCreateHelper.toCode;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.message.MessageCreateHelper.toCode;
 
 /**
  * DBCのインフォメーションメッセージ定義列挙型です。

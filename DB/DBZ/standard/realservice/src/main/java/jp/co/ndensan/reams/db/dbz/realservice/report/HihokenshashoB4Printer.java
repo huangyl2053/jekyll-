@@ -15,8 +15,8 @@ import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoB4;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
+import jp.co.ndensan.reams.ur.urz.business.IAssociation;
 import jp.co.ndensan.reams.ur.urz.business.ITsuchishoAtesaki;
-import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
 import jp.co.ndensan.reams.ur.urz.business.report.IReportBuilder;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
 
@@ -33,7 +33,7 @@ public class HihokenshashoB4Printer {
     private static final RString REPORT_ID_B4;
 
     static {
-        REPORT_ID_B4 = new RString("DBA100001");
+        REPORT_ID_B4 = new RString("DBA100001_HihokenshashoB4");
     }
 
     /**
@@ -74,13 +74,14 @@ public class HihokenshashoB4Printer {
 
         HihokenshashoModel target = new HihokenshashoModel(daichoModel, kojin, shikakuHakkoModel, position);
 
-        ITsuchishoAtesaki tsuchishoAtesaki = printerBase.getTsuchishoAtesaki(target.getShikakuHakko().get交付日(), target.getKojinJoho().get識別コード());
-        IZenkokuJushoItem zenkokuJusho = printerBase.getZenkokuJusho(target);
+        ITsuchishoAtesaki tsuchishoAtesaki = printerBase.getTsuchishoAtesaki(
+                target.getShikakuHakko().get交付日(), target.getKojinJoho().get識別コード());
+        IAssociation assosiation = printerBase.getAssociation();
 
         formType = HihokenshashoB4.class;
         reportId = REPORT_ID_B4;
         builder = hihoshoBuilderFactory
-                .createInstanceForB4(target, zenkokuJusho, tsuchishoAtesaki);
+                .createInstanceForB4(target, assosiation, tsuchishoAtesaki);
 
         return printerBase.print(formType, reportId, builder);
     }

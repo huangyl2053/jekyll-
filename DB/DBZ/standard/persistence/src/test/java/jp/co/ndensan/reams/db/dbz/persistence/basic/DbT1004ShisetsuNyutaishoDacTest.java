@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
@@ -39,6 +40,7 @@ public class DbT1004ShisetsuNyutaishoDacTest extends DbzTestDacBase {
     private static final RString キー_03 = new RString("03");
     private static final LasdecCode 市町村コード202012 = new LasdecCode("202012");
     private static final LasdecCode 市町村コード202013 = new LasdecCode("202013");
+    private static final YMDHMS shoriTimestamp = new YMDHMS("20991231010101");
     private static DbT1004ShisetsuNyutaishoDac sut;
 
     @BeforeClass
@@ -53,47 +55,53 @@ public class DbT1004ShisetsuNyutaishoDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    shoriTimestamp);
             TestSupport.insert(
                     市町村コード202012,
                     DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    shoriTimestamp);
         }
 
         @Test(expected = NullPointerException.class)
         public void 市町村コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    市町村コード202012,
-                    DEFAULT_識別コード);
+                    null,
+                    DEFAULT_識別コード,
+                    shoriTimestamp);
         }
 
         @Test(expected = NullPointerException.class)
         public void 識別コードがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    市町村コード202012,
-                    DEFAULT_識別コード);
+                    DEFAULT_市町村コード,
+                    null,
+                    shoriTimestamp);
         }
 
         @Test(expected = NullPointerException.class)
         public void 処理日時がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
                     市町村コード202012,
-                    DEFAULT_識別コード);
+                    DEFAULT_識別コード,
+                    null);
         }
 
         @Test
         public void 存在する主キーを渡すと_selectByKeyは_該当のエンティティを返す() {
             DbT1004ShisetsuNyutaishoEntity insertedRecord = sut.selectByKey(
-                    市町村コード202012,
-                    DEFAULT_識別コード);
+                    DEFAULT_市町村コード,
+                    DEFAULT_識別コード,
+                    shoriTimestamp);
             assertThat(insertedRecord, is(notNullValue()));
         }
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             DbT1004ShisetsuNyutaishoEntity insertedRecord = sut.selectByKey(
-                    市町村コード202012,
-                    DEFAULT_識別コード);
+                    市町村コード202013,
+                    DEFAULT_識別コード,
+                    shoriTimestamp
+            );
             assertThat(insertedRecord, is(nullValue()));
         }
     }
@@ -105,11 +113,11 @@ public class DbT1004ShisetsuNyutaishoDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    shoriTimestamp);
             TestSupport.insert(
                     市町村コード202012,
                     DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    shoriTimestamp);
             assertThat(sut.selectAll().size(), is(2));
         }
 
@@ -126,11 +134,14 @@ public class DbT1004ShisetsuNyutaishoDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    shoriTimestamp);
 
             assertThat(sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_識別コード), is(notNullValue()));
+                    DEFAULT_識別コード,
+                    shoriTimestamp
+            ), is(notNullValue())
+            );
         }
     }
 
@@ -141,22 +152,23 @@ public class DbT1004ShisetsuNyutaishoDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    shoriTimestamp);
         }
 
         @Test
         public void 介護保険施設入退所エンティティを渡すと_updateは_介護保険施設入退所を更新する() {
             DbT1004ShisetsuNyutaishoEntity updateRecord = DbT1004ShisetsuNyutaishoEntityGenerator.createDbT1004ShisetsuNyutaishoEntity();
-            // TODO 主キー以外の項目を変更してください
-            //           updateRecord.set変更したい項目(75);
-
+            FlexibleDate updateDate = new FlexibleDate("20221103");
+            updateRecord.setTaishoYMD(updateDate);
             sut.update(updateRecord);
 
             DbT1004ShisetsuNyutaishoEntity updatedRecord = sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_識別コード);
+                    DEFAULT_識別コード,
+                    shoriTimestamp
+            );
 
-            //         assertThat(updateRecord.get変更したい項目(), is(updatedRecord.get変更したい項目()));
+            assertThat(updateRecord.getTaishoYMD(), is(updateDate));
         }
     }
 
@@ -167,17 +179,21 @@ public class DbT1004ShisetsuNyutaishoDacTest extends DbzTestDacBase {
             TestSupport.insert(
                     DEFAULT_市町村コード,
                     DEFAULT_識別コード,
-                    DEFAULT_処理日時);
+                    shoriTimestamp);
         }
 
         @Test
         public void 介護保険施設入退所エンティティを渡すと_deleteは_介護保険施設入退所を削除する() {
             sut.delete(sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_識別コード));
+                    DEFAULT_識別コード,
+                    shoriTimestamp
+            ));
             assertThat(sut.selectByKey(
                     DEFAULT_市町村コード,
-                    DEFAULT_識別コード), is(nullValue()));
+                    DEFAULT_識別コード,
+                    shoriTimestamp),
+                    is(nullValue()));
         }
     }
 

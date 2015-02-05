@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuShutokuJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -209,9 +211,9 @@ public class HihokenshaDaichoViewDacTest extends DbzTestDacBase {
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         entity.setShichosonCode(new LasdecCode(市町村コード));
         entity.setHihokenshaNo(new HihokenshaNo(new RString(被保険者番号)));
-        entity.setShoriTimestamp(new YMDHMS(処理日時));
+        entity.setShoriTimestamp(ShoriTimestamp.of(new YMDHMS(処理日時)));
         entity.setShikibetsuCode(new ShikibetsuCode("000000000000001"));
-        entity.setShikakuShutokuJiyuCode(new RString("01"));
+        entity.setShikakuShutokuJiyuCode(new KaigoShikakuShutokuJiyu(new RString("01")));
         entity.setShikakuShutokuYMD(FlexibleDate.MIN);
         entity.setHihokennshaKubunCode(new RString("1"));
         entity.setKoikinaiTokureiSochimotoShichosonCode(new LasdecCode((措置元市町村コード)));

@@ -36,6 +36,18 @@
             </exclusions>
         </dependency>
         <dependency>
+            <artifactId>DbaPersistence</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urd</groupId>
+            <artifactId>UrdPersistence</artifactId>
+            <version>${project.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
             <groupId>jp.co.ndensan.reams.ur.ura</groupId>
             <artifactId>UraDivController</artifactId>
             <classifier>classes</classifier>
@@ -62,6 +74,12 @@
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>1.13</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzBusiness</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

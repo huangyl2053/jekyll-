@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.realservice.KaigoJogaiTokureiTaishoShisetsuManager;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -37,7 +38,7 @@ public class TestShisetsuNyutaishoRirekiKanri {
      */
     public ResponseData<testShisetsuNyutaishoRirekiKanriDiv> onLoad(testShisetsuNyutaishoRirekiKanriDiv div) {
 
-        div.getCcdShisetsuNyutaishRirekiKanri().initialize();
+        div.getCcdShisetsuNyutaishRirekiKanri().initialize(new LasdecCode("012345"), new ShikibetsuCode("012340123400001"));
         div.getCcdShisetsuNyutaishRirekiKanri().load(SHIKIBETSU_CODE);
 
         //施設入退情報

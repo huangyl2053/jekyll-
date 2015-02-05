@@ -49,7 +49,24 @@ public interface IShisetsuNyutaishoRirekiKanriDiv {
 
     /**
      * 共有子Divの初期化を行います。<br />
-     * 利用機能モードの設定を元に初期化します。
+     * 引数を元に処理対象者の情報を設定し、利用機能モードの設定を元に初期化を行います。
+     *
+     * @param shichosonCode 処理対象者の市町村コード
+     * @param shikibetsuCode 処理対象者の識別コード
      */
-    void initialize();
+    void initialize(LasdecCode shichosonCode, ShikibetsuCode shikibetsuCode);
+
+    /**
+     * 自身が持つ施設入退所情報に対して変更が存在した場合に、trueを返します。
+     *
+     * @return 施設入退所情報に変更が有った場合、true
+     */
+    boolean hasChanged();
+
+    /**
+     * 明細パネルが変更されたかどうかを判定します。
+     *
+     * @return 明細パネルの内容が変更されていたらtrue
+     */
+    boolean hasChangedInMeisai();
 }

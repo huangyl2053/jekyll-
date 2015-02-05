@@ -8,8 +8,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho.shichosonCode;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho.shikibetsuCode;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaisho.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -38,23 +37,27 @@ public class DbT1004ShisetsuNyutaishoDac implements IModifiable<DbT1004ShisetsuN
      *
      * @param 市町村コード 市町村コード
      * @param 識別コード 識別コード
+     * @param 処理日時 処理日時
      * @return DbT1004ShisetsuNyutaishoEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public DbT1004ShisetsuNyutaishoEntity selectByKey(
             LasdecCode 市町村コード,
-            ShikibetsuCode 識別コード) throws NullPointerException {
+            ShikibetsuCode 識別コード,
+            YMDHMS 処理日時) throws NullPointerException {
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
 
-        DbAccessorForAddType accessor = new DbAccessorForAddType(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT1004ShisetsuNyutaisho.class).
                 where(and(
                                 eq(shichosonCode, 市町村コード),
-                                eq(shikibetsuCode, 識別コード))).
+                                eq(shikibetsuCode, 識別コード),
+                                eq(shoriTimestamp, 処理日時))).
                 toObject(DbT1004ShisetsuNyutaishoEntity.class);
     }
 
@@ -100,10 +103,6 @@ public class DbT1004ShisetsuNyutaishoDac implements IModifiable<DbT1004ShisetsuN
     }
 
     void insertDenialRow(DbT1004ShisetsuNyutaishoEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void selectByKey(Object object, ShikibetsuCode DEFAULT_識別コード, YMDHMS DEFAULT_処理日時) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
