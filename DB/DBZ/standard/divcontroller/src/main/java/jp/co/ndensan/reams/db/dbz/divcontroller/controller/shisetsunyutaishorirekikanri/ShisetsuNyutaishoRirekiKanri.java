@@ -48,6 +48,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * 共有子Divのロード時に行う処理です。
      *
      * @param shisetsuNyutaishoRirekiDiv
+     * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return レスポンス
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onLoad(ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
@@ -326,7 +327,8 @@ public class ShisetsuNyutaishoRirekiKanri {
      * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
-    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoKakutei(ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
+    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoKakutei(
+            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
 
         //TODO
         //１）追加を確定する場合以下の処理を行う。
@@ -364,7 +366,8 @@ public class ShisetsuNyutaishoRirekiKanri {
      * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
-    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoTorikeshi(ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
+    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoTorikeshi(
+            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
 
         ResponseData<ShisetsuNyutaishoRirekiKanriDiv> response = new ResponseData<>();
         //TODO
@@ -395,12 +398,18 @@ public class ShisetsuNyutaishoRirekiKanri {
                 int rowIndex = Integer.valueOf(shisetsuNyutaishoRirekiDiv.getSelectRow().toString()).intValue();
                 dgShisetsuNyutaishoRireki_Row 選択行 = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rowIndex);
 
-                RString 入所年月日 = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().toString()));
-                RString 退所年月日 = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().toString()));
-                RString 台帳種別 = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get台帳種別().toString()));
-                RString 入所施設種類 = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類().getCode().toString()));
-                RString 入所施設コード = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get入所施設コード().toString()));
-                RString 施設名称 = composeNulltoStr(new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設名称().toString()));
+                RString 入所年月日 = composeNulltoStr(
+                        new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().toString()));
+                RString 退所年月日 = composeNulltoStr(
+                        new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().toString()));
+                RString 台帳種別 = composeNulltoStr(
+                        new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get台帳種別().toString()));
+                RString 入所施設種類 = composeNulltoStr(
+                        new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類().getCode().toString()));
+                RString 入所施設コード = composeNulltoStr(
+                        new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get入所施設コード().toString()));
+                RString 施設名称 = composeNulltoStr(
+                        new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設名称().toString()));
 
                 if (!入所年月日.equals(composeNulltoStr(new RString(選択行.getNyushoDate().getValue().toString())))) {
                     flg = Boolean.TRUE;

@@ -95,75 +95,75 @@ public interface IKoikiKoseiShichosonMaster extends IHokensha {
      *
      * @return {@link RokenJukyushaNoTaikei 老人保健受給者番号体系}
      */
-    public RokenJukyushaNoTaikei get老人保健受給者番号体系();
+    RokenJukyushaNoTaikei get老人保健受給者番号体系();
 
     /**
      * 移行日を返します。
      *
      * @return 移行日
      */
-    public FlexibleDate get移行日();
+    FlexibleDate get移行日();
 
     /**
      * 広域への加入日を返します。
      *
      * @return 加入日
      */
-    public FlexibleDate get加入日();
+    FlexibleDate get加入日();
 
     /**
      * 広域からの脱退日を返します。
      *
      * @return 広域からの脱退日
      */
-    public FlexibleDate get離脱日();
+    FlexibleDate get離脱日();
 
     /**
      * 合併した旧市町村かそうでないかの区分を返します。
      *
      * @return {@link GappeiKyuShichosonKubun 合併旧市町村区分}
      */
-    public GappeiKyuShichosonKubun get合併旧市町村区分();
+    GappeiKyuShichosonKubun get合併旧市町村区分();
 
     /**
      * 合併旧市町村で表示をする必要がある市町村かどうかを返します。
      *
      * @return {@link GappeiKyuShichosonHyoji 合併旧市町村表示有無}
      */
-    public GappeiKyuShichosonHyoji get合併旧市町村表示有無();
+    GappeiKyuShichosonHyoji get合併旧市町村表示有無();
 
     /**
      * 合併地域番号を返します。
      *
      * @return {@link GappeiChiikiNo get合併情報リンク番号}
      */
-    public GappeiChiikiNo get合併地域番号();
+    GappeiChiikiNo get合併地域番号();
 
     /**
      * 運用保険者番号を返します。
      *
      * @return 運用{@link ShoKisaiHokenshaNo 保険者番号}
      */
-    public ShoKisaiHokenshaNo get運用保険者番号();
+    ShoKisaiHokenshaNo get運用保険者番号();
 
     /**
      * 運用開始日を返します。
      *
      * @return 運用開始日
      */
-    public FlexibleDate get運用開始日();
+    FlexibleDate get運用開始日();
 
     /**
      * 運用終了日を返します。
      *
      * @return 運用終了日
      */
-    public FlexibleDate get運用終了日();
+    FlexibleDate get運用終了日();
 
     /**
      * 運用形態区分を返します。
      *
      * @return {@link UnyoKeitaiKubun 運用形態区分}
      */
-    public UnyoKeitaiKubun get運用形態区分();
+    UnyoKeitaiKubun get運用形態区分();
 }
