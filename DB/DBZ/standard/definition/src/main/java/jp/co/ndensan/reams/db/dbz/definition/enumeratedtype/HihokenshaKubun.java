@@ -76,5 +76,4 @@ public enum HihokenshaKubun {
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage(HihokenshaKubun.class.getSimpleName()));
     }
-
 }

@@ -46,6 +46,7 @@ public class ShichosonSecurity {
      *
      * @return 市町村識別ID。介護業務未導入の場合はnullを返します。
      */
+    //TODO n3327 三浦凌 nullを返すのではなく、NullObjectを返すように修正する。
     public ShichosonShikibetsuID get市町村識別ID() {
         return 介護導入 ? 市町村識別ID : null;
     }
@@ -55,6 +56,7 @@ public class ShichosonSecurity {
      *
      * @return 市町村コード。介護業務未導入の場合はnullを返します。
      */
+    //TODO n3327 三浦凌 nullを返すのではなく、NullObjectを返すように修正する。
     public LasdecCode get市町村コード() {
         return 介護導入 ? 市町村コード : null;
     }

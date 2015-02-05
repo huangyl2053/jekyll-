@@ -25,7 +25,7 @@ public interface IHihokenshashoCommonEditData extends ITsuchishoAtesakiSourceMap
      */
     void setYukokigen(RString yukokigen);
 
-    /*
+    /**
      * @return the yukokigen2
      */
     RString getYukokigen2();

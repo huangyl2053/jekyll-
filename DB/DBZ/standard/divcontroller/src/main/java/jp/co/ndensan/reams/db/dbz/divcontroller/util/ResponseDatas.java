@@ -26,8 +26,21 @@ public final class ResponseDatas {
      * @param <T> ResponseDataが持つdataの型
      * @param postData ResponseDataに渡すデータ
      * @return 引数から受け取った値を、dataに設定したResponseData
+     * @deprecated {@link #newResponseData(java.lang.Object)}を使用して下さい。
      */
+    @Deprecated
     public static <T> ResponseData<T> createSettingDataTo(T postData) {
+        return newResponseData(postData);
+    }
+
+    /**
+     * ResponseDataを生成し、引数から受け取った値を設定して返します。
+     *
+     * @param <T> ResponseDataが持つdataの型
+     * @param postData ResponseDataに渡すデータ
+     * @return 引数から受け取った値を、dataに設定したResponseData
+     */
+    public static <T> ResponseData<T> newResponseData(T postData) {
         ResponseData<T> response = new ResponseData<>();
         response.data = postData;
         return response;
