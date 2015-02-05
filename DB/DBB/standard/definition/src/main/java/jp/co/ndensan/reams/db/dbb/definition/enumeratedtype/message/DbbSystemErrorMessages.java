@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.message;
 
 import java.util.regex.Pattern;
-import static jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.message.MessageCreateHelper.toCode;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

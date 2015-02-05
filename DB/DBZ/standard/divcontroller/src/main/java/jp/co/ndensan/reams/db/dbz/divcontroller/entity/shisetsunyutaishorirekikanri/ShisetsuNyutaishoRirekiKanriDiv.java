@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -39,6 +40,10 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     private RString selectRow;
     @JsonProperty("inputMode")
     private RString inputMode;
+    @JsonProperty("shichosonCode")
+    private RString shichosonCode;
+    @JsonProperty("shikibetsuCode")
+    private RString shikibetsuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -94,6 +99,26 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     @JsonProperty("inputMode")
     public void setInputMode(RString inputMode) {
         this.inputMode = inputMode;
+    }
+
+    @JsonProperty("shichosonCode")
+    public RString getShichosonCode() {
+        return shichosonCode;
+    }
+
+    @JsonProperty("shichosonCode")
+    public void setShichosonCode(RString shichosonCode) {
+        this.shichosonCode = shichosonCode;
+    }
+
+    @JsonProperty("shikibetsuCode")
+    public RString getShikibetsuCode() {
+        return shikibetsuCode;
+    }
+
+    @JsonProperty("shikibetsuCode")
+    public void setShikibetsuCode(RString shikibetsuCode) {
+        this.shikibetsuCode = shikibetsuCode;
     }
 
     /*
@@ -218,7 +243,7 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
         _CommonChildDivModeUtil.setMode(this.modes, 施設種類の列を.class, value);
     }
 
-    public static enum 表示heightサイズ implements ICommonChildDivMode {
+    public static enum 表示Heightサイズ implements ICommonChildDivMode {
 
         サイズ200("サイズ200"),
         サイズ250("サイズ250"),
@@ -230,14 +255,14 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
 
         private final String name;
 
-        private 表示heightサイズ(final String name) {
+        private 表示Heightサイズ(final String name) {
             this.name = name;
         }
 
-        public static 表示heightサイズ getEnum(String str) {
-            表示heightサイズ[] enumArray = 表示heightサイズ.values();
+        public static 表示Heightサイズ getEnum(String str) {
+            表示Heightサイズ[] enumArray = 表示Heightサイズ.values();
 
-            for (表示heightサイズ enumStr : enumArray) {
+            for (表示Heightサイズ enumStr : enumArray) {
                 if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
@@ -252,12 +277,12 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
 
     }
 
-    public 表示heightサイズ getMode_表示heightサイズ() {
-        return (表示heightサイズ) _CommonChildDivModeUtil.getMode(this.modes, 表示heightサイズ.class);
+    public 表示Heightサイズ getMode_表示heightサイズ() {
+        return (表示Heightサイズ) _CommonChildDivModeUtil.getMode(this.modes, 表示Heightサイズ.class);
     }
 
-    public void setMode_表示heightサイズ(表示heightサイズ value) {
-        _CommonChildDivModeUtil.setMode(this.modes, 表示heightサイズ.class, value);
+    public void setMode_表示heightサイズ(表示Heightサイズ value) {
+        _CommonChildDivModeUtil.setMode(this.modes, 表示Heightサイズ.class, value);
     }
 
     public static enum 表示モード implements ICommonChildDivMode {
@@ -417,8 +442,9 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     }
 
     @Override
-    public void initialize() {
-        //TODO
+    public void initialize(LasdecCode shichosonCode, ShikibetsuCode shikibetsuCode) {
+        this.shichosonCode = shichosonCode.getColumnValue();
+        this.shikibetsuCode = shikibetsuCode.getColumnValue();
         getHandler().initialize();
     }
 
@@ -426,6 +452,16 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
     @JsonIgnore
     private ShisetsuNyutaishoRirekiKanriHandler getHandler() {
         return new ShisetsuNyutaishoRirekiKanriHandler(this);
+    }
+
+    @Override
+    public boolean hasChanged() {
+        return getHandler().hasChanged();
+    }
+
+    @Override
+    public boolean hasChangedInMeisai() {
+        return getHandler().hasChangedInMeisai();
     }
 
 }

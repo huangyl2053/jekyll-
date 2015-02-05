@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -16,105 +16,72 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ShikakuShutokuJiyu implements IShikakuIdoJiyu {
 
     /**
-     * なし <br />
+     * EMPTY <br />
      * 資格取得事由がないこと表す。<br />
-     * コード : 00
+     * コード : EMPTY
      */
-    なし("00"),
+    EMPTY("", ""),
     /**
      * 転入 <br />
      * コード : 01
      */
-    転入("01"),
+    転入("01", "転入"),
     /**
      * 年齢到達 <br />
      * コード : 02
      */
-    年齢到達("02"),
+    年齢到達("02", "年齢到達"),
     /**
      * 外国人 <br />
      * コード : 03
      */
-    外国人("03"),
+    外国人("03", "外国人"),
     /**
      * ２号申請 <br />
      * コード : 04
      */
-    第２号申請("04"),
+    第２号申請("04", "第２号申請"),
     /**
      * 他特例居住 <br />
-     * コード : 07
+     * コード : 05
      */
-    他特例居住("07"),
+    他特例居住("05", "他特例居住"),
     /**
      * 除外者居住 <br />
-     * コード : 08
+     * コード : 06
      */
-    除外者居住("08"),
+    除外者居住("06", "除外者居住"),
     /**
      * 帰化 <br />
-     * コード : 09
+     * コード : 07
      */
-    帰化("09"),
-    /**
-     * 広域内転入 <br />
-     * コード : 11
-     */
-    広域内転入("11"),
+    帰化("07", "帰化"),
     /**
      * 国籍取得 <br />
-     * コード : 12
+     * コード : 08
      */
-    国籍取得("12"),
-    /**
-     * 広住特適用 <br />
-     * コード : 13
-     */
-    広住特適用("13"),
-    /**
-     * 広住特転入 <br />
-     * コード : 14
-     */
-    広住特転入("14"),
-    /**
-     * 広住特居住 <br />
-     * コード : 15
-     */
-    広住特居住("15"),
-    /**
-     * 合併内転居 <br />
-     * コード : 16
-     */
-    合併内転居("16"),
+    国籍取得("08", "国籍取得"),
     /**
      * 職権取得 <br />
-     * コード : 17
+     * コード : 09
      */
-    職権取得("17"),
+    職権取得("09", "職権取得"),
     /**
-     * 一本化 <br />
-     * コード : 41
+     * 施行時取得 <br />
+     * コード : 10
      */
-    一本化("41"),
-    /**
-     * 合併 <br />
-     * コード : 42
-     */
-    合併("42"),
-    /**
-     * 施工時取得 <br />
-     * コード : 46
-     */
-    施工時取得("46"),
+    施行時取得("10", "施行時取得"),
     /**
      * その他 <br />
-     * コード : 49
+     * コード : 99
      */
-    その他("49");
+    その他("99", "その他");
     private final RString code;
+    private final RString shortName;
 
-    private ShikakuShutokuJiyu(String code) {
+    private ShikakuShutokuJiyu(String code, String shortName) {
         this.code = new RString(code);
+        this.shortName = new RString(shortName);
     }
 
     @Override
@@ -124,27 +91,32 @@ public enum ShikakuShutokuJiyu implements IShikakuIdoJiyu {
 
     @Override
     public RString getName() {
-        return new RString(name());
+        return shortName;
     }
 
     @Override
     public RString getShortName() {
-        return new RString(name());
+        return shortName;
     }
 
     /**
-     * 指定のコードに対応するShikakuShutokuJiyuを返します。
+     * 指定のコードに対応するShikakuShutokuJiyuを返します。<br/>
+     * 空文字列、もしくはnullを受け取った場合は"EMPTY"を表すShikakuShutokuJiyuを返します。
      *
      * @param code コード
      * @return 指定のコードに対応するShikakuShutokuJiyu
      * @throws IllegalArgumentException 指定のコードに対応するShikakuShutokuJiyuがないとき。
      */
     public static ShikakuShutokuJiyu toValue(RString code) throws IllegalArgumentException {
+        if (code == null || code.isEmpty()) {
+            return EMPTY;
+        }
+
         for (ShikakuShutokuJiyu target : values()) {
             if (target.getCode().equals(code)) {
                 return target;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("コード:" + code + " に対応する資格取得事由").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("コード:" + code + " に対応する資格取得事由").evaluate());
     }
 }

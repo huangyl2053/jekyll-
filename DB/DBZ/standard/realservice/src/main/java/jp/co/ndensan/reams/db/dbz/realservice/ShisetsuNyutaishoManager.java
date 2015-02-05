@@ -4,7 +4,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
@@ -12,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.relate.ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -45,12 +45,13 @@ public class ShisetsuNyutaishoManager {
      *
      * @param 市町村コード LasdecCode
      * @param 識別コード ShikibetsuCode
+     * @param 処理日時 YMDHMS
      * @return ShisetsuNyutaishoModel
      */
     @Transaction
-    public Optional<ShisetsuNyutaishoRelateModel> get介護保険施設入退所(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+    public Optional<ShisetsuNyutaishoRelateModel> get介護保険施設入退所(LasdecCode 市町村コード, ShikibetsuCode 識別コード, YMDHMS 処理日時) {
 
-        return dac.select介護保険施設入退所ByKey(市町村コード, 識別コード);
+        return dac.select介護保険施設入退所ByKey(市町村コード, 識別コード, 処理日時);
     }
 
     /**

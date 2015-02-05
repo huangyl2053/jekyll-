@@ -5,12 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0000001.testShisetsuNyutaishoRirekiKanriDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
+import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
 import jp.co.ndensan.reams.db.dbz.realservice.ShisetsuNyutaishoManager;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.realservice.KaigoJogaiTokureiTaishoShisetsuManager;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 施設履歴管理共有子Divのテスト画面のコントローラクラスです。※テスト用※
@@ -32,7 +38,7 @@ public class TestShisetsuNyutaishoRirekiKanri {
      */
     public ResponseData<testShisetsuNyutaishoRirekiKanriDiv> onLoad(testShisetsuNyutaishoRirekiKanriDiv div) {
 
-        div.getCcdShisetsuNyutaishRirekiKanri().initialize();
+        div.getCcdShisetsuNyutaishRirekiKanri().initialize(new LasdecCode("012345"), new ShikibetsuCode("012340123400001"));
         div.getCcdShisetsuNyutaishRirekiKanri().load(SHIKIBETSU_CODE);
 
         //施設入退情報
@@ -57,6 +63,14 @@ public class TestShisetsuNyutaishoRirekiKanri {
 //        }
 //
 //        div.getCcdShisetsuNyutaishRirekiKanri().set施設入退所履歴(shisetsuNyutaishoIchiranList);
-        return ResponseDatas.newResponseData(div);
+        return createResponse(div);
     }
+
+    private ResponseData<testShisetsuNyutaishoRirekiKanriDiv> createResponse(testShisetsuNyutaishoRirekiKanriDiv div) {
+
+        ResponseData<testShisetsuNyutaishoRirekiKanriDiv> response = new ResponseData();
+        response.data = div;
+        return response;
+    }
+
 }

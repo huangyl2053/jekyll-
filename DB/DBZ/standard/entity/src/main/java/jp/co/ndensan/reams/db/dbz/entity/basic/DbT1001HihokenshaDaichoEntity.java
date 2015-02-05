@@ -3,9 +3,7 @@ package jp.co.ndensan.reams.db.dbz.entity.basic;
 import java.util.Objects;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -13,14 +11,24 @@ import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuShutokuJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuHenkoJiyu;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * DbT1001HihokenshaDaichoの項目定義クラスです
  *
  */
 public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001HihokenshaDaichoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
 
+    // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1001HihokenshaDaicho");
 
@@ -37,24 +45,24 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private YMDHMS shoriTimestamp;
+    private ShoriTimestamp shoriTimestamp;
     private ShikibetsuCode shikibetsuCode;
-    private RString shikakuShutokuJiyuCode;
+    private KaigoShikakuShutokuJiyu shikakuShutokuJiyuCode;
     private FlexibleDate shikakuShutokuYMD;
     private FlexibleDate shikakuShutokuTodokedeYMD;
     private FlexibleDate ichigoShikakuShutokuYMD;
     private RString hihokennshaKubunCode;
-    private RString shikakuSoshitsuJiyuCode;
+    private KaigoShikakuSoshitsuJiyu shikakuSoshitsuJiyuCode;
     private FlexibleDate shikakuSoshitsuYMD;
     private FlexibleDate shikakuSoshitsuTodokedeYMD;
     private RString jushochiTokureiFlag;
-    private RString shikakuHenkoJiyuCode;
+    private KaigoShikakuHenkoJiyu shikakuHenkoJiyuCode;
     private FlexibleDate shikakuHenkoYMD;
     private FlexibleDate shikakuHenkoTodokedeYMD;
-    private RString jushochitokureiTekiyoJiyuCode;
+    private KaigoShikakuJutokuTekiyoJiyu jushochitokureiTekiyoJiyuCode;
     private FlexibleDate jushochitokureiTekiyoYMD;
     private FlexibleDate jushochitokureiTekiyoTodokedeYMD;
-    private RString jushochitokureiKaijoJiyuCode;
+    private KaigoShikakuJutokuKaijoJiyu jushochitokureiKaijoJiyuCode;
     private FlexibleDate jushochitokureiKaijoYMD;
     private FlexibleDate jushochitokureiKaijoTodokedeYMD;
     private RString koikinaiJushochiTokureiFlag;
@@ -150,7 +158,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return shoriTimestamp
      */
-    public YMDHMS getShoriTimestamp() {
+    public ShoriTimestamp getShoriTimestamp() {
         return shoriTimestamp;
     }
 
@@ -159,7 +167,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param shoriTimestamp shoriTimestamp
      */
-    public void setShoriTimestamp(YMDHMS shoriTimestamp) {
+    public void setShoriTimestamp(ShoriTimestamp shoriTimestamp) {
         this.shoriTimestamp = shoriTimestamp;
     }
 
@@ -186,7 +194,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return shikakuShutokuJiyuCode
      */
-    public RString getShikakuShutokuJiyuCode() {
+    public KaigoShikakuShutokuJiyu getShikakuShutokuJiyuCode() {
         return shikakuShutokuJiyuCode;
     }
 
@@ -195,7 +203,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param shikakuShutokuJiyuCode shikakuShutokuJiyuCode
      */
-    public void setShikakuShutokuJiyuCode(RString shikakuShutokuJiyuCode) {
+    public void setShikakuShutokuJiyuCode(KaigoShikakuShutokuJiyu shikakuShutokuJiyuCode) {
         this.shikakuShutokuJiyuCode = shikakuShutokuJiyuCode;
     }
 
@@ -276,7 +284,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return shikakuSoshitsuJiyuCode
      */
-    public RString getShikakuSoshitsuJiyuCode() {
+    public KaigoShikakuSoshitsuJiyu getShikakuSoshitsuJiyuCode() {
         return shikakuSoshitsuJiyuCode;
     }
 
@@ -285,7 +293,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param shikakuSoshitsuJiyuCode shikakuSoshitsuJiyuCode
      */
-    public void setShikakuSoshitsuJiyuCode(RString shikakuSoshitsuJiyuCode) {
+    public void setShikakuSoshitsuJiyuCode(KaigoShikakuSoshitsuJiyu shikakuSoshitsuJiyuCode) {
         this.shikakuSoshitsuJiyuCode = shikakuSoshitsuJiyuCode;
     }
 
@@ -348,7 +356,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return shikakuHenkoJiyuCode
      */
-    public RString getShikakuHenkoJiyuCode() {
+    public KaigoShikakuHenkoJiyu getShikakuHenkoJiyuCode() {
         return shikakuHenkoJiyuCode;
     }
 
@@ -357,7 +365,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param shikakuHenkoJiyuCode shikakuHenkoJiyuCode
      */
-    public void setShikakuHenkoJiyuCode(RString shikakuHenkoJiyuCode) {
+    public void setShikakuHenkoJiyuCode(KaigoShikakuHenkoJiyu shikakuHenkoJiyuCode) {
         this.shikakuHenkoJiyuCode = shikakuHenkoJiyuCode;
     }
 
@@ -402,7 +410,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return jushochitokureiTekiyoJiyuCode
      */
-    public RString getJushochitokureiTekiyoJiyuCode() {
+    public KaigoShikakuJutokuTekiyoJiyu getJushochitokureiTekiyoJiyuCode() {
         return jushochitokureiTekiyoJiyuCode;
     }
 
@@ -411,7 +419,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param jushochitokureiTekiyoJiyuCode jushochitokureiTekiyoJiyuCode
      */
-    public void setJushochitokureiTekiyoJiyuCode(RString jushochitokureiTekiyoJiyuCode) {
+    public void setJushochitokureiTekiyoJiyuCode(KaigoShikakuJutokuTekiyoJiyu jushochitokureiTekiyoJiyuCode) {
         this.jushochitokureiTekiyoJiyuCode = jushochitokureiTekiyoJiyuCode;
     }
 
@@ -456,7 +464,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @return jushochitokureiKaijoJiyuCode
      */
-    public RString getJushochitokureiKaijoJiyuCode() {
+    public KaigoShikakuJutokuKaijoJiyu getJushochitokureiKaijoJiyuCode() {
         return jushochitokureiKaijoJiyuCode;
     }
 
@@ -465,7 +473,7 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      *
      * @param jushochitokureiKaijoJiyuCode jushochitokureiKaijoJiyuCode
      */
-    public void setJushochitokureiKaijoJiyuCode(RString jushochitokureiKaijoJiyuCode) {
+    public void setJushochitokureiKaijoJiyuCode(KaigoShikakuJutokuKaijoJiyu jushochitokureiKaijoJiyuCode) {
         this.jushochitokureiKaijoJiyuCode = jushochitokureiKaijoJiyuCode;
     }
 
@@ -536,7 +544,6 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
      * setKoikinaiTokureiSochimotoShichosonCode
      *
      * @param koikinaiTokureiSochimotoShichosonCode
-     * koikinaiTokureiSochimotoShichosonCode
      */
     public void setKoikinaiTokureiSochimotoShichosonCode(LasdecCode koikinaiTokureiSochimotoShichosonCode) {
         this.koikinaiTokureiSochimotoShichosonCode = koikinaiTokureiSochimotoShichosonCode;
@@ -701,5 +708,4 @@ public class DbT1001HihokenshaDaichoEntity extends DbTableEntityBase<DbT1001Hiho
         return super.toMd5(shichosonCode, hihokenshaNo, shoriTimestamp, shikibetsuCode, shikakuShutokuJiyuCode, shikakuShutokuYMD, shikakuShutokuTodokedeYMD, ichigoShikakuShutokuYMD, hihokennshaKubunCode, shikakuSoshitsuJiyuCode, shikakuSoshitsuYMD, shikakuSoshitsuTodokedeYMD, jushochiTokureiFlag, shikakuHenkoJiyuCode, shikakuHenkoYMD, shikakuHenkoTodokedeYMD, jushochitokureiTekiyoJiyuCode, jushochitokureiTekiyoYMD, jushochitokureiTekiyoTodokedeYMD, jushochitokureiKaijoJiyuCode, jushochitokureiKaijoYMD, jushochitokureiKaijoTodokedeYMD, koikinaiJushochiTokureiFlag, koikinaiTokureiSochimotoShichosonCode, kyuShichosonCode, saikofuKubun, saikofuJiyuCode, chohyoKofuRirekiID);
     }
 
-// </editor-fold>
 }

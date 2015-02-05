@@ -19,17 +19,19 @@ public enum HihokenshaKubun {
      * 被保険者区分が「1号被保険者」であることを表します。 <br />
      * コード：1
      */
-    第1号被保険者("1"),
+    第1号被保険者("1", "第1号"),
     /**
      * 被保険者区分が「2号被保険者」であることを表します。 <br />
      * コード：2
      */
-    第2号被保険者("2");
+    第2号被保険者("2", "第2号");
 
     private final RString theCode;
+    private final RString ryakusho;
 
-    private HihokenshaKubun(String code) {
+    private HihokenshaKubun(String code, String ryakusho) {
         this.theCode = new RString(code);
+        this.ryakusho = new RString(ryakusho);
     }
 
     /**
@@ -39,6 +41,15 @@ public enum HihokenshaKubun {
      */
     public RString code() {
         return theCode;
+    }
+
+    /**
+     * 被保険者区分の略称を返します。
+     *
+     * @return 略称
+     */
+    public RString get略称() {
+        return ryakusho;
     }
 
     /**

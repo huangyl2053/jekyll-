@@ -48,7 +48,6 @@ public class ShisetsuNyutaishoRirekiKanri {
      * 共有子Divのロード時に行う処理です。
      *
      * @param shisetsuNyutaishoRirekiDiv
-     * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return レスポンス
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onLoad(ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
@@ -95,6 +94,8 @@ public class ShisetsuNyutaishoRirekiKanri {
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelect_dgShisetsuNyutaishoRireki(
             ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
 
+        dgShisetsuNyutaishoRireki_Row selectedRow = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getClickedItem();
+
         //TODO
         //１）「追加する」ボタンを押下不可にする。
         shisetsuNyutaishoRirekiDiv.getBtnAddShisetsuNyutaisho().setDisabled(true);
@@ -122,7 +123,7 @@ public class ShisetsuNyutaishoRirekiKanri {
 
         }
         //３）明細エリアに選択行の内容を表示する。
-        createHandlerOf(shisetsuNyutaishoRirekiDiv).showSelectedData();
+        createHandlerOf(shisetsuNyutaishoRirekiDiv).showSelectedData(selectedRow);
 
         //４－１）状態が「追加」の場合、明細エリアの項目を入力可にする。
         //４－１－１）明細表示モードに、追加・修正を設定する。
@@ -146,6 +147,8 @@ public class ShisetsuNyutaishoRirekiKanri {
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelectByModifyButton_dgShisetsuNyutaishoRireki(
             ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
 
+        dgShisetsuNyutaishoRireki_Row selectedRow = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getClickedItem();
+
         //TODO
         //１）「追加する」ボタンを押下不可にする。
         shisetsuNyutaishoRirekiDiv.getBtnAddShisetsuNyutaisho().setDisabled(true);
@@ -156,7 +159,7 @@ public class ShisetsuNyutaishoRirekiKanri {
         shisetsuNyutaishoRirekiDiv.setMode_明細表示モード(ShisetsuNyutaishoRirekiKanriDiv.明細表示モード.追加_修正);
         //３）明細エリアに選択行の内容を表示する。
         shisetsuNyutaishoRirekiDiv.setInputMode(ViewExecutionStatus.Modify.getValue());
-        createHandlerOf(shisetsuNyutaishoRirekiDiv).showSelectedData();
+        createHandlerOf(shisetsuNyutaishoRirekiDiv).showSelectedData(selectedRow);
 
         return createSettingData(shisetsuNyutaishoRirekiDiv);
     }
@@ -172,6 +175,8 @@ public class ShisetsuNyutaishoRirekiKanri {
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelectByDeleteButton_dgShisetsuNyutaishoRireki(
             ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
 
+        dgShisetsuNyutaishoRireki_Row selectedRow = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getClickedItem();
+
         //TODO
         //１）「追加する」ボタンを押下不可にする。
         shisetsuNyutaishoRirekiDiv.getBtnAddShisetsuNyutaisho().setDisabled(true);
@@ -184,7 +189,7 @@ public class ShisetsuNyutaishoRirekiKanri {
         shisetsuNyutaishoRirekiDiv.setMode_明細表示モード(ShisetsuNyutaishoRirekiKanriDiv.明細表示モード.削除);
         shisetsuNyutaishoRirekiDiv.setInputMode(ViewExecutionStatus.Delete.getValue());
         shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().setReadOnly(true);
-        createHandlerOf(shisetsuNyutaishoRirekiDiv).showSelectedData();
+        createHandlerOf(shisetsuNyutaishoRirekiDiv).showSelectedData(selectedRow);
 
         return createSettingData(shisetsuNyutaishoRirekiDiv);
     }
@@ -327,8 +332,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
-    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoKakutei(
-            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
+    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoKakutei(ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
 
         //TODO
         //１）追加を確定する場合以下の処理を行う。
@@ -366,8 +370,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * {@link ShisetsuNyutaishoRirekiKanriDiv 施設入退所履歴Div}
      * @return 施設入退所履歴Divを持つResponseData
      */
-    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoTorikeshi(
-            ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
+    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoTorikeshi(ShisetsuNyutaishoRirekiKanriDiv shisetsuNyutaishoRirekiDiv) {
 
         ResponseData<ShisetsuNyutaishoRirekiKanriDiv> response = new ResponseData<>();
         //TODO
@@ -379,61 +382,7 @@ public class ShisetsuNyutaishoRirekiKanri {
         //      Yes：onClick_btnIryoHokenTorikeshi_onYesの処理を実行する。
         //      No:ダイアログを閉じる
 
-        boolean flg = Boolean.FALSE;
-        RString rowState = shisetsuNyutaishoRirekiDiv.getInputMode();
-        switch (ViewExecutionStatus.toValue(rowState)) {
-
-            case Add:
-
-                if (!shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
-                    flg = Boolean.TRUE;
-                } else if (!shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()) {
-                    flg = Boolean.TRUE;
-                } else if (shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().toString().isEmpty()) {
-                    flg = Boolean.TRUE;
-                }
-                break;
-
-            case Modify:
-                int rowIndex = Integer.valueOf(shisetsuNyutaishoRirekiDiv.getSelectRow().toString()).intValue();
-                dgShisetsuNyutaishoRireki_Row 選択行 = shisetsuNyutaishoRirekiDiv.getDgShisetsuNyutaishoRireki().getDataSource().get(rowIndex);
-
-                RString 入所年月日 = composeNulltoStr(
-                        new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().toString()));
-                RString 退所年月日 = composeNulltoStr(
-                        new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().toString()));
-                RString 台帳種別 = composeNulltoStr(
-                        new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get台帳種別().toString()));
-                RString 入所施設種類 = composeNulltoStr(
-                        new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類().getCode().toString()));
-                RString 入所施設コード = composeNulltoStr(
-                        new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get入所施設コード().toString()));
-                RString 施設名称 = composeNulltoStr(
-                        new RString(shisetsuNyutaishoRirekiDiv.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設名称().toString()));
-
-                if (!入所年月日.equals(composeNulltoStr(new RString(選択行.getNyushoDate().getValue().toString())))) {
-                    flg = Boolean.TRUE;
-                } else if (!退所年月日.equals(composeNulltoStr(new RString(選択行.getTaishoDate().getValue().toString())))) {
-                    flg = Boolean.TRUE;
-                } else if (!台帳種別.equals(composeNulltoStr(new RString(選択行.getDaichoShubetsuKey().toString())))) {
-                    flg = Boolean.TRUE;
-                } else if (!入所施設種類.equals(composeNulltoStr(new RString(選択行.getShisetsuShuruiKey().toString())))) {
-                    flg = Boolean.TRUE;
-                } else if (!入所施設コード.equals(composeNulltoStr(new RString(選択行.getShisetsuCode().toString())))) {
-                    flg = Boolean.TRUE;
-                } else if (!施設名称.equals(composeNulltoStr(new RString(選択行.getShisetsuMeisho().toString())))) {
-                    flg = Boolean.TRUE;
-                }
-
-                break;
-
-            case Delete:
-
-                break;
-            default:
-                break;
-        }
-
+        boolean flg = shisetsuNyutaishoRirekiDiv.hasChangedInMeisai();
         if (!flg) {
             return this.onClick_btnShisetsuNyutaishoTorikeshi_onYes(shisetsuNyutaishoRirekiDiv);
         }
@@ -450,16 +399,6 @@ public class ShisetsuNyutaishoRirekiKanri {
         response.addMessage(message);
         response.data = shisetsuNyutaishoRirekiDiv;
         return response;
-    }
-
-    private static RString composeNulltoStr(RString str) {
-        RString afterStr;
-        if (str == null) {
-            afterStr = RString.EMPTY;
-        } else {
-            afterStr = str;
-        }
-        return afterStr;
     }
 
     /**

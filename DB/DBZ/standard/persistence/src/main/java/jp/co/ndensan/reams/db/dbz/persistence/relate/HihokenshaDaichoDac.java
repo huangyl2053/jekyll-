@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
@@ -25,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
@@ -50,7 +50,7 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
      * @return {@code Optional<HihokenshaDaichoModel>}
      */
     @Transaction
-    public Optional<HihokenshaDaichoModel> select被保険者台帳ByKey(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
+    public Optional<HihokenshaDaichoModel> select被保険者台帳ByKey(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, ShoriTimestamp 処理日時) {
 
         requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
@@ -121,6 +121,35 @@ public class HihokenshaDaichoDac implements IModifiable<HihokenshaDaichoModel> {
         List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = accessor.select().
                 table(DbT1001HihokenshaDaicho.class).
                 where(and(eq(DbT1001HihokenshaDaicho.shichosonCode, 市町村コード), eq(DbT1001HihokenshaDaicho.hihokenshaNo, 被保険者番号))).
+                toList(DbT1001HihokenshaDaichoEntity.class);
+
+        List<HihokenshaDaichoModel> list = new ArrayList<>();
+
+        for (DbT1001HihokenshaDaichoEntity 被保険者台帳 : 被保険者台帳List) {
+            list.add(createModel(被保険者台帳));
+        }
+
+        return ItemList.of(list);
+    }
+
+    /**
+     * 条件に合致する被保険者台帳のリストを返します。返却されるListは処理日時の降順になります。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 被保険者番号 被保険者番号
+     * @return {@code IItemList<HihokenshaDaichoModel>}
+     */
+    @Transaction
+    public IItemList<HihokenshaDaichoModel> select被保険者台帳一覧DescOrderByShoriTimestamp(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        List<DbT1001HihokenshaDaichoEntity> 被保険者台帳List = accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(eq(DbT1001HihokenshaDaicho.shichosonCode, 市町村コード), eq(DbT1001HihokenshaDaicho.hihokenshaNo, 被保険者番号))).
+                order(by(DbT1001HihokenshaDaicho.shoriTimestamp, Order.DESC)).
                 toList(DbT1001HihokenshaDaichoEntity.class);
 
         List<HihokenshaDaichoModel> list = new ArrayList<>();

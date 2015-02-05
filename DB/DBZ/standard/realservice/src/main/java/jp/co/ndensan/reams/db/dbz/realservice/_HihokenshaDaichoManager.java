@@ -88,8 +88,8 @@ public class _HihokenshaDaichoManager {
      * @param 処理日時 {@link YMDHMS 処理日時}
      * @return {@link IHihokenshaShikaku IHihokenshaShikaku}。もしくは、null。
      */
-    IHihokenshaShikaku get被保険者資格(LasdecCode 市町村コード, ShikibetsuCode 識別コード, YMDHMS 処理日時) {
-        DbT1001HihokenshaDaichoEntity entity = dac.selectFromKey(市町村コード, 識別コード, 処理日時);
+    IHihokenshaShikaku get被保険者資格(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+        DbT1001HihokenshaDaichoEntity entity = dac.selectLatestOfPerson(市町村コード, 識別コード);
         return HihokenshaShikakuMapper.toHihokenshaShikaku(entity);
     }
 
@@ -102,7 +102,7 @@ public class _HihokenshaDaichoManager {
      * もしくは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}。
      */
     List<IHihokenshaShikaku> get被保険者資格ListOf(LasdecCode 市町村コード) {
-        List<DbT1001HihokenshaDaichoEntity> entites = dac.selectAll(市町村コード);
+        List<DbT1001HihokenshaDaichoEntity> entites = dac.selectAll();
         return HihokenshaShikakuMapper.toListOfHihokenshaShikaku(entites);
     }
 
@@ -115,7 +115,7 @@ public class _HihokenshaDaichoManager {
      * もしくは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}。
      */
     List<IHihokenshaShikaku> get被保険者資格ListOf(ISearchCondition 検索条件) {
-        List<DbT1001HihokenshaDaichoEntity> entites = dac.selectAll(検索条件.makeSearchCondition());
+        List<DbT1001HihokenshaDaichoEntity> entites = dac.selectAll();
         return HihokenshaShikakuMapper.toListOfHihokenshaShikaku(entites);
     }
 

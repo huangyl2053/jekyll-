@@ -13,7 +13,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public interface IHihokenshaShikakuHakkoDiv {
 
     /**
-     * 引数を元に被保険者証・資格者証の情報を取得して共有子Divに表示します。
+     * 引数を元に被保険者証・資格者証の情報を取得して共有子Divに表示します。<br/>
+     * このメソッドを動作させるには、画面上で共有子Divに対して 発行証タイプ モードを設定する必要があります。
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 識別コード ShikibetsuCode

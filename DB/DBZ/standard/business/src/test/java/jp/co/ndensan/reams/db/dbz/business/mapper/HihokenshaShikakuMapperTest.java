@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
@@ -90,7 +91,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
         when(kaigoShikaku.get資格取得届出年月日()).thenReturn(ichigoGaitoDate);
         when(kaigoShikaku.get資格取得年月日()).thenReturn(ichigoGaitoDate);
         IShikakuSoshitsuJiyu soshitsuJiyu = mock(IShikakuSoshitsuJiyu.class);
-        when(soshitsuJiyu.getCode()).thenReturn(ShikakuSoshitsuJiyu.なし.getCode());
+        when(soshitsuJiyu.getCode()).thenReturn(ShikakuSoshitsuJiyu.EMPTY.getCode());
         when(kaigoShikaku.get資格喪失事由()).thenReturn(soshitsuJiyu);
         when(kaigoShikaku.get資格喪失届出年月日()).thenReturn(RDate.MAX);
         when(kaigoShikaku.get資格喪失年月日()).thenReturn(RDate.MAX);
@@ -126,7 +127,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
             @Test
             public void toHihokenshaDaichoEntityで変換したとき_結果のgetShoriTimestampは_引数のget被保険者台帳登録日時と一致する() {
                 result = sut.toHihokenshaDaichoEntity(shikaku);
-                assertThat(result.getShoriTimestamp(), is(shikaku.get処理日時()));
+                assertThat(result.getShoriTimestamp(), is(ShoriTimestamp.of(shikaku.get処理日時())));
             }
 
             @Test
@@ -196,7 +197,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Test
             public void toHihokenshaDaichoEntityで変換したとき_結果のgetShikakuShutokuJiyuCodeは_引数のget資格取得$getReason$getCodeと一致する() {
-                assertThat(result.getShikakuShutokuJiyuCode(), is(shikaku.get資格取得().getReason().getCode()));
+                assertThat(result.getShikakuShutokuJiyuCode(), is(new KaigoShikakuShutokuJiyu(shikaku.get資格取得().getReason().getCode())));
             }
 
             @Test
@@ -234,7 +235,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Test
             public void toHihokenshaDaichoEntityで変換したとき_結果のgetShikakuSoshitsuJiyuCodeは_引数のget資格喪失$getReason$getCodeと一致する() {
-                assertThat(result.getShikakuSoshitsuJiyuCode(), is(shikaku.get資格喪失().getReason().getCode()));
+                assertThat(result.getShikakuSoshitsuJiyuCode(), is(new KaigoShikakuSoshitsuJiyu(shikaku.get資格喪失().getReason().getCode())));
             }
 
             @Test
@@ -272,7 +273,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Test
             public void toHihokenshaDaichoEntityで変換したとき_結果のgetShikakuHenkoJiyuCodeは_引数のget資格変更$getReason$getCodeと一致する() {
-                assertThat(result.getShikakuHenkoJiyuCode(), is(shikaku.get資格変更().getReason().getCode()));
+                assertThat(result.getShikakuHenkoJiyuCode(), is(new KaigoShikakuHenkoJiyu(shikaku.get資格変更().getReason().getCode())));
             }
 
             @Test
@@ -296,7 +297,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Before
             public void setUp() {
-                reason = JushochitokureiTekiyoJiyu.特例転入;
+                reason = JushochitokureiTekiyoJiyu.自特例適用;
                 noticeDate = new FlexibleDate("20130331");
                 actionDate = new FlexibleDate("20130331");
                 jutokuTekiyo = new JushochitokureiTekiyo(reason, noticeDate, actionDate);
@@ -310,7 +311,8 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Test
             public void toHihokenshaDaichoEntityで変換したとき_結果のgetJushochitokureiTekiyoJiyuCodeは_引数のget住所地特例適用$getReason$getCodeと一致する() {
-                assertThat(result.getJushochitokureiTekiyoJiyuCode(), is(shikaku.get住所地特例適用().getReason().getCode()));
+                assertThat(result.getJushochitokureiTekiyoJiyuCode(),
+                        is(new KaigoShikakuJutokuTekiyoJiyu(shikaku.get住所地特例適用().getReason().getCode())));
             }
 
             @Test
@@ -334,7 +336,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Before
             public void setUp() {
-                reason = JushochitokureiKaijoJiyu.特例転入;
+                reason = JushochitokureiKaijoJiyu.自特例転入;
                 noticeDate = new FlexibleDate("20130331");
                 actionDate = new FlexibleDate("20130331");
                 jutokuKaijo = new JushochitokureiKaijo(reason, noticeDate, actionDate);
@@ -348,7 +350,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Test
             public void toHihokenshaDaichoEntityで変換したとき_結果のgetJushochitokureiKaijoJiyuCodeは_引数のget住所地特例解除$getReason$getCodeと一致する() {
-                assertThat(result.getJushochitokureiKaijoJiyuCode(), is(shikaku.get住所地特例解除().getReason().getCode()));
+                assertThat(result.getJushochitokureiKaijoJiyuCode(), is(new KaigoShikakuJutokuKaijoJiyu(shikaku.get住所地特例解除().getReason().getCode())));
             }
 
             @Test
@@ -461,7 +463,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Before
             public void setUp() {
-                entity.setShikakuShutokuJiyuCode(new KaigoShikakuShutokuJiyu(reason.getCode()).toRString());
+                entity.setShikakuShutokuJiyuCode(new KaigoShikakuShutokuJiyu(reason.getCode()));
                 entity.setShikakuShutokuTodokedeYMD(noticeDate);
                 entity.setShikakuShutokuYMD(actionDate);
                 result = sut.toHihokenshaShikaku(entity);
@@ -509,7 +511,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Before
             public void setUp() {
-                entity.setShikakuSoshitsuJiyuCode(new KaigoShikakuSoshitsuJiyu(reason.getCode()).toRString());
+                entity.setShikakuSoshitsuJiyuCode(new KaigoShikakuSoshitsuJiyu(reason.getCode()));
                 entity.setShikakuSoshitsuTodokedeYMD(noticeDate);
                 entity.setShikakuSoshitsuYMD(actionDate);
                 converted = sut.toHihokenshaShikaku(entity);
@@ -557,7 +559,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Before
             public void setUp() {
-                entity.setShikakuHenkoJiyuCode(new KaigoShikakuHenkoJiyu(reason.getCode()).toRString());
+                entity.setShikakuHenkoJiyuCode(new KaigoShikakuHenkoJiyu(reason.getCode()));
                 entity.setShikakuHenkoTodokedeYMD(noticeDate);
                 entity.setShikakuHenkoYMD(actionDate);
                 converted = sut.toHihokenshaShikaku(entity);
@@ -591,7 +593,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Before
             public void setUp() {
-                entity.setJushochitokureiTekiyoJiyuCode(new KaigoShikakuJutokuTekiyoJiyu(reason.getCode()).toRString());
+                entity.setJushochitokureiTekiyoJiyuCode(new KaigoShikakuJutokuTekiyoJiyu(reason.getCode()));
                 entity.setJushochitokureiTekiyoTodokedeYMD(noticeDate);
                 entity.setJushochitokureiTekiyoYMD(actionDate);
                 converted = sut.toHihokenshaShikaku(entity);
@@ -625,7 +627,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Before
             public void setUp() {
-                entity.setJushochitokureiKaijoJiyuCode(new KaigoShikakuJutokuKaijoJiyu(reason.getCode()).toRString());
+                entity.setJushochitokureiKaijoJiyuCode(new KaigoShikakuJutokuKaijoJiyu(reason.getCode()));
                 entity.setJushochitokureiKaijoTodokedeYMD(noticeDate);
                 entity.setJushochitokureiKaijoYMD(actionDate);
                 converted = sut.toHihokenshaShikaku(entity);

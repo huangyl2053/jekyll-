@@ -308,7 +308,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                     private HihokenshaShikaku.Builder sut;
                     private final FlexibleDate 住所地特例解除届出年月日 = new FlexibleDate("20140404");
                     private final FlexibleDate 住所地特例解除年月日 = new FlexibleDate("20140404");
-                    private final JushochitokureiKaijoJiyu 住所地特例解除事由 = JushochitokureiKaijoJiyu.特例転入;
+                    private final JushochitokureiKaijoJiyu 住所地特例解除事由 = JushochitokureiKaijoJiyu.自特例転入;
                     private final JushochitokureiKaijo 住所地特例解除 = new JushochitokureiKaijo(住所地特例解除事由, 住所地特例解除届出年月日, 住所地特例解除年月日);
 
                     @Before

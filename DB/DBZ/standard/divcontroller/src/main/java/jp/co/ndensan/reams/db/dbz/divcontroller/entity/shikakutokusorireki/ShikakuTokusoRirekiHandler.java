@@ -55,33 +55,33 @@ public class ShikakuTokusoRirekiHandler {
      * @param 市町村コード 市町村コード
      * @param 識別コード 識別コード
      */
-    public void load(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
-
-        KaigoShikakuKihonSearchKey 検索キー = new KaigoShikakuKihonSearchKey.Builder(市町村コード, 識別コード).build();
-        INewSearchCondition 市町村コード検索条件 = SearchConditionFactory.condition(
-                HihokenshaSearchItem.市町村コード, StringOperator.完全一致, 検索キー.get市町村コード().value());
-        INewSearchCondition 識別コード検索条件 = SearchConditionFactory.condition(
-                HihokenshaSearchItem.識別コード, StringOperator.完全一致, 検索キー.get識別コード().value());
-
-        HihokenshaList hihokenshaList = hihokenshaFinder.get被保険者List(市町村コード検索条件.and(識別コード検索条件));
-
-        List<dgShikakuShutokuRireki_Row> rowList = new ArrayList<>();
-        for (Hihokensha hihokensha : hihokenshaList) {
-            dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row();
-            row.getShutokuDate().setValue(hihokensha.get資格取得().getActionDate());
-            row.getShutokuTodokedeDate().setValue(hihokensha.get資格取得().getNoticeDate());
-            row.setShutokuJiyu(hihokensha.get資格取得().getReason().getName());
-            row.setHihokenshaKubun(hihokensha.get被保険者区分().getMeisho());
-            row.getSoshitsuDate().setValue(hihokensha.get資格喪失().getActionDate());
-            row.getSoshitsuTodokedeDate().setValue(hihokensha.get資格喪失().getNoticeDate());
-            row.setSoshitsuJiyu(hihokensha.get資格喪失().getReason().getName());
-            row.setJutokuKubun(hihokensha.get住所地特例者区分().get名称());
-            row.setShozaiHokensha(hihokensha.get市町村コード().value());
-            row.setSochimotoHokensha(hihokensha.get広域内住所地特例措置元保険者番号().value());
-            row.setKyuHokensha(hihokensha.get旧市町村コード().value());
-            row.setShikibetsuCode(hihokensha.get識別コード().value());
-            rowList.add(row);
-        }
-        div.getDgShikakuShutokuRireki().setDataSource(rowList);
-    }
+//    public void load(LasdecCode 市町村コード, ShikibetsuCode 識別コード) {
+//
+//        KaigoShikakuKihonSearchKey 検索キー = new KaigoShikakuKihonSearchKey.Builder(市町村コード, 識別コード).build();
+//        INewSearchCondition 市町村コード検索条件 = SearchConditionFactory.condition(
+//                HihokenshaSearchItem.市町村コード, StringOperator.完全一致, 検索キー.get市町村コード().value());
+//        INewSearchCondition 識別コード検索条件 = SearchConditionFactory.condition(
+//                HihokenshaSearchItem.識別コード, StringOperator.完全一致, 検索キー.get識別コード().value());
+//
+//        HihokenshaList hihokenshaList = hihokenshaFinder.市町村コード検索条件.and(識別コード検索条件);
+//
+//        List<dgShikakuShutokuRireki_Row> rowList = new ArrayList<>();
+//        for (Hihokensha hihokensha : hihokenshaList) {
+//            dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row();
+//            row.getShutokuDate().setValue(hihokensha.get資格取得().getActionDate());
+//            row.getShutokuTodokedeDate().setValue(hihokensha.get資格取得().getNoticeDate());
+//            row.setShutokuJiyu(hihokensha.get資格取得().getReason().getName());
+//            row.setHihokenshaKubun(hihokensha.get被保険者区分().getMeisho());
+//            row.getSoshitsuDate().setValue(hihokensha.get資格喪失().getActionDate());
+//            row.getSoshitsuTodokedeDate().setValue(hihokensha.get資格喪失().getNoticeDate());
+//            row.setSoshitsuJiyu(hihokensha.get資格喪失().getReason().getName());
+//            row.setJutokuKubun(hihokensha.get住所地特例者区分().get名称());
+//            row.setShozaiHokensha(hihokensha.get市町村コード().value());
+//            row.setSochimotoHokensha(hihokensha.get広域内住所地特例措置元保険者番号().value());
+//            row.setKyuHokensha(hihokensha.get旧市町村コード().value());
+//            row.setShikibetsuCode(hihokensha.get識別コード().value());
+//            rowList.add(row);
+//        }
+//        div.getDgShikakuShutokuRireki().setDataSource(rowList);
+//}
 }

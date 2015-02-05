@@ -30,6 +30,16 @@ public class ShikakuShutokuJiyuTest extends DbzTestBase {
             assertThat(ShikakuShutokuJiyu.toValue(sut.getCode()), is(sut));
         }
 
+        @Test
+        public void toValueは_nullを受け取った場合_EMPTYを返す() {
+            assertThat(ShikakuShutokuJiyu.toValue(null), is(ShikakuShutokuJiyu.EMPTY));
+        }
+
+        @Test
+        public void toValueは_空の文字列を受け取った場合_EMPTY() {
+            assertThat(ShikakuShutokuJiyu.toValue(RString.EMPTY), is(ShikakuShutokuJiyu.EMPTY));
+        }
+
         @Test(expected = IllegalArgumentException.class)
         public void toValueは_指定のコードに対応する列挙子がなければ_IllegalArgumentExceptionを返す() {
             ShikakuShutokuJiyu sut = ShikakuShutokuJiyu.toValue(new RString("1000"));

@@ -65,6 +65,6 @@ public enum JushochiTokureiExecutionStatus {
                 return status;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("画面処理ステータス"));
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("ステータス:" + value + " を画面処理ステータス"));
     }
 }

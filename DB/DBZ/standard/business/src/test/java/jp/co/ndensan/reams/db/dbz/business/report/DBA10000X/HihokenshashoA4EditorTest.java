@@ -26,12 +26,12 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
+import jp.co.ndensan.reams.ur.urz.business.IAssociation;
 import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import org.junit.Test;
@@ -60,22 +60,22 @@ public class HihokenshashoA4EditorTest {
 
     public static class constructor extends DbzTestBase {
 
-        HihokenshashoModel model;
-        IZenkokuJushoItem jusho;
+        private HihokenshashoModel model;
+        private IAssociation asscoiation;
 
         @Test(expected = NullPointerException.class)
         public void 被保険者証Modelにnullが渡された場合_NullPointerExceptionが発生する() {
             model = null;
-            jusho = mock(IZenkokuJushoItem.class);
-            sut = new HihokenshashoA4Editor(model, jusho);
+            asscoiation = mock(IAssociation.class);
+            sut = new HihokenshashoA4Editor(model, asscoiation);
             fail();
         }
 
         @Test(expected = NullPointerException.class)
         public void 全国住所にnullが渡された場合_NullPointerExceptionが発生する() {
             model = mock(HihokenshashoModel.class);
-            jusho = null;
-            sut = new HihokenshashoA4Editor(model, jusho);
+            asscoiation = null;
+            sut = new HihokenshashoA4Editor(model, asscoiation);
             fail();
         }
     }
@@ -182,9 +182,8 @@ public class HihokenshashoA4EditorTest {
 
         private ShikakuKihonEditorBase createMockShikakuKihonEditor(HihokenshashoModel model, HihokenshashoPrintConfig printConfig,
                 HihokenshashoJushoEditConfig hihoJushoEditConfig, ChohyoKyotsuJushoEditConfig kyotsuJushoEditConfig) {
-            IZenkokuJushoItem zenkokuJusho;
-            zenkokuJusho = mock(IZenkokuJushoItem.class);
-            ShikakuKihonEditorBase editorBase = spy(new ShikakuKihonEditorBase(model, zenkokuJusho, printConfig, hihoJushoEditConfig, kyotsuJushoEditConfig));
+            IAssociation associationMock = mock(IAssociation.class);
+            ShikakuKihonEditorBase editorBase = spy(new ShikakuKihonEditorBase(model, associationMock, printConfig, hihoJushoEditConfig, kyotsuJushoEditConfig));
             doCallRealMethod().when(editorBase).set被保険者番号(any(IHihokenshashoCommonEditData.class));
             doNothing().when(editorBase).set住所(any(IHihokenshashoCommonEditData.class));
             doNothing().when(editorBase).set被保険者名(any(IHihokenshashoCommonEditData.class));

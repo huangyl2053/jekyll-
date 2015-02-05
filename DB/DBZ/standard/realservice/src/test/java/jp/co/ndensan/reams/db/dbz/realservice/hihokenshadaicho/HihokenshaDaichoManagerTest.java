@@ -14,12 +14,12 @@ import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.model.helper.HihokenshaDaichoModelTestHelper;
 import jp.co.ndensan.reams.db.dbz.persistence.relate.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
@@ -44,7 +44,7 @@ public class HihokenshaDaichoManagerTest {
 
     private static final LasdecCode 市町村コード = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_市町村コード;
     private static final HihokenshaNo 被保険者番号 = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号;
-    private static final YMDHMS 処理日時 = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_処理日時;
+    private static final ShoriTimestamp 処理日時 = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_処理日時;
     private static final ShikibetsuCode 識別コード = DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_識別コード;
 
     @BeforeClass
@@ -60,7 +60,7 @@ public class HihokenshaDaichoManagerTest {
 
             Optional<HihokenshaDaichoModel> 被保険者台帳モデル = Optional.ofNullable(HihokenshaDaichoModelTestHelper.createModel());
 
-            when(dac.select被保険者台帳ByKey(any(LasdecCode.class), any(HihokenshaNo.class), any(YMDHMS.class))).thenReturn(被保険者台帳モデル);
+            when(dac.select被保険者台帳ByKey(any(LasdecCode.class), any(HihokenshaNo.class), any(ShoriTimestamp.class))).thenReturn(被保険者台帳モデル);
 
             Optional<HihokenshaDaichoModel> result = sut.find被保険者台帳(市町村コード, 被保険者番号, 処理日時);
 
@@ -136,6 +136,25 @@ public class HihokenshaDaichoManagerTest {
         }
     }
 
+    public static class get被保険者台帳一覧DescOrderByShoriTimestamp extends DbzTestBase {
+
+        @Test
+        public void データが3件見つかる検索条件を指定した場合_size3の被保険者台帳Listが返る() {
+
+            HihokenshaDaichoModel hihoModel1 = HihokenshaDaichoModelTestHelper.createModel();
+            HihokenshaDaichoModel hihoModel2 = HihokenshaDaichoModelTestHelper.createModel();
+            HihokenshaDaichoModel hihoModel3 = HihokenshaDaichoModelTestHelper.createModel();
+            IItemList<HihokenshaDaichoModel> hihoList = ItemList.of(hihoModel1, hihoModel2, hihoModel3);
+
+            when(dac.select被保険者台帳一覧DescOrderByShoriTimestamp(any(LasdecCode.class), any(HihokenshaNo.class))).thenReturn(hihoList);
+
+            IItemList<HihokenshaDaichoModel> result = sut.get被保険者台帳一覧DescOrderByShoriTimestamp(
+                    DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_市町村コード, DbT1001HihokenshaDaichoEntityGenerator.DEFAULT_被保険者番号);
+
+            assertThat(result.size(), is(3));
+        }
+    }
+
     public static class save被保険者台帳 extends DbzTestBase {
 
         @Test
@@ -153,7 +172,7 @@ public class HihokenshaDaichoManagerTest {
 
             HihokenshaDaichoModel 被保険者台帳モデル = HihokenshaDaichoModelTestHelper.createModel();
             被保険者台帳モデル.getEntity().initializeMd5();
-            被保険者台帳モデル.set資格取得事由(ShikakuShutokuJiyu.合併);
+            被保険者台帳モデル.set資格取得事由(ShikakuShutokuJiyu.転入);
 
             assertThat(sut.save被保険者台帳(被保険者台帳モデル), is(1));
         }

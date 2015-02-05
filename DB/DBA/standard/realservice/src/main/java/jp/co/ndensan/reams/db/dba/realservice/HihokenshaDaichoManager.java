@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @author n8178 城間篤人
  */
+//TODO n8178 城間篤人 DBZにEntityが存在する関係で、同名のManagerがDBZにも存在している。どちらを使用するか確認後、どちらかに統合する。 2014年1月23日
 public class HihokenshaDaichoManager {
 
     private final HihokenshaDaichoDac dac;

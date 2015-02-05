@@ -35,6 +35,7 @@ import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.GesshoGetsuma
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.HokenshaKosei.*;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
@@ -111,8 +112,8 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
         @Test
         public void 例２() {
             被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000401010101", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000401", ShikakuSoshitsuJiyu.死亡.getCode().toString(), "20000701", "000001"));
-            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000701010102", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000701", ShikakuSoshitsuJiyu.合併.getCode().toString(), "20041101", "000001"));
-            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20041101083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20041101", ShikakuSoshitsuJiyu.帰化.getCode().toString(), "20051001", "000001"));
+            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000701010102", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000701", ShikakuSoshitsuJiyu.転出.getCode().toString(), "20041101", "000001"));
+            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20041101083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20041101", ShikakuSoshitsuJiyu.転出.getCode().toString(), "20051001", "000001"));
             被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20051001083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20041001", ShikakuSoshitsuJiyu.転出.getCode().toString(), "", "000001"));
 
             最新合併市町村情報By市町村コード = getParam(get合併情報(3), get合併市町村(5), get合併市町村(6));
@@ -130,8 +131,8 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
         @Test
         public void 例３() {
             被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000401010101", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000401", ShikakuSoshitsuJiyu.死亡.getCode().toString(), "20000701", "000001"));
-            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000701010102", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000701", ShikakuSoshitsuJiyu.合併.getCode().toString(), "20041101", "000001"));
-            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20041101083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20041101", ShikakuSoshitsuJiyu.帰化.getCode().toString(), "20051001", "000001"));
+            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000701010102", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000701", ShikakuSoshitsuJiyu.転出.getCode().toString(), "20041101", "000001"));
+            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20041101083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20041101", ShikakuSoshitsuJiyu.転出.getCode().toString(), "20051001", "000001"));
             被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20051001083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20051001", ShikakuSoshitsuJiyu.転出.getCode().toString(), "", "000001"));
 
             最新合併市町村情報By市町村コード = getParam(get合併情報(3), get合併市町村(5), get合併市町村(6));
@@ -149,8 +150,8 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
         @Test
         public void 例４() {
             被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000401010101", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000401", ShikakuSoshitsuJiyu.死亡.getCode().toString(), "20000701", "000001"));
-            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000701010102", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000701", ShikakuSoshitsuJiyu.合併.getCode().toString(), "20041101", "000001"));
-            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20041101083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20041101", ShikakuSoshitsuJiyu.帰化.getCode().toString(), "20051001", "000001"));
+            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000701010102", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000701", ShikakuSoshitsuJiyu.転出.getCode().toString(), "20041101", "000001"));
+            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20041101083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20041101", ShikakuSoshitsuJiyu.転出.getCode().toString(), "20051001", "000001"));
             被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20051001083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20051001", ShikakuSoshitsuJiyu.転出.getCode().toString(), "", "000001"));
 
             最新合併市町村情報By市町村コード = getParam(get合併情報(3), get合併市町村(5), get合併市町村(6));
@@ -168,8 +169,8 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
         @Test
         public void 例５() {
             被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000401010101", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000401", ShikakuSoshitsuJiyu.死亡.getCode().toString(), "20000701", "000001"));
-            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000701010102", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000701", ShikakuSoshitsuJiyu.合併.getCode().toString(), "20041101", "000001"));
-            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20041101083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20041101", ShikakuSoshitsuJiyu.帰化.getCode().toString(), "20051001", "000001"));
+            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000701010102", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000701", ShikakuSoshitsuJiyu.転出.getCode().toString(), "20041101", "000001"));
+            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20041101083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20041101", ShikakuSoshitsuJiyu.転出.getCode().toString(), "20051001", "000001"));
             被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20051001083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20051001", ShikakuSoshitsuJiyu.転出.getCode().toString(), "", "000001"));
 
             最新合併市町村情報By市町村コード = getParam(get合併情報(3), get合併市町村(5), get合併市町村(6));
@@ -187,8 +188,8 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
         @Test
         public void 例６() {
             被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000401010101", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000401", ShikakuSoshitsuJiyu.死亡.getCode().toString(), "20000701", "000001"));
-            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000701010102", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000701", ShikakuSoshitsuJiyu.合併.getCode().toString(), "20041101", "000001"));
-            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20041101083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20041101", ShikakuSoshitsuJiyu.帰化.getCode().toString(), "20051001", "000001"));
+            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000701010102", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000701", ShikakuSoshitsuJiyu.転出.getCode().toString(), "20041101", "000001"));
+            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20041101083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20041101", ShikakuSoshitsuJiyu.転出.getCode().toString(), "20051001", "000001"));
             被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20051001083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20051001", ShikakuSoshitsuJiyu.転出.getCode().toString(), "", "000001"));
 
             最新合併市町村情報By市町村コード = getParam(get合併情報(3), get合併市町村(5), get合併市町村(6));
@@ -204,8 +205,8 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
         @Test
         public void 例７() {
             被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000401010101", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000401", ShikakuSoshitsuJiyu.死亡.getCode().toString(), "20000701", "000001"));
-            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000701010102", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000701", ShikakuSoshitsuJiyu.合併.getCode().toString(), "20041101", "000001"));
-            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20041101083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20041101", ShikakuSoshitsuJiyu.帰化.getCode().toString(), "20051001", "000001"));
+            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000701010102", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000701", ShikakuSoshitsuJiyu.転出.getCode().toString(), "20041101", "000001"));
+            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20041101083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20041101", ShikakuSoshitsuJiyu.転出.getCode().toString(), "20051001", "000001"));
             被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20051001083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20051001", ShikakuSoshitsuJiyu.転出.getCode().toString(), "", "000001"));
 
             最新合併市町村情報By市町村コード = getParam(get合併情報(3), get合併市町村(5), get合併市町村(6));
@@ -235,8 +236,8 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
         @Test
         public void 例９() {
             被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000601010101", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000601", ShikakuSoshitsuJiyu.死亡.getCode().toString(), "20000701", ""));
-            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000701010102", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000701", ShikakuSoshitsuJiyu.合併.getCode().toString(), "20041101", ""));
-            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20041101083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20041101", ShikakuSoshitsuJiyu.帰化.getCode().toString(), "20051001", ""));
+            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20000701010102", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000701", ShikakuSoshitsuJiyu.転出.getCode().toString(), "20041101", ""));
+            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20041101083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20041101", ShikakuSoshitsuJiyu.転出.getCode().toString(), "20051001", ""));
             被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20051001083001", ShikakuShutokuJiyu.帰化.getCode().toString(), "20051001", ShikakuSoshitsuJiyu.転出.getCode().toString(), "", ""));
 
             KijunTsukiShichosonFinder sut = createKijunTsukiShichosonFinder();
@@ -254,8 +255,8 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
             initialize();
 
             被保険者台帳List.add(createHihokenshaDaicho("000200", "0000000001", "20000401010101", ShikakuShutokuJiyu.帰化.getCode().toString(), "20000401", ShikakuSoshitsuJiyu.死亡.getCode().toString(), "20030401", "000046"));
-            被保険者台帳List.add(createHihokenshaDaicho("000200", "0000000001", "20030401010101", ShikakuShutokuJiyu.合併.getCode().toString(), "20030401", ShikakuSoshitsuJiyu.合併.getCode().toString(), "20050106", "000046"));
-            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20060101083001", ShikakuShutokuJiyu.なし.getCode().toString(), "20050106", ShikakuSoshitsuJiyu.帰化.getCode().toString(), "20060101", "000043"));
+            被保険者台帳List.add(createHihokenshaDaicho("000200", "0000000001", "20030401010101", ShikakuShutokuJiyu.帰化.getCode().toString(), "20030401", ShikakuSoshitsuJiyu.転出.getCode().toString(), "20050106", "000046"));
+            被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20060101083001", ShikakuShutokuJiyu.年齢到達.getCode().toString(), "20050106", ShikakuSoshitsuJiyu.転出.getCode().toString(), "20060101", "000043"));
             被保険者台帳List.add(createHihokenshaDaicho("000100", "0000000001", "20060101083001", ShikakuShutokuJiyu.転入.getCode().toString(), "20060101", ShikakuSoshitsuJiyu.その他.getCode().toString(), "", "000043"));
 
             合併情報Map.put(1, createGappeiJoho("20061001", "01", "000100", "1", "100056", "", "20061001"));
@@ -588,7 +589,7 @@ public class KijunTsukiShichosonFinderTest extends DbzTestBase {
         HihokenshaDaichoModel mock = mock(HihokenshaDaichoModel.class);
         when(mock.get市町村コード()).thenReturn(new LasdecCode(市町村コード));
         when(mock.get被保険者番号()).thenReturn(new HihokenshaNo(new RString(被保険者番号)));
-        when(mock.get処理日時()).thenReturn(new YMDHMS(処理日時));
+        when(mock.get処理日時()).thenReturn(ShoriTimestamp.of(new YMDHMS(処理日時)));
         when(mock.get資格取得事由()).thenReturn(ShikakuShutokuJiyu.toValue(new RString(資格取得事由コード)));
         when(mock.get資格取得年月日()).thenReturn(new FlexibleDate(資格取得日));
         when(mock.get資格喪失事由()).thenReturn(ShikakuSoshitsuJiyu.toValue(new RString(資格喪失事由コード)));

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1003TashichosonJushochiTokureiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1003TashichosonJushochiTokureiEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.TashichosonJushochiTokureiDac;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1003TashichosonJushochiTokureiEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
