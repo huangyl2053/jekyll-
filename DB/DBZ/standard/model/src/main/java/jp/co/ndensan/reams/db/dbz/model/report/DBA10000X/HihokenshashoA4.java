@@ -6,6 +6,10 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItemGroup;
 // TODO n8178 参照できないため、福祉を参考に一時的にpomを書き換えて見えるようにした。TsuchishoSofusakiSourceがModelに移動した後に修正する。 2015年2月末
 import jp.co.ndensan.reams.ur.urz.business.report.parts.tsuchishoatesaki.TsuchishoAtesakiSource;
 
+/**
+ *
+ * @author n8178
+ */
 public class HihokenshashoA4 implements IHihokenshasho {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

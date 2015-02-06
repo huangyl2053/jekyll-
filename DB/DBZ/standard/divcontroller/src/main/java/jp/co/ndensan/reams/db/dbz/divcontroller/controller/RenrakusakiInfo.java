@@ -12,7 +12,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.KaigoRenrakusaki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoRenrakusakiInfo.KaigoRenrakusakiInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoRenrakusakiInfo.dgRenrakusaki_Row;
-import jp.co.ndensan.reams.db.dbz.realservice.RenrakusakiInfoFinder;
 import jp.co.ndensan.reams.db.dbz.realservice.RenrakusakiInfoManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -22,7 +21,9 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.RenrakusakiKubunNo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -49,7 +50,7 @@ public class RenrakusakiInfo {
 
         List<KaigoRenrakusaki> list = new ArrayList<>();
 
-        if (div.getHihokenshaNo() != null && div.getHihokenshaNo().isEmpty() == false) {
+        if (div.getHihokenshaNo() != null && !div.getHihokenshaNo().isEmpty()) {
 
             if (div.getHokenshaNo().isEmpty()) {
                 //TODO n9606 漢那憲作 証記載保険者番号を取得してセットするよう今後対応を行う。
@@ -191,46 +192,44 @@ public class RenrakusakiInfo {
      * @return ResponseData
      */
     public ResponseData onClick_btnDelete(KaigoRenrakusakiInfoDiv div) {
-        ResponseData<KaigoRenrakusakiInfoDiv> response = new ResponseData<>();
 
-        Boolean result = Boolean.FALSE;
+        if (div.getHihokenshaNo() == null || div.getHihokenshaNo().isEmpty()) {
+            return ResponseDatas.newResponseData(div);
+        }
+
         RString shishoCode = null;
+        dgRenrakusaki_Row rowRenrakusaki = div.getDgRenrakusaki().getSelectedItems().get(0);
+        DecimalFormat df = new DecimalFormat("00000000");
 
-        if (div.getHihokenshaNo() != null && div.getHihokenshaNo().isEmpty() == false) {
+        //TODO n3327 三浦凌 たまたま見つけたのでコメントを付加。連絡先のsaveを複数のメソッドでやっているのでまとめるべき。
+        KaigoRenrakusaki renrakusakiJoho = new KaigoRenrakusaki(
+                new AtenaMeisho(rowRenrakusaki.getShimei()),
+                new AtenaKanaMeisho(rowRenrakusaki.getShimeiKana()),
+                new TelNo(rowRenrakusaki.getTel()),
+                new TelNo(rowRenrakusaki.getKeitaiNo()),
+                new YubinNo(rowRenrakusaki.getYubinNo()),
+                new AtenaJusho(rowRenrakusaki.getJusho()),
+                rowRenrakusaki.getTsuzukigara(),
+                new RenrakusakiKubunNo(new RString(df.format(Integer.parseInt(
+                                                div.getDgRenrakusaki().getSelectedItems().get(0).
+                                                getRenrakusakiKbnNo().toString())))),
+                new ShoKisaiHokenshaNo(div.getHokenshaNo()),
+                new HihokenshaNo(div.getHihokenshaNo()),
+                shishoCode);
 
-            dgRenrakusaki_Row rowRenrakusaki = div.getDgRenrakusaki().getSelectedItems().get(0);
-            DecimalFormat df = new DecimalFormat("00000000");
+        boolean isSaveSuccess = new RenrakusakiInfoManager().remove(renrakusakiJoho);
 
-            KaigoRenrakusaki renrakusakiJoho = new KaigoRenrakusaki(
-                    new AtenaMeisho(rowRenrakusaki.getShimei()),
-                    new AtenaKanaMeisho(rowRenrakusaki.getShimeiKana()),
-                    new TelNo(rowRenrakusaki.getTel()),
-                    new TelNo(rowRenrakusaki.getKeitaiNo()),
-                    new YubinNo(rowRenrakusaki.getYubinNo()),
-                    new AtenaJusho(rowRenrakusaki.getJusho()),
-                    rowRenrakusaki.getTsuzukigara(),
-                    new RenrakusakiKubunNo(new RString(df.format(Integer.parseInt(
-                                                    div.getDgRenrakusaki().getSelectedItems().get(0).
-                                                    getRenrakusakiKbnNo().toString())))),
-                    new ShoKisaiHokenshaNo(div.getHokenshaNo()),
-                    new HihokenshaNo(div.getHihokenshaNo()),
-                    shishoCode);
+        if (isSaveSuccess == Boolean.TRUE) {
+            div.getDgRenrakusaki().getDataSource().remove(div.getDgRenrakusaki().
+                    getSelectedItems().get(0));
 
-            result = new RenrakusakiInfoManager().remove(renrakusakiJoho);
-
-            if (result == Boolean.TRUE) {
-                div.getDgRenrakusaki().getDataSource().remove(div.getDgRenrakusaki().
-                        getSelectedItems().get(0));
-
-                div.getBtnAdd().setDisabled(false);
-                if (div.getDgRenrakusaki().getTotalRecords() == 0) {
-                    div.getBtnDelete().setDisabled(true);
-                }
+            div.getBtnAdd().setDisabled(false);
+            if (div.getDgRenrakusaki().getTotalRecords() == 0) {
+                div.getBtnDelete().setDisabled(true);
             }
         }
 
-        response.data = div;
-        return response;
+        return ResponseDatas.newResponseData(div);
     }
 
     /**
@@ -265,89 +264,92 @@ public class RenrakusakiInfo {
     public ResponseData onClick_btnKoshin(KaigoRenrakusakiInfoDiv div) {
         ResponseData<KaigoRenrakusakiInfoDiv> response = new ResponseData<>();
 
-        Boolean result = Boolean.FALSE;
+        if (!chkInputJoho(div)) {
+            return ResponseDatas.newResponseData(div);
+        }
+        if (div.getHihokenshaNo() == null || !div.getHihokenshaNo().isEmpty()) {
+            return ResponseDatas.newResponseData(div);
+        }
+
         RString shishoCode = null;
 
-        if (chkInputJoho(div) == Boolean.TRUE) {
-            if (div.getHihokenshaNo() != null && div.getHihokenshaNo().isEmpty() == false) {
+        DecimalFormat df = new DecimalFormat("00000000");
+        KaigoRenrakusaki renrakusakiJoho = new KaigoRenrakusaki(
+                new AtenaMeisho(div.getSelectedContents().getTxtShimei().getValue()),
+                new AtenaKanaMeisho(div.getSelectedContents().getTxtShimeiKana().getValue()),
+                new TelNo(div.getSelectedContents().getTxtTel().getValue()),
+                new TelNo(div.getSelectedContents().getTxtKeitaiNo().getValue()),
+                new YubinNo(div.getSelectedContents().getTxtYubinNo().getText()),
+                new AtenaJusho(div.getSelectedContents().getTxtJusho().getValue()),
+                div.getSelectedContents().getTxtTsuzukigara().getValue(),
+                new RenrakusakiKubunNo(new RString(df.format(Integer.parseInt(
+                                                div.getSelectedContents().
+                                                getTxtRenrakusakiKbnNo().getValue().toString())))),
+                new ShoKisaiHokenshaNo(div.getHokenshaNo()),
+                new HihokenshaNo(div.getHihokenshaNo()),
+                shishoCode);
 
-                DecimalFormat df = new DecimalFormat("00000000");
+        boolean isSaveSucces = new RenrakusakiInfoManager().save(renrakusakiJoho);
 
-                KaigoRenrakusaki renrakusakiJoho = new KaigoRenrakusaki(
-                        new AtenaMeisho(div.getSelectedContents().getTxtShimei().getValue()),
-                        new AtenaKanaMeisho(div.getSelectedContents().getTxtShimeiKana().getValue()),
-                        new TelNo(div.getSelectedContents().getTxtTel().getValue()),
-                        new TelNo(div.getSelectedContents().getTxtKeitaiNo().getValue()),
-                        new YubinNo(div.getSelectedContents().getTxtYubinNo().getText()),
-                        new AtenaJusho(div.getSelectedContents().getTxtJusho().getValue()),
+        if (!isSaveSucces) {
+            //TODO n3327 たまたま見つけたので修正。現在は作業している時間が無いのでTODOコメントにより省略。適切なエラー処理を考えて、適用する必要がある。
+            throw new ApplicationException("");
+        } else {
+            div.getSelectedContents().setDisplayNone(true);
+
+            if (div.getShoriKbn().equals(SHORIKBN_INSERT)) {
+
+                //連絡先データグリッドを更新表示する
+                List<dgRenrakusaki_Row> renrakusakiList = div.getDgRenrakusaki().getDataSource();
+                renrakusakiList.add(createRenrakusakiListRow(
+                        div.getSelectedContents().getTxtRenrakusakiKbnNo().getValue(),
+                        div.getSelectedContents().getTxtShimei().getValue(),
                         div.getSelectedContents().getTxtTsuzukigara().getValue(),
-                        new RenrakusakiKubunNo(new RString(df.format(Integer.parseInt(
-                                                        div.getSelectedContents().
-                                                        getTxtRenrakusakiKbnNo().getValue().toString())))),
-                        new ShoKisaiHokenshaNo(div.getHokenshaNo()),
-                        new HihokenshaNo(div.getHihokenshaNo()),
-                        shishoCode);
+                        div.getSelectedContents().getTxtTel().getValue(),
+                        div.getSelectedContents().getTxtKeitaiNo().getValue(),
+                        div.getSelectedContents().getTxtShimeiKana().getValue(),
+                        div.getSelectedContents().getTxtYubinNo().getText(),
+                        div.getSelectedContents().getTxtJusho().getValue()
+                ));
+                div.getDgRenrakusaki().setDataSource(renrakusakiList);
 
-                result = new RenrakusakiInfoManager().save(renrakusakiJoho);
+                List<dgRenrakusaki_Row> selectRenrakusakiList = new ArrayList<>();
+                selectRenrakusakiList.add(div.getDgRenrakusaki().getDataSource().get(
+                        div.getDgRenrakusaki().getTotalRecords() - 1));
+                div.getDgRenrakusaki().setSelectedItems(selectRenrakusakiList);
 
-                if (result == Boolean.TRUE) {
-                    div.getSelectedContents().setDisplayNone(true);
+            } else if (div.getShoriKbn().equals(SHORIKBN_UPDATE)) {
 
-                    if (div.getShoriKbn().equals(SHORIKBN_INSERT)) {
+                //連絡先データグリッドに入力内容を反映する
+                div.getDgRenrakusaki().getSelectedItems().get(0).setShimei(
+                        div.getSelectedContents().getTxtShimei().getValue());
 
-                        //連絡先データグリッドを更新表示する
-                        List<dgRenrakusaki_Row> renrakusakiList = div.getDgRenrakusaki().getDataSource();
-                        renrakusakiList.add(createRenrakusakiListRow(
-                                div.getSelectedContents().getTxtRenrakusakiKbnNo().getValue(),
-                                div.getSelectedContents().getTxtShimei().getValue(),
-                                div.getSelectedContents().getTxtTsuzukigara().getValue(),
-                                div.getSelectedContents().getTxtTel().getValue(),
-                                div.getSelectedContents().getTxtKeitaiNo().getValue(),
-                                div.getSelectedContents().getTxtShimeiKana().getValue(),
-                                div.getSelectedContents().getTxtYubinNo().getText(),
-                                div.getSelectedContents().getTxtJusho().getValue()
-                        ));
-                        div.getDgRenrakusaki().setDataSource(renrakusakiList);
+                div.getDgRenrakusaki().getSelectedItems().get(0).setShimeiKana(
+                        div.getSelectedContents().getTxtShimeiKana().getValue());
 
-                        List<dgRenrakusaki_Row> selectRenrakusakiList = new ArrayList<>();
-                        selectRenrakusakiList.add(div.getDgRenrakusaki().getDataSource().get(
-                                div.getDgRenrakusaki().getTotalRecords() - 1));
-                        div.getDgRenrakusaki().setSelectedItems(selectRenrakusakiList);
+                div.getDgRenrakusaki().getSelectedItems().get(0).setTel(
+                        div.getSelectedContents().getTxtTel().getValue());
 
-                    } else if (div.getShoriKbn().equals(SHORIKBN_UPDATE)) {
+                div.getDgRenrakusaki().getSelectedItems().get(0).setKeitaiNo(
+                        div.getSelectedContents().getTxtKeitaiNo().getValue());
 
-                        //連絡先データグリッドに入力内容を反映する
-                        div.getDgRenrakusaki().getSelectedItems().get(0).setShimei(
-                                div.getSelectedContents().getTxtShimei().getValue());
+                div.getDgRenrakusaki().getSelectedItems().get(0).setYubinNo(
+                        div.getSelectedContents().getTxtYubinNo().getText());
 
-                        div.getDgRenrakusaki().getSelectedItems().get(0).setShimeiKana(
-                                div.getSelectedContents().getTxtShimeiKana().getValue());
+                div.getDgRenrakusaki().getSelectedItems().get(0).setJusho(
+                        div.getSelectedContents().getTxtJusho().getValue());
 
-                        div.getDgRenrakusaki().getSelectedItems().get(0).setTel(
-                                div.getSelectedContents().getTxtTel().getValue());
+                div.getDgRenrakusaki().getSelectedItems().get(0).setTsuzukigara(
+                        div.getSelectedContents().getTxtTsuzukigara().getValue());
 
-                        div.getDgRenrakusaki().getSelectedItems().get(0).setKeitaiNo(
-                                div.getSelectedContents().getTxtKeitaiNo().getValue());
-
-                        div.getDgRenrakusaki().getSelectedItems().get(0).setYubinNo(
-                                div.getSelectedContents().getTxtYubinNo().getText());
-
-                        div.getDgRenrakusaki().getSelectedItems().get(0).setJusho(
-                                div.getSelectedContents().getTxtJusho().getValue());
-
-                        div.getDgRenrakusaki().getSelectedItems().get(0).setTsuzukigara(
-                                div.getSelectedContents().getTxtTsuzukigara().getValue());
-
-                    }
-
-                    if (div.getDgRenrakusaki().getTotalRecords() >= MAX_ROW) {
-                        div.getBtnAdd().setDisabled(true);
-                    } else {
-                        div.getBtnAdd().setDisabled(false);
-                    }
-                    div.getBtnDelete().setDisabled(false);
-                }
             }
+
+            if (div.getDgRenrakusaki().getTotalRecords() >= MAX_ROW) {
+                div.getBtnAdd().setDisabled(true);
+            } else {
+                div.getBtnAdd().setDisabled(false);
+            }
+            div.getBtnDelete().setDisabled(false);
         }
 
         response.data = div;
@@ -362,18 +364,18 @@ public class RenrakusakiInfo {
      */
     private boolean chkInputJoho(KaigoRenrakusakiInfoDiv div) {
 
-        Boolean hanteiFlg = Boolean.TRUE;
+        boolean hanteiFlg = true;
 
         if ((div.getSelectedContents().getTxtShimei().getValue().isEmpty())
                 || (div.getSelectedContents().getTxtShimeiKana().getValue().isEmpty())
                 || (div.getSelectedContents().getTxtTsuzukigara().getValue().isEmpty())
                 || (div.getSelectedContents().getTxtRenrakusakiKbnNo().getValue().isEmpty())) {
-            hanteiFlg = Boolean.FALSE;
+            hanteiFlg = false;
         }
 
         if ((div.getSelectedContents().getTxtTel().getValue().isEmpty())
                 && (div.getSelectedContents().getTxtKeitaiNo().getValue().isEmpty())) {
-            hanteiFlg = Boolean.FALSE;
+            hanteiFlg = false;
         }
 
         if (div.getShoriKbn().equals(SHORIKBN_INSERT)) {
@@ -382,7 +384,7 @@ public class RenrakusakiInfo {
             for (dgRenrakusaki_Row rowRenrakusaki : list) {
                 if (rowRenrakusaki.getRenrakusakiKbnNo().equals(
                         div.getSelectedContents().getTxtRenrakusakiKbnNo().getValue())) {
-                    hanteiFlg = Boolean.FALSE;
+                    hanteiFlg = false;
                     break;
                 }
             }

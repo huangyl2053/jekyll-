@@ -19,7 +19,7 @@ public interface IHihokenshashoB4CommonEditData extends IHihokenshashoCommonEdit
      *
      * @return 帳票ソース
      */
-    public HihokenshashoB4 getEditData();
+    HihokenshashoB4 getEditData();
 
     /**
      * @return the umareMeiji1

@@ -371,11 +371,11 @@ public class KaigoJogaiTokureiTaishoShisetsuModel implements Serializable {
     /**
      * FAX番号を設定します。
      *
-     * @param FAX番号 FAX番号
+     * @param fax番号 FAX番号
      */
-    public void setFAX番号(TelNo FAX番号) {
-        requireNonNull(FAX番号, UrSystemErrorMessages.値がnull.getReplacedMessage("FAX番号"));
-        entity.setFaxNo(FAX番号);
+    public void setFAX番号(TelNo fax番号) {
+        requireNonNull(fax番号, UrSystemErrorMessages.値がnull.getReplacedMessage("FAX番号"));
+        entity.setFaxNo(fax番号);
     }
 
     /**

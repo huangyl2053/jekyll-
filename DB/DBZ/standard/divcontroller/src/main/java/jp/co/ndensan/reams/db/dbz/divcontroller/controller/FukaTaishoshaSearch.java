@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaModel;
 import jp.co.ndensan.reams.db.dbz.model.util.SearchResult;
 import jp.co.ndensan.reams.db.dbz.realservice.search.FukaSearchItem;
 import jp.co.ndensan.reams.db.dbz.realservice.TaishoshaFinder;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.KensakuYusenKubun;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IShikibetsuTaishoGyomuHanteiKey;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;

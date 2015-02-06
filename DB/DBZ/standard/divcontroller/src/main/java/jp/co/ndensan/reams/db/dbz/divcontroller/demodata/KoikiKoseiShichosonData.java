@@ -20,6 +20,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  */
 public class KoikiKoseiShichosonData {
 
+    /**
+     *
+     */
     public interface IShichoson {
 
         /**
@@ -37,15 +40,24 @@ public class KoikiKoseiShichosonData {
         RString getName();
     }
 
+    /**
+     *
+     */
     public interface IShichosons {
 
+        /**
+         * @return as List
+         */
         List<IShichoson> asList();
 
+        /**
+         * @return as list of KeyValueDataSource
+         */
         List<KeyValueDataSource> asKeyValueDataSources();
 
     }
 
-    private class Shichosons implements IShichosons {
+    private final class Shichosons implements IShichosons {
 
         private final List<HashMap> dataFromYaml;
 
@@ -77,7 +89,7 @@ public class KoikiKoseiShichosonData {
             });
         }
 
-        private class Shichoson implements KoikiKoseiShichosonData.IShichoson {
+        private final class Shichoson implements KoikiKoseiShichosonData.IShichoson {
 
             private final RString code;
             private final RString name;
@@ -100,6 +112,9 @@ public class KoikiKoseiShichosonData {
         }
     }
 
+    /**
+     * @return IShichosons
+     */
     public IShichosons get広域構成市町村() {
         return new Shichosons(YamlLoader.DBZ.loadAsList(new RString("hihokenshaFinder/KoikiKoseiShichoson.yml")));
     }
