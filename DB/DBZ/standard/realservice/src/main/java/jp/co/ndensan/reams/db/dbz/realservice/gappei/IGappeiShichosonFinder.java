@@ -95,6 +95,14 @@ public interface IGappeiShichosonFinder {
     /**
      * 条件に該当する直近合併市町村情報を取得します。
      *
+     * @param 市町村コード 市町村コード
+     * @return 合併市町村情報
+     */
+    Optional<GappeiShichosonJohoModel> get直近合併市町村情報(LasdecCode 市町村コード);
+
+    /**
+     * 条件に該当する直近合併市町村情報を取得します。
+     *
      * @param 旧保険者番号 旧保険者番号
      * @return 合併市町村情報
      */

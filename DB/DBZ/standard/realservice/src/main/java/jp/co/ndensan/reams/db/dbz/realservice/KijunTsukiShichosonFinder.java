@@ -100,6 +100,41 @@ public class KijunTsukiShichosonFinder {
      * 対象となる被保険者の基準月時点での合併市町村情報を取得します。
      *
      * @param 基準年月 基準年月
+     * @param 市町村コード 市町村コード
+     * @return 合併市町村情報
+     * @throws IllegalArgumentException 基準年月より後に合併した保険者番号を指定した場合
+     */
+    //TODO n8178 城間篤人 後から追加したメソッドのためテスト未作成。生産性課題優先のためテストの作成を後日行う。2015年2月末まで。
+    public Optional<GappeiShichosonJohoModel> get基準月市町村情報(
+            FlexibleYearMonth 基準年月, LasdecCode 市町村コード) throws IllegalArgumentException {
+
+        if (gappeiFinder.get最新合併市町村情報(市町村コード).isPresent()) {
+            Optional<GappeiShichosonJohoModel> check2 = gappeiFinder.get直近合併市町村情報(市町村コード);
+            if (check2.isPresent()) {
+                return set新旧被保険者番号変換区分(check2, 基準年月);
+            } else {
+                return set新旧被保険者番号変換区分(gappeiFinder.get市町村情報(市町村コード), 基準年月);
+            }
+        } else {
+            Optional<GappeiShichosonJohoModel> check3 = gappeiFinder.get直近合併市町村情報(市町村コード);
+            if (check3.isPresent()) {
+                return set新旧被保険者番号変換区分(check3, 基準年月);
+            } else {
+                Optional<GappeiShichosonJohoModel> check4 = gappeiFinder.get最新合併市町村情報(市町村コード);
+                if (check4.isPresent()) {
+                    throw new IllegalArgumentException(UrErrorMessages.不正.getMessage().replace("保険者番号").evaluate());
+                } else {
+                    return set新旧被保険者番号変換区分(gappeiFinder.get市町村情報(市町村コード), 基準年月);
+                }
+            }
+        }
+
+    }
+
+    /**
+     * 対象となる被保険者の基準月時点での合併市町村情報を取得します。
+     *
+     * @param 基準年月 基準年月
      * @param 保険者番号 保険者番号
      * @return 合併市町村情報
      * @throws IllegalArgumentException 基準年月より後に合併した保険者番号を指定した場合

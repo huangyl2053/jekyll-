@@ -584,10 +584,10 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     @Override
-    public void initialize(LasdecCode 市町村コード, HokenshaJohoDisplayMode mode) {
+    public void initialize(LasdecCode 市町村コード, LasdecCode 旧市町村コード, HokenshaJohoDisplayMode mode) {
 
         ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(this);
-        handler.initialize(市町村コード, mode);
+        handler.initialize(市町村コード, 旧市町村コード, mode);
     }
 
     @Override

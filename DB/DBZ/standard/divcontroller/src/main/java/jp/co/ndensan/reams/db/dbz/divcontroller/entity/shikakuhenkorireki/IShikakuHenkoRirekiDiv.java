@@ -30,9 +30,10 @@ public interface IShikakuHenkoRirekiDiv {
      * </ul>
      *
      * @param 市町村コード LasdecCode
+     * @param 旧市町村コード LasdecCode
      * @param mode ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode
      */
-    void initialize(LasdecCode 市町村コード, ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode mode);
+    void initialize(LasdecCode 市町村コード, LasdecCode 旧市町村コード, ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode mode);
 
     /**
      * 入力明細エリアの情報を初期化します。

@@ -47,7 +47,9 @@ public class ShikakuHenkoRireki {
      */
     public ResponseData<ShikakuHenkoRirekiDiv> load(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
         ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(henkoRirekiDiv);
+        //TODO n8178 城間篤人 修正の必要有り。 2015年2月末まで
         LasdecCode lasdecCode = new LasdecCode("123456");
+        LasdecCode kyuLasdecCode = new LasdecCode("123456");
 
         HokenshaJohoDisplayMode mode = ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiNashi;
         if (henkoRirekiDiv.getMode_HokenshaJohoDisplayMode() != null) {
@@ -55,7 +57,7 @@ public class ShikakuHenkoRireki {
         }
 
         handler.load(lasdecCode, new HihokenshaNo("1234567892"));
-        handler.initialize(lasdecCode, mode);
+        handler.initialize(lasdecCode, kyuLasdecCode, mode);
         return createSettingData(henkoRirekiDiv);
 
     }

@@ -76,7 +76,7 @@ public class ShikakuHenkoRirekiHandler {
         setHenkoJiyuDataSource();
     }
 
-    public void initialize(LasdecCode 市町村コード, ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode mode) {
+    public void initialize(LasdecCode 市町村コード, LasdecCode 旧市町村コード, ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode mode) {
         HihokenshaDaichoFinder hihokenshaFinder = new HihokenshaDaichoFinder();
         HihokenshaDaichoList 被保険者List = new HihokenshaDaichoList(hihokenshaFinder.find直近被保険者台帳一覧(市町村コード));
 
@@ -85,21 +85,18 @@ public class ShikakuHenkoRirekiHandler {
             case TanitsuGappeiNashi:
                 break;
             case TanitsuGappeiAri:
-                shikakuHenkoRirekiDiv.setMode_HokenshaJohoDisplayMode(ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiAri);
+                setKyuHokensya(旧市町村コード);
                 setTanitsuGappeiAri(被保険者List);
-                setKyuHokensya(市町村コード);
                 break;
 
             case KoikiGappeiNashi:
-                shikakuHenkoRirekiDiv.setMode_HokenshaJohoDisplayMode(ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.KoikiGappeiNashi);
                 setJuminJohoDataSource();
                 setKoikiGappeiNashi(被保険者List);
                 break;
             case KoikiGappeiAri:
-                shikakuHenkoRirekiDiv.setMode_HokenshaJohoDisplayMode(ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiAri);
+                setKyuHokensya(旧市町村コード);
                 setJuminJohoDataSource();
                 setKoikiGappeiAri(被保険者List);
-                setKyuHokensya(市町村コード);
                 break;
             default:
                 break;
@@ -109,10 +106,8 @@ public class ShikakuHenkoRirekiHandler {
 
     private void setKyuHokensya(LasdecCode lasdecCode) {
 
-        //TODO n8178 城間篤人 複数個所で使用するなら、本来ならクラス化するべき。
         KijunTsukiShichosonFinder finder = new KijunTsukiShichosonFinder();
-        Optional<GappeiShichosonJohoModel> gappeiInfo = finder.get基準月市町村情報(FlexibleDate.getNowDate().getYearMonth(),
-                new ShoKisaiHokenshaNo(lasdecCode.getColumnValue()));
+        Optional<GappeiShichosonJohoModel> gappeiInfo = finder.get基準月市町村情報(FlexibleDate.getNowDate().getYearMonth(), lasdecCode);
         if (gappeiInfo.isPresent()) {
             PanelSessionAccessor.put(shikakuHenkoRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.newItemList(gappeiInfo.get().get単一市町村情報()));
         } else {
@@ -121,6 +116,12 @@ public class ShikakuHenkoRirekiHandler {
     }
 
     private RString getKyuHokenshaName(final LasdecCode lasdecCode) {
+
+        switch (shikakuHenkoRirekiDiv.getMode_HokenshaJohoDisplayMode()) {
+            case KoikiGappeiNashi:
+            case TanitsuGappeiNashi:
+                return RString.EMPTY;
+        }
 
         IItemList<IGappeiShichoson> kyuHokenshaList
                 = PanelSessionAccessor.get(shikakuHenkoRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.class);
@@ -564,6 +565,7 @@ public class ShikakuHenkoRirekiHandler {
         shikakuHenkoRirekiDiv.setExecutionStatus(status.getValue());
     }
 
+    //TODO n8178 被保険者ではなく、旧保険者情報を参照するように修正する必要がある。 2015年2月末
     private List<KeyValueDataSource> createSochimotoDataSource(HihokenshaDaichoList 被保険者List) {
 
         List<KeyValueDataSource> dataSource = new ArrayList<>();
@@ -583,6 +585,7 @@ public class ShikakuHenkoRirekiHandler {
         return RString.EMPTY;
     }
 
+    //TODO n8178 被保険者ではなく、旧保険者情報を参照するように修正する必要がある。 2015年2月末
     private List<KeyValueDataSource> createKyuhokenshaDataSource(HihokenshaDaichoList 被保険者List) {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         for (HihokenshaDaichoModel hihokensha : 被保険者List) {

@@ -60,8 +60,8 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
      */
     public _GappeiShichosonFinder() {
         gappeiDac = InstanceProvider.create(GappeiJohoDac.class);
-        tanitsuDac = InstanceProvider.createWithCustomize(GappeiShichosonDac.class);
-        koikiDac = InstanceProvider.createWithCustomize(KoseiShichosonMasterDac.class);
+        tanitsuDac = InstanceProvider.create(GappeiShichosonDac.class);
+        koikiDac = InstanceProvider.create(KoseiShichosonMasterDac.class);
         gappeiConfig = new GappeiJohoKanriConfig();
         hokenshaConfig = new HokenshaJohoConfig();
     }
@@ -159,6 +159,19 @@ public class _GappeiShichosonFinder implements IGappeiShichosonFinder {
         List<GappeiShichosonJohoModel> 合併市町村情報List = get合併市町村情報List(make単一Key(旧市町村コード), make広域Key(旧市町村コード));
         if (!合併市町村情報List.isEmpty()) {
             return Optional.of(合併市町村情報List.get(0));
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<GappeiShichosonJohoModel> get直近合併市町村情報(LasdecCode 市町村コード) {
+
+        if (!is合併あり()) {
+            return Optional.empty();
+        }
+        List<GappeiShichosonJohoModel> 合併市町村情報List = get合併市町村情報(市町村コード).toList();
+        if (!合併市町村情報List.isEmpty()) {
+            return Optional.of(合併市町村情報List.get(合併市町村情報List.size() - 1));
         }
         return Optional.empty();
     }
