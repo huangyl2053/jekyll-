@@ -91,16 +91,17 @@ public class KyufuSeigenEditorBase {
     }
 
     private void setKyufuSeigen(IKyufuSeigenSetter setter, RString kyufuSeigenName, Range<FlexibleDate> kyufuRange) {
-        int halfIndex;
-        if (kyufuSeigenName.length() <= KYUFU_SEIGEN_NAME_LENGTH) {
-            halfIndex = KYUFU_SEIGEN_NAME_LENGTH / 2;
-            setter.setSeigen1(kyufuSeigenName.substring(0, halfIndex));
-            setter.setSeigen2(kyufuSeigenName.substring(halfIndex, KYUFU_SEIGEN_NAME_LENGTH));
-        } else {
-            halfIndex = KYUFU_SEIGEN_LONG_NAME_LENGTH / 2;
-            setter.setSeigenLong1(kyufuSeigenName.substring(0, halfIndex));
-            setter.setSeigenLong2(kyufuSeigenName.substring(halfIndex, KYUFU_SEIGEN_LONG_NAME_LENGTH));
-        }
+        //TODO n8178 城間篤人 長さ8か12の文字列を受け取ることしか考慮していない実装になっているため例外で落ちる。後日修正 2015年2月末
+//        int halfIndex;
+//        if (kyufuSeigenName.length() <= KYUFU_SEIGEN_NAME_LENGTH) {
+//            halfIndex = KYUFU_SEIGEN_NAME_LENGTH / 2;
+//            setter.setSeigen1(kyufuSeigenName.substring(0, halfIndex));
+//            setter.setSeigen2(kyufuSeigenName.substring(halfIndex, KYUFU_SEIGEN_NAME_LENGTH));
+//        } else {
+//            halfIndex = KYUFU_SEIGEN_LONG_NAME_LENGTH / 2;
+//            setter.setSeigenLong1(kyufuSeigenName.substring(0, halfIndex));
+//            setter.setSeigenLong2(kyufuSeigenName.substring(halfIndex, KYUFU_SEIGEN_LONG_NAME_LENGTH));
+//        }
         setter.setSeigenSt(toWarekiString(kyufuRange.getFrom()));
         setter.setSeigenEd(toWarekiString(kyufuRange.getTo()));
     }

@@ -49,7 +49,7 @@ public class HihokenshaHakko {
 
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
 
-        hakkoDiv.getCcdHihokenshaShikakuHakko().load(taishoshaKey.get被保険者番号(), taishoshaKey.get識別コード(), true);
+        hakkoDiv.getCcdHihokenshaShikakuHakko().load(taishoshaKey.get被保険者番号(), taishoshaKey.get識別コード(), false);
         return ResponseDatas.createSettingDataTo(hakkoDiv);
     }
 
