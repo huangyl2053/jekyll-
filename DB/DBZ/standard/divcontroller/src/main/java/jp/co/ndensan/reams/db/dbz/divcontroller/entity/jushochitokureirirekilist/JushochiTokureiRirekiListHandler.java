@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiTekiy
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.util.Lists;
+import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoCondition;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
@@ -25,6 +26,9 @@ import jp.co.ndensan.reams.db.dbz.definition.util.function.IPredicate;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonJohoModel;
+import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
+import jp.co.ndensan.reams.db.dbz.realservice.KijunTsukiShichosonFinder;
 import jp.co.ndensan.reams.ur.ura.business.IAtenaShokaiSimple;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.ur.urz.definition.code.CodeMasterHelper;
@@ -63,6 +67,7 @@ public class JushochiTokureiRirekiListHandler {
     private final JushochiTokureiRirekiListDiv jutokuRirekiDiv;
     private static final RString PANEL_SESSION_ACCESSOR_KEY = new RString("jushochiTokureiRireki");
     private static final RString PANEL_SESSION_ACCESSOR_EDITING_KEY = new RString("jushochiTokureiRireki_Editing");
+    private static final RString SESSION_KYU_HOKENSHA = new RString("kyuHokensha");
 
     /**
      * コンストラクタです。
@@ -354,11 +359,69 @@ public class JushochiTokureiRirekiListHandler {
             row.setKaijoJiyu(model.get住所地特例解除事由().getShortName());
         }
         row.setSochimotoHokensha(model.get広住特措置元市町村コード().getColumnValue());
-        row.setKyuHokensha(model.get旧市町村コード().getColumnValue());
+        row.setKyuHokensha(getKyuHokenshaName(model.get旧市町村コード()));
         if (model.getEntity().getLastUpdateTimestamp() != null) {
             row.getShoriDate().setValue((model.getEntity().getLastUpdateTimestamp().getDate()));
         }
         return row;
+    }
+
+    private void setKyuHokensya(LasdecCode lasdecCode) {
+
+        KijunTsukiShichosonFinder finder = new KijunTsukiShichosonFinder();
+        Optional<GappeiShichosonJohoModel> gappeiInfo = finder.get基準月市町村情報(FlexibleDate.getNowDate().getYearMonth(), lasdecCode);
+        if (gappeiInfo.isPresent()) {
+            PanelSessionAccessor.put(jutokuRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.newItemList(gappeiInfo.get().get単一市町村情報()));
+        } else {
+            PanelSessionAccessor.put(jutokuRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.empty());
+        }
+    }
+
+    private List<KeyValueDataSource> getKyuHokensyaKeyValueDataSource() {
+
+        switch (jutokuRirekiDiv.getMode_HokenshaJohoDisplayMode()) {
+            case KoikiGappeiNashi:
+            case TanitsuGappeiNashi:
+                return Collections.<KeyValueDataSource>emptyList();
+        }
+
+        IItemList<IGappeiShichoson> kyuHokenshaList
+                = PanelSessionAccessor.get(jutokuRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.class);
+
+        IFunction<IGappeiShichoson, KeyValueDataSource> predicate = new IFunction<IGappeiShichoson, KeyValueDataSource>() {
+            @Override
+            public KeyValueDataSource apply(IGappeiShichoson target) {
+                return new KeyValueDataSource(target.get旧市町村コード().getColumnValue(), target.get旧市町村名称());
+            }
+        };
+
+        return kyuHokenshaList.map(predicate).toList();
+    }
+
+    private RString getKyuHokenshaName(final LasdecCode lasdecCode) {
+
+        switch (jutokuRirekiDiv.getMode_HokenshaJohoDisplayMode()) {
+            case KoikiGappeiNashi:
+            case TanitsuGappeiNashi:
+                return RString.EMPTY;
+        }
+
+        IItemList<IGappeiShichoson> kyuHokenshaList
+                = PanelSessionAccessor.get(jutokuRirekiDiv, SESSION_KYU_HOKENSHA, ItemList.class);
+
+        IPredicate<IGappeiShichoson> predicate = new IPredicate<IGappeiShichoson>() {
+            @Override
+            public boolean evaluate(IGappeiShichoson t) {
+                return t.get旧市町村コード().equals(lasdecCode);
+            }
+        };
+
+        IItemList<IGappeiShichoson> kyuHokensha = kyuHokenshaList.filter(predicate);
+        if (kyuHokensha.isJustOne() && kyuHokensha.findFirst().isPresent()) {
+            return kyuHokensha.findJustOne().get().get旧市町村名称();
+        } else {
+            return RString.EMPTY;
+        }
     }
 
     private void setRowState(dgJutoku_Row row, HihokenshaDaichoModel model) {
@@ -470,7 +533,7 @@ public class JushochiTokureiRirekiListHandler {
     private void modifyEntryData() {
 
         IItemList<HihokenshaDaichoModel> sorted被保険者台帳履歴
-                = getEditing被保険者台帳情報().sorted(HihokenshaDaichoModelComparators.orderBy資格取得年月日.desc());
+                = getEditing被保険者台帳情報().sorted(HihokenshaDaichoModelComparators.orderBy処理日時.desc());
         List<HihokenshaDaichoModel> sortedList = sorted被保険者台帳履歴.toList();
         HihokenshaDaichoModel mergedTekiyoModel;
         HihokenshaDaichoModel mergedKaijoModel;
@@ -496,7 +559,7 @@ public class JushochiTokureiRirekiListHandler {
 
     private void deleteEntryData() {
         IItemList<HihokenshaDaichoModel> sorted被保険者台帳履歴
-                = getEditing被保険者台帳情報().sorted(HihokenshaDaichoModelComparators.orderBy資格取得年月日.desc());
+                = getEditing被保険者台帳情報().sorted(HihokenshaDaichoModelComparators.orderBy処理日時.desc());
         List<HihokenshaDaichoModel> sortedList = sorted被保険者台帳履歴.toList();
         HihokenshaDaichoModel deleteModel;
 
@@ -690,20 +753,28 @@ public class JushochiTokureiRirekiListHandler {
     /**
      * 共有子Divの状態を初期化します。
      *
+     * @param kyuShichosonCode 旧市町村コード
      * @param exeStatus 実行ステータス。Add・Delete・Modifyのうちのいずれかを設定する。
      * @param jutokuExeStatsu
      * 住所地特例実行ステータス。実行ステータス（Add・Delete・Modify）とは別に、Tekiyo・Kaijo・Teisei・Shokaiのうちのいずれかを設定する。
      * @param hokenshaJohoDisplayMode 明細表示モード
      */
-    public void initialize(ViewExecutionStatus exeStatus, JushochiTokureiExecutionStatus jutokuExeStatsu,
+    public void initialize(LasdecCode kyuShichosonCode, ViewExecutionStatus exeStatus, JushochiTokureiExecutionStatus jutokuExeStatsu,
             JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode hokenshaJohoDisplayMode) {
         jutokuRirekiDiv.setExecutionStatus(exeStatus.getValue());
         jutokuRirekiDiv.setJushochiTokureiExecutionState(jutokuExeStatsu.getValue());
 
+        switch (hokenshaJohoDisplayMode) {
+            case TanitsuGappeiAri:
+            case KoikiGappeiAri:
+                setKyuHokensya(kyuShichosonCode);
+                break;
+        }
+
         jutokuRirekiDiv.setMode_HokenshaJohoDisplayMode(hokenshaJohoDisplayMode);
         setTekiyoJiyuDataSource();
         setKaijoJiyuDataSource();
-        setShichosonJohoDataSource();
+        setShichosonJohoDataSource(kyuShichosonCode);
         setJuminJohoDataSource();
     }
 
@@ -719,17 +790,26 @@ public class JushochiTokureiRirekiListHandler {
         jutokuRirekiDiv.getDdlKaijoJiyu().setDataSource(dataSource.toList());
     }
 
-    private void setShichosonJohoDataSource() {
-        //TODO n8178 城間篤人 市町村関連の情報を取得する必要があるが、それらのクラス群はまだ未作成である。どのように対応するか決まり次第修正 2014/12/24
-        List<LasdecCode> kyuShochosonJohoList = Collections.<LasdecCode>emptyList();
-        List<KeyValueDataSource> kyuShichosonDataSource = creaateShichosonKeyValue(kyuShochosonJohoList);
+    private void setShichosonJohoDataSource(LasdecCode kyuLasdecCode) {
+        List<KeyValueDataSource> kyuShichosonDataSource = getKyuHokensyaKeyValueDataSource();
         jutokuRirekiDiv.getDdlTekiyojiKyuHokensha().setDataSource(kyuShichosonDataSource);
         jutokuRirekiDiv.getDdlKaijojiKyuHokensha().setDataSource(kyuShichosonDataSource);
 
+        if (kyuLasdecCode == null || kyuLasdecCode.isEmpty()) {
+            jutokuRirekiDiv.getDdlTekiyojiKyuHokensha().setSelectedIndex(0);
+            jutokuRirekiDiv.getDdlTekiyojiKyuHokensha().setSelectedIndex(0);
+        } else {
+            jutokuRirekiDiv.getDdlTekiyojiKyuHokensha().setSelectedKey(kyuLasdecCode.getColumnValue());
+            jutokuRirekiDiv.getDdlKaijojiKyuHokensha().setSelectedKey(kyuLasdecCode.getColumnValue());
+        }
+        jutokuRirekiDiv.getDdlTekiyojiKyuHokensha().setDisabled(true);
+        jutokuRirekiDiv.getDdlKaijojiKyuHokensha().setDisabled(true);
+
+        //TODO n8178 城間篤人 広域対応時に修正が必要。
         List<LasdecCode> koikiShochosonJohoList = Collections.<LasdecCode>emptyList();
         List<KeyValueDataSource> koikiShichosonDataSource = creaateShichosonKeyValue(koikiShochosonJohoList);
-        jutokuRirekiDiv.getDdlTekiyojiKyuHokensha().setDataSource(koikiShichosonDataSource);
-        jutokuRirekiDiv.getDdlKaijojiKyuHokensha().setDataSource(koikiShichosonDataSource);
+        jutokuRirekiDiv.getDdlTekiyojiSochimotoHokensha().setDataSource(koikiShichosonDataSource);
+        jutokuRirekiDiv.getDdlKaijojiSochimotoHokensha().setDataSource(koikiShichosonDataSource);
     }
 
     private void setJuminJohoDataSource() {

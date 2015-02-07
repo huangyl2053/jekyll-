@@ -84,9 +84,9 @@ public class KihonJoho {
             case 転出者:
             case 消除者:
             case 住登外:
-                return true;
-            default:
                 return false;
+            default:
+                return true;
         }
     }
 

@@ -137,7 +137,7 @@ public class ShikakuShosai {
             shikakuShosaiDiv.getLblShutokuShozaiHokensha().setDisplayNone(true);
             shikakuShosaiDiv.getLblShutokuSochimotoHokensha().setDisplayNone(true);
             shikakuShosaiDiv.getLblKyuHokensha().setDisplayNone(true);
-            initializeJushochiTokureiRirekiList(controlData, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
+            initializeJushochiTokureiRirekiList(controlData, hihoDaicho, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
                     JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.TanitsuGappeiNashi);
             shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, hihoDaicho.get().get旧市町村コード(),
                     ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiNashi);
@@ -149,7 +149,7 @@ public class ShikakuShosai {
             shikakuShosaiDiv.getLblShutokuShozaiHokensha().setDisplayNone(true);
             shikakuShosaiDiv.getLblShutokuSochimotoHokensha().setDisplayNone(true);
             shikakuShosaiDiv.getLblKyuHokensha().setDisplayNone(false);
-            initializeJushochiTokureiRirekiList(controlData, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
+            initializeJushochiTokureiRirekiList(controlData, hihoDaicho, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
                     JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.TanitsuGappeiAri);
             shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, hihoDaicho.get().get旧市町村コード(),
                     ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.TanitsuGappeiAri);
@@ -161,7 +161,7 @@ public class ShikakuShosai {
             shikakuShosaiDiv.getLblShutokuShozaiHokensha().setDisplayNone(false);
             shikakuShosaiDiv.getLblShutokuSochimotoHokensha().setDisplayNone(false);
             shikakuShosaiDiv.getLblKyuHokensha().setDisplayNone(true);
-            initializeJushochiTokureiRirekiList(controlData, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
+            initializeJushochiTokureiRirekiList(controlData, hihoDaicho, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
                     JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.KoikiGappeiNashi);
             shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, hihoDaicho.get().get旧市町村コード(),
                     ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.KoikiGappeiNashi);
@@ -173,7 +173,7 @@ public class ShikakuShosai {
             shikakuShosaiDiv.getLblShutokuShozaiHokensha().setDisplayNone(false);
             shikakuShosaiDiv.getLblShutokuSochimotoHokensha().setDisplayNone(false);
             shikakuShosaiDiv.getLblKyuHokensha().setDisplayNone(false);
-            initializeJushochiTokureiRirekiList(controlData, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
+            initializeJushochiTokureiRirekiList(controlData, hihoDaicho, shikakuShosaiDiv.getCcdJushochiTokureiRirekiList(),
                     JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode.KoikiGappeiAri);
             shikakuShosaiDiv.getCcdShikakuHenkoRireki().initialize(lasdecCode, hihoDaicho.get().get旧市町村コード(),
                     ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.KoikiGappeiAri);
@@ -182,8 +182,8 @@ public class ShikakuShosai {
         shikakuShosaiDiv.getCcdShisetsuNyutaishoRirekiKanri().initialize(lasdecCode, shikibetsuCode);
     }
 
-    private void initializeJushochiTokureiRirekiList(IUrControlData controlData, IJushochiTokureiRirekiListDiv jutokuDiv,
-            JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode hokenshaMode) {
+    private void initializeJushochiTokureiRirekiList(IUrControlData controlData, Optional<HihokenshaDaichoModel> hihoDaicho,
+            IJushochiTokureiRirekiListDiv jutokuDiv, JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode hokenshaMode) {
         ViewExecutionStatus exeStatus;
         JushochiTokureiExecutionStatus jutokuExeStatus;
 
@@ -206,7 +206,7 @@ public class ShikakuShosai {
                 jutokuExeStatus = JushochiTokureiExecutionStatus.Tekiyo;
                 break;
         }
-        jutokuDiv.initialize(exeStatus, jutokuExeStatus, hokenshaMode);
+        jutokuDiv.initialize(hihoDaicho.get().get旧市町村コード(), exeStatus, jutokuExeStatus, hokenshaMode);
     }
 
     private void setDataOfShikakuTokuso(ShikakuShosaiDiv shikakuShosaiDiv, Optional<HihokenshaDaichoModel> hihoDaicho, LasdecCode lasdecCode,
@@ -249,7 +249,6 @@ public class ShikakuShosai {
         }
 
         if (gappeiConfig.is合併あり()) {
-            //TODO n8178 城間篤人 複数個所で使用するなら、本来ならクラス化するべき。
             KijunTsukiShichosonFinder finder = new KijunTsukiShichosonFinder();
             Optional<GappeiShichosonJohoModel> gappeiInfo = finder.get基準月市町村情報(FlexibleDate.getNowDate().getYearMonth(),
                     hihoDaicho.get().get旧市町村コード());

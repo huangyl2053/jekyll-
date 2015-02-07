@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoatenainfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaShokaiSimpleDiv;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * 共有子Div「住所地特例履歴」において、配置先の親Divで実行可能な処理を定義したインターフェースです。
@@ -52,12 +53,14 @@ public interface IJushochiTokureiRirekiListDiv {
      * <li>適用事由DDL・解除事由DDLの選択項目の設定（コードマスタからの取得）</li>
      * </ul>
      *
+     * @param kyuShichosonCode 旧市町村コード
      * @param exeStatus 実行ステータス。Add・Delete・Modifyのうちのいずれかを設定する。
      * @param jutokuExeStatsu
      * 住所地特例実行ステータス。実行ステータス（Add・Delete・Modify）とは別に、Tekiyo・Kaijo・Teisei・Shokaiのうちのいずれかを設定する。
      * @param mode 保険者情報表示モード
      */
-    void initialize(ViewExecutionStatus exeStatus, JushochiTokureiExecutionStatus jutokuExeStatsu, JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode mode);
+    void initialize(LasdecCode kyuShichosonCode, ViewExecutionStatus exeStatus, JushochiTokureiExecutionStatus jutokuExeStatsu,
+            JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode mode);
 
     /**
      * 明細パネルが変更されたかどうかを判定します。 <br/>
