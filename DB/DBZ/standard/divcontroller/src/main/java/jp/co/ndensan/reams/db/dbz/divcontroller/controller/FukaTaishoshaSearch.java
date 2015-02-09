@@ -188,6 +188,7 @@ public class FukaTaishoshaSearch {
                 new HihokenshaNo(row.getTxtHihoNo()),
                 new ShikibetsuCode(row.getTxtShikbetsuCode()),
                 new SetaiCode(row.getTxtSetaiCode()),
+                new FlexibleYear(row.getTxtChoteiNendo()),
                 new FlexibleYear(row.getTxtFukaNendo()),
                 new TsuchishoNo(row.getTxtTsuchiNo()));
     }
@@ -197,6 +198,7 @@ public class FukaTaishoshaSearch {
                 model.get被保険者番号(),
                 model.get識別コード(),
                 model.get世帯コード(),
+                model.get調定年度(),
                 model.get賦課年度(),
                 model.get通知書番号());
     }

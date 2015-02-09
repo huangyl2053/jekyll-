@@ -79,7 +79,7 @@ public class HokenryoDankaiManager {
     }
 
     private boolean isランク対象(FukaNendo 賦課年度, LasdecCode 市町村コード) {
-        return config.isランク有り() && new Range(config.getランク開始年度(), config.getランク終了年度()).between(賦課年度) && 市町村コード != null;
+        return config.isランク有り() && new Range(config.getランク開始年度(), config.getランク終了年度()).between(賦課年度.value()) && 市町村コード != null;
     }
 
     /**

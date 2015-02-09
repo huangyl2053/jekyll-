@@ -1,8 +1,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.fukarirekiall.FukaRirekiAllDiv;
@@ -13,8 +12,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * FukaRirekiAllPanel のクラスファイル 
- * 
+ * FukaRirekiAllPanel のクラスファイル
+ *
  * @author 自動生成
  */
 public class FukaRirekiAllPanelDiv extends Panel {
@@ -24,6 +23,7 @@ public class FukaRirekiAllPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ccdFukaRirekiAll")
     private FukaRirekiAllDiv ccdFukaRirekiAll;
     @JsonProperty("lblMode")
@@ -51,7 +51,7 @@ public class FukaRirekiAllPanelDiv extends Panel {
 
     @JsonProperty("lblMode")
     public void setLblMode(Label lblMode) {
-        this.lblMode=lblMode;
+        this.lblMode = lblMode;
     }
 
     @JsonProperty("mode")
@@ -61,7 +61,7 @@ public class FukaRirekiAllPanelDiv extends Panel {
 
     @JsonProperty("mode")
     public void setMode(RString mode) {
-        this.mode=mode;
+        this.mode = mode;
     }
 
     @JsonProperty("loadShikibetsuCode")
@@ -71,7 +71,7 @@ public class FukaRirekiAllPanelDiv extends Panel {
 
     @JsonProperty("loadShikibetsuCode")
     public void setLoadShikibetsuCode(RString loadShikibetsuCode) {
-        this.loadShikibetsuCode=loadShikibetsuCode;
+        this.loadShikibetsuCode = loadShikibetsuCode;
     }
 
 }

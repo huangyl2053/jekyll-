@@ -104,6 +104,7 @@ public class GemmenChoshuYuyo {
             div.getTxtChoshuYuyoKeitteiYMD().setValue(FukaMapper.toRDate(model.get徴収猶予決定年月日()));
             div.getTxtChoshuYuyoShurui().setValue(model.get徴収猶予種類().getRyakusho());
             div.getTxtChoshuYuyoShouninRiyu().setValue(model.get徴収猶予事由());
+            div.getChoshuYuyoKikan().setDisplayNone(false);
 
             new KibetsuChoshuYuyo(div.getChoshuYuyoKikan(), modeloid.get().get期別徴収猶予モデルリスト()).load();
         }
