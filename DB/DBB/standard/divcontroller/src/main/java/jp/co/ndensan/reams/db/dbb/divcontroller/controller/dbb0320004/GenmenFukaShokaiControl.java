@@ -3,20 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320003;
+package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320004;
 
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320003.FukaShokaiControlDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.ViewStateKeyCreator;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320004.FukaShokaiControlDiv;
 import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
+import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
+import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
- * 特別徴収画面の賦課照会コントロールdivです。
+ * 減免・徴収猶予画面の賦課照会コントロールdivです。
  *
  * @author N3317 塚田 萌
  */
-public class FukaShokaiControl {
+public class GenmenFukaShokaiControl {
 
     /**
      * コントロールdivの初期処理です。
@@ -27,7 +34,6 @@ public class FukaShokaiControl {
     public ResponseData<FukaShokaiControlDiv> initialize(FukaShokaiControlDiv div) {
 
         FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
-
         div.getTxtChoteiNendo().setDomain(key.get調定年度().value());
         div.getTxtKoseiM().setValue(key.get更正月());
         div.getTxtKoseiYMD().setValue(new FlexibleDate(key.get更正日時().getDate().toString()));

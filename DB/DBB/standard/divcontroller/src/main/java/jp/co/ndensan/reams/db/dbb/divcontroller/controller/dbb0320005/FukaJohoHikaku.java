@@ -109,8 +109,8 @@ public class FukaJohoHikaku {
             return FukaHikakuTarget.仮算定_仮算定;
         } else if (fukaShokaiKey.get算定状態() == SanteiState.仮算定 && maeRirekiKey.get算定状態() == SanteiState.本算定) {
             return FukaHikakuTarget.仮算定_本算定;
-        } else if (fukaShokaiKey.get算定状態() == SanteiState.本算定 && maeRirekiKey.get算定状態() == SanteiState.本算定) {
-            return FukaHikakuTarget.本算定_本算定;
+        } else if (fukaShokaiKey.get算定状態() == SanteiState.本算定 && maeRirekiKey.get算定状態() == SanteiState.仮算定) {
+            return FukaHikakuTarget.本算定_仮算定;
         } else {
             return FukaHikakuTarget.本算定_本算定;
         }
