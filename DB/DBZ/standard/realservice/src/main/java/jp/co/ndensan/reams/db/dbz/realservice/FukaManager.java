@@ -96,6 +96,31 @@ public class FukaManager {
     }
 
     /**
+     * 引数の通知書番号に一致するデータで<br/>
+     * 引数の処理日時より前で一番直近のデータを１件取得します。
+     *
+     * @param 通知書番号 通知書番号
+     * @param 処理日時 処理日時
+     * @return 直近賦課モデル
+     */
+    public Optional<FukaModel> find賦課直近(TsuchishoNo 通知書番号, RDateTime 処理日時) {
+
+        return dac.select賦課Recently(通知書番号, 処理日時);
+    }
+
+    /**
+     * 引数に該当するデータから処理日時の直近のデータを取得します。
+     *
+     * @param 調定年度 調定年度
+     * @param 賦課年度 賦課年度
+     * @param 通知書番号 通知書番号
+     * @return 直近賦課モデル
+     */
+    public IItemList<FukaModel> find賦課直近(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号) {
+        return dac.selectRecently賦課(調定年度, 賦課年度, 通知書番号);
+    }
+
+    /**
      * 条件に合致する介護賦課の一覧を返します。
      *
      * @param 調定年度 調定年度
@@ -118,6 +143,17 @@ public class FukaManager {
     @Transaction
     public Optional<FukaModel> get最新介護賦課(FukaNendo 賦課年度, TsuchishoNo 通知書番号) {
         return dac.select最新介護賦課(賦課年度, 通知書番号);
+    }
+
+    /**
+     * 条件に合致する介護賦課の直近の一覧を返します。
+     *
+     * @param 通知書番号 通知書番号
+     * @return IItemList<FukaModel>
+     */
+    @Transaction
+    public IItemList<FukaModel> get直近介護賦課一覧(TsuchishoNo 通知書番号) {
+        return dac.selectRecently賦課一覧by通知書番号(通知書番号);
     }
 
     /**

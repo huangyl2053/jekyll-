@@ -1,8 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.fukarirekiall;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.fukarirekiall.IFukaRirekiAllDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,8 +17,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 
 /**
- * FukaRirekiAll のクラスファイル 
- * 
+ * FukaRirekiAll のクラスファイル
+ *
  * @author 自動生成
  */
 public class FukaRirekiAllDiv extends Panel implements IFukaRirekiAllDiv {
@@ -29,6 +28,7 @@ public class FukaRirekiAllDiv extends Panel implements IFukaRirekiAllDiv {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("dgFukaRirekiAll")
     private DataGrid<dgFukaRirekiAll_Row> dgFukaRirekiAll;
 
@@ -45,7 +45,7 @@ public class FukaRirekiAllDiv extends Panel implements IFukaRirekiAllDiv {
 
     @JsonProperty("dgFukaRirekiAll")
     public void setDgFukaRirekiAll(DataGrid<dgFukaRirekiAll_Row> dgFukaRirekiAll) {
-        this.dgFukaRirekiAll=dgFukaRirekiAll;
+        this.dgFukaRirekiAll = dgFukaRirekiAll;
     }
 
     //--------------- この行より下にコードを追加してください -------------------
@@ -57,6 +57,16 @@ public class FukaRirekiAllDiv extends Panel implements IFukaRirekiAllDiv {
     @Override
     public int load(HihokenshaNo 被保険者番号, FukaNendo 賦課年度) {
         return getHandler().load(被保険者番号, 賦課年度);
+    }
+
+    @Override
+    public int load(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号) {
+        return getHandler().load(調定年度, 賦課年度, 通知書番号);
+    }
+
+    @Override
+    public int reload(TsuchishoNo 通知書番号) {
+        return getHandler().reload(通知書番号);
     }
 
     @Override

@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002Fuka.fukaNendo;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT2002Fuka.hihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbV2002Fuka;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbV2002FukaEntity;
 
 /**
  * 賦課のデータアクセスクラスです。
@@ -99,6 +101,39 @@ public class FukaDac implements IModifiable<FukaModel> {
                 order(
                         by(tsuchishoNo, Order.DESC),
                         by(choteiNendo, Order.DESC),
+                        by(shoriTimestamp, Order.DESC)).
+                toList(DbT2002FukaEntity.class);
+
+        return Optional.ofNullable(createModel(entities.isEmpty() ? null : entities.get(0)));
+    }
+
+    /**
+     * 引数の通知書番号に一致するデータで<br/>
+     * 引数の処理日時より前で一番直近のデータを１件取得します。
+     *
+     * @param 通知書番号 通知書番号
+     * @param 処理日時 処理日時
+     * @return 直近賦課情報
+     * @throws NullPointerException 引数がnullの時
+     */
+    @Transaction
+    public Optional<FukaModel> select賦課Recently(
+            TsuchishoNo 通知書番号,
+            RDateTime 処理日時) throws NullPointerException {
+
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        List<DbT2002FukaEntity> entities = accessor.select().
+                table(DbT2002Fuka.class).
+                where(and(
+                                eq(tsuchishoNo, 通知書番号),
+                                lt(shoriTimestamp, 処理日時))).
+                order(
+                        by(choteiNendo, Order.DESC),
+                        by(fukaNendo, Order.DESC),
                         by(shoriTimestamp, Order.DESC)).
                 toList(DbT2002FukaEntity.class);
 
@@ -214,6 +249,69 @@ public class FukaDac implements IModifiable<FukaModel> {
         }
 
         return ItemList.of(list);
+    }
+
+    /**
+     * 賦課情報をキー検索で処理日時が直近の介護賦課を返します。
+     *
+     * @param 調定年度 調定年度
+     * @param 賦課年度 賦課年度
+     * @param 通知書番号 通知書番号
+     * @return FukaModel
+     */
+    @Transaction
+    public IItemList<FukaModel> selectRecently賦課(ChoteiNendo 調定年度, FukaNendo 賦課年度,
+            TsuchishoNo 通知書番号) {
+
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        List<DbT2002FukaEntity> 介護賦課List = accessor.select().
+                table(DbV2002Fuka.class).
+                where(and(eq(DbV2002Fuka.choteiNendo, 調定年度.value()),
+                                eq(DbV2002Fuka.fukaNendo, 賦課年度.value()),
+                                eq(DbV2002Fuka.tsuchishoNo, 通知書番号))).
+                order(by(DbV2002Fuka.choteiNendo, Order.DESC), by(DbV2002Fuka.fukaNendo, Order.DESC), by(DbV2002Fuka.tsuchishoNo, Order.DESC)).
+                toList(DbT2002FukaEntity.class);
+
+        List<FukaModel> list = new ArrayList<>();
+
+        for (DbT2002FukaEntity 介護賦課 : 介護賦課List) {
+            list.add(createModel(介護賦課));
+        }
+
+        return ItemList.of(list);
+
+    }
+
+    /**
+     * 賦課情報をキー検索で処理日時が直近の介護賦課のリストを返します。
+     *
+     * @param 通知書番号 通知書番号
+     * @return FukaModel
+     */
+    @Transaction
+    public IItemList<FukaModel> selectRecently賦課一覧by通知書番号(TsuchishoNo 通知書番号) {
+
+        requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        List<DbT2002FukaEntity> 介護賦課List = accessor.select().
+                table(DbV2002Fuka.class).
+                where(eq(DbV2002Fuka.tsuchishoNo, 通知書番号)).
+                order(by(DbV2002Fuka.choteiNendo, Order.DESC), by(DbV2002Fuka.fukaNendo, Order.DESC), by(DbV2002Fuka.tsuchishoNo, Order.DESC)).
+                toList(DbT2002FukaEntity.class);
+
+        List<FukaModel> list = new ArrayList<>();
+
+        for (DbT2002FukaEntity 介護賦課 : 介護賦課List) {
+            list.add(createModel(介護賦課));
+        }
+
+        return ItemList.of(list);
+
     }
 
     private FukaModel createModel(DbT2002FukaEntity 介護賦課エンティティ) {

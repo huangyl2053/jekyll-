@@ -31,6 +31,24 @@ public interface IFukaRirekiAllDiv {
     int load(HihokenshaNo 被保険者番号, FukaNendo 賦課年度);
 
     /**
+     * 調定年度、賦課年度、通知書番号に該当する処理日時の直近データをDivに設定します。
+     *
+     * @param 調定年度 調定年度
+     * @param 賦課年度 賦課年度
+     * @param 通知書番号 通知書番号
+     * @return 表示件数
+     */
+    int load(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号);
+
+    /**
+     * 通知書番号に該当する処理日時の直近データをDivに設定します。
+     *
+     * @param 通知書番号 通知書番号
+     * @return 表示件数
+     */
+    int reload(TsuchishoNo 通知書番号);
+
+    /**
      * 引数の被保険者番号に該当するデータをDivに設定し、調定年度、賦課年度、通知書番号に該当する行を選択状態にします。
      *
      * @param 被保険者番号 被保険者番号

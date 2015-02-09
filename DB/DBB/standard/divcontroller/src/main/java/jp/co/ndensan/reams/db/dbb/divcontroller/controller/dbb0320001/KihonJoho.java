@@ -11,7 +11,11 @@ import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import jp.co.ndensan.reams.uz.uza.config.SystemConfigKey;
 
 /**
  * 賦課照会の基本情報Divです。
@@ -33,9 +37,11 @@ public class KihonJoho {
         div.getCcdKaigoAtenaInfo().set介護宛名賦課モード();
         div.getCcdKaigoAtenaInfo().load(taishoshaKey.get識別コード());
 
-        //TODO 市町村コードはどこから取得？→searchKey見直し予定
         KaigoFukaKihonSearchKey searchKey = new KaigoFukaKihonSearchKey.Builder(
-                taishoshaKey.get通知書番号(), new FukaNendo(taishoshaKey.get賦課年度()), LasdecCode.EMPTY, taishoshaKey.get識別コード()).build();
+                taishoshaKey.get通知書番号(),
+                new FukaNendo(taishoshaKey.get賦課年度()),
+                new LasdecCode(BusinessConfig.get(SystemConfigKey.DonyuDantaiCode, SubGyomuCode.UZAフレームワーク)),
+                taishoshaKey.get識別コード()).build();
         div.getCcdKaigoFukaKihon().load(searchKey);
 
         return createResponseData(div);
@@ -46,4 +52,5 @@ public class KihonJoho {
         response.data = div;
         return response;
     }
+
 }

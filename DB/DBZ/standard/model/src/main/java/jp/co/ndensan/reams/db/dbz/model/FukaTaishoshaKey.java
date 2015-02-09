@@ -24,6 +24,7 @@ public class FukaTaishoshaKey implements Serializable {
     private final HihokenshaNo 被保険者番号;
     private final ShikibetsuCode 識別コード;
     private final SetaiCode 世帯コード;
+    private final FlexibleYear 調定年度;
     private final FlexibleYear 賦課年度;
     private final TsuchishoNo 通知書番号;
 
@@ -33,15 +34,17 @@ public class FukaTaishoshaKey implements Serializable {
      * @param 被保険者番号 被保険者番号
      * @param 識別コード 識別コード
      * @param 世帯コード 世帯コード
+     * @param 調定年度 調定年度
      * @param 賦課年度 賦課年度
      * @param 通知書番号 通知書番号
      * @throws NullPointerException 引数がnullの時
      */
     public FukaTaishoshaKey(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, SetaiCode 世帯コード,
-            FlexibleYear 賦課年度, TsuchishoNo 通知書番号) throws NullPointerException {
+            FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) throws NullPointerException {
         this.被保険者番号 = requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         this.識別コード = requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         this.世帯コード = requireNonNull(世帯コード, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯コード"));
+        this.調定年度 = requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
         this.賦課年度 = requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課年度"));
         this.通知書番号 = requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage("通知書番号"));
     }
@@ -71,6 +74,15 @@ public class FukaTaishoshaKey implements Serializable {
      */
     public SetaiCode get世帯コード() {
         return 世帯コード;
+    }
+
+    /**
+     * 調定年度を返します。
+     *
+     * @return 調定年度
+     */
+    public FlexibleYear get調定年度() {
+        return 調定年度;
     }
 
     /**

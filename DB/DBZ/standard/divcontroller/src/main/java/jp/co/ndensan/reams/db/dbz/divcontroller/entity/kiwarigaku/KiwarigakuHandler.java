@@ -185,7 +185,8 @@ public class KiwarigakuHandler {
         for (KiwarigakuMeisai 明細 : 期割額.get期割額明細()) {
 
             ChoshuHohoKibetsu 徴収方法 = 明細.get期別調定共通().get介護期別モデル().get徴収方法();
-            RString 期 = new RString(String.format("%1$02d", 明細.get期別調定共通().get介護期別モデル().get期()));
+//            RString 期 = new RString(String.format("%1$02d", 明細.get期別調定共通().get介護期別モデル().get期()));
+            RString 期 = new RString(String.valueOf(明細.get期別調定共通().get介護期別モデル().get期()));
             Decimal 調定額 = 明細.get期別調定共通().get調定共通モデル().get調定額();
             Decimal 収入額 = 明細.get収入額();
 

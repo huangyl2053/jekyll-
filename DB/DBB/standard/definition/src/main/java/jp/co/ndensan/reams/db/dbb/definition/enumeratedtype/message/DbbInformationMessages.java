@@ -17,8 +17,7 @@ import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.message.Messa
  */
 public enum DbbInformationMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    比較対象データなし(1, "比較対象のデータがありません。");
 
     private final Message message;
 

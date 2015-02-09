@@ -263,9 +263,25 @@ public class HizukeConfig {
         list.add(get月別テーブル9());
         list.add(get月別テーブル10());
         list.add(get月別テーブル11());
+
+        Integer 月別テーブル12 = Integer.parseInt(get月別テーブル12().toString());
         list.add(get月別テーブル12());
-        list.add(get月別テーブル13());
-        list.add(get月別テーブル14());
+
+        Integer 月別テーブル13 = Integer.parseInt(get月別テーブル13().toString());
+        if (月別テーブル13 > 12) {
+            月別テーブル13 = 月別テーブル12 + 1;
+            list.add(new RString(String.valueOf(月別テーブル13)));
+        } else {
+            list.add(get月別テーブル13());
+        }
+
+        Integer 月別テーブル14 = Integer.parseInt(get月別テーブル14().toString());
+        if (月別テーブル14 > 12) {
+            月別テーブル14 = 月別テーブル13 + 1;
+            list.add(new RString(String.valueOf(月別テーブル14)));
+        } else {
+            list.add(get月別テーブル14());
+        }
         return list;
     }
 }

@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005;
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005.EventPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005.HonSantei1Div;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005.HonSantei2Div;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005.KariSantei1Div;
@@ -30,6 +31,8 @@ public class FukaJohoHikakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("EventPanel")
+    private EventPanelDiv EventPanel;
     @JsonProperty("HonSantei1")
     private HonSantei1Div HonSantei1;
     @JsonProperty("KariSantei1")
@@ -45,6 +48,16 @@ public class FukaJohoHikakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("EventPanel")
+    public EventPanelDiv getEventPanel() {
+        return EventPanel;
+    }
+
+    @JsonProperty("EventPanel")
+    public void setEventPanel(EventPanelDiv EventPanel) {
+        this.EventPanel=EventPanel;
+    }
+
     @JsonProperty("HonSantei1")
     public HonSantei1Div getHonSantei1() {
         return HonSantei1;
@@ -88,6 +101,26 @@ public class FukaJohoHikakuDiv extends Panel {
     /*
      * [ ショートカットの作成 ]
      */
+    @JsonIgnore
+    public Button getBtnForHikaku() {
+        return this.getEventPanel().getBtnForHikaku();
+    }
+
+    @JsonIgnore
+    public void  setBtnForHikaku(Button btnForHikaku) {
+        this.getEventPanel().setBtnForHikaku(btnForHikaku);
+    }
+
+    @JsonIgnore
+    public Button getBtnHaveNoRireki() {
+        return this.getEventPanel().getBtnHaveNoRireki();
+    }
+
+    @JsonIgnore
+    public void  setBtnHaveNoRireki(Button btnHaveNoRireki) {
+        this.getEventPanel().setBtnHaveNoRireki(btnHaveNoRireki);
+    }
+
     @JsonIgnore
     public Label getLblShikakushutokuYMDHon1() {
         return this.getHonSantei1().getFukakijunHon1().getLblShikakushutokuYMDHon1();

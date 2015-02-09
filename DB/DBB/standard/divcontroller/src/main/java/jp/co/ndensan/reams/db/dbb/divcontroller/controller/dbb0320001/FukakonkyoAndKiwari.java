@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320001;
 
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.ViewStateKeyCreator;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.FukakonkyoAndKiwariDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.FukakonkyoNengakuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.KikanDiv;
@@ -16,7 +17,14 @@ import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.IViewStateValue;
+import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
+import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
+import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -38,8 +46,50 @@ public class FukakonkyoAndKiwari {
      */
     public ResponseData<FukakonkyoAndKiwariDiv> initialize(FukakonkyoAndKiwariDiv div) {
 
-        FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
+        final FukaManager fukaFinder = new FukaManager();
+        FukaTaishoshaKey fukaTaishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
+
+//        FukaModel model = FukaShokaiController.getFukaModelByFukaShokaiKey();
+        FukaModel model = fukaFinder.find賦課直近(
+                new ChoteiNendo(fukaTaishoshaKey.get調定年度()),
+                new FukaNendo(fukaTaishoshaKey.get賦課年度()),
+                fukaTaishoshaKey.get通知書番号()).findFirst().get();
+
+        FukaShokaiKey key = createFukaShokaiKey(model);
+
+        return createResponseData(setDisplay(div, model, key));
+    }
+
+    /**
+     * ２回目以降処理です。
+     *
+     * @param div 賦課根拠・期割Div
+     * @return レスポンスデータ
+     */
+    public ResponseData<FukakonkyoAndKiwariDiv> reLoad(FukakonkyoAndKiwariDiv div) {
+
         FukaModel model = FukaShokaiController.getFukaModelByFukaShokaiKey();
+
+        FukaShokaiKey key = createFukaShokaiKey(model);
+
+        return createResponseData(setDisplay(div, model, key));
+    }
+
+    /**
+     * 賦課情報から賦課照会キーをViewStateに格納し、作成した賦課照会キーを返却します。
+     *
+     * @param model 賦課情報モデル
+     * @return 賦課照会キー
+     */
+    private FukaShokaiKey createFukaShokaiKey(FukaModel model) {
+        FukaShokaiKey key = ViewStateKeyCreator.createFukaShokaiKey(model, AtenaMeisho.EMPTY);
+        IViewStateValue<FukaShokaiKey> value = ViewStates.access().valueAssignedToA(FukaShokaiKey.class);
+        value.put(key);
+
+        return key;
+    }
+
+    private FukakonkyoAndKiwariDiv setDisplay(FukakonkyoAndKiwariDiv div, FukaModel model, FukaShokaiKey key) {
 
         changeDivState(div, key.get算定状態());
         set賦課根拠(div.getTblFukakonkyoMeisai(), model);
@@ -57,7 +107,7 @@ public class FukakonkyoAndKiwari {
             set年額Of仮算定(div, model);
         }
 
-        return createResponseData(div);
+        return div;
     }
 
     /**
@@ -186,9 +236,16 @@ public class FukakonkyoAndKiwari {
 
     private void set調定事由(tblFukaKonkyoDiv div, FukaModel model) {
         div.getTxtFukashokaiChoteiJiyu1().setValue(model.get調定事由1().getRyakusho());
-        div.getTxtFukashokaiChoteiJiyu2().setValue(model.get調定事由2().getRyakusho());
-        div.getTxtFukashokaiChoteiJiyu3().setValue(model.get調定事由3().getRyakusho());
-        div.getTxtFukashokaiChoteiJiyu4().setValue(model.get調定事由4().getRyakusho());
+        if (model.get調定事由2() != null) {
+            div.getTxtFukashokaiChoteiJiyu2().setValue(model.get調定事由2().getRyakusho());
+        }
+        if (model.get調定事由3() != null) {
+            div.getTxtFukashokaiChoteiJiyu3().setValue(model.get調定事由3().getRyakusho());
+        }
+        if (model.get調定事由4() != null) {
+            div.getTxtFukashokaiChoteiJiyu4().setValue(model.get調定事由4().getRyakusho());
+        }
+
     }
 
     private RString toRange(FlexibleYearMonth from, FlexibleYearMonth to) {
