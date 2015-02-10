@@ -93,7 +93,8 @@ public class DBC120010_KyufukanrihyoIn extends BatchFlowBase<KokuhorenJohoToriko
     IBatchFlowCommand sharedFileCopy() {
         Map<RString, Object> processParameter = new HashMap<>();
         // TODO 業務内共通のフォルダが決まっていない
-        processParameter.put(SharedFileCopy.PARAMETER_IN_FILEPATH, new RString(System.getenv("USERPROFILE").replace('\\', '/') + "/shared/"));
+//        processParameter.put(SharedFileCopy.PARAMETER_IN_FILEPATH, new RString(System.getenv("USERPROFILE").replace('\\', '/') + "/shared/"));
+        processParameter.put(SharedFileCopy.PARAMETER_IN_FILEPATH, new RString("/nfshome/D209007/sharedFiles/DB/"));
         processParameter.put(SharedFileCopy.PARAMETER_IN_SHAREDNAME, sharedFileKey);
         processParameter.put(SharedFileCopy.PARAMETER_IN_ICCHIJOKEN, IcchiJoken.前方一致);
 
