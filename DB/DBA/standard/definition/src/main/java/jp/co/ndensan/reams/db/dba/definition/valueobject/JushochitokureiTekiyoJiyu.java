@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.definition.valueobject;
 import java.util.Objects;
 //TODO n3327 三浦凌 ICodeAssinedItemがdefinitionへ移動されたら、当該インタフェースを実装する。
 //import jp.co.ndensan.reams.ur.urz.business.ICodeAssignedItem;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -36,8 +36,8 @@ public class JushochitokureiTekiyoJiyu { //implements ICodeAssignedItem {
      */
     public JushochitokureiTekiyoJiyu(RString code, RString name) {
         RString className = new RString("住所地特例適用事由");
-        this.code = Objects.requireNonNull(code, Messages.E00003.replace("コード", className.toString()).getMessage());
-        this.name = Objects.requireNonNull(name, Messages.E00003.replace("名称", className.toString()).getMessage());
+        this.code = Objects.requireNonNull(code, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("コード", className.toString()).evalute());
+        this.name = Objects.requireNonNull(name, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("名称", className.toString()).evalute());
     }
 
     /**

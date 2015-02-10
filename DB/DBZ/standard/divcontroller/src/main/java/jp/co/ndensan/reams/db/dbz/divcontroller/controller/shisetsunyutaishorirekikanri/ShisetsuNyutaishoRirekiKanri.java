@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekika
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.ShisetsuNyutaishoRirekiKanriHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
-import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage;
 import jp.co.ndensan.reams.db.dbz.divcontroller.messagemapping.ShisetsuNyutaishoValidationMessageMapping;
 import jp.co.ndensan.reams.db.dbz.model.relate.ShisetsuNyutaishoRelateModel;
@@ -23,10 +23,11 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrQuestionMessages;
-import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationHelper;
+//import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationHelper;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.DivcontrollerMethod;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICallbackMethod;
@@ -270,45 +271,45 @@ public class ShisetsuNyutaishoRirekiKanri {
         //バリデーションチェック
         validationMessages.add(model.get介護保険施設入退所モデル().validateIn(context));
         //バリデーションチェック
-        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所日が未入力)) {
-            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
-            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
-        }
-        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.終了日設定なし)) {
-            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
-            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
-        }
-
-        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所施設が未入力)) {
-            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
-            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
-        }
-
-        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所年月日より前)) {
-            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
-            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
-
-        }
-        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複)) {
-            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
-            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
-
-        }
-        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複)) {
-            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
-            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
-
-        }
-        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所日と期間が重複する履歴がある)) {
-            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
-            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
-
-        }
-        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.退所日と期間が重複する履歴がある)) {
-            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
-            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
-
-        }
+//        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所日が未入力)) {
+//            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+//            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+//        }
+//        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.終了日設定なし)) {
+//            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+//            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+//        }
+//
+//        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所施設が未入力)) {
+//            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+//            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+//        }
+//
+//        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所年月日より前)) {
+//            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+//            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+//
+//        }
+//        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複)) {
+//            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+//            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+//
+//        }
+//        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複)) {
+//            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+//            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+//
+//        }
+//        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.入所日と期間が重複する履歴がある)) {
+//            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+//            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+//
+//        }
+//        if (validationMessages.contains(ShisetsuNyutaishoValidationMessage.退所日と期間が重複する履歴がある)) {
+//            //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
+//            ValidationHelper.appendMessages(response, validationMessages, ShisetsuNyutaishoValidationMessageMapping.class);
+//
+//        }
 
         //４）ValidationHelper.appendMessagesを使用して、responseにバリデーションメッセージを付加する。
         response.data = shisetsuNyutaishoRirekiDiv;

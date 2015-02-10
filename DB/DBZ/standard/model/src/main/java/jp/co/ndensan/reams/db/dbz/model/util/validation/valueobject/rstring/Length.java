@@ -11,10 +11,10 @@ import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObject
 import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
 import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
-import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
-import jp.co.ndensan.reams.ur.urz.model.validations.validators.LengthValidator;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.ur.urz.model.validation.validators.LengthValidator;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -152,7 +152,7 @@ public final class Length implements IValueObjectCheckable<RString> {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         if (!isValid(v)) {
             List<String> replacement = createReplacement(objInfo);
-            messages.add(type.getMessage(), replacement.toArray(new String[replacement.size()]));
+            messages.add(type.getMessage());//, replacement.toArray(new String[replacement.size()]));
         }
         return messages;
     }

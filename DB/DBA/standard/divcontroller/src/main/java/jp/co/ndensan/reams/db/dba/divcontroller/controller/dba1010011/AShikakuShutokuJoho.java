@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.dba1010011;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.KihonJohoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.ShikakuShutokuJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**

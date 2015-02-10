@@ -16,6 +16,10 @@
     <dependencies>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzDefinition</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzModel</artifactId>
         </dependency>
         <dependency>

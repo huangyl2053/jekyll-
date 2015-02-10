@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikaku
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IAtesaki;
-import jp.co.ndensan.reams.ur.urz.business.IAtesakiPSMSearchKey;
+import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IAtesakiPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;

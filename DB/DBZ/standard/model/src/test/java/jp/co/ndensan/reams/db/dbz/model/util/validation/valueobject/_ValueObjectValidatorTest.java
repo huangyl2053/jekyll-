@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject;
 
 import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject._ValueObjectValidator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
-import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
+import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import static org.hamcrest.CoreMatchers.is;

@@ -19,12 +19,12 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 //mport jp.co.ndensan.reams.fc.dbz.model.validations.validators.DzValidationMessage;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidatable;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidatableWithContext;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
-import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
-import jp.co.ndensan.reams.ur.urz.model.validations.validators.OrderValidator;
-import jp.co.ndensan.reams.ur.urz.model.validations.validators.PresenceValidator;
+import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
+import jp.co.ndensan.reams.ur.urz.model.validation.IValidatableWithContext;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
+import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.ur.urz.model.validation.validators.OrderValidator;
+import jp.co.ndensan.reams.ur.urz.model.validation.validators.PresenceValidator;
 
 /**
  * 介護保険施設入退所のモデルクラスです。
@@ -293,24 +293,24 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
 
         if (PresenceValidator.isInvalid(this.get入所年月日())) {
-            messages.add(ShisetsuNyutaishoValidationMessage.入所日が未入力, "必須項目の入所日が未入力 ");
+            messages.add(ShisetsuNyutaishoValidationMessage.入所日が未入力);//, "必須項目の入所日が未入力 ");
         }
 
         if (PresenceValidator.isInvalid(this.get入所施設コード())) {
-            messages.add(ShisetsuNyutaishoValidationMessage.入所施設が未入力, "必須項目の入所施設が未入力 ");
+            messages.add(ShisetsuNyutaishoValidationMessage.入所施設が未入力);//, "必須項目の入所施設が未入力 ");
         }
 
         if (is退所日が入所日より前()) {
-            messages.add(ShisetsuNyutaishoValidationMessage.入所年月日より前, "退所年月日" + this.get退所年月日() + "が入所年月日" + this.get入所年月日() + "以降でない");
+            messages.add(ShisetsuNyutaishoValidationMessage.入所年月日より前);//, "退所年月日" + this.get退所年月日() + "が入所年月日" + this.get入所年月日() + "以降でない");
         }
         if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複)) {
             if (is入所日が前の履歴データの退所日と重複(context.get前履歴())) {
-                messages.add(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複, "入所年月日" + this.get入所年月日() + "と前の履歴データの退所日と重複");
+                messages.add(ShisetsuNyutaishoValidationMessage.入所日と前の履歴データの退所日の期間が重複);//, "入所年月日" + this.get入所年月日() + "と前の履歴データの退所日と重複");
             }
         }
         if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複)) {
             if (is退所日が次の履歴データの入所日と重複(context.get次履歴())) {
-                messages.add(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複, "退所年月日" + this.get退所年月日() + "次の履歴データの入所日の期間が重複");
+                messages.add(ShisetsuNyutaishoValidationMessage.退所日と次の履歴データの入所日の期間が重複);//, "退所年月日" + this.get退所年月日() + "次の履歴データの入所日の期間が重複");
             }
         }
         if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.入所日と期間が重複する履歴がある)) {
@@ -327,14 +327,14 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
 
             if (!flg) {
                 if (has入所日と期間が重複する履歴In(context.get全履歴())) {
-                    messages.add(ShisetsuNyutaishoValidationMessage.入所日と期間が重複する履歴がある, "入所年月日" + this.get入所年月日() + "と期間が重複する履歴がある");
+                    messages.add(ShisetsuNyutaishoValidationMessage.入所日と期間が重複する履歴がある);//, "入所年月日" + this.get入所年月日() + "と期間が重複する履歴がある");
 
                 }
             }
         }
         if (!context.shouldSkipValidation(ShisetsuNyutaishoValidationMessage.退所日と期間が重複する履歴がある)) {
             if (has退所日と期間が重複する履歴In(context.get全履歴())) {
-                messages.add(ShisetsuNyutaishoValidationMessage.退所日と期間が重複する履歴がある, "退所年月日" + this.get退所年月日() + "と期間が重複する履歴がある");
+                messages.add(ShisetsuNyutaishoValidationMessage.退所日と期間が重複する履歴がある);//, "退所年月日" + this.get退所年月日() + "と期間が重複する履歴がある");
             }
         }
         return messages;

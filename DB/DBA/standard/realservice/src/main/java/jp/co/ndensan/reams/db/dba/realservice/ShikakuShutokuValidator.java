@@ -9,9 +9,9 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.model.IDateOfBirth;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidatable;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
-import static jp.co.ndensan.reams.ur.urz.model.validations.ValidationChain.validateFollowingItems;
+import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
+import static jp.co.ndensan.reams.ur.urz.model.validation.ValidationChain.validateFollowingItems;
 
 /**
  * 資格取得処理で利用するバリデーションチェック処理を提供するクラスです。<br/>

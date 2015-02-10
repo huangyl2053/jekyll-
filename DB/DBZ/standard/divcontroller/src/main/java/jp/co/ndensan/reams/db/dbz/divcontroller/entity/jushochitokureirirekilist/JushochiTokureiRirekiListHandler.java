@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonJohoModel;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.realservice.KijunTsukiShichosonFinder;
-import jp.co.ndensan.reams.ur.ura.business.IAtenaShokaiSimple;
+import jp.co.ndensan.reams.ur.ura.model.IAtenaShokaiSimple;
 import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IAtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.ur.urz.definition.code.CodeMasterHelper;
 import jp.co.ndensan.reams.ur.urz.definition.code.ICodeShubetsu;

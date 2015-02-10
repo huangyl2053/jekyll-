@@ -30,8 +30,8 @@ public class TaskTajutokuTekiyoComplete {
 
         AtenaShokaiSimpleDiv atena = taishoshaJohoDiv.getAtenaJoho();
 
-        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("他市町村住所地特例適用を更新しました。"),
-                atena.getTxtShikibetsuCode().getValue(), atena.getTxtAtenaMeisho().getValue());
+        KaigoKanryoMessage.setMessage(completeDiv.getComplete(), new RString("他市町村住所地特例適用を更新しました。"));//,
+//                atena.getTxtShikibetsuCode().getValue(), atena.getTxtAtenaMeisho().getValue());
 
         response.data = completeDiv;
         return response;
