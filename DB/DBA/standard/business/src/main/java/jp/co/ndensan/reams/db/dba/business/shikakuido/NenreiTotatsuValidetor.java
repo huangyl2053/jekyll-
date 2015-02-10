@@ -10,8 +10,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.model.IDateOfBirth;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidatable;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
+import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 
 /**
  * 資格取得対象者が、資格を取得可能な年齢に到達しているかのチェック機能を提供するクラスです。

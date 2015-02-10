@@ -25,5 +25,10 @@
             <artifactId>DbzDefinition</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzDefinition</artifactId>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

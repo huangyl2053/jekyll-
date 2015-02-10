@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.validation.JushochiTokureiValidationMessage;
 import jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.JushochiTokureiUnduplicateValidator;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
-import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
+import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -52,7 +52,7 @@ public final class JushochiTokureiRirekiListValidationHelper {
                 new ValidationMessageControlPair(
                         JushochiTokureiValidationMessage.住所地特例期間と適用除外期間が重複する履歴がある, 住所地特例grid));
 
-        IValidationMessages messages = ValidationMessagesFactory.createValidationMessagesInstance();
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();//createValidationMessagesInstance();
 
         messages.add(JushochiTokureiValidator.setJushochiTokureiData(target)
                 .setJushochiTokureiList(daichoList).validate());

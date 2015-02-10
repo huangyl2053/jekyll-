@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.validation.JushochiTokureiValidationMessage;
 import jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.JushochiTokureiUnduplicateValidator;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
-import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
+import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
@@ -36,7 +36,7 @@ public final class ShikakuShosaiValidationHelper {
             TextBoxFlexibleDate 適用日, TextBoxFlexibleDate 解除日, DataGrid<dgJutoku_Row> 住所地特例grid, JushochiTokureiExecutionStatus status) {
         ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionary();
 
-        IValidationMessages messages = ValidationMessagesFactory.createValidationMessagesInstance();
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();//createValidationMessagesInstance();
         return dictionary.check(messages);
     }
 
@@ -44,7 +44,7 @@ public final class ShikakuShosaiValidationHelper {
             TextBoxFlexibleDate 適用日, TextBoxFlexibleDate 解除日, DataGrid<dgJutoku_Row> 住所地特例grid, JushochiTokureiExecutionStatus status) {
         ValidationMessageControlDictionary dictionary = new ValidationMessageControlDictionary();
 
-        IValidationMessages messages = ValidationMessagesFactory.createValidationMessagesInstance();
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();//createValidationMessagesInstance();
         return dictionary.check(messages);
     }
 

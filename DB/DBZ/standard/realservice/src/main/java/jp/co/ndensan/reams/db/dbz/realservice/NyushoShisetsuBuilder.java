@@ -11,13 +11,14 @@ import jp.co.ndensan.reams.db.dbz.business.mapper.NyushoShisetsuMapper;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
 import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.KaigoHokenNyushoShisetsuBunrui;
-import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaFinder;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaFinder;
+import jp.co.ndensan.reams.uz.uza.message.Messages;
 import jp.co.ndensan.reams.ur.urz.realservice.HojinService;
 import jp.co.ndensan.reams.ur.urz.realservice.IHojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
 /**
  * 入所施設を作成するクラスです。<br/>
@@ -95,6 +96,6 @@ class NyushoShisetsuBuilder {
 
     private IHojin find法人(ShikibetsuCode 識別コード, FlexibleDate 基準日) {
         //TODO n3317塚田萌　RDateからFlexibleDateに変更されたら.toRDate()を外す。
-        return hojinFinder.get法人(識別コード, 基準日.toRDate());
+        return hojinFinder.get法人(識別コード, RDate.MAX);
     }
 }

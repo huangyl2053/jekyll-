@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dba.business.shikakuido;
 
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidatable;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
+import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 
 /**
  * 資格の取得・喪失日に不整合がおきていないかをチェックする機能を提供するクラスです。<br/>

@@ -22,8 +22,8 @@ import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValid
 import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.入所日と期間が重複する履歴がある;
 import static jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage.退所日と期間が重複する履歴がある;
 
-import jp.co.ndensan.reams.ur.urz.model.validations.IContext;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage;
+import jp.co.ndensan.reams.ur.urz.model.context.IContext;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 
 /**
  *

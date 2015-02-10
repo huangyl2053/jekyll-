@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
+//import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -47,8 +47,7 @@ public interface IShujii {
      *
      * @return 医療機関コード
      */
-    IIryoKikanCode get医療機関コード();
-
+//    IIryoKikanCode get医療機関コード();
     /**
      * 医師識別番号を返します。
      *

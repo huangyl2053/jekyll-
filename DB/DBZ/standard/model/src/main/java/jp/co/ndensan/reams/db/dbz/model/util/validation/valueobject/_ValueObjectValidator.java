@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
-import jp.co.ndensan.reams.ur.urz.model.validations.ValidationChain;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
+import jp.co.ndensan.reams.ur.urz.model.validation.ValidationChain;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 
 /**

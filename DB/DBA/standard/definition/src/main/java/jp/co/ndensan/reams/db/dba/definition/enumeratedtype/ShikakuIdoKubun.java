@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dba.definition.enumeratedtype;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
  * 介護保険の資格異動を表す区分の列挙型です。
@@ -54,6 +54,6 @@ public enum ShikakuIdoKubun {
                 return shikakuIdoKubun;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("\"" + コード + "\"に対応する資格異動区分").getMessage());
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("\"" + コード + "\"に対応する資格異動区分").evalute());
     }
 }
