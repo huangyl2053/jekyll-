@@ -36,8 +36,8 @@ public class JushochitokureiKaijoJiyu { //implements ICodeAssignedItem {
      */
     public JushochitokureiKaijoJiyu(RString code, RString name) {
         RString className = new RString("住所地特例解除事由");
-        this.code = Objects.requireNonNull(code, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("コード", className.toString()).evalute());
-        this.name = Objects.requireNonNull(name, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("名称", className.toString()).evalute());
+        this.code = Objects.requireNonNull(code, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("コード", className.toString()));
+        this.name = Objects.requireNonNull(name, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("名称", className.toString()));
     }
 
     /**

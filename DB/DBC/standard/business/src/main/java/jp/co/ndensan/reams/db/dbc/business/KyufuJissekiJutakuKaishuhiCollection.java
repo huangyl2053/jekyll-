@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business;
 import java.util.Iterator;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
  * 住宅改修費情報リストを保持するコレクションクラスです。
@@ -25,7 +25,7 @@ public class KyufuJissekiJutakuKaishuhiCollection implements Iterable<KyufuJisse
      * @param list 住宅改修費情報List
      */
     public KyufuJissekiJutakuKaishuhiCollection(List<KyufuJissekiJutakuKaishuhi> list) {
-        this.list = requireNonNull(list, Messages.E00001.replace("住宅改修費情報List").getMessage());
+        this.list = requireNonNull(list, UrSystemErrorMessages.値がnull.getReplacedMessage("住宅改修費情報List"));
     }
 
     /**

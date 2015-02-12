@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.business;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.IShikakuIdoJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
@@ -30,9 +30,9 @@ public abstract class ShikakuIdoBaseItem<E extends Enum & IShikakuIdoJiyu> {
      * @param actionDate 処理年月日
      */
     public ShikakuIdoBaseItem(E reason, FlexibleDate noticeDate, FlexibleDate actionDate) {
-        requireNonNull(reason, Messages.E00001.replace("資格異動事由").getMessage());
-        requireNonNull(noticeDate, Messages.E00001.replace("noticeDate").getMessage());
-        requireNonNull(actionDate, Messages.E00001.replace("actionDate").getMessage());
+        requireNonNull(reason, UrSystemErrorMessages.値がnull.getReplacedMessage("資格異動事由"));
+        requireNonNull(noticeDate, UrSystemErrorMessages.値がnull.getReplacedMessage("noticeDate"));
+        requireNonNull(actionDate, UrSystemErrorMessages.値がnull.getReplacedMessage("actionDate"));
         this.reason = reason;
         this.noticeDate = noticeDate;
         this.actionDate = actionDate;

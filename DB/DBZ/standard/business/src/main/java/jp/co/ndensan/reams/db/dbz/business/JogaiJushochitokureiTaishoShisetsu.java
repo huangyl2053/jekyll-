@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -65,11 +65,11 @@ public class JogaiJushochitokureiTaishoShisetsu {
             FlexibleDate 施設開始年月日, FlexibleDate 施設休止年月日,
             FlexibleDate 施設廃止年月日, FlexibleDate 施設再開年月日) {
 
-        this.施設種類 = requireNonNull(施設種類, Messages.E00001.replace("施設種類").getMessage());
-        this.施設コード = requireNonNull(施設コード, Messages.E00001.replace("施設コード").getMessage());
-        this.処理日時 = requireNonNull(処理日時, Messages.E00001.replace("処理日時").getMessage());
-        this.有効期間 = requireNonNull(有効期間, Messages.E00001.replace("有効期間").getMessage());
-        this.識別コード = requireNonNull(識別コード, Messages.E00001.replace("識別コード").getMessage());
+        this.施設種類 = requireNonNull(施設種類, UrSystemErrorMessages.値がnull.getReplacedMessage("施設種類"));
+        this.施設コード = requireNonNull(施設コード, UrSystemErrorMessages.値がnull.getReplacedMessage("施設コード"));
+        this.処理日時 = requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+        this.有効期間 = requireNonNull(有効期間, UrSystemErrorMessages.値がnull.getReplacedMessage("有効期間"));
+        this.識別コード = requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
         this.施設略称 = 施設略称;
         this.施設略称カナ = 施設略称カナ;
         this.施設住所カナ = 施設住所カナ;

@@ -8,7 +8,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoSaikofuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
  * 被保険者証の再交付を扱うクラスです。
@@ -105,6 +105,6 @@ public class HihokenshashoSaikofu {
     }
 
     private String errorMessageForE00003With(String str) {
-        return Messages.E00003.replace(str, HihokenshashoSaikofu.class.getSimpleName()).getMessage();
+        return UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage(str, HihokenshashoSaikofu.class.getSimpleName());
     }
 }

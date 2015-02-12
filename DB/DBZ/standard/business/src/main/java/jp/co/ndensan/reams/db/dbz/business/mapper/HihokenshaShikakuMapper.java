@@ -27,8 +27,9 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
-import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
-import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
+//クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+//import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
+//import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.KaigoShikakuFactory;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
@@ -184,10 +185,14 @@ public final class HihokenshaShikakuMapper {
                 jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.HokenShubetsu.介護保険,
                 toRDateOrMin(entity.getShikakuShutokuTodokedeYMD()),
                 toRDateOrMin(entity.getShikakuShutokuYMD()),
-                toShikakuShutokuJiyu(entity.getShikakuShutokuJiyuCode().toRString()),
+                //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+                //                toShikakuShutokuJiyu(entity.getShikakuShutokuJiyuCode().toRString()),
+                null,
                 toRDateOrMax(entity.getShikakuSoshitsuTodokedeYMD()),
                 toRDateOrMax(entity.getShikakuSoshitsuYMD()),
-                toShikakuSoshitsuJiyu(entity.getShikakuSoshitsuJiyuCode().toRString()),
+                //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+                //                toShikakuSoshitsuJiyu(entity.getShikakuSoshitsuJiyuCode().toRString()),
+                null,
                 toValue(entity.getHihokenshaNo()),
                 entity.getKoikinaiTokureiSochimotoShichosonCode().value(),
                 toRDateOrMax(entity.getIchigoShikakuShutokuYMD()),
@@ -212,46 +217,46 @@ public final class HihokenshaShikakuMapper {
     private static <T> T toValue(IValueObject<T> source) {
         return isNull(source) ? null : source.value();
     }
-
-    private static IShikakuShutokuJiyu toShikakuShutokuJiyu(RString code) {
-        final ShikakuShutokuJiyu reason = ShikakuShutokuJiyu.toValue(code);
-        return new IShikakuShutokuJiyu() {
-            @Override
-            public RString getCode() {
-                return reason.getCode();
-            }
-
-            @Override
-            public RString getName() {
-                return reason.getName();
-            }
-
-            @Override
-            public RString getShortName() {
-                return reason.getShortName();
-            }
-        };
-    }
-
-    private static IShikakuSoshitsuJiyu toShikakuSoshitsuJiyu(RString code) {
-        final ShikakuSoshitsuJiyu reason = ShikakuSoshitsuJiyu.toValue(code);
-        return new IShikakuSoshitsuJiyu() {
-            @Override
-            public RString getCode() {
-                return reason.getCode();
-            }
-
-            @Override
-            public RString getName() {
-                return reason.getName();
-            }
-
-            @Override
-            public RString getShortName() {
-                return reason.getShortName();
-            }
-        };
-    }
+//クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+//    private static IShikakuShutokuJiyu toShikakuShutokuJiyu(RString code) {
+//        final ShikakuShutokuJiyu reason = ShikakuShutokuJiyu.toValue(code);
+//        return new IShikakuShutokuJiyu() {
+//            @Override
+//            public RString getCode() {
+//                return reason.getCode();
+//            }
+//
+//            @Override
+//            public RString getName() {
+//                return reason.getName();
+//            }
+//
+//            @Override
+//            public RString getShortName() {
+//                return reason.getShortName();
+//            }
+//        };
+//    }
+//クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+//    private static IShikakuSoshitsuJiyu toShikakuSoshitsuJiyu(RString code) {
+//        final ShikakuSoshitsuJiyu reason = ShikakuSoshitsuJiyu.toValue(code);
+//        return new IShikakuSoshitsuJiyu() {
+//            @Override
+//            public RString getCode() {
+//                return reason.getCode();
+//            }
+//
+//            @Override
+//            public RString getName() {
+//                return reason.getName();
+//            }
+//
+//            @Override
+//            public RString getShortName() {
+//                return reason.getShortName();
+//            }
+//        };
+//    }
 
     private static ShikakuHenko toShikakuHenko(RString code, FlexibleDate noticeDate, FlexibleDate actionDate) {
         return new ShikakuHenko(ShikakuHenkoJiyu.toValue(code), noticeDate, actionDate);

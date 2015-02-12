@@ -14,8 +14,9 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
-import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
-import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
+//クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+//import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
+//import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.KaigoShikakuFactory;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
@@ -161,7 +162,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
 
                     @Test
                     public void shikakuShutokuに渡したShikakuShutoku$getReasonは_生成されたHihokenshaShikakuの_toKaigoShikaku$get資格取得事由$getCodeから導かれる値と一致する() {
-                        ShikakuShutokuJiyu reason = ShikakuShutokuJiyu.toValue(shikaku.toKaigoShikaku().get資格取得事由().getCode());
+                        ShikakuShutokuJiyu reason = ShikakuShutokuJiyu.toValue(shikaku.toKaigoShikaku().get資格取得事由().getCode().value());
                         assertThat(reason, is(資格取得事由));
                     }
 
@@ -211,7 +212,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
 
                     @Test
                     public void shikakuSoshitsuに渡したShikakuSoshitsu$getReasonは_生成されたHihokenshaShikakuの_toKaigoShikaku$get資格喪失事由$getCodeから導かれる値と一致する() {
-                        ShikakuSoshitsuJiyu reason = ShikakuSoshitsuJiyu.toValue(shikaku.toKaigoShikaku().get資格喪失事由().getCode());
+                        ShikakuSoshitsuJiyu reason = ShikakuSoshitsuJiyu.toValue(shikaku.toKaigoShikaku().get資格喪失事由().getCode().value());
                         assertThat(reason, is(資格喪失事由));
                     }
 
@@ -467,16 +468,18 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                 private static final IKaigoShikaku kaigoShikaku;
                 private static final RDate 資格取得届出Date = new RDate("20140402");
                 private static final RDate 資格取得Date = new RDate("20140403");
-                private static final IShikakuShutokuJiyu 資格取得事由 = createShikakuShutokuJiyu(ShikakuShutokuJiyu.転入);
+//                private static final IShikakuShutokuJiyu 資格取得事由 = createShikakuShutokuJiyu(ShikakuShutokuJiyu.転入);
                 private static final RDate 資格喪失届出Date = new RDate("20140404");
                 private static final RDate 資格喪失Date = new RDate("20140405");
-                private static final IShikakuSoshitsuJiyu 資格喪失事由 = createShikakuSoshitsuJiyu(ShikakuSoshitsuJiyu.転出);
+//                private static final IShikakuSoshitsuJiyu 資格喪失事由 = createShikakuSoshitsuJiyu(ShikakuSoshitsuJiyu.転出);
 
                 static {
                     kaigoShikaku = KaigoShikakuFactory.createInstance(
                             shikibetsuCode, HokenShubetsu.介護保険,
-                            資格取得届出Date, 資格取得Date, 資格取得事由,
-                            資格喪失届出Date, 資格喪失Date, 資格喪失事由,
+                            //                            資格取得届出Date, 資格取得Date, 資格取得事由,
+                            //                            資格喪失届出Date, 資格喪失Date, 資格喪失事由,
+                            資格取得届出Date, 資格取得Date, null,
+                            資格喪失届出Date, 資格喪失Date, null,
                             hihokenshaNo.value(), shoKisaiHokenshaNo.getColumnValue(),
                             ichigoGaitoDate, ShikakuHihokenshaKubun.toValue(hihokenshaKubun.getCode().getColumnValue()),
                             JushochiTokureishaKubun.通常資格者);
@@ -525,7 +528,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                     @Test
                     public void IKaigoShikakuのもつ資格取得事由は_Builderによって生成されたHihokenshaShikakuの_get資格取得$getReasonと一致する() {
                         HihokenshaShikaku shikaku = sut.build();
-                        ShikakuShutokuJiyu shikakuShutokuJiyu = ShikakuShutokuJiyu.toValue(kaigoShikaku.get資格取得事由().getCode());
+                        ShikakuShutokuJiyu shikakuShutokuJiyu = ShikakuShutokuJiyu.toValue(kaigoShikaku.get資格取得事由().getCode().value());
                         assertThat(shikaku.get資格取得().getReason(), is(shikakuShutokuJiyu));
                     }
 
@@ -544,7 +547,7 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                     @Test
                     public void IKaigoShikakuのもつ資格喪失事由は_Builderによって生成されたHihokenshaShikakuの_get資格喪失$getReasonと一致する() {
                         HihokenshaShikaku shikaku = sut.build();
-                        ShikakuSoshitsuJiyu shikakuHenkoJiyu = ShikakuSoshitsuJiyu.toValue(kaigoShikaku.get資格喪失事由().getCode());
+                        ShikakuSoshitsuJiyu shikakuHenkoJiyu = ShikakuSoshitsuJiyu.toValue(kaigoShikaku.get資格喪失事由().getCode().value());
                         assertThat(shikaku.get資格喪失().getReason(), is(shikakuHenkoJiyu));
                     }
                 }
@@ -657,42 +660,41 @@ public class HihokenshaShikakuTest extends DbzTestBase {
             }
         }
     }
-
-    private static IShikakuShutokuJiyu createShikakuShutokuJiyu(final ShikakuShutokuJiyu reason) {
-        return new IShikakuShutokuJiyu() {
-            @Override
-            public RString getCode() {
-                return reason.getCode();
-            }
-
-            @Override
-            public RString getName() {
-                return reason.getName();
-            }
-
-            @Override
-            public RString getShortName() {
-                return reason.getShortName();
-            }
-        };
-    }
-
-    private static IShikakuSoshitsuJiyu createShikakuSoshitsuJiyu(final ShikakuSoshitsuJiyu reason) {
-        return new IShikakuSoshitsuJiyu() {
-            @Override
-            public RString getCode() {
-                return reason.getCode();
-            }
-
-            @Override
-            public RString getName() {
-                return reason.getName();
-            }
-
-            @Override
-            public RString getShortName() {
-                return reason.getShortName();
-            }
-        };
-    }
+//クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+//    private static IShikakuShutokuJiyu createShikakuShutokuJiyu(final ShikakuShutokuJiyu reason) {
+//        return new IShikakuShutokuJiyu() {
+//            @Override
+//            public RString getCode() {
+//                return reason.getCode();
+//            }
+//
+//            @Override
+//            public RString getName() {
+//                return reason.getName();
+//            }
+//
+//            @Override
+//            public RString getShortName() {
+//                return reason.getShortName();
+//            }
+//        };
+//    }
+//    private static IShikakuSoshitsuJiyu createShikakuSoshitsuJiyu(final ShikakuSoshitsuJiyu reason) {
+//        return new IShikakuSoshitsuJiyu() {
+//            @Override
+//            public RString getCode() {
+//                return reason.getCode();
+//            }
+//
+//            @Override
+//            public RString getName() {
+//                return reason.getName();
+//            }
+//
+//            @Override
+//            public RString getShortName() {
+//                return reason.getShortName();
+//            }
+//        };
+//    }
 }

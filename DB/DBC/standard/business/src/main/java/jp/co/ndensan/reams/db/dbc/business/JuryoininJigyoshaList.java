@@ -9,7 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 
 /**
  * 受領委任事業者リストのクラスです。
@@ -27,7 +28,7 @@ public class JuryoininJigyoshaList implements Iterable<JuryoininJigyosha> {
      */
     public JuryoininJigyoshaList(List<JuryoininJigyosha> 受領委任事業者List) {
         this.受領委任事業者List = requireNonNull(受領委任事業者List,
-                Messages.E00001.replace("受領委任事業者List").getMessage());
+                UrSystemErrorMessages.値がnull.getReplacedMessage("受領委任事業者List"));
     }
 
     /**
@@ -43,7 +44,7 @@ public class JuryoininJigyoshaList implements Iterable<JuryoininJigyosha> {
                 return 受領委任事業者;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("対応する受領委任事業者").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する受領委任事業者").evaluate());
     }
 
     private boolean is契約番号一致(JuryoininJigyosha 受領委任事業者, KeiyakuNo 契約番号) {

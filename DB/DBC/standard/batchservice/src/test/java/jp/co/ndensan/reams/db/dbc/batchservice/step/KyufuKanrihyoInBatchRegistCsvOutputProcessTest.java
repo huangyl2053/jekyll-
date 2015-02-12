@@ -167,7 +167,8 @@ public class KyufuKanrihyoInBatchRegistCsvOutputProcessTest extends DbcTestDacBa
                 .tempTableName(一時テーブル)
                 .build();
         _BatchProcessChunkQueryExecutor chunkQueryExecutor = new _BatchProcessChunkQueryExecutor(sqlSession);
-        writer.setChunkQueryExecuter(sqlSession, chunkQueryExecutor);
+//UZのインターフェースからメソッドが消えている模様。
+//        writer.setChunkQueryExecuter(sqlSession, chunkQueryExecutor);
         for (DbTKyufukanrihyoDataTempTableEntity entity : createTempDataList()) {
             writer.insert(entity);
         }

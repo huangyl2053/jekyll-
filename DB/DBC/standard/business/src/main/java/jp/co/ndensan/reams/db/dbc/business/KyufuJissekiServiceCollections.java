@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
  * 給付実績月別集計のコレクションクラスです。
@@ -26,7 +26,7 @@ public class KyufuJissekiServiceCollections implements Iterable {
      * @param 給付実績月別集計リスト 給付実績月別集計リスト
      */
     public KyufuJissekiServiceCollections(List<KyufuJissekiServiceCollection> 給付実績月別集計リスト) {
-        this.給付実績月別集計リスト = requireNonNull(給付実績月別集計リスト, Messages.E00001.replace("給付実績月別集計リスト").getMessage());
+        this.給付実績月別集計リスト = requireNonNull(給付実績月別集計リスト, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績月別集計リスト"));
     }
 
     /**

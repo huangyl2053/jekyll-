@@ -31,8 +31,9 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokensha
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
-import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
-import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
+//クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+//import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
+//import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuHenkoJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
@@ -85,14 +86,16 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
         kaigoShikaku = mock(IKaigoShikaku.class);
         when(kaigoShikaku.get一号該当日()).thenReturn(ichigoGaitoDate);
-        IShikakuShutokuJiyu shutokujiyu = mock(IShikakuShutokuJiyu.class);
-        when(shutokujiyu.getCode()).thenReturn(ShikakuShutokuJiyu.年齢到達.getCode());
-        when(kaigoShikaku.get資格取得事由()).thenReturn(shutokujiyu);
+        //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+//        IShikakuShutokuJiyu shutokujiyu = mock(IShikakuShutokuJiyu.class);
+//        when(shutokujiyu.getCode()).thenReturn(ShikakuShutokuJiyu.年齢到達.getCode());
+//        when(kaigoShikaku.get資格取得事由()).thenReturn(shutokujiyu);
         when(kaigoShikaku.get資格取得届出年月日()).thenReturn(ichigoGaitoDate);
         when(kaigoShikaku.get資格取得年月日()).thenReturn(ichigoGaitoDate);
-        IShikakuSoshitsuJiyu soshitsuJiyu = mock(IShikakuSoshitsuJiyu.class);
-        when(soshitsuJiyu.getCode()).thenReturn(ShikakuSoshitsuJiyu.EMPTY.getCode());
-        when(kaigoShikaku.get資格喪失事由()).thenReturn(soshitsuJiyu);
+        //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+//        IShikakuSoshitsuJiyu soshitsuJiyu = mock(IShikakuSoshitsuJiyu.class);
+//        when(soshitsuJiyu.getCode()).thenReturn(ShikakuSoshitsuJiyu.EMPTY.getCode());
+//        when(kaigoShikaku.get資格喪失事由()).thenReturn(soshitsuJiyu);
         when(kaigoShikaku.get資格喪失届出年月日()).thenReturn(RDate.MAX);
         when(kaigoShikaku.get資格喪失年月日()).thenReturn(RDate.MAX);
 

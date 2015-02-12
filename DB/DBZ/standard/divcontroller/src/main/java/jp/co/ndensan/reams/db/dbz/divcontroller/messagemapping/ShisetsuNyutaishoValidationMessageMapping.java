@@ -58,9 +58,10 @@ public enum ShisetsuNyutaishoValidationMessageMapping implements IValidationMess
         this.fieldName = fieldName;
     }
 
+//    @Override
     @Override
-    public IValidationMessage getValidationMessage() {
-        return message;
+    public jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage getValidationMessage() {
+        return (jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage) message;
     }
 
     @Override

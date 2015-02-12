@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
-import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
-import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
+//クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+//import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
+//import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.business.KaigoShikakuFactory;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.HokenShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
@@ -488,7 +489,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         }
 
         private ShikakuShutoku createShikakuShutoku() {
-            ShikakuShutokuJiyu cause = toShikakuShutokuJiyu(this.kaigoShikaku.get資格取得事由().getCode());
+            ShikakuShutokuJiyu cause = toShikakuShutokuJiyu(this.kaigoShikaku.get資格取得事由().getCode().value());
             FlexibleDate noticeDate = toFlexibleDate(this.kaigoShikaku.get資格取得届出年月日());
             FlexibleDate actionDate = toFlexibleDate(this.kaigoShikaku.get資格取得年月日());
             return new ShikakuShutoku(cause, noticeDate, actionDate);
@@ -499,7 +500,7 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         }
 
         private ShikakuSoshitsu createShikakuSoshitsu() {
-            ShikakuSoshitsuJiyu cause = toShikakuSoshitsuJiyu(this.kaigoShikaku.get資格喪失事由().getCode());
+            ShikakuSoshitsuJiyu cause = toShikakuSoshitsuJiyu(this.kaigoShikaku.get資格喪失事由().getCode().value());
             FlexibleDate noticeDate = toFlexibleDate(this.kaigoShikaku.get資格喪失届出年月日());
             FlexibleDate actionDate = toFlexibleDate(this.kaigoShikaku.get資格喪失年月日());
             return new ShikakuSoshitsu(cause, noticeDate, actionDate);
@@ -514,10 +515,14 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
                     this.theShikibetsuCode, HokenShubetsu.介護保険,
                     toRDateOrMin(this.shutoku.getNoticeDate()),
                     toRDateOrMin(this.shutoku.getActionDate()),
-                    toIShikakuShutokuJiyu(this.shutoku.getReason().getCode()),
+                    //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+                    //                    toIShikakuShutokuJiyu(this.shutoku.getReason().getCode()),
+                    null,
                     toRDateOrMax(this.soshitsu.getNoticeDate()),
                     toRDateOrMax(this.soshitsu.getActionDate()),
-                    toIShikakuSoshitsuJiyu(this.soshitsu.getReason().getCode()),
+                    //                    toIShikakuSoshitsuJiyu(this.soshitsu.getReason().getCode()),
+                    //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+                    null,
                     this.theHihokenshaNo.value(),
                     this.koikiJutokuOriginHokenshaCode.value(),
                     toRDateOrMax(this.ichigoGaitoDate),
@@ -551,44 +556,43 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
             return new RDate(date.toString());
         }
 
-        private IShikakuShutokuJiyu toIShikakuShutokuJiyu(RString code) {
-            final ShikakuShutokuJiyu reason = ShikakuShutokuJiyu.toValue(code);
-            return new IShikakuShutokuJiyu() {
-                @Override
-                public RString getCode() {
-                    return reason.getCode();
-                }
-
-                @Override
-                public RString getName() {
-                    return reason.getName();
-                }
-
-                @Override
-                public RString getShortName() {
-                    return reason.getShortName();
-                }
-            };
-        }
-
-        private IShikakuSoshitsuJiyu toIShikakuSoshitsuJiyu(RString code) {
-            final ShikakuSoshitsuJiyu reason = ShikakuSoshitsuJiyu.toValue(code);
-            return new IShikakuSoshitsuJiyu() {
-                @Override
-                public RString getCode() {
-                    return reason.getCode();
-                }
-
-                @Override
-                public RString getName() {
-                    return reason.getName();
-                }
-
-                @Override
-                public RString getShortName() {
-                    return reason.getShortName();
-                }
-            };
-        }
+//        private IShikakuShutokuJiyu toIShikakuShutokuJiyu(RString code) {
+//            final ShikakuShutokuJiyu reason = ShikakuShutokuJiyu.toValue(code);
+//            return new IShikakuShutokuJiyu() {
+//                @Override
+//                public RString getCode() {
+//                    return reason.getCode();
+//                }
+//
+//                @Override
+//                public RString getName() {
+//                    return reason.getName();
+//                }
+//
+//                @Override
+//                public RString getShortName() {
+//                    return reason.getShortName();
+//                }
+//            };
+//        }
+//        private IShikakuSoshitsuJiyu toIShikakuSoshitsuJiyu(RString code) {
+//            final ShikakuSoshitsuJiyu reason = ShikakuSoshitsuJiyu.toValue(code);
+//            return new IShikakuSoshitsuJiyu() {
+//                @Override
+//                public RString getCode() {
+//                    return reason.getCode();
+//                }
+//
+//                @Override
+//                public RString getName() {
+//                    return reason.getName();
+//                }
+//
+//                @Override
+//                public RString getShortName() {
+//                    return reason.getShortName();
+//                }
+//            };
+//        }
     }
 }
