@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoIraiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -86,7 +86,7 @@ public class ShujiiIkenshoIraiTaishoshaManager {
      * @throws NullPointerException 引数がnullの場合
      */
     public List<ShujiiIkenshoIraiTaishosha> get主治医意見書作成依頼対象者(LasdecCode 市町村コード) throws NullPointerException {
-        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         List<KaigoNinteiShoriTaishoshaEntity> iraiTaishoshaEntityList = shujiiIkenshoIraiTaishoshaDac.selectAll();
         return create主治医意見書作成依頼対象者List(市町村コード, iraiTaishoshaEntityList);
     }
@@ -101,8 +101,8 @@ public class ShujiiIkenshoIraiTaishoshaManager {
      */
     public List<ShujiiIkenshoIraiTaishosha> get主治医意見書作成依頼対象者(
             LasdecCode 市町村コード, ShoKisaiHokenshaNo 証記載保険者番号) throws NullPointerException {
-        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
-        requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         List<KaigoNinteiShoriTaishoshaEntity> iraiTaishoshaEntityList = shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号(証記載保険者番号);
         return create主治医意見書作成依頼対象者List(市町村コード, iraiTaishoshaEntityList);
     }
@@ -118,9 +118,9 @@ public class ShujiiIkenshoIraiTaishoshaManager {
      */
     public List<ShujiiIkenshoIraiTaishosha> get主治医意見書作成依頼対象者(
             LasdecCode 市町村コード, ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) throws NullPointerException {
-        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
-        requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
-        requireNonNull(支所コード, Messages.E00001.replace("支所コード").getMessage());
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+        requireNonNull(支所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("支所コード"));
         List<KaigoNinteiShoriTaishoshaEntity> iraiTaishoshaEntityList = shujiiIkenshoIraiTaishoshaDac.select証記載保険者番号及び支所コード(証記載保険者番号, 支所コード);
         return create主治医意見書作成依頼対象者List(市町村コード, iraiTaishoshaEntityList);
     }
@@ -189,6 +189,8 @@ public class ShujiiIkenshoIraiTaishoshaManager {
     private KaigoIryoKikan get主治医医療機関情報(LasdecCode 市町村コード, ShujiiIkenshoSakuseiIrai 主治医意見書作成依頼情報) {
         return kaigoIryoKikanFinder.get介護医療機関(
                 市町村コード,
-                主治医意見書作成依頼情報.get介護医師().get介護医療機関コード());
+                null);
+        //TODO KaigoDoctorコメントアウトされている
+//                主治医意見書作成依頼情報.get介護医師().get介護医療機関コード());
     }
 }

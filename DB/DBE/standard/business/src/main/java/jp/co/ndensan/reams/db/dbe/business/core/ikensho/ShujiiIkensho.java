@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemKubun;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -34,8 +34,8 @@ public class ShujiiIkensho<E extends IShujiiIkenshoItemKubun, T extends IShujiiI
      * @param 意見書項目グループ 意見書項目グループ
      */
     public ShujiiIkensho(Map<E, T> 意見書定義, IShujiiIkenshoItemGroup[] 意見書項目グループ) {
-        this.意見書定義 = requireNonNull(意見書定義, Messages.E00001.replace("意見書定義").getMessage());
-        this.意見書項目グループ = requireNonNull(意見書項目グループ, Messages.E00001.replace("意見書項目グループ").getMessage());
+        this.意見書定義 = requireNonNull(意見書定義, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書定義"));
+        this.意見書項目グループ = requireNonNull(意見書項目グループ, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書項目グループ"));
     }
 
     /**

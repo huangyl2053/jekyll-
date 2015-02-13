@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -26,7 +26,7 @@ public class NinteiShinseiDate implements IDbColumnMappable, IValueObject<Flexib
      */
     public NinteiShinseiDate(FlexibleDate 認定申請年月日) {
         this.認定申請年月日 = requireNonNull(認定申請年月日,
-                Messages.E00003.replace("認定申請年月日", getClass().getName()).getMessage());
+                UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定申請年月日", getClass().getName()));
     }
 
     @Override

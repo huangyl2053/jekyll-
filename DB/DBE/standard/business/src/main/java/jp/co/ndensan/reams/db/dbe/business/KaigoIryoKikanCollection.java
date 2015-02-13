@@ -12,7 +12,8 @@ import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
@@ -32,7 +33,7 @@ public class KaigoIryoKikanCollection implements Iterable {
      */
     public KaigoIryoKikanCollection(List<KaigoIryoKikan> 介護医療機関List) throws NullPointerException {
         this.介護医療機関List = requireNonNull(介護医療機関List,
-                Messages.E00003.replace("介護医療機関List", getClass().getName()).getMessage());
+                UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("介護医療機関List", getClass().getName()));
     }
 
     /**
@@ -51,7 +52,7 @@ public class KaigoIryoKikanCollection implements Iterable {
                 return kaigoIryoKikan;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("対応する介護医療機関").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する介護医療機関").evaluate());
     }
 
     private boolean is市町村コードと介護機関コードが一致(KaigoIryoKikan kaigoIryoKikan, LasdecCode 市町村コード,

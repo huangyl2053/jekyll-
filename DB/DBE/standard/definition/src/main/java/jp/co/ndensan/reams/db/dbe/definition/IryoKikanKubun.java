@@ -9,7 +9,7 @@ import java.util.Objects;
 //import jp.co.ndensan.reams.ur.urz.business.ICodeAssignedItem;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
  * 病院、診療所、助産所といった、医療機関の区分を表すクラスです。
@@ -39,9 +39,9 @@ public class IryoKikanKubun { //implements ICodeAssignedItem {
      * @param 略称 略称
      */
     public IryoKikanKubun(RString コード, RString 名称, RString 略称) {
-        requireNonNull(コード, Messages.E00003.replace("コード", getClass().getName()).getMessage());
-        requireNonNull(名称, Messages.E00003.replace("名称", getClass().getName()).getMessage());
-        requireNonNull(略称, Messages.E00003.replace("略称", getClass().getName()).getMessage());
+        requireNonNull(コード, UrSystemErrorMessages.値がnull.getReplacedMessage("コード", getClass().getName()));
+        requireNonNull(名称, UrSystemErrorMessages.値がnull.getReplacedMessage("名称", getClass().getName()));
+        requireNonNull(略称, UrSystemErrorMessages.値がnull.getReplacedMessage("略称", getClass().getName()));
 
         this.code = コード;
         this.name = 名称;

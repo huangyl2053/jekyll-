@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.business._Doctor;
-import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
+//import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.*;
 import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun.*;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryokikanCode;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.model.IryokikanModel;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import static org.mockito.Mockito.spy;
@@ -84,32 +84,34 @@ public class ShujiiIkenshoResultMock {
     }
 
     private static KaigoDoctor createKaigoDoctor() {
-        return new KaigoDoctor(
-                new _Doctor(
-                        new RString("医師識別番号"),
-                        new AtenaMeisho(new RString("医師氏名")),
-                        new _IryoKikanCode(new RString("1234567890")),
-                        new Code(new RString("所属診療科")),
-                        new Code(new RString("医師区分"))),
-                new Shujii(
-                        new LasdecCode(new RString("202052")),
-                        new KaigoIryoKikanCode(new RString("介護医療機関コード")),
-                        new KaigoDoctorCode(new RString("介護医師コード")),
-                        new _IryoKikanCode(new RString("1234567890")),
-                        new RString("医師識別番号"),
-                        IshiJokyo.有効,
-                        new YubinNo(new RString("1234567")),
-                        new AtenaJusho(new RString("住所")),
-                        new TelNo("電話番号"),
-                        new RString("FAX番号")),
-                new KaigoIryoKikan(
-                        new IryokikanModel(KaigoIryoKikanTestHelper.create医療機関Entity()),
-                        new ShujiiIryoKikan(
-                                new LasdecCode(new RString("202052")),
-                                new KaigoIryoKikanCode(new RString("1234567890")),
-                                new IryokikanCode("1234567890"),
-                                IryoKikanJokyo.有効,
-                                new IryoKikanKubun(new RString("医療機関の区分"), RString.EMPTY, RString.EMPTY))));
+//        return new KaigoDoctor(
+//                new _Doctor(
+//                        new RString("医師識別番号"),
+//                        new AtenaMeisho(new RString("医師氏名")),
+//                        new _IryoKikanCode(new RString("1234567890")),
+//                        new Code(new RString("所属診療科")),
+//                        new Code(new RString("医師区分"))),
+//                new Shujii(
+//                        new LasdecCode(new RString("202052")),
+//                        new KaigoIryoKikanCode(new RString("介護医療機関コード")),
+//                        new KaigoDoctorCode(new RString("介護医師コード")),
+//                        new _IryoKikanCode(new RString("1234567890")),
+//                        new RString("医師識別番号"),
+//                        IshiJokyo.有効,
+//                        new YubinNo(new RString("1234567")),
+//                        new AtenaJusho(new RString("住所")),
+//                        new TelNo("電話番号"),
+//                        new RString("FAX番号")),
+//                new KaigoIryoKikan(
+//                        new IryokikanModel(KaigoIryoKikanTestHelper.create医療機関Entity()),
+//                        new ShujiiIryoKikan(
+//                                new LasdecCode(new RString("202052")),
+//                                new KaigoIryoKikanCode(new RString("1234567890")),
+//                                new IryokikanCode("1234567890"),
+//                                IryoKikanJokyo.有効,
+//                                new IryoKikanKubun(new RString("医療機関の区分"), RString.EMPTY, RString.EMPTY))));
+        //TODO KaigoDoctorコメントアウトされている
+        return null;
     }
 
     /**

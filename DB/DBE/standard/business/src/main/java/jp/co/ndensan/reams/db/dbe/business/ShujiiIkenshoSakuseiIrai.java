@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.SakuseiryoSeikyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static java.util.Objects.requireNonNull;
 
@@ -62,12 +62,12 @@ public class ShujiiIkenshoSakuseiIrai {
             FlexibleDate 請求書出力年月日,
             SakuseiryoSeikyuKubun 作成料請求区分,
             ShujiiIkenshoSakuseiTokusoku 意見書作成督促情報) {
-        this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
-        this.意見書作成依頼履歴番号 = requireNonNull(意見書作成依頼履歴番号, Messages.E00001.replace("意見書作成依頼履歴番号").getMessage());
-        this.介護医師 = requireNonNull(介護医師, Messages.E00001.replace("介護医師").getMessage());
-        this.意見書作成依頼区分 = requireNonNull(意見書作成依頼区分, Messages.E00001.replace("意見書作成依頼区分").getMessage());
+        this.申請書管理番号 = requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        this.意見書作成依頼履歴番号 = requireNonNull(意見書作成依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書作成依頼履歴番号"));
+        this.介護医師 = requireNonNull(介護医師, UrSystemErrorMessages.値がnull.getReplacedMessage("介護医師"));
+        this.意見書作成依頼区分 = requireNonNull(意見書作成依頼区分, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書作成依頼区分"));
         this.意見書作成回数 = 意見書作成回数;
-        this.医師区分 = requireNonNull(医師区分, Messages.E00001.replace("医師区分").getMessage());
+        this.医師区分 = requireNonNull(医師区分, UrSystemErrorMessages.値がnull.getReplacedMessage("医師区分"));
         this.意見書作成依頼年月日 = 意見書作成依頼年月日;
         this.意見書作成期限年月日 = 意見書作成期限年月日;
         this.意見書出力年月日 = 意見書出力年月日;

@@ -30,9 +30,11 @@ public final class KaigoDoctorMapper {
      * @return 介護医師情報
      */
     public static KaigoDoctor toKaigoDoctor(KaigoDoctorEntity kaigoDoctorEntity, KaigoIryoKikan kaigoIryoKikan) {
-        return new KaigoDoctor(
-                DoctorMapper.toDoctor(kaigoDoctorEntity.getDoctorEntity()),
-                ShujiiMapper.toShujii(kaigoDoctorEntity.getDbT7012ShujiiJohoEntity()),
-                kaigoIryoKikan);
+//        return new KaigoDoctor(
+//                DoctorMapper.toDoctor(kaigoDoctorEntity.getDoctorEntity()),
+//                ShujiiMapper.toShujii(kaigoDoctorEntity.getDbT7012ShujiiJohoEntity()),
+//                kaigoIryoKikan);
+        //KaigoDoctorがコメントアウトされている
+        return null;
     }
 }

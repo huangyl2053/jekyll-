@@ -35,17 +35,21 @@ public class KaigoDoctorTest extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 医師がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            KaigoDoctor sut = new KaigoDoctor(null, shujii, facility);
+            //TODO KaigoDoctorコメントアウトされている
+//            KaigoDoctor sut = new KaigoDoctor(null, shujii, facility);
+
         }
 
         @Test(expected = NullPointerException.class)
         public void 主治医がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            KaigoDoctor sut = new KaigoDoctor(doctor, null, facility);
+            //TODO KaigoDoctorコメントアウトされている
+//            KaigoDoctor sut = new KaigoDoctor(doctor, null, facility);
         }
 
         @Test(expected = NullPointerException.class)
         public void 介護医療機関がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            KaigoDoctor sut = new KaigoDoctor(doctor, shujii, null);
+            //TODO KaigoDoctorコメントアウトされている
+//            KaigoDoctor sut = new KaigoDoctor(doctor, shujii, null);
         }
     }
 }

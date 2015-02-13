@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -80,7 +80,7 @@ public enum IchijiHanteiKeikokuShubetsu {
                 return 警告種別;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("対応する警告種別").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する警告種別").evaluate());
     }
 
     private static FlexibleYear get判定年度(FlexibleDate 一次判定年月日) {

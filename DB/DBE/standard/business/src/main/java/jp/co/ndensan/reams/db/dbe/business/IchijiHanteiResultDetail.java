@@ -13,7 +13,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItem;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -288,84 +288,84 @@ public final class IchijiHanteiResultDetail {
 
         @Override
         public KoroshoIFKubunSetter set申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
-            requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
+            requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
             this.申請書管理番号 = 申請書管理番号;
             return this;
         }
 
         @Override
         public KariIchijiHanteiKubunSetter set厚労省IF区分(KoroshoIFKubun 厚労省IF区分) {
-            requireNonNull(厚労省IF区分, Messages.E00001.replace("厚労省IF区分").getMessage());
+            requireNonNull(厚労省IF区分, UrSystemErrorMessages.値がnull.getReplacedMessage("厚労省IF区分"));
             this.厚労省IF区分 = 厚労省IF区分;
             return this;
         }
 
         @Override
         public IchijiHanteiDateSetter set厚労省IF区分(KariIchijiHanteiKubun 仮一次判定区分) {
-            requireNonNull(仮一次判定区分, Messages.E00001.replace("仮一次判定区分").getMessage());
+            requireNonNull(仮一次判定区分, UrSystemErrorMessages.値がnull.getReplacedMessage("仮一次判定区分"));
             this.仮一次判定区分 = 仮一次判定区分;
             return this;
         }
 
         @Override
         public IchijiHanteiResultSetter set一次判定年月日(FlexibleDate 一次判定年月日) {
-            requireNonNull(一次判定年月日, Messages.E00001.replace("一次判定年月日").getMessage());
+            requireNonNull(一次判定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("一次判定年月日"));
             this.一次判定年月日 = 一次判定年月日;
             return this;
         }
 
         @Override
         public NinchishoKasanIchijiHanteiResultSetter set一次判定結果(IchijiHanteiResultKomoku 一次判定結果) {
-            requireNonNull(一次判定結果, Messages.E00001.replace("一次判定結果").getMessage());
+            requireNonNull(一次判定結果, UrSystemErrorMessages.値がnull.getReplacedMessage("一次判定結果"));
             this.一次判定結果 = 一次判定結果;
             return this;
         }
 
         @Override
         public YokaigoNinteiKijunTimeSetter set認知症加算一次判定結果(IchijiHanteiResultKomoku 認知症加算一次判定結果) {
-            requireNonNull(認知症加算一次判定結果, Messages.E00001.replace("認知症加算一次判定結果").getMessage());
+            requireNonNull(認知症加算一次判定結果, UrSystemErrorMessages.値がnull.getReplacedMessage("認知症加算一次判定結果"));
             this.認知症加算一次判定結果 = 認知症加算一次判定結果;
             return this;
         }
 
         @Override
         public ChukanHyokaKomokuTokutenSetter set要介護認定等基準時間(YokaigoNinteiKijunTime 要介護認定等基準時間) {
-            requireNonNull(要介護認定等基準時間, Messages.E00001.replace("要介護認定等基準時間").getMessage());
+            requireNonNull(要介護認定等基準時間, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定等基準時間"));
             this.要介護認定等基準時間 = 要介護認定等基準時間;
             return this;
         }
 
         @Override
         public IchijiHanteiKeikokuListSetter set中間評価項目得点(YokaigoNinteiChukanHyokaKomokuTokuten 中間評価項目得点) {
-            requireNonNull(中間評価項目得点, Messages.E00001.replace("中間評価項目得点").getMessage());
+            requireNonNull(中間評価項目得点, UrSystemErrorMessages.値がnull.getReplacedMessage("中間評価項目得点"));
             this.中間評価項目得点 = 中間評価項目得点;
             return this;
         }
 
         @Override
         public JotaiAnteiseiSetter set一次判定警告List(IchijiHanteiKeikokuList 一次判定警告List) {
-            requireNonNull(一次判定警告List, Messages.E00001.replace("一次判定警告List").getMessage());
+            requireNonNull(一次判定警告List, UrSystemErrorMessages.値がnull.getReplacedMessage("一次判定警告List"));
             this.一次判定警告List = 一次判定警告List;
             return this;
         }
 
         @Override
         public GaizenseiSetter set状態安定性(JotaiAnteiseiKubun 認定状態安定性) {
-            requireNonNull(認定状態安定性, Messages.E00001.replace("認定状態安定性").getMessage());
+            requireNonNull(認定状態安定性, UrSystemErrorMessages.値がnull.getReplacedMessage("認定状態安定性"));
             this.認定状態安定性 = 認定状態安定性;
             return this;
         }
 
         @Override
         public SuiteiKyuhuKubunSetter set認知症自立度2以上蓋然性(Decimal 認知症自立度2以上蓋然性) {
-            requireNonNull(認知症自立度2以上蓋然性, Messages.E00001.replace("認知症自立度2以上蓋然性").getMessage());
+            requireNonNull(認知症自立度2以上蓋然性, UrSystemErrorMessages.値がnull.getReplacedMessage("認知症自立度2以上蓋然性"));
             this.認知症自立度2以上蓋然性 = 認知症自立度2以上蓋然性;
             return this;
         }
 
         @Override
         public OthersSetter set推定給付区分(SuiteiKyuhuKubun 推定給付区分) {
-            requireNonNull(推定給付区分, Messages.E00001.replace("推定給付区分").getMessage());
+            requireNonNull(推定給付区分, UrSystemErrorMessages.値がnull.getReplacedMessage("推定給付区分"));
             this.推定給付区分 = 推定給付区分;
             return this;
         }

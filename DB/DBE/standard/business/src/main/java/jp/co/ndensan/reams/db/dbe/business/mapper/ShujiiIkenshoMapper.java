@@ -67,8 +67,9 @@ public final class ShujiiIkenshoMapper {
         entity.setShinseishoKanriNo(rslt.get申請書管理番号());
         entity.setIkenshoIraiKubun(rslt.get意見書依頼区分().getCode());
         entity.setIkenshoIraiRirekiNo(rslt.get意見書履歴番号().value().intValue());
-        entity.setShujiiIryoKikanCode(rslt.get主治医().get介護医療機関コード().getValue());
-        entity.setShujiiCode(rslt.get主治医().get介護医師コード().value());
+        //TODO KaigoDoctorがコメントアウトされている
+//        entity.setShujiiIryoKikanCode(rslt.get主治医().get介護医療機関コード().getValue());
+//        entity.setShujiiCode(rslt.get主治医().get介護医師コード().value());
         entity.setIkenshoJuryoYMD(rslt.get意見書受領年月日());
         entity.setIkenshoKinyuYMD(rslt.get意見書記入年月日());
         entity.setIkenshoSakuseiKaisu(rslt.get意見書作成回数().getCode());

@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -66,15 +66,15 @@ public class ShujiiIkenshoIraiTaishosha {
             KaigoIryoKikan 主治医医療機関,
             KaigoDoctor 主治医) throws NullPointerException {
 
-        this.認定進捗情報 = requireNonNull(認定進捗情報, Messages.E00003.replace("認定進捗情報", "主治医意見書依頼対象").getMessage());
-        this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", "主治医意見書依頼対象").getMessage());
-        this.証記載保険者番号 = requireNonNull(証記載保険者番号, Messages.E00003.replace("証記載保険者番号", "主治医意見書依頼対象").getMessage());
-        this.被保険者番号 = requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", "主治医意見書依頼対象").getMessage());
-        this.認定申請年月日 = requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", "主治医意見書依頼対象").getMessage());
-        this.認定申請区分 = requireNonNull(認定申請区分, Messages.E00003.replace("認定申請区分", "主治医意見書依頼対象").getMessage());
-        this.個人情報 = requireNonNull(個人情報, Messages.E00003.replace("個人情報", "主治医意見書依頼対象").getMessage());
-        this.氏名 = requireNonNull(氏名, Messages.E00003.replace("氏名", "主治医意見書依頼対象").getMessage());
-        this.住所 = requireNonNull(住所, Messages.E00003.replace("住所", "主治医意見書依頼対象").getMessage());
+        this.認定進捗情報 = requireNonNull(認定進捗情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定進捗情報", "主治医意見書依頼対象"));
+        this.申請書管理番号 = requireNonNull(申請書管理番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("申請書管理番号", "主治医意見書依頼対象"));
+        this.証記載保険者番号 = requireNonNull(証記載保険者番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("証記載保険者番号", "主治医意見書依頼対象"));
+        this.被保険者番号 = requireNonNull(被保険者番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("被保険者番号", "主治医意見書依頼対象"));
+        this.認定申請年月日 = requireNonNull(認定申請年月日, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定申請年月日", "主治医意見書依頼対象"));
+        this.認定申請区分 = requireNonNull(認定申請区分, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定申請区分", "主治医意見書依頼対象"));
+        this.個人情報 = requireNonNull(個人情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("個人情報", "主治医意見書依頼対象"));
+        this.氏名 = requireNonNull(氏名, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("氏名", "主治医意見書依頼対象"));
+        this.住所 = requireNonNull(住所, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("住所", "主治医意見書依頼対象"));
         this.主治医医療機関 = 主治医医療機関;
         this.主治医 = 主治医;
     }

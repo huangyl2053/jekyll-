@@ -7,7 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business;
 import java.util.Iterator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 
@@ -27,7 +28,7 @@ public class NinteichosaIraiCollection implements Iterable {
      * @throws NullPointerException 引数にnullが渡されたとき
      */
     public NinteichosaIraiCollection(List<NinteichosaIrai> 認定調査依頼情報List) throws NullPointerException {
-        requireNonNull(認定調査依頼情報List, Messages.E00003.replace("認定調査依頼情報List", getClass().getName()).getMessage());
+        requireNonNull(認定調査依頼情報List, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定調査依頼情報List", getClass().getName()));
         this.認定調査依頼情報List = 認定調査依頼情報List;
     }
 
@@ -46,7 +47,7 @@ public class NinteichosaIraiCollection implements Iterable {
                 return 認定調査依頼情報;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("対応する認定申請情報").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定申請情報").evaluate());
     }
 
     private boolean is申請書管理番号と認定調査依頼履歴番号が一致(NinteichosaIrai 認定調査依頼情報, ShinseishoKanriNo 申請書管理番号,

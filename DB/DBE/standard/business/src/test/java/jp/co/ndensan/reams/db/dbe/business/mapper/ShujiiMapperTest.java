@@ -50,7 +50,7 @@ public class ShujiiMapperTest extends DbeTestBase {
 
         @Test
         public void 医療機関コードの設定がある時_toShujii_get医療機関コードは_設定値を返す() {
-            assertThat(createShujii().get医療機関コード().getValue(), is(new RString("1234567890")));
+            assertThat(createShujii().get介護医療機関コード().getValue(), is(new RString("1234567890")));
         }
 
         @Test

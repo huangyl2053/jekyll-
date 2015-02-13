@@ -4,7 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -26,11 +27,11 @@ public class Gogitai {
      * @throws IllegalArgumentException 引数からわたされた合議体情報と、割当委員がそれぞれ持つ合議体情報が一致しないとき
      */
     public Gogitai(GogitaiDetail 合議体情報, GogitaiWariateIinList 割当委員List) throws NullPointerException, IllegalArgumentException {
-        requireNonNull(合議体情報, Messages.E00003.replace("合議体情報", getClass().getName().toString()).getMessage());
-        requireNonNull(割当委員List, Messages.E00003.replace("割当委員List", getClass().getName().toString()).getMessage());
+        requireNonNull(合議体情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("合議体情報", getClass().getName().toString()));
+        requireNonNull(割当委員List, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("割当委員List", getClass().getName().toString()));
 
         if (!is割当委員の合議体情報が一致(合議体情報, 割当委員List)) {
-            throw new IllegalArgumentException(Messages.E00013.replace("割当委員Listが持つ合議体情報", "すべて同じ").getMessage());
+            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("割当委員Listが持つ合議体情報", "すべて同じ").evaluate());
         }
 
         this.合議体情報 = 合議体情報;

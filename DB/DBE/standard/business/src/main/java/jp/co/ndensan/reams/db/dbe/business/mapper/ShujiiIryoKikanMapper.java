@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbe.business.ShujiiIryoKikan;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryokikanCode;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
 
 /**
  * 主治医医療機関のマッパーです。
@@ -34,7 +34,7 @@ public final class ShujiiIryoKikanMapper {
      * @throws NullPointerException 引数にNULLが渡された場合
      */
     public static IShujiiIryoKikan toShujiiIryoKikan(DbT7011ShujiiIryoKikanJohoEntity shujiiIryokikanEntity) throws NullPointerException {
-        requireNonNull(shujiiIryokikanEntity, Messages.E00003.replace("主治医医療機関エンティティ", "主治医医療機関").getMessage());
+        requireNonNull(shujiiIryokikanEntity, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("主治医医療機関エンティティ", "主治医医療機関"));
 
         return new ShujiiIryoKikan(shujiiIryokikanEntity.getShichosonCode(),
                 shujiiIryokikanEntity.getKaigoIryokikanCode(),
@@ -43,8 +43,8 @@ public final class ShujiiIryoKikanMapper {
                 create医療機関区分(shujiiIryokikanEntity));
     }
 
-    private static IryokikanCode create医療機関コード(DbT7011ShujiiIryoKikanJohoEntity entity) {
-        return new IryokikanCode(entity.getIryokikanCode());
+    private static IryoKikanCode create医療機関コード(DbT7011ShujiiIryoKikanJohoEntity entity) {
+        return new IryoKikanCode(entity.getIryokikanCode());
     }
 
     private static IryoKikanKubun create医療機関区分(DbT7011ShujiiIryoKikanJohoEntity entity) {
@@ -60,7 +60,7 @@ public final class ShujiiIryoKikanMapper {
      */
     public static DbT7011ShujiiIryoKikanJohoEntity toShujiiIryoKikanEntity(IShujiiIryoKikan iryoKikan) throws NullPointerException {
 
-        requireNonNull(iryoKikan, Messages.E00003.replace("主治医医療機関", "主治医医療機関エンティティ").getMessage());
+        requireNonNull(iryoKikan, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("主治医医療機関", "主治医医療機関エンティティ"));
 
         //TODO n8178 城間篤人 共通項目についてどのように扱うか未定 2014年2月末
         DbT7011ShujiiIryoKikanJohoEntity entity = new DbT7011ShujiiIryoKikanJohoEntity();
@@ -85,8 +85,8 @@ public final class ShujiiIryoKikanMapper {
     public static DbT7011ShujiiIryoKikanJohoEntity toShujiiIryoKikanEntity(IShujiiIryoKikan iryoKikan, IryoKikanJokyo 医療機関状況)
             throws NullPointerException {
 
-        requireNonNull(iryoKikan, Messages.E00003.replace("主治医医療機関", "主治医医療機関エンティティ").getMessage());
-        requireNonNull(iryoKikan, Messages.E00003.replace("医療機関状況", "主治医医療機関エンティティ").getMessage());
+        requireNonNull(iryoKikan, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("主治医医療機関", "主治医医療機関エンティティ"));
+        requireNonNull(iryoKikan, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("医療機関状況", "主治医医療機関エンティティ"));
 
         DbT7011ShujiiIryoKikanJohoEntity entity = toShujiiIryoKikanEntity(iryoKikan);
         entity.setIryokikanJokyo(医療機関状況.is有効());

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 
@@ -49,10 +49,10 @@ public class NinteichosahyoKaitoHairetsuCode {
      */
     public NinteichosahyoKaitoHairetsuCode(RString 調査項目回答, ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 要介護認定調査履歴番号,
             KoroshoIFKubun 厚労省IF区分) throws NullPointerException {
-        requireNonNull(調査項目回答, Messages.E00003.replace("調査項目回答", getClass().getName()).getMessage());
-        requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
-        requireNonNull(要介護認定調査履歴番号, Messages.E00003.replace("要介護認定調査履歴番号", getClass().getName()).getMessage());
-        requireNonNull(厚労省IF区分, Messages.E00003.replace("厚労省IFコードを表す区分", getClass().getName()).getMessage());
+        requireNonNull(調査項目回答, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("調査項目回答", getClass().getName()));
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("申請書管理番号", getClass().getName()));
+        requireNonNull(要介護認定調査履歴番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("要介護認定調査履歴番号", getClass().getName()));
+        requireNonNull(厚労省IF区分, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("厚労省IFコードを表す区分", getClass().getName()));
 
         this.調査項目回答 = 調査項目回答;
         this.申請書管理番号 = 申請書管理番号;

@@ -7,7 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import static java.util.Objects.requireNonNull;
@@ -28,7 +29,7 @@ public class KaigoDoctorCollection implements Iterable {
      * @param 介護医師リスト 介護医師リスト
      */
     public KaigoDoctorCollection(List<KaigoDoctor> 介護医師リスト) {
-        this.介護医師リスト = requireNonNull(介護医師リスト, Messages.E00001.replace("介護医師リスト").getMessage());
+        this.介護医師リスト = requireNonNull(介護医師リスト, UrSystemErrorMessages.値がnull.getReplacedMessage("介護医師リスト"));
     }
 
     /**
@@ -41,13 +42,14 @@ public class KaigoDoctorCollection implements Iterable {
      */
     public KaigoDoctor get介護医師(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード) {
         for (KaigoDoctor 介護医師 : 介護医師リスト) {
-            if (介護医師.get市町村コード().equals(市町村コード)
-                    && 介護医師.get介護医療機関コード().equals(介護医療機関コード)
-                    && 介護医師.get介護医師コード().equals(介護医師コード)) {
-                return 介護医師;
-            }
+            //KaigoDoctorがコメントアウトされている
+//            if (介護医師.get市町村コード().equals(市町村コード)
+//                    && 介護医師.get介護医療機関コード().equals(介護医療機関コード)
+//                    && 介護医師.get介護医師コード().equals(介護医師コード)) {
+//                return 介護医師;
+//            }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("介護医師").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("介護医師").evaluate());
     }
 
     /**
@@ -59,9 +61,10 @@ public class KaigoDoctorCollection implements Iterable {
     public KaigoDoctorCollection sub介護医師List(KaigoIryoKikanCode 介護医療機関コード) {
         List<KaigoDoctor> sub介護医師List = new ArrayList<>();
         for (KaigoDoctor 介護医師 : 介護医師リスト) {
-            if (介護医師.get介護医療機関コード().equals(介護医療機関コード)) {
-                sub介護医師List.add(介護医師);
-            }
+            //KaigoDoctorがコメントアウトされている
+//            if (介護医師.get介護医療機関コード().equals(介護医療機関コード)) {
+//                sub介護医師List.add(介護医師);
+//            }
         }
         return new KaigoDoctorCollection(sub介護医師List);
     }

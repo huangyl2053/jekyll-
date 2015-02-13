@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -25,8 +25,8 @@ public class YokaigoJotai {
      * @param 認定有効期間 認定有効期間
      */
     public YokaigoJotai(YokaigoJotaiKubun 要介護状態区分, NinteiYukoKikan 認定有効期間) {
-        this.要介護状態区分 = requireNonNull(要介護状態区分, Messages.E00001.replace("要介護状態区分").getMessage());
-        this.認定有効期間 = requireNonNull(認定有効期間, Messages.E00001.replace("認定有効期間").getMessage());
+        this.要介護状態区分 = requireNonNull(要介護状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護状態区分"));
+        this.認定有効期間 = requireNonNull(認定有効期間, UrSystemErrorMessages.値がnull.getReplacedMessage("認定有効期間"));
     }
 
     /**

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import java.util.EnumMap;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
@@ -84,7 +84,7 @@ public class YokaigoNinteiProgressFactory {
      * @param progress 要介護認定進捗情報
      */
     public YokaigoNinteiProgressFactory(YokaigoNinteiProgress progress) {
-        this.progress = requireNonNull(progress, Messages.E00001.replace("要介護認定進捗情報").getMessage());
+        this.progress = requireNonNull(progress, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定進捗情報"));
         mapOfDateItems = toMapOnlyDateItems();
     }
 

@@ -5,7 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.definition;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.lib.util.IRStringConvertable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -56,14 +57,14 @@ public enum NinteiShinseijiKubun implements IRStringConvertable {
      * @throws IllegalArgumentException {@code code}が実在しない認定申請区分（申請時）の場合
      */
     public static NinteiShinseijiKubun toValue(RString code) throws NullPointerException, IllegalArgumentException {
-        Objects.requireNonNull(code, Messages.E00001.replace("認定申請区分（申請時）").getMessage());
+        Objects.requireNonNull(code, UrSystemErrorMessages.値がnull.getReplacedMessage("認定申請区分（申請時）"));
 
         for (NinteiShinseijiKubun item : NinteiShinseijiKubun.values()) {
             if (item.コード.equals(code)) {
                 return item;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("該当する認定申請区分（申請時）").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する認定申請区分（申請時）").evaluate());
     }
 
     /**

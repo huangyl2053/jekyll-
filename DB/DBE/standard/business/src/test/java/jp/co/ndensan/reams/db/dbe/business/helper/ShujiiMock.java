@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.Shujii;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -36,16 +36,17 @@ public class ShujiiMock {
      * @return Shujii
      */
     public static IShujii getSpiedInstance() {
-        return spy(new Shujii(
-                new LasdecCode(new RString("000001")),
-                new KaigoIryoKikanCode(new RString("介護医療機関コード")),
-                new KaigoDoctorCode(new RString("介護医師コード")),
-                new _IryoKikanCode(new RString("1234567890")),
-                new RString("医師識別番号"),
-                IshiJokyo.有効,
-                new YubinNo(new RString("1234567")),
-                new AtenaJusho(new RString("住所")),
-                new TelNo("電話番号"),
-                new RString("FAX番号")));
+//        return spy(new Shujii(
+//                new LasdecCode(new RString("000001")),
+//                new KaigoIryoKikanCode(new RString("介護医療機関コード")),
+//                new KaigoDoctorCode(new RString("介護医師コード")),
+//                new IryoKikanCode(new RString("1234567890")),
+//                new RString("医師識別番号"),
+//                IshiJokyo.有効,
+//                new YubinNo(new RString("1234567")),
+//                new AtenaJusho(new RString("住所")),
+//                new TelNo("電話番号"),
+//                new RString("FAX番号")));
+        return null;
     }
 }

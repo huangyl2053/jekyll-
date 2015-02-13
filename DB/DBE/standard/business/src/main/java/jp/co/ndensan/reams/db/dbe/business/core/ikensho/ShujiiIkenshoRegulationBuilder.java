@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujii
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoItemNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 
@@ -36,7 +36,7 @@ class ShujiiIkenshoRegulationBuilder<E extends IShujiiIkenshoItemKubun> {
      * @param 意見書定義 意見書定義
      */
     ShujiiIkenshoRegulationBuilder(Map<E, IShujiiIkenshoItem> 意見書定義) {
-        this.意見書定義 = requireNonNull(意見書定義, Messages.E00001.replace("意見書定義").getMessage());
+        this.意見書定義 = requireNonNull(意見書定義, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書定義"));
     }
 
     /**

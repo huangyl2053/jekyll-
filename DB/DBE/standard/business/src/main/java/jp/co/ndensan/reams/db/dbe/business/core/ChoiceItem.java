@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core;
 import java.util.Arrays;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.IAnswerResultItem;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 
@@ -26,7 +26,7 @@ public class ChoiceItem implements IAnswerItem {
      * @param 選択肢 選択肢
      */
     public ChoiceItem(IAnswerResultItem[] 選択肢) {
-        this.選択肢 = requireNonNull(選択肢, Messages.E00001.replace("選択肢").getMessage());
+        this.選択肢 = requireNonNull(選択肢, UrSystemErrorMessages.値がnull.getReplacedMessage("選択肢"));
     }
 
     @Override

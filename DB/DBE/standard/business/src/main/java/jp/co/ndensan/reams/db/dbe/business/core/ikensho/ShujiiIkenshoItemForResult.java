@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujii
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.IAnswerResultItem;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoItemNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 
@@ -31,8 +31,8 @@ public class ShujiiIkenshoItemForResult implements IShujiiIkenshoItem {
      * @param 意見書結果 意見書結果
      */
     public ShujiiIkenshoItemForResult(ShujiiIkenshoItem 意見書項目, RString 意見書結果) {
-        this.意見書項目 = requireNonNull(意見書項目, Messages.E00001.replace("意見書項目").getMessage());
-        this.意見書結果 = requireNonNull(意見書結果, Messages.E00001.replace("意見書結果").getMessage());
+        this.意見書項目 = requireNonNull(意見書項目, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書項目"));
+        this.意見書結果 = requireNonNull(意見書結果, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書結果"));
     }
 
     @Override

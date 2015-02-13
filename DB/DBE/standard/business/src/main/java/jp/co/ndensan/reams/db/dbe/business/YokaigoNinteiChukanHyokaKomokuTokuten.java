@@ -8,7 +8,8 @@ import java.util.EnumMap;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChukanHyokaKomoku;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 
 /**
  * 一次判定における、要介護認定中間評価項目得点群の情報を持つクラスです。
@@ -28,10 +29,10 @@ public class YokaigoNinteiChukanHyokaKomokuTokuten {
      */
     public YokaigoNinteiChukanHyokaKomokuTokuten(Map<ChukanHyokaKomoku, Integer> 中間評価項目得点群)
             throws NullPointerException, IllegalArgumentException {
-        requireNonNull(中間評価項目得点群, Messages.E00003.replace("中間評価項目得点群", getClass().getName()).getMessage());
+        requireNonNull(中間評価項目得点群, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("中間評価項目得点群", getClass().getName()));
 
         for (int 得点 : 中間評価項目得点群.values()) {
-            check0未満(得点, Messages.E00013.replace("中間評価項目得点群", "全て0以上").getMessage());
+            check0未満(得点, UrErrorMessages.項目に対する制約.getMessage().replace("中間評価項目得点群", "全て0以上").evaluate());
         }
 
         this.中間評価項目得点群 = new EnumMap<>(中間評価項目得点群);

@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -57,7 +57,8 @@ public class NinteichosaIrai {
      * @param 認定調査督促方法 認定調査督促方法
      * @param 認定調査督促回数 認定調査督促回数
      * @param 認定調査督促メモ 認定調査督促メモ
-     * @throws NullPointerException 申請書管理番号、認定調査委依頼履歴番号、認定調査委託先コード、調査員番号コード、認定調査委依頼区分コードにnullが渡されたとき
+     * @throws NullPointerException
+     * 申請書管理番号、認定調査委依頼履歴番号、認定調査委託先コード、調査員番号コード、認定調査委依頼区分コードにnullが渡されたとき
      */
     public NinteichosaIrai(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
             KaigoJigyoshaNo 認定調査委託先コード, NinteichosainBangoCode 調査員番号コード,
@@ -65,11 +66,11 @@ public class NinteichosaIrai {
             RDate 認定調査期限年月日, RDate 認定調査出力年月日, RDate 調査票等出力年月日,
             MobileDataShutsuryoku モバイルデータ出力, RDate 認定調査督促年月日,
             NinteichosaTokusokuHoho 認定調査督促方法, int 認定調査督促回数, RString 認定調査督促メモ) throws NullPointerException {
-        requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
-        requireNonNull(認定調査依頼履歴番号, Messages.E00003.replace("認定調査依頼履歴番号", getClass().getName()).getMessage());
-        requireNonNull(認定調査委託先コード, Messages.E00003.replace("認定調査委託先コード", getClass().getName()).getMessage());
-        requireNonNull(調査員番号コード, Messages.E00003.replace("調査員番号コード", getClass().getName()).getMessage());
-        requireNonNull(認定調査依頼区分, Messages.E00003.replace("認定調査依頼区分", getClass().getName()).getMessage());
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("申請書管理番号", getClass().getName()));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定調査依頼履歴番号", getClass().getName()));
+        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定調査委託先コード", getClass().getName()));
+        requireNonNull(調査員番号コード, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("調査員番号コード", getClass().getName()));
+        requireNonNull(認定調査依頼区分, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定調査依頼区分", getClass().getName()));
 
         this.申請書管理番号 = 申請書管理番号;
         this.認定調査依頼履歴番号 = 認定調査依頼履歴番号;

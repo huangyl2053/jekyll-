@@ -4,7 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
@@ -34,9 +35,9 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
     public TimeString(RString timeStr) throws NullPointerException, IllegalArgumentException {
         RString エラー出力 = new RString("時間を表す文字列");
 
-        requireNonNull(timeStr, Messages.E00003.replace(エラー出力.toString(), getClass().getName()).getMessage());
+        requireNonNull(timeStr, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage(エラー出力.toString(), getClass().getName()));
         if (!checkLength(timeStr)) {
-            throw new IllegalArgumentException(Messages.E00013.replace(エラー出力.toString(), "4桁").getMessage());
+            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace(エラー出力.toString(), "4桁").evaluate());
         }
 
         int hour, minute;
@@ -45,13 +46,13 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
             hour = Integer.parseInt(timeStr.substring(0, halfLenght).toString());
             minute = Integer.parseInt(timeStr.substring(halfLenght, TIME_STRING_LENGTH).toString());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(Messages.E00013.replace(エラー出力.toString(), "数字").getMessage());
+            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace(エラー出力.toString(), "数字").evaluate());
         }
 
         try {
             time = RTime.of(hour, minute);
         } catch (RuntimeException e) {
-            throw new IllegalArgumentException(Messages.E00013.replace(エラー出力.toString(), "0000～2359の間").getMessage());
+            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace(エラー出力.toString(), "0000～2359の間").evaluate());
         }
 
         RString hourString = padToZero(Integer.toString(time.getHour()));
