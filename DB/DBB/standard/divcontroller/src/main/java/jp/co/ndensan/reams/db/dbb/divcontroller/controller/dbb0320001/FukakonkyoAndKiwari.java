@@ -191,7 +191,7 @@ public class FukakonkyoAndKiwari {
         div.getLblKikan1().setText(toRange(model.get月割開始年月1(), model.get月割終了年月1()));
         div.getLblTsukiSu1().setText(月数1);
         div.getLblHokenryoDankai1().setText(保険料段階1.edit表示用保険料段階());
-        div.getLblHokenryoritsu1().setText(FukaMapper.toRString(保険料段階1.get保険料率()));
+        div.getLblHokenryoritsu1().setText(FukaMapper.addComma(保険料段階1.get保険料率()));
         div.getLblHokenryoSansyutsu1().setText(calc保険料算出額(保険料段階1.get保険料率(), 月数1));
         div.getLblHokenryo1().setText(FukaMapper.addComma(model.get算定年額保険料1()));
 
@@ -202,7 +202,7 @@ public class FukakonkyoAndKiwari {
             div.getLblKikan2().setText(toRange(model.get月割開始年月2(), model.get月割終了年月2()));
             div.getLblTsukiSu2().setText(月数2);
             div.getLblHokenryoDankai2().setText(保険料段階2.edit表示用保険料段階());
-            div.getLblHokenryoritsu2().setText(FukaMapper.toRString(保険料段階2.get保険料率()));
+            div.getLblHokenryoritsu2().setText(FukaMapper.addComma(保険料段階2.get保険料率()));
             div.getLblHokenryoSansyutsu2().setText(calc保険料算出額(保険料段階2.get保険料率(), 月数2));
             div.getLblHokenryo1().setText(FukaMapper.addComma(model.get算定年額保険料1()));
         } else {
@@ -219,7 +219,7 @@ public class FukakonkyoAndKiwari {
         }
         Decimal result = 保険料率.multiply(Integer.parseInt(月数.toString())).divide(NUMBER_OF_MONTHS_OF_A_YEAR);
 
-        return FukaMapper.toRString(result.roundDownTo(POINT_OF_ROUND_DOWN));
+        return FukaMapper.addComma(result.roundDownTo(POINT_OF_ROUND_DOWN));
     }
 
     private void set年額Of仮算定(FukakonkyoAndKiwariDiv div, FukaModel model) {

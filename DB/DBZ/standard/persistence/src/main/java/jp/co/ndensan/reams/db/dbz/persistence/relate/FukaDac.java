@@ -161,6 +161,7 @@ public class FukaDac implements IModifiable<FukaModel> {
                 where(and(eq(DbT2002Fuka.choteiNendo, 調定年度.value()),
                                 eq(DbT2002Fuka.fukaNendo, 賦課年度.value()),
                                 eq(DbT2002Fuka.tsuchishoNo, 通知書番号))).
+                order(by(shoriTimestamp, Order.DESC)).
                 toList(DbT2002FukaEntity.class);
 
         List<FukaModel> list = new ArrayList<>();

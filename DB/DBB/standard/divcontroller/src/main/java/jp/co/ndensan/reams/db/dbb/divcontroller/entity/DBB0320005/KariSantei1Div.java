@@ -31,9 +31,9 @@ public class KariSantei1Div extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtChoteiNendoKari1")
-    private TextBoxYear txtChoteiNendoKari1;
+    private TextBoxFlexibleDate txtChoteiNendoKari1;
     @JsonProperty("txtFukaNendoKari1")
-    private TextBoxYear txtFukaNendoKari1;
+    private TextBoxFlexibleDate txtFukaNendoKari1;
     @JsonProperty("txtTsuchiNoKari1")
     private TextBox txtTsuchiNoKari1;
     @JsonProperty("txtKoseiYMDKari1")
@@ -62,22 +62,22 @@ public class KariSantei1Div extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("txtChoteiNendoKari1")
-    public TextBoxYear getTxtChoteiNendoKari1() {
+    public TextBoxFlexibleDate getTxtChoteiNendoKari1() {
         return txtChoteiNendoKari1;
     }
 
     @JsonProperty("txtChoteiNendoKari1")
-    public void setTxtChoteiNendoKari1(TextBoxYear txtChoteiNendoKari1) {
+    public void setTxtChoteiNendoKari1(TextBoxFlexibleDate txtChoteiNendoKari1) {
         this.txtChoteiNendoKari1=txtChoteiNendoKari1;
     }
 
     @JsonProperty("txtFukaNendoKari1")
-    public TextBoxYear getTxtFukaNendoKari1() {
+    public TextBoxFlexibleDate getTxtFukaNendoKari1() {
         return txtFukaNendoKari1;
     }
 
     @JsonProperty("txtFukaNendoKari1")
-    public void setTxtFukaNendoKari1(TextBoxYear txtFukaNendoKari1) {
+    public void setTxtFukaNendoKari1(TextBoxFlexibleDate txtFukaNendoKari1) {
         this.txtFukaNendoKari1=txtFukaNendoKari1;
     }
 

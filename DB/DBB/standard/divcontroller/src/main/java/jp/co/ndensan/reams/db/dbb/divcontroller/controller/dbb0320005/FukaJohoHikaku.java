@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
 import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ControlEventType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.DivcontrollerMethod;
@@ -184,7 +185,7 @@ public class FukaJohoHikaku {
     private void clearKariSantei1(final KariSantei1Div div) {
         div.getTxtChoteiJiyuKari11().clearValue();
         div.getTxtChoteiJiyuKari14().clearValue();
-        div.getTxtFukaNendoKari1().clearDomain();
+        div.getTxtFukaNendoKari1().clearValue();
         div.getTxtGemmenGakuKari1().clearValue();
         div.getTxtHokenryoRitsuKari1().clearValue();
         div.getTxtChoteiJiyuKari13().clearValue();
@@ -197,7 +198,7 @@ public class FukaJohoHikaku {
         div.getTxtShikakuSoshitsuYMDKari1().clearValue();
         div.getTxtChoteiJiyuKari12().clearValue();
         div.getTxtZanteiKeisanjoHokenryoKari1().clearValue();
-        div.getTxtChoteiNendoKari1().clearDomain();
+        div.getTxtChoteiNendoKari1().clearValue();
         div.getTxtNengakuHokenryoKari1().clearValue();
         div.getTxtShikakuShutokuYMDKari1().clearValue();
     }
@@ -206,7 +207,7 @@ public class FukaJohoHikaku {
         div.getTxtChoteiJiyuKari23().clearValue();
         div.getTxtShikakuSoshitsuYMDKari2().clearValue();
         div.getTxtGemmenGakuKari2().clearValue();
-        div.getTxtFukaNendoKari2().clearDomain();
+        div.getTxtFukaNendoKari2().clearValue();
         div.getTxtKoseiYMDKari2().clearValue();
         div.getTxtZanteiKeisanjoHokenryoKari2().clearValue();
         div.getTxtTsuchiNoKari2().clearValue();
@@ -214,7 +215,7 @@ public class FukaJohoHikaku {
         div.getTxtChoteiJiyuKari22().clearValue();
         div.getTxtShimeiKari2().clearValue();
         div.getTxtNengakuHokenryoKari2().clearValue();
-        div.getTxtChoteiNendoKari2().clearDomain();
+        div.getTxtChoteiNendoKari2().clearValue();
         div.getTxtChoteiJiyuKari21().clearValue();
         div.getTxtZanteiGoukeiGakuKari2().clearValue();
         div.getTxtShikakuShutokuYMDKari2().clearValue();
@@ -226,14 +227,14 @@ public class FukaJohoHikaku {
     private void clearHonSantei1(final HonSantei1Div div) {
         div.getTxtKyokaisoHon1().clearValue();
         div.getTxtHokenryoDankaiHon1().clearValue();
-        div.getTxtChoteiNendoHon1().clearDomain();
+        div.getTxtChoteiNendoHon1().clearValue();
         div.getTxtKakuteiHokenryoHon1().clearValue();
         div.getTxtChoteiJiyuHon13().clearValue();
         div.getTxtShimeiHon1().clearValue();
         div.getTxtNenkinShunyuHon1().clearValue();
         div.getTxtGemmenGakuHon1().clearValue();
         div.getTxtShikakusoshitsuYMDHon1().clearValue();
-        div.getTxtFukaNendoHon1().clearDomain();
+        div.getTxtFukaNendoHon1().clearValue();
         div.getTxtShikakuShutokuYMDHon1().clearValue();
         div.getTxtSetaiinSuHon1().clearValue();
         div.getTxtChoteiJiyuHon14().clearValue();
@@ -269,8 +270,8 @@ public class FukaJohoHikaku {
         div.getTxtHokenryoDankaiHon2().clearValue();
         div.getTxtGemmenGakuHon2().clearValue();
         div.getTxtChoteiJiyuHon21().clearValue();
-        div.getTxtFukaNendoHon2().clearDomain();
-        div.getTxtChoteiNendoHon2().clearDomain();
+        div.getTxtFukaNendoHon2().clearValue();
+        div.getTxtChoteiNendoHon2().clearValue();
     }
 
     private void setKariSantei1(final KariSantei1Div div, FukaModel model, AtenaMeisho name) {
@@ -278,7 +279,7 @@ public class FukaJohoHikaku {
 
         div.getTxtChoteiJiyuKari11().setValue(model.get調定事由1().getRyakusho());
         div.getTxtChoteiJiyuKari14().setValue(getRyakusho(model.get調定事由4()));
-        div.getTxtFukaNendoKari1().setDomain(FukaMapper.toRYear(model.get賦課年度().value()));
+        div.getTxtFukaNendoKari1().setValue(new FlexibleDate(model.get賦課年度().value().getYearValue(), 12, 31));
         div.getTxtGemmenGakuKari1().setValue(model.get減免額());
 
         Optional<HokenryoDankai> 前年度保険料段階 = FukaShokaiController.findZennendoHokenryoDankai(model);
@@ -300,7 +301,7 @@ public class FukaJohoHikaku {
         div.getTxtShikakuSoshitsuYMDKari1().setValue(FukaMapper.toRDate(model.get資格喪失日()));
         div.getTxtChoteiJiyuKari12().setValue(getRyakusho(model.get調定事由2()));
         div.getTxtZanteiKeisanjoHokenryoKari1().setValue(model.get減免前介護保険料_年額());
-        div.getTxtChoteiNendoKari1().setDomain(FukaMapper.toRYear(model.get調定年度().value()));
+        div.getTxtChoteiNendoKari1().setValue(new FlexibleDate(model.get調定年度().value().getYearValue(), 12, 31));
         div.getTxtNengakuHokenryoKari1().setValue(model.get確定介護保険料_年額());
         div.getTxtShikakuShutokuYMDKari1().setValue(FukaMapper.toRDate(model.get資格取得日()));
     }
@@ -311,7 +312,7 @@ public class FukaJohoHikaku {
         div.getTxtChoteiJiyuKari23().setValue(getRyakusho(model.get調定事由3()));
         div.getTxtShikakuSoshitsuYMDKari2().setValue(FukaMapper.toRDate(model.get資格喪失日()));
         div.getTxtGemmenGakuKari2().setValue(model.get減免額());
-        div.getTxtFukaNendoKari2().setDomain(FukaMapper.toRYear(model.get賦課年度().value()));
+        div.getTxtFukaNendoKari2().setValue(new FlexibleDate(model.get賦課年度().value().getYearValue(), 12, 31));
         div.getTxtKoseiYMDKari2().setValue(model.get調定日時().getDate().wareki().toDateString());
         div.getTxtKoseiTimeKari2().setValue(model.get調定日時().getTime());
         div.getTxtZanteiKeisanjoHokenryoKari2().setValue(model.get減免前介護保険料_年額());
@@ -319,7 +320,7 @@ public class FukaJohoHikaku {
         div.getTxtChoteiJiyuKari22().setValue(getRyakusho(model.get調定事由2()));
         div.getTxtShimeiKari2().setValue(name.value());
         div.getTxtNengakuHokenryoKari2().setValue(model.get確定介護保険料_年額());
-        div.getTxtChoteiNendoKari2().setDomain(FukaMapper.toRYear(model.get調定年度().value()));
+        div.getTxtChoteiNendoKari2().setValue(new FlexibleDate(model.get調定年度().value().getYearValue(), 12, 31));
         div.getTxtChoteiJiyuKari21().setValue(model.get調定事由1().getRyakusho());
         div.getTxtZanteiGoukeiGakuKari2().setValue(model.get確定介護保険料_年額());
         div.getTxtShikakuShutokuYMDKari2().setValue(FukaMapper.toRDate(model.get資格取得日()));
@@ -342,14 +343,14 @@ public class FukaJohoHikaku {
         div.getTxtHokenryoDankaiHon1().setValue(
                 FukaShokaiController.findHokenryoDankai(model.get賦課年度(), model.get賦課市町村コード(), model.get保険料段階())
                 .edit表示用保険料段階());
-        div.getTxtChoteiNendoHon1().setDomain(FukaMapper.toRYear(model.get調定年度().value()));
+        div.getTxtChoteiNendoHon1().setValue(new FlexibleDate(model.get調定年度().value().getYearValue(), 12, 31));
         div.getTxtKakuteiHokenryoHon1().setValue(model.get確定介護保険料_年額());
         div.getTxtChoteiJiyuHon13().setValue(getRyakusho(model.get調定事由3()));
         div.getTxtShimeiHon1().setValue(name.value());
         div.getTxtNenkinShunyuHon1().setValue(model.get公的年金収入額());
         div.getTxtGemmenGakuHon1().setValue(model.get減免額());
         div.getTxtShikakusoshitsuYMDHon1().setValue(FukaMapper.toRDate(model.get資格喪失日()));
-        div.getTxtFukaNendoHon1().setDomain(FukaMapper.toRYear(model.get賦課年度().value()));
+        div.getTxtFukaNendoHon1().setValue(new FlexibleDate(model.get賦課年度().value().getYearValue(), 12, 31));
         div.getKibetsugakuHon1().getCcdKiwarigakuHon1().
                 load(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get処理日時());
         div.getTxtShikakuShutokuYMDHon1().setValue(FukaMapper.toRDate(model.get資格取得日()));
@@ -395,8 +396,8 @@ public class FukaJohoHikaku {
                 .edit表示用保険料段階());
         div.getTxtGemmenGakuHon2().setValue(model.get減免額());
         div.getTxtChoteiJiyuHon21().setValue(model.get調定事由1().getRyakusho());
-        div.getTxtFukaNendoHon2().setDomain(FukaMapper.toRYear(model.get賦課年度().value()));
-        div.getTxtChoteiNendoHon2().setDomain(FukaMapper.toRYear(model.get調定年度().value()));
+        div.getTxtFukaNendoHon2().setValue(new FlexibleDate(model.get賦課年度().value().getYearValue(), 12, 31));
+        div.getTxtChoteiNendoHon2().setValue(new FlexibleDate(model.get調定年度().value().getYearValue(), 12, 31));
     }
 
     private ResponseData<FukaJohoHikakuDiv> createResponseData(FukaJohoHikakuDiv div) {
