@@ -7,7 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business;
 import java.util.Iterator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
@@ -28,7 +29,7 @@ public class GogitaiWariateIinList implements Iterable<GogitaiWariateIin> {
      */
     public GogitaiWariateIinList(List<GogitaiWariateIin> 合議体割当委員List) {
         this.合議体割当委員List = requireNonNull(合議体割当委員List,
-                Messages.E00003.replace("合議体割当委員List", getClass().getName()).getMessage());
+                UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("合議体割当委員List", getClass().getName()));
     }
 
     /**
@@ -46,7 +47,7 @@ public class GogitaiWariateIinList implements Iterable<GogitaiWariateIin> {
                 return 合議体割当委員;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("対応する合議体割当委員").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("対応する合議体割当委員").evaluate());
     }
 
     private boolean isキー項目が一致(GogitaiWariateIin 割当委員, GogitaiNo 合議体番号,

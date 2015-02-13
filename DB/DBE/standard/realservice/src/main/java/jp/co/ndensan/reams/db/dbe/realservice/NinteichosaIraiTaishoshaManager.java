@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.ur.urf.realservice.INinteiChosainFinder;
 import jp.co.ndensan.reams.ur.urf.realservice.KaigoJigyoshaFinderFactory;
 import jp.co.ndensan.reams.ur.urf.realservice.NinteiChosainFinderFactory;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -108,7 +108,7 @@ public class NinteichosaIraiTaishoshaManager {
      * @throws NullPointerException 引数がnullの場合
      */
     public List<NinteichosaIraiTaishosha> get認定調査依頼対象者(LasdecCode 市町村コード) throws NullPointerException {
-        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
         List<KaigoNinteiShoriTaishoshaEntity> iraiTaishoshaEntityList = iraiTaishoshaDac.selectAll();
         return create認定調査依頼対象者List(市町村コード, iraiTaishoshaEntityList);
     }
@@ -122,8 +122,8 @@ public class NinteichosaIraiTaishoshaManager {
      * @throws NullPointerException 引数がnullの場合
      */
     public List<NinteichosaIraiTaishosha> get認定調査依頼対象者(LasdecCode 市町村コード, ShoKisaiHokenshaNo 証記載保険者番号) throws NullPointerException {
-        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
-        requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         List<KaigoNinteiShoriTaishoshaEntity> iraiTaishoshaEntityList = iraiTaishoshaDac.select証記載保険者番号(証記載保険者番号);
         return create認定調査依頼対象者List(市町村コード, iraiTaishoshaEntityList);
     }
@@ -138,9 +138,9 @@ public class NinteichosaIraiTaishoshaManager {
      * @throws NullPointerException 引数がnullの場合
      */
     public List<NinteichosaIraiTaishosha> get認定調査依頼対象者(LasdecCode 市町村コード, ShoKisaiHokenshaNo 証記載保険者番号, RString 支所コード) throws NullPointerException {
-        requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
-        requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
-        requireNonNull(支所コード, Messages.E00001.replace("支所コード").getMessage());
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+        requireNonNull(支所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("支所コード"));
         List<KaigoNinteiShoriTaishoshaEntity> iraiTaishoshaEntityList = iraiTaishoshaDac.select証記載保険者番号及び支所コード(証記載保険者番号, 支所コード);
         return create認定調査依頼対象者List(市町村コード, iraiTaishoshaEntityList);
     }

@@ -9,7 +9,8 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 
 /**
  * 合議体のリストを扱うクラスです。
@@ -27,7 +28,7 @@ public class GogitaiList implements Iterable<Gogitai> {
      * @throws NullPointerException 引数にNullが渡されたとき
      */
     public GogitaiList(List<Gogitai> 合議体List) throws NullPointerException {
-        this.合議体List = requireNonNull(合議体List, Messages.E00003.replace("合議体List", getClass().getName()).getMessage());
+        this.合議体List = requireNonNull(合議体List, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("合議体List", getClass().getName()));
     }
 
     /**
@@ -45,7 +46,7 @@ public class GogitaiList implements Iterable<Gogitai> {
                 return 合議体;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("合致する合議体").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("合致する合議体").evaluate());
     }
 
     private boolean isキー項目が一致(Gogitai 合議体, GogitaiNo 合議体番号, GogitaiYukoKikanKaishiDate 合議体有効期間開始年月日) {

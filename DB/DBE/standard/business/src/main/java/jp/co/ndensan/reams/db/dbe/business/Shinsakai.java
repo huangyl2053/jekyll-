@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import static java.util.Objects.requireNonNull;
 
 /*
@@ -28,12 +29,12 @@ public class Shinsakai {
      */
     public Shinsakai(ShinsakaiDetail 審査会情報, ShinsakaiWariateIinList 審査会割当委員List)
             throws NullPointerException, IllegalArgumentException {
-        requireNonNull(審査会情報, Messages.E00003.replace("審査会情報", getClass().getName()).getMessage());
-        requireNonNull(審査会割当委員List, Messages.E00003.replace("審査会割当委員List", getClass().getName()).getMessage());
+        requireNonNull(審査会情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("審査会情報", getClass().getName()));
+        requireNonNull(審査会割当委員List, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("審査会割当委員List", getClass().getName()));
 
         for (ShinsakaiWariateIin 割当委員 : 審査会割当委員List) {
             if (!割当委員.get審査会情報().equals(審査会情報)) {
-                throw new IllegalArgumentException(Messages.E00013.replace("割当委員が持つ審査会の情報", "すべて一致").getMessage());
+                throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("割当委員が持つ審査会の情報", "すべて一致").evaluate());
             }
         }
 

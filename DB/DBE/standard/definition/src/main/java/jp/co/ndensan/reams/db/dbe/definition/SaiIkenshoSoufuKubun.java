@@ -5,7 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.definition;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.lib.util.IRStringConvertable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -48,14 +49,14 @@ public enum SaiIkenshoSoufuKubun implements IRStringConvertable {
      * @throws IllegalArgumentException {@code code}が実在しない再意見書送付区分の場合
      */
     public static SaiIkenshoSoufuKubun toValue(RString code) throws NullPointerException, IllegalArgumentException {
-        Objects.requireNonNull(code, Messages.E00001.replace("再意見書送付区分").getMessage());
+        Objects.requireNonNull(code, UrSystemErrorMessages.値がnull.getReplacedMessage("再意見書送付区分"));
 
         for (SaiIkenshoSoufuKubun item : SaiIkenshoSoufuKubun.values()) {
             if (item.コード.equals(code)) {
                 return item;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("該当する再意見書送付区分").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する再意見書送付区分").evaluate());
     }
 
     /**

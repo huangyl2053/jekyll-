@@ -12,7 +12,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.GogitaiYukoKikanKaishiDate;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -59,16 +60,16 @@ public class GogitaiDetail {
             int 審査会予定定員, int 審査会自動割当定員, int 審査会委員定員,
             GogitaiSeishinkaIshiSonzaiKubun 精神科医師存在区分, GogitaiDummyKubun ダミー区分)
             throws NullPointerException, IllegalArgumentException {
-        requireNonNull(合議体番号, Messages.E00003.replace("合議体番号", getClass().getName()).getMessage());
-        requireNonNull(合議体名称, Messages.E00003.replace("合議体名称", getClass().getName()).getMessage());
-        requireNonNull(有効期間開始年月日, Messages.E00003.replace("有効期間開始年月日", getClass().getName()).getMessage());
-        requireNonNull(有効期間終了年月日, Messages.E00003.replace("有効期間終了年月日", getClass().getName()).getMessage());
-        requireNonNull(予定開催時間, Messages.E00003.replace("予定開催時間", getClass().getName()).getMessage());
-        requireNonNull(審査会開催場所, Messages.E00003.replace("審査会開催場所", getClass().getName()).getMessage());
+        requireNonNull(合議体番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("合議体番号", getClass().getName()));
+        requireNonNull(合議体名称, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("合議体名称", getClass().getName()));
+        requireNonNull(有効期間開始年月日, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("有効期間開始年月日", getClass().getName()));
+        requireNonNull(有効期間終了年月日, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("有効期間終了年月日", getClass().getName()));
+        requireNonNull(予定開催時間, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("予定開催時間", getClass().getName()));
+        requireNonNull(審査会開催場所, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("審査会開催場所", getClass().getName()));
 
-        checkゼロ以下(審査会予定定員, Messages.E00013.replace("審査会予定定員", "0以上").getMessage());
-        checkゼロ以下(審査会自動割当定員, Messages.E00013.replace("審査会自動割当定員", "0以上").getMessage());
-        checkゼロ以下(審査会委員定員, Messages.E00013.replace("審査会委員定員", "0以上").getMessage());
+        checkゼロ以下(審査会予定定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会予定定員", "0以上").evaluate());
+        checkゼロ以下(審査会自動割当定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会自動割当定員", "0以上").evaluate());
+        checkゼロ以下(審査会委員定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会委員定員", "0以上").evaluate());
 
         this.合議体番号 = 合議体番号;
         this.合議体名称 = 合議体名称;

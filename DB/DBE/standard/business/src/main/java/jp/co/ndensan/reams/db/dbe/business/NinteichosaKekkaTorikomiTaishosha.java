@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
  * 認定調査結果取込対象者を扱うクラスです。
@@ -36,11 +36,11 @@ public class NinteichosaKekkaTorikomiTaishosha {
             NinteichosaIrai 認定調査依頼情報,
             KaigoNinteichosain 介護認定調査員,
             IKojin 個人) {
-        this.認定進捗情報 = requireNonNull(認定進捗情報, Messages.E00003.replace("認定進捗情報", getClass().getName()).getMessage());
-        this.認定申請情報 = requireNonNull(認定申請情報, Messages.E00003.replace("認定申請情報", getClass().getName()).getMessage());
-        this.認定調査依頼情報 = requireNonNull(認定調査依頼情報, Messages.E00003.replace("認定調査依頼情報", getClass().getName()).getMessage());
-        this.介護認定調査員 = requireNonNull(介護認定調査員, Messages.E00003.replace("介護認定調査員", getClass().getName()).getMessage());
-        this.個人 = requireNonNull(個人, Messages.E00003.replace("個人", getClass().getName()).getMessage());
+        this.認定進捗情報 = requireNonNull(認定進捗情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定進捗情報", getClass().getName()));
+        this.認定申請情報 = requireNonNull(認定申請情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定申請情報", getClass().getName()));
+        this.認定調査依頼情報 = requireNonNull(認定調査依頼情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定調査依頼情報", getClass().getName()));
+        this.介護認定調査員 = requireNonNull(介護認定調査員, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("介護認定調査員", getClass().getName()));
+        this.個人 = requireNonNull(個人, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("個人", getClass().getName()));
     }
 
     /**

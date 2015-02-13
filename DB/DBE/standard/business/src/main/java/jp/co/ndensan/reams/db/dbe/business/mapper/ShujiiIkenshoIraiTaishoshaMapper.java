@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIkenshoIraiTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -52,8 +52,8 @@ public final class ShujiiIkenshoIraiTaishoshaMapper {
             KaigoIryoKikan 主治医医療機関,
             KaigoDoctor 主治医) throws NullPointerException {
 
-        requireNonNull(認定進捗情報, Messages.E00003.replace("認定進捗情報", " 主治医意見書作成依頼対象者").getMessage());
-        requireNonNull(認定申請情報, Messages.E00003.replace("認定申請情報", "主治医意見書作成依頼対象者").getMessage());
+        requireNonNull(認定進捗情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定進捗情報", " 主治医意見書作成依頼対象者"));
+        requireNonNull(認定申請情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定申請情報", "主治医意見書作成依頼対象者"));
 
         return new ShujiiIkenshoIraiTaishosha(
                 認定進捗情報,

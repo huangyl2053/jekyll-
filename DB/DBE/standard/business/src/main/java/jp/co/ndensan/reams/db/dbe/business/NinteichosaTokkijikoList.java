@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -28,7 +29,7 @@ public class NinteichosaTokkijikoList implements Iterable<NinteichosaTokkijiko> 
      * @throws NullPointerException 引数にnullが渡されたとき
      */
     public NinteichosaTokkijikoList(List<NinteichosaTokkijiko> 認定調査特記事項List) throws NullPointerException {
-        requireNonNull(認定調査特記事項List, Messages.E00003.replace("認定調査特記事項のリスト", getClass().getName()).getMessage());
+        requireNonNull(認定調査特記事項List, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定調査特記事項のリスト", getClass().getName()));
         this.認定調査特記事項List = 認定調査特記事項List;
     }
 
@@ -87,7 +88,7 @@ public class NinteichosaTokkijikoList implements Iterable<NinteichosaTokkijiko> 
                 return 認定調査特記事項;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("対応する認定調査特記事項").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定調査特記事項").evaluate());
     }
 
     private boolean is特記事項番号と依頼履歴番号が一致(NinteichosaTokkijiko 認定調査特記事項, NinteichosaIraiRirekiNo 依頼履歴番号,

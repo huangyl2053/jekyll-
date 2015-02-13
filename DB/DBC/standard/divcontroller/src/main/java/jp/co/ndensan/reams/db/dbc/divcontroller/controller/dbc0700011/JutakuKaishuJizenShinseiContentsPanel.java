@@ -176,10 +176,10 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 //        div.getTxtShinseishaNameKana().setReadOnly(true);
 //    }
     private void setHonninInfo(ShinseishaInfoDiv shinseishaDiv, AtenaShokaiSimpleDiv atenaDiv) {
-        shinseishaDiv.getTxtShinseishaNameKana().setValue(atenaDiv.getTxtAtenaKanaMeisho().getValue());
-        shinseishaDiv.getTxtShinseishaName().setValue(atenaDiv.getTxtAtenaMeisho().getValue());
-        shinseishaDiv.getTxtYubinNo().setValue(atenaDiv.getTxtYubinNo().getValue());
-        shinseishaDiv.getTxtAddress().setValue(atenaDiv.getTxtJusho().getValue());
+//        shinseishaDiv.getTxtShinseishaNameKana().setValue(atenaDiv.getTxtAtenaKanaMeisho().getValue());
+//        shinseishaDiv.getTxtShinseishaName().setValue(atenaDiv.getTxtAtenaMeisho().getValue());
+//        shinseishaDiv.getTxtYubinNo().setValue(atenaDiv.getTxtYubinNo().getValue());
+//        shinseishaDiv.getTxtAddress().setValue(atenaDiv.getTxtJusho().getValue());
         shinseishaDiv.getTxtTelNo().setValue(new RString("0123456789"));
     }
 

@@ -11,7 +11,8 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 
 /**
  * 主治医意見書作成依頼対象者のリストを扱うクラスです。
@@ -41,13 +42,13 @@ public class ShujiiIkenshoIraiTaishoshaList implements Iterable {
      */
     public ShujiiIkenshoIraiTaishosha get主治医意見書作成依頼処理対象者(ShinseishoKanriNo 申請書管理番号)
             throws IllegalArgumentException, NullPointerException {
-        requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         for (ShujiiIkenshoIraiTaishosha taishosha : taishoshaList) {
             if (taishosha.get申請書管理番号().value().equals(申請書管理番号.value())) {
                 return taishosha;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("対応する主治医意見書作成依頼処理対象者").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する主治医意見書作成依頼処理対象者").evaluate());
     }
 
     /**
@@ -60,7 +61,7 @@ public class ShujiiIkenshoIraiTaishoshaList implements Iterable {
      */
     public ShujiiIkenshoIraiTaishoshaList sub主治医意見書作成依頼処理対象者List(ShoKisaiHokenshaNo 証記載保険者番号)
             throws NullPointerException {
-        requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         List<ShujiiIkenshoIraiTaishosha> list = new ArrayList<>();
         for (ShujiiIkenshoIraiTaishosha taishosha : taishoshaList) {
             if (taishosha.get証記載保険者番号().equals(証記載保険者番号)) {

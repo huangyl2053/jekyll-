@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShokanbaraiKyufuKeiy
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.TokuteiFukushiYoguHanbaiKeiyakuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ToriatsukaiKakuyakushoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -62,13 +62,13 @@ public class JuryoininJigyosha {
             KogakuKyufuKeiyakuKubun 高額給付契約有無,
             ToriatsukaiKakuyakushoKubun 取扱確約書有無) {
 
-        this.契約番号 = requireNonNull(契約番号, Messages.E00001.replace("契約番号").getMessage());
-        this.契約期間 = requireNonNull(契約期間, Messages.E00001.replace("契約期間").getMessage());
-        this.処理日時 = requireNonNull(処理日時, Messages.E00001.replace("処理日時").getMessage());
+        this.契約番号 = requireNonNull(契約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("契約番号"));
+        this.契約期間 = requireNonNull(契約期間, UrSystemErrorMessages.値がnull.getReplacedMessage("契約期間"));
+        this.処理日時 = requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
         this.届出年月日 = 届出年月日;
         this.届出者 = 届出者;
         this.契約登録年月日 = 契約登録年月日;
-        this.契約事業者 = requireNonNull(契約事業者, Messages.E00001.replace("契約事業者").getMessage());
+        this.契約事業者 = requireNonNull(契約事業者, UrSystemErrorMessages.値がnull.getReplacedMessage("契約事業者"));
         this.住宅改修契約有無 = 住宅改修契約有無;
         this.特定福祉用具販売契約有無 = 特定福祉用具販売契約有無;
         this.償還払給付契約有無 = 償還払給付契約有無;

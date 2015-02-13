@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -51,6 +51,6 @@ public enum IchijiHanteiResultSofuKubun {
                 return 送付区分;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("対応する送付区分").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する送付区分").evaluate());
     }
 }

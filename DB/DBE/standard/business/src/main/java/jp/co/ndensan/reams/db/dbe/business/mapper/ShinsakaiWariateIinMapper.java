@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.business.ShinsakaiWariateIinList;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinShukketsuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5106ShinsakaiWariateIinJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 
 /**
@@ -108,7 +108,7 @@ public final class ShinsakaiWariateIinMapper {
                 return 委員;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("審査会割当情報に対応した委員").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("審査会割当情報に対応した委員").evaluate());
     }
 
     private static boolean is審査会委員コードが一致(DbT5106ShinsakaiWariateIinJohoEntity 審査会割当委員Entity, ShinsakaiIin 審査会委員) {

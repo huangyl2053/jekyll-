@@ -8,7 +8,8 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiKeikokuS
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiKeikokuUmu;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
@@ -32,14 +33,14 @@ public class IchijiHanteiKeikokuHairetsuCode {
      */
     public IchijiHanteiKeikokuHairetsuCode(RString 警告配列コード, FlexibleDate 判定年月日)
             throws NullPointerException {
-        requireNonNull(警告配列コード, Messages.E00003.replace("警告配列コード", getClass().getName()).getMessage());
-        requireNonNull(判定年月日, Messages.E00003.replace("警告コード種別", getClass().getName()).getMessage());
+        requireNonNull(警告配列コード, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("警告配列コード", getClass().getName()));
+        requireNonNull(判定年月日, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("警告コード種別", getClass().getName()));
 
         this.警告配列コード = 警告配列コード;
         this.警告種別 = IchijiHanteiKeikokuShubetsu.toValue(判定年月日);
 
         if (警告配列コード.length() != 警告種別.get警告数()) {
-            throw new IllegalArgumentException(Messages.E00013.replace("警告配列コード", 警告種別.get警告数() + "桁").getMessage());
+            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("警告配列コード", 警告種別.get警告数() + "桁").evaluate());
         }
     }
 
@@ -80,8 +81,8 @@ public class IchijiHanteiKeikokuHairetsuCode {
      */
     public IchijiHanteiKeikokuUmu valueAt(int index) throws IllegalArgumentException {
         if (index < 0 || this.length() - 1 < index) {
-            throw new IllegalArgumentException(Messages.E00013.replace("引数のindexは",
-                    "0より小さい値、もしくは警告配列コード長よりも大きい値").getMessage());
+            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("引数のindexは",
+                    "0より小さい値、もしくは警告配列コード長よりも大きい値").evaluate());
         }
         return IchijiHanteiKeikokuUmu.toValue(警告配列コード.stringAt(index));
     }

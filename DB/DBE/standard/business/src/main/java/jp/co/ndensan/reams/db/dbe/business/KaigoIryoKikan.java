@@ -9,8 +9,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryokikanCode;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.model.IryokikanModel;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -36,15 +36,15 @@ public class KaigoIryoKikan implements IShujiiIryoKikan {
      * @throws NullPointerException 引数にNULLが渡された場合
      */
     public KaigoIryoKikan(IryokikanModel 医療機関, IShujiiIryoKikan 主治医医療機関) throws NullPointerException {
-        requireNonNull(医療機関, Messages.E00003.replace("医療機関", getClass().getName()).getMessage());
-        requireNonNull(主治医医療機関, Messages.E00003.replace("主治医医療機関", getClass().getName()).getMessage());
+        requireNonNull(医療機関, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("医療機関", getClass().getName()));
+        requireNonNull(主治医医療機関, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("主治医医療機関", getClass().getName()));
 
         this.医療機関 = 医療機関;
         this.主治医医療機関 = 主治医医療機関;
     }
 
     @Override
-    public IryokikanCode get医療機関コード() {
+    public IryoKikanCode get医療機関コード() {
         return 医療機関.get医療機関コード();
     }
 
@@ -97,7 +97,7 @@ public class KaigoIryoKikan implements IShujiiIryoKikan {
     }
 
     public boolean is休止() {
-        return 医療機関.get休止フラグ();
+        return 医療機関.is休止フラグ();
     }
 
     public Code get異動事由() {
@@ -109,7 +109,7 @@ public class KaigoIryoKikan implements IShujiiIryoKikan {
     }
 
     public boolean is指定自立支援医療機関() {
-        return 医療機関.get指定自立支援医療機関フラグ();
+        return 医療機関.is指定自立支援医療機関フラグ();
     }
 
     @Override

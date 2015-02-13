@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import java.util.Iterator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 
 /**
  * 認定申請取下げ対象者のリストを扱うクラスです。
@@ -43,7 +43,7 @@ public class NinteiShinseiTorisageTaishoshaList implements Iterable {
                 return taishosha;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("対応する認定申請取下げ対象者").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定申請取下げ対象者").evaluate());
     }
 
     /**

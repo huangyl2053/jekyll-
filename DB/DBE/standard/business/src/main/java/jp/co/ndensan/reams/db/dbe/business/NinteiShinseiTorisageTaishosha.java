@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
@@ -41,12 +41,12 @@ public class NinteiShinseiTorisageTaishosha {
     public NinteiShinseiTorisageTaishosha(ShinseishoKanriNo 申請書管理No, ShoKisaiHokenshaNo 証記載保険者番号, HihokenshaNo 被保険者番号,
             FlexibleDate 認定申請年月日, NinteiShinseiKubunShinsei 認定申請区分コード_申請時, NinteiShinseiTorisage 認定申請取下げ) {
 
-        requireNonNull(申請書管理No, Messages.E00003.replace("申請書管理No", getClass().getName()).getMessage());
-        requireNonNull(証記載保険者番号, Messages.E00003.replace("証記載保険者番号", getClass().getName()).getMessage());
-        requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", getClass().getName()).getMessage());
-        requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", getClass().getName()).getMessage());
-        requireNonNull(認定申請区分コード_申請時, Messages.E00003.replace("認定申請区分コード(申請時)", getClass().getName()).getMessage());
-        requireNonNull(認定申請取下げ, Messages.E00003.replace("認定申請取下げ", getClass().getName()).getMessage());
+        requireNonNull(申請書管理No, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("申請書管理No", getClass().getName()));
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("証記載保険者番号", getClass().getName()));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("被保険者番号", getClass().getName()));
+        requireNonNull(認定申請年月日, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定申請年月日", getClass().getName()));
+        requireNonNull(認定申請区分コード_申請時, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定申請区分コード(申請時)", getClass().getName()));
+        requireNonNull(認定申請取下げ, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定申請取下げ", getClass().getName()));
 
         this.申請書管理No = 申請書管理No;
         this.証記載保険者番号 = 証記載保険者番号;

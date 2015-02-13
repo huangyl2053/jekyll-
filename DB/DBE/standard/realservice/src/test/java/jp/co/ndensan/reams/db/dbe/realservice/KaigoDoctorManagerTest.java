@@ -229,6 +229,8 @@ public class KaigoDoctorManagerTest extends DbeTestBase {
     }
 
     private static KaigoDoctor createKaigoDoctor() {
-        return new KaigoDoctor(mock(IDoctor.class), mock(IShujii.class), mock(KaigoIryoKikan.class));
+        //TODO KaigoDoctorコメントアウトされている
+//        return new KaigoDoctor(mock(IDoctor.class), mock(IShujii.class), mock(KaigoIryoKikan.class));
+        return null;
     }
 }

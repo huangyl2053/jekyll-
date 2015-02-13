@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.EigyoKeitai;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -44,11 +44,11 @@ public class KeiyakuJigyosha {
             EigyoKeitai 営業形態, RString 送付先部署, IKoza 口座) {
 
         this.事業者番号 = 事業者番号;
-        this.法人 = requireNonNull(法人, Messages.E00001.replace("法人").getMessage());
+        this.法人 = requireNonNull(法人, UrSystemErrorMessages.値がnull.getReplacedMessage("法人"));
         this.事業者FAX番号 = 事業者FAX番号;
         this.営業形態 = 営業形態;
         this.送付先部署 = 送付先部署;
-        this.口座 = requireNonNull(口座, Messages.E00001.replace("口座").getMessage());
+        this.口座 = requireNonNull(口座, UrSystemErrorMessages.値がnull.getReplacedMessage("口座"));
     }
 
     /**

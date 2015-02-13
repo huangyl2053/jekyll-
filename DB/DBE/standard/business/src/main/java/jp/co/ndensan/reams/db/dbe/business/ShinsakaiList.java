@@ -6,9 +6,10 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import java.util.Iterator;
 import java.util.List;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 
 /**
  * 審査会のListを表すクラスです。
@@ -26,7 +27,7 @@ public class ShinsakaiList implements Iterable<Shinsakai> {
      * @throws NullPointerException 引数にnullが渡されたとき
      */
     public ShinsakaiList(List<Shinsakai> 審査会List) throws NullPointerException {
-        this.審査会List = requireNonNull(審査会List, Messages.E00003.replace("審査会List", getClass().getName()).getMessage());
+        this.審査会List = requireNonNull(審査会List, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("審査会List", getClass().getName()));
     }
 
     /**
@@ -43,7 +44,7 @@ public class ShinsakaiList implements Iterable<Shinsakai> {
                 return 審査会;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("対応する審査会").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する審査会").evaluate());
     }
 
     private boolean isキー項目が一致(Shinsakai 審査会, ShinsakaiKaisaiNo 審査会開催番号) {

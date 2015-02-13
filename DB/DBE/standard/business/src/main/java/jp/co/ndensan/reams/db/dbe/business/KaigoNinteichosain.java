@@ -8,7 +8,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosainJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -73,19 +73,19 @@ public class KaigoNinteichosain {
             TelNo 電話番号,
             NinteichosaItakusaki 認定調査委託先) throws NullPointerException {
 
-        this.市町村コード = requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
-        this.介護事業者番号 = requireNonNull(介護事業者番号, Messages.E00001.replace("介護事業者番号").getMessage());
-        this.介護調査員番号 = requireNonNull(介護調査員番号, Messages.E00001.replace("介護調査員番号").getMessage());
+        this.市町村コード = requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        this.介護事業者番号 = requireNonNull(介護事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護事業者番号"));
+        this.介護調査員番号 = requireNonNull(介護調査員番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護調査員番号"));
         this.調査員状況 = 調査員状況;
-        this.調査員氏名 = requireNonNull(調査員氏名, Messages.E00001.replace("調査員氏名").getMessage());
-        this.調査員氏名カナ = requireNonNull(調査員氏名カナ, Messages.E00001.replace("調査員氏名カナ").getMessage());
+        this.調査員氏名 = requireNonNull(調査員氏名, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員氏名"));
+        this.調査員氏名カナ = requireNonNull(調査員氏名カナ, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員氏名カナ"));
         this.性別 = 性別;
-        this.調査員資格コード = requireNonNull(調査員資格コード, Messages.E00001.replace("調査員資格コード").getMessage());
-        this.地区コード = requireNonNull(地区コード, Messages.E00001.replace("地区コード").getMessage());
-        this.郵便番号 = requireNonNull(郵便番号, Messages.E00001.replace("郵便番号").getMessage());
-        this.住所 = requireNonNull(住所, Messages.E00001.replace("住所").getMessage());
-        this.電話番号 = requireNonNull(電話番号, Messages.E00001.replace("電話番号").getMessage());
-        this.認定調査委託先 = requireNonNull(認定調査委託先, Messages.E00001.replace("認定調査委託先").getMessage());
+        this.調査員資格コード = requireNonNull(調査員資格コード, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員資格コード"));
+        this.地区コード = requireNonNull(地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("地区コード"));
+        this.郵便番号 = requireNonNull(郵便番号, UrSystemErrorMessages.値がnull.getReplacedMessage("郵便番号"));
+        this.住所 = requireNonNull(住所, UrSystemErrorMessages.値がnull.getReplacedMessage("住所"));
+        this.電話番号 = requireNonNull(電話番号, UrSystemErrorMessages.値がnull.getReplacedMessage("電話番号"));
+        this.認定調査委託先 = requireNonNull(認定調査委託先, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先"));
     }
 
     /**

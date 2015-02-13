@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujii
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShujiiIkenshoItemNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 
@@ -46,14 +46,14 @@ public class ShujiiIkenshoItem implements IShujiiIkenshoItem {
     public ShujiiIkenshoItem(IShujiiIkenshoItemGroup 意見書項目グループ, IShujiiIkenshoItemSubGroup 意見書項目サブグループ,
             int 意見書項目グループ内番号, int 意見書項目サブグループ内番号, ShujiiIkenshoItemNo 意見書項目番号,
             IShujiiIkenshoItemKubun 意見書項目区分, RString 表示名称, IAnswerItem 回答項目, boolean 主要意見書項目) {
-        this.意見書項目グループ = requireNonNull(意見書項目グループ, Messages.E00001.replace("意見書項目グループ").getMessage());
-        this.意見書項目サブグループ = requireNonNull(意見書項目サブグループ, Messages.E00001.replace("意見書項目サブグループ").getMessage());
+        this.意見書項目グループ = requireNonNull(意見書項目グループ, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書項目グループ"));
+        this.意見書項目サブグループ = requireNonNull(意見書項目サブグループ, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書項目サブグループ"));
         this.意見書項目グループ内番号 = 意見書項目グループ内番号;
         this.意見書項目サブグループ内番号 = 意見書項目サブグループ内番号;
-        this.意見書項目番号 = requireNonNull(意見書項目番号, Messages.E00001.replace("意見書項目番号").getMessage());
-        this.意見書項目区分 = requireNonNull(意見書項目区分, Messages.E00001.replace("意見書項目区分").getMessage());
-        this.表示名称 = requireNonNull(表示名称, Messages.E00001.replace("表示名称").getMessage());
-        this.回答項目 = requireNonNull(回答項目, Messages.E00001.replace("回答項目").getMessage());
+        this.意見書項目番号 = requireNonNull(意見書項目番号, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書項目番号"));
+        this.意見書項目区分 = requireNonNull(意見書項目区分, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書項目区分"));
+        this.表示名称 = requireNonNull(表示名称, UrSystemErrorMessages.値がnull.getReplacedMessage("表示名称"));
+        this.回答項目 = requireNonNull(回答項目, UrSystemErrorMessages.値がnull.getReplacedMessage("回答項目"));
         this.主要意見書項目 = 主要意見書項目;
     }
 

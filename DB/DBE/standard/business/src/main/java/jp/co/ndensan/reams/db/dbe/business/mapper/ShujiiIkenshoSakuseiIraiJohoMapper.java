@@ -65,8 +65,9 @@ public final class ShujiiIkenshoSakuseiIraiJohoMapper {
         DbT5011ShujiiIkenshoIraiJohoEntity entity = new DbT5011ShujiiIkenshoIraiJohoEntity();
         entity.setShinseishoKanriNo(iraiJoho.get申請書管理番号());
         entity.setIkenshoIraiRirekiNo(iraiJoho.get意見書作成依頼履歴番号().value().intValue());
-        entity.setKaigoIryokikanCode(iraiJoho.get介護医師().get介護医療機関コード().getValue());
-        entity.setKaigoIshiCode(iraiJoho.get介護医師().get介護医師コード().value());
+        //TODO KaigoDoctorがコメントアウトされている
+//        entity.setKaigoIryokikanCode(iraiJoho.get介護医師().get介護医療機関コード().getValue());
+//        entity.setKaigoIshiCode(iraiJoho.get介護医師().get介護医師コード().value());
         entity.setIkenshoIraiKubun(iraiJoho.get意見書作成依頼区分().getCode());
         entity.setIkenshoIraiKaisu(iraiJoho.get意見書作成回数());
         entity.setIshiKubunCode(new Code(iraiJoho.get医師区分().getCode()));

@@ -12,7 +12,8 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
@@ -30,7 +31,7 @@ public class KaigoNinteichosainCollection implements Iterable<KaigoNinteichosain
      * @param 介護認定調査員List 介護認定調査員リスト
      */
     public KaigoNinteichosainCollection(List<KaigoNinteichosain> 介護認定調査員List) {
-        this.介護認定調査員List = requireNonNull(介護認定調査員List, Messages.E00001.replace("介護認定調査員リスト").getMessage());
+        this.介護認定調査員List = requireNonNull(介護認定調査員List, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定調査員リスト"));
     }
 
     /**
@@ -53,7 +54,7 @@ public class KaigoNinteichosainCollection implements Iterable<KaigoNinteichosain
                 return 介護認定調査員;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("介護認定調査員").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("介護認定調査員").evaluate());
     }
 
     /**

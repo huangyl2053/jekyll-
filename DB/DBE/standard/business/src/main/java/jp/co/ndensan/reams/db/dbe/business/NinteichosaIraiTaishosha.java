@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -70,15 +70,15 @@ public class NinteichosaIraiTaishosha {
             IKaigoJigyosha 事業者情報,
             INinteiChosain 認定調査員情報) throws NullPointerException {
 
-        this.認定進捗情報 = requireNonNull(認定進捗情報, Messages.E00003.replace("認定進捗情報", getClass().getName()).getMessage());
-        this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
-        this.証記載保険者番号 = requireNonNull(証記載保険者番号, Messages.E00003.replace("証記載保険者番号", getClass().getName()).getMessage());
-        this.被保険者番号 = requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", getClass().getName()).getMessage());
-        this.認定申請年月日 = requireNonNull(認定申請年月日, Messages.E00003.replace("認定申請年月日", getClass().getName()).getMessage());
-        this.認定申請区分 = requireNonNull(認定申請区分, Messages.E00003.replace("認定申請区分", getClass().getName()).getMessage());
-        this.個人情報 = requireNonNull(個人情報, Messages.E00003.replace("個人情報", getClass().getName()).getMessage());
-        this.氏名 = requireNonNull(氏名, Messages.E00003.replace("氏名", getClass().getName()).getMessage());
-        this.住所 = requireNonNull(住所, Messages.E00003.replace("住所", getClass().getName()).getMessage());
+        this.認定進捗情報 = requireNonNull(認定進捗情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定進捗情報", getClass().getName()));
+        this.申請書管理番号 = requireNonNull(申請書管理番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("申請書管理番号", getClass().getName()));
+        this.証記載保険者番号 = requireNonNull(証記載保険者番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("証記載保険者番号", getClass().getName()));
+        this.被保険者番号 = requireNonNull(被保険者番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("被保険者番号", getClass().getName()));
+        this.認定申請年月日 = requireNonNull(認定申請年月日, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定申請年月日", getClass().getName()));
+        this.認定申請区分 = requireNonNull(認定申請区分, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定申請区分", getClass().getName()));
+        this.個人情報 = requireNonNull(個人情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("個人情報", getClass().getName()));
+        this.氏名 = requireNonNull(氏名, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("氏名", getClass().getName()));
+        this.住所 = requireNonNull(住所, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("住所", getClass().getName()));
         this.認定調査委託先 = 認定調査委託先;
         this.事業者情報 = 事業者情報;
         this.認定調査員情報 = 認定調査員情報;

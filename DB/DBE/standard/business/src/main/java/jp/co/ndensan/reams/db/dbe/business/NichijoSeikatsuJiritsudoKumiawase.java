@@ -8,7 +8,8 @@ import java.util.EnumMap;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NichijoSeikatsuJiritsudoKumiawaseItem;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 
 /**
  * 一次判定における、日常生活自立度の組み合わせについての情報を持つクラスです。<br/>
@@ -42,10 +43,10 @@ public class NichijoSeikatsuJiritsudoKumiawase {
      */
     public NichijoSeikatsuJiritsudoKumiawase(Map<NichijoSeikatsuJiritsudoKumiawaseItem, Integer> 日常生活自立度組み合わせ)
             throws NullPointerException, IllegalArgumentException {
-        requireNonNull(日常生活自立度組み合わせ, Messages.E00003.replace("日常生活自立度組み合わせ", getClass().getName()).getMessage());
+        requireNonNull(日常生活自立度組み合わせ, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("日常生活自立度組み合わせ", getClass().getName()));
 
         for (int 得点 : 日常生活自立度組み合わせ.values()) {
-            check0未満(得点, Messages.E00013.replace("日常生活自立度組み合わせが持つ割合", "全て0以上").getMessage());
+            check0未満(得点, UrErrorMessages.項目に対する制約.getMessage().replace("日常生活自立度組み合わせが持つ割合", "全て0以上").evaluate());
         }
 
         this.日常生活自立度組み合わせ = new EnumMap<>(日常生活自立度組み合わせ);

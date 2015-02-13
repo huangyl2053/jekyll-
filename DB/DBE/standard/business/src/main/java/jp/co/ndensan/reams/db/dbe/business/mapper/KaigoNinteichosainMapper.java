@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 
 /**
@@ -38,8 +38,8 @@ public final class KaigoNinteichosainMapper {
     public static KaigoNinteichosain toKaigoNinteichosain(
             DbT7013ChosainJohoEntity chosainJohoEntity,
             DbT7010NinteichosaItakusakiJohoEntity itakusakiJohoEntity) throws NullPointerException {
-        requireNonNull(chosainJohoEntity, Messages.E00003.replace("認定調査員エンティティ", "介護認定調査員").getMessage());
-        requireNonNull(itakusakiJohoEntity, Messages.E00003.replace("認定調査委託先エンティティ", "介護認定調査員").getMessage());
+        requireNonNull(chosainJohoEntity, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定調査員エンティティ", "介護認定調査員"));
+        requireNonNull(itakusakiJohoEntity, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定調査委託先エンティティ", "介護認定調査員"));
 
         return new KaigoNinteichosain(
                 chosainJohoEntity.getShichosonCode(),
@@ -65,7 +65,7 @@ public final class KaigoNinteichosainMapper {
      * @throws NullPointerException 引数にNULLが渡された場合
      */
     public static DbT7013ChosainJohoEntity toKaigoNinteichosainEntity(KaigoNinteichosain 介護認定調査員) throws NullPointerException {
-        requireNonNull(介護認定調査員, Messages.E00003.replace("介護認定調査員", "介護認定調査員エンティティ").getMessage());
+        requireNonNull(介護認定調査員, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("介護認定調査員", "介護認定調査員エンティティ"));
         DbT7013ChosainJohoEntity entity = new DbT7013ChosainJohoEntity();
         entity.setShichosonCode(介護認定調査員.get市町村コード());
         entity.setKaigoJigyoshaNo(介護認定調査員.get介護事業者番号().value());

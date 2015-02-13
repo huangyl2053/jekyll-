@@ -6,7 +6,8 @@ package jp.co.ndensan.reams.db.dbe.business;
 
 import java.util.Iterator;
 import java.util.List;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiIinCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
@@ -28,7 +29,7 @@ public class ShinsakaiWariateIinList implements Iterable<ShinsakaiWariateIin> {
      */
     public ShinsakaiWariateIinList(List<ShinsakaiWariateIin> 審査会割当委員List) throws NullPointerException {
         this.審査会割当委員List = requireNonNull(審査会割当委員List,
-                Messages.E00003.replace("審査会割当委員List", getClass().getName()).getMessage());
+                UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("審査会割当委員List", getClass().getName()));
     }
 
     /**
@@ -46,7 +47,7 @@ public class ShinsakaiWariateIinList implements Iterable<ShinsakaiWariateIin> {
                 return 審査会割当委員;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("対応する審査会割当委員").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する審査会割当委員").evaluate());
     }
 
     private boolean isキー項目が一致(ShinsakaiWariateIin 審査会割当委員, ShinsakaiKaisaiNo 審査会開催番号,

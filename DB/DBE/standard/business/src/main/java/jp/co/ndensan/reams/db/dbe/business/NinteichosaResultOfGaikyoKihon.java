@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteichosaKubun;
 import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static java.util.Objects.requireNonNull;
 
@@ -45,13 +45,13 @@ public class NinteichosaResultOfGaikyoKihon {
             NinteichosaKubun 認定調査区分,
             INinteiChosain 認定調査員,
             NinteichosaJisshibashoKubun 認定調査実施場所区分) {
-        this.認定調査依頼区分 = requireNonNull(認定調査依頼区分, Messages.E00001.replace("認定調査依頼区分").getMessage());
-        this.認定調査回数 = requireNonNull(認定調査回数, Messages.E00001.replace("認定調査回数").getMessage());
-        this.認定調査実施年月日 = requireNonNull(認定調査実施年月日, Messages.E00001.replace("認定調査実施年月日").getMessage());
-        this.認定調査受領年月日 = requireNonNull(認定調査受領年月日, Messages.E00001.replace("認定調査受領年月日").getMessage());
-        this.認定調査区分 = requireNonNull(認定調査区分, Messages.E00001.replace("認定調査区分").getMessage());
-        this.認定調査員 = requireNonNull(認定調査員, Messages.E00001.replace("認定調査員").getMessage());
-        this.認定調査実施場所区分 = requireNonNull(認定調査実施場所区分, Messages.E00001.replace("認定調査実施場所区分").getMessage());
+        this.認定調査依頼区分 = requireNonNull(認定調査依頼区分, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼区分"));
+        this.認定調査回数 = requireNonNull(認定調査回数, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査回数"));
+        this.認定調査実施年月日 = requireNonNull(認定調査実施年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査実施年月日"));
+        this.認定調査受領年月日 = requireNonNull(認定調査受領年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査受領年月日"));
+        this.認定調査区分 = requireNonNull(認定調査区分, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査区分"));
+        this.認定調査員 = requireNonNull(認定調査員, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員"));
+        this.認定調査実施場所区分 = requireNonNull(認定調査実施場所区分, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査実施場所区分"));
     }
 
     /**

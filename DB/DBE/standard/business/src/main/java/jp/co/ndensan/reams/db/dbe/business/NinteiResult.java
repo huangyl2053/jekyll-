@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TsuchiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
@@ -134,12 +134,12 @@ public class NinteiResult {
             TsuchiKubun 通知区分,
             RString 認定理由,
             FlexibleDate IF送付年月日) {
-        this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
-        this.処理日時 = requireNonNull(処理日時, Messages.E00001.replace("処理日時").getMessage());
-        this.証記載保険者番号 = requireNonNull(証記載保険者番号, Messages.E00001.replace("証記載保険者番号").getMessage());
-        this.被保険者番号 = requireNonNull(被保険者番号, Messages.E00001.replace("被保険者番号").getMessage());
-        this.要介護度認定年月日 = requireNonNull(要介護度認定年月日, Messages.E00001.replace("要介護度認定年月日").getMessage());
-        this.要介護状態 = requireNonNull(要介護状態, Messages.E00001.replace("要介護状態").getMessage());
+        this.申請書管理番号 = requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        this.処理日時 = requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+        this.証記載保険者番号 = requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+        this.被保険者番号 = requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        this.要介護度認定年月日 = requireNonNull(要介護度認定年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護度認定年月日"));
+        this.要介護状態 = requireNonNull(要介護状態, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護状態"));
         this.要介護状態像例 = 要介護状態像例;
         this.介護サービス種類０１ = 介護サービス種類０１;
         this.介護サービス種類０２ = 介護サービス種類０２;

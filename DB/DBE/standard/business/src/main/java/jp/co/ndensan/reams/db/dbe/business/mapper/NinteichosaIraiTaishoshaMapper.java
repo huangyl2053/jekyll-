@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
@@ -51,9 +51,9 @@ public final class NinteichosaIraiTaishoshaMapper {
             IKaigoJigyosha 事業者情報,
             INinteiChosain 認定調査員情報) throws NullPointerException {
 
-        requireNonNull(認定進捗情報, Messages.E00003.replace("認定進捗情報", " 認定調査依頼対象者").getMessage());
-        requireNonNull(要介護認定申請情報, Messages.E00003.replace("要介護認定申請情報", " 認定調査依頼対象者").getMessage());
-        requireNonNull(個人, Messages.E00003.replace("個人", " 認定調査依頼対象者").getMessage());
+        requireNonNull(認定進捗情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定進捗情報", " 認定調査依頼対象者"));
+        requireNonNull(要介護認定申請情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("要介護認定申請情報", " 認定調査依頼対象者"));
+        requireNonNull(個人, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("個人", " 認定調査依頼対象者"));
 
         return new NinteichosaIraiTaishosha(
                 認定進捗情報,

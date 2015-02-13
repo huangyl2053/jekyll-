@@ -103,12 +103,16 @@ public class KaigoDoctorManager implements IKaigoDoctorManager {
 
     @Override
     public boolean save(KaigoDoctor 介護医師情報) {
-        return doctorManager.save(介護医師情報.get医師()) && shujiiManager.save(介護医師情報.get主治医());
+        //TODO KaigoDoctorコメントアウトされている
+//        return doctorManager.save(介護医師情報.get医師()) && shujiiManager.save(介護医師情報.get主治医());
+        return false;
     }
 
     @Override
     public boolean remove(KaigoDoctor 介護医師情報) {
-        return doctorManager.remove(介護医師情報.get医師()) && shujiiManager.remove(介護医師情報.get主治医());
+        //TODO KaigoDoctorコメントアウトされている
+//        return doctorManager.remove(介護医師情報.get医師()) && shujiiManager.remove(介護医師情報.get主治医());
+        return false;
     }
 
     private KaigoDoctorCollection get介護医師Collection(List<KaigoDoctorEntity> entityList) {
@@ -126,6 +130,8 @@ public class KaigoDoctorManager implements IKaigoDoctorManager {
         IDoctor doctor = DoctorMapper.toDoctor(entity.getDoctorEntity());
         IShujii shujii = ShujiiMapper.toShujii(entity.getDbT7012ShujiiJohoEntity());
         KaigoIryoKikan kaigoIryoKikan = kaigoIryoKikanFinder.get介護医療機関(shujii.get市町村コード(), shujii.get介護医療機関コード());
-        return new KaigoDoctor(doctor, shujii, kaigoIryoKikan);
+        //TODO KaigoDoctorコメントアウトされている
+//        return new KaigoDoctor(doctor, shujii, kaigoIryoKikan);
+        return null;
     }
 }

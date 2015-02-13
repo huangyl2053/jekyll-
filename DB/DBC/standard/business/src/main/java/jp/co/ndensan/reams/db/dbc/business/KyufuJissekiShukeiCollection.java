@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business;
 
 import java.util.Iterator;
 import java.util.List;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -25,7 +25,7 @@ public class KyufuJissekiShukeiCollection implements Iterable<KyufuJissekiShukei
      * @param list 給付実績の集計情報List
      */
     public KyufuJissekiShukeiCollection(List<KyufuJissekiShukei> list) {
-        this.list = requireNonNull(list, Messages.E00001.replace("給付実績の集計情報List").getMessage());
+        this.list = requireNonNull(list, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績の集計情報List"));
     }
 
     /**

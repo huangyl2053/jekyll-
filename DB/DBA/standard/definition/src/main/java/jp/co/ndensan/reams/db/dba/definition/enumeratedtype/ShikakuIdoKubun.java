@@ -54,6 +54,6 @@ public enum ShikakuIdoKubun {
                 return shikakuIdoKubun;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("\"" + コード + "\"に対応する資格異動区分").evalute());
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("\"" + コード + "\"に対応する資格異動区分"));
     }
 }
