@@ -134,6 +134,8 @@ public class KyufuKanrihyoInBatchRegistCsvOutputProcess extends BatchProcessBase
     @Override
     protected void afterExecute() {
         kekkaWriter.writeLine(to結果Data());
+        ichiranWriter.close();
+        kekkaWriter.close();
         ichiranSpoolManager.spool(一覧ファイルパス);
         kekkaSpoolManager.spool(結果ファイルパス);
         一覧ファイル.setValue(一覧ファイルパス);

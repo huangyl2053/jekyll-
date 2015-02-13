@@ -72,7 +72,7 @@ public class DBC120010_KyufukanrihyoInTest extends DbcTestDacBase {
         @Test
         public void Resultは_SUCCESSとなる() {
 
-            createSharedFile();
+//            createSharedFile();
             BatchFlowTestHelper testhelper = new BatchFlowTestHelper();
             result = testhelper.executeFlow(batchID, batchName, DBC120010_KyufukanrihyoIn.class, parameter);
             assertThat(result.getStatus(), is(BatchExitStatus.Status.SUCCESS));
@@ -84,14 +84,11 @@ public class DBC120010_KyufukanrihyoInTest extends DbcTestDacBase {
         }
 
         private void createSharedFile() {
-            FilesystemName fileName1 = FilesystemName.fromString("11210000");
-            FilesystemName fileName2 = FilesystemName.fromString("11220000");
+//            List<Uzt> a = SharedFile.searchSharedFile(new RString("給付管理票情報"));
+            FilesystemName fileName1 = FilesystemName.fromString("給付管理票情報");
             SharedFile.defineSharedFile(fileName1);
-            SharedFile.defineSharedFile(fileName2);
             SharedFile.deleteNewestEntry(new SharedFileDescriptor(fileName1));
-            SharedFile.deleteNewestEntry(new SharedFileDescriptor(fileName2));
             SharedFile.copyToSharedFile(FilesystemPath.fromString(System.getenv("USERPROFILE") + "/shared/" + fileName1.toString() + "/"), fileName1);
-            SharedFile.copyToSharedFile(FilesystemPath.fromString(System.getenv("USERPROFILE") + "/shared/" + fileName2.toString() + "/"), fileName2);
 
         }
 
@@ -135,15 +132,15 @@ public class DBC120010_KyufukanrihyoInTest extends DbcTestDacBase {
             filePath.append("src");
             filePath.append(File.separator).append("test");
             filePath.append(File.separator).append("resources");
-            filePath.append(File.separator).append("jp");
-            filePath.append(File.separator).append("co");
-            filePath.append(File.separator).append("ndensan");
-            filePath.append(File.separator).append("reams");
-            filePath.append(File.separator).append("db");
-            filePath.append(File.separator).append("dbc");
-            filePath.append(File.separator).append("batchservice");
-            filePath.append(File.separator).append("flow");
-            filePath.append(File.separator).append("csv");
+//            filePath.append(File.separator).append("jp");
+//            filePath.append(File.separator).append("co");
+//            filePath.append(File.separator).append("ndensan");
+//            filePath.append(File.separator).append("reams");
+//            filePath.append(File.separator).append("db");
+//            filePath.append(File.separator).append("dbc");
+//            filePath.append(File.separator).append("batchservice");
+//            filePath.append(File.separator).append("flow");
+//            filePath.append(File.separator).append("csv");
             filePath.append(File.separator).append(fileName);
             return new RString(filePath.toString());
         }

@@ -27,6 +27,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class KyufuKanrihyoInBatch {
 
+    private final RString RSTRING_ALL9_2 = new RString("99");
+    private final RString RSTRING_ALL9_10 = new RString("9999999999");
+
     public DbTKyufuInCtrlTempTableEntity CreateControlRecord(List<RString> input, RString filtpath) {
 
         DbTKyufuInCtrlTempTableEntity result = new DbTKyufuInCtrlTempTableEntity();
@@ -116,9 +119,19 @@ public class KyufuKanrihyoInBatch {
         result.setGendogakuTekiyoShuryoYM(new FlexibleYearMonth(input.getGendogakuTekiyoShuryoYMD()));
         result.setKyotakuKaigoYoboShikyuGendogaku(checkDecimal(input.getKyotakuKaigoyoboShikyugendogaku()));
         result.setKyotakuServicePlanSakuseiKubunCode(input.getKyotakuKeikakuSakuseiKubunCode());
-        result.setServiceJigyoshoNo(input.getServiceTeikyoJigyoshoNo());
+        if (input.getServiceTeikyoJigyoshoNo().isEmpty()) {
+            result.setServiceJigyoshoNo(RSTRING_ALL9_10);
+        } else {
+            result.setServiceJigyoshoNo(input.getServiceTeikyoJigyoshoNo());
+        }
+
         result.setShiteiKijungaitoChiikimitchakuServiceShikibetsuCode(input.getShiteiKijunGaitoJigyoshoKubunCode());
-        result.setServiceShuruiCode(input.getServiceShuruiCode());
+        if (input.getServiceShuruiCode().isEmpty()) {
+            result.setServiceShuruiCode(RSTRING_ALL9_2);
+        } else {
+            result.setServiceShuruiCode(input.getServiceShuruiCode());
+        }
+
         result.setKyufuKeikakuTanisuNissu(checkDecimal(input.getKyufuKeikakuTanisuNissu()));
         result.setKyufuKeikakuNissu(checkDecimal(input.getZentsukiMadeKyufuKeikakuNissu()));
         result.setShiteiServiceSubTotal(checkDecimal(input.getShiteiServiceShokei()));
@@ -154,9 +167,17 @@ public class KyufuKanrihyoInBatch {
         result.setGendogakuTekiyoShuryoYM(new FlexibleYearMonth(input.getGendogakuTekiyoShuryoYMD()));
         result.setKyotakuKaigoYoboShikyuGendogaku(checkDecimal(input.getKyotakuKaigoyoboShikyugendogaku()));
         result.setKyotakuServicePlanSakuseiKubunCode(input.getKyotakuKeikakuSakuseiKubunCode());
-        result.setServiceJigyoshoNo(input.getServiceTeikyoJigyoshoNo());
+        if (input.getServiceTeikyoJigyoshoNo().isEmpty()) {
+            result.setServiceJigyoshoNo(RSTRING_ALL9_10);
+        } else {
+            result.setServiceJigyoshoNo(input.getServiceTeikyoJigyoshoNo());
+        }
         result.setShiteiKijungaitoChiikimitchakuServiceShikibetsuCode(input.getShiteiKijunGaitoJigyoshoKubunCode());
-        result.setServiceShuruiCode(input.getServiceShuruiCode());
+        if (input.getServiceShuruiCode().isEmpty()) {
+            result.setServiceShuruiCode(RSTRING_ALL9_2);
+        } else {
+            result.setServiceShuruiCode(input.getServiceShuruiCode());
+        }
         result.setKyufuKeikakuTanisuNissu(checkInteger(input.getKyufuKeikakuTanisuNissu()));
         result.setKyufuKeikakuNissu(checkInteger(input.getZentsukiMadeKyufuKeikakuNissu()));
         result.setShiteiServiceSubTotal(checkInteger(input.getShiteiServiceShokei()));
@@ -164,7 +185,12 @@ public class KyufuKanrihyoInBatch {
         result.setKyufuKeikakuTotalTanisuNissu(checkInteger(input.getKyufuKeikakuGokeiTanisuNissu()));
 
         result.setTantoKaigoShienSemmoninNo(input.getKaigoshienSenmoninNo());
-        result.setKaigoShienJigyoshaNo(input.getItakusakiKyotakuKaigoshienJigyoshoNo());
+        if (input.getItakusakiKyotakuKaigoshienJigyoshoNo().isEmpty()) {
+            result.setKaigoShienJigyoshaNo(RSTRING_ALL9_10);
+        } else {
+            result.setKaigoShienJigyoshaNo(input.getItakusakiKyotakuKaigoshienJigyoshoNo());
+        }
+
         result.setItakusakiTantoKaigoShienSemmoninNo(input.getItakusakiKaigoshienSenmoninNo());
 
         result.setTorikomiYM(new FlexibleYearMonth(shoriNengetsu.substringReturnAsPossible(0, 6)));

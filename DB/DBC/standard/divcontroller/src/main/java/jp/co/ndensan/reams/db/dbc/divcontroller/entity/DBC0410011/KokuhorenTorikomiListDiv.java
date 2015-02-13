@@ -1,11 +1,11 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0410000;
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0410011;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0410000.dgKokuhorenTorikomiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0410011.dgKokuhorenTorikomiList_Row;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -24,14 +24,16 @@ public class KokuhorenTorikomiListDiv extends Panel {
      */
     @JsonProperty("txtShoriYM")
     private TextBoxDate txtShoriYM;
-    @JsonProperty("lblKokuhorenTorikomiList")
-    private Label lblKokuhorenTorikomiList;
     @JsonProperty("btnDisplay")
     private Button btnDisplay;
+    @JsonProperty("btnScheduleSetting")
+    private Button btnScheduleSetting;
     @JsonProperty("dgKokuhorenTorikomiList")
     private DataGrid<dgKokuhorenTorikomiList_Row> dgKokuhorenTorikomiList;
     @JsonProperty("lblUketoriTorikomi")
     private Label lblUketoriTorikomi;
+    @JsonProperty("lblKokuhorenTorikomiList")
+    private Label lblKokuhorenTorikomiList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -49,16 +51,6 @@ public class KokuhorenTorikomiListDiv extends Panel {
         this.txtShoriYM=txtShoriYM;
     }
 
-    @JsonProperty("lblKokuhorenTorikomiList")
-    public Label getLblKokuhorenTorikomiList() {
-        return lblKokuhorenTorikomiList;
-    }
-
-    @JsonProperty("lblKokuhorenTorikomiList")
-    public void setLblKokuhorenTorikomiList(Label lblKokuhorenTorikomiList) {
-        this.lblKokuhorenTorikomiList=lblKokuhorenTorikomiList;
-    }
-
     @JsonProperty("btnDisplay")
     public Button getBtnDisplay() {
         return btnDisplay;
@@ -67,6 +59,16 @@ public class KokuhorenTorikomiListDiv extends Panel {
     @JsonProperty("btnDisplay")
     public void setBtnDisplay(Button btnDisplay) {
         this.btnDisplay=btnDisplay;
+    }
+
+    @JsonProperty("btnScheduleSetting")
+    public Button getBtnScheduleSetting() {
+        return btnScheduleSetting;
+    }
+
+    @JsonProperty("btnScheduleSetting")
+    public void setBtnScheduleSetting(Button btnScheduleSetting) {
+        this.btnScheduleSetting=btnScheduleSetting;
     }
 
     @JsonProperty("dgKokuhorenTorikomiList")
@@ -87,6 +89,16 @@ public class KokuhorenTorikomiListDiv extends Panel {
     @JsonProperty("lblUketoriTorikomi")
     public void setLblUketoriTorikomi(Label lblUketoriTorikomi) {
         this.lblUketoriTorikomi=lblUketoriTorikomi;
+    }
+
+    @JsonProperty("lblKokuhorenTorikomiList")
+    public Label getLblKokuhorenTorikomiList() {
+        return lblKokuhorenTorikomiList;
+    }
+
+    @JsonProperty("lblKokuhorenTorikomiList")
+    public void setLblKokuhorenTorikomiList(Label lblKokuhorenTorikomiList) {
+        this.lblKokuhorenTorikomiList=lblKokuhorenTorikomiList;
     }
 
 }

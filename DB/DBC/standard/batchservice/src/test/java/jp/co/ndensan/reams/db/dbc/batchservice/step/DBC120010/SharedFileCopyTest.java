@@ -63,7 +63,7 @@ public class SharedFileCopyTest extends DbcTestDacBase {
         private HashMap<RString, Object> createBatchParameter() {
             HashMap<RString, Object> processParameter = new HashMap<>();
             processParameter.put(SharedFileCopy.PARAMETER_IN_FILEPATH, new RString(System.getenv("USERPROFILE").replace('\\', '/') + "/shared/test/"));
-            processParameter.put(SharedFileCopy.PARAMETER_IN_SHAREDNAME, new RString("121"));
+            processParameter.put(SharedFileCopy.PARAMETER_IN_SHAREDNAME, new RString("給付管理票情報"));
             processParameter.put(SharedFileCopy.PARAMETER_IN_ICCHIJOKEN, IcchiJoken.前方一致);
             return processParameter;
         }

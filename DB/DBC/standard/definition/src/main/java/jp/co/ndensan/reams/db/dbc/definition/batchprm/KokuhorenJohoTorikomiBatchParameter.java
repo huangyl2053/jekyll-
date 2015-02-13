@@ -44,9 +44,6 @@ public class KokuhorenJohoTorikomiBatchParameter extends BatchParameterBase {
     @BatchParameter(key = GAPPEIJOHOKBN, name = "合併情報区分")
     private RString gappeiJohoKubun;
 
-//    // 制御情報を格納するフィールド
-//    @BatchParameter(name = "処理区分")
-//    private RString shoriKubun;
     /**
      * @return the shoriYM
      */
@@ -102,20 +99,6 @@ public class KokuhorenJohoTorikomiBatchParameter extends BatchParameterBase {
     public void setKokanjohoShikibetsuNo(RString kokanjohoShikibetsuNo) {
         this.kokanjohoShikibetsuNo = kokanjohoShikibetsuNo;
     }
-
-//    /**
-//     * @return the shoriKubun
-//     */
-//    public RString getShoriKubun() {
-//        return shoriKubun;
-//    }
-//
-//    /**
-//     * @param shoriKubun the shoriKubun to set
-//     */
-//    public void setShoriKubun(RString shoriKubun) {
-//        this.shoriKubun = shoriKubun;
-//    }
 
     /**
      * @return the shoriNichiji
