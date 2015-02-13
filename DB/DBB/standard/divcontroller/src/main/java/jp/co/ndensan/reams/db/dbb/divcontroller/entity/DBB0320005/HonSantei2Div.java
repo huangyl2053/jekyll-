@@ -29,9 +29,9 @@ public class HonSantei2Div extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtChoteiNendoHon2")
-    private TextBoxYear txtChoteiNendoHon2;
+    private TextBoxFlexibleDate txtChoteiNendoHon2;
     @JsonProperty("txtFukaNendoHon2")
-    private TextBoxYear txtFukaNendoHon2;
+    private TextBoxFlexibleDate txtFukaNendoHon2;
     @JsonProperty("txtTsuchiNoHon2")
     private TextBox txtTsuchiNoHon2;
     @JsonProperty("txtKoseiYMDHon2")
@@ -58,22 +58,22 @@ public class HonSantei2Div extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("txtChoteiNendoHon2")
-    public TextBoxYear getTxtChoteiNendoHon2() {
+    public TextBoxFlexibleDate getTxtChoteiNendoHon2() {
         return txtChoteiNendoHon2;
     }
 
     @JsonProperty("txtChoteiNendoHon2")
-    public void setTxtChoteiNendoHon2(TextBoxYear txtChoteiNendoHon2) {
+    public void setTxtChoteiNendoHon2(TextBoxFlexibleDate txtChoteiNendoHon2) {
         this.txtChoteiNendoHon2=txtChoteiNendoHon2;
     }
 
     @JsonProperty("txtFukaNendoHon2")
-    public TextBoxYear getTxtFukaNendoHon2() {
+    public TextBoxFlexibleDate getTxtFukaNendoHon2() {
         return txtFukaNendoHon2;
     }
 
     @JsonProperty("txtFukaNendoHon2")
-    public void setTxtFukaNendoHon2(TextBoxYear txtFukaNendoHon2) {
+    public void setTxtFukaNendoHon2(TextBoxFlexibleDate txtFukaNendoHon2) {
         this.txtFukaNendoHon2=txtFukaNendoHon2;
     }
 
