@@ -28,14 +28,6 @@ var DBB;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
-            Controls.prototype.txtHakkoYmd = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtHakkoYmd"));
-            };
-
-            Controls.prototype.lblMsg = function () {
-                return new UZA.Label(this.convFiledName("lblMsg"));
-            };
-
             Controls.prototype.txtShutsuryokuKi = function () {
                 return new UZA.TextBox(this.convFiledName("txtShutsuryokuKi"));
             };
@@ -44,8 +36,24 @@ var DBB;
                 return new UZA.DropDownList(this.convFiledName("ddlShutsuryokuKi"));
             };
 
-            Controls.prototype.chkTaishosha = function () {
-                return new UZA.CheckBoxList(this.convFiledName("chkTaishosha"));
+            Controls.prototype.lblMsg = function () {
+                return new UZA.Label(this.convFiledName("lblMsg"));
+            };
+
+            Controls.prototype.txtHakkoYmd = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtHakkoYmd"));
+            };
+
+            Controls.prototype.radTaishoSha = function () {
+                return new UZA.RadioButton(this.convFiledName("radTaishoSha"));
+            };
+
+            Controls.prototype.txtKozaIdoOnly = function () {
+                return new UZA.TextBox(this.convFiledName("txtKozaIdoOnly"));
+            };
+
+            Controls.prototype.radKozaiFurikaeshaYosiki = function () {
+                return new UZA.RadioButton(this.convFiledName("radKozaiFurikaeshaYosiki"));
             };
 
             Controls.prototype.radSeiho = function () {

@@ -22,16 +22,20 @@ public class KaigoNonyutuchishoHakkoJokenDiv extends Panel implements IKaigoNony
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtHakkoYmd")
-    private TextBoxDate txtHakkoYmd;
-    @JsonProperty("lblMsg")
-    private Label lblMsg;
     @JsonProperty("txtShutsuryokuKi")
     private TextBox txtShutsuryokuKi;
     @JsonProperty("ddlShutsuryokuKi")
     private DropDownList ddlShutsuryokuKi;
-    @JsonProperty("chkTaishosha")
-    private CheckBoxList chkTaishosha;
+    @JsonProperty("lblMsg")
+    private Label lblMsg;
+    @JsonProperty("txtHakkoYmd")
+    private TextBoxDate txtHakkoYmd;
+    @JsonProperty("radTaishoSha")
+    private RadioButton radTaishoSha;
+    @JsonProperty("txtKozaIdoOnly")
+    private TextBox txtKozaIdoOnly;
+    @JsonProperty("radKozaiFurikaeshaYosiki")
+    private RadioButton radKozaiFurikaeshaYosiki;
     @JsonProperty("radSeiho")
     private RadioButton radSeiho;
     @JsonProperty("radYamawake")
@@ -43,26 +47,6 @@ public class KaigoNonyutuchishoHakkoJokenDiv extends Panel implements IKaigoNony
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtHakkoYmd")
-    public TextBoxDate getTxtHakkoYmd() {
-        return txtHakkoYmd;
-    }
-
-    @JsonProperty("txtHakkoYmd")
-    public void setTxtHakkoYmd(TextBoxDate txtHakkoYmd) {
-        this.txtHakkoYmd=txtHakkoYmd;
-    }
-
-    @JsonProperty("lblMsg")
-    public Label getLblMsg() {
-        return lblMsg;
-    }
-
-    @JsonProperty("lblMsg")
-    public void setLblMsg(Label lblMsg) {
-        this.lblMsg=lblMsg;
-    }
-
     @JsonProperty("txtShutsuryokuKi")
     public TextBox getTxtShutsuryokuKi() {
         return txtShutsuryokuKi;
@@ -83,14 +67,54 @@ public class KaigoNonyutuchishoHakkoJokenDiv extends Panel implements IKaigoNony
         this.ddlShutsuryokuKi=ddlShutsuryokuKi;
     }
 
-    @JsonProperty("chkTaishosha")
-    public CheckBoxList getChkTaishosha() {
-        return chkTaishosha;
+    @JsonProperty("lblMsg")
+    public Label getLblMsg() {
+        return lblMsg;
     }
 
-    @JsonProperty("chkTaishosha")
-    public void setChkTaishosha(CheckBoxList chkTaishosha) {
-        this.chkTaishosha=chkTaishosha;
+    @JsonProperty("lblMsg")
+    public void setLblMsg(Label lblMsg) {
+        this.lblMsg=lblMsg;
+    }
+
+    @JsonProperty("txtHakkoYmd")
+    public TextBoxDate getTxtHakkoYmd() {
+        return txtHakkoYmd;
+    }
+
+    @JsonProperty("txtHakkoYmd")
+    public void setTxtHakkoYmd(TextBoxDate txtHakkoYmd) {
+        this.txtHakkoYmd=txtHakkoYmd;
+    }
+
+    @JsonProperty("radTaishoSha")
+    public RadioButton getRadTaishoSha() {
+        return radTaishoSha;
+    }
+
+    @JsonProperty("radTaishoSha")
+    public void setRadTaishoSha(RadioButton radTaishoSha) {
+        this.radTaishoSha=radTaishoSha;
+    }
+
+    @JsonProperty("txtKozaIdoOnly")
+    public TextBox getTxtKozaIdoOnly() {
+        return txtKozaIdoOnly;
+    }
+
+    @JsonProperty("txtKozaIdoOnly")
+    public void setTxtKozaIdoOnly(TextBox txtKozaIdoOnly) {
+        this.txtKozaIdoOnly=txtKozaIdoOnly;
+    }
+
+    @JsonProperty("radKozaiFurikaeshaYosiki")
+    public RadioButton getRadKozaiFurikaeshaYosiki() {
+        return radKozaiFurikaeshaYosiki;
+    }
+
+    @JsonProperty("radKozaiFurikaeshaYosiki")
+    public void setRadKozaiFurikaeshaYosiki(RadioButton radKozaiFurikaeshaYosiki) {
+        this.radKozaiFurikaeshaYosiki=radKozaiFurikaeshaYosiki;
     }
 
     @JsonProperty("radSeiho")

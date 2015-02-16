@@ -33,14 +33,6 @@ module DBB {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public txtHakkoYmd(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtHakkoYmd"));
-            }
-
-            public lblMsg(): UZA.Label {
-                return new UZA.Label(this.convFiledName("lblMsg"));
-            }
-
             public txtShutsuryokuKi(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtShutsuryokuKi"));
             }
@@ -49,8 +41,24 @@ module DBB {
                 return new UZA.DropDownList(this.convFiledName("ddlShutsuryokuKi"));
             }
 
-            public chkTaishosha(): UZA.CheckBoxList {
-                return new UZA.CheckBoxList(this.convFiledName("chkTaishosha"));
+            public lblMsg(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblMsg"));
+            }
+
+            public txtHakkoYmd(): UZA.TextBoxDate {
+                return new UZA.TextBoxDate(this.convFiledName("txtHakkoYmd"));
+            }
+
+            public radTaishoSha(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radTaishoSha"));
+            }
+
+            public txtKozaIdoOnly(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtKozaIdoOnly"));
+            }
+
+            public radKozaiFurikaeshaYosiki(): UZA.RadioButton {
+                return new UZA.RadioButton(this.convFiledName("radKozaiFurikaeshaYosiki"));
             }
 
             public radSeiho(): UZA.RadioButton {
