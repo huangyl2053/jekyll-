@@ -1,0 +1,129 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KaigoAtesakiJushoHenshu&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.KaigoAtesakiJushoHenshu"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText Panel-Shadow UzCommonChildDivPanel UzCompositeChild" id="KaigoAtesakiJushoHenshu" style="margin: 0px; width: 720px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KaigoAtesakiJushoHenshu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;720px&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;KaigoAtesakiJushoHenshu&quot;,&quot;title&quot;:&quot;住所編集方法&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KaigoAtesakiJushoHenshu&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KaigoAtesakiJushoHenshu_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">住所編集方法</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="KaigoAtesakiJushoHenshu_panel_body_area"><div class="StateChangable UzPanel JSControl FloatLeft marginLeft-XS marginRight-XS UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M Width-G1 UzCompositeChild" id="JushoHenshu1" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;JushoHenshu1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;selectControlID&quot;:&quot;JushoHenshu1&quot;,&quot;title&quot;:&quot;県・郡・市名編集方法&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;panelDisplay&quot;:1,&quot;focusPositionID&quot;:&quot;fieldNameProperty&quot;,&quot;canPost&quot;:false}"><div class="UzPanelHeader clearBackground" id="JushoHenshu1_panel_header_area" style="display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">県・郡・市名編集方法</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable Panel-GroupBox" id="JushoHenshu1_panel_body_area"><div class="UzRadioButton JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="radKenmeiHyojiUmu" style="width: 323px; height: 19px; display: block; opacity: 1;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;radKenmeiHyojiUmu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;selectControlID&quot;:&quot;radKenmeiHyojiUmu_core&quot;,&quot;icon&quot;:[],&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;する&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;しない&quot;}],&quot;required&quot;:true,&quot;labelLText&quot;:&quot;都道府県名称を表示　&quot;,&quot;labelLWidth&quot;:&quot;170px&quot;,&quot;spaceSize&quot;:&quot;L&quot;,&quot;disabledItem&quot;:[],&quot;groupName&quot;:&quot;radKenmeiHyojiUmu_group&quot;}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right" id="radKenmeiHyojiUmu_labelL" style="width: 170px;"><span class="requireMark">*</span><span>都道府県名称を表示　</span></span><span class="buttonSpan FloatLeft required" id="radKenmeiHyojiUmu_core" style="width: 150px;"><input name="radKenmeiHyojiUmu_group" id="radKenmeiHyojiUmu_key0" type="radio" value="する" data-key="key0"><label for="radKenmeiHyojiUmu_key0" data-key="key0">する</label><input name="radKenmeiHyojiUmu_group" class="spaceSize-L" id="radKenmeiHyojiUmu_key1" type="radio" value="しない" data-key="key1"><label for="radKenmeiHyojiUmu_key1" data-key="key1">しない</label></span></div><div title="" class="UzRadioButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS ClearFloat UzCompositeChild" id="radGunmeiHyojiUmu" style="width: 323px; height: 19px; display: block;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;radGunmeiHyojiUmu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;radGunmeiHyojiUmu_core&quot;,&quot;icon&quot;:[],&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;する&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;しない&quot;}],&quot;required&quot;:true,&quot;labelLText&quot;:&quot;郡名称を表示　&quot;,&quot;labelLWidth&quot;:&quot;170px&quot;,&quot;spaceSize&quot;:&quot;L&quot;,&quot;disabledItem&quot;:[],&quot;groupName&quot;:&quot;radGunmeiHyojiUmu_group&quot;}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right" id="radGunmeiHyojiUmu_labelL" style="width: 170px;"><span class="requireMark">*</span><span>郡名称を表示　</span></span><span class="buttonSpan FloatLeft required" id="radGunmeiHyojiUmu_core" style="width: 150px;"><input name="radGunmeiHyojiUmu_group" id="radGunmeiHyojiUmu_key0" type="radio" value="する" data-key="key0"><label for="radGunmeiHyojiUmu_key0" data-key="key0">する</label><input name="radGunmeiHyojiUmu_group" class="spaceSize-L" id="radGunmeiHyojiUmu_key1" type="radio" value="しない" data-key="key1"><label for="radGunmeiHyojiUmu_key1" data-key="key1">しない</label></span></div><div title="" class="UzRadioButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS ClearFloat UzCompositeChild" id="radCitymeiHyojiUmu" style="width: 323px; height: 19px;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;radCitymeiHyojiUmu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;radCitymeiHyojiUmu_core&quot;,&quot;icon&quot;:[],&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;する&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;しない&quot;}],&quot;required&quot;:true,&quot;labelLText&quot;:&quot;市町村名称を表示　&quot;,&quot;labelLWidth&quot;:&quot;170px&quot;,&quot;spaceSize&quot;:&quot;L&quot;,&quot;disabledItem&quot;:[],&quot;groupName&quot;:&quot;radCitymeiHyojiUmu_group&quot;}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right" id="radCitymeiHyojiUmu_labelL" style="width: 170px;"><span class="requireMark">*</span><span>市町村名称を表示　</span></span><span class="buttonSpan FloatLeft required" id="radCitymeiHyojiUmu_core" style="width: 150px;"><input name="radCitymeiHyojiUmu_group" id="radCitymeiHyojiUmu_key0" type="radio" value="する" data-key="key0"><label for="radCitymeiHyojiUmu_key0" data-key="key0">する</label><input name="radCitymeiHyojiUmu_group" class="spaceSize-L" id="radCitymeiHyojiUmu_key1" type="radio" value="しない" data-key="key1"><label for="radCitymeiHyojiUmu_key1" data-key="key1">しない</label></span></div></div></div><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M marginRight-XS marginLeft-XS Width-G1 UzCompositeChild" id="JushoHenshu2" style="width: auto; margin-top: 0px; margin-bottom: 0px; position: relative; opacity: 1;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;JushoHenshu2&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;selectControlID&quot;:&quot;JushoHenshu2&quot;,&quot;title&quot;:&quot;住所編集方法&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;panelDisplay&quot;:1,&quot;focusPositionID&quot;:&quot;wrapProperty&quot;,&quot;canPost&quot;:false}"><div class="UzPanelHeader clearBackground" id="JushoHenshu2_panel_header_area" style="display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">住所編集方法</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable Panel-GroupBox" id="JushoHenshu2_panel_body_area"><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlJushoHenshu" style="width: 333px; height: 21px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlJushoHenshu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;200px&quot;,&quot;selectControlID&quot;:&quot;ddlJushoHenshu_core&quot;,&quot;selectedItem&quot;:&quot;key1&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;行政区＋番地&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;住所＋番地、（行政区）&quot;},{&quot;key&quot;:&quot;key2&quot;,&quot;value&quot;:&quot;表示なし&quot;}],&quot;required&quot;:true,&quot;labelLText&quot;:&quot;住所編集方法&quot;,&quot;labelLWidth&quot;:&quot;130px&quot;,&quot;disabledItem&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="ddlJushoHenshu_labelL" style="width: 130px;"><span class="requireMark">*</span><span>住所編集方法</span></span><select class="CoreElement required" id="ddlJushoHenshu_core" style="width: 200px;"><option value="key0">行政区＋番地</option><option value="key1">住所＋番地、（行政区）</option><option value="key2">表示なし</option></select></div><div title="" class="UzRadioButton JSControl FloatLeft controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="radKatagakiHyojiUmu" style="width: 283px; height: 19px;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;radKatagakiHyojiUmu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;150px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;radKatagakiHyojiUmu_core&quot;,&quot;icon&quot;:[],&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;する&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;しない&quot;}],&quot;required&quot;:true,&quot;labelLText&quot;:&quot;方書を表示　&quot;,&quot;labelLWidth&quot;:&quot;130px&quot;,&quot;spaceSize&quot;:&quot;L&quot;,&quot;disabledItem&quot;:[],&quot;groupName&quot;:&quot;radKatagakiHyojiUmu_group&quot;}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right" id="radKatagakiHyojiUmu_labelL" style="width: 130px;"><span class="requireMark">*</span><span>方書を表示　</span></span><span class="buttonSpan FloatLeft required" id="radKatagakiHyojiUmu_core" style="width: 150px;"><input name="radKatagakiHyojiUmu_group" id="radKatagakiHyojiUmu_key0" type="radio" value="する" data-key="key0"><label for="radKatagakiHyojiUmu_key0" data-key="key0">する</label><input name="radKatagakiHyojiUmu_group" class="spaceSize-L" id="radKatagakiHyojiUmu_key1" type="radio" value="しない" data-key="key1"><label for="radKatagakiHyojiUmu_key1" data-key="key1">しない</label></span></div><div class="UzSpace JSControl controlMargin-M ClearFloat Width-Default UzCompositeChild" id="SpaceJusho" style="height: 17px;" data-control-type="Space" data-obj="{&quot;fieldName&quot;:&quot;SpaceJusho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Space&quot;,&quot;width&quot;:&quot;Default&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;SpaceJusho&quot;,&quot;height&quot;:&quot;17px&quot;}"></div></div></div><div class="UzHorizontalLine JSControl controlMargin-M Width-Default ClearFloat UzCompositeChild" id="lin1" data-control-type="HorizontalLine" data-obj="{&quot;fieldName&quot;:&quot;lin1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;HorizontalLine&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;lin1&quot;}"></div><button class="UzButton JSControl controlMargin-M Width-S FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnClose" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnClose&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnClose&quot;,&quot;text&quot;:&quot;閉じる&quot;}"><span>閉じる</span></button><button class="UzButton JSControl controlMargin-M FloatRight marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnKakutei" style="opacity: 0.8;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnKakutei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnKakutei&quot;,&quot;text&quot;:&quot;確定する&quot;}"><span>確定する</span></button></div></div>        
+  <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['KAIGOATESAKIJUSHOHENSHU'] = {};
+DBZ['KAIGOATESAKIJUSHOHENSHU'].KaigoAtesakiJushoHenshuRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KaigoAtesakiJushoHenshu').getProperty();parameter0.JushoHenshu1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_JushoHenshu1').getProperty();parameter0.JushoHenshu1.radKenmeiHyojiUmu = Uz.JSControlUtil.getJSControl(parentFieldName + '_radKenmeiHyojiUmu').getProperty();parameter0.JushoHenshu1.radGunmeiHyojiUmu = Uz.JSControlUtil.getJSControl(parentFieldName + '_radGunmeiHyojiUmu').getProperty();parameter0.JushoHenshu1.radCitymeiHyojiUmu = Uz.JSControlUtil.getJSControl(parentFieldName + '_radCitymeiHyojiUmu').getProperty();parameter0.JushoHenshu2 = Uz.JSControlUtil.getJSControl(parentFieldName + '_JushoHenshu2').getProperty();parameter0.JushoHenshu2.ddlJushoHenshu = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlJushoHenshu').getProperty();parameter0.JushoHenshu2.radKatagakiHyojiUmu = Uz.JSControlUtil.getJSControl(parentFieldName + '_radKatagakiHyojiUmu').getProperty();parameter0.JushoHenshu2.SpaceJusho = Uz.JSControlUtil.getJSControl(parentFieldName + '_SpaceJusho').getProperty();parameter0.lin1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_lin1').getProperty();parameter0.btnClose = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnClose').getProperty();parameter0.btnKakutei = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnKakutei').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (KaigoAtesakiJushoHenshu) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KaigoAtesakiJushoHenshu.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KaigoAtesakiJushoHenshu";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KaigoAtesakiJushoHenshu.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.KaigoAtesakiJushoHenshu.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KaigoAtesakiJushoHenshu = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.JushoHenshu1 = function () {
+                return new UZA.Panel(this.convFiledName("JushoHenshu1"));
+            };
+
+            Controls.prototype.radKenmeiHyojiUmu = function () {
+                return new UZA.RadioButton(this.convFiledName("radKenmeiHyojiUmu"));
+            };
+
+            Controls.prototype.radGunmeiHyojiUmu = function () {
+                return new UZA.RadioButton(this.convFiledName("radGunmeiHyojiUmu"));
+            };
+
+            Controls.prototype.radCitymeiHyojiUmu = function () {
+                return new UZA.RadioButton(this.convFiledName("radCitymeiHyojiUmu"));
+            };
+
+            Controls.prototype.JushoHenshu2 = function () {
+                return new UZA.Panel(this.convFiledName("JushoHenshu2"));
+            };
+
+            Controls.prototype.ddlJushoHenshu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlJushoHenshu"));
+            };
+
+            Controls.prototype.radKatagakiHyojiUmu = function () {
+                return new UZA.RadioButton(this.convFiledName("radKatagakiHyojiUmu"));
+            };
+
+            Controls.prototype.SpaceJusho = function () {
+                return new UZA.Space(this.convFiledName("SpaceJusho"));
+            };
+
+            Controls.prototype.lin1 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("lin1"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
+            };
+
+            Controls.prototype.btnKakutei = function () {
+                return new UZA.Button(this.convFiledName("btnKakutei"));
+            };
+            return Controls;
+        })();
+        KaigoAtesakiJushoHenshu.Controls = Controls;
+    })(DBZ.KaigoAtesakiJushoHenshu || (DBZ.KaigoAtesakiJushoHenshu = {}));
+    var KaigoAtesakiJushoHenshu = DBZ.KaigoAtesakiJushoHenshu;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (KaigoAtesakiJushoHenshu) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KaigoAtesakiJushoHenshu.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new KaigoAtesakiJushoHenshu.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KaigoAtesakiJushoHenshu.ModeController = ModeController;
+    })(DBZ.KaigoAtesakiJushoHenshu || (DBZ.KaigoAtesakiJushoHenshu = {}));
+    var KaigoAtesakiJushoHenshu = DBZ.KaigoAtesakiJushoHenshu;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KaigoAtesakiJushoHenshu) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KaigoAtesakiJushoHenshu.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        KaigoAtesakiJushoHenshu.PublicProperties = PublicProperties;
+    })(DBZ.KaigoAtesakiJushoHenshu || (DBZ.KaigoAtesakiJushoHenshu = {}));
+    var KaigoAtesakiJushoHenshu = DBZ.KaigoAtesakiJushoHenshu;
+})(DBZ || (DBZ = {}));
+</script></div>
