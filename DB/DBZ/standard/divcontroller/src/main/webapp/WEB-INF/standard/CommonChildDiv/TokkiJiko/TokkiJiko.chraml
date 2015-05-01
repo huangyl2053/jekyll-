@@ -1,0 +1,106 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;TokkiJiko&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;TokkiJiko&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;L&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.TokkiJiko"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel UzCompositeChild" id="TokkiJiko" style="width: 820px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;TokkiJiko&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;820px&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;TokkiJiko&quot;,&quot;title&quot;:&quot;特記すべき事項&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;TokkiJiko&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="TokkiJiko_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">特記すべき事項</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="TokkiJiko_panel_body_area"><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-left UzCompositeChild" id="lblTokki" style="width: 800px; opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblTokki&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;800px&quot;,&quot;selectControlID&quot;:&quot;lblTokki&quot;,&quot;text&quot;:&quot;要介護認定及び介護サービス計画作成時に必要な医学的なご意見を記載して下さい。<br>なお、専門医等に別途意見を求めた場合はその内容、結果も記載して下さい。<br>（情報提供書や身体障害者申請診断書の写し等を添付して頂いても結構です。）&quot;,&quot;align&quot;:0}"><span>要介護認定及び介護サービス計画作成時に必要な医学的なご意見を記載して下さい。</span><br><span>なお、専門医等に別途意見を求めた場合はその内容、結果も記載して下さい。</span><br><span>（情報提供書や身体障害者申請診断書の写し等を添付して頂いても結構です。）</span></span><div class="WithLabel StaticImageOuterDiv JSControl controlMargin-M FloatCenter ClearFloat UzCompositeChild" id="imgTokkiJiko" style="width: 819px; height: 300px;" data-control-type="StaticImage" data-obj="{&quot;fieldName&quot;:&quot;imgTokkiJiko&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;StaticImage&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;imgTokkiJiko&quot;,&quot;imageWidth&quot;:&quot;600px&quot;,&quot;imageHeight&quot;:&quot;300px&quot;}"><img class="UzStaticImage CoreElement" id="imgTokkiJiko_core" style="width: 600px; height: 300px;" alt="image"></div><button class="UzButton JSControl controlMargin-M Width-S FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnModoru" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnModoru&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnModoru&quot;,&quot;text&quot;:&quot;戻る&quot;}"><span>戻る</span></button><button class="UzButton JSControl controlMargin-M Width-S FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnKoshin" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnKoshin&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnKoshin&quot;,&quot;text&quot;:&quot;更新する&quot;}"><span>更新する</span></button><button class="UzButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnMasking" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnMasking&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;btnMasking&quot;,&quot;text&quot;:&quot;マスキングする&quot;}"><span>マスキングする</span></button></div></div>        
+       
+     <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['TOKKIJIKO'] = {};
+DBZ['TOKKIJIKO'].TokkiJikoRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_TokkiJiko').getProperty();parameter0.lblTokki = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblTokki').getProperty();parameter0.imgTokkiJiko = Uz.JSControlUtil.getJSControl(parentFieldName + '_imgTokkiJiko').getProperty();parameter0.btnModoru = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnModoru').getProperty();parameter0.btnKoshin = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnKoshin').getProperty();parameter0.btnMasking = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnMasking').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (TokkiJiko) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        TokkiJiko.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "TokkiJiko";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.TokkiJiko.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.TokkiJiko.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.TokkiJiko = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.lblTokki = function () {
+                return new UZA.Label(this.convFiledName("lblTokki"));
+            };
+
+            Controls.prototype.imgTokkiJiko = function () {
+                return new UZA.StaticImage(this.convFiledName("imgTokkiJiko"));
+            };
+
+            Controls.prototype.btnModoru = function () {
+                return new UZA.Button(this.convFiledName("btnModoru"));
+            };
+
+            Controls.prototype.btnKoshin = function () {
+                return new UZA.Button(this.convFiledName("btnKoshin"));
+            };
+
+            Controls.prototype.btnMasking = function () {
+                return new UZA.Button(this.convFiledName("btnMasking"));
+            };
+            return Controls;
+        })();
+        TokkiJiko.Controls = Controls;
+    })(DBZ.TokkiJiko || (DBZ.TokkiJiko = {}));
+    var TokkiJiko = DBZ.TokkiJiko;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (TokkiJiko) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new TokkiJiko.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new TokkiJiko.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        TokkiJiko.ModeController = ModeController;
+    })(DBZ.TokkiJiko || (DBZ.TokkiJiko = {}));
+    var TokkiJiko = DBZ.TokkiJiko;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (TokkiJiko) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new TokkiJiko.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        TokkiJiko.PublicProperties = PublicProperties;
+    })(DBZ.TokkiJiko || (DBZ.TokkiJiko = {}));
+    var TokkiJiko = DBZ.TokkiJiko;
+})(DBZ || (DBZ = {}));
+</script></div>

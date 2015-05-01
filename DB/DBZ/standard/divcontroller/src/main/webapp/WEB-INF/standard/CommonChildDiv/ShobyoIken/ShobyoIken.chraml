@@ -1,0 +1,155 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;ShobyoIken&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ShobyoIken&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;L&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-control-name="DBZ.ShobyoIken" data-is-composite-control="true"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel UzCompositeChild" id="ShobyoIken" style="width: 870px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ShobyoIken&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;870px&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;ShobyoIken&quot;,&quot;title&quot;:&quot;傷病に関する意見&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ShobyoIken&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ShobyoIken_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">傷病に関する意見</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="ShobyoIken_panel_body_area"><div class="StateChangable UzPanel JSControl FloatLeft marginLeft-XS marginRight-XS UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M Panel-Shadow UzCompositeChild" id="ShindanName" style="width: 850px; margin-top: 0px; margin-bottom: 0px; position: relative; opacity: 1;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ShindanName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;850px&quot;,&quot;selectControlID&quot;:&quot;ShindanName&quot;,&quot;title&quot;:&quot;(1)診断名(特定疾病または生活機能低下の直接の原因となっている傷病名については1.に記入)及び発症年月日&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;focusPositionID&quot;:&quot;canOpenAndCloseProperty&quot;,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="ShindanName_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">(1)診断名(特定疾病または生活機能低下の直接の原因となっている傷病名については1.に記入)及び発症年月日</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="ShindanName_panel_body_area"><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtShindanName1" style="width: 367px; height: 21px; position: relative; opacity: 1;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShindanName1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;M&quot;,&quot;selectControlID&quot;:&quot;txtShindanName1_core&quot;,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;1.診断名１&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-S" id="txtShindanName1_labelL"><span>1.診断名１</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana Width-M" id="txtShindanName1_core" type="text" placeholder=""></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtShindanYMD1" style="width: 236px; height: 21px; position: relative; opacity: 1;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtShindanYMD1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;txtShindanYMD1_core&quot;,&quot;labelLText&quot;:&quot;発症年月日&quot;,&quot;displayFormat&quot;:3}"><span class="word-wrap-break-word Label-L text-align-right Width-S" id="txtShindanYMD1_labelL"><span>発症年月日</span></span><input class="UzTextBox CoreElement Width-S" id="txtShindanYMD1_core" type="text" placeholder="" data-ymd="2" data-maxdate="" data-mindate="" data-orgtext="" data-fmt="0" data-seireki="" data-setcount="0" data-wareki=""></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M ClearFloat UzCompositeChild" id="txtShindanName2" style="width: 367px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShindanName2&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;M&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtShindanName2_core&quot;,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;2.診断名２&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-S" id="txtShindanName2_labelL"><span>2.診断名２</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana Width-M" id="txtShindanName2_core" type="text" placeholder=""></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtShindanYMD2" style="width: 236px; height: 21px; position: relative; opacity: 1;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtShindanYMD2&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;txtShindanYMD2_core&quot;,&quot;labelLText&quot;:&quot;発症年月日&quot;,&quot;displayFormat&quot;:3}"><span class="word-wrap-break-word Label-L text-align-right Width-S" id="txtShindanYMD2_labelL"><span>発症年月日</span></span><input class="UzTextBox CoreElement Width-S" id="txtShindanYMD2_core" type="text" placeholder="" data-ymd="2" data-maxdate="" data-mindate="" data-orgtext="" data-fmt="0" data-seireki="" data-setcount="0" data-wareki=""></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M ClearFloat UzCompositeChild" id="txtShindanName" style="width: 367px; height: 21px; position: relative; opacity: 1;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShindanName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;M&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtShindanName_core&quot;,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;3.診断名３&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-S" id="txtShindanName_labelL"><span>3.診断名３</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana Width-M" id="txtShindanName_core" type="text" placeholder=""></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtShindanYMD3" style="width: 236px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtShindanYMD3&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;txtShindanYMD3_core&quot;,&quot;labelLText&quot;:&quot;発症年月日&quot;,&quot;displayFormat&quot;:3}"><span class="word-wrap-break-word Label-L text-align-right Width-S" id="txtShindanYMD3_labelL"><span>発症年月日</span></span><input class="UzTextBox CoreElement Width-S" id="txtShindanYMD3_core" type="text" placeholder="" data-ymd="2" data-maxdate="" data-mindate="" data-orgtext="" data-fmt="0" data-seireki="" data-setcount="0" data-wareki=""></div><button class="UzButtonDialog JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS ClearFloat Width-S UzCompositeChild" id="btnShuyoShippeiGuide" style="opacity: 0.8;" type="button" data-control-type="ButtonDialog" data-obj="{&quot;fieldName&quot;:&quot;btnShuyoShippeiGuide&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;ButtonDialog&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;btnShuyoShippeiGuide&quot;,&quot;text&quot;:&quot;原因疾患コード&quot;,&quot;dataPassing&quot;:[]}"><span>原因疾患コード</span></button><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtShuyoShippeiCode" style="width: 249px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShuyoShippeiCode&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;M&quot;,&quot;selectControlID&quot;:&quot;txtShuyoShippeiCode_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[]}"><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana Width-M readonlyColor" id="txtShuyoShippeiCode_core" type="text" placeholder=""></div></div></div><div class="StateChangable UzPanel JSControl FloatLeft marginLeft-XS marginRight-XS UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M Panel-Shadow ClearFloat UzCompositeChild" id="ShojoAnteisei" style="width: 850px; margin-top: 0px; margin-bottom: 0px; position: relative; opacity: 1;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ShojoAnteisei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;850px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;ShojoAnteisei&quot;,&quot;title&quot;:&quot;(2)症状としての安定性&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="ShojoAnteisei_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">(2)症状としての安定性</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="ShojoAnteisei_panel_body_area"><div class="UzRadioButton JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="radShojoAnteisei" style="width: 251px; height: 19px; opacity: 1;" data-control-type="RadioButton" data-obj="{&quot;fieldName&quot;:&quot;radShojoAnteisei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;RadioButton&quot;,&quot;width&quot;:&quot;M&quot;,&quot;selectControlID&quot;:&quot;radShojoAnteisei_core&quot;,&quot;icon&quot;:[],&quot;selectedItem&quot;:&quot;key2&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;安定&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;不安定&quot;},{&quot;key&quot;:&quot;key2&quot;,&quot;value&quot;:&quot;不明&quot;}],&quot;newLineItemNumber&quot;:3,&quot;disabledItem&quot;:[]}"><span class="buttonSpan FloatLeft Width-M" id="radShojoAnteisei_core"><input id="radShojoAnteisei_key0" type="radio" value="安定" data-key="key0"><label for="radShojoAnteisei_key0" data-key="key0">安定</label><input class="spaceSize-M" id="radShojoAnteisei_key1" type="radio" value="不安定" data-key="key1"><label for="radShojoAnteisei_key1" data-key="key1">不安定</label><input class="spaceSize-M" id="radShojoAnteisei_key2" type="radio" value="不明" data-key="key2"><label for="radShojoAnteisei_key2" data-key="key2">不明</label></span></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M ClearFloat UzCompositeChild" id="txtFuanteiShosaiJokyo" style="width: 525px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtFuanteiShosaiJokyo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;M&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtFuanteiShosaiJokyo_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;「不安定」とした場合、具体的な状況&quot;,&quot;labelLWidth&quot;:&quot;275px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtFuanteiShosaiJokyo_labelL" style="width: 275px;"><span>「不安定」とした場合、具体的な状況</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana Width-M readonlyColor" id="txtFuanteiShosaiJokyo_core" type="text" placeholder=""></div></div></div><div class="StateChangable UzPanel JSControl FloatLeft marginLeft-XS marginRight-XS UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M Panel-Shadow UzCompositeChild" id="SeikatsuKinoGenin" style="width: 850px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;SeikatsuKinoGenin&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;850px&quot;,&quot;selectControlID&quot;:&quot;SeikatsuKinoGenin&quot;,&quot;title&quot;:&quot;(3)生活機能低下の直接の原因となっている傷病または特定疾病の経過及び投薬内容を含む治療内容&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="SeikatsuKinoGenin_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">(3)生活機能低下の直接の原因となっている傷病または特定疾病の経過及び投薬内容を含む治療内容</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="SeikatsuKinoGenin_panel_body_area"><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-center UzCompositeChild" id="lblChiryoNaiyo" style="width: 830px; opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblChiryoNaiyo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;830px&quot;,&quot;selectControlID&quot;:&quot;lblChiryoNaiyo&quot;,&quot;text&quot;:&quot;最近（概ね6カ月以内）介護に影響のあったもの　及び　特定疾病についてはその診断の根拠等について記入&quot;,&quot;align&quot;:1}"><span>最近（概ね6カ月以内）介護に影響のあったもの　及び　特定疾病についてはその診断の根拠等について記入</span></span><div class="WithLabel StaticImageOuterDiv JSControl controlMargin-M FloatCenter ClearFloat UzCompositeChild" id="imgChiryoNaiyo" style="width: 781px; height: 100px; position: relative; opacity: 1;" data-control-type="StaticImage" data-obj="{&quot;fieldName&quot;:&quot;imgChiryoNaiyo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;StaticImage&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;imgChiryoNaiyo&quot;,&quot;imageWidth&quot;:&quot;780px&quot;,&quot;imageHeight&quot;:&quot;100px&quot;}"><img class="UzStaticImage CoreElement" id="imgChiryoNaiyo_core" style="width: 780px; height: 100px;" alt="image"></div></div></div><button class="UzButton JSControl controlMargin-M Width-S FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnModoru" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnModoru&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnModoru&quot;,&quot;text&quot;:&quot;戻る&quot;}"><span>戻る</span></button><button class="UzButton JSControl controlMargin-M Width-S FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnKoshin" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnKoshin&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnKoshin&quot;,&quot;text&quot;:&quot;更新する&quot;}"><span>更新する</span></button></div></div>                  
+   
+   
+   <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['SHOBYOIKEN'] = {};
+DBZ['SHOBYOIKEN'].ShobyoIkenRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShobyoIken').getProperty();parameter0.ShindanName = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShindanName').getProperty();parameter0.ShindanName.txtShindanName1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShindanName1').getProperty();parameter0.ShindanName.txtShindanYMD1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShindanYMD1').getProperty();parameter0.ShindanName.txtShindanName2 = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShindanName2').getProperty();parameter0.ShindanName.txtShindanYMD2 = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShindanYMD2').getProperty();parameter0.ShindanName.txtShindanName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShindanName').getProperty();parameter0.ShindanName.txtShindanYMD3 = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShindanYMD3').getProperty();parameter0.ShindanName.btnShuyoShippeiGuide = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnShuyoShippeiGuide').getProperty();parameter0.ShindanName.txtShuyoShippeiCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShuyoShippeiCode').getProperty();parameter0.ShojoAnteisei = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShojoAnteisei').getProperty();parameter0.ShojoAnteisei.radShojoAnteisei = Uz.JSControlUtil.getJSControl(parentFieldName + '_radShojoAnteisei').getProperty();parameter0.ShojoAnteisei.txtFuanteiShosaiJokyo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtFuanteiShosaiJokyo').getProperty();parameter0.SeikatsuKinoGenin = Uz.JSControlUtil.getJSControl(parentFieldName + '_SeikatsuKinoGenin').getProperty();parameter0.SeikatsuKinoGenin.lblChiryoNaiyo = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblChiryoNaiyo').getProperty();parameter0.SeikatsuKinoGenin.imgChiryoNaiyo = Uz.JSControlUtil.getJSControl(parentFieldName + '_imgChiryoNaiyo').getProperty();parameter0.btnModoru = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnModoru').getProperty();parameter0.btnKoshin = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnKoshin').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (ShobyoIken) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ShobyoIken.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ShobyoIken";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.ShobyoIken.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.ShobyoIken.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ShobyoIken = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ShindanName = function () {
+                return new UZA.Panel(this.convFiledName("ShindanName"));
+            };
+
+            Controls.prototype.txtShindanName1 = function () {
+                return new UZA.TextBox(this.convFiledName("txtShindanName1"));
+            };
+
+            Controls.prototype.txtShindanYMD1 = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShindanYMD1"));
+            };
+
+            Controls.prototype.txtShindanName2 = function () {
+                return new UZA.TextBox(this.convFiledName("txtShindanName2"));
+            };
+
+            Controls.prototype.txtShindanYMD2 = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShindanYMD2"));
+            };
+
+            Controls.prototype.txtShindanName = function () {
+                return new UZA.TextBox(this.convFiledName("txtShindanName"));
+            };
+
+            Controls.prototype.txtShindanYMD3 = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShindanYMD3"));
+            };
+
+            Controls.prototype.btnShuyoShippeiGuide = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnShuyoShippeiGuide"));
+            };
+
+            Controls.prototype.txtShuyoShippeiCode = function () {
+                return new UZA.TextBox(this.convFiledName("txtShuyoShippeiCode"));
+            };
+
+            Controls.prototype.ShojoAnteisei = function () {
+                return new UZA.Panel(this.convFiledName("ShojoAnteisei"));
+            };
+
+            Controls.prototype.radShojoAnteisei = function () {
+                return new UZA.RadioButton(this.convFiledName("radShojoAnteisei"));
+            };
+
+            Controls.prototype.txtFuanteiShosaiJokyo = function () {
+                return new UZA.TextBox(this.convFiledName("txtFuanteiShosaiJokyo"));
+            };
+
+            Controls.prototype.SeikatsuKinoGenin = function () {
+                return new UZA.Panel(this.convFiledName("SeikatsuKinoGenin"));
+            };
+
+            Controls.prototype.lblChiryoNaiyo = function () {
+                return new UZA.Label(this.convFiledName("lblChiryoNaiyo"));
+            };
+
+            Controls.prototype.imgChiryoNaiyo = function () {
+                return new UZA.StaticImage(this.convFiledName("imgChiryoNaiyo"));
+            };
+
+            Controls.prototype.btnModoru = function () {
+                return new UZA.Button(this.convFiledName("btnModoru"));
+            };
+
+            Controls.prototype.btnKoshin = function () {
+                return new UZA.Button(this.convFiledName("btnKoshin"));
+            };
+            return Controls;
+        })();
+        ShobyoIken.Controls = Controls;
+    })(DBZ.ShobyoIken || (DBZ.ShobyoIken = {}));
+    var ShobyoIken = DBZ.ShobyoIken;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (ShobyoIken) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShobyoIken.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new ShobyoIken.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ShobyoIken.ModeController = ModeController;
+    })(DBZ.ShobyoIken || (DBZ.ShobyoIken = {}));
+    var ShobyoIken = DBZ.ShobyoIken;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (ShobyoIken) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShobyoIken.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ShobyoIken.PublicProperties = PublicProperties;
+    })(DBZ.ShobyoIken || (DBZ.ShobyoIken = {}));
+    var ShobyoIken = DBZ.ShobyoIken;
+})(DBZ || (DBZ = {}));
+</script></div>
