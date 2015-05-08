@@ -62,8 +62,8 @@ import jp.co.ndensan.reams.ur.urz.definition.code.ICodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.code.ICodeValueObject;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrQuestionMessages;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuShutokuJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -214,14 +214,15 @@ public class ShikakuShosai {
         HihokenshaDaichoModel daichoModel = hihoDaicho.get();
         shikakuShosaiDiv.getTxtShutokuDate().setValue(daichoModel.get資格取得年月日());
         shikakuShosaiDiv.getTxtShutokuTodokedeDate().setValue(daichoModel.get資格取得届出年月日());
-        List<KaigoShikakuShutokuJiyu> shutokuJiyuList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格取得事由);
+//TODO n8223 朴 URZCodeShubetsu.介護資格取得事由がみつかれません。エラーが発生したため、コメントアウト
+//        List<KaigoShikakuShutokuJiyu> shutokuJiyuList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格取得事由);
 
-        shikakuShosaiDiv.getDdlShutokuJiyu().setDataSource(
-                ItemList.of(shutokuJiyuList).map(new CodeMasterToKeyValueFunction()).toList());
-        if (!daichoModel.getEntity().getShikakuShutokuJiyuCode().getColumnValue().isEmpty()) {
-            shikakuShosaiDiv.getDdlShutokuJiyu().setSelectedKey(daichoModel.get資格取得事由().getCode());
-        }
-
+//        shikakuShosaiDiv.getDdlShutokuJiyu().setDataSource(
+//                ItemList.of(shutokuJiyuList).map(new CodeMasterToKeyValueFunction()).toList());
+//TODO n8223 朴    getShikakuShutokuJiyuCode() エラーが発生したため、コメントアウト
+//        if (!daichoModel.getEntity().getShikakuShutokuJiyuCode().getColumnValue().isEmpty()) {
+//            shikakuShosaiDiv.getDdlShutokuJiyu().setSelectedKey(daichoModel.get資格取得事由().getCode());
+//        }
         KeyValueDataSource hihoKubun1 = new KeyValueDataSource(HihokenshaKubun.第1号被保険者.code(), HihokenshaKubun.第1号被保険者.get略称());
         KeyValueDataSource hihoKubun2 = new KeyValueDataSource(HihokenshaKubun.第2号被保険者.code(), HihokenshaKubun.第2号被保険者.get略称());
         shikakuShosaiDiv.getDdlHihoKubun().setDataSource(Lists.newArrayList(hihoKubun1, hihoKubun2));
@@ -267,14 +268,14 @@ public class ShikakuShosai {
         shikakuShosaiDiv.getTxtSoshitsuDate().setValue(daichoModel.get資格喪失年月日());
         shikakuShosaiDiv.getTxtSoshitsuTodokedeDate().setValue(daichoModel.get資格喪失届出年月日());
 
-        List<KaigoShikakuSoshitsuJiyu> sositsuJiyuList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格喪失事由);
-        shikakuShosaiDiv.getDdlSoshitsuJiyu().setDataSource(
-                ItemList.of(sositsuJiyuList).map(new CodeMasterToKeyValueFunction()).toList());
-
-        if (!daichoModel.getEntity().getShikakuSoshitsuJiyuCode().getColumnValue().isEmpty()) {
-            shikakuShosaiDiv.getDdlSoshitsuJiyu().setSelectedKey(daichoModel.get資格喪失事由().getCode());
-        }
-
+//TODO n8223 朴 URZCodeShubetsu.介護資格取得事由がみつかれません。エラーが発生したため、コメントアウト
+//        List<KaigoShikakuSoshitsuJiyu> sositsuJiyuList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格喪失事由);
+//        shikakuShosaiDiv.getDdlSoshitsuJiyu().setDataSource(
+//                ItemList.of(sositsuJiyuList).map(new CodeMasterToKeyValueFunction()).toList());
+//TODO n8223 朴    getShikakuShutokuJiyuCode() エラーが発生したため、コメントアウト
+//        if (!daichoModel.getEntity().getShikakuSoshitsuJiyuCode().getColumnValue().isEmpty()) {
+//            shikakuShosaiDiv.getDdlSoshitsuJiyu().setSelectedKey(daichoModel.get資格喪失事由().getCode());
+//        }
         shikakuShosaiDiv.getTblShikakuShosai().setDisabled(true);
     }
 
@@ -303,7 +304,7 @@ public class ShikakuShosai {
         JushochiTokureiMenuType menuType = JushochiTokureiMenuType.toValue(controlData.getMenuID());
         switch (menuType) {
             case DBAMN25001_届出により適用:
-                shikakuShosaiDiv.getTabShisakuShosaiRireki().setSelectedItem(shikakuShosaiDiv.getTplJutoku());
+                // shikakuShosaiDiv.getTabShisakuShosaiRireki().setSelectedItem(shikakuShosaiDiv.getTplJutoku());
                 shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().setDisplayType(JushochiTokureiRirekiListDiv.DisplayType.toroku);
                 shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().setMeisaiDisplayMode(
                         JushochiTokureiRirekiListDiv.MeisaiDisplayMode.tekiyoInput);
@@ -311,7 +312,7 @@ public class ShikakuShosai {
                         JushochiTokureiRirekiListDiv.BtnDisplayMode.SetDisplay);
                 break;
             case DBAMN25002_届出により解除:
-                shikakuShosaiDiv.getTabShisakuShosaiRireki().setSelectedItem(shikakuShosaiDiv.getTplJutoku());
+                //   shikakuShosaiDiv.getTabShisakuShosaiRireki().setSelectedItem(shikakuShosaiDiv.getTplJutoku());
                 shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().setDisplayType(JushochiTokureiRirekiListDiv.DisplayType.toroku);
                 shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().setMeisaiDisplayMode(
                         JushochiTokureiRirekiListDiv.MeisaiDisplayMode.kaijoInput);
@@ -319,7 +320,7 @@ public class ShikakuShosai {
                         JushochiTokureiRirekiListDiv.BtnDisplayMode.SetDisplayNone);
                 break;
             case DBAMN25003_届出により施設変更:
-                shikakuShosaiDiv.getTabShisakuShosaiRireki().setSelectedItem(shikakuShosaiDiv.getTplShisetsuNyutaisho());
+                //   shikakuShosaiDiv.getTabShisakuShosaiRireki().setSelectedItem(shikakuShosaiDiv.getTplShisetsuNyutaisho());
                 shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().setDisplayType(JushochiTokureiRirekiListDiv.DisplayType.shokai);
                 shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().setMeisaiDisplayMode(
                         JushochiTokureiRirekiListDiv.MeisaiDisplayMode.displayNone);
@@ -327,7 +328,7 @@ public class ShikakuShosai {
                         JushochiTokureiRirekiListDiv.BtnDisplayMode.SetDisplayNone);
                 break;
             case DBAMN52002_合併前の住所地特例措置解除:
-                shikakuShosaiDiv.getTabShisakuShosaiRireki().setSelectedItem(shikakuShosaiDiv.getTplJutoku());
+                //   shikakuShosaiDiv.getTabShisakuShosaiRireki().setSelectedItem(shikakuShosaiDiv.getTplJutoku());
                 shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().setDisplayType(JushochiTokureiRirekiListDiv.DisplayType.toroku);
                 shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().setMeisaiDisplayMode(
                         JushochiTokureiRirekiListDiv.MeisaiDisplayMode.kaijoInput);
@@ -335,7 +336,7 @@ public class ShikakuShosai {
                         JushochiTokureiRirekiListDiv.BtnDisplayMode.SetDisplayNone);
                 break;
             case DBAMN61002_転入転出保留対象者管理:
-                shikakuShosaiDiv.getTabShisakuShosaiRireki().setSelectedItem(shikakuShosaiDiv.getTplJutoku());
+                //   shikakuShosaiDiv.getTabShisakuShosaiRireki().setSelectedItem(shikakuShosaiDiv.getTplJutoku());
                 shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().setDisplayType(JushochiTokureiRirekiListDiv.DisplayType.toroku);
                 shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().setMeisaiDisplayMode(
                         JushochiTokureiRirekiListDiv.MeisaiDisplayMode.tekiyoInput);

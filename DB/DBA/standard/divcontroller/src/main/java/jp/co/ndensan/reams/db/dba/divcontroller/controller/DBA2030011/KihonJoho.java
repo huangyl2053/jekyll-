@@ -18,8 +18,8 @@ import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.IKojinFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IKojinFinder;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -79,15 +79,16 @@ public class KihonJoho {
         }
 
         IKojinFinder kojinFinder = ShikibetsuTaishoService.getKojinFinder();
-        IKojin kojin = kojinFinder.get個人(controlData.getGyomuCD(), taishoshaKey.get識別コード());
-        switch (kojin.get住民状態()) {
-            case 転出者:
-            case 消除者:
-            case 住登外:
-                return false;
-            default:
-                return true;
-        }
+// TODO n8223 朴 modelからbusiness変更できない。エラーが発生したため、コメントアウト
+//        IKojin kojin = kojinFinder.get個人(controlData.getGyomuCD(), taishoshaKey.get識別コード());
+//        switch (kojin.get住民状態()) {
+//            case 転出者:
+//            case 消除者:
+//            case 住登外:
+//                return false;
+//            default:
+        return true;
+//        }
     }
 
 }

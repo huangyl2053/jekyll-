@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.ShikakuShutokuCompleteDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.ShikakuShutokuTaishoshaJohoDiv;
 //import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoKanryoMessage;
-//import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
+//import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.atenashokaisimple.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 //import jp.co.ndensan.reams.uz.uza.lang.RString;
 

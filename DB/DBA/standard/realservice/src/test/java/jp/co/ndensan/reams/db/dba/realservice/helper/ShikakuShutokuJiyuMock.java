@@ -4,7 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dba.realservice.helper;
 
-import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
+//TODO:クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+//import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -26,20 +27,20 @@ public class ShikakuShutokuJiyuMock {
      */
     public static IShikakuShutokuJiyu createInstance(final RString code, final RString name) {
         return new IShikakuShutokuJiyu() {
-            @Override
-            public RString getCode() {
-                return code;
-            }
-
-            @Override
-            public RString getName() {
-                return name;
-            }
-
-            @Override
-            public RString getShortName() {
-                return RString.EMPTY;
-            }
+//            @Override
+//            public RString getCode() {
+//                return code;
+//            }
+//
+//            @Override
+//            public RString getName() {
+//                return name;
+//            }
+//
+//            @Override
+//            public RString getShortName() {
+//                return RString.EMPTY;
+//            }
         };
     }
 

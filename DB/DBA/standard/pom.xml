@@ -22,8 +22,8 @@
         <module>definition</module>
         <module>persistence</module>
         <module>realservice</module>
-        <module>divcontroller</module>
         <module>model</module>
+        <module>divcontroller</module>
     </modules>
     <dependencyManagement>
         <dependencies>

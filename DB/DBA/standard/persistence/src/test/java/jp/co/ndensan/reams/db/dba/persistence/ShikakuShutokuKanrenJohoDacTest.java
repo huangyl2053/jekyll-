@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.persistence;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestDacBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -16,6 +17,8 @@ import org.junit.runner.RunWith;
  *
  * @author n8178 城間篤人
  */
+//TODO　 n8223 テスト無視
+@Ignore
 @RunWith(Enclosed.class)
 public class ShikakuShutokuKanrenJohoDacTest {
 
