@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X;
 
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoModel;
 import jp.co.ndensan.reams.ur.urz.business.IAssociation;
-import jp.co.ndensan.reams.ur.urz.business.ITsuchishoAtesaki;
+import jp.co.ndensan.reams.ua.uax.business.atesaki.ITsuchishoAtesaki;
 import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.tsuchishoatesaki.TsuchishoAtesakiBuilderFactory;
+import jp.co.ndensan.reams.ux.uxx.business.report.parts.tsuchishoatesaki.TsuchishoAtesakiBuilderFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

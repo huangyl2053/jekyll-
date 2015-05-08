@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbz.business.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
-import jp.co.ndensan.reams.ur.urz.model.IJusho;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
+import jp.co.ndensan.reams.ur.urz.business.IJusho;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojin;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -67,7 +67,7 @@ public class ShisetsuNyutaishoMock {
         IName name = mock(IName.class);
         when(name.getName()).thenReturn(new AtenaMeisho("介護太郎"));
         when(name.getKana()).thenReturn(new AtenaKanaMeisho("ｶｲｺﾞ ﾀﾛｳ"));
-        when(hojinMock.get氏名()).thenReturn(name);
+        when(hojinMock.get名称()).thenReturn(name);
 
         return hojinMock;
     }

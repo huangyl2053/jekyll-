@@ -63,11 +63,11 @@ public class ShikakuHenkoValidator implements IValidatableWithContext<ShikakuHen
     public IValidationMessages validateIn(ShikakuHenkoRirekiKanriContext context) {
         IValidationMessages messages = ValidationMessagesFactory.createValidationMessagesInstance();
 
-        if (PresenceValidator.isInvalid(変更日)) {
+        if (!PresenceValidator.isValid(変更日)) {
             messages.add(ShikakuHenkoValidationMessage.変更日が未入力);
         }
 
-        if (PresenceValidator.isInvalid(変更事由)) {
+        if (!PresenceValidator.isValid(変更事由)) {
             messages.add(ShikakuHenkoValidationMessage.変更事由が未入力);
         }
 

@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoTatokuTekiyoJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoTatokuKaijoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoTatokuTekiyoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoTatokuKaijoJiyu;
 
 /**
  * DbT1003TashichosonJushochiTokureiの項目定義クラスです

@@ -13,6 +13,15 @@
         <relativePath>../../</relativePath>
     </parent>
     <properties>
+        <jp.co.ndensan.reams.dbzVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbzVersion>
+        <jp.co.ndensan.reams.dbxVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbxVersion>
+        <jp.co.ndensan.reams.uzVersion>1.0.0</jp.co.ndensan.reams.uzVersion>
+        <jp.co.ndensan.reams.urVersion>1.0.0</jp.co.ndensan.reams.urVersion>
+        <jp.co.ndensan.reams.uaxVersion>0.1.0-SNAPSHOT</jp.co.ndensan.reams.uaxVersion>
+        <jp.co.ndensan.reams.uexVersion>0.1.0-SNAPSHOT</jp.co.ndensan.reams.uexVersion>
+        <jp.co.ndensan.reams.aaxVersion>0.1.0-SNAPSHOT</jp.co.ndensan.reams.aaxVersion>
+        <jp.co.ndensan.reams.bcxVersion>0.1.0-SNAPSHOT</jp.co.ndensan.reams.bcxVersion>
+        <jp.co.ndensan.reams.caxVersion>0.1.0-SNAPSHOT</jp.co.ndensan.reams.caxVersion>
     </properties>
     <modules>
         <module>entity</module>
@@ -30,7 +39,7 @@
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbz</groupId>
                 <artifactId>DbzTestHelper</artifactId>
-                <version>${project.version}</version>
+                <version>${jp.co.ndensan.reams.dbzVersion}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>

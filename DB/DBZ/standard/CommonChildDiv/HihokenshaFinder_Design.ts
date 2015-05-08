@@ -1066,8 +1066,8 @@ module DBZ {
                 return new UZA.CheckBoxList(this.convFiledName("chkMinashiNigo"));
             }
 
-            public ccdAtenaFinder(): URA.AtenaFinder.ModeController {
-                return new URA.AtenaFinder.ModeController("ccdAtenaFinder");
+            public ccdAtenaFinder(): UAX.AtenaFinder.ModeController {
+                return new UAX.AtenaFinder.ModeController("ccdAtenaFinder");
             }
 
             public ButtonsForHihokenshaFinder(): UZA.Panel {

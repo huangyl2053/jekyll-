@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.DBXCodeShubetsu;
 
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
@@ -34,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.ur.urz.definition.code.CodeMasterHelper;
 import jp.co.ndensan.reams.ur.urz.definition.code.ICodeValueObject;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuHenkoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuHenkoJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -163,7 +164,7 @@ public class ShikakuHenkoRirekiHandler {
     }
 
     private void setHenkoJiyuDataSource() {
-        List<KaigoShikakuHenkoJiyu> henkoJiyuList = CodeMasterHelper.getCode(URZCodeShubetsu.介護資格変更事由);
+        List<KaigoShikakuHenkoJiyu> henkoJiyuList = CodeMasterHelper.getCode(DBXCodeShubetsu.介護資格変更事由);
         shikakuHenkoRirekiDiv.getDdlHenkoJiyu().setDataSource(createCodeMasterKeyValue(henkoJiyuList));
     }
 

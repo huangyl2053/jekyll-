@@ -16,14 +16,14 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
-import jp.co.ndensan.reams.ur.urz.model.IDateOfBirth;
-import jp.co.ndensan.reams.ur.urz.model.IJusho;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.IName;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.IDateOfBirth;
+import jp.co.ndensan.reams.ur.urz.business.IJusho;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KojinNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -384,7 +384,7 @@ public class HihokenshaTest extends DbzTestBase {
         @Test
         public void get氏名は_コンストラクタ引数のIKojinのget氏名と_同じ値を返す() {
             IName shimei = mock(IName.class);
-            when(this.profile.get氏名()).thenReturn(shimei);
+            when(this.profile.get名称()).thenReturn(shimei);
             assertThat(sut.get氏名(), is(shimei));
         }
 

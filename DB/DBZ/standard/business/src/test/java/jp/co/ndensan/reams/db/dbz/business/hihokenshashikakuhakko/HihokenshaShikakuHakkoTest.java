@@ -16,10 +16,12 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.YukoKig
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
-import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
-import jp.co.ndensan.reams.ur.urz.business._KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoService;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.business._KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoServiceBunruiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -422,8 +424,8 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
 
         private static IKaigoServiceShurui createKaigoServiceShurui() {
             return spy(new _KaigoServiceShurui(
-                    new RString("01"), new Range<>(FlexibleYearMonth.MIN, FlexibleYearMonth.MAX), new RString("サービス種類名称。"),
-                    new RString("略称。"), new RString("サービス分類")));
+                    new KaigoServiceShuruiCode("01"), new Range<>(FlexibleYearMonth.MIN, FlexibleYearMonth.MAX), new RString("サービス種類名称。"),
+                    new RString("略称。"), new KaigoServiceBunruiCode(new RString("サービス分類"))));
         }
 
     }

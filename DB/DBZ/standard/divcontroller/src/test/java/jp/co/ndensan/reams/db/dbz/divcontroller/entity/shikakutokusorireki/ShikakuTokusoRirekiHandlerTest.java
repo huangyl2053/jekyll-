@@ -18,7 +18,7 @@
 //import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 //import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaFinder;
 //import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-//import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
+//import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.JushochiTokureishaKubun;
 //import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 //import jp.co.ndensan.reams.uz.uza.biz.Code;
 //import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

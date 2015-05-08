@@ -10,12 +10,13 @@ import jp.co.ndensan.reams.db.dbz.business.NyushoShisetsu;
 import jp.co.ndensan.reams.db.dbz.business.mapper.NyushoShisetsuMapper;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
-import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.KaigoHokenNyushoShisetsuBunrui;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
-import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaFinder;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.KaigoHokenNyushoShisetsuBunrui;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojin;
+import jp.co.ndensan.reams.db.dbx.realservice.IKaigoJigyoshaFinder;
 import jp.co.ndensan.reams.uz.uza.message.Messages;
-import jp.co.ndensan.reams.ur.urz.realservice.HojinService;
-import jp.co.ndensan.reams.ur.urz.realservice.IHojinFinder;
+import jp.co.ndensan.reams.ua.uax.realservice.HojinService;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IHojinFinder;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -87,7 +88,10 @@ class NyushoShisetsuBuilder {
 
     private ShikibetsuCode find法人識別コードFrom介護事業者(ShisetsuCode 施設コード) {
         //TODO n3317塚田萌 IKaigoJigyoshaFinderの修正が完了したら引数(KaigoJigyoshaShubetsu.サービス事業者)を削除する。
-        return jigyoshaFinder.get特定の事業者番号の介護事業者(施設コード.value()).get識別コード();
+
+        //TODO　n8235船山洋介 get識別コード()が無くなったため、コメントアウト。
+//        return jigyoshaFinder.get特定の事業者番号の介護事業者(施設コード.value()).get識別コード();
+        return null;
     }
 
     private ShikibetsuCode find法人識別コードFrom除外住所地特例対象施設(ShisetsuType 施設種類, ShisetsuCode 施設コード) {
@@ -96,6 +100,9 @@ class NyushoShisetsuBuilder {
 
     private IHojin find法人(ShikibetsuCode 識別コード, FlexibleDate 基準日) {
         //TODO n3317塚田萌　RDateからFlexibleDateに変更されたら.toRDate()を外す。
-        return hojinFinder.get法人(識別コード, RDate.MAX);
+
+        //TODO n8235船山洋介 hojinFinder.get法人()の引数が変わっているため、暫定的に修正。
+//        return hojinFinder.get法人(識別コード, RDate.MAX);
+        return hojinFinder.get法人(GyomuCode.DB介護保険, 識別コード);
     }
 }

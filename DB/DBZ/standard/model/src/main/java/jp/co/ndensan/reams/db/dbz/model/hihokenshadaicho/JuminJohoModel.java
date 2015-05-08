@@ -9,8 +9,8 @@ import java.io.Serializable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
-import jp.co.ndensan.reams.ur.urz.model.IDateOfBirth;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.business.IDateOfBirth;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -45,7 +45,7 @@ public class JuminJohoModel implements Serializable {
 
         this.識別コード = shikibetsuTaisho.get識別コード();
         this.住民種別 = shikibetsuTaisho.get住民種別();
-        this.カナ名称 = shikibetsuTaisho.get氏名().getKana();
+        this.カナ名称 = shikibetsuTaisho.get名称().getKana();
         this.性別 = shikibetsuTaisho.to個人().get性別();
         this.生年月日 = shikibetsuTaisho.to個人().get生年月日();
         //TODO n8178 城間篤人 まだur/developに混ざっていない、地区コードを識別対象の行政区から取得できる修正が完了した後に修正する。 2014/12/24

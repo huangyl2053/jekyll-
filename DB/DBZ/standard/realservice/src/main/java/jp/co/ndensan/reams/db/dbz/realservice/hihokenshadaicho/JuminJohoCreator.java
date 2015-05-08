@@ -7,16 +7,9 @@ package jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.JuminJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.corner.ShikibetsuTaishoCornerFactory;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.Kana;
-import jp.co.ndensan.reams.ur.urz.model.IDateOfBirth;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.IShikibetsuTaisho;
-import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.IKojinFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.IShikibetsuTaishoFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.ShikibetsuTaishoService;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IShikibetsuTaishoFinder;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
 
 /**
  * 住所地特例などで使用する、名寄せの参考に使用する住民情報を取得するクラスです。

@@ -19,9 +19,9 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNa
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.ur.urz.business.IAssociation;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.KannaiKangai;
-import jp.co.ndensan.reams.ur.urz.model.IJusho;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.KannaiKangaiKubunType;
+import jp.co.ndensan.reams.ur.urz.business.IJusho;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -147,7 +147,7 @@ public class ShikakuKihonEditorBase {
             katagaki = kyotsuJushoEdit.get方書表示有無();
         }
 
-        if (jusho.get管内管外().equals(KannaiKangai.管内)) {
+        if (jusho.get管内管外().equals(KannaiKangaiKubunType.管内)) {
             setGyoseiku(source, jusho);
 
             RStringBuilder jushoBuilder = new RStringBuilder();
@@ -205,9 +205,9 @@ public class ShikakuKihonEditorBase {
      */
     public void set被保険者名(IHihokenshashoCommonEditData source) {
         IKojin kojin = hihokenshashoModel.getKojinJoho();
-        source.setHihoname(kojin.get氏名().getName().value());
+        source.setHihoname(kojin.get名称().getName().value());
         if (printConfig.is氏名カナ表示有り()) {
-            source.setHihokana(kojin.get氏名().getKana().value());
+            source.setHihokana(kojin.get名称().getKana().value());
         } else {
             source.setHihokana(RString.EMPTY);
         }

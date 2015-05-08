@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1002TekiyoJogaishaEntity;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoJogaiTekiyoJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoJogaiKaijoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoJogaiTekiyoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoJogaiKaijoJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;

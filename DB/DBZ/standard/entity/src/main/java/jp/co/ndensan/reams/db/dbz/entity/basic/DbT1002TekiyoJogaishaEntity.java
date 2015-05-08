@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoJogaiTekiyoJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoJogaiKaijoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoJogaiTekiyoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoJogaiKaijoJiyu;
 
 /**
  * DbT1002TekiyoJogaishaの項目定義クラスです

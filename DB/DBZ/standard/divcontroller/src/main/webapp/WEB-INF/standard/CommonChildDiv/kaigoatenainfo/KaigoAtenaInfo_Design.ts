@@ -34,8 +34,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            //public atenaInfo(): URA.AtenaShokaiSimple.ModeController {
-            //    return new URA.AtenaShokaiSimple.ModeController(this.convFiledName("atenaInfo"));
+            //public atenaInfo(): UAX.AtenaShokaiSimple.ModeController {
+            //    return new UAX.AtenaShokaiSimple.ModeController(this.convFiledName("atenaInfo"));
             //}
 
         }

@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.business.config;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysNenreiTotatsuKijunJoho;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.model.DateOfBirthFactory;
-import jp.co.ndensan.reams.ur.urz.model.IDateOfBirth;
+import jp.co.ndensan.reams.ua.uax.business.DateOfBirthFactory;
+import jp.co.ndensan.reams.ua.uax.business.IDateOfBirth;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
