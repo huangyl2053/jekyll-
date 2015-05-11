@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.messagemapping;
 
 import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportValidationMessage;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage;
+//TODO n8223 バリデーションの構成が変更があり、その対応必要。
+//import jp.co.ndensan.reams.ua.uax.model.validations.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.IValidationMessageMapping;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 
@@ -28,8 +30,8 @@ public enum FukaErrorValidationMessageMapping implements IValidationMessageMappi
     }
 
     @Override
-    public IValidationMessage getValidationMessage() {
-        return message;
+    public jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage getValidationMessage() {
+        return (jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage) message;
     }
 
     @Override
@@ -41,5 +43,4 @@ public enum FukaErrorValidationMessageMapping implements IValidationMessageMappi
     public String getFieldName() {
         return fieldName;
     }
-
 }

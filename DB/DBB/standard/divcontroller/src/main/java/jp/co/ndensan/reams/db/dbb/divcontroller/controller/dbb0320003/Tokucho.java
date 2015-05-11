@@ -20,11 +20,11 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configkeys.TokuchoHo
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuHohoModel;
-import jp.co.ndensan.reams.ur.urz.definition.nenkintokucho.KakushuKubun;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.NenkinCode;
-import jp.co.ndensan.reams.ur.urz.model.NenkinTokuchoKaifuJohoModel;
-import jp.co.ndensan.reams.ur.urz.realservice.INenkinTokuchoKaifuJohoManager;
-import jp.co.ndensan.reams.ur.urz.realservice.NenkinTokuchoKaifuJohoManager;
+import jp.co.ndensan.reams.ue.uex.definition.nenkintokucho.KakushuKubun;
+import jp.co.ndensan.reams.ue.uex.definition.valueobject.code.NenkinCode;
+import jp.co.ndensan.reams.ue.uex.model.NenkinTokuchoKaifuJohoModel;
+import jp.co.ndensan.reams.ue.uex.realservice.INenkinTokuchoKaifuJohoManager;
+import jp.co.ndensan.reams.ue.uex.realservice.NenkinTokuchoKaifuJohoManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -165,12 +165,14 @@ public class Tokucho {
                 GyomuCode.DB介護保険, 賦課年度.value(), 基礎年金番号, 年金コード, 捕捉月);
 
         div.getTxtHosokuYM().setDomain(new RYearMonth(model.get処理年度().toDateString().concat(捕捉月)));
-        div.getTxtTokuChoGimusha().setValue(model.getDT特別徴収義務者コード().getRyakusho());
+        //TODO n8223 シンボルを見つけられません。（businessの対応しなければなりません。）
+        div.getTxtTokuChoGimusha().setValue(model.getDT特別徴収義務者コード().value());
         div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKana().setValue(model.getDTカナ氏名());
         div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKanji().setValue(model.getDT漢字氏名());
         div.getNenkinHokenshaTotsugoJoho().getTxtJushoKana().setValue(model.getDTカナ住所());
         div.getNenkinHokenshaTotsugoJoho().getTxtJushoKanji().setValue(model.getDT漢字住所());
-        div.getNenkinHokenshaTotsugoJoho().getTxtSex().setValue(model.getDT性別().value().get性別名称());
+        //TODO n8223 シンボルを見つけられません。 （businessの対応しなければなりません。）
+        div.getNenkinHokenshaTotsugoJoho().getTxtSex().setValue(model.getDT性別());
         div.getNenkinHokenshaTotsugoJoho().getTxtBirthYMD().setValue(model.getDT生年月日());
     }
 
@@ -195,9 +197,11 @@ public class Tokucho {
 
         return new dgTokuChoIdoAndIrai_Row(
                 model.get処理対象年月().wareki().toDateString(),
-                model.get通知内容コード().value().get通知内容名称(),
+                //TODO n8223 シンボルを見つけられません。 （businessの対応しなければなりません。通知内容名称)
+                model.get通知内容コード(),
                 KakushuKubun.search各種区分名称(
-                        model.get通知内容コード().value().get通知内容コード(), model.getDT各種区分()).get各種区分名称(),
+                        //TODO n8223 シンボルを見つけられません。 （businessの対応しなければなりません。通知内容コード）
+                        model.get通知内容コード(), model.getDT各種区分()).get各種区分名称(),
                 FukaMapper.addComma(new Decimal(model.getDT各種金額欄１().toString())),
                 FukaMapper.addComma(new Decimal(model.getDT各種金額欄２().toString())),
                 FukaMapper.addComma(new Decimal(model.getDT各種金額欄３().toString())));
@@ -224,9 +228,11 @@ public class Tokucho {
 
         return new dgTokuchoKekka_Row(
                 model.get処理対象年月().wareki().toDateString(),
-                model.get通知内容コード().value().get通知内容名称(),
+                //TODO n8223 シンボルを見つけられません。 （businessの対応しなければなりません。通知内容名称)
+                model.get通知内容コード(),
                 KakushuKubun.search各種区分名称(
-                        model.get通知内容コード().value().get通知内容コード(), model.getDT各種区分()).get各種区分名称(),
+                        //TODO n8223 シンボルを見つけられません。 （businessの対応しなければなりません。通知内容コード）
+                        model.get通知内容コード(), model.getDT各種区分()).get各種区分名称(),
                 FukaMapper.addComma(new Decimal(model.getDT各種金額欄１().toString())),
                 FukaMapper.addComma(new Decimal(model.getDT各種金額欄２().toString())),
                 FukaMapper.addComma(new Decimal(model.getDT各種金額欄３().toString())),

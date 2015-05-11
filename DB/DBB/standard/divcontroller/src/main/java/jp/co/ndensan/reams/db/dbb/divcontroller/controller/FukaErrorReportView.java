@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.ur.urz.business.internalreport.IInternalReportCommon;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.IInternalReportKihonDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationHelper;
 import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage;
+//import jp.co.ndensan.reams.ua.uax.model.validations.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
