@@ -8,8 +8,10 @@ package jp.co.ndensan.reams.db.dbc.business;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.EigyoKeitai;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.ur.urz.business.IKoza;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
+import jp.co.ndensan.reams.ur.urc.business.IKoza;
+//TODO n8233 朴　jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojinに変更
+//import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojin;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

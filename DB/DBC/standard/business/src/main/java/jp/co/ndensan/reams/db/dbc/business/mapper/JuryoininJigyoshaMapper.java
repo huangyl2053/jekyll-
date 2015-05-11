@@ -21,8 +21,10 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ToriatsukaiKakuyakus
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.ur.urz.business.IKoza;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
+import jp.co.ndensan.reams.ur.urc.business.IKoza;
+//TODO n8233 朴　jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojinに変更
+//import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojin;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
