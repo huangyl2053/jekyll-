@@ -80,7 +80,8 @@ public enum IchijiHanteiKeikokuShubetsu {
                 return 警告種別;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する警告種別").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する警告種別").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する警告種別").getMessage());
     }
 
     private static FlexibleYear get判定年度(FlexibleDate 一次判定年月日) {

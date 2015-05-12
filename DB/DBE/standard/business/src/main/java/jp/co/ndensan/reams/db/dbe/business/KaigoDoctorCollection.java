@@ -49,7 +49,8 @@ public class KaigoDoctorCollection implements Iterable {
 //                return 介護医師;
 //            }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("介護医師").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("介護医師").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("介護医師").getMessage());
     }
 
     /**

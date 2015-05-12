@@ -37,7 +37,8 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
 
         requireNonNull(timeStr, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage(エラー出力.toString(), getClass().getName()));
         if (!checkLength(timeStr)) {
-            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace(エラー出力.toString(), "4桁").evaluate());
+//            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace(エラー出力.toString(), "4桁").evaluate());
+            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace(エラー出力.toString(), "4桁").getMessage());
         }
 
         int hour, minute;
@@ -46,13 +47,15 @@ public class TimeString implements IValueObject<RString>, Comparable<TimeString>
             hour = Integer.parseInt(timeStr.substring(0, halfLenght).toString());
             minute = Integer.parseInt(timeStr.substring(halfLenght, TIME_STRING_LENGTH).toString());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace(エラー出力.toString(), "数字").evaluate());
+//            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace(エラー出力.toString(), "数字").evaluate());
+            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace(エラー出力.toString(), "数字").getMessage());
         }
 
         try {
             time = RTime.of(hour, minute);
         } catch (RuntimeException e) {
-            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace(エラー出力.toString(), "0000～2359の間").evaluate());
+//            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace(エラー出力.toString(), "0000～2359の間").evaluate());
+            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace(エラー出力.toString(), "0000～2359の間").getMessage());
         }
 
         RString hourString = padToZero(Integer.toString(time.getHour()));

@@ -13,7 +13,11 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiYusenWaritsukeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -39,11 +43,11 @@ public final class YokaigoNinteiShinseiMapper {
      */
     public static YokaigoNinteiShinsei toYokaigoNinteiShinsei(DbT5001NinteiShinseiJohoEntity entity) {
         return new YokaigoNinteiShinsei(
-                entity.getShinseishoKanriNo(),
+                new ShinseishoKanriNo(entity.getShinseishoKanriNo()),
                 entity.getShoriTimestamp(),
-                entity.getShoKisaiHokenshaNo(),
-                entity.getShishoCode(),
-                entity.getHihokenshaNo(),
+                new ShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo()),
+                new ShishoCode(entity.getShishoCode()),
+                new HihokenshaNo(entity.getHihokenshaNo()),
                 entity.getShikibetsuCode(),
                 entity.getNinteiShinseiYMD(),
                 entity.getNinteiShinseiEdabanCode(),
@@ -81,12 +85,12 @@ public final class YokaigoNinteiShinseiMapper {
      */
     public static DbT5001NinteiShinseiJohoEntity toDbT5001NinteiShinseiJohoEntity(YokaigoNinteiShinsei yokaigoNinteiShinsei) {
         DbT5001NinteiShinseiJohoEntity entity = new DbT5001NinteiShinseiJohoEntity();
-        entity.setShinseishoKanriNo(yokaigoNinteiShinsei.get申請書管理番号());
+        entity.setShinseishoKanriNo(yokaigoNinteiShinsei.get申請書管理番号().value());
         entity.setShoriTimestamp(yokaigoNinteiShinsei.get処理日時());
         entity.setNinteichosaIraiRirekiNo(yokaigoNinteiShinsei.get認定調査依頼履歴番号().value());
-        entity.setShoKisaiHokenshaNo(yokaigoNinteiShinsei.get証記載保険者番号());
-        entity.setShishoCode(yokaigoNinteiShinsei.get支所コード());
-        entity.setHihokenshaNo(yokaigoNinteiShinsei.get被保番号());
+        entity.setShoKisaiHokenshaNo(yokaigoNinteiShinsei.get証記載保険者番号().value());
+        entity.setShishoCode(yokaigoNinteiShinsei.get支所コード().value());
+        entity.setHihokenshaNo(yokaigoNinteiShinsei.get被保番号().value());
         entity.setShikibetsuCode(yokaigoNinteiShinsei.get識別コード());
         entity.setNinteiShinseiYMD(yokaigoNinteiShinsei.get認定申請年月日());
         entity.setNinteiShinseiEdabanCode(yokaigoNinteiShinsei.get枝番コード());

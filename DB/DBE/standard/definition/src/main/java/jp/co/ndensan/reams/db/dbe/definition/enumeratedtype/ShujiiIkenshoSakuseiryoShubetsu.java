@@ -49,6 +49,7 @@ public enum ShujiiIkenshoSakuseiryoShubetsu {
                 return data;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する主治医意見書作成料種別").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する主治医意見書作成料種別").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する主治医意見書作成料種別").getMessage());
     }
 }

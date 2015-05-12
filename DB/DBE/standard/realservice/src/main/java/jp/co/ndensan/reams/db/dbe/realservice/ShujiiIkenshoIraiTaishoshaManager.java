@@ -23,11 +23,13 @@ import jp.co.ndensan.reams.db.dbe.business.mapper.ShujiiIkenshoIraiTaishoshaMapp
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.ShujiiIkenshoIraiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IKojinFinder;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -50,7 +52,7 @@ public class ShujiiIkenshoIraiTaishoshaManager {
      */
     public ShujiiIkenshoIraiTaishoshaManager() {
         shujiiIkenshoIraiTaishoshaDac = InstanceProvider.create(ShujiiIkenshoIraiTaishoshaDac.class);
-        kojinFinder = KojinService.createKojinFinder();
+        kojinFinder = ShikibetsuTaishoService.getKojinFinder();
         shujiiManager = new ShujiiIkenshoSakuseiIraiKirokuManager();
         kaigoIryoKikanFinder = new KaigoIryoKikanFinder();
         yokaigoninteiProgressManager = new YokaigoNinteiProgressManager();
@@ -159,7 +161,7 @@ public class ShujiiIkenshoIraiTaishoshaManager {
         YokaigoNinteiProgress 認定進捗情報 = NinteiShinchokuJohoMapper.toNinteiShinchokuJoho(entity.getNinteiShinchokuJohoEntity());
         YokaigoNinteiShinsei 認定申請情報 = YokaigoNinteiShinseiMapper.toYokaigoNinteiShinsei(entity.getNinteiShinseiJohoEntity());
         IKojin 個人 = get個人(認定申請情報);
-        RString 氏名 = 個人.get氏名().getName().value();
+        RString 氏名 = 個人.get名称().getName().value();
         RString 住所 = 個人.get住所().get住所();
         ShujiiIkenshoSakuseiIrai 主治医意見書作成依頼情報 = get主治医意見書作成依頼情報(市町村コード, 認定申請情報);
         KaigoIryoKikan 主治医医療機関情報 = get主治医医療機関情報(市町村コード, 主治医意見書作成依頼情報);
@@ -176,7 +178,7 @@ public class ShujiiIkenshoIraiTaishoshaManager {
     }
 
     private IKojin get個人(YokaigoNinteiShinsei 認定申請情報) {
-        return kojinFinder.get個人(認定申請情報.get識別コード());
+        return kojinFinder.get個人(GyomuCode.DB介護保険, 認定申請情報.get識別コード());
     }
 
     private ShujiiIkenshoSakuseiIrai get主治医意見書作成依頼情報(LasdecCode 市町村コード, YokaigoNinteiShinsei 認定申請情報) {

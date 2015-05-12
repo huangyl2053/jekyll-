@@ -16,8 +16,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.business.mapper.ShujiiMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoDoctorEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.KaigoDoctorDac;
-import jp.co.ndensan.reams.ur.urz.business.IDoctor;
-import jp.co.ndensan.reams.ur.urz.business.mapper.DoctorMapper;
+//import jp.co.ndensan.reams.ur.urz.business.IDoctor;
+//import jp.co.ndensan.reams.ur.urz.business.mapper.DoctorMapper;
 import jp.co.ndensan.reams.ur.urz.realservice.DoctorManagerFactory;
 import jp.co.ndensan.reams.ur.urz.realservice.IDoctorManager;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  * @author N8156 宮本 康
  */
 public class KaigoDoctorManager implements IKaigoDoctorManager {
+    //TODO　介護医師はなくなるため、暫定的にコメントアウト。実装作業にはいった差異にこのクラスを削除する。
 
     private final KaigoDoctorDac kaigoDoctorDac;
     private final IDoctorManager doctorManager;
@@ -127,9 +128,10 @@ public class KaigoDoctorManager implements IKaigoDoctorManager {
         if (entity == null) {
             return null;
         }
-        IDoctor doctor = DoctorMapper.toDoctor(entity.getDoctorEntity());
-        IShujii shujii = ShujiiMapper.toShujii(entity.getDbT7012ShujiiJohoEntity());
-        KaigoIryoKikan kaigoIryoKikan = kaigoIryoKikanFinder.get介護医療機関(shujii.get市町村コード(), shujii.get介護医療機関コード());
+        //TODO n8235船山洋介　IDoctorが存在しないため、コメントアウト
+//        IDoctor doctor = DoctorMapper.toDoctor(entity.getDoctorEntity());
+//        IShujii shujii = ShujiiMapper.toShujii(entity.getDbT7012ShujiiJohoEntity());
+//        KaigoIryoKikan kaigoIryoKikan = kaigoIryoKikanFinder.get介護医療機関(shujii.get市町村コード(), shujii.get介護医療機関コード());
         //TODO KaigoDoctorコメントアウトされている
 //        return new KaigoDoctor(doctor, shujii, kaigoIryoKikan);
         return null;

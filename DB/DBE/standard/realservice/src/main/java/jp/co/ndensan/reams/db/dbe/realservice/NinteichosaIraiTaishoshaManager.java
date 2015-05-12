@@ -23,16 +23,20 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokensha
 import jp.co.ndensan.reams.db.dbe.business.mapper.YokaigoNinteiShinseiMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.NinteichosaIraiTaishoshaDac;
-import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
-import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
-import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaFinder;
-import jp.co.ndensan.reams.ur.urf.realservice.INinteiChosainFinder;
-import jp.co.ndensan.reams.ur.urf.realservice.KaigoJigyoshaFinderFactory;
-import jp.co.ndensan.reams.ur.urf.realservice.NinteiChosainFinderFactory;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.db.dbx.business.KaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.business.INinteiChosain;
+//import jp.co.ndensan.reams.db.dbx.realservice.IKaigoJigyoshaFinder;
+import jp.co.ndensan.reams.db.dbx.realservice.IKaigoJigyoshaRelateFinder;
+import jp.co.ndensan.reams.db.dbx.realservice.INinteiChosainFinder;
+//import jp.co.ndensan.reams.db.dbx.realservice.KaigoJigyoshaFinderFactory;
+import jp.co.ndensan.reams.db.dbx.realservice.KaigoJigyoshaRelateFinderFactory;
+import jp.co.ndensan.reams.db.dbx.realservice.NinteiChosainFinderFactory;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IKojinFinder;
+//import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -49,7 +53,7 @@ public class NinteichosaIraiTaishoshaManager {
     private final IKojinFinder kojinFinder;
     private final NinteichosaIraiManager ninteichosaIraiManager;
     private final NinteichosaItakusakiManager ninteichosaItakusakiManager;
-    private final IKaigoJigyoshaFinder kaigoJigyoshaFinder;
+    private final IKaigoJigyoshaRelateFinder kaigoJigyoshaFinder;
     private final KaigoNinteichosainManager kaigoNinteichosainManager;
     private final INinteiChosainFinder ninteiChosainFinder;
     private final YokaigoNinteiProgressManager yokaigoninteiProgressManager;
@@ -60,10 +64,11 @@ public class NinteichosaIraiTaishoshaManager {
      */
     public NinteichosaIraiTaishoshaManager() {
         iraiTaishoshaDac = InstanceProvider.create(NinteichosaIraiTaishoshaDac.class);
-        kojinFinder = KojinService.createKojinFinder();
+//        kojinFinder = KojinService.createKojinFinder();
+        kojinFinder = ShikibetsuTaishoService.getKojinFinder();
         ninteichosaIraiManager = new NinteichosaIraiManager();
         ninteichosaItakusakiManager = new NinteichosaItakusakiManager();
-        kaigoJigyoshaFinder = KaigoJigyoshaFinderFactory.getInstance();
+        kaigoJigyoshaFinder = KaigoJigyoshaRelateFinderFactory.createInstance();
         kaigoNinteichosainManager = new KaigoNinteichosainManager();
         ninteiChosainFinder = NinteiChosainFinderFactory.getInstance();
         yokaigoninteiProgressManager = new YokaigoNinteiProgressManager();
@@ -86,7 +91,7 @@ public class NinteichosaIraiTaishoshaManager {
             IKojinFinder kojinFinder,
             NinteichosaIraiManager ninteichosaIraiManager,
             NinteichosaItakusakiManager ninteichosaItakusakiManager,
-            IKaigoJigyoshaFinder kaigoJigyoshaFinder,
+            IKaigoJigyoshaRelateFinder kaigoJigyoshaFinder,
             KaigoNinteichosainManager kaigoNinteichosainManager,
             INinteiChosainFinder ninteiChosainFinder,
             YokaigoNinteiProgressManager yokaigoninteiProgressManager) {
@@ -180,7 +185,7 @@ public class NinteichosaIraiTaishoshaManager {
         IKojin 個人 = get個人(認定申請情報);
         NinteichosaIrai 認定調査依頼情報 = get認定調査依頼情報(認定申請情報);
         NinteichosaItakusaki 認定調査委託先情報 = get認定調査委託先情報(市町村コード, 認定調査依頼情報);
-        IKaigoJigyosha 介護事業者 = get介護事業者(認定調査依頼情報);
+        KaigoJigyosha 介護事業者 = get介護事業者(認定調査依頼情報);
         KaigoNinteichosain 介護認定調査員 = get介護認定調査員(市町村コード, 認定調査依頼情報);
         INinteiChosain 認定調査員情報 = get認定調査員情報(介護認定調査員);
         return NinteichosaIraiTaishoshaMapper.toNinteichosaIraiTaishosha(
@@ -193,7 +198,8 @@ public class NinteichosaIraiTaishoshaManager {
     }
 
     private IKojin get個人(YokaigoNinteiShinsei 認定申請情報) {
-        return kojinFinder.get個人(認定申請情報.get識別コード());
+//                return kojinFinder.get個人(認定申請情報.get識別コード());
+        return kojinFinder.get個人(GyomuCode.DB介護保険, 認定申請情報.get識別コード());
     }
 
     private NinteichosaIrai get認定調査依頼情報(YokaigoNinteiShinsei 認定申請情報) {
@@ -209,9 +215,11 @@ public class NinteichosaIraiTaishoshaManager {
                 true);
     }
 
-    private IKaigoJigyosha get介護事業者(NinteichosaIrai 認定調査依頼情報) {
-        return kaigoJigyoshaFinder.get特定の事業者番号の介護事業者(
-                認定調査依頼情報.get認定調査委託先コード().value());
+    private KaigoJigyosha get介護事業者(NinteichosaIrai 認定調査依頼情報) {
+//        return kaigoJigyoshaFinder.get特定の事業者番号の介護事業者(
+//                認定調査依頼情報.get認定調査委託先コード().value());
+        return kaigoJigyoshaFinder.findLatestJigyosha(
+                認定調査依頼情報.get認定調査委託先コード());
     }
 
     private KaigoNinteichosain get介護認定調査員(LasdecCode 市町村コード, NinteichosaIrai 認定調査依頼情報) {

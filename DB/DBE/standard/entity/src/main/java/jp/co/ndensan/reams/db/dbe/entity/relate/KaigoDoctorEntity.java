@@ -5,17 +5,19 @@
 package jp.co.ndensan.reams.db.dbe.entity.relate;
 
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
-import jp.co.ndensan.reams.ur.urz.entity.basic.UrT0517IshiEntity;
+//import jp.co.ndensan.reams.ur.urz.entity.basic.UrT0517IshiEntity;
 
 /**
  * 介護医師のエンティティクラスです。
  *
  * @author N8156 宮本 康
  */
+@Deprecated
 public class KaigoDoctorEntity {
+    //TODO n8235船山洋介　介護医師はなくなるため、暫定的にコメントアウト。実装作業にはいった差異にこのクラスを削除する。
 
     private DbT7012ShujiiJohoEntity dbT7012ShujiiJohoEntity = null;
-    private UrT0517IshiEntity doctorEntity = null;
+//    private UrT0517IshiEntity doctorEntity = null;
 
     /**
      * インスタンスを生成します。
@@ -46,16 +48,15 @@ public class KaigoDoctorEntity {
      *
      * @return 医師情報エンティティ
      */
-    public UrT0517IshiEntity getDoctorEntity() {
-        return doctorEntity;
-    }
-
+//    public UrT0517IshiEntity getDoctorEntity() {
+//        return doctorEntity;
+//    }
     /**
      * 医師情報エンティティを設定します。
      *
      * @param entity 医師情報エンティティ
      */
-    public void setDoctorEntity(UrT0517IshiEntity entity) {
-        this.doctorEntity = entity;
-    }
+//    public void setDoctorEntity(UrT0517IshiEntity entity) {
+//        this.doctorEntity = entity;
+//    }
 }

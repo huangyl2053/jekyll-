@@ -17,10 +17,9 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaJisshibashoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urf.business._KaigoJigyosha;
-import jp.co.ndensan.reams.ur.urf.business._NinteiChosain;
-import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Name;
+import jp.co.ndensan.reams.db.dbx.business.KaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.business._NinteiChosain;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho._Name;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -31,6 +30,7 @@ import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceRe
 import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfGaikyo.*;
 import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon.*;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import static org.mockito.Mockito.spy;
 
 /**
@@ -110,13 +110,13 @@ public class NinteichosaResultMock {
                 editor.getNinteichosahyo()));
     }
 
-    private static IKaigoJigyosha createKaigoJigyosha() {
-        return new _KaigoJigyosha(
-                new RString("事業者番号"), RDate.MIN, RDate.MAX,
+    private static KaigoJigyosha createKaigoJigyosha() {
+        return new KaigoJigyosha(
+                new KaigoJigyoshaNo("事業者番号"), FlexibleDate.MIN, FlexibleDate.MAX,
                 new ShikibetsuCode(new RString("1234567890")), new RString("事業者略称"), new RString("事業者略称カナ"),
-                new RString("事業者住所カナ"), new RString("異動事由"), RDate.MIN, new RString("社会福祉法人軽減対象区分"),
+                new RString("事業者住所カナ"), new RString("異動事由"), FlexibleDate.MIN, new RString("社会福祉法人軽減対象区分"),
                 new RString("地域差区分"), new RString("受領委任区分"), new RString("生活保護指定区分"), new RString("法人種別"),
-                RDate.MAX, RDate.MIN, RDate.MAX, RDate.MIN);
+                FlexibleDate.MAX, FlexibleDate.MIN, FlexibleDate.MAX, FlexibleDate.MIN);
     }
 
     /**

@@ -67,9 +67,12 @@ public class GogitaiDetail {
         requireNonNull(予定開催時間, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("予定開催時間", getClass().getName()));
         requireNonNull(審査会開催場所, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("審査会開催場所", getClass().getName()));
 
-        checkゼロ以下(審査会予定定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会予定定員", "0以上").evaluate());
-        checkゼロ以下(審査会自動割当定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会自動割当定員", "0以上").evaluate());
-        checkゼロ以下(審査会委員定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会委員定員", "0以上").evaluate());
+//        checkゼロ以下(審査会予定定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会予定定員", "0以上").evaluate());
+//        checkゼロ以下(審査会自動割当定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会自動割当定員", "0以上").evaluate());
+//        checkゼロ以下(審査会委員定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会委員定員", "0以上").evaluate());
+        checkゼロ以下(審査会予定定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会予定定員", "0以上").getMessage());
+        checkゼロ以下(審査会自動割当定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会自動割当定員", "0以上").getMessage());
+        checkゼロ以下(審査会委員定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会委員定員", "0以上").getMessage());
 
         this.合議体番号 = 合議体番号;
         this.合議体名称 = 合議体名称;

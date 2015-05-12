@@ -31,7 +31,9 @@ public class Gogitai {
         requireNonNull(割当委員List, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("割当委員List", getClass().getName().toString()));
 
         if (!is割当委員の合議体情報が一致(合議体情報, 割当委員List)) {
-            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("割当委員Listが持つ合議体情報", "すべて同じ").evaluate());
+//            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("割当委員Listが持つ合議体情報", "すべて同じ").evaluate());
+            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("割当委員Listが持つ合議体情報", "すべて同じ").getMessage());
+
         }
 
         this.合議体情報 = 合議体情報;

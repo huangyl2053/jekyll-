@@ -64,7 +64,9 @@ public enum NinteiShinseijiKubun implements IRStringConvertable {
                 return item;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する認定申請区分（申請時）").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する認定申請区分（申請時）").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する認定申請区分（申請時）").getMessage());
+
     }
 
     /**

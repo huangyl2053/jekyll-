@@ -55,6 +55,7 @@ public enum NinteichosaIraiKubun {
                 return code;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定調査依頼区分").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定調査依頼区分").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定調査依頼区分").getMessage());
     }
 }

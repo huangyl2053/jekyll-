@@ -14,13 +14,14 @@ import jp.co.ndensan.reams.db.dbe.entity.helper.KaigoJigyoshaEntityMock;
 import jp.co.ndensan.reams.db.dbe.business.helper.KojinTestHelper;
 import jp.co.ndensan.reams.db.dbe.business.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteichosaItakusakiTestHelper;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
-import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
-import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
-import jp.co.ndensan.reams.ur.urf.business.mapper.KaigoJigyoshaMapper;
-import jp.co.ndensan.reams.ur.urf.business.mapper.NinteiChosainMapper;
-import jp.co.ndensan.reams.ur.urz.model.IJusho;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.db.dbx.business.KaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.business.INinteiChosain;
+import jp.co.ndensan.reams.db.dbx.business.mapper.KaigoJigyoshaMapper;
+import jp.co.ndensan.reams.db.dbx.business.mapper.NinteiChosainMapper;
+import jp.co.ndensan.reams.ur.urz.business.IJusho;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -130,7 +131,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends DbeTestBase {
 
         @Test
         public void 引き渡した_個人の氏名_とtoNinteichosaIraiTaishoshaの結果は一致する() {
-            assertThat(sut.get氏名(), is(個人.get氏名().getName().value()));
+            assertThat(sut.get氏名(), is(個人.get名称().getName().value()));
         }
 
         @Test
@@ -145,7 +146,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends DbeTestBase {
 
         @Test
         public void 引き渡した_事業者情報の法人種別_とtoNinteichosaIraiTaishoshaの結果は一致する() {
-            assertThat(sut.get事業者情報().get法人種別(), is(介護事業者.get法人種別()));
+            assertThat(sut.get事業者情報().get法人等種別(), is(介護事業者.get法人等種別()));
         }
 
         @Test
@@ -161,7 +162,7 @@ public class NinteichosaIraiTaishoshaMapperTest extends DbeTestBase {
 
     private static IKojin createKojinMock(IName name, IJusho jusho) {
         IKojin kojin = mock(IKojin.class);
-        when(kojin.get氏名()).thenReturn(name);
+        when(kojin.get名称()).thenReturn(name);
         when(kojin.get住所()).thenReturn(jusho);
         return kojin;
     }

@@ -16,8 +16,8 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.business.IDoctor;
-import jp.co.ndensan.reams.ur.urz.business._Doctor;
+//import jp.co.ndensan.reams.ur.urz.business.IDoctor;
+//import jp.co.ndensan.reams.ur.urz.business._Doctor;
 //import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.model.IryokikanModel;
@@ -54,17 +54,16 @@ public class KaigoDoctorMock {
         return null;
     }
 
-    private static IDoctor createDoctor() {
-        //TODO KaigoDoctorコメントアウトされている
+//    private static IDoctor createDoctor() {
+    //TODO KaigoDoctorコメントアウトされている
 //        return new _Doctor(
 //                new RString("医師識別番号"),
 //                new AtenaMeisho(new RString("医師氏名")),
 //                new _IryoKikanCode(new RString("1234567890")),
 //                new Code(new RString("所属診療科")),
 //                new Code(new RString("医師区分")));
-        return null;
-    }
-
+//        return null;
+//    }
     private static IShujii createShujii() {
 //        return new Shujii(
 //                new LasdecCode(new RString("000001")),

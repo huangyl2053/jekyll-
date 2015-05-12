@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbe.realservice.helper.KaigoDoctorEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
-import jp.co.ndensan.reams.ur.urz.business.IDoctor;
+//import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import jp.co.ndensan.reams.ur.urz.realservice.IDoctorManager;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -198,8 +198,8 @@ public class KaigoDoctorManagerTest extends DbeTestBase {
 
     private static IDoctorManager createDoctorManager(int flg) {
         IDoctorManager manager = mock(IDoctorManager.class);
-        when(manager.save(any(IDoctor.class))).thenReturn(flg != 0);
-        when(manager.remove(any(IDoctor.class))).thenReturn(flg != 0);
+//        when(manager.save(any(IDoctor.class))).thenReturn(flg != 0);
+//        when(manager.remove(any(IDoctor.class))).thenReturn(flg != 0);
         return manager;
     }
 

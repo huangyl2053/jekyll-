@@ -5,11 +5,11 @@
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -59,11 +59,11 @@ public final class YokaigoNinteiShinseiTestHelper {
 
     public static DbT5001NinteiShinseiJohoEntity create認定申請情報Entity() {
         DbT5001NinteiShinseiJohoEntity entity = new DbT5001NinteiShinseiJohoEntity();
-        entity.setShinseishoKanriNo(申請書管理番号);
+        entity.setShinseishoKanriNo(申請書管理番号.value());
         entity.setShoriTimestamp(処理日時);
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
-        entity.setShishoCode(支所コード);
-        entity.setHihokenshaNo(介護被保険者番号);
+        entity.setShoKisaiHokenshaNo(証記載保険者番号.value());
+        entity.setShishoCode(支所コード.value());
+        entity.setHihokenshaNo(介護被保険者番号.value());
         entity.setShikibetsuCode(識別コード);
         entity.setNinteiShinseiYMD(認定申請年月日);
         entity.setNinteiShinseiEdabanCode(枝番コード);

@@ -14,7 +14,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 //import jp.co.ndensan.reams.ur.urz.business.IDoctors;
 //import jp.co.ndensan.reams.ur.urz.business.IIryoKikan;
 //import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
-//import jp.co.ndensan.reams.ur.urz.business.IKoza;
+//import jp.co.ndensan.reams.ur.urc.business.IKoza;
 //import jp.co.ndensan.reams.ur.urz.business._Doctor;
 //import jp.co.ndensan.reams.ur.urz.business._Doctors;
 //import jp.co.ndensan.reams.ur.urz.business._IryoKikan;

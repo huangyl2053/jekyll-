@@ -7,10 +7,11 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
-import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.business.INinteiChosain;
+import jp.co.ndensan.reams.db.dbx.business.KaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -41,7 +42,7 @@ public class NinteichosaIraiTaishoshaTest extends TestBase {
         private RString 氏名;
         private RString 住所;
         private NinteichosaItakusaki 認定調査委託先;
-        private IKaigoJigyosha 事業者情報;
+        private KaigoJigyosha 事業者情報;
         private INinteiChosain 認定調査員情報;
 
         @Override
@@ -56,7 +57,7 @@ public class NinteichosaIraiTaishoshaTest extends TestBase {
             氏名 = new RString("あああ");
             住所 = new RString("長野市AAAAAAAA");
             認定調査委託先 = mock(NinteichosaItakusaki.class);
-            事業者情報 = mock(IKaigoJigyosha.class);
+            事業者情報 = mock(KaigoJigyosha.class);
             認定調査員情報 = mock(INinteiChosain.class);
         }
 

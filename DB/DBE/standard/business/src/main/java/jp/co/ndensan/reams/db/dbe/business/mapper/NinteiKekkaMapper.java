@@ -19,8 +19,11 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShisetsuNyushoKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TsuchiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
-import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5002NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -87,10 +90,10 @@ public final class NinteiKekkaMapper {
             return null;
         }
         return new NinteiResult(
-                entity.getShinseishoKanriNo(),
+                new ShinseishoKanriNo(entity.getShinseishoKanriNo()),
                 entity.getShoriTimestamp(),
-                entity.getShoKisaiHokenshaNo(),
-                entity.getHihokenshaNo(),
+                new ShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo()),
+                new HihokenshaNo(entity.getHihokenshaNo()),
                 entity.getYoukaigodoNinteiYMD(),
                 create要介護状態(entity),
                 new YokaigoJotaizoRei(entity.getYokaigoJotaizoReiCode(), RString.EMPTY, RString.EMPTY),
@@ -164,10 +167,10 @@ public final class NinteiKekkaMapper {
      */
     public static DbT5002NinteiKekkaJohoEntity toDbT5002NinteiKekkaJohoEntity(NinteiResult ninteiResult) {
         DbT5002NinteiKekkaJohoEntity entity = new DbT5002NinteiKekkaJohoEntity();
-        entity.setShinseishoKanriNo(ninteiResult.get申請書管理番号());
+        entity.setShinseishoKanriNo(ninteiResult.get申請書管理番号().value());
         entity.setShoriTimestamp(ninteiResult.get処理日時());
-        entity.setShoKisaiHokenshaNo(ninteiResult.get証記載保険者番号());
-        entity.setHihokenshaNo(ninteiResult.get被保険者番号());
+        entity.setShoKisaiHokenshaNo(ninteiResult.get証記載保険者番号().value());
+        entity.setHihokenshaNo(ninteiResult.get被保険者番号().value());
         entity.setYoukaigodoNinteiYMD(ninteiResult.get要介護度認定年月日());
         entity.setYoukaigoJotaiKubunCode(ninteiResult.get要介護状態().get要介護状態区分().getCode());
         entity.setNinteiYukoKikan(ninteiResult.get要介護状態().get認定有効期間().get有効期間月数().value().intValue());
@@ -180,7 +183,8 @@ public final class NinteiKekkaMapper {
         entity.setIchijiHnateiKekkaHenkoRiyu(ninteiResult.get認定審査会意見().get一次判定結果変更理由());
         entity.setYokaigoJotaizoReiCode(ninteiResult.get要介護状態像例().getCode());
         entity.setNinteishinsakaiIkenShurui(ninteiResult.get認定審査会意見().get審査会意見種類().getCode());
-        entity.setKaigoServiceShurui01(ninteiResult.get介護サービス種類０１().getサービス種類コード());
+        //TODO n8235船山洋介　IKaigoServiceShuruiがエラーのため、コメントアウト。修正されたらコメントを外す。
+//        entity.setKaigoServiceShurui01(ninteiResult.get介護サービス種類０１().getサービス種類コード());
         entity.setNinteiKekkaIdoJiyu(ninteiResult.get認定結果異動().get認定結果異動事由区分().getCode());
         entity.setNinteiKekkaIdoYMD(ninteiResult.get認定結果異動().get認定結果異動年月日());
         entity.setNinteiTorikeshiRiyu(ninteiResult.get認定取消().get認定取消理由());

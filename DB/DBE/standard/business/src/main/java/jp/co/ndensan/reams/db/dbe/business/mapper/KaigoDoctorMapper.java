@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.mapper;
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoDoctorEntity;
-import jp.co.ndensan.reams.ur.urz.business.mapper.DoctorMapper;
+//import jp.co.ndensan.reams.ur.urz.business.mapper.DoctorMapper;
 
 /**
  * 介護医師情報を変換するMapperクラスです。
@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.business.mapper.DoctorMapper;
  * @author N8156 宮本 康
  */
 public final class KaigoDoctorMapper {
+    //TODO　介護医師はなくなるため、暫定的にコメントアウト。実装作業にはいった差異にこのクラスを削除する。
 
     /**
      * インスタンス化防止のためのプライベートコンストラクタです。

@@ -32,7 +32,8 @@ public class YokaigoNinteiKijunTime {
         requireNonNull(要介護認定等基準時間, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("要介護認定等基準時間", getClass().getName()));
 
         for (int 得点 : 要介護認定等基準時間.values()) {
-            check0未満(得点, UrErrorMessages.項目に対する制約.getMessage().replace("要介護認定等基準時間", "全て0以上").evaluate());
+//            check0未満(得点, UrErrorMessages.項目に対する制約.getMessage().replace("要介護認定等基準時間", "全て0以上").evaluate());
+            check0未満(得点, UrErrorMessages.項目に対する制約.getMessage().replace("要介護認定等基準時間", "全て0以上").getMessage());
         }
 
         this.要介護認定等基準時間 = new EnumMap<>(要介護認定等基準時間);

@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 //import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 //import jp.co.ndensan.reams.ur.urz.business.IDoctors;
 //import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
-//import jp.co.ndensan.reams.ur.urz.business.IKoza;
+//import jp.co.ndensan.reams.ur.urc.business.IKoza;
 //import jp.co.ndensan.reams.ur.urz.business._Doctor;
 //import jp.co.ndensan.reams.ur.urz.business._Doctors;
 //import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;

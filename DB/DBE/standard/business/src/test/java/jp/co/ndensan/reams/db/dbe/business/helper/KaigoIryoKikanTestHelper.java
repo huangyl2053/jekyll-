@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.ur.urz.business.IKoza;
+import jp.co.ndensan.reams.ur.urc.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.IryoKikanIdoJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaiinKubun;

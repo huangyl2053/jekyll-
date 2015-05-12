@@ -88,7 +88,8 @@ public class NinteichosaTokkijikoList implements Iterable<NinteichosaTokkijiko> 
                 return 認定調査特記事項;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定調査特記事項").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定調査特記事項").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定調査特記事項").getMessage());
     }
 
     private boolean is特記事項番号と依頼履歴番号が一致(NinteichosaTokkijiko 認定調査特記事項, NinteichosaIraiRirekiNo 依頼履歴番号,
