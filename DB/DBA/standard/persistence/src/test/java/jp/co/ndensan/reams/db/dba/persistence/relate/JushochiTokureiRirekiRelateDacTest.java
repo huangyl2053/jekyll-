@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1004ShisetsuNyutaishoEntity;
-//import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
-//import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1004ShisetsuNyutaishoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1001HihokenshaDaichoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT1004ShisetsuNyutaishoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT1001HihokenshaDaichoDac;
@@ -26,7 +26,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -35,8 +34,6 @@ import org.junit.runner.RunWith;
  *
  * @author n8178 城間篤人
  */
-//TODO　 n8223 テスト無視
-@Ignore
 @RunWith(Enclosed.class)
 public class JushochiTokureiRirekiRelateDacTest extends DbaTestDacBase {
 
@@ -65,33 +62,33 @@ public class JushochiTokureiRirekiRelateDacTest extends DbaTestDacBase {
         nyutaishoDac = InstanceProvider.create(DbT1004ShisetsuNyutaishoDac.class);
 
 // TODO: n8223 朴　DBZのbuildが終わり次第に、コメントアウトする
-//        hihoDaicho1 = createHihoDaichoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214010000")));
-//        hihoDaichoDac.insert(hihoDaicho1.getEntity());
-//        hihoDaicho2 = createHihoDaichoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214020000")));
-//        hihoDaichoDac.insert(hihoDaicho2.getEntity());
-//        hihoDaicho3 = createHihoDaichoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214030000")));
-//        hihoDaichoDac.insert(hihoDaicho3.getEntity());
-//        hihoDaicho4 = createHihoDaichoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214040000")));
-//        hihoDaichoDac.insert(hihoDaicho4.getEntity());
-//        nyutaisho1 = createNyutaishoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214010000")));
+        hihoDaicho1 = createHihoDaichoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214010000")));
+        hihoDaichoDac.insert(hihoDaicho1.getEntity());
+        hihoDaicho2 = createHihoDaichoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214020000")));
+        hihoDaichoDac.insert(hihoDaicho2.getEntity());
+        hihoDaicho3 = createHihoDaichoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214030000")));
+        hihoDaichoDac.insert(hihoDaicho3.getEntity());
+        hihoDaicho4 = createHihoDaichoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214040000")));
+        hihoDaichoDac.insert(hihoDaicho4.getEntity());
+        nyutaisho1 = createNyutaishoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214010000")));
         nyutaishoDac.insert(nyutaisho1.getEntity());
-//        nyutaisho2 = createNyutaishoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214020000")));
+        nyutaisho2 = createNyutaishoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214020000")));
         nyutaishoDac.insert(nyutaisho2.getEntity());
-//        nyutaisho3 = createNyutaishoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214030000")));
+        nyutaisho3 = createNyutaishoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214030000")));
         nyutaishoDac.insert(nyutaisho3.getEntity());
-//        nyutaisho4 = createNyutaishoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214040000")));
+        nyutaisho4 = createNyutaishoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214040000")));
         nyutaishoDac.insert(nyutaisho4.getEntity());
 
-//        hihoDaicho3 = changedHihoDaichoModel(hihoDaicho3, new ShikibetsuCode("111112222233303"));
-//        hihoDaicho4 = deletedHihoDaichoModel(hihoDaicho4);
-//        hihoDaicho5 = createHihoDaichoModel(EntityDataState.Added, ShoriTimestamp.of(new YMDHMS("20141214050000")));
+        hihoDaicho3 = changedHihoDaichoModel(hihoDaicho3, new ShikibetsuCode("111112222233303"));
+        hihoDaicho4 = deletedHihoDaichoModel(hihoDaicho4);
+        hihoDaicho5 = createHihoDaichoModel(EntityDataState.Added, ShoriTimestamp.of(new YMDHMS("20141214050000")));
         nyutaisho3 = changedNyutaishoModel(nyutaisho3, new JigyoshaNo("1111133303"));
         nyutaisho4 = DeletedNyutaishoModel(nyutaisho4);
-//        nyutaisho5 = createNyutaishoModel(EntityDataState.Added, ShoriTimestamp.of(new YMDHMS("20141214050000")));
+        nyutaisho5 = createNyutaishoModel(EntityDataState.Added, ShoriTimestamp.of(new YMDHMS("20141214050000")));
 
-//        target = new JushochiTokureiModel(
-//                Lists.newArrayList(hihoDaicho1, hihoDaicho2, hihoDaicho3, hihoDaicho4, hihoDaicho5),
-//                Lists.newArrayList(nyutaisho1, nyutaisho2, nyutaisho3, nyutaisho4, nyutaisho5));
+        target = new JushochiTokureiModel(
+                Lists.newArrayList(hihoDaicho1, hihoDaicho2, hihoDaicho3, hihoDaicho4, hihoDaicho5),
+                Lists.newArrayList(nyutaisho1, nyutaisho2, nyutaisho3, nyutaisho4, nyutaisho5));
         result = sut.update(target);
     }
 
@@ -123,24 +120,26 @@ public class JushochiTokureiRirekiRelateDacTest extends DbaTestDacBase {
             assertThat(resultEntity.getShoriTimestamp(), is(hihoDaicho5.get処理日時()));
         }
 
-//        @Test
-//        public void update対象の施設入退所Modelについて_更新後のデータがselectで取得できる() {
-//            DbT1004ShisetsuNyutaishoEntity resultEntity = nyutaishoDac.selectByKey(nyutaisho3.get市町村コード(),
-//                    nyutaisho3.get識別コード(), nyutaisho3.get処理日時());
-//            assertThat(resultEntity.getNyushoShisetsuCode(), is(nyutaisho3.get入所施設コード()));
-//        }
-//        @Test
-//        public void delete対象の施設入退所Modelについて_selectで取得できない() {
-//            DbT1004ShisetsuNyutaishoEntity resultEntity = nyutaishoDac.selectByKey(nyutaisho4.get市町村コード(),
-//                    nyutaisho4.get識別コード(), nyutaisho4.get処理日時());
-//            assertThat(resultEntity, is(nullValue()));
-//        }
-//        @Test
-//        public void insert対象の施設入退所Modelについて_selectで取得できる() {
-//            DbT1004ShisetsuNyutaishoEntity resultEntity = nyutaishoDac.selectByKey(nyutaisho5.get市町村コード(),
-//                    nyutaisho5.get識別コード(), nyutaisho5.get処理日時());
-//            assertThat(resultEntity.getShoriTimestamp(), is(nyutaisho5.get処理日時()));
-//        }
+        @Test
+        public void update対象の施設入退所Modelについて_更新後のデータがselectで取得できる() {
+            DbT1004ShisetsuNyutaishoEntity resultEntity = nyutaishoDac.selectByKey(nyutaisho3.get市町村コード(),
+                    nyutaisho3.get識別コード(), nyutaisho3.get処理日時());
+            assertThat(resultEntity.getNyushoShisetsuCode(), is(nyutaisho3.get入所施設コード()));
+        }
+
+        @Test
+        public void delete対象の施設入退所Modelについて_selectで取得できない() {
+            DbT1004ShisetsuNyutaishoEntity resultEntity = nyutaishoDac.selectByKey(nyutaisho4.get市町村コード(),
+                    nyutaisho4.get識別コード(), nyutaisho4.get処理日時());
+            assertThat(resultEntity, is(nullValue()));
+        }
+
+        @Test
+        public void insert対象の施設入退所Modelについて_selectで取得できる() {
+            DbT1004ShisetsuNyutaishoEntity resultEntity = nyutaishoDac.selectByKey(nyutaisho5.get市町村コード(),
+                    nyutaisho5.get識別コード(), nyutaisho5.get処理日時());
+            assertThat(resultEntity.getShoriTimestamp(), is(nyutaisho5.get処理日時()));
+        }
     }
 
     private static JushochiTokureiModel createJutokuModel() {
@@ -149,30 +148,33 @@ public class JushochiTokureiRirekiRelateDacTest extends DbaTestDacBase {
     }
 
 // TODO: n8223 朴　DBZのbuildが終わり次第に、コメントアウトする
-//    private static HihokenshaDaichoModel createHihoDaichoModel(EntityDataState status, ShoriTimestamp timestamp) {
-//        HihokenshaDaichoModel creatingModel = new HihokenshaDaichoModel(DbT1001HihokenshaDaichoEntityGenerator.
-//                createDbT1001HihokenshaDaichoEntity());
-//        creatingModel.getEntity().setState(status);
-//        creatingModel.set処理日時(timestamp);
-//        return creatingModel;
-//    }
-//
-//    private static ShisetsuNyutaishoModel createNyutaishoModel(EntityDataState status, ShoriTimestamp timestamp) {
-//        ShisetsuNyutaishoModel creatingModel = new ShisetsuNyutaishoModel(DbT1004ShisetsuNyutaishoEntityGenerator.
-//                createDbT1004ShisetsuNyutaishoEntity());
-//        creatingModel.getEntity().setState(status);
-//        creatingModel.set処理日時(timestamp.getColumnValue());
-//        return creatingModel;
-//    }
-//    private static HihokenshaDaichoModel changedHihoDaichoModel(HihokenshaDaichoModel targetModel, ShikibetsuCode shikibetsuCode) {
-//        targetModel.getEntity().setState(EntityDataState.Modified);
-//        targetModel.set識別コード(shikibetsuCode);
-//        return targetModel;
-//    }
-//    private static HihokenshaDaichoModel deletedHihoDaichoModel(HihokenshaDaichoModel targetModel) {
-//        targetModel.getEntity().setState(EntityDataState.Deleted);
-//        return targetModel;
-//    }
+    private static HihokenshaDaichoModel createHihoDaichoModel(EntityDataState status, ShoriTimestamp timestamp) {
+        HihokenshaDaichoModel creatingModel = new HihokenshaDaichoModel(DbT1001HihokenshaDaichoEntityGenerator.
+                createDbT1001HihokenshaDaichoEntity());
+        creatingModel.getEntity().setState(status);
+        creatingModel.set処理日時(timestamp);
+        return creatingModel;
+    }
+
+    private static ShisetsuNyutaishoModel createNyutaishoModel(EntityDataState status, ShoriTimestamp timestamp) {
+        ShisetsuNyutaishoModel creatingModel = new ShisetsuNyutaishoModel(DbT1004ShisetsuNyutaishoEntityGenerator.
+                createDbT1004ShisetsuNyutaishoEntity());
+        creatingModel.getEntity().setState(status);
+        creatingModel.set処理日時(timestamp.getColumnValue());
+        return creatingModel;
+    }
+
+    private static HihokenshaDaichoModel changedHihoDaichoModel(HihokenshaDaichoModel targetModel, ShikibetsuCode shikibetsuCode) {
+        targetModel.getEntity().setState(EntityDataState.Modified);
+        targetModel.set識別コード(shikibetsuCode);
+        return targetModel;
+    }
+
+    private static HihokenshaDaichoModel deletedHihoDaichoModel(HihokenshaDaichoModel targetModel) {
+        targetModel.getEntity().setState(EntityDataState.Deleted);
+        return targetModel;
+    }
+
     private static ShisetsuNyutaishoModel changedNyutaishoModel(ShisetsuNyutaishoModel targetModel, JigyoshaNo jigyoshaNo) {
         targetModel.getEntity().setState(EntityDataState.Modified);
         targetModel.set入所施設コード(jigyoshaNo.getColumnValue());

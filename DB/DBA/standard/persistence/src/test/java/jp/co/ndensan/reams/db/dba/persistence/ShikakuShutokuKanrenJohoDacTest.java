@@ -17,8 +17,6 @@ import org.junit.runner.RunWith;
  *
  * @author n8178 城間篤人
  */
-//TODO　 n8223 テスト無視
-@Ignore
 @RunWith(Enclosed.class)
 public class ShikakuShutokuKanrenJohoDacTest {
 
