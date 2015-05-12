@@ -34,5 +34,107 @@
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>jp.co.ndensan.reams.aa.aax</groupId>
+            <artifactId>AaxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ac.acx</groupId>
+            <artifactId>AcxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ad.adx</groupId>
+            <artifactId>AdxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.af.afx</groupId>
+            <artifactId>AfxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ar.arx</groupId>
+            <artifactId>ArxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ba.bax</groupId>
+            <artifactId>BaxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.bb.bbx</groupId>
+            <artifactId>BbxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.bc.bcx</groupId>
+            <artifactId>BcxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jp.co.ndensan.reams.da.dax</groupId>
+            <artifactId>DaxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.dc.dcx</groupId>
+            <artifactId>DcxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jp.co.ndensan.reams.fb.fbx</groupId>
+            <artifactId>FbxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.fc.fcx</groupId>
+            <artifactId>FcxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.fd.fdx</groupId>
+            <artifactId>FdxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ib.ibx</groupId>
+            <artifactId>IbxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.uc.ucx</groupId>
+            <artifactId>UcxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+            <artifactId>UexModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
+            <artifactId>UxxModel</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+        </dependency>
+
+
     </dependencies>
 </project>

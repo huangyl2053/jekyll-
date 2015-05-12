@@ -30,4 +30,5 @@
             <url>http://zrtechwiki.ndensan.co.jp/mvn/repo/</url>
         </repository>
     </repositories>
+
 </project>

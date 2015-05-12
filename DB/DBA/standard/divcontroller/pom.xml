@@ -390,7 +390,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxDivController</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>0.1.0-SNAPSHOT</version>
             <classifier>classes</classifier>
         </dependency>
 
@@ -398,19 +398,19 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdEntity</artifactId>
-            <version>1.2-release-staging-SNAPSHOT</version>
+            <version>1.0.0</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdModel</artifactId>
-            <version>1.2-release-staging-SNAPSHOT</version>
+            <version>1.0.0</version>
             <type>jar</type>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzModel</artifactId>
-            <version>1.3-densan-SNAPSHOT</version>
+            <version>1.0.0</version>
             <type>jar</type>
         </dependency>
     </dependencies>

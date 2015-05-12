@@ -17,7 +17,8 @@ import jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoM
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
+//import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IKojinFinder;
 import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;

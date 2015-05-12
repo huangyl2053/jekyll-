@@ -40,16 +40,16 @@ public class JushochiTokureiRirekiRelateDac {
         for (HihokenshaDaichoModel hihoDaicho : model.getHihoDaichoData()) {
             switch (hihoDaicho.getState()) {
 //TODO: n8223 朴　DBZのbuildが終わり次第、エラー内容を対応。
-//                case Added:
-//                    saveNum += hihoDaichoDac.insert(hihoDaicho.getEntity());
-//                    break;
-//                case Modified:
-//                    saveNum += hihoDaichoDac.update(hihoDaicho.getEntity());
-//                    break;
-//                case Deleted:
-//                    saveNum += hihoDaichoDac.delete(hihoDaicho.getEntity());
-//                    break;
-//                case Unchanged:
+                case Added:
+                    saveNum += hihoDaichoDac.insert(hihoDaicho.getEntity());
+                    break;
+                case Modified:
+                    saveNum += hihoDaichoDac.update(hihoDaicho.getEntity());
+                    break;
+                case Deleted:
+                    saveNum += hihoDaichoDac.delete(hihoDaicho.getEntity());
+                    break;
+                case Unchanged:
                 default:
                     break;
             }
@@ -58,15 +58,15 @@ public class JushochiTokureiRirekiRelateDac {
         for (ShisetsuNyutaishoModel nyutaishoModel : model.getShisetsuNyutaishoData()) {
             switch (nyutaishoModel.getState()) {
 //TODO: n8223 朴　DBZのbuildが終わり次第に、コメントアウトする。
-//                case Added:
-//                    saveNum += nyutaishoDac.insert(nyutaishoModel.getEntity());
-//                    break;
-//                case Modified:
-//                    saveNum += nyutaishoDac.update(nyutaishoModel.getEntity());
-//                    break;
-//                case Deleted:
-//                    saveNum += nyutaishoDac.delete(nyutaishoModel.getEntity());
-//                    break;
+                case Added:
+                    saveNum += nyutaishoDac.insert(nyutaishoModel.getEntity());
+                    break;
+                case Modified:
+                    saveNum += nyutaishoDac.update(nyutaishoModel.getEntity());
+                    break;
+                case Deleted:
+                    saveNum += nyutaishoDac.delete(nyutaishoModel.getEntity());
+                    break;
                 default:
                     break;
             }

@@ -50,5 +50,13 @@
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzEntity</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>
