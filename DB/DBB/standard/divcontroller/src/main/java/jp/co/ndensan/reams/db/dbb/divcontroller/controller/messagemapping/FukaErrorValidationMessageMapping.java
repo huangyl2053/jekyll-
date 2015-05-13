@@ -19,7 +19,9 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
  */
 public enum FukaErrorValidationMessageMapping implements IValidationMessageMapping {
 
-    エラー処理対象が未処理でない((IValidationMessage) InternalReportValidationMessage.更正対象が未処理状態ではないため実行不可.getMessage(), "dgFukaErrorList");
+//    エラー処理対象が未処理でない((IValidationMessage) InternalReportValidationMessage.更正対象が未処理状態ではないため実行不可.getMessage(), "dgFukaErrorList");
+    //更正対象が未処理状態ではないため実行不可→修正対象が未処理状態ではないため実行不可 へ変更
+    エラー処理対象が未処理でない((IValidationMessage) InternalReportValidationMessage.修正対象が未処理状態ではないため実行不可.getMessage(), "dgFukaErrorList");
 
     private final IValidationMessage message;
     private final String fieldName;

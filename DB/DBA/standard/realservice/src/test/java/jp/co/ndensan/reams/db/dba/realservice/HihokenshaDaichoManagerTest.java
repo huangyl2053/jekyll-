@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dba.realservice;
 
-import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoList;
+//TODO n8235船山洋介 パッケージhihokenshadaicho が無く、未使用のため、コメントアウト
+//import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;

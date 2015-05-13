@@ -98,7 +98,10 @@ public class FukaErrorReportView {
         FukaErrorInternalReportItemList reportItem = FukaErrorGridMapper.toFukaErrorReportItemList(div.getDgFukaErrorList().getDataSource());
         IInternalReport internalReport = new FukaErrorInternalReport(reportCommon, reportItem);
 
-        IInternalReportCsvConverter converter = InternalReportConverterFactory.createCsvConvertor(サブ業務コード);
+//        IInternalReportCsvConverter converter = InternalReportConverterFactory.createCsvConvertor(サブ業務コード);
+        //createCsvConvertor の引数がなくなったため、修正
+        IInternalReportCsvConverter converter = InternalReportConverterFactory.createCsvConvertor();
+
         byte[] csvByteData = converter.convertCsvByteData(internalReport);
 
         response.writeData(csvByteData);
