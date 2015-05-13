@@ -491,13 +491,13 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         }
 
         private ShikakuShutoku createShikakuShutoku() {
-//            this.kaigoShikakuのメソッドがなくなっているため、コメントアウト
+//            this.kaigoShikakuのメソッドがなくなっているため、コメントアウトし代わりに値をセット
 //            ShikakuShutokuJiyu cause = toShikakuShutokuJiyu(this.kaigoShikaku.get資格取得事由().getCode().value());
 //            FlexibleDate noticeDate = toFlexibleDate(this.kaigoShikaku.get資格取得届出年月日());
 //            FlexibleDate actionDate = toFlexibleDate(this.kaigoShikaku.get資格取得年月日());
-            ShikakuShutokuJiyu cause = null;
-            FlexibleDate noticeDate = null;
-            FlexibleDate actionDate = null;
+            ShikakuShutokuJiyu cause = ShikakuShutokuJiyu.その他;
+            FlexibleDate noticeDate = FlexibleDate.MIN;
+            FlexibleDate actionDate = FlexibleDate.MAX;
             return new ShikakuShutoku(cause, noticeDate, actionDate);
         }
 
@@ -506,13 +506,13 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         }
 
         private ShikakuSoshitsu createShikakuSoshitsu() {
-//            this.kaigoShikakuのメソッドがなくなっているため、コメントアウト
+//            this.kaigoShikakuのメソッドがなくなっているため、コメントアウト代わりに値をセット
 //            ShikakuSoshitsuJiyu cause = toShikakuSoshitsuJiyu(this.kaigoShikaku.get資格喪失事由().getCode().value());
 //            FlexibleDate noticeDate = toFlexibleDate(this.kaigoShikaku.get資格喪失届出年月日());
 //            FlexibleDate actionDate = toFlexibleDate(this.kaigoShikaku.get資格喪失年月日());
-            ShikakuSoshitsuJiyu cause = null;
-            FlexibleDate noticeDate = null;
-            FlexibleDate actionDate = null;
+            ShikakuSoshitsuJiyu cause = ShikakuSoshitsuJiyu.その他;
+            FlexibleDate noticeDate = FlexibleDate.MIN;
+            FlexibleDate actionDate = FlexibleDate.MAX;
             return new ShikakuSoshitsu(cause, noticeDate, actionDate);
         }
 

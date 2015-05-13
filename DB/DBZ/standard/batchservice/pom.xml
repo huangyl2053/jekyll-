@@ -23,5 +23,11 @@
             <artifactId>DbzEntity</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.uz</groupId>
+            <artifactId>framework</artifactId>
+            <version>1.0.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

@@ -116,6 +116,7 @@ public class DateOfBirthEditorA4BaseTest {
 
         @Test
         public void 生年月日が1960年01月07日の場合_UmareMmに_1が設定される() {
+            model = createMockModel(dateOfBirthStr, Jinshu.外国人);
             sut = new DateOfBirthEditorA4Base(model);
             sut.set生年月日(target);
             assertThat(target.getUmareMm(), is(monthStr));
@@ -123,6 +124,7 @@ public class DateOfBirthEditorA4BaseTest {
 
         @Test
         public void 生年月日が1960年01月07日の場合_UmareDdに_7が設定される() {
+            model = createMockModel(dateOfBirthStr, Jinshu.外国人);
             sut = new DateOfBirthEditorA4Base(model);
             sut.set生年月日(target);
             assertThat(target.getUmareDd(), is(dayStr));

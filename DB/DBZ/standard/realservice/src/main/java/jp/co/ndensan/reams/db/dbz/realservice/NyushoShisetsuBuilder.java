@@ -91,7 +91,7 @@ class NyushoShisetsuBuilder {
 
         //TODO　n8235船山洋介 get識別コード()が無くなったため、コメントアウト。
 //        return jigyoshaFinder.get特定の事業者番号の介護事業者(施設コード.value()).get識別コード();
-        return null;
+        return new ShikibetsuCode("0000000001");
     }
 
     private ShikibetsuCode find法人識別コードFrom除外住所地特例対象施設(ShisetsuType 施設種類, ShisetsuCode 施設コード) {

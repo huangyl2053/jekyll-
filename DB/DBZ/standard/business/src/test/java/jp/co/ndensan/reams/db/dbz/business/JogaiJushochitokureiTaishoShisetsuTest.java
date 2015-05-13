@@ -51,7 +51,9 @@ public class JogaiJushochitokureiTaishoShisetsuTest extends DbzTestBase {
     @BeforeClass
     public static void setUp() {
         施設種類 = ShisetsuType.介護保険施設;
-        施設コード = mock(ShisetsuCode.class);
+        //ShisetsuCodeがfinalのため、コメントアウトし、施設コードのインスタンスを生成
+//        施設コード = mock(ShisetsuCode.class);
+        施設コード = new ShisetsuCode(new RString("施設コード"));
         処理日時 = mock(RDateTime.class);
         有効期間 = create有効期間();
         識別コード = mock(ShikibetsuCode.class);

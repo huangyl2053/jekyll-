@@ -21,6 +21,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzRealService</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urf</groupId>
@@ -30,11 +31,13 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzDivController</artifactId>
+            <version>1.0.0</version>
             <classifier>classes</classifier>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.ura</groupId>
             <artifactId>UraDivController</artifactId>
+            <version>1.0.0</version>
             <classifier>classes</classifier>
         </dependency>
         <dependency>
