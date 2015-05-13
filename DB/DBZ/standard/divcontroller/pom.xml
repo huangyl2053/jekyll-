@@ -21,7 +21,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzRealService</artifactId>
-            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urf</groupId>
@@ -31,13 +30,11 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzDivController</artifactId>
-            <version>1.0.0</version>
             <classifier>classes</classifier>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.ura</groupId>
             <artifactId>UraDivController</artifactId>
-            <version>1.0.0</version>
             <classifier>classes</classifier>
         </dependency>
         <dependency>
@@ -49,7 +46,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdPersistence</artifactId>
-            <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -74,6 +70,11 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>DbzBusiness</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>DbzModel</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
@@ -94,8 +95,12 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxDivController</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
             <classifier>classes</classifier>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxRealService</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

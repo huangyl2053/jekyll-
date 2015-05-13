@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJoho;
 import static jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJoho.*;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
-import jp.co.ndensan.reams.uz.uza.util.db.DbAccessor;
+import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 
@@ -29,24 +29,24 @@ public class ShujiiIryoKikanDac implements IShuJiiIryoKikanDac {
 
     @Override
     public int insert(DbT7011ShujiiIryoKikanJohoEntity entity) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(entity).execute();
     }
 
     @Override
     public int update(DbT7011ShujiiIryoKikanJohoEntity entity) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.update(entity).execute();
     }
 
     @Override
     public int delete(DbT7011ShujiiIryoKikanJohoEntity entity) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
     }
 
     private int getMatchRowCount(DbT7011ShujiiIryoKikanJohoEntity entity) {
-        DbAccessor accessor = new DbAccessor(session);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT7011ShujiiIryoKikanJoho.class).
                 where(and(eq(shichosonCode, entity.getShichosonCode()),

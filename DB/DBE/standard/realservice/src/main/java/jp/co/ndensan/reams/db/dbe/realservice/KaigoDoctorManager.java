@@ -18,8 +18,8 @@ import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoDoctorEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.KaigoDoctorDac;
 //import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 //import jp.co.ndensan.reams.ur.urz.business.mapper.DoctorMapper;
-import jp.co.ndensan.reams.ur.urz.realservice.DoctorManagerFactory;
-import jp.co.ndensan.reams.ur.urz.realservice.IDoctorManager;
+//import jp.co.ndensan.reams.ur.urz.realservice.DoctorManagerFactory;
+//import jp.co.ndensan.reams.ur.urz.realservice.IDoctorManager;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -33,7 +33,7 @@ public class KaigoDoctorManager implements IKaigoDoctorManager {
     //TODO　介護医師はなくなるため、暫定的にコメントアウト。実装作業にはいった差異にこのクラスを削除する。
 
     private final KaigoDoctorDac kaigoDoctorDac;
-    private final IDoctorManager doctorManager;
+//    private final IDoctorManager doctorManager;
     private final IShujiiManager shujiiManager;
     private final IKaigoIryoKikanFinder kaigoIryoKikanFinder;
 
@@ -42,7 +42,7 @@ public class KaigoDoctorManager implements IKaigoDoctorManager {
      */
     public KaigoDoctorManager() {
         kaigoDoctorDac = InstanceProvider.create(KaigoDoctorDac.class);
-        doctorManager = DoctorManagerFactory.createInstance();
+//        doctorManager = DoctorManagerFactory.createInstance();
         shujiiManager = new ShujiiManager();
         kaigoIryoKikanFinder = new KaigoIryoKikanFinder();
     }
@@ -57,11 +57,11 @@ public class KaigoDoctorManager implements IKaigoDoctorManager {
      */
     KaigoDoctorManager(
             KaigoDoctorDac kaigoDoctorDac,
-            IDoctorManager doctorManager,
+            //            IDoctorManager doctorManager,
             IShujiiManager shujiiManager,
             IKaigoIryoKikanFinder kaigoIryoKikanFinder) {
         this.kaigoDoctorDac = kaigoDoctorDac;
-        this.doctorManager = doctorManager;
+//        this.doctorManager = doctorManager;
         this.shujiiManager = shujiiManager;
         this.kaigoIryoKikanFinder = kaigoIryoKikanFinder;
     }

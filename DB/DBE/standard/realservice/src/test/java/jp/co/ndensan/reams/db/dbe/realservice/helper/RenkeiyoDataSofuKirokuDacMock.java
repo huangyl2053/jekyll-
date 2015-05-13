@@ -150,7 +150,7 @@ public class RenkeiyoDataSofuKirokuDacMock implements IRenkeiyoDataSofuKirokuDac
         return 0;
     }
 
-    @Override
+//    @Override
     public int insert(DbT5022RenkeiyoDataSofuKirokuEntity entity) {
         if (entity.getShinseishoKanriNo().getColumnValue().equals(登録可能な申請書管理番号)) {
             return 1;
@@ -158,7 +158,7 @@ public class RenkeiyoDataSofuKirokuDacMock implements IRenkeiyoDataSofuKirokuDac
         return 0;
     }
 
-    @Override
+//    @Override
     public int update(DbT5022RenkeiyoDataSofuKirokuEntity entity) {
         if (entity.getShinseishoKanriNo().getColumnValue().equals(登録可能な申請書管理番号)) {
             return 1;
