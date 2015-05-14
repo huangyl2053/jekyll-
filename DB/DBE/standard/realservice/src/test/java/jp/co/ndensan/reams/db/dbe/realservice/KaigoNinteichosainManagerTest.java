@@ -46,7 +46,7 @@ public class KaigoNinteichosainManagerTest extends TestBase {
         @Override
         protected void setUp() {
             市町村コード = new LasdecCode(new RString("000001"));
-            介護事業者番号 = new KaigoJigyoshaNo(new RString("002"));
+            介護事業者番号 = new KaigoJigyoshaNo(new RString("0000000002"));
             介護調査員番号 = new KaigoNinteichosainNo(new RString("003"));
         }
 
@@ -74,7 +74,7 @@ public class KaigoNinteichosainManagerTest extends TestBase {
         @Override
         protected void setUp() {
             市町村コード = new LasdecCode(new RString("000001"));
-            介護事業者番号 = new KaigoJigyoshaNo(new RString("002"));
+            介護事業者番号 = new KaigoJigyoshaNo(new RString("0000000002"));
             介護調査員番号 = new KaigoNinteichosainNo(new RString("003"));
             調査員の状況 = ChosainJokyo.有効;
         }
@@ -109,7 +109,7 @@ public class KaigoNinteichosainManagerTest extends TestBase {
         @Override
         protected void setUp() {
             市町村コード = new LasdecCode(new RString("000001"));
-            介護事業者番号 = new KaigoJigyoshaNo(new RString("002"));
+            介護事業者番号 = new KaigoJigyoshaNo(new RString("0000000002"));
         }
 
         @Test
@@ -136,7 +136,7 @@ public class KaigoNinteichosainManagerTest extends TestBase {
         @Override
         protected void setUp() {
             市町村コード = new LasdecCode(new RString("000001"));
-            介護事業者番号 = new KaigoJigyoshaNo(new RString("002"));
+            介護事業者番号 = new KaigoJigyoshaNo(new RString("0000000002"));
             調査員の状況 = ChosainJokyo.有効;
         }
 

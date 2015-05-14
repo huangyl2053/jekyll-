@@ -17,12 +17,10 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdDefinition</artifactId>
-            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzDefinition</artifactId>
-            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
@@ -31,6 +29,10 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.uz</groupId>
+            <artifactId>framework</artifactId>
         </dependency>
     </dependencies>
 </project>

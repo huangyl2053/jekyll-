@@ -48,9 +48,9 @@ public class ShujiiIkenshoSakuseiIraiMock {
                 FlexibleDate.MAX,
                 SakuseiryoSeikyuKubun.在宅継続,
                 new ShujiiIkenshoSakuseiTokusoku(
-                FlexibleDate.MIN,
-                IkenshoSakuseiTokusokuHoho.電話,
-                2,
-                new RString("意見書作成督促メモ"))));
+                        FlexibleDate.MIN,
+                        IkenshoSakuseiTokusokuHoho.電話,
+                        2,
+                        new RString("意見書作成督促メモ"))));
     }
 }

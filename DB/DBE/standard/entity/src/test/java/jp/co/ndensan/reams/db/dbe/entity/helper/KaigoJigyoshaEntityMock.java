@@ -24,7 +24,7 @@ public final class KaigoJigyoshaEntityMock {
 
     public static KaigoJigyoshaEntity getSpiedInstance() {
         return spy(new KaigoJigyoshaEntity(
-                new KaigoJigyoshaNo(new RString("123456")),
+                new KaigoJigyoshaNo(new RString("1234567890")),
                 new FlexibleDate("20130101"),
                 new FlexibleDate("20140101"),
                 new ShikibetsuCode(new RString("1234567")),

@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KaigoNinteichosainTestHelper {
 
     public static final LasdecCode 市町村コード = new LasdecCode(new RString("123456"));
-    public static final KaigoJigyoshaNo 介護事業者番号 = new KaigoJigyoshaNo(new RString("0002"));
+    public static final KaigoJigyoshaNo 介護事業者番号 = new KaigoJigyoshaNo(new RString("0000000001"));
     public static final RString 介護調査員番号 = new RString("0003");
     public static final JigyoshaNo 事業者番号 = new JigyoshaNo(new RString("2020300001"));
     public static final ChosainJokyo 調査員状況 = ChosainJokyo.有効;

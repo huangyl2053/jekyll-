@@ -39,9 +39,9 @@ public class IryoKikanKubun { //implements ICodeAssignedItem {
      * @param 略称 略称
      */
     public IryoKikanKubun(RString コード, RString 名称, RString 略称) {
-        requireNonNull(コード, UrSystemErrorMessages.値がnull.getReplacedMessage("コード", getClass().getName()));
-        requireNonNull(名称, UrSystemErrorMessages.値がnull.getReplacedMessage("名称", getClass().getName()));
-        requireNonNull(略称, UrSystemErrorMessages.値がnull.getReplacedMessage("略称", getClass().getName()));
+        requireNonNull(コード, UrSystemErrorMessages.値がnull.getReplacedMessage("コード：" + getClass().getName()));
+        requireNonNull(名称, UrSystemErrorMessages.値がnull.getReplacedMessage("名称：" + getClass().getName()));
+        requireNonNull(略称, UrSystemErrorMessages.値がnull.getReplacedMessage("略称：" + getClass().getName()));
 
         this.code = コード;
         this.name = 名称;

@@ -102,7 +102,7 @@ public class NinteichosaIraiCollectionTest extends DbeTestBase {
     }
 
     private static NinteichosaIrai create認定調査依頼情報(String 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
-        KaigoJigyoshaNo 認定調査委託先コード = new KaigoJigyoshaNo(new RString("000"));
+        KaigoJigyoshaNo 認定調査委託先コード = new KaigoJigyoshaNo(new RString("0000000001"));
         NinteichosainBangoCode 調査員番号コード = new NinteichosainBangoCode(new RString("001"));
         NinteichosaIrai ninteichosaIraiJoho = new NinteichosaIrai(create申請書管理番号(申請書管理番号),
                 認定調査依頼履歴番号, 認定調査委託先コード, 調査員番号コード, NinteichosaIraiKubun.初回, 0, new RDate(20140301), new RDate(20140331), new RDate(20140311), new RDate(20140311), MobileDataShutsuryoku.未出力, new RDate(20140331), NinteichosaTokusokuHoho.その他, 0, new RString("メモ"));

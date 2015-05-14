@@ -27,8 +27,8 @@ public class MockNinteichosaItakusakiJohoEntity {
     }
 
     public static DbT7010NinteichosaItakusakiJohoEntity getSpiedInstance() {
-        kaigojigyoshaNo = mock(KaigoJigyoshaNo.class);
-        jigyoshaNo = mock(JigyoshaNo.class);
+        kaigojigyoshaNo = KaigoJigyoshaNo.EMPTY;
+        jigyoshaNo = JigyoshaNo.EMPTY;
         kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("0000000001"));
         jigyoshaNo = new JigyoshaNo(new RString("2020300001"));
         DbT7010NinteichosaItakusakiJohoEntity ninteichosaItakusakiJohoEntity = new DbT7010NinteichosaItakusakiJohoEntity(

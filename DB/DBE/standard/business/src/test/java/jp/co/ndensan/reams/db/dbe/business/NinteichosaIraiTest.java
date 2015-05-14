@@ -35,7 +35,7 @@ public class NinteichosaIraiTest extends TestBase {
 
         private ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(new RString("0001"));
         private NinteichosaIraiRirekiNo 認定調査依頼履歴番号 = new NinteichosaIraiRirekiNo(1);
-        private KaigoJigyoshaNo 認定調査委託先コード = new KaigoJigyoshaNo(new RString("2001"));
+        private KaigoJigyoshaNo 認定調査委託先コード = new KaigoJigyoshaNo(new RString("0000000001"));
         private NinteichosainBangoCode 調査員番号コード = new NinteichosainBangoCode(new RString("3001"));
         private NinteichosaIraiKubun 認定調査依頼区分 = NinteichosaIraiKubun.初回;
         private int 認定調査回数 = 1;

@@ -50,13 +50,13 @@ public class KaigoNinteichosainDacTest extends DbeTestDacBase {
 
         @Test
         public void select_市町村コード_介護事業者番号_介護調査員番号_介護認定調査員情報が存在しない時_NULLを返す() {
-            assertThat(sut.select(createShichosonCode("999999"), createKaigoJigyoshaNo("99999"), createKaigoNinteichosainNo("9999")), nullValue());
+            assertThat(sut.select(createShichosonCode("999999"), createKaigoJigyoshaNo("9999999999"), createKaigoNinteichosainNo("9999")), nullValue());
         }
 
         @Test
         public void select_市町村コード_介護事業者番号_介護調査員番号_介護認定調査員情報が存在する時_該当する情報を返す() {
             assertThat(sut.select(
-                    createShichosonCode("123456"), createKaigoJigyoshaNo("12345"), createKaigoNinteichosainNo("1234")).getShichosonCode(),
+                    createShichosonCode("123456"), createKaigoJigyoshaNo("1234567890"), createKaigoNinteichosainNo("1234")).getShichosonCode(),
                     is(createShichosonCode("123456")));
         }
     }
@@ -70,13 +70,13 @@ public class KaigoNinteichosainDacTest extends DbeTestDacBase {
 
         @Test
         public void select_市町村コード_介護事業者番号_介護調査員番号_調査員の状況_介護認定調査員情報が存在しない時_NULLを返す() {
-            assertThat(sut.select(createShichosonCode("999999"), createKaigoJigyoshaNo("99999"), createKaigoNinteichosainNo("9999"), ChosainJokyo.無効), nullValue());
+            assertThat(sut.select(createShichosonCode("999999"), createKaigoJigyoshaNo("9999999999"), createKaigoNinteichosainNo("9999"), ChosainJokyo.無効), nullValue());
         }
 
         @Test
         public void select_市町村コード_介護事業者番号_介護調査員番号_調査員の状況_介護認定調査員情報が存在する時_該当する情報を返す() {
             assertThat(sut.select(
-                    createShichosonCode("123456"), createKaigoJigyoshaNo("12345"), createKaigoNinteichosainNo("1234"), ChosainJokyo.有効).getShichosonCode(),
+                    createShichosonCode("123456"), createKaigoJigyoshaNo("1234567890"), createKaigoNinteichosainNo("1234"), ChosainJokyo.有効).getShichosonCode(),
                     is(createShichosonCode("123456")));
         }
     }
@@ -90,18 +90,18 @@ public class KaigoNinteichosainDacTest extends DbeTestDacBase {
 
         @Test
         public void selectAll_市町村コード_介護事業者番号_介護認定調査員情報が存在しない時_EMPTYを返す() {
-            assertThat(sut.selectAll(createShichosonCode("999999"), createKaigoJigyoshaNo("99999")), is(Collections.EMPTY_LIST));
+            assertThat(sut.selectAll(createShichosonCode("999999"), createKaigoJigyoshaNo("9999999999")), is(Collections.EMPTY_LIST));
         }
 
         @Test
         public void selectAll_市町村コード_介護事業者番号_介護認定調査員情報が1件存在する時_該当する情報を1件返す() {
-            assertThat(sut.selectAll(createShichosonCode("123456"), createKaigoJigyoshaNo("12345")).size(), is(1));
+            assertThat(sut.selectAll(createShichosonCode("123456"), createKaigoJigyoshaNo("1234567890")).size(), is(1));
         }
 
         @Test
         public void selectAll_市町村コード_介護事業者番号_介護認定調査員情報が2件存在する時_該当する情報を2件返す() {
             sut.insert(createEntity("123456", "12345", "1240", "123"));
-            assertThat(sut.selectAll(createShichosonCode("123456"), createKaigoJigyoshaNo("12345")).size(), is(2));
+            assertThat(sut.selectAll(createShichosonCode("123456"), createKaigoJigyoshaNo("1234567890")).size(), is(2));
         }
     }
 
@@ -114,18 +114,18 @@ public class KaigoNinteichosainDacTest extends DbeTestDacBase {
 
         @Test
         public void selectAll_市町村コード_介護事業者番号_調査員の状況_介護認定調査員情報が存在しない時_EMPTYを返す() {
-            assertThat(sut.selectAll(createShichosonCode("999999"), createKaigoJigyoshaNo("99999"), ChosainJokyo.無効), is(Collections.EMPTY_LIST));
+            assertThat(sut.selectAll(createShichosonCode("999999"), createKaigoJigyoshaNo("9999999999"), ChosainJokyo.無効), is(Collections.EMPTY_LIST));
         }
 
         @Test
         public void selectAll_市町村コード_介護事業者番号_調査員の状況_介護認定調査員情報が1件存在する時_該当する情報を1件返す() {
-            assertThat(sut.selectAll(createShichosonCode("123456"), createKaigoJigyoshaNo("12345"), ChosainJokyo.有効).size(), is(1));
+            assertThat(sut.selectAll(createShichosonCode("123456"), createKaigoJigyoshaNo("1234567890"), ChosainJokyo.有効).size(), is(1));
         }
 
         @Test
         public void selectAll_市町村コード_介護事業者番号_調査員の状況_介護認定調査員情報が2件存在する時_該当する情報を2件返す() {
             sut.insert(createEntity("123456", "12345", "1240", "123"));
-            assertThat(sut.selectAll(createShichosonCode("123456"), createKaigoJigyoshaNo("12345"), ChosainJokyo.有効).size(), is(2));
+            assertThat(sut.selectAll(createShichosonCode("123456"), createKaigoJigyoshaNo("1234567890"), ChosainJokyo.有効).size(), is(2));
         }
     }
 
@@ -148,7 +148,7 @@ public class KaigoNinteichosainDacTest extends DbeTestDacBase {
 
         @Test
         public void selectAll_市町村コード_調査員の状況_介護認定調査員情報が2件存在する時_該当する情報を2件返す() {
-            sut.insert(createEntity("123456", "12345", "1240", "123"));
+            sut.insert(createEntity("123456", "1234567890", "1240", "123"));
             assertThat(sut.selectAll(createShichosonCode("123456"), ChosainJokyo.有効).size(), is(2));
         }
     }
@@ -188,7 +188,7 @@ public class KaigoNinteichosainDacTest extends DbeTestDacBase {
         public void insertOrUpdate_指定した介護認定調査員情報が存在しない時_指定した情報を追加する() {
             sut.insertOrUpdate(createEntity("123456", "12345", "1235", "123"));
             assertThat(sut.select(
-                    createShichosonCode("123456"), createKaigoJigyoshaNo("12345"), createKaigoNinteichosainNo("1235")).getShichosonCode(),
+                    createShichosonCode("123456"), createKaigoJigyoshaNo("1234567890"), createKaigoNinteichosainNo("1235")).getShichosonCode(),
                     is(createShichosonCode("123456")));
         }
 
@@ -196,7 +196,7 @@ public class KaigoNinteichosainDacTest extends DbeTestDacBase {
         public void insertOrUpdate_指定した介護認定調査員情報が存在する時_該当の情報を更新する() {
             sut.insertOrUpdate(createEntity("123456", "12345", "1234", "124"));
             assertThat(sut.select(
-                    createShichosonCode("123456"), createKaigoJigyoshaNo("12345"), createKaigoNinteichosainNo("1234")).getShichosonCode(),
+                    createShichosonCode("123456"), createKaigoJigyoshaNo("1234567890"), createKaigoNinteichosainNo("1234")).getShichosonCode(),
                     is(createShichosonCode("123456")));
         }
     }
@@ -210,20 +210,20 @@ public class KaigoNinteichosainDacTest extends DbeTestDacBase {
 
         @Test
         public void insert_指定した介護認定調査員情報が存在しない時_成功する() {
-            assertThat(sut.insert(createEntity("123456", "12345", "1235", "123")), is(1));
+            assertThat(sut.insert(createEntity("123456", "1234567890", "1235", "123")), is(1));
         }
 
         @Test
         public void insert_指定した介護認定調査員情報が存在しない時_指定した情報を追加する() {
             sut.insert(createEntity("123456", "12345", "1235", "123"));
             assertThat(sut.select(
-                    createShichosonCode("123456"), createKaigoJigyoshaNo("12345"), createKaigoNinteichosainNo("1235")).getShichosonCode(),
+                    createShichosonCode("123456"), createKaigoJigyoshaNo("1234567890"), createKaigoNinteichosainNo("1235")).getShichosonCode(),
                     is(createShichosonCode("123456")));
         }
 
         @Test(expected = SystemException.class)
         public void insert_指定した介護認定調査員情報が存在する時_失敗する() {
-            sut.insert(createEntity("123456", "12345", "1234", "123"));
+            sut.insert(createEntity("123456", "1234567890", "1234", "123"));
         }
     }
 
@@ -236,14 +236,14 @@ public class KaigoNinteichosainDacTest extends DbeTestDacBase {
 
         @Test
         public void update_指定した介護認定調査員情報が存在する時_成功する() {
-            assertThat(sut.update(createEntity("123456", "12345", "1234", "124")), is(1));
+            assertThat(sut.update(createEntity("123456", "1234567890", "1234", "124")), is(1));
         }
 
         @Test
         public void update_指定した介護認定調査員情報が存在する時_該当の情報を更新する() {
             sut.update(createEntity("123456", "12345", "1234", "124"));
             assertThat(sut.select(
-                    createShichosonCode("123456"), createKaigoJigyoshaNo("12345"), createKaigoNinteichosainNo("1234")).getShichosonCode(),
+                    createShichosonCode("123456"), createKaigoJigyoshaNo("1234567890"), createKaigoNinteichosainNo("1234")).getShichosonCode(),
                     is(createShichosonCode("123456")));
         }
 
@@ -268,7 +268,7 @@ public class KaigoNinteichosainDacTest extends DbeTestDacBase {
         @Test
         public void delete_指定した介護認定調査員情報が存在する時_deleteは_該当の情報を削除する() {
             sut.delete(createEntity("123456", "12345", "1234", "123"));
-            assertThat(sut.select(createShichosonCode("123456"), createKaigoJigyoshaNo("12345"), createKaigoNinteichosainNo("1234")), nullValue());
+            assertThat(sut.select(createShichosonCode("123456"), createKaigoJigyoshaNo("1234567890"), createKaigoNinteichosainNo("1234")), nullValue());
         }
 
         @Test(expected = _SQLOptimisticLockFaildException.class)

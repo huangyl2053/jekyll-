@@ -112,7 +112,7 @@ public class NinteichosaResultMock {
 
     private static KaigoJigyosha createKaigoJigyosha() {
         return new KaigoJigyosha(
-                new KaigoJigyoshaNo("事業者番号"), FlexibleDate.MIN, FlexibleDate.MAX,
+                new KaigoJigyoshaNo("0000000001"), FlexibleDate.MIN, FlexibleDate.MAX,
                 new ShikibetsuCode(new RString("1234567890")), new RString("事業者略称"), new RString("事業者略称カナ"),
                 new RString("事業者住所カナ"), new RString("異動事由"), FlexibleDate.MIN, new RString("社会福祉法人軽減対象区分"),
                 new RString("地域差区分"), new RString("受領委任区分"), new RString("生活保護指定区分"), new RString("法人種別"),

@@ -26,7 +26,7 @@ public class KaigoDoctorCode implements Comparable<KaigoDoctorCode>, IDbColumnMa
      * @param 介護医師コード 介護医師コード
      */
     public KaigoDoctorCode(RString 介護医師コード) {
-        this.介護医師コード = requireNonNull(介護医師コード, Messages.E00001.replace("介護医師コード").getMessage());
+        this.介護医師コード = requireNonNull(介護医師コード, Messages.E00001.getMessage());
     }
 
     @Override

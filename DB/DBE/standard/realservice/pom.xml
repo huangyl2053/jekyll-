@@ -39,6 +39,14 @@
             <artifactId>UrzBusiness</artifactId>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzEntity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzPersistence</artifactId>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbeDefinition</artifactId>
             <version>${project.version}</version>
@@ -70,6 +78,11 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbeEntity</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbeEntity</artifactId>
+            <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
@@ -83,6 +96,11 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.uz</groupId>
             <artifactId>framework</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzBusiness</artifactId>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

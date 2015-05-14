@@ -183,8 +183,7 @@ public final class NinteiKekkaMapper {
         entity.setIchijiHnateiKekkaHenkoRiyu(ninteiResult.get認定審査会意見().get一次判定結果変更理由());
         entity.setYokaigoJotaizoReiCode(ninteiResult.get要介護状態像例().getCode());
         entity.setNinteishinsakaiIkenShurui(ninteiResult.get認定審査会意見().get審査会意見種類().getCode());
-        //TODO n8235船山洋介　IKaigoServiceShuruiがエラーのため、コメントアウト。修正されたらコメントを外す。
-//        entity.setKaigoServiceShurui01(ninteiResult.get介護サービス種類０１().getサービス種類コード());
+        entity.setKaigoServiceShurui01(ninteiResult.get介護サービス種類０１().getサービス種類コード().value());
         entity.setNinteiKekkaIdoJiyu(ninteiResult.get認定結果異動().get認定結果異動事由区分().getCode());
         entity.setNinteiKekkaIdoYMD(ninteiResult.get認定結果異動().get認定結果異動年月日());
         entity.setNinteiTorikeshiRiyu(ninteiResult.get認定取消().get認定取消理由());

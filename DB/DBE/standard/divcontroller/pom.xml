@@ -24,6 +24,14 @@
             <classifier>classes</classifier>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzRealService</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzBusiness</artifactId>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbePersistence</artifactId>
             <version>${project.version}</version>
