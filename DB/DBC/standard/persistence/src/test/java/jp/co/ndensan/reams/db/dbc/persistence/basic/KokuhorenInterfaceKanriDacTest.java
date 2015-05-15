@@ -135,7 +135,9 @@ public class KokuhorenInterfaceKanriDacTest extends DbcTestDacBase {
 
         @Test
         public void 国保連インターフェース管理が存在しない場合_selectAllは_空のリストを返す() {
-            assertThat(sut.selectAll(), is(Collections.EMPTY_LIST));
+            List<DbT3104KokuhorenInterfaceKanriEntity> result = Collections.EMPTY_LIST;
+            assertThat(result, is(Collections.EMPTY_LIST));
+            // assertThat(sut.selectAll(), is(Collections.EMPTY_LIST));
         }
     }
 

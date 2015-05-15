@@ -169,7 +169,7 @@ public class KokuhorenTorikomiJohoDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_送付取込区分,
                     DEFAULT_処理状態区分);
-            assertThat(sut.selectAll().size(), is(3));
+            assertThat(sut.selectAll().size(), is(6));
 
         }
 
