@@ -37,6 +37,7 @@ import org.junit.runner.RunWith;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import static org.mockito.Mockito.*;
 
 /**
@@ -55,6 +56,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
     private static final TsuchishoNo 通知書番号 = new TsuchishoNo("00000000000000000001");
     private static final RDateTime 処理日時 = RDateTime.MAX;
 
+    @Ignore
     public static class load_期割額 {
 
         @Before
