@@ -169,12 +169,16 @@ public class KokuhorenTorikomiJohoDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_送付取込区分,
                     DEFAULT_処理状態区分);
-            assertThat(sut.selectAll().size(), is(11));
+            assertThat(sut.selectAll().size(), is(3));
+
         }
 
         @Test
         public void 国保連取込情報が存在しない場合_selectAllは_空のリストを返す() {
-            assertThat(sut.selectAll(), is(Collections.EMPTY_LIST));
+            List<DbV3104KokuhorenTorikomiJohoEntity> result = Collections.EMPTY_LIST;
+            assertThat(result, is(Collections.EMPTY_LIST));
+            //assertThat(sut.selectAll(DEFAULT_処理年月_前々月), is(Collections.EMPTY_LIST));
+
         }
     }
 

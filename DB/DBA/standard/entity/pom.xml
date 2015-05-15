@@ -27,6 +27,8 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

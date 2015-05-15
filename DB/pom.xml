@@ -35,6 +35,7 @@
         <jp.co.ndensan.reams.uexVersion>0.1.0-SNAPSHOT</jp.co.ndensan.reams.uexVersion>
         <jp.co.ndensan.reams.caxVersion>0.1.0-SNAPSHOT</jp.co.ndensan.reams.caxVersion>
         <jp.co.ndensan.reams.dbxVersion>0.1.0-SNAPSHOT</jp.co.ndensan.reams.dbxVersion>
+        <jp.co.ndensan.reams.adxVersion>0.1.0-SNAPSHOT</jp.co.ndensan.reams.adxVersion>
         <jp.co.ndensan.reams.urVersion>1.0.0</jp.co.ndensan.reams.urVersion>
         <jp.co.ndensan.reams.uzVersion>1.0.0</jp.co.ndensan.reams.uzVersion>
     </properties>
@@ -78,9 +79,19 @@
                 <version>${jp.co.ndensan.reams.uaxVersion}</version>
             </dependency>
             <dependency>
+                <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+                <artifactId>UaxDefinition</artifactId>
+                <version>${jp.co.ndensan.reams.uaxVersion}</version>
+            </dependency>
+            <dependency>
                 <groupId>jp.co.ndensan.reams.ue.uex</groupId>
                 <artifactId>UexRealService</artifactId>
                 <version>${jp.co.ndensan.reams.uexVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ad.adx</groupId>
+                <artifactId>AdxDefinition</artifactId>
+                <version>${jp.co.ndensan.reams.adxVersion}</version>
             </dependency>
 
             <dependency>

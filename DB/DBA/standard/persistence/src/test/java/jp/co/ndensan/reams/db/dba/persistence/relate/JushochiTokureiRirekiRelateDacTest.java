@@ -61,7 +61,6 @@ public class JushochiTokureiRirekiRelateDacTest extends DbaTestDacBase {
         hihoDaichoDac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
         nyutaishoDac = InstanceProvider.create(DbT1004ShisetsuNyutaishoDac.class);
 
-// TODO: n8223 朴　DBZのbuildが終わり次第に、コメントアウトする
         hihoDaicho1 = createHihoDaichoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214010000")));
         hihoDaichoDac.insert(hihoDaicho1.getEntity());
         hihoDaicho2 = createHihoDaichoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214020000")));

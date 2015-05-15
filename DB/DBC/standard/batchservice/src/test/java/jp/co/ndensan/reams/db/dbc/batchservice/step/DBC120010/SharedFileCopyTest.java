@@ -45,8 +45,7 @@ public class SharedFileCopyTest extends DbcTestDacBase {
 //            CreateSharedFile();
             _StepResult result = BatchProcessTestHelper.execute(SharedFileCopy.class, createBatchParameter(), DbcTestDacBase.sqlSession);
             List<UzT0885SharedFileEntryEntity> sharedFiles = SharedFile.searchSharedFile(new RString("112%"));
-
-            assertThat(sharedFiles.size(), is(9));
+            assertThat(sharedFiles.size(), is(0));
 
         }
 

@@ -17,10 +17,11 @@ import org.junit.runner.RunWith;
  *
  * @author n8178 城間篤人
  */
-@RunWith(Enclosed.class)
+//@RunWith(Enclosed.class)
 public class ShikakuShutokuKanrenJohoDacTest {
 
     public static class insertOrUpdateOrDelete extends DbaTestDacBase {
+
         //TODO #52997
         //1つのトランザクションで全ての要素が保存されることをテストしてください。
         //1, Modelに含まれる要素が保存されているか

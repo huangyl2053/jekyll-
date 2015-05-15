@@ -26,10 +26,13 @@ import org.junit.runner.RunWith;
 public class KokuhorenTorikomiJohoManagerTest extends DbcTestBase {
 
     private static KokuhorenTorikomiJohoManager sut;
-    private static final RYearMonth DEFAULT_処理年月 = new RYearMonth("201402");
-    private static final RYearMonth DEFAULT_最大処理年月 = new RYearMonth("201411");
-    private static final RYearMonth DEFAULT_現在年月 = new RYearMonth("201501");
-    private static final RYearMonth DEFAULT_存在しない処理年月 = new RYearMonth("201504");
+    private static final RYearMonth DEFAULT_処理年月 = new RYearMonth("201411");
+//    private static final RYearMonth DEFAULT_最大処理年月 = new RYearMonth("201411");
+    private static final RYearMonth DEFAULT_最大処理年月 = new RYearMonth("201505");
+//    private static final RYearMonth DEFAULT_現在年月 = new RYearMonth("201501");
+    private static final RYearMonth DEFAULT_現在年月 = new RYearMonth("201505");
+//    private static final RYearMonth DEFAULT_存在しない処理年月 = new RYearMonth("201504");
+    private static final RYearMonth DEFAULT_存在しない処理年月 = new RYearMonth("201505");
     private static final RString DEFAULT_交換情報識別番号 = new RString("121");
 
     public static class Test_get国保連IF管理Max処理年月 {
@@ -51,13 +54,18 @@ public class KokuhorenTorikomiJohoManagerTest extends DbcTestBase {
 
     public static class Test_get国保連取込情報 {
 
+        //TODO n8223 朴　ShareのUDT012ConfigTableは存在しないので、テスト確認ができない。
+        //@Ignore
         @Test
         public void 該当の処理年月がない時_get国保連取込情報は_NULLを返す() {
             sut = createManager();
             List<KokuhorenTorikomiJohoModel> result = sut.get国保連取込情報(DEFAULT_存在しない処理年月);
+
             assertThat(result, is(Collections.EMPTY_LIST));
         }
 
+        //TODO n8223 朴　ShareのUDT012ConfigTableは存在しない。
+        //@Ignore
         @Test
         public void 該当の処理年月がある時_get国保連取込情報は_国保連取込情報を返す() {
             sut = createManager();
@@ -71,8 +79,8 @@ public class KokuhorenTorikomiJohoManagerTest extends DbcTestBase {
         @Test
         public void saveに成功した場合_trueを返す() {
             sut = createManager();
-
             assertThat(sut.Save国保連IF管理の処理状態を起動にする(DEFAULT_処理年月, DEFAULT_交換情報識別番号), is(true));
+
         }
     }
 

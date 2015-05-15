@@ -16,45 +16,35 @@ import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.TokuteiFukushiYoguHa
 import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ToriatsukaiKakuyakushoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.valueobject.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-//TODO n8233 朴　jp.co.ndensan.reams.ur.urz.business.IKinyuKikanに変更
-//import jp.co.ndensan.reams.ur.urc.business.IKinyuKikan;
-import jp.co.ndensan.reams.ur.urz.business.IKinyuKikan;
-//TODO n8233 朴　jp.co.ndensan.reams.ur.urz.business.IKinyuKikanShitenに変更
-//import jp.co.ndensan.reams.ur.urc.business.IKinyuKikanShiten;
-import jp.co.ndensan.reams.ur.urz.business.IKinyuKikanShiten;
+import jp.co.ndensan.reams.ur.urc.business.IKinyuKikan;
+import jp.co.ndensan.reams.ur.urc.business.IKinyuKikanShiten;
 import jp.co.ndensan.reams.ur.urc.business.IKoza;
-import jp.co.ndensan.reams.ur.urz.business._KinyuKikan;
-import jp.co.ndensan.reams.ur.urz.business._KinyuKikanShiten;
-import jp.co.ndensan.reams.ur.urz.business._Koza;
-//TODO n8233 朴　jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojinに変更
+import jp.co.ndensan.reams.ur.urc.business._KinyuKikan;
+import jp.co.ndensan.reams.ur.urc.business._KinyuKikanShiten;
+import jp.co.ndensan.reams.ur.urc.business._Koza;
+//import jp.co.ndensan.reams.ur.urz.business._Koza;
 //import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojin;
-//TODO n8233 朴　jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojinMeishoに変更
 //import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.IHojinMeisho;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojinMeisho;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.IShikibetsuTaisho;
-//TODO n8233 朴　jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Hojinに変更
 //import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._Hojin;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin._Hojin;
-//TODO n8233 朴　　jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin._HojinMeishoに変更
 //import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._HojinMeisho;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin._HojinMeisho;
 //import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho._ShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.YokinShubetsu;
-//TODO n8223 朴　valueobject.codeのHojinKeitaiを使用してください。
 //import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.HojinKeitai;
 import jp.co.ndensan.reams.ua.uax.definition.valueobject.code.HojinKeitai;
 import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.HojinKeitaiFuyoKubun;
-//TODO n8233 朴　jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.HojinKeitaiRyakushoKubunType変更
 //import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.HojinKeitaiRyakushoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.HojinKeitaiRyakushoKubunType;
 import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.NinkaChienDantai;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -63,6 +53,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static org.mockito.Mockito.mock;
 import jp.co.ndensan.reams.ua.uax.entity.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  * 受領委任事業者のテストヘルパーです。
@@ -118,12 +109,20 @@ public class JuryoininJigyoshaMock {
 //      return new _Hojin(識別対象, HojinKeitai.有限会社,
 //      HojinKeitaiFuyoKubun.付与しない, HojinKeitaiRyakushoKubun.正式名称,
 //      法人名称, 法人代表者氏名, 認可地縁団体, 認可地縁団体認可年月日);
-        return new _Hojin(new UaFt200FindShikibetsuTaishoEntity());
+        UaFt200FindShikibetsuTaishoEntity entity = new UaFt200FindShikibetsuTaishoEntity();
+        entity.setSeibetsuCode(識別対象.get識別コード().value());
+        entity.setJuminShubetsuCode(識別対象.get住民種別().getCode());
+        entity.setShikibetsuCode(new ShikibetsuCode(new RString("0000000001")));
+        return new _Hojin(entity);
 
     }
 
     private static IShikibetsuTaisho createShikibetsuTaisho() {
-        return ShikibetsuTaishoFactory.createShikibetsuTaisho(new UaFt200FindShikibetsuTaishoEntity());
+        UaFt200FindShikibetsuTaishoEntity entity = new UaFt200FindShikibetsuTaishoEntity();
+        entity.setShikibetsuCode(new ShikibetsuCode(new RString("0000000001")));
+//住民種別コード コード:1 日本人, コード:2 外国人  コード:3 住登外日本人 コード:4 住登外外国人 コード:5 法人 コード:6共有者
+        entity.setJuminShubetsuCode(new RString("5"));
+        return ShikibetsuTaishoFactory.createShikibetsuTaisho(entity);
 //TODO  n8223 _ShikibetsuTaishoのパッケージ変更によって引数が違うことで確認必要ある。
 //        return _ShikibetsuTaisho(
 //                new ShikibetsuCode(new RString("0000000001")),
