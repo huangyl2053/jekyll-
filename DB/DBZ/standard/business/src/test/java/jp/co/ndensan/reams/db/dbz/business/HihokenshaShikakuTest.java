@@ -537,13 +537,13 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                     @Test
                     public void IKaigoShikakuのもつ資格喪失年月日は_Builderによって生成されたHihokenshaShikakuの_get資格喪失$getActionDateと一致する() {
                         HihokenshaShikaku shikaku = sut.build();
-                        assertThat(shikaku.get資格喪失().getActionDate(), is(new FlexibleDate(資格喪失Date.toString())));
+                        assertThat(shikaku.get資格喪失().getActionDate(), is(new FlexibleDate(資格喪失Date.toDateString())));
                     }
 
                     @Test
                     public void IKaigoShikakuのもつ資格喪失届出年月日は_Builderによって生成されたHihokenshaShikakuの_get資格喪失$getNoticeDateと一致する() {
                         HihokenshaShikaku shikaku = sut.build();
-                        assertThat(shikaku.get資格喪失().getNoticeDate(), is(new FlexibleDate(資格喪失届出Date.toString())));
+                        assertThat(shikaku.get資格喪失().getNoticeDate(), is(new FlexibleDate(資格喪失届出Date.toDateString())));
                     }
 
 //                  kaigoShikaku.get資格喪失事由()がなくなっているため、テストをコメントアウト

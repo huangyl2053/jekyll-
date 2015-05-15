@@ -101,6 +101,9 @@
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxRealService</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ca.cax</groupId>
+            <artifactId>CaxRealService</artifactId>
+        </dependency>
     </dependencies>
 </project>

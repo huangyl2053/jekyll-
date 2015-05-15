@@ -496,8 +496,8 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
 //            FlexibleDate noticeDate = toFlexibleDate(this.kaigoShikaku.get資格取得届出年月日());
 //            FlexibleDate actionDate = toFlexibleDate(this.kaigoShikaku.get資格取得年月日());
             ShikakuShutokuJiyu cause = ShikakuShutokuJiyu.その他;
-            FlexibleDate noticeDate = FlexibleDate.MIN;
-            FlexibleDate actionDate = FlexibleDate.MAX;
+            FlexibleDate noticeDate = new FlexibleDate("20140402");
+            FlexibleDate actionDate = new FlexibleDate("20140403");
             return new ShikakuShutoku(cause, noticeDate, actionDate);
         }
 
@@ -511,8 +511,8 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
 //            FlexibleDate noticeDate = toFlexibleDate(this.kaigoShikaku.get資格喪失届出年月日());
 //            FlexibleDate actionDate = toFlexibleDate(this.kaigoShikaku.get資格喪失年月日());
             ShikakuSoshitsuJiyu cause = ShikakuSoshitsuJiyu.その他;
-            FlexibleDate noticeDate = FlexibleDate.MIN;
-            FlexibleDate actionDate = FlexibleDate.MAX;
+            FlexibleDate noticeDate = new FlexibleDate("20140404");
+            FlexibleDate actionDate = new FlexibleDate("20140405");
             return new ShikakuSoshitsu(cause, noticeDate, actionDate);
         }
 

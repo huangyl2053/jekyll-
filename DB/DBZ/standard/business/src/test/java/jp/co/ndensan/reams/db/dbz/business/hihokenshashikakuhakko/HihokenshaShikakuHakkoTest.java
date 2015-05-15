@@ -300,7 +300,7 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
         private HihokenshaShikakuHakko sut = sut1;
 
         /**
-         * /**
+         *
          * 業務コンフィグDBD：表示有無が0(非表示) <br />
          * のとき、支援事業者名称は計画事業者名称を返す。
          */
