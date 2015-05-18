@@ -16,9 +16,9 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.ur.urz.business.IAssociation;
-import jp.co.ndensan.reams.ur.urz.business.ITsuchishoAtesaki;
+import jp.co.ndensan.reams.ua.uax.business.atesaki.ITsuchishoAtesaki;
 import jp.co.ndensan.reams.ur.urz.business.report.IReportBuilder;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 
 /**
  * 被保険者証B4版を発行するために使用するPrinterクラスです。

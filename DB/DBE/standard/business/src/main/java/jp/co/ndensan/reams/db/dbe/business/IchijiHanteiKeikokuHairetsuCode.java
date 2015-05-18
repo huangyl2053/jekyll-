@@ -40,7 +40,8 @@ public class IchijiHanteiKeikokuHairetsuCode {
         this.警告種別 = IchijiHanteiKeikokuShubetsu.toValue(判定年月日);
 
         if (警告配列コード.length() != 警告種別.get警告数()) {
-            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("警告配列コード", 警告種別.get警告数() + "桁").evaluate());
+//            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("警告配列コード", 警告種別.get警告数() + "桁").evaluate());
+            throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("警告配列コード", 警告種別.get警告数() + "桁").getMessage());
         }
     }
 
@@ -82,7 +83,8 @@ public class IchijiHanteiKeikokuHairetsuCode {
     public IchijiHanteiKeikokuUmu valueAt(int index) throws IllegalArgumentException {
         if (index < 0 || this.length() - 1 < index) {
             throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("引数のindexは",
-                    "0より小さい値、もしくは警告配列コード長よりも大きい値").evaluate());
+                    //                    "0より小さい値、もしくは警告配列コード長よりも大きい値").evaluate());
+                    "0より小さい値、もしくは警告配列コード長よりも大きい値").getMessage());
         }
         return IchijiHanteiKeikokuUmu.toValue(警告配列コード.stringAt(index));
     }

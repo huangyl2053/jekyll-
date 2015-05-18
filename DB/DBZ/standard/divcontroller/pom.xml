@@ -46,7 +46,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdPersistence</artifactId>
-            <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -71,6 +70,11 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>DbzBusiness</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>DbzModel</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
@@ -87,6 +91,19 @@
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <version>1.13</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxDivController</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxRealService</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ca.cax</groupId>
+            <artifactId>CaxRealService</artifactId>
         </dependency>
     </dependencies>
 </project>

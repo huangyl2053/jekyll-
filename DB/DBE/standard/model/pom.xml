@@ -21,13 +21,12 @@
             <artifactId>UrzModel</artifactId>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzModel</artifactId>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzBusiness</artifactId>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbeEntity</artifactId>
-            <version>${project.version}</version>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzModel</artifactId>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>

@@ -16,10 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.model.IDateOfBirth;
-import jp.co.ndensan.reams.ur.urz.model.IJusho;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.IName;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.IDateOfBirth;
+import jp.co.ndensan.reams.ur.urz.business.IJusho;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 
@@ -65,7 +65,7 @@ public class Minashi2Gosha implements IMinashi2GoshaDaicho, INinteiShinseiTaisho
 
     @Override
     public IName get氏名() {
-        return profile.get氏名();
+        return profile.get名称();
     }
 
     @Override
@@ -78,7 +78,6 @@ public class Minashi2Gosha implements IMinashi2GoshaDaicho, INinteiShinseiTaisho
         return profile.get生年月日();
     }
 
-    @Override
     public IJusho get住所() {
         return profile.get住所();
     }

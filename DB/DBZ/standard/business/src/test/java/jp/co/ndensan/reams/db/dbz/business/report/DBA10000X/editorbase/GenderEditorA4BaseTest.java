@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoA4CommonE
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;

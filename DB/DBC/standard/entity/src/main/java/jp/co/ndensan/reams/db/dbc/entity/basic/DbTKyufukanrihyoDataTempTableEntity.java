@@ -4,12 +4,14 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
  * DbTKyufukanrihyoDataTempTableの項目定義クラスです
  *
  */
+@OnNextSchema("rgdb")
 public class DbTKyufukanrihyoDataTempTableEntity extends DbTableEntityBase<DbTKyufukanrihyoDataTempTableEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
 

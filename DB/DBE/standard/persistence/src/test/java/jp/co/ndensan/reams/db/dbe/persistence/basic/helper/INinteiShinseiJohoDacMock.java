@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic.helper;
 
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IInsertable;
 
 /**

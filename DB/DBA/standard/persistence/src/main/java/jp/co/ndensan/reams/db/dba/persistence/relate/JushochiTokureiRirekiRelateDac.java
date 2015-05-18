@@ -39,6 +39,7 @@ public class JushochiTokureiRirekiRelateDac {
 
         for (HihokenshaDaichoModel hihoDaicho : model.getHihoDaichoData()) {
             switch (hihoDaicho.getState()) {
+//TODO: n8223 朴　DBZのbuildが終わり次第、エラー内容を対応。
                 case Added:
                     saveNum += hihoDaichoDac.insert(hihoDaicho.getEntity());
                     break;
@@ -56,6 +57,7 @@ public class JushochiTokureiRirekiRelateDac {
 
         for (ShisetsuNyutaishoModel nyutaishoModel : model.getShisetsuNyutaishoData()) {
             switch (nyutaishoModel.getState()) {
+//TODO: n8223 朴　DBZのbuildが終わり次第に、コメントアウトする。
                 case Added:
                     saveNum += nyutaishoDac.insert(nyutaishoModel.getEntity());
                     break;

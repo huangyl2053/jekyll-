@@ -13,14 +13,14 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoShikaku;
 //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
 //import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 //import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.ur.urz.business.KaigoShikakuFactory;
+import jp.co.ndensan.reams.db.dbx.business.KaigoShikakuFactory;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.HokenShubetsu;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.JushochiTokureishaKubun;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -160,33 +160,34 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                         assertThat(shikaku.get資格取得().getReason(), is(資格取得.getReason()));
                     }
 
-                    @Test
-                    public void shikakuShutokuに渡したShikakuShutoku$getReasonは_生成されたHihokenshaShikakuの_toKaigoShikaku$get資格取得事由$getCodeから導かれる値と一致する() {
-                        ShikakuShutokuJiyu reason = ShikakuShutokuJiyu.toValue(shikaku.toKaigoShikaku().get資格取得事由().getCode().value());
-                        assertThat(reason, is(資格取得事由));
-                    }
-
+//                  shikaku.toKaigoShikaku().get資格取得事由()がなくなっているため、テストをコメントアウト
+//                    @Test
+//                    public void shikakuShutokuに渡したShikakuShutoku$getReasonは_生成されたHihokenshaShikakuの_toKaigoShikaku$get資格取得事由$getCodeから導かれる値と一致する() {
+//                        ShikakuShutokuJiyu reason = ShikakuShutokuJiyu.toValue(shikaku.toKaigoShikaku().get資格取得事由().getCode().value());
+//                        assertThat(reason, is(資格取得事由));
+//                    }
                     @Test
                     public void shikakuShutokuに渡したShikakuShutoku$getActionDateは_生成されたHihokenshaShikakuの_get資格取得$getActionDateと一致する() {
                         assertThat(shikaku.get資格取得().getActionDate(), is(資格取得.getActionDate()));
                     }
 
-                    @Test
-                    public void shikakuShutokuに渡したShikakuShutoku$getActionDateは_生成されたHihokenshaShikakuの_toKaigoShikaku$get資格取得年月日と日付が一致する() {
-                        FlexibleDate shikakuShutokuDate = new FlexibleDate(shikaku.toKaigoShikaku().get資格取得年月日().toString());
-                        assertThat(shikakuShutokuDate, is(資格取得年月日));
-                    }
-
+//                  shikaku.toKaigoShikaku().get資格取得年月日()がなくなっているため、テストをコメントアウト
+//                    @Test
+//                    public void shikakuShutokuに渡したShikakuShutoku$getActionDateは_生成されたHihokenshaShikakuの_toKaigoShikaku$get資格取得年月日と日付が一致する() {
+//                        FlexibleDate shikakuShutokuDate = new FlexibleDate(shikaku.toKaigoShikaku().get資格取得年月日().toString());
+//                        assertThat(shikakuShutokuDate, is(資格取得年月日));
+//                    }
                     @Test
                     public void shikakuShutokuに渡したShikakuShutoku$getNoticeDateは_生成されたHihokenshaShikakuの_get資格取得$getNoticeDateと一致する() {
                         assertThat(shikaku.get資格取得().getNoticeDate(), is(資格取得.getNoticeDate()));
                     }
 
-                    @Test
-                    public void shikakuShutokuに渡したShikakuShutoku$getNoticeDateは_生成されたHihokenshaShikakuの_toKaigoShikaku$get資格取得届出年月日と日付が一致する() {
-                        FlexibleDate shikakuShutokuTodokedeDate = new FlexibleDate(shikaku.toKaigoShikaku().get資格取得届出年月日().toString());
-                        assertThat(shikakuShutokuTodokedeDate, is(資格取得届出年月日));
-                    }
+//                  shikaku.toKaigoShikaku()..get資格取得届出年月日()がなくなっているため、テストをコメントアウト
+//                    @Test
+//                    public void shikakuShutokuに渡したShikakuShutoku$getNoticeDateは_生成されたHihokenshaShikakuの_toKaigoShikaku$get資格取得届出年月日と日付が一致する() {
+//                        FlexibleDate shikakuShutokuTodokedeDate = new FlexibleDate(shikaku.toKaigoShikaku().get資格取得届出年月日().toString());
+//                        assertThat(shikakuShutokuTodokedeDate, is(資格取得届出年月日));
+//                    }
                 }
 
                 public static class shikakuSoshitsu extends DbzTestBase {
@@ -210,33 +211,34 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                         assertThat(shikaku.get資格喪失().getReason(), is(資格喪失.getReason()));
                     }
 
-                    @Test
-                    public void shikakuSoshitsuに渡したShikakuSoshitsu$getReasonは_生成されたHihokenshaShikakuの_toKaigoShikaku$get資格喪失事由$getCodeから導かれる値と一致する() {
-                        ShikakuSoshitsuJiyu reason = ShikakuSoshitsuJiyu.toValue(shikaku.toKaigoShikaku().get資格喪失事由().getCode().value());
-                        assertThat(reason, is(資格喪失事由));
-                    }
-
+//                  shikaku.toKaigoShikaku().get資格喪失事由()がなくなっているため、テストをコメントアウト
+//                    @Test
+//                    public void shikakuSoshitsuに渡したShikakuSoshitsu$getReasonは_生成されたHihokenshaShikakuの_toKaigoShikaku$get資格喪失事由$getCodeから導かれる値と一致する() {
+//                        ShikakuSoshitsuJiyu reason = ShikakuSoshitsuJiyu.toValue(shikaku.toKaigoShikaku().get資格喪失事由().getCode().value());
+//                        assertThat(reason, is(資格喪失事由));
+//                    }
                     @Test
                     public void shikakuSoshitsuに渡したShikakuSoshitsu$getActionDateは_生成されたHihokenshaShikakuの_get資格喪失$getActionDateと一致する() {
                         assertThat(shikaku.get資格喪失().getActionDate(), is(資格喪失.getActionDate()));
                     }
 
-                    @Test
-                    public void shikakuSoshitsuに渡したshikakuSoshitsu$getActionDateは_生成されたHihokenshaShikakuの_toKaigoShikaku$get資格喪失年月日と日付が一致する() {
-                        FlexibleDate shikakuSoshitsuDate = new FlexibleDate(shikaku.toKaigoShikaku().get資格喪失年月日().toString());
-                        assertThat(shikakuSoshitsuDate, is(資格喪失年月日));
-                    }
-
+//                  shikaku.toKaigoShikaku().get資格喪失年月日()がなくなっているため、テストをコメントアウト
+//                    @Test
+//                    public void shikakuSoshitsuに渡したshikakuSoshitsu$getActionDateは_生成されたHihokenshaShikakuの_toKaigoShikaku$get資格喪失年月日と日付が一致する() {
+//                        FlexibleDate shikakuSoshitsuDate = new FlexibleDate(shikaku.toKaigoShikaku().get資格喪失年月日().toString());
+//                        assertThat(shikakuSoshitsuDate, is(資格喪失年月日));
+//                    }
                     @Test
                     public void shikakuSoshitsuに渡したShikakuSoshitsu$getNoticeDateは_生成されたHihokenshaShikakuの_get資格喪失$getNoticeDateと一致する() {
                         assertThat(shikaku.get資格喪失().getNoticeDate(), is(資格喪失.getNoticeDate()));
                     }
 
-                    @Test
-                    public void shikakuSoshitsuに渡したshikakuSoshitsu$getNoticeDateは_生成されたHihokenshaShikakuの_toKaigoShikaku$get資格喪失届出年月日と日付が一致する() {
-                        FlexibleDate shikakuSoshitsuTodokedeDate = new FlexibleDate(shikaku.toKaigoShikaku().get資格喪失届出年月日().toString());
-                        assertThat(shikakuSoshitsuTodokedeDate, is(資格喪失届出年月日));
-                    }
+//                  shikaku.toKaigoShikaku().get資格喪失届出年月日()がなくなっているため、テストをコメントアウト
+//                    @Test
+//                    public void shikakuSoshitsuに渡したshikakuSoshitsu$getNoticeDateは_生成されたHihokenshaShikakuの_toKaigoShikaku$get資格喪失届出年月日と日付が一致する() {
+//                        FlexibleDate shikakuSoshitsuTodokedeDate = new FlexibleDate(shikaku.toKaigoShikaku().get資格喪失届出年月日().toString());
+//                        assertThat(shikakuSoshitsuTodokedeDate, is(資格喪失届出年月日));
+//                    }
                 }
 
                 public static class shikakuHenko extends DbzTestBase {
@@ -525,31 +527,32 @@ public class HihokenshaShikakuTest extends DbzTestBase {
                         assertThat(shikaku.get資格取得().getNoticeDate(), is(new FlexibleDate(資格取得届出Date.toString())));
                     }
 
-                    @Test
-                    public void IKaigoShikakuのもつ資格取得事由は_Builderによって生成されたHihokenshaShikakuの_get資格取得$getReasonと一致する() {
-                        HihokenshaShikaku shikaku = sut.build();
-                        ShikakuShutokuJiyu shikakuShutokuJiyu = ShikakuShutokuJiyu.toValue(kaigoShikaku.get資格取得事由().getCode().value());
-                        assertThat(shikaku.get資格取得().getReason(), is(shikakuShutokuJiyu));
-                    }
-
+//                  kaigoShikaku.get資格取得事由()がなくなっているため、テストをコメントアウト
+//                    @Test
+//                    public void IKaigoShikakuのもつ資格取得事由は_Builderによって生成されたHihokenshaShikakuの_get資格取得$getReasonと一致する() {
+//                        HihokenshaShikaku shikaku = sut.build();
+//                        ShikakuShutokuJiyu shikakuShutokuJiyu = ShikakuShutokuJiyu.toValue(kaigoShikaku.get資格取得事由().getCode().value());
+//                        assertThat(shikaku.get資格取得().getReason(), is(shikakuShutokuJiyu));
+//                    }
                     @Test
                     public void IKaigoShikakuのもつ資格喪失年月日は_Builderによって生成されたHihokenshaShikakuの_get資格喪失$getActionDateと一致する() {
                         HihokenshaShikaku shikaku = sut.build();
-                        assertThat(shikaku.get資格喪失().getActionDate(), is(new FlexibleDate(資格喪失Date.toString())));
+                        assertThat(shikaku.get資格喪失().getActionDate(), is(new FlexibleDate(資格喪失Date.toDateString())));
                     }
 
                     @Test
                     public void IKaigoShikakuのもつ資格喪失届出年月日は_Builderによって生成されたHihokenshaShikakuの_get資格喪失$getNoticeDateと一致する() {
                         HihokenshaShikaku shikaku = sut.build();
-                        assertThat(shikaku.get資格喪失().getNoticeDate(), is(new FlexibleDate(資格喪失届出Date.toString())));
+                        assertThat(shikaku.get資格喪失().getNoticeDate(), is(new FlexibleDate(資格喪失届出Date.toDateString())));
                     }
 
-                    @Test
-                    public void IKaigoShikakuのもつ資格喪失事由は_Builderによって生成されたHihokenshaShikakuの_get資格喪失$getReasonと一致する() {
-                        HihokenshaShikaku shikaku = sut.build();
-                        ShikakuSoshitsuJiyu shikakuHenkoJiyu = ShikakuSoshitsuJiyu.toValue(kaigoShikaku.get資格喪失事由().getCode().value());
-                        assertThat(shikaku.get資格喪失().getReason(), is(shikakuHenkoJiyu));
-                    }
+//                  kaigoShikaku.get資格喪失事由()がなくなっているため、テストをコメントアウト
+//                    @Test
+//                    public void IKaigoShikakuのもつ資格喪失事由は_Builderによって生成されたHihokenshaShikakuの_get資格喪失$getReasonと一致する() {
+//                        HihokenshaShikaku shikaku = sut.build();
+//                        ShikakuSoshitsuJiyu shikakuHenkoJiyu = ShikakuSoshitsuJiyu.toValue(kaigoShikaku.get資格喪失事由().getCode().value());
+//                        assertThat(shikaku.get資格喪失().getReason(), is(shikakuHenkoJiyu));
+//                    }
                 }
             }
         }

@@ -37,6 +37,7 @@
             <artifactId>DbdPersistence</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzRealService</artifactId>
@@ -45,5 +46,6 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
         </dependency>
+
     </dependencies>
 </project>

@@ -61,5 +61,10 @@
             <artifactId>snakeyaml</artifactId>
             <version>1.13</version>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxDivController</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
     </dependencies>
 </project>

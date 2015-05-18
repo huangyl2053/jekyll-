@@ -30,15 +30,16 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoShikaku;
 //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
 //import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 //import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuHenkoJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuShutokuJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuHenkoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.entity.helper.DbT1001HihokenshaDaichoEntityMock;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KofuJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -90,15 +91,16 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 //        IShikakuShutokuJiyu shutokujiyu = mock(IShikakuShutokuJiyu.class);
 //        when(shutokujiyu.getCode()).thenReturn(ShikakuShutokuJiyu.年齢到達.getCode());
 //        when(kaigoShikaku.get資格取得事由()).thenReturn(shutokujiyu);
-        when(kaigoShikaku.get資格取得届出年月日()).thenReturn(ichigoGaitoDate);
-        when(kaigoShikaku.get資格取得年月日()).thenReturn(ichigoGaitoDate);
+        //kaigoShikaku.get資格取得届出年月日()、kaigoShikaku.get資格取得年月日()　がなくなっているため、コメントアウト
+//        when(kaigoShikaku.get資格取得届出年月日()).thenReturn(ichigoGaitoDate);
+//        when(kaigoShikaku.get資格取得年月日()).thenReturn(ichigoGaitoDate);
         //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
 //        IShikakuSoshitsuJiyu soshitsuJiyu = mock(IShikakuSoshitsuJiyu.class);
 //        when(soshitsuJiyu.getCode()).thenReturn(ShikakuSoshitsuJiyu.EMPTY.getCode());
 //        when(kaigoShikaku.get資格喪失事由()).thenReturn(soshitsuJiyu);
-        when(kaigoShikaku.get資格喪失届出年月日()).thenReturn(RDate.MAX);
-        when(kaigoShikaku.get資格喪失年月日()).thenReturn(RDate.MAX);
-
+        //kaigoShikaku.get資格喪失届出年月日()、kaigoShikaku.get資格喪失年月日()　がなくなっているため、コメントアウト
+//        when(kaigoShikaku.get資格喪失届出年月日()).thenReturn(RDate.MAX);
+//        when(kaigoShikaku.get資格喪失年月日()).thenReturn(RDate.MAX);
         hihokenshaKubun = new HihokenshaKubun(new Code("1"), new RString("第1号"));
     }
 
@@ -440,7 +442,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
         @BeforeClass
         public static void setUp() {
-//            entity = DbT1001HihokenshaDaichoEntityMock.getSpiedInstance();
+            entity = DbT1001HihokenshaDaichoEntityMock.getSpiedInstance();
         }
 
         public static class Other extends DbzTestBase {
@@ -630,6 +632,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
 
             @Before
             public void setUp() {
+                entity = DbT1001HihokenshaDaichoEntityMock.getSpiedInstance();
                 entity.setJushochitokureiKaijoJiyuCode(new KaigoShikakuJutokuKaijoJiyu(reason.getCode()));
                 entity.setJushochitokureiKaijoTodokedeYMD(noticeDate);
                 entity.setJushochitokureiKaijoYMD(actionDate);

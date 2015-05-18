@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.ur.urz.business.IKoza;
+import jp.co.ndensan.reams.ur.urc.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.IryoKikanIdoJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaiinKubun;
@@ -46,8 +46,8 @@ public final class KaigoIryoKikanTestHelper {
     public static RString 異動事由 = new RString("疲れのため");
     public static RDate 異動年月日 = new RDate("20051212");
     public static LasdecCode 市町村コード_000123 = new LasdecCode(new RString("000123"));
-    public static KaigoIryoKikanCode 介護医療機関コード = new KaigoIryoKikanCode(new RString("B001"));
-    public static IryoKikanCode 医療機関コード = new IryoKikanCode(new RString("C00000001"));
+    public static KaigoIryoKikanCode 介護医療機関コード = new KaigoIryoKikanCode(new RString("0000000001"));
+    public static IryoKikanCode 医療機関コード = new IryoKikanCode(new RString("0000000001"));
     public static IryoKikanJokyo 医療機関状況 = IryoKikanJokyo.有効;
     public static IryoKikanKubun 医療機関区分 = new IryoKikanKubun(new RString("100"), new RString("名称"), new RString("略称"));
 

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+//import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -68,6 +68,8 @@ public enum ShisetsuType {
                 return data;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("指定した施設種類コードに対応する施設種類").getMessage());
+//TODO n8235 船山 Ver1.0.0への変更に伴いエラーが発生したため、コメントアウト
+//        throw new IllegalArgumentException(Messages.E00006.replace("指定したコードに対応する台帳種別").getMessage());
+        throw new IllegalArgumentException();
     }
 }

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.mapper;
 import jp.co.ndensan.reams.db.dbz.business.NyushoShisetsu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojin;
 
 /**
  * 入所施設を作成するクラスです。
@@ -39,8 +39,8 @@ public final class NyushoShisetsuMapper {
         return new NyushoShisetsu(
                 施設種類,
                 施設コード,
-                法人.get氏名().getName().value(),
-                法人.get氏名().getKana().value(),
+                法人.get法人名称().getName().value(),
+                法人.get法人名称().getKana().value(),
                 法人.get住所().get住所());
     }
 }

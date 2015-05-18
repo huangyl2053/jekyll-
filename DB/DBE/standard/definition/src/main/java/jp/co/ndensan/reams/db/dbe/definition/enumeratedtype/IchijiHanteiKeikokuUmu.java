@@ -60,6 +60,7 @@ public enum IchijiHanteiKeikokuUmu {
                 return 警告有無区分;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する警告有無区分").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する警告有無区分").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する警告有無区分").getMessage());
     }
 }

@@ -47,7 +47,8 @@ public class NinteichosaIraiCollection implements Iterable {
                 return 認定調査依頼情報;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定申請情報").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定申請情報").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定申請情報").getMessage());
     }
 
     private boolean is申請書管理番号と認定調査依頼履歴番号が一致(NinteichosaIrai 認定調査依頼情報, ShinseishoKanriNo 申請書管理番号,

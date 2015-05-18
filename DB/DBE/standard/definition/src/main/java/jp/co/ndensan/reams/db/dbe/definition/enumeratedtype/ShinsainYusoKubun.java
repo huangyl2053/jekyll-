@@ -50,6 +50,7 @@ public enum ShinsainYusoKubun {
                 return kubun;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する郵送区分").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する郵送区分").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する郵送区分").getMessage());
     }
 }

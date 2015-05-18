@@ -6,13 +6,14 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder;
 
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
-import jp.co.ndensan.reams.ur.urz.business.IRecentUsed;
+import jp.co.ndensan.reams.ur.urz.business.RecentUsed;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ScopeCode;
-import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.KensakuYusenKubun;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ScopeCodeType;
+import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.ScopeCode;
 import jp.co.ndensan.reams.ur.urz.realservice.ISaikinShorishaManager;
 import jp.co.ndensan.reams.ur.urz.realservice.RecentUsedManagerFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -158,7 +159,7 @@ public class HihokenshaFinderHandler {
      * 最近処理者を読み込みます。
      */
     void load最近処理者() {
-        div.getCcdSaikinShorisha().getWrappedSaikinShorishaRireki().setInitialLoad(ScopeCode.識別対象);
+        div.getCcdSaikinShorisha().getWrappedSaikinShorishaRireki().setInitialLoad(new ScopeCode(ScopeCodeType.識別対象.getCode()));
     }
 
     /**
@@ -169,7 +170,7 @@ public class HihokenshaFinderHandler {
      */
     void save最近処理者(ShikibetsuCode 識別コード, AtenaMeisho 名称) {
         IUrControlData controlData = UrControlDataFactory.createInstance();
-        saikinShorishaManager.save(controlData, ScopeCode.識別対象, 識別コード.value(), 名称.value());
+        saikinShorishaManager.save(controlData, new ScopeCode(ScopeCodeType.識別対象.getCode()), 識別コード.value(), 名称.value());
     }
 
     /**
@@ -178,7 +179,7 @@ public class HihokenshaFinderHandler {
      * @return 最近処理者
      */
     RString get最近処理者() {
-        IRecentUsed 最近処理者 = div.getCcdSaikinShorisha().getWrappedSaikinShorishaRireki().getRecentUsed();
+        RecentUsed 最近処理者 = div.getCcdSaikinShorisha().getWrappedSaikinShorishaRireki().getRecentUsed();
         return 最近処理者 != null ? 最近処理者.get最近処理対象コード() : RString.EMPTY;
     }
 }

@@ -48,11 +48,12 @@ import jp.co.ndensan.reams.db.dbz.realservice.hokensha.KoikiKoseiShichosonFinder
 //import jp.co.ndensan.reams.ur.urf.model.relate.KaigoJigyoshaRelateModel;
 //import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaDaichoManager;
 //import jp.co.ndensan.reams.ur.urf.realservice.KaigoJigyoshaDaichoManagerFactory;
-import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoService;
 import jp.co.ndensan.reams.ur.urz.divcontroller.helper.PanelSessionAccessor;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
-import jp.co.ndensan.reams.ur.urz.realservice.IKaigoServiceManager;
-import jp.co.ndensan.reams.ur.urz.realservice.KaigoServiceManagerFactory;
+import jp.co.ndensan.reams.db.dbx.realservice.IKaigoServiceManager;
+import jp.co.ndensan.reams.db.dbx.realservice.KaigoServiceManagerFactory;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 //import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -247,7 +248,7 @@ public class HihokenshaShikakuHakkoHandler {
         for (ServiceShuruiShikyuGendoGakuModel item : list) {
             IKaigoService service = manager.get介護サービス(
                     認定申請結果.get受給者台帳モデル().get支給限度有効開始年月日().getYearMonth(),
-                    item.getサービス種類コード().value());
+                    new KaigoServiceShuruiCode(item.getサービス種類コード().value()));
             if (service != null) {
                 serviceList.add(new dgShuruiShikyuGendoKijunGaku_Row(
                         service.get介護サービス種類().getサービス種類名称(),
@@ -266,7 +267,7 @@ public class HihokenshaShikakuHakkoHandler {
         List<RString> list = 認定申請結果.getサービス種類List();
         for (RString サービス種類 : list) {
             if (!サービス種類.isEmpty()) {
-                IKaigoService serviceShurui = manager.get介護サービス(ServiceYM, サービス種類);
+                IKaigoService serviceShurui = manager.get介護サービス(ServiceYM, new KaigoServiceShuruiCode(サービス種類));
                 if (serviceShurui != null) {
                     serviceList.add(serviceShurui);
                 }

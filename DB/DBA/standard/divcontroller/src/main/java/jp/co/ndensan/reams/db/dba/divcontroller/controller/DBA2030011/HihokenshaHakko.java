@@ -14,11 +14,12 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.model.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.realservice.report.HihokenshashoPrinter;
-import jp.co.ndensan.reams.ur.urd.entity.basic.UrT0505ShoKofuKaishuEntity;
-import jp.co.ndensan.reams.ur.urd.model.IShoKofuKaishuKiroku;
-import jp.co.ndensan.reams.ur.urd.model.ShoKofuKaishuModel;
-import jp.co.ndensan.reams.ur.urd.realservice.IShoKofuKaishuManager;
-import jp.co.ndensan.reams.ur.urd.realservice.ShoKofuKaishuManagerFactory;
+//import jp.co.ndensan.reams.ur.urd.entity.basic.UrT0505ShoKofuKaishuEntity;
+//import jp.co.ndensan.reams.ur.urd.model.IShoKofuKaishuKiroku;
+//import jp.co.ndensan.reams.ur.urd.model.ShoKofuKaishuModel;
+//TODO n8235船山洋介 ShoKofuKaishuManager が使用されておらず、大体クラス見つからないため(DC？)コメントアウト
+//import jp.co.ndensan.reams.ur.urd.realservice.IShoKofuKaishuManager;
+//import jp.co.ndensan.reams.ur.urd.realservice.ShoKofuKaishuManagerFactory;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;

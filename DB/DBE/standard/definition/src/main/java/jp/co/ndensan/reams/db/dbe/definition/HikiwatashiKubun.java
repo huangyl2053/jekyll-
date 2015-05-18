@@ -48,7 +48,9 @@ public enum HikiwatashiKubun implements IRStringConvertable {
                 return item;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する引渡し区分").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する引渡し区分").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する引渡し区分").getMessage());
+
     }
 
     /**

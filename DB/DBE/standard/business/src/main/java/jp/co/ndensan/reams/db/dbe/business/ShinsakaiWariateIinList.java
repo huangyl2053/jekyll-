@@ -47,7 +47,8 @@ public class ShinsakaiWariateIinList implements Iterable<ShinsakaiWariateIin> {
                 return 審査会割当委員;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する審査会割当委員").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する審査会割当委員").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する審査会割当委員").getMessage());
     }
 
     private boolean isキー項目が一致(ShinsakaiWariateIin 審査会割当委員, ShinsakaiKaisaiNo 審査会開催番号,

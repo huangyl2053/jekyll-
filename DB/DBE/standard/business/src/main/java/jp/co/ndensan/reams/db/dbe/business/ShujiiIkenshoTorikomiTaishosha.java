@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**

@@ -33,7 +33,7 @@ public class HihokenshaShikakuHakkoValidator implements IValidatable {
     public IValidationMessages validate() {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
 
-        if (PresenceValidator.isInvalid(交付事由)) {
+        if (!PresenceValidator.isValid(交付事由)) {
             messages.add(HihokenshaShikakuHakkoValidationMessage.交付事由が未選択);
         }
 

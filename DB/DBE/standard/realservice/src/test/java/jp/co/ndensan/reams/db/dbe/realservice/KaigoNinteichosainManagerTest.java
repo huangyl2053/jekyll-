@@ -9,7 +9,8 @@ import java.util.List;
 import static jp.co.ndensan.reams.db.dbe.business.helper.KaigoNinteichosainTestHelper.create認定調査員;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosainJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
+//import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.NinteichosaItakusakiDac;
@@ -45,7 +46,7 @@ public class KaigoNinteichosainManagerTest extends TestBase {
         @Override
         protected void setUp() {
             市町村コード = new LasdecCode(new RString("000001"));
-            介護事業者番号 = new KaigoJigyoshaNo(new RString("002"));
+            介護事業者番号 = new KaigoJigyoshaNo(new RString("0000000002"));
             介護調査員番号 = new KaigoNinteichosainNo(new RString("003"));
         }
 
@@ -73,7 +74,7 @@ public class KaigoNinteichosainManagerTest extends TestBase {
         @Override
         protected void setUp() {
             市町村コード = new LasdecCode(new RString("000001"));
-            介護事業者番号 = new KaigoJigyoshaNo(new RString("002"));
+            介護事業者番号 = new KaigoJigyoshaNo(new RString("0000000002"));
             介護調査員番号 = new KaigoNinteichosainNo(new RString("003"));
             調査員の状況 = ChosainJokyo.有効;
         }
@@ -108,7 +109,7 @@ public class KaigoNinteichosainManagerTest extends TestBase {
         @Override
         protected void setUp() {
             市町村コード = new LasdecCode(new RString("000001"));
-            介護事業者番号 = new KaigoJigyoshaNo(new RString("002"));
+            介護事業者番号 = new KaigoJigyoshaNo(new RString("0000000002"));
         }
 
         @Test
@@ -135,7 +136,7 @@ public class KaigoNinteichosainManagerTest extends TestBase {
         @Override
         protected void setUp() {
             市町村コード = new LasdecCode(new RString("000001"));
-            介護事業者番号 = new KaigoJigyoshaNo(new RString("002"));
+            介護事業者番号 = new KaigoJigyoshaNo(new RString("0000000002"));
             調査員の状況 = ChosainJokyo.有効;
         }
 

@@ -14,7 +14,7 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -25,6 +25,10 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzBatchService</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.uz</groupId>
+            <artifactId>framework</artifactId>
         </dependency>
     </dependencies>
 </project>

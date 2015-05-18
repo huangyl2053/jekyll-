@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.helper;
 
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
-import jp.co.ndensan.reams.ur.urz.model.IJusho;
+import jp.co.ndensan.reams.ur.urz.business.IJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -26,7 +26,7 @@ public final class KojinTestHelper {
         IJusho jusho = createJusho();
         IName name = createName();
         when(kojin.get住所()).thenReturn(jusho);
-        when(kojin.get氏名()).thenReturn(name);
+        when(kojin.get名称()).thenReturn(name);
         return kojin;
     }
 

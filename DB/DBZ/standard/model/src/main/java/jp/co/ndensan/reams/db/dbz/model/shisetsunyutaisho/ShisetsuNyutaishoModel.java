@@ -292,11 +292,11 @@ public class ShisetsuNyutaishoModel implements Serializable, IValidatable, IVali
     public IValidationMessages validateIn(ShisetsuNyutaishoRirekiKanriContext context) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
 
-        if (PresenceValidator.isInvalid(this.get入所年月日())) {
+        if (!PresenceValidator.isValid(this.get入所年月日())) {
             messages.add(ShisetsuNyutaishoValidationMessage.入所日が未入力);//, "必須項目の入所日が未入力 ");
         }
 
-        if (PresenceValidator.isInvalid(this.get入所施設コード())) {
+        if (!PresenceValidator.isValid(this.get入所施設コード())) {
             messages.add(ShisetsuNyutaishoValidationMessage.入所施設が未入力);//, "必須項目の入所施設が未入力 ");
         }
 

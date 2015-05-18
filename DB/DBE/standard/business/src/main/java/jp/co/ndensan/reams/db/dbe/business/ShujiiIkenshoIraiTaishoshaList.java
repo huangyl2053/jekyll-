@@ -48,7 +48,8 @@ public class ShujiiIkenshoIraiTaishoshaList implements Iterable {
                 return taishosha;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する主治医意見書作成依頼処理対象者").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する主治医意見書作成依頼処理対象者").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する主治医意見書作成依頼処理対象者").getMessage());
     }
 
     /**

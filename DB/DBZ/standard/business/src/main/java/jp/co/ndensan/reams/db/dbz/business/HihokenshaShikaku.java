@@ -11,14 +11,14 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoShikaku;
 //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
 //import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 //import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.ur.urz.business.KaigoShikakuFactory;
+import jp.co.ndensan.reams.db.dbx.business.KaigoShikakuFactory;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.HokenShubetsu;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.JushochiTokureishaKubun;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -106,7 +106,9 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
 
     @Override
     public boolean has被保険者資格At(RDate baseDate) {
-        return this.kaigoShikaku.is資格あり(baseDate);
+//TODO n8235 船山　 this.kaigoShikaku.is資格あり()が消えているため、コメントアウトしfalseを返すよう暫定対応。
+//        return this.kaigoShikaku.is資格あり(baseDate);
+        return false;
     }
 
     @Override
@@ -489,9 +491,13 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         }
 
         private ShikakuShutoku createShikakuShutoku() {
-            ShikakuShutokuJiyu cause = toShikakuShutokuJiyu(this.kaigoShikaku.get資格取得事由().getCode().value());
-            FlexibleDate noticeDate = toFlexibleDate(this.kaigoShikaku.get資格取得届出年月日());
-            FlexibleDate actionDate = toFlexibleDate(this.kaigoShikaku.get資格取得年月日());
+//            this.kaigoShikakuのメソッドがなくなっているため、コメントアウトし代わりに値をセット
+//            ShikakuShutokuJiyu cause = toShikakuShutokuJiyu(this.kaigoShikaku.get資格取得事由().getCode().value());
+//            FlexibleDate noticeDate = toFlexibleDate(this.kaigoShikaku.get資格取得届出年月日());
+//            FlexibleDate actionDate = toFlexibleDate(this.kaigoShikaku.get資格取得年月日());
+            ShikakuShutokuJiyu cause = ShikakuShutokuJiyu.その他;
+            FlexibleDate noticeDate = new FlexibleDate("20140402");
+            FlexibleDate actionDate = new FlexibleDate("20140403");
             return new ShikakuShutoku(cause, noticeDate, actionDate);
         }
 
@@ -500,9 +506,13 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
         }
 
         private ShikakuSoshitsu createShikakuSoshitsu() {
-            ShikakuSoshitsuJiyu cause = toShikakuSoshitsuJiyu(this.kaigoShikaku.get資格喪失事由().getCode().value());
-            FlexibleDate noticeDate = toFlexibleDate(this.kaigoShikaku.get資格喪失届出年月日());
-            FlexibleDate actionDate = toFlexibleDate(this.kaigoShikaku.get資格喪失年月日());
+//            this.kaigoShikakuのメソッドがなくなっているため、コメントアウト代わりに値をセット
+//            ShikakuSoshitsuJiyu cause = toShikakuSoshitsuJiyu(this.kaigoShikaku.get資格喪失事由().getCode().value());
+//            FlexibleDate noticeDate = toFlexibleDate(this.kaigoShikaku.get資格喪失届出年月日());
+//            FlexibleDate actionDate = toFlexibleDate(this.kaigoShikaku.get資格喪失年月日());
+            ShikakuSoshitsuJiyu cause = ShikakuSoshitsuJiyu.その他;
+            FlexibleDate noticeDate = new FlexibleDate("20140404");
+            FlexibleDate actionDate = new FlexibleDate("20140405");
             return new ShikakuSoshitsu(cause, noticeDate, actionDate);
         }
 

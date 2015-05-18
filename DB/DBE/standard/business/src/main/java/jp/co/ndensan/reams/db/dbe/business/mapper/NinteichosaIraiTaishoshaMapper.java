@@ -10,11 +10,12 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
-import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
 // TODO N8187 久保田英男 URのNinteiChosainのキャメルケースをNinteichosainに修正する。URを修正するタイミングで対応する。
-import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.db.dbx.business.INinteiChosain;
+import jp.co.ndensan.reams.db.dbx.business.KaigoJigyosha;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
@@ -63,7 +64,7 @@ public final class NinteichosaIraiTaishoshaMapper {
                 要介護認定申請情報.get認定申請年月日(),
                 要介護認定申請情報.get認定申請区分_申請時(),
                 個人,
-                個人.get氏名().getName().value(),
+                個人.get名称().getName().value(),
                 個人.get住所().get住所(),
                 認定調査委託先情報,
                 事業者情報,

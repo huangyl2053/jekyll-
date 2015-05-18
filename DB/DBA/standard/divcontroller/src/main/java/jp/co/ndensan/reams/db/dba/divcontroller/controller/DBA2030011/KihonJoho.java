@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.DBA2030011;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.JushochiTokureiMenuType;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA2030011.KihonJohoDiv;
@@ -17,14 +18,24 @@ import jp.co.ndensan.reams.db.dbz.realservice.hihokenshadaicho.HihokenshaDaichoM
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.IKojinFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.ShikibetsuTaishoService;
+//import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IShikibetsuTaishoGyomuHanteiKey;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IKojinFinder;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.KensakuYusenKubun;
+import jp.co.ndensan.reams.uz.uza.biz.KojinNo;
 
 /**
  * 住所地特例画面における、資格基本情報Divのイベントを定義したDivControllerです。
@@ -79,8 +90,13 @@ public class KihonJoho {
         }
 
         IKojinFinder kojinFinder = ShikibetsuTaishoService.getKojinFinder();
-        IKojin kojin = kojinFinder.get個人(controlData.getGyomuCD(), taishoshaKey.get識別コード());
-        switch (kojin.get住民状態()) {
+        // IKojin kojin = kojinFinder.get個人(controlData.getGyomuCD(), taishoshaKey.get識別コード());
+        IShikibetsuTaishoGyomuHanteiKey createInstance = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.EMPTY, KensakuYusenKubun.住登内優先);
+        ShikibetsuTaishoSearchKeyBuilder shikibetsuTaishoSearchKeyBuilder = new ShikibetsuTaishoSearchKeyBuilder(createInstance);
+        shikibetsuTaishoSearchKeyBuilder.set個人番号(KojinNo.EMPTY);
+        // IKojin kojin = kojinFinder.get個人s(shikibetsuTaishoSearchKeyBuilder);
+        List<IKojin> kojinList = kojinFinder.get個人s(shikibetsuTaishoSearchKeyBuilder.build());
+        switch (kojinList.get(0).get住民状態()) {
             case 転出者:
             case 消除者:
             case 住登外:

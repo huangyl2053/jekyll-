@@ -9,8 +9,11 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishosha;
 import jp.co.ndensan.reams.db.dbe.business.TorisageRiyu;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5001NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
@@ -33,8 +36,8 @@ public final class NinteishinseiTorisageTaishoshaMapper {
      * @return 認定申請取下げ対象者クラス
      */
     public static NinteiShinseiTorisageTaishosha to認定申請取下げ対象者(DbT5001NinteiShinseiJohoEntity entity) {
-        return new NinteiShinseiTorisageTaishosha(entity.getShinseishoKanriNo(), entity.getShoKisaiHokenshaNo(), entity.getHihokenshaNo(),
-                entity.getNinteiShinseiYMD(),
+        return new NinteiShinseiTorisageTaishosha(new ShinseishoKanriNo(entity.getShinseishoKanriNo()),
+                new ShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo()), new HihokenshaNo(entity.getHihokenshaNo()), entity.getNinteiShinseiYMD(),
                 NinteiShinseiKubunShinsei.toValue(toIntValue(entity.getNinteiShinseiShinseijiKubunCode())),
                 create認定申請取下げ(entity));
     }

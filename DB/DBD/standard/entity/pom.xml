@@ -28,5 +28,6 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
         </dependency>
+
     </dependencies>
 </project>

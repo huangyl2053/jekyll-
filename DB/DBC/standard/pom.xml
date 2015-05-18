@@ -64,6 +64,25 @@
                 <version>${jp.co.ndensan.reams.dbzVersion}</version>
                 <scope>test</scope>
             </dependency>
+
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+                <artifactId>UaxRealService</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.aa.aax</groupId>
+                <artifactId>AaxDefinition</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+                <artifactId>UaxDivController</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <classifier>classes</classifier>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>

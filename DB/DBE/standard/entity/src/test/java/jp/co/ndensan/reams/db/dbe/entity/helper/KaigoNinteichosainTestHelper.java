@@ -6,7 +6,8 @@ package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosainJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
+//import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7013ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -27,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KaigoNinteichosainTestHelper {
 
     public static final LasdecCode 市町村コード = new LasdecCode(new RString("123456"));
-    public static final KaigoJigyoshaNo 介護事業者番号 = new KaigoJigyoshaNo(new RString("0002"));
+    public static final KaigoJigyoshaNo 介護事業者番号 = new KaigoJigyoshaNo(new RString("0000000001"));
     public static final RString 介護調査員番号 = new RString("0003");
     public static final JigyoshaNo 事業者番号 = new JigyoshaNo(new RString("2020300001"));
     public static final ChosainJokyo 調査員状況 = ChosainJokyo.有効;

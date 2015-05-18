@@ -60,6 +60,7 @@ public enum ChosainJokyo {
                 return item;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する調査員の状況").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する調査員の状況").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する調査員の状況").getMessage());
     }
 }

@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbz.entity.relate;
 
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbV7902FukaSearchEntity;
-import jp.co.ndensan.reams.ur.urz.entity.basic.JutogaiYusenEntity;
-import jp.co.ndensan.reams.ur.urz.entity.basic.JutonaiYusenEntity;
-import jp.co.ndensan.reams.ur.urz.entity.relate.IKojinRelateEntity;
+import jp.co.ndensan.reams.ua.uax.entity.basic.JutonaiYusenEntity;
+import jp.co.ndensan.reams.ua.uax.entity.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ua.uax.entity.relate.IKojinRelateEntity;
 
 /**
  * 対象者のエンティティです。（賦課系）
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.ur.urz.entity.relate.IKojinRelateEntity;
 public class FukaTaishoshaRelateEntity implements IKojinRelateEntity {
 
     private JutonaiYusenEntity 住基個人住登内エンティティ;
-    private JutogaiYusenEntity 住基個人住登外エンティティ;
+    private UaFt200FindShikibetsuTaishoEntity 住基個人住登外エンティティ;
     private DbV7902FukaSearchEntity 賦課検索エンティティ;
 
     /**
@@ -46,7 +46,7 @@ public class FukaTaishoshaRelateEntity implements IKojinRelateEntity {
      * @return 住基個人住登外エンティティ
      */
     @Override
-    public JutogaiYusenEntity get住基個人住登外エンティティ() {
+    public UaFt200FindShikibetsuTaishoEntity get住基個人住登外エンティティ() {
         return 住基個人住登外エンティティ;
     }
 
@@ -55,7 +55,7 @@ public class FukaTaishoshaRelateEntity implements IKojinRelateEntity {
      *
      * @param 住基個人住登外エンティティ 住基個人住登外エンティティ
      */
-    public void set住基個人住登外エンティティ(JutogaiYusenEntity 住基個人住登外エンティティ) {
+    public void set住基個人住登外エンティティ(UaFt200FindShikibetsuTaishoEntity 住基個人住登外エンティティ) {
         this.住基個人住登外エンティティ = 住基個人住登外エンティティ;
     }
 

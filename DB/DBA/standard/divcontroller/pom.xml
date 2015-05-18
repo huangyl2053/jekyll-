@@ -19,6 +19,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdRealService</artifactId>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
@@ -44,7 +45,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdPersistence</artifactId>
-            <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -55,7 +55,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzDivController</artifactId>
-            <version>${project.version}</version>
             <classifier>classes</classifier>
         </dependency>
         <dependency>
@@ -78,8 +77,16 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzBusiness</artifactId>
-            <version>1.0-SNAPSHOT</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxDivController</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.uz</groupId>
+            <artifactId>framework</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -51,6 +51,7 @@ public enum IchijiHanteiResultSofuKubun {
                 return 送付区分;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する送付区分").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する送付区分").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する送付区分").getMessage());
     }
 }

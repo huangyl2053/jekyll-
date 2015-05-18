@@ -59,6 +59,7 @@ public enum NinteichosaTokusokuHoho {
                 return hoho;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定調査督促方法").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定調査督促方法").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定調査督促方法").getMessage());
     }
 }

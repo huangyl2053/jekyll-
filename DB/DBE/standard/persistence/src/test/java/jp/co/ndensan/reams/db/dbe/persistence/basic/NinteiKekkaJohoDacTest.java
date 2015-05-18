@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5002NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5002NinteiKekkaJohoEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
@@ -74,7 +74,7 @@ public class NinteiKekkaJohoDacTest extends DbeTestDacBase {
         @Test
         public void 指定した認定結果情報が存在しない時_insertは_指定した情報を追加する() {
             sut.insert(createEntity(AS_新規データ));
-            assertThat(sut.select(新規管理番号).getShinseishoKanriNo(), is(新規管理番号));
+            assertThat(sut.select(新規管理番号).getShinseishoKanriNo(), is(新規管理番号.value()));
         }
 
         @Test(expected = SystemException.class)
@@ -115,7 +115,7 @@ public class NinteiKekkaJohoDacTest extends DbeTestDacBase {
 
     private static DbT5002NinteiKekkaJohoEntity createEntity(int flg) {
         DbT5002NinteiKekkaJohoEntity entity = DbT5002NinteiKekkaJohoEntityMock.getDbT5002NinteiKekkaJohoEntity();
-        entity.setShinseishoKanriNo(flg == AS_新規データ ? 新規管理番号 : 既存管理番号);
+        entity.setShinseishoKanriNo(flg == AS_新規データ ? 新規管理番号.value() : 既存管理番号.value());
         return entity;
     }
 }

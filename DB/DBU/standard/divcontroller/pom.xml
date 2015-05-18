@@ -55,5 +55,10 @@
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxDivController</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
     </dependencies>
 </project>

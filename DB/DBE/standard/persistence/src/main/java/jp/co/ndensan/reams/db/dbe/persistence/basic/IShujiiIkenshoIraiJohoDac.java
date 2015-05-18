@@ -69,4 +69,11 @@ public interface IShujiiIkenshoIraiJohoDac
      */
     @Transaction
     List<DbT5011ShujiiIkenshoIraiJohoEntity> selectBy督促年月日(FlexibleDate 意見書作成督促年月日);
+
+    @Override
+    int insertOrUpdate(DbT5011ShujiiIkenshoIraiJohoEntity entity);
+
+    int insert(DbT5011ShujiiIkenshoIraiJohoEntity entity);
+
+    public int update(DbT5011ShujiiIkenshoIraiJohoEntity entity);
 }

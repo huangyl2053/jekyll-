@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7012ShujiiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoDoctorEntity;
-import jp.co.ndensan.reams.ur.urz.entity.basic.UrT0517IshiEntity;
+//import jp.co.ndensan.reams.ur.urz.entity.basic.UrT0517IshiEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -23,6 +23,9 @@ import static org.mockito.Mockito.spy;
  *
  * @author N8156 宮本 康
  */
+@Deprecated
+//TODO　介護医師はなくなるため、暫定的にコメントアウト。実装作業にはいった差異にこのクラスを削除する。
+
 public class KaigoDoctorEntityMock {
 
     /**
@@ -38,21 +41,20 @@ public class KaigoDoctorEntityMock {
      */
     public static KaigoDoctorEntity getSpiedInstance() {
         KaigoDoctorEntity entity = new KaigoDoctorEntity();
-        entity.setDoctorEntity(createDoctorEntity());
-        entity.setDbT7012ShujiiJohoEntity(createDbT7012ShujiiJohoEntity());
+//        entity.setDoctorEntity(createDoctorEntity());
+//        entity.setDbT7012ShujiiJohoEntity(createDbT7012ShujiiJohoEntity());
         return spy(entity);
     }
 
-    private static UrT0517IshiEntity createDoctorEntity() {
-        UrT0517IshiEntity entity = new UrT0517IshiEntity();
-        entity.setIshiShikibetsuNo(new RString("医師識別番号"));
-        entity.setIshiShimei(new AtenaMeisho(new RString("医師氏名")));
-        entity.setIryokikanCd(new RString("所属医療機関コード"));
-        entity.setShinryokaCode(new Code(new RString("所属診療科")));
-        entity.setIshiKubunCode(new Code(new RString("医師区分")));
-        return spy(entity);
-    }
-
+//    private static UrT0517IshiEntity createDoctorEntity() {
+//        UrT0517IshiEntity entity = new UrT0517IshiEntity();
+//        entity.setIshiShikibetsuNo(new RString("医師識別番号"));
+//        entity.setIshiShimei(new AtenaMeisho(new RString("医師氏名")));
+//        entity.setIryokikanCd(new RString("所属医療機関コード"));
+//        entity.setShinryokaCode(new Code(new RString("所属診療科")));
+//        entity.setIshiKubunCode(new Code(new RString("医師区分")));
+//        return spy(entity);
+//    }
     private static DbT7012ShujiiJohoEntity createDbT7012ShujiiJohoEntity() {
         DbT7012ShujiiJohoEntity entity = new DbT7012ShujiiJohoEntity();
         entity.setShichosonCode(new LasdecCode(new RString("000001")));

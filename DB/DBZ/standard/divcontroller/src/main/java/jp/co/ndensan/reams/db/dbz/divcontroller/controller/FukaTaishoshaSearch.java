@@ -23,11 +23,11 @@ import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaModel;
 import jp.co.ndensan.reams.db.dbz.model.util.SearchResult;
 import jp.co.ndensan.reams.db.dbz.realservice.search.FukaSearchItem;
 import jp.co.ndensan.reams.db.dbz.realservice.TaishoshaFinder;
-import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.KensakuYusenKubun;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IShikibetsuTaishoGyomuHanteiKey;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IShikibetsuTaishoGyomuHanteiKey;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ur.urz.realservice.search.FlexibleYearOperator;
 import jp.co.ndensan.reams.ur.urz.realservice.search.INewSearchCondition;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
@@ -107,7 +107,7 @@ public class FukaTaishoshaSearch {
         IShikibetsuTaishoGyomuHanteiKey 業務判定キー
                 = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
         IShikibetsuTaishoSearchKey 検索キー = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true)
-                .setShikibetsuCode(識別コード)
+                .set識別コード(識別コード)
                 .build();
 
         TaishoshaFinder finder = new TaishoshaFinder();

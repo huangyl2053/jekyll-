@@ -69,7 +69,6 @@ public class JushochiTokureiRirekiRelateDacTest extends DbaTestDacBase {
         hihoDaichoDac.insert(hihoDaicho3.getEntity());
         hihoDaicho4 = createHihoDaichoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214040000")));
         hihoDaichoDac.insert(hihoDaicho4.getEntity());
-
         nyutaisho1 = createNyutaishoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214010000")));
         nyutaishoDac.insert(nyutaisho1.getEntity());
         nyutaisho2 = createNyutaishoModel(EntityDataState.Unchanged, ShoriTimestamp.of(new YMDHMS("20141214020000")));
@@ -89,7 +88,6 @@ public class JushochiTokureiRirekiRelateDacTest extends DbaTestDacBase {
         target = new JushochiTokureiModel(
                 Lists.newArrayList(hihoDaicho1, hihoDaicho2, hihoDaicho3, hihoDaicho4, hihoDaicho5),
                 Lists.newArrayList(nyutaisho1, nyutaisho2, nyutaisho3, nyutaisho4, nyutaisho5));
-
         result = sut.update(target);
     }
 
@@ -141,7 +139,6 @@ public class JushochiTokureiRirekiRelateDacTest extends DbaTestDacBase {
                     nyutaisho5.get識別コード(), nyutaisho5.get処理日時());
             assertThat(resultEntity.getShoriTimestamp(), is(nyutaisho5.get処理日時()));
         }
-
     }
 
     private static JushochiTokureiModel createJutokuModel() {
@@ -149,6 +146,7 @@ public class JushochiTokureiRirekiRelateDacTest extends DbaTestDacBase {
         return new JushochiTokureiModel(null, null);
     }
 
+// TODO: n8223 朴　DBZのbuildが終わり次第に、コメントアウトする
     private static HihokenshaDaichoModel createHihoDaichoModel(EntityDataState status, ShoriTimestamp timestamp) {
         HihokenshaDaichoModel creatingModel = new HihokenshaDaichoModel(DbT1001HihokenshaDaichoEntityGenerator.
                 createDbT1001HihokenshaDaichoEntity());

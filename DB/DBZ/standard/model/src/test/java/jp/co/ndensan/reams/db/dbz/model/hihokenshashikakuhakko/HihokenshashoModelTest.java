@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.jukikojin.IJukiKojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.jukikojin.IJukiKojin;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.experimental.runners.Enclosed;

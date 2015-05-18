@@ -31,18 +31,17 @@ public final class ShujiiMapper {
      * @return 主治医情報
      */
     public static IShujii toShujii(DbT7012ShujiiJohoEntity entity) {
-//        return new Shujii(
-//                entity.getShichosonCode(),
-//                entity.getKaigoIryokikanCode(),
-//                new KaigoDoctorCode(entity.getKaigoIshiCode()),
-//                new IryoKikanCode(entity.getIryokikanCode()),
-//                entity.getIshiShikibetsuNo(),
-//                IshiJokyo.toValue(entity.getShujiiJokyo()),
-//                entity.getYubinNo(),
-//                entity.getJusho(),
-//                entity.getTelNo(),
-//                entity.getFaxNo());
-        return null;
+        return new Shujii(
+                entity.getShichosonCode(),
+                entity.getKaigoIryokikanCode(),
+                new KaigoDoctorCode(entity.getKaigoIshiCode()),
+                new IryoKikanCode(entity.getIryokikanCode()),
+                entity.getIshiShikibetsuNo(),
+                IshiJokyo.toValue(entity.getShujiiJokyo()),
+                entity.getYubinNo(),
+                entity.getJusho(),
+                entity.getTelNo(),
+                entity.getFaxNo());
     }
 
     /**

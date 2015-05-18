@@ -26,5 +26,6 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzDefinition</artifactId>
         </dependency>
+
     </dependencies>
 </project>

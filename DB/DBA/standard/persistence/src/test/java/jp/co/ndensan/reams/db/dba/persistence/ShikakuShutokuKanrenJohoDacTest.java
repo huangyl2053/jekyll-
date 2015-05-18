@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.persistence;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestDacBase;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -16,10 +17,11 @@ import org.junit.runner.RunWith;
  *
  * @author n8178 城間篤人
  */
-@RunWith(Enclosed.class)
+//@RunWith(Enclosed.class)
 public class ShikakuShutokuKanrenJohoDacTest {
 
     public static class insertOrUpdateOrDelete extends DbaTestDacBase {
+
         //TODO #52997
         //1つのトランザクションで全ての要素が保存されることをテストしてください。
         //1, Modelに含まれる要素が保存されているか

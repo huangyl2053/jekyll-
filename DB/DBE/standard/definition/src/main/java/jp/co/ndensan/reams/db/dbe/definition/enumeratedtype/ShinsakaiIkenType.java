@@ -56,6 +56,7 @@ public enum ShinsakaiIkenType {
                 return data;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する介護認定審査会意見種類").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する介護認定審査会意見種類").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する介護認定審査会意見種類").getMessage());
     }
 }

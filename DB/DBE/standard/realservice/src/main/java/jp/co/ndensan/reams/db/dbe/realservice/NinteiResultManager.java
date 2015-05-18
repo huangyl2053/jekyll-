@@ -5,18 +5,19 @@
 package jp.co.ndensan.reams.db.dbe.realservice;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiResult;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5002NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.business.mapper.NinteiKekkaMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
-import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
-import jp.co.ndensan.reams.ur.urz.realservice.IKaigoServiceManager;
-import jp.co.ndensan.reams.ur.urz.realservice.KaigoServiceManagerFactory;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoService;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.realservice.IKaigoServiceManager;
+import jp.co.ndensan.reams.db.dbx.realservice.KaigoServiceManagerFactory;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 
 /**
  * 要介護認定結果を管理するクラスです。
@@ -91,7 +92,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui01());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui01()));
         return service.get介護サービス種類();
     }
 
@@ -100,7 +101,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui02());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui02()));
         return service.get介護サービス種類();
     }
 
@@ -109,7 +110,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui03());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui03()));
         return service.get介護サービス種類();
     }
 
@@ -118,7 +119,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui04());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui04()));
         return service.get介護サービス種類();
     }
 
@@ -127,7 +128,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui05());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui05()));
         return service.get介護サービス種類();
     }
 
@@ -136,7 +137,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui06());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui06()));
         return service.get介護サービス種類();
     }
 
@@ -145,7 +146,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui07());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui07()));
         return service.get介護サービス種類();
     }
 
@@ -154,7 +155,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui08());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui08()));
         return service.get介護サービス種類();
     }
 
@@ -163,7 +164,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui09());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui09()));
         return service.get介護サービス種類();
     }
 
@@ -172,7 +173,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui10());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui10()));
         return service.get介護サービス種類();
     }
 
@@ -181,7 +182,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui11());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui11()));
         return service.get介護サービス種類();
     }
 
@@ -190,7 +191,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui12());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui12()));
         return service.get介護サービス種類();
     }
 
@@ -199,7 +200,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui13());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui13()));
         return service.get介護サービス種類();
     }
 
@@ -208,7 +209,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui14());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui14()));
         return service.get介護サービス種類();
     }
 
@@ -217,7 +218,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui15());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui15()));
         return service.get介護サービス種類();
     }
 
@@ -226,7 +227,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui16());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui16()));
         return service.get介護サービス種類();
     }
 
@@ -235,7 +236,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui17());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui17()));
         return service.get介護サービス種類();
     }
 
@@ -244,7 +245,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui18());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui18()));
         return service.get介護サービス種類();
     }
 
@@ -253,7 +254,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui19());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui19()));
         return service.get介護サービス種類();
     }
 
@@ -262,7 +263,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui20());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui20()));
         return service.get介護サービス種類();
     }
 
@@ -271,7 +272,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui21());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui21()));
         return service.get介護サービス種類();
     }
 
@@ -280,7 +281,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui22());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui22()));
         return service.get介護サービス種類();
     }
 
@@ -289,7 +290,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui23());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui23()));
         return service.get介護サービス種類();
     }
 
@@ -298,7 +299,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui24());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui24()));
         return service.get介護サービス種類();
     }
 
@@ -307,7 +308,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui25());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui25()));
         return service.get介護サービス種類();
     }
 
@@ -316,7 +317,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui26());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui26()));
         return service.get介護サービス種類();
     }
 
@@ -325,7 +326,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui27());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui27()));
         return service.get介護サービス種類();
     }
 
@@ -334,7 +335,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui28());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui28()));
         return service.get介護サービス種類();
     }
 
@@ -343,7 +344,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui29());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui29()));
         return service.get介護サービス種類();
     }
 
@@ -352,7 +353,7 @@ public class NinteiResultManager {
             return null;
         }
         IKaigoService service = kaigoServiceManager.get介護サービス(
-                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), entity.getKaigoServiceShurui30());
+                new FlexibleYearMonth(entity.getYoukaigodoNinteiYMD().toString().substring(0, 6)), new KaigoServiceShuruiCode(entity.getKaigoServiceShurui30()));
         return service.get介護サービス種類();
     }
 }

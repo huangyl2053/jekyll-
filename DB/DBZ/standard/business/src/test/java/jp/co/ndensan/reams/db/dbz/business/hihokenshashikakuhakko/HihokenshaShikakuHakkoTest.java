@@ -16,10 +16,12 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.YukoKig
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
-import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
-import jp.co.ndensan.reams.ur.urz.business._KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoService;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.business._KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoServiceBunruiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -42,7 +44,7 @@ import static org.mockito.Mockito.when;
 @RunWith(Enclosed.class)
 public class HihokenshaShikakuHakkoTest extends DbzTestBase {
 
-    private static HihokenshaShikakuHakko sut = new HihokenshaShikakuHakko();
+    private static HihokenshaShikakuHakko sut1 = new HihokenshaShikakuHakko();
     private static final Code SHINSEIKUBUN_SHINKI = new Code(new RString("1"));
     private static final Code SHINSEIKUBUN_KOSHIN = new Code(new RString("2"));
     private static final Code SHINSEIKUBUN_KUBUNHENKO = new Code(new RString("3"));
@@ -54,14 +56,19 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
     private static final Integer 有効期限加算値より後 = 50;
     private static final RString 委託代行業者表示開始文言 = new RString("（委託先：");
     private static final RString 委託代行業者表示終了文言 = new RString("）");
-    private static FlexibleDate 申請日;
-    private static FlexibleDate 有効データ認定終了日;
-    private static FlexibleDate 期待結果日;
-    private static RString 計画事業者名称;
-    private static RString 委託先事業者名称;
-    private static RString 支援事業者名称;
+//    private static FlexibleDate 申請日;
+//    private static FlexibleDate 有効データ認定終了日;
+//    private static FlexibleDate 期待結果日;
+//    private static RString 計画事業者名称;
+//    private static RString 委託先事業者名称;
+//    private static RString 支援事業者名称;
 
     public static class get有効期限初期値Test {
+
+        private HihokenshaShikakuHakko sut = sut1;
+        private FlexibleDate 申請日;
+        private FlexibleDate 有効データ認定終了日;
+        private FlexibleDate 期待結果日;
 
         /**
          * 業務コンフィグDBD：資格者証期限_有効期限初期表示が1(常にシステム日付+有効期限加算値) <br />
@@ -226,7 +233,13 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
 
     public static class compose被保険者証支援事業者名称Test {
 
+        private RString 計画事業者名称;
+        private RString 委託先事業者名称;
+        private RString 支援事業者名称;
+        private HihokenshaShikakuHakko sut = sut1;
+
         /**
+         * /**
          * 業務コンフィグDBA：表示有無が0(非表示) <br />
          * のとき、支援事業者名称は計画事業者名称を返す。
          */
@@ -281,7 +294,13 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
 
     public static class compose資格者証支援事業者名称Test {
 
+        private RString 計画事業者名称;
+        private RString 委託先事業者名称;
+        private RString 支援事業者名称;
+        private HihokenshaShikakuHakko sut = sut1;
+
         /**
+         *
          * 業務コンフィグDBD：表示有無が0(非表示) <br />
          * のとき、支援事業者名称は計画事業者名称を返す。
          */
@@ -336,6 +355,8 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
     }
 
     public static class compose審査会意見Test {
+
+        private HihokenshaShikakuHakko sut = new HihokenshaShikakuHakko();
 
         RString 審査会意見50文字 = new RString("あいうえおあいうえおかきくけこかきくけこさしすせそさしすせそたちつてとたちつてとなにぬねのなにぬねの");
         RString 審査会意見 = 審査会意見50文字.concat(審査会意見50文字);
@@ -422,8 +443,8 @@ public class HihokenshaShikakuHakkoTest extends DbzTestBase {
 
         private static IKaigoServiceShurui createKaigoServiceShurui() {
             return spy(new _KaigoServiceShurui(
-                    new RString("01"), new Range<>(FlexibleYearMonth.MIN, FlexibleYearMonth.MAX), new RString("サービス種類名称。"),
-                    new RString("略称。"), new RString("サービス分類")));
+                    new KaigoServiceShuruiCode("01"), new Range<>(FlexibleYearMonth.MIN, FlexibleYearMonth.MAX), new RString("サービス種類名称。"),
+                    new RString("略称。"), new KaigoServiceBunruiCode(new RString("サービス分類"))));
         }
 
     }

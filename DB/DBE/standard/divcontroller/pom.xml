@@ -24,6 +24,14 @@
             <classifier>classes</classifier>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzRealService</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzBusiness</artifactId>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbePersistence</artifactId>
             <version>${project.version}</version>
@@ -61,6 +69,12 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>DbeDefinition</artifactId>
             <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxDivController</artifactId>
+            <classifier>classes</classifier>
         </dependency>
     </dependencies>
 </project>

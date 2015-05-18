@@ -6,10 +6,9 @@
 package jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.IShikibetsuTaisho;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;

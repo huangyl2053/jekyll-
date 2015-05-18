@@ -27,6 +27,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzRealService</artifactId>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -46,7 +47,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzRealService</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
@@ -65,6 +65,15 @@
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzBusiness</artifactId>
         </dependency>
     </dependencies>
 </project>

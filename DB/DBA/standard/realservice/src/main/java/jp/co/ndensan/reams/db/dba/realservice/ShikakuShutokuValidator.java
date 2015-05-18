@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.realservice;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.model.IDateOfBirth;
+import jp.co.ndensan.reams.ua.uax.business.IDateOfBirth;
 import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import static jp.co.ndensan.reams.ur.urz.model.validation.ValidationChain.validateFollowingItems;

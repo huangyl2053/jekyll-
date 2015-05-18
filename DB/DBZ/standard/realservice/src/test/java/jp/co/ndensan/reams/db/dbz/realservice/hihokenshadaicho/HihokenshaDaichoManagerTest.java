@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -172,8 +173,8 @@ public class HihokenshaDaichoManagerTest {
 
             HihokenshaDaichoModel 被保険者台帳モデル = HihokenshaDaichoModelTestHelper.createModel();
             被保険者台帳モデル.getEntity().initializeMd5();
-            被保険者台帳モデル.set資格取得事由(ShikakuShutokuJiyu.転入);
-
+//            被保険者台帳モデル.set資格取得事由(ShikakuShutokuJiyu.転入);
+            被保険者台帳モデル.set資格変更届出年月日(FlexibleDate.getNowDate());
             assertThat(sut.save被保険者台帳(被保険者台帳モデル), is(1));
         }
 

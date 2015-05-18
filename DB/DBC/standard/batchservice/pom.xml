@@ -49,18 +49,16 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzBusiness</artifactId>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
             <scope>test</scope>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzBatchService</artifactId>
-            <type>jar</type>
         </dependency>
+
     </dependencies>
 </project>

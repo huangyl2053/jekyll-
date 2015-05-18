@@ -108,7 +108,9 @@ public final class ShinsakaiWariateIinMapper {
                 return 委員;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("審査会割当情報に対応した委員").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("審査会割当情報に対応した委員").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("審査会割当情報に対応した委員").getMessage());
+
     }
 
     private static boolean is審査会委員コードが一致(DbT5106ShinsakaiWariateIinJohoEntity 審査会割当委員Entity, ShinsakaiIin 審査会委員) {

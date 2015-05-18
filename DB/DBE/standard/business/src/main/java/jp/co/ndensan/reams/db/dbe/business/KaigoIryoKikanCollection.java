@@ -52,7 +52,9 @@ public class KaigoIryoKikanCollection implements Iterable {
                 return kaigoIryoKikan;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する介護医療機関").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する介護医療機関").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する介護医療機関").getMessage());
+
     }
 
     private boolean is市町村コードと介護機関コードが一致(KaigoIryoKikan kaigoIryoKikan, LasdecCode 市町村コード,

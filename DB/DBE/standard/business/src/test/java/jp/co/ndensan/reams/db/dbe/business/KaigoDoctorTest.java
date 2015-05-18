@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
-import jp.co.ndensan.reams.ur.urz.business.IDoctor;
+//import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -19,37 +19,37 @@ import static org.mockito.Mockito.*;
  */
 @RunWith(Enclosed.class)
 public class KaigoDoctorTest extends DbeTestBase {
-
-    public static class コンストラクタ extends DbeTestBase {
-
-        private static IDoctor doctor;
-        private static IShujii shujii;
-        private static KaigoIryoKikan facility;
-
-        @Before
-        public void setUp() {
-            doctor = mock(IDoctor.class);
-            shujii = mock(IShujii.class);
-            facility = mock(KaigoIryoKikan.class);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 医師がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            //TODO KaigoDoctorコメントアウトされている
-//            KaigoDoctor sut = new KaigoDoctor(null, shujii, facility);
-
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 主治医がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            //TODO KaigoDoctorコメントアウトされている
-//            KaigoDoctor sut = new KaigoDoctor(doctor, null, facility);
-        }
-
-        @Test(expected = NullPointerException.class)
-        public void 介護医療機関がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            //TODO KaigoDoctorコメントアウトされている
-//            KaigoDoctor sut = new KaigoDoctor(doctor, shujii, null);
-        }
-    }
+   //TODO n8235 KaigoDoctorがずべてコメントアウトされていたため、コメントアウト。
+//    public static class コンストラクタ extends DbeTestBase {
+//
+//        private static IDoctor doctor;
+//        private static IShujii shujii;
+//        private static KaigoIryoKikan facility;
+//
+//        @Before
+//        public void setUp() {
+//            doctor = mock(IDoctor.class);
+//            shujii = mock(IShujii.class);
+//            facility = mock(KaigoIryoKikan.class);
+//        }
+//
+//        @Test(expected = NullPointerException.class)
+//        public void 医師がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+//            //TODO KaigoDoctorコメントアウトされている
+////            KaigoDoctor sut = new KaigoDoctor(null, shujii, facility);
+//
+//        }
+//
+//        @Test(expected = NullPointerException.class)
+//        public void 主治医がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+//            //TODO KaigoDoctorコメントアウトされている
+////            KaigoDoctor sut = new KaigoDoctor(doctor, null, facility);
+//        }
+//
+//        @Test(expected = NullPointerException.class)
+//        public void 介護医療機関がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
+//            //TODO KaigoDoctorコメントアウトされている
+////            KaigoDoctor sut = new KaigoDoctor(doctor, shujii, null);
+//        }
+//    }
 }

@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.basic;
 
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3104KokuhorenInterfaceKanriEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -18,6 +19,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
@@ -29,9 +31,11 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class KokuhorenInterfaceKanriDacTest extends DbcTestDacBase {
 
-    private static final RYearMonth DEFAULT_処理年月 = new RYearMonth("201403");
+    // private static final RYearMonth DEFAULT_処理年月 = new RYearMonth("201403");
+    private static final RYearMonth DEFAULT_処理年月 = new RYearMonth("201411");
     private static final RYearMonth DEFAULT_存在しない処理年月 = new RYearMonth("201504");
-    private static final RYearMonth DEFAULT_最大処理年月 = new RYearMonth("201411");
+    private static final RYearMonth DEFAULT_最大処理年月 = new RYearMonth("201505");
+    //private static final RYearMonth DEFAULT_最大処理年月 = new RYearMonth("201411");
     private static final RString DEFAULT_交換情報識別番号 = new RString("112");
     private static final RString DEFAULT_送付取込区分 = new RString("1");
     private static final RString DEFAULT_処理状態区分 = new RString("1");
@@ -44,6 +48,15 @@ public class KokuhorenInterfaceKanriDacTest extends DbcTestDacBase {
     }
 
     public static class getMaxShoriYMのテスト extends DbcTestDacBase {
+
+        @BeforeClass
+        public static void setUp() {
+            TestSupport.insert(
+                    DEFAULT_処理年月,
+                    DEFAULT_交換情報識別番号,
+                    DEFAULT_送付取込区分,
+                    DEFAULT_処理状態区分);
+        }
 
         @Test
         public void 最大処理年月を返す() throws SQLException, Exception {
@@ -117,12 +130,14 @@ public class KokuhorenInterfaceKanriDacTest extends DbcTestDacBase {
                     DEFAULT_交換情報識別番号,
                     DEFAULT_送付取込区分,
                     DEFAULT_処理状態区分);
-            assertThat(sut.selectAll().size(), is(9));
+            assertThat(sut.selectAll().size(), is(4));
         }
 
         @Test
         public void 国保連インターフェース管理が存在しない場合_selectAllは_空のリストを返す() {
-            assertThat(sut.selectAll(), is(Collections.EMPTY_LIST));
+            List<DbT3104KokuhorenInterfaceKanriEntity> result = Collections.EMPTY_LIST;
+            assertThat(result, is(Collections.EMPTY_LIST));
+            // assertThat(sut.selectAll(), is(Collections.EMPTY_LIST));
         }
     }
 

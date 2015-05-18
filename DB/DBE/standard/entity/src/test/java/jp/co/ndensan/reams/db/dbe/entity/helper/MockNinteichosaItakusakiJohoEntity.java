@@ -5,7 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
+//import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -26,8 +27,8 @@ public class MockNinteichosaItakusakiJohoEntity {
     }
 
     public static DbT7010NinteichosaItakusakiJohoEntity getSpiedInstance() {
-        kaigojigyoshaNo = mock(KaigoJigyoshaNo.class);
-        jigyoshaNo = mock(JigyoshaNo.class);
+        kaigojigyoshaNo = KaigoJigyoshaNo.EMPTY;
+        jigyoshaNo = JigyoshaNo.EMPTY;
         kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("0000000001"));
         jigyoshaNo = new JigyoshaNo(new RString("2020300001"));
         DbT7010NinteichosaItakusakiJohoEntity ninteichosaItakusakiJohoEntity = new DbT7010NinteichosaItakusakiJohoEntity(

@@ -4,15 +4,15 @@ package jp.co.ndensan.reams.db.dbe.entity.helper;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-//import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.AgeArrivalDay;
+//import jp.co.ndensan.reams.ua.uax.definition.enumeratedtype.AgeArrivalDay;
 //import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.KannaiKangai;
-//import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.UnknownDate;
+//import jp.co.ndensan.reams.ua.uax.definition.enumeratedtype.UnknownDate;
 //import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JukiIdoJiyu;
 //import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminJotai;
 //import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
-//import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.StatusOfMidToLongTermResidence;
-//import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.StatusOfResidence;
-//import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.Tsuzukigara;
+//import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.StatusOfMidToLongTermResidence;
+//import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.StatusOfResidence;
+//import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.Tsuzukigara;
 //import jp.co.ndensan.reams.ur.urz.entity.basic.KojinEntity;
 //import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 //import jp.co.ndensan.reams.uz.uza.lang.RDate;

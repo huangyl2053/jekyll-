@@ -21,10 +21,12 @@ import jp.co.ndensan.reams.db.dbe.business.mapper.YokaigoNinteiShinseiMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoNinteiShoriTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.NinteichosaKekkaTorikomiTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IKojinFinder;
+//import jp.co.ndensan.reams.ur.urz.realservice.KojinService;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -50,7 +52,8 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
         torikomiTaishoshaDac = InstanceProvider.create(NinteichosaKekkaTorikomiTaishoshaDac.class);
         ninteichosaIraiManager = new NinteichosaIraiManager();
         kaigoNinteichosainManager = new KaigoNinteichosainManager();
-        kojinFinder = KojinService.createKojinFinder();
+//        kojinFinder = KojinService.createKojinFinder();
+        kojinFinder = ShikibetsuTaishoService.getKojinFinder();
         yokaigoninteiProgressManager = new YokaigoNinteiProgressManager();
     }
 
@@ -170,7 +173,9 @@ public class NinteichosaKekkaTorikomiTaishoshaManager {
     }
 
     private IKojin get個人(YokaigoNinteiShinsei 認定申請情報) {
-        return kojinFinder.get個人(認定申請情報.get識別コード());
+//        return kojinFinder.get個人(認定申請情報.get識別コード());
+        return kojinFinder.get個人(GyomuCode.DB介護保険, 認定申請情報.get識別コード());
+
     }
 
     private NinteichosaIrai get認定調査依頼情報(

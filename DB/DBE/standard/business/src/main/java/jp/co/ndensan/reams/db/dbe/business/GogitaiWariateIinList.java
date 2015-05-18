@@ -47,7 +47,8 @@ public class GogitaiWariateIinList implements Iterable<GogitaiWariateIin> {
                 return 合議体割当委員;
             }
         }
-        throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("対応する合議体割当委員").evaluate());
+//        throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("対応する合議体割当委員").evaluate());
+        throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("対応する合議体割当委員").getMessage());
     }
 
     private boolean isキー項目が一致(GogitaiWariateIin 割当委員, GogitaiNo 合議体番号,

@@ -10,8 +10,8 @@ import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoA4;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoA4EditData;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoA4CommonEditData;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.model.IDateOfBirth;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.IDateOfBirth;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
@@ -116,6 +116,7 @@ public class DateOfBirthEditorA4BaseTest {
 
         @Test
         public void 生年月日が1960年01月07日の場合_UmareMmに_1が設定される() {
+            model = createMockModel(dateOfBirthStr, Jinshu.外国人);
             sut = new DateOfBirthEditorA4Base(model);
             sut.set生年月日(target);
             assertThat(target.getUmareMm(), is(monthStr));
@@ -123,6 +124,7 @@ public class DateOfBirthEditorA4BaseTest {
 
         @Test
         public void 生年月日が1960年01月07日の場合_UmareDdに_7が設定される() {
+            model = createMockModel(dateOfBirthStr, Jinshu.外国人);
             sut = new DateOfBirthEditorA4Base(model);
             sut.set生年月日(target);
             assertThat(target.getUmareDd(), is(dayStr));

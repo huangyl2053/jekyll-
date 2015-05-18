@@ -15,11 +15,11 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuShutokuJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaigoShikakuHenkoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuHenkoJiyu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**

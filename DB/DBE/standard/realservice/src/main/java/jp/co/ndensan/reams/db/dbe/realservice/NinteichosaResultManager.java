@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriN
 import jp.co.ndensan.reams.db.dbe.business.mapper.NinteichosaKekkaMapper;
 import jp.co.ndensan.reams.db.dbe.entity.relate.NinteichosaKekkaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.NinteichosaKekkaDac;
-import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
-import jp.co.ndensan.reams.ur.urf.realservice._NinteiChosainFinder;
-import jp.co.ndensan.reams.ur.urf.realservice.INinteiChosainFinder;
+import jp.co.ndensan.reams.db.dbx.business.INinteiChosain;
+import jp.co.ndensan.reams.db.dbx.realservice._NinteiChosainFinder;
+import jp.co.ndensan.reams.db.dbx.realservice.INinteiChosainFinder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**

@@ -11,11 +11,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * DbT3104KokuhorenInterfaceKanriの項目定義クラスです
  *
  */
+@OnNextSchema("rgdb")
 public class DbT3104KokuhorenInterfaceKanriEntity extends DbTableEntityBase<DbT3104KokuhorenInterfaceKanriEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
 
@@ -557,8 +559,7 @@ public class DbT3104KokuhorenInterfaceKanriEntity extends DbTableEntityBase<DbT3
      * このエンティティの主キーが他の{@literal DbT3104KokuhorenInterfaceKanriEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT3104KokuhorenInterfaceKanriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT3104KokuhorenInterfaceKanriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3104KokuhorenInterfaceKanriEntity other) {

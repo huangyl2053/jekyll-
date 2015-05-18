@@ -29,7 +29,7 @@ public enum CharType implements IValueObjectCheckable<RString> {
 
                 @Override
                 public boolean isValid(IValueObject<RString> v) {
-                    return LetterValidator.半角数字のみ.isValid(v);
+                    return LetterValidator.半角数字のみ().isValid(v);
                 }
 
                 @Override
@@ -48,7 +48,7 @@ public enum CharType implements IValueObjectCheckable<RString> {
 
                 @Override
                 public boolean isValid(IValueObject<RString> v) {
-                    return LetterValidator.半角英数のみ.isValid(v);
+                    return LetterValidator.半角英数のみ().isValid(v);
                 }
 
                 @Override
