@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
 //import jp.co.ndensan.reams.ur.urz.definition.Messages;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
