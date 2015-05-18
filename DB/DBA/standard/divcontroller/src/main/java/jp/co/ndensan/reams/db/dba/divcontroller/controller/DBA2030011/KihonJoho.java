@@ -90,7 +90,6 @@ public class KihonJoho {
         }
 
         IKojinFinder kojinFinder = ShikibetsuTaishoService.getKojinFinder();
-        // TODO n8223 朴 modelからbusiness変更できない。エラーが発生したため、コメントアウト
         // IKojin kojin = kojinFinder.get個人(controlData.getGyomuCD(), taishoshaKey.get識別コード());
         IShikibetsuTaishoGyomuHanteiKey createInstance = ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.EMPTY, KensakuYusenKubun.住登内優先);
         ShikibetsuTaishoSearchKeyBuilder shikibetsuTaishoSearchKeyBuilder = new ShikibetsuTaishoSearchKeyBuilder(createInstance);
