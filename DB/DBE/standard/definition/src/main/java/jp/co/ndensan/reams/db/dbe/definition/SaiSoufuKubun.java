@@ -52,8 +52,7 @@ public enum SaiSoufuKubun implements IRStringConvertable {
                 return item;
             }
         }
-//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する再送付区分").evaluate());
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する再送付区分").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する再送付区分").evaluate());
 
     }
 

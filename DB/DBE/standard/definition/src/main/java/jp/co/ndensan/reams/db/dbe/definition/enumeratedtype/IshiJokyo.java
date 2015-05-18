@@ -60,7 +60,6 @@ public enum IshiJokyo {
                 return item;
             }
         }
-//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する医師の状況").evaluate());
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する医師の状況").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("該当する医師の状況").evaluate());
     }
 }

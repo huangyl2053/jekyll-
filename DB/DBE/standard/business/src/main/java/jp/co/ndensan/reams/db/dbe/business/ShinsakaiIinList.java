@@ -40,8 +40,7 @@ public class ShinsakaiIinList implements Iterable<ShinsakaiIin> {
                 return 委員;
             }
         }
-//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("指定した委員コードに対応した委員").evaluate());
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("指定した委員コードに対応した委員").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("指定した委員コードに対応した委員").evaluate());
     }
 
     /**

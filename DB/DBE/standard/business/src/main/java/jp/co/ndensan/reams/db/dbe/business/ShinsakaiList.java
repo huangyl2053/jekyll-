@@ -44,8 +44,7 @@ public class ShinsakaiList implements Iterable<Shinsakai> {
                 return 審査会;
             }
         }
-//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する審査会").evaluate());
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する審査会").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する審査会").evaluate());
     }
 
     private boolean isキー項目が一致(Shinsakai 審査会, ShinsakaiKaisaiNo 審査会開催番号) {

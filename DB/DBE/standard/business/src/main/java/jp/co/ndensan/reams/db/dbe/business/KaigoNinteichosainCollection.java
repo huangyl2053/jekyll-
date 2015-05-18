@@ -55,8 +55,7 @@ public class KaigoNinteichosainCollection implements Iterable<KaigoNinteichosain
                 return 介護認定調査員;
             }
         }
-//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("介護認定調査員").evaluate());
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("介護認定調査員").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("介護認定調査員").evaluate());
 
     }
 

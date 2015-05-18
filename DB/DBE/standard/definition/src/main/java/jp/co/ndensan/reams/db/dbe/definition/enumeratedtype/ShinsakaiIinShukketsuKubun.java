@@ -54,7 +54,6 @@ public enum ShinsakaiIinShukketsuKubun {
                 return 出欠区分;
             }
         }
-//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する出欠区分").evaluate());
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する出欠区分").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する出欠区分").evaluate());
     }
 }

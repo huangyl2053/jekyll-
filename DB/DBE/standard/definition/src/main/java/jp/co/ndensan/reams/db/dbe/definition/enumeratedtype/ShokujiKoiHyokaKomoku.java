@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.enumeratedtype;
 
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -54,6 +55,6 @@ public enum ShokujiKoiHyokaKomoku {
                 return 食事行為評価項目;
             }
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する食事行為評価項目").evaluate());
     }
 }

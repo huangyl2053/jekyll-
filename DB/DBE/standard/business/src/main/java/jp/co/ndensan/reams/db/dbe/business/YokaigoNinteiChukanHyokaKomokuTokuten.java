@@ -32,8 +32,7 @@ public class YokaigoNinteiChukanHyokaKomokuTokuten {
         requireNonNull(中間評価項目得点群, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("中間評価項目得点群", getClass().getName()));
 
         for (int 得点 : 中間評価項目得点群.values()) {
-//            check0未満(得点, UrErrorMessages.項目に対する制約.getMessage().replace("中間評価項目得点群", "全て0以上").evaluate());
-            check0未満(得点, UrErrorMessages.項目に対する制約.getMessage().replace("中間評価項目得点群", "全て0以上").getMessage());
+            check0未満(得点, UrErrorMessages.項目に対する制約.getMessage().replace("中間評価項目得点群", "全て0以上").evaluate());
         }
 
         this.中間評価項目得点群 = new EnumMap<>(中間評価項目得点群);

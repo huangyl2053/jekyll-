@@ -413,8 +413,7 @@ public final class ShinsakaiDetail {
          * @throws IllegalArgumentException 審査会予定定員に0より小さい値が渡されたとき
          */
         public Builder set審査会予定定員(int 審査会予定定員) throws IllegalArgumentException {
-//            check0以上(審査会予定定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会予定定員", エラーメッセージ_0以上.toString()).evaluate());
-            check0以上(審査会予定定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会予定定員", エラーメッセージ_0以上.toString()).getMessage());
+            check0以上(審査会予定定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会予定定員", エラーメッセージ_0以上.toString()).evaluate());
             plannedTeiin = 審査会予定定員;
             return this;
         }
@@ -434,8 +433,7 @@ public final class ShinsakaiDetail {
          * @throws IllegalArgumentException 審査会最大定員に0より小さい値が渡されたとき
          */
         public Builder set審査会最大定員(int 審査会最大定員) throws IllegalArgumentException {
-//            check0以上(審査会最大定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会最大定員", エラーメッセージ_0以上.toString()).evaluate());
-            check0以上(審査会最大定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会最大定員", エラーメッセージ_0以上.toString()).getMessage());
+            check0以上(審査会最大定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会最大定員", エラーメッセージ_0以上.toString()).evaluate());
             maxTeiin = 審査会最大定員;
             return this;
         }
@@ -448,8 +446,7 @@ public final class ShinsakaiDetail {
          * @throws IllegalArgumentException 審査会自動割当定員に0より小さい値が渡されたとき
          */
         public Builder set審査会自動割当定員(int 審査会自動割当定員) throws IllegalArgumentException {
-//            check0以上(審査会自動割当定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会自動割当定員", エラーメッセージ_0以上.toString()).evaluate());
-            check0以上(審査会自動割当定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会自動割当定員", エラーメッセージ_0以上.toString()).getMessage());
+            check0以上(審査会自動割当定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会自動割当定員", エラーメッセージ_0以上.toString()).evaluate());
             autoWariateTeiin = 審査会自動割当定員;
             return this;
         }
@@ -462,8 +459,7 @@ public final class ShinsakaiDetail {
          * @throws IllegalArgumentException 審査会委員定員に0より小さい値が渡されたとき
          */
         public Builder set審査会委員定員(int 審査会委員定員) throws IllegalArgumentException {
-//            check0以上(審査会委員定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会委員定員", エラーメッセージ_0以上.toString()).evaluate());
-            check0以上(審査会委員定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会委員定員", エラーメッセージ_0以上.toString()).getMessage());
+            check0以上(審査会委員定員, UrErrorMessages.項目に対する制約.getMessage().replace("審査会委員定員", エラーメッセージ_0以上.toString()).evaluate());
             memberTeiin = 審査会委員定員;
             return this;
         }
@@ -520,8 +516,7 @@ public final class ShinsakaiDetail {
          * @throws IllegalArgumentException 審査会割当済み人数に0より小さい値が渡されたとき
          */
         public Builder set審査会割当済み人数(int 審査会割当済み人数) throws IllegalArgumentException {
-//            check0以上(審査会割当済み人数, UrErrorMessages.項目に対する制約.getMessage().replace("審査会割当済み人数", エラーメッセージ_0以上.toString()).evaluate());
-            check0以上(審査会割当済み人数, UrErrorMessages.項目に対する制約.getMessage().replace("審査会割当済み人数", エラーメッセージ_0以上.toString()).getMessage());
+            check0以上(審査会割当済み人数, UrErrorMessages.項目に対する制約.getMessage().replace("審査会割当済み人数", エラーメッセージ_0以上.toString()).evaluate());
             wariatesumi = 審査会割当済み人数;
             return this;
         }

@@ -46,8 +46,7 @@ public class GogitaiList implements Iterable<Gogitai> {
                 return 合議体;
             }
         }
-//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("合致する合議体").evaluate());
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("合致する合議体").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("合致する合議体").evaluate());
     }
 
     private boolean isキー項目が一致(Gogitai 合議体, GogitaiNo 合議体番号, GogitaiYukoKikanKaishiDate 合議体有効期間開始年月日) {

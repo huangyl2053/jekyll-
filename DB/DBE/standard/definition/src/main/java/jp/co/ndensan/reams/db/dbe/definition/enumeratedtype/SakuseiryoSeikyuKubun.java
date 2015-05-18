@@ -61,7 +61,6 @@ public enum SakuseiryoSeikyuKubun {
                 return data;
             }
         }
-//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する作成料請求区分").evaluate());
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する作成料請求区分").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する作成料請求区分").evaluate());
     }
 }

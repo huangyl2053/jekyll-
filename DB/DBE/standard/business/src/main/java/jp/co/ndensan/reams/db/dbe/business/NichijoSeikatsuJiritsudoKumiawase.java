@@ -46,8 +46,7 @@ public class NichijoSeikatsuJiritsudoKumiawase {
         requireNonNull(日常生活自立度組み合わせ, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("日常生活自立度組み合わせ", getClass().getName()));
 
         for (int 得点 : 日常生活自立度組み合わせ.values()) {
-//            check0未満(得点, UrErrorMessages.項目に対する制約.getMessage().replace("日常生活自立度組み合わせが持つ割合", "全て0以上").evaluate());
-            check0未満(得点, UrErrorMessages.項目に対する制約.getMessage().replace("日常生活自立度組み合わせが持つ割合", "全て0以上").getMessage());
+            check0未満(得点, UrErrorMessages.項目に対する制約.getMessage().replace("日常生活自立度組み合わせが持つ割合", "全て0以上").evaluate());
         }
 
         this.日常生活自立度組み合わせ = new EnumMap<>(日常生活自立度組み合わせ);

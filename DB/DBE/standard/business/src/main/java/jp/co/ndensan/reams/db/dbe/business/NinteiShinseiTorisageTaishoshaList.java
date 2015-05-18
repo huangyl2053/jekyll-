@@ -43,8 +43,7 @@ public class NinteiShinseiTorisageTaishoshaList implements Iterable {
                 return taishosha;
             }
         }
-//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定申請取下げ対象者").evaluate());
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定申請取下げ対象者").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する認定申請取下げ対象者").evaluate());
     }
 
     /**

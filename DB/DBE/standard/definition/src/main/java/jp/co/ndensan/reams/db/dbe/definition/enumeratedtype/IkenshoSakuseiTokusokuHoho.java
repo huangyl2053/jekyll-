@@ -61,7 +61,6 @@ public enum IkenshoSakuseiTokusokuHoho {
                 return data;
             }
         }
-//        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する意見書作成督促方法").evaluate());
-        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する意見書作成督促方法").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する意見書作成督促方法").evaluate());
     }
 }

@@ -5,6 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
 //import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.lib.util.IRStringConvertable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -316,7 +317,7 @@ public enum TeikeibunShubetsuTokki implements IRStringConvertable {
         }
         //TODO n8235 船山 Ver1.0.0への変更に伴いエラーが発生したため、コメントアウト
 //        throw new IllegalArgumentException(Messages.E00006.replace("該当する定型文種別").getMessage());
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(UrErrorMessages.データが存在しない.getMessage().replace("該当する定型文種別").evaluate());
     }
 
     /**

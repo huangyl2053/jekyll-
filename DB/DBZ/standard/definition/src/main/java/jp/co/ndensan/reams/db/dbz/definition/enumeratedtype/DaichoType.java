@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
 //import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.message.DbzErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -71,6 +73,6 @@ public enum DaichoType {
 
 //TODO n8235 船山 Ver1.0.0への変更に伴いエラーが発生したため、コメントアウト
 //        throw new IllegalArgumentException(Messages.E00006.replace("指定したコードに対応する台帳種別").getMessage());
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(UrErrorMessages.データが存在しない.getMessage().replace("指定したコードに対応する台帳種別").evaluate());
     }
 }

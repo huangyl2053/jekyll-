@@ -34,8 +34,7 @@ public class Shinsakai {
 
         for (ShinsakaiWariateIin 割当委員 : 審査会割当委員List) {
             if (!割当委員.get審査会情報().equals(審査会情報)) {
-//                throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("割当委員が持つ審査会の情報", "すべて一致").evaluate());
-                throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("割当委員が持つ審査会の情報", "すべて一致").getMessage());
+                throw new IllegalArgumentException(UrErrorMessages.項目に対する制約.getMessage().replace("割当委員が持つ審査会の情報", "すべて一致").evaluate());
             }
         }
 
