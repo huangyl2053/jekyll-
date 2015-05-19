@@ -1,0 +1,152 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;ZenkaiNinteiKekkaJoho&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ZenkaiNinteiKekkaJoho&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.ZenkaiNinteiKekkaJoho"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel UzCompositeChild" id="ZenkaiNinteiKekkaJoho" style="width: 1110px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ZenkaiNinteiKekkaJoho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1110px&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;ZenkaiNinteiKekkaJoho&quot;,&quot;title&quot;:&quot;前回認定結果&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ZenkaiNinteiKekkaJoho&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;hdnShinseishoKanriNo&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hdnDatabaseSubGyomuCode&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;focusPositionID&quot;:&quot;createFile&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ZenkaiNinteiKekkaJoho_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">前回認定結果</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="ZenkaiNinteiKekkaJoho_panel_body_area"><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtYokaigodo" style="width: 167px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtYokaigodo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;selectControlID&quot;:&quot;txtYokaigodo_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;要介護度&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right" id="txtYokaigodo_labelL" style="width: 80px;"><span>要介護度</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana readonlyColor" id="txtYokaigodo_core" style="width: 80px;" type="text" placeholder=""></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtNinteiDay" style="width: 177px; height: 21px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtNinteiDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;selectControlID&quot;:&quot;txtNinteiDay_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;認定日&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtNinteiDay_labelL" style="width: 80px;"><span>認定日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtNinteiDay_core" style="width: 90px;" type="text" readonly="readonly" placeholder="" data-ymd="2" data-fmt="0" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS controlMargin-M UzCompositeChild" id="txtYukoKikanFrom" style="width: 198px; margin-right: 0px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtYukoKikanFrom&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtYukoKikanFrom_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;有効期間&quot;,&quot;labelRText&quot;:&quot;～&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;,&quot;labelRWidth&quot;:&quot;20px&quot;,&quot;labelRAlign&quot;:2}"><span class="word-wrap-break-word Label-L text-align-right" id="txtYukoKikanFrom_labelL" style="width: 80px;"><span>有効期間</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtYukoKikanFrom_core" style="width: 90px;" type="text" readonly="readonly" placeholder="" data-ymd="2" data-fmt="0" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""><span class="word-wrap-break-word Label-R text-align-right" id="txtYukoKikanFrom_labelR" style="width: 20px;"><span>～</span></span></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginRight-XS controlMargin-M UzCompositeChild" id="txtYukoKikanTo" style="width: 95px; height: 21px; margin-left: 5px; position: relative; opacity: 1;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtYukoKikanTo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;marginLeft&quot;:&quot;5px&quot;,&quot;selectControlID&quot;:&quot;txtYukoKikanTo_core&quot;,&quot;readOnly&quot;:true}"><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtYukoKikanTo_core" style="width: 90px;" type="text" readonly="readonly" placeholder="" data-ymd="2" data-fmt="0" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><button class="UzButtonDialog JSControl controlMargin-M Width-M FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnZenkaiShosaiGuide" type="button" data-control-type="ButtonDialog" data-obj="{&quot;fieldName&quot;:&quot;btnZenkaiShosaiGuide&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;ButtonDialog&quot;,&quot;width&quot;:&quot;M&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnZenkaiShosaiGuide&quot;,&quot;text&quot;:&quot;前回の認定内容を照会する&quot;,&quot;displayChildDivName&quot;:&quot;DBZ.ZenknaiKekkaShosaiJoho&quot;,&quot;dataPassing&quot;:[]}"><span>前回の認定内容を照会する</span></button></div></div>        
+   
+   
+   
+   
+       
+   
+             
+   <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['ZENKAININTEIKEKKAJOHO'] = {};
+DBZ['ZENKAININTEIKEKKAJOHO'].ZenkaiNinteiKekkaJohoRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ZenkaiNinteiKekkaJoho').getProperty();parameter0.txtYokaigodo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtYokaigodo').getProperty();parameter0.txtNinteiDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtNinteiDay').getProperty();parameter0.txtYukoKikanFrom = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtYukoKikanFrom').getProperty();parameter0.txtYukoKikanTo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtYukoKikanTo').getProperty();parameter0.btnZenkaiShosaiGuide = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnZenkaiShosaiGuide').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (ZenkaiNinteiKekkaJoho) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ZenkaiNinteiKekkaJoho.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ZenkaiNinteiKekkaJoho";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.ZenkaiNinteiKekkaJoho.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.ZenkaiNinteiKekkaJoho.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ZenkaiNinteiKekkaJoho = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtYokaigodo = function () {
+                return new UZA.TextBox(this.convFiledName("txtYokaigodo"));
+            };
+
+            Controls.prototype.txtNinteiDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiDay"));
+            };
+
+            Controls.prototype.txtYukoKikanFrom = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtYukoKikanFrom"));
+            };
+
+            Controls.prototype.txtYukoKikanTo = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtYukoKikanTo"));
+            };
+
+            Controls.prototype.btnZenkaiShosaiGuide = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnZenkaiShosaiGuide"));
+            };
+            return Controls;
+        })();
+        ZenkaiNinteiKekkaJoho.Controls = Controls;
+    })(DBZ.ZenkaiNinteiKekkaJoho || (DBZ.ZenkaiNinteiKekkaJoho = {}));
+    var ZenkaiNinteiKekkaJoho = DBZ.ZenkaiNinteiKekkaJoho;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (ZenkaiNinteiKekkaJoho) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ZenkaiNinteiKekkaJoho.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new ZenkaiNinteiKekkaJoho.PublicProperties(this.fieldName);
+            };
+
+            ModeController.prototype.ShokaiButtonType = function () {
+                return new Modes.ShokaiButtonType(this.controls);
+            };
+            ModeController.prototype.DivSize = function () {
+                return new Modes.DivSize(this.controls);
+            };
+            return ModeController;
+        })();
+        ZenkaiNinteiKekkaJoho.ModeController = ModeController;
+
+        (function (Modes) {
+            var ShokaiButtonType = (function () {
+                function ShokaiButtonType(controls) {
+                    this.controls = controls;
+                }
+                ShokaiButtonType.prototype.ShokaiButtonMode = function () {
+                    this.controls.btnZenkaiShosaiGuide().displayNone = false;
+                };
+
+                ShokaiButtonType.prototype.ShokaiButtonNoneMode = function () {
+                    this.controls.btnZenkaiShosaiGuide().displayNone = true;
+                };
+                return ShokaiButtonType;
+            })();
+            Modes.ShokaiButtonType = ShokaiButtonType;
+
+            var DivSize = (function () {
+                function DivSize(controls) {
+                    this.controls = controls;
+                }
+                DivSize.prototype.ShinseiUketsuke = function () {
+                    this.controls.ZenkaiNinteiKekkaJoho().width = 1050;
+                };
+
+                DivSize.prototype.ChosaKekkaToroku = function () {
+                    this.controls.ZenkaiNinteiKekkaJoho().width = 1110;
+                };
+                return DivSize;
+            })();
+            Modes.DivSize = DivSize;
+        })(ZenkaiNinteiKekkaJoho.Modes || (ZenkaiNinteiKekkaJoho.Modes = {}));
+        var Modes = ZenkaiNinteiKekkaJoho.Modes;
+    })(DBZ.ZenkaiNinteiKekkaJoho || (DBZ.ZenkaiNinteiKekkaJoho = {}));
+    var ZenkaiNinteiKekkaJoho = DBZ.ZenkaiNinteiKekkaJoho;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (ZenkaiNinteiKekkaJoho) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ZenkaiNinteiKekkaJoho.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ZenkaiNinteiKekkaJoho.PublicProperties = PublicProperties;
+    })(DBZ.ZenkaiNinteiKekkaJoho || (DBZ.ZenkaiNinteiKekkaJoho = {}));
+    var ZenkaiNinteiKekkaJoho = DBZ.ZenkaiNinteiKekkaJoho;
+})(DBZ || (DBZ = {}));
+</script></div>
