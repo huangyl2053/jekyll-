@@ -1,0 +1,14 @@
+﻿shichosonCode,DbUDD001ShichosonCode,ShichosonCode,,,,,市町村コード,A
+ninteichosaItakusakiCode,varchar,RString,,,,,認定調査委託先コード,A
+ninteiChosainNo,varchar,RString,,,,,認定調査員コード,A
+chosainShimei,varchar,RString,,,,,調査員氏名,A
+chosainKanaShimei,varchar,RString,,,,,調査員氏名カナ,A
+seibetsu,bpchar,RString,,,,,性別,A
+chosainShikaku,bpchar,RString,,,,,調査員資格,A
+chikuCode,varchar,RString,,,,,地区コード,A
+chosaKanoNinzuPerMonth,int2,int,,,,,調査可能人数／月,A
+yubinNo,UDD003YubinNo,YubinNo,,,,,郵便番号,A
+jusho,UDD046AtenaJusho,AtenaJusho,,,,,住所,A
+telNo,UDD026TelNo,TelNo,,,,,電話番号,A
+faxNo,UDD026TelNo,TelNo,,,,,FAX番号,A
+JokyoFlag,bool,boolean,,,,,状況フラグ,A
