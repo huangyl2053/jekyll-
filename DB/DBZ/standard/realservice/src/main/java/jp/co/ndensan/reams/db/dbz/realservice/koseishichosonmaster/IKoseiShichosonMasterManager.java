@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 構成市町村マスタ情報を取得するインターフェースです。
+ * 構成市町村マスタマネージャーのインターフェースです。
  *
  * @author n8223　朴義一
  */
@@ -19,7 +19,7 @@ public interface IKoseiShichosonMasterManager {
     /**
      * 構成市町村マスタ情報を取得します。
      *
-     * @param 市町村識別ID
+     * @param 市町村識別ID 市町村識別ID
      * @return 構成市町村マスタ情報
      */
     Optional<IKoseiShichosonMaster> find構成市町村(RString 市町村識別ID);

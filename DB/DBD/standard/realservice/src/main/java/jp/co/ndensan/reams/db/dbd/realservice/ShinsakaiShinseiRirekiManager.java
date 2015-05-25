@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriN
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 申請履歴情報を作成するクラスです。
+ * 認定(DBE)の申請履歴情報を管理するクラスです。
  *
  * @author n8223　朴義一
  */
@@ -25,15 +25,16 @@ public class ShinsakaiShinseiRirekiManager extends ShinseiRirekiManagerBase {
 
     /**
      * コンストラクタです
-     *
-     * 申請履歴情報を作成するインターフェースを生成します。
      */
     public ShinsakaiShinseiRirekiManager() {
         this.dac = InstanceProvider.create(DbT5121ShinseiRirekiJohoDac.class);
     }
 
     /**
+     *
      * 単体テスト用のコンストラクタです。
+     *
+     * @param dac 審査会申請履歴情報Dac
      */
     ShinsakaiShinseiRirekiManager(DbT5121ShinseiRirekiJohoDac dac) {
         this.dac = dac;
@@ -42,9 +43,10 @@ public class ShinsakaiShinseiRirekiManager extends ShinseiRirekiManagerBase {
     /**
      * 申請履歴情報を取得します。
      *
-     * @param 申請管理番号
+     * @param 申請管理番号 申請管理番号
      * @return 申請履歴情報
      */
+    @Override
     public Optional<IShinseiRirekiJoho> find申請履歴情報(ShinseishoKanriNo 申請管理番号) {
         return dac.selectByKey(申請管理番号)
                 .map(new IFunction<DbT5121ShinseiRirekiJohoEntity, IShinseiRirekiJoho>() {

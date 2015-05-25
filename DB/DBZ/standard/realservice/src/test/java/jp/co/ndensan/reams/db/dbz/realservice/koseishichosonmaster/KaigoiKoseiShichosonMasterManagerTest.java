@@ -69,8 +69,10 @@ public class KaigoiKoseiShichosonMasterManagerTest extends DbzTestBase {
         public void testFind構成市町村_該当の情報があるとき_該当情報を返す() {
             RString DEFAULT_市町村識別ID = new RString("1");
             IKoseiShichosonMaster business = createBusines(DEFAULT_市町村識別ID);
-            Optional<IKoseiShichosonMaster> result = sut.find構成市町村(市町村識別ID);
 
+            when(dac.selectByKey(市町村識別ID)).thenReturn(
+                    Optional.ofNullable(DbT7051KoseiShichosonMasterEntityGenerator.createDbT7051KoseiShichosonMasterEntity()));
+            Optional<IKoseiShichosonMaster> result = sut.find構成市町村(市町村識別ID);
             assertThat(result.get().get市町村識別ID(), is(business.get市町村識別ID()));
         }
 

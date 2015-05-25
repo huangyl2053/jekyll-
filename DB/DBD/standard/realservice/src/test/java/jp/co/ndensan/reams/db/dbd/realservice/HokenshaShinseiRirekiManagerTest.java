@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.realservice;
 
-import jp.co.ndensan.reams.db.dbd.business.HokenshaShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbd.business.IShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4121ShinseiRirekiJohoEntityGenerator;
@@ -13,7 +12,6 @@ import jp.co.ndensan.reams.db.dbd.persistence.basic.DbT4121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +29,6 @@ import static org.mockito.Mockito.when;
 @RunWith(Enclosed.class)
 public class HokenshaShinseiRirekiManagerTest extends DbdTestBase {
 
-    //   private static final ShinseishoKanriNo 申請管理番号 = DbT4121ShinseiRirekiJohoEntityGenerator.DEFAULT_申請管理番号;
     private static final ShinseishoKanriNo 申請管理番号 = new ShinseishoKanriNo("12345678901234567");
     private static final ShinseishoKanriNo notFound申請管理番号 = new ShinseishoKanriNo("92345678901234567");
 

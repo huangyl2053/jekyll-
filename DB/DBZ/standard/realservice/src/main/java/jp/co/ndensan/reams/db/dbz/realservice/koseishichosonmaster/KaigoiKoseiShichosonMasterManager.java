@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 構成市町村マスタ情報を作成するクラスです。
+ * 構成市町村マスタ情報を管理するクラスです。
  *
  * @author n8223　朴義一
  */
@@ -25,8 +25,6 @@ public class KaigoiKoseiShichosonMasterManager extends KoseiShichosonMasterManag
 
     /**
      * コンストラクタです。
-     *
-     * 構成市町村マスタ情報を作成するインターフェースを生成します。
      */
     public KaigoiKoseiShichosonMasterManager() {
         this.dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
@@ -42,9 +40,10 @@ public class KaigoiKoseiShichosonMasterManager extends KoseiShichosonMasterManag
     /**
      * 構成市町村マスタ情報を取得します。
      *
-     * @param 市町村識別ID
+     * @param 市町村識別ID 市町村識別ID
      * @return 構成市町村マスタ情報
      */
+    @Override
     public Optional<IKoseiShichosonMaster> find構成市町村(RString 市町村識別ID) {
         return dac.selectByKey(市町村識別ID)
                 .map(new IFunction<DbT7051KoseiShichosonMasterEntity, IKoseiShichosonMaster>() {

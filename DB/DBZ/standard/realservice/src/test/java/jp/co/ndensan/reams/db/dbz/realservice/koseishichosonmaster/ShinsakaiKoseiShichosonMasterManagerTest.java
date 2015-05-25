@@ -19,6 +19,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -27,6 +29,7 @@ import static org.mockito.Mockito.when;
  *
  * @author n8223　朴義一
  */
+@RunWith(Enclosed.class)
 public class ShinsakaiKoseiShichosonMasterManagerTest {
 
     private static final RString 市町村識別ID = DbT5051KoseiShichosonMasterEntityGenerator.DEFAULT_市町村識別ID;
@@ -70,8 +73,9 @@ public class ShinsakaiKoseiShichosonMasterManagerTest {
             System.out.println("Find構成市町村");
             RString DEFAULT_市町村識別ID = new RString("1");
             IKoseiShichosonMaster business = createBusines(DEFAULT_市町村識別ID);
+            when(dac.selectByKey(市町村識別ID)).thenReturn(
+                    Optional.ofNullable(DbT5051KoseiShichosonMasterEntityGenerator.createDbT5051KoseiShichosonMasterEntity()));
             Optional<IKoseiShichosonMaster> result = sut.find構成市町村(市町村識別ID);
-
             assertThat(result.get().get市町村識別ID(), is(business.get市町村識別ID()));
         }
 

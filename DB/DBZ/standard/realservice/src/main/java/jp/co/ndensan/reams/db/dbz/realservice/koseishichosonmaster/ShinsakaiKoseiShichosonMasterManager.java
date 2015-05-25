@@ -26,7 +26,6 @@ public class ShinsakaiKoseiShichosonMasterManager extends KoseiShichosonMasterMa
     /**
      * コンストラクタです。
      *
-     * 構成市町村マスタ情報を作成するインターフェースを生成します。
      */
     public ShinsakaiKoseiShichosonMasterManager() {
         this.dac = InstanceProvider.create(DbT5051KoseiShichosonMasterDac.class);
@@ -42,9 +41,10 @@ public class ShinsakaiKoseiShichosonMasterManager extends KoseiShichosonMasterMa
     /**
      * 構成市町村マスタ情報を取得します。
      *
-     * @param 市町村識別ID
+     * @param 市町村識別ID 市町村識別ID
      * @return 構成市町村マスタ情報
      */
+    @Override
     public Optional<IKoseiShichosonMaster> find構成市町村(RString 市町村識別ID) {
         return dac.selectByKey(市町村識別ID)
                 .map(new IFunction<DbT5051KoseiShichosonMasterEntity, IKoseiShichosonMaster>() {

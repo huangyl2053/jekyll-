@@ -48,6 +48,7 @@ public class ShinsakaiShinseiRirekiJoho implements IShinseiRirekiJoho {
      *
      * @return 申請管理番号
      */
+    @Override
     public ShinseishoKanriNo get申請管理番号() {
         return entity.getShinseishoKanriNo();
     }
@@ -57,6 +58,7 @@ public class ShinsakaiShinseiRirekiJoho implements IShinseiRirekiJoho {
      *
      * @return 前回申請管理番号
      */
+    @Override
     public ShinseishoKanriNo get前回申請管理番号() {
         return entity.getZenkaiShinseishoKanriNo();
     }
@@ -132,7 +134,7 @@ public class ShinsakaiShinseiRirekiJoho implements IShinseiRirekiJoho {
         /**
          * insertDantaiCdを設定します。
          *
-         * @param insertDantaiCd
+         * @param insertDantaiCd 挿入市町村
          * @return builder
          */
         public Builder setInsertDantaiCd(RString insertDantaiCd) {
@@ -144,7 +146,7 @@ public class ShinsakaiShinseiRirekiJoho implements IShinseiRirekiJoho {
         /**
          * isDeletedを設定します。
          *
-         * @param isDeleted
+         * @param isDeleted 論理削除flag
          * @return builder
          */
         public Builder setIsDeleted(boolean isDeleted) {
@@ -155,7 +157,7 @@ public class ShinsakaiShinseiRirekiJoho implements IShinseiRirekiJoho {
         /**
          * lastUpdateReamsLoginIdを設定します。
          *
-         * @param lastUpdateReamsLoginId
+         * @param lastUpdateReamsLoginId 更新ユーザーId
          * @return builder
          */
         public Builder setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -167,7 +169,7 @@ public class ShinsakaiShinseiRirekiJoho implements IShinseiRirekiJoho {
         /**
          * shinseishoKanriNoを設定します。
          *
-         * @param shinseishoKanriNo
+         * @param shinseishoKanriNo 申請書管理番号
          * @return builder
          */
         public Builder setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
@@ -179,7 +181,7 @@ public class ShinsakaiShinseiRirekiJoho implements IShinseiRirekiJoho {
         /**
          * zenkaiShinseishoKanriNoを設定します。
          *
-         * @param zenkaiShinseishoKanriNo
+         * @param zenkaiShinseishoKanriNo 前回申請書管理番号
          * @return builder
          */
         public Builder setZenkaiShinseishoKanriNo(ShinseishoKanriNo zenkaiShinseishoKanriNo) {
@@ -199,7 +201,8 @@ public class ShinsakaiShinseiRirekiJoho implements IShinseiRirekiJoho {
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。
+     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

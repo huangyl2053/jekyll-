@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 
 /**
- * 申請履歴情報を作成するクラスです。
+ * 申請履歴情報のベースクラスです。
  *
  * @author n8223　朴義一
  */
@@ -19,9 +19,10 @@ public abstract class ShinseiRirekiManagerBase implements IShinseiRirekiManager 
     /**
      * 申請履歴情報を取得します。
      *
-     * @param 申請管理番号
+     * @param 申請書管理番号 申請書管理番号
      * @return 申請履歴情報
      */
-    public abstract Optional<IShinseiRirekiJoho> find申請履歴情報(ShinseishoKanriNo 申請管理番号);
+    @Override
+    public abstract Optional<IShinseiRirekiJoho> find申請履歴情報(ShinseishoKanriNo 申請書管理番号);
 
 }

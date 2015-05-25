@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 構成市町村マスタ情報を取得するクラスです。
+ * 構成市町村マスタマネージャーのベースクラスです。
  *
  * @author n8223　朴義一
  */
@@ -19,9 +19,10 @@ public abstract class KoseiShichosonMasterManagerBase implements IKoseiShichoson
     /**
      * 構成市町村マスタ情報を取得します。
      *
-     * @param 市町村識別ID
+     * @param 市町村識別ID 市町村識別ID
      * @return 構成市町村マスタ情報
      */
+    @Override
     public abstract Optional<IKoseiShichosonMaster> find構成市町村(RString 市町村識別ID);
 
 }

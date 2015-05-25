@@ -53,6 +53,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 市町村識別ID
      */
+    @Override
     public RString get市町村識別ID() {
         return entity.getShichosonShokibetsuID();
     }
@@ -62,6 +63,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 市町村コード
      */
+    @Override
     public LasdecCode get市町村コード() {
         return entity.getShichosonCode();
     }
@@ -71,6 +73,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 証記載保険者番号
      */
+    @Override
     public ShoKisaiHokenshaNo get証記載保険者番号() {
         return entity.getShoKisaiHokenshaNo();
     }
@@ -80,6 +83,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 国保連広域内市町村番号
      */
+    @Override
     public RString get国保連広域内市町村番号() {
         return entity.getKokuhorenKoikiShichosonNo();
     }
@@ -89,6 +93,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 市町村名称
      */
+    @Override
     public RString get市町村名称() {
         return entity.getShichosonMeisho();
     }
@@ -98,6 +103,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 都道府県名称
      */
+    @Override
     public RString get都道府県名称() {
         return entity.getTodofukenMeisho();
     }
@@ -107,6 +113,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 郡名称
      */
+    @Override
     public RString get郡名称() {
         return entity.getGunMeisho();
     }
@@ -116,6 +123,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 郵便番号
      */
+    @Override
     public YubinNo get郵便番号() {
         return entity.getYubinNo();
     }
@@ -125,6 +133,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 住所
      */
+    @Override
     public AtenaJusho get住所() {
         return entity.getJusho();
     }
@@ -134,6 +143,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 電話番号
      */
+    @Override
     public TelNo get電話番号() {
         return entity.getTelNo();
     }
@@ -143,6 +153,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 最優先地区コード
      */
+    @Override
     public RString get最優先地区コード() {
         return entity.getYusenChikuCode();
     }
@@ -152,6 +163,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 帳票用都道府県名称表示有無
      */
+    @Override
     public RString get帳票用都道府県名称表示有無() {
         return entity.getTyohyoTodoufukenHyojiUmu();
     }
@@ -161,6 +173,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 帳票用郡名称表示有無
      */
+    @Override
     public RString get帳票用郡名称表示有無() {
         return entity.getTyohyoGunHyojiUmu();
     }
@@ -170,6 +183,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 帳票用市町村名称表示有無
      */
+    @Override
     public RString get帳票用市町村名称表示有無() {
         return entity.getTyohyoShichosonHyojiUmu();
     }
@@ -179,6 +193,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 帳票用住所編集方法
      */
+    @Override
     public RString get帳票用住所編集方法() {
         return entity.getTyohyoJushoHenshuHouhou();
     }
@@ -188,6 +203,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 帳票用方書表示有無
      */
+    @Override
     public RString get帳票用方書表示有無() {
         return entity.getTyohyoKatagakiHyojiUmu();
     }
@@ -197,6 +213,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 外国人氏名表示方法
      */
+    @Override
     public RString get外国人氏名表示方法() {
         return entity.getGaikokujinHyojiHouhou();
     }
@@ -206,6 +223,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 老人保健市町村番号
      */
+    @Override
     public RString get老人保健市町村番号() {
         return entity.getRojinhokenShichosonNo();
     }
@@ -215,6 +233,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 老人保健受給者番号体系
      */
+    @Override
     public RString get老人保健受給者番号体系() {
         return entity.getRokenJukyushaNoTaikei();
     }
@@ -224,6 +243,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 特徴分配集約
      */
+    @Override
     public RString get特徴分配集約() {
         return entity.getTokuchoBunpaishuyaku();
     }
@@ -233,6 +253,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 移行日
      */
+    @Override
     public FlexibleDate get移行日() {
         return entity.getIkoYMD();
     }
@@ -242,6 +263,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 加入日
      */
+    @Override
     public FlexibleDate get加入日() {
         return entity.getKanyuYMD();
     }
@@ -251,6 +273,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 離脱日
      */
+    @Override
     public FlexibleDate get離脱日() {
         return entity.getRidatsuYMD();
     }
@@ -260,6 +283,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 合併旧市町村区分
      */
+    @Override
     public RString get合併旧市町村区分() {
         return entity.getGappeiKyuShichosonKubun();
     }
@@ -269,6 +293,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 合併旧市町村表示有無
      */
+    @Override
     public RString get合併旧市町村表示有無() {
         return entity.getGappeiKyuShichosonHyojiUmu();
     }
@@ -278,6 +303,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 合併情報地域番号
      */
+    @Override
     public RString get合併情報地域番号() {
         return entity.getGappeiChiikiNo();
     }
@@ -287,6 +313,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 運用保険者番号
      */
+    @Override
     public ShoKisaiHokenshaNo get運用保険者番号() {
         return entity.getUnyoHokenshaNo();
     }
@@ -296,6 +323,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 運用開始日
      */
+    @Override
     public FlexibleDate get運用開始日() {
         return entity.getUnyoKaishiYMD();
     }
@@ -305,6 +333,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 運用終了日
      */
+    @Override
     public FlexibleDate get運用終了日() {
         return entity.getUnyoShuryoYMD();
     }
@@ -314,6 +343,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return 運用形態区分
      */
+    @Override
     public RString get運用形態区分() {
         return entity.getUnyoKeitaiKubun();
     }
@@ -389,7 +419,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * insertDantaiCdを設定します。
          *
-         * @param insertDantaiCd
+         * @param insertDantaiCd 挿入市町村
          * @return builder
          */
         public Builder setInsertDantaiCd(RString insertDantaiCd) {
@@ -401,7 +431,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * isDeletedを設定します。
          *
-         * @param isDeleted
+         * @param isDeleted 論理削除フラグ
          * @return builder
          */
         public Builder setIsDeleted(boolean isDeleted) {
@@ -412,7 +442,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * lastUpdateReamsLoginIdを設定します。
          *
-         * @param lastUpdateReamsLoginId
+         * @param lastUpdateReamsLoginId 最終更新ユーザーId
          * @return builder
          */
         public Builder setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -424,7 +454,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * shichosonShokibetsuIDを設定します。
          *
-         * @param shichosonShokibetsuID
+         * @param shichosonShokibetsuID 市町村識別ID
          * @return builder
          */
         public Builder setShichosonShokibetsuID(RString shichosonShokibetsuID) {
@@ -436,7 +466,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * shichosonCodeを設定します。
          *
-         * @param shichosonCode
+         * @param shichosonCode 市町村コード
          * @return builder
          */
         public Builder setShichosonCode(LasdecCode shichosonCode) {
@@ -448,7 +478,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * shoKisaiHokenshaNoを設定します。
          *
-         * @param shoKisaiHokenshaNo
+         * @param shoKisaiHokenshaNo 証記載保険者番号
          * @return builder
          */
         public Builder setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
@@ -460,7 +490,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * kokuhorenKoikiShichosonNoを設定します。
          *
-         * @param kokuhorenKoikiShichosonNo
+         * @param kokuhorenKoikiShichosonNo 国保連広域内市町村番号
          * @return builder
          */
         public Builder setKokuhorenKoikiShichosonNo(RString kokuhorenKoikiShichosonNo) {
@@ -472,7 +502,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * shichosonMeishoを設定します。
          *
-         * @param shichosonMeisho
+         * @param shichosonMeisho 市町村名称
          * @return builder
          */
         public Builder setShichosonMeisho(RString shichosonMeisho) {
@@ -484,7 +514,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * todofukenMeishoを設定します。
          *
-         * @param todofukenMeisho
+         * @param todofukenMeisho 都道府県名称
          * @return builder
          */
         public Builder setTodofukenMeisho(RString todofukenMeisho) {
@@ -496,7 +526,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * gunMeishoを設定します。
          *
-         * @param gunMeisho
+         * @param gunMeisho 郡名称
          * @return builder
          */
         public Builder setGunMeisho(RString gunMeisho) {
@@ -508,7 +538,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * yubinNoを設定します。
          *
-         * @param yubinNo
+         * @param yubinNo 郵便番号
          * @return builder
          */
         public Builder setYubinNo(YubinNo yubinNo) {
@@ -520,7 +550,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * jushoを設定します。
          *
-         * @param jusho
+         * @param jusho 住所
          * @return builder
          */
         public Builder setJusho(AtenaJusho jusho) {
@@ -532,7 +562,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * telNoを設定します。
          *
-         * @param telNo
+         * @param telNo 電話番号
          * @return builder
          */
         public Builder setTelNo(TelNo telNo) {
@@ -544,7 +574,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * yusenChikuCodeを設定します。
          *
-         * @param yusenChikuCode
+         * @param yusenChikuCode 電話番号
          * @return builder
          */
         public Builder setYusenChikuCode(RString yusenChikuCode) {
@@ -556,7 +586,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * tyohyoTodoufukenHyojiUmuを設定します。
          *
-         * @param tyohyoTodoufukenHyojiUmu
+         * @param tyohyoTodoufukenHyojiUmu 帳票用都道府県名称表示有無
          * @return builder
          */
         public Builder setTyohyoTodoufukenHyojiUmu(RString tyohyoTodoufukenHyojiUmu) {
@@ -568,7 +598,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * tyohyoGunHyojiUmuを設定します。
          *
-         * @param tyohyoGunHyojiUmu
+         * @param tyohyoGunHyojiUmu 帳票用郡名称表示有無
          * @return builder
          */
         public Builder setTyohyoGunHyojiUmu(RString tyohyoGunHyojiUmu) {
@@ -580,7 +610,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * tyohyoShichosonHyojiUmuを設定します。
          *
-         * @param tyohyoShichosonHyojiUmu
+         * @param tyohyoShichosonHyojiUmu 帳票用市町村名称表示有無
          * @return builder
          */
         public Builder setTyohyoShichosonHyojiUmu(RString tyohyoShichosonHyojiUmu) {
@@ -592,7 +622,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * tyohyoJushoHenshuHouhouを設定します。
          *
-         * @param tyohyoJushoHenshuHouhou
+         * @param tyohyoJushoHenshuHouhou 帳票用住所編集方法
          * @return builder
          */
         public Builder setTyohyoJushoHenshuHouhou(RString tyohyoJushoHenshuHouhou) {
@@ -604,7 +634,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * tyohyoKatagakiHyojiUmuを設定します。
          *
-         * @param tyohyoKatagakiHyojiUmu
+         * @param tyohyoKatagakiHyojiUmu 帳票用方書表示有無
          * @return builder
          */
         public Builder setTyohyoKatagakiHyojiUmu(RString tyohyoKatagakiHyojiUmu) {
@@ -616,7 +646,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * gaikokujinHyojiHouhouを設定します。
          *
-         * @param gaikokujinHyojiHouhou
+         * @param gaikokujinHyojiHouhou 外国人氏名表示方法
          * @return builder
          */
         public Builder setGaikokujinHyojiHouhou(RString gaikokujinHyojiHouhou) {
@@ -628,7 +658,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * rojinhokenShichosonNoを設定します。
          *
-         * @param rojinhokenShichosonNo
+         * @param rojinhokenShichosonNo 老人保健市町村番号
          * @return builder
          */
         public Builder setRojinhokenShichosonNo(RString rojinhokenShichosonNo) {
@@ -640,7 +670,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * rokenJukyushaNoTaikeiを設定します。
          *
-         * @param rokenJukyushaNoTaikei
+         * @param rokenJukyushaNoTaikei 老人保健受給者番号体系
          * @return builder
          */
         public Builder setRokenJukyushaNoTaikei(RString rokenJukyushaNoTaikei) {
@@ -652,7 +682,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * tokuchoBunpaishuyakuを設定します。
          *
-         * @param tokuchoBunpaishuyaku
+         * @param tokuchoBunpaishuyaku 特徴分配集約
          * @return builder
          */
         public Builder setTokuchoBunpaishuyaku(RString tokuchoBunpaishuyaku) {
@@ -664,7 +694,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * ikoYMDを設定します。
          *
-         * @param ikoYMD
+         * @param ikoYMD 移行日
          * @return builder
          */
         public Builder setIkoYMD(FlexibleDate ikoYMD) {
@@ -676,7 +706,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * kanyuYMDを設定します。
          *
-         * @param kanyuYMD
+         * @param kanyuYMD 加入日
          * @return builder
          */
         public Builder setKanyuYMD(FlexibleDate kanyuYMD) {
@@ -688,7 +718,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * ridatsuYMDを設定します。
          *
-         * @param ridatsuYMD
+         * @param ridatsuYMD 離脱日
          * @return builder
          */
         public Builder setRidatsuYMD(FlexibleDate ridatsuYMD) {
@@ -700,7 +730,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * gappeiKyuShichosonKubunを設定します。
          *
-         * @param gappeiKyuShichosonKubun
+         * @param gappeiKyuShichosonKubun 合併旧市町村区分
          * @return builder
          */
         public Builder setGappeiKyuShichosonKubun(RString gappeiKyuShichosonKubun) {
@@ -712,7 +742,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * gappeiKyuShichosonHyojiUmuを設定します。
          *
-         * @param gappeiKyuShichosonHyojiUmu
+         * @param gappeiKyuShichosonHyojiUmu 合併旧市町村表示有無
          * @return builder
          */
         public Builder setGappeiKyuShichosonHyojiUmu(RString gappeiKyuShichosonHyojiUmu) {
@@ -724,7 +754,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * gappeiChiikiNoを設定します。
          *
-         * @param gappeiChiikiNo
+         * @param gappeiChiikiNo 合併情報地域番号
          * @return builder
          */
         public Builder setGappeiChiikiNo(RString gappeiChiikiNo) {
@@ -736,7 +766,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * unyoHokenshaNoを設定します。
          *
-         * @param unyoHokenshaNo
+         * @param unyoHokenshaNo 運用保険者番号
          * @return builder
          */
         public Builder setUnyoHokenshaNo(ShoKisaiHokenshaNo unyoHokenshaNo) {
@@ -748,7 +778,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * unyoKaishiYMDを設定します。
          *
-         * @param unyoKaishiYMD
+         * @param unyoKaishiYMD 運用開始日
          * @return builder
          */
         public Builder setUnyoKaishiYMD(FlexibleDate unyoKaishiYMD) {
@@ -760,7 +790,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * unyoShuryoYMDを設定します。
          *
-         * @param unyoShuryoYMD
+         * @param unyoShuryoYMD 運用終了日
          * @return builder
          */
         public Builder setUnyoShuryoYMD(FlexibleDate unyoShuryoYMD) {
@@ -772,7 +802,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
         /**
          * unyoKeitaiKubunを設定します。
          *
-         * @param unyoKeitaiKubun
+         * @param unyoKeitaiKubun 運用形態区分
          * @return builder
          */
         public Builder setUnyoKeitaiKubun(RString unyoKeitaiKubun) {
@@ -792,7 +822,8 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。
+     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

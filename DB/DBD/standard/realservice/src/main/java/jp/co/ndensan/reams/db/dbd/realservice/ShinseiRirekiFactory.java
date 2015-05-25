@@ -18,19 +18,17 @@ public final class ShinseiRirekiFactory {
     }
 
     /**
-     * 業務コード{@code SubGyomuCode}で介護受給・認定情報を取得します。
+     * 業務コード{@code SubGyomuCode}で{@link IShinseiRirekiManager}を生成します。
      *
-     * @param subGyomuCode
+     * @param subGyomuCode サブ業務コード
      * @return {@link IShinseiRirekiManager}
      */
     public static IShinseiRirekiManager getInstance(SubGyomuCode subGyomuCode) {
 
         if (subGyomuCode.equals(SubGyomuCode.DBD介護受給)) {
             return new HokenshaShinseiRirekiManager();
-        } //else {
-        //  return new ShinsakaiShinseiRirekiManager();
+        }
         return new HokenshaShinseiRirekiManager();
-        //}
 
     }
 

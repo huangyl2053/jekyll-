@@ -18,19 +18,17 @@ public final class KoseiShichosonMasterFactory {
     }
 
     /**
-     * 業務コード{@code SubGyomuCode}で構成市町村マスタ情報を取得します。
+     * 業務コード{@code SubGyomuCode}で{@link IKoseiShichosonMaster}Manager構成市町村マスタ情報を取得します。
      *
-     * @param subGyomuCode
+     * @param subGyomuCode サブ業務コード
      * @return {@link IChosainManager}
      */
     public static IKoseiShichosonMasterManager getInstance(SubGyomuCode subGyomuCode) {
 
         if (subGyomuCode.equals(SubGyomuCode.DBD介護受給)) {
             return new ShinsakaiKoseiShichosonMasterManager();
-        }//else {
-        //return new KaigoiKoseiShichosonMasterManager();
-        return new ShinsakaiKoseiShichosonMasterManager();
-        // }
-    }
+        }
 
+        return new ShinsakaiKoseiShichosonMasterManager();
+    }
 }

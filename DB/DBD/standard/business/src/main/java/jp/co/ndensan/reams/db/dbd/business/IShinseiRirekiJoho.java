@@ -19,13 +19,13 @@ public interface IShinseiRirekiJoho {
      *
      * @return 申請管理番号
      */
-    public ShinseishoKanriNo get申請管理番号();
+    ShinseishoKanriNo get申請管理番号();
 
     /**
      * 前回申請管理番号を返します。
      *
      * @return 前回申請管理番号
      */
-    public ShinseishoKanriNo get前回申請管理番号();
+    ShinseishoKanriNo get前回申請管理番号();
 
 }
