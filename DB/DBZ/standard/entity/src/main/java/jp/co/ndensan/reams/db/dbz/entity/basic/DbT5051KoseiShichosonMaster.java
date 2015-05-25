@@ -4,9 +4,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
  * 構成市町村マスタテーブルの項目定義クラスです。
- * <br/> 運用保険者単位に構成市長を管理する
+ * <br/> 運用保険者単位に構成市町村を管理する
  */
-public enum DbT7051KoseiShichosonMaster implements IColumnDefinition {
+public enum DbT5051KoseiShichosonMaster implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
     /**
      * insertDantaiCd
@@ -171,7 +171,7 @@ public enum DbT7051KoseiShichosonMaster implements IColumnDefinition {
     private final int maxLength;
     private final int scale;
 
-    private DbT7051KoseiShichosonMaster(int maxLength, int scale) {
+    private DbT5051KoseiShichosonMaster(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

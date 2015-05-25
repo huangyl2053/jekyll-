@@ -115,7 +115,7 @@ public class DbT1008IryohokenKanyuJokyoDacTest extends DbzTestDacBase {
                     市町村コード202012,
                     DEFAULT_識別コード,
                     DEFAULT_処理日時);
-            assertThat(sut.selectAll().size(), is(2));
+            assertThat(sut.selectAll().size(), is(3));
         }
 
         @Test
