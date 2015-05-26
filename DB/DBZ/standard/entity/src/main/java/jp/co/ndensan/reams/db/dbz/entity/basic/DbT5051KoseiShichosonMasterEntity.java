@@ -17,13 +17,13 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokensha
 
 /**
  * 構成市町村マスタテーブルのエンティティクラスです。
- * <br/> 運用保険者単位に構成市長を管理する
+ * <br/> 運用保険者単位に構成市町村を管理する
  */
-public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051KoseiShichosonMasterEntity> implements IDbAccessable {
+public class DbT5051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT5051KoseiShichosonMasterEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
-    public static final RString TABLE_NAME = new RString("DbT7051KoseiShichosonMaster");
+    public static final RString TABLE_NAME = new RString("DbT5051KoseiShichosonMaster");
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -667,13 +667,13 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     }
 
     /**
-     * このエンティティの主キーが他の{@literal DbT7051KoseiShichosonMasterEntity}と等しいか判定します。
+     * このエンティティの主キーが他の{@literal DbT5051KoseiShichosonMasterEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT7051KoseiShichosonMasterEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT5051KoseiShichosonMasterEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
-    public boolean equalsPrimaryKeys(DbT7051KoseiShichosonMasterEntity other) {
+    public boolean equalsPrimaryKeys(DbT5051KoseiShichosonMasterEntity other) {
         if (other == null) {
             return false;
         }
@@ -687,7 +687,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
      * {@inheritDoc}
      */
     @Override
-    public void shallowCopy(DbT7051KoseiShichosonMasterEntity entity) {
+    public void shallowCopy(DbT5051KoseiShichosonMasterEntity entity) {
         this.shichosonShokibetsuID = entity.shichosonShokibetsuID;
         this.shichosonCode = entity.shichosonCode;
         this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;

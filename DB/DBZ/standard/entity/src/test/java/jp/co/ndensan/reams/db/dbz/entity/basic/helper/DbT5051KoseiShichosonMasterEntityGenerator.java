@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8223 朴義一
  */
-public final class DbT7051KoseiShichosonMasterEntityGenerator {
+public final class DbT5051KoseiShichosonMasterEntityGenerator {
 
     public static final RString DEFAULT_市町村識別ID = new RString("1");
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode(new RString("012345"));
@@ -54,11 +54,11 @@ public final class DbT7051KoseiShichosonMasterEntityGenerator {
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
      */
-    private DbT7051KoseiShichosonMasterEntityGenerator() {
+    private DbT5051KoseiShichosonMasterEntityGenerator() {
     }
 
-    public static DbT7051KoseiShichosonMasterEntity createDbT7051KoseiShichosonMasterEntity() {
-        DbT7051KoseiShichosonMasterEntity entity = new DbT7051KoseiShichosonMasterEntity();
+    public static DbT5051KoseiShichosonMasterEntity createDbT5051KoseiShichosonMasterEntity() {
+        DbT5051KoseiShichosonMasterEntity entity = new DbT5051KoseiShichosonMasterEntity();
         entity.setShichosonShokibetsuID(DEFAULT_市町村識別ID);
         entity.setShichosonCode(DEFAULT_市町村コード);
         entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);

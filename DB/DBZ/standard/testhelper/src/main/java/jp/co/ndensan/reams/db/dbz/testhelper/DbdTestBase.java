@@ -1,5 +1,6 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package jp.co.ndensan.reams.db.dbz.testhelper;
@@ -11,7 +12,7 @@ import org.junit.BeforeClass;
 /**
  * {@link TestBase3}のラッパークラスです。
  *
- * @author N1013 松本直樹
+ * @author n8223 朴義一
  */
 public class DbdTestBase extends TestBase3 {
 
