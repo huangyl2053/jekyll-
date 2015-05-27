@@ -1,26 +1,26 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
- * DbT7051KoseiShichosonMasterの項目定義クラスです
- *
+ * 構成市町村マスタテーブルのエンティティクラスです。
+ * <br/> 運用保険者単位に構成市長を管理する
  */
 public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051KoseiShichosonMasterEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7051KoseiShichosonMaster");
@@ -35,9 +35,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private RString shichosonShokibetsuID;
-    @PrimaryKey
     private LasdecCode shichosonCode;
-    @PrimaryKey
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private RString kokuhorenKoikiShichosonNo;
     private RString shichosonMeisho;
@@ -68,7 +66,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     private RString unyoKeitaiKubun;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
      *
      * @return insertDantaiCd
      */
@@ -77,7 +75,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
      *
      * @param insertDantaiCd insertDantaiCd
      */
@@ -86,7 +84,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
      *
      * @return isDeleted
      */
@@ -95,7 +93,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
      *
      * @param isDeleted isDeleted
      */
@@ -104,7 +102,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     }
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
      *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
@@ -113,540 +111,556 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     }
 
     /**
-     * getShichosonShokibetsuID
+     * 市町村識別IDのgetメソッドです。
      *
-     * @return shichosonShokibetsuID
+     * @return 市町村識別ID
      */
     public RString getShichosonShokibetsuID() {
         return shichosonShokibetsuID;
     }
 
     /**
-     * setShichosonShokibetsuID
+     * 市町村識別IDのsetメソッドです。
      *
-     * @param shichosonShokibetsuID shichosonShokibetsuID
+     * @param shichosonShokibetsuID 市町村識別ID
      */
     public void setShichosonShokibetsuID(RString shichosonShokibetsuID) {
         this.shichosonShokibetsuID = shichosonShokibetsuID;
     }
 
     /**
-     * getShichosonCode
+     * 市町村コードのgetメソッドです。
      *
-     * @return shichosonCode
+     * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
         return shichosonCode;
     }
 
     /**
-     * setShichosonCode
+     * 市町村コードのsetメソッドです。
      *
-     * @param shichosonCode shichosonCode
+     * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
     /**
-     * getShoKisaiHokenshaNo
+     * 証記載保険者番号のgetメソッドです。
      *
-     * @return shoKisaiHokenshaNo
+     * @return 証記載保険者番号
      */
     public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
-     * setShoKisaiHokenshaNo
+     * 証記載保険者番号のsetメソッドです。
      *
-     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
+     * @param shoKisaiHokenshaNo 証記載保険者番号
      */
     public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
-     * getKokuhorenKoikiShichosonNo
+     * 国保連広域内市町村番号のgetメソッドです。
      *
-     * @return kokuhorenKoikiShichosonNo
+     * @return 国保連広域内市町村番号
      */
     public RString getKokuhorenKoikiShichosonNo() {
         return kokuhorenKoikiShichosonNo;
     }
 
     /**
-     * setKokuhorenKoikiShichosonNo
+     * 国保連広域内市町村番号のsetメソッドです。
      *
-     * @param kokuhorenKoikiShichosonNo kokuhorenKoikiShichosonNo
+     * @param kokuhorenKoikiShichosonNo 国保連広域内市町村番号
      */
     public void setKokuhorenKoikiShichosonNo(RString kokuhorenKoikiShichosonNo) {
         this.kokuhorenKoikiShichosonNo = kokuhorenKoikiShichosonNo;
     }
 
     /**
-     * getShichosonMeisho
+     * 市町村名称のgetメソッドです。
      *
-     * @return shichosonMeisho
+     * @return 市町村名称
      */
     public RString getShichosonMeisho() {
         return shichosonMeisho;
     }
 
     /**
-     * setShichosonMeisho
+     * 市町村名称のsetメソッドです。
      *
-     * @param shichosonMeisho shichosonMeisho
+     * @param shichosonMeisho 市町村名称
      */
     public void setShichosonMeisho(RString shichosonMeisho) {
         this.shichosonMeisho = shichosonMeisho;
     }
 
     /**
-     * getTodofukenMeisho
+     * 都道府県名称のgetメソッドです。
      *
-     * @return todofukenMeisho
+     * @return 都道府県名称
      */
     public RString getTodofukenMeisho() {
         return todofukenMeisho;
     }
 
     /**
-     * setTodofukenMeisho
+     * 都道府県名称のsetメソッドです。
      *
-     * @param todofukenMeisho todofukenMeisho
+     * @param todofukenMeisho 都道府県名称
      */
     public void setTodofukenMeisho(RString todofukenMeisho) {
         this.todofukenMeisho = todofukenMeisho;
     }
 
     /**
-     * getGunMeisho
+     * 郡名称のgetメソッドです。
      *
-     * @return gunMeisho
+     * @return 郡名称
      */
     public RString getGunMeisho() {
         return gunMeisho;
     }
 
     /**
-     * setGunMeisho
+     * 郡名称のsetメソッドです。
      *
-     * @param gunMeisho gunMeisho
+     * @param gunMeisho 郡名称
      */
     public void setGunMeisho(RString gunMeisho) {
         this.gunMeisho = gunMeisho;
     }
 
     /**
-     * getYubinNo
+     * 郵便番号のgetメソッドです。
      *
-     * @return yubinNo
+     * @return 郵便番号
      */
     public YubinNo getYubinNo() {
         return yubinNo;
     }
 
     /**
-     * setYubinNo
+     * 郵便番号のsetメソッドです。
      *
-     * @param yubinNo yubinNo
+     * @param yubinNo 郵便番号
      */
     public void setYubinNo(YubinNo yubinNo) {
         this.yubinNo = yubinNo;
     }
 
     /**
-     * getJusho
+     * 住所のgetメソッドです。
      *
-     * @return jusho
+     * @return 住所
      */
     public AtenaJusho getJusho() {
         return jusho;
     }
 
     /**
-     * setJusho
+     * 住所のsetメソッドです。
      *
-     * @param jusho jusho
+     * @param jusho 住所
      */
     public void setJusho(AtenaJusho jusho) {
         this.jusho = jusho;
     }
 
     /**
-     * getTelNo
+     * 電話番号のgetメソッドです。
      *
-     * @return telNo
+     * @return 電話番号
      */
     public TelNo getTelNo() {
         return telNo;
     }
 
     /**
-     * setTelNo
+     * 電話番号のsetメソッドです。
      *
-     * @param telNo telNo
+     * @param telNo 電話番号
      */
     public void setTelNo(TelNo telNo) {
         this.telNo = telNo;
     }
 
     /**
-     * getYusenChikuCode
+     * 最優先地区コードのgetメソッドです。
      *
-     * @return yusenChikuCode
+     * @return 最優先地区コード
      */
     public RString getYusenChikuCode() {
         return yusenChikuCode;
     }
 
     /**
-     * setYusenChikuCode
+     * 最優先地区コードのsetメソッドです。
      *
-     * @param yusenChikuCode yusenChikuCode
+     * @param yusenChikuCode 最優先地区コード
      */
     public void setYusenChikuCode(RString yusenChikuCode) {
         this.yusenChikuCode = yusenChikuCode;
     }
 
     /**
-     * getTyohyoTodoufukenHyojiUmu
+     * 帳票用都道府県名称表示有無のgetメソッドです。
      *
-     * @return tyohyoTodoufukenHyojiUmu
+     * @return 帳票用都道府県名称表示有無
      */
     public RString getTyohyoTodoufukenHyojiUmu() {
         return tyohyoTodoufukenHyojiUmu;
     }
 
     /**
-     * setTyohyoTodoufukenHyojiUmu
+     * 帳票用都道府県名称表示有無のsetメソッドです。
      *
-     * @param tyohyoTodoufukenHyojiUmu tyohyoTodoufukenHyojiUmu
+     * @param tyohyoTodoufukenHyojiUmu 帳票用都道府県名称表示有無
      */
     public void setTyohyoTodoufukenHyojiUmu(RString tyohyoTodoufukenHyojiUmu) {
         this.tyohyoTodoufukenHyojiUmu = tyohyoTodoufukenHyojiUmu;
     }
 
     /**
-     * getTyohyoGunHyojiUmu
+     * 帳票用郡名称表示有無のgetメソッドです。
      *
-     * @return tyohyoGunHyojiUmu
+     * @return 帳票用郡名称表示有無
      */
     public RString getTyohyoGunHyojiUmu() {
         return tyohyoGunHyojiUmu;
     }
 
     /**
-     * setTyohyoGunHyojiUmu
+     * 帳票用郡名称表示有無のsetメソッドです。
      *
-     * @param tyohyoGunHyojiUmu tyohyoGunHyojiUmu
+     * @param tyohyoGunHyojiUmu 帳票用郡名称表示有無
      */
     public void setTyohyoGunHyojiUmu(RString tyohyoGunHyojiUmu) {
         this.tyohyoGunHyojiUmu = tyohyoGunHyojiUmu;
     }
 
     /**
-     * getTyohyoShichosonHyojiUmu
+     * 帳票用市町村名称表示有無のgetメソッドです。
      *
-     * @return tyohyoShichosonHyojiUmu
+     * @return 帳票用市町村名称表示有無
      */
     public RString getTyohyoShichosonHyojiUmu() {
         return tyohyoShichosonHyojiUmu;
     }
 
     /**
-     * setTyohyoShichosonHyojiUmu
+     * 帳票用市町村名称表示有無のsetメソッドです。
      *
-     * @param tyohyoShichosonHyojiUmu tyohyoShichosonHyojiUmu
+     * @param tyohyoShichosonHyojiUmu 帳票用市町村名称表示有無
      */
     public void setTyohyoShichosonHyojiUmu(RString tyohyoShichosonHyojiUmu) {
         this.tyohyoShichosonHyojiUmu = tyohyoShichosonHyojiUmu;
     }
 
     /**
-     * getTyohyoJushoHenshuHouhou
+     * 帳票用住所編集方法のgetメソッドです。
      *
-     * @return tyohyoJushoHenshuHouhou
+     * @return 帳票用住所編集方法
      */
     public RString getTyohyoJushoHenshuHouhou() {
         return tyohyoJushoHenshuHouhou;
     }
 
     /**
-     * setTyohyoJushoHenshuHouhou
+     * 帳票用住所編集方法のsetメソッドです。
      *
-     * @param tyohyoJushoHenshuHouhou tyohyoJushoHenshuHouhou
+     * @param tyohyoJushoHenshuHouhou 帳票用住所編集方法
      */
     public void setTyohyoJushoHenshuHouhou(RString tyohyoJushoHenshuHouhou) {
         this.tyohyoJushoHenshuHouhou = tyohyoJushoHenshuHouhou;
     }
 
     /**
-     * getTyohyoKatagakiHyojiUmu
+     * 帳票用方書表示有無のgetメソッドです。
      *
-     * @return tyohyoKatagakiHyojiUmu
+     * @return 帳票用方書表示有無
      */
     public RString getTyohyoKatagakiHyojiUmu() {
         return tyohyoKatagakiHyojiUmu;
     }
 
     /**
-     * setTyohyoKatagakiHyojiUmu
+     * 帳票用方書表示有無のsetメソッドです。
      *
-     * @param tyohyoKatagakiHyojiUmu tyohyoKatagakiHyojiUmu
+     * @param tyohyoKatagakiHyojiUmu 帳票用方書表示有無
      */
     public void setTyohyoKatagakiHyojiUmu(RString tyohyoKatagakiHyojiUmu) {
         this.tyohyoKatagakiHyojiUmu = tyohyoKatagakiHyojiUmu;
     }
 
     /**
-     * getGaikokujinHyojiHouhou
+     * 外国人氏名表示方法のgetメソッドです。
      *
-     * @return gaikokujinHyojiHouhou
+     * @return 外国人氏名表示方法
      */
     public RString getGaikokujinHyojiHouhou() {
         return gaikokujinHyojiHouhou;
     }
 
     /**
-     * setGaikokujinHyojiHouhou
+     * 外国人氏名表示方法のsetメソッドです。
      *
-     * @param gaikokujinHyojiHouhou gaikokujinHyojiHouhou
+     * @param gaikokujinHyojiHouhou 外国人氏名表示方法
      */
     public void setGaikokujinHyojiHouhou(RString gaikokujinHyojiHouhou) {
         this.gaikokujinHyojiHouhou = gaikokujinHyojiHouhou;
     }
 
     /**
-     * getRojinhokenShichosonNo
+     * 老人保健市町村番号のgetメソッドです。
      *
-     * @return rojinhokenShichosonNo
+     * @return 老人保健市町村番号
      */
     public RString getRojinhokenShichosonNo() {
         return rojinhokenShichosonNo;
     }
 
     /**
-     * setRojinhokenShichosonNo
+     * 老人保健市町村番号のsetメソッドです。
      *
-     * @param rojinhokenShichosonNo rojinhokenShichosonNo
+     * @param rojinhokenShichosonNo 老人保健市町村番号
      */
     public void setRojinhokenShichosonNo(RString rojinhokenShichosonNo) {
         this.rojinhokenShichosonNo = rojinhokenShichosonNo;
     }
 
     /**
-     * getRokenJukyushaNoTaikei
+     * 老人保健受給者番号体系のgetメソッドです。
      *
-     * @return rokenJukyushaNoTaikei
+     * @return 老人保健受給者番号体系
      */
     public RString getRokenJukyushaNoTaikei() {
         return rokenJukyushaNoTaikei;
     }
 
     /**
-     * setRokenJukyushaNoTaikei
+     * 老人保健受給者番号体系のsetメソッドです。
      *
-     * @param rokenJukyushaNoTaikei rokenJukyushaNoTaikei
+     * @param rokenJukyushaNoTaikei 老人保健受給者番号体系
      */
     public void setRokenJukyushaNoTaikei(RString rokenJukyushaNoTaikei) {
         this.rokenJukyushaNoTaikei = rokenJukyushaNoTaikei;
     }
 
     /**
-     * getTokuchoBunpaishuyaku
+     * 特徴分配集約のgetメソッドです。
+     * <br/>
+     * <br/>0：なし　1：あり（国保／後期）　2：あり（後期）
      *
-     * @return tokuchoBunpaishuyaku
+     * @return 特徴分配集約
      */
     public RString getTokuchoBunpaishuyaku() {
         return tokuchoBunpaishuyaku;
     }
 
     /**
-     * setTokuchoBunpaishuyaku
+     * 特徴分配集約のsetメソッドです。
+     * <br/>
+     * <br/>0：なし　1：あり（国保／後期）　2：あり（後期）
      *
-     * @param tokuchoBunpaishuyaku tokuchoBunpaishuyaku
+     * @param tokuchoBunpaishuyaku 特徴分配集約
      */
     public void setTokuchoBunpaishuyaku(RString tokuchoBunpaishuyaku) {
         this.tokuchoBunpaishuyaku = tokuchoBunpaishuyaku;
     }
 
     /**
-     * getIkoYMD
+     * 移行日のgetメソッドです。
      *
-     * @return ikoYMD
+     * @return 移行日
      */
     public FlexibleDate getIkoYMD() {
         return ikoYMD;
     }
 
     /**
-     * setIkoYMD
+     * 移行日のsetメソッドです。
      *
-     * @param ikoYMD ikoYMD
+     * @param ikoYMD 移行日
      */
     public void setIkoYMD(FlexibleDate ikoYMD) {
         this.ikoYMD = ikoYMD;
     }
 
     /**
-     * getKanyuYMD
+     * 加入日のgetメソッドです。
      *
-     * @return kanyuYMD
+     * @return 加入日
      */
     public FlexibleDate getKanyuYMD() {
         return kanyuYMD;
     }
 
     /**
-     * setKanyuYMD
+     * 加入日のsetメソッドです。
      *
-     * @param kanyuYMD kanyuYMD
+     * @param kanyuYMD 加入日
      */
     public void setKanyuYMD(FlexibleDate kanyuYMD) {
         this.kanyuYMD = kanyuYMD;
     }
 
     /**
-     * getRidatsuYMD
+     * 離脱日のgetメソッドです。
      *
-     * @return ridatsuYMD
+     * @return 離脱日
      */
     public FlexibleDate getRidatsuYMD() {
         return ridatsuYMD;
     }
 
     /**
-     * setRidatsuYMD
+     * 離脱日のsetメソッドです。
      *
-     * @param ridatsuYMD ridatsuYMD
+     * @param ridatsuYMD 離脱日
      */
     public void setRidatsuYMD(FlexibleDate ridatsuYMD) {
         this.ridatsuYMD = ridatsuYMD;
     }
 
     /**
-     * getGappeiKyuShichosonKubun
+     * 合併旧市町村区分 １：合併前の旧市町村である ０：最新の広域構成市町村であるのgetメソッドです。
      *
-     * @return gappeiKyuShichosonKubun
+     * @return 合併旧市町村区分 １：合併前の旧市町村である ０：最新の広域構成市町村である
      */
     public RString getGappeiKyuShichosonKubun() {
         return gappeiKyuShichosonKubun;
     }
 
     /**
-     * setGappeiKyuShichosonKubun
+     * 合併旧市町村区分 １：合併前の旧市町村である ０：最新の広域構成市町村であるのsetメソッドです。
      *
-     * @param gappeiKyuShichosonKubun gappeiKyuShichosonKubun
+     * @param gappeiKyuShichosonKubun 合併旧市町村区分 １：合併前の旧市町村である ０：最新の広域構成市町村である
      */
     public void setGappeiKyuShichosonKubun(RString gappeiKyuShichosonKubun) {
         this.gappeiKyuShichosonKubun = gappeiKyuShichosonKubun;
     }
 
     /**
-     * getGappeiKyuShichosonHyojiUmu
+     * 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しないのgetメソッドです。
      *
-     * @return gappeiKyuShichosonHyojiUmu
+     * @return 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しない
      */
     public RString getGappeiKyuShichosonHyojiUmu() {
         return gappeiKyuShichosonHyojiUmu;
     }
 
     /**
-     * setGappeiKyuShichosonHyojiUmu
+     * 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しないのsetメソッドです。
      *
-     * @param gappeiKyuShichosonHyojiUmu gappeiKyuShichosonHyojiUmu
+     * @param gappeiKyuShichosonHyojiUmu 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しない
      */
     public void setGappeiKyuShichosonHyojiUmu(RString gappeiKyuShichosonHyojiUmu) {
         this.gappeiKyuShichosonHyojiUmu = gappeiKyuShichosonHyojiUmu;
     }
 
     /**
-     * getGappeiChiikiNo
+     * 合併情報地域番号のgetメソッドです。
      *
-     * @return gappeiChiikiNo
+     * @return 合併情報地域番号
      */
     public RString getGappeiChiikiNo() {
         return gappeiChiikiNo;
     }
 
     /**
-     * setGappeiChiikiNo
+     * 合併情報地域番号のsetメソッドです。
      *
-     * @param gappeiChiikiNo gappeiChiikiNo
+     * @param gappeiChiikiNo 合併情報地域番号
      */
     public void setGappeiChiikiNo(RString gappeiChiikiNo) {
         this.gappeiChiikiNo = gappeiChiikiNo;
     }
 
     /**
-     * getUnyoHokenshaNo
+     * 運用保険者番号のgetメソッドです。
      *
-     * @return unyoHokenshaNo
+     * @return 運用保険者番号
      */
     public ShoKisaiHokenshaNo getUnyoHokenshaNo() {
         return unyoHokenshaNo;
     }
 
     /**
-     * setUnyoHokenshaNo
+     * 運用保険者番号のsetメソッドです。
      *
-     * @param unyoHokenshaNo unyoHokenshaNo
+     * @param unyoHokenshaNo 運用保険者番号
      */
     public void setUnyoHokenshaNo(ShoKisaiHokenshaNo unyoHokenshaNo) {
         this.unyoHokenshaNo = unyoHokenshaNo;
     }
 
     /**
-     * getUnyoKaishiYMD
+     * 運用開始日のgetメソッドです。
      *
-     * @return unyoKaishiYMD
+     * @return 運用開始日
      */
     public FlexibleDate getUnyoKaishiYMD() {
         return unyoKaishiYMD;
     }
 
     /**
-     * setUnyoKaishiYMD
+     * 運用開始日のsetメソッドです。
      *
-     * @param unyoKaishiYMD unyoKaishiYMD
+     * @param unyoKaishiYMD 運用開始日
      */
     public void setUnyoKaishiYMD(FlexibleDate unyoKaishiYMD) {
         this.unyoKaishiYMD = unyoKaishiYMD;
     }
 
     /**
-     * getUnyoShuryoYMD
+     * 運用終了日のgetメソッドです。
      *
-     * @return unyoShuryoYMD
+     * @return 運用終了日
      */
     public FlexibleDate getUnyoShuryoYMD() {
         return unyoShuryoYMD;
     }
 
     /**
-     * setUnyoShuryoYMD
+     * 運用終了日のsetメソッドです。
      *
-     * @param unyoShuryoYMD unyoShuryoYMD
+     * @param unyoShuryoYMD 運用終了日
      */
     public void setUnyoShuryoYMD(FlexibleDate unyoShuryoYMD) {
         this.unyoShuryoYMD = unyoShuryoYMD;
     }
 
     /**
-     * getUnyoKeitaiKubun
+     * 運用形態区分のgetメソッドです。
+     * <br/>
+     * <br/>単独
      *
-     * @return unyoKeitaiKubun
+     * <br/>広域連合
+     *
+     * <br/>一部事務組合
+     *
+     * @return 運用形態区分
      */
     public RString getUnyoKeitaiKubun() {
         return unyoKeitaiKubun;
     }
 
     /**
-     * setUnyoKeitaiKubun
+     * 運用形態区分のsetメソッドです。
+     * <br/>
+     * <br/>単独
      *
-     * @param unyoKeitaiKubun unyoKeitaiKubun
+     * <br/>広域連合
+     *
+     * <br/>一部事務組合
+     *
+     * @param unyoKeitaiKubun 運用形態区分
      */
     public void setUnyoKeitaiKubun(RString unyoKeitaiKubun) {
         this.unyoKeitaiKubun = unyoKeitaiKubun;
@@ -656,8 +670,7 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
      * このエンティティの主キーが他の{@literal DbT7051KoseiShichosonMasterEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT7051KoseiShichosonMasterEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT7051KoseiShichosonMasterEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7051KoseiShichosonMasterEntity other) {
@@ -665,12 +678,6 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
             return false;
         }
         if (!Objects.equals(this.shichosonShokibetsuID, other.shichosonShokibetsuID)) {
-            return false;
-        }
-        if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
-            return false;
-        }
-        if (!Objects.equals(this.shoKisaiHokenshaNo, other.shoKisaiHokenshaNo)) {
             return false;
         }
         return true;

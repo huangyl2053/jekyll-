@@ -194,7 +194,7 @@ public class KoseiShichosonMasterModelTest extends DbzTestBase {
 
         @Test
         public void 戻り値の合併地域番号は_設定した値と同じ合併地域番号を返す() {
-            GappeiChiikiNo no = new GappeiChiikiNo(DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_合併情報リンク番号);
+            GappeiChiikiNo no = new GappeiChiikiNo(DbT7051KoseiShichosonMasterEntityGenerator.DEFAULT_合併情報地域番号);
             sut.set合併地域番号(no);
             assertThat(sut.get合併地域番号(), is(no));
         }

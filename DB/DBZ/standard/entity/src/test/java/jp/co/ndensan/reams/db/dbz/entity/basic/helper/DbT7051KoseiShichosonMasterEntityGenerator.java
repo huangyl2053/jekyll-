@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 構成市町村マスタエンティティのテスト用インスタンスを作成する補助クラスです。
  *
- * @author LDNS 宋文娟
+ * @author n8223 朴義一
  */
 public final class DbT7051KoseiShichosonMasterEntityGenerator {
 
@@ -39,15 +39,16 @@ public final class DbT7051KoseiShichosonMasterEntityGenerator {
     public static final RString DEFAULT_外国人氏名表示方法 = new RString("1");
     public static final RString DEFAULT_老人保健市町村番号 = new RString("1");
     public static final RString DEFAULT_老人保健受給者番号体系 = new RString("1");
-    public static final FlexibleDate DEFAULT_移行日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_加入日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_離脱日 = new FlexibleDate("20140402");
+    public static final RString DEFAULT_特徴分配集約 = new RString("1");
+    public static final FlexibleDate DEFAULT_移行日 = new FlexibleDate("20150522");
+    public static final FlexibleDate DEFAULT_加入日 = new FlexibleDate("20150522");
+    public static final FlexibleDate DEFAULT_離脱日 = new FlexibleDate("20150522");
     public static final RString DEFAULT_合併旧市町村区分 = new RString("1");
     public static final RString DEFAULT_合併旧市町村表示有無 = new RString("1");
-    public static final RString DEFAULT_合併情報リンク番号 = new RString("1");
+    public static final RString DEFAULT_合併情報地域番号 = new RString("1");
     public static final ShoKisaiHokenshaNo DEFAULT_運用保険者番号 = new ShoKisaiHokenshaNo(new RString("2"));
-    public static final FlexibleDate DEFAULT_運用開始日 = new FlexibleDate("20140402");
-    public static final FlexibleDate DEFAULT_運用終了日 = new FlexibleDate("20140402");
+    public static final FlexibleDate DEFAULT_運用開始日 = new FlexibleDate("20150522");
+    public static final FlexibleDate DEFAULT_運用終了日 = new FlexibleDate("20150522");
     public static final RString DEFAULT_運用形態区分 = new RString("1");
 
     /**
@@ -77,12 +78,13 @@ public final class DbT7051KoseiShichosonMasterEntityGenerator {
         entity.setGaikokujinHyojiHouhou(DEFAULT_外国人氏名表示方法);
         entity.setRojinhokenShichosonNo(DEFAULT_老人保健市町村番号);
         entity.setRokenJukyushaNoTaikei(DEFAULT_老人保健受給者番号体系);
+        entity.setTokuchoBunpaishuyaku(DEFAULT_特徴分配集約);
         entity.setIkoYMD(DEFAULT_移行日);
         entity.setKanyuYMD(DEFAULT_加入日);
         entity.setRidatsuYMD(DEFAULT_離脱日);
         entity.setGappeiKyuShichosonKubun(DEFAULT_合併旧市町村区分);
         entity.setGappeiKyuShichosonHyojiUmu(DEFAULT_合併旧市町村表示有無);
-        entity.setGappeiChiikiNo(DEFAULT_合併情報リンク番号);
+        entity.setGappeiChiikiNo(DEFAULT_合併情報地域番号);
         entity.setUnyoHokenshaNo(DEFAULT_運用保険者番号);
         entity.setUnyoKaishiYMD(DEFAULT_運用開始日);
         entity.setUnyoShuryoYMD(DEFAULT_運用終了日);
