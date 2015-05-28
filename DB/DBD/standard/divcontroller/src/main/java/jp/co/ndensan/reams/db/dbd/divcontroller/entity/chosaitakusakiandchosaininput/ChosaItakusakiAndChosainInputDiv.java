@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * ChosaItakusakiAndChosainInput のクラスファイル 
@@ -43,6 +44,12 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
     private Button btnClear;
     @JsonProperty("hdnDatabaseSubGyomuCode")
     private RString hdnDatabaseSubGyomuCode;
+    @JsonProperty("hdnChosainRenrakuJiko")
+    private RString hdnChosainRenrakuJiko;
+    @JsonProperty("hdnShinseishoKanriNo")
+    private RString hdnShinseishoKanriNo;
+    @JsonProperty("hdnShichosonCode")
+    private RString hdnShichosonCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -150,7 +157,46 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
         this.hdnDatabaseSubGyomuCode=hdnDatabaseSubGyomuCode;
     }
 
+    @JsonProperty("hdnChosainRenrakuJiko")
+    public RString getHdnChosainRenrakuJiko() {
+        return hdnChosainRenrakuJiko;
+    }
+
+    @JsonProperty("hdnChosainRenrakuJiko")
+    public void setHdnChosainRenrakuJiko(RString hdnChosainRenrakuJiko) {
+        this.hdnChosainRenrakuJiko=hdnChosainRenrakuJiko;
+    }
+
+    @JsonProperty("hdnShinseishoKanriNo")
+    public RString getHdnShinseishoKanriNo() {
+        return hdnShinseishoKanriNo;
+    }
+
+    @JsonProperty("hdnShinseishoKanriNo")
+    public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo) {
+        this.hdnShinseishoKanriNo=hdnShinseishoKanriNo;
+    }
+
+    @JsonProperty("hdnShichosonCode")
+    public RString getHdnShichosonCode() {
+        return hdnShichosonCode;
+    }
+
+    @JsonProperty("hdnShichosonCode")
+    public void setHdnShichosonCode(RString hdnShichosonCode) {
+        this.hdnShichosonCode=hdnShichosonCode;
+    }
+
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void onClickBtnClear() {
+        getHandler().onClickBtnClear();
+    }
 
+    // 以下のメソッドはインタフェースに定義していないので業務には公開されません。
+    @JsonIgnore
+    private ChosaItakusakiAndChosainInputHandler getHandler() {
+        return new ChosaItakusakiAndChosainInputHandler(this);
+    }
 }

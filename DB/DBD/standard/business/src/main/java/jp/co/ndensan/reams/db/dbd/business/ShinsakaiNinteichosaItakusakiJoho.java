@@ -6,11 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.business;
 
 import java.io.Serializable;
-import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -18,13 +15,15 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
- * 認定調査委託先情報のモデルクラスです。
+ * 認定調査委託先情報のビジネスクラスです。
  *
  * @author n8223 朴義一
  */
-public class ShinsakaiNinteichosaItakusakiJoho {
+public class ShinsakaiNinteichosaItakusakiJoho implements INinteichosaItakusakiJoho {
 
     private DbT5910NinteichosaItakusakiJohoEntity entity;
 
@@ -55,7 +54,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
      *
      * @return 市町村コード
      */
-    public ShichosonCode get市町村コード() {
+    public LasdecCode get市町村コード() {
         return entity.getShichosonCode();
     }
 
@@ -64,7 +63,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
      *
      * @return 認定調査委託先コード
      */
-    public RString get認定調査委託先コード() {
+    public ChosaItakusakiCode get認定調査委託先コード() {
         return entity.getNinteichosaItakusakiCode();
     }
 
@@ -221,6 +220,15 @@ public class ShinsakaiNinteichosaItakusakiJoho {
     }
 
     /**
+     * 更新処理を行う際に必要となるエンティティを返します。
+     *
+     * @return DbT5910NinteichosaItakusakiJohoEntity
+     */
+    public DbT5910NinteichosaItakusakiJohoEntity toEntity() {
+        return entity.clone();
+    }
+
+    /**
      * 編集用のビルダーを返します。
      *
      * @return ビルダー
@@ -256,7 +264,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * insertDantaiCdを設定します。
          *
-         * @param insertDantaiCd
+         * @param insertDantaiCd 挿入市町村
          * @return builder
          */
         public Builder setInsertDantaiCd(RString insertDantaiCd) {
@@ -268,7 +276,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * isDeletedを設定します。
          *
-         * @param isDeleted
+         * @param isDeleted 論理削除flag
          * @return builder
          */
         public Builder setIsDeleted(boolean isDeleted) {
@@ -279,7 +287,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * lastUpdateReamsLoginIdを設定します。
          *
-         * @param lastUpdateReamsLoginId
+         * @param lastUpdateReamsLoginId 更新ユーザーId
          * @return builder
          */
         public Builder setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -291,10 +299,10 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * shichosonCodeを設定します。
          *
-         * @param shichosonCode
+         * @param shichosonCode 市町村コード
          * @return builder
          */
-        public Builder setShichosonCode(ShichosonCode shichosonCode) {
+        public Builder setShichosonCode(LasdecCode shichosonCode) {
             Objects.requireNonNull(shichosonCode);
             this.entity.setShichosonCode(shichosonCode);
             return this;
@@ -303,10 +311,10 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * ninteichosaItakusakiCodeを設定します。
          *
-         * @param ninteichosaItakusakiCode
+         * @param ninteichosaItakusakiCode 認定調査委託先コード
          * @return builder
          */
-        public Builder setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {
+        public Builder setNinteichosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
             Objects.requireNonNull(ninteichosaItakusakiCode);
             this.entity.setNinteichosaItakusakiCode(ninteichosaItakusakiCode);
             return this;
@@ -315,7 +323,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * jigyoshaNoを設定します。
          *
-         * @param jigyoshaNo
+         * @param jigyoshaNo 事業者番号
          * @return builder
          */
         public Builder setJigyoshaNo(JigyoshaNo jigyoshaNo) {
@@ -327,7 +335,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * jigyoshaMeishoを設定します。
          *
-         * @param jigyoshaMeisho
+         * @param jigyoshaMeisho 事業者名称
          * @return builder
          */
         public Builder setJigyoshaMeisho(RString jigyoshaMeisho) {
@@ -339,7 +347,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * jigyoshaMeishoKanaを設定します。
          *
-         * @param jigyoshaMeishoKana
+         * @param jigyoshaMeishoKana 事業者名称カナ
          * @return builder
          */
         public Builder setJigyoshaMeishoKana(RString jigyoshaMeishoKana) {
@@ -351,7 +359,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * yubinNoを設定します。
          *
-         * @param yubinNo
+         * @param yubinNo 郵便番号
          * @return builder
          */
         public Builder setYubinNo(YubinNo yubinNo) {
@@ -363,7 +371,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * jushoを設定します。
          *
-         * @param jusho
+         * @param jusho 住所
          * @return builder
          */
         public Builder setJusho(RString jusho) {
@@ -375,7 +383,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * telNoを設定します。
          *
-         * @param telNo
+         * @param telNo 電話番号
          * @return builder
          */
         public Builder setTelNo(TelNo telNo) {
@@ -387,7 +395,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * faxNoを設定します。
          *
-         * @param faxNo
+         * @param faxNo FAX番号
          * @return builder
          */
         public Builder setFaxNo(TelNo faxNo) {
@@ -399,7 +407,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * daihyoshaNameを設定します。
          *
-         * @param daihyoshaName
+         * @param daihyoshaName 代表者名
          * @return builder
          */
         public Builder setDaihyoshaName(AtenaMeisho daihyoshaName) {
@@ -411,7 +419,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * chosaItakuKubunを設定します。
          *
-         * @param chosaItakuKubun
+         * @param chosaItakuKubun 調査委託区分
          * @return builder
          */
         public Builder setChosaItakuKubun(RString chosaItakuKubun) {
@@ -423,7 +431,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * waritsukeTeiinを設定します。
          *
-         * @param waritsukeTeiin
+         * @param waritsukeTeiin 割付定員
          * @return builder
          */
         public Builder setWaritsukeTeiin(int waritsukeTeiin) {
@@ -434,7 +442,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * waritsukeChikuを設定します。
          *
-         * @param waritsukeChiku
+         * @param waritsukeChiku 割付地区
          * @return builder
          */
         public Builder setWaritsukeChiku(ChikuCode waritsukeChiku) {
@@ -446,7 +454,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * autoWaritsukeFlagを設定します。
          *
-         * @param autoWaritsukeFlag
+         * @param autoWaritsukeFlag 自動割付フラグ
          * @return builder
          */
         public Builder setAutoWaritsukeFlag(boolean autoWaritsukeFlag) {
@@ -457,7 +465,7 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * kikanKubunを設定します。
          *
-         * @param kikanKubun
+         * @param kikanKubun 機関の区分
          * @return builder
          */
         public Builder setKikanKubun(RString kikanKubun) {
@@ -469,11 +477,11 @@ public class ShinsakaiNinteichosaItakusakiJoho {
         /**
          * JokyoFlagを設定します。
          *
-         * @param JokyoFlag
+         * @param jokyoFlag 状況フラグ
          * @return builder
          */
-        public Builder setJokyoFlag(boolean JokyoFlag) {
-            this.entity.setJokyoFlag(JokyoFlag);
+        public Builder setJokyoFlag(boolean jokyoFlag) {
+            this.entity.setJokyoFlag(jokyoFlag);
             return this;
         }
 

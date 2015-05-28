@@ -4,6 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.business;
 
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosainCode;
+import db.dbd.definition.valueobject.ninteishinsei.ShujiiCode;
+import db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4101NinteiShinseiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
@@ -711,13 +715,13 @@ public class HokenshaNinteiShinseiJohoTest extends DbdTestBase {
 
         @Test
         public void setNinteichosaItakusakiCodeで設定した値を_生成されたHokenshaNinteiShinseiJohoも保持する() {
-            HokenshaNinteiShinseiJoho result = HokenshaNinteiShinseiJoho.newBuilder().setNinteichosaItakusakiCode(new RString("0000000001")).build();
+            HokenshaNinteiShinseiJoho result = HokenshaNinteiShinseiJoho.newBuilder().setNinteichosaItakusakiCode(new ChosaItakusakiCode("0000000001")).build();
             assertThat(result.get認定調査委託先コード(), is(DbT4101NinteiShinseiJohoEntityGenerator.DEFAULT_認定調査委託先コード));
         }
 
         @Test
         public void setNinteiChousainCodeで設定した値を_生成されたHokenshaNinteiShinseiJohoも保持する() {
-            HokenshaNinteiShinseiJoho result = HokenshaNinteiShinseiJoho.newBuilder().setNinteiChousainCode(new RString("00000001")).build();
+            HokenshaNinteiShinseiJoho result = HokenshaNinteiShinseiJoho.newBuilder().setNinteiChousainCode(new ChosainCode("00000001")).build();
             assertThat(result.get認定調査員コード(), is(DbT4101NinteiShinseiJohoEntityGenerator.DEFAULT_認定調査員コード));
         }
 
@@ -729,13 +733,13 @@ public class HokenshaNinteiShinseiJohoTest extends DbdTestBase {
 
         @Test
         public void setShujiiIryokikanCodeで設定した値を_生成されたHokenshaNinteiShinseiJohoも保持する() {
-            HokenshaNinteiShinseiJoho result = HokenshaNinteiShinseiJoho.newBuilder().setShujiiIryokikanCode(new RString("0000000001")).build();
+            HokenshaNinteiShinseiJoho result = HokenshaNinteiShinseiJoho.newBuilder().setShujiiIryokikanCode(new ShujiiIryokikanCode("0000000001")).build();
             assertThat(result.get主治医医療機関コード(), is(DbT4101NinteiShinseiJohoEntityGenerator.DEFAULT_主治医医療機関コード));
         }
 
         @Test
         public void setShujiiCodeで設定した値を_生成されたHokenshaNinteiShinseiJohoも保持する() {
-            HokenshaNinteiShinseiJoho result = HokenshaNinteiShinseiJoho.newBuilder().setShujiiCode(new RString("00000001")).build();
+            HokenshaNinteiShinseiJoho result = HokenshaNinteiShinseiJoho.newBuilder().setShujiiCode(new ShujiiCode("00000001")).build();
             assertThat(result.get主治医コード(), is(DbT4101NinteiShinseiJohoEntityGenerator.DEFAULT_主治医コード));
         }
 

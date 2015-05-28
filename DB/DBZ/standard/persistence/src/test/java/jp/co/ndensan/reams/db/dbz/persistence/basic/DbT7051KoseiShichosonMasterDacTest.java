@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.Collections;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7051KoseiShichosonMasterEntityGenerator.*;
@@ -36,6 +37,7 @@ public class DbT7051KoseiShichosonMasterDacTest extends DbzTestDacBase {
     private static final RString キー_03 = new RString("03");
     private static final RString 市町村識別ID = new RString("2");
     private static final RString 市町村識別ID3 = new RString("3");
+    private static final ShoKisaiHokenshaNo 証記載保険者番号2 = new ShoKisaiHokenshaNo(new RString("3"));
     private static DbT7051KoseiShichosonMasterDac sut;
 
     @BeforeClass
@@ -56,7 +58,7 @@ public class DbT7051KoseiShichosonMasterDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 市町村識別IDがnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    null);
+                    new RString(""));
         }
 
         @Test(expected = NullPointerException.class)
@@ -68,7 +70,7 @@ public class DbT7051KoseiShichosonMasterDacTest extends DbzTestDacBase {
         @Test(expected = NullPointerException.class)
         public void 証記載保険者番号がnullの場合_selectByKeyは_NullPointerExceptionを発生させる() {
             sut.selectByKey(
-                    DEFAULT_市町村識別ID);
+                    DEFAULT_証記載保険者番号);
         }
 
         @Test

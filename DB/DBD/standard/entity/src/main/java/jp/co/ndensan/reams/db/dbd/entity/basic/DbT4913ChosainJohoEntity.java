@@ -7,11 +7,13 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosainCode;
 
 /**
  * 調査員情報（子）テーブルのエンティティクラスです。
@@ -31,11 +33,11 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private ShichosonCode shichosonCode;
+    private LasdecCode shichosonCode;
     @PrimaryKey
-    private RString ninteichosaItakusakiCode;
+    private ChosaItakusakiCode ninteichosaItakusakiCode;
     @PrimaryKey
-    private RString ninteiChosainNo;
+    private ChosainCode ninteiChosainNo;
     private RString chosainShimei;
     private RString chosainKanaShimei;
     private RString seibetsu;
@@ -46,7 +48,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
     private AtenaJusho jusho;
     private TelNo telNo;
     private TelNo faxNo;
-    private boolean JokyoFlag;
+    private boolean jokyoFlag;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -98,7 +100,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      *
      * @return 市町村コード
      */
-    public ShichosonCode getShichosonCode() {
+    public LasdecCode getShichosonCode() {
         return shichosonCode;
     }
 
@@ -107,7 +109,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      *
      * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(ShichosonCode shichosonCode) {
+    public void setShichosonCode(LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
@@ -116,7 +118,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      *
      * @return 認定調査委託先コード
      */
-    public RString getNinteichosaItakusakiCode() {
+    public ChosaItakusakiCode getNinteichosaItakusakiCode() {
         return ninteichosaItakusakiCode;
     }
 
@@ -125,7 +127,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      *
      * @param ninteichosaItakusakiCode 認定調査委託先コード
      */
-    public void setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {
+    public void setNinteichosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
         this.ninteichosaItakusakiCode = ninteichosaItakusakiCode;
     }
 
@@ -134,7 +136,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      *
      * @return 認定調査員コード
      */
-    public RString getNinteiChosainNo() {
+    public ChosainCode getNinteiChosainNo() {
         return ninteiChosainNo;
     }
 
@@ -143,7 +145,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      *
      * @param ninteiChosainNo 認定調査員コード
      */
-    public void setNinteiChosainNo(RString ninteiChosainNo) {
+    public void setNinteiChosainNo(ChosainCode ninteiChosainNo) {
         this.ninteiChosainNo = ninteiChosainNo;
     }
 
@@ -333,16 +335,16 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      * @return 状況フラグ
      */
     public boolean getJokyoFlag() {
-        return JokyoFlag;
+        return jokyoFlag;
     }
 
     /**
      * 状況フラグのsetメソッドです。
      *
-     * @param JokyoFlag 状況フラグ
+     * @param jokyoFlag 状況フラグ
      */
-    public void setJokyoFlag(boolean JokyoFlag) {
-        this.JokyoFlag = JokyoFlag;
+    public void setJokyoFlag(boolean jokyoFlag) {
+        this.jokyoFlag = jokyoFlag;
     }
 
     /**
@@ -386,7 +388,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
         this.jusho = entity.jusho;
         this.telNo = entity.telNo;
         this.faxNo = entity.faxNo;
-        this.JokyoFlag = entity.JokyoFlag;
+        this.jokyoFlag = entity.jokyoFlag;
     }
 
     /**
@@ -396,7 +398,7 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shichosonCode, ninteichosaItakusakiCode, ninteiChosainNo, chosainShimei, chosainKanaShimei, seibetsu, chosainShikaku, chikuCode, chosaKanoNinzuPerMonth, yubinNo, jusho, telNo, faxNo, JokyoFlag);
+        return super.toMd5(shichosonCode, ninteichosaItakusakiCode, ninteiChosainNo, chosainShimei, chosainKanaShimei, seibetsu, chosainShikaku, chikuCode, chosaKanoNinzuPerMonth, yubinNo, jusho, telNo, faxNo, jokyoFlag);
     }
 
 // </editor-fold>

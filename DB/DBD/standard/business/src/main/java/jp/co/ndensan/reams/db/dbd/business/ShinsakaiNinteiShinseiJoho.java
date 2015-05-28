@@ -24,6 +24,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosainCode;
+import db.dbd.definition.valueobject.ninteishinsei.ShujiiCode;
+import db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 
 /**
  * 要介護認定申請情報のビジネスクラスです。
@@ -464,7 +468,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      * @return 認定調査委託先コード
      */
     @Override
-    public RString get認定調査委託先コード() {
+    public ChosaItakusakiCode get認定調査委託先コード() {
         return entity.getNinteichosaItakusakiCode();
     }
 
@@ -474,7 +478,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      * @return 認定調査員コード
      */
     @Override
-    public RString get認定調査員コード() {
+    public ChosainCode get認定調査員コード() {
         return entity.getNinteiChousainCode();
     }
 
@@ -494,7 +498,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      * @return 主治医医療機関コード
      */
     @Override
-    public RString get主治医医療機関コード() {
+    public ShujiiIryokikanCode get主治医医療機関コード() {
         return entity.getShujiiIryokikanCode();
     }
 
@@ -504,7 +508,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      * @return 主治医コード
      */
     @Override
-    public RString get主治医コード() {
+    public ShujiiCode get主治医コード() {
         return entity.getShujiiCode();
     }
 
@@ -1403,7 +1407,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param ninteichosaItakusakiCode 認定調査委託先コード
          * @return builder
          */
-        public Builder setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {
+        public Builder setNinteichosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
             Objects.requireNonNull(ninteichosaItakusakiCode);
             this.entity.setNinteichosaItakusakiCode(ninteichosaItakusakiCode);
             return this;
@@ -1415,7 +1419,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param ninteiChousainCode 認定調査員コード
          * @return builder
          */
-        public Builder setNinteiChousainCode(RString ninteiChousainCode) {
+        public Builder setNinteiChousainCode(ChosainCode ninteiChousainCode) {
             Objects.requireNonNull(ninteiChousainCode);
             this.entity.setNinteiChousainCode(ninteiChousainCode);
             return this;
@@ -1439,7 +1443,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param shujiiIryokikanCode 主治医医療機関コード
          * @return builder
          */
-        public Builder setShujiiIryokikanCode(RString shujiiIryokikanCode) {
+        public Builder setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
             Objects.requireNonNull(shujiiIryokikanCode);
             this.entity.setShujiiIryokikanCode(shujiiIryokikanCode);
             return this;
@@ -1451,7 +1455,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param shujiiCode 主治医コード
          * @return builder
          */
-        public Builder setShujiiCode(RString shujiiCode) {
+        public Builder setShujiiCode(ShujiiCode shujiiCode) {
             Objects.requireNonNull(shujiiCode);
             this.entity.setShujiiCode(shujiiCode);
             return this;
@@ -1855,8 +1859,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。
-     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

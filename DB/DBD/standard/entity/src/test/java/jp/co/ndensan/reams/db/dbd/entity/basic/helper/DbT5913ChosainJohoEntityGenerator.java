@@ -4,9 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT5913ChosainJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -19,14 +20,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public final class DbT5913ChosainJohoEntityGenerator {
 
-    public static final ShichosonCode DEFAULT_市町村コード = new ShichosonCode("12345");
-    public static final RString DEFAULT_認定調査委託先コード = new RString("1234567890");
-    public static final RString DEFAULT_認定調査員コード = new RString("12345678");
+    public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("123456");
+    public static final ChosaItakusakiCode DEFAULT_認定調査委託先コード = new ChosaItakusakiCode("1234567890");
+    public static final ChosainCode DEFAULT_認定調査員コード = new ChosainCode("12345678");
     public static final RString DEFAULT_調査員氏名 = new RString("事業者名称");
     public static final RString DEFAULT_調査員氏名カナ = new RString("事業者名称カナ");
     public static final RString DEFAULT_性別 = new RString("1");
-    public static final RString DEFAULT_調査員資格 = new RString("調査員資格");
-    public static final RString DEFAULT_地区コード = new RString("地区コード");
+    public static final RString DEFAULT_調査員資格 = new RString("12");
+    public static final RString DEFAULT_地区コード = new RString("12345678");
     public static final int DEFAULT_調査可能人数月 = 1;
     public static final YubinNo DEFAULT_郵便番号 = new YubinNo("1234567");
     public static final AtenaJusho DEFAULT_住所 = new AtenaJusho("住所");

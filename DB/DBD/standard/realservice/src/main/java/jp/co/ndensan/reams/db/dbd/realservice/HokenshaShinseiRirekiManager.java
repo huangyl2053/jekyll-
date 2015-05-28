@@ -42,7 +42,7 @@ public class HokenshaShinseiRirekiManager extends ShinseiRirekiManagerBase {
     /**
      * 申請履歴情報を取得します。
      *
-     * @param 申請書管理番号
+     * @param 申請書管理番号 申請書管理番号
      * @return 申請履歴情報
      */
     @Override

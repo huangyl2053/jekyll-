@@ -32,8 +32,8 @@ public class DbT4101NinteiShinseiJohoDacTest extends DbdTestDacBase {
 
     private static DbT4101NinteiShinseiJohoDac sut;
 
-    public static ShinseishoKanriNo DEFAULT_申請書管理番号2 = new ShinseishoKanriNo("00000000000000002");
-    public static ShinseishoKanriNo NotDEFAULT_申請書管理番号 = new ShinseishoKanriNo("99999999999999999");
+    public static ShinseishoKanriNo OTHER_申請書管理番号 = new ShinseishoKanriNo("90000000000000002");
+    public static ShinseishoKanriNo NOTFOUND_申請書管理番号 = new ShinseishoKanriNo("99999999999999999");
 
     @BeforeClass
     public static void setUpClass() {
@@ -45,7 +45,7 @@ public class DbT4101NinteiShinseiJohoDacTest extends DbdTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(DEFAULT_申請書管理番号);
-            TestSupport.insert(DEFAULT_申請書管理番号2);
+            TestSupport.insert(OTHER_申請書管理番号);
         }
 
         @Test(expected = NullPointerException.class)
@@ -61,7 +61,7 @@ public class DbT4101NinteiShinseiJohoDacTest extends DbdTestDacBase {
 
         @Test
         public void 存在しない主キーを渡すと_selectByKeyのisPresentは_falseを返す() {
-            Optional<DbT4101NinteiShinseiJohoEntity> insertedRecord = sut.selectByKey(NotDEFAULT_申請書管理番号);
+            Optional<DbT4101NinteiShinseiJohoEntity> insertedRecord = sut.selectByKey(NOTFOUND_申請書管理番号);
             assertThat(insertedRecord.isPresent(), is(false));
         }
     }
@@ -72,7 +72,7 @@ public class DbT4101NinteiShinseiJohoDacTest extends DbdTestDacBase {
         @Test
         public void 要介護認定申請情報が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(DEFAULT_申請書管理番号);
-            TestSupport.insert(DEFAULT_申請書管理番号2);
+            TestSupport.insert(OTHER_申請書管理番号);
             assertThat(sut.selectAll().size(), is(3));
         }
 

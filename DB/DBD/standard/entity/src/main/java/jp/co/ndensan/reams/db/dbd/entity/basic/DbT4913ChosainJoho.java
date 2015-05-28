@@ -94,7 +94,7 @@ public enum DbT4913ChosainJoho implements IColumnDefinition {
     /**
      * 状況フラグ
      */
-    JokyoFlag(1, 0);
+    jokyoFlag(1, 0);
 
     private final int maxLength;
     private final int scale;

@@ -12,7 +12,6 @@ import static jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4121ShinseiRirek
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestDacBase;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -32,10 +31,8 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class DbT4121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
 
-    private static final ShinseishoKanriNo 申請管理番号 = new ShinseishoKanriNo("00000000001");
-    private static final ShinseishoKanriNo 申請管理番号00000000001 = new ShinseishoKanriNo("00000000002");
-    private static final RString キー_02 = new RString("02");
-    private static final RString キー_03 = new RString("03");
+    private static final ShinseishoKanriNo OTHER_申請書管理番号 = new ShinseishoKanriNo("00000000001");
+    private static final ShinseishoKanriNo NOTFOUND_申請書管理番号 = new ShinseishoKanriNo("90000000002");
     private static DbT4121ShinseiRirekiJohoDac sut;
 
     @BeforeClass
@@ -48,7 +45,7 @@ public class DbT4121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    申請管理番号);
+                    OTHER_申請書管理番号);
             TestSupport.insert(
                     DEFAULT_申請管理番号);
         }
@@ -69,7 +66,7 @@ public class DbT4121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
         @Test
         public void 存在しない主キーを渡すと_selectByKeyは_nullを返す() {
             Optional<DbT4121ShinseiRirekiJohoEntity> insertedRecord = sut.selectByKey(
-                    申請管理番号00000000001);
+                    NOTFOUND_申請書管理番号);
             assertThat(insertedRecord.isPresent(), is(false));
         }
     }
@@ -80,13 +77,13 @@ public class DbT4121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
         @Test
         public void 申請履歴情報が存在する場合_selectAllは_全件を返す() {
             TestSupport.insert(
-                    申請管理番号);
+                    OTHER_申請書管理番号);
             assertThat(sut.selectAll().size(), is(1));
         }
 
         @Test
         public void 申請履歴情報が存在しない場合_selectAllは_空のリストを返す() {
-            assertThat(sut.selectAll(), is(Collections.EMPTY_LIST));
+            assertThat(sut.selectAll().toList(), is(Collections.EMPTY_LIST));
         }
     }
 
@@ -106,18 +103,18 @@ public class DbT4121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
         @Before
         public void setUp() {
             TestSupport.insert(
-                    申請管理番号00000000001);
+                    NOTFOUND_申請書管理番号);
         }
 
         @Test
         public void 申請履歴情報エンティティを渡すと_updateは_申請履歴情報を更新する() {
             DbT4121ShinseiRirekiJohoEntity updateRecord = DbT4121ShinseiRirekiJohoEntityGenerator.createDbT4121ShinseiRirekiJohoEntity();
-            updateRecord.setShinseishoKanriNo(申請管理番号00000000001);
+            updateRecord.setShinseishoKanriNo(NOTFOUND_申請書管理番号);
 
             sut.update(updateRecord);
 
             Optional<DbT4121ShinseiRirekiJohoEntity> updatedRecord = sut.selectByKey(
-                    申請管理番号00000000001);
+                    NOTFOUND_申請書管理番号);
 
             assertThat(updateRecord.getShinseishoKanriNo(), is(updatedRecord.get().getShinseishoKanriNo()));
         }
@@ -143,9 +140,9 @@ public class DbT4121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
     private static class TestSupport {
 
         public static void insert(
-                ShinseishoKanriNo 申請管理番号) {
+                ShinseishoKanriNo OTHER_申請書管理番号) {
             DbT4121ShinseiRirekiJohoEntity entity = DbT4121ShinseiRirekiJohoEntityGenerator.createDbT4121ShinseiRirekiJohoEntity();
-            entity.setShinseishoKanriNo(申請管理番号);
+            entity.setShinseishoKanriNo(OTHER_申請書管理番号);
             sut.insert(entity);
         }
     }

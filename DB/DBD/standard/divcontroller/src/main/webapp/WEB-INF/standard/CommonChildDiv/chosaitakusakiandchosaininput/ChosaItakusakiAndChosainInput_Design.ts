@@ -8,6 +8,22 @@ module DBD {
 
         export class Events {
 
+            public static onBlurTxtchosaItakusaki(): string {
+                return "onBlurTxtchosaItakusaki";
+            }
+
+            public static onClickBtnZenkaiFukusha(): string {
+                return "onClickBtnZenkaiFukusha";
+            }
+
+            public static onBlurTxtChosaincode(): string {
+                return "onBlurTxtChosaincode";
+            }
+
+            public static onClickBtnClear(): string {
+                return "onClickBtnClear";
+            }
+
         }
 
         export class Controls {

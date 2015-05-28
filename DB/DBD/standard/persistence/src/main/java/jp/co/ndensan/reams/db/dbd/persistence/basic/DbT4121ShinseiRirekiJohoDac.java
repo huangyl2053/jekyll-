@@ -4,12 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbd.persistence.basic;
 
-import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4121ShinseiRirekiJoho;
 import static jp.co.ndensan.reams.db.dbd.entity.basic.DbT4121ShinseiRirekiJoho.*;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4121ShinseiRirekiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -55,12 +55,12 @@ public class DbT4121ShinseiRirekiJohoDac implements IModifiable<DbT4121ShinseiRi
      * @return List<DbT4121ShinseiRirekiJohoEntity>
      */
     @Transaction
-    public List<DbT4121ShinseiRirekiJohoEntity> selectAll() {
+    public ItemList<DbT4121ShinseiRirekiJohoEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.select().
+        return ItemList.of(accessor.select().
                 table(DbT4121ShinseiRirekiJoho.class).
-                toList(DbT4121ShinseiRirekiJohoEntity.class);
+                toList(DbT4121ShinseiRirekiJohoEntity.class));
     }
 
     @Transaction

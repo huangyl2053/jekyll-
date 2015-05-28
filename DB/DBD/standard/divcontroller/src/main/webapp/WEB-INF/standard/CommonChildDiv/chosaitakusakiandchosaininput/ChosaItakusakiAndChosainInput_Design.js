@@ -4,6 +4,21 @@ var DBD;
         var Events = (function () {
             function Events() {
             }
+            Events.onBlurTxtchosaItakusaki = function () {
+                return "onBlurTxtchosaItakusaki";
+            };
+
+            Events.onClickBtnZenkaiFukusha = function () {
+                return "onClickBtnZenkaiFukusha";
+            };
+
+            Events.onBlurTxtChosaincode = function () {
+                return "onBlurTxtChosaincode";
+            };
+
+            Events.onClickBtnClear = function () {
+                return "onClickBtnClear";
+            };
             return Events;
         })();
         ChosaItakusakiAndChosainInput.Events = Events;

@@ -4,19 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbd.business;
 
-import jp.co.ndensan.reams.db.dbd.business.HokenshaChosainJoho;
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4913ChosainJohoEntity;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4913ChosainJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.serialization._Base64Serializer;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
@@ -118,20 +114,20 @@ public class HokenshaChosainJohoTest extends DbdTestBase {
     public static class BuilderTest extends DbdTestBase {
 
         @Test
-        public void setShichosonCodeで設定した値を＿生成されたChosainJohoJukyuも保持する() {
-            HokenshaChosainJoho result = HokenshaChosainJoho.newBuilder().setShichosonCode(new ShichosonCode("12345")).build();
+        public void setLasdecCodeで設定した値を＿生成されたChosainJohoJukyuも保持する() {
+            HokenshaChosainJoho result = HokenshaChosainJoho.newBuilder().setShichosonCode(LasdecCode.EMPTY).setShichosonCode(new LasdecCode("123456")).build();
             assertThat(result.get市町村コード(), is(DbT4913ChosainJohoEntityGenerator.DEFAULT_市町村コード));
         }
 
         @Test
         public void setNinteichosaItakusakiCodeで設定した値を＿生成されたChosainJohoJukyuも保持する() {
-            HokenshaChosainJoho result = HokenshaChosainJoho.newBuilder().setNinteichosaItakusakiCode(new RString("1234567890")).build();
+            HokenshaChosainJoho result = HokenshaChosainJoho.newBuilder().setNinteichosaItakusakiCode(new ChosaItakusakiCode("1234567890")).build();
             assertThat(result.get認定調査委託先コード(), is(DbT4913ChosainJohoEntityGenerator.DEFAULT_認定調査委託先コード));
         }
 
         @Test
         public void setNinteiChosainNoで設定した値を＿生成されたChosainJohoJukyuも保持する() {
-            HokenshaChosainJoho result = HokenshaChosainJoho.newBuilder().setNinteiChosainNo(new RString("12345678")).build();
+            HokenshaChosainJoho result = HokenshaChosainJoho.newBuilder().setNinteiChosainNo(new ChosainCode("12345678")).build();
             assertThat(result.get認定調査員コード(), is(DbT4913ChosainJohoEntityGenerator.DEFAULT_認定調査員コード));
         }
 
@@ -155,13 +151,13 @@ public class HokenshaChosainJohoTest extends DbdTestBase {
 
         @Test
         public void setChosainShikakuで設定した値を＿生成されたChosainJohoJukyuも保持する() {
-            HokenshaChosainJoho result = HokenshaChosainJoho.newBuilder().setChosainShikaku(new RString("調査員資格")).build();
+            HokenshaChosainJoho result = HokenshaChosainJoho.newBuilder().setChosainShikaku(new RString("12")).build();
             assertThat(result.get調査員資格(), is(DbT4913ChosainJohoEntityGenerator.DEFAULT_調査員資格));
         }
 
         @Test
         public void setChikuCodeで設定した値を＿生成されたChosainJohoJukyuも保持する() {
-            HokenshaChosainJoho result = HokenshaChosainJoho.newBuilder().setChikuCode(new RString("地区コード")).build();
+            HokenshaChosainJoho result = HokenshaChosainJoho.newBuilder().setChikuCode(new RString("12345678")).build();
             assertThat(result.get地区コード(), is(DbT4913ChosainJohoEntityGenerator.DEFAULT_地区コード));
         }
 
