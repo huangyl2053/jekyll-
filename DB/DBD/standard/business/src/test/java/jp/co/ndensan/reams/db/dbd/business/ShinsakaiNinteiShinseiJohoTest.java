@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbd.business;
 
 import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT5101NinteiShinseiJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.SeibetsuCode;
@@ -777,7 +776,7 @@ public class ShinsakaiNinteiShinseiJohoTest extends DbdTestBase {
 
         @Test
         public void setNyushoShisetsuCodeで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
-            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setNyushoShisetsuCode(new JigyoshaNo("0000000001")).build();
+            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setNyushoShisetsuCode(new RString("0000000001")).build();
             assertThat(result.get入所施設コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_入所施設コード));
         }
 

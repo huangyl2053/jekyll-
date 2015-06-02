@@ -383,7 +383,7 @@ public interface INinteiShinseiJoho {
      *
      * @return 入所施設コード
      */
-    JigyoshaNo get入所施設コード();
+    RString get入所施設コード();
 
     /**
      * 家庭訪問の有無を返します。
