@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.business;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT5101NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.SeibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -574,7 +573,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
      * @return 入所施設コード
      */
     @Override
-    public JigyoshaNo get入所施設コード() {
+    public RString get入所施設コード() {
         return entity.getNyushoShisetsuCode();
     }
 
@@ -1532,7 +1531,7 @@ public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param nyushoShisetsuCode 入所施設コード
          * @return builder
          */
-        public Builder setNyushoShisetsuCode(JigyoshaNo nyushoShisetsuCode) {
+        public Builder setNyushoShisetsuCode(RString nyushoShisetsuCode) {
             Objects.requireNonNull(nyushoShisetsuCode);
             this.entity.setNyushoShisetsuCode(nyushoShisetsuCode);
             return this;
