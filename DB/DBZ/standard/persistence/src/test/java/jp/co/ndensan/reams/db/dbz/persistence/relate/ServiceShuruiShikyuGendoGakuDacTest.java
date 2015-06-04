@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.relate;
 
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.IYokaigoJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubun09A;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator;
@@ -41,8 +41,8 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
 
     private static final ServiceShuruiCode サービス種類コード1 = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_サービス種類コード;
     private static final ServiceShuruiCode サービス種類コード2 = new ServiceShuruiCode(new RString("11"));
-    private static final YokaigoJotaiKubun09 要介護状態区分1 = YokaigoJotaiKubun09.toValue(DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分);
-    private static final YokaigoJotaiKubun09 要介護状態区分2 = YokaigoJotaiKubun09.toValue(new RString("12"));
+    private static final YokaigoJotaiKubun09A 要介護状態区分1 = YokaigoJotaiKubun09A.toValue(DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分);
+    private static final YokaigoJotaiKubun09A 要介護状態区分2 = YokaigoJotaiKubun09A.toValue(new RString("12"));
     private static final FlexibleYearMonth 適用開始年月1 = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_適用終了年月;
     private static final FlexibleYearMonth 適用開始年月2 = new FlexibleYearMonth(new RString("201501"));
     private static final YMDHMS 処理日時1 = DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_処理日時;
