@@ -97,6 +97,17 @@ public class JukyushaDaichoManager {
     }
 
     /**
+     * 被保険者番号に合致する受給者台帳の一覧を返します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return Optional<JukyushaDaicho>
+     */
+    @Transaction
+    public Optional<JukyushaDaicho> get直近受給者台帳(HihokenshaNo 被保険者番号) {
+        return Optional.ofNullable(new JukyushaDaicho(dac.select直近受給者台帳By被保険者番号(被保険者番号)));
+    }
+
+    /**
      * 受給者台帳を登録します。
      *
      * @param 受給者台帳 JukyushaDaicho

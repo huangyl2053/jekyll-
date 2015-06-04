@@ -93,6 +93,27 @@ public class DbT4001JukyushaDaichoDac implements IModifiable<DbT4001JukyushaDaic
     }
 
     /**
+     * 被保険者番号に合致する受給者台帳の履歴を返します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT4001JukyushaDaichoEntity
+     */
+    @Transaction
+    public DbT4001JukyushaDaichoEntity select直近受給者台帳By被保険者番号(
+            HihokenshaNo 被保険者番号) {
+
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(eq(DbT4001JukyushaDaicho.hihokenshaNo, 被保険者番号),
+                                eq(DbT4001JukyushaDaicho.chokkinFlag, true))).
+                toObject(DbT4001JukyushaDaichoEntity.class);
+
+    }
+
+    /**
      * 受給者台帳を全件返します。
      *
      * @return List<DbT4001JukyushaDaichoEntity>

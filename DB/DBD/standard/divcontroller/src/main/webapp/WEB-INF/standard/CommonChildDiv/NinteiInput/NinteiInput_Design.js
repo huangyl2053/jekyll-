@@ -1,9 +1,28 @@
-var DBZ;
-(function (DBZ) {
+var DBD;
+(function (DBD) {
     (function (NinteiInput) {
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_radNinteiKubun = function () {
+                return "onChange_radNinteiKubun";
+            };
+
+            Events.onClick_btnSixMonthLater = function () {
+                return "onClick_btnSixMonthLater";
+            };
+
+            Events.onClick_btnTwelveMonthLater = function () {
+                return "onClick_btnTwelveMonthLater";
+            };
+
+            Events.onClick_btnEigtheenMonthLater = function () {
+                return "onClick_btnEigtheenMonthLater";
+            };
+
+            Events.onClick_btnTwentyfourMonthLater = function () {
+                return "onClick_btnTwentyfourMonthLater";
+            };
             return Events;
         })();
         NinteiInput.Events = Events;
@@ -17,11 +36,11 @@ var DBZ;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBZ.NinteiInput.Controls.myType();
+                return this._myName + "_" + DBD.NinteiInput.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBZ.NinteiInput.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBD.NinteiInput.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.NinteiInput = function () {
@@ -41,7 +60,7 @@ var DBZ;
             };
 
             Controls.prototype.txtNinteiYMD = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiYMD"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiYMD"));
             };
 
             Controls.prototype.txtYokaigodoCode = function () {
@@ -57,11 +76,11 @@ var DBZ;
             };
 
             Controls.prototype.txtYukoKaishiYMD = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtYukoKaishiYMD"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoKaishiYMD"));
             };
 
             Controls.prototype.txtYukoShuryoYMD = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtYukoShuryoYMD"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoShuryoYMD"));
             };
 
             Controls.prototype.btnAfter6Month = function () {
@@ -98,6 +117,6 @@ var DBZ;
             return Controls;
         })();
         NinteiInput.Controls = Controls;
-    })(DBZ.NinteiInput || (DBZ.NinteiInput = {}));
-    var NinteiInput = DBZ.NinteiInput;
-})(DBZ || (DBZ = {}));
+    })(DBD.NinteiInput || (DBD.NinteiInput = {}));
+    var NinteiInput = DBD.NinteiInput;
+})(DBD || (DBD = {}));
