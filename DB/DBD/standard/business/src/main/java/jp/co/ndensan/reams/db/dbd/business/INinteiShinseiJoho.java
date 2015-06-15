@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.business;
 
 import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.SeibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -22,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import db.dbd.definition.valueobject.ninteishinsei.ShujiiCode;
-import db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
+//import db.dbd.definition.valueobject.ninteishinsei.ShujiiCode;
+//import db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 
 /**
  * 認定申請情報（ビジネス）を扱うインターフェースです。
@@ -331,14 +330,14 @@ public interface INinteiShinseiJoho {
      *
      * @return 主治医医療機関コード
      */
-    ShujiiIryokikanCode get主治医医療機関コード();
+    RString get主治医医療機関コード();
 
     /**
      * 主治医コードを返します。
      *
      * @return 主治医コード
      */
-    ShujiiCode get主治医コード();
+    RString get主治医コード();
 
     /**
      * 指定医フラグを返します。
@@ -387,7 +386,7 @@ public interface INinteiShinseiJoho {
      *
      * @return 入所施設コード
      */
-    JigyoshaNo get入所施設コード();
+    RString get入所施設コード();
 
     /**
      * 家庭訪問の有無を返します。

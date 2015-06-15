@@ -258,8 +258,9 @@ public enum DbT4101NinteiShinseiJoho implements IColumnDefinition {
     shisetsuNyushoFlag(1, 0),
     /**
      * 入所施設コード
+     * <br/>介護事業者の事業者番号または、医療機関コード
      */
-    nyushoShisetsuCode(2147483647, 0),
+    nyushoShisetsuCode(10, 0),
     /**
      * 家庭訪問の有無
      */

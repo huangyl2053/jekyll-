@@ -11,7 +11,7 @@ torisageKubunCode,UDD035Code,Code,,,,,取下区分コード,A
 hihokenshaKubunCode,bpchar,RString,,,,,被保険者区分コード,A
 seinengappiYMD,UDD015YMD,FlexibleDate,,,,,生年月日,A
 age,int2,int,,,,,年齢,A
-seibetsu,UDD035Code,SeibetsuCode,,,,,性別,A
+seibetsu,UDD035Code,Code,,,,,性別,A
 hihokenshaKana,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,被保険者氏名カナ,A
 hihokenshaName,UDD042AtenaMeisho,AtenaMeisho,,,,,被保険者氏名,A
 yubinNo,UDD003YubinNo,YubinNo,,,,,郵便番号,A
@@ -48,7 +48,7 @@ renrakuJikoToShujii,text,RString,,,,,主治医への連絡事項,A
 minashiCode,UDD035Code,Code,,,,,みなし要介護区分コード,A
 enkitsuchiNashiDoiFlag,bool,boolean,,,,,認定延期通知発行しないことに対する同意有無,A
 shisetsuNyushoFlag,bool,boolean,,,,,施設入所の有無,A
-nyushoShisetsuCode,DbUDD004JigyoshaNo,JigyoshaNo,,,,,入所施設コード,A
+nyushoShisetsuCode,bpchar,RString,,,,,入所施設コード,A
 kateiHomonFlag,bool,boolean,,,,,家庭訪問の有無,A
 homonChosasakiYubinNo,UDD003YubinNo,YubinNo,,,,,訪問調査先郵便番号,A
 homonChosasakiJusho,UDD046AtenaJusho,AtenaJusho,,,,,訪問調査先住所,A

@@ -19,11 +19,12 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
-import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ShujiiCode;
+//TODO ShujiiIryokikanCode　使用必要
+//import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
+//TODO ShujiiCode　使用必要
+//import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ShujiiCode;
 import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosainCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.SeibetsuCode;
 
@@ -87,15 +88,15 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     private ChosaItakusakiCode ninteichosaItakusakiCode;
     private ChosainCode ninteiChousainCode;
     private RString renrakuJikoToChosain;
-    private ShujiiIryokikanCode shujiiIryokikanCode;
-    private ShujiiCode shujiiCode;
+    private RString shujiiIryokikanCode;
+    private RString shujiiCode;
     private boolean shiteiiFlag;
     private Code ikenshoDataShubetsu;
     private RString renrakuJikoToShujii;
     private Code minashiCode;
     private boolean enkitsuchiNashiDoiFlag;
     private boolean shisetsuNyushoFlag;
-    private JigyoshaNo nyushoShisetsuCode;
+    private RString nyushoShisetsuCode;
     private boolean kateiHomonFlag;
     private YubinNo homonChosasakiYubinNo;
     private AtenaJusho homonChosasakiJusho;
@@ -989,7 +990,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 主治医医療機関コード
      */
-    public ShujiiIryokikanCode getShujiiIryokikanCode() {
+    public RString getShujiiIryokikanCode() {
         return shujiiIryokikanCode;
     }
 
@@ -1002,7 +1003,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param shujiiIryokikanCode 主治医医療機関コード
      */
-    public void setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
+    public void setShujiiIryokikanCode(RString shujiiIryokikanCode) {
         this.shujiiIryokikanCode = shujiiIryokikanCode;
     }
 
@@ -1013,7 +1014,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 主治医コード
      */
-    public ShujiiCode getShujiiCode() {
+    public RString getShujiiCode() {
         return shujiiCode;
     }
 
@@ -1024,7 +1025,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param shujiiCode 主治医コード
      */
-    public void setShujiiCode(ShujiiCode shujiiCode) {
+    public void setShujiiCode(RString shujiiCode) {
         this.shujiiCode = shujiiCode;
     }
 
@@ -1138,19 +1139,23 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 入所施設コードのgetメソッドです。
+     * <br/>
+     * <br/>介護事業者の事業者番号または、医療機関コード
      *
      * @return 入所施設コード
      */
-    public JigyoshaNo getNyushoShisetsuCode() {
+    public RString getNyushoShisetsuCode() {
         return nyushoShisetsuCode;
     }
 
     /**
      * 入所施設コードのsetメソッドです。
+     * <br/>
+     * <br/>介護事業者の事業者番号または、医療機関コード
      *
      * @param nyushoShisetsuCode 入所施設コード
      */
-    public void setNyushoShisetsuCode(JigyoshaNo nyushoShisetsuCode) {
+    public void setNyushoShisetsuCode(RString nyushoShisetsuCode) {
         this.nyushoShisetsuCode = nyushoShisetsuCode;
     }
 
@@ -1634,7 +1639,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      * このエンティティの主キーが他の{@literal DbT5101NinteiShinseiJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT5101NinteiShinseiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT5101NinteiShinseiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5101NinteiShinseiJohoEntity other) {
