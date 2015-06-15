@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.db.dbx.business.IKaigoShikaku;
 //import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 //import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbx.business.KaigoShikakuFactory;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.HokenShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuShutokuJiyu;
@@ -182,7 +183,7 @@ public final class HihokenshaShikakuMapper {
     private static IKaigoShikaku toKaigoShikaku(DbT1001HihokenshaDaichoEntity entity) {
         IKaigoShikaku kaigoShikaku = KaigoShikakuFactory.createInstance(
                 entity.getShikibetsuCode(),
-                jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.HokenShubetsu.介護保険,
+                HokenShubetsu.介護保険,
                 toRDateOrMin(entity.getShikakuShutokuTodokedeYMD()),
                 toRDateOrMin(entity.getShikakuShutokuYMD()),
                 //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
