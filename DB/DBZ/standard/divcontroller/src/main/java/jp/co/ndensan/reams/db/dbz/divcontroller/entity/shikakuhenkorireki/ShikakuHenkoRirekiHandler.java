@@ -164,7 +164,9 @@ public class ShikakuHenkoRirekiHandler {
     }
 
     private void setHenkoJiyuDataSource() {
-        List<KaigoShikakuHenkoJiyu> henkoJiyuList = CodeMasterHelper.getCode(DBXCodeShubetsu.介護資格変更事由);
+        //TODO n8235　船山洋介 DBXCodeShubetsuがICodeShubetsuに適応できないため、nullを渡す。　使用できるようになったら修正。
+        // List<KaigoShikakuHenkoJiyu> henkoJiyuList = CodeMasterHelper.getCode(DBXCodeShubetsu.介護資格変更事由);
+        List<KaigoShikakuHenkoJiyu> henkoJiyuList = CodeMasterHelper.getCode(null);
         shikakuHenkoRirekiDiv.getDdlHenkoJiyu().setDataSource(createCodeMasterKeyValue(henkoJiyuList));
     }
 
