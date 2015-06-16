@@ -23,6 +23,7 @@ public abstract class ChosaItakusakiManagerBase implements IChosaItakusakiManage
      *
      * @return 調査委託先情報
      */
+    @Override
     public abstract ItemList<INinteichosaItakusakiJoho> find調査委託先情報();
 
     /**
@@ -32,6 +33,7 @@ public abstract class ChosaItakusakiManagerBase implements IChosaItakusakiManage
      * @param 認定調査委託先コード ChosaItakusakiCode
      * @return 調査委託先情報
      */
+    @Override
     public abstract Optional<INinteichosaItakusakiJoho> find調査委託先情報(LasdecCode 市町村コード, ChosaItakusakiCode 認定調査委託先コード);
 
     /**
@@ -40,6 +42,7 @@ public abstract class ChosaItakusakiManagerBase implements IChosaItakusakiManage
      * @param 調査委託先情報 INinteichosaItakusakiJoho
      * @return　更新件数
      */
+    @Override
     public abstract int save調査委託先(INinteichosaItakusakiJoho 調査委託先情報);
 
 }

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査委託先情報を作成するクラスです。
@@ -49,6 +50,7 @@ public class HokenshaChosaltakusakiJohoManager extends ChosaItakusakiManagerBase
      *
      * @return 調査委託先情報
      */
+    @Override
     public ItemList<INinteichosaItakusakiJoho> find調査委託先情報() {
         return to調査委託先情報(dac.selectAll());
     }
@@ -60,6 +62,7 @@ public class HokenshaChosaltakusakiJohoManager extends ChosaItakusakiManagerBase
      * @param 認定調査委託先コード ChosaItakusakiCode
      * @return 調査委託先情報
      */
+    @Override
     public Optional<INinteichosaItakusakiJoho> find調査委託先情報(LasdecCode 市町村コード, ChosaItakusakiCode 認定調査委託先コード) {
         return dac.selectByKey(市町村コード, 認定調査委託先コード)
                 .map(new IFunction<DbT4910NinteichosaItakusakiJohoEntity, INinteichosaItakusakiJoho>() {
@@ -83,11 +86,13 @@ public class HokenshaChosaltakusakiJohoManager extends ChosaItakusakiManagerBase
     }
 
     /**
-     * 調査委託先情報を更新します。
+     * 調査委託先情報を登録します。
      *
      * @param 調査委託先情報 INinteichosaItakusakiJoho
-     * @return 更新件数
+     * @return 登録件数
      */
+    @Transaction
+    @Override
     public int save調査委託先(INinteichosaItakusakiJoho 調査委託先情報) {
 
         INinteichosaItakusakiJohoEntity entity = 調査委託先情報.getEntity();

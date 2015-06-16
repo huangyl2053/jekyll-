@@ -49,6 +49,7 @@ public class ShinsakaiChosaItakusakiManager extends ChosaItakusakiManagerBase {
      *
      * @return 調査委託先情報
      */
+    @Override
     public ItemList<INinteichosaItakusakiJoho> find調査委託先情報() {
         return to調査委託先情報(dac.selectAll());
     }
@@ -60,6 +61,7 @@ public class ShinsakaiChosaItakusakiManager extends ChosaItakusakiManagerBase {
      * @param 認定調査委託先コード 認定調査委託先コード
      * @return 調査委託先情報
      */
+    @Override
     public Optional<INinteichosaItakusakiJoho> find調査委託先情報(LasdecCode 市町村コード, ChosaItakusakiCode 認定調査委託先コード) {
         return dac.selectByKey(市町村コード, 認定調査委託先コード)
                 .map(new IFunction<DbT5910NinteichosaItakusakiJohoEntity, INinteichosaItakusakiJoho>() {
@@ -88,6 +90,7 @@ public class ShinsakaiChosaItakusakiManager extends ChosaItakusakiManagerBase {
      * @param 調査委託先情報 INinteichosaItakusakiJoho
      * @return 更新件数
      */
+    @Override
     public int save調査委託先(INinteichosaItakusakiJoho 調査委託先情報) {
 
         INinteichosaItakusakiJohoEntity entity = 調査委託先情報.getEntity();
