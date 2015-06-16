@@ -8,6 +8,10 @@ var DBD;
                 return "onChange_radNinteiKubun";
             };
 
+            Events.onBeforeClick_btnValidate = function () {
+                return "onBeforeClick_btnValidate";
+            };
+
             Events.onClick_btnSixMonthLater = function () {
                 return "onClick_btnSixMonthLater";
             };

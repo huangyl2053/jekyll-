@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbd.business.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator;
 import jp.co.ndensan.reams.db.dbd.persistence.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
-import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4001JukyushaDaichoEntity;
@@ -64,7 +63,6 @@ public class JukyushaDaichoManagerTest {
                     DbT4001JukyushaDaichoEntityGenerator.DEFAULT_枝番,
                     DbT4001JukyushaDaichoEntityGenerator.DEFAULT_受給申請事由);
 
-            // 任意の項目が一致するテストケースを記述してください。
             assertThat(受給者台帳.get().getデータ区分(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_データ区分));
         }
     }
@@ -81,8 +79,6 @@ public class JukyushaDaichoManagerTest {
 
             IItemList<JukyushaDaicho> 受給者台帳リスト = sut.get受給者台帳一覧();
 
-            assertThat(受給者台帳リスト.size(), is(1));
-            // 任意の項目が一致するテストケースを記述してください。
             assertThat(受給者台帳リスト.toList().get(0).get識別コード(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_識別コード));
         }
     }
@@ -100,7 +96,6 @@ public class JukyushaDaichoManagerTest {
             IItemList<JukyushaDaicho> 受給者台帳リスト = sut.get受給者台帳履歴(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_被保険者番号);
 
             assertThat(受給者台帳リスト.size(), is(1));
-            // 任意の項目が一致するテストケースを記述してください。
             assertThat(受給者台帳リスト.toList().get(0).get識別コード(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_識別コード));
         }
     }
@@ -122,7 +117,6 @@ public class JukyushaDaichoManagerTest {
 
             JukyushaDaicho 受給者台帳 = new JukyushaDaicho(DbT4001JukyushaDaichoEntityGenerator.createDbT4001JukyushaDaichoEntity());
             受給者台帳.getEntity().initializeMd5();
-            // 状態をModifiedにするため、任意の項目を変更してください。
             受給者台帳.set支給限度単位数(new Decimal("20"));
 
             assertThat(sut.save受給者台帳(受給者台帳), is(1));
@@ -139,8 +133,8 @@ public class JukyushaDaichoManagerTest {
             assertThat(sut.save受給者台帳(受給者台帳), is(1));
         }
 
-        @Test(expected = IllegalArgumentException.class)
-        public void モデルの状態がUnchangedの場合_ApplicationExceptionが発生する() {
+        @Test(expected = ApplicationException.class)
+        public void ビジネスクラスの状態がUnchangedの場合_ApplicationExceptionが発生する() {
 
             JukyushaDaicho 受給者台帳 = new JukyushaDaicho(DbT4001JukyushaDaichoEntityGenerator.createDbT4001JukyushaDaichoEntity());
             受給者台帳.getEntity().initializeMd5();

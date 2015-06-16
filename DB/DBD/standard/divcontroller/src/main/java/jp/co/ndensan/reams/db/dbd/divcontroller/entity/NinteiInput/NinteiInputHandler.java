@@ -7,20 +7,16 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.INinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbd.business.JukyushaDaicho;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.IchibuSoshitsuMode;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.NinteiMode;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.ShokaiMode;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.ShokkenShuseiMode;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.TokushuShuseiMode;
-import jp.co.ndensan.reams.db.dbd.realservice.INinteiKekkaJohoManager;
 import jp.co.ndensan.reams.db.dbd.realservice.JukyushaDaichoManager;
-import jp.co.ndensan.reams.db.dbd.realservice.NinteiKekkaJohoFactory;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -55,9 +51,6 @@ public class NinteiInputHandler {
         switch (div.getMode_ShoriType()) {
 
             case NinteiMode:
-                setShiteiService();
-                setNinteiKekka();
-                break;
             case IchibuSoshitsuMode:
             case ShokaiMode:
             case ShokkenShuseiMode:
@@ -99,22 +92,11 @@ public class NinteiInputHandler {
     }
 
     public void onClickSixMonthLater() {
-
-        if (div.getTxtYukoKaishiYMD().getValue().isEmpty()) {
-            //TODO n8235船山洋介　バリデーション実装方式が未確定のため、確定したらバリデーション処理を行う
-
-        }
-
         div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(6));
 
     }
 
     public void onClickTwelveMonthLater() {
-
-        if (div.getTxtYukoKaishiYMD().getValue().isEmpty()) {
-            //TODO n8235船山洋介　バリデーション実装方式が未確定のため、確定したらバリデーション処理を行う
-
-        }
 
         div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(12));
 
@@ -122,38 +104,14 @@ public class NinteiInputHandler {
 
     public void onClickEighteenMonthLater() {
 
-        if (div.getTxtYukoKaishiYMD().getValue().isEmpty()) {
-            //TODO n8235船山洋介　バリデーション実装方式が未確定のため、確定したらバリデーション処理を行う
-
-        }
-
         div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(18));
 
     }
 
     public void onClickTwentyfourMonthLater() {
 
-        if (div.getTxtYukoKaishiYMD().getValue().isEmpty()) {
-            //TODO n8235船山洋介　バリデーション実装方式が未確定のため、確定したらバリデーション処理を行う
-
-        }
-
         div.getTxtYukoShuryoYMD().setValue(div.getTxtYukoKaishiYMD().getValue().plusMonth(24));
 
-    }
-
-    private void setNinteiKekka() throws IllegalArgumentException, NullPointerException {
-        INinteiKekkaJohoManager instance = NinteiKekkaJohoFactory.getInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
-        Optional<INinteiKekkaJoho> 要介護認定結果情報 = instance.find要介護認定結果情報(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()));
-        if (要介護認定結果情報.isPresent()) {
-            div.getTxtNinteiYMD().setValue(要介護認定結果情報.get().get二次判定年月日());
-            div.getTxtYukoKaishiYMD().setValue(要介護認定結果情報.get().get二次判定認定有効開始年月日());
-            div.getTxtYukoShuryoYMD().setValue(要介護認定結果情報.get().get二次判定認定有効終了年月日());
-            div.getTxtYokaigodoCode().setValue(要介護認定結果情報.get().get二次判定要介護状態区分コード().value());
-            div.getTxtYokaigodoName().setValue(YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(
-                    div.getHdnKoroshoIfShikibetsuCode()), 要介護認定結果情報.get().get二次判定要介護状態区分コード().value()).getName());
-            div.getTxtShinsakaiIken().setValue(要介護認定結果情報.get().get介護認定審査会意見());
-        }
     }
 
     public void clear() {

@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -124,6 +125,6 @@ public class JukyushaDaichoManager {
             return dac.delete(受給者台帳.getEntity());
         }
 
-        throw new IllegalArgumentException(UrErrorMessages.更新対象のデータがない.getMessage().evaluate());
+        throw new ApplicationException(UrErrorMessages.更新対象のデータがない.getMessage().evaluate());
     }
 }

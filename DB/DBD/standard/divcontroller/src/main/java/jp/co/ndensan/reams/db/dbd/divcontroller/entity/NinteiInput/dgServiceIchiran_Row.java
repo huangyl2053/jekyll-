@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Jun 04 15:25:05 JST 2015 
+ * Tue Jun 16 18:18:31 JST 2015 
  */
 
 

@@ -12,6 +12,10 @@ module DBD {
                 return "onChange_radNinteiKubun";
             }
 
+            public static onBeforeClick_btnValidate(): string {
+                return "onBeforeClick_btnValidate";
+            }
+
             public static onClick_btnSixMonthLater(): string {
                 return "onClick_btnSixMonthLater";
             }
