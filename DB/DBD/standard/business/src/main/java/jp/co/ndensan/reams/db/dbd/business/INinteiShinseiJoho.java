@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business;
 
+import jp.co.ndensan.reams.db.dbd.entity.basic.INinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.SeibetsuCode;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 認定申請情報（ビジネス）を扱うインターフェースです。
@@ -567,4 +569,17 @@ public interface INinteiShinseiJoho {
      */
     boolean is論理削除区分();
 
+    /**
+     * INinteiShinseiJoho。
+     *
+     * @return INinteiShinseiJoho
+     */
+    public INinteiShinseiJohoEntity getEntity();
+
+    /**
+     * stateを返します。
+     *
+     * @return EntityDataState
+     */
+    public EntityDataState getState();
 }

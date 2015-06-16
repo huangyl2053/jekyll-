@@ -54,6 +54,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
      *
      * @return DbT4101NinteiShinseiJohoEntity
      */
+    @Override
     public DbT4101NinteiShinseiJohoEntity getEntity() {
         return entity;
     }
@@ -855,6 +856,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
      *
      * @return EntityDataState
      */
+    @Override
     public EntityDataState getState() {
         return entity.getState();
     }

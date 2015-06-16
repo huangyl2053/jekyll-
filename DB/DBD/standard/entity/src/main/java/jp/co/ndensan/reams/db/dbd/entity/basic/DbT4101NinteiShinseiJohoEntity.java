@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.ur.urz.definition.valueobject.SeibetsuCode;
 /**
  * 要介護認定申請情報（子）テーブルのエンティティクラスです。
  */
-public class DbT4101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT4101NinteiShinseiJohoEntity> implements IDbAccessable {
+public class DbT4101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT4101NinteiShinseiJohoEntity> implements IDbAccessable, INinteiShinseiJohoEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
