@@ -36,4 +36,12 @@ public interface IChosainManager {
      */
     Optional<IChosainJoho> find調査員情報(LasdecCode 市町村コード, ChosaItakusakiCode 認定調査委託先コード, ChosainCode 認定調査員コード);
 
+    /**
+     * 調査員情報を更新します。
+     *
+     * @param 調査員情報 IChosainJoho
+     * @return 調査員情報
+     */
+    int save調査員(IChosainJoho 調査員情報);
+
 }

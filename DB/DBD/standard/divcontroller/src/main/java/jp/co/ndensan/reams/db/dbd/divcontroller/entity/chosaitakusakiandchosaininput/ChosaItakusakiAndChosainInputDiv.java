@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.chosaitakusakiandchosain
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.chosaitakusakiandchosaininput.IChosaItakusakiAndChosainInputDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -12,11 +13,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * ChosaItakusakiAndChosainInput のクラスファイル 
- * 
+ * ChosaItakusakiAndChosainInput のクラスファイル
+ *
  * @author 自動生成
  */
 public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaItakusakiAndChosainInputDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-44">
     /*
      * [ private の作成 ]
@@ -64,7 +66,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
 
     @JsonProperty("txtChosaItakusakiCode")
     public void setTxtChosaItakusakiCode(TextBoxCode txtChosaItakusakiCode) {
-        this.txtChosaItakusakiCode=txtChosaItakusakiCode;
+        this.txtChosaItakusakiCode = txtChosaItakusakiCode;
     }
 
     @JsonProperty("btnChosaItakusakiGuide")
@@ -74,7 +76,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
 
     @JsonProperty("btnChosaItakusakiGuide")
     public void setBtnChosaItakusakiGuide(ButtonDialog btnChosaItakusakiGuide) {
-        this.btnChosaItakusakiGuide=btnChosaItakusakiGuide;
+        this.btnChosaItakusakiGuide = btnChosaItakusakiGuide;
     }
 
     @JsonProperty("txtChosaItakusakiName")
@@ -84,7 +86,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
 
     @JsonProperty("txtChosaItakusakiName")
     public void setTxtChosaItakusakiName(TextBox txtChosaItakusakiName) {
-        this.txtChosaItakusakiName=txtChosaItakusakiName;
+        this.txtChosaItakusakiName = txtChosaItakusakiName;
     }
 
     @JsonProperty("btnChosainRenrakuJiko")
@@ -94,7 +96,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
 
     @JsonProperty("btnChosainRenrakuJiko")
     public void setBtnChosainRenrakuJiko(ButtonDialog btnChosainRenrakuJiko) {
-        this.btnChosainRenrakuJiko=btnChosainRenrakuJiko;
+        this.btnChosainRenrakuJiko = btnChosainRenrakuJiko;
     }
 
     @JsonProperty("btnZenkaiFukusha")
@@ -104,7 +106,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
 
     @JsonProperty("btnZenkaiFukusha")
     public void setBtnZenkaiFukusha(Button btnZenkaiFukusha) {
-        this.btnZenkaiFukusha=btnZenkaiFukusha;
+        this.btnZenkaiFukusha = btnZenkaiFukusha;
     }
 
     @JsonProperty("txtChosainCode")
@@ -114,7 +116,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
 
     @JsonProperty("txtChosainCode")
     public void setTxtChosainCode(TextBoxCode txtChosainCode) {
-        this.txtChosainCode=txtChosainCode;
+        this.txtChosainCode = txtChosainCode;
     }
 
     @JsonProperty("btnChosainGuide")
@@ -124,7 +126,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
 
     @JsonProperty("btnChosainGuide")
     public void setBtnChosainGuide(ButtonDialog btnChosainGuide) {
-        this.btnChosainGuide=btnChosainGuide;
+        this.btnChosainGuide = btnChosainGuide;
     }
 
     @JsonProperty("txtChosainName")
@@ -134,7 +136,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
 
     @JsonProperty("txtChosainName")
     public void setTxtChosainName(TextBox txtChosainName) {
-        this.txtChosainName=txtChosainName;
+        this.txtChosainName = txtChosainName;
     }
 
     @JsonProperty("btnClear")
@@ -144,7 +146,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
 
     @JsonProperty("btnClear")
     public void setBtnClear(Button btnClear) {
-        this.btnClear=btnClear;
+        this.btnClear = btnClear;
     }
 
     @JsonProperty("hdnDatabaseSubGyomuCode")
@@ -154,7 +156,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
 
     @JsonProperty("hdnDatabaseSubGyomuCode")
     public void setHdnDatabaseSubGyomuCode(RString hdnDatabaseSubGyomuCode) {
-        this.hdnDatabaseSubGyomuCode=hdnDatabaseSubGyomuCode;
+        this.hdnDatabaseSubGyomuCode = hdnDatabaseSubGyomuCode;
     }
 
     @JsonProperty("hdnChosainRenrakuJiko")
@@ -164,7 +166,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
 
     @JsonProperty("hdnChosainRenrakuJiko")
     public void setHdnChosainRenrakuJiko(RString hdnChosainRenrakuJiko) {
-        this.hdnChosainRenrakuJiko=hdnChosainRenrakuJiko;
+        this.hdnChosainRenrakuJiko = hdnChosainRenrakuJiko;
     }
 
     @JsonProperty("hdnShinseishoKanriNo")
@@ -174,7 +176,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
 
     @JsonProperty("hdnShinseishoKanriNo")
     public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo) {
-        this.hdnShinseishoKanriNo=hdnShinseishoKanriNo;
+        this.hdnShinseishoKanriNo = hdnShinseishoKanriNo;
     }
 
     @JsonProperty("hdnShichosonCode")
@@ -184,7 +186,7 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
 
     @JsonProperty("hdnShichosonCode")
     public void setHdnShichosonCode(RString hdnShichosonCode) {
-        this.hdnShichosonCode=hdnShichosonCode;
+        this.hdnShichosonCode = hdnShichosonCode;
     }
 
     // </editor-fold>
@@ -192,6 +194,11 @@ public class ChosaItakusakiAndChosainInputDiv extends Panel implements IChosaIta
     @Override
     public void onClickBtnClear() {
         getHandler().onClickBtnClear();
+    }
+
+    @Override
+    public void onClickbtnToroku() {
+        getHandler().onClickbtnToroku();
     }
 
     // 以下のメソッドはインタフェースに定義していないので業務には公開されません。

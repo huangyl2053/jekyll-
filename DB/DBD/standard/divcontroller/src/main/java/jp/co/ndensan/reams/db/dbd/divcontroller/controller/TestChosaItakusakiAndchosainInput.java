@@ -30,9 +30,21 @@ public class TestChosaItakusakiAndchosainInput {
         return _createResponseData(div);
     }
 
+    /**
+     * 調査先情報・調査員情報を更新します。
+     *
+     * @param div TestChosaItakusakiAndchosainInputDiv
+     * @return ResponseData
+     */
+    public ResponseData<TestChosaItakusakiAndchosainInputDiv> onClickbtnToroku(TestChosaItakusakiAndchosainInputDiv div) {
+        div.getCcdChosaItakutsakiAndChosainInput().onClickbtnToroku();
+        return _createResponseData(div);
+    }
+
     private ResponseData<TestChosaItakusakiAndchosainInputDiv> _createResponseData(TestChosaItakusakiAndchosainInputDiv div) {
         ResponseData<TestChosaItakusakiAndchosainInputDiv> response = new ResponseData<>();
         response.data = div;
         return response;
     }
+
 }

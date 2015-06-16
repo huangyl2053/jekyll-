@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosainCo
 /**
  * 調査員情報（子）テーブルのエンティティクラスです。
  */
-public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJohoEntity> implements IDbAccessable {
+public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJohoEntity> implements IDbAccessable, IChosainJohoEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
@@ -351,7 +351,8 @@ public class DbT4913ChosainJohoEntity extends DbTableEntityBase<DbT4913ChosainJo
      * このエンティティの主キーが他の{@literal DbT4913ChosainJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT4913ChosainJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT4913ChosainJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT4913ChosainJohoEntity other) {

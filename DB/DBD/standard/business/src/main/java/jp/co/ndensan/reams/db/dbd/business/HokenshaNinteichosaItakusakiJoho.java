@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
  *
  * @author n8223 朴義一
  */
-public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJoho {
+public class HokenshaNinteichosaItakusakiJoho implements Serializable, INinteichosaItakusakiJoho {
 
     private DbT4910NinteichosaItakusakiJohoEntity entity;
 
@@ -54,6 +54,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return 市町村コード
      */
+    @Override
     public LasdecCode get市町村コード() {
         return entity.getShichosonCode();
     }
@@ -63,6 +64,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return 認定調査委託先コード
      */
+    @Override
     public ChosaItakusakiCode get認定調査委託先コード() {
         return entity.getNinteichosaItakusakiCode();
     }
@@ -72,6 +74,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return 事業者番号
      */
+    @Override
     public JigyoshaNo get事業者番号() {
         return entity.getJigyoshaNo();
     }
@@ -81,6 +84,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return 事業者名称
      */
+    @Override
     public RString get事業者名称() {
         return entity.getJigyoshaMeisho();
     }
@@ -90,6 +94,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return 事業者名称カナ
      */
+    @Override
     public RString get事業者名称カナ() {
         return entity.getJigyoshaMeishoKana();
     }
@@ -99,6 +104,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return 郵便番号
      */
+    @Override
     public YubinNo get郵便番号() {
         return entity.getYubinNo();
     }
@@ -108,6 +114,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return 住所
      */
+    @Override
     public RString get住所() {
         return entity.getJusho();
     }
@@ -117,6 +124,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return 電話番号
      */
+    @Override
     public TelNo get電話番号() {
         return entity.getTelNo();
     }
@@ -126,6 +134,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return FAX番号
      */
+    @Override
     public TelNo getFAX番号() {
         return entity.getFaxNo();
     }
@@ -135,6 +144,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return 代表者名
      */
+    @Override
     public AtenaMeisho get代表者名() {
         return entity.getDaihyoshaName();
     }
@@ -144,6 +154,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return 調査委託区分
      */
+    @Override
     public RString get調査委託区分() {
         return entity.getChosaItakuKubun();
     }
@@ -153,6 +164,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return 割付定員
      */
+    @Override
     public int get割付定員() {
         return entity.getWaritsukeTeiin();
     }
@@ -162,6 +174,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return 割付地区
      */
+    @Override
     public ChikuCode get割付地区() {
         return entity.getWaritsukeChiku();
     }
@@ -171,6 +184,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return 自動割付フラグ
      */
+    @Override
     public boolean get自動割付フラグ() {
         return entity.getAutoWaritsukeFlag();
     }
@@ -180,6 +194,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return 機関の区分
      */
+    @Override
     public RString get機関の区分() {
         return entity.getKikanKubun();
     }
@@ -189,8 +204,19 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return 状況フラグ
      */
+    @Override
     public boolean get状況フラグ() {
         return entity.getJokyoFlag();
+    }
+
+    /**
+     * 状態を設定します。
+     *
+     * @param entityDataState EntityDataState
+     */
+    @Override
+    public void setState(EntityDataState entityDataState) {
+        entity.setState(entityDataState);
     }
 
     /**
@@ -198,6 +224,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @param deleteFlag deleteFlag
      */
+    @Override
     public void setDeletedState(boolean deleteFlag) {
         if (deleteFlag) {
             entity.setState(EntityDataState.Deleted);
@@ -211,6 +238,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return EntityDataState
      */
+    @Override
     public EntityDataState getState() {
         return entity.getState();
     }
@@ -233,6 +261,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
      *
      * @return ビルダー
      */
+    @Override
     public Builder createBuilderForEdit() {
         return new Builder(this);
     }
@@ -249,7 +278,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
     /**
      * {@link HokenshaNinteichosaItakusakiJoho}を生成するためのビルダーです。
      */
-    public static final class Builder {
+    public static final class Builder extends INinteichosaItakusakiJoho.Builder {
 
         private DbT4910NinteichosaItakusakiJohoEntity entity;
 
@@ -302,6 +331,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
          * @param shichosonCode 市町村コード
          * @return builder
          */
+        @Override
         public Builder setShichosonCode(LasdecCode shichosonCode) {
             Objects.requireNonNull(shichosonCode);
             this.entity.setShichosonCode(shichosonCode);
@@ -314,6 +344,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
          * @param ninteichosaItakusakiCode 認定調査委託先コード
          * @return builder
          */
+        @Override
         public Builder setNinteichosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
             Objects.requireNonNull(ninteichosaItakusakiCode);
             this.entity.setNinteichosaItakusakiCode(ninteichosaItakusakiCode);
@@ -326,6 +357,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
          * @param jigyoshaNo 事業者番号
          * @return builder
          */
+        @Override
         public Builder setJigyoshaNo(JigyoshaNo jigyoshaNo) {
             Objects.requireNonNull(jigyoshaNo);
             this.entity.setJigyoshaNo(jigyoshaNo);
@@ -338,6 +370,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
          * @param jigyoshaMeisho 事業者名称
          * @return builder
          */
+        @Override
         public Builder setJigyoshaMeisho(RString jigyoshaMeisho) {
             Objects.requireNonNull(jigyoshaMeisho);
             this.entity.setJigyoshaMeisho(jigyoshaMeisho);
@@ -350,6 +383,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
          * @param jigyoshaMeishoKana 事業者名称カナ
          * @return builder
          */
+        @Override
         public Builder setJigyoshaMeishoKana(RString jigyoshaMeishoKana) {
             Objects.requireNonNull(jigyoshaMeishoKana);
             this.entity.setJigyoshaMeishoKana(jigyoshaMeishoKana);
@@ -362,6 +396,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
          * @param yubinNo 郵便番号
          * @return builder
          */
+        @Override
         public Builder setYubinNo(YubinNo yubinNo) {
             Objects.requireNonNull(yubinNo);
             this.entity.setYubinNo(yubinNo);
@@ -374,6 +409,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
          * @param jusho 住所
          * @return builder
          */
+        @Override
         public Builder setJusho(RString jusho) {
             Objects.requireNonNull(jusho);
             this.entity.setJusho(jusho);
@@ -386,6 +422,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
          * @param telNo 電話番号
          * @return builder
          */
+        @Override
         public Builder setTelNo(TelNo telNo) {
             Objects.requireNonNull(telNo);
             this.entity.setTelNo(telNo);
@@ -398,6 +435,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
          * @param faxNo FAX番号
          * @return builder
          */
+        @Override
         public Builder setFaxNo(TelNo faxNo) {
             Objects.requireNonNull(faxNo);
             this.entity.setFaxNo(faxNo);
@@ -410,6 +448,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
          * @param daihyoshaName 代表者名
          * @return builder
          */
+        @Override
         public Builder setDaihyoshaName(AtenaMeisho daihyoshaName) {
             Objects.requireNonNull(daihyoshaName);
             this.entity.setDaihyoshaName(daihyoshaName);
@@ -422,6 +461,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
          * @param chosaItakuKubun 調査委託区分
          * @return builder
          */
+        @Override
         public Builder setChosaItakuKubun(RString chosaItakuKubun) {
             Objects.requireNonNull(chosaItakuKubun);
             this.entity.setChosaItakuKubun(chosaItakuKubun);
@@ -434,6 +474,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
          * @param waritsukeTeiin 割付定員
          * @return builder
          */
+        @Override
         public Builder setWaritsukeTeiin(int waritsukeTeiin) {
             this.entity.setWaritsukeTeiin(waritsukeTeiin);
             return this;
@@ -445,6 +486,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
          * @param waritsukeChiku 割付地区
          * @return builder
          */
+        @Override
         public Builder setWaritsukeChiku(ChikuCode waritsukeChiku) {
             Objects.requireNonNull(waritsukeChiku);
             this.entity.setWaritsukeChiku(waritsukeChiku);
@@ -457,6 +499,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
          * @param autoWaritsukeFlag 自動割付フラグ
          * @return builder
          */
+        @Override
         public Builder setAutoWaritsukeFlag(boolean autoWaritsukeFlag) {
             this.entity.setAutoWaritsukeFlag(autoWaritsukeFlag);
             return this;
@@ -468,6 +511,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
          * @param kikanKubun 機関の区分
          * @return builder
          */
+        @Override
         public Builder setKikanKubun(RString kikanKubun) {
             Objects.requireNonNull(kikanKubun);
             this.entity.setKikanKubun(kikanKubun);
@@ -480,6 +524,7 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
          * @param jokyoFlag 状況フラグ
          * @return builder
          */
+        @Override
         public Builder setJokyoFlag(boolean jokyoFlag) {
             this.entity.setJokyoFlag(jokyoFlag);
             return this;
@@ -490,13 +535,15 @@ public class HokenshaNinteichosaItakusakiJoho implements INinteichosaItakusakiJo
          *
          * @return {@link HokenshaNinteichosaItakusakiJoho}
          */
+        @Override
         public HokenshaNinteichosaItakusakiJoho build() {
             return new HokenshaNinteichosaItakusakiJoho(this);
         }
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。
+     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.business;
 
 import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbd.entity.basic.INinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
@@ -21,6 +22,13 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  * @author n8223　朴義一
  */
 public interface INinteichosaItakusakiJoho {
+
+    /**
+     * 認定調査委託先エンティティの情報を返します。
+     *
+     * @return 認定調査委託先エンティティの情報
+     */
+    INinteichosaItakusakiJohoEntity getEntity();
 
     /**
      * 市町村コードを返します。
@@ -140,5 +148,205 @@ public interface INinteichosaItakusakiJoho {
      * @return EntityDataState
      */
     EntityDataState getState();
+
+    /**
+     * 状態を設定します。
+     *
+     * @param entityDataState EntityDataState
+     */
+    void setState(EntityDataState entityDataState);
+
+    /**
+     * 状態に削除を設定します。
+     *
+     * @param deleteFlag deleteFlag
+     */
+    void setDeletedState(boolean deleteFlag);
+
+    /**
+     * 編集用のビルダーを返します。
+     *
+     * @return ビルダー
+     */
+    Builder createBuilderForEdit();
+
+    /**
+     * {@link INinteichosaItakusakiJoho}を生成するためのビルダーです。
+     */
+    public class Builder {
+
+        /**
+         * shichosonCodeを設定します。
+         *
+         * @param shichosonCode 市町村コード
+         * @return builder
+         */
+        public Builder setShichosonCode(LasdecCode shichosonCode) {
+            return this;
+        }
+
+        /**
+         * ninteichosaItakusakiCodeを設定します。
+         *
+         * @param ninteichosaItakusakiCode 認定調査委託先コード
+         * @return builder
+         */
+        public Builder setNinteichosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
+            return this;
+        }
+
+        /**
+         * jigyoshaNoを設定します。
+         *
+         * @param jigyoshaNo 事業者番号
+         * @return builder
+         */
+        public Builder setJigyoshaNo(JigyoshaNo jigyoshaNo) {
+            return this;
+        }
+
+        /**
+         * jigyoshaMeishoを設定します。
+         *
+         * @param jigyoshaMeisho 事業者名称
+         * @return builder
+         */
+        public Builder setJigyoshaMeisho(RString jigyoshaMeisho) {
+            return this;
+        }
+
+        /**
+         * jigyoshaMeishoKanaを設定します。
+         *
+         * @param jigyoshaMeishoKana 事業者名称カナ
+         * @return builder
+         */
+        public Builder setJigyoshaMeishoKana(RString jigyoshaMeishoKana) {
+            return this;
+        }
+
+        /**
+         * yubinNoを設定します。
+         *
+         * @param yubinNo 郵便番号
+         * @return builder
+         */
+        public Builder setYubinNo(YubinNo yubinNo) {
+            return this;
+        }
+
+        /**
+         * jushoを設定します。
+         *
+         * @param jusho 住所
+         * @return builder
+         */
+        public Builder setJusho(RString jusho) {
+            return this;
+        }
+
+        /**
+         * telNoを設定します。
+         *
+         * @param telNo 電話番号
+         * @return builder
+         */
+        public Builder setTelNo(TelNo telNo) {
+            return this;
+        }
+
+        /**
+         * faxNoを設定します。
+         *
+         * @param faxNo FAX番号
+         * @return builder
+         */
+        public Builder setFaxNo(TelNo faxNo) {
+            return this;
+        }
+
+        /**
+         * daihyoshaNameを設定します。
+         *
+         * @param daihyoshaName 代表者名
+         * @return builder
+         */
+        public Builder setDaihyoshaName(AtenaMeisho daihyoshaName) {
+            return this;
+        }
+
+        /**
+         * chosaItakuKubunを設定します。
+         *
+         * @param chosaItakuKubun 調査委託区分
+         * @return builder
+         */
+        public Builder setChosaItakuKubun(RString chosaItakuKubun) {
+            return this;
+        }
+
+        /**
+         * waritsukeTeiinを設定します。
+         *
+         * @param waritsukeTeiin 割付定員
+         * @return builder
+         */
+        public Builder setWaritsukeTeiin(int waritsukeTeiin) {
+            return this;
+        }
+
+        /**
+         * waritsukeChikuを設定します。
+         *
+         * @param waritsukeChiku 割付地区
+         * @return builder
+         */
+        public Builder setWaritsukeChiku(ChikuCode waritsukeChiku) {
+
+            return this;
+        }
+
+        /**
+         * autoWaritsukeFlagを設定します。
+         *
+         * @param autoWaritsukeFlag 自動割付フラグ
+         * @return builder
+         */
+        public Builder setAutoWaritsukeFlag(boolean autoWaritsukeFlag) {
+
+            return this;
+        }
+
+        /**
+         * kikanKubunを設定します。
+         *
+         * @param kikanKubun 機関の区分
+         * @return builder
+         */
+        public Builder setKikanKubun(RString kikanKubun) {
+
+            return this;
+        }
+
+        /**
+         * JokyoFlagを設定します。
+         *
+         * @param jokyoFlag 状況フラグ
+         * @return builder
+         */
+        public Builder setJokyoFlag(boolean jokyoFlag) {
+
+            return this;
+        }
+
+        /**
+         * {@link HokenshaNinteichosaItakusakiJoho}を生成します。
+         *
+         * @return {@link HokenshaNinteichosaItakusakiJoho}
+         */
+        public INinteichosaItakusakiJoho build() {
+            return new INinteichosaItakusakiJoho.Builder().build();
+        }
+    };
 
 }

@@ -41,4 +41,9 @@ public interface IChosaItakusakiAndChosainInputDiv extends ICommonChildDivBasePr
      */
     void onClickBtnClear();
 
+    /**
+     * 更新処理を行います。
+     */
+    void onClickbtnToroku();
+
 }

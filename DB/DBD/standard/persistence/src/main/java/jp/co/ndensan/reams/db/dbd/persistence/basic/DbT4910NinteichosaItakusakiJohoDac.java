@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbd.persistence.basic;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbd.entity.basic.INinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4910NinteichosaItakusakiJoho;
 import static jp.co.ndensan.reams.db.dbd.entity.basic.DbT4910NinteichosaItakusakiJoho.*;
@@ -26,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8223 朴義一
  */
-public class DbT4910NinteichosaItakusakiJohoDac implements IModifiable<DbT4910NinteichosaItakusakiJohoEntity> {
+public class DbT4910NinteichosaItakusakiJohoDac implements IModifiable<INinteichosaItakusakiJohoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -72,21 +73,21 @@ public class DbT4910NinteichosaItakusakiJohoDac implements IModifiable<DbT4910Ni
 
     @Transaction
     @Override
-    public int insert(DbT4910NinteichosaItakusakiJohoEntity entity) {
+    public int insert(INinteichosaItakusakiJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(entity).execute();
     }
 
     @Transaction
     @Override
-    public int update(DbT4910NinteichosaItakusakiJohoEntity entity) {
+    public int update(INinteichosaItakusakiJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.update(entity).execute();
     }
 
     @Transaction
     @Override
-    public int delete(DbT4910NinteichosaItakusakiJohoEntity entity) {
+    public int delete(INinteichosaItakusakiJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
     }
@@ -95,12 +96,12 @@ public class DbT4910NinteichosaItakusakiJohoDac implements IModifiable<DbT4910Ni
     /**
      * 物理削除を行う。
      *
-     * @param entity DbT4910NinteichosaItakusakiJohoEntity
+     * @param entity INinteichosaItakusakiJohoEntity
      * @return int 件数
      */
-    @Transaction
-    public int deletePhysical(DbT4910NinteichosaItakusakiJohoEntity entity) {
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-        return accessor.deletePhysical(entity).execute();
-    }
+//    @Transaction
+//    public int deletePhysical(INinteichosaItakusakiJohoEntity entity) {
+//        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+//        return accessor.deletePhysical(entity).execute();
+//    }
 }

@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.TestChosaItakusakiAndcho
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.chosaitakusakiandchosaininput.IChosaItakusakiAndChosainInputDiv;
@@ -12,12 +11,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * TestChosaItakusakiAndchosainInput のクラスファイル
- *
+ * TestChosaItakusakiAndchosainInput のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class TestChosaItakusakiAndchosainInputDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-44">
     /*
      * [ private の作成 ]
@@ -49,7 +47,7 @@ public class TestChosaItakusakiAndchosainInputDiv extends Panel {
 
     @JsonProperty("txtSubGyomuCode")
     public void setTxtSubGyomuCode(TextBox txtSubGyomuCode) {
-        this.txtSubGyomuCode = txtSubGyomuCode;
+        this.txtSubGyomuCode=txtSubGyomuCode;
     }
 
     @JsonProperty("txtShichosonCode")
@@ -59,7 +57,7 @@ public class TestChosaItakusakiAndchosainInputDiv extends Panel {
 
     @JsonProperty("txtShichosonCode")
     public void setTxtShichosonCode(TextBox txtShichosonCode) {
-        this.txtShichosonCode = txtShichosonCode;
+        this.txtShichosonCode=txtShichosonCode;
     }
 
     @JsonProperty("txtShinseishoKanriNo")
@@ -69,7 +67,7 @@ public class TestChosaItakusakiAndchosainInputDiv extends Panel {
 
     @JsonProperty("txtShinseishoKanriNo")
     public void setTxtShinseishoKanriNo(TextBox txtShinseishoKanriNo) {
-        this.txtShinseishoKanriNo = txtShinseishoKanriNo;
+        this.txtShinseishoKanriNo=txtShinseishoKanriNo;
     }
 
     @JsonProperty("btnSetinput")
@@ -79,7 +77,7 @@ public class TestChosaItakusakiAndchosainInputDiv extends Panel {
 
     @JsonProperty("btnSetinput")
     public void setBtnSetinput(Button btnSetinput) {
-        this.btnSetinput = btnSetinput;
+        this.btnSetinput=btnSetinput;
     }
 
     @JsonProperty("ccdChosaItakutsakiAndChosainInput")

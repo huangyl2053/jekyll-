@@ -33,4 +33,12 @@ public interface IChosaItakusakiManager {
      * @return 調査委託先情報(1件）
      */
     Optional<INinteichosaItakusakiJoho> find調査委託先情報(LasdecCode 市町村コード, ChosaItakusakiCode 認定調査委託先コード);
+
+    /**
+     * 調査委託先情報を更新します。
+     *
+     * @param 調査委託先情報 INinteichosaItakusakiJoho
+     * @return 調査委託先情報
+     */
+    int save調査委託先(INinteichosaItakusakiJoho 調査委託先情報);
 }

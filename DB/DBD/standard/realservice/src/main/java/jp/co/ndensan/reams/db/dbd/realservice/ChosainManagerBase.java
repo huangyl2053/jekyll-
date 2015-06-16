@@ -36,4 +36,6 @@ public abstract class ChosainManagerBase implements IChosainManager {
      */
     public abstract Optional<IChosainJoho> find調査員情報(LasdecCode 市町村コード, ChosaItakusakiCode 認定調査委託先コード, ChosainCode 認定調査員コード);
 
+    public abstract int save調査員(IChosainJoho 調査員情報);
+
 }

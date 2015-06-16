@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosainCo
  *
  * @author n8235 船山洋介
  */
-public class ShinsakaiNinteiShinseiJoho implements INinteiShinseiJoho {
+public class ShinsakaiNinteiShinseiJoho implements Serializable, INinteiShinseiJoho {
 
     private DbT5101NinteiShinseiJohoEntity entity;
 

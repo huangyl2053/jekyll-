@@ -36,7 +36,6 @@ public class ChosaItakusakiAndChosainInput {
     public ResponseData<ChosaItakusakiAndChosainInputDiv> onBlur_txtChosainCode(ChosaItakusakiAndChosainInputDiv div) {
         createHandOf(div).onBlurTxtChosainCode();
         return createSettingData(div);
-
     }
 
     /**
@@ -48,18 +47,29 @@ public class ChosaItakusakiAndChosainInput {
     public ResponseData<ChosaItakusakiAndChosainInputDiv> onClick_btnZenkaiFukusha(ChosaItakusakiAndChosainInputDiv div) {
         createHandOf(div).onClickBtnZenkaiFukusha();
         return createSettingData(div);
-
     }
 
     /**
      * onClick_btnClearボタンを押下した際に動作するメソッドです。<br/>
-     * 共有子Div内の項目に設定された値をすべてクリアする。
+     * 共有子Div内の項目に設定された値をすべてクリアします。
      *
      * @param div 調査委託先/調査員入力共有子Div
      * @return レスポンス
      */
     public ResponseData<ChosaItakusakiAndChosainInputDiv> onClick_btnClear(ChosaItakusakiAndChosainInputDiv div) {
         createHandOf(div).onClickBtnClear();
+        return createSettingData(div);
+    }
+
+    /**
+     * onClickbtnTorokuボタンを押した際に動作するメソッドです。<br/>
+     * 共有子Div内の項目に設定された値を保存します。
+     *
+     * @param div 調査委託先/調査員入力共有子Div
+     * @return レスポンス
+     */
+    public ResponseData<ChosaItakusakiAndChosainInputDiv> onClickbtnToroku(ChosaItakusakiAndChosainInputDiv div) {
+        createHandOf(div).onClickbtnToroku();
         return createSettingData(div);
     }
 

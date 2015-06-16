@@ -15,10 +15,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.db.dbd.business.ShinsakaiChosainJoho;
 import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbd.entity.basic.IChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査員を作成するクラスです。
@@ -84,6 +86,29 @@ public class ShinsakaiChosainManager extends ChosainManagerBase {
         }
 
         return shinsakaiChosainJohoList;
+    }
+
+    /**
+     * 調査員情報を登録します。
+     *
+     * @param 調査員情報 IChosainJoho
+     * @return 登録件数
+     */
+    @Transaction
+    @Override
+    public int save調査員(IChosainJoho 調査員情報) {
+        IChosainJohoEntity entity = 調査員情報.getEntity();
+
+        switch (調査員情報.getState()) {
+            case Added:
+                return dac.insert(entity);
+            case Modified:
+                return dac.update(entity);
+            case Deleted:
+                return dac.delete(entity);
+            default:
+                return 0;
+        }
     }
 
 }

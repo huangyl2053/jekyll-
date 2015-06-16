@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.realservice;
 import jp.co.ndensan.reams.db.dbd.business.INinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbd.business.ShinsakaiNinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbd.entity.basic.INinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.basic.DbT5910NinteichosaItakusakiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
@@ -81,4 +82,25 @@ public class ShinsakaiChosaItakusakiManager extends ChosaItakusakiManagerBase {
         return shinsakaiNinteichosaItakusakiJohList;
     }
 
+    /**
+     * 調査委託先情報を更新します。
+     *
+     * @param 調査委託先情報 INinteichosaItakusakiJoho
+     * @return 更新件数
+     */
+    public int save調査委託先(INinteichosaItakusakiJoho 調査委託先情報) {
+
+        INinteichosaItakusakiJohoEntity entity = 調査委託先情報.getEntity();
+
+        switch (調査委託先情報.getState()) {
+            case Added:
+                return dac.insert(entity);
+            case Modified:
+                return dac.update(entity);
+            case Deleted:
+                return dac.delete(entity);
+            default:
+                return 0;
+        }
+    }
 }

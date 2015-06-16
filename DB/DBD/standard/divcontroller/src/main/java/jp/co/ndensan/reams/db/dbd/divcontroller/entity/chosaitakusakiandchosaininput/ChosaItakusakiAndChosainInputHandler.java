@@ -5,10 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.chosaitakusakiandchosaininput;
 
+import jp.co.ndensan.reams.db.dbd.business.HokenshaChosainJoho;
+import jp.co.ndensan.reams.db.dbd.business.HokenshaNinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbd.business.IChosainJoho;
 import jp.co.ndensan.reams.db.dbd.business.INinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbd.business.INinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbd.business.IShinseiRirekiJoho;
+import jp.co.ndensan.reams.db.dbd.business.ShinsakaiChosainJoho;
+import jp.co.ndensan.reams.db.dbd.business.ShinsakaiNinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbd.realservice.ChosaItakusakiFactory;
@@ -27,6 +31,7 @@ import jp.co.ndensan.reams.db.dbz.realservice.koseishichosonmaster.IKoseiShichos
 import jp.co.ndensan.reams.db.dbz.realservice.koseishichosonmaster.KoseiShichosonMasterFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 調査委託先/調査員入力共有子Divのエンティティに対する操作を行うクラスです。
@@ -42,7 +47,7 @@ public class ChosaItakusakiAndChosainInputHandler {
     private IChosaItakusakiManager chosaItakusakimanager;
     private IChosainManager chosaInmanager;
 
-    private SubGyomuCode subGyomuCode;
+    private final SubGyomuCode subGyomuCode;
 
     /**
      * コンストラクタです。
@@ -154,6 +159,72 @@ public class ChosaItakusakiAndChosainInputHandler {
         div.getTxtChosaItakusakiName().clearValue();
         div.getTxtChosainCode().clearValue();
         div.getTxtChosainName().clearValue();
+    }
+
+    /**
+     * 入力された調査委託先/調査員入力共有子Div情報を更新します。
+     */
+    public void onClickbtnToroku() {
+        //調査委託先を更新します。
+        chosaItakusakimanager = ChosaItakusakiFactory.getInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
+        INinteichosaItakusakiJoho.Builder chosaItakusakiJohoBuilder = setchosaItakusakiJoho();
+        chosaItakusakiJohoBuilder.setNinteichosaItakusakiCode(new ChosaItakusakiCode(div.getTxtChosaItakusakiCode().getValue()));
+        chosaItakusakiJohoBuilder.setJigyoshaMeisho(div.getTxtChosaItakusakiName().getValue());
+        chosaItakusakiJohoBuilder.setShichosonCode(new LasdecCode(div.getHdnShichosonCode()));
+        chosaItakusakimanager.save調査委託先(chosaItakusakiJohoBuilder.build());
+        //調査員を更新します。
+        chosaInmanager = ChosainFactory.getInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
+        IChosainJoho.Builder chosainJohoBuilder = setchosaInJoho();
+        chosainJohoBuilder.setNinteichosaItakusakiCode(new ChosaItakusakiCode(div.getTxtChosaItakusakiCode().getValue()));
+        chosainJohoBuilder.setNinteiChosainNo(new ChosainCode(div.getTxtChosainCode().getValue()));
+        chosainJohoBuilder.setChosainShimei(div.getTxtChosainName().getValue());
+        chosainJohoBuilder.setShichosonCode(new LasdecCode(div.getHdnShichosonCode()));
+        //TODO 性別 DBZ.KaigoNinteiShinseihaから取得します。
+        chosainJohoBuilder.setSeibetsu(new RString("1"));
+        chosaInmanager.save調査員(chosainJohoBuilder.build());
+    }
+
+    private INinteichosaItakusakiJoho.Builder setchosaItakusakiJoho() {
+
+        Optional<INinteichosaItakusakiJoho> chosaItakusakiJoho
+                = isChosaItakusakiJoho();
+
+        if (chosaItakusakiJoho.isPresent()) {
+            return chosaItakusakiJoho.get().createBuilderForEdit();
+        }
+        if (div.getHdnDatabaseSubGyomuCode().equals(SubGyomuCode.DBD介護受給.value())) {
+            return HokenshaNinteichosaItakusakiJoho.newBuilder();
+        }
+        return ShinsakaiNinteichosaItakusakiJoho.newBuilder();
+
+    }
+
+    private Optional<INinteichosaItakusakiJoho> isChosaItakusakiJoho() throws IllegalArgumentException, NullPointerException {
+        Optional<INinteichosaItakusakiJoho> chosaItakusakiJoho
+                = chosaItakusakimanager.find調査委託先情報(new LasdecCode(div.getHdnShichosonCode()), new ChosaItakusakiCode(div.getTxtChosaItakusakiCode().getValue()));
+        return chosaItakusakiJoho;
+    }
+
+    private IChosainJoho.Builder setchosaInJoho() {
+        Optional<IChosainJoho> chosainJoho
+                = isChosainJoho();
+
+        if (chosainJoho.isPresent()) {
+            return chosainJoho.get().createBuilderForEdit();
+        }
+
+        if (div.getHdnDatabaseSubGyomuCode().equals(SubGyomuCode.DBD介護受給.value())) {
+            return HokenshaChosainJoho.newBuilder();
+        }
+        return ShinsakaiChosainJoho.newBuilder();
+
+    }
+
+    private Optional<IChosainJoho> isChosainJoho() throws NullPointerException, IllegalArgumentException {
+        Optional<IChosainJoho> chosainJoho
+                = chosaInmanager.find調査員情報(new LasdecCode(div.getHdnShichosonCode()), new ChosaItakusakiCode(div.getTxtChosaItakusakiCode().getValue()),
+                        new ChosainCode(div.getTxtChosainCode().getValue()));
+        return chosainJoho;
     }
 
 }

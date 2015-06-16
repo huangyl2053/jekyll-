@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.realservice;
 
+import jp.co.ndensan.reams.db.dbd.business.HokenshaNinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbd.business.INinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4910NinteichosaItakusakiJohoEntity;
@@ -22,6 +23,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.any;
 
 /**
  * {link HokenshaChosaltakusakiJohoManager}のテストクラスです。
@@ -37,6 +39,9 @@ public class HokenshaChosaltakusakiJohoManagerTest {
     private static final LasdecCode notFound市町村コード = new LasdecCode("123456");
     private static final ChosaItakusakiCode notFound認定調査委託先コード = new ChosaItakusakiCode("1234567890");
 
+    private static HokenshaChosaltakusakiJohoManager sut;
+    private static DbT4910NinteichosaItakusakiJohoDac dac;
+
     public HokenshaChosaltakusakiJohoManagerTest() {
     }
 
@@ -44,9 +49,6 @@ public class HokenshaChosaltakusakiJohoManagerTest {
      * Test of find調査委託先情報 method, of class HokenshaChosaltakusakiJohoManager.
      */
     public static class testFind調査委託先情報 extends DbdTestBase {
-
-        private HokenshaChosaltakusakiJohoManager sut;
-        private DbT4910NinteichosaItakusakiJohoDac dac;
 
         @Before
         public void setUp() {
@@ -85,6 +87,51 @@ public class HokenshaChosaltakusakiJohoManagerTest {
             Optional<INinteichosaItakusakiJoho> result = sut.find調査委託先情報(市町村コード, 認定調査委託先コード);
             assertThat(result.get().get市町村コード().value(), is(business.get市町村コード().value()));
         }
-
     }
+
+    public static class testSave調査委託先情報 extends DbdTestBase {
+
+        @Before
+        public void setUp() {
+            dac = mock(DbT4910NinteichosaItakusakiJohoDac.class);
+            sut = new HokenshaChosaltakusakiJohoManager(dac);
+        }
+
+        @Test
+        public void insertに成功すると1が返る() {
+            when(dac.insert(any(DbT4910NinteichosaItakusakiJohoEntity.class))).thenReturn(1);
+            INinteichosaItakusakiJoho hokenshaChosainjoho = new HokenshaNinteichosaItakusakiJoho(DbT4910NinteichosaItakusakiJohoEntityGenerator.createDbT4910NinteichosaItakusakiJohoEntity());
+            assertThat(sut.save調査委託先(hokenshaChosainjoho), is(1));
+        }
+
+        @Test
+        public void updateに成功すると1が返る() {
+            when(dac.update(any(DbT4910NinteichosaItakusakiJohoEntity.class))).thenReturn(1);
+            HokenshaNinteichosaItakusakiJoho hokenshaNinteichosaItakusakiJoho = new HokenshaNinteichosaItakusakiJoho(DbT4910NinteichosaItakusakiJohoEntityGenerator.createDbT4910NinteichosaItakusakiJohoEntity());
+            hokenshaNinteichosaItakusakiJoho.getEntity().initializeMd5();
+            //編集
+            HokenshaNinteichosaItakusakiJoho.Builder createBuilderForEdit = hokenshaNinteichosaItakusakiJoho.createBuilderForEdit();
+            createBuilderForEdit.setJusho(new RString("アドレス"));
+            INinteichosaItakusakiJoho build = createBuilderForEdit.build();
+            assertThat(sut.save調査委託先(build), is(1));
+        }
+
+        @Test
+        public void deleteに成功すると1が返る() {
+            when(dac.delete(any(DbT4910NinteichosaItakusakiJohoEntity.class))).thenReturn(1);
+            HokenshaNinteichosaItakusakiJoho hokenshaNinteichosaItakusakiJoho = new HokenshaNinteichosaItakusakiJoho(DbT4910NinteichosaItakusakiJohoEntityGenerator.createDbT4910NinteichosaItakusakiJohoEntity());
+            hokenshaNinteichosaItakusakiJoho.getEntity().initializeMd5();
+            hokenshaNinteichosaItakusakiJoho.setDeletedState(true);
+
+            assertThat(sut.save調査委託先(hokenshaNinteichosaItakusakiJoho), is(1));
+        }
+
+        @Test
+        public void ビジネスクラスの状態がUnchangedの場合_ApplicationExceptionが発生する() {
+            HokenshaNinteichosaItakusakiJoho hokenshaNinteichosaItakusakiJoho = new HokenshaNinteichosaItakusakiJoho(DbT4910NinteichosaItakusakiJohoEntityGenerator.createDbT4910NinteichosaItakusakiJohoEntity());
+            hokenshaNinteichosaItakusakiJoho.getEntity().initializeMd5();
+            sut.save調査委託先(hokenshaNinteichosaItakusakiJoho);
+        }
+    }
+
 }

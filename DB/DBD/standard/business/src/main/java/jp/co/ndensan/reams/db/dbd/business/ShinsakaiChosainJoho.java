@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
  *
  * @author n8223 朴義一
  */
-public class ShinsakaiChosainJoho implements IChosainJoho {
+public class ShinsakaiChosainJoho implements Serializable, IChosainJoho {
 
     private DbT5913ChosainJohoEntity entity;
 
@@ -47,6 +47,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @return DbT5913ChosainJohoEntity
      */
+    @Override
     public DbT5913ChosainJohoEntity getEntity() {
         return entity;
     }
@@ -56,6 +57,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @return 市町村コード
      */
+    @Override
     public LasdecCode get市町村コード() {
         return entity.getShichosonCode();
     }
@@ -65,6 +67,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @return 認定調査委託先コード
      */
+    @Override
     public ChosaItakusakiCode get認定調査委託先コード() {
         return entity.getNinteichosaItakusakiCode();
     }
@@ -74,6 +77,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @return 認定調査員コード
      */
+    @Override
     public ChosainCode get認定調査員コード() {
         return entity.getNinteiChosainNo();
     }
@@ -83,6 +87,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @return 調査員氏名
      */
+    @Override
     public RString get調査員氏名() {
         return entity.getChosainShimei();
     }
@@ -92,6 +97,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @return 調査員氏名カナ
      */
+    @Override
     public RString get調査員氏名カナ() {
         return entity.getChosainKanaShimei();
     }
@@ -101,6 +107,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @return 性別
      */
+    @Override
     public RString get性別() {
         return entity.getSeibetsu();
     }
@@ -110,6 +117,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @return 調査員資格
      */
+    @Override
     public RString get調査員資格() {
         return entity.getChosainShikaku();
     }
@@ -119,6 +127,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @return 地区コード
      */
+    @Override
     public RString get地区コード() {
         return entity.getChikuCode();
     }
@@ -128,6 +137,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @return 調査可能人数／月
      */
+    @Override
     public int get調査可能人数月() {
         return entity.getChosaKanoNinzuPerMonth();
     }
@@ -137,6 +147,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @return 郵便番号
      */
+    @Override
     public YubinNo get郵便番号() {
         return entity.getYubinNo();
     }
@@ -146,6 +157,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @return 住所
      */
+    @Override
     public AtenaJusho get住所() {
         return entity.getJusho();
     }
@@ -155,6 +167,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @return 電話番号
      */
+    @Override
     public TelNo get電話番号() {
         return entity.getTelNo();
     }
@@ -164,6 +177,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @return FAX番号
      */
+    @Override
     public TelNo getFAX番号() {
         return entity.getFaxNo();
     }
@@ -173,8 +187,19 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @return 状況フラグ
      */
+    @Override
     public boolean get状況フラグ() {
         return entity.getJokyoFlag();
+    }
+
+    /**
+     * 状態を設定します。
+     *
+     * @param entityDataState EntityDataState
+     */
+    @Override
+    public void setState(EntityDataState entityDataState) {
+        entity.setState(entityDataState);
     }
 
     /**
@@ -182,6 +207,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @param deleteFlag deleteFlag
      */
+    @Override
     public void setDeletedState(boolean deleteFlag) {
         if (deleteFlag) {
             entity.setState(EntityDataState.Deleted);
@@ -195,6 +221,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @return EntityDataState
      */
+    @Override
     public EntityDataState getState() {
         return entity.getState();
     }
@@ -217,6 +244,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
      *
      * @return ビルダー
      */
+    @Override
     public Builder createBuilderForEdit() {
         return new Builder(this);
     }
@@ -233,7 +261,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
     /**
      * {@link ShinsakaiChosainJoho}を生成するためのビルダーです。
      */
-    public static final class Builder {
+    public static final class Builder extends IChosainJoho.Builder {
 
         private DbT5913ChosainJohoEntity entity;
 
@@ -286,6 +314,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
          * @param shichosonCode 市町村コード
          * @return builder
          */
+        @Override
         public Builder setShichosonCode(LasdecCode shichosonCode) {
             Objects.requireNonNull(shichosonCode);
             this.entity.setShichosonCode(shichosonCode);
@@ -298,6 +327,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
          * @param ninteichosaItakusakiCode 認定調査委託先コード
          * @return builder
          */
+        @Override
         public Builder setNinteichosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
             Objects.requireNonNull(ninteichosaItakusakiCode);
             this.entity.setNinteichosaItakusakiCode(ninteichosaItakusakiCode);
@@ -310,6 +340,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
          * @param ninteiChosainNo 認定調査員コード
          * @return builder
          */
+        @Override
         public Builder setNinteiChosainNo(ChosainCode ninteiChosainNo) {
             Objects.requireNonNull(ninteiChosainNo);
             this.entity.setNinteiChosainNo(ninteiChosainNo);
@@ -322,6 +353,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
          * @param chosainShimei 調査員氏名
          * @return builder
          */
+        @Override
         public Builder setChosainShimei(RString chosainShimei) {
             Objects.requireNonNull(chosainShimei);
             this.entity.setChosainShimei(chosainShimei);
@@ -334,6 +366,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
          * @param chosainKanaShimei 調査員氏名カナ
          * @return builder
          */
+        @Override
         public Builder setChosainKanaShimei(RString chosainKanaShimei) {
             Objects.requireNonNull(chosainKanaShimei);
             this.entity.setChosainKanaShimei(chosainKanaShimei);
@@ -346,6 +379,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
          * @param seibetsu 性別
          * @return builder
          */
+        @Override
         public Builder setSeibetsu(RString seibetsu) {
             Objects.requireNonNull(seibetsu);
             this.entity.setSeibetsu(seibetsu);
@@ -358,6 +392,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
          * @param chosainShikaku 調査員資格
          * @return builder
          */
+        @Override
         public Builder setChosainShikaku(RString chosainShikaku) {
             Objects.requireNonNull(chosainShikaku);
             this.entity.setChosainShikaku(chosainShikaku);
@@ -370,6 +405,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
          * @param chikuCode 地区コード
          * @return builder
          */
+        @Override
         public Builder setChikuCode(RString chikuCode) {
             Objects.requireNonNull(chikuCode);
             this.entity.setChikuCode(chikuCode);
@@ -382,6 +418,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
          * @param chosaKanoNinzuPerMonth 調査可能人数／月
          * @return builder
          */
+        @Override
         public Builder setChosaKanoNinzuPerMonth(int chosaKanoNinzuPerMonth) {
             this.entity.setChosaKanoNinzuPerMonth(chosaKanoNinzuPerMonth);
             return this;
@@ -393,6 +430,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
          * @param yubinNo 郵便番号
          * @return builder
          */
+        @Override
         public Builder setYubinNo(YubinNo yubinNo) {
             Objects.requireNonNull(yubinNo);
             this.entity.setYubinNo(yubinNo);
@@ -405,6 +443,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
          * @param jusho 住所
          * @return builder
          */
+        @Override
         public Builder setJusho(AtenaJusho jusho) {
             Objects.requireNonNull(jusho);
             this.entity.setJusho(jusho);
@@ -417,6 +456,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
          * @param telNo 電話番号
          * @return builder
          */
+        @Override
         public Builder setTelNo(TelNo telNo) {
             Objects.requireNonNull(telNo);
             this.entity.setTelNo(telNo);
@@ -429,6 +469,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
          * @param faxNo FAX番号
          * @return builder
          */
+        @Override
         public Builder setFaxNo(TelNo faxNo) {
             Objects.requireNonNull(faxNo);
             this.entity.setFaxNo(faxNo);
@@ -441,6 +482,7 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
          * @param jokyoFlag 状況フラグ
          * @return builder
          */
+        @Override
         public Builder setJokyoFlag(boolean jokyoFlag) {
             this.entity.setJokyoFlag(jokyoFlag);
             return this;
@@ -451,13 +493,15 @@ public class ShinsakaiChosainJoho implements IChosainJoho {
          *
          * @return {@link ShinsakaiChosainJoho}
          */
+        @Override
         public ShinsakaiChosainJoho build() {
             return new ShinsakaiChosainJoho(this);
         }
     }
 
     /**
-     * このオブジェクトのシリアライズ形式を提供します。 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
+     * このオブジェクトのシリアライズ形式を提供します。
+     * 戻り値である{@link Serializable}のインスタンスは、デシリアライズ時に、このオブジェクトを生成します。
      *
      * @return このオブジェクトのシリアライズ形式
      */

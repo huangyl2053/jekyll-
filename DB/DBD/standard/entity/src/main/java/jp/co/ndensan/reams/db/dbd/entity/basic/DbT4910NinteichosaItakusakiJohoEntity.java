@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 /**
  * 認定調査委託先情報（子）テーブルのエンティティクラスです。
  */
-public class DbT4910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT4910NinteichosaItakusakiJohoEntity> implements IDbAccessable {
+public class DbT4910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT4910NinteichosaItakusakiJohoEntity> implements IDbAccessable, INinteichosaItakusakiJohoEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
@@ -393,7 +393,8 @@ public class DbT4910NinteichosaItakusakiJohoEntity extends DbTableEntityBase<DbT
      * このエンティティの主キーが他の{@literal DbT4910NinteichosaItakusakiJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT4910NinteichosaItakusakiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT4910NinteichosaItakusakiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT4910NinteichosaItakusakiJohoEntity other) {

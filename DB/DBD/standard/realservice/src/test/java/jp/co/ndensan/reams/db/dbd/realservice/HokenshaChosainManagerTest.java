@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.realservice;
 
+import jp.co.ndensan.reams.db.dbd.business.HokenshaChosainJoho;
 import jp.co.ndensan.reams.db.dbd.business.IChosainJoho;
 import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosainCode;
@@ -21,6 +22,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -40,6 +42,9 @@ public class HokenshaChosainManagerTest {
     private static final ChosaItakusakiCode notFound認定調査委託先コード = new ChosaItakusakiCode("5234567890");
     private static final ChosainCode notFound認定調査員コード = new ChosainCode("52345678");
 
+    private static HokenshaChosainManager sut;
+    private static DbT4913ChosainJohoDac dac;
+
     public HokenshaChosainManagerTest() {
     }
 
@@ -47,9 +52,6 @@ public class HokenshaChosainManagerTest {
      * Test of find調査員情報 method, of class HokenshaChosainManager.
      */
     public static class testFind調査員情報 extends DbdTestBase {
-
-        private HokenshaChosainManager sut;
-        private DbT4913ChosainJohoDac dac;
 
         @Before
         public void setUp() {
@@ -93,6 +95,51 @@ public class HokenshaChosainManagerTest {
             assertThat(result.get().get市町村コード().value(), is(business.get市町村コード().value()));
         }
 
+    }
+
+    public static class testSave調査員情報 extends DbdTestBase {
+
+        @Before
+        public void setUp() {
+            dac = mock(DbT4913ChosainJohoDac.class);
+            sut = new HokenshaChosainManager(dac);
+        }
+
+        @Test
+        public void insertに成功すると1が返る() {
+            when(dac.insert(any(DbT4913ChosainJohoEntity.class))).thenReturn(1);
+            IChosainJoho hokenshaChosainjoho = new HokenshaChosainJoho(DbT4913ChosainJohoEntityGenerator.createDbT4913ChosainJohoEntity());
+            assertThat(sut.save調査員(hokenshaChosainjoho), is(1));
+        }
+
+        @Test
+        public void updateに成功すると1が返る() {
+            when(dac.update(any(DbT4913ChosainJohoEntity.class))).thenReturn(1);
+            HokenshaChosainJoho hokenshaChosainjoho = new HokenshaChosainJoho(DbT4913ChosainJohoEntityGenerator.createDbT4913ChosainJohoEntity());
+            hokenshaChosainjoho.getEntity().initializeMd5();
+            //編集
+            HokenshaChosainJoho.Builder createBuilderForEdit = hokenshaChosainjoho.createBuilderForEdit();
+            createBuilderForEdit.setSeibetsu(new RString("2"));
+            IChosainJoho build = createBuilderForEdit.build();
+            assertThat(sut.save調査員(build), is(1));
+        }
+
+        @Test
+        public void deleteに成功すると1が返る() {
+            when(dac.delete(any(DbT4913ChosainJohoEntity.class))).thenReturn(1);
+            HokenshaChosainJoho hokenshaChosainjoho = new HokenshaChosainJoho(DbT4913ChosainJohoEntityGenerator.createDbT4913ChosainJohoEntity());
+            hokenshaChosainjoho.getEntity().initializeMd5();
+            hokenshaChosainjoho.setDeletedState(true);
+
+            assertThat(sut.save調査員(hokenshaChosainjoho), is(1));
+        }
+
+        @Test
+        public void ビジネスクラスの状態がUnchangedの場合_ApplicationExceptionが発生する() {
+            HokenshaChosainJoho hokenshaChosainjoho = new HokenshaChosainJoho(DbT4913ChosainJohoEntityGenerator.createDbT4913ChosainJohoEntity());
+            hokenshaChosainjoho.getEntity().initializeMd5();
+            sut.save調査員(hokenshaChosainjoho);
+        }
     }
 
 }

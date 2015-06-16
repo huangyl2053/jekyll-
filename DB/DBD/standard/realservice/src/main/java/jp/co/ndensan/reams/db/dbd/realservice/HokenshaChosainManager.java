@@ -12,10 +12,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.db.dbd.business.HokenshaChosainJoho;
 import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbd.entity.basic.IChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査員を作成するクラスです。
@@ -50,6 +52,7 @@ public class HokenshaChosainManager extends ChosainManagerBase {
      *
      * @return 調査員情報
      */
+    @Override
     public ItemList<IChosainJoho> find調査員情報() {
         return to調査員情報(dac.selectAll());
     }
@@ -62,6 +65,7 @@ public class HokenshaChosainManager extends ChosainManagerBase {
      * @param 認定調査員コード 認定調査員コード
      * @return 認定調情報
      */
+    @Override
     public Optional<IChosainJoho> find調査員情報(LasdecCode 市町村コード, ChosaItakusakiCode 認定調査委託先コード, ChosainCode 認定調査員コード) {
         return dac.selectByKey(市町村コード, 認定調査委託先コード, 認定調査員コード)
                 .map(new IFunction<DbT4913ChosainJohoEntity, IChosainJoho>() {
@@ -81,6 +85,30 @@ public class HokenshaChosainManager extends ChosainManagerBase {
         }
 
         return hokenshaChosainJohoList;
+    }
+
+    /**
+     * 調査員情報を登録します。
+     *
+     * @param 調査員情報 IChosainJoho
+     * @return 登録件数
+     */
+    @Transaction
+    @Override
+    public int save調査員(IChosainJoho 調査員情報) {
+
+        IChosainJohoEntity entity = 調査員情報.getEntity();
+
+        switch (調査員情報.getState()) {
+            case Added:
+                return dac.insert(entity);
+            case Modified:
+                return dac.update(entity);
+            case Deleted:
+                return dac.delete(entity);
+            default:
+                return 0;
+        }
     }
 
 }
