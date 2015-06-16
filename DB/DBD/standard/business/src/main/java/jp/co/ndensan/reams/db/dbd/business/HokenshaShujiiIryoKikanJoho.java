@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business;
 
-import db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;

@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.persistence.basic;
 
-import db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT5911ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT5911ShujiiIryoKikanJohoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT5911ShujiiIryoKikanJohoEntityGenerator.*;

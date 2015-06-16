@@ -1,6 +1,6 @@
 package jp.co.ndensan.reams.db.dbd.entity.basic;
 
-import db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
 /**
  * 主治医医療機関情報（子）テーブルのエンティティクラスです。
  */
-public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911ShujiiIryoKikanJohoEntity> implements IDbAccessable {
+public class DbT4911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT4911ShujiiIryoKikanJohoEntity> implements IDbAccessable, IShujiiIryoKikanJohoEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName

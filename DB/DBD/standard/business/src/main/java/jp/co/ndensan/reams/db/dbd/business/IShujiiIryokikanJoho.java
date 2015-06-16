@@ -5,7 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.business;
 
-import db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbd.entity.basic.IShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -13,9 +14,9 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 
 /**
+ * 主治医医療機関情報のインターフェースです。
  *
  * @author N8235 船山 洋介
  */
@@ -108,8 +109,8 @@ public interface IShujiiIryokikanJoho {
     /**
      * ShujiiIryoKikanJohoEntityを返します。
      *
-     * @return DbTableEntityBase
+     * @return IShujiiIryokikanJoho
      */
-    IDbAccessable getEntity();
+    IShujiiIryoKikanJohoEntity getEntity();
 
 }

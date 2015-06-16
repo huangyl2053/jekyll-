@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.shujiiIryokikanandshujiiinput;
 
-import db.dbd.definition.valueobject.ninteishinsei.ShujiiCode;
-import db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbd.business.INinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbd.business.IShinseiRirekiJoho;

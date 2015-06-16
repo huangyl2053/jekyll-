@@ -4,11 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbd.persistence.basic;
 
-import db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT5911ShujiiIryoKikanJoho;
 import static jp.co.ndensan.reams.db.dbd.entity.basic.DbT5911ShujiiIryoKikanJoho.*;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT5911ShujiiIryoKikanJohoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.basic.IShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
@@ -27,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8235 船山洋介
  */
-public class DbT5911ShujiiIryoKikanJohoDac implements IModifiable<DbT5911ShujiiIryoKikanJohoEntity> {
+public class DbT5911ShujiiIryoKikanJohoDac implements IModifiable<IShujiiIryoKikanJohoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -101,21 +102,21 @@ public class DbT5911ShujiiIryoKikanJohoDac implements IModifiable<DbT5911ShujiiI
 
     @Transaction
     @Override
-    public int insert(DbT5911ShujiiIryoKikanJohoEntity entity) {
+    public int insert(IShujiiIryoKikanJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(entity).execute();
     }
 
     @Transaction
     @Override
-    public int update(DbT5911ShujiiIryoKikanJohoEntity entity) {
+    public int update(IShujiiIryoKikanJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.update(entity).execute();
     }
 
     @Transaction
     @Override
-    public int delete(DbT5911ShujiiIryoKikanJohoEntity entity) {
+    public int delete(IShujiiIryoKikanJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
     }

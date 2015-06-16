@@ -1,9 +1,11 @@
+package jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package db.dbd.definition.valueobject.ninteishinsei;
+
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,43 +14,43 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 主治医医療機関コードです。
+ * 主治医コードです。
  *
  * @author N8235 船山 洋介
  */
-public class ShujiiIryokikanCode implements IValueObject<RString>, Comparable<ShujiiIryokikanCode>, IDbColumnMappable, Serializable {
+public class ShujiiCode implements IValueObject<RString>, Comparable<ShujiiCode>, IDbColumnMappable, Serializable {
 
     /**
-     * 空の{@link ShujiiIryokikanCode}です。
+     * 空の{@link ShujiiCode}です。
      */
-    public static final ShujiiIryokikanCode EMPTY;
+    public static final ShujiiCode EMPTY;
     /**
      * 最大長です。
      */
     public static final int MAX_LENGTH;
 
     static {
-        EMPTY = new ShujiiIryokikanCode(RString.EMPTY);
+        EMPTY = new ShujiiCode(RString.EMPTY);
         MAX_LENGTH = 8;
     }
 
     private final RString theValue;
 
     /**
-     * 指定の値をもった ShujiiIryokikanCode を生成します。
+     * 指定の値をもった ShujiCode を生成します。
      *
      * @param value 値
      */
-    public ShujiiIryokikanCode(String value) {
+    public ShujiiCode(String value) {
         this.theValue = (value == null) ? null : new RString(value);
     }
 
     /**
-     * 指定の値をもった ShujiiIryokikanCode を生成します。
+     * 指定の値をもった ShujiCode を生成します。
      *
      * @param value 値
      */
-    public ShujiiIryokikanCode(RString value) {
+    public ShujiiCode(RString value) {
         this.theValue = value;
     }
 
@@ -63,7 +65,7 @@ public class ShujiiIryokikanCode implements IValueObject<RString>, Comparable<Sh
     }
 
     @Override
-    public int compareTo(ShujiiIryokikanCode o) {
+    public int compareTo(ShujiiCode o) {
         return this.theValue.compareTo(o.theValue);
     }
 
@@ -75,14 +77,14 @@ public class ShujiiIryokikanCode implements IValueObject<RString>, Comparable<Sh
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final ShujiiIryokikanCode other = (ShujiiIryokikanCode) obj;
+        final ShujiiCode other = (ShujiiCode) obj;
         return Objects.equals(this.theValue, other.theValue);
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + Objects.hashCode(this.theValue);
+        int hash = 5;
+        hash = 89 * hash + Objects.hashCode(this.theValue);
         return hash;
     }
 

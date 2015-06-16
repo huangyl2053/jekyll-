@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbd.entity.basic;
 
-import db.dbd.definition.valueobject.ninteishinsei.ShujiiCode;
-import db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
@@ -20,7 +20,7 @@ import java.util.Objects;
 /**
  * 主治医情報テーブルのエンティティクラスです。
  */
-public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJohoEntity> implements IDbAccessable {
+public class DbT5912ShujiiJohoEntity extends DbTableEntityBase<DbT5912ShujiiJohoEntity> implements IDbAccessable, IShujiiJohoEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName

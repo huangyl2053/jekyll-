@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.realservice;
 
-import db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbd.business.IShujiiIryokikanJoho;
 import jp.co.ndensan.reams.db.dbd.business.ShinsakaiShujiiIryoKikanJoho;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT5911ShujiiIryoKikanJohoEntity;
@@ -13,8 +13,12 @@ import jp.co.ndensan.reams.db.dbd.persistence.basic.DbT5911ShujiiIryoKikanJohoDa
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 受給(DBD)用の主治医医療機関を管理するクラスです。
@@ -69,4 +73,23 @@ public class ShinsakaiShujiiIryokikanManager extends ShujiiIryokikanManagerBase 
         return shujiiIryoKikanJohoList;
     }
 
+    /**
+     * 主治医医療機関情報を登録します。
+     *
+     * @param 主治医医療機関情報 RankJohoModel
+     * @return 登録件数
+     */
+    @Transaction
+    public int save主治医医療機関情報(IShujiiIryokikanJoho 主治医医療機関情報) {
+
+        if (主治医医療機関情報.getState() == EntityDataState.Added) {
+            return dac.insert(主治医医療機関情報.getEntity());
+        } else if (主治医医療機関情報.getState() == EntityDataState.Modified) {
+            return dac.update(主治医医療機関情報.getEntity());
+        } else if (主治医医療機関情報.getState() == EntityDataState.Deleted) {
+            return dac.delete(主治医医療機関情報.getEntity());
+        }
+
+        throw new ApplicationException(UrErrorMessages.更新対象のデータがない.getMessage());
+    }
 }
