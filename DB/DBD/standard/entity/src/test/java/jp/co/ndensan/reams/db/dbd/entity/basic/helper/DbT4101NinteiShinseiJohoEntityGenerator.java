@@ -78,7 +78,7 @@ public final class DbT4101NinteiShinseiJohoEntityGenerator {
     public static final Code DEFAULT_みなし要介護区分コード = new Code("1");
     public static final boolean DEFAULT_認定延期通知発行しないことに対する同意有無 = false;
     public static final boolean DEFAULT_施設入所の有無 = false;
-    public static final JigyoshaNo DEFAULT_入所施設コード = new JigyoshaNo("0000000001");
+    public static final RString DEFAULT_入所施設コード = new RString("0000000001");
     public static final boolean DEFAULT_家庭訪問の有無 = false;
     public static final YubinNo DEFAULT_訪問調査先郵便番号 = new YubinNo("7654321");
     public static final AtenaJusho DEFAULT_訪問調査先住所 = new AtenaJusho("訪問先受住所");

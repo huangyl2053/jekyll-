@@ -11,7 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.config.HokenshaJohoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.ShuruiShikyuGendoGetConfig;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubun09A;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
@@ -196,7 +196,7 @@ public class HihokenshaShikakuHakkoHandler {
     private void set認定情報(NinteiShinseiKekkaModel 認定申請結果) {
 
         //  TODO n8187 久保田 要介護状態のEnumクラスは制度改正年度ごとに増える予定。名称の取得は将来的にビジネスクラスを使用して取得する予定だが未検討。 2015/01/31。
-        RString 要介護状態 = YokaigoJotaiKubun09.toValue(認定申請結果.get要介護認定結果情報モデル().get().get要介護状態区分コード().value()).getName();
+        RString 要介護状態 = YokaigoJotaiKubun09A.toValue(認定申請結果.get要介護認定結果情報モデル().get().get要介護状態区分コード().value()).getName();
         FlexibleDate 認定年月日 = 認定申請結果.get要介護認定結果情報モデル().get().get要介護度認定年月日();
         FlexibleDate 開始年月日 = 認定申請結果.get要介護認定結果情報モデル().get().get認定有効期間開始年月日();
         FlexibleDate 終了年月日 = 認定申請結果.get要介護認定結果情報モデル().get().get認定有効期間終了年月日();
@@ -236,11 +236,11 @@ public class HihokenshaShikakuHakkoHandler {
 
         if (取得方法 == ShuruiShikyuGendoGet.要介護度を検索キーにしない) {
             list = new ServiceShuruiShikyuGendoGakuManager().getサービス種類支給限度額一覧(
-                    YokaigoJotaiKubun09.toValue(認定申請結果.get要介護認定結果情報モデル().get().get要介護状態区分コード().value()),
+                    YokaigoJotaiKubun09A.toValue(認定申請結果.get要介護認定結果情報モデル().get().get要介護状態区分コード().value()),
                     認定申請結果.get受給者台帳モデル().get支給限度有効開始年月日());
         } else {
             list = new ServiceShuruiShikyuGendoGakuManager().getサービス種類支給限度額一覧(
-                    YokaigoJotaiKubun09.toValue(認定申請結果.get要介護認定結果情報モデル().get().get要介護状態区分コード().value()));
+                    YokaigoJotaiKubun09A.toValue(認定申請結果.get要介護認定結果情報モデル().get().get要介護状態区分コード().value()));
         }
         List<dgShuruiShikyuGendoKijunGaku_Row> serviceList = new ArrayList<>();
 
