@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbx.business.IKaigoShikaku;
 //import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
 //import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbx.business.KaigoShikakuFactory;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.HokenShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.HokenShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
