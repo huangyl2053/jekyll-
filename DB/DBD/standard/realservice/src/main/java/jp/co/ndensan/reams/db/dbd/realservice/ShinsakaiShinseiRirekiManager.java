@@ -8,11 +8,13 @@ package jp.co.ndensan.reams.db.dbd.realservice;
 import jp.co.ndensan.reams.db.dbd.business.IShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbd.business.ShinsakaiShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT5121ShinseiRirekiJohoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.basic.IShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.basic.DbT5121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定(DBE)の申請履歴情報を管理するクラスです。
@@ -31,7 +33,6 @@ public class ShinsakaiShinseiRirekiManager extends ShinseiRirekiManagerBase {
     }
 
     /**
-     *
      * 単体テスト用のコンストラクタです。
      *
      * @param dac 審査会申請履歴情報Dac
@@ -55,6 +56,30 @@ public class ShinsakaiShinseiRirekiManager extends ShinseiRirekiManagerBase {
                         return new ShinsakaiShinseiRirekiJoho(t);
                     }
                 });
+    }
+
+    /**
+     * 申請履歴情報を登録します。
+     *
+     * @param 申請履歴情報 IShinseiRirekiJoho
+     * @return 登録件数
+     */
+    @Transaction
+    @Override
+    public int save申請履歴(IShinseiRirekiJoho 申請履歴情報) {
+
+        IShinseiRirekiJohoEntity entity = 申請履歴情報.getEntity();
+
+        switch (申請履歴情報.getState()) {
+            case Added:
+                return dac.insert(entity);
+            case Modified:
+                return dac.update(entity);
+            case Deleted:
+                return dac.delete(entity);
+            default:
+                return 0;
+        }
     }
 
 }
