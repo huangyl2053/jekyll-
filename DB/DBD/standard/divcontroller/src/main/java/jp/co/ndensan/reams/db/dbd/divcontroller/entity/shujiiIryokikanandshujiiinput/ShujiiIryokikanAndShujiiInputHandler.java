@@ -120,10 +120,10 @@ public class ShujiiIryokikanAndShujiiInputHandler {
                 = koseiShichosonMaster.find構成市町村(new ShoKisaiHokenshaNo(前回認定申請情報.get().get証記載保険者番号()));
 
         Optional<IShujiiIryokikanJoho> 主治医医療機関 = shujiiIryokikanManager.find主治医医療機関(
-                構成市町村マスタ.get().get市町村コード(), 前回認定申請情報.get().get主治医医療機関コード());
+                構成市町村マスタ.get().get市町村コード(), new ShujiiIryokikanCode(前回認定申請情報.get().get主治医医療機関コード()));
 
         Optional<IShujiiJoho> 主治医 = shujiiManager.find主治医(構成市町村マスタ.get().get市町村コード(),
-                前回認定申請情報.get().get主治医医療機関コード(), 前回認定申請情報.get().get主治医コード());
+                new ShujiiIryokikanCode(前回認定申請情報.get().get主治医医療機関コード()), new ShujiiCode(前回認定申請情報.get().get主治医コード()));
 
         setZenkaiJoho(主治医医療機関, 主治医);
     }

@@ -113,4 +113,132 @@ public interface IShujiiIryokikanJoho {
      */
     IShujiiIryoKikanJohoEntity getEntity();
 
+    /**
+     * 編集用のビルダーを返します。
+     *
+     * @return ビルダー
+     */
+    public Builder createBuilderForEdit();
+
+    public class Builder {
+
+        /**
+         * shichosonCodeを設定します。
+         *
+         * @param shichosonCode 市町村コード
+         * @return builder
+         */
+        public Builder setShichosonCode(LasdecCode shichosonCode) {
+            return this;
+        }
+
+        /**
+         * shujiiIryokikanCodeを設定します。
+         *
+         * @param shujiiIryokikanCode 主治医医療機関コード
+         * @return builder
+         */
+        public Builder setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
+            return this;
+        }
+
+        /**
+         * iryokikanCodeを設定します。
+         *
+         * @param iryokikanCode 医療機関コード
+         * @return builder
+         */
+        public Builder setIryokikanCode(IryoKikanCode iryokikanCode) {
+            return this;
+        }
+
+        /**
+         * iryoKikanMeishoを設定します。
+         *
+         * @param iryoKikanMeisho 医療機関名称
+         * @return builder
+         */
+        public Builder setIryoKikanMeisho(RString iryoKikanMeisho) {
+            return this;
+        }
+
+        /**
+         * iryoKikanMeishoKanaを設定します。
+         *
+         * @param iryoKikanMeishoKana 医療機関名称カナ
+         * @return builder
+         */
+        public Builder setIryoKikanMeishoKana(RString iryoKikanMeishoKana) {
+            return this;
+        }
+
+        /**
+         * yubinNoを設定します。
+         *
+         * @param yubinNo 郵便番号
+         * @return builder
+         */
+        public Builder setYubinNo(YubinNo yubinNo) {
+            return this;
+        }
+
+        /**
+         * jushoを設定します。
+         *
+         * @param jusho 住所
+         * @return builder
+         */
+        public Builder setJusho(RString jusho) {
+            return this;
+        }
+
+        /**
+         * telNoを設定します。
+         *
+         * @param telNo 電話番号
+         * @return builder
+         */
+        public Builder setTelNo(TelNo telNo) {
+            return this;
+        }
+
+        /**
+         * faxNoを設定します。
+         *
+         * @param faxNo FAX番号
+         * @return builder
+         */
+        public Builder setFaxNo(TelNo faxNo) {
+            return this;
+        }
+
+        /**
+         * daihyoshaNameを設定します。
+         *
+         * @param daihyoshaName 代表者名
+         * @return builder
+         */
+        public Builder setDaihyoshaName(AtenaMeisho daihyoshaName) {
+            return this;
+        }
+
+        /**
+         * JokyoFlagを設定します。
+         *
+         * @param jokyoFlag 状況フラグ
+         * @return builder
+         */
+        public Builder setJokyoFlag(boolean jokyoFlag) {
+            return this;
+        }
+
+        /**
+         * {@link IShujiiIryokikanJoho}を生成します。
+         *
+         * @return {@link IShujiiIryokikanJoho}
+         */
+        public IShujiiIryokikanJoho build() {
+            return this.build();
+        }
+    }
 }

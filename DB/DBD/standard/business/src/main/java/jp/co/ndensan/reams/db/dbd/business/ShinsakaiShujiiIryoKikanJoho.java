@@ -205,6 +205,7 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
      *
      * @return ビルダー
      */
+    @Override
     public Builder createBuilderForEdit() {
         return new Builder(this);
     }
@@ -221,7 +222,7 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
     /**
      * {@link ShinsakaiShujiiIryoKikanJoho}を生成するためのビルダーです。
      */
-    public static final class Builder {
+    public static final class Builder extends IShujiiIryokikanJoho.Builder {
 
         private DbT5911ShujiiIryoKikanJohoEntity entity;
 
@@ -274,6 +275,7 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          * @param shichosonCode 市町村コード
          * @return builder
          */
+        @Override
         public Builder setShichosonCode(LasdecCode shichosonCode) {
             Objects.requireNonNull(shichosonCode);
             this.entity.setShichosonCode(shichosonCode);
@@ -286,6 +288,7 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          * @param shujiiIryokikanCode 主治医医療機関コード
          * @return builder
          */
+        @Override
         public Builder setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
             Objects.requireNonNull(shujiiIryokikanCode);
             this.entity.setShujiiIryokikanCode(shujiiIryokikanCode);
@@ -298,6 +301,7 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          * @param iryokikanCode 医療機関コード
          * @return builder
          */
+        @Override
         public Builder setIryokikanCode(IryoKikanCode iryokikanCode) {
             Objects.requireNonNull(iryokikanCode);
             this.entity.setIryokikanCode(iryokikanCode);
@@ -310,6 +314,7 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          * @param iryoKikanMeisho 医療機関名称
          * @return builder
          */
+        @Override
         public Builder setIryoKikanMeisho(RString iryoKikanMeisho) {
             Objects.requireNonNull(iryoKikanMeisho);
             this.entity.setIryoKikanMeisho(iryoKikanMeisho);
@@ -322,6 +327,7 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          * @param iryoKikanMeishoKana 医療機関名称カナ
          * @return builder
          */
+        @Override
         public Builder setIryoKikanMeishoKana(RString iryoKikanMeishoKana) {
             Objects.requireNonNull(iryoKikanMeishoKana);
             this.entity.setIryoKikanMeishoKana(iryoKikanMeishoKana);
@@ -334,6 +340,7 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          * @param yubinNo 郵便番号
          * @return builder
          */
+        @Override
         public Builder setYubinNo(YubinNo yubinNo) {
             Objects.requireNonNull(yubinNo);
             this.entity.setYubinNo(yubinNo);
@@ -346,6 +353,7 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          * @param jusho 住所
          * @return builder
          */
+        @Override
         public Builder setJusho(RString jusho) {
             Objects.requireNonNull(jusho);
             this.entity.setJusho(jusho);
@@ -358,6 +366,7 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          * @param telNo 電話番号
          * @return builder
          */
+        @Override
         public Builder setTelNo(TelNo telNo) {
             Objects.requireNonNull(telNo);
             this.entity.setTelNo(telNo);
@@ -370,6 +379,7 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          * @param faxNo FAX番号
          * @return builder
          */
+        @Override
         public Builder setFaxNo(TelNo faxNo) {
             Objects.requireNonNull(faxNo);
             this.entity.setFaxNo(faxNo);
@@ -382,6 +392,7 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          * @param daihyoshaName 代表者名
          * @return builder
          */
+        @Override
         public Builder setDaihyoshaName(AtenaMeisho daihyoshaName) {
             Objects.requireNonNull(daihyoshaName);
             this.entity.setDaihyoshaName(daihyoshaName);
@@ -394,6 +405,7 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          * @param jokyoFlag 状況フラグ
          * @return builder
          */
+        @Override
         public Builder setJokyoFlag(boolean jokyoFlag) {
             this.entity.setJokyoFlag(jokyoFlag);
             return this;
@@ -404,6 +416,7 @@ public class ShinsakaiShujiiIryoKikanJoho implements IShujiiIryokikanJoho {
          *
          * @return {@link ShinsakaiShujiiIryoKikanJoho}
          */
+        @Override
         public ShinsakaiShujiiIryoKikanJoho build() {
             return new ShinsakaiShujiiIryoKikanJoho(this);
         }

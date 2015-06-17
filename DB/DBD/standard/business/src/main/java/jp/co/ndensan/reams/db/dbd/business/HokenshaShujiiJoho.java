@@ -214,6 +214,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
      *
      * @return ビルダー
      */
+    @Override
     public Builder createBuilderForEdit() {
         return new Builder(this);
     }
@@ -230,7 +231,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
     /**
      * {@link HokenshaShujiiJoho}を生成するためのビルダーです。
      */
-    public static final class Builder {
+    public static final class Builder extends IShujiiJoho.Builder {
 
         private DbT4912ShujiiJohoEntity entity;
 
@@ -283,6 +284,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          * @param shichosonCode 市町村コード
          * @return builder
          */
+        @Override
         public Builder setShichosonCode(LasdecCode shichosonCode) {
             Objects.requireNonNull(shichosonCode);
             this.entity.setShichosonCode(shichosonCode);
@@ -295,6 +297,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          * @param shujiiIryokikanCode 主治医医療機関コード
          * @return builder
          */
+        @Override
         public Builder setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
             Objects.requireNonNull(shujiiIryokikanCode);
             this.entity.setShujiiIryokikanCode(shujiiIryokikanCode);
@@ -307,6 +310,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          * @param shujiiCode 主治医コード
          * @return builder
          */
+        @Override
         public Builder setShujiiCode(ShujiiCode shujiiCode) {
             Objects.requireNonNull(shujiiCode);
             this.entity.setShujiiCode(shujiiCode);
@@ -319,6 +323,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          * @param shujiiName 主治医氏名
          * @return builder
          */
+        @Override
         public Builder setShujiiName(AtenaMeisho shujiiName) {
             Objects.requireNonNull(shujiiName);
             this.entity.setShujiiName(shujiiName);
@@ -331,6 +336,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          * @param shujiiKana 主治医カナ
          * @return builder
          */
+        @Override
         public Builder setShujiiKana(AtenaKanaMeisho shujiiKana) {
             Objects.requireNonNull(shujiiKana);
             this.entity.setShujiiKana(shujiiKana);
@@ -343,6 +349,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          * @param yubinNo 郵便番号
          * @return builder
          */
+        @Override
         public Builder setYubinNo(YubinNo yubinNo) {
             Objects.requireNonNull(yubinNo);
             this.entity.setYubinNo(yubinNo);
@@ -355,6 +362,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          * @param jusho 住所
          * @return builder
          */
+        @Override
         public Builder setJusho(AtenaJusho jusho) {
             Objects.requireNonNull(jusho);
             this.entity.setJusho(jusho);
@@ -367,6 +375,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          * @param telNo 電話番号
          * @return builder
          */
+        @Override
         public Builder setTelNo(TelNo telNo) {
             Objects.requireNonNull(telNo);
             this.entity.setTelNo(telNo);
@@ -379,6 +388,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          * @param faxNo FAX番号
          * @return builder
          */
+        @Override
         public Builder setFaxNo(TelNo faxNo) {
             Objects.requireNonNull(faxNo);
             this.entity.setFaxNo(faxNo);
@@ -391,6 +401,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          * @param shinryokaName 診療科名称
          * @return builder
          */
+        @Override
         public Builder setShinryokaName(RString shinryokaName) {
             Objects.requireNonNull(shinryokaName);
             this.entity.setShinryokaName(shinryokaName);
@@ -403,6 +414,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          * @param shiteiiFlag 指定医フラグ
          * @return builder
          */
+        @Override
         public Builder setShiteiiFlag(boolean shiteiiFlag) {
             this.entity.setShiteiiFlag(shiteiiFlag);
             return this;
@@ -414,6 +426,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          * @param jokyoFlag 状況フラグ
          * @return builder
          */
+        @Override
         public Builder setJokyoFlag(boolean jokyoFlag) {
             this.entity.setJokyoFlag(jokyoFlag);
             return this;
@@ -424,6 +437,7 @@ public class HokenshaShujiiJoho implements IShujiiJoho {
          *
          * @return {@link HokenshaShujiiJoho}
          */
+        @Override
         public HokenshaShujiiJoho build() {
             return new HokenshaShujiiJoho(this);
         }
