@@ -118,8 +118,11 @@ public interface IShujiiIryokikanJoho {
      *
      * @return ビルダー
      */
-    public Builder createBuilderForEdit();
+    Builder createBuilderForEdit();
 
+    /**
+     * {@link IShujiiIryokikanJoho}を生成するためのビルダーです。
+     */
     public class Builder {
 
         /**
@@ -238,7 +241,7 @@ public interface IShujiiIryokikanJoho {
          * @return {@link IShujiiIryokikanJoho}
          */
         public IShujiiIryokikanJoho build() {
-            return this.build();
+            return new IShujiiIryokikanJoho.Builder().build();
         }
     }
 }

@@ -127,10 +127,10 @@ public interface IShujiiJoho {
      *
      * @return ビルダー
      */
-    public Builder createBuilderForEdit();
+    Builder createBuilderForEdit();
 
     /**
-     * {@link ShinsakaiShujiiJoho}を生成するためのビルダーです。
+     * {@link IShujiiJoho}を生成するためのビルダーです。
      */
     public class Builder {
 
@@ -260,7 +260,7 @@ public interface IShujiiJoho {
          * @return {@link IShujiiJoho}
          */
         public IShujiiJoho build() {
-            return this.build();
+            return new IShujiiJoho.Builder().build();
         }
     }
 
