@@ -46,6 +46,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      *
      * @return DbT5120ShinseitodokedeJohoEntity
      */
+    @Override
     public DbT5120ShinseitodokedeJohoEntity getEntity() {
         return entity;
     }
@@ -64,6 +65,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      *
      * @return 申請書管理番号
      */
+    @Override
     public ShinseishoKanriNo get申請書管理番号() {
         return entity.getShinseishoKanriNo();
     }
@@ -73,6 +75,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      *
      * @return 申請届出代行区分コード
      */
+    @Override
     public Code get申請届出代行区分コード() {
         return entity.getShinseiTodokedeDaikoKubunCode();
     }
@@ -82,6 +85,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      *
      * @return 申請届出者氏名
      */
+    @Override
     public AtenaMeisho get申請届出者氏名() {
         return entity.getShinseiTodokedeshaShimei();
     }
@@ -91,6 +95,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      *
      * @return 申請届出者氏名カナ
      */
+    @Override
     public AtenaKanaMeisho get申請届出者氏名カナ() {
         return entity.getShinseiTodokedeshaKanaShimei();
     }
@@ -100,6 +105,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      *
      * @return 申請届出者続柄コード
      */
+    @Override
     public RString get申請届出者続柄コード() {
         return entity.getShinseiTodokedeshaTsuzukigaraCode();
     }
@@ -109,6 +115,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      *
      * @return 申請届出代行事業者番号
      */
+    @Override
     public JigyoshaNo get申請届出代行事業者番号() {
         return entity.getShinseiTodokedeDaikoJigyoshaNo();
     }
@@ -118,6 +125,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      *
      * @return 事業者区分
      */
+    @Override
     public RString get事業者区分() {
         return entity.getJigyoshaKubun();
     }
@@ -127,6 +135,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      *
      * @return 申請届出者郵便番号
      */
+    @Override
     public YubinNo get申請届出者郵便番号() {
         return entity.getShinseiTodokedeshaYubinNo();
     }
@@ -136,6 +145,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      *
      * @return 申請届出者住所
      */
+    @Override
     public AtenaJusho get申請届出者住所() {
         return entity.getShinseiTodokedeshaJusho();
     }
@@ -145,6 +155,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      *
      * @return 申請届出者電話番号
      */
+    @Override
     public TelNo get申請届出者電話番号() {
         return entity.getShinseiTodokedeshaTelNo();
     }
@@ -167,6 +178,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      *
      * @return EntityDataState
      */
+    @Override
     public EntityDataState getState() {
         return entity.getState();
     }
@@ -189,6 +201,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
      *
      * @return ビルダー
      */
+    @Override
     public Builder createBuilderForEdit() {
         return new Builder(this);
     }
@@ -205,7 +218,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
     /**
      * {@link ShinsakaiShinseitodokedeJoho}を生成するためのビルダーです。
      */
-    public static final class Builder {
+    public static final class Builder extends IShinseitodokedeJoho.Builder {
 
         private DbT5120ShinseitodokedeJohoEntity entity;
 
@@ -258,6 +271,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @param shinseishoKanriNo 申請書管理番号
          * @return builder
          */
+        @Override
         public Builder setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
             Objects.requireNonNull(shinseishoKanriNo);
             this.entity.setShinseishoKanriNo(shinseishoKanriNo);
@@ -270,6 +284,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @param shinseiTodokedeDaikoKubunCode 申請届出代行区分コード
          * @return builder
          */
+        @Override
         public Builder setShinseiTodokedeDaikoKubunCode(Code shinseiTodokedeDaikoKubunCode) {
             Objects.requireNonNull(shinseiTodokedeDaikoKubunCode);
             this.entity.setShinseiTodokedeDaikoKubunCode(shinseiTodokedeDaikoKubunCode);
@@ -282,6 +297,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @param shinseiTodokedeshaShimei 申請届出者氏名
          * @return builder
          */
+        @Override
         public Builder setShinseiTodokedeshaShimei(AtenaMeisho shinseiTodokedeshaShimei) {
             Objects.requireNonNull(shinseiTodokedeshaShimei);
             this.entity.setShinseiTodokedeshaShimei(shinseiTodokedeshaShimei);
@@ -294,6 +310,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @param shinseiTodokedeshaKanaShimei 申請届出者氏名カナ
          * @return builder
          */
+        @Override
         public Builder setShinseiTodokedeshaKanaShimei(AtenaKanaMeisho shinseiTodokedeshaKanaShimei) {
             Objects.requireNonNull(shinseiTodokedeshaKanaShimei);
             this.entity.setShinseiTodokedeshaKanaShimei(shinseiTodokedeshaKanaShimei);
@@ -303,12 +320,13 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
         /**
          * shinseiTodokedeshaTsuzukigaraCodeを設定します。
          *
-         * @param shinseiTodokedeshaTsuzukigaraCode 申請届出者続柄コード
+         * @param todokedeshaTsuzukigaraCode 申請届出者続柄コード
          * @return builder
          */
-        public Builder setShinseiTodokedeshaTsuzukigaraCode(RString shinseiTodokedeshaTsuzukigaraCode) {
-            Objects.requireNonNull(shinseiTodokedeshaTsuzukigaraCode);
-            this.entity.setShinseiTodokedeshaTsuzukigaraCode(shinseiTodokedeshaTsuzukigaraCode);
+        @Override
+        public Builder setShinseiTodokedeshaTsuzukigaraCode(RString todokedeshaTsuzukigaraCode) {
+            Objects.requireNonNull(todokedeshaTsuzukigaraCode);
+            this.entity.setShinseiTodokedeshaTsuzukigaraCode(todokedeshaTsuzukigaraCode);
             return this;
         }
 
@@ -318,6 +336,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @param shinseiTodokedeDaikoJigyoshaNo 申請届出代行事業者番号
          * @return builder
          */
+        @Override
         public Builder setShinseiTodokedeDaikoJigyoshaNo(JigyoshaNo shinseiTodokedeDaikoJigyoshaNo) {
             Objects.requireNonNull(shinseiTodokedeDaikoJigyoshaNo);
             this.entity.setShinseiTodokedeDaikoJigyoshaNo(shinseiTodokedeDaikoJigyoshaNo);
@@ -330,6 +349,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @param jigyoshaKubun 事業者区分
          * @return builder
          */
+        @Override
         public Builder setJigyoshaKubun(RString jigyoshaKubun) {
             Objects.requireNonNull(jigyoshaKubun);
             this.entity.setJigyoshaKubun(jigyoshaKubun);
@@ -342,6 +362,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @param shinseiTodokedeshaYubinNo 申請届出者郵便番号
          * @return builder
          */
+        @Override
         public Builder setShinseiTodokedeshaYubinNo(YubinNo shinseiTodokedeshaYubinNo) {
             Objects.requireNonNull(shinseiTodokedeshaYubinNo);
             this.entity.setShinseiTodokedeshaYubinNo(shinseiTodokedeshaYubinNo);
@@ -354,6 +375,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @param shinseiTodokedeshaJusho 申請届出者住所
          * @return builder
          */
+        @Override
         public Builder setShinseiTodokedeshaJusho(AtenaJusho shinseiTodokedeshaJusho) {
             Objects.requireNonNull(shinseiTodokedeshaJusho);
             this.entity.setShinseiTodokedeshaJusho(shinseiTodokedeshaJusho);
@@ -366,6 +388,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          * @param shinseiTodokedeshaTelNo 申請届出者電話番号
          * @return builder
          */
+        @Override
         public Builder setShinseiTodokedeshaTelNo(TelNo shinseiTodokedeshaTelNo) {
             Objects.requireNonNull(shinseiTodokedeshaTelNo);
             this.entity.setShinseiTodokedeshaTelNo(shinseiTodokedeshaTelNo);
@@ -377,6 +400,7 @@ public class ShinsakaiShinseitodokedeJoho implements IShinseitodokedeJoho {
          *
          * @return {@link ShinsakaiShinseitodokedeJoho}
          */
+        @Override
         public ShinsakaiShinseitodokedeJoho build() {
             return new ShinsakaiShinseitodokedeJoho(this);
         }

@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT5120ShinseitodokedeJoho;
 import static jp.co.ndensan.reams.db.dbd.entity.basic.DbT5120ShinseitodokedeJoho.*;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT5120ShinseitodokedeJohoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.basic.IShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
@@ -24,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8223 朴義一
  */
-public class DbT5120ShinsakaiShinseitodokedeJohoDac implements IModifiable<DbT5120ShinseitodokedeJohoEntity> {
+public class DbT5120ShinsakaiShinseitodokedeJohoDac implements IModifiable<IShinseitodokedeJohoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -66,21 +67,21 @@ public class DbT5120ShinsakaiShinseitodokedeJohoDac implements IModifiable<DbT51
 
     @Transaction
     @Override
-    public int insert(DbT5120ShinseitodokedeJohoEntity entity) {
+    public int insert(IShinseitodokedeJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(entity).execute();
     }
 
     @Transaction
     @Override
-    public int update(DbT5120ShinseitodokedeJohoEntity entity) {
+    public int update(IShinseitodokedeJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.update(entity).execute();
     }
 
     @Transaction
     @Override
-    public int delete(DbT5120ShinseitodokedeJohoEntity entity) {
+    public int delete(IShinseitodokedeJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
     }
@@ -88,7 +89,7 @@ public class DbT5120ShinsakaiShinseitodokedeJohoDac implements IModifiable<DbT51
     // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
 //    @Transaction
 //    @Override
-//    public int deletePhysical(DbT5120ShinseitodokedeJohoEntity entity) {
+//    public int deletePhysical(IShinseitodokedeJohoEntity entity) {
 //        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 //        return accessor.deletePhysical(entity).execute();
 //    }

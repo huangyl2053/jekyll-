@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business;
 
+import jp.co.ndensan.reams.db.dbd.entity.basic.IShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -14,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 申請届出情報（ビジネス）を扱うインターフェースです。
@@ -91,5 +93,142 @@ public interface IShinseitodokedeJoho {
      * @return 申請届出者電話番号
      */
     TelNo get申請届出者電話番号();
+
+    /**
+     * stateを返します。
+     *
+     * @return EntityDataState
+     */
+    EntityDataState getState();
+
+    /**
+     * DbT4120ShinseitodokedeJohoEntityを返します。
+     *
+     * @return DbT4120ShinseitodokedeJohoEntity
+     */
+    IShinseitodokedeJohoEntity getEntity();
+
+    /**
+     * 編集用のビルダーを返します。
+     *
+     * @return ビルダー
+     */
+    Builder createBuilderForEdit();
+
+    /**
+     * {@link ShinsakaiShinseitodokedeJoho}を生成するためのビルダーです。
+     */
+    class Builder {
+
+        /**
+         * shinseishoKanriNoを設定します。
+         *
+         * @param shinseishoKanriNo 申請書管理番号
+         * @return builder
+         */
+        public Builder setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+            return this;
+        }
+
+        /**
+         * shinseiTodokedeDaikoKubunCodeを設定します。
+         *
+         * @param shinseiTodokedeDaikoKubunCode 申請届出代行区分コード
+         * @return builder
+         */
+        public Builder setShinseiTodokedeDaikoKubunCode(Code shinseiTodokedeDaikoKubunCode) {
+            return this;
+        }
+
+        /**
+         * shinseiTodokedeshaShimeiを設定します。
+         *
+         * @param shinseiTodokedeshaShimei 申請届出者氏名
+         * @return builder
+         */
+        public Builder setShinseiTodokedeshaShimei(AtenaMeisho shinseiTodokedeshaShimei) {
+
+            return this;
+        }
+
+        /**
+         * shinseiTodokedeshaKanaShimeiを設定します。
+         *
+         * @param shinseiTodokedeshaKanaShimei 申請届出者氏名カナ
+         * @return builder
+         */
+        public Builder setShinseiTodokedeshaKanaShimei(AtenaKanaMeisho shinseiTodokedeshaKanaShimei) {
+            return this;
+        }
+
+        /**
+         * shinseiTodokedeshaTsuzukigaraCodeを設定します。
+         *
+         * @param todokedeshaTsuzukigaraCode 申請届出者続柄コード
+         * @return builder
+         */
+        public Builder setShinseiTodokedeshaTsuzukigaraCode(RString todokedeshaTsuzukigaraCode) {
+            return this;
+        }
+
+        /**
+         * shinseiTodokedeDaikoJigyoshaNoを設定します。
+         *
+         * @param shinseiTodokedeDaikoJigyoshaNo 申請届出代行事業者番号
+         * @return builder
+         */
+        public Builder setShinseiTodokedeDaikoJigyoshaNo(JigyoshaNo shinseiTodokedeDaikoJigyoshaNo) {
+            return this;
+        }
+
+        /**
+         * jigyoshaKubunを設定します。
+         *
+         * @param jigyoshaKubun 事業者区分
+         * @return builder
+         */
+        public Builder setJigyoshaKubun(RString jigyoshaKubun) {
+            return this;
+        }
+
+        /**
+         * shinseiTodokedeshaYubinNoを設定します。
+         *
+         * @param shinseiTodokedeshaYubinNo 申請届出者郵便番号
+         * @return builder
+         */
+        public Builder setShinseiTodokedeshaYubinNo(YubinNo shinseiTodokedeshaYubinNo) {
+            return this;
+        }
+
+        /**
+         * shinseiTodokedeshaJushoを設定します。
+         *
+         * @param shinseiTodokedeshaJusho 申請届出者住所
+         * @return builder
+         */
+        public Builder setShinseiTodokedeshaJusho(AtenaJusho shinseiTodokedeshaJusho) {
+            return this;
+        }
+
+        /**
+         * shinseiTodokedeshaTelNoを設定します。
+         *
+         * @param shinseiTodokedeshaTelNo 申請届出者電話番号
+         * @return builder
+         */
+        public Builder setShinseiTodokedeshaTelNo(TelNo shinseiTodokedeshaTelNo) {
+            return this;
+        }
+
+        /**
+         * {@link IShinseitodokedeJoho}を生成します。
+         *
+         * @return {@link IShinseitodokedeJoho}
+         */
+        public IShinseitodokedeJoho build() {
+            return new IShinseitodokedeJoho.Builder().build();
+        }
+    }
 
 }
