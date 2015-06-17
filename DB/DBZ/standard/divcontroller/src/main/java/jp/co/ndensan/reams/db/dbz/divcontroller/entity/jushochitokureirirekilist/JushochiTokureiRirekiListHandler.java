@@ -779,13 +779,18 @@ public class JushochiTokureiRirekiListHandler {
     }
 
     private void setTekiyoJiyuDataSource() {
-        List<KaigoShikakuHenkoJiyu> tekiyoList = CodeMasterHelper.getCode(DBXCodeShubetsu.介護資格住特適用事由);
+        //TODO n8235　船山洋介 DBXCodeShubetsuがICodeShubetsuに適応できないため、nullを渡す。　使用できるようになったら修正。
+        // List<KaigoShikakuHenkoJiyu> tekiyoList = CodeMasterHelper.getCode(DBXCodeShubetsu.介護資格住特適用事由);
+        List<KaigoShikakuHenkoJiyu> tekiyoList = CodeMasterHelper.getCode(null);
+
         IItemList<KeyValueDataSource> dataSource = ItemList.of(tekiyoList).map(new CodeMasterToKeyValueFunction());
         jutokuRirekiDiv.getDdlTekiyoJiyu().setDataSource(dataSource.toList());
     }
 
     private void setKaijoJiyuDataSource() {
-        List<KaigoShikakuJutokuKaijoJiyu> kaijoList = CodeMasterHelper.getCode(DBXCodeShubetsu.介護資格住特解除事由);
+        //TODO n8235　船山洋介 DBXCodeShubetsuがICodeShubetsuに適応できないため、nullを渡す。　使用できるようになったら修正。
+        // List<KaigoShikakuJutokuKaijoJiyu> kaijoList = CodeMasterHelper.getCode(DBXCodeShubetsu.介護資格住特解除事由);
+        List<KaigoShikakuJutokuKaijoJiyu> kaijoList = CodeMasterHelper.getCode(null);
         IItemList<KeyValueDataSource> dataSource = ItemList.of(kaijoList).map(new CodeMasterToKeyValueFunction());
         jutokuRirekiDiv.getDdlKaijoJiyu().setDataSource(dataSource.toList());
     }
