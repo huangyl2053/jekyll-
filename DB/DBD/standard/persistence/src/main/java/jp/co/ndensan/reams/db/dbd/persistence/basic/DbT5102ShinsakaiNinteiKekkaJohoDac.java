@@ -10,6 +10,7 @@ import static jp.co.ndensan.reams.db.dbd.entity.basic.DbT5102NinteiKekkaJoho.shi
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT5102NinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT5102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.basic.INinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -24,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8223 朴義一
  */
-public class DbT5102ShinsakaiNinteiKekkaJohoDac implements IModifiable<DbT5102NinteiKekkaJohoEntity> {
+public class DbT5102ShinsakaiNinteiKekkaJohoDac implements IModifiable<INinteiKekkaJohoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -65,21 +66,21 @@ public class DbT5102ShinsakaiNinteiKekkaJohoDac implements IModifiable<DbT5102Ni
 
     @Transaction
     @Override
-    public int insert(DbT5102NinteiKekkaJohoEntity entity) {
+    public int insert(INinteiKekkaJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(entity).execute();
     }
 
     @Transaction
     @Override
-    public int update(DbT5102NinteiKekkaJohoEntity entity) {
+    public int update(INinteiKekkaJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.update(entity).execute();
     }
 
     @Transaction
     @Override
-    public int delete(DbT5102NinteiKekkaJohoEntity entity) {
+    public int delete(INinteiKekkaJohoEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
     }

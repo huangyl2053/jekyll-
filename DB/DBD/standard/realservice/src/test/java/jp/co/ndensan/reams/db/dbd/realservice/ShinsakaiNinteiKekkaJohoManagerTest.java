@@ -6,12 +6,14 @@
 package jp.co.ndensan.reams.db.dbd.realservice;
 
 import jp.co.ndensan.reams.db.dbd.business.INinteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbd.business.ShinsakaiNinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT5102NinteiKekkaJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbd.persistence.basic.DbT5102ShinsakaiNinteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -20,16 +22,20 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.any;
 
 /**
+ * {link ShinsakaiNinteiKekkaJohoManager}のテストクラスです。
  *
- * @author n8223
+ * @author n8223 朴義一
  */
 @RunWith(Enclosed.class)
 public class ShinsakaiNinteiKekkaJohoManagerTest {
 
     private static final ShinseishoKanriNo 申請管理番号 = DbT5102NinteiKekkaJohoEntityGenerator.DEFAULT_申請書管理番号;
     private static final ShinseishoKanriNo notFound申請管理番号 = new ShinseishoKanriNo("92345678901234567");
+    private static ShinsakaiNinteiKekkaJohoManager sut;
+    private static DbT5102ShinsakaiNinteiKekkaJohoDac dac;
 
     public ShinsakaiNinteiKekkaJohoManagerTest() {
     }
@@ -38,9 +44,6 @@ public class ShinsakaiNinteiKekkaJohoManagerTest {
      * Test of find要介護認定結果情報 method, of class HokenshaNinteiKekkaJohoManager.
      */
     public static class testFind要介護認定結果情報 extends DbdTestBase {
-
-        private ShinsakaiNinteiKekkaJohoManager sut;
-        private DbT5102ShinsakaiNinteiKekkaJohoDac dac;
 
         @Before
         public void setUp() {
@@ -78,6 +81,51 @@ public class ShinsakaiNinteiKekkaJohoManagerTest {
 
         }
 
+    }
+
+    public static class testSave要介護認定結果情報 extends DbdTestBase {
+
+        @Before
+        public void setUp() {
+            dac = mock(DbT5102ShinsakaiNinteiKekkaJohoDac.class);
+            sut = new ShinsakaiNinteiKekkaJohoManager(dac);
+        }
+
+        @Test
+        public void insertに成功すると1が返る() {
+            when(dac.insert(any(DbT5102NinteiKekkaJohoEntity.class))).thenReturn(1);
+            INinteiKekkaJoho shinsakaiNinteiKekkaJoho = new ShinsakaiNinteiKekkaJoho(DbT5102NinteiKekkaJohoEntityGenerator.createDbT5102NinteiKekkaJohoEntity());
+            assertThat(sut.save要介護認定結果(shinsakaiNinteiKekkaJoho), is(1));
+        }
+
+        @Test
+        public void updateに成功すると1が返る() {
+            when(dac.update(any(DbT5102NinteiKekkaJohoEntity.class))).thenReturn(1);
+            ShinsakaiNinteiKekkaJoho shinsakaiNinteiKekkaJoho = new ShinsakaiNinteiKekkaJoho(DbT5102NinteiKekkaJohoEntityGenerator.createDbT5102NinteiKekkaJohoEntity());
+            shinsakaiNinteiKekkaJoho.getEntity().initializeMd5();
+            //編集
+            ShinsakaiNinteiKekkaJoho.Builder createBuilderForEdit = shinsakaiNinteiKekkaJoho.createBuilderForEdit();
+            createBuilderForEdit.setShinsakaiMemo(RString.EMPTY);
+            INinteiKekkaJoho build = createBuilderForEdit.build();
+            assertThat(sut.save要介護認定結果(build), is(1));
+        }
+
+        @Test
+        public void deleteに成功すると1が返る() {
+            when(dac.delete(any(DbT5102NinteiKekkaJohoEntity.class))).thenReturn(1);
+            ShinsakaiNinteiKekkaJoho shinsakaiNinteiKekkaJoho = new ShinsakaiNinteiKekkaJoho(DbT5102NinteiKekkaJohoEntityGenerator.createDbT5102NinteiKekkaJohoEntity());
+            shinsakaiNinteiKekkaJoho.getEntity().initializeMd5();
+            shinsakaiNinteiKekkaJoho.setDeletedState(true);
+
+            assertThat(sut.save要介護認定結果(shinsakaiNinteiKekkaJoho), is(1));
+        }
+
+        @Test
+        public void ビジネスクラスの状態がUnchangedの場合_ApplicationExceptionが発生する() {
+            ShinsakaiNinteiKekkaJoho hokenshaNinteiKekkaJoho = new ShinsakaiNinteiKekkaJoho(DbT5102NinteiKekkaJohoEntityGenerator.createDbT5102NinteiKekkaJohoEntity());
+            hokenshaNinteiKekkaJoho.getEntity().initializeMd5();
+            sut.save要介護認定結果(hokenshaNinteiKekkaJoho);
+        }
     }
 
 }

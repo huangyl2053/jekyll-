@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriN
 /**
  * 要介護認定結果情報テーブルのエンティティクラスです。
  */
-public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102NinteiKekkaJohoEntity> implements IDbAccessable {
+public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102NinteiKekkaJohoEntity> implements IDbAccessable, INinteiKekkaJohoEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName

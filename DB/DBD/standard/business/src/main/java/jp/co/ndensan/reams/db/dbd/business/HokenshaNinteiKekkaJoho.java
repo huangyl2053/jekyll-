@@ -77,6 +77,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return 二次判定要介護状態区分コード
      */
+    @Override
     public Code get二次判定要介護状態区分コード() {
         return entity.getNijiHanteiYokaigoJotaiKubunCode();
     }
@@ -86,6 +87,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return 二次判定認定有効期間
      */
+    @Override
     public Integer get二次判定認定有効期間() {
         return entity.getNijiHanteiNinteiYukoKikan();
     }
@@ -95,6 +97,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return 二次判定認定有効開始年月日
      */
+    @Override
     public FlexibleDate get二次判定認定有効開始年月日() {
         return entity.getNijiHanteiNinteiYukoKaishiYMD();
     }
@@ -104,6 +107,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return 二次判定認定有効終了年月日
      */
+    @Override
     public FlexibleDate get二次判定認定有効終了年月日() {
         return entity.getNijiHanteiNinteiYukoShuryoYMD();
     }
@@ -113,6 +117,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return 介護認定審査会開催番号
      */
+    @Override
     public Integer get介護認定審査会開催番号() {
         return entity.getShinsakaiKaisaiNo();
     }
@@ -122,6 +127,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return 介護認定審査会意見
      */
+    @Override
     public RString get介護認定審査会意見() {
         return entity.getShinsakaiIken();
     }
@@ -131,6 +137,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return 一次判定結果変更理由
      */
+    @Override
     public RString get一次判定結果変更理由() {
         return entity.getIchijiHnateiKekkaHenkoRiyu();
     }
@@ -140,6 +147,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return 要介護状態像例コード
      */
+    @Override
     public Code get要介護状態像例コード() {
         return entity.getYokaigoJotaizoReiCode();
     }
@@ -149,6 +157,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return 認定審査会意見種類
      */
+    @Override
     public RString get認定審査会意見種類() {
         return entity.getNinteishinsakaiIkenShurui();
     }
@@ -158,6 +167,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return 審査会メモ
      */
+    @Override
     public RString get審査会メモ() {
         return entity.getShinsakaiMemo();
     }
@@ -167,6 +177,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return 二次判定結果入力方法
      */
+    @Override
     public Code get二次判定結果入力方法() {
         return entity.getNijiHanteiKekkaInputHoho();
     }
@@ -176,8 +187,19 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return 二次判定結果入力年月日
      */
+    @Override
     public FlexibleDate get二次判定結果入力年月日() {
         return entity.getNiniHanteiKekkaInputYMD();
+    }
+
+    /**
+     * 状態を設定します。
+     *
+     * @param entityDataState EntityDataState
+     */
+    @Override
+    public void setState(EntityDataState entityDataState) {
+        entity.setState(entityDataState);
     }
 
     /**
@@ -185,6 +207,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @param deleteFlag deleteFlag
      */
+    @Override
     public void setDeletedState(boolean deleteFlag) {
         if (deleteFlag) {
             entity.setState(EntityDataState.Deleted);
@@ -198,6 +221,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return EntityDataState
      */
+    @Override
     public EntityDataState getState() {
         return entity.getState();
     }
@@ -220,6 +244,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return ビルダー
      */
+    @Override
     public Builder createBuilderForEdit() {
         return new Builder(this);
     }
@@ -236,7 +261,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
     /**
      * {@link HokenshaNinteiKekkaJoho}を生成するためのビルダーです。
      */
-    public static final class Builder {
+    public static final class Builder extends INinteiKekkaJoho.Builder {
 
         private DbT4102NinteiKekkaJohoEntity entity;
 
@@ -289,6 +314,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
          * @param shinseishoKanriNo 申請書管理番号
          * @return builder
          */
+        @Override
         public Builder setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
             Objects.requireNonNull(shinseishoKanriNo);
             this.entity.setShinseishoKanriNo(shinseishoKanriNo);
@@ -301,6 +327,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
          * @param nijiHanteiYMD 二次判定年月日
          * @return builder
          */
+        @Override
         public Builder setNijiHanteiYMD(FlexibleDate nijiHanteiYMD) {
             Objects.requireNonNull(nijiHanteiYMD);
             this.entity.setNijiHanteiYMD(nijiHanteiYMD);
@@ -313,6 +340,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
          * @param nijiHanteiYokaigoJotaiKubunCode 二次判定要介護状態区分コード
          * @return builder
          */
+        @Override
         public Builder setNijiHanteiYokaigoJotaiKubunCode(Code nijiHanteiYokaigoJotaiKubunCode) {
             Objects.requireNonNull(nijiHanteiYokaigoJotaiKubunCode);
             this.entity.setNijiHanteiYokaigoJotaiKubunCode(nijiHanteiYokaigoJotaiKubunCode);
@@ -325,6 +353,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
          * @param nijiHanteiNinteiYukoKikan 二次判定認定有効期間
          * @return builder
          */
+        @Override
         public Builder setNijiHanteiNinteiYukoKikan(int nijiHanteiNinteiYukoKikan) {
             this.entity.setNijiHanteiNinteiYukoKikan(nijiHanteiNinteiYukoKikan);
             return this;
@@ -336,6 +365,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
          * @param nijiHanteiNinteiYukoKaishiYMD 二次判定認定有効開始年月日
          * @return builder
          */
+        @Override
         public Builder setNijiHanteiNinteiYukoKaishiYMD(FlexibleDate nijiHanteiNinteiYukoKaishiYMD) {
             Objects.requireNonNull(nijiHanteiNinteiYukoKaishiYMD);
             this.entity.setNijiHanteiNinteiYukoKaishiYMD(nijiHanteiNinteiYukoKaishiYMD);
@@ -348,6 +378,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
          * @param nijiHanteiNinteiYukoShuryoYMD 二次判定認定有効開始年月日
          * @return builder
          */
+        @Override
         public Builder setNijiHanteiNinteiYukoShuryoYMD(FlexibleDate nijiHanteiNinteiYukoShuryoYMD) {
             Objects.requireNonNull(nijiHanteiNinteiYukoShuryoYMD);
             this.entity.setNijiHanteiNinteiYukoShuryoYMD(nijiHanteiNinteiYukoShuryoYMD);
@@ -360,6 +391,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
          * @param shinsakaiKaisaiNo 介護認定審査会開催番号
          * @return builder
          */
+        @Override
         public Builder setShinsakaiKaisaiNo(int shinsakaiKaisaiNo) {
             this.entity.setShinsakaiKaisaiNo(shinsakaiKaisaiNo);
             return this;
@@ -371,6 +403,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
          * @param shinsakaiIken 介護認定審査会意見
          * @return builder
          */
+        @Override
         public Builder setShinsakaiIken(RString shinsakaiIken) {
             Objects.requireNonNull(shinsakaiIken);
             this.entity.setShinsakaiIken(shinsakaiIken);
@@ -383,6 +416,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
          * @param ichijiHnateiKekkaHenkoRiyu 一次判定結果変更理由
          * @return builder
          */
+        @Override
         public Builder setIchijiHnateiKekkaHenkoRiyu(RString ichijiHnateiKekkaHenkoRiyu) {
             Objects.requireNonNull(ichijiHnateiKekkaHenkoRiyu);
             this.entity.setIchijiHnateiKekkaHenkoRiyu(ichijiHnateiKekkaHenkoRiyu);
@@ -395,6 +429,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
          * @param yokaigoJotaizoReiCode 要介護状態像例コード
          * @return builder
          */
+        @Override
         public Builder setYokaigoJotaizoReiCode(Code yokaigoJotaizoReiCode) {
             Objects.requireNonNull(yokaigoJotaizoReiCode);
             this.entity.setYokaigoJotaizoReiCode(yokaigoJotaizoReiCode);
@@ -407,6 +442,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
          * @param ninteishinsakaiIkenShurui 認定審査会意見種類
          * @return builder
          */
+        @Override
         public Builder setNinteishinsakaiIkenShurui(RString ninteishinsakaiIkenShurui) {
             Objects.requireNonNull(ninteishinsakaiIkenShurui);
             this.entity.setNinteishinsakaiIkenShurui(ninteishinsakaiIkenShurui);
@@ -419,6 +455,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
          * @param shinsakaiMemo 審査会メモ
          * @return builder
          */
+        @Override
         public Builder setShinsakaiMemo(RString shinsakaiMemo) {
             Objects.requireNonNull(shinsakaiMemo);
             this.entity.setShinsakaiMemo(shinsakaiMemo);
@@ -431,6 +468,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
          * @param nijiHanteiKekkaInputHoho 二次判定結果入力方法
          * @return builder
          */
+        @Override
         public Builder setNijiHanteiKekkaInputHoho(Code nijiHanteiKekkaInputHoho) {
             Objects.requireNonNull(nijiHanteiKekkaInputHoho);
             this.entity.setNijiHanteiKekkaInputHoho(nijiHanteiKekkaInputHoho);
@@ -443,6 +481,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
          * @param niniHanteiKekkaInputYMD 二次判定結果入力年月日
          * @return builder
          */
+        @Override
         public Builder setNiniHanteiKekkaInputYMD(FlexibleDate niniHanteiKekkaInputYMD) {
             Objects.requireNonNull(niniHanteiKekkaInputYMD);
             this.entity.setNiniHanteiKekkaInputYMD(niniHanteiKekkaInputYMD);
@@ -454,6 +493,7 @@ public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
          *
          * @return {@link HokenshaNinteiKekkaJoho}
          */
+        @Override
         public HokenshaNinteiKekkaJoho build() {
             return new HokenshaNinteiKekkaJoho(this);
         }
