@@ -578,7 +578,7 @@ public interface IKoseiShichosonMaster {
          * @return {@link KaigoKoseiShichosonMaster}
          */
         public IKoseiShichosonMaster build() {
-            return this.build();
+            return new IKoseiShichosonMaster.Builder().build();
         }
     };
 
