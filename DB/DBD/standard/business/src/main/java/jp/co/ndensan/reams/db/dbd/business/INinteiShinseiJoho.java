@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.business;
 
 import jp.co.ndensan.reams.db.dbd.entity.basic.INinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.SeibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -570,16 +569,814 @@ public interface INinteiShinseiJoho {
     boolean is論理削除区分();
 
     /**
-     * INinteiShinseiJoho。
+     * INinteiShinseiJohoEntityを取得します。
      *
-     * @return INinteiShinseiJoho
+     * @return INinteiShinseiJohoEntity
      */
-    public INinteiShinseiJohoEntity getEntity();
+    INinteiShinseiJohoEntity getEntity();
 
     /**
      * stateを返します。
      *
      * @return EntityDataState
      */
-    public EntityDataState getState();
+    EntityDataState getState();
+
+    /**
+     * 編集用のビルダーを返します。
+     *
+     * @return ビルダー
+     */
+    Builder createBuilderForEdit();
+
+    /**
+     * 認定申請情報ビルダーの親クラスです。
+     */
+    public class Builder {
+
+        /**
+         * shinseishoKanriNoを設定します。
+         *
+         * @param shinseishoKanriNo 申請書管理番号
+         * @return builder
+         */
+        public Builder setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
+
+            return this;
+        }
+
+        /**
+         * koroshoIfShikibetsuCodeを設定します。
+         *
+         * @param koroshoIfShikibetsuCode 厚労省IF識別コード
+         * @return builder
+         */
+        public Builder setKoroshoIfShikibetsuCode(Code koroshoIfShikibetsuCode) {
+
+            return this;
+        }
+
+        /**
+         * shoKisaiHokenshaNoを設定します。
+         *
+         * @param shoKisaiHokenshaNo 証記載保険者番号
+         * @return builder
+         */
+        public Builder setShoKisaiHokenshaNo(RString shoKisaiHokenshaNo) {
+
+            return this;
+        }
+
+        /**
+         * shinseiNendoを設定します。
+         *
+         * @param shinseiNendo 申請年度
+         * @return builder
+         */
+        public Builder setShinseiNendo(FlexibleYear shinseiNendo) {
+
+            return this;
+        }
+
+        /**
+         * hihokenshaNoを設定します。
+         *
+         * @param hihokenshaNo 被保険者番号
+         * @return builder
+         */
+        public Builder setHihokenshaNo(RString hihokenshaNo) {
+
+            return this;
+        }
+
+        /**
+         * ninteiShinseiYMDを設定します。
+         *
+         * @param ninteiShinseiYMD 認定申請年月日
+         * @return builder
+         */
+        public Builder setNinteiShinseiYMD(FlexibleDate ninteiShinseiYMD) {
+            return this;
+        }
+
+        /**
+         * ninteiShinseiEdabanCodeを設定します。
+         *
+         * @param ninteiShinseiEdabanCode 認定申請枝番コード
+         * @return builder
+         */
+        public Builder setNinteiShinseiEdabanCode(EdabanCode ninteiShinseiEdabanCode) {
+            return this;
+        }
+
+        /**
+         * ninteiShinseiHoreiKubunCodeを設定します。
+         *
+         * @param ninteiHoreiKubunCode 認定申請区分（法令）コード
+         * @return builder
+         */
+        public Builder setNinteiShinseiHoreiKubunCode(Code ninteiHoreiKubunCode) {
+            return this;
+        }
+
+        /**
+         * ninteiShinseiShinseijiKubunCodeを設定します。
+         *
+         * @param ninteiShinseijiKubunCode 認定申請区分（申請時）コード
+         * @return builder
+         */
+        public Builder setNinteiShinseiShinseijiKubunCode(Code ninteiShinseijiKubunCode) {
+            return this;
+        }
+
+        /**
+         * torisageKubunCodeを設定します。
+         *
+         * @param torisageKubunCode 取下区分コード
+         * @return builder
+         */
+        public Builder setTorisageKubunCode(Code torisageKubunCode) {
+            return this;
+        }
+
+        /**
+         * hihokenshaKubunCodeを設定します。
+         *
+         * @param hihokenshaKubunCode 被保険者区分コード
+         * @return builder
+         */
+        public Builder setHihokenshaKubunCode(RString hihokenshaKubunCode) {
+            return this;
+        }
+
+        /**
+         * seinengappiYMDを設定します。
+         *
+         * @param seinengappiYMD 生年月日
+         * @return builder
+         */
+        public Builder setSeinengappiYMD(FlexibleDate seinengappiYMD) {
+            return this;
+        }
+
+        /**
+         * ageを設定します。
+         *
+         * @param age 年齢
+         * @return builder
+         */
+        public Builder setAge(int age) {
+            return this;
+        }
+
+        /**
+         * seibetsuを設定します。
+         *
+         * @param seibetsu 性別
+         * @return builder
+         */
+        public Builder setSeibetsu(SeibetsuCode seibetsu) {
+            return this;
+        }
+
+        /**
+         * hihokenshaKanaを設定します。
+         *
+         * @param hihokenshaKana 被保険者氏名カナ
+         * @return builder
+         */
+        public Builder setHihokenshaKana(AtenaKanaMeisho hihokenshaKana) {
+            return this;
+        }
+
+        /**
+         * hihokenshaNameを設定します。
+         *
+         * @param hihokenshaName 被保険者氏名
+         * @return builder
+         */
+        public Builder setHihokenshaName(AtenaMeisho hihokenshaName) {
+            return this;
+        }
+
+        /**
+         * yubinNoを設定します。
+         *
+         * @param yubinNo 郵便番号
+         * @return builder
+         */
+        public Builder setYubinNo(YubinNo yubinNo) {
+            return this;
+        }
+
+        /**
+         * jushoを設定します。
+         *
+         * @param jusho 住所
+         * @return builder
+         */
+        public Builder setJusho(AtenaJusho jusho) {
+            return this;
+        }
+
+        /**
+         * telNoを設定します。
+         *
+         * @param telNo 電話番号
+         * @return builder
+         */
+        public Builder setTelNo(TelNo telNo) {
+            return this;
+        }
+
+        /**
+         * shishoCodeを設定します。
+         *
+         * @param shishoCode 支所コード
+         * @return builder
+         */
+        public Builder setShishoCode(RString shishoCode) {
+            return this;
+        }
+
+        /**
+         * shikibetsuCodeを設定します。
+         *
+         * @param shikibetsuCode 識別コード
+         * @return builder
+         */
+        public Builder setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
+            return this;
+        }
+
+        /**
+         * chikuCodeを設定します。
+         *
+         * @param chikuCode 地区コード
+         * @return builder
+         */
+        public Builder setChikuCode(ChikuCode chikuCode) {
+            return this;
+        }
+
+        /**
+         * minashiNigoEtcTaishoFlagを設定します。
+         *
+         * @param minashiNigoEtcTaishoFlag みなし２号等対象フラグ
+         * @return builder
+         */
+        public Builder setMinashiNigoEtcTaishoFlag(boolean minashiNigoEtcTaishoFlag) {
+            return this;
+        }
+
+        /**
+         * koikinaiTenkyoKubunを設定します。
+         *
+         * @param koikinaiTenkyoKubun 広域内転居区分
+         * @return builder
+         */
+        public Builder setKoikinaiTenkyoKubun(Code koikinaiTenkyoKubun) {
+            return this;
+        }
+
+        /**
+         * ninteiShinseiYukoKubunCodeを設定します。
+         *
+         * @param ninteiShinseiYukoKubunCode 認定申請有効区分
+         * @return builder
+         */
+        public Builder setNinteiShinseiYukoKubunCode(Code ninteiShinseiYukoKubunCode) {
+            return this;
+        }
+
+        /**
+         * shienShinseiKubunを設定します。
+         *
+         * @param shienShinseiKubun 要介護申請・要支援申請の区分
+         * @return builder
+         */
+        public Builder setShienShinseiKubun(RString shienShinseiKubun) {
+            return this;
+        }
+
+        /**
+         * ninteiShinseiRiyuを設定します。
+         *
+         * @param ninteiShinseiRiyu 認定申請理由
+         * @return builder
+         */
+        public Builder setNinteiShinseiRiyu(RString ninteiShinseiRiyu) {
+            return this;
+        }
+
+        /**
+         * shinseiServiceDeleteRiyuを設定します。
+         *
+         * @param shinseiServiceDeleteRiyu 申請サービス削除の理由
+         * @return builder
+         */
+        public Builder setShinseiServiceDeleteRiyu(RString shinseiServiceDeleteRiyu) {
+            return this;
+        }
+
+        /**
+         * zenYokaigoKubunCodeを設定します。
+         *
+         * @param zenYokaigoKubunCode 前回要介護状態区分コード
+         * @return builder
+         */
+        public Builder setZenYokaigoKubunCode(Code zenYokaigoKubunCode) {
+            return this;
+        }
+
+        /**
+         * zenkaiNinteiYMDを設定します。
+         *
+         * @param zenkaiNinteiYMD 前回認定年月日
+         * @return builder
+         */
+        public Builder setZenkaiNinteiYMD(FlexibleDate zenkaiNinteiYMD) {
+            return this;
+        }
+
+        /**
+         * zenkaiYukoKikanStartを設定します。
+         *
+         * @param zenkaiYukoKikanStart 前回認定有効期間（開始）
+         * @return builder
+         */
+        public Builder setZenkaiYukoKikanStart(FlexibleDate zenkaiYukoKikanStart) {
+            return this;
+        }
+
+        /**
+         * zenkaiYukoKikanEndを設定します。
+         *
+         * @param zenkaiYukoKikanEnd 前回認定有効期間（終了）
+         * @return builder
+         */
+        public Builder setZenkaiYukoKikanEnd(FlexibleDate zenkaiYukoKikanEnd) {
+            return this;
+        }
+
+        /**
+         * nigoIryoHokenshaNameを設定します。
+         *
+         * @param nigoIryoHokenshaName ２号医療保険者名
+         * @return builder
+         */
+        public Builder setNigoIryoHokenshaName(RString nigoIryoHokenshaName) {
+            return this;
+        }
+
+        /**
+         * nigoIryoHokenKigoBangoを設定します。
+         *
+         * @param nigoIryoHokenKigoBango ２号医療保険記号番号
+         * @return builder
+         */
+        public Builder setNigoIryoHokenKigoBango(RString nigoIryoHokenKigoBango) {
+            return this;
+        }
+
+        /**
+         * nigoTokuteiShippeiCodeを設定します。
+         *
+         * @param nigoTokuteiShippeiCode ２号特定疾病コード
+         * @return builder
+         */
+        public Builder setNigoTokuteiShippeiCode(Code nigoTokuteiShippeiCode) {
+            return this;
+        }
+
+        /**
+         * jidoWariateJogaishaKubunを設定します。
+         *
+         * @param jidoWariateJogaishaKubun 自動割当除外者区分
+         * @return builder
+         */
+        public Builder setJidoWariateJogaishaKubun(RString jidoWariateJogaishaKubun) {
+            return this;
+        }
+
+        /**
+         * johoteikyoDoiFlagを設定します。
+         *
+         * @param johoteikyoDoiFlag 情報提供への同意有無
+         * @return builder
+         */
+        public Builder setJohoteikyoDoiFlag(boolean johoteikyoDoiFlag) {
+            return this;
+        }
+
+        /**
+         * johoteikyoSiryoOutputYMDを設定します。
+         *
+         * @param johoteikyoSiryoOutputYMD 情報提供資料出力年月日
+         * @return builder
+         */
+        public Builder setJohoteikyoSiryoOutputYMD(FlexibleDate johoteikyoSiryoOutputYMD) {
+            return this;
+        }
+
+        /**
+         * chosaKubunを設定します。
+         *
+         * @param chosaKubun 調査区分
+         * @return builder
+         */
+        public Builder setChosaKubun(Code chosaKubun) {
+            return this;
+        }
+
+        /**
+         * ninteichosaItakusakiCodeを設定します。
+         *
+         * @param ninteichosaItakusakiCode 認定調査委託先コード
+         * @return builder
+         */
+        public Builder setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {
+            return this;
+        }
+
+        /**
+         * ninteiChousainCodeを設定します。
+         *
+         * @param ninteiChousainCode 認定調査員コード
+         * @return builder
+         */
+        public Builder setNinteiChousainCode(RString ninteiChousainCode) {
+            return this;
+        }
+
+        /**
+         * renrakuJikoToChosainを設定します。
+         *
+         * @param renrakuJikoToChosain 調査員への連絡事項
+         * @return builder
+         */
+        public Builder setRenrakuJikoToChosain(RString renrakuJikoToChosain) {
+            return this;
+        }
+
+        /**
+         * shujiiIryokikanCodeを設定します。
+         *
+         * @param shujiiIryokikanCode 主治医医療機関コード
+         * @return builder
+         */
+        public Builder setShujiiIryokikanCode(RString shujiiIryokikanCode) {
+            return this;
+        }
+
+        /**
+         * shujiiCodeを設定します。
+         *
+         * @param shujiiCode 主治医コード
+         * @return builder
+         */
+        public Builder setShujiiCode(RString shujiiCode) {
+            return this;
+        }
+
+        /**
+         * shiteiiFlagを設定します。
+         *
+         * @param shiteiiFlag 指定医フラグ
+         * @return builder
+         */
+        public Builder setShiteiiFlag(boolean shiteiiFlag) {
+            return this;
+        }
+
+        /**
+         * ikenshoDataShubetsuを設定します。
+         *
+         * @param ikenshoDataShubetsu 意見書データ種別
+         * @return builder
+         */
+        public Builder setIkenshoDataShubetsu(Code ikenshoDataShubetsu) {
+            return this;
+        }
+
+        /**
+         * renrakuJikoToShujiiを設定します。
+         *
+         * @param renrakuJikoToShujii 主治医への連絡事項
+         * @return builder
+         */
+        public Builder setRenrakuJikoToShujii(RString renrakuJikoToShujii) {
+            return this;
+        }
+
+        /**
+         * minashiCodeを設定します。
+         *
+         * @param minashiCode みなし要介護区分コード
+         * @return builder
+         */
+        public Builder setMinashiCode(Code minashiCode) {
+            return this;
+        }
+
+        /**
+         * enkitsuchiNashiDoiFlagを設定します。
+         *
+         * @param enkitsuchiNashiDoiFlag 認定延期通知発行しないことに対する同意有無
+         * @return builder
+         */
+        public Builder setEnkitsuchiNashiDoiFlag(boolean enkitsuchiNashiDoiFlag) {
+            return this;
+        }
+
+        /**
+         * shisetsuNyushoFlagを設定します。
+         *
+         * @param shisetsuNyushoFlag 施設入所の有無
+         * @return builder
+         */
+        public Builder setShisetsuNyushoFlag(boolean shisetsuNyushoFlag) {
+            return this;
+        }
+
+        /**
+         * nyushoShisetsuCodeを設定します。
+         *
+         * @param nyushoShisetsuCode 入所施設コード
+         * @return builder
+         */
+        public Builder setNyushoShisetsuCode(RString nyushoShisetsuCode) {
+            return this;
+        }
+
+        /**
+         * kateiHomonFlagを設定します。
+         *
+         * @param kateiHomonFlag 家庭訪問の有無
+         * @return builder
+         */
+        public Builder setKateiHomonFlag(boolean kateiHomonFlag) {
+            return this;
+        }
+
+        /**
+         * homonChosasakiYubinNoを設定します。
+         *
+         * @param homonChosasakiYubinNo 訪問調査先郵便番号
+         * @return builder
+         */
+        public Builder setHomonChosasakiYubinNo(YubinNo homonChosasakiYubinNo) {
+            return this;
+        }
+
+        /**
+         * homonChosasakiJushoを設定します。
+         *
+         * @param homonChosasakiJusho 訪問調査先住所
+         * @return builder
+         */
+        public Builder setHomonChosasakiJusho(AtenaJusho homonChosasakiJusho) {
+            return this;
+        }
+
+        /**
+         * homonChosasakiNameを設定します。
+         *
+         * @param homonChosasakiName 訪問調査先名称
+         * @return builder
+         */
+        public Builder setHomonChosasakiName(AtenaMeisho homonChosasakiName) {
+            return this;
+        }
+
+        /**
+         * homonChosasakiTelNoを設定します。
+         *
+         * @param homonChosasakiTelNo 訪問調査先電話番号
+         * @return builder
+         */
+        public Builder setHomonChosasakiTelNo(TelNo homonChosasakiTelNo) {
+            return this;
+        }
+
+        /**
+         * sichosonRenrakuJikoを設定します。
+         *
+         * @param sichosonRenrakuJiko 市町村連絡事項
+         * @return builder
+         */
+        public Builder setSichosonRenrakuJiko(RString sichosonRenrakuJiko) {
+            return this;
+        }
+
+        /**
+         * shoriJotaiKubunを設定します。
+         *
+         * @param shoriJotaiKubun 処理状態区分
+         * @return builder
+         */
+        public Builder setShoriJotaiKubun(Code shoriJotaiKubun) {
+            return this;
+        }
+
+        /**
+         * torisageYMDを設定します。
+         *
+         * @param torisageYMD 取下年月日
+         * @return builder
+         */
+        public Builder setTorisageYMD(FlexibleDate torisageYMD) {
+            return this;
+        }
+
+        /**
+         * torisageRiyuを設定します。
+         *
+         * @param torisageRiyu 取下理由
+         * @return builder
+         */
+        public Builder setTorisageRiyu(RString torisageRiyu) {
+            return this;
+        }
+
+        /**
+         * kyakkaYMDを設定します。
+         *
+         * @param kyakkaYMD 却下年月日
+         * @return builder
+         */
+        public Builder setKyakkaYMD(FlexibleDate kyakkaYMD) {
+            return this;
+        }
+
+        /**
+         * kyakkaRiyuを設定します。
+         *
+         * @param kyakkaRiyu 却下理由
+         * @return builder
+         */
+        public Builder setKyakkaRiyu(RString kyakkaRiyu) {
+            return this;
+        }
+
+        /**
+         * enkiKetteiYMDを設定します。
+         *
+         * @param enkiKetteiYMD 延期決定年月日
+         * @return builder
+         */
+        public Builder setEnkiKetteiYMD(FlexibleDate enkiKetteiYMD) {
+            return this;
+        }
+
+        /**
+         * enkiRiyuを設定します。
+         *
+         * @param enkiRiyu 延期理由
+         * @return builder
+         */
+        public Builder setEnkiRiyu(RString enkiRiyu) {
+            return this;
+        }
+
+        /**
+         * enkitsuchiHakkoYMDを設定します。
+         *
+         * @param enkitsuchiHakkoYMD 延期通知発行年月日
+         * @return builder
+         */
+        public Builder setEnkitsuchiHakkoYMD(FlexibleDate enkitsuchiHakkoYMD) {
+            return this;
+        }
+
+        /**
+         * enkitsuchiHakkoKaisuを設定します。
+         *
+         * @param enkitsuchiHakkoKaisu 延期通知発行回数
+         * @return builder
+         */
+        public Builder setEnkitsuchiHakkoKaisu(int enkitsuchiHakkoKaisu) {
+            return this;
+        }
+
+        /**
+         * enkiMikomiKaishiYMDを設定します。
+         *
+         * @param enkiMikomiKaishiYMD 延期見込期間開始年月日
+         * @return builder
+         */
+        public Builder setEnkiMikomiKaishiYMD(FlexibleDate enkiMikomiKaishiYMD) {
+            return this;
+        }
+
+        /**
+         * enkiMikomiShuryoYMDを設定します。
+         *
+         * @param enkiMikomiShuryoYMD 延期見込期間終了年月日
+         * @return builder
+         */
+        public Builder setEnkiMikomiShuryoYMD(FlexibleDate enkiMikomiShuryoYMD) {
+            return this;
+        }
+
+        /**
+         * shinsaKeizokuFlagを設定します。
+         *
+         * @param shinsaKeizokuFlag 審査継続区分
+         * @return builder
+         */
+        public Builder setShinsaKeizokuFlag(boolean shinsaKeizokuFlag) {
+            return this;
+        }
+
+        /**
+         * shinsakaiYusenWaritsukeKubunCodeを設定します。
+         *
+         * @param shinsakaiYusenWaritsukeCode 要介護認定審査会優先振分区分コード
+         * @return builder
+         */
+        public Builder setShinsakaiYusenWaritsukeKubunCode(Code shinsakaiYusenWaritsukeCode) {
+            return this;
+        }
+
+        /**
+         * kosinTsuchiHakkoYMDを設定します。
+         *
+         * @param kosinTsuchiHakkoYMD 更新通知発行年月日
+         * @return builder
+         */
+        public Builder setKosinTsuchiHakkoYMD(FlexibleDate kosinTsuchiHakkoYMD) {
+            return this;
+        }
+
+        /**
+         * kosinTsuchiHakkoKanryoYMDを設定します。
+         *
+         * @param kosinTsuchiHakkoKanryoYMD 更新通知発行完了年月日
+         * @return builder
+         */
+        public Builder setKosinTsuchiHakkoKanryoYMD(FlexibleDate kosinTsuchiHakkoKanryoYMD) {
+            return this;
+        }
+
+        /**
+         * ninteiShinseiJohoTorokuYMDを設定します。
+         *
+         * @param ninteiShinseiJohoTorokuYMD 認定申請情報登録年月日
+         * @return builder
+         */
+        public Builder setNinteiShinseiJohoTorokuYMD(FlexibleDate ninteiShinseiJohoTorokuYMD) {
+            return this;
+        }
+
+        /**
+         * saiChosaIraiKaisuを設定します。
+         *
+         * @param saiChosaIraiKaisu 再調査依頼回数
+         * @return builder
+         */
+        public Builder setSaiChosaIraiKaisu(int saiChosaIraiKaisu) {
+            return this;
+        }
+
+        /**
+         * saiSakuseiIraiKaisuを設定します。
+         *
+         * @param saiSakuseiIraiKaisu 再作成依頼回数
+         * @return builder
+         */
+        public Builder setSaiSakuseiIraiKaisu(int saiSakuseiIraiKaisu) {
+            return this;
+        }
+
+        /**
+         * ifSofuYMDを設定します。
+         *
+         * @param ifSofuYMD ＩＦ送付年月日
+         * @return builder
+         */
+        public Builder setIfSofuYMD(FlexibleDate ifSofuYMD) {
+            return this;
+        }
+
+        /**
+         * logicalDeletedFlagを設定します。
+         *
+         * @param logicalDeletedFlag 論理削除フラグ
+         * @return builder
+         */
+        public Builder setLogicalDeletedFlag(boolean logicalDeletedFlag) {
+            return this;
+        }
+
+        /**
+         * {@link HokenshaNinteiShinseiJoho}を生成します。
+         *
+         * @return {@link HokenshaNinteiShinseiJoho}
+         */
+        public INinteiShinseiJoho build() {
+            return new INinteiShinseiJoho.Builder().build();
+        }
+    }
+
 }
