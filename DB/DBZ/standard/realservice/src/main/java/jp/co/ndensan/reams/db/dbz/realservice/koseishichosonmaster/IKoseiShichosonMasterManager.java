@@ -24,4 +24,12 @@ public interface IKoseiShichosonMasterManager {
      */
     Optional<IKoseiShichosonMaster> find構成市町村(RString 市町村識別ID);
 
+    /**
+     * 構成市町村マスタ情報を登録します。
+     *
+     * @param 構成市町村情報
+     * @return 登録件数
+     */
+    int save構成市町村(IKoseiShichosonMaster 構成市町村情報);
+
 }

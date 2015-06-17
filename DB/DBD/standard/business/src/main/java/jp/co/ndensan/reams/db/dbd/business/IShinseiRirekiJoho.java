@@ -45,7 +45,7 @@ public interface IShinseiRirekiJoho {
     EntityDataState getState();
 
     /**
-     * 態を設定します。
+     * 状態を設定します。
      *
      * @param entityDataState EntityDataState
      */
