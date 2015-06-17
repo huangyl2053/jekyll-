@@ -14,12 +14,13 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.relate.IKoseiShichosonMasterEntity;
 
 /**
  * 構成市町村マスタテーブルのエンティティクラスです。
  * <br/> 運用保険者単位に構成市長を管理する
  */
-public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051KoseiShichosonMasterEntity> implements IDbAccessable {
+public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051KoseiShichosonMasterEntity> implements IDbAccessable, IKoseiShichosonMasterEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
@@ -558,7 +559,8 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
     /**
      * 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しないのsetメソッドです。
      *
-     * @param gappeiKyuShichosonHyojiUmu 合併旧市町村表示有無 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しない
+     * @param gappeiKyuShichosonHyojiUmu 合併旧市町村表示有無
+     * 合併旧市町村で表示を必要とする市町村について、表示設定が行われる １：表示する ０：表示しない
      */
     public void setGappeiKyuShichosonHyojiUmu(RString gappeiKyuShichosonHyojiUmu) {
         this.gappeiKyuShichosonHyojiUmu = gappeiKyuShichosonHyojiUmu;
@@ -670,7 +672,8 @@ public class DbT7051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT7051
      * このエンティティの主キーが他の{@literal DbT7051KoseiShichosonMasterEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT7051KoseiShichosonMasterEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT7051KoseiShichosonMasterEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7051KoseiShichosonMasterEntity other) {

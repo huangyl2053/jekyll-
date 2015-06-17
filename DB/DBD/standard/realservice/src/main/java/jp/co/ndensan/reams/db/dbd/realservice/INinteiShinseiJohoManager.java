@@ -31,4 +31,12 @@ public interface INinteiShinseiJohoManager {
      * @return 認定申請情報
      */
     IItemList<INinteiShinseiJoho> find認定申請情報();
+
+    /**
+     * 認定申請情報を登録します。
+     *
+     * @param 認定申請情報 IRenrakusakiJoho
+     * @return 登録件数
+     */
+    int save認定申請情報(INinteiShinseiJoho 認定申請情報);
 }
