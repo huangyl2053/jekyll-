@@ -1,9 +1,28 @@
-var DBZ;
-(function (DBZ) {
+var DBD;
+(function (DBD) {
     (function (ShujiiIryokikanAndShujiiInput) {
         var Events = (function () {
             function Events() {
             }
+            Events.onBlur_txtShujiiIryokikan = function () {
+                return "onBlur_txtShujiiIryokikan";
+            };
+
+            Events.onClick_btnZankaiFukusha = function () {
+                return "onClick_btnZankaiFukusha";
+            };
+
+            Events.onBlur_txtShujii = function () {
+                return "onBlur_txtShujii";
+            };
+
+            Events.onClick_btnShujiiGuide = function () {
+                return "onClick_btnShujiiGuide";
+            };
+
+            Events.onClick_btnClear = function () {
+                return "onClick_btnClear";
+            };
             return Events;
         })();
         ShujiiIryokikanAndShujiiInput.Events = Events;
@@ -17,11 +36,11 @@ var DBZ;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBZ.ShujiiIryokikanAndShujiiInput.Controls.myType();
+                return this._myName + "_" + DBD.ShujiiIryokikanAndShujiiInput.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBZ.ShujiiIryokikanAndShujiiInput.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBD.ShujiiIryokikanAndShujiiInput.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.ShujiiIryokikanAndShujiiInput = function () {
@@ -70,6 +89,6 @@ var DBZ;
             return Controls;
         })();
         ShujiiIryokikanAndShujiiInput.Controls = Controls;
-    })(DBZ.ShujiiIryokikanAndShujiiInput || (DBZ.ShujiiIryokikanAndShujiiInput = {}));
-    var ShujiiIryokikanAndShujiiInput = DBZ.ShujiiIryokikanAndShujiiInput;
-})(DBZ || (DBZ = {}));
+    })(DBD.ShujiiIryokikanAndShujiiInput || (DBD.ShujiiIryokikanAndShujiiInput = {}));
+    var ShujiiIryokikanAndShujiiInput = DBD.ShujiiIryokikanAndShujiiInput;
+})(DBD || (DBD = {}));

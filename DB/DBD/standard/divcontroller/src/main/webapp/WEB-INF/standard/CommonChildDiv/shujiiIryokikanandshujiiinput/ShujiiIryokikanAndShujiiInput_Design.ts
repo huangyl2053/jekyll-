@@ -2,11 +2,31 @@
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
 
-module DBZ {
+module DBD {
 
      export module ShujiiIryokikanAndShujiiInput {
 
         export class Events {
+
+            public static onBlur_txtShujiiIryokikan(): string {
+                return "onBlur_txtShujiiIryokikan";
+            }
+
+            public static onClick_btnZankaiFukusha(): string {
+                return "onClick_btnZankaiFukusha";
+            }
+
+            public static onBlur_txtShujii(): string {
+                return "onBlur_txtShujii";
+            }
+
+            public static onClick_btnShujiiGuide(): string {
+                return "onClick_btnShujiiGuide";
+            }
+
+            public static onClick_btnClear(): string {
+                return "onClick_btnClear";
+            }
 
         }
 
@@ -22,11 +42,11 @@ module DBZ {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBZ.ShujiiIryokikanAndShujiiInput.Controls.myType();
+                return this._myName + "_" + DBD.ShujiiIryokikanAndShujiiInput.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBZ.ShujiiIryokikanAndShujiiInput.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBD.ShujiiIryokikanAndShujiiInput.Controls.myType() + "_" + fieldName;
             }
 
             public ShujiiIryokikanAndShujiiInput(): UZA.Panel {
