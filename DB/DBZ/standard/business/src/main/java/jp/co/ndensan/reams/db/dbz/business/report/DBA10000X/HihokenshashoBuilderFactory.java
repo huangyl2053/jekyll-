@@ -33,13 +33,17 @@ public class HihokenshashoBuilderFactory {
      * @param tsuchishoAtesaki 通知書宛先
      * @return 単票発行時の被保険者証B4版
      */
-//    public HihokenshashoB4Builder createInstanceForB4(HihokenshashoModel hihokenshasho, IAssociation association,
-//            ITsuchishoAtesaki tsuchishoAtesaki) {
-//        return new HihokenshashoB4Builder(
-//                new HihokenshashoB4SourceBuilder(new HihokenshashoB4Editor(hihokenshasho, association)),
-//                TsuchishoAtesakiBuilderFactory.createInstance(tsuchishoAtesaki)
-//        );
-//    }
+    public HihokenshashoB4Builder createInstanceForB4(HihokenshashoModel hihokenshasho, IAssociation association,
+            ITsuchishoAtesaki tsuchishoAtesaki) {
+        //TODO n8235 船山洋介 TsuchishoAtesakiBuilderFactory.createInstanceにエラーがあるため、暫定的にnullを返す。
+        return null;
+
+        //        return new HihokenshashoB4Builder(
+        //                new HihokenshashoB4SourceBuilder(new HihokenshashoB4Editor(hihokenshasho, association)),
+        //                TsuchishoAtesakiBuilderFactory.createInstance(tsuchishoAtesaki)
+        //        );
+    }
+
     /**
      * 被保険者証A4版Builderを生成します。
      *
@@ -48,12 +52,15 @@ public class HihokenshashoBuilderFactory {
      * @param tsuchishoAtesaki 通知書宛先
      * @return 単票発行時の被保険者証A4版
      */
-//    public HihokenshashoA4Builder createInstanceForA4(HihokenshashoModel hihokenshasho, IAssociation association,
-//            ITsuchishoAtesaki tsuchishoAtesaki) {
-//        return new HihokenshashoA4Builder(
-//                new HihokenshashoA4SourceBuilder(new HihokenshashoA4Editor(hihokenshasho, association)),
-//                TsuchishoAtesakiBuilderFactory.createInstance(tsuchishoAtesaki)
-//        );
-//    }
+    public HihokenshashoA4Builder createInstanceForA4(HihokenshashoModel hihokenshasho, IAssociation association,
+            ITsuchishoAtesaki tsuchishoAtesaki) {
+        //TODO n8235 船山洋介 TsuchishoAtesakiBuilderFactory.createInstanceにエラーがあるため、暫定的にnullを返す。
+        return null;
+
+        //        return new HihokenshashoA4Builder(
+        //                new HihokenshashoA4SourceBuilder(new HihokenshashoA4Editor(hihokenshasho, association)),
+        //                TsuchishoAtesakiBuilderFactory.createInstance(tsuchishoAtesaki)
+        //        );
+    }
     //TODO n8178 城間篤人 被保険者証B4版Builderについて、複数人分の被保険者証を一括発行する際の、上下ともに印字する場合のcreateメソッドが、バッチ処理などで必要になる。 2015年2月末
 }

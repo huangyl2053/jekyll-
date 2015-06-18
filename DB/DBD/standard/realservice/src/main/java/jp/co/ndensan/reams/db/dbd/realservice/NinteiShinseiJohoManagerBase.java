@@ -22,4 +22,8 @@ public abstract class NinteiShinseiJohoManagerBase implements INinteiShinseiJoho
 
     @Override
     public abstract IItemList<INinteiShinseiJoho> find認定申請情報();
+
+    @Override
+    public abstract int save認定申請情報(INinteiShinseiJoho 認定申請情報);
+
 }
