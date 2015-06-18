@@ -2,11 +2,19 @@
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
 
-module DBZ {
+module DBD {
 
      export module NinteiShinseiTodokedesha {
 
         export class Events {
+
+            public static onChanged_ddlTodokedeDaikoKubun(): string {
+                return "onChanged_ddlTodokedeDaikoKubun";
+            }
+
+            public static onClick_btnZenkaiFukusha(): string {
+                return "onClick_btnZenkaiFukusha";
+            }
 
         }
 
@@ -22,11 +30,11 @@ module DBZ {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBZ.NinteiShinseiTodokedesha.Controls.myType();
+                return this._myName + "_" + DBD.NinteiShinseiTodokedesha.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBZ.NinteiShinseiTodokedesha.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBD.NinteiShinseiTodokedesha.Controls.myType() + "_" + fieldName;
             }
 
             public NinteiShinseiTodokedesha(): UZA.Panel {
@@ -45,8 +53,8 @@ module DBZ {
                 return new UZA.ButtonDialog(this.convFiledName("btnAtenaKensaku"));
             }
 
-            public btnZenkaiFukusha(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnZenkaiFukusha"));
+            public btnZenkaiFukusha(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnZenkaiFukusha"));
             }
 
             public txtJigyoshaCode(): UZA.TextBox {
@@ -73,8 +81,12 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtKanaShimei"));
             }
 
-            public txtHonninKankeisei(): UZA.TextBoxTsuzukigaraCode {
-                return new UZA.TextBoxTsuzukigaraCode(this.convFiledName("txtHonninKankeisei"));
+            public txtHonninKankeisei(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtHonninKankeisei"));
+            }
+
+            public lblHonninKankeiseiMei(): UZA.Label {
+                return new UZA.Label(this.convFiledName("lblHonninKankeiseiMei"));
             }
 
             public txtYubinNo(): UZA.TextBoxYubinNo {

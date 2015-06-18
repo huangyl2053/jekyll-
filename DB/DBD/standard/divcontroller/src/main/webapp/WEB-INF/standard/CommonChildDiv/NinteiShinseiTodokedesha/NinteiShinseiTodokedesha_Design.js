@@ -1,9 +1,16 @@
-var DBZ;
-(function (DBZ) {
+var DBD;
+(function (DBD) {
     (function (NinteiShinseiTodokedesha) {
         var Events = (function () {
             function Events() {
             }
+            Events.onChanged_ddlTodokedeDaikoKubun = function () {
+                return "onChanged_ddlTodokedeDaikoKubun";
+            };
+
+            Events.onClick_btnZenkaiFukusha = function () {
+                return "onClick_btnZenkaiFukusha";
+            };
             return Events;
         })();
         NinteiShinseiTodokedesha.Events = Events;
@@ -17,11 +24,11 @@ var DBZ;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBZ.NinteiShinseiTodokedesha.Controls.myType();
+                return this._myName + "_" + DBD.NinteiShinseiTodokedesha.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBZ.NinteiShinseiTodokedesha.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBD.NinteiShinseiTodokedesha.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.NinteiShinseiTodokedesha = function () {
@@ -41,7 +48,7 @@ var DBZ;
             };
 
             Controls.prototype.btnZenkaiFukusha = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnZenkaiFukusha"));
+                return new UZA.Button(this.convFiledName("btnZenkaiFukusha"));
             };
 
             Controls.prototype.txtJigyoshaCode = function () {
@@ -69,7 +76,11 @@ var DBZ;
             };
 
             Controls.prototype.txtHonninKankeisei = function () {
-                return new UZA.TextBoxTsuzukigaraCode(this.convFiledName("txtHonninKankeisei"));
+                return new UZA.TextBoxCode(this.convFiledName("txtHonninKankeisei"));
+            };
+
+            Controls.prototype.lblHonninKankeiseiMei = function () {
+                return new UZA.Label(this.convFiledName("lblHonninKankeiseiMei"));
             };
 
             Controls.prototype.txtYubinNo = function () {
@@ -86,6 +97,6 @@ var DBZ;
             return Controls;
         })();
         NinteiShinseiTodokedesha.Controls = Controls;
-    })(DBZ.NinteiShinseiTodokedesha || (DBZ.NinteiShinseiTodokedesha = {}));
-    var NinteiShinseiTodokedesha = DBZ.NinteiShinseiTodokedesha;
-})(DBZ || (DBZ = {}));
+    })(DBD.NinteiShinseiTodokedesha || (DBD.NinteiShinseiTodokedesha = {}));
+    var NinteiShinseiTodokedesha = DBD.NinteiShinseiTodokedesha;
+})(DBD || (DBD = {}));

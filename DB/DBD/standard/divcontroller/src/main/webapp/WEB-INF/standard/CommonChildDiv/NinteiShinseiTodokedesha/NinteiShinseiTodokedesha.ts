@@ -1,5 +1,5 @@
 /// <reference path='NinteiShinseiTodokedesha_Design.ts' />
-module DBZ {
+module DBD {
     export module NinteiShinseiTodokedesha {
         export class ModeController {
             private controls: Controls;
@@ -85,7 +85,7 @@ module DBZ {
     }
 }
 
-module DBZ
+module DBD
 {
     export module NinteiShinseiTodokedesha
     {
