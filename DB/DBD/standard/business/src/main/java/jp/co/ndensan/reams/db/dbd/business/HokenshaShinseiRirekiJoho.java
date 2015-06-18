@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8223 朴義一
  */
-public class HokenshaShinseiRirekiJoho implements IShinseiRirekiJoho {
+public class HokenshaShinseiRirekiJoho implements Serializable, IShinseiRirekiJoho {
 
     private DbT4121ShinseiRirekiJohoEntity entity;
 
@@ -39,6 +39,7 @@ public class HokenshaShinseiRirekiJoho implements IShinseiRirekiJoho {
      *
      * @return DbT4121ShinseiRirekiJohoEntity
      */
+    @Override
     public DbT4121ShinseiRirekiJohoEntity getEntity() {
         return entity;
     }
@@ -48,6 +49,7 @@ public class HokenshaShinseiRirekiJoho implements IShinseiRirekiJoho {
      *
      * @return 申請管理番号
      */
+    @Override
     public ShinseishoKanriNo get申請管理番号() {
         return entity.getShinseishoKanriNo();
     }
@@ -57,8 +59,19 @@ public class HokenshaShinseiRirekiJoho implements IShinseiRirekiJoho {
      *
      * @return 前回申請管理番号
      */
+    @Override
     public ShinseishoKanriNo get前回申請管理番号() {
         return entity.getZenkaiShinseishoKanriNo();
+    }
+
+    /**
+     * 状態を設定します。
+     *
+     * @param entityDataState EntityDataState
+     */
+    @Override
+    public void setState(EntityDataState entityDataState) {
+        entity.setState(entityDataState);
     }
 
     /**
@@ -66,6 +79,7 @@ public class HokenshaShinseiRirekiJoho implements IShinseiRirekiJoho {
      *
      * @param deleteFlag deleteFlag
      */
+    @Override
     public void setDeletedState(boolean deleteFlag) {
         if (deleteFlag) {
             entity.setState(EntityDataState.Deleted);
@@ -79,6 +93,7 @@ public class HokenshaShinseiRirekiJoho implements IShinseiRirekiJoho {
      *
      * @return EntityDataState
      */
+    @Override
     public EntityDataState getState() {
         return entity.getState();
     }
@@ -101,6 +116,7 @@ public class HokenshaShinseiRirekiJoho implements IShinseiRirekiJoho {
      *
      * @return ビルダー
      */
+    @Override
     public Builder createBuilderForEdit() {
         return new Builder(this);
     }
@@ -117,7 +133,7 @@ public class HokenshaShinseiRirekiJoho implements IShinseiRirekiJoho {
     /**
      * {@link HokenshaShinseiRirekiJoho}を生成するためのビルダーです。
      */
-    public static final class Builder {
+    public static final class Builder extends IShinseiRirekiJoho.Builder {
 
         private final DbT4121ShinseiRirekiJohoEntity entity;
 
@@ -170,6 +186,7 @@ public class HokenshaShinseiRirekiJoho implements IShinseiRirekiJoho {
          * @param shinseishoKanriNo 申請書管理番号
          * @return builder
          */
+        @Override
         public Builder setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
             Objects.requireNonNull(shinseishoKanriNo);
             this.entity.setShinseishoKanriNo(shinseishoKanriNo);
@@ -182,6 +199,7 @@ public class HokenshaShinseiRirekiJoho implements IShinseiRirekiJoho {
          * @param zenkaiShinseishoKanriNo 前回申請書管理番号
          * @return builder
          */
+        @Override
         public Builder setZenkaiShinseishoKanriNo(ShinseishoKanriNo zenkaiShinseishoKanriNo) {
             Objects.requireNonNull(zenkaiShinseishoKanriNo);
             this.entity.setZenkaiShinseishoKanriNo(zenkaiShinseishoKanriNo);
@@ -193,6 +211,7 @@ public class HokenshaShinseiRirekiJoho implements IShinseiRirekiJoho {
          *
          * @return {@link HokenshaShinseiRirekiJoho}
          */
+        @Override
         public HokenshaShinseiRirekiJoho build() {
             return new HokenshaShinseiRirekiJoho(this);
         }

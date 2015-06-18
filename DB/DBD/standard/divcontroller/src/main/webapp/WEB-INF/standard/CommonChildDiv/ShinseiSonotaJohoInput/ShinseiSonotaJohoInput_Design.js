@@ -1,5 +1,5 @@
-var DBZ;
-(function (DBZ) {
+var DBD;
+(function (DBD) {
     (function (ShinseiSonotaJohoInput) {
         var Events = (function () {
             function Events() {
@@ -17,11 +17,11 @@ var DBZ;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBZ.ShinseiSonotaJohoInput.Controls.myType();
+                return this._myName + "_" + DBD.ShinseiSonotaJohoInput.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBZ.ShinseiSonotaJohoInput.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBD.ShinseiSonotaJohoInput.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.ShinseiSonotaJohoInput = function () {
@@ -41,19 +41,19 @@ var DBZ;
             };
 
             Controls.prototype.txtSoshitsuDay = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtSoshitsuDay"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSoshitsuDay"));
             };
 
             Controls.prototype.txtTorikeshiDay = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtTorikeshiDay"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTorikeshiDay"));
             };
 
             Controls.prototype.txtToshoNinteiKikanFrom = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtToshoNinteiKikanFrom"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtToshoNinteiKikanFrom"));
             };
 
             Controls.prototype.txtToshoNinteiKikanTo = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtToshoNinteiKikanTo"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtToshoNinteiKikanTo"));
             };
 
             Controls.prototype.lblJukyuShikakuShomeisho = function () {
@@ -61,15 +61,15 @@ var DBZ;
             };
 
             Controls.prototype.txtJukyuShikakuHakkoDay1 = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtJukyuShikakuHakkoDay1"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtJukyuShikakuHakkoDay1"));
             };
 
             Controls.prototype.txtJukyuShikakuHakkoDay2 = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtJukyuShikakuHakkoDay2"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtJukyuShikakuHakkoDay2"));
             };
             return Controls;
         })();
         ShinseiSonotaJohoInput.Controls = Controls;
-    })(DBZ.ShinseiSonotaJohoInput || (DBZ.ShinseiSonotaJohoInput = {}));
-    var ShinseiSonotaJohoInput = DBZ.ShinseiSonotaJohoInput;
-})(DBZ || (DBZ = {}));
+    })(DBD.ShinseiSonotaJohoInput || (DBD.ShinseiSonotaJohoInput = {}));
+    var ShinseiSonotaJohoInput = DBD.ShinseiSonotaJohoInput;
+})(DBD || (DBD = {}));

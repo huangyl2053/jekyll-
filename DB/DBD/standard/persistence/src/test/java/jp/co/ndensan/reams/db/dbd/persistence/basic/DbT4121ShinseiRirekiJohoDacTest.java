@@ -5,7 +5,6 @@
 package jp.co.ndensan.reams.db.dbd.persistence.basic;
 
 import java.util.Collections;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4121ShinseiRirekiJohoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4121ShinseiRirekiJohoEntityGenerator.*;

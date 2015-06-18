@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster.shichosonShokibetsuID;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbz.entity.relate.IKoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -25,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  * @author LDNS 宋文娟
  * @author n8223 朴義一
  */
-public class DbT7051KoseiShichosonMasterDac implements IModifiable<DbT7051KoseiShichosonMasterEntity> {
+public class DbT7051KoseiShichosonMasterDac implements IModifiable<IKoseiShichosonMasterEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -73,7 +74,7 @@ public class DbT7051KoseiShichosonMasterDac implements IModifiable<DbT7051KoseiS
      */
     @Transaction
     @Override
-    public int insert(DbT7051KoseiShichosonMasterEntity entity) {
+    public int insert(IKoseiShichosonMasterEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(entity).execute();
     }
@@ -86,7 +87,7 @@ public class DbT7051KoseiShichosonMasterDac implements IModifiable<DbT7051KoseiS
      */
     @Transaction
     @Override
-    public int update(DbT7051KoseiShichosonMasterEntity entity) {
+    public int update(IKoseiShichosonMasterEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.update(entity).execute();
     }
@@ -99,7 +100,7 @@ public class DbT7051KoseiShichosonMasterDac implements IModifiable<DbT7051KoseiS
      */
     @Transaction
     @Override
-    public int delete(DbT7051KoseiShichosonMasterEntity entity) {
+    public int delete(IKoseiShichosonMasterEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
     }

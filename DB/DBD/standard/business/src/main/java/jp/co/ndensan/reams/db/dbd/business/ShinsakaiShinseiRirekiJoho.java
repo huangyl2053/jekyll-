@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8223 朴義一
  */
-public class ShinsakaiShinseiRirekiJoho implements IShinseiRirekiJoho {
+public class ShinsakaiShinseiRirekiJoho implements Serializable, IShinseiRirekiJoho {
 
     private DbT5121ShinseiRirekiJohoEntity entity;
 
@@ -39,6 +39,7 @@ public class ShinsakaiShinseiRirekiJoho implements IShinseiRirekiJoho {
      *
      * @return DbT5121ShinseiRirekiJohoEntity
      */
+    @Override
     public DbT5121ShinseiRirekiJohoEntity getEntity() {
         return entity;
     }
@@ -61,6 +62,15 @@ public class ShinsakaiShinseiRirekiJoho implements IShinseiRirekiJoho {
     @Override
     public ShinseishoKanriNo get前回申請管理番号() {
         return entity.getZenkaiShinseishoKanriNo();
+    }
+
+    /**
+     * 状態を設定します。
+     *
+     * @param entityDataState EntityDataState
+     */
+    public void setState(EntityDataState entityDataState) {
+        entity.setState(entityDataState);
     }
 
     /**
@@ -119,7 +129,7 @@ public class ShinsakaiShinseiRirekiJoho implements IShinseiRirekiJoho {
     /**
      * {@link ShinsakaiShinseiRirekiJoho}を生成するためのビルダーです。
      */
-    public static final class Builder {
+    public static final class Builder extends IShinseiRirekiJoho.Builder {
 
         private DbT5121ShinseiRirekiJohoEntity entity;
 
@@ -172,6 +182,7 @@ public class ShinsakaiShinseiRirekiJoho implements IShinseiRirekiJoho {
          * @param shinseishoKanriNo 申請書管理番号
          * @return builder
          */
+        @Override
         public Builder setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
             Objects.requireNonNull(shinseishoKanriNo);
             this.entity.setShinseishoKanriNo(shinseishoKanriNo);
@@ -184,6 +195,7 @@ public class ShinsakaiShinseiRirekiJoho implements IShinseiRirekiJoho {
          * @param zenkaiShinseishoKanriNo 前回申請書管理番号
          * @return builder
          */
+        @Override
         public Builder setZenkaiShinseishoKanriNo(ShinseishoKanriNo zenkaiShinseishoKanriNo) {
             Objects.requireNonNull(zenkaiShinseishoKanriNo);
             this.entity.setZenkaiShinseishoKanriNo(zenkaiShinseishoKanriNo);
@@ -195,6 +207,7 @@ public class ShinsakaiShinseiRirekiJoho implements IShinseiRirekiJoho {
          *
          * @return {@link ShinsakaiShinseiRirekiJoho}
          */
+        @Override
         public ShinsakaiShinseiRirekiJoho build() {
             return new ShinsakaiShinseiRirekiJoho(this);
         }

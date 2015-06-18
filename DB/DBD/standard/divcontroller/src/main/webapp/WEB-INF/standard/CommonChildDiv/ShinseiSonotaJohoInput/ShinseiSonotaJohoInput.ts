@@ -1,5 +1,5 @@
 /// <reference path='ShinseiSonotaJohoInput_Design.ts' />
-module DBZ
+module DBD
 {
     export module ShinseiSonotaJohoInput
     {
@@ -191,7 +191,7 @@ module DBZ
     }
 }
 
-module DBZ
+module DBD
 {
     export module ShinseiSonotaJohoInput
     {

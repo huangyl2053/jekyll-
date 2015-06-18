@@ -55,15 +55,14 @@ public class HihokenshashoPrinter {
      * @param position 被保険者証印字位置
      * @return 帳票ソースデータ
      */
-    public SourceDataCollection print(HihokenshaNo hihokenshaNo, HihokenshaShikakuHakkoModel shikakuHakkoModel,
-            HihokenshashoPrintPosition position) {
-        switch (printConfig.get証表示タイプ()) {
-            case A4横:
-                return a4Printer.print(hihokenshaNo, shikakuHakkoModel, position);
-            case B4横:
-            default:
-                return b4Printer.print(hihokenshaNo, shikakuHakkoModel, position);
-        }
-    }
-
+//    public SourceDataCollection print(HihokenshaNo hihokenshaNo, HihokenshaShikakuHakkoModel shikakuHakkoModel,
+//            HihokenshashoPrintPosition position) {
+//        switch (printConfig.get証表示タイプ()) {
+//            case A4横:
+//                return a4Printer.print(hihokenshaNo, shikakuHakkoModel, position);
+//            case B4横:
+//            default:
+//                return b4Printer.print(hihokenshaNo, shikakuHakkoModel, position);
+//        }
+//    }
 }

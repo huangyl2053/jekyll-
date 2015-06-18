@@ -19,14 +19,13 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.SeibetsuCode;
 
 /**
  * 要介護認定申請情報テーブルのエンティティクラスです。
  */
-public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101NinteiShinseiJohoEntity> implements IDbAccessable {
+public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101NinteiShinseiJohoEntity> implements IDbAccessable, INinteiShinseiJohoEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
@@ -91,7 +90,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     private Code minashiCode;
     private boolean enkitsuchiNashiDoiFlag;
     private boolean shisetsuNyushoFlag;
-    private JigyoshaNo nyushoShisetsuCode;
+    private RString nyushoShisetsuCode;
     private boolean kateiHomonFlag;
     private YubinNo homonChosasakiYubinNo;
     private AtenaJusho homonChosasakiJusho;
@@ -1134,19 +1133,23 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 入所施設コードのgetメソッドです。
+     * <br/>
+     * <br/>介護事業者の事業者番号または、医療機関コード
      *
      * @return 入所施設コード
      */
-    public JigyoshaNo getNyushoShisetsuCode() {
+    public RString getNyushoShisetsuCode() {
         return nyushoShisetsuCode;
     }
 
     /**
      * 入所施設コードのsetメソッドです。
+     * <br/>
+     * <br/>介護事業者の事業者番号または、医療機関コード
      *
      * @param nyushoShisetsuCode 入所施設コード
      */
-    public void setNyushoShisetsuCode(JigyoshaNo nyushoShisetsuCode) {
+    public void setNyushoShisetsuCode(RString nyushoShisetsuCode) {
         this.nyushoShisetsuCode = nyushoShisetsuCode;
     }
 

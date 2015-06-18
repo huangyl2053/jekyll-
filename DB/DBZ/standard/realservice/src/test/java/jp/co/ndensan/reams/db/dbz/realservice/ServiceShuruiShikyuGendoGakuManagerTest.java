@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.realservice;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.IYokaigoJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubun09A;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.model.ServiceShuruiShikyuGendoGakuModel;
@@ -61,7 +61,7 @@ public class ServiceShuruiShikyuGendoGakuManagerTest {
 
             Optional<ServiceShuruiShikyuGendoGakuModel> サービス種類支給限度額 = sut.getサービス種類支給限度額(
                     DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_サービス種類コード,
-                    YokaigoJotaiKubun09.toValue(DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分),
+                    YokaigoJotaiKubun09A.toValue(DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分),
                     DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_適用開始年月,
                     DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_処理日時);
 
@@ -103,7 +103,7 @@ public class ServiceShuruiShikyuGendoGakuManagerTest {
             when(dac.selectサービス種類支給限度額リスト(any(IYokaigoJotaiKubun.class), any(FlexibleDate.class))).thenReturn(list);
 
             IItemList<ServiceShuruiShikyuGendoGakuModel> サービス種類支給限度額リスト = sut.getサービス種類支給限度額一覧(
-                    YokaigoJotaiKubun09.toValue(DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分),
+                    YokaigoJotaiKubun09A.toValue(DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分),
                     new FlexibleDate(new RString("20140831")));
             assertThat(サービス種類支給限度額リスト.size(), is(2));
             // 任意の項目が一致するテストケースを記述してください。
@@ -125,7 +125,7 @@ public class ServiceShuruiShikyuGendoGakuManagerTest {
             when(dac.selectサービス種類支給限度額リスト(any(IYokaigoJotaiKubun.class))).thenReturn(list);
 
             IItemList<ServiceShuruiShikyuGendoGakuModel> サービス種類支給限度額リスト = sut.getサービス種類支給限度額一覧(
-                    YokaigoJotaiKubun09.toValue(DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分));
+                    YokaigoJotaiKubun09A.toValue(DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_要介護状態区分));
             assertThat(サービス種類支給限度額リスト.size(), is(2));
             // 任意の項目が一致するテストケースを記述してください。
             assertThat(サービス種類支給限度額リスト.toList().get(0).get支給限度単位数(), is(DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.DEFAULT_支給限度単位数));
