@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.entity.relate.IKoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -52,6 +53,29 @@ public class KaigoiKoseiShichosonMasterManager extends KoseiShichosonMasterManag
                         return new KaigoKoseiShichosonMaster(t);
                     }
                 });
+    }
+
+    /**
+     * 構成市町村マスタ情報を登録します。
+     *
+     * @param 構成市町村情報 構成市町村情報
+     * @return 登録件数
+     */
+    @Override
+    public int save構成市町村(IKoseiShichosonMaster 構成市町村情報) {
+
+        IKoseiShichosonMasterEntity entity = 構成市町村情報.getEntity();
+
+        switch (構成市町村情報.getState()) {
+            case Added:
+                return dac.insert(entity);
+            case Modified:
+                return dac.update(entity);
+            case Deleted:
+                return dac.delete(entity);
+            default:
+                return 0;
+        }
     }
 
 }

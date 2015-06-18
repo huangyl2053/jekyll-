@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5051KoseiShichosonMaster;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT5051KoseiShichosonMaster.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.entity.relate.IKoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -24,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8223 朴義一
  */
-public class DbT5051KoseiShichosonMasterDac implements IModifiable<DbT5051KoseiShichosonMasterEntity> {
+public class DbT5051KoseiShichosonMasterDac implements IModifiable<IKoseiShichosonMasterEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -66,21 +67,21 @@ public class DbT5051KoseiShichosonMasterDac implements IModifiable<DbT5051KoseiS
 
     @Transaction
     @Override
-    public int insert(DbT5051KoseiShichosonMasterEntity entity) {
+    public int insert(IKoseiShichosonMasterEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.insert(entity).execute();
     }
 
     @Transaction
     @Override
-    public int update(DbT5051KoseiShichosonMasterEntity entity) {
+    public int update(IKoseiShichosonMasterEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.update(entity).execute();
     }
 
     @Transaction
     @Override
-    public int delete(DbT5051KoseiShichosonMasterEntity entity) {
+    public int delete(IKoseiShichosonMasterEntity entity) {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.delete(entity).execute();
     }

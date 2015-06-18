@@ -23,4 +23,12 @@ public interface IShinseiRirekiManager {
      * @return 申請履歴情報
      */
     Optional<IShinseiRirekiJoho> find申請履歴情報(ShinseishoKanriNo 申請書管理番号);
+
+    /**
+     * 申請履歴情報を更新します。
+     *
+     * @param 申請履歴情報 IShinseiRirekiJoho
+     * @return 申請履歴情報
+     */
+    int save申請履歴(IShinseiRirekiJoho 申請履歴情報);
 }

@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4001JukyushaDaicho;
 import static jp.co.ndensan.reams.db.dbd.entity.basic.DbT4001JukyushaDaicho.*;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -89,6 +90,27 @@ public class DbT4001JukyushaDaichoDac implements IModifiable<DbT4001JukyushaDaic
                 where(eq(DbT4001JukyushaDaicho.hihokenshaNo, 被保険者番号)).
                 order(by(DbT4001JukyushaDaicho.shinseishoKanriNo, Order.DESC)).
                 toList(DbT4001JukyushaDaichoEntity.class);
+
+    }
+
+    /**
+     * 申請書管理番号に合致する受給者台帳の履歴を返します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return JukyushaDaichoModel
+     */
+    @Transaction
+    public DbT4001JukyushaDaichoEntity select受給者台帳履歴By申請書管理番号(
+            ShinseishoKanriNo 申請書管理番号) {
+
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(eq(DbT4001JukyushaDaicho.shinseishoKanriNo, 申請書管理番号),
+                                eq(DbT4001JukyushaDaicho.chokkinFlag, true))).
+                toObject(DbT4001JukyushaDaichoEntity.class);
 
     }
 

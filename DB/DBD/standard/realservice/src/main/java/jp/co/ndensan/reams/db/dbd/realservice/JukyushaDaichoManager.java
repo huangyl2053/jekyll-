@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -94,6 +95,19 @@ public class JukyushaDaichoManager {
             jukyushaDaichoList.add(new JukyushaDaicho(entity));
         }
         return ItemList.of(jukyushaDaichoList);
+    }
+
+    /**
+     * 申請書管理番号に合致する受給者台帳の一覧を返します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return Optional<JukyushaDaicho>
+     */
+    @Transaction
+    public Optional<JukyushaDaicho> get直近受給者台帳(ShinseishoKanriNo 申請書管理番号) {
+
+        return Optional.ofNullable(new JukyushaDaicho(dac.select受給者台帳履歴By申請書管理番号(申請書管理番号)));
+
     }
 
     /**
