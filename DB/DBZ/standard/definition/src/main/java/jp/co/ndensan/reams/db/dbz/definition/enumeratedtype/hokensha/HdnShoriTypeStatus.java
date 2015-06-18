@@ -12,37 +12,42 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErro
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 保険者の構成です。
+ * 処理タイプです。
  *
- * @author N3327 三浦 凌
  * @author n8223 朴義一
  */
-public enum HokenshaKosei {
+public enum HdnShoriTypeStatus {
 
     /**
-     * 単一市町村の保険者であることを表します。<br/>
+     * 処理タイプモードのNomalAddModeであることを表します。<br/>
      * コード:"1"
      */
-    単一市町村("1"),
+    NomalAddMode("1"),
     /**
-     * 広域保険者であることを表します。<br/>
+     * 処理タイプモードのNomalUpdateModeであることを表します。<br/>
      * コード:"2"
      */
-    広域市町村("2"),
+    NomalUpdateMode("2"),
      /**
-      *広域保険者あることを表します。<br/>
+      * 処理タイプモードのSeihoAddModeであることを表します。<br/>
      * コード:"3"
      */
-    広域保険者("3"),
+    SeihoAddMode("3"),
      /**
-      * 広域審査会であることを表します。<br/>
+      * 処理タイプモードのSeihoUpdateModeであることを表します。<br/>
      * コード:"4"
      */
-    広域審査会("4");
+    SeihoUpdateMode("4"),
+         /**
+      * 処理タイプモードのShokaiModeであることを表します。<br/>
+     * コード:"4"
+     */
+    ShokaiMode("5");
+    
     
     private final RString theCode;
 
-    private HokenshaKosei(String code) {
+    private HdnShoriTypeStatus(String code) {
         this.theCode = new RString(code);
     }
 
@@ -62,28 +67,28 @@ public enum HokenshaKosei {
      * @return コードに対応する HokenshaKosei
      * @throws IllegalArgumentException コードに対応する HokenshaKosei が無い時
      */
-    public static HokenshaKosei toValue(RString code) throws IllegalArgumentException {
-        HokenshaKosei value = CodeToValue.get(code);
+    public static HdnShoriTypeStatus toValue(RString code) throws IllegalArgumentException {
+        HdnShoriTypeStatus value = CodeToValue.get(code);
         if (value != null) {
             return value;
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage(HokenshaKosei.class.getSimpleName()));
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage(HdnShoriTypeStatus.class.getSimpleName()));
     }
 
     //<editor-fold defaultstate="collapsed" desc="CodeToValue">
     private static final class CodeToValue {
 
-        private static final Map<RString, HokenshaKosei> DICTHIONARY;
+        private static final Map<RString, HdnShoriTypeStatus> DICTHIONARY;
 
         static {
-            Map<RString, HokenshaKosei> map = new HashMap<>();
-            for (HokenshaKosei value : values()) {
+            Map<RString, HdnShoriTypeStatus> map = new HashMap<>();
+            for (HdnShoriTypeStatus value : values()) {
                 map.put(value.code(), value);
             }
             DICTHIONARY = Collections.unmodifiableMap(map);
         }
 
-        static HokenshaKosei get(RString code) {
+        static HdnShoriTypeStatus get(RString code) {
             return DICTHIONARY.get(code);
         }
     }
