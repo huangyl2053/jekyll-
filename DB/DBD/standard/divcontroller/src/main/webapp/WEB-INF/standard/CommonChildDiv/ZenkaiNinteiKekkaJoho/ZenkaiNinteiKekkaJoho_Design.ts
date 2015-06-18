@@ -2,11 +2,15 @@
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
 
-module DBZ {
+module DBD {
 
      export module ZenkaiNinteiKekkaJoho {
 
         export class Events {
+
+            public static btn_ZenkaiShosai(): string {
+                return "btn_ZenkaiShosai";
+            }
 
         }
 
@@ -22,11 +26,11 @@ module DBZ {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBZ.ZenkaiNinteiKekkaJoho.Controls.myType();
+                return this._myName + "_" + DBD.ZenkaiNinteiKekkaJoho.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBZ.ZenkaiNinteiKekkaJoho.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBD.ZenkaiNinteiKekkaJoho.Controls.myType() + "_" + fieldName;
             }
 
             public ZenkaiNinteiKekkaJoho(): UZA.Panel {
@@ -37,20 +41,20 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtYokaigodo"));
             }
 
-            public txtNinteiDay(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiDay"));
+            public txtNinteiDay(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiDay"));
             }
 
-            public txtYukoKikanFrom(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtYukoKikanFrom"));
+            public txtYukoKikanFrom(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoKikanFrom"));
             }
 
-            public txtYukoKikanTo(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtYukoKikanTo"));
+            public btnZenkaiShosai(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnZenkaiShosai"));
             }
 
-            public btnZenkaiShosaiGuide(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnZenkaiShosaiGuide"));
+            public txtYukoKikanTo(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoKikanTo"));
             }
 
         }

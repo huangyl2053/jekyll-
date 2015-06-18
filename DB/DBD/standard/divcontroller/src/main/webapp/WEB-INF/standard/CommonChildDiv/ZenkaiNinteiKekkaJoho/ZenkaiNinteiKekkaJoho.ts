@@ -1,5 +1,5 @@
 /// <reference path='ZenkaiNinteiKekkaJoho_Design.ts' />
-module DBZ
+module DBD
 {
     export module ZenkaiNinteiKekkaJoho
     {
@@ -38,11 +38,11 @@ module DBZ
                 }
                 
                 public ShokaiButtonMode():void {
-                    this.controls.btnZenkaiShosaiGuide().displayNone = false;
+                    this.controls.btnZenkaiShosai().displayNone = false;
                 }
 
                 public ShokaiButtonNoneMode(): void {
-                    this.controls.btnZenkaiShosaiGuide().displayNone = true;
+                    this.controls.btnZenkaiShosai().displayNone = true;
                 }
             }
 
@@ -65,7 +65,7 @@ module DBZ
     }
 }
 
-module DBZ
+module DBD
 {
     export module ZenkaiNinteiKekkaJoho
     {
