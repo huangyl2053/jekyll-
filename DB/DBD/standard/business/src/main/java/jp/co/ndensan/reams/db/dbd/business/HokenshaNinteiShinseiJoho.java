@@ -54,6 +54,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
      *
      * @return DbT4101NinteiShinseiJohoEntity
      */
+    @Override
     public DbT4101NinteiShinseiJohoEntity getEntity() {
         return entity;
     }
@@ -855,6 +856,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
      *
      * @return EntityDataState
      */
+    @Override
     public EntityDataState getState() {
         return entity.getState();
     }
@@ -868,6 +870,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
      *
      * @return ビルダー
      */
+    @Override
     public Builder createBuilderForEdit() {
         return new Builder(this);
     }
@@ -884,7 +887,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
     /**
      * {@link HokenshaNinteiShinseiJoho}を生成するためのビルダーです。
      */
-    public static final class Builder {
+    public static final class Builder extends INinteiShinseiJoho.Builder {
 
         private DbT4101NinteiShinseiJohoEntity entity;
 
@@ -937,6 +940,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param shinseishoKanriNo 申請書管理番号
          * @return builder
          */
+        @Override
         public Builder setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
             Objects.requireNonNull(shinseishoKanriNo);
             this.entity.setShinseishoKanriNo(shinseishoKanriNo);
@@ -949,6 +953,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param koroshoIfShikibetsuCode 厚労省IF識別コード
          * @return builder
          */
+        @Override
         public Builder setKoroshoIfShikibetsuCode(Code koroshoIfShikibetsuCode) {
             Objects.requireNonNull(koroshoIfShikibetsuCode);
             this.entity.setKoroshoIfShikibetsuCode(koroshoIfShikibetsuCode);
@@ -961,6 +966,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param shoKisaiHokenshaNo 証記載保険者番号
          * @return builder
          */
+        @Override
         public Builder setShoKisaiHokenshaNo(RString shoKisaiHokenshaNo) {
             Objects.requireNonNull(shoKisaiHokenshaNo);
             this.entity.setShoKisaiHokenshaNo(shoKisaiHokenshaNo);
@@ -973,6 +979,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param shinseiNendo 申請年度
          * @return builder
          */
+        @Override
         public Builder setShinseiNendo(FlexibleYear shinseiNendo) {
             Objects.requireNonNull(shinseiNendo);
             this.entity.setShinseiNendo(shinseiNendo);
@@ -985,6 +992,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param hihokenshaNo 被保険者番号
          * @return builder
          */
+        @Override
         public Builder setHihokenshaNo(RString hihokenshaNo) {
             Objects.requireNonNull(hihokenshaNo);
             this.entity.setHihokenshaNo(hihokenshaNo);
@@ -997,6 +1005,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param ninteiShinseiYMD 認定申請年月日
          * @return builder
          */
+        @Override
         public Builder setNinteiShinseiYMD(FlexibleDate ninteiShinseiYMD) {
             Objects.requireNonNull(ninteiShinseiYMD);
             this.entity.setNinteiShinseiYMD(ninteiShinseiYMD);
@@ -1009,6 +1018,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param ninteiShinseiEdabanCode 認定申請枝番コード
          * @return builder
          */
+        @Override
         public Builder setNinteiShinseiEdabanCode(EdabanCode ninteiShinseiEdabanCode) {
             Objects.requireNonNull(ninteiShinseiEdabanCode);
             this.entity.setNinteiShinseiEdabanCode(ninteiShinseiEdabanCode);
@@ -1021,6 +1031,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param ninteiHoreiKubunCode 認定申請区分（法令）コード
          * @return builder
          */
+        @Override
         public Builder setNinteiShinseiHoreiKubunCode(Code ninteiHoreiKubunCode) {
             Objects.requireNonNull(ninteiHoreiKubunCode);
             this.entity.setNinteiShinseiHoreiKubunCode(ninteiHoreiKubunCode);
@@ -1033,6 +1044,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param ninteiShinseijiKubunCode 認定申請区分（申請時）コード
          * @return builder
          */
+        @Override
         public Builder setNinteiShinseiShinseijiKubunCode(Code ninteiShinseijiKubunCode) {
             Objects.requireNonNull(ninteiShinseijiKubunCode);
             this.entity.setNinteiShinseiShinseijiKubunCode(ninteiShinseijiKubunCode);
@@ -1045,6 +1057,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param torisageKubunCode 取下区分コード
          * @return builder
          */
+        @Override
         public Builder setTorisageKubunCode(Code torisageKubunCode) {
             Objects.requireNonNull(torisageKubunCode);
             this.entity.setTorisageKubunCode(torisageKubunCode);
@@ -1057,6 +1070,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param hihokenshaKubunCode 被保険者区分コード
          * @return builder
          */
+        @Override
         public Builder setHihokenshaKubunCode(RString hihokenshaKubunCode) {
             Objects.requireNonNull(hihokenshaKubunCode);
             this.entity.setHihokenshaKubunCode(hihokenshaKubunCode);
@@ -1069,6 +1083,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param seinengappiYMD 生年月日
          * @return builder
          */
+        @Override
         public Builder setSeinengappiYMD(FlexibleDate seinengappiYMD) {
             Objects.requireNonNull(seinengappiYMD);
             this.entity.setSeinengappiYMD(seinengappiYMD);
@@ -1081,6 +1096,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param age 年齢
          * @return builder
          */
+        @Override
         public Builder setAge(int age) {
             this.entity.setAge(age);
             return this;
@@ -1092,6 +1108,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param seibetsu 性別
          * @return builder
          */
+        @Override
         public Builder setSeibetsu(SeibetsuCode seibetsu) {
             Objects.requireNonNull(seibetsu);
             this.entity.setSeibetsu(seibetsu);
@@ -1104,6 +1121,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param hihokenshaKana 被保険者氏名カナ
          * @return builder
          */
+        @Override
         public Builder setHihokenshaKana(AtenaKanaMeisho hihokenshaKana) {
             Objects.requireNonNull(hihokenshaKana);
             this.entity.setHihokenshaKana(hihokenshaKana);
@@ -1116,6 +1134,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param hihokenshaName 被保険者氏名
          * @return builder
          */
+        @Override
         public Builder setHihokenshaName(AtenaMeisho hihokenshaName) {
             Objects.requireNonNull(hihokenshaName);
             this.entity.setHihokenshaName(hihokenshaName);
@@ -1128,6 +1147,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param yubinNo 郵便番号
          * @return builder
          */
+        @Override
         public Builder setYubinNo(YubinNo yubinNo) {
             Objects.requireNonNull(yubinNo);
             this.entity.setYubinNo(yubinNo);
@@ -1140,6 +1160,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param jusho 住所
          * @return builder
          */
+        @Override
         public Builder setJusho(AtenaJusho jusho) {
             Objects.requireNonNull(jusho);
             this.entity.setJusho(jusho);
@@ -1152,6 +1173,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param telNo 電話番号
          * @return builder
          */
+        @Override
         public Builder setTelNo(TelNo telNo) {
             Objects.requireNonNull(telNo);
             this.entity.setTelNo(telNo);
@@ -1164,6 +1186,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param shishoCode 支所コード
          * @return builder
          */
+        @Override
         public Builder setShishoCode(RString shishoCode) {
             Objects.requireNonNull(shishoCode);
             this.entity.setShishoCode(shishoCode);
@@ -1176,6 +1199,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param shikibetsuCode 識別コード
          * @return builder
          */
+        @Override
         public Builder setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
             Objects.requireNonNull(shikibetsuCode);
             this.entity.setShikibetsuCode(shikibetsuCode);
@@ -1188,6 +1212,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param chikuCode 地区コード
          * @return builder
          */
+        @Override
         public Builder setChikuCode(ChikuCode chikuCode) {
             Objects.requireNonNull(chikuCode);
             this.entity.setChikuCode(chikuCode);
@@ -1200,6 +1225,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param minashiNigoEtcTaishoFlag みなし２号等対象フラグ
          * @return builder
          */
+        @Override
         public Builder setMinashiNigoEtcTaishoFlag(boolean minashiNigoEtcTaishoFlag) {
             this.entity.setMinashiNigoEtcTaishoFlag(minashiNigoEtcTaishoFlag);
             return this;
@@ -1211,6 +1237,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param koikinaiTenkyoKubun 広域内転居区分
          * @return builder
          */
+        @Override
         public Builder setKoikinaiTenkyoKubun(Code koikinaiTenkyoKubun) {
             Objects.requireNonNull(koikinaiTenkyoKubun);
             this.entity.setKoikinaiTenkyoKubun(koikinaiTenkyoKubun);
@@ -1223,6 +1250,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param ninteiShinseiYukoKubunCode 認定申請有効区分
          * @return builder
          */
+        @Override
         public Builder setNinteiShinseiYukoKubunCode(Code ninteiShinseiYukoKubunCode) {
             Objects.requireNonNull(ninteiShinseiYukoKubunCode);
             this.entity.setNinteiShinseiYukoKubunCode(ninteiShinseiYukoKubunCode);
@@ -1235,6 +1263,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param shienShinseiKubun 要介護申請・要支援申請の区分
          * @return builder
          */
+        @Override
         public Builder setShienShinseiKubun(RString shienShinseiKubun) {
             Objects.requireNonNull(shienShinseiKubun);
             this.entity.setShienShinseiKubun(shienShinseiKubun);
@@ -1247,6 +1276,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param ninteiShinseiRiyu 認定申請理由
          * @return builder
          */
+        @Override
         public Builder setNinteiShinseiRiyu(RString ninteiShinseiRiyu) {
             Objects.requireNonNull(ninteiShinseiRiyu);
             this.entity.setNinteiShinseiRiyu(ninteiShinseiRiyu);
@@ -1259,6 +1289,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param shinseiServiceDeleteRiyu 申請サービス削除の理由
          * @return builder
          */
+        @Override
         public Builder setShinseiServiceDeleteRiyu(RString shinseiServiceDeleteRiyu) {
             Objects.requireNonNull(shinseiServiceDeleteRiyu);
             this.entity.setShinseiServiceDeleteRiyu(shinseiServiceDeleteRiyu);
@@ -1271,6 +1302,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param zenYokaigoKubunCode 前回要介護状態区分コード
          * @return builder
          */
+        @Override
         public Builder setZenYokaigoKubunCode(Code zenYokaigoKubunCode) {
             Objects.requireNonNull(zenYokaigoKubunCode);
             this.entity.setZenYokaigoKubunCode(zenYokaigoKubunCode);
@@ -1283,6 +1315,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param zenkaiNinteiYMD 前回認定年月日
          * @return builder
          */
+        @Override
         public Builder setZenkaiNinteiYMD(FlexibleDate zenkaiNinteiYMD) {
             Objects.requireNonNull(zenkaiNinteiYMD);
             this.entity.setZenkaiNinteiYMD(zenkaiNinteiYMD);
@@ -1295,6 +1328,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param zenkaiYukoKikanStart 前回認定有効期間（開始）
          * @return builder
          */
+        @Override
         public Builder setZenkaiYukoKikanStart(FlexibleDate zenkaiYukoKikanStart) {
             Objects.requireNonNull(zenkaiYukoKikanStart);
             this.entity.setZenkaiYukoKikanStart(zenkaiYukoKikanStart);
@@ -1307,6 +1341,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param zenkaiYukoKikanEnd 前回認定有効期間（終了）
          * @return builder
          */
+        @Override
         public Builder setZenkaiYukoKikanEnd(FlexibleDate zenkaiYukoKikanEnd) {
             Objects.requireNonNull(zenkaiYukoKikanEnd);
             this.entity.setZenkaiYukoKikanEnd(zenkaiYukoKikanEnd);
@@ -1319,6 +1354,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param nigoIryoHokenshaName ２号医療保険者名
          * @return builder
          */
+        @Override
         public Builder setNigoIryoHokenshaName(RString nigoIryoHokenshaName) {
             Objects.requireNonNull(nigoIryoHokenshaName);
             this.entity.setNigoIryoHokenshaName(nigoIryoHokenshaName);
@@ -1331,6 +1367,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param nigoIryoHokenKigoBango ２号医療保険記号番号
          * @return builder
          */
+        @Override
         public Builder setNigoIryoHokenKigoBango(RString nigoIryoHokenKigoBango) {
             Objects.requireNonNull(nigoIryoHokenKigoBango);
             this.entity.setNigoIryoHokenKigoBango(nigoIryoHokenKigoBango);
@@ -1343,6 +1380,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param nigoTokuteiShippeiCode ２号特定疾病コード
          * @return builder
          */
+        @Override
         public Builder setNigoTokuteiShippeiCode(Code nigoTokuteiShippeiCode) {
             Objects.requireNonNull(nigoTokuteiShippeiCode);
             this.entity.setNigoTokuteiShippeiCode(nigoTokuteiShippeiCode);
@@ -1355,6 +1393,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param jidoWariateJogaishaKubun 自動割当除外者区分
          * @return builder
          */
+        @Override
         public Builder setJidoWariateJogaishaKubun(RString jidoWariateJogaishaKubun) {
             Objects.requireNonNull(jidoWariateJogaishaKubun);
             this.entity.setJidoWariateJogaishaKubun(jidoWariateJogaishaKubun);
@@ -1367,6 +1406,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param johoteikyoDoiFlag 情報提供への同意有無
          * @return builder
          */
+        @Override
         public Builder setJohoteikyoDoiFlag(boolean johoteikyoDoiFlag) {
             this.entity.setJohoteikyoDoiFlag(johoteikyoDoiFlag);
             return this;
@@ -1378,6 +1418,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param johoteikyoSiryoOutputYMD 情報提供資料出力年月日
          * @return builder
          */
+        @Override
         public Builder setJohoteikyoSiryoOutputYMD(FlexibleDate johoteikyoSiryoOutputYMD) {
             Objects.requireNonNull(johoteikyoSiryoOutputYMD);
             this.entity.setJohoteikyoSiryoOutputYMD(johoteikyoSiryoOutputYMD);
@@ -1390,6 +1431,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param chosaKubun 調査区分
          * @return builder
          */
+        @Override
         public Builder setChosaKubun(Code chosaKubun) {
             Objects.requireNonNull(chosaKubun);
             this.entity.setChosaKubun(chosaKubun);
@@ -1402,6 +1444,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param ninteichosaItakusakiCode 認定調査委託先コード
          * @return builder
          */
+        @Override
         public Builder setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {
             Objects.requireNonNull(ninteichosaItakusakiCode);
             this.entity.setNinteichosaItakusakiCode(ninteichosaItakusakiCode);
@@ -1414,6 +1457,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param ninteiChousainCode 認定調査員コード
          * @return builder
          */
+        @Override
         public Builder setNinteiChousainCode(RString ninteiChousainCode) {
             Objects.requireNonNull(ninteiChousainCode);
             this.entity.setNinteiChousainCode(ninteiChousainCode);
@@ -1426,6 +1470,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param renrakuJikoToChosain 調査員への連絡事項
          * @return builder
          */
+        @Override
         public Builder setRenrakuJikoToChosain(RString renrakuJikoToChosain) {
             Objects.requireNonNull(renrakuJikoToChosain);
             this.entity.setRenrakuJikoToChosain(renrakuJikoToChosain);
@@ -1438,6 +1483,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param shujiiIryokikanCode 主治医医療機関コード
          * @return builder
          */
+        @Override
         public Builder setShujiiIryokikanCode(RString shujiiIryokikanCode) {
             Objects.requireNonNull(shujiiIryokikanCode);
             this.entity.setShujiiIryokikanCode(shujiiIryokikanCode);
@@ -1450,6 +1496,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param shujiiCode 主治医コード
          * @return builder
          */
+        @Override
         public Builder setShujiiCode(RString shujiiCode) {
             Objects.requireNonNull(shujiiCode);
             this.entity.setShujiiCode(shujiiCode);
@@ -1462,6 +1509,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param shiteiiFlag 指定医フラグ
          * @return builder
          */
+        @Override
         public Builder setShiteiiFlag(boolean shiteiiFlag) {
             this.entity.setShiteiiFlag(shiteiiFlag);
             return this;
@@ -1473,6 +1521,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param ikenshoDataShubetsu 意見書データ種別
          * @return builder
          */
+        @Override
         public Builder setIkenshoDataShubetsu(Code ikenshoDataShubetsu) {
             Objects.requireNonNull(ikenshoDataShubetsu);
             this.entity.setIkenshoDataShubetsu(ikenshoDataShubetsu);
@@ -1485,6 +1534,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param renrakuJikoToShujii 主治医への連絡事項
          * @return builder
          */
+        @Override
         public Builder setRenrakuJikoToShujii(RString renrakuJikoToShujii) {
             Objects.requireNonNull(renrakuJikoToShujii);
             this.entity.setRenrakuJikoToShujii(renrakuJikoToShujii);
@@ -1497,6 +1547,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param minashiCode みなし要介護区分コード
          * @return builder
          */
+        @Override
         public Builder setMinashiCode(Code minashiCode) {
             Objects.requireNonNull(minashiCode);
             this.entity.setMinashiCode(minashiCode);
@@ -1509,6 +1560,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param enkitsuchiNashiDoiFlag 認定延期通知発行しないことに対する同意有無
          * @return builder
          */
+        @Override
         public Builder setEnkitsuchiNashiDoiFlag(boolean enkitsuchiNashiDoiFlag) {
             this.entity.setEnkitsuchiNashiDoiFlag(enkitsuchiNashiDoiFlag);
             return this;
@@ -1520,6 +1572,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param shisetsuNyushoFlag 施設入所の有無
          * @return builder
          */
+        @Override
         public Builder setShisetsuNyushoFlag(boolean shisetsuNyushoFlag) {
             this.entity.setShisetsuNyushoFlag(shisetsuNyushoFlag);
             return this;
@@ -1531,6 +1584,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param nyushoShisetsuCode 入所施設コード
          * @return builder
          */
+        @Override
         public Builder setNyushoShisetsuCode(RString nyushoShisetsuCode) {
             Objects.requireNonNull(nyushoShisetsuCode);
             this.entity.setNyushoShisetsuCode(nyushoShisetsuCode);
@@ -1543,6 +1597,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param kateiHomonFlag 家庭訪問の有無
          * @return builder
          */
+        @Override
         public Builder setKateiHomonFlag(boolean kateiHomonFlag) {
             this.entity.setKateiHomonFlag(kateiHomonFlag);
             return this;
@@ -1554,6 +1609,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param homonChosasakiYubinNo 訪問調査先郵便番号
          * @return builder
          */
+        @Override
         public Builder setHomonChosasakiYubinNo(YubinNo homonChosasakiYubinNo) {
             Objects.requireNonNull(homonChosasakiYubinNo);
             this.entity.setHomonChosasakiYubinNo(homonChosasakiYubinNo);
@@ -1566,6 +1622,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param homonChosasakiJusho 訪問調査先住所
          * @return builder
          */
+        @Override
         public Builder setHomonChosasakiJusho(AtenaJusho homonChosasakiJusho) {
             Objects.requireNonNull(homonChosasakiJusho);
             this.entity.setHomonChosasakiJusho(homonChosasakiJusho);
@@ -1578,6 +1635,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param homonChosasakiName 訪問調査先名称
          * @return builder
          */
+        @Override
         public Builder setHomonChosasakiName(AtenaMeisho homonChosasakiName) {
             Objects.requireNonNull(homonChosasakiName);
             this.entity.setHomonChosasakiName(homonChosasakiName);
@@ -1590,6 +1648,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param homonChosasakiTelNo 訪問調査先電話番号
          * @return builder
          */
+        @Override
         public Builder setHomonChosasakiTelNo(TelNo homonChosasakiTelNo) {
             Objects.requireNonNull(homonChosasakiTelNo);
             this.entity.setHomonChosasakiTelNo(homonChosasakiTelNo);
@@ -1602,6 +1661,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param sichosonRenrakuJiko 市町村連絡事項
          * @return builder
          */
+        @Override
         public Builder setSichosonRenrakuJiko(RString sichosonRenrakuJiko) {
             Objects.requireNonNull(sichosonRenrakuJiko);
             this.entity.setSichosonRenrakuJiko(sichosonRenrakuJiko);
@@ -1614,6 +1674,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param shoriJotaiKubun 処理状態区分
          * @return builder
          */
+        @Override
         public Builder setShoriJotaiKubun(Code shoriJotaiKubun) {
             Objects.requireNonNull(shoriJotaiKubun);
             this.entity.setShoriJotaiKubun(shoriJotaiKubun);
@@ -1626,6 +1687,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param torisageYMD 取下年月日
          * @return builder
          */
+        @Override
         public Builder setTorisageYMD(FlexibleDate torisageYMD) {
             Objects.requireNonNull(torisageYMD);
             this.entity.setTorisageYMD(torisageYMD);
@@ -1638,6 +1700,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param torisageRiyu 取下理由
          * @return builder
          */
+        @Override
         public Builder setTorisageRiyu(RString torisageRiyu) {
             Objects.requireNonNull(torisageRiyu);
             this.entity.setTorisageRiyu(torisageRiyu);
@@ -1650,6 +1713,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param kyakkaYMD 却下年月日
          * @return builder
          */
+        @Override
         public Builder setKyakkaYMD(FlexibleDate kyakkaYMD) {
             Objects.requireNonNull(kyakkaYMD);
             this.entity.setKyakkaYMD(kyakkaYMD);
@@ -1662,6 +1726,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param kyakkaRiyu 却下理由
          * @return builder
          */
+        @Override
         public Builder setKyakkaRiyu(RString kyakkaRiyu) {
             Objects.requireNonNull(kyakkaRiyu);
             this.entity.setKyakkaRiyu(kyakkaRiyu);
@@ -1674,6 +1739,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param enkiKetteiYMD 延期決定年月日
          * @return builder
          */
+        @Override
         public Builder setEnkiKetteiYMD(FlexibleDate enkiKetteiYMD) {
             Objects.requireNonNull(enkiKetteiYMD);
             this.entity.setEnkiKetteiYMD(enkiKetteiYMD);
@@ -1686,6 +1752,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param enkiRiyu 延期理由
          * @return builder
          */
+        @Override
         public Builder setEnkiRiyu(RString enkiRiyu) {
             Objects.requireNonNull(enkiRiyu);
             this.entity.setEnkiRiyu(enkiRiyu);
@@ -1698,6 +1765,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param enkitsuchiHakkoYMD 延期通知発行年月日
          * @return builder
          */
+        @Override
         public Builder setEnkitsuchiHakkoYMD(FlexibleDate enkitsuchiHakkoYMD) {
             Objects.requireNonNull(enkitsuchiHakkoYMD);
             this.entity.setEnkitsuchiHakkoYMD(enkitsuchiHakkoYMD);
@@ -1710,6 +1778,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param enkitsuchiHakkoKaisu 延期通知発行回数
          * @return builder
          */
+        @Override
         public Builder setEnkitsuchiHakkoKaisu(int enkitsuchiHakkoKaisu) {
             this.entity.setEnkitsuchiHakkoKaisu(enkitsuchiHakkoKaisu);
             return this;
@@ -1721,6 +1790,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param enkiMikomiKaishiYMD 延期見込期間開始年月日
          * @return builder
          */
+        @Override
         public Builder setEnkiMikomiKaishiYMD(FlexibleDate enkiMikomiKaishiYMD) {
             Objects.requireNonNull(enkiMikomiKaishiYMD);
             this.entity.setEnkiMikomiKaishiYMD(enkiMikomiKaishiYMD);
@@ -1733,6 +1803,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param enkiMikomiShuryoYMD 延期見込期間終了年月日
          * @return builder
          */
+        @Override
         public Builder setEnkiMikomiShuryoYMD(FlexibleDate enkiMikomiShuryoYMD) {
             Objects.requireNonNull(enkiMikomiShuryoYMD);
             this.entity.setEnkiMikomiShuryoYMD(enkiMikomiShuryoYMD);
@@ -1745,6 +1816,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param shinsaKeizokuFlag 審査継続区分
          * @return builder
          */
+        @Override
         public Builder setShinsaKeizokuFlag(boolean shinsaKeizokuFlag) {
             this.entity.setShinsaKeizokuFlag(shinsaKeizokuFlag);
             return this;
@@ -1756,6 +1828,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param shinsakaiYusenWaritsukeCode 要介護認定審査会優先振分区分コード
          * @return builder
          */
+        @Override
         public Builder setShinsakaiYusenWaritsukeKubunCode(Code shinsakaiYusenWaritsukeCode) {
             Objects.requireNonNull(shinsakaiYusenWaritsukeCode);
             this.entity.setShinsakaiYusenWaritsukeKubunCode(shinsakaiYusenWaritsukeCode);
@@ -1768,6 +1841,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param kosinTsuchiHakkoYMD 更新通知発行年月日
          * @return builder
          */
+        @Override
         public Builder setKosinTsuchiHakkoYMD(FlexibleDate kosinTsuchiHakkoYMD) {
             Objects.requireNonNull(kosinTsuchiHakkoYMD);
             this.entity.setKosinTsuchiHakkoYMD(kosinTsuchiHakkoYMD);
@@ -1780,6 +1854,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param kosinTsuchiHakkoKanryoYMD 更新通知発行完了年月日
          * @return builder
          */
+        @Override
         public Builder setKosinTsuchiHakkoKanryoYMD(FlexibleDate kosinTsuchiHakkoKanryoYMD) {
             Objects.requireNonNull(kosinTsuchiHakkoKanryoYMD);
             this.entity.setKosinTsuchiHakkoKanryoYMD(kosinTsuchiHakkoKanryoYMD);
@@ -1792,6 +1867,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param ninteiShinseiJohoTorokuYMD 認定申請情報登録年月日
          * @return builder
          */
+        @Override
         public Builder setNinteiShinseiJohoTorokuYMD(FlexibleDate ninteiShinseiJohoTorokuYMD) {
             Objects.requireNonNull(ninteiShinseiJohoTorokuYMD);
             this.entity.setNinteiShinseiJohoTorokuYMD(ninteiShinseiJohoTorokuYMD);
@@ -1804,6 +1880,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param saiChosaIraiKaisu 再調査依頼回数
          * @return builder
          */
+        @Override
         public Builder setSaiChosaIraiKaisu(int saiChosaIraiKaisu) {
             this.entity.setSaiChosaIraiKaisu(saiChosaIraiKaisu);
             return this;
@@ -1815,6 +1892,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param saiSakuseiIraiKaisu 再作成依頼回数
          * @return builder
          */
+        @Override
         public Builder setSaiSakuseiIraiKaisu(int saiSakuseiIraiKaisu) {
             this.entity.setSaiSakuseiIraiKaisu(saiSakuseiIraiKaisu);
             return this;
@@ -1826,6 +1904,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param ifSofuYMD ＩＦ送付年月日
          * @return builder
          */
+        @Override
         public Builder setIfSofuYMD(FlexibleDate ifSofuYMD) {
             Objects.requireNonNull(ifSofuYMD);
             this.entity.setIfSofuYMD(ifSofuYMD);
@@ -1838,6 +1917,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @param logicalDeletedFlag 論理削除フラグ
          * @return builder
          */
+        @Override
         public Builder setLogicalDeletedFlag(boolean logicalDeletedFlag) {
             this.entity.setLogicalDeletedFlag(logicalDeletedFlag);
             return this;
@@ -1848,6 +1928,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          *
          * @return {@link HokenshaNinteiShinseiJoho}
          */
+        @Override
         public HokenshaNinteiShinseiJoho build() {
             return new HokenshaNinteiShinseiJoho(this);
         }

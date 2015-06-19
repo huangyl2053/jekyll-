@@ -44,6 +44,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return DbT5051KoseiShichosonMasterEntity
      */
+    @Override
     public DbT5051KoseiShichosonMasterEntity getEntity() {
         return entity;
     }
@@ -349,10 +350,21 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
     }
 
     /**
+     * 状態を設定します。
+     *
+     * @param entityDataState EntityDataState
+     */
+    @Override
+    public void setState(EntityDataState entityDataState) {
+        entity.setState(entityDataState);
+    }
+
+    /**
      * 状態に削除を設定します。
      *
      * @param deleteFlag deleteFlag
      */
+    @Override
     public void setDeletedState(boolean deleteFlag) {
         if (deleteFlag) {
             entity.setState(EntityDataState.Deleted);
@@ -366,6 +378,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return EntityDataState
      */
+    @Override
     public EntityDataState getState() {
         return entity.getState();
     }
@@ -388,6 +401,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
      *
      * @return ビルダー
      */
+    @Override
     public Builder createBuilderForEdit() {
         return new Builder(this);
     }
@@ -404,7 +418,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
     /**
      * {@link ShinsakaiKoseiShichosonMaster}を生成するためのビルダーです。
      */
-    public static final class Builder {
+    public static final class Builder extends IKoseiShichosonMaster.Builder {
 
         private DbT5051KoseiShichosonMasterEntity entity;
 
@@ -457,6 +471,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param shichosonShokibetsuID 市町村識別ID
          * @return builder
          */
+        @Override
         public Builder setShichosonShokibetsuID(RString shichosonShokibetsuID) {
             Objects.requireNonNull(shichosonShokibetsuID);
             this.entity.setShichosonShokibetsuID(shichosonShokibetsuID);
@@ -469,6 +484,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param shichosonCode 市町村コード
          * @return builder
          */
+        @Override
         public Builder setShichosonCode(LasdecCode shichosonCode) {
             Objects.requireNonNull(shichosonCode);
             this.entity.setShichosonCode(shichosonCode);
@@ -481,6 +497,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param shoKisaiHokenshaNo 証記載保険者番号
          * @return builder
          */
+        @Override
         public Builder setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
             Objects.requireNonNull(shoKisaiHokenshaNo);
             this.entity.setShoKisaiHokenshaNo(shoKisaiHokenshaNo);
@@ -493,6 +510,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param kokuhorenKoikiShichosonNo 国保連広域内市町村番号
          * @return builder
          */
+        @Override
         public Builder setKokuhorenKoikiShichosonNo(RString kokuhorenKoikiShichosonNo) {
             Objects.requireNonNull(kokuhorenKoikiShichosonNo);
             this.entity.setKokuhorenKoikiShichosonNo(kokuhorenKoikiShichosonNo);
@@ -505,6 +523,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param shichosonMeisho 市町村名称
          * @return builder
          */
+        @Override
         public Builder setShichosonMeisho(RString shichosonMeisho) {
             Objects.requireNonNull(shichosonMeisho);
             this.entity.setShichosonMeisho(shichosonMeisho);
@@ -517,6 +536,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param todofukenMeisho 都道府県名称
          * @return builder
          */
+        @Override
         public Builder setTodofukenMeisho(RString todofukenMeisho) {
             Objects.requireNonNull(todofukenMeisho);
             this.entity.setTodofukenMeisho(todofukenMeisho);
@@ -529,6 +549,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param gunMeisho 郡名称
          * @return builder
          */
+        @Override
         public Builder setGunMeisho(RString gunMeisho) {
             Objects.requireNonNull(gunMeisho);
             this.entity.setGunMeisho(gunMeisho);
@@ -541,6 +562,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param yubinNo 郵便番号
          * @return builder
          */
+        @Override
         public Builder setYubinNo(YubinNo yubinNo) {
             Objects.requireNonNull(yubinNo);
             this.entity.setYubinNo(yubinNo);
@@ -553,6 +575,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param jusho 住所
          * @return builder
          */
+        @Override
         public Builder setJusho(AtenaJusho jusho) {
             Objects.requireNonNull(jusho);
             this.entity.setJusho(jusho);
@@ -565,6 +588,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param telNo 電話番号
          * @return builder
          */
+        @Override
         public Builder setTelNo(TelNo telNo) {
             Objects.requireNonNull(telNo);
             this.entity.setTelNo(telNo);
@@ -577,6 +601,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param yusenChikuCode 電話番号
          * @return builder
          */
+        @Override
         public Builder setYusenChikuCode(RString yusenChikuCode) {
             Objects.requireNonNull(yusenChikuCode);
             this.entity.setYusenChikuCode(yusenChikuCode);
@@ -589,6 +614,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param tyohyoTodoufukenHyojiUmu 帳票用都道府県名称表示有無
          * @return builder
          */
+        @Override
         public Builder setTyohyoTodoufukenHyojiUmu(RString tyohyoTodoufukenHyojiUmu) {
             Objects.requireNonNull(tyohyoTodoufukenHyojiUmu);
             this.entity.setTyohyoTodoufukenHyojiUmu(tyohyoTodoufukenHyojiUmu);
@@ -601,6 +627,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param tyohyoGunHyojiUmu 帳票用郡名称表示有無
          * @return builder
          */
+        @Override
         public Builder setTyohyoGunHyojiUmu(RString tyohyoGunHyojiUmu) {
             Objects.requireNonNull(tyohyoGunHyojiUmu);
             this.entity.setTyohyoGunHyojiUmu(tyohyoGunHyojiUmu);
@@ -613,6 +640,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param tyohyoShichosonHyojiUmu 帳票用市町村名称表示有無
          * @return builder
          */
+        @Override
         public Builder setTyohyoShichosonHyojiUmu(RString tyohyoShichosonHyojiUmu) {
             Objects.requireNonNull(tyohyoShichosonHyojiUmu);
             this.entity.setTyohyoShichosonHyojiUmu(tyohyoShichosonHyojiUmu);
@@ -625,6 +653,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param tyohyoJushoHenshuHouhou 帳票用住所編集方法
          * @return builder
          */
+        @Override
         public Builder setTyohyoJushoHenshuHouhou(RString tyohyoJushoHenshuHouhou) {
             Objects.requireNonNull(tyohyoJushoHenshuHouhou);
             this.entity.setTyohyoJushoHenshuHouhou(tyohyoJushoHenshuHouhou);
@@ -637,6 +666,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param tyohyoKatagakiHyojiUmu 帳票用方書表示有無
          * @return builder
          */
+        @Override
         public Builder setTyohyoKatagakiHyojiUmu(RString tyohyoKatagakiHyojiUmu) {
             Objects.requireNonNull(tyohyoKatagakiHyojiUmu);
             this.entity.setTyohyoKatagakiHyojiUmu(tyohyoKatagakiHyojiUmu);
@@ -649,6 +679,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param gaikokujinHyojiHouhou 外国人氏名表示方法
          * @return builder
          */
+        @Override
         public Builder setGaikokujinHyojiHouhou(RString gaikokujinHyojiHouhou) {
             Objects.requireNonNull(gaikokujinHyojiHouhou);
             this.entity.setGaikokujinHyojiHouhou(gaikokujinHyojiHouhou);
@@ -661,6 +692,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param rojinhokenShichosonNo 老人保健市町村番号
          * @return builder
          */
+        @Override
         public Builder setRojinhokenShichosonNo(RString rojinhokenShichosonNo) {
             Objects.requireNonNull(rojinhokenShichosonNo);
             this.entity.setRojinhokenShichosonNo(rojinhokenShichosonNo);
@@ -673,6 +705,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param rokenJukyushaNoTaikei 老人保健受給者番号体系
          * @return builder
          */
+        @Override
         public Builder setRokenJukyushaNoTaikei(RString rokenJukyushaNoTaikei) {
             Objects.requireNonNull(rokenJukyushaNoTaikei);
             this.entity.setRokenJukyushaNoTaikei(rokenJukyushaNoTaikei);
@@ -685,6 +718,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param tokuchoBunpaishuyaku 特徴分配集約
          * @return builder
          */
+        @Override
         public Builder setTokuchoBunpaishuyaku(RString tokuchoBunpaishuyaku) {
             Objects.requireNonNull(tokuchoBunpaishuyaku);
             this.entity.setTokuchoBunpaishuyaku(tokuchoBunpaishuyaku);
@@ -697,6 +731,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param ikoYMD 移行日
          * @return builder
          */
+        @Override
         public Builder setIkoYMD(FlexibleDate ikoYMD) {
             Objects.requireNonNull(ikoYMD);
             this.entity.setIkoYMD(ikoYMD);
@@ -709,6 +744,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param kanyuYMD 加入日
          * @return builder
          */
+        @Override
         public Builder setKanyuYMD(FlexibleDate kanyuYMD) {
             Objects.requireNonNull(kanyuYMD);
             this.entity.setKanyuYMD(kanyuYMD);
@@ -721,6 +757,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param ridatsuYMD 離脱日
          * @return builder
          */
+        @Override
         public Builder setRidatsuYMD(FlexibleDate ridatsuYMD) {
             Objects.requireNonNull(ridatsuYMD);
             this.entity.setRidatsuYMD(ridatsuYMD);
@@ -733,6 +770,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param gappeiKyuShichosonKubun 合併旧市町村区分
          * @return builder
          */
+        @Override
         public Builder setGappeiKyuShichosonKubun(RString gappeiKyuShichosonKubun) {
             Objects.requireNonNull(gappeiKyuShichosonKubun);
             this.entity.setGappeiKyuShichosonKubun(gappeiKyuShichosonKubun);
@@ -745,6 +783,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param gappeiKyuShichosonHyojiUmu 合併旧市町村表示有無
          * @return builder
          */
+        @Override
         public Builder setGappeiKyuShichosonHyojiUmu(RString gappeiKyuShichosonHyojiUmu) {
             Objects.requireNonNull(gappeiKyuShichosonHyojiUmu);
             this.entity.setGappeiKyuShichosonHyojiUmu(gappeiKyuShichosonHyojiUmu);
@@ -757,6 +796,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param gappeiChiikiNo 合併情報地域番号
          * @return builder
          */
+        @Override
         public Builder setGappeiChiikiNo(RString gappeiChiikiNo) {
             Objects.requireNonNull(gappeiChiikiNo);
             this.entity.setGappeiChiikiNo(gappeiChiikiNo);
@@ -769,6 +809,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param unyoHokenshaNo 運用保険者番号
          * @return builder
          */
+        @Override
         public Builder setUnyoHokenshaNo(ShoKisaiHokenshaNo unyoHokenshaNo) {
             Objects.requireNonNull(unyoHokenshaNo);
             this.entity.setUnyoHokenshaNo(unyoHokenshaNo);
@@ -781,6 +822,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param unyoKaishiYMD 運用開始日
          * @return builder
          */
+        @Override
         public Builder setUnyoKaishiYMD(FlexibleDate unyoKaishiYMD) {
             Objects.requireNonNull(unyoKaishiYMD);
             this.entity.setUnyoKaishiYMD(unyoKaishiYMD);
@@ -793,6 +835,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param unyoShuryoYMD 運用終了日
          * @return builder
          */
+        @Override
         public Builder setUnyoShuryoYMD(FlexibleDate unyoShuryoYMD) {
             Objects.requireNonNull(unyoShuryoYMD);
             this.entity.setUnyoShuryoYMD(unyoShuryoYMD);
@@ -805,6 +848,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          * @param unyoKeitaiKubun 運用形態区分
          * @return builder
          */
+        @Override
         public Builder setUnyoKeitaiKubun(RString unyoKeitaiKubun) {
             Objects.requireNonNull(unyoKeitaiKubun);
             this.entity.setUnyoKeitaiKubun(unyoKeitaiKubun);
@@ -816,6 +860,7 @@ public class ShinsakaiKoseiShichosonMaster implements IKoseiShichosonMaster {
          *
          * @return {@link ShinsakaiKoseiShichosonMaster}
          */
+        @Override
         public ShinsakaiKoseiShichosonMaster build() {
             return new ShinsakaiKoseiShichosonMaster(this);
         }

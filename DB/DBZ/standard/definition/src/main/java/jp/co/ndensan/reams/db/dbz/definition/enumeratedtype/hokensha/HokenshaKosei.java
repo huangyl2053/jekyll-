@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * 保険者の構成です。
  *
  * @author N3327 三浦 凌
+ * @author n8223 朴義一
  */
 public enum HokenshaKosei {
 
@@ -27,7 +28,18 @@ public enum HokenshaKosei {
      * 広域保険者であることを表します。<br/>
      * コード:"2"
      */
-    広域市町村("2");
+    広域市町村("2"),
+     /**
+      *広域保険者あることを表します。<br/>
+     * コード:"3"
+     */
+    広域保険者("3"),
+     /**
+      * 広域審査会であることを表します。<br/>
+     * コード:"4"
+     */
+    広域審査会("4");
+    
     private final RString theCode;
 
     private HokenshaKosei(String code) {

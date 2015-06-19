@@ -63,26 +63,26 @@ public class HihokenshashoA4Printer {
      * @param position 被保険者証印字位置
      * @return 帳票ソースデータ
      */
-//    public SourceDataCollection print(HihokenshaNo hihokenshaNo, HihokenshaShikakuHakkoModel shikakuHakkoModel,
-//            HihokenshashoPrintPosition position) {
-//        Class formType;
-//        RString reportId;
-//        IReportBuilder<IHihokenshasho> builder;
-//
-//        HihokenshaDaichoModel daichoModel = printerBase.getDaichoModel(hihokenshaNo);
-//        IKojin kojin = printerBase.getKojin(daichoModel);
-//
-//        HihokenshashoModel target = new HihokenshashoModel(daichoModel, kojin, shikakuHakkoModel, position);
-//
-//        ITsuchishoAtesaki tsuchishoAtesaki = printerBase.getTsuchishoAtesaki(
-//                target.getShikakuHakko().get交付日(), target.getKojinJoho().get識別コード());
-//        IAssociation assosiation = printerBase.getAssociation();
-//
-//        formType = HihokenshashoA4.class;
-//        reportId = REPORT_ID_A4;
-//        builder = hihoshoBuilderFactory
-//                .createInstanceForA4(target, assosiation, tsuchishoAtesaki);
-//
-//        return printerBase.print(formType, reportId, builder);
-//    }
+    public SourceDataCollection print(HihokenshaNo hihokenshaNo, HihokenshaShikakuHakkoModel shikakuHakkoModel,
+            HihokenshashoPrintPosition position) {
+        Class formType;
+        RString reportId;
+        IReportBuilder<IHihokenshasho> builder;
+
+        HihokenshaDaichoModel daichoModel = printerBase.getDaichoModel(hihokenshaNo);
+        IKojin kojin = printerBase.getKojin(daichoModel);
+
+        HihokenshashoModel target = new HihokenshashoModel(daichoModel, kojin, shikakuHakkoModel, position);
+
+        ITsuchishoAtesaki tsuchishoAtesaki = printerBase.getTsuchishoAtesaki(
+                target.getShikakuHakko().get交付日(), target.getKojinJoho().get識別コード());
+        IAssociation assosiation = printerBase.getAssociation();
+
+        formType = HihokenshashoA4.class;
+        reportId = REPORT_ID_A4;
+        builder = hihoshoBuilderFactory
+                .createInstanceForA4(target, assosiation, tsuchishoAtesaki);
+
+        return printerBase.print(formType, reportId, builder);
+    }
 }
