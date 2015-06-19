@@ -6,15 +6,15 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.ZenkaiNinteiKekkaJoho;
 
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbd.business.INinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbd.business.IShinseiRirekiJoho;
+import jp.co.ndensan.reams.db.dbz.business.INinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbz.business.IShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.business.INinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbz.realservice.INinteiKekkaJohoManager;
-import jp.co.ndensan.reams.db.dbd.realservice.INinteiShinseiJohoManager;
-import jp.co.ndensan.reams.db.dbd.realservice.IShinseiRirekiManager;
+import jp.co.ndensan.reams.db.dbz.realservice.INinteiShinseiJohoManager;
+import jp.co.ndensan.reams.db.dbz.realservice.IShinseiRirekiManager;
 import jp.co.ndensan.reams.db.dbz.realservice.NinteiKekkaJohoFactory;
-import jp.co.ndensan.reams.db.dbd.realservice.NinteiShinseiJohoManagerFactory;
-import jp.co.ndensan.reams.db.dbd.realservice.ShinseiRirekiFactory;
+import jp.co.ndensan.reams.db.dbz.realservice.NinteiShinseiJohoManagerFactory;
+import jp.co.ndensan.reams.db.dbz.realservice.ShinseiRirekiFactory;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
@@ -62,6 +62,9 @@ public class ZenkaiNinteiKekkaJohoHandler {
 
         Optional<INinteiShinseiJoho> ninteiShinseiJoho
                 = ninteiShinseiJohoManager.find認定申請情報(shinseiRirekiJoho.get().get前回申請管理番号());
+        if (!ninteiShinseiJoho.isPresent()) {
+            return;
+        }
         Optional<INinteiKekkaJoho> ninteiKekkaJoho
                 = ninteiKekkaJohoManager.find要介護認定結果情報(ninteiShinseiJoho.get().get申請書管理番号());
         if (ninteiKekkaJoho.isPresent()) {
