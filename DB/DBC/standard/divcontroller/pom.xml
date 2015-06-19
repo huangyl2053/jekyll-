@@ -22,8 +22,8 @@
         </dependency>
 
         <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzDivController</artifactId>
+            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+            <artifactId>DbdDivController</artifactId>
             <classifier>classes</classifier>
         </dependency>
 
