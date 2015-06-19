@@ -2,15 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.persistence.basic;
+package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT5102NinteiKekkaJoho.shinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
-import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4102NinteiKekkaJoho;
-import static jp.co.ndensan.reams.db.dbd.entity.basic.DbT4102NinteiKekkaJoho.*;
-import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4102NinteiKekkaJohoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.basic.INinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5102NinteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.INinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8223 朴義一
  */
-public class DbT4102HokenshaNinteiKekkaJohoDac implements IModifiable<INinteiKekkaJohoEntity> {
+public class DbT5102ShinsakaiNinteiKekkaJohoDac implements IModifiable<INinteiKekkaJohoEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -34,34 +34,34 @@ public class DbT4102HokenshaNinteiKekkaJohoDac implements IModifiable<INinteiKek
      * 主キーで要介護認定結果情報を取得します。
      *
      * @param 申請書管理番号 shinseishoKanriNo
-     * @return DbT4102NinteiKekkaJohoEntity
+     * @return DbT5102NinteiKekkaJohoEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
-    public Optional<DbT4102NinteiKekkaJohoEntity> selectByKey(
+    public Optional<DbT5102NinteiKekkaJohoEntity> selectByKey(
             ShinseishoKanriNo 申請書管理番号) throws NullPointerException {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return Optional.ofNullable(accessor.select().
-                table(DbT4102NinteiKekkaJoho.class).
+                table(DbT5102NinteiKekkaJoho.class).
                 where(eq(shinseishoKanriNo, 申請書管理番号)).
-                toObject(DbT4102NinteiKekkaJohoEntity.class));
+                toObject(DbT5102NinteiKekkaJohoEntity.class));
     }
 
     /**
      * 要介護認定結果情報を全件返します。
      *
-     * @return List<DbT4102NinteiKekkaJohoEntity>
+     * @return List<DbT5102NinteiKekkaJohoEntity>
      */
     @Transaction
-    public List<DbT4102NinteiKekkaJohoEntity> selectAll() {
+    public List<DbT5102NinteiKekkaJohoEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
-                table(DbT4102NinteiKekkaJoho.class).
-                toList(DbT4102NinteiKekkaJohoEntity.class);
+                table(DbT5102NinteiKekkaJoho.class).
+                toList(DbT5102NinteiKekkaJohoEntity.class);
     }
 
     @Transaction
@@ -88,7 +88,7 @@ public class DbT4102HokenshaNinteiKekkaJohoDac implements IModifiable<INinteiKek
     // TODO 物理削除用メソッドが必要であるかは業務ごとに検討してください。
 //    @Transaction
 //    @Override
-//    public int deletePhysical(DbT4102NinteiKekkaJohoEntity entity) {
+//    public int deletePhysical(DbT5102NinteiKekkaJohoEntity entity) {
 //        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 //        return accessor.deletePhysical(entity).execute();
 //    }

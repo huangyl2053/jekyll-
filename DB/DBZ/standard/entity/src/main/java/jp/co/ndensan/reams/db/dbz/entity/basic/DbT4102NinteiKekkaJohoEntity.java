@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbd.entity.basic;
+package jp.co.ndensan.reams.db.dbz.entity.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
@@ -15,11 +15,11 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriN
 /**
  * 要介護認定結果情報テーブルのエンティティクラスです。
  */
-public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102NinteiKekkaJohoEntity> implements IDbAccessable, INinteiKekkaJohoEntity {
+public class DbT4102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT4102NinteiKekkaJohoEntity> implements IDbAccessable, INinteiKekkaJohoEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
-    public static final RString TABLE_NAME = new RString("DbT5102NinteiKekkaJoho");
+    public static final RString TABLE_NAME = new RString("DbT4102NinteiKekkaJoho");
 
     private RString insertDantaiCd;
     private RDateTime insertTimestamp;
@@ -92,6 +92,8 @@ public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102Ninte
 
     /**
      * 申請書管理番号のgetメソッドです。
+     * <br/>
+     * <br/>要介護認定申請情報
      *
      * @return 申請書管理番号
      */
@@ -101,6 +103,8 @@ public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102Ninte
 
     /**
      * 申請書管理番号のsetメソッドです。
+     * <br/>
+     * <br/>要介護認定申請情報
      *
      * @param shinseishoKanriNo 申請書管理番号
      */
@@ -363,14 +367,14 @@ public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102Ninte
     }
 
     /**
-     * このエンティティの主キーが他の{@literal DbT5102NinteiKekkaJohoEntity}と等しいか判定します。
+     * このエンティティの主キーが他の{@literal DbT4102NinteiKekkaJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
      * @@return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT5102NinteiKekkaJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT4102NinteiKekkaJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
-    public boolean equalsPrimaryKeys(DbT5102NinteiKekkaJohoEntity other) {
+    public boolean equalsPrimaryKeys(DbT4102NinteiKekkaJohoEntity other) {
         if (other == null) {
             return false;
         }
@@ -384,7 +388,7 @@ public class DbT5102NinteiKekkaJohoEntity extends DbTableEntityBase<DbT5102Ninte
      * {@inheritDoc}
      */
     @Override
-    public void shallowCopy(DbT5102NinteiKekkaJohoEntity entity) {
+    public void shallowCopy(DbT4102NinteiKekkaJohoEntity entity) {
         this.shinseishoKanriNo = entity.shinseishoKanriNo;
         this.nijiHanteiYMD = entity.nijiHanteiYMD;
         this.nijiHanteiYokaigoJotaiKubunCode = entity.nijiHanteiYokaigoJotaiKubunCode;

@@ -1,21 +1,23 @@
-package jp.co.ndensan.reams.db.dbd.divcontroller.entity.TestZenkaiNinteiKekkaJoho;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.TestZenkaiNinteiKekkaJoho;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.ZenkaiNinteiKekkaJoho.IZenkaiNinteiKekkaJohoDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ZenkaiNinteiKekkaJoho.IZenkaiNinteiKekkaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ZenkaiNinteiKekkaJoho.ZenkaiNinteiKekkaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * TestZenkaiNinteiKekkaJoho のクラスファイル 
- * 
+ * TestZenkaiNinteiKekkaJoho のクラスファイル
+ *
  * @author 自動生成
  */
 public class TestZenkaiNinteiKekkaJohoDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-44">
     /*
      * [ private の作成 ]
@@ -47,7 +49,7 @@ public class TestZenkaiNinteiKekkaJohoDiv extends Panel {
 
     @JsonProperty("txthdnShinseishoKanriNo")
     public void setTxthdnShinseishoKanriNo(TextBox txthdnShinseishoKanriNo) {
-        this.txthdnShinseishoKanriNo=txthdnShinseishoKanriNo;
+        this.txthdnShinseishoKanriNo = txthdnShinseishoKanriNo;
     }
 
     @JsonProperty("txthdnDatabaseSubGyomuCode")
@@ -57,7 +59,7 @@ public class TestZenkaiNinteiKekkaJohoDiv extends Panel {
 
     @JsonProperty("txthdnDatabaseSubGyomuCode")
     public void setTxthdnDatabaseSubGyomuCode(TextBox txthdnDatabaseSubGyomuCode) {
-        this.txthdnDatabaseSubGyomuCode=txthdnDatabaseSubGyomuCode;
+        this.txthdnDatabaseSubGyomuCode = txthdnDatabaseSubGyomuCode;
     }
 
     @JsonProperty("btnSetinput")
@@ -67,7 +69,7 @@ public class TestZenkaiNinteiKekkaJohoDiv extends Panel {
 
     @JsonProperty("btnSetinput")
     public void setBtnSetinput(Button btnSetinput) {
-        this.btnSetinput=btnSetinput;
+        this.btnSetinput = btnSetinput;
     }
 
     @JsonProperty("Hline1")
@@ -77,7 +79,7 @@ public class TestZenkaiNinteiKekkaJohoDiv extends Panel {
 
     @JsonProperty("Hline1")
     public void setHline1(HorizontalLine Hline1) {
-        this.Hline1=Hline1;
+        this.Hline1 = Hline1;
     }
 
     @JsonProperty("ccdZenkaiNinteiKekkaJoho")

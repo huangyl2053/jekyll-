@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business;
+package jp.co.ndensan.reams.db.dbz.business;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbd.entity.basic.DbT5102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
@@ -19,38 +19,38 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8223 朴義一
  */
-public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
+public class HokenshaNinteiKekkaJoho implements INinteiKekkaJoho {
 
-    private DbT5102NinteiKekkaJohoEntity entity;
+    private DbT4102NinteiKekkaJohoEntity entity;
 
-    private ShinsakaiNinteiKekkaJoho() {
-        this.entity = new DbT5102NinteiKekkaJohoEntity();
+    private HokenshaNinteiKekkaJoho() {
+        this.entity = new DbT4102NinteiKekkaJohoEntity();
     }
 
     /**
      * コンストラクタです。
      *
-     * @param entity DbT5102NinteiKekkaJohoEntity
+     * @param entity DbT4102NinteiKekkaJohoEntity
      */
-    public ShinsakaiNinteiKekkaJoho(DbT5102NinteiKekkaJohoEntity entity) {
+    public HokenshaNinteiKekkaJoho(DbT4102NinteiKekkaJohoEntity entity) {
         this.entity = entity;
     }
 
     /**
-     * DbT5102NinteiKekkaJohoEntityを返します。
+     * DbT4102NinteiKekkaJohoEntityを返します。
      *
-     * @return DbT5102NinteiKekkaJohoEntity
+     * @return DbT4102NinteiKekkaJohoEntity
      */
-    public DbT5102NinteiKekkaJohoEntity getEntity() {
+    public DbT4102NinteiKekkaJohoEntity getEntity() {
         return entity;
     }
 
     /**
-     * DbT5102NinteiKekkaJohoEntityを設定します。
+     * DbT4102NinteiKekkaJohoEntityを設定します。
      *
-     * @param entity DbT5102NinteiKekkaJohoEntity
+     * @param entity DbT4102NinteiKekkaJohoEntity
      */
-    public void setEntity(DbT5102NinteiKekkaJohoEntity entity) {
+    public void setEntity(DbT4102NinteiKekkaJohoEntity entity) {
         this.entity = entity;
     }
 
@@ -59,7 +59,6 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return 申請書管理番号
      */
-    @Override
     public ShinseishoKanriNo get申請書管理番号() {
         return entity.getShinseishoKanriNo();
     }
@@ -69,7 +68,6 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
      *
      * @return 二次判定年月日
      */
-    @Override
     public FlexibleDate get二次判定年月日() {
         return entity.getNijiHanteiYMD();
     }
@@ -228,16 +226,16 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
         return entity.getState();
     }
 
-    private ShinsakaiNinteiKekkaJoho(Builder builder) {
+    private HokenshaNinteiKekkaJoho(Builder builder) {
         this.entity = builder.entity;
     }
 
     /**
      * 更新処理を行う際に必要となるエンティティを返します。
      *
-     * @return DbT5102NinteiKekkaJohoEntity
+     * @return DbT4102NinteiKekkaJohoEntity
      */
-    public DbT5102NinteiKekkaJohoEntity toEntity() {
+    public DbT4102NinteiKekkaJohoEntity toEntity() {
         return entity.clone();
     }
 
@@ -252,7 +250,7 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
     }
 
     /**
-     * 新しい{@link ShinsakaiNinteiKekkaJoho}を生成するためのビルダーを返します。
+     * 新しい{@link HokenshaNinteiKekkaJoho}を生成するためのビルダーを返します。
      *
      * @return ビルダー
      */
@@ -261,18 +259,18 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
     }
 
     /**
-     * {@link ShinsakaiNinteiKekkaJoho}を生成するためのビルダーです。
+     * {@link HokenshaNinteiKekkaJoho}を生成するためのビルダーです。
      */
     public static final class Builder extends INinteiKekkaJoho.Builder {
 
-        private DbT5102NinteiKekkaJohoEntity entity;
+        private DbT4102NinteiKekkaJohoEntity entity;
 
         Builder() {
-            this.entity = new DbT5102NinteiKekkaJohoEntity();
+            this.entity = new DbT4102NinteiKekkaJohoEntity();
         }
 
-        Builder(ShinsakaiNinteiKekkaJoho shinsakaiNinteiKekkaJoho) {
-            this.entity = shinsakaiNinteiKekkaJoho.entity.clone();
+        Builder(HokenshaNinteiKekkaJoho hokenshaNinteiKekkaJoho) {
+            this.entity = hokenshaNinteiKekkaJoho.entity.clone();
         }
 
         /**
@@ -491,13 +489,13 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
         }
 
         /**
-         * {@link ShinsakaiNinteiKekkaJoho}を生成します。
+         * {@link HokenshaNinteiKekkaJoho}を生成します。
          *
-         * @return {@link ShinsakaiNinteiKekkaJoho}
+         * @return {@link HokenshaNinteiKekkaJoho}
          */
         @Override
-        public ShinsakaiNinteiKekkaJoho build() {
-            return new ShinsakaiNinteiKekkaJoho(this);
+        public HokenshaNinteiKekkaJoho build() {
+            return new HokenshaNinteiKekkaJoho(this);
         }
     }
 
@@ -515,14 +513,14 @@ public class ShinsakaiNinteiKekkaJoho implements INinteiKekkaJoho {
 
         private static final long serialVersionUID = 2036070529568954387L;
 
-        private final DbT5102NinteiKekkaJohoEntity entity;
+        private final DbT4102NinteiKekkaJohoEntity entity;
 
-        private _SerializationProxy(ShinsakaiNinteiKekkaJoho shinsakaiNinteiKekkaJoho) {
-            this.entity = shinsakaiNinteiKekkaJoho.entity;
+        private _SerializationProxy(HokenshaNinteiKekkaJoho hokenshaNinteiKekkaJoho) {
+            this.entity = hokenshaNinteiKekkaJoho.entity;
         }
 
         private Object readResolve() {
-            return new ShinsakaiNinteiKekkaJoho(entity);
+            return new HokenshaNinteiKekkaJoho(entity);
         }
     }
 }

@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.divcontroller.entity.ZenkaiNinteiKekkaJoho;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.ZenkaiNinteiKekkaJoho;
 
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbd.business.INinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbd.business.IShinseiRirekiJoho;
-import jp.co.ndensan.reams.db.dbd.business.INinteiKekkaJoho;
-import jp.co.ndensan.reams.db.dbd.realservice.INinteiKekkaJohoManager;
+import jp.co.ndensan.reams.db.dbz.business.INinteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbz.realservice.INinteiKekkaJohoManager;
 import jp.co.ndensan.reams.db.dbd.realservice.INinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbd.realservice.IShinseiRirekiManager;
-import jp.co.ndensan.reams.db.dbd.realservice.NinteiKekkaJohoFactory;
+import jp.co.ndensan.reams.db.dbz.realservice.NinteiKekkaJohoFactory;
 import jp.co.ndensan.reams.db.dbd.realservice.NinteiShinseiJohoManagerFactory;
 import jp.co.ndensan.reams.db.dbd.realservice.ShinseiRirekiFactory;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.KoroshoInterfaceShikibetsuCode;

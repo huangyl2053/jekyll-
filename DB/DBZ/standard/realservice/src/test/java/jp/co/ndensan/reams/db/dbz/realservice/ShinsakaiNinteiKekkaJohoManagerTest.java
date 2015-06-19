@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.realservice;
+package jp.co.ndensan.reams.db.dbz.realservice;
 
-import jp.co.ndensan.reams.db.dbd.business.INinteiKekkaJoho;
-import jp.co.ndensan.reams.db.dbd.business.ShinsakaiNinteiKekkaJoho;
-import jp.co.ndensan.reams.db.dbd.entity.basic.DbT5102NinteiKekkaJohoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT5102NinteiKekkaJohoEntityGenerator;
-import jp.co.ndensan.reams.db.dbd.persistence.basic.DbT5102ShinsakaiNinteiKekkaJohoDac;
+import jp.co.ndensan.reams.db.dbz.business.INinteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbz.business.ShinsakaiNinteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5102NinteiKekkaJohoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5102ShinsakaiNinteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;

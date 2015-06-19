@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.entity.basic.helper;
+package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
-import jp.co.ndensan.reams.db.dbd.entity.basic.DbT5102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8223 朴義一
  */
-public final class DbT5102NinteiKekkaJohoEntityGenerator {
+public final class DbT4102NinteiKekkaJohoEntityGenerator {
 
     public static final ShinseishoKanriNo DEFAULT_申請書管理番号 = new ShinseishoKanriNo("00000000000000002");
     public static final FlexibleDate DEFAULT_二次判定年月日 = new FlexibleDate("20150604");
@@ -35,11 +35,11 @@ public final class DbT5102NinteiKekkaJohoEntityGenerator {
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
      */
-    private DbT5102NinteiKekkaJohoEntityGenerator() {
+    private DbT4102NinteiKekkaJohoEntityGenerator() {
     }
 
-    public static DbT5102NinteiKekkaJohoEntity createDbT5102NinteiKekkaJohoEntity() {
-        DbT5102NinteiKekkaJohoEntity entity = new DbT5102NinteiKekkaJohoEntity();
+    public static DbT4102NinteiKekkaJohoEntity createDbT4102NinteiKekkaJohoEntity() {
+        DbT4102NinteiKekkaJohoEntity entity = new DbT4102NinteiKekkaJohoEntity();
         entity.setShinseishoKanriNo(DEFAULT_申請書管理番号);
         entity.setNijiHanteiYMD(DEFAULT_二次判定年月日);
         entity.setNijiHanteiYokaigoJotaiKubunCode(DEFAULT_二次判定要介護状態区分コード);
