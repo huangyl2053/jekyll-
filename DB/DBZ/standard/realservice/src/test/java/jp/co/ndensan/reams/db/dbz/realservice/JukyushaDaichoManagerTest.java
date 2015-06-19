@@ -5,20 +5,22 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
+import jp.co.ndensan.reams.db.dbz.realservice.JukyushaDaichoManager;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4001JukyushaDaichoEntityGenerator;
-import jp.co.ndensan.reams.db.dbz.model.JukyushaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.persistence.relate.JukyushaDaichoDac;
-import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.Test;
@@ -31,54 +33,54 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * {link JukyushaDaichoManager}のテストクラスです。
+ * * {link JukyushaDaichoManager}のテストクラスです。
  *
- * @author n8187 久保田 英男
+ * @author n8235 船山洋介
  */
 @RunWith(Enclosed.class)
 public class JukyushaDaichoManagerTest {
 
-    private static JukyushaDaichoDac dac;
+    private static DbT4001JukyushaDaichoDac dac;
     private static JukyushaDaichoManager sut;
 
     @BeforeClass
     public static void test() {
-        dac = mock(JukyushaDaichoDac.class);
+        dac = mock(DbT4001JukyushaDaichoDac.class);
         sut = new JukyushaDaichoManager(dac);
     }
 
-    public static class get受給者台帳Test extends DbzTestBase {
+    public static class get受給者台帳Test extends DbdTestBase {
 
         @Test
         public void データが見つかる検索条件を指定した場合_受給者台帳が返る() {
 
-            Optional<JukyushaDaichoModel> 受給者台帳モデル = Optional.ofNullable(createModel());
+            DbT4001JukyushaDaichoEntity 受給者台帳モデル = DbT4001JukyushaDaichoEntityGenerator.createDbT4001JukyushaDaichoEntity();
 
-            when(dac.selectByKey(any(ShoKisaiHokenshaNo.class), any(HihokenshaNo.class), any(ShinseishoKanriNo.class), any(YMDHMS.class))).thenReturn(受給者台帳モデル);
+            when(dac.selectByKey(any(LasdecCode.class), any(HihokenshaNo.class), any(RString.class), any(RString.class), any(Code.class))).thenReturn(受給者台帳モデル);
 
-            Optional<JukyushaDaichoModel> 受給者台帳 = sut.get受給者台帳(
-                    DbT4001JukyushaDaichoEntityGenerator.DEFAULT_証記載保険者番号,
+            Optional<JukyushaDaicho> 受給者台帳 = sut.get受給者台帳(
+                    DbT4001JukyushaDaichoEntityGenerator.DEFAULT_市町村コード,
                     DbT4001JukyushaDaichoEntityGenerator.DEFAULT_被保険者番号,
-                    DbT4001JukyushaDaichoEntityGenerator.DEFAULT_申請書管理番号,
-                    DbT4001JukyushaDaichoEntityGenerator.DEFAULT_処理日時);
+                    DbT4001JukyushaDaichoEntityGenerator.DEFAULT_履歴番号,
+                    DbT4001JukyushaDaichoEntityGenerator.DEFAULT_枝番,
+                    DbT4001JukyushaDaichoEntityGenerator.DEFAULT_受給申請事由);
 
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(受給者台帳.get().get地区コード(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_地区コード));
+            assertThat(受給者台帳.get().getデータ区分(), is(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_データ区分));
         }
     }
 
-    public static class get受給者台帳一覧Test extends DbzTestBase {
+    public static class get受給者台帳一覧Test extends DbdTestBase {
 
         @Test
         public void データが見つかる検索条件を指定した場合_受給者台帳のリストが返る() {
 
-            List<JukyushaDaichoModel> 受給者台帳モデルリスト = new ArrayList<>();
-            受給者台帳モデルリスト.add(createModel());
-            IItemList list = ItemList.of(受給者台帳モデルリスト);
+            List<DbT4001JukyushaDaichoEntity> 受給者台帳エンティティリスト = new ArrayList<>();
+            受給者台帳エンティティリスト.add(DbT4001JukyushaDaichoEntityGenerator.createDbT4001JukyushaDaichoEntity());
 
-            when(dac.selectAll()).thenReturn(list);
+            when(dac.selectAll()).thenReturn(受給者台帳エンティティリスト);
 
-            IItemList<JukyushaDaichoModel> 受給者台帳リスト = sut.get受給者台帳一覧();
+            IItemList<JukyushaDaicho> 受給者台帳リスト = sut.get受給者台帳一覧();
 
             assertThat(受給者台帳リスト.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
@@ -86,18 +88,17 @@ public class JukyushaDaichoManagerTest {
         }
     }
 
-    public static class get受給者台帳履歴Test extends DbzTestBase {
+    public static class get受給者台帳履歴Test extends DbdTestBase {
 
         @Test
         public void データが見つかる検索条件を指定した場合_受給者台帳のリストが返る() {
 
-            List<JukyushaDaichoModel> 受給者台帳モデルリスト = new ArrayList<>();
-            受給者台帳モデルリスト.add(createModel());
-            IItemList list = ItemList.of(受給者台帳モデルリスト);
+            List<DbT4001JukyushaDaichoEntity> 受給者台帳エンティティリスト = new ArrayList<>();
+            受給者台帳エンティティリスト.add(DbT4001JukyushaDaichoEntityGenerator.createDbT4001JukyushaDaichoEntity());
 
-            when(dac.select受給者台帳履歴By被保険者番号(any(HihokenshaNo.class))).thenReturn(list);
+            when(dac.select受給者台帳履歴By被保険者番号(any(HihokenshaNo.class))).thenReturn(受給者台帳エンティティリスト);
 
-            IItemList<JukyushaDaichoModel> 受給者台帳リスト = sut.get受給者台帳履歴(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_被保険者番号);
+            IItemList<JukyushaDaicho> 受給者台帳リスト = sut.get受給者台帳履歴(DbT4001JukyushaDaichoEntityGenerator.DEFAULT_被保険者番号);
 
             assertThat(受給者台帳リスト.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
@@ -105,52 +106,48 @@ public class JukyushaDaichoManagerTest {
         }
     }
 
-    public static class save受給者台帳 extends DbzTestBase {
+    public static class save受給者台帳 extends DbdTestBase {
 
         @Test
         public void insertに成功すると1が返る() {
-            when(dac.insert(any(JukyushaDaichoModel.class))).thenReturn(1);
+            when(dac.insert(any(DbT4001JukyushaDaichoEntity.class))).thenReturn(1);
 
-            JukyushaDaichoModel 受給者台帳モデル = createModel();
+            JukyushaDaicho 受給者台帳 = new JukyushaDaicho(DbT4001JukyushaDaichoEntityGenerator.createDbT4001JukyushaDaichoEntity());
 
-            assertThat(sut.save受給者台帳(受給者台帳モデル), is(1));
+            assertThat(sut.save受給者台帳(受給者台帳), is(1));
         }
 
         @Test
         public void updateに成功すると1が返る() {
-            when(dac.update(any(JukyushaDaichoModel.class))).thenReturn(1);
+            when(dac.update(any(DbT4001JukyushaDaichoEntity.class))).thenReturn(1);
 
-            JukyushaDaichoModel 受給者台帳モデル = createModel();
-            受給者台帳モデル.getEntity().initializeMd5();
+            JukyushaDaicho 受給者台帳 = new JukyushaDaicho(DbT4001JukyushaDaichoEntityGenerator.createDbT4001JukyushaDaichoEntity());
+            受給者台帳.getEntity().initializeMd5();
             // 状態をModifiedにするため、任意の項目を変更してください。
-            受給者台帳モデル.set支給限度単位数(new Decimal("20"));
+            受給者台帳.set支給限度単位数(new Decimal("20"));
 
-            assertThat(sut.save受給者台帳(受給者台帳モデル), is(1));
+            assertThat(sut.save受給者台帳(受給者台帳), is(1));
         }
 
         @Test
         public void deleteに成功すると1が返る() {
-            when(dac.delete(any(JukyushaDaichoModel.class))).thenReturn(1);
+            when(dac.delete(any(DbT4001JukyushaDaichoEntity.class))).thenReturn(1);
 
-            JukyushaDaichoModel 受給者台帳モデル = createModel();
-            受給者台帳モデル.getEntity().initializeMd5();
-            受給者台帳モデル.setDeletedState(true);
+            JukyushaDaicho 受給者台帳 = new JukyushaDaicho(DbT4001JukyushaDaichoEntityGenerator.createDbT4001JukyushaDaichoEntity());
+            受給者台帳.getEntity().initializeMd5();
+            受給者台帳.setDeletedState(true);
 
-            assertThat(sut.save受給者台帳(受給者台帳モデル), is(1));
+            assertThat(sut.save受給者台帳(受給者台帳), is(1));
         }
 
-        @Test(expected = ApplicationException.class)
+        @Test(expected = IllegalArgumentException.class)
         public void モデルの状態がUnchangedの場合_ApplicationExceptionが発生する() {
 
-            JukyushaDaichoModel 受給者台帳モデル = createModel();
-            受給者台帳モデル.getEntity().initializeMd5();
+            JukyushaDaicho 受給者台帳 = new JukyushaDaicho(DbT4001JukyushaDaichoEntityGenerator.createDbT4001JukyushaDaichoEntity());
+            受給者台帳.getEntity().initializeMd5();
 
-            sut.save受給者台帳(受給者台帳モデル);
+            sut.save受給者台帳(受給者台帳);
         }
-    }
-
-    private static JukyushaDaichoModel createModel() {
-        return new JukyushaDaichoModel(DbT4001JukyushaDaichoEntityGenerator.createDbT4001JukyushaDaichoEntity());
     }
 
 }

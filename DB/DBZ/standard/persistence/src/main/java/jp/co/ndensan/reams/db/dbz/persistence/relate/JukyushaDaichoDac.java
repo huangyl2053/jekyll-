@@ -59,8 +59,9 @@ public class JukyushaDaichoDac implements IModifiable<JukyushaDaichoModel> {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
-
-        return Optional.ofNullable(createModel(受給者台帳Dac.selectByKey(証記載保険者番号, 被保険者番号, 申請書管理番号, 処理日時)));
+//TODO n8235 船山洋介 受給者台帳のテーブルが変更されたため、最新化が必要
+//        return Optional.ofNullable(createModel(受給者台帳Dac.selectByKey(証記載保険者番号, 被保険者番号, 申請書管理番号, 処理日時)));
+        return Optional.ofNullable(new JukyushaDaichoModel());
     }
 
     /**
