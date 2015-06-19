@@ -14,8 +14,10 @@ import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5001NinteiShinseiJohoDac;
+//TODO n8235 船山洋介 要介護認定申請情報情報のテーブルが変更されたため、最新化が必要
+//import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5001NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
+import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
@@ -36,7 +38,9 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
 
     @InjectSession
     private SqlSession session;
-    private final DbT5001NinteiShinseiJohoDac 要介護認定申請情報Dac = InstanceProvider.create(DbT5001NinteiShinseiJohoDac.class);
+    //TODO n8235 船山洋介 要介護認定申請情報情報のテーブルが変更されたため、最新化が必要
+//    private final DbT5001NinteiShinseiJohoDac 要介護認定申請情報Dac = InstanceProvider.create(DbT5001NinteiShinseiJohoDac.class);
+    private final DbT5101NinteiShinseiJohoDac 要介護認定申請情報Dac = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
 
     /**
      * 要介護認定申請情報情報をキー検索で１件返します。
@@ -52,8 +56,9 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
 
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
         requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
-
-        return Optional.ofNullable(createModel(要介護認定申請情報Dac.selectByKey(申請書管理番号.value(), 処理日時)));
+//TODO n8235 船山洋介 要介護認定申請情報情報のテーブルが変更されたため、最新化が必要
+//        return Optional.ofNullable(createModel(要介護認定申請情報Dac.selectByKey(申請書管理番号.value(), 処理日時)));
+        return Optional.empty();
     }
 
     /**
@@ -63,13 +68,13 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
      */
     @Transaction
     public IItemList<NinteiShinseiJohoModel> selectAll() {
-
-        List<DbT5001NinteiShinseiJohoEntity> 要介護認定申請情報List = 要介護認定申請情報Dac.selectAll();
+//TODO n8235 船山洋介 要介護認定申請情報情報のテーブルが変更されたため、最新化が必要
+//        List<DbT5001NinteiShinseiJohoEntity> 要介護認定申請情報List = 要介護認定申請情報Dac.selectAll();
         List<NinteiShinseiJohoModel> list = new ArrayList<>();
 
-        for (DbT5001NinteiShinseiJohoEntity 要介護認定申請情報 : 要介護認定申請情報List) {
-            list.add(createModel(要介護認定申請情報));
-        }
+//        for (DbT5001NinteiShinseiJohoEntity 要介護認定申請情報 : 要介護認定申請情報List) {
+//            list.add(createModel(要介護認定申請情報));
+//        }
         IItemList<NinteiShinseiJohoModel> 台帳リスト = ItemList.of(list);
 
         return 台帳リスト;
@@ -115,9 +120,8 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
         if (data == null) {
             return result;
         }
-
-        result = 要介護認定申請情報Dac.insert(data.getEntity());
-
+//TODO n8235 船山洋介 要介護認定申請情報情報のテーブルが変更されたため、最新化が必要
+//        result = 要介護認定申請情報Dac.insert(data.getEntity());
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;
     }
@@ -129,9 +133,8 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
         if (data == null) {
             return result;
         }
-
-        result = 要介護認定申請情報Dac.update(data.getEntity());
-
+//TODO n8235 船山洋介 要介護認定申請情報情報のテーブルが変更されたため、最新化が必要
+//        result = 要介護認定申請情報Dac.update(data.getEntity());
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;
     }
@@ -144,8 +147,7 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
             return result;
         }
 
-        result = 要介護認定申請情報Dac.delete(data.getEntity());
-
+//        result = 要介護認定申請情報Dac.delete(data.getEntity());
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;
     }
@@ -162,8 +164,8 @@ public class NinteiShinseiJohoDac implements IModifiable<NinteiShinseiJohoModel>
         if (data == null) {
             return result;
         }
-
-        result = 要介護認定申請情報Dac.deletePhysical(data.getEntity());
+//TODO n8235 船山洋介 要介護認定申請情報情報のテーブルが変更されたため、最新化が必要
+//        result = 要介護認定申請情報Dac.deletePhysical(data.getEntity());
 
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;
