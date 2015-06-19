@@ -1,0 +1,11 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+shujiiIryokikanCode,varchar,ShujiiIryokikanCode,,,,,主治医医療機関コード,A
+iryokikanCode,DbUDD012IryoKikanCode,IryoKikanCode,,,,,医療機関コード,A
+iryoKikanMeisho,varchar,RString,,,,,医療機関名称,A
+iryoKikanMeishoKana,varchar,RString,,,,,医療機関名称カナ,A
+yubinNo,UDD003YubinNo,YubinNo,,,,,郵便番号,A
+jusho,varchar,RString,,,,,住所,A
+telNo,UDD026TelNo,TelNo,,,,,電話番号,A
+faxNo,UDD026TelNo,TelNo,,,,,FAX番号,A
+daihyoshaName,UDD042AtenaMeisho,AtenaMeisho,,,,,代表者名,A
+jokyoFlag,bool,boolean,,,,,状況フラグ,A

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriN
 /**
  * 申請履歴情報（子）テーブルのエンティティクラスです。
  */
-public class DbT4121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT4121ShinseiRirekiJohoEntity> implements IDbAccessable {
+public class DbT4121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT4121ShinseiRirekiJohoEntity> implements IDbAccessable, IShinseiRirekiJohoEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
@@ -116,7 +116,8 @@ public class DbT4121ShinseiRirekiJohoEntity extends DbTableEntityBase<DbT4121Shi
      * このエンティティの主キーが他の{@literal DbT4121ShinseiRirekiJohoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT4121ShinseiRirekiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT4121ShinseiRirekiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT4121ShinseiRirekiJohoEntity other) {

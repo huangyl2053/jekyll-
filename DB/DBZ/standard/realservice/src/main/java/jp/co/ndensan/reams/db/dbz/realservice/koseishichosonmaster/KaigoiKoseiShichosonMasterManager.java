@@ -11,8 +11,7 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.db.dbz.entity.relate.IKoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -40,7 +39,7 @@ public class KaigoiKoseiShichosonMasterManager extends KoseiShichosonMasterManag
     }
 
     /**
-     * 市町村識別IDより構成市町村マスタ情報を取得します。
+     * 構成市町村マスタ情報を取得します。
      *
      * @param 市町村識別ID 市町村識別ID
      * @return 構成市町村マスタ情報
@@ -57,37 +56,26 @@ public class KaigoiKoseiShichosonMasterManager extends KoseiShichosonMasterManag
     }
 
     /**
-     * 証記載保険者番号より構成市町村マスタ情報を取得します。
+     * 構成市町村マスタ情報を登録します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
-     * @return 構成市町村マスタ情報
+     * @param 構成市町村情報 構成市町村情報
+     * @return 登録件数
      */
     @Override
-    public Optional<IKoseiShichosonMaster> find構成市町村(ShoKisaiHokenshaNo 証記載保険者番号) {
-        return dac.selectByKey(証記載保険者番号)
-                .map(new IFunction<DbT7051KoseiShichosonMasterEntity, IKoseiShichosonMaster>() {
-                    @Override
-                    public IKoseiShichosonMaster apply(DbT7051KoseiShichosonMasterEntity t) {
-                        return new KaigoKoseiShichosonMaster(t);
-                    }
-                });
-    }
+    public int save構成市町村(IKoseiShichosonMaster 構成市町村情報) {
 
-    /**
-     * 証記載保険者番号より構成市町村マスタ情報を取得します。
-     *
-     * @param 市町村コード 市町村コード
-     * @return 構成市町村マスタ情報
-     */
-    @Override
-    public Optional<IKoseiShichosonMaster> find構成市町村(LasdecCode 市町村コード) {
-        return dac.selectByKey(市町村コード)
-                .map(new IFunction<DbT7051KoseiShichosonMasterEntity, IKoseiShichosonMaster>() {
-                    @Override
-                    public IKoseiShichosonMaster apply(DbT7051KoseiShichosonMasterEntity t) {
-                        return new KaigoKoseiShichosonMaster(t);
-                    }
-                });
+        IKoseiShichosonMasterEntity entity = 構成市町村情報.getEntity();
+
+        switch (構成市町村情報.getState()) {
+            case Added:
+                return dac.insert(entity);
+            case Modified:
+                return dac.update(entity);
+            case Deleted:
+                return dac.delete(entity);
+            default:
+                return 0;
+        }
     }
 
 }

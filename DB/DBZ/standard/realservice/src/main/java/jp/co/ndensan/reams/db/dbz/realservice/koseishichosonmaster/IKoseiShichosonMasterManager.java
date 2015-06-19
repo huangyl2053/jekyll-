@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbz.realservice.koseishichosonmaster;
 
 import jp.co.ndensan.reams.db.dbz.business.koseishichosonmaster.IKoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -27,18 +25,11 @@ public interface IKoseiShichosonMasterManager {
     Optional<IKoseiShichosonMaster> find構成市町村(RString 市町村識別ID);
 
     /**
-     * 構成市町村マスタ情報を取得します。
+     * 構成市町村マスタ情報を登録します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
-     * @return 構成市町村マスタ情報
+     * @param 構成市町村情報
+     * @return 登録件数
      */
-    Optional<IKoseiShichosonMaster> find構成市町村(ShoKisaiHokenshaNo 証記載保険者番号);
+    int save構成市町村(IKoseiShichosonMaster 構成市町村情報);
 
-    /**
-     * 構成市町村マスタ情報を取得します。
-     *
-     * @param 市町村コード 市町村コード
-     * @return 構成市町村マスタ情報
-     */
-    Optional<IKoseiShichosonMaster> find構成市町村(LasdecCode 市町村コード);
 }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.realservice;
 
+import jp.co.ndensan.reams.db.dbd.business.HokenshaNinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbd.business.INinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.basic.helper.DbT4101NinteiShinseiJohoEntityGenerator;
@@ -12,14 +13,17 @@ import jp.co.ndensan.reams.db.dbd.persistence.basic.DbT4101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static org.hamcrest.CoreMatchers.is;
-import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.any;
 
 /**
  * {link HokenshaNinteiShinseiJohoManager}のテストクラスです。
@@ -29,19 +33,19 @@ import static org.mockito.Mockito.when;
 @RunWith(Enclosed.class)
 public class HokenshaNinteiShinseiJohoManagerTest {
 
+    private static final ShinseishoKanriNo notFound申請書管理番号 = new ShinseishoKanriNo("99999999999999999");
+    private static final ShinseishoKanriNo Found申請書管理番号 = new ShinseishoKanriNo("00000000000000999");
+
+    private static HokenshaNinteiShinseiJohoManager sut;
+    private static DbT4101NinteiShinseiJohoDac dac;
+
+    @BeforeClass
+    public static void setUp() {
+        dac = mock(DbT4101NinteiShinseiJohoDac.class);
+        sut = new HokenshaNinteiShinseiJohoManager(dac);
+    }
+
     public static class find認定申請情報 extends DbdTestBase {
-
-        private static final ShinseishoKanriNo notFound申請書管理番号 = new ShinseishoKanriNo("99999999999999999");
-        private static final ShinseishoKanriNo Found申請書管理番号 = new ShinseishoKanriNo("00000000000000999");
-
-        private HokenshaNinteiShinseiJohoManager sut;
-        private DbT4101NinteiShinseiJohoDac dac;
-
-        @Before
-        public void setUp() {
-            dac = mock(DbT4101NinteiShinseiJohoDac.class);
-            sut = new HokenshaNinteiShinseiJohoManager(dac);
-        }
 
         private static INinteiShinseiJoho createBusiness(ShinseishoKanriNo 申請書管理番号) {
             INinteiShinseiJoho business = mock(INinteiShinseiJoho.class);
@@ -68,4 +72,50 @@ public class HokenshaNinteiShinseiJohoManagerTest {
             assertThat(result.get().get申請書管理番号().value(), is(createBusiness(Found申請書管理番号).get申請書管理番号().value()));
         }
     }
+
+    public static class save認定申請情報のテスト extends DbdTestBase {
+
+        @Test
+        public void insertに成功すると1が返る() {
+            when(dac.insert(any(DbT4101NinteiShinseiJohoEntity.class))).thenReturn(1);
+
+            INinteiShinseiJoho renrakusaki = new HokenshaNinteiShinseiJoho(DbT4101NinteiShinseiJohoEntityGenerator.createDbT4101NinteiShinseiJohoEntity());
+
+            assertThat(sut.save認定申請情報(renrakusaki), is(1));
+        }
+
+        @Test
+        public void updateに成功すると1が返る() {
+            when(dac.update(any(DbT4101NinteiShinseiJohoEntity.class))).thenReturn(1);
+
+            HokenshaNinteiShinseiJoho renrakusaki = new HokenshaNinteiShinseiJoho(DbT4101NinteiShinseiJohoEntityGenerator.createDbT4101NinteiShinseiJohoEntity());
+            renrakusaki.getEntity().initializeMd5();
+            HokenshaNinteiShinseiJoho.Builder createBuilderForEdit = renrakusaki.createBuilderForEdit();
+            createBuilderForEdit.setEnkiRiyu(RString.HALF_SPACE);
+            INinteiShinseiJoho build = createBuilderForEdit.build();
+
+            assertThat(sut.save認定申請情報(build), is(1));
+        }
+
+        @Test
+        public void deleteに成功すると1が返る() {
+            when(dac.delete(any(DbT4101NinteiShinseiJohoEntity.class))).thenReturn(1);
+
+            HokenshaNinteiShinseiJoho renrakusaki = new HokenshaNinteiShinseiJoho(DbT4101NinteiShinseiJohoEntityGenerator.createDbT4101NinteiShinseiJohoEntity());
+            renrakusaki.getEntity().initializeMd5();
+            renrakusaki.setDeletedState(true);
+
+            assertThat(sut.save認定申請情報(renrakusaki), is(1));
+        }
+
+        @Test(expected = ApplicationException.class)
+        public void ビジネスクラスの状態がUnchangedの場合_ApplicationExceptionが発生する() {
+
+            HokenshaNinteiShinseiJoho renrakusaki = new HokenshaNinteiShinseiJoho(DbT4101NinteiShinseiJohoEntityGenerator.createDbT4101NinteiShinseiJohoEntity());
+            renrakusaki.getEntity().initializeMd5();
+
+            sut.save認定申請情報(renrakusaki);
+        }
+    }
+
 }

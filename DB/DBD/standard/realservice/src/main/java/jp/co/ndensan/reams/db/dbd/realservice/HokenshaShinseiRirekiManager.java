@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.realservice;
 import jp.co.ndensan.reams.db.dbd.business.IShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbd.business.HokenshaShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbd.entity.basic.DbT4121ShinseiRirekiJohoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.basic.IShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.basic.DbT4121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
@@ -42,7 +43,7 @@ public class HokenshaShinseiRirekiManager extends ShinseiRirekiManagerBase {
     /**
      * 申請履歴情報を取得します。
      *
-     * @param 申請書管理番号 申請書管理番号
+     * @param 申請書管理番号 ShinseishoKanriNo
      * @return 申請履歴情報
      */
     @Override
@@ -54,6 +55,30 @@ public class HokenshaShinseiRirekiManager extends ShinseiRirekiManagerBase {
                         return new HokenshaShinseiRirekiJoho(t);
                     }
                 });
+    }
+
+    /**
+     * 申請履歴情報を登録します。
+     *
+     * @param 申請履歴情報 IShinseiRirekiJoho
+     * @return 登録件数
+     */
+    @Override
+    public int save申請履歴(IShinseiRirekiJoho 申請履歴情報) {
+
+        IShinseiRirekiJohoEntity entity = 申請履歴情報.getEntity();
+
+        switch (申請履歴情報.getState()) {
+            case Added:
+                return dac.insert(entity);
+            case Modified:
+                return dac.update(entity);
+            case Deleted:
+                return dac.delete(entity);
+            default:
+                return 0;
+        }
+
     }
 
 }
