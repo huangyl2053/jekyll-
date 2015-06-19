@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.ur.urz.definition.lib.util.IRStringConvertable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * データ区分の列挙型です。
  *
- * @author n8235
+ * @author n8235 船山洋介
  */
 public enum DataKubun implements IRStringConvertable {
 

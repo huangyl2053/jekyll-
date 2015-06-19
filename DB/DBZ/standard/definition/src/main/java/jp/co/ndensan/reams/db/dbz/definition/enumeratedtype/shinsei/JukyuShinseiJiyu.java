@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErro
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 受給申請事由
+ * 受給申請事由の列挙型です。
  *
  * @author N8235 船山 洋介
  */
@@ -83,8 +83,7 @@ public enum JukyuShinseiJiyu {
      *
      * @param code コード
      * @return コードに対応する{@link JukyuShinseiJiyu}
-     * @throws IllegalArgumentException
-     * コードに対応する{@link JukyuShinseiJiyu}が無い時
+     * @throws IllegalArgumentException コードに対応する{@link JukyuShinseiJiyu}が無い時
      */
     public static JukyuShinseiJiyu toValue(RString code) throws IllegalArgumentException {
         JukyuShinseiJiyu value = CodeToValue.get(code);

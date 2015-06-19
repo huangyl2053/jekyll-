@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.ur.urz.definition.lib.util.IRStringConvertable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 削除事由の列挙型です
+ * 削除事由の列挙型です。
  *
- * @author n8235
+ * @author n8235 船山洋介
  */
 public enum SakujoJiyuCode implements IRStringConvertable {
 

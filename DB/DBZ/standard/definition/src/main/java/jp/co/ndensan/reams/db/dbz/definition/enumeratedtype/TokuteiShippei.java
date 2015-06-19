@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErro
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 特定疾病の列挙型です。
  *
  * @author N8235 船山 洋介
  */
@@ -132,8 +133,7 @@ public enum TokuteiShippei {
      *
      * @param code コード
      * @return コードに対応する{@link TokuteiShippei}
-     * @throws IllegalArgumentException
-     * コードに対応する{@link TokuteiShippei}が無い時
+     * @throws IllegalArgumentException コードに対応する{@link TokuteiShippei}が無い時
      */
     public static TokuteiShippei toValue(RString code) throws IllegalArgumentException {
         TokuteiShippei value = CodeToValue.get(code);

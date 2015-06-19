@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErro
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 要介護認定申請で使用する被保険者の区分です。
+ * 要介護認定申請で使用する被保険者区分の列挙型です。
  *
  * @author N8235 船山 洋介
  */
@@ -63,8 +63,7 @@ public enum HihokenshaKubunCode {
      *
      * @param code コード
      * @return コードに対応する{@link HihokenshaKubunCode}
-     * @throws IllegalArgumentException
-     * コードに対応する{@link HihokenshaKubunCode}が無い時
+     * @throws IllegalArgumentException コードに対応する{@link HihokenshaKubunCode}が無い時
      */
     public static HihokenshaKubunCode toValue(RString code) throws IllegalArgumentException {
         HihokenshaKubunCode value = CodeToValue.get(code);
