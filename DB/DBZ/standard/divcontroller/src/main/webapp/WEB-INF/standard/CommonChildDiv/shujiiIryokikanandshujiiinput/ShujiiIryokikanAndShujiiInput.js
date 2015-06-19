@@ -1,5 +1,5 @@
-var DBD;
-(function (DBD) {
+var DBZ;
+(function (DBZ) {
     (function (ShujiiIryokikanAndShujiiInput) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -16,12 +16,12 @@ var DBD;
             return ModeController;
         })();
         ShujiiIryokikanAndShujiiInput.ModeController = ModeController;
-    })(DBD.ShujiiIryokikanAndShujiiInput || (DBD.ShujiiIryokikanAndShujiiInput = {}));
-    var ShujiiIryokikanAndShujiiInput = DBD.ShujiiIryokikanAndShujiiInput;
-})(DBD || (DBD = {}));
+    })(DBZ.ShujiiIryokikanAndShujiiInput || (DBZ.ShujiiIryokikanAndShujiiInput = {}));
+    var ShujiiIryokikanAndShujiiInput = DBZ.ShujiiIryokikanAndShujiiInput;
+})(DBZ || (DBZ = {}));
 
-var DBD;
-(function (DBD) {
+var DBZ;
+(function (DBZ) {
     (function (ShujiiIryokikanAndShujiiInput) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -36,6 +36,6 @@ var DBD;
             return PublicProperties;
         })();
         ShujiiIryokikanAndShujiiInput.PublicProperties = PublicProperties;
-    })(DBD.ShujiiIryokikanAndShujiiInput || (DBD.ShujiiIryokikanAndShujiiInput = {}));
-    var ShujiiIryokikanAndShujiiInput = DBD.ShujiiIryokikanAndShujiiInput;
-})(DBD || (DBD = {}));
+    })(DBZ.ShujiiIryokikanAndShujiiInput || (DBZ.ShujiiIryokikanAndShujiiInput = {}));
+    var ShujiiIryokikanAndShujiiInput = DBZ.ShujiiIryokikanAndShujiiInput;
+})(DBZ || (DBZ = {}));

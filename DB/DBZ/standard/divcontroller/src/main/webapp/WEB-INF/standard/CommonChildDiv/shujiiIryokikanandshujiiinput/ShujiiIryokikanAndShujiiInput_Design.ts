@@ -2,7 +2,7 @@
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
 
-module DBD {
+module DBZ {
 
      export module ShujiiIryokikanAndShujiiInput {
 
@@ -42,11 +42,11 @@ module DBD {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBD.ShujiiIryokikanAndShujiiInput.Controls.myType();
+                return this._myName + "_" + DBZ.ShujiiIryokikanAndShujiiInput.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBD.ShujiiIryokikanAndShujiiInput.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.ShujiiIryokikanAndShujiiInput.Controls.myType() + "_" + fieldName;
             }
 
             public ShujiiIryokikanAndShujiiInput(): UZA.Panel {

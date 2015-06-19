@@ -1,5 +1,5 @@
 /// <reference path='ShujiiIryokikanAndShujiiInput_Design.ts' />
-module DBD
+module DBZ
 {
     export module ShujiiIryokikanAndShujiiInput
     {
@@ -26,7 +26,7 @@ module DBD
     }
 }
 
-module DBD
+module DBZ
 {
     export module ShujiiIryokikanAndShujiiInput
     {

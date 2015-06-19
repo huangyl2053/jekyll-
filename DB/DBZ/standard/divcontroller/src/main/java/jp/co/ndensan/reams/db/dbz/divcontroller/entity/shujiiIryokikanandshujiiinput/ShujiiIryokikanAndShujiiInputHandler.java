@@ -68,7 +68,6 @@ public class ShujiiIryokikanAndShujiiInputHandler {
         if (shujiiIryoKikanJoho.isPresent()) {
             div.getTxtIryoKikanName().setValue(shujiiIryoKikanJoho.get().get医療機関名称());
         }
-        div.getTxtIryoKikanName().clearValue();
     }
 
     /**
