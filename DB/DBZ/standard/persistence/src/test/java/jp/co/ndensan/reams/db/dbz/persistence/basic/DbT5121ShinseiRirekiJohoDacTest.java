@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.CoreMatchers.nullValue;
 import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -86,7 +85,7 @@ public class DbT5121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
 
         @Test
         public void 申請履歴情報が存在しない場合_selectAllは_空のリストを返す() {
-            assertThat(sut.selectAll(), is(Collections.EMPTY_LIST));
+            assertThat(sut.selectAll().toList(), is(Collections.EMPTY_LIST));
         }
     }
 

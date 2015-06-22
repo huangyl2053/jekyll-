@@ -85,7 +85,7 @@ public class DbT4121ShinseiRirekiJohoDacTest extends DbdTestDacBase {
 
         @Test
         public void 申請履歴情報が存在しない場合_selectAllは_空のリストを返す() {
-            assertThat(sut.selectAll(), is(Collections.EMPTY_LIST));
+            assertThat(sut.selectAll().toList(), is(Collections.EMPTY_LIST));
         }
     }
 

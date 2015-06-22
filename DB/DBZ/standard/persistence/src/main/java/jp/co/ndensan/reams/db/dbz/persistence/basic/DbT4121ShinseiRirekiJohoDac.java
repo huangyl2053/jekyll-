@@ -4,9 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
-import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4121ShinseiRirekiJoho;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT4121ShinseiRirekiJoho.*;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4121ShinseiRirekiJohoEntity;
@@ -54,15 +53,15 @@ public class DbT4121ShinseiRirekiJohoDac implements IModifiable<IShinseiRirekiJo
     /**
      * 申請履歴情報を全件返します。
      *
-     * @return List<DbT4121ShinseiRirekiJohoEntity>
+     * @return ItemList<DbT4121ShinseiRirekiJohoEntity>
      */
     @Transaction
-    public List<DbT4121ShinseiRirekiJohoEntity> selectAll() {
+    public ItemList<DbT4121ShinseiRirekiJohoEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.select().
+        return ItemList.of(accessor.select().
                 table(DbT4121ShinseiRirekiJoho.class).
-                toList(DbT4121ShinseiRirekiJohoEntity.class);
+                toList(DbT4121ShinseiRirekiJohoEntity.class));
     }
 
     @Transaction
