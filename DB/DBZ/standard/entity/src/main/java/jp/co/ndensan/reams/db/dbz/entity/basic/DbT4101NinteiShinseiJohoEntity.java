@@ -20,6 +20,10 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.SeibetsuCode;
 
 /**
@@ -79,11 +83,11 @@ public class DbT4101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT4101Nin
     private boolean johoteikyoDoiFlag;
     private FlexibleDate johoteikyoSiryoOutputYMD;
     private Code chosaKubun;
-    private RString ninteichosaItakusakiCode;
-    private RString ninteiChousainCode;
+    private ChosaItakusakiCode ninteichosaItakusakiCode;
+    private ChosainCode ninteiChousainCode;
     private RString renrakuJikoToChosain;
-    private RString shujiiIryokikanCode;
-    private RString shujiiCode;
+    private ShujiiIryokikanCode shujiiIryokikanCode;
+    private ShujiiCode shujiiCode;
     private boolean shiteiiFlag;
     private Code ikenshoDataShubetsu;
     private RString renrakuJikoToShujii;
@@ -920,7 +924,7 @@ public class DbT4101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT4101Nin
      *
      * @return 認定調査委託先コード
      */
-    public RString getNinteichosaItakusakiCode() {
+    public ChosaItakusakiCode getNinteiChosaItakusakiCode() {
         return ninteichosaItakusakiCode;
     }
 
@@ -931,7 +935,7 @@ public class DbT4101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT4101Nin
      *
      * @param ninteichosaItakusakiCode 認定調査委託先コード
      */
-    public void setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {
+    public void setNinteiChosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
         this.ninteichosaItakusakiCode = ninteichosaItakusakiCode;
     }
 
@@ -942,7 +946,7 @@ public class DbT4101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT4101Nin
      *
      * @return 認定調査員コード
      */
-    public RString getNinteiChousainCode() {
+    public ChosainCode getNinteiChousainCode() {
         return ninteiChousainCode;
     }
 
@@ -953,7 +957,7 @@ public class DbT4101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT4101Nin
      *
      * @param ninteiChousainCode 認定調査員コード
      */
-    public void setNinteiChousainCode(RString ninteiChousainCode) {
+    public void setNinteiChosainCode(ChosainCode ninteiChousainCode) {
         this.ninteiChousainCode = ninteiChousainCode;
     }
 
@@ -984,7 +988,7 @@ public class DbT4101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT4101Nin
      *
      * @return 主治医医療機関コード
      */
-    public RString getShujiiIryokikanCode() {
+    public ShujiiIryokikanCode getShujiiIryokikanCode() {
         return shujiiIryokikanCode;
     }
 
@@ -997,7 +1001,7 @@ public class DbT4101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT4101Nin
      *
      * @param shujiiIryokikanCode 主治医医療機関コード
      */
-    public void setShujiiIryokikanCode(RString shujiiIryokikanCode) {
+    public void setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
         this.shujiiIryokikanCode = shujiiIryokikanCode;
     }
 
@@ -1008,7 +1012,7 @@ public class DbT4101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT4101Nin
      *
      * @return 主治医コード
      */
-    public RString getShujiiCode() {
+    public ShujiiCode getShujiiCode() {
         return shujiiCode;
     }
 
@@ -1019,7 +1023,7 @@ public class DbT4101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT4101Nin
      *
      * @param shujiiCode 主治医コード
      */
-    public void setShujiiCode(RString shujiiCode) {
+    public void setShujiiCode(ShujiiCode shujiiCode) {
         this.shujiiCode = shujiiCode;
     }
 
@@ -1641,10 +1645,7 @@ public class DbT4101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT4101Nin
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo);
     }
 
     /**
