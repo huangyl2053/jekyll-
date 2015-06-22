@@ -11,7 +11,9 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.relate.IKoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -47,6 +49,40 @@ public class KaigoiKoseiShichosonMasterManager extends KoseiShichosonMasterManag
     @Override
     public Optional<IKoseiShichosonMaster> find構成市町村(RString 市町村識別ID) {
         return dac.selectByKey(市町村識別ID)
+                .map(new IFunction<DbT7051KoseiShichosonMasterEntity, IKoseiShichosonMaster>() {
+                    @Override
+                    public IKoseiShichosonMaster apply(DbT7051KoseiShichosonMasterEntity t) {
+                        return new KaigoKoseiShichosonMaster(t);
+                    }
+                });
+    }
+
+    /**
+     * 証記載保険者番号を市町村コードへ読み替える構成市町村マスタ情報を取得します。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @return 構成市町村マスタ情報
+     */
+    @Override
+    public Optional<IKoseiShichosonMaster> find構成市町村by証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
+        return dac.selectByKey(証記載保険者番号)
+                .map(new IFunction<DbT7051KoseiShichosonMasterEntity, IKoseiShichosonMaster>() {
+                    @Override
+                    public IKoseiShichosonMaster apply(DbT7051KoseiShichosonMasterEntity t) {
+                        return new KaigoKoseiShichosonMaster(t);
+                    }
+                });
+    }
+
+    /**
+     * 市町村コードを証記載保険者番号へ読み替える構成市町村マスタ情報を取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return 構成市町村マスタ情報
+     */
+    @Override
+    public Optional<IKoseiShichosonMaster> find構成市町村by市町村コード(LasdecCode 市町村コード) {
+        return dac.selectByKey(市町村コード)
                 .map(new IFunction<DbT7051KoseiShichosonMasterEntity, IKoseiShichosonMaster>() {
                     @Override
                     public IKoseiShichosonMaster apply(DbT7051KoseiShichosonMasterEntity t) {

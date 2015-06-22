@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster;
-import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster.*;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster.shichosonShokibetsuID;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.relate.IKoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
@@ -55,9 +55,9 @@ public class DbT7051KoseiShichosonMasterDac implements IModifiable<IKoseiShichos
     }
 
     /**
-     * 証記載保険者番号で構成市町村マスタを取得します。
+     * 主キーで構成市町村マスタを取得します。
      *
-     * @param 証記載保険者番号 ShoKisaiHokenshaNo
+     * @param 証記載保険者番号 ShokisaiHokenshaNo
      * @return DbT7051KoseiShichosonMasterEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
@@ -71,8 +71,8 @@ public class DbT7051KoseiShichosonMasterDac implements IModifiable<IKoseiShichos
         return Optional.ofNullable(accessor.select().
                 table(DbT7051KoseiShichosonMaster.class).
                 where(
-                        eq(shoKisaiHokenshaNo, 証記載保険者番号)).
-                toObject(DbT7051KoseiShichosonMasterEntity.class));
+                        eq(shichosonShokibetsuID, 証記載保険者番号)).
+                toList(DbT7051KoseiShichosonMasterEntity.class).get(0));
     }
 
     /**
@@ -85,15 +85,15 @@ public class DbT7051KoseiShichosonMasterDac implements IModifiable<IKoseiShichos
     @Transaction
     public Optional<DbT7051KoseiShichosonMasterEntity> selectByKey(
             LasdecCode 市町村コード) throws NullPointerException {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村識別ID"));
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return Optional.ofNullable(accessor.select().
                 table(DbT7051KoseiShichosonMaster.class).
                 where(
-                        eq(shichosonCode, 市町村コード)).
-                toObject(DbT7051KoseiShichosonMasterEntity.class));
+                        eq(shichosonShokibetsuID, 市町村コード)).
+                toList(DbT7051KoseiShichosonMasterEntity.class).get(0));
     }
 
     /**

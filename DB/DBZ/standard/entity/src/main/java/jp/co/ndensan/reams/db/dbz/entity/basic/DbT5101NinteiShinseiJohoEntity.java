@@ -19,13 +19,11 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import java.util.Objects;
-//TODO ShujiiIryokikanCode　使用必要
-//import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
-//TODO ShujiiCode　使用必要
-//import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ShujiiCode;
-import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.SeibetsuCode;
 
 /**
@@ -86,10 +84,10 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     private FlexibleDate johoteikyoSiryoOutputYMD;
     private Code chosaKubun;
     private ChosaItakusakiCode ninteichosaItakusakiCode;
-    private ChosainCode ninteiChousainCode;
+    private ChosainCode ninteiChosainCode;
     private RString renrakuJikoToChosain;
-    private RString shujiiIryokikanCode;
-    private RString shujiiCode;
+    private ShujiiIryokikanCode shujiiIryokikanCode;
+    private ShujiiCode shujiiCode;
     private boolean shiteiiFlag;
     private Code ikenshoDataShubetsu;
     private RString renrakuJikoToShujii;
@@ -926,7 +924,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 認定調査委託先コード
      */
-    public ChosaItakusakiCode getNinteichosaItakusakiCode() {
+    public ChosaItakusakiCode getNinteiChosaItakusakiCode() {
         return ninteichosaItakusakiCode;
     }
 
@@ -937,7 +935,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param ninteichosaItakusakiCode 認定調査委託先コード
      */
-    public void setNinteichosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
+    public void setNinteiChosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
         this.ninteichosaItakusakiCode = ninteichosaItakusakiCode;
     }
 
@@ -948,8 +946,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 認定調査員コード
      */
-    public ChosainCode getNinteiChousainCode() {
-        return ninteiChousainCode;
+    public ChosainCode getNinteiChosainCode() {
+        return ninteiChosainCode;
     }
 
     /**
@@ -957,10 +955,10 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      * <br/>
      * <br/>依頼情報の生成によってupdateされていく。
      *
-     * @param ninteiChousainCode 認定調査員コード
+     * @param ninteiChosainCode 認定調査員コード
      */
-    public void setNinteiChousainCode(ChosainCode ninteiChousainCode) {
-        this.ninteiChousainCode = ninteiChousainCode;
+    public void setNinteiChosainCode(ChosainCode ninteiChosainCode) {
+        this.ninteiChosainCode = ninteiChosainCode;
     }
 
     /**
@@ -990,7 +988,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 主治医医療機関コード
      */
-    public RString getShujiiIryokikanCode() {
+    public ShujiiIryokikanCode getShujiiIryokikanCode() {
         return shujiiIryokikanCode;
     }
 
@@ -1003,7 +1001,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param shujiiIryokikanCode 主治医医療機関コード
      */
-    public void setShujiiIryokikanCode(RString shujiiIryokikanCode) {
+    public void setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
         this.shujiiIryokikanCode = shujiiIryokikanCode;
     }
 
@@ -1014,7 +1012,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @return 主治医コード
      */
-    public RString getShujiiCode() {
+    public ShujiiCode getShujiiCode() {
         return shujiiCode;
     }
 
@@ -1025,7 +1023,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      *
      * @param shujiiCode 主治医コード
      */
-    public void setShujiiCode(RString shujiiCode) {
+    public void setShujiiCode(ShujiiCode shujiiCode) {
         this.shujiiCode = shujiiCode;
     }
 
@@ -1698,7 +1696,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
         this.johoteikyoSiryoOutputYMD = entity.johoteikyoSiryoOutputYMD;
         this.chosaKubun = entity.chosaKubun;
         this.ninteichosaItakusakiCode = entity.ninteichosaItakusakiCode;
-        this.ninteiChousainCode = entity.ninteiChousainCode;
+        this.ninteiChosainCode = entity.ninteiChosainCode;
         this.renrakuJikoToChosain = entity.renrakuJikoToChosain;
         this.shujiiIryokikanCode = entity.shujiiIryokikanCode;
         this.shujiiCode = entity.shujiiCode;
@@ -1744,7 +1742,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, koroshoIfShikibetsuCode, shoKisaiHokenshaNo, shinseiNendo, hihokenshaNo, ninteiShinseiYMD, ninteiShinseiEdabanCode, ninteiShinseiHoreiKubunCode, ninteiShinseiShinseijiKubunCode, torisageKubunCode, hihokenshaKubunCode, seinengappiYMD, age, seibetsu, hihokenshaKana, hihokenshaName, yubinNo, jusho, telNo, shishoCode, shikibetsuCode, chikuCode, minashiNigoEtcTaishoFlag, koikinaiTenkyoKubun, ninteiShinseiYukoKubunCode, shienShinseiKubun, ninteiShinseiRiyu, shinseiServiceDeleteRiyu, zenYokaigoKubunCode, zenkaiNinteiYMD, zenkaiYukoKikanStart, zenkaiYukoKikanEnd, nigoIryoHokenshaName, nigoIryoHokenKigoBango, nigoTokuteiShippeiCode, jidoWariateJogaishaKubun, johoteikyoDoiFlag, johoteikyoSiryoOutputYMD, chosaKubun, ninteichosaItakusakiCode, ninteiChousainCode, renrakuJikoToChosain, shujiiIryokikanCode, shujiiCode, shiteiiFlag, ikenshoDataShubetsu, renrakuJikoToShujii, minashiCode, enkitsuchiNashiDoiFlag, shisetsuNyushoFlag, nyushoShisetsuCode, kateiHomonFlag, homonChosasakiYubinNo, homonChosasakiJusho, homonChosasakiName, homonChosasakiTelNo, sichosonRenrakuJiko, shoriJotaiKubun, torisageYMD, torisageRiyu, kyakkaYMD, kyakkaRiyu, enkiKetteiYMD, enkiRiyu, enkitsuchiHakkoYMD, enkitsuchiHakkoKaisu, enkiMikomiKaishiYMD, enkiMikomiShuryoYMD, shinsaKeizokuFlag, shinsakaiYusenWaritsukeKubunCode, kosinTsuchiHakkoYMD, kosinTsuchiHakkoKanryoYMD, ninteiShinseiJohoTorokuYMD, saiChosaIraiKaisu, saiSakuseiIraiKaisu, ifSofuYMD, logicalDeletedFlag);
+        return super.toMd5(shinseishoKanriNo, koroshoIfShikibetsuCode, shoKisaiHokenshaNo, shinseiNendo, hihokenshaNo, ninteiShinseiYMD, ninteiShinseiEdabanCode, ninteiShinseiHoreiKubunCode, ninteiShinseiShinseijiKubunCode, torisageKubunCode, hihokenshaKubunCode, seinengappiYMD, age, seibetsu, hihokenshaKana, hihokenshaName, yubinNo, jusho, telNo, shishoCode, shikibetsuCode, chikuCode, minashiNigoEtcTaishoFlag, koikinaiTenkyoKubun, ninteiShinseiYukoKubunCode, shienShinseiKubun, ninteiShinseiRiyu, shinseiServiceDeleteRiyu, zenYokaigoKubunCode, zenkaiNinteiYMD, zenkaiYukoKikanStart, zenkaiYukoKikanEnd, nigoIryoHokenshaName, nigoIryoHokenKigoBango, nigoTokuteiShippeiCode, jidoWariateJogaishaKubun, johoteikyoDoiFlag, johoteikyoSiryoOutputYMD, chosaKubun, ninteichosaItakusakiCode, ninteiChosainCode, renrakuJikoToChosain, shujiiIryokikanCode, shujiiCode, shiteiiFlag, ikenshoDataShubetsu, renrakuJikoToShujii, minashiCode, enkitsuchiNashiDoiFlag, shisetsuNyushoFlag, nyushoShisetsuCode, kateiHomonFlag, homonChosasakiYubinNo, homonChosasakiJusho, homonChosasakiName, homonChosasakiTelNo, sichosonRenrakuJiko, shoriJotaiKubun, torisageYMD, torisageRiyu, kyakkaYMD, kyakkaRiyu, enkiKetteiYMD, enkiRiyu, enkitsuchiHakkoYMD, enkitsuchiHakkoKaisu, enkiMikomiKaishiYMD, enkiMikomiShuryoYMD, shinsaKeizokuFlag, shinsakaiYusenWaritsukeKubunCode, kosinTsuchiHakkoYMD, kosinTsuchiHakkoKanryoYMD, ninteiShinseiJohoTorokuYMD, saiChosaIraiKaisu, saiSakuseiIraiKaisu, ifSofuYMD, logicalDeletedFlag);
     }
 
 // </editor-fold>
