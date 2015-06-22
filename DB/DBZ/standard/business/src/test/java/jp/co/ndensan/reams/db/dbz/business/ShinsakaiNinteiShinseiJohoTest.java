@@ -4,9 +4,12 @@
  */
 package jp.co.ndensan.reams.db.dbz.business;
 
-import jp.co.ndensan.reams.db.dbz.business.ShinsakaiNinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5101NinteiShinseiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbdTestBase;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.SeibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -710,14 +713,14 @@ public class ShinsakaiNinteiShinseiJohoTest extends DbdTestBase {
         }
 
         @Test
-        public void setNinteichosaItakusakiCodeで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
-            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setNinteichosaItakusakiCode(new RString("0000000001")).build();
+        public void setNinteiChosaItakusakiCodeで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
+            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setNinteiChosaItakusakiCode(new ChosaItakusakiCode("0000000001")).build();
             assertThat(result.get認定調査委託先コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_認定調査委託先コード));
         }
 
         @Test
-        public void setNinteiChousainCodeで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
-            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setNinteiChousainCode(new RString("00000001")).build();
+        public void setNinteiChosainCodeで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
+            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setNinteiChosainCode(new ChosainCode("00000001")).build();
             assertThat(result.get認定調査員コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_認定調査員コード));
         }
 
@@ -729,13 +732,13 @@ public class ShinsakaiNinteiShinseiJohoTest extends DbdTestBase {
 
         @Test
         public void setShujiiIryokikanCodeで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
-            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setShujiiIryokikanCode(new RString("0000000001")).build();
+            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setShujiiIryokikanCode(new ShujiiIryokikanCode("0000000001")).build();
             assertThat(result.get主治医医療機関コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_主治医医療機関コード));
         }
 
         @Test
         public void setShujiiCodeで設定した値を_生成されたShinsakaiNinteiShinseiJohoも保持する() {
-            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setShujiiCode(new RString("00000001")).build();
+            ShinsakaiNinteiShinseiJoho result = ShinsakaiNinteiShinseiJoho.newBuilder().setShujiiCode(new ShujiiCode("00000001")).build();
             assertThat(result.get主治医コード(), is(DbT5101NinteiShinseiJohoEntityGenerator.DEFAULT_主治医コード));
         }
 

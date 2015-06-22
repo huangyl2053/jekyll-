@@ -680,10 +680,7 @@ public class DbT5051KoseiShichosonMasterEntity extends DbTableEntityBase<DbT5051
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shichosonShokibetsuID, other.shichosonShokibetsuID)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.shichosonShokibetsuID, other.shichosonShokibetsuID);
     }
 
     /**

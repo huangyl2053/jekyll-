@@ -1,7 +1,7 @@
-/// <reference path='NinteiShinseiShichosonRenrakuJoho_Design.ts' />
+/// <reference path='NinteiShinseiShichosonRenrakuJiko_Design.ts' />
 module DBZ
 {
-    export module NinteiShinseiShichosonRenrakuJoho
+    export module NinteiShinseiShichosonRenrakuJiko
     {
         export class ModeController {
             private controls: Controls;
@@ -19,16 +19,40 @@ module DBZ
             public PublicProperties() {
                 return new PublicProperties(this.fieldName);
             }
+            public ShoriType() {
+                return new Modes.ShoriType(this.controls);
+            }
         }
 
         export module Modes {
+
+
+            export class ShoriType {
+                private controls: Controls;
+
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                public InputMode(): void {
+                    this.controls.txtRenrakujiko().readOnly = false;
+                    this.controls.btnToroku().disabled = false;
+
+                }
+
+                public ShokaiMode(): void {
+                    this.controls.txtRenrakujiko().readOnly = true;
+                    this.controls.btnToroku().disabled = true;
+
+                }
+            }
         }
     }
 }
 
 module DBZ
 {
-    export module NinteiShinseiShichosonRenrakuJoho
+    export module NinteiShinseiShichosonRenrakuJiko
     {
         export class PublicProperties {
             private controls: Controls;
