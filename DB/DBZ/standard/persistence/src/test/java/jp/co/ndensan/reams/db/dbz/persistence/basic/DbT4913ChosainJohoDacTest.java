@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT4913ChosainJohoDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4913ChosainJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4913ChosainJohoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT4913ChosainJohoEntityGenerator.*;

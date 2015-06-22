@@ -1,5 +1,5 @@
-var DBD;
-(function (DBD) {
+var DBZ;
+(function (DBZ) {
     (function (ChosaItakusakiAndChosainInput) {
         var Events = (function () {
             function Events() {
@@ -32,11 +32,11 @@ var DBD;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBD.ChosaItakusakiAndChosainInput.Controls.myType();
+                return this._myName + "_" + DBZ.ChosaItakusakiAndChosainInput.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBD.ChosaItakusakiAndChosainInput.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.ChosaItakusakiAndChosainInput.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.ChosaItakusakiAndChosainInput = function () {
@@ -81,6 +81,6 @@ var DBD;
             return Controls;
         })();
         ChosaItakusakiAndChosainInput.Controls = Controls;
-    })(DBD.ChosaItakusakiAndChosainInput || (DBD.ChosaItakusakiAndChosainInput = {}));
-    var ChosaItakusakiAndChosainInput = DBD.ChosaItakusakiAndChosainInput;
-})(DBD || (DBD = {}));
+    })(DBZ.ChosaItakusakiAndChosainInput || (DBZ.ChosaItakusakiAndChosainInput = {}));
+    var ChosaItakusakiAndChosainInput = DBZ.ChosaItakusakiAndChosainInput;
+})(DBZ || (DBZ = {}));

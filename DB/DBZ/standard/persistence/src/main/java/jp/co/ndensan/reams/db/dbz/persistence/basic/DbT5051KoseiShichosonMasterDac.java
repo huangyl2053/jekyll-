@@ -69,7 +69,7 @@ public class DbT5051KoseiShichosonMasterDac implements IModifiable<IKoseiShichos
         return Optional.ofNullable(accessor.select().
                 table(DbT5051KoseiShichosonMaster.class).
                 where(
-                        eq(shichosonShokibetsuID, 証記載保険者番号)).
+                        eq(shoKisaiHokenshaNo, 証記載保険者番号)).
                 toList(DbT5051KoseiShichosonMasterEntity.class).get(0));
     }
 
@@ -90,7 +90,7 @@ public class DbT5051KoseiShichosonMasterDac implements IModifiable<IKoseiShichos
         return Optional.ofNullable(accessor.select().
                 table(DbT5051KoseiShichosonMaster.class).
                 where(
-                        eq(shichosonShokibetsuID, 市町村コード)).
+                        eq(shichosonCode, 市町村コード)).
                 toList(DbT5051KoseiShichosonMasterEntity.class).get(0));
     }
 

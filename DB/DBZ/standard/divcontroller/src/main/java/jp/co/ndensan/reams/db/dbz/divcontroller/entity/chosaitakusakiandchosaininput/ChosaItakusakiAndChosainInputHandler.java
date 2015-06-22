@@ -8,21 +8,21 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.chosaitakusakiandchosain
 import jp.co.ndensan.reams.db.dbz.business.HokenshaChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.HokenshaNinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.IChosainJoho;
-import jp.co.ndensan.reams.db.dbd.business.INinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbz.business.INinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.INinteichosaItakusakiJoho;
-import jp.co.ndensan.reams.db.dbd.business.IShinseiRirekiJoho;
+import jp.co.ndensan.reams.db.dbz.business.IShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.business.ShinsakaiChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.ShinsakaiNinteichosaItakusakiJoho;
-import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbd.definition.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.realservice.ChosaItakusakiFactory;
 import jp.co.ndensan.reams.db.dbz.realservice.ChosainFactory;
 import jp.co.ndensan.reams.db.dbz.realservice.IChosaItakusakiManager;
 import jp.co.ndensan.reams.db.dbz.realservice.IChosainManager;
-import jp.co.ndensan.reams.db.dbd.realservice.INinteiShinseiJohoManager;
-import jp.co.ndensan.reams.db.dbd.realservice.IShinseiRirekiManager;
-import jp.co.ndensan.reams.db.dbd.realservice.NinteiShinseiJohoManagerFactory;
-import jp.co.ndensan.reams.db.dbd.realservice.ShinseiRirekiFactory;
+import jp.co.ndensan.reams.db.dbz.realservice.INinteiShinseiJohoManager;
+import jp.co.ndensan.reams.db.dbz.realservice.IShinseiRirekiManager;
+import jp.co.ndensan.reams.db.dbz.realservice.NinteiShinseiJohoManagerFactory;
+import jp.co.ndensan.reams.db.dbz.realservice.ShinseiRirekiFactory;
 import jp.co.ndensan.reams.db.dbz.business.koseishichosonmaster.IKoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
@@ -124,7 +124,7 @@ public class ChosaItakusakiAndChosainInputHandler {
         Optional<INinteiShinseiJoho> ninteiShinseiJoho
                 = ninteiShinseiJohoManager.find認定申請情報(shinseiRirekiJoho.get().get前回申請管理番号());
         Optional<IKoseiShichosonMaster> koseiShichosonMaster
-                = koseiShichosonMasterManager.find構成市町村(new ShoKisaiHokenshaNo(ninteiShinseiJoho.get().get証記載保険者番号()));
+                = koseiShichosonMasterManager.find構成市町村by証記載保険者番号(new ShoKisaiHokenshaNo(ninteiShinseiJoho.get().get証記載保険者番号()));
         //⑤-1③から取得した認定調査委託コード・④から取得した市町村コードをもとに認定調査委託先情報の認定調査委託コード・市町村コードと比較してから認定調査委託先情報を取得します。
         Optional<INinteichosaItakusakiJoho> chosaItakusakiJoho
                 = chosaItakusakimanager.find調査委託先情報(koseiShichosonMaster.get().get市町村コード(), ninteiShinseiJoho.get().get認定調査委託先コード());
