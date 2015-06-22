@@ -1,5 +1,5 @@
-var DBD;
-(function (DBD) {
+var DBZ;
+(function (DBZ) {
     (function (NinteiShinseiTodokedesha) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -67,12 +67,12 @@ var DBD;
             Modes.AtenaType = AtenaType;
         })(NinteiShinseiTodokedesha.Modes || (NinteiShinseiTodokedesha.Modes = {}));
         var Modes = NinteiShinseiTodokedesha.Modes;
-    })(DBD.NinteiShinseiTodokedesha || (DBD.NinteiShinseiTodokedesha = {}));
-    var NinteiShinseiTodokedesha = DBD.NinteiShinseiTodokedesha;
-})(DBD || (DBD = {}));
+    })(DBZ.NinteiShinseiTodokedesha || (DBZ.NinteiShinseiTodokedesha = {}));
+    var NinteiShinseiTodokedesha = DBZ.NinteiShinseiTodokedesha;
+})(DBZ || (DBZ = {}));
 
-var DBD;
-(function (DBD) {
+var DBZ;
+(function (DBZ) {
     (function (NinteiShinseiTodokedesha) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -87,6 +87,6 @@ var DBD;
             return PublicProperties;
         })();
         NinteiShinseiTodokedesha.PublicProperties = PublicProperties;
-    })(DBD.NinteiShinseiTodokedesha || (DBD.NinteiShinseiTodokedesha = {}));
-    var NinteiShinseiTodokedesha = DBD.NinteiShinseiTodokedesha;
-})(DBD || (DBD = {}));
+    })(DBZ.NinteiShinseiTodokedesha || (DBZ.NinteiShinseiTodokedesha = {}));
+    var NinteiShinseiTodokedesha = DBZ.NinteiShinseiTodokedesha;
+})(DBZ || (DBZ = {}));

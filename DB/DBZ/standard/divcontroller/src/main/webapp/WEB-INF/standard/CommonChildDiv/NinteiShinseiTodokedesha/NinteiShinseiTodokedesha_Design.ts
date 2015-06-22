@@ -2,7 +2,7 @@
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
 
-module DBD {
+module DBZ {
 
      export module NinteiShinseiTodokedesha {
 
@@ -30,11 +30,11 @@ module DBD {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBD.NinteiShinseiTodokedesha.Controls.myType();
+                return this._myName + "_" + DBZ.NinteiShinseiTodokedesha.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBD.NinteiShinseiTodokedesha.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.NinteiShinseiTodokedesha.Controls.myType() + "_" + fieldName;
             }
 
             public NinteiShinseiTodokedesha(): UZA.Panel {

@@ -7,18 +7,18 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiShinseiTodokedesha
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.INinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbd.business.IShinseiRirekiJoho;
+import jp.co.ndensan.reams.db.dbz.business.INinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbz.business.IShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.business.IShinseitodokedeJoho;
 import jp.co.ndensan.reams.db.dbz.definition.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.ShinseiTodokedeshaTsuzukigaraCode;
-import jp.co.ndensan.reams.db.dbd.realservice.INinteiShinseiJohoManager;
-import jp.co.ndensan.reams.db.dbd.realservice.IShinseiRirekiManager;
-import jp.co.ndensan.reams.db.dbd.realservice.IShinseitodokedeJohoManager;
-import jp.co.ndensan.reams.db.dbd.realservice.NinteiShinseiJohoManagerFactory;
-import jp.co.ndensan.reams.db.dbd.realservice.ShinseiRirekiFactory;
-import jp.co.ndensan.reams.db.dbd.realservice.ShinseitodokedeJohoFactory;
+import jp.co.ndensan.reams.db.dbz.realservice.INinteiShinseiJohoManager;
+import jp.co.ndensan.reams.db.dbz.realservice.IShinseiRirekiManager;
+import jp.co.ndensan.reams.db.dbz.realservice.IShinseitodokedeJohoManager;
+import jp.co.ndensan.reams.db.dbz.realservice.NinteiShinseiJohoManagerFactory;
+import jp.co.ndensan.reams.db.dbz.realservice.ShinseiRirekiFactory;
+import jp.co.ndensan.reams.db.dbz.realservice.ShinseitodokedeJohoFactory;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

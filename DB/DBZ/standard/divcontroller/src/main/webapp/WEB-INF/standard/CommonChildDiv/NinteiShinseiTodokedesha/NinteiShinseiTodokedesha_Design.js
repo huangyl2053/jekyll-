@@ -1,5 +1,5 @@
-var DBD;
-(function (DBD) {
+var DBZ;
+(function (DBZ) {
     (function (NinteiShinseiTodokedesha) {
         var Events = (function () {
             function Events() {
@@ -24,11 +24,11 @@ var DBD;
             };
 
             Controls.prototype.convFiledNameSelf = function () {
-                return this._myName + "_" + DBD.NinteiShinseiTodokedesha.Controls.myType();
+                return this._myName + "_" + DBZ.NinteiShinseiTodokedesha.Controls.myType();
             };
 
             Controls.prototype.convFiledName = function (fieldName) {
-                return this._myName + "_" + DBD.NinteiShinseiTodokedesha.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.NinteiShinseiTodokedesha.Controls.myType() + "_" + fieldName;
             };
 
             Controls.prototype.NinteiShinseiTodokedesha = function () {
@@ -97,6 +97,6 @@ var DBD;
             return Controls;
         })();
         NinteiShinseiTodokedesha.Controls = Controls;
-    })(DBD.NinteiShinseiTodokedesha || (DBD.NinteiShinseiTodokedesha = {}));
-    var NinteiShinseiTodokedesha = DBD.NinteiShinseiTodokedesha;
-})(DBD || (DBD = {}));
+    })(DBZ.NinteiShinseiTodokedesha || (DBZ.NinteiShinseiTodokedesha = {}));
+    var NinteiShinseiTodokedesha = DBZ.NinteiShinseiTodokedesha;
+})(DBZ || (DBZ = {}));
