@@ -4,17 +4,19 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoninteishikakuinfo;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoninteishikakuinfo.IKaigoninteiShikakuInfoDiv;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KaigoninteiShikakuInfo のクラスファイル 
- * 
+ * KaigoninteiShikakuInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShikakuInfoDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-44">
     /*
      * [ private の作成 ]
@@ -56,7 +58,7 @@ public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShik
 
     @JsonProperty("txtHihokenshaNo")
     public void setTxtHihokenshaNo(TextBox txtHihokenshaNo) {
-        this.txtHihokenshaNo=txtHihokenshaNo;
+        this.txtHihokenshaNo = txtHihokenshaNo;
     }
 
     @JsonProperty("txtShutokuYmd")
@@ -66,7 +68,7 @@ public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShik
 
     @JsonProperty("txtShutokuYmd")
     public void setTxtShutokuYmd(TextBoxFlexibleDate txtShutokuYmd) {
-        this.txtShutokuYmd=txtShutokuYmd;
+        this.txtShutokuYmd = txtShutokuYmd;
     }
 
     @JsonProperty("txtShutokuJiyu")
@@ -76,7 +78,7 @@ public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShik
 
     @JsonProperty("txtShutokuJiyu")
     public void setTxtShutokuJiyu(TextBox txtShutokuJiyu) {
-        this.txtShutokuJiyu=txtShutokuJiyu;
+        this.txtShutokuJiyu = txtShutokuJiyu;
     }
 
     @JsonProperty("txtSoshitsuYmd")
@@ -86,7 +88,7 @@ public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShik
 
     @JsonProperty("txtSoshitsuYmd")
     public void setTxtSoshitsuYmd(TextBoxFlexibleDate txtSoshitsuYmd) {
-        this.txtSoshitsuYmd=txtSoshitsuYmd;
+        this.txtSoshitsuYmd = txtSoshitsuYmd;
     }
 
     @JsonProperty("txtSoshitsuJiyu")
@@ -96,7 +98,7 @@ public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShik
 
     @JsonProperty("txtSoshitsuJiyu")
     public void setTxtSoshitsuJiyu(TextBox txtSoshitsuJiyu) {
-        this.txtSoshitsuJiyu=txtSoshitsuJiyu;
+        this.txtSoshitsuJiyu = txtSoshitsuJiyu;
     }
 
     @JsonProperty("txtJutokuKubun")
@@ -106,7 +108,7 @@ public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShik
 
     @JsonProperty("txtJutokuKubun")
     public void setTxtJutokuKubun(TextBox txtJutokuKubun) {
-        this.txtJutokuKubun=txtJutokuKubun;
+        this.txtJutokuKubun = txtJutokuKubun;
     }
 
     @JsonProperty("txtYokaigoJotaiKubun")
@@ -116,7 +118,7 @@ public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShik
 
     @JsonProperty("txtYokaigoJotaiKubun")
     public void setTxtYokaigoJotaiKubun(TextBox txtYokaigoJotaiKubun) {
-        this.txtYokaigoJotaiKubun=txtYokaigoJotaiKubun;
+        this.txtYokaigoJotaiKubun = txtYokaigoJotaiKubun;
     }
 
     @JsonProperty("txtNinteiKaishiYmd")
@@ -126,7 +128,7 @@ public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShik
 
     @JsonProperty("txtNinteiKaishiYmd")
     public void setTxtNinteiKaishiYmd(TextBoxDate txtNinteiKaishiYmd) {
-        this.txtNinteiKaishiYmd=txtNinteiKaishiYmd;
+        this.txtNinteiKaishiYmd = txtNinteiKaishiYmd;
     }
 
     @JsonProperty("txtNinteiShuryoYmd")
@@ -136,7 +138,7 @@ public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShik
 
     @JsonProperty("txtNinteiShuryoYmd")
     public void setTxtNinteiShuryoYmd(TextBoxDate txtNinteiShuryoYmd) {
-        this.txtNinteiShuryoYmd=txtNinteiShuryoYmd;
+        this.txtNinteiShuryoYmd = txtNinteiShuryoYmd;
     }
 
     @JsonProperty("txtHokensha")
@@ -146,10 +148,29 @@ public class KaigoninteiShikakuInfoDiv extends Panel implements IKaigoninteiShik
 
     @JsonProperty("txtHokensha")
     public void setTxtHokensha(TextBox txtHokensha) {
-        this.txtHokensha=txtHokensha;
+        this.txtHokensha = txtHokensha;
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public RString get被保険者番号() {
+        return this.txtHihokenshaNo.getValue();
+    }
+
+    @Override
+    public void set被保険者番号(RString 被保険者番号) {
+        this.txtHihokenshaNo.setValue(被保険者番号);
+    }
+
+    @Override
+    public RString get保険者() {
+        return this.txtHokensha.getValue();
+    }
+
+    @Override
+    public void set保険者(RString 証記載保険者番号) {
+        this.txtHokensha.setValue(証記載保険者番号);
+    }
 
 }
