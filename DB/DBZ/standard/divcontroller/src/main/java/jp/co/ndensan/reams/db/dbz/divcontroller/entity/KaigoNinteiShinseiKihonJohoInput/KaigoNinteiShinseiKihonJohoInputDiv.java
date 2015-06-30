@@ -4,20 +4,23 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoNinteiShinseiKihonJ
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.KaigoNinteiShinseiKihonJohoInput.IKaigoNinteiShinseiKihonJohoInputDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
+import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+
 /**
- * KaigoNinteiShinseiKihonJohoInput のクラスファイル
- *
+ * KaigoNinteiShinseiKihonJohoInput のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigoNinteiShinseiKihonJohoInputDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-44">
     /*
      * [ private の作成 ]
@@ -61,113 +64,103 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
      * フィールド名のGetterとSetter を作成
      */
     @JsonProperty("radShinseishoKubun")
-    @Override
     public RadioButton getRadShinseishoKubun() {
         return radShinseishoKubun;
     }
 
     @JsonProperty("radShinseishoKubun")
     public void setRadShinseishoKubun(RadioButton radShinseishoKubun) {
-        this.radShinseishoKubun = radShinseishoKubun;
+        this.radShinseishoKubun=radShinseishoKubun;
     }
 
     @JsonProperty("txtShinseiYMD")
-    @Override
     public TextBoxDate getTxtShinseiYMD() {
         return txtShinseiYMD;
     }
 
     @JsonProperty("txtShinseiYMD")
     public void setTxtShinseiYMD(TextBoxDate txtShinseiYMD) {
-        this.txtShinseiYMD = txtShinseiYMD;
+        this.txtShinseiYMD=txtShinseiYMD;
     }
 
     @JsonProperty("ddlShinseiShubetsu")
-    @Override
     public DropDownList getDdlShinseiShubetsu() {
         return ddlShinseiShubetsu;
     }
 
     @JsonProperty("ddlShinseiShubetsu")
     public void setDdlShinseiShubetsu(DropDownList ddlShinseiShubetsu) {
-        this.ddlShinseiShubetsu = ddlShinseiShubetsu;
+        this.ddlShinseiShubetsu=ddlShinseiShubetsu;
     }
 
     @JsonProperty("ddlShinseiKubunShinseiji")
-    @Override
     public DropDownList getDdlShinseiKubunShinseiji() {
         return ddlShinseiKubunShinseiji;
     }
 
     @JsonProperty("ddlShinseiKubunShinseiji")
     public void setDdlShinseiKubunShinseiji(DropDownList ddlShinseiKubunShinseiji) {
-        this.ddlShinseiKubunShinseiji = ddlShinseiKubunShinseiji;
+        this.ddlShinseiKubunShinseiji=ddlShinseiKubunShinseiji;
     }
 
     @JsonProperty("ddlShinseiKubunHorei")
-    @Override
     public DropDownList getDdlShinseiKubunHorei() {
         return ddlShinseiKubunHorei;
     }
 
     @JsonProperty("ddlShinseiKubunHorei")
     public void setDdlShinseiKubunHorei(DropDownList ddlShinseiKubunHorei) {
-        this.ddlShinseiKubunHorei = ddlShinseiKubunHorei;
+        this.ddlShinseiKubunHorei=ddlShinseiKubunHorei;
     }
 
     @JsonProperty("chkKyuSochisha")
-    @Override
     public CheckBoxList getChkKyuSochisha() {
         return chkKyuSochisha;
     }
 
     @JsonProperty("chkKyuSochisha")
     public void setChkKyuSochisha(CheckBoxList chkKyuSochisha) {
-        this.chkKyuSochisha = chkKyuSochisha;
+        this.chkKyuSochisha=chkKyuSochisha;
     }
 
     @JsonProperty("ddlHihokenshaKubun")
-    @Override
     public DropDownList getDdlHihokenshaKubun() {
         return ddlHihokenshaKubun;
     }
 
     @JsonProperty("ddlHihokenshaKubun")
     public void setDdlHihokenshaKubun(DropDownList ddlHihokenshaKubun) {
-        this.ddlHihokenshaKubun = ddlHihokenshaKubun;
+        this.ddlHihokenshaKubun=ddlHihokenshaKubun;
     }
 
     @JsonProperty("chkShikakuShutokuMae")
-    @Override
     public CheckBoxList getChkShikakuShutokuMae() {
         return chkShikakuShutokuMae;
     }
 
     @JsonProperty("chkShikakuShutokuMae")
     public void setChkShikakuShutokuMae(CheckBoxList chkShikakuShutokuMae) {
-        this.chkShikakuShutokuMae = chkShikakuShutokuMae;
+        this.chkShikakuShutokuMae=chkShikakuShutokuMae;
     }
 
     @JsonProperty("ddlTokuteiShippei")
-    @Override
     public DropDownList getDdlTokuteiShippei() {
         return ddlTokuteiShippei;
     }
 
     @JsonProperty("ddlTokuteiShippei")
     public void setDdlTokuteiShippei(DropDownList ddlTokuteiShippei) {
-        this.ddlTokuteiShippei = ddlTokuteiShippei;
+        this.ddlTokuteiShippei=ddlTokuteiShippei;
     }
 
     @JsonProperty("txtShinseiJokyo")
-    @Override
     public TextBox getTxtShinseiJokyo() {
         return txtShinseiJokyo;
     }
 
     @JsonProperty("txtShinseiJokyo")
     public void setTxtShinseiJokyo(TextBox txtShinseiJokyo) {
-        this.txtShinseiJokyo = txtShinseiJokyo;
+        this.txtShinseiJokyo=txtShinseiJokyo;
     }
 
     @JsonProperty("ServiceSakujo")
@@ -177,7 +170,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("ServiceSakujo")
     public void setServiceSakujo(ServiceSakujoDiv ServiceSakujo) {
-        this.ServiceSakujo = ServiceSakujo;
+        this.ServiceSakujo=ServiceSakujo;
     }
 
     @JsonProperty("NinteiShinseiRiyu")
@@ -187,7 +180,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("NinteiShinseiRiyu")
     public void setNinteiShinseiRiyu(NinteiShinseiRiyuDiv NinteiShinseiRiyu) {
-        this.NinteiShinseiRiyu = NinteiShinseiRiyu;
+        this.NinteiShinseiRiyu=NinteiShinseiRiyu;
     }
 
     @JsonProperty("hdnServiceSakujoTeikeibunKey")
@@ -197,7 +190,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("hdnServiceSakujoTeikeibunKey")
     public void setHdnServiceSakujoTeikeibunKey(RString hdnServiceSakujoTeikeibunKey) {
-        this.hdnServiceSakujoTeikeibunKey = hdnServiceSakujoTeikeibunKey;
+        this.hdnServiceSakujoTeikeibunKey=hdnServiceSakujoTeikeibunKey;
     }
 
     @JsonProperty("hdnNinteiRiyuTeikeibunKey")
@@ -207,7 +200,58 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
 
     @JsonProperty("hdnNinteiRiyuTeikeibunKey")
     public void setHdnNinteiRiyuTeikeibunKey(RString hdnNinteiRiyuTeikeibunKey) {
-        this.hdnNinteiRiyuTeikeibunKey = hdnNinteiRiyuTeikeibunKey;
+        this.hdnNinteiRiyuTeikeibunKey=hdnNinteiRiyuTeikeibunKey;
+    }
+
+    /*
+     * [共有子DIVモード]
+     */
+    @JsonProperty("modes")
+    private HashSet<Mode> modes;
+
+    public static enum InputType implements ICommonChildDivMode {
+
+        AllInputMode("AllInputMode"),
+        ServiceInputMode("ServiceInputMode"),
+        ServiceShokaiMode("ServiceShokaiMode"),
+        ServiceNomalInputMode("ServiceNomalInputMode"),
+        TokuteiShippeiMode("TokuteiShippeiMode"),
+        TokuteiShippeiNashiMode("TokuteiShippeiNashiMode"),
+        JizenShinseiNashiMode("JizenShinseiNashiMode"),
+        ShinseibiMode("ShinseibiMode"),
+        NinteiMode("NinteiMode"),
+        ShokaiMode("ShokaiMode");
+
+        private final String name;
+
+        private InputType(final String name) {
+            this.name = name;
+        }
+
+        public static InputType getEnum(String str) {
+            InputType[] enumArray = InputType.values();
+
+            for (InputType enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) { 
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public InputType getMode_InputType() {
+        return (InputType) _CommonChildDivModeUtil.getMode( this.modes, InputType.class );
+    }
+
+    public void setMode_InputType( InputType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, InputType.class , value );
     }
 
     /*
@@ -219,7 +263,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     }
 
     @JsonIgnore
-    public void setBtnServiceSakujoTeikeibun(ButtonDialog btnServiceSakujoTeikeibun) {
+    public void  setBtnServiceSakujoTeikeibun(ButtonDialog btnServiceSakujoTeikeibun) {
         this.getServiceSakujo().setBtnServiceSakujoTeikeibun(btnServiceSakujoTeikeibun);
     }
 
@@ -229,7 +273,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     }
 
     @JsonIgnore
-    public void setTxtServiceSakujo(TextBoxMultiLine txtServiceSakujo) {
+    public void  setTxtServiceSakujo(TextBoxMultiLine txtServiceSakujo) {
         this.getServiceSakujo().setTxtServiceSakujo(txtServiceSakujo);
     }
 
@@ -239,18 +283,17 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     }
 
     @JsonIgnore
-    public void setBtnNinteiShinseiRiyuTeikeibun(ButtonDialog btnNinteiShinseiRiyuTeikeibun) {
+    public void  setBtnNinteiShinseiRiyuTeikeibun(ButtonDialog btnNinteiShinseiRiyuTeikeibun) {
         this.getNinteiShinseiRiyu().setBtnNinteiShinseiRiyuTeikeibun(btnNinteiShinseiRiyuTeikeibun);
     }
 
     @JsonIgnore
-    @Override
     public TextBoxMultiLine getTxtNinteiShinseRiyu() {
         return this.getNinteiShinseiRiyu().getTxtNinteiShinseRiyu();
     }
 
     @JsonIgnore
-    public void setTxtNinteiShinseRiyu(TextBoxMultiLine txtNinteiShinseRiyu) {
+    public void  setTxtNinteiShinseRiyu(TextBoxMultiLine txtNinteiShinseRiyu) {
         this.getNinteiShinseiRiyu().setTxtNinteiShinseRiyu(txtNinteiShinseRiyu);
     }
 

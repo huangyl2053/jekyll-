@@ -7,6 +7,10 @@ package jp.co.ndensan.reams.db.dbz.business;
 
 import jp.co.ndensan.reams.db.dbz.entity.basic.INinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.SeibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -307,14 +311,14 @@ public interface INinteiShinseiJoho {
      *
      * @return 認定調査委託先コード
      */
-    RString get認定調査委託先コード();
+    ChosaItakusakiCode get認定調査委託先コード();
 
     /**
      * 認定調査員コードを返します。
      *
      * @return 認定調査員コード
      */
-    RString get認定調査員コード();
+    ChosainCode get認定調査員コード();
 
     /**
      * 調査員への連絡事項を返します。
@@ -328,14 +332,14 @@ public interface INinteiShinseiJoho {
      *
      * @return 主治医医療機関コード
      */
-    RString get主治医医療機関コード();
+    ShujiiIryokikanCode get主治医医療機関コード();
 
     /**
      * 主治医コードを返します。
      *
      * @return 主治医コード
      */
-    RString get主治医コード();
+    ShujiiCode get主治医コード();
 
     /**
      * 指定医フラグを返します。
@@ -995,7 +999,7 @@ public interface INinteiShinseiJoho {
          * @param ninteichosaItakusakiCode 認定調査委託先コード
          * @return builder
          */
-        public Builder setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {
+        public Builder setNinteiChosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
             return this;
         }
 
@@ -1005,7 +1009,7 @@ public interface INinteiShinseiJoho {
          * @param ninteiChousainCode 認定調査員コード
          * @return builder
          */
-        public Builder setNinteiChousainCode(RString ninteiChousainCode) {
+        public Builder setNinteiChosainCode(ChosainCode ninteiChousainCode) {
             return this;
         }
 
@@ -1025,7 +1029,7 @@ public interface INinteiShinseiJoho {
          * @param shujiiIryokikanCode 主治医医療機関コード
          * @return builder
          */
-        public Builder setShujiiIryokikanCode(RString shujiiIryokikanCode) {
+        public Builder setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
             return this;
         }
 
@@ -1035,7 +1039,7 @@ public interface INinteiShinseiJoho {
          * @param shujiiCode 主治医コード
          * @return builder
          */
-        public Builder setShujiiCode(RString shujiiCode) {
+        public Builder setShujiiCode(ShujiiCode shujiiCode) {
             return this;
         }
 

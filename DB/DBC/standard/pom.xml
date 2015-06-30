@@ -14,6 +14,7 @@
     </parent>
     <properties>
         <jp.co.ndensan.reams.dbzVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbzVersion>
+        <jp.co.ndensan.reams.dbdVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbdVersion>
     </properties>
     <modules>
         <module>entity</module>
@@ -64,7 +65,38 @@
                 <version>${jp.co.ndensan.reams.dbzVersion}</version>
                 <scope>test</scope>
             </dependency>
-
+            
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+                <artifactId>DbdDefinition</artifactId>
+                <version>${jp.co.ndensan.reams.dbdVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+                <artifactId>DbdEntity</artifactId>
+                <version>${jp.co.ndensan.reams.dbdVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+                <artifactId>DbdModel</artifactId>
+                <version>${jp.co.ndensan.reams.dbdVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+                <artifactId>DbdBusiness</artifactId>
+                <version>${jp.co.ndensan.reams.dbdVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+                <artifactId>DbdRealService</artifactId>
+                <version>${jp.co.ndensan.reams.dbdVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+                <artifactId>DbdDivController</artifactId>
+                <version>${jp.co.ndensan.reams.dbdVersion}</version>
+            </dependency>
+                                                 
             <dependency>
                 <groupId>jp.co.ndensan.reams.ua.uax</groupId>
                 <artifactId>UaxRealService</artifactId>

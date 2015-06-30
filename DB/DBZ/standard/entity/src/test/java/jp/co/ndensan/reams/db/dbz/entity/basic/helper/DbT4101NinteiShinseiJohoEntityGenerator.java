@@ -5,8 +5,11 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT4101NinteiShinseiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.SeibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -67,11 +70,11 @@ public final class DbT4101NinteiShinseiJohoEntityGenerator {
     public static final boolean DEFAULT_情報提供への同意有無 = true;
     public static final FlexibleDate DEFAULT_情報提供資料出力年月日 = new FlexibleDate("20150807");
     public static final Code DEFAULT_調査区分 = new Code("01");
-    public static final RString DEFAULT_認定調査委託先コード = new RString("0000000001");
-    public static final RString DEFAULT_認定調査員コード = new RString("00000001");
+    public static final ChosaItakusakiCode DEFAULT_認定調査委託先コード = new ChosaItakusakiCode("0000000001");
+    public static final ChosainCode DEFAULT_認定調査員コード = new ChosainCode("00000001");
     public static final RString DEFAULT_調査員への連絡事項 = new RString("調査員への連絡事項");
-    public static final RString DEFAULT_主治医医療機関コード = new RString("0000000001");
-    public static final RString DEFAULT_主治医コード = new RString("00000001");
+    public static final ShujiiIryokikanCode DEFAULT_主治医医療機関コード = new ShujiiIryokikanCode("0000000001");
+    public static final ShujiiCode DEFAULT_主治医コード = new ShujiiCode("00000001");
     public static final boolean DEFAULT_指定医フラグ = false;
     public static final Code DEFAULT_意見書データ種別 = new Code("01");
     public static final RString DEFAULT_主治医への連絡事項 = new RString("主治医への連絡事項");
@@ -153,8 +156,8 @@ public final class DbT4101NinteiShinseiJohoEntityGenerator {
         entity.setJohoteikyoDoiFlag(DEFAULT_情報提供への同意有無);
         entity.setJohoteikyoSiryoOutputYMD(DEFAULT_情報提供資料出力年月日);
         entity.setChosaKubun(DEFAULT_調査区分);
-        entity.setNinteichosaItakusakiCode(DEFAULT_認定調査委託先コード);
-        entity.setNinteiChousainCode(DEFAULT_認定調査員コード);
+        entity.setNinteiChosaItakusakiCode(DEFAULT_認定調査委託先コード);
+        entity.setNinteiChosainCode(DEFAULT_認定調査員コード);
         entity.setRenrakuJikoToChosain(DEFAULT_調査員への連絡事項);
         entity.setShujiiIryokikanCode(DEFAULT_主治医医療機関コード);
         entity.setShujiiCode(DEFAULT_主治医コード);

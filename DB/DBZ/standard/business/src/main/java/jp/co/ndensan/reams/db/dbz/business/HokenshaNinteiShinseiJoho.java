@@ -23,6 +23,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 
 /**
  * 要介護認定申請情報のビジネスクラスです。
@@ -464,8 +468,8 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
      * @return 認定調査委託先コード
      */
     @Override
-    public RString get認定調査委託先コード() {
-        return entity.getNinteichosaItakusakiCode();
+    public ChosaItakusakiCode get認定調査委託先コード() {
+        return entity.getNinteiChosaItakusakiCode();
     }
 
     /**
@@ -474,8 +478,8 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
      * @return 認定調査員コード
      */
     @Override
-    public RString get認定調査員コード() {
-        return entity.getNinteiChousainCode();
+    public ChosainCode get認定調査員コード() {
+        return entity.getNinteiChosainCode();
     }
 
     /**
@@ -494,7 +498,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
      * @return 主治医医療機関コード
      */
     @Override
-    public RString get主治医医療機関コード() {
+    public ShujiiIryokikanCode get主治医医療機関コード() {
         return entity.getShujiiIryokikanCode();
     }
 
@@ -504,7 +508,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
      * @return 主治医コード
      */
     @Override
-    public RString get主治医コード() {
+    public ShujiiCode get主治医コード() {
         return entity.getShujiiCode();
     }
 
@@ -1445,9 +1449,9 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @return builder
          */
         @Override
-        public Builder setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {
+        public Builder setNinteiChosaItakusakiCode(ChosaItakusakiCode ninteichosaItakusakiCode) {
             Objects.requireNonNull(ninteichosaItakusakiCode);
-            this.entity.setNinteichosaItakusakiCode(ninteichosaItakusakiCode);
+            this.entity.setNinteiChosaItakusakiCode(ninteichosaItakusakiCode);
             return this;
         }
 
@@ -1458,9 +1462,9 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @return builder
          */
         @Override
-        public Builder setNinteiChousainCode(RString ninteiChousainCode) {
+        public Builder setNinteiChosainCode(ChosainCode ninteiChousainCode) {
             Objects.requireNonNull(ninteiChousainCode);
-            this.entity.setNinteiChousainCode(ninteiChousainCode);
+            this.entity.setNinteiChosainCode(ninteiChousainCode);
             return this;
         }
 
@@ -1484,7 +1488,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @return builder
          */
         @Override
-        public Builder setShujiiIryokikanCode(RString shujiiIryokikanCode) {
+        public Builder setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
             Objects.requireNonNull(shujiiIryokikanCode);
             this.entity.setShujiiIryokikanCode(shujiiIryokikanCode);
             return this;
@@ -1497,7 +1501,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
          * @return builder
          */
         @Override
-        public Builder setShujiiCode(RString shujiiCode) {
+        public Builder setShujiiCode(ShujiiCode shujiiCode) {
             Objects.requireNonNull(shujiiCode);
             this.entity.setShujiiCode(shujiiCode);
             return this;

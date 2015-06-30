@@ -36,8 +36,8 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzPersistence</artifactId>
+            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+            <artifactId>DbdPersistence</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

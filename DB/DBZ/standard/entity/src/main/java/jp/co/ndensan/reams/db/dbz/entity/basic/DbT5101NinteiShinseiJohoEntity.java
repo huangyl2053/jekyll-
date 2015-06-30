@@ -20,6 +20,10 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.SeibetsuCode;
 
 /**
@@ -79,11 +83,11 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     private boolean johoteikyoDoiFlag;
     private FlexibleDate johoteikyoSiryoOutputYMD;
     private Code chosaKubun;
-    private RString ninteichosaItakusakiCode;
-    private RString ninteiChousainCode;
+    private ChosaItakusakiCode ninteiChosaItakusakiCode;
+    private ChosainCode ninteiChosainCode;
     private RString renrakuJikoToChosain;
-    private RString shujiiIryokikanCode;
-    private RString shujiiCode;
+    private ShujiiIryokikanCode shujiiIryokikanCode;
+    private ShujiiCode shujiiCode;
     private boolean shiteiiFlag;
     private Code ikenshoDataShubetsu;
     private RString renrakuJikoToShujii;
@@ -184,7 +188,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 厚労省IF識別コードのgetメソッドです。
      * <br/>
-     * <br/>年によって異なる認定調査項目を特定するためのコード。
+     * <br/>Enum（DBE：厚労省認定ソフトのバージョン）年によって異なる認定調査項目を特定するためのコード。
      *
      * @return 厚労省IF識別コード
      */
@@ -195,7 +199,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 厚労省IF識別コードのsetメソッドです。
      * <br/>
-     * <br/>年によって異なる認定調査項目を特定するためのコード。
+     * <br/>Enum（DBE：厚労省認定ソフトのバージョン）年によって異なる認定調査項目を特定するためのコード。
      *
      * @param koroshoIfShikibetsuCode 厚労省IF識別コード
      */
@@ -300,7 +304,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 認定申請区分（法令）コードのgetメソッドです。
      * <br/>
-     * <br/>新規申請・更新申請・区分変更申請・職権
+     * <br/>Enum（DBD：申請区分（法令）コード）新規申請・更新申請・区分変更申請・職権
      *
      * @return 認定申請区分（法令）コード
      */
@@ -311,7 +315,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 認定申請区分（法令）コードのsetメソッドです。
      * <br/>
-     * <br/>新規申請・更新申請・区分変更申請・職権
+     * <br/>Enum（DBD：申請区分（法令）コード）新規申請・更新申請・区分変更申請・職権
      *
      * @param ninteiShinseiHoreiKubunCode 認定申請区分（法令）コード
      */
@@ -322,7 +326,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 認定申請区分（申請時）コードのgetメソッドです。
      * <br/>
-     * <br/>新規・更新・区分変更・転入申請・資格喪失（死亡）・新規（事前）・更新（事前）
+     * <br/>Enum（DBD：申請区分（申請時）コード）新規・更新・区分変更・転入申請・資格喪失（死亡）・新規（事前）・更新（事前）
      *
      * @return 認定申請区分（申請時）コード
      */
@@ -333,7 +337,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 認定申請区分（申請時）コードのsetメソッドです。
      * <br/>
-     * <br/>新規・更新・区分変更・転入申請・資格喪失（死亡）・新規（事前）・更新（事前）
+     * <br/>Enum（DBD：申請区分（申請時）コード）新規・更新・区分変更・転入申請・資格喪失（死亡）・新規（事前）・更新（事前）
      *
      * @param ninteiShinseiShinseijiKubunCode 認定申請区分（申請時）コード
      */
@@ -344,7 +348,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 取下区分コードのgetメソッドです。
      * <br/>
-     * <br/>NCI 1:認定申請有効、2:却下、3:取り下げ、4:区分変更却下
+     * <br/>Enum（DBE：取下区分コード）NCI 1:認定申請有効、2:却下、3:取り下げ、4:区分変更却下
      *
      * @return 取下区分コード
      */
@@ -355,7 +359,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 取下区分コードのsetメソッドです。
      * <br/>
-     * <br/>NCI 1:認定申請有効、2:却下、3:取り下げ、4:区分変更却下
+     * <br/>Enum（DBE：取下区分コード）NCI 1:認定申請有効、2:却下、3:取り下げ、4:区分変更却下
      *
      * @param torisageKubunCode 取下区分コード
      */
@@ -366,7 +370,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 被保険者区分コードのgetメソッドです。
      * <br/>
-     * <br/>1:第1号被保険者、2:第2号被保険者、その他8生活保護)
+     * <br/>Enum（DBE：被保険者区分コード）1:第1号被保険者、2:第2号被保険者、その他8生活保護)
      *
      * @return 被保険者区分コード
      */
@@ -377,7 +381,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 被保険者区分コードのsetメソッドです。
      * <br/>
-     * <br/>1:第1号被保険者、2:第2号被保険者、その他8生活保護)
+     * <br/>Enum（DBE：被保険者区分コード）1:第1号被保険者、2:第2号被保険者、その他8生活保護)
      *
      * @param hihokenshaKubunCode 被保険者区分コード
      */
@@ -427,6 +431,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 性別のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBZ：性別コード）
      *
      * @return 性別
      */
@@ -436,6 +442,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 性別のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBZ：性別コード）
      *
      * @param seibetsu 性別
      */
@@ -593,6 +601,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * みなし２号等対象フラグのgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：みなし2号等対象フラグ）
      *
      * @return みなし２号等対象フラグ
      */
@@ -602,6 +612,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * みなし２号等対象フラグのsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：みなし2号等対象フラグ）
      *
      * @param minashiNigoEtcTaishoFlag みなし２号等対象フラグ
      */
@@ -612,7 +624,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 広域内転居区分のgetメソッドです。
      * <br/>
-     * <br/>0：対象外、1:申請中の転居、2:申請終了
+     * <br/>Enum（DBE：広域内転居区分）0：対象外、1:申請中の転居、2:申請終了
      *
      * @return 広域内転居区分
      */
@@ -623,7 +635,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 広域内転居区分のsetメソッドです。
      * <br/>
-     * <br/>0：対象外、1:申請中の転居、2:申請終了
+     * <br/>Enum（DBE：広域内転居区分）0：対象外、1:申請中の転居、2:申請終了
      *
      * @param koikinaiTenkyoKubun 広域内転居区分
      */
@@ -634,7 +646,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 認定申請有効区分のgetメソッドです。
      * <br/>
-     * <br/>申請中
+     * <br/>Enum（DBD：認定申請有効区分）
      *
      * @return 認定申請有効区分
      */
@@ -645,7 +657,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 認定申請有効区分のsetメソッドです。
      * <br/>
-     * <br/>申請中
+     * <br/>Enum（DBD：認定申請有効区分）
      *
      * @param ninteiShinseiYukoKubunCode 認定申請有効区分
      */
@@ -655,6 +667,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 要介護申請・要支援申請の区分のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBD：要介護申請・要支援申請の区分）
      *
      * @return 要介護申請・要支援申請の区分
      */
@@ -664,6 +678,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 要介護申請・要支援申請の区分のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBD：要介護申請・要支援申請の区分）
      *
      * @param shienShinseiKubun 要介護申請・要支援申請の区分
      */
@@ -709,6 +725,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 前回要介護状態区分コードのgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBZ：要介護状態区分コード09）
      *
      * @return 前回要介護状態区分コード
      */
@@ -718,6 +736,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 前回要介護状態区分コードのsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBZ：要介護状態区分コード09）
      *
      * @param zenYokaigoKubunCode 前回要介護状態区分コード
      */
@@ -825,6 +845,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * ２号特定疾病コードのgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBZ：特定疾病コード）
      *
      * @return ２号特定疾病コード
      */
@@ -834,6 +856,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * ２号特定疾病コードのsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBZ：特定疾病コード）
      *
      * @param nigoTokuteiShippeiCode ２号特定疾病コード
      */
@@ -843,6 +867,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 自動割当除外者区分のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：自動割当除外者区分）
      *
      * @return 自動割当除外者区分
      */
@@ -852,6 +878,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 自動割当除外者区分のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：自動割当除外者区分）
      *
      * @param jidoWariateJogaishaKubun 自動割当除外者区分
      */
@@ -861,6 +889,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 情報提供への同意有無のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBD：情報提供への同意有無）
      *
      * @return 情報提供への同意有無
      */
@@ -870,6 +900,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 情報提供への同意有無のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBD：情報提供への同意有無）
      *
      * @param johoteikyoDoiFlag 情報提供への同意有無
      */
@@ -897,6 +929,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 調査区分のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：調査区分）
      *
      * @return 調査区分
      */
@@ -906,6 +940,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 調査区分のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：調査区分）
      *
      * @param chosaKubun 調査区分
      */
@@ -916,45 +952,45 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 認定調査委託先コードのgetメソッドです。
      * <br/>
-     * <br/>依頼情報の生成によってupdateされていく。
+     * <br/>依頼情報の生成によってupdateされていく。認定調査委託先情報
      *
      * @return 認定調査委託先コード
      */
-    public RString getNinteichosaItakusakiCode() {
-        return ninteichosaItakusakiCode;
+    public ChosaItakusakiCode getNinteiChosaItakusakiCode() {
+        return ninteiChosaItakusakiCode;
     }
 
     /**
      * 認定調査委託先コードのsetメソッドです。
      * <br/>
-     * <br/>依頼情報の生成によってupdateされていく。
+     * <br/>依頼情報の生成によってupdateされていく。認定調査委託先情報
      *
-     * @param ninteichosaItakusakiCode 認定調査委託先コード
+     * @param ninteiChosaItakusakiCode 認定調査委託先コード
      */
-    public void setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {
-        this.ninteichosaItakusakiCode = ninteichosaItakusakiCode;
+    public void setNinteiChosaItakusakiCode(ChosaItakusakiCode ninteiChosaItakusakiCode) {
+        this.ninteiChosaItakusakiCode = ninteiChosaItakusakiCode;
     }
 
     /**
      * 認定調査員コードのgetメソッドです。
      * <br/>
-     * <br/>依頼情報の生成によってupdateされていく。
+     * <br/>依頼情報の生成によってupdateされていく。認定調査員情報
      *
      * @return 認定調査員コード
      */
-    public RString getNinteiChousainCode() {
-        return ninteiChousainCode;
+    public ChosainCode getNinteiChosainCode() {
+        return ninteiChosainCode;
     }
 
     /**
      * 認定調査員コードのsetメソッドです。
      * <br/>
-     * <br/>依頼情報の生成によってupdateされていく。
+     * <br/>依頼情報の生成によってupdateされていく。認定調査員情報
      *
-     * @param ninteiChousainCode 認定調査員コード
+     * @param ninteiChosainCode 認定調査員コード
      */
-    public void setNinteiChousainCode(RString ninteiChousainCode) {
-        this.ninteiChousainCode = ninteiChousainCode;
+    public void setNinteiChosainCode(ChosainCode ninteiChosainCode) {
+        this.ninteiChosainCode = ninteiChosainCode;
     }
 
     /**
@@ -978,53 +1014,51 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     /**
      * 主治医医療機関コードのgetメソッドです。
      * <br/>
-     * <br/>申請書の主治医の医療機関に相当する介護独自の医療機関コード。
-     *
-     * <br/>依頼情報の生成によってupdateされていく。
+     * <br/>申請書の主治医の医療機関に相当する介護独自の医療機関コード。依頼情報の生成によってupdateされていく。主治医医療機関情報
      *
      * @return 主治医医療機関コード
      */
-    public RString getShujiiIryokikanCode() {
+    public ShujiiIryokikanCode getShujiiIryokikanCode() {
         return shujiiIryokikanCode;
     }
 
     /**
      * 主治医医療機関コードのsetメソッドです。
      * <br/>
-     * <br/>申請書の主治医の医療機関に相当する介護独自の医療機関コード。
-     *
-     * <br/>依頼情報の生成によってupdateされていく。
+     * <br/>申請書の主治医の医療機関に相当する介護独自の医療機関コード。依頼情報の生成によってupdateされていく。主治医医療機関情報
      *
      * @param shujiiIryokikanCode 主治医医療機関コード
      */
-    public void setShujiiIryokikanCode(RString shujiiIryokikanCode) {
+    public void setShujiiIryokikanCode(ShujiiIryokikanCode shujiiIryokikanCode) {
         this.shujiiIryokikanCode = shujiiIryokikanCode;
     }
 
     /**
      * 主治医コードのgetメソッドです。
      * <br/>
-     * <br/>申請書の主治医に相当する介護独自の医師コード。依頼情報の生成によってupdateされていく。
+     * <br/>申請書の主治医に相当する介護独自の医師コード。依頼情報の生成によってupdateされていく。主治医情報
      *
      * @return 主治医コード
      */
-    public RString getShujiiCode() {
+    public ShujiiCode getShujiiCode() {
         return shujiiCode;
     }
 
     /**
      * 主治医コードのsetメソッドです。
      * <br/>
-     * <br/>申請書の主治医に相当する介護独自の医師コード。依頼情報の生成によってupdateされていく。
+     * <br/>申請書の主治医に相当する介護独自の医師コード。依頼情報の生成によってupdateされていく。主治医情報
      *
      * @param shujiiCode 主治医コード
      */
-    public void setShujiiCode(RString shujiiCode) {
+    public void setShujiiCode(ShujiiCode shujiiCode) {
         this.shujiiCode = shujiiCode;
     }
 
     /**
      * 指定医フラグのgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：指定医フラグ）
      *
      * @return 指定医フラグ
      */
@@ -1034,6 +1068,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 指定医フラグのsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：指定医フラグ）
      *
      * @param shiteiiFlag 指定医フラグ
      */
@@ -1043,6 +1079,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 意見書データ種別のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：意見書データ種別）
      *
      * @return 意見書データ種別
      */
@@ -1052,6 +1090,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 意見書データ種別のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：意見書データ種別）
      *
      * @param ikenshoDataShubetsu 意見書データ種別
      */
@@ -1079,6 +1119,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * みなし要介護区分コードのgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：みなし要介護区分コード）
      *
      * @return みなし要介護区分コード
      */
@@ -1088,6 +1130,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * みなし要介護区分コードのsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：みなし要介護区分コード）
      *
      * @param minashiCode みなし要介護区分コード
      */
@@ -1097,6 +1141,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 認定延期通知発行しないことに対する同意有無のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：認定延期通知発行しないことに対する同意有無）
      *
      * @return 認定延期通知発行しないことに対する同意有無
      */
@@ -1106,6 +1152,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 認定延期通知発行しないことに対する同意有無のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：認定延期通知発行しないことに対する同意有無）
      *
      * @param enkitsuchiNashiDoiFlag 認定延期通知発行しないことに対する同意有無
      */
@@ -1115,6 +1163,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 施設入所の有無のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：施設入所の有無）
      *
      * @return 施設入所の有無
      */
@@ -1124,6 +1174,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 施設入所の有無のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：施設入所の有無）
      *
      * @param shisetsuNyushoFlag 施設入所の有無
      */
@@ -1155,6 +1207,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 家庭訪問の有無のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：家庭訪問の有無）
      *
      * @return 家庭訪問の有無
      */
@@ -1164,6 +1218,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 家庭訪問の有無のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：家庭訪問の有無）
      *
      * @param kateiHomonFlag 家庭訪問の有無
      */
@@ -1469,6 +1525,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 審査継続区分のgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：審査継続区分）
      *
      * @return 審査継続区分
      */
@@ -1478,6 +1536,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 審査継続区分のsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：審査継続区分）
      *
      * @param shinsaKeizokuFlag 審査継続区分
      */
@@ -1486,18 +1546,22 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
     }
 
     /**
-     * 要介護認定審査会優先振分区分コードのgetメソッドです。
+     * 介護認定審査会優先振分区分コードのgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：介護認定審査会優先振分区分コード）
      *
-     * @return 要介護認定審査会優先振分区分コード
+     * @return 介護認定審査会優先振分区分コード
      */
     public Code getShinsakaiYusenWaritsukeKubunCode() {
         return shinsakaiYusenWaritsukeKubunCode;
     }
 
     /**
-     * 要介護認定審査会優先振分区分コードのsetメソッドです。
+     * 介護認定審査会優先振分区分コードのsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：介護認定審査会優先振分区分コード）
      *
-     * @param shinsakaiYusenWaritsukeKubunCode 要介護認定審査会優先振分区分コード
+     * @param shinsakaiYusenWaritsukeKubunCode 介護認定審査会優先振分区分コード
      */
     public void setShinsakaiYusenWaritsukeKubunCode(Code shinsakaiYusenWaritsukeKubunCode) {
         this.shinsakaiYusenWaritsukeKubunCode = shinsakaiYusenWaritsukeKubunCode;
@@ -1613,6 +1677,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 論理削除フラグのgetメソッドです。
+     * <br/>
+     * <br/>True：論理削除　False：論理未削除
      *
      * @return 論理削除フラグ
      */
@@ -1622,6 +1688,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
 
     /**
      * 論理削除フラグのsetメソッドです。
+     * <br/>
+     * <br/>True：論理削除　False：論理未削除
      *
      * @param logicalDeletedFlag 論理削除フラグ
      */
@@ -1641,10 +1709,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.shinseishoKanriNo, other.shinseishoKanriNo);
     }
 
     /**
@@ -1691,8 +1756,8 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
         this.johoteikyoDoiFlag = entity.johoteikyoDoiFlag;
         this.johoteikyoSiryoOutputYMD = entity.johoteikyoSiryoOutputYMD;
         this.chosaKubun = entity.chosaKubun;
-        this.ninteichosaItakusakiCode = entity.ninteichosaItakusakiCode;
-        this.ninteiChousainCode = entity.ninteiChousainCode;
+        this.ninteiChosaItakusakiCode = entity.ninteiChosaItakusakiCode;
+        this.ninteiChosainCode = entity.ninteiChosainCode;
         this.renrakuJikoToChosain = entity.renrakuJikoToChosain;
         this.shujiiIryokikanCode = entity.shujiiIryokikanCode;
         this.shujiiCode = entity.shujiiCode;
@@ -1738,7 +1803,7 @@ public class DbT5101NinteiShinseiJohoEntity extends DbTableEntityBase<DbT5101Nin
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, koroshoIfShikibetsuCode, shoKisaiHokenshaNo, shinseiNendo, hihokenshaNo, ninteiShinseiYMD, ninteiShinseiEdabanCode, ninteiShinseiHoreiKubunCode, ninteiShinseiShinseijiKubunCode, torisageKubunCode, hihokenshaKubunCode, seinengappiYMD, age, seibetsu, hihokenshaKana, hihokenshaName, yubinNo, jusho, telNo, shishoCode, shikibetsuCode, chikuCode, minashiNigoEtcTaishoFlag, koikinaiTenkyoKubun, ninteiShinseiYukoKubunCode, shienShinseiKubun, ninteiShinseiRiyu, shinseiServiceDeleteRiyu, zenYokaigoKubunCode, zenkaiNinteiYMD, zenkaiYukoKikanStart, zenkaiYukoKikanEnd, nigoIryoHokenshaName, nigoIryoHokenKigoBango, nigoTokuteiShippeiCode, jidoWariateJogaishaKubun, johoteikyoDoiFlag, johoteikyoSiryoOutputYMD, chosaKubun, ninteichosaItakusakiCode, ninteiChousainCode, renrakuJikoToChosain, shujiiIryokikanCode, shujiiCode, shiteiiFlag, ikenshoDataShubetsu, renrakuJikoToShujii, minashiCode, enkitsuchiNashiDoiFlag, shisetsuNyushoFlag, nyushoShisetsuCode, kateiHomonFlag, homonChosasakiYubinNo, homonChosasakiJusho, homonChosasakiName, homonChosasakiTelNo, sichosonRenrakuJiko, shoriJotaiKubun, torisageYMD, torisageRiyu, kyakkaYMD, kyakkaRiyu, enkiKetteiYMD, enkiRiyu, enkitsuchiHakkoYMD, enkitsuchiHakkoKaisu, enkiMikomiKaishiYMD, enkiMikomiShuryoYMD, shinsaKeizokuFlag, shinsakaiYusenWaritsukeKubunCode, kosinTsuchiHakkoYMD, kosinTsuchiHakkoKanryoYMD, ninteiShinseiJohoTorokuYMD, saiChosaIraiKaisu, saiSakuseiIraiKaisu, ifSofuYMD, logicalDeletedFlag);
+        return super.toMd5(shinseishoKanriNo, koroshoIfShikibetsuCode, shoKisaiHokenshaNo, shinseiNendo, hihokenshaNo, ninteiShinseiYMD, ninteiShinseiEdabanCode, ninteiShinseiHoreiKubunCode, ninteiShinseiShinseijiKubunCode, torisageKubunCode, hihokenshaKubunCode, seinengappiYMD, age, seibetsu, hihokenshaKana, hihokenshaName, yubinNo, jusho, telNo, shishoCode, shikibetsuCode, chikuCode, minashiNigoEtcTaishoFlag, koikinaiTenkyoKubun, ninteiShinseiYukoKubunCode, shienShinseiKubun, ninteiShinseiRiyu, shinseiServiceDeleteRiyu, zenYokaigoKubunCode, zenkaiNinteiYMD, zenkaiYukoKikanStart, zenkaiYukoKikanEnd, nigoIryoHokenshaName, nigoIryoHokenKigoBango, nigoTokuteiShippeiCode, jidoWariateJogaishaKubun, johoteikyoDoiFlag, johoteikyoSiryoOutputYMD, chosaKubun, ninteiChosaItakusakiCode, ninteiChosainCode, renrakuJikoToChosain, shujiiIryokikanCode, shujiiCode, shiteiiFlag, ikenshoDataShubetsu, renrakuJikoToShujii, minashiCode, enkitsuchiNashiDoiFlag, shisetsuNyushoFlag, nyushoShisetsuCode, kateiHomonFlag, homonChosasakiYubinNo, homonChosasakiJusho, homonChosasakiName, homonChosasakiTelNo, sichosonRenrakuJiko, shoriJotaiKubun, torisageYMD, torisageRiyu, kyakkaYMD, kyakkaRiyu, enkiKetteiYMD, enkiRiyu, enkitsuchiHakkoYMD, enkitsuchiHakkoKaisu, enkiMikomiKaishiYMD, enkiMikomiShuryoYMD, shinsaKeizokuFlag, shinsakaiYusenWaritsukeKubunCode, kosinTsuchiHakkoYMD, kosinTsuchiHakkoKanryoYMD, ninteiShinseiJohoTorokuYMD, saiChosaIraiKaisu, saiSakuseiIraiKaisu, ifSofuYMD, logicalDeletedFlag);
     }
 
 // </editor-fold>

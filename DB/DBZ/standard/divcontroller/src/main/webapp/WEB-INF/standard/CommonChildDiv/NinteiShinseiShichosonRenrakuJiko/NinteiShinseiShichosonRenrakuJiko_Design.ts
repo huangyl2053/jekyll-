@@ -4,7 +4,7 @@
 
 module DBZ {
 
-     export module NinteiShinseiShichosonRenrakuJoho {
+     export module NinteiShinseiShichosonRenrakuJiko {
 
         export class Events {
 
@@ -22,7 +22,7 @@ module DBZ {
             private _myName: string;
 
             public static myType(): string {
-                return "NinteiShinseiShichosonRenrakuJoho";
+                return "NinteiShinseiShichosonRenrakuJiko";
             }
 
             constructor(fieldName: string) {
@@ -30,14 +30,14 @@ module DBZ {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBZ.NinteiShinseiShichosonRenrakuJoho.Controls.myType();
+                return this._myName + "_" + DBZ.NinteiShinseiShichosonRenrakuJiko.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBZ.NinteiShinseiShichosonRenrakuJoho.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBZ.NinteiShinseiShichosonRenrakuJiko.Controls.myType() + "_" + fieldName;
             }
 
-            public NinteiShinseiShichosonRenrakuJoho(): UZA.Panel {
+            public NinteiShinseiShichosonRenrakuJiko(): UZA.Panel {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 

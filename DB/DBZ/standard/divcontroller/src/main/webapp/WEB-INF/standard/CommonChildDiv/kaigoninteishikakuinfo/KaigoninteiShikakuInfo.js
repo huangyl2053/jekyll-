@@ -1,32 +1,32 @@
 var DBZ;
 (function (DBZ) {
-    (function (NinteiChosaJokyoInput) {
+    (function (KaigoninteiShikakuInfo) {
         var ModeController = (function () {
             function ModeController(fieldName) {
                 this.fieldName = fieldName;
-                this.controls = new NinteiChosaJokyoInput.Controls(fieldName);
+                this.controls = new KaigoninteiShikakuInfo.Controls(fieldName);
             }
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);
             };
 
             ModeController.prototype.PublicProperties = function () {
-                return new NinteiChosaJokyoInput.PublicProperties(this.fieldName);
+                return new KaigoninteiShikakuInfo.PublicProperties(this.fieldName);
             };
             return ModeController;
         })();
-        NinteiChosaJokyoInput.ModeController = ModeController;
-    })(DBZ.NinteiChosaJokyoInput || (DBZ.NinteiChosaJokyoInput = {}));
-    var NinteiChosaJokyoInput = DBZ.NinteiChosaJokyoInput;
+        KaigoninteiShikakuInfo.ModeController = ModeController;
+    })(DBZ.KaigoninteiShikakuInfo || (DBZ.KaigoninteiShikakuInfo = {}));
+    var KaigoninteiShikakuInfo = DBZ.KaigoninteiShikakuInfo;
 })(DBZ || (DBZ = {}));
 
 var DBZ;
 (function (DBZ) {
-    (function (NinteiChosaJokyoInput) {
+    (function (KaigoninteiShikakuInfo) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
                 this.fieldName = fieldName;
-                this.controls = new NinteiChosaJokyoInput.Controls(fieldName);
+                this.controls = new KaigoninteiShikakuInfo.Controls(fieldName);
             }
             PublicProperties.prototype.getEditTypes = function () {
                 var editTypes = new UZA.EditTypeForPublicProperty();
@@ -35,7 +35,7 @@ var DBZ;
             };
             return PublicProperties;
         })();
-        NinteiChosaJokyoInput.PublicProperties = PublicProperties;
-    })(DBZ.NinteiChosaJokyoInput || (DBZ.NinteiChosaJokyoInput = {}));
-    var NinteiChosaJokyoInput = DBZ.NinteiChosaJokyoInput;
+        KaigoninteiShikakuInfo.PublicProperties = PublicProperties;
+    })(DBZ.KaigoninteiShikakuInfo || (DBZ.KaigoninteiShikakuInfo = {}));
+    var KaigoninteiShikakuInfo = DBZ.KaigoninteiShikakuInfo;
 })(DBZ || (DBZ = {}));

@@ -1,7 +1,7 @@
-/// <reference path='NinteiShinseiShichosonRenrakuJoho_Design.ts' />
+/// <reference path='KaigoninteiShikakuInfo_Design.ts' />
 module DBZ
 {
-    export module NinteiShinseiShichosonRenrakuJoho
+    export module KaigoninteiShikakuInfo
     {
         export class ModeController {
             private controls: Controls;
@@ -28,7 +28,7 @@ module DBZ
 
 module DBZ
 {
-    export module NinteiShinseiShichosonRenrakuJoho
+    export module KaigoninteiShikakuInfo
     {
         export class PublicProperties {
             private controls: Controls;

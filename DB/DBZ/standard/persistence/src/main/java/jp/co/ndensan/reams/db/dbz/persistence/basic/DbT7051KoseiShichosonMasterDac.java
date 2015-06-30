@@ -6,13 +6,16 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster.shichosonShokibetsuID;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.entity.relate.IKoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
@@ -53,12 +56,54 @@ public class DbT7051KoseiShichosonMasterDac implements IModifiable<IKoseiShichos
     }
 
     /**
+     * 主キーで構成市町村マスタを取得します。
+     *
+     * @param 証記載保険者番号 ShokisaiHokenshaNo
+     * @return DbT7051KoseiShichosonMasterEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public Optional<DbT7051KoseiShichosonMasterEntity> selectByKey(
+            ShoKisaiHokenshaNo 証記載保険者番号) throws NullPointerException {
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return Optional.ofNullable(accessor.select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(
+                        eq(shichosonShokibetsuID, 証記載保険者番号)).
+                toList(DbT7051KoseiShichosonMasterEntity.class).get(0));
+    }
+
+    /**
+     * 市町村コードで構成市町村マスタを取得します。
+     *
+     * @param 市町村コード ShichosonCode
+     * @return DbT7051KoseiShichosonMasterEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public Optional<DbT7051KoseiShichosonMasterEntity> selectByKey(
+            LasdecCode 市町村コード) throws NullPointerException {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return Optional.ofNullable(accessor.select().
+                table(DbT7051KoseiShichosonMaster.class).
+                where(
+                        eq(shichosonShokibetsuID, 市町村コード)).
+                toList(DbT7051KoseiShichosonMasterEntity.class).get(0));
+    }
+
+    /**
      * 構成市町村マスタを全件返します。
      *
      * @return List<DbT7051KoseiShichosonMasterEntity>
      */
     @Transaction
-    public List<DbT7051KoseiShichosonMasterEntity> selectAll() {
+    public ItemList<DbT7051KoseiShichosonMasterEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
