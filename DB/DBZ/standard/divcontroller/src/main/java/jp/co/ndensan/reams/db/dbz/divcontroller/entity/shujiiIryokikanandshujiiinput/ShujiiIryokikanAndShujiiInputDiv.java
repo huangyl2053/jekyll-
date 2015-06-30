@@ -4,7 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shujiiIryokikanandshujii
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shujiiIryokikanandshujiiinput.IShujiiIryokikanAndShujiiInputDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -15,12 +15,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
- * ShujiiIryokikanAndShujiiInput のクラスファイル
- *
+ * ShujiiIryokikanAndShujiiInput のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIryokikanAndShujiiInputDiv {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-44">
     /*
      * [ private の作成 ]
@@ -70,7 +69,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
 
     @JsonProperty("txtIryoKikanCode")
     public void setTxtIryoKikanCode(TextBoxCode txtIryoKikanCode) {
-        this.txtIryoKikanCode = txtIryoKikanCode;
+        this.txtIryoKikanCode=txtIryoKikanCode;
     }
 
     @JsonProperty("btnIryokikanGuide")
@@ -80,7 +79,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
 
     @JsonProperty("btnIryokikanGuide")
     public void setBtnIryokikanGuide(ButtonDialog btnIryokikanGuide) {
-        this.btnIryokikanGuide = btnIryokikanGuide;
+        this.btnIryokikanGuide=btnIryokikanGuide;
     }
 
     @JsonProperty("txtIryoKikanName")
@@ -90,7 +89,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
 
     @JsonProperty("txtIryoKikanName")
     public void setTxtIryoKikanName(TextBox txtIryoKikanName) {
-        this.txtIryoKikanName = txtIryoKikanName;
+        this.txtIryoKikanName=txtIryoKikanName;
     }
 
     @JsonProperty("btnShujiiRenrakuJiko")
@@ -100,7 +99,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
 
     @JsonProperty("btnShujiiRenrakuJiko")
     public void setBtnShujiiRenrakuJiko(ButtonDialog btnShujiiRenrakuJiko) {
-        this.btnShujiiRenrakuJiko = btnShujiiRenrakuJiko;
+        this.btnShujiiRenrakuJiko=btnShujiiRenrakuJiko;
     }
 
     @JsonProperty("btnZenkaiIrokikanJoho")
@@ -110,7 +109,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
 
     @JsonProperty("btnZenkaiIrokikanJoho")
     public void setBtnZenkaiIrokikanJoho(Button btnZenkaiIrokikanJoho) {
-        this.btnZenkaiIrokikanJoho = btnZenkaiIrokikanJoho;
+        this.btnZenkaiIrokikanJoho=btnZenkaiIrokikanJoho;
     }
 
     @JsonProperty("txtShujiiCode")
@@ -120,7 +119,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
 
     @JsonProperty("txtShujiiCode")
     public void setTxtShujiiCode(TextBoxCode txtShujiiCode) {
-        this.txtShujiiCode = txtShujiiCode;
+        this.txtShujiiCode=txtShujiiCode;
     }
 
     @JsonProperty("btnShujiiGuide")
@@ -130,7 +129,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
 
     @JsonProperty("btnShujiiGuide")
     public void setBtnShujiiGuide(ButtonDialog btnShujiiGuide) {
-        this.btnShujiiGuide = btnShujiiGuide;
+        this.btnShujiiGuide=btnShujiiGuide;
     }
 
     @JsonProperty("txtShujiiName")
@@ -140,7 +139,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
 
     @JsonProperty("txtShujiiName")
     public void setTxtShujiiName(TextBox txtShujiiName) {
-        this.txtShujiiName = txtShujiiName;
+        this.txtShujiiName=txtShujiiName;
     }
 
     @JsonProperty("chkShiteii")
@@ -150,7 +149,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
 
     @JsonProperty("chkShiteii")
     public void setChkShiteii(CheckBoxList chkShiteii) {
-        this.chkShiteii = chkShiteii;
+        this.chkShiteii=chkShiteii;
     }
 
     @JsonProperty("btnClear")
@@ -160,7 +159,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
 
     @JsonProperty("btnClear")
     public void setBtnClear(Button btnClear) {
-        this.btnClear = btnClear;
+        this.btnClear=btnClear;
     }
 
     @JsonProperty("hdnDatabaseSubGyomuCode")
@@ -169,20 +168,18 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
     }
 
     @JsonProperty("hdnDatabaseSubGyomuCode")
-    @Override
     public void setHdnDatabaseSubGyomuCode(RString hdnDatabaseSubGyomuCode) {
-        this.hdnDatabaseSubGyomuCode = hdnDatabaseSubGyomuCode;
+        this.hdnDatabaseSubGyomuCode=hdnDatabaseSubGyomuCode;
     }
 
     @JsonProperty("hdnShujiiRenrakuJiko")
-    @Override
     public RString getHdnShujiiRenrakuJiko() {
         return hdnShujiiRenrakuJiko;
     }
 
     @JsonProperty("hdnShujiiRenrakuJiko")
     public void setHdnShujiiRenrakuJiko(RString hdnShujiiRenrakuJiko) {
-        this.hdnShujiiRenrakuJiko = hdnShujiiRenrakuJiko;
+        this.hdnShujiiRenrakuJiko=hdnShujiiRenrakuJiko;
     }
 
     @JsonProperty("hdnShinseishoKanriNo")
@@ -191,9 +188,8 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
     }
 
     @JsonProperty("hdnShinseishoKanriNo")
-    @Override
     public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo) {
-        this.hdnShinseishoKanriNo = hdnShinseishoKanriNo;
+        this.hdnShinseishoKanriNo=hdnShinseishoKanriNo;
     }
 
     @JsonProperty("hdnShichosonCode")
@@ -202,55 +198,8 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
     }
 
     @JsonProperty("hdnShichosonCode")
-    @Override
     public void setHdnShichosonCode(RString hdnShichosonCode) {
-        this.hdnShichosonCode = hdnShichosonCode;
-    }
-
-    /*
-     * [共有子DIVモード]
-     */
-    @JsonProperty("modes")
-    private HashSet<Mode> modes;
-
-    public static enum ShoriType implements ICommonChildDivMode {
-
-        InputMode("InputMode"),
-        NinteiMode("NinteiMode"),
-        ShokaiMode("ShokaiMode"),
-        SimpleInputMode("SimpleInputMode"),
-        SimpleShokaiMode("SimpleShokaiMode");
-
-        private final String name;
-
-        private ShoriType(final String name) {
-            this.name = name;
-        }
-
-        public static ShoriType getEnum(String str) {
-            ShoriType[] enumArray = ShoriType.values();
-
-            for (ShoriType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
-                    return enumStr;
-                }
-            }
-            return null;
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-
-    }
-
-    public ShoriType getMode_ShoriType() {
-        return (ShoriType) _CommonChildDivModeUtil.getMode(this.modes, ShoriType.class);
-    }
-
-    public void setMode_ShoriType(ShoriType value) {
-        _CommonChildDivModeUtil.setMode(this.modes, ShoriType.class, value);
+        this.hdnShichosonCode=hdnShichosonCode;
     }
 
     // </editor-fold>
