@@ -7,9 +7,11 @@ package jp.co.ndensan.reams.db.dbz.realservice.koseishichosonmaster;
 
 import jp.co.ndensan.reams.db.dbz.business.koseishichosonmaster.IKoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.koseishichosonmaster.KaigoKoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbz.business.koseishichosonmaster.ShinsakaiKoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.definition.util.function.IFunction;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.relate.IKoseiShichosonMasterEntity;
@@ -49,6 +51,22 @@ public class KaigoiKoseiShichosonMasterManager extends KoseiShichosonMasterManag
     @Override
     public Optional<IKoseiShichosonMaster> find構成市町村(RString 市町村識別ID) {
         return dac.selectByKey(市町村識別ID)
+                .map(new IFunction<DbT7051KoseiShichosonMasterEntity, IKoseiShichosonMaster>() {
+                    @Override
+                    public IKoseiShichosonMaster apply(DbT7051KoseiShichosonMasterEntity t) {
+                        return new KaigoKoseiShichosonMaster(t);
+                    }
+                });
+    }
+
+    /**
+     * 構成市町村マスタ情報を取得します。
+     *
+     * @return 構成市町村マスタ情報
+     */
+    @Override
+    public IItemList<IKoseiShichosonMaster> findAll構成市町村() {
+        return dac.selectAll()
                 .map(new IFunction<DbT7051KoseiShichosonMasterEntity, IKoseiShichosonMaster>() {
                     @Override
                     public IKoseiShichosonMaster apply(DbT7051KoseiShichosonMasterEntity t) {

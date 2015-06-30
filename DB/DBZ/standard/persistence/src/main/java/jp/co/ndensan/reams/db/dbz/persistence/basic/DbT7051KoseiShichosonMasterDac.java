@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT7051KoseiShichosonMaster;
@@ -102,7 +103,7 @@ public class DbT7051KoseiShichosonMasterDac implements IModifiable<IKoseiShichos
      * @return List<DbT7051KoseiShichosonMasterEntity>
      */
     @Transaction
-    public List<DbT7051KoseiShichosonMasterEntity> selectAll() {
+    public ItemList<DbT7051KoseiShichosonMasterEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().

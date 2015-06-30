@@ -37,11 +37,11 @@ jidoWariateJogaishaKubun,bpchar,RString,,,,,自動割当除外者区分,A
 johoteikyoDoiFlag,bool,boolean,,,,,情報提供への同意有無,A
 johoteikyoSiryoOutputYMD,UDD015YMD,FlexibleDate,,,,,情報提供資料出力年月日,A
 chosaKubun,UDD035Code,Code,,,,,調査区分,A
-ninteichosaItakusakiCode,varchar,ChosaItakusakiCode,,,,,認定調査委託先コード,A
-ninteiChousainCode,varchar,ChosainCode,,,,,認定調査員コード,A
+ninteiChosaItakusakiCode,varchar,RString,,,,,認定調査委託先コード,A
+ninteiChosainCode,varchar,RString,,,,,認定調査員コード,A
 renrakuJikoToChosain,text,RString,,,,,調査員への連絡事項,A
-shujiiIryokikanCode,varchar,ShujiiIryokikanCode,,,,,主治医医療機関コード,A
-shujiiCode,varchar,ShujiiCode,,,,,主治医コード,A
+shujiiIryokikanCode,varchar,RString,,,,,主治医医療機関コード,A
+shujiiCode,varchar,RString,,,,,主治医コード,A
 shiteiiFlag,bool,boolean,,,,,指定医フラグ,A
 ikenshoDataShubetsu,UDD035Code,Code,,,,,意見書データ種別,A
 renrakuJikoToShujii,text,RString,,,,,主治医への連絡事項,A
@@ -67,7 +67,7 @@ enkitsuchiHakkoKaisu,int2,int,,,,,延期通知発行回数,A
 enkiMikomiKaishiYMD,UDD015YMD,FlexibleDate,,,,,延期見込期間開始年月日,A
 enkiMikomiShuryoYMD,UDD015YMD,FlexibleDate,,,,,延期見込期間終了年月日,A
 shinsaKeizokuFlag,bool,boolean,,,,,審査継続区分,A
-shinsakaiYusenWaritsukeKubunCode,UDD035Code,Code,,,,,要介護認定審査会優先振分区分コード,A
+shinsakaiYusenWaritsukeKubunCode,UDD035Code,Code,,,,,介護認定審査会優先振分区分コード,A
 kosinTsuchiHakkoYMD,UDD015YMD,FlexibleDate,,,,,更新通知発行年月日,A
 kosinTsuchiHakkoKanryoYMD,UDD015YMD,FlexibleDate,,,,,更新通知発行完了年月日,A
 ninteiShinseiJohoTorokuYMD,UDD015YMD,FlexibleDate,,,,,認定申請情報登録年月日,A

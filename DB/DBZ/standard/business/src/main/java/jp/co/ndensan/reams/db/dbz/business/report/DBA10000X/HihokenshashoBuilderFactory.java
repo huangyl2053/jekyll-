@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoMode
 import jp.co.ndensan.reams.ur.urz.business.IAssociation;
 import jp.co.ndensan.reams.ua.uax.business.atesaki.ITsuchishoAtesaki;
 import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
+//import jp.co.ndensan.reams.ux.uxx.business.report.parts.tsuchishoatesaki.TsuchishoAtesakiBuilderFactory;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
