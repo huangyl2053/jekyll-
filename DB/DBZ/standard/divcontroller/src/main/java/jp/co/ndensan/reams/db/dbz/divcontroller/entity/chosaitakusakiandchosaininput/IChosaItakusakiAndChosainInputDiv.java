@@ -46,4 +46,19 @@ public interface IChosaItakusakiAndChosainInputDiv extends ICommonChildDivBasePr
      */
     void onClickbtnToroku();
 
+    RString getChosain();
+
+    RString getChosaItakusakiCode();
+
+    void setTxtChosaItakusakiCode(RString chosaItakusakiCode);
+
+    void setTxtChosaItakusakiName(RString chosaItakusakiName);
+
+    void setTxtChosainCode(RString chosainCode);
+
+    void setTxtChosainName(RString chosainName);
+
+    void onBlurTxtChosaItakusakiCode();
+
+    void onBlurTxtShujiiCode();
 }
