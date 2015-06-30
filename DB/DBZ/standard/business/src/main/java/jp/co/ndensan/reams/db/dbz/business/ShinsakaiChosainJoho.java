@@ -188,7 +188,7 @@ public class ShinsakaiChosainJoho implements Serializable, IChosainJoho {
      * @return 状況フラグ
      */
     @Override
-    public boolean get状況フラグ() {
+    public boolean has状況フラグ() {
         return entity.getJokyoFlag();
     }
 

@@ -125,7 +125,7 @@ public interface IChosainJoho {
      *
      * @return 状況フラグ
      */
-    boolean get状況フラグ();
+    boolean has状況フラグ();
 
     /**
      * stateを返します。

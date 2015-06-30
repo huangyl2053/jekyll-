@@ -185,7 +185,7 @@ public class ShinsakaiNinteichosaItakusakiJoho implements Serializable, INinteic
      * @return 自動割付フラグ
      */
     @Override
-    public boolean get自動割付フラグ() {
+    public boolean has自動割付フラグ() {
         return entity.getAutoWaritsukeFlag();
     }
 
@@ -205,7 +205,7 @@ public class ShinsakaiNinteichosaItakusakiJoho implements Serializable, INinteic
      * @return 状況フラグ
      */
     @Override
-    public boolean get状況フラグ() {
+    public boolean has状況フラグ() {
         return entity.getJokyoFlag();
     }
 

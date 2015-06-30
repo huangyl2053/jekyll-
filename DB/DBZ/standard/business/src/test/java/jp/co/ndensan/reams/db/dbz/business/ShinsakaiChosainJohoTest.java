@@ -106,7 +106,7 @@ public class ShinsakaiChosainJohoTest extends DbdTestBase {
 
         @Test
         public void 引数に状況フラグを設定した場合_ge状況フラグと同じ状況フラグを返す() {
-            assertThat(sut.get状況フラグ(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_状況フラグ));
+            assertThat(sut.has状況フラグ(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_状況フラグ));
         }
 
     }
@@ -193,8 +193,8 @@ public class ShinsakaiChosainJohoTest extends DbdTestBase {
 
         @Test
         public void setJokyoFlagで設定した値を＿生成されたChosainJohoJukyuも保持する() {
-            ShinsakaiChosainJoho result = ShinsakaiChosainJoho.newBuilder().setJokyoFlag(new Boolean(true)).build();
-            assertThat(result.get状況フラグ(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_状況フラグ));
+            ShinsakaiChosainJoho result = ShinsakaiChosainJoho.newBuilder().setJokyoFlag(true).build();
+            assertThat(result.has状況フラグ(), is(DbT5913ChosainJohoEntityGenerator.DEFAULT_状況フラグ));
         }
     }
 

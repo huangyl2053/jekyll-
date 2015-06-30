@@ -47,16 +47,13 @@ public class ChosaItakusakiAndChosainInputHandler {
     private IChosaItakusakiManager chosaItakusakimanager;
     private IChosainManager chosaInmanager;
 
-    private final SubGyomuCode subGyomuCode;
-
     /**
      * コンストラクタです。
      *
-     * @param chosaItakusakiAndChosainInputDiv 調査委託先/調査員入力共有子のエンティティ
+     * @param div 調査委託先/調査員入力共有子のエンティティ
      */
-    public ChosaItakusakiAndChosainInputHandler(ChosaItakusakiAndChosainInputDiv chosaItakusakiAndChosainInputDiv) {
-        this.div = chosaItakusakiAndChosainInputDiv;
-        this.subGyomuCode = new SubGyomuCode(div.getHdnDatabaseSubGyomuCode());
+    public ChosaItakusakiAndChosainInputHandler(ChosaItakusakiAndChosainInputDiv div) {
+        this.div = div;
     }
 
     /**
@@ -67,7 +64,7 @@ public class ChosaItakusakiAndChosainInputHandler {
         //①証記載保険者番号と構成市町村マスタDBでの証記載保険者番号と比較して、市町村コードを取得します。
         //②その市町村コードと画面で入力値の認定調査委託コートをもとに認定調査委託先情報DBの市町村コード・認定調査委託コートを比較してから
         //認定調査委託先情報を取得します。
-        IChosaItakusakiManager chosaItakusakimanager = ChosaItakusakiFactory.getInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
+        chosaItakusakimanager = ChosaItakusakiFactory.getInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
         Optional<INinteichosaItakusakiJoho> chosaItakusakiJoho = chosaItakusakimanager.find調査委託先情報(new LasdecCode(div.getHdnShichosonCode()),
                 new ChosaItakusakiCode(div.getTxtChosaItakusakiCode().getValue()));
         //調査委託先名を画面に設定します。
@@ -86,7 +83,7 @@ public class ChosaItakusakiAndChosainInputHandler {
         //①証記載保険者番号と構成市町村マスタDBでの証記載保険者番号と比較して、市町村コードを取得します。
         //②その市町村コードと②画面で入力値の認定調査委託コートと画面で入力値の調査員コードをもとに認定員情報DBの市町村コード・
         //認定調査委託コート・認定調査委託コートを比較してから認定調査員情報を取得します。
-        IChosainManager chosaInmanager = ChosainFactory.getInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
+        chosaInmanager = ChosainFactory.getInstance(new SubGyomuCode(div.getHdnDatabaseSubGyomuCode()));
         Optional<IChosainJoho> chosainJoho
                 = chosaInmanager.find調査員情報(new LasdecCode(div.getHdnShichosonCode()),
                         new ChosaItakusakiCode(div.getTxtChosaItakusakiCode().getValue()),

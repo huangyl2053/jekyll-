@@ -126,7 +126,7 @@ public interface INinteichosaItakusakiJoho {
      *
      * @return 自動割付フラグ
      */
-    boolean get自動割付フラグ();
+    boolean has自動割付フラグ();
 
     /**
      * 機関の区分を返します。
@@ -140,7 +140,7 @@ public interface INinteichosaItakusakiJoho {
      *
      * @return 状況フラグ
      */
-    boolean get状況フラグ();
+    boolean has状況フラグ();
 
     /**
      * stateを返します。

@@ -107,7 +107,7 @@ public class ShinsakaiNinteichosaItakusakiJohoTest extends DbdTestBase {
 
         @Test
         public void 引数に自動割付フラグを設定した場合_get自動割付フラグは_自動割付フラグと同じ自動割付フラグを返す() {
-            assertThat(sut.get自動割付フラグ(), is(DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_自動割付フラグ));
+            assertThat(sut.has自動割付フラグ(), is(DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_自動割付フラグ));
         }
 
         @Test
@@ -117,7 +117,7 @@ public class ShinsakaiNinteichosaItakusakiJohoTest extends DbdTestBase {
 
         @Test
         public void 引数に状況フラグを設定した場合_get状況フラグは_状況フラグと同じ状況フラグを返す() {
-            assertThat(sut.get状況フラグ(), is(DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_状況フラグ));
+            assertThat(sut.has状況フラグ(), is(DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_状況フラグ));
         }
     }
 
@@ -204,7 +204,7 @@ public class ShinsakaiNinteichosaItakusakiJohoTest extends DbdTestBase {
         @Test
         public void setAutoWaritsukeFlagで設定した値を_生成されたNinteichosaItakusakiJohoJukyuも保持する() {
             HokenshaNinteichosaItakusakiJoho result = HokenshaNinteichosaItakusakiJoho.newBuilder().setAutoWaritsukeFlag(Boolean.TRUE).build();
-            assertThat(result.get自動割付フラグ(), is(DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_自動割付フラグ));
+            assertThat(result.has自動割付フラグ(), is(DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_自動割付フラグ));
         }
 
         @Test
@@ -216,7 +216,7 @@ public class ShinsakaiNinteichosaItakusakiJohoTest extends DbdTestBase {
         @Test
         public void setJokyoFlagで設定した値を_生成されたNinteichosaItakusakiJohoJukyuも保持する() {
             HokenshaNinteichosaItakusakiJoho result = HokenshaNinteichosaItakusakiJoho.newBuilder().setJokyoFlag(Boolean.TRUE).build();
-            assertThat(result.get状況フラグ(), is(DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_状況フラグ));
+            assertThat(result.has状況フラグ(), is(DbT5910NinteichosaItakusakiJohoEntityGenerator.DEFAULT_状況フラグ));
         }
     }
 
