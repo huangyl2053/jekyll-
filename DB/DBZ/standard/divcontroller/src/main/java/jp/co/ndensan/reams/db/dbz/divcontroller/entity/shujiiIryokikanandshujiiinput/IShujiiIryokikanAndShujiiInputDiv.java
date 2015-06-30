@@ -41,4 +41,26 @@ public interface IShujiiIryokikanAndShujiiInputDiv extends ICommonChildDivBasePr
      */
     void clear();
 
+    RString getShujiiCode();
+
+    RString getIryoKikanCode();
+
+    boolean getShiteiiFlag();
+
+    void setTxtIryoKikanCode(RString iryoKikanCode);
+
+    void setTxtIryoKikanName(RString iryoKikanName);
+
+    void setTxtShujiiCode(RString shujiiCode);
+
+    void setTxtShujiiName(RString shujiiName);
+
+    void setChkShiteii(RString chkShiteii);
+
+    void setShiteiiFlag(boolean shiteiiFlag);
+
+    void onBlurTxtShujiiIryokikanCode();
+
+    void onBlurTxtShujiiCode();
+
 }

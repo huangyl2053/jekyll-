@@ -145,6 +145,12 @@ public class ShujiiIryokikanAndShujiiInputHandler {
         }
     }
 
+    public void setShiteiiFlag(boolean shiteiiFlag) {
+        if (shiteiiFlag) {
+            div.getChkShiteii().setSelectedItems(div.getChkShiteii().getDataSource());
+        }
+    }
+
     /**
      * 画面上にセットされた値をクリアします。
      */
