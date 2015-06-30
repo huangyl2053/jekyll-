@@ -166,6 +166,13 @@ public interface INinteiShinseiTodokedeshaDiv extends ICommonChildDivBasePropert
     void set事業者区分(RString 事業者区分);
 
     /**
+     * 事業者名を設定します。
+     *
+     * @param 事業者名 事業者名
+     */
+    void set事業者名(RString 事業者名);
+
+    /**
      * 申請届出者氏名を設定します。
      *
      * @param 申請届出者氏名 申請届出者氏名
@@ -216,6 +223,11 @@ public interface INinteiShinseiTodokedeshaDiv extends ICommonChildDivBasePropert
      * 前回の申請情報の申請届出情報の内容を取得する処理を行います。
      */
     void onChangeDdlTodokedeDaikoKubun();
+
+    /**
+     * 入力された事業者コードより事業者名称を表示します。
+     */
+    void onBlurJigyoshaGuide();
 
     /**
      * 共有子Divの初期化を行います。

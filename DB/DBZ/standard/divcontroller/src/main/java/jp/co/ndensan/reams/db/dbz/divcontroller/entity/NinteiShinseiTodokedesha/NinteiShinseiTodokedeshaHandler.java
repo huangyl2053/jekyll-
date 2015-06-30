@@ -60,6 +60,7 @@ public class NinteiShinseiTodokedeshaHandler {
         div.getDdlTodokledeDaikoKubun().setDataSource(getTodokledeDaikoKubunDataSource());
         //申請関係者(事業者区分) ddlShinseiKankeisha
         div.getDdlShinseiKankeisha().setDataSource(getShinseiKankeisha());
+
     }
 
     private List<KeyValueDataSource> getTodokledeDaikoKubunDataSource() {
@@ -152,6 +153,13 @@ public class NinteiShinseiTodokedeshaHandler {
         if (shinseiRirekiJoho.isPresent()) {
             createZenkaiJoho(shinseiRirekiJoho);
         }
+    }
+
+    /**
+     * TODO
+     */
+    public void onBlurJigyoshaGuide() {
+
     }
 
     private void createZenkaiJohoManager() {

@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiShinseiTodokedesha
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiShinseiTodokedesha.INinteiShinseiTodokedeshaDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,11 +21,12 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 
 /**
- * NinteiShinseiTodokedesha のクラスファイル 
- * 
+ * NinteiShinseiTodokedesha のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinseiTodokedeshaDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-44">
     /*
      * [ private の作成 ]
@@ -100,7 +102,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("ddlTodokledeDaikoKubun")
     public void setDdlTodokledeDaikoKubun(DropDownList ddlTodokledeDaikoKubun) {
-        this.ddlTodokledeDaikoKubun=ddlTodokledeDaikoKubun;
+        this.ddlTodokledeDaikoKubun = ddlTodokledeDaikoKubun;
     }
 
     @JsonProperty("btnSetaiIchiran")
@@ -110,7 +112,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("btnSetaiIchiran")
     public void setBtnSetaiIchiran(ButtonDialog btnSetaiIchiran) {
-        this.btnSetaiIchiran=btnSetaiIchiran;
+        this.btnSetaiIchiran = btnSetaiIchiran;
     }
 
     @JsonProperty("btnAtenaKensaku")
@@ -120,7 +122,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("btnAtenaKensaku")
     public void setBtnAtenaKensaku(ButtonDialog btnAtenaKensaku) {
-        this.btnAtenaKensaku=btnAtenaKensaku;
+        this.btnAtenaKensaku = btnAtenaKensaku;
     }
 
     @JsonProperty("btnZenkaiFukusha")
@@ -130,7 +132,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("btnZenkaiFukusha")
     public void setBtnZenkaiFukusha(Button btnZenkaiFukusha) {
-        this.btnZenkaiFukusha=btnZenkaiFukusha;
+        this.btnZenkaiFukusha = btnZenkaiFukusha;
     }
 
     @JsonProperty("txtJigyoshaCode")
@@ -140,7 +142,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("txtJigyoshaCode")
     public void setTxtJigyoshaCode(TextBox txtJigyoshaCode) {
-        this.txtJigyoshaCode=txtJigyoshaCode;
+        this.txtJigyoshaCode = txtJigyoshaCode;
     }
 
     @JsonProperty("btnJigyoshaGuide")
@@ -150,7 +152,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("btnJigyoshaGuide")
     public void setBtnJigyoshaGuide(ButtonDialog btnJigyoshaGuide) {
-        this.btnJigyoshaGuide=btnJigyoshaGuide;
+        this.btnJigyoshaGuide = btnJigyoshaGuide;
     }
 
     @JsonProperty("txtJigyoshaName")
@@ -160,7 +162,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("txtJigyoshaName")
     public void setTxtJigyoshaName(TextBox txtJigyoshaName) {
-        this.txtJigyoshaName=txtJigyoshaName;
+        this.txtJigyoshaName = txtJigyoshaName;
     }
 
     @JsonProperty("ddlShinseiKankeisha")
@@ -170,7 +172,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("ddlShinseiKankeisha")
     public void setDdlShinseiKankeisha(DropDownList ddlShinseiKankeisha) {
-        this.ddlShinseiKankeisha=ddlShinseiKankeisha;
+        this.ddlShinseiKankeisha = ddlShinseiKankeisha;
     }
 
     @JsonProperty("txtShimei")
@@ -180,7 +182,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("txtShimei")
     public void setTxtShimei(TextBox txtShimei) {
-        this.txtShimei=txtShimei;
+        this.txtShimei = txtShimei;
     }
 
     @JsonProperty("txtKanaShimei")
@@ -190,7 +192,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("txtKanaShimei")
     public void setTxtKanaShimei(TextBox txtKanaShimei) {
-        this.txtKanaShimei=txtKanaShimei;
+        this.txtKanaShimei = txtKanaShimei;
     }
 
     @JsonProperty("txtHonninKankeisei")
@@ -200,7 +202,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("txtHonninKankeisei")
     public void setTxtHonninKankeisei(TextBoxCode txtHonninKankeisei) {
-        this.txtHonninKankeisei=txtHonninKankeisei;
+        this.txtHonninKankeisei = txtHonninKankeisei;
     }
 
     @JsonProperty("lblHonninKankeiseiMei")
@@ -210,7 +212,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("lblHonninKankeiseiMei")
     public void setLblHonninKankeiseiMei(Label lblHonninKankeiseiMei) {
-        this.lblHonninKankeiseiMei=lblHonninKankeiseiMei;
+        this.lblHonninKankeiseiMei = lblHonninKankeiseiMei;
     }
 
     @JsonProperty("txtYubinNo")
@@ -220,7 +222,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("txtYubinNo")
     public void setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
-        this.txtYubinNo=txtYubinNo;
+        this.txtYubinNo = txtYubinNo;
     }
 
     @JsonProperty("txtTelNo")
@@ -230,7 +232,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("txtTelNo")
     public void setTxtTelNo(TextBoxTelNo txtTelNo) {
-        this.txtTelNo=txtTelNo;
+        this.txtTelNo = txtTelNo;
     }
 
     @JsonProperty("txtJusho")
@@ -240,7 +242,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("txtJusho")
     public void setTxtJusho(TextBoxJusho txtJusho) {
-        this.txtJusho=txtJusho;
+        this.txtJusho = txtJusho;
     }
 
     @JsonProperty("hdnShinseishoKanriNo")
@@ -250,7 +252,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("hdnShinseishoKanriNo")
     public void setHdnShinseishoKanriNo(RString hdnShinseishoKanriNo) {
-        this.hdnShinseishoKanriNo=hdnShinseishoKanriNo;
+        this.hdnShinseishoKanriNo = hdnShinseishoKanriNo;
     }
 
     @JsonProperty("hdnShikibetsuCode")
@@ -260,7 +262,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("hdnShikibetsuCode")
     public void setHdnShikibetsuCode(RString hdnShikibetsuCode) {
-        this.hdnShikibetsuCode=hdnShikibetsuCode;
+        this.hdnShikibetsuCode = hdnShikibetsuCode;
     }
 
     @JsonProperty("hdnShimei")
@@ -270,7 +272,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("hdnShimei")
     public void setHdnShimei(RString hdnShimei) {
-        this.hdnShimei=hdnShimei;
+        this.hdnShimei = hdnShimei;
     }
 
     @JsonProperty("hdnKanaShimei")
@@ -279,8 +281,9 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
     }
 
     @JsonProperty("hdnKanaShimei")
+    @Override
     public void setHdnKanaShimei(RString hdnKanaShimei) {
-        this.hdnKanaShimei=hdnKanaShimei;
+        this.hdnKanaShimei = hdnKanaShimei;
     }
 
     @JsonProperty("hdnTsudukigara")
@@ -289,8 +292,9 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
     }
 
     @JsonProperty("hdnTsudukigara")
+    @Override
     public void setHdnTsudukigara(RString hdnTsudukigara) {
-        this.hdnTsudukigara=hdnTsudukigara;
+        this.hdnTsudukigara = hdnTsudukigara;
     }
 
     @JsonProperty("hdnYubinNo")
@@ -299,8 +303,9 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
     }
 
     @JsonProperty("hdnYubinNo")
+    @Override
     public void setHdnYubinNo(RString hdnYubinNo) {
-        this.hdnYubinNo=hdnYubinNo;
+        this.hdnYubinNo = hdnYubinNo;
     }
 
     @JsonProperty("hdnJusho")
@@ -309,8 +314,9 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
     }
 
     @JsonProperty("hdnJusho")
+    @Override
     public void setHdnJusho(RString hdnJusho) {
-        this.hdnJusho=hdnJusho;
+        this.hdnJusho = hdnJusho;
     }
 
     @JsonProperty("hdnTelNo")
@@ -319,8 +325,9 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
     }
 
     @JsonProperty("hdnTelNo")
+    @Override
     public void setHdnTelNo(RString hdnTelNo) {
-        this.hdnTelNo=hdnTelNo;
+        this.hdnTelNo = hdnTelNo;
     }
 
     @JsonProperty("hdnGyomuCode")
@@ -329,8 +336,9 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
     }
 
     @JsonProperty("hdnGyomuCode")
+    @Override
     public void setHdnGyomuCode(RString hdnGyomuCode) {
-        this.hdnGyomuCode=hdnGyomuCode;
+        this.hdnGyomuCode = hdnGyomuCode;
     }
 
     @JsonProperty("hdnSerchYusenKubun")
@@ -339,8 +347,9 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
     }
 
     @JsonProperty("hdnSerchYusenKubun")
+    @Override
     public void setHdnSerchYusenKubun(RString hdnSerchYusenKubun) {
-        this.hdnSerchYusenKubun=hdnSerchYusenKubun;
+        this.hdnSerchYusenKubun = hdnSerchYusenKubun;
     }
 
     @JsonProperty("hdnKeyDialog")
@@ -350,7 +359,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("hdnKeyDialog")
     public void setHdnKeyDialog(RString hdnKeyDialog) {
-        this.hdnKeyDialog=hdnKeyDialog;
+        this.hdnKeyDialog = hdnKeyDialog;
     }
 
     @JsonProperty("hdnKeyAgeArrivalDay")
@@ -360,7 +369,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
 
     @JsonProperty("hdnKeyAgeArrivalDay")
     public void setHdnKeyAgeArrivalDay(RString hdnKeyAgeArrivalDay) {
-        this.hdnKeyAgeArrivalDay=hdnKeyAgeArrivalDay;
+        this.hdnKeyAgeArrivalDay = hdnKeyAgeArrivalDay;
     }
 
     /*
@@ -384,7 +393,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
             ShoriType[] enumArray = ShoriType.values();
 
             for (ShoriType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -399,11 +408,11 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
     }
 
     public ShoriType getMode_ShoriType() {
-        return (ShoriType) _CommonChildDivModeUtil.getMode( this.modes, ShoriType.class );
+        return (ShoriType) _CommonChildDivModeUtil.getMode(this.modes, ShoriType.class);
     }
 
-    public void setMode_ShoriType( ShoriType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, ShoriType.class , value );
+    public void setMode_ShoriType(ShoriType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, ShoriType.class, value);
     }
 
     public static enum AtenaType implements ICommonChildDivMode {
@@ -421,7 +430,7 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
             AtenaType[] enumArray = AtenaType.values();
 
             for (AtenaType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -436,11 +445,11 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
     }
 
     public AtenaType getMode_AtenaType() {
-        return (AtenaType) _CommonChildDivModeUtil.getMode( this.modes, AtenaType.class );
+        return (AtenaType) _CommonChildDivModeUtil.getMode(this.modes, AtenaType.class);
     }
 
-    public void setMode_AtenaType( AtenaType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, AtenaType.class , value );
+    public void setMode_AtenaType(AtenaType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, AtenaType.class, value);
     }
 
     // </editor-fold>
@@ -448,13 +457,13 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
     @JsonIgnore
     @Override
     public RString get申請届出代行区分コード() {
-        return ddlTodokledeDaikoKubun.getSelectedValue();
+        return ddlTodokledeDaikoKubun.getSelectedKey();
     }
 
     @JsonIgnore
     @Override
     public void set申請届出代行区分コード(RString 申請届出代行区分コード) {
-        ddlTodokledeDaikoKubun.setSelectedValue(申請届出代行区分コード);
+        ddlTodokledeDaikoKubun.setSelectedKey(申請届出代行区分コード);
     }
 
     @JsonIgnore
@@ -472,13 +481,13 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
     @JsonIgnore
     @Override
     public RString get事業者区分() {
-        return ddlShinseiKankeisha.getSelectedValue();
+        return ddlShinseiKankeisha.getSelectedKey();
     }
 
     @JsonIgnore
     @Override
     public void set事業者区分(RString 事業者区分) {
-        ddlShinseiKankeisha.setSelectedValue(事業者区分);
+        ddlShinseiKankeisha.setSelectedKey(事業者区分);
     }
 
     @JsonIgnore
@@ -553,23 +562,29 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
         txtJusho.setDomain(申請届出者住所);
     }
 
+    @JsonIgnore
+    @Override
+    public void set事業者名(RString 事業者名) {
+        txtJigyoshaName.setValue(事業者名);
+    }
+
     @Override
     public void initialize() {
-        getHandler().initialize();
+        createHandler().initialize();
     }
 
     @Override
     public void onClickBtnZenkaiFukusha() {
-        getHandler().onClickBtnZenkaiFukusha();
+        createHandler().onClickBtnZenkaiFukusha();
     }
 
     @Override
     public void onChangeDdlTodokedeDaikoKubun() {
-        getHandler().onChangeDdlTodokedeDaikoKubun();
+        createHandler().onChangeDdlTodokedeDaikoKubun();
     }
 
     @JsonIgnore
-    private NinteiShinseiTodokedeshaHandler getHandler() {
+    private NinteiShinseiTodokedeshaHandler createHandler() {
         return new NinteiShinseiTodokedeshaHandler(this);
     }
 
@@ -577,14 +592,20 @@ public class NinteiShinseiTodokedeshaDiv extends Panel implements INinteiShinsei
      * 共有子Div情報を全てクリアします。
      */
     public void clear() {
-        getHandler().clear();
+        createHandler().clear();
     }
 
     /**
      * 共有子Div情報をロードします。
      */
     public void load() {
-        getHandler().load();
+        createHandler().load();
     }
 
+    /**
+     * 共有子Div情報の事業者を取得します。
+     */
+    public void onBlurJigyoshaGuide() {
+        createHandler().onBlurJigyoshaGuide();
+    }
 }
