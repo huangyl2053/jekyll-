@@ -45,7 +45,7 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
     shinseishoKanriNo(2147483647, 0),
     /**
      * 厚労省IF識別コード
-     * <br/>年によって異なる認定調査項目を特定するためのコード。
+     * <br/>Enum（DBE：厚労省認定ソフトのバージョン）年によって異なる認定調査項目を特定するためのコード。
      */
     koroshoIfShikibetsuCode(2147483647, 0),
     /**
@@ -71,22 +71,22 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
     ninteiShinseiEdabanCode(2147483647, 0),
     /**
      * 認定申請区分（法令）コード
-     * <br/>新規申請・更新申請・区分変更申請・職権
+     * <br/>Enum（DBD：申請区分（法令）コード）新規申請・更新申請・区分変更申請・職権
      */
     ninteiShinseiHoreiKubunCode(2147483647, 0),
     /**
      * 認定申請区分（申請時）コード
-     * <br/>新規・更新・区分変更・転入申請・資格喪失（死亡）・新規（事前）・更新（事前）
+     * <br/>Enum（DBD：申請区分（申請時）コード）新規・更新・区分変更・転入申請・資格喪失（死亡）・新規（事前）・更新（事前）
      */
     ninteiShinseiShinseijiKubunCode(2147483647, 0),
     /**
      * 取下区分コード
-     * <br/>NCI 1:認定申請有効、2:却下、3:取り下げ、4:区分変更却下
+     * <br/>Enum（DBE：取下区分コード）NCI 1:認定申請有効、2:却下、3:取り下げ、4:区分変更却下
      */
     torisageKubunCode(2147483647, 0),
     /**
      * 被保険者区分コード
-     * <br/>1:第1号被保険者、2:第2号被保険者、その他8生活保護)
+     * <br/>Enum（DBE：被保険者区分コード）1:第1号被保険者、2:第2号被保険者、その他8生活保護)
      */
     hihokenshaKubunCode(1, 0),
     /**
@@ -100,6 +100,7 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
     age(5, 0),
     /**
      * 性別
+     * <br/>Enum（DBZ：性別コード）
      */
     seibetsu(2147483647, 0),
     /**
@@ -137,20 +138,22 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
     chikuCode(2147483647, 0),
     /**
      * みなし２号等対象フラグ
+     * <br/>Enum（DBE：みなし2号等対象フラグ）
      */
     minashiNigoEtcTaishoFlag(1, 0),
     /**
      * 広域内転居区分
-     * <br/>0：対象外、1:申請中の転居、2:申請終了
+     * <br/>Enum（DBE：広域内転居区分）0：対象外、1:申請中の転居、2:申請終了
      */
     koikinaiTenkyoKubun(2147483647, 0),
     /**
      * 認定申請有効区分
-     * <br/>申請中
+     * <br/>Enum（DBD：認定申請有効区分）
      */
     ninteiShinseiYukoKubunCode(2147483647, 0),
     /**
      * 要介護申請・要支援申請の区分
+     * <br/>Enum（DBD：要介護申請・要支援申請の区分）
      */
     shienShinseiKubun(1, 0),
     /**
@@ -163,6 +166,7 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
     shinseiServiceDeleteRiyu(2147483647, 0),
     /**
      * 前回要介護状態区分コード
+     * <br/>Enum（DBZ：要介護状態区分コード09）
      */
     zenYokaigoKubunCode(2147483647, 0),
     /**
@@ -189,14 +193,17 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
     nigoIryoHokenKigoBango(30, 0),
     /**
      * ２号特定疾病コード
+     * <br/>Enum（DBZ：特定疾病コード）
      */
     nigoTokuteiShippeiCode(2147483647, 0),
     /**
      * 自動割当除外者区分
+     * <br/>Enum（DBE：自動割当除外者区分）
      */
     jidoWariateJogaishaKubun(1, 0),
     /**
      * 情報提供への同意有無
+     * <br/>Enum（DBD：情報提供への同意有無）
      */
     johoteikyoDoiFlag(1, 0),
     /**
@@ -205,39 +212,41 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
     johoteikyoSiryoOutputYMD(2147483647, 0),
     /**
      * 調査区分
+     * <br/>Enum（DBE：調査区分）
      */
     chosaKubun(2147483647, 0),
     /**
      * 認定調査委託先コード
-     * <br/>依頼情報の生成によってupdateされていく。
+     * <br/>依頼情報の生成によってupdateされていく。認定調査委託先情報
      */
-    ninteichosaItakusakiCode(10, 0),
+    ninteiChosaItakusakiCode(10, 0),
     /**
      * 認定調査員コード
-     * <br/>依頼情報の生成によってupdateされていく。
+     * <br/>依頼情報の生成によってupdateされていく。認定調査員情報
      */
-    ninteiChousainCode(8, 0),
+    ninteiChosainCode(8, 0),
     /**
      * 調査員への連絡事項
      */
     renrakuJikoToChosain(2147483647, 0),
     /**
      * 主治医医療機関コード
-     * <br/>申請書の主治医の医療機関に相当する介護独自の医療機関コード。
-     * <br/>依頼情報の生成によってupdateされていく。
+     * <br/>申請書の主治医の医療機関に相当する介護独自の医療機関コード。依頼情報の生成によってupdateされていく。主治医医療機関情報
      */
     shujiiIryokikanCode(10, 0),
     /**
      * 主治医コード
-     * <br/>申請書の主治医に相当する介護独自の医師コード。依頼情報の生成によってupdateされていく。
+     * <br/>申請書の主治医に相当する介護独自の医師コード。依頼情報の生成によってupdateされていく。主治医情報
      */
     shujiiCode(8, 0),
     /**
      * 指定医フラグ
+     * <br/>Enum（DBE：指定医フラグ）
      */
     shiteiiFlag(1, 0),
     /**
      * 意見書データ種別
+     * <br/>Enum（DBE：意見書データ種別）
      */
     ikenshoDataShubetsu(2147483647, 0),
     /**
@@ -246,14 +255,17 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
     renrakuJikoToShujii(2147483647, 0),
     /**
      * みなし要介護区分コード
+     * <br/>Enum（DBE：みなし要介護区分コード）
      */
     minashiCode(2147483647, 0),
     /**
      * 認定延期通知発行しないことに対する同意有無
+     * <br/>Enum（DBE：認定延期通知発行しないことに対する同意有無）
      */
     enkitsuchiNashiDoiFlag(1, 0),
     /**
      * 施設入所の有無
+     * <br/>Enum（DBE：施設入所の有無）
      */
     shisetsuNyushoFlag(1, 0),
     /**
@@ -263,6 +275,7 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
     nyushoShisetsuCode(10, 0),
     /**
      * 家庭訪問の有無
+     * <br/>Enum（DBE：家庭訪問の有無）
      */
     kateiHomonFlag(1, 0),
     /**
@@ -333,10 +346,12 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
     enkiMikomiShuryoYMD(2147483647, 0),
     /**
      * 審査継続区分
+     * <br/>Enum（DBE：審査継続区分）
      */
     shinsaKeizokuFlag(1, 0),
     /**
-     * 要介護認定審査会優先振分区分コード
+     * 介護認定審査会優先振分区分コード
+     * <br/>Enum（DBE：介護認定審査会優先振分区分コード）
      */
     shinsakaiYusenWaritsukeKubunCode(2147483647, 0),
     /**
@@ -365,6 +380,7 @@ public enum DbT5101NinteiShinseiJoho implements IColumnDefinition {
     ifSofuYMD(2147483647, 0),
     /**
      * 論理削除フラグ
+     * <br/>True：論理削除　False：論理未削除
      */
     logicalDeletedFlag(1, 0);
 
