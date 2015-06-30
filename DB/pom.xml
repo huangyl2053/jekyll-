@@ -37,7 +37,7 @@
         <jp.co.ndensan.reams.dbxVersion>0.1.0-SNAPSHOT</jp.co.ndensan.reams.dbxVersion>
         <jp.co.ndensan.reams.adxVersion>0.1.0-SNAPSHOT</jp.co.ndensan.reams.adxVersion>
         <jp.co.ndensan.reams.urVersion>1.0.0</jp.co.ndensan.reams.urVersion>
-        <jp.co.ndensan.reams.uzVersion>1.0.0</jp.co.ndensan.reams.uzVersion>
+        <jp.co.ndensan.reams.uzVersion>1.1.1</jp.co.ndensan.reams.uzVersion>
     </properties>
 
     <dependencyManagement>
