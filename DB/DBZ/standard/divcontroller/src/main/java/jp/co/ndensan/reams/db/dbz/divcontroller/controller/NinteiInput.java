@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.divcontroller.controller;
+package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbd.divcontroller.controller.helper.NinteiInputValidationHelper;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput.NinteiInputDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput.NinteiInputHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.helper.NinteiInputValidationHelper;
+import jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput.NinteiInputDiv;
+import jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput.NinteiInputHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput;
+package jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput;
 
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

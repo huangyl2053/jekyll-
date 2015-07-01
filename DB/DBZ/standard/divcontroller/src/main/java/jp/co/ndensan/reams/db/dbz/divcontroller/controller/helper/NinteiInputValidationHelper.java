@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.divcontroller.controller.helper;
+package jp.co.ndensan.reams.db.dbz.divcontroller.controller.helper;
 
-import jp.co.ndensan.reams.db.dbd.business.NinteiInputValidator;
-import jp.co.ndensan.reams.db.dbd.business.validation.NinteiInputValidationMessage;
+import jp.co.ndensan.reams.db.dbz.business.NinteiInputValidator;
+import jp.co.ndensan.reams.db.dbz.business.validation.NinteiInputValidationMessage;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;

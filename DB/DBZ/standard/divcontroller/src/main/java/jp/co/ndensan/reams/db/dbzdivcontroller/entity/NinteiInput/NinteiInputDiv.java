@@ -1,13 +1,13 @@
-package jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput;
+package jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput.INinteiInputDiv;
+import jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput.INinteiInputDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput.dgServiceIchiran_Row;
+import jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput.dgServiceIchiran_Row;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;

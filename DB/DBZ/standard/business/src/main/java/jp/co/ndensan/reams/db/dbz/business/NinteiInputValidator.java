@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.business;
+package jp.co.ndensan.reams.db.dbz.business;
 
-import jp.co.ndensan.reams.db.dbd.business.validation.NinteiInputValidationMessage;
+import jp.co.ndensan.reams.db.dbz.business.validation.NinteiInputValidationMessage;
 import jp.co.ndensan.reams.ur.urz.model.validation.IValidatable;
 import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

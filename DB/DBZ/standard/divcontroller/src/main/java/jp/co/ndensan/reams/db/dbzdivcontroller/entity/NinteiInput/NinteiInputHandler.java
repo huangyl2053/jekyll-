@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput;
+package jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.JukyushaDaicho;
-import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.IchibuSoshitsuMode;
-import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.NinteiMode;
-import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.ShokaiMode;
-import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.ShokkenShuseiMode;
-import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.TokushuShuseiMode;
-import jp.co.ndensan.reams.db.dbd.realservice.JukyushaDaichoManager;
+import static jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.IchibuSoshitsuMode;
+import static jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.NinteiMode;
+import static jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.ShokaiMode;
+import static jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.ShokkenShuseiMode;
+import static jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.TokushuShuseiMode;
+import jp.co.ndensan.reams.db.dbz.business.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.realservice.JukyushaDaichoManager;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
