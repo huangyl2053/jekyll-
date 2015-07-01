@@ -38,11 +38,11 @@ module DBZ
                 }
                 
                 public ShokaiButtonMode():void {
-                    this.controls.btnZenkaiShosaiGuide().displayNone = false;
+                    this.controls.btnZenkaiShosai().displayNone = false;
                 }
 
                 public ShokaiButtonNoneMode(): void {
-                    this.controls.btnZenkaiShosaiGuide().displayNone = true;
+                    this.controls.btnZenkaiShosai().displayNone = true;
                 }
             }
 

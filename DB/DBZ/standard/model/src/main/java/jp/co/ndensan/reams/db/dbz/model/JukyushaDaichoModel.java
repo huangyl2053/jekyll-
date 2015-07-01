@@ -71,7 +71,10 @@ public class JukyushaDaichoModel implements Serializable {
      * @return 証記載保険者番号
      */
     public ShoKisaiHokenshaNo get証記載保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
+        //TODO n8235 船山洋介 受給者台帳のテーブルが変更されたため、最新化が必要
+//        return entity.getShoKisaiHokenshaNo();
+        return ShoKisaiHokenshaNo.EMPTY;
+
     }
 
     /**
@@ -98,7 +101,10 @@ public class JukyushaDaichoModel implements Serializable {
      * @return 処理日時
      */
     public YMDHMS get処理日時() {
-        return entity.getShoriTimeStamp();
+        //TODO n8235 船山洋介 受給者台帳のテーブルが変更されたため、最新化が必要
+//        return entity.getShoriTimeStamp();
+        return new YMDHMS(RString.EMPTY);
+
     }
 
     /**
@@ -107,7 +113,10 @@ public class JukyushaDaichoModel implements Serializable {
      * @return 支所コード
      */
     public ShishoCode get支所コード() {
-        return entity.getShishoCode();
+        //TODO n8235 船山洋介 受給者台帳のテーブルが変更されたため、最新化が必要
+
+//        return entity.getShishoCode();
+        return ShishoCode.EMPTY;
     }
 
     /**
@@ -125,7 +134,9 @@ public class JukyushaDaichoModel implements Serializable {
      * @return 地区コード
      */
     public ChikuCode get地区コード() {
-        return entity.getChikuCode();
+        //TODO n8235 船山洋介 受給者台帳のテーブルが変更されたため、最新化が必要
+//    return entity.getChikuCode();
+        return ChikuCode.EMPTY;
     }
 
     /**
@@ -143,7 +154,9 @@ public class JukyushaDaichoModel implements Serializable {
      * @return 2号特定疾病コード
      */
     public Code get2号特定疾病コード() {
-        return entity.getNigouTokuteiShippeiCode();
+        //TODO n8235 船山洋介 受給者台帳のテーブルが変更されたため、最新化が必要
+//        return entity.getNigouTokuteiShippeiCode();
+        return Code.EMPTY;
     }
 
     /**
@@ -224,7 +237,9 @@ public class JukyushaDaichoModel implements Serializable {
      * @return 自動割当除外者区分
      */
     public RString get自動割当除外者区分() {
-        return entity.getJidoWariateJogaishaKubun();
+        //TODO n8235 船山洋介 受給者台帳のテーブルが変更されたため、最新化が必要
+//        return entity.getJidoWariateJogaishaKubun();
+        return RString.EMPTY;
     }
 
     /**
@@ -233,8 +248,9 @@ public class JukyushaDaichoModel implements Serializable {
      * @param 証記載保険者番号 証記載保険者番号
      */
     public void set証記載保険者番号(ShoKisaiHokenshaNo 証記載保険者番号) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
+        //TODO n8235 船山洋介 受給者台帳のテーブルが変更されたため、最新化が必要
+//        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+//        entity.setShoKisaiHokenshaNo(証記載保険者番号);
     }
 
     /**
@@ -263,8 +279,9 @@ public class JukyushaDaichoModel implements Serializable {
      * @param 処理日時 処理日時
      */
     public void set処理日時(YMDHMS 処理日時) {
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
-        entity.setShoriTimeStamp(処理日時);
+        //TODO n8235 船山洋介 受給者台帳のテーブルが変更されたため、最新化が必要
+//        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+//        entity.setShoriTimeStamp(処理日時);
     }
 
     /**
@@ -273,8 +290,9 @@ public class JukyushaDaichoModel implements Serializable {
      * @param 支所コード 支所コード
      */
     public void set支所コード(ShishoCode 支所コード) {
-        requireNonNull(支所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("支所コード"));
-        entity.setShishoCode(支所コード);
+        //TODO n8235 船山洋介 受給者台帳のテーブルが変更されたため、最新化が必要
+//        requireNonNull(支所コード, UrSystemErrorMessages.値がnull.getReplacedMessage("支所コード"));
+//        entity.setShishoCode(支所コード);
     }
 
     /**
@@ -293,8 +311,9 @@ public class JukyushaDaichoModel implements Serializable {
      * @param 地区コード 地区コード
      */
     public void set地区コード(ChikuCode 地区コード) {
-        requireNonNull(地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("地区コード"));
-        entity.setChikuCode(地区コード);
+        //TODO n8235 船山洋介 受給者台帳のテーブルが変更されたため、最新化が必要
+//        requireNonNull(地区コード, UrSystemErrorMessages.値がnull.getReplacedMessage("地区コード"));
+//        entity.setChikuCode(地区コード);
     }
 
     /**
@@ -313,8 +332,9 @@ public class JukyushaDaichoModel implements Serializable {
      * @param 特定疾病コード 特定疾病コード
      */
     public void set2号特定疾病コード(Code 特定疾病コード) {
-        requireNonNull(特定疾病コード, UrSystemErrorMessages.値がnull.getReplacedMessage("特定疾病コード"));
-        entity.setNigouTokuteiShippeiCode(特定疾病コード);
+        //TODO n8235 船山洋介 受給者台帳のテーブルが変更されたため、最新化が必要
+//        requireNonNull(特定疾病コード, UrSystemErrorMessages.値がnull.getReplacedMessage("特定疾病コード"));
+//        entity.setNigouTokuteiShippeiCode(特定疾病コード);
     }
 
     /**
@@ -403,8 +423,9 @@ public class JukyushaDaichoModel implements Serializable {
      * @param 自動割当除外者区分 自動割当除外者区分
      */
     public void set自動割当除外者区分(RString 自動割当除外者区分) {
-        requireNonNull(自動割当除外者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("自動割当除外者区分"));
-        entity.setJidoWariateJogaishaKubun(自動割当除外者区分);
+        //TODO n8235 船山洋介 受給者台帳のテーブルが変更されたため、最新化が必要
+//        requireNonNull(自動割当除外者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("自動割当除外者区分"));
+//        entity.setJidoWariateJogaishaKubun(自動割当除外者区分);
     }
 
     /**

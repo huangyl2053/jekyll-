@@ -4,6 +4,13 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onChanged_ddlTodokedeDaikoKubun = function () {
+                return "onChanged_ddlTodokedeDaikoKubun";
+            };
+
+            Events.onClick_btnZenkaiFukusha = function () {
+                return "onClick_btnZenkaiFukusha";
+            };
             return Events;
         })();
         NinteiShinseiTodokedesha.Events = Events;
@@ -41,7 +48,7 @@ var DBZ;
             };
 
             Controls.prototype.btnZenkaiFukusha = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnZenkaiFukusha"));
+                return new UZA.Button(this.convFiledName("btnZenkaiFukusha"));
             };
 
             Controls.prototype.txtJigyoshaCode = function () {
@@ -69,7 +76,11 @@ var DBZ;
             };
 
             Controls.prototype.txtHonninKankeisei = function () {
-                return new UZA.TextBoxTsuzukigaraCode(this.convFiledName("txtHonninKankeisei"));
+                return new UZA.TextBoxCode(this.convFiledName("txtHonninKankeisei"));
+            };
+
+            Controls.prototype.lblHonninKankeiseiMei = function () {
+                return new UZA.Label(this.convFiledName("lblHonninKankeiseiMei"));
             };
 
             Controls.prototype.txtYubinNo = function () {

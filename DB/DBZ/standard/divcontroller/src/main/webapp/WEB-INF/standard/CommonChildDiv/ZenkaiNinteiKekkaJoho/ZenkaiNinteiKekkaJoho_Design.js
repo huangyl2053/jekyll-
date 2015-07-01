@@ -4,6 +4,9 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.btn_ZenkaiShosai = function () {
+                return "btn_ZenkaiShosai";
+            };
             return Events;
         })();
         ZenkaiNinteiKekkaJoho.Events = Events;
@@ -33,19 +36,19 @@ var DBZ;
             };
 
             Controls.prototype.txtNinteiDay = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiDay"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiDay"));
             };
 
             Controls.prototype.txtYukoKikanFrom = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtYukoKikanFrom"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoKikanFrom"));
+            };
+
+            Controls.prototype.btnZenkaiShosai = function () {
+                return new UZA.Button(this.convFiledName("btnZenkaiShosai"));
             };
 
             Controls.prototype.txtYukoKikanTo = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtYukoKikanTo"));
-            };
-
-            Controls.prototype.btnZenkaiShosaiGuide = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnZenkaiShosaiGuide"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoKikanTo"));
             };
             return Controls;
         })();
