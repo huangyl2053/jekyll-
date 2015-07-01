@@ -1,5 +1,5 @@
-var DBD;
-(function (DBD) {
+var DBZ;
+(function (DBZ) {
     (function (ZenkaiNinteiKekkaJoho) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -56,12 +56,12 @@ var DBD;
             Modes.DivSize = DivSize;
         })(ZenkaiNinteiKekkaJoho.Modes || (ZenkaiNinteiKekkaJoho.Modes = {}));
         var Modes = ZenkaiNinteiKekkaJoho.Modes;
-    })(DBD.ZenkaiNinteiKekkaJoho || (DBD.ZenkaiNinteiKekkaJoho = {}));
-    var ZenkaiNinteiKekkaJoho = DBD.ZenkaiNinteiKekkaJoho;
-})(DBD || (DBD = {}));
+    })(DBZ.ZenkaiNinteiKekkaJoho || (DBZ.ZenkaiNinteiKekkaJoho = {}));
+    var ZenkaiNinteiKekkaJoho = DBZ.ZenkaiNinteiKekkaJoho;
+})(DBZ || (DBZ = {}));
 
-var DBD;
-(function (DBD) {
+var DBZ;
+(function (DBZ) {
     (function (ZenkaiNinteiKekkaJoho) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -76,6 +76,6 @@ var DBD;
             return PublicProperties;
         })();
         ZenkaiNinteiKekkaJoho.PublicProperties = PublicProperties;
-    })(DBD.ZenkaiNinteiKekkaJoho || (DBD.ZenkaiNinteiKekkaJoho = {}));
-    var ZenkaiNinteiKekkaJoho = DBD.ZenkaiNinteiKekkaJoho;
-})(DBD || (DBD = {}));
+    })(DBZ.ZenkaiNinteiKekkaJoho || (DBZ.ZenkaiNinteiKekkaJoho = {}));
+    var ZenkaiNinteiKekkaJoho = DBZ.ZenkaiNinteiKekkaJoho;
+})(DBZ || (DBZ = {}));

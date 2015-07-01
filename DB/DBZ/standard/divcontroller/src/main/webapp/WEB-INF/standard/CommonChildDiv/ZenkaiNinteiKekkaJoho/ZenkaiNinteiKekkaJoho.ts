@@ -1,5 +1,5 @@
 /// <reference path='ZenkaiNinteiKekkaJoho_Design.ts' />
-module DBD
+module DBZ
 {
     export module ZenkaiNinteiKekkaJoho
     {
@@ -65,7 +65,7 @@ module DBD
     }
 }
 
-module DBD
+module DBZ
 {
     export module ZenkaiNinteiKekkaJoho
     {
