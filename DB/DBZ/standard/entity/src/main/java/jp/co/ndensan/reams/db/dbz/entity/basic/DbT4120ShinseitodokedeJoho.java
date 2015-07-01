@@ -1,12 +1,11 @@
-package jp.co.ndensan.reams.db.dbd.entity.basic;
+package jp.co.ndensan.reams.db.dbz.entity.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
- * 申請届出情報テーブルの項目定義クラスです。
- * <br/> 申請届出情報を一元管理する
+ * 申請届出情報（子）テーブルの項目定義クラスです。
  */
-public enum DbT5120ShinseitodokedeJoho implements IColumnDefinition {
+public enum DbT4120ShinseitodokedeJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
     /**
      * insertDantaiCd
@@ -85,7 +84,7 @@ public enum DbT5120ShinseitodokedeJoho implements IColumnDefinition {
     private final int maxLength;
     private final int scale;
 
-    private DbT5120ShinseitodokedeJoho(int maxLength, int scale) {
+    private DbT4120ShinseitodokedeJoho(int maxLength, int scale) {
         this.maxLength = maxLength;
         this.scale = scale;
     }

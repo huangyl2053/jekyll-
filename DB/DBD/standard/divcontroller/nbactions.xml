@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
     <action>
-        <actionName>CUSTOM-clean</actionName>
+        <actionName>CUSTOM-build_no_test</actionName>
         <displayName>build_no_test</displayName>
         <goals>
             <goal>clean</goal>
