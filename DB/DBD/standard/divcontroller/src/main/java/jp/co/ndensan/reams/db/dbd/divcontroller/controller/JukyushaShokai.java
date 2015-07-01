@@ -31,12 +31,10 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.ShiteiServiceI
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.ShujiiIkenshoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.dgNinteiRireki_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.dbd3010002.dgShiteiServiceShurui_Row;
-//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.SearchResultOfHihokensha;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.SearchResultOfHihokenshaDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.dgSearchResult_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.YoKaigoJotaiKubun;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
