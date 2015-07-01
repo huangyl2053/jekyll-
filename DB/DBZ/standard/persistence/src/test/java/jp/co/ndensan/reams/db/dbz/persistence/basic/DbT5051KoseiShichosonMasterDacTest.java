@@ -86,7 +86,7 @@ public class DbT5051KoseiShichosonMasterDacTest extends DbdTestDacBase {
 
         @Test
         public void 構成市町村マスタが存在しない場合_selectAllは_空のリストを返す() {
-            assertThat(sut.selectAll(), is(Collections.EMPTY_LIST));
+            assertThat(sut.selectAll().toList(), is(Collections.EMPTY_LIST));
         }
     }
 
