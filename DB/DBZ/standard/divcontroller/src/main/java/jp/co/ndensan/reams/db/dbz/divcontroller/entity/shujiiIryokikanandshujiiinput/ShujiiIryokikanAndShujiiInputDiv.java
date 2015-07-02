@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * @author 自動生成
  */
 public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIryokikanAndShujiiInputDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-44">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-47">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
