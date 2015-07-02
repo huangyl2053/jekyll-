@@ -11,4 +11,15 @@
             <skipTests>true</skipTests>
         </properties>
     </action>
+    <action>
+        <actionName>CUSTOM-share_setting</actionName>
+        <displayName>share_setting</displayName>
+        <goals>
+            <goal>jp.co.ndensan.reams.uz.maven.plugins:shareSetting-maven-plugin:shareSetting</goal>
+        </goals>
+        <properties>
+            <skipTests>true</skipTests>
+        </properties>
+    </action>
+
 </actions>
