@@ -1,4 +1,9 @@
 
+dbz/db/dbz/ChosaItakusakiAndChosainInput/onBlur_txtChosaItakusakiCode
+dbz/db/dbz/ChosaItakusakiAndChosainInput/onBlur_txtChosainCode
+dbz/db/dbz/ChosaItakusakiAndChosainInput/onClick_btnClear
+dbz/db/dbz/ChosaItakusakiAndChosainInput/onClick_btnZenkaiFukusha
+dbz/db/dbz/ChosaItakusakiAndChosainInput/onClickbtnToroku
 dbz/db/dbz/FukaTaishoshaSearch/onClick_btnReSearch
 dbz/db/dbz/FukaTaishoshaSearch/onClick_btnSaikinShorishaHyoji
 dbz/db/dbz/FukaTaishoshaSearch/onClick_btnSearch
@@ -35,6 +40,9 @@ dbz/db/dbz/KaigoTeikeibunSelector/onChange_ddlTeikenbunShubetsu
 dbz/db/dbz/KaigoTeikeibunSelector/onLoad
 dbz/db/dbz/KaigoTeikeibunSelector/onSelectBySelectButton_dgTeikeibun
 dbz/db/dbz/KoshinKakunin/onLoad
+dbz/db/dbz/NinteiShinseiTodokedesha/initialize
+dbz/db/dbz/NinteiShinseiTodokedesha/onChanged_ddlTodokedeDaikoKubun
+dbz/db/dbz/NinteiShinseiTodokedesha/onClick_btnZenkaiFukusha
 dbz/db/dbz/OtherTokureiShisetsuInputGuide/onClick_btnSearchOtherShisetsu
 dbz/db/dbz/OtherTokureiShisetsuInputGuide/onLoad
 dbz/db/dbz/OtherTokureiShisetsuInputGuide/onSelectBySelectButton_dgSearchResultOtherTokureiShisetsu
@@ -84,18 +92,25 @@ dbz/db/dbz/ShoKaishuKirokuKanri/onClick_btnShoKaishuTorikeshi_onYes
 dbz/db/dbz/ShoKaishuKirokuKanri/onClick_btnUpdateShoKaishuJokyo
 dbz/db/dbz/ShoKaishuKirokuKanri/onSelectBySelectButton_dgShoKaishuJokyo
 dbz/db/dbz/ShoKaishuKirokuKanri/onSelect_dgShoKaishuJokyo
+dbz/db/dbz/ShujiiIryokikanAndShujiiInput/onBlurTxtShujiiCode
+dbz/db/dbz/ShujiiIryokikanAndShujiiInput/onBlurTxtShujiiIryokikanCode
+dbz/db/dbz/ShujiiIryokikanAndShujiiInput/onClickBtnClear
+dbz/db/dbz/ShujiiIryokikanAndShujiiInput/onClickBtnZenkaiFukusha
 dbz/db/dbz/TaishoshaSearch/onClick_btnReSearch
 dbz/db/dbz/TaishoshaSearch/onClick_btnSaikinShorishaHyoji
 dbz/db/dbz/TaishoshaSearch/onClick_btnSearch
 dbz/db/dbz/TaishoshaSearch/onSelect_dgGaitoshaList
 dbz/db/dbz/TekiyoJogaiShisetsuInputGuide/onLoad
 dbz/db/dbz/TekiyoJogaiShisetsuInputGuide/onSelectBySelectButton_dgTekiyoJogaiShisetsu
+dbz/db/dbz/TestChosaItakusakiAndchosainInput/onClickbtnSetinput
+dbz/db/dbz/TestChosaItakusakiAndchosainInput/onClickbtnToroku
 dbz/db/dbz/TestHihokenshaShikakuHakkoPanel/onClick_btnGetModel
 dbz/db/dbz/TestHihokenshaShikakuHakkoPanel/onClick_btnLoad
 dbz/db/dbz/TestHihokenshaShikakuHakkoPanel/onLoad
 dbz/db/dbz/TestKaigoNinteiAtenaInfo/onClickbtnSetinput
 dbz/db/dbz/TestKaigoNinteiKihonJohoInput/onClickClear
 dbz/db/dbz/TestKaigoNinteiKihonJohoInput/onClickLoad
+dbz/db/dbz/TestNinteiShinseiTodokedesha/onClickbtnSetinput
 dbz/db/dbz/TestShinseiSonotaJohoInput/onBlurTxtShinseishoKanriNo
 dbz/db/dbz/TestShinseiSonotaJohoInput/onChangeRadModeSet
 dbz/db/dbz/TestShinseiSonotaJohoInput/onClickBtnClear
@@ -115,3 +130,6 @@ dbz/db/dbz/TestShisetsuJoho/onClick_btnSetInputEnable
 dbz/db/dbz/TestShisetsuJoho/onClick_btnSetMeisho
 dbz/db/dbz/TestShisetsuJoho/onClick_btnSetShisetsu
 dbz/db/dbz/TestShisetsuNyutaishoRirekiKanri/onLoad
+dbz/db/dbz/TestShujiiryoKikanAndShujiiInput/setTestData
+dbz/db/dbz/TestZenkaiNinteiKekkaJoho/onClick_btnSetinput
+dbz/db/dbz/ZenkaiNinteiKekkaJoho/onClick_btn_ZenkaiShosai
