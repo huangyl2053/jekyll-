@@ -81,6 +81,26 @@ public class MainPanelDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBox getTxtChosaChikuCode() {
+        return this.getChosaChikuShichosonPanel().getTxtChosaChikuCode();
+    }
+
+    @JsonIgnore
+    public void  setTxtChosaChikuCode(TextBox txtChosaChikuCode) {
+        this.getChosaChikuShichosonPanel().setTxtChosaChikuCode(txtChosaChikuCode);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtChosaChikuName() {
+        return this.getChosaChikuShichosonPanel().getTxtChosaChikuName();
+    }
+
+    @JsonIgnore
+    public void  setTxtChosaChikuName(TextBox txtChosaChikuName) {
+        this.getChosaChikuShichosonPanel().setTxtChosaChikuName(txtChosaChikuName);
+    }
+
+    @JsonIgnore
     public DataGrid<dgChosaChikuChichosonList_Row> getDgChosaChikuChichosonList() {
         return this.getChosaChikuShichosonPanel().getDgChosaChikuChichosonList();
     }

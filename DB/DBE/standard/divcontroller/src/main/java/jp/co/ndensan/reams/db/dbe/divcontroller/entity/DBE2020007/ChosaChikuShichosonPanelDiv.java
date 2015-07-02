@@ -21,6 +21,10 @@ public class ChosaChikuShichosonPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("txtChosaChikuCode")
+    private TextBox txtChosaChikuCode;
+    @JsonProperty("txtChosaChikuName")
+    private TextBox txtChosaChikuName;
     @JsonProperty("dgChosaChikuChichosonList")
     private DataGrid<dgChosaChikuChichosonList_Row> dgChosaChikuChichosonList;
     @JsonProperty("btnDelete")
@@ -34,6 +38,26 @@ public class ChosaChikuShichosonPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    @JsonProperty("txtChosaChikuCode")
+    public TextBox getTxtChosaChikuCode() {
+        return txtChosaChikuCode;
+    }
+
+    @JsonProperty("txtChosaChikuCode")
+    public void setTxtChosaChikuCode(TextBox txtChosaChikuCode) {
+        this.txtChosaChikuCode=txtChosaChikuCode;
+    }
+
+    @JsonProperty("txtChosaChikuName")
+    public TextBox getTxtChosaChikuName() {
+        return txtChosaChikuName;
+    }
+
+    @JsonProperty("txtChosaChikuName")
+    public void setTxtChosaChikuName(TextBox txtChosaChikuName) {
+        this.txtChosaChikuName=txtChosaChikuName;
+    }
+
     @JsonProperty("dgChosaChikuChichosonList")
     public DataGrid<dgChosaChikuChichosonList_Row> getDgChosaChikuChichosonList() {
         return dgChosaChikuChichosonList;
