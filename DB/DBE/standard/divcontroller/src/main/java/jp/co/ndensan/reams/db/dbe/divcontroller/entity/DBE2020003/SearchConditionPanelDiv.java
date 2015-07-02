@@ -50,11 +50,6 @@ public class SearchConditionPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtMaxRow() {
-        return this.getTblSearchCondition().getTxtMaxRow();
-    }
-
-    @JsonIgnore
     public DropDownList getDdlHokensha() {
         return this.getTblSearchCondition().getDdlHokensha();
     }
@@ -107,6 +102,11 @@ public class SearchConditionPanelDiv extends Panel {
     @JsonIgnore
     public DropDownList getDdlNinteiChosain() {
         return this.getTblSearchCondition().getDdlNinteiChosain();
+    }
+
+    @JsonIgnore
+    public TextBox getTxtMaxRow() {
+        return this.getTblSearchCondition().getTxtMaxRow();
     }
 
     @JsonIgnore

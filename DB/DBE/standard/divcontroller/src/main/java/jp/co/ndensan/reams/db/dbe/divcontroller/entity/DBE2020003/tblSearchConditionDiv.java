@@ -42,11 +42,6 @@ public class tblSearchConditionDiv extends TablePanel {
     }
 
     @JsonIgnore
-    public TextBox getTxtMaxRow() {
-        return this.celR1C2.getTxtMaxRow();
-    }
-
-    @JsonIgnore
     public DropDownList getDdlHokensha() {
         return this.celR2C1.getDdlHokensha();
     }
@@ -99,6 +94,11 @@ public class tblSearchConditionDiv extends TablePanel {
     @JsonIgnore
     public DropDownList getDdlNinteiChosain() {
         return this.celR2C2.getDdlNinteiChosain();
+    }
+
+    @JsonIgnore
+    public TextBox getTxtMaxRow() {
+        return this.celR2C2.getTxtMaxRow();
     }
 
     @JsonIgnore
@@ -183,18 +183,6 @@ class celR1C1AttblSearchCondition extends TableCell {
  */
 class celR1C2AttblSearchCondition extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-47">
-    @JsonProperty("txtMaxRow")
-    private TextBox txtMaxRow;
-
-    @JsonProperty("txtMaxRow")
-    public TextBox getTxtMaxRow() {
-        return txtMaxRow;
-    }
-
-    @JsonProperty("txtMaxRow")
-    public void setTxtMaxRow(TextBox txtMaxRow) {
-        this.txtMaxRow=txtMaxRow;
-    }
 
     // </editor-fold>
 }
@@ -287,6 +275,8 @@ class celR2C2AttblSearchCondition extends TableCell {
     private TextBox txtMemo;
     @JsonProperty("ddlNinteiChosain")
     private DropDownList ddlNinteiChosain;
+    @JsonProperty("txtMaxRow")
+    private TextBox txtMaxRow;
     @JsonProperty("btnSearch")
     private Button btnSearch;
 
@@ -348,6 +338,16 @@ class celR2C2AttblSearchCondition extends TableCell {
     @JsonProperty("ddlNinteiChosain")
     public void setDdlNinteiChosain(DropDownList ddlNinteiChosain) {
         this.ddlNinteiChosain=ddlNinteiChosain;
+    }
+
+    @JsonProperty("txtMaxRow")
+    public TextBox getTxtMaxRow() {
+        return txtMaxRow;
+    }
+
+    @JsonProperty("txtMaxRow")
+    public void setTxtMaxRow(TextBox txtMaxRow) {
+        this.txtMaxRow=txtMaxRow;
     }
 
     @JsonProperty("btnSearch")
