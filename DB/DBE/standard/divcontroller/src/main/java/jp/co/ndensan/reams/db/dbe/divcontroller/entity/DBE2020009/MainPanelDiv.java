@@ -26,8 +26,6 @@ public class MainPanelDiv extends Panel {
     private PrintConditionPanelDiv PrintConditionPanel;
     @JsonProperty("btnClear")
     private Button btnClear;
-    @JsonProperty("btnPrint")
-    private ButtonPrint btnPrint;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -53,16 +51,6 @@ public class MainPanelDiv extends Panel {
     @JsonProperty("btnClear")
     public void setBtnClear(Button btnClear) {
         this.btnClear=btnClear;
-    }
-
-    @JsonProperty("btnPrint")
-    public ButtonPrint getBtnPrint() {
-        return btnPrint;
-    }
-
-    @JsonProperty("btnPrint")
-    public void setBtnPrint(ButtonPrint btnPrint) {
-        this.btnPrint=btnPrint;
     }
 
     /*
