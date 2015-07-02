@@ -20,7 +20,6 @@ var DBZ;
             return ModeController;
         })();
         ChosaItakusakiAndChosainInput.ModeController = ModeController;
-
         (function (Modes) {
             var ShoriType = (function () {
                 function ShoriType(controls) {

@@ -49,32 +49,16 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("NinchishoChukakuShojo"));
             }
 
-            public TankiKioku(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("TankiKioku"));
-            }
-
             public radTankiKioku(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radTankiKioku"));
-            }
-
-            public NichijoNinchiNoryoku(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("NichijoNinchiNoryoku"));
             }
 
             public radNichijoNinchiNoryoku(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radNichijoNinchiNoryoku"));
             }
 
-            public IshiDentatsuNoryoku(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("IshiDentatsuNoryoku"));
-            }
-
             public radIshiDentatsuNoryoku(): UZA.RadioButton {
                 return new UZA.RadioButton(this.convFiledName("radIshiDentatsuNoryoku"));
-            }
-
-            public ShokujiKoi(): UZA.Panel {
-                return new UZA.Panel(this.convFiledName("ShokujiKoi"));
             }
 
             public radShokujiKoi(): UZA.RadioButton {

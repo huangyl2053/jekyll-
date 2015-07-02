@@ -23,9 +23,9 @@ module DBZ
             public ShoriType() {
                 return new Modes.ShoriType(this.controls);
             }
-        }
+          }
+            export module Modes {
 
-        export module Modes {
 
             export class ShoriType{
                 private controls: Controls;

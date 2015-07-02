@@ -56,7 +56,7 @@ public class ShinseiSonotaJohoInputHandler {
         }
 
         JukyushaDaichoManager jukyushaDaichoManager = new JukyushaDaichoManager();
-        Optional<JukyushaDaicho> 直近受給者台帳 = jukyushaDaichoManager.get直近受給者台帳(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()));
+        Optional<JukyushaDaicho> 直近受給者台帳 = jukyushaDaichoManager.get受給者台帳By申請書管理番号(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()));
 
         if (直近受給者台帳.isPresent()) {
             setChokkinJukyushaJoho(直近受給者台帳);
