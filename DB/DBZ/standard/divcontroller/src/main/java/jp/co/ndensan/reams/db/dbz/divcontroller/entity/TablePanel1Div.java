@@ -1,19 +1,19 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.Chiku1InputDiv;
+import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IChiku1InputDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TableCell;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TablePanel1 のクラスファイル 
- * 
+ * TablePanel1 のクラスファイル
+ *
  * @author 自動生成
  */
 public class TablePanel1Div extends TablePanel {
@@ -23,65 +23,47 @@ public class TablePanel1Div extends TablePanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("celJigyoshaTitle")
-    private celJigyoshaTitleAtTablePanel1 celJigyoshaTitle;
-    @JsonProperty("celTodokedeDateTitle")
-    private celTodokedeDateTitleAtTablePanel1 celTodokedeDateTitle;
-    @JsonProperty("celJigyosha1")
-    private celJigyosha1AtTablePanel1 celJigyosha1;
-    @JsonProperty("celTodokedeDate1")
-    private celTodokedeDate1AtTablePanel1 celTodokedeDate1;
-    @JsonProperty("celJigyosha2")
-    private celJigyosha2AtTablePanel1 celJigyosha2;
-    @JsonProperty("celTodokedeDate2")
-    private celTodokedeDate2AtTablePanel1 celTodokedeDate2;
-    @JsonProperty("celJigyosha3")
-    private celJigyosha3AtTablePanel1 celJigyosha3;
-    @JsonProperty("celTodokedeDate3")
-    private celTodokedeDate3AtTablePanel1 celTodokedeDate3;
+
+    @JsonProperty("TableCell13")
+    private TableCell13AtTablePanel1 TableCell13;
+    @JsonProperty("TableCell14")
+    private TableCell14AtTablePanel1 TableCell14;
+    @JsonProperty("TableCell15")
+    private TableCell15AtTablePanel1 TableCell15;
+    @JsonProperty("TableCell16")
+    private TableCell16AtTablePanel1 TableCell16;
+    @JsonProperty("TableCell17")
+    private TableCell17AtTablePanel1 TableCell17;
+    @JsonProperty("TableCell18")
+    private TableCell18AtTablePanel1 TableCell18;
 
     /*
      * [ Helperの作成 ]
      * TablePanelコントロールに特化したヘルパーメソッドを作成
      */
     @JsonIgnore
-    public Label getLblJigyosha() {
-        return this.celJigyoshaTitle.getLblJigyosha();
+    public Label getLblChiku1InputSt() {
+        return this.TableCell13.getLblChiku1InputSt();
     }
 
     @JsonIgnore
-    public Label getLblTodokedeDate() {
-        return this.celTodokedeDateTitle.getLblTodokedeDate();
+    public Label getLblChiku1InputEd() {
+        return this.TableCell15.getLblChiku1InputEd();
     }
 
     @JsonIgnore
-    public TextBox getTxtJigyosha1() {
-        return this.celJigyosha1.getTxtJigyosha1();
+    public IChiku1InputDiv getCcdChiku1InputSt() {
+        return this.TableCell16.getCcdChiku1InputSt();
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtTodokedeDate1() {
-        return this.celTodokedeDate1.getTxtTodokedeDate1();
+    public Label getLblKaraChiku1() {
+        return this.TableCell17.getLblKaraChiku1();
     }
 
     @JsonIgnore
-    public TextBox getTxtJigyosha2() {
-        return this.celJigyosha2.getTxtJigyosha2();
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtTodokedeDate2() {
-        return this.celTodokedeDate2.getTxtTodokedeDate2();
-    }
-
-    @JsonIgnore
-    public TextBox getTxtJigyosha3() {
-        return this.celJigyosha3.getTxtJigyosha3();
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtTodokedeDate3() {
-        return this.celTodokedeDate3.getTxtTodokedeDate3();
+    public IChiku1InputDiv getCcdChiku1InputEd() {
+        return this.TableCell18.getCcdChiku1InputEd();
     }
 
     /*
@@ -90,244 +72,173 @@ public class TablePanel1Div extends TablePanel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("celJigyoshaTitle")
-    private celJigyoshaTitleAtTablePanel1 getCelJigyoshaTitle() {
-        return celJigyoshaTitle;
+    @JsonProperty("TableCell13")
+    private TableCell13AtTablePanel1 getTableCell13() {
+        return TableCell13;
     }
 
-    @JsonProperty("celJigyoshaTitle")
-    private void setCelJigyoshaTitle(celJigyoshaTitleAtTablePanel1 celJigyoshaTitle) {
-        this.celJigyoshaTitle=celJigyoshaTitle;
+    @JsonProperty("TableCell13")
+    private void setTableCell13(TableCell13AtTablePanel1 TableCell13) {
+        this.TableCell13 = TableCell13;
     }
 
-    @JsonProperty("celTodokedeDateTitle")
-    private celTodokedeDateTitleAtTablePanel1 getCelTodokedeDateTitle() {
-        return celTodokedeDateTitle;
+    @JsonProperty("TableCell14")
+    private TableCell14AtTablePanel1 getTableCell14() {
+        return TableCell14;
     }
 
-    @JsonProperty("celTodokedeDateTitle")
-    private void setCelTodokedeDateTitle(celTodokedeDateTitleAtTablePanel1 celTodokedeDateTitle) {
-        this.celTodokedeDateTitle=celTodokedeDateTitle;
+    @JsonProperty("TableCell14")
+    private void setTableCell14(TableCell14AtTablePanel1 TableCell14) {
+        this.TableCell14 = TableCell14;
     }
 
-    @JsonProperty("celJigyosha1")
-    private celJigyosha1AtTablePanel1 getCelJigyosha1() {
-        return celJigyosha1;
+    @JsonProperty("TableCell15")
+    private TableCell15AtTablePanel1 getTableCell15() {
+        return TableCell15;
     }
 
-    @JsonProperty("celJigyosha1")
-    private void setCelJigyosha1(celJigyosha1AtTablePanel1 celJigyosha1) {
-        this.celJigyosha1=celJigyosha1;
+    @JsonProperty("TableCell15")
+    private void setTableCell15(TableCell15AtTablePanel1 TableCell15) {
+        this.TableCell15 = TableCell15;
     }
 
-    @JsonProperty("celTodokedeDate1")
-    private celTodokedeDate1AtTablePanel1 getCelTodokedeDate1() {
-        return celTodokedeDate1;
+    @JsonProperty("TableCell16")
+    private TableCell16AtTablePanel1 getTableCell16() {
+        return TableCell16;
     }
 
-    @JsonProperty("celTodokedeDate1")
-    private void setCelTodokedeDate1(celTodokedeDate1AtTablePanel1 celTodokedeDate1) {
-        this.celTodokedeDate1=celTodokedeDate1;
+    @JsonProperty("TableCell16")
+    private void setTableCell16(TableCell16AtTablePanel1 TableCell16) {
+        this.TableCell16 = TableCell16;
     }
 
-    @JsonProperty("celJigyosha2")
-    private celJigyosha2AtTablePanel1 getCelJigyosha2() {
-        return celJigyosha2;
+    @JsonProperty("TableCell17")
+    private TableCell17AtTablePanel1 getTableCell17() {
+        return TableCell17;
     }
 
-    @JsonProperty("celJigyosha2")
-    private void setCelJigyosha2(celJigyosha2AtTablePanel1 celJigyosha2) {
-        this.celJigyosha2=celJigyosha2;
+    @JsonProperty("TableCell17")
+    private void setTableCell17(TableCell17AtTablePanel1 TableCell17) {
+        this.TableCell17 = TableCell17;
     }
 
-    @JsonProperty("celTodokedeDate2")
-    private celTodokedeDate2AtTablePanel1 getCelTodokedeDate2() {
-        return celTodokedeDate2;
+    @JsonProperty("TableCell18")
+    private TableCell18AtTablePanel1 getTableCell18() {
+        return TableCell18;
     }
 
-    @JsonProperty("celTodokedeDate2")
-    private void setCelTodokedeDate2(celTodokedeDate2AtTablePanel1 celTodokedeDate2) {
-        this.celTodokedeDate2=celTodokedeDate2;
-    }
-
-    @JsonProperty("celJigyosha3")
-    private celJigyosha3AtTablePanel1 getCelJigyosha3() {
-        return celJigyosha3;
-    }
-
-    @JsonProperty("celJigyosha3")
-    private void setCelJigyosha3(celJigyosha3AtTablePanel1 celJigyosha3) {
-        this.celJigyosha3=celJigyosha3;
-    }
-
-    @JsonProperty("celTodokedeDate3")
-    private celTodokedeDate3AtTablePanel1 getCelTodokedeDate3() {
-        return celTodokedeDate3;
-    }
-
-    @JsonProperty("celTodokedeDate3")
-    private void setCelTodokedeDate3(celTodokedeDate3AtTablePanel1 celTodokedeDate3) {
-        this.celTodokedeDate3=celTodokedeDate3;
+    @JsonProperty("TableCell18")
+    private void setTableCell18(TableCell18AtTablePanel1 TableCell18) {
+        this.TableCell18 = TableCell18;
     }
 
 }
+
 /**
- * celJigyoshaTitle のクラスファイル 
- * 
+ * TableCell13 のクラスファイル
+ *
  * @author 自動生成
  */
-class celJigyoshaTitleAtTablePanel1 extends TableCell {
-    @JsonProperty("lblJigyosha")
-    private Label lblJigyosha;
+class TableCell13AtTablePanel1 extends TableCell {
 
-    @JsonProperty("lblJigyosha")
-    public Label getLblJigyosha() {
-        return lblJigyosha;
+    @JsonProperty("lblChiku1InputSt")
+    private Label lblChiku1InputSt;
+
+    @JsonProperty("lblChiku1InputSt")
+    public Label getLblChiku1InputSt() {
+        return lblChiku1InputSt;
     }
 
-    @JsonProperty("lblJigyosha")
-    public void setLblJigyosha(Label lblJigyosha) {
-        this.lblJigyosha=lblJigyosha;
+    @JsonProperty("lblChiku1InputSt")
+    public void setLblChiku1InputSt(Label lblChiku1InputSt) {
+        this.lblChiku1InputSt = lblChiku1InputSt;
     }
 
 }
+
 /**
- * celTodokedeDateTitle のクラスファイル 
- * 
+ * TableCell14 のクラスファイル
+ *
  * @author 自動生成
  */
-class celTodokedeDateTitleAtTablePanel1 extends TableCell {
-    @JsonProperty("lblTodokedeDate")
-    private Label lblTodokedeDate;
+class TableCell14AtTablePanel1 extends TableCell {
 
-    @JsonProperty("lblTodokedeDate")
-    public Label getLblTodokedeDate() {
-        return lblTodokedeDate;
+}
+
+/**
+ * TableCell15 のクラスファイル
+ *
+ * @author 自動生成
+ */
+class TableCell15AtTablePanel1 extends TableCell {
+
+    @JsonProperty("lblChiku1InputEd")
+    private Label lblChiku1InputEd;
+
+    @JsonProperty("lblChiku1InputEd")
+    public Label getLblChiku1InputEd() {
+        return lblChiku1InputEd;
     }
 
-    @JsonProperty("lblTodokedeDate")
-    public void setLblTodokedeDate(Label lblTodokedeDate) {
-        this.lblTodokedeDate=lblTodokedeDate;
+    @JsonProperty("lblChiku1InputEd")
+    public void setLblChiku1InputEd(Label lblChiku1InputEd) {
+        this.lblChiku1InputEd = lblChiku1InputEd;
     }
 
 }
+
 /**
- * celJigyosha1 のクラスファイル 
- * 
+ * TableCell16 のクラスファイル
+ *
  * @author 自動生成
  */
-class celJigyosha1AtTablePanel1 extends TableCell {
-    @JsonProperty("txtJigyosha1")
-    private TextBox txtJigyosha1;
+class TableCell16AtTablePanel1 extends TableCell {
 
-    @JsonProperty("txtJigyosha1")
-    public TextBox getTxtJigyosha1() {
-        return txtJigyosha1;
-    }
+    @JsonProperty("ccdChiku1InputSt")
+    private Chiku1InputDiv ccdChiku1InputSt;
 
-    @JsonProperty("txtJigyosha1")
-    public void setTxtJigyosha1(TextBox txtJigyosha1) {
-        this.txtJigyosha1=txtJigyosha1;
+    @JsonProperty("ccdChiku1InputSt")
+    public IChiku1InputDiv getCcdChiku1InputSt() {
+        return ccdChiku1InputSt;
     }
 
 }
+
 /**
- * celTodokedeDate1 のクラスファイル 
- * 
+ * TableCell17 のクラスファイル
+ *
  * @author 自動生成
  */
-class celTodokedeDate1AtTablePanel1 extends TableCell {
-    @JsonProperty("txtTodokedeDate1")
-    private TextBoxFlexibleDate txtTodokedeDate1;
+class TableCell17AtTablePanel1 extends TableCell {
 
-    @JsonProperty("txtTodokedeDate1")
-    public TextBoxFlexibleDate getTxtTodokedeDate1() {
-        return txtTodokedeDate1;
+    @JsonProperty("lblKaraChiku1")
+    private Label lblKaraChiku1;
+
+    @JsonProperty("lblKaraChiku1")
+    public Label getLblKaraChiku1() {
+        return lblKaraChiku1;
     }
 
-    @JsonProperty("txtTodokedeDate1")
-    public void setTxtTodokedeDate1(TextBoxFlexibleDate txtTodokedeDate1) {
-        this.txtTodokedeDate1=txtTodokedeDate1;
+    @JsonProperty("lblKaraChiku1")
+    public void setLblKaraChiku1(Label lblKaraChiku1) {
+        this.lblKaraChiku1 = lblKaraChiku1;
     }
 
 }
+
 /**
- * celJigyosha2 のクラスファイル 
- * 
+ * TableCell18 のクラスファイル
+ *
  * @author 自動生成
  */
-class celJigyosha2AtTablePanel1 extends TableCell {
-    @JsonProperty("txtJigyosha2")
-    private TextBox txtJigyosha2;
+class TableCell18AtTablePanel1 extends TableCell {
 
-    @JsonProperty("txtJigyosha2")
-    public TextBox getTxtJigyosha2() {
-        return txtJigyosha2;
-    }
+    @JsonProperty("ccdChiku1InputEd")
+    private Chiku1InputDiv ccdChiku1InputEd;
 
-    @JsonProperty("txtJigyosha2")
-    public void setTxtJigyosha2(TextBox txtJigyosha2) {
-        this.txtJigyosha2=txtJigyosha2;
-    }
-
-}
-/**
- * celTodokedeDate2 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celTodokedeDate2AtTablePanel1 extends TableCell {
-    @JsonProperty("txtTodokedeDate2")
-    private TextBoxFlexibleDate txtTodokedeDate2;
-
-    @JsonProperty("txtTodokedeDate2")
-    public TextBoxFlexibleDate getTxtTodokedeDate2() {
-        return txtTodokedeDate2;
-    }
-
-    @JsonProperty("txtTodokedeDate2")
-    public void setTxtTodokedeDate2(TextBoxFlexibleDate txtTodokedeDate2) {
-        this.txtTodokedeDate2=txtTodokedeDate2;
-    }
-
-}
-/**
- * celJigyosha3 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celJigyosha3AtTablePanel1 extends TableCell {
-    @JsonProperty("txtJigyosha3")
-    private TextBox txtJigyosha3;
-
-    @JsonProperty("txtJigyosha3")
-    public TextBox getTxtJigyosha3() {
-        return txtJigyosha3;
-    }
-
-    @JsonProperty("txtJigyosha3")
-    public void setTxtJigyosha3(TextBox txtJigyosha3) {
-        this.txtJigyosha3=txtJigyosha3;
-    }
-
-}
-/**
- * celTodokedeDate3 のクラスファイル 
- * 
- * @author 自動生成
- */
-class celTodokedeDate3AtTablePanel1 extends TableCell {
-    @JsonProperty("txtTodokedeDate3")
-    private TextBoxFlexibleDate txtTodokedeDate3;
-
-    @JsonProperty("txtTodokedeDate3")
-    public TextBoxFlexibleDate getTxtTodokedeDate3() {
-        return txtTodokedeDate3;
-    }
-
-    @JsonProperty("txtTodokedeDate3")
-    public void setTxtTodokedeDate3(TextBoxFlexibleDate txtTodokedeDate3) {
-        this.txtTodokedeDate3=txtTodokedeDate3;
+    @JsonProperty("ccdChiku1InputEd")
+    public IChiku1InputDiv getCcdChiku1InputEd() {
+        return ccdChiku1InputEd;
     }
 
 }
