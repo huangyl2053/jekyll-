@@ -1,0 +1,7 @@
+﻿choteiNendo,UDD012YSeireki,FlexibleYear,,,,,調定年度,A
+fukaNendo,UDD012YSeireki,FlexibleYear,,,,,賦課年度,A
+tsuchishoNo,DbUDD008TsuchishoNo,DbUDD008TsuchishoNo,,,,,通知書番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+choshuHouhou,varchar,RString,,,,,徴収方法,A
+ki,int4,int,,,,,期,A
+choteiId,numeric,Decimal,,,,,調定ID,A

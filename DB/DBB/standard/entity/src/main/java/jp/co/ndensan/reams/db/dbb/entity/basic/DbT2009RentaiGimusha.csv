@@ -1,0 +1,5 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+shikibetuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
+startYMD,UDD015YMD,FlexibleDate,,,,,開始年月日,A
+endYMD,UDD015YMD,FlexibleDate,,,,,終了年月日,A

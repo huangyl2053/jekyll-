@@ -1,0 +1,15 @@
+﻿toriatsukaiYM,UDD014YM,FlexibleYearMonth,,,,,取扱年月,A
+hokenshaKubun,varchar,RString,,,,,保険者区分,A
+rirekiNo,int2,int,,,,,履歴番号,A
+kaigoKyufuhiKensu,int4,int,,,,,介護給付費件数,A
+kaigoKyufuhiTanisu,numeric,Decimal,,,,,介護給付費単位数,A
+kaigoKyufuhiFutangaku,numeric,Decimal,,,,,介護給付費保険者負担額,A
+kogakuServicehiKensu,int4,int,,,,,高額介護サービス費件数,A
+kogakuServicehiTanisu,numeric,Decimal,,,,,高額介護サービス費単位数,A
+kogakuServicehiFutangaku,numeric,Decimal,,,,,高額介護サービス費保険者負担額,A
+tokuteiNyushoshaServicehiKensu,int4,int,,,,,特定入所者介護サービス費等件数,A
+tokuteiNyushoshaServicehiTanisu,numeric,Decimal,,,,,特定入所者介護サービス費等費用額,A
+tokuteiNyushoshaServicehiFutangaku,numeric,Decimal,,,,,特定入所者介護サービス費等保険者負担額,A
+kohiFutanshaNo,varchar,RString,,,,,公費負担者番号,A
+sakuseiYMD,UDD015YMD,FlexibleDate,,,,,作成年月日,A
+torikomiYM,UDD014YM,FlexibleYearMonth,,,,,取込年月,A

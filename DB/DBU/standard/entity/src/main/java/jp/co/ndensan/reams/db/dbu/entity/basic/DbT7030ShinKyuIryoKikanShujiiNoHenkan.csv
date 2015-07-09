@@ -1,0 +1,8 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+shinIryoKikanNo,varchar,RString,,,,,新医療機関番号,A
+shinShujiiNo,varchar,RString,,,,,新主治医番号,A
+kyuIryoKikanNo,varchar,RString,,,,,旧医療機関番号,A
+kyuShujiiNo,varchar,RString,,,,,旧主治医番号,A
+shichosonCode2,UDD023LasdecCode,LasdecCode,,,,,市町村コード２,A
+kyuIryoKikanNo2,varchar,RString,,,,,旧医療機関番号２,A
+kyuShujiiNo2,varchar,RString,,,,,旧主治医番号２,A

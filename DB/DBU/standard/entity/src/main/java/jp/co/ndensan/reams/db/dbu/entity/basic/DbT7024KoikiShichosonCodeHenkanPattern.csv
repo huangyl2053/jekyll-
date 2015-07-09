@@ -1,0 +1,14 @@
+﻿koikiShichosonNo,varchar,RString,,,,,広域内市町村番号,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+codeKubun,varchar,RString,,,,,コード区分,A
+codeHenkanTableShiyoUmu,varchar,RString,,,,,コード変換テーブル使用区分,A
+jidoSaibanKubun,varchar,RString,,,,,自動採番区分,A
+shichosonCodeKetasu,int2,int,,,,,市町村用コード桁数,A
+shichosonCodeKaishiIchi,int2,int,,,,,市町村用コード開始位置,A
+shichosonCodeShiyoKetasu,int2,int,,,,,市町村用コード使用桁数,A
+shichosonNinshoNoUmu,varchar,RString,,,,,市町村用チェックディジット有無区分,A
+koikiCodeKetasu,int2,int,,,,,広域用コード桁数,A
+koikiCodeKaishiIchi,int2,int,,,,,広域用コード開始位置,A
+koikiCodeShiyoKetasu,int2,int,,,,,広域用コード使用桁数,A
+koikiNinshoNoUmu,varchar,RString,,,,,広域用チェックディジット有無区分,A
+shichosonNoFukaKubun,varchar,RString,,,,,広域内市町村番号付加区分,A

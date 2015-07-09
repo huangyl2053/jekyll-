@@ -1,0 +1,9 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,申請書管理番号,A
+shiryoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,資料作成日,A
+hikiwatashiKubun,bpchar,RString,,,,,引渡し区分,A
+rirekiNo,int2,int,,,,,履歴番号,A
+saiSoufuKubun,bpchar,RString,,,,,再送付区分,A
+saiChousaSofuKubun,bpchar,RString,,,,,再調査送付区分,A
+saiIkenshoSofuKubun,bpchar,RString,,,,,再意見書送付区分,A
+saiImageSofuKubun,bpchar,RString,,,,,再イメージ送付区分,A
+saiSoshinYMD,UDD015YMD,FlexibleDate,,,,,再送信年月日,A

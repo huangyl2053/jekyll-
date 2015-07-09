@@ -1,0 +1,17 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+kofuShoShurui,varchar,RString,,,,,交付証種類,A
+rirekiNo,int2,int,,,,,履歴番号,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
+kofuYMD,UDD015YMD,FlexibleDate,,,,,交付年月日,A
+yukoKigenYMD,UDD015YMD,FlexibleDate,,,,,有効期限,A
+kofuJiyu,varchar,RString,,,,,交付事由,A
+kofuRiyu,text,RString,,,,,交付理由,A
+kaishuYMD,UDD015YMD,FlexibleDate,,,,,回収年月日,A
+kaishuJiyu,varchar,RString,,,,,回収事由,A
+kaishuRiyu,text,RString,,,,,回収理由,A
+tanpyoHakkoUmuFlag,bool,boolean,,,,,単票発行有無フラグ,A
+hakkoShoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,発行処理日時,A
+shinYoshikiSumiKubunCode,varchar,RString,,,,,新様式印書済区分コード,A
+shoYoshikiKubunCode,varchar,RString,,,,,証様式区分コード,A
+logicalDeletedFlag,bool,boolean,,,,,論理削除フラグ,A

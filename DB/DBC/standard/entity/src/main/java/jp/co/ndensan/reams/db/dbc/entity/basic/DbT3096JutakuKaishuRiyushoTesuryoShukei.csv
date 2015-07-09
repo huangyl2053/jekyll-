@@ -1,0 +1,12 @@
+﻿shoKisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,証記載保険者番号,A
+shukeiKaishiYM,UDD014YM,FlexibleYearMonth,,,,,集計開始年月,A
+rirekiNo,int2,int,,,,,履歴番号,A
+shukeiShuryoYM,UDD014YM,FlexibleYearMonth,,,,,集計終了年月,A
+riyushoSakuseiJigyoshaNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,介護住宅改修理由書作成事業者番号,A
+riyushoSakuseiKensu,numeric,Decimal,,,,,介護住宅改修理由書作成件数,A
+riyushoSakuseiTanka,numeric,Decimal,,,,,介護住宅改修理由書作成単価,A
+riyushoSakuseiSeikyuKingaku,numeric,Decimal,,,,,介護住宅改修理由書作成請求金額,A
+riyushoSakuseiShinseiYMD,UDD015YMD,FlexibleDate,,,,,介護住宅改修理由書作成申請年月日,A
+riyushoSakuseiUketsukeYMD,UDD015YMD,FlexibleDate,,,,,介護住宅改修理由書作成受付年月日,A
+shiharaiHohoKubun,varchar,RString,,,,,介護支払方法区分,A
+shikibetsuNo,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A

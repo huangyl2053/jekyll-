@@ -17,7 +17,7 @@ import java.util.Objects;
  *
  */
 public class DbT5032ShujiiIkenshoHoshuTankaEntity extends DbTableEntityBase<DbT5032ShujiiIkenshoHoshuTankaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5032ShujiiIkenshoHoshuTanka");
 
@@ -39,7 +39,8 @@ public class DbT5032ShujiiIkenshoHoshuTankaEntity extends DbTableEntityBase<DbT5
     private Decimal tanka;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -47,7 +48,8 @@ public class DbT5032ShujiiIkenshoHoshuTankaEntity extends DbTableEntityBase<DbT5
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -55,7 +57,8 @@ public class DbT5032ShujiiIkenshoHoshuTankaEntity extends DbTableEntityBase<DbT5
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -63,7 +66,8 @@ public class DbT5032ShujiiIkenshoHoshuTankaEntity extends DbTableEntityBase<DbT5
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
@@ -72,7 +76,8 @@ public class DbT5032ShujiiIkenshoHoshuTankaEntity extends DbTableEntityBase<DbT5
 
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -80,80 +85,90 @@ public class DbT5032ShujiiIkenshoHoshuTankaEntity extends DbTableEntityBase<DbT5
     }
 
     /**
-     * getZaitakuShisetsuKubun
-     * @return zaitakuShisetsuKubun
+     * 在宅施設区分のgetメソッドです。
+     * 
+     * @return 在宅施設区分
      */
     public Code getZaitakuShisetsuKubun() {
         return zaitakuShisetsuKubun;
     }
 
     /**
-     * setZaitakuShisetsuKubun
-     * @param zaitakuShisetsuKubun zaitakuShisetsuKubun
+     * 在宅施設区分のsetメソッドです。
+     * 
+     * @param zaitakuShisetsuKubun 在宅施設区分
      */
     public void setZaitakuShisetsuKubun(Code zaitakuShisetsuKubun) {
         this.zaitakuShisetsuKubun = zaitakuShisetsuKubun;
     }
 
     /**
-     * getIkenshoSakuseiKaisuKubun
-     * @return ikenshoSakuseiKaisuKubun
+     * 意見書作成回数区分のgetメソッドです。
+     * 
+     * @return 意見書作成回数区分
      */
     public Code getIkenshoSakuseiKaisuKubun() {
         return ikenshoSakuseiKaisuKubun;
     }
 
     /**
-     * setIkenshoSakuseiKaisuKubun
-     * @param ikenshoSakuseiKaisuKubun ikenshoSakuseiKaisuKubun
+     * 意見書作成回数区分のsetメソッドです。
+     * 
+     * @param ikenshoSakuseiKaisuKubun 意見書作成回数区分
      */
     public void setIkenshoSakuseiKaisuKubun(Code ikenshoSakuseiKaisuKubun) {
         this.ikenshoSakuseiKaisuKubun = ikenshoSakuseiKaisuKubun;
     }
 
     /**
-     * getKaishiYM
-     * @return kaishiYM
+     * 開始年月のgetメソッドです。
+     * 
+     * @return 開始年月
      */
     public FlexibleYearMonth getKaishiYM() {
         return kaishiYM;
     }
 
     /**
-     * setKaishiYM
-     * @param kaishiYM kaishiYM
+     * 開始年月のsetメソッドです。
+     * 
+     * @param kaishiYM 開始年月
      */
     public void setKaishiYM(FlexibleYearMonth kaishiYM) {
         this.kaishiYM = kaishiYM;
     }
 
     /**
-     * getShuryoYM
-     * @return shuryoYM
+     * 終了年月のgetメソッドです。
+     * 
+     * @return 終了年月
      */
     public FlexibleYearMonth getShuryoYM() {
         return shuryoYM;
     }
 
     /**
-     * setShuryoYM
-     * @param shuryoYM shuryoYM
+     * 終了年月のsetメソッドです。
+     * 
+     * @param shuryoYM 終了年月
      */
     public void setShuryoYM(FlexibleYearMonth shuryoYM) {
         this.shuryoYM = shuryoYM;
     }
 
     /**
-     * getTanka
-     * @return tanka
+     * 単価のgetメソッドです。
+     * 
+     * @return 単価
      */
     public Decimal getTanka() {
         return tanka;
     }
 
     /**
-     * setTanka
-     * @param tanka tanka
+     * 単価のsetメソッドです。
+     * 
+     * @param tanka 単価
      */
     public void setTanka(Decimal tanka) {
         this.tanka = tanka;
@@ -205,5 +220,6 @@ public class DbT5032ShujiiIkenshoHoshuTankaEntity extends DbTableEntityBase<DbT5
     }
 
 // </editor-fold>
+
 
 }

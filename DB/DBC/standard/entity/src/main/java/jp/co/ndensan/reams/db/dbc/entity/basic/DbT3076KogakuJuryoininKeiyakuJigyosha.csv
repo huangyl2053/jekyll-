@@ -1,0 +1,14 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+uketsukeYMD,UDD015YMD,FlexibleDate,,,,,受付年月日,A
+rirekiNo,int2,int,,,,,履歴番号,A
+shinseiYMD,UDD015YMD,FlexibleDate,,,,,申請年月日,A
+jigyoshaNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,事業者番号,A
+ketteiYMD,UDD015YMD,FlexibleDate,,,,,決定年月日,A
+shoninKekkaKubun,varchar,RString,,,,,承認結果区分,A
+juryoininKaishiYMD,UDD015YMD,FlexibleDate,,,,,受領委任払適用開始年月日,A
+juryoininShuryoYMD,UDD015YMD,FlexibleDate,,,,,受領委任払適用終了年月日,A
+keiyakuNo,varchar,RString,,,,,契約番号,A
+fuShoninRiyu,varchar,RString,,,,,不承認理由,A
+riyoshaFutanJogenGaku,numeric,Decimal,,,,,利用者負担上限額,A
+shoninKekkaTsuchiSakuseiYMD,UDD015YMD,FlexibleDate,,,,,承認結果通知書作成日,A
+shoninKekkaTsuchiSaiHakkoKubun,varchar,RString,,,,,承認結果通知書再発行区分,A

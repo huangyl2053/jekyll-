@@ -1,0 +1,13 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+shikibetsuKubun,varchar,RString,,,,,識別区分,A
+yukoKaishiYM,UDD014YM,FlexibleYearMonth,,,,,有効開始年月,A
+rirekiNo,int2,int,,,,,履歴番号,A
+yukoShuryoYM,UDD014YM,FlexibleYearMonth,,,,,有効終了年月,A
+yoKaigoJotaiKubun,varchar,RString,,,,,要介護状態区分,A
+kakudaiBaisu,varchar,RString,,,,,拡大倍数,A
+kiriwakeTaniSu,numeric,Decimal,,,,,切り分け単位数,A
+torokuYMD,UDD015YMD,FlexibleDate,,,,,登録年月日,A
+henkoYMD,UDD015YMD,FlexibleDate,,,,,変更年月日,A
+gendoGakuKanriKikanSu,varchar,RString,,,,,限度額管理期間数,A
+shinTaikeiKanriKubun,varchar,RString,,,,,新体系管理区分,A
+shinTaikeiKakudaiTekiyoUmu,varchar,RString,,,,,新体系拡大適用有無,A

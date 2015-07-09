@@ -1,0 +1,9 @@
+﻿shinsakaiKaisaiNo,int2,int,,,,,介護認定審査会開催番号,A
+shinsakaiIinCode,varchar,RString,,,,,介護認定審査会委員コード,A
+shinsakaiKaisaiYMD,UDD015YMD,FlexibleDate,,,,,介護認定審査会開催年月日,A
+kaigoninteiShinsakaiGichoKubunCode,UDD035Code,Code,,,,,介護認定審査会議長区分コード,A
+shussekiFlag,bool,boolean,,,,,委員出席,A
+existChikokuFlag,bool,boolean,,,,,委員遅刻有無,A
+shussekiTime,varchar,RString,,,,,委員出席時間,A
+existSotaiFlag,bool,boolean,,,,,委員早退有無,A
+taisekiTime,varchar,RString,,,,,委員退席時間,A

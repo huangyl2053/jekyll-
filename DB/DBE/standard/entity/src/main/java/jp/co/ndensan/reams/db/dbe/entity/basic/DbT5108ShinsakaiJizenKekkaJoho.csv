@@ -1,0 +1,5 @@
+﻿shinsakaiKaisaiNo,int2,int,,,,,介護認定審査会開催番号,A
+shinsakaiIinCode,varchar,RString,,,,,介護認定審査会委員コード,A
+shinsakaiOrder,int2,int,,,,,介護認定審査会審査順,A
+ichijiHanteiHenkoRiyu,text,RString,,,,,一次判定結果変更理由,A
+nijiHanteiKekkaCode,UDD035Code,Code,,,,,二次判定結果コード,A

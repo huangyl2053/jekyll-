@@ -1,0 +1,15 @@
+﻿toriatsukaiYM,UDD014YM,FlexibleYearMonth,,,,,取扱年月,A
+hokenshaKubun,varchar,RString,,,,,保険者区分,A
+rirekiNo,int2,int,,,,,履歴番号,A
+jigyoshoNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,事業所番号,A
+jigyoshoName,varchar,RString,,,,,事業所名,A
+hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+kohiJukyushaNo,varchar,RString,,,,,公費受給者番号,A
+shokisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,証記載保険者番号,A
+serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
+serviceShuruiCode,DbUDD005ServiceShuruiCode,DbUDD005ServiceShuruiCode,,,,,サービス種類コード,A
+serviceShuruiName,varchar,RString,,,,,サービス種類名,A
+kagomoushitateJiyuCode,UDD035Code,Code,,,,,過誤申立事由コード,A
+kagomoushitateJiyu,varchar,RString,,,,,過誤申立事由,A
+tanisu,numeric,Decimal,,,,,単位数（特定入所者介護費等）,A
+hokenshaFutangaku,numeric,Decimal,,,,,保険者負担額,A

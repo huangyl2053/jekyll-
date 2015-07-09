@@ -1,0 +1,10 @@
+﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
+hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+choteiNendo,UDD015YMD,FlexibleDate,,,,,調定年度,A
+fukaNendo,UDD015YMD,FlexibleDate,,,,,賦課年度,A
+tokucho_FuchoKubun,varchar,RString,,,,,特徴・普徴区分,A
+tsuchishoNo,DbUDD008TsuchishoNo,DbUDD008TsuchishoNo,,,,,通知書番号,A
+shuno_Ki_Tsuki,varchar,RString,,,,,収納期・月,A
+rirekiNo,int2,int,,,,,履歴番号,A
+jikoKisanYMD,UDD015YMD,FlexibleDate,,,,,時効起算年月日,A
+jikoKisanYMDKubun,varchar,RString,,,,,時効起算日区分,A

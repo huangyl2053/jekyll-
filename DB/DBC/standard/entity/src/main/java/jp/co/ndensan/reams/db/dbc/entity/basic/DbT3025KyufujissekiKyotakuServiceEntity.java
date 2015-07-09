@@ -1,28 +1,23 @@
 package jp.co.ndensan.reams.db.dbc.entity.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
 import java.util.Objects;
 
 /**
  * DbT3025KyufujissekiKyotakuServiceの項目定義クラスです
  *
  */
-public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+public class DbT3025KyufujissekiKyotakuServiceEntity extends DbTableEntityBase<DbT3025KyufujissekiKyotakuServiceEntity> implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3025KyufujissekiKyotakuService");
 
@@ -43,7 +38,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
     @PrimaryKey
     private ShoKisaiHokenshaNo shokisaiHokenshaNo;
     @PrimaryKey
-    private HihokenshaNo hiHokenshaNo;
+    private KaigoHihokenshaNo hiHokenshaNo;
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
@@ -75,7 +70,8 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
     private FlexibleYearMonth torikomiYM;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -83,7 +79,8 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -91,7 +88,8 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -99,7 +97,8 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
@@ -108,7 +107,8 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
 
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -116,480 +116,568 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
     }
 
     /**
-     * getKokanJohoShikibetsuNo
-     * @return kokanJohoShikibetsuNo
+     * 交換情報識別番号のgetメソッドです。
+     * 
+     * @return 交換情報識別番号
      */
     public KokanShikibetsuNo getKokanJohoShikibetsuNo() {
         return kokanJohoShikibetsuNo;
     }
 
     /**
-     * setKokanJohoShikibetsuNo
-     * @param kokanJohoShikibetsuNo kokanJohoShikibetsuNo
+     * 交換情報識別番号のsetメソッドです。
+     * 
+     * @param kokanJohoShikibetsuNo 交換情報識別番号
      */
     public void setKokanJohoShikibetsuNo(KokanShikibetsuNo kokanJohoShikibetsuNo) {
         this.kokanJohoShikibetsuNo = kokanJohoShikibetsuNo;
     }
 
     /**
-     * getInputShikibetsuNo
-     * @return inputShikibetsuNo
+     * 入力識別番号のgetメソッドです。
+     * 
+     * @return 入力識別番号
      */
     public RString getInputShikibetsuNo() {
         return inputShikibetsuNo;
     }
 
     /**
-     * setInputShikibetsuNo
-     * @param inputShikibetsuNo inputShikibetsuNo
+     * 入力識別番号のsetメソッドです。
+     * 
+     * @param inputShikibetsuNo 入力識別番号
      */
     public void setInputShikibetsuNo(RString inputShikibetsuNo) {
         this.inputShikibetsuNo = inputShikibetsuNo;
     }
 
     /**
-     * getRecodeShubetsuCode
-     * @return recodeShubetsuCode
+     * レコード種別コードのgetメソッドです。
+     * 
+     * @return レコード種別コード
      */
     public RString getRecodeShubetsuCode() {
         return recodeShubetsuCode;
     }
 
     /**
-     * setRecodeShubetsuCode
-     * @param recodeShubetsuCode recodeShubetsuCode
+     * レコード種別コードのsetメソッドです。
+     * 
+     * @param recodeShubetsuCode レコード種別コード
      */
     public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
         this.recodeShubetsuCode = recodeShubetsuCode;
     }
 
     /**
-     * getShokisaiHokenshaNo
-     * @return shokisaiHokenshaNo
+     * 証記載保険者番号のgetメソッドです。
+     * 
+     * @return 証記載保険者番号
      */
     public ShoKisaiHokenshaNo getShokisaiHokenshaNo() {
         return shokisaiHokenshaNo;
     }
 
     /**
-     * setShokisaiHokenshaNo
-     * @param shokisaiHokenshaNo shokisaiHokenshaNo
+     * 証記載保険者番号のsetメソッドです。
+     * 
+     * @param shokisaiHokenshaNo 証記載保険者番号
      */
     public void setShokisaiHokenshaNo(ShoKisaiHokenshaNo shokisaiHokenshaNo) {
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
     /**
-     * getHiHokenshaNo
-     * @return hiHokenshaNo
+     * 被保険者番号のgetメソッドです。
+     * 
+     * @return 被保険者番号
      */
-    public HihokenshaNo getHiHokenshaNo() {
+    public KaigoHihokenshaNo getHiHokenshaNo() {
         return hiHokenshaNo;
     }
 
     /**
-     * setHiHokenshaNo
-     * @param hiHokenshaNo hiHokenshaNo
+     * 被保険者番号のsetメソッドです。
+     * 
+     * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(KaigoHihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
     /**
-     * getServiceTeikyoYM
-     * @return serviceTeikyoYM
+     * サービス提供年月のgetメソッドです。
+     * 
+     * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
         return serviceTeikyoYM;
     }
 
     /**
-     * setServiceTeikyoYM
-     * @param serviceTeikyoYM serviceTeikyoYM
+     * サービス提供年月のsetメソッドです。
+     * 
+     * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
         this.serviceTeikyoYM = serviceTeikyoYM;
     }
 
     /**
-     * getJigyoshoNo
-     * @return jigyoshoNo
+     * 事業所番号のgetメソッドです。
+     * 
+     * @return 事業所番号
      */
     public JigyoshaNo getJigyoshoNo() {
         return jigyoshoNo;
     }
 
     /**
-     * setJigyoshoNo
-     * @param jigyoshoNo jigyoshoNo
+     * 事業所番号のsetメソッドです。
+     * 
+     * @param jigyoshoNo 事業所番号
      */
     public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
         this.jigyoshoNo = jigyoshoNo;
     }
 
     /**
-     * getToshiNo
-     * @return toshiNo
+     * 通し番号のgetメソッドです。
+     * 
+     * @return 通し番号
      */
     public ToshiNo getToshiNo() {
         return toshiNo;
     }
 
     /**
-     * setToshiNo
-     * @param toshiNo toshiNo
+     * 通し番号のsetメソッドです。
+     * 
+     * @param toshiNo 通し番号
      */
     public void setToshiNo(ToshiNo toshiNo) {
         this.toshiNo = toshiNo;
     }
 
     /**
-     * getServicePlanhiMeisaiLineNo
-     * @return servicePlanhiMeisaiLineNo
+     * サービス計画費明細行番号のgetメソッドです。
+     * <br/>
+     * <br/>サービス提供年月が平成２１年４月以降の場合
+     * 
+     * @return サービス計画費明細行番号
      */
     public RString getServicePlanhiMeisaiLineNo() {
         return servicePlanhiMeisaiLineNo;
     }
 
     /**
-     * setServicePlanhiMeisaiLineNo
-     * @param servicePlanhiMeisaiLineNo servicePlanhiMeisaiLineNo
+     * サービス計画費明細行番号のsetメソッドです。
+     * <br/>
+     * <br/>サービス提供年月が平成２１年４月以降の場合
+     * 
+     * @param servicePlanhiMeisaiLineNo サービス計画費明細行番号
      */
     public void setServicePlanhiMeisaiLineNo(RString servicePlanhiMeisaiLineNo) {
         this.servicePlanhiMeisaiLineNo = servicePlanhiMeisaiLineNo;
     }
 
     /**
-     * getShiteiKijunGaitoJigyoshaKubunCode
-     * @return shiteiKijunGaitoJigyoshaKubunCode
+     * 指定／基準該当等事業所区分コードのgetメソッドです。
+     * 
+     * @return 指定／基準該当等事業所区分コード
      */
     public RString getShiteiKijunGaitoJigyoshaKubunCode() {
         return shiteiKijunGaitoJigyoshaKubunCode;
     }
 
     /**
-     * setShiteiKijunGaitoJigyoshaKubunCode
-     * @param shiteiKijunGaitoJigyoshaKubunCode shiteiKijunGaitoJigyoshaKubunCode
+     * 指定／基準該当等事業所区分コードのsetメソッドです。
+     * 
+     * @param shiteiKijunGaitoJigyoshaKubunCode 指定／基準該当等事業所区分コード
      */
     public void setShiteiKijunGaitoJigyoshaKubunCode(RString shiteiKijunGaitoJigyoshaKubunCode) {
         this.shiteiKijunGaitoJigyoshaKubunCode = shiteiKijunGaitoJigyoshaKubunCode;
     }
 
     /**
-     * getTanisuTanka
-     * @return tanisuTanka
+     * 単位数単価のgetメソッドです。
+     * 
+     * @return 単位数単価
      */
     public Decimal getTanisuTanka() {
         return tanisuTanka;
     }
 
     /**
-     * setTanisuTanka
-     * @param tanisuTanka tanisuTanka
+     * 単位数単価のsetメソッドです。
+     * 
+     * @param tanisuTanka 単位数単価
      */
     public void setTanisuTanka(Decimal tanisuTanka) {
         this.tanisuTanka = tanisuTanka;
     }
 
     /**
-     * getKyotakuServiceSakuseiIraiYMD
-     * @return kyotakuServiceSakuseiIraiYMD
+     * 居宅サービス計画作成依頼届出年月日のgetメソッドです。
+     * 
+     * @return 居宅サービス計画作成依頼届出年月日
      */
     public FlexibleDate getKyotakuServiceSakuseiIraiYMD() {
         return kyotakuServiceSakuseiIraiYMD;
     }
 
     /**
-     * setKyotakuServiceSakuseiIraiYMD
-     * @param kyotakuServiceSakuseiIraiYMD kyotakuServiceSakuseiIraiYMD
+     * 居宅サービス計画作成依頼届出年月日のsetメソッドです。
+     * 
+     * @param kyotakuServiceSakuseiIraiYMD 居宅サービス計画作成依頼届出年月日
      */
     public void setKyotakuServiceSakuseiIraiYMD(FlexibleDate kyotakuServiceSakuseiIraiYMD) {
         this.kyotakuServiceSakuseiIraiYMD = kyotakuServiceSakuseiIraiYMD;
     }
 
     /**
-     * getServiceCode
-     * @return serviceCode
+     * サービスコードのgetメソッドです。
+     * 
+     * @return サービスコード
      */
     public ServiceCode getServiceCode() {
         return serviceCode;
     }
 
     /**
-     * setServiceCode
-     * @param serviceCode serviceCode
+     * サービスコードのsetメソッドです。
+     * 
+     * @param serviceCode サービスコード
      */
     public void setServiceCode(ServiceCode serviceCode) {
         this.serviceCode = serviceCode;
     }
 
     /**
-     * getTanisu
-     * @return tanisu
+     * 単位数のgetメソッドです。
+     * 
+     * @return 単位数
      */
     public Decimal getTanisu() {
         return tanisu;
     }
 
     /**
-     * setTanisu
-     * @param tanisu tanisu
+     * 単位数のsetメソッドです。
+     * 
+     * @param tanisu 単位数
      */
     public void setTanisu(Decimal tanisu) {
         this.tanisu = tanisu;
     }
 
     /**
-     * getKaisu
-     * @return kaisu
+     * 回数のgetメソッドです。
+     * <br/>
+     * <br/>サービス提供年月が平成２１年４月以降の場合
+     * 
+     * @return 回数
      */
     public Integer getKaisu() {
         return kaisu;
     }
 
     /**
-     * setKaisu
-     * @param kaisu kaisu
+     * 回数のsetメソッドです。
+     * <br/>
+     * <br/>サービス提供年月が平成２１年４月以降の場合
+     * 
+     * @param kaisu 回数
      */
     public void setKaisu(Integer kaisu) {
         this.kaisu = kaisu;
     }
 
     /**
-     * getServiceTanisu
-     * @return serviceTanisu
+     * サービス単位数のgetメソッドです。
+     * 
+     * @return サービス単位数
      */
     public Decimal getServiceTanisu() {
         return serviceTanisu;
     }
 
     /**
-     * setServiceTanisu
-     * @param serviceTanisu serviceTanisu
+     * サービス単位数のsetメソッドです。
+     * 
+     * @param serviceTanisu サービス単位数
      */
     public void setServiceTanisu(Decimal serviceTanisu) {
         this.serviceTanisu = serviceTanisu;
     }
 
     /**
-     * getServiceTanisuTotal
-     * @return serviceTanisuTotal
+     * サービス単位数合計のgetメソッドです。
+     * 
+     * @return サービス単位数合計
      */
     public Decimal getServiceTanisuTotal() {
         return serviceTanisuTotal;
     }
 
     /**
-     * setServiceTanisuTotal
-     * @param serviceTanisuTotal serviceTanisuTotal
+     * サービス単位数合計のsetメソッドです。
+     * 
+     * @param serviceTanisuTotal サービス単位数合計
      */
     public void setServiceTanisuTotal(Decimal serviceTanisuTotal) {
         this.serviceTanisuTotal = serviceTanisuTotal;
     }
 
     /**
-     * getSeikyuKingaku
-     * @return seikyuKingaku
+     * 請求金額のgetメソッドです。
+     * 
+     * @return 請求金額
      */
     public Decimal getSeikyuKingaku() {
         return seikyuKingaku;
     }
 
     /**
-     * setSeikyuKingaku
-     * @param seikyuKingaku seikyuKingaku
+     * 請求金額のsetメソッドです。
+     * 
+     * @param seikyuKingaku 請求金額
      */
     public void setSeikyuKingaku(Decimal seikyuKingaku) {
         this.seikyuKingaku = seikyuKingaku;
     }
 
     /**
-     * getTantouKaigoShienSemmoninNo
-     * @return tantouKaigoShienSemmoninNo
+     * 担当介護支援専門員番号のgetメソッドです。
+     * <br/>
+     * <br/>サービス提供年月が平成１８年４月以降、平成２１年３月以前の場合
+     * 
+     * @return 担当介護支援専門員番号
      */
     public RString getTantouKaigoShienSemmoninNo() {
         return tantouKaigoShienSemmoninNo;
     }
 
     /**
-     * setTantouKaigoShienSemmoninNo
-     * @param tantouKaigoShienSemmoninNo tantouKaigoShienSemmoninNo
+     * 担当介護支援専門員番号のsetメソッドです。
+     * <br/>
+     * <br/>サービス提供年月が平成１８年４月以降、平成２１年３月以前の場合
+     * 
+     * @param tantouKaigoShienSemmoninNo 担当介護支援専門員番号
      */
     public void setTantouKaigoShienSemmoninNo(RString tantouKaigoShienSemmoninNo) {
         this.tantouKaigoShienSemmoninNo = tantouKaigoShienSemmoninNo;
     }
 
     /**
-     * getTekiyo
-     * @return tekiyo
+     * 摘要のgetメソッドです。
+     * <br/>
+     * <br/>サービス提供年月が平成１８年４月以降、平成２１年３月以前の場合
+     * 
+     * @return 摘要
      */
     public RString getTekiyo() {
         return tekiyo;
     }
 
     /**
-     * setTekiyo
-     * @param tekiyo tekiyo
+     * 摘要のsetメソッドです。
+     * <br/>
+     * <br/>サービス提供年月が平成１８年４月以降、平成２１年３月以前の場合
+     * 
+     * @param tekiyo 摘要
      */
     public void setTekiyo(RString tekiyo) {
         this.tekiyo = tekiyo;
     }
 
     /**
-     * getAtoTanisu
-     * @return atoTanisu
+     * 後・単位数のgetメソッドです。
+     * 
+     * @return 後・単位数
      */
     public Decimal getAtoTanisu() {
         return atoTanisu;
     }
 
     /**
-     * setAtoTanisu
-     * @param atoTanisu atoTanisu
+     * 後・単位数のsetメソッドです。
+     * 
+     * @param atoTanisu 後・単位数
      */
     public void setAtoTanisu(Decimal atoTanisu) {
         this.atoTanisu = atoTanisu;
     }
 
     /**
-     * getAtoKaisu
-     * @return atoKaisu
+     * 後・回数のgetメソッドです。
+     * <br/>
+     * <br/>サービス提供年月が平成２１年４月以降の場合
+     * 
+     * @return 後・回数
      */
     public Integer getAtoKaisu() {
         return atoKaisu;
     }
 
     /**
-     * setAtoKaisu
-     * @param atoKaisu atoKaisu
+     * 後・回数のsetメソッドです。
+     * <br/>
+     * <br/>サービス提供年月が平成２１年４月以降の場合
+     * 
+     * @param atoKaisu 後・回数
      */
     public void setAtoKaisu(Integer atoKaisu) {
         this.atoKaisu = atoKaisu;
     }
 
     /**
-     * getAtoServiceTanisu
-     * @return atoServiceTanisu
+     * 後・サービス単位数のgetメソッドです。
+     * <br/>
+     * <br/>サービス提供年月が平成２１年４月以降の場合
+     * 
+     * @return 後・サービス単位数
      */
     public Decimal getAtoServiceTanisu() {
         return atoServiceTanisu;
     }
 
     /**
-     * setAtoServiceTanisu
-     * @param atoServiceTanisu atoServiceTanisu
+     * 後・サービス単位数のsetメソッドです。
+     * <br/>
+     * <br/>サービス提供年月が平成２１年４月以降の場合
+     * 
+     * @param atoServiceTanisu 後・サービス単位数
      */
     public void setAtoServiceTanisu(Decimal atoServiceTanisu) {
         this.atoServiceTanisu = atoServiceTanisu;
     }
 
     /**
-     * getAtoServiceTanisuTotal
-     * @return atoServiceTanisuTotal
+     * 後・サービス単位数合計のgetメソッドです。
+     * <br/>
+     * <br/>サービス提供年月が平成２１年４月以降の場合
+     * 
+     * @return 後・サービス単位数合計
      */
     public Decimal getAtoServiceTanisuTotal() {
         return atoServiceTanisuTotal;
     }
 
     /**
-     * setAtoServiceTanisuTotal
-     * @param atoServiceTanisuTotal atoServiceTanisuTotal
+     * 後・サービス単位数合計のsetメソッドです。
+     * <br/>
+     * <br/>サービス提供年月が平成２１年４月以降の場合
+     * 
+     * @param atoServiceTanisuTotal 後・サービス単位数合計
      */
     public void setAtoServiceTanisuTotal(Decimal atoServiceTanisuTotal) {
         this.atoServiceTanisuTotal = atoServiceTanisuTotal;
     }
 
     /**
-     * getAtoSeikyuKingaku
-     * @return atoSeikyuKingaku
+     * 後・請求金額のgetメソッドです。
+     * 
+     * @return 後・請求金額
      */
     public Decimal getAtoSeikyuKingaku() {
         return atoSeikyuKingaku;
     }
 
     /**
-     * setAtoSeikyuKingaku
-     * @param atoSeikyuKingaku atoSeikyuKingaku
+     * 後・請求金額のsetメソッドです。
+     * 
+     * @param atoSeikyuKingaku 後・請求金額
      */
     public void setAtoSeikyuKingaku(Decimal atoSeikyuKingaku) {
         this.atoSeikyuKingaku = atoSeikyuKingaku;
     }
 
     /**
-     * getSaishinsaKaisu
-     * @return saishinsaKaisu
+     * 再審査回数のgetメソッドです。
+     * 
+     * @return 再審査回数
      */
     public Integer getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
     /**
-     * setSaishinsaKaisu
-     * @param saishinsaKaisu saishinsaKaisu
+     * 再審査回数のsetメソッドです。
+     * 
+     * @param saishinsaKaisu 再審査回数
      */
     public void setSaishinsaKaisu(Integer saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
     /**
-     * getKagoKaisu
-     * @return kagoKaisu
+     * 過誤回数のgetメソッドです。
+     * 
+     * @return 過誤回数
      */
     public Integer getKagoKaisu() {
         return kagoKaisu;
     }
 
     /**
-     * setKagoKaisu
-     * @param kagoKaisu kagoKaisu
+     * 過誤回数のsetメソッドです。
+     * 
+     * @param kagoKaisu 過誤回数
      */
     public void setKagoKaisu(Integer kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 
     /**
-     * getShinsaYM
-     * @return shinsaYM
+     * 審査年月のgetメソッドです。
+     * 
+     * @return 審査年月
      */
     public FlexibleYearMonth getShinsaYM() {
         return shinsaYM;
     }
 
     /**
-     * setShinsaYM
-     * @param shinsaYM shinsaYM
+     * 審査年月のsetメソッドです。
+     * 
+     * @param shinsaYM 審査年月
      */
     public void setShinsaYM(FlexibleYearMonth shinsaYM) {
         this.shinsaYM = shinsaYM;
     }
 
     /**
-     * getSeiriNo
-     * @return seiriNo
+     * 整理番号のgetメソッドです。
+     * 
+     * @return 整理番号
      */
     public RString getSeiriNo() {
         return seiriNo;
     }
 
     /**
-     * setSeiriNo
-     * @param seiriNo seiriNo
+     * 整理番号のsetメソッドです。
+     * 
+     * @param seiriNo 整理番号
      */
     public void setSeiriNo(RString seiriNo) {
         this.seiriNo = seiriNo;
     }
 
     /**
-     * getTorikomiYM
-     * @return torikomiYM
+     * 取込年月のgetメソッドです。
+     * 
+     * @return 取込年月
      */
     public FlexibleYearMonth getTorikomiYM() {
         return torikomiYM;
     }
 
     /**
-     * setTorikomiYM
-     * @param torikomiYM torikomiYM
+     * 取込年月のsetメソッドです。
+     * 
+     * @param torikomiYM 取込年月
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
         this.torikomiYM = torikomiYM;
@@ -602,6 +690,7 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
      * @@return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3025KyufujissekiKyotakuServiceEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
+    @Override
     public boolean equalsPrimaryKeys(DbT3025KyufujissekiKyotakuServiceEntity other) {
         if (other == null) {
             return false;
@@ -636,7 +725,54 @@ public class DbT3025KyufujissekiKyotakuServiceEntity implements IDbAccessable {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void shallowCopy(DbT3025KyufujissekiKyotakuServiceEntity entity) {
+        this.kokanJohoShikibetsuNo = entity.kokanJohoShikibetsuNo;
+        this.inputShikibetsuNo = entity.inputShikibetsuNo;
+        this.recodeShubetsuCode = entity.recodeShubetsuCode;
+        this.shokisaiHokenshaNo = entity.shokisaiHokenshaNo;
+        this.hiHokenshaNo = entity.hiHokenshaNo;
+        this.serviceTeikyoYM = entity.serviceTeikyoYM;
+        this.jigyoshoNo = entity.jigyoshoNo;
+        this.toshiNo = entity.toshiNo;
+        this.servicePlanhiMeisaiLineNo = entity.servicePlanhiMeisaiLineNo;
+        this.shiteiKijunGaitoJigyoshaKubunCode = entity.shiteiKijunGaitoJigyoshaKubunCode;
+        this.tanisuTanka = entity.tanisuTanka;
+        this.kyotakuServiceSakuseiIraiYMD = entity.kyotakuServiceSakuseiIraiYMD;
+        this.serviceCode = entity.serviceCode;
+        this.tanisu = entity.tanisu;
+        this.kaisu = entity.kaisu;
+        this.serviceTanisu = entity.serviceTanisu;
+        this.serviceTanisuTotal = entity.serviceTanisuTotal;
+        this.seikyuKingaku = entity.seikyuKingaku;
+        this.tantouKaigoShienSemmoninNo = entity.tantouKaigoShienSemmoninNo;
+        this.tekiyo = entity.tekiyo;
+        this.atoTanisu = entity.atoTanisu;
+        this.atoKaisu = entity.atoKaisu;
+        this.atoServiceTanisu = entity.atoServiceTanisu;
+        this.atoServiceTanisuTotal = entity.atoServiceTanisuTotal;
+        this.atoSeikyuKingaku = entity.atoSeikyuKingaku;
+        this.saishinsaKaisu = entity.saishinsaKaisu;
+        this.kagoKaisu = entity.kagoKaisu;
+        this.shinsaYM = entity.shinsaYM;
+        this.seiriNo = entity.seiriNo;
+        this.torikomiYM = entity.torikomiYM;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Override
+    public RString getMd5() {
+        return super.toMd5(kokanJohoShikibetsuNo, inputShikibetsuNo, recodeShubetsuCode, shokisaiHokenshaNo, hiHokenshaNo, serviceTeikyoYM, jigyoshoNo, toshiNo, servicePlanhiMeisaiLineNo, shiteiKijunGaitoJigyoshaKubunCode, tanisuTanka, kyotakuServiceSakuseiIraiYMD, serviceCode, tanisu, kaisu, serviceTanisu, serviceTanisuTotal, seikyuKingaku, tantouKaigoShienSemmoninNo, tekiyo, atoTanisu, atoKaisu, atoServiceTanisu, atoServiceTanisuTotal, atoSeikyuKingaku, saishinsaKaisu, kagoKaisu, shinsaYM, seiriNo, torikomiYM);
+    }
+
 // </editor-fold>
+
 
 
 

@@ -1,0 +1,14 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+todokedeKanriNo,varchar,RString,,,,,第三者行為届出管理番号,A
+kyushoSeikyuNo,varchar,RString,,,,,第三者行為求償請求番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+kyufuGakuGokei,numeric,Decimal,,,,,給付額合計,A
+kashitsuSosatsuGaku,numeric,Decimal,,,,,過失相殺額,A
+hokenKyufuSeikyuGaku,numeric,Decimal,,,,,保険給付請求額,A
+songaiBaishoKinNonyuYMD,UDD015YMD,FlexibleDate,,,,,損害賠償金納入期限,A
+seikyusakiYubinNo,UDD003YubinNo,YubinNo,,,,,請求先郵便番号,A
+seikyusakiJusho,varchar,RString,,,,,請求先住所,A
+seikyusakiMeisho,UDD042AtenaMeisho,AtenaMeisho,,,,,請求先名称,A
+seikyusakiBusho,varchar,RString,,,,,請求先部署,A
+seikyusakiTantosha,UDD042AtenaMeisho,AtenaMeisho,,,,,請求先担当者,A
+seikyusakiTelNo,UDD026TelNo,TelNo,,,,,請求先電話番号,A

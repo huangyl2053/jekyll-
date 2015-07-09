@@ -1,0 +1,5 @@
+﻿hokaiseiShikoYMD,UDD015YMD,FlexibleDate,,,,,法改正施行年月日,A
+koroshoIfShikibetsuCode,bpchar,RString,,,,,厚労省IF識別コード,A
+chosaGaikyoKomokuChangeFlag,bool,boolean,,,,,認定調査概況項目変更フラグ,A
+chosaKihonKomokuChangeFlag,bool,boolean,,,,,認定調査基本項目変更フラグ,A
+shujiiIkenshoKomokuChangeFlag,bool,boolean,,,,,主治医意見書項目変更フラグ,A

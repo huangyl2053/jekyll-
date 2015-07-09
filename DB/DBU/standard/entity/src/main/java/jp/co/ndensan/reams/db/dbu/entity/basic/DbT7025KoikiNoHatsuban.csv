@@ -1,0 +1,3 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+codeKubun,varchar,RString,,,,,コード区分,A
+no,varchar,RString,,,,,番号,A

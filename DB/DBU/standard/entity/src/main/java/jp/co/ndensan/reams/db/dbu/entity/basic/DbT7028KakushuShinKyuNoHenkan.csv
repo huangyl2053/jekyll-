@@ -1,0 +1,4 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+noKubun,varchar,RString,,,,,番号区分,A
+shinNo,varchar,RString,,,,,新番号,A
+kyuNo,varchar,RString,,,,,旧番号,A

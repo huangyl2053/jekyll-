@@ -1,0 +1,8 @@
+﻿tandokuJoseiShuruiCode,varchar,RString,,,,,市町村単独助成種類,A
+joseiServiceShuruiCode,DbUDD005ServiceShuruiCode,DbUDD005ServiceShuruiCode,,,,,助成サービス種類コード,A
+tekiyoKaishiYM,UDD014YM,FlexibleYearMonth,,,,,適用開始年月,A
+rirekiNo,int2,int,,,,,履歴番号,A
+tekiyoShuryoYM,UDD014YM,FlexibleYearMonth,,,,,適用終了年月,A
+joseiServiceShuriMeisho,varchar,RString,,,,,助成サービス種類名称,A
+joseiTani,numeric,Decimal,,,,,市町村単独助成単位,A
+joseiNaiyo,varchar,RString,,,,,市町村単独助成内容,A

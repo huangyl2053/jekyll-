@@ -1,0 +1,14 @@
+﻿idoYMD,UDD015YMD,FlexibleDate,,,,,異動年月日,A
+idoKubunCode,varchar,RString,,,,,異動区分コード,A
+jukyushaIdoJiyu,varchar,RString,,,,,受給者異動事由,A
+shoKisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,証記載保険者番号,A
+hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+setaiShuyakuNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,世帯集約番号,A
+setaiShotokuKubunCode,varchar,RString,,,,,世帯所得区分コード,A
+shotokuKubunCode,varchar,RString,,,,,所得区分コード,A
+roureiFukushiNenkinJukyuAriFlag,bool,boolean,,,,,老齢福祉年金受給有フラグ,A
+riyoshaFutan2DankaiAriFlag,bool,boolean,,,,,利用者負担第２段階有フラグ,A
+shikyuShinseishoOutputAriFlag,bool,boolean,,,,,支給申請書出力有フラグ,A
+teiseiRenrakuhyoFlag,bool,boolean,,,,,訂正連絡票フラグ,A
+sofuYM,UDD014YM,FlexibleYearMonth,,,,,送付年月,A

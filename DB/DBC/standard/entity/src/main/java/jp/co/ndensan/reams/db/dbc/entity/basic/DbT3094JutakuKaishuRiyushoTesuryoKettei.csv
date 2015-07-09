@@ -1,0 +1,7 @@
+﻿riyushoSakuseiJigyoshaNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,介護住宅改修理由書作成事業者番号,A
+ketteiYMD,UDD015YMD,FlexibleDate,,,,,決定年月日,A
+rirekiNo,int2,int,,,,,履歴番号,A
+shikyu_FushikyuKetteiYMD,UDD015YMD,FlexibleDate,,,,,支給・不支給決定年月日,A
+shikyu_FushikyuKubun,varchar,RString,,,,,支給・不支給区分,A
+fushikyuRiyu,varchar,RString,,,,,償還不支給理由等,A
+tesuryoShiharaiYoteiYMD,UDD015YMD,FlexibleDate,,,,,住宅改修理由書作成手数料支払予定日,A

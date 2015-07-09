@@ -1,0 +1,5 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+shinTekiyoJogaiShisetsuNo,varchar,RString,,,,,新適用除外施設番号,A
+kyuTekiyoJogaiShisetsuNo,varchar,RString,,,,,旧適用除外施設番号,A
+shichosonCode2,UDD023LasdecCode,LasdecCode,,,,,市町村コード２,A
+kyuTekiyoJogaiShisetsuNo2,varchar,RString,,,,,旧適用除外施設番号２,A

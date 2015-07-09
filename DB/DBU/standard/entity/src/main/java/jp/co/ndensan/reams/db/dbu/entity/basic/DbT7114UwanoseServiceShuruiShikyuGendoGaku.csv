@@ -1,0 +1,6 @@
+﻿serviceShuruiCode,DbUDD005ServiceShuruiCode,DbUDD005ServiceShuruiCode,,,,,サービス種類コード,A
+yoKaigoJotaiKubun,varchar,RString,,,,,要介護状態区分,A
+tekiyoKaishiYM,UDD014YM,FlexibleYearMonth,,,,,適用開始年月,A
+rirekiNo,int2,int,,,,,履歴番号,A
+tekiyoShuryoYM,UDD014YM,FlexibleYearMonth,,,,,適用終了年月,A
+shikyuGendoTaniSu,numeric,Decimal,,,,,支給限度単位数,A

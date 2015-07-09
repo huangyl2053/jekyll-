@@ -1,0 +1,14 @@
+﻿choteiNendo,UDD012YSeireki,FlexibleYear,,,,,調定年度,A
+fukaNendo,UDD012YSeireki,FlexibleYear,,,,,賦課年度,A
+tsuchishoNo,DbUDD008TsuchishoNo,DbUDD008TsuchishoNo,,,,,通知書番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+shinseiYMD,UDD015YMD,FlexibleDate,,,,,徴収猶予申請年月日,A
+ketteiYMD,UDD015YMD,FlexibleDate,,,,,徴収猶予決定年月日,A
+torikeshiYMD,UDD015YMD,FlexibleDate,,,,,徴収猶予取消年月日,A
+jotaiKubun,varchar,RString,,,,,徴収猶予状態区分,A
+sakuseiKubun,varchar,RString,,,,,徴収猶予作成区分,A
+shinseiJiyu,text,RString,,,,,申請事由,A
+yuyoJiyuCode,UDD035Code,Code,,,,,徴収猶予種類コード,A
+yuyoJiyu,text,RString,,,,,徴収猶予事由,A
+yuyoTorikeshiJiyuCode,UDD035Code,Code,,,,,徴収猶予取消種類コード,A
+yuyoTorikeshiJiyu,text,RString,,,,,徴収猶予取消事由,A

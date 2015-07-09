@@ -1,0 +1,12 @@
+﻿serviceCode,varchar,RString,,,,,市町村特別給付用サービスコード,A
+serviceYukoKikanKaishiYMD,UDD015YMD,FlexibleDate,,,,,市町村特別給付用サービス有効期間開始年月日,A
+rirekiNo,int2,int,,,,,履歴番号,A
+serviceSeishikiName,varchar,RString,,,,,市町村特別給付用サービス名（正式名称）,A
+serviceRyakushoName,varchar,RString,,,,,市町村特別給付用サービス名（略称）,A
+serviceYukoKikanShuryoYMD,UDD015YMD,FlexibleDate,,,,,市町村特別給付用サービス有効期間終了年月日,A
+serviceKubun,varchar,RString,,,,,市町村特別給付用サービス区分,A
+tanisuNissu,numeric,Decimal,,,,,市町村特別給付用単位・日数,A
+shikyuGendoKijungaku,numeric,Decimal,,,,,市町村特別給付用支給限度基準額,A
+kyufuritsuHikisageAriFlag,bool,boolean,,,,,市町村特別給付用給付率引下有フラグ,A
+torokuYMD,UDD015YMD,FlexibleDate,,,,,登録年月日,A
+henkoYMD,UDD015YMD,FlexibleDate,,,,,変更年月日,A
