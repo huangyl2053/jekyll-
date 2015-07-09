@@ -1,0 +1,1658 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-is-composite-control="true" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBE&quot;,&quot;controlName&quot;:&quot;DankaibetsuShinseiList&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;originalProperty&quot;:[],&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;canTransferEvent&quot;:true,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}"><div title="" class="UzPanel FloatLeft JSControl Panel panelMarginTop-M panelMarginBottom-M StateChangable marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G12" id="DankaibetsuShinseiList" style="margin: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;DankaibetsuShinseiList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G12&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;DankaibetsuShinseiList&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onLoad&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;Default&quot;,&quot;marginBottom&quot;:&quot;Default&quot;,&quot;isOpen&quot;:true,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;onOpen&quot;:&quot;&quot;,&quot;onClose&quot;:&quot;&quot;,&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;backgroundColor&quot;:0,&quot;widthAuto&quot;:false,&quot;panelDisplay&quot;:0,&quot;isGroupBox&quot;:false,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;530px&quot;,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="DankaibetsuShinseiList_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="DankaibetsuShinseiList_panel_body_area" style="height: 530px;"><button title="" class="UzButton FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="btnToSearch" style="width: 100px;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnToSearch&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;100px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;btnToSearch&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onBeforeClick&quot;:&quot;&quot;,&quot;onAfterClick&quot;:&quot;&quot;,&quot;onClick&quot;:&quot;onClick_btnToSearch&quot;,&quot;text&quot;:&quot;検索する&quot;,&quot;appearance&quot;:0,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;,&quot;icon&quot;:0,&quot;heightTextBoxMatches&quot;:false}"><span>検索する</span></button><div title="" class="WithLabel TextBoxOuterDiv JSControl controlMargin-M FloatRight marginLeft-XS" id="txtKanryo" style="width: 117px; height: 21px; margin-right: 10px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtKanryo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;70px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:true,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:2,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;10px&quot;,&quot;selectControlID&quot;:&quot;txtKanryo_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;text&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:0,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:0,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;完了&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;40px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtKanryo_labelL" style="width: 40px;"><span>完了</span></span><input tabindex="-1" class="UzTextBox CoreElement disabledColor text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtKanryo_core" style="width: 70px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv JSControl controlMargin-M FloatRight marginLeft-XS marginRight-XS" id="txtGokei" style="width: 117px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtGokei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;70px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:true,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:2,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;txtGokei_core&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;text&quot;:&quot;&quot;,&quot;required&quot;:false,&quot;maxLength&quot;:100000000,&quot;minLength&quot;:0,&quot;textAlign&quot;:0,&quot;placeHolder&quot;:&quot;&quot;,&quot;textKind&quot;:0,&quot;isPrivateInfo&quot;:false,&quot;isPassword&quot;:false,&quot;isComboBox&quot;:false,&quot;onFocus&quot;:&quot;&quot;,&quot;onBlur&quot;:&quot;&quot;,&quot;onChange&quot;:&quot;&quot;,&quot;onKeyPress&quot;:&quot;&quot;,&quot;suggest&quot;:[],&quot;value&quot;:&quot;&quot;,&quot;labelLText&quot;:&quot;合計&quot;,&quot;labelRText&quot;:&quot;&quot;,&quot;labelLWidth&quot;:&quot;40px&quot;,&quot;labelRWidth&quot;:&quot;S&quot;,&quot;labelLAlign&quot;:2,&quot;labelRAlign&quot;:0,&quot;decorationClass&quot;:&quot;&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtGokei_labelL" style="width: 40px;"><span>合計</span></span><input tabindex="-1" class="UzTextBox CoreElement disabledColor text-align-left ime-mode-Hiragana ui-autocomplete-input" id="txtGokei_core" style="width: 70px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><button title="" class="UzButtonDialog FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="btnNarabikae" style="width: 100px;" type="button" data-control-type="ButtonDialog" data-obj="{&quot;fieldName&quot;:&quot;btnNarabikae&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;ButtonDialog&quot;,&quot;width&quot;:&quot;100px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;btnNarabikae&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;onBeforeClick&quot;:&quot;&quot;,&quot;onAfterClick&quot;:&quot;&quot;,&quot;onClick&quot;:&quot;&quot;,&quot;text&quot;:&quot;並び替える&quot;,&quot;appearance&quot;:0,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;imageWidth&quot;:&quot;&quot;,&quot;imageHeight&quot;:&quot;&quot;,&quot;icon&quot;:0,&quot;heightTextBoxMatches&quot;:false,&quot;displayChildDivName&quot;:&quot;DBE.Narabikae&quot;,&quot;dataPassing&quot;:[],&quot;visibleCloseButton&quot;:true,&quot;onOkClose&quot;:&quot;&quot;,&quot;onBeforeOpenDialog&quot;:&quot;&quot;,&quot;onCancelClose&quot;:&quot;&quot;}"><span>並び替える</span></button><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS" id="dgTaishoIchiran" style="width: 1095px; height: 525px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgTaishoIchiran&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;1095px&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;dependencies&quot;:[],&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;dgTaishoIchiran&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;readOnly&quot;:false,&quot;height&quot;:&quot;525px&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:true,&quot;isShowHeader&quot;:true,&quot;isShowFooter&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowRowState&quot;:false,&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0,&quot;header&quot;:{&quot;combineColumns&quot;:[{&quot;combineColumnName&quot;:&quot;調査票&quot;,&quot;combineItem&quot;:[&quot;chosaIraiKanryoYmd&quot;,&quot;chosahyoNyushuKanryoYmd&quot;,&quot;chosaWaritsukeYmd&quot;,&quot;chosaIraishoHakkoYmd&quot;,&quot;dataOutputYmd&quot;,&quot;chosaKigenYmd&quot;,&quot;chosaIraiKubun&quot;,&quot;chosaDataInputYmd&quot;,&quot;chosaChiku&quot;]},{&quot;combineColumnName&quot;:&quot;今回調査&quot;,&quot;combineItem&quot;:[&quot;konkaiChosaItakusaki&quot;,&quot;konkaiChosain&quot;]},{&quot;combineColumnName&quot;:&quot;前回調査&quot;,&quot;combineItem&quot;:[&quot;zenkaiChosaItakusaki&quot;,&quot;zenkaiChosain&quot;]},{&quot;combineColumnName&quot;:&quot;前々回調査&quot;,&quot;combineItem&quot;:[&quot;zenzenkaiChosaItakusaki&quot;,&quot;zenzenkaiChosain&quot;]},{&quot;combineColumnName&quot;:&quot;意見書&quot;,&quot;combineItem&quot;:[&quot;ikenshoIraiKanryoYmd&quot;,&quot;ikenshoNyushuKanryoYmd&quot;,&quot;ikenSaiIrai&quot;,&quot;ikenIraiYmd&quot;,&quot;ikenshoIraishoHakkoYmd&quot;,&quot;ikenshoOutYmd&quot;,&quot;ikenshoIraiTorokuYmd&quot;,&quot;ikenshoIraiKigenYmd&quot;,&quot;ikenshoIraiKaisu&quot;,&quot;ikenshoTeikei&quot;,&quot;ikenshoTeikeigai&quot;,&quot;gokomokuNyuryoku&quot;]},{&quot;combineColumnName&quot;:&quot;今回&quot;,&quot;combineItem&quot;:[&quot;konkaiIryoKikan&quot;,&quot;konkaiShujii&quot;]},{&quot;combineColumnName&quot;:&quot;前回&quot;,&quot;combineItem&quot;:[&quot;zenkaiIryoKikan&quot;,&quot;zenkaiShujii&quot;]},{&quot;combineColumnName&quot;:&quot;督促&quot;,&quot;combineItem&quot;:[&quot;chosahyoTokusokuHakkoYmd&quot;,&quot;chosahyoTokusokuPattern&quot;,&quot;chosahyoTokusokuKaisu&quot;,&quot;chosahyoTokusokuKigenYmd&quot;,&quot;ikenshoTokusokuHakkoYmd&quot;,&quot;ikenshoTokusokuPattern&quot;,&quot;ikenshoTokusokuKaisu&quot;,&quot;ikenshoTokusokuKigenYmd&quot;]},{&quot;combineColumnName&quot;:&quot;一次判定&quot;,&quot;combineItem&quot;:[&quot;ichijiHanteiKanryoYmd&quot;,&quot;saiChosa&quot;,&quot;saiIken&quot;,&quot;chosaIchiji&quot;,&quot;ikenIchiji&quot;,&quot;ichijiHanteiKekka&quot;,&quot;keikokuCode&quot;]},{&quot;combineColumnName&quot;:&quot;審査会&quot;,&quot;combineItem&quot;:[&quot;shinsakaiTorokuKanryoYmd&quot;,&quot;saiShinsa&quot;,&quot;shinsakaiWaritsukeYmd&quot;,&quot;shinsakaiKaisaiYmd&quot;,&quot;kaisaiJikan&quot;,&quot;yusenWaritsukesha&quot;,&quot;shinsakaiNo&quot;,&quot;gogitai&quot;]}],&quot;frozenColumn&quot;:&quot;shimei&quot;,&quot;headerHeight&quot;:1},&quot;columns&quot;:[{&quot;columnName&quot;:&quot;保険者&quot;,&quot;dataName&quot;:&quot;hokensha&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;hokensha&quot;},{&quot;columnName&quot;:&quot;被保番号&quot;,&quot;dataName&quot;:&quot;hihoNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;hihoNo&quot;},{&quot;columnName&quot;:&quot;申請日&quot;,&quot;dataName&quot;:&quot;shinseiYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;shinseiYmd&quot;},{&quot;columnName&quot;:&quot;氏名&quot;,&quot;dataName&quot;:&quot;shimei&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:200,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;shimei&quot;},{&quot;columnName&quot;:&quot;申請区分&quot;,&quot;dataName&quot;:&quot;shinseiKubun&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;shinseiKubun&quot;},{&quot;columnName&quot;:&quot;完了日&quot;,&quot;dataName&quot;:&quot;chosaIraiKanryoYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosaIraiKanryoYmd&quot;},{&quot;columnName&quot;:&quot;完了日&quot;,&quot;dataName&quot;:&quot;chosahyoNyushuKanryoYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosahyoNyushuKanryoYmd&quot;},{&quot;columnName&quot;:&quot;調査<br>割付日&quot;,&quot;dataName&quot;:&quot;chosaWaritsukeYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosaWaritsukeYmd&quot;},{&quot;columnName&quot;:&quot;依頼書<br>発行日&quot;,&quot;dataName&quot;:&quot;chosaIraishoHakkoYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosaIraishoHakkoYmd&quot;},{&quot;columnName&quot;:&quot;データ<br>出力日&quot;,&quot;dataName&quot;:&quot;dataOutputYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;dataOutputYmd&quot;},{&quot;columnName&quot;:&quot;調査<br>期限&quot;,&quot;dataName&quot;:&quot;chosaKigenYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosaKigenYmd&quot;},{&quot;columnName&quot;:&quot;調査依頼<br>区分&quot;,&quot;dataName&quot;:&quot;chosaIraiKubun&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosaIraiKubun&quot;},{&quot;columnName&quot;:&quot;調査データ<br>入力&quot;,&quot;dataName&quot;:&quot;chosaDataInputYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosaDataInputYmd&quot;},{&quot;columnName&quot;:&quot;調査地区&quot;,&quot;dataName&quot;:&quot;chosaChiku&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosaChiku&quot;},{&quot;columnName&quot;:&quot;調査委託先&quot;,&quot;dataName&quot;:&quot;konkaiChosaItakusaki&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:250,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;konkaiChosaItakusaki&quot;},{&quot;columnName&quot;:&quot;調査員&quot;,&quot;dataName&quot;:&quot;konkaiChosain&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:200,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;konkaiChosain&quot;},{&quot;columnName&quot;:&quot;調査委託先&quot;,&quot;dataName&quot;:&quot;zenkaiChosaItakusaki&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:250,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;zenkaiChosaItakusaki&quot;},{&quot;columnName&quot;:&quot;調査員&quot;,&quot;dataName&quot;:&quot;zenkaiChosain&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:200,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;zenkaiChosain&quot;},{&quot;columnName&quot;:&quot;調査委託先&quot;,&quot;dataName&quot;:&quot;zenzenkaiChosaItakusaki&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:250,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;zenzenkaiChosaItakusaki&quot;},{&quot;columnName&quot;:&quot;調査員&quot;,&quot;dataName&quot;:&quot;zenzenkaiChosain&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:200,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;zenzenkaiChosain&quot;},{&quot;columnName&quot;:&quot;郵便番号&quot;,&quot;dataName&quot;:&quot;chosaItakusakiYubinNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosaItakusakiYubinNo&quot;},{&quot;columnName&quot;:&quot;住所&quot;,&quot;dataName&quot;:&quot;chosaItakusakiJusho&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:300,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosaItakusakiJusho&quot;},{&quot;columnName&quot;:&quot;完了日&quot;,&quot;dataName&quot;:&quot;ikenshoIraiKanryoYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ikenshoIraiKanryoYmd&quot;},{&quot;columnName&quot;:&quot;完了日&quot;,&quot;dataName&quot;:&quot;ikenshoNyushuKanryoYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ikenshoNyushuKanryoYmd&quot;},{&quot;columnName&quot;:&quot;意見<br>（再）&quot;,&quot;dataName&quot;:&quot;ikenSaiIrai&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:60,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ikenSaiIrai&quot;},{&quot;columnName&quot;:&quot;依頼日&quot;,&quot;dataName&quot;:&quot;ikenIraiYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ikenIraiYmd&quot;},{&quot;columnName&quot;:&quot;依頼書<br>発行日&quot;,&quot;dataName&quot;:&quot;ikenshoIraishoHakkoYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ikenshoIraishoHakkoYmd&quot;},{&quot;columnName&quot;:&quot;意見書<br>出力日&quot;,&quot;dataName&quot;:&quot;ikenshoOutYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ikenshoOutYmd&quot;},{&quot;columnName&quot;:&quot;依頼<br>登録日&quot;,&quot;dataName&quot;:&quot;ikenshoIraiTorokuYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ikenshoIraiTorokuYmd&quot;},{&quot;columnName&quot;:&quot;依頼<br>期限&quot;,&quot;dataName&quot;:&quot;ikenshoIraiKigenYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ikenshoIraiKigenYmd&quot;},{&quot;columnName&quot;:&quot;依頼<br>回数&quot;,&quot;dataName&quot;:&quot;ikenshoIraiKaisu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:60,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ikenshoIraiKaisu&quot;},{&quot;columnName&quot;:&quot;意見書<br>(定型)&quot;,&quot;dataName&quot;:&quot;ikenshoTeikei&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ikenshoTeikei&quot;},{&quot;columnName&quot;:&quot;意見書<br>(定型外)&quot;,&quot;dataName&quot;:&quot;ikenshoTeikeigai&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ikenshoTeikeigai&quot;},{&quot;columnName&quot;:&quot;5項目<br>入力&quot;,&quot;dataName&quot;:&quot;gokomokuNyuryoku&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;gokomokuNyuryoku&quot;},{&quot;columnName&quot;:&quot;医療機関&quot;,&quot;dataName&quot;:&quot;konkaiIryoKikan&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:250,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;konkaiIryoKikan&quot;},{&quot;columnName&quot;:&quot;主治医&quot;,&quot;dataName&quot;:&quot;konkaiShujii&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:200,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;konkaiShujii&quot;},{&quot;columnName&quot;:&quot;医療機関&quot;,&quot;dataName&quot;:&quot;zenkaiIryoKikan&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:250,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;zenkaiIryoKikan&quot;},{&quot;columnName&quot;:&quot;主治医&quot;,&quot;dataName&quot;:&quot;zenkaiShujii&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:200,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;zenkaiShujii&quot;},{&quot;columnName&quot;:&quot;郵便番号&quot;,&quot;dataName&quot;:&quot;iryokikanYubinNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;iryokikanYubinNo&quot;},{&quot;columnName&quot;:&quot;住所&quot;,&quot;dataName&quot;:&quot;iryokikanJusho&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:300,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;iryokikanJusho&quot;},{&quot;columnName&quot;:&quot;入所施設&quot;,&quot;dataName&quot;:&quot;nyushoShisetsu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:250,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;nyushoShisetsu&quot;},{&quot;columnName&quot;:&quot;発行日&quot;,&quot;dataName&quot;:&quot;chosahyoTokusokuHakkoYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosahyoTokusokuHakkoYmd&quot;},{&quot;columnName&quot;:&quot;方法&quot;,&quot;dataName&quot;:&quot;chosahyoTokusokuPattern&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosahyoTokusokuPattern&quot;},{&quot;columnName&quot;:&quot;回数&quot;,&quot;dataName&quot;:&quot;chosahyoTokusokuKaisu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosahyoTokusokuKaisu&quot;},{&quot;columnName&quot;:&quot;期限&quot;,&quot;dataName&quot;:&quot;chosahyoTokusokuKigenYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosahyoTokusokuKigenYmd&quot;},{&quot;columnName&quot;:&quot;発行日&quot;,&quot;dataName&quot;:&quot;ikenshoTokusokuHakkoYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ikenshoTokusokuHakkoYmd&quot;},{&quot;columnName&quot;:&quot;方法&quot;,&quot;dataName&quot;:&quot;ikenshoTokusokuPattern&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ikenshoTokusokuPattern&quot;},{&quot;columnName&quot;:&quot;回数&quot;,&quot;dataName&quot;:&quot;ikenshoTokusokuKaisu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:2,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ikenshoTokusokuKaisu&quot;},{&quot;columnName&quot;:&quot;期限&quot;,&quot;dataName&quot;:&quot;ikenshoTokusokuKigenYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ikenshoTokusokuKigenYmd&quot;},{&quot;columnName&quot;:&quot;完了日&quot;,&quot;dataName&quot;:&quot;ichijiHanteiKanryoYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ichijiHanteiKanryoYmd&quot;},{&quot;columnName&quot;:&quot;再調査&quot;,&quot;dataName&quot;:&quot;saiChosa&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:60,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;saiChosa&quot;},{&quot;columnName&quot;:&quot;再意見&quot;,&quot;dataName&quot;:&quot;saiIken&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:60,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;saiIken&quot;},{&quot;columnName&quot;:&quot;調査一次&quot;,&quot;dataName&quot;:&quot;chosaIchiji&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;chosaIchiji&quot;},{&quot;columnName&quot;:&quot;意見一次&quot;,&quot;dataName&quot;:&quot;ikenIchiji&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ikenIchiji&quot;},{&quot;columnName&quot;:&quot;一次判定<br>結果&quot;,&quot;dataName&quot;:&quot;ichijiHanteiKekka&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;ichijiHanteiKekka&quot;},{&quot;columnName&quot;:&quot;警告<br>コード&quot;,&quot;dataName&quot;:&quot;keikokuCode&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;keikokuCode&quot;},{&quot;columnName&quot;:&quot;完了日&quot;,&quot;dataName&quot;:&quot;shinsakaiTorokuKanryoYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;shinsakaiTorokuKanryoYmd&quot;},{&quot;columnName&quot;:&quot;再審査&quot;,&quot;dataName&quot;:&quot;saiShinsa&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:60,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;saiShinsa&quot;},{&quot;columnName&quot;:&quot;審査会<br>割付日&quot;,&quot;dataName&quot;:&quot;shinsakaiWaritsukeYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;shinsakaiWaritsukeYmd&quot;},{&quot;columnName&quot;:&quot;審査会<br>開催日&quot;,&quot;dataName&quot;:&quot;shinsakaiKaisaiYmd&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:7,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;readOnly&quot;:true},&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;shinsakaiKaisaiYmd&quot;},{&quot;columnName&quot;:&quot;開催時間&quot;,&quot;dataName&quot;:&quot;kaisaiJikan&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:60,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;kaisaiJikan&quot;},{&quot;columnName&quot;:&quot;優先<br>割付者&quot;,&quot;dataName&quot;:&quot;yusenWaritsukesha&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;yusenWaritsukesha&quot;},{&quot;columnName&quot;:&quot;審査会<br>番号&quot;,&quot;dataName&quot;:&quot;shinsakaiNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:1,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;shinsakaiNo&quot;},{&quot;columnName&quot;:&quot;合議体&quot;,&quot;dataName&quot;:&quot;gogitai&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;gogitai&quot;},{&quot;columnName&quot;:&quot;申請から&quot;,&quot;dataName&quot;:&quot;shinseiKeikaNissu&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;shinseiKeikaNissu&quot;},{&quot;columnName&quot;:&quot;取下げ区分&quot;,&quot;dataName&quot;:&quot;torisageKubun&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;torisageKubun&quot;},{&quot;columnName&quot;:&quot;通知区分&quot;,&quot;dataName&quot;:&quot;tsuchiKubun&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;tsuchiKubun&quot;},{&quot;columnName&quot;:&quot;申請書管理番号&quot;,&quot;dataName&quot;:&quot;shinseishoKanriNo&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:0,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;shinseishoKanriNo&quot;},{&quot;columnName&quot;:&quot;厚労省ＩＦ識別コード&quot;,&quot;dataName&quot;:&quot;koroshoIfShikibetsuCode&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:0,&quot;visible&quot;:false,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:false,&quot;isPrivateInfo&quot;:false,&quot;sortKey&quot;:&quot;koroshoIfShikibetsuCode&quot;}]},&quot;onSort&quot;:&quot;&quot;,&quot;onSelect&quot;:&quot;&quot;,&quot;onSelectByDblClick&quot;:&quot;&quot;,&quot;onSelectBySelectButton&quot;:&quot;&quot;,&quot;onSelectByModifyButton&quot;:&quot;&quot;,&quot;onSelectByDeleteButton&quot;:&quot;&quot;,&quot;onAfterRequest&quot;:&quot;&quot;,&quot;onAfterRequestByDblClick&quot;:&quot;&quot;,&quot;onAfterRequestBySelectButton&quot;:&quot;&quot;,&quot;onAfterRequestByModifyButton&quot;:&quot;&quot;,&quot;onAfterRequestByDeleteButton&quot;:&quot;&quot;,&quot;onOnlyRow&quot;:&quot;&quot;,&quot;onNoRow&quot;:&quot;&quot;,&quot;onMultiRows&quot;:&quot;&quot;,&quot;dataSource&quot;:[],&quot;sortOrder&quot;:&quot;shinseiYmd&quot;,&quot;isAscending&quot;:true,&quot;filterList&quot;:[],&quot;activeRowId&quot;:-1,&quot;gridAction&quot;:[]}"><div id="dgTaishoIchiran_grid_table" role="" style="width: 1095px; height: 500px; position: relative;"></div><div id="dgTaishoIchiran_footer" style="width: 1095px; height: 25px;"></div></div></div></div> <script type='text/javascript' class='RamlConvert'>var DBE= DBE? DBE: {};DBE['DEFAULT'] = {};</script>
+<script type='text/javascript'>var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBE;
+(function (DBE) {
+    var DankaibetsuShinseiList_Design = (function (_super) {
+        __extends(DankaibetsuShinseiList_Design, _super);
+        function DankaibetsuShinseiList_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, DankaibetsuShinseiList_Design.myLayout, fieldName);
+        }
+        DankaibetsuShinseiList_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        DankaibetsuShinseiList_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        DankaibetsuShinseiList_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "DankaibetsuShinseiList",
+                    "items": [
+                        {
+                            "fieldName": "btnToSearch",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "100px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnToSearch",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
+                            "onClick": "onClick_btnToSearch",
+                            "text": "検索する",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false
+                        },
+                        {
+                            "fieldName": "txtKanryo",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "70px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": true,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "10px",
+                            "selectControlID": "txtKanryo_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "text": "",
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "完了",
+                            "labelRText": "",
+                            "labelLWidth": "40px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": ""
+                        },
+                        {
+                            "fieldName": "txtGokei",
+                            "items": [],
+                            "controlType": "TextBox",
+                            "width": "70px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": true,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 2,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "txtGokei_core",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "text": "",
+                            "required": false,
+                            "maxLength": 100000000,
+                            "minLength": 0,
+                            "textAlign": 0,
+                            "placeHolder": "",
+                            "textKind": 0,
+                            "isPrivateInfo": false,
+                            "isPassword": false,
+                            "isComboBox": false,
+                            "onFocus": "",
+                            "onBlur": "",
+                            "onChange": "",
+                            "onKeyPress": "",
+                            "suggest": [],
+                            "value": "",
+                            "labelLText": "合計",
+                            "labelRText": "",
+                            "labelLWidth": "40px",
+                            "labelRWidth": "S",
+                            "labelLAlign": 2,
+                            "labelRAlign": 0,
+                            "decorationClass": ""
+                        },
+                        {
+                            "fieldName": "btnNarabikae",
+                            "items": [],
+                            "controlType": "ButtonDialog",
+                            "width": "100px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnNarabikae",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "onBeforeClick": "",
+                            "onAfterClick": "",
+                            "onClick": "",
+                            "text": "並び替える",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": "",
+                            "icon": 0,
+                            "heightTextBoxMatches": false,
+                            "displayChildDivName": "DBE.Narabikae",
+                            "dataPassing": [],
+                            "visibleCloseButton": true,
+                            "onOkClose": "",
+                            "onBeforeOpenDialog": ""
+                        },
+                        {
+                            "fieldName": "dgTaishoIchiran",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "1095px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "dgTaishoIchiran",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "525px",
+                            "gridSetting": {
+                                "rowHeight": 25,
+                                "isMultiSelectable": true,
+                                "isShowHeader": true,
+                                "isShowFooter": true,
+                                "isShowFilter": false,
+                                "isShowFilterButton": false,
+                                "isShowRowState": false,
+                                "isShowSelectButtonColumn": false,
+                                "isShowModifyButtonColumn": false,
+                                "isShowDeleteButtonColumn": false,
+                                "limitRowCount": 0,
+                                "selectedRowCount": 0,
+                                "selectLimitRowCount": 0,
+                                "header": {
+                                    "combineColumns": [
+                                        {
+                                            "combineColumnName": "調査票",
+                                            "combineItem": [
+                                                "chosaIraiKanryoYmd",
+                                                "chosahyoNyushuKanryoYmd",
+                                                "chosaWaritsukeYmd",
+                                                "chosaIraishoHakkoYmd",
+                                                "dataOutputYmd",
+                                                "chosaKigenYmd",
+                                                "chosaIraiKubun",
+                                                "chosaDataInputYmd",
+                                                "chosaChiku"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "今回調査",
+                                            "combineItem": [
+                                                "konkaiChosaItakusaki",
+                                                "konkaiChosain"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "前回調査",
+                                            "combineItem": [
+                                                "zenkaiChosaItakusaki",
+                                                "zenkaiChosain"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "前々回調査",
+                                            "combineItem": [
+                                                "zenzenkaiChosaItakusaki",
+                                                "zenzenkaiChosain"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "意見書",
+                                            "combineItem": [
+                                                "ikenshoIraiKanryoYmd",
+                                                "ikenshoNyushuKanryoYmd",
+                                                "ikenSaiIrai",
+                                                "ikenIraiYmd",
+                                                "ikenshoIraishoHakkoYmd",
+                                                "ikenshoOutYmd",
+                                                "ikenshoIraiTorokuYmd",
+                                                "ikenshoIraiKigenYmd",
+                                                "ikenshoIraiKaisu",
+                                                "ikenshoTeikei",
+                                                "ikenshoTeikeigai",
+                                                "gokomokuNyuryoku"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "今回",
+                                            "combineItem": [
+                                                "konkaiIryoKikan",
+                                                "konkaiShujii"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "前回",
+                                            "combineItem": [
+                                                "zenkaiIryoKikan",
+                                                "zenkaiShujii"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "督促",
+                                            "combineItem": [
+                                                "chosahyoTokusokuHakkoYmd",
+                                                "chosahyoTokusokuPattern",
+                                                "chosahyoTokusokuKaisu",
+                                                "chosahyoTokusokuKigenYmd",
+                                                "ikenshoTokusokuHakkoYmd",
+                                                "ikenshoTokusokuPattern",
+                                                "ikenshoTokusokuKaisu",
+                                                "ikenshoTokusokuKigenYmd"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "一次判定",
+                                            "combineItem": [
+                                                "ichijiHanteiKanryoYmd",
+                                                "saiChosa",
+                                                "saiIken",
+                                                "chosaIchiji",
+                                                "ikenIchiji",
+                                                "ichijiHanteiKekka",
+                                                "keikokuCode"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "審査会",
+                                            "combineItem": [
+                                                "shinsakaiTorokuKanryoYmd",
+                                                "saiShinsa",
+                                                "shinsakaiWaritsukeYmd",
+                                                "shinsakaiKaisaiYmd",
+                                                "kaisaiJikan",
+                                                "yusenWaritsukesha",
+                                                "shinsakaiNo",
+                                                "gogitai"
+                                            ]
+                                        }
+                                    ],
+                                    "frozenColumn": "shimei",
+                                    "headerHeight": 1
+                                },
+                                "columns": [
+                                    {
+                                        "columnName": "保険者",
+                                        "dataName": "hokensha",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "hokensha"
+                                    },
+                                    {
+                                        "columnName": "被保番号",
+                                        "dataName": "hihoNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "hihoNo"
+                                    },
+                                    {
+                                        "columnName": "申請日",
+                                        "dataName": "shinseiYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shinseiYmd"
+                                    },
+                                    {
+                                        "columnName": "氏名",
+                                        "dataName": "shimei",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 200,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shimei"
+                                    },
+                                    {
+                                        "columnName": "申請区分",
+                                        "dataName": "shinseiKubun",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": {
+                                            "cellType": 0
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shinseiKubun"
+                                    },
+                                    {
+                                        "columnName": "完了日",
+                                        "dataName": "chosaIraiKanryoYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "chosaIraiKanryoYmd"
+                                    },
+                                    {
+                                        "columnName": "完了日",
+                                        "dataName": "chosahyoNyushuKanryoYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "chosahyoNyushuKanryoYmd"
+                                    },
+                                    {
+                                        "columnName": "調査<br>割付日",
+                                        "dataName": "chosaWaritsukeYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "chosaWaritsukeYmd"
+                                    },
+                                    {
+                                        "columnName": "依頼書<br>発行日",
+                                        "dataName": "chosaIraishoHakkoYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "chosaIraishoHakkoYmd"
+                                    },
+                                    {
+                                        "columnName": "データ<br>出力日",
+                                        "dataName": "dataOutputYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "dataOutputYmd"
+                                    },
+                                    {
+                                        "columnName": "調査<br>期限",
+                                        "dataName": "chosaKigenYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "chosaKigenYmd"
+                                    },
+                                    {
+                                        "columnName": "調査依頼<br>区分",
+                                        "dataName": "chosaIraiKubun",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "chosaIraiKubun"
+                                    },
+                                    {
+                                        "columnName": "調査データ<br>入力",
+                                        "dataName": "chosaDataInputYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "chosaDataInputYmd"
+                                    },
+                                    {
+                                        "columnName": "調査地区",
+                                        "dataName": "chosaChiku",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 150,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "chosaChiku"
+                                    },
+                                    {
+                                        "columnName": "調査委託先",
+                                        "dataName": "konkaiChosaItakusaki",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 250,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "konkaiChosaItakusaki"
+                                    },
+                                    {
+                                        "columnName": "調査員",
+                                        "dataName": "konkaiChosain",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 200,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "konkaiChosain"
+                                    },
+                                    {
+                                        "columnName": "調査委託先",
+                                        "dataName": "zenkaiChosaItakusaki",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 250,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "zenkaiChosaItakusaki"
+                                    },
+                                    {
+                                        "columnName": "調査員",
+                                        "dataName": "zenkaiChosain",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 200,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "zenkaiChosain"
+                                    },
+                                    {
+                                        "columnName": "調査委託先",
+                                        "dataName": "zenzenkaiChosaItakusaki",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 250,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "zenzenkaiChosaItakusaki"
+                                    },
+                                    {
+                                        "columnName": "調査員",
+                                        "dataName": "zenzenkaiChosain",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 200,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "zenzenkaiChosain"
+                                    },
+                                    {
+                                        "columnName": "郵便番号",
+                                        "dataName": "chosaItakusakiYubinNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "chosaItakusakiYubinNo"
+                                    },
+                                    {
+                                        "columnName": "住所",
+                                        "dataName": "chosaItakusakiJusho",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 300,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "chosaItakusakiJusho"
+                                    },
+                                    {
+                                        "columnName": "完了日",
+                                        "dataName": "ikenshoIraiKanryoYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ikenshoIraiKanryoYmd"
+                                    },
+                                    {
+                                        "columnName": "完了日",
+                                        "dataName": "ikenshoNyushuKanryoYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ikenshoNyushuKanryoYmd"
+                                    },
+                                    {
+                                        "columnName": "意見<br>（再）",
+                                        "dataName": "ikenSaiIrai",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 60,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ikenSaiIrai"
+                                    },
+                                    {
+                                        "columnName": "依頼日",
+                                        "dataName": "ikenIraiYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ikenIraiYmd"
+                                    },
+                                    {
+                                        "columnName": "依頼書<br>発行日",
+                                        "dataName": "ikenshoIraishoHakkoYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ikenshoIraishoHakkoYmd"
+                                    },
+                                    {
+                                        "columnName": "意見書<br>出力日",
+                                        "dataName": "ikenshoOutYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ikenshoOutYmd"
+                                    },
+                                    {
+                                        "columnName": "依頼<br>登録日",
+                                        "dataName": "ikenshoIraiTorokuYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ikenshoIraiTorokuYmd"
+                                    },
+                                    {
+                                        "columnName": "依頼<br>期限",
+                                        "dataName": "ikenshoIraiKigenYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ikenshoIraiKigenYmd"
+                                    },
+                                    {
+                                        "columnName": "依頼<br>回数",
+                                        "dataName": "ikenshoIraiKaisu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 60,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ikenshoIraiKaisu"
+                                    },
+                                    {
+                                        "columnName": "意見書<br>(定型)",
+                                        "dataName": "ikenshoTeikei",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ikenshoTeikei"
+                                    },
+                                    {
+                                        "columnName": "意見書<br>(定型外)",
+                                        "dataName": "ikenshoTeikeigai",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ikenshoTeikeigai"
+                                    },
+                                    {
+                                        "columnName": "5項目<br>入力",
+                                        "dataName": "gokomokuNyuryoku",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "gokomokuNyuryoku"
+                                    },
+                                    {
+                                        "columnName": "医療機関",
+                                        "dataName": "konkaiIryoKikan",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 250,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "konkaiIryoKikan"
+                                    },
+                                    {
+                                        "columnName": "主治医",
+                                        "dataName": "konkaiShujii",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 200,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "konkaiShujii"
+                                    },
+                                    {
+                                        "columnName": "医療機関",
+                                        "dataName": "zenkaiIryoKikan",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 250,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "zenkaiIryoKikan"
+                                    },
+                                    {
+                                        "columnName": "主治医",
+                                        "dataName": "zenkaiShujii",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 200,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "zenkaiShujii"
+                                    },
+                                    {
+                                        "columnName": "郵便番号",
+                                        "dataName": "iryokikanYubinNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "iryokikanYubinNo"
+                                    },
+                                    {
+                                        "columnName": "住所",
+                                        "dataName": "iryokikanJusho",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 300,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "iryokikanJusho"
+                                    },
+                                    {
+                                        "columnName": "入所施設",
+                                        "dataName": "nyushoShisetsu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 250,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "nyushoShisetsu"
+                                    },
+                                    {
+                                        "columnName": "発行日",
+                                        "dataName": "chosahyoTokusokuHakkoYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "chosahyoTokusokuHakkoYmd"
+                                    },
+                                    {
+                                        "columnName": "方法",
+                                        "dataName": "chosahyoTokusokuPattern",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "chosahyoTokusokuPattern"
+                                    },
+                                    {
+                                        "columnName": "回数",
+                                        "dataName": "chosahyoTokusokuKaisu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "chosahyoTokusokuKaisu"
+                                    },
+                                    {
+                                        "columnName": "期限",
+                                        "dataName": "chosahyoTokusokuKigenYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "chosahyoTokusokuKigenYmd"
+                                    },
+                                    {
+                                        "columnName": "発行日",
+                                        "dataName": "ikenshoTokusokuHakkoYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ikenshoTokusokuHakkoYmd"
+                                    },
+                                    {
+                                        "columnName": "方法",
+                                        "dataName": "ikenshoTokusokuPattern",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ikenshoTokusokuPattern"
+                                    },
+                                    {
+                                        "columnName": "回数",
+                                        "dataName": "ikenshoTokusokuKaisu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 2,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ikenshoTokusokuKaisu"
+                                    },
+                                    {
+                                        "columnName": "期限",
+                                        "dataName": "ikenshoTokusokuKigenYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ikenshoTokusokuKigenYmd"
+                                    },
+                                    {
+                                        "columnName": "完了日",
+                                        "dataName": "ichijiHanteiKanryoYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ichijiHanteiKanryoYmd"
+                                    },
+                                    {
+                                        "columnName": "再調査",
+                                        "dataName": "saiChosa",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 60,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "saiChosa"
+                                    },
+                                    {
+                                        "columnName": "再意見",
+                                        "dataName": "saiIken",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 60,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "saiIken"
+                                    },
+                                    {
+                                        "columnName": "調査一次",
+                                        "dataName": "chosaIchiji",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "chosaIchiji"
+                                    },
+                                    {
+                                        "columnName": "意見一次",
+                                        "dataName": "ikenIchiji",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ikenIchiji"
+                                    },
+                                    {
+                                        "columnName": "一次判定<br>結果",
+                                        "dataName": "ichijiHanteiKekka",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 120,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "ichijiHanteiKekka"
+                                    },
+                                    {
+                                        "columnName": "警告<br>コード",
+                                        "dataName": "keikokuCode",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "keikokuCode"
+                                    },
+                                    {
+                                        "columnName": "完了日",
+                                        "dataName": "shinsakaiTorokuKanryoYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shinsakaiTorokuKanryoYmd"
+                                    },
+                                    {
+                                        "columnName": "再審査",
+                                        "dataName": "saiShinsa",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 60,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "saiShinsa"
+                                    },
+                                    {
+                                        "columnName": "審査会<br>割付日",
+                                        "dataName": "shinsakaiWaritsukeYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shinsakaiWaritsukeYmd"
+                                    },
+                                    {
+                                        "columnName": "審査会<br>開催日",
+                                        "dataName": "shinsakaiKaisaiYmd",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 85,
+                                        "visible": true,
+                                        "cellType": 7,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "ymdKubun": 2,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "isSetValueToToolTip": false,
+                                            "readOnly": true
+                                        },
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shinsakaiKaisaiYmd"
+                                    },
+                                    {
+                                        "columnName": "開催時間",
+                                        "dataName": "kaisaiJikan",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 60,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "kaisaiJikan"
+                                    },
+                                    {
+                                        "columnName": "優先<br>割付者",
+                                        "dataName": "yusenWaritsukesha",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "yusenWaritsukesha"
+                                    },
+                                    {
+                                        "columnName": "審査会<br>番号",
+                                        "dataName": "shinsakaiNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 80,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 1,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shinsakaiNo"
+                                    },
+                                    {
+                                        "columnName": "合議体",
+                                        "dataName": "gogitai",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 150,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "gogitai"
+                                    },
+                                    {
+                                        "columnName": "申請から",
+                                        "dataName": "shinseiKeikaNissu",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 100,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shinseiKeikaNissu"
+                                    },
+                                    {
+                                        "columnName": "取下げ区分",
+                                        "dataName": "torisageKubun",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 120,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "torisageKubun"
+                                    },
+                                    {
+                                        "columnName": "通知区分",
+                                        "dataName": "tsuchiKubun",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 120,
+                                        "visible": true,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": true,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "tsuchiKubun"
+                                    },
+                                    {
+                                        "columnName": "申請書管理番号",
+                                        "dataName": "shinseishoKanriNo",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "shinseishoKanriNo"
+                                    },
+                                    {
+                                        "columnName": "厚労省ＩＦ識別コード",
+                                        "dataName": "koroshoIfShikibetsuCode",
+                                        "toolTip": "",
+                                        "bgColor": 0,
+                                        "width": 0,
+                                        "visible": false,
+                                        "cellType": 0,
+                                        "cellDetails": null,
+                                        "align": 0,
+                                        "resize": false,
+                                        "isPrivateInfo": false,
+                                        "sortKey": "koroshoIfShikibetsuCode"
+                                    }
+                                ]
+                            },
+                            "onSort": "",
+                            "onSelect": "",
+                            "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "dataSource": [],
+                            "sortOrder": "shinseiYmd",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1,
+                            "gridAction": []
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G12",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "0px",
+                    "marginRight": "0px",
+                    "selectControlID": "DankaibetsuShinseiList",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": false,
+                    "postParameterPanelNames": [],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": true,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "530px",
+                    "canPost": false
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "0px",
+            "marginRight": "0px",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBE",
+            "controlName": "DankaibetsuShinseiList",
+            "marginTop": "0px",
+            "marginBottom": "0px",
+            "originalProperty": [],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "M",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
+        };
+        return DankaibetsuShinseiList_Design;
+    })(Uz.CommonChildDiv);
+    DBE.DankaibetsuShinseiList_Design = DankaibetsuShinseiList_Design;
+
+    (function (DankaibetsuShinseiList) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnToSearch = function () {
+                return "onClick_btnToSearch";
+            };
+            return Events;
+        })();
+        DankaibetsuShinseiList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "DankaibetsuShinseiList";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBE.DankaibetsuShinseiList.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBE.DankaibetsuShinseiList.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.DankaibetsuShinseiList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.btnToSearch = function () {
+                return new UZA.Button(this.convFiledName("btnToSearch"));
+            };
+
+            Controls.prototype.txtKanryo = function () {
+                return new UZA.TextBox(this.convFiledName("txtKanryo"));
+            };
+
+            Controls.prototype.txtGokei = function () {
+                return new UZA.TextBox(this.convFiledName("txtGokei"));
+            };
+
+            Controls.prototype.btnNarabikae = function () {
+                return new UZA.ButtonDialog(this.convFiledName("btnNarabikae"));
+            };
+
+            Controls.prototype.dgTaishoIchiran = function () {
+                return new UZA.DataGrid(this.convFiledName("dgTaishoIchiran"));
+            };
+            return Controls;
+        })();
+        DankaibetsuShinseiList.Controls = Controls;
+    })(DBE.DankaibetsuShinseiList || (DBE.DankaibetsuShinseiList = {}));
+    var DankaibetsuShinseiList = DBE.DankaibetsuShinseiList;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (DankaibetsuShinseiList) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new DankaibetsuShinseiList.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        DankaibetsuShinseiList.ModeController = ModeController;
+    })(DBE.DankaibetsuShinseiList || (DBE.DankaibetsuShinseiList = {}));
+    var DankaibetsuShinseiList = DBE.DankaibetsuShinseiList;
+})(DBE || (DBE = {}));
+</script>
+</div>
