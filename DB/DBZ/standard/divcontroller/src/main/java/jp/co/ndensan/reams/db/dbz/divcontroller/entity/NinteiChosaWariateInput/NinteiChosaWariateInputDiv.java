@@ -122,12 +122,12 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtNinteiChosaDate() {
+    public TextBoxFlexibleDate getTxtNinteiChosaDate() {
         return this.getWariateJokyo().getTxtNinteiChosaDate();
     }
 
     @JsonIgnore
-    public void  setTxtNinteiChosaDate(TextBoxDate txtNinteiChosaDate) {
+    public void  setTxtNinteiChosaDate(TextBoxFlexibleDate txtNinteiChosaDate) {
         this.getWariateJokyo().setTxtNinteiChosaDate(txtNinteiChosaDate);
     }
 
@@ -212,12 +212,12 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtNinteiShinseiDate() {
+    public TextBoxFlexibleDate getTxtNinteiShinseiDate() {
         return this.getTaishoshaShosai().getTxtNinteiShinseiDate();
     }
 
     @JsonIgnore
-    public void  setTxtNinteiShinseiDate(TextBoxDate txtNinteiShinseiDate) {
+    public void  setTxtNinteiShinseiDate(TextBoxFlexibleDate txtNinteiShinseiDate) {
         this.getTaishoshaShosai().setTxtNinteiShinseiDate(txtNinteiShinseiDate);
     }
 
@@ -319,6 +319,26 @@ public class NinteiChosaWariateInputDiv extends Panel implements INinteiChosaWar
     @JsonIgnore
     public void  setTxtTaishoshaShosaiMemo(TextBoxMultiLine txtTaishoshaShosaiMemo) {
         this.getTaishoshaShosai().setTxtTaishoshaShosaiMemo(txtTaishoshaShosaiMemo);
+    }
+
+    @JsonIgnore
+    public Space getSpSpace1() {
+        return this.getTaishoshaShosai().getSpSpace1();
+    }
+
+    @JsonIgnore
+    public void  setSpSpace1(Space spSpace1) {
+        this.getTaishoshaShosai().setSpSpace1(spSpace1);
+    }
+
+    @JsonIgnore
+    public Button getBtnClear() {
+        return this.getTaishoshaShosai().getBtnClear();
+    }
+
+    @JsonIgnore
+    public void  setBtnClear(Button btnClear) {
+        this.getTaishoshaShosai().setBtnClear(btnClear);
     }
 
     // </editor-fold>

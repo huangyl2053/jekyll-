@@ -30,7 +30,7 @@ public class WariateJokyoDiv extends Panel {
     @JsonProperty("txtNinteiChosaItakusakiName")
     private TextBox txtNinteiChosaItakusakiName;
     @JsonProperty("txtNinteiChosaDate")
-    private TextBoxDate txtNinteiChosaDate;
+    private TextBoxFlexibleDate txtNinteiChosaDate;
     @JsonProperty("txtNinteiChosaTime")
     private TextBox txtNinteiChosaTime;
     @JsonProperty("txtNinteiChosaTimeFrame")
@@ -89,12 +89,12 @@ public class WariateJokyoDiv extends Panel {
     }
 
     @JsonProperty("txtNinteiChosaDate")
-    public TextBoxDate getTxtNinteiChosaDate() {
+    public TextBoxFlexibleDate getTxtNinteiChosaDate() {
         return txtNinteiChosaDate;
     }
 
     @JsonProperty("txtNinteiChosaDate")
-    public void setTxtNinteiChosaDate(TextBoxDate txtNinteiChosaDate) {
+    public void setTxtNinteiChosaDate(TextBoxFlexibleDate txtNinteiChosaDate) {
         this.txtNinteiChosaDate=txtNinteiChosaDate;
     }
 

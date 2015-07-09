@@ -28,7 +28,7 @@ public class TaishoshaShosaiDiv extends Panel {
     @JsonProperty("txtHokenshaName")
     private TextBox txtHokenshaName;
     @JsonProperty("txtNinteiShinseiDate")
-    private TextBoxDate txtNinteiShinseiDate;
+    private TextBoxFlexibleDate txtNinteiShinseiDate;
     @JsonProperty("txtNinteiShinseiKubun")
     private TextBox txtNinteiShinseiKubun;
     @JsonProperty("txtTaishoshaName")
@@ -49,6 +49,10 @@ public class TaishoshaShosaiDiv extends Panel {
     private TextBox txtRenrakusaki2;
     @JsonProperty("txtTaishoshaShosaiMemo")
     private TextBoxMultiLine txtTaishoshaShosaiMemo;
+    @JsonProperty("spSpace1")
+    private Space spSpace1;
+    @JsonProperty("btnClear")
+    private Button btnClear;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -87,12 +91,12 @@ public class TaishoshaShosaiDiv extends Panel {
     }
 
     @JsonProperty("txtNinteiShinseiDate")
-    public TextBoxDate getTxtNinteiShinseiDate() {
+    public TextBoxFlexibleDate getTxtNinteiShinseiDate() {
         return txtNinteiShinseiDate;
     }
 
     @JsonProperty("txtNinteiShinseiDate")
-    public void setTxtNinteiShinseiDate(TextBoxDate txtNinteiShinseiDate) {
+    public void setTxtNinteiShinseiDate(TextBoxFlexibleDate txtNinteiShinseiDate) {
         this.txtNinteiShinseiDate=txtNinteiShinseiDate;
     }
 
@@ -194,6 +198,26 @@ public class TaishoshaShosaiDiv extends Panel {
     @JsonProperty("txtTaishoshaShosaiMemo")
     public void setTxtTaishoshaShosaiMemo(TextBoxMultiLine txtTaishoshaShosaiMemo) {
         this.txtTaishoshaShosaiMemo=txtTaishoshaShosaiMemo;
+    }
+
+    @JsonProperty("spSpace1")
+    public Space getSpSpace1() {
+        return spSpace1;
+    }
+
+    @JsonProperty("spSpace1")
+    public void setSpSpace1(Space spSpace1) {
+        this.spSpace1=spSpace1;
+    }
+
+    @JsonProperty("btnClear")
+    public Button getBtnClear() {
+        return btnClear;
+    }
+
+    @JsonProperty("btnClear")
+    public void setBtnClear(Button btnClear) {
+        this.btnClear=btnClear;
     }
 
     // </editor-fold>

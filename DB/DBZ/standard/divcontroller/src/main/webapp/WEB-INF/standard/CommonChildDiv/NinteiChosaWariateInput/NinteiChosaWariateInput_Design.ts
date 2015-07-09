@@ -53,8 +53,8 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtNinteiChosaItakusakiName"));
             }
 
-            public txtNinteiChosaDate(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaDate"));
+            public txtNinteiChosaDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiChosaDate"));
             }
 
             public txtNinteiChosaTime(): UZA.TextBox {
@@ -101,8 +101,8 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtHokenshaName"));
             }
 
-            public txtNinteiShinseiDate(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiShinseiDate"));
+            public txtNinteiShinseiDate(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiShinseiDate"));
             }
 
             public txtNinteiShinseiKubun(): UZA.TextBox {
@@ -143,6 +143,14 @@ module DBZ {
 
             public txtTaishoshaShosaiMemo(): UZA.TextBoxMultiLine {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtTaishoshaShosaiMemo"));
+            }
+
+            public spSpace1(): UZA.Space {
+                return new UZA.Space(this.convFiledName("spSpace1"));
+            }
+
+            public btnClear(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnClear"));
             }
 
         }

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ScopeCodeType;
 import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ur.urz.business.RecentUsedDdlValue;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.ScopeCode;
 import jp.co.ndensan.reams.ur.urz.realservice.ISaikinShorishaManager;
 import jp.co.ndensan.reams.ur.urz.realservice.RecentUsedManagerFactory;
@@ -179,7 +180,7 @@ public class HihokenshaFinderHandler {
      * @return 最近処理者
      */
     RString get最近処理者() {
-        RecentUsed 最近処理者 = div.getCcdSaikinShorisha().getWrappedSaikinShorishaRireki().getRecentUsed();
+        RecentUsedDdlValue 最近処理者 = div.getCcdSaikinShorisha().getWrappedSaikinShorishaRireki().getRecentUsed();
         return 最近処理者 != null ? 最近処理者.get最近処理対象コード() : RString.EMPTY;
     }
 }

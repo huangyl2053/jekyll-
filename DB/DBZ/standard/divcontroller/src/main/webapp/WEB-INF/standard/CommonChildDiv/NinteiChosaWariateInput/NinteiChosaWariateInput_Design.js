@@ -49,7 +49,7 @@ var DBZ;
             };
 
             Controls.prototype.txtNinteiChosaDate = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaDate"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiChosaDate"));
             };
 
             Controls.prototype.txtNinteiChosaTime = function () {
@@ -97,7 +97,7 @@ var DBZ;
             };
 
             Controls.prototype.txtNinteiShinseiDate = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiShinseiDate"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiShinseiDate"));
             };
 
             Controls.prototype.txtNinteiShinseiKubun = function () {
@@ -138,6 +138,14 @@ var DBZ;
 
             Controls.prototype.txtTaishoshaShosaiMemo = function () {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtTaishoshaShosaiMemo"));
+            };
+
+            Controls.prototype.spSpace1 = function () {
+                return new UZA.Space(this.convFiledName("spSpace1"));
+            };
+
+            Controls.prototype.btnClear = function () {
+                return new UZA.Button(this.convFiledName("btnClear"));
             };
             return Controls;
         })();
