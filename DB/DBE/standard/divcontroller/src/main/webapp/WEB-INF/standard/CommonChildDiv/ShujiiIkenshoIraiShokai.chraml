@@ -1,0 +1,96 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBE&quot;,&quot;controlName&quot;:&quot;ShujiiIkenshoIraiShokai&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}" data-is-composite-control="true" data-control-name="DBE.ShujiiIkenshoIraiShokai"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel Width-G12 UzCompositeChild" id="ShujiiIkenshoIraiShokai" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ShujiiIkenshoIraiShokai&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G12&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;ShujiiIkenshoIraiShokai&quot;,&quot;title&quot;:&quot;要介護認定主治医意見書作成依頼照会&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ShujiiIkenshoIraiShokai&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ShujiiIkenshoIraiShokai_panel_header_area" style="display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">要介護認定主治医意見書作成依頼照会</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="ShujiiIkenshoIraiShokai_panel_body_area"><div class="StateChangable UzPanel JSControl FloatLeft marginLeft-XS marginRight-XS UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M Panel-Shadow Width-G1 UzCompositeChild" id="KaigoShikakuKihonDummy" style="width: auto; margin-top: 0px; margin-bottom: 0px; position: relative; opacity: 1;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KaigoShikakuKihonDummy&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;selectControlID&quot;:&quot;KaigoShikakuKihonDummy&quot;,&quot;title&quot;:&quot;DBZ.KaigoShikakuKihon&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;focusPositionID&quot;:&quot;ui-accordion-WestAccordion-header-0&quot;,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="KaigoShikakuKihonDummy_panel_header_area" style="display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">DBZ.KaigoShikakuKihon</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="KaigoShikakuKihonDummy_panel_body_area"><div class="UzSpace JSControl controlMargin-M ClearFloat Width-Default Height-XS UzCompositeChild" id="spSpace" data-control-type="Space" data-obj="{&quot;fieldName&quot;:&quot;spSpace&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Space&quot;,&quot;width&quot;:&quot;Default&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;spSpace&quot;}"></div></div></div><div class="UzDataGrid JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M ClearFloat Height-M UzCompositeChild" id="dgIkenshoIraiShujiiIchiran" style="width: 1095px; opacity: 1;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgIkenshoIraiShujiiIchiran&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;1095px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;dgIkenshoIraiShujiiIchiran&quot;,&quot;height&quot;:&quot;M&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowClearSortButton&quot;:false,&quot;isShowSelectedRowCount&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowRowState&quot;:false,&quot;columns&quot;:[{&quot;columnName&quot;:&quot;No&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;number&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:80,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;number&quot;},{&quot;columnName&quot;:&quot;認定申請日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;ninyeiShonseibi&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;ninyeiShonseibi&quot;},{&quot;columnName&quot;:&quot;申請区分&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;shinseiKubun&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;shinseiKubun&quot;},{&quot;columnName&quot;:&quot;申請取消日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;niteiTorikeshibi&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;niteiTorikeshibi&quot;},{&quot;columnName&quot;:&quot;認定日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;ninteibi&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;ninteibi&quot;},{&quot;columnName&quot;:&quot;要介護度&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;yokaigodo&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;yokaigodo&quot;},{&quot;columnName&quot;:&quot;有効期間&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;yukoKikan&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;yukoKikan&quot;},{&quot;columnName&quot;:&quot;医療機関番号&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;iryoKikanNumber&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;iryoKikanNumber&quot;},{&quot;columnName&quot;:&quot;医療機関名称&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;iryoKikanMeisho&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;iryoKikanMeisho&quot;},{&quot;columnName&quot;:&quot;主治医コード&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;shujiiCode&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;shujiiCode&quot;},{&quot;columnName&quot;:&quot;主治医情報&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;shujiiJoho&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:150,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;shujiiJoho&quot;}],&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:1,&quot;groupHeaderHeight&quot;:0},&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;sortOrder&quot;:&quot;ninyeiShonseibi&quot;,&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgIkenshoIraiShujiiIchiran_grid_table" role="" style="width: 1095px; height: 365px; position: relative;"></div><div id="dgIkenshoIraiShujiiIchiran_footer" style="width: 1095px; height: 25px;"></div></div></div></div>    <script class="RamlConvert" type="text/javascript">
+var DBE= DBE? DBE: {};
+DBE['SHUJIIIKENSHOIRAISHOKAI'] = {};
+DBE['SHUJIIIKENSHOIRAISHOKAI'].ShujiiIkenshoIraiShokaiRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShujiiIkenshoIraiShokai').getProperty();parameter0.KaigoShikakuKihonDummy = Uz.JSControlUtil.getJSControl(parentFieldName + '_KaigoShikakuKihonDummy').getProperty();parameter0.KaigoShikakuKihonDummy.spSpace = Uz.JSControlUtil.getJSControl(parentFieldName + '_spSpace').getProperty();parameter0.dgIkenshoIraiShujiiIchiran = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgIkenshoIraiShujiiIchiran').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBE;
+(function (DBE) {
+    (function (ShujiiIkenshoIraiShokai) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ShujiiIkenshoIraiShokai.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ShujiiIkenshoIraiShokai";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBE.ShujiiIkenshoIraiShokai.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBE.ShujiiIkenshoIraiShokai.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ShujiiIkenshoIraiShokai = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.KaigoShikakuKihonDummy = function () {
+                return new UZA.Panel(this.convFiledName("KaigoShikakuKihonDummy"));
+            };
+
+            Controls.prototype.spSpace = function () {
+                return new UZA.Space(this.convFiledName("spSpace"));
+            };
+
+            Controls.prototype.dgIkenshoIraiShujiiIchiran = function () {
+                return new UZA.DataGrid(this.convFiledName("dgIkenshoIraiShujiiIchiran"));
+            };
+            return Controls;
+        })();
+        ShujiiIkenshoIraiShokai.Controls = Controls;
+    })(DBE.ShujiiIkenshoIraiShokai || (DBE.ShujiiIkenshoIraiShokai = {}));
+    var ShujiiIkenshoIraiShokai = DBE.ShujiiIkenshoIraiShokai;
+})(DBE || (DBE = {}));
+var DBE;
+(function (DBE) {
+    (function (ShujiiIkenshoIraiShokai) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShujiiIkenshoIraiShokai.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new ShujiiIkenshoIraiShokai.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ShujiiIkenshoIraiShokai.ModeController = ModeController;
+    })(DBE.ShujiiIkenshoIraiShokai || (DBE.ShujiiIkenshoIraiShokai = {}));
+    var ShujiiIkenshoIraiShokai = DBE.ShujiiIkenshoIraiShokai;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (ShujiiIkenshoIraiShokai) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShujiiIkenshoIraiShokai.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ShujiiIkenshoIraiShokai.PublicProperties = PublicProperties;
+    })(DBE.ShujiiIkenshoIraiShokai || (DBE.ShujiiIkenshoIraiShokai = {}));
+    var ShujiiIkenshoIraiShokai = DBE.ShujiiIkenshoIraiShokai;
+})(DBE || (DBE = {}));
+</script></div>
