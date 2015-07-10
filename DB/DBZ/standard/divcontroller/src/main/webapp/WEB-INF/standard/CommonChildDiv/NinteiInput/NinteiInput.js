@@ -1,5 +1,5 @@
-var DBZ;
-(function (DBZ) {
+var DBD;
+(function (DBD) {
     (function (NinteiInput) {
         var ModeController = (function () {
             function ModeController(fieldName) {
@@ -13,19 +13,19 @@ var DBZ;
             ModeController.prototype.PublicProperties = function () {
                 return new NinteiInput.PublicProperties(this.fieldName);
             };
-            ModeController.prototype.shoriType = function () {
-                return new Modes.shoriType(this.controls);
+            ModeController.prototype.ShoriType = function () {
+                return new Modes.ShoriType(this.controls);
             };
             return ModeController;
         })();
         NinteiInput.ModeController = ModeController;
 
         (function (Modes) {
-            var shoriType = (function () {
-                function shoriType(controls) {
+            var ShoriType = (function () {
+                function ShoriType(controls) {
                     this.controls = controls;
                 }
-                shoriType.prototype.TemnyuMode = function () {
+                ShoriType.prototype.TemnyuMode = function () {
                     this.controls.txtNinteiYMD().readOnly = false;
                     this.controls.txtShinsakaiIken().readOnly = false;
                     this.controls.txtYokaigodoCode().readOnly = false;
@@ -33,7 +33,9 @@ var DBZ;
                     this.controls.txtYukoKaishiYMD().readOnly = false;
                     this.controls.txtYukoShuryoYMD().readOnly = false;
 
+                    this.controls.radNinteiKubun().selectedItem = "0";
                     this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = false;
 
                     this.controls.dgServiceIchiran().readOnly = false;
 
@@ -47,7 +49,7 @@ var DBZ;
                     this.controls.btnAfter24Month().disabled = false;
                 };
 
-                shoriType.prototype.InputMode = function () {
+                ShoriType.prototype.InputMode = function () {
                     this.controls.txtNinteiYMD().readOnly = false;
                     this.controls.txtShinsakaiIken().readOnly = false;
                     this.controls.txtYokaigodoCode().readOnly = false;
@@ -55,8 +57,9 @@ var DBZ;
                     this.controls.txtYukoKaishiYMD().readOnly = false;
                     this.controls.txtYukoShuryoYMD().readOnly = false;
 
-                    this.controls.radNinteiKubun().readOnly = false;
-                    this.controls.radNinteiKubun().selectedItem = "key0";
+                    this.controls.radNinteiKubun().selectedItem = "0";
+                    this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = false;
 
                     this.controls.dgServiceIchiran().readOnly = false;
 
@@ -68,7 +71,7 @@ var DBZ;
                     this.controls.btnAfter18Month().disabled = false;
                     this.controls.btnAfter24Month().disabled = false;
                 };
-                shoriType.prototype.TokushuTsuikaMode = function () {
+                ShoriType.prototype.TokushuTsuikaMode = function () {
                     this.controls.txtNinteiYMD().readOnly = false;
                     this.controls.txtShinsakaiIken().readOnly = false;
                     this.controls.txtYokaigodoCode().readOnly = false;
@@ -76,8 +79,9 @@ var DBZ;
                     this.controls.txtYukoKaishiYMD().readOnly = false;
                     this.controls.txtYukoShuryoYMD().readOnly = false;
 
-                    this.controls.radNinteiKubun().readOnly = false;
-                    this.controls.radNinteiKubun().selectedItem = "key0";
+                    this.controls.radNinteiKubun().selectedItem = "0";
+                    this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = false;
 
                     this.controls.dgServiceIchiran().readOnly = false;
 
@@ -89,7 +93,7 @@ var DBZ;
                     this.controls.btnAfter18Month().disabled = false;
                     this.controls.btnAfter24Month().disabled = false;
                 };
-                shoriType.prototype.TokushuShuseiMode = function () {
+                ShoriType.prototype.TokushuShuseiMode = function () {
                     this.controls.txtNinteiYMD().readOnly = false;
                     this.controls.txtShinsakaiIken().readOnly = false;
                     this.controls.txtYokaigodoCode().readOnly = false;
@@ -97,8 +101,9 @@ var DBZ;
                     this.controls.txtYukoKaishiYMD().readOnly = false;
                     this.controls.txtYukoShuryoYMD().readOnly = false;
 
-                    this.controls.radNinteiKubun().readOnly = false;
-                    this.controls.radNinteiKubun().selectedItem = "key0";
+                    this.controls.radNinteiKubun().selectedItem = "0";
+                    this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = false;
 
                     this.controls.dgServiceIchiran().readOnly = false;
 
@@ -110,7 +115,7 @@ var DBZ;
                     this.controls.btnAfter18Month().disabled = false;
                     this.controls.btnAfter24Month().disabled = false;
                 };
-                shoriType.prototype.ShokaiMode = function () {
+                ShoriType.prototype.ShokaiMode = function () {
                     this.controls.txtNinteiYMD().readOnly = true;
                     this.controls.txtShinsakaiIken().readOnly = true;
                     this.controls.txtYokaigodoCode().readOnly = true;
@@ -118,8 +123,9 @@ var DBZ;
                     this.controls.txtYukoKaishiYMD().readOnly = true;
                     this.controls.txtYukoShuryoYMD().readOnly = true;
 
+                    this.controls.radNinteiKubun().selectedItem = "0";
                     this.controls.radNinteiKubun().readOnly = true;
-                    this.controls.radNinteiKubun().selectedItem = "key0";
+                    this.controls.radNinteiKubun().displayNone = false;
 
                     this.controls.dgServiceIchiran().readOnly = true;
 
@@ -131,7 +137,7 @@ var DBZ;
                     this.controls.btnAfter18Month().disabled = true;
                     this.controls.btnAfter24Month().disabled = true;
                 };
-                shoriType.prototype.NinteiMode = function () {
+                ShoriType.prototype.NinteiMode = function () {
                     this.controls.txtNinteiYMD().readOnly = false;
                     this.controls.txtShinsakaiIken().readOnly = false;
                     this.controls.txtYokaigodoCode().readOnly = false;
@@ -140,6 +146,7 @@ var DBZ;
                     this.controls.txtYukoShuryoYMD().readOnly = false;
 
                     this.controls.radNinteiKubun().readOnly = false;
+                    this.controls.radNinteiKubun().displayNone = false;
 
                     this.controls.dgServiceIchiran().readOnly = true;
 
@@ -151,7 +158,7 @@ var DBZ;
                     this.controls.btnAfter18Month().disabled = false;
                     this.controls.btnAfter24Month().disabled = false;
                 };
-                shoriType.prototype.ShokkenMode = function () {
+                ShoriType.prototype.ShokkenTsuikaMode = function () {
                     this.controls.txtNinteiYMD().readOnly = false;
                     this.controls.txtShinsakaiIken().readOnly = false;
                     this.controls.txtYokaigodoCode().readOnly = false;
@@ -160,6 +167,7 @@ var DBZ;
                     this.controls.txtYukoShuryoYMD().readOnly = false;
 
                     this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = false;
 
                     this.controls.dgServiceIchiran().readOnly = false;
 
@@ -171,7 +179,28 @@ var DBZ;
                     this.controls.btnAfter18Month().disabled = false;
                     this.controls.btnAfter24Month().disabled = false;
                 };
-                shoriType.prototype.IchibuSoshitsuMode = function () {
+                ShoriType.prototype.ShokkenShuseiMode = function () {
+                    this.controls.txtNinteiYMD().readOnly = false;
+                    this.controls.txtShinsakaiIken().readOnly = false;
+                    this.controls.txtYokaigodoCode().readOnly = false;
+                    this.controls.txtYokaigodoName().readOnly = true;
+                    this.controls.txtYukoKaishiYMD().readOnly = false;
+                    this.controls.txtYukoShuryoYMD().readOnly = false;
+
+                    this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = true;
+
+                    this.controls.dgServiceIchiran().readOnly = false;
+
+                    this.controls.chkMinashiKoshinNintei().readOnly = true;
+
+                    this.controls.btnYokaigodoGuide().disabled = false;
+                    this.controls.btnAfter6Month().disabled = false;
+                    this.controls.btnAfter12Month().disabled = false;
+                    this.controls.btnAfter18Month().disabled = false;
+                    this.controls.btnAfter24Month().disabled = false;
+                };
+                ShoriType.prototype.IchibuSoshitsuMode = function () {
                     this.controls.txtNinteiYMD().readOnly = false;
                     this.controls.txtShinsakaiIken().readOnly = true;
                     this.controls.txtYokaigodoCode().readOnly = true;
@@ -179,7 +208,9 @@ var DBZ;
                     this.controls.txtYukoKaishiYMD().readOnly = false;
                     this.controls.txtYukoShuryoYMD().readOnly = true;
 
+                    this.controls.radNinteiKubun().selectedItem = "0";
                     this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = true;
 
                     this.controls.dgServiceIchiran().readOnly = true;
 
@@ -191,17 +222,17 @@ var DBZ;
                     this.controls.btnAfter18Month().disabled = true;
                     this.controls.btnAfter24Month().disabled = true;
                 };
-                return shoriType;
+                return ShoriType;
             })();
-            Modes.shoriType = shoriType;
+            Modes.ShoriType = ShoriType;
         })(NinteiInput.Modes || (NinteiInput.Modes = {}));
         var Modes = NinteiInput.Modes;
-    })(DBZ.NinteiInput || (DBZ.NinteiInput = {}));
-    var NinteiInput = DBZ.NinteiInput;
-})(DBZ || (DBZ = {}));
+    })(DBD.NinteiInput || (DBD.NinteiInput = {}));
+    var NinteiInput = DBD.NinteiInput;
+})(DBD || (DBD = {}));
 
-var DBZ;
-(function (DBZ) {
+var DBD;
+(function (DBD) {
     (function (NinteiInput) {
         var PublicProperties = (function () {
             function PublicProperties(fieldName) {
@@ -216,6 +247,6 @@ var DBZ;
             return PublicProperties;
         })();
         NinteiInput.PublicProperties = PublicProperties;
-    })(DBZ.NinteiInput || (DBZ.NinteiInput = {}));
-    var NinteiInput = DBZ.NinteiInput;
-})(DBZ || (DBZ = {}));
+    })(DBD.NinteiInput || (DBD.NinteiInput = {}));
+    var NinteiInput = DBD.NinteiInput;
+})(DBD || (DBD = {}));

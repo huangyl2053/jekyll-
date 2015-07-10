@@ -2,11 +2,35 @@
 /// <reference path="../../d.ts/UzViewControls.d.ts" />
 /// <reference path="../../d.ts/UzaConverter.d.ts" />
 
-module DBZ {
+module DBD {
 
      export module NinteiInput {
 
         export class Events {
+
+            public static onChange_radNinteiKubun(): string {
+                return "onChange_radNinteiKubun";
+            }
+
+            public static onBeforeClick_btnValidate(): string {
+                return "onBeforeClick_btnValidate";
+            }
+
+            public static onClick_btnSixMonthLater(): string {
+                return "onClick_btnSixMonthLater";
+            }
+
+            public static onClick_btnTwelveMonthLater(): string {
+                return "onClick_btnTwelveMonthLater";
+            }
+
+            public static onClick_btnEigtheenMonthLater(): string {
+                return "onClick_btnEigtheenMonthLater";
+            }
+
+            public static onClick_btnTwentyfourMonthLater(): string {
+                return "onClick_btnTwentyfourMonthLater";
+            }
 
         }
 
@@ -22,11 +46,11 @@ module DBZ {
             }
 
             public convFiledNameSelf(): string {
-                return this._myName + "_" + DBZ.NinteiInput.Controls.myType();
+                return this._myName + "_" + DBD.NinteiInput.Controls.myType();
             }
 
             public convFiledName(fieldName: string): string {
-                return this._myName + "_" + DBZ.NinteiInput.Controls.myType() + "_" + fieldName;
+                return this._myName + "_" + DBD.NinteiInput.Controls.myType() + "_" + fieldName;
             }
 
             public NinteiInput(): UZA.Panel {
@@ -45,8 +69,8 @@ module DBZ {
                 return new UZA.CheckBoxList(this.convFiledName("chkMinashiKoshinNintei"));
             }
 
-            public txtNinteiYMD(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinteiYMD"));
+            public txtNinteiYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtNinteiYMD"));
             }
 
             public txtYokaigodoCode(): UZA.TextBoxCode {
@@ -61,12 +85,12 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtYokaigodoName"));
             }
 
-            public txtYukoKaishiYMD(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtYukoKaishiYMD"));
+            public txtYukoKaishiYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoKaishiYMD"));
             }
 
-            public txtYukoShuryoYMD(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtYukoShuryoYMD"));
+            public txtYukoShuryoYMD(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYukoShuryoYMD"));
             }
 
             public btnAfter6Month(): UZA.Button {

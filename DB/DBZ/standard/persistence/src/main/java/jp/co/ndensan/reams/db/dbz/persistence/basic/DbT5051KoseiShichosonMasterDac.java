@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.persistence.IModifiable;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5051KoseiShichosonMaster;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT5051KoseiShichosonMaster.*;
@@ -69,7 +70,7 @@ public class DbT5051KoseiShichosonMasterDac implements IModifiable<IKoseiShichos
         return Optional.ofNullable(accessor.select().
                 table(DbT5051KoseiShichosonMaster.class).
                 where(
-                        eq(shichosonShokibetsuID, 証記載保険者番号)).
+                        eq(shoKisaiHokenshaNo, 証記載保険者番号)).
                 toList(DbT5051KoseiShichosonMasterEntity.class).get(0));
     }
 
@@ -90,7 +91,7 @@ public class DbT5051KoseiShichosonMasterDac implements IModifiable<IKoseiShichos
         return Optional.ofNullable(accessor.select().
                 table(DbT5051KoseiShichosonMaster.class).
                 where(
-                        eq(shichosonShokibetsuID, 市町村コード)).
+                        eq(shichosonCode, 市町村コード)).
                 toList(DbT5051KoseiShichosonMasterEntity.class).get(0));
     }
 
@@ -100,12 +101,12 @@ public class DbT5051KoseiShichosonMasterDac implements IModifiable<IKoseiShichos
      * @return List<DbT5051KoseiShichosonMasterEntity>
      */
     @Transaction
-    public List<DbT5051KoseiShichosonMasterEntity> selectAll() {
+    public ItemList<DbT5051KoseiShichosonMasterEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.select().
+        return ItemList.of(accessor.select().
                 table(DbT5051KoseiShichosonMaster.class).
-                toList(DbT5051KoseiShichosonMasterEntity.class);
+                toList(DbT5051KoseiShichosonMasterEntity.class));
     }
 
     @Transaction

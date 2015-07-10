@@ -23,10 +23,9 @@
             <groupId>jp.co.ndensan.reams.ur.urf</groupId>
             <artifactId>UrfEntity</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzEntity</artifactId>
+            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+            <artifactId>DbdEntity</artifactId>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

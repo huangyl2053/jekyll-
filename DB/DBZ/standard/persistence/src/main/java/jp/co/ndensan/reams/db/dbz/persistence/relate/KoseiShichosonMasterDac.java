@@ -55,7 +55,7 @@ public class KoseiShichosonMasterDac implements IModifiable<KoseiShichosonMaster
                     .where(not(eq(gappeiKyuShichosonKubun, GappeiKyuShichosonKubun.合併旧市町村.code())))
                     .toList(DbT7051KoseiShichosonMasterEntity.class);
         } else {
-            result = dac.selectAll();
+            result = dac.selectAll().toList();
         }
         return ItemList.of(result).map(toModel());
     }

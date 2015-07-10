@@ -479,7 +479,7 @@ public class HokenshaNinteiShinseiJoho implements INinteiShinseiJoho {
      */
     @Override
     public ChosainCode get認定調査員コード() {
-        return entity.getNinteiChousainCode();
+        return entity.getNinteiChosainCode();
     }
 
     /**

@@ -104,10 +104,21 @@ public class JukyushaDaichoManager {
      * @return Optional<JukyushaDaicho>
      */
     @Transaction
-    public Optional<JukyushaDaicho> get直近受給者台帳(ShinseishoKanriNo 申請書管理番号) {
+    public Optional<JukyushaDaicho> get受給者台帳By申請書管理番号(ShinseishoKanriNo 申請書管理番号) {
 
         return Optional.ofNullable(new JukyushaDaicho(dac.select受給者台帳履歴By申請書管理番号(申請書管理番号)));
 
+    }
+
+    /**
+     * 被保険者番号に合致する受給者台帳の一覧を返します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return Optional<JukyushaDaicho>
+     */
+    @Transaction
+    public Optional<JukyushaDaicho> get直近受給者台帳(HihokenshaNo 被保険者番号) {
+        return Optional.ofNullable(new JukyushaDaicho(dac.select直近受給者台帳By被保険者番号(被保険者番号)));
     }
 
     /**

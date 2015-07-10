@@ -25,7 +25,7 @@ public final class KoseiShichosonMasterFactory {
      */
     public static IKoseiShichosonMasterManager getInstance(SubGyomuCode subGyomuCode) {
 
-        if (subGyomuCode.equals(SubGyomuCode.DBD介護受給)) {
+        if (subGyomuCode.equals(SubGyomuCode.DBE認定支援)) {
             return new ShinsakaiKoseiShichosonMasterManager();
         }
 
