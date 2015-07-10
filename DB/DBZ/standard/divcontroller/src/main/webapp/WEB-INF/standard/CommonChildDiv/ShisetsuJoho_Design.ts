@@ -8,10 +8,6 @@ module DBZ {
 
         export class Events {
 
-            public static onChange_ddlDaichoShubetsu(): string {
-                return "onChange_ddlDaichoShubetsu";
-            }
-
             public static onChange_radShisetsuShurui(): string {
                 return "onChange_radShisetsuShurui";
             }
