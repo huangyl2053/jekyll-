@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakusei
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShujiiIkenshoSakuseiryoShubetsu;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static java.util.Objects.requireNonNull;
 
@@ -59,16 +59,16 @@ public class ShujiiIkenshoBase {
             ShujiiIkenshoSakuseiryoShubetsu 意見書作成料種別,
             NinteiJohoTeikyoKibo 認定情報提供希望,
             IkenshoDoi 意見書同意) {
-        this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
-        this.意見書履歴番号 = requireNonNull(意見書履歴番号, Messages.E00001.replace("意見書履歴番号").getMessage());
-        this.意見書依頼区分 = requireNonNull(意見書依頼区分, Messages.E00001.replace("意見書依頼区分").getMessage());
-        this.主治医 = requireNonNull(主治医, Messages.E00001.replace("主治医").getMessage());
-        this.意見書受領年月日 = requireNonNull(意見書受領年月日, Messages.E00001.replace("意見書受領年月日").getMessage());
-        this.意見書記入年月日 = requireNonNull(意見書記入年月日, Messages.E00001.replace("意見書記入年月日").getMessage());
-        this.意見書作成回数 = requireNonNull(意見書作成回数, Messages.E00001.replace("意見書作成回数").getMessage());
-        this.意見書作成料種別 = requireNonNull(意見書作成料種別, Messages.E00001.replace("意見書作成料種別").getMessage());
-        this.認定情報提供希望 = requireNonNull(認定情報提供希望, Messages.E00001.replace("認定情報提供希望").getMessage());
-        this.意見書同意 = requireNonNull(意見書同意, Messages.E00001.replace("意見書同意").getMessage());
+        this.申請書管理番号 = requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        this.意見書履歴番号 = requireNonNull(意見書履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書履歴番号"));
+        this.意見書依頼区分 = requireNonNull(意見書依頼区分, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書依頼区分"));
+        this.主治医 = requireNonNull(主治医, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医"));
+        this.意見書受領年月日 = requireNonNull(意見書受領年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書受領年月日"));
+        this.意見書記入年月日 = requireNonNull(意見書記入年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書記入年月日"));
+        this.意見書作成回数 = requireNonNull(意見書作成回数, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書作成回数"));
+        this.意見書作成料種別 = requireNonNull(意見書作成料種別, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書作成料種別"));
+        this.認定情報提供希望 = requireNonNull(認定情報提供希望, UrSystemErrorMessages.値がnull.getReplacedMessage("認定情報提供希望"));
+        this.意見書同意 = requireNonNull(意見書同意, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書同意"));
     }
 
     /**

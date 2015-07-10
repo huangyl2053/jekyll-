@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -24,8 +24,8 @@ public class NinteichosaResult {
      * @param 基本調査結果 基本調査結果
      */
     public NinteichosaResult(NinteichosaResultOfGaikyo 概況調査結果, NinteichosaResultOfKihon 基本調査結果) {
-        this.概況調査結果 = requireNonNull(概況調査結果, Messages.E00001.replace("概況調査結果").getMessage());
-        this.基本調査結果 = requireNonNull(基本調査結果, Messages.E00001.replace("基本調査結果").getMessage());
+        this.概況調査結果 = requireNonNull(概況調査結果, UrSystemErrorMessages.値がnull.getReplacedMessage("概況調査結果"));
+        this.基本調査結果 = requireNonNull(基本調査結果, UrSystemErrorMessages.値がnull.getReplacedMessage("基本調査結果"));
     }
 
     /**

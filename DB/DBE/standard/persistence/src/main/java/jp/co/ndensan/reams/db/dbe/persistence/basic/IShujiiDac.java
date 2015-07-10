@@ -29,4 +29,13 @@ public interface IShujiiDac extends IReplaceable<DbT7012ShujiiJohoEntity>, IDele
      */
     @Transaction
     DbT7012ShujiiJohoEntity select(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード);
+
+    int insertOrUpdate(DbT7012ShujiiJohoEntity entity);
+
+    int insert(DbT7012ShujiiJohoEntity entity);
+
+    int update(DbT7012ShujiiJohoEntity entity);
+
+    int delete(DbT7012ShujiiJohoEntity entity);
+
 }

@@ -1,0 +1,41 @@
+﻿{
+ "transitionList": [
+  {
+   "id": "0",
+   "layoutSubGyomuCode": "DBZ",
+   "layoutName": "DBZ0200001",
+   "layoutTitle": "対象者検索",
+   "eventName": "next",
+   "toLayoutSubGyomuCode": "DBA",
+   "toLayoutName": "DBA2030011",
+   "toLayoutTitle": "住所地特例異動",
+   "toEventName": "initialize"
+  },
+  {
+   "id": "1",
+   "layoutSubGyomuCode": "DBA",
+   "layoutName": "DBA2030011",
+   "layoutTitle": "住所地特例異動",
+   "eventName": "backGaitoshaIchiran",
+   "toLayoutSubGyomuCode": "DBZ",
+   "toLayoutName": "DBZ0200001",
+   "toLayoutTitle": "対象者検索",
+   "toEventName": ""
+  },
+  {
+   "id": "2",
+   "layoutSubGyomuCode": "DBA",
+   "layoutName": "DBA2030011",
+   "layoutTitle": "住所地特例異動",
+   "eventName": "backSearch",
+   "toLayoutSubGyomuCode": "DBZ",
+   "toLayoutName": "DBZ0200001",
+   "toLayoutTitle": "対象者検索",
+   "toEventName": "research"
+  }
+ ],
+ "wizardOrderList": [],
+ "subGyomuCode": "DBA",
+ "uiContainerName": "DBAUC23001",
+ "initAfterOnLoadEventAlias": ""
+}

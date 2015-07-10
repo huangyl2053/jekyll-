@@ -6,6 +6,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 要介護認定結果情報を表す列挙型です。
  *
  * @author N8156 宮本 康
+ * @deprecated 共有子Divでこのテーブルを参照するために
+ * {@link DbT5002NinteiKekkaJoho DBZ.DbT5002NinteiKekkaJoho}
+ * を作成したのでそちらを使用してください。
  */
 public enum DbT5002NinteiKekkaJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">

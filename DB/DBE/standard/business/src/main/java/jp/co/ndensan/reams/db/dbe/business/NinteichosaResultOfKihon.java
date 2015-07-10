@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -35,10 +35,10 @@ public class NinteichosaResultOfKihon {
      */
     public NinteichosaResultOfKihon(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号,
             KoroshoIFKubun 厚労省IF識別区分, Ninteichosahyo<NinteichosaItemKubunOfKihon, NinteichosaItemForResult> 認定調査票) {
-        this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
-        this.認定調査依頼履歴番号 = requireNonNull(認定調査依頼履歴番号, Messages.E00001.replace("認定調査依頼履歴番号").getMessage());
-        this.厚労省IF識別区分 = requireNonNull(厚労省IF識別区分, Messages.E00001.replace("厚労省IF識別区分").getMessage());
-        this.認定調査票 = requireNonNull(認定調査票, Messages.E00001.replace("認定調査票").getMessage());
+        this.申請書管理番号 = requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        this.認定調査依頼履歴番号 = requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼履歴番号"));
+        this.厚労省IF識別区分 = requireNonNull(厚労省IF識別区分, UrSystemErrorMessages.値がnull.getReplacedMessage("厚労省IF識別区分"));
+        this.認定調査票 = requireNonNull(認定調査票, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査票"));
     }
 
     /**

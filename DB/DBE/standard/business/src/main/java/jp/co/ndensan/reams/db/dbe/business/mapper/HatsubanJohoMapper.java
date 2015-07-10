@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.mapper;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.HatsubanJoho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5020HatsubanKanriJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
  * 発番情報のビジネスクラスとエンティティの変換を行うクラスです
@@ -30,7 +30,7 @@ public final class HatsubanJohoMapper {
      * @throws NullPointerException 引数がnullのとき
      */
     public static HatsubanJoho toHatsubanJoho(DbT5020HatsubanKanriJohoEntity 発番管理情報Entity) throws NullPointerException {
-        requireNonNull(発番管理情報Entity, Messages.E00003.replace("発番管理情報エンティティ", "発番情報").getMessage());
+        requireNonNull(発番管理情報Entity, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("発番管理情報エンティティ", "発番情報"));
         return new HatsubanJoho(発番管理情報Entity.get発番());
     }
 }

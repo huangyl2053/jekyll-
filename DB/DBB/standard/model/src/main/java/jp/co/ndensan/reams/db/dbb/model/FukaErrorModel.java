@@ -8,7 +8,8 @@ package jp.co.ndensan.reams.db.dbb.model;
 import jp.co.ndensan.reams.db.dbb.entity.basic.DbT2010FukaErrorListEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.ur.urz.model.IInternalReportCommonModel;
+//TODO n8235 船山洋介　InternalReportCommonMode がなくなっているためコメントアウト
+//import jp.co.ndensan.reams.ur.urz.model.IInternalReportCommonModel;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.InternalReportShoriKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -22,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public class FukaErrorModel implements IInternalReportCommonModel {
+public class FukaErrorModel /* implements IInternalReportCommonModel*/ {
 
     private DbT2010FukaErrorListEntity entity;
 
@@ -70,28 +71,33 @@ public class FukaErrorModel implements IInternalReportCommonModel {
     public void setEntity(DbT2010FukaErrorListEntity entity) {
         this.entity = entity;
     }
+//IInternalReportCommonModelをコメントアウトしたため、@Overrideもコメントアウト
+//    @Override
 
-    @Override
     public SubGyomuCode getサブ業務コード() {
         return entity.getSubGyomuCode();
     }
+//IInternalReportCommonModelをコメントアウトしたため、@Overrideもコメントアウト
+//    @Override
 
-    @Override
     public RString get内部帳票Id() {
         return entity.getInternalReportId();
     }
+//IInternalReportCommonModelをコメントアウトしたため、@Overrideもコメントアウト
+//    @Override
 
-    @Override
     public RDateTime get内部帳票作成日時() {
         return entity.getInternalReportCreationDateTime();
     }
+//IInternalReportCommonModelをコメントアウトしたため、@Overrideもコメントアウト
+//    @Override
 
-    @Override
     public RString getバッチId() {
         return entity.getBatchId();
     }
+//IInternalReportCommonModelをコメントアウトしたため、@Overrideもコメントアウト
+//    @Override
 
-    @Override
     public RDateTime getバッチ起動日時() {
         return entity.getBatchStartingDateTime();
     }
@@ -168,27 +174,32 @@ public class FukaErrorModel implements IInternalReportCommonModel {
         return InternalReportShoriKubun.toValue(entity.getShoriKubunCode());
     }
 
-    @Override
+//IInternalReportCommonModelをコメントアウトしたため、@Overrideもコメントアウト
+//    @Override
     public void setサブ業務コード(SubGyomuCode サブ業務コード) {
         entity.setSubGyomuCode(サブ業務コード);
     }
 
-    @Override
+//IInternalReportCommonModelをコメントアウトしたため、@Overrideもコメントアウト
+//    @Override
     public void set内部帳票Id(RString 内部帳票Id) {
         entity.setInternalReportId(内部帳票Id);
     }
 
-    @Override
+//IInternalReportCommonModelをコメントアウトしたため、@Overrideもコメントアウト
+//    @Override
     public void set内部帳票作成日時(RDateTime 内部帳票作成日時) {
         entity.setInternalReportCreationDateTime(内部帳票作成日時);
     }
 
-    @Override
+//IInternalReportCommonModelをコメントアウトしたため、@Overrideもコメントアウト
+//    @Override
     public void setバッチId(RString バッチId) {
         entity.setBatchId(バッチId);
     }
 
-    @Override
+//IInternalReportCommonModelをコメントアウトしたため、@Overrideもコメントアウト
+//    @Override
     public void setバッチ起動日時(RDateTime バッチ起動日時) {
         entity.setBatchStartingDateTime(バッチ起動日時);
     }

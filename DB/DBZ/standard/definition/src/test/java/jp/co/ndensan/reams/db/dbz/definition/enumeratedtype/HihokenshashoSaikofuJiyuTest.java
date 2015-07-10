@@ -28,6 +28,18 @@ public class HihokenshashoSaikofuJiyuTest extends DbzTestBase {
             assertThat(HihokenshashoSaikofuJiyu.toValue(sut.getCode()), is(sut));
         }
 
+        @Test
+        public void toValueは_nullが渡された場合_EMPTYを返す() {
+            HihokenshashoSaikofuJiyu sut = HihokenshashoSaikofuJiyu.EMPTY;
+            assertThat(HihokenshashoSaikofuJiyu.toValue(null), is(sut));
+        }
+
+        @Test
+        public void toValueは_空の文字列が渡された場合_EMPTYを返す() {
+            HihokenshashoSaikofuJiyu sut = HihokenshashoSaikofuJiyu.EMPTY;
+            assertThat(HihokenshashoSaikofuJiyu.toValue(RString.EMPTY), is(sut));
+        }
+
         @Test(expected = IllegalArgumentException.class)
         public void toValueは_指定のコードに対応する列挙子がなければ_IllegalArgumentExceptionを返す() {
             HihokenshashoSaikofuJiyu sut = HihokenshashoSaikofuJiyu.toValue(new RString("1000"));

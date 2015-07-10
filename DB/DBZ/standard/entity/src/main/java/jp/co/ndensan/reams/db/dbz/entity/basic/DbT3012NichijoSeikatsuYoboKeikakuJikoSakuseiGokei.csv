@@ -1,0 +1,9 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+shoKisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,A
+shikibetsuNo,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+taishoYM,UDD014YM,FlexibleYearMonth,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+kyotakuServiceKubun,varchar,RString,,,,,A
+serviceTeikyoJigyoshaNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,A
+serviceShuruiCode,DbUDD005ServiceShuruiCode,DbUDD005ServiceShuruiCode,,,,,A
+keikakuTaniSu,numeric,Decimal,,,,,A

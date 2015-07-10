@@ -16,14 +16,14 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoShikaku;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.JushochiTokureishaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminShubetsu;
-import jp.co.ndensan.reams.ur.urz.model.IDateOfBirth;
-import jp.co.ndensan.reams.ur.urz.model.IJusho;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.IName;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.IDateOfBirth;
+import jp.co.ndensan.reams.ur.urz.business.IJusho;
+import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KojinNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -100,13 +100,6 @@ public class HihokenshaTest extends DbzTestBase {
             }
 
             @Test
-            public void get証記載保険者番号は_コンストラクタ引数のIHihokenshaShikakuの_get証記載保険者番号と_同じ値を返す() {
-                ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("000001"));
-                when(shikaku.get証記載保険者番号()).thenReturn(shoKisaiHokenshaNo);
-                assertThat(sut.get証記載保険者番号(), is(shoKisaiHokenshaNo));
-            }
-
-            @Test
             public void get識別コードは_コンストラクタ引数のIHihokenshaShikakuの_get識別コードと_同じ値を返す() {
                 ShikibetsuCode shikibetsuCode = new ShikibetsuCode("0000000001");
                 when(shikaku.get識別コード()).thenReturn(shikibetsuCode);
@@ -164,7 +157,7 @@ public class HihokenshaTest extends DbzTestBase {
 
             @Test
             public void get広域内住所地特例措置元市町村コードは_コンストラクタ引数のIHihokenshaShikakuのものと_同じ値を返す() {
-                ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(new RString("000001"));
+                ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo("000001");
                 when(shikaku.get広域内住所地特例措置元保険者番号()).thenReturn(shoKisaiHokenshaNo);
                 assertThat(sut.get広域内住所地特例措置元保険者番号(), is(shoKisaiHokenshaNo));
             }
@@ -321,7 +314,7 @@ public class HihokenshaTest extends DbzTestBase {
             public void setUp() {
                 FlexibleDate noticeDate = new FlexibleDate("20140326");
                 FlexibleDate actionDate = new FlexibleDate("20140326");
-                shikakuSoshitsu = new JushochitokureiTekiyo(JushochitokureiTekiyoJiyu.特例転入, noticeDate, actionDate);
+                shikakuSoshitsu = new JushochitokureiTekiyo(JushochitokureiTekiyoJiyu.自特例適用, noticeDate, actionDate);
 
                 when(shikaku.get住所地特例適用()).thenReturn(shikakuSoshitsu);
                 sut = new Hihokensha(profile, shikaku);
@@ -352,7 +345,7 @@ public class HihokenshaTest extends DbzTestBase {
             public void setUp() {
                 FlexibleDate noticeDate = new FlexibleDate("20140326");
                 FlexibleDate actionDate = new FlexibleDate("20140326");
-                shikakuSoshitsu = new JushochitokureiKaijo(JushochitokureiKaijoJiyu.特例転入, noticeDate, actionDate);
+                shikakuSoshitsu = new JushochitokureiKaijo(JushochitokureiKaijoJiyu.自特例転入, noticeDate, actionDate);
 
                 when(shikaku.get住所地特例解除()).thenReturn(shikakuSoshitsu);
                 sut = new Hihokensha(profile, shikaku);
@@ -391,7 +384,7 @@ public class HihokenshaTest extends DbzTestBase {
         @Test
         public void get氏名は_コンストラクタ引数のIKojinのget氏名と_同じ値を返す() {
             IName shimei = mock(IName.class);
-            when(this.profile.get氏名()).thenReturn(shimei);
+            when(this.profile.get名称()).thenReturn(shimei);
             assertThat(sut.get氏名(), is(shimei));
         }
 

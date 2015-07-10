@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentsToEnkitsuchiHakko;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -74,23 +74,23 @@ public class YokaigoNinteiProgress {
             FlexibleDate 認定審査会割当完了年月日,
             FlexibleDate 認定審査会完了年月日,
             FlexibleDate センター送信年月日) {
-        this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
-        this.認定申請情報登録年月日 = requireNonNull(認定申請情報登録年月日, Messages.E00001.replace("認定申請情報登録年月日").getMessage());
-        this.認定延期通知発行に対する同意有無 = requireNonNull(認定延期通知発行に対する同意有無, Messages.E00001.replace("認定延期通知発行に対する同意有無").getMessage());
-        this.認定延期通知発行年月日 = requireNonNull(認定延期通知発行年月日, Messages.E00001.replace("認定延期通知発行年月日").getMessage());
-        this.認定延期通知発行回数 = requireNonNull(認定延期通知発行回数, Messages.E00001.replace("認定延期通知発行回数").getMessage());
-        this.要介護認定延期理由 = requireNonNull(要介護認定延期理由, Messages.E00001.replace("要介護認定延期理由").getMessage());
-        this.要介護認定一次判定情報抽出年月日 = requireNonNull(要介護認定一次判定情報抽出年月日, Messages.E00001.replace("要介護認定一次判定情報抽出年月日").getMessage());
-        this.依頼情報データ送信年月日 = requireNonNull(依頼情報データ送信年月日, Messages.E00001.replace("依頼情報データ送信年月日").getMessage());
-        this.認定調査依頼完了年月日 = requireNonNull(認定調査依頼完了年月日, Messages.E00001.replace("認定調査依頼完了年月日").getMessage());
-        this.認定調査完了年月日 = requireNonNull(認定調査完了年月日, Messages.E00001.replace("認定調査完了年月日").getMessage());
-        this.主治医意見書作成依頼完了年月日 = requireNonNull(主治医意見書作成依頼完了年月日, Messages.E00001.replace("主治医意見書作成依頼完了年月日").getMessage());
-        this.主治医意見書登録完了年月日 = requireNonNull(主治医意見書登録完了年月日, Messages.E00001.replace("主治医意見書登録完了年月日").getMessage());
-        this.要介護認定一次判定完了年月日 = requireNonNull(要介護認定一次判定完了年月日, Messages.E00001.replace("要介護認定一次判定完了年月日").getMessage());
-        this.要介護認定1_5次判定完了年月日 = requireNonNull(要介護認定1_5次判定完了年月日, Messages.E00001.replace("要介護認定1_5次判定完了年月日").getMessage());
-        this.認定審査会割当完了年月日 = requireNonNull(認定審査会割当完了年月日, Messages.E00001.replace("認定審査会割当完了年月日").getMessage());
-        this.認定審査会完了年月日 = requireNonNull(認定審査会完了年月日, Messages.E00001.replace("認定審査会完了年月日").getMessage());
-        this.センター送信年月日 = requireNonNull(センター送信年月日, Messages.E00001.replace("センター送信年月日").getMessage());
+        this.申請書管理番号 = requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        this.認定申請情報登録年月日 = requireNonNull(認定申請情報登録年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定申請情報登録年月日"));
+        this.認定延期通知発行に対する同意有無 = requireNonNull(認定延期通知発行に対する同意有無, UrSystemErrorMessages.値がnull.getReplacedMessage("認定延期通知発行に対する同意有無"));
+        this.認定延期通知発行年月日 = requireNonNull(認定延期通知発行年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定延期通知発行年月日"));
+        this.認定延期通知発行回数 = requireNonNull(認定延期通知発行回数, UrSystemErrorMessages.値がnull.getReplacedMessage("認定延期通知発行回数"));
+        this.要介護認定延期理由 = requireNonNull(要介護認定延期理由, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定延期理由"));
+        this.要介護認定一次判定情報抽出年月日 = requireNonNull(要介護認定一次判定情報抽出年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定一次判定情報抽出年月日"));
+        this.依頼情報データ送信年月日 = requireNonNull(依頼情報データ送信年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("依頼情報データ送信年月日"));
+        this.認定調査依頼完了年月日 = requireNonNull(認定調査依頼完了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査依頼完了年月日"));
+        this.認定調査完了年月日 = requireNonNull(認定調査完了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査完了年月日"));
+        this.主治医意見書作成依頼完了年月日 = requireNonNull(主治医意見書作成依頼完了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医意見書作成依頼完了年月日"));
+        this.主治医意見書登録完了年月日 = requireNonNull(主治医意見書登録完了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医意見書登録完了年月日"));
+        this.要介護認定一次判定完了年月日 = requireNonNull(要介護認定一次判定完了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定一次判定完了年月日"));
+        this.要介護認定1_5次判定完了年月日 = requireNonNull(要介護認定1_5次判定完了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定1_5次判定完了年月日"));
+        this.認定審査会割当完了年月日 = requireNonNull(認定審査会割当完了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定審査会割当完了年月日"));
+        this.認定審査会完了年月日 = requireNonNull(認定審査会完了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定審査会完了年月日"));
+        this.センター送信年月日 = requireNonNull(センター送信年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("センター送信年月日"));
     }
 
     /**

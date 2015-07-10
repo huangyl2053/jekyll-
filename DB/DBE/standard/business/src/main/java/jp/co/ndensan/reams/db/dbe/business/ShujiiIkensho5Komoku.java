@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TankiKiokuKomoku;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
@@ -58,12 +58,12 @@ public class ShujiiIkensho5Komoku {
     public ShujiiIkensho5Komoku(ShogaiKoreishaJiritsudoKomoku 障害高齢者自立度, NinchishoKoreishaJiritsudoKomoku 認知症高齢者自立度,
             TankiKiokuKomoku 短期記憶, NinchiNoryokuKomoku 認知能力, DentatsuNoryokuKomoku 伝達能力, ShokujiKoiHyokaKomoku 食事行為)
             throws NullPointerException {
-        requireNonNull(障害高齢者自立度, Messages.E00003.replace("障害高齢者自立度", getClass().getName()).getMessage());
-        requireNonNull(認知症高齢者自立度, Messages.E00003.replace("認知症高齢者自立度", getClass().getName()).getMessage());
-        requireNonNull(短期記憶, Messages.E00003.replace("短期記憶", getClass().getName()).getMessage());
-        requireNonNull(認知能力, Messages.E00003.replace("認知能力", getClass().getName()).getMessage());
-        requireNonNull(伝達能力, Messages.E00003.replace("伝達能力", getClass().getName()).getMessage());
-        requireNonNull(食事行為, Messages.E00003.replace("食事行為", getClass().getName()).getMessage());
+        requireNonNull(障害高齢者自立度, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("障害高齢者自立度", getClass().getName()));
+        requireNonNull(認知症高齢者自立度, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認知症高齢者自立度", getClass().getName()));
+        requireNonNull(短期記憶, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("短期記憶", getClass().getName()));
+        requireNonNull(認知能力, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認知能力", getClass().getName()));
+        requireNonNull(伝達能力, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("伝達能力", getClass().getName()));
+        requireNonNull(食事行為, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("食事行為", getClass().getName()));
 
         this.障害高齢者自立度 = 障害高齢者自立度;
         this.認知症高齢者自立度 = 認知症高齢者自立度;

@@ -3,7 +3,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyoshosai;
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyoshosai.IShoKaishuJokyoShosaiDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -49,7 +48,6 @@ public class ShoKaishuJokyoShosaiDiv extends Panel implements IShoKaishuJokyoSho
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @Override
     @JsonProperty("txtShoKofuShurui")
     public TextBox getTxtShoKofuShurui() {
         return txtShoKofuShurui;
@@ -60,7 +58,6 @@ public class ShoKaishuJokyoShosaiDiv extends Panel implements IShoKaishuJokyoSho
         this.txtShoKofuShurui = txtShoKofuShurui;
     }
 
-    @Override
     @JsonProperty("txtKofuDate")
     public TextBoxFlexibleDate getTxtKofuDate() {
         return txtKofuDate;
@@ -71,7 +68,6 @@ public class ShoKaishuJokyoShosaiDiv extends Panel implements IShoKaishuJokyoSho
         this.txtKofuDate = txtKofuDate;
     }
 
-    @Override
     @JsonProperty("txtYukoKigen")
     public TextBoxFlexibleDate getTxtYukoKigen() {
         return txtYukoKigen;
@@ -82,7 +78,6 @@ public class ShoKaishuJokyoShosaiDiv extends Panel implements IShoKaishuJokyoSho
         this.txtYukoKigen = txtYukoKigen;
     }
 
-    @Override
     @JsonProperty("txtKofuJiyu")
     public TextBox getTxtKofuJiyu() {
         return txtKofuJiyu;
@@ -93,7 +88,6 @@ public class ShoKaishuJokyoShosaiDiv extends Panel implements IShoKaishuJokyoSho
         this.txtKofuJiyu = txtKofuJiyu;
     }
 
-    @Override
     @JsonProperty("txtKofuRiyu")
     public TextBoxMultiLine getTxtKofuRiyu() {
         return txtKofuRiyu;
@@ -104,7 +98,6 @@ public class ShoKaishuJokyoShosaiDiv extends Panel implements IShoKaishuJokyoSho
         this.txtKofuRiyu = txtKofuRiyu;
     }
 
-    @Override
     @JsonProperty("txtKaishuDate")
     public TextBoxFlexibleDate getTxtKaishuDate() {
         return txtKaishuDate;
@@ -115,7 +108,6 @@ public class ShoKaishuJokyoShosaiDiv extends Panel implements IShoKaishuJokyoSho
         this.txtKaishuDate = txtKaishuDate;
     }
 
-    @Override
     @JsonProperty("ddlKaishuJiyu")
     public DropDownList getDdlKaishuJiyu() {
         return ddlKaishuJiyu;
@@ -126,7 +118,6 @@ public class ShoKaishuJokyoShosaiDiv extends Panel implements IShoKaishuJokyoSho
         this.ddlKaishuJiyu = ddlKaishuJiyu;
     }
 
-    @Override
     @JsonProperty("txtKaishuRiyu")
     public TextBoxMultiLine getTxtKaishuRiyu() {
         return txtKaishuRiyu;

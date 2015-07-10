@@ -1,0 +1,12 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+shujiiIryokikanCode,varchar,ShujiiIryokikanCode,,,,,主治医医療機関コード,A
+shujiiCode,varchar,ShujiiCode,,,,,主治医コード,A
+shujiiName,UDD042AtenaMeisho,AtenaMeisho,,,,,主治医氏名,A
+shujiiKana,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,主治医カナ,A
+yubinNo,UDD003YubinNo,YubinNo,,,,,郵便番号,A
+jusho,UDD046AtenaJusho,AtenaJusho,,,,,住所,A
+telNo,UDD026TelNo,TelNo,,,,,電話番号,A
+faxNo,UDD026TelNo,TelNo,,,,,FAX番号,A
+shinryokaName,varchar,RString,,,,,診療科名称,A
+shiteiiFlag,bool,boolean,,,,,指定医フラグ,A
+jokyoFlag,bool,boolean,,,,,状況フラグ,A

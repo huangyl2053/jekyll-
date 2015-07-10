@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Range;
  *
  * @author N3317 塚田 萌
  */
+@Deprecated
 public final class JogaiJushochitokureiTaishoShisetsuMapper {
 
     /**

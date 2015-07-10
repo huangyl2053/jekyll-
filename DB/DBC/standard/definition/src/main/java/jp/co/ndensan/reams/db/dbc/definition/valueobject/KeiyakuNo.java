@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.definition.valueobject;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
@@ -26,7 +26,7 @@ public class KeiyakuNo implements IValueObject, Comparable<KeiyakuNo> {
      * @param 契約番号 契約番号
      */
     public KeiyakuNo(RString 契約番号) {
-        this.契約番号 = requireNonNull(契約番号, Messages.E00001.replace("契約番号").getMessage());
+        this.契約番号 = requireNonNull(契約番号, UrSystemErrorMessages.値がnull.getReplacedMessage("契約番号"));
     }
 
     @Override

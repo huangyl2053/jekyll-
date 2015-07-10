@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiYukoKikanTsukisu;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static java.util.Objects.requireNonNull;
@@ -44,9 +44,9 @@ public class NinteiYukoKikan {
      * @param 有効終了年月日 有効終了年月日
      */
     public NinteiYukoKikan(FlexibleDate 有効開始年月日, NinteiYukoKikanTsukisu 有効期間月数, FlexibleDate 有効終了年月日) {
-        this.有効開始年月日 = requireNonNull(有効開始年月日, Messages.E00001.replace("有効開始年月日").getMessage());
-        this.有効期間月数 = requireNonNull(有効期間月数, Messages.E00001.replace("有効期間月数").getMessage());
-        this.有効終了年月日 = requireNonNull(有効終了年月日, Messages.E00001.replace("有効終了年月日").getMessage());
+        this.有効開始年月日 = requireNonNull(有効開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効開始年月日"));
+        this.有効期間月数 = requireNonNull(有効期間月数, UrSystemErrorMessages.値がnull.getReplacedMessage("有効期間月数"));
+        this.有効終了年月日 = requireNonNull(有効終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("有効終了年月日"));
     }
 
     /**

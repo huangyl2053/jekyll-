@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIinShukkets
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TimeString;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
  * 審査会に割り当てられた審査会委員を表すクラスです。
@@ -37,8 +37,8 @@ public class ShinsakaiWariateIin {
      */
     public ShinsakaiWariateIin(ShinsakaiDetail 審査会情報, ShinsakaiIin 審査会委員情報, ShinsainKubun 認定審査員区分,
             GogitaichoKubun 合議体長区分, Range<TimeString> 審査時間, ShinsakaiIinShukketsuKubun 出欠区分) throws NullPointerException {
-        requireNonNull(審査会情報, Messages.E00003.replace("審査会情報", getClass().getName()).getMessage());
-        requireNonNull(審査会委員情報, Messages.E00003.replace("審査会委員情報", getClass().getName()).getMessage());
+        requireNonNull(審査会情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("審査会情報", getClass().getName()));
+        requireNonNull(審査会委員情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("審査会委員情報", getClass().getName()));
 
         this.審査会情報 = 審査会情報;
         this.審査会委員情報 = 審査会委員情報;

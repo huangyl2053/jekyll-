@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.helper;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.NinteiResultIdoJiyuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsakaiIkenType;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TsuchiKubun;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5002NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
@@ -46,10 +46,10 @@ public class DbT5002NinteiKekkaJohoEntityMock {
      */
     public static DbT5002NinteiKekkaJohoEntity getDbT5002NinteiKekkaJohoEntity() {
         DbT5002NinteiKekkaJohoEntity entity = new DbT5002NinteiKekkaJohoEntity();
-        entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("1234567890")));
+        entity.setShinseishoKanriNo(new RString("1234567890"));
         entity.setShoriTimestamp(new YMDHMS(new RString("20140808102030")));
-        entity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(new RString("123456")));
-        entity.setHihokenshaNo(new HihokenshaNo(new RString("1234567890")));
+        entity.setShoKisaiHokenshaNo(new RString("123456"));
+        entity.setHihokenshaNo(new RString("1234567890"));
         entity.setYoukaigodoNinteiYMD(new FlexibleDate("20140101"));
         entity.setYoukaigoJotaiKubunCode(new Code("111111"));
         entity.setNinteiYukoKikan(1);

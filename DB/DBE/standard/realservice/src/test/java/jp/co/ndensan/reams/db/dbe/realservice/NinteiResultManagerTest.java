@@ -5,15 +5,16 @@
 package jp.co.ndensan.reams.db.dbe.realservice;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteiResult;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5002NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5002NinteiKekkaJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.business.helper.NinteiResultMock;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.NinteiKekkaJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
-import jp.co.ndensan.reams.ur.urz.business.IKaigoService;
-import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
-import jp.co.ndensan.reams.ur.urz.realservice.IKaigoServiceManager;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoService;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.realservice.IKaigoServiceManager;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -96,7 +97,7 @@ public class NinteiResultManagerTest extends DbeTestBase {
     private static IKaigoServiceManager createKaigoServiceManager() {
         IKaigoService service = createKaigoService();
         IKaigoServiceManager manager = mock(IKaigoServiceManager.class);
-        when(manager.get介護サービス(any(FlexibleYearMonth.class), any(RString.class))).thenReturn(service);
+        when(manager.get介護サービス(any(FlexibleYearMonth.class), any(KaigoServiceShuruiCode.class))).thenReturn(service);
         return manager;
     }
 

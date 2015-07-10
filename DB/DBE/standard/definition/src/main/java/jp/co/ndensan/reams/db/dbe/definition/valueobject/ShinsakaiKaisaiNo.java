@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import static java.util.Objects.requireNonNull;
 
@@ -24,7 +24,7 @@ public class ShinsakaiKaisaiNo implements IValueObject<Integer>, Comparable<Shin
      * @throws NullPointerException
      */
     public ShinsakaiKaisaiNo(Integer value) {
-        requireNonNull(value, Messages.E00003.replace("value", getClass().getName()).getMessage());
+        requireNonNull(value, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("value", getClass().getName()));
         this.theValue = value;
     }
 

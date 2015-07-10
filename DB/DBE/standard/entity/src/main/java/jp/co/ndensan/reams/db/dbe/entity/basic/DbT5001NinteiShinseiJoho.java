@@ -5,9 +5,13 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 /**
  * DbT5001NinteiShinseiJohoの項目定義クラスです
  *
+ * @deprecated 共有子Divでこのテーブルを参照するために
+ * {@link DbT5001NinteiShinseiJoho DBZ.DbT5001NinteiShinseiJoho}
+ * を作成したのでそちらを使用してください。
  */
 public enum DbT5001NinteiShinseiJoho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+
     insertDantaiCd(2147483647, 0),
     insertTimestamp(29, 0),
     insertReamsLoginId(2147483647, 0),
@@ -58,6 +62,7 @@ public enum DbT5001NinteiShinseiJoho implements IColumnDefinition {
 
     /**
      * getMaxLength
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -66,6 +71,7 @@ public enum DbT5001NinteiShinseiJoho implements IColumnDefinition {
 
     /**
      * getScale
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

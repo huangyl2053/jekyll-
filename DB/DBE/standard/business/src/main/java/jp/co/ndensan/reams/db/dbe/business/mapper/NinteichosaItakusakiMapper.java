@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.mapper;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
  * 認定調査委託先のビジネスクラスとエンティティの変換を行うクラスです
@@ -30,7 +30,7 @@ public final class NinteichosaItakusakiMapper {
      * @throws NullPointerException {@code 認定調査委託先Entity}がnullの場合
      */
     public static NinteichosaItakusaki toNinteichosaItakusaki(DbT7010NinteichosaItakusakiJohoEntity 認定調査委託先Entity) throws NullPointerException {
-        requireNonNull(認定調査委託先Entity, Messages.E00003.replace("認定調査委託先エンティティ", "認定調査委託先").getMessage());
+        requireNonNull(認定調査委託先Entity, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定調査委託先エンティティ", "認定調査委託先"));
         return new NinteichosaItakusaki(
                 認定調査委託先Entity.get市町村コード(),
                 認定調査委託先Entity.get介護事業者番号(),
@@ -44,7 +44,7 @@ public final class NinteichosaItakusakiMapper {
 
     //TODO n3317塚田萌　モデルパッケージ導入時にエラーが出るので、暫定対応
     public static DbT7010NinteichosaItakusakiJohoEntity toNinteichosaItakusakiEntity(NinteichosaItakusaki 認定調査委託先) throws NullPointerException {
-        requireNonNull(認定調査委託先, Messages.E00003.replace("認定調査委託先", " 認定調査委託先エンティティ").getMessage());
+        requireNonNull(認定調査委託先, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定調査委託先", " 認定調査委託先エンティティ"));
 
         DbT7010NinteichosaItakusakiJohoEntity entity = new DbT7010NinteichosaItakusakiJohoEntity();
 

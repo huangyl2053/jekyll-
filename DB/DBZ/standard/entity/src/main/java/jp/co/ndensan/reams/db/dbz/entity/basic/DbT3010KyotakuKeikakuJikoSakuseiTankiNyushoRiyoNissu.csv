@@ -1,0 +1,7 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+shoKisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+taishoYM,UDD014YM,FlexibleYearMonth,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+zenkaiRiyoNissu,numeric,Decimal,,,,,A
+konkaiKeikakuRiyoNissu,numeric,Decimal,,,,,A

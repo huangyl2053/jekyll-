@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.message;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import static jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.message.MessageCreateHelper.toCode;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.message.MessageCreateHelper.toCode;
 
 /**
  * DBBのエラーメッセージ定義列挙型です。
@@ -17,10 +17,10 @@ import static jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.message.Messa
  */
 public enum DbbErrorMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    比較対象データなし(1, "比較対象のデータがありません。");
 
-    private final Message message;
+    private final int no;
+    private final String message;
 
     /**
      * コンストラクタです。
@@ -29,12 +29,12 @@ public enum DbbErrorMessages implements IMessageGettable {
      * @param message メッセージ
      */
     private DbbErrorMessages(int no, String message) {
-        this.message = new ErrorMessage(toCode("E", no), message);
+        this.no = no;
+        this.message = message;
     }
 
     @Override
     public Message getMessage() {
-        return message;
+        return new ErrorMessage(toCode("E", no), message);
     }
-
 }

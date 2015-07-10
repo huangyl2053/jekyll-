@@ -1,0 +1,7 @@
+﻿kihonJokyoFlag,bool,boolean,,,,,A
+mobileDataFlag,bool,boolean,,,,,A
+ninteiJohoTeikyoKiboAriFlag,bool,boolean,,,,,A
+shinsakaiShinsajunKakuteiFlag,bool,boolean,,,,,A
+gogitaiDummyFlag,bool,boolean,,,,,A
+gogitaiSeishinkaiFlag,bool,boolean,,,,,A
+shinsakaiKyukaiFlag,bool,boolean,,,,,A

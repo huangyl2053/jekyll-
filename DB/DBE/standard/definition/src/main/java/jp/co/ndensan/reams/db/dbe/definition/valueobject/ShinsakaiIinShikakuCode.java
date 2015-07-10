@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -27,7 +27,7 @@ public class ShinsakaiIinShikakuCode implements ICodeWrapValueObject, Comparable
      * @throws NullPointerException 引数にnullが渡されたとき
      */
     public ShinsakaiIinShikakuCode(Code code) throws NullPointerException {
-        this.code = requireNonNull(code, Messages.E00003.replace("審査会委員資格コード", getClass().getName()).getMessage());
+        this.code = requireNonNull(code, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("審査会委員資格コード", getClass().getName()));
     }
 
     @Override

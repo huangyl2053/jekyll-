@@ -1,0 +1,684 @@
+﻿{
+ "fieldName": "Page",
+ "items": [
+  {
+   "fieldName": "FukaTaishoshaSearch",
+   "items": [
+    {
+     "fieldName": "SearchCondition",
+     "items": [
+      {
+       "fieldName": "ccdSearchCondition",
+       "items": [],
+       "controlType": "CommonChildDiv",
+       "width": "XS",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "0px",
+       "selectControlID": "ccdSearchCondition",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "relation": [],
+       "packageName": "",
+       "marginTop": "XS",
+       "marginBottom": "0px",
+       "businessId": "DBZ",
+       "controlName": "HihokenshaFinder",
+       "dataPassingForDialog": [],
+       "dialogOkEventNameForDialog": "",
+       "dialogCancelEventNameForDialog": "",
+       "canTransferEvent": true,
+       "heightForDialog": "M",
+       "firstFocusFieldName": "",
+       "lastFocusFieldName": "",
+       "modes": [
+        {
+         "modeKey": "表示モード",
+         "modeValue": "賦課系"
+        }
+       ],
+       "publicEvents": [
+        {
+         "eventName": "onClick_btnSearch"
+        }
+       ],
+       "publicEventsAlias": []
+      }
+     ],
+     "controlType": "Panel",
+     "width": "G12",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0em",
+     "marginRight": "XS",
+     "selectControlID": "SearchCondition",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onLoad": "",
+     "title": "検索条件",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "0em",
+     "marginBottom": "Default",
+     "eraseBorder": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto",
+     "canPost": false
+    },
+    {
+     "fieldName": "GaitoshaList",
+     "items": [
+      {
+       "fieldName": "txtFukanendo",
+       "items": [],
+       "controlType": "TextBoxDate",
+       "width": "35px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "txtFukanendo_core",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "onChange": "",
+       "required": false,
+       "labelLText": "賦課年度",
+       "labelRText": "",
+       "labelLWidth": "70px",
+       "labelRWidth": "S",
+       "labelLAlign": 2,
+       "labelRAlign": 0,
+       "onFocus": "",
+       "onBlur": "",
+       "placeHolder": "",
+       "isPrivateInfo": false,
+       "isPassword": false,
+       "onKeyPress": "",
+       "text": "",
+       "value": "",
+       "decorationClass": "",
+       "permitCharactor": "./_-",
+       "ymdKubun": 0,
+       "displayFormat": 0
+      },
+      {
+       "fieldName": "dgFukaGaitoshaList",
+       "items": [],
+       "controlType": "DataGrid",
+       "width": "1098px",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "dgFukaGaitoshaList",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "readOnly": false,
+       "height": "318px",
+       "dataSource": [],
+       "gridSetting": {
+        "rowHeight": 25,
+        "isMultiSelectable": false,
+        "isShowHeader": true,
+        "isShowFooter": true,
+        "isShowFilter": true,
+        "isShowFilterButton": true,
+        "isShowRowState": false,
+        "isShowSelectButtonColumn": true,
+        "isShowModifyButtonColumn": false,
+        "isShowDeleteButtonColumn": false,
+        "limitRowCount": 0,
+        "selectedRowCount": 0,
+        "selectLimitRowCount": 0,
+        "header": {
+         "combineColumns": [],
+         "frozenColumn": "txtTsuchiNo",
+         "headerHeight": 0
+        },
+        "columns": [
+         {
+          "columnName": "調定",
+          "dataName": "txtChoteiNendo",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 60,
+          "visible": false,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0,
+           "isSetValueToToolTip": false
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtChoteiNendo"
+         },
+         {
+          "columnName": "賦課",
+          "dataName": "txtFukaNendo",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 60,
+          "visible": false,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtFukaNendo"
+         },
+         {
+          "columnName": "通知書番号",
+          "dataName": "txtTsuchiNo",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 135,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtTsuchiNo"
+         },
+         {
+          "columnName": "被保番号",
+          "dataName": "txtHihoNo",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 90,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtHihoNo"
+         },
+         {
+          "columnName": "氏名",
+          "dataName": "txtName",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 200,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0
+          },
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtName"
+         },
+         {
+          "columnName": "生年月日",
+          "dataName": "txtUmareYmd",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 80,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": {
+           "cellType": 0,
+           "isSetValueToToolTip": false
+          },
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtUmareYmd"
+         },
+         {
+          "columnName": "性別",
+          "dataName": "txtSeibetsu",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 40,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtSeibetsu"
+         },
+         {
+          "columnName": "種別",
+          "dataName": "txtShubetsu",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 60,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtShubetsu"
+         },
+         {
+          "columnName": "住所",
+          "dataName": "txtJusho",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 250,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 0,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtJusho"
+         },
+         {
+          "columnName": "識別コード",
+          "dataName": "txtShikbetsuCode",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 120,
+          "visible": true,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtShikbetsuCode"
+         },
+         {
+          "columnName": "世帯コード",
+          "dataName": "txtSetaiCode",
+          "toolTip": "",
+          "bgColor": 0,
+          "width": 120,
+          "visible": false,
+          "cellType": 0,
+          "cellDetails": null,
+          "align": 1,
+          "resize": true,
+          "isPrivateInfo": false,
+          "sortKey": "txtSetaiCode"
+         }
+        ]
+       },
+       "onSort": "",
+       "onSelect": "",
+       "onSelectByDblClick": "onSelectByDblClick_dgGaitoshaList",
+       "onSelectBySelectButton": "onSelectBySelectButton_dgGaitoshaList",
+       "onSelectByModifyButton": "",
+       "onSelectByDeleteButton": "",
+       "onAfterRequest": "",
+       "onAfterRequestByDblClick": "",
+       "onAfterRequestBySelectButton": "",
+       "onAfterRequestByModifyButton": "",
+       "onAfterRequestByDeleteButton": "",
+       "onOnlyRow": "",
+       "onNoRow": "",
+       "onMultiRows": "",
+       "sortOrder": "txtJusho",
+       "isAscending": true,
+       "filterList": [],
+       "activeRowId": -1,
+       "gridAction": []
+      },
+      {
+       "fieldName": "btnReSearch",
+       "items": [],
+       "controlType": "Button",
+       "width": "M",
+       "visible": true,
+       "displayNone": false,
+       "disabled": false,
+       "accessKey": "",
+       "nextFocusFieldName": "",
+       "wrap": false,
+       "dependencies": [],
+       "float": 0,
+       "toolTip": "",
+       "authorityMode": 0,
+       "marginLeft": "XS",
+       "marginRight": "XS",
+       "selectControlID": "btnReSearch",
+       "helpMessageID": "",
+       "jpControlName": "",
+       "text": "再検索する",
+       "onClick": "onClick_btnReSearch",
+       "icon": 0,
+       "onBeforeClick": "",
+       "onAfterClick": "",
+       "appearance": 0,
+       "imageFileUrl": "",
+       "imageWidth": "",
+       "imageHeight": "",
+       "heightTextBoxMatches": false
+      }
+     ],
+     "controlType": "Panel",
+     "width": "G12",
+     "visible": true,
+     "displayNone": false,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "0em",
+     "marginRight": "XS",
+     "selectControlID": "GaitoshaList",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "onLoad": "",
+     "title": "該当者一覧",
+     "isOpen": true,
+     "canOpenAndClose": true,
+     "postParameterPanelNames": [
+      {
+       "postParameterPanelNames": "ccdSearchCondition"
+      }
+     ],
+     "requestSettings": [],
+     "hiddenInput": [],
+     "onOpen": "",
+     "onClose": "",
+     "session": {},
+     "marginTop": "Default",
+     "marginBottom": "Default",
+     "eraseBorder": false,
+     "backgroundColor": 0,
+     "widthAuto": false,
+     "panelDisplay": 0,
+     "isGroupBox": false,
+     "readOnly": false,
+     "height": "Auto",
+     "canPost": true
+    },
+    {
+     "fieldName": "btnReSearchMode",
+     "items": [],
+     "controlType": "Button",
+     "width": "S",
+     "visible": false,
+     "displayNone": true,
+     "disabled": false,
+     "accessKey": "",
+     "nextFocusFieldName": "",
+     "wrap": false,
+     "dependencies": [],
+     "float": 0,
+     "toolTip": "",
+     "authorityMode": 0,
+     "marginLeft": "XS",
+     "marginRight": "XS",
+     "selectControlID": "btnReSearchMode",
+     "helpMessageID": "",
+     "jpControlName": "",
+     "text": "Button1",
+     "onClick": "",
+     "icon": 0,
+     "onBeforeClick": "",
+     "onAfterClick": "",
+     "appearance": 0,
+     "imageFileUrl": "",
+     "imageWidth": "",
+     "imageHeight": "",
+     "heightTextBoxMatches": false
+    }
+   ],
+   "controlType": "Panel",
+   "width": "G12",
+   "visible": true,
+   "displayNone": false,
+   "disabled": false,
+   "accessKey": "",
+   "nextFocusFieldName": "",
+   "wrap": true,
+   "dependencies": [],
+   "float": 0,
+   "toolTip": "",
+   "authorityMode": 0,
+   "marginLeft": "0em",
+   "marginRight": "XS",
+   "selectControlID": "FukaTaishoshaSearch",
+   "helpMessageID": "",
+   "jpControlName": "",
+   "onLoad": "",
+   "title": "",
+   "isOpen": true,
+   "canOpenAndClose": true,
+   "postParameterPanelNames": [
+    {
+     "postParameterPanelNames": "FukaTaishoshaSearch"
+    }
+   ],
+   "requestSettings": [
+    {
+     "eventName": "onLoad",
+     "requestUrl": ""
+    },
+    {
+     "eventName": "onClick_btnSearch",
+     "requestUrl": "dbz/db/dbz/FukaTaishoshaSearch/onClick_btnSearch"
+    },
+    {
+     "eventName": "onClick_btnReSearch",
+     "requestUrl": "dbz/db/dbz/FukaTaishoshaSearch/onClick_btnReSearch"
+    },
+    {
+     "eventName": "onSelectByDblClick_dgGaitoshaList",
+     "requestUrl": "dbz/db/dbz/FukaTaishoshaSearch/onSelect_dgGaitoshaList"
+    },
+    {
+     "eventName": "onSelectBySelectButton_dgGaitoshaList",
+     "requestUrl": "dbz/db/dbz/FukaTaishoshaSearch/onSelect_dgGaitoshaList"
+    }
+   ],
+   "hiddenInput": [],
+   "onOpen": "",
+   "onClose": "",
+   "session": {},
+   "marginTop": "Default",
+   "marginBottom": "Default",
+   "eraseBorder": true,
+   "backgroundColor": 0,
+   "widthAuto": false,
+   "panelDisplay": 0,
+   "isGroupBox": false,
+   "readOnly": false,
+   "height": "Auto",
+   "canPost": true
+  }
+ ],
+ "controlType": null,
+ "width": "XS",
+ "visible": true,
+ "displayNone": false,
+ "disabled": false,
+ "accessKey": "",
+ "nextFocusFieldName": "",
+ "wrap": false,
+ "dependencies": [],
+ "float": 0,
+ "toolTip": "",
+ "authorityMode": 0,
+ "marginLeft": "XS",
+ "marginRight": "XS",
+ "selectControlID": "Page",
+ "helpMessageID": "",
+ "jpControlName": "",
+ "onLoad": "",
+ "title": "賦課対象者検索",
+ "jsPathCollection": [],
+ "relation": [],
+ "stateTransition": [
+  {
+   "order": "1",
+   "stateName": "検索条件",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "FukaTaishoshaSearch",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "SearchCondition",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdSearchCondition",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "GaitoshaList",
+     "panelState": "close",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "ccdSearchCondition_HihokenshaFinder_ButtonsForHihokenshaFinder_btnSearch",
+     "event": "onClick",
+     "transition": "該当者一覧"
+    },
+    {
+     "fieldName": "btnReSearch",
+     "event": "onClick",
+     "transition": ""
+    }
+   ]
+  },
+  {
+   "order": "2",
+   "stateName": "該当者一覧",
+   "wizardName": "",
+   "showWizard": false,
+   "visibleDivs": [
+    {
+     "visibleDiv": "FukaTaishoshaSearch",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "SearchCondition",
+     "panelState": "close",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "ccdSearchCondition",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    },
+    {
+     "visibleDiv": "GaitoshaList",
+     "panelState": "visible",
+     "fixedDiv": "No"
+    }
+   ],
+   "supplementInfo": "",
+   "validation": {},
+   "events": [
+    {
+     "fieldName": "ccdSearchCondition_HihokenshaFinder_ButtonsForHihokenshaFinder_btnSearch",
+     "event": "onClick",
+     "transition": ""
+    },
+    {
+     "fieldName": "btnReSearch",
+     "event": "onClick",
+     "transition": "検索条件"
+    }
+   ]
+  }
+ ],
+ "currentState": "All",
+ "id": "DBZ0300001",
+ "WFParameter": [],
+ "UIContainerEventMapping": [
+  {
+   "alias": "SelectFukaTaishosha",
+   "eventName": "dgTaishoshaIchiran.onSelectByDblClick"
+  },
+  {
+   "alias": "SelectFukaTaishosha",
+   "eventName": "dgTaishoshaIchiran.onSelectBySelectButton"
+  },
+  {
+   "alias": "reSearch",
+   "eventName": "btnReSearchMode.onClick"
+  },
+  {
+   "alias": "onOnlyRow",
+   "eventName": "dgTaishoshaIchiran.onOnlyRow"
+  }
+ ],
+ "loadSequencePanelNames": [
+  [
+   "TaishoshaSearch",
+   "TaishoshaSentaku"
+  ],
+  [
+   "FukaTaishoSearch"
+  ]
+ ],
+ "panelMargin": 1,
+ "controlMargin": 1,
+ "supplementInfoAllSet": "",
+ "supplementInfoAllPostParam": [],
+ "commonButtonAreaData": [],
+ "packageName": ""
+}

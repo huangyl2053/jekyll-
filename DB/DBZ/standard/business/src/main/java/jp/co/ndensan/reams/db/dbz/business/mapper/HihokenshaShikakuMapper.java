@@ -23,14 +23,23 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChohyoKofuRirekiID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShoriTimestamp;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.ur.urz.business.IKaigoShikaku;
-import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
-import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.ur.urz.business.KaigoShikakuFactory;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.JushochiTokureishaKubun;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoShikaku;
+//クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+//import jp.co.ndensan.reams.ur.urz.business.IShikakuShutokuJiyu;
+//import jp.co.ndensan.reams.ur.urz.business.IShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbx.business.KaigoShikakuFactory;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.HokenShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.JushochiTokureishaKubun;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.ShikakuHihokenshaKubun;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuShutokuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuHenkoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -44,6 +53,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3327 三浦 凌
  */
+@Deprecated
 public final class HihokenshaShikakuMapper {
 
     private HihokenshaShikakuMapper() {
@@ -64,30 +74,29 @@ public final class HihokenshaShikakuMapper {
     private static DbT1001HihokenshaDaichoEntity _toHihokenshaDaichoEntity(IHihokenshaShikaku shikaku) {
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         entity.setShichosonCode(shikaku.get市町村コード());
-        entity.setShoKisaiHokenshaNo(shikaku.get証記載保険者番号());
         entity.setHihokenshaNo(shikaku.get被保険者番号());
         entity.setShikibetsuCode(shikaku.get識別コード());
-        entity.setShoriTimestamp(shikaku.get処理日時());
-        entity.setHihokennshaKubunCode(shikaku.get被保険者区分().getCode());
-        entity.setIchigoHihokenshaNenreiTotatsuYMD(shikaku.get第一号年齢到達日());
-        entity.setShikakuShutokuJiyuCode(shikaku.get資格取得().getReason().getCode());
+        entity.setShoriTimestamp(ShoriTimestamp.of(shikaku.get処理日時()));
+        entity.setHihokennshaKubunCode(shikaku.get被保険者区分().getCode().value());
+        entity.setIchigoShikakuShutokuYMD(shikaku.get第一号年齢到達日());
+        entity.setShikakuShutokuJiyuCode(new KaigoShikakuShutokuJiyu(shikaku.get資格取得().getReason().getCode()));
         entity.setShikakuShutokuTodokedeYMD(shikaku.get資格取得().getNoticeDate());
         entity.setShikakuShutokuYMD(shikaku.get資格取得().getActionDate());
-        entity.setShikakuSoshitsuJiyuCode(shikaku.get資格喪失().getReason().getCode());
+        entity.setShikakuSoshitsuJiyuCode(new KaigoShikakuSoshitsuJiyu(shikaku.get資格喪失().getReason().getCode()));
         entity.setShikakuSoshitsuTodokedeYMD(shikaku.get資格喪失().getNoticeDate());
         entity.setShikakuSoshitsuYMD(shikaku.get資格喪失().getActionDate());
-        entity.setShikakuHenkoJiyuCode(shikaku.get資格変更().getReason().getCode());
+        entity.setShikakuHenkoJiyuCode(new KaigoShikakuHenkoJiyu(shikaku.get資格変更().getReason().getCode()));
         entity.setShikakuHenkoTodokedeYMD(shikaku.get資格変更().getActionDate());
         entity.setShikakuHenkoYMD(shikaku.get資格変更().getNoticeDate());
-        entity.setJushochitokureiTekiyoJiyuCode(shikaku.get住所地特例適用().getReason().getCode());
+        entity.setJushochitokureiTekiyoJiyuCode(new KaigoShikakuJutokuTekiyoJiyu(shikaku.get住所地特例適用().getReason().getCode()));
         entity.setJushochitokureiTekiyoTodokedeYMD(shikaku.get住所地特例適用().getNoticeDate());
         entity.setJushochitokureiTekiyoYMD(shikaku.get住所地特例適用().getActionDate());
-        entity.setJushochitokureiKaijoJiyuCode(shikaku.get住所地特例解除().getReason().getCode());
+        entity.setJushochitokureiKaijoJiyuCode(new KaigoShikakuJutokuKaijoJiyu(shikaku.get住所地特例解除().getReason().getCode()));
         entity.setJushochitokureiKaijoTodokedeYMD(shikaku.get住所地特例解除().getNoticeDate());
         entity.setJushochitokureiKaijoYMD(shikaku.get住所地特例解除().getActionDate());
         entity.setJushochiTokureiFlag(shikaku.get住所地特例者区分().getコード());
         entity.setKoikinaiJushochiTokureiFlag(shikaku.get広域内住所地特例者区分().getCode());
-        entity.setKoikinaiTokureiSochimotoHokenshaNo(shikaku.get広域内住所地特例措置元保険者番号());
+        entity.setKoikinaiTokureiSochimotoShichosonCode(LasdecCode.EMPTY);
         entity.setKyuShichosonCode(shikaku.get旧市町村コード());
         entity.setSaikofuKubun(shikaku.get被保険者証再交付().get有無区分().getCode());
         entity.setSaikofuJiyuCode(shikaku.get被保険者証再交付().getReason().getCode());
@@ -134,15 +143,15 @@ public final class HihokenshaShikakuMapper {
     private static IHihokenshaShikaku _toHihokenshaShikaku(DbT1001HihokenshaDaichoEntity entity) {
         IKaigoShikaku kaigoShikaku = toKaigoShikaku(entity);
         ShikakuHenko 資格変更 = toShikakuHenko(
-                entity.getShikakuHenkoJiyuCode(),
+                entity.getShikakuHenkoJiyuCode().toRString(),
                 entity.getShikakuHenkoTodokedeYMD(),
                 entity.getShikakuHenkoYMD());
         JushochitokureiTekiyo 住所地特例適用 = toJushochitokureiTekiyo(
-                entity.getJushochitokureiTekiyoJiyuCode(),
+                entity.getJushochitokureiTekiyoJiyuCode().toRString(),
                 entity.getJushochitokureiTekiyoTodokedeYMD(),
                 entity.getJushochitokureiTekiyoYMD());
         JushochitokureiKaijo 住所地特例解除 = toJushochitokureiKaijo(
-                entity.getJushochitokureiKaijoJiyuCode(),
+                entity.getJushochitokureiKaijoJiyuCode().toRString(),
                 entity.getJushochitokureiKaijoTodokedeYMD(),
                 entity.getJushochitokureiKaijoYMD());
         HihokenshashoSaikofu 被保険者証再交付 = toHihokenshashoSaikofu(
@@ -151,20 +160,19 @@ public final class HihokenshaShikakuMapper {
                 entity.getChohyoKofuRirekiID());
 
         LasdecCode lasdecCode = entity.getShichosonCode();
-        ShoKisaiHokenshaNo shoKisaiHokenshaNo = entity.getShoKisaiHokenshaNo();
         ShikibetsuCode shikibetsuCode = entity.getShikibetsuCode();
-        YMDHMS shoriTimestamp = entity.getShoriTimestamp();
-        HihokenshaKubun hihokenshaKubun = new HihokenshaKubun(entity.getHihokennshaKubunCode(), entity.getHihokennshaKubunCodeMeisho());
+        YMDHMS shoriTimestamp = entity.getShoriTimestamp().value();
+        HihokenshaKubun hihokenshaKubun = new HihokenshaKubun(Code.EMPTY, RString.EMPTY);
         HihokenshaShikaku shikaku
                 = new HihokenshaShikaku.Builder(kaigoShikaku, lasdecCode, shikibetsuCode, shoriTimestamp,
-                        shoKisaiHokenshaNo, hihokenshaKubun).
+                        hihokenshaKubun).
                 hihokenshaNo(entity.getHihokenshaNo()).
                 shikakuHenko(資格変更).
                 jushochitokureiTekiyo(住所地特例適用).
                 jushochitokureiKaijo(住所地特例解除).
                 jushochiTokureishaKubun(JushochiTokureishaKubun.toValue(entity.getJushochiTokureiFlag())).
                 koikinaiJushochiTokureishaKubun(KoikinaiJushochitokureishaKubun.toValue(entity.getKoikinaiJushochiTokureiFlag())).
-                koikinaiJutokuSochimotoLasdecCode(entity.getKoikinaiTokureiSochimotoHokenshaNo()).
+                koikinaiJutokuSochimotoLasdecCode(ShoKisaiHokenshaNo.EMPTY).
                 oldLasdecCode(entity.getKyuShichosonCode()).
                 hihokenshashoSaikofu(被保険者証再交付).
                 build();
@@ -175,17 +183,21 @@ public final class HihokenshaShikakuMapper {
     private static IKaigoShikaku toKaigoShikaku(DbT1001HihokenshaDaichoEntity entity) {
         IKaigoShikaku kaigoShikaku = KaigoShikakuFactory.createInstance(
                 entity.getShikibetsuCode(),
-                jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.HokenShubetsu.介護保険,
+                HokenShubetsu.介護保険,
                 toRDateOrMin(entity.getShikakuShutokuTodokedeYMD()),
                 toRDateOrMin(entity.getShikakuShutokuYMD()),
-                toShikakuShutokuJiyu(entity.getShikakuShutokuJiyuCode()),
+                //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+                //                toShikakuShutokuJiyu(entity.getShikakuShutokuJiyuCode().toRString()),
+                null,
                 toRDateOrMax(entity.getShikakuSoshitsuTodokedeYMD()),
                 toRDateOrMax(entity.getShikakuSoshitsuYMD()),
-                toShikakuSoshitsuJiyu(entity.getShikakuSoshitsuJiyuCode()),
+                //クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+                //                toShikakuSoshitsuJiyu(entity.getShikakuSoshitsuJiyuCode().toRString()),
+                null,
                 toValue(entity.getHihokenshaNo()),
-                entity.getShoKisaiHokenshaNo().getColumnValue(),
-                toRDateOrMax(entity.getIchigoHihokenshaNenreiTotatsuYMD()),
-                ShikakuHihokenshaKubun.toValue(entity.getHihokennshaKubunCode().getColumnValue()),
+                entity.getKoikinaiTokureiSochimotoShichosonCode().value(),
+                toRDateOrMax(entity.getIchigoShikakuShutokuYMD()),
+                ShikakuHihokenshaKubun.toValue(entity.getHihokennshaKubunCode()),
                 JushochiTokureishaKubun.toValue(entity.getJushochiTokureiFlag()));
 
         return kaigoShikaku;
@@ -206,46 +218,46 @@ public final class HihokenshaShikakuMapper {
     private static <T> T toValue(IValueObject<T> source) {
         return isNull(source) ? null : source.value();
     }
-
-    private static IShikakuShutokuJiyu toShikakuShutokuJiyu(RString code) {
-        final ShikakuShutokuJiyu reason = ShikakuShutokuJiyu.toValue(code);
-        return new IShikakuShutokuJiyu() {
-            @Override
-            public RString getCode() {
-                return reason.getCode();
-            }
-
-            @Override
-            public RString getName() {
-                return reason.getName();
-            }
-
-            @Override
-            public RString getShortName() {
-                return reason.getShortName();
-            }
-        };
-    }
-
-    private static IShikakuSoshitsuJiyu toShikakuSoshitsuJiyu(RString code) {
-        final ShikakuSoshitsuJiyu reason = ShikakuSoshitsuJiyu.toValue(code);
-        return new IShikakuSoshitsuJiyu() {
-            @Override
-            public RString getCode() {
-                return reason.getCode();
-            }
-
-            @Override
-            public RString getName() {
-                return reason.getName();
-            }
-
-            @Override
-            public RString getShortName() {
-                return reason.getShortName();
-            }
-        };
-    }
+//クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+//    private static IShikakuShutokuJiyu toShikakuShutokuJiyu(RString code) {
+//        final ShikakuShutokuJiyu reason = ShikakuShutokuJiyu.toValue(code);
+//        return new IShikakuShutokuJiyu() {
+//            @Override
+//            public RString getCode() {
+//                return reason.getCode();
+//            }
+//
+//            @Override
+//            public RString getName() {
+//                return reason.getName();
+//            }
+//
+//            @Override
+//            public RString getShortName() {
+//                return reason.getShortName();
+//            }
+//        };
+//    }
+//クラスが削除されてしまっているため、このクラスをどうするか決める必要がある。
+//    private static IShikakuSoshitsuJiyu toShikakuSoshitsuJiyu(RString code) {
+//        final ShikakuSoshitsuJiyu reason = ShikakuSoshitsuJiyu.toValue(code);
+//        return new IShikakuSoshitsuJiyu() {
+//            @Override
+//            public RString getCode() {
+//                return reason.getCode();
+//            }
+//
+//            @Override
+//            public RString getName() {
+//                return reason.getName();
+//            }
+//
+//            @Override
+//            public RString getShortName() {
+//                return reason.getShortName();
+//            }
+//        };
+//    }
 
     private static ShikakuHenko toShikakuHenko(RString code, FlexibleDate noticeDate, FlexibleDate actionDate) {
         return new ShikakuHenko(ShikakuHenkoJiyu.toValue(code), noticeDate, actionDate);

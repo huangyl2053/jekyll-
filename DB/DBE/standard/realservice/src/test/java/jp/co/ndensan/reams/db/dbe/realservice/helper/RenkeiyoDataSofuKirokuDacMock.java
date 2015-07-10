@@ -40,13 +40,13 @@ public class RenkeiyoDataSofuKirokuDacMock implements IRenkeiyoDataSofuKirokuDac
 
         DbT5022RenkeiyoDataSofuKirokuEntity entity = new DbT5022RenkeiyoDataSofuKirokuEntity();
 
-        shinseishokanriNo = mock(ShinseishoKanriNo.class);
+//        shinseishokanriNo = mock(ShinseishoKanriNo.class);
         shinseishokanriNo = new ShinseishoKanriNo(new RString("100000001"));
 
-        shoriTimestamp = mock(YMDHMS.class);
+//        shoriTimestamp = mock(YMDHMS.class);
         shoriTimestamp = new YMDHMS(new RString("20140808102030"));
 
-        hihokennshaNo = mock(HihokenshaNo.class);
+//        hihokennshaNo = mock(HihokenshaNo.class);
         hihokennshaNo = new HihokenshaNo(new RString("1234567890"));
 
         entity.setShinseishoKanriNo(new ShinseishoKanriNo(new RString("100000001")));
@@ -150,7 +150,7 @@ public class RenkeiyoDataSofuKirokuDacMock implements IRenkeiyoDataSofuKirokuDac
         return 0;
     }
 
-    @Override
+//    @Override
     public int insert(DbT5022RenkeiyoDataSofuKirokuEntity entity) {
         if (entity.getShinseishoKanriNo().getColumnValue().equals(登録可能な申請書管理番号)) {
             return 1;
@@ -158,7 +158,7 @@ public class RenkeiyoDataSofuKirokuDacMock implements IRenkeiyoDataSofuKirokuDac
         return 0;
     }
 
-    @Override
+//    @Override
     public int update(DbT5022RenkeiyoDataSofuKirokuEntity entity) {
         if (entity.getShinseishoKanriNo().getColumnValue().equals(登録可能な申請書管理番号)) {
             return 1;

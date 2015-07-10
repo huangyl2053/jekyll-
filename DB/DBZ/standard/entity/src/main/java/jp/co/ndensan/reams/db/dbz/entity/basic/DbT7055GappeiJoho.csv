@@ -1,0 +1,7 @@
+﻿gappeiYMD,UDD015YMD,FlexibleDate,,,,,A
+chiikiNo,bpchar,RString,,,,,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+gappeiShurui,bpchar,RString,,,,,A
+hokenshaNo,DbUDD003HokenshaNo,ShoKisaiHokenshaNo,,,,,A
+kyuJohoFuyoToYMD,UDD015YMD,FlexibleDate,,,,,A
+kokuhorenDataFromYMD,UDD015YMD,FlexibleDate,,,,,A

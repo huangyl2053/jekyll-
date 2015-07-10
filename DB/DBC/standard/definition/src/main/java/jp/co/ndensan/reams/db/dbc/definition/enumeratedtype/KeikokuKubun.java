@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -52,6 +52,6 @@ public enum KeikokuKubun {
                 return data;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("対応する警告区分").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する警告区分").evaluate());
     }
 }

@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  * @author N8156 宮本 康
  */
 public interface IKaigoDoctorDac {
+    //TODO　介護医師はなくなるため、暫定的にコメントアウト。実装作業にはいった差異にこのクラスを削除する。
 
     /**
      * 引数の条件に該当する介護医師情報エンティティのリストを取得します。

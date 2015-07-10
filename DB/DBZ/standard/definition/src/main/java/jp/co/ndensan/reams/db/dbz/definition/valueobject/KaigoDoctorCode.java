@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.definition.valueobject;
 import java.util.Objects;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.message.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import static java.util.Objects.requireNonNull;
 
@@ -26,7 +26,7 @@ public class KaigoDoctorCode implements Comparable<KaigoDoctorCode>, IDbColumnMa
      * @param 介護医師コード 介護医師コード
      */
     public KaigoDoctorCode(RString 介護医師コード) {
-        this.介護医師コード = requireNonNull(介護医師コード, Messages.E00001.replace("介護医師コード").getMessage());
+        this.介護医師コード = requireNonNull(介護医師コード, Messages.E00001.getMessage());
     }
 
     @Override

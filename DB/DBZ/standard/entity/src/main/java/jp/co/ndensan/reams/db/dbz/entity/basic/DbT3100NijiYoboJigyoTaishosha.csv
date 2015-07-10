@@ -1,0 +1,8 @@
+﻿shoKisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,A
+hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+tekiyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+tekiyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+uketsukeYMD,UDD015YMD,FlexibleDate,,,,,A
+ketteiYMD,UDD015YMD,FlexibleDate,,,,,A

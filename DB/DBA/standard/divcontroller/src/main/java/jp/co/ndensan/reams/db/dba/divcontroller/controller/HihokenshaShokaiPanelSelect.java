@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplShisetsuNyu
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba4010011.tplShoKofuKaishuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dgShikakuShutokuRireki_Row;
 //import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IryoHokenRireki;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShisetsuNyutaishoRirekiKanri;
+//import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShisetsuNyutaishoRirekiKanri;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShoKaishuKirokuKanri;
 //import jp.co.ndensan.reams.db.dbz.divcontroller.controller.IryoHokenRireki;
 //import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShikakuTokusoRireki;

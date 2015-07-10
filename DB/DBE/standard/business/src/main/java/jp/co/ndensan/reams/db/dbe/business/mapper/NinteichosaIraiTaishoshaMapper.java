@@ -5,16 +5,17 @@
 package jp.co.ndensan.reams.db.dbe.business.mapper;
 
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaIraiTaishosha;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiShinsei;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
-import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
 // TODO N8187 久保田英男 URのNinteiChosainのキャメルケースをNinteichosainに修正する。URを修正するタイミングで対応する。
-import jp.co.ndensan.reams.ur.urf.business.INinteiChosain;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.db.dbx.business.INinteiChosain;
+import jp.co.ndensan.reams.db.dbx.business.KaigoJigyosha;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
@@ -51,9 +52,9 @@ public final class NinteichosaIraiTaishoshaMapper {
             IKaigoJigyosha 事業者情報,
             INinteiChosain 認定調査員情報) throws NullPointerException {
 
-        requireNonNull(認定進捗情報, Messages.E00003.replace("認定進捗情報", " 認定調査依頼対象者").getMessage());
-        requireNonNull(要介護認定申請情報, Messages.E00003.replace("要介護認定申請情報", " 認定調査依頼対象者").getMessage());
-        requireNonNull(個人, Messages.E00003.replace("個人", " 認定調査依頼対象者").getMessage());
+        requireNonNull(認定進捗情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定進捗情報", " 認定調査依頼対象者"));
+        requireNonNull(要介護認定申請情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("要介護認定申請情報", " 認定調査依頼対象者"));
+        requireNonNull(個人, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("個人", " 認定調査依頼対象者"));
 
         return new NinteichosaIraiTaishosha(
                 認定進捗情報,
@@ -63,7 +64,7 @@ public final class NinteichosaIraiTaishoshaMapper {
                 要介護認定申請情報.get認定申請年月日(),
                 要介護認定申請情報.get認定申請区分_申請時(),
                 個人,
-                個人.get氏名().getName().value(),
+                個人.get名称().getName().value(),
                 個人.get住所().get住所(),
                 認定調査委託先情報,
                 事業者情報,

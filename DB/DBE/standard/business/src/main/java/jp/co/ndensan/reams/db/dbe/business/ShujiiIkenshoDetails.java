@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -38,10 +38,10 @@ public class ShujiiIkenshoDetails {
             IkenshosakuseiIraiRirekiNo 意見書履歴番号,
             KoroshoIFKubun 厚労省IF識別区分,
             ShujiiIkensho<ShujiiIkenshoItemKubun, ShujiiIkenshoItemForResult> 主治医意見書) {
-        this.申請書管理番号 = requireNonNull(申請書管理番号, Messages.E00001.replace("申請書管理番号").getMessage());
-        this.意見書履歴番号 = requireNonNull(意見書履歴番号, Messages.E00001.replace("意見書履歴番号").getMessage());
-        this.厚労省IF識別区分 = requireNonNull(厚労省IF識別区分, Messages.E00001.replace("厚労省IF識別区分").getMessage());
-        this.主治医意見書 = requireNonNull(主治医意見書, Messages.E00001.replace("主治医意見書").getMessage());
+        this.申請書管理番号 = requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+        this.意見書履歴番号 = requireNonNull(意見書履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書履歴番号"));
+        this.厚労省IF識別区分 = requireNonNull(厚労省IF識別区分, UrSystemErrorMessages.値がnull.getReplacedMessage("厚労省IF識別区分"));
+        this.主治医意見書 = requireNonNull(主治医意見書, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医意見書"));
     }
 
     /**

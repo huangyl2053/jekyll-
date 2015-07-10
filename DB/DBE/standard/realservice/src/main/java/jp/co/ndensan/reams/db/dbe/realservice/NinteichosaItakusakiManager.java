@@ -9,7 +9,8 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.HatsubanJoho;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
+//import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5020HatsubanKanriJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7010NinteichosaItakusakiJohoEntity;
@@ -17,7 +18,7 @@ import jp.co.ndensan.reams.db.dbe.business.mapper.HatsubanJohoMapper;
 import jp.co.ndensan.reams.db.dbe.business.mapper.NinteichosaItakusakiMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.IHatsubanKanriJohoDac;
 import jp.co.ndensan.reams.db.dbe.persistence.NinteichosaItakusakiDac;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -141,7 +142,7 @@ public class NinteichosaItakusakiManager {
     public int save(NinteichosaItakusaki ninteichosaitakusaki) {
         int result = dac.insertOrUpdate(NinteichosaItakusakiMapper.toNinteichosaItakusakiEntity(ninteichosaitakusaki));
         if (result != 1) {
-            throw new ApplicationException(Messages.E00003.replace("認定調査委託先の更新").getMessage());
+            throw new ApplicationException(UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定調査委託先の更新"));
         }
         return result;
     }

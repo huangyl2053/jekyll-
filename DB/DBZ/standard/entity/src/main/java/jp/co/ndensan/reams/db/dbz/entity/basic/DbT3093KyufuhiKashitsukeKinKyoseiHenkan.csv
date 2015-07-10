@@ -1,0 +1,7 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+kashitsukeKanriNo,varchar,RString,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+henkanKinKubun,varchar,RString,,,,,A
+henkanKingaku,numeric,Decimal,,,,,A
+henkanKigenYMD,UDD015YMD,FlexibleDate,,,,,A
+henkanRiyu,varchar,RString,,,,,A

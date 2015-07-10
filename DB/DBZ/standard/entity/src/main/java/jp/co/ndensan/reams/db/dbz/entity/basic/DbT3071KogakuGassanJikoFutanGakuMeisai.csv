@@ -1,0 +1,16 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+taishoNendo,UDD012YSeireki,FlexibleYear,,,,,A
+hokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,A
+shikyuShinseishoSeiriNo,varchar,RString,,,,,A
+taishoM,varchar,RString,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+jikoFutanGaku,numeric,Decimal,,,,,A
+uchisu_70_74JikoFutanGaku,numeric,Decimal,,,,,A
+under_70KogakuShikyuGaku,numeric,Decimal,,,,,A
+over_70_74KogakuShikyuGaku,numeric,Decimal,,,,,A
+tekiyo,varchar,RString,,,,,A
+sumi_JikoFutanGaku,numeric,Decimal,,,,,A
+sumi_70_74JikoFutanGaku,numeric,Decimal,,,,,A
+sumi_under_70KogakuShikyuGaku,numeric,Decimal,,,,,A
+sumi_70_74KogakuShikyuGaku,numeric,Decimal,,,,,A
+sumi_Tekiyo,varchar,RString,,,,,A

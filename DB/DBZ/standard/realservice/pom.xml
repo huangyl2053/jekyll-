@@ -15,16 +15,32 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urf</groupId>
-            <artifactId>UrfDefinition</artifactId>
+            <groupId>jp.co.ndensan.reams.ca.cax</groupId>
+            <artifactId>CaxRealService</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxRealService</artifactId>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzRealService</artifactId>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxRealService</artifactId>
+        </dependency>
+        <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdRealService</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzBusiness</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxBusiness</artifactId>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urf</groupId>
@@ -59,6 +75,13 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbzBusiness</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbzModel</artifactId>
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>

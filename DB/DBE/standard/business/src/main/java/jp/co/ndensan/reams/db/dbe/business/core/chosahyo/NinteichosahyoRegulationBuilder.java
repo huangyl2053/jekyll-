@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinte
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemGroup;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.NinteichosaItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItemNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 
@@ -36,7 +36,7 @@ class NinteichosahyoRegulationBuilder<E extends INinteichosaItemKubun> {
      * @param 調査票定義 調査票定義
      */
     NinteichosahyoRegulationBuilder(Map<E, INinteichosaItem> 調査票定義) {
-        this.調査票定義 = requireNonNull(調査票定義, Messages.E00001.replace("調査票定義").getMessage());
+        this.調査票定義 = requireNonNull(調査票定義, UrSystemErrorMessages.値がnull.getReplacedMessage("調査票定義"));
     }
 
     /**

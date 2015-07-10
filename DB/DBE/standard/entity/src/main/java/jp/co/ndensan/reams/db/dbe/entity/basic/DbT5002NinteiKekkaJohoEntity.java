@@ -18,6 +18,10 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
  * 要介護認定結果情報のエンティティクラスです。
  *
  * @author N8156 宮本 康
+ *
+ * @deprecated 共有子Divでこのテーブルを参照するために
+ * {@link DbT5002NinteiKekkaJohoEntity DBZ.DbT5002NinteiKekkaJohoEntity}
+ * を作成したのでそちらを使用してください。
  */
 public class DbT5002NinteiKekkaJohoEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">

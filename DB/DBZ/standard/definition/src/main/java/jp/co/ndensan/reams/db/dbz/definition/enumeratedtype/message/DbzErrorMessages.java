@@ -9,13 +9,14 @@ import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.message.MessageCreateHelper.toCode;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 
 /**
  * DBZのエラーメッセージ定義列挙型です。
  *
  * @author N9606 漢那 憲作
  */
-public enum DbzErrorMessages implements IMessageGettable {
+public enum DbzErrorMessages implements IMessageGettable, IValidationMessage {
 
     必須項目を入力(1, "必須項目を入力してください。"),
     必須項目を入力_追加メッセージあり(2, "必須項目を入力してください。：?"),
@@ -59,8 +60,8 @@ public enum DbzErrorMessages implements IMessageGettable {
     ファイルFETCHエラー(40, "テキストファイルＦＥＴＣＨエラー（?）"),
     ファイルWRITEエラー(41, "テキストファイルＷＲＩＴＥエラー（?）"),
     出力順序を指定(42, "出力順序を指定してください。"),
-    出力項目を指定(43, "出力項目を指定してください。");
-
+    出力項目を指定(43, "出力項目を指定してください。"),
+    確定不可(43, "最新の取得日として登録できません。:(?)");
     private final Message message;
 
     /**

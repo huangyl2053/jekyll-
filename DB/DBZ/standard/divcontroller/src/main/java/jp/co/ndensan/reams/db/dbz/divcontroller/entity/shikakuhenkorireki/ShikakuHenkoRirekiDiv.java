@@ -6,20 +6,27 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.IShikakuHenkoRirekiDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.HenkoHokenshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.HenkoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.dgHenko_Row;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.util.CodeMasterToKeyValueFunction;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
+import jp.co.ndensan.reams.ur.urz.definition.code.CodeMasterHelper;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuHenkoJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.URZCodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * ShikakuHenkoRireki のクラスファイル
@@ -40,6 +47,24 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     private DataGrid<dgHenko_Row> dgHenko;
     @JsonProperty("HenkoInput")
     private HenkoInputDiv HenkoInput;
+    @JsonProperty("executionStatus")
+    private RString executionStatus;
+    @JsonProperty("henkoRirekiExecutionState")
+    private RString henkoRirekiExecutionState;
+    @JsonProperty("selectRow")
+    private RString selectRow;
+    @JsonProperty("inputMode")
+    private RString inputMode;
+    @JsonProperty("selectIdoYMD")
+    private RString selectIdoYMD;
+    @JsonProperty("latestSoshitsubi")
+    private RString latestSoshitsubi;
+    @JsonProperty("latestShutokubi")
+    private RString latestShutokubi;
+    @JsonProperty("latestKoshinbi")
+    private RString latestKoshinbi;
+    @JsonProperty("ichigoShikakuShutokubi")
+    private RString ichigoShikakuShutokubi;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -75,6 +100,96 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     @JsonProperty("HenkoInput")
     public void setHenkoInput(HenkoInputDiv HenkoInput) {
         this.HenkoInput = HenkoInput;
+    }
+
+    @JsonProperty("executionStatus")
+    public RString getExecutionStatus() {
+        return executionStatus;
+    }
+
+    @JsonProperty("executionStatus")
+    public void setExecutionStatus(RString executionStatus) {
+        this.executionStatus = executionStatus;
+    }
+
+    @JsonProperty("henkoRirekiExecutionState")
+    public RString getHenkoRirekiExecutionState() {
+        return henkoRirekiExecutionState;
+    }
+
+    @JsonProperty("henkoRirekiExecutionState")
+    public void setHenkoRirekiExecutionState(RString henkoRirekiExecutionState) {
+        this.henkoRirekiExecutionState = henkoRirekiExecutionState;
+    }
+
+    @JsonProperty("selectRow")
+    public RString getSelectRow() {
+        return selectRow;
+    }
+
+    @JsonProperty("selectRow")
+    public void setSelectRow(RString selectRow) {
+        this.selectRow = selectRow;
+    }
+
+    @JsonProperty("inputMode")
+    public RString getInputMode() {
+        return inputMode;
+    }
+
+    @JsonProperty("inputMode")
+    public void setInputMode(RString inputMode) {
+        this.inputMode = inputMode;
+    }
+
+    @JsonProperty("selectIdoYMD")
+    public RString getSelectIdoYMD() {
+        return selectIdoYMD;
+    }
+
+    @JsonProperty("selectIdoYMD")
+    public void setSelectIdoYMD(RString selectIdoYMD) {
+        this.selectIdoYMD = selectIdoYMD;
+    }
+
+    @JsonProperty("latestSoshitsubi")
+    public RString getLatestSoshitsubi() {
+        return latestSoshitsubi;
+    }
+
+    @JsonProperty("latestSoshitsubi")
+    public void setLatestSoshitsubi(RString latestSoshitsubi) {
+        this.latestSoshitsubi = latestSoshitsubi;
+    }
+
+    @JsonProperty("latestShutokubi")
+    public RString getLatestShutokubi() {
+        return latestShutokubi;
+    }
+
+    @JsonProperty("latestShutokubi")
+    public void setLatestShutokubi(RString latestShutokubi) {
+        this.latestShutokubi = latestShutokubi;
+    }
+
+    @JsonProperty("latestKoshinbi")
+    public RString getLatestKoshinbi() {
+        return latestKoshinbi;
+    }
+
+    @JsonProperty("latestKoshinbi")
+    public void setLatestKoshinbi(RString latestKoshinbi) {
+        this.latestKoshinbi = latestKoshinbi;
+    }
+
+    @JsonProperty("ichigoShikakuShutokubi")
+    public RString getIchigoShikakuShutokubi() {
+        return ichigoShikakuShutokubi;
+    }
+
+    @JsonProperty("ichigoShikakuShutokubi")
+    public void setIchigoShikakuShutokubi(RString ichigoShikakuShutokubi) {
+        this.ichigoShikakuShutokubi = ichigoShikakuShutokubi;
     }
 
     /*
@@ -405,16 +520,6 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     }
 
     @JsonIgnore
-    public DropDownList getDdlHenkoShozaiHokensha() {
-        return this.getHenkoInput().getHenkoHokenshaJoho().getDdlHenkoShozaiHokensha();
-    }
-
-    @JsonIgnore
-    public void setDdlHenkoShozaiHokensha(DropDownList ddlHenkoShozaiHokensha) {
-        this.getHenkoInput().getHenkoHokenshaJoho().setDdlHenkoShozaiHokensha(ddlHenkoShozaiHokensha);
-    }
-
-    @JsonIgnore
     public DropDownList getDdlHenkoSochimotoHokensha() {
         return this.getHenkoInput().getHenkoHokenshaJoho().getDdlHenkoSochimotoHokensha();
     }
@@ -468,47 +573,37 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     @Override
     public void load(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
         //TODO
+        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(this);
+
         //1)、引数から渡されたキーを元に、被保険者台帳情報を検索する。
         //2)、検索結果として取得する被保険者台帳Listから、資格関連異動の履歴を表現するために必要な情報を抽出する。
         //3)、取得した情報をPanelSessionAccessorに登録する。
         //4)、抽出した資格関連異動履歴Listを、グリッドにマッピングする。
+        handler.load(市町村コード, 被保険者番号);
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void initialize(LasdecCode 市町村コード) {
-        //TODO
-        //1)、引数から受け取った市町村コードを元に、保険者情報を取得する。
-        //2)、取得した保険者情報を元に、以下のように処理を分岐する。
-        //2-1)、保険者が「単一保険者」で「合併なし」の保険者である場合
-        //      HikenshaJohoDisplayModeに、TanitsuGappeiNashiを設定する。
-        //2-2)、保険者が「単一保険者」で「合併あり」の保険者である場合
-        //      HikenshaJohoDisplayModeに、TanitshGappeiAriを設定する。
-        //      保険者情報を元に、旧保険者DDLの選択項目を設定する。
-        //2-3)、保険者が「広域保険者」で「合併なし」の保険者である場合
-        //      HikenshaJohoDisplayModeに、KoikiGappeiNashiを設定する。
-        //      保険者情報を元に、所在保険者DDL・措置元保険者DDLを選択項目を設定する。
-        //2-4)、保険者が「広域保険者」で「合併あり」の保険者である場合
-        //      HikenshaJohoDisplayModeに、KoikiGappeiAriを設定する。
-        //      保険者情報を元に、所在保険者DDL・措置元保険者DDL・旧保険者DDLの選択項目を設定する。
-        //
-        //3)、コードマスタから変更事由(被保険者)（コードマスタ:0126）の情報を取得する。
-        //4)、コードマスタから取得した情報を、変更事由DDLに設定する。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void initialize(LasdecCode 市町村コード, LasdecCode 旧市町村コード, HokenshaJohoDisplayMode mode) {
+
+        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(this);
+        handler.initialize(市町村コード, 旧市町村コード, mode);
     }
 
     @Override
     public void clearInputData() {
         //TODO
         //1)、入力明細パネル上のコントロールに対して、空白やnullなどを設定する。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(this);
+        handler.clearInputData();
     }
 
     @Override
     public IItemList<HihokenshaDaichoModel> get資格関連異動履歴() {
         //TODO
         //1)、PanelSessionAccessorに登録されている情報を取得し、戻り値として返却する。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(this);
+        return handler.get資格関連異動履歴();
     }
 
     @Override
@@ -516,6 +611,8 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
         //TODO
         //1)、引数から渡された情報を、PanelSessionAccessorに登録する。
         //2)、登録した情報を、グリッドにマッピングする。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ShikakuHenkoRirekiHandler handler = new ShikakuHenkoRirekiHandler(this);
+        handler.set被保険者台帳情報(被保険者台帳List);
+        handler.mapping資格変更履歴();
     }
 }

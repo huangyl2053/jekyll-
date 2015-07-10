@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  *
  * @author N3327 三浦 凌
  */
+@Deprecated
 public class ShikakuHenko extends ShikakuIdoBaseItem<ShikakuHenkoJiyu> {
 
     /**
@@ -20,7 +21,7 @@ public class ShikakuHenko extends ShikakuIdoBaseItem<ShikakuHenkoJiyu> {
     public static final ShikakuHenko NOTHING;
 
     static {
-        NOTHING = new ShikakuHenko(ShikakuHenkoJiyu.なし, FlexibleDate.MAX, FlexibleDate.MAX);
+        NOTHING = new ShikakuHenko(ShikakuHenkoJiyu.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
     }
 
     /**

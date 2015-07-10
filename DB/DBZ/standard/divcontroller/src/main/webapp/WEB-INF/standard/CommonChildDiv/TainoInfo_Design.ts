@@ -8,10 +8,6 @@ module DBZ {
 
         export class Events {
 
-            public static onClick_btnReturn(): string {
-                return "onClick_btnReturn";
-            }
-
         }
 
         export class Controls {
@@ -43,6 +39,10 @@ module DBZ {
 
             public btnKensaku(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnKensaku"));
+            }
+
+            public btnGengakuJoho(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnGengakuJoho"));
             }
 
             public txtSaikoNokigen(): UZA.TextBoxDate {
@@ -175,14 +175,6 @@ module DBZ {
 
             public lblMassage4(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblMassage4"));
-            }
-
-            public btnReturn(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnReturn"));
-            }
-
-            public btnKakutei(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKakutei"));
             }
 
         }

@@ -21,6 +21,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzBusiness</artifactId>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
@@ -66,6 +67,24 @@
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxBusiness</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>jp.co.ndensan.reams.uz</groupId>
+            <artifactId>framework</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.google.collections</groupId>
+            <artifactId>google-collections</artifactId>
+            <version>1.0</version>
+            <scope>test</scope>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

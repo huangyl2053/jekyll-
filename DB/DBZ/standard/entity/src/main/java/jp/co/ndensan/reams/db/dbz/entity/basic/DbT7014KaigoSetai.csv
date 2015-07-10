@@ -1,0 +1,5 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+setaiKijunYMD,UDD015YMD,FlexibleDate,,,,,A
+renban,int4,int,,,,,A
+shoriTimestamp,timestamp,RDateTime,,,,,A
+setaiInshikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A

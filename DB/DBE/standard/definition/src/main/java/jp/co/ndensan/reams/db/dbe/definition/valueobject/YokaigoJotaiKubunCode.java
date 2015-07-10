@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
@@ -26,7 +26,7 @@ public class YokaigoJotaiKubunCode implements ICodeWrapValueObject, Comparable<Y
      * @param code 値
      */
     public YokaigoJotaiKubunCode(Code code) {
-        this.code = requireNonNull(code, Messages.E00003.replace("code", getClass().getName()).getMessage());
+        this.code = requireNonNull(code, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("code", getClass().getName()));
     }
 
     @Override

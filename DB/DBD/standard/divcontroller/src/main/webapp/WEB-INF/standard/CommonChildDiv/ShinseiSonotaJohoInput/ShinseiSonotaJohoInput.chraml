@@ -1,0 +1,285 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;ShinseiSonotaJohoInput&quot;,&quot;businessId&quot;:&quot;DBD&quot;,&quot;controlName&quot;:&quot;ShinseiSonotaJohoInput&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBD.ShinseiSonotaJohoInput"><div class="StateChangable UzPanel JSControl FloatLeft marginTop-Default marginBottom-Default marginLeft-Default marginRight-Default UzCommonChildDivPanel Panel-Shadow UzCompositeChild" id="ShinseiSonotaJohoInput" style="width: 1050px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ShinseiSonotaJohoInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1050px&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;ShinseiSonotaJohoInput&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ShinseiSonotaJohoInput&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;hdnDatabaseSubGyomuCode&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hdnShinseishoKanriNo&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;focusPositionID&quot;:&quot;restoreLayoutButton&quot;,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ShinseiSonotaJohoInput_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content ui-droppable ui-sortable panelPadding-M" id="ShinseiSonotaJohoInput_panel_body_area"><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlIdoJiyu" style="width: 368px; height: 21px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlIdoJiyu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;M&quot;,&quot;selectControlID&quot;:&quot;ddlIdoJiyu_core&quot;,&quot;labelLText&quot;:&quot;異動事由&quot;,&quot;dataSource&quot;:[],&quot;isBlankLine&quot;:true}"><span class="word-wrap-break-word Label-L text-align-right Width-S" id="ddlIdoJiyu_labelL"><span>異動事由</span></span><select class="CoreElement Width-M" id="ddlIdoJiyu_core"><option value="isBlankLine"></option></select></div><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlSakujoJiyu" style="width: 368px; height: 21px;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlSakujoJiyu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;M&quot;,&quot;selectControlID&quot;:&quot;ddlSakujoJiyu_core&quot;,&quot;labelLText&quot;:&quot;削除事由&quot;,&quot;labelRWidth&quot;:&quot;110px&quot;,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right Width-S" id="ddlSakujoJiyu_labelL"><span>削除事由</span></span><select class="CoreElement Width-M" id="ddlSakujoJiyu_core"></select></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M ClearFloat UzCompositeChild" id="txtRiyu" style="width: 974px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtRiyu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;850px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtRiyu_core&quot;,&quot;labelLText&quot;:&quot;理由&quot;,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L text-align-right Width-S" id="txtRiyu_labelL"><span>理由</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana" id="txtRiyu_core" style="width: 850px;" type="text" placeholder=""></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtSoshitsuDay" style="width: 214px; height: 20px; position: relative; opacity: 1;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtSoshitsuDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;selectControlID&quot;:&quot;txtSoshitsuDay_core&quot;,&quot;labelLText&quot;:&quot;喪失日&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-S" id="txtSoshitsuDay_labelL"><span>喪失日</span></span><input class="UzTextBox CoreElement" id="txtSoshitsuDay_core" style="width: 90px;" type="text" placeholder="" data-ymd="2" data-fmt="0" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtTorikeshiDay" style="width: 177px; height: 20px; display: block; position: relative; opacity: 1;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtTorikeshiDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;selectControlID&quot;:&quot;txtTorikeshiDay_core&quot;,&quot;labelLText&quot;:&quot;取消日&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtTorikeshiDay_labelL" style="width: 80px;"><span>取消日</span></span><input class="UzTextBox CoreElement" id="txtTorikeshiDay_core" style="width: 90px;" type="text" placeholder="" data-ymd="2" data-fmt="0" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtToshoNinteiKikanFrom" style="width: 227px; height: 20px;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtToshoNinteiKikanFrom&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;selectControlID&quot;:&quot;txtToshoNinteiKikanFrom_core&quot;,&quot;labelLText&quot;:&quot;当初認定期間&quot;,&quot;labelRText&quot;:&quot;～&quot;,&quot;labelLWidth&quot;:&quot;104px&quot;,&quot;labelRWidth&quot;:&quot;25px&quot;,&quot;labelRAlign&quot;:2}"><span class="word-wrap-break-word Label-L text-align-right" id="txtToshoNinteiKikanFrom_labelL" style="width: 104px;"><span>当初認定期間</span></span><input class="UzTextBox CoreElement" id="txtToshoNinteiKikanFrom_core" style="width: 90px;" type="text" placeholder="" data-ymd="2" data-fmt="0" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""><span class="word-wrap-break-word Label-R text-align-right" id="txtToshoNinteiKikanFrom_labelR" style="width: 25px;"><span>～</span></span></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate JSControl FloatLeft controlMargin-M marginRight-XS UzCompositeChild" id="txtToshoNinteiKikanTo" style="width: 95px; height: 20px; margin-left: 3px;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtToshoNinteiKikanTo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;marginLeft&quot;:&quot;3px&quot;,&quot;selectControlID&quot;:&quot;txtToshoNinteiKikanTo_core&quot;}"><input class="UzTextBox CoreElement" id="txtToshoNinteiKikanTo_core" style="width: 90px;" type="text" placeholder="" data-ymd="2" data-fmt="0" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-right ClearFloat Width-S UzCompositeChild" id="lblJukyuShikakuShomeisho" style="opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblJukyuShikakuShomeisho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;lblJukyuShikakuShomeisho&quot;,&quot;text&quot;:&quot;受給資格証明書&quot;}"><span>受給資格証明書</span></span><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtJukyuShikakuHakkoDay1" style="width: 177px; height: 20px; position: relative; opacity: 1;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtJukyuShikakuHakkoDay1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;selectControlID&quot;:&quot;txtJukyuShikakuHakkoDay1_core&quot;,&quot;labelLText&quot;:&quot;発行日１&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtJukyuShikakuHakkoDay1_labelL" style="width: 80px;"><span>発行日１</span></span><input class="UzTextBox CoreElement" id="txtJukyuShikakuHakkoDay1_core" style="width: 90px;" type="text" placeholder="" data-ymd="2" data-fmt="0" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtJukyuShikakuHakkoDay2" style="width: 177px; height: 20px;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtJukyuShikakuHakkoDay2&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;selectControlID&quot;:&quot;txtJukyuShikakuHakkoDay2_core&quot;,&quot;labelLText&quot;:&quot;発行日２&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtJukyuShikakuHakkoDay2_labelL" style="width: 80px;"><span>発行日２</span></span><input class="UzTextBox CoreElement" id="txtJukyuShikakuHakkoDay2_core" style="width: 90px;" type="text" placeholder="" data-ymd="2" data-fmt="0" data-maxdate="" data-mindate="" data-wareki="" data-seireki="" data-setcount="0" data-orgtext=""></div></div></div>                  
+     
+   
+   
+     
+                               
+   
+   <script class="RamlConvert" type="text/javascript">
+var DBD= DBD? DBD: {};
+DBD['SHINSEISONOTAJOHOINPUT'] = {};
+DBD['SHINSEISONOTAJOHOINPUT'].ShinseiSonotaJohoInputRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShinseiSonotaJohoInput').getProperty();parameter0.ddlIdoJiyu = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlIdoJiyu').getProperty();parameter0.ddlSakujoJiyu = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlSakujoJiyu').getProperty();parameter0.txtRiyu = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtRiyu').getProperty();parameter0.txtSoshitsuDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtSoshitsuDay').getProperty();parameter0.txtTorikeshiDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtTorikeshiDay').getProperty();parameter0.txtToshoNinteiKikanFrom = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtToshoNinteiKikanFrom').getProperty();parameter0.txtToshoNinteiKikanTo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtToshoNinteiKikanTo').getProperty();parameter0.lblJukyuShikakuShomeisho = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblJukyuShikakuShomeisho').getProperty();parameter0.txtJukyuShikakuHakkoDay1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtJukyuShikakuHakkoDay1').getProperty();parameter0.txtJukyuShikakuHakkoDay2 = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtJukyuShikakuHakkoDay2').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBD;
+(function (DBD) {
+    (function (ShinseiSonotaJohoInput) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ShinseiSonotaJohoInput.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ShinseiSonotaJohoInput";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBD.ShinseiSonotaJohoInput.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBD.ShinseiSonotaJohoInput.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ShinseiSonotaJohoInput = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ddlIdoJiyu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlIdoJiyu"));
+            };
+
+            Controls.prototype.ddlSakujoJiyu = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlSakujoJiyu"));
+            };
+
+            Controls.prototype.txtRiyu = function () {
+                return new UZA.TextBox(this.convFiledName("txtRiyu"));
+            };
+
+            Controls.prototype.txtSoshitsuDay = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtSoshitsuDay"));
+            };
+
+            Controls.prototype.txtTorikeshiDay = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTorikeshiDay"));
+            };
+
+            Controls.prototype.txtToshoNinteiKikanFrom = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtToshoNinteiKikanFrom"));
+            };
+
+            Controls.prototype.txtToshoNinteiKikanTo = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtToshoNinteiKikanTo"));
+            };
+
+            Controls.prototype.lblJukyuShikakuShomeisho = function () {
+                return new UZA.Label(this.convFiledName("lblJukyuShikakuShomeisho"));
+            };
+
+            Controls.prototype.txtJukyuShikakuHakkoDay1 = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtJukyuShikakuHakkoDay1"));
+            };
+
+            Controls.prototype.txtJukyuShikakuHakkoDay2 = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtJukyuShikakuHakkoDay2"));
+            };
+            return Controls;
+        })();
+        ShinseiSonotaJohoInput.Controls = Controls;
+    })(DBD.ShinseiSonotaJohoInput || (DBD.ShinseiSonotaJohoInput = {}));
+    var ShinseiSonotaJohoInput = DBD.ShinseiSonotaJohoInput;
+})(DBD || (DBD = {}));
+var DBD;
+(function (DBD) {
+    (function (ShinseiSonotaJohoInput) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShinseiSonotaJohoInput.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new ShinseiSonotaJohoInput.PublicProperties(this.fieldName);
+            };
+
+            ModeController.prototype.ShoriType = function () {
+                return new Modes.ShoriType(this.controls);
+            };
+            return ModeController;
+        })();
+        ShinseiSonotaJohoInput.ModeController = ModeController;
+
+        (function (Modes) {
+            var ShoriType = (function () {
+                function ShoriType(controls) {
+                    this.controls = controls;
+                }
+                ShoriType.prototype.TokushuTsuikaMode = function () {
+                    this.controls.ddlIdoJiyu().readOnly = false;
+                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.txtRiyu().readOnly = false;
+                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtTorikeshiDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = true;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
+                };
+
+                ShoriType.prototype.TokushuShuseiMode = function () {
+                    this.controls.ddlIdoJiyu().readOnly = false;
+                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.txtRiyu().readOnly = false;
+                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtTorikeshiDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = false;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = false;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = false;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = false;
+                };
+                ShoriType.prototype.TokushuSakujoMode = function () {
+                    this.controls.ddlIdoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().readOnly = false;
+                    this.controls.txtRiyu().readOnly = true;
+                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtTorikeshiDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = true;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
+                };
+
+                ShoriType.prototype.TokushuRirekiShuseiMode = function () {
+                    this.controls.ddlIdoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.txtRiyu().readOnly = false;
+                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtTorikeshiDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = false;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = false;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = false;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = false;
+                };
+
+                ShoriType.prototype.NinteiMode = function () {
+                    this.controls.ddlIdoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.txtRiyu().readOnly = false;
+                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtTorikeshiDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = true;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
+                };
+                ShoriType.prototype.KyakkaMode = function () {
+                    this.controls.ddlIdoJiyu().readOnly = false;
+                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.txtRiyu().readOnly = false;
+                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtTorikeshiDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = true;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
+                };
+
+                ShoriType.prototype.ShokkenKisaiMode = function () {
+                    this.controls.ddlIdoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.txtRiyu().readOnly = false;
+                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtTorikeshiDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = true;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
+                };
+                ShoriType.prototype.TorikeshiMode = function () {
+                    this.controls.ddlIdoJiyu().readOnly = false;
+                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.txtRiyu().readOnly = false;
+                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtTorikeshiDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = false;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = false;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
+                };
+                ShoriType.prototype.ShokkenTorikeshiMode = function () {
+                    this.controls.ddlIdoJiyu().readOnly = false;
+                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.txtRiyu().readOnly = false;
+                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtTorikeshiDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = false;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = false;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
+                };
+
+                ShoriType.prototype.SoshitsuMode = function () {
+                    this.controls.ddlIdoJiyu().readOnly = false;
+                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.txtRiyu().readOnly = false;
+                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtTorikeshiDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = true;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
+                };
+
+                ShoriType.prototype.JukyuShikakushashoMode = function () {
+                    this.controls.ddlIdoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.txtRiyu().readOnly = false;
+                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtTorikeshiDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = true;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = false;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = false;
+                };
+
+                ShoriType.prototype.ShokaiMode = function () {
+                    this.controls.ddlIdoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.txtRiyu().readOnly = true;
+                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtTorikeshiDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = true;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
+                };
+                return ShoriType;
+            })();
+            Modes.ShoriType = ShoriType;
+        })(ShinseiSonotaJohoInput.Modes || (ShinseiSonotaJohoInput.Modes = {}));
+        var Modes = ShinseiSonotaJohoInput.Modes;
+    })(DBD.ShinseiSonotaJohoInput || (DBD.ShinseiSonotaJohoInput = {}));
+    var ShinseiSonotaJohoInput = DBD.ShinseiSonotaJohoInput;
+})(DBD || (DBD = {}));
+
+var DBD;
+(function (DBD) {
+    (function (ShinseiSonotaJohoInput) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShinseiSonotaJohoInput.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ShinseiSonotaJohoInput.PublicProperties = PublicProperties;
+    })(DBD.ShinseiSonotaJohoInput || (DBD.ShinseiSonotaJohoInput = {}));
+    var ShinseiSonotaJohoInput = DBD.ShinseiSonotaJohoInput;
+})(DBD || (DBD = {}));
+</script></div>

@@ -1,0 +1,12 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+uketsukeYMD,UDD015YMD,FlexibleDate,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+shinseiYMD,UDD015YMD,FlexibleDate,,,,,A
+shinseishaKubun,varchar,RString,,,,,A
+daikoJigyoshaNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,A
+jigyoshaKubun,varchar,RString,,,,,A
+shinseishaYubinNo,UDD003YubinNo,YubinNo,,,,,A
+shinseishaJusho,varchar,RString,,,,,A
+shinseishaTelNo,UDD026TelNo,TelNo,,,,,A
+shinseiRiyu,varchar,RString,,,,,A
+tandokuJoseiShuruiCode,varchar,RString,,,,,A

@@ -9,7 +9,8 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.HatsubanJoho;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
+//import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.business.NinteichosaItakusaki;
 import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5020HatsubanKanriJohoEntity;
@@ -52,8 +53,8 @@ public class NinteichosaItakusakiManagerTest {
         ninteichosaItakusakiDac = mock(NinteichosaItakusakiDac.class);
         hatsubankanrijohoDac = mock(IHatsubanKanriJohoDac.class);
         ninteichosaItakusaki = mock(NinteichosaItakusaki.class);
-        kaigojigyoshaNo = mock(KaigoJigyoshaNo.class);
-        jigyoshaNo = mock(JigyoshaNo.class);
+        kaigojigyoshaNo = KaigoJigyoshaNo.EMPTY;
+        jigyoshaNo = JigyoshaNo.EMPTY;
         entity = mock(DbT7010NinteichosaItakusakiJohoEntity.class);
         hatsubanentity = mock(DbT5020HatsubanKanriJohoEntity.class);
         list = new ArrayList<>();
@@ -131,7 +132,7 @@ public class NinteichosaItakusakiManagerTest {
 
         @Test
         public void 引数の指定がない場合get認定調査委託先介護事業者番号指定はNullを返却する() {
-            kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("001"));
+            kaigojigyoshaNo = new KaigoJigyoshaNo(new RString("0000000001"));
             when(ninteichosaItakusakiDac.select(null, kaigojigyoshaNo, true)).thenReturn(null);
             NinteichosaItakusaki result = sut.get認定調査委託先介護事業者番号指定(null, kaigojigyoshaNo, true);
             assertThat(result, nullValue());

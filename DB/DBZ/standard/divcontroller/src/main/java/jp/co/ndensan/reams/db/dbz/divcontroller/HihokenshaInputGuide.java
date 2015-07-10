@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 public class HihokenshaInputGuide {
 
-    private final static RString HIHOKENSHA_DATA = new RString("hihokenshaInputGuide/HihokenshaData.yml");
+    private static final RString HIHOKENSHA_DATA = new RString("hihokenshaInputGuide/HihokenshaData.yml");
 
     /**
      * 被保険者入力補助ガイドの初期処理を表示します。
@@ -78,7 +78,8 @@ public class HihokenshaInputGuide {
     }
 
     private dgSearchResultOfHihokensha_Row createSearchResultRow(ControlGenerator generator) {
-        dgSearchResultOfHihokensha_Row row = new dgSearchResultOfHihokensha_Row(new Button(), RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+        dgSearchResultOfHihokensha_Row row = new dgSearchResultOfHihokensha_Row(new Button(),
+                RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, new TextBoxDate(), RString.EMPTY, RString.EMPTY, RString.EMPTY,
                 RString.EMPTY, RString.EMPTY);
 

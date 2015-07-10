@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 
@@ -27,7 +27,7 @@ public class ShinsainKubunCode implements ICodeWrapValueObject, Comparable<Shins
      * @throws NullPointerException 引数にnullが渡されたとき
      */
     public ShinsainKubunCode(Code code) throws NullPointerException {
-        this.code = requireNonNull(code, Messages.E00003.replace("審査員区分コード", getClass().getName()).getMessage());
+        this.code = requireNonNull(code, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("審査員区分コード", getClass().getName()));
     }
 
     @Override

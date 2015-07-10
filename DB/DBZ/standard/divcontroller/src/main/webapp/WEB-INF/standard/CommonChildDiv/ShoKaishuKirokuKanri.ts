@@ -1,6 +1,3 @@
-/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
 
 /// <reference path='ShoKaishuKirokuKanri_Design.ts' />
 module DBZ
@@ -29,7 +26,7 @@ module DBZ
             }
 
             public PublicProperties() {
-                return new PublicProperties(this.fieldName);
+                return new DBZ.ShoKaishuKirokuKanri.PublicProperties(this.fieldName);
             }
             
             public 表示方法() {
@@ -163,19 +160,19 @@ module DBZ {
             }
 
             public getShoKaishuJokyoShosai_panelDisplay() {
-                return this.controls.ccdShoKaishuJokyoShosai().PublicProperties().getShoKaishuJokyoShosai_panelDisplay;
+                return this.controls.ccdShoKaishuJokyoShosai().PublicProperties().getShoKaishuJokyoShosai_panelDisplay();
             }
 
             public setShoKaishuJokyoShosai_panelDisplay(value) {
-                this.controls.ccdShoKaishuJokyoShosai().PublicProperties().setShoKaishuJokyoShosai_panelDisplay = value;
+                this.controls.ccdShoKaishuJokyoShosai().PublicProperties().setShoKaishuJokyoShosai_panelDisplay(value);
             }
 
             public getShoKaishuJokyoShosai_canOpenAndClose() {
-                return this.controls.ccdShoKaishuJokyoShosai().PublicProperties().getShoKaishuJokyoShosai_canOpenAndClose;
+                return this.controls.ccdShoKaishuJokyoShosai().PublicProperties().getShoKaishuJokyoShosai_canOpenAndClose();
             }
 
             public setShoKaishuJokyoShosai_canOpenAndClose(value) {
-                this.controls.ccdShoKaishuJokyoShosai().PublicProperties().setShoKaishuJokyoShosai_canOpenAndClose = value;
+                this.controls.ccdShoKaishuJokyoShosai().PublicProperties().setShoKaishuJokyoShosai_canOpenAndClose(value);
             }
 
         }

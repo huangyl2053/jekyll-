@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -26,7 +26,7 @@ public class KaigoNinteichosainNo implements Comparable<KaigoNinteichosainNo>, I
      * @throws NullPointerException 引数にnullが渡されたとき
      */
     public KaigoNinteichosainNo(RString 介護調査員番号) throws NullPointerException {
-        this.介護調査員番号 = requireNonNull(介護調査員番号, Messages.E00001.replace("介護調査員番号").getMessage());
+        this.介護調査員番号 = requireNonNull(介護調査員番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護調査員番号"));
     }
 
     @Override

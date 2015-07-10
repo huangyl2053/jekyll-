@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteichosaIraiDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.realservice.helper.NinteichosaIraiTestHelper;
 import static jp.co.ndensan.reams.db.dbe.realservice.helper.NinteichosaIraiTestHelper.*;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestBase;
@@ -63,7 +64,7 @@ public class NinteichosaIraiManagerTest extends TestBase {
 
         private INinteichosaIraiDac createDac(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号) {
             INinteichosaIraiDac dac = mock(INinteichosaIraiDac.class);
-            when(dac.select(申請書管理番号, 認定調査依頼履歴番号)).thenReturn(create認定調査依頼情報Entity(申請書管理番号, 認定調査依頼履歴番号));
+            when(dac.select(申請書管理番号, 認定調査依頼履歴番号)).thenReturn(NinteichosaIraiTestHelper.create認定調査依頼情報Entity(申請書管理番号, 認定調査依頼履歴番号));
             return dac;
         }
     }

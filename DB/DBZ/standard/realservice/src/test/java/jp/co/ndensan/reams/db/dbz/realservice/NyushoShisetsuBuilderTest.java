@@ -11,11 +11,12 @@ import jp.co.ndensan.reams.db.dbz.business.helper.ShisetsuNyutaishoMock;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
-import jp.co.ndensan.reams.ur.urf.definition.enumeratedtype.KaigoHokenNyushoShisetsuBunrui;
-import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaFinder;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
-import jp.co.ndensan.reams.ur.urz.realservice.IHojinFinder;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.KaigoHokenNyushoShisetsuBunrui;
+import jp.co.ndensan.reams.db.dbx.realservice.IKaigoJigyoshaFinder;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojin;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IHojinFinder;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -69,9 +70,10 @@ public class NyushoShisetsuBuilderTest extends DbzTestBase {
         IHojin hojinMock = ShisetsuNyutaishoMock.createHojinMock();
 
         //TODO n3317塚田萌　RDateからFlexibleDateに変更されたらRDateを修正。
-        when(HojinFinderMock.get法人(any(ShikibetsuCode.class), any(RDate.class)))
+//        when(HojinFinderMock.get法人(any(ShikibetsuCode.class), any(RDate.class)))
+//                .thenReturn(hojinMock);
+        when(HojinFinderMock.get法人(any(GyomuCode.class), any(ShikibetsuCode.class)))
                 .thenReturn(hojinMock);
-
         return HojinFinderMock;
     }
 

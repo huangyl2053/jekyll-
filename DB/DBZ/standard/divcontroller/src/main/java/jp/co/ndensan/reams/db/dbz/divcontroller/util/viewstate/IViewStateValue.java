@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbz.model.util.optional.IOptional;
+import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateChangeState;
 
 /**
@@ -22,7 +22,7 @@ public interface IViewStateValue<T extends Serializable> {
      *
      * @return ViewStateに保持されている値(ただし、保持していないかもしれない。)
      */
-    IOptional<T> tryToGet();
+    Optional<T> tryToGet();
 
     /**
      * 引数の値を、{@code ViewState}へ保持します。

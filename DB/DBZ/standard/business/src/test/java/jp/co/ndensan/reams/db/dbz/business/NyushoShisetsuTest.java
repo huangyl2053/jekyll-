@@ -36,7 +36,8 @@ public class NyushoShisetsuTest extends DbzTestBase {
     @BeforeClass
     public static void setUp() {
         施設種類 = ShisetsuType.介護保険施設;
-        施設コード = mock(ShisetsuCode.class);
+//        施設コード = mock(ShisetsuCode.class);
+        施設コード = new ShisetsuCode(RString.EMPTY);
         施設名称 = new RString("たいよう");
         施設カナ名称 = new RString("タイヨウ");
         施設所在地住所 = new RString("山ノ内町");

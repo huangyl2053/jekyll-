@@ -3,25 +3,33 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilis
 /**
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.IJushochiTokureiRirekiListDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuKaijoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuTekiyoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.KaijojiHokenshaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.TekiyojiHokenshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.dgJutoku_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.kaijojiHokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.tekiyojiHokenshaJohoDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import java.util.HashMap;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ViewExecutionStatus;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigoatenainfo.IKaigoAtenaInfoDiv;
+import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.atenashokaisimple.IAtenaShokaiSimpleDiv;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * JushochiTokureiRirekiList のクラスファイル
@@ -42,6 +50,10 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     private DataGrid<dgJutoku_Row> dgJutoku;
     @JsonProperty("JutokuInput")
     private JutokuInputDiv JutokuInput;
+    @JsonProperty("executionStatus")
+    private RString executionStatus;
+    @JsonProperty("jushochiTokureiExecutionState")
+    private RString jushochiTokureiExecutionState;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -77,6 +89,26 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     @JsonProperty("JutokuInput")
     public void setJutokuInput(JutokuInputDiv JutokuInput) {
         this.JutokuInput = JutokuInput;
+    }
+
+    @JsonProperty("executionStatus")
+    public RString getExecutionStatus() {
+        return executionStatus;
+    }
+
+    @JsonProperty("executionStatus")
+    public void setExecutionStatus(RString executionStatus) {
+        this.executionStatus = executionStatus;
+    }
+
+    @JsonProperty("jushochiTokureiExecutionState")
+    public RString getJushochiTokureiExecutionState() {
+        return jushochiTokureiExecutionState;
+    }
+
+    @JsonProperty("jushochiTokureiExecutionState")
+    public void setJushochiTokureiExecutionState(RString jushochiTokureiExecutionState) {
+        this.jushochiTokureiExecutionState = jushochiTokureiExecutionState;
     }
 
     /*
@@ -291,7 +323,8 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
         kaijoShokai("kaijoShokai"),
         tekiyoInput("tekiyoInput"),
         kaijoInput("kaijoInput"),
-        TeiseiInput("TeiseiInput"),
+        teiseiInput("teiseiInput"),
+        teiseiShokai("teiseiShokai"),
         displayNone("displayNone");
 
         private final String name;
@@ -408,23 +441,13 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public tekiyojiHokenshaJohoDiv getTekiyojiHokenshaJoho() {
+    public TekiyojiHokenshaJohoDiv getTekiyojiHokenshaJoho() {
         return this.getJutokuInput().getJutokuTekiyoInput().getTekiyojiHokenshaJoho();
     }
 
     @JsonIgnore
-    public void setTekiyojiHokenshaJoho(tekiyojiHokenshaJohoDiv tekiyojiHokenshaJoho) {
-        this.getJutokuInput().getJutokuTekiyoInput().setTekiyojiHokenshaJoho(tekiyojiHokenshaJoho);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlTekiyojiShozaiHokensha() {
-        return this.getJutokuInput().getJutokuTekiyoInput().getTekiyojiHokenshaJoho().getDdlTekiyojiShozaiHokensha();
-    }
-
-    @JsonIgnore
-    public void setDdlTekiyojiShozaiHokensha(DropDownList ddlTekiyojiShozaiHokensha) {
-        this.getJutokuInput().getJutokuTekiyoInput().getTekiyojiHokenshaJoho().setDdlTekiyojiShozaiHokensha(ddlTekiyojiShozaiHokensha);
+    public void setTekiyojiHokenshaJoho(TekiyojiHokenshaJohoDiv TekiyojiHokenshaJoho) {
+        this.getJutokuInput().getJutokuTekiyoInput().setTekiyojiHokenshaJoho(TekiyojiHokenshaJoho);
     }
 
     @JsonIgnore
@@ -498,23 +521,13 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public kaijojiHokenshaJohoDiv getKaijojiHokenshaJoho() {
+    public KaijojiHokenshaJohoDiv getKaijojiHokenshaJoho() {
         return this.getJutokuInput().getJutokuKaijoInput().getKaijojiHokenshaJoho();
     }
 
     @JsonIgnore
-    public void setKaijojiHokenshaJoho(kaijojiHokenshaJohoDiv kaijojiHokenshaJoho) {
-        this.getJutokuInput().getJutokuKaijoInput().setKaijojiHokenshaJoho(kaijojiHokenshaJoho);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlKaijojiShozaiHokensha() {
-        return this.getJutokuInput().getJutokuKaijoInput().getKaijojiHokenshaJoho().getDdlKaijojiShozaiHokensha();
-    }
-
-    @JsonIgnore
-    public void setDdlKaijojiShozaiHokensha(DropDownList ddlKaijojiShozaiHokensha) {
-        this.getJutokuInput().getJutokuKaijoInput().getKaijojiHokenshaJoho().setDdlKaijojiShozaiHokensha(ddlKaijojiShozaiHokensha);
+    public void setKaijojiHokenshaJoho(KaijojiHokenshaJohoDiv KaijojiHokenshaJoho) {
+        this.getJutokuInput().getJutokuKaijoInput().setKaijojiHokenshaJoho(KaijojiHokenshaJoho);
     }
 
     @JsonIgnore
@@ -569,60 +582,61 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
 
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void load(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
-
-        //TODO
-        //1)、引数から渡されたキーを元に、被保険者台帳情報を検索する。
-        //2)、検索結果として取得する被保険者台帳Listから、住所地特例の履歴を表現するために必要な情報を抽出する。
-        //3)、取得した情報をPanelSessionAccessorに登録する。
-        //4)、抽出した住所地特例履歴Listを、グリッドにマッピングする。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public IItemList<HihokenshaDaichoModel> get被保険者台帳情報() {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        return handler.getUpdate被保険者台帳情報();
     }
 
     @Override
-    public IItemList<HihokenshaDaichoModel> get住所地特例異動履歴() {
-
-        //TODO
-        //1)、PanelSessionAccessorに登録されている情報を取得し、戻り値として返却する。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void set被保険者台帳情報(IItemList<HihokenshaDaichoModel> 被保険者台帳List) {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        handler.set被保険者台帳情報(被保険者台帳List);
+        handler.mapping住所地特例履歴();
     }
 
     @Override
-    public void set住所地特例異動履歴(IItemList<HihokenshaDaichoModel> 被保険者台帳List) {
-
-        //TODO
-        //1)、引数から渡された情報を、PanelSessionAccessorに登録する。
-        //2)、登録した情報を、グリッドにマッピングする。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void mapping住所地特例履歴() {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        handler.mapping住所地特例履歴();
     }
 
     @Override
     public void clearInputData() {
-        //TODO
-        //1)、入力明細パネル上のコントロールに対して、空白やnullなどを設定する。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        handler.clearInputData();
     }
 
     @Override
-    public void initialize(LasdecCode 市町村コード) {
-        //TODO
-        //1)、引数から受け取った市町村コードを元に、保険者情報を取得する。
-        //2)、取得した保険者情報を元に、以下のように処理を分岐する。
-        //2-1)、保険者が「単一保険者」で「合併なし」の保険者である場合
-        //      HikenshaJohoDisplayModeに、TanitsuGappeiNashiを設定する。
-        //2-2)、保険者が「単一保険者」で「合併あり」の保険者である場合
-        //      HikenshaJohoDisplayModeに、TanitshGappeiAriを設定する。
-        //      保険者情報を元に、旧保険者DDLの選択項目を設定する。
-        //2-3)、保険者が「広域保険者」で「合併なし」の保険者である場合
-        //      HikenshaJohoDisplayModeに、KoikiGappeiNashiを設定する。
-        //      保険者情報を元に、所在保険者DDL・措置元保険者DDLを選択項目を設定する。
-        //2-4)、保険者が「広域保険者」で「合併あり」の保険者である場合
-        //      HikenshaJohoDisplayModeに、KoikiGappeiAriを設定する。
-        //      保険者情報を元に、所在保険者DDL・措置元保険者DDL・旧保険者DDLの選択項目を設定する。
-        //
-        //3)、コードマスタから住特適用（コードマスタ:0127）、住適解除（コードマスタ:0128）の情報を取得する。
-        //4)、コードマスタから取得した情報を、適用事由DDL、解除事由DDLに設定する。
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void initialize(LasdecCode kyuShichosonCode, ViewExecutionStatus exeStatus, JushochiTokureiExecutionStatus jutokuExeStatsu,
+            JushochiTokureiRirekiListDiv.HokenshaJohoDisplayMode mode) {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        handler.initialize(kyuShichosonCode, exeStatus, jutokuExeStatsu, mode);
     }
 
+    @Override
+    public boolean hasChangedInMeisai() {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        return handler.hasChangedInMeisai();
+    }
+
+    @Override
+    public void setMeisaiDisplayMode(MeisaiDisplayMode displayMode) {
+        setMode_MeisaiDisplayMode(displayMode);
+    }
+
+    @Override
+    public void setAddButtonDisplay(BtnDisplayMode displayMode) {
+        setMode_BtnDisplayMode(displayMode);
+    }
+
+    @Override
+    public void setDisplayType(DisplayType displayType) {
+        setMode_DisplayType(displayType);
+    }
+
+    @Override
+    public boolean hasChanged() {
+        JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(this);
+        return handler.hasChanged();
+    }
 }

@@ -7,14 +7,16 @@ package jp.co.ndensan.reams.db.dbe.business;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+//import jp.co.ndensan.reams.ur.urz.business.IIryoKikanCode;
+//import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.message.Messages;
 
 /**
  * 主治医の情報を表すクラスです。
@@ -26,7 +28,7 @@ public class Shujii implements IShujii {
     private final LasdecCode 市町村コード;
     private final KaigoIryoKikanCode 介護医療機関コード;
     private final KaigoDoctorCode 介護医師コード;
-    private final IIryoKikanCode 医療機関コード;
+    private final IryoKikanCode 医療機関コード;
     private final RString 医師識別番号;
     private final IshiJokyo 医師の状況;
     private final YubinNo 郵便番号;
@@ -49,7 +51,7 @@ public class Shujii implements IShujii {
      * @param ＦＡＸ番号 ＦＡＸ番号
      */
     public Shujii(LasdecCode 市町村コード, KaigoIryoKikanCode 介護医療機関コード, KaigoDoctorCode 介護医師コード,
-            IIryoKikanCode 医療機関コード, RString 医師識別番号, IshiJokyo 医師の状況,
+            /*I*/ IryoKikanCode 医療機関コード, RString 医師識別番号, IshiJokyo 医師の状況,
             YubinNo 郵便番号, AtenaJusho 住所, TelNo 電話番号, RString ＦＡＸ番号) {
         this.市町村コード = requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
         this.介護医療機関コード = requireNonNull(介護医療機関コード, Messages.E00001.replace("介護医療機関コード").getMessage());
@@ -79,7 +81,7 @@ public class Shujii implements IShujii {
     }
 
     @Override
-    public IIryoKikanCode get医療機関コード() {
+    public IryoKikanCode get医療機関コード() {
         return 医療機関コード;
     }
 

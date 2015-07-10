@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -37,12 +37,12 @@ public class ShinsakaiIinKoza {
      */
     public ShinsakaiIinKoza(KinyuKikanCode 金融機関コード, KinyuKikanShitenCode 金融機関支店コード, RString 口座種別,
             RString 口座名義人, RString 口座名義人カナ, RString 口座番号) throws NullPointerException {
-        requireNonNull(金融機関コード, Messages.E00003.replace("金融機関コード", getClass().getName()).getMessage());
-        requireNonNull(金融機関支店コード, Messages.E00003.replace("金融機関支店コード", getClass().getName()).getMessage());
-        requireNonNull(口座種別, Messages.E00003.replace("口座種別", getClass().getName()).getMessage());
-        requireNonNull(口座名義人, Messages.E00003.replace("口座名義人", getClass().getName()).getMessage());
-        requireNonNull(口座名義人カナ, Messages.E00003.replace("口座名義人カナ", getClass().getName()).getMessage());
-        requireNonNull(口座番号, Messages.E00003.replace("口座番号", getClass().getName()).getMessage());
+        requireNonNull(金融機関コード, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("金融機関コード", getClass().getName()));
+        requireNonNull(金融機関支店コード, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("金融機関支店コード", getClass().getName()));
+        requireNonNull(口座種別, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("口座種別", getClass().getName()));
+        requireNonNull(口座名義人, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("口座名義人", getClass().getName()));
+        requireNonNull(口座名義人カナ, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("口座名義人カナ", getClass().getName()));
+        requireNonNull(口座番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("口座番号", getClass().getName()));
 
         this.金融機関コード = 金融機関コード;
         this.金融機関支店コード = 金融機関支店コード;

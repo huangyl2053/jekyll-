@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuKaijoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuTekiyoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.kaijojiHokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.tekiyojiHokenshaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.KaijojiHokenshaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.TekiyojiHokenshaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -115,23 +115,13 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public tekiyojiHokenshaJohoDiv getTekiyojiHokenshaJoho() {
+    public TekiyojiHokenshaJohoDiv getTekiyojiHokenshaJoho() {
         return this.getJutokuTekiyoInput().getTekiyojiHokenshaJoho();
     }
 
     @JsonIgnore
-    public void  setTekiyojiHokenshaJoho(tekiyojiHokenshaJohoDiv tekiyojiHokenshaJoho) {
-        this.getJutokuTekiyoInput().setTekiyojiHokenshaJoho(tekiyojiHokenshaJoho);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlTekiyojiShozaiHokensha() {
-        return this.getJutokuTekiyoInput().getTekiyojiHokenshaJoho().getDdlTekiyojiShozaiHokensha();
-    }
-
-    @JsonIgnore
-    public void  setDdlTekiyojiShozaiHokensha(DropDownList ddlTekiyojiShozaiHokensha) {
-        this.getJutokuTekiyoInput().getTekiyojiHokenshaJoho().setDdlTekiyojiShozaiHokensha(ddlTekiyojiShozaiHokensha);
+    public void  setTekiyojiHokenshaJoho(TekiyojiHokenshaJohoDiv TekiyojiHokenshaJoho) {
+        this.getJutokuTekiyoInput().setTekiyojiHokenshaJoho(TekiyojiHokenshaJoho);
     }
 
     @JsonIgnore
@@ -195,23 +185,13 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public kaijojiHokenshaJohoDiv getKaijojiHokenshaJoho() {
+    public KaijojiHokenshaJohoDiv getKaijojiHokenshaJoho() {
         return this.getJutokuKaijoInput().getKaijojiHokenshaJoho();
     }
 
     @JsonIgnore
-    public void  setKaijojiHokenshaJoho(kaijojiHokenshaJohoDiv kaijojiHokenshaJoho) {
-        this.getJutokuKaijoInput().setKaijojiHokenshaJoho(kaijojiHokenshaJoho);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlKaijojiShozaiHokensha() {
-        return this.getJutokuKaijoInput().getKaijojiHokenshaJoho().getDdlKaijojiShozaiHokensha();
-    }
-
-    @JsonIgnore
-    public void  setDdlKaijojiShozaiHokensha(DropDownList ddlKaijojiShozaiHokensha) {
-        this.getJutokuKaijoInput().getKaijojiHokenshaJoho().setDdlKaijojiShozaiHokensha(ddlKaijojiShozaiHokensha);
+    public void  setKaijojiHokenshaJoho(KaijojiHokenshaJohoDiv KaijojiHokenshaJoho) {
+        this.getJutokuKaijoInput().setKaijojiHokenshaJoho(KaijojiHokenshaJoho);
     }
 
     @JsonIgnore

@@ -92,7 +92,7 @@ public final class ValueObjectValidations {
         }
     }
 
-    private static class _ValueObjecValidationSpec<T> implements IValueObjectValidationSpec<T> {
+    private static final class _ValueObjecValidationSpec<T> implements IValueObjectValidationSpec<T> {
 
         private final IValueObjectInfo info;
         private final ValueObjectCheckList<T> checkList;

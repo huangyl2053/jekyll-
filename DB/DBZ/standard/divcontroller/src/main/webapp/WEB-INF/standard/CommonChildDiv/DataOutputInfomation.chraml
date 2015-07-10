@@ -1,0 +1,367 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="defaultLayout" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBE&quot;,&quot;controlName&quot;:&quot;DataOutputInfomation&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;CloseOK&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBE.DataOutputInfomation"><div title="" class="UzPanel Panel-Shadow FloatLeft JSControl Panel UzPanelAndText panelMarginTop-M panelMarginBottom-M StateChangable ClearFloat marginLeft-XS marginRight-XS marginTop-Default marginBottom-Default UzCommonChildDivPanel Width-G4 UzCompositeChild" id="DataOutputInfomation" style="margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;DataOutputInfomation&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G4&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;DataOutputInfomation&quot;,&quot;title&quot;:&quot;完了メッセージ&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;DataOutputInfomation&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="DataOutputInfomation_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">完了メッセージ</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="DataOutputInfomation_panel_body_area"><img title="" class="UzIcon FloatLeft JSControl controlMargin-M Width-XS marginLeft-XS marginRight-XS IconSize-S UzCompositeChild" id="icnKanryo" alt="image" src="/uz/uza/image/UZ_Info.png" data-control-type="Icon" data-obj="{&quot;fieldName&quot;:&quot;icnKanryo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Icon&quot;,&quot;selectControlID&quot;:&quot;icnKanryo&quot;,&quot;iconSize&quot;:1}"><span title="" class="UzLabel word-wrap-break-word FloatLeft JSControl controlMargin-M marginLeft-XS marginRight-XS text-align-center UzCompositeChild" id="lblMessage" style="width: 300px;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblMessage&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;300px&quot;,&quot;selectControlID&quot;:&quot;lblMessage&quot;,&quot;text&quot;:&quot;データ出力が終了しました&quot;,&quot;align&quot;:1}"><span>データ出力が終了しました</span></span><button title="" class="UzButton JSControl controlMargin-M ClearFloat FloatCenter Width-S UzCompositeChild" id="btnKakunin" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnKakunin&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:1,&quot;selectControlID&quot;:&quot;btnKakunin&quot;,&quot;onClick&quot;:&quot;CloseOK&quot;,&quot;text&quot;:&quot;確認&quot;}"><span>確認</span></button></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBE;
+(function (DBE) {
+    (function (DataOutputInfomation) {
+        var Events = (function () {
+            function Events() {
+            }
+            Object.defineProperty(Events, "CloseOK", {
+                get: function () {
+                    return "CloseOK";
+                },
+                enumerable: true,
+                configurable: true
+            });
+            return Events;
+        })();
+        DataOutputInfomation.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Object.defineProperty(Controls, "MyType", {
+                get: function () {
+                    return "DataOutputInfomation";
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            Controls.prototype.DataOutputInfomation = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.icnKanryo = function () {
+                return new UZA.Icon(this.convFiledName("icnKanryo"));
+            };
+
+            Controls.prototype.lblMessage = function () {
+                return new UZA.Label(this.convFiledName("lblMessage"));
+            };
+
+            Controls.prototype.btnKakunin = function () {
+                return new UZA.Button(this.convFiledName("btnKakunin"));
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + Controls.MyType;
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + Controls.MyType + "_" + fieldName;
+            };
+            return Controls;
+        })();
+        DataOutputInfomation.Controls = Controls;
+    })(DBE.DataOutputInfomation || (DBE.DataOutputInfomation = {}));
+    var DataOutputInfomation = DBE.DataOutputInfomation;
+
+    var DataOutputInfomation_Design = (function (_super) {
+        __extends(DataOutputInfomation_Design, _super);
+        function DataOutputInfomation_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, DataOutputInfomation_Design.myLayout, fieldName);
+        }
+        DataOutputInfomation_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+        };
+
+        DataOutputInfomation_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+
+            return editablePropertyInfo;
+        };
+        DataOutputInfomation_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "DataOutputInfomation",
+                    "items": [
+                        {
+                            "fieldName": "icnKanryo",
+                            "items": [],
+                            "controlType": "Icon",
+                            "width": "XS",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "icnKanryo",
+                            "icon": 0,
+                            "iconSize": 1
+                        },
+                        {
+                            "fieldName": "lblMessage",
+                            "items": [],
+                            "controlType": "Label",
+                            "width": "300",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": false,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "lblMessage",
+                            "required": false,
+                            "align": 1,
+                            "text": "データ出力が終了しました",
+                            "isPrivateInfo": false
+                        },
+                        {
+                            "fieldName": "btnKakunin",
+                            "items": [],
+                            "controlType": "Button",
+                            "width": "S",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 1,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "btnKakunin",
+                            "icon": 0,
+                            "text": "確認",
+                            "onClick": "CloseOK",
+                            "appearance": 0,
+                            "imageFileUrl": "",
+                            "imageWidth": "",
+                            "imageHeight": ""
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G4",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": true,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "XS",
+                    "marginRight": "XS",
+                    "selectControlID": "DataOutputInfomation",
+                    "onLoad": "",
+                    "title": "完了メッセージ",
+                    "marginTop": "Default",
+                    "marginBottom": "Default",
+                    "isOpen": true,
+                    "canOpenAndClose": true,
+                    "postParameterPanelNames": [
+                        {
+                            "postParameterPanelNames": "DataOutputInfomation"
+                        }
+                    ],
+                    "requestSettings": [],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorderTop": false,
+                    "eraseBorderBottom": false,
+                    "eraseBorderRight": false,
+                    "eraseBorderLeft": false,
+                    "backgroundColor": 0,
+                    "widthAuto": false,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "selectControlID": "defaultLayout",
+            "relation": [],
+            "businessId": "DBE",
+            "controlName": "DataOutputInfomation",
+            "marginTop": 0,
+            "marginBottom": 0,
+            "originalProperty": [],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "CloseOK",
+            "dialogCancelEventNameForDialog": ""
+        };
+        return DataOutputInfomation_Design;
+    })(Uz.CommonChildDiv);
+    DBE.DataOutputInfomation_Design = DataOutputInfomation_Design;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (DataOutputInfomation) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new DataOutputInfomation.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        DataOutputInfomation.ModeController = ModeController;
+    })(DBE.DataOutputInfomation || (DBE.DataOutputInfomation = {}));
+    var DataOutputInfomation = DBE.DataOutputInfomation;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (DataOutputInfomation) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new DataOutputInfomation.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        DataOutputInfomation.PublicProperties = PublicProperties;
+    })(DBE.DataOutputInfomation || (DBE.DataOutputInfomation = {}));
+    var DataOutputInfomation = DBE.DataOutputInfomation;
+})(DBE || (DBE = {}));
+</script>
+  <script class="RamlConvert" type="text/javascript">
+var DBE= DBE? DBE: {};
+DBE['DATAOUTPUTINFOMATION'] = {};
+DBE['DATAOUTPUTINFOMATION'].DataOutputInfomationRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_DataOutputInfomation').getProperty();parameter0.icnKanryo = Uz.JSControlUtil.getJSControl(parentFieldName + '_icnKanryo').getProperty();parameter0.lblMessage = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblMessage').getProperty();parameter0.btnKakunin = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnKakunin').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBE;
+(function (DBE) {
+    (function (DataOutputInfomation) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.CloseOK = function () {
+                return "CloseOK";
+            };
+            return Events;
+        })();
+        DataOutputInfomation.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "DataOutputInfomation";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBE.DataOutputInfomation.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBE.DataOutputInfomation.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.DataOutputInfomation = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.icnKanryo = function () {
+                return new UZA.Icon(this.convFiledName("icnKanryo"));
+            };
+
+            Controls.prototype.lblMessage = function () {
+                return new UZA.Label(this.convFiledName("lblMessage"));
+            };
+
+            Controls.prototype.btnKakunin = function () {
+                return new UZA.Button(this.convFiledName("btnKakunin"));
+            };
+            return Controls;
+        })();
+        DataOutputInfomation.Controls = Controls;
+    })(DBE.DataOutputInfomation || (DBE.DataOutputInfomation = {}));
+    var DataOutputInfomation = DBE.DataOutputInfomation;
+})(DBE || (DBE = {}));
+var DBE;
+(function (DBE) {
+    (function (DataOutputInfomation) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new DataOutputInfomation.Controls(fieldName);
+            }
+            ModeController.prototype.priorities = function () {
+                return [];
+            };
+
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        DataOutputInfomation.ModeController = ModeController;
+    })(DBE.DataOutputInfomation || (DBE.DataOutputInfomation = {}));
+    var DataOutputInfomation = DBE.DataOutputInfomation;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (DataOutputInfomation) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new DataOutputInfomation.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        DataOutputInfomation.PublicProperties = PublicProperties;
+    })(DBE.DataOutputInfomation || (DBE.DataOutputInfomation = {}));
+    var DataOutputInfomation = DBE.DataOutputInfomation;
+})(DBE || (DBE = {}));
+</script></div>

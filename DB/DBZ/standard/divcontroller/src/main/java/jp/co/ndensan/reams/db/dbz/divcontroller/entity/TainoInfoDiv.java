@@ -35,6 +35,8 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
     private TextBoxDate txtHanteiKijunYMD;
     @JsonProperty("btnKensaku")
     private Button btnKensaku;
+    @JsonProperty("btnGengakuJoho")
+    private Button btnGengakuJoho;
     @JsonProperty("txtSaikoNokigen")
     private TextBoxDate txtSaikoNokigen;
     @JsonProperty("txtKeikaNen")
@@ -61,10 +63,6 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
     private TextBoxNum txtSonotatainoGaku;
     @JsonProperty("TainoSetsumei")
     private TainoSetsumeiDiv TainoSetsumei;
-    @JsonProperty("btnReturn")
-    private Button btnReturn;
-    @JsonProperty("btnKakutei")
-    private Button btnKakutei;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -90,6 +88,16 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
     @JsonProperty("btnKensaku")
     public void setBtnKensaku(Button btnKensaku) {
         this.btnKensaku=btnKensaku;
+    }
+
+    @JsonProperty("btnGengakuJoho")
+    public Button getBtnGengakuJoho() {
+        return btnGengakuJoho;
+    }
+
+    @JsonProperty("btnGengakuJoho")
+    public void setBtnGengakuJoho(Button btnGengakuJoho) {
+        this.btnGengakuJoho=btnGengakuJoho;
     }
 
     @JsonProperty("txtSaikoNokigen")
@@ -220,26 +228,6 @@ public class TainoInfoDiv extends Panel implements ITainoInfoDiv {
     @JsonProperty("TainoSetsumei")
     public void setTainoSetsumei(TainoSetsumeiDiv TainoSetsumei) {
         this.TainoSetsumei=TainoSetsumei;
-    }
-
-    @JsonProperty("btnReturn")
-    public Button getBtnReturn() {
-        return btnReturn;
-    }
-
-    @JsonProperty("btnReturn")
-    public void setBtnReturn(Button btnReturn) {
-        this.btnReturn=btnReturn;
-    }
-
-    @JsonProperty("btnKakutei")
-    public Button getBtnKakutei() {
-        return btnKakutei;
-    }
-
-    @JsonProperty("btnKakutei")
-    public void setBtnKakutei(Button btnKakutei) {
-        this.btnKakutei=btnKakutei;
     }
 
     /*

@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -15,6 +15,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum KoikinaiJushochitokureishaKubun {
 
+    /**
+     * EMPTY <br />
+     * コード : EMPTY
+     */
+    EMPTY(""),
     /**
      * 広域内住所地特例者 <br />
      * コード : 1
@@ -41,7 +46,8 @@ public enum KoikinaiJushochitokureishaKubun {
     }
 
     /**
-     * 指定のコードに対応するKoikinaiJushochitokureishaKubunを返します。
+     * 指定のコードに対応するKoikinaiJushochitokureishaKubunを返します。<br/>
+     * 空文字列、もしくはnullを受け取った場合は"EMPTY"を表すKoikinaiJushochitokureishaKubunを返します。
      *
      * @param code コード
      * @return 指定のコードに対応するKoikinaiJushochitokureishaKubun
@@ -49,11 +55,15 @@ public enum KoikinaiJushochitokureishaKubun {
      * 指定のコードに対応するKoikinaiJushochitokureishaKubunがないとき。
      */
     public static KoikinaiJushochitokureishaKubun toValue(RString code) throws IllegalArgumentException {
+        if (code == null || code.isEmpty()) {
+            return EMPTY;
+        }
+
         for (KoikinaiJushochitokureishaKubun target : values()) {
             if (target.getCode().equals(code)) {
                 return target;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("コード:" + code + " に対応する広域内住所地特例者区分").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("コード:" + code + " に対応する広域内住所地特例者区分").evaluate());
     }
 }

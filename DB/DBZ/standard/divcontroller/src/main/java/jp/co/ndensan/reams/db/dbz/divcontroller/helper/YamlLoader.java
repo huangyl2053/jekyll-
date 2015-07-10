@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._IServletControlData;
 import org.yaml.snakeyaml.Yaml;
 
-/*
+/**
  * Yamlファイルをロードします。
  *
  * @author N3327 三浦 凌

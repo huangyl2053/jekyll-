@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 
 /**
@@ -38,10 +38,10 @@ public class NinteichosaTokkijiko {
     public NinteichosaTokkijiko(ShinseishoKanriNo 申請書管理番号, NinteichosaIraiRirekiNo 認定調査依頼履歴番号, RString 認定調査特記事項番号,
             Code 原本マスク区分, RString 特記事項)
             throws NullPointerException {
-        requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
-        requireNonNull(認定調査依頼履歴番号, Messages.E00003.replace("認定調査依頼履歴番号", getClass().getName()).getMessage());
-        requireNonNull(認定調査特記事項番号, Messages.E00003.replace("認定調査特記事項番号", getClass().getName()).getMessage());
-        requireNonNull(原本マスク区分, Messages.E00003.replace("原本マスク区分", getClass().getName()).getMessage());
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("申請書管理番号", getClass().getName()));
+        requireNonNull(認定調査依頼履歴番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定調査依頼履歴番号", getClass().getName()));
+        requireNonNull(認定調査特記事項番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定調査特記事項番号", getClass().getName()));
+        requireNonNull(原本マスク区分, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("原本マスク区分", getClass().getName()));
 
         this.申請書管理番号 = 申請書管理番号;
         this.認定調査依頼履歴番号 = 認定調査依頼履歴番号;

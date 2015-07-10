@@ -1,0 +1,1376 @@
+<div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft marginLeft-XS marginRight-XS" id="defaultLayout" style="margin-top: 0em; margin-bottom: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;XS&quot;,&quot;marginRight&quot;:&quot;XS&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBE&quot;,&quot;controlName&quot;:&quot;NinteichosaIraiListForByHandCom&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[{&quot;propertyName&quot;:&quot;onSort&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;onSelect&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;onSelectByDblClick&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;onOnlyRow&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;onNoRow&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;onMultiRows&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;height&quot;,&quot;editType&quot;:0},{&quot;propertyName&quot;:&quot;withOfGrid&quot;,&quot;editType&quot;:0}]},&quot;onSort&quot;:&quot;&quot;,&quot;onSelect&quot;:&quot;&quot;,&quot;onSelectByDblClick&quot;:&quot;&quot;,&quot;onOnlyRow&quot;:&quot;&quot;,&quot;onNoRow&quot;:&quot;&quot;,&quot;onMultiRows&quot;:&quot;&quot;,&quot;height&quot;:&quot;162px&quot;,&quot;withOfGrid&quot;:&quot;1070px&quot;}" data-is-composite-control="true" data-control-name="DBE.NinteichosaIraiListForByHandCom"><div title="" class="UzPanel FloatLeft JSControl Panel StateChangable marginLeft-XS marginRight-XS marginTop-XS marginBottom-XS UzCommonChildDivPanel Width-G2 UzCompositeChild" id="NinteichosaIraiListForByHandCom" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;NinteichosaIraiListForByHandCom&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G2&quot;,&quot;selectControlID&quot;:&quot;NinteichosaIraiListForByHandCom&quot;,&quot;title&quot;:&quot;&quot;,&quot;marginTop&quot;:&quot;XS&quot;,&quot;marginBottom&quot;:&quot;XS&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[{&quot;eventName&quot;:&quot;onLoad&quot;,&quot;requestUrl&quot;:&quot;&quot;}],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;eraseBorder&quot;:true,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="NinteichosaIraiListForByHandCom_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: hidden;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPaddingDelete Panel-EraseBoder ui-droppable ui-sortable" id="NinteichosaIraiListForByHandCom_panel_body_area"><div title="" class="UzDataGrid FloatLeft JSControl controlMargin-M ClearFloat marginLeft-XS marginRight-XS UzCompositeChild" id="dgNinteichosaIraiListForByHand" style="width: 1070px; height: 162px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgNinteichosaIraiListForByHand&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;1070px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;dgNinteichosaIraiListForByHand&quot;,&quot;height&quot;:&quot;162px&quot;,&quot;gridSetting&quot;:{&quot;isShowModifyButtonColumn&quot;:false,&quot;rowHeight&quot;:24,&quot;isShowFilter&quot;:false,&quot;isShowFooter&quot;:false,&quot;limitRowCount&quot;:0,&quot;isShowDeleteButtonColumn&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowHeader&quot;:true,&quot;isMultiSelectable&quot;:true,&quot;isShowRowState&quot;:false,&quot;selectedRowCount&quot;:0,&quot;isShowSelectButtonColumn&quot;:false,&quot;columns&quot;:[{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:0,&quot;cellType&quot;:2,&quot;visible&quot;:false,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chosaKanryoFlag&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;disabled&quot;:true,&quot;cellType&quot;:2,&quot;onChange&quot;:&quot;&quot;},&quot;columnName&quot;:&quot;調査済みフラグ&quot;,&quot;dataName&quot;:&quot;chosaKanryoFlag&quot;,&quot;resize&quot;:false,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:55,&quot;cellType&quot;:0,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chosaJokyo&quot;,&quot;align&quot;:1,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;状況&quot;,&quot;dataName&quot;:&quot;chosaJokyo&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:50,&quot;cellType&quot;:8,&quot;visible&quot;:false,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;btnToShowDetail&quot;,&quot;align&quot;:1,&quot;cellDetails&quot;:{&quot;imageWidth&quot;:&quot;&quot;,&quot;cellType&quot;:8,&quot;text&quot;:&quot;詳細&quot;,&quot;imageHeight&quot;:&quot;&quot;,&quot;imageFileUrl&quot;:&quot;&quot;,&quot;onClick&quot;:&quot;&quot;},&quot;columnName&quot;:&quot;詳細&quot;,&quot;dataName&quot;:&quot;btnToShowDetail&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:75,&quot;cellType&quot;:0,&quot;visible&quot;:false,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;hokenshaNo&quot;,&quot;align&quot;:1,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;保険者番号&quot;,&quot;dataName&quot;:&quot;hokenshaNo&quot;,&quot;resize&quot;:false,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:75,&quot;cellType&quot;:0,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;shichoson&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;市町村&quot;,&quot;dataName&quot;:&quot;shichoson&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:0,&quot;cellType&quot;:0,&quot;visible&quot;:false,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;shishoCode&quot;,&quot;align&quot;:1,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;支所コード&quot;,&quot;dataName&quot;:&quot;shishoCode&quot;,&quot;resize&quot;:false,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:75,&quot;cellType&quot;:0,&quot;visible&quot;:false,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;shoshoName&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;支所&quot;,&quot;dataName&quot;:&quot;shoshoName&quot;,&quot;resize&quot;:false,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:85,&quot;cellType&quot;:0,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;hihokenshaNo&quot;,&quot;align&quot;:1,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;被保番号&quot;,&quot;dataName&quot;:&quot;hihokenshaNo&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:120,&quot;cellType&quot;:0,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;shimei&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;氏名&quot;,&quot;dataName&quot;:&quot;shimei&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:0,&quot;cellType&quot;:0,&quot;visible&quot;:false,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;kanaShimei&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;カナ氏名&quot;,&quot;dataName&quot;:&quot;kanaShimei&quot;,&quot;resize&quot;:false,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:0,&quot;cellType&quot;:0,&quot;visible&quot;:false,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;shimeiWithKana&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;氏名&quot;,&quot;dataName&quot;:&quot;shimeiWithKana&quot;,&quot;resize&quot;:false,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:80,&quot;cellType&quot;:0,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;ninteiShinseiKubun&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;申請区分&quot;,&quot;dataName&quot;:&quot;ninteiShinseiKubun&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:82,&quot;cellType&quot;:7,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;ninteiShinseiDate&quot;,&quot;align&quot;:1,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;isSetValueToToolTip&quot;:false,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;ymdKubun&quot;:2,&quot;readOnly&quot;:true},&quot;columnName&quot;:&quot;申請日&quot;,&quot;dataName&quot;:&quot;ninteiShinseiDate&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:60,&quot;cellType&quot;:0,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chiku&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:null,&quot;columnName&quot;:&quot;地区&quot;,&quot;dataName&quot;:&quot;chiku&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:80,&quot;cellType&quot;:0,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chosaIraiKubun&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;依頼区分&quot;,&quot;dataName&quot;:&quot;chosaIraiKubun&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:82,&quot;cellType&quot;:7,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chosaIraiDate&quot;,&quot;align&quot;:1,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;isSetValueToToolTip&quot;:false,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;ymdKubun&quot;:2,&quot;readOnly&quot;:true},&quot;columnName&quot;:&quot;依頼日&quot;,&quot;dataName&quot;:&quot;chosaIraiDate&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:82,&quot;cellType&quot;:7,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chosaKigenDate&quot;,&quot;align&quot;:1,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;isSetValueToToolTip&quot;:false,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;ymdKubun&quot;:2,&quot;readOnly&quot;:true},&quot;columnName&quot;:&quot;期限日&quot;,&quot;dataName&quot;:&quot;chosaKigenDate&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:82,&quot;cellType&quot;:7,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;iraishoHakkoDate&quot;,&quot;align&quot;:1,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;isSetValueToToolTip&quot;:false,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;ymdKubun&quot;:2,&quot;readOnly&quot;:true},&quot;columnName&quot;:&quot;発行日&quot;,&quot;dataName&quot;:&quot;iraishoHakkoDate&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:0,&quot;cellType&quot;:0,&quot;visible&quot;:false,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chosaItakusakiNo&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;調査委託先コード&quot;,&quot;dataName&quot;:&quot;chosaItakusakiNo&quot;,&quot;resize&quot;:false,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:120,&quot;cellType&quot;:0,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chosaItakusakiName&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;調査委託先&quot;,&quot;dataName&quot;:&quot;chosaItakusakiName&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:0,&quot;cellType&quot;:0,&quot;visible&quot;:false,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chosainNo&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;調査員コード&quot;,&quot;dataName&quot;:&quot;chosainNo&quot;,&quot;resize&quot;:false,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:90,&quot;cellType&quot;:0,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chosainName&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;調査員&quot;,&quot;dataName&quot;:&quot;chosainName&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:0,&quot;cellType&quot;:0,&quot;visible&quot;:false,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chosaItakusakiNo1TA&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;調査委託先コード&quot;,&quot;dataName&quot;:&quot;chosaItakusakiNo1TA&quot;,&quot;resize&quot;:false,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:120,&quot;cellType&quot;:0,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chosaItakusakiName1TA&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;調査委託先&quot;,&quot;dataName&quot;:&quot;chosaItakusakiName1TA&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:0,&quot;cellType&quot;:0,&quot;visible&quot;:false,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chosainNo1TA&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;調査員コード&quot;,&quot;dataName&quot;:&quot;chosainNo1TA&quot;,&quot;resize&quot;:false,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:90,&quot;cellType&quot;:0,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chosainName1TA&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;調査員&quot;,&quot;dataName&quot;:&quot;chosainName1TA&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:0,&quot;cellType&quot;:0,&quot;visible&quot;:false,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chosaItakusakiNo2TA&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;調査委託先コード&quot;,&quot;dataName&quot;:&quot;chosaItakusakiNo2TA&quot;,&quot;resize&quot;:false,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:120,&quot;cellType&quot;:0,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chosaItakusakiName2TA&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;調査委託先&quot;,&quot;dataName&quot;:&quot;chosaItakusakiName2TA&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:0,&quot;cellType&quot;:0,&quot;visible&quot;:false,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chosainNo2TA&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;調査員コード&quot;,&quot;dataName&quot;:&quot;chosainNo2TA&quot;,&quot;resize&quot;:false,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:90,&quot;cellType&quot;:0,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;chosainName2TA&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;調査員&quot;,&quot;dataName&quot;:&quot;chosainName2TA&quot;,&quot;resize&quot;:false,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:82,&quot;cellType&quot;:7,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;tokusokuDate&quot;,&quot;align&quot;:1,&quot;cellDetails&quot;:{&quot;cellType&quot;:7,&quot;isSetValueToToolTip&quot;:false,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;ymdKubun&quot;:2,&quot;readOnly&quot;:true},&quot;columnName&quot;:&quot;督促日&quot;,&quot;dataName&quot;:&quot;tokusokuDate&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:0,&quot;cellType&quot;:0,&quot;visible&quot;:false,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;tokusokuCount&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;回数&quot;,&quot;dataName&quot;:&quot;tokusokuCount&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:75,&quot;cellType&quot;:0,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;yubinNo&quot;,&quot;align&quot;:1,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;番号&quot;,&quot;dataName&quot;:&quot;yubinNo&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:180,&quot;cellType&quot;:0,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;jusho&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;住所&quot;,&quot;dataName&quot;:&quot;jusho&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0},{&quot;isPrivateInfo&quot;:false,&quot;width&quot;:100,&quot;cellType&quot;:0,&quot;visible&quot;:true,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;nyushoShisetsu&quot;,&quot;align&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:false},&quot;columnName&quot;:&quot;入所施設&quot;,&quot;dataName&quot;:&quot;nyushoShisetsu&quot;,&quot;resize&quot;:true,&quot;bgColor&quot;:0}],&quot;header&quot;:{&quot;headerHeight&quot;:0,&quot;frozenColumn&quot;:&quot;&quot;,&quot;combineColumns&quot;:[{&quot;combineColumnName&quot;:&quot;調査&quot;,&quot;combineItem&quot;:[&quot;chosaJokyo&quot;]},{&quot;combineColumnName&quot;:&quot;被保険者&quot;,&quot;combineItem&quot;:[&quot;hihokenshaNo&quot;,&quot;shimei&quot;,&quot;kanaShimei&quot;,&quot;shimeiWithKana&quot;]},{&quot;combineColumnName&quot;:&quot;認定&quot;,&quot;combineItem&quot;:[&quot;ninteiShinseiKubun&quot;,&quot;ninteiShinseiDate&quot;]},{&quot;combineColumnName&quot;:&quot;調査依頼&quot;,&quot;combineItem&quot;:[&quot;chosaIraiKubun&quot;,&quot;chosaIraiDate&quot;,&quot;chosaKigenDate&quot;]},{&quot;combineColumnName&quot;:&quot;依頼書&quot;,&quot;combineItem&quot;:[&quot;iraishoHakkoDate&quot;]},{&quot;combineColumnName&quot;:&quot;今回&quot;,&quot;combineItem&quot;:[&quot;chosaItakusakiNo&quot;,&quot;chosaItakusakiName&quot;,&quot;chosainNo&quot;,&quot;chosainName&quot;]},{&quot;combineColumnName&quot;:&quot;前回&quot;,&quot;combineItem&quot;:[&quot;chosaItakusakiNo1TA&quot;,&quot;chosaItakusakiName1TA&quot;,&quot;chosainNo1TA&quot;,&quot;chosainName1TA&quot;]},{&quot;combineColumnName&quot;:&quot;前々回&quot;,&quot;combineItem&quot;:[&quot;chosaItakusakiNo2TA&quot;,&quot;chosaItakusakiName2TA&quot;,&quot;chosainNo2TA&quot;,&quot;chosainName2TA&quot;]},{&quot;combineColumnName&quot;:&quot;督促&quot;,&quot;combineItem&quot;:[&quot;tokusokuDate&quot;,&quot;tokusokuCount&quot;]},{&quot;combineColumnName&quot;:&quot;被保険者&quot;,&quot;combineItem&quot;:[&quot;yubinNo&quot;,&quot;jusho&quot;,&quot;nyushoShisetsu&quot;]}]}},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgNinteichosaIraiListForByHand_grid_table" role="" style="width: 1070px; height: 162px; position: relative;"></div><div id="dgNinteichosaIraiListForByHand_footer" style="width: 1070px; height: 0px;"></div></div></div></div> 
+<script type="text/javascript">var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+};
+var DBE;
+(function (DBE) {
+    var NinteichosaIraiListForByHandCom_Design = (function (_super) {
+        __extends(NinteichosaIraiListForByHandCom_Design, _super);
+        function NinteichosaIraiListForByHandCom_Design($parentElement, isDesignMode, fieldName) {
+            _super.call(this, $parentElement, isDesignMode, NinteichosaIraiListForByHandCom_Design.myLayout, fieldName);
+        }
+        Object.defineProperty(NinteichosaIraiListForByHandCom_Design.prototype, "onSort", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSort"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSort"] = value;
+                } else {
+                    this.layout.items[0].items[0]["onSort"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(NinteichosaIraiListForByHandCom_Design.prototype, "onSelect", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelect"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelect"] = value;
+                } else {
+                    this.layout.items[0].items[0]["onSelect"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(NinteichosaIraiListForByHandCom_Design.prototype, "onSelectByDblClick", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByDblClick"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onSelectByDblClick"] = value;
+                } else {
+                    this.layout.items[0].items[0]["onSelectByDblClick"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(NinteichosaIraiListForByHandCom_Design.prototype, "onOnlyRow", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onOnlyRow"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onOnlyRow"] = value;
+                } else {
+                    this.layout.items[0].items[0]["onOnlyRow"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(NinteichosaIraiListForByHandCom_Design.prototype, "onNoRow", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onNoRow"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onNoRow"] = value;
+                } else {
+                    this.layout.items[0].items[0]["onNoRow"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(NinteichosaIraiListForByHandCom_Design.prototype, "onMultiRows", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onMultiRows"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["onMultiRows"] = value;
+                } else {
+                    this.layout.items[0].items[0]["onMultiRows"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(NinteichosaIraiListForByHandCom_Design.prototype, "height", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["height"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["height"] = value;
+                } else {
+                    this.layout.items[0].items[0]["height"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        Object.defineProperty(NinteichosaIraiListForByHandCom_Design.prototype, "withOfGrid", {
+            get: function () {
+                return Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["width"];
+            },
+            set: function (value) {
+                if ($("#" + this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).length > 0 && Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]) != undefined) {
+                    Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"])["width"] = value;
+                } else {
+                    this.layout.items[0].items[0]["width"] = value;
+                    this.raisePropertyChanged(this.layout);
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+
+
+        NinteichosaIraiListForByHandCom_Design.prototype.registProperty = function () {
+            _super.prototype.registProperty.call(this);
+            Uz.JSControlUtil.registProperty("onSort");
+            Uz.JSControlUtil.registProperty("onSelect");
+            Uz.JSControlUtil.registProperty("onSelectByDblClick");
+            Uz.JSControlUtil.registProperty("onOnlyRow");
+            Uz.JSControlUtil.registProperty("onNoRow");
+            Uz.JSControlUtil.registProperty("onMultiRows");
+            Uz.JSControlUtil.registProperty("height");
+            Uz.JSControlUtil.registProperty("withOfGrid");
+        };
+
+        NinteichosaIraiListForByHandCom_Design.prototype.getEditablePropertyInfo = function () {
+            var editablePropertyInfo = _super.prototype.getEditablePropertyInfo.call(this);
+            editablePropertyInfo["onSort"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onSort"];
+            editablePropertyInfo["onSelect"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onSelect"];
+            editablePropertyInfo["onSelectByDblClick"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onSelectByDblClick"];
+            editablePropertyInfo["onOnlyRow"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onOnlyRow"];
+            editablePropertyInfo["onNoRow"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onNoRow"];
+            editablePropertyInfo["onMultiRows"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["onMultiRows"];
+            editablePropertyInfo["height"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["height"];
+            editablePropertyInfo["withOfGrid"] = Uz.JSControlUtil.getJSControl(this.fieldName + "_" + this.layout.items[0]["fieldName"] + "_" + this.layout.items[0].items[0]["fieldName"]).getEditablePropertyInfo()["width"];
+
+            return editablePropertyInfo;
+        };
+        NinteichosaIraiListForByHandCom_Design.myLayout = {
+            "fieldName": "defaultLayout",
+            "items": [
+                {
+                    "fieldName": "NinteichosaIraiListForByHandCom",
+                    "items": [
+                        {
+                            "fieldName": "dgNinteichosaIraiListForByHand",
+                            "items": [],
+                            "controlType": "DataGrid",
+                            "width": "1070px",
+                            "visible": true,
+                            "displayNone": false,
+                            "disabled": false,
+                            "accessKey": "",
+                            "nextFocusFieldName": "",
+                            "wrap": true,
+                            "dependencies": [],
+                            "float": 0,
+                            "toolTip": "",
+                            "authorityMode": 0,
+                            "marginLeft": "XS",
+                            "marginRight": "XS",
+                            "selectControlID": "dgNinteichosaIraiListForByHand",
+                            "helpMessageID": "",
+                            "jpControlName": "",
+                            "readOnly": false,
+                            "height": "162px",
+                            "dataSource": [],
+                            "gridSetting": {
+                                "isShowModifyButtonColumn": false,
+                                "rowHeight": 24,
+                                "isShowFilter": false,
+                                "isShowFooter": false,
+                                "limitRowCount": 0,
+                                "isShowDeleteButtonColumn": false,
+                                "isShowFilterButton": false,
+                                "isShowHeader": true,
+                                "isMultiSelectable": true,
+                                "isShowRowState": false,
+                                "selectedRowCount": 0,
+                                "isShowSelectButtonColumn": false,
+                                "columns": [
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 0,
+                                        "cellType": 2,
+                                        "visible": false,
+                                        "toolTip": "",
+                                        "sortKey": "chosaKanryoFlag",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "disabled": true,
+                                            "cellType": 2,
+                                            "onChange": ""
+                                        },
+                                        "columnName": "調査済みフラグ",
+                                        "dataName": "chosaKanryoFlag",
+                                        "resize": false,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 55,
+                                        "cellType": 0,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "chosaJokyo",
+                                        "align": 1,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "状況",
+                                        "dataName": "chosaJokyo",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 50,
+                                        "cellType": 8,
+                                        "visible": false,
+                                        "toolTip": "",
+                                        "sortKey": "btnToShowDetail",
+                                        "align": 1,
+                                        "cellDetails": {
+                                            "imageWidth": "",
+                                            "cellType": 8,
+                                            "text": "詳細",
+                                            "imageHeight": "",
+                                            "imageFileUrl": "",
+                                            "onClick": ""
+                                        },
+                                        "columnName": "詳細",
+                                        "dataName": "btnToShowDetail",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 75,
+                                        "cellType": 0,
+                                        "visible": false,
+                                        "toolTip": "",
+                                        "sortKey": "hokenshaNo",
+                                        "align": 1,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "保険者番号",
+                                        "dataName": "hokenshaNo",
+                                        "resize": false,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 75,
+                                        "cellType": 0,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "shichoson",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "市町村",
+                                        "dataName": "shichoson",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 0,
+                                        "cellType": 0,
+                                        "visible": false,
+                                        "toolTip": "",
+                                        "sortKey": "shishoCode",
+                                        "align": 1,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "支所コード",
+                                        "dataName": "shishoCode",
+                                        "resize": false,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 75,
+                                        "cellType": 0,
+                                        "visible": false,
+                                        "toolTip": "",
+                                        "sortKey": "shoshoName",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "支所",
+                                        "dataName": "shoshoName",
+                                        "resize": false,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 85,
+                                        "cellType": 0,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "hihokenshaNo",
+                                        "align": 1,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "被保番号",
+                                        "dataName": "hihokenshaNo",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 120,
+                                        "cellType": 0,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "shimei",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "氏名",
+                                        "dataName": "shimei",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 0,
+                                        "cellType": 0,
+                                        "visible": false,
+                                        "toolTip": "",
+                                        "sortKey": "kanaShimei",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "カナ氏名",
+                                        "dataName": "kanaShimei",
+                                        "resize": false,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 0,
+                                        "cellType": 0,
+                                        "visible": false,
+                                        "toolTip": "",
+                                        "sortKey": "shimeiWithKana",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "氏名",
+                                        "dataName": "shimeiWithKana",
+                                        "resize": false,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 80,
+                                        "cellType": 0,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "ninteiShinseiKubun",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "申請区分",
+                                        "dataName": "ninteiShinseiKubun",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 82,
+                                        "cellType": 7,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "ninteiShinseiDate",
+                                        "align": 1,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "isSetValueToToolTip": false,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "ymdKubun": 2,
+                                            "readOnly": true
+                                        },
+                                        "columnName": "申請日",
+                                        "dataName": "ninteiShinseiDate",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 60,
+                                        "cellType": 0,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "chiku",
+                                        "align": 0,
+                                        "cellDetails": null,
+                                        "columnName": "地区",
+                                        "dataName": "chiku",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 80,
+                                        "cellType": 0,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "chosaIraiKubun",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "依頼区分",
+                                        "dataName": "chosaIraiKubun",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 82,
+                                        "cellType": 7,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "chosaIraiDate",
+                                        "align": 1,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "isSetValueToToolTip": false,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "ymdKubun": 2,
+                                            "readOnly": true
+                                        },
+                                        "columnName": "依頼日",
+                                        "dataName": "chosaIraiDate",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 82,
+                                        "cellType": 7,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "chosaKigenDate",
+                                        "align": 1,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "isSetValueToToolTip": false,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "ymdKubun": 2,
+                                            "readOnly": true
+                                        },
+                                        "columnName": "期限日",
+                                        "dataName": "chosaKigenDate",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 82,
+                                        "cellType": 7,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "iraishoHakkoDate",
+                                        "align": 1,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "isSetValueToToolTip": false,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "ymdKubun": 2,
+                                            "readOnly": true
+                                        },
+                                        "columnName": "発行日",
+                                        "dataName": "iraishoHakkoDate",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 0,
+                                        "cellType": 0,
+                                        "visible": false,
+                                        "toolTip": "",
+                                        "sortKey": "chosaItakusakiNo",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "調査委託先コード",
+                                        "dataName": "chosaItakusakiNo",
+                                        "resize": false,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 120,
+                                        "cellType": 0,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "chosaItakusakiName",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "調査委託先",
+                                        "dataName": "chosaItakusakiName",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 0,
+                                        "cellType": 0,
+                                        "visible": false,
+                                        "toolTip": "",
+                                        "sortKey": "chosainNo",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "調査員コード",
+                                        "dataName": "chosainNo",
+                                        "resize": false,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 90,
+                                        "cellType": 0,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "chosainName",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "調査員",
+                                        "dataName": "chosainName",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 0,
+                                        "cellType": 0,
+                                        "visible": false,
+                                        "toolTip": "",
+                                        "sortKey": "chosaItakusakiNo1TA",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "調査委託先コード",
+                                        "dataName": "chosaItakusakiNo1TA",
+                                        "resize": false,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 120,
+                                        "cellType": 0,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "chosaItakusakiName1TA",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "調査委託先",
+                                        "dataName": "chosaItakusakiName1TA",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 0,
+                                        "cellType": 0,
+                                        "visible": false,
+                                        "toolTip": "",
+                                        "sortKey": "chosainNo1TA",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "調査員コード",
+                                        "dataName": "chosainNo1TA",
+                                        "resize": false,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 90,
+                                        "cellType": 0,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "chosainName1TA",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "調査員",
+                                        "dataName": "chosainName1TA",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 0,
+                                        "cellType": 0,
+                                        "visible": false,
+                                        "toolTip": "",
+                                        "sortKey": "chosaItakusakiNo2TA",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "調査委託先コード",
+                                        "dataName": "chosaItakusakiNo2TA",
+                                        "resize": false,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 120,
+                                        "cellType": 0,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "chosaItakusakiName2TA",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "調査委託先",
+                                        "dataName": "chosaItakusakiName2TA",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 0,
+                                        "cellType": 0,
+                                        "visible": false,
+                                        "toolTip": "",
+                                        "sortKey": "chosainNo2TA",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "調査員コード",
+                                        "dataName": "chosainNo2TA",
+                                        "resize": false,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 90,
+                                        "cellType": 0,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "chosainName2TA",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "調査員",
+                                        "dataName": "chosainName2TA",
+                                        "resize": false,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 82,
+                                        "cellType": 7,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "tokusokuDate",
+                                        "align": 1,
+                                        "cellDetails": {
+                                            "cellType": 7,
+                                            "isSetValueToToolTip": false,
+                                            "displayFormat": 0,
+                                            "onChange": "",
+                                            "ymdKubun": 2,
+                                            "readOnly": true
+                                        },
+                                        "columnName": "督促日",
+                                        "dataName": "tokusokuDate",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 0,
+                                        "cellType": 0,
+                                        "visible": false,
+                                        "toolTip": "",
+                                        "sortKey": "tokusokuCount",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "回数",
+                                        "dataName": "tokusokuCount",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 75,
+                                        "cellType": 0,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "yubinNo",
+                                        "align": 1,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "番号",
+                                        "dataName": "yubinNo",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 180,
+                                        "cellType": 0,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "jusho",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "住所",
+                                        "dataName": "jusho",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    },
+                                    {
+                                        "isPrivateInfo": false,
+                                        "width": 100,
+                                        "cellType": 0,
+                                        "visible": true,
+                                        "toolTip": "",
+                                        "sortKey": "nyushoShisetsu",
+                                        "align": 0,
+                                        "cellDetails": {
+                                            "cellType": 0,
+                                            "isSetValueToToolTip": false
+                                        },
+                                        "columnName": "入所施設",
+                                        "dataName": "nyushoShisetsu",
+                                        "resize": true,
+                                        "bgColor": 0
+                                    }
+                                ],
+                                "header": {
+                                    "headerHeight": 0,
+                                    "frozenColumn": "",
+                                    "combineColumns": [
+                                        {
+                                            "combineColumnName": "調査",
+                                            "combineItem": [
+                                                "chosaJokyo"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "被保険者",
+                                            "combineItem": [
+                                                "hihokenshaNo",
+                                                "shimei",
+                                                "kanaShimei",
+                                                "shimeiWithKana"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "認定",
+                                            "combineItem": [
+                                                "ninteiShinseiKubun",
+                                                "ninteiShinseiDate"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "調査依頼",
+                                            "combineItem": [
+                                                "chosaIraiKubun",
+                                                "chosaIraiDate",
+                                                "chosaKigenDate"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "依頼書",
+                                            "combineItem": [
+                                                "iraishoHakkoDate"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "今回",
+                                            "combineItem": [
+                                                "chosaItakusakiNo",
+                                                "chosaItakusakiName",
+                                                "chosainNo",
+                                                "chosainName"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "前回",
+                                            "combineItem": [
+                                                "chosaItakusakiNo1TA",
+                                                "chosaItakusakiName1TA",
+                                                "chosainNo1TA",
+                                                "chosainName1TA"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "前々回",
+                                            "combineItem": [
+                                                "chosaItakusakiNo2TA",
+                                                "chosaItakusakiName2TA",
+                                                "chosainNo2TA",
+                                                "chosainName2TA"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "督促",
+                                            "combineItem": [
+                                                "tokusokuDate",
+                                                "tokusokuCount"
+                                            ]
+                                        },
+                                        {
+                                            "combineColumnName": "被保険者",
+                                            "combineItem": [
+                                                "yubinNo",
+                                                "jusho",
+                                                "nyushoShisetsu"
+                                            ]
+                                        }
+                                    ]
+                                }
+                            },
+                            "onSort": "",
+                            "onSelect": "",
+                            "onSelectByDblClick": "",
+                            "onSelectBySelectButton": "",
+                            "onSelectByModifyButton": "",
+                            "onSelectByDeleteButton": "",
+                            "onAfterRequest": "",
+                            "onAfterRequestByDblClick": "",
+                            "onAfterRequestBySelectButton": "",
+                            "onAfterRequestByModifyButton": "",
+                            "onAfterRequestByDeleteButton": "",
+                            "onOnlyRow": "",
+                            "onNoRow": "",
+                            "onMultiRows": "",
+                            "sortOrder": "chosaIraiKubun",
+                            "isAscending": true,
+                            "filterList": [],
+                            "activeRowId": -1,
+                            "gridAction": []
+                        }
+                    ],
+                    "controlType": "Panel",
+                    "width": "G2",
+                    "visible": true,
+                    "displayNone": false,
+                    "disabled": false,
+                    "accessKey": "",
+                    "nextFocusFieldName": "",
+                    "wrap": false,
+                    "dependencies": [],
+                    "float": 0,
+                    "toolTip": "",
+                    "authorityMode": 0,
+                    "marginLeft": "XS",
+                    "marginRight": "XS",
+                    "selectControlID": "NinteichosaIraiListForByHandCom",
+                    "helpMessageID": "",
+                    "jpControlName": "",
+                    "onLoad": "",
+                    "title": "",
+                    "marginTop": "XS",
+                    "marginBottom": "XS",
+                    "isOpen": true,
+                    "canOpenAndClose": false,
+                    "postParameterPanelNames": [],
+                    "requestSettings": [
+                        {
+                            "eventName": "onLoad",
+                            "requestUrl": ""
+                        }
+                    ],
+                    "hiddenInput": [],
+                    "onOpen": "",
+                    "onClose": "",
+                    "session": {},
+                    "eraseBorder": true,
+                    "backgroundColor": 0,
+                    "widthAuto": true,
+                    "panelDisplay": 0,
+                    "isGroupBox": false,
+                    "readOnly": false,
+                    "height": "Auto",
+                    "canPost": false
+                }
+            ],
+            "controlType": "CommonChildDiv",
+            "width": "XS",
+            "visible": true,
+            "displayNone": false,
+            "disabled": false,
+            "accessKey": "",
+            "nextFocusFieldName": "",
+            "wrap": false,
+            "dependencies": [],
+            "float": 0,
+            "toolTip": "",
+            "authorityMode": 0,
+            "marginLeft": "XS",
+            "marginRight": "XS",
+            "selectControlID": "defaultLayout",
+            "helpMessageID": "",
+            "jpControlName": "",
+            "relation": [],
+            "packageName": "",
+            "businessId": "DBE",
+            "controlName": "NinteichosaIraiListForByHandCom",
+            "marginTop": "0em",
+            "marginBottom": "0em",
+            "originalProperty": [
+                {
+                    "publicChildProperty": "onSort",
+                    "publicChildFieldName": "dgNinteichosaIraiListForByHand",
+                    "newPropertyName": "onSort"
+                },
+                {
+                    "publicChildProperty": "onSelect",
+                    "publicChildFieldName": "dgNinteichosaIraiListForByHand",
+                    "newPropertyName": "onSelect"
+                },
+                {
+                    "publicChildProperty": "onSelectByDblClick",
+                    "publicChildFieldName": "dgNinteichosaIraiListForByHand",
+                    "newPropertyName": "onSelectByDblClick"
+                },
+                {
+                    "publicChildProperty": "onOnlyRow",
+                    "publicChildFieldName": "dgNinteichosaIraiListForByHand",
+                    "newPropertyName": "onOnlyRow"
+                },
+                {
+                    "publicChildProperty": "onNoRow",
+                    "publicChildFieldName": "dgNinteichosaIraiListForByHand",
+                    "newPropertyName": "onNoRow"
+                },
+                {
+                    "publicChildProperty": "onMultiRows",
+                    "publicChildFieldName": "dgNinteichosaIraiListForByHand",
+                    "newPropertyName": "onMultiRows"
+                },
+                {
+                    "publicChildProperty": "height",
+                    "publicChildFieldName": "dgNinteichosaIraiListForByHand",
+                    "newPropertyName": "height"
+                },
+                {
+                    "publicChildProperty": "width",
+                    "publicChildFieldName": "dgNinteichosaIraiListForByHand",
+                    "newPropertyName": "withOfGrid"
+                }
+            ],
+            "dataPassingForDialog": [],
+            "dialogOkEventNameForDialog": "",
+            "dialogCancelEventNameForDialog": "",
+            "canTransferEvent": true,
+            "heightForDialog": "",
+            "firstFocusFieldName": "",
+            "lastFocusFieldName": "",
+            "modes": [],
+            "publicEvents": [],
+            "publicEventsAlias": []
+        };
+        return NinteichosaIraiListForByHandCom_Design;
+    })(Uz.CommonChildDiv);
+    DBE.NinteichosaIraiListForByHandCom_Design = NinteichosaIraiListForByHandCom_Design;
+
+    (function (NinteichosaIraiListForByHandCom) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        NinteichosaIraiListForByHandCom.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "NinteichosaIraiListForByHandCom";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBE.NinteichosaIraiListForByHandCom.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + fieldName;
+            };
+
+            Controls.prototype.NinteichosaIraiListForByHandCom = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgNinteichosaIraiListForByHand = function () {
+                return new UZA.DataGrid(this.convFiledName("dgNinteichosaIraiListForByHand"));
+            };
+            return Controls;
+        })();
+        NinteichosaIraiListForByHandCom.Controls = Controls;
+    })(DBE.NinteichosaIraiListForByHandCom || (DBE.NinteichosaIraiListForByHandCom = {}));
+    var NinteichosaIraiListForByHandCom = DBE.NinteichosaIraiListForByHandCom;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (NinteichosaIraiListForByHandCom) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new NinteichosaIraiListForByHandCom.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        NinteichosaIraiListForByHandCom.ModeController = ModeController;
+    })(DBE.NinteichosaIraiListForByHandCom || (DBE.NinteichosaIraiListForByHandCom = {}));
+    var NinteichosaIraiListForByHandCom = DBE.NinteichosaIraiListForByHandCom;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (NinteichosaIraiListForByHandCom) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new NinteichosaIraiListForByHandCom.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("onSort", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("onSelect", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("onSelectByDblClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("onOnlyRow", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("onNoRow", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("onMultiRows", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("height", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("withOfGrid", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getonSort = function () {
+                return this.controls.dgNinteichosaIraiListForByHand().onSort;
+            };
+
+            PublicProperties.prototype.setonSort = function (value) {
+                this.controls.dgNinteichosaIraiListForByHand().onSort = value;
+            };
+
+            PublicProperties.prototype.getonSelect = function () {
+                return this.controls.dgNinteichosaIraiListForByHand().onSelect;
+            };
+
+            PublicProperties.prototype.setonSelect = function (value) {
+                this.controls.dgNinteichosaIraiListForByHand().onSelect = value;
+            };
+
+            PublicProperties.prototype.getonSelectByDblClick = function () {
+                return this.controls.dgNinteichosaIraiListForByHand().onSelectByDblClick;
+            };
+
+            PublicProperties.prototype.setonSelectByDblClick = function (value) {
+                this.controls.dgNinteichosaIraiListForByHand().onSelectByDblClick = value;
+            };
+
+            PublicProperties.prototype.getonOnlyRow = function () {
+                return this.controls.dgNinteichosaIraiListForByHand().onOnlyRow;
+            };
+
+            PublicProperties.prototype.setonOnlyRow = function (value) {
+                this.controls.dgNinteichosaIraiListForByHand().onOnlyRow = value;
+            };
+
+            PublicProperties.prototype.getonNoRow = function () {
+                return this.controls.dgNinteichosaIraiListForByHand().onNoRow;
+            };
+
+            PublicProperties.prototype.setonNoRow = function (value) {
+                this.controls.dgNinteichosaIraiListForByHand().onNoRow = value;
+            };
+
+            PublicProperties.prototype.getonMultiRows = function () {
+                return this.controls.dgNinteichosaIraiListForByHand().onMultiRows;
+            };
+
+            PublicProperties.prototype.setonMultiRows = function (value) {
+                this.controls.dgNinteichosaIraiListForByHand().onMultiRows = value;
+            };
+
+            PublicProperties.prototype.getheight = function () {
+                return this.controls.dgNinteichosaIraiListForByHand().height;
+            };
+
+            PublicProperties.prototype.setheight = function (value) {
+                this.controls.dgNinteichosaIraiListForByHand().height = value;
+            };
+
+            PublicProperties.prototype.getwithOfGrid = function () {
+                return this.controls.dgNinteichosaIraiListForByHand().width;
+            };
+
+            PublicProperties.prototype.setwithOfGrid = function (value) {
+                this.controls.dgNinteichosaIraiListForByHand().width = value;
+            };
+            return PublicProperties;
+        })();
+        NinteichosaIraiListForByHandCom.PublicProperties = PublicProperties;
+    })(DBE.NinteichosaIraiListForByHandCom || (DBE.NinteichosaIraiListForByHandCom = {}));
+    var NinteichosaIraiListForByHandCom = DBE.NinteichosaIraiListForByHandCom;
+})(DBE || (DBE = {}));
+</script>
+  <script class="RamlConvert" type="text/javascript">
+var DBE= DBE? DBE: {};
+DBE['NINTEICHOSAIRAILISTFORBYHANDCOM'] = {};
+</script><script>var DBE;
+(function (DBE) {
+    (function (KihonchosaResultInputCom) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KihonchosaResultInputCom.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KihonchosaResultInputCom";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBE.KihonchosaResultInputCom.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBE.KihonchosaResultInputCom.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KihonchosaResultInputCom = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.lblItemNo = function () {
+                return new UZA.Label(this.convFiledName("lblItemNo"));
+            };
+
+            Controls.prototype.lblItemName = function () {
+                return new UZA.Label(this.convFiledName("lblItemName"));
+            };
+
+            Controls.prototype.txtAnswer = function () {
+                return new UZA.TextBox(this.convFiledName("txtAnswer"));
+            };
+
+            Controls.prototype.radChoices = function () {
+                return new UZA.RadioButton(this.convFiledName("radChoices"));
+            };
+            return Controls;
+        })();
+        KihonchosaResultInputCom.Controls = Controls;
+    })(DBE.KihonchosaResultInputCom || (DBE.KihonchosaResultInputCom = {}));
+    var KihonchosaResultInputCom = DBE.KihonchosaResultInputCom;
+})(DBE || (DBE = {}));
+var DBE;
+(function (DBE) {
+    (function (NinteichosaIraiListForByHandCom) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new NinteichosaIraiListForByHandCom.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+            return ModeController;
+        })();
+        NinteichosaIraiListForByHandCom.ModeController = ModeController;
+    })(DBE.NinteichosaIraiListForByHandCom || (DBE.NinteichosaIraiListForByHandCom = {}));
+    var NinteichosaIraiListForByHandCom = DBE.NinteichosaIraiListForByHandCom;
+})(DBE || (DBE = {}));
+
+var DBE;
+(function (DBE) {
+    (function (NinteichosaIraiListForByHandCom) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.controls = new NinteichosaIraiListForByHandCom.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                editTypes.addEditType("onSort", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("onSelect", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("onSelectByDblClick", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("onOnlyRow", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("onNoRow", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("onMultiRows", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("height", UZA.EditTypeEnumForPublicProperty.StringType);
+                editTypes.addEditType("withOfGrid", UZA.EditTypeEnumForPublicProperty.StringType);
+                return editTypes;
+            };
+
+            PublicProperties.prototype.getonSort = function () {
+                return this.controls.dgNinteichosaIraiListForByHand().onSort;
+            };
+
+            PublicProperties.prototype.setonSort = function (value) {
+                this.controls.dgNinteichosaIraiListForByHand().onSort = value;
+            };
+
+            PublicProperties.prototype.getonSelect = function () {
+                return this.controls.dgNinteichosaIraiListForByHand().onSelect;
+            };
+
+            PublicProperties.prototype.setonSelect = function (value) {
+                this.controls.dgNinteichosaIraiListForByHand().onSelect = value;
+            };
+
+            PublicProperties.prototype.getonSelectByDblClick = function () {
+                return this.controls.dgNinteichosaIraiListForByHand().onSelectByDblClick;
+            };
+
+            PublicProperties.prototype.setonSelectByDblClick = function (value) {
+                this.controls.dgNinteichosaIraiListForByHand().onSelectByDblClick = value;
+            };
+
+            PublicProperties.prototype.getonOnlyRow = function () {
+                return this.controls.dgNinteichosaIraiListForByHand().onOnlyRow;
+            };
+
+            PublicProperties.prototype.setonOnlyRow = function (value) {
+                this.controls.dgNinteichosaIraiListForByHand().onOnlyRow = value;
+            };
+
+            PublicProperties.prototype.getonNoRow = function () {
+                return this.controls.dgNinteichosaIraiListForByHand().onNoRow;
+            };
+
+            PublicProperties.prototype.setonNoRow = function (value) {
+                this.controls.dgNinteichosaIraiListForByHand().onNoRow = value;
+            };
+
+            PublicProperties.prototype.getonMultiRows = function () {
+                return this.controls.dgNinteichosaIraiListForByHand().onMultiRows;
+            };
+
+            PublicProperties.prototype.setonMultiRows = function (value) {
+                this.controls.dgNinteichosaIraiListForByHand().onMultiRows = value;
+            };
+
+            PublicProperties.prototype.getheight = function () {
+                return this.controls.dgNinteichosaIraiListForByHand().height;
+            };
+
+            PublicProperties.prototype.setheight = function (value) {
+                this.controls.dgNinteichosaIraiListForByHand().height = value;
+            };
+
+            PublicProperties.prototype.getwithOfGrid = function () {
+                return this.controls.dgNinteichosaIraiListForByHand().width;
+            };
+
+            PublicProperties.prototype.setwithOfGrid = function (value) {
+                this.controls.dgNinteichosaIraiListForByHand().width = value;
+            };
+            return PublicProperties;
+        })();
+        NinteichosaIraiListForByHandCom.PublicProperties = PublicProperties;
+    })(DBE.NinteichosaIraiListForByHandCom || (DBE.NinteichosaIraiListForByHandCom = {}));
+    var NinteichosaIraiListForByHandCom = DBE.NinteichosaIraiListForByHandCom;
+})(DBE || (DBE = {}));
+</script></div>

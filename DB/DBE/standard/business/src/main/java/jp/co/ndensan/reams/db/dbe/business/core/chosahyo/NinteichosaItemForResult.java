@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinte
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinteichosaItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItemNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 
@@ -31,8 +31,8 @@ public class NinteichosaItemForResult implements INinteichosaItem {
      * @param 調査結果 調査結果
      */
     public NinteichosaItemForResult(NinteichosaItem 調査項目, RString 調査結果) {
-        this.調査項目 = requireNonNull(調査項目, Messages.E00001.replace("調査項目").getMessage());
-        this.調査結果 = requireNonNull(調査結果, Messages.E00001.replace("調査結果").getMessage());
+        this.調査項目 = requireNonNull(調査項目, UrSystemErrorMessages.値がnull.getReplacedMessage("調査項目"));
+        this.調査結果 = requireNonNull(調査結果, UrSystemErrorMessages.値がnull.getReplacedMessage("調査結果"));
     }
 
     @Override

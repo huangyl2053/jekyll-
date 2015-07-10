@@ -1,18 +1,19 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IKaigoKanryoMessageDiv;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.KanryoMessageDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KaigoKanryoMessage のクラスファイル 
- * 
+ * KaigoKanryoMessage のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoKanryoMessageDiv extends Panel implements IKaigoKanryoMessageDiv {
@@ -22,6 +23,7 @@ public class KaigoKanryoMessageDiv extends Panel implements IKaigoKanryoMessageD
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ccdKanryoMessage")
     private KanryoMessageDiv ccdKanryoMessage;
 
@@ -37,5 +39,8 @@ public class KaigoKanryoMessageDiv extends Panel implements IKaigoKanryoMessageD
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
+    @Override
+    public void setSuccessMessage(RString messageMein, RString messageTaisho1, RString messageTaisho2) {
+        ccdKanryoMessage.setMessage(messageMein, messageTaisho1, messageTaisho2, true);
+    }
 }

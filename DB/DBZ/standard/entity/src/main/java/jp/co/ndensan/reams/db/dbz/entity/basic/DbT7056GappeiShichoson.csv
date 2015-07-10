@@ -1,0 +1,14 @@
+﻿gappeiYMD,UDD015YMD,FlexibleDate,,,,,A
+chiikiNo,varchar,RString,,,,,A
+kyuShichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+unyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+unyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,A
+kyuHokenshaNo,DbUDD003HokenshaNo,ShoKisaiHokenshaNo,,,,,A
+kyuShichosonMeisho,varchar,RString,,,,,A
+todofukenMeisho,varchar,RString,,,,,A
+gunMeisho,varchar,RString,,,,,A
+yubinNo,UDD003YubinNo,YubinNo,,,,,A
+telNo,UDD026TelNo,TelNo,,,,,A
+rojinhokenShichosonNo,varchar,RString,,,,,A
+rokenJukyushaNoTaikei,varchar,RString,,,,,A
+hyojiUmu,varchar,RString,,,,,A

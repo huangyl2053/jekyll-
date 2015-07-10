@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -28,7 +28,7 @@ public class ShinsakaiKaisaiChiku extends Code {
      */
     public ShinsakaiKaisaiChiku(RString code, RString name) throws NullPointerException, IllegalArgumentException {
         super(code);
-        this.name = requireNonNull(name, Messages.E00003.replace("名称", getClass().getName()).getMessage());
+        this.name = requireNonNull(name, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("名称", getClass().getName()));
     }
 
     /**

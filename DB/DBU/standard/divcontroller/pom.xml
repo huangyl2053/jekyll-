@@ -25,13 +25,11 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.ura</groupId>
             <artifactId>UraDivController</artifactId>
-            <version>${project.version}</version>
             <classifier>classes</classifier>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzDivController</artifactId>
-            <version>${project.version}</version>
             <classifier>classes</classifier>
         </dependency>
         <dependency>
@@ -56,6 +54,11 @@
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxDivController</artifactId>
+            <classifier>classes</classifier>
         </dependency>
     </dependencies>
 </project>

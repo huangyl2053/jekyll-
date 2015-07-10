@@ -1,0 +1,14 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
+nijiHanteiYMD,UDD015YMD,FlexibleDate,,,,,二次判定年月日,A
+nijiHanteiYokaigoJotaiKubunCode,UDD035Code,Code,,,,,二次判定要介護状態区分コード,A
+nijiHanteiNinteiYukoKikan,int2,int,,,,,二次判定認定有効期間,A
+nijiHanteiNinteiYukoKaishiYMD,UDD015YMD,FlexibleDate,,,,,二次判定認定有効開始年月日,A
+nijiHanteiNinteiYukoShuryoYMD,UDD015YMD,FlexibleDate,,,,,二次判定認定有効終了年月日,A
+shinsakaiKaisaiNo,int2,int,,,,,介護認定審査会開催番号,A
+shinsakaiIken,text,RString,,,,,介護認定審査会意見,A
+ichijiHnateiKekkaHenkoRiyu,text,RString,,,,,一次判定結果変更理由,A
+yokaigoJotaizoReiCode,UDD035Code,Code,,,,,要介護状態像例コード,A
+ninteishinsakaiIkenShurui,bpchar,RString,,,,,認定審査会意見種類,A
+shinsakaiMemo,text,RString,,,,,審査会メモ,A
+nijiHanteiKekkaInputHoho,UDD035Code,Code,,,,,二次判定結果入力方法,A
+niniHanteiKekkaInputYMD,UDD015YMD,FlexibleDate,,,,,二次判定結果入力年月日,A

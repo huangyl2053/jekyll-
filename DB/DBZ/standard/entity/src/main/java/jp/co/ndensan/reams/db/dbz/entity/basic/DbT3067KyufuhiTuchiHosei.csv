@@ -1,0 +1,8 @@
+﻿shokisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,A
+hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,A
+jigyoshoNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,A
+serviceShuruiCode,DbUDD005ServiceShuruiCode,DbUDD005ServiceShuruiCode,,,,,A
+shoriTimestamp,UDD019Timestamp,RDateTime,,,,,A
+serviceHiyoTotal,numeric,Decimal,,,,,A
+riyoshaFutangaku,numeric,Decimal,,,,,A

@@ -4,9 +4,6 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_btnReturn = function () {
-                return "onClick_btnReturn";
-            };
             return Events;
         })();
         TainoInfo.Events = Events;
@@ -37,6 +34,10 @@ var DBZ;
 
             Controls.prototype.btnKensaku = function () {
                 return new UZA.Button(this.convFiledName("btnKensaku"));
+            };
+
+            Controls.prototype.btnGengakuJoho = function () {
+                return new UZA.Button(this.convFiledName("btnGengakuJoho"));
             };
 
             Controls.prototype.txtSaikoNokigen = function () {
@@ -169,14 +170,6 @@ var DBZ;
 
             Controls.prototype.lblMassage4 = function () {
                 return new UZA.Label(this.convFiledName("lblMassage4"));
-            };
-
-            Controls.prototype.btnReturn = function () {
-                return new UZA.Button(this.convFiledName("btnReturn"));
-            };
-
-            Controls.prototype.btnKakutei = function () {
-                return new UZA.Button(this.convFiledName("btnKakutei"));
             };
             return Controls;
         })();

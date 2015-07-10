@@ -14,14 +14,19 @@ import jp.co.ndensan.reams.db.dbc.business.helper.JuryoininJigyoshaMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.JuryoininJigyoshaEntityMock;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.JuryoininJigyoshaDac;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
-import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
-import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaFinder;
-import jp.co.ndensan.reams.ur.urz.business.IKoza;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
-import jp.co.ndensan.reams.ur.urz.realservice.IHojinFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.IKozaManager;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.realservice.IKaigoJigyoshaFinder;
+import jp.co.ndensan.reams.ur.urc.business.IKoza;
+//TODO n8233 朴　jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojinに変更
+//import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojin;
+//TODO n8233 朴　jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IHojinFinderに変更
+//import jp.co.ndensan.reams.ur.urz.realservice.IHojinFinder;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IHojinFinder;
+import jp.co.ndensan.reams.ur.urc.realservice.IKozaManager;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
@@ -132,7 +137,11 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
     private static IHojinFinder createHojinFinderMock() {
         IHojinFinder HojinFinderMock = mock(IHojinFinder.class);
         //TODO n3317塚田萌　RDateからFlexibleDateに変更されたらRDateを修正。
-        when(HojinFinderMock.get法人(any(ShikibetsuCode.class), any(RDate.class)))
+        //TODO n8233 朴　get法人(識別コード, 契約開始日.toRDate()　→　get法人(GyomuCode.DB介護保険, 識別コード)に変更する。
+        //TOD  n8233 朴  契約開始日.toRDate()に関しては、必要があるので、対応必要がある。
+//        when(HojinFinderMock.get法人(any(ShikibetsuCode.class), any(RDate.class)))
+//                .thenReturn(mock(IHojin.class));
+        when(HojinFinderMock.get法人(any(GyomuCode.class), any(ShikibetsuCode.class)))
                 .thenReturn(mock(IHojin.class));
         return HojinFinderMock;
     }

@@ -5,13 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyolist.ShoKaishuJokyoListDiv;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-
 /**
  *
  * @author N8211 田辺 紘一
  */
+//TODO 不要ならば削除する。
 public class ShoKaishuJokyoList {
 
 }

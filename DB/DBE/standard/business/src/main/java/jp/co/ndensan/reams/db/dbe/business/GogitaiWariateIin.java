@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
  * 合議体に割り当てられた審査会委員を表すクラスです。
@@ -30,8 +30,8 @@ public class GogitaiWariateIin {
      */
     public GogitaiWariateIin(ShinsakaiIin 委員情報, ShinsainKubun 認定調査員区分, GogitaichoKubun 合議体長区分, GogitaiDetail 合議体情報)
             throws NullPointerException {
-        requireNonNull(委員情報, Messages.E00003.replace("委員情報", getClass().getName()).getMessage());
-        requireNonNull(合議体情報, Messages.E00003.replace("合議体情報", getClass().getName()).getMessage());
+        requireNonNull(委員情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("委員情報", getClass().getName()));
+        requireNonNull(合議体情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("合議体情報", getClass().getName()));
 
         this.委員情報 = 委員情報;
         this.認定調査員区分 = 認定調査員区分;

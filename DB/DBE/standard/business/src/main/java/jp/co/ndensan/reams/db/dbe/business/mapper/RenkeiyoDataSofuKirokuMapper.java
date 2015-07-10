@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbe.definition.SaiSoufuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5022RenkeiyoDataSofuKirokuEntity;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 
 /**
@@ -38,7 +38,7 @@ public final class RenkeiyoDataSofuKirokuMapper {
      * @throws NullPointerException {@code 連携用データ送付記録Entity}がnullの場合
      */
     public static RenkeiyoDataSofuKiroku toRenkeiyoDataSofuKiroku(DbT5022RenkeiyoDataSofuKirokuEntity entity) throws NullPointerException {
-        requireNonNull(entity, Messages.E00003.replace("連携用データ送付記録Entity", "連携用データ送付記録").getMessage());
+        requireNonNull(entity, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("連携用データ送付記録Entity", "連携用データ送付記録"));
         ShinseishoKanriNo 申請書管理番号 = entity.getShinseishoKanriNo();
         YMDHMS 処理日時 = entity.getShoriTimestamp();
         HihokenshaNo 被保険者番号 = entity.getHihokenshaNo();

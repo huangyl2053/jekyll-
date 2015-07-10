@@ -14,13 +14,14 @@ import static org.mockito.Mockito.*;
  *
  * @author N3327 三浦 凌
  */
+//TODO: n3327 三浦領　必要なさそうなので問題がなければ消す。
 public class HihokenshaKubunMock {
 
     private HihokenshaKubunMock() {
     }
 
-    public static HihokenshaKubun getSpiedInstance() {
-        HihokenshaKubun 被保険者区分 = new HihokenshaKubun(new Code("コード"), new RString("名称"));
-        return spy(被保険者区分);
-    }
+    // public static HihokenshaKubun getSpiedInstance() {
+    // HihokenshaKubun 被保険者区分 = new HihokenshaKubun(new Code("コード"), new RString("名称"));
+    // return spy(被保険者区分);
+    // }
 }

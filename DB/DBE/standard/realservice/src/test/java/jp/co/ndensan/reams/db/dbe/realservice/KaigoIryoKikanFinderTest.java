@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.relate.IKaigoIryoKikanDac;
 import jp.co.ndensan.reams.db.dbe.business.helper.KaigoIryoKikanTestHelper;
-import jp.co.ndensan.reams.ur.urz.realservice.IKozaManager;
+import jp.co.ndensan.reams.ur.urc.realservice.IKozaManager;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -38,9 +38,9 @@ import static org.mockito.Mockito.any;
 public class KaigoIryoKikanFinderTest extends TestBase {
 
     private static KaigoIryoKikanFinder sut;
-    public static LasdecCode 市町村コード = new LasdecCode(new RString("000001"));
+    public static LasdecCode 市町村コード = new LasdecCode(new RString("000123"));
 
-    public static KaigoIryoKikanCode 介護医療機関コード = new KaigoIryoKikanCode(new RString("B001"));
+    public static KaigoIryoKikanCode 介護医療機関コード = new KaigoIryoKikanCode(new RString("0000000001"));
 
     public static class get介護医療機関_市町村コードと介護医療機関コードが引数の場合のテスト extends TestBase {
 

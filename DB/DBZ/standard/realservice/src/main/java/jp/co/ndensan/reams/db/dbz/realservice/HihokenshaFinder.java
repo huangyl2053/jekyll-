@@ -11,12 +11,12 @@ import jp.co.ndensan.reams.db.dbz.business.Hihokensha;
 import jp.co.ndensan.reams.db.dbz.business.HihokenshaList;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IJuminKihonDaichoSearchKey;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.JuminKihonDaichoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IJuminKihonDaichoSearchKey;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.JuminKihonDaichoSearchKeyBuilder;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
-import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.IJukiKojinFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IJukiKojinFinder;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -27,28 +27,29 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
  *
  * @author N3327 三浦 凌
  */
+@Deprecated
 public class HihokenshaFinder {
 
-    private final HihokenshaDaichoManager hihokenshaDaicho;
+    private final _HihokenshaDaichoManager hihokenshaDaicho;
     private final IJukiKojinFinder profileSearcher;
 
     /**
      * 新しいHihokenshaFinderのインスタンスを生成します。
      */
     public HihokenshaFinder() {
-        this.hihokenshaDaicho = new HihokenshaDaichoManager();
+        this.hihokenshaDaicho = new _HihokenshaDaichoManager();
         this.profileSearcher = ShikibetsuTaishoService.getJukiKojinFinder();
     }
 
     /**
-     * テスト用のコンストラクタです。 {@link HihokenshaDaichoManager HihokenshaDaichoManager}と
+     * テスト用のコンストラクタです。 {@link _HihokenshaDaichoManager HihokenshaDaichoManager}と
      * {@link IKojinFinder IKojinFinder}を指定して、インスタンスを生成します。
      *
      * @param hihokenshaDaicho
-     * {@link HihokenshaDaichoManager HihokenshaDaichoManager}
+     * {@link _HihokenshaDaichoManager HihokenshaDaichoManager}
      * @param profileSearcher {@link IKojinFinder IKojinFinder}
      */
-    HihokenshaFinder(HihokenshaDaichoManager hihokenshaDaicho, IJukiKojinFinder profileSearcher) {
+    HihokenshaFinder(_HihokenshaDaichoManager hihokenshaDaicho, IJukiKojinFinder profileSearcher) {
         this.hihokenshaDaicho = hihokenshaDaicho;
         this.profileSearcher = profileSearcher;
     }
@@ -91,7 +92,7 @@ public class HihokenshaFinder {
      * @return {@link Hihokensha Hihokensha}。もしくは、null。
      */
     public Hihokensha get被保険者(LasdecCode 市町村コード, ShikibetsuCode 識別コード, YMDHMS 処理日時) {
-        IHihokenshaShikaku shikaku = hihokenshaDaicho.get被保険者資格(市町村コード, 識別コード, 処理日時);
+        IHihokenshaShikaku shikaku = hihokenshaDaicho.get被保険者資格(市町村コード, 識別コード);
         return toHihokensha(shikaku);
     }
 

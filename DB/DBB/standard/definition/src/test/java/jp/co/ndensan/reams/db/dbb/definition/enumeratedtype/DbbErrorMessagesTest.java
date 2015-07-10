@@ -10,12 +10,15 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import static org.hamcrest.CoreMatchers.*;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 
 /**
  * 介護賦課業務のエラーメッセージのテストです。
  *
  * @author n8178 城間篤人
  */
+@RunWith(Enclosed.class)
 public class DbbErrorMessagesTest extends DbbTestBase {
 
     public static class toValue extends DbbTestBase {
@@ -33,7 +36,7 @@ public class DbbErrorMessagesTest extends DbbTestBase {
 
         @Test(expected = IllegalArgumentException.class)
         public void 上記以外のコードを渡した場合_例外が発生する() {
-            DbbErrorMessages.toValue(new Code("02"));
+            DbbErrorMessages.toValue(new Code(""));
             fail();
         }
     }

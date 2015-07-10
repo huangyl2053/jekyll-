@@ -2,7 +2,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.db.dbz.model.util.itemlist.IItemList;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.IItemList;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
@@ -29,9 +29,11 @@ public interface IShikakuHenkoRirekiDiv {
      * <li>変更事由DDLの選択項目の設定（コードマスタからの取得）</li>
      * </ul>
      *
-     * @param 市町村コード 市町村コード
+     * @param 市町村コード LasdecCode
+     * @param 旧市町村コード LasdecCode
+     * @param mode ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode
      */
-    void initialize(LasdecCode 市町村コード);
+    void initialize(LasdecCode 市町村コード, LasdecCode 旧市町村コード, ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode mode);
 
     /**
      * 入力明細エリアの情報を初期化します。

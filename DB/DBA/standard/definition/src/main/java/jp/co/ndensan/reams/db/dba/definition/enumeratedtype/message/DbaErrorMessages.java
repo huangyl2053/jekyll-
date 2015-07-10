@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.definition.enumeratedtype.message;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import static jp.co.ndensan.reams.db.dba.definition.enumeratedtype.message.MessageCreateHelper.toCode;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.message.MessageCreateHelper.toCode;
 
 /**
  * DBAのエラーメッセージ定義列挙型です。
@@ -17,8 +17,9 @@ import static jp.co.ndensan.reams.db.dba.definition.enumeratedtype.message.Messa
  */
 public enum DbaErrorMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    住所地特例適用対象者でない(4, "住所地特例の適用対象者ではありません。"),
+    住所地特例として適用済(5, "住所地特例として適用されています。"),
+    住所地特例として未適用(6, "住所地特例として適用されていません。");
 
     private final Message message;
 

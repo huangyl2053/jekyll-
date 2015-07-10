@@ -1,0 +1,106 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;TokubetsuIryoIken&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;TokubetsuIryoIken&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.TokubetsuIryoIken"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel Width-G1 UzCompositeChild" id="TokubetsuIryoIken" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;TokubetsuIryoIken&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;TokubetsuIryoIken&quot;,&quot;title&quot;:&quot;特別な医療（過去14日に受けた医療）&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;TokubetsuIryoIken&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="TokubetsuIryoIken_panel_header_area" style="display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">特別な医療（過去14日に受けた医療）</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="TokubetsuIryoIken_panel_body_area"><div class="UzCheckBoxList JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="chkTokubetsuIryo" style="width: 824px; height: 38px;" data-control-type="CheckBoxList" data-obj="{&quot;fieldName&quot;:&quot;chkTokubetsuIryo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CheckBoxList&quot;,&quot;width&quot;:&quot;700px&quot;,&quot;selectControlID&quot;:&quot;chkTokubetsuIryo_core&quot;,&quot;icon&quot;:[],&quot;labelLText&quot;:&quot;処置内容&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;点滴の管理　　&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;中心静脈栄養　&quot;},{&quot;key&quot;:&quot;key2&quot;,&quot;value&quot;:&quot;透析　　　&quot;},{&quot;key&quot;:&quot;key3&quot;,&quot;value&quot;:&quot;ストーマの処置&quot;},{&quot;key&quot;:&quot;key4&quot;,&quot;value&quot;:&quot;酸素療法&quot;},{&quot;key&quot;:&quot;key5&quot;,&quot;value&quot;:&quot;レスピレーター&quot;},{&quot;key&quot;:&quot;key6&quot;,&quot;value&quot;:&quot;気管切開の処置&quot;},{&quot;key&quot;:&quot;key7&quot;,&quot;value&quot;:&quot;疼痛の看護&quot;},{&quot;key&quot;:&quot;key8&quot;,&quot;value&quot;:&quot;経管栄養&quot;}],&quot;newLineItemNumber&quot;:5,&quot;disabledItem&quot;:[],&quot;selectedItems&quot;:[]}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right Width-S" id="chkTokubetsuIryo_labelL"><span>処置内容</span></span><span class="checkBoxSpan FloatLeft" id="chkTokubetsuIryo_core" style="width: 700px;"><input id="chkTokubetsuIryo_key0" type="checkbox" value="点滴の管理　　" data-key="key0"><label for="chkTokubetsuIryo_key0" data-key="key0">点滴の管理　　</label><input class="spaceSize-M" id="chkTokubetsuIryo_key1" type="checkbox" value="中心静脈栄養　" data-key="key1"><label for="chkTokubetsuIryo_key1" data-key="key1">中心静脈栄養　</label><input class="spaceSize-M" id="chkTokubetsuIryo_key2" type="checkbox" value="透析　　　" data-key="key2"><label for="chkTokubetsuIryo_key2" data-key="key2">透析　　　</label><input class="spaceSize-M" id="chkTokubetsuIryo_key3" type="checkbox" value="ストーマの処置" data-key="key3"><label for="chkTokubetsuIryo_key3" data-key="key3">ストーマの処置</label><input class="spaceSize-M" id="chkTokubetsuIryo_key4" type="checkbox" value="酸素療法" data-key="key4"><label for="chkTokubetsuIryo_key4" data-key="key4">酸素療法</label><br><input id="chkTokubetsuIryo_key5" type="checkbox" value="レスピレーター" data-key="key5"><label for="chkTokubetsuIryo_key5" data-key="key5">レスピレーター</label><input class="spaceSize-M" id="chkTokubetsuIryo_key6" type="checkbox" value="気管切開の処置" data-key="key6"><label for="chkTokubetsuIryo_key6" data-key="key6">気管切開の処置</label><input class="spaceSize-M" id="chkTokubetsuIryo_key7" type="checkbox" value="疼痛の看護" data-key="key7"><label for="chkTokubetsuIryo_key7" data-key="key7">疼痛の看護</label><input class="spaceSize-M" id="chkTokubetsuIryo_key8" type="checkbox" value="経管栄養" data-key="key8"><label for="chkTokubetsuIryo_key8" data-key="key8">経管栄養</label></span></div><div class="UzCheckBoxList JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M ClearFloat UzCompositeChild" id="chkTokubetsuTaiou" style="width: 774px; height: 19px; opacity: 1;" data-control-type="CheckBoxList" data-obj="{&quot;fieldName&quot;:&quot;chkTokubetsuTaiou&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CheckBoxList&quot;,&quot;width&quot;:&quot;650px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;chkTokubetsuTaiou_core&quot;,&quot;icon&quot;:[],&quot;labelLText&quot;:&quot;特別な対応&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;モニター測定(血液、心拍、酸素飽和度など)　　　&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;褥瘡の処置&quot;}],&quot;disabledItem&quot;:[],&quot;selectedItems&quot;:[]}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right Width-S" id="chkTokubetsuTaiou_labelL"><span>特別な対応</span></span><span class="checkBoxSpan FloatLeft" id="chkTokubetsuTaiou_core" style="width: 650px;"><input id="chkTokubetsuTaiou_key0" type="checkbox" value="モニター測定(血液、心拍、酸素飽和度など)　　　" data-key="key0"><label for="chkTokubetsuTaiou_key0" data-key="key0">モニター測定(血液、心拍、酸素飽和度など)　　　</label><input class="spaceSize-M" id="chkTokubetsuTaiou_key1" type="checkbox" value="褥瘡の処置" data-key="key1"><label for="chkTokubetsuTaiou_key1" data-key="key1">褥瘡の処置</label></span></div><div class="UzCheckBoxList JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M ClearFloat UzCompositeChild" id="chkShikkinTaio" style="width: 636px; height: 19px; opacity: 1;" data-control-type="CheckBoxList" data-obj="{&quot;fieldName&quot;:&quot;chkShikkinTaio&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CheckBoxList&quot;,&quot;width&quot;:&quot;L&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;chkShikkinTaio_core&quot;,&quot;icon&quot;:[],&quot;labelLText&quot;:&quot;失禁への対応&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;カテーテル(コンドームカテーテル、留置カテーテル 等)&quot;}],&quot;disabledItem&quot;:[],&quot;selectedItems&quot;:[]}"><span class="word-wrap-break-word Label-L FloatLeft text-align-right Width-S" id="chkShikkinTaio_labelL"><span>失禁への対応</span></span><span class="checkBoxSpan FloatLeft Width-L" id="chkShikkinTaio_core"><input id="chkShikkinTaio_key0" type="checkbox" value="カテーテル(コンドームカテーテル、留置カテーテル 等)" data-key="key0"><label for="chkShikkinTaio_key0" data-key="key0">カテーテル(コンドームカテーテル、留置カテーテル 等)</label></span></div><button class="UzButton JSControl controlMargin-M FloatRight marginLeft-XS marginRight-XS Width-S ClearFloat UzCompositeChild" id="btnBack" style="opacity: 0.8;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnBack&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnBack&quot;,&quot;text&quot;:&quot;戻る&quot;}"><span>戻る</span></button><button class="UzButton JSControl controlMargin-M FloatRight marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnKoshin" style="opacity: 0.8;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnKoshin&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnKoshin&quot;,&quot;text&quot;:&quot;更新&quot;}"><span>更新</span></button></div></div>  
+   
+   <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['TOKUBETSUIRYOIKEN'] = {};
+DBZ['TOKUBETSUIRYOIKEN'].TokubetsuIryoIkenRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_TokubetsuIryoIken').getProperty();parameter0.chkTokubetsuIryo = Uz.JSControlUtil.getJSControl(parentFieldName + '_chkTokubetsuIryo').getProperty();parameter0.chkTokubetsuTaiou = Uz.JSControlUtil.getJSControl(parentFieldName + '_chkTokubetsuTaiou').getProperty();parameter0.chkShikkinTaio = Uz.JSControlUtil.getJSControl(parentFieldName + '_chkShikkinTaio').getProperty();parameter0.btnBack = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnBack').getProperty();parameter0.btnKoshin = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnKoshin').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (TokubetsuIryoIken) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        TokubetsuIryoIken.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "TokubetsuIryoIken";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.TokubetsuIryoIken.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.TokubetsuIryoIken.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.TokubetsuIryoIken = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.chkTokubetsuIryo = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkTokubetsuIryo"));
+            };
+
+            Controls.prototype.chkTokubetsuTaiou = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkTokubetsuTaiou"));
+            };
+
+            Controls.prototype.chkShikkinTaio = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkShikkinTaio"));
+            };
+
+            Controls.prototype.btnBack = function () {
+                return new UZA.Button(this.convFiledName("btnBack"));
+            };
+
+            Controls.prototype.btnKoshin = function () {
+                return new UZA.Button(this.convFiledName("btnKoshin"));
+            };
+            return Controls;
+        })();
+        TokubetsuIryoIken.Controls = Controls;
+    })(DBZ.TokubetsuIryoIken || (DBZ.TokubetsuIryoIken = {}));
+    var TokubetsuIryoIken = DBZ.TokubetsuIryoIken;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (TokubetsuIryoIken) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new TokubetsuIryoIken.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new TokubetsuIryoIken.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        TokubetsuIryoIken.ModeController = ModeController;
+    })(DBZ.TokubetsuIryoIken || (DBZ.TokubetsuIryoIken = {}));
+    var TokubetsuIryoIken = DBZ.TokubetsuIryoIken;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (TokubetsuIryoIken) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new TokubetsuIryoIken.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        TokubetsuIryoIken.PublicProperties = PublicProperties;
+    })(DBZ.TokubetsuIryoIken || (DBZ.TokubetsuIryoIken = {}));
+    var TokubetsuIryoIken = DBZ.TokubetsuIryoIken;
+})(DBZ || (DBZ = {}));
+</script></div>

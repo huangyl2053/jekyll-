@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -26,7 +26,7 @@ public class GogitaiYukoKikanKaishiDate implements IValueObject<FlexibleDate>, C
      * @throws NullPointerException 引数にnullが渡されたとき
      */
     public GogitaiYukoKikanKaishiDate(FlexibleDate 開始年月日) throws NullPointerException {
-        this.開始年月日 = requireNonNull(開始年月日, Messages.E00003.replace("開始年月日", getClass().getName()).getMessage());
+        this.開始年月日 = requireNonNull(開始年月日, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("開始年月日", getClass().getName()));
     }
 
     /**

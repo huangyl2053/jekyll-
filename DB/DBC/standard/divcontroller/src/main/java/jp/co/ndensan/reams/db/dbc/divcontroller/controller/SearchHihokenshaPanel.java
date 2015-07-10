@@ -35,7 +35,7 @@ public class SearchHihokenshaPanel {
         ResponseData<SearchHihokenshaPanelDiv> response = new ResponseData<>();
 
         //TO DO　被保険者の検索の内容を閉じる
-        panel.getHihokenshaFinder().getSearchCriteriaOfHihokensha().setIsOpen(false);
+//        panel.getHihokenshaFinder().getSearchCriteriaOfHihokensha().setIsOpen(false);
         /////////////////////////////////////////////////////////////////////////////////////////
         //TO DO  JutakuData1.xml ①
         List<HashMap> ymlData = ymlData();
@@ -45,8 +45,7 @@ public class SearchHihokenshaPanel {
        /////////////////////////////////////////////////////////////////////////////////////////
 
         //TO DO  JutakuData.xml Write　③
-        panel.getHihokenshaFinder().getSearchCriteriaOfHihokensha().getTxtHihokenshaNo().setValue(new RString(hihokenshaNo));
-
+//        panel.getHihokenshaFinder().getSearchCriteriaOfHihokensha().getTxtHihokenshaNo().setValue(new RString(hihokenshaNo));
         response.data = panel;
         return response;
     }
@@ -62,8 +61,7 @@ public class SearchHihokenshaPanel {
         ResponseData<SearchHihokenshaPanelDiv> response = new ResponseData<>();
 
 //        //TO DO　被保険者の検索の内容を閉じる
-        panel.getHihokenshaFinder().getSearchCriteriaOfHihokensha().setIsOpen(false);
-
+//        panel.getHihokenshaFinder().getSearchCriteriaOfHihokensha().setIsOpen(false);
         /////////////////////////////////////////////////////////////////////////////////////////
         //TO DO  JutakuData1.xml ①
         List<HashMap> ymlData = ymlData();
@@ -73,8 +71,7 @@ public class SearchHihokenshaPanel {
        /////////////////////////////////////////////////////////////////////////////////////////
 
         //TO DO  JutakuData.xml Write　③
-        panel.getHihokenshaFinder().getSearchCriteriaOfHihokensha().getTxtHihokenshaNo().setValue(new RString(hihokenshaNo));
-
+//        panel.getHihokenshaFinder().getSearchCriteriaOfHihokensha().getTxtHihokenshaNo().setValue(new RString(hihokenshaNo));
         response.data = panel;
         return response;
     }

@@ -9,7 +9,7 @@ import java.util.HashMap;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0410011.HihokenshashoHakkoTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.ur.ura.divcontroller.controller.AtenaShokaiSimple;
+import jp.co.ndensan.reams.ua.uax.divcontroller.controller.commonchilddiv.atenashokaisimple.AtenaShokaiSimple;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -95,7 +95,7 @@ public class HihokenshashoHakkoTaishoshaJoho {
             panel.getCcdKaigoShikakuKihon().getTxtShutokuYmd().clearValue();
         } else {
             panel.getCcdKaigoShikakuKihon().getTxtShutokuYmd().
-                    setValue(ymlData.getAsRDate("shutokuymd"));
+                    setValue(ymlData.getAsFlexibleDate("shutokuymd"));
         }
 
         if (ymlData.getAsRString("shutokujiyu").toString().isEmpty()) {
@@ -109,7 +109,7 @@ public class HihokenshashoHakkoTaishoshaJoho {
             panel.getCcdKaigoShikakuKihon().getTxtSoshitsuYmd().clearValue();
         } else {
             panel.getCcdKaigoShikakuKihon().getTxtSoshitsuYmd().
-                    setValue(ymlData.getAsRDate("soshitsuymd"));
+                    setValue(ymlData.getAsFlexibleDate("soshitsuymd"));
         }
 
         if (ymlData.getAsRString("soshitsujiyu").toString().isEmpty()) {

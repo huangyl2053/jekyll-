@@ -8,7 +8,8 @@ import jp.co.ndensan.reams.db.dbe.definition.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ChosainJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.KaigoNinteichosainNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
+//import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -53,7 +54,7 @@ public class KaigoNinteichosainTest extends TestBase {
         protected void setUp() {
 
             市町村コード = new LasdecCode(new RString("000001"));
-            介護事業者番号 = new KaigoJigyoshaNo(new RString("0001"));
+            介護事業者番号 = new KaigoJigyoshaNo(new RString("0000000001"));
             介護調査員番号 = new KaigoNinteichosainNo(new RString("0001"));
             調査員状況 = ChosainJokyo.有効;
             調査員氏名 = new AtenaMeisho(new RString("山田"));

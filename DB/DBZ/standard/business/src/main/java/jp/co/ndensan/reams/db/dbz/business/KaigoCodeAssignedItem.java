@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.business;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
-import jp.co.ndensan.reams.ur.urz.business.CodeAssignedItem;
+import jp.co.ndensan.reams.ur.urz.definition.CodeAssignedItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -51,7 +51,8 @@ public abstract class KaigoCodeAssignedItem<V extends ICodeWrapValueObject> exte
 
     /**
      * このクラスが保持する、CodeをwrapしたValueObjcetの値を返します。
-     * <p> {@link CodeAssignedItem#getOption1() CodeAssignedItemの任意情報}と同じように、
+     * <p>
+     * {@link CodeAssignedItem#getOption1() CodeAssignedItemの任意情報}と同じように、
      * 『何が返るかがメソッド名から明確になるメソッドを実装し、内部では当メソッドに委譲して』
      * ください。すると、わかりやすい名称のメソッドで、CodeをwrapしたValueObjcetの値を取得できます。
      * </p>

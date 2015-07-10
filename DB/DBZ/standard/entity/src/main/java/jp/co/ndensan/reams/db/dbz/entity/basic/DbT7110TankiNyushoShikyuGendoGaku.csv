@@ -1,0 +1,5 @@
+﻿yoKaigoJotaiKubun,varchar,RString,,,,,A
+tekiyoKaishiYM,UDD014YM,FlexibleYearMonth,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+tekiyoShuryoYM,UDD014YM,FlexibleYearMonth,,,,,A
+shikyuGendoNissu,numeric,Decimal,,,,,A

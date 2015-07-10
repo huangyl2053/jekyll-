@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.Range;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsainYusoKubun;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.Gender;
 
 /**
@@ -64,19 +64,19 @@ public class ShinsakaiIin {
             JigyoshaNo 事業者番号, AtenaMeisho 氏名, AtenaKanaMeisho カナ氏名, Gender 性別, ShinsakaiIinShikaku 審査会委員資格,
             ShinsainYusoKubun 審査委員郵送区分, YubinNo 郵便番号, AtenaJusho 住所, TelNo 電話番号, ShinsakaiIinKoza 口座情報)
             throws NullPointerException {
-        requireNonNull(審査会委員コード, Messages.E00003.replace("審査会委員コード", getClass().getName()).getMessage());
-        requireNonNull(委員着任期間, Messages.E00003.replace("委員着任期間", getClass().getName()).getMessage());
-        requireNonNull(審査会委員状況, Messages.E00003.replace("審査会委員状況", getClass().getName()).getMessage());
-        requireNonNull(事業者番号, Messages.E00003.replace("事業者番号", getClass().getName()).getMessage());
-        requireNonNull(氏名, Messages.E00003.replace("氏名", getClass().getName()).getMessage());
-        requireNonNull(カナ氏名, Messages.E00003.replace("カナ氏名", getClass().getName()).getMessage());
-        requireNonNull(性別, Messages.E00003.replace("性別", getClass().getName()).getMessage());
-        requireNonNull(審査会委員資格, Messages.E00003.replace("審査会委員資格", getClass().getName()).getMessage());
-        requireNonNull(審査委員郵送区分, Messages.E00003.replace("審査委員郵送区分", getClass().getName()).getMessage());
-        requireNonNull(郵便番号, Messages.E00003.replace("郵便番号", getClass().getName()).getMessage());
-        requireNonNull(住所, Messages.E00003.replace("住所", getClass().getName()).getMessage());
-        requireNonNull(電話番号, Messages.E00003.replace("電話番号", getClass().getName()).getMessage());
-        requireNonNull(口座情報, Messages.E00003.replace("口座情報", getClass().getName()).getMessage());
+        requireNonNull(審査会委員コード, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("審査会委員コード", getClass().getName()));
+        requireNonNull(委員着任期間, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("委員着任期間", getClass().getName()));
+        requireNonNull(審査会委員状況, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("審査会委員状況", getClass().getName()));
+        requireNonNull(事業者番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("事業者番号", getClass().getName()));
+        requireNonNull(氏名, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("氏名", getClass().getName()));
+        requireNonNull(カナ氏名, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("カナ氏名", getClass().getName()));
+        requireNonNull(性別, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("性別", getClass().getName()));
+        requireNonNull(審査会委員資格, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("審査会委員資格", getClass().getName()));
+        requireNonNull(審査委員郵送区分, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("審査委員郵送区分", getClass().getName()));
+        requireNonNull(郵便番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("郵便番号", getClass().getName()));
+        requireNonNull(住所, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("住所", getClass().getName()));
+        requireNonNull(電話番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("電話番号", getClass().getName()));
+        requireNonNull(口座情報, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("口座情報", getClass().getName()));
 
         this.審査会委員コード = 審査会委員コード;
         this.委員着任期間 = 委員着任期間;

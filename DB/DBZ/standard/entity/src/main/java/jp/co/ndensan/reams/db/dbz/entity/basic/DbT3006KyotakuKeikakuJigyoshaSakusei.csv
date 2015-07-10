@@ -1,0 +1,11 @@
+﻿hihokenshano,varchar,RString,,,,,A
+shoKisaiHokenshaNo,varchar,RString,,,,,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+taishoYM,UDD014YM,FlexibleYearMonth,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+tekiyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+tekiyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,A
+keikakuJigyoshaNo,varchar,RString,,,,,A
+itakusakiJigyoshaNo,varchar,RString,,,,,A
+jigyoshaHenkoYMD,UDD015YMD,FlexibleDate,,,,,A
+jigyoshaHenkoJiyu,text,RString,,,,,A

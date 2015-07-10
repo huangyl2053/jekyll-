@@ -12,13 +12,13 @@ import jp.co.ndensan.reams.db.dbe.business.NinteiShinseiTorisageTaishoshaList;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ShinsaKeizokuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteiShinseiDate;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.business.mapper.NinteishinseiTorisageTaishoshaMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.INinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -122,9 +122,9 @@ public class NinteiShinseiTorisageManagerTest extends TestBase {
 
     private static DbT5001NinteiShinseiJohoEntity create認定申請情報Entity() {
         DbT5001NinteiShinseiJohoEntity entity = new DbT5001NinteiShinseiJohoEntity();
-        entity.setShinseishoKanriNo(申請書管理No);
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
-        entity.setHihokenshaNo(被保険者No);
+        entity.setShinseishoKanriNo(申請書管理No.value());
+        entity.setShoKisaiHokenshaNo(証記載保険者番号.value());
+        entity.setHihokenshaNo(被保険者No.value());
         entity.setNinteiShinseiYMD(認定申請年月日);
         entity.setNinteiShinseiShinseijiKubunCode(
                 new Code(String.valueOf(認定申請区分コード_申請時.コード())));

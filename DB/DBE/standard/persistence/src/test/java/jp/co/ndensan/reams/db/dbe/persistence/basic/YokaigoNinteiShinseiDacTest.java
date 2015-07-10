@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5001NinteiShinseiJohoEntityMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
@@ -65,7 +65,7 @@ public class YokaigoNinteiShinseiDacTest extends DbeTestDacBase {
         @Test
         public void selectFromKeyは_引数にレコードの存在するShinseishoKanriNoを渡した時_同じ値を持ったDbT5001NinteiShinseiJohoEntityを返す() {
             DbT5001NinteiShinseiJohoEntity selected = sut.selectFromKey(shinseishoKanriNo);
-            assertThat(selected.getShinseishoKanriNo(), is(shinseishoKanriNo));
+            assertThat(selected.getShinseishoKanriNo(), is(shinseishoKanriNo.value()));
         }
 
         @Test
@@ -77,7 +77,7 @@ public class YokaigoNinteiShinseiDacTest extends DbeTestDacBase {
 
     private static DbT5001NinteiShinseiJohoEntity createEntity(ShinseishoKanriNo shinseishoKanriNo) {
         DbT5001NinteiShinseiJohoEntity entity = DbT5001NinteiShinseiJohoEntityMock.getEntity();
-        entity.setShinseishoKanriNo(shinseishoKanriNo);
+        entity.setShinseishoKanriNo(shinseishoKanriNo.value());
         return entity;
     }
 
@@ -107,7 +107,7 @@ public class YokaigoNinteiShinseiDacTest extends DbeTestDacBase {
             DbT5001NinteiShinseiJohoEntity recode = createEntity(key);
             sut.insertOrUpdate(recode);
             DbT5001NinteiShinseiJohoEntity selected = sut.selectFromKey(key);
-            assertThat(selected.getShinseishoKanriNo(), is(key));
+            assertThat(selected.getShinseishoKanriNo(), is(key.value()));
         }
     }
 

@@ -33,5 +33,14 @@
             <artifactId>DbeDefinition</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxEntity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.uz</groupId>
+            <artifactId>framework</artifactId>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

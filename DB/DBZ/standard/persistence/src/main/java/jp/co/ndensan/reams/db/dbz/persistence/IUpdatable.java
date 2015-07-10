@@ -4,19 +4,22 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence;
 
+import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
+
 /**
- * テーブルのデータを更新するためのインタフェースです。
+ * テーブルデータをアップデートするためのインタフェースです。
  *
- * @author N3327 三浦 凌
- * @param <T> 更新したいテーブルのEntityクラス
+ * @author n8223 朴義一
+ * @param <T>
  */
 public interface IUpdatable<T> {
 
     /**
-     * データでテーブルを更新します。
+     * データのアップデートを行います。
      *
-     * @param data 更新したいデータ
-     * @return 更新件数
+     * @param data 対象のデータ
+     * @return アップデート件数
      */
+    @Transaction
     int update(T data);
 }

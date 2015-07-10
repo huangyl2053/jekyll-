@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbe.business.IMinashi2GoshaDaicho;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT1012Minashi2GoshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbe.business.mapper.Minashi2GoshaDaichoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.basic.IMinashi2GoshaDaichoDac;
-import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IKojinFinder;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 

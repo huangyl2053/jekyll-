@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -14,6 +14,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum HihokenshashoSaikofuKubun {
 
+    /**
+     * 再交付区分に値が設定されていないことを表します。<br />
+     * コード : なし
+     */
+    EMPTY(""),
     /**
      * 被保険者証の再交付があることを表す。<br />
      * コード : 1
@@ -41,6 +46,7 @@ public enum HihokenshashoSaikofuKubun {
 
     /**
      * 指定のコードに対応するHihokenshashoSaikofuKubunを返します。
+     * 空文字列、もしくはnullを受け取った場合は<@code>HihokenshashoSaikofuKubun.EMPTY</code>を返します。
      *
      * @param code コード
      * @return 指定のコードに対応するHihokenshashoSaikofuKubun
@@ -48,11 +54,16 @@ public enum HihokenshashoSaikofuKubun {
      * 指定のコードに対応するHihokenshashoSaikofuKubunがないとき。
      */
     public static HihokenshashoSaikofuKubun toValue(RString code) throws IllegalArgumentException {
+        if (code == null || code.isEmpty()) {
+            return EMPTY;
+        }
+
         for (HihokenshashoSaikofuKubun target : values()) {
             if (target.getCode().equals(code)) {
                 return target;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("コード:" + code + " に対応する被保険者証再交付区分").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage()
+                .replace("コード:" + code + " に対応する被保険者証再交付区分").evaluate());
     }
 }

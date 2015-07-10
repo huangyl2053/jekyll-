@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+//import jp.co.ndensan.reams.ur.urz.definition.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -22,18 +22,20 @@ public enum DaichoType {
     被保険者("1"),
     /**
      * 台帳種別が「他市町村住所地特例者」であることを表します。 <br />
-     * コード：2
-     */
-    他市町村住所地特例者("2"),
-    /**
-     * 台帳種別が「適用除外者」であることを表します。 <br />
      * コード：3
      */
-    適用除外者("3");
+    他市町村住所地特例者("3"),
+    /**
+     * 台帳種別が「適用除外者」であることを表します。 <br />
+     * コード：2
+     */
+    適用除外者("2");
     private final RString code;
+    private final RString name;
 
     private DaichoType(String code) {
         this.code = new RString(code);
+        this.name = new RString(name());
     }
 
     /**
@@ -43,6 +45,15 @@ public enum DaichoType {
      */
     public RString getCode() {
         return code;
+    }
+
+    /**
+     * RString型の台帳種別名称を返します。
+     *
+     * @return 台帳種別名称
+     */
+    public RString getName() {
+        return name;
     }
 
     /**
@@ -57,6 +68,9 @@ public enum DaichoType {
                 return data;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("指定したコードに対応する台帳種別").getMessage());
+
+//TODO n8235 船山 Ver1.0.0への変更に伴いエラーが発生したため、コメントアウト
+//        throw new IllegalArgumentException(Messages.E00006.replace("指定したコードに対応する台帳種別").getMessage());
+        throw new IllegalArgumentException();
     }
 }

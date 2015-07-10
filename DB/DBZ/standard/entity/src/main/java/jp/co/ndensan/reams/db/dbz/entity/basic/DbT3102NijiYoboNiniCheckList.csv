@@ -1,0 +1,6 @@
+﻿shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+uketsukeYMD,UDD015YMD,FlexibleDate,,,,,A
+niniShitsumonNo,int2,int,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+niniShitsumonJiko,int2,int,,,,,A

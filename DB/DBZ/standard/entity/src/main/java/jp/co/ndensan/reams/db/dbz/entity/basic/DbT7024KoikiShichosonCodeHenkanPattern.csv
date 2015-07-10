@@ -1,0 +1,14 @@
+﻿koikiShichosonNo,varchar,RString,,,,,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+codeKubun,varchar,RString,,,,,A
+codeHenkanTableShiyoUmu,varchar,RString,,,,,A
+jidoSaibanKubun,varchar,RString,,,,,A
+shichosonCodeKetasu,int2,int,,,,,A
+shichosonCodeKaishiIchi,int2,int,,,,,A
+shichosonCodeShiyoKetasu,int2,int,,,,,A
+shichosonNinshoNoUmu,varchar,RString,,,,,A
+koikiCodeKetasu,int2,int,,,,,A
+koikiCodeKaishiIchi,int2,int,,,,,A
+koikiCodeShiyoKetasu,int2,int,,,,,A
+koikiNinshoNoUmu,varchar,RString,,,,,A
+shichosonNoFukaKubun,varchar,RString,,,,,A

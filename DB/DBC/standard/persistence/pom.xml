@@ -27,12 +27,17 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>DbcBusiness</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>DbcDefinition</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzPersistence</artifactId>
+            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+            <artifactId>DbdPersistence</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -65,5 +70,12 @@
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzBatchService</artifactId>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+
     </dependencies>
 </project>

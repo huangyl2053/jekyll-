@@ -30,7 +30,7 @@ public class ShikakuIdoBaseItemTest extends DbzTestBase {
         public static final ShikakuIdoBaseItemSample NOTHING;
 
         static {
-            NOTHING = new ShikakuIdoBaseItemSample(ShikakuShutokuJiyu.なし, FlexibleDate.MAX, FlexibleDate.MAX);
+            NOTHING = new ShikakuIdoBaseItemSample(ShikakuShutokuJiyu.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
         }
 
         private ShikakuIdoBaseItemSample(ShikakuShutokuJiyu reason, FlexibleDate noticeDate, FlexibleDate actionDate) {
@@ -81,7 +81,7 @@ public class ShikakuIdoBaseItemTest extends DbzTestBase {
 
         @Test
         public void NOTHING以外は_isNothingで_falseを返す() {
-            ShikakuIdoBaseItemSample sut = new ShikakuIdoBaseItemSample(ShikakuShutokuJiyu.なし, FlexibleDate.MAX, FlexibleDate.MAX);
+            ShikakuIdoBaseItemSample sut = new ShikakuIdoBaseItemSample(ShikakuShutokuJiyu.EMPTY, FlexibleDate.MAX, FlexibleDate.MAX);
             assertThat(sut.isNothing(), is(false));
         }
     }

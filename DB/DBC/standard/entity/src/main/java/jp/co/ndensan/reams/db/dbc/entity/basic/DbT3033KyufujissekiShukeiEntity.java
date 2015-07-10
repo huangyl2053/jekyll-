@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 
 /**
  * DbT3033KyufujissekiShukeiの項目定義クラスです
@@ -22,6 +23,7 @@ import java.util.Objects;
  */
 public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3033KyufujissekiShukei");
 
@@ -107,6 +109,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getInsertDantaiCd
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -115,6 +118,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setInsertDantaiCd
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -123,6 +127,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getIsDeleted
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -131,15 +136,16 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setIsDeleted
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * setLastUpdateReamsLoginId
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -148,6 +154,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKokanJohoShikibetsuNo
+     *
      * @return kokanJohoShikibetsuNo
      */
     public KokanShikibetsuNo getKokanJohoShikibetsuNo() {
@@ -156,6 +163,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKokanJohoShikibetsuNo
+     *
      * @param kokanJohoShikibetsuNo kokanJohoShikibetsuNo
      */
     public void setKokanJohoShikibetsuNo(KokanShikibetsuNo kokanJohoShikibetsuNo) {
@@ -164,6 +172,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getInputShikibetsuNo
+     *
      * @return inputShikibetsuNo
      */
     public RString getInputShikibetsuNo() {
@@ -172,6 +181,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setInputShikibetsuNo
+     *
      * @param inputShikibetsuNo inputShikibetsuNo
      */
     public void setInputShikibetsuNo(RString inputShikibetsuNo) {
@@ -180,6 +190,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getRecodeShubetsuCode
+     *
      * @return recodeShubetsuCode
      */
     public RString getRecodeShubetsuCode() {
@@ -188,6 +199,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setRecodeShubetsuCode
+     *
      * @param recodeShubetsuCode recodeShubetsuCode
      */
     public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
@@ -196,6 +208,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getShokisaiHokenshaNo
+     *
      * @return shokisaiHokenshaNo
      */
     public ShoKisaiHokenshaNo getShokisaiHokenshaNo() {
@@ -204,6 +217,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setShokisaiHokenshaNo
+     *
      * @param shokisaiHokenshaNo shokisaiHokenshaNo
      */
     public void setShokisaiHokenshaNo(ShoKisaiHokenshaNo shokisaiHokenshaNo) {
@@ -212,6 +226,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getHiHokenshaNo
+     *
      * @return hiHokenshaNo
      */
     public HihokenshaNo getHiHokenshaNo() {
@@ -220,6 +235,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setHiHokenshaNo
+     *
      * @param hiHokenshaNo hiHokenshaNo
      */
     public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
@@ -228,6 +244,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getServiceTeikyoYM
+     *
      * @return serviceTeikyoYM
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -236,6 +253,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setServiceTeikyoYM
+     *
      * @param serviceTeikyoYM serviceTeikyoYM
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -244,6 +262,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getJigyoshoNo
+     *
      * @return jigyoshoNo
      */
     public JigyoshaNo getJigyoshoNo() {
@@ -252,6 +271,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setJigyoshoNo
+     *
      * @param jigyoshoNo jigyoshoNo
      */
     public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
@@ -260,6 +280,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getToshiNo
+     *
      * @return toshiNo
      */
     public ToshiNo getToshiNo() {
@@ -268,6 +289,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setToshiNo
+     *
      * @param toshiNo toshiNo
      */
     public void setToshiNo(ToshiNo toshiNo) {
@@ -276,6 +298,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getServiceSyuruiCode
+     *
      * @return serviceSyuruiCode
      */
     public ServiceShuruiCode getServiceSyuruiCode() {
@@ -284,6 +307,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setServiceSyuruiCode
+     *
      * @param serviceSyuruiCode serviceSyuruiCode
      */
     public void setServiceSyuruiCode(ServiceShuruiCode serviceSyuruiCode) {
@@ -292,6 +316,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getServiceJitsunissu
+     *
      * @return serviceJitsunissu
      */
     public Integer getServiceJitsunissu() {
@@ -300,6 +325,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setServiceJitsunissu
+     *
      * @param serviceJitsunissu serviceJitsunissu
      */
     public void setServiceJitsunissu(Integer serviceJitsunissu) {
@@ -308,6 +334,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getPlanTanisu
+     *
      * @return planTanisu
      */
     public Decimal getPlanTanisu() {
@@ -316,6 +343,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setPlanTanisu
+     *
      * @param planTanisu planTanisu
      */
     public void setPlanTanisu(Decimal planTanisu) {
@@ -324,6 +352,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getGendogakuKanriTaishoTanisu
+     *
      * @return gendogakuKanriTaishoTanisu
      */
     public Decimal getGendogakuKanriTaishoTanisu() {
@@ -332,6 +361,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setGendogakuKanriTaishoTanisu
+     *
      * @param gendogakuKanriTaishoTanisu gendogakuKanriTaishoTanisu
      */
     public void setGendogakuKanriTaishoTanisu(Decimal gendogakuKanriTaishoTanisu) {
@@ -340,6 +370,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getGendogakuKanritaishogaiTanisu
+     *
      * @return gendogakuKanritaishogaiTanisu
      */
     public Decimal getGendogakuKanritaishogaiTanisu() {
@@ -348,6 +379,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setGendogakuKanritaishogaiTanisu
+     *
      * @param gendogakuKanritaishogaiTanisu gendogakuKanritaishogaiTanisu
      */
     public void setGendogakuKanritaishogaiTanisu(Decimal gendogakuKanritaishogaiTanisu) {
@@ -356,6 +388,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getTankiNyushoPlanNissu
+     *
      * @return tankiNyushoPlanNissu
      */
     public Integer getTankiNyushoPlanNissu() {
@@ -364,6 +397,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setTankiNyushoPlanNissu
+     *
      * @param tankiNyushoPlanNissu tankiNyushoPlanNissu
      */
     public void setTankiNyushoPlanNissu(Integer tankiNyushoPlanNissu) {
@@ -372,6 +406,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getTankiNyushoJitsunissu
+     *
      * @return tankiNyushoJitsunissu
      */
     public Integer getTankiNyushoJitsunissu() {
@@ -380,6 +415,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setTankiNyushoJitsunissu
+     *
      * @param tankiNyushoJitsunissu tankiNyushoJitsunissu
      */
     public void setTankiNyushoJitsunissu(Integer tankiNyushoJitsunissu) {
@@ -388,6 +424,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getHokenTanisuTotal
+     *
      * @return hokenTanisuTotal
      */
     public Decimal getHokenTanisuTotal() {
@@ -396,6 +433,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setHokenTanisuTotal
+     *
      * @param hokenTanisuTotal hokenTanisuTotal
      */
     public void setHokenTanisuTotal(Decimal hokenTanisuTotal) {
@@ -404,6 +442,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getHokenTanisuTani
+     *
      * @return hokenTanisuTani
      */
     public Decimal getHokenTanisuTani() {
@@ -412,6 +451,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setHokenTanisuTani
+     *
      * @param hokenTanisuTani hokenTanisuTani
      */
     public void setHokenTanisuTani(Decimal hokenTanisuTani) {
@@ -420,6 +460,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getHokenSeikyugaku
+     *
      * @return hokenSeikyugaku
      */
     public Decimal getHokenSeikyugaku() {
@@ -428,6 +469,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setHokenSeikyugaku
+     *
      * @param hokenSeikyugaku hokenSeikyugaku
      */
     public void setHokenSeikyugaku(Decimal hokenSeikyugaku) {
@@ -436,6 +478,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getHokenRiyoshaFutangaku
+     *
      * @return hokenRiyoshaFutangaku
      */
     public Decimal getHokenRiyoshaFutangaku() {
@@ -444,6 +487,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setHokenRiyoshaFutangaku
+     *
      * @param hokenRiyoshaFutangaku hokenRiyoshaFutangaku
      */
     public void setHokenRiyoshaFutangaku(Decimal hokenRiyoshaFutangaku) {
@@ -452,6 +496,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi1TanisuTotal
+     *
      * @return kohi1TanisuTotal
      */
     public Decimal getKohi1TanisuTotal() {
@@ -460,6 +505,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi1TanisuTotal
+     *
      * @param kohi1TanisuTotal kohi1TanisuTotal
      */
     public void setKohi1TanisuTotal(Decimal kohi1TanisuTotal) {
@@ -468,6 +514,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi1Seikyugaku
+     *
      * @return kohi1Seikyugaku
      */
     public Decimal getKohi1Seikyugaku() {
@@ -476,6 +523,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi1Seikyugaku
+     *
      * @param kohi1Seikyugaku kohi1Seikyugaku
      */
     public void setKohi1Seikyugaku(Decimal kohi1Seikyugaku) {
@@ -484,6 +532,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi1HonninFutangaku
+     *
      * @return kohi1HonninFutangaku
      */
     public Decimal getKohi1HonninFutangaku() {
@@ -492,6 +541,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi1HonninFutangaku
+     *
      * @param kohi1HonninFutangaku kohi1HonninFutangaku
      */
     public void setKohi1HonninFutangaku(Decimal kohi1HonninFutangaku) {
@@ -500,6 +550,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi2TanisuTotal
+     *
      * @return kohi2TanisuTotal
      */
     public Decimal getKohi2TanisuTotal() {
@@ -508,6 +559,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi2TanisuTotal
+     *
      * @param kohi2TanisuTotal kohi2TanisuTotal
      */
     public void setKohi2TanisuTotal(Decimal kohi2TanisuTotal) {
@@ -516,6 +568,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi2Seikyugaku
+     *
      * @return kohi2Seikyugaku
      */
     public Decimal getKohi2Seikyugaku() {
@@ -524,6 +577,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi2Seikyugaku
+     *
      * @param kohi2Seikyugaku kohi2Seikyugaku
      */
     public void setKohi2Seikyugaku(Decimal kohi2Seikyugaku) {
@@ -532,6 +586,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi2HonninFutangaku
+     *
      * @return kohi2HonninFutangaku
      */
     public Decimal getKohi2HonninFutangaku() {
@@ -540,6 +595,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi2HonninFutangaku
+     *
      * @param kohi2HonninFutangaku kohi2HonninFutangaku
      */
     public void setKohi2HonninFutangaku(Decimal kohi2HonninFutangaku) {
@@ -548,6 +604,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi3TanisuTotal
+     *
      * @return kohi3TanisuTotal
      */
     public Decimal getKohi3TanisuTotal() {
@@ -556,6 +613,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi3TanisuTotal
+     *
      * @param kohi3TanisuTotal kohi3TanisuTotal
      */
     public void setKohi3TanisuTotal(Decimal kohi3TanisuTotal) {
@@ -564,6 +622,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi3Seikyugaku
+     *
      * @return kohi3Seikyugaku
      */
     public Decimal getKohi3Seikyugaku() {
@@ -572,6 +631,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi3Seikyugaku
+     *
      * @param kohi3Seikyugaku kohi3Seikyugaku
      */
     public void setKohi3Seikyugaku(Decimal kohi3Seikyugaku) {
@@ -580,6 +640,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi3HonninFutangaku
+     *
      * @return kohi3HonninFutangaku
      */
     public Decimal getKohi3HonninFutangaku() {
@@ -588,6 +649,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi3HonninFutangaku
+     *
      * @param kohi3HonninFutangaku kohi3HonninFutangaku
      */
     public void setKohi3HonninFutangaku(Decimal kohi3HonninFutangaku) {
@@ -596,6 +658,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getHokenDekidakaTanisuTotal
+     *
      * @return hokenDekidakaTanisuTotal
      */
     public Decimal getHokenDekidakaTanisuTotal() {
@@ -604,6 +667,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setHokenDekidakaTanisuTotal
+     *
      * @param hokenDekidakaTanisuTotal hokenDekidakaTanisuTotal
      */
     public void setHokenDekidakaTanisuTotal(Decimal hokenDekidakaTanisuTotal) {
@@ -612,6 +676,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getHokenDekidakaSeikyugaku
+     *
      * @return hokenDekidakaSeikyugaku
      */
     public Decimal getHokenDekidakaSeikyugaku() {
@@ -620,6 +685,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setHokenDekidakaSeikyugaku
+     *
      * @param hokenDekidakaSeikyugaku hokenDekidakaSeikyugaku
      */
     public void setHokenDekidakaSeikyugaku(Decimal hokenDekidakaSeikyugaku) {
@@ -628,6 +694,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getHokenDekidakaIryohiRiyoshaFutangaku
+     *
      * @return hokenDekidakaIryohiRiyoshaFutangaku
      */
     public Decimal getHokenDekidakaIryohiRiyoshaFutangaku() {
@@ -636,6 +703,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setHokenDekidakaIryohiRiyoshaFutangaku
+     *
      * @param hokenDekidakaIryohiRiyoshaFutangaku hokenDekidakaIryohiRiyoshaFutangaku
      */
     public void setHokenDekidakaIryohiRiyoshaFutangaku(Decimal hokenDekidakaIryohiRiyoshaFutangaku) {
@@ -644,6 +712,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi1DekidakaTanisuTotal
+     *
      * @return kohi1DekidakaTanisuTotal
      */
     public Decimal getKohi1DekidakaTanisuTotal() {
@@ -652,6 +721,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi1DekidakaTanisuTotal
+     *
      * @param kohi1DekidakaTanisuTotal kohi1DekidakaTanisuTotal
      */
     public void setKohi1DekidakaTanisuTotal(Decimal kohi1DekidakaTanisuTotal) {
@@ -660,6 +730,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi1DekidakaSeikyugaku
+     *
      * @return kohi1DekidakaSeikyugaku
      */
     public Decimal getKohi1DekidakaSeikyugaku() {
@@ -668,6 +739,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi1DekidakaSeikyugaku
+     *
      * @param kohi1DekidakaSeikyugaku kohi1DekidakaSeikyugaku
      */
     public void setKohi1DekidakaSeikyugaku(Decimal kohi1DekidakaSeikyugaku) {
@@ -676,6 +748,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi1DekidakaIryohiRiyoshaFutangaku
+     *
      * @return kohi1DekidakaIryohiRiyoshaFutangaku
      */
     public Decimal getKohi1DekidakaIryohiRiyoshaFutangaku() {
@@ -684,6 +757,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi1DekidakaIryohiRiyoshaFutangaku
+     *
      * @param kohi1DekidakaIryohiRiyoshaFutangaku kohi1DekidakaIryohiRiyoshaFutangaku
      */
     public void setKohi1DekidakaIryohiRiyoshaFutangaku(Decimal kohi1DekidakaIryohiRiyoshaFutangaku) {
@@ -692,6 +766,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi2DekidakaTanisuTotal
+     *
      * @return kohi2DekidakaTanisuTotal
      */
     public Decimal getKohi2DekidakaTanisuTotal() {
@@ -700,6 +775,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi2DekidakaTanisuTotal
+     *
      * @param kohi2DekidakaTanisuTotal kohi2DekidakaTanisuTotal
      */
     public void setKohi2DekidakaTanisuTotal(Decimal kohi2DekidakaTanisuTotal) {
@@ -708,6 +784,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi2DekidakaSeikyugaku
+     *
      * @return kohi2DekidakaSeikyugaku
      */
     public Decimal getKohi2DekidakaSeikyugaku() {
@@ -716,6 +793,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi2DekidakaSeikyugaku
+     *
      * @param kohi2DekidakaSeikyugaku kohi2DekidakaSeikyugaku
      */
     public void setKohi2DekidakaSeikyugaku(Decimal kohi2DekidakaSeikyugaku) {
@@ -724,6 +802,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi2DekidakaIryohiRiyoshaFutangaku
+     *
      * @return kohi2DekidakaIryohiRiyoshaFutangaku
      */
     public Decimal getKohi2DekidakaIryohiRiyoshaFutangaku() {
@@ -732,6 +811,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi2DekidakaIryohiRiyoshaFutangaku
+     *
      * @param kohi2DekidakaIryohiRiyoshaFutangaku kohi2DekidakaIryohiRiyoshaFutangaku
      */
     public void setKohi2DekidakaIryohiRiyoshaFutangaku(Decimal kohi2DekidakaIryohiRiyoshaFutangaku) {
@@ -740,6 +820,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi3DekidakaTanisuTotal
+     *
      * @return kohi3DekidakaTanisuTotal
      */
     public Decimal getKohi3DekidakaTanisuTotal() {
@@ -748,6 +829,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi3DekidakaTanisuTotal
+     *
      * @param kohi3DekidakaTanisuTotal kohi3DekidakaTanisuTotal
      */
     public void setKohi3DekidakaTanisuTotal(Decimal kohi3DekidakaTanisuTotal) {
@@ -756,6 +838,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi3DekidakaSeikyugaku
+     *
      * @return kohi3DekidakaSeikyugaku
      */
     public Decimal getKohi3DekidakaSeikyugaku() {
@@ -764,6 +847,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi3DekidakaSeikyugaku
+     *
      * @param kohi3DekidakaSeikyugaku kohi3DekidakaSeikyugaku
      */
     public void setKohi3DekidakaSeikyugaku(Decimal kohi3DekidakaSeikyugaku) {
@@ -772,6 +856,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKohi3DekidakaIryohiRiyoshaFutangaku
+     *
      * @return kohi3DekidakaIryohiRiyoshaFutangaku
      */
     public Decimal getKohi3DekidakaIryohiRiyoshaFutangaku() {
@@ -780,6 +865,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKohi3DekidakaIryohiRiyoshaFutangaku
+     *
      * @param kohi3DekidakaIryohiRiyoshaFutangaku kohi3DekidakaIryohiRiyoshaFutangaku
      */
     public void setKohi3DekidakaIryohiRiyoshaFutangaku(Decimal kohi3DekidakaIryohiRiyoshaFutangaku) {
@@ -788,6 +874,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getAtoTankiNyushoJitsunissu
+     *
      * @return atoTankiNyushoJitsunissu
      */
     public Integer getAtoTankiNyushoJitsunissu() {
@@ -796,6 +883,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setAtoTankiNyushoJitsunissu
+     *
      * @param atoTankiNyushoJitsunissu atoTankiNyushoJitsunissu
      */
     public void setAtoTankiNyushoJitsunissu(Integer atoTankiNyushoJitsunissu) {
@@ -804,6 +892,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getAtoHokenTanisuTotal
+     *
      * @return atoHokenTanisuTotal
      */
     public Decimal getAtoHokenTanisuTotal() {
@@ -812,6 +901,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setAtoHokenTanisuTotal
+     *
      * @param atoHokenTanisuTotal atoHokenTanisuTotal
      */
     public void setAtoHokenTanisuTotal(Decimal atoHokenTanisuTotal) {
@@ -820,6 +910,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getAtoHokenSeikyugaku
+     *
      * @return atoHokenSeikyugaku
      */
     public Decimal getAtoHokenSeikyugaku() {
@@ -828,6 +919,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setAtoHokenSeikyugaku
+     *
      * @param atoHokenSeikyugaku atoHokenSeikyugaku
      */
     public void setAtoHokenSeikyugaku(Decimal atoHokenSeikyugaku) {
@@ -836,6 +928,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getAtoKohi1TanisuTotal
+     *
      * @return atoKohi1TanisuTotal
      */
     public Decimal getAtoKohi1TanisuTotal() {
@@ -844,6 +937,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setAtoKohi1TanisuTotal
+     *
      * @param atoKohi1TanisuTotal atoKohi1TanisuTotal
      */
     public void setAtoKohi1TanisuTotal(Decimal atoKohi1TanisuTotal) {
@@ -852,6 +946,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getAtoKohi1Seikyugaku
+     *
      * @return atoKohi1Seikyugaku
      */
     public Decimal getAtoKohi1Seikyugaku() {
@@ -860,6 +955,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setAtoKohi1Seikyugaku
+     *
      * @param atoKohi1Seikyugaku atoKohi1Seikyugaku
      */
     public void setAtoKohi1Seikyugaku(Decimal atoKohi1Seikyugaku) {
@@ -868,6 +964,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getAtoKohi2TanisuTotal
+     *
      * @return atoKohi2TanisuTotal
      */
     public Decimal getAtoKohi2TanisuTotal() {
@@ -876,6 +973,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setAtoKohi2TanisuTotal
+     *
      * @param atoKohi2TanisuTotal atoKohi2TanisuTotal
      */
     public void setAtoKohi2TanisuTotal(Decimal atoKohi2TanisuTotal) {
@@ -884,6 +982,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getAtoKohi2Seikyugaku
+     *
      * @return atoKohi2Seikyugaku
      */
     public Decimal getAtoKohi2Seikyugaku() {
@@ -892,6 +991,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setAtoKohi2Seikyugaku
+     *
      * @param atoKohi2Seikyugaku atoKohi2Seikyugaku
      */
     public void setAtoKohi2Seikyugaku(Decimal atoKohi2Seikyugaku) {
@@ -900,6 +1000,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getAtoKohi3TanisuTotal
+     *
      * @return atoKohi3TanisuTotal
      */
     public Decimal getAtoKohi3TanisuTotal() {
@@ -908,6 +1009,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setAtoKohi3TanisuTotal
+     *
      * @param atoKohi3TanisuTotal atoKohi3TanisuTotal
      */
     public void setAtoKohi3TanisuTotal(Decimal atoKohi3TanisuTotal) {
@@ -916,6 +1018,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getAtoKohi3Seikyugaku
+     *
      * @return atoKohi3Seikyugaku
      */
     public Decimal getAtoKohi3Seikyugaku() {
@@ -924,6 +1027,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setAtoKohi3Seikyugaku
+     *
      * @param atoKohi3Seikyugaku atoKohi3Seikyugaku
      */
     public void setAtoKohi3Seikyugaku(Decimal atoKohi3Seikyugaku) {
@@ -932,6 +1036,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getAtoHokenDekidakaTanisuTotal
+     *
      * @return atoHokenDekidakaTanisuTotal
      */
     public Decimal getAtoHokenDekidakaTanisuTotal() {
@@ -940,6 +1045,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setAtoHokenDekidakaTanisuTotal
+     *
      * @param atoHokenDekidakaTanisuTotal atoHokenDekidakaTanisuTotal
      */
     public void setAtoHokenDekidakaTanisuTotal(Decimal atoHokenDekidakaTanisuTotal) {
@@ -948,6 +1054,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getAtoHokenDekidakaSeikyugaku
+     *
      * @return atoHokenDekidakaSeikyugaku
      */
     public Decimal getAtoHokenDekidakaSeikyugaku() {
@@ -956,6 +1063,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setAtoHokenDekidakaSeikyugaku
+     *
      * @param atoHokenDekidakaSeikyugaku atoHokenDekidakaSeikyugaku
      */
     public void setAtoHokenDekidakaSeikyugaku(Decimal atoHokenDekidakaSeikyugaku) {
@@ -964,6 +1072,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getAtoKohi1DekidakaTanisuTotal
+     *
      * @return atoKohi1DekidakaTanisuTotal
      */
     public Decimal getAtoKohi1DekidakaTanisuTotal() {
@@ -972,6 +1081,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setAtoKohi1DekidakaTanisuTotal
+     *
      * @param atoKohi1DekidakaTanisuTotal atoKohi1DekidakaTanisuTotal
      */
     public void setAtoKohi1DekidakaTanisuTotal(Decimal atoKohi1DekidakaTanisuTotal) {
@@ -980,6 +1090,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getAtoKohi1DekidakaSeikyugaku
+     *
      * @return atoKohi1DekidakaSeikyugaku
      */
     public Decimal getAtoKohi1DekidakaSeikyugaku() {
@@ -988,6 +1099,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setAtoKohi1DekidakaSeikyugaku
+     *
      * @param atoKohi1DekidakaSeikyugaku atoKohi1DekidakaSeikyugaku
      */
     public void setAtoKohi1DekidakaSeikyugaku(Decimal atoKohi1DekidakaSeikyugaku) {
@@ -996,6 +1108,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getAtoKohi2DekidakaTanisuTotal
+     *
      * @return atoKohi2DekidakaTanisuTotal
      */
     public Decimal getAtoKohi2DekidakaTanisuTotal() {
@@ -1004,6 +1117,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setAtoKohi2DekidakaTanisuTotal
+     *
      * @param atoKohi2DekidakaTanisuTotal atoKohi2DekidakaTanisuTotal
      */
     public void setAtoKohi2DekidakaTanisuTotal(Decimal atoKohi2DekidakaTanisuTotal) {
@@ -1012,6 +1126,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getAtoKohi2DekidakaSeikyugaku
+     *
      * @return atoKohi2DekidakaSeikyugaku
      */
     public Decimal getAtoKohi2DekidakaSeikyugaku() {
@@ -1020,6 +1135,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setAtoKohi2DekidakaSeikyugaku
+     *
      * @param atoKohi2DekidakaSeikyugaku atoKohi2DekidakaSeikyugaku
      */
     public void setAtoKohi2DekidakaSeikyugaku(Decimal atoKohi2DekidakaSeikyugaku) {
@@ -1028,6 +1144,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getAtoKohi3DekidakaTanisuTotal
+     *
      * @return atoKohi3DekidakaTanisuTotal
      */
     public Decimal getAtoKohi3DekidakaTanisuTotal() {
@@ -1036,6 +1153,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setAtoKohi3DekidakaTanisuTotal
+     *
      * @param atoKohi3DekidakaTanisuTotal atoKohi3DekidakaTanisuTotal
      */
     public void setAtoKohi3DekidakaTanisuTotal(Decimal atoKohi3DekidakaTanisuTotal) {
@@ -1044,6 +1162,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getAtoKohi3DekidakaSeikyugaku
+     *
      * @return atoKohi3DekidakaSeikyugaku
      */
     public Decimal getAtoKohi3DekidakaSeikyugaku() {
@@ -1052,6 +1171,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setAtoKohi3DekidakaSeikyugaku
+     *
      * @param atoKohi3DekidakaSeikyugaku atoKohi3DekidakaSeikyugaku
      */
     public void setAtoKohi3DekidakaSeikyugaku(Decimal atoKohi3DekidakaSeikyugaku) {
@@ -1060,6 +1180,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getSaishinsaKaisu
+     *
      * @return saishinsaKaisu
      */
     public Integer getSaishinsaKaisu() {
@@ -1068,6 +1189,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setSaishinsaKaisu
+     *
      * @param saishinsaKaisu saishinsaKaisu
      */
     public void setSaishinsaKaisu(Integer saishinsaKaisu) {
@@ -1076,6 +1198,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getKagoKaisu
+     *
      * @return kagoKaisu
      */
     public Integer getKagoKaisu() {
@@ -1084,6 +1207,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setKagoKaisu
+     *
      * @param kagoKaisu kagoKaisu
      */
     public void setKagoKaisu(Integer kagoKaisu) {
@@ -1092,6 +1216,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getShinsaYM
+     *
      * @return shinsaYM
      */
     public FlexibleYearMonth getShinsaYM() {
@@ -1100,6 +1225,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setShinsaYM
+     *
      * @param shinsaYM shinsaYM
      */
     public void setShinsaYM(FlexibleYearMonth shinsaYM) {
@@ -1108,6 +1234,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getSeiriNo
+     *
      * @return seiriNo
      */
     public RString getSeiriNo() {
@@ -1116,6 +1243,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setSeiriNo
+     *
      * @param seiriNo seiriNo
      */
     public void setSeiriNo(RString seiriNo) {
@@ -1124,6 +1252,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * getTorikomiYM
+     *
      * @return torikomiYM
      */
     public FlexibleYearMonth getTorikomiYM() {
@@ -1132,6 +1261,7 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * setTorikomiYM
+     *
      * @param torikomiYM torikomiYM
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -1140,10 +1270,9 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
 
     /**
      * このエンティティの主キーが他の{@literal DbT3033KyufujissekiShukeiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT3033KyufujissekiShukeiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT3033KyufujissekiShukeiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     public boolean equalsPrimaryKeys(DbT3033KyufujissekiShukeiEntity other) {
         if (other == null) {
@@ -1180,5 +1309,4 @@ public class DbT3033KyufujissekiShukeiEntity implements IDbAccessable {
     }
 
 // </editor-fold>
-
 }

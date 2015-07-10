@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Jun 16 11:44:46 JST 2014 
+ * Mon Jan 05 19:08:18 JST 2015 
  */
 
 
@@ -24,54 +24,50 @@ public class dgFukaRirekiFukaRireki_Row extends DataRow {
     private Button btnMaeHikaku;
     private RString txtTsuchishoNo;
     private RString txtChoteiNendo;
-    private RString txtRirekiNo;
     private RString txtKoseiYMD;
     private RString txtKoseiM;
     private RString txtHokenryoDankai;
     private RString txtHokenryoGaku;
     private RString txtTokubetsuChoshu;
     private RString txtFutsuChoshu;
-    private RString txtShikibetsuCode;
+    private RString shoriTimestamp;
 
     public dgFukaRirekiFukaRireki_Row() {
         super();
         this.btnMaeHikaku = new Button();
         this.txtTsuchishoNo = RString.EMPTY;
         this.txtChoteiNendo = RString.EMPTY;
-        this.txtRirekiNo = RString.EMPTY;
         this.txtKoseiYMD = RString.EMPTY;
         this.txtKoseiM = RString.EMPTY;
         this.txtHokenryoDankai = RString.EMPTY;
         this.txtHokenryoGaku = RString.EMPTY;
         this.txtTokubetsuChoshu = RString.EMPTY;
         this.txtFutsuChoshu = RString.EMPTY;
-        this.txtShikibetsuCode = RString.EMPTY;
+        this.shoriTimestamp = RString.EMPTY;
     }
 
-    public dgFukaRirekiFukaRireki_Row(Button btnMaeHikaku, RString txtTsuchishoNo, RString txtChoteiNendo, RString txtRirekiNo, RString txtKoseiYMD, RString txtKoseiM, RString txtHokenryoDankai, RString txtHokenryoGaku, RString txtTokubetsuChoshu, RString txtFutsuChoshu, RString txtShikibetsuCode) {
+    public dgFukaRirekiFukaRireki_Row(Button btnMaeHikaku, RString txtTsuchishoNo, RString txtChoteiNendo, RString txtKoseiYMD, RString txtKoseiM, RString txtHokenryoDankai, RString txtHokenryoGaku, RString txtTokubetsuChoshu, RString txtFutsuChoshu, RString shoriTimestamp) {
         super();
         this.setOriginalData("btnMaeHikaku", btnMaeHikaku);
         this.setOriginalData("txtTsuchishoNo", txtTsuchishoNo);
         this.setOriginalData("txtChoteiNendo", txtChoteiNendo);
-        this.setOriginalData("txtRirekiNo", txtRirekiNo);
         this.setOriginalData("txtKoseiYMD", txtKoseiYMD);
         this.setOriginalData("txtKoseiM", txtKoseiM);
         this.setOriginalData("txtHokenryoDankai", txtHokenryoDankai);
         this.setOriginalData("txtHokenryoGaku", txtHokenryoGaku);
         this.setOriginalData("txtTokubetsuChoshu", txtTokubetsuChoshu);
         this.setOriginalData("txtFutsuChoshu", txtFutsuChoshu);
-        this.setOriginalData("txtShikibetsuCode", txtShikibetsuCode);
+        this.setOriginalData("shoriTimestamp", shoriTimestamp);
         this.btnMaeHikaku = btnMaeHikaku;
         this.txtTsuchishoNo = txtTsuchishoNo;
         this.txtChoteiNendo = txtChoteiNendo;
-        this.txtRirekiNo = txtRirekiNo;
         this.txtKoseiYMD = txtKoseiYMD;
         this.txtKoseiM = txtKoseiM;
         this.txtHokenryoDankai = txtHokenryoDankai;
         this.txtHokenryoGaku = txtHokenryoGaku;
         this.txtTokubetsuChoshu = txtTokubetsuChoshu;
         this.txtFutsuChoshu = txtFutsuChoshu;
-        this.txtShikibetsuCode = txtShikibetsuCode;
+        this.shoriTimestamp = shoriTimestamp;
     }
 
     public Button getBtnMaeHikaku() {
@@ -84,10 +80,6 @@ public class dgFukaRirekiFukaRireki_Row extends DataRow {
 
     public RString getTxtChoteiNendo() {
         return txtChoteiNendo;
-    }
-
-    public RString getTxtRirekiNo() {
-        return txtRirekiNo;
     }
 
     public RString getTxtKoseiYMD() {
@@ -114,8 +106,8 @@ public class dgFukaRirekiFukaRireki_Row extends DataRow {
         return txtFutsuChoshu;
     }
 
-    public RString getTxtShikibetsuCode() {
-        return txtShikibetsuCode;
+    public RString getShoriTimestamp() {
+        return shoriTimestamp;
     }
 
     public void setBtnMaeHikaku(Button btnMaeHikaku) {
@@ -131,11 +123,6 @@ public class dgFukaRirekiFukaRireki_Row extends DataRow {
     public void setTxtChoteiNendo(RString txtChoteiNendo) {
         this.setOriginalData("txtChoteiNendo", txtChoteiNendo);
         this.txtChoteiNendo = txtChoteiNendo;
-    }
-
-    public void setTxtRirekiNo(RString txtRirekiNo) {
-        this.setOriginalData("txtRirekiNo", txtRirekiNo);
-        this.txtRirekiNo = txtRirekiNo;
     }
 
     public void setTxtKoseiYMD(RString txtKoseiYMD) {
@@ -168,9 +155,9 @@ public class dgFukaRirekiFukaRireki_Row extends DataRow {
         this.txtFutsuChoshu = txtFutsuChoshu;
     }
 
-    public void setTxtShikibetsuCode(RString txtShikibetsuCode) {
-        this.setOriginalData("txtShikibetsuCode", txtShikibetsuCode);
-        this.txtShikibetsuCode = txtShikibetsuCode;
+    public void setShoriTimestamp(RString shoriTimestamp) {
+        this.setOriginalData("shoriTimestamp", shoriTimestamp);
+        this.shoriTimestamp = shoriTimestamp;
     }
 
 }

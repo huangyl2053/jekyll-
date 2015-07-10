@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
  * 合議体（介護認定審査会）の長や長代理、委員などの区分コードを表すクラスです。
@@ -27,7 +27,7 @@ public class GogitaichoKubunCode implements ICodeWrapValueObject, Comparable<Gog
      * @throws NullPointerException 引数にnullが渡されたとき
      */
     public GogitaichoKubunCode(Code code) throws NullPointerException {
-        this.code = requireNonNull(code, Messages.E00003.replace("合議体長区分コード", getClass().getName()).getMessage());
+        this.code = requireNonNull(code, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("合議体長区分コード", getClass().getName()));
     }
 
     @Override

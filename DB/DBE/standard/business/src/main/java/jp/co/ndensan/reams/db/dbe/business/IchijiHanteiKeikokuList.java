@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business;
 import java.util.Iterator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiKeikokuShubetsu;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -29,8 +29,8 @@ public class IchijiHanteiKeikokuList implements Iterable<IchijiHanteiKeikoku> {
      */
     public IchijiHanteiKeikokuList(IchijiHanteiKeikokuHairetsuCode 警告配列コード,
             List<IchijiHanteiKeikoku> 一次判定警告List) throws NullPointerException {
-        requireNonNull(警告配列コード, Messages.E00003.replace("警告配列コード", getClass().getName()).getMessage());
-        requireNonNull(一次判定警告List, Messages.E00003.replace("警告List", getClass().getName()).getMessage());
+        requireNonNull(警告配列コード, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("警告配列コード", getClass().getName()));
+        requireNonNull(一次判定警告List, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("警告List", getClass().getName()));
 
         this.警告配列コード = 警告配列コード;
         this.警告List = 一次判定警告List;

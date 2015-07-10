@@ -1,0 +1,14 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+todokedeKanriNo,varchar,RString,,,,,A
+kyushoSeikyuNo,varchar,RString,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+kyufuGakuGokei,numeric,Decimal,,,,,A
+kashitsuSosatsuGaku,numeric,Decimal,,,,,A
+hokenKyufuSeikyuGaku,numeric,Decimal,,,,,A
+songaiBaishoKinNonyuYMD,UDD015YMD,FlexibleDate,,,,,A
+seikyusakiYubinNo,UDD003YubinNo,YubinNo,,,,,A
+seikyusakiJusho,varchar,RString,,,,,A
+seikyusakiMeisho,UDD042AtenaMeisho,AtenaMeisho,,,,,A
+seikyusakiBusho,varchar,RString,,,,,A
+seikyusakiTantosha,UDD042AtenaMeisho,AtenaMeisho,,,,,A
+seikyusakiTelNo,UDD026TelNo,TelNo,,,,,A

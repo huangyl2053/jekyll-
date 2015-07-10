@@ -28,6 +28,10 @@ var DBZ;
                 return "onSelectByDeleteButton_dgShisetsuNyutaishoRireki";
             };
 
+            Events.onBeforeClick_btnShisetsuNyutaishoKakutei = function () {
+                return "onBeforeClick_btnShisetsuNyutaishoKakutei";
+            };
+
             Events.onClick_btnShisetsuNyutaishoKakutei = function () {
                 return "onClick_btnShisetsuNyutaishoKakutei";
             };

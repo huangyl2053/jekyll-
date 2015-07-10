@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ShisetsuCode;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -39,8 +39,8 @@ public class NyushoShisetsu {
             RString 施設カナ名称,
             RString 施設所在地住所) {
 
-        this.施設種類 = requireNonNull(施設種類, Messages.E00001.replace("施設種類").getMessage());
-        this.施設コード = requireNonNull(施設コード, Messages.E00001.replace("施設コード").getMessage());
+        this.施設種類 = requireNonNull(施設種類, UrSystemErrorMessages.値がnull.getReplacedMessage("施設種類"));
+        this.施設コード = requireNonNull(施設コード, UrSystemErrorMessages.値がnull.getReplacedMessage("施設コード"));
         this.施設名称 = 施設名称;
         this.施設カナ名称 = 施設カナ名称;
         this.施設所在地住所 = 施設所在地住所;

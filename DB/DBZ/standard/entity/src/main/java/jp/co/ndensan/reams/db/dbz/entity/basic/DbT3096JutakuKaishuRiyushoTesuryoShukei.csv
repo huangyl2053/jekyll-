@@ -1,0 +1,12 @@
+﻿shoKisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,A
+shukeiKaishiYM,UDD014YM,FlexibleYearMonth,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+shukeiShuryoYM,UDD014YM,FlexibleYearMonth,,,,,A
+riyushoSakuseiJigyoshaNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,A
+riyushoSakuseiKensu,numeric,Decimal,,,,,A
+riyushoSakuseiTanka,numeric,Decimal,,,,,A
+riyushoSakuseiSeikyuKingaku,numeric,Decimal,,,,,A
+riyushoSakuseiShinseiYMD,UDD015YMD,FlexibleDate,,,,,A
+riyushoSakuseiUketsukeYMD,UDD015YMD,FlexibleDate,,,,,A
+shiharaiHohoKubun,varchar,RString,,,,,A
+shikibetsuNo,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A

@@ -20,7 +20,7 @@ public class ShikibetsuCodeMock {
     }
 
     public static ShikibetsuCode getSpiedInstance() {
-        ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("識別コード"));
+        ShikibetsuCode 識別コード = new ShikibetsuCode("0000000001");
         return spy(識別コード);
     }
 

@@ -1,0 +1,12 @@
+﻿idoYMD,UDD015YMD,FlexibleDate,,,,,A
+idoKubunCode,varchar,RString,,,,,A
+jukyushaIdoJiyu,varchar,RString,,,,,A
+shoKisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,A
+hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+syoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+hokenKyufuIchijiSashitomeKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+hokenKyufuIchijiSashitomeShuryoYMD,UDD015YMD,FlexibleDate,,,,,A
+hokenkyufuIchijiSashitomeKubunCode,varchar,RString,,,,,A
+hokenkyufuIchijiSashitomeKingaku,numeric,Decimal,,,,,A
+teiseiRenrakuhyoFlag,bool,boolean,,,,,A
+sofuYM,UDD014YM,FlexibleYearMonth,,,,,A

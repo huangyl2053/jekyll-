@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -8,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
 
@@ -15,13 +17,13 @@ import java.util.Objects;
  * DbT1004ShisetsuNyutaishoの項目定義クラスです
  *
  */
-public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004ShisetsuNyutaishoEntity> implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1004ShisetsuNyutaisho");
 
     private RString insertDantaiCd;
-    @PrimaryKey
     private RDateTime insertTimestamp;
     private RString insertReamsLoginId;
     private UUID insertContextId;
@@ -34,7 +36,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
     @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
-    private RDateTime shoriTimestamp;
+    private YMDHMS shoriTimestamp;
     private RString daichoShubetsu;
     private RString nyushoShisetsuShurui;
     private RString nyushoShisetsuCode;
@@ -45,6 +47,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * getInsertDantaiCd
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -53,6 +56,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * setInsertDantaiCd
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -61,6 +65,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * getIsDeleted
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -69,15 +74,16 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * setIsDeleted
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * setLastUpdateReamsLoginId
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -86,6 +92,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * getShichosonCode
+     *
      * @return shichosonCode
      */
     public LasdecCode getShichosonCode() {
@@ -94,6 +101,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * setShichosonCode
+     *
      * @param shichosonCode shichosonCode
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -102,6 +110,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * getShikibetsuCode
+     *
      * @return shikibetsuCode
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -110,6 +119,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * setShikibetsuCode
+     *
      * @param shikibetsuCode shikibetsuCode
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -118,22 +128,25 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * getShoriTimestamp
+     *
      * @return shoriTimestamp
      */
-    public RDateTime getShoriTimestamp() {
+    public YMDHMS getShoriTimestamp() {
         return shoriTimestamp;
     }
 
     /**
      * setShoriTimestamp
+     *
      * @param shoriTimestamp shoriTimestamp
      */
-    public void setShoriTimestamp(RDateTime shoriTimestamp) {
+    public void setShoriTimestamp(YMDHMS shoriTimestamp) {
         this.shoriTimestamp = shoriTimestamp;
     }
 
     /**
      * getDaichoShubetsu
+     *
      * @return daichoShubetsu
      */
     public RString getDaichoShubetsu() {
@@ -142,6 +155,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * setDaichoShubetsu
+     *
      * @param daichoShubetsu daichoShubetsu
      */
     public void setDaichoShubetsu(RString daichoShubetsu) {
@@ -150,6 +164,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * getNyushoShisetsuShurui
+     *
      * @return nyushoShisetsuShurui
      */
     public RString getNyushoShisetsuShurui() {
@@ -158,6 +173,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * setNyushoShisetsuShurui
+     *
      * @param nyushoShisetsuShurui nyushoShisetsuShurui
      */
     public void setNyushoShisetsuShurui(RString nyushoShisetsuShurui) {
@@ -166,6 +182,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * getNyushoShisetsuCode
+     *
      * @return nyushoShisetsuCode
      */
     public RString getNyushoShisetsuCode() {
@@ -174,6 +191,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * setNyushoShisetsuCode
+     *
      * @param nyushoShisetsuCode nyushoShisetsuCode
      */
     public void setNyushoShisetsuCode(RString nyushoShisetsuCode) {
@@ -182,6 +200,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * getNyushoYMD
+     *
      * @return nyushoYMD
      */
     public FlexibleDate getNyushoYMD() {
@@ -190,6 +209,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * setNyushoYMD
+     *
      * @param nyushoYMD nyushoYMD
      */
     public void setNyushoYMD(FlexibleDate nyushoYMD) {
@@ -198,6 +218,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * getTaishoYMD
+     *
      * @return taishoYMD
      */
     public FlexibleDate getTaishoYMD() {
@@ -206,6 +227,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * setTaishoYMD
+     *
      * @param taishoYMD taishoYMD
      */
     public void setTaishoYMD(FlexibleDate taishoYMD) {
@@ -214,6 +236,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * getNyushoShoriYMD
+     *
      * @return nyushoShoriYMD
      */
     public FlexibleDate getNyushoShoriYMD() {
@@ -222,6 +245,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * setNyushoShoriYMD
+     *
      * @param nyushoShoriYMD nyushoShoriYMD
      */
     public void setNyushoShoriYMD(FlexibleDate nyushoShoriYMD) {
@@ -230,6 +254,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * getTaishoShoriYMD
+     *
      * @return taishoShoriYMD
      */
     public FlexibleDate getTaishoShoriYMD() {
@@ -238,6 +263,7 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * setTaishoShoriYMD
+     *
      * @param taishoShoriYMD taishoShoriYMD
      */
     public void setTaishoShoriYMD(FlexibleDate taishoShoriYMD) {
@@ -246,16 +272,13 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
 
     /**
      * このエンティティの主キーが他の{@literal DbT1004ShisetsuNyutaishoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT1004ShisetsuNyutaishoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT1004ShisetsuNyutaishoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
+    @Override
     public boolean equalsPrimaryKeys(DbT1004ShisetsuNyutaishoEntity other) {
         if (other == null) {
-            return false;
-        }
-        if (!Objects.equals(this.insertTimestamp, other.insertTimestamp)) {
             return false;
         }
         if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
@@ -270,6 +293,32 @@ public class DbT1004ShisetsuNyutaishoEntity implements IDbAccessable {
         return true;
     }
 
-// </editor-fold>
+    /**
+     * {@inheritDoc}
+     *
+     * @param entity
+     */
+    @Override
+    public void shallowCopy(DbT1004ShisetsuNyutaishoEntity entity) {
+        this.shichosonCode = entity.shichosonCode;
+        this.shikibetsuCode = entity.shikibetsuCode;
+        this.shoriTimestamp = entity.shoriTimestamp;
+        this.daichoShubetsu = entity.daichoShubetsu;
+        this.nyushoShisetsuShurui = entity.nyushoShisetsuShurui;
+        this.nyushoShisetsuCode = entity.nyushoShisetsuCode;
+        this.nyushoYMD = entity.nyushoYMD;
+        this.taishoYMD = entity.taishoYMD;
+        this.nyushoShoriYMD = entity.nyushoShoriYMD;
+        this.taishoShoriYMD = entity.taishoShoriYMD;
+    }
+
+    /**
+     *
+     * @return {@inheritDoc}
+     */
+    @Override
+    public RString getMd5() {
+        return super.toMd5(shichosonCode, shikibetsuCode, shoriTimestamp, daichoShubetsu, nyushoShisetsuShurui, nyushoShisetsuCode, nyushoYMD, taishoYMD, nyushoShoriYMD, taishoShoriYMD);
+    }
 
 }

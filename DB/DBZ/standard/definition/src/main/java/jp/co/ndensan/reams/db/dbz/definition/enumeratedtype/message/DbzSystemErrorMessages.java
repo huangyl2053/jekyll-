@@ -24,13 +24,13 @@ public enum DbzSystemErrorMessages {
     static {
         REPLACEE = new RString("?");
     }
-    private final String code;
-    private final String message;
+    private final RString code;
+    private final RString message;
     private final int numOfReplacees;
 
     private DbzSystemErrorMessages(int no, String message) {
-        this.code = toCode("S", no);
-        this.message = message;
+        this.code = new RString(toCode("S", no));
+        this.message = new RString(message);
         this.numOfReplacees = countNumOfReplaceesIn(message);
     }
 
@@ -54,7 +54,7 @@ public enum DbzSystemErrorMessages {
      * @return メッセージ
      */
     public String getMessage() {
-        return message;
+        return message.toString();
     }
 
     /**
@@ -69,7 +69,7 @@ public enum DbzSystemErrorMessages {
             throw new IllegalArgumentException("置換予定部分の数と、指定する置換文字列の数を一致させてください。");
         }
 
-        String replaced = message;
+        String replaced = message.toString();
         int i = 0;
 
         while (true) {

@@ -38,7 +38,7 @@ public final class ViewStates {
      *
      *  ■「取得」メソッドの戻り値
      *    get()      : 引数で指定したClass
-     *    tryToGet() : {@link IOptional IOptional}
+     *    tryToGet() : {@link Optional Optional}
      *
      *  ■ViewStateに保持されている値がnullの場合
      *    get()      : nullを返します。

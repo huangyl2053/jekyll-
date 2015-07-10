@@ -1,0 +1,15 @@
+﻿hokokuYSeireki,UDD012YSeireki,FlexibleYear,,,,,A
+hokokuM,varchar,RString,,,,,A
+shukeiTaishoYSeireki,UDD012YSeireki,FlexibleYear,,,,,A
+shukeiTaishoM,varchar,RString,,,,,A
+toukeiTaishoKubun,varchar,RString,,,,,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+hyoNo,UDD035Code,Code,,,,,A
+shukeiNo,UDD035Code,Code,,,,,A
+shukeiTani,UDD035Code,Code,,,,,A
+tateNo,numeric,Decimal,,,,,A
+yokoNo,numeric,Decimal,,,,,A
+shoriTimestamp,timestamp,RDateTime,,,,,A
+shukeiKekkaAtai,numeric,Decimal,,,,,A
+tateKomokuCode,UDD035Code,Code,,,,,A
+yokoKomokuCode,UDD035Code,Code,,,,,A

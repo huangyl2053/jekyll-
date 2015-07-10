@@ -11,17 +11,25 @@ import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3077JuryoininKeiyakuJigyoshaEn
 import jp.co.ndensan.reams.db.dbc.business.mapper.JuryoininJigyoshaMapper;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.JuryoininJigyoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.ur.urf.business.IKaigoJigyosha;
-import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaFinder;
-import jp.co.ndensan.reams.ur.urz.business.IKoza;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
-import jp.co.ndensan.reams.ur.urz.realservice.HojinService;
-import jp.co.ndensan.reams.ur.urz.realservice.IHojinFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.IKozaManager;
-import jp.co.ndensan.reams.ur.urz.realservice.KozaService;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoJigyosha;
+import jp.co.ndensan.reams.db.dbx.realservice.IKaigoJigyoshaFinder;
+import jp.co.ndensan.reams.ur.urc.business.IKoza;
+//TODO n8233 朴　jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojinに変更
+//import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IHojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojin;
+//TODO n8233 朴　jp.co.ndensan.reams.ua.uax.realservice.HojinServiceに変更
+//import jp.co.ndensan.reams.ur.urz.realservice.HojinService;
+import jp.co.ndensan.reams.ua.uax.realservice.HojinService;
+//TODO n8233 朴　jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IHojinFinderに変更
+//import jp.co.ndensan.reams.ur.urz.realservice.IHojinFinder;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IHojinFinder;
+import jp.co.ndensan.reams.ur.urc.realservice.IKozaManager;
+import jp.co.ndensan.reams.ur.urc.realservice.KozaService;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -112,7 +120,8 @@ public class JuryoininJigyoshaManager {
     private void set識別コードAs(DbT3077JuryoininKeiyakuJigyoshaEntity entity) {
         IKaigoJigyosha 介護事業者;
         介護事業者 = find介護事業者(entity.getKeiyakuJigyoshaNo());
-        entity.setShikibetsuCode(介護事業者.get識別コード());
+        //TODO n8223 IKaigoJigyoshaのクラスなくなることで、代わりするクラスが必要がある。
+        //entity.setShikibetsuCode(介護事業者.get識別コード());
     }
 
     private IKaigoJigyosha find介護事業者(JigyoshaNo 事業者番号) {
@@ -121,7 +130,10 @@ public class JuryoininJigyoshaManager {
 
     private IHojin find法人(ShikibetsuCode 識別コード, FlexibleDate 契約開始日) {
         //TODO n3317塚田萌　RDateからFlexibleDateに変更されたら.toRDate()を外す。
-        return hojinFinder.get法人(識別コード, 契約開始日.toRDate());
+        //TODO n8233 朴　get法人(識別コード, 契約開始日.toRDate()　→　get法人(GyomuCode.DB介護保険, 識別コード)に変更する。
+        //TOD  n8233 朴  契約開始日.toRDate()に関しては、必要があるので、対応必要がある。
+        return hojinFinder.get法人(GyomuCode.DB介護保険, 識別コード);//.get法人(識別コード, 契約開始日.toRDate());
+
     }
 
     private IKoza find口座(ShikibetsuCode 識別コード, FlexibleDate 契約開始日) {

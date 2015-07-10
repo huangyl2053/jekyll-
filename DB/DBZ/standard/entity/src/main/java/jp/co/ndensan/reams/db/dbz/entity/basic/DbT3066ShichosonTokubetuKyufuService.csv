@@ -1,0 +1,12 @@
+﻿serviceCode,varchar,RString,,,,,A
+serviceYukoKikanKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+serviceSeishikiName,varchar,RString,,,,,A
+serviceRyakushoName,varchar,RString,,,,,A
+serviceYukoKikanShuryoYMD,UDD015YMD,FlexibleDate,,,,,A
+serviceKubun,varchar,RString,,,,,A
+tanisuNissu,numeric,Decimal,,,,,A
+shikyuGendoKijungaku,numeric,Decimal,,,,,A
+kyufuritsuHikisageAriFlag,bool,boolean,,,,,A
+torokuYMD,UDD015YMD,FlexibleDate,,,,,A
+henkoYMD,UDD015YMD,FlexibleDate,,,,,A

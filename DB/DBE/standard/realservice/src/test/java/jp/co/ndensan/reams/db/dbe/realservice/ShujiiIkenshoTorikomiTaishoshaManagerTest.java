@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.business.helper.KojinTestHelper;
 import jp.co.ndensan.reams.db.dbe.business.helper.NinteiShinchokuJohoMock;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.IkenshosakuseiIraiRirekiNo;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.YokaigoNinteiShinseiTestHelper;
 import jp.co.ndensan.reams.db.dbe.entity.helper.NinteiShinchokuJohoEntityMock;
@@ -26,8 +26,9 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriN
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
-import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IKojin;
-import jp.co.ndensan.reams.ur.urz.realservice.IKojinFinder;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IKojinFinder;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -89,7 +90,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManagerTest extends DbeTestBase {
             when(torikomiTaishoshaDac.selectAll()).thenReturn(create介護認定処理対象者List(1));
             when(shujiiManager.get主治医意見書作成依頼情報(
                     any(LasdecCode.class), any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(create主治医意見書作成依頼());
-            when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(mock(IKojin.class));
+            when(kojinFinder.get個人(GyomuCode.DB介護保険, any(ShikibetsuCode.class))).thenReturn(mock(IKojin.class));
             sut = new ShujiiIkenshoTorikomiTaishoshaManager(torikomiTaishoshaDac, shujiiManager, kojinFinder, yokaigoninteiProgressManager);
             resultList = sut.get主治医意見書取込対象者(市町村コード);
             assertThat(resultList.size(), is(1));
@@ -119,7 +120,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManagerTest extends DbeTestBase {
             when(torikomiTaishoshaDac.select証記載保険者番号(any(ShoKisaiHokenshaNo.class))).thenReturn(create介護認定処理対象者List(1));
             when(shujiiManager.get主治医意見書作成依頼情報(
                     any(LasdecCode.class), any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(create主治医意見書作成依頼());
-            when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(mock(IKojin.class));
+            when(kojinFinder.get個人(GyomuCode.DB介護保険, any(ShikibetsuCode.class))).thenReturn(mock(IKojin.class));
             sut = new ShujiiIkenshoTorikomiTaishoshaManager(torikomiTaishoshaDac, shujiiManager, kojinFinder, yokaigoninteiProgressManager);
             resultList = sut.get主治医意見書取込対象者(市町村コード, 証記載保険者番号);
             assertThat(resultList.size(), is(1));
@@ -149,7 +150,7 @@ public class ShujiiIkenshoTorikomiTaishoshaManagerTest extends DbeTestBase {
             when(torikomiTaishoshaDac.select証記載保険者番号及び支所コード(any(ShoKisaiHokenshaNo.class), any(RString.class))).thenReturn(create介護認定処理対象者List(1));
             when(shujiiManager.get主治医意見書作成依頼情報(
                     any(LasdecCode.class), any(ShinseishoKanriNo.class), any(IkenshosakuseiIraiRirekiNo.class))).thenReturn(create主治医意見書作成依頼());
-            when(kojinFinder.get個人(any(ShikibetsuCode.class))).thenReturn(mock(IKojin.class));
+            when(kojinFinder.get個人(GyomuCode.DB介護保険, any(ShikibetsuCode.class))).thenReturn(mock(IKojin.class));
             sut = new ShujiiIkenshoTorikomiTaishoshaManager(torikomiTaishoshaDac, shujiiManager, kojinFinder, yokaigoninteiProgressManager);
             resultList = sut.get主治医意見書取込対象者(市町村コード, 証記載保険者番号, 支所コード);
             assertThat(resultList.size(), is(1));
@@ -186,8 +187,8 @@ public class ShujiiIkenshoTorikomiTaishoshaManagerTest extends DbeTestBase {
             entity.setNinteiShinchokuJohoEntity(shinchokuEntity);
 
             DbT5001NinteiShinseiJohoEntity shinseiEntity = YokaigoNinteiShinseiTestHelper.create認定申請情報Entity();
-            shinseiEntity.setShoKisaiHokenshaNo(証記載保険者番号);
-            shinseiEntity.setShishoCode(new ShishoCode(支所コード));
+            shinseiEntity.setShoKisaiHokenshaNo(証記載保険者番号.value());
+            shinseiEntity.setShishoCode(支所コード);
             entity.setNinteiShinseiJohoEntity(shinseiEntity);
             list.add(entity);
         }

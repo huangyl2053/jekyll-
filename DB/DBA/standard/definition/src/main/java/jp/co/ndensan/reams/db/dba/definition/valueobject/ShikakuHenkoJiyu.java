@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dba.definition.valueobject;
 import java.util.Objects;
 //TODO n3327 三浦凌 ICodeAssinedItemがdefinitionへ移動されたら、当該インタフェースを実装する。
 //import jp.co.ndensan.reams.ur.urz.business.ICodeAssignedItem;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.uz.uza.message.Messages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

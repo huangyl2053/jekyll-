@@ -1,0 +1,6 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+shoriTimestamp,timestamp,RDateTime,,,,,A
+rirekiNo,int4,int,,,,,A
+shikibetuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+startYMD,UDD015YMD,FlexibleDate,,,,,A
+endYMD,UDD015YMD,FlexibleDate,,,,,A

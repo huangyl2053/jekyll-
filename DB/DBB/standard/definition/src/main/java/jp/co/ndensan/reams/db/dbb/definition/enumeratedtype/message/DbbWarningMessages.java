@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.message;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
-import static jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.message.MessageCreateHelper.toCode;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.message.MessageCreateHelper.toCode;
 
 /**
  * DBBの警告メッセージ定義列挙型です。

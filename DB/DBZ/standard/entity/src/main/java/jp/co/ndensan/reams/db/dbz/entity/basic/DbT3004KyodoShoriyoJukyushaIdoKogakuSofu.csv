@@ -1,0 +1,14 @@
+﻿idoYMD,UDD015YMD,FlexibleDate,,,,,A
+idoKubunCode,varchar,RString,,,,,A
+jukyushaIdoJiyu,varchar,RString,,,,,A
+shoKisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,A
+hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+setaiShuyakuNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+setaiShotokuKubunCode,varchar,RString,,,,,A
+shotokuKubunCode,varchar,RString,,,,,A
+roureiFukushiNenkinJukyuAriFlag,bool,boolean,,,,,A
+riyoshaFutan2DankaiAriFlag,bool,boolean,,,,,A
+shikyuShinseishoOutputAriFlag,bool,boolean,,,,,A
+teiseiRenrakuhyoFlag,bool,boolean,,,,,A
+sofuYM,UDD014YM,FlexibleYearMonth,,,,,A

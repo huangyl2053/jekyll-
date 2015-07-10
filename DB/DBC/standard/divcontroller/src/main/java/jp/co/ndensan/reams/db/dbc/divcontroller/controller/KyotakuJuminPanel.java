@@ -68,12 +68,12 @@ public class KyotakuJuminPanel {
 //                ymlDt.getAsRString("setaiCode"));
 //        panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv1().getAtenaInfo().getTxtKojinHojinCode().setValue(
 //                ymlDt.getAsRString("kojinHojinCode"));
-//        
+//
         //資格取得 ～　認定期間
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtHihokenshaNo().setValue(
                 ymlDt.getAsRString("hihokenshaNo"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtShutokuYmd().setValue(
-                ymlDt.getAsRDate("shotokuYmd"));
+                ymlDt.getAsFlexibleDate("shotokuYmd"));
         panel.getKyotakuNushiJuminJoho().getCommonKyotakuJuminChildDiv2().getTxtShutokuJiyu().setValue(
                 ymlDt.getAsRString("shotokuJiyu"));
 

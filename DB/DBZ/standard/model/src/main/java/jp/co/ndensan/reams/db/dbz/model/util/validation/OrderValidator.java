@@ -36,7 +36,10 @@ import jp.co.ndensan.reams.uz.uza.lang.IOrderComparable;
  * 3件以上の場合も、同じようにメソッドを連結することで、チェックすることができます。
  *
  * @author N3327 三浦 凌
+ * @deprecated
+ * {@link jp.co.ndensan.reams.ur.urz.model.validations.validators.OrderValidator}を利用してください。
  */
+@Deprecated
 public final class OrderValidator {
 
     private OrderValidator() {

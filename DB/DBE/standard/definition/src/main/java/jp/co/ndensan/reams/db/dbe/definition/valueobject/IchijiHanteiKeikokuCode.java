@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.ICodeWrapValueObject;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
  * 一次判定警告コードを表すクラスです。
@@ -28,7 +28,7 @@ public class IchijiHanteiKeikokuCode implements ICodeWrapValueObject, Comparable
      */
     public IchijiHanteiKeikokuCode(Code code)
             throws NullPointerException {
-        this.code = requireNonNull(code, Messages.E00003.replace("一次判定警告コード", getClass().getName()).getMessage());
+        this.code = requireNonNull(code, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("一次判定警告コード", getClass().getName()));
     }
 
     @Override

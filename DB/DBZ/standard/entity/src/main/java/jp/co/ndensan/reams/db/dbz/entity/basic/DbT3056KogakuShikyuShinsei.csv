@@ -1,0 +1,13 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,A
+shoKisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+uketsukeYMD,UDD015YMD,FlexibleDate,,,,,A
+shinseiYMD,UDD015YMD,FlexibleDate,,,,,A
+shinseiRiyu,varchar,RString,,,,,A
+shinseishaKubun,varchar,RString,,,,,A
+shinseishaShimei,UDD042AtenaMeisho,AtenaMeisho,,,,,A
+shinseishaShimeiKana,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,A
+shinseishaJusho,varchar,RString,,,,,A
+shinseishaTelNo,UDD026TelNo,TelNo,,,,,A
+shinseiJigyoshaNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,A

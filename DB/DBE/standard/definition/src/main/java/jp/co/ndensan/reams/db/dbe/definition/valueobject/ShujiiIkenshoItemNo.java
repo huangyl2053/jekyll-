@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.valueobject;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
@@ -25,7 +25,7 @@ public class ShujiiIkenshoItemNo implements Comparable<ShujiiIkenshoItemNo>, IVa
      * @param 項目番号 項目番号
      */
     public ShujiiIkenshoItemNo(RString 項目番号) {
-        this.項目番号 = requireNonNull(項目番号, Messages.E00001.replace("項目番号").getMessage());
+        this.項目番号 = requireNonNull(項目番号, UrSystemErrorMessages.値がnull.getReplacedMessage("項目番号"));
     }
 
     @Override

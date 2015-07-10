@@ -1,0 +1,8 @@
+﻿tandokuJoseiShuruiCode,varchar,RString,,,,,A
+joseiServiceShuruiCode,DbUDD005ServiceShuruiCode,DbUDD005ServiceShuruiCode,,,,,A
+tekiyoKaishiYM,UDD014YM,FlexibleYearMonth,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+tekiyoShuryoYM,UDD014YM,FlexibleYearMonth,,,,,A
+joseiServiceShuriMeisho,varchar,RString,,,,,A
+joseiTani,numeric,Decimal,,,,,A
+joseiNaiyo,varchar,RString,,,,,A

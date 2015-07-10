@@ -6,7 +6,8 @@ package jp.co.ndensan.reams.db.dbe.entity.helper;
 
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosainBangoCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
+//import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5006NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -21,7 +22,7 @@ public class NinteichosaIraiTestHelper {
 
     public static ShinseishoKanriNo shinseishoKanriNo = new ShinseishoKanriNo(new RString("0001"));
     public static NinteichosaIraiRirekiNo ninteichosaIraiRirekiNo = new NinteichosaIraiRirekiNo(1);
-    public static KaigoJigyoshaNo ninteichosaItakusakiCode = new KaigoJigyoshaNo(new RString("2001"));
+    public static KaigoJigyoshaNo ninteichosaItakusakiCode = new KaigoJigyoshaNo(new RString("0000000001"));
     public static NinteichosainBangoCode chousainCode = new NinteichosainBangoCode(new RString("3001"));
     public static RString ninteichousaIraiKubunCode = new RString("0");
     public static int ninteichosaIraiKaisu = 1;

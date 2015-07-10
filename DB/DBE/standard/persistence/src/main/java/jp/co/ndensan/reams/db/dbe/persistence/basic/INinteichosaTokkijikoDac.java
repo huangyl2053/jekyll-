@@ -41,4 +41,10 @@ public interface INinteichosaTokkijikoDac extends IInsertable<DbT5010Ninteichosa
      */
     @Transaction
     List<DbT5010NinteichosaTokkijikoEntity> select(ShinseishoKanriNo 申請書管理番号);
+
+    @Override
+    int delete(DbT5010NinteichosaTokkijikoEntity data);
+
+    @Override
+    int insertOrUpdate(DbT5010NinteichosaTokkijikoEntity data);
 }

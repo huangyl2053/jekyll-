@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -24,8 +24,8 @@ public class ShujiiIkenshoResult {
      * @param 詳細情報 詳細情報
      */
     public ShujiiIkenshoResult(ShujiiIkenshoBase 基本情報, ShujiiIkenshoDetails 詳細情報) {
-        this.基本情報 = requireNonNull(基本情報, Messages.E00001.replace("基本情報").getMessage());
-        this.詳細情報 = requireNonNull(詳細情報, Messages.E00001.replace("詳細情報").getMessage());
+        this.基本情報 = requireNonNull(基本情報, UrSystemErrorMessages.値がnull.getReplacedMessage("基本情報"));
+        this.詳細情報 = requireNonNull(詳細情報, UrSystemErrorMessages.値がnull.getReplacedMessage("詳細情報"));
     }
 
     /**

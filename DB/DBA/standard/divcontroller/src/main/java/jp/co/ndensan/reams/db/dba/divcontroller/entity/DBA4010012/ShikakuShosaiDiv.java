@@ -1,8 +1,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA4010012;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -25,8 +24,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * ShikakuShosai のクラスファイル 
- * 
+ * ShikakuShosai のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShikakuShosaiDiv extends Panel {
@@ -36,6 +35,7 @@ public class ShikakuShosaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("tblShikakuShosai")
     private tblShikakuShosaiDiv tblShikakuShosai;
     @JsonProperty("tabShisakuShosaiRireki")
@@ -54,7 +54,7 @@ public class ShikakuShosaiDiv extends Panel {
 
     @JsonProperty("tblShikakuShosai")
     public void setTblShikakuShosai(tblShikakuShosaiDiv tblShikakuShosai) {
-        this.tblShikakuShosai=tblShikakuShosai;
+        this.tblShikakuShosai = tblShikakuShosai;
     }
 
     @JsonProperty("tabShisakuShosaiRireki")
@@ -64,7 +64,7 @@ public class ShikakuShosaiDiv extends Panel {
 
     @JsonProperty("tabShisakuShosaiRireki")
     public void setTabShisakuShosaiRireki(tabShisakuShosaiRirekiDiv tabShisakuShosaiRireki) {
-        this.tabShisakuShosaiRireki=tabShisakuShosaiRireki;
+        this.tabShisakuShosaiRireki = tabShisakuShosaiRireki;
     }
 
     /*
@@ -196,7 +196,7 @@ public class ShikakuShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTplJutoku(tplJutokuDiv tplJutoku) {
+    public void setTplJutoku(tplJutokuDiv tplJutoku) {
         this.getTabShisakuShosaiRireki().setTplJutoku(tplJutoku);
     }
 
@@ -206,7 +206,7 @@ public class ShikakuShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setJutoku(JutokuDiv Jutoku) {
+    public void setJutoku(JutokuDiv Jutoku) {
         this.getTabShisakuShosaiRireki().getTplJutoku().setJutoku(Jutoku);
     }
 
@@ -221,7 +221,7 @@ public class ShikakuShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTplHenko(tplHenkoDiv tplHenko) {
+    public void setTplHenko(tplHenkoDiv tplHenko) {
         this.getTabShisakuShosaiRireki().setTplHenko(tplHenko);
     }
 
@@ -231,7 +231,7 @@ public class ShikakuShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setShikakuHenko(ShikakuHenkoDiv ShikakuHenko) {
+    public void setShikakuHenko(ShikakuHenkoDiv ShikakuHenko) {
         this.getTabShisakuShosaiRireki().getTplHenko().setShikakuHenko(ShikakuHenko);
     }
 
@@ -246,7 +246,7 @@ public class ShikakuShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTplShisetsuNyutaisho(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho) {
+    public void setTplShisetsuNyutaisho(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho) {
         this.getTabShisakuShosaiRireki().setTplShisetsuNyutaisho(tplShisetsuNyutaisho);
     }
 
@@ -256,7 +256,7 @@ public class ShikakuShosaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiDiv ShisetsuNyutaishoRireki) {
+    public void setShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiDiv ShisetsuNyutaishoRireki) {
         this.getTabShisakuShosaiRireki().getTplShisetsuNyutaisho().setShisetsuNyutaishoRireki(ShisetsuNyutaishoRireki);
     }
 

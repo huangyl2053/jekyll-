@@ -1,0 +1,17 @@
+﻿hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,A
+seiriNo,varchar,RString,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+shoKisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,A
+ketteiYMD,UDD015YMD,FlexibleDate,,,,,A
+shikyuHushikyuKetteiKubun,varchar,RString,,,,,A
+shiharaiKingaku,numeric,Decimal,,,,,A
+shiharaiKingakuUchiwakeRiyoshabun,numeric,Decimal,,,,,A
+shiharaiHohoKubun,varchar,RString,,,,,A
+shiharaiBasho,varchar,RString,,,,,A
+shiharaiKikanKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+shiharaiKikanShuryoYMD,UDD015YMD,FlexibleDate,,,,,A
+kaichoNaiyo,varchar,RString,,,,,A
+shiharaiMadoguchiKaishiTime,time,RTime,,,,,A
+shiharaiMadoguchiShuryoTime,time,RTime,,,,,A
+ketteiIchiranTorikomiYM,UDD014YM,FlexibleYearMonth,,,,,A

@@ -26,8 +26,20 @@ public class ShikakuSoshitsuJiyuTest extends DbzTestBase {
 
         @Test
         public void toValueは_指定のコードに対応する列挙子があれば_それを返す() {
-            ShikakuSoshitsuJiyu sut = ShikakuSoshitsuJiyu.年齢到達;
+            ShikakuSoshitsuJiyu sut = ShikakuSoshitsuJiyu.死亡;
             assertThat(ShikakuSoshitsuJiyu.toValue(sut.getCode()), is(sut));
+        }
+
+        @Test
+        public void toValueは_nullが渡された場合_EMPTYを返す() {
+            ShikakuSoshitsuJiyu sut = ShikakuSoshitsuJiyu.EMPTY;
+            assertThat(ShikakuSoshitsuJiyu.toValue(null), is(sut));
+        }
+
+        @Test
+        public void toValueは_空の文字列が渡された場合_EMPTYを返す() {
+            ShikakuSoshitsuJiyu sut = ShikakuSoshitsuJiyu.EMPTY;
+            assertThat(ShikakuSoshitsuJiyu.toValue(RString.EMPTY), is(sut));
         }
 
         @Test(expected = IllegalArgumentException.class)

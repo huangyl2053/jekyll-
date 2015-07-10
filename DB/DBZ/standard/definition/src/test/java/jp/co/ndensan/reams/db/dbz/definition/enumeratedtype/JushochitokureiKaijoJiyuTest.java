@@ -24,8 +24,20 @@ public class JushochitokureiKaijoJiyuTest extends DbzTestBase {
 
         @Test
         public void toValueは_指定のコードに対応する列挙子があれば_それを返す() {
-            JushochitokureiKaijoJiyu sut = JushochitokureiKaijoJiyu.特例転入;
+            JushochitokureiKaijoJiyu sut = JushochitokureiKaijoJiyu.自特例転入;
             assertThat(JushochitokureiKaijoJiyu.toValue(sut.getCode()), is(sut));
+        }
+
+        @Test
+        public void toValueは_nullを受け取った場合_EMPTYを返す() {
+            JushochitokureiKaijoJiyu sut = JushochitokureiKaijoJiyu.EMPTY;
+            assertThat(JushochitokureiKaijoJiyu.toValue(null), is(sut));
+        }
+
+        @Test
+        public void toValueは_空の文字列を受け取った場合_EMPTYを返す() {
+            JushochitokureiKaijoJiyu sut = JushochitokureiKaijoJiyu.EMPTY;
+            assertThat(JushochitokureiKaijoJiyu.toValue(RString.EMPTY), is(sut));
         }
 
         @Test(expected = IllegalArgumentException.class)
@@ -38,7 +50,7 @@ public class JushochitokureiKaijoJiyuTest extends DbzTestBase {
 
         @Test
         public void getNameは_Enumクラスのnameと同じ値を返す() {
-            assertThat(JushochitokureiKaijoJiyu.特例解除.getName().toString(), is(JushochitokureiKaijoJiyu.特例解除.name()));
+            assertThat(JushochitokureiKaijoJiyu.自特例解除.getName().toString(), is(JushochitokureiKaijoJiyu.自特例解除.name()));
         }
     }
 
@@ -46,7 +58,7 @@ public class JushochitokureiKaijoJiyuTest extends DbzTestBase {
 
         @Test
         public void getShortNameは_Enumクラスのnameと同じ値を返す() {
-            assertThat(JushochitokureiKaijoJiyu.特例転入.getShortName().toString(), is(JushochitokureiKaijoJiyu.特例転入.name()));
+            assertThat(JushochitokureiKaijoJiyu.自特例転入.getShortName().toString(), is(JushochitokureiKaijoJiyu.自特例転入.name()));
         }
     }
 }

@@ -3,36 +3,22 @@ package jp.co.ndensan.reams.db.dbz.testhelper;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.testhelper.TestDacBase3;
 import org.junit.After;
-import org.junit.BeforeClass;
 import org.junit.AfterClass;
+import org.junit.BeforeClass;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  * {@link TestDacBase}のラッパークラスです。
  *
- * @author N9606 漢那 憲作
+ * @author n8178 城間篤人
  */
 public class DbaTestDacBase extends TestDacBase3 {
-
-    /**
-     * サブ業務コードを返します。
-     *
-     * @return サブ業務コード
-     */
-    @Override
-    public RString getSubGyomuCD() {
-        return new RString("DBA");
-    }
 
     /**
      * ダミーのControlDataを作成します。<br/>
      * DBセッションを開き、sqlSessionオブジェクトにDBセッションを代入します。
      */
     @BeforeClass
-    public static void beforeSetUpClass() {
+    public static void setUpClass() {
         setDummyControlData(new RString("DBA"));
         openMainSession();
     }
@@ -46,10 +32,10 @@ public class DbaTestDacBase extends TestDacBase3 {
     }
 
     /**
-     * DBセッションを閉じます。
+     * ロールバックし、DBセッションを閉じます。
      */
     @AfterClass
-    public static void afterTearDownClass() {
-        closeSession();
+    public static void tearDownClass() {
+        rollBackAndCloseSession();
     }
 }

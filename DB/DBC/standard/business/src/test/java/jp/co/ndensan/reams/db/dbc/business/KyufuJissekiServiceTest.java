@@ -44,7 +44,7 @@ public class KyufuJissekiServiceTest extends DbcTestBase {
 
         @Before
         public void setUp() {
-            事業者番号 = mock(JigyoshaNo.class);
+            事業者番号 = JigyoshaNo.EMPTY;
             利用者負担額合計 = mock(Decimal.class);
             単位数合計 = mock(Decimal.class);
             保険請求分請求額合計 = mock(Decimal.class);

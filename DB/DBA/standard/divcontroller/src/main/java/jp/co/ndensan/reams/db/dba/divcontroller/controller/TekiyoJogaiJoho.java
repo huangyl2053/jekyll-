@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2050011.TekiyoJogaiJoh
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2050011.TekiyoJogaiTorokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2050011.dgTekiyoJogaiRireki_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2050011.TekiyoJogaiTaishoshaSearchDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShisetsuJoho;
+import jp.co.ndensan.reams.db.dbz.divcontroller.controller.shisetsujoho.ShisetsuJoho;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;

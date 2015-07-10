@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.dbc0700011.JutakuKaishuJi
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.ShinseishaInfo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ShinseishaInfo.ShinseishaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.AtenaShokaiSimpleDiv;
+import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.atenashokaisimple.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -176,10 +176,10 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 //        div.getTxtShinseishaNameKana().setReadOnly(true);
 //    }
     private void setHonninInfo(ShinseishaInfoDiv shinseishaDiv, AtenaShokaiSimpleDiv atenaDiv) {
-        shinseishaDiv.getTxtShinseishaNameKana().setValue(atenaDiv.getTxtAtenaKanaMeisho().getValue());
-        shinseishaDiv.getTxtShinseishaName().setValue(atenaDiv.getTxtAtenaMeisho().getValue());
-        shinseishaDiv.getTxtYubinNo().setValue(atenaDiv.getTxtYubinNo().getValue());
-        shinseishaDiv.getTxtAddress().setValue(atenaDiv.getTxtJusho().getValue());
+//        shinseishaDiv.getTxtShinseishaNameKana().setValue(atenaDiv.getTxtAtenaKanaMeisho().getValue());
+//        shinseishaDiv.getTxtShinseishaName().setValue(atenaDiv.getTxtAtenaMeisho().getValue());
+//        shinseishaDiv.getTxtYubinNo().setValue(atenaDiv.getTxtYubinNo().getValue());
+//        shinseishaDiv.getTxtAddress().setValue(atenaDiv.getTxtJusho().getValue());
         shinseishaDiv.getTxtTelNo().setValue(new RString("0123456789"));
     }
 

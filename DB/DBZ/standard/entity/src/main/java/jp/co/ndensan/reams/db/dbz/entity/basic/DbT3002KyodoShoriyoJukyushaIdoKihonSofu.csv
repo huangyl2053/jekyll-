@@ -1,0 +1,14 @@
+﻿idoYMD,UDD015YMD,FlexibleDate,,,,,A
+idoKubunCode,varchar,RString,,,,,A
+jukyushaIdoJiyu,varchar,RString,,,,,A
+shoKisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,A
+hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+hiHokenshaName,varchar,RString,,,,,A
+YubinNo,UDD003YubinNo,YubinNo,,,,,A
+ddressKana,varchar,RString,,,,,A
+address,varchar,RString,,,,,A
+telNo,UDD026TelNo,TelNo,,,,,A
+chohyoOutputJunjyoCode,varchar,RString,,,,,A
+teiseiRenrakuhyoFlag,bool,boolean,,,,,A
+sofuYM,UDD014YM,FlexibleYearMonth,,,,,A

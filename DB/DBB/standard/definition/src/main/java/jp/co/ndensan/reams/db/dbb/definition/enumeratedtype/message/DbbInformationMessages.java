@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.message;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
-import static jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.message.MessageCreateHelper.toCode;
+import static jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.message.MessageCreateHelper.toCode;
 
 /**
  * DBBのインフォメーションメッセージ定義列挙型です。
@@ -17,8 +17,7 @@ import static jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.message.Messa
  */
 public enum DbbInformationMessages implements IMessageGettable {
 
-    // TODO 一つ目の要素が定義されたらこの要素は削除する。
-    ダミーメッセージ(0, "");
+    比較対象データなし(1, "比較対象のデータがありません。");
 
     private final Message message;
 

@@ -6,7 +6,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilis
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.kaijojiHokenshaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.KaijojiHokenshaJohoDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -29,8 +30,14 @@ public class JutokuKaijoInputDiv extends Panel {
     private TextBoxFlexibleDate txtKaijoTodokedeDate;
     @JsonProperty("ddlKaijoJiyu")
     private DropDownList ddlKaijoJiyu;
-    @JsonProperty("kaijojiHokenshaJoho")
-    private kaijojiHokenshaJohoDiv kaijojiHokenshaJoho;
+    @JsonProperty("KaijojiHokenshaJoho")
+    private KaijojiHokenshaJohoDiv KaijojiHokenshaJoho;
+    @JsonProperty("kaijojiShichosonCode")
+    private RString kaijojiShichosonCode;
+    @JsonProperty("kaijojiHihokenshaNo")
+    private RString kaijojiHihokenshaNo;
+    @JsonProperty("kaijojiShoriDatetime")
+    private RString kaijojiShoriDatetime;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -68,29 +75,49 @@ public class JutokuKaijoInputDiv extends Panel {
         this.ddlKaijoJiyu=ddlKaijoJiyu;
     }
 
-    @JsonProperty("kaijojiHokenshaJoho")
-    public kaijojiHokenshaJohoDiv getKaijojiHokenshaJoho() {
-        return kaijojiHokenshaJoho;
+    @JsonProperty("KaijojiHokenshaJoho")
+    public KaijojiHokenshaJohoDiv getKaijojiHokenshaJoho() {
+        return KaijojiHokenshaJoho;
     }
 
-    @JsonProperty("kaijojiHokenshaJoho")
-    public void setKaijojiHokenshaJoho(kaijojiHokenshaJohoDiv kaijojiHokenshaJoho) {
-        this.kaijojiHokenshaJoho=kaijojiHokenshaJoho;
+    @JsonProperty("KaijojiHokenshaJoho")
+    public void setKaijojiHokenshaJoho(KaijojiHokenshaJohoDiv KaijojiHokenshaJoho) {
+        this.KaijojiHokenshaJoho=KaijojiHokenshaJoho;
+    }
+
+    @JsonProperty("kaijojiShichosonCode")
+    public RString getKaijojiShichosonCode() {
+        return kaijojiShichosonCode;
+    }
+
+    @JsonProperty("kaijojiShichosonCode")
+    public void setKaijojiShichosonCode(RString kaijojiShichosonCode) {
+        this.kaijojiShichosonCode=kaijojiShichosonCode;
+    }
+
+    @JsonProperty("kaijojiHihokenshaNo")
+    public RString getKaijojiHihokenshaNo() {
+        return kaijojiHihokenshaNo;
+    }
+
+    @JsonProperty("kaijojiHihokenshaNo")
+    public void setKaijojiHihokenshaNo(RString kaijojiHihokenshaNo) {
+        this.kaijojiHihokenshaNo=kaijojiHihokenshaNo;
+    }
+
+    @JsonProperty("kaijojiShoriDatetime")
+    public RString getKaijojiShoriDatetime() {
+        return kaijojiShoriDatetime;
+    }
+
+    @JsonProperty("kaijojiShoriDatetime")
+    public void setKaijojiShoriDatetime(RString kaijojiShoriDatetime) {
+        this.kaijojiShoriDatetime=kaijojiShoriDatetime;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
-    @JsonIgnore
-    public DropDownList getDdlKaijojiShozaiHokensha() {
-        return this.getKaijojiHokenshaJoho().getDdlKaijojiShozaiHokensha();
-    }
-
-    @JsonIgnore
-    public void  setDdlKaijojiShozaiHokensha(DropDownList ddlKaijojiShozaiHokensha) {
-        this.getKaijojiHokenshaJoho().setDdlKaijojiShozaiHokensha(ddlKaijojiShozaiHokensha);
-    }
-
     @JsonIgnore
     public DropDownList getDdlKaijojiSochimotoHokensha() {
         return this.getKaijojiHokenshaJoho().getDdlKaijojiSochimotoHokensha();

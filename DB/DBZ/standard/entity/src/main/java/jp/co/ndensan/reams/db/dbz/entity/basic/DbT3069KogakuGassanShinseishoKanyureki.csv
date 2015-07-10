@@ -1,0 +1,10 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+taishoNendo,UDD012YSeireki,FlexibleYear,,,,,A
+hokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,A
+seiriNo,varchar,RString,,,,,A
+kanyurekiNo,varchar,RString,,,,,A
+shoriTimestamp,UDD018YMDHMS,YMDHMS,,,,,A
+hokenshaMei,varchar,RString,,,,,A
+kanyuKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+kanyuShuryoYMD,UDD015YMD,FlexibleDate,,,,,A
+jikoFutanShomeisho_SeiriNo,varchar,RString,,,,,A

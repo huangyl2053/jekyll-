@@ -10,12 +10,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.IMinashi2GoshaDaicho;
 import jp.co.ndensan.reams.db.dbe.business.Minashi2Gosha;
 import jp.co.ndensan.reams.db.dbe.business.Minashi2GoshaList;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.IJuminKihonDaichoSearchKey;
-import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.search.JuminKihonDaichoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IJuminKihonDaichoSearchKey;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.JuminKihonDaichoSearchKeyBuilder;
 import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
-import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.IJukiKojinFinder;
-import jp.co.ndensan.reams.ur.urz.realservice.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IJukiKojinFinder;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 

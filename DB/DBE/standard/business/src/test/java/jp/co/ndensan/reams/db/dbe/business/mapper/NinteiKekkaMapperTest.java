@@ -15,16 +15,18 @@ import jp.co.ndensan.reams.db.dbe.definition.valueobject.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.TokuteiShippeiCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.YokaigoJotaiKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.YokaigoJotaizoReiCode;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5002NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5002NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5002NinteiKekkaJohoEntityMock;
 import jp.co.ndensan.reams.db.dbe.business.helper.NinteiResultMock;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
-import jp.co.ndensan.reams.ur.urz.business.IKaigoServiceShurui;
-import jp.co.ndensan.reams.ur.urz.business._KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.business.IKaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.business._KaigoServiceShurui;
+import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoServiceBunruiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -113,7 +115,7 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
 
         @Test
         public void 申請書管理番号の設定がある時_toNinteiResultで生成した_NinteiResult_get申請書管理番号は_設定値を返す() {
-            entity.setShinseishoKanriNo(申請書管理番号);
+            entity.setShinseishoKanriNo(申請書管理番号.value());
             NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類01, 介護サービス種類02, 介護サービス種類03, 介護サービス種類04,
                     介護サービス種類05, 介護サービス種類06, 介護サービス種類07, 介護サービス種類08, 介護サービス種類09, 介護サービス種類10,
                     介護サービス種類11, 介護サービス種類12, 介護サービス種類13, 介護サービス種類14, 介護サービス種類15, 介護サービス種類16,
@@ -125,7 +127,7 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
 
         @Test
         public void 証記載保険者番号の設定がある時_toNinteiResultで生成した_NinteiResult_get証記載保険者番号は_設定値を返す() {
-            entity.setShoKisaiHokenshaNo(証記載保険者番号);
+            entity.setShoKisaiHokenshaNo(証記載保険者番号.value());
             NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類01, 介護サービス種類02, 介護サービス種類03, 介護サービス種類04,
                     介護サービス種類05, 介護サービス種類06, 介護サービス種類07, 介護サービス種類08, 介護サービス種類09, 介護サービス種類10,
                     介護サービス種類11, 介護サービス種類12, 介護サービス種類13, 介護サービス種類14, 介護サービス種類15, 介護サービス種類16,
@@ -137,7 +139,7 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
 
         @Test
         public void 被保険者番号の設定がある時_toNinteiResultで生成した_NinteiResult_get被保険者番号は_設定値を返す() {
-            entity.setHihokenshaNo(被保険者番号);
+            entity.setHihokenshaNo(被保険者番号.value());
             NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類01, 介護サービス種類02, 介護サービス種類03, 介護サービス種類04,
                     介護サービス種類05, 介護サービス種類06, 介護サービス種類07, 介護サービス種類08, 介護サービス種類09, 介護サービス種類10,
                     介護サービス種類11, 介護サービス種類12, 介護サービス種類13, 介護サービス種類14, 介護サービス種類15, 介護サービス種類16,
@@ -221,7 +223,7 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
 
         @Test
         public void 介護サービス種類の設定がある時_toNinteiResultで生成した_NinteiResult_get介護サービス種類は_設定値を返す() {
-            entity.setKaigoServiceShurui01(介護サービス種類01.getサービス種類コード());
+            entity.setKaigoServiceShurui01(介護サービス種類01.getサービス種類コード().value());
             NinteiResult result = sut.toNinteiResult(entity, 介護サービス種類01, 介護サービス種類02, 介護サービス種類03, 介護サービス種類04,
                     介護サービス種類05, 介護サービス種類06, 介護サービス種類07, 介護サービス種類08, 介護サービス種類09, 介護サービス種類10,
                     介護サービス種類11, 介護サービス種類12, 介護サービス種類13, 介護サービス種類14, 介護サービス種類15, 介護サービス種類16,
@@ -401,21 +403,21 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
         public void 申請書管理番号の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getShinseishoKanriNoは_設定値を返す() {
             when(ninteiResult.get申請書管理番号()).thenReturn(申請書管理番号);
             DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
-            assertThat(result.getShinseishoKanriNo(), is(申請書管理番号));
+            assertThat(result.getShinseishoKanriNo(), is(申請書管理番号.value()));
         }
 
         @Test
         public void 証記載保険者番号の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getShoKisaiHokenshaNoは_設定値を返す() {
             when(ninteiResult.get証記載保険者番号()).thenReturn(証記載保険者番号);
             DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
-            assertThat(result.getShoKisaiHokenshaNo(), is(証記載保険者番号));
+            assertThat(result.getShoKisaiHokenshaNo(), is(証記載保険者番号.value()));
         }
 
         @Test
         public void 被保険者番号の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getHihokenshaNoは_設定値を返す() {
             when(ninteiResult.get被保険者番号()).thenReturn(被保険者番号);
             DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
-            assertThat(result.getHihokenshaNo(), is(被保険者番号));
+            assertThat(result.getHihokenshaNo(), is(被保険者番号.value()));
         }
 
         @Test
@@ -506,7 +508,7 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
         public void 介護サービス種類の設定がある時_toDbT5002NinteiKekkaJohoEntityで生成した_DbT5002NinteiKekkaJohoEntity_getKaigoServiceShuruiは_設定値を返す() {
             when(ninteiResult.get介護サービス種類０１()).thenReturn(介護サービス種類01);
             DbT5002NinteiKekkaJohoEntity result = sut.toDbT5002NinteiKekkaJohoEntity(ninteiResult);
-            assertThat(result.getKaigoServiceShurui01(), is(介護サービス種類01.getサービス種類コード()));
+            assertThat(result.getKaigoServiceShurui01(), is(介護サービス種類01.getサービス種類コード().value()));
         }
 
         @Test
@@ -561,7 +563,7 @@ public class NinteiKekkaMapperTest extends DbeTestBase {
 
     private static IKaigoServiceShurui create介護サービス種類(String code) {
         return new _KaigoServiceShurui(
-                new RString(code), new Range<>(FlexibleYearMonth.MIN, FlexibleYearMonth.MAX), new RString("サービス種類名称"),
-                new RString("サービス種類名称略称"), new RString("サービス分類"));
+                new KaigoServiceShuruiCode(code), new Range<>(FlexibleYearMonth.MIN, FlexibleYearMonth.MAX), new RString("サービス種類名称"),
+                new RString("サービス種類名称略称"), new KaigoServiceBunruiCode(new RString("サービス分類")));
     }
 }

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 
+//TODO n3317塚田　これは「介護賦課業務のエラー」ではなく、賦課エラーリストのみで使うenumなので名前を変える
 /**
  * 介護賦課業務のエラーをまとめた列挙クラスです。
  *

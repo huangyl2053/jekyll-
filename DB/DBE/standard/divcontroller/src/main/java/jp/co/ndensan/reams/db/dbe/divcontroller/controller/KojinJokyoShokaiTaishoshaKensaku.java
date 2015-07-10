@@ -36,8 +36,7 @@ public class KojinJokyoShokaiTaishoshaKensaku {
         List<HashMap> targetSource = YamlLoader.DBE.loadAsList(new RString("DemoCity.yml"));
         ControlGenerator cg = new ControlGenerator(targetSource.get(0));
 
-        div.getHihokenshaFinder().getSearchCriteriaOfHihokensha().getTxtTuchishoNo().setDisplayNone(true);
-
+//        div.getHihokenshaFinder().getSearchCriteriaOfHihokensha().getTxtTuchishoNo().setDisplayNone(true);
         response.data = div;
         return response;
     }

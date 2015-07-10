@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  *
  * @author N3327 三浦 凌
  */
+@Deprecated
 public class ShikakuShutoku extends ShikakuIdoBaseItem<ShikakuShutokuJiyu> {
 
     /**
@@ -21,7 +22,7 @@ public class ShikakuShutoku extends ShikakuIdoBaseItem<ShikakuShutokuJiyu> {
     public static final ShikakuShutoku NOTHING;
 
     static {
-        NOTHING = new ShikakuShutoku(ShikakuShutokuJiyu.なし, FlexibleDate.MIN, FlexibleDate.MIN);
+        NOTHING = new ShikakuShutoku(ShikakuShutokuJiyu.EMPTY, FlexibleDate.MIN, FlexibleDate.MIN);
     }
 
     /**

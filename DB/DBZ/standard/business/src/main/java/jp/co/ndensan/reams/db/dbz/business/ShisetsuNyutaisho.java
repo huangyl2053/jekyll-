@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.DaichoType;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -47,12 +47,12 @@ public class ShisetsuNyutaisho {
             DaichoType 台帳種別, Range<FlexibleDate> 入所期間,
             NyushoShisetsu 入所施設, FlexibleDate 入所処理年月日, FlexibleDate 退所処理年月日) {
 
-        this.市町村コード = requireNonNull(市町村コード, Messages.E00001.replace("市町村コード").getMessage());
-        this.個人識別コード = requireNonNull(個人識別コード, Messages.E00001.replace("個人識別コード").getMessage());
-        this.処理日時 = requireNonNull(処理日時, Messages.E00001.replace("処理日時").getMessage());
-        this.台帳種別 = requireNonNull(台帳種別, Messages.E00001.replace("台帳種別").getMessage());
-        this.入所期間 = requireNonNull(入所期間, Messages.E00001.replace("入所期間").getMessage());
-        this.入所施設 = requireNonNull(入所施設, Messages.E00001.replace("入所施設").getMessage());
+        this.市町村コード = requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        this.個人識別コード = requireNonNull(個人識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("個人識別コード"));
+        this.処理日時 = requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
+        this.台帳種別 = requireNonNull(台帳種別, UrSystemErrorMessages.値がnull.getReplacedMessage("台帳種別"));
+        this.入所期間 = requireNonNull(入所期間, UrSystemErrorMessages.値がnull.getReplacedMessage("入所期間"));
+        this.入所施設 = requireNonNull(入所施設, UrSystemErrorMessages.値がnull.getReplacedMessage("入所施設"));
         this.入所処理年月日 = 入所処理年月日;
         this.退所処理年月日 = 退所処理年月日;
     }

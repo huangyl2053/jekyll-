@@ -1,0 +1,6 @@
+﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,A
+hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
+shoriTimeStamp,UDD018YMDHMS,YMDHMS,,,,,A
+tekiyoKaishiYM,UDD014YM,FlexibleYearMonth,,,,,A
+tekiyoShuryoYM,UDD014YM,FlexibleYearMonth,,,,,A
+gengakuGoHokenryoDankai,varchar,RString,,,,,A

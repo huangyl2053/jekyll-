@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -57,6 +57,6 @@ public enum KyufuSakuseiKubun {
                 return data;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("対応する給付実績情報作成区分").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する給付実績情報作成区分").evaluate());
     }
 }

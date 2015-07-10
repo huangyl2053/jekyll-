@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.uz.uza.core._ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.core.mybatis._DbSession;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.workflow.context._WorkFlowSession;
 import jp.co.ndensan.reams.uz.uza.workflow.flow.dac._FlowDefinitionDac;
 import jp.co.ndensan.reams.uz.uza.workflow.flow.valueobject.FlowKey;
@@ -25,6 +24,9 @@ public final class RootTitleSetter {
     private RootTitleSetter() {
     }
 
+    /**
+     * @return the Title
+     */
     public static RString getTitle() {
         try {
             SqlSession session = _DbSession.get(_WorkFlowSession.KEY);
@@ -34,8 +36,8 @@ public final class RootTitleSetter {
             return KaigoMenuType.getRootTitle(flowKey.getFlowId().getId());
         } catch (Throwable e) {
             //return (MenuType) ViewStateHolder.get("menuType", MenuType.class);
+            //TODO n3327 適切な戻り値を検討する必要がある。
+            return RString.EMPTY;
         }
-        return RString.EMPTY;
     }
-
 }

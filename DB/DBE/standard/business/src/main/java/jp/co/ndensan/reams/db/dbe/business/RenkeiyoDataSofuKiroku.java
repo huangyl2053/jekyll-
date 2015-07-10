@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.NinteiShinseijiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiChousaSoufuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiIkenshoSoufuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.SaiSoufuKubun;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 
@@ -52,13 +52,13 @@ public class RenkeiyoDataSofuKiroku {
             HikiwatashiKubun 引渡し区分, RDateTime 引渡し日時,
             SaiSoufuKubun 再送付区分, SaiChousaSoufuKubun 再調査送付区分,
             SaiIkenshoSoufuKubun 再意見書送付区分) throws NullPointerException {
-        Objects.requireNonNull(申請書管理番号, Messages.E00003.replace("申請書管理番号", getClass().getName()).getMessage());
-        Objects.requireNonNull(処理日時, Messages.E00003.replace("処理日時", getClass().getName()).getMessage());
-        Objects.requireNonNull(被保険者番号, Messages.E00003.replace("被保険者番号", getClass().getName()).getMessage());
-        Objects.requireNonNull(認定申請時区分, Messages.E00003.replace("認定申請時区分", getClass().getName()).getMessage());
-        Objects.requireNonNull(引渡し区分, Messages.E00003.replace("引渡し区分", getClass().getName()).getMessage());
-        Objects.requireNonNull(引渡し日時, Messages.E00003.replace("引渡し日時", getClass().getName()).getMessage());
-        Objects.requireNonNull(再送付区分, Messages.E00003.replace("再送付区分", getClass().getName()).getMessage());
+        Objects.requireNonNull(申請書管理番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("申請書管理番号", getClass().getName()));
+        Objects.requireNonNull(処理日時, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("処理日時", getClass().getName()));
+        Objects.requireNonNull(被保険者番号, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("被保険者番号", getClass().getName()));
+        Objects.requireNonNull(認定申請時区分, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定申請時区分", getClass().getName()));
+        Objects.requireNonNull(引渡し区分, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("引渡し区分", getClass().getName()));
+        Objects.requireNonNull(引渡し日時, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("引渡し日時", getClass().getName()));
+        Objects.requireNonNull(再送付区分, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("再送付区分", getClass().getName()));
 
         this.申請書管理番号 = 申請書管理番号;
         this.処理日時 = 処理日時;

@@ -15,4 +15,16 @@ import jp.co.ndensan.reams.db.dbz.persistence.IReplaceable;
  */
 public interface IShuJiiIryoKikanDac extends IReplaceable<DbT7011ShujiiIryoKikanJohoEntity>,
         IDeletable<DbT7011ShujiiIryoKikanJohoEntity> {
+
+    @Override
+    int insertOrUpdate(DbT7011ShujiiIryoKikanJohoEntity entity);
+
+    @Override
+    int insert(DbT7011ShujiiIryoKikanJohoEntity entity);
+
+    @Override
+    int update(DbT7011ShujiiIryoKikanJohoEntity entity);
+
+    @Override
+    int delete(DbT7011ShujiiIryoKikanJohoEntity entity);
 }

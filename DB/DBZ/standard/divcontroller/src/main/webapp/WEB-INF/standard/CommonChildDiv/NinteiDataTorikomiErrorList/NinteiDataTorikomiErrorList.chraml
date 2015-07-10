@@ -1,0 +1,151 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;NinteiDataTorikomiErrorList&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;NinteiDataTorikomiErrorList&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}" data-is-composite-control="true" data-control-name="DBZ.NinteiDataTorikomiErrorList"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel Width-G1 UzCompositeChild" id="NinteiDataTorikomiErrorList" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;NinteiDataTorikomiErrorList&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;NinteiDataTorikomiErrorList&quot;,&quot;title&quot;:&quot;データ取込エラー&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;NinteiDataTorikomiErrorList&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="NinteiDataTorikomiErrorList_panel_header_area" style="display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">データ取込エラー</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="NinteiDataTorikomiErrorList_panel_body_area"><div class="UzDataGrid JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="dgDataTorikomiErrorIchiran" style="width: 998px; height: 316px;" data-control-type="DataGrid" data-obj="{&quot;fieldName&quot;:&quot;dgDataTorikomiErrorIchiran&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DataGrid&quot;,&quot;width&quot;:&quot;998px&quot;,&quot;selectControlID&quot;:&quot;dgDataTorikomiErrorIchiran&quot;,&quot;height&quot;:&quot;316px&quot;,&quot;gridSetting&quot;:{&quot;rowHeight&quot;:25,&quot;isMultiSelectable&quot;:false,&quot;isShowHeader&quot;:true,&quot;isShowFilter&quot;:false,&quot;isShowFilterButton&quot;:false,&quot;isShowClearSortButton&quot;:false,&quot;isShowSelectedRowCount&quot;:false,&quot;isShowFooter&quot;:true,&quot;isShowRowState&quot;:false,&quot;columns&quot;:[{&quot;columnName&quot;:&quot;No&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;no&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:40,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;no&quot;},{&quot;columnName&quot;:&quot;保険者番号&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;hokenshaNo&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:100,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;hokenshaNo&quot;},{&quot;columnName&quot;:&quot;保険者&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;hokenshaMeisho&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:130,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;hokenshaMeisho&quot;},{&quot;columnName&quot;:&quot;被保番号&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;hihokenshaNo&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:110,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;hihokenshaNo&quot;},{&quot;columnName&quot;:&quot;認定申請日&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;ninteiShinseiYMD&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:85,&quot;visible&quot;:true,&quot;cellType&quot;:6,&quot;cellDetails&quot;:{&quot;cellType&quot;:6,&quot;disabled&quot;:false,&quot;readOnly&quot;:true,&quot;required&quot;:false,&quot;ymdKubun&quot;:2,&quot;displayFormat&quot;:0,&quot;onChange&quot;:&quot;&quot;,&quot;isSetValueToToolTip&quot;:false,&quot;isShowCalendarOpenerIcon&quot;:false},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;ninteiShinseiYMD&quot;},{&quot;columnName&quot;:&quot;申請区分<br>（申請時）&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;shinseiKubunShinseiji&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;shinseiKubunShinseiji&quot;},{&quot;columnName&quot;:&quot;申請区分<br>（法令）&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;shinseiKubunHorei&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:120,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:null,&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;shinseiKubunHorei&quot;},{&quot;columnName&quot;:&quot;エラー内容&quot;,&quot;headerHtml&quot;:&quot;&quot;,&quot;string&quot;:&quot;&quot;,&quot;toolTip&quot;:&quot;&quot;,&quot;sortKey&quot;:&quot;errorNaiyo&quot;,&quot;bgColor&quot;:0,&quot;width&quot;:275,&quot;visible&quot;:true,&quot;cellType&quot;:0,&quot;cellDetails&quot;:{&quot;cellType&quot;:0,&quot;isSetValueToToolTip&quot;:true},&quot;align&quot;:0,&quot;resize&quot;:true,&quot;isPrivateInfo&quot;:false,&quot;authorityMode&quot;:0,&quot;dataName&quot;:&quot;errorNaiyo&quot;}],&quot;header&quot;:{&quot;combineColumns&quot;:[],&quot;frozenColumn&quot;:&quot;&quot;,&quot;headerHeight&quot;:1,&quot;groupHeaderHeight&quot;:0},&quot;isShowSelectButtonColumn&quot;:false,&quot;isShowModifyButtonColumn&quot;:false,&quot;isShowDeleteButtonColumn&quot;:false,&quot;limitRowCount&quot;:0,&quot;selectedRowCount&quot;:0,&quot;selectLimitRowCount&quot;:0},&quot;confirmDialog&quot;:[{&quot;button&quot;:&quot;selectButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;modifyButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;},{&quot;button&quot;:&quot;deleteButton&quot;,&quot;showDialog&quot;:false,&quot;title&quot;:&quot;&quot;,&quot;messageBody&quot;:&quot;&quot;,&quot;okButtonValue&quot;:&quot;&quot;,&quot;cancelButtonValue&quot;:&quot;&quot;}],&quot;dataSource&quot;:[],&quot;filterList&quot;:[],&quot;gridAction&quot;:[]}"><div id="dgDataTorikomiErrorIchiran_grid_table" role="" style="width: 998px; height: 291px; position: relative;"></div><div id="dgDataTorikomiErrorIchiran_footer" style="width: 998px; height: 25px;"></div></div></div></div>            <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['NINTEIDATATORIKOMIERRORLIST'] = {};
+DBZ['NINTEIDATATORIKOMIERRORLIST'].NinteiDataTorikomiErrorListRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_NinteiDataTorikomiErrorList').getProperty();parameter0.dgDataTorikomiErrorIchiran = Uz.JSControlUtil.getJSControl(parentFieldName + '_dgDataTorikomiErrorIchiran').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (NinteiDataTorikomiErrorList) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        NinteiDataTorikomiErrorList.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "NinteiDataTorikomiErrorList";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.NinteiDataTorikomiErrorList.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.NinteiDataTorikomiErrorList.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.NinteiDataTorikomiErrorList = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.dgDataTorikomiErrorIchiran = function () {
+                return new UZA.DataGrid(this.convFiledName("dgDataTorikomiErrorIchiran"));
+            };
+            return Controls;
+        })();
+        NinteiDataTorikomiErrorList.Controls = Controls;
+    })(DBZ.NinteiDataTorikomiErrorList || (DBZ.NinteiDataTorikomiErrorList = {}));
+    var NinteiDataTorikomiErrorList = DBZ.NinteiDataTorikomiErrorList;
+})(DBZ || (DBZ = {}));
+﻿var DBZ;
+(function (DBZ) {
+    (function (NinteiDataTorikomiErrorList) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new NinteiDataTorikomiErrorList.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new NinteiDataTorikomiErrorList.PublicProperties(this.fieldName);
+            };
+            ModeController.prototype.TorikomiType = function () {
+                return new Modes.TorikomiType(this.controls);
+            };
+            return ModeController;
+        })();
+        NinteiDataTorikomiErrorList.ModeController = ModeController;
+
+        (function (Modes) {
+            var TorikomiType = (function () {
+                function TorikomiType(controls) {
+                    this.controls = controls;
+                }
+                TorikomiType.prototype.ShinseiJohoMode = function () {
+                    var gridSetting = this.controls.dgDataTorikomiErrorIchiran().gridSetting;
+                    gridSetting.columns[0].visible = true;
+                    gridSetting.columns[1].visible = true;
+                    gridSetting.columns[2].visible = true;
+                    gridSetting.columns[3].visible = true;
+                    gridSetting.columns[4].visible = true;
+                    gridSetting.columns[5].visible = true;
+                    gridSetting.columns[6].visible = false;
+                    gridSetting.columns[7].visible = true;
+                    this.controls.dgDataTorikomiErrorIchiran().gridSetting = gridSetting;
+                    this.controls.dgDataTorikomiErrorIchiran()._control.afterPropertiesSet();
+                };
+
+                TorikomiType.prototype.ChosaKekkaMode = function () {
+                    var gridSetting = this.controls.dgDataTorikomiErrorIchiran().gridSetting;
+
+                    gridSetting.columns[6].visible = false;
+
+                    this.controls.dgDataTorikomiErrorIchiran().gridSetting = gridSetting;
+                    this.controls.dgDataTorikomiErrorIchiran()._control.afterPropertiesSet();
+                };
+
+                TorikomiType.prototype.OrcaMode = function () {
+                    var gridSetting = this.controls.dgDataTorikomiErrorIchiran().gridSetting;
+
+                    gridSetting.columns[6].visible = false;
+
+                    this.controls.dgDataTorikomiErrorIchiran().gridSetting = gridSetting;
+                    this.controls.dgDataTorikomiErrorIchiran()._control.afterPropertiesSet();
+                };
+
+                TorikomiType.prototype.ShinsaKekkaMode = function () {
+                    var gridSetting = this.controls.dgDataTorikomiErrorIchiran().gridSetting;
+
+                    gridSetting.columns[6].visible = true;
+
+                    this.controls.dgDataTorikomiErrorIchiran().gridSetting = gridSetting;
+                    this.controls.dgDataTorikomiErrorIchiran()._control.afterPropertiesSet();
+                };
+
+                TorikomiType.prototype.NinteiKekkaMode = function () {
+                    var gridSetting = this.controls.dgDataTorikomiErrorIchiran().gridSetting;
+
+                    gridSetting.columns[6].visible = true;
+
+                    this.controls.dgDataTorikomiErrorIchiran().gridSetting = gridSetting;
+                    this.controls.dgDataTorikomiErrorIchiran()._control.afterPropertiesSet();
+                };
+                return TorikomiType;
+            })();
+            Modes.TorikomiType = TorikomiType;
+        })(NinteiDataTorikomiErrorList.Modes || (NinteiDataTorikomiErrorList.Modes = {}));
+        var Modes = NinteiDataTorikomiErrorList.Modes;
+    })(DBZ.NinteiDataTorikomiErrorList || (DBZ.NinteiDataTorikomiErrorList = {}));
+    var NinteiDataTorikomiErrorList = DBZ.NinteiDataTorikomiErrorList;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (NinteiDataTorikomiErrorList) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new NinteiDataTorikomiErrorList.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        NinteiDataTorikomiErrorList.PublicProperties = PublicProperties;
+    })(DBZ.NinteiDataTorikomiErrorList || (DBZ.NinteiDataTorikomiErrorList = {}));
+    var NinteiDataTorikomiErrorList = DBZ.NinteiDataTorikomiErrorList;
+})(DBZ || (DBZ = {}));
+</script></div>

@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.rstring;
 import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
 import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
 import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
-import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
-import jp.co.ndensan.reams.ur.urz.model.validations.validators.LetterValidator;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
+import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.ur.urz.model.validation.validators.LetterValidator;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -29,14 +29,14 @@ public enum CharType implements IValueObjectCheckable<RString> {
 
                 @Override
                 public boolean isValid(IValueObject<RString> v) {
-                    return LetterValidator.半角数字のみ.isValid(v);
+                    return LetterValidator.半角数字のみ().isValid(v);
                 }
 
                 @Override
                 public IValidationMessages check(IValueObject<RString> value, IValueObjectInfo objInfo) {
                     IValidationMessages messages = ValidationMessagesFactory.createInstance();
                     if (!isValid(value)) {
-                        messages.add(getMessage(), objInfo.getDisplayName().toString(), "半角数字のみ");
+                        messages.add(getMessage());//, objInfo.getDisplayName().toString(), "半角数字のみ");
                     }
                     return messages;
                 }
@@ -48,14 +48,14 @@ public enum CharType implements IValueObjectCheckable<RString> {
 
                 @Override
                 public boolean isValid(IValueObject<RString> v) {
-                    return LetterValidator.半角英数のみ.isValid(v);
+                    return LetterValidator.半角英数のみ().isValid(v);
                 }
 
                 @Override
                 public IValidationMessages check(IValueObject<RString> value, IValueObjectInfo objInfo) {
                     IValidationMessages messages = ValidationMessagesFactory.createInstance();
                     if (!isValid(value)) {
-                        messages.add(getMessage(), objInfo.getDisplayName().toString(), "半角英数のみ");
+                        messages.add(getMessage());//, objInfo.getDisplayName().toString(), "半角英数のみ");
                     }
                     return messages;
                 }

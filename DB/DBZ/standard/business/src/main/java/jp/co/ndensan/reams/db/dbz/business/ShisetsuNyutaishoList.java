@@ -8,7 +8,8 @@ package jp.co.ndensan.reams.db.dbz.business;
 import java.util.Iterator;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
@@ -27,7 +28,7 @@ public class ShisetsuNyutaishoList implements Iterable<ShisetsuNyutaisho> {
      */
     public ShisetsuNyutaishoList(List<ShisetsuNyutaisho> 施設入退所List) {
         this.施設入退所List = requireNonNull(施設入退所List,
-                Messages.E00001.replace("施設入退所List").getMessage());
+                UrSystemErrorMessages.値がnull.getReplacedMessage("施設入退所List"));
     }
 
     /**
@@ -43,7 +44,7 @@ public class ShisetsuNyutaishoList implements Iterable<ShisetsuNyutaisho> {
                 return 施設入退所;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("対応する施設入退所").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage().replace("対応する施設入退所").evaluate());
     }
 
     private boolean is入所(ShisetsuNyutaisho 施設入退所, FlexibleDate 基準日) {

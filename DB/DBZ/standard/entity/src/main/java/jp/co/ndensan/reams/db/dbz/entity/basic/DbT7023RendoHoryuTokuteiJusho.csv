@@ -1,0 +1,10 @@
+﻿kanriNo,varchar,RString,,,,,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,A
+jushoCode,UDD007ChoikiCode,ChoikiCode,,,,,A
+jusho,UDD046AtenaJusho,AtenaJusho,,,,,A
+banchiCode1,UDD006BanchiCode,BanchiCode,,,,,A
+banchiCode2,UDD006BanchiCode,BanchiCode,,,,,A
+banchiCode3,UDD006BanchiCode,BanchiCode,,,,,A
+banchi,UDD047AtenaBanchi,AtenaBanchi,,,,,A
+shisetsuShurui,varchar,RString,,,,,A
+shisetsuCode,varchar,RString,,,,,A

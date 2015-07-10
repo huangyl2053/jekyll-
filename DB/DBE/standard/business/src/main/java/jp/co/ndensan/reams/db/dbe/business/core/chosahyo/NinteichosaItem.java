@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinte
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinteichosaItemKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.chosahyo.INinteichosaItemSubGroup;
 import jp.co.ndensan.reams.db.dbe.definition.valueobject.NinteichosaItemNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
 
@@ -44,14 +44,14 @@ public class NinteichosaItem implements INinteichosaItem {
     public NinteichosaItem(INinteichosaItemGroup 調査項目グループ, INinteichosaItemSubGroup 調査項目サブグループ,
             int 調査項目グループ内番号, int 調査項目サブグループ内番号, NinteichosaItemNo 調査項目番号,
             INinteichosaItemKubun 調査項目区分, RString 表示名称, IAnswerItem 回答項目) {
-        this.調査項目グループ = requireNonNull(調査項目グループ, Messages.E00001.replace("調査項目グループ").getMessage());
-        this.調査項目サブグループ = requireNonNull(調査項目サブグループ, Messages.E00001.replace("調査項目サブグループ").getMessage());
+        this.調査項目グループ = requireNonNull(調査項目グループ, UrSystemErrorMessages.値がnull.getReplacedMessage("調査項目グループ"));
+        this.調査項目サブグループ = requireNonNull(調査項目サブグループ, UrSystemErrorMessages.値がnull.getReplacedMessage("調査項目サブグループ"));
         this.調査項目グループ内番号 = 調査項目グループ内番号;
         this.調査項目サブグループ内番号 = 調査項目サブグループ内番号;
-        this.調査項目番号 = requireNonNull(調査項目番号, Messages.E00001.replace("調査項目番号").getMessage());
-        this.調査項目区分 = requireNonNull(調査項目区分, Messages.E00001.replace("調査項目区分").getMessage());
-        this.表示名称 = requireNonNull(表示名称, Messages.E00001.replace("表示名称").getMessage());
-        this.回答項目 = requireNonNull(回答項目, Messages.E00001.replace("回答項目").getMessage());
+        this.調査項目番号 = requireNonNull(調査項目番号, UrSystemErrorMessages.値がnull.getReplacedMessage("調査項目番号"));
+        this.調査項目区分 = requireNonNull(調査項目区分, UrSystemErrorMessages.値がnull.getReplacedMessage("調査項目区分"));
+        this.表示名称 = requireNonNull(表示名称, UrSystemErrorMessages.値がnull.getReplacedMessage("表示名称"));
+        this.回答項目 = requireNonNull(回答項目, UrSystemErrorMessages.値がnull.getReplacedMessage("回答項目"));
     }
 
     @Override

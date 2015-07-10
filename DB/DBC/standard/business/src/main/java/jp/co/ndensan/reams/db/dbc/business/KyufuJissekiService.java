@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -40,12 +40,12 @@ public class KyufuJissekiService {
             Decimal 保険請求分請求額合計,
             Decimal サービス単位数合計,
             KyufuJissekiKeyInfo 給付実績キー情報) {
-        this.事業者番号 = requireNonNull(事業者番号, Messages.E00001.replace("事業者番号").getMessage());
+        this.事業者番号 = requireNonNull(事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("事業者番号"));
         this.利用者負担額合計 = 利用者負担額合計;
         this.単位数合計 = 単位数合計;
         this.保険請求分請求額合計 = 保険請求分請求額合計;
         this.サービス単位数合計 = サービス単位数合計;
-        this.給付実績キー情報 = requireNonNull(給付実績キー情報, Messages.E00001.replace("給付実績キー情報").getMessage());
+        this.給付実績キー情報 = requireNonNull(給付実績キー情報, UrSystemErrorMessages.値がnull.getReplacedMessage("給付実績キー情報"));
     }
 
     /**

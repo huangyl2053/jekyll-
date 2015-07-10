@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.HenkoHokenshaJohoDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -35,6 +36,12 @@ public class HenkoInputDiv extends Panel {
     private Button btnHenkoKakutei;
     @JsonProperty("btnHenkoTorikeshi")
     private Button btnHenkoTorikeshi;
+    @JsonProperty("henkojiShichosonCode")
+    private RString henkojiShichosonCode;
+    @JsonProperty("henkojiHihokenshaNo")
+    private RString henkojiHihokenshaNo;
+    @JsonProperty("henkojiShoriDatetime")
+    private RString henkojiShoriDatetime;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -102,19 +109,39 @@ public class HenkoInputDiv extends Panel {
         this.btnHenkoTorikeshi=btnHenkoTorikeshi;
     }
 
+    @JsonProperty("henkojiShichosonCode")
+    public RString getHenkojiShichosonCode() {
+        return henkojiShichosonCode;
+    }
+
+    @JsonProperty("henkojiShichosonCode")
+    public void setHenkojiShichosonCode(RString henkojiShichosonCode) {
+        this.henkojiShichosonCode=henkojiShichosonCode;
+    }
+
+    @JsonProperty("henkojiHihokenshaNo")
+    public RString getHenkojiHihokenshaNo() {
+        return henkojiHihokenshaNo;
+    }
+
+    @JsonProperty("henkojiHihokenshaNo")
+    public void setHenkojiHihokenshaNo(RString henkojiHihokenshaNo) {
+        this.henkojiHihokenshaNo=henkojiHihokenshaNo;
+    }
+
+    @JsonProperty("henkojiShoriDatetime")
+    public RString getHenkojiShoriDatetime() {
+        return henkojiShoriDatetime;
+    }
+
+    @JsonProperty("henkojiShoriDatetime")
+    public void setHenkojiShoriDatetime(RString henkojiShoriDatetime) {
+        this.henkojiShoriDatetime=henkojiShoriDatetime;
+    }
+
     /*
      * [ ショートカットの作成 ]
      */
-    @JsonIgnore
-    public DropDownList getDdlHenkoShozaiHokensha() {
-        return this.getHenkoHokenshaJoho().getDdlHenkoShozaiHokensha();
-    }
-
-    @JsonIgnore
-    public void  setDdlHenkoShozaiHokensha(DropDownList ddlHenkoShozaiHokensha) {
-        this.getHenkoHokenshaJoho().setDdlHenkoShozaiHokensha(ddlHenkoShozaiHokensha);
-    }
-
     @JsonIgnore
     public DropDownList getDdlHenkoSochimotoHokensha() {
         return this.getHenkoHokenshaJoho().getDdlHenkoSochimotoHokensha();

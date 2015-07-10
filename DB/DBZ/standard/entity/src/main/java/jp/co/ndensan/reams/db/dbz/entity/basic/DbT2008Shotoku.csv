@@ -1,0 +1,8 @@
+﻿shotokuNendo,UDD012YSeireki,FlexibleYear,,,,,A
+shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+rirekiNo,int4,int,,,,,A
+hiKazeiKubun,varchar,RString,,,,,A
+hiKazeiKubunGemmenGo,varchar,RString,,,,,A
+gokeiShotokuGaku,numeric,Decimal,,,,,A
+nenkiniShunyuGaku,numeric,Decimal,,,,,A
+gekihenKanwaKubun,varchar,RString,,,,,A

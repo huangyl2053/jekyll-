@@ -54,7 +54,7 @@ public class HihokenshashoSaikofuTest extends DbzTestBase {
 
         @Test(expected = NullPointerException.class)
         public void コンストラクタ引数の_帳票交付履歴ID_がnullのとき_NullPointerExceptionをスローする() {
-            HihokenshashoSaikofu sut = new HihokenshashoSaikofu(HihokenshashoSaikofuJiyu.なし, null);
+            HihokenshashoSaikofu sut = new HihokenshashoSaikofu(HihokenshashoSaikofuJiyu.EMPTY, null);
         }
     }
 

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller;
 
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.kaigokanryomessage.KaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.ur.urz.divcontroller.controller.KanryoMessage;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -31,6 +30,7 @@ public final class KaigoKanryoMessage {
      * @param messageTaisho2 完了メッセージ対象情報2
      */
     public static void setMessage(KaigoKanryoMessageDiv messageDiv, RString messageMain, RString messageTaisho1, RString messageTaisho2) {
+        //TODO n3327 プロダクトなのに実装が無いのはおかしい。必要ないならば削除し、使用するならば修正する。
     }
 
     /**
@@ -41,5 +41,6 @@ public final class KaigoKanryoMessage {
      * @param messageMain 完了メッセージメイン
      */
     public static void setMessage(KaigoKanryoMessageDiv messageDiv, RString messageMain) {
+        //TODO n3327 プロダクトなのに実装が無いのはおかしい。必要ないならば削除し、使用するならば修正する。
     }
 }

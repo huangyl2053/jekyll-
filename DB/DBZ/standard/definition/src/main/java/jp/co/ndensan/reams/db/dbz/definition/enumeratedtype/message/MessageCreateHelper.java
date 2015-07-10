@@ -13,12 +13,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N9606 漢那 憲作
  */
-final class MessageCreateHelper {
+//TODO n8178 城間篤人 URZにも同じクラスが存在するが、現在参照不可。URZのクラスが参照可能なように修正されるなら、
+//このクラスの処理をURを使用するように置き換えるか、このクラスを削除して、これを利用していたほかクラスのimportを修正する。 2015年2月
+public final class MessageCreateHelper {
 
     private MessageCreateHelper() {
     }
 
-    static String toCode(String prefix, int no) {
+    public static String toCode(String prefix, int no) {
 
         RString noString = new RString(Integer.toString(no));
         RString zeroPadded = noString.padZeroToLeft(5);

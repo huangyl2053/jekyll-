@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype;
 
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -15,7 +15,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum HihokenshashoSaikofuJiyu {
 
     /**
-     * 被保険者再交付事由がないことを表す。<br />
+     * 被保険者再交付事由が設定されていないことを表す。<br />
+     * コード : なし
+     */
+    EMPTY(""),
+    /**
+     * その他 <br />
      * コード : 00
      */
     なし("00"),
@@ -24,7 +29,7 @@ public enum HihokenshashoSaikofuJiyu {
      * コード : 99
      */
     その他("99");
-    private RString code;
+    private final RString code;
 
     private HihokenshashoSaikofuJiyu(String code) {
         this.code = new RString(code);
@@ -41,6 +46,7 @@ public enum HihokenshashoSaikofuJiyu {
 
     /**
      * 指定のコードに対応するHihokenshashoSaikofuJiyuを返します。
+     * 空文字列、もしくはnullを受け取った場合は<@code>HihokenshashoSaikofuJiyu.EMPTY</code>を返します。
      *
      * @param code コード
      * @return 指定のコードに対応するHihokenshashoSaikofuJiyu
@@ -48,11 +54,16 @@ public enum HihokenshashoSaikofuJiyu {
      * 指定のコードに対応するHihokenshashoSaikofuJiyuがないとき。
      */
     public static HihokenshashoSaikofuJiyu toValue(RString code) throws IllegalArgumentException {
+        if (code == null || code.isEmpty()) {
+            return EMPTY;
+        }
+
         for (HihokenshashoSaikofuJiyu target : values()) {
             if (target.getCode().equals(code)) {
                 return target;
             }
         }
-        throw new IllegalArgumentException(Messages.E00006.replace("コード:" + code + " に対応する被保険者証再交付事由").getMessage());
+        throw new IllegalArgumentException(UrErrorMessages.存在しない.getMessage()
+                .replace("コード:" + code + " に対応する被保険者証再交付事由").evaluate());
     }
 }

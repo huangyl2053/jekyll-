@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.common;
 import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectCheckable;
 import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.IValueObjectInfo;
 import jp.co.ndensan.reams.db.dbz.model.util.validation.valueobject.ValidationMessages;
-import jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessages;
-import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
+import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -69,7 +69,7 @@ public final class NotEmptyChecker {
         public IValidationMessages check(IValueObject v, IValueObjectInfo objInfo) {
             IValidationMessages messages = ValidationMessagesFactory.createInstance();
             if (!isValid(v)) {
-                messages.add(ValidationMessages.必須入力項目, objInfo.getDisplayName().toString());
+                messages.add(ValidationMessages.必須入力項目);//, objInfo.getDisplayName().toString());
             }
             return messages;
         }

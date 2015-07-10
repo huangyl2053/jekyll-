@@ -1,0 +1,5 @@
+﻿hoshuTankaTekiyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,A
+hoshuTankaTekiyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,A
+gogitaiChoKubunCode,UDD035Code,Code,,,,,A
+ninteiShinsaHoshuTanka,int4,int,,,,,A
+kazeiHikazeiKubun,bpchar,RString,,,,,A

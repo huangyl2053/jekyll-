@@ -8,7 +8,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.YokaigoNinteiProgress;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.ConsentsToEnkitsuchiHakko;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5005NinteiShinchokuJohoEntity;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
  * 認定進捗情報を変換するMapperクラスです。
@@ -30,7 +30,7 @@ public final class NinteiShinchokuJohoMapper {
      * @return 認定進捗情報
      */
     public static YokaigoNinteiProgress toNinteiShinchokuJoho(DbT5005NinteiShinchokuJohoEntity entity) {
-        requireNonNull(entity, Messages.E00003.replace("認定進捗情報エンティティ", "認定進捗情報").getMessage());
+        requireNonNull(entity, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定進捗情報エンティティ", "認定進捗情報"));
         return new YokaigoNinteiProgress(
                 entity.getShinseishoKanriNo(),
                 entity.getNinteiShinseiJohoTorokuYMD(),
@@ -58,7 +58,7 @@ public final class NinteiShinchokuJohoMapper {
      * @return 認定進捗情報エンティティ
      */
     public static DbT5005NinteiShinchokuJohoEntity toNinteiShinchokuJohoEntity(YokaigoNinteiProgress yokaigoninteiProgress) {
-        requireNonNull(yokaigoninteiProgress, Messages.E00003.replace("認定進捗情報", "認定進捗情報エンティティ").getMessage());
+        requireNonNull(yokaigoninteiProgress, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("認定進捗情報", "認定進捗情報エンティティ"));
         DbT5005NinteiShinchokuJohoEntity entity = new DbT5005NinteiShinchokuJohoEntity();
 
         entity.setShinseishoKanriNo(yokaigoninteiProgress.get申請書管理番号());

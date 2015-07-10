@@ -1,0 +1,151 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;KekkaShosaiJoho&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KekkaShosaiJoho&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[{&quot;key&quot;:&quot;ShinseishoKanriNo&quot;,&quot;controlName&quot;:&quot;KekkaShosaiJoho.hdnShinseishoKanriNo&quot;},{&quot;key&quot;:&quot;DatabaseSubGyomuCode&quot;,&quot;controlName&quot;:&quot;KekkaShosaiJoho.hdnDatabaseSubGyomuCode&quot;},{&quot;key&quot;:&quot;KoroshoIfShikibetsuCode&quot;,&quot;controlName&quot;:&quot;KekkaShosaiJoho.hdnKoroshoIfShikibetsuCode&quot;}],&quot;dialogOkEventNameForDialog&quot;:&quot;onClick_btnToroku&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;onClick_btnModoru&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.KekkaShosaiJoho"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel Width-G11 UzCompositeChild" id="KekkaShosaiJoho" style="margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KekkaShosaiJoho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G11&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;KekkaShosaiJoho&quot;,&quot;title&quot;:&quot;結果詳細情報&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KekkaShosaiJoho&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;hdnShinseishoKanriNo&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hdnDatabaseSubGyomuCode&quot;,&quot;value&quot;:&quot;&quot;},{&quot;propertyName&quot;:&quot;hdnKoroshoIfShikibetsuCode&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KekkaShosaiJoho_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">結果詳細情報</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="KekkaShosaiJoho_panel_body_area"><div class="JSControl UzCompositeControl Width-XS FloatLeft" id="ccdNinteiInput" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdNinteiInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ccdNinteiInput&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;NinteiInput&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;NinteiInput&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.NinteiInput"></div><div class="JSControl UzCompositeControl FloatLeft Width-XS" id="ccdShinseiSonotaJohoInput" style="margin: 0px; opacity: 1;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdShinseiSonotaJohoInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ccdShinseiSonotaJohoInput&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;ShinseiSonotaJohoInput&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ShinseiSonotaJohoInput&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.ShinseiSonotaJohoInput"></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtShinseiKubunShinsei" style="width: 249px; height: 21px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShinseiKubunShinsei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;txtShinseiKubunShinsei_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;申請区分(申請時)&quot;,&quot;labelLWidth&quot;:&quot;130px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShinseiKubunShinsei_labelL" style="width: 130px;"><span>申請区分(申請時)</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana readonlyColor Width-S" id="txtShinseiKubunShinsei_core" type="text" placeholder=""></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtShinseiKubunLaw" style="width: 236px; height: 21px; position: relative; opacity: 1;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtShinseiKubunLaw&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;txtShinseiKubunLaw_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;申請区分(法令)&quot;}"><span class="word-wrap-break-word Label-L text-align-right Width-S" id="txtShinseiKubunLaw_labelL"><span>申請区分(法令)</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana Width-S readonlyColor" id="txtShinseiKubunLaw_core" type="text" placeholder=""></div><button class="UzButton JSControl controlMargin-M FloatRight marginLeft-XS marginRight-L Width-S ClearFloat UzCompositeChild" id="btnModoru" style="opacity: 0.8;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnModoru&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;wrap&quot;:true,&quot;float&quot;:2,&quot;marginRight&quot;:&quot;L&quot;,&quot;selectControlID&quot;:&quot;btnModoru&quot;,&quot;onClick&quot;:&quot;onClick_btnModoru&quot;,&quot;text&quot;:&quot;戻る&quot;}"><span>戻る</span></button><button class="UzButton JSControl controlMargin-M FloatRight marginLeft-XS marginRight-XS Width-S UzCompositeChild" id="btnToroku" style="opacity: 1;" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnToroku&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;S&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnToroku&quot;,&quot;onClick&quot;:&quot;onClick_btnToroku&quot;,&quot;text&quot;:&quot;登録する&quot;}"><span>登録する</span></button></div></div>  
+       
+   
+   
+   
+   
+     
+     <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['KEKKASHOSAIJOHO'] = {};
+DBZ['KEKKASHOSAIJOHO'].KekkaShosaiJohoRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KekkaShosaiJoho').getProperty();parameter0.ccdNinteiInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_ccdNinteiInput').getPostParameter();parameter0.ccdShinseiSonotaJohoInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_ccdShinseiSonotaJohoInput').getPostParameter();parameter0.txtShinseiKubunShinsei = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShinseiKubunShinsei').getProperty();parameter0.txtShinseiKubunLaw = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShinseiKubunLaw').getProperty();parameter0.btnModoru = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnModoru').getProperty();parameter0.btnToroku = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnToroku').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (KekkaShosaiJoho) {
+        var Events = (function () {
+            function Events() {
+            }
+            Events.onClick_btnModoru = function () {
+                return "onClick_btnModoru";
+            };
+
+            Events.onClick_btnToroku = function () {
+                return "onClick_btnToroku";
+            };
+            return Events;
+        })();
+        KekkaShosaiJoho.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KekkaShosaiJoho";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KekkaShosaiJoho.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.KekkaShosaiJoho.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KekkaShosaiJoho = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ccdNinteiInput = function () {
+                return new DBZ.NinteiInput.ModeController(this.convFiledName("ccdNinteiInput"));
+            };
+
+            Controls.prototype.ccdShinseiSonotaJohoInput = function () {
+                return new DBZ.ShinseiSonotaJohoInput.ModeController(this.convFiledName("ccdShinseiSonotaJohoInput"));
+            };
+
+            Controls.prototype.txtShinseiKubunShinsei = function () {
+                return new UZA.TextBox(this.convFiledName("txtShinseiKubunShinsei"));
+            };
+
+            Controls.prototype.txtShinseiKubunLaw = function () {
+                return new UZA.TextBox(this.convFiledName("txtShinseiKubunLaw"));
+            };
+
+            Controls.prototype.btnModoru = function () {
+                return new UZA.Button(this.convFiledName("btnModoru"));
+            };
+
+            Controls.prototype.btnToroku = function () {
+                return new UZA.Button(this.convFiledName("btnToroku"));
+            };
+            return Controls;
+        })();
+        KekkaShosaiJoho.Controls = Controls;
+    })(DBZ.KekkaShosaiJoho || (DBZ.KekkaShosaiJoho = {}));
+    var KekkaShosaiJoho = DBZ.KekkaShosaiJoho;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (KekkaShosaiJoho) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KekkaShosaiJoho.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new KekkaShosaiJoho.PublicProperties(this.fieldName);
+            };
+            ModeController.prototype.ShoriType = function () {
+                return new Modes.ShoriType(this.controls);
+            };
+            return ModeController;
+        })();
+        KekkaShosaiJoho.ModeController = ModeController;
+
+        (function (Modes) {
+            var ShoriType = (function () {
+                function ShoriType(controls) {
+                    this.controls = controls;
+                }
+                ShoriType.prototype.SoshitsuMode = function () {
+                    this.controls.ccdNinteiInput().shoriType().InputMode();
+                    this.controls.ccdShinseiSonotaJohoInput().ShoriType().SoshitsuMode();
+                    this.controls.btnToroku().displayNone = false;
+                };
+                ShoriType.prototype.ShokkenTorikeshiInputMode = function () {
+                    this.controls.ccdNinteiInput().shoriType().IchibuSoshitsuMode();
+                    this.controls.ccdShinseiSonotaJohoInput().ShoriType().TokushuTsuikaMode();
+                    this.controls.btnToroku().displayNone = false;
+                };
+
+                ShoriType.prototype.ShokaiMode = function () {
+                    this.controls.ccdNinteiInput().shoriType().ShokaiMode();
+                    this.controls.ccdShinseiSonotaJohoInput().ShoriType().ShokaiMode();
+                    this.controls.btnToroku().displayNone = true;
+                };
+                return ShoriType;
+            })();
+            Modes.ShoriType = ShoriType;
+        })(KekkaShosaiJoho.Modes || (KekkaShosaiJoho.Modes = {}));
+        var Modes = KekkaShosaiJoho.Modes;
+    })(DBZ.KekkaShosaiJoho || (DBZ.KekkaShosaiJoho = {}));
+    var KekkaShosaiJoho = DBZ.KekkaShosaiJoho;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (KekkaShosaiJoho) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KekkaShosaiJoho.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        KekkaShosaiJoho.PublicProperties = PublicProperties;
+    })(DBZ.KekkaShosaiJoho || (DBZ.KekkaShosaiJoho = {}));
+    var KekkaShosaiJoho = DBZ.KekkaShosaiJoho;
+})(DBZ || (DBZ = {}));
+</script></div>

@@ -1,0 +1,112 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;KaigoNinteiShinseishaInfo&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KaigoNinteiShinseishaInfo&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.KaigoNinteiShinseishaInfo"><div class="StateChangable UzPanel JSControl FloatLeft marginTop-Default marginBottom-Default marginLeft-Default Panel-Shadow UzCommonChildDivPanel marginRight-Default UzCompositeChild" id="KaigoNinteiShinseishaInfo" style="width: 1110px; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KaigoNinteiShinseishaInfo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1110px&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;KaigoNinteiShinseishaInfo&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KaigoNinteiShinseishaInfo&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[{&quot;propertyName&quot;:&quot;hdnKaigoDonyuDantaiKeitai&quot;,&quot;value&quot;:&quot;&quot;}],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KaigoNinteiShinseishaInfo_panel_header_area" style="width: auto; display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content ui-droppable ui-sortable panelPaddingDelete" id="KaigoNinteiShinseishaInfo_panel_body_area"><div class="JSControl UzCompositeControl FloatLeft Width-XS" id="ccdKaigoNinteiAtenaInfo" style="margin: 0px; opacity: 1;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdKaigoNinteiAtenaInfo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ccdKaigoNinteiAtenaInfo&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;KaigoNinteiAtenaInfo&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KaigoNinteiAtenaInfo&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.KaigoNinteiAtenaInfo"></div><div title="" class="JSControl UzCompositeControl  Width-XS FloatLeft" id="ccdKaigoShikakuKihon" style="margin: 0em;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdKaigoShikakuKihon&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;ccdKaigoShikakuKihon&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;relation&quot;:[],&quot;packageName&quot;:&quot;kaigoshikakukihon&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KaigoShikakuKihon&quot;,&quot;marginTop&quot;:&quot;0em&quot;,&quot;marginBottom&quot;:&quot;0em&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[{&quot;modeKey&quot;:&quot;HihokenrirekiNashiMode&quot;,&quot;modeValue&quot;:&quot;HihokenrirekiNashi&quot;},{&quot;modeKey&quot;:&quot;NinteirirekiNashiMode&quot;,&quot;modeValue&quot;:&quot;NinteirirekiAri&quot;}],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}" data-is-composite-control="true" data-control-name="DBZ.KaigoShikakuKihon"></div></div></div>  
+   
+     <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['KAIGONINTEISHINSEISHAINFO'] = {};
+DBZ['KAIGONINTEISHINSEISHAINFO'].KaigoNinteiShinseishaInfoRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KaigoNinteiShinseishaInfo').getProperty();parameter0.ccdKaigoNinteiAtenaInfo = Uz.JSControlUtil.getJSControl(parentFieldName + '_ccdKaigoNinteiAtenaInfo').getPostParameter();parameter0.ccdKaigoShikakuKihon = Uz.JSControlUtil.getJSControl(parentFieldName + '_ccdKaigoShikakuKihon').getPostParameter();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (KaigoNinteiShinseishaInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KaigoNinteiShinseishaInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KaigoNinteiShinseishaInfo";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KaigoNinteiShinseishaInfo.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.KaigoNinteiShinseishaInfo.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KaigoNinteiShinseishaInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ccdKaigoNinteiAtenaInfo = function () {
+                return new DBZ.KaigoNinteiAtenaInfo.ModeController(this.convFiledName("ccdKaigoNinteiAtenaInfo"));
+            };
+
+            Controls.prototype.ccdKaigoShikakuKihon = function () {
+                return new DBZ.KaigoShikakuKihon.ModeController(this.convFiledName("ccdKaigoShikakuKihon"));
+            };
+            return Controls;
+        })();
+        KaigoNinteiShinseishaInfo.Controls = Controls;
+    })(DBZ.KaigoNinteiShinseishaInfo || (DBZ.KaigoNinteiShinseishaInfo = {}));
+    var KaigoNinteiShinseishaInfo = DBZ.KaigoNinteiShinseishaInfo;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (KaigoNinteiShinseishaInfo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KaigoNinteiShinseishaInfo.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new KaigoNinteiShinseishaInfo.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KaigoNinteiShinseishaInfo.ModeController = ModeController;
+
+        (function (Modes) {
+            var AtenaMode = (function () {
+                function AtenaMode(controls) {
+                    this.controls = controls;
+                }
+                AtenaMode.prototype.AtenaMode = function () {
+                    this.controls.ccdKaigoNinteiAtenaInfo().AtenaType().AtenaMode;
+                };
+
+                AtenaMode.prototype.AtenNoneMode = function () {
+                    this.controls.ccdKaigoNinteiAtenaInfo().AtenaType().AtenaNonMode;
+                };
+                return AtenaMode;
+            })();
+            Modes.AtenaMode = AtenaMode;
+        })(KaigoNinteiShinseishaInfo.Modes || (KaigoNinteiShinseishaInfo.Modes = {}));
+        var Modes = KaigoNinteiShinseishaInfo.Modes;
+    })(DBZ.KaigoNinteiShinseishaInfo || (DBZ.KaigoNinteiShinseishaInfo = {}));
+    var KaigoNinteiShinseishaInfo = DBZ.KaigoNinteiShinseishaInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KaigoNinteiShinseishaInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KaigoNinteiShinseishaInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        KaigoNinteiShinseishaInfo.PublicProperties = PublicProperties;
+    })(DBZ.KaigoNinteiShinseishaInfo || (DBZ.KaigoNinteiShinseishaInfo = {}));
+    var KaigoNinteiShinseishaInfo = DBZ.KaigoNinteiShinseishaInfo;
+})(DBZ || (DBZ = {}));
+</script></div>

@@ -1,9 +1,10 @@
-﻿/// <reference path="../d.ts/jquery.d.ts" />
-/// <reference path="../d.ts/UzViewControls.d.ts" />
-/// <reference path="../d.ts/UzaConverter.d.ts" />
+﻿/// <reference path='ShisetsuNyutaishoRirekiKanri_Design.ts' />
 
-/// <reference path='ShisetsuNyutaishoRirekiKanri_Design.ts' />
+// 共有子Divモード記述TypeScriptソースです。
+
+
 module DBZ {
+
     export module ShisetsuNyutaishoRirekiKanri {
 
         export class ModeController {
@@ -21,7 +22,9 @@ module DBZ {
                     "表示Heightサイズ",
                     "表示widthサイズ",
                     "台帳種別の列を",
-                    "明細表示モード"
+                    "明細表示モード",
+                    "施設種類の列を",
+                    "利用"
                 ];
             }
 
@@ -52,6 +55,16 @@ module DBZ {
             public 明細表示モード() {
                 return new Modes.明細表示モード(this.controls);
             }
+
+            public 施設種類の列を() {
+                return new Modes.施設種類の列を(this.controls);
+            }
+
+            public 利用() {
+                return new Modes.利用(this.controls);
+            }
+
+
         }
 
         export module Modes {
@@ -302,11 +315,77 @@ module DBZ {
                 }
             }
 
+            
+            export class 施設種類の列を {
+                private controls: Controls;
+                private gridWidthCalc;
+
+                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                public 表示しない(): void {
+                    var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
+
+                    var columns = gridSetting.columns;
+                    for (var i = 0; i < columns.length; i++) {
+                        if (columns[i].dataName === 'shisetsuShurui') {
+                            columns[i].visible = false;
+                        }
+                    }
+                    gridSetting.columns = columns;
+
+                    this.controls.ccdShisetsuJoho().施設種類().施設種類を表示しない();
+
+                    this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
+                    this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                }
+
+                public 表示する(): void {
+                    var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
+
+                    var columns = gridSetting.columns;
+                    for (var i = 0; i < columns.length; i++) {
+                        if (columns[i].dataName === 'shisetsuShurui') {
+                            columns[i].visible = true;
+                        }
+                    }
+                    gridSetting.columns = columns;
+
+                    this.controls.ccdShisetsuJoho().施設種類().施設種類を表示する();
+                    this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
+                    this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                }
+            }
+
+
+            export class 利用 {       
+         private controls: Controls;
+                                constructor(controls: Controls) {
+                    this.controls = controls;
+                }
+
+                public 台帳種別表示機能(): void {
+                }
+
+                public 全施設対象機能(): void {
+                }
+
+                public 被保険者対象機能(): void {
+                }
+
+                public 他市町村住所地特例者対象機能(): void {
+                }
+
+                public 適用除外者対象機能(): void {
+                }
+
+
+            }
+
         }
     }
 }
-
-
 
 
 module DBZ {

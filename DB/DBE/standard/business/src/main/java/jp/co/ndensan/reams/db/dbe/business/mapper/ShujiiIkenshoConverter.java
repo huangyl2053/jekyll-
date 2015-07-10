@@ -8,7 +8,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkensho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoItemForResult;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.IShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ShujiiIkenshoItem;
-import jp.co.ndensan.reams.ur.urz.definition.Messages;
+import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
@@ -28,7 +28,7 @@ class ShujiiIkenshoConverter {
      * @param 意見書 意見書
      */
     ShujiiIkenshoConverter(ShujiiIkensho 意見書) {
-        this.意見書 = requireNonNull(意見書, Messages.E00001.replace("意見書").getMessage());
+        this.意見書 = requireNonNull(意見書, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書"));
     }
 
     /**

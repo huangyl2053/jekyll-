@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.basic;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.entity.basic.DbT5001NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.DbT5001NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.persistence.IInsertable;
@@ -48,4 +48,13 @@ public interface INinteiShinseiJohoDac extends IInsertable<DbT5001NinteiShinseiJ
      */
     @Transaction
     List<DbT5001NinteiShinseiJohoEntity> selectAllBy取下げ年月日(ShoKisaiHokenshaNo 証記載保険者番号, Range<RDate> 取下げ年月日範囲);
+
+    /**
+     * 受け取った認定申請情報エンティティをDBへ登録します。
+     *
+     * @param entity 認定申請情報エンティティ
+     * @return 登録に成功した数
+     */
+    @Transaction
+    int insert(DbT5001NinteiShinseiJohoEntity entity);
 }
