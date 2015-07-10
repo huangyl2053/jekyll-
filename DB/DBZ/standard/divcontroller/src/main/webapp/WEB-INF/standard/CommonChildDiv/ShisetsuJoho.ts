@@ -1,4 +1,8 @@
-﻿/// <reference path='ShisetsuJoho_Design.ts' />
+﻿/// <reference path="../d.ts/jquery.d.ts" />
+/// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+
+/// <reference path='ShisetsuJoho_Design.ts' />
 module DBZ {
     export module ShisetsuJoho {
         export class ModeController {
@@ -19,8 +23,7 @@ module DBZ {
             }
 
             public priorities(): Array {
-				return [
-					"利用機能",
+                return [
                     "台帳種別",
                     "施設種類",
                     "入力補助",
@@ -28,9 +31,6 @@ module DBZ {
                 ];
             }
 
-			public 利用機能() {
-				return new Modes.利用機能(this.controls);
-			}
 
             public 台帳種別() {
                 return new Modes.台帳種別(this.controls);
@@ -52,29 +52,6 @@ module DBZ {
 
         export module Modes {
 
-
-			export class 利用機能 {
-				private controls: Controls;
-
-				constructor(controls: Controls) {
-					this.controls = controls;
-				}
-
-				public 台帳種別表示機能(): void {
-				}
-
-				public 全施設対象機能(): void {
-				}
-
-				public 被保険者対象機能(): void {
-				}
-
-				public 他市町村住所地特例者対象機能(): void {
-				}
-
-				public 適用除外者対象機能(): void {
-				}
-			}
 
             export class 台帳種別 {
                 private controls: Controls;
