@@ -106,9 +106,9 @@ public class DbT7051KoseiShichosonMasterDac implements IModifiable<IKoseiShichos
     public ItemList<DbT7051KoseiShichosonMasterEntity> selectAll() {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.select().
+        return ItemList.of(accessor.select().
                 table(DbT7051KoseiShichosonMaster.class).
-                toList(DbT7051KoseiShichosonMasterEntity.class);
+                toList(DbT7051KoseiShichosonMasterEntity.class));
     }
 
     /**

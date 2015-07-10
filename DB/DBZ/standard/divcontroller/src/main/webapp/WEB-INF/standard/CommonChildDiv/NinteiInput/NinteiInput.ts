@@ -1,5 +1,5 @@
 /// <reference path='NinteiInput_Design.ts' />
-module DBZ
+module DBD
 {
     export module NinteiInput
     {
@@ -19,14 +19,14 @@ module DBZ
             public PublicProperties() {
                 return new PublicProperties(this.fieldName);
             }
-            public shoriType() {
-                return new Modes.shoriType(this.controls);
+            public ShoriType() {
+                return new Modes.ShoriType(this.controls);
             }
         }
 
         export module Modes {
 
-            export class shoriType {
+            export class ShoriType {
 
                 private controls: Controls;
 
@@ -44,7 +44,9 @@ module DBZ
                     this.controls.txtYukoKaishiYMD().readOnly = false;
                     this.controls.txtYukoShuryoYMD().readOnly = false;
 
+                    this.controls.radNinteiKubun().selectedItem = "0";
                     this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = false;
 
                     this.controls.dgServiceIchiran().readOnly = false;
 
@@ -68,8 +70,9 @@ module DBZ
                     this.controls.txtYukoKaishiYMD().readOnly = false;
                     this.controls.txtYukoShuryoYMD().readOnly = false;
 
-                    this.controls.radNinteiKubun().readOnly = false;
-                    this.controls.radNinteiKubun().selectedItem = "key0";
+                    this.controls.radNinteiKubun().selectedItem = "0";
+                    this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = false;
 
                     this.controls.dgServiceIchiran().readOnly = false;
 
@@ -91,8 +94,9 @@ module DBZ
                     this.controls.txtYukoKaishiYMD().readOnly = false;
                     this.controls.txtYukoShuryoYMD().readOnly = false;
 
-                    this.controls.radNinteiKubun().readOnly = false;
-                    this.controls.radNinteiKubun().selectedItem = "key0";
+                    this.controls.radNinteiKubun().selectedItem = "0";
+                    this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = false;
 
                     this.controls.dgServiceIchiran().readOnly = false;
 
@@ -114,8 +118,9 @@ module DBZ
                     this.controls.txtYukoKaishiYMD().readOnly = false;
                     this.controls.txtYukoShuryoYMD().readOnly = false;
 
-                    this.controls.radNinteiKubun().readOnly = false;
-                    this.controls.radNinteiKubun().selectedItem = "key0";
+                    this.controls.radNinteiKubun().selectedItem = "0";
+                    this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = false;
 
                     this.controls.dgServiceIchiran().readOnly = false;
 
@@ -137,8 +142,9 @@ module DBZ
                     this.controls.txtYukoKaishiYMD().readOnly = true;
                     this.controls.txtYukoShuryoYMD().readOnly = true;
 
+                    this.controls.radNinteiKubun().selectedItem = "0";
                     this.controls.radNinteiKubun().readOnly = true;
-                    this.controls.radNinteiKubun().selectedItem = "key0";
+                    this.controls.radNinteiKubun().displayNone = false;
 
                     this.controls.dgServiceIchiran().readOnly = true;
 
@@ -160,6 +166,8 @@ module DBZ
                     this.controls.txtYukoShuryoYMD().readOnly = false;
 
                     this.controls.radNinteiKubun().readOnly = false;
+                    this.controls.radNinteiKubun().displayNone = false;
+
 
                     this.controls.dgServiceIchiran().readOnly = true;
 
@@ -171,7 +179,7 @@ module DBZ
                     this.controls.btnAfter18Month().disabled = false;
                     this.controls.btnAfter24Month().disabled = false;
                 }
-                public ShokkenMode(): void {
+                public ShokkenTsuikaMode(): void {
                     this.controls.txtNinteiYMD().readOnly = false;
                     this.controls.txtShinsakaiIken().readOnly = false;
                     this.controls.txtYokaigodoCode().readOnly = false;
@@ -180,6 +188,29 @@ module DBZ
                     this.controls.txtYukoShuryoYMD().readOnly = false;
 
                     this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = false;
+
+
+                    this.controls.dgServiceIchiran().readOnly = false;
+
+                    this.controls.chkMinashiKoshinNintei().readOnly = true;
+
+                    this.controls.btnYokaigodoGuide().disabled = false;
+                    this.controls.btnAfter6Month().disabled = false;
+                    this.controls.btnAfter12Month().disabled = false;
+                    this.controls.btnAfter18Month().disabled = false;
+                    this.controls.btnAfter24Month().disabled = false;
+                }
+                public ShokkenShuseiMode(): void {
+                    this.controls.txtNinteiYMD().readOnly = false;
+                    this.controls.txtShinsakaiIken().readOnly = false;
+                    this.controls.txtYokaigodoCode().readOnly = false;
+                    this.controls.txtYokaigodoName().readOnly = true;
+                    this.controls.txtYukoKaishiYMD().readOnly = false;
+                    this.controls.txtYukoShuryoYMD().readOnly = false;
+
+                    this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = true;
 
                     this.controls.dgServiceIchiran().readOnly = false;
 
@@ -199,7 +230,9 @@ module DBZ
                     this.controls.txtYukoKaishiYMD().readOnly = false;
                     this.controls.txtYukoShuryoYMD().readOnly = true;
 
+                    this.controls.radNinteiKubun().selectedItem = "0";
                     this.controls.radNinteiKubun().readOnly = true;
+                    this.controls.radNinteiKubun().displayNone = true;
 
                     this.controls.dgServiceIchiran().readOnly = true;
 
@@ -216,7 +249,7 @@ module DBZ
     }
 }
 
-module DBZ
+module DBD
 {
     export module NinteiInput
     {

@@ -1,0 +1,138 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KaigoToiawase&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.KaigoToiawase"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText Panel-Shadow UzCommonChildDivPanel Width-G1 UzCompositeChild" id="KaigoToiawase" style="margin: 0px; width: auto;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KaigoToiawase&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;KaigoToiawase&quot;,&quot;title&quot;:&quot;問い合わせ先&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KaigoToiawase&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KaigoToiawase_panel_header_area" style="display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">問い合わせ先</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="KaigoToiawase_panel_body_area"><div title="" class="UzDropDownList WithLabel JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="ddlHakkoBusho" style="width: 348px; height: 20px; position: relative; opacity: 1;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlHakkoBusho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;260px&quot;,&quot;selectControlID&quot;:&quot;ddlHakkoBusho_core&quot;,&quot;required&quot;:true,&quot;labelLText&quot;:&quot;発行部署&quot;,&quot;labelLWidth&quot;:&quot;85px&quot;,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;value0&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;value1&quot;}]}"><span class="word-wrap-break-word Label-L text-align-right" id="ddlHakkoBusho_labelL" style="width: 85px;"><span class="requireMark">*</span><span>発行部署</span></span><select class="CoreElement required" id="ddlHakkoBusho_core" style="width: 260px;"><option value="key0">value0</option><option value="key1">value1</option></select></div><div class="StateChangable UzPanel JSControl FloatLeft ClearFloat UzPanelAndText Width-G12 UzCompositeChild" id="InjiNaiyo" style="margin: 0px; width: auto;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;InjiNaiyo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G12&quot;,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;InjiNaiyo&quot;,&quot;title&quot;:&quot;印字情報・印字方法&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;canOpenAndClose&quot;:false,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;panelDisplay&quot;:1,&quot;focusPositionID&quot;:&quot;BasicControlArea&quot;,&quot;canPost&quot;:false}"><div class="UzPanelHeader clearBackground" id="InjiNaiyo_panel_header_area" style="display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n iconSpan-GroupBox" style="visibility: hidden;"></span><span class="textSpan textSpan-GroupBox textSpan-GroupBoxWithoutIcon">印字情報・印字方法</span><div class="groupBoxBorder" style="display: block;"></div></div><div class="UzPanelBody ui-widget-content ui-droppable ui-sortable panelPadding-M Panel-GroupBox" id="InjiNaiyo_panel_body_area"><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlBusho" style="width: 333px; height: 20px; display: block; position: relative; opacity: 1;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlBusho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;260px&quot;,&quot;selectControlID&quot;:&quot;ddlBusho_core&quot;,&quot;required&quot;:true,&quot;labelLText&quot;:&quot;印字部署&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;value0&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;value1&quot;}]}"><span class="word-wrap-break-word Label-L text-align-right" id="ddlBusho_labelL" style="width: 70px;"><span class="requireMark">*</span><span>印字部署</span></span><select class="CoreElement required" id="ddlBusho_core" style="width: 260px;"><option value="key0">value0</option><option value="key1">value1</option></select></div><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="dllBushomeiKuhakuUMu" style="width: 180px; height: 20px; position: relative; opacity: 1;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;dllBushomeiKuhakuUMu&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;60px&quot;,&quot;selectControlID&quot;:&quot;dllBushomeiKuhakuUMu_core&quot;,&quot;required&quot;:true,&quot;labelLText&quot;:&quot;部署名前空白&quot;,&quot;selectedItem&quot;:&quot;key0&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;あり&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;なし&quot;}]}"><span class="word-wrap-break-word Label-L text-align-right Width-S" id="dllBushomeiKuhakuUMu_labelL"><span class="requireMark">*</span><span>部署名前空白</span></span><select class="CoreElement required" id="dllBushomeiKuhakuUMu_core" style="width: 60px;"><option value="key0">あり</option><option value="key1">なし</option></select></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M ClearFloat UzCompositeChild" id="txtName" style="width: 347px; height: 20px; position: relative; opacity: 1;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;270px&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtName_core&quot;,&quot;required&quot;:true,&quot;placeHolder&quot;:&quot;１２３４５６７８９０１２３４５&quot;,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;担当者&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtName_labelL" style="width: 70px;"><span class="requireMark">*</span><span>担当者</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana required" id="txtName_core" style="width: 270px;" type="text" placeholder="１２３４５６７８９０１２３４５"></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtTelNo" style="width: 249px; height: 20px; position: relative; opacity: 1;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtTelNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;140px&quot;,&quot;selectControlID&quot;:&quot;txtTelNo_core&quot;,&quot;required&quot;:true,&quot;placeHolder&quot;:&quot;123456789901234&quot;,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;電話番号&quot;,&quot;labelLWidth&quot;:&quot;102px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtTelNo_labelL" style="width: 102px;"><span class="requireMark">*</span><span>電話番号</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana required" id="txtTelNo_core" style="width: 140px;" type="text" placeholder="123456789901234"></div><div class="WithLabel TextBoxOuterDiv JSControl FloatLeft marginRight-XS controlMargin-M marginLeft-XS UzCompositeChild" id="txtNaisenNo" style="width: 104px; height: 20px; position: relative; opacity: 1;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtNaisenNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;57px&quot;,&quot;selectControlID&quot;:&quot;txtNaisenNo_core&quot;,&quot;placeHolder&quot;:&quot;123456&quot;,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;内線&quot;,&quot;labelLWidth&quot;:&quot;40px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtNaisenNo_labelL" style="width: 40px;"><span>内線</span></span><input class="UzTextBox CoreElement text-align-left ime-mode-Hiragana" id="txtNaisenNo_core" style="width: 57px;" type="text" placeholder="123456"></div><div class="UzHorizontalLine JSControl controlMargin-M Width-Default ClearFloat UzCompositeChild" id="lin1" style="opacity: 1;" data-control-type="HorizontalLine" data-obj="{&quot;fieldName&quot;:&quot;lin1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;HorizontalLine&quot;,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;lin1&quot;}"></div><div class="UzDropDownList WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="ddlKenmeiFuyo" style="width: 180px; height: 20px; position: relative; opacity: 1;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlKenmeiFuyo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;ddlKenmeiFuyo_core&quot;,&quot;required&quot;:true,&quot;labelLText&quot;:&quot;県名&quot;,&quot;labelLWidth&quot;:&quot;60px&quot;,&quot;selectedItem&quot;:&quot;key1&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;付与する&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;付与しない&quot;}]}"><span class="word-wrap-break-word Label-L text-align-right" id="ddlKenmeiFuyo_labelL" style="width: 60px;"><span class="requireMark">*</span><span>県名</span></span><select class="CoreElement required Width-S" id="ddlKenmeiFuyo_core"><option value="key0">付与する</option><option value="key1">付与しない</option></select></div><div class="UzDropDownList WithLabel JSControl FloatLeft marginRight-XS controlMargin-M UzCompositeChild" id="ddlShichoshonMei" style="width: 190px; height: 20px; margin-left: 40px; position: relative; opacity: 1;" data-control-type="DropDownList" data-obj="{&quot;fieldName&quot;:&quot;ddlShichoshonMei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;DropDownList&quot;,&quot;width&quot;:&quot;S&quot;,&quot;marginLeft&quot;:&quot;40px&quot;,&quot;selectControlID&quot;:&quot;ddlShichoshonMei_core&quot;,&quot;required&quot;:true,&quot;labelLText&quot;:&quot;市町村名&quot;,&quot;labelLWidth&quot;:&quot;70px&quot;,&quot;selectedItem&quot;:&quot;key1&quot;,&quot;dataSource&quot;:[{&quot;key&quot;:&quot;key0&quot;,&quot;value&quot;:&quot;付与する&quot;},{&quot;key&quot;:&quot;key1&quot;,&quot;value&quot;:&quot;付与しない&quot;}]}"><span class="word-wrap-break-word Label-L text-align-right" id="ddlShichoshonMei_labelL" style="width: 70px;"><span class="requireMark">*</span><span>市町村名</span></span><select class="CoreElement required Width-S" id="ddlShichoshonMei_core"><option value="key0">付与する</option><option value="key1">付与しない</option></select></div><div class="WithLabel TextBoxOuterDiv UzTextBoxYubinNo JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M ClearFloat UzCompositeChild" id="txtYubinNo" style="width: 147px; position: relative; opacity: 1;" data-control-type="TextBoxYubinNo" data-obj="{&quot;fieldName&quot;:&quot;txtYubinNo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxYubinNo&quot;,&quot;width&quot;:&quot;80px&quot;,&quot;disabled&quot;:true,&quot;wrap&quot;:true,&quot;selectControlID&quot;:&quot;txtYubinNo_core&quot;,&quot;required&quot;:true,&quot;placeHolder&quot;:&quot;123-4567&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[],&quot;labelLText&quot;:&quot;〒&quot;,&quot;labelLWidth&quot;:&quot;60px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtYubinNo_labelL" style="width: 60px;"><span>〒</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Off disabledColor" id="txtYubinNo_core" style="width: 80px;" type="text" placeholder="123-4567"></div><div class="UzTextBoxMultiLine TextBoxOuterDiv WithLabel JSControl FloatLeft marginRight-XS controlMargin-M UzCompositeChild" id="txtJusho" style="width: 642px; height: 56px; margin-left: 0px; position: relative; opacity: 1;" data-control-type="TextBoxMultiLine" data-obj="{&quot;fieldName&quot;:&quot;txtJusho&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxMultiLine&quot;,&quot;width&quot;:&quot;600px&quot;,&quot;disabled&quot;:true,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtJusho_text_area&quot;,&quot;height&quot;:&quot;35px&quot;,&quot;labelLText&quot;:&quot;住所&quot;,&quot;labelLWidth&quot;:&quot;35px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtJusho_labelL" style="width: 35px; vertical-align: top;"><span>住所</span></span><span class="CoreElement UzTextBox" id="txtJusho_core" style="width: 600px;"><textarea tabindex="-1" class="UzTextBox UzTextBoxMultiLine disabledColor DispJcountLine" id="txtJusho_text_area" style="width: 604px; height: 39px;" placeholder="" type="text" data-control-type="TextBoxMultiLine"></textarea></span><div class="UzTextBoxMultiLineCountDiv" id="txtJusho_text_countDiv"><span class="word-wrap-break-word Label-L text-align-right" id="txtJusho_labelL_count" style="width: 35px;"></span><span class="UzTextBoxMultiLine" id="txtJusho_text_count">残り20文字</span></div></div></div></div></div></div>    
+      
+  
+             
+   
+     
+   <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['KAIGOTOIAWASE'] = {};
+DBZ['KAIGOTOIAWASE'].KaigoToiawaseRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KaigoToiawase').getProperty();parameter0.ddlHakkoBusho = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlHakkoBusho').getProperty();parameter0.InjiNaiyo = Uz.JSControlUtil.getJSControl(parentFieldName + '_InjiNaiyo').getProperty();parameter0.InjiNaiyo.ddlBusho = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlBusho').getProperty();parameter0.InjiNaiyo.dllBushomeiKuhakuUMu = Uz.JSControlUtil.getJSControl(parentFieldName + '_dllBushomeiKuhakuUMu').getProperty();parameter0.InjiNaiyo.txtName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtName').getProperty();parameter0.InjiNaiyo.txtTelNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtTelNo').getProperty();parameter0.InjiNaiyo.txtNaisenNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtNaisenNo').getProperty();parameter0.InjiNaiyo.lin1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_lin1').getProperty();parameter0.InjiNaiyo.ddlKenmeiFuyo = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlKenmeiFuyo').getProperty();parameter0.InjiNaiyo.ddlShichoshonMei = Uz.JSControlUtil.getJSControl(parentFieldName + '_ddlShichoshonMei').getProperty();parameter0.InjiNaiyo.txtYubinNo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtYubinNo').getProperty();parameter0.InjiNaiyo.txtJusho = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtJusho').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (KaigoToiawase) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KaigoToiawase.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KaigoToiawase";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.KaigoToiawase.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.KaigoToiawase.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KaigoToiawase = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ddlHakkoBusho = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlHakkoBusho"));
+            };
+
+            Controls.prototype.InjiNaiyo = function () {
+                return new UZA.Panel(this.convFiledName("InjiNaiyo"));
+            };
+
+            Controls.prototype.ddlBusho = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlBusho"));
+            };
+
+            Controls.prototype.dllBushomeiKuhakuUMu = function () {
+                return new UZA.DropDownList(this.convFiledName("dllBushomeiKuhakuUMu"));
+            };
+
+            Controls.prototype.txtName = function () {
+                return new UZA.TextBox(this.convFiledName("txtName"));
+            };
+
+            Controls.prototype.txtTelNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtTelNo"));
+            };
+
+            Controls.prototype.txtNaisenNo = function () {
+                return new UZA.TextBox(this.convFiledName("txtNaisenNo"));
+            };
+
+            Controls.prototype.lin1 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("lin1"));
+            };
+
+            Controls.prototype.ddlKenmeiFuyo = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlKenmeiFuyo"));
+            };
+
+            Controls.prototype.ddlShichoshonMei = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlShichoshonMei"));
+            };
+
+            Controls.prototype.txtYubinNo = function () {
+                return new UZA.TextBoxYubinNo(this.convFiledName("txtYubinNo"));
+            };
+
+            Controls.prototype.txtJusho = function () {
+                return new UZA.TextBoxMultiLine(this.convFiledName("txtJusho"));
+            };
+            return Controls;
+        })();
+        KaigoToiawase.Controls = Controls;
+    })(DBZ.KaigoToiawase || (DBZ.KaigoToiawase = {}));
+    var KaigoToiawase = DBZ.KaigoToiawase;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (KaigoToiawase) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KaigoToiawase.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new KaigoToiawase.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KaigoToiawase.ModeController = ModeController;
+    })(DBZ.KaigoToiawase || (DBZ.KaigoToiawase = {}));
+    var KaigoToiawase = DBZ.KaigoToiawase;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (KaigoToiawase) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KaigoToiawase.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        KaigoToiawase.PublicProperties = PublicProperties;
+    })(DBZ.KaigoToiawase || (DBZ.KaigoToiawase = {}));
+    var KaigoToiawase = DBZ.KaigoToiawase;
+})(DBZ || (DBZ = {}));
+</script></div>
