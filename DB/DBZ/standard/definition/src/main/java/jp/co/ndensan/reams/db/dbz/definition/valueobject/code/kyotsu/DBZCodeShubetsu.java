@@ -4,9 +4,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.valueobject.code.kyotsu;
 
-import jp.co.ndensan.reams.ur.urz.definition.code.ICodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.util.code.ICodeShubetsu;
 
 /**
  * コード種別を表す列挙型です。

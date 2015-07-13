@@ -10,19 +10,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * kaijojiHokenshaJoho のクラスファイル 
+ * KaijojiHokenshaJoho のクラスファイル 
  * 
  * @author 自動生成
  */
-public class kaijojiHokenshaJohoDiv extends Panel {
+public class KaijojiHokenshaJohoDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlKaijojiShozaiHokensha")
-    private DropDownList ddlKaijojiShozaiHokensha;
     @JsonProperty("ddlKaijojiSochimotoHokensha")
     private DropDownList ddlKaijojiSochimotoHokensha;
     @JsonProperty("ddlKaijojiKyuHokensha")
@@ -36,16 +34,6 @@ public class kaijojiHokenshaJohoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ddlKaijojiShozaiHokensha")
-    public DropDownList getDdlKaijojiShozaiHokensha() {
-        return ddlKaijojiShozaiHokensha;
-    }
-
-    @JsonProperty("ddlKaijojiShozaiHokensha")
-    public void setDdlKaijojiShozaiHokensha(DropDownList ddlKaijojiShozaiHokensha) {
-        this.ddlKaijojiShozaiHokensha=ddlKaijojiShozaiHokensha;
-    }
-
     @JsonProperty("ddlKaijojiSochimotoHokensha")
     public DropDownList getDdlKaijojiSochimotoHokensha() {
         return ddlKaijojiSochimotoHokensha;
