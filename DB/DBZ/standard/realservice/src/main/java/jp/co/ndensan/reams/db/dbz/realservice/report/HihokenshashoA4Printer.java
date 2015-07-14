@@ -15,8 +15,8 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoA4;
-import jp.co.ndensan.reams.ur.urz.business.IAssociation;
-import jp.co.ndensan.reams.ua.uax.business.atesaki.ITsuchishoAtesaki;
+import jp.co.ndensan.reams.ur.urz.business.Association;
+import jp.co.ndensan.reams.ua.uax.business.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ur.urz.business.report.IReportBuilder;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 
@@ -74,9 +74,9 @@ public class HihokenshashoA4Printer {
 
         HihokenshashoModel target = new HihokenshashoModel(daichoModel, kojin, shikakuHakkoModel, position);
 
-        ITsuchishoAtesaki tsuchishoAtesaki = printerBase.getTsuchishoAtesaki(
+        IAtesaki tsuchishoAtesaki = printerBase.getTsuchishoAtesaki(
                 target.getShikakuHakko().get交付日(), target.getKojinJoho().get識別コード());
-        IAssociation assosiation = printerBase.getAssociation();
+        Association assosiation = printerBase.getAssociation();
 
         formType = HihokenshashoA4.class;
         reportId = REPORT_ID_A4;
