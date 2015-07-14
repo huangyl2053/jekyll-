@@ -38,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ChoiceResultItem.*;
 import static jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun.*;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.model.IryokikanModel;
+import jp.co.ndensan.reams.ux.uxx.business.IryoKikan;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import static org.mockito.Mockito.spy;
 

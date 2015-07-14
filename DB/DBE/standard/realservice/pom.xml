@@ -17,19 +17,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxRealService</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
-            <artifactId>UaxRealService</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urd</groupId>
-            <artifactId>UrdRealService</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urf</groupId>
-            <artifactId>UrfRealService</artifactId>
+            <version>${jp.co.ndensan.reams.dbxVersion}</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
@@ -69,7 +57,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzPersistence</artifactId>
-            <version>${project.version}</version>
+            <version>${jp.co.ndensan.reams.dbzVersion}</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
@@ -93,11 +81,6 @@
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.uz</groupId>
-            <artifactId>framework</artifactId>
-            <version>${jp.co.ndensan.reams.uzVersion}</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
