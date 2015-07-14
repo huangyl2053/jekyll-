@@ -35,6 +35,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.uz</groupId>
             <artifactId>framework</artifactId>
+            <version>${jp.co.ndensan.reams.uzVersion}</version>
         </dependency>
     </dependencies>
 </project>

@@ -74,6 +74,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxDefinition</artifactId>
+            <version>${jp.co.ndensan.reams.uaVersion}</version>
         </dependency>
     </dependencies>
 </project>
