@@ -45,12 +45,8 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
-            <artifactId>DbdRealService</artifactId>
-        </dependency>
-        <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
-            <artifactId>DbzTestHelper</artifactId>
+            <artifactId>DbzRealService</artifactId>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
@@ -70,9 +66,15 @@
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxBusiness</artifactId>
+            <version>${jp.co.ndensan.reams.uaVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
+            <artifactId>UaxRealService</artifactId>
             <version>${jp.co.ndensan.reams.uaVersion}</version>
         </dependency>
         <dependency>

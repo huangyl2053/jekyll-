@@ -42,13 +42,13 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
-            <artifactId>DbdBatchService</artifactId>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzBatchService</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
-            <artifactId>DbdBusiness</artifactId>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzBusiness</artifactId>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
