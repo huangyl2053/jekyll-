@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.Formatted;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Width;
@@ -50,11 +50,11 @@ public class DateOfBirthEditorA4Base {
         Formatted formattedDate;
 
         if (kojin.is日本人()) {
-            formattedDate = toWareki(kojin.get生年月日().toDate());
+            formattedDate = toWareki(kojin.get生年月日().toFlexibleDate());
             source.setUmareG(formattedDate.getEra());
             source.setUmareYy(formattedDate.getYear().replace(formattedDate.getEra(), RString.EMPTY));
         } else {
-            formattedDate = toSeireki(kojin.get生年月日().toDate());
+            formattedDate = toSeireki(kojin.get生年月日().toFlexibleDate());
             source.setUmareYyyy(formattedDate.getYear());
         }
 
@@ -62,11 +62,11 @@ public class DateOfBirthEditorA4Base {
         source.setUmareDd(formattedDate.getDay());
     }
 
-    private Formatted toSeireki(RDate date) {
+    private Formatted toSeireki(FlexibleDate date) {
         return date.seireki().separator(Separator.NONE).fillType(FillType.BLANK).width(Width.HALF);
     }
 
-    private Formatted toWareki(RDate date) {
+    private Formatted toWareki(FlexibleDate date) {
         return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.NONE)
                 .fillType(FillType.BLANK).width(Width.HALF);
     }

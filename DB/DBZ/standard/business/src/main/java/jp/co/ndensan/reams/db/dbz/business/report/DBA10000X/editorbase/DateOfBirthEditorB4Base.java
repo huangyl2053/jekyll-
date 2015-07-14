@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.Formatted;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Width;
@@ -54,11 +54,11 @@ public class DateOfBirthEditorB4Base {
     public void set生年月日(IHihokenshashoB4CommonEditData source) {
 
         IKojin kojin = hihokenshashoModel.getKojinJoho();
-        RDate date = kojin.get生年月日().toDate();
+        FlexibleDate date = kojin.get生年月日().toFlexibleDate();
         Formatted formattedDate;
 
         if (kojin.is日本人()) {
-            formattedDate = toWareki(kojin.get生年月日().toDate());
+            formattedDate = toWareki(kojin.get生年月日().toFlexibleDate());
             switch (formattedDate.getEra().toString()) {
                 case "明治":
                     daubTaisho(source);
@@ -76,13 +76,13 @@ public class DateOfBirthEditorB4Base {
                     setUmareDate(source, formattedDate);
                     break;
                 default:
-                    formattedDate = toSeireki(kojin.get生年月日().toDate());
+                    formattedDate = toSeireki(kojin.get生年月日().toFlexibleDate());
                     setUmareSDate(source, formattedDate);
                     break;
 
             }
         } else {
-            formattedDate = toSeireki(kojin.get生年月日().toDate());
+            formattedDate = toSeireki(kojin.get生年月日().toFlexibleDate());
             daubMeiji(source);
             daubTaisho(source);
             daubShowa(source);
@@ -91,11 +91,11 @@ public class DateOfBirthEditorB4Base {
 
     }
 
-    private Formatted toSeireki(RDate date) {
+    private Formatted toSeireki(FlexibleDate date) {
         return date.seireki().separator(Separator.NONE).fillType(FillType.BLANK).width(Width.HALF);
     }
 
-    private Formatted toWareki(RDate date) {
+    private Formatted toWareki(FlexibleDate date) {
         return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.NONE)
                 .fillType(FillType.BLANK).width(Width.HALF);
     }

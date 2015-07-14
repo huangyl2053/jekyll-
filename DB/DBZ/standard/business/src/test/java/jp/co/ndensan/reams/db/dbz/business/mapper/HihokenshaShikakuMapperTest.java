@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutoku
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.entity.helper.DbT1001HihokenshaDaichoEntityMock;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KofuJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KofuJiyuCodeValue;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -668,7 +668,7 @@ public class HihokenshaShikakuMapperTest extends DbzTestBase {
             @Before
             public void setUp() {
                 entity.setSaikofuKubun(kubun.getCode());
-                entity.setSaikofuJiyuCode(new KofuJiyu(reason.getCode()).toRString());
+                entity.setSaikofuJiyuCode(new KofuJiyuCodeValue(reason.getCode()).toRString());
                 entity.setChohyoKofuRirekiID(chohyoID.value());
                 converted = sut.toHihokenshaShikaku(entity);
             }

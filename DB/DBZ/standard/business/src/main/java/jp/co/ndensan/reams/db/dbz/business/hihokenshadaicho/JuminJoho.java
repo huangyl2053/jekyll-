@@ -52,7 +52,7 @@ public class JuminJoho {
         modelStrBuilder.append(BREAK_STRING);
         modelStrBuilder.append(model.get性別().getName());
         modelStrBuilder.append(BREAK_STRING);
-        modelStrBuilder.append(model.get生年月日().toDate().wareki().eraType(EraType.KANJI_RYAKU)
+        modelStrBuilder.append(model.get生年月日().toFlexibleDate().wareki().eraType(EraType.KANJI_RYAKU)
                 .firstYear(FirstYear.GAN_NEN).fillType(FillType.NONE).toDateString());
         modelStrBuilder.append(BREAK_STRING);
         modelStrBuilder.append(model.get地区コード3().getColumnValue().substring(SHICHOSON_CODE_INDEX));

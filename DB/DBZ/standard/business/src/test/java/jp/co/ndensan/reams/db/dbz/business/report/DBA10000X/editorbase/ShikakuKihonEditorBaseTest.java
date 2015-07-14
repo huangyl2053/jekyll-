@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.IAssociation;
+import jp.co.ndensan.reams.ur.urz.business.Association;
 import jp.co.ndensan.reams.ur.urz.business.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -44,7 +44,7 @@ public class ShikakuKihonEditorBaseTest {
     private static IHihokenshashoCommonEditData target;
     private static ShikakuKihonEditorBase sut;
     private static HihokenshashoModel model;
-    private static IAssociation association;
+    private static Association association;
     private static HihokenshashoPrintConfig printConfig;
     private static HihokenshashoJushoEditConfig hihoJushoEdit;
     private static ChohyoKyotsuJushoEditConfig kyotsuJushoEdit;
@@ -54,7 +54,7 @@ public class ShikakuKihonEditorBaseTest {
         @Test(expected = NullPointerException.class)
         public void 被保険者証Modelにnullが渡された場合_NullPointerExceptionが発生する() {
             model = null;
-            association = mock(IAssociation.class);
+            association = mock(Association.class);
             printConfig = mock(HihokenshashoPrintConfig.class);
             hihoJushoEdit = mock(HihokenshashoJushoEditConfig.class);
             kyotsuJushoEdit = mock(ChohyoKyotsuJushoEditConfig.class);
@@ -76,7 +76,7 @@ public class ShikakuKihonEditorBaseTest {
         @Test(expected = NullPointerException.class)
         public void 被保険者証表示方法コンフィグにnullが渡された場合_NullPointerExceptionが発生する() {
             model = mock(HihokenshashoModel.class);
-            association = mock(IAssociation.class);
+            association = mock(Association.class);
             printConfig = null;
             hihoJushoEdit = mock(HihokenshashoJushoEditConfig.class);
             kyotsuJushoEdit = mock(ChohyoKyotsuJushoEditConfig.class);
@@ -87,7 +87,7 @@ public class ShikakuKihonEditorBaseTest {
         @Test(expected = NullPointerException.class)
         public void 被保険者証住所編集方法コンフィグにnullが渡された場合_NullPointerExceptionが発生する() {
             model = mock(HihokenshashoModel.class);
-            association = mock(IAssociation.class);
+            association = mock(Association.class);
             printConfig = mock(HihokenshashoPrintConfig.class);
             hihoJushoEdit = null;
             kyotsuJushoEdit = mock(ChohyoKyotsuJushoEditConfig.class);
@@ -98,7 +98,7 @@ public class ShikakuKihonEditorBaseTest {
         @Test(expected = NullPointerException.class)
         public void 帳票共通住所編集方法コンフィグにnullが渡された場合_NullPointerExceptionが発生する() {
             model = mock(HihokenshashoModel.class);
-            association = mock(IAssociation.class);
+            association = mock(Association.class);
             printConfig = mock(HihokenshashoPrintConfig.class);
             hihoJushoEdit = mock(HihokenshashoJushoEditConfig.class);
             kyotsuJushoEdit = null;
@@ -120,7 +120,7 @@ public class ShikakuKihonEditorBaseTest {
             hihoNoStringSpace = new RString("     12345");
 
             model = createMockModel(hihoNoStringZero);
-            association = mock(IAssociation.class);
+            association = mock(Association.class);
             hihoJushoEdit = mock(HihokenshashoJushoEditConfig.class);
             kyotsuJushoEdit = mock(ChohyoKyotsuJushoEditConfig.class);
         }
@@ -424,7 +424,7 @@ public class ShikakuKihonEditorBaseTest {
             nameKana = new RString("ﾀﾅｶ ﾌﾟﾙｰﾄｩ");
 
             model = createMockModel(name, nameKana);
-            association = mock(IAssociation.class);
+            association = mock(Association.class);
             hihoJushoEdit = mock(HihokenshashoJushoEditConfig.class);
             kyotsuJushoEdit = mock(ChohyoKyotsuJushoEditConfig.class);
         }
@@ -492,7 +492,7 @@ public class ShikakuKihonEditorBaseTest {
             dayStr = new RString(" 7");
 
             model = createMockModel(kofuDate);
-            association = mock(IAssociation.class);
+            association = mock(Association.class);
             printConfig = mock(HihokenshashoPrintConfig.class);
             hihoJushoEdit = mock(HihokenshashoJushoEditConfig.class);
             kyotsuJushoEdit = mock(ChohyoKyotsuJushoEditConfig.class);
@@ -548,7 +548,7 @@ public class ShikakuKihonEditorBaseTest {
             otherJiyu = new RString("01");
             saikofuJiyu = new RString("90");
 
-            association = mock(IAssociation.class);
+            association = mock(Association.class);
             printConfig = mock(HihokenshashoPrintConfig.class);
             hihoJushoEdit = mock(HihokenshashoJushoEditConfig.class);
             kyotsuJushoEdit = mock(ChohyoKyotsuJushoEditConfig.class);
@@ -609,7 +609,7 @@ public class ShikakuKihonEditorBaseTest {
             //TODO n8178 城間 DBAのコードマスタに対応するEnumをkyotsu-productにて作成後、Enumから値を取得するように修正。 2015年1月8日
             hokenshaNo = new RString("123456");
 
-            association = mock(IAssociation.class);
+            association = mock(Association.class);
             printConfig = mock(HihokenshashoPrintConfig.class);
             hihoJushoEdit = mock(HihokenshashoJushoEditConfig.class);
             kyotsuJushoEdit = mock(ChohyoKyotsuJushoEditConfig.class);

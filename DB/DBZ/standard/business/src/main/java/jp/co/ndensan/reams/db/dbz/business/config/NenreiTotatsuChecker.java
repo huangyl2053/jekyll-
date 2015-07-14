@@ -7,9 +7,11 @@ package jp.co.ndensan.reams.db.dbz.business.config;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.ConfigKeysNenreiTotatsuKijunJoho;
+import jp.co.ndensan.reams.ua.uax.business.AgeCalculator;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ua.uax.business.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.IDateOfBirth;
+import jp.co.ndensan.reams.ur.urz.definition.shikibetsutaisho.enumeratedtype.JuminJotai;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 
@@ -65,16 +67,6 @@ public final class NenreiTotatsuChecker {
      */
     public INenreiTotatsuJudicative personBornOn(IDateOfBirth dateOfBirth) {
         return checker.setDateOfBirth(dateOfBirth);
-    }
-
-    /**
-     * 年齢到達チェック対象の生年月日を設定します。
-     *
-     * @param dateOfBirth チェック対象の生年月日(暦上日)
-     * @return 判定を行うインターフェース
-     */
-    public INenreiTotatsuJudicative personBornOn(RDate dateOfBirth) {
-        return checker.setDateOfBirth(DateOfBirthFactory.createInstance(dateOfBirth));
     }
 
     /**
@@ -138,8 +130,10 @@ public final class NenreiTotatsuChecker {
 
         @Override
         public boolean has年齢到達() {
-            RDate nenreiTotatsuDate = dateOfBirth.get年齢到達日(config.get(nenreiTotatsuKijun));
-            return nenreiTotatsuDate.isBeforeOrEquals(kijunDate);
+            FlexibleDate 消除異動年月日 = FlexibleDate.EMPTY;
+            AgeCalculator ageCalculator = new AgeCalculator(dateOfBirth, JuminJotai.未定義, 消除異動年月日);
+            FlexibleDate nenreiTotatsuDate = ageCalculator.get年齢到達日(config.get(nenreiTotatsuKijun));
+            return nenreiTotatsuDate.isBeforeOrEquals(new FlexibleDate(kijunDate.toDateString()));
         }
     }
 }
