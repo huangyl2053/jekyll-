@@ -70,11 +70,5 @@
             <artifactId>DbeDefinition</artifactId>
             <version>${project.version}</version>
         </dependency>
-
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
-            <artifactId>UaxDivController</artifactId>
-            <classifier>classes</classifier>
-        </dependency>
     </dependencies>
 </project>
