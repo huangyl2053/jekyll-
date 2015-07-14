@@ -17,10 +17,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urd</groupId>
-            <artifactId>UrdEntity</artifactId>
-        </dependency>
-        <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzEntity</artifactId>
         </dependency>
@@ -31,7 +27,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbd</groupId>
             <artifactId>DbdDefinition</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>
