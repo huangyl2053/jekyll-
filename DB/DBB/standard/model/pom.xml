@@ -13,6 +13,7 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
@@ -40,10 +41,6 @@
             <version>${project.version}</version>
             <type>jar</type>
         </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.uz</groupId>
-            <artifactId>framework</artifactId>
-            <version>${jp.co.ndensan.reams.uzVersion}</version>
-        </dependency>
     </dependencies>
+
 </project>

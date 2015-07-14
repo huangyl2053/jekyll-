@@ -17,21 +17,23 @@
 
     <dependencies>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urd</groupId>
-            <artifactId>UrdEntity</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzEntity</artifactId>
-        </dependency>
-        <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.uz</groupId>
-            <artifactId>framework</artifactId>
-            <version>${jp.co.ndensan.reams.uzVersion}</version>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DbbDefinition</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxEntity</artifactId>
+            <version>${jp.co.ndensan.reams.dbxVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzEntity</artifactId>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>
