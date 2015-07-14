@@ -4,18 +4,18 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice;
 
+import java.util.Collections;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.ShikakuHihokenshaKubun;
 import jp.co.ndensan.reams.db.dbz.business.IHihokenshaShikaku;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.business.mapper.HihokenshaShikakuMapper;
+import jp.co.ndensan.reams.db.dbz.definition.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoDac;
-import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.ShikakuHihokenshaKubun;
-import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -80,12 +80,12 @@ public class HihokenshaDaichoManager {
      * 指定の値に相当する資格情報がないときは、nullを返します。
      *
      * @param 市町村コード {@link LasdecCode 市町村コード}
-     * @param 識別コード {@link ShikibetsuCode 識別コード}
+     * @param 被保険者番号 {@link HihokenshaNo 被保険者番号}
      * @param 処理日時 {@link YMDHMS 処理日時}
      * @return {@link IHihokenshaShikaku IHihokenshaShikaku}。もしくは、null。
      */
-    IHihokenshaShikaku get被保険者資格(LasdecCode 市町村コード, ShikibetsuCode 識別コード, YMDHMS 処理日時) {
-        DbT1001HihokenshaDaichoEntity entity = dac.selectFromKey(市町村コード, 識別コード, 処理日時);
+    IHihokenshaShikaku get被保険者資格(LasdecCode 市町村コード, HihokenshaNo 被保険者番号, YMDHMS 処理日時) {
+        DbT1001HihokenshaDaichoEntity entity = dac.selectByKey(市町村コード, 被保険者番号, 処理日時);
         return HihokenshaShikakuMapper.toHihokenshaShikaku(entity);
     }
 
@@ -98,8 +98,8 @@ public class HihokenshaDaichoManager {
      * もしくは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}。
      */
     List<IHihokenshaShikaku> get被保険者資格ListOf(LasdecCode 市町村コード) {
-        List<DbT1001HihokenshaDaichoEntity> entites = dac.selectAll(市町村コード);
-        return HihokenshaShikakuMapper.toListOfHihokenshaShikaku(entites);
+        ItemList<DbT1001HihokenshaDaichoEntity> entites = dac.selectByKey(市町村コード);
+        return HihokenshaShikakuMapper.toListOfHihokenshaShikaku(entites.toList());
     }
 
     /**
@@ -110,11 +110,11 @@ public class HihokenshaDaichoManager {
      * @return {@link IHihokenshaShikaku IHihokenshaShikaku}の{@link List list}。
      * もしくは、{@link Collections#EMPTY_LIST Collections.EMPTY_LIST}。
      */
-    List<IHihokenshaShikaku> get被保険者資格ListOf(ISearchCondition 検索条件) {
-        List<DbT1001HihokenshaDaichoEntity> entites = dac.selectAll(検索条件.makeSearchCondition());
-        return HihokenshaShikakuMapper.toListOfHihokenshaShikaku(entites);
-    }
-
+    //TODO n3317 塚田萌　検索条件が引数のdacメソッドがない。今回はビルドを通したいので暫定対応。mapperを消したりする時に見直してください。
+//    List<IHihokenshaShikaku> get被保険者資格ListOf(ISearchCondition 検索条件) {
+//        List<DbT1001HihokenshaDaichoEntity> entites = dac.selectAll(検索条件.makeSearchCondition());
+//        return HihokenshaShikakuMapper.toListOfHihokenshaShikaku(entites);
+//    }
     /**
      * 指定の資格情報を被保険者台帳へ保存します。<br />
      * 被保険者番号のない情報が渡されたとき、被保険者番号の採番を行います。

@@ -14,13 +14,13 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IJuminKihonDaichoSearchKey;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.JuminKihonDaichoSearchKeyBuilder;
-import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IJukiKojinFinder;
 import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
 
 /**
  * 介護保険の被保険者を検索するためのクラスです。

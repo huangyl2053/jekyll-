@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.jukikojin.IJukiKojin;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IJuminKihonDaichoSearchKey;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.JuminKihonDaichoSearchKeyBuilder;
-import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IJukiKojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;

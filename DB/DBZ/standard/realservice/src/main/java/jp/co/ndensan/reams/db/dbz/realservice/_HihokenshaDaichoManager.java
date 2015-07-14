@@ -12,10 +12,10 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.business.mapper.HihokenshaShikakuMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.basic.HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.ShikakuHihokenshaKubun;
-import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**

@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice.search;
 
-import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchItem;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaicho.*;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchItem;
 
 /**
  * 被保険者を検索する際に、検索条件指定に使用するSearchItemです
