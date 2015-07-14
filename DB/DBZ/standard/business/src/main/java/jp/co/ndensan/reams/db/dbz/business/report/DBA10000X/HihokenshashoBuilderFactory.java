@@ -6,11 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X;
 
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshashoModel;
-import jp.co.ndensan.reams.ur.urz.business.IAssociation;
-import jp.co.ndensan.reams.ua.uax.business.atesaki.ITsuchishoAtesaki;
-import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
-//import jp.co.ndensan.reams.ux.uxx.business.report.parts.tsuchishoatesaki.TsuchishoAtesakiBuilderFactory;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.ur.urz.business.Association;
+import jp.co.ndensan.reams.ua.uax.business.atesaki.IAtesaki;
 
 /**
  * 被保険者証B4版のBuilderを生成するファクトリクラスです。
@@ -33,8 +30,8 @@ public class HihokenshashoBuilderFactory {
      * @param tsuchishoAtesaki 通知書宛先
      * @return 単票発行時の被保険者証B4版
      */
-    public HihokenshashoB4Builder createInstanceForB4(HihokenshashoModel hihokenshasho, IAssociation association,
-            ITsuchishoAtesaki tsuchishoAtesaki) {
+    public HihokenshashoB4Builder createInstanceForB4(HihokenshashoModel hihokenshasho, Association association,
+            IAtesaki tsuchishoAtesaki) {
         //TODO n8235 船山洋介 TsuchishoAtesakiBuilderFactory.createInstanceにエラーがあるため、暫定的にnullを返す。
         return null;
 
@@ -52,8 +49,8 @@ public class HihokenshashoBuilderFactory {
      * @param tsuchishoAtesaki 通知書宛先
      * @return 単票発行時の被保険者証A4版
      */
-    public HihokenshashoA4Builder createInstanceForA4(HihokenshashoModel hihokenshasho, IAssociation association,
-            ITsuchishoAtesaki tsuchishoAtesaki) {
+    public HihokenshashoA4Builder createInstanceForA4(HihokenshashoModel hihokenshasho, Association association,
+            IAtesaki tsuchishoAtesaki) {
         //TODO n8235 船山洋介 TsuchishoAtesakiBuilderFactory.createInstanceにエラーがあるため、暫定的にnullを返す。
         return null;
 

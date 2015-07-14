@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoB4;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.tsuchishoatesaki.ITsuchishoAtesakiBuilder;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.tsuchishoatesaki.TsuchishoAtesakiSource;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.sofubutsuatesaki.ISofubutsuAtesakiSourceBuilder;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiSource;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -17,9 +17,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.doNothing;
 
 /**
  * {@link jp.co.ndensan.reams.db.dba.business.report.DBA10000X.HihokenshashoB4Builder}のテストです。
@@ -32,14 +30,14 @@ public class HihokenshashoB4BuilderTest {
     private static HihokenshashoB4Builder sut;
     private static HihokenshashoB4 result;
     private static HihokenshashoB4SourceBuilder builder;
-    private static ITsuchishoAtesakiBuilder tsuchishoAtesakiBuilder;
+    private static ISofubutsuAtesakiSourceBuilder tsuchishoAtesakiBuilder;
 
     public static class constructor extends DbzTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 被保険者証ソースビルダーにnullが渡されたとき_NullPointerExceptionが発生する() {
             builder = null;
-            tsuchishoAtesakiBuilder = mock(ITsuchishoAtesakiBuilder.class);
+            tsuchishoAtesakiBuilder = mock(ISofubutsuAtesakiSourceBuilder.class);
             sut = new HihokenshashoB4Builder(builder, tsuchishoAtesakiBuilder);
             fail();
         }
@@ -104,9 +102,9 @@ public class HihokenshashoB4BuilderTest {
             return builder;
         }
 
-        private static ITsuchishoAtesakiBuilder createAtesakiBuidler() {
-            ITsuchishoAtesakiBuilder builder = mock(ITsuchishoAtesakiBuilder.class);
-            when(builder.buildSource()).thenReturn(new TsuchishoAtesakiSource());
+        private static ISofubutsuAtesakiSourceBuilder createAtesakiBuidler() {
+            ISofubutsuAtesakiSourceBuilder builder = mock(ISofubutsuAtesakiSourceBuilder.class);
+            when(builder.buildSource()).thenReturn(new SofubutsuAtesakiSource());
             return builder;
         }
     }

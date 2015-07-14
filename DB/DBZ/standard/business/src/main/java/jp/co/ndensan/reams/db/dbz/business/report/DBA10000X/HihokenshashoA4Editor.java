@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoA4;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoA4EditData;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoA4CommonEditData;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoCommonEditData;
-import jp.co.ndensan.reams.ur.urz.business.IAssociation;
+import jp.co.ndensan.reams.ur.urz.business.Association;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
@@ -53,7 +53,7 @@ public class HihokenshashoA4Editor implements IHihokenshashoA4Editor {
      * @param association 導入団体情報
      * @throws NullPointerException 引数がnullの場合
      */
-    public HihokenshashoA4Editor(HihokenshashoModel hihokenshashoModel, IAssociation association) throws NullPointerException {
+    public HihokenshashoA4Editor(HihokenshashoModel hihokenshashoModel, Association association) throws NullPointerException {
         requireNonNull(hihokenshashoModel, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("被保険者証情報", getClass().getName()));
         requireNonNull(association, UrSystemErrorMessages.引数がnullのため生成不可
