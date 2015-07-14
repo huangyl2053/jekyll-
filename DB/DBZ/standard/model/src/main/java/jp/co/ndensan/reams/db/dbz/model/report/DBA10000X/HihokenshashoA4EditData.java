@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.model.report.DBA10000X;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.tsuchishoatesaki.TsuchishoAtesakiSource;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -1196,7 +1196,7 @@ public class HihokenshashoA4EditData implements IHihokenshashoA4CommonEditData {
     }
 
     @Override
-    public void setTsuchishoSofusakiSource(TsuchishoAtesakiSource tsuchishoSofusakiSource) {
+    public void setSofubutsuAtesakiSource(SofubutsuAtesakiSource tsuchishoSofusakiSource) {
         this.hihokenshasho.sofusakiAtena = tsuchishoSofusakiSource;
     }
 }

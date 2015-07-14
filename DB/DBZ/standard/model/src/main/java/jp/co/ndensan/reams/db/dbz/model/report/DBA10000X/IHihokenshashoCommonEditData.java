@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.model.report.DBA10000X;
 
-import jp.co.ndensan.reams.ur.urz.business.report.parts.tsuchishoatesaki.ITsuchishoAtesakiSourceMappable;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.sofubutsuatesaki.ISofubutsuAtesakiSourceMappable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8178 城間篤人
  */
-public interface IHihokenshashoCommonEditData extends ITsuchishoAtesakiSourceMappable {
+public interface IHihokenshashoCommonEditData extends ISofubutsuAtesakiSourceMappable {
 
     /**
      * @return the yukokigen
