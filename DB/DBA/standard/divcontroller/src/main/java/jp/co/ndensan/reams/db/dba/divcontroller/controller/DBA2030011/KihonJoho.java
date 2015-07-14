@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrErrorMessages;
 //import jp.co.ndensan.reams.ur.urz.model.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IShikibetsuTaishoGyomuHanteiKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatis.param.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IKojinFinder;
 import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
@@ -105,5 +105,4 @@ public class KihonJoho {
                 return true;
         }
     }
-
 }
