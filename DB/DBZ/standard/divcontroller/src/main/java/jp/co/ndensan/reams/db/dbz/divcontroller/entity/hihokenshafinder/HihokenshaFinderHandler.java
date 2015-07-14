@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder;
 
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.HihokenshaFinderDiv;
 import jp.co.ndensan.reams.ur.urz.business.RecentUsed;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -30,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  *
  * @author N8156 宮本 康
  */
+//TODO n3317 塚田萌　ビルドを通すための暫定対応。見直しのタイミングで対応してください。
 public class HihokenshaFinderHandler {
 
     private final HihokenshaFinderDiv div;
@@ -64,7 +66,8 @@ public class HihokenshaFinderHandler {
      * @return 保険者
      */
     RString get保険者() {
-        DropDownList item = div.getKaigoFinder().getDdlHokensha();
+//        DropDownList item = div.getKaigoFinder().getDdlHokensha();
+        DropDownList item = null;
         return (item != null && item.isVisible()) ? item.getSelectedKey() : RString.EMPTY;
     }
 
@@ -74,7 +77,8 @@ public class HihokenshaFinderHandler {
      * @return 被保険者番号
      */
     RString get被保険者番号() {
-        TextBoxCode item = div.getKaigoFinder().getTxtHihokenshaNo();
+//        TextBoxCode item = div.getKaigoFinder().getTxtHihokenshaNo();
+        TextBoxCode item = null;
         return (item != null && !item.getValue().trim().isEmpty()) ? item.getValue() : RString.EMPTY;
     }
 
@@ -84,7 +88,8 @@ public class HihokenshaFinderHandler {
      * @return 通知書番号
      */
     RString get通知書番号() {
-        TextBoxCode item = div.getKaigoFinder().getTxtTuchishoNo();
+//        TextBoxCode item = div.getKaigoFinder().getTxtTuchishoNo();
+        TextBoxCode item = null;
         return (item != null && !item.getValue().trim().isEmpty()) ? item.getValue() : RString.EMPTY;
     }
 
@@ -94,7 +99,8 @@ public class HihokenshaFinderHandler {
      * @return 賦課年度
      */
     FlexibleYear get賦課年度() {
-        DropDownList item = div.getKaigoFinder().getDdlFukaNendo();
+//        DropDownList item = div.getKaigoFinder().getDdlFukaNendo();
+        DropDownList item = null;
         return (item != null && item.getSelectedKey() != null && !item.getSelectedKey().equals(FlexibleYear.MAX.toDateString()))
                 ? new FlexibleYear(item.getSelectedKey().toString()) : FlexibleYear.MAX;
     }
@@ -105,7 +111,8 @@ public class HihokenshaFinderHandler {
      * @return true:登録者、false:登録者ではない
      */
     boolean is被保険者台帳登録者() {
-        return !div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedValues().isEmpty();
+        return true;
+//        return !div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedValues().isEmpty();
     }
 
     /**
@@ -114,7 +121,8 @@ public class HihokenshaFinderHandler {
      * @return true:登録者、false:登録者ではない
      */
     boolean is受給者台帳登録者() {
-        return !div.getKaigoFinder().getKaigoFinderDetail().getChkJukyushaDaicho().getSelectedValues().isEmpty();
+        return true;
+//        return !div.getKaigoFinder().getKaigoFinderDetail().getChkJukyushaDaicho().getSelectedValues().isEmpty();
     }
 
     /**
@@ -123,7 +131,8 @@ public class HihokenshaFinderHandler {
      * @return true:特例者、false:特例者ではない
      */
     boolean is住所地特例者() {
-        return !div.getKaigoFinder().getKaigoFinderDetail().getChkJushochiTokureisha().getSelectedValues().isEmpty();
+        return true;
+//        return !div.getKaigoFinder().getKaigoFinderDetail().getChkJushochiTokureisha().getSelectedValues().isEmpty();
     }
 
     /**
@@ -132,7 +141,8 @@ public class HihokenshaFinderHandler {
      * @return true:含む、false:含まない
      */
     boolean isみなし２号含む() {
-        return div.getKaigoFinder().getKaigoFinderDetail().getRadMinashiNigo().getSelectedValue().equals(みなし２号含む);
+        return true;
+//        return div.getKaigoFinder().getKaigoFinderDetail().getRadMinashiNigo().getSelectedValue().equals(みなし２号含む);
     }
 
     /**
@@ -151,15 +161,16 @@ public class HihokenshaFinderHandler {
      * @return 宛名条件
      */
     IShikibetsuTaishoSearchKey get宛名条件() {
-        div.getCcdAtenaFinder().load(ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先));
-        return div.getCcdAtenaFinder().makeShikibetsuTaishoSearchKey(div.getCcdAtenaFinder());
+        return null;
+//        div.getCcdAtenaFinder().load(ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先));
+//        return div.getCcdAtenaFinder().makeShikibetsuTaishoSearchKey(div.getCcdAtenaFinder());
     }
 
     /**
      * 最近処理者を読み込みます。
      */
     void load最近処理者() {
-        div.getCcdSaikinShorisha().getWrappedSaikinShorishaRireki().setInitialLoad(new ScopeCode(ScopeCodeType.識別対象.getCode()));
+//        div.getCcdSaikinShorisha().getWrappedSaikinShorishaRireki().setInitialLoad(new ScopeCode(ScopeCodeType.識別対象.getCode()));
     }
 
     /**
@@ -170,7 +181,7 @@ public class HihokenshaFinderHandler {
      */
     void save最近処理者(ShikibetsuCode 識別コード, AtenaMeisho 名称) {
         IUrControlData controlData = UrControlDataFactory.createInstance();
-        saikinShorishaManager.save(controlData, new ScopeCode(ScopeCodeType.識別対象.getCode()), 識別コード.value(), 名称.value());
+//        saikinShorishaManager.save(controlData, new ScopeCode(ScopeCodeType.識別対象.getCode()), 識別コード.value(), 名称.value());
     }
 
     /**
@@ -179,7 +190,8 @@ public class HihokenshaFinderHandler {
      * @return 最近処理者
      */
     RString get最近処理者() {
-        RecentUsed 最近処理者 = div.getCcdSaikinShorisha().getWrappedSaikinShorishaRireki().getRecentUsed();
-        return 最近処理者 != null ? 最近処理者.get最近処理対象コード() : RString.EMPTY;
+        return null;
+//        RecentUsed 最近処理者 = div.getCcdSaikinShorisha().getWrappedSaikinShorishaRireki().getRecentUsed();
+//        return 最近処理者 != null ? 最近処理者.get最近処理対象コード() : RString.EMPTY;
     }
 }

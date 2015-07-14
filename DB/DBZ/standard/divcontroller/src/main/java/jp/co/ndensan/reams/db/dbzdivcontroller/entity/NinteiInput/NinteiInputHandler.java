@@ -23,7 +23,8 @@ import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.util.code.UDT022CodeTable;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UDT022CodeTable;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 共有子Div「認定情報」の実装クラスです。
@@ -180,7 +181,7 @@ public class NinteiInputHandler {
 
         List<dgServiceIchiran_Row> serviceIchiranList = new ArrayList<>();
 
-        List<UDT022CodeTable> codeMaster = CodeMaster.getCode(SubGyomuCode.DBD介護受給, SERVICESHITEI_CODE_SHUBETSU);
+        List<UzT0007CodeEntity> codeMaster = CodeMaster.getCode(SubGyomuCode.DBD介護受給, SERVICESHITEI_CODE_SHUBETSU);
 
         for (UDT022CodeTable siteiService : codeMaster) {
             dgServiceIchiran_Row dgServiceIchiran_Row = new dgServiceIchiran_Row(siteiService.getコード().value(), siteiService.getコード名称());
@@ -197,7 +198,7 @@ public class NinteiInputHandler {
     }
 
     private void setShiteiService() {
-        List<UDT022CodeTable> code = CodeMaster.getCode(SubGyomuCode.DBD介護受給, SERVICESHITEI_CODE_SHUBETSU);
+        List<UzT0007CodeEntity> code = CodeMaster.getCode(SubGyomuCode.DBD介護受給, SERVICESHITEI_CODE_SHUBETSU);
         List<dgServiceIchiran_Row> serviceIchiranList = new ArrayList<>();
         for (UDT022CodeTable siteiService : code) {
             serviceIchiranList.add(new dgServiceIchiran_Row(siteiService.getコード().value(), siteiService.getコード名称()));

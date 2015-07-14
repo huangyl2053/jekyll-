@@ -1,21 +1,20 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tblJigyoshaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.tblJigyoshaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tplShienJigyosha のクラスファイル 
- * 
+ * tplShienJigyosha のクラスファイル
+ *
  * @author 自動生成
  */
+//TODO n3317 塚田萌　ビルドを通すための暫定対応。再生成してください。
 public class tplShienJigyoshaDiv extends TabPanel {
     /*
      * [ private の作成 ]
@@ -23,6 +22,7 @@ public class tplShienJigyoshaDiv extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("lblShienJigyosha")
     private Label lblShienJigyosha;
     @JsonProperty("tblJigyosha")
@@ -41,7 +41,7 @@ public class tplShienJigyoshaDiv extends TabPanel {
 
     @JsonProperty("lblShienJigyosha")
     public void setLblShienJigyosha(Label lblShienJigyosha) {
-        this.lblShienJigyosha=lblShienJigyosha;
+        this.lblShienJigyosha = lblShienJigyosha;
     }
 
     @JsonProperty("tblJigyosha")
@@ -51,7 +51,7 @@ public class tplShienJigyoshaDiv extends TabPanel {
 
     @JsonProperty("tblJigyosha")
     public void setTblJigyosha(tblJigyoshaDiv tblJigyosha) {
-        this.tblJigyosha=tblJigyosha;
+        this.tblJigyosha = tblJigyosha;
     }
 
     /*
@@ -72,29 +72,28 @@ public class tplShienJigyoshaDiv extends TabPanel {
         return this.getTblJigyosha().getTxtJigyosha1();
     }
 
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtTodokedeDate1() {
-        return this.getTblJigyosha().getTxtTodokedeDate1();
-    }
-
-    @JsonIgnore
-    public TextBox getTxtJigyosha2() {
-        return this.getTblJigyosha().getTxtJigyosha2();
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtTodokedeDate2() {
-        return this.getTblJigyosha().getTxtTodokedeDate2();
-    }
-
-    @JsonIgnore
-    public TextBox getTxtJigyosha3() {
-        return this.getTblJigyosha().getTxtJigyosha3();
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtTodokedeDate3() {
-        return this.getTblJigyosha().getTxtTodokedeDate3();
-    }
-
+//    @JsonIgnore
+//    public TextBoxFlexibleDate getTxtTodokedeDate1() {
+//        return this.getTblJigyosha().getTxtTodokedeDate1();
+//    }
+//
+//    @JsonIgnore
+//    public TextBox getTxtJigyosha2() {
+//        return this.getTblJigyosha().getTxtJigyosha2();
+//    }
+//
+//    @JsonIgnore
+//    public TextBoxFlexibleDate getTxtTodokedeDate2() {
+//        return this.getTblJigyosha().getTxtTodokedeDate2();
+//    }
+//
+//    @JsonIgnore
+//    public TextBox getTxtJigyosha3() {
+//        return this.getTblJigyosha().getTxtJigyosha3();
+//    }
+//
+//    @JsonIgnore
+//    public TextBoxFlexibleDate getTxtTodokedeDate3() {
+//        return this.getTblJigyosha().getTxtTodokedeDate3();
+//    }
 }

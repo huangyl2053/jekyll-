@@ -24,15 +24,10 @@ import jp.co.ndensan.reams.db.dbz.model.util.SearchResult;
 import jp.co.ndensan.reams.db.dbz.realservice.search.FukaSearchItem;
 import jp.co.ndensan.reams.db.dbz.realservice.TaishoshaFinder;
 import jp.co.ndensan.reams.ua.uax.definition.shikibetsutaisho.enumeratedtype.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IShikibetsuTaishoGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
-import jp.co.ndensan.reams.ur.urz.realservice.search.FlexibleYearOperator;
-import jp.co.ndensan.reams.ur.urz.realservice.search.INewSearchCondition;
-import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
-import jp.co.ndensan.reams.ur.urz.realservice.search.SearchConditionFactory;
-import jp.co.ndensan.reams.ur.urz.realservice.search.StringOperator;
+import jp.co.ndensan.reams.ua.uax.definition.mybatis.param.shikibetsutaisho.IShikibetsuTaishoGyomuHanteiKey;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -41,6 +36,11 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.FlexibleYearOperator;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.INewSearchCondition;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchConditionFactory;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
 
 /**
  * 対象者検索のコントローラークラスです。（賦課系）
