@@ -19,7 +19,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdEntity</artifactId>
-            <!--<version>1.0.0</version>-->
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -29,7 +28,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzDefinition</artifactId>
-            <!--<type>jar</type>-->
         </dependency>
 <!--        <dependency>
             <groupId>jp.co.ndensan.reams.aa.aax</groupId>
@@ -88,7 +86,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxDefinition</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
+            <version>${jp.co.ndensan.reams.dbxVersion}</version>
         </dependency><!--
         <dependency>
             <groupId>jp.co.ndensan.reams.dc.dcx</groupId>
