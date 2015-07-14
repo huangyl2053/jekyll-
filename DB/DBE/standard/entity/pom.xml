@@ -36,11 +36,13 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.uz</groupId>
             <artifactId>framework</artifactId>
             <type>jar</type>
+            <version>${jp.co.ndensan.reams.uzVersion}</version>
         </dependency>
     </dependencies>
 </project>

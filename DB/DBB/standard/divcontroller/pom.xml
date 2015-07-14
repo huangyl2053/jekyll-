@@ -76,10 +76,7 @@
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxDivController</artifactId>
             <classifier>classes</classifier>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ue.uex</groupId>
-            <artifactId>UexRealService</artifactId>
+            <version>${jp.co.ndensan.reams.uaVersion}</version>
         </dependency>
     </dependencies>
 </project>
