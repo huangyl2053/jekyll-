@@ -1,20 +1,18 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.IKiwarigakuDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.Kiwarigaku.tblKiwariGakuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.tblKiwariGakuDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * Kiwarigaku のクラスファイル 
- * 
+ * Kiwarigaku のクラスファイル
+ *
  * @author 自動生成
  */
 public class KiwarigakuDiv extends Panel implements IKiwarigakuDiv {
@@ -24,6 +22,7 @@ public class KiwarigakuDiv extends Panel implements IKiwarigakuDiv {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("tblKiwariGaku")
     private tblKiwariGakuDiv tblKiwariGaku;
 
@@ -40,7 +39,7 @@ public class KiwarigakuDiv extends Panel implements IKiwarigakuDiv {
 
     @JsonProperty("tblKiwariGaku")
     public void setTblKiwariGaku(tblKiwariGakuDiv tblKiwariGaku) {
-        this.tblKiwariGaku=tblKiwariGaku;
+        this.tblKiwariGaku = tblKiwariGaku;
     }
 
     /*
@@ -487,5 +486,4 @@ public class KiwarigakuDiv extends Panel implements IKiwarigakuDiv {
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }
