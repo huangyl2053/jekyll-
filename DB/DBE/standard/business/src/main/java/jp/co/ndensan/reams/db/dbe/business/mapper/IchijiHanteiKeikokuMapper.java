@@ -4,17 +4,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.mapper;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikoku;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuHairetsuCode;
 import jp.co.ndensan.reams.db.dbe.business.IchijiHanteiKeikokuList;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IchijiHanteiKeikokuShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.util.code.UDT022CodeTable;
+import jp.co.ndensan.reams.uz.uza.util.code.entity.UDT022CodeTable;
 
 /**
  * 一次判定警告についてマッピングを行うクラスです。

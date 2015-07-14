@@ -8,7 +8,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
 import jp.co.ndensan.reams.db.dbe.entity.relate.KaigoIryoKikanEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.model.IryokikanModel;
+import jp.co.ndensan.reams.ux.uxx.business.IryoKikan;
 
 /**
  * 介護医療機関エンティティを介護医療機関クラスにマッピングします。
@@ -34,7 +34,7 @@ public final class KaigoIryoKikanMapper {
     public static KaigoIryoKikan toKaigoIryoKikan(KaigoIryoKikanEntity entity) throws NullPointerException {
         requireNonNull(entity, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("介護医療機関エンティティ", "介護医療機関"));
 
-        return new KaigoIryoKikan(new IryokikanModel(entity.getIryoKikanEntity()),
+        return new KaigoIryoKikan(new IryoKikan(entity.getIryoKikanEntity(), null),
                 ShujiiIryoKikanMapper.toShujiiIryoKikan(entity.getDbT7011ShujiiIryoKikanJohoEntity()));
     }
 }
