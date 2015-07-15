@@ -59,5 +59,10 @@
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+            <artifactId>UexRealService</artifactId>
+            <version>${jp.co.ndensan.reams.uexVersion}</version>
+        </dependency>
     </dependencies>
 </project>

@@ -1,8 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -10,17 +9,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TekiyojiHokenshaJoho のクラスファイル 
- * 
+ * TekiyojiHokenshaJoho のクラスファイル
+ *
  * @author 自動生成
  */
-public class TekiyojiHokenshaJohoDiv extends Panel {
+//TODO n3317塚田　先頭を大文字にして再生成してください。
+public class tekiyojiHokenshaJohoDiv extends Panel {
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ddlTekiyojiSochimotoHokensha")
     private DropDownList ddlTekiyojiSochimotoHokensha;
     @JsonProperty("ddlTekiyojiKyuHokensha")
@@ -41,7 +42,7 @@ public class TekiyojiHokenshaJohoDiv extends Panel {
 
     @JsonProperty("ddlTekiyojiSochimotoHokensha")
     public void setDdlTekiyojiSochimotoHokensha(DropDownList ddlTekiyojiSochimotoHokensha) {
-        this.ddlTekiyojiSochimotoHokensha=ddlTekiyojiSochimotoHokensha;
+        this.ddlTekiyojiSochimotoHokensha = ddlTekiyojiSochimotoHokensha;
     }
 
     @JsonProperty("ddlTekiyojiKyuHokensha")
@@ -51,7 +52,7 @@ public class TekiyojiHokenshaJohoDiv extends Panel {
 
     @JsonProperty("ddlTekiyojiKyuHokensha")
     public void setDdlTekiyojiKyuHokensha(DropDownList ddlTekiyojiKyuHokensha) {
-        this.ddlTekiyojiKyuHokensha=ddlTekiyojiKyuHokensha;
+        this.ddlTekiyojiKyuHokensha = ddlTekiyojiKyuHokensha;
     }
 
     @JsonProperty("ddlTekiyojiJuminJoho")
@@ -61,7 +62,7 @@ public class TekiyojiHokenshaJohoDiv extends Panel {
 
     @JsonProperty("ddlTekiyojiJuminJoho")
     public void setDdlTekiyojiJuminJoho(DropDownList ddlTekiyojiJuminJoho) {
-        this.ddlTekiyojiJuminJoho=ddlTekiyojiJuminJoho;
+        this.ddlTekiyojiJuminJoho = ddlTekiyojiJuminJoho;
     }
 
 }
