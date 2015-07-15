@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiChosaJokyoInput;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため

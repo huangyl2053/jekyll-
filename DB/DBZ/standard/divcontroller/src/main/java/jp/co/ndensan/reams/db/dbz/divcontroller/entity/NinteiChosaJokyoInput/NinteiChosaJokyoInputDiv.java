@@ -1,19 +1,19 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiChosaJokyoInput;
 /**
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.INinteiChosaJokyoInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiChosaJokyoInput.INinteiChosaJokyoInputDiv;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.EnkiTsuchiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.HomonChosasakiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.IchigoHanteiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.IchijiHanteiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.KaigoNinteiShinsakaiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.NinteiChosaDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.ShujiiAndShujiIryoKikanDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiChosaJokyoInput.EnkiTsuchiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiChosaJokyoInput.HomonChosasakiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiChosaJokyoInput.IchigoHanteiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiChosaJokyoInput.IchijiHanteiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiChosaJokyoInput.KaigoNinteiShinsakaiDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiChosaJokyoInput.NinteiChosaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiChosaJokyoInput.ShujiiAndShujiIryoKikanDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;

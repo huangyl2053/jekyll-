@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput;
 
 import java.util.ArrayList;
 import java.util.List;
-import static jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.IchibuSoshitsuMode;
-import static jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.NinteiMode;
-import static jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.ShokaiMode;
-import static jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.ShokkenShuseiMode;
-import static jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.TokushuShuseiMode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.IchibuSoshitsuMode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.NinteiMode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.ShokaiMode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.ShokkenShuseiMode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.NinteiInputDiv.ShoriType.TokushuShuseiMode;
 import jp.co.ndensan.reams.db.dbz.business.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;

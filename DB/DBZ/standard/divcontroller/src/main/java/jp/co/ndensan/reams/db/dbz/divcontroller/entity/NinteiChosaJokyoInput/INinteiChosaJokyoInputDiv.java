@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiChosaJokyoInput;
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 

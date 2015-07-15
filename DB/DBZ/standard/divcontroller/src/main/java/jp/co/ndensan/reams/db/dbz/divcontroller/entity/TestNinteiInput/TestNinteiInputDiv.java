@@ -5,8 +5,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.TestNinteiInput;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput.INinteiInputDiv;
-import jp.co.ndensan.reams.db.dbzdivcontroller.entity.NinteiInput.NinteiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.INinteiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.NinteiInput.NinteiInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
