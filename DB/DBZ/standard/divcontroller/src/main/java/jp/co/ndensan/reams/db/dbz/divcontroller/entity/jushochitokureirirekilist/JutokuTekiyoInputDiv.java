@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilis
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.tekiyojiHokenshaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.TekiyojiHokenshaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -31,7 +31,7 @@ public class JutokuTekiyoInputDiv extends Panel {
     @JsonProperty("ddlTekiyoJiyu")
     private DropDownList ddlTekiyoJiyu;
     @JsonProperty("TekiyojiHokenshaJoho")
-    private tekiyojiHokenshaJohoDiv TekiyojiHokenshaJoho;
+    private TekiyojiHokenshaJohoDiv TekiyojiHokenshaJoho;
     @JsonProperty("tekiyojiShichosonCode")
     private RString tekiyojiShichosonCode;
     @JsonProperty("tekiyojiHihokenshaNo")
@@ -76,12 +76,12 @@ public class JutokuTekiyoInputDiv extends Panel {
     }
 
     @JsonProperty("TekiyojiHokenshaJoho")
-    public tekiyojiHokenshaJohoDiv getTekiyojiHokenshaJoho() {
+    public TekiyojiHokenshaJohoDiv getTekiyojiHokenshaJoho() {
         return TekiyojiHokenshaJoho;
     }
 
     @JsonProperty("TekiyojiHokenshaJoho")
-    public void setTekiyojiHokenshaJoho(tekiyojiHokenshaJohoDiv TekiyojiHokenshaJoho) {
+    public void setTekiyojiHokenshaJoho(TekiyojiHokenshaJohoDiv TekiyojiHokenshaJoho) {
         this.TekiyojiHokenshaJoho=TekiyojiHokenshaJoho;
     }
 
