@@ -25,11 +25,6 @@
             <artifactId>UrzBusiness</artifactId>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>DbaBusiness</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzBusiness</artifactId>
         </dependency>
@@ -55,12 +50,6 @@
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.uz</groupId>
-            <artifactId>framework</artifactId>
-            <type>jar</type>
-            <version>${jp.co.ndensan.reams.uzVersion}</version>
         </dependency>
     </dependencies>
 </project>
