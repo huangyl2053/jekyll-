@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuKaijoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuTekiyoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.kaijojiHokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.tekiyojiHokenshaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.KaijojiHokenshaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.TekiyojiHokenshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.dgJutoku_Row;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -441,12 +441,12 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public tekiyojiHokenshaJohoDiv getTekiyojiHokenshaJoho() {
+    public TekiyojiHokenshaJohoDiv getTekiyojiHokenshaJoho() {
         return this.getJutokuInput().getJutokuTekiyoInput().getTekiyojiHokenshaJoho();
     }
 
     @JsonIgnore
-    public void setTekiyojiHokenshaJoho(tekiyojiHokenshaJohoDiv TekiyojiHokenshaJoho) {
+    public void setTekiyojiHokenshaJoho(TekiyojiHokenshaJohoDiv TekiyojiHokenshaJoho) {
         this.getJutokuInput().getJutokuTekiyoInput().setTekiyojiHokenshaJoho(TekiyojiHokenshaJoho);
     }
 
@@ -521,12 +521,12 @@ public class JushochiTokureiRirekiListDiv extends Panel implements IJushochiToku
     }
 
     @JsonIgnore
-    public kaijojiHokenshaJohoDiv getKaijojiHokenshaJoho() {
+    public KaijojiHokenshaJohoDiv getKaijojiHokenshaJoho() {
         return this.getJutokuInput().getJutokuKaijoInput().getKaijojiHokenshaJoho();
     }
 
     @JsonIgnore
-    public void setKaijojiHokenshaJoho(kaijojiHokenshaJohoDiv KaijojiHokenshaJoho) {
+    public void setKaijojiHokenshaJoho(KaijojiHokenshaJohoDiv KaijojiHokenshaJoho) {
         this.getJutokuInput().getJutokuKaijoInput().setKaijojiHokenshaJoho(KaijojiHokenshaJoho);
     }
 
