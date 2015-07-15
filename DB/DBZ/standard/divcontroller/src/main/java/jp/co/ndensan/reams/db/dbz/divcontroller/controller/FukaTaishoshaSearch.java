@@ -169,7 +169,7 @@ public class FukaTaishoshaSearch {
     private ISearchCondition get介護除外条件(IHihokenshaFinderDiv div, FukaSearchMenu menu) {
         List<INewSearchCondition> 条件List = new ArrayList<>();
 
-        //TODO 検索ボタン押下時にエラーするためコメントアウト　宮本さん対応予定
+        //TODO 検索ボタン押下時にエラーするためコメントアウト
 //        if (menu.is(FukaSearchMenuGroup.照会系)) {
 //            条件List.add(SearchConditionFactory.condition(
 //                    FukaSearchItem.通知書番号, StringOperator.完全一致, RString.EMPTY));
