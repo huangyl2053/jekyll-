@@ -40,6 +40,12 @@ dbz/db/dbz/KaigoTeikeibunSelector/onChange_ddlTeikenbunShubetsu
 dbz/db/dbz/KaigoTeikeibunSelector/onLoad
 dbz/db/dbz/KaigoTeikeibunSelector/onSelectBySelectButton_dgTeikeibun
 dbz/db/dbz/KoshinKakunin/onLoad
+dbz/db/dbz/NinteiInput/beforeClickValidate
+dbz/db/dbz/NinteiInput/onChangeNinteiKubun
+dbz/db/dbz/NinteiInput/onClickEighteenMonthLater
+dbz/db/dbz/NinteiInput/onClickSixMonthLater
+dbz/db/dbz/NinteiInput/onClickTwelveMonthLater
+dbz/db/dbz/NinteiInput/onClickTwentyfourMonthLater
 dbz/db/dbz/NinteiShinseiTodokedesha/initialize
 dbz/db/dbz/NinteiShinseiTodokedesha/onChanged_ddlTodokedeDaikoKubun
 dbz/db/dbz/NinteiShinseiTodokedesha/onClick_btnZenkaiFukusha
@@ -110,6 +116,12 @@ dbz/db/dbz/TestHihokenshaShikakuHakkoPanel/onLoad
 dbz/db/dbz/TestKaigoNinteiAtenaInfo/onClickbtnSetinput
 dbz/db/dbz/TestKaigoNinteiKihonJohoInput/onClickClear
 dbz/db/dbz/TestKaigoNinteiKihonJohoInput/onClickLoad
+dbz/db/dbz/TestNinteiInput/onBlurTxtHihokenshaNoSet
+dbz/db/dbz/TestNinteiInput/onBlurTxtIfCodeSet
+dbz/db/dbz/TestNinteiInput/onBlurTxtShinseishoKanriNoSet
+dbz/db/dbz/TestNinteiInput/onChangeRadModeSet
+dbz/db/dbz/TestNinteiInput/onClickBtnClear
+dbz/db/dbz/TestNinteiInput/onClickBtnLoad
 dbz/db/dbz/TestNinteiShinseiTodokedesha/onClickbtnSetinput
 dbz/db/dbz/TestShinseiSonotaJohoInput/onBlurTxtShinseishoKanriNo
 dbz/db/dbz/TestShinseiSonotaJohoInput/onChangeRadModeSet

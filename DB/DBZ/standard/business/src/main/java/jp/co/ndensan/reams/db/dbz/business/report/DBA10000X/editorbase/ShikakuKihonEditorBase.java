@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.KatagakiPri
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.ShichosonNamePrint;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.hokensha.TodofukenNamePrint;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
-import jp.co.ndensan.reams.ur.urz.business.IAssociation;
+import jp.co.ndensan.reams.ur.urz.business.Association;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.KannaiKangaiKubunType;
 import jp.co.ndensan.reams.ur.urz.business.IJusho;
@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Width;
 public class ShikakuKihonEditorBase {
 
     private final HihokenshashoModel hihokenshashoModel;
-    private final IAssociation association;
+    private final Association association;
     private final HihokenshashoPrintConfig printConfig;
     private final HihokenshashoJushoEditConfig hihoJushoEdit;
     private final ChohyoKyotsuJushoEditConfig kyotsuJushoEdit;
@@ -60,7 +60,7 @@ public class ShikakuKihonEditorBase {
      * @param kyotsuJushoEdit 共通住所編集コンフィグ
      * @throws NullPointerException 引数のいずれかにnullが渡されたとき
      */
-    public ShikakuKihonEditorBase(HihokenshashoModel hihokenshashoModel, IAssociation association, HihokenshashoPrintConfig printConfig,
+    public ShikakuKihonEditorBase(HihokenshashoModel hihokenshashoModel, Association association, HihokenshashoPrintConfig printConfig,
             HihokenshashoJushoEditConfig hihoJushoEdit, ChohyoKyotsuJushoEditConfig kyotsuJushoEdit) throws NullPointerException {
         requireNonNull(hihokenshashoModel, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("被保険者証情報", getClass().getName()));
@@ -122,6 +122,7 @@ public class ShikakuKihonEditorBase {
     public void set住所(IHihokenshashoCommonEditData source) {
         IKojin kojinJoho = hihokenshashoModel.getKojinJoho();
         IJusho jusho = kojinJoho.get住所();
+        RString 行政区名称 = kojinJoho.get行政区画().getGyoseiku().get名称();
 
         if (printConfig.is郵便番号表示有り()) {
             source.setYubinno(jusho.get郵便番号().getEditedYubinNo());
@@ -146,9 +147,8 @@ public class ShikakuKihonEditorBase {
             howToEditJusho = kyotsuJushoEdit.get住所編集方法();
             katagaki = kyotsuJushoEdit.get方書表示有無();
         }
-
         if (jusho.get管内管外().equals(KannaiKangaiKubunType.管内)) {
-            setGyoseiku(source, jusho);
+            setGyoseiku(source, 行政区名称);
 
             RStringBuilder jushoBuilder = new RStringBuilder();
             if (todofuken == TodofukenNamePrint.印字する) {
@@ -167,7 +167,7 @@ public class ShikakuKihonEditorBase {
                     jushoBuilder.append(jusho.get番地().getBanchi().getColumnValue());
                     break;
                 case 行政区と番地:
-                    jushoBuilder.append(jusho.get行政区());
+                    jushoBuilder.append(行政区名称);
                     jushoBuilder.append(jusho.get番地().getBanchi().getColumnValue());
                     break;
 
@@ -190,11 +190,11 @@ public class ShikakuKihonEditorBase {
         }
     }
 
-    private void setGyoseiku(IHihokenshashoCommonEditData source, IJusho jusho) {
-        if (jusho.get行政区().length() <= GYOSEIKU_LENGTH) {
-            source.setGyoseiku(jusho.get行政区());
+    private void setGyoseiku(IHihokenshashoCommonEditData source, RString 行政区名称) {
+        if (行政区名称.length() <= GYOSEIKU_LENGTH) {
+            source.setGyoseiku(行政区名称);
         } else {
-            source.setGyoseikuS(jusho.get行政区());
+            source.setGyoseikuS(行政区名称);
         }
     }
 

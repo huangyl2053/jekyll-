@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutoku
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KofuJiyu;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KofuJiyuCodeValue;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -210,7 +210,7 @@ public interface IHihokenshaDaicho {
      *
      * @return 再交付事由コード
      */
-    KofuJiyu get再交付事由コード();
+    KofuJiyuCodeValue get再交付事由コード();
 
     /**
      * 帳票交付履歴IDを返します。

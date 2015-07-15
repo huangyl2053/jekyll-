@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbx.definition.enumeratedtype.KaigoHokenNyushoShis
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojin;
 import jp.co.ndensan.reams.db.dbx.realservice.IKaigoJigyoshaFinder;
 import jp.co.ndensan.reams.uz.uza.message.Messages;
-import jp.co.ndensan.reams.ua.uax.realservice.HojinService;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IHojinFinder;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -42,7 +42,7 @@ class NyushoShisetsuBuilder {
      * デフォルトコンストラクタです。
      */
     NyushoShisetsuBuilder() {
-        hojinFinder = HojinService.createHojinFinder();
+        hojinFinder = ShikibetsuTaishoService.getHojinFinder();
     }
 
     /**

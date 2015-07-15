@@ -1,24 +1,16 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
-/**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
- */
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.IKaigoToiawaseDiv;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.InjiNaiyoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.RirekiHyojiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgToiawaseakiRireki_Row;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.ChoikiInputDiv;
-import jp.co.ndensan.reams.ur.ura.divcontroller.entity.IChoikiInputDiv;
 
 /**
- * KaigoToiawase のクラスファイル 
- * 
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+ */
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
+/**
+ * KaigoToiawase のクラスファイル
+ *
  * @author 自動生成
  */
 public class KaigoToiawaseDiv extends Panel implements IKaigoToiawaseDiv {
@@ -28,6 +20,7 @@ public class KaigoToiawaseDiv extends Panel implements IKaigoToiawaseDiv {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("ddlHakkoBusho")
     private DropDownList ddlHakkoBusho;
     @JsonProperty("InjiNaiyo")
@@ -46,7 +39,7 @@ public class KaigoToiawaseDiv extends Panel implements IKaigoToiawaseDiv {
 
     @JsonProperty("ddlHakkoBusho")
     public void setDdlHakkoBusho(DropDownList ddlHakkoBusho) {
-        this.ddlHakkoBusho=ddlHakkoBusho;
+        this.ddlHakkoBusho = ddlHakkoBusho;
     }
 
     @JsonProperty("InjiNaiyo")
@@ -56,7 +49,7 @@ public class KaigoToiawaseDiv extends Panel implements IKaigoToiawaseDiv {
 
     @JsonProperty("InjiNaiyo")
     public void setInjiNaiyo(InjiNaiyoDiv InjiNaiyo) {
-        this.InjiNaiyo=InjiNaiyo;
+        this.InjiNaiyo = InjiNaiyo;
     }
 
     /*
@@ -68,7 +61,7 @@ public class KaigoToiawaseDiv extends Panel implements IKaigoToiawaseDiv {
     }
 
     @JsonIgnore
-    public void  setDdlBusho(DropDownList ddlBusho) {
+    public void setDdlBusho(DropDownList ddlBusho) {
         this.getInjiNaiyo().setDdlBusho(ddlBusho);
     }
 
@@ -78,7 +71,7 @@ public class KaigoToiawaseDiv extends Panel implements IKaigoToiawaseDiv {
     }
 
     @JsonIgnore
-    public void  setDllBushomeiKuhakuUMu(DropDownList dllBushomeiKuhakuUMu) {
+    public void setDllBushomeiKuhakuUMu(DropDownList dllBushomeiKuhakuUMu) {
         this.getInjiNaiyo().setDllBushomeiKuhakuUMu(dllBushomeiKuhakuUMu);
     }
 
@@ -88,7 +81,7 @@ public class KaigoToiawaseDiv extends Panel implements IKaigoToiawaseDiv {
     }
 
     @JsonIgnore
-    public void  setTxtName(TextBox txtName) {
+    public void setTxtName(TextBox txtName) {
         this.getInjiNaiyo().setTxtName(txtName);
     }
 
@@ -98,7 +91,7 @@ public class KaigoToiawaseDiv extends Panel implements IKaigoToiawaseDiv {
     }
 
     @JsonIgnore
-    public void  setTxtTelNo(TextBox txtTelNo) {
+    public void setTxtTelNo(TextBox txtTelNo) {
         this.getInjiNaiyo().setTxtTelNo(txtTelNo);
     }
 
@@ -108,7 +101,7 @@ public class KaigoToiawaseDiv extends Panel implements IKaigoToiawaseDiv {
     }
 
     @JsonIgnore
-    public void  setTxtNaisenNo(TextBox txtNaisenNo) {
+    public void setTxtNaisenNo(TextBox txtNaisenNo) {
         this.getInjiNaiyo().setTxtNaisenNo(txtNaisenNo);
     }
 
@@ -118,7 +111,7 @@ public class KaigoToiawaseDiv extends Panel implements IKaigoToiawaseDiv {
     }
 
     @JsonIgnore
-    public void  setLin1(HorizontalLine lin1) {
+    public void setLin1(HorizontalLine lin1) {
         this.getInjiNaiyo().setLin1(lin1);
     }
 
@@ -128,7 +121,7 @@ public class KaigoToiawaseDiv extends Panel implements IKaigoToiawaseDiv {
     }
 
     @JsonIgnore
-    public void  setDdlKenmeiFuyo(DropDownList ddlKenmeiFuyo) {
+    public void setDdlKenmeiFuyo(DropDownList ddlKenmeiFuyo) {
         this.getInjiNaiyo().setDdlKenmeiFuyo(ddlKenmeiFuyo);
     }
 
@@ -138,7 +131,7 @@ public class KaigoToiawaseDiv extends Panel implements IKaigoToiawaseDiv {
     }
 
     @JsonIgnore
-    public void  setDdlShichoshonMei(DropDownList ddlShichoshonMei) {
+    public void setDdlShichoshonMei(DropDownList ddlShichoshonMei) {
         this.getInjiNaiyo().setDdlShichoshonMei(ddlShichoshonMei);
     }
 
@@ -148,7 +141,7 @@ public class KaigoToiawaseDiv extends Panel implements IKaigoToiawaseDiv {
     }
 
     @JsonIgnore
-    public void  setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
+    public void setTxtYubinNo(TextBoxYubinNo txtYubinNo) {
         this.getInjiNaiyo().setTxtYubinNo(txtYubinNo);
     }
 
@@ -158,10 +151,9 @@ public class KaigoToiawaseDiv extends Panel implements IKaigoToiawaseDiv {
     }
 
     @JsonIgnore
-    public void  setTxtJusho(TextBoxMultiLine txtJusho) {
+    public void setTxtJusho(TextBoxMultiLine txtJusho) {
         this.getInjiNaiyo().setTxtJusho(txtJusho);
     }
 
     //--------------- この行より下にコードを追加してください -------------------
-
 }

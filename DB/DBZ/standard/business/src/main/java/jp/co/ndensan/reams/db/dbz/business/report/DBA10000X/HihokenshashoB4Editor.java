@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoB4LowerEdi
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoB4UpperEditData;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoB4CommonEditData;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoCommonEditData;
-import jp.co.ndensan.reams.ur.urz.business.IAssociation;
+import jp.co.ndensan.reams.ur.urz.business.Association;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
@@ -57,7 +57,7 @@ public class HihokenshashoB4Editor implements IHihokenshashoB4Editor {
      * @throws IllegalArgumentException 引数が持つ印字位置が指定無しである場合
      * @throws NullPointerException 引数がnullの場合
      */
-    public HihokenshashoB4Editor(HihokenshashoModel hihokenshashoModel, IAssociation association) throws NullPointerException, IllegalArgumentException {
+    public HihokenshashoB4Editor(HihokenshashoModel hihokenshashoModel, Association association) throws NullPointerException, IllegalArgumentException {
         requireNonNull(hihokenshashoModel, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("被保険者証情報", getClass().getName()));
         check印字位置(hihokenshashoModel);

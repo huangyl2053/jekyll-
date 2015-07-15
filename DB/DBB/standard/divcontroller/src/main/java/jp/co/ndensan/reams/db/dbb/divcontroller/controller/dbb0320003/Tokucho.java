@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.model.fuka.ChoshuHohoModel;
 import jp.co.ndensan.reams.ue.uex.definition.nenkintokucho.KakushuKubun;
 import jp.co.ndensan.reams.ue.uex.definition.valueobject.code.NenkinCode;
-import jp.co.ndensan.reams.ue.uex.model.NenkinTokuchoKaifuJohoModel;
+import jp.co.ndensan.reams.ue.uex.business.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ue.uex.realservice.INenkinTokuchoKaifuJohoManager;
 import jp.co.ndensan.reams.ue.uex.realservice.NenkinTokuchoKaifuJohoManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -161,82 +161,76 @@ public class Tokucho {
 
         //TODO n3317塚田　本当はファクトリーから生成
         INenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
-        NenkinTokuchoKaifuJohoModel model = manager.get年金特徴対象者情報(
+        NenkinTokuchoKaifuJoho kaifuJoho = manager.get年金特徴対象者情報(
                 GyomuCode.DB介護保険, 賦課年度.value(), 基礎年金番号, 年金コード, 捕捉月);
 
-        div.getTxtHosokuYM().setDomain(new RYearMonth(model.get処理年度().toDateString().concat(捕捉月)));
-        //TODO n8223 シンボルを見つけられません。（businessの対応しなければなりません。）
-        div.getTxtTokuChoGimusha().setValue(model.getDT特別徴収義務者コード().value());
-        div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKana().setValue(model.getDTカナ氏名());
-        div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKanji().setValue(model.getDT漢字氏名());
-        div.getNenkinHokenshaTotsugoJoho().getTxtJushoKana().setValue(model.getDTカナ住所());
-        div.getNenkinHokenshaTotsugoJoho().getTxtJushoKanji().setValue(model.getDT漢字住所());
-        //TODO n8223 シンボルを見つけられません。 （businessの対応しなければなりません。）
-        div.getNenkinHokenshaTotsugoJoho().getTxtSex().setValue(model.getDT性別());
-        div.getNenkinHokenshaTotsugoJoho().getTxtBirthYMD().setValue(model.getDT生年月日());
+        div.getTxtHosokuYM().setDomain(new RYearMonth(kaifuJoho.get処理年度().toDateString().concat(捕捉月)));
+        div.getTxtTokuChoGimusha().setValue(kaifuJoho.getDT特別徴収義務者コード().getRyakusho());
+        div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKana().setValue(kaifuJoho.getDTカナ氏名());
+        div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKanji().setValue(kaifuJoho.getDT漢字氏名());
+        div.getNenkinHokenshaTotsugoJoho().getTxtJushoKana().setValue(kaifuJoho.getDTカナ住所());
+        div.getNenkinHokenshaTotsugoJoho().getTxtJushoKanji().setValue(kaifuJoho.getDT漢字住所());
+        div.getNenkinHokenshaTotsugoJoho().getTxtSex().setValue(kaifuJoho.getDT性別().value().get性別名称());
+        div.getNenkinHokenshaTotsugoJoho().getTxtBirthYMD().setValue(kaifuJoho.getDT生年月日());
     }
 
     private void set特徴異動and依頼Div(TokuChoIdoAndIraiDiv div, ChoshuHohoModel model) {
         //TODO n3317塚田　本当はファクトリーから生成
         INenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
-        List<NenkinTokuchoKaifuJohoModel> 年金特徴送付List = manager.get年金特徴送付情報List(
+        List<NenkinTokuchoKaifuJoho> 年金特徴送付List = manager.get年金特徴送付情報List(
                 GyomuCode.DB介護保険, model.get賦課年度().value(),
                 model.get仮徴収_基礎年金番号(), model.get仮徴収_年金コード(),
                 model.get本徴収_基礎年金番号(), model.get本徴収_年金コード(),
                 model.get翌年度仮徴収_基礎年金番号(), model.get翌年度仮徴収_年金コード());
         List dataSource = new ArrayList();
 
-        for (NenkinTokuchoKaifuJohoModel tokuchoKaifuModel : 年金特徴送付List) {
-            dataSource.add(toDgTokuChoIdoAndIrai_Row(tokuchoKaifuModel));
+        for (NenkinTokuchoKaifuJoho tokuchoKaifu : 年金特徴送付List) {
+            dataSource.add(toDgTokuChoIdoAndIrai_Row(tokuchoKaifu));
         }
 
         div.getDgTokuChoIdoAndIrai().setDataSource(dataSource);
     }
 
-    private dgTokuChoIdoAndIrai_Row toDgTokuChoIdoAndIrai_Row(NenkinTokuchoKaifuJohoModel model) {
+    private dgTokuChoIdoAndIrai_Row toDgTokuChoIdoAndIrai_Row(NenkinTokuchoKaifuJoho kaifuJoho) {
 
         return new dgTokuChoIdoAndIrai_Row(
-                model.get処理対象年月().wareki().toDateString(),
-                //TODO n8223 シンボルを見つけられません。 （businessの対応しなければなりません。通知内容名称)
-                model.get通知内容コード(),
+                kaifuJoho.get処理対象年月().wareki().toDateString(),
+                kaifuJoho.get通知内容コード().value().get通知内容名称(),
                 KakushuKubun.search各種区分名称(
-                        //TODO n8223 シンボルを見つけられません。 （businessの対応しなければなりません。通知内容コード）
-                        model.get通知内容コード(), model.getDT各種区分()).get各種区分名称(),
-                FukaMapper.addComma(new Decimal(model.getDT各種金額欄１().toString())),
-                FukaMapper.addComma(new Decimal(model.getDT各種金額欄２().toString())),
-                FukaMapper.addComma(new Decimal(model.getDT各種金額欄３().toString())));
+                        kaifuJoho.get通知内容コード().value().get通知内容コード(), kaifuJoho.getDT各種区分()).get各種区分名称(),
+                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄１().toString())),
+                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄２().toString())),
+                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄３().toString())));
 
     }
 
     private void set特徴結果Div(TokuChoKekkaDiv div, ChoshuHohoModel model) {
         //TODO n3317塚田　本当はファクトリーから生成
         INenkinTokuchoKaifuJohoManager manager = new NenkinTokuchoKaifuJohoManager();
-        List<NenkinTokuchoKaifuJohoModel> 年金特徴受取List = manager.get年金特徴受取情報List(
+        List<NenkinTokuchoKaifuJoho> 年金特徴受取List = manager.get年金特徴受取情報List(
                 GyomuCode.DB介護保険, model.get賦課年度().value(),
                 model.get仮徴収_基礎年金番号(), model.get仮徴収_年金コード(),
                 model.get本徴収_基礎年金番号(), model.get本徴収_年金コード());
         List dataSource = new ArrayList();
 
-        for (NenkinTokuchoKaifuJohoModel tokuchoKaifuModel : 年金特徴受取List) {
-            dataSource.add(toDgTokuchoKekka_Row(tokuchoKaifuModel));
+        for (NenkinTokuchoKaifuJoho tokuchoKaifu : 年金特徴受取List) {
+            dataSource.add(toDgTokuchoKekka_Row(tokuchoKaifu));
         }
 
         div.getDgTokuchoKekka().setDataSource(dataSource);
     }
 
-    private dgTokuchoKekka_Row toDgTokuchoKekka_Row(NenkinTokuchoKaifuJohoModel model) {
+    private dgTokuchoKekka_Row toDgTokuchoKekka_Row(NenkinTokuchoKaifuJoho kaifuJoho) {
 
         return new dgTokuchoKekka_Row(
-                model.get処理対象年月().wareki().toDateString(),
-                //TODO n8223 シンボルを見つけられません。 （businessの対応しなければなりません。通知内容名称)
-                model.get通知内容コード(),
+                kaifuJoho.get処理対象年月().wareki().toDateString(),
+                kaifuJoho.get通知内容コード().value().get通知内容名称(),
                 KakushuKubun.search各種区分名称(
-                        //TODO n8223 シンボルを見つけられません。 （businessの対応しなければなりません。通知内容コード）
-                        model.get通知内容コード(), model.getDT各種区分()).get各種区分名称(),
-                FukaMapper.addComma(new Decimal(model.getDT各種金額欄１().toString())),
-                FukaMapper.addComma(new Decimal(model.getDT各種金額欄２().toString())),
-                FukaMapper.addComma(new Decimal(model.getDT各種金額欄３().toString())),
-                model.getDT処理結果());
+                        kaifuJoho.get通知内容コード().value().get通知内容コード(), kaifuJoho.getDT各種区分()).get各種区分名称(),
+                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄１().toString())),
+                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄２().toString())),
+                FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄３().toString())),
+                kaifuJoho.getDT処理結果());
     }
 
     private ResponseData<TokuchoDiv> createResponseData(TokuchoDiv div) {

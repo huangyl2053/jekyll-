@@ -11,7 +11,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.model.IryokikanModel;
+import jp.co.ndensan.reams.ux.uxx.business.IryoKikan;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 public class KaigoIryoKikan implements IShujiiIryoKikan {
 
     private final IShujiiIryoKikan 主治医医療機関;
-    private final IryokikanModel 医療機関;
+    private final IryoKikan 医療機関;
 
     /**
      * 引数からメンバを受け取るコンストラクタです。
@@ -35,7 +35,7 @@ public class KaigoIryoKikan implements IShujiiIryoKikan {
      * @param 主治医医療機関 主治医医療機関
      * @throws NullPointerException 引数にNULLが渡された場合
      */
-    public KaigoIryoKikan(IryokikanModel 医療機関, IShujiiIryoKikan 主治医医療機関) throws NullPointerException {
+    public KaigoIryoKikan(IryoKikan 医療機関, IShujiiIryoKikan 主治医医療機関) throws NullPointerException {
         requireNonNull(医療機関, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("医療機関", getClass().getName()));
         requireNonNull(主治医医療機関, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("主治医医療機関", getClass().getName()));
 

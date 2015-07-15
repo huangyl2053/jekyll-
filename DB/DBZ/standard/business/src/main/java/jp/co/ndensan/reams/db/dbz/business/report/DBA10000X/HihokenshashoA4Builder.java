@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X;
 
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoA4;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.tsuchishoatesaki.ITsuchishoAtesakiBuilder;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.sofubutsuatesaki.ISofubutsuAtesakiSourceBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 
 /**
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErro
 public class HihokenshashoA4Builder implements IHihokenshashoBuilder {
 
     private final IHihokenshashoA4SourceBuilder hihokenshashoA4;
-    private final ITsuchishoAtesakiBuilder tsuchishoSofusaki;
+    private final ISofubutsuAtesakiSourceBuilder tsuchishoSofusaki;
 
     /**
      * コンストラクタです。
@@ -27,7 +27,7 @@ public class HihokenshashoA4Builder implements IHihokenshashoBuilder {
      * @param tsuchishoSofusaki 宛先SourceBuilder
      * @throws NullPointerException 引数のいずれかにnullが渡されたとき
      */
-    public HihokenshashoA4Builder(IHihokenshashoA4SourceBuilder hihokenshashoA4, ITsuchishoAtesakiBuilder tsuchishoSofusaki) throws NullPointerException {
+    public HihokenshashoA4Builder(IHihokenshashoA4SourceBuilder hihokenshashoA4, ISofubutsuAtesakiSourceBuilder tsuchishoSofusaki) throws NullPointerException {
         requireNonNull(hihokenshashoA4, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("被保険者証A4版ソースビルダー", getClass().getName()));
         requireNonNull(tsuchishoSofusaki, UrSystemErrorMessages.引数がnullのため生成不可

@@ -19,8 +19,8 @@ import jp.co.ndensan.reams.db.dbz.model.hokensha.KoseiShichosonModel;
 import static jp.co.ndensan.reams.db.dbz.realservice.hokensha._KoseiShichosonMapper.toKoikiKoseiShichoson;
 import static jp.co.ndensan.reams.db.dbz.realservice.hokensha._KoseiShichosonMapper.toKoseiShichosonModel;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
 
 /**
  * {@link IKoikiKoseiShichosonFinder}の実装です。

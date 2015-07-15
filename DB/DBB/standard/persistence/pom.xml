@@ -65,9 +65,5 @@
             <scope>test</scope>
             <type>jar</type>
         </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.uz</groupId>
-            <artifactId>framework</artifactId>
-        </dependency>
     </dependencies>
 </project>

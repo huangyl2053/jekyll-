@@ -17,10 +17,18 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>
             <artifactId>CaxRealService</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxDefinition</artifactId>
+            <version>${jp.co.ndensan.reams.dbxVersion}</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxRealService</artifactId>
+            <version>${jp.co.ndensan.reams.dbxVersion}</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
@@ -29,6 +37,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxRealService</artifactId>
+            <version>${jp.co.ndensan.reams.uaVersion}</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
@@ -41,6 +50,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>
             <artifactId>UaxBusiness</artifactId>
+            <version>${jp.co.ndensan.reams.uaVersion}</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urf</groupId>
@@ -85,6 +95,12 @@
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ca.cax</groupId>
+            <artifactId>CaxBusiness</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

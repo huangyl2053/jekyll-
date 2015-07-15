@@ -53,9 +53,9 @@ public class ShisetsuJoho implements Serializable {
      */
     public ResponseData onChange_radShisetsuShurui(ShisetsuJohoDiv div) {
 
-        ShisetsuJohoHandler handler = div.getHandler();
-        handler.onChange_radShisetsuShurui();
-
+        //TODO n3317 塚田萌　Handlerがprivateになってるし、handlerにはonChange_radShisetsuShuruiがない。今回はビルドを通すための対応なのでコメントアウトする。見直しのタイミングで対応してください。
+//        ShisetsuJohoHandler handler = div.getHandler();
+//        handler.onChange_radShisetsuShurui();
         div.getTxtShisetsuCode().setValue(null);
         div.getTxtShisetsuMeisho().setValue(null);
 

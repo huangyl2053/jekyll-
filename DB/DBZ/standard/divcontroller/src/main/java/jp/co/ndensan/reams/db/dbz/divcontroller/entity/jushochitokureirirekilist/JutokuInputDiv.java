@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuKaijoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JutokuTekiyoInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.KaijojiHokenshaJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.TekiyojiHokenshaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.kaijojiHokenshaJohoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.tekiyojiHokenshaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
@@ -115,12 +115,12 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public TekiyojiHokenshaJohoDiv getTekiyojiHokenshaJoho() {
+    public tekiyojiHokenshaJohoDiv getTekiyojiHokenshaJoho() {
         return this.getJutokuTekiyoInput().getTekiyojiHokenshaJoho();
     }
 
     @JsonIgnore
-    public void  setTekiyojiHokenshaJoho(TekiyojiHokenshaJohoDiv TekiyojiHokenshaJoho) {
+    public void  setTekiyojiHokenshaJoho(tekiyojiHokenshaJohoDiv TekiyojiHokenshaJoho) {
         this.getJutokuTekiyoInput().setTekiyojiHokenshaJoho(TekiyojiHokenshaJoho);
     }
 
@@ -185,12 +185,12 @@ public class JutokuInputDiv extends Panel {
     }
 
     @JsonIgnore
-    public KaijojiHokenshaJohoDiv getKaijojiHokenshaJoho() {
+    public kaijojiHokenshaJohoDiv getKaijojiHokenshaJoho() {
         return this.getJutokuKaijoInput().getKaijojiHokenshaJoho();
     }
 
     @JsonIgnore
-    public void  setKaijojiHokenshaJoho(KaijojiHokenshaJohoDiv KaijojiHokenshaJoho) {
+    public void  setKaijojiHokenshaJoho(kaijojiHokenshaJohoDiv KaijojiHokenshaJoho) {
         this.getJutokuKaijoInput().setKaijojiHokenshaJoho(KaijojiHokenshaJoho);
     }
 

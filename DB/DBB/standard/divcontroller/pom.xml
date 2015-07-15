@@ -24,19 +24,6 @@
             <classifier>classes</classifier>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urd</groupId>
-            <artifactId>UrdRealService</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzRealService</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
-            <artifactId>UrzDivController</artifactId>
-            <classifier>classes</classifier>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbbPersistence</artifactId>
             <version>${project.version}</version>
@@ -73,13 +60,31 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
-            <artifactId>UaxDivController</artifactId>
-            <classifier>classes</classifier>
-        </dependency>
-        <dependency>
             <groupId>jp.co.ndensan.reams.ue.uex</groupId>
             <artifactId>UexRealService</artifactId>
+            <version>${jp.co.ndensan.reams.uexVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
+            <artifactId>shareSetting-maven-plugin</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
+                <artifactId>requestSettings-maven-plugin</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>createRequestSettings</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

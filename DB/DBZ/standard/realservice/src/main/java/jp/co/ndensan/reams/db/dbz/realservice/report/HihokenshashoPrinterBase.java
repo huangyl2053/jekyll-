@@ -14,18 +14,16 @@ import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.realservice.HihokenshaDaichoFinder;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
-import jp.co.ndensan.reams.ur.urz.business.IAssociation;
+import jp.co.ndensan.reams.ur.urz.business.Association;
 import jp.co.ndensan.reams.ua.uax.business.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.search.IAtesakiPSMSearchKey;
-import jp.co.ndensan.reams.ua.uax.business.atesaki.ITsuchishoAtesaki;
-import jp.co.ndensan.reams.ua.uax.business.atesaki.TsuchishoAtesakiFactory;
 import jp.co.ndensan.reams.ur.urz.business.report.IReportBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.enumeratedtype.JushoEditPattern;
-import jp.co.ndensan.reams.ua.uax.definition.enumeratedtype.KatagakiEditPattern;
 import jp.co.ndensan.reams.ua.uax.definition.enumeratedtype.MeishoFuyoType;
 import jp.co.ndensan.reams.ua.uax.definition.enumeratedtype.SetainushiRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.definition.enumeratedtype.JushoKangaiEditPattern;
+import jp.co.ndensan.reams.ua.uax.definition.enumeratedtype.JushoKannaiEditPattern;
 import jp.co.ndensan.reams.ur.urz.realservice.AssociationService;
 import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IAtesakiFinder;
 import jp.co.ndensan.reams.ur.urz.realservice.report.core.IReportManager;
@@ -106,7 +104,7 @@ public class HihokenshashoPrinterBase {
      * @param 識別コード 宛先検索対象の識別コード
      * @return 通知書宛先
      */
-    public ITsuchishoAtesaki getTsuchishoAtesaki(FlexibleDate 基準日, ShikibetsuCode 識別コード) {
+    public IAtesaki getTsuchishoAtesaki(FlexibleDate 基準日, ShikibetsuCode 識別コード) {
         //TODO n8178 城間篤人 世帯主の表示有無を設定したいが、IAtesakiPSMSearchKeyに設定できるのは検索対象が死亡していた場合に世帯主を設定するフラグであるため用途が違う。対応法が決まった後修正
         SetainushiRiyoKubun 世帯主表示 = SetainushiRiyoKubun.利用しない;
         MeishoFuyoType meishoFuyo = MeishoFuyoType.無し;
@@ -124,22 +122,15 @@ public class HihokenshashoPrinterBase {
                 .set世帯主利用区分(世帯主表示)
                 .set基準日(基準日)
                 .build();
-        IAtesaki atesaki = atesakiFinder.get宛先(searchKey);
-
-        return TsuchishoAtesakiFactory.createInstance(atesaki,
-                JushoEditPattern.町域番地,
-                KatagakiEditPattern.方書,
-                meishoFuyo,
-                meishoFuyo,
-                true);
+        return atesakiFinder.get宛先(searchKey);
     }
 
     /**
      * 被保険者が属している導入団体の情報を取得します。
      *
-     * @return 導入団体情報 IAssociation
+     * @return 導入団体情報 Association
      */
-    public IAssociation getAssociation() {
+    public Association getAssociation() {
         return AssociationService.createAssociationFinder().getAssociation();
     }
 

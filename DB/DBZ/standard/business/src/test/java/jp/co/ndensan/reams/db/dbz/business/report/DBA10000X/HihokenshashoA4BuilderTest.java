@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X;
 
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.tsuchishoatesaki.ITsuchishoAtesakiBuilder;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.sofubutsuatesaki.ISofubutsuAtesakiSourceBuilder;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.experimental.runners.Enclosed;
@@ -23,14 +23,14 @@ public class HihokenshashoA4BuilderTest {
 
     private static HihokenshashoA4Builder sut;
     private static IHihokenshashoA4SourceBuilder hihokenshashoA4;
-    private static ITsuchishoAtesakiBuilder tsuchishoSofusaki;
+    private static ISofubutsuAtesakiSourceBuilder tsuchishoSofusaki;
 
     public static class constructor extends DbzTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 引数の被保険者証ソースビルダーにnullが渡されたとき_NullPointerExceptionが発生する() {
             hihokenshashoA4 = null;
-            tsuchishoSofusaki = mock(ITsuchishoAtesakiBuilder.class);
+            tsuchishoSofusaki = mock(ISofubutsuAtesakiSourceBuilder.class);
             sut = new HihokenshashoA4Builder(hihokenshashoA4, tsuchishoSofusaki);
             fail();
         }

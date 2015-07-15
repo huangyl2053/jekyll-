@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilis
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.DBXCodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.business.hihokenshadaicho.HihokenshaDaichoList;
 import jp.co.ndensan.reams.db.dbz.business.util.CodeMasterToKeyValueFunction;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureiKaijoJiyu;
@@ -30,24 +29,18 @@ import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.model.gappei.GappeiShichosonJohoModel;
 import jp.co.ndensan.reams.db.dbz.model.gappei.IGappeiShichoson;
 import jp.co.ndensan.reams.db.dbz.realservice.KijunTsukiShichosonFinder;
-import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.atenashokaisimple.IAtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.ur.urz.definition.code.CodeMasterHelper;
-import jp.co.ndensan.reams.ur.urz.definition.code.ICodeShubetsu;
-import jp.co.ndensan.reams.ur.urz.definition.code.ICodeValueObject;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutokuKaijoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.URZCodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.divcontroller.helper.PanelSessionAccessor;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.Month;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -779,20 +772,17 @@ public class JushochiTokureiRirekiListHandler {
     }
 
     private void setTekiyoJiyuDataSource() {
-        //TODO n8235　船山洋介 DBXCodeShubetsuがICodeShubetsuに適応できないため、nullを渡す。　使用できるようになったら修正。
+        //TODO n8235　船山洋介 DBXCodeShubetsuがICodeShubetsuに適応できないため、コメントアウト。　使用できるようになったら修正。
         // List<KaigoShikakuHenkoJiyu> tekiyoList = CodeMasterHelper.getCode(DBXCodeShubetsu.介護資格住特適用事由);
-        List<KaigoShikakuHenkoJiyu> tekiyoList = CodeMasterHelper.getCode(null);
-
-        IItemList<KeyValueDataSource> dataSource = ItemList.of(tekiyoList).map(new CodeMasterToKeyValueFunction());
-        jutokuRirekiDiv.getDdlTekiyoJiyu().setDataSource(dataSource.toList());
+//        IItemList<KeyValueDataSource> dataSource = ItemList.of(tekiyoList).map(new CodeMasterToKeyValueFunction());
+//        jutokuRirekiDiv.getDdlTekiyoJiyu().setDataSource(dataSource.toList());
     }
 
     private void setKaijoJiyuDataSource() {
-        //TODO n8235　船山洋介 DBXCodeShubetsuがICodeShubetsuに適応できないため、nullを渡す。　使用できるようになったら修正。
+        //TODO n8235　船山洋介 DBXCodeShubetsuがICodeShubetsuに適応できないため、コメントアウト。　使用できるようになったら修正。
         // List<KaigoShikakuJutokuKaijoJiyu> kaijoList = CodeMasterHelper.getCode(DBXCodeShubetsu.介護資格住特解除事由);
-        List<KaigoShikakuJutokuKaijoJiyu> kaijoList = CodeMasterHelper.getCode(null);
-        IItemList<KeyValueDataSource> dataSource = ItemList.of(kaijoList).map(new CodeMasterToKeyValueFunction());
-        jutokuRirekiDiv.getDdlKaijoJiyu().setDataSource(dataSource.toList());
+//        IItemList<KeyValueDataSource> dataSource = ItemList.of(kaijoList).map(new CodeMasterToKeyValueFunction());
+//        jutokuRirekiDiv.getDdlKaijoJiyu().setDataSource(dataSource.toList());
     }
 
     private void setShichosonJohoDataSource(LasdecCode kyuLasdecCode) {

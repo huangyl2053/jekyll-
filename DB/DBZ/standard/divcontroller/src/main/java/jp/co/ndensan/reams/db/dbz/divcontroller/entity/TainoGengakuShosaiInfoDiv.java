@@ -1,26 +1,16 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.ModoruDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.TainocolorKannoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.TainocolorKanoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.TainocolorMitoraiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.TainocolorTaishoGaiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.TainocolorToraiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.dgTainoShosaiInfo_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.tblCommentDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TainoGengakuShosaiInfo のクラスファイル 
- * 
+ * TainoGengakuShosaiInfo のクラスファイル
+ *
  * @author 自動生成
  */
 public class TainoGengakuShosaiInfoDiv extends Panel {
@@ -30,6 +20,7 @@ public class TainoGengakuShosaiInfoDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("chkHyojiKirikae")
     private CheckBoxList chkHyojiKirikae;
     @JsonProperty("txtNendo")
@@ -54,7 +45,7 @@ public class TainoGengakuShosaiInfoDiv extends Panel {
 
     @JsonProperty("chkHyojiKirikae")
     public void setChkHyojiKirikae(CheckBoxList chkHyojiKirikae) {
-        this.chkHyojiKirikae=chkHyojiKirikae;
+        this.chkHyojiKirikae = chkHyojiKirikae;
     }
 
     @JsonProperty("txtNendo")
@@ -64,7 +55,7 @@ public class TainoGengakuShosaiInfoDiv extends Panel {
 
     @JsonProperty("txtNendo")
     public void setTxtNendo(TextBoxDate txtNendo) {
-        this.txtNendo=txtNendo;
+        this.txtNendo = txtNendo;
     }
 
     @JsonProperty("dgTainoShosaiInfo")
@@ -74,7 +65,7 @@ public class TainoGengakuShosaiInfoDiv extends Panel {
 
     @JsonProperty("dgTainoShosaiInfo")
     public void setDgTainoShosaiInfo(DataGrid<dgTainoShosaiInfo_Row> dgTainoShosaiInfo) {
-        this.dgTainoShosaiInfo=dgTainoShosaiInfo;
+        this.dgTainoShosaiInfo = dgTainoShosaiInfo;
     }
 
     @JsonProperty("tblComment")
@@ -84,7 +75,7 @@ public class TainoGengakuShosaiInfoDiv extends Panel {
 
     @JsonProperty("tblComment")
     public void setTblComment(tblCommentDiv tblComment) {
-        this.tblComment=tblComment;
+        this.tblComment = tblComment;
     }
 
     @JsonProperty("Modoru")
@@ -94,7 +85,7 @@ public class TainoGengakuShosaiInfoDiv extends Panel {
 
     @JsonProperty("Modoru")
     public void setModoru(ModoruDiv Modoru) {
-        this.Modoru=Modoru;
+        this.Modoru = Modoru;
     }
 
     /*
@@ -107,7 +98,7 @@ public class TainoGengakuShosaiInfoDiv extends Panel {
 
     @JsonIgnore
     public Label getLblColorWhite() {
-        return this.getTblComment().getTainocolorKanno().getLblColorWhite();
+        return this.getTblComment().getTainocolorKanno().getLblDummyWhite();
     }
 
     @JsonIgnore
@@ -181,7 +172,7 @@ public class TainoGengakuShosaiInfoDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnModoru(Button btnModoru) {
+    public void setBtnModoru(Button btnModoru) {
         this.getModoru().setBtnModoru(btnModoru);
     }
 

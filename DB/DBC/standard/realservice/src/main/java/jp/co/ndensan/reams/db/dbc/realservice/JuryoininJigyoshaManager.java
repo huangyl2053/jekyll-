@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.ur.urc.business.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.hojin.IHojin;
 //TODO n8233 朴　jp.co.ndensan.reams.ua.uax.realservice.HojinServiceに変更
 //import jp.co.ndensan.reams.ur.urz.realservice.HojinService;
-import jp.co.ndensan.reams.ua.uax.realservice.HojinService;
+import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.ShikibetsuTaishoService;
 //TODO n8233 朴　jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IHojinFinderに変更
 //import jp.co.ndensan.reams.ur.urz.realservice.IHojinFinder;
 import jp.co.ndensan.reams.ua.uax.realservice.shikibetsutaisho.IHojinFinder;
@@ -53,7 +53,7 @@ public class JuryoininJigyoshaManager {
 
         //TODO n3317塚田萌 _KaigoJigyoshaFinder() の実装が完了したらgetInstance()を行う。
 //        jigyoshaFinder = KaigoJigyoshaFinderFactory.getInstance();
-        hojinFinder = HojinService.createHojinFinder();
+        hojinFinder = ShikibetsuTaishoService.getHojinFinder();
         kozaFinder = KozaService.createKozaManager();
     }
 
@@ -141,7 +141,7 @@ public class JuryoininJigyoshaManager {
         //TODO n3317塚田萌　kozaFinderの修正が完了した時に対応する。
         RString 業務コード = new RString("業務コード");
         KamokuCode 科目コード = new KamokuCode(new RString("AAA"));
-        return kozaFinder.get口座(契約開始日.toRDate(), 識別コード, 業務コード, 科目コード).get(0);
+        return kozaFinder.get口座(契約開始日.toRDate(), 識別コード, GyomuCode.DB介護保険, 科目コード).get(0);
     }
 
     private boolean is更新成功(int 更新件数) {
