@@ -1,0 +1,102 @@
+﻿{
+ "uiContainerName": "DBAUC24001",
+ "displayWizard": false,
+ "subGyomuCode": "DBA",
+ "steps": [
+  {
+   "id": 1,
+   "name": "他市町村住所地特例異動",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZU020001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "対象者検索"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZU020001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA2040011",
+     "toLayoutTitle": "他市町村住所地特例異動",
+     "toState": "照会適用"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZU020001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "解除",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA2040011",
+     "toLayoutTitle": "他市町村住所地特例異動",
+     "toState": "照会解除"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZU020001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "変更",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA2040011",
+     "toLayoutTitle": "他市町村住所地特例異動",
+     "toState": "照会変更"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2040011",
+     "layoutTitle": "他市町村住所地特例異動",
+     "eventName": "検索に戻る",
+     "destroy": false,
+     "condition": "対象者検索",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZU020001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "対象者検索"
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2040011",
+     "layoutTitle": "他市町村住所地特例異動",
+     "eventName": "検索に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZU020001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
+    },
+    {
+     "id": "7",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2040011",
+     "layoutTitle": "他市町村住所地特例異動",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}
