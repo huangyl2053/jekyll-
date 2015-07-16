@@ -46,6 +46,7 @@ import static org.mockito.Mockito.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class KiwarigakuHandlerTest extends DbbTestBase {
 
     private static KiwarigakuDiv result;
