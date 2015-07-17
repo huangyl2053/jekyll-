@@ -27,8 +27,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 public class JukyushaIdoRenrakuhyoHenkoSearchResultListPanel {
 
-    private static final RString YML_NAME = new RString("dbc0220011/JukyushaIdoRenrakuhyoHenkoSearchResultList.yml");
-
     /**
      * 検索時の処理です。
      *
@@ -37,13 +35,9 @@ public class JukyushaIdoRenrakuhyoHenkoSearchResultListPanel {
      */
     public ResponseData<JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv> onClick_btnSearch(
             JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv panel) {
-        ResponseData<JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv> response = new ResponseData<>();
-
         setJukyushaIdoRenrakuhyoHenkoSearchResult(panel);
 
-        response.data = panel;
-        return response;
-
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -54,13 +48,9 @@ public class JukyushaIdoRenrakuhyoHenkoSearchResultListPanel {
      */
     public ResponseData<JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv> onClick_btnDelete(
             JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv panel) {
-        ResponseData<JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv> response = new ResponseData<>();
-
         modifyJukyushaIdoRenrakuhyoHenkoSearchResult(panel, RowState.Deleted);
 
-        response.data = panel;
-        return response;
-
+        return ResponseData.of(panel).respond();
     }
 
     private void setJukyushaIdoRenrakuhyoHenkoSearchResult(JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv panel) {
@@ -72,17 +62,17 @@ public class JukyushaIdoRenrakuhyoHenkoSearchResultListPanel {
     }
 
     private void loadJukyushaIdoRenrakuhyoHenkoSearchResult(JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv panel) {
-        List<HashMap> mapList = getYmlData();
-        List<dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row> list = new ArrayList<>();
-        for (int index = 0; index < mapList.size(); index++) {
-            ControlGenerator cg = new ControlGenerator(mapList.get(index));
-            list.add(createJukyushaIdoRenrakuhyoHenkoSearchResultRow(
-                    cg.getAsTextBoxDate("異動日"),
-                    cg.getAsTextBoxCode("被保番号"),
-                    cg.getAsTextBox("カナ氏名"),
-                    cg.getAsTextBoxDate("送付年月")));
-        }
-        panel.getDgJukyushaIdoRenrakuhyoHenkoSearchResult().setDataSource(list);
+//        List<HashMap> mapList = getYmlData();
+//        List<dgJukyushaIdoRenrakuhyoHenkoSearchResult_Row> list = new ArrayList<>();
+//        for (int index = 0; index < mapList.size(); index++) {
+//            ControlGenerator cg = new ControlGenerator(mapList.get(index));
+//            list.add(createJukyushaIdoRenrakuhyoHenkoSearchResultRow(
+//                    cg.getAsTextBoxDate("異動日"),
+//                    cg.getAsTextBoxCode("被保番号"),
+//                    cg.getAsTextBox("カナ氏名"),
+//                    cg.getAsTextBoxDate("送付年月")));
+//        }
+//        panel.getDgJukyushaIdoRenrakuhyoHenkoSearchResult().setDataSource(list);
     }
 
     private void modifyJukyushaIdoRenrakuhyoHenkoSearchResult(JukyushaIdoRenrakuhyoHenkoSearchResultListPanelDiv panel, RowState rowState) {
@@ -105,9 +95,5 @@ public class JukyushaIdoRenrakuhyoHenkoSearchResultListPanel {
                 txtResultHihoName,
                 txtResultSendYM,
                 true);
-    }
-
-    private List<HashMap> getYmlData() {
-        return YamlLoader.DBC.loadAsList(YML_NAME);
     }
 }

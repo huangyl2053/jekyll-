@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.KyotakuJikoTodokedeDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.KyotakuJikoTodokedeHenkoNaiyoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.KyotakuJikoTodokedeKihonDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.KyotakuJikoTodokedeMeisaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.KyotakuJikoTodokedeRirekiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0110000.KyotakuJikoTodokedeshaDiv;
@@ -22,10 +21,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoK
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyolist.dgShoKaishuJokyo_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -37,11 +34,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  *
  * @author N8187 久保田 英男
  */
+//TODO n3317塚田　Yamlを使わないように修正する
 public class KyotakuJikoTodokedeDetail {
-
-    private List<HashMap> getYaml() {
-        return YamlLoader.DBC.loadAsList(new RString("dbc0110000/KyotakuJikoTodokedeDetail.yml"));
-    }
 
     /**
      * 画面ロード時の処理です。
@@ -50,13 +44,12 @@ public class KyotakuJikoTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onLoad(KyotakuJikoTodokedeDetailDiv panel) {
-        ResponseData<KyotakuJikoTodokedeDetailDiv> response = new ResponseData<>();
         setKihonData(panel);
         setRirekiList(panel);
         setMeisaiDefaultData(panel);
         setShoKaishuJokyoListData(panel);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     private enum 画面表示 {
@@ -74,24 +67,24 @@ public class KyotakuJikoTodokedeDetail {
     }
 
     private void setKihonData(KyotakuJikoTodokedeDetailDiv panel) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
-        ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
-        int rowId = 0;
-        KyotakuJikoTodokedeKihonDiv div = panel.getKyotakuJikoTodokedeKihon();
-//        KaigoShikakuKihon.setData(div.getKyotakuJikoTodokedeKihonAtena(), div.getKyotakuJikoTodokedeKaigoKihon(), 識別コード, rowId);
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
+//        ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
+//        int rowId = 0;
+//        KyotakuJikoTodokedeKihonDiv div = panel.getKyotakuJikoTodokedeKihon();
+////        KaigoShikakuKihon.setData(div.getKyotakuJikoTodokedeKihonAtena(), div.getKyotakuJikoTodokedeKaigoKihon(), 識別コード, rowId);
     }
 
     private void setRirekiList(KyotakuJikoTodokedeDetailDiv panel) {
-        Button btn = new Button();
-        for (int i = 3; i < 5; i++) {
-            ControlGenerator cg = new ControlGenerator(getYaml().get(i));
-            add履歴(panel, create履歴(
-                    btn,
-                    cg.getAsRString("計画適用期間開始日"),
-                    cg.getAsRString("計画適用期間終了日"),
-                    cg.getAsRString("届出日"),
-                    cg.getAsRString("届出区分")));
-        }
+//        Button btn = new Button();
+//        for (int i = 3; i < 5; i++) {
+//            ControlGenerator cg = new ControlGenerator(getYaml().get(i));
+//            add履歴(panel, create履歴(
+//                    btn,
+//                    cg.getAsRString("計画適用期間開始日"),
+//                    cg.getAsRString("計画適用期間終了日"),
+//                    cg.getAsRString("届出日"),
+//                    cg.getAsRString("届出区分")));
+//        }
     }
 
     /**
@@ -193,12 +186,11 @@ public class KyotakuJikoTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onClickTodokedeNew(KyotakuJikoTodokedeDetailDiv panel) {
-        ResponseData<KyotakuJikoTodokedeDetailDiv> response = new ResponseData<>();
         initMeisai(panel);
         setMeisaiData(panel, 画面表示.新規届出);
         showMeisai(panel, 画面表示.新規届出);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -208,12 +200,11 @@ public class KyotakuJikoTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onClickTodokedeModify(KyotakuJikoTodokedeDetailDiv panel) {
-        ResponseData<KyotakuJikoTodokedeDetailDiv> response = new ResponseData<>();
         initMeisai(panel);
         setMeisaiData(panel, 画面表示.変更届出);
         showMeisai(panel, 画面表示.変更届出);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -223,7 +214,6 @@ public class KyotakuJikoTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onClickTodokedeSelect(KyotakuJikoTodokedeDetailDiv panel) {
-        ResponseData<KyotakuJikoTodokedeDetailDiv> response = new ResponseData<>();
         int selectRowindex = panel.getTabKyotakuServiceJikoSakuseiTodokede().getTplKyotakuJikoTodokedeDetailRireki().
                 getKyotakuJikoTodokedeRirekiList().getDgKyotakuJikoTodokedeRirekiList().getClickedRowId();
         RString index = new RString(String.valueOf(selectRowindex));
@@ -235,8 +225,7 @@ public class KyotakuJikoTodokedeDetail {
         div.getKyotakuJikoTodokedeRirekiList().setIsOpen(false);
         div.getKyotakuJikoTodokedeMeisai().setIsOpen(true);
 
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -246,13 +235,12 @@ public class KyotakuJikoTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onClickTodokedeDelete(KyotakuJikoTodokedeDetailDiv panel) {
-        ResponseData<KyotakuJikoTodokedeDetailDiv> response = new ResponseData<>();
         int index = Integer.valueOf(panel.getTabKyotakuServiceJikoSakuseiTodokede().
                 getTplKyotakuJikoTodokedeDetailRireki().getKyotakuJikoTodokedeMeisai().getTxtRirekiListSelectIndex().getValue().toString());
         modify履歴(panel, index, 修正削除.削除);
         initMeisai(panel);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -262,10 +250,9 @@ public class KyotakuJikoTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onClickTodokedeClear(KyotakuJikoTodokedeDetailDiv panel) {
-        ResponseData<KyotakuJikoTodokedeDetailDiv> response = new ResponseData<>();
         initMeisai(panel);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -275,7 +262,6 @@ public class KyotakuJikoTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onClickTodokedeKakutei(KyotakuJikoTodokedeDetailDiv panel) {
-        ResponseData<KyotakuJikoTodokedeDetailDiv> response = new ResponseData<>();
         Button btn = new Button();
         KyotakuJikoTodokedeMeisaiDiv meisai = panel.getTabKyotakuServiceJikoSakuseiTodokede().
                 getTplKyotakuJikoTodokedeDetailRireki().getKyotakuJikoTodokedeMeisai();
@@ -317,8 +303,7 @@ public class KyotakuJikoTodokedeDetail {
         add履歴(panel, row);
 
         initMeisai(panel);
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -328,14 +313,12 @@ public class KyotakuJikoTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onClickTodokedeTeisei(KyotakuJikoTodokedeDetailDiv panel) {
-        ResponseData<KyotakuJikoTodokedeDetailDiv> response = new ResponseData<>();
         int index = Integer.valueOf(panel.getTabKyotakuServiceJikoSakuseiTodokede().
                 getTplKyotakuJikoTodokedeDetailRireki().getKyotakuJikoTodokedeMeisai().getTxtRirekiListSelectIndex().getValue().toString());
         modify履歴(panel, index, 修正削除.修正);
         initMeisai(panel);
 
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -409,68 +392,68 @@ public class KyotakuJikoTodokedeDetail {
      */
     private void setMeisaiData(KyotakuJikoTodokedeDetailDiv panel, 画面表示 pattern) {
 
-        KyotakuJikoTodokedeMeisaiDiv meisai = panel.getTabKyotakuServiceJikoSakuseiTodokede().
-                getTplKyotakuJikoTodokedeDetailRireki().getKyotakuJikoTodokedeMeisai();
-        DataGrid<dgKyotakuJikoTodokedeRirekiList_Row> rirekiList = panel.getTabKyotakuServiceJikoSakuseiTodokede().
-                getTplKyotakuJikoTodokedeDetailRireki().getKyotakuJikoTodokedeRirekiList().getDgKyotakuJikoTodokedeRirekiList();
-        dgKyotakuJikoTodokedeRirekiList_Row selectRow = rirekiList.getClickedItem();
-
-        KyotakuJikoTodokedeshaDiv todokedesha = meisai.getKyotakuJikoTodokedesha();
-        KyotakuJikoTodokedeHenkoNaiyoDiv henkoNaiyo = meisai.getKyotakuJikoTodokedeHenkoNaiyo();
-
-        ControlGenerator cg = new ControlGenerator(getYaml().get(7));
-        if (pattern.equals(画面表示.初期表示)) {
-            meisai.getTxtTodokedeKubun().clearValue();
-        } else if (pattern.equals(画面表示.新規届出)) {
-            cg = new ControlGenerator(getYaml().get(8));
-            meisai.getTxtTodokedeKubun().setValue(cg.getAsRString("届出区分"));
-        } else if (pattern.equals(画面表示.変更届出)) {
-            cg = new ControlGenerator(getYaml().get(9));
-            meisai.getTxtTodokedeKubun().setValue(cg.getAsRString("届出区分"));
-        } else if (pattern.equals(画面表示.届出内容修正)) {
-            cg = new ControlGenerator(getYaml().get(10));
-            meisai.getTxtTodokedeKubun().setValue(selectRow.getTxtTodokedeKubun());
-        }
-
-        if (pattern.equals(画面表示.新規届出)
-                || pattern.equals(画面表示.変更届出)
-                || pattern.equals(画面表示.届出内容修正)) {
-
-            if (pattern.equals(画面表示.届出内容修正)) {
-                try {
-                    meisai.getTxtTodokedeYMD().setValue(new RDate(selectRow.getTxtTodokedeYMD().toString()));
-                } catch (Throwable e) {
-                    meisai.getTxtTodokedeYMD().clearValue();
-                }
-                try {
-                    meisai.getTxtTekiyoKikan().setFromValue(new RDate(selectRow.getTxtKeikakuTekiyoKaishiYMD().toString()));
-                } catch (Throwable e) {
-                    meisai.getTxtTekiyoKikan().clearFromValue();
-                }
-                try {
-                    meisai.getTxtTekiyoKikan().setToValue(new RDate(selectRow.getTxtKeikakuTekiyoShuryoYMD().toString()));
-                } catch (Throwable e) {
-                    meisai.getTxtTekiyoKikan().clearToValue();
-                }
-                meisai.getTxtTaishoYMD().setValue(cg.getAsRDate("対象年月"));
-                meisai.getTxtKeikakuSakuseiYMD().setValue(cg.getAsRDate("計画作成日"));
-            } else {
-                meisai.getTxtTodokedeYMD().setValue(cg.getAsRDate("届出日"));
-                meisai.getTxtTekiyoKikan().setFromValue(cg.getAsRDate("適用期間開始日"));
-            }
-
-            todokedesha.getTxtTodokedeshaName().setValue(cg.getAsRString("届出者氏名"));
-            todokedesha.getTxtTodokedeshaKana().setValue(cg.getAsRString("届出者カナ"));
-            todokedesha.getTxtTodokedeshaTelNo().setValue(cg.getAsRString("届出者電話番号"));
-            todokedesha.getTxtTodokedeshaYubinNo().setValue(cg.getAsYubinNo("届出者郵便番号"));
-            todokedesha.getTxtTodokedeshaJusho().setValue(cg.getAsRString("届出者住所"));
-
-            if (pattern.equals(画面表示.変更届出)
-                    || (pattern.equals(画面表示.届出内容修正) && !selectRow.getTxtTodokedeKubun().equals(new RString("新規")))) {
-                henkoNaiyo.getTxtHenkoYMD().setValue(cg.getAsRDate("変更日"));
-                henkoNaiyo.getTxtHenkoJiyu().setValue(cg.getAsRString("変更事由"));
-            }
-        }
+//        KyotakuJikoTodokedeMeisaiDiv meisai = panel.getTabKyotakuServiceJikoSakuseiTodokede().
+//                getTplKyotakuJikoTodokedeDetailRireki().getKyotakuJikoTodokedeMeisai();
+//        DataGrid<dgKyotakuJikoTodokedeRirekiList_Row> rirekiList = panel.getTabKyotakuServiceJikoSakuseiTodokede().
+//                getTplKyotakuJikoTodokedeDetailRireki().getKyotakuJikoTodokedeRirekiList().getDgKyotakuJikoTodokedeRirekiList();
+//        dgKyotakuJikoTodokedeRirekiList_Row selectRow = rirekiList.getClickedItem();
+//
+//        KyotakuJikoTodokedeshaDiv todokedesha = meisai.getKyotakuJikoTodokedesha();
+//        KyotakuJikoTodokedeHenkoNaiyoDiv henkoNaiyo = meisai.getKyotakuJikoTodokedeHenkoNaiyo();
+//
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(7));
+//        if (pattern.equals(画面表示.初期表示)) {
+//            meisai.getTxtTodokedeKubun().clearValue();
+//        } else if (pattern.equals(画面表示.新規届出)) {
+//            cg = new ControlGenerator(getYaml().get(8));
+//            meisai.getTxtTodokedeKubun().setValue(cg.getAsRString("届出区分"));
+//        } else if (pattern.equals(画面表示.変更届出)) {
+//            cg = new ControlGenerator(getYaml().get(9));
+//            meisai.getTxtTodokedeKubun().setValue(cg.getAsRString("届出区分"));
+//        } else if (pattern.equals(画面表示.届出内容修正)) {
+//            cg = new ControlGenerator(getYaml().get(10));
+//            meisai.getTxtTodokedeKubun().setValue(selectRow.getTxtTodokedeKubun());
+//        }
+//
+//        if (pattern.equals(画面表示.新規届出)
+//                || pattern.equals(画面表示.変更届出)
+//                || pattern.equals(画面表示.届出内容修正)) {
+//
+//            if (pattern.equals(画面表示.届出内容修正)) {
+//                try {
+//                    meisai.getTxtTodokedeYMD().setValue(new RDate(selectRow.getTxtTodokedeYMD().toString()));
+//                } catch (Throwable e) {
+//                    meisai.getTxtTodokedeYMD().clearValue();
+//                }
+//                try {
+//                    meisai.getTxtTekiyoKikan().setFromValue(new RDate(selectRow.getTxtKeikakuTekiyoKaishiYMD().toString()));
+//                } catch (Throwable e) {
+//                    meisai.getTxtTekiyoKikan().clearFromValue();
+//                }
+//                try {
+//                    meisai.getTxtTekiyoKikan().setToValue(new RDate(selectRow.getTxtKeikakuTekiyoShuryoYMD().toString()));
+//                } catch (Throwable e) {
+//                    meisai.getTxtTekiyoKikan().clearToValue();
+//                }
+//                meisai.getTxtTaishoYMD().setValue(cg.getAsRDate("対象年月"));
+//                meisai.getTxtKeikakuSakuseiYMD().setValue(cg.getAsRDate("計画作成日"));
+//            } else {
+//                meisai.getTxtTodokedeYMD().setValue(cg.getAsRDate("届出日"));
+//                meisai.getTxtTekiyoKikan().setFromValue(cg.getAsRDate("適用期間開始日"));
+//            }
+//
+//            todokedesha.getTxtTodokedeshaName().setValue(cg.getAsRString("届出者氏名"));
+//            todokedesha.getTxtTodokedeshaKana().setValue(cg.getAsRString("届出者カナ"));
+//            todokedesha.getTxtTodokedeshaTelNo().setValue(cg.getAsRString("届出者電話番号"));
+//            todokedesha.getTxtTodokedeshaYubinNo().setValue(cg.getAsYubinNo("届出者郵便番号"));
+//            todokedesha.getTxtTodokedeshaJusho().setValue(cg.getAsRString("届出者住所"));
+//
+//            if (pattern.equals(画面表示.変更届出)
+//                    || (pattern.equals(画面表示.届出内容修正) && !selectRow.getTxtTodokedeKubun().equals(new RString("新規")))) {
+//                henkoNaiyo.getTxtHenkoYMD().setValue(cg.getAsRDate("変更日"));
+//                henkoNaiyo.getTxtHenkoJiyu().setValue(cg.getAsRString("変更事由"));
+//            }
+//        }
     }
 
     /**

@@ -32,16 +32,8 @@ public class JutakuKaishuShinseiList {
      */
     public ResponseData<JutakuKaishuShinseiListDiv> onLoad(JutakuKaishuShinseiListDiv panel) {
 
-        ResponseData<JutakuKaishuShinseiListDiv> response = new ResponseData<>();
-
-        //TO DO
-        String ymlDataName = "JutakuData_1.yml";
-
-        setJutakuKaishuShinseiList(panel, ymlDataName);
-
-        response.data = panel;
-        return response;
-
+//        setJutakuKaishuShinseiList(panel, ymlDataName);
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -51,28 +43,12 @@ public class JutakuKaishuShinseiList {
      * @return PanelDivのResponseData
      */
     public ResponseData<JutakuKaishuShinseiListDiv> onClick_btnAddShinseiContents(JutakuKaishuShinseiListDiv panel) {
-        ResponseData<JutakuKaishuShinseiListDiv> response = new ResponseData<>();
 
-        //TO DO
-        int selRowId = panel.getDgJutakuKaishuShinseiList().getClickedRowId();
-
-        System.out.println("+++selRowId++++" + selRowId);
-
-        String ymlDataName;
-
-        ///////////////////////////////////////////////////////////
-        if (selRowId >= 0) {
-            ymlDataName = "JutakuData_1_2.yml";
-        } else {
-            ymlDataName = "JutakuData_2.yml";
-        }
-        ///////////////////////////////////////////////////////////
-
-        setJutakuKaishuShinseiList(panel, ymlDataName);
-
-        response.data = panel;
-        return response;
-
+//        int selRowId = panel.getDgJutakuKaishuShinseiList().getClickedRowId();
+//
+//        String ymlDataName;
+//        setJutakuKaishuShinseiList(panel, ymlDataName);
+        return ResponseData.of(panel).respond();
     }
 
     /*
@@ -93,29 +69,28 @@ public class JutakuKaishuShinseiList {
 
         List<dgJutakuKaishuShinseiList_Row> arrayData = new ArrayList<>();
 
-/////////////////////////////////////////////////////////////////////////////////////////
-        //TO DO  JutakuData1.xml ①
-        List<HashMap> ymlData = ymlData(ymlDataName);
-
-        if (ymlDataName.equals("JutakuData_2.yml")) {
-
-            //TO DO データを増える場合。
-            for (int i = 2; i < ymlData.size(); i++) {
-                HashMap hashMap = ymlData.get(i);
-                hashMap(hashMap, arrayData);
-            }
-
-        } else if (ymlDataName.equals("JutakuData_1.yml")) {
-
-            HashMap hashMap = ymlData.get(2);
-            hashMap(hashMap, arrayData);
-
-        } else if (ymlDataName.equals("JutakuData_1_2.yml")) {
-
-            HashMap hashMap = ymlData.get(2);
-            hashMap(hashMap, arrayData);
-        }
-
+///////////////////////////////////////////////////////////////////////////////////////////
+//        //TO DO  JutakuData1.xml ①
+//        List<HashMap> ymlData = ymlData(ymlDataName);
+//
+//        if (ymlDataName.equals("JutakuData_2.yml")) {
+//
+//            //TO DO データを増える場合。
+//            for (int i = 2; i < ymlData.size(); i++) {
+//                HashMap hashMap = ymlData.get(i);
+//                hashMap(hashMap, arrayData);
+//            }
+//
+//        } else if (ymlDataName.equals("JutakuData_1.yml")) {
+//
+//            HashMap hashMap = ymlData.get(2);
+//            hashMap(hashMap, arrayData);
+//
+//        } else if (ymlDataName.equals("JutakuData_1_2.yml")) {
+//
+//            HashMap hashMap = ymlData.get(2);
+//            hashMap(hashMap, arrayData);
+//        }
         return arrayData;
 
     }
@@ -199,11 +174,5 @@ public class JutakuKaishuShinseiList {
 
     private boolean isAddRow(String 状態) {
         return 状態.equals("追加");
-    }
-
-    // TO DO  JutakuData１.xml ①
-    private List<HashMap> ymlData(String ymlDataName) {
-
-        return YamlLoader.DBC.loadAsList(new RString("dbc0710011/").concat(ymlDataName));
     }
 }

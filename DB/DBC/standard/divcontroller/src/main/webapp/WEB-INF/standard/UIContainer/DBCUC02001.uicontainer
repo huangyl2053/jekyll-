@@ -1,33 +1,60 @@
 ﻿{
- "transitionList": [
-  {
-   "id": "0",
-   "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0200001",
-   "eventName": "modify",
-   "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0200002",
-   "toEventName": ""
-  },
-  {
-   "id": "2",
-   "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0200002",
-   "eventName": "cancel",
-   "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0200001",
-   "toEventName": ""
-  },
-  {
-   "id": "3",
-   "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0200002",
-   "eventName": "update",
-   "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0200001",
-   "toEventName": "onload"
-  }
- ],
+ "uiContainerName": "DBCUC02001",
+ "displayWizard": false,
  "subGyomuCode": "DBC",
- "uiContainerName": "DBCUC02001"
+ "steps": [
+  {
+   "id": 1,
+   "name": "受給移動情報履歴訂正",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0200001",
+     "toLayoutTitle": "受給異動情報履歴訂正一覧",
+     "toState": ""
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0200001",
+     "layoutTitle": "受給異動情報履歴訂正一覧",
+     "eventName": "連絡票変更",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0200002",
+     "toLayoutTitle": "保険者情報送付",
+     "toState": ""
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0200002",
+     "layoutTitle": "保険者情報送付",
+     "eventName": "履歴訂正一覧",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0200001",
+     "toLayoutTitle": "受給異動情報履歴訂正一覧",
+     "toState": ""
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0200001",
+     "layoutTitle": "受給異動情報履歴訂正一覧",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
 }

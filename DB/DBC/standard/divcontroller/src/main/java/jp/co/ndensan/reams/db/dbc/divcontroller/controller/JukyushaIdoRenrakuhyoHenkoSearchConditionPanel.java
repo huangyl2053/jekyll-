@@ -18,9 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8156 宮本 康
  */
+//TODO n3317塚田　Yamlを使わないように変更
 public class JukyushaIdoRenrakuhyoHenkoSearchConditionPanel {
-
-    private static final RString YML_NAME = new RString("dbc0220011/JukyushaIdoRenrakuhyoHenko.yml");
 
     /**
      * 画面ロード時の処理です。
@@ -29,12 +28,10 @@ public class JukyushaIdoRenrakuhyoHenkoSearchConditionPanel {
      * @return ResponseData
      */
     public ResponseData<JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv> onLoad(JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv panel) {
-        ResponseData<JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv> response = new ResponseData<>();
 
         setJukyushaIdoRenrakuhyoHenkoSearchCondition(panel);
 
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -45,28 +42,21 @@ public class JukyushaIdoRenrakuhyoHenkoSearchConditionPanel {
      */
     public ResponseData<JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv> onClick_btnClearSearchCondition(
             JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv panel) {
-        ResponseData<JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv> response = new ResponseData<>();
-
         setClearSearchCondition(panel);
 
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     private void setJukyushaIdoRenrakuhyoHenkoSearchCondition(JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv panel) {
-        ControlGenerator cg = new ControlGenerator(getYmlData().get(0));
-        panel.getTxtIdoDateRange().setFromValue(cg.getAsRDate("異動日開始"));
-        panel.getTxtIdoDateRange().setToValue(cg.getAsRDate("異動日終了"));
-        panel.getTxtSearchHihoNo().setValue(cg.getAsRString("被保番号"));
+//        ControlGenerator cg = new ControlGenerator(getYmlData().get(0));
+//        panel.getTxtIdoDateRange().setFromValue(cg.getAsRDate("異動日開始"));
+//        panel.getTxtIdoDateRange().setToValue(cg.getAsRDate("異動日終了"));
+//        panel.getTxtSearchHihoNo().setValue(cg.getAsRString("被保番号"));
     }
 
     private void setClearSearchCondition(JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv panel) {
         panel.getTxtIdoDateRange().clearFromValue();
         panel.getTxtIdoDateRange().clearToValue();
         panel.getTxtSearchHihoNo().clearValue();
-    }
-
-    private List<HashMap> getYmlData() {
-        return YamlLoader.DBC.loadAsList(YML_NAME);
     }
 }

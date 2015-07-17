@@ -20,10 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class JukyushaIdoRenrakuhyoSakusei {
 
-    private List<HashMap> getYaml() {
-        return YamlLoader.DBC.loadAsList(new RString("dbc0200000/JukyushaIdoRenrakuhyoSakusei.yml"));
-    }
-
     /**
      * 保険者情報送付一覧でリストを選択したときの処理です。
      *
@@ -31,19 +27,16 @@ public class JukyushaIdoRenrakuhyoSakusei {
      * @return ResponseData
      */
     public ResponseData<JukyushaIdoRenrakuhyoSakuseiDiv> onSelectHokenshaSofuList(JukyushaIdoRenrakuhyoSakuseiDiv panel) {
-        ResponseData<JukyushaIdoRenrakuhyoSakuseiDiv> response = new ResponseData<>();
-
         setJukyushaIdoRenrakuhyoSakusei(panel);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     private void setJukyushaIdoRenrakuhyoSakusei(JukyushaIdoRenrakuhyoSakuseiDiv panel) {
-        HashMap source = getYaml().get(0);
-
-        panel.getTxtShoriTaishoYM().setValue(new RDate(source.get("処理対象年月").toString()));
-        panel.getTxtSaiShoriKubun().setValue(new RString(source.get("再処理区分").toString()));
-        panel.getTxtFileName().setValue(new RString(source.get("ファイル名").toString()));
+//        HashMap source = getYaml().get(0);
+//
+//        panel.getTxtShoriTaishoYM().setValue(new RDate(source.get("処理対象年月").toString()));
+//        panel.getTxtSaiShoriKubun().setValue(new RString(source.get("再処理区分").toString()));
+//        panel.getTxtFileName().setValue(new RString(source.get("ファイル名").toString()));
     }
-
 }

@@ -8,6 +8,10 @@ module DBC {
 
         export class Events {
 
+            public static onSelectBySelectButton(): string {
+                return "onSelectBySelectButton";
+            }
+
         }
 
         export class Controls {

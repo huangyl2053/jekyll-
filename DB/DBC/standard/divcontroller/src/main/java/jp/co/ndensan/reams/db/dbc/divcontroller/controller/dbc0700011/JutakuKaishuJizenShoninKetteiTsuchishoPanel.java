@@ -27,12 +27,9 @@ public class JutakuKaishuJizenShoninKetteiTsuchishoPanel {
      * @return response
      */
     public ResponseData<JutakuKaishuJizenShoninKetteiTsuchishoPanelDiv> onLoad(JutakuKaishuJizenShoninKetteiTsuchishoPanelDiv panel) {
-        ResponseData<JutakuKaishuJizenShoninKetteiTsuchishoPanelDiv> response = new ResponseData<>();
 
-//        List<HashMap> targetSource = YamlLoader.DBZ.loadAsList(new RString("ReportPublish.yml"));
-//        ControlGenerator cg = new ControlGenerator(targetSource.get(0));
         panel.getTxtHakkoDate().setValue(new RDate("20140711"));
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 }
