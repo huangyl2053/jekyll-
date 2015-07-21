@@ -33,6 +33,10 @@ module DBE {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
+            public ddlHokensha(): UZA.DropDownList {
+                return new UZA.DropDownList(this.convFiledName("ddlHokensha"));
+            }
+
             public txtNinteiShinsakaiName(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtNinteiShinsakaiName"));
             }
