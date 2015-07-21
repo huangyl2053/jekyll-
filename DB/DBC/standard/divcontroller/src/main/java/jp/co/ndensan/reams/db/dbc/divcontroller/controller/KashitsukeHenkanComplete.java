@@ -21,8 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KashitsukeHenkanComplete {
 
-    private static final RString YML_COMPLETE = new RString("dbc1810000/KashitsukeHenkanComplete.yml");
-
     /**
      * 画面ロード時の処理です。
      *
@@ -30,16 +28,9 @@ public class KashitsukeHenkanComplete {
      * @return ResponseData
      */
     public ResponseData<KashitsukeHenkanCompleteDiv> onLoad(KashitsukeHenkanCompleteDiv panel) {
-        ResponseData<KashitsukeHenkanCompleteDiv> response = new ResponseData<>();
+//        ControlGenerator cg = new ControlGenerator(getYamlData(YML_COMPLETE).get(0));
+//        KaigoKanryoMessage.setMessage(panel.getKashitsukeHenkanInfoCompleteInfo(), cg.getAsRString("メッセージ"));
 
-        ControlGenerator cg = new ControlGenerator(getYamlData(YML_COMPLETE).get(0));
-        KaigoKanryoMessage.setMessage(panel.getKashitsukeHenkanInfoCompleteInfo(), cg.getAsRString("メッセージ"));
-
-        response.data = panel;
-        return response;
-    }
-
-    private List<HashMap> getYamlData(RString yamlName) {
-        return YamlLoader.DBC.loadAsList(yamlName);
+        return ResponseData.of(panel).respond();
     }
 }

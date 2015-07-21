@@ -1,24 +1,74 @@
 ﻿{
- "transitionList": [
-  {
-   "id": "0",
-   "layoutSubGyomuCode": "DBZ",
-   "layoutName": "DBZU020001",
-   "eventName": "decideToTaishosha",
-   "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC1800000",
-   "toEventName": ""
-  },
-  {
-   "id": "1",
-   "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC1800000",
-   "eventName": "return",
-   "toLayoutSubGyomuCode": "DBZ",
-   "toLayoutName": "DBZU020001",
-   "toEventName": ""
-  }
- ],
+ "uiContainerName": "DBCUC18000",
+ "displayWizard": false,
  "subGyomuCode": "DBC",
- "uiContainerName": "DBCUC18000"
+ "steps": [
+  {
+   "id": 1,
+   "name": "給付費貸付金申請登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZU020001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "対象者検索"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZU020001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1800000",
+     "toLayoutTitle": "給付費貸付金申請登録",
+     "toState": "貸付金一覧"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1800000",
+     "layoutTitle": "給付費貸付金申請登録",
+     "eventName": "対象者検索",
+     "destroy": false,
+     "condition": "対象者検索",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZU020001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "対象者検索"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1800000",
+     "layoutTitle": "給付費貸付金申請登録",
+     "eventName": "対象者検索",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZU020001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1800000",
+     "layoutTitle": "給付費貸付金申請登録",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
 }

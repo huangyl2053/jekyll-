@@ -1,69 +1,144 @@
 ﻿{
- "transitionList": [
-  {
-   "id": "1",
-   "layoutSubGyomuCode": "DBZ",
-   "layoutName": "DBZU020001",
-   "eventName": "decideToTaishosha",
-   "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0810000",
-   "toEventName": ""
-  },
-  {
-   "id": "2",
-   "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0810000",
-   "eventName": "research",
-   "toLayoutSubGyomuCode": "DBZ",
-   "toLayoutName": "DBZU020001",
-   "toEventName": "researchToTaishosha"
-  },
-  {
-   "id": 4,
-   "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0810000",
-   "eventName": "select",
-   "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0810001",
-   "toEventName": "onOpen"
-  },
-  {
-   "id": "5",
-   "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0810001",
-   "eventName": "return",
-   "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0810000",
-   "toEventName": ""
-  },
-  {
-   "id": 6,
-   "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0810001",
-   "eventName": "select",
-   "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0810002",
-   "toEventName": "onOpen"
-  },
-  {
-   "id": 7,
-   "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0810002",
-   "eventName": "return",
-   "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0810001",
-   "toEventName": ""
-  },
-  {
-   "id": 8,
-   "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0810001",
-   "eventName": "save",
-   "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0810003",
-   "toEventName": "onOpen"
-  }
- ],
+ "uiContainerName": "DBCUC08100",
+ "displayWizard": false,
  "subGyomuCode": "DBC",
- "uiContainerName": "DBCUC08100"
+ "steps": [
+  {
+   "id": 1,
+   "name": "償還支給申請決定",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZU020001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "対象者検索"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZU020001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0810000",
+     "toLayoutTitle": "償還支給申請決定",
+     "toState": ""
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0810000",
+     "layoutTitle": "償還支給申請決定",
+     "eventName": "対象者検索",
+     "destroy": false,
+     "condition": "対象者検索",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZU020001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "対象者検索"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0810000",
+     "layoutTitle": "償還支給申請決定",
+     "eventName": "対象者検索",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZU020001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0810000",
+     "layoutTitle": "償還支給申請決定",
+     "eventName": "申請者情報",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0810001",
+     "toLayoutTitle": "償還支給申請決定",
+     "toState": ""
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0810001",
+     "layoutTitle": "償還支給申請決定",
+     "eventName": "申請登録",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0810000",
+     "toLayoutTitle": "償還支給申請決定",
+     "toState": ""
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0810001",
+     "layoutTitle": "償還支給申請決定",
+     "eventName": "証明書情報",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0810002",
+     "toLayoutTitle": "償還支給申請決定",
+     "toState": ""
+    },
+    {
+     "id": "8",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0810002",
+     "layoutTitle": "償還支給申請決定",
+     "eventName": "申請書情報",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0810001",
+     "toLayoutTitle": "償還支給申請決定",
+     "toState": ""
+    },
+    {
+     "id": "9",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0810002",
+     "layoutTitle": "償還支給申請決定",
+     "eventName": "更新完了",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0810003",
+     "toLayoutTitle": "償還支給申請決定",
+     "toState": ""
+    },
+    {
+     "id": "10",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0810003",
+     "layoutTitle": "償還支給申請決定",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
 }

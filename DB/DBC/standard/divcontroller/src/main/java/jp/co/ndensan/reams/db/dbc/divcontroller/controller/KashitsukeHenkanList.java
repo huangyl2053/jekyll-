@@ -23,10 +23,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  */
 public class KashitsukeHenkanList {
 
-    private List<HashMap> getYaml() {
-        return YamlLoader.DBC.loadAsList(new RString("dbc1810000/KashitsukeHenkanList.yml"));
-    }
-
     /**
      * 画面ロード時の処理です。
      *
@@ -36,36 +32,34 @@ public class KashitsukeHenkanList {
     public ResponseData<KashitsukeHenkanListDiv> onLoad(KashitsukeHenkanListDiv panel) {
         setKashitsukeHenkanListData(panel);
 
-        ResponseData<KashitsukeHenkanListDiv> response = new ResponseData<>();
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     private void setKashitsukeHenkanListData(KashitsukeHenkanListDiv panel) {
 
-        List<HashMap> sourceList = getYaml();
-        DataGrid<dgKyufuhiKashitsukekinList_Row> dgRow = panel.getKashitsukeHenkanListInfo().getDgKyufuhiKashitsukekinList();
-        List<dgKyufuhiKashitsukekinList_Row> dgRowList = dgRow.getDataSource();
-
-        for (int i = 0; i < 3; i++) {
-            ControlGenerator cg = new ControlGenerator(sourceList.get(i));
-            dgRowList.add(create給付費貸付金一覧アイテム(
-                    cg.getAsRString("被保番号"),
-                    cg.getAsRString("被保険者氏名"),
-                    cg.getAsRString("被保険者カナ"),
-                    cg.getAsRString("借入受付日"),
-                    cg.getAsRString("借入申請日"),
-                    cg.getAsRString("借入利用開始日"),
-                    cg.getAsRString("借入利用終了日"),
-                    cg.getAsRString("貸付対象サービス種類"),
-                    cg.getAsRString("事業者の支払請求額"),
-                    cg.getAsRString("申請金額"),
-                    cg.getAsRString("貸付審査決定日"),
-                    cg.getAsRString("貸付承認不承認"),
-                    cg.getAsRString("借受日"),
-                    cg.getAsRString("償還期限延長申請日")
-            ));
-        }
+//        List<HashMap> sourceList = getYaml();
+//        DataGrid<dgKyufuhiKashitsukekinList_Row> dgRow = panel.getKashitsukeHenkanListInfo().getDgKyufuhiKashitsukekinList();
+//        List<dgKyufuhiKashitsukekinList_Row> dgRowList = dgRow.getDataSource();
+//
+//        for (int i = 0; i < 3; i++) {
+//            ControlGenerator cg = new ControlGenerator(sourceList.get(i));
+//            dgRowList.add(create給付費貸付金一覧アイテム(
+//                    cg.getAsRString("被保番号"),
+//                    cg.getAsRString("被保険者氏名"),
+//                    cg.getAsRString("被保険者カナ"),
+//                    cg.getAsRString("借入受付日"),
+//                    cg.getAsRString("借入申請日"),
+//                    cg.getAsRString("借入利用開始日"),
+//                    cg.getAsRString("借入利用終了日"),
+//                    cg.getAsRString("貸付対象サービス種類"),
+//                    cg.getAsRString("事業者の支払請求額"),
+//                    cg.getAsRString("申請金額"),
+//                    cg.getAsRString("貸付審査決定日"),
+//                    cg.getAsRString("貸付承認不承認"),
+//                    cg.getAsRString("借受日"),
+//                    cg.getAsRString("償還期限延長申請日")
+//            ));
+//        }
     }
 
     private dgKyufuhiKashitsukekinList_Row create給付費貸付金一覧アイテム(

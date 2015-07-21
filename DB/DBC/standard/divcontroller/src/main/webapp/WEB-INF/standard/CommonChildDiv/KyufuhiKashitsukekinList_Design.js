@@ -4,6 +4,17 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onSelectBySelectButton = function () {
+                return "onSelectBySelectButton";
+            };
+
+            Events.onSelectByModifyButton = function () {
+                return "onSelectByModifyButton";
+            };
+
+            Events.onSelectByDeleteButton = function () {
+                return "onSelectByDeleteButton";
+            };
             return Events;
         })();
         KyufuhiKashitsukekinList.Events = Events;

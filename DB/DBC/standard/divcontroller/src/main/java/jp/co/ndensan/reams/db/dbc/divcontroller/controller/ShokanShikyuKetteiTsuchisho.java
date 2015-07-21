@@ -27,14 +27,12 @@ public class ShokanShikyuKetteiTsuchisho {
      */
     public ResponseData<ShokanShikyuKetteiTsuchishoDiv> onSelectedShinseishoList(ShokanShikyuKetteiTsuchishoDiv panel) {
         setTsuchishoData(panel);
-        ResponseData<ShokanShikyuKetteiTsuchishoDiv> response = new ResponseData<>();
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     private void setTsuchishoData(ShokanShikyuKetteiTsuchishoDiv panel) {
-        HashMap source = YamlLoader.DBC.loadAsList(new RString("dbc0810000/ShokanShikyuKetteiTsuchisho.yml")).get(0);
-        panel.getShokanShikyuKetteiTsuchishoPrintContentsSetting().getTxtIssueDate().
-                setValue(new RDate(source.get("発効日").toString()));
+//        panel.getShokanShikyuKetteiTsuchishoPrintContentsSetting().getTxtIssueDate().
+//                setValue(new RDate(source.get("発効日").toString()));
     }
 }

@@ -21,10 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShokanShikyuKetteiKanryo {
 
-    private List<HashMap> getYaml() {
-        return YamlLoader.DBC.loadAsList(new RString("dbc0810000/ShokanShikyuKetteiKanryo.yml"));
-    }
-
     /**
      * 画面ロード時の処理です。
      *
@@ -32,17 +28,15 @@ public class ShokanShikyuKetteiKanryo {
      * @return ResponseData
      */
     public ResponseData onLoad(ShokanShikyuKetteiKanryoDiv panel) {
-        ResponseData<ShokanShikyuKetteiKanryoDiv> response = new ResponseData<>();
         setKanryoMessage(panel);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     private void setKanryoMessage(ShokanShikyuKetteiKanryoDiv panel) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
-
-        KaigoKanryoMessage.setMessage(panel.getShokanShikyuKetteiKanryoMessage(),
-                cg.getAsRString("完了メッセージ"), cg.getAsRString("識別コード"), cg.getAsRString("氏名"));
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
+//
+//        KaigoKanryoMessage.setMessage(panel.getShokanShikyuKetteiKanryoMessage(),
+//                cg.getAsRString("完了メッセージ"), cg.getAsRString("識別コード"), cg.getAsRString("氏名"));
     }
-
 }

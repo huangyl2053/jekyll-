@@ -1,15 +1,14 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity;
-/**
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanShikyuShinseishoList;
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Nov 27 19:45:23 JST 2014 
+ * Tue Jul 21 11:54:46 JST 2015 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
@@ -20,10 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgShokanShikyuShinseishoList_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
-    private Button btnSelect;
-    private Button btnEdit;
-    private Button btnDelete;
     private RString txtServiceYM;
     private RString txtShinseiYMD;
     private RString txtSeiriNo;
@@ -33,9 +30,6 @@ public class dgShokanShikyuShinseishoList_Row extends DataRow {
 
     public dgShokanShikyuShinseishoList_Row() {
         super();
-        this.btnSelect = new Button();
-        this.btnEdit = new Button();
-        this.btnDelete = new Button();
         this.txtServiceYM = RString.EMPTY;
         this.txtShinseiYMD = RString.EMPTY;
         this.txtSeiriNo = RString.EMPTY;
@@ -44,38 +38,20 @@ public class dgShokanShikyuShinseishoList_Row extends DataRow {
         this.txtJikoGokei = RString.EMPTY;
     }
 
-    public dgShokanShikyuShinseishoList_Row(Button btnSelect, Button btnEdit, Button btnDelete, RString txtServiceYM, RString txtShinseiYMD, RString txtSeiriNo, RString txtShiharaiGokei, RString txtHokenGokei, RString txtJikoGokei) {
+    public dgShokanShikyuShinseishoList_Row(RString txtServiceYM, RString txtShinseiYMD, RString txtSeiriNo, RString txtShiharaiGokei, RString txtHokenGokei, RString txtJikoGokei) {
         super();
-        this.setOriginalData("btnSelect", btnSelect);
-        this.setOriginalData("btnEdit", btnEdit);
-        this.setOriginalData("btnDelete", btnDelete);
         this.setOriginalData("txtServiceYM", txtServiceYM);
         this.setOriginalData("txtShinseiYMD", txtShinseiYMD);
         this.setOriginalData("txtSeiriNo", txtSeiriNo);
         this.setOriginalData("txtShiharaiGokei", txtShiharaiGokei);
         this.setOriginalData("txtHokenGokei", txtHokenGokei);
         this.setOriginalData("txtJikoGokei", txtJikoGokei);
-        this.btnSelect = btnSelect;
-        this.btnEdit = btnEdit;
-        this.btnDelete = btnDelete;
         this.txtServiceYM = txtServiceYM;
         this.txtShinseiYMD = txtShinseiYMD;
         this.txtSeiriNo = txtSeiriNo;
         this.txtShiharaiGokei = txtShiharaiGokei;
         this.txtHokenGokei = txtHokenGokei;
         this.txtJikoGokei = txtJikoGokei;
-    }
-
-    public Button getBtnSelect() {
-        return btnSelect;
-    }
-
-    public Button getBtnEdit() {
-        return btnEdit;
-    }
-
-    public Button getBtnDelete() {
-        return btnDelete;
     }
 
     public RString getTxtServiceYM() {
@@ -100,21 +76,6 @@ public class dgShokanShikyuShinseishoList_Row extends DataRow {
 
     public RString getTxtJikoGokei() {
         return txtJikoGokei;
-    }
-
-    public void setBtnSelect(Button btnSelect) {
-        this.setOriginalData("btnSelect", btnSelect);
-        this.btnSelect = btnSelect;
-    }
-
-    public void setBtnEdit(Button btnEdit) {
-        this.setOriginalData("btnEdit", btnEdit);
-        this.btnEdit = btnEdit;
-    }
-
-    public void setBtnDelete(Button btnDelete) {
-        this.setOriginalData("btnDelete", btnDelete);
-        this.btnDelete = btnDelete;
     }
 
     public void setTxtServiceYM(RString txtServiceYM) {
@@ -147,4 +108,5 @@ public class dgShokanShikyuShinseishoList_Row extends DataRow {
         this.txtJikoGokei = txtJikoGokei;
     }
 
+    // </editor-fold>
 }

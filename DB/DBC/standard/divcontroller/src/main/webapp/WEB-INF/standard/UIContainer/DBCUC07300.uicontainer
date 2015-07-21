@@ -1,15 +1,32 @@
 ﻿{
- "transitionList": [
-  {
-   "id": "0",
-   "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0730011",
-   "eventName": "",
-   "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0730011",
-   "toEventName": ""
-  }
- ],
+ "uiContainerName": "DBCUC07300",
+ "displayWizard": false,
  "subGyomuCode": "DBC",
- "uiContainerName": "DBCUC07300"
+ "steps": [
+  {
+   "id": 1,
+   "name": "住宅改修費支給（不支給）決定通知書発行",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0730011",
+     "toLayoutTitle": "住宅改修費支給（不支給）決定通知書発行",
+     "toState": "申請登録"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0730011",
+     "layoutTitle": "住宅改修費支給（不支給）決定通知書発行",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
 }
