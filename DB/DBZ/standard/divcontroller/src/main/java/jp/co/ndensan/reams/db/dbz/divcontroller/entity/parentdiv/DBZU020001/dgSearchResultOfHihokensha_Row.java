@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0200001;
-/**
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZU020001;
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Dec 25 20:17:24 JST 2014 
+ * Wed Jul 22 17:41:16 JST 2015 
  */
 
 
@@ -13,12 +13,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
 /**
- * dgGaitoshaList_Row のクラスファイル 
+ * dgSearchResultOfHihokensha_Row のクラスファイル 
  * 
  * @author 自動生成
  */
 
-public class dgGaitoshaList_Row extends DataRow {
+public class dgSearchResultOfHihokensha_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
     private RString hihokenshaNo;
     private RString shikibetsuCode;
@@ -34,7 +35,7 @@ public class dgGaitoshaList_Row extends DataRow {
     private RString juminShubetsu;
     private RString setaiCode;
 
-    public dgGaitoshaList_Row() {
+    public dgSearchResultOfHihokensha_Row() {
         super();
         this.hihokenshaNo = RString.EMPTY;
         this.shikibetsuCode = RString.EMPTY;
@@ -51,7 +52,7 @@ public class dgGaitoshaList_Row extends DataRow {
         this.setaiCode = RString.EMPTY;
     }
 
-    public dgGaitoshaList_Row(RString hihokenshaNo, RString shikibetsuCode, RString hihokenshaKubun, RString shimei, RString kanaShimsei, RString shimeiAndKanaShimsei, RString gender, RString birthDay, RString yubinNo, RString jusho, RString kojinNo, RString juminShubetsu, RString setaiCode) {
+    public dgSearchResultOfHihokensha_Row(RString hihokenshaNo, RString shikibetsuCode, RString hihokenshaKubun, RString shimei, RString kanaShimsei, RString shimeiAndKanaShimsei, RString gender, RString birthDay, RString yubinNo, RString jusho, RString kojinNo, RString juminShubetsu, RString setaiCode) {
         super();
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
         this.setOriginalData("shikibetsuCode", shikibetsuCode);
@@ -198,4 +199,5 @@ public class dgGaitoshaList_Row extends DataRow {
         this.setaiCode = setaiCode;
     }
 
+    // </editor-fold>
 }

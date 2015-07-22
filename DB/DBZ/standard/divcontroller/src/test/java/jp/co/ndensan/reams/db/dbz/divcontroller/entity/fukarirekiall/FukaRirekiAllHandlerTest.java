@@ -46,6 +46,7 @@ import org.junit.runner.RunWith;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import org.junit.Ignore;
 import static org.mockito.Mockito.*;
 
 /**
@@ -54,6 +55,7 @@ import static org.mockito.Mockito.*;
  * @author N8156 宮本 康
  */
 @RunWith(Enclosed.class)
+@Ignore
 public class FukaRirekiAllHandlerTest extends DbzTestBase {
 
     private static FukaRirekiAllHandler sut;

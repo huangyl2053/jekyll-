@@ -10,10 +10,9 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.JushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0200001.dgGaitoshaList_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0200001.TaishoshaSearchDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.IHihokenshaFinderDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder.IHihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.TaishoshaSearchDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.dgGaitoshaList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
 import jp.co.ndensan.reams.db.dbz.model.TaishoshaKey;
@@ -38,6 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.INewSearchCondition;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchConditionFactory;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.DBZ0200001StateName.該当者一覧;
 
 /**
  * 対象者検索のコントローラークラスです。（資格系）
@@ -57,10 +57,14 @@ public class TaishoshaSearch {
      */
     public ResponseData<TaishoshaSearchDiv> onClick_btnSearch(TaishoshaSearchDiv div) {
 
-        SearchResult<TaishoshaModel> result = get対象者(div.getSearchCondition().getCcdSearchCondition());
-        div.getGaitoshaList().getDgGaitoshaList().setDataSource(toRowList(result));
+        //TODO n3317塚田　遷移させるために空行を作成
+//        SearchResult<TaishoshaModel> result = get対象者(div.getSearchCondition().getCcdSearchCondition());
+//        div.getGaitoshaList().getDgGaitoshaList().setDataSource(toRowList(result));
+        List<dgGaitoshaList_Row> rowList = new ArrayList<>();
+        rowList.add(new dgGaitoshaList_Row());
+        div.getGaitoshaList().getDgGaitoshaList().setDataSource(rowList);
 
-        return ResponseDatas.createSettingDataTo(div);
+        return ResponseData.of(div).setState(該当者一覧);
     }
 
     /**
@@ -73,7 +77,7 @@ public class TaishoshaSearch {
 
         div.getGaitoshaList().getDgGaitoshaList().setDataSource(Collections.EMPTY_LIST);
 
-        return ResponseDatas.createSettingDataTo(div);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -87,7 +91,7 @@ public class TaishoshaSearch {
         put対象者Key(create対象者Key(div));
         save最近処理者(div);
 
-        return ResponseDatas.createSettingDataTo(div);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -113,7 +117,7 @@ public class TaishoshaSearch {
             put対象者Key(create対象者Key(対象者.records().findFirst().get()));
         }
 
-        return ResponseDatas.createSettingDataTo(div);
+        return ResponseData.of(div).respond();
     }
 
     private SearchResult<TaishoshaModel> get対象者(IHihokenshaFinderDiv div) {
