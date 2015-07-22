@@ -32,12 +32,12 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("NichijoJiritsudo"));
             };
 
-            Controls.prototype.radShogaiKoreishaNichijoSeikatsuJiritsudo = function () {
-                return new UZA.RadioButton(this.convFiledName("radShogaiKoreishaNichijoSeikatsuJiritsudo"));
+            Controls.prototype.chkShogaiKoreishaNichijoSeikatsuJiritsudo = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkShogaiKoreishaNichijoSeikatsuJiritsudo"));
             };
 
-            Controls.prototype.radNinchishoKoreishaJiritsu = function () {
-                return new UZA.RadioButton(this.convFiledName("radNinchishoKoreishaJiritsu"));
+            Controls.prototype.chkNinchishoKoreishaJiritsu = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkNinchishoKoreishaJiritsu"));
             };
 
             Controls.prototype.NinchishoChukakuShojo = function () {
