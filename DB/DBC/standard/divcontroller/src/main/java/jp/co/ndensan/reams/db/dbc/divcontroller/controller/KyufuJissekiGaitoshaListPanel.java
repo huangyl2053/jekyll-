@@ -61,25 +61,7 @@ public class KyufuJissekiGaitoshaListPanel {
      */
     private List<dgHihokenshaSearchGaitosha_Row> createRowKyufuJissekiGaitoshaTestData(SearchToKyufujissekiPanelDiv srchpanel) {
         List<dgHihokenshaSearchGaitosha_Row> arrayData = new ArrayList<>();
-//        List<HashMap> ymlData = ymlData();
-//
-//        //TO DO データを増える場合。
-//        for (int i = 0; i < ymlData.size(); i++) {
-//            HashMap hashMap = ymlData.get(i);
-//            ControlGenerator ymlDt = new ControlGenerator(hashMap);
-//
-//            arrayData.add(createRowKyufuJissekiGaitoshaListData(
-//                    ymlDt.getAsRString("jigyoshaNo"),
-//                    ymlDt.getAsRString("jigyoshaName"),
-//                    ymlDt.getAsRString("hihoNo"),
-//                    ymlDt.getAsRString("hihoName"),
-//                    ymlDt.getAsRString("kagoForm"),
-//                    ymlDt.getAsRString("teikyoYM"),
-//                    ymlDt.getAsRString("kyufuJissekiSakuseiKubun"),
-//                    ymlDt.getAsRString("kyufuKubun"),
-//                    ymlDt.getAsRString("shinsaYM")
-//            ));
-//        }
+        arrayData.add(new dgHihokenshaSearchGaitosha_Row());
         return arrayData;
     }
 

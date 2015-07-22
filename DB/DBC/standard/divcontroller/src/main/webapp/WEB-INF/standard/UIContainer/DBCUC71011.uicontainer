@@ -1,33 +1,74 @@
 ﻿{
- "transitionList": [
-  {
-   "id": "0",
-   "layoutSubGyomuCode": "DBZ",
-   "layoutName": "DBZU020001",
-   "eventName": "decideToTaishosha",
-   "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBC0071011",
-   "toEventName": "decide"
-  },
-  {
-   "id": "1",
-   "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0071011",
-   "eventName": "research",
-   "toLayoutSubGyomuCode": "DBZ",
-   "toLayoutName": "DBZU020001",
-   "toEventName": "researchToTaishosha"
-  },
-  {
-   "id": "2",
-   "layoutSubGyomuCode": "DBC",
-   "layoutName": "DBC0071011",
-   "eventName": "searchResult",
-   "toLayoutSubGyomuCode": "DBC",
-   "toLayoutName": "DBZU020001",
-   "toEventName": ""
-  }
- ],
+ "uiContainerName": "DBCUC71011",
+ "displayWizard": false,
  "subGyomuCode": "DBC",
- "uiContainerName": "DBCUC71011"
+ "steps": [
+  {
+   "id": 1,
+   "name": "過誤申立書送付情報照会",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZU020001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "対象者検索"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0071011",
+     "layoutTitle": "過誤決定取込情報照会",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZU020001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0071011",
+     "toLayoutTitle": "過誤決定取込情報照会",
+     "toState": "過誤決定取込情報照会"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0071011",
+     "layoutTitle": "過誤決定取込情報照会",
+     "eventName": "検索",
+     "destroy": false,
+     "condition": "対象者検索",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZU020001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "対象者検索"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0071011",
+     "layoutTitle": "過誤決定取込情報照会",
+     "eventName": "検索",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZU020001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
+    }
+   ]
+  }
+ ]
 }

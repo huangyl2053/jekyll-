@@ -42,6 +42,8 @@ public class HokenshaSofuList {
     private void setHokenshaSofuList(HokenshaSofuListDiv panel) {
         DataGrid<dgHokenshaSofuList_Row> dgRow = panel.getDgHokenshaSofuList();
         List<dgHokenshaSofuList_Row> dgRowList = dgRow.getDataSource();
+        //TODO n3317塚田　遷移させるために空の行を表示
+        dgRowList.add(new dgHokenshaSofuList_Row());
 
 //        List<HashMap> sourceList = getHokenshaSofuListYaml();
 //        dgRowList.clear();

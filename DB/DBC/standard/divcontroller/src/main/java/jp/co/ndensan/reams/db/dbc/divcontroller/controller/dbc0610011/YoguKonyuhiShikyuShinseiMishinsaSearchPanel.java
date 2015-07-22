@@ -47,7 +47,6 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
     public ResponseData<YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv> onClick_btnSearchMishinsa(
             YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
 
-        //panelは閉じているのでオンロード時にデータをセットしておくrequestSettingにセットしない
         set審査日(panel);
         setMishinsaShikyuShinseiData(panel);
 
@@ -98,7 +97,7 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
     }
 
     private void set審査日(YoguKonyuhiShikyuShinseiMishinsaSearchPanelDiv panel) {
-        panel.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtShinsaDate().setValue(RDate.getNowDate());
+//        panel.getYoguKonyuhiShikyuShinseiMishinsaResultList().getTxtShinsaDate().setValue(RDate.getNowDate());
     }
 
     /**
@@ -113,25 +112,14 @@ public class YoguKonyuhiShikyuShinseiMishinsaSearchPanel {
 
     private List<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> getMishinsaShikyuShinseiData() {
         List<dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row> list = new ArrayList<>();
-//        for (Map info : targetSource) {
-//            list.add(toDgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row(info));
-//        }
+        list.add(toDgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row());
         return list;
     }
 
-    private static dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row toDgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row(Map map) {
-        ControlGenerator cg = new ControlGenerator(map);
+    private static dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row toDgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row() {
 
-        dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row = new dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row(
-                cg.getAsTextBoxDate("shikyuShinseiDate"),
-                cg.getAsTextBoxDate("teikyoYM"),
-                cg.getAsTextBoxCode("hihoNo"),
-                cg.getAsTextBox("hihokenshaName"),
-                cg.getAsTextBoxNum("hokenKyufuAmount"),
-                cg.getAsTextBoxNum("riyoshaFutanAmount"),
-                cg.getAsTextBoxNum("hiyoTotalAmount"),
-                new TextBox(),
-                cg.getAsTextBox("seiriNo"));
+        //TODO n3317塚田　遷移させるために空のリストを作成
+        dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row row = new dgYoguKonyuhiShisaMishinsaShikyuShinseiList_Row();
         return row;
     }
 }

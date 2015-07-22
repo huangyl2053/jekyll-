@@ -37,12 +37,11 @@ public class KashitsukeHenkanList {
 
     private void setKashitsukeHenkanListData(KashitsukeHenkanListDiv panel) {
 
-//        List<HashMap> sourceList = getYaml();
-//        DataGrid<dgKyufuhiKashitsukekinList_Row> dgRow = panel.getKashitsukeHenkanListInfo().getDgKyufuhiKashitsukekinList();
-//        List<dgKyufuhiKashitsukekinList_Row> dgRowList = dgRow.getDataSource();
-//
-//        for (int i = 0; i < 3; i++) {
-//            ControlGenerator cg = new ControlGenerator(sourceList.get(i));
+        DataGrid<dgKyufuhiKashitsukekinList_Row> dgRow = panel.getKashitsukeHenkanListInfo().getDgKyufuhiKashitsukekinList();
+        List<dgKyufuhiKashitsukekinList_Row> dgRowList = dgRow.getDataSource();
+
+        //TODO n3317塚田　遷移するために空のリストを作成
+        dgRowList.add(new dgKyufuhiKashitsukekinList_Row());
 //            dgRowList.add(create給付費貸付金一覧アイテム(
 //                    cg.getAsRString("被保番号"),
 //                    cg.getAsRString("被保険者氏名"),

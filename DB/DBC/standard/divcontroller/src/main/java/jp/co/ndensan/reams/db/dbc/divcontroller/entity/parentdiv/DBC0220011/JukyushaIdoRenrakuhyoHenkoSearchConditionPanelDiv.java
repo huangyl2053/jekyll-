@@ -1,5 +1,5 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0220011;
-/**
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220011;
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0220011;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * JukyushaIdoRenrakuhyoHenkoSearchConditionPanel のクラスファイル 
@@ -15,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,18 +27,16 @@ public class JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv extends Panel {
     private TextBoxCode txtSearchHihoNo;
     @JsonProperty("btnSearchHihokensha")
     private Button btnSearchHihokensha;
-    @JsonProperty("ddlShichosonCode")
-    private DropDownList ddlShichosonCode;
     @JsonProperty("chkIsSearchDeletedData")
     private CheckBoxList chkIsSearchDeletedData;
     @JsonProperty("lblSearchCondition")
     private Label lblSearchCondition;
+    @JsonProperty("searchHorizontalLine")
+    private HorizontalLine searchHorizontalLine;
     @JsonProperty("btnClearSearchCondition")
     private Button btnClearSearchCondition;
     @JsonProperty("btnSearch")
     private Button btnSearch;
-    @JsonProperty("btnKari")
-    private Button btnKari;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -76,16 +74,6 @@ public class JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv extends Panel {
         this.btnSearchHihokensha=btnSearchHihokensha;
     }
 
-    @JsonProperty("ddlShichosonCode")
-    public DropDownList getDdlShichosonCode() {
-        return ddlShichosonCode;
-    }
-
-    @JsonProperty("ddlShichosonCode")
-    public void setDdlShichosonCode(DropDownList ddlShichosonCode) {
-        this.ddlShichosonCode=ddlShichosonCode;
-    }
-
     @JsonProperty("chkIsSearchDeletedData")
     public CheckBoxList getChkIsSearchDeletedData() {
         return chkIsSearchDeletedData;
@@ -104,6 +92,16 @@ public class JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv extends Panel {
     @JsonProperty("lblSearchCondition")
     public void setLblSearchCondition(Label lblSearchCondition) {
         this.lblSearchCondition=lblSearchCondition;
+    }
+
+    @JsonProperty("searchHorizontalLine")
+    public HorizontalLine getSearchHorizontalLine() {
+        return searchHorizontalLine;
+    }
+
+    @JsonProperty("searchHorizontalLine")
+    public void setSearchHorizontalLine(HorizontalLine searchHorizontalLine) {
+        this.searchHorizontalLine=searchHorizontalLine;
     }
 
     @JsonProperty("btnClearSearchCondition")
@@ -126,14 +124,5 @@ public class JukyushaIdoRenrakuhyoHenkoSearchConditionPanelDiv extends Panel {
         this.btnSearch=btnSearch;
     }
 
-    @JsonProperty("btnKari")
-    public Button getBtnKari() {
-        return btnKari;
-    }
-
-    @JsonProperty("btnKari")
-    public void setBtnKari(Button btnKari) {
-        this.btnKari=btnKari;
-    }
-
+    // </editor-fold>
 }

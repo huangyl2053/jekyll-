@@ -38,10 +38,8 @@ public class MishinsaShikyuShinseiListPanel {
      * @return PanelDivのResponseData
      */
     public ResponseData<MishinsaShikyuShinseiListPanelDiv> onLoad(MishinsaShikyuShinseiListPanelDiv panel) {
-        panel.getTxtShinsaDate().setValue(RDate.getNowDate());
+//        panel.getTxtShinsaDate().setValue(RDate.getNowDate());
 
-        //requestSettingsにセットしていない。
-        //検索ボタンを押してから時間がかかるので、オンロード時にデータセットしておく。パネルは閉じているので。
         setMishinsaShikyuShinseiList(panel);
 
         //TO DO
@@ -152,22 +150,19 @@ public class MishinsaShikyuShinseiListPanel {
      */
     private void setMishinsaShikyuShinseiList(MishinsaShikyuShinseiListPanelDiv panel) {
 
-//        List<dgMishinsaShikyuShinsei_Row> arraydata = createRowMishinsaShikyuShinseiTestData(ymlDataName);
-//        DataGrid<dgMishinsaShikyuShinsei_Row> grid = panel.getDgMishinsaShikyuShinsei();
-//
-//        grid.setDataSource(arraydata);
+        List<dgMishinsaShikyuShinsei_Row> arraydata = createRowMishinsaShikyuShinseiTestData();
+        DataGrid<dgMishinsaShikyuShinsei_Row> grid = panel.getDgMishinsaShikyuShinsei();
+
+        grid.setDataSource(arraydata);
     }
 
     /*
      * 住宅改修費支給申請審査 (YMLDATA)未審査支給申請一覧のデータを設定する。
      */
-    private List<dgMishinsaShikyuShinsei_Row> createRowMishinsaShikyuShinseiTestData(String ymlDataName) {
+    private List<dgMishinsaShikyuShinsei_Row> createRowMishinsaShikyuShinseiTestData() {
 
         List<dgMishinsaShikyuShinsei_Row> arrayData = new ArrayList<>();
-//        for (int i = 0; i < ymlData.size(); i++) {
-//            HashMap hashMap = ymlData.get(i);
-//            hashMap(hashMap, arrayData);
-//        }
+        arrayData.add(new dgMishinsaShikyuShinsei_Row());
         return arrayData;
     }
 

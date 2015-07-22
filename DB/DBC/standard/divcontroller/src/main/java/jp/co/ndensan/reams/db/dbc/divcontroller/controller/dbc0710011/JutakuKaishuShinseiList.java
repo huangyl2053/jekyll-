@@ -32,7 +32,7 @@ public class JutakuKaishuShinseiList {
      */
     public ResponseData<JutakuKaishuShinseiListDiv> onLoad(JutakuKaishuShinseiListDiv panel) {
 
-//        setJutakuKaishuShinseiList(panel, ymlDataName);
+        setJutakuKaishuShinseiList(panel);
         return ResponseData.of(panel).respond();
     }
 
@@ -54,9 +54,9 @@ public class JutakuKaishuShinseiList {
     /*
      * 住宅改修費事申請登録 申請を追加するボタンを押下後、
      */
-    private void setJutakuKaishuShinseiList(JutakuKaishuShinseiListDiv panel, String ymlDataName) {
+    private void setJutakuKaishuShinseiList(JutakuKaishuShinseiListDiv panel) {
 
-        List<dgJutakuKaishuShinseiList_Row> arraydata = createRowJutakuKaishuShinseiTestData(ymlDataName);
+        List<dgJutakuKaishuShinseiList_Row> arraydata = createRowJutakuKaishuShinseiTestData();
         DataGrid<dgJutakuKaishuShinseiList_Row> grid = panel.getDgJutakuKaishuShinseiList();
         grid.setDataSource(arraydata);
 
@@ -65,34 +65,12 @@ public class JutakuKaishuShinseiList {
     /*
      * 住宅改修費事申請登録 申請内容の情報を設定する。
      */
-    private List<dgJutakuKaishuShinseiList_Row> createRowJutakuKaishuShinseiTestData(String ymlDataName) {
+    private List<dgJutakuKaishuShinseiList_Row> createRowJutakuKaishuShinseiTestData() {
 
         List<dgJutakuKaishuShinseiList_Row> arrayData = new ArrayList<>();
+        arrayData.add(new dgJutakuKaishuShinseiList_Row());
 
-///////////////////////////////////////////////////////////////////////////////////////////
-//        //TO DO  JutakuData1.xml ①
-//        List<HashMap> ymlData = ymlData(ymlDataName);
-//
-//        if (ymlDataName.equals("JutakuData_2.yml")) {
-//
-//            //TO DO データを増える場合。
-//            for (int i = 2; i < ymlData.size(); i++) {
-//                HashMap hashMap = ymlData.get(i);
-//                hashMap(hashMap, arrayData);
-//            }
-//
-//        } else if (ymlDataName.equals("JutakuData_1.yml")) {
-//
-//            HashMap hashMap = ymlData.get(2);
-//            hashMap(hashMap, arrayData);
-//
-//        } else if (ymlDataName.equals("JutakuData_1_2.yml")) {
-//
-//            HashMap hashMap = ymlData.get(2);
-//            hashMap(hashMap, arrayData);
-//        }
         return arrayData;
-
     }
 
     /*

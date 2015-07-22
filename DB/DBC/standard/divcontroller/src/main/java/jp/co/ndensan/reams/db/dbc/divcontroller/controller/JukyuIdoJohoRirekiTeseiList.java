@@ -47,16 +47,8 @@ public class JukyuIdoJohoRirekiTeseiList {
     }
 
     private void loadRirekiTeseiList(JukyuIdoJohoRirekiTeseiListDiv panel) {
-//        List<dgJukyuIdoJohoRirekiTeseiList_Row> list = panel.getDgJukyuIdoJohoRirekiTeseiList().getDataSource();
-//        List<HashMap> mapList = getYamlData(YML_RIREKI_TEISEI_LIST);
-//        for (int index = 0; index < mapList.size(); index++) {
-//            ControlGenerator cg = new ControlGenerator(mapList.get(index));
-//            list.add(createJukyuIdoJohoRirekiTeseiListRow(
-//                    cg.getAsRString("被保番号"),
-//                    cg.getAsRString("被保険者氏名"),
-//                    cg.getAsRString("異動日"),
-//                    cg.getAsRString("項目")));
-//        }
+        List<dgJukyuIdoJohoRirekiTeseiList_Row> list = panel.getDgJukyuIdoJohoRirekiTeseiList().getDataSource();
+        list.add(createJukyuIdoJohoRirekiTeseiListRow());
     }
 
     private void modifyRirekiTeseiList(JukyuIdoJohoRirekiTeseiListDiv panel) {
@@ -76,15 +68,8 @@ public class JukyuIdoJohoRirekiTeseiList {
         }
     }
 
-    private dgJukyuIdoJohoRirekiTeseiList_Row createJukyuIdoJohoRirekiTeseiListRow(
-            RString txtHihoNo,
-            RString txtHihokenshaName,
-            RString txtIdoYMD,
-            RString txtKomoku) {
-        return new dgJukyuIdoJohoRirekiTeseiList_Row(
-                txtHihoNo,
-                txtHihokenshaName,
-                txtIdoYMD,
-                txtKomoku);
+    private dgJukyuIdoJohoRirekiTeseiList_Row createJukyuIdoJohoRirekiTeseiListRow() {
+        //TODO n3317塚田　遷移するために空のリストを作成
+        return new dgJukyuIdoJohoRirekiTeseiList_Row();
     }
 }
