@@ -19,7 +19,8 @@ public enum DBB0320002TransitionEventName implements IContainerEvents {
     賦課履歴照会("賦課履歴照会"),
     特別徴収("特別徴収"),
     減免("減免"),
-    初期化("初期化");
+    初期化("初期化"),
+    一覧に戻る("一覧に戻る");
 
     private final RString name;
 

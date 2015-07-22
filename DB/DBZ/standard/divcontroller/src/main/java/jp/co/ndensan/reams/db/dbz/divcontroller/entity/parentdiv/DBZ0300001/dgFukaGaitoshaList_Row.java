@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0300001;
-/**
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001;
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Dec 25 20:16:38 JST 2014 
+ * Wed Jul 22 16:13:58 JST 2015 
  */
 
 
@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgFukaGaitoshaList_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
     private RString txtChoteiNendo;
     private RString txtFukaNendo;
@@ -172,4 +173,5 @@ public class dgFukaGaitoshaList_Row extends DataRow {
         this.txtSetaiCode = txtSetaiCode;
     }
 
+    // </editor-fold>
 }

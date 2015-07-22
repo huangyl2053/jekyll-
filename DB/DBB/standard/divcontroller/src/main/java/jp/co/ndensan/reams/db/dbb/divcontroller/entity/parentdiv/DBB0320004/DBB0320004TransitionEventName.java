@@ -19,7 +19,8 @@ public enum DBB0320004TransitionEventName implements IContainerEvents {
     世帯員所得("世帯員所得"),
     特別徴収("特別徴収"),
     初期化("初期化"),
-    期割("期割");
+    期割("期割"),
+    一覧に戻る("一覧に戻る");
 
     private final RString name;
 

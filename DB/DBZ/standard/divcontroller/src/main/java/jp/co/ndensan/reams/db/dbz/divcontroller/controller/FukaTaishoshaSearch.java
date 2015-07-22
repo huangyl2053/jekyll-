@@ -12,9 +12,10 @@ import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0300001.dgFukaGaitoshaList_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.DBZ0300001.FukaTaishoshaSearchDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.IHihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.dgFukaGaitoshaList_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.FukaTaishoshaSearchDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder.IHihokenshaFinderDiv;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.DBZ0300001StateName.該当者一覧;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
@@ -64,7 +65,7 @@ public class FukaTaishoshaSearch {
         SearchResult<FukaTaishoshaModel> result = get対象者(div.getSearchCondition().getCcdSearchCondition());
         div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(toRowList(result));
 
-        return ResponseDatas.createSettingDataTo(div);
+        return ResponseData.of(div).setState(該当者一覧);
     }
 
     /**
@@ -121,10 +122,10 @@ public class FukaTaishoshaSearch {
     }
 
     private void set賦課年度(FukaTaishoshaSearchDiv div) {
-        boolean is全年度 = div.getCcdSearchCondition().get賦課年度().isMaxOrMin();
+        boolean is全年度 = div.getSearchCondition().getCcdSearchCondition().get賦課年度().isMaxOrMin();
         div.getGaitoshaList().getTxtFukanendo().setVisible(!is全年度);
         div.getGaitoshaList().getTxtFukanendo().setDisplayNone(is全年度);
-        div.getGaitoshaList().getTxtFukanendo().setValue(new RDate(div.getCcdSearchCondition().get賦課年度().toString()));
+        div.getGaitoshaList().getTxtFukanendo().setValue(new RDate(div.getSearchCondition().getCcdSearchCondition().get賦課年度().toString()));
     }
 
     private SearchResult<FukaTaishoshaModel> get対象者(IHihokenshaFinderDiv div) {
