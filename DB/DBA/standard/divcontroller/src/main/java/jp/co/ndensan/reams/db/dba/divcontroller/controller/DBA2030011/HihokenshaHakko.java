@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.DBA2030011;
 
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA2030011.HihokenshaHakkoDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.HihokenshaHakkoDiv;
 import jp.co.ndensan.reams.db.dbz.business.config.shikaku.HihokenshashoPrintConfig;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.HihokenshashoPrintPosition;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.configvalues.HihokenshashoPrintType;
@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.model.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.realservice.report.HihokenshashoPrinter;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 //import jp.co.ndensan.reams.ur.urd.entity.basic.UrT0505ShoKofuKaishuEntity;
 //import jp.co.ndensan.reams.ur.urd.model.IShoKofuKaishuKiroku;
 //import jp.co.ndensan.reams.ur.urd.model.ShoKofuKaishuModel;
@@ -51,7 +52,7 @@ public class HihokenshaHakko {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
 
         hakkoDiv.getCcdHihokenshaShikakuHakko().load(taishoshaKey.get被保険者番号(), taishoshaKey.get識別コード(), false);
-        return ResponseDatas.createSettingDataTo(hakkoDiv);
+        return ResponseData.of(hakkoDiv).respond();
     }
 
     /**
@@ -79,12 +80,14 @@ public class HihokenshaHakko {
                 position = HihokenshashoPrintPosition.指定無し;
             }
 
+            //TODO n8187 久保田 画面遷移の確認のために対象者キーにダミーデータを設定
+            taishoshaKey = new TaishoshaKey(new HihokenshaNo("1234567890"), ShikibetsuCode.EMPTY, SetaiCode.EMPTY);
             HihokenshashoPrinter printer = new HihokenshashoPrinter();
             SourceDataCollection sdc = printer.print(
                     taishoshaKey.get被保険者番号(),
                     div.getCcdHihokenshaShikakuHakko().create証発行情報(),
                     position);
-            return ResponseDatas.createSettingDataTo(sdc);
+            return ResponseDatas.newResponseData(sdc);
         }
     }
 
@@ -112,6 +115,6 @@ public class HihokenshaHakko {
 //        //modelに必要な値を詰める作業。。。
 //        //
 //        kofuKaishuManager.save(model);
-        return ResponseDatas.createSettingDataTo(hakkoDiv);
+        return ResponseData.of(hakkoDiv).respond();
     }
 }

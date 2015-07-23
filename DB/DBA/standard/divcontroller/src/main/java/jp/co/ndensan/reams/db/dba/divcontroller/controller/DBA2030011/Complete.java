@@ -5,9 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.DBA2030011;
 
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA2030011.CompleteDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA2030011.KihonJohoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.CompleteDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.KihonJohoDiv;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -35,6 +34,6 @@ public class Complete {
 
         compDiv.getCcdKaigoKanryoMessage().setSuccessMessage(messageMain, messageTaishoHihoNo, messageTaishoName);
 
-        return ResponseDatas.createSettingDataTo(compDiv);
+        return ResponseData.of(compDiv).respond();
     }
 }
