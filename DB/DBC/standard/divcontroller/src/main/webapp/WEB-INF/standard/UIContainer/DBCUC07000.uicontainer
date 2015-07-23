@@ -36,9 +36,9 @@
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0700011",
      "layoutTitle": "住宅改修費事前申請登録",
-     "eventName": "対象者検索",
+     "eventName": "検索条件",
      "destroy": false,
-     "condition": "対象者検索",
+     "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
      "toLayoutTitle": "対象者検索",
@@ -46,20 +46,6 @@
     },
     {
      "id": "4",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0700011",
-     "layoutTitle": "住宅改修費事前申請登録",
-     "eventName": "対象者検索",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBZ",
-     "toLayoutName": "DBZ0200001",
-     "toLayoutTitle": "対象者検索",
-     "toState": "該当者一覧"
-    },
-    {
-     "id": "5",
      "type": "end",
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0700011",
@@ -67,6 +53,20 @@
      "eventName": "完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0700011",
+     "layoutTitle": "住宅改修費事前申請登録",
+     "eventName": "該当者一覧",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
     }
    ]
   }

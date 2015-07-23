@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1810000.DBC1810000StateName.徴収登録;
 
 /**
  * 給付費貸付金返還徴収登録の給付費貸付金一覧のコントロールです。
@@ -33,6 +34,11 @@ public class KashitsukeHenkanList {
         setKashitsukeHenkanListData(panel);
 
         return ResponseData.of(panel).respond();
+    }
+
+    public ResponseData<KashitsukeHenkanListDiv> toTorokuDiv(KashitsukeHenkanListDiv panel) {
+
+        return ResponseData.of(panel).setState(徴収登録);
     }
 
     private void setKashitsukeHenkanListData(KashitsukeHenkanListDiv panel) {

@@ -5,18 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0810000.ShokanShikyuKetteiShinseishoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ShokanShikyuShinseishoList.dgShokanShikyuShinseishoList_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810000.DBC0810000TransitionEventName.申請者情報;
 
 /**
  * 償還支給申請決定の申請書一覧のコントロールです。
@@ -37,6 +35,14 @@ public class ShokanShikyuKetteiShinseishoList {
         return ResponseData.of(panel).respond();
     }
 
+    public ResponseData<ShokanShikyuKetteiShinseishoListDiv> onClick_dgButton(ShokanShikyuKetteiShinseishoListDiv panel) {
+        List<dgShokanShikyuShinseishoList_Row> list = panel.getShokanShikyuKetteiShinseishoListInfo().getDgShokanShikyuShinseishoList().getDataSource();
+        list.add(new dgShokanShikyuShinseishoList_Row());
+        panel.getShokanShikyuKetteiShinseishoListInfo().getDgShokanShikyuShinseishoList().setDataSource(list);
+
+        return ResponseData.of(panel).forwardWithEventName(申請者情報).respond();
+    }
+
     /**
      * 支給申請書情報で「決定情報を保存する」ボタンを押下した時の申請書一覧パネルの処理です。
      *
@@ -48,10 +54,11 @@ public class ShokanShikyuKetteiShinseishoList {
     }
 
     private void setShinseishoListData(ShokanShikyuKetteiShinseishoListDiv panel) {
-//        List<HashMap> sourceList = getShokanShikyuTorokuShinseishoListYaml();
-//        DataGrid<dgShokanShikyuShinseishoList_Row> dgRow = panel.getShokanShikyuKetteiShinseishoListInfo().getDgShokanShikyuShinseishoList();
-//        List<dgShokanShikyuShinseishoList_Row> dgRowList = dgRow.getDataSource();
-//
+        DataGrid<dgShokanShikyuShinseishoList_Row> dgRow = panel.getShokanShikyuKetteiShinseishoListInfo().getDgShokanShikyuShinseishoList();
+        List<dgShokanShikyuShinseishoList_Row> dgRowList = dgRow.getDataSource();
+
+        //TODO n3317塚田　遷移させるために空行を作成
+        dgRowList.add(new dgShokanShikyuShinseishoList_Row());
 //        for (int i = 0; i < 3; i++) {
 //            dgRowList.add(create申請書情報(
 //                    sourceList.get(i).get("サービス年月").toString(),
@@ -62,7 +69,7 @@ public class ShokanShikyuKetteiShinseishoList {
 //                    sourceList.get(i).get("自己負担額合計").toString()));
 //        }
 //        Collections.sort(dgRowList, new DateComparator());
-//        dgRow.setDataSource(dgRowList);
+        dgRow.setDataSource(dgRowList);
     }
 
     private static class DateComparator implements Comparator<dgShokanShikyuShinseishoList_Row> {

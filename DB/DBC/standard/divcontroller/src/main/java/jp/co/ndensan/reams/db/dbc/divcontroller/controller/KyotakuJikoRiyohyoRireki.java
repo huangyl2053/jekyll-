@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiy
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0120000.DBC0120000StateName.利用票登録;
 
 /**
  * 居宅サービス自己作成サービス利用票登録の履歴一覧をコントロールするクラスです。
@@ -35,6 +36,10 @@ public class KyotakuJikoRiyohyoRireki {
         return ResponseData.of(panel).respond();
     }
 
+    public ResponseData onClick_dgSelectButton(KyotakuJikoRiyohyoRirekiDiv panel) {
+        return ResponseData.of(panel).setState(利用票登録);
+    }
+
     /**
      * 履歴一覧のデータ設定
      */
@@ -42,10 +47,12 @@ public class KyotakuJikoRiyohyoRireki {
         ServiceRiyohyoRirekiListDiv rirekiList = panel.getKyotakuJikoRiyohyoRirekiList();
         List<dgServiceRiyohyoRirekiList_Row> dgList = rirekiList.getDgServiceRiyohyoRirekiList().getDataSource();
         dgList.clear();
-        for (int index = 0; index < 2; index++) {
-            dgList.add(create履歴(index));
-        }
-        Collections.sort(dgList, new DateComparator());
+        //TODO n3317塚田　遷移させるために空にリストを作成
+        dgList.add(new dgServiceRiyohyoRirekiList_Row());
+//        for (int index = 0; index < 2; index++) {
+//            dgList.add(create履歴(index));
+//        }
+//        Collections.sort(dgList, new DateComparator());
         rirekiList.getDgServiceRiyohyoRirekiList().setDataSource(dgList);
     }
 

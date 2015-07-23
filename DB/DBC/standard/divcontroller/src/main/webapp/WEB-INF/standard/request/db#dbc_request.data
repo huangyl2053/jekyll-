@@ -62,6 +62,7 @@ dbc/db/dbc/KashitsukeHenkanComplete/onLoad
 dbc/db/dbc/KashitsukeHenkanInfo/onSelectedHenkanList
 dbc/db/dbc/KashitsukeHenkanKihon/onLoad
 dbc/db/dbc/KashitsukeHenkanList/onLoad
+dbc/db/dbc/KashitsukeHenkanList/toTorokuDiv
 dbc/db/dbc/KashitsukeShinseiComplete/onLoad
 dbc/db/dbc/KashitsukeShinseiInfo/onClickAddButton
 dbc/db/dbc/KashitsukeShinseiInfo/onClickShinseishaCopy
@@ -69,6 +70,8 @@ dbc/db/dbc/KashitsukeShinseiInfo/onSelectedShinseiList
 dbc/db/dbc/KashitsukeShinseiList/onClickDelete
 dbc/db/dbc/KashitsukeShinseiList/onClickKashitsukeKakutei
 dbc/db/dbc/KashitsukeShinseiList/onLoad
+dbc/db/dbc/KashitsukeShinseiToroku/onLoad
+dbc/db/dbc/KashitsukeShinseiToroku/toTorokuDiv
 dbc/db/dbc/KashitsukekinKihon/onLoad
 dbc/db/dbc/Ketteijoho/onClick_btnSearch
 dbc/db/dbc/Ketteijoho/onLoad
@@ -101,6 +104,7 @@ dbc/db/dbc/KyotakuJikoRiyohyo/onClickZengetsuCopy
 dbc/db/dbc/KyotakuJikoRiyohyo/onLoad
 dbc/db/dbc/KyotakuJikoRiyohyoKanryo/onLoad
 dbc/db/dbc/KyotakuJikoRiyohyoKihon/onLoad
+dbc/db/dbc/KyotakuJikoRiyohyoRireki/onClick_dgSelectButton
 dbc/db/dbc/KyotakuJikoRiyohyoRireki/onLoad
 dbc/db/dbc/KyotakuJikoTodokedeDetail/onClickTodokedeClear
 dbc/db/dbc/KyotakuJikoTodokedeDetail/onClickTodokedeDelete
@@ -190,6 +194,7 @@ dbc/db/dbc/ShokanShikyuKetteiKihon/onLoad
 dbc/db/dbc/ShokanShikyuKetteiShinseisho/onChangeShikyuKubun
 dbc/db/dbc/ShokanShikyuKetteiShinseisho/onSelectedShinseishoList
 dbc/db/dbc/ShokanShikyuKetteiShinseishoList/onClickKetteiSave
+dbc/db/dbc/ShokanShikyuKetteiShinseishoList/onClick_dgButton
 dbc/db/dbc/ShokanShikyuKetteiShinseishoList/onLoad
 dbc/db/dbc/ShokanShikyuKetteiShomeisho/onSelectedShomeishoList
 dbc/db/dbc/ShokanShikyuKetteiTsuchisho/onSelectedShinseishoList

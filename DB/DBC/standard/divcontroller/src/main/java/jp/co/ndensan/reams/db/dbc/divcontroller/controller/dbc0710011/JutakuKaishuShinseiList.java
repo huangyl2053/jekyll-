@@ -32,7 +32,11 @@ public class JutakuKaishuShinseiList {
      */
     public ResponseData<JutakuKaishuShinseiListDiv> onLoad(JutakuKaishuShinseiListDiv panel) {
 
-        setJutakuKaishuShinseiList(panel);
+        //TODO n3317塚田　遷移するために空行を作成
+        List<dgJutakuKaishuShinseiList_Row> list = new ArrayList<>();
+        list.add(new dgJutakuKaishuShinseiList_Row());
+        panel.getDgJutakuKaishuShinseiList().setDataSource(list);
+//        setJutakuKaishuShinseiList(panel);
         return ResponseData.of(panel).respond();
     }
 

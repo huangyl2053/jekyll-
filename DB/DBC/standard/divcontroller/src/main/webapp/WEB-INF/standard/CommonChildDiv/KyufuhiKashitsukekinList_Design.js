@@ -4,6 +4,10 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnAddShinsei = function () {
+                return "onClick_btnAddShinsei";
+            };
+
             Events.onSelectBySelectButton = function () {
                 return "onSelectBySelectButton";
             };

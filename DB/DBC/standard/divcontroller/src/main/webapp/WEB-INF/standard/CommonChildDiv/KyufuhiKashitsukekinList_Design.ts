@@ -8,6 +8,10 @@ module DBC {
 
         export class Events {
 
+            public static onClick_btnAddShinsei(): string {
+                return "onClick_btnAddShinsei";
+            }
+
             public static onSelectBySelectButton(): string {
                 return "onSelectBySelectButton";
             }
