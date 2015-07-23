@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchConditionFactory;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.DBZ0200001StateName.該当者一覧;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.DBZ0200001TransitionEventName.対象者特定;
 
 /**
  * 対象者検索のコントローラークラスです。（資格系）
@@ -64,7 +65,11 @@ public class TaishoshaSearch {
         rowList.add(new dgGaitoshaList_Row());
         div.getGaitoshaList().getDgGaitoshaList().setDataSource(rowList);
 
-        return ResponseData.of(div).setState(該当者一覧);
+        if (rowList.size() == 1) {
+            return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
+        } else {
+            return ResponseData.of(div).setState(該当者一覧);
+        }
     }
 
     /**
