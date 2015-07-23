@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.dgFukaGaitoshaList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.FukaTaishoshaSearchDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder.IHihokenshaFinderDiv;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.DBZ0300001TransitionEventName.対象者特定;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.DBZ0300001StateName.該当者一覧;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
@@ -61,11 +62,19 @@ public class FukaTaishoshaSearch {
      */
     public ResponseData<FukaTaishoshaSearchDiv> onClick_btnSearch(FukaTaishoshaSearchDiv div) {
 
-        set賦課年度(div);
-        SearchResult<FukaTaishoshaModel> result = get対象者(div.getSearchCondition().getCcdSearchCondition());
-        div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(toRowList(result));
+//        set賦課年度(div);
+//        SearchResult<FukaTaishoshaModel> result = get対象者(div.getSearchCondition().getCcdSearchCondition());
+//        div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(toRowList(result));
+        // TODO n8187久保田 画面遷移(DBZ030001)の表示確認のために、空行を渡すよう一時的に修正
+        List<dgFukaGaitoshaList_Row> rowList = new ArrayList<>();
+        rowList.add(new dgFukaGaitoshaList_Row());
+        div.getGaitoshaList().getDgFukaGaitoshaList().setDataSource(rowList);
 
-        return ResponseData.of(div).setState(該当者一覧);
+        if (rowList.size() == 1) {
+            return ResponseData.of(div).forwardWithEventName(対象者特定).respond();
+        } else {
+            return ResponseData.of(div).setState(該当者一覧);
+        }
     }
 
     /**
