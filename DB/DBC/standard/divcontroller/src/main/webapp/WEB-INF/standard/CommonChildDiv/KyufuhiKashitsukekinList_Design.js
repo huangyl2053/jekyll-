@@ -8,16 +8,16 @@ var DBC;
                 return "onClick_btnAddShinsei";
             };
 
-            Events.onSelectBySelectButton = function () {
-                return "onSelectBySelectButton";
+            Events.onClick_dgSelectShinsei = function () {
+                return "onClick_dgSelectShinsei";
             };
 
-            Events.onSelectByModifyButton = function () {
-                return "onSelectByModifyButton";
+            Events.onClick_dgModifyShinsei = function () {
+                return "onClick_dgModifyShinsei";
             };
 
-            Events.onSelectByDeleteButton = function () {
-                return "onSelectByDeleteButton";
+            Events.onClick_dgDeleteShinsei = function () {
+                return "onClick_dgDeleteShinsei";
             };
             return Events;
         })();

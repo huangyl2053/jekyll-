@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1800000.DBC1800000StateName.申請登録;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000.KashitsukeShinseiTorokuDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuhiKashitsukekinList.dgKyufuhiKashitsukekinList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuhiKashitsukekinList.dgKyufuhiKashitsukekinList_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**

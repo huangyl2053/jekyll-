@@ -1,17 +1,15 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000.KashitsukeShinseishoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.KyufuhiKashitsukekinList.KyufuhiKashitsukekinListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuhiKashitsukekinList.KyufuhiKashitsukekinListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * KashitsukeShinseiList のクラスファイル 
- * 
+ * KashitsukeShinseiList のクラスファイル
+ *
  * @author 自動生成
  */
 public class KashitsukeShinseiListDiv extends Panel {
@@ -21,6 +19,7 @@ public class KashitsukeShinseiListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("KashitsukeShinseiListInfo")
     private KyufuhiKashitsukekinListDiv KashitsukeShinseiListInfo;
     @JsonProperty("KashitsukeShinseisho")
@@ -39,7 +38,7 @@ public class KashitsukeShinseiListDiv extends Panel {
 
     @JsonProperty("KashitsukeShinseiListInfo")
     public void setKashitsukeShinseiListInfo(KyufuhiKashitsukekinListDiv KashitsukeShinseiListInfo) {
-        this.KashitsukeShinseiListInfo=KashitsukeShinseiListInfo;
+        this.KashitsukeShinseiListInfo = KashitsukeShinseiListInfo;
     }
 
     @JsonProperty("KashitsukeShinseisho")
@@ -49,7 +48,7 @@ public class KashitsukeShinseiListDiv extends Panel {
 
     @JsonProperty("KashitsukeShinseisho")
     public void setKashitsukeShinseisho(KashitsukeShinseishoDiv KashitsukeShinseisho) {
-        this.KashitsukeShinseisho=KashitsukeShinseisho;
+        this.KashitsukeShinseisho = KashitsukeShinseisho;
     }
 
 }

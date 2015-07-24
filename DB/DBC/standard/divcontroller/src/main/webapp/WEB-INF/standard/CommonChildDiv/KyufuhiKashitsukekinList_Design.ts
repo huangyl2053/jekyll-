@@ -12,16 +12,16 @@ module DBC {
                 return "onClick_btnAddShinsei";
             }
 
-            public static onSelectBySelectButton(): string {
-                return "onSelectBySelectButton";
+            public static onClick_dgSelectShinsei(): string {
+                return "onClick_dgSelectShinsei";
             }
 
-            public static onSelectByModifyButton(): string {
-                return "onSelectByModifyButton";
+            public static onClick_dgModifyShinsei(): string {
+                return "onClick_dgModifyShinsei";
             }
 
-            public static onSelectByDeleteButton(): string {
-                return "onSelectByDeleteButton";
+            public static onClick_dgDeleteShinsei(): string {
+                return "onClick_dgDeleteShinsei";
             }
 
         }

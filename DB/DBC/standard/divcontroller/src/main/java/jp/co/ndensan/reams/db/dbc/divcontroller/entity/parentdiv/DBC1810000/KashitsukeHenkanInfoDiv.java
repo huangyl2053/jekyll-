@@ -1,17 +1,12 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1810000;
-/**
+package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1810000;
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1810000.KashitsukeHenkanChoshuDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1810000.KashitsukeHenkanKeisanDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1810000.KashitsukeHenkanRisokuDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1810000.KashitsukeHenkanTsuchishoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
  * KashitsukeHenkanInfo のクラスファイル 
@@ -19,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class KashitsukeHenkanInfoDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -63,8 +59,6 @@ public class KashitsukeHenkanInfoDiv extends Panel {
     private KashitsukeHenkanChoshuDiv KashitsukeHenkanChoshu;
     @JsonProperty("KashitsukeHenkanTsuchisho")
     private KashitsukeHenkanTsuchishoDiv KashitsukeHenkanTsuchisho;
-    @JsonProperty("btnReturn")
-    private Button btnReturn;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -262,14 +256,5 @@ public class KashitsukeHenkanInfoDiv extends Panel {
         this.KashitsukeHenkanTsuchisho=KashitsukeHenkanTsuchisho;
     }
 
-    @JsonProperty("btnReturn")
-    public Button getBtnReturn() {
-        return btnReturn;
-    }
-
-    @JsonProperty("btnReturn")
-    public void setBtnReturn(Button btnReturn) {
-        this.btnReturn=btnReturn;
-    }
-
+    // </editor-fold>
 }
