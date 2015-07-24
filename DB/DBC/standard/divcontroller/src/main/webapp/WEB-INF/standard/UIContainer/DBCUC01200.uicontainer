@@ -28,7 +28,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0120000",
      "toLayoutTitle": "居宅サービス自己作成サービス利用票登録",
-     "toState": "利用票登録"
+     "toState": "履歴一覧"
     },
     {
      "id": "3",
