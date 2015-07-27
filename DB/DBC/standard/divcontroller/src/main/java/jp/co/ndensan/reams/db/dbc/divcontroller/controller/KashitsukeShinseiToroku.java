@@ -29,9 +29,6 @@ public class KashitsukeShinseiToroku {
 
     public ResponseData<KashitsukeShinseiTorokuDiv> toTorokuDiv(KashitsukeShinseiTorokuDiv panel) {
 
-        List<dgKyufuhiKashitsukekinList_Row> list = panel.getKashitsukeShinseiList().getKashitsukeShinseiListInfo().getDgKyufuhiKashitsukekinList().getDataSource();
-        list.add(new dgKyufuhiKashitsukekinList_Row());
-
         return ResponseData.of(panel).setState(申請登録);
     }
 }
