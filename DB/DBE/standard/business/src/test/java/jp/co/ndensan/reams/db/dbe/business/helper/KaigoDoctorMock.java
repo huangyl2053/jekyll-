@@ -9,26 +9,18 @@ import jp.co.ndensan.reams.db.dbe.business.IShujii;
 import jp.co.ndensan.reams.db.dbe.business.IShujiiIryoKikan;
 import jp.co.ndensan.reams.db.dbe.business.KaigoDoctor;
 import jp.co.ndensan.reams.db.dbe.business.KaigoIryoKikan;
-import jp.co.ndensan.reams.db.dbe.business.Shujii;
 import jp.co.ndensan.reams.db.dbe.business.ShujiiIryoKikan;
 import jp.co.ndensan.reams.db.dbe.definition.IryoKikanKubun;
 import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IryoKikanJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.IshiJokyo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoDoctorCode;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 //import jp.co.ndensan.reams.ur.urz.business.IDoctor;
 //import jp.co.ndensan.reams.ur.urz.business._Doctor;
 //import jp.co.ndensan.reams.ur.urz.business._IryoKikanCode;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.model.IryokikanModel;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
+//import jp.co.ndensan.reams.ur.urz.model.IryokikanModel;
+import jp.co.ndensan.reams.ux.uxx.business.IryoKikan;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static org.mockito.Mockito.spy;
 
 /**
  * モデルパッケージ作成時にエラーになったため仮作成。対応するときに考える。
@@ -83,8 +75,8 @@ public class KaigoDoctorMock {
         return new KaigoIryoKikan(createIryoKikan(), createShujiiIryoKikan());
     }
 
-    private static IryokikanModel createIryoKikan() {
-        return new IryokikanModel(KaigoIryoKikanTestHelper.create医療機関Entity());
+    private static IryoKikan createIryoKikan() {
+        return new IryoKikan(KaigoIryoKikanTestHelper.create医療機関Entity(), null);
     }
 
     private static IShujiiIryoKikan createShujiiIryoKikan() {

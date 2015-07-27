@@ -1,0 +1,379 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;KaigoNinteiShinchokuJokyoKojin&quot;,&quot;businessId&quot;:&quot;DBD&quot;,&quot;controlName&quot;:&quot;KaigoNinteiShinchokuJokyoKojin&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBD.KaigoNinteiShinchokuJokyoKojin"><div class="StateChangable UzPanel JSControl FloatLeft UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel Width-G12 UzCompositeChild" id="KaigoNinteiShinchokuJokyoKojin" style="margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;KaigoNinteiShinchokuJokyoKojin&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G12&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;KaigoNinteiShinchokuJokyoKojin&quot;,&quot;title&quot;:&quot;要介護認定進捗状況照会(個人)&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;KaigoNinteiShinchokuJokyoKojin&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="KaigoNinteiShinchokuJokyoKojin_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">要介護認定進捗状況照会(個人)</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="KaigoNinteiShinchokuJokyoKojin_panel_body_area"><div class="JSControl UzCompositeControl FloatLeft Width-XS" id="ccdKaigoNinteiShinseishaInfo" style="margin: 0px; opacity: 1;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdKaigoNinteiShinseishaInfo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ccdKaigoNinteiShinseishaInfo&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;KaigoNinteiShinseishaInfo&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;KaigoNinteiShinseishaInfo&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.KaigoNinteiShinseishaInfo"></div><div class="StateChangable UzPanel JSControl FloatLeft marginLeft-XS marginRight-XS UzPanelAndText marginTop-Default panelMarginTop-M marginBottom-Default panelMarginBottom-M Panel-Shadow UzCompositeChild" id="ShinchokuJokyo" style="width: 1100px; margin-top: 0px; margin-bottom: 0px; position: relative; opacity: 1;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ShinchokuJokyo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;1100px&quot;,&quot;selectControlID&quot;:&quot;ShinchokuJokyo&quot;,&quot;title&quot;:&quot;進捗状況&quot;,&quot;postParameterPanelNames&quot;:[],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;widthAuto&quot;:false,&quot;focusPositionID&quot;:&quot;KaigoNinteiShinchokuJokyoKojin_panel_body_area&quot;,&quot;canPost&quot;:false}"><div class="UzPanelHeader" id="ShinchokuJokyo_panel_header_area" style="width: auto; display: block;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">進捗状況</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content panelPadding-M ui-droppable ui-sortable" id="ShinchokuJokyo_panel_body_area"><div class="UzTablePanel JSControl FloatLeft marginRight-XS controlMargin-M ClearFloat Width-XS UzTablePanel_GridDesign marginLeft-S UzCompositeChild" id="tplShinchoKujokyo" style="opacity: 1;" data-control-type="TablePanel" data-obj="{&quot;fieldName&quot;:&quot;tplShinchoKujokyo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TablePanel&quot;,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;tplShinchoKujokyo&quot;,&quot;html&quot;:&quot;<table>\n  <tbody>\n    <tr>\n      <td id='R1C1'></td>\n      <td id='R1C2'></td>\n      <td id='R1C3'></td>\n      <td id='R1C4'></td>\n      <td id='R1C5'></td>\n      <td id='R1C6'></td>\n      <td id='R1C7'></td>\n      <td id='R1C8'></td>\n      <td id='R1C9'></td>\n      <td id='R1C10'></td>\n    </tr>\n    <tr>\n      <td id='R2C1'></td>\n      <td id='R2C2'></td>\n      <td id='R2C3'></td>\n      <td id='R2C4'></td>\n      <td id='R2C5'></td>\n      <td id='R2C6'></td>\n      <td id='R2C7'></td>\n      <td id='R2C8'></td>\n      <td id='R2C9'></td>\n      <td id='R2C10'></td>\n    </tr>  \n    <tr>\n      <td id='R3C1'></td>\n      <td id='R3C2'></td>\n      <td id='R3C3'></td>\n      <td id='R3C4'></td>\n      <td id='R3C5'></td>\n      <td id='R3C6'></td>\n      <td id='R3C7'></td>\n      <td id='R3C8'></td>\n      <td id='R3C9'></td>\n      <td id='R3C10'></td>\n    </tr>\n  </tbody>\n</table>\n&quot;,&quot;isGridDesign&quot;:true}"><div id="tempDiv"></div><table>
+  <tbody>
+    <tr>
+      <td id="R1C1" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell1" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell1&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell1&quot;,&quot;connectTd&quot;:&quot;R1C1&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R1C1"></div></td>
+      <td id="R1C2" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell2" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell2&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell2&quot;,&quot;connectTd&quot;:&quot;R1C2&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R1C2"><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-center Width-S UzCompositeChild" id="lblShinseiToroku" style="opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblShinseiToroku&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;lblShinseiToroku&quot;,&quot;text&quot;:&quot;申請登録&quot;,&quot;align&quot;:1}"><span>申請登録</span></span></div></td>
+      <td id="R1C3" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell3" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell3&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell3&quot;,&quot;connectTd&quot;:&quot;R1C3&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R1C3"><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-center Width-S UzCompositeChild" id="lblNinteiChosaIrai" style="opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblNinteiChosaIrai&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;lblNinteiChosaIrai&quot;,&quot;text&quot;:&quot;認定調査<br>依頼&quot;,&quot;align&quot;:1}"><span>認定調査</span><br><span>依頼</span></span></div></td>
+      <td id="R1C4" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell7" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell7&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell7&quot;,&quot;connectTd&quot;:&quot;R1C4&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R1C4"><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-center Width-S UzCompositeChild" id="lblNinteiChosaJisshi" style="opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblNinteiChosaJisshi&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;lblNinteiChosaJisshi&quot;,&quot;text&quot;:&quot;認定調査<br>実施&quot;,&quot;align&quot;:1}"><span>認定調査</span><br><span>実施</span></span></div></td>
+      <td id="R1C5" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell8" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell8&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell8&quot;,&quot;connectTd&quot;:&quot;R1C5&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R1C5"><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-center Width-S UzCompositeChild" id="ShujiIkenshoSakuseiIrai" style="opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;ShujiIkenshoSakuseiIrai&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;ShujiIkenshoSakuseiIrai&quot;,&quot;text&quot;:&quot;主治医意見書<br>作成依頼&quot;,&quot;align&quot;:1}"><span>主治医意見書</span><br><span>作成依頼</span></span></div></td>
+      <td id="R1C6" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell9" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell9&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell9&quot;,&quot;connectTd&quot;:&quot;R1C6&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R1C6"><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-center Width-S UzCompositeChild" id="lblShujiiIkenshoToroku" style="opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblShujiiIkenshoToroku&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;lblShujiiIkenshoToroku&quot;,&quot;text&quot;:&quot;主治医意見書<br>登録&quot;,&quot;align&quot;:1}"><span>主治医意見書</span><br><span>登録</span></span></div></td>
+      <td id="R1C7" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell10" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell10&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell10&quot;,&quot;connectTd&quot;:&quot;R1C7&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R1C7"><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-center Width-S UzCompositeChild" id="IblIchijiHantei" style="opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;IblIchijiHantei&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;IblIchijiHantei&quot;,&quot;text&quot;:&quot;一次判定&quot;,&quot;align&quot;:1}"><span>一次判定</span></span></div></td>
+      <td id="R1C8" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell11" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell11&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell11&quot;,&quot;connectTd&quot;:&quot;R1C8&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R1C8"><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-center Width-S UzCompositeChild" id="lblMasking" style="opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblMasking&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;lblMasking&quot;,&quot;text&quot;:&quot;マスキング&quot;,&quot;align&quot;:1}"><span>マスキング</span></span></div></td>
+      <td id="R1C9" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell12" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell12&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell12&quot;,&quot;connectTd&quot;:&quot;R1C9&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R1C9"><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-center Width-S UzCompositeChild" id="lblKaigoNinteiShinsakaiWaritsuke" style="opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblKaigoNinteiShinsakaiWaritsuke&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;lblKaigoNinteiShinsakaiWaritsuke&quot;,&quot;text&quot;:&quot;介護認定<br>審査会割付&quot;,&quot;align&quot;:1}"><span>介護認定</span><br><span>審査会割付</span></span></div></td>
+      <td id="R1C10" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell13" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell13&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell13&quot;,&quot;connectTd&quot;:&quot;R1C10&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R1C10"><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-center Width-S UzCompositeChild" id="lblKaigoNinteiShinsakaiJissi" style="opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblKaigoNinteiShinsakaiJissi&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;S&quot;,&quot;selectControlID&quot;:&quot;lblKaigoNinteiShinsakaiJissi&quot;,&quot;text&quot;:&quot;介護認定<br>審査会実施&quot;,&quot;align&quot;:1}"><span>介護認定</span><br><span>審査会実施</span></span></div></td>
+    </tr>
+    <tr>
+      <td id="R2C1" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell4" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell4&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell4&quot;,&quot;connectTd&quot;:&quot;R2C1&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R2C1"><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-right UzCompositeChild" id="lblYoteiDay" style="width: 60px; opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblYoteiDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;60px&quot;,&quot;selectControlID&quot;:&quot;lblYoteiDay&quot;,&quot;text&quot;:&quot;予定日&quot;}"><span>予定日</span></span></div></td>
+      <td id="R2C2" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell5" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell5&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell5&quot;,&quot;connectTd&quot;:&quot;R2C2&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R2C2"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtShinseiTorokuYoteiDay" style="width: 107px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtShinseiTorokuYoteiDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;disabled&quot;:true,&quot;selectControlID&quot;:&quot;txtShinseiTorokuYoteiDay_core&quot;}"><input tabindex="-1" class="UzTextBox CoreElement AsIfDisabled disabledColor" id="txtShinseiTorokuYoteiDay_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+      <td id="R2C3" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell6" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell6&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell6&quot;,&quot;connectTd&quot;:&quot;R2C3&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R2C3"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtNinteiChosaIraiYoteiDay" style="width: 107px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtNinteiChosaIraiYoteiDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;selectControlID&quot;:&quot;txtNinteiChosaIraiYoteiDay_core&quot;}"><input class="UzTextBox CoreElement" id="txtNinteiChosaIraiYoteiDay_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+      <td id="R2C4" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell14" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell14&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell14&quot;,&quot;connectTd&quot;:&quot;R2C4&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R2C4"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtNinteiChosaJisshiYoteiDay" style="width: 107px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtNinteiChosaJisshiYoteiDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;selectControlID&quot;:&quot;txtNinteiChosaJisshiYoteiDay_core&quot;}"><input class="UzTextBox CoreElement" id="txtNinteiChosaJisshiYoteiDay_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+      <td id="R2C5" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell15" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell15&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell15&quot;,&quot;connectTd&quot;:&quot;R2C5&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R2C5"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtShujiIkenshoSakuseiIraiYoteiDay" style="width: 107px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtShujiIkenshoSakuseiIraiYoteiDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;selectControlID&quot;:&quot;txtShujiIkenshoSakuseiIraiYoteiDay_core&quot;}"><input class="UzTextBox CoreElement" id="txtShujiIkenshoSakuseiIraiYoteiDay_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+      <td id="R2C6" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell16" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell16&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell16&quot;,&quot;connectTd&quot;:&quot;R2C6&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R2C6"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtShujiiIkenshoTorokuYoteiDay" style="width: 107px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtShujiiIkenshoTorokuYoteiDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;selectControlID&quot;:&quot;txtShujiiIkenshoTorokuYoteiDay_core&quot;}"><input class="UzTextBox CoreElement" id="txtShujiiIkenshoTorokuYoteiDay_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+      <td id="R2C7" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell17" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell17&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell17&quot;,&quot;connectTd&quot;:&quot;R2C7&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R2C7"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtIchijiHanteiYoteiDay" style="width: 107px; height: 20px; position: relative; opacity: 1;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtIchijiHanteiYoteiDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;selectControlID&quot;:&quot;txtIchijiHanteiYoteiDay_core&quot;}"><input class="UzTextBox CoreElement" id="txtIchijiHanteiYoteiDay_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+      <td id="R2C8" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell18" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell18&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell18&quot;,&quot;connectTd&quot;:&quot;R2C8&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R2C8"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtMaskingYoteiDay" style="width: 107px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtMaskingYoteiDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;disabled&quot;:true,&quot;selectControlID&quot;:&quot;txtMaskingYoteiDay_core&quot;}"><input tabindex="-1" class="UzTextBox CoreElement AsIfDisabled disabledColor" id="txtMaskingYoteiDay_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+      <td id="R2C9" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell19" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell19&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell19&quot;,&quot;connectTd&quot;:&quot;R2C9&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R2C9"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtKaigoNinteiShinsakaiWaritsukeYoteiDay" style="width: 107px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtKaigoNinteiShinsakaiWaritsukeYoteiDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;selectControlID&quot;:&quot;txtKaigoNinteiShinsakaiWaritsukeYoteiDay_core&quot;}"><input class="UzTextBox CoreElement" id="txtKaigoNinteiShinsakaiWaritsukeYoteiDay_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+      <td id="R2C10" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell20" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell20&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell20&quot;,&quot;connectTd&quot;:&quot;R2C10&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R2C10"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtKaigoNinteiShinsakaiJissiYoteiDay" style="width: 107px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtKaigoNinteiShinsakaiJissiYoteiDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;selectControlID&quot;:&quot;txtKaigoNinteiShinsakaiJissiYoteiDay_core&quot;}"><input class="UzTextBox CoreElement" id="txtKaigoNinteiShinsakaiJissiYoteiDay_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+    </tr>  
+    <tr>
+      <td id="R3C1" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell21" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell21&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell21&quot;,&quot;connectTd&quot;:&quot;R3C1&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R3C1"><span class="UzLabel word-wrap-break-word JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M text-align-right UzCompositeChild" id="lblKanryoDay" style="width: 60px; opacity: 1;" data-control-type="Label" data-obj="{&quot;fieldName&quot;:&quot;lblKanryoDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Label&quot;,&quot;width&quot;:&quot;60px&quot;,&quot;selectControlID&quot;:&quot;lblKanryoDay&quot;,&quot;text&quot;:&quot;完了日&quot;}"><span>完了日</span></span></div></td>
+      <td id="R3C2" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell22" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell22&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell22&quot;,&quot;connectTd&quot;:&quot;R3C2&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R3C2"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtShinseiTorokuKanryoDay" style="width: 107px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtShinseiTorokuKanryoDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;selectControlID&quot;:&quot;txtShinseiTorokuKanryoDay_core&quot;}"><input class="UzTextBox CoreElement" id="txtShinseiTorokuKanryoDay_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+      <td id="R3C3" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell23" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell23&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell23&quot;,&quot;connectTd&quot;:&quot;R3C3&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R3C3"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtNinteiChosaIraiKanryoDay" style="width: 107px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtNinteiChosaIraiKanryoDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;selectControlID&quot;:&quot;txtNinteiChosaIraiKanryoDay_core&quot;}"><input class="UzTextBox CoreElement" id="txtNinteiChosaIraiKanryoDay_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+      <td id="R3C4" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell24" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell24&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell24&quot;,&quot;connectTd&quot;:&quot;R3C4&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R3C4"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtNinteiChosaJisshiKanryoDay" style="width: 107px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtNinteiChosaJisshiKanryoDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;selectControlID&quot;:&quot;txtNinteiChosaJisshiKanryoDay_core&quot;}"><input class="UzTextBox CoreElement" id="txtNinteiChosaJisshiKanryoDay_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+      <td id="R3C5" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell25" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell25&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell25&quot;,&quot;connectTd&quot;:&quot;R3C5&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R3C5"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtShujiIkenshoSakuseiIraiKanryoDay" style="width: 107px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtShujiIkenshoSakuseiIraiKanryoDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;selectControlID&quot;:&quot;txtShujiIkenshoSakuseiIraiKanryoDay_core&quot;}"><input class="UzTextBox CoreElement" id="txtShujiIkenshoSakuseiIraiKanryoDay_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+      <td id="R3C6" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell26" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell26&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell26&quot;,&quot;connectTd&quot;:&quot;R3C6&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R3C6"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtShujiiIkenshoTorokuKanryoDay" style="width: 107px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtShujiiIkenshoTorokuKanryoDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;selectControlID&quot;:&quot;txtShujiiIkenshoTorokuKanryoDay_core&quot;}"><input class="UzTextBox CoreElement" id="txtShujiiIkenshoTorokuKanryoDay_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+      <td id="R3C7" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell27" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell27&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell27&quot;,&quot;connectTd&quot;:&quot;R3C7&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R3C7"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtIchijiHanteiKanryoDay" style="width: 107px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtIchijiHanteiKanryoDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;selectControlID&quot;:&quot;txtIchijiHanteiKanryoDay_core&quot;}"><input class="UzTextBox CoreElement" id="txtIchijiHanteiKanryoDay_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+      <td id="R3C8" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell28" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell28&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell28&quot;,&quot;connectTd&quot;:&quot;R3C8&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R3C8"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtMaskingKanryo" style="width: 107px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtMaskingKanryo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;selectControlID&quot;:&quot;txtMaskingKanryo_core&quot;}"><input class="UzTextBox CoreElement" id="txtMaskingKanryo_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+      <td id="R3C9" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell29" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell29&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell29&quot;,&quot;connectTd&quot;:&quot;R3C9&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R3C9"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtKaigoNinteiShinsakaiWaritsukeKanryoDay" style="width: 107px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtKaigoNinteiShinsakaiWaritsukeKanryoDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;selectControlID&quot;:&quot;txtKaigoNinteiShinsakaiWaritsukeKanryoDay_core&quot;}"><input class="UzTextBox CoreElement" id="txtKaigoNinteiShinsakaiWaritsukeKanryoDay_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+      <td id="R3C10" data-connect-tablepanel="tplShinchoKujokyo"><div class="UzTableCell JSControl FloatLeft Width-XS controlMargin-M ui-droppable ui-sortable UzCompositeChild" id="celTableCell30" style="margin-right: 0em; margin-left: 0em;" data-control-type="TableCell" data-obj="{&quot;fieldName&quot;:&quot;celTableCell30&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TableCell&quot;,&quot;marginLeft&quot;:&quot;0em&quot;,&quot;marginRight&quot;:&quot;0em&quot;,&quot;selectControlID&quot;:&quot;celTableCell30&quot;,&quot;connectTd&quot;:&quot;R3C10&quot;}" data-connect-tablepanel="tplShinchoKujokyo" data-connect-td="R3C10"><div class="UzTextBoxDate TextBoxOuterDiv WithLabel JSControl FloatLeft marginLeft-XS marginRight-XS controlMargin-M UzCompositeChild" id="txtKaigoNinteiShinsakaiJissiKanryoDay" style="width: 107px; height: 20px;" data-control-type="TextBoxDate" data-obj="{&quot;fieldName&quot;:&quot;txtKaigoNinteiShinsakaiJissiKanryoDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxDate&quot;,&quot;width&quot;:&quot;102px&quot;,&quot;selectControlID&quot;:&quot;txtKaigoNinteiShinsakaiJissiKanryoDay_core&quot;}"><input class="UzTextBox CoreElement" id="txtKaigoNinteiShinsakaiJissiKanryoDay_core" style="width: 102px;" type="text" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2"></div></div></td>
+    </tr>
+  </tbody>
+</table></div></div></div><div class="JSControl UzCompositeControl FloatLeft Width-XS" id="ccdNinteiChosaJokyoInput" style="margin: 0px; opacity: 1;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;ccdNinteiChosaJokyoInput&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;ccdNinteiChosaJokyoInput&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;NinteiChosaJokyoInput&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;NinteiChosaJokyoInput&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[],&quot;EditTypes&quot;:{&quot;_editTypes&quot;:[]}}" data-is-composite-control="true" data-control-name="DBZ.NinteiChosaJokyoInput"></div><button class="UzButton JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS Width-M UzCompositeChild" id="btnModoru" type="button" data-control-type="Button" data-obj="{&quot;fieldName&quot;:&quot;btnModoru&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Button&quot;,&quot;width&quot;:&quot;M&quot;,&quot;selectControlID&quot;:&quot;btnModoru&quot;,&quot;text&quot;:&quot;戻る&quot;}"><span>戻る</span></button><button class="UzButtonBatchRegister JSControl controlMargin-M Width-M FloatRight marginLeft-XS marginRight-XS UzCompositeChild" id="btnKojinShinchokuPrint" type="button" data-control-type="ButtonBatchRegister" data-obj="{&quot;fieldName&quot;:&quot;btnKojinShinchokuPrint&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;ButtonBatchRegister&quot;,&quot;width&quot;:&quot;M&quot;,&quot;float&quot;:2,&quot;selectControlID&quot;:&quot;btnKojinShinchokuPrint&quot;,&quot;postParameterPanelNames&quot;:[],&quot;text&quot;:&quot;個人進捗状況票を印刷する&quot;,&quot;dataPassing&quot;:[],&quot;visibleCloseButton&quot;:false}"><span>個人進捗状況票を印刷する</span></button></div></div>          
+               
+       
+   
+   <script class="RamlConvert" type="text/javascript">
+var DBD= DBD? DBD: {};
+DBD['KAIGONINTEISHINCHOKUJOKYOKOJIN'] = {};
+DBD['KAIGONINTEISHINCHOKUJOKYOKOJIN'].KaigoNinteiShinchokuJokyoKojinRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_KaigoNinteiShinchokuJokyoKojin').getProperty();parameter0.ccdKaigoNinteiShinseishaInfo = Uz.JSControlUtil.getJSControl(parentFieldName + '_ccdKaigoNinteiShinseishaInfo').getPostParameter();parameter0.ShinchokuJokyo = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShinchokuJokyo').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo = Uz.JSControlUtil.getJSControl(parentFieldName + '_tplShinchoKujokyo').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell1 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell1').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell2 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell2').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell2.lblShinseiToroku = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblShinseiToroku').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell3 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell3').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell3.lblNinteiChosaIrai = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblNinteiChosaIrai').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell7 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell7').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell7.lblNinteiChosaJisshi = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblNinteiChosaJisshi').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell8 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell8').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell8.ShujiIkenshoSakuseiIrai = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShujiIkenshoSakuseiIrai').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell9 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell9').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell9.lblShujiiIkenshoToroku = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblShujiiIkenshoToroku').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell10 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell10').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell10.IblIchijiHantei = Uz.JSControlUtil.getJSControl(parentFieldName + '_IblIchijiHantei').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell11 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell11').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell11.lblMasking = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblMasking').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell12 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell12').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell12.lblKaigoNinteiShinsakaiWaritsuke = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblKaigoNinteiShinsakaiWaritsuke').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell13 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell13').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell13.lblKaigoNinteiShinsakaiJissi = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblKaigoNinteiShinsakaiJissi').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell4 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell4').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell4.lblYoteiDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblYoteiDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell5 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell5').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell5.txtShinseiTorokuYoteiDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShinseiTorokuYoteiDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell6 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell6').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell6.txtNinteiChosaIraiYoteiDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtNinteiChosaIraiYoteiDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell14 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell14').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell14.txtNinteiChosaJisshiYoteiDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtNinteiChosaJisshiYoteiDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell15 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell15').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell15.txtShujiIkenshoSakuseiIraiYoteiDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShujiIkenshoSakuseiIraiYoteiDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell16 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell16').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell16.txtShujiiIkenshoTorokuYoteiDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShujiiIkenshoTorokuYoteiDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell17 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell17').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell17.txtIchijiHanteiYoteiDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtIchijiHanteiYoteiDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell18 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell18').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell18.txtMaskingYoteiDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtMaskingYoteiDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell19 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell19').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell19.txtKaigoNinteiShinsakaiWaritsukeYoteiDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKaigoNinteiShinsakaiWaritsukeYoteiDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell20 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell20').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell20.txtKaigoNinteiShinsakaiJissiYoteiDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKaigoNinteiShinsakaiJissiYoteiDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell21 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell21').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell21.lblKanryoDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_lblKanryoDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell22 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell22').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell22.txtShinseiTorokuKanryoDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShinseiTorokuKanryoDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell23 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell23').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell23.txtNinteiChosaIraiKanryoDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtNinteiChosaIraiKanryoDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell24 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell24').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell24.txtNinteiChosaJisshiKanryoDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtNinteiChosaJisshiKanryoDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell25 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell25').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell25.txtShujiIkenshoSakuseiIraiKanryoDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShujiIkenshoSakuseiIraiKanryoDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell26 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell26').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell26.txtShujiiIkenshoTorokuKanryoDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShujiiIkenshoTorokuKanryoDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell27 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell27').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell27.txtIchijiHanteiKanryoDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtIchijiHanteiKanryoDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell28 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell28').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell28.txtMaskingKanryo = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtMaskingKanryo').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell29 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell29').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell29.txtKaigoNinteiShinsakaiWaritsukeKanryoDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKaigoNinteiShinsakaiWaritsukeKanryoDay').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell30 = Uz.JSControlUtil.getJSControl(parentFieldName + '_celTableCell30').getProperty();parameter0.ShinchokuJokyo.tplShinchoKujokyo.celTableCell30.txtKaigoNinteiShinsakaiJissiKanryoDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtKaigoNinteiShinsakaiJissiKanryoDay').getProperty();parameter0.ccdNinteiChosaJokyoInput = Uz.JSControlUtil.getJSControl(parentFieldName + '_ccdNinteiChosaJokyoInput').getPostParameter();parameter0.btnModoru = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnModoru').getProperty();parameter0.btnKojinShinchokuPrint = Uz.JSControlUtil.getJSControl(parentFieldName + '_btnKojinShinchokuPrint').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBD;
+(function (DBD) {
+    (function (KaigoNinteiShinchokuJokyoKojin) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        KaigoNinteiShinchokuJokyoKojin.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "KaigoNinteiShinchokuJokyoKojin";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBD.KaigoNinteiShinchokuJokyoKojin.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBD.KaigoNinteiShinchokuJokyoKojin.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.KaigoNinteiShinchokuJokyoKojin = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.ShinchokuJokyo = function () {
+                return new UZA.Panel(this.convFiledName("ShinchokuJokyo"));
+            };
+
+            Controls.prototype.tplShinchoKujokyo = function () {
+                return new UZA.TablePanel(this.convFiledName("tplShinchoKujokyo"));
+            };
+
+            Controls.prototype.celTableCell1 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell1"));
+            };
+
+            Controls.prototype.celTableCell2 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell2"));
+            };
+
+            Controls.prototype.lblShinseiToroku = function () {
+                return new UZA.Label(this.convFiledName("lblShinseiToroku"));
+            };
+
+            Controls.prototype.celTableCell3 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell3"));
+            };
+
+            Controls.prototype.lblNinteiChosaIrai = function () {
+                return new UZA.Label(this.convFiledName("lblNinteiChosaIrai"));
+            };
+
+            Controls.prototype.celTableCell7 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell7"));
+            };
+
+            Controls.prototype.lblNinteiChosaJisshi = function () {
+                return new UZA.Label(this.convFiledName("lblNinteiChosaJisshi"));
+            };
+
+            Controls.prototype.celTableCell8 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell8"));
+            };
+
+            Controls.prototype.ShujiIkenshoSakuseiIrai = function () {
+                return new UZA.Label(this.convFiledName("ShujiIkenshoSakuseiIrai"));
+            };
+
+            Controls.prototype.celTableCell9 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell9"));
+            };
+
+            Controls.prototype.lblShujiiIkenshoToroku = function () {
+                return new UZA.Label(this.convFiledName("lblShujiiIkenshoToroku"));
+            };
+
+            Controls.prototype.celTableCell10 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell10"));
+            };
+
+            Controls.prototype.IblIchijiHantei = function () {
+                return new UZA.Label(this.convFiledName("IblIchijiHantei"));
+            };
+
+            Controls.prototype.celTableCell11 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell11"));
+            };
+
+            Controls.prototype.lblMasking = function () {
+                return new UZA.Label(this.convFiledName("lblMasking"));
+            };
+
+            Controls.prototype.celTableCell12 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell12"));
+            };
+
+            Controls.prototype.lblKaigoNinteiShinsakaiWaritsuke = function () {
+                return new UZA.Label(this.convFiledName("lblKaigoNinteiShinsakaiWaritsuke"));
+            };
+
+            Controls.prototype.celTableCell13 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell13"));
+            };
+
+            Controls.prototype.lblKaigoNinteiShinsakaiJissi = function () {
+                return new UZA.Label(this.convFiledName("lblKaigoNinteiShinsakaiJissi"));
+            };
+
+            Controls.prototype.celTableCell4 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell4"));
+            };
+
+            Controls.prototype.lblYoteiDay = function () {
+                return new UZA.Label(this.convFiledName("lblYoteiDay"));
+            };
+
+            Controls.prototype.celTableCell5 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell5"));
+            };
+
+            Controls.prototype.txtShinseiTorokuYoteiDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShinseiTorokuYoteiDay"));
+            };
+
+            Controls.prototype.celTableCell6 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell6"));
+            };
+
+            Controls.prototype.txtNinteiChosaIraiYoteiDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaIraiYoteiDay"));
+            };
+
+            Controls.prototype.celTableCell14 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell14"));
+            };
+
+            Controls.prototype.txtNinteiChosaJisshiYoteiDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaJisshiYoteiDay"));
+            };
+
+            Controls.prototype.celTableCell15 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell15"));
+            };
+
+            Controls.prototype.txtShujiIkenshoSakuseiIraiYoteiDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShujiIkenshoSakuseiIraiYoteiDay"));
+            };
+
+            Controls.prototype.celTableCell16 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell16"));
+            };
+
+            Controls.prototype.txtShujiiIkenshoTorokuYoteiDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShujiiIkenshoTorokuYoteiDay"));
+            };
+
+            Controls.prototype.celTableCell17 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell17"));
+            };
+
+            Controls.prototype.txtIchijiHanteiYoteiDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtIchijiHanteiYoteiDay"));
+            };
+
+            Controls.prototype.celTableCell18 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell18"));
+            };
+
+            Controls.prototype.txtMaskingYoteiDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtMaskingYoteiDay"));
+            };
+
+            Controls.prototype.celTableCell19 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell19"));
+            };
+
+            Controls.prototype.txtKaigoNinteiShinsakaiWaritsukeYoteiDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKaigoNinteiShinsakaiWaritsukeYoteiDay"));
+            };
+
+            Controls.prototype.celTableCell20 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell20"));
+            };
+
+            Controls.prototype.txtKaigoNinteiShinsakaiJissiYoteiDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKaigoNinteiShinsakaiJissiYoteiDay"));
+            };
+
+            Controls.prototype.celTableCell21 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell21"));
+            };
+
+            Controls.prototype.lblKanryoDay = function () {
+                return new UZA.Label(this.convFiledName("lblKanryoDay"));
+            };
+
+            Controls.prototype.celTableCell22 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell22"));
+            };
+
+            Controls.prototype.txtShinseiTorokuKanryoDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShinseiTorokuKanryoDay"));
+            };
+
+            Controls.prototype.celTableCell23 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell23"));
+            };
+
+            Controls.prototype.txtNinteiChosaIraiKanryoDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaIraiKanryoDay"));
+            };
+
+            Controls.prototype.celTableCell24 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell24"));
+            };
+
+            Controls.prototype.txtNinteiChosaJisshiKanryoDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtNinteiChosaJisshiKanryoDay"));
+            };
+
+            Controls.prototype.celTableCell25 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell25"));
+            };
+
+            Controls.prototype.txtShujiIkenshoSakuseiIraiKanryoDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShujiIkenshoSakuseiIraiKanryoDay"));
+            };
+
+            Controls.prototype.celTableCell26 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell26"));
+            };
+
+            Controls.prototype.txtShujiiIkenshoTorokuKanryoDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtShujiiIkenshoTorokuKanryoDay"));
+            };
+
+            Controls.prototype.celTableCell27 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell27"));
+            };
+
+            Controls.prototype.txtIchijiHanteiKanryoDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtIchijiHanteiKanryoDay"));
+            };
+
+            Controls.prototype.celTableCell28 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell28"));
+            };
+
+            Controls.prototype.txtMaskingKanryo = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtMaskingKanryo"));
+            };
+
+            Controls.prototype.celTableCell29 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell29"));
+            };
+
+            Controls.prototype.txtKaigoNinteiShinsakaiWaritsukeKanryoDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKaigoNinteiShinsakaiWaritsukeKanryoDay"));
+            };
+
+            Controls.prototype.celTableCell30 = function () {
+                return new UZA.TableCell(this.convFiledName("celTableCell30"));
+            };
+
+            Controls.prototype.txtKaigoNinteiShinsakaiJissiKanryoDay = function () {
+                return new UZA.TextBoxDate(this.convFiledName("txtKaigoNinteiShinsakaiJissiKanryoDay"));
+            };
+
+            Controls.prototype.btnModoru = function () {
+                return new UZA.Button(this.convFiledName("btnModoru"));
+            };
+
+            Controls.prototype.btnKojinShinchokuPrint = function () {
+                return new UZA.ButtonBatchRegister(this.convFiledName("btnKojinShinchokuPrint"));
+            };
+            return Controls;
+        })();
+        KaigoNinteiShinchokuJokyoKojin.Controls = Controls;
+    })(DBD.KaigoNinteiShinchokuJokyoKojin || (DBD.KaigoNinteiShinchokuJokyoKojin = {}));
+    var KaigoNinteiShinchokuJokyoKojin = DBD.KaigoNinteiShinchokuJokyoKojin;
+})(DBD || (DBD = {}));
+var DBD;
+(function (DBD) {
+    (function (KaigoNinteiShinchokuJokyoKojin) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KaigoNinteiShinchokuJokyoKojin.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new KaigoNinteiShinchokuJokyoKojin.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        KaigoNinteiShinchokuJokyoKojin.ModeController = ModeController;
+    })(DBD.KaigoNinteiShinchokuJokyoKojin || (DBD.KaigoNinteiShinchokuJokyoKojin = {}));
+    var KaigoNinteiShinchokuJokyoKojin = DBD.KaigoNinteiShinchokuJokyoKojin;
+})(DBD || (DBD = {}));
+
+var DBD;
+(function (DBD) {
+    (function (KaigoNinteiShinchokuJokyoKojin) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new KaigoNinteiShinchokuJokyoKojin.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        KaigoNinteiShinchokuJokyoKojin.PublicProperties = PublicProperties;
+    })(DBD.KaigoNinteiShinchokuJokyoKojin || (DBD.KaigoNinteiShinchokuJokyoKojin = {}));
+    var KaigoNinteiShinchokuJokyoKojin = DBD.KaigoNinteiShinchokuJokyoKojin;
+})(DBD || (DBD = {}));
+</script></div>

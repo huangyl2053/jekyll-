@@ -4,7 +4,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.dbu0600011;
  * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshafinder.HihokenshaFinderDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.HihokenshaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.searchResultOfHihokensha.SearchResultOfHihokenshaDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  *
  * @author 自動生成
  */
+//TODO n3317　塚田萌　ビルドを通すための暫定対応。再生成してください。
 public class SogoShokaiSearchDiv extends Panel {
     /*
      * [ private の作成 ]

@@ -15,10 +15,10 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku.Hihokensha
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.code.shikaku.ShikakushashoKofuJiyu;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HihokenshaShikakuHakkoHandler.KOFUJIYU_CHOKUZEN;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.hihokenshashikakuhakko.HihokenshaShikakuHakkoHandler.KOFUJIYU_TEST;
-import jp.co.ndensan.reams.ur.urz.definition.code.CodeMasterHelper;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMasterHelper;
 
 /**
  * {@link HihokenshaShikakuHakkoDiv.発行証タイプ}毎に異なる振る舞いを定義しています。

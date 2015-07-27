@@ -6,10 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.messagemapping;
 
 import jp.co.ndensan.reams.ur.urz.business.internalreport.InternalReportValidationMessage;
-//TODO n8223 バリデーションの構成が変更があり、その対応必要。
-//import jp.co.ndensan.reams.ua.uax.model.validations.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.ur.urz.divcontroller.validations.IValidationMessageMapping;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
@@ -17,7 +14,8 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
  *
  * @author n8178 城間篤人
  */
-public enum FukaErrorValidationMessageMapping implements IValidationMessageMapping {
+//TODO n8223 バリデーションの構成が変更があり、その対応必要。
+public enum FukaErrorValidationMessageMapping {
 
 //    エラー処理対象が未処理でない((IValidationMessage) InternalReportValidationMessage.更正対象が未処理状態ではないため実行不可.getMessage(), "dgFukaErrorList");
     //更正対象が未処理状態ではないため実行不可→修正対象が未処理状態ではないため実行不可 へ変更
@@ -31,17 +29,14 @@ public enum FukaErrorValidationMessageMapping implements IValidationMessageMappi
         this.fieldName = fieldName;
     }
 
-    @Override
-    public jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage getValidationMessage() {
-        return (jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage) message;
+    public IValidationMessage getValidationMessage() {
+        return message;
     }
 
-    @Override
     public Message getMessage() {
         return message.getMessage();
     }
 
-    @Override
     public String getFieldName() {
         return fieldName;
     }

@@ -12,9 +12,9 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoIryoKikanCode;
 import jp.co.ndensan.reams.db.dbe.entity.basic.DbT7011ShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urc.business.IKoza;
 import jp.co.ndensan.reams.ur.urz.definition.valueobject.IryoKikanCode;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.IryoKikanIdoJiyu;
-import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaiinKubun;
-import jp.co.ndensan.reams.ur.urz.entity.basic.UrT0516IryokikanEntity;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.IryoKikanIdoJiyuCodeValue;
+import jp.co.ndensan.reams.ur.urz.definition.valueobject.code.KaiinKubunCodeValue;
+import jp.co.ndensan.reams.ur.urz.entity.basic.UrT0516IryoKikanEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -54,24 +54,24 @@ public final class KaigoIryoKikanTestHelper {
     private KaigoIryoKikanTestHelper() {
     }
 
-    public static UrT0516IryokikanEntity create医療機関Entity() {
-        //TODO n1013 松本直樹 UrT0516IryokikanEntityにIIryoKikanの修正に伴う見直し。暫定対応
-        //UrT0516IryokikanEntity entity = new UrT0516IryokikanEntity(createIryoKikan());
-        UrT0516IryokikanEntity entity = new UrT0516IryokikanEntity();
-        entity.setIryokikanCode(医療機関コード);
-        entity.setIryokikanRyakusho(医療機関略称);
-        entity.setIryokikanKanaRyakusho(医療機関カナ略称);
+    public static UrT0516IryoKikanEntity create医療機関Entity() {
+        //TODO n1013 松本直樹 UrT0516IryoKikanEntityにIIryoKikanの修正に伴う見直し。暫定対応
+        //UrT0516IryoKikanEntity entity = new UrT0516IryoKikanEntity(createIryoKikan());
+        UrT0516IryoKikanEntity entity = new UrT0516IryoKikanEntity();
+        entity.setIryoKikanCode(医療機関コード);
+        entity.setIryoKikanRyakusho(医療機関略称);
+        entity.setIryoKikanKanaRyakusho(医療機関カナ略称);
 //        entity.setYubinNo(郵便番号);
 //        entity.setJusho(住所);
 //        entity.setKanaJusho(カナ住所);
-        KaiinKubun kaiinKubun = mock(KaiinKubun.class);
+        KaiinKubunCodeValue kaiinKubun = mock(KaiinKubunCodeValue.class);
         when(kaiinKubun.value()).thenReturn(new Code(会員区分));
         entity.setKaiinKubunCode(kaiinKubun);
         entity.setJiritsushienFlag(指定自立支援医療機関flag);
         entity.setShinsetsuYMD(new FlexibleDate(新設年月日.toDateString()));
         entity.setHaishiYMD(new FlexibleDate(廃止年月日.toDateString()));
         entity.setKyushiFlag(休止flag);
-        IryoKikanIdoJiyu idoJiyu = mock(IryoKikanIdoJiyu.class);
+        IryoKikanIdoJiyuCodeValue idoJiyu = mock(IryoKikanIdoJiyuCodeValue.class);
         when(idoJiyu.value()).thenReturn(new Code(異動事由));
         entity.setIdoJiyuCode(idoJiyu);
         entity.setIdoYMD(new FlexibleDate(異動年月日.toDateString()));

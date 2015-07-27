@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.IAssociation;
+import jp.co.ndensan.reams.ur.urz.business.Association;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -60,12 +60,12 @@ public class HihokenshashoB4EditorTest {
     public static class constructor extends DbzTestBase {
 
         private HihokenshashoModel model;
-        private IAssociation association;
+        private Association association;
 
         @Test(expected = NullPointerException.class)
         public void 被保険者証Modelにnullが渡された場合_NullPointerExceptionが発生する() {
             model = null;
-            association = mock(IAssociation.class);
+            association = mock(Association.class);
             sut = new HihokenshashoB4Editor(model, association);
             fail();
         }
@@ -214,7 +214,7 @@ public class HihokenshashoB4EditorTest {
 
         private ShikakuKihonEditorBase createMockShikakuKihonEditor(HihokenshashoModel model, HihokenshashoPrintConfig printConfig,
                 HihokenshashoJushoEditConfig hihoJushoEditConfig, ChohyoKyotsuJushoEditConfig kyotsuJushoEditConfig) {
-            IAssociation association = mock(IAssociation.class);
+            Association association = mock(Association.class);
             ShikakuKihonEditorBase editorBase = spy(new ShikakuKihonEditorBase(model, association, printConfig, hihoJushoEditConfig, kyotsuJushoEditConfig));
             doCallRealMethod().when(editorBase).set被保険者番号(any(IHihokenshashoCommonEditData.class));
             doNothing().when(editorBase).set住所(any(IHihokenshashoCommonEditData.class));

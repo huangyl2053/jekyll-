@@ -26,8 +26,7 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.model.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
-import jp.co.ndensan.reams.ur.urz.business.IAssociation;
-import jp.co.ndensan.reams.ur.urz.business.IZenkokuJushoItem;
+import jp.co.ndensan.reams.ur.urz.business.Association;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -61,12 +60,12 @@ public class HihokenshashoA4EditorTest {
     public static class constructor extends DbzTestBase {
 
         private HihokenshashoModel model;
-        private IAssociation asscoiation;
+        private Association asscoiation;
 
         @Test(expected = NullPointerException.class)
         public void 被保険者証Modelにnullが渡された場合_NullPointerExceptionが発生する() {
             model = null;
-            asscoiation = mock(IAssociation.class);
+            asscoiation = mock(Association.class);
             sut = new HihokenshashoA4Editor(model, asscoiation);
             fail();
         }
@@ -182,7 +181,7 @@ public class HihokenshashoA4EditorTest {
 
         private ShikakuKihonEditorBase createMockShikakuKihonEditor(HihokenshashoModel model, HihokenshashoPrintConfig printConfig,
                 HihokenshashoJushoEditConfig hihoJushoEditConfig, ChohyoKyotsuJushoEditConfig kyotsuJushoEditConfig) {
-            IAssociation associationMock = mock(IAssociation.class);
+            Association associationMock = mock(Association.class);
             ShikakuKihonEditorBase editorBase = spy(new ShikakuKihonEditorBase(model, associationMock, printConfig, hihoJushoEditConfig, kyotsuJushoEditConfig));
             doCallRealMethod().when(editorBase).set被保険者番号(any(IHihokenshashoCommonEditData.class));
             doNothing().when(editorBase).set住所(any(IHihokenshashoCommonEditData.class));

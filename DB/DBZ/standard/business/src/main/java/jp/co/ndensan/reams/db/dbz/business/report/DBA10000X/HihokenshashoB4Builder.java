@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X;
 
 import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.HihokenshashoB4;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.tsuchishoatesaki.ITsuchishoAtesakiBuilder;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.sofubutsuatesaki.ISofubutsuAtesakiSourceBuilder;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.ur.urz.business.report.parts.tsuchishoatesaki.TsuchishoAtesakiSource;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiSource;
 
 /**
  * 被保険者証B4版発行のために必要な情報を元に、帳票ソースを作成するクラスです。
@@ -20,7 +20,7 @@ public class HihokenshashoB4Builder implements IHihokenshashoBuilder {
     //TODO n8178 城間篤人 単票発行のみを想定。バッチ処理での動作(1枚の帳票に2人分の情報を印字する場合)について、考慮する必要がある。 2015年2月
 
     private final HihokenshashoB4SourceBuilder hihokenshashoB4;
-    private final ITsuchishoAtesakiBuilder tsuchishoSofusaki;
+    private final ISofubutsuAtesakiSourceBuilder tsuchishoSofusaki;
 
     /**
      * コンストラクタです。
@@ -29,7 +29,7 @@ public class HihokenshashoB4Builder implements IHihokenshashoBuilder {
      * @param tsuchishoSofusaki 宛先SourceBuilder
      * @throws NullPointerException 引数のいずれかにnullが渡されたとき
      */
-    public HihokenshashoB4Builder(HihokenshashoB4SourceBuilder hihokenshashoB4, ITsuchishoAtesakiBuilder tsuchishoSofusaki) throws NullPointerException {
+    public HihokenshashoB4Builder(HihokenshashoB4SourceBuilder hihokenshashoB4, ISofubutsuAtesakiSourceBuilder tsuchishoSofusaki) throws NullPointerException {
         requireNonNull(hihokenshashoB4, UrSystemErrorMessages.引数がnullのため生成不可
                 .getReplacedMessage("被保険者証A4版ソースビルダー", getClass().getName()));
         requireNonNull(tsuchishoSofusaki, UrSystemErrorMessages.引数がnullのため生成不可
@@ -44,10 +44,10 @@ public class HihokenshashoB4Builder implements IHihokenshashoBuilder {
         switch (hihokenshashoB4.get印字位置()) {
             case 上部:
                 source.sofusakiAtena1 = tsuchishoSofusaki.buildSource();
-                source.sofusakiAtena2 = new TsuchishoAtesakiSource();
+                source.sofusakiAtena2 = new SofubutsuAtesakiSource();
                 break;
             default:
-                source.sofusakiAtena1 = new TsuchishoAtesakiSource();
+                source.sofusakiAtena1 = new SofubutsuAtesakiSource();
                 source.sofusakiAtena2 = tsuchishoSofusaki.buildSource();
                 break;
         }

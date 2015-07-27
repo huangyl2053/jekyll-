@@ -17,12 +17,10 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzDefinition</artifactId>
-            <version>1.0.0</version>
-            <type>jar</type>
         </dependency>
 
 
-        <dependency>
+<!--        <dependency>
             <groupId>jp.co.ndensan.reams.aa.aax</groupId>
             <artifactId>AaxDefinition</artifactId>
             <version>0.1.0-SNAPSHOT</version>
@@ -126,7 +124,7 @@
             <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
             <artifactId>UxxDefinition</artifactId>
             <version>0.1.0-SNAPSHOT</version>
-        </dependency>
+        </dependency>-->
 
 
         <dependency>

@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.model.validation.ShikakuHenkoValidationMessage
 import jp.co.ndensan.reams.ur.urz.model.validation.IValidatableWithContext;
 import jp.co.ndensan.reams.ur.urz.model.validation.validators.OrderValidator;
 import jp.co.ndensan.reams.ur.urz.model.validation.validators.PresenceValidator;
-import jp.co.ndensan.reams.ur.urz.model.validations.ValidationMessagesFactory;
+import jp.co.ndensan.reams.ur.urz.model.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
@@ -61,7 +61,7 @@ public class ShikakuHenkoValidator implements IValidatableWithContext<ShikakuHen
 
     @Override
     public IValidationMessages validateIn(ShikakuHenkoRirekiKanriContext context) {
-        IValidationMessages messages = ValidationMessagesFactory.createValidationMessagesInstance();
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
 
         if (!PresenceValidator.isValid(変更日)) {
             messages.add(ShikakuHenkoValidationMessage.変更日が未入力);

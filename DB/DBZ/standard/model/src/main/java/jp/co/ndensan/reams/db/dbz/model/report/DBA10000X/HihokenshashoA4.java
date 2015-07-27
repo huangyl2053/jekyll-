@@ -4,7 +4,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItemGroup;
 // TODO n8178 参照できないため、福祉を参考に一時的にpomを書き換えて見えるようにした。TsuchishoSofusakiSourceがModelに移動した後に修正する。 2015年2月末
-import jp.co.ndensan.reams.ur.urz.business.report.parts.tsuchishoatesaki.TsuchishoAtesakiSource;
+//import jp.co.ndensan.reams.ur.urz.business.report.parts.tsuchishoatesaki.TsuchishoAtesakiSource;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.sofubutsuatesaki.SofubutsuAtesakiSource;
 
 /**
  *
@@ -255,7 +256,7 @@ public class HihokenshashoA4 implements IHihokenshasho {
     public RString kosekiSeibetsu12;
     @ReportItemGroup(groupName = "sofusakiAtena", order = 121)
     // TODO n8178 AtesakiSourceをModelパッケージに移動した後変更する。 2014/1/9
-    public TsuchishoAtesakiSource sofusakiAtena;
+    public SofubutsuAtesakiSource sofusakiAtena;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

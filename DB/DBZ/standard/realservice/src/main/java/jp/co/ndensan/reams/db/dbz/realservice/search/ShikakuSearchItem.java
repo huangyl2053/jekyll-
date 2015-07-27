@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice.search;
 
-import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchItem;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbV7901ShikakuSearch.*;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchItem;
 
 /**
  * 資格検索Viewの条件検索で使用する列挙型です。

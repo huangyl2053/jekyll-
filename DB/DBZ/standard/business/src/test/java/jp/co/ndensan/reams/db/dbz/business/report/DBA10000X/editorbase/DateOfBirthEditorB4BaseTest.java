@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbz.model.report.DBA10000X.IHihokenshashoB4CommonE
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.ua.uax.business.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -381,7 +381,7 @@ public class DateOfBirthEditorB4BaseTest {
 
         private static HihokenshashoModel createMockModel(RString dateOfBirthStr, Jinshu 人種) {
             IDateOfBirth dateOfBirth = mock(IDateOfBirth.class);
-            when(dateOfBirth.toDate()).thenReturn(new RDate(dateOfBirthStr.toString()));
+            when(dateOfBirth.toFlexibleDate()).thenReturn(new FlexibleDate(dateOfBirthStr.toString()));
             IKojin kojin = mock(IKojin.class);
             when(kojin.get生年月日()).thenReturn(dateOfBirth);
             when(kojin.is日本人()).thenReturn(人種.value);

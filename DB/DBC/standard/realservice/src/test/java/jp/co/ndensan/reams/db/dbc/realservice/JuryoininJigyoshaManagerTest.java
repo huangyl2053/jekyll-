@@ -153,7 +153,7 @@ public class JuryoininJigyoshaManagerTest extends DbcTestBase {
         IKozaManager kozaFinderMock = mock(IKozaManager.class);
         //TODO n3317塚田萌　RDateからFlexibleDateに変更されたらRDateを修正。
         when(kozaFinderMock.get口座(any(RDate.class), any(ShikibetsuCode.class),
-                any(RString.class), any(KamokuCode.class))).thenReturn(list);
+                any(GyomuCode.class), any(KamokuCode.class))).thenReturn(list);
 
         return kozaFinderMock;
     }

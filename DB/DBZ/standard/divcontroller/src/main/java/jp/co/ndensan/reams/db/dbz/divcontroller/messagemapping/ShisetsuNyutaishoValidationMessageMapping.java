@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.messagemapping;
 
 import jp.co.ndensan.reams.db.dbz.model.validation.ShisetsuNyutaishoValidationMessage;
-import jp.co.ndensan.reams.ur.urz.divcontroller.validations.IValidationMessageMapping;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 
@@ -15,7 +14,8 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
  *
  * @author N8223　朴義一
  */
-public enum ShisetsuNyutaishoValidationMessageMapping implements IValidationMessageMapping {
+//TODO n3317 塚田萌　ビルドを通すための暫定対応。見直してください。
+public enum ShisetsuNyutaishoValidationMessageMapping {
 
     /**
      *
@@ -58,20 +58,15 @@ public enum ShisetsuNyutaishoValidationMessageMapping implements IValidationMess
         this.fieldName = fieldName;
     }
 
-//    @Override
-    @Override
-    public jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage getValidationMessage() {
-        return (jp.co.ndensan.reams.ur.urz.model.validations.IValidationMessage) message;
+    public IValidationMessage getValidationMessage() {
+        return (IValidationMessage) message;
     }
 
-    @Override
     public Message getMessage() {
         return message.getMessage();
     }
 
-    @Override
     public String getFieldName() {
         return fieldName;
     }
-
 }

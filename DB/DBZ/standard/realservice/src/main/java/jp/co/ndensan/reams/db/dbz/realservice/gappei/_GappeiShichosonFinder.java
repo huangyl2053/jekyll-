@@ -28,16 +28,16 @@ import jp.co.ndensan.reams.db.dbz.persistence.basic.KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.realservice.search.GappeiJohoSearchItem;
 import jp.co.ndensan.reams.db.dbz.realservice.search.GappeiShichosonSearchItem;
 import jp.co.ndensan.reams.db.dbz.realservice.search.KoseiShichosonMasterSearchItem;
-import jp.co.ndensan.reams.ur.urz.realservice.search.FlexibleDateOperator;
-import jp.co.ndensan.reams.ur.urz.realservice.search.INewSearchCondition;
-import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchCondition;
-import jp.co.ndensan.reams.ur.urz.realservice.search.SearchConditionFactory;
-import jp.co.ndensan.reams.ur.urz.realservice.search.StringOperator;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.FlexibleDateOperator;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.INewSearchCondition;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchConditionFactory;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**

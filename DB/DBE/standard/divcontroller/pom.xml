@@ -70,11 +70,15 @@
             <artifactId>DbeDefinition</artifactId>
             <version>${project.version}</version>
         </dependency>
-
         <dependency>
-            <groupId>jp.co.ndensan.reams.ua.uax</groupId>
-            <artifactId>UaxDivController</artifactId>
-            <classifier>classes</classifier>
+            <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
+            <artifactId>requestSettings-maven-plugin</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>
+            <artifactId>shareSetting-maven-plugin</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.uz.maven.plugins</groupId>

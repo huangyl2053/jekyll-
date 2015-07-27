@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.ua.uax.business.shikibetsutaisho.ShikibetsuTaishoFactory;
 
 /**
  * 対象者のモデルです。（資格系）
@@ -59,7 +60,8 @@ public class TaishoshaModel {
      * @return 識別コード
      */
     public ShikibetsuCode get識別コード() {
-        return entity.get住基個人住登内エンティティ().getShikibetsuCode();
+        return ShikibetsuTaishoFactory.createKojin(entity.get住基個人住登外エンティティ()).get識別コード();
+//        return entity.get住基個人住登外エンティティ().getShikibetsuCode();
     }
 
     /**
@@ -96,7 +98,8 @@ public class TaishoshaModel {
      * @return 氏名
      */
     public AtenaMeisho get氏名() {
-        return entity.get住基個人住登内エンティティ().getKanjiShimei();
+        return ShikibetsuTaishoFactory.createKojin(entity.get住基個人住登外エンティティ()).get名称().getName();
+//        return entity.get住基個人住登外エンティティ().getKanjiShimei();
     }
 
     /**
@@ -105,7 +108,8 @@ public class TaishoshaModel {
      * @return カナ氏名
      */
     public AtenaKanaMeisho getカナ氏名() {
-        return entity.get住基個人住登内エンティティ().getKanaShimei();
+        return ShikibetsuTaishoFactory.createKojin(entity.get住基個人住登外エンティティ()).get名称().getKana();
+//        return entity.get住基個人住登外エンティティ().getKanaShimei();
     }
 
     /**
@@ -114,7 +118,8 @@ public class TaishoshaModel {
      * @return 性別
      */
     public Gender get性別() {
-        return Gender.toValue(entity.get住基個人住登内エンティティ().getSeibetsuCode());
+        return ShikibetsuTaishoFactory.createKojin(entity.get住基個人住登外エンティティ()).get性別();
+//        return Gender.toValue(entity.get住基個人住登外エンティティ().getSeibetsuCode());
     }
 
     /**
@@ -123,7 +128,8 @@ public class TaishoshaModel {
      * @return 生年月日
      */
     public FlexibleDate get生年月日() {
-        return entity.get住基個人住登内エンティティ().getSeinengappiYMD();
+        return ShikibetsuTaishoFactory.createKojin(entity.get住基個人住登外エンティティ()).get生年月日().toFlexibleDate();
+//        return entity.get住基個人住登外エンティティ().getSeinengappiYMD();
     }
 
     /**
@@ -132,7 +138,8 @@ public class TaishoshaModel {
      * @return 郵便番号
      */
     public YubinNo get郵便番号() {
-        return entity.get住基個人住登内エンティティ().getYubinNo();
+        return ShikibetsuTaishoFactory.createKojin(entity.get住基個人住登外エンティティ()).get住所().get郵便番号();
+//        return entity.get住基個人住登外エンティティ().getYubinNo();
     }
 
     /**
@@ -141,7 +148,8 @@ public class TaishoshaModel {
      * @return 住所
      */
     public AtenaJusho get住所() {
-        return new AtenaJusho(entity.get住基個人住登内エンティティ().getJusho());
+        return new AtenaJusho(ShikibetsuTaishoFactory.createKojin(entity.get住基個人住登外エンティティ()).get住所().get住所());
+//        return entity.get住基個人住登外エンティティ().getJusho();
     }
 
     /**
@@ -150,7 +158,8 @@ public class TaishoshaModel {
      * @return 個人番号
      */
     public KojinNo get個人番号() {
-        return entity.get住基個人住登内エンティティ().getKojinNo();
+        return ShikibetsuTaishoFactory.createKojin(entity.get住基個人住登外エンティティ()).get個人番号();
+//        return entity.get住基個人住登外エンティティ().getKojinNo();
     }
 
     /**
@@ -159,7 +168,8 @@ public class TaishoshaModel {
      * @return 住民種別
      */
     public JuminShubetsu get住民種別() {
-        return JuminShubetsu.toValue(entity.get住基個人住登内エンティティ().getJuminShubetsuCode());
+        return ShikibetsuTaishoFactory.createKojin(entity.get住基個人住登外エンティティ()).get住民種別();
+//        return JuminShubetsu.toValue(entity.get住基個人住登外エンティティ().getJuminShubetsuCode());
     }
 
     /**
@@ -168,6 +178,7 @@ public class TaishoshaModel {
      * @return 世帯コード
      */
     public SetaiCode get世帯コード() {
-        return entity.get住基個人住登内エンティティ().getSetaiCode();
+        return ShikibetsuTaishoFactory.createKojin(entity.get住基個人住登外エンティティ()).get世帯コード();
+//        return entity.get住基個人住登外エンティティ().getSetaiCode();
     }
 }

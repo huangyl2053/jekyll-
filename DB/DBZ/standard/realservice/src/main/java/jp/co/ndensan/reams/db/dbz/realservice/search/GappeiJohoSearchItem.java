@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.realservice.search;
 
-import jp.co.ndensan.reams.ur.urz.realservice.search.ISearchItem;
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.DbT7055GappeiJoho.*;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchItem;
 
 /**
  * 合併情報テーブルを検索する際に条件指定する項目の列挙型です。

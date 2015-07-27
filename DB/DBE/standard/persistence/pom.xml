@@ -33,7 +33,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzPersistence</artifactId>
-            <version>${project.version}</version>
+            <version>${jp.co.ndensan.reams.dbzVersion}</version>
             <type>jar</type>
         </dependency>
         <dependency>
@@ -58,11 +58,6 @@
             <version>${project.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.uz</groupId>
-            <artifactId>framework</artifactId>
-            <type>jar</type>
         </dependency>
     </dependencies>
 </project>
