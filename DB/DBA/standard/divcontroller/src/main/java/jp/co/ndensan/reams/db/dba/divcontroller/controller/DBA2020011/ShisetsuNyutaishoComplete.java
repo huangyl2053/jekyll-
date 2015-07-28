@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.controller;
+package jp.co.ndensan.reams.db.dba.divcontroller.controller.DBA2020011;
 
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2020011.ShisetsuNyutaishoCompleteDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba2020011.ShisetsuNyutaishoKanriTaishoshaJohoDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.ShisetsuNyutaishoCompleteDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2020011.ShisetsuNyutaishoKanriTaishoshaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoKanryoMessage;
 import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.atenashokaisimple.AtenaShokaiSimpleDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;

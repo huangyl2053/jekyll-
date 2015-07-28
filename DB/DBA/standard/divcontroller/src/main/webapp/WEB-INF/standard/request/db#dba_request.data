@@ -79,6 +79,9 @@ dba/db/dba/ShisetsuNyutaishoComplete/onClick_btnSave
 dba/db/dba/ShisetsuNyutaishoIdo/onClick_btnToDecide
 dba/db/dba/ShisetsuNyutaishoKanriTaishoshaJoho/onClick_btnToDecide
 dba/db/dba/ShisetsuNyutaishoKanriTaishoshaSearch/onLoad
+dba/db/dba/ShisetsuNyutaishoRireki/onClickAddShisetsuNyutaisho
+dba/db/dba/ShisetsuNyutaishoRireki/onClickDeleteShisetsuNyutaisho
+dba/db/dba/ShisetsuNyutaishoRireki/onClickModifyShisetsuNyutaisho
 dba/db/dba/TaishoshaKeySetting/onClick_btnNext
 dba/db/dba/TaishoshaKeySetting/onLoad
 dba/db/dba/TajutokuTaishosaJoho/onClick_btnToDecide
