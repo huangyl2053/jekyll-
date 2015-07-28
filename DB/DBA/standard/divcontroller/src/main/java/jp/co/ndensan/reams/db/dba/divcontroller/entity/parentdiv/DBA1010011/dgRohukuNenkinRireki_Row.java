@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011;
-/**
+package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011;
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Jun 27 19:09:54 JST 2014 
+ * Fri Jul 24 15:39:51 JST 2015 
  */
 
 
@@ -14,39 +14,32 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 
 /**
- * dgSeikatsuHogoRireki_Row のクラスファイル 
+ * dgRohukuNenkinRireki_Row のクラスファイル 
  * 
  * @author 自動生成
  */
 
-public class dgSeikatsuHogoRireki_Row extends DataRow {
+public class dgRohukuNenkinRireki_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 
     private TextBoxFlexibleDate kaishiDate;
     private TextBoxFlexibleDate shuryoDate;
-    private RString seihoShubetsuKey;
-    private RString seihoShubetsu;
     private RString jukyushaNo;
 
-    public dgSeikatsuHogoRireki_Row() {
+    public dgRohukuNenkinRireki_Row() {
         super();
         this.kaishiDate = new TextBoxFlexibleDate();
         this.shuryoDate = new TextBoxFlexibleDate();
-        this.seihoShubetsuKey = RString.EMPTY;
-        this.seihoShubetsu = RString.EMPTY;
         this.jukyushaNo = RString.EMPTY;
     }
 
-    public dgSeikatsuHogoRireki_Row(TextBoxFlexibleDate kaishiDate, TextBoxFlexibleDate shuryoDate, RString seihoShubetsuKey, RString seihoShubetsu, RString jukyushaNo) {
+    public dgRohukuNenkinRireki_Row(TextBoxFlexibleDate kaishiDate, TextBoxFlexibleDate shuryoDate, RString jukyushaNo) {
         super();
         this.setOriginalData("kaishiDate", kaishiDate);
         this.setOriginalData("shuryoDate", shuryoDate);
-        this.setOriginalData("seihoShubetsuKey", seihoShubetsuKey);
-        this.setOriginalData("seihoShubetsu", seihoShubetsu);
         this.setOriginalData("jukyushaNo", jukyushaNo);
         this.kaishiDate = kaishiDate;
         this.shuryoDate = shuryoDate;
-        this.seihoShubetsuKey = seihoShubetsuKey;
-        this.seihoShubetsu = seihoShubetsu;
         this.jukyushaNo = jukyushaNo;
     }
 
@@ -56,14 +49,6 @@ public class dgSeikatsuHogoRireki_Row extends DataRow {
 
     public TextBoxFlexibleDate getShuryoDate() {
         return shuryoDate;
-    }
-
-    public RString getSeihoShubetsuKey() {
-        return seihoShubetsuKey;
-    }
-
-    public RString getSeihoShubetsu() {
-        return seihoShubetsu;
     }
 
     public RString getJukyushaNo() {
@@ -80,19 +65,10 @@ public class dgSeikatsuHogoRireki_Row extends DataRow {
         this.shuryoDate = shuryoDate;
     }
 
-    public void setSeihoShubetsuKey(RString seihoShubetsuKey) {
-        this.setOriginalData("seihoShubetsuKey", seihoShubetsuKey);
-        this.seihoShubetsuKey = seihoShubetsuKey;
-    }
-
-    public void setSeihoShubetsu(RString seihoShubetsu) {
-        this.setOriginalData("seihoShubetsu", seihoShubetsu);
-        this.seihoShubetsu = seihoShubetsu;
-    }
-
     public void setJukyushaNo(RString jukyushaNo) {
         this.setOriginalData("jukyushaNo", jukyushaNo);
         this.jukyushaNo = jukyushaNo;
     }
 
+    // </editor-fold>
 }

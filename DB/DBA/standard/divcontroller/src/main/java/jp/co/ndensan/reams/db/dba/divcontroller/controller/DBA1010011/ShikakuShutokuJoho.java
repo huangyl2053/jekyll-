@@ -3,24 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.controller;
+package jp.co.ndensan.reams.db.dba.divcontroller.controller.DBA1010011;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dba.divcontroller.controller.helper.DemoKojin;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.IryoHokenInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.ShikakuShutokuInputDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.ShikakuShutokuJohoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.ShikakuShutokuSearchDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.dgRohukuNenkinRireki_Row;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.dgSeikatsuHogoRireki_Row;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplIryoHokenDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplRofukuNenkinDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplSeikatsuHogoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplShikakuJohoDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.dba1010011.tplShisetsuNyutaishoDiv;
+import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName.被保履歴入力;
+import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName.医療保険入力;
+import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName.施設入退所入力;
+import static jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName.資格取得情報登録;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.IryoHokenInputDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuInputDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuJohoDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuSearchDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.dgRohukuNenkinRireki_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.dgSeikatsuHogoRireki_Row;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.tplIryoHokenDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.tplRofukuNenkinDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.tplSeikatsuHogoDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.tplShikakuJohoDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.tplShisetsuNyutaishoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.iryohokenrireki.dgIryoHokenRireki_Row;
 //import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakutokusorireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shisetsunyutaishorirekikanri.dgShisetsuNyutaishoRireki_Row;
@@ -172,8 +176,9 @@ public class ShikakuShutokuJoho {
 //    }
 
     private void setShikakuJohoDisabled(tplShikakuJohoDiv tplShikakuJoho, boolean disableValue) {
-        tplShikakuJoho.getShikakuShutokuInput().setDisabled(disableValue);
-        tplShikakuJoho.getBtnUpdateShikaku().setDisabled(disableValue);
+        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//        tplShikakuJoho.getShikakuShutokuInput().setDisabled(disableValue);
+//        tplShikakuJoho.getBtnUpdateShikaku().setDisabled(disableValue);
     }
 
     /**
@@ -183,27 +188,28 @@ public class ShikakuShutokuJoho {
      * @param shikibetsuCode 識別コード
      */
     private void setIryoHoken(ShikakuShutokuJohoDiv shikakuJohoDiv, RString shikibetsuCode) {
-        tplIryoHokenDiv tplIryoHoken = shikakuJohoDiv.getTabInputs().getTplIryoHoken();
-
-        List<HashMap> iryoHokenDataList = YamlLoader.DBA.loadAsList(IRYO_HOKEN_DATA);
-        DataGrid<dgIryoHokenRireki_Row> grid = tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki();
-        List<dgIryoHokenRireki_Row> dataSource = new ArrayList<>();
-        for (HashMap iryoHokenData : iryoHokenDataList) {
-            if (iryoHokenData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
-                dataSource = createDgIryoHokenRirekiList((List<HashMap>) iryoHokenData.get("医療保険"));
-            }
-        }
-        grid.setDataSource(dataSource);
-
-        if (dataSource.isEmpty()) {
-            shikakuJohoDiv.setIryoHokenInputMode(IRYO_HOKEN_ADD);
-            setIryoHokenDisabled(tplIryoHoken, false);
-
-            tplIryoHoken.getBtnAddIryoHoken().setDisabled(true);
-        } else {
-            setIryoHokenDisabled(tplIryoHoken, true);
-            tplIryoHoken.getBtnAddIryoHoken().setDisabled(false);
-        }
+        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//        tplIryoHokenDiv tplIryoHoken = shikakuJohoDiv.getTabInputs().getTplIryoHoken();
+//
+//        List<HashMap> iryoHokenDataList = YamlLoader.DBA.loadAsList(IRYO_HOKEN_DATA);
+//        DataGrid<dgIryoHokenRireki_Row> grid = tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki();
+//        List<dgIryoHokenRireki_Row> dataSource = new ArrayList<>();
+//        for (HashMap iryoHokenData : iryoHokenDataList) {
+//            if (iryoHokenData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
+//                dataSource = createDgIryoHokenRirekiList((List<HashMap>) iryoHokenData.get("医療保険"));
+//            }
+//        }
+//        grid.setDataSource(dataSource);
+//
+//        if (dataSource.isEmpty()) {
+//            shikakuJohoDiv.setIryoHokenInputMode(IRYO_HOKEN_ADD);
+//            setIryoHokenDisabled(tplIryoHoken, false);
+//
+//            tplIryoHoken.getBtnAddIryoHoken().setDisabled(true);
+//        } else {
+//            setIryoHokenDisabled(tplIryoHoken, true);
+//            tplIryoHoken.getBtnAddIryoHoken().setDisabled(false);
+//        }
     }
 
     private List<dgIryoHokenRireki_Row> createDgIryoHokenRirekiList(List<HashMap> iryoHokenData) {
@@ -231,8 +237,9 @@ public class ShikakuShutokuJoho {
     }
 
     private void setIryoHokenDisabled(tplIryoHokenDiv tplIryoHoken, boolean disableValue) {
-        tplIryoHoken.getIryoHokenInput().setDisabled(disableValue);
-        tplIryoHoken.getBtnUpdateIryoHoken().setDisabled(disableValue);
+        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//        tplIryoHoken.getIryoHokenInput().setDisabled(disableValue);
+//        tplIryoHoken.getBtnUpdateIryoHoken().setDisabled(disableValue);
     }
 
     /**
@@ -280,8 +287,9 @@ public class ShikakuShutokuJoho {
     }
 
     private void setRofukuNenkinDisabled(tplRofukuNenkinDiv tplRofukuNenkin, boolean disableValue) {
-        tplRofukuNenkin.getRohukuNenkin().getRohukuNenkinInput().setDisabled(disableValue);
-        tplRofukuNenkin.getRohukuNenkin().getBtnUpdateRofukuNenkin().setDisabled(disableValue);
+        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//        tplRofukuNenkin.getRohukuNenkin().getRohukuNenkinInput().setDisabled(disableValue);
+//        tplRofukuNenkin.getRohukuNenkin().getBtnUpdateRofukuNenkin().setDisabled(disableValue);
     }
 
     /**
@@ -343,23 +351,24 @@ public class ShikakuShutokuJoho {
      * @param shikibetsuCode 識別コード
      */
     private void setShisetsuNyutaisho(ShikakuShutokuJohoDiv shikakuJohoDiv, RString shikibetsuCode) {
-        tplShisetsuNyutaishoDiv tplShisetsuNyutaisho = shikakuJohoDiv.getTabInputs().getTplShisetsuNyutaisho();
-
-        List<HashMap> shisetsuNyutaishoRirekiDataList = YamlLoader.DBA.loadAsList(SHISETSU_NYUTAISHO_DATA);
-        DataGrid<dgShisetsuNyutaishoRireki_Row> grid = tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getDgShisetsuNyutaishoRireki();
-        List<dgShisetsuNyutaishoRireki_Row> dataSource = new ArrayList<>();
-        for (HashMap shisetsuNyutaishoRirekiData : shisetsuNyutaishoRirekiDataList) {
-            if (shisetsuNyutaishoRirekiData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
-                dataSource = createShisetsuNyutaishoList((List<HashMap>) shisetsuNyutaishoRirekiData.get("異動履歴"));
-            }
-        }
-        grid.setDataSource(dataSource);
-
-        if (dataSource.isEmpty()) {
-            setShisetsuNyutaishoDisabled(tplShisetsuNyutaisho, false);
-        } else {
-            setShisetsuNyutaishoDisabled(tplShisetsuNyutaisho, true);
-        }
+        //TODO n8187久保田 画面部品が変更されていたがコード未対応のためエラーが発生していたのでコメントアウト
+//        tplShisetsuNyutaishoDiv tplShisetsuNyutaisho = shikakuJohoDiv.getTabInputs().getTplShisetsuNyutaisho();
+//
+//        List<HashMap> shisetsuNyutaishoRirekiDataList = YamlLoader.DBA.loadAsList(SHISETSU_NYUTAISHO_DATA);
+//        DataGrid<dgShisetsuNyutaishoRireki_Row> grid = tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getDgShisetsuNyutaishoRireki();
+//        List<dgShisetsuNyutaishoRireki_Row> dataSource = new ArrayList<>();
+//        for (HashMap shisetsuNyutaishoRirekiData : shisetsuNyutaishoRirekiDataList) {
+//            if (shisetsuNyutaishoRirekiData.get("識別コード").toString().equals(shikibetsuCode.toString())) {
+//                dataSource = createShisetsuNyutaishoList((List<HashMap>) shisetsuNyutaishoRirekiData.get("異動履歴"));
+//            }
+//        }
+//        grid.setDataSource(dataSource);
+//
+//        if (dataSource.isEmpty()) {
+//            setShisetsuNyutaishoDisabled(tplShisetsuNyutaisho, false);
+//        } else {
+//            setShisetsuNyutaishoDisabled(tplShisetsuNyutaisho, true);
+//        }
 
 //        DropDownList ddl = tplShisetsuNyutaisho.getShisetsuNyutaishoRirekiKanri().getShisetsuNyutaishoInput().getDdlTaishoJoho();
 //        ddl.setDataSource(ddl.getDataSource().subList(0, 2));
@@ -400,29 +409,30 @@ public class ShikakuShutokuJoho {
 
     private void setShutokuJiyu(tplShikakuJohoDiv shikakuJohoDiv) {
 
-        DropDownList ddl = shikakuJohoDiv.getShikakuShutokuInput().getDdlShikakuShutokuJiyu();
-        ddl.setDataSource(createDdlShutokuJiyu());
-        SqlSession session = _DbSession.get(_WorkFlowSession.KEY);
-        _FlowDefinitionDac dac = new _FlowDefinitionDac(session);
-        FlowKey flowKey = dac.getFlowKey(_ControlDataHolder.getControlData().getFlowContext().getFlowInstanceId());
-
-        RString flowId = new RString(flowKey.getFlowId().getId());
-
-        if (KaigoMenuType.転入により取得.getFlowId().equals(flowId)) {
-            createPartOfDdlShutokuJiyu(ddl, "tennyu");
-        } else if (KaigoMenuType.第2号被保険者取得申請により取得.getFlowId().equals(flowId)) {
-            createPartOfDdlShutokuJiyu(ddl, "nigoShinsei");
-        } else if (KaigoMenuType.外国人申請により取得.getFlowId().equals(flowId)) {
-            createPartOfDdlShutokuJiyu(ddl, "gaikokuJin");
-        } else if (KaigoMenuType.年齢到達により取得.getFlowId().equals(flowId)) {
-            createPartOfDdlShutokuJiyu(ddl, "nenreiTotatsu");
-        } else if (KaigoMenuType.転居により取得_施設退所等.getFlowId().equals(flowId)) {
-            createPartOfDdlShutokuJiyu(ddl, "gappeinaiTenkyo");
-        } else if (KaigoMenuType.帰化により取得.getFlowId().equals(flowId)) {
-            createPartOfDdlShutokuJiyu(ddl, "kika");
-        } else if (KaigoMenuType.職権により取得.getFlowId().equals(flowId)) {
-            createPartOfDdlShutokuJiyu(ddl, "shokkenShutoku");
-        }
+        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//        DropDownList ddl = shikakuJohoDiv.getShikakuShutokuInput().getDdlShikakuShutokuJiyu();
+//        ddl.setDataSource(createDdlShutokuJiyu());
+//        SqlSession session = _DbSession.get(_WorkFlowSession.KEY);
+//        _FlowDefinitionDac dac = new _FlowDefinitionDac(session);
+//        FlowKey flowKey = dac.getFlowKey(_ControlDataHolder.getControlData().getFlowContext().getFlowInstanceId());
+//
+//        RString flowId = new RString(flowKey.getFlowId().getId());
+//
+//        if (KaigoMenuType.転入により取得.getFlowId().equals(flowId)) {
+//            createPartOfDdlShutokuJiyu(ddl, "tennyu");
+//        } else if (KaigoMenuType.第2号被保険者取得申請により取得.getFlowId().equals(flowId)) {
+//            createPartOfDdlShutokuJiyu(ddl, "nigoShinsei");
+//        } else if (KaigoMenuType.外国人申請により取得.getFlowId().equals(flowId)) {
+//            createPartOfDdlShutokuJiyu(ddl, "gaikokuJin");
+//        } else if (KaigoMenuType.年齢到達により取得.getFlowId().equals(flowId)) {
+//            createPartOfDdlShutokuJiyu(ddl, "nenreiTotatsu");
+//        } else if (KaigoMenuType.転居により取得_施設退所等.getFlowId().equals(flowId)) {
+//            createPartOfDdlShutokuJiyu(ddl, "gappeinaiTenkyo");
+//        } else if (KaigoMenuType.帰化により取得.getFlowId().equals(flowId)) {
+//            createPartOfDdlShutokuJiyu(ddl, "kika");
+//        } else if (KaigoMenuType.職権により取得.getFlowId().equals(flowId)) {
+//            createPartOfDdlShutokuJiyu(ddl, "shokkenShutoku");
+//        }
     }
 
     private List<KeyValueDataSource> createDdlShutokuJiyu() {
@@ -486,7 +496,8 @@ public class ShikakuShutokuJoho {
 //        shikakuJohoDiv.setShikakuSelectRow(new RString(Integer.toString(tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedRowId())));
 //        setShikakuJohoInput(tplShikakuJoho, tplShikakuJoho.getShikakuTokusoRireki().getDgShikakuShutokuRireki().getClickedItem());
         setShikakuJohoDisabled(tplShikakuJoho, true);
-        tplShikakuJoho.getBtnUpdateShikaku().setDisabled(false);
+        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//        tplShikakuJoho.getBtnUpdateShikaku().setDisabled(false);
         response.data = shikakuJohoDiv;
         return response;
     }
@@ -581,10 +592,11 @@ public class ShikakuShutokuJoho {
 
     private void setShikakuShutokuJohoInput(tplShikakuJohoDiv tplShikakuJoho, RString ddlShikakuShutokuJiyu, FlexibleDate ShutokuDate,
             FlexibleDate ShutokuTodokedeDate, RString ddlHihokenshaKubun, FlexibleDate nenreiTotatsuDate) {
-        ShikakuShutokuInputDiv shikakuShutoku = tplShikakuJoho.getShikakuShutokuInput();
-        shikakuShutoku.getDdlShikakuShutokuJiyu().setSelectedItem(ddlShikakuShutokuJiyu);
-        shikakuShutoku.getTxtShutokuDate().setValue(ShutokuDate);
-        shikakuShutoku.getTxtShutokuTodokedeDate().setValue(ShutokuTodokedeDate);
+        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//        ShikakuShutokuInputDiv shikakuShutoku = tplShikakuJoho.getShikakuShutokuInput();
+//        shikakuShutoku.getDdlShikakuShutokuJiyu().setSelectedItem(ddlShikakuShutokuJiyu);
+//        shikakuShutoku.getTxtShutokuDate().setValue(ShutokuDate);
+//        shikakuShutoku.getTxtShutokuTodokedeDate().setValue(ShutokuTodokedeDate);
     }
 
     /**
@@ -619,9 +631,10 @@ public class ShikakuShutokuJoho {
         tplIryoHokenDiv tplIryoHoken = shikakuJohoDiv.getTabInputs().getTplIryoHoken();
 
         shikakuJohoDiv.setIryoHokenInputMode(IRYO_HOKEN_MODIFY);
-        shikakuJohoDiv.setIryoHokenSelectRow(new RString(Integer.toString(tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getClickedRowId())));
-        setIryoHokenInput(tplIryoHoken, tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getClickedItem());
-        setIryoHokenDisabled(tplIryoHoken, false);
+        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//        shikakuJohoDiv.setIryoHokenSelectRow(new RString(Integer.toString(tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getClickedRowId())));
+//        setIryoHokenInput(tplIryoHoken, tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getClickedItem());
+//        setIryoHokenDisabled(tplIryoHoken, false);
         response.data = shikakuJohoDiv;
         return response;
     }
@@ -639,10 +652,11 @@ public class ShikakuShutokuJoho {
         tplIryoHokenDiv tplIryoHoken = shikakuJohoDiv.getTabInputs().getTplIryoHoken();
 
         shikakuJohoDiv.setIryoHokenInputMode(IRYO_HOKEN_DELETE);
-        shikakuJohoDiv.setIryoHokenSelectRow(new RString(Integer.toString(tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getClickedRowId())));
-        setIryoHokenInput(tplIryoHoken, tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getClickedItem());
-        setIryoHokenDisabled(tplIryoHoken, true);
-        tplIryoHoken.getBtnUpdateIryoHoken().setDisabled(false);
+        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//        shikakuJohoDiv.setIryoHokenSelectRow(new RString(Integer.toString(tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getClickedRowId())));
+//        setIryoHokenInput(tplIryoHoken, tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getClickedItem());
+//        setIryoHokenDisabled(tplIryoHoken, true);
+//        tplIryoHoken.getBtnUpdateIryoHoken().setDisabled(false);
         response.data = shikakuJohoDiv;
         return response;
     }
@@ -662,54 +676,57 @@ public class ShikakuShutokuJoho {
         tplIryoHokenDiv tplIryoHoken = shikakuJohoDiv.getTabInputs().getTplIryoHoken();
         int selectRowNum;
 
-        if (shikakuJohoDiv.getIryoHokenInputMode().equals(IRYO_HOKEN_ADD)) {
-            dgIryoHokenRireki_Row row = createDgIryoHokenRirekiRowFrowInputValue(tplIryoHoken);
-            row.setRowState(RowState.Added);
-            tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getDataSource().add(0, row);
-        } else if (shikakuJohoDiv.getIryoHokenInputMode().equals(IRYO_HOKEN_MODIFY)) {
-            selectRowNum = Integer.parseInt(shikakuJohoDiv.getIryoHokenSelectRow().toString());
-            dgIryoHokenRireki_Row selectRow = tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getDataSource().get(selectRowNum);
-            setDgIryoHokenRirekiRowFrowInputValue(tplIryoHoken, selectRow);
-            if (selectRow.getRowState().equals(RowState.Added)) {
-            } else {
-                selectRow.setRowState(RowState.Modified);
-            }
-        } else if (shikakuJohoDiv.getIryoHokenInputMode().equals(IRYO_HOKEN_DELETE)) {
-            selectRowNum = Integer.parseInt(shikakuJohoDiv.getIryoHokenSelectRow().toString());
-            dgIryoHokenRireki_Row selectRow = tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getDataSource().get(selectRowNum);
-            if (selectRow.getRowState().equals(RowState.Added)) {
-                tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getDataSource().remove(selectRowNum);
-            } else {
-                selectRow.setRowState(RowState.Deleted);
-            }
-        }
-
-        setIryoHokenDisabled(tplIryoHoken, true);
-
-        tplIryoHoken.getBtnAddIryoHoken().setDisabled(false);
-        clearIryoHokenInput(tplIryoHoken);
+        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//        if (shikakuJohoDiv.getIryoHokenInputMode().equals(IRYO_HOKEN_ADD)) {
+//            dgIryoHokenRireki_Row row = createDgIryoHokenRirekiRowFrowInputValue(tplIryoHoken);
+//            row.setRowState(RowState.Added);
+//            tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getDataSource().add(0, row);
+//        } else if (shikakuJohoDiv.getIryoHokenInputMode().equals(IRYO_HOKEN_MODIFY)) {
+//            selectRowNum = Integer.parseInt(shikakuJohoDiv.getIryoHokenSelectRow().toString());
+//            dgIryoHokenRireki_Row selectRow = tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getDataSource().get(selectRowNum);
+//            setDgIryoHokenRirekiRowFrowInputValue(tplIryoHoken, selectRow);
+//            if (selectRow.getRowState().equals(RowState.Added)) {
+//            } else {
+//                selectRow.setRowState(RowState.Modified);
+//            }
+//        } else if (shikakuJohoDiv.getIryoHokenInputMode().equals(IRYO_HOKEN_DELETE)) {
+//            selectRowNum = Integer.parseInt(shikakuJohoDiv.getIryoHokenSelectRow().toString());
+//            dgIryoHokenRireki_Row selectRow = tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getDataSource().get(selectRowNum);
+//            if (selectRow.getRowState().equals(RowState.Added)) {
+//                tplIryoHoken.getIryoHokenRireki().getDgIryoHokenRireki().getDataSource().remove(selectRowNum);
+//            } else {
+//                selectRow.setRowState(RowState.Deleted);
+//            }
+//        }
+//
+//        setIryoHokenDisabled(tplIryoHoken, true);
+//
+//        tplIryoHoken.getBtnAddIryoHoken().setDisabled(false);
+//        clearIryoHokenInput(tplIryoHoken);
         response.data = shikakuJohoDiv;
         return response;
     }
 
     private void setIryoHokenInput(tplIryoHokenDiv tplIryoHoken, dgIryoHokenRireki_Row row) {
-        IryoHokenInputDiv iryoHokenInput = tplIryoHoken.getIryoHokenInput();
-        iryoHokenInput.getTxtIryoHokenKanyuDate().setValue(row.getKanyuDate().getValue());
-        iryoHokenInput.getTxtIryoHokenDattaiDate().setValue(row.getDattaiDate().getValue());
-        iryoHokenInput.getTxtIryoHokenHokenshaNo().setValue(row.getHokenshaNo());
-        iryoHokenInput.getTxtIryoHokenHokenshaMeisho().setValue(row.getHokenshaMeisho());
-        iryoHokenInput.getDdlIryoHokenShubetsu().setSelectedItem(row.getIryoHokenShubetsuKey());
-        iryoHokenInput.getTxtIryoHokenKigoNo().setValue(row.getKigoNo());
+        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//        IryoHokenInputDiv iryoHokenInput = tplIryoHoken.getIryoHokenInput();
+//        iryoHokenInput.getTxtIryoHokenKanyuDate().setValue(row.getKanyuDate().getValue());
+//        iryoHokenInput.getTxtIryoHokenDattaiDate().setValue(row.getDattaiDate().getValue());
+//        iryoHokenInput.getTxtIryoHokenHokenshaNo().setValue(row.getHokenshaNo());
+//        iryoHokenInput.getTxtIryoHokenHokenshaMeisho().setValue(row.getHokenshaMeisho());
+//        iryoHokenInput.getDdlIryoHokenShubetsu().setSelectedItem(row.getIryoHokenShubetsuKey());
+//        iryoHokenInput.getTxtIryoHokenKigoNo().setValue(row.getKigoNo());
     }
 
     private void clearIryoHokenInput(tplIryoHokenDiv tplIryoHoken) {
-        IryoHokenInputDiv iryoHokenInput = tplIryoHoken.getIryoHokenInput();
-        iryoHokenInput.getDdlIryoHokenShubetsu().setSelectedItem(new RString("kyokai"));
-        iryoHokenInput.getTxtIryoHokenDattaiDate().setValue(null);
-        iryoHokenInput.getTxtIryoHokenHokenshaMeisho().setValue(null);
-        iryoHokenInput.getTxtIryoHokenHokenshaNo().setValue(null);
-        iryoHokenInput.getTxtIryoHokenKanyuDate().setValue(null);
-        iryoHokenInput.getTxtIryoHokenKigoNo().setValue(null);
+        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//        IryoHokenInputDiv iryoHokenInput = tplIryoHoken.getIryoHokenInput();
+//        iryoHokenInput.getDdlIryoHokenShubetsu().setSelectedItem(new RString("kyokai"));
+//        iryoHokenInput.getTxtIryoHokenDattaiDate().setValue(null);
+//        iryoHokenInput.getTxtIryoHokenHokenshaMeisho().setValue(null);
+//        iryoHokenInput.getTxtIryoHokenHokenshaNo().setValue(null);
+//        iryoHokenInput.getTxtIryoHokenKanyuDate().setValue(null);
+//        iryoHokenInput.getTxtIryoHokenKigoNo().setValue(null);
     }
 
     private dgIryoHokenRireki_Row createDgIryoHokenRirekiRowFrowInputValue(tplIryoHokenDiv tplIryoHoken) {
@@ -721,15 +738,153 @@ public class ShikakuShutokuJoho {
     }
 
     private dgIryoHokenRireki_Row setDgIryoHokenRirekiRowFrowInputValue(tplIryoHokenDiv tplIryoHoken, dgIryoHokenRireki_Row row) {
-        IryoHokenInputDiv input = tplIryoHoken.getIryoHokenInput();
-        row.setHokenshaNo(input.getTxtIryoHokenHokenshaNo().getValue());
-        row.setHokenshaMeisho(input.getTxtIryoHokenHokenshaMeisho().getValue());
-        row.setHokensha(row.getHokenshaNo().concat(":").concat(row.getHokenshaMeisho()));
-        row.setIryoHokenShubetsuKey(input.getDdlIryoHokenShubetsu().getSelectedItem());
-        row.setIryoHokenShubetsu(input.getDdlIryoHokenShubetsu().getSelectedValue());
-        row.getKanyuDate().setValue(input.getTxtIryoHokenKanyuDate().getValue());
-        row.getDattaiDate().setValue(input.getTxtIryoHokenDattaiDate().getValue());
-        row.setKigoNo(input.getTxtIryoHokenKigoNo().getValue());
+        //TODO n8187久保田 画面Entiityが変更されたがコード未対応のためエラーが発生するのでコメントアウト
+//        IryoHokenInputDiv input = tplIryoHoken.getIryoHokenInput();
+//        row.setHokenshaNo(input.getTxtIryoHokenHokenshaNo().getValue());
+//        row.setHokenshaMeisho(input.getTxtIryoHokenHokenshaMeisho().getValue());
+//        row.setHokensha(row.getHokenshaNo().concat(":").concat(row.getHokenshaMeisho()));
+//        row.setIryoHokenShubetsuKey(input.getDdlIryoHokenShubetsu().getSelectedItem());
+//        row.setIryoHokenShubetsu(input.getDdlIryoHokenShubetsu().getSelectedValue());
+//        row.getKanyuDate().setValue(input.getTxtIryoHokenKanyuDate().getValue());
+//        row.getDattaiDate().setValue(input.getTxtIryoHokenDattaiDate().getValue());
+//        row.setKigoNo(input.getTxtIryoHokenKigoNo().getValue());
         return row;
     }
+
+    /**
+     * 被保履歴タブで追加ボタン押下時の処理。
+     *
+     * @param div 資格取得情報div
+     * @return ResponseData
+     */
+    public ResponseData<ShikakuShutokuJohoDiv> onClickAddHihoRireki(ShikakuShutokuJohoDiv div) {
+        return toHihoRirekiNyuryoku(div);
+    }
+
+    /**
+     * 被保履歴タブでDataGrid選択時の処理。
+     *
+     * @param div 資格取得情報div
+     * @return ResponseData
+     */
+    public ResponseData<ShikakuShutokuJohoDiv> onSelectHihoRireki(ShikakuShutokuJohoDiv div) {
+        return toHihoRirekiNyuryoku(div);
+    }
+
+    /**
+     * 被保履歴タブで確定ボタン押下時の処理。
+     *
+     * @param div 資格取得情報div
+     * @return ResponseData
+     */
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnHihoRirekiKakutei(ShikakuShutokuJohoDiv div) {
+        return toShikakuShutokuJohoToroku(div);
+    }
+
+    /**
+     * 被保履歴タブで取消ボタン押下時の処理。
+     *
+     * @param div 資格取得情報div
+     * @return ResponseData
+     */
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnHihoRirekiTorikeshi(ShikakuShutokuJohoDiv div) {
+        return toShikakuShutokuJohoToroku(div);
+    }
+
+    /**
+     * 医療保険タブで追加ボタン押下時の処理。
+     *
+     * @param div 資格取得情報div
+     * @return ResponseData
+     */
+    public ResponseData<ShikakuShutokuJohoDiv> onClickAddIryoHokenRireki(ShikakuShutokuJohoDiv div) {
+        return toIryoHokenNyuryoku(div);
+    }
+
+    /**
+     * 医療保険タブでDataGrid選択時の処理。
+     *
+     * @param div 資格取得情報div
+     * @return ResponseData
+     */
+    public ResponseData<ShikakuShutokuJohoDiv> onSelectIryoHokenRireki(ShikakuShutokuJohoDiv div) {
+        return toIryoHokenNyuryoku(div);
+    }
+
+    /**
+     * 医療保険タブで確定ボタン押下時の処理。
+     *
+     * @param div 資格取得情報div
+     * @return ResponseData
+     */
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnIryoHokenKakutei(ShikakuShutokuJohoDiv div) {
+        return toShikakuShutokuJohoToroku(div);
+    }
+
+    /**
+     * 医療保険タブで取消ボタン押下時の処理。
+     *
+     * @param div 資格取得情報div
+     * @return ResponseData
+     */
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnIryoHokenTorikeshi(ShikakuShutokuJohoDiv div) {
+        return toShikakuShutokuJohoToroku(div);
+    }
+
+    /**
+     * 施設入退所タブで追加ボタン押下時の処理。
+     *
+     * @param div 資格取得情報div
+     * @return ResponseData
+     */
+    public ResponseData<ShikakuShutokuJohoDiv> onClickAddShisetsuNyutaisho(ShikakuShutokuJohoDiv div) {
+        return toShisetsuNyutaisho(div);
+    }
+
+    /**
+     * 施設入退所タブでDataGrid選択時の処理。
+     *
+     * @param div 資格取得情報div
+     * @return ResponseData
+     */
+    public ResponseData<ShikakuShutokuJohoDiv> onSelectShisetsuNyutaisho(ShikakuShutokuJohoDiv div) {
+        return toShisetsuNyutaisho(div);
+    }
+
+    /**
+     * 施設入退所タブで確定ボタン押下時の処理。
+     *
+     * @param div 資格取得情報div
+     * @return ResponseData
+     */
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnShisetsuNyutaishoKakutei(ShikakuShutokuJohoDiv div) {
+        return toShikakuShutokuJohoToroku(div);
+    }
+
+    /**
+     * 施設入退所タブで取消ボタン押下時の処理。
+     *
+     * @param div 資格取得情報div
+     * @return ResponseData
+     */
+    public ResponseData<ShikakuShutokuJohoDiv> onClick_btnShisetsuNyutaishoTorikeshi(ShikakuShutokuJohoDiv div) {
+        return toShikakuShutokuJohoToroku(div);
+    }
+
+    private ResponseData<ShikakuShutokuJohoDiv> toHihoRirekiNyuryoku(ShikakuShutokuJohoDiv div) {
+        return ResponseData.of(div).setState(被保履歴入力);
+    }
+
+    private ResponseData<ShikakuShutokuJohoDiv> toIryoHokenNyuryoku(ShikakuShutokuJohoDiv div) {
+        return ResponseData.of(div).setState(医療保険入力);
+    }
+
+    private ResponseData<ShikakuShutokuJohoDiv> toShisetsuNyutaisho(ShikakuShutokuJohoDiv div) {
+        return ResponseData.of(div).setState(施設入退所入力);
+    }
+
+    public ResponseData<ShikakuShutokuJohoDiv> toShikakuShutokuJohoToroku(ShikakuShutokuJohoDiv div) {
+        return ResponseData.of(div).setState(資格取得情報登録);
+    }
+
 }
