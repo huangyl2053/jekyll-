@@ -56,8 +56,9 @@ public class ShikakuHenkoRireki {
             mode = henkoRirekiDiv.getMode_HokenshaJohoDisplayMode();
         }
 
-        handler.load(lasdecCode, new HihokenshaNo("1234567892"));
-        handler.initialize(lasdecCode, kyuLasdecCode, mode);
+        //TODO n8187 久保田 画面遷移のためデータ取得処理を一時的にコメントアウト
+//        handler.load(lasdecCode, new HihokenshaNo("1234567892"));
+//        handler.initialize(lasdecCode, kyuLasdecCode, mode);
         return createSettingData(henkoRirekiDiv);
 
     }

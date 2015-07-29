@@ -39,14 +39,12 @@ dba/db/dba/Dba3030011KaigoKanryoMessage/onClick_btnAddUpdate
 dba/db/dba/HihokenshaHakko$HihokenshaShoPublish/publish
 dba/db/dba/HihokenshaHakko/afterPrint_btnReportPublish
 dba/db/dba/HihokenshaHakko/createSource_btnReportPublish
-dba/db/dba/HihokenshaHakko/onAfterClick_btnUpdate
+dba/db/dba/HihokenshaHakko/onActive_HihokenshaHakko
 dba/db/dba/HihokenshaShokaiPanelSelect/onClick_btnToDecide
 dba/db/dba/HihokenshaShokaiTaishoSearch/onLoad
 dba/db/dba/HihokenshaShokaiTaishoshaJoho/onClick_btnToDecide
 dba/db/dba/KihonJoho/initialize
 dba/db/dba/ShikakuShosai/initialize
-dba/db/dba/ShikakuShosai/onAfterClick_btnUpdate
-dba/db/dba/ShikakuShosai/onBeforeClick_btnUpdate
 dba/db/dba/ShikakuShosai/onClick_btnBackGaitoshaIchiran
 dba/db/dba/ShikakuShosai/onClick_btnResearch
 dba/db/dba/ShikakuShosai/onClick_btnUpdate

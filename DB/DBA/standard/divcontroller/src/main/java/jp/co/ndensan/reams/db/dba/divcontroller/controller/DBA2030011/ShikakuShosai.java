@@ -49,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.InformationException;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -414,29 +415,6 @@ public class ShikakuShosai {
     }
 
     /**
-     * {@link ShikakuShosai#onClick_btnUpdate}の処理が実行される前に、自動的に実行されるイベントです。<br/>
-     *
-     * @param shikakuShosaiDiv {@link ShikakuShosaiDiv 資格詳細Div}
-     * @param kihonDiv {@link KihonJohoDiv 基本情報Div}
-     * @return 資格取得情報Divを持つResponseData
-     */
-    public ResponseData<ShikakuShosaiDiv> onBeforeClick_btnUpdate(ShikakuShosaiDiv shikakuShosaiDiv, KihonJohoDiv kihonDiv) {
-        ResponseData<ShikakuShosaiDiv> response = new ResponseData<>();
-
-        //TODO n8187 久保田 画面遷移のためチェック処理を一時的にコメントアウト
-        //ここから
-//        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-//        pairs.add(
-//                ShikakuShosaiValidationHelper.validate保存前(null, null, null, null, null, JushochiTokureiExecutionStatus.Kaijo)
-//        );
-//
-//        response.addValidationMessages(pairs);
-        //ここまで
-        response.data = shikakuShosaiDiv;
-        return response;
-    }
-
-    /**
      * 共通ボタンエリアの、住所地特例画面で入力した全ての情報を保存するためのボタンが押下された際に実行します。<br/>
      * 住所地特例情報と施設入退所情報が変更されているかを確認します。変更が無い場合はエラーメッセージをダイアログで表示します。<br/>
      * 変更が存在する場合は、保存処理を行うか否かを確認するダイアログを表示します。
@@ -446,6 +424,18 @@ public class ShikakuShosai {
      * @return 資格取得情報Divを持つResponseData
      */
     public ResponseData<ShikakuShosaiDiv> onClick_btnUpdate(ShikakuShosaiDiv shikakuShosaiDiv, KihonJohoDiv kihonDiv) throws InformationException {
+        if (!ResponseHolder.isReRequest()) {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            pairs.add(
+                    ShikakuShosaiValidationHelper.validate保存前(null, null, null, null, null, JushochiTokureiExecutionStatus.Kaijo));
+
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(shikakuShosaiDiv)
+                        .addMessage(pairs.iterator().next().getMessage())
+                        .respond();
+            }
+        }
+
         //TODO n8187 久保田 画面遷移のため戻り値を一時的に修正。チェック処理を一時的にコメントアウト。
         return ResponseData.of(shikakuShosaiDiv).respond();
         //ここから
@@ -494,17 +484,6 @@ public class ShikakuShosai {
         );
 
         new JushochiTokureiRegister().save(jutokuModel);
-        return ResponseData.of(shikakuShosaiDiv).respond();
-    }
-
-    /**
-     * {@link ShikakuShosai#onClick_btnUpdate}の処理が正常に完了した後に、自動的に実行されるイベントです。<br/>
-     *
-     * @param shikakuShosaiDiv {@link ShikakuShosaiDiv 資格詳細Div}
-     * @param kihonDiv {@link KihonJohoDiv 基本情報Div}
-     * @return 資格取得情報Divを持つResponseData
-     */
-    public ResponseData<ShikakuShosaiDiv> onAfterClick_btnUpdate(ShikakuShosaiDiv shikakuShosaiDiv, KihonJohoDiv kihonDiv) {
         return ResponseData.of(shikakuShosaiDiv).respond();
     }
 

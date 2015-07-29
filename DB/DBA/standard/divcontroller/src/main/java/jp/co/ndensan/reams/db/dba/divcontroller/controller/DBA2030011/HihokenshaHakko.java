@@ -43,15 +43,15 @@ public class HihokenshaHakko {
      * @param hakkoDiv {@link ShikakuShosaiDiv 被保険者証発行Div}
      * @return 被保険者証発行Divを持つResponseData
      */
-    public ResponseData<HihokenshaHakkoDiv> onAfterClick_btnUpdate(HihokenshaHakkoDiv hakkoDiv) {
+    public ResponseData<HihokenshaHakkoDiv> onActive_HihokenshaHakko(HihokenshaHakkoDiv hakkoDiv) {
         HihokenshashoPrintConfig config = new HihokenshashoPrintConfig();
         if (config.get証表示タイプ() == HihokenshashoPrintType.A4横) {
             hakkoDiv.getRadPrintPosition().setDisplayNone(true);
         }
 
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
-
-        hakkoDiv.getCcdHihokenshaShikakuHakko().load(taishoshaKey.get被保険者番号(), taishoshaKey.get識別コード(), false);
+        //TODO n8187 久保田 画面遷移のためデータ取得処理を一時的にコメントアウト
+//        hakkoDiv.getCcdHihokenshaShikakuHakko().load(taishoshaKey.get被保険者番号(), taishoshaKey.get識別コード(), false);
         return ResponseData.of(hakkoDiv).respond();
     }
 
