@@ -31,7 +31,7 @@ dba/db/dba/AShikakuShutokuJoho/onSelectByModifyButton_ccdIryoHokenRireki
 dba/db/dba/AShikakuShutokuJoho/onSelect_ShisetsuNyutaishoRireki
 dba/db/dba/AShikakuShutokuJoho/onSelect_ccdIryoHokenRireki
 dba/db/dba/AShikakuShutokuJoho/onSelect_ccdShikakuTokusoRireki
-dba/db/dba/Complete/onAfterClick_btnUpdate
+dba/db/dba/Complete/onAciveComplete
 dba/db/dba/Dba3030011IryoHokenIchiran/onClick_btnAddIryoHoken
 dba/db/dba/Dba3030011IryoHokenIchiran/onClick_btnAddUpdate
 dba/db/dba/Dba3030011IryoHokenIchiran/onLoad
