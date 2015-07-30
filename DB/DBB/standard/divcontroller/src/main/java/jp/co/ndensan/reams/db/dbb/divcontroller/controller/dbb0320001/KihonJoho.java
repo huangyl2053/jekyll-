@@ -60,9 +60,7 @@ public class KihonJoho {
     }
 
     private ResponseData<KihonJohoDiv> createResponseData(KihonJohoDiv div) {
-        ResponseData<KihonJohoDiv> response = new ResponseData<>();
-        response.data = div;
-        return response;
+        return ResponseData.of(div).respond();
     }
 
 }

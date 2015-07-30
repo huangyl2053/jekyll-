@@ -15,7 +15,7 @@ public enum DBB0320004TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     検索に戻る("検索に戻る"),
-    履歴("履歴"),
+    履歴一覧("履歴一覧"),
     世帯員所得("世帯員所得"),
     特別徴収("特別徴収"),
     初期化("初期化"),

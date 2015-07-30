@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320001;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiDisplayMode;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.ViewStateKeyCreator;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.EventPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukaRirekiAllPanelDiv;
 import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
@@ -104,8 +103,6 @@ public class FukaRirekiAllPanel {
     }
 
     private ResponseData<FukaRirekiAllPanelDiv> createResponseData(FukaRirekiAllPanelDiv div) {
-        ResponseData<FukaRirekiAllPanelDiv> response = new ResponseData<>();
-        response.data = div;
-        return response;
+        return ResponseData.of(div).respond();
     }
 }

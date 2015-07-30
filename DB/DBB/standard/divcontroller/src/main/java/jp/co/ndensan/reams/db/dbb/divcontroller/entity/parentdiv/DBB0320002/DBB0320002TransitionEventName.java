@@ -16,7 +16,7 @@ public enum DBB0320002TransitionEventName implements IContainerEvents {
 
     検索に戻る("検索に戻る"),
     期割("期割"),
-    賦課履歴照会("賦課履歴照会"),
+    履歴一覧("履歴一覧"),
     特別徴収("特別徴収"),
     減免("減免"),
     初期化("初期化"),

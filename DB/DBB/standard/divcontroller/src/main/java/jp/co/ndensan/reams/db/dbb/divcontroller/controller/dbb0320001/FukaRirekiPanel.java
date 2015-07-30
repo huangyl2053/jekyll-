@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiDisplayMode;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.ViewStateKeyCreator;
+import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.DBB0320001StateName.賦課根拠期割;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukaRirekiAllPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukaRirekiPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.KihonJohoDiv;
@@ -54,7 +55,9 @@ public class FukaRirekiPanel {
     /**
      * コントロールdivが「生成」された際の処理です。
      *
-     * @param div コントロールdiv
+     * @param rirekiDiv 履歴div
+     * @param rirekiAllDiv 全履歴div
+     * @param kihonDiv 基本情報div
      * @return レスポンスデータ
      */
     public ResponseData<FukaRirekiPanelDiv> onLoad(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
@@ -64,7 +67,9 @@ public class FukaRirekiPanel {
     /**
      * コントロールdivが「非表示」→「表示」となった際の処理です。
      *
-     * @param div コントロールdiv
+     * @param rirekiDiv 履歴div
+     * @param rirekiAllDiv 全履歴div
+     * @param kihonDiv 基本情報div
      * @return レスポンスデータ
      */
     public ResponseData<FukaRirekiPanelDiv> onActive(FukaRirekiPanelDiv rirekiDiv, FukaRirekiAllPanelDiv rirekiAllDiv, KihonJohoDiv kihonDiv) {
@@ -85,7 +90,7 @@ public class FukaRirekiPanel {
         // TODO n8187久保田 画面遷移の確認のために空行を設定。
         setDgFukaRireki(rirekiDiv, null, null);
 //        rirekiDiv.setDisplayNone(true);
-        return createResponseData(rirekiDiv);
+        return ResponseData.of(rirekiDiv).setState(賦課根拠期割);
     }
 
     /**
@@ -296,8 +301,6 @@ public class FukaRirekiPanel {
     }
 
     private ResponseData<FukaRirekiPanelDiv> createResponseData(FukaRirekiPanelDiv rirekiDiv) {
-        ResponseData<FukaRirekiPanelDiv> response = new ResponseData<>();
-        response.data = rirekiDiv;
-        return response;
+        return ResponseData.of(rirekiDiv).respond();
     }
 }

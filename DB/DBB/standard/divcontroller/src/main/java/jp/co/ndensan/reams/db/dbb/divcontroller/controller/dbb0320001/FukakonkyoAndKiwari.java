@@ -330,8 +330,6 @@ public class FukakonkyoAndKiwari {
     }
 
     private ResponseData<FukakonkyoAndKiwariDiv> createResponseData(FukakonkyoAndKiwariDiv div) {
-        ResponseData<FukakonkyoAndKiwariDiv> response = new ResponseData<>();
-        response.data = div;
-        return response;
+        return ResponseData.of(div).respond();
     }
 }
