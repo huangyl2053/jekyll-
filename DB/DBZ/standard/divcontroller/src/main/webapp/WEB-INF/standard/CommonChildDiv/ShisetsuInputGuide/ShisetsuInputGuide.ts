@@ -1,12 +1,9 @@
-/// <reference path="IryoKikanDialog_Design.ts" />
-
-// 共有子Divモード記述TypeScriptソースです。
-
-module DBE
+/// <reference path='ShisetsuInputGuide_Design.ts' />
+module DBZ
 {
-    export module IryoKikanDialog {
-
-        export class ModeController{
+    export module ShisetsuInputGuide
+    {
+        export class ModeController {
             private controls: Controls;
             private fieldName: string;
 
@@ -14,29 +11,31 @@ module DBE
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
             }
- 
-            public priorities(): Array<string> {
-                return [];
-            }
 
             public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
             }
+
+            public PublicProperties() {
+                return new PublicProperties(this.fieldName);
+            }
         }
 
+        export module Modes {
+        }
     }
 }
 
-
-
-module DBE {
-
-    export module IryoKikanDialog {
-
+module DBZ
+{
+    export module ShisetsuInputGuide
+    {
         export class PublicProperties {
             private controls: Controls;
+            private fieldName: string;
 
             constructor(fieldName: string) {
+                this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
             }
 
@@ -45,11 +44,7 @@ module DBE {
 
                 return editTypes;
             }
-
         }
     }
 }
-
-
-
 
