@@ -28,6 +28,10 @@ var DBE;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
+            Controls.prototype.ddlHokensha = function () {
+                return new UZA.DropDownList(this.convFiledName("ddlHokensha"));
+            };
+
             Controls.prototype.txtNinteiShinsakaiName = function () {
                 return new UZA.TextBox(this.convFiledName("txtNinteiShinsakaiName"));
             };

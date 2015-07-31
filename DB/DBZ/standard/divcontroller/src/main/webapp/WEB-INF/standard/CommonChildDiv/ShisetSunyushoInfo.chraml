@@ -1,0 +1,100 @@
+<div class="JSControl UzCompositeControl FloatLeft Width-XS" id="defaultLayout" style="margin: 0px;" data-control-type="CommonChildDiv" data-obj="{&quot;fieldName&quot;:&quot;defaultLayout&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;CommonChildDiv&quot;,&quot;width&quot;:&quot;XS&quot;,&quot;visible&quot;:true,&quot;displayNone&quot;:false,&quot;disabled&quot;:false,&quot;accessKey&quot;:&quot;&quot;,&quot;nextFocusFieldName&quot;:&quot;&quot;,&quot;wrap&quot;:false,&quot;float&quot;:0,&quot;toolTip&quot;:&quot;&quot;,&quot;authorityMode&quot;:0,&quot;marginLeft&quot;:&quot;0px&quot;,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;defaultLayout&quot;,&quot;helpMessageID&quot;:&quot;&quot;,&quot;jpControlName&quot;:&quot;&quot;,&quot;packageName&quot;:&quot;&quot;,&quot;businessId&quot;:&quot;DBZ&quot;,&quot;controlName&quot;:&quot;ShisetSunyushoInfo&quot;,&quot;marginTop&quot;:&quot;0px&quot;,&quot;marginBottom&quot;:&quot;0px&quot;,&quot;dataPassingForDialog&quot;:[],&quot;dialogOkEventNameForDialog&quot;:&quot;&quot;,&quot;dialogCancelEventNameForDialog&quot;:&quot;&quot;,&quot;heightForDialog&quot;:&quot;M&quot;,&quot;firstFocusFieldName&quot;:&quot;&quot;,&quot;lastFocusFieldName&quot;:&quot;&quot;,&quot;modes&quot;:[],&quot;publicEvents&quot;:[],&quot;publicEventsAlias&quot;:[]}" data-is-composite-control="true" data-control-name="DBZ.ShisetSunyushoInfo"><div class="StateChangable UzPanel JSControl FloatLeft marginTop-Default marginBottom-Default marginLeft-Default marginRight-Default Panel-Shadow UzCommonChildDivPanel Width-G1 UzCompositeChild" id="ShisetSunyushoInfo" style="width: auto; margin-top: 0px; margin-bottom: 0px;" data-control-type="Panel" data-obj="{&quot;fieldName&quot;:&quot;ShisetSunyushoInfo&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;Panel&quot;,&quot;width&quot;:&quot;G1&quot;,&quot;marginLeft&quot;:&quot;Default&quot;,&quot;marginRight&quot;:&quot;Default&quot;,&quot;selectControlID&quot;:&quot;ShisetSunyushoInfo&quot;,&quot;title&quot;:&quot;&quot;,&quot;postParameterPanelNames&quot;:[{&quot;postParameterPanelNames&quot;:&quot;ShisetSunyushoInfo&quot;}],&quot;requestSettings&quot;:[],&quot;hiddenInput&quot;:[],&quot;session&quot;:{},&quot;canPost&quot;:true}"><div class="UzPanelHeader" id="ShisetSunyushoInfo_panel_header_area" style="display: none;"><span class="closeIconSpan ui-icon ui-icon-circle-close" style="display: none;"></span><span class="iconSpan ui-icon ui-icon-circle-triangle-n" style="visibility: visible;"></span><span class="textSpan">タイトル</span><div class="groupBoxBorder" style="display: none;"></div></div><div class="UzPanelBody ui-widget-content ui-droppable ui-sortable panelPaddingDelete" id="ShisetSunyushoInfo_panel_body_area"><div title="" class="WithLabel TextBoxOuterDiv UzTextBoxCode JSControl FloatLeft controlMargin-M ClearFloat marginLeft-XS UzCompositeChild" id="txtNyushoShisetsuCode" style="width: 214px; height: 20px; margin-right: 0px;" data-control-type="TextBoxCode" data-obj="{&quot;fieldName&quot;:&quot;txtNyushoShisetsuCode&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxCode&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;wrap&quot;:true,&quot;marginRight&quot;:&quot;0px&quot;,&quot;selectControlID&quot;:&quot;txtNyushoShisetsuCode_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;入所施設&quot;,&quot;textKind&quot;:2,&quot;suggest&quot;:[]}"><span class="word-wrap-break-word Label-L Width-S text-align-right" id="txtNyushoShisetsuCode_labelL"><span>入所施設</span></span><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Off ui-autocomplete-input readonlyColor" id="txtNyushoShisetsuCode_core" style="width: 90px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="WithLabel TextBoxOuterDiv JSControl FloatLeft controlMargin-M marginRight-XS UzCompositeChild" id="txtNyushoShisetsuName" style="width: 505px; height: 20px; margin-left: 1px;" data-control-type="TextBox" data-obj="{&quot;fieldName&quot;:&quot;txtNyushoShisetsuName&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBox&quot;,&quot;width&quot;:&quot;500px&quot;,&quot;marginLeft&quot;:&quot;1px&quot;,&quot;selectControlID&quot;:&quot;txtNyushoShisetsuName_core&quot;,&quot;readOnly&quot;:true,&quot;suggest&quot;:[]}"><input tabindex="-1" class="UzTextBox CoreElement text-align-left ime-mode-Hiragana ui-autocomplete-input readonlyColor" id="txtNyushoShisetsuName_core" style="width: 500px;" type="text" placeholder="" autocomplete="off"><span class="ui-helper-hidden-accessible" role="status" aria-live="polite"></span></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate JSControl FloatLeft controlMargin-M ClearFloat marginRight-XS UzCompositeChild" id="txtShisetsunyuShoDay" style="width: 177px; height: 20px; margin-left: 270px;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtShisetsunyuShoDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;wrap&quot;:true,&quot;marginLeft&quot;:&quot;270px&quot;,&quot;selectControlID&quot;:&quot;txtShisetsunyuShoDay_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;施設入所日&quot;,&quot;labelLWidth&quot;:&quot;80px&quot;}"><span class="word-wrap-break-word Label-L text-align-right" id="txtShisetsunyuShoDay_labelL" style="width: 80px;"><span>施設入所日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtShisetsunyuShoDay_core" style="width: 90px;" type="text" readonly="readonly" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2" data-wareki-hirekijyou=""></div><div title="" class="UzTextBoxDate TextBoxOuterDiv WithLabel UzTextBoxFlexibleDate JSControl FloatLeft controlMargin-M marginLeft-XS marginRight-XS UzCompositeChild" id="txtShisetsuTaishoDay" style="width: 214px; height: 20px;" data-control-type="TextBoxFlexibleDate" data-obj="{&quot;fieldName&quot;:&quot;txtShisetsuTaishoDay&quot;,&quot;items&quot;:[],&quot;controlType&quot;:&quot;TextBoxFlexibleDate&quot;,&quot;width&quot;:&quot;90px&quot;,&quot;selectControlID&quot;:&quot;txtShisetsuTaishoDay_core&quot;,&quot;readOnly&quot;:true,&quot;labelLText&quot;:&quot;施設退職日&quot;}"><span class="word-wrap-break-word Label-L Width-S text-align-right" id="txtShisetsuTaishoDay_labelL"><span>施設退職日</span></span><input tabindex="-1" class="UzTextBox CoreElement readonlyColor AsIfDisabled" id="txtShisetsuTaishoDay_core" style="width: 90px;" type="text" readonly="readonly" placeholder="" data-orgtext="" data-setcount="0" data-seireki="" data-wareki="" data-mindate="" data-maxdate="" data-fmt="0" data-ymd="2" data-wareki-hirekijyou=""></div></div></div>            <script class="RamlConvert" type="text/javascript">
+var DBZ= DBZ? DBZ: {};
+DBZ['SHISETSUNYUSHOINFO'] = {};
+DBZ['SHISETSUNYUSHOINFO'].ShisetSunyushoInfoRequest = function(parentFieldName){ 
+var paramArray = [];var parameter0 = Uz.JSControlUtil.getJSControl(parentFieldName + '_ShisetSunyushoInfo').getProperty();parameter0.txtNyushoShisetsuCode = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtNyushoShisetsuCode').getProperty();parameter0.txtNyushoShisetsuName = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtNyushoShisetsuName').getProperty();parameter0.txtShisetsunyuShoDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShisetsunyuShoDay').getProperty();parameter0.txtShisetsuTaishoDay = Uz.JSControlUtil.getJSControl(parentFieldName + '_txtShisetsuTaishoDay').getProperty();paramArray.push(parameter0);
+return paramArray;
+ };
+</script><script>var DBZ;
+(function (DBZ) {
+    (function (ShisetSunyushoInfo) {
+        var Events = (function () {
+            function Events() {
+            }
+            return Events;
+        })();
+        ShisetSunyushoInfo.Events = Events;
+
+        var Controls = (function () {
+            function Controls(fieldName) {
+                this._myName = fieldName;
+            }
+            Controls.myType = function () {
+                return "ShisetSunyushoInfo";
+            };
+
+            Controls.prototype.convFiledNameSelf = function () {
+                return this._myName + "_" + DBZ.ShisetSunyushoInfo.Controls.myType();
+            };
+
+            Controls.prototype.convFiledName = function (fieldName) {
+                return this._myName + "_" + DBZ.ShisetSunyushoInfo.Controls.myType() + "_" + fieldName;
+            };
+
+            Controls.prototype.ShisetSunyushoInfo = function () {
+                return new UZA.Panel(this.convFiledNameSelf());
+            };
+
+            Controls.prototype.txtNyushoShisetsuCode = function () {
+                return new UZA.TextBoxCode(this.convFiledName("txtNyushoShisetsuCode"));
+            };
+
+            Controls.prototype.txtNyushoShisetsuName = function () {
+                return new UZA.TextBox(this.convFiledName("txtNyushoShisetsuName"));
+            };
+
+            Controls.prototype.txtShisetsunyuShoDay = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShisetsunyuShoDay"));
+            };
+
+            Controls.prototype.txtShisetsuTaishoDay = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShisetsuTaishoDay"));
+            };
+            return Controls;
+        })();
+        ShisetSunyushoInfo.Controls = Controls;
+    })(DBZ.ShisetSunyushoInfo || (DBZ.ShisetSunyushoInfo = {}));
+    var ShisetSunyushoInfo = DBZ.ShisetSunyushoInfo;
+})(DBZ || (DBZ = {}));
+var DBZ;
+(function (DBZ) {
+    (function (ShisetSunyushoInfo) {
+        var ModeController = (function () {
+            function ModeController(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShisetSunyushoInfo.Controls(fieldName);
+            }
+            ModeController.prototype.Properties = function () {
+                return new UZA.CommonChildDiv(this.fieldName);
+            };
+
+            ModeController.prototype.PublicProperties = function () {
+                return new ShisetSunyushoInfo.PublicProperties(this.fieldName);
+            };
+            return ModeController;
+        })();
+        ShisetSunyushoInfo.ModeController = ModeController;
+    })(DBZ.ShisetSunyushoInfo || (DBZ.ShisetSunyushoInfo = {}));
+    var ShisetSunyushoInfo = DBZ.ShisetSunyushoInfo;
+})(DBZ || (DBZ = {}));
+
+var DBZ;
+(function (DBZ) {
+    (function (ShisetSunyushoInfo) {
+        var PublicProperties = (function () {
+            function PublicProperties(fieldName) {
+                this.fieldName = fieldName;
+                this.controls = new ShisetSunyushoInfo.Controls(fieldName);
+            }
+            PublicProperties.prototype.getEditTypes = function () {
+                var editTypes = new UZA.EditTypeForPublicProperty();
+
+                return editTypes;
+            };
+            return PublicProperties;
+        })();
+        ShisetSunyushoInfo.PublicProperties = PublicProperties;
+    })(DBZ.ShisetSunyushoInfo || (DBZ.ShisetSunyushoInfo = {}));
+    var ShisetSunyushoInfo = DBZ.ShisetSunyushoInfo;
+})(DBZ || (DBZ = {}));
+</script></div>

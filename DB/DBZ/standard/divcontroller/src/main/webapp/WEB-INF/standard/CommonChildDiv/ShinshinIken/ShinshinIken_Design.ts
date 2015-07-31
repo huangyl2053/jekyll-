@@ -37,12 +37,12 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("NichijoJiritsudo"));
             }
 
-            public radShogaiKoreishaNichijoSeikatsuJiritsudo(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radShogaiKoreishaNichijoSeikatsuJiritsudo"));
+            public chkShogaiKoreishaNichijoSeikatsuJiritsudo(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkShogaiKoreishaNichijoSeikatsuJiritsudo"));
             }
 
-            public radNinchishoKoreishaJiritsu(): UZA.RadioButton {
-                return new UZA.RadioButton(this.convFiledName("radNinchishoKoreishaJiritsu"));
+            public chkNinchishoKoreishaJiritsu(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkNinchishoKoreishaJiritsu"));
             }
 
             public NinchishoChukakuShojo(): UZA.Panel {
