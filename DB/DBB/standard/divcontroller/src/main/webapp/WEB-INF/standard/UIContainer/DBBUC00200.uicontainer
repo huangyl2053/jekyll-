@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC00200",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "通知書発行後異動把握",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0020001",
+     "toLayoutTitle": "通知書発行後異動把握",
+     "toState": "異動把握初期表示"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0020001",
+     "layoutTitle": "通知書発行後異動把握",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

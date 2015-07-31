@@ -4,6 +4,21 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_btnAddShinsei = function () {
+                return "onClick_btnAddShinsei";
+            };
+
+            Events.onClick_dgSelectShinsei = function () {
+                return "onClick_dgSelectShinsei";
+            };
+
+            Events.onClick_dgModifyShinsei = function () {
+                return "onClick_dgModifyShinsei";
+            };
+
+            Events.onClick_dgDeleteShinsei = function () {
+                return "onClick_dgDeleteShinsei";
+            };
             return Events;
         })();
         KyufuhiKashitsukekinList.Events = Events;

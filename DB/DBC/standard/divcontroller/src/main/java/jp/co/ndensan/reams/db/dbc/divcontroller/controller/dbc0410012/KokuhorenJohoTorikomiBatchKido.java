@@ -39,16 +39,13 @@ public class KokuhorenJohoTorikomiBatchKido {
 
     public ResponseData<KokuhorenJohoTorikomiBatchKidoDiv> onLoad(KokuhorenJohoTorikomiBatchKidoDiv panel) {
 
-        ResponseData<KokuhorenJohoTorikomiBatchKidoDiv> response = new ResponseData<>();
-
         KokuhorenJohoTorikomiBatchKidoModel selectedrow
                 = ViewStateHolder.get(ViewStateHolderName.国保連取込情報, KokuhorenJohoTorikomiBatchKidoModel.class);
 
         setDisplay(panel, selectedrow);
         panel.getLblTitle().setText(selectedrow.get処理名());
-        response.data = panel;
-        return response;
 
+        return ResponseData.of(panel).respond();
     }
 
     public ResponseData<KokuhorenJohoTorikomiBatchParameter> setBatchParameter(KokuhorenJohoTorikomiBatchKidoDiv panel) {

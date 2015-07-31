@@ -49,10 +49,6 @@ public class ShokanShikyuKetteiShomeisho {
         選択
     }
 
-    private List<HashMap> getYaml() {
-        return YamlLoader.DBC.loadAsList(new RString("dbc0800000/ShokanShikyuTorokuShomeisho.yml"));
-    }
-
     /**
      * 支給申請書情報の一覧で行を選択した時のサービス提供証明書情報パネルの処理です。
      *
@@ -60,8 +56,6 @@ public class ShokanShikyuKetteiShomeisho {
      * @return ResponseData
      */
     public ResponseData<ShokanShikyuKetteiShomeishoDiv> onSelectedShomeishoList(ShokanShikyuKetteiShomeishoDiv panel) {
-        ResponseData<ShokanShikyuKetteiShomeishoDiv> response = new ResponseData<>();
-
         tabVisible(panel);
 
 // 南魚沼市のデモ向けに、「基本情報」「給付費明細」「請求額集計」「社福系減額」以外のタブの機能をコメントアウト。
@@ -87,8 +81,7 @@ public class ShokanShikyuKetteiShomeisho {
 //        showNyusho(panel, 一覧明細表示.一覧表示);
 //        showShafuku(panel, 一覧明細表示.一覧表示);
 
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -109,16 +102,15 @@ public class ShokanShikyuKetteiShomeisho {
         tab.getShokanShikyuKetteiShomeishoNyusho().setVisible(false);
         tab.getShokanShikyuKetteiShomeishoShafuku().setVisible(true);
         tab.setVisible(true);
-        
+
     }
 
     private void setTopData(ShokanShikyuKetteiShomeishoDiv panel) {
-        HashMap source = getYaml().get(0);
-        panel.getTxtShomeishoTeikyoYM().setValue(new RDate(source.get("提供年月").toString()));
-        panel.getTxtShomeishoJigyoshaCode().setValue(new RString(source.get("事業者コード").toString()));
-        panel.getTxtShomeishoJigyoshaName().setValue(new RString(source.get("事業者名").toString()));
-        panel.getTxtShomeishoShinseiYMD().setValue(new RDate(source.get("申請日").toString()));
-        panel.getTxtShomeishoShomeisho().setValue(new RString(source.get("証明書").toString()));
+//        panel.getTxtShomeishoTeikyoYM().setValue(new RDate(source.get("提供年月").toString()));
+//        panel.getTxtShomeishoJigyoshaCode().setValue(new RString(source.get("事業者コード").toString()));
+//        panel.getTxtShomeishoJigyoshaName().setValue(new RString(source.get("事業者名").toString()));
+//        panel.getTxtShomeishoShinseiYMD().setValue(new RDate(source.get("申請日").toString()));
+//        panel.getTxtShomeishoShomeisho().setValue(new RString(source.get("証明書").toString()));
     }
 
     // !!!!!!!!!!!!!!!!!!!!!!↓↓ここから基本情報タブに関連するコード↓↓!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -156,53 +148,53 @@ public class ShokanShikyuKetteiShomeisho {
     }
 
     private void setKihonData(ShokanShikyuKetteiShomeishoDiv panel) {
-        ShokanShikyuKetteiShomeishoKihonDiv kihon = panel.getTabShokanShikyuKetteiShomeisho().getShokanShikyuKetteiShomeishoKihon();
-        ShokanShikyuKetteiShomeishoKihonKeikakuDiv keikaku = kihon.getShokanShikyuKetteiShomeishoKihonKeikaku();
-        ShokanShikyuKetteiShomeishoKihonKikanDiv kikan = kihon.getShokanShikyuKetteiShomeishoKihonKikan();
-        ShokanShikyuKetteiShomeishoKihonNyutaishoDiv nyutaisho = kihon.getShokanShikyuKetteiShomeishoKihonNyutaisho();
-
-        HashMap source = getYaml().get(1);
-        RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
-        keikaku.getTxtShomeishoKihonSakuseiKubun().setValue(new RString(source.get("計画作成区分").toString()));
-        keikaku.getTxtShomeishoKihonTokurei().setValue(new RString(source.get("旧措置入所者特例").toString()));
-        keikaku.getTxtShomeishoKihonJigyoshaCode().setValue(new RString(source.get("事業者コード").toString()));
-        keikaku.getTxtShomeishoKihonJigyoshaName().setValue(new RString(source.get("事業者名").toString()));
-        keikaku.getTxtShomeishoKihonKyufuritsu().setValue(new Decimal(source.get("保険給付率").toString()));
-        if (date.isBefore(基本情報切替.H2104.getDate())) {
-            source = getYaml().get(2);
-            kikan.getTxtShomeishoKihonKaishiYMD().setValue(new RDate(source.get("開始日").toString()));
-            kikan.getTxtShomeishoKihonChushiYMD().setValue(new RDate(source.get("中止日").toString()));
-        } else {
-            source = getYaml().get(3);
-            nyutaisho.getTxtShomeishoKihonNyushoYMD().setValue(new RDate(source.get("入所日").toString()));
-            nyutaisho.getTxtShomeishoKihonTaishoYMD().setValue(new RDate(source.get("退所日").toString()));
-            nyutaisho.getTxtShomeishoKihonNyushoNissu().setValue(new Decimal(source.get("入所実日数").toString()));
-            nyutaisho.getTxtShomeishoKihonGaihakuNissu().setValue(new Decimal(source.get("外泊日数").toString()));
-            nyutaisho.getTxtShomeishoKihonNyushoMaeJokyo().setValue(new RString(source.get("入所前の状況").toString()));
-            nyutaisho.getTxtShomeishoKihonTaishoGoJokyo().setValue(new RString(source.get("入所後の状況").toString()));
-        }
+//        ShokanShikyuKetteiShomeishoKihonDiv kihon = panel.getTabShokanShikyuKetteiShomeisho().getShokanShikyuKetteiShomeishoKihon();
+//        ShokanShikyuKetteiShomeishoKihonKeikakuDiv keikaku = kihon.getShokanShikyuKetteiShomeishoKihonKeikaku();
+//        ShokanShikyuKetteiShomeishoKihonKikanDiv kikan = kihon.getShokanShikyuKetteiShomeishoKihonKikan();
+//        ShokanShikyuKetteiShomeishoKihonNyutaishoDiv nyutaisho = kihon.getShokanShikyuKetteiShomeishoKihonNyutaisho();
+//
+//        HashMap source = getYaml().get(1);
+//        RDate date = panel.getTxtShomeishoTeikyoYM().getValue();
+//        keikaku.getTxtShomeishoKihonSakuseiKubun().setValue(new RString(source.get("計画作成区分").toString()));
+//        keikaku.getTxtShomeishoKihonTokurei().setValue(new RString(source.get("旧措置入所者特例").toString()));
+//        keikaku.getTxtShomeishoKihonJigyoshaCode().setValue(new RString(source.get("事業者コード").toString()));
+//        keikaku.getTxtShomeishoKihonJigyoshaName().setValue(new RString(source.get("事業者名").toString()));
+//        keikaku.getTxtShomeishoKihonKyufuritsu().setValue(new Decimal(source.get("保険給付率").toString()));
+//        if (date.isBefore(基本情報切替.H2104.getDate())) {
+//            source = getYaml().get(2);
+//            kikan.getTxtShomeishoKihonKaishiYMD().setValue(new RDate(source.get("開始日").toString()));
+//            kikan.getTxtShomeishoKihonChushiYMD().setValue(new RDate(source.get("中止日").toString()));
+//        } else {
+//            source = getYaml().get(3);
+//            nyutaisho.getTxtShomeishoKihonNyushoYMD().setValue(new RDate(source.get("入所日").toString()));
+//            nyutaisho.getTxtShomeishoKihonTaishoYMD().setValue(new RDate(source.get("退所日").toString()));
+//            nyutaisho.getTxtShomeishoKihonNyushoNissu().setValue(new Decimal(source.get("入所実日数").toString()));
+//            nyutaisho.getTxtShomeishoKihonGaihakuNissu().setValue(new Decimal(source.get("外泊日数").toString()));
+//            nyutaisho.getTxtShomeishoKihonNyushoMaeJokyo().setValue(new RString(source.get("入所前の状況").toString()));
+//            nyutaisho.getTxtShomeishoKihonTaishoGoJokyo().setValue(new RString(source.get("入所後の状況").toString()));
+//        }
     }
     // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで基本情報タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     // !!!!!!!!!!!!!!!!!!!!!!↓↓ここから給付費明細タブに関連するコード↓↓!!!!!!!!!!!!!!!!!!!!!!!!!!!
     private void setKyufuhiListData(ShokanShikyuKetteiShomeishoDiv panel) {
-        ShokanShikyuKetteiShomeishoMeisaiDiv meisai = panel.getTabShokanShikyuKetteiShomeisho()
-                .getShokanShikyuKetteiShomeishoMeisai();
-        ServiceTeikyoShomeishoMeisaiListDiv meisaiList = meisai.getShokanShikyuKetteiShomeishoMeisaiListInfo();
-        DataGrid<dgServiceTeikyoShomeishoMeisaiList_Row> dgRow = meisaiList.getDgServiceTeikyoShomeishoMeisaiList();
-        List<dgServiceTeikyoShomeishoMeisaiList_Row> dgRowList = dgRow.getDataSource();
-
-        List<HashMap> sourceList = getYaml();
-        dgRowList.clear();
-        for (int i = 4; i < 7; i++) {
-            dgRowList.add(create給付費明細一覧アイテム(
-                    sourceList.get(i).get("サービス").toString(),
-                    sourceList.get(i).get("単位数").toString(),
-                    sourceList.get(i).get("日数回数").toString(),
-                    sourceList.get(i).get("サービス単位数").toString(),
-                    sourceList.get(i).get("摘要").toString()));
-        }
-        dgRow.setDataSource(dgRowList);
+//        ShokanShikyuKetteiShomeishoMeisaiDiv meisai = panel.getTabShokanShikyuKetteiShomeisho()
+//                .getShokanShikyuKetteiShomeishoMeisai();
+//        ServiceTeikyoShomeishoMeisaiListDiv meisaiList = meisai.getShokanShikyuKetteiShomeishoMeisaiListInfo();
+//        DataGrid<dgServiceTeikyoShomeishoMeisaiList_Row> dgRow = meisaiList.getDgServiceTeikyoShomeishoMeisaiList();
+//        List<dgServiceTeikyoShomeishoMeisaiList_Row> dgRowList = dgRow.getDataSource();
+//
+//        List<HashMap> sourceList = getYaml();
+//        dgRowList.clear();
+//        for (int i = 4; i < 7; i++) {
+//            dgRowList.add(create給付費明細一覧アイテム(
+//                    sourceList.get(i).get("サービス").toString(),
+//                    sourceList.get(i).get("単位数").toString(),
+//                    sourceList.get(i).get("日数回数").toString(),
+//                    sourceList.get(i).get("サービス単位数").toString(),
+//                    sourceList.get(i).get("摘要").toString()));
+//        }
+//        dgRow.setDataSource(dgRowList);
     }
 
     private dgServiceTeikyoShomeishoMeisaiList_Row create給付費明細一覧アイテム(
@@ -246,25 +238,25 @@ public class ShokanShikyuKetteiShomeisho {
     // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで計画費タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // !!!!!!!!!!!!!!!!!!!!!!↓↓ここから請求額集計タブに関連するコード↓↓!!!!!!!!!!!!!!!!!!!!!!!!!!!
     private void setShukeiListData(ShokanShikyuKetteiShomeishoDiv panel) {
-        ShokanShikyuKetteiShomeishoShukeiDiv shukei = panel.getTabShokanShikyuKetteiShomeisho()
-                .getShokanShikyuKetteiShomeishoShukei();
-        ServiceTeikyoShomeishoShukeiListDiv list = shukei.getShokanShikyuKetteiShomeishoShukeiListInfo();
-        DataGrid<dgServiceTeikyoShomeishoShukeiList_Row> dgRow = list.getDgServiceTeikyoShomeishoShukeiList();
-        List<dgServiceTeikyoShomeishoShukeiList_Row> dgRowList = dgRow.getDataSource();
-
-        List<HashMap> sourceList = getYaml();
-        dgRowList.clear();
-        for (int i = 37; i < 38; i++) {
-            dgRowList.add(create請求額一覧アイテム(
-                    sourceList.get(i).get("サービス種類").toString(),
-                    sourceList.get(i).get("単位数合計").toString(),
-                    sourceList.get(i).get("単位数単価").toString(),
-                    sourceList.get(i).get("請求額").toString(),
-                    sourceList.get(i).get("利用者負担額").toString(),
-                    sourceList.get(i).get("審査方法").toString()
-            ));
-        }
-        dgRow.setDataSource(dgRowList);
+//        ShokanShikyuKetteiShomeishoShukeiDiv shukei = panel.getTabShokanShikyuKetteiShomeisho()
+//                .getShokanShikyuKetteiShomeishoShukei();
+//        ServiceTeikyoShomeishoShukeiListDiv list = shukei.getShokanShikyuKetteiShomeishoShukeiListInfo();
+//        DataGrid<dgServiceTeikyoShomeishoShukeiList_Row> dgRow = list.getDgServiceTeikyoShomeishoShukeiList();
+//        List<dgServiceTeikyoShomeishoShukeiList_Row> dgRowList = dgRow.getDataSource();
+//
+//        List<HashMap> sourceList = getYaml();
+//        dgRowList.clear();
+//        for (int i = 37; i < 38; i++) {
+//            dgRowList.add(create請求額一覧アイテム(
+//                    sourceList.get(i).get("サービス種類").toString(),
+//                    sourceList.get(i).get("単位数合計").toString(),
+//                    sourceList.get(i).get("単位数単価").toString(),
+//                    sourceList.get(i).get("請求額").toString(),
+//                    sourceList.get(i).get("利用者負担額").toString(),
+//                    sourceList.get(i).get("審査方法").toString()
+//            ));
+//        }
+//        dgRow.setDataSource(dgRowList);
     }
 
     private dgServiceTeikyoShomeishoShukeiList_Row create請求額一覧アイテム(
@@ -298,24 +290,24 @@ public class ShokanShikyuKetteiShomeisho {
     // !!!!!!!!!!!!!!!!!!!!!!↑↑ここまで特定入所者費用タブに関連するコード↑↑!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // !!!!!!!!!!!!!!!!!!!!!!↓↓ここから社福軽減額タブに関連するコード↓↓!!!!!!!!!!!!!!!!!!!!!!!!!!!
     private void setShafukuListData(ShokanShikyuKetteiShomeishoDiv panel) {
-        ShokanShikyuKetteiShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuKetteiShomeisho()
-                .getShokanShikyuKetteiShomeishoShafuku();
-        ServiceTeikyoShomeishoShafukuListDiv list = shafuku.getShokanShikyuKetteiShomeishoShafukuListInfo();
-        DataGrid<dgServiceTeikyoShomeishoShafukuList_Row> dgRow = list.getDgServiceTeikyoShomeishoShafukuList();
-        List<dgServiceTeikyoShomeishoShafukuList_Row> dgRowList = dgRow.getDataSource();
-
-        List<HashMap> sourceList = getYaml();
-        dgRowList.clear();
-        for (int i = 45; i < 46; i++) {
-            dgRowList.add(create社福軽減額一覧アイテム(
-                    sourceList.get(i).get("サービス種類").toString(),
-                    sourceList.get(i).get("軽減率").toString(),
-                    sourceList.get(i).get("受領すべき利用者負担の総額").toString(),
-                    sourceList.get(i).get("軽減額").toString(),
-                    sourceList.get(i).get("軽減後利用者負担額").toString(),
-                    sourceList.get(i).get("備考").toString()));
-        }
-        dgRow.setDataSource(dgRowList);
+//        ShokanShikyuKetteiShomeishoShafukuDiv shafuku = panel.getTabShokanShikyuKetteiShomeisho()
+//                .getShokanShikyuKetteiShomeishoShafuku();
+//        ServiceTeikyoShomeishoShafukuListDiv list = shafuku.getShokanShikyuKetteiShomeishoShafukuListInfo();
+//        DataGrid<dgServiceTeikyoShomeishoShafukuList_Row> dgRow = list.getDgServiceTeikyoShomeishoShafukuList();
+//        List<dgServiceTeikyoShomeishoShafukuList_Row> dgRowList = dgRow.getDataSource();
+//
+//        List<HashMap> sourceList = getYaml();
+//        dgRowList.clear();
+//        for (int i = 45; i < 46; i++) {
+//            dgRowList.add(create社福軽減額一覧アイテム(
+//                    sourceList.get(i).get("サービス種類").toString(),
+//                    sourceList.get(i).get("軽減率").toString(),
+//                    sourceList.get(i).get("受領すべき利用者負担の総額").toString(),
+//                    sourceList.get(i).get("軽減額").toString(),
+//                    sourceList.get(i).get("軽減後利用者負担額").toString(),
+//                    sourceList.get(i).get("備考").toString()));
+//        }
+//        dgRow.setDataSource(dgRowList);
     }
 
     private dgServiceTeikyoShomeishoShafukuList_Row create社福軽減額一覧アイテム(

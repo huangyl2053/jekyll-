@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320001;
 
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.KihonJohoDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.KihonJohoDiv;
 import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
 import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
@@ -25,6 +25,16 @@ import jp.co.ndensan.reams.uz.uza.config.SystemConfigKey;
 public class KihonJoho {
 
     /**
+     * コントロールdivが「生成」された際の処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<KihonJohoDiv> onLoad(KihonJohoDiv div) {
+        return initialize(div);
+    }
+
+    /**
      * 初期処理です。
      *
      * @param div 基本情報Div
@@ -32,25 +42,25 @@ public class KihonJoho {
      */
     public ResponseData<KihonJohoDiv> initialize(KihonJohoDiv div) {
 
-        FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
-
-        div.getCcdKaigoAtenaInfo().set介護宛名賦課モード();
-        div.getCcdKaigoAtenaInfo().load(taishoshaKey.get識別コード());
-
-        KaigoFukaKihonSearchKey searchKey = new KaigoFukaKihonSearchKey.Builder(
-                taishoshaKey.get通知書番号(),
-                new FukaNendo(taishoshaKey.get賦課年度()),
-                new LasdecCode(BusinessConfig.get(SystemConfigKey.DonyuDantaiCode, SubGyomuCode.UZAフレームワーク)),
-                taishoshaKey.get識別コード()).build();
-        div.getCcdKaigoFukaKihon().load(searchKey);
-
+        // TODO n8187久保田 画面遷移の確認のために一時的にコメントアウト。
+        // ここから
+//        FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
+//
+//        div.getCcdKaigoAtenaInfo().set介護宛名賦課モード();
+//        div.getCcdKaigoAtenaInfo().load(taishoshaKey.get識別コード());
+//
+//        KaigoFukaKihonSearchKey searchKey = new KaigoFukaKihonSearchKey.Builder(
+//                taishoshaKey.get通知書番号(),
+//                new FukaNendo(taishoshaKey.get賦課年度()),
+//                new LasdecCode(BusinessConfig.get(SystemConfigKey.DonyuDantaiCode, SubGyomuCode.UZAフレームワーク)),
+//                taishoshaKey.get識別コード()).build();
+//        div.getCcdKaigoFukaKihon().load(searchKey);
+        // ここまで
         return createResponseData(div);
     }
 
     private ResponseData<KihonJohoDiv> createResponseData(KihonJohoDiv div) {
-        ResponseData<KihonJohoDiv> response = new ResponseData<>();
-        response.data = div;
-        return response;
+        return ResponseData.of(div).respond();
     }
 
 }

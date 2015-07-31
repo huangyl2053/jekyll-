@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320004;
 
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320004.ChoshuYuyoDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320004.GemmenChoshuYuyoDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320004.GemmenDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.ChoshuYuyoDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.GemmenChoshuYuyoDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.GemmenDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;

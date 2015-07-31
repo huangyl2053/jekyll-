@@ -1,0 +1,60 @@
+﻿{
+ "uiContainerName": "DBDUC31000",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "受給者照会",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD3010001",
+     "toLayoutTitle": "受給者照会",
+     "toState": "対象者検索"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD3010001",
+     "layoutTitle": "受給者照会",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD3010002",
+     "toLayoutTitle": "受給者照会",
+     "toState": "認定履歴一覧"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD3010002",
+     "layoutTitle": "受給者照会",
+     "eventName": "検索に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD3010001",
+     "toLayoutTitle": "受給者照会",
+     "toState": "対象者検索"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD3010002",
+     "layoutTitle": "受給者照会",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

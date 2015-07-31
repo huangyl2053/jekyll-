@@ -23,8 +23,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
  */
 public class JutakuKaishuJizenShinseiShinsaResultPanel {
 
-    private final List<HashMap> ymlData = YamlLoader.DBC.loadAsList(new RString("dbc0700011/JutakuData.yml"));
-
     /**
      * 住宅改修費事前申請登録 審査結果内容の情報を表示する。
      *
@@ -33,7 +31,6 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
      */
     public ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> onLoad(
             JutakuKaishuJizenShinseiShinsaResultPanelDiv panel, JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel) {
-        ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> response = new ResponseData<>();
 
         //前回・今回　初期化設定　　　　　　
         setSummary(panel);
@@ -42,8 +39,7 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
         //判定区分(承認、不承認）セットする。
         setRadJudgeKubun(panel);
 
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -54,14 +50,12 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
      */
     public ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> onClick_btnModifyDetail(
             JutakuKaishuJizenShinseiShinsaResultPanelDiv resultPanel, JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel) {
-        ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> response = new ResponseData<>();
 
         //今回設定
         setSummaryNowData(resultPanel, contentsPanel.getJutakuJizenShinseiDetailInput()
                 .getDgJutakuKaishuDetail().getDataSource().get(0).getTxtMitsumoriAmount().getValue());
-        response.data = resultPanel;
-        return response;
 
+        return ResponseData.of(resultPanel).respond();
     }
 
     /**
@@ -73,11 +67,10 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
      */
     public ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> onClick_btnCheckGendogaku(
             JutakuKaishuJizenShinseiShinsaResultPanelDiv resultPanel, JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel) {
-        ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> response = new ResponseData<>();
 
         resultPanel.getChkResetInfo().setSelectedItems(createSetItems());
-        response.data = resultPanel;
-        return response;
+
+        return ResponseData.of(resultPanel).respond();
     }
 
     private List<KeyValueDataSource> createSetItems() {
@@ -94,7 +87,6 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
      */
     public ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> onClick_radJudgeKubun(
             JutakuKaishuJizenShinseiShinsaResultPanelDiv panel, JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel) {
-        ResponseData<JutakuKaishuJizenShinseiShinsaResultPanelDiv> response = new ResponseData<>();
 
 //        System.out.println("++++" + panel.getRadJudgeKubun().getSelectedItem().toString());
         String selRadJudgeKubun = panel.getRadJudgeKubun().getSelectedItem().toString();
@@ -108,8 +100,7 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
             panel.getTxtFushoninReason().setDisabled(false);
             panel.getTxtShoninCondition().setDisabled(true);
         }
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     /*
@@ -117,33 +108,33 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
      */
     private void setSummary(JutakuKaishuJizenShinseiShinsaResultPanelDiv panel) {
 
-        /////////////////////////////////////////////////////////////////////////////////////////
-        //JutakuData.xml Read　②
-        //前回
-        String payTotalMae = ymlData.get(4).get("payTotalMae").toString();
-        String hokenSeikyuAmountMae = ymlData.get(4).get("hokenSeikyuAmountMae").toString();
-        String riyoshaFutanAmountMae = ymlData.get(4).get("riyoshaFutanAmountMae").toString();
-        String limitOverAmountMae = ymlData.get(4).get("limitOverAmountMae").toString();
-        //今回
-        String payTotalNow = ymlData.get(4).get("payTotalNow").toString();
-        String hokenSeikyuAmountNow = ymlData.get(4).get("hokenSeikyuAmountNow").toString();
-        String riyoshaFutanAmountNow = ymlData.get(4).get("riyoshaFutanAmountNow").toString();
-        String limitOverAmountNow = ymlData.get(4).get("limitOverAmountNow").toString();
-        /////////////////////////////////////////////////////////////////////////////////////////
-
-        //TO DO  JutakuData.xml Write　③
-        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
-        //前回
-        panel.getJutakuJizenShinseiKyufugakuSummary().getTblSeikyuSummary().getTxtHiyoTotalMae().setValue(new Decimal(payTotalMae));
-        panel.getJutakuJizenShinseiKyufugakuSummary().getTblSeikyuSummary().getTxtHokenTaishoHiyoMae().setValue(new Decimal(hokenSeikyuAmountMae));
-        panel.getJutakuJizenShinseiKyufugakuSummary().getTblSeikyuSummary().getTxtHokenKyufuAmountMae().setValue(new Decimal(riyoshaFutanAmountMae));
-        panel.getJutakuJizenShinseiKyufugakuSummary().getTblSeikyuSummary().getTxtRiyoshaFutanAmountMae().setValue(new Decimal(limitOverAmountMae));
-
-        //今回
-        panel.getJutakuJizenShinseiKyufugakuSummary().getTblSeikyuSummary().getTxtHiyoTotalNow().setValue(new Decimal(payTotalNow));
-        panel.getJutakuJizenShinseiKyufugakuSummary().getTblSeikyuSummary().getTxtHokenTaishoHiyoNow().setValue(new Decimal(hokenSeikyuAmountNow));
-        panel.getJutakuJizenShinseiKyufugakuSummary().getTblSeikyuSummary().getTxtHokenKyufuAmountNow().setValue(new Decimal(riyoshaFutanAmountNow));
-        panel.getJutakuJizenShinseiKyufugakuSummary().getTblSeikyuSummary().getTxtRiyoshaFutanAmountNow().setValue(new Decimal(limitOverAmountNow));
+//        /////////////////////////////////////////////////////////////////////////////////////////
+//        //JutakuData.xml Read　②
+//        //前回
+//        String payTotalMae = ymlData.get(4).get("payTotalMae").toString();
+//        String hokenSeikyuAmountMae = ymlData.get(4).get("hokenSeikyuAmountMae").toString();
+//        String riyoshaFutanAmountMae = ymlData.get(4).get("riyoshaFutanAmountMae").toString();
+//        String limitOverAmountMae = ymlData.get(4).get("limitOverAmountMae").toString();
+//        //今回
+//        String payTotalNow = ymlData.get(4).get("payTotalNow").toString();
+//        String hokenSeikyuAmountNow = ymlData.get(4).get("hokenSeikyuAmountNow").toString();
+//        String riyoshaFutanAmountNow = ymlData.get(4).get("riyoshaFutanAmountNow").toString();
+//        String limitOverAmountNow = ymlData.get(4).get("limitOverAmountNow").toString();
+//        /////////////////////////////////////////////////////////////////////////////////////////
+//
+//        //TO DO  JutakuData.xml Write　③
+//        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
+//        //前回
+//        panel.getJutakuJizenShinseiKyufugakuSummary().getTblSeikyuSummary().getTxtHiyoTotalMae().setValue(new Decimal(payTotalMae));
+//        panel.getJutakuJizenShinseiKyufugakuSummary().getTblSeikyuSummary().getTxtHokenTaishoHiyoMae().setValue(new Decimal(hokenSeikyuAmountMae));
+//        panel.getJutakuJizenShinseiKyufugakuSummary().getTblSeikyuSummary().getTxtHokenKyufuAmountMae().setValue(new Decimal(riyoshaFutanAmountMae));
+//        panel.getJutakuJizenShinseiKyufugakuSummary().getTblSeikyuSummary().getTxtRiyoshaFutanAmountMae().setValue(new Decimal(limitOverAmountMae));
+//
+//        //今回
+//        panel.getJutakuJizenShinseiKyufugakuSummary().getTblSeikyuSummary().getTxtHiyoTotalNow().setValue(new Decimal(payTotalNow));
+//        panel.getJutakuJizenShinseiKyufugakuSummary().getTblSeikyuSummary().getTxtHokenTaishoHiyoNow().setValue(new Decimal(hokenSeikyuAmountNow));
+//        panel.getJutakuJizenShinseiKyufugakuSummary().getTblSeikyuSummary().getTxtHokenKyufuAmountNow().setValue(new Decimal(riyoshaFutanAmountNow));
+//        panel.getJutakuJizenShinseiKyufugakuSummary().getTblSeikyuSummary().getTxtRiyoshaFutanAmountNow().setValue(new Decimal(limitOverAmountNow));
     }
 
     /*
@@ -151,22 +142,22 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
      */
     private void setSummaryNowData(JutakuKaishuJizenShinseiShinsaResultPanelDiv resultPanel, Decimal mitsumoriAmount) {
 
-//        /////////////////////////////////////////////////////////////////////////////////////////
-//        //JutakuData.xml Read　②
-//        //今回
-//        String payTotalNow = ymlData.get(9).get("payTotalNow").toString();
-//        String hokenSeikyuAmountNow = ymlData.get(9).get("hokenSeikyuAmountNow").toString();
-//        String riyoshaFutanAmountNow = ymlData.get(9).get("riyoshaFutanAmountNow").toString();
-//        String limitOverAmountNow = ymlData.get(9).get("limitOverAmountNow").toString();
-//        /////////////////////////////////////////////////////////////////////////////////////////
-        resultPanel.getJutakuJizenShinseiKyufugakuSummary().
-                getTblSeikyuSummary().getTxtHiyoTotalNow().setValue(mitsumoriAmount);
-        resultPanel.getJutakuJizenShinseiKyufugakuSummary().
-                getTblSeikyuSummary().getTxtHokenTaishoHiyoNow().setValue(mitsumoriAmount);
-        resultPanel.getJutakuJizenShinseiKyufugakuSummary().
-                getTblSeikyuSummary().getTxtHokenKyufuAmountNow().setValue(mitsumoriAmount.multiply(0.9));
-        resultPanel.getJutakuJizenShinseiKyufugakuSummary().
-                getTblSeikyuSummary().getTxtRiyoshaFutanAmountNow().setValue(mitsumoriAmount.multiply(0.1));
+////        /////////////////////////////////////////////////////////////////////////////////////////
+////        //JutakuData.xml Read　②
+////        //今回
+////        String payTotalNow = ymlData.get(9).get("payTotalNow").toString();
+////        String hokenSeikyuAmountNow = ymlData.get(9).get("hokenSeikyuAmountNow").toString();
+////        String riyoshaFutanAmountNow = ymlData.get(9).get("riyoshaFutanAmountNow").toString();
+////        String limitOverAmountNow = ymlData.get(9).get("limitOverAmountNow").toString();
+////        /////////////////////////////////////////////////////////////////////////////////////////
+//        resultPanel.getJutakuJizenShinseiKyufugakuSummary().
+//                getTblSeikyuSummary().getTxtHiyoTotalNow().setValue(mitsumoriAmount);
+//        resultPanel.getJutakuJizenShinseiKyufugakuSummary().
+//                getTblSeikyuSummary().getTxtHokenTaishoHiyoNow().setValue(mitsumoriAmount);
+//        resultPanel.getJutakuJizenShinseiKyufugakuSummary().
+//                getTblSeikyuSummary().getTxtHokenKyufuAmountNow().setValue(mitsumoriAmount.multiply(0.9));
+//        resultPanel.getJutakuJizenShinseiKyufugakuSummary().
+//                getTblSeikyuSummary().getTxtRiyoshaFutanAmountNow().setValue(mitsumoriAmount.multiply(0.1));
     }
 
     /*
@@ -174,18 +165,17 @@ public class JutakuKaishuJizenShinseiShinsaResultPanel {
      */
     private void setShinseiShinsaResult(JutakuKaishuJizenShinseiShinsaResultPanelDiv panel) {
 
-//        /////////////////////////////////////////////////////////////////////////////////////////
-//        //JutakuData.xml Read　②
-//        String judgeDate = ymlData.get(10).get("judgeDate").toString();
-//        String judgeKubun = ymlData.get(10).get("judgeKubun").toString();
-//        String shoninCondition = ymlData.get(10).get("shoninCondition").toString();
-//
-//        /////////////////////////////////////////////////////////////////////////////////////////
-//        //TO DO  JutakuData.xml Write　③
-//        panel.getTxtJudgeDate().setValue(new RDate(judgeDate));
-        panel.getRadJudgeKubun().setSelectedItem(new RString("shonin"));
-//        panel.getTxtShoninCondition().setValue(new RString(shoninCondition));
-
+////        /////////////////////////////////////////////////////////////////////////////////////////
+////        //JutakuData.xml Read　②
+////        String judgeDate = ymlData.get(10).get("judgeDate").toString();
+////        String judgeKubun = ymlData.get(10).get("judgeKubun").toString();
+////        String shoninCondition = ymlData.get(10).get("shoninCondition").toString();
+////
+////        /////////////////////////////////////////////////////////////////////////////////////////
+////        //TO DO  JutakuData.xml Write　③
+////        panel.getTxtJudgeDate().setValue(new RDate(judgeDate));
+//        panel.getRadJudgeKubun().setSelectedItem(new RString("shonin"));
+////        panel.getTxtShoninCondition().setValue(new RString(shoninCondition));
     }
 
     /*

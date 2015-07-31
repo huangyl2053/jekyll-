@@ -33,12 +33,7 @@ var DBC;
                 editTypes.addEditType("AddButtonVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 editTypes.addEditType("AddButtonDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 editTypes.addEditType("ListHeight", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("ListOnSelect", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("ListOnSelectByDblClick", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("onClickAddButton", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("ListOnSelectBySelectButton", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("ListOnSelectByModifyButton", UZA.EditTypeEnumForPublicProperty.StringType);
-                editTypes.addEditType("ListOnSelectByDeleteButton", UZA.EditTypeEnumForPublicProperty.StringType);
+
                 return editTypes;
             };
 
@@ -64,54 +59,6 @@ var DBC;
 
             PublicProperties.prototype.setListHeight = function (value) {
                 this.controls.dgKyufuhiKashitsukekinList().height = value;
-            };
-
-            PublicProperties.prototype.getListOnSelect = function () {
-                return this.controls.dgKyufuhiKashitsukekinList().onSelect;
-            };
-
-            PublicProperties.prototype.setListOnSelect = function (value) {
-                this.controls.dgKyufuhiKashitsukekinList().onSelect = value;
-            };
-
-            PublicProperties.prototype.getListOnSelectByDblClick = function () {
-                return this.controls.dgKyufuhiKashitsukekinList().onSelectByDblClick;
-            };
-
-            PublicProperties.prototype.setListOnSelectByDblClick = function (value) {
-                this.controls.dgKyufuhiKashitsukekinList().onSelectByDblClick = value;
-            };
-
-            PublicProperties.prototype.getonClickAddButton = function () {
-                return this.controls.btnAdd().onClick;
-            };
-
-            PublicProperties.prototype.setonClickAddButton = function (value) {
-                this.controls.btnAdd().onClick = value;
-            };
-
-            PublicProperties.prototype.getListOnSelectBySelectButton = function () {
-                return this.controls.dgKyufuhiKashitsukekinList().onSelectBySelectButton;
-            };
-
-            PublicProperties.prototype.setListOnSelectBySelectButton = function (value) {
-                this.controls.dgKyufuhiKashitsukekinList().onSelectBySelectButton = value;
-            };
-
-            PublicProperties.prototype.getListOnSelectByModifyButton = function () {
-                return this.controls.dgKyufuhiKashitsukekinList().onSelectByModifyButton;
-            };
-
-            PublicProperties.prototype.setListOnSelectByModifyButton = function (value) {
-                this.controls.dgKyufuhiKashitsukekinList().onSelectByModifyButton = value;
-            };
-
-            PublicProperties.prototype.getListOnSelectByDeleteButton = function () {
-                return this.controls.dgKyufuhiKashitsukekinList().onSelectByDeleteButton;
-            };
-
-            PublicProperties.prototype.setListOnSelectByDeleteButton = function (value) {
-                this.controls.dgKyufuhiKashitsukekinList().onSelectByDeleteButton = value;
             };
             return PublicProperties;
         })();

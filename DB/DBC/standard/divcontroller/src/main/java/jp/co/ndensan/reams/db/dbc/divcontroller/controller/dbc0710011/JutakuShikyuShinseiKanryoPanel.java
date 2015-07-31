@@ -27,13 +27,11 @@ public class JutakuShikyuShinseiKanryoPanel {
      */
     public ResponseData<JutakuShikyuShinseiKanryoPanelDiv> onClick_btnSave(
             JutakuShikyuShinseiKanryoPanelDiv kanryoPanel, JutakuKaishuShinseiHihokenshaPanelDiv atenaDiv) {
-        ResponseData<JutakuShikyuShinseiKanryoPanelDiv> response = new ResponseData<>();
 
 //        KaigoKanryoMessage.setMessage(kanryoPanel.getKanryoMessage(),
 //                new RString("住宅改修費支給申請を更新しました。"),
 //                atenaDiv.getKaigoShikakuKihon().getTxtHihokenshaNo().getValue(),
 //                atenaDiv.getKaigoAtenaInfo().getAtenaInfo().getTxtAtenaMeisho().getValue());
-        response.data = kanryoPanel;
-        return response;
+        return ResponseData.of(kanryoPanel).respond();
     }
 }

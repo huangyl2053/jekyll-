@@ -5,14 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
-import java.util.HashMap;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC1800000.KashitsukeShinseiCompleteDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.controller.KaigoKanryoMessage;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1800000.KashitsukeShinseiCompleteDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 給付費貸付金申請登録 処理完了のコントローラークラスです。
@@ -21,8 +15,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KashitsukeShinseiComplete {
 
-    private static final RString YML_COMPLETE = new RString("dbc1800000/KashitsukeShinseiComplete.yml");
-
     /**
      * 画面ロード時の処理です。
      *
@@ -30,20 +22,13 @@ public class KashitsukeShinseiComplete {
      * @return ResponseData
      */
     public ResponseData<KashitsukeShinseiCompleteDiv> onLoad(KashitsukeShinseiCompleteDiv panel) {
-        ResponseData<KashitsukeShinseiCompleteDiv> response = new ResponseData<>();
+//        ControlGenerator cg = new ControlGenerator(getYamlData(YML_COMPLETE).get(0));
+//        KaigoKanryoMessage.setMessage(
+//                panel.getKashitsukeShinseiCompleteInfo(),
+//                cg.getAsRString("メッセージ"),
+//                cg.getAsRString("上部"),
+//                cg.getAsRString("下部"));
 
-        ControlGenerator cg = new ControlGenerator(getYamlData(YML_COMPLETE).get(0));
-        KaigoKanryoMessage.setMessage(
-                panel.getKashitsukeShinseiCompleteInfo(),
-                cg.getAsRString("メッセージ"),
-                cg.getAsRString("上部"),
-                cg.getAsRString("下部"));
-
-        response.data = panel;
-        return response;
-    }
-
-    private List<HashMap> getYamlData(RString yamlName) {
-        return YamlLoader.DBC.loadAsList(yamlName);
+        return ResponseData.of(panel).respond();
     }
 }

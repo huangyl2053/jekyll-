@@ -12,7 +12,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikakuTodokedeDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikakuTodokedeHenkoNaiyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikakuTodokedeJigyoshaDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikakuTodokedeKihonDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikakuTodokedeMeisaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikakuTodokedeRirekiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0100000.KyotakuKeikakuTodokedeshaDiv;
@@ -23,10 +22,8 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishukirokukanri.ShoK
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shokaishujokyolist.dgShoKaishuJokyo_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -39,11 +36,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  *
  * @author N8187 久保田 英男
  */
+//TODO n3317塚田　Yamlを使わないように変更
 public class KyotakuKeikakuTodokedeDetail {
-
-    private List<HashMap> getYaml() {
-        return YamlLoader.DBC.loadAsList(new RString("dbc0100000/KyotakuKeikakuTodokedeDetail.yml"));
-    }
 
     /**
      * 画面ロード時の処理です。
@@ -52,13 +46,12 @@ public class KyotakuKeikakuTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onLoad(KyotakuKeikakuTodokedeDetailDiv panel) {
-        ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
         setKihonData(panel);
         setRirekiList(panel);
         setMeisaiDefaultData(panel);
         setShoKaishuJokyoListData(panel);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     private enum 画面表示 {
@@ -76,25 +69,24 @@ public class KyotakuKeikakuTodokedeDetail {
     }
 
     private void setKihonData(KyotakuKeikakuTodokedeDetailDiv panel) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
-        ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
-        int rowId = 0;
-        KyotakuKeikakuTodokedeKihonDiv div = panel.getKyotakuKeikakuTodokedeKihon();
-//        KaigoShikakuKihon.setData(div.getKyotakuKeikakuTodokedeKihonAtena(), div.getKyotakuKeikakuTodokedeKaigoKihon(), 識別コード, rowId);
+//        ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
+//        int rowId = 0;
+//        KyotakuKeikakuTodokedeKihonDiv div = panel.getKyotakuKeikakuTodokedeKihon();
+////        KaigoShikakuKぷびｃihon.setData(div.getKyotakuKeikakuTodokedeKihonAtena(), div.getKyotakuKeikakuTodokedeKaigoKihon(), 識別コード, rowId);
     }
 
     private void setRirekiList(KyotakuKeikakuTodokedeDetailDiv panel) {
-        Button btn = new Button();
-        for (int i = 3; i < 5; i++) {
-            ControlGenerator cg = new ControlGenerator(getYaml().get(i));
-            add履歴(panel, create履歴(
-                    btn,
-                    cg.getAsRString("計画適用期間開始日"),
-                    cg.getAsRString("計画適用期間終了日"),
-                    cg.getAsRString("届出日"),
-                    cg.getAsRString("届出区分"),
-                    cg.getAsRString("計画依頼事業者")));
-        }
+//        Button btn = new Button();
+//        for (int i = 3; i < 5; i++) {
+//            ControlGenerator cg = new ControlGenerator(getYaml().get(i));
+//            add履歴(panel, create履歴(
+//                    btn,
+//                    cg.getAsRString("計画適用期間開始日"),
+//                    cg.getAsRString("計画適用期間終了日"),
+//                    cg.getAsRString("届出日"),
+//                    cg.getAsRString("届出区分"),
+//                    cg.getAsRString("計画依頼事業者")));
+//        }
     }
 
     /**
@@ -201,12 +193,11 @@ public class KyotakuKeikakuTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onClickTodokedeNew(KyotakuKeikakuTodokedeDetailDiv panel) {
-        ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
         initMeisai(panel);
         setMeisaiData(panel, 画面表示.新規届出);
         showMeisai(panel, 画面表示.新規届出);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -216,12 +207,11 @@ public class KyotakuKeikakuTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onClickTodokedeModify(KyotakuKeikakuTodokedeDetailDiv panel) {
-        ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
         initMeisai(panel);
         setMeisaiData(panel, 画面表示.変更届出);
         showMeisai(panel, 画面表示.変更届出);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -231,7 +221,6 @@ public class KyotakuKeikakuTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onClickTodokedeSelect(KyotakuKeikakuTodokedeDetailDiv panel) {
-        ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
         int selectRowindex = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().getTplKyotakuKeikakuTodokedeDetailRireki().
                 getKyotakuKeikakuTodokedeRirekiList().getDgKyotakuKeikakuTodokedeRirekiList().getClickedRowId();
         RString index = new RString(String.valueOf(selectRowindex));
@@ -244,8 +233,7 @@ public class KyotakuKeikakuTodokedeDetail {
         div.getKyotakuKeikakuTodokedeRirekiList().setIsOpen(false);
         div.getKyotakuKeikakuTodokedeMeisai().setIsOpen(true);
 
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -255,13 +243,12 @@ public class KyotakuKeikakuTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onClickTodokedeDelete(KyotakuKeikakuTodokedeDetailDiv panel) {
-        ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
         int index = Integer.valueOf(panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
                 getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai().getTxtRirekiListSelectIndex().getValue().toString());
         modify履歴(panel, index, 修正削除.削除);
         initMeisai(panel);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -271,10 +258,9 @@ public class KyotakuKeikakuTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onClickTodokedeClear(KyotakuKeikakuTodokedeDetailDiv panel) {
-        ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
         initMeisai(panel);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -284,53 +270,51 @@ public class KyotakuKeikakuTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onClickTodokedeKakutei(KyotakuKeikakuTodokedeDetailDiv panel) {
-        ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
-        Button btn = new Button();
-        KyotakuKeikakuTodokedeMeisaiDiv meisai = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
-                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai();
-        RString kubun = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
-                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai().getTxtTodokedeKubun().getValue();
-        ControlGenerator cg;
-        if (new RString("新規").equals(kubun)) {
-            cg = new ControlGenerator(getYaml().get(5));
-        } else {
-            cg = new ControlGenerator(getYaml().get(6));
-        }
-
-        RString 計画適用期間開始日;
-        RString 計画適用期間終了日;
-        RString 届出日;
-        try {
-            計画適用期間開始日 = new FlexibleDate(meisai.getTxtTekiyoKikan().getFromValue().toDateString()).wareki().toDateString();
-        } catch (Throwable e) {
-            計画適用期間開始日 = RString.EMPTY;
-        }
-        try {
-            計画適用期間終了日 = new FlexibleDate(meisai.getTxtTekiyoKikan().getToValue().toDateString()).wareki().toDateString();
-        } catch (Throwable e) {
-            計画適用期間終了日 = RString.EMPTY;
-        }
-        try {
-            届出日 = new FlexibleDate(meisai.getTxtTodokedeYMD().getValue().toDateString()).wareki().toDateString();
-        } catch (Throwable e) {
-            届出日 = RString.EMPTY;
-        }
-        RString 計画依頼事業者 = meisai.getKyotakuKeikakuTodokedeJigyosha().getTxtJigyoshaCode().getValue().
-                concat(":").concat(meisai.getKyotakuKeikakuTodokedeJigyosha().getTxtJigyoshaName().getValue());
-
-        dgKyotakuKeikakuTodokedeRirekiList_Row row = create履歴(
-                btn,
-                計画適用期間開始日,
-                計画適用期間終了日,
-                届出日,
-                kubun,
-                計画依頼事業者);
-        row.setRowState(RowState.Added);
-        add履歴(panel, row);
-
-        initMeisai(panel);
-        response.data = panel;
-        return response;
+//        Button btn = new Button();
+//        KyotakuKeikakuTodokedeMeisaiDiv meisai = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+//                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai();
+//        RString kubun = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+//                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai().getTxtTodokedeKubun().getValue();
+//        ControlGenerator cg;
+//        if (new RString("新規").equals(kubun)) {
+//            cg = new ControlGenerator(getYaml().get(5));
+//        } else {
+//            cg = new ControlGenerator(getYaml().get(6));
+//        }
+//
+//        RString 計画適用期間開始日;
+//        RString 計画適用期間終了日;
+//        RString 届出日;
+//        try {
+//            計画適用期間開始日 = new FlexibleDate(meisai.getTxtTekiyoKikan().getFromValue().toDateString()).wareki().toDateString();
+//        } catch (Throwable e) {
+//            計画適用期間開始日 = RString.EMPTY;
+//        }
+//        try {
+//            計画適用期間終了日 = new FlexibleDate(meisai.getTxtTekiyoKikan().getToValue().toDateString()).wareki().toDateString();
+//        } catch (Throwable e) {
+//            計画適用期間終了日 = RString.EMPTY;
+//        }
+//        try {
+//            届出日 = new FlexibleDate(meisai.getTxtTodokedeYMD().getValue().toDateString()).wareki().toDateString();
+//        } catch (Throwable e) {
+//            届出日 = RString.EMPTY;
+//        }
+//        RString 計画依頼事業者 = meisai.getKyotakuKeikakuTodokedeJigyosha().getTxtJigyoshaCode().getValue().
+//                concat(":").concat(meisai.getKyotakuKeikakuTodokedeJigyosha().getTxtJigyoshaName().getValue());
+//
+//        dgKyotakuKeikakuTodokedeRirekiList_Row row = create履歴(
+//                btn,
+//                計画適用期間開始日,
+//                計画適用期間終了日,
+//                届出日,
+//                kubun,
+//                計画依頼事業者);
+//        row.setRowState(RowState.Added);
+//        add履歴(panel, row);
+//
+//        initMeisai(panel);
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -340,14 +324,12 @@ public class KyotakuKeikakuTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onClickTodokedeTeisei(KyotakuKeikakuTodokedeDetailDiv panel) {
-        ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
         int index = Integer.valueOf(panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
                 getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai().getTxtRirekiListSelectIndex().getValue().toString());
         modify履歴(panel, index, 修正削除.修正);
         initMeisai(panel);
 
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -357,10 +339,9 @@ public class KyotakuKeikakuTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onChangeRadKeikakuSakuseiKubun(KyotakuKeikakuTodokedeDetailDiv panel) {
-        ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
         changeRadKeikakuSakuseiKubun(panel);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -370,18 +351,16 @@ public class KyotakuKeikakuTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onOkCloseJigyoshaDialog(KyotakuKeikakuTodokedeDetailDiv panel) {
-        ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
-        KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
-                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai().getKyotakuKeikakuTodokedeJigyosha();
-        ControlGenerator cg = new ControlGenerator(getYaml().get(11));
-        jigyosha.getTxtServiceShurui1().setValue(cg.getAsRString("事業者サービス種類１"));
-        jigyosha.getTxtServiceShurui2().setValue(cg.getAsRString("事業者サービス種類２"));
-        jigyosha.getTxtKanrishaName().setValue(cg.getAsRString("事業者管理者名"));
-        jigyosha.getTxtJigyoshaTelNo().setValue(cg.getAsRString("事業者電話番号"));
-        jigyosha.getTxtJigyoshaYubinNo().setValue(cg.getAsYubinNo("事業者郵便番号"));
-        jigyosha.getTxtJigyoshaJusho().setValue(cg.getAsRString("事業者住所"));
-        response.data = panel;
-        return response;
+//        KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+//                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai().getKyotakuKeikakuTodokedeJigyosha();
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(11));
+//        jigyosha.getTxtServiceShurui1().setValue(cg.getAsRString("事業者サービス種類１"));
+//        jigyosha.getTxtServiceShurui2().setValue(cg.getAsRString("事業者サービス種類２"));
+//        jigyosha.getTxtKanrishaName().setValue(cg.getAsRString("事業者管理者名"));
+//        jigyosha.getTxtJigyoshaTelNo().setValue(cg.getAsRString("事業者電話番号"));
+//        jigyosha.getTxtJigyoshaYubinNo().setValue(cg.getAsYubinNo("事業者郵便番号"));
+//        jigyosha.getTxtJigyoshaJusho().setValue(cg.getAsRString("事業者住所"));
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -391,13 +370,11 @@ public class KyotakuKeikakuTodokedeDetail {
      * @return ResponseData
      */
     public ResponseData onBlurItakuJigyoshaCode(KyotakuKeikakuTodokedeDetailDiv panel) {
-        ResponseData<KyotakuKeikakuTodokedeDetailDiv> response = new ResponseData<>();
-        KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
-                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai().getKyotakuKeikakuTodokedeJigyosha();
-        ControlGenerator cg = new ControlGenerator(getYaml().get(11));
-        jigyosha.getTxtItakuJigyoshaName().setValue(cg.getAsRString("委託先事業者名"));
-        response.data = panel;
-        return response;
+//        KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+//                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai().getKyotakuKeikakuTodokedeJigyosha();
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(11));
+//        jigyosha.getTxtItakuJigyoshaName().setValue(cg.getAsRString("委託先事業者名"));
+        return ResponseData.of(panel).respond();
     }
 
     private void changeRadKeikakuSakuseiKubun(KyotakuKeikakuTodokedeDetailDiv panel) {
@@ -500,86 +477,86 @@ public class KyotakuKeikakuTodokedeDetail {
      */
     private void setMeisaiData(KyotakuKeikakuTodokedeDetailDiv panel, 画面表示 pattern) {
 
-        KyotakuKeikakuTodokedeMeisaiDiv meisai = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
-                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai();
-        DataGrid<dgKyotakuKeikakuTodokedeRirekiList_Row> rirekiList = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
-                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeRirekiList().getDgKyotakuKeikakuTodokedeRirekiList();
-        dgKyotakuKeikakuTodokedeRirekiList_Row selectRow = rirekiList.getClickedItem();
-
-        KyotakuKeikakuTodokedeshaDiv todokedesha = meisai.getKyotakuKeikakuTodokedesha();
-        KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = meisai.getKyotakuKeikakuTodokedeJigyosha();
-        KyotakuKeikakuTodokedeHenkoNaiyoDiv henkoNaiyo = meisai.getKyotakuKeikakuTodokedeHenkoNaiyo();
-
-        ControlGenerator cg = new ControlGenerator(getYaml().get(7));
-        if (pattern.equals(画面表示.初期表示)) {
-            meisai.getTxtTodokedeKubun().clearValue();
-        } else if (pattern.equals(画面表示.新規届出)) {
-            cg = new ControlGenerator(getYaml().get(8));
-            meisai.getTxtTodokedeKubun().setValue(cg.getAsRString("届出区分"));
-        } else if (pattern.equals(画面表示.変更届出)) {
-            cg = new ControlGenerator(getYaml().get(9));
-            meisai.getTxtTodokedeKubun().setValue(cg.getAsRString("届出区分"));
-        } else if (pattern.equals(画面表示.届出内容修正)) {
-            cg = new ControlGenerator(getYaml().get(10));
-            meisai.getTxtTodokedeKubun().setValue(selectRow.getTxtTodokedeKubun());
-        }
-
-        if (pattern.equals(画面表示.新規届出)
-                || pattern.equals(画面表示.変更届出)
-                || pattern.equals(画面表示.届出内容修正)) {
-
-            if (pattern.equals(画面表示.届出内容修正)) {
-                try {
-                    meisai.getTxtTodokedeYMD().setValue(new RDate(selectRow.getTxtTodokedeYMD().toString()));
-                } catch (Throwable e) {
-                    meisai.getTxtTodokedeYMD().clearValue();
-                }
-                try {
-                    meisai.getTxtTekiyoKikan().setFromValue(new RDate(selectRow.getTxtKeikakuTekiyoKaishiYMD().toString()));
-                } catch (Throwable e) {
-                    meisai.getTxtTekiyoKikan().clearFromValue();
-                }
-                try {
-                    meisai.getTxtTekiyoKikan().setToValue(new RDate(selectRow.getTxtKeikakuTekiyoShuryoYMD().toString()));
-                } catch (Throwable e) {
-                    meisai.getTxtTekiyoKikan().clearToValue();
-                }
-            } else {
-                meisai.getTxtTodokedeYMD().setValue(cg.getAsRDate("届出日"));
-                meisai.getTxtTekiyoKikan().setFromValue(cg.getAsRDate("適用期間開始日"));
-            }
-
-            todokedesha.getTxtTodokedeshaName().setValue(cg.getAsRString("届出者氏名"));
-            todokedesha.getTxtTodokedeshaKana().setValue(cg.getAsRString("届出者カナ"));
-            todokedesha.getTxtTodokedeshaTelNo().setValue(cg.getAsRString("届出者電話番号"));
-            todokedesha.getTxtTodokedeshaYubinNo().setValue(cg.getAsYubinNo("届出者郵便番号"));
-            todokedesha.getTxtTodokedeshaJusho().setValue(cg.getAsRString("届出者住所"));
-
-            jigyosha.getRadKeikakuSakuseiKubun().setSelectedItem(cg.getAsRString("事業者作成区分"));
-            if (pattern.equals(画面表示.届出内容修正)) {
-                RString 事業者コード = selectRow.getTxtKeikakuIraiJigyosha().substring(0, 10);
-                RString 事業者名 = selectRow.getTxtKeikakuIraiJigyosha().substring(11);
-                jigyosha.getTxtJigyoshaCode().setValue(事業者コード);
-                jigyosha.getTxtJigyoshaName().setValue(事業者名);
-            } else {
-                jigyosha.getTxtJigyoshaCode().setValue(cg.getAsRString("事業者コード"));
-                jigyosha.getTxtJigyoshaName().setValue(cg.getAsRString("事業者名"));
-            }
-            jigyosha.getTxtServiceShurui1().setValue(cg.getAsRString("事業者サービス種類１"));
-            jigyosha.getTxtServiceShurui2().setValue(cg.getAsRString("事業者サービス種類２"));
-            jigyosha.getTxtKanrishaName().setValue(cg.getAsRString("事業者管理者名"));
-            jigyosha.getTxtJigyoshaTelNo().setValue(cg.getAsRString("事業者電話番号"));
-            jigyosha.getTxtJigyoshaYubinNo().setValue(cg.getAsYubinNo("事業者郵便番号"));
-            jigyosha.getTxtJigyoshaJusho().setValue(cg.getAsRString("事業者住所"));
-            jigyosha.getTxtItakuJigyoshaCode().setValue(cg.getAsRString("委託先事業者コード"));
-            jigyosha.getTxtItakuJigyoshaName().setValue(cg.getAsRString("委託先事業者名"));
-
-            if (pattern.equals(画面表示.変更届出)
-                    || (pattern.equals(画面表示.届出内容修正) && !selectRow.getTxtTodokedeKubun().equals(new RString("新規")))) {
-                henkoNaiyo.getTxtHenkoYMD().setValue(cg.getAsRDate("変更日"));
-                henkoNaiyo.getTxtHenkoJiyu().setValue(cg.getAsRString("変更事由"));
-            }
-        }
+//        KyotakuKeikakuTodokedeMeisaiDiv meisai = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+//                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeMeisai();
+//        DataGrid<dgKyotakuKeikakuTodokedeRirekiList_Row> rirekiList = panel.getTabKyotakuServiceKeikakuSakuseiIraiTodokede().
+//                getTplKyotakuKeikakuTodokedeDetailRireki().getKyotakuKeikakuTodokedeRirekiList().getDgKyotakuKeikakuTodokedeRirekiList();
+//        dgKyotakuKeikakuTodokedeRirekiList_Row selectRow = rirekiList.getClickedItem();
+//
+//        KyotakuKeikakuTodokedeshaDiv todokedesha = meisai.getKyotakuKeikakuTodokedesha();
+//        KyotakuKeikakuTodokedeJigyoshaDiv jigyosha = meisai.getKyotakuKeikakuTodokedeJigyosha();
+//        KyotakuKeikakuTodokedeHenkoNaiyoDiv henkoNaiyo = meisai.getKyotakuKeikakuTodokedeHenkoNaiyo();
+//
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(7));
+//        if (pattern.equals(画面表示.初期表示)) {
+//            meisai.getTxtTodokedeKubun().clearValue();
+//        } else if (pattern.equals(画面表示.新規届出)) {
+//            cg = new ControlGenerator(getYaml().get(8));
+//            meisai.getTxtTodokedeKubun().setValue(cg.getAsRString("届出区分"));
+//        } else if (pattern.equals(画面表示.変更届出)) {
+//            cg = new ControlGenerator(getYaml().get(9));
+//            meisai.getTxtTodokedeKubun().setValue(cg.getAsRString("届出区分"));
+//        } else if (pattern.equals(画面表示.届出内容修正)) {
+//            cg = new ControlGenerator(getYaml().get(10));
+//            meisai.getTxtTodokedeKubun().setValue(selectRow.getTxtTodokedeKubun());
+//        }
+//
+//        if (pattern.equals(画面表示.新規届出)
+//                || pattern.equals(画面表示.変更届出)
+//                || pattern.equals(画面表示.届出内容修正)) {
+//
+//            if (pattern.equals(画面表示.届出内容修正)) {
+//                try {
+//                    meisai.getTxtTodokedeYMD().setValue(new RDate(selectRow.getTxtTodokedeYMD().toString()));
+//                } catch (Throwable e) {
+//                    meisai.getTxtTodokedeYMD().clearValue();
+//                }
+//                try {
+//                    meisai.getTxtTekiyoKikan().setFromValue(new RDate(selectRow.getTxtKeikakuTekiyoKaishiYMD().toString()));
+//                } catch (Throwable e) {
+//                    meisai.getTxtTekiyoKikan().clearFromValue();
+//                }
+//                try {
+//                    meisai.getTxtTekiyoKikan().setToValue(new RDate(selectRow.getTxtKeikakuTekiyoShuryoYMD().toString()));
+//                } catch (Throwable e) {
+//                    meisai.getTxtTekiyoKikan().clearToValue();
+//                }
+//            } else {
+//                meisai.getTxtTodokedeYMD().setValue(cg.getAsRDate("届出日"));
+//                meisai.getTxtTekiyoKikan().setFromValue(cg.getAsRDate("適用期間開始日"));
+//            }
+//
+//            todokedesha.getTxtTodokedeshaName().setValue(cg.getAsRString("届出者氏名"));
+//            todokedesha.getTxtTodokedeshaKana().setValue(cg.getAsRString("届出者カナ"));
+//            todokedesha.getTxtTodokedeshaTelNo().setValue(cg.getAsRString("届出者電話番号"));
+//            todokedesha.getTxtTodokedeshaYubinNo().setValue(cg.getAsYubinNo("届出者郵便番号"));
+//            todokedesha.getTxtTodokedeshaJusho().setValue(cg.getAsRString("届出者住所"));
+//
+//            jigyosha.getRadKeikakuSakuseiKubun().setSelectedItem(cg.getAsRString("事業者作成区分"));
+//            if (pattern.equals(画面表示.届出内容修正)) {
+//                RString 事業者コード = selectRow.getTxtKeikakuIraiJigyosha().substring(0, 10);
+//                RString 事業者名 = selectRow.getTxtKeikakuIraiJigyosha().substring(11);
+//                jigyosha.getTxtJigyoshaCode().setValue(事業者コード);
+//                jigyosha.getTxtJigyoshaName().setValue(事業者名);
+//            } else {
+//                jigyosha.getTxtJigyoshaCode().setValue(cg.getAsRString("事業者コード"));
+//                jigyosha.getTxtJigyoshaName().setValue(cg.getAsRString("事業者名"));
+//            }
+//            jigyosha.getTxtServiceShurui1().setValue(cg.getAsRString("事業者サービス種類１"));
+//            jigyosha.getTxtServiceShurui2().setValue(cg.getAsRString("事業者サービス種類２"));
+//            jigyosha.getTxtKanrishaName().setValue(cg.getAsRString("事業者管理者名"));
+//            jigyosha.getTxtJigyoshaTelNo().setValue(cg.getAsRString("事業者電話番号"));
+//            jigyosha.getTxtJigyoshaYubinNo().setValue(cg.getAsYubinNo("事業者郵便番号"));
+//            jigyosha.getTxtJigyoshaJusho().setValue(cg.getAsRString("事業者住所"));
+//            jigyosha.getTxtItakuJigyoshaCode().setValue(cg.getAsRString("委託先事業者コード"));
+//            jigyosha.getTxtItakuJigyoshaName().setValue(cg.getAsRString("委託先事業者名"));
+//
+//            if (pattern.equals(画面表示.変更届出)
+//                    || (pattern.equals(画面表示.届出内容修正) && !selectRow.getTxtTodokedeKubun().equals(new RString("新規")))) {
+//                henkoNaiyo.getTxtHenkoYMD().setValue(cg.getAsRDate("変更日"));
+//                henkoNaiyo.getTxtHenkoJiyu().setValue(cg.getAsRString("変更事由"));
+//            }
+//        }
     }
 
     /**

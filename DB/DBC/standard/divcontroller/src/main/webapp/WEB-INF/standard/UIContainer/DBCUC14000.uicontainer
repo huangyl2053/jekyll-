@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC14000",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "受給異動情報履歴訂正",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1400011",
+     "toLayoutTitle": "介護給付費過誤申立書登録",
+     "toState": "検索"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1400011",
+     "layoutTitle": "介護給付費過誤申立書登録",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

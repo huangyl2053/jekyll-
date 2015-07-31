@@ -7,28 +7,22 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0120000.KyotakuJikoRiyohyoRirekiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoRirekiList.ServiceRiyohyoRirekiListDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoRirekiList.dgServiceRiyohyoRirekiList_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
-import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoRirekiList.ServiceRiyohyoRirekiListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoRirekiList.dgServiceRiyohyoRirekiList_Row;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0120000.DBC0120000StateName.利用票登録;
 
 /**
  * 居宅サービス自己作成サービス利用票登録の履歴一覧をコントロールするクラスです。
  *
  * @author N8187 久保田 英男
  */
+//TODO n3317塚田　Yamlを使わないように変更する
 public class KyotakuJikoRiyohyoRireki {
-
-    private List<HashMap> getYaml() {
-        return YamlLoader.DBC.loadAsList(new RString("dbc0120000/KyotakuJikoRiyohyoRireki.yml"));
-    }
 
     /**
      * 画面ロード時の処理です。
@@ -37,10 +31,13 @@ public class KyotakuJikoRiyohyoRireki {
      * @return ResponseData
      */
     public ResponseData onLoad(KyotakuJikoRiyohyoRirekiDiv panel) {
-        ResponseData<KyotakuJikoRiyohyoRirekiDiv> response = new ResponseData<>();
         setRirekiList(panel);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
+    }
+
+    public ResponseData onClick_dgSelectButton(KyotakuJikoRiyohyoRirekiDiv panel) {
+        return ResponseData.of(panel).setState(利用票登録);
     }
 
     /**
@@ -50,10 +47,12 @@ public class KyotakuJikoRiyohyoRireki {
         ServiceRiyohyoRirekiListDiv rirekiList = panel.getKyotakuJikoRiyohyoRirekiList();
         List<dgServiceRiyohyoRirekiList_Row> dgList = rirekiList.getDgServiceRiyohyoRirekiList().getDataSource();
         dgList.clear();
-        for (int index = 0; index < 2; index++) {
-            dgList.add(create履歴(index));
-        }
-        Collections.sort(dgList, new DateComparator());
+        //TODO n3317塚田　遷移させるために空にリストを作成
+        dgList.add(new dgServiceRiyohyoRirekiList_Row());
+//        for (int index = 0; index < 2; index++) {
+//            dgList.add(create履歴(index));
+//        }
+//        Collections.sort(dgList, new DateComparator());
         rirekiList.getDgServiceRiyohyoRirekiList().setDataSource(dgList);
     }
 
@@ -70,20 +69,19 @@ public class KyotakuJikoRiyohyoRireki {
     }
 
     private dgServiceRiyohyoRirekiList_Row create履歴(int index) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(index));
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(index));
         dgServiceRiyohyoRirekiList_Row row = new dgServiceRiyohyoRirekiList_Row(
-                new Button(),
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY);
-        row.setTxtJotai(cg.getAsRString("状態"));
-        row.setTxtTodokedeYMD(cg.getAsRString("届出日"));
-        row.setTxtTodokedeKubun(cg.getAsRString("届出区分"));
-        row.setTxtTekiyoKaishiYMD(cg.getAsRString("計画適用期間開始日"));
-        row.setTxtTekiyoShuryoYMD(cg.getAsRString("計画適用期間終了日"));
+//        row.setTxtJotai(cg.getAsRString("状態"));
+//        row.setTxtTodokedeYMD(cg.getAsRString("届出日"));
+//        row.setTxtTodokedeKubun(cg.getAsRString("届出区分"));
+//        row.setTxtTekiyoKaishiYMD(cg.getAsRString("計画適用期間開始日"));
+//        row.setTxtTekiyoShuryoYMD(cg.getAsRString("計画適用期間終了日"));
         return row;
     }
 }
