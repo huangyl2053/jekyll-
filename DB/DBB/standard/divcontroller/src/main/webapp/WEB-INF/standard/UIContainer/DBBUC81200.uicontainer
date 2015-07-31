@@ -1,0 +1,56 @@
+﻿{
+ "uiContainerName": "DBBUC81200",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "介護保険料即時賦課更正",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB8120001",
+     "toLayoutTitle": "介護保険料即時賦課更正",
+     "toState": "即時賦課更正"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB8120001",
+     "layoutTitle": "介護保険料即時賦課更正",
+     "eventName": "通知書作成",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB8110001",
+     "toLayoutTitle": "各種通知書作成（個別）",
+     "toState": "通知書発行"
+    },
+    {
+     "id": "3",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB8120001",
+     "layoutTitle": "介護保険料即時賦課更正",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB8110001",
+     "layoutTitle": "各種通知書作成（個別）",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

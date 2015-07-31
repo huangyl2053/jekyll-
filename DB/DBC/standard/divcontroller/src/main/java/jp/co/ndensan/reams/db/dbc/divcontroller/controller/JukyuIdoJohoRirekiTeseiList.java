@@ -26,8 +26,6 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.IdentificationKeyValues;
  */
 public class JukyuIdoJohoRirekiTeseiList {
 
-    private static final RString YML_RIREKI_TEISEI_LIST = new RString("dbc0200001/JukyuIdoJohoRirekiTeseiList.yml");
-
     /**
      * 画面ロード時の処理です。
      *
@@ -35,16 +33,9 @@ public class JukyuIdoJohoRirekiTeseiList {
      * @return ResponseData
      */
     public ResponseData<JukyuIdoJohoRirekiTeseiListDiv> onLoad(JukyuIdoJohoRirekiTeseiListDiv panel) {
-        ResponseData<JukyuIdoJohoRirekiTeseiListDiv> response = new ResponseData<>();
-
         setJukyuIdoJohoRirekiTeseiList(panel);
 
-        response.data = panel;
-        return response;
-    }
-
-    private List<HashMap> getYamlData(RString yamlName) {
-        return YamlLoader.DBC.loadAsList(yamlName);
+        return ResponseData.of(panel).respond();
     }
 
     private void setJukyuIdoJohoRirekiTeseiList(JukyuIdoJohoRirekiTeseiListDiv panel) {
@@ -57,15 +48,7 @@ public class JukyuIdoJohoRirekiTeseiList {
 
     private void loadRirekiTeseiList(JukyuIdoJohoRirekiTeseiListDiv panel) {
         List<dgJukyuIdoJohoRirekiTeseiList_Row> list = panel.getDgJukyuIdoJohoRirekiTeseiList().getDataSource();
-        List<HashMap> mapList = getYamlData(YML_RIREKI_TEISEI_LIST);
-        for (int index = 0; index < mapList.size(); index++) {
-            ControlGenerator cg = new ControlGenerator(mapList.get(index));
-            list.add(createJukyuIdoJohoRirekiTeseiListRow(
-                    cg.getAsRString("被保番号"),
-                    cg.getAsRString("被保険者氏名"),
-                    cg.getAsRString("異動日"),
-                    cg.getAsRString("項目")));
-        }
+        list.add(createJukyuIdoJohoRirekiTeseiListRow());
     }
 
     private void modifyRirekiTeseiList(JukyuIdoJohoRirekiTeseiListDiv panel) {
@@ -85,15 +68,8 @@ public class JukyuIdoJohoRirekiTeseiList {
         }
     }
 
-    private dgJukyuIdoJohoRirekiTeseiList_Row createJukyuIdoJohoRirekiTeseiListRow(
-            RString txtHihoNo,
-            RString txtHihokenshaName,
-            RString txtIdoYMD,
-            RString txtKomoku) {
-        return new dgJukyuIdoJohoRirekiTeseiList_Row(
-                txtHihoNo,
-                txtHihokenshaName,
-                txtIdoYMD,
-                txtKomoku);
+    private dgJukyuIdoJohoRirekiTeseiList_Row createJukyuIdoJohoRirekiTeseiListRow() {
+        //TODO n3317塚田　遷移するために空のリストを作成
+        return new dgJukyuIdoJohoRirekiTeseiList_Row();
     }
 }

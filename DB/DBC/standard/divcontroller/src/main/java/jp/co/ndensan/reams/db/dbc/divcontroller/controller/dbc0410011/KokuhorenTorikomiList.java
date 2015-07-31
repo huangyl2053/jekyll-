@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -40,10 +41,9 @@ public class KokuhorenTorikomiList {
 
         panel.getTxtShoriYM().setValue(new RDate(max処理年月.getYearValue(), max処理年月.getMonthValue()));
 
-        ResponseData<KokuhorenTorikomiListDiv> response = new ResponseData<>();
-        response.data = loadGrid(panel, max処理年月);
-        return response;
+        loadGrid(panel, max処理年月);
 
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -53,12 +53,12 @@ public class KokuhorenTorikomiList {
      * @return response
      */
     public ResponseData<KokuhorenTorikomiListDiv> onChange_txtShoriYM(KokuhorenTorikomiListDiv panel) {
-        ResponseData<KokuhorenTorikomiListDiv> response = new ResponseData<>();
-        response.data = loadGrid(panel, panel.getTxtShoriYM().getValue().getYearMonth());
-        return response;
+        loadGrid(panel, panel.getTxtShoriYM().getValue().getYearMonth());
+
+        return ResponseData.of(panel).respond();
     }
 
-    private KokuhorenTorikomiListDiv loadGrid(KokuhorenTorikomiListDiv panel, RYearMonth 処理年月) {
+    private void loadGrid(KokuhorenTorikomiListDiv panel, RYearMonth 処理年月) {
 
         KokuhorenTorikomiJohoManager realservice = new KokuhorenTorikomiJohoManager();
 
@@ -73,7 +73,6 @@ public class KokuhorenTorikomiList {
         panel.getDgKokuhorenTorikomiList().setDataSource(KokuhorenTorikomiListDataSource);
 
         panel.getDgKokuhorenTorikomiList().setSortOrder(グリッドソート条件１);
-        return panel;
     }
 
     public ResponseData<KokuhorenTorikomiListDiv> onSelect_dgKokuhorenTorikomiList_Row(KokuhorenTorikomiListDiv panel) {
@@ -87,9 +86,7 @@ public class KokuhorenTorikomiList {
         viewStateHolder.set処理年月(panel.getTxtShoriYM().getValue().seireki().separator(Separator.NONE).getYearMonth());
         ViewStateHolder.put(ViewStateHolderName.国保連取込情報, viewStateHolder);
 
-        ResponseData<KokuhorenTorikomiListDiv> response = new ResponseData<>();
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     private dgKokuhorenTorikomiList_Row createKokuhorenTorikomiRow(KokuhorenTorikomiJohoModel model) {
@@ -114,7 +111,9 @@ public class KokuhorenTorikomiList {
         row.getIchiranHyojijun().setValue(new Decimal(model.get一覧表示順().toString()));
         row.setBatchID(model.getバッチID());
         row.setKokanShikibetsuNo(model.get交換識別番号());
-        row.setSelectButtonState(business.get選択ボタン状態(row.getTorikomiFlag(), row.getTxtTogetsuJotai()));
+//TODO n3317塚田　画面遷移させるために一時的に処理を修正
+//        row.setSelectButtonState(business.get選択ボタン状態(row.getTorikomiFlag(), row.getTxtTogetsuJotai()));
+        row.setSelectButtonState(DataGridButtonState.Enabled);
         return row;
     }
 }

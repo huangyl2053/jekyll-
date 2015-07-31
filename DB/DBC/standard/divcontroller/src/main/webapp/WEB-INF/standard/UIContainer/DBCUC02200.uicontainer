@@ -1,0 +1,60 @@
+﻿{
+ "uiContainerName": "DBCUC02200",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "受給者異動連絡票変更登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0220011",
+     "toLayoutTitle": "受給者異動連絡票変更登録",
+     "toState": "対象者検索"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0220011",
+     "layoutTitle": "受給者異動連絡票変更登録",
+     "eventName": "連絡票変更",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0220012",
+     "toLayoutTitle": "受給者異動連絡票変更登録",
+     "toState": "連絡票変更"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0220012",
+     "layoutTitle": "受給者異動連絡票変更登録",
+     "eventName": "対象者一覧",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0220011",
+     "toLayoutTitle": "受給者異動連絡票変更登録",
+     "toState": "対象者一覧"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0220011",
+     "layoutTitle": "受給者異動連絡票変更登録",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

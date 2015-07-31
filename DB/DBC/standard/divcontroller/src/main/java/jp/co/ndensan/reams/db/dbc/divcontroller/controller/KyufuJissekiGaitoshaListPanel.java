@@ -38,13 +38,11 @@ public class KyufuJissekiGaitoshaListPanel {
      */
     public ResponseData<KyufuJissekiGaitoshaListPanelDiv> onClick_btnSearch(
             KyufuJissekiGaitoshaListPanelDiv panel, SearchToKyufujissekiPanelDiv srchpanel) {
-        ResponseData<KyufuJissekiGaitoshaListPanelDiv> response = new ResponseData<>();
 
         //給付実積該当一覧の内容を設定する。
         setKyufuJissekiGaitoshaList(panel, srchpanel);
 
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     /*
@@ -63,25 +61,7 @@ public class KyufuJissekiGaitoshaListPanel {
      */
     private List<dgHihokenshaSearchGaitosha_Row> createRowKyufuJissekiGaitoshaTestData(SearchToKyufujissekiPanelDiv srchpanel) {
         List<dgHihokenshaSearchGaitosha_Row> arrayData = new ArrayList<>();
-        List<HashMap> ymlData = ymlData();
-
-        //TO DO データを増える場合。
-        for (int i = 0; i < ymlData.size(); i++) {
-            HashMap hashMap = ymlData.get(i);
-            ControlGenerator ymlDt = new ControlGenerator(hashMap);
-
-            arrayData.add(createRowKyufuJissekiGaitoshaListData(
-                    ymlDt.getAsRString("jigyoshaNo"),
-                    ymlDt.getAsRString("jigyoshaName"),
-                    ymlDt.getAsRString("hihoNo"),
-                    ymlDt.getAsRString("hihoName"),
-                    ymlDt.getAsRString("kagoForm"),
-                    ymlDt.getAsRString("teikyoYM"),
-                    ymlDt.getAsRString("kyufuJissekiSakuseiKubun"),
-                    ymlDt.getAsRString("kyufuKubun"),
-                    ymlDt.getAsRString("shinsaYM")
-            ));
-        }
+        arrayData.add(new dgHihokenshaSearchGaitosha_Row());
         return arrayData;
     }
 
@@ -168,9 +148,5 @@ public class KyufuJissekiGaitoshaListPanel {
 
         response.data = panel;
         return response;
-    }
-
-    private List<HashMap> ymlData() {
-        return YamlLoader.DBC.loadAsList(new RString("dbc1400011/KagoMoshitateKyufuJissekiGaitoshaList.yml"));
     }
 }

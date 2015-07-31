@@ -4,6 +4,9 @@ var DBC;
         var Events = (function () {
             function Events() {
             }
+            Events.onSelectBySelectButton = function () {
+                return "onSelectBySelectButton";
+            };
             return Events;
         })();
         ServiceRiyohyoRirekiList.Events = Events;

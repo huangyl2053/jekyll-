@@ -16,12 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
-
 /**
  * 受給者異動連絡票情報照会の照会パネルです。
  *
  * @author N3317 塚田 萌
- * @author n8823 ymlData 適用
  */
 public class JukyushaIdoRenrakuhyoInquiryPanel {
 
@@ -32,18 +30,12 @@ public class JukyushaIdoRenrakuhyoInquiryPanel {
      * @param searchPanel 検索パネル
      * @return ResponseData
      */
-    public ResponseData<JukyushaIdoRenrakuhyoInquiryPanelDiv> onClick_btnShowDetail(
+    public ResponseData onClick_btnShowDetail(
             JukyushaIdoRenrakuhyoInquiryPanelDiv inquiryPanel, JukyushaIdoRenrakuhyoSearchPanelDiv searchPanel) {
 
-//        set連絡票(inquiryPanel,
-//                searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem());
         //連絡票
-        setJukyushaIdoRenrakuhyoInquiry(inquiryPanel, searchPanel);
-
-        ResponseData<JukyushaIdoRenrakuhyoInquiryPanelDiv> response = new ResponseData<>();
-        response.data = inquiryPanel;
-
-        return response;
+//        setJukyushaIdoRenrakuhyoInquiry(inquiryPanel, searchPanel);
+        return ResponseData.of(inquiryPanel).respond();
     }
 
     /**
@@ -53,12 +45,10 @@ public class JukyushaIdoRenrakuhyoInquiryPanel {
      * @param searchPanel 検索パネル
      * @return ResponseData
      */
-    public ResponseData<JukyushaIdoRenrakuhyoInquiryPanelDiv> onClick_btnReSearch(
+    public ResponseData onClick_btnReSearch(
             JukyushaIdoRenrakuhyoInquiryPanelDiv inquiryPanel, JukyushaIdoRenrakuhyoSearchPanelDiv searchPanel) {
 
-        ResponseData<JukyushaIdoRenrakuhyoInquiryPanelDiv> response = new ResponseData<>();
-        response.data = inquiryPanel;
-        return response;
+        return ResponseData.of(inquiryPanel).respond();
     }
 
     //連絡票
@@ -74,20 +64,20 @@ public class JukyushaIdoRenrakuhyoInquiryPanel {
         List<HashMap> ymlData = ymlData("dbc0040011/JukyushaIdoRenrakuhyoInquiryInfo.yml");
 
         HashMap hashMap = null;
-        //## set基本情報 
+        //## set基本情報
         //①対象者一覧から選択した内容をもとに基本情報に設定する
-        
+
         //異動日
         inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
                 getTxtRenrakuhyoIdoDate().setValue(new FlexibleDate(
                                 setSeireki(searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().
                                         getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem().getTxtResultIdoDate())));
-      
+
         //異動区分
         for (int i = 0; i < inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getRadRenrakuhyoIdoKubun().getDataSource().size(); i++) {
-            
-            System.out.print("asdfasdfasdfasdfsda" +
-                    inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getRadRenrakuhyoIdoKubun().getDataSource().get(i).getValue().toString());
+
+            System.out.print("asdfasdfasdfasdfsda"
+                    + inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getRadRenrakuhyoIdoKubun().getDataSource().get(i).getValue().toString());
 
             if (inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getRadRenrakuhyoIdoKubun().getDataSource().get(i).getValue().toString().
                     equals(searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().
@@ -100,12 +90,12 @@ public class JukyushaIdoRenrakuhyoInquiryPanel {
             }
         }
 
-        //異動事由        
+        //異動事由
         for (int i = 0; i < inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getDdlIdoJiyu().getDataSource().size(); i++) {
 
-                        System.out.print("asdfasdfasdfasdfsda" +
-                    inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getDdlIdoJiyu().getDataSource().get(i).getValue().toString());
-            
+            System.out.print("asdfasdfasdfasdfsda"
+                    + inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getDdlIdoJiyu().getDataSource().get(i).getValue().toString());
+
             if (inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getDdlIdoJiyu().getDataSource().get(i).getValue().toString().
                     equals(searchPanel.getJukyushaIdoRenrakuhyoSearchResultIchiran().
                             getDgJukyushaIdoRenrakuhyoSearchResult().getClickedItem().getTxtDdlIdoJiyu().toString())) {
@@ -113,11 +103,10 @@ public class JukyushaIdoRenrakuhyoInquiryPanel {
                 inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
                         getDdlIdoJiyu().setSelectedItem(
                                 inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getDdlIdoJiyu().getDataSource().get(i).getKey());
-                 break;
+                break;
             }
         }
-        
-        
+
         //被保険番号
         inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
                 getTxtRenrakuhyoHihoNo().setValue(new RString(
@@ -148,7 +137,7 @@ public class JukyushaIdoRenrakuhyoInquiryPanel {
 //                hashMap = ymlData.get(2);
 //                break;
 //       }
-        
+
         hashMap = ymlData.get(0);
         ControlGenerator ymlDt = new ControlGenerator(hashMap);
 
@@ -169,7 +158,7 @@ public class JukyushaIdoRenrakuhyoInquiryPanel {
         inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoYokaigonintei().
                 getTxtNinteiDateRange().setToValue(ymlDt.getAsRDate("ninteiDateRangeto"));
 
-        //##set支給限度基準額    
+        //##set支給限度基準額
         inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoShikyugendoKijungaku().
                 getTxtKyuHomonTsushoShikyuGendoKijungaku().setValue(ymlDt.getAsDecimal("kyuHomonTsushoShikyuGendoKijungaku"));
         inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoShikyugendoKijungaku().
@@ -206,16 +195,14 @@ public class JukyushaIdoRenrakuhyoInquiryPanel {
                 getTxtKokuhoHihokenshashoNo().setValue(ymlDt.getAsRString("kokuhoHihokenshashoNo"));
         inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKokiKoreiKokuho().getJukyushaIdoRenrakuhyoKokuho().
                 getTxtKokuhoKojinNo().setValue(ymlDt.getAsRString("kokuhoKojinNo"));
-        
+
         //##setRadio
         //異動区分
         //inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
         //        getRadRenrakuhyoIdoKubun().setSelectedItem(ymlDt.getAsRString("radRenrakuhyoIdoKubun"));
-
         //異動事由区分
         //inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().getDdlIdoJiyu()
         //       .setSelectedItem(ymlDt.getAsRString("radRenrakuhyoIdoKubun"));
-
         //性別
         inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoKihonJoho().
                 getRadHihoSex().setSelectedItem(ymlDt.getAsRString("radHihoSex"));
@@ -263,7 +250,6 @@ public class JukyushaIdoRenrakuhyoInquiryPanel {
         //事業区分
         inquiryPanel.getJukyushaIdoRenrakuhyo().getJukyushaIdoRenrakuhyoNijiyoboJigyo().getRadNijiyoboJigyoKubun().
                 setSelectedItem(ymlDt.getAsRString("radNijiyoboJigyoKubun"));
-        
 
     }
 

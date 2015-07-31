@@ -19,11 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N8187 久保田 英男
  */
+//TODO n3317塚田　Yamlを使わないようにする
 public class KyotakuJikoRiyohyoKanryo {
-
-    private List<HashMap> getYaml() {
-        return YamlLoader.DBC.loadAsList(new RString("dbc0120000/KyotakuJikoRiyohyoKanryo.yml"));
-    }
 
     /**
      * 画面ロード時の処理です。
@@ -32,16 +29,15 @@ public class KyotakuJikoRiyohyoKanryo {
      * @return ResponseData
      */
     public ResponseData onLoad(KyotakuJikoRiyohyoKanryoDiv panel) {
-        ResponseData<KyotakuJikoRiyohyoKanryoDiv> response = new ResponseData<>();
         setKanryoMessage(panel);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     private void setKanryoMessage(KyotakuJikoRiyohyoKanryoDiv panel) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
-
-        KaigoKanryoMessage.setMessage(panel.getKyotakuJikoRiyohyoKanryoMessage(),
-                cg.getAsRString("完了メッセージ"), cg.getAsRString("識別コード"), cg.getAsRString("氏名"));
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
+//
+//        KaigoKanryoMessage.setMessage(panel.getKyotakuJikoRiyohyoKanryoMessage(),
+//                cg.getAsRString("完了メッセージ"), cg.getAsRString("識別コード"), cg.getAsRString("氏名"));
     }
 }

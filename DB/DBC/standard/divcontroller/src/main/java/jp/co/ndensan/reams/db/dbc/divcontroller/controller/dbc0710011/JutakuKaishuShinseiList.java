@@ -32,16 +32,12 @@ public class JutakuKaishuShinseiList {
      */
     public ResponseData<JutakuKaishuShinseiListDiv> onLoad(JutakuKaishuShinseiListDiv panel) {
 
-        ResponseData<JutakuKaishuShinseiListDiv> response = new ResponseData<>();
-
-        //TO DO
-        String ymlDataName = "JutakuData_1.yml";
-
-        setJutakuKaishuShinseiList(panel, ymlDataName);
-
-        response.data = panel;
-        return response;
-
+        //TODO n3317塚田　遷移するために空行を作成
+        List<dgJutakuKaishuShinseiList_Row> list = new ArrayList<>();
+        list.add(new dgJutakuKaishuShinseiList_Row());
+        panel.getDgJutakuKaishuShinseiList().setDataSource(list);
+//        setJutakuKaishuShinseiList(panel);
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -51,36 +47,20 @@ public class JutakuKaishuShinseiList {
      * @return PanelDivのResponseData
      */
     public ResponseData<JutakuKaishuShinseiListDiv> onClick_btnAddShinseiContents(JutakuKaishuShinseiListDiv panel) {
-        ResponseData<JutakuKaishuShinseiListDiv> response = new ResponseData<>();
 
-        //TO DO
-        int selRowId = panel.getDgJutakuKaishuShinseiList().getClickedRowId();
-
-        System.out.println("+++selRowId++++" + selRowId);
-
-        String ymlDataName;
-
-        ///////////////////////////////////////////////////////////
-        if (selRowId >= 0) {
-            ymlDataName = "JutakuData_1_2.yml";
-        } else {
-            ymlDataName = "JutakuData_2.yml";
-        }
-        ///////////////////////////////////////////////////////////
-
-        setJutakuKaishuShinseiList(panel, ymlDataName);
-
-        response.data = panel;
-        return response;
-
+//        int selRowId = panel.getDgJutakuKaishuShinseiList().getClickedRowId();
+//
+//        String ymlDataName;
+//        setJutakuKaishuShinseiList(panel, ymlDataName);
+        return ResponseData.of(panel).respond();
     }
 
     /*
      * 住宅改修費事申請登録 申請を追加するボタンを押下後、
      */
-    private void setJutakuKaishuShinseiList(JutakuKaishuShinseiListDiv panel, String ymlDataName) {
+    private void setJutakuKaishuShinseiList(JutakuKaishuShinseiListDiv panel) {
 
-        List<dgJutakuKaishuShinseiList_Row> arraydata = createRowJutakuKaishuShinseiTestData(ymlDataName);
+        List<dgJutakuKaishuShinseiList_Row> arraydata = createRowJutakuKaishuShinseiTestData();
         DataGrid<dgJutakuKaishuShinseiList_Row> grid = panel.getDgJutakuKaishuShinseiList();
         grid.setDataSource(arraydata);
 
@@ -89,35 +69,12 @@ public class JutakuKaishuShinseiList {
     /*
      * 住宅改修費事申請登録 申請内容の情報を設定する。
      */
-    private List<dgJutakuKaishuShinseiList_Row> createRowJutakuKaishuShinseiTestData(String ymlDataName) {
+    private List<dgJutakuKaishuShinseiList_Row> createRowJutakuKaishuShinseiTestData() {
 
         List<dgJutakuKaishuShinseiList_Row> arrayData = new ArrayList<>();
-
-/////////////////////////////////////////////////////////////////////////////////////////
-        //TO DO  JutakuData1.xml ①
-        List<HashMap> ymlData = ymlData(ymlDataName);
-
-        if (ymlDataName.equals("JutakuData_2.yml")) {
-
-            //TO DO データを増える場合。
-            for (int i = 2; i < ymlData.size(); i++) {
-                HashMap hashMap = ymlData.get(i);
-                hashMap(hashMap, arrayData);
-            }
-
-        } else if (ymlDataName.equals("JutakuData_1.yml")) {
-
-            HashMap hashMap = ymlData.get(2);
-            hashMap(hashMap, arrayData);
-
-        } else if (ymlDataName.equals("JutakuData_1_2.yml")) {
-
-            HashMap hashMap = ymlData.get(2);
-            hashMap(hashMap, arrayData);
-        }
+        arrayData.add(new dgJutakuKaishuShinseiList_Row());
 
         return arrayData;
-
     }
 
     /*
@@ -199,11 +156,5 @@ public class JutakuKaishuShinseiList {
 
     private boolean isAddRow(String 状態) {
         return 状態.equals("追加");
-    }
-
-    // TO DO  JutakuData１.xml ①
-    private List<HashMap> ymlData(String ymlDataName) {
-
-        return YamlLoader.DBC.loadAsList(new RString("dbc0710011/").concat(ymlDataName));
     }
 }

@@ -106,18 +106,20 @@ public class KiwarigakuHandler {
      * @param 処理日時 処理日時
      */
     public void load(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号, RDateTime 処理日時) {
-
-        List<RString> 月列 = 日付Config.get月別テーブル();
-        List<RString> 特徴期列 = 特徴Config.get月の期();
-        List<RString> 普徴期列 = (調定年度.value().equals(賦課年度.value())) ? 普徴Config.get月の期() : 過年度Config.get月の期();
-
-        setDisplayMode(賦課年度, 普徴期列.size());
-
-        setTableData(TableItem.月, 月列, SUFFIX_月);
-        setTableData(TableItem.特徴期, 特徴期列, SUFFIX_期);
-        setTableData(TableItem.普徴期, 普徴期列, SUFFIX_期);
-
-        setKiwarigaku(finder.load期割額(調定年度, 賦課年度, 通知書番号, 処理日時).get(), createIndexMap(特徴期列), createIndexMap(普徴期列));
+        // TODO n8187久保田 画面遷移の確認のために一時的にコメントアウト
+        // ここから
+//        List<RString> 月列 = 日付Config.get月別テーブル();
+//        List<RString> 特徴期列 = 特徴Config.get月の期();
+//        List<RString> 普徴期列 = (調定年度.value().equals(賦課年度.value())) ? 普徴Config.get月の期() : 過年度Config.get月の期();
+//
+//        setDisplayMode(賦課年度, 普徴期列.size());
+//
+//        setTableData(TableItem.月, 月列, SUFFIX_月);
+//        setTableData(TableItem.特徴期, 特徴期列, SUFFIX_期);
+//        setTableData(TableItem.普徴期, 普徴期列, SUFFIX_期);
+//
+//        setKiwarigaku(finder.load期割額(調定年度, 賦課年度, 通知書番号, 処理日時).get(), createIndexMap(特徴期列), createIndexMap(普徴期列));
+        // ここまで
     }
 
     private Map<RString, Integer> createIndexMap(List<RString> data) {

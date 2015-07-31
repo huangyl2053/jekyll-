@@ -32,8 +32,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class JutakuKaishuJizenShinseiContentsPanel {
 
-    private final List<HashMap> targetSource = YamlLoader.DBC.loadAsList(new RString("dbc0700011/JutakuData.yml"));
-
     /**
      * 住宅改修費事前申請登録 事前申請内容の情報を表示する。
      *
@@ -42,7 +40,6 @@ public class JutakuKaishuJizenShinseiContentsPanel {
      */
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onLoad(
             JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
-        ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
 
 //        //住宅所有者・被保険者との関係　
 //        setJutakuOwnerData(contentsPanel);
@@ -56,8 +53,7 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 //        setShinseiKozaInfo(contentsPanel);
         setDefaultData(contentsPanel, hihoPanel);
 
-        response.data = contentsPanel;
-        return response;
+        return ResponseData.of(contentsPanel).respond();
     }
 
     /**
@@ -68,7 +64,6 @@ public class JutakuKaishuJizenShinseiContentsPanel {
      */
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_btnModifyDetail(
             JutakuKaishuJizenShinseiContentsPanelDiv contentsPanel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
-        ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
 
         //住宅改修明細
         contentsPanel.getJutakuJizenShinseiDetailInput().
@@ -82,37 +77,31 @@ public class JutakuKaishuJizenShinseiContentsPanel {
         //クリア設定
         setJutakuKaishuJizenShinseiDetailInput(contentsPanel);
 
-        response.data = contentsPanel;
-        return response;
+        return ResponseData.of(contentsPanel).respond();
 
     }
 
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_copyToAddress(
             JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
-        ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
 
 //        panel.getJutakuJizenShinseiDetailInput().getJutakuKaishuDetailInput()
 //                .getTxtKaishuTaishoAddress().setValue(
 //                        hihoPanel.getKaigoAtena().getAtenaInfo().getTxtJusho().getValue());
 //
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_btnClear(
             JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
-        ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
 
         //クリア設定
         setJutakuKaishuJizenShinseiDetailInput(panel);
 
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onChange_ddlShinseishaKubun(
             JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
-        ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
 
         String 申請者区分key = panel.getJutakuKaishuJizenShinseisha().getDdlShinseishaKubun().getSelectedItem().toString();
 
@@ -132,8 +121,7 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 //                ableJigyosha(panel.getJutakuKaishuJizenShinseisha());
 //                break;
 //        }
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -144,12 +132,10 @@ public class JutakuKaishuJizenShinseiContentsPanel {
      */
     public ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> onClick_radPayMethod(
             JutakuKaishuJizenShinseiContentsPanelDiv panel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
-        ResponseData<JutakuKaishuJizenShinseiContentsPanelDiv> response = new ResponseData<>();
 
         PaymentMethod.showSelectedPaymentMethod(panel.getJutakuKaishuJizenShinseiKoza());
 
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     private void clearToShinseishaInfo(ShinseishaInfoDiv div) {
@@ -197,17 +183,16 @@ public class JutakuKaishuJizenShinseiContentsPanel {
 
     private void setJutakuOwnerData(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
 
-        /////////////////////////////////////////////////////////////////////////////////////////
-        //JutakuData.xml Read　②
-        String jutakuOwner = targetSource.get(2).get("jutakuOwner").toString();
-        String relationWithHihokensha = targetSource.get(2).get("relationWithHihokensha").toString();
-       /////////////////////////////////////////////////////////////////////////////////////////
-
-        //TO DO  JutakuData.xml Write　③
-        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
-        panel.getTxtJutakuOwner().setValue(new RString(jutakuOwner));
-        panel.getTxtRelationWithHihokensha().setValue(new RString(relationWithHihokensha));
-
+//        /////////////////////////////////////////////////////////////////////////////////////////
+//        //JutakuData.xml Read　②
+//        String jutakuOwner = targetSource.get(2).get("jutakuOwner").toString();
+//        String relationWithHihokensha = targetSource.get(2).get("relationWithHihokensha").toString();
+//       /////////////////////////////////////////////////////////////////////////////////////////
+//
+//        //TO DO  JutakuData.xml Write　③
+//        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
+//        panel.getTxtJutakuOwner().setValue(new RString(jutakuOwner));
+//        panel.getTxtRelationWithHihokensha().setValue(new RString(relationWithHihokensha));
     }
 
     /*
@@ -215,33 +200,33 @@ public class JutakuKaishuJizenShinseiContentsPanel {
      */
     private void setZizenShinseiDetailInput(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
 
-        /////////////////////////////////////////////////////////////////////////////////////////
-        //JutakuData.xml Read　②
-        String kaishuContents = targetSource.get(3).get("kaishuContents").toString();
-        String kaishuJigyoshaName = targetSource.get(3).get("kaishuJigyoshaName").toString();
-        String kaishuTaishoAddress1 = targetSource.get(3).get("kaishuTaishoAddress").toString();
-        String chakkoDueDate = targetSource.get(3).get("chakkoDueDate").toString();
-        String kanseiDueDate = targetSource.get(3).get("kanseiDueDate").toString();
-        String estimatedAmount = targetSource.get(3).get("estimatedAmount").toString();
-        /////////////////////////////////////////////////////////////////////////////////////////
-
-        //TO DO  JutakuData.xml Write　③
-        panel.getJutakuJizenShinseiDetailInput().
-                getJutakuKaishuDetailInput().getTxtKaishuContents().setValue(new RString(kaishuContents));
-
-        panel.getJutakuJizenShinseiDetailInput().
-                getJutakuKaishuDetailInput().getTxtKaishuJigyoshaName().setValue(new RString(kaishuJigyoshaName));
-
-        panel.getJutakuJizenShinseiDetailInput().
-                getJutakuKaishuDetailInput().getTxtKaishuTaishoAddress().setValue(new RString(kaishuTaishoAddress1));
-        panel.getJutakuJizenShinseiDetailInput().
-                getJutakuKaishuDetailInput().getTxtChakkoDueDate().setValue(new RDate(chakkoDueDate));
-
-        panel.getJutakuJizenShinseiDetailInput().
-                getJutakuKaishuDetailInput().getTxtKanseiDueDate().setValue(new RDate(kanseiDueDate));
-
-        panel.getJutakuJizenShinseiDetailInput().
-                getJutakuKaishuDetailInput().getTxtEstimatedAmount().setValue(new Decimal(estimatedAmount));
+//        /////////////////////////////////////////////////////////////////////////////////////////
+//        //JutakuData.xml Read　②
+//        String kaishuContents = targetSource.get(3).get("kaishuContents").toString();
+//        String kaishuJigyoshaName = targetSource.get(3).get("kaishuJigyoshaName").toString();
+//        String kaishuTaishoAddress1 = targetSource.get(3).get("kaishuTaishoAddress").toString();
+//        String chakkoDueDate = targetSource.get(3).get("chakkoDueDate").toString();
+//        String kanseiDueDate = targetSource.get(3).get("kanseiDueDate").toString();
+//        String estimatedAmount = targetSource.get(3).get("estimatedAmount").toString();
+//        /////////////////////////////////////////////////////////////////////////////////////////
+//
+//        //TO DO  JutakuData.xml Write　③
+//        panel.getJutakuJizenShinseiDetailInput().
+//                getJutakuKaishuDetailInput().getTxtKaishuContents().setValue(new RString(kaishuContents));
+//
+//        panel.getJutakuJizenShinseiDetailInput().
+//                getJutakuKaishuDetailInput().getTxtKaishuJigyoshaName().setValue(new RString(kaishuJigyoshaName));
+//
+//        panel.getJutakuJizenShinseiDetailInput().
+//                getJutakuKaishuDetailInput().getTxtKaishuTaishoAddress().setValue(new RString(kaishuTaishoAddress1));
+//        panel.getJutakuJizenShinseiDetailInput().
+//                getJutakuKaishuDetailInput().getTxtChakkoDueDate().setValue(new RDate(chakkoDueDate));
+//
+//        panel.getJutakuJizenShinseiDetailInput().
+//                getJutakuKaishuDetailInput().getTxtKanseiDueDate().setValue(new RDate(kanseiDueDate));
+//
+//        panel.getJutakuJizenShinseiDetailInput().
+//                getJutakuKaishuDetailInput().getTxtEstimatedAmount().setValue(new Decimal(estimatedAmount));
     }
 
     /*
@@ -256,23 +241,22 @@ public class JutakuKaishuJizenShinseiContentsPanel {
      */
     private void setShinseiReason(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
 
-        /////////////////////////////////////////////////////////////////////////////////////////
-        //JutakuData.xml Read　②
-        String createDate = targetSource.get(6).get("createDate").toString();
-        String creationJigyoshaNo = targetSource.get(6).get("creationJigyoshaNo").toString();
-        String creationJigyoshaName = targetSource.get(6).get("creationJigyoshaName").toString();
-        String creatorKanaName = targetSource.get(6).get("creatorKanaName").toString();
-        String creatorName = targetSource.get(6).get("creatorName").toString();
-       /////////////////////////////////////////////////////////////////////////////////////////
-
-        //TO DO  JutakuData.xml Write　③
-        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
-        panel.getJutakuKaishuJizenShinseiReason().getTxtCreateDate().setValue(new RDate(createDate));
-        panel.getJutakuKaishuJizenShinseiReason().getTxtCreationJigyoshaNo().setValue(new RString(creationJigyoshaNo));
-        panel.getJutakuKaishuJizenShinseiReason().getTxtCreationJigyoshaName().setValue(new RString(creationJigyoshaName));
-        panel.getJutakuKaishuJizenShinseiReason().getTxtCreatorKanaName().setValue(new RString(creatorKanaName));
-        panel.getJutakuKaishuJizenShinseiReason().getTxtCreatorName().setValue(new RString(creatorName));
-
+//        /////////////////////////////////////////////////////////////////////////////////////////
+//        //JutakuData.xml Read　②
+//        String createDate = targetSource.get(6).get("createDate").toString();
+//        String creationJigyoshaNo = targetSource.get(6).get("creationJigyoshaNo").toString();
+//        String creationJigyoshaName = targetSource.get(6).get("creationJigyoshaName").toString();
+//        String creatorKanaName = targetSource.get(6).get("creatorKanaName").toString();
+//        String creatorName = targetSource.get(6).get("creatorName").toString();
+//       /////////////////////////////////////////////////////////////////////////////////////////
+//
+//        //TO DO  JutakuData.xml Write　③
+//        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
+//        panel.getJutakuKaishuJizenShinseiReason().getTxtCreateDate().setValue(new RDate(createDate));
+//        panel.getJutakuKaishuJizenShinseiReason().getTxtCreationJigyoshaNo().setValue(new RString(creationJigyoshaNo));
+//        panel.getJutakuKaishuJizenShinseiReason().getTxtCreationJigyoshaName().setValue(new RString(creationJigyoshaName));
+//        panel.getJutakuKaishuJizenShinseiReason().getTxtCreatorKanaName().setValue(new RString(creatorKanaName));
+//        panel.getJutakuKaishuJizenShinseiReason().getTxtCreatorName().setValue(new RString(creatorName));
     }
 
     /*
@@ -280,26 +264,26 @@ public class JutakuKaishuJizenShinseiContentsPanel {
      */
     private void setShinseiKozaInfo(JutakuKaishuJizenShinseiContentsPanelDiv panel) {
 
-        panel.getJutakuKaishuJizenShinseiKoza().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
-
-        /////////////////////////////////////////////////////////////////////////////////////////
-        //JutakuData.xml Read　②
-        String kinyuKikanCode = targetSource.get(7).get("kinyuKikanCode").toString();
-        String kinyuKikanName = targetSource.get(7).get("kinyuKikanName").toString();
-        String kinyuBranchCode = targetSource.get(7).get("kinyuBranchCode").toString();
-        String kinyuBranchName = targetSource.get(7).get("kinyuBranchName").toString();
-        String kozaMeigininKanaName = targetSource.get(7).get("kozaMeigininKanaName").toString();
-        String kozaMeigininName = targetSource.get(7).get("kozaMeigininName").toString();
-        /////////////////////////////////////////////////////////////////////////////////////////
-
-        //TO DO  JutakuData.xml Write　③
-        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
-        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKinyuKikanCode().setValue(new RString(kinyuKikanCode));
-        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKinyuKikanName().setValue(new RString(kinyuKikanName));
-        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKinyuKikanBrunchCode().setValue(new RString(kinyuBranchCode));
-        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKinyuKikanBrunchName().setValue(new RString(kinyuBranchName));
-        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKozaMeigininKana().setValue(new RString(kozaMeigininKanaName));
-        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKozaMeiginin().setValue(new RString(kozaMeigininName));
+//        panel.getJutakuKaishuJizenShinseiKoza().getRadPayMethod().setSelectedItem(new RString("payToKoza"));
+//
+//        /////////////////////////////////////////////////////////////////////////////////////////
+//        //JutakuData.xml Read　②
+//        String kinyuKikanCode = targetSource.get(7).get("kinyuKikanCode").toString();
+//        String kinyuKikanName = targetSource.get(7).get("kinyuKikanName").toString();
+//        String kinyuBranchCode = targetSource.get(7).get("kinyuBranchCode").toString();
+//        String kinyuBranchName = targetSource.get(7).get("kinyuBranchName").toString();
+//        String kozaMeigininKanaName = targetSource.get(7).get("kozaMeigininKanaName").toString();
+//        String kozaMeigininName = targetSource.get(7).get("kozaMeigininName").toString();
+//        /////////////////////////////////////////////////////////////////////////////////////////
+//
+//        //TO DO  JutakuData.xml Write　③
+//        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
+//        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKinyuKikanCode().setValue(new RString(kinyuKikanCode));
+//        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKinyuKikanName().setValue(new RString(kinyuKikanName));
+//        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKinyuKikanBrunchCode().setValue(new RString(kinyuBranchCode));
+//        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKinyuKikanBrunchName().setValue(new RString(kinyuBranchName));
+//        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKozaMeigininKana().setValue(new RString(kozaMeigininKanaName));
+//        panel.getJutakuKaishuJizenShinseiKoza().getKozaPayment().getTxtKozaMeiginin().setValue(new RString(kozaMeigininName));
     }
 
     private List<dgJutakuKaishuDetail_Row> getShikyuShinseiInputData(JutakuKaishuDetailInputDiv div) {

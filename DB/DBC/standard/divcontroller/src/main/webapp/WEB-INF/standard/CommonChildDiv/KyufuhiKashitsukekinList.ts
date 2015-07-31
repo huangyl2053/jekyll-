@@ -46,12 +46,14 @@ module DBC {
                 editTypes.addEditType("AddButtonVisible", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 editTypes.addEditType("AddButtonDisplayNone", UZA.EditTypeEnumForPublicProperty.BooleanType);
                 editTypes.addEditType("ListHeight", UZA.EditTypeEnumForPublicProperty.StringType);
+                /*
                 editTypes.addEditType("ListOnSelect", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("ListOnSelectByDblClick", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("onClickAddButton", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("ListOnSelectBySelectButton", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("ListOnSelectByModifyButton", UZA.EditTypeEnumForPublicProperty.StringType);
                 editTypes.addEditType("ListOnSelectByDeleteButton", UZA.EditTypeEnumForPublicProperty.StringType);
+            */
                 return editTypes;
             }
 
@@ -89,7 +91,7 @@ module DBC {
             public setListHeight(value) {
                 this.controls.dgKyufuhiKashitsukekinList().height = value;
             }
-
+            /*
             public getListOnSelect() {
                 return this.controls.dgKyufuhiKashitsukekinList().onSelect;
             }
@@ -137,7 +139,7 @@ module DBC {
             public setListOnSelectByDeleteButton(value) {
                 this.controls.dgKyufuhiKashitsukekinList().onSelectByDeleteButton = value;
             }
-
+*/
         }
     }
 }

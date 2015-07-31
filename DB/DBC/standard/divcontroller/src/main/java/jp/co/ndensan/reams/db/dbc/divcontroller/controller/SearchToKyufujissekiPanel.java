@@ -26,40 +26,32 @@ public class SearchToKyufujissekiPanel {
      * @return ResponseData
      */
     public ResponseData onLoad(SearchToKyufujissekiPanelDiv panel) {
-        ResponseData<SearchToKyufujissekiPanelDiv> response = new ResponseData<>();
         setSearchData(panel);
 
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     private void setSearchData(SearchToKyufujissekiPanelDiv panel) {
 
-        List<HashMap> ymlData = ymlData();
-
-        //事業者NO
-        panel.getTxtJigyoshaNo().setValue(new RString(
-                ymlData.get(0).get("jigyoshaNo").toString()));
-        //事業者名
-        panel.getTxtJigyoshaName().setValue(new RString(
-                ymlData.get(0).get("jigyoshaName").toString()));
-
-        //被保険番号
-        panel.getTxtHihoNo().setValue(new RString(
-                ymlData.get(0).get("hihoNo").toString()));
-        //事業者名
-        panel.getTxtHihoName().setValue(new RString(
-                ymlData.get(0).get("hihoName").toString()));
-
-        //提供年月 from
-        panel.getTxtTeikyoYMRange().setFromValue(new RDate(
-                ymlData.get(0).get("teikyoYMRangefromPlaceHolder").toString()));
-        //提供年月 to
-        panel.getTxtTeikyoYMRange().setToValue(new RDate(
-                ymlData.get(0).get("teikyoYMRangetoPlaceHolder").toString()));
-    }
-
-    private List<HashMap> ymlData() {
-        return YamlLoader.DBC.loadAsList(new RString("dbc1400011/KagoMoshitateSearchToKyufujisseki.yml"));
+//        //事業者NO
+//        panel.getTxtJigyoshaNo().setValue(new RString(
+//                ymlData.get(0).get("jigyoshaNo").toString()));
+//        //事業者名
+//        panel.getTxtJigyoshaName().setValue(new RString(
+//                ymlData.get(0).get("jigyoshaName").toString()));
+//
+//        //被保険番号
+//        panel.getTxtHihoNo().setValue(new RString(
+//                ymlData.get(0).get("hihoNo").toString()));
+//        //事業者名
+//        panel.getTxtHihoName().setValue(new RString(
+//                ymlData.get(0).get("hihoName").toString()));
+//
+//        //提供年月 from
+//        panel.getTxtTeikyoYMRange().setFromValue(new RDate(
+//                ymlData.get(0).get("teikyoYMRangefromPlaceHolder").toString()));
+//        //提供年月 to
+//        panel.getTxtTeikyoYMRange().setToValue(new RDate(
+//                ymlData.get(0).get("teikyoYMRangetoPlaceHolder").toString()));
     }
 }

@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC11400",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "所得照会票一括発行",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB1140001",
+     "toLayoutTitle": "所得照会票一括発行",
+     "toState": "所得照会票一括発行"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB1140001",
+     "layoutTitle": "所得照会票一括発行",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

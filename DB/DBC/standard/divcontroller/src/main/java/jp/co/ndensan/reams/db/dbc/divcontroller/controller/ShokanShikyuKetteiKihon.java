@@ -22,10 +22,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShokanShikyuKetteiKihon {
 
-    private List<HashMap> getYaml() {
-        return YamlLoader.DBC.loadAsList(new RString("dbc0100000/KyotakuKeikakuTodokedeDetail.yml"));
-    }
-
     /**
      * 画面ロード時の処理です。
      *
@@ -33,18 +29,15 @@ public class ShokanShikyuKetteiKihon {
      * @return ResponseData
      */
     public ResponseData onLoad(ShokanShikyuKetteiKihonDiv panel) {
-        ResponseData<ShokanShikyuKetteiKihonDiv> response = new ResponseData<>();
         setKihonData(panel);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     private void setKihonData(ShokanShikyuKetteiKihonDiv panel) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
-        ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
-        int rowId = 0;
+//        ShikibetsuCode 識別コード = new ShikibetsuCode(cg.getAsRString("識別コード"));
+//        int rowId = 0;
 
 //        KaigoShikakuKihon.setData(panel.getShokanShikyuKetteiKihonAtena(), panel.getShokanShikyuKetteiKaigoKihon(), 識別コード, rowId);
     }
-
 }
