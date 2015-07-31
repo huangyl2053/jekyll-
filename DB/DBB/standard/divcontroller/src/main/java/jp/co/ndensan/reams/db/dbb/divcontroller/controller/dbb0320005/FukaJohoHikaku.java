@@ -11,11 +11,11 @@ import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.message.DbbWarningMe
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.ViewStateKeyCreator;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005.FukaJohoHikakuDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005.HonSantei1Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005.HonSantei2Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005.KariSantei1Div;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320005.KariSantei2Div;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.FukaJohoHikakuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.HonSantei1Div;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.HonSantei2Div;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.KariSantei1Div;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.KariSantei2Div;
 import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbz.business.viewstate.MaeRirekiKey;

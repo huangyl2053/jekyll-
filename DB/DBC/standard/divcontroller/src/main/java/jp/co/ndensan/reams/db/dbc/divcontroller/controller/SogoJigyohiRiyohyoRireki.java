@@ -9,9 +9,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoRirekiList.ServiceRiyohyoRirekiListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoRirekiList.ServiceRiyohyoRirekiListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.SogoJigyohiRiyohyoRirekiDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoRirekiList.dgServiceRiyohyoRirekiList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoRirekiList.dgServiceRiyohyoRirekiList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -92,7 +92,6 @@ public class SogoJigyohiRiyohyoRireki {
 //        TextBoxDate txtBoxTodokedeYMDInvisible = new TextBoxDate();
 //        txtBoxTodokedeYMDInvisible.setValue(new RDate(txtTodokedeYMDInvisible));
         return new dgServiceRiyohyoRirekiList_Row(
-                btn,
                 new RString(txtJotai),
                 //                txtBoxTodokedeYMDInvisible,
                 new RString(txtTodokedeYMD),

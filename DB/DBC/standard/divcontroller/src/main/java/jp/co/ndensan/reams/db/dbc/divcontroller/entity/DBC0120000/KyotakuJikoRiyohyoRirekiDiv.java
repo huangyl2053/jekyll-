@@ -1,18 +1,17 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.DBC0120000;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoRirekiList.ServiceRiyohyoRirekiListDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceRiyohyoRirekiList.ServiceRiyohyoRirekiListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KyotakuJikoRiyohyoRireki のクラスファイル 
- * 
+ * KyotakuJikoRiyohyoRireki のクラスファイル
+ *
  * @author 自動生成
  */
 public class KyotakuJikoRiyohyoRirekiDiv extends Panel {
@@ -22,6 +21,7 @@ public class KyotakuJikoRiyohyoRirekiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("KyotakuJikoRiyohyoRirekiList")
     private ServiceRiyohyoRirekiListDiv KyotakuJikoRiyohyoRirekiList;
     @JsonProperty("btnGaitoshaReturn")
@@ -40,7 +40,7 @@ public class KyotakuJikoRiyohyoRirekiDiv extends Panel {
 
     @JsonProperty("KyotakuJikoRiyohyoRirekiList")
     public void setKyotakuJikoRiyohyoRirekiList(ServiceRiyohyoRirekiListDiv KyotakuJikoRiyohyoRirekiList) {
-        this.KyotakuJikoRiyohyoRirekiList=KyotakuJikoRiyohyoRirekiList;
+        this.KyotakuJikoRiyohyoRirekiList = KyotakuJikoRiyohyoRirekiList;
     }
 
     @JsonProperty("btnGaitoshaReturn")
@@ -50,7 +50,7 @@ public class KyotakuJikoRiyohyoRirekiDiv extends Panel {
 
     @JsonProperty("btnGaitoshaReturn")
     public void setBtnGaitoshaReturn(Button btnGaitoshaReturn) {
-        this.btnGaitoshaReturn=btnGaitoshaReturn;
+        this.btnGaitoshaReturn = btnGaitoshaReturn;
     }
 
 }

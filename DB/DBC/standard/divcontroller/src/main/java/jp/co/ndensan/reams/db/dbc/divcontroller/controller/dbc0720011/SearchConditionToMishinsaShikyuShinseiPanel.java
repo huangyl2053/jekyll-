@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n8223 朴
  */
+//TODO n3317塚田　Yamlを使わないようにする
 public class SearchConditionToMishinsaShikyuShinseiPanel {
 
     /**
@@ -27,13 +28,9 @@ public class SearchConditionToMishinsaShikyuShinseiPanel {
      */
     //デモでは初期値を出しておかないので、requestSettingsにセットしていない。
     public ResponseData<SearchConditionToMishinsaShikyuShinseiPanelDiv> onLoad(SearchConditionToMishinsaShikyuShinseiPanelDiv panel) {
-        ResponseData<SearchConditionToMishinsaShikyuShinseiPanelDiv> response = new ResponseData<>();
-
         setMSearchConditionToMishinsaShikyuShinsei(panel);
 
-        response.data = panel;
-        return response;
-
+        return ResponseData.of(panel).respond();
     }
 
     /*
@@ -41,22 +38,10 @@ public class SearchConditionToMishinsaShikyuShinseiPanel {
      */
     private void setMSearchConditionToMishinsaShikyuShinsei(SearchConditionToMishinsaShikyuShinseiPanelDiv panel) {
 
-        //TO DO
-        String ymlDataName = "MishinsaShikyuShinseSearchCondition.yml";
-        //TO DO
-        List<HashMap> ymlData = ymlData(ymlDataName);
-
-        String shikyuShinseiDateFrom = ymlData.get(0).get("shikyuShinseiDateFrom").toString();
-        String shikyuShinseiDateTo = ymlData.get(0).get("shikyuShinseiDateTo").toString();
-
-        panel.getTxtShikyuShinseiDate().setFromValue(new RDate(shikyuShinseiDateFrom));
-        panel.getTxtShikyuShinseiDate().setToValue(new RDate(shikyuShinseiDateTo));
-    }
-
-    /*
-     * YML DATA 設定する
-     */
-    private List<HashMap> ymlData(String ymlDataName) {
-        return YamlLoader.DBC.loadAsList(new RString("dbc0720011/" + ymlDataName));
+//        String shikyuShinseiDateFrom = ymlData.get(0).get("shikyuShinseiDateFrom").toString();
+//        String shikyuShinseiDateTo = ymlData.get(0).get("shikyuShinseiDateTo").toString();
+//
+//        panel.getTxtShikyuShinseiDate().setFromValue(new RDate(shikyuShinseiDateFrom));
+//        panel.getTxtShikyuShinseiDate().setToValue(new RDate(shikyuShinseiDateTo));
     }
 }

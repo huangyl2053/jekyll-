@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3317 塚田 萌
  */
+//TODO n3317塚田　Yamlを使わないようにする
 public class YoguShinsaHihokenshaPanel {
 
     /**
@@ -32,13 +33,9 @@ public class YoguShinsaHihokenshaPanel {
     public ResponseData<YoguShinsaHihokenshaPanelDiv> onLoad(YoguShinsaHihokenshaPanelDiv panel) {
         ResponseData<YoguShinsaHihokenshaPanelDiv> response = new ResponseData<>();
 
-        List<HashMap> targetSourceList = YamlLoader.DBC.loadAsList(new RString("dbc0610011/demoKojin.yml"));
-        ControlGenerator targetSource = new ControlGenerator(targetSourceList.get(0));
-
-        ShikibetsuCode 識別コード = new ShikibetsuCode(targetSource.getAsRString("識別コード"));
-        int rowId = 0;
-//        KaigoShikakuKihon.setData(panel.getKaigoAtenaInfo(), panel.getKaigoShikakuKihon(), 識別コード, rowId);
-        response.data = panel;
-        return response;
+//        ControlGenerator targetSource = new ControlGenerator(targetSourceList.get(0));
+//        ShikibetsuCode 識別コード = new ShikibetsuCode(targetSource.getAsRString("識別コード"));
+//        int rowId = 0;
+        return ResponseData.of(panel).respond();
     }
 }

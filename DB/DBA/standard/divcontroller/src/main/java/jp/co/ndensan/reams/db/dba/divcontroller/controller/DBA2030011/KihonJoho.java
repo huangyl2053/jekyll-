@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.DBA2030011;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.JushochiTokureiMenuType;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.message.DbaErrorMessages;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA2030011.KihonJohoDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.KihonJohoDiv;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;

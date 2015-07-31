@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author N3317 塚田 萌
  */
+//TODO n3317塚田　Yamlを使わないようにする
 public class JutakuKaishuShinsaHihokenshaPanel {
 
     /**
@@ -29,15 +30,12 @@ public class JutakuKaishuShinsaHihokenshaPanel {
      * @return response
      */
     public ResponseData<JutakuKaishuShinsaHihokenshaPanelDiv> onLoad(JutakuKaishuShinsaHihokenshaPanelDiv panel) {
-        ResponseData<JutakuKaishuShinsaHihokenshaPanelDiv> response = new ResponseData<>();
-
-        List<HashMap> targetSourceList = YamlLoader.DBC.loadAsList(new RString("dbc0720011/demoKojin.yml"));
-        ControlGenerator targetSource = new ControlGenerator(targetSourceList.get(0));
-
-        ShikibetsuCode 識別コード = new ShikibetsuCode(targetSource.getAsRString("識別コード"));
-        int rowId = 0;
+//        ControlGenerator targetSource = new ControlGenerator(targetSourceList.get(0));
+//
+//        ShikibetsuCode 識別コード = new ShikibetsuCode(targetSource.getAsRString("識別コード"));
+//        int rowId = 0;
 //        KaigoShikakuKihon.setData(panel.getKaigoAtena(), panel.getKaigoShikakuKihon(), 識別コード, rowId);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 }

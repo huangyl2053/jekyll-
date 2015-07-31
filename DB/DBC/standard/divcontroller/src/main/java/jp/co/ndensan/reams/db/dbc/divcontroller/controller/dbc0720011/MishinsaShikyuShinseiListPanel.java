@@ -38,12 +38,8 @@ public class MishinsaShikyuShinseiListPanel {
      * @return PanelDivのResponseData
      */
     public ResponseData<MishinsaShikyuShinseiListPanelDiv> onLoad(MishinsaShikyuShinseiListPanelDiv panel) {
-        ResponseData<MishinsaShikyuShinseiListPanelDiv> response = new ResponseData<>();
+//        panel.getTxtShinsaDate().setValue(RDate.getNowDate());
 
-        panel.getTxtShinsaDate().setValue(RDate.getNowDate());
-
-        //requestSettingsにセットしていない。
-        //検索ボタンを押してから時間がかかるので、オンロード時にデータセットしておく。パネルは閉じているので。
         setMishinsaShikyuShinseiList(panel);
 
         //TO DO
@@ -52,9 +48,7 @@ public class MishinsaShikyuShinseiListPanel {
         dataSource.add(new KeyValueDataSource(new RString("threeStep"), new RString("３段階リセットの判定を行う")));
         panel.getSystemCheck().getChkResetCheck().setSelectedItems(dataSource);
 
-        response.data = panel;
-        return response;
-
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -64,12 +58,10 @@ public class MishinsaShikyuShinseiListPanel {
      * @return PanelDivのResponseData
      */
     public ResponseData<MishinsaShikyuShinseiListPanelDiv> onClick_btnSearchMishinsa(MishinsaShikyuShinseiListPanelDiv panel) {
-        ResponseData<MishinsaShikyuShinseiListPanelDiv> response = new ResponseData<>();
-
         //requestSettingでセットしない
         setMishinsaShikyuShinseiList(panel);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -79,7 +71,6 @@ public class MishinsaShikyuShinseiListPanel {
      * @return
      */
     public ResponseData<MishinsaShikyuShinseiListPanelDiv> onClick_btnShinsa(MishinsaShikyuShinseiListPanelDiv panel) {
-        ResponseData<MishinsaShikyuShinseiListPanelDiv> response = new ResponseData<>();
 
         int 不承認 = 3;
 //        if (is３段階チェックあり(panel.getDgMishinsaShikyuShinsei().getDataSource().get(不承認))) {
@@ -94,18 +85,16 @@ public class MishinsaShikyuShinseiListPanel {
         }
 //        }
         setAbleCommonButton();
-        response.data = panel;
-        return response;
 
+        return ResponseData.of(panel).respond();
     }
 
     public ResponseData<MishinsaShikyuShinseiListPanelDiv> onSelectByModifyButton(MishinsaShikyuShinseiListPanelDiv panel) {
-        ResponseData<MishinsaShikyuShinseiListPanelDiv> response = new ResponseData<>();
 
         dgMishinsaShikyuShinsei_Row selectedRow = panel.getDgMishinsaShikyuShinsei().getClickedItem();
         ViewStateHolder.put("selectedRow", selectedRow);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -116,7 +105,6 @@ public class MishinsaShikyuShinseiListPanel {
      */
     public ResponseData<MishinsaShikyuShinseiListPanelDiv> onClick_btnModifyShinseiContents(
             MishinsaShikyuShinseiListPanelDiv panel) {
-        ResponseData<MishinsaShikyuShinseiListPanelDiv> response = new ResponseData<>();
 
         int 不承認 = 3;
         panel.getDgMishinsaShikyuShinsei().getDataSource().get(不承認).setRowState(RowState.Modified);
@@ -146,9 +134,7 @@ public class MishinsaShikyuShinseiListPanel {
 //                mishinsaShikyuShinsei_Row.setTxtShinsaResult(new RString("承認"));
 //            }
 //        }
-        response.data = panel;
-        return response;
-
+        return ResponseData.of(panel).respond();
     }
 
     private void setAbleCommonButton() {
@@ -164,10 +150,7 @@ public class MishinsaShikyuShinseiListPanel {
      */
     private void setMishinsaShikyuShinseiList(MishinsaShikyuShinseiListPanelDiv panel) {
 
-        //TO DO
-        String ymlDataName = "MishinsaShikyuShinseiList.yml";
-
-        List<dgMishinsaShikyuShinsei_Row> arraydata = createRowMishinsaShikyuShinseiTestData(ymlDataName);
+        List<dgMishinsaShikyuShinsei_Row> arraydata = createRowMishinsaShikyuShinseiTestData();
         DataGrid<dgMishinsaShikyuShinsei_Row> grid = panel.getDgMishinsaShikyuShinsei();
 
         grid.setDataSource(arraydata);
@@ -176,18 +159,10 @@ public class MishinsaShikyuShinseiListPanel {
     /*
      * 住宅改修費支給申請審査 (YMLDATA)未審査支給申請一覧のデータを設定する。
      */
-    private List<dgMishinsaShikyuShinsei_Row> createRowMishinsaShikyuShinseiTestData(String ymlDataName) {
+    private List<dgMishinsaShikyuShinsei_Row> createRowMishinsaShikyuShinseiTestData() {
 
         List<dgMishinsaShikyuShinsei_Row> arrayData = new ArrayList<>();
-
-        List<HashMap> ymlData = ymlData(ymlDataName);
-
-        //TO DO データを増える場合。
-        for (int i = 0; i < ymlData.size(); i++) {
-            HashMap hashMap = ymlData.get(i);
-            hashMap(hashMap, arrayData);
-        }
-
+        arrayData.add(new dgMishinsaShikyuShinsei_Row());
         return arrayData;
     }
 
@@ -276,11 +251,4 @@ public class MishinsaShikyuShinseiListPanel {
 //       String errMessage = "【未審査支給申請一覧】3行：相違有り3段階をリセットしてください";
 //       response.addMessage(new WarningMessage("エラー", errMessage), DivcontrollerMethod.method(SingleButtonType.Free,null));
 //    }
-    /*
-     * YML DATA 設定する
-     */
-    private List<HashMap> ymlData(String ymlDataName) {
-
-        return YamlLoader.DBC.loadAsList(new RString("dbc0720011/" + ymlDataName));
-    }
 }

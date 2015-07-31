@@ -8,25 +8,30 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.dbb0320001;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.ViewStateKeyCreator;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.FukakonkyoAndKiwariDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.FukakonkyoNengakuDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.KikanDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.tblFukaKonkyoDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.DBB0320001.tblFukakonkyoMeisaiDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukakonkyoAndKiwariDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.FukakonkyoNengakuDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.KikanDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.tblFukaKonkyoDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.tblFukakonkyoMeisaiDiv;
 import jp.co.ndensan.reams.db.dbz.business.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbz.business.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.FukaNendo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.IViewStateValue;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStates;
 import jp.co.ndensan.reams.db.dbz.model.FukaTaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.model.fuka.FukaModel;
+import jp.co.ndensan.reams.db.dbz.model.fuka.HokenryoDankaiModel;
 import jp.co.ndensan.reams.db.dbz.realservice.FukaManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -39,6 +44,26 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class FukakonkyoAndKiwari {
 
     /**
+     * コントロールdivが「生成」された際の処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<FukakonkyoAndKiwariDiv> onLoad(FukakonkyoAndKiwariDiv div) {
+        return initialize(div);
+    }
+
+    /**
+     * コントロールdivが「非表示」→「表示」となった際の処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<FukakonkyoAndKiwariDiv> onActive(FukakonkyoAndKiwariDiv div) {
+        return reLoad(div);
+    }
+
+    /**
      * 初期処理です。
      *
      * @param div 賦課根拠・期割Div
@@ -46,16 +71,26 @@ public class FukakonkyoAndKiwari {
      */
     public ResponseData<FukakonkyoAndKiwariDiv> initialize(FukakonkyoAndKiwariDiv div) {
 
-        final FukaManager fukaFinder = new FukaManager();
-        FukaTaishoshaKey fukaTaishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
-
+        // TODO n8187久保田 画面遷移の確認のために一時的にコメントアウト
+        // ここから
+//        final FukaManager fukaFinder = new FukaManager();
+//        FukaTaishoshaKey fukaTaishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
+        // ここまで
 //        FukaModel model = FukaShokaiController.getFukaModelByFukaShokaiKey();
-        FukaModel model = fukaFinder.find賦課直近(
-                new ChoteiNendo(fukaTaishoshaKey.get調定年度()),
-                new FukaNendo(fukaTaishoshaKey.get賦課年度()),
-                fukaTaishoshaKey.get通知書番号()).findFirst().get();
-
-        FukaShokaiKey key = createFukaShokaiKey(model);
+        // TODO n8187久保田 画面遷移の確認のために仮データで賦課情報を作成。
+        // ここから
+        FukaModel model = new FukaModel();
+        FukaShokaiKey key = new FukaShokaiKey(ChoteiNendo.EMPTY, FukaNendo.EMPTY, TsuchishoNo.EMPTY,
+                RDateTime.MAX, HihokenshaNo.EMPTY, FlexibleDate.MAX,
+                RString.EMPTY, RDateTime.MAX, SanteiState.仮算定,
+                true, true, AtenaMeisho.EMPTY);
+//        FukaModel model = fukaFinder.find賦課直近(
+//                new ChoteiNendo(fukaTaishoshaKey.get調定年度()),
+//                new FukaNendo(fukaTaishoshaKey.get賦課年度()),
+//                fukaTaishoshaKey.get通知書番号()).findFirst().get();
+//
+//        FukaShokaiKey key = createFukaShokaiKey(model);
+        // ここまで
 
         return createResponseData(setDisplay(div, model, key));
     }
@@ -68,9 +103,17 @@ public class FukakonkyoAndKiwari {
      */
     public ResponseData<FukakonkyoAndKiwariDiv> reLoad(FukakonkyoAndKiwariDiv div) {
 
-        FukaModel model = FukaShokaiController.getFukaModelByFukaShokaiKey();
-
-        FukaShokaiKey key = createFukaShokaiKey(model);
+        // TODO n8187久保田 画面遷移の確認のために仮データで賦課情報を作成。
+        // ここから
+        FukaModel model = new FukaModel();
+        FukaShokaiKey key = new FukaShokaiKey(ChoteiNendo.EMPTY, FukaNendo.EMPTY, TsuchishoNo.EMPTY,
+                RDateTime.MAX, HihokenshaNo.EMPTY, FlexibleDate.MAX,
+                RString.EMPTY, RDateTime.MAX, SanteiState.仮算定,
+                true, true, AtenaMeisho.EMPTY);
+//        FukaModel model = FukaShokaiController.getFukaModelByFukaShokaiKey();
+//
+//        FukaShokaiKey key = createFukaShokaiKey(model);
+        // ここまで
 
         return createResponseData(setDisplay(div, model, key));
     }
@@ -91,22 +134,24 @@ public class FukakonkyoAndKiwari {
 
     private FukakonkyoAndKiwariDiv setDisplay(FukakonkyoAndKiwariDiv div, FukaModel model, FukaShokaiKey key) {
 
-        changeDivState(div, key.get算定状態());
-        set賦課根拠(div.getTblFukakonkyoMeisai(), model);
-
-        div.getCcdKiwarigaku().load(key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get処理日時());
-
-        set調定事由(div.getTblFukaKonkyo(), model);
-
-        if (key.get算定状態() == SanteiState.本算定) {
-            set賦課根拠Of本算定(div.getTblFukakonkyoMeisai(), model);
-            set期間(div.getKikan(), model);
-            set年額Of本算定(div.getFukakonkyoNengaku(), model);
-        } else if (key.get算定状態() == SanteiState.仮算定) {
-            set賦課根拠Of仮算定(div.getTblFukakonkyoMeisai(), model);
-            set年額Of仮算定(div, model);
-        }
-
+        // TODO n8187久保田 画面遷移の確認のために一時的にコメントアウト
+        // ここから
+//        changeDivState(div, key.get算定状態());
+//        set賦課根拠(div.getTblFukakonkyoMeisai(), model);
+//
+//        div.getCcdKiwarigaku().load(key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get処理日時());
+//
+//        set調定事由(div.getTblFukaKonkyo(), model);
+//
+//        if (key.get算定状態() == SanteiState.本算定) {
+//            set賦課根拠Of本算定(div.getTblFukakonkyoMeisai(), model);
+//            set期間(div.getKikan(), model);
+//            set年額Of本算定(div.getFukakonkyoNengaku(), model);
+//        } else if (key.get算定状態() == SanteiState.仮算定) {
+//            set賦課根拠Of仮算定(div.getTblFukakonkyoMeisai(), model);
+//            set年額Of仮算定(div, model);
+//        }
+        // ここまで
         return div;
     }
 
@@ -285,8 +330,6 @@ public class FukakonkyoAndKiwari {
     }
 
     private ResponseData<FukakonkyoAndKiwariDiv> createResponseData(FukakonkyoAndKiwariDiv div) {
-        ResponseData<FukakonkyoAndKiwariDiv> response = new ResponseData<>();
-        response.data = div;
-        return response;
+        return ResponseData.of(div).respond();
     }
 }

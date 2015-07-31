@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.DBA2030011;
 
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.JushochiTokureiMenuType;
 import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.message.DbaErrorMessages;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA2030011.ShikakuShosaiDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.DBA2030011.KihonJohoDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.ShikakuShosaiDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.KihonJohoDiv;
 import jp.co.ndensan.reams.db.dba.model.relate.shikakuido.JushochiTokureiModel;
 import jp.co.ndensan.reams.db.dba.realservice.JushochiTokureiRegister;
 import jp.co.ndensan.reams.db.dbz.business.config.kyotsutokei.GappeiJohoKanriConfig;
@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.JushochiTokureiRirekiListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.jushochitokureirirekilist.util.JushochiTokureiExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.shikakuhenkorireki.ShikakuHenkoRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.model.shisetsunyutaisho.ShisetsuNyutaishoModel;
 import jp.co.ndensan.reams.db.dbz.model.TaishoshaKey;
@@ -50,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.InformationException;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -95,7 +95,7 @@ public class ShikakuShosai {
 
         setJushochiTokureiView(shikakuShosaiDiv, controlData);
 
-        return ResponseDatas.createSettingDataTo(shikakuShosaiDiv);
+        return ResponseData.of(shikakuShosaiDiv).respond();
     }
 
     private void initializeHokenshaJoho(ShikakuShosaiDiv shikakuShosaiDiv, Optional<HihokenshaDaichoModel> hihoDaicho, LasdecCode lasdecCode,
@@ -395,38 +395,21 @@ public class ShikakuShosai {
     private ResponseData<ShikakuShosaiDiv> checkInputDataBeforeBack(ShikakuShosaiDiv shikakuShosaiDiv) {
 
         ResponseData<ShikakuShosaiDiv> response = new ResponseData<>();
-        if (shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().hasChanged()
-                || shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().hasChangedInMeisai()
-                || shikakuShosaiDiv.getCcdShisetsuNyutaishoRirekiKanri().hasChanged()
-                || shikakuShosaiDiv.getCcdShisetsuNyutaishoRirekiKanri().hasChangedInMeisai()) {
-            response.data = shikakuShosaiDiv;
-            return response;
-        }
-
-        QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
-                UrQuestionMessages.入力内容の破棄.getMessage().evaluate(), "はい", "いいえ");
-
-        response.addMessage(message);
-        response.data = shikakuShosaiDiv;
-        return response;
-    }
-
-    /**
-     * {@link ShikakuShosai#onClick_btnUpdate}の処理が実行される前に、自動的に実行されるイベントです。<br/>
-     *
-     * @param shikakuShosaiDiv {@link ShikakuShosaiDiv 資格詳細Div}
-     * @param kihonDiv {@link KihonJohoDiv 基本情報Div}
-     * @return 資格取得情報Divを持つResponseData
-     */
-    public ResponseData<ShikakuShosaiDiv> onBeforeClick_btnUpdate(ShikakuShosaiDiv shikakuShosaiDiv, KihonJohoDiv kihonDiv) {
-        ResponseData<ShikakuShosaiDiv> response = new ResponseData<>();
-
-        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-        pairs.add(
-                ShikakuShosaiValidationHelper.validate保存前(null, null, null, null, null, JushochiTokureiExecutionStatus.Kaijo)
-        );
-
-        response.addValidationMessages(pairs);
+        //TODO n8187 久保田 画面遷移のためチェック処理を一時的にコメントアウト
+        //ここから
+//        if (shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().hasChanged()
+//                || shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().hasChangedInMeisai()
+//                || shikakuShosaiDiv.getCcdShisetsuNyutaishoRirekiKanri().hasChanged()
+//                || shikakuShosaiDiv.getCcdShisetsuNyutaishoRirekiKanri().hasChangedInMeisai()) {
+//            response.data = shikakuShosaiDiv;
+//            return response;
+//        }
+//
+//        QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+//                UrQuestionMessages.入力内容の破棄.getMessage().evaluate(), "はい", "いいえ");
+//
+//        response.addMessage(message);
+        //ここまで
         response.data = shikakuShosaiDiv;
         return response;
     }
@@ -441,25 +424,41 @@ public class ShikakuShosai {
      * @return 資格取得情報Divを持つResponseData
      */
     public ResponseData<ShikakuShosaiDiv> onClick_btnUpdate(ShikakuShosaiDiv shikakuShosaiDiv, KihonJohoDiv kihonDiv) throws InformationException {
-        if (shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().hasChanged()) {
+        if (!ResponseHolder.isReRequest()) {
+            ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+            pairs.add(
+                    ShikakuShosaiValidationHelper.validate保存前(null, null, null, null, null, JushochiTokureiExecutionStatus.Kaijo));
 
-            return onClick_btnUpdate_onYes(shikakuShosaiDiv, kihonDiv);
-
-            //TODO n8178 城間篤人 メッセージの「はい」をクリックする前に、状態遷移が動作してしまうため、確認用メッセージ表示を一時取りやめ。
-//            ResponseData<ShikakuShosaiDiv> response = new ResponseData<>();
-//            ICallbackMethod methodYes = DivcontrollerMethod.method(SingleButtonType.Free, "onClick_btnUpdate_onYes");
-//            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
-//                    UrQuestionMessages.保存の確認.getMessage().evaluate(), "はい", "いいえ");
-//            ICallbackMethod[] methods = {methodYes};
-//            message.addInvokeMethod(methods);
-//            response.addMessage(message);
-//            response.data = shikakuShosaiDiv;
-//            return response;
+            if (pairs.iterator().hasNext()) {
+                return ResponseData.of(shikakuShosaiDiv)
+                        .addMessage(pairs.iterator().next().getMessage())
+                        .respond();
+            }
         }
 
-        //TODO n8178 城間篤人 ApplicationExceptionでの実装ではメニューに遷移してしまうため問題がある。調査後、適切な処理に置き換える必要がある。 2015年3月
-        throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
-
+        //TODO n8187 久保田 画面遷移のため戻り値を一時的に修正。チェック処理を一時的にコメントアウト。
+        return ResponseData.of(shikakuShosaiDiv).respond();
+        //ここから
+//        if (shikakuShosaiDiv.getCcdJushochiTokureiRirekiList().hasChanged()) {
+//
+//            return onClick_btnUpdate_onYes(shikakuShosaiDiv, kihonDiv);
+//
+//            //TODO n8178 城間篤人 メッセージの「はい」をクリックする前に、状態遷移が動作してしまうため、確認用メッセージ表示を一時取りやめ。
+////            ResponseData<ShikakuShosaiDiv> response = new ResponseData<>();
+////            ICallbackMethod methodYes = DivcontrollerMethod.method(SingleButtonType.Free, "onClick_btnUpdate_onYes");
+////            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+////                    UrQuestionMessages.保存の確認.getMessage().evaluate(), "はい", "いいえ");
+////            ICallbackMethod[] methods = {methodYes};
+////            message.addInvokeMethod(methods);
+////            response.addMessage(message);
+////            response.data = shikakuShosaiDiv;
+////            return response;
+//        }
+//
+//        //TODO n8178 城間篤人 ApplicationExceptionでの実装ではメニューに遷移してしまうため問題がある。調査後、適切な処理に置き換える必要がある。 2015年3月
+//        throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
+//
+        //ここまで
     }
 
     /**
@@ -485,18 +484,7 @@ public class ShikakuShosai {
         );
 
         new JushochiTokureiRegister().save(jutokuModel);
-        return ResponseDatas.createSettingDataTo(shikakuShosaiDiv);
-    }
-
-    /**
-     * {@link ShikakuShosai#onClick_btnUpdate}の処理が正常に完了した後に、自動的に実行されるイベントです。<br/>
-     *
-     * @param shikakuShosaiDiv {@link ShikakuShosaiDiv 資格詳細Div}
-     * @param kihonDiv {@link KihonJohoDiv 基本情報Div}
-     * @return 資格取得情報Divを持つResponseData
-     */
-    public ResponseData<ShikakuShosaiDiv> onAfterClick_btnUpdate(ShikakuShosaiDiv shikakuShosaiDiv, KihonJohoDiv kihonDiv) {
-        return ResponseDatas.createSettingDataTo(shikakuShosaiDiv);
+        return ResponseData.of(shikakuShosaiDiv).respond();
     }
 
 }

@@ -21,10 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class JukyushaIdoSofuTaishoshaList {
 
-    private List<HashMap> getYaml() {
-        return YamlLoader.DBC.loadAsList(new RString("dbc0200000/JukyushaIdoSofuTaishoshaList.yml"));
-    }
-
     /**
      * 保険者情報送付一覧でリストを選択したときの処理です。
      *
@@ -32,18 +28,16 @@ public class JukyushaIdoSofuTaishoshaList {
      * @return ResponseData
      */
     public ResponseData<JukyushaIdoSofuTaishoshaListDiv> onSelectHokenshaSofuList(JukyushaIdoSofuTaishoshaListDiv panel) {
-        ResponseData<JukyushaIdoSofuTaishoshaListDiv> response = new ResponseData<>();
-
         setJukyushaIdoRenrakuhyoSakusei(panel);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     private void setJukyushaIdoRenrakuhyoSakusei(JukyushaIdoSofuTaishoshaListDiv panel) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
-        panel.getJukyushaIdoSofuTaishoshaListPrintSetting().getTxtIssueDate().setValue(RDate.getNowDate());
-        panel.getJukyushaIdoSofuTaishoshaListOutputOrder().getTxtSortName().setValue(cg.getAsRString("出力順名称"));
-        panel.getJukyushaIdoSofuTaishoshaListOutputOrder().getTxtKaiPage().setValue(cg.getAsRString("改頁"));
-        panel.getJukyushaIdoSofuTaishoshaListOutputOrder().getTxtSort().setValue(cg.getAsRString("出力順"));
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(0));
+//        panel.getJukyushaIdoSofuTaishoshaListPrintSetting().getTxtIssueDate().setValue(RDate.getNowDate());
+//        panel.getJukyushaIdoSofuTaishoshaListOutputOrder().getTxtSortName().setValue(cg.getAsRString("出力順名称"));
+//        panel.getJukyushaIdoSofuTaishoshaListOutputOrder().getTxtKaiPage().setValue(cg.getAsRString("改頁"));
+//        panel.getJukyushaIdoSofuTaishoshaListOutputOrder().getTxtSort().setValue(cg.getAsRString("出力順"));
     }
 }

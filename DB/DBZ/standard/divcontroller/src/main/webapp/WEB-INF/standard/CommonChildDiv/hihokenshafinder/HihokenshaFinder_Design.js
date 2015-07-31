@@ -60,7 +60,7 @@ var DBZ;
             };
 
             Controls.prototype.KaigoFinderDetail = function () {
-                return new UZA.Panel(this.convFiledName("KaigoFinder_KaigoFinderDetail"));
+                return new UZA.Panel(this.convFiledName("KaigoFinderDetail"));
             };
 
             Controls.prototype.lblHihokenshaJotai = function () {
@@ -87,6 +87,10 @@ var DBZ;
                 return new UZA.CheckBoxList(this.convFiledName("chkMinashiNigo"));
             };
 
+            Controls.prototype.ccdAtenaFinder = function () {
+                return new UAX.AtenaFinder.ModeController(this.convFiledName("ccdAtenaFinder"));
+            };
+
             Controls.prototype.ButtonsForHihokenshaFinder = function () {
                 return new UZA.Panel(this.convFiledName("ButtonsForHihokenshaFinder"));
             };
@@ -101,6 +105,10 @@ var DBZ;
 
             Controls.prototype.txtMaxNumber = function () {
                 return new UZA.TextBoxNum(this.convFiledName("txtMaxNumber"));
+            };
+
+            Controls.prototype.ccdSaikinShorisha = function () {
+                return new DBZ.KaigoSaikinShorishaRireki.ModeController(this.convFiledName("ccdSaikinShorisha"));
             };
 
             Controls.prototype.btnHihokenshaFinderHyoji = function () {

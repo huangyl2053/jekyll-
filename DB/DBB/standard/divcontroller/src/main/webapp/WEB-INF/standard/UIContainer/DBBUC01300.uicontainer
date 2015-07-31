@@ -1,0 +1,46 @@
+﻿{
+ "uiContainerName": "DBBUC01300",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "特別徴収平準化計算8月分",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0130001",
+     "toLayoutTitle": "特別徴収平準化計算（特別徴収8月分）",
+     "toState": "平準化計算"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0130001",
+     "layoutTitle": "特別徴収平準化計算（特別徴収8月分）",
+     "eventName": "計算",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB0130002",
+     "toLayoutTitle": "特別徴収平準化計算確定",
+     "toState": "平準化確定"
+    },
+    {
+     "id": "3",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB0130002",
+     "layoutTitle": "特別徴収平準化計算確定",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

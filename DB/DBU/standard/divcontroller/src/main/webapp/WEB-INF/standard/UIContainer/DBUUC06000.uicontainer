@@ -1,0 +1,74 @@
+﻿{
+ "uiContainerName": "DBUUC06000",
+ "displayWizard": false,
+ "subGyomuCode": "DBU",
+ "steps": [
+  {
+   "id": 1,
+   "name": "総合照会",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZU020001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "対象者検索"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZU020001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBU",
+     "toLayoutName": "DBU0600011",
+     "toLayoutTitle": "総合照会",
+     "toState": "総合照会"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0600011",
+     "layoutTitle": "総合照会",
+     "eventName": "検索に戻る",
+     "destroy": false,
+     "condition": "対象者検索",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZU020001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "対象者検索"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0600011",
+     "layoutTitle": "総合照会",
+     "eventName": "検索に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZU020001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBU",
+     "layoutName": "DBU0600011",
+     "layoutTitle": "総合照会",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

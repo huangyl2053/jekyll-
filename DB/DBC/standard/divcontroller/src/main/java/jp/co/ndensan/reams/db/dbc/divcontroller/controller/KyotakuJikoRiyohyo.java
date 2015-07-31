@@ -13,19 +13,15 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo.Servic
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo.ServiceRiyohyoBeppyoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo.ServiceRiyohyoBeppyoMeisaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo.ServiceRiyohyoBeppyoRiyoNissuDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo.ServiceRiyohyoDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo.ServiceRiyohyoInfoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo.dgServiceRiyohyoBeppyoList_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.ServiceRiyohyoInfo.dgServiceRiyohyoList_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ControlGenerator;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.YamlLoader;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridColumn;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
@@ -36,11 +32,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  *
  * @author N8187 久保田 英男
  */
+//TODO n3317塚田　Yamlを使わないように変更する
 public class KyotakuJikoRiyohyo {
-
-    private List<HashMap> getYaml() {
-        return YamlLoader.DBC.loadAsList(new RString("dbc0120000/KyotakuJikoRiyohyo.yml"));
-    }
 
     private enum 別票画面表示 {
 
@@ -62,13 +55,11 @@ public class KyotakuJikoRiyohyo {
      * @return ResponseData
      */
     public ResponseData onLoad(KyotakuJikoRiyohyoDiv panel) {
-        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
         setRiyohyoData(panel);
         setRiyohyoBeppyoVisible(panel, 別票画面表示.初期表示);
 // TODO N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンをDisableにする。共通パネルの仕様が固まってから対応する。
 //        kyotsu.getBtnRiyohyoSave().setDisabled(true);
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -78,15 +69,13 @@ public class KyotakuJikoRiyohyo {
      * @return ResponseData
      */
     public ResponseData onClickZengetsuCopy(KyotakuJikoRiyohyoDiv panel) {
-        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
         setSummaryZengetsuData(panel);
         setServiceRiyohyoYobi(panel);
         setServiceRiyohyoZengetsuData(panel);
         setServiceRiyohyoBeppyoZengetsuData(panel);
 // TODO N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンを有効/無効にする。共通パネルの仕様が固まってから対応する。
 //        validateRiyohyoSave(panel, kyotsu);
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -96,8 +85,6 @@ public class KyotakuJikoRiyohyo {
      * @return ResponseData
      */
     public ResponseData onClickRiyohyoMeisaiAdd(KyotakuJikoRiyohyoDiv panel) {
-        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
-
         DataGrid<dgServiceRiyohyoList_Row> dgRiyohyo = panel.getKyotakuJikoRiyohyoInfo().
                 getTabServiceRiyohyo().getServiceRiyohyo().getDgServiceRiyohyoList();
         List<dgServiceRiyohyoList_Row> dgRiyohyoList = dgRiyohyo.getDataSource();
@@ -105,58 +92,56 @@ public class KyotakuJikoRiyohyo {
         Button btnService = new Button();
         Button btnJigyosha = new Button();
 
-        for (int index = 0; index < 2; index++) {
-            ControlGenerator cg = new ControlGenerator(getYaml().get(index));
-            dgServiceRiyohyoList_Row rowItem = createサービス利用票(
-                    btnDelete,
-                    cg.getAsRString("提供開始時刻"),
-                    cg.getAsRString("提供終了時刻"),
-                    btnService,
-                    cg.getAsRString("サービス内容"),
-                    btnJigyosha,
-                    cg.getAsRString("サービス事業者"),
-                    cg.getAsRString("予定実績"),
-                    cg.getAsRString("1日"),
-                    cg.getAsRString("2日"),
-                    cg.getAsRString("3日"),
-                    cg.getAsRString("4日"),
-                    cg.getAsRString("5日"),
-                    cg.getAsRString("6日"),
-                    cg.getAsRString("7日"),
-                    cg.getAsRString("8日"),
-                    cg.getAsRString("9日"),
-                    cg.getAsRString("10日"),
-                    cg.getAsRString("11日"),
-                    cg.getAsRString("12日"),
-                    cg.getAsRString("13日"),
-                    cg.getAsRString("14日"),
-                    cg.getAsRString("15日"),
-                    cg.getAsRString("16日"),
-                    cg.getAsRString("17日"),
-                    cg.getAsRString("18日"),
-                    cg.getAsRString("19日"),
-                    cg.getAsRString("20日"),
-                    cg.getAsRString("21日"),
-                    cg.getAsRString("22日"),
-                    cg.getAsRString("23日"),
-                    cg.getAsRString("24日"),
-                    cg.getAsRString("25日"),
-                    cg.getAsRString("26日"),
-                    cg.getAsRString("27日"),
-                    cg.getAsRString("28日"),
-                    cg.getAsRString("29日"),
-                    cg.getAsRString("30日"),
-                    cg.getAsRString("31日"),
-                    cg.getAsRString("合計"));
-            rowItem.setRowState(RowState.Added);
-            dgRiyohyoList.add(rowItem);
-        }
-        dgRiyohyo.setDataSource(dgRiyohyoList);
+//        for (int index = 0; index < 2; index++) {
+//            ControlGenerator cg = new ControlGenerator(getYaml().get(index));
+//            dgServiceRiyohyoList_Row rowItem = createサービス利用票(
+//                    btnDelete,
+//                    cg.getAsRString("提供開始時刻"),
+//                    cg.getAsRString("提供終了時刻"),
+//                    btnService,
+//                    cg.getAsRString("サービス内容"),
+//                    btnJigyosha,
+//                    cg.getAsRString("サービス事業者"),
+//                    cg.getAsRString("予定実績"),
+//                    cg.getAsRString("1日"),
+//                    cg.getAsRString("2日"),
+//                    cg.getAsRString("3日"),
+//                    cg.getAsRString("4日"),
+//                    cg.getAsRString("5日"),
+//                    cg.getAsRString("6日"),
+//                    cg.getAsRString("7日"),
+//                    cg.getAsRString("8日"),
+//                    cg.getAsRString("9日"),
+//                    cg.getAsRString("10日"),
+//                    cg.getAsRString("11日"),
+//                    cg.getAsRString("12日"),
+//                    cg.getAsRString("13日"),
+//                    cg.getAsRString("14日"),
+//                    cg.getAsRString("15日"),
+//                    cg.getAsRString("16日"),
+//                    cg.getAsRString("17日"),
+//                    cg.getAsRString("18日"),
+//                    cg.getAsRString("19日"),
+//                    cg.getAsRString("20日"),
+//                    cg.getAsRString("21日"),
+//                    cg.getAsRString("22日"),
+//                    cg.getAsRString("23日"),
+//                    cg.getAsRString("24日"),
+//                    cg.getAsRString("25日"),
+//                    cg.getAsRString("26日"),
+//                    cg.getAsRString("27日"),
+//                    cg.getAsRString("28日"),
+//                    cg.getAsRString("29日"),
+//                    cg.getAsRString("30日"),
+//                    cg.getAsRString("31日"),
+//                    cg.getAsRString("合計"));
+//            rowItem.setRowState(RowState.Added);
+//            dgRiyohyoList.add(rowItem);
+//        }
+//        dgRiyohyo.setDataSource(dgRiyohyoList);
 // TODO N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンを有効/無効にする。共通パネルの仕様が固まってから対応する。
 //        validateRiyohyoSave(panel, kyotsu);
-
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -166,11 +151,10 @@ public class KyotakuJikoRiyohyo {
      * @return ResponseData
      */
     public ResponseData onClickServiceRiyohyoListDelete(KyotakuJikoRiyohyoDiv panel) {
-        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
         panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyo().
                 getDgServiceRiyohyoList().getActiveRow().setRowState(RowState.Deleted);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -180,12 +164,11 @@ public class KyotakuJikoRiyohyo {
      * @return ResponseData
      */
     public ResponseData onClickBeppyoMeisaiNew(KyotakuJikoRiyohyoDiv panel) {
-        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
         panel.getTxtBeppyoListSelectIndex().setValue(new RString("-1"));
         setRiyohyoBeppyoVisible(panel, 別票画面表示.明細);
         setRiyohyoBeppyoMeisaiData(panel);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -195,12 +178,11 @@ public class KyotakuJikoRiyohyo {
      * @return ResponseData
      */
     public ResponseData onClickBeppyoGokeiNew(KyotakuJikoRiyohyoDiv panel) {
-        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
         panel.getTxtBeppyoListSelectIndex().setValue(new RString("-1"));
         setRiyohyoBeppyoVisible(panel, 別票画面表示.合計);
         setRiyohyoBeppyoGokeiData(panel);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -210,7 +192,6 @@ public class KyotakuJikoRiyohyo {
      * @return ResponseData
      */
     public ResponseData onClickServiceRiyohyoBeppyoListSelect(KyotakuJikoRiyohyoDiv panel) {
-        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
         dgServiceRiyohyoBeppyoList_Row row = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().
                 getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getActiveRow();
         int index = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().
@@ -224,8 +205,7 @@ public class KyotakuJikoRiyohyo {
             beppyoMeisaiModify(panel);
         }
 
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -235,11 +215,10 @@ public class KyotakuJikoRiyohyo {
      * @return ResponseData
      */
     public ResponseData onClickServiceRiyohyoBeppyoListDelete(KyotakuJikoRiyohyoDiv panel) {
-        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
         panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList().
                 getDgServiceRiyohyoBeppyoList().getActiveRow().setRowState(RowState.Deleted);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -249,14 +228,12 @@ public class KyotakuJikoRiyohyo {
      * @return ResponseData
      */
     public ResponseData onClickBeppyoMeisaiKakutei(KyotakuJikoRiyohyoDiv panel) {
-        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
         setBeppyoListMeisaiKakutei(panel);
         initRiyohyoBeppyoMeisaiData(panel);
         setRiyohyoBeppyoVisible(panel, 別票画面表示.初期表示);
 // TODO N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンを有効/無効にする。共通パネルの仕様が固まってから対応する。
 //        validateRiyohyoSave(panel, kyotsu);
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -266,14 +243,12 @@ public class KyotakuJikoRiyohyo {
      * @return ResponseData
      */
     public ResponseData onClickBeppyoGokeiKakutei(KyotakuJikoRiyohyoDiv panel) {
-        ResponseData<KyotakuJikoRiyohyoDiv> response = new ResponseData<>();
         setBeppyoListGokeiKakutei(panel);
         initRiyohyoBeppyoGokeiData(panel);
         setRiyohyoBeppyoVisible(panel, 別票画面表示.初期表示);
 // TODO N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンを有効/無効にする。共通パネルの仕様が固まってから対応する。
 //        validateRiyohyoSave(panel, kyotsu);
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
 // TODO N8187 久保田英男 共通パネルの「サービス利用票を保存する」ボタンを有効/無効にする。共通パネルの仕様が固まってから対応する。
@@ -432,61 +407,61 @@ public class KyotakuJikoRiyohyo {
      * @param panel panel
      */
     private void setBeppyoListGokeiKakutei(KyotakuJikoRiyohyoDiv panel) {
-        ServiceRiyohyoBeppyoListDiv beppyoList = panel.getKyotakuJikoRiyohyoInfo().
-                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList();
-        ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().
-                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
-        List<dgServiceRiyohyoBeppyoList_Row> listRow = beppyoList.getDgServiceRiyohyoBeppyoList().getDataSource();
-        int index = Integer.parseInt(panel.getTxtBeppyoListSelectIndex().getValue().toString());
-        ControlGenerator cg = new ControlGenerator(getYaml().get(2));
-
-        Button btnSelect = new Button();
-        Button btnDelete = new Button();
-        RString jigyosha = (RString) ViewStateHolder.get("jigyosha", RString.class);
-        RString service = cg.getAsRString("サービス内容");
-        RString serviceTani = (RString) ViewStateHolder.get("serviceTani", RString.class);
-
-        dgServiceRiyohyoBeppyoList_Row rowItem;
-        rowItem = create別票一覧リスト(
-                別票行区分.合計,
-                btnSelect,
-                btnDelete,
-                jigyosha,
-                service,
-                cg.getAsRString("単位"),
-                cg.getAsRString("割引後率"),
-                cg.getAsRString("割引後単位"),
-                cg.getAsRString("回数"),
-                serviceTani,
-                //                new RString(gokei.getTxtShuruiGendoChokaTani().getValue().toString()),
-                RString.EMPTY,
-                new RString(gokei.getTxtShuruiGendonaiTani().getValue().toString()),
-                //                new RString(gokei.getTxtKubunGendoChokaTani().getValue().toString()),
-                RString.EMPTY,
-                new RString(gokei.getTxtKubunGendonaiTani().getValue().toString()),
-                new RString(gokei.getTxtTanisuTanka().getValue().toString()),
-                new RString(gokei.getTxtHiyoSogaku().getValue().toString()),
-                new RString(gokei.getTxtKyufuritsu().getValue().toString()),
-                new RString(gokei.getTxtHokenKyufugaku().getValue().toString()),
-                new RString(gokei.getTxtRiyoshaFutangakuHoken().getValue().toString()),
-                RString.EMPTY);
-//                new RString(gokei.getTxtRiyoshaFutangakuZengaku().getValue().toString()));
-        if (Integer.valueOf(index).equals(Integer.valueOf("-1"))) {
-            rowItem.setRowState(RowState.Added);
-            listRow.add(rowItem);
-        } else {
-            if (validateGokei(panel, index)) {
-                rowItem.setRowState(RowState.Modified);
-                listRow.remove(index);
-                listRow.add(index, rowItem);
-            } else {
-                rowItem.setRowState(RowState.Unchanged);
-                listRow.remove(index);
-                listRow.add(index, rowItem);
-            }
-        }
-        panel.getTxtBeppyoListSelectIndex().setValue(new RString("-1"));
-        beppyoList.getDgServiceRiyohyoBeppyoList().setDataSource(listRow);
+//        ServiceRiyohyoBeppyoListDiv beppyoList = panel.getKyotakuJikoRiyohyoInfo().
+//                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoList();
+//        ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().
+//                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
+//        List<dgServiceRiyohyoBeppyoList_Row> listRow = beppyoList.getDgServiceRiyohyoBeppyoList().getDataSource();
+//        int index = Integer.parseInt(panel.getTxtBeppyoListSelectIndex().getValue().toString());
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(2));
+//
+//        Button btnSelect = new Button();
+//        Button btnDelete = new Button();
+//        RString jigyosha = (RString) ViewStateHolder.get("jigyosha", RString.class);
+//        RString service = cg.getAsRString("サービス内容");
+//        RString serviceTani = (RString) ViewStateHolder.get("serviceTani", RString.class);
+//
+//        dgServiceRiyohyoBeppyoList_Row rowItem;
+//        rowItem = create別票一覧リスト(
+//                別票行区分.合計,
+//                btnSelect,
+//                btnDelete,
+//                jigyosha,
+//                service,
+//                cg.getAsRString("単位"),
+//                cg.getAsRString("割引後率"),
+//                cg.getAsRString("割引後単位"),
+//                cg.getAsRString("回数"),
+//                serviceTani,
+//                //                new RString(gokei.getTxtShuruiGendoChokaTani().getValue().toString()),
+//                RString.EMPTY,
+//                new RString(gokei.getTxtShuruiGendonaiTani().getValue().toString()),
+//                //                new RString(gokei.getTxtKubunGendoChokaTani().getValue().toString()),
+//                RString.EMPTY,
+//                new RString(gokei.getTxtKubunGendonaiTani().getValue().toString()),
+//                new RString(gokei.getTxtTanisuTanka().getValue().toString()),
+//                new RString(gokei.getTxtHiyoSogaku().getValue().toString()),
+//                new RString(gokei.getTxtKyufuritsu().getValue().toString()),
+//                new RString(gokei.getTxtHokenKyufugaku().getValue().toString()),
+//                new RString(gokei.getTxtRiyoshaFutangakuHoken().getValue().toString()),
+//                RString.EMPTY);
+////                new RString(gokei.getTxtRiyoshaFutangakuZengaku().getValue().toString()));
+//        if (Integer.valueOf(index).equals(Integer.valueOf("-1"))) {
+//            rowItem.setRowState(RowState.Added);
+//            listRow.add(rowItem);
+//        } else {
+//            if (validateGokei(panel, index)) {
+//                rowItem.setRowState(RowState.Modified);
+//                listRow.remove(index);
+//                listRow.add(index, rowItem);
+//            } else {
+//                rowItem.setRowState(RowState.Unchanged);
+//                listRow.remove(index);
+//                listRow.add(index, rowItem);
+//            }
+//        }
+//        panel.getTxtBeppyoListSelectIndex().setValue(new RString("-1"));
+//        beppyoList.getDgServiceRiyohyoBeppyoList().setDataSource(listRow);
     }
 
     private boolean validateGokei(KyotakuJikoRiyohyoDiv panel, int index) {
@@ -553,18 +528,18 @@ public class KyotakuJikoRiyohyo {
      * @param panel panel
      */
     private void setRiyohyoBeppyoMeisaiData(KyotakuJikoRiyohyoDiv panel) {
-        ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().
-                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
-        ControlGenerator cg = new ControlGenerator(getYaml().get(3));
-        meisai.getTxtJigyoshaCode().setValue(cg.getAsRString("事業者コード"));
-        meisai.getTxtJigyoshaName().setValue(cg.getAsRString("事業者名"));
-        meisai.getTxtServiceCode().setValue(cg.getAsRString("サービスコード"));
-        meisai.getTxtServiceName().setValue(cg.getAsRString("サービス名称"));
-        meisai.getTxtTani().setValue(cg.getAsDecimal("単位"));
-        meisai.getTxtWaribikigoRitsu().setValue(cg.getAsDecimal("割引後率"));
-        meisai.getTxtWaribikigoTani().setValue(cg.getAsDecimal("割引後単位"));
-        meisai.getTxtKaisu().setValue(cg.getAsDecimal("回数"));
-        meisai.getTxtServiceTani().setValue(cg.getAsDecimal("サービス単位"));
+//        ServiceRiyohyoBeppyoMeisaiDiv meisai = panel.getKyotakuJikoRiyohyoInfo().
+//                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoMeisai();
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(3));
+//        meisai.getTxtJigyoshaCode().setValue(cg.getAsRString("事業者コード"));
+//        meisai.getTxtJigyoshaName().setValue(cg.getAsRString("事業者名"));
+//        meisai.getTxtServiceCode().setValue(cg.getAsRString("サービスコード"));
+//        meisai.getTxtServiceName().setValue(cg.getAsRString("サービス名称"));
+//        meisai.getTxtTani().setValue(cg.getAsDecimal("単位"));
+//        meisai.getTxtWaribikigoRitsu().setValue(cg.getAsDecimal("割引後率"));
+//        meisai.getTxtWaribikigoTani().setValue(cg.getAsDecimal("割引後単位"));
+//        meisai.getTxtKaisu().setValue(cg.getAsDecimal("回数"));
+//        meisai.getTxtServiceTani().setValue(cg.getAsDecimal("サービス単位"));
     }
 
     /**
@@ -573,19 +548,19 @@ public class KyotakuJikoRiyohyo {
      * @param panel panel
      */
     private void setRiyohyoBeppyoGokeiData(KyotakuJikoRiyohyoDiv panel) {
-        ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().
-                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
-        ControlGenerator cg = new ControlGenerator(getYaml().get(4));
-        gokei.getTxtShuruiGendoChokaTani().setValue(cg.getAsDecimal("種類限度超過単位"));
-        gokei.getTxtShuruiGendonaiTani().setValue(cg.getAsDecimal("種類限度内単位"));
-        gokei.getTxtTanisuTanka().setValue(cg.getAsDecimal("単位数単価"));
-        gokei.getTxtKubunGendoChokaTani().setValue(cg.getAsDecimal("区分限度超過単位"));
-        gokei.getTxtKubunGendonaiTani().setValue(cg.getAsDecimal("区分限度内単位"));
-        gokei.getTxtKyufuritsu().setValue(cg.getAsDecimal("給付率"));
-        gokei.getTxtHiyoSogaku().setValue(cg.getAsDecimal("費用総額"));
-        gokei.getTxtHokenKyufugaku().setValue(cg.getAsDecimal("保険給付額"));
-        gokei.getTxtRiyoshaFutangakuHoken().setValue(cg.getAsDecimal("利用者負担額保険"));
-        gokei.getTxtRiyoshaFutangakuZengaku().setValue(cg.getAsDecimal("利用者負担額全額"));
+//        ServiceRiyohyoBeppyoGokeiDiv gokei = panel.getKyotakuJikoRiyohyoInfo().
+//                getTabServiceRiyohyo().getServiceRiyohyoBeppyo().getServiceRiyohyoBeppyoGokei();
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(4));
+//        gokei.getTxtShuruiGendoChokaTani().setValue(cg.getAsDecimal("種類限度超過単位"));
+//        gokei.getTxtShuruiGendonaiTani().setValue(cg.getAsDecimal("種類限度内単位"));
+//        gokei.getTxtTanisuTanka().setValue(cg.getAsDecimal("単位数単価"));
+//        gokei.getTxtKubunGendoChokaTani().setValue(cg.getAsDecimal("区分限度超過単位"));
+//        gokei.getTxtKubunGendonaiTani().setValue(cg.getAsDecimal("区分限度内単位"));
+//        gokei.getTxtKyufuritsu().setValue(cg.getAsDecimal("給付率"));
+//        gokei.getTxtHiyoSogaku().setValue(cg.getAsDecimal("費用総額"));
+//        gokei.getTxtHokenKyufugaku().setValue(cg.getAsDecimal("保険給付額"));
+//        gokei.getTxtRiyoshaFutangakuHoken().setValue(cg.getAsDecimal("利用者負担額保険"));
+//        gokei.getTxtRiyoshaFutangakuZengaku().setValue(cg.getAsDecimal("利用者負担額全額"));
     }
 
     /**
@@ -595,30 +570,30 @@ public class KyotakuJikoRiyohyo {
      * @param 表示 表示
      */
     private void setRiyohyoBeppyoVisible(KyotakuJikoRiyohyoDiv panel, 別票画面表示 表示) {
-        ServiceRiyohyoBeppyoDiv beppyo = panel.getKyotakuJikoRiyohyoInfo().
-                getTabServiceRiyohyo().getServiceRiyohyoBeppyo();
-        if (表示.equals(別票画面表示.初期表示)) {
-            beppyo.getServiceRiyohyoBeppyoList().setVisible(true);
-            beppyo.getServiceRiyohyoBeppyoList().setDisplayNone(false);
-            beppyo.getServiceRiyohyoBeppyoMeisai().setVisible(false);
-            beppyo.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
-            beppyo.getServiceRiyohyoBeppyoGokei().setVisible(false);
-            beppyo.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
-        } else if (表示.equals(別票画面表示.明細)) {
-            beppyo.getServiceRiyohyoBeppyoList().setVisible(true);
-            beppyo.getServiceRiyohyoBeppyoList().setDisplayNone(false);
-            beppyo.getServiceRiyohyoBeppyoMeisai().setVisible(true);
-            beppyo.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
-            beppyo.getServiceRiyohyoBeppyoGokei().setVisible(false);
-            beppyo.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
-        } else if (表示.equals(別票画面表示.合計)) {
-            beppyo.getServiceRiyohyoBeppyoList().setVisible(true);
-            beppyo.getServiceRiyohyoBeppyoList().setDisplayNone(false);
-            beppyo.getServiceRiyohyoBeppyoMeisai().setVisible(false);
-            beppyo.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
-            beppyo.getServiceRiyohyoBeppyoGokei().setVisible(true);
-            beppyo.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
-        }
+//        ServiceRiyohyoBeppyoDiv beppyo = panel.getKyotakuJikoRiyohyoInfo().
+//                getTabServiceRiyohyo().getServiceRiyohyoBeppyo();
+//        if (表示.equals(別票画面表示.初期表示)) {
+//            beppyo.getServiceRiyohyoBeppyoList().setVisible(true);
+//            beppyo.getServiceRiyohyoBeppyoList().setDisplayNone(false);
+//            beppyo.getServiceRiyohyoBeppyoMeisai().setVisible(false);
+//            beppyo.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
+//            beppyo.getServiceRiyohyoBeppyoGokei().setVisible(false);
+//            beppyo.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
+//        } else if (表示.equals(別票画面表示.明細)) {
+//            beppyo.getServiceRiyohyoBeppyoList().setVisible(true);
+//            beppyo.getServiceRiyohyoBeppyoList().setDisplayNone(false);
+//            beppyo.getServiceRiyohyoBeppyoMeisai().setVisible(true);
+//            beppyo.getServiceRiyohyoBeppyoMeisai().setDisplayNone(false);
+//            beppyo.getServiceRiyohyoBeppyoGokei().setVisible(false);
+//            beppyo.getServiceRiyohyoBeppyoGokei().setDisplayNone(true);
+//        } else if (表示.equals(別票画面表示.合計)) {
+//            beppyo.getServiceRiyohyoBeppyoList().setVisible(true);
+//            beppyo.getServiceRiyohyoBeppyoList().setDisplayNone(false);
+//            beppyo.getServiceRiyohyoBeppyoMeisai().setVisible(false);
+//            beppyo.getServiceRiyohyoBeppyoMeisai().setDisplayNone(true);
+//            beppyo.getServiceRiyohyoBeppyoGokei().setVisible(true);
+//            beppyo.getServiceRiyohyoBeppyoGokei().setDisplayNone(false);
+//        }
     }
 
     /**
@@ -627,18 +602,18 @@ public class KyotakuJikoRiyohyo {
      * @param panel panel
      */
     private void setSummaryZengetsuData(KyotakuJikoRiyohyoDiv panel) {
-        ServiceRiyohyoInfoDiv info = panel.getKyotakuJikoRiyohyoInfo();
-        ControlGenerator cg = new ControlGenerator(getYaml().get(5));
-        info.getTxtTodokedeYMD().setValue(cg.getAsRDate("届出日"));
-        info.getTxtTekiyoKikan().setFromValue(cg.getAsRDate("適用期間開始日"));
-        info.getTxtTekiyoKikan().setToValue(cg.getAsRDate("適用期間終了日"));
-        info.getTxtTaishoYM().setValue(cg.getAsRDate("対象年月"));
-        info.getTxtRiyohyoSakuseiYMD().setValue(cg.getAsRDate("利用票作成年月日"));
-        info.getTxtRiyohyoTodokedeYMD().setValue(cg.getAsRDate("利用票届出年月日"));
-        info.getTxtKubunShikyuGendogaku().setValue(cg.getAsRString("区分支給限度額"));
-        info.getTxtRiyohyoSakuseisha().setValue(cg.getAsRString("利用票作成者"));
-        info.getTxtGendoKanriKikan().setFromValue(cg.getAsRDate("限度開始期間開始日"));
-        info.getTxtGendoKanriKikan().setToValue(cg.getAsRDate("限度開始期間終了日"));
+//        ServiceRiyohyoInfoDiv info = panel.getKyotakuJikoRiyohyoInfo();
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(5));
+//        info.getTxtTodokedeYMD().setValue(cg.getAsRDate("届出日"));
+//        info.getTxtTekiyoKikan().setFromValue(cg.getAsRDate("適用期間開始日"));
+//        info.getTxtTekiyoKikan().setToValue(cg.getAsRDate("適用期間終了日"));
+//        info.getTxtTaishoYM().setValue(cg.getAsRDate("対象年月"));
+//        info.getTxtRiyohyoSakuseiYMD().setValue(cg.getAsRDate("利用票作成年月日"));
+//        info.getTxtRiyohyoTodokedeYMD().setValue(cg.getAsRDate("利用票届出年月日"));
+//        info.getTxtKubunShikyuGendogaku().setValue(cg.getAsRString("区分支給限度額"));
+//        info.getTxtRiyohyoSakuseisha().setValue(cg.getAsRString("利用票作成者"));
+//        info.getTxtGendoKanriKikan().setFromValue(cg.getAsRDate("限度開始期間開始日"));
+//        info.getTxtGendoKanriKikan().setToValue(cg.getAsRDate("限度開始期間終了日"));
     }
 
     /**
@@ -647,18 +622,18 @@ public class KyotakuJikoRiyohyo {
      * @param panel panel
      */
     private void setSummaryData(KyotakuJikoRiyohyoDiv panel) {
-        ServiceRiyohyoInfoDiv info = panel.getKyotakuJikoRiyohyoInfo();
-        ControlGenerator cg = new ControlGenerator(getYaml().get(6));
-        info.getTxtTodokedeYMD().setValue(cg.getAsRDate("届出日"));
-        info.getTxtTekiyoKikan().setFromValue(cg.getAsRDate("適用期間開始日"));
-        info.getTxtTekiyoKikan().clearToValue();
-        info.getTxtTaishoYM().setValue(cg.getAsRDate("対象年月"));
-        info.getTxtRiyohyoSakuseiYMD().setValue(cg.getAsRDate("利用票作成年月日"));
-        info.getTxtRiyohyoTodokedeYMD().setValue(cg.getAsRDate("利用票届出年月日"));
-        info.getTxtKubunShikyuGendogaku().setValue(cg.getAsRString("区分支給限度額"));
-        info.getTxtRiyohyoSakuseisha().setValue(cg.getAsRString("利用票作成者"));
-        info.getTxtGendoKanriKikan().setFromValue(cg.getAsRDate("限度開始期間開始日"));
-        info.getTxtGendoKanriKikan().setToValue(cg.getAsRDate("限度開始期間終了日"));
+//        ServiceRiyohyoInfoDiv info = panel.getKyotakuJikoRiyohyoInfo();
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(6));
+//        info.getTxtTodokedeYMD().setValue(cg.getAsRDate("届出日"));
+//        info.getTxtTekiyoKikan().setFromValue(cg.getAsRDate("適用期間開始日"));
+//        info.getTxtTekiyoKikan().clearToValue();
+//        info.getTxtTaishoYM().setValue(cg.getAsRDate("対象年月"));
+//        info.getTxtRiyohyoSakuseiYMD().setValue(cg.getAsRDate("利用票作成年月日"));
+//        info.getTxtRiyohyoTodokedeYMD().setValue(cg.getAsRDate("利用票届出年月日"));
+//        info.getTxtKubunShikyuGendogaku().setValue(cg.getAsRString("区分支給限度額"));
+//        info.getTxtRiyohyoSakuseisha().setValue(cg.getAsRString("利用票作成者"));
+//        info.getTxtGendoKanriKikan().setFromValue(cg.getAsRDate("限度開始期間開始日"));
+//        info.getTxtGendoKanriKikan().setToValue(cg.getAsRDate("限度開始期間終了日"));
     }
 
     /**
@@ -667,16 +642,16 @@ public class KyotakuJikoRiyohyo {
      * @param panel panel
      */
     private void setServiceRiyohyoYobi(KyotakuJikoRiyohyoDiv panel) {
-        RDate taishoYMD = new RDate(panel.getKyotakuJikoRiyohyoInfo().getTxtTaishoYM().getValue().getYearMonth().toString().concat("01"));
-        ServiceRiyohyoDiv riyohyo = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyo();
-        DataGrid<dgServiceRiyohyoList_Row> dg = riyohyo.getDgServiceRiyohyoList();
-        int dateNum = taishoYMD.getLastDay();
-        for (int i = 0; i < dateNum; i++) {
-            RString txtDay = new RString("txtDay").concat(String.valueOf(i + 1));
-            DataGridColumn column = dg.getGridSetting().getColumn(txtDay);
-            column.setColumnName(new RString(taishoYMD.getDayOfWeek().getShortTerm()));
-            taishoYMD = taishoYMD.plusDay(1);
-        }
+//        RDate taishoYMD = new RDate(panel.getKyotakuJikoRiyohyoInfo().getTxtTaishoYM().getValue().getYearMonth().toString().concat("01"));
+//        ServiceRiyohyoDiv riyohyo = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyo();
+//        DataGrid<dgServiceRiyohyoList_Row> dg = riyohyo.getDgServiceRiyohyoList();
+//        int dateNum = taishoYMD.getLastDay();
+//        for (int i = 0; i < dateNum; i++) {
+//            RString txtDay = new RString("txtDay").concat(String.valueOf(i + 1));
+//            DataGridColumn column = dg.getGridSetting().getColumn(txtDay);
+//            column.setColumnName(new RString(taishoYMD.getDayOfWeek().getShortTerm()));
+//            taishoYMD = taishoYMD.plusDay(1);
+//        }
     }
 
     /**
@@ -685,59 +660,59 @@ public class KyotakuJikoRiyohyo {
      * @param panel panel
      */
     private void setServiceRiyohyoZengetsuData(KyotakuJikoRiyohyoDiv panel) {
-        ServiceRiyohyoDiv riyohyo = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyo();
-        List<dgServiceRiyohyoList_Row> dgRowList = riyohyo.getDgServiceRiyohyoList().getDataSource();
-        dgRowList.clear();
-        Button btnDelete = new Button();
-        Button btnService = new Button();
-        Button btnJigyosha = new Button();
-
-        for (int index = 7; index < 9; index++) {
-            ControlGenerator cg = new ControlGenerator(getYaml().get(index));
-            dgServiceRiyohyoList_Row rowItem = createサービス利用票(
-                    btnDelete,
-                    cg.getAsRString("提供開始時刻"),
-                    cg.getAsRString("提供終了時刻"),
-                    btnService,
-                    cg.getAsRString("サービス内容"),
-                    btnJigyosha,
-                    cg.getAsRString("サービス事業者"),
-                    cg.getAsRString("予定実績"),
-                    cg.getAsRString("1日"),
-                    cg.getAsRString("2日"),
-                    cg.getAsRString("3日"),
-                    cg.getAsRString("4日"),
-                    cg.getAsRString("5日"),
-                    cg.getAsRString("6日"),
-                    cg.getAsRString("7日"),
-                    cg.getAsRString("8日"),
-                    cg.getAsRString("9日"),
-                    cg.getAsRString("10日"),
-                    cg.getAsRString("11日"),
-                    cg.getAsRString("12日"),
-                    cg.getAsRString("13日"),
-                    cg.getAsRString("14日"),
-                    cg.getAsRString("15日"),
-                    cg.getAsRString("16日"),
-                    cg.getAsRString("17日"),
-                    cg.getAsRString("18日"),
-                    cg.getAsRString("19日"),
-                    cg.getAsRString("20日"),
-                    cg.getAsRString("21日"),
-                    cg.getAsRString("22日"),
-                    cg.getAsRString("23日"),
-                    cg.getAsRString("24日"),
-                    cg.getAsRString("25日"),
-                    cg.getAsRString("26日"),
-                    cg.getAsRString("27日"),
-                    cg.getAsRString("28日"),
-                    cg.getAsRString("29日"),
-                    cg.getAsRString("30日"),
-                    cg.getAsRString("31日"),
-                    cg.getAsRString("合計"));
-            dgRowList.add(rowItem);
-        }
-        riyohyo.getDgServiceRiyohyoList().setDataSource(dgRowList);
+//        ServiceRiyohyoDiv riyohyo = panel.getKyotakuJikoRiyohyoInfo().getTabServiceRiyohyo().getServiceRiyohyo();
+//        List<dgServiceRiyohyoList_Row> dgRowList = riyohyo.getDgServiceRiyohyoList().getDataSource();
+//        dgRowList.clear();
+//        Button btnDelete = new Button();
+//        Button btnService = new Button();
+//        Button btnJigyosha = new Button();
+//
+//        for (int index = 7; index < 9; index++) {
+//            ControlGenerator cg = new ControlGenerator(getYaml().get(index));
+//            dgServiceRiyohyoList_Row rowItem = createサービス利用票(
+//                    btnDelete,
+//                    cg.getAsRString("提供開始時刻"),
+//                    cg.getAsRString("提供終了時刻"),
+//                    btnService,
+//                    cg.getAsRString("サービス内容"),
+//                    btnJigyosha,
+//                    cg.getAsRString("サービス事業者"),
+//                    cg.getAsRString("予定実績"),
+//                    cg.getAsRString("1日"),
+//                    cg.getAsRString("2日"),
+//                    cg.getAsRString("3日"),
+//                    cg.getAsRString("4日"),
+//                    cg.getAsRString("5日"),
+//                    cg.getAsRString("6日"),
+//                    cg.getAsRString("7日"),
+//                    cg.getAsRString("8日"),
+//                    cg.getAsRString("9日"),
+//                    cg.getAsRString("10日"),
+//                    cg.getAsRString("11日"),
+//                    cg.getAsRString("12日"),
+//                    cg.getAsRString("13日"),
+//                    cg.getAsRString("14日"),
+//                    cg.getAsRString("15日"),
+//                    cg.getAsRString("16日"),
+//                    cg.getAsRString("17日"),
+//                    cg.getAsRString("18日"),
+//                    cg.getAsRString("19日"),
+//                    cg.getAsRString("20日"),
+//                    cg.getAsRString("21日"),
+//                    cg.getAsRString("22日"),
+//                    cg.getAsRString("23日"),
+//                    cg.getAsRString("24日"),
+//                    cg.getAsRString("25日"),
+//                    cg.getAsRString("26日"),
+//                    cg.getAsRString("27日"),
+//                    cg.getAsRString("28日"),
+//                    cg.getAsRString("29日"),
+//                    cg.getAsRString("30日"),
+//                    cg.getAsRString("31日"),
+//                    cg.getAsRString("合計"));
+//            dgRowList.add(rowItem);
+//        }
+//        riyohyo.getDgServiceRiyohyoList().setDataSource(dgRowList);
     }
 
     private void setServiceRiyohyoBeppyoData(KyotakuJikoRiyohyoDiv panel) {
@@ -750,10 +725,10 @@ public class KyotakuJikoRiyohyo {
     }
 
     private void setBeppyoNissuData(ServiceRiyohyoBeppyoRiyoNissuDiv nissu) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(9));
-        nissu.getTxtZengetsuRiyoNissu().setValue(cg.getAsDecimal("前月利用日数"));
-        nissu.getTxtTogetsuRiyoNissu().setValue(cg.getAsDecimal("当月利用日数"));
-        nissu.getTxtRuikeiRiyoNissu().setValue(cg.getAsDecimal("累計利用日数"));
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(9));
+//        nissu.getTxtZengetsuRiyoNissu().setValue(cg.getAsDecimal("前月利用日数"));
+//        nissu.getTxtTogetsuRiyoNissu().setValue(cg.getAsDecimal("当月利用日数"));
+//        nissu.getTxtRuikeiRiyoNissu().setValue(cg.getAsDecimal("累計利用日数"));
     }
 
     private void setServiceRiyohyoBeppyoZengetsuData(KyotakuJikoRiyohyoDiv panel) {
@@ -768,52 +743,52 @@ public class KyotakuJikoRiyohyo {
     }
 
     private void setBeppyoNissuZengetsuData(ServiceRiyohyoBeppyoRiyoNissuDiv nissu) {
-        ControlGenerator cg = new ControlGenerator(getYaml().get(10));
-        nissu.getTxtZengetsuRiyoNissu().setValue(cg.getAsDecimal("前月利用日数"));
-        nissu.getTxtTogetsuRiyoNissu().setValue(cg.getAsDecimal("当月利用日数"));
-        nissu.getTxtRuikeiRiyoNissu().setValue(cg.getAsDecimal("累計利用日数"));
+//        ControlGenerator cg = new ControlGenerator(getYaml().get(10));
+//        nissu.getTxtZengetsuRiyoNissu().setValue(cg.getAsDecimal("前月利用日数"));
+//        nissu.getTxtTogetsuRiyoNissu().setValue(cg.getAsDecimal("当月利用日数"));
+//        nissu.getTxtRuikeiRiyoNissu().setValue(cg.getAsDecimal("累計利用日数"));
     }
 
     private void setBeppyoListZengetsuData(ServiceRiyohyoBeppyoListDiv list) {
-        List<dgServiceRiyohyoBeppyoList_Row> listRow = list.getDgServiceRiyohyoBeppyoList().getDataSource();
-        listRow.clear();
-        Button btnSelect = new Button();
-        Button btnDelete = new Button();
-
-        dgServiceRiyohyoBeppyoList_Row rowItem;
-        for (int index = 11; index < 14; index++) {
-            ControlGenerator cg = new ControlGenerator(getYaml().get(index));
-            別票行区分 kubun;
-            if (cg.getAsRString("別票行区分").equals(new RString("明細"))) {
-                kubun = 別票行区分.明細;
-            } else {
-                kubun = 別票行区分.合計;
-            }
-
-            rowItem = create別票一覧リスト(
-                    kubun,
-                    btnSelect,
-                    btnDelete,
-                    cg.getAsRString("事業者"),
-                    cg.getAsRString("サービス"),
-                    cg.getAsRString("単位"),
-                    cg.getAsRString("割引後率"),
-                    cg.getAsRString("割引後単位"),
-                    cg.getAsRString("回数"),
-                    cg.getAsRString("サービス単位"),
-                    cg.getAsRString("種類限度超過単位"),
-                    cg.getAsRString("種類限度内単位"),
-                    cg.getAsRString("区分限度超過単位"),
-                    cg.getAsRString("区分限度内単位"),
-                    cg.getAsRString("単位数単価"),
-                    cg.getAsRString("費用総額"),
-                    cg.getAsRString("給付率"),
-                    cg.getAsRString("保険給付額"),
-                    cg.getAsRString("利用者負担額保険"),
-                    cg.getAsRString("利用者負担額全額"));
-            listRow.add(rowItem);
-        }
-        list.getDgServiceRiyohyoBeppyoList().setDataSource(listRow);
+//        List<dgServiceRiyohyoBeppyoList_Row> listRow = list.getDgServiceRiyohyoBeppyoList().getDataSource();
+//        listRow.clear();
+//        Button btnSelect = new Button();
+//        Button btnDelete = new Button();
+//
+//        dgServiceRiyohyoBeppyoList_Row rowItem;
+//        for (int index = 11; index < 14; index++) {
+//            ControlGenerator cg = new ControlGenerator(getYaml().get(index));
+//            別票行区分 kubun;
+//            if (cg.getAsRString("別票行区分").equals(new RString("明細"))) {
+//                kubun = 別票行区分.明細;
+//            } else {
+//                kubun = 別票行区分.合計;
+//            }
+//
+//            rowItem = create別票一覧リスト(
+//                    kubun,
+//                    btnSelect,
+//                    btnDelete,
+//                    cg.getAsRString("事業者"),
+//                    cg.getAsRString("サービス"),
+//                    cg.getAsRString("単位"),
+//                    cg.getAsRString("割引後率"),
+//                    cg.getAsRString("割引後単位"),
+//                    cg.getAsRString("回数"),
+//                    cg.getAsRString("サービス単位"),
+//                    cg.getAsRString("種類限度超過単位"),
+//                    cg.getAsRString("種類限度内単位"),
+//                    cg.getAsRString("区分限度超過単位"),
+//                    cg.getAsRString("区分限度内単位"),
+//                    cg.getAsRString("単位数単価"),
+//                    cg.getAsRString("費用総額"),
+//                    cg.getAsRString("給付率"),
+//                    cg.getAsRString("保険給付額"),
+//                    cg.getAsRString("利用者負担額保険"),
+//                    cg.getAsRString("利用者負担額全額"));
+//            listRow.add(rowItem);
+//        }
+//        list.getDgServiceRiyohyoBeppyoList().setDataSource(listRow);
     }
 
     private dgServiceRiyohyoBeppyoList_Row create別票一覧リスト(
@@ -1144,5 +1119,4 @@ public class KyotakuJikoRiyohyo {
 
         return ret;
     }
-
 }

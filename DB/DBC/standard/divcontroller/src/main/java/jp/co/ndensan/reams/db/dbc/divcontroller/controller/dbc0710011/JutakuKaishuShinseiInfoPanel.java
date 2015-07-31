@@ -45,7 +45,6 @@ public class JutakuKaishuShinseiInfoPanel {
     //TODO 該当者一覧から人を特定したイベントでここの動作を行う。
     public ResponseData<JutakuKaishuShinseiInfoPanelDiv> onClick_btnShowDetail(
             JutakuKaishuShinseiInfoPanelDiv panel, JutakuKaishuShinseiListDiv panel1) {
-        ResponseData<JutakuKaishuShinseiInfoPanelDiv> response = new ResponseData<>();
 
         if (is事前申請あり(panel1.getDgJutakuKaishuShinseiList().getClickedRowId())) {
             panel.getJutakuKaishuShinseiContents().getBtnShowJizenShinsei().setDisplayNone(false);
@@ -55,12 +54,10 @@ public class JutakuKaishuShinseiInfoPanel {
         //支給内容をクリア処理が行う
         setClearJutakuKaishuShinseiInfoPanelDiv(panel);
         //事前申請用のデータ
-        String ymlDataName = "JutakuData_1_1.yml";
         //事前申請内容の情報を表示する。
-        setInfoData(panel, ymlDataName);
+//        setInfoData(panel, ymlDataName);
 
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -72,19 +69,14 @@ public class JutakuKaishuShinseiInfoPanel {
      */
     public ResponseData<JutakuKaishuShinseiInfoPanelDiv> onSelectByModifyButton(
             JutakuKaishuShinseiInfoPanelDiv panel, JutakuKaishuShinseiListDiv panel1) {
-        ResponseData<JutakuKaishuShinseiInfoPanelDiv> response = new ResponseData<>();
-
         //追加するデータ
-        String ymlDataName = "JutakuData_1_1.yml";
         //改修内容を反映する。
-        setZizenShinseiDetailInput(panel, ymlDataName);
-        //TO DO
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().
-                getBtnModifyDetail().setText(new RString("明細を修正する"));
+////        setZizenShinseiDetailInput(panel, ymlDataName);
+//        //TO DO
+//        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().
+//                getBtnModifyDetail().setText(new RString("明細を修正する"));
 
-        response.data = panel;
-        return response;
-
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -96,7 +88,6 @@ public class JutakuKaishuShinseiInfoPanel {
      */
     public ResponseData<JutakuKaishuShinseiInfoPanelDiv> onClick_btnAddShinsei(
             JutakuKaishuShinseiInfoPanelDiv panel, JutakuKaishuShinseiListDiv panel1) {
-        ResponseData<JutakuKaishuShinseiInfoPanelDiv> response = new ResponseData<>();
 
         panel.getJutakuKaishuShinseiContents().getBtnShowJizenShinsei().setDisplayNone(true);
 
@@ -107,13 +98,12 @@ public class JutakuKaishuShinseiInfoPanel {
 //        String ymlDataName = "JutakuData_2_1.yml";
 //        //事前申請内容の情報を表示する。
 //        setInfoData(panel, ymlDataName);
-        response.data = panel;
-        return response;
-
+        return ResponseData.of(panel).respond();
     }
 
     /**
-     * 住宅改修費事前申請登録 申請を追加するボタン押下後、事前申請内容の情報を表示する（明細を追加するボタン押下後、住宅改修明細を表示し、改修内容などは、クリア処理が行う）
+     * 住宅改修費事前申請登録
+     * 申請を追加するボタン押下後、事前申請内容の情報を表示する（明細を追加するボタン押下後、住宅改修明細を表示し、改修内容などは、クリア処理が行う）
      *
      * @param panel JutakuKaishuShinseiInfoPanelDiv
      * @param panel1 JutakuKaishuShinseiListDiv
@@ -121,11 +111,9 @@ public class JutakuKaishuShinseiInfoPanel {
      */
     public ResponseData<JutakuKaishuShinseiInfoPanelDiv> onClick_btnModifyDetail(
             JutakuKaishuShinseiInfoPanelDiv panel, JutakuKaishuShinseiListDiv panel1) {
-        ResponseData<JutakuKaishuShinseiInfoPanelDiv> response = new ResponseData<>();
 
         //TO DO　現在選択された内容があるのかチェックする。
         int selRowId = panel1.getDgJutakuKaishuShinseiList().getClickedRowId();
-        String ymlDataName = "JutakuData_1_3.yml";
 
 //        if (selRowId >= 0) {
 //            ymlDataName = "JutakuData_1_3.yml";
@@ -139,15 +127,12 @@ public class JutakuKaishuShinseiInfoPanel {
 //        DataGrid<dgJutakuKaishuDetail_Row> grid = panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiDetail().
 //                getJutakuKaishuShinseiDetailInput().getDgJutakuKaishuDetail();
 //        grid.setDataSource(arraydata);
-        setInputDateToList(panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiDetailInput());
-        //今回設定
-        setSummaryAddNowData(panel, ymlDataName);
-        //クリア設定
-        setJutakuKaishuJizenShinseiAddDetailInput(panel);
-
-        response.data = panel;
-        return response;
-
+//        setInputDateToList(panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiDetailInput());
+//        //今回設定
+//        setSummaryAddNowData(panel, ymlDataName);
+//        //クリア設定
+//        setJutakuKaishuJizenShinseiAddDetailInput(panel);
+        return ResponseData.of(panel).respond();
     }
 
     /**
@@ -159,11 +144,10 @@ public class JutakuKaishuShinseiInfoPanel {
      */
     public ResponseData<JutakuKaishuShinseiInfoPanelDiv> onClick_btnCheckGendogaku(
             JutakuKaishuShinseiInfoPanelDiv panel, JutakuKaishuShinseiListDiv panel1) {
-        ResponseData<JutakuKaishuShinseiInfoPanelDiv> response = new ResponseData<>();
 
         panel.getJutakuKaishuShinseiResetInfo().getChkResetInfo().setSelectedItems(createSetItems());
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 
     private List<KeyValueDataSource> createSetItems() {
@@ -180,12 +164,10 @@ public class JutakuKaishuShinseiInfoPanel {
      */
     public ResponseData<JutakuKaishuShinseiInfoPanelDiv> onClick_radPayMethod(
             JutakuKaishuShinseiInfoPanelDiv panel, JutakuKaishuShinseiListDiv panel1) {
-        ResponseData<JutakuKaishuShinseiInfoPanelDiv> response = new ResponseData<>();
 
         PaymentMethod.showSelectedPaymentMethod(panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo());
 
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     private void setInputDateToList(JutakuKaishuShinseiDetailInputDiv div) {
@@ -210,29 +192,29 @@ public class JutakuKaishuShinseiInfoPanel {
 
     private void setInfoData(JutakuKaishuShinseiInfoPanelDiv panel, String ymlDataName) {
 
-        ////////////////////////////////////////
-        //住宅所有者・被保険者との関係
-        setJutakuOwnerData(panel, ymlDataName);
-
-        if (ymlDataName.equals("JutakuData_1_1.yml")) {
-            //住宅改修明細 ①
-            setZizenJutakuKaishuDetail(panel, ymlDataName);
-        }
-
-        if (ymlDataName.equals("JutakuData_2_1.yml")) {
-            //住宅改修明細 ②
-            setZizenShinseiDetailInput(panel, ymlDataName);
-        }
-
-        //前回・今回初期化設定
-        setSummary(panel, ymlDataName);
-        //申請者情報初期化設定
-        setShinseishaInfo(panel, ymlDataName);
-        //住宅改修理由書
-        setShinseiReason(panel, ymlDataName);
-        //口座振替申請情報（UR)
-        setShinseiKozaInfo(panel, ymlDataName);
-        ////////////////////////////////////////
+//        ////////////////////////////////////////
+//        //住宅所有者・被保険者との関係
+//        setJutakuOwnerData(panel, ymlDataName);
+//
+//        if (ymlDataName.equals("JutakuData_1_1.yml")) {
+//            //住宅改修明細 ①
+//            setZizenJutakuKaishuDetail(panel, ymlDataName);
+//        }
+//
+//        if (ymlDataName.equals("JutakuData_2_1.yml")) {
+//            //住宅改修明細 ②
+//            setZizenShinseiDetailInput(panel, ymlDataName);
+//        }
+//
+//        //前回・今回初期化設定
+//        setSummary(panel, ymlDataName);
+//        //申請者情報初期化設定
+//        setShinseishaInfo(panel, ymlDataName);
+//        //住宅改修理由書
+//        setShinseiReason(panel, ymlDataName);
+//        //口座振替申請情報（UR)
+//        setShinseiKozaInfo(panel, ymlDataName);
+//        ////////////////////////////////////////
     }
 
     /*
@@ -240,25 +222,21 @@ public class JutakuKaishuShinseiInfoPanel {
      */
     private void setJutakuOwnerData(JutakuKaishuShinseiInfoPanelDiv panel, String ymlDataName) {
 
-        //TO DO  JutakuData1.xml ①
-        List<HashMap> ymlData = ymlData(ymlDataName);
-
-        //JutakuData.xml Read　②
-        String teikyoYM = ymlData.get(0).get("teikyoYM").toString();
-        String seiriNo = ymlData.get(0).get("seiriNo").toString();
-        String jutakuOwner = ymlData.get(0).get("jutakuOwner").toString();
-        String relationWithHihokensha = ymlData.get(0).get("relationWithHihokensha").toString();
-
-        //TO DO  JutakuData.xml Write　③
-        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
-        panel.getJutakuKaishuShinseiContents().
-                getTxtTeikyoYM().setValue(new RDate(teikyoYM));
-        panel.getJutakuKaishuShinseiContents().
-                getTxtSeiriNo().setValue(new RString(seiriNo));
-        panel.getJutakuKaishuShinseiContents().
-                getTxtJutakuOwner().setValue(new RString(jutakuOwner));
-        panel.getJutakuKaishuShinseiContents().
-                getTxtRelationWithHihokensha().setValue(new RString(relationWithHihokensha));
+//        String teikyoYM = ymlData.get(0).get("teikyoYM").toString();
+//        String seiriNo = ymlData.get(0).get("seiriNo").toString();
+//        String jutakuOwner = ymlData.get(0).get("jutakuOwner").toString();
+//        String relationWithHihokensha = ymlData.get(0).get("relationWithHihokensha").toString();
+//
+//        //TO DO  JutakuData.xml Write　③
+//        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
+//        panel.getJutakuKaishuShinseiContents().
+//                getTxtTeikyoYM().setValue(new RDate(teikyoYM));
+//        panel.getJutakuKaishuShinseiContents().
+//                getTxtSeiriNo().setValue(new RString(seiriNo));
+//        panel.getJutakuKaishuShinseiContents().
+//                getTxtJutakuOwner().setValue(new RString(jutakuOwner));
+//        panel.getJutakuKaishuShinseiContents().
+//                getTxtRelationWithHihokensha().setValue(new RString(relationWithHihokensha));
     }
 
     /*
@@ -280,30 +258,26 @@ public class JutakuKaishuShinseiInfoPanel {
 
         List<dgJutakuKaishuDetail_Row> arrayData = new ArrayList<>();
 
-        //TO DO  JutakuData1.xml ①
-        List<HashMap> ymlData = ymlData(ymlDataName);
-
-        //JutakuData.xml Read　②
-        String chakkoDueDate = ymlData.get(6).get("chakkoDueDate").toString();
-        String kanseiDueDate = ymlData.get(6).get("kanseiDueDate").toString();
-        String mitsumoriAmount = ymlData.get(6).get("mitsumoriAmount").toString();
-        String kaishuJigyosha = ymlData.get(6).get("kaishuJigyosha").toString();
-        String kaishuTaishoAddress = ymlData.get(6).get("kaishuTaishoAddress").toString();
-        String kaishuNaiyo = ymlData.get(6).get("kaishuNaiyo").toString();
-
-        //TO DO  JutakuData.xml Write　③
-        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
-        dgJutakuKaishuDetail_Row item;
-        item = createRowShikyuShinseiListData(
-                chakkoDueDate,
-                kanseiDueDate,
-                mitsumoriAmount,
-                kaishuJigyosha,
-                kaishuTaishoAddress,
-                kaishuNaiyo
-        );
-
-        arrayData.add(item);
+//        String chakkoDueDate = ymlData.get(6).get("chakkoDueDate").toString();
+//        String kanseiDueDate = ymlData.get(6).get("kanseiDueDate").toString();
+//        String mitsumoriAmount = ymlData.get(6).get("mitsumoriAmount").toString();
+//        String kaishuJigyosha = ymlData.get(6).get("kaishuJigyosha").toString();
+//        String kaishuTaishoAddress = ymlData.get(6).get("kaishuTaishoAddress").toString();
+//        String kaishuNaiyo = ymlData.get(6).get("kaishuNaiyo").toString();
+//
+//        //TO DO  JutakuData.xml Write　③
+//        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
+//        dgJutakuKaishuDetail_Row item;
+//        item = createRowShikyuShinseiListData(
+//                chakkoDueDate,
+//                kanseiDueDate,
+//                mitsumoriAmount,
+//                kaishuJigyosha,
+//                kaishuTaishoAddress,
+//                kaishuNaiyo
+//        );
+//
+//        arrayData.add(item);
         return arrayData;
     }
 
@@ -336,41 +310,37 @@ public class JutakuKaishuShinseiInfoPanel {
      */
     private void setZizenShinseiDetailInput(JutakuKaishuShinseiInfoPanelDiv panel, String ymlDataName) {
 
-        //TO DO  JutakuData1.xml ①
-        List<HashMap> ymlData = ymlData(ymlDataName);
-
-        //JutakuData.xml Read　②
-        String kaishuContents = ymlData.get(1).get("kaishuContents").toString();
-        String kaishuJigyoshaName = ymlData.get(1).get("kaishuJigyoshaName").toString();
-        String kaishuTaishoAddress1 = ymlData.get(1).get("kaishuTaishoAddress1").toString();
-        String chakkoDueDate = ymlData.get(1).get("chakkoDueDate").toString();
-        String kanseiDueDate = ymlData.get(1).get("kanseiDueDate").toString();
-        String estimatedAmount = ymlData.get(1).get("estimatedAmount").toString();
-        /////////////////////////////////////////////////////////////////////////////////////////
-
-        //TO DO  JutakuData.xml Write　③
-        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput()
-                .getTxtKaishuContents().setValue(new RString(kaishuContents));
-
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput()
-                .getTxtKaishuJigyoshaName().setValue(new RString(kaishuJigyoshaName));
-
-        panel.getJutakuKaishuShinseiContents().
-                getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().getTxtKaishuTaishoAddress().
-                setValue(new RString(kaishuTaishoAddress1));
-
-        panel.getJutakuKaishuShinseiContents().
-                getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().getTxtChakkoDueDate().
-                setValue(new RDate(chakkoDueDate));
-
-        panel.getJutakuKaishuShinseiContents().
-                getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().getTxtKanseiDueDate().
-                setValue(new RDate(kanseiDueDate));
-
-        panel.getJutakuKaishuShinseiContents().
-                getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().getTxtEstimatedAmount().
-                setValue(new Decimal(estimatedAmount));
+//        String kaishuContents = ymlData.get(1).get("kaishuContents").toString();
+//        String kaishuJigyoshaName = ymlData.get(1).get("kaishuJigyoshaName").toString();
+//        String kaishuTaishoAddress1 = ymlData.get(1).get("kaishuTaishoAddress1").toString();
+//        String chakkoDueDate = ymlData.get(1).get("chakkoDueDate").toString();
+//        String kanseiDueDate = ymlData.get(1).get("kanseiDueDate").toString();
+//        String estimatedAmount = ymlData.get(1).get("estimatedAmount").toString();
+//        /////////////////////////////////////////////////////////////////////////////////////////
+//
+//        //TO DO  JutakuData.xml Write　③
+//        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
+//        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput()
+//                .getTxtKaishuContents().setValue(new RString(kaishuContents));
+//
+//        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput()
+//                .getTxtKaishuJigyoshaName().setValue(new RString(kaishuJigyoshaName));
+//
+//        panel.getJutakuKaishuShinseiContents().
+//                getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().getTxtKaishuTaishoAddress().
+//                setValue(new RString(kaishuTaishoAddress1));
+//
+//        panel.getJutakuKaishuShinseiContents().
+//                getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().getTxtChakkoDueDate().
+//                setValue(new RDate(chakkoDueDate));
+//
+//        panel.getJutakuKaishuShinseiContents().
+//                getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().getTxtKanseiDueDate().
+//                setValue(new RDate(kanseiDueDate));
+//
+//        panel.getJutakuKaishuShinseiContents().
+//                getJutakuKaishuShinseiDetailInput().getJutakuKaishuDetailInput().getTxtEstimatedAmount().
+//                setValue(new Decimal(estimatedAmount));
     }
 
     /*
@@ -378,47 +348,42 @@ public class JutakuKaishuShinseiInfoPanel {
      */
     private void setSummary(JutakuKaishuShinseiInfoPanelDiv panel, String ymlDataName) {
 
-        //TO DO  JutakuData1.xml ①
-        List<HashMap> ymlData = ymlData(ymlDataName);
-
-        //JutakuData.xml Read　②
-        //前回
-        String payTotalMae = ymlData.get(2).get("payTotalMae").toString();
-        String hokenSeikyuAmountMae = ymlData.get(2).get("hokenSeikyuAmountMae").toString();
-        String riyoshaFutanAmountMae = ymlData.get(2).get("riyoshaFutanAmountMae").toString();
-        String limitOverAmountMae = ymlData.get(2).get("limitOverAmountMae").toString();
-        //今回
-        String payTotalNow = ymlData.get(2).get("payTotalNow").toString();
-        String hokenSeikyuAmountNow = ymlData.get(2).get("hokenSeikyuAmountNow").toString();
-        String riyoshaFutanAmountNow = ymlData.get(2).get("riyoshaFutanAmountNow").toString();
-        String limitOverAmountNow = ymlData.get(2).get("limitOverAmountNow").toString();
-
-        //TO DO  JutakuData.xml Write　③
-        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
-        //前回
-//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-//                getTxtHiyoTotalMae().setValue(new Decimal(payTotalMae));
+//        //前回
+//        String payTotalMae = ymlData.get(2).get("payTotalMae").toString();
+//        String hokenSeikyuAmountMae = ymlData.get(2).get("hokenSeikyuAmountMae").toString();
+//        String riyoshaFutanAmountMae = ymlData.get(2).get("riyoshaFutanAmountMae").toString();
+//        String limitOverAmountMae = ymlData.get(2).get("limitOverAmountMae").toString();
+//        //今回
+//        String payTotalNow = ymlData.get(2).get("payTotalNow").toString();
+//        String hokenSeikyuAmountNow = ymlData.get(2).get("hokenSeikyuAmountNow").toString();
+//        String riyoshaFutanAmountNow = ymlData.get(2).get("riyoshaFutanAmountNow").toString();
+//        String limitOverAmountNow = ymlData.get(2).get("limitOverAmountNow").toString();
 //
+//        //TO DO  JutakuData.xml Write　③
+//        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
+//        //前回
+////        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+////                getTxtHiyoTotalMae().setValue(new Decimal(payTotalMae));
+////
+////        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+////                getTxtHokenTaishoHiyoMae().setValue(new Decimal(hokenSeikyuAmountMae));
+////
+////        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+////                getTxtHokenKyufuAmountMae().setValue(new Decimal(riyoshaFutanAmountMae));
 //        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-//                getTxtHokenTaishoHiyoMae().setValue(new Decimal(hokenSeikyuAmountMae));
+//                getTxtRiyoshaFutanAmountMae().setValue(new Decimal(limitOverAmountMae));
 //
+//        //今回
+////        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+////                getTxtHiyoTotalNow().setValue(new Decimal(payTotalNow));
+////
+////        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+////                getTxtHokenTaishoHiyoNow().setValue(new Decimal(hokenSeikyuAmountNow));
+////
+////        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+////                getTxtHokenKyufuAmountNow().setValue(new Decimal(riyoshaFutanAmountNow));
 //        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-//                getTxtHokenKyufuAmountMae().setValue(new Decimal(riyoshaFutanAmountMae));
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-                getTxtRiyoshaFutanAmountMae().setValue(new Decimal(limitOverAmountMae));
-
-        //今回
-//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-//                getTxtHiyoTotalNow().setValue(new Decimal(payTotalNow));
-//
-//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-//                getTxtHokenTaishoHiyoNow().setValue(new Decimal(hokenSeikyuAmountNow));
-//
-//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-//                getTxtHokenKyufuAmountNow().setValue(new Decimal(riyoshaFutanAmountNow));
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-                getTxtRiyoshaFutanAmountNow().setValue(new Decimal(limitOverAmountNow));
-
+//                getTxtRiyoshaFutanAmountNow().setValue(new Decimal(limitOverAmountNow));
     }
 
     /*
@@ -435,24 +400,19 @@ public class JutakuKaishuShinseiInfoPanel {
      */
     private void setShinseiReason(JutakuKaishuShinseiInfoPanelDiv panel, String ymlDataName) {
 
-        //TO DO  JutakuData1.xml ①
-        List<HashMap> ymlData = ymlData(ymlDataName);
-
-        //JutakuData.xml Read　②
-        String createDate = ymlData.get(4).get("createDate").toString();
-        String creationJigyoshaNo = ymlData.get(4).get("creationJigyoshaNo").toString();
-        String creationJigyoshaName = ymlData.get(4).get("creationJigyoshaName").toString();
-        String creatorKanaName = ymlData.get(4).get("creatorKanaName").toString();
-        String creatorName = ymlData.get(4).get("creatorName").toString();
-
-        //TO DO  JutakuData.xml Write　③
-        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreateDate().setValue(new RDate(createDate));
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreationJigyoshaNo().setValue(new RString(creationJigyoshaNo));
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreationJigyoshaName().setValue(new RString(creationJigyoshaName));
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreatorKanaName().setValue(new RString(creatorKanaName));
-        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreatorName().setValue(new RString(creatorName));
-
+//        String createDate = ymlData.get(4).get("createDate").toString();
+//        String creationJigyoshaNo = ymlData.get(4).get("creationJigyoshaNo").toString();
+//        String creationJigyoshaName = ymlData.get(4).get("creationJigyoshaName").toString();
+//        String creatorKanaName = ymlData.get(4).get("creatorKanaName").toString();
+//        String creatorName = ymlData.get(4).get("creatorName").toString();
+//
+//        //TO DO  JutakuData.xml Write　③
+//        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
+//        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreateDate().setValue(new RDate(createDate));
+//        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreationJigyoshaNo().setValue(new RString(creationJigyoshaNo));
+//        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreationJigyoshaName().setValue(new RString(creationJigyoshaName));
+//        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreatorKanaName().setValue(new RString(creatorKanaName));
+//        panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiReason().getTxtCreatorName().setValue(new RString(creatorName));
     }
 
     /*
@@ -471,31 +431,27 @@ public class JutakuKaishuShinseiInfoPanel {
 
         List<dgJutakuKaishuDetail_Row> arrayData = new ArrayList<>();
 
-        //TO DO  JutakuData1.xml ①
-        List<HashMap> ymlData = ymlData(ymlDataName);
-
-        //JutakuData.xml Read　②
-        String chakkoDueDate = ymlData.get(0).get("chakkoDueDate").toString();
-        String kanseiDueDate = ymlData.get(0).get("kanseiDueDate").toString();
-        String mitsumoriAmount = ymlData.get(0).get("mitsumoriAmount").toString();
-        String kaishuJigyosha = ymlData.get(0).get("kaishuJigyosha").toString();
-        String kaishuTaishoAddress = ymlData.get(0).get("kaishuTaishoAddress").toString();
-        String kaishuNaiyo = ymlData.get(0).get("kaishuNaiyo").toString();
-
-        //TO DO  JutakuData.xml Write　③
-        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
-        dgJutakuKaishuDetail_Row item;
-        item = createRowShikyuShinseiListAddData(
-                rowId,
-                chakkoDueDate,
-                kanseiDueDate,
-                mitsumoriAmount,
-                kaishuJigyosha,
-                kaishuTaishoAddress,
-                kaishuNaiyo
-        );
-
-        arrayData.add(item);
+//        String chakkoDueDate = ymlData.get(0).get("chakkoDueDate").toString();
+//        String kanseiDueDate = ymlData.get(0).get("kanseiDueDate").toString();
+//        String mitsumoriAmount = ymlData.get(0).get("mitsumoriAmount").toString();
+//        String kaishuJigyosha = ymlData.get(0).get("kaishuJigyosha").toString();
+//        String kaishuTaishoAddress = ymlData.get(0).get("kaishuTaishoAddress").toString();
+//        String kaishuNaiyo = ymlData.get(0).get("kaishuNaiyo").toString();
+//
+//        //TO DO  JutakuData.xml Write　③
+//        //初期値を設定したいものに値を入れる。値をセットしなければ空欄
+//        dgJutakuKaishuDetail_Row item;
+//        item = createRowShikyuShinseiListAddData(
+//                rowId,
+//                chakkoDueDate,
+//                kanseiDueDate,
+//                mitsumoriAmount,
+//                kaishuJigyosha,
+//                kaishuTaishoAddress,
+//                kaishuNaiyo
+//        );
+//
+//        arrayData.add(item);
         return arrayData;
 
     }
@@ -542,25 +498,14 @@ public class JutakuKaishuShinseiInfoPanel {
 
     private void setSummaryAddNowData(JutakuKaishuShinseiInfoPanelDiv panel, String ymlDataName) {
 
-        //TO DO  JutakuData1.xml ①
-        List<HashMap> ymlData = ymlData(ymlDataName);
-
-        //JutakuData.xml Read　②
-        //今回
-        String payTotalNow = ymlData.get(1).get("payTotalNow").toString();
-        String hokenSeikyuAmountNow = ymlData.get(1).get("hokenSeikyuAmountNow").toString();
-        String riyoshaFutanAmountNow = ymlData.get(1).get("riyoshaFutanAmountNow").toString();
-        String limitOverAmountNow = ymlData.get(1).get("limitOverAmountNow").toString();
-
 //        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary()
 //                .getTxtHiyoTotalNow().setValue(new Decimal(payTotalNow));
 //        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary()
 //                .getTxtHokenTaishoHiyoNow().setValue(new Decimal(hokenSeikyuAmountNow));
 //        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
 //                getTxtHokenKyufuAmountNow().setValue(new Decimal(riyoshaFutanAmountNow));
-        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
-                getTxtRiyoshaFutanAmountNow().setValue(new Decimal(limitOverAmountNow));
-
+//        panel.getJutakuKaishuShinseiResetInfo().getJutakuKaishuShinseiKyufugakuSummary().getTblSeikyuSummary().
+//                getTxtRiyoshaFutanAmountNow().setValue(new Decimal(limitOverAmountNow));
     }
 
     /*
@@ -682,11 +627,5 @@ public class JutakuKaishuShinseiInfoPanel {
         panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKozaNo().clearValue();
         panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKozaMeigininKana().clearValue();
         panel.getJutakuKaishuShinseiContents().getJutakuKaishuShinseiKozaInfo().getKozaPayment().getTxtKozaMeiginin().clearValue();
-    }
-
-    // TO DO  JutakuData１.xml ①
-    private List<HashMap> ymlData(String ymlDataName) {
-
-        return YamlLoader.DBC.loadAsList(new RString("dbc0710011/").concat(ymlDataName));
     }
 }

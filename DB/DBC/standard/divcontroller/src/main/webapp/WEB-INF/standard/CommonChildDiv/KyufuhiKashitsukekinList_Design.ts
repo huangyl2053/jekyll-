@@ -8,6 +8,22 @@ module DBC {
 
         export class Events {
 
+            public static onClick_btnAddShinsei(): string {
+                return "onClick_btnAddShinsei";
+            }
+
+            public static onClick_dgSelectShinsei(): string {
+                return "onClick_dgSelectShinsei";
+            }
+
+            public static onClick_dgModifyShinsei(): string {
+                return "onClick_dgModifyShinsei";
+            }
+
+            public static onClick_dgDeleteShinsei(): string {
+                return "onClick_dgDeleteShinsei";
+            }
+
         }
 
         export class Controls {

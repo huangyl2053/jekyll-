@@ -73,8 +73,13 @@ public class FukaRirekiAllHandler {
      * @return 表示件数
      */
     public int load(HihokenshaNo 被保険者番号) {
-        IItemList<FukaModel> modelList = fukaFinder.load全賦課履歴(被保険者番号);
-        PanelSessionAccessor.put(div, SESSION_NAME, ItemList.newItemList(modelList));
+        // TODO n8187久保田 画面遷移の確認のために空行を表示するよう一時的に修正
+        // ここから
+        List<FukaModel> list = new ArrayList<>();
+        IItemList<FukaModel> modelList = ItemList.of(list);
+//        IItemList<FukaModel> modelList = fukaFinder.load全賦課履歴(被保険者番号);
+//        PanelSessionAccessor.put(div, SESSION_NAME, ItemList.newItemList(modelList));
+        // ここまで
         return set全賦課履歴(modelList);
     }
 
@@ -86,8 +91,13 @@ public class FukaRirekiAllHandler {
      * @return 表示件数
      */
     public int load(HihokenshaNo 被保険者番号, FukaNendo 賦課年度) {
-        IItemList<FukaModel> modelList = fukaFinder.load全賦課履歴(被保険者番号, 賦課年度);
-        PanelSessionAccessor.put(div, SESSION_NAME, ItemList.newItemList(modelList));
+        // TODO n8187久保田 画面遷移の確認のために空行を表示するよう一時的に修正
+        // ここから
+        List<FukaModel> list = new ArrayList<>();
+        IItemList<FukaModel> modelList = ItemList.of(list);
+//        IItemList<FukaModel> modelList = fukaFinder.load全賦課履歴(被保険者番号, 賦課年度);
+//        PanelSessionAccessor.put(div, SESSION_NAME, ItemList.newItemList(modelList));
+        // ここまで
         return set全賦課履歴(modelList);
     }
 
@@ -100,8 +110,13 @@ public class FukaRirekiAllHandler {
      * @return 表示件数
      */
     public int load(ChoteiNendo 調定年度, FukaNendo 賦課年度, TsuchishoNo 通知書番号) {
-        IItemList<FukaModel> modelList = fukaFinder.find賦課直近(調定年度, 賦課年度, 通知書番号);
-        PanelSessionAccessor.put(div, SESSION_NAME, ItemList.newItemList(modelList));
+        // TODO n8187久保田 画面遷移の確認のために空行を表示するよう一時的に修正
+        // ここから
+        List<FukaModel> list = new ArrayList<>();
+        IItemList<FukaModel> modelList = ItemList.of(list);
+//        IItemList<FukaModel> modelList = fukaFinder.find賦課直近(調定年度, 賦課年度, 通知書番号);
+//        PanelSessionAccessor.put(div, SESSION_NAME, ItemList.newItemList(modelList));
+        // ここまで
         return set全賦課履歴(modelList);
     }
 
@@ -112,8 +127,13 @@ public class FukaRirekiAllHandler {
      * @return 表示件数
      */
     public int reload(TsuchishoNo 通知書番号) {
-        IItemList<FukaModel> modelList = fukaFinder.get直近介護賦課一覧(通知書番号);
-        PanelSessionAccessor.put(div, SESSION_NAME, ItemList.newItemList(modelList));
+        // TODO n8187久保田 画面遷移の確認のために空行を表示するよう一時的に修正
+        // ここから
+        List<FukaModel> list = new ArrayList<>();
+        IItemList<FukaModel> modelList = ItemList.of(list);
+//        IItemList<FukaModel> modelList = fukaFinder.get直近介護賦課一覧(通知書番号);
+//        PanelSessionAccessor.put(div, SESSION_NAME, ItemList.newItemList(modelList));
+        // ここまで
         return set全賦課履歴(modelList);
     }
 
@@ -153,27 +173,31 @@ public class FukaRirekiAllHandler {
     private int set全賦課履歴(IItemList<FukaModel> modelList) {
 
         List<dgFukaRirekiAll_Row> rowList = new ArrayList<>();
-        for (FukaModel model : new FukaRireki(modelList.toList()).getグループ化賦課履歴()) {
-
-            Optional<HokenryoDankai> 保険料段階 = dankaiManager.get保険料段階(model.get賦課年度(), model.get賦課市町村コード(), model.get保険料段階());
-            Optional<Kiwarigaku> 期割額 = kiwariFinder.load期割額(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get処理日時());
-
-            if (!期割額.isPresent()) {
-                continue;
-            }
-
-            rowList.add(new dgFukaRirekiAll_Row(
-                    model.get調定年度().value().toDateString(),
-                    model.get賦課年度().value().toDateString(),
-                    model.get通知書番号().value(),
-                    保険料段階.get().edit表示用保険料段階(),
-                    new RString(model.get減免前介護保険料_年額().toString()),
-                    new RString(model.get減免額().toString()),
-                    new RString(model.get確定介護保険料_年額().toString()),
-                    new RString(期割額.get().get特徴期別額合計().toString()),
-                    new RString(期割額.get().get普徴期別額合計().toString())
-            ));
-        }
+        // TODO n8187久保田 画面遷移の確認のために空行を表示するよう一時的に修正
+        // ここから
+        rowList.add(new dgFukaRirekiAll_Row());
+//        for (FukaModel model : new FukaRireki(modelList.toList()).getグループ化賦課履歴()) {
+//
+//            Optional<HokenryoDankai> 保険料段階 = dankaiManager.get保険料段階(model.get賦課年度(), model.get賦課市町村コード(), model.get保険料段階());
+//            Optional<Kiwarigaku> 期割額 = kiwariFinder.load期割額(model.get調定年度(), model.get賦課年度(), model.get通知書番号(), model.get処理日時());
+//
+//            if (!期割額.isPresent()) {
+//                continue;
+//            }
+//
+//            rowList.add(new dgFukaRirekiAll_Row(
+//                    model.get調定年度().value().toDateString(),
+//                    model.get賦課年度().value().toDateString(),
+//                    model.get通知書番号().value(),
+//                    保険料段階.get().edit表示用保険料段階(),
+//                    new RString(model.get減免前介護保険料_年額().toString()),
+//                    new RString(model.get減免額().toString()),
+//                    new RString(model.get確定介護保険料_年額().toString()),
+//                    new RString(期割額.get().get特徴期別額合計().toString()),
+//                    new RString(期割額.get().get普徴期別額合計().toString())
+//            ));
+//        }
+        // ここまで
         div.getDgFukaRirekiAll().setDataSource(rowList);
 
         return div.getDgFukaRirekiAll().getDataSource().size();

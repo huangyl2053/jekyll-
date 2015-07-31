@@ -28,13 +28,11 @@ public class JutakuJizenKanryoPanel {
      */
     public ResponseData<JutakuJizenKanryoPanelDiv> onLoad(
             JutakuJizenKanryoPanelDiv kanryoPanel, JutakuKaishuJizenShinseiHihokenshaPanelDiv hihoPanel) {
-        ResponseData<JutakuJizenKanryoPanelDiv> response = new ResponseData<>();
 
 //        KaigoKanryoMessage.setMessage(kanryoPanel.getKanryoMessage(),
 //                new RString("住宅改修費事前申請を更新しました。"),
 //                hihoPanel.getKaigoShikakuKihon().getTxtHihokenshaNo().getValue(),
 //                hihoPanel.getKaigoAtena().getAtenaInfo().getTxtAtenaMeisho().getValue());
-        response.data = kanryoPanel;
-        return response;
+        return ResponseData.of(kanryoPanel).respond();
     }
 }

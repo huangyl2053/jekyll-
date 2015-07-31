@@ -23,12 +23,11 @@ public class JutakuKaishuShinseiHihokenshaPanel {
      * @return response
      */
     public ResponseData<JutakuKaishuShinseiHihokenshaPanelDiv> onLoad(JutakuKaishuShinseiHihokenshaPanelDiv panel) {
-        ResponseData<JutakuKaishuShinseiHihokenshaPanelDiv> response = new ResponseData<>();
 
         ShikibetsuCode 識別コード = new ShikibetsuCode("012345678901234");
         int rowId = 0;
 //        KaigoShikakuKihon.setData(panel.getKaigoAtenaInfo(), panel.getKaigoShikakuKihon(), 識別コード, rowId);
-        response.data = panel;
-        return response;
+
+        return ResponseData.of(panel).respond();
     }
 }

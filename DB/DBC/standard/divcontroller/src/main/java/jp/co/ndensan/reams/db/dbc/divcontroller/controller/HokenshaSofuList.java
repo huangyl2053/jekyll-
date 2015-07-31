@@ -21,11 +21,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
  *
  * @author N8187 久保田 英男
  */
+//TODO n3317塚田　Yamlを使わないようにする
 public class HokenshaSofuList {
-
-    private List<HashMap> getHokenshaSofuListYaml() {
-        return YamlLoader.DBC.loadAsList(new RString("dbc0200000/HokenshaSofuList.yml"));
-    }
 
     /**
      * 画面ロード時の処理です。
@@ -34,32 +31,32 @@ public class HokenshaSofuList {
      * @return ResponseData
      */
     public ResponseData<HokenshaSofuListDiv> onLoad(HokenshaSofuListDiv panel) {
-        ResponseData<HokenshaSofuListDiv> response = new ResponseData<>();
 
-        ControlGenerator cg = new ControlGenerator(getHokenshaSofuListYaml().get(0));
-        panel.getTxtShoriYM().setValue(cg.getAsRDate("処理年月"));
+//        ControlGenerator cg = new ControlGenerator(getHokenshaSofuListYaml().get(0));
+//        panel.getTxtShoriYM().setValue(cg.getAsRDate("処理年月"));
         setHokenshaSofuList(panel);
 
-        response.data = panel;
-        return response;
+        return ResponseData.of(panel).respond();
     }
 
     private void setHokenshaSofuList(HokenshaSofuListDiv panel) {
         DataGrid<dgHokenshaSofuList_Row> dgRow = panel.getDgHokenshaSofuList();
         List<dgHokenshaSofuList_Row> dgRowList = dgRow.getDataSource();
+        //TODO n3317塚田　遷移させるために空の行を表示
+        dgRowList.add(new dgHokenshaSofuList_Row());
 
-        List<HashMap> sourceList = getHokenshaSofuListYaml();
-        dgRowList.clear();
-        for (int i = 1; i < sourceList.size(); i++) {
-            ControlGenerator cg = new ControlGenerator(sourceList.get(i));
-            dgRowList.add(create保険者情報送付一覧アイテム(
-                    cg.getAsRString("送付情報"),
-                    cg.getAsRString("前月"),
-                    cg.getAsRString("前々月"),
-                    cg.getAsRString("当月状態"),
-                    cg.getAsRString("当月処理日時")));
-        }
-        dgRow.setDataSource(dgRowList);
+//        List<HashMap> sourceList = getHokenshaSofuListYaml();
+//        dgRowList.clear();
+//        for (int i = 1; i < sourceList.size(); i++) {
+//            ControlGenerator cg = new ControlGenerator(sourceList.get(i));
+//            dgRowList.add(create保険者情報送付一覧アイテム(
+//                    cg.getAsRString("送付情報"),
+//                    cg.getAsRString("前月"),
+//                    cg.getAsRString("前々月"),
+//                    cg.getAsRString("当月状態"),
+//                    cg.getAsRString("当月処理日時")));
+//        }
+//        dgRow.setDataSource(dgRowList);
     }
 
     private dgHokenshaSofuList_Row create保険者情報送付一覧アイテム(
