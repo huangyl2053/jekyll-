@@ -1,0 +1,14 @@
+﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
+hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+shinseiJiyu,varchar,RString,,,,,申請事由,A
+seihoJukyuUmu,bool,boolean,,,,,生活保護受給有無,A
+roreiFukushiNenkinJukyuUmu,bool,boolean,,,,,老齢福祉年金受給有無,A
+seihoFujoMinaoshiTokureiUmu,bool,boolean,,,,,生保扶助見直し特例有無,A
+keigenritsu_Bunshi,numeric,Decimal,,,,,軽減率（分子）,A
+keigenritsu_Bumbo,numeric,Decimal,,,,,軽減率（分母）,A
+kyotakuServiceGentei,bool,boolean,,,,,居宅サービス限定,A
+kyojuhiShokuhiNomi,bool,boolean,,,,,居住費・食費のみ,A
+kyusochishaUnitTypeKoshitsuNomi,bool,boolean,,,,,旧措置者ユニット型個室のみ,A
+kakuninNo,varchar,RString,,,,,確認番号,A
+gemmenKubun,varchar,RString,,,,,減免区分,A

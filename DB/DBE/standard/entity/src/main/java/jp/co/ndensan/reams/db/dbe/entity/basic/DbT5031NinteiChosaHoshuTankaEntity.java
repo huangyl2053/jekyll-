@@ -17,7 +17,7 @@ import java.util.Objects;
  *
  */
 public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT5031NinteiChosaHoshuTankaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5031NinteiChosaHoshuTanka");
 
@@ -42,7 +42,8 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
     private Decimal tanka;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -50,7 +51,8 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -58,7 +60,8 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -66,7 +69,8 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
@@ -75,7 +79,8 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
 
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -83,96 +88,108 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
     }
 
     /**
-     * getChosaKubun
-     * @return chosaKubun
+     * 調査区分のgetメソッドです。
+     * 
+     * @return 調査区分
      */
     public Code getChosaKubun() {
         return chosaKubun;
     }
 
     /**
-     * setChosaKubun
-     * @param chosaKubun chosaKubun
+     * 調査区分のsetメソッドです。
+     * 
+     * @param chosaKubun 調査区分
      */
     public void setChosaKubun(Code chosaKubun) {
         this.chosaKubun = chosaKubun;
     }
 
     /**
-     * getHomonShubetsu
-     * @return homonShubetsu
+     * 訪問種別のgetメソッドです。
+     * 
+     * @return 訪問種別
      */
     public Code getHomonShubetsu() {
         return homonShubetsu;
     }
 
     /**
-     * setHomonShubetsu
-     * @param homonShubetsu homonShubetsu
+     * 訪問種別のsetメソッドです。
+     * 
+     * @param homonShubetsu 訪問種別
      */
     public void setHomonShubetsu(Code homonShubetsu) {
         this.homonShubetsu = homonShubetsu;
     }
 
     /**
-     * getIkenshoNyushuPatern
-     * @return ikenshoNyushuPatern
+     * 意見書入手パターンのgetメソッドです。
+     * 
+     * @return 意見書入手パターン
      */
     public Code getIkenshoNyushuPatern() {
         return ikenshoNyushuPatern;
     }
 
     /**
-     * setIkenshoNyushuPatern
-     * @param ikenshoNyushuPatern ikenshoNyushuPatern
+     * 意見書入手パターンのsetメソッドです。
+     * 
+     * @param ikenshoNyushuPatern 意見書入手パターン
      */
     public void setIkenshoNyushuPatern(Code ikenshoNyushuPatern) {
         this.ikenshoNyushuPatern = ikenshoNyushuPatern;
     }
 
     /**
-     * getKaishiYM
-     * @return kaishiYM
+     * 開始年月のgetメソッドです。
+     * 
+     * @return 開始年月
      */
     public FlexibleYearMonth getKaishiYM() {
         return kaishiYM;
     }
 
     /**
-     * setKaishiYM
-     * @param kaishiYM kaishiYM
+     * 開始年月のsetメソッドです。
+     * 
+     * @param kaishiYM 開始年月
      */
     public void setKaishiYM(FlexibleYearMonth kaishiYM) {
         this.kaishiYM = kaishiYM;
     }
 
     /**
-     * getShuryoYM
-     * @return shuryoYM
+     * 終了年月のgetメソッドです。
+     * 
+     * @return 終了年月
      */
     public FlexibleYearMonth getShuryoYM() {
         return shuryoYM;
     }
 
     /**
-     * setShuryoYM
-     * @param shuryoYM shuryoYM
+     * 終了年月のsetメソッドです。
+     * 
+     * @param shuryoYM 終了年月
      */
     public void setShuryoYM(FlexibleYearMonth shuryoYM) {
         this.shuryoYM = shuryoYM;
     }
 
     /**
-     * getTanka
-     * @return tanka
+     * 単価のgetメソッドです。
+     * 
+     * @return 単価
      */
     public Decimal getTanka() {
         return tanka;
     }
 
     /**
-     * setTanka
-     * @param tanka tanka
+     * 単価のsetメソッドです。
+     * 
+     * @param tanka 単価
      */
     public void setTanka(Decimal tanka) {
         this.tanka = tanka;
@@ -231,5 +248,6 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
     }
 
 // </editor-fold>
+
 
 }

@@ -1,0 +1,6 @@
+﻿shinsakaiKaisaiBashoCode,varchar,RString,,,,,介護認定審査会開催場所コード,A
+shinsakaiKaisaiBashoName,varchar,RString,,,,,介護認定審査会開催場所名称,A
+shinsakaiKaisaiChikuCode,UDD035Code,Code,,,,,介護認定審査会開催地区コード,A
+shinsakaiKaisaiBashoJusho,UDD046AtenaJusho,AtenaJusho,,,,,介護認定審査会開催場所住所,A
+shinsakaiKaisaiBashoTelNo,UDD026TelNo,TelNo,,,,,介護認定審査会開催場所電話番号,A
+shinsakaiKaisaiBashoJokyo,bpchar,RString,,,,,介護認定審査会開催場所状況,A

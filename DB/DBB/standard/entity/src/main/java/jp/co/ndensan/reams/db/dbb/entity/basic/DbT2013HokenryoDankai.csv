@@ -1,0 +1,6 @@
+﻿fukaNendo,UDD012YSeireki,FlexibleYear,,,,,賦課年度,A
+dankaiIndex,varchar,RString,,,,,段階インデックス,A
+rankuKubun,varchar,RString,,,,,ランク区分,A
+dankaiKubun,varchar,RString,,,,,段階区分,A
+hokenryoRitsu,numeric,Decimal,,,,,保険料率,A
+tokureiHyoki,varchar,RString,,,,,特例表記,A

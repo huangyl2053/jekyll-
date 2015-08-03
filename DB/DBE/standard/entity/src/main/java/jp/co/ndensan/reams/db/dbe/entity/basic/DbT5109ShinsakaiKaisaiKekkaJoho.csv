@@ -1,0 +1,9 @@
+﻿shinsakaiKaisaiNo,int2,int,,,,,介護認定審査会開催番号,A
+gogitaiNo,int2,int,,,,,合議体番号,A
+shinsakaiKaisaiYMD,UDD015YMD,FlexibleDate,,,,,介護認定審査会開催年月日,A
+shinsakaiKaishiTime,varchar,RString,,,,,介護認定審査会開始時刻,A
+shinsakaiShuryoTime,varchar,RString,,,,,介護認定審査会終了時刻,A
+shinsakaiKaisaiBashoCode,varchar,RString,,,,,介護認定審査会開催場所コード,A
+shinsakaiIinJokyo,bpchar,RString,,,,,介護認定審査会委員の状況,A
+isKaisaiZumi,bool,boolean,,,,,開催済み登録区分,A
+shoyoJikanGokei,int2,int,,,,,所要時間合計,A

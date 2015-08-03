@@ -1,0 +1,17 @@
+﻿choteiNendo,UDD012YSeireki,FlexibleYear,,,,,調定年度,A
+fukaNendo,UDD012YSeireki,FlexibleYear,,,,,賦課年度,A
+tsuchishoNo,DbUDD008TsuchishoNo,DbUDD008TsuchishoNo,,,,,通知書番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+shinseiYMD,UDD015YMD,FlexibleDate,,,,,減免申請日,A
+ketteiYMD,UDD015YMD,FlexibleDate,,,,,減免決定日,A
+torikeshiYMD,UDD015YMD,FlexibleDate,,,,,減免取消日,A
+jotaiKubun,varchar,RString,,,,,減免状態区分,A
+sakuseiKubun,varchar,RString,,,,,減免作成区分,A
+shinseiJiyu,text,RString,,,,,申請事由,A
+gemmenJiyuCode,UDD035Code,Code,,,,,減免種類コード,A
+gemmenJiyu,text,RString,,,,,減免事由,A
+gemmenTorikeshiJiyuCode,UDD035Code,Code,,,,,減免取消種類コード,A
+gemmenTorikeshiJiyu,text,RString,,,,,減免取消事由,A
+shinseiGemmenGaku,numeric,Decimal,,,,,申請減免額,A
+ketteiGemmenGaku,numeric,Decimal,,,,,決定減免額,A
+torikeshiGemmenGaku,numeric,Decimal,,,,,取消減免額,A

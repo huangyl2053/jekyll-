@@ -1,0 +1,12 @@
+﻿idoYMD,UDD015YMD,FlexibleDate,,,,,異動年月日,A
+idoKubunCode,varchar,RString,,,,,異動区分コード,A
+jukyushaIdoJiyu,varchar,RString,,,,,受給者異動事由,A
+shoKisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,証記載保険者番号,A
+hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+hokenKyufuIchijiSashitomeKaishiYMD,UDD015YMD,FlexibleDate,,,,,保険給付支払一時差止開始年月日,A
+hokenKyufuIchijiSashitomeShuryoYMD,UDD015YMD,FlexibleDate,,,,,保険給付支払一時差止終了年月日,A
+hokenkyufuIchijiSashitomeKubunCode,varchar,RString,,,,,保険給付支払一時差止区分コード,A
+hokenkyufuIchijiSashitomeKingaku,numeric,Decimal,,,,,保険給付支払一時差止金額,A
+teiseiRenrakuhyoFlag,bool,boolean,,,,,訂正連絡票フラグ,A
+sofuYM,UDD014YM,FlexibleYearMonth,,,,,送付年月,A

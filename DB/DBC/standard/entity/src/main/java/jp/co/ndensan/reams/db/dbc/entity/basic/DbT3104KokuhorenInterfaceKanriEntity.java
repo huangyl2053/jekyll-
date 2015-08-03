@@ -4,23 +4,20 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import java.util.UUID;
-import java.util.Objects;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
+import java.util.Objects;
 
 /**
  * DbT3104KokuhorenInterfaceKanriの項目定義クラスです
  *
  */
-@OnNextSchema("rgdb")
 public class DbT3104KokuhorenInterfaceKanriEntity extends DbTableEntityBase<DbT3104KokuhorenInterfaceKanriEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3104KokuhorenInterfaceKanri");
 
@@ -33,7 +30,7 @@ public class DbT3104KokuhorenInterfaceKanriEntity extends DbTableEntityBase<DbT3
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private RYearMonth shoriYM;
+    private FlexibleYearMonth shoriYM;
     @PrimaryKey
     private RString kokanShikibetsuNo;
     private RString sofuTorikomiKubun;
@@ -55,14 +52,14 @@ public class DbT3104KokuhorenInterfaceKanriEntity extends DbTableEntityBase<DbT3
     private int fileKensu5;
     private boolean saiShoriFukaKubun;
     private int ctrlRecordKensu;
-    private RYearMonth ctrlShoriYM;
+    private FlexibleYearMonth ctrlShoriYM;
     private int kagoCtrlRecordKensu;
-    private RYearMonth kagoCtrlShoriYM;
-    private RYearMonth jissekiDataShinsaYM;
+    private FlexibleYearMonth kagoCtrlShoriYM;
+    private FlexibleYearMonth jissekiDataShinsaYM;
 
     /**
-     * getInsertDantaiCd
-     *
+     * insertDantaiCdのgetメソッドです。
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -70,8 +67,8 @@ public class DbT3104KokuhorenInterfaceKanriEntity extends DbTableEntityBase<DbT3
     }
 
     /**
-     * setInsertDantaiCd
-     *
+     * insertDantaiCdのsetメソッドです。
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -79,8 +76,8 @@ public class DbT3104KokuhorenInterfaceKanriEntity extends DbTableEntityBase<DbT3
     }
 
     /**
-     * getIsDeleted
-     *
+     * isDeletedのgetメソッドです。
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -88,17 +85,18 @@ public class DbT3104KokuhorenInterfaceKanriEntity extends DbTableEntityBase<DbT3
     }
 
     /**
-     * setIsDeleted
-     *
+     * isDeletedのsetメソッドです。
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
-     * setLastUpdateReamsLoginId
-     *
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -106,460 +104,481 @@ public class DbT3104KokuhorenInterfaceKanriEntity extends DbTableEntityBase<DbT3
     }
 
     /**
-     * getShoriYM
-     *
-     * @return shoriYM
+     * 処理年月のgetメソッドです。
+     * 
+     * @return 処理年月
      */
-    public RYearMonth getShoriYM() {
+    public FlexibleYearMonth getShoriYM() {
         return shoriYM;
     }
 
     /**
-     * setShoriYM
-     *
-     * @param shoriYM shoriYM
+     * 処理年月のsetメソッドです。
+     * 
+     * @param shoriYM 処理年月
      */
-    public void setShoriYM(RYearMonth shoriYM) {
+    public void setShoriYM(FlexibleYearMonth shoriYM) {
         this.shoriYM = shoriYM;
     }
 
     /**
-     * getKokanShikibetsuNo
-     *
-     * @return kokanShikibetsuNo
+     * 交換情報識別番号のgetメソッドです。
+     * <br/>
+     * <br/>交換情報識別番号の上3桁
+     * 
+     * @return 交換情報識別番号
      */
     public RString getKokanShikibetsuNo() {
         return kokanShikibetsuNo;
     }
 
     /**
-     * setKokanShikibetsuNo
-     *
-     * @param kokanShikibetsuNo kokanShikibetsuNo
+     * 交換情報識別番号のsetメソッドです。
+     * <br/>
+     * <br/>交換情報識別番号の上3桁
+     * 
+     * @param kokanShikibetsuNo 交換情報識別番号
      */
     public void setKokanShikibetsuNo(RString kokanShikibetsuNo) {
         this.kokanShikibetsuNo = kokanShikibetsuNo;
     }
 
     /**
-     * getSofuTorikomiKubun
-     *
-     * @return sofuTorikomiKubun
+     * 送付取込区分のgetメソッドです。
+     * <br/>
+     * <br/>1:送付 2:取込 3:それ以外
+     * 
+     * @return 送付取込区分
      */
     public RString getSofuTorikomiKubun() {
         return sofuTorikomiKubun;
     }
 
     /**
-     * setSofuTorikomiKubun
-     *
-     * @param sofuTorikomiKubun sofuTorikomiKubun
+     * 送付取込区分のsetメソッドです。
+     * <br/>
+     * <br/>1:送付 2:取込 3:それ以外
+     * 
+     * @param sofuTorikomiKubun 送付取込区分
      */
     public void setSofuTorikomiKubun(RString sofuTorikomiKubun) {
         this.sofuTorikomiKubun = sofuTorikomiKubun;
     }
 
     /**
-     * getShoriJotaiKubun
-     *
-     * @return shoriJotaiKubun
+     * 処理状態区分のgetメソッドです。
+     * <br/>
+     * <br/>1:処理前 2:起動 3:終了 9:処理なし
+     * 
+     * @return 処理状態区分
      */
     public RString getShoriJotaiKubun() {
         return shoriJotaiKubun;
     }
 
     /**
-     * setShoriJotaiKubun
-     *
-     * @param shoriJotaiKubun shoriJotaiKubun
+     * 処理状態区分のsetメソッドです。
+     * <br/>
+     * <br/>1:処理前 2:起動 3:終了 9:処理なし
+     * 
+     * @param shoriJotaiKubun 処理状態区分
      */
     public void setShoriJotaiKubun(RString shoriJotaiKubun) {
         this.shoriJotaiKubun = shoriJotaiKubun;
     }
 
     /**
-     * getShoriJisshiTimestamp
-     *
-     * @return shoriJisshiTimestamp
+     * 処理実施日時のgetメソッドです。
+     * 
+     * @return 処理実施日時
      */
     public YMDHMS getShoriJisshiTimestamp() {
         return shoriJisshiTimestamp;
     }
 
     /**
-     * setShoriJisshiTimestamp
-     *
-     * @param shoriJisshiTimestamp shoriJisshiTimestamp
+     * 処理実施日時のsetメソッドです。
+     * 
+     * @param shoriJisshiTimestamp 処理実施日時
      */
     public void setShoriJisshiTimestamp(YMDHMS shoriJisshiTimestamp) {
         this.shoriJisshiTimestamp = shoriJisshiTimestamp;
     }
 
     /**
-     * getChushutsuKaishiTimestamp
-     *
-     * @return chushutsuKaishiTimestamp
+     * 抽出開始日時のgetメソッドです。
+     * 
+     * @return 抽出開始日時
      */
     public YMDHMS getChushutsuKaishiTimestamp() {
         return chushutsuKaishiTimestamp;
     }
 
     /**
-     * setChushutsuKaishiTimestamp
-     *
-     * @param chushutsuKaishiTimestamp chushutsuKaishiTimestamp
+     * 抽出開始日時のsetメソッドです。
+     * 
+     * @param chushutsuKaishiTimestamp 抽出開始日時
      */
     public void setChushutsuKaishiTimestamp(YMDHMS chushutsuKaishiTimestamp) {
         this.chushutsuKaishiTimestamp = chushutsuKaishiTimestamp;
     }
 
     /**
-     * getChushutsuShuryoTimestamp
-     *
-     * @return chushutsuShuryoTimestamp
+     * 抽出終了日時のgetメソッドです。
+     * 
+     * @return 抽出終了日時
      */
     public YMDHMS getChushutsuShuryoTimestamp() {
         return chushutsuShuryoTimestamp;
     }
 
     /**
-     * setChushutsuShuryoTimestamp
-     *
-     * @param chushutsuShuryoTimestamp chushutsuShuryoTimestamp
+     * 抽出終了日時のsetメソッドです。
+     * 
+     * @param chushutsuShuryoTimestamp 抽出終了日時
      */
     public void setChushutsuShuryoTimestamp(YMDHMS chushutsuShuryoTimestamp) {
         this.chushutsuShuryoTimestamp = chushutsuShuryoTimestamp;
     }
 
     /**
-     * getSaiShoriKahiKubun
-     *
-     * @return saiShoriKahiKubun
+     * 再処理可能区分のgetメソッドです。
+     * <br/>
+     * <br/>True:再処理可能 False:再処理不可
+     * 
+     * @return 再処理可能区分
      */
     public boolean getSaiShoriKahiKubun() {
         return saiShoriKahiKubun;
     }
 
     /**
-     * setSaiShoriKahiKubun
-     *
-     * @param saiShoriKahiKubun saiShoriKahiKubun
+     * 再処理可能区分のsetメソッドです。
+     * <br/>
+     * <br/>True:再処理可能 False:再処理不可
+     * 
+     * @param saiShoriKahiKubun 再処理可能区分
      */
     public void setSaiShoriKahiKubun(boolean saiShoriKahiKubun) {
         this.saiShoriKahiKubun = saiShoriKahiKubun;
     }
 
     /**
-     * getShoriJikkoKaisu
-     *
-     * @return shoriJikkoKaisu
+     * 処理実行回数のgetメソッドです。
+     * 
+     * @return 処理実行回数
      */
     public Decimal getShoriJikkoKaisu() {
         return shoriJikkoKaisu;
     }
 
     /**
-     * setShoriJikkoKaisu
-     *
-     * @param shoriJikkoKaisu shoriJikkoKaisu
+     * 処理実行回数のsetメソッドです。
+     * 
+     * @param shoriJikkoKaisu 処理実行回数
      */
     public void setShoriJikkoKaisu(Decimal shoriJikkoKaisu) {
         this.shoriJikkoKaisu = shoriJikkoKaisu;
     }
 
     /**
-     * getFileName1
-     *
-     * @return fileName1
+     * ファイル名称１のgetメソッドです。
+     * 
+     * @return ファイル名称１
      */
     public RString getFileName1() {
         return fileName1;
     }
 
     /**
-     * setFileName1
-     *
-     * @param fileName1 fileName1
+     * ファイル名称１のsetメソッドです。
+     * 
+     * @param fileName1 ファイル名称１
      */
     public void setFileName1(RString fileName1) {
         this.fileName1 = fileName1;
     }
 
     /**
-     * getFileName2
-     *
-     * @return fileName2
+     * ファイル名称２のgetメソッドです。
+     * 
+     * @return ファイル名称２
      */
     public RString getFileName2() {
         return fileName2;
     }
 
     /**
-     * setFileName2
-     *
-     * @param fileName2 fileName2
+     * ファイル名称２のsetメソッドです。
+     * 
+     * @param fileName2 ファイル名称２
      */
     public void setFileName2(RString fileName2) {
         this.fileName2 = fileName2;
     }
 
     /**
-     * getFileName3
-     *
-     * @return fileName3
+     * ファイル名称３のgetメソッドです。
+     * 
+     * @return ファイル名称３
      */
     public RString getFileName3() {
         return fileName3;
     }
 
     /**
-     * setFileName3
-     *
-     * @param fileName3 fileName3
+     * ファイル名称３のsetメソッドです。
+     * 
+     * @param fileName3 ファイル名称３
      */
     public void setFileName3(RString fileName3) {
         this.fileName3 = fileName3;
     }
 
     /**
-     * getFileName4
-     *
-     * @return fileName4
+     * ファイル名称４のgetメソッドです。
+     * 
+     * @return ファイル名称４
      */
     public RString getFileName4() {
         return fileName4;
     }
 
     /**
-     * setFileName4
-     *
-     * @param fileName4 fileName4
+     * ファイル名称４のsetメソッドです。
+     * 
+     * @param fileName4 ファイル名称４
      */
     public void setFileName4(RString fileName4) {
         this.fileName4 = fileName4;
     }
 
     /**
-     * getFileName5
-     *
-     * @return fileName5
+     * ファイル名称５のgetメソッドです。
+     * 
+     * @return ファイル名称５
      */
     public RString getFileName5() {
         return fileName5;
     }
 
     /**
-     * setFileName5
-     *
-     * @param fileName5 fileName5
+     * ファイル名称５のsetメソッドです。
+     * 
+     * @param fileName5 ファイル名称５
      */
     public void setFileName5(RString fileName5) {
         this.fileName5 = fileName5;
     }
 
     /**
-     * getFileKensu1
-     *
-     * @return fileKensu1
+     * ファイル件数１のgetメソッドです。
+     * 
+     * @return ファイル件数１
      */
     public int getFileKensu1() {
         return fileKensu1;
     }
 
     /**
-     * setFileKensu1
-     *
-     * @param fileKensu1 fileKensu1
+     * ファイル件数１のsetメソッドです。
+     * 
+     * @param fileKensu1 ファイル件数１
      */
     public void setFileKensu1(int fileKensu1) {
         this.fileKensu1 = fileKensu1;
     }
 
     /**
-     * getFileKensu2
-     *
-     * @return fileKensu2
+     * ファイル件数２のgetメソッドです。
+     * 
+     * @return ファイル件数２
      */
     public int getFileKensu2() {
         return fileKensu2;
     }
 
     /**
-     * setFileKensu2
-     *
-     * @param fileKensu2 fileKensu2
+     * ファイル件数２のsetメソッドです。
+     * 
+     * @param fileKensu2 ファイル件数２
      */
     public void setFileKensu2(int fileKensu2) {
         this.fileKensu2 = fileKensu2;
     }
 
     /**
-     * getFileKensu3
-     *
-     * @return fileKensu3
+     * ファイル件数３のgetメソッドです。
+     * 
+     * @return ファイル件数３
      */
     public int getFileKensu3() {
         return fileKensu3;
     }
 
     /**
-     * setFileKensu3
-     *
-     * @param fileKensu3 fileKensu3
+     * ファイル件数３のsetメソッドです。
+     * 
+     * @param fileKensu3 ファイル件数３
      */
     public void setFileKensu3(int fileKensu3) {
         this.fileKensu3 = fileKensu3;
     }
 
     /**
-     * getFileKensu4
-     *
-     * @return fileKensu4
+     * ファイル件数４のgetメソッドです。
+     * 
+     * @return ファイル件数４
      */
     public int getFileKensu4() {
         return fileKensu4;
     }
 
     /**
-     * setFileKensu4
-     *
-     * @param fileKensu4 fileKensu4
+     * ファイル件数４のsetメソッドです。
+     * 
+     * @param fileKensu4 ファイル件数４
      */
     public void setFileKensu4(int fileKensu4) {
         this.fileKensu4 = fileKensu4;
     }
 
     /**
-     * getFileKensu5
-     *
-     * @return fileKensu5
+     * ファイル件数５のgetメソッドです。
+     * 
+     * @return ファイル件数５
      */
     public int getFileKensu5() {
         return fileKensu5;
     }
 
     /**
-     * setFileKensu5
-     *
-     * @param fileKensu5 fileKensu5
+     * ファイル件数５のsetメソッドです。
+     * 
+     * @param fileKensu5 ファイル件数５
      */
     public void setFileKensu5(int fileKensu5) {
         this.fileKensu5 = fileKensu5;
     }
 
     /**
-     * getSaiShoriFukaKubun
-     *
-     * @return saiShoriFukaKubun
+     * 再処理設定不可区分のgetメソッドです。
+     * <br/>
+     * <br/>True:再処理設定不可 false:再処理設定可能
+     * 
+     * @return 再処理設定不可区分
      */
     public boolean getSaiShoriFukaKubun() {
         return saiShoriFukaKubun;
     }
 
     /**
-     * setSaiShoriFukaKubun
-     *
-     * @param saiShoriFukaKubun saiShoriFukaKubun
+     * 再処理設定不可区分のsetメソッドです。
+     * <br/>
+     * <br/>True:再処理設定不可 false:再処理設定可能
+     * 
+     * @param saiShoriFukaKubun 再処理設定不可区分
      */
     public void setSaiShoriFukaKubun(boolean saiShoriFukaKubun) {
         this.saiShoriFukaKubun = saiShoriFukaKubun;
     }
 
     /**
-     * getCtrlRecordKensu
-     *
-     * @return ctrlRecordKensu
+     * コントロール上レコード件数のgetメソッドです。
+     * 
+     * @return コントロール上レコード件数
      */
     public int getCtrlRecordKensu() {
         return ctrlRecordKensu;
     }
 
     /**
-     * setCtrlRecordKensu
-     *
-     * @param ctrlRecordKensu ctrlRecordKensu
+     * コントロール上レコード件数のsetメソッドです。
+     * 
+     * @param ctrlRecordKensu コントロール上レコード件数
      */
     public void setCtrlRecordKensu(int ctrlRecordKensu) {
         this.ctrlRecordKensu = ctrlRecordKensu;
     }
 
     /**
-     * getCtrlShoriYM
-     *
-     * @return ctrlShoriYM
+     * コントロール上処理年月のgetメソッドです。
+     * 
+     * @return コントロール上処理年月
      */
-    public RYearMonth getCtrlShoriYM() {
+    public FlexibleYearMonth getCtrlShoriYM() {
         return ctrlShoriYM;
     }
 
     /**
-     * setCtrlShoriYM
-     *
-     * @param ctrlShoriYM ctrlShoriYM
+     * コントロール上処理年月のsetメソッドです。
+     * 
+     * @param ctrlShoriYM コントロール上処理年月
      */
-    public void setCtrlShoriYM(RYearMonth ctrlShoriYM) {
+    public void setCtrlShoriYM(FlexibleYearMonth ctrlShoriYM) {
         this.ctrlShoriYM = ctrlShoriYM;
     }
 
     /**
-     * getKagoCtrlRecordKensu
-     *
-     * @return kagoCtrlRecordKensu
+     * 過誤コントロール上レコード件数のgetメソッドです。
+     * 
+     * @return 過誤コントロール上レコード件数
      */
     public int getKagoCtrlRecordKensu() {
         return kagoCtrlRecordKensu;
     }
 
     /**
-     * setKagoCtrlRecordKensu
-     *
-     * @param kagoCtrlRecordKensu kagoCtrlRecordKensu
+     * 過誤コントロール上レコード件数のsetメソッドです。
+     * 
+     * @param kagoCtrlRecordKensu 過誤コントロール上レコード件数
      */
     public void setKagoCtrlRecordKensu(int kagoCtrlRecordKensu) {
         this.kagoCtrlRecordKensu = kagoCtrlRecordKensu;
     }
 
     /**
-     * getKagoCtrlShoriYM
-     *
-     * @return kagoCtrlShoriYM
+     * 過誤コントロール上処理年月のgetメソッドです。
+     * 
+     * @return 過誤コントロール上処理年月
      */
-    public RYearMonth getKagoCtrlShoriYM() {
+    public FlexibleYearMonth getKagoCtrlShoriYM() {
         return kagoCtrlShoriYM;
     }
 
     /**
-     * setKagoCtrlShoriYM
-     *
-     * @param kagoCtrlShoriYM kagoCtrlShoriYM
+     * 過誤コントロール上処理年月のsetメソッドです。
+     * 
+     * @param kagoCtrlShoriYM 過誤コントロール上処理年月
      */
-    public void setKagoCtrlShoriYM(RYearMonth kagoCtrlShoriYM) {
+    public void setKagoCtrlShoriYM(FlexibleYearMonth kagoCtrlShoriYM) {
         this.kagoCtrlShoriYM = kagoCtrlShoriYM;
     }
 
     /**
-     * getJissekiDataShinsaYM
-     *
-     * @return jissekiDataShinsaYM
+     * 実績データ上審査年月のgetメソッドです。
+     * 
+     * @return 実績データ上審査年月
      */
-    public RYearMonth getJissekiDataShinsaYM() {
+    public FlexibleYearMonth getJissekiDataShinsaYM() {
         return jissekiDataShinsaYM;
     }
 
     /**
-     * setJissekiDataShinsaYM
-     *
-     * @param jissekiDataShinsaYM jissekiDataShinsaYM
+     * 実績データ上審査年月のsetメソッドです。
+     * 
+     * @param jissekiDataShinsaYM 実績データ上審査年月
      */
-    public void setJissekiDataShinsaYM(RYearMonth jissekiDataShinsaYM) {
+    public void setJissekiDataShinsaYM(FlexibleYearMonth jissekiDataShinsaYM) {
         this.jissekiDataShinsaYM = jissekiDataShinsaYM;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT3104KokuhorenInterfaceKanriEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT3104KokuhorenInterfaceKanriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT3104KokuhorenInterfaceKanriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3104KokuhorenInterfaceKanriEntity other) {
@@ -577,8 +596,6 @@ public class DbT3104KokuhorenInterfaceKanriEntity extends DbTableEntityBase<DbT3
 
     /**
      * {@inheritDoc}
-     *
-     * @param entity
      */
     @Override
     public void shallowCopy(DbT3104KokuhorenInterfaceKanriEntity entity) {
@@ -611,7 +628,6 @@ public class DbT3104KokuhorenInterfaceKanriEntity extends DbTableEntityBase<DbT3
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -620,4 +636,5 @@ public class DbT3104KokuhorenInterfaceKanriEntity extends DbTableEntityBase<DbT3
     }
 
 // </editor-fold>
+
 }

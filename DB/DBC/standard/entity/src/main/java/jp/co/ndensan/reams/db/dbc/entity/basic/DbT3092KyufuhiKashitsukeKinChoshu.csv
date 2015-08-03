@@ -1,0 +1,7 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+kashitsukeKanriNo,varchar,RString,,,,,貸付管理番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+henkanChoshuHoho,varchar,RString,,,,,貸付金返還徴収方法,A
+HenkanChoshuYMD,UDD015YMD,FlexibleDate,,,,,貸付金返還徴収年月日,A
+henkanChoshuKingaku,numeric,Decimal,,,,,貸付金返還徴収金額,A
+kabusokuHanteiKekkaKubun,varchar,RString,,,,,過不足判定結果区分,A

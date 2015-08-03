@@ -1,0 +1,15 @@
+﻿shinsakaiKaisaiNo,int2,int,,,,,介護認定審査会開催番号,A
+shinsakaiKaisaiYoteiYMD,UDD015YMD,FlexibleDate,,,,,介護認定審査会開催予定年月日,A
+shinsakaiKaishiYoteiTime,varchar,RString,,,,,介護認定審査会開始予定時刻,A
+shinsakaiShuryoYoteiTime,varchar,RString,,,,,介護認定審査会終了予定時刻,A
+shinsakaiKaisaiYoteiBashoCode,varchar,RString,,,,,介護認定審査会開催予定場所コード,A
+gogitaiNo,int2,int,,,,,合議体番号,A
+shinsakaiYoteiTeiin,int2,int,,,,,介護認定審査会予定定員,A
+shinsakaiSaidaiTeiin,int2,int,,,,,介護認定審査会最大定員,A
+shinsakaiJidoWariateTeiin,int2,int,,,,,介護認定審査会自動割当定員,A
+shinsakaiIinTeiin,int2,int,,,,,介護認定審査会委員定員,A
+shinsakaiShiryoSakuseiYMD,UDD015YMD,FlexibleDate,,,,,介護認定審査会資料作成年月日,A
+ShinsakaiShinchokuJokyo,UDD035Code,Code,,,,,介護認定審査会進捗状況,A
+shinsakaiWariateZumiNinzu,int2,int,,,,,介護認定審査会割当済み人数,A
+shiryoSakuseiZumiFlag,bool,boolean,,,,,資料作成済フラグ,A
+mobileDataOutputYMD,UDD015YMD,FlexibleDate,,,,,モバイルデータ出力年月日,A

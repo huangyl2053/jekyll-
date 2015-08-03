@@ -1,0 +1,3 @@
+﻿”shichosonCode”,DbUDD001ShichosonCode,DbUDD001ShichosonCode,,,,,市町村コード,A
+koshinTaishoChushutsuYMD,UDD015YMD,FlexibleDate,,,,,更新対象抽出処理日,A
+koshinTaishoChushutsuYukoShuryoYM,UDD014YM,FlexibleYearMonth,,,,,更新対象抽出有効終了年月,A

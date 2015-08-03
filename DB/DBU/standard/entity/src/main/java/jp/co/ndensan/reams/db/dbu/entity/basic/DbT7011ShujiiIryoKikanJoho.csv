@@ -1,0 +1,17 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+kaigoIryokikanCode,varchar,RString,,,,,介護医療機関コード,A
+iryokikanCode,varchar,RString,,,,,医療機関コード,A
+iryokikanJokyo,bpchar,RString,,,,,医療機関の状況,A
+iryoKikanMeisho,varchar,RString,,,,,医療機関名称,A
+iryoKikanMeishoKana,varchar,RString,,,,,医療機関名称カナ,A
+yubinNo,UDD003YubinNo,YubinNo,,,,,郵便番号,A
+jusho,varchar,RString,,,,,住所,A
+jushoKana,varchar,RString,,,,,住所カナ,A
+telNo,UDD026TelNo,TelNo,,,,,電話番号,A
+ginkoCode,UDD030KinyuKikanCode,KinyuKikanCode,,,,,銀行コード,A
+shitenCode,UDD031KinyuKikanShitenCode,KinyuKikanShitenCode,,,,,支店コード,A
+kozaShubetsu,UDD035Code,Code,,,,,口座種別,A
+kozaNo,UDD035Code,Code,,,,,口座番号,A
+kozaMeiginin,bpchar,RString,,,,,口座名義人,A
+kozaMeigininKana,bpchar,RString,,,,,口座名義人カナ,A
+kikanKubunCode,UDD035Code,Code,,,,,機関の区分コード,A

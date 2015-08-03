@@ -1,4 +1,4 @@
-﻿kaigoNinteiShinsaIinShubetsu,UDD034CodeShubetsu,CodeShubetsu,,,,,A
-kaishiYM,UDD014YM,FlexibleYearMonth,,,,,A
-shuryoYM,UDD014YM,FlexibleYearMonth,,,,,A
-tanka,numeric,Decimal,,,,,A
+﻿kaigoNinteiShinsaIinShubetsu,UDD034CodeShubetsu,CodeShubetsu,,,,,介護認定審査委員種別,A
+kaishiYM,UDD014YM,FlexibleYearMonth,,,,,開始年月,A
+shuryoYM,UDD014YM,FlexibleYearMonth,,,,,終了年月,A
+tanka,numeric,Decimal,,,,,単価,A

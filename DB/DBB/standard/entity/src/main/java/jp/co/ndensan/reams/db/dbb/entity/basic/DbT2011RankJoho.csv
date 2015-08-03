@@ -1,0 +1,3 @@
+﻿fukaNendo,UDD012YSeireki,FlexibleYear,,,,,賦課年度,A
+rankKubun,varchar,RString,,,,,ランク区分,A
+rankName,varchar,RString,,,,,ランク名称,A

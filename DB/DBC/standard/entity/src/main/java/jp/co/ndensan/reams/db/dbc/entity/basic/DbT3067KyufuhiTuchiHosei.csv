@@ -1,0 +1,8 @@
+﻿shokisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,証記載保険者番号,A
+hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
+jigyoshoNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,事業所番号,A
+serviceShuruiCode,DbUDD005ServiceShuruiCode,DbUDD005ServiceShuruiCode,,,,,サービス種類コード,A
+rirekiNo,int2,int,,,,,履歴番号,A
+serviceHiyoTotal,numeric,Decimal,,,,,サービス費用合計額,A
+riyoshaFutangaku,numeric,Decimal,,,,,利用者負担額,A

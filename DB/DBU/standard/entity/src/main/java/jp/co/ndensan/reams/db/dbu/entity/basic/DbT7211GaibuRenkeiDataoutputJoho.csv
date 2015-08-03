@@ -1,0 +1,6 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,申請書管理番号,A
+ninteiShinseiJohoChushutsuYMD,UDD015YMD,FlexibleDate,,,,,認定申請情報抽出年月日,A
+ninteiChosaKekkaJohoChushutsuYMD,UDD015YMD,FlexibleDate,,,,,認定調査結果情報抽出年月日,A
+ninteiChosaIkenshoKekkaJohoChushutsuYMD,UDD015YMD,FlexibleDate,,,,,認定調査・意見書結果情報抽出年月日,A
+ichijihanteiChushutsuYMD,UDD015YMD,FlexibleDate,,,,,一次判定情報抽出年月日,A
+shinsakaiKekkaJohoChushutsuYMD,UDD015YMD,FlexibleDate,,,,,審査会結果情報抽出年月日,A

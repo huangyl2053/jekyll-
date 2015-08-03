@@ -1,0 +1,7 @@
+﻿serviceShuruiCode,DbUDD005ServiceShuruiCode,DbUDD005ServiceShuruiCode,,,,,サービス種類コード,A
+serviceKomokuCode,DbUDD006ServiceKomokuCode,DbUDD006ServiceKomokuCode,,,,,サービス項目コード,A
+tekiyoKaishiYM,UDD014YM,FlexibleYearMonth,,,,,適用開始年月,A
+rirekiNo,int2,int,,,,,履歴番号,A
+tekiyoShuryoYM,UDD014YM,FlexibleYearMonth,,,,,適用終了年月,A
+serviceMeisho,varchar,RString,,,,,サービス名称,A
+taniSu,numeric,Decimal,,,,,単位数,A

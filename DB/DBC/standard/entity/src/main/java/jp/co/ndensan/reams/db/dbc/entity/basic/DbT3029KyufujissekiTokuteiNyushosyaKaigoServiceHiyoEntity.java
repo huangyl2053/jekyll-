@@ -1,19 +1,13 @@
 package jp.co.ndensan.reams.db.dbc.entity.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
 
@@ -21,8 +15,8 @@ import java.util.Objects;
  * DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoの項目定義クラスです
  *
  */
-public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity extends DbTableEntityBase<DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity> implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo");
 
@@ -43,7 +37,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
     @PrimaryKey
     private ShoKisaiHokenshaNo shokisaiHokenshaNo;
     @PrimaryKey
-    private HihokenshaNo hiHokenshaNo;
+    private KaigoHihokenshaNo hiHokenshaNo;
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
@@ -108,7 +102,8 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
     private FlexibleYearMonth torikomiYM;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -116,7 +111,8 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -124,7 +120,8 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -132,7 +129,8 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
@@ -141,7 +139,8 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
 
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -149,1008 +148,1134 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
     }
 
     /**
-     * getKokanJohoShikibetsuNo
-     * @return kokanJohoShikibetsuNo
+     * 交換情報識別番号のgetメソッドです。
+     * 
+     * @return 交換情報識別番号
      */
     public KokanShikibetsuNo getKokanJohoShikibetsuNo() {
         return kokanJohoShikibetsuNo;
     }
 
     /**
-     * setKokanJohoShikibetsuNo
-     * @param kokanJohoShikibetsuNo kokanJohoShikibetsuNo
+     * 交換情報識別番号のsetメソッドです。
+     * 
+     * @param kokanJohoShikibetsuNo 交換情報識別番号
      */
     public void setKokanJohoShikibetsuNo(KokanShikibetsuNo kokanJohoShikibetsuNo) {
         this.kokanJohoShikibetsuNo = kokanJohoShikibetsuNo;
     }
 
     /**
-     * getInputShikibetsuNo
-     * @return inputShikibetsuNo
+     * 入力識別番号のgetメソッドです。
+     * 
+     * @return 入力識別番号
      */
     public RString getInputShikibetsuNo() {
         return inputShikibetsuNo;
     }
 
     /**
-     * setInputShikibetsuNo
-     * @param inputShikibetsuNo inputShikibetsuNo
+     * 入力識別番号のsetメソッドです。
+     * 
+     * @param inputShikibetsuNo 入力識別番号
      */
     public void setInputShikibetsuNo(RString inputShikibetsuNo) {
         this.inputShikibetsuNo = inputShikibetsuNo;
     }
 
     /**
-     * getRecodeShubetsuCode
-     * @return recodeShubetsuCode
+     * レコード種別コードのgetメソッドです。
+     * 
+     * @return レコード種別コード
      */
     public RString getRecodeShubetsuCode() {
         return recodeShubetsuCode;
     }
 
     /**
-     * setRecodeShubetsuCode
-     * @param recodeShubetsuCode recodeShubetsuCode
+     * レコード種別コードのsetメソッドです。
+     * 
+     * @param recodeShubetsuCode レコード種別コード
      */
     public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
         this.recodeShubetsuCode = recodeShubetsuCode;
     }
 
     /**
-     * getShokisaiHokenshaNo
-     * @return shokisaiHokenshaNo
+     * 証記載保険者番号のgetメソッドです。
+     * 
+     * @return 証記載保険者番号
      */
     public ShoKisaiHokenshaNo getShokisaiHokenshaNo() {
         return shokisaiHokenshaNo;
     }
 
     /**
-     * setShokisaiHokenshaNo
-     * @param shokisaiHokenshaNo shokisaiHokenshaNo
+     * 証記載保険者番号のsetメソッドです。
+     * 
+     * @param shokisaiHokenshaNo 証記載保険者番号
      */
     public void setShokisaiHokenshaNo(ShoKisaiHokenshaNo shokisaiHokenshaNo) {
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
     /**
-     * getHiHokenshaNo
-     * @return hiHokenshaNo
+     * 被保険者番号のgetメソッドです。
+     * 
+     * @return 被保険者番号
      */
-    public HihokenshaNo getHiHokenshaNo() {
+    public KaigoHihokenshaNo getHiHokenshaNo() {
         return hiHokenshaNo;
     }
 
     /**
-     * setHiHokenshaNo
-     * @param hiHokenshaNo hiHokenshaNo
+     * 被保険者番号のsetメソッドです。
+     * 
+     * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(KaigoHihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
     /**
-     * getServiceTeikyoYM
-     * @return serviceTeikyoYM
+     * サービス提供年月のgetメソッドです。
+     * 
+     * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
         return serviceTeikyoYM;
     }
 
     /**
-     * setServiceTeikyoYM
-     * @param serviceTeikyoYM serviceTeikyoYM
+     * サービス提供年月のsetメソッドです。
+     * 
+     * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
         this.serviceTeikyoYM = serviceTeikyoYM;
     }
 
     /**
-     * getJigyoshoNo
-     * @return jigyoshoNo
+     * 事業所番号のgetメソッドです。
+     * 
+     * @return 事業所番号
      */
     public JigyoshaNo getJigyoshoNo() {
         return jigyoshoNo;
     }
 
     /**
-     * setJigyoshoNo
-     * @param jigyoshoNo jigyoshoNo
+     * 事業所番号のsetメソッドです。
+     * 
+     * @param jigyoshoNo 事業所番号
      */
     public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
         this.jigyoshoNo = jigyoshoNo;
     }
 
     /**
-     * getToshiNo
-     * @return toshiNo
+     * 通し番号のgetメソッドです。
+     * 
+     * @return 通し番号
      */
     public ToshiNo getToshiNo() {
         return toshiNo;
     }
 
     /**
-     * setToshiNo
-     * @param toshiNo toshiNo
+     * 通し番号のsetメソッドです。
+     * 
+     * @param toshiNo 通し番号
      */
     public void setToshiNo(ToshiNo toshiNo) {
         this.toshiNo = toshiNo;
     }
 
     /**
-     * getRecodeJunjiNo
-     * @return recodeJunjiNo
+     * 特定入所者介護サービス費用情報レコード順次番号のgetメソッドです。
+     * 
+     * @return 特定入所者介護サービス費用情報レコード順次番号
      */
     public RString getRecodeJunjiNo() {
         return recodeJunjiNo;
     }
 
     /**
-     * setRecodeJunjiNo
-     * @param recodeJunjiNo recodeJunjiNo
+     * 特定入所者介護サービス費用情報レコード順次番号のsetメソッドです。
+     * 
+     * @param recodeJunjiNo 特定入所者介護サービス費用情報レコード順次番号
      */
     public void setRecodeJunjiNo(RString recodeJunjiNo) {
         this.recodeJunjiNo = recodeJunjiNo;
     }
 
     /**
-     * getServiceSyuruiCode
-     * @return serviceSyuruiCode
+     * サービス種類コードのgetメソッドです。
+     * 
+     * @return サービス種類コード
      */
     public ServiceShuruiCode getServiceSyuruiCode() {
         return serviceSyuruiCode;
     }
 
     /**
-     * setServiceSyuruiCode
-     * @param serviceSyuruiCode serviceSyuruiCode
+     * サービス種類コードのsetメソッドです。
+     * 
+     * @param serviceSyuruiCode サービス種類コード
      */
     public void setServiceSyuruiCode(ServiceShuruiCode serviceSyuruiCode) {
         this.serviceSyuruiCode = serviceSyuruiCode;
     }
 
     /**
-     * getServiceKomokuCode
-     * @return serviceKomokuCode
+     * サービス項目コードのgetメソッドです。
+     * 
+     * @return サービス項目コード
      */
     public ServiceKomokuCode getServiceKomokuCode() {
         return serviceKomokuCode;
     }
 
     /**
-     * setServiceKomokuCode
-     * @param serviceKomokuCode serviceKomokuCode
+     * サービス項目コードのsetメソッドです。
+     * 
+     * @param serviceKomokuCode サービス項目コード
      */
     public void setServiceKomokuCode(ServiceKomokuCode serviceKomokuCode) {
         this.serviceKomokuCode = serviceKomokuCode;
     }
 
     /**
-     * getHiyoTanka
-     * @return hiyoTanka
+     * 費用単価のgetメソッドです。
+     * 
+     * @return 費用単価
      */
     public Decimal getHiyoTanka() {
         return hiyoTanka;
     }
 
     /**
-     * setHiyoTanka
-     * @param hiyoTanka hiyoTanka
+     * 費用単価のsetメソッドです。
+     * 
+     * @param hiyoTanka 費用単価
      */
     public void setHiyoTanka(Decimal hiyoTanka) {
         this.hiyoTanka = hiyoTanka;
     }
 
     /**
-     * getFutanGendogaku
-     * @return futanGendogaku
+     * 負担限度額のgetメソッドです。
+     * 
+     * @return 負担限度額
      */
     public Decimal getFutanGendogaku() {
         return futanGendogaku;
     }
 
     /**
-     * setFutanGendogaku
-     * @param futanGendogaku futanGendogaku
+     * 負担限度額のsetメソッドです。
+     * 
+     * @param futanGendogaku 負担限度額
      */
     public void setFutanGendogaku(Decimal futanGendogaku) {
         this.futanGendogaku = futanGendogaku;
     }
 
     /**
-     * getNissu
-     * @return nissu
+     * 日数のgetメソッドです。
+     * 
+     * @return 日数
      */
     public Integer getNissu() {
         return nissu;
     }
 
     /**
-     * setNissu
-     * @param nissu nissu
+     * 日数のsetメソッドです。
+     * 
+     * @param nissu 日数
      */
     public void setNissu(Integer nissu) {
         this.nissu = nissu;
     }
 
     /**
-     * getKohi1Nissu
-     * @return kohi1Nissu
+     * 公費１日数のgetメソッドです。
+     * 
+     * @return 公費１日数
      */
     public Integer getKohi1Nissu() {
         return kohi1Nissu;
     }
 
     /**
-     * setKohi1Nissu
-     * @param kohi1Nissu kohi1Nissu
+     * 公費１日数のsetメソッドです。
+     * 
+     * @param kohi1Nissu 公費１日数
      */
     public void setKohi1Nissu(Integer kohi1Nissu) {
         this.kohi1Nissu = kohi1Nissu;
     }
 
     /**
-     * getKohi2Nissu
-     * @return kohi2Nissu
+     * 公費２日数のgetメソッドです。
+     * 
+     * @return 公費２日数
      */
     public Integer getKohi2Nissu() {
         return kohi2Nissu;
     }
 
     /**
-     * setKohi2Nissu
-     * @param kohi2Nissu kohi2Nissu
+     * 公費２日数のsetメソッドです。
+     * 
+     * @param kohi2Nissu 公費２日数
      */
     public void setKohi2Nissu(Integer kohi2Nissu) {
         this.kohi2Nissu = kohi2Nissu;
     }
 
     /**
-     * getKohi3Nissu
-     * @return kohi3Nissu
+     * 公費３日数のgetメソッドです。
+     * 
+     * @return 公費３日数
      */
     public Integer getKohi3Nissu() {
         return kohi3Nissu;
     }
 
     /**
-     * setKohi3Nissu
-     * @param kohi3Nissu kohi3Nissu
+     * 公費３日数のsetメソッドです。
+     * 
+     * @param kohi3Nissu 公費３日数
      */
     public void setKohi3Nissu(Integer kohi3Nissu) {
         this.kohi3Nissu = kohi3Nissu;
     }
 
     /**
-     * getHiyogaku
-     * @return hiyogaku
+     * 費用額のgetメソッドです。
+     * 
+     * @return 費用額
      */
     public Decimal getHiyogaku() {
         return hiyogaku;
     }
 
     /**
-     * setHiyogaku
-     * @param hiyogaku hiyogaku
+     * 費用額のsetメソッドです。
+     * 
+     * @param hiyogaku 費用額
      */
     public void setHiyogaku(Decimal hiyogaku) {
         this.hiyogaku = hiyogaku;
     }
 
     /**
-     * getHokenbunSeikyugaku
-     * @return hokenbunSeikyugaku
+     * 保険分請求額のgetメソッドです。
+     * 
+     * @return 保険分請求額
      */
     public Decimal getHokenbunSeikyugaku() {
         return hokenbunSeikyugaku;
     }
 
     /**
-     * setHokenbunSeikyugaku
-     * @param hokenbunSeikyugaku hokenbunSeikyugaku
+     * 保険分請求額のsetメソッドです。
+     * 
+     * @param hokenbunSeikyugaku 保険分請求額
      */
     public void setHokenbunSeikyugaku(Decimal hokenbunSeikyugaku) {
         this.hokenbunSeikyugaku = hokenbunSeikyugaku;
     }
 
     /**
-     * getKohi1Futangaku
-     * @return kohi1Futangaku
+     * 公費１負担額（明細）のgetメソッドです。
+     * 
+     * @return 公費１負担額（明細）
      */
     public Decimal getKohi1Futangaku() {
         return kohi1Futangaku;
     }
 
     /**
-     * setKohi1Futangaku
-     * @param kohi1Futangaku kohi1Futangaku
+     * 公費１負担額（明細）のsetメソッドです。
+     * 
+     * @param kohi1Futangaku 公費１負担額（明細）
      */
     public void setKohi1Futangaku(Decimal kohi1Futangaku) {
         this.kohi1Futangaku = kohi1Futangaku;
     }
 
     /**
-     * getKohi2Futangaku
-     * @return kohi2Futangaku
+     * 公費２負担額（明細）のgetメソッドです。
+     * 
+     * @return 公費２負担額（明細）
      */
     public Decimal getKohi2Futangaku() {
         return kohi2Futangaku;
     }
 
     /**
-     * setKohi2Futangaku
-     * @param kohi2Futangaku kohi2Futangaku
+     * 公費２負担額（明細）のsetメソッドです。
+     * 
+     * @param kohi2Futangaku 公費２負担額（明細）
      */
     public void setKohi2Futangaku(Decimal kohi2Futangaku) {
         this.kohi2Futangaku = kohi2Futangaku;
     }
 
     /**
-     * getKohi3Futangaku
-     * @return kohi3Futangaku
+     * 公費３負担額（明細）のgetメソッドです。
+     * 
+     * @return 公費３負担額（明細）
      */
     public Decimal getKohi3Futangaku() {
         return kohi3Futangaku;
     }
 
     /**
-     * setKohi3Futangaku
-     * @param kohi3Futangaku kohi3Futangaku
+     * 公費３負担額（明細）のsetメソッドです。
+     * 
+     * @param kohi3Futangaku 公費３負担額（明細）
      */
     public void setKohi3Futangaku(Decimal kohi3Futangaku) {
         this.kohi3Futangaku = kohi3Futangaku;
     }
 
     /**
-     * getRiyoshaFutangaku
-     * @return riyoshaFutangaku
+     * 利用者負担額のgetメソッドです。
+     * 
+     * @return 利用者負担額
      */
     public Decimal getRiyoshaFutangaku() {
         return riyoshaFutangaku;
     }
 
     /**
-     * setRiyoshaFutangaku
-     * @param riyoshaFutangaku riyoshaFutangaku
+     * 利用者負担額のsetメソッドです。
+     * 
+     * @param riyoshaFutangaku 利用者負担額
      */
     public void setRiyoshaFutangaku(Decimal riyoshaFutangaku) {
         this.riyoshaFutangaku = riyoshaFutangaku;
     }
 
     /**
-     * getHiyogakuTotal
-     * @return hiyogakuTotal
+     * 費用額合計のgetメソッドです。
+     * 
+     * @return 費用額合計
      */
     public Decimal getHiyogakuTotal() {
         return hiyogakuTotal;
     }
 
     /**
-     * setHiyogakuTotal
-     * @param hiyogakuTotal hiyogakuTotal
+     * 費用額合計のsetメソッドです。
+     * 
+     * @param hiyogakuTotal 費用額合計
      */
     public void setHiyogakuTotal(Decimal hiyogakuTotal) {
         this.hiyogakuTotal = hiyogakuTotal;
     }
 
     /**
-     * getHokenbunSeikyugakuTotal
-     * @return hokenbunSeikyugakuTotal
+     * 保険分請求額合計のgetメソッドです。
+     * 
+     * @return 保険分請求額合計
      */
     public Decimal getHokenbunSeikyugakuTotal() {
         return hokenbunSeikyugakuTotal;
     }
 
     /**
-     * setHokenbunSeikyugakuTotal
-     * @param hokenbunSeikyugakuTotal hokenbunSeikyugakuTotal
+     * 保険分請求額合計のsetメソッドです。
+     * 
+     * @param hokenbunSeikyugakuTotal 保険分請求額合計
      */
     public void setHokenbunSeikyugakuTotal(Decimal hokenbunSeikyugakuTotal) {
         this.hokenbunSeikyugakuTotal = hokenbunSeikyugakuTotal;
     }
 
     /**
-     * getRiyoshaFutangakuTotal
-     * @return riyoshaFutangakuTotal
+     * 利用者負担額合計のgetメソッドです。
+     * 
+     * @return 利用者負担額合計
      */
     public Decimal getRiyoshaFutangakuTotal() {
         return riyoshaFutangakuTotal;
     }
 
     /**
-     * setRiyoshaFutangakuTotal
-     * @param riyoshaFutangakuTotal riyoshaFutangakuTotal
+     * 利用者負担額合計のsetメソッドです。
+     * 
+     * @param riyoshaFutangakuTotal 利用者負担額合計
      */
     public void setRiyoshaFutangakuTotal(Decimal riyoshaFutangakuTotal) {
         this.riyoshaFutangakuTotal = riyoshaFutangakuTotal;
     }
 
     /**
-     * getKohi1FutangakuTotal
-     * @return kohi1FutangakuTotal
+     * 公費１・負担額合計のgetメソッドです。
+     * 
+     * @return 公費１・負担額合計
      */
     public Decimal getKohi1FutangakuTotal() {
         return kohi1FutangakuTotal;
     }
 
     /**
-     * setKohi1FutangakuTotal
-     * @param kohi1FutangakuTotal kohi1FutangakuTotal
+     * 公費１・負担額合計のsetメソッドです。
+     * 
+     * @param kohi1FutangakuTotal 公費１・負担額合計
      */
     public void setKohi1FutangakuTotal(Decimal kohi1FutangakuTotal) {
         this.kohi1FutangakuTotal = kohi1FutangakuTotal;
     }
 
     /**
-     * getKohi1Seikyugaku
-     * @return kohi1Seikyugaku
+     * 公費１・請求額のgetメソッドです。
+     * 
+     * @return 公費１・請求額
      */
     public Decimal getKohi1Seikyugaku() {
         return kohi1Seikyugaku;
     }
 
     /**
-     * setKohi1Seikyugaku
-     * @param kohi1Seikyugaku kohi1Seikyugaku
+     * 公費１・請求額のsetメソッドです。
+     * 
+     * @param kohi1Seikyugaku 公費１・請求額
      */
     public void setKohi1Seikyugaku(Decimal kohi1Seikyugaku) {
         this.kohi1Seikyugaku = kohi1Seikyugaku;
     }
 
     /**
-     * getKohi1HonninFutanGetsugaku
-     * @return kohi1HonninFutanGetsugaku
+     * 公費１・本人負担月額のgetメソッドです。
+     * 
+     * @return 公費１・本人負担月額
      */
     public Decimal getKohi1HonninFutanGetsugaku() {
         return kohi1HonninFutanGetsugaku;
     }
 
     /**
-     * setKohi1HonninFutanGetsugaku
-     * @param kohi1HonninFutanGetsugaku kohi1HonninFutanGetsugaku
+     * 公費１・本人負担月額のsetメソッドです。
+     * 
+     * @param kohi1HonninFutanGetsugaku 公費１・本人負担月額
      */
     public void setKohi1HonninFutanGetsugaku(Decimal kohi1HonninFutanGetsugaku) {
         this.kohi1HonninFutanGetsugaku = kohi1HonninFutanGetsugaku;
     }
 
     /**
-     * getKohi2FutangakuTotal
-     * @return kohi2FutangakuTotal
+     * 公費２・負担額合計のgetメソッドです。
+     * 
+     * @return 公費２・負担額合計
      */
     public Decimal getKohi2FutangakuTotal() {
         return kohi2FutangakuTotal;
     }
 
     /**
-     * setKohi2FutangakuTotal
-     * @param kohi2FutangakuTotal kohi2FutangakuTotal
+     * 公費２・負担額合計のsetメソッドです。
+     * 
+     * @param kohi2FutangakuTotal 公費２・負担額合計
      */
     public void setKohi2FutangakuTotal(Decimal kohi2FutangakuTotal) {
         this.kohi2FutangakuTotal = kohi2FutangakuTotal;
     }
 
     /**
-     * getKohi2Seikyugaku
-     * @return kohi2Seikyugaku
+     * 公費２・請求額のgetメソッドです。
+     * 
+     * @return 公費２・請求額
      */
     public Decimal getKohi2Seikyugaku() {
         return kohi2Seikyugaku;
     }
 
     /**
-     * setKohi2Seikyugaku
-     * @param kohi2Seikyugaku kohi2Seikyugaku
+     * 公費２・請求額のsetメソッドです。
+     * 
+     * @param kohi2Seikyugaku 公費２・請求額
      */
     public void setKohi2Seikyugaku(Decimal kohi2Seikyugaku) {
         this.kohi2Seikyugaku = kohi2Seikyugaku;
     }
 
     /**
-     * getKohi2HonninFutanGetsugaku
-     * @return kohi2HonninFutanGetsugaku
+     * 公費２・本人負担月額のgetメソッドです。
+     * 
+     * @return 公費２・本人負担月額
      */
     public Decimal getKohi2HonninFutanGetsugaku() {
         return kohi2HonninFutanGetsugaku;
     }
 
     /**
-     * setKohi2HonninFutanGetsugaku
-     * @param kohi2HonninFutanGetsugaku kohi2HonninFutanGetsugaku
+     * 公費２・本人負担月額のsetメソッドです。
+     * 
+     * @param kohi2HonninFutanGetsugaku 公費２・本人負担月額
      */
     public void setKohi2HonninFutanGetsugaku(Decimal kohi2HonninFutanGetsugaku) {
         this.kohi2HonninFutanGetsugaku = kohi2HonninFutanGetsugaku;
     }
 
     /**
-     * getKohi3FutangakuTotal
-     * @return kohi3FutangakuTotal
+     * 公費３・負担額合計のgetメソッドです。
+     * 
+     * @return 公費３・負担額合計
      */
     public Decimal getKohi3FutangakuTotal() {
         return kohi3FutangakuTotal;
     }
 
     /**
-     * setKohi3FutangakuTotal
-     * @param kohi3FutangakuTotal kohi3FutangakuTotal
+     * 公費３・負担額合計のsetメソッドです。
+     * 
+     * @param kohi3FutangakuTotal 公費３・負担額合計
      */
     public void setKohi3FutangakuTotal(Decimal kohi3FutangakuTotal) {
         this.kohi3FutangakuTotal = kohi3FutangakuTotal;
     }
 
     /**
-     * getKohi3Seikyugaku
-     * @return kohi3Seikyugaku
+     * 公費３・請求額のgetメソッドです。
+     * 
+     * @return 公費３・請求額
      */
     public Decimal getKohi3Seikyugaku() {
         return kohi3Seikyugaku;
     }
 
     /**
-     * setKohi3Seikyugaku
-     * @param kohi3Seikyugaku kohi3Seikyugaku
+     * 公費３・請求額のsetメソッドです。
+     * 
+     * @param kohi3Seikyugaku 公費３・請求額
      */
     public void setKohi3Seikyugaku(Decimal kohi3Seikyugaku) {
         this.kohi3Seikyugaku = kohi3Seikyugaku;
     }
 
     /**
-     * getKohi3HonninFutanGetsugaku
-     * @return kohi3HonninFutanGetsugaku
+     * 公費３・本人負担月額のgetメソッドです。
+     * 
+     * @return 公費３・本人負担月額
      */
     public Decimal getKohi3HonninFutanGetsugaku() {
         return kohi3HonninFutanGetsugaku;
     }
 
     /**
-     * setKohi3HonninFutanGetsugaku
-     * @param kohi3HonninFutanGetsugaku kohi3HonninFutanGetsugaku
+     * 公費３・本人負担月額のsetメソッドです。
+     * 
+     * @param kohi3HonninFutanGetsugaku 公費３・本人負担月額
      */
     public void setKohi3HonninFutanGetsugaku(Decimal kohi3HonninFutanGetsugaku) {
         this.kohi3HonninFutanGetsugaku = kohi3HonninFutanGetsugaku;
     }
 
     /**
-     * getAtoHiyoTanka
-     * @return atoHiyoTanka
+     * 後・費用単価のgetメソッドです。
+     * 
+     * @return 後・費用単価
      */
     public Decimal getAtoHiyoTanka() {
         return atoHiyoTanka;
     }
 
     /**
-     * setAtoHiyoTanka
-     * @param atoHiyoTanka atoHiyoTanka
+     * 後・費用単価のsetメソッドです。
+     * 
+     * @param atoHiyoTanka 後・費用単価
      */
     public void setAtoHiyoTanka(Decimal atoHiyoTanka) {
         this.atoHiyoTanka = atoHiyoTanka;
     }
 
     /**
-     * getAtoNissu
-     * @return atoNissu
+     * 後・日数のgetメソッドです。
+     * 
+     * @return 後・日数
      */
     public Integer getAtoNissu() {
         return atoNissu;
     }
 
     /**
-     * setAtoNissu
-     * @param atoNissu atoNissu
+     * 後・日数のsetメソッドです。
+     * 
+     * @param atoNissu 後・日数
      */
     public void setAtoNissu(Integer atoNissu) {
         this.atoNissu = atoNissu;
     }
 
     /**
-     * getAtoKohi1Nissu
-     * @return atoKohi1Nissu
+     * 後・公費１日数のgetメソッドです。
+     * 
+     * @return 後・公費１日数
      */
     public Integer getAtoKohi1Nissu() {
         return atoKohi1Nissu;
     }
 
     /**
-     * setAtoKohi1Nissu
-     * @param atoKohi1Nissu atoKohi1Nissu
+     * 後・公費１日数のsetメソッドです。
+     * 
+     * @param atoKohi1Nissu 後・公費１日数
      */
     public void setAtoKohi1Nissu(Integer atoKohi1Nissu) {
         this.atoKohi1Nissu = atoKohi1Nissu;
     }
 
     /**
-     * getAtoKohi2Nissu
-     * @return atoKohi2Nissu
+     * 後・公費２日数のgetメソッドです。
+     * 
+     * @return 後・公費２日数
      */
     public Integer getAtoKohi2Nissu() {
         return atoKohi2Nissu;
     }
 
     /**
-     * setAtoKohi2Nissu
-     * @param atoKohi2Nissu atoKohi2Nissu
+     * 後・公費２日数のsetメソッドです。
+     * 
+     * @param atoKohi2Nissu 後・公費２日数
      */
     public void setAtoKohi2Nissu(Integer atoKohi2Nissu) {
         this.atoKohi2Nissu = atoKohi2Nissu;
     }
 
     /**
-     * getAtoKohi3Nissu
-     * @return atoKohi3Nissu
+     * 後・公費３日数のgetメソッドです。
+     * 
+     * @return 後・公費３日数
      */
     public Integer getAtoKohi3Nissu() {
         return atoKohi3Nissu;
     }
 
     /**
-     * setAtoKohi3Nissu
-     * @param atoKohi3Nissu atoKohi3Nissu
+     * 後・公費３日数のsetメソッドです。
+     * 
+     * @param atoKohi3Nissu 後・公費３日数
      */
     public void setAtoKohi3Nissu(Integer atoKohi3Nissu) {
         this.atoKohi3Nissu = atoKohi3Nissu;
     }
 
     /**
-     * getAtoHiyogaku
-     * @return atoHiyogaku
+     * 後・費用額のgetメソッドです。
+     * 
+     * @return 後・費用額
      */
     public Decimal getAtoHiyogaku() {
         return atoHiyogaku;
     }
 
     /**
-     * setAtoHiyogaku
-     * @param atoHiyogaku atoHiyogaku
+     * 後・費用額のsetメソッドです。
+     * 
+     * @param atoHiyogaku 後・費用額
      */
     public void setAtoHiyogaku(Decimal atoHiyogaku) {
         this.atoHiyogaku = atoHiyogaku;
     }
 
     /**
-     * getAtoHokenbunSeikyugaku
-     * @return atoHokenbunSeikyugaku
+     * 後・保険分請求額のgetメソッドです。
+     * 
+     * @return 後・保険分請求額
      */
     public Decimal getAtoHokenbunSeikyugaku() {
         return atoHokenbunSeikyugaku;
     }
 
     /**
-     * setAtoHokenbunSeikyugaku
-     * @param atoHokenbunSeikyugaku atoHokenbunSeikyugaku
+     * 後・保険分請求額のsetメソッドです。
+     * 
+     * @param atoHokenbunSeikyugaku 後・保険分請求額
      */
     public void setAtoHokenbunSeikyugaku(Decimal atoHokenbunSeikyugaku) {
         this.atoHokenbunSeikyugaku = atoHokenbunSeikyugaku;
     }
 
     /**
-     * getAtoKohi1Futangaku
-     * @return atoKohi1Futangaku
+     * 後・公費１負担額（明細）のgetメソッドです。
+     * 
+     * @return 後・公費１負担額（明細）
      */
     public Decimal getAtoKohi1Futangaku() {
         return atoKohi1Futangaku;
     }
 
     /**
-     * setAtoKohi1Futangaku
-     * @param atoKohi1Futangaku atoKohi1Futangaku
+     * 後・公費１負担額（明細）のsetメソッドです。
+     * 
+     * @param atoKohi1Futangaku 後・公費１負担額（明細）
      */
     public void setAtoKohi1Futangaku(Decimal atoKohi1Futangaku) {
         this.atoKohi1Futangaku = atoKohi1Futangaku;
     }
 
     /**
-     * getAtoKohi2Futangaku
-     * @return atoKohi2Futangaku
+     * 後・公費２負担額（明細）のgetメソッドです。
+     * 
+     * @return 後・公費２負担額（明細）
      */
     public Decimal getAtoKohi2Futangaku() {
         return atoKohi2Futangaku;
     }
 
     /**
-     * setAtoKohi2Futangaku
-     * @param atoKohi2Futangaku atoKohi2Futangaku
+     * 後・公費２負担額（明細）のsetメソッドです。
+     * 
+     * @param atoKohi2Futangaku 後・公費２負担額（明細）
      */
     public void setAtoKohi2Futangaku(Decimal atoKohi2Futangaku) {
         this.atoKohi2Futangaku = atoKohi2Futangaku;
     }
 
     /**
-     * getAtoKohi3Futangaku
-     * @return atoKohi3Futangaku
+     * 後・公費３負担額（明細）のgetメソッドです。
+     * 
+     * @return 後・公費３負担額（明細）
      */
     public Decimal getAtoKohi3Futangaku() {
         return atoKohi3Futangaku;
     }
 
     /**
-     * setAtoKohi3Futangaku
-     * @param atoKohi3Futangaku atoKohi3Futangaku
+     * 後・公費３負担額（明細）のsetメソッドです。
+     * 
+     * @param atoKohi3Futangaku 後・公費３負担額（明細）
      */
     public void setAtoKohi3Futangaku(Decimal atoKohi3Futangaku) {
         this.atoKohi3Futangaku = atoKohi3Futangaku;
     }
 
     /**
-     * getAtoRiyoshaFutangaku
-     * @return atoRiyoshaFutangaku
+     * 後・利用者負担額のgetメソッドです。
+     * 
+     * @return 後・利用者負担額
      */
     public Decimal getAtoRiyoshaFutangaku() {
         return atoRiyoshaFutangaku;
     }
 
     /**
-     * setAtoRiyoshaFutangaku
-     * @param atoRiyoshaFutangaku atoRiyoshaFutangaku
+     * 後・利用者負担額のsetメソッドです。
+     * 
+     * @param atoRiyoshaFutangaku 後・利用者負担額
      */
     public void setAtoRiyoshaFutangaku(Decimal atoRiyoshaFutangaku) {
         this.atoRiyoshaFutangaku = atoRiyoshaFutangaku;
     }
 
     /**
-     * getAtoHiyogakuTotal
-     * @return atoHiyogakuTotal
+     * 後・費用額合計のgetメソッドです。
+     * 
+     * @return 後・費用額合計
      */
     public Decimal getAtoHiyogakuTotal() {
         return atoHiyogakuTotal;
     }
 
     /**
-     * setAtoHiyogakuTotal
-     * @param atoHiyogakuTotal atoHiyogakuTotal
+     * 後・費用額合計のsetメソッドです。
+     * 
+     * @param atoHiyogakuTotal 後・費用額合計
      */
     public void setAtoHiyogakuTotal(Decimal atoHiyogakuTotal) {
         this.atoHiyogakuTotal = atoHiyogakuTotal;
     }
 
     /**
-     * getAtoHokenbunSeikyugakuTotal
-     * @return atoHokenbunSeikyugakuTotal
+     * 後・保険分請求額合計のgetメソッドです。
+     * 
+     * @return 後・保険分請求額合計
      */
     public Decimal getAtoHokenbunSeikyugakuTotal() {
         return atoHokenbunSeikyugakuTotal;
     }
 
     /**
-     * setAtoHokenbunSeikyugakuTotal
-     * @param atoHokenbunSeikyugakuTotal atoHokenbunSeikyugakuTotal
+     * 後・保険分請求額合計のsetメソッドです。
+     * 
+     * @param atoHokenbunSeikyugakuTotal 後・保険分請求額合計
      */
     public void setAtoHokenbunSeikyugakuTotal(Decimal atoHokenbunSeikyugakuTotal) {
         this.atoHokenbunSeikyugakuTotal = atoHokenbunSeikyugakuTotal;
     }
 
     /**
-     * getAtoRiyoshaFutangakuTotal
-     * @return atoRiyoshaFutangakuTotal
+     * 後・利用者負担額合計のgetメソッドです。
+     * 
+     * @return 後・利用者負担額合計
      */
     public Decimal getAtoRiyoshaFutangakuTotal() {
         return atoRiyoshaFutangakuTotal;
     }
 
     /**
-     * setAtoRiyoshaFutangakuTotal
-     * @param atoRiyoshaFutangakuTotal atoRiyoshaFutangakuTotal
+     * 後・利用者負担額合計のsetメソッドです。
+     * 
+     * @param atoRiyoshaFutangakuTotal 後・利用者負担額合計
      */
     public void setAtoRiyoshaFutangakuTotal(Decimal atoRiyoshaFutangakuTotal) {
         this.atoRiyoshaFutangakuTotal = atoRiyoshaFutangakuTotal;
     }
 
     /**
-     * getAtoKohi1FutangakuTotal
-     * @return atoKohi1FutangakuTotal
+     * 後・公費１・負担額合計のgetメソッドです。
+     * 
+     * @return 後・公費１・負担額合計
      */
     public Decimal getAtoKohi1FutangakuTotal() {
         return atoKohi1FutangakuTotal;
     }
 
     /**
-     * setAtoKohi1FutangakuTotal
-     * @param atoKohi1FutangakuTotal atoKohi1FutangakuTotal
+     * 後・公費１・負担額合計のsetメソッドです。
+     * 
+     * @param atoKohi1FutangakuTotal 後・公費１・負担額合計
      */
     public void setAtoKohi1FutangakuTotal(Decimal atoKohi1FutangakuTotal) {
         this.atoKohi1FutangakuTotal = atoKohi1FutangakuTotal;
     }
 
     /**
-     * getAtoKohi1Seikyugaku
-     * @return atoKohi1Seikyugaku
+     * 後・公費１・請求額のgetメソッドです。
+     * 
+     * @return 後・公費１・請求額
      */
     public Decimal getAtoKohi1Seikyugaku() {
         return atoKohi1Seikyugaku;
     }
 
     /**
-     * setAtoKohi1Seikyugaku
-     * @param atoKohi1Seikyugaku atoKohi1Seikyugaku
+     * 後・公費１・請求額のsetメソッドです。
+     * 
+     * @param atoKohi1Seikyugaku 後・公費１・請求額
      */
     public void setAtoKohi1Seikyugaku(Decimal atoKohi1Seikyugaku) {
         this.atoKohi1Seikyugaku = atoKohi1Seikyugaku;
     }
 
     /**
-     * getAtoKohi1HonninFutanGetsugaku
-     * @return atoKohi1HonninFutanGetsugaku
+     * 後・公費１・本人負担月額のgetメソッドです。
+     * 
+     * @return 後・公費１・本人負担月額
      */
     public Decimal getAtoKohi1HonninFutanGetsugaku() {
         return atoKohi1HonninFutanGetsugaku;
     }
 
     /**
-     * setAtoKohi1HonninFutanGetsugaku
-     * @param atoKohi1HonninFutanGetsugaku atoKohi1HonninFutanGetsugaku
+     * 後・公費１・本人負担月額のsetメソッドです。
+     * 
+     * @param atoKohi1HonninFutanGetsugaku 後・公費１・本人負担月額
      */
     public void setAtoKohi1HonninFutanGetsugaku(Decimal atoKohi1HonninFutanGetsugaku) {
         this.atoKohi1HonninFutanGetsugaku = atoKohi1HonninFutanGetsugaku;
     }
 
     /**
-     * getAtoKohi2FutangakuTotal
-     * @return atoKohi2FutangakuTotal
+     * 後・公費２・負担額合計のgetメソッドです。
+     * 
+     * @return 後・公費２・負担額合計
      */
     public Decimal getAtoKohi2FutangakuTotal() {
         return atoKohi2FutangakuTotal;
     }
 
     /**
-     * setAtoKohi2FutangakuTotal
-     * @param atoKohi2FutangakuTotal atoKohi2FutangakuTotal
+     * 後・公費２・負担額合計のsetメソッドです。
+     * 
+     * @param atoKohi2FutangakuTotal 後・公費２・負担額合計
      */
     public void setAtoKohi2FutangakuTotal(Decimal atoKohi2FutangakuTotal) {
         this.atoKohi2FutangakuTotal = atoKohi2FutangakuTotal;
     }
 
     /**
-     * getAtoKohi2Seikyugaku
-     * @return atoKohi2Seikyugaku
+     * 後・公費２・請求額のgetメソッドです。
+     * 
+     * @return 後・公費２・請求額
      */
     public Decimal getAtoKohi2Seikyugaku() {
         return atoKohi2Seikyugaku;
     }
 
     /**
-     * setAtoKohi2Seikyugaku
-     * @param atoKohi2Seikyugaku atoKohi2Seikyugaku
+     * 後・公費２・請求額のsetメソッドです。
+     * 
+     * @param atoKohi2Seikyugaku 後・公費２・請求額
      */
     public void setAtoKohi2Seikyugaku(Decimal atoKohi2Seikyugaku) {
         this.atoKohi2Seikyugaku = atoKohi2Seikyugaku;
     }
 
     /**
-     * getAtoKohi2HonninFutanGetsugaku
-     * @return atoKohi2HonninFutanGetsugaku
+     * 後・公費２・本人負担月額のgetメソッドです。
+     * 
+     * @return 後・公費２・本人負担月額
      */
     public Decimal getAtoKohi2HonninFutanGetsugaku() {
         return atoKohi2HonninFutanGetsugaku;
     }
 
     /**
-     * setAtoKohi2HonninFutanGetsugaku
-     * @param atoKohi2HonninFutanGetsugaku atoKohi2HonninFutanGetsugaku
+     * 後・公費２・本人負担月額のsetメソッドです。
+     * 
+     * @param atoKohi2HonninFutanGetsugaku 後・公費２・本人負担月額
      */
     public void setAtoKohi2HonninFutanGetsugaku(Decimal atoKohi2HonninFutanGetsugaku) {
         this.atoKohi2HonninFutanGetsugaku = atoKohi2HonninFutanGetsugaku;
     }
 
     /**
-     * getAtoKohi3FutangakuTotal
-     * @return atoKohi3FutangakuTotal
+     * 後・公費３・負担額合計のgetメソッドです。
+     * 
+     * @return 後・公費３・負担額合計
      */
     public Decimal getAtoKohi3FutangakuTotal() {
         return atoKohi3FutangakuTotal;
     }
 
     /**
-     * setAtoKohi3FutangakuTotal
-     * @param atoKohi3FutangakuTotal atoKohi3FutangakuTotal
+     * 後・公費３・負担額合計のsetメソッドです。
+     * 
+     * @param atoKohi3FutangakuTotal 後・公費３・負担額合計
      */
     public void setAtoKohi3FutangakuTotal(Decimal atoKohi3FutangakuTotal) {
         this.atoKohi3FutangakuTotal = atoKohi3FutangakuTotal;
     }
 
     /**
-     * getAtoKohi3Seikyugaku
-     * @return atoKohi3Seikyugaku
+     * 後・公費３・請求額のgetメソッドです。
+     * 
+     * @return 後・公費３・請求額
      */
     public Decimal getAtoKohi3Seikyugaku() {
         return atoKohi3Seikyugaku;
     }
 
     /**
-     * setAtoKohi3Seikyugaku
-     * @param atoKohi3Seikyugaku atoKohi3Seikyugaku
+     * 後・公費３・請求額のsetメソッドです。
+     * 
+     * @param atoKohi3Seikyugaku 後・公費３・請求額
      */
     public void setAtoKohi3Seikyugaku(Decimal atoKohi3Seikyugaku) {
         this.atoKohi3Seikyugaku = atoKohi3Seikyugaku;
     }
 
     /**
-     * getAtoKohi3HonninFutanGetsugaku
-     * @return atoKohi3HonninFutanGetsugaku
+     * 後・公費３・本人負担月額のgetメソッドです。
+     * 
+     * @return 後・公費３・本人負担月額
      */
     public Decimal getAtoKohi3HonninFutanGetsugaku() {
         return atoKohi3HonninFutanGetsugaku;
     }
 
     /**
-     * setAtoKohi3HonninFutanGetsugaku
-     * @param atoKohi3HonninFutanGetsugaku atoKohi3HonninFutanGetsugaku
+     * 後・公費３・本人負担月額のsetメソッドです。
+     * 
+     * @param atoKohi3HonninFutanGetsugaku 後・公費３・本人負担月額
      */
     public void setAtoKohi3HonninFutanGetsugaku(Decimal atoKohi3HonninFutanGetsugaku) {
         this.atoKohi3HonninFutanGetsugaku = atoKohi3HonninFutanGetsugaku;
     }
 
     /**
-     * getSaishinsaKaisu
-     * @return saishinsaKaisu
+     * 再審査回数のgetメソッドです。
+     * 
+     * @return 再審査回数
      */
     public Integer getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
     /**
-     * setSaishinsaKaisu
-     * @param saishinsaKaisu saishinsaKaisu
+     * 再審査回数のsetメソッドです。
+     * 
+     * @param saishinsaKaisu 再審査回数
      */
     public void setSaishinsaKaisu(Integer saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
     /**
-     * getKagoKaisu
-     * @return kagoKaisu
+     * 過誤回数のgetメソッドです。
+     * 
+     * @return 過誤回数
      */
     public Integer getKagoKaisu() {
         return kagoKaisu;
     }
 
     /**
-     * setKagoKaisu
-     * @param kagoKaisu kagoKaisu
+     * 過誤回数のsetメソッドです。
+     * 
+     * @param kagoKaisu 過誤回数
      */
     public void setKagoKaisu(Integer kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 
     /**
-     * getShinsaYM
-     * @return shinsaYM
+     * 審査年月のgetメソッドです。
+     * 
+     * @return 審査年月
      */
     public FlexibleYearMonth getShinsaYM() {
         return shinsaYM;
     }
 
     /**
-     * setShinsaYM
-     * @param shinsaYM shinsaYM
+     * 審査年月のsetメソッドです。
+     * 
+     * @param shinsaYM 審査年月
      */
     public void setShinsaYM(FlexibleYearMonth shinsaYM) {
         this.shinsaYM = shinsaYM;
     }
 
     /**
-     * getSeiriNo
-     * @return seiriNo
+     * 整理番号のgetメソッドです。
+     * 
+     * @return 整理番号
      */
     public RString getSeiriNo() {
         return seiriNo;
     }
 
     /**
-     * setSeiriNo
-     * @param seiriNo seiriNo
+     * 整理番号のsetメソッドです。
+     * 
+     * @param seiriNo 整理番号
      */
     public void setSeiriNo(RString seiriNo) {
         this.seiriNo = seiriNo;
     }
 
     /**
-     * getTorikomiYM
-     * @return torikomiYM
+     * 取込年月のgetメソッドです。
+     * 
+     * @return 取込年月
      */
     public FlexibleYearMonth getTorikomiYM() {
         return torikomiYM;
     }
 
     /**
-     * setTorikomiYM
-     * @param torikomiYM torikomiYM
+     * 取込年月のsetメソッドです。
+     * 
+     * @param torikomiYM 取込年月
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
         this.torikomiYM = torikomiYM;
@@ -1163,6 +1288,7 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
      * @@return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
+    @Override
     public boolean equalsPrimaryKeys(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity other) {
         if (other == null) {
             return false;
@@ -1197,7 +1323,87 @@ public class DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity implement
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void shallowCopy(DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntity entity) {
+        this.kokanJohoShikibetsuNo = entity.kokanJohoShikibetsuNo;
+        this.inputShikibetsuNo = entity.inputShikibetsuNo;
+        this.recodeShubetsuCode = entity.recodeShubetsuCode;
+        this.shokisaiHokenshaNo = entity.shokisaiHokenshaNo;
+        this.hiHokenshaNo = entity.hiHokenshaNo;
+        this.serviceTeikyoYM = entity.serviceTeikyoYM;
+        this.jigyoshoNo = entity.jigyoshoNo;
+        this.toshiNo = entity.toshiNo;
+        this.recodeJunjiNo = entity.recodeJunjiNo;
+        this.serviceSyuruiCode = entity.serviceSyuruiCode;
+        this.serviceKomokuCode = entity.serviceKomokuCode;
+        this.hiyoTanka = entity.hiyoTanka;
+        this.futanGendogaku = entity.futanGendogaku;
+        this.nissu = entity.nissu;
+        this.kohi1Nissu = entity.kohi1Nissu;
+        this.kohi2Nissu = entity.kohi2Nissu;
+        this.kohi3Nissu = entity.kohi3Nissu;
+        this.hiyogaku = entity.hiyogaku;
+        this.hokenbunSeikyugaku = entity.hokenbunSeikyugaku;
+        this.kohi1Futangaku = entity.kohi1Futangaku;
+        this.kohi2Futangaku = entity.kohi2Futangaku;
+        this.kohi3Futangaku = entity.kohi3Futangaku;
+        this.riyoshaFutangaku = entity.riyoshaFutangaku;
+        this.hiyogakuTotal = entity.hiyogakuTotal;
+        this.hokenbunSeikyugakuTotal = entity.hokenbunSeikyugakuTotal;
+        this.riyoshaFutangakuTotal = entity.riyoshaFutangakuTotal;
+        this.kohi1FutangakuTotal = entity.kohi1FutangakuTotal;
+        this.kohi1Seikyugaku = entity.kohi1Seikyugaku;
+        this.kohi1HonninFutanGetsugaku = entity.kohi1HonninFutanGetsugaku;
+        this.kohi2FutangakuTotal = entity.kohi2FutangakuTotal;
+        this.kohi2Seikyugaku = entity.kohi2Seikyugaku;
+        this.kohi2HonninFutanGetsugaku = entity.kohi2HonninFutanGetsugaku;
+        this.kohi3FutangakuTotal = entity.kohi3FutangakuTotal;
+        this.kohi3Seikyugaku = entity.kohi3Seikyugaku;
+        this.kohi3HonninFutanGetsugaku = entity.kohi3HonninFutanGetsugaku;
+        this.atoHiyoTanka = entity.atoHiyoTanka;
+        this.atoNissu = entity.atoNissu;
+        this.atoKohi1Nissu = entity.atoKohi1Nissu;
+        this.atoKohi2Nissu = entity.atoKohi2Nissu;
+        this.atoKohi3Nissu = entity.atoKohi3Nissu;
+        this.atoHiyogaku = entity.atoHiyogaku;
+        this.atoHokenbunSeikyugaku = entity.atoHokenbunSeikyugaku;
+        this.atoKohi1Futangaku = entity.atoKohi1Futangaku;
+        this.atoKohi2Futangaku = entity.atoKohi2Futangaku;
+        this.atoKohi3Futangaku = entity.atoKohi3Futangaku;
+        this.atoRiyoshaFutangaku = entity.atoRiyoshaFutangaku;
+        this.atoHiyogakuTotal = entity.atoHiyogakuTotal;
+        this.atoHokenbunSeikyugakuTotal = entity.atoHokenbunSeikyugakuTotal;
+        this.atoRiyoshaFutangakuTotal = entity.atoRiyoshaFutangakuTotal;
+        this.atoKohi1FutangakuTotal = entity.atoKohi1FutangakuTotal;
+        this.atoKohi1Seikyugaku = entity.atoKohi1Seikyugaku;
+        this.atoKohi1HonninFutanGetsugaku = entity.atoKohi1HonninFutanGetsugaku;
+        this.atoKohi2FutangakuTotal = entity.atoKohi2FutangakuTotal;
+        this.atoKohi2Seikyugaku = entity.atoKohi2Seikyugaku;
+        this.atoKohi2HonninFutanGetsugaku = entity.atoKohi2HonninFutanGetsugaku;
+        this.atoKohi3FutangakuTotal = entity.atoKohi3FutangakuTotal;
+        this.atoKohi3Seikyugaku = entity.atoKohi3Seikyugaku;
+        this.atoKohi3HonninFutanGetsugaku = entity.atoKohi3HonninFutanGetsugaku;
+        this.saishinsaKaisu = entity.saishinsaKaisu;
+        this.kagoKaisu = entity.kagoKaisu;
+        this.shinsaYM = entity.shinsaYM;
+        this.seiriNo = entity.seiriNo;
+        this.torikomiYM = entity.torikomiYM;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Override
+    public RString getMd5() {
+        return super.toMd5(kokanJohoShikibetsuNo, inputShikibetsuNo, recodeShubetsuCode, shokisaiHokenshaNo, hiHokenshaNo, serviceTeikyoYM, jigyoshoNo, toshiNo, recodeJunjiNo, serviceSyuruiCode, serviceKomokuCode, hiyoTanka, futanGendogaku, nissu, kohi1Nissu, kohi2Nissu, kohi3Nissu, hiyogaku, hokenbunSeikyugaku, kohi1Futangaku, kohi2Futangaku, kohi3Futangaku, riyoshaFutangaku, hiyogakuTotal, hokenbunSeikyugakuTotal, riyoshaFutangakuTotal, kohi1FutangakuTotal, kohi1Seikyugaku, kohi1HonninFutanGetsugaku, kohi2FutangakuTotal, kohi2Seikyugaku, kohi2HonninFutanGetsugaku, kohi3FutangakuTotal, kohi3Seikyugaku, kohi3HonninFutanGetsugaku, atoHiyoTanka, atoNissu, atoKohi1Nissu, atoKohi2Nissu, atoKohi3Nissu, atoHiyogaku, atoHokenbunSeikyugaku, atoKohi1Futangaku, atoKohi2Futangaku, atoKohi3Futangaku, atoRiyoshaFutangaku, atoHiyogakuTotal, atoHokenbunSeikyugakuTotal, atoRiyoshaFutangakuTotal, atoKohi1FutangakuTotal, atoKohi1Seikyugaku, atoKohi1HonninFutanGetsugaku, atoKohi2FutangakuTotal, atoKohi2Seikyugaku, atoKohi2HonninFutanGetsugaku, atoKohi3FutangakuTotal, atoKohi3Seikyugaku, atoKohi3HonninFutanGetsugaku, saishinsaKaisu, kagoKaisu, shinsaYM, seiriNo, torikomiYM);
+    }
+
 // </editor-fold>
+
 
 
 

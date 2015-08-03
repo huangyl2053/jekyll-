@@ -1,0 +1,10 @@
+﻿kanriNo,varchar,RString,,,,,管理番号,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+jushoCode,UDD007ChoikiCode,ChoikiCode,,,,,住所コード,A
+jusho,UDD046AtenaJusho,AtenaJusho,,,,,住所,A
+banchiCode1,UDD006BanchiCode,BanchiCode,,,,,番地コード１,A
+banchiCode2,UDD006BanchiCode,BanchiCode,,,,,番地コード２,A
+banchiCode3,UDD006BanchiCode,BanchiCode,,,,,番地コード３,A
+banchi,UDD047AtenaBanchi,AtenaBanchi,,,,,番地,A
+shisetsuShurui,varchar,RString,,,,,施設種類,A
+shisetsuCode,varchar,RString,,,,,施設コード,A

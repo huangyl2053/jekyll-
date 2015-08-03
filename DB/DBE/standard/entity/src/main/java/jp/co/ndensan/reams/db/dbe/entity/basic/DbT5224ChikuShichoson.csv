@@ -1,0 +1,4 @@
+﻿chosaChikuCode,UDD035Code,Code,,,,,調査地区コード,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+yusenNo,int2,int,,,,,優先番号,A
+jiChikuFlag,bool,boolean,,,,,自地区フラグ,A

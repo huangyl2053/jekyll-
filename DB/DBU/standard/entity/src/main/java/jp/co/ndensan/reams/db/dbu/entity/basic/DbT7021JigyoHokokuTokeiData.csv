@@ -1,0 +1,15 @@
+﻿hokokuYSeireki,UDD012YSeireki,FlexibleYear,,,,,報告年,A
+hokokuM,varchar,RString,,,,,報告月,A
+shukeiTaishoYSeireki,UDD012YSeireki,FlexibleYear,,,,,集計対象年,A
+shukeiTaishoM,varchar,RString,,,,,集計対象月,A
+toukeiTaishoKubun,varchar,RString,,,,,統計対象区分,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+hyoNo,UDD035Code,Code,,,,,表番号,A
+shukeiNo,UDD035Code,Code,,,,,集計番号,A
+shukeiTani,UDD035Code,Code,,,,,集計単位,A
+tateNo,numeric,Decimal,,,,,縦番号,A
+yokoNo,numeric,Decimal,,,,,横番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+shukeiKekkaAtai,numeric,Decimal,,,,,集計結果値,A
+tateKomokuCode,UDD035Code,Code,,,,,縦項目コード,A
+yokoKomokuCode,UDD035Code,Code,,,,,横項目コード,A

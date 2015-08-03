@@ -1,0 +1,15 @@
+﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,証記載保険者番号,A
+hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+kyusochishaKubun,varchar,RString,,,,,旧措置者区分,A
+shinseiRiyuKubun,varchar,RString,,,,,申請理由区分,A
+riyoshaFutanDankai,varchar,RString,,,,,利用者負担段階,A
+kyokaisoGaitoshaKubun,bool,boolean,,,,,境界層該当者区分,A
+gekihenKanwaSochiTaishoshaKubun,bool,boolean,,,,,激変緩和措置対象者区分,A
+kyoshitsuShubetsu,varchar,RString,,,,,居室種別,A
+shokuhiFutanGendogaku,numeric,Decimal,,,,,食費負担限度額,A
+unitTypeKoshitsu,numeric,Decimal,,,,,ユニット型個室,A
+unitTypeJunKoshitsu,numeric,Decimal,,,,,ユニット型準個室,A
+juraiTypeKoshitsu_Tokuyo,numeric,Decimal,,,,,従来型個室（特養等）,A
+juraiTypeKoshitsu_Roken_Ryoyo,numeric,Decimal,,,,,従来型個室（老健・療養等）,A
+tashoshitsu,numeric,Decimal,,,,,多床室,A

@@ -1,0 +1,14 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+kariireShinseiYMD,UDD015YMD,FlexibleDate,,,,,借入申請年月日,A
+rirekiNo,int2,int,,,,,履歴番号,A
+kariukeYMD,UDD015YMD,FlexibleDate,,,,,借受年月日,A
+kariukeninYubinNo,UDD003YubinNo,YubinNo,,,,,借受人郵便番号,A
+kariukeninJusho,varchar,RString,,,,,借受人住所,A
+kariukeninShimeiKana,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,借受人氏名カナ,A
+kariukeninShimei,UDD042AtenaMeisho,AtenaMeisho,,,,,借受人氏名,A
+kariukeninTelNo,UDD026TelNo,TelNo,,,,,借受人電話番号,A
+hoshoninShimeiKana,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,保証人氏名カナ,A
+hoshoninShimei,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,保証人氏名,A
+hoshoninYubinNo,UDD003YubinNo,YubinNo,,,,,保証人郵便番号,A
+hoshoninJusho,varchar,RString,,,,,保証人住所,A
+hoshoninTelNo,UDD026TelNo,TelNo,,,,,保証人電話番号,A

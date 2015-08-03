@@ -1,0 +1,11 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+todokedeKanriNo,varchar,RString,,,,,第三者行為届出管理番号,A
+jidanHokokushoUketukeYMD,UDD015YMD,FlexibleDate,,,,,示談報告書受付年月日,A
+rirekiNo,int2,int,,,,,履歴番号,A
+kyushoKyogiKubun,varchar,RString,,,,,第三者行為求償協議区分,A
+jidanHokokushoTeishutsuYMD,UDD015YMD,FlexibleDate,,,,,示談報告書提出年月日,A
+jidanSeiritsuYMD,UDD015YMD,FlexibleDate,,,,,示談成立年月日,A
+kyufuKaishiYMD,UDD014YM,FlexibleYearMonth,,,,,給付期間開始年月,A
+kyufuShuryoYMD,UDD014YM,FlexibleYearMonth,,,,,給付期間終了年月,A
+kashitsuWariai_Kagaisha,varchar,RString,,,,,過失割合・加害者,A
+kashitsuWariai_Higaisha,varchar,RString,,,,,過失割合・被害者,A

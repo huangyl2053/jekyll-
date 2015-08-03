@@ -1,0 +1,3 @@
+﻿groupID,varchar,RString,,,,,グループID,A
+shichosonShikibetsuID,bpchar,RString,,,,,市町村識別ID,A
+shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A

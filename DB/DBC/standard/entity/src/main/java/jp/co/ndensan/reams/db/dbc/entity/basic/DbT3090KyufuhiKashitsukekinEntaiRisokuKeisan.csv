@@ -1,0 +1,5 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+kashitsukeKanriNo,varchar,RString,,,,,貸付管理番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+entaiNissu,varchar,RString,,,,,貸付金延滞日数,A
+entaiRisokuKingaku,numeric,Decimal,,,,,貸付金延滞利息金額,A

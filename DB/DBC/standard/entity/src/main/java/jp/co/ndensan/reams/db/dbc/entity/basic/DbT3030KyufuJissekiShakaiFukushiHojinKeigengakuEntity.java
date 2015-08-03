@@ -1,27 +1,22 @@
 package jp.co.ndensan.reams.db.dbc.entity.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.ToshiNo;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import java.util.Objects;
 
 /**
  * DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuの項目定義クラスです
  *
  */
-public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity extends DbTableEntityBase<DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity> implements IDbAccessable {
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3030KyufuJissekiShakaiFukushiHojinKeigengaku");
 
@@ -42,7 +37,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
     @PrimaryKey
     private ShoKisaiHokenshaNo shokisaiHokenshaNo;
     @PrimaryKey
-    private HihokenshaNo hiHokenshaNo;
+    private KaigoHihokenshaNo hiHokenshaNo;
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
@@ -66,7 +61,8 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
     private FlexibleYearMonth torikomiYM;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -74,7 +70,8 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -82,7 +79,8 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -90,7 +88,8 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
@@ -99,7 +98,8 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
 
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -107,352 +107,396 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
     }
 
     /**
-     * getKokanJohoShikibetsuNo
-     * @return kokanJohoShikibetsuNo
+     * 交換情報識別番号のgetメソッドです。
+     * 
+     * @return 交換情報識別番号
      */
     public KokanShikibetsuNo getKokanJohoShikibetsuNo() {
         return kokanJohoShikibetsuNo;
     }
 
     /**
-     * setKokanJohoShikibetsuNo
-     * @param kokanJohoShikibetsuNo kokanJohoShikibetsuNo
+     * 交換情報識別番号のsetメソッドです。
+     * 
+     * @param kokanJohoShikibetsuNo 交換情報識別番号
      */
     public void setKokanJohoShikibetsuNo(KokanShikibetsuNo kokanJohoShikibetsuNo) {
         this.kokanJohoShikibetsuNo = kokanJohoShikibetsuNo;
     }
 
     /**
-     * getInputShikibetsuNo
-     * @return inputShikibetsuNo
+     * 入力識別番号のgetメソッドです。
+     * 
+     * @return 入力識別番号
      */
     public RString getInputShikibetsuNo() {
         return inputShikibetsuNo;
     }
 
     /**
-     * setInputShikibetsuNo
-     * @param inputShikibetsuNo inputShikibetsuNo
+     * 入力識別番号のsetメソッドです。
+     * 
+     * @param inputShikibetsuNo 入力識別番号
      */
     public void setInputShikibetsuNo(RString inputShikibetsuNo) {
         this.inputShikibetsuNo = inputShikibetsuNo;
     }
 
     /**
-     * getRecodeShubetsuCode
-     * @return recodeShubetsuCode
+     * レコード種別コードのgetメソッドです。
+     * 
+     * @return レコード種別コード
      */
     public RString getRecodeShubetsuCode() {
         return recodeShubetsuCode;
     }
 
     /**
-     * setRecodeShubetsuCode
-     * @param recodeShubetsuCode recodeShubetsuCode
+     * レコード種別コードのsetメソッドです。
+     * 
+     * @param recodeShubetsuCode レコード種別コード
      */
     public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
         this.recodeShubetsuCode = recodeShubetsuCode;
     }
 
     /**
-     * getShokisaiHokenshaNo
-     * @return shokisaiHokenshaNo
+     * 証記載保険者番号のgetメソッドです。
+     * 
+     * @return 証記載保険者番号
      */
     public ShoKisaiHokenshaNo getShokisaiHokenshaNo() {
         return shokisaiHokenshaNo;
     }
 
     /**
-     * setShokisaiHokenshaNo
-     * @param shokisaiHokenshaNo shokisaiHokenshaNo
+     * 証記載保険者番号のsetメソッドです。
+     * 
+     * @param shokisaiHokenshaNo 証記載保険者番号
      */
     public void setShokisaiHokenshaNo(ShoKisaiHokenshaNo shokisaiHokenshaNo) {
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
     /**
-     * getHiHokenshaNo
-     * @return hiHokenshaNo
+     * 被保険者番号のgetメソッドです。
+     * 
+     * @return 被保険者番号
      */
-    public HihokenshaNo getHiHokenshaNo() {
+    public KaigoHihokenshaNo getHiHokenshaNo() {
         return hiHokenshaNo;
     }
 
     /**
-     * setHiHokenshaNo
-     * @param hiHokenshaNo hiHokenshaNo
+     * 被保険者番号のsetメソッドです。
+     * 
+     * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(KaigoHihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
     /**
-     * getServiceTeikyoYM
-     * @return serviceTeikyoYM
+     * サービス提供年月のgetメソッドです。
+     * 
+     * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
         return serviceTeikyoYM;
     }
 
     /**
-     * setServiceTeikyoYM
-     * @param serviceTeikyoYM serviceTeikyoYM
+     * サービス提供年月のsetメソッドです。
+     * 
+     * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
         this.serviceTeikyoYM = serviceTeikyoYM;
     }
 
     /**
-     * getJigyoshoNo
-     * @return jigyoshoNo
+     * 事業所番号のgetメソッドです。
+     * 
+     * @return 事業所番号
      */
     public JigyoshaNo getJigyoshoNo() {
         return jigyoshoNo;
     }
 
     /**
-     * setJigyoshoNo
-     * @param jigyoshoNo jigyoshoNo
+     * 事業所番号のsetメソッドです。
+     * 
+     * @param jigyoshoNo 事業所番号
      */
     public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
         this.jigyoshoNo = jigyoshoNo;
     }
 
     /**
-     * getToshiNo
-     * @return toshiNo
+     * 通し番号のgetメソッドです。
+     * 
+     * @return 通し番号
      */
     public ToshiNo getToshiNo() {
         return toshiNo;
     }
 
     /**
-     * setToshiNo
-     * @param toshiNo toshiNo
+     * 通し番号のsetメソッドです。
+     * 
+     * @param toshiNo 通し番号
      */
     public void setToshiNo(ToshiNo toshiNo) {
         this.toshiNo = toshiNo;
     }
 
     /**
-     * getKeigenritsu
-     * @return keigenritsu
+     * 軽減率のgetメソッドです。
+     * 
+     * @return 軽減率
      */
     public Decimal getKeigenritsu() {
         return keigenritsu;
     }
 
     /**
-     * setKeigenritsu
-     * @param keigenritsu keigenritsu
+     * 軽減率のsetメソッドです。
+     * 
+     * @param keigenritsu 軽減率
      */
     public void setKeigenritsu(Decimal keigenritsu) {
         this.keigenritsu = keigenritsu;
     }
 
     /**
-     * getServiceSyuruiCode
-     * @return serviceSyuruiCode
+     * サービス種類コードのgetメソッドです。
+     * 
+     * @return サービス種類コード
      */
     public ServiceShuruiCode getServiceSyuruiCode() {
         return serviceSyuruiCode;
     }
 
     /**
-     * setServiceSyuruiCode
-     * @param serviceSyuruiCode serviceSyuruiCode
+     * サービス種類コードのsetメソッドです。
+     * 
+     * @param serviceSyuruiCode サービス種類コード
      */
     public void setServiceSyuruiCode(ServiceShuruiCode serviceSyuruiCode) {
         this.serviceSyuruiCode = serviceSyuruiCode;
     }
 
     /**
-     * getRiyoshaFutanTotal
-     * @return riyoshaFutanTotal
+     * 受領すべき利用者負担の総額のgetメソッドです。
+     * 
+     * @return 受領すべき利用者負担の総額
      */
     public Decimal getRiyoshaFutanTotal() {
         return riyoshaFutanTotal;
     }
 
     /**
-     * setRiyoshaFutanTotal
-     * @param riyoshaFutanTotal riyoshaFutanTotal
+     * 受領すべき利用者負担の総額のsetメソッドです。
+     * 
+     * @param riyoshaFutanTotal 受領すべき利用者負担の総額
      */
     public void setRiyoshaFutanTotal(Decimal riyoshaFutanTotal) {
         this.riyoshaFutanTotal = riyoshaFutanTotal;
     }
 
     /**
-     * getKeigengaku
-     * @return keigengaku
+     * 軽減額のgetメソッドです。
+     * 
+     * @return 軽減額
      */
     public Decimal getKeigengaku() {
         return keigengaku;
     }
 
     /**
-     * setKeigengaku
-     * @param keigengaku keigengaku
+     * 軽減額のsetメソッドです。
+     * 
+     * @param keigengaku 軽減額
      */
     public void setKeigengaku(Decimal keigengaku) {
         this.keigengaku = keigengaku;
     }
 
     /**
-     * getKeigengoRiyoshaFutangaku
-     * @return keigengoRiyoshaFutangaku
+     * 軽減後利用者負担額のgetメソッドです。
+     * 
+     * @return 軽減後利用者負担額
      */
     public Decimal getKeigengoRiyoshaFutangaku() {
         return keigengoRiyoshaFutangaku;
     }
 
     /**
-     * setKeigengoRiyoshaFutangaku
-     * @param keigengoRiyoshaFutangaku keigengoRiyoshaFutangaku
+     * 軽減後利用者負担額のsetメソッドです。
+     * 
+     * @param keigengoRiyoshaFutangaku 軽減後利用者負担額
      */
     public void setKeigengoRiyoshaFutangaku(Decimal keigengoRiyoshaFutangaku) {
         this.keigengoRiyoshaFutangaku = keigengoRiyoshaFutangaku;
     }
 
     /**
-     * getBiko
-     * @return biko
+     * 備考のgetメソッドです。
+     * 
+     * @return 備考
      */
     public RString getBiko() {
         return biko;
     }
 
     /**
-     * setBiko
-     * @param biko biko
+     * 備考のsetメソッドです。
+     * 
+     * @param biko 備考
      */
     public void setBiko(RString biko) {
         this.biko = biko;
     }
 
     /**
-     * getAtoRiyoshaFutanTotal
-     * @return atoRiyoshaFutanTotal
+     * 後・受領すべき利用者負担の総額のgetメソッドです。
+     * 
+     * @return 後・受領すべき利用者負担の総額
      */
     public Decimal getAtoRiyoshaFutanTotal() {
         return atoRiyoshaFutanTotal;
     }
 
     /**
-     * setAtoRiyoshaFutanTotal
-     * @param atoRiyoshaFutanTotal atoRiyoshaFutanTotal
+     * 後・受領すべき利用者負担の総額のsetメソッドです。
+     * 
+     * @param atoRiyoshaFutanTotal 後・受領すべき利用者負担の総額
      */
     public void setAtoRiyoshaFutanTotal(Decimal atoRiyoshaFutanTotal) {
         this.atoRiyoshaFutanTotal = atoRiyoshaFutanTotal;
     }
 
     /**
-     * getAtoKeigengaku
-     * @return atoKeigengaku
+     * 後・軽減額のgetメソッドです。
+     * 
+     * @return 後・軽減額
      */
     public Decimal getAtoKeigengaku() {
         return atoKeigengaku;
     }
 
     /**
-     * setAtoKeigengaku
-     * @param atoKeigengaku atoKeigengaku
+     * 後・軽減額のsetメソッドです。
+     * 
+     * @param atoKeigengaku 後・軽減額
      */
     public void setAtoKeigengaku(Decimal atoKeigengaku) {
         this.atoKeigengaku = atoKeigengaku;
     }
 
     /**
-     * getAtoKeigengoRiyoshaFutangaku
-     * @return atoKeigengoRiyoshaFutangaku
+     * 後・軽減後利用者負担額のgetメソッドです。
+     * 
+     * @return 後・軽減後利用者負担額
      */
     public Decimal getAtoKeigengoRiyoshaFutangaku() {
         return atoKeigengoRiyoshaFutangaku;
     }
 
     /**
-     * setAtoKeigengoRiyoshaFutangaku
-     * @param atoKeigengoRiyoshaFutangaku atoKeigengoRiyoshaFutangaku
+     * 後・軽減後利用者負担額のsetメソッドです。
+     * 
+     * @param atoKeigengoRiyoshaFutangaku 後・軽減後利用者負担額
      */
     public void setAtoKeigengoRiyoshaFutangaku(Decimal atoKeigengoRiyoshaFutangaku) {
         this.atoKeigengoRiyoshaFutangaku = atoKeigengoRiyoshaFutangaku;
     }
 
     /**
-     * getSaishinsaKaisu
-     * @return saishinsaKaisu
+     * 再審査回数のgetメソッドです。
+     * 
+     * @return 再審査回数
      */
     public Integer getSaishinsaKaisu() {
         return saishinsaKaisu;
     }
 
     /**
-     * setSaishinsaKaisu
-     * @param saishinsaKaisu saishinsaKaisu
+     * 再審査回数のsetメソッドです。
+     * 
+     * @param saishinsaKaisu 再審査回数
      */
     public void setSaishinsaKaisu(Integer saishinsaKaisu) {
         this.saishinsaKaisu = saishinsaKaisu;
     }
 
     /**
-     * getKagoKaisu
-     * @return kagoKaisu
+     * 過誤回数のgetメソッドです。
+     * 
+     * @return 過誤回数
      */
     public Integer getKagoKaisu() {
         return kagoKaisu;
     }
 
     /**
-     * setKagoKaisu
-     * @param kagoKaisu kagoKaisu
+     * 過誤回数のsetメソッドです。
+     * 
+     * @param kagoKaisu 過誤回数
      */
     public void setKagoKaisu(Integer kagoKaisu) {
         this.kagoKaisu = kagoKaisu;
     }
 
     /**
-     * getShinsaYM
-     * @return shinsaYM
+     * 審査年月のgetメソッドです。
+     * 
+     * @return 審査年月
      */
     public FlexibleYearMonth getShinsaYM() {
         return shinsaYM;
     }
 
     /**
-     * setShinsaYM
-     * @param shinsaYM shinsaYM
+     * 審査年月のsetメソッドです。
+     * 
+     * @param shinsaYM 審査年月
      */
     public void setShinsaYM(FlexibleYearMonth shinsaYM) {
         this.shinsaYM = shinsaYM;
     }
 
     /**
-     * getSeiriNo
-     * @return seiriNo
+     * 整理番号のgetメソッドです。
+     * 
+     * @return 整理番号
      */
     public RString getSeiriNo() {
         return seiriNo;
     }
 
     /**
-     * setSeiriNo
-     * @param seiriNo seiriNo
+     * 整理番号のsetメソッドです。
+     * 
+     * @param seiriNo 整理番号
      */
     public void setSeiriNo(RString seiriNo) {
         this.seiriNo = seiriNo;
     }
 
     /**
-     * getTorikomiYM
-     * @return torikomiYM
+     * 取込年月のgetメソッドです。
+     * 
+     * @return 取込年月
      */
     public FlexibleYearMonth getTorikomiYM() {
         return torikomiYM;
     }
 
     /**
-     * setTorikomiYM
-     * @param torikomiYM torikomiYM
+     * 取込年月のsetメソッドです。
+     * 
+     * @param torikomiYM 取込年月
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
         this.torikomiYM = torikomiYM;
@@ -465,6 +509,7 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
      * @@return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
+    @Override
     public boolean equalsPrimaryKeys(DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity other) {
         if (other == null) {
             return false;
@@ -499,6 +544,45 @@ public class DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity implements ID
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void shallowCopy(DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntity entity) {
+        this.kokanJohoShikibetsuNo = entity.kokanJohoShikibetsuNo;
+        this.inputShikibetsuNo = entity.inputShikibetsuNo;
+        this.recodeShubetsuCode = entity.recodeShubetsuCode;
+        this.shokisaiHokenshaNo = entity.shokisaiHokenshaNo;
+        this.hiHokenshaNo = entity.hiHokenshaNo;
+        this.serviceTeikyoYM = entity.serviceTeikyoYM;
+        this.jigyoshoNo = entity.jigyoshoNo;
+        this.toshiNo = entity.toshiNo;
+        this.keigenritsu = entity.keigenritsu;
+        this.serviceSyuruiCode = entity.serviceSyuruiCode;
+        this.riyoshaFutanTotal = entity.riyoshaFutanTotal;
+        this.keigengaku = entity.keigengaku;
+        this.keigengoRiyoshaFutangaku = entity.keigengoRiyoshaFutangaku;
+        this.biko = entity.biko;
+        this.atoRiyoshaFutanTotal = entity.atoRiyoshaFutanTotal;
+        this.atoKeigengaku = entity.atoKeigengaku;
+        this.atoKeigengoRiyoshaFutangaku = entity.atoKeigengoRiyoshaFutangaku;
+        this.saishinsaKaisu = entity.saishinsaKaisu;
+        this.kagoKaisu = entity.kagoKaisu;
+        this.shinsaYM = entity.shinsaYM;
+        this.seiriNo = entity.seiriNo;
+        this.torikomiYM = entity.torikomiYM;
+    }
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Override
+    public RString getMd5() {
+        return super.toMd5(kokanJohoShikibetsuNo, inputShikibetsuNo, recodeShubetsuCode, shokisaiHokenshaNo, hiHokenshaNo, serviceTeikyoYM, jigyoshoNo, toshiNo, keigenritsu, serviceSyuruiCode, riyoshaFutanTotal, keigengaku, keigengoRiyoshaFutangaku, biko, atoRiyoshaFutanTotal, atoKeigengaku, atoKeigengoRiyoshaFutangaku, saishinsaKaisu, kagoKaisu, shinsaYM, seiriNo, torikomiYM);
+    }
+
 // </editor-fold>
+
 
 }

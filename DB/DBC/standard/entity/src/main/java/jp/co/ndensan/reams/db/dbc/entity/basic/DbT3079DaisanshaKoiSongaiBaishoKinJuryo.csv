@@ -1,0 +1,9 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+todokedeKanriNo,varchar,RString,,,,,第三者行為届出管理番号,A
+kyushoSeikyuNo,varchar,RString,,,,,第三者行為求償請求番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+nyukinKakuninYMD,UDD015YMD,FlexibleDate,,,,,入金確認年月日,A
+ryoshuYMD,UDD015YMD,FlexibleDate,,,,,領収年月日,A
+ryoshuKingaku,numeric,Decimal,,,,,領収金額,A
+mabusokuKinUMU,varchar,RString,,,,,過不足金有無,A
+kabusokuGaku,numeric,Decimal,,,,,過不足額,A

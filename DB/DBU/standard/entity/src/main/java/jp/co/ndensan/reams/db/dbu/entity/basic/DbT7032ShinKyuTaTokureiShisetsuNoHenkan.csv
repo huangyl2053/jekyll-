@@ -1,0 +1,5 @@
+﻿shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
+shinTaTokureiShisetsuNo,varchar,RString,,,,,新他特例施設番号,A
+kyuTaTokureiShisetsuNo,varchar,RString,,,,,旧他特例施設番号,A
+shichosonCode2,UDD023LasdecCode,LasdecCode,,,,,市町村コード２,A
+kyuTaTokureiShisetsuNo2,varchar,RString,,,,,旧他特例施設番号２,A

@@ -1,0 +1,9 @@
+﻿shinseishoKanriNo,varchar,RString,,,,,申請書管理番号,A
+ninteichosaRirekiNo,int2,int,,,,,認定調査依頼履歴番号,A
+ninteichosaTokkijikoNo,bpchar,RString,,,,,認定調査特記事項番号,A
+ninteichosaTokkijikoRenban,bpchar,RString,,,,,認定調査特記事項連番,A
+tokkijikoTextImageKubun,bpchar,RString,,,,,特記事項テキスト・イメージ区分,A
+genponMaskKubun,UDD035Code,Code,,,,,原本マスク区分,A
+tokkiJiko,varchar,RString,,,,,特記事項,A
+tokkiJikoImageSharedFileId,timestamp,RDateTime,,,,,特記事項イメージ共有ファイルID,A
+tokkiJikoMaskingImageSharedFileId,timestamp,RDateTime,,,,,特記事項マスキングイメージ共有ファイルID,A
