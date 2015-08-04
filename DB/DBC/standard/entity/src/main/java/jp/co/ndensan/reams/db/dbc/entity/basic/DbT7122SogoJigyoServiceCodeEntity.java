@@ -1,21 +1,25 @@
 package jp.co.ndensan.reams.db.dbc.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.util.Objects;
 
 /**
  * 介護予防・日常生活支援総合事業サービスコードテーブルのエンティティクラスです。
  */
 public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122SogoJigyoServiceCodeEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7122SogoJigyoServiceCode");
 
@@ -28,9 +32,9 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD005ServiceShuruiCode serviceShuruiCode;
+    private ServiceShuruiCode serviceShuruiCode;
     @PrimaryKey
-    private DbUDD006ServiceKomokuCode serviceKomokuCode;
+    private ServiceKomokuCode serviceKomokuCode;
     @PrimaryKey
     private FlexibleYearMonth tekiyoKaishiYM;
     @PrimaryKey
@@ -44,14 +48,14 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
     private RString tokubetsuChiikiKasanFlag;
     private RString teiRitsu_TeiGakuKubun;
     private Decimal riyoshaFutanGaku;
-    private DbUDD011HokenKyufuRitsu kyufuRitsu;
+    private HokenKyufuRitsu kyufuRitsu;
     private RString nijiYoboTaishosha_JissiKubun;
     private RString yoShien1_JisshiKubun;
     private RString yoShien2_JisshiKubun;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -60,7 +64,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -69,7 +73,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -78,17 +82,16 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -97,43 +100,43 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * サービス種類コードのgetメソッドです。
-     * 
+     *
      * @return サービス種類コード
      */
-    public DbUDD005ServiceShuruiCode getServiceShuruiCode() {
+    public ServiceShuruiCode getServiceShuruiCode() {
         return serviceShuruiCode;
     }
 
     /**
      * サービス種類コードのsetメソッドです。
-     * 
+     *
      * @param serviceShuruiCode サービス種類コード
      */
-    public void setServiceShuruiCode(DbUDD005ServiceShuruiCode serviceShuruiCode) {
+    public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
         this.serviceShuruiCode = serviceShuruiCode;
     }
 
     /**
      * サービス項目コードのgetメソッドです。
-     * 
+     *
      * @return サービス項目コード
      */
-    public DbUDD006ServiceKomokuCode getServiceKomokuCode() {
+    public ServiceKomokuCode getServiceKomokuCode() {
         return serviceKomokuCode;
     }
 
     /**
      * サービス項目コードのsetメソッドです。
-     * 
+     *
      * @param serviceKomokuCode サービス項目コード
      */
-    public void setServiceKomokuCode(DbUDD006ServiceKomokuCode serviceKomokuCode) {
+    public void setServiceKomokuCode(ServiceKomokuCode serviceKomokuCode) {
         this.serviceKomokuCode = serviceKomokuCode;
     }
 
     /**
      * 適用開始年月のgetメソッドです。
-     * 
+     *
      * @return 適用開始年月
      */
     public FlexibleYearMonth getTekiyoKaishiYM() {
@@ -142,7 +145,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 適用開始年月のsetメソッドです。
-     * 
+     *
      * @param tekiyoKaishiYM 適用開始年月
      */
     public void setTekiyoKaishiYM(FlexibleYearMonth tekiyoKaishiYM) {
@@ -151,7 +154,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -160,7 +163,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -169,7 +172,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 適用終了年月のgetメソッドです。
-     * 
+     *
      * @return 適用終了年月
      */
     public FlexibleYearMonth getTekiyoShuryoYM() {
@@ -178,7 +181,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 適用終了年月のsetメソッドです。
-     * 
+     *
      * @param tekiyoShuryoYM 適用終了年月
      */
     public void setTekiyoShuryoYM(FlexibleYearMonth tekiyoShuryoYM) {
@@ -187,7 +190,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * サービス名称のgetメソッドです。
-     * 
+     *
      * @return サービス名称
      */
     public RString getServiceMeisho() {
@@ -196,7 +199,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * サービス名称のsetメソッドです。
-     * 
+     *
      * @param serviceMeisho サービス名称
      */
     public void setServiceMeisho(RString serviceMeisho) {
@@ -205,7 +208,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 単位数のgetメソッドです。
-     * 
+     *
      * @return 単位数
      */
     public Decimal getTaniSu() {
@@ -214,7 +217,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 単位数のsetメソッドです。
-     * 
+     *
      * @param taniSu 単位数
      */
     public void setTaniSu(Decimal taniSu) {
@@ -223,7 +226,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 限度額対象外フラグのgetメソッドです。
-     * 
+     *
      * @return 限度額対象外フラグ
      */
     public RString getGendoGakuTaishogaiFlag() {
@@ -232,7 +235,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 限度額対象外フラグのsetメソッドです。
-     * 
+     *
      * @param gendoGakuTaishogaiFlag 限度額対象外フラグ
      */
     public void setGendoGakuTaishogaiFlag(RString gendoGakuTaishogaiFlag) {
@@ -241,7 +244,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 単位数識別コードのgetメソッドです。
-     * 
+     *
      * @return 単位数識別コード
      */
     public RString getTaniSuShikibetsuCode() {
@@ -250,7 +253,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 単位数識別コードのsetメソッドです。
-     * 
+     *
      * @param taniSuShikibetsuCode 単位数識別コード
      */
     public void setTaniSuShikibetsuCode(RString taniSuShikibetsuCode) {
@@ -259,7 +262,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 外部サービス利用型区分のgetメソッドです。
-     * 
+     *
      * @return 外部サービス利用型区分
      */
     public RString getGaibuServiceRiyoKubun() {
@@ -268,7 +271,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 外部サービス利用型区分のsetメソッドです。
-     * 
+     *
      * @param gaibuServiceRiyoKubun 外部サービス利用型区分
      */
     public void setGaibuServiceRiyoKubun(RString gaibuServiceRiyoKubun) {
@@ -277,7 +280,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 特別地域加算フラグのgetメソッドです。
-     * 
+     *
      * @return 特別地域加算フラグ
      */
     public RString getTokubetsuChiikiKasanFlag() {
@@ -286,7 +289,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 特別地域加算フラグのsetメソッドです。
-     * 
+     *
      * @param tokubetsuChiikiKasanFlag 特別地域加算フラグ
      */
     public void setTokubetsuChiikiKasanFlag(RString tokubetsuChiikiKasanFlag) {
@@ -295,7 +298,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 利用者負担定率／定額区分のgetメソッドです。
-     * 
+     *
      * @return 利用者負担定率／定額区分
      */
     public RString getTeiRitsu_TeiGakuKubun() {
@@ -304,7 +307,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 利用者負担定率／定額区分のsetメソッドです。
-     * 
+     *
      * @param teiRitsu_TeiGakuKubun 利用者負担定率／定額区分
      */
     public void setTeiRitsu_TeiGakuKubun(RString teiRitsu_TeiGakuKubun) {
@@ -315,7 +318,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
      * 利用者負担額のgetメソッドです。
      * <br/>
      * <br/>利用者負担定率／定額区分が”2”（定額）時
-     * 
+     *
      * @return 利用者負担額
      */
     public Decimal getRiyoshaFutanGaku() {
@@ -326,7 +329,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
      * 利用者負担額のsetメソッドです。
      * <br/>
      * <br/>利用者負担定率／定額区分が”2”（定額）時
-     * 
+     *
      * @param riyoshaFutanGaku 利用者負担額
      */
     public void setRiyoshaFutanGaku(Decimal riyoshaFutanGaku) {
@@ -337,10 +340,10 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
      * 給付率のgetメソッドです。
      * <br/>
      * <br/>利用者負担定率／定額区分が”1”（定率）時
-     * 
+     *
      * @return 給付率
      */
-    public DbUDD011HokenKyufuRitsu getKyufuRitsu() {
+    public HokenKyufuRitsu getKyufuRitsu() {
         return kyufuRitsu;
     }
 
@@ -348,16 +351,16 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
      * 給付率のsetメソッドです。
      * <br/>
      * <br/>利用者負担定率／定額区分が”1”（定率）時
-     * 
+     *
      * @param kyufuRitsu 給付率
      */
-    public void setKyufuRitsu(DbUDD011HokenKyufuRitsu kyufuRitsu) {
+    public void setKyufuRitsu(HokenKyufuRitsu kyufuRitsu) {
         this.kyufuRitsu = kyufuRitsu;
     }
 
     /**
      * 二次予防事業対象者実施区分のgetメソッドです。
-     * 
+     *
      * @return 二次予防事業対象者実施区分
      */
     public RString getNijiYoboTaishosha_JissiKubun() {
@@ -366,7 +369,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 二次予防事業対象者実施区分のsetメソッドです。
-     * 
+     *
      * @param nijiYoboTaishosha_JissiKubun 二次予防事業対象者実施区分
      */
     public void setNijiYoboTaishosha_JissiKubun(RString nijiYoboTaishosha_JissiKubun) {
@@ -375,7 +378,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 要支援１受給者実施区分のgetメソッドです。
-     * 
+     *
      * @return 要支援１受給者実施区分
      */
     public RString getYoShien1_JisshiKubun() {
@@ -384,7 +387,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 要支援１受給者実施区分のsetメソッドです。
-     * 
+     *
      * @param yoShien1_JisshiKubun 要支援１受給者実施区分
      */
     public void setYoShien1_JisshiKubun(RString yoShien1_JisshiKubun) {
@@ -393,7 +396,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 要支援２受給者実施区分のgetメソッドです。
-     * 
+     *
      * @return 要支援２受給者実施区分
      */
     public RString getYoShien2_JisshiKubun() {
@@ -402,7 +405,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * 要支援２受給者実施区分のsetメソッドです。
-     * 
+     *
      * @param yoShien2_JisshiKubun 要支援２受給者実施区分
      */
     public void setYoShien2_JisshiKubun(RString yoShien2_JisshiKubun) {
@@ -411,9 +414,9 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * このエンティティの主キーが他の{@literal DbT7122SogoJigyoServiceCodeEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7122SogoJigyoServiceCodeEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -462,6 +465,7 @@ public class DbT7122SogoJigyoServiceCodeEntity extends DbTableEntityBase<DbT7122
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

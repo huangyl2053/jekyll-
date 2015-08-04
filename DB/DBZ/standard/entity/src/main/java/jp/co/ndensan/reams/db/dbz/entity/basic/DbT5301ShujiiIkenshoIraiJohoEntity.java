@@ -1,21 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.Objects;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 主治医意見書作成依頼情報テーブルのエンティティクラスです。
  */
 public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT5301ShujiiIkenshoIraiJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5301ShujiiIkenshoIraiJoho");
 
@@ -28,7 +30,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD013ShinseishoKanriNo shinseishoKanriNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
     private int ikenshoIraiRirekiNo;
     private Code koroshoIfShikibetsuCode;
@@ -53,7 +55,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -62,7 +64,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -71,7 +73,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -80,17 +82,16 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -99,25 +100,25 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 申請書管理番号のgetメソッドです。
-     * 
+     *
      * @return 申請書管理番号
      */
-    public DbUDD013ShinseishoKanriNo getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
     /**
      * 申請書管理番号のsetメソッドです。
-     * 
+     *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(DbUDD013ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     /**
      * 主治医意見書作成依頼履歴番号のgetメソッドです。
-     * 
+     *
      * @return 主治医意見書作成依頼履歴番号
      */
     public int getIkenshoIraiRirekiNo() {
@@ -126,7 +127,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 主治医意見書作成依頼履歴番号のsetメソッドです。
-     * 
+     *
      * @param ikenshoIraiRirekiNo 主治医意見書作成依頼履歴番号
      */
     public void setIkenshoIraiRirekiNo(int ikenshoIraiRirekiNo) {
@@ -137,7 +138,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 厚労省IF識別コードのgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：厚労省認定ソフトのバージョン）パーティショニングのCheck項目
-     * 
+     *
      * @return 厚労省IF識別コード
      */
     public Code getKoroshoIfShikibetsuCode() {
@@ -148,7 +149,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 厚労省IF識別コードのsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：厚労省認定ソフトのバージョン）パーティショニングのCheck項目
-     * 
+     *
      * @param koroshoIfShikibetsuCode 厚労省IF識別コード
      */
     public void setKoroshoIfShikibetsuCode(Code koroshoIfShikibetsuCode) {
@@ -159,7 +160,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 主治医医療機関コードのgetメソッドです。
      * <br/>
      * <br/>主治医医療機関情報
-     * 
+     *
      * @return 主治医医療機関コード
      */
     public RString getShujiiIryokikanCode() {
@@ -170,7 +171,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 主治医医療機関コードのsetメソッドです。
      * <br/>
      * <br/>主治医医療機関情報
-     * 
+     *
      * @param shujiiIryokikanCode 主治医医療機関コード
      */
     public void setShujiiIryokikanCode(RString shujiiIryokikanCode) {
@@ -181,7 +182,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 主治医コードのgetメソッドです。
      * <br/>
      * <br/>主治医情報
-     * 
+     *
      * @return 主治医コード
      */
     public RString getShujiiCode() {
@@ -192,7 +193,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 主治医コードのsetメソッドです。
      * <br/>
      * <br/>主治医情報
-     * 
+     *
      * @param shujiiCode 主治医コード
      */
     public void setShujiiCode(RString shujiiCode) {
@@ -203,7 +204,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 主治医意見書依頼区分のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：主治医意見書依頼区分）初回・再依頼・再意見書
-     * 
+     *
      * @return 主治医意見書依頼区分
      */
     public RString getIkenshoIraiKubun() {
@@ -214,7 +215,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 主治医意見書依頼区分のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：主治医意見書依頼区分）初回・再依頼・再意見書
-     * 
+     *
      * @param ikenshoIraiKubun 主治医意見書依頼区分
      */
     public void setIkenshoIraiKubun(RString ikenshoIraiKubun) {
@@ -225,7 +226,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 主治医意見書作成回数のgetメソッドです。
      * <br/>
      * <br/>主治医意見書を作成した回数（申請単位）
-     * 
+     *
      * @return 主治医意見書作成回数
      */
     public int getIkenshoIraiKaisu() {
@@ -236,7 +237,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 主治医意見書作成回数のsetメソッドです。
      * <br/>
      * <br/>主治医意見書を作成した回数（申請単位）
-     * 
+     *
      * @param ikenshoIraiKaisu 主治医意見書作成回数
      */
     public void setIkenshoIraiKaisu(int ikenshoIraiKaisu) {
@@ -247,7 +248,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 医師区分コードのgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：医師区分コード）主治医・指定医
-     * 
+     *
      * @return 医師区分コード
      */
     public Code getIshiKubunCode() {
@@ -258,7 +259,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 医師区分コードのsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：医師区分コード）主治医・指定医
-     * 
+     *
      * @param ishiKubunCode 医師区分コード
      */
     public void setIshiKubunCode(Code ishiKubunCode) {
@@ -267,7 +268,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 主治医意見書作成依頼年月日のgetメソッドです。
-     * 
+     *
      * @return 主治医意見書作成依頼年月日
      */
     public FlexibleDate getIkenshoSakuseiIraiYMD() {
@@ -276,7 +277,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 主治医意見書作成依頼年月日のsetメソッドです。
-     * 
+     *
      * @param ikenshoSakuseiIraiYMD 主治医意見書作成依頼年月日
      */
     public void setIkenshoSakuseiIraiYMD(FlexibleDate ikenshoSakuseiIraiYMD) {
@@ -285,7 +286,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 主治医意見書作成期限年月日のgetメソッドです。
-     * 
+     *
      * @return 主治医意見書作成期限年月日
      */
     public FlexibleDate getIkenshoSakuseiKigenYMD() {
@@ -294,7 +295,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 主治医意見書作成期限年月日のsetメソッドです。
-     * 
+     *
      * @param ikenshoSakuseiKigenYMD 主治医意見書作成期限年月日
      */
     public void setIkenshoSakuseiKigenYMD(FlexibleDate ikenshoSakuseiKigenYMD) {
@@ -303,7 +304,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 依頼書出力年月日のgetメソッドです。
-     * 
+     *
      * @return 依頼書出力年月日
      */
     public FlexibleDate getIraishoShutsuryokuYMD() {
@@ -312,7 +313,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 依頼書出力年月日のsetメソッドです。
-     * 
+     *
      * @param iraishoShutsuryokuYMD 依頼書出力年月日
      */
     public void setIraishoShutsuryokuYMD(FlexibleDate iraishoShutsuryokuYMD) {
@@ -321,7 +322,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 意見書出力年月日のgetメソッドです。
-     * 
+     *
      * @return 意見書出力年月日
      */
     public FlexibleDate getIkenshoShutsuryokuYMD() {
@@ -330,7 +331,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 意見書出力年月日のsetメソッドです。
-     * 
+     *
      * @param ikenshoShutsuryokuYMD 意見書出力年月日
      */
     public void setIkenshoShutsuryokuYMD(FlexibleDate ikenshoShutsuryokuYMD) {
@@ -339,7 +340,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 請求書出力年月日のgetメソッドです。
-     * 
+     *
      * @return 請求書出力年月日
      */
     public FlexibleDate getSeikyushoShutsuryokuYMD() {
@@ -348,7 +349,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 請求書出力年月日のsetメソッドです。
-     * 
+     *
      * @param seikyushoShutsuryokuYMD 請求書出力年月日
      */
     public void setSeikyushoShutsuryokuYMD(FlexibleDate seikyushoShutsuryokuYMD) {
@@ -359,7 +360,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 作成料請求区分のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：作成料請求区分）
-     * 
+     *
      * @return 作成料請求区分
      */
     public Code getSakuseiryoSeikyuKubun() {
@@ -370,7 +371,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 作成料請求区分のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：作成料請求区分）
-     * 
+     *
      * @param sakuseiryoSeikyuKubun 作成料請求区分
      */
     public void setSakuseiryoSeikyuKubun(Code sakuseiryoSeikyuKubun) {
@@ -379,7 +380,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 主治医意見書作成督促年月日のgetメソッドです。
-     * 
+     *
      * @return 主治医意見書作成督促年月日
      */
     public FlexibleDate getIkenshoSakuseiTokusokuYMD() {
@@ -388,7 +389,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 主治医意見書作成督促年月日のsetメソッドです。
-     * 
+     *
      * @param ikenshoSakuseiTokusokuYMD 主治医意見書作成督促年月日
      */
     public void setIkenshoSakuseiTokusokuYMD(FlexibleDate ikenshoSakuseiTokusokuYMD) {
@@ -399,7 +400,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 主治医意見書作成督促方法のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：意見書作成督促方法）電話・ＦＡＸ・督促状
-     * 
+     *
      * @return 主治医意見書作成督促方法
      */
     public RString getIkenshoSakuseiTokusokuHoho() {
@@ -410,7 +411,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 主治医意見書作成督促方法のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：意見書作成督促方法）電話・ＦＡＸ・督促状
-     * 
+     *
      * @param ikenshoSakuseiTokusokuHoho 主治医意見書作成督促方法
      */
     public void setIkenshoSakuseiTokusokuHoho(RString ikenshoSakuseiTokusokuHoho) {
@@ -419,7 +420,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 主治医意見書作成督促回数のgetメソッドです。
-     * 
+     *
      * @return 主治医意見書作成督促回数
      */
     public int getIkenshoTokusokuKaisu() {
@@ -428,7 +429,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 主治医意見書作成督促回数のsetメソッドです。
-     * 
+     *
      * @param ikenshoTokusokuKaisu 主治医意見書作成督促回数
      */
     public void setIkenshoTokusokuKaisu(int ikenshoTokusokuKaisu) {
@@ -437,7 +438,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 主治医意見書作成督促メモのgetメソッドです。
-     * 
+     *
      * @return 主治医意見書作成督促メモ
      */
     public RString getIkenshoTokusokuMemo() {
@@ -446,7 +447,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 主治医意見書作成督促メモのsetメソッドです。
-     * 
+     *
      * @param ikenshoTokusokuMemo 主治医意見書作成督促メモ
      */
     public void setIkenshoTokusokuMemo(RString ikenshoTokusokuMemo) {
@@ -457,7 +458,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 認定情報提供希望フラグのgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：認定情報提供希望フラグ）
-     * 
+     *
      * @return 認定情報提供希望フラグ
      */
     public boolean getNinteiJohoTeikyoKiboFlag() {
@@ -468,7 +469,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 認定情報提供希望フラグのsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：認定情報提供希望フラグ）
-     * 
+     *
      * @param ninteiJohoTeikyoKiboFlag 認定情報提供希望フラグ
      */
     public void setNinteiJohoTeikyoKiboFlag(boolean ninteiJohoTeikyoKiboFlag) {
@@ -477,7 +478,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 認定状況提供年月日のgetメソッドです。
-     * 
+     *
      * @return 認定状況提供年月日
      */
     public FlexibleDate getNinteiJohoTeikyoYMD() {
@@ -486,7 +487,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * 認定状況提供年月日のsetメソッドです。
-     * 
+     *
      * @param ninteiJohoTeikyoYMD 認定状況提供年月日
      */
     public void setNinteiJohoTeikyoYMD(FlexibleDate ninteiJohoTeikyoYMD) {
@@ -497,7 +498,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 論理削除フラグのgetメソッドです。
      * <br/>
      * <br/>True：削除　False：通常
-     * 
+     *
      * @return 論理削除フラグ
      */
     public boolean getLogicalDeletedFlag() {
@@ -508,7 +509,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
      * 論理削除フラグのsetメソッドです。
      * <br/>
      * <br/>True：削除　False：通常
-     * 
+     *
      * @param logicalDeletedFlag 論理削除フラグ
      */
     public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
@@ -517,9 +518,9 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * このエンティティの主キーが他の{@literal DbT5301ShujiiIkenshoIraiJohoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5301ShujiiIkenshoIraiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -566,6 +567,7 @@ public class DbT5301ShujiiIkenshoIraiJohoEntity extends DbTableEntityBase<DbT530
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

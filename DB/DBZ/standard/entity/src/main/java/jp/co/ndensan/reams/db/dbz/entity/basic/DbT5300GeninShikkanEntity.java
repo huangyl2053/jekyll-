@@ -1,20 +1,22 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import java.util.Objects;
 
 /**
  * 原因疾患テーブルのエンティティクラスです。
  */
 public class DbT5300GeninShikkanEntity extends DbTableEntityBase<DbT5300GeninShikkanEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5300GeninShikkan");
 
@@ -27,7 +29,7 @@ public class DbT5300GeninShikkanEntity extends DbTableEntityBase<DbT5300GeninShi
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD013ShinseishoKanriNo shinseishoKanriNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
     private int remban;
     private boolean isShutaruGeninShikkan;
@@ -35,7 +37,7 @@ public class DbT5300GeninShikkanEntity extends DbTableEntityBase<DbT5300GeninShi
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -44,7 +46,7 @@ public class DbT5300GeninShikkanEntity extends DbTableEntityBase<DbT5300GeninShi
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -53,7 +55,7 @@ public class DbT5300GeninShikkanEntity extends DbTableEntityBase<DbT5300GeninShi
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -62,17 +64,16 @@ public class DbT5300GeninShikkanEntity extends DbTableEntityBase<DbT5300GeninShi
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -81,25 +82,25 @@ public class DbT5300GeninShikkanEntity extends DbTableEntityBase<DbT5300GeninShi
 
     /**
      * 申請書管理番号のgetメソッドです。
-     * 
+     *
      * @return 申請書管理番号
      */
-    public DbUDD013ShinseishoKanriNo getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
     /**
      * 申請書管理番号のsetメソッドです。
-     * 
+     *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(DbUDD013ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     /**
      * 連番のgetメソッドです。
-     * 
+     *
      * @return 連番
      */
     public int getRemban() {
@@ -108,7 +109,7 @@ public class DbT5300GeninShikkanEntity extends DbTableEntityBase<DbT5300GeninShi
 
     /**
      * 連番のsetメソッドです。
-     * 
+     *
      * @param remban 連番
      */
     public void setRemban(int remban) {
@@ -117,7 +118,7 @@ public class DbT5300GeninShikkanEntity extends DbTableEntityBase<DbT5300GeninShi
 
     /**
      * 主たる原因疾患フラグのgetメソッドです。
-     * 
+     *
      * @return 主たる原因疾患フラグ
      */
     public boolean getIsShutaruGeninShikkan() {
@@ -126,7 +127,7 @@ public class DbT5300GeninShikkanEntity extends DbTableEntityBase<DbT5300GeninShi
 
     /**
      * 主たる原因疾患フラグのsetメソッドです。
-     * 
+     *
      * @param isShutaruGeninShikkan 主たる原因疾患フラグ
      */
     public void setIsShutaruGeninShikkan(boolean isShutaruGeninShikkan) {
@@ -135,7 +136,7 @@ public class DbT5300GeninShikkanEntity extends DbTableEntityBase<DbT5300GeninShi
 
     /**
      * 原因疾患コードのgetメソッドです。
-     * 
+     *
      * @return 原因疾患コード
      */
     public Code getGeninShikkanCode() {
@@ -144,7 +145,7 @@ public class DbT5300GeninShikkanEntity extends DbTableEntityBase<DbT5300GeninShi
 
     /**
      * 原因疾患コードのsetメソッドです。
-     * 
+     *
      * @param geninShikkanCode 原因疾患コード
      */
     public void setGeninShikkanCode(Code geninShikkanCode) {
@@ -153,10 +154,9 @@ public class DbT5300GeninShikkanEntity extends DbTableEntityBase<DbT5300GeninShi
 
     /**
      * このエンティティの主キーが他の{@literal DbT5300GeninShikkanEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT5300GeninShikkanEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT5300GeninShikkanEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5300GeninShikkanEntity other) {
@@ -185,6 +185,7 @@ public class DbT5300GeninShikkanEntity extends DbTableEntityBase<DbT5300GeninShi
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

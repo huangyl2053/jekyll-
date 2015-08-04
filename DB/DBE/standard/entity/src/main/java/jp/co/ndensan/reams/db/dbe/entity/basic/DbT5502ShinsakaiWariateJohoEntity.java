@@ -1,21 +1,23 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import java.util.Objects;
 
 /**
  * 介護認定審査会割当情報テーブルのエンティティクラスです。
  */
 public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502ShinsakaiWariateJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5502ShinsakaiWariateJoho");
 
@@ -30,7 +32,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
     @PrimaryKey
     private int shinsakaiKaisaiNo;
     @PrimaryKey
-    private DbUDD013ShinseishoKanriNo shinseishoKanriNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
     private FlexibleDate shinsakaiKaisaiYMD;
     private FlexibleDate shinsakaiWariateYMD;
     private int shinsakaiOrder;
@@ -42,7 +44,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -51,7 +53,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -60,7 +62,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -69,17 +71,16 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -88,7 +89,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * 介護認定審査会開催番号のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会開催番号
      */
     public int getShinsakaiKaisaiNo() {
@@ -97,7 +98,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * 介護認定審査会開催番号のsetメソッドです。
-     * 
+     *
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      */
     public void setShinsakaiKaisaiNo(int shinsakaiKaisaiNo) {
@@ -106,25 +107,25 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * 申請書管理番号のgetメソッドです。
-     * 
+     *
      * @return 申請書管理番号
      */
-    public DbUDD013ShinseishoKanriNo getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
     /**
      * 申請書管理番号のsetメソッドです。
-     * 
+     *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(DbUDD013ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     /**
      * 介護認定審査会開催年月日のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会開催年月日
      */
     public FlexibleDate getShinsakaiKaisaiYMD() {
@@ -133,7 +134,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * 介護認定審査会開催年月日のsetメソッドです。
-     * 
+     *
      * @param shinsakaiKaisaiYMD 介護認定審査会開催年月日
      */
     public void setShinsakaiKaisaiYMD(FlexibleDate shinsakaiKaisaiYMD) {
@@ -142,7 +143,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * 介護認定審査会割当年月日のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会割当年月日
      */
     public FlexibleDate getShinsakaiWariateYMD() {
@@ -151,7 +152,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * 介護認定審査会割当年月日のsetメソッドです。
-     * 
+     *
      * @param shinsakaiWariateYMD 介護認定審査会割当年月日
      */
     public void setShinsakaiWariateYMD(FlexibleDate shinsakaiWariateYMD) {
@@ -160,7 +161,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * 介護認定審査会審査順のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会審査順
      */
     public int getShinsakaiOrder() {
@@ -169,7 +170,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * 介護認定審査会審査順のsetメソッドです。
-     * 
+     *
      * @param shinsakaiOrder 介護認定審査会審査順
      */
     public void setShinsakaiOrder(int shinsakaiOrder) {
@@ -178,7 +179,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * 介護認定審査会審査順確定フラグのgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会審査順確定フラグ
      */
     public boolean getShinsakaiOrderKakuteiFlag() {
@@ -187,7 +188,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * 介護認定審査会審査順確定フラグのsetメソッドです。
-     * 
+     *
      * @param shinsakaiOrderKakuteiFlag 介護認定審査会審査順確定フラグ
      */
     public void setShinsakaiOrderKakuteiFlag(boolean shinsakaiOrderKakuteiFlag) {
@@ -196,7 +197,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * 審査会自動割付フラグのgetメソッドです。
-     * 
+     *
      * @return 審査会自動割付フラグ
      */
     public boolean getShinsakaiJidoWaritsukeFlag() {
@@ -205,7 +206,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * 審査会自動割付フラグのsetメソッドです。
-     * 
+     *
      * @param shinsakaiJidoWaritsukeFlag 審査会自動割付フラグ
      */
     public void setShinsakaiJidoWaritsukeFlag(boolean shinsakaiJidoWaritsukeFlag) {
@@ -214,7 +215,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * 審査会資料作成年月日のgetメソッドです。
-     * 
+     *
      * @return 審査会資料作成年月日
      */
     public FlexibleDate getShinsakaiShiryoSakuseiYMD() {
@@ -223,7 +224,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * 審査会資料作成年月日のsetメソッドです。
-     * 
+     *
      * @param shinsakaiShiryoSakuseiYMD 審査会資料作成年月日
      */
     public void setShinsakaiShiryoSakuseiYMD(FlexibleDate shinsakaiShiryoSakuseiYMD) {
@@ -232,7 +233,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * 審査会資料送付年月日のgetメソッドです。
-     * 
+     *
      * @return 審査会資料送付年月日
      */
     public FlexibleDate getShinsakaiShiryoSofuYMD() {
@@ -241,7 +242,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * 審査会資料送付年月日のsetメソッドです。
-     * 
+     *
      * @param shinsakaiShiryoSofuYMD 審査会資料送付年月日
      */
     public void setShinsakaiShiryoSofuYMD(FlexibleDate shinsakaiShiryoSofuYMD) {
@@ -252,7 +253,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
      * 判定結果コードのgetメソッドです。
      * <br/>
      * <br/>01：認定、11：未審査、21：再審査、31：再調査（調査票・意見書）、32：再調査（調査のみ）、33：再調査（意見書のみ）
-     * 
+     *
      * @return 判定結果コード
      */
     public Code getHanteiKekkaCode() {
@@ -263,7 +264,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
      * 判定結果コードのsetメソッドです。
      * <br/>
      * <br/>01：認定、11：未審査、21：再審査、31：再調査（調査票・意見書）、32：再調査（調査のみ）、33：再調査（意見書のみ）
-     * 
+     *
      * @param hanteiKekkaCode 判定結果コード
      */
     public void setHanteiKekkaCode(Code hanteiKekkaCode) {
@@ -272,9 +273,9 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * このエンティティの主キーが他の{@literal DbT5502ShinsakaiWariateJohoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5502ShinsakaiWariateJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -310,6 +311,7 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -318,5 +320,4 @@ public class DbT5502ShinsakaiWariateJohoEntity extends DbTableEntityBase<DbT5502
     }
 
 // </editor-fold>
-
 }

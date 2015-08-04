@@ -1,19 +1,21 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import java.util.Objects;
 
 /**
  * 審査会委員除外情報テーブルのエンティティクラスです。
  */
 public class DbT5590ShinsakaiIinJogaiJohoEntity extends DbTableEntityBase<DbT5590ShinsakaiIinJogaiJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5590ShinsakaiIinJogaiJoho");
 
@@ -26,14 +28,14 @@ public class DbT5590ShinsakaiIinJogaiJohoEntity extends DbTableEntityBase<DbT559
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD013ShinseishoKanriNo shinseishoKanriNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
     private int renban;
     private RString jogaiTaishoShinsakaiIinCode;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -42,7 +44,7 @@ public class DbT5590ShinsakaiIinJogaiJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -51,7 +53,7 @@ public class DbT5590ShinsakaiIinJogaiJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -60,17 +62,16 @@ public class DbT5590ShinsakaiIinJogaiJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -81,10 +82,10 @@ public class DbT5590ShinsakaiIinJogaiJohoEntity extends DbTableEntityBase<DbT559
      * 申請書管理番号のgetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @return 申請書管理番号
      */
-    public DbUDD013ShinseishoKanriNo getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
@@ -92,16 +93,16 @@ public class DbT5590ShinsakaiIinJogaiJohoEntity extends DbTableEntityBase<DbT559
      * 申請書管理番号のsetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(DbUDD013ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     /**
      * 連番のgetメソッドです。
-     * 
+     *
      * @return 連番
      */
     public int getRenban() {
@@ -110,7 +111,7 @@ public class DbT5590ShinsakaiIinJogaiJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * 連番のsetメソッドです。
-     * 
+     *
      * @param renban 連番
      */
     public void setRenban(int renban) {
@@ -121,7 +122,7 @@ public class DbT5590ShinsakaiIinJogaiJohoEntity extends DbTableEntityBase<DbT559
      * 除外対象審査会委員コードのgetメソッドです。
      * <br/>
      * <br/>介護認定審査会委員情報
-     * 
+     *
      * @return 除外対象審査会委員コード
      */
     public RString getJogaiTaishoShinsakaiIinCode() {
@@ -132,7 +133,7 @@ public class DbT5590ShinsakaiIinJogaiJohoEntity extends DbTableEntityBase<DbT559
      * 除外対象審査会委員コードのsetメソッドです。
      * <br/>
      * <br/>介護認定審査会委員情報
-     * 
+     *
      * @param jogaiTaishoShinsakaiIinCode 除外対象審査会委員コード
      */
     public void setJogaiTaishoShinsakaiIinCode(RString jogaiTaishoShinsakaiIinCode) {
@@ -141,9 +142,9 @@ public class DbT5590ShinsakaiIinJogaiJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * このエンティティの主キーが他の{@literal DbT5590ShinsakaiIinJogaiJohoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5590ShinsakaiIinJogaiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -172,6 +173,7 @@ public class DbT5590ShinsakaiIinJogaiJohoEntity extends DbTableEntityBase<DbT559
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

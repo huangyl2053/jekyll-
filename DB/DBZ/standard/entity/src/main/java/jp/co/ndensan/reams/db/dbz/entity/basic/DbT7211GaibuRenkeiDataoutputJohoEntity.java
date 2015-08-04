@@ -1,20 +1,22 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
 
 /**
  * 外部連携データ抽出情報テーブルのエンティティクラスです。
  */
 public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<DbT7211GaibuRenkeiDataoutputJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7211GaibuRenkeiDataoutputJoho");
 
@@ -27,7 +29,7 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD013ShinseishoKanriNo shinseishoKanriNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
     private FlexibleDate ninteiShinseiJohoChushutsuYMD;
     private FlexibleDate ninteiChosaKekkaJohoChushutsuYMD;
     private FlexibleDate ninteiChosaIkenshoKekkaJohoChushutsuYMD;
@@ -36,7 +38,7 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -45,7 +47,7 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -54,7 +56,7 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -63,17 +65,16 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -82,25 +83,25 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
 
     /**
      * 申請書管理番号のgetメソッドです。
-     * 
+     *
      * @return 申請書管理番号
      */
-    public DbUDD013ShinseishoKanriNo getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
     /**
      * 申請書管理番号のsetメソッドです。
-     * 
+     *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(DbUDD013ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     /**
      * 認定申請情報抽出年月日のgetメソッドです。
-     * 
+     *
      * @return 認定申請情報抽出年月日
      */
     public FlexibleDate getNinteiShinseiJohoChushutsuYMD() {
@@ -109,7 +110,7 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
 
     /**
      * 認定申請情報抽出年月日のsetメソッドです。
-     * 
+     *
      * @param ninteiShinseiJohoChushutsuYMD 認定申請情報抽出年月日
      */
     public void setNinteiShinseiJohoChushutsuYMD(FlexibleDate ninteiShinseiJohoChushutsuYMD) {
@@ -118,7 +119,7 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
 
     /**
      * 認定調査結果情報抽出年月日のgetメソッドです。
-     * 
+     *
      * @return 認定調査結果情報抽出年月日
      */
     public FlexibleDate getNinteiChosaKekkaJohoChushutsuYMD() {
@@ -127,7 +128,7 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
 
     /**
      * 認定調査結果情報抽出年月日のsetメソッドです。
-     * 
+     *
      * @param ninteiChosaKekkaJohoChushutsuYMD 認定調査結果情報抽出年月日
      */
     public void setNinteiChosaKekkaJohoChushutsuYMD(FlexibleDate ninteiChosaKekkaJohoChushutsuYMD) {
@@ -136,7 +137,7 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
 
     /**
      * 認定調査・意見書結果情報抽出年月日のgetメソッドです。
-     * 
+     *
      * @return 認定調査・意見書結果情報抽出年月日
      */
     public FlexibleDate getNinteiChosaIkenshoKekkaJohoChushutsuYMD() {
@@ -145,7 +146,7 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
 
     /**
      * 認定調査・意見書結果情報抽出年月日のsetメソッドです。
-     * 
+     *
      * @param ninteiChosaIkenshoKekkaJohoChushutsuYMD 認定調査・意見書結果情報抽出年月日
      */
     public void setNinteiChosaIkenshoKekkaJohoChushutsuYMD(FlexibleDate ninteiChosaIkenshoKekkaJohoChushutsuYMD) {
@@ -156,7 +157,7 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
      * 一次判定情報抽出年月日のgetメソッドです。
      * <br/>
      * <br/>一次判定結果連携時、市町村から広域連合に渡すデータを作成した日付
-     * 
+     *
      * @return 一次判定情報抽出年月日
      */
     public FlexibleDate getIchijihanteiChushutsuYMD() {
@@ -167,7 +168,7 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
      * 一次判定情報抽出年月日のsetメソッドです。
      * <br/>
      * <br/>一次判定結果連携時、市町村から広域連合に渡すデータを作成した日付
-     * 
+     *
      * @param ichijihanteiChushutsuYMD 一次判定情報抽出年月日
      */
     public void setIchijihanteiChushutsuYMD(FlexibleDate ichijihanteiChushutsuYMD) {
@@ -176,7 +177,7 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
 
     /**
      * 審査会結果情報抽出年月日のgetメソッドです。
-     * 
+     *
      * @return 審査会結果情報抽出年月日
      */
     public FlexibleDate getShinsakaiKekkaJohoChushutsuYMD() {
@@ -185,7 +186,7 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
 
     /**
      * 審査会結果情報抽出年月日のsetメソッドです。
-     * 
+     *
      * @param shinsakaiKekkaJohoChushutsuYMD 審査会結果情報抽出年月日
      */
     public void setShinsakaiKekkaJohoChushutsuYMD(FlexibleDate shinsakaiKekkaJohoChushutsuYMD) {
@@ -194,9 +195,9 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
 
     /**
      * このエンティティの主キーが他の{@literal DbT7211GaibuRenkeiDataoutputJohoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7211GaibuRenkeiDataoutputJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -225,6 +226,7 @@ public class DbT7211GaibuRenkeiDataoutputJohoEntity extends DbTableEntityBase<Db
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

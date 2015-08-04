@@ -1,21 +1,24 @@
 package jp.co.ndensan.reams.db.dbc.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.util.Objects;
 
 /**
  * 特定診療サービスコードテーブルのエンティティクラスです。
  */
 public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<DbT7120TokuteiShinryoServiceCodeEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7120TokuteiShinryoServiceCode");
 
@@ -28,9 +31,9 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD005ServiceShuruiCode serviceShuruiCode;
+    private ServiceShuruiCode serviceShuruiCode;
     @PrimaryKey
-    private DbUDD006ServiceKomokuCode serviceKomokuCode;
+    private ServiceKomokuCode serviceKomokuCode;
     @PrimaryKey
     private FlexibleYearMonth tekiyoKaishiYM;
     @PrimaryKey
@@ -48,7 +51,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -57,7 +60,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -66,7 +69,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -75,17 +78,16 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -94,43 +96,43 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * サービス種類コードのgetメソッドです。
-     * 
+     *
      * @return サービス種類コード
      */
-    public DbUDD005ServiceShuruiCode getServiceShuruiCode() {
+    public ServiceShuruiCode getServiceShuruiCode() {
         return serviceShuruiCode;
     }
 
     /**
      * サービス種類コードのsetメソッドです。
-     * 
+     *
      * @param serviceShuruiCode サービス種類コード
      */
-    public void setServiceShuruiCode(DbUDD005ServiceShuruiCode serviceShuruiCode) {
+    public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
         this.serviceShuruiCode = serviceShuruiCode;
     }
 
     /**
      * サービス項目コードのgetメソッドです。
-     * 
+     *
      * @return サービス項目コード
      */
-    public DbUDD006ServiceKomokuCode getServiceKomokuCode() {
+    public ServiceKomokuCode getServiceKomokuCode() {
         return serviceKomokuCode;
     }
 
     /**
      * サービス項目コードのsetメソッドです。
-     * 
+     *
      * @param serviceKomokuCode サービス項目コード
      */
-    public void setServiceKomokuCode(DbUDD006ServiceKomokuCode serviceKomokuCode) {
+    public void setServiceKomokuCode(ServiceKomokuCode serviceKomokuCode) {
         this.serviceKomokuCode = serviceKomokuCode;
     }
 
     /**
      * 適用開始年月のgetメソッドです。
-     * 
+     *
      * @return 適用開始年月
      */
     public FlexibleYearMonth getTekiyoKaishiYM() {
@@ -139,7 +141,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 適用開始年月のsetメソッドです。
-     * 
+     *
      * @param tekiyoKaishiYM 適用開始年月
      */
     public void setTekiyoKaishiYM(FlexibleYearMonth tekiyoKaishiYM) {
@@ -148,7 +150,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -157,7 +159,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -166,7 +168,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 適用終了年月のgetメソッドです。
-     * 
+     *
      * @return 適用終了年月
      */
     public FlexibleYearMonth getTekiyoShuryoYM() {
@@ -175,7 +177,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 適用終了年月のsetメソッドです。
-     * 
+     *
      * @param tekiyoShuryoYM 適用終了年月
      */
     public void setTekiyoShuryoYM(FlexibleYearMonth tekiyoShuryoYM) {
@@ -184,7 +186,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * サービス名称のgetメソッドです。
-     * 
+     *
      * @return サービス名称
      */
     public RString getServiceMeisho() {
@@ -193,7 +195,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * サービス名称のsetメソッドです。
-     * 
+     *
      * @param serviceMeisho サービス名称
      */
     public void setServiceMeisho(RString serviceMeisho) {
@@ -202,7 +204,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 単位数のgetメソッドです。
-     * 
+     *
      * @return 単位数
      */
     public Decimal getTaniSu() {
@@ -211,7 +213,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 単位数のsetメソッドです。
-     * 
+     *
      * @param taniSu 単位数
      */
     public void setTaniSu(Decimal taniSu) {
@@ -220,7 +222,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 単位数識別のgetメソッドです。
-     * 
+     *
      * @return 単位数識別
      */
     public RString getTaniSuShikibetsu() {
@@ -229,7 +231,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 単位数識別のsetメソッドです。
-     * 
+     *
      * @param taniSuShikibetsu 単位数識別
      */
     public void setTaniSuShikibetsu(RString taniSuShikibetsu) {
@@ -238,7 +240,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 算定単位のgetメソッドです。
-     * 
+     *
      * @return 算定単位
      */
     public RString getSanteiTani() {
@@ -247,7 +249,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 算定単位のsetメソッドです。
-     * 
+     *
      * @param santeiTani 算定単位
      */
     public void setSanteiTani(RString santeiTani) {
@@ -256,7 +258,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 合成識別区分のgetメソッドです。
-     * 
+     *
      * @return 合成識別区分
      */
     public RString getGoseiShikibetsuKubun() {
@@ -265,7 +267,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 合成識別区分のsetメソッドです。
-     * 
+     *
      * @param goseiShikibetsuKubun 合成識別区分
      */
     public void setGoseiShikibetsuKubun(RString goseiShikibetsuKubun) {
@@ -274,7 +276,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 特定診療区分コードのgetメソッドです。
-     * 
+     *
      * @return 特定診療区分コード
      */
     public RString getTokuteiShinryoKubunCode() {
@@ -283,7 +285,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 特定診療区分コードのsetメソッドです。
-     * 
+     *
      * @param tokuteiShinryoKubunCode 特定診療区分コード
      */
     public void setTokuteiShinryoKubunCode(RString tokuteiShinryoKubunCode) {
@@ -294,7 +296,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
      * 特定診療項目コードのgetメソッドです。
      * <br/>
      * <br/>回数（日数）
-     * 
+     *
      * @return 特定診療項目コード
      */
     public RString getTokuteiShinryoKomokuCode() {
@@ -305,7 +307,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
      * 特定診療項目コードのsetメソッドです。
      * <br/>
      * <br/>回数（日数）
-     * 
+     *
      * @param tokuteiShinryoKomokuCode 特定診療項目コード
      */
     public void setTokuteiShinryoKomokuCode(RString tokuteiShinryoKomokuCode) {
@@ -314,7 +316,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 算定制約期間のgetメソッドです。
-     * 
+     *
      * @return 算定制約期間
      */
     public RString getSanteiSeiyakuKikan() {
@@ -323,7 +325,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 算定制約期間のsetメソッドです。
-     * 
+     *
      * @param santeiSeiyakuKikan 算定制約期間
      */
     public void setSanteiSeiyakuKikan(RString santeiSeiyakuKikan) {
@@ -332,7 +334,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 算定制約回数のgetメソッドです。
-     * 
+     *
      * @return 算定制約回数
      */
     public Decimal getSanteiSeiyakuKaisu() {
@@ -341,7 +343,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * 算定制約回数のsetメソッドです。
-     * 
+     *
      * @param santeiSeiyakuKaisu 算定制約回数
      */
     public void setSanteiSeiyakuKaisu(Decimal santeiSeiyakuKaisu) {
@@ -350,9 +352,9 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * このエンティティの主キーが他の{@literal DbT7120TokuteiShinryoServiceCodeEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7120TokuteiShinryoServiceCodeEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -398,6 +400,7 @@ public class DbT7120TokuteiShinryoServiceCodeEntity extends DbTableEntityBase<Db
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

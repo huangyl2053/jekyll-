@@ -1,20 +1,23 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
 
 /**
  * 認定調査報酬実績情報テーブルのエンティティクラスです。
  */
 public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<DbT5601NinteiChosaHoshuJissekiJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5601NinteiChosaHoshuJissekiJoho");
 
@@ -27,11 +30,11 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD004JigyoshaNo ninteichosaItakusakiCode;
+    private JigyoshaNo ninteichosaItakusakiCode;
     @PrimaryKey
     private RString ninteichosainCode;
     @PrimaryKey
-    private DbUDD013ShinseishoKanriNo shinseishoKanriNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
     private int ninteichosaIraiRirekiNo;
     private int chosaItakuryo;
@@ -41,7 +44,7 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -50,7 +53,7 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -59,7 +62,7 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -68,17 +71,16 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -87,25 +89,25 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 認定調査委託先コードのgetメソッドです。
-     * 
+     *
      * @return 認定調査委託先コード
      */
-    public DbUDD004JigyoshaNo getNinteichosaItakusakiCode() {
+    public JigyoshaNo getNinteichosaItakusakiCode() {
         return ninteichosaItakusakiCode;
     }
 
     /**
      * 認定調査委託先コードのsetメソッドです。
-     * 
+     *
      * @param ninteichosaItakusakiCode 認定調査委託先コード
      */
-    public void setNinteichosaItakusakiCode(DbUDD004JigyoshaNo ninteichosaItakusakiCode) {
+    public void setNinteichosaItakusakiCode(JigyoshaNo ninteichosaItakusakiCode) {
         this.ninteichosaItakusakiCode = ninteichosaItakusakiCode;
     }
 
     /**
      * 認定調査員コードのgetメソッドです。
-     * 
+     *
      * @return 認定調査員コード
      */
     public RString getNinteichosainCode() {
@@ -114,7 +116,7 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 認定調査員コードのsetメソッドです。
-     * 
+     *
      * @param ninteichosainCode 認定調査員コード
      */
     public void setNinteichosainCode(RString ninteichosainCode) {
@@ -123,25 +125,25 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 申請書管理番号のgetメソッドです。
-     * 
+     *
      * @return 申請書管理番号
      */
-    public DbUDD013ShinseishoKanriNo getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
     /**
      * 申請書管理番号のsetメソッドです。
-     * 
+     *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(DbUDD013ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     /**
      * 認定調査依頼履歴番号のgetメソッドです。
-     * 
+     *
      * @return 認定調査依頼履歴番号
      */
     public int getNinteichosaIraiRirekiNo() {
@@ -150,7 +152,7 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 認定調査依頼履歴番号のsetメソッドです。
-     * 
+     *
      * @param ninteichosaIraiRirekiNo 認定調査依頼履歴番号
      */
     public void setNinteichosaIraiRirekiNo(int ninteichosaIraiRirekiNo) {
@@ -159,7 +161,7 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 認定調査委託料のgetメソッドです。
-     * 
+     *
      * @return 認定調査委託料
      */
     public int getChosaItakuryo() {
@@ -168,7 +170,7 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 認定調査委託料のsetメソッドです。
-     * 
+     *
      * @param chosaItakuryo 認定調査委託料
      */
     public void setChosaItakuryo(int chosaItakuryo) {
@@ -177,7 +179,7 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 認定調査委託料支払年月日のgetメソッドです。
-     * 
+     *
      * @return 認定調査委託料支払年月日
      */
     public FlexibleDate getChosaItakuryoShiharaiYMD() {
@@ -186,7 +188,7 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 認定調査委託料支払年月日のsetメソッドです。
-     * 
+     *
      * @param chosaItakuryoShiharaiYMD 認定調査委託料支払年月日
      */
     public void setChosaItakuryoShiharaiYMD(FlexibleDate chosaItakuryoShiharaiYMD) {
@@ -195,7 +197,7 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 認定調査委託料支払メモのgetメソッドです。
-     * 
+     *
      * @return 認定調査委託料支払メモ
      */
     public RString getChosaItakuryoShiharaiMemo() {
@@ -204,7 +206,7 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 認定調査委託料支払メモのsetメソッドです。
-     * 
+     *
      * @param chosaItakuryoShiharaiMemo 認定調査委託料支払メモ
      */
     public void setChosaItakuryoShiharaiMemo(RString chosaItakuryoShiharaiMemo) {
@@ -213,7 +215,7 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 銀行振込出力フラグのgetメソッドです。
-     * 
+     *
      * @return 銀行振込出力フラグ
      */
     public boolean getIsGinkoFurikomiShutsuryoku() {
@@ -222,7 +224,7 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 銀行振込出力フラグのsetメソッドです。
-     * 
+     *
      * @param isGinkoFurikomiShutsuryoku 銀行振込出力フラグ
      */
     public void setIsGinkoFurikomiShutsuryoku(boolean isGinkoFurikomiShutsuryoku) {
@@ -231,9 +233,9 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * このエンティティの主キーが他の{@literal DbT5601NinteiChosaHoshuJissekiJohoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5601NinteiChosaHoshuJissekiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -273,6 +275,7 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -281,5 +284,4 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
     }
 
 // </editor-fold>
-
 }

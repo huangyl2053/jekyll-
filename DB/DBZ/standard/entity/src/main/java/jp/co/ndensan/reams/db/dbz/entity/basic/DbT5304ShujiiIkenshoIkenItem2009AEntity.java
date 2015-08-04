@@ -1,20 +1,22 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import java.util.Objects;
 
 /**
  * 要介護認定主治医意見書意見項目2009Aテーブルのエンティティクラスです。
  */
 public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<DbT5304ShujiiIkenshoIkenItem2009AEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5304ShujiiIkenshoIkenItem2009A");
 
@@ -27,7 +29,7 @@ public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<D
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD013ShinseishoKanriNo shinseishoKanriNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
     private int ikenshoIraiRirekiNo;
     private int remban;
@@ -36,7 +38,7 @@ public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<D
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -45,7 +47,7 @@ public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<D
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -54,7 +56,7 @@ public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<D
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -63,17 +65,16 @@ public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<D
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -84,10 +85,10 @@ public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<D
      * 申請書管理番号のgetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @return 申請書管理番号
      */
-    public DbUDD013ShinseishoKanriNo getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
@@ -95,10 +96,10 @@ public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<D
      * 申請書管理番号のsetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(DbUDD013ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -106,7 +107,7 @@ public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<D
      * 主治医意見書作成依頼履歴番号のgetメソッドです。
      * <br/>
      * <br/>主治医意見書作成依頼情報
-     * 
+     *
      * @return 主治医意見書作成依頼履歴番号
      */
     public int getIkenshoIraiRirekiNo() {
@@ -117,7 +118,7 @@ public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<D
      * 主治医意見書作成依頼履歴番号のsetメソッドです。
      * <br/>
      * <br/>主治医意見書作成依頼情報
-     * 
+     *
      * @param ikenshoIraiRirekiNo 主治医意見書作成依頼履歴番号
      */
     public void setIkenshoIraiRirekiNo(int ikenshoIraiRirekiNo) {
@@ -126,7 +127,7 @@ public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<D
 
     /**
      * 連番のgetメソッドです。
-     * 
+     *
      * @return 連番
      */
     public int getRemban() {
@@ -135,7 +136,7 @@ public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<D
 
     /**
      * 連番のsetメソッドです。
-     * 
+     *
      * @param remban 連番
      */
     public void setRemban(int remban) {
@@ -146,7 +147,7 @@ public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<D
      * 厚労省IF識別コードのgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：厚労省認定ソフトのバージョン）
-     * 
+     *
      * @return 厚労省IF識別コード
      */
     public Code getKoroshoIfShikibetsuCode() {
@@ -157,7 +158,7 @@ public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<D
      * 厚労省IF識別コードのsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：厚労省認定ソフトのバージョン）
-     * 
+     *
      * @param koroshoIfShikibetsuCode 厚労省IF識別コード
      */
     public void setKoroshoIfShikibetsuCode(Code koroshoIfShikibetsuCode) {
@@ -166,7 +167,7 @@ public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<D
 
     /**
      * 意見項目のgetメソッドです。
-     * 
+     *
      * @return 意見項目
      */
     public RString getIkenItem() {
@@ -175,7 +176,7 @@ public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<D
 
     /**
      * 意見項目のsetメソッドです。
-     * 
+     *
      * @param ikenItem 意見項目
      */
     public void setIkenItem(RString ikenItem) {
@@ -184,9 +185,9 @@ public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<D
 
     /**
      * このエンティティの主キーが他の{@literal DbT5304ShujiiIkenshoIkenItem2009AEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5304ShujiiIkenshoIkenItem2009AEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -217,6 +218,7 @@ public class DbT5304ShujiiIkenshoIkenItem2009AEntity extends DbTableEntityBase<D
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

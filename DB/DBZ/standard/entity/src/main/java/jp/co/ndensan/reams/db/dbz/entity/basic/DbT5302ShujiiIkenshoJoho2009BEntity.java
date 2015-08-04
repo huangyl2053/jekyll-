@@ -1,21 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import java.util.Objects;
 
 /**
  * 要介護認定主治医意見書情報2009Bテーブルのエンティティクラスです。
  */
 public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT5302ShujiiIkenshoJoho2009BEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5302ShujiiIkenshoJoho2009B");
 
@@ -28,7 +30,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD013ShinseishoKanriNo shinseishoKanriNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
     private int ikenshoIraiRirekiNo;
     private RString koroshoIfShikibetsuCode;
@@ -60,7 +62,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -69,7 +71,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -78,7 +80,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -87,17 +89,16 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -108,10 +109,10 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 申請書管理番号のgetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @return 申請書管理番号
      */
-    public DbUDD013ShinseishoKanriNo getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
@@ -119,10 +120,10 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 申請書管理番号のsetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(DbUDD013ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -130,7 +131,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 主治医意見書作成依頼履歴番号のgetメソッドです。
      * <br/>
      * <br/>主治医意見書作成依頼情報
-     * 
+     *
      * @return 主治医意見書作成依頼履歴番号
      */
     public int getIkenshoIraiRirekiNo() {
@@ -141,7 +142,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 主治医意見書作成依頼履歴番号のsetメソッドです。
      * <br/>
      * <br/>主治医意見書作成依頼情報
-     * 
+     *
      * @param ikenshoIraiRirekiNo 主治医意見書作成依頼履歴番号
      */
     public void setIkenshoIraiRirekiNo(int ikenshoIraiRirekiNo) {
@@ -152,7 +153,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 厚労省IF識別コードのgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：厚労省認定ソフトのバージョン）
-     * 
+     *
      * @return 厚労省IF識別コード
      */
     public RString getKoroshoIfShikibetsuCode() {
@@ -163,7 +164,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 厚労省IF識別コードのsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：厚労省認定ソフトのバージョン）
-     * 
+     *
      * @param koroshoIfShikibetsuCode 厚労省IF識別コード
      */
     public void setKoroshoIfShikibetsuCode(RString koroshoIfShikibetsuCode) {
@@ -174,7 +175,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 主治医意見書依頼区分のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：主治医意見書依頼区分）
-     * 
+     *
      * @return 主治医意見書依頼区分
      */
     public RString getIkenshoIraiKubun() {
@@ -185,7 +186,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 主治医意見書依頼区分のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：主治医意見書依頼区分）
-     * 
+     *
      * @param ikenshoIraiKubun 主治医意見書依頼区分
      */
     public void setIkenshoIraiKubun(RString ikenshoIraiKubun) {
@@ -196,7 +197,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 主治医医療機関コードのgetメソッドです。
      * <br/>
      * <br/>主治医医療機関情報
-     * 
+     *
      * @return 主治医医療機関コード
      */
     public RString getShujiiIryoKikanCode() {
@@ -207,7 +208,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 主治医医療機関コードのsetメソッドです。
      * <br/>
      * <br/>主治医医療機関情報
-     * 
+     *
      * @param shujiiIryoKikanCode 主治医医療機関コード
      */
     public void setShujiiIryoKikanCode(RString shujiiIryoKikanCode) {
@@ -218,7 +219,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 主治医コードのgetメソッドです。
      * <br/>
      * <br/>主治医情報
-     * 
+     *
      * @return 主治医コード
      */
     public RString getShujiiCode() {
@@ -229,7 +230,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 主治医コードのsetメソッドです。
      * <br/>
      * <br/>主治医情報
-     * 
+     *
      * @param shujiiCode 主治医コード
      */
     public void setShujiiCode(RString shujiiCode) {
@@ -238,7 +239,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
 
     /**
      * 主治医意見書受領年月日のgetメソッドです。
-     * 
+     *
      * @return 主治医意見書受領年月日
      */
     public FlexibleDate getIkenshoJuryoYMD() {
@@ -247,7 +248,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
 
     /**
      * 主治医意見書受領年月日のsetメソッドです。
-     * 
+     *
      * @param ikenshoJuryoYMD 主治医意見書受領年月日
      */
     public void setIkenshoJuryoYMD(FlexibleDate ikenshoJuryoYMD) {
@@ -256,7 +257,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
 
     /**
      * 主治医意見書記入年月日のgetメソッドです。
-     * 
+     *
      * @return 主治医意見書記入年月日
      */
     public FlexibleDate getIkenshoKinyuYMD() {
@@ -265,7 +266,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
 
     /**
      * 主治医意見書記入年月日のsetメソッドです。
-     * 
+     *
      * @param ikenshoKinyuYMD 主治医意見書記入年月日
      */
     public void setIkenshoKinyuYMD(FlexibleDate ikenshoKinyuYMD) {
@@ -276,7 +277,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 意見書作成回数区分のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：意見書作成回数区分）初回/2回目以上
-     * 
+     *
      * @return 意見書作成回数区分
      */
     public Code getIkenshoSakuseiKaisuKubun() {
@@ -287,7 +288,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 意見書作成回数区分のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：意見書作成回数区分）初回/2回目以上
-     * 
+     *
      * @param ikenshoSakuseiKaisuKubun 意見書作成回数区分
      */
     public void setIkenshoSakuseiKaisuKubun(Code ikenshoSakuseiKaisuKubun) {
@@ -298,7 +299,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 在宅／施設区分のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：在宅/施設区分）在宅/施設
-     * 
+     *
      * @return 在宅／施設区分
      */
     public Code getZaitakuShisetsuKubun() {
@@ -309,7 +310,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 在宅／施設区分のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：在宅/施設区分）在宅/施設
-     * 
+     *
      * @param zaitakuShisetsuKubun 在宅／施設区分
      */
     public void setZaitakuShisetsuKubun(Code zaitakuShisetsuKubun) {
@@ -320,7 +321,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 意見書同意フラグのgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：意見書同意フラグ）
-     * 
+     *
      * @return 意見書同意フラグ
      */
     public boolean getIkenshoDoiFlag() {
@@ -331,7 +332,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 意見書同意フラグのsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：意見書同意フラグ）
-     * 
+     *
      * @param ikenshoDoiFlag 意見書同意フラグ
      */
     public void setIkenshoDoiFlag(boolean ikenshoDoiFlag) {
@@ -340,7 +341,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
 
     /**
      * 最終診療日のgetメソッドです。
-     * 
+     *
      * @return 最終診療日
      */
     public FlexibleDate getSaishuShinryoYMD() {
@@ -349,7 +350,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
 
     /**
      * 最終診療日のsetメソッドです。
-     * 
+     *
      * @param saishuShinryoYMD 最終診療日
      */
     public void setSaishuShinryoYMD(FlexibleDate saishuShinryoYMD) {
@@ -360,7 +361,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 他科受診の有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：他科受診の有無）
-     * 
+     *
      * @return 他科受診の有無
      */
     public boolean getExistTakaJushinFlag() {
@@ -371,7 +372,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 他科受診の有無のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：他科受診の有無）
-     * 
+     *
      * @param existTakaJushinFlag 他科受診の有無
      */
     public void setExistTakaJushinFlag(boolean existTakaJushinFlag) {
@@ -382,7 +383,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 内科受診の有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：内科受診の有無）
-     * 
+     *
      * @return 内科受診の有無
      */
     public boolean getExistNaikaJushinFlag() {
@@ -393,7 +394,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 内科受診の有無のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：内科受診の有無）
-     * 
+     *
      * @param existNaikaJushinFlag 内科受診の有無
      */
     public void setExistNaikaJushinFlag(boolean existNaikaJushinFlag) {
@@ -404,7 +405,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 精神科受診の有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：精神科受診の有無）
-     * 
+     *
      * @return 精神科受診の有無
      */
     public boolean getExistSeishinkaJushinFlag() {
@@ -415,7 +416,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 精神科受診の有無のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：精神科受診の有無）
-     * 
+     *
      * @param existSeishinkaJushinFlag 精神科受診の有無
      */
     public void setExistSeishinkaJushinFlag(boolean existSeishinkaJushinFlag) {
@@ -426,7 +427,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 外科受診の有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：外科受診の有無）
-     * 
+     *
      * @return 外科受診の有無
      */
     public boolean getExistGekaJushinFlag() {
@@ -437,7 +438,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 外科受診の有無のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：外科受診の有無）
-     * 
+     *
      * @param existGekaJushinFlag 外科受診の有無
      */
     public void setExistGekaJushinFlag(boolean existGekaJushinFlag) {
@@ -448,7 +449,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 整形外科受診の有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：整形外科受診の有無）
-     * 
+     *
      * @return 整形外科受診の有無
      */
     public boolean getExistSeikeigekaJushinFlag() {
@@ -459,7 +460,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 整形外科受診の有無のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：整形外科受診の有無）
-     * 
+     *
      * @param existSeikeigekaJushinFlag 整形外科受診の有無
      */
     public void setExistSeikeigekaJushinFlag(boolean existSeikeigekaJushinFlag) {
@@ -470,7 +471,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 脳神経外科の有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：脳神経外科受診の有無）
-     * 
+     *
      * @return 脳神経外科の有無
      */
     public boolean getExistNoshinkeigekaJushinFlag() {
@@ -481,7 +482,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 脳神経外科の有無のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：脳神経外科受診の有無）
-     * 
+     *
      * @param existNoshinkeigekaJushinFlag 脳神経外科の有無
      */
     public void setExistNoshinkeigekaJushinFlag(boolean existNoshinkeigekaJushinFlag) {
@@ -492,7 +493,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 皮膚科受診の有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：皮膚科受診の有無）
-     * 
+     *
      * @return 皮膚科受診の有無
      */
     public boolean getExistHifukaJushinFlag() {
@@ -503,7 +504,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 皮膚科受診の有無のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：皮膚科受診の有無）
-     * 
+     *
      * @param existHifukaJushinFlag 皮膚科受診の有無
      */
     public void setExistHifukaJushinFlag(boolean existHifukaJushinFlag) {
@@ -514,7 +515,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 泌尿器科受診の有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：泌尿器科受診の有無）
-     * 
+     *
      * @return 泌尿器科受診の有無
      */
     public boolean getExistHinyokikaJushinFlag() {
@@ -525,7 +526,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 泌尿器科受診の有無のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：泌尿器科受診の有無）
-     * 
+     *
      * @param existHinyokikaJushinFlag 泌尿器科受診の有無
      */
     public void setExistHinyokikaJushinFlag(boolean existHinyokikaJushinFlag) {
@@ -536,7 +537,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 婦人科受診の有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：婦人科受診の有無）
-     * 
+     *
      * @return 婦人科受診の有無
      */
     public boolean getExistFujinkaJushinFlag() {
@@ -547,7 +548,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 婦人科受診の有無のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：婦人科受診の有無）
-     * 
+     *
      * @param existFujinkaJushinFlag 婦人科受診の有無
      */
     public void setExistFujinkaJushinFlag(boolean existFujinkaJushinFlag) {
@@ -558,7 +559,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 耳鼻咽喉科受診の有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：耳鼻咽喉科受診の有無）
-     * 
+     *
      * @return 耳鼻咽喉科受診の有無
      */
     public boolean getExistJibiinkokaJushinFlag() {
@@ -569,7 +570,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 耳鼻咽喉科受診の有無のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：耳鼻咽喉科受診の有無）
-     * 
+     *
      * @param existJibiinkokaJushinFlag 耳鼻咽喉科受診の有無
      */
     public void setExistJibiinkokaJushinFlag(boolean existJibiinkokaJushinFlag) {
@@ -580,7 +581,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * リハビリテーション科受診の有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：リハビリテーション科受診の有無）
-     * 
+     *
      * @return リハビリテーション科受診の有無
      */
     public boolean getExistRehabilitationkaJushinFlag() {
@@ -591,7 +592,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * リハビリテーション科受診の有無のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：リハビリテーション科受診の有無）
-     * 
+     *
      * @param existRehabilitationkaJushinFlag リハビリテーション科受診の有無
      */
     public void setExistRehabilitationkaJushinFlag(boolean existRehabilitationkaJushinFlag) {
@@ -602,7 +603,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 歯科受診の有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：歯科受診の有無）
-     * 
+     *
      * @return 歯科受診の有無
      */
     public boolean getExistShikaJushinFlag() {
@@ -613,7 +614,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 歯科受診の有無のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：歯科受診の有無）
-     * 
+     *
      * @param existShikaJushinFlag 歯科受診の有無
      */
     public void setExistShikaJushinFlag(boolean existShikaJushinFlag) {
@@ -624,7 +625,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 眼科の有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：眼科受診の有無）
-     * 
+     *
      * @return 眼科の有無
      */
     public boolean getExistGankaJushinFlag() {
@@ -635,7 +636,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 眼科の有無のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：眼科受診の有無）
-     * 
+     *
      * @param existGankaJushinFlag 眼科の有無
      */
     public void setExistGankaJushinFlag(boolean existGankaJushinFlag) {
@@ -646,7 +647,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * その他受診科の有無のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：その他受診科の有無）
-     * 
+     *
      * @return その他受診科の有無
      */
     public boolean getExistSonotaJushinkaFlag() {
@@ -657,7 +658,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * その他受診科の有無のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：その他受診科の有無）
-     * 
+     *
      * @param existSonotaJushinkaFlag その他受診科の有無
      */
     public void setExistSonotaJushinkaFlag(boolean existSonotaJushinkaFlag) {
@@ -666,7 +667,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
 
     /**
      * その他受診科名のgetメソッドです。
-     * 
+     *
      * @return その他受診科名
      */
     public RString getSonotaJushinKaShimei() {
@@ -675,7 +676,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
 
     /**
      * その他受診科名のsetメソッドです。
-     * 
+     *
      * @param sonotaJushinKaShimei その他受診科名
      */
     public void setSonotaJushinKaShimei(RString sonotaJushinKaShimei) {
@@ -686,7 +687,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 意見書メモのgetメソッドです。
      * <br/>
      * <br/>広域対応
-     * 
+     *
      * @return 意見書メモ
      */
     public RString getIkenshoMemo() {
@@ -697,7 +698,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
      * 意見書メモのsetメソッドです。
      * <br/>
      * <br/>広域対応
-     * 
+     *
      * @param ikenshoMemo 意見書メモ
      */
     public void setIkenshoMemo(RString ikenshoMemo) {
@@ -706,9 +707,9 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
 
     /**
      * このエンティティの主キーが他の{@literal DbT5302ShujiiIkenshoJoho2009BEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5302ShujiiIkenshoJoho2009BEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -762,6 +763,7 @@ public class DbT5302ShujiiIkenshoJoho2009BEntity extends DbTableEntityBase<DbT53
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
