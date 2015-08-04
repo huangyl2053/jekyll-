@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHM;
 import jp.co.ndensan.reams.uz.uza.biz.NinshoshaCode;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 介護支払情報テーブルのエンティティクラスです。
@@ -21,6 +23,7 @@ import java.util.Objects;
  */
 public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004KaigoShiharaiJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7004KaigoShiharaiJoho");
 
@@ -33,14 +36,14 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
     private KamokuCode kamokuCode;
     @PrimaryKey
     private FlexibleDate ketteiYMD;
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     private RString shiharaiHohoKubun;
     private Code madoguchiShiharaiBashoCode;
     private YMDHM madoguchiShiharaiKaishiYMDHM;
@@ -56,7 +59,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -65,7 +68,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -74,7 +77,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -83,17 +86,16 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -102,19 +104,19 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD015ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
@@ -122,7 +124,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
      * 識別コードのgetメソッドです。
      * <br/>
      * <br/>口座ＤＢ上の識別コード
-     * 
+     *
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -133,7 +135,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
      * 識別コードのsetメソッドです。
      * <br/>
      * <br/>口座ＤＢ上の識別コード
-     * 
+     *
      * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -144,7 +146,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
      * 科目コードのgetメソッドです。
      * <br/>
      * <br/>支払単位の科目：高額サ・福祉用具・住宅改修など
-     * 
+     *
      * @return 科目コード
      */
     public KamokuCode getKamokuCode() {
@@ -155,7 +157,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
      * 科目コードのsetメソッドです。
      * <br/>
      * <br/>支払単位の科目：高額サ・福祉用具・住宅改修など
-     * 
+     *
      * @param kamokuCode 科目コード
      */
     public void setKamokuCode(KamokuCode kamokuCode) {
@@ -164,7 +166,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 決定年月日のgetメソッドです。
-     * 
+     *
      * @return 決定年月日
      */
     public FlexibleDate getKetteiYMD() {
@@ -173,7 +175,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 決定年月日のsetメソッドです。
-     * 
+     *
      * @param ketteiYMD 決定年月日
      */
     public void setKetteiYMD(FlexibleDate ketteiYMD) {
@@ -182,19 +184,19 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -202,7 +204,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
      * 支払方法区分のgetメソッドです。
      * <br/>
      * <br/>窓口・口座
-     * 
+     *
      * @return 支払方法区分
      */
     public RString getShiharaiHohoKubun() {
@@ -213,7 +215,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
      * 支払方法区分のsetメソッドです。
      * <br/>
      * <br/>窓口・口座
-     * 
+     *
      * @param shiharaiHohoKubun 支払方法区分
      */
     public void setShiharaiHohoKubun(RString shiharaiHohoKubun) {
@@ -224,7 +226,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
      * 窓口支払場所コードのgetメソッドです。
      * <br/>
      * <br/>各市町村の窓口
-     * 
+     *
      * @return 窓口支払場所コード
      */
     public Code getMadoguchiShiharaiBashoCode() {
@@ -235,7 +237,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
      * 窓口支払場所コードのsetメソッドです。
      * <br/>
      * <br/>各市町村の窓口
-     * 
+     *
      * @param madoguchiShiharaiBashoCode 窓口支払場所コード
      */
     public void setMadoguchiShiharaiBashoCode(Code madoguchiShiharaiBashoCode) {
@@ -244,7 +246,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 窓口支払開始年月日時分のgetメソッドです。
-     * 
+     *
      * @return 窓口支払開始年月日時分
      */
     public YMDHM getMadoguchiShiharaiKaishiYMDHM() {
@@ -253,7 +255,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 窓口支払開始年月日時分のsetメソッドです。
-     * 
+     *
      * @param madoguchiShiharaiKaishiYMDHM 窓口支払開始年月日時分
      */
     public void setMadoguchiShiharaiKaishiYMDHM(YMDHM madoguchiShiharaiKaishiYMDHM) {
@@ -262,7 +264,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 窓口支払終了年月日時分のgetメソッドです。
-     * 
+     *
      * @return 窓口支払終了年月日時分
      */
     public YMDHM getMadoguchiShiharaiShuryoYMDHM() {
@@ -271,7 +273,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 窓口支払終了年月日時分のsetメソッドです。
-     * 
+     *
      * @param madoguchiShiharaiShuryoYMDHM 窓口支払終了年月日時分
      */
     public void setMadoguchiShiharaiShuryoYMDHM(YMDHM madoguchiShiharaiShuryoYMDHM) {
@@ -280,7 +282,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 振込予定年月日のgetメソッドです。
-     * 
+     *
      * @return 振込予定年月日
      */
     public FlexibleDate getFurikomiYoteiYMD() {
@@ -289,7 +291,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 振込予定年月日のsetメソッドです。
-     * 
+     *
      * @param furikomiYoteiYMD 振込予定年月日
      */
     public void setFurikomiYoteiYMD(FlexibleDate furikomiYoteiYMD) {
@@ -298,7 +300,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 支払金額のgetメソッドです。
-     * 
+     *
      * @return 支払金額
      */
     public int getShiharaiKingaku() {
@@ -307,7 +309,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 支払金額のsetメソッドです。
-     * 
+     *
      * @param shiharaiKingaku 支払金額
      */
     public void setShiharaiKingaku(int shiharaiKingaku) {
@@ -316,7 +318,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 種別コードのgetメソッドです。
-     * 
+     *
      * @return 種別コード
      */
     public Code getShubetsuCode() {
@@ -325,7 +327,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 種別コードのsetメソッドです。
-     * 
+     *
      * @param shubetsuCode 種別コード
      */
     public void setShubetsuCode(Code shubetsuCode) {
@@ -334,7 +336,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 用途区分コードのgetメソッドです。
-     * 
+     *
      * @return 用途区分コード
      */
     public Code getYotoKubunCode() {
@@ -343,7 +345,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 用途区分コードのsetメソッドです。
-     * 
+     *
      * @param yotoKubunCode 用途区分コード
      */
     public void setYotoKubunCode(Code yotoKubunCode) {
@@ -352,7 +354,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 認証日１のgetメソッドです。
-     * 
+     *
      * @return 認証日１
      */
     public FlexibleDate getNinshoYMD1() {
@@ -361,7 +363,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 認証日１のsetメソッドです。
-     * 
+     *
      * @param ninshoYMD1 認証日１
      */
     public void setNinshoYMD1(FlexibleDate ninshoYMD1) {
@@ -370,7 +372,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 認証者コード１のgetメソッドです。
-     * 
+     *
      * @return 認証者コード１
      */
     public NinshoshaCode getNinshoshaCode1() {
@@ -379,7 +381,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 認証者コード１のsetメソッドです。
-     * 
+     *
      * @param ninshoshaCode1 認証者コード１
      */
     public void setNinshoshaCode1(NinshoshaCode ninshoshaCode1) {
@@ -388,7 +390,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 認証日２のgetメソッドです。
-     * 
+     *
      * @return 認証日２
      */
     public FlexibleDate getNinshoYMD2() {
@@ -397,7 +399,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 認証日２のsetメソッドです。
-     * 
+     *
      * @param ninshoYMD2 認証日２
      */
     public void setNinshoYMD2(FlexibleDate ninshoYMD2) {
@@ -406,7 +408,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 認証者コード２のgetメソッドです。
-     * 
+     *
      * @return 認証者コード２
      */
     public NinshoshaCode getNinshoshaCode2() {
@@ -415,7 +417,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * 認証者コード２のsetメソッドです。
-     * 
+     *
      * @param ninshoshaCode2 認証者コード２
      */
     public void setNinshoshaCode2(NinshoshaCode ninshoshaCode2) {
@@ -424,9 +426,9 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * このエンティティの主キーが他の{@literal DbT7004KaigoShiharaiJohoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7004KaigoShiharaiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -475,6 +477,7 @@ public class DbT7004KaigoShiharaiJohoEntity extends DbTableEntityBase<DbT7004Kai
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

@@ -10,12 +10,14 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 
 /**
  * 合併情報テーブルのエンティティクラスです。
  */
 public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7055GappeiJoho");
 
@@ -33,13 +35,13 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
     private RString chiikiNo;
     private LasdecCode shichosonCode;
     private RString gappeiShurui;
-    private DbUDD003HokenshaNo hokenshaNo;
+    private HokenshaNo hokenshaNo;
     private FlexibleDate kyuJohoFuyoToYMD;
     private FlexibleDate kokuhorenDataFromYMD;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -48,7 +50,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -57,7 +59,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -66,17 +68,16 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -85,7 +86,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
 
     /**
      * 合併年月日のgetメソッドです。
-     * 
+     *
      * @return 合併年月日
      */
     public FlexibleDate getGappeiYMD() {
@@ -94,7 +95,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
 
     /**
      * 合併年月日のsetメソッドです。
-     * 
+     *
      * @param gappeiYMD 合併年月日
      */
     public void setGappeiYMD(FlexibleDate gappeiYMD) {
@@ -103,7 +104,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
 
     /**
      * 地域番号のgetメソッドです。
-     * 
+     *
      * @return 地域番号
      */
     public RString getChiikiNo() {
@@ -112,7 +113,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
 
     /**
      * 地域番号のsetメソッドです。
-     * 
+     *
      * @param chiikiNo 地域番号
      */
     public void setChiikiNo(RString chiikiNo) {
@@ -121,7 +122,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
 
     /**
      * 市町村コードのgetメソッドです。
-     * 
+     *
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
@@ -130,7 +131,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
 
     /**
      * 市町村コードのsetメソッドです。
-     * 
+     *
      * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -141,7 +142,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
      * 合併種類のgetメソッドです。
      * <br/>
      * <br/>1:対等合併 2:吸収合併
-     * 
+     *
      * @return 合併種類
      */
     public RString getGappeiShurui() {
@@ -152,7 +153,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
      * 合併種類のsetメソッドです。
      * <br/>
      * <br/>1:対等合併 2:吸収合併
-     * 
+     *
      * @param gappeiShurui 合併種類
      */
     public void setGappeiShurui(RString gappeiShurui) {
@@ -161,19 +162,19 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
 
     /**
      * 保険者番号のgetメソッドです。
-     * 
+     *
      * @return 保険者番号
      */
-    public DbUDD003HokenshaNo getHokenshaNo() {
+    public HokenshaNo getHokenshaNo() {
         return hokenshaNo;
     }
 
     /**
      * 保険者番号のsetメソッドです。
-     * 
+     *
      * @param hokenshaNo 保険者番号
      */
-    public void setHokenshaNo(DbUDD003HokenshaNo hokenshaNo) {
+    public void setHokenshaNo(HokenshaNo hokenshaNo) {
         this.hokenshaNo = hokenshaNo;
     }
 
@@ -181,7 +182,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
      * 旧市町村情報付与終了年月日のgetメソッドです。
      * <br/>
      * <br/>旧市町村情報を合併日以降、いつまで管理するかを設定
-     * 
+     *
      * @return 旧市町村情報付与終了年月日
      */
     public FlexibleDate getKyuJohoFuyoToYMD() {
@@ -192,7 +193,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
      * 旧市町村情報付与終了年月日のsetメソッドです。
      * <br/>
      * <br/>旧市町村情報を合併日以降、いつまで管理するかを設定
-     * 
+     *
      * @param kyuJohoFuyoToYMD 旧市町村情報付与終了年月日
      */
     public void setKyuJohoFuyoToYMD(FlexibleDate kyuJohoFuyoToYMD) {
@@ -201,7 +202,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
 
     /**
      * 国保連データ連携開始年月日のgetメソッドです。
-     * 
+     *
      * @return 国保連データ連携開始年月日
      */
     public FlexibleDate getKokuhorenDataFromYMD() {
@@ -210,7 +211,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
 
     /**
      * 国保連データ連携開始年月日のsetメソッドです。
-     * 
+     *
      * @param kokuhorenDataFromYMD 国保連データ連携開始年月日
      */
     public void setKokuhorenDataFromYMD(FlexibleDate kokuhorenDataFromYMD) {
@@ -219,9 +220,9 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
 
     /**
      * このエンティティの主キーが他の{@literal DbT7055GappeiJohoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7055GappeiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -254,6 +255,7 @@ public class DbT7055GappeiJohoEntity extends DbTableEntityBase<DbT7055GappeiJoho
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

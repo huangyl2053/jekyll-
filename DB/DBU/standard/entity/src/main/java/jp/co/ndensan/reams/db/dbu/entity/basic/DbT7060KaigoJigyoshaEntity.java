@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 
 /**
  * 介護事業者テーブルのエンティティクラスです。
@@ -24,6 +25,7 @@ import java.util.Objects;
  */
 public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJigyoshaEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7060KaigoJigyosha");
 
@@ -36,7 +38,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private UDD060KaigoJigyoshaNo jigyoshaNo;
+    private KaigoJigyoshaNo jigyoshaNo;
     @PrimaryKey
     private FlexibleDate yukoKaishiYMD;
     private FlexibleDate yukoShuryoYMD;
@@ -73,7 +75,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -82,7 +84,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -91,7 +93,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -100,17 +102,16 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -119,25 +120,25 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 事業者番号のgetメソッドです。
-     * 
+     *
      * @return 事業者番号
      */
-    public UDD060KaigoJigyoshaNo getJigyoshaNo() {
+    public KaigoJigyoshaNo getJigyoshaNo() {
         return jigyoshaNo;
     }
 
     /**
      * 事業者番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshaNo 事業者番号
      */
-    public void setJigyoshaNo(UDD060KaigoJigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(KaigoJigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
     /**
      * 有効開始日のgetメソッドです。
-     * 
+     *
      * @return 有効開始日
      */
     public FlexibleDate getYukoKaishiYMD() {
@@ -146,7 +147,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 有効開始日のsetメソッドです。
-     * 
+     *
      * @param yukoKaishiYMD 有効開始日
      */
     public void setYukoKaishiYMD(FlexibleDate yukoKaishiYMD) {
@@ -155,7 +156,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 有効終了日のgetメソッドです。
-     * 
+     *
      * @return 有効終了日
      */
     public FlexibleDate getYukoShuryoYMD() {
@@ -164,7 +165,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 有効終了日のsetメソッドです。
-     * 
+     *
      * @param yukoShuryoYMD 有効終了日
      */
     public void setYukoShuryoYMD(FlexibleDate yukoShuryoYMD) {
@@ -173,7 +174,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 異動日のgetメソッドです。
-     * 
+     *
      * @return 異動日
      */
     public FlexibleDate getIdoYMD() {
@@ -182,7 +183,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 異動日のsetメソッドです。
-     * 
+     *
      * @param idoYMD 異動日
      */
     public void setIdoYMD(FlexibleDate idoYMD) {
@@ -191,7 +192,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 異動事由のgetメソッドです。
-     * 
+     *
      * @return 異動事由
      */
     public RString getIdoJiyuCode() {
@@ -200,7 +201,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 異動事由のsetメソッドです。
-     * 
+     *
      * @param idoJiyuCode 異動事由
      */
     public void setIdoJiyuCode(RString idoJiyuCode) {
@@ -209,7 +210,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 事業開始日のgetメソッドです。
-     * 
+     *
      * @return 事業開始日
      */
     public FlexibleDate getJigyoKaishiYMD() {
@@ -218,7 +219,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 事業開始日のsetメソッドです。
-     * 
+     *
      * @param jigyoKaishiYMD 事業開始日
      */
     public void setJigyoKaishiYMD(FlexibleDate jigyoKaishiYMD) {
@@ -227,7 +228,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 事業休止日のgetメソッドです。
-     * 
+     *
      * @return 事業休止日
      */
     public FlexibleDate getJigyoKyushiYMD() {
@@ -236,7 +237,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 事業休止日のsetメソッドです。
-     * 
+     *
      * @param jigyoKyushiYMD 事業休止日
      */
     public void setJigyoKyushiYMD(FlexibleDate jigyoKyushiYMD) {
@@ -245,7 +246,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 事業再開日のgetメソッドです。
-     * 
+     *
      * @return 事業再開日
      */
     public FlexibleDate getJigyoSaikaiYMD() {
@@ -254,7 +255,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 事業再開日のsetメソッドです。
-     * 
+     *
      * @param jigyoSaikaiYMD 事業再開日
      */
     public void setJigyoSaikaiYMD(FlexibleDate jigyoSaikaiYMD) {
@@ -263,7 +264,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 事業廃止日のgetメソッドです。
-     * 
+     *
      * @return 事業廃止日
      */
     public FlexibleDate getJigyoHaishiYMD() {
@@ -272,7 +273,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 事業廃止日のsetメソッドです。
-     * 
+     *
      * @param jigyoHaishiYMD 事業廃止日
      */
     public void setJigyoHaishiYMD(FlexibleDate jigyoHaishiYMD) {
@@ -281,7 +282,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 事業者名称のgetメソッドです。
-     * 
+     *
      * @return 事業者名称
      */
     public AtenaMeisho getJigyoshaName() {
@@ -290,7 +291,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 事業者名称のsetメソッドです。
-     * 
+     *
      * @param jigyoshaName 事業者名称
      */
     public void setJigyoshaName(AtenaMeisho jigyoshaName) {
@@ -299,7 +300,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 事業者名称カナのgetメソッドです。
-     * 
+     *
      * @return 事業者名称カナ
      */
     public AtenaKanaMeisho getJigyoshaNameKana() {
@@ -308,7 +309,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 事業者名称カナのsetメソッドです。
-     * 
+     *
      * @param jigyoshaNameKana 事業者名称カナ
      */
     public void setJigyoshaNameKana(AtenaKanaMeisho jigyoshaNameKana) {
@@ -317,7 +318,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 郵便番号のgetメソッドです。
-     * 
+     *
      * @return 郵便番号
      */
     public YubinNo getYubinNo() {
@@ -326,7 +327,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 郵便番号のsetメソッドです。
-     * 
+     *
      * @param yubinNo 郵便番号
      */
     public void setYubinNo(YubinNo yubinNo) {
@@ -335,7 +336,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 事業者住所のgetメソッドです。
-     * 
+     *
      * @return 事業者住所
      */
     public AtenaJusho getJigyoshaAddress() {
@@ -344,7 +345,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 事業者住所のsetメソッドです。
-     * 
+     *
      * @param jigyoshaAddress 事業者住所
      */
     public void setJigyoshaAddress(AtenaJusho jigyoshaAddress) {
@@ -353,7 +354,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 事業者住所カナのgetメソッドです。
-     * 
+     *
      * @return 事業者住所カナ
      */
     public RString getJigyoshaKanaAddress() {
@@ -362,7 +363,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 事業者住所カナのsetメソッドです。
-     * 
+     *
      * @param jigyoshaKanaAddress 事業者住所カナ
      */
     public void setJigyoshaKanaAddress(RString jigyoshaKanaAddress) {
@@ -371,7 +372,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 電話番号のgetメソッドです。
-     * 
+     *
      * @return 電話番号
      */
     public TelNo getTelNo() {
@@ -380,7 +381,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 電話番号のsetメソッドです。
-     * 
+     *
      * @param telNo 電話番号
      */
     public void setTelNo(TelNo telNo) {
@@ -389,7 +390,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * FAX番号のgetメソッドです。
-     * 
+     *
      * @return FAX番号
      */
     public TelNo getFaxNo() {
@@ -398,7 +399,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * FAX番号のsetメソッドです。
-     * 
+     *
      * @param faxNo FAX番号
      */
     public void setFaxNo(TelNo faxNo) {
@@ -407,7 +408,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 宛先部署のgetメソッドです。
-     * 
+     *
      * @return 宛先部署
      */
     public RString getAtesakiBusho() {
@@ -416,7 +417,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 宛先部署のsetメソッドです。
-     * 
+     *
      * @param atesakiBusho 宛先部署
      */
     public void setAtesakiBusho(RString atesakiBusho) {
@@ -425,7 +426,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 宛先人名のgetメソッドです。
-     * 
+     *
      * @return 宛先人名
      */
     public AtenaMeisho getAtesakininName() {
@@ -434,7 +435,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 宛先人名のsetメソッドです。
-     * 
+     *
      * @param atesakininName 宛先人名
      */
     public void setAtesakininName(AtenaMeisho atesakininName) {
@@ -443,7 +444,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 宛先人名カナのgetメソッドです。
-     * 
+     *
      * @return 宛先人名カナ
      */
     public AtenaKanaMeisho getAtesakininNamekana() {
@@ -452,7 +453,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 宛先人名カナのsetメソッドです。
-     * 
+     *
      * @param atesakininNamekana 宛先人名カナ
      */
     public void setAtesakininNamekana(AtenaKanaMeisho atesakininNamekana) {
@@ -461,7 +462,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 銀行コードのgetメソッドです。
-     * 
+     *
      * @return 銀行コード
      */
     public KinyuKikanCode getGinkoCode() {
@@ -470,7 +471,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 銀行コードのsetメソッドです。
-     * 
+     *
      * @param ginkoCode 銀行コード
      */
     public void setGinkoCode(KinyuKikanCode ginkoCode) {
@@ -479,7 +480,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 支店コードのgetメソッドです。
-     * 
+     *
      * @return 支店コード
      */
     public KinyuKikanShitenCode getShitenCode() {
@@ -488,7 +489,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 支店コードのsetメソッドです。
-     * 
+     *
      * @param shitenCode 支店コード
      */
     public void setShitenCode(KinyuKikanShitenCode shitenCode) {
@@ -497,7 +498,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 口座種別のgetメソッドです。
-     * 
+     *
      * @return 口座種別
      */
     public Code getKozaShubetsu() {
@@ -506,7 +507,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 口座種別のsetメソッドです。
-     * 
+     *
      * @param kozaShubetsu 口座種別
      */
     public void setKozaShubetsu(Code kozaShubetsu) {
@@ -515,7 +516,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 口座番号のgetメソッドです。
-     * 
+     *
      * @return 口座番号
      */
     public RString getKozaNo() {
@@ -524,7 +525,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 口座番号のsetメソッドです。
-     * 
+     *
      * @param kozaNo 口座番号
      */
     public void setKozaNo(RString kozaNo) {
@@ -533,7 +534,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 口座名義人のgetメソッドです。
-     * 
+     *
      * @return 口座名義人
      */
     public AtenaMeisho getKozaMeiginin() {
@@ -542,7 +543,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 口座名義人のsetメソッドです。
-     * 
+     *
      * @param kozaMeiginin 口座名義人
      */
     public void setKozaMeiginin(AtenaMeisho kozaMeiginin) {
@@ -551,7 +552,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 口座名義人カナのgetメソッドです。
-     * 
+     *
      * @return 口座名義人カナ
      */
     public AtenaKanaMeisho getKozaMeigininKana() {
@@ -560,7 +561,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 口座名義人カナのsetメソッドです。
-     * 
+     *
      * @param kozaMeigininKana 口座名義人カナ
      */
     public void setKozaMeigininKana(AtenaKanaMeisho kozaMeigininKana) {
@@ -569,7 +570,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 指定／基準該当等事業所区分のgetメソッドです。
-     * 
+     *
      * @return 指定／基準該当等事業所区分
      */
     public Code getShiteiKijungaitoJigyoshaKubun() {
@@ -578,7 +579,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 指定／基準該当等事業所区分のsetメソッドです。
-     * 
+     *
      * @param shiteiKijungaitoJigyoshaKubun 指定／基準該当等事業所区分
      */
     public void setShiteiKijungaitoJigyoshaKubun(Code shiteiKijungaitoJigyoshaKubun) {
@@ -587,7 +588,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 所在市町村のgetメソッドです。
-     * 
+     *
      * @return 所在市町村
      */
     public RString getShozaiShichoson() {
@@ -596,7 +597,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 所在市町村のsetメソッドです。
-     * 
+     *
      * @param shozaiShichoson 所在市町村
      */
     public void setShozaiShichoson(RString shozaiShichoson) {
@@ -605,7 +606,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * サービス実施地域のgetメソッドです。
-     * 
+     *
      * @return サービス実施地域
      */
     public RString getServiceJisshiChiiki() {
@@ -614,7 +615,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * サービス実施地域のsetメソッドです。
-     * 
+     *
      * @param serviceJisshiChiiki サービス実施地域
      */
     public void setServiceJisshiChiiki(RString serviceJisshiChiiki) {
@@ -623,7 +624,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 法人等種別のgetメソッドです。
-     * 
+     *
      * @return 法人等種別
      */
     public Code getHojinShubetsu() {
@@ -632,7 +633,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 法人等種別のsetメソッドです。
-     * 
+     *
      * @param hojinShubetsu 法人等種別
      */
     public void setHojinShubetsu(Code hojinShubetsu) {
@@ -641,7 +642,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * ベッド数のgetメソッドです。
-     * 
+     *
      * @return ベッド数
      */
     public int getBedSu() {
@@ -650,7 +651,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * ベッド数のsetメソッドです。
-     * 
+     *
      * @param bedSu ベッド数
      */
     public void setBedSu(int bedSu) {
@@ -659,7 +660,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 所属人数のgetメソッドです。
-     * 
+     *
      * @return 所属人数
      */
     public int getShozokuNinzu() {
@@ -668,7 +669,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 所属人数のsetメソッドです。
-     * 
+     *
      * @param shozokuNinzu 所属人数
      */
     public void setShozokuNinzu(int shozokuNinzu) {
@@ -677,7 +678,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 利用者数のgetメソッドです。
-     * 
+     *
      * @return 利用者数
      */
     public int getRiyoshaSu() {
@@ -686,7 +687,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 利用者数のsetメソッドです。
-     * 
+     *
      * @param riyoshaSu 利用者数
      */
     public void setRiyoshaSu(int riyoshaSu) {
@@ -695,7 +696,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 備考のgetメソッドです。
-     * 
+     *
      * @return 備考
      */
     public RString getBiko() {
@@ -704,7 +705,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * 備考のsetメソッドです。
-     * 
+     *
      * @param biko 備考
      */
     public void setBiko(RString biko) {
@@ -713,9 +714,9 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * このエンティティの主キーが他の{@literal DbT7060KaigoJigyoshaEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7060KaigoJigyoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -774,6 +775,7 @@ public class DbT7060KaigoJigyoshaEntity extends DbTableEntityBase<DbT7060KaigoJi
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

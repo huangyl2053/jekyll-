@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 不服審査申立情報テーブルのエンティティクラスです。
@@ -22,6 +24,7 @@ import java.util.Objects;
  */
 public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001FufukuMoshitateEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7001FufukuMoshitate");
 
@@ -34,11 +37,11 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
-    private DbUDD002HihokenshaNo genshobunsHihokennshaNo;
+    private HihokenshaNo genshobunsHihokennshaNo;
     @PrimaryKey
     private FlexibleDate shinsaSeikyuTodokedeYMD;
     private YubinNo genshobunHihokenshaYubinNo;
@@ -71,7 +74,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -80,7 +83,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -89,7 +92,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -98,17 +101,16 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -117,25 +119,25 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD015ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * 識別コードのgetメソッドです。
-     * 
+     *
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -144,7 +146,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 識別コードのsetメソッドです。
-     * 
+     *
      * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -153,25 +155,25 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 原処分被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 原処分被保険者番号
      */
-    public DbUDD002HihokenshaNo getGenshobunsHihokennshaNo() {
+    public HihokenshaNo getGenshobunsHihokennshaNo() {
         return genshobunsHihokennshaNo;
     }
 
     /**
      * 原処分被保険者番号のsetメソッドです。
-     * 
+     *
      * @param genshobunsHihokennshaNo 原処分被保険者番号
      */
-    public void setGenshobunsHihokennshaNo(DbUDD002HihokenshaNo genshobunsHihokennshaNo) {
+    public void setGenshobunsHihokennshaNo(HihokenshaNo genshobunsHihokennshaNo) {
         this.genshobunsHihokennshaNo = genshobunsHihokennshaNo;
     }
 
     /**
      * 審査請求届出日のgetメソッドです。
-     * 
+     *
      * @return 審査請求届出日
      */
     public FlexibleDate getShinsaSeikyuTodokedeYMD() {
@@ -180,7 +182,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 審査請求届出日のsetメソッドです。
-     * 
+     *
      * @param shinsaSeikyuTodokedeYMD 審査請求届出日
      */
     public void setShinsaSeikyuTodokedeYMD(FlexibleDate shinsaSeikyuTodokedeYMD) {
@@ -189,7 +191,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 原処分被保険者郵便番号のgetメソッドです。
-     * 
+     *
      * @return 原処分被保険者郵便番号
      */
     public YubinNo getGenshobunHihokenshaYubinNo() {
@@ -198,7 +200,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 原処分被保険者郵便番号のsetメソッドです。
-     * 
+     *
      * @param genshobunHihokenshaYubinNo 原処分被保険者郵便番号
      */
     public void setGenshobunHihokenshaYubinNo(YubinNo genshobunHihokenshaYubinNo) {
@@ -207,7 +209,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 原処分被保険者住所のgetメソッドです。
-     * 
+     *
      * @return 原処分被保険者住所
      */
     public AtenaJusho getGenshobunHihokenshaJusho() {
@@ -216,7 +218,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 原処分被保険者住所のsetメソッドです。
-     * 
+     *
      * @param genshobunHihokenshaJusho 原処分被保険者住所
      */
     public void setGenshobunHihokenshaJusho(AtenaJusho genshobunHihokenshaJusho) {
@@ -225,7 +227,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 原処分被保険者氏名のgetメソッドです。
-     * 
+     *
      * @return 原処分被保険者氏名
      */
     public AtenaMeisho getGenshobunHihokenshaShimei() {
@@ -234,7 +236,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 原処分被保険者氏名のsetメソッドです。
-     * 
+     *
      * @param genshobunHihokenshaShimei 原処分被保険者氏名
      */
     public void setGenshobunHihokenshaShimei(AtenaMeisho genshobunHihokenshaShimei) {
@@ -243,7 +245,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 原処分被保険者電話番号のgetメソッドです。
-     * 
+     *
      * @return 原処分被保険者電話番号
      */
     public TelNo getGenshobunHihokenshaTelNo() {
@@ -252,7 +254,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 原処分被保険者電話番号のsetメソッドです。
-     * 
+     *
      * @param genshobunHihokenshaTelNo 原処分被保険者電話番号
      */
     public void setGenshobunHihokenshaTelNo(TelNo genshobunHihokenshaTelNo) {
@@ -261,7 +263,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 原処分被保険者生年月日のgetメソッドです。
-     * 
+     *
      * @return 原処分被保険者生年月日
      */
     public FlexibleDate getGenshobunHihokenshaBirthYMD() {
@@ -270,7 +272,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 原処分被保険者生年月日のsetメソッドです。
-     * 
+     *
      * @param genshobunHihokenshaBirthYMD 原処分被保険者生年月日
      */
     public void setGenshobunHihokenshaBirthYMD(FlexibleDate genshobunHihokenshaBirthYMD) {
@@ -279,7 +281,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 審査請求人郵便番号のgetメソッドです。
-     * 
+     *
      * @return 審査請求人郵便番号
      */
     public YubinNo getShinsaSeikyuninYubinNo() {
@@ -288,7 +290,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 審査請求人郵便番号のsetメソッドです。
-     * 
+     *
      * @param shinsaSeikyuninYubinNo 審査請求人郵便番号
      */
     public void setShinsaSeikyuninYubinNo(YubinNo shinsaSeikyuninYubinNo) {
@@ -297,7 +299,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 審査請求人住所のgetメソッドです。
-     * 
+     *
      * @return 審査請求人住所
      */
     public AtenaJusho getShinsaSeikyuninJusho() {
@@ -306,7 +308,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 審査請求人住所のsetメソッドです。
-     * 
+     *
      * @param shinsaSeikyuninJusho 審査請求人住所
      */
     public void setShinsaSeikyuninJusho(AtenaJusho shinsaSeikyuninJusho) {
@@ -315,7 +317,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 審査請求人氏名のgetメソッドです。
-     * 
+     *
      * @return 審査請求人氏名
      */
     public AtenaMeisho getShinsaSeikyuninShimei() {
@@ -324,7 +326,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 審査請求人氏名のsetメソッドです。
-     * 
+     *
      * @param shinsaSeikyuninShimei 審査請求人氏名
      */
     public void setShinsaSeikyuninShimei(AtenaMeisho shinsaSeikyuninShimei) {
@@ -333,7 +335,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 審査請求人電話番号のgetメソッドです。
-     * 
+     *
      * @return 審査請求人電話番号
      */
     public TelNo getShinsaSeikyuninTelNo() {
@@ -342,7 +344,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 審査請求人電話番号のsetメソッドです。
-     * 
+     *
      * @param shinsaSeikyuninTelNo 審査請求人電話番号
      */
     public void setShinsaSeikyuninTelNo(TelNo shinsaSeikyuninTelNo) {
@@ -351,7 +353,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 被保険者との関係コードのgetメソッドです。
-     * 
+     *
      * @return 被保険者との関係コード
      */
     public Code getHihokenshaTonoKankeiCode() {
@@ -360,7 +362,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 被保険者との関係コードのsetメソッドです。
-     * 
+     *
      * @param hihokenshaTonoKankeiCode 被保険者との関係コード
      */
     public void setHihokenshaTonoKankeiCode(Code hihokenshaTonoKankeiCode) {
@@ -369,7 +371,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 代理人郵便番号のgetメソッドです。
-     * 
+     *
      * @return 代理人郵便番号
      */
     public YubinNo getDairininYubinNo() {
@@ -378,7 +380,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 代理人郵便番号のsetメソッドです。
-     * 
+     *
      * @param dairininYubinNo 代理人郵便番号
      */
     public void setDairininYubinNo(YubinNo dairininYubinNo) {
@@ -387,7 +389,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 代理人住所のgetメソッドです。
-     * 
+     *
      * @return 代理人住所
      */
     public AtenaJusho getDairininJusho() {
@@ -396,7 +398,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 代理人住所のsetメソッドです。
-     * 
+     *
      * @param dairininJusho 代理人住所
      */
     public void setDairininJusho(AtenaJusho dairininJusho) {
@@ -405,7 +407,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 代理人氏名のgetメソッドです。
-     * 
+     *
      * @return 代理人氏名
      */
     public AtenaMeisho getDairininShimei() {
@@ -414,7 +416,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 代理人氏名のsetメソッドです。
-     * 
+     *
      * @param dairininShimei 代理人氏名
      */
     public void setDairininShimei(AtenaMeisho dairininShimei) {
@@ -423,7 +425,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 代理人電話番号のgetメソッドです。
-     * 
+     *
      * @return 代理人電話番号
      */
     public TelNo getDairininTelNo() {
@@ -432,7 +434,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 代理人電話番号のsetメソッドです。
-     * 
+     *
      * @param dairininTelNo 代理人電話番号
      */
     public void setDairininTelNo(TelNo dairininTelNo) {
@@ -441,7 +443,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 処分庁のgetメソッドです。
-     * 
+     *
      * @return 処分庁
      */
     public RString getShobunCho() {
@@ -450,7 +452,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 処分庁のsetメソッドです。
-     * 
+     *
      * @param shobunCho 処分庁
      */
     public void setShobunCho(RString shobunCho) {
@@ -459,7 +461,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 処分日のgetメソッドです。
-     * 
+     *
      * @return 処分日
      */
     public FlexibleDate getShobunYMD() {
@@ -468,7 +470,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 処分日のsetメソッドです。
-     * 
+     *
      * @param shobunYMD 処分日
      */
     public void setShobunYMD(FlexibleDate shobunYMD) {
@@ -477,7 +479,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 処分種類コードのgetメソッドです。
-     * 
+     *
      * @return 処分種類コード
      */
     public Code getShobunShuruiCode() {
@@ -486,7 +488,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 処分種類コードのsetメソッドです。
-     * 
+     *
      * @param shobunShuruiCode 処分種類コード
      */
     public void setShobunShuruiCode(Code shobunShuruiCode) {
@@ -495,7 +497,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 処分があったことを知った日のgetメソッドです。
-     * 
+     *
      * @return 処分があったことを知った日
      */
     public FlexibleDate getShobunKakuninYMD() {
@@ -504,7 +506,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 処分があったことを知った日のsetメソッドです。
-     * 
+     *
      * @param shobunKakuninYMD 処分があったことを知った日
      */
     public void setShobunKakuninYMD(FlexibleDate shobunKakuninYMD) {
@@ -513,7 +515,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 審査請求の理由のgetメソッドです。
-     * 
+     *
      * @return 審査請求の理由
      */
     public RString getShinsaSeikyuRiyu() {
@@ -522,7 +524,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 審査請求の理由のsetメソッドです。
-     * 
+     *
      * @param shinsaSeikyuRiyu 審査請求の理由
      */
     public void setShinsaSeikyuRiyu(RString shinsaSeikyuRiyu) {
@@ -531,7 +533,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 処分庁教示の有無及び教示の内容のgetメソッドです。
-     * 
+     *
      * @return 処分庁教示の有無及び教示の内容
      */
     public RString getShobunChoKyojiNaiyo() {
@@ -540,7 +542,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 処分庁教示の有無及び教示の内容のsetメソッドです。
-     * 
+     *
      * @param shobunChoKyojiNaiyo 処分庁教示の有無及び教示の内容
      */
     public void setShobunChoKyojiNaiyo(RString shobunChoKyojiNaiyo) {
@@ -549,7 +551,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 添付書類等のgetメソッドです。
-     * 
+     *
      * @return 添付書類等
      */
     public boolean getTempuShoruiTo() {
@@ -558,7 +560,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 添付書類等のsetメソッドです。
-     * 
+     *
      * @param tempuShoruiTo 添付書類等
      */
     public void setTempuShoruiTo(boolean tempuShoruiTo) {
@@ -567,7 +569,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 審査請求取下日のgetメソッドです。
-     * 
+     *
      * @return 審査請求取下日
      */
     public FlexibleDate getShinsaSeikyuTorisageYMD() {
@@ -576,7 +578,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 審査請求取下日のsetメソッドです。
-     * 
+     *
      * @param shinsaSeikyuTorisageYMD 審査請求取下日
      */
     public void setShinsaSeikyuTorisageYMD(FlexibleDate shinsaSeikyuTorisageYMD) {
@@ -585,7 +587,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 弁明書登録フラグのgetメソッドです。
-     * 
+     *
      * @return 弁明書登録フラグ
      */
     public boolean getBemmeishoTorokuFlag() {
@@ -594,7 +596,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 弁明書登録フラグのsetメソッドです。
-     * 
+     *
      * @param bemmeishoTorokuFlag 弁明書登録フラグ
      */
     public void setBemmeishoTorokuFlag(boolean bemmeishoTorokuFlag) {
@@ -603,7 +605,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 弁明書作成日のgetメソッドです。
-     * 
+     *
      * @return 弁明書作成日
      */
     public FlexibleDate getBemmeishoSakuseiYMD() {
@@ -612,7 +614,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 弁明書作成日のsetメソッドです。
-     * 
+     *
      * @param bemmeishoSakuseiYMD 弁明書作成日
      */
     public void setBemmeishoSakuseiYMD(FlexibleDate bemmeishoSakuseiYMD) {
@@ -621,7 +623,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 裁決日のgetメソッドです。
-     * 
+     *
      * @return 裁決日
      */
     public FlexibleDate getSaiketsuYMD() {
@@ -630,7 +632,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 裁決日のsetメソッドです。
-     * 
+     *
      * @param saiketsuYMD 裁決日
      */
     public void setSaiketsuYMD(FlexibleDate saiketsuYMD) {
@@ -639,7 +641,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 裁決結果のgetメソッドです。
-     * 
+     *
      * @return 裁決結果
      */
     public RString getSaiketsuKekka() {
@@ -648,7 +650,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 裁決結果のsetメソッドです。
-     * 
+     *
      * @param saiketsuKekka 裁決結果
      */
     public void setSaiketsuKekka(RString saiketsuKekka) {
@@ -657,7 +659,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 裁決理由のgetメソッドです。
-     * 
+     *
      * @return 裁決理由
      */
     public RString getSaiketsuRiyu() {
@@ -666,7 +668,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * 裁決理由のsetメソッドです。
-     * 
+     *
      * @param saiketsuRiyu 裁決理由
      */
     public void setSaiketsuRiyu(RString saiketsuRiyu) {
@@ -675,9 +677,9 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * このエンティティの主キーが他の{@literal DbT7001FufukuMoshitateEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7001FufukuMoshitateEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -740,6 +742,7 @@ public class DbT7001FufukuMoshitateEntity extends DbTableEntityBase<DbT7001Fufuk
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
