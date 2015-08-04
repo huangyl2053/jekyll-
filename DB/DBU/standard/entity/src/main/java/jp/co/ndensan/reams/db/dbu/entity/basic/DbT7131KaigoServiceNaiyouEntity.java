@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 
 /**
  * 介護サービス内容テーブルのエンティティクラスです。
@@ -18,6 +19,7 @@ import java.util.Objects;
  */
 public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131KaigoServiceNaiyouEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7131KaigoServiceNaiyou");
 
@@ -30,7 +32,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private UDD061KaigoServiceShuruiCode serviceShuruiCode;
+    private KaigoServiceShuruiCode serviceShuruiCode;
     @PrimaryKey
     private RString serviceKoumokuCode;
     @PrimaryKey
@@ -47,7 +49,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -56,7 +58,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -65,7 +67,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -74,17 +76,16 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -93,25 +94,25 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * サービス種類コードのgetメソッドです。
-     * 
+     *
      * @return サービス種類コード
      */
-    public UDD061KaigoServiceShuruiCode getServiceShuruiCode() {
+    public KaigoServiceShuruiCode getServiceShuruiCode() {
         return serviceShuruiCode;
     }
 
     /**
      * サービス種類コードのsetメソッドです。
-     * 
+     *
      * @param serviceShuruiCode サービス種類コード
      */
-    public void setServiceShuruiCode(UDD061KaigoServiceShuruiCode serviceShuruiCode) {
+    public void setServiceShuruiCode(KaigoServiceShuruiCode serviceShuruiCode) {
         this.serviceShuruiCode = serviceShuruiCode;
     }
 
     /**
      * サービス項目コードのgetメソッドです。
-     * 
+     *
      * @return サービス項目コード
      */
     public RString getServiceKoumokuCode() {
@@ -120,7 +121,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * サービス項目コードのsetメソッドです。
-     * 
+     *
      * @param serviceKoumokuCode サービス項目コード
      */
     public void setServiceKoumokuCode(RString serviceKoumokuCode) {
@@ -129,7 +130,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * 提供開始年月のgetメソッドです。
-     * 
+     *
      * @return 提供開始年月
      */
     public FlexibleYearMonth getTeikyoKaishiYM() {
@@ -138,7 +139,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * 提供開始年月のsetメソッドです。
-     * 
+     *
      * @param teikyoKaishiYM 提供開始年月
      */
     public void setTeikyoKaishiYM(FlexibleYearMonth teikyoKaishiYM) {
@@ -147,7 +148,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public Decimal getRirekiNo() {
@@ -156,7 +157,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(Decimal rirekiNo) {
@@ -165,7 +166,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * 提供終了年月のgetメソッドです。
-     * 
+     *
      * @return 提供終了年月
      */
     public FlexibleYearMonth getTeikyoShuryoYM() {
@@ -174,7 +175,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * 提供終了年月のsetメソッドです。
-     * 
+     *
      * @param teikyoShuryoYM 提供終了年月
      */
     public void setTeikyoShuryoYM(FlexibleYearMonth teikyoShuryoYM) {
@@ -183,7 +184,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * サービス名称のgetメソッドです。
-     * 
+     *
      * @return サービス名称
      */
     public RString getServiceName() {
@@ -192,7 +193,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * サービス名称のsetメソッドです。
-     * 
+     *
      * @param serviceName サービス名称
      */
     public void setServiceName(RString serviceName) {
@@ -201,7 +202,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * サービス略称のgetメソッドです。
-     * 
+     *
      * @return サービス略称
      */
     public RString getServiceNameRyaku() {
@@ -210,7 +211,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * サービス略称のsetメソッドです。
-     * 
+     *
      * @param serviceNameRyaku サービス略称
      */
     public void setServiceNameRyaku(RString serviceNameRyaku) {
@@ -219,7 +220,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * 単位数のgetメソッドです。
-     * 
+     *
      * @return 単位数
      */
     public int getTaniSu() {
@@ -228,7 +229,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * 単位数のsetメソッドです。
-     * 
+     *
      * @param taniSu 単位数
      */
     public void setTaniSu(int taniSu) {
@@ -238,17 +239,17 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
     /**
      * 単位数識別のgetメソッドです。
      * <br/>
-     * <br/>01：単位数　　　　 
+     * <br/>01：単位数
      * <br/>02：金額(円)
-     * <br/>03：％値　　　　　 
+     * <br/>03：％値
      * <br/>04：きざみ基準単位
-     * <br/>05：法定単位数なし 
+     * <br/>05：法定単位数なし
      * <br/>06：単位数(記載省略)
-     * <br/>07：％値(記載省略) 
+     * <br/>07：％値(記載省略)
      * <br/>08：1/1000値
      * <br/>09：1/1000値(記載省略)
      * <br/>13：％値：上限
-     * 
+     *
      * @return 単位数識別
      */
     public Code getTanisuShikibetsuCode() {
@@ -258,17 +259,17 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
     /**
      * 単位数識別のsetメソッドです。
      * <br/>
-     * <br/>01：単位数　　　　 
+     * <br/>01：単位数
      * <br/>02：金額(円)
-     * <br/>03：％値　　　　　 
+     * <br/>03：％値
      * <br/>04：きざみ基準単位
-     * <br/>05：法定単位数なし 
+     * <br/>05：法定単位数なし
      * <br/>06：単位数(記載省略)
-     * <br/>07：％値(記載省略) 
+     * <br/>07：％値(記載省略)
      * <br/>08：1/1000値
      * <br/>09：1/1000値(記載省略)
      * <br/>13：％値：上限
-     * 
+     *
      * @param tanisuShikibetsuCode 単位数識別
      */
     public void setTanisuShikibetsuCode(Code tanisuShikibetsuCode) {
@@ -283,7 +284,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
      * <br/>03:1月につき
      * <br/>04:算定単位無し
      * <br/>05:1週間につき
-     * 
+     *
      * @return 単位数算定単位
      */
     public Code getTanisuSanteiTani() {
@@ -298,7 +299,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
      * <br/>03:1月につき
      * <br/>04:算定単位無し
      * <br/>05:1週間につき
-     * 
+     *
      * @param tanisuSanteiTani 単位数算定単位
      */
     public void setTanisuSanteiTani(Code tanisuSanteiTani) {
@@ -309,7 +310,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
      * 異動事由のgetメソッドです。
      * <br/>
      * <br/>010：厚生省改定による 等
-     * 
+     *
      * @return 異動事由
      */
     public Code getIdouJiyuCode() {
@@ -320,7 +321,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
      * 異動事由のsetメソッドです。
      * <br/>
      * <br/>010：厚生省改定による 等
-     * 
+     *
      * @param idouJiyuCode 異動事由
      */
     public void setIdouJiyuCode(Code idouJiyuCode) {
@@ -329,9 +330,9 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * このエンティティの主キーが他の{@literal DbT7131KaigoServiceNaiyouEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7131KaigoServiceNaiyouEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -374,6 +375,7 @@ public class DbT7131KaigoServiceNaiyouEntity extends DbTableEntityBase<DbT7131Ka
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

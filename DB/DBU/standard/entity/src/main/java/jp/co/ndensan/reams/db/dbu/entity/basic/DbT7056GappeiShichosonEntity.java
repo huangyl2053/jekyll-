@@ -12,12 +12,14 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 
 /**
  * 合併市町村テーブルのエンティティクラスです。
  */
 public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056GappeiShichosonEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7056GappeiShichoson");
 
@@ -37,7 +39,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
     private LasdecCode kyuShichosonCode;
     private FlexibleDate unyoKaishiYMD;
     private FlexibleDate unyoShuryoYMD;
-    private DbUDD003HokenshaNo kyuHokenshaNo;
+    private HokenshaNo kyuHokenshaNo;
     private RString kyuShichosonMeisho;
     private RString todofukenMeisho;
     private RString gunMeisho;
@@ -49,7 +51,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -58,7 +60,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -67,7 +69,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -76,17 +78,16 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -95,7 +96,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 合併年月日のgetメソッドです。
-     * 
+     *
      * @return 合併年月日
      */
     public FlexibleDate getGappeiYMD() {
@@ -104,7 +105,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 合併年月日のsetメソッドです。
-     * 
+     *
      * @param gappeiYMD 合併年月日
      */
     public void setGappeiYMD(FlexibleDate gappeiYMD) {
@@ -113,7 +114,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 地域番号のgetメソッドです。
-     * 
+     *
      * @return 地域番号
      */
     public RString getChiikiNo() {
@@ -122,7 +123,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 地域番号のsetメソッドです。
-     * 
+     *
      * @param chiikiNo 地域番号
      */
     public void setChiikiNo(RString chiikiNo) {
@@ -131,7 +132,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 旧市町村コードのgetメソッドです。
-     * 
+     *
      * @return 旧市町村コード
      */
     public LasdecCode getKyuShichosonCode() {
@@ -140,7 +141,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 旧市町村コードのsetメソッドです。
-     * 
+     *
      * @param kyuShichosonCode 旧市町村コード
      */
     public void setKyuShichosonCode(LasdecCode kyuShichosonCode) {
@@ -149,7 +150,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 運用開始年月日のgetメソッドです。
-     * 
+     *
      * @return 運用開始年月日
      */
     public FlexibleDate getUnyoKaishiYMD() {
@@ -158,7 +159,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 運用開始年月日のsetメソッドです。
-     * 
+     *
      * @param unyoKaishiYMD 運用開始年月日
      */
     public void setUnyoKaishiYMD(FlexibleDate unyoKaishiYMD) {
@@ -167,7 +168,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 運用終了年月日のgetメソッドです。
-     * 
+     *
      * @return 運用終了年月日
      */
     public FlexibleDate getUnyoShuryoYMD() {
@@ -176,7 +177,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 運用終了年月日のsetメソッドです。
-     * 
+     *
      * @param unyoShuryoYMD 運用終了年月日
      */
     public void setUnyoShuryoYMD(FlexibleDate unyoShuryoYMD) {
@@ -185,25 +186,25 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 旧保険者番号のgetメソッドです。
-     * 
+     *
      * @return 旧保険者番号
      */
-    public DbUDD003HokenshaNo getKyuHokenshaNo() {
+    public HokenshaNo getKyuHokenshaNo() {
         return kyuHokenshaNo;
     }
 
     /**
      * 旧保険者番号のsetメソッドです。
-     * 
+     *
      * @param kyuHokenshaNo 旧保険者番号
      */
-    public void setKyuHokenshaNo(DbUDD003HokenshaNo kyuHokenshaNo) {
+    public void setKyuHokenshaNo(HokenshaNo kyuHokenshaNo) {
         this.kyuHokenshaNo = kyuHokenshaNo;
     }
 
     /**
      * 旧市町村名称のgetメソッドです。
-     * 
+     *
      * @return 旧市町村名称
      */
     public RString getKyuShichosonMeisho() {
@@ -212,7 +213,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 旧市町村名称のsetメソッドです。
-     * 
+     *
      * @param kyuShichosonMeisho 旧市町村名称
      */
     public void setKyuShichosonMeisho(RString kyuShichosonMeisho) {
@@ -221,7 +222,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 都道府県名称のgetメソッドです。
-     * 
+     *
      * @return 都道府県名称
      */
     public RString getTodofukenMeisho() {
@@ -230,7 +231,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 都道府県名称のsetメソッドです。
-     * 
+     *
      * @param todofukenMeisho 都道府県名称
      */
     public void setTodofukenMeisho(RString todofukenMeisho) {
@@ -239,7 +240,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 郡名称のgetメソッドです。
-     * 
+     *
      * @return 郡名称
      */
     public RString getGunMeisho() {
@@ -248,7 +249,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 郡名称のsetメソッドです。
-     * 
+     *
      * @param gunMeisho 郡名称
      */
     public void setGunMeisho(RString gunMeisho) {
@@ -257,7 +258,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 郵便番号のgetメソッドです。
-     * 
+     *
      * @return 郵便番号
      */
     public YubinNo getYubinNo() {
@@ -266,7 +267,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 郵便番号のsetメソッドです。
-     * 
+     *
      * @param yubinNo 郵便番号
      */
     public void setYubinNo(YubinNo yubinNo) {
@@ -275,7 +276,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 電話番号のgetメソッドです。
-     * 
+     *
      * @return 電話番号
      */
     public TelNo getTelNo() {
@@ -284,7 +285,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 電話番号のsetメソッドです。
-     * 
+     *
      * @param telNo 電話番号
      */
     public void setTelNo(TelNo telNo) {
@@ -293,7 +294,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 老人保健市町村番号のgetメソッドです。
-     * 
+     *
      * @return 老人保健市町村番号
      */
     public RString getRojinhokenShichosonNo() {
@@ -302,7 +303,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * 老人保健市町村番号のsetメソッドです。
-     * 
+     *
      * @param rojinhokenShichosonNo 老人保健市町村番号
      */
     public void setRojinhokenShichosonNo(RString rojinhokenShichosonNo) {
@@ -313,7 +314,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
      * 老人保健受給者番号体系のgetメソッドです。
      * <br/>
      * <br/>1:住民コード 2:医療給付サブシステム 3:市町村独自
-     * 
+     *
      * @return 老人保健受給者番号体系
      */
     public RString getRokenJukyushaNoTaikei() {
@@ -324,7 +325,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
      * 老人保健受給者番号体系のsetメソッドです。
      * <br/>
      * <br/>1:住民コード 2:医療給付サブシステム 3:市町村独自
-     * 
+     *
      * @param rokenJukyushaNoTaikei 老人保健受給者番号体系
      */
     public void setRokenJukyushaNoTaikei(RString rokenJukyushaNoTaikei) {
@@ -335,7 +336,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
      * 表示有無のgetメソッドです。
      * <br/>
      * <br/>1:表示対象とする 0:表示対象としない
-     * 
+     *
      * @return 表示有無
      */
     public RString getHyojiUmu() {
@@ -346,7 +347,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
      * 表示有無のsetメソッドです。
      * <br/>
      * <br/>1:表示対象とする 0:表示対象としない
-     * 
+     *
      * @param hyojiUmu 表示有無
      */
     public void setHyojiUmu(RString hyojiUmu) {
@@ -355,9 +356,9 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * このエンティティの主キーが他の{@literal DbT7056GappeiShichosonEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7056GappeiShichosonEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -400,6 +401,7 @@ public class DbT7056GappeiShichosonEntity extends DbTableEntityBase<DbT7056Gappe
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

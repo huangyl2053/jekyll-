@@ -11,12 +11,14 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 
 /**
  * 合併内住特者新旧番号変換テーブルテーブルのエンティティクラスです。
  */
 public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntityBase<DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7033GappeiNaiJutokushaShinKyuNoHenkan");
 
@@ -35,14 +37,14 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
     private ShikibetsuCode shikibetsuCodeSochiMoto;
     private LasdecCode shichosonCode;
     private LasdecCode shichosonCodeSochiMoto;
-    private DbUDD002HihokenshaNo hihokenshaNo;
-    private DbUDD002HihokenshaNo hihokenshaNoSochiMoto;
+    private HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNoSochiMoto;
     private FlexibleDate kaishiYMD;
     private FlexibleDate shuryoYMD;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -51,7 +53,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -60,7 +62,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -69,17 +71,16 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -88,7 +89,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * 識別コードのgetメソッドです。
-     * 
+     *
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -97,7 +98,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * 識別コードのsetメソッドです。
-     * 
+     *
      * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -106,7 +107,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public RString getRirekiNo() {
@@ -115,7 +116,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(RString rirekiNo) {
@@ -124,7 +125,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * 識別コード（措置元）のgetメソッドです。
-     * 
+     *
      * @return 識別コード（措置元）
      */
     public ShikibetsuCode getShikibetsuCodeSochiMoto() {
@@ -133,7 +134,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * 識別コード（措置元）のsetメソッドです。
-     * 
+     *
      * @param shikibetsuCodeSochiMoto 識別コード（措置元）
      */
     public void setShikibetsuCodeSochiMoto(ShikibetsuCode shikibetsuCodeSochiMoto) {
@@ -142,7 +143,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * 市町村コードのgetメソッドです。
-     * 
+     *
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
@@ -151,7 +152,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * 市町村コードのsetメソッドです。
-     * 
+     *
      * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -160,7 +161,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * 市町村コード（措置元）のgetメソッドです。
-     * 
+     *
      * @return 市町村コード（措置元）
      */
     public LasdecCode getShichosonCodeSochiMoto() {
@@ -169,7 +170,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * 市町村コード（措置元）のsetメソッドです。
-     * 
+     *
      * @param shichosonCodeSochiMoto 市町村コード（措置元）
      */
     public void setShichosonCodeSochiMoto(LasdecCode shichosonCodeSochiMoto) {
@@ -178,43 +179,43 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 被保険者番号（措置元）のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号（措置元）
      */
-    public DbUDD002HihokenshaNo getHihokenshaNoSochiMoto() {
+    public HihokenshaNo getHihokenshaNoSochiMoto() {
         return hihokenshaNoSochiMoto;
     }
 
     /**
      * 被保険者番号（措置元）のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNoSochiMoto 被保険者番号（措置元）
      */
-    public void setHihokenshaNoSochiMoto(DbUDD002HihokenshaNo hihokenshaNoSochiMoto) {
+    public void setHihokenshaNoSochiMoto(HihokenshaNo hihokenshaNoSochiMoto) {
         this.hihokenshaNoSochiMoto = hihokenshaNoSochiMoto;
     }
 
     /**
      * 開始年月日のgetメソッドです。
-     * 
+     *
      * @return 開始年月日
      */
     public FlexibleDate getKaishiYMD() {
@@ -223,7 +224,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * 開始年月日のsetメソッドです。
-     * 
+     *
      * @param kaishiYMD 開始年月日
      */
     public void setKaishiYMD(FlexibleDate kaishiYMD) {
@@ -232,7 +233,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * 終了年月日のgetメソッドです。
-     * 
+     *
      * @return 終了年月日
      */
     public FlexibleDate getShuryoYMD() {
@@ -241,7 +242,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * 終了年月日のsetメソッドです。
-     * 
+     *
      * @param shuryoYMD 終了年月日
      */
     public void setShuryoYMD(FlexibleDate shuryoYMD) {
@@ -250,9 +251,9 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * このエンティティの主キーが他の{@literal DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -287,6 +288,7 @@ public class DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity extends DbTableEntit
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

@@ -11,12 +11,14 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 
 /**
  * 受給者限度額管理テーブルのエンティティクラスです。
  */
 public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT7116JukyushaGendoGakuKanriEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7116JukyushaGendoGakuKanri");
 
@@ -29,7 +31,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private RString shikibetsuKubun;
     @PrimaryKey
@@ -48,7 +50,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -57,7 +59,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -66,7 +68,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -75,17 +77,16 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -94,25 +95,25 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 識別区分のgetメソッドです。
-     * 
+     *
      * @return 識別区分
      */
     public RString getShikibetsuKubun() {
@@ -121,7 +122,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 識別区分のsetメソッドです。
-     * 
+     *
      * @param shikibetsuKubun 識別区分
      */
     public void setShikibetsuKubun(RString shikibetsuKubun) {
@@ -130,7 +131,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 有効開始年月のgetメソッドです。
-     * 
+     *
      * @return 有効開始年月
      */
     public FlexibleYearMonth getYukoKaishiYM() {
@@ -139,7 +140,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 有効開始年月のsetメソッドです。
-     * 
+     *
      * @param yukoKaishiYM 有効開始年月
      */
     public void setYukoKaishiYM(FlexibleYearMonth yukoKaishiYM) {
@@ -148,7 +149,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -157,7 +158,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -166,7 +167,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 有効終了年月のgetメソッドです。
-     * 
+     *
      * @return 有効終了年月
      */
     public FlexibleYearMonth getYukoShuryoYM() {
@@ -175,7 +176,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 有効終了年月のsetメソッドです。
-     * 
+     *
      * @param yukoShuryoYM 有効終了年月
      */
     public void setYukoShuryoYM(FlexibleYearMonth yukoShuryoYM) {
@@ -184,7 +185,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 要介護状態区分のgetメソッドです。
-     * 
+     *
      * @return 要介護状態区分
      */
     public RString getYoKaigoJotaiKubun() {
@@ -193,7 +194,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 要介護状態区分のsetメソッドです。
-     * 
+     *
      * @param yoKaigoJotaiKubun 要介護状態区分
      */
     public void setYoKaigoJotaiKubun(RString yoKaigoJotaiKubun) {
@@ -202,7 +203,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 拡大倍数のgetメソッドです。
-     * 
+     *
      * @return 拡大倍数
      */
     public RString getKakudaiBaisu() {
@@ -211,7 +212,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 拡大倍数のsetメソッドです。
-     * 
+     *
      * @param kakudaiBaisu 拡大倍数
      */
     public void setKakudaiBaisu(RString kakudaiBaisu) {
@@ -220,7 +221,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 切り分け単位数のgetメソッドです。
-     * 
+     *
      * @return 切り分け単位数
      */
     public Decimal getKiriwakeTaniSu() {
@@ -229,7 +230,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 切り分け単位数のsetメソッドです。
-     * 
+     *
      * @param kiriwakeTaniSu 切り分け単位数
      */
     public void setKiriwakeTaniSu(Decimal kiriwakeTaniSu) {
@@ -238,7 +239,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 登録年月日のgetメソッドです。
-     * 
+     *
      * @return 登録年月日
      */
     public FlexibleDate getTorokuYMD() {
@@ -247,7 +248,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 登録年月日のsetメソッドです。
-     * 
+     *
      * @param torokuYMD 登録年月日
      */
     public void setTorokuYMD(FlexibleDate torokuYMD) {
@@ -256,7 +257,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 変更年月日のgetメソッドです。
-     * 
+     *
      * @return 変更年月日
      */
     public FlexibleDate getHenkoYMD() {
@@ -265,7 +266,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 変更年月日のsetメソッドです。
-     * 
+     *
      * @param henkoYMD 変更年月日
      */
     public void setHenkoYMD(FlexibleDate henkoYMD) {
@@ -274,7 +275,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 限度額管理期間数のgetメソッドです。
-     * 
+     *
      * @return 限度額管理期間数
      */
     public RString getGendoGakuKanriKikanSu() {
@@ -283,7 +284,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 限度額管理期間数のsetメソッドです。
-     * 
+     *
      * @param gendoGakuKanriKikanSu 限度額管理期間数
      */
     public void setGendoGakuKanriKikanSu(RString gendoGakuKanriKikanSu) {
@@ -292,7 +293,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 新体系管理区分のgetメソッドです。
-     * 
+     *
      * @return 新体系管理区分
      */
     public RString getShinTaikeiKanriKubun() {
@@ -301,7 +302,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 新体系管理区分のsetメソッドです。
-     * 
+     *
      * @param shinTaikeiKanriKubun 新体系管理区分
      */
     public void setShinTaikeiKanriKubun(RString shinTaikeiKanriKubun) {
@@ -310,7 +311,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 新体系拡大適用有無のgetメソッドです。
-     * 
+     *
      * @return 新体系拡大適用有無
      */
     public RString getShinTaikeiKakudaiTekiyoUmu() {
@@ -319,7 +320,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * 新体系拡大適用有無のsetメソッドです。
-     * 
+     *
      * @param shinTaikeiKakudaiTekiyoUmu 新体系拡大適用有無
      */
     public void setShinTaikeiKakudaiTekiyoUmu(RString shinTaikeiKakudaiTekiyoUmu) {
@@ -328,9 +329,9 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * このエンティティの主キーが他の{@literal DbT7116JukyushaGendoGakuKanriEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7116JukyushaGendoGakuKanriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -375,6 +376,7 @@ public class DbT7116JukyushaGendoGakuKanriEntity extends DbTableEntityBase<DbT71
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

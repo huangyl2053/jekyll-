@@ -9,12 +9,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
 
 /**
  * 申請書採番管理テーブルのエンティティクラスです。
  */
 public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT7201ShinseishoSaibanKanriEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7201ShinseishoSaibanKanri");
 
@@ -27,7 +29,7 @@ public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT720
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD001ShichosonCode shichosonCode;
+    private ShichosonCode shichosonCode;
     @PrimaryKey
     private FlexibleYearMonth nengetsu;
     private int currentNumber;
@@ -37,7 +39,7 @@ public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT720
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -46,7 +48,7 @@ public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT720
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -55,7 +57,7 @@ public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT720
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -64,17 +66,16 @@ public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT720
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -83,25 +84,25 @@ public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT720
 
     /**
      * 市町村コードのgetメソッドです。
-     * 
+     *
      * @return 市町村コード
      */
-    public DbUDD001ShichosonCode getShichosonCode() {
+    public ShichosonCode getShichosonCode() {
         return shichosonCode;
     }
 
     /**
      * 市町村コードのsetメソッドです。
-     * 
+     *
      * @param shichosonCode 市町村コード
      */
-    public void setShichosonCode(DbUDD001ShichosonCode shichosonCode) {
+    public void setShichosonCode(ShichosonCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
     /**
      * 年月のgetメソッドです。
-     * 
+     *
      * @return 年月
      */
     public FlexibleYearMonth getNengetsu() {
@@ -110,7 +111,7 @@ public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT720
 
     /**
      * 年月のsetメソッドです。
-     * 
+     *
      * @param nengetsu 年月
      */
     public void setNengetsu(FlexibleYearMonth nengetsu) {
@@ -119,7 +120,7 @@ public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT720
 
     /**
      * 現在の番号のgetメソッドです。
-     * 
+     *
      * @return 現在の番号
      */
     public int getCurrentNumber() {
@@ -128,7 +129,7 @@ public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT720
 
     /**
      * 現在の番号のsetメソッドです。
-     * 
+     *
      * @param currentNumber 現在の番号
      */
     public void setCurrentNumber(int currentNumber) {
@@ -137,7 +138,7 @@ public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT720
 
     /**
      * 開始番号のgetメソッドです。
-     * 
+     *
      * @return 開始番号
      */
     public int getMinNumber() {
@@ -146,7 +147,7 @@ public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT720
 
     /**
      * 開始番号のsetメソッドです。
-     * 
+     *
      * @param minNumber 開始番号
      */
     public void setMinNumber(int minNumber) {
@@ -155,7 +156,7 @@ public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT720
 
     /**
      * 終了番号のgetメソッドです。
-     * 
+     *
      * @return 終了番号
      */
     public int getMaxNumber() {
@@ -164,7 +165,7 @@ public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT720
 
     /**
      * 終了番号のsetメソッドです。
-     * 
+     *
      * @param maxNumber 終了番号
      */
     public void setMaxNumber(int maxNumber) {
@@ -173,7 +174,7 @@ public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT720
 
     /**
      * 増分値のgetメソッドです。
-     * 
+     *
      * @return 増分値
      */
     public int getIncrement() {
@@ -182,7 +183,7 @@ public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT720
 
     /**
      * 増分値のsetメソッドです。
-     * 
+     *
      * @param increment 増分値
      */
     public void setIncrement(int increment) {
@@ -191,9 +192,9 @@ public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT720
 
     /**
      * このエンティティの主キーが他の{@literal DbT7201ShinseishoSaibanKanriEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7201ShinseishoSaibanKanriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -225,6 +226,7 @@ public class DbT7201ShinseishoSaibanKanriEntity extends DbTableEntityBase<DbT720
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

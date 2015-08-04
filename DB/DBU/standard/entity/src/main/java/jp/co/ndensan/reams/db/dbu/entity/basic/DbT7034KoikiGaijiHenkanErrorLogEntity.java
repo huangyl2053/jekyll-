@@ -10,12 +10,14 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 
 /**
  * 広域外字変換エラーログテーブルのエンティティクラスです。
  */
 public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT7034KoikiGaijiHenkanErrorLogEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7034KoikiGaijiHenkanErrorLog");
 
@@ -41,7 +43,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
     private ShikibetsuCode jukiShikibetsuCode;
     private RString kakuninKubun;
     private ShikibetsuCode shikibetsuCode;
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     private RString recoadNo;
     private RString errorKomokuMeisho;
     private RString errorKomokuNo;
@@ -53,7 +55,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -62,7 +64,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -71,7 +73,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -80,17 +82,16 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -99,7 +100,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 処理番号のgetメソッドです。
-     * 
+     *
      * @return 処理番号
      */
     public RString getShoriNo() {
@@ -108,7 +109,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 処理番号のsetメソッドです。
-     * 
+     *
      * @param shoriNo 処理番号
      */
     public void setShoriNo(RString shoriNo) {
@@ -117,7 +118,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 連番のgetメソッドです。
-     * 
+     *
      * @return 連番
      */
     public RString getRenNo() {
@@ -126,7 +127,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 連番のsetメソッドです。
-     * 
+     *
      * @param renNo 連番
      */
     public void setRenNo(RString renNo) {
@@ -135,7 +136,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 市町村番号のgetメソッドです。
-     * 
+     *
      * @return 市町村番号
      */
     public LasdecCode getShichosonCode() {
@@ -144,7 +145,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 市町村番号のsetメソッドです。
-     * 
+     *
      * @param shichosonCode 市町村番号
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -153,7 +154,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 種別のgetメソッドです。
-     * 
+     *
      * @return 種別
      */
     public RString getShubetsu() {
@@ -162,7 +163,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 種別のsetメソッドです。
-     * 
+     *
      * @param shubetsu 種別
      */
     public void setShubetsu(RString shubetsu) {
@@ -171,7 +172,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -180,7 +181,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -189,7 +190,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 送信元市町村コードのgetメソッドです。
-     * 
+     *
      * @return 送信元市町村コード
      */
     public LasdecCode getMotoShichosonCode() {
@@ -198,7 +199,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 送信元市町村コードのsetメソッドです。
-     * 
+     *
      * @param motoShichosonCode 送信元市町村コード
      */
     public void setMotoShichosonCode(LasdecCode motoShichosonCode) {
@@ -207,7 +208,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 送信元市町村名称のgetメソッドです。
-     * 
+     *
      * @return 送信元市町村名称
      */
     public RString getMotoShichosonMeisho() {
@@ -216,7 +217,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 送信元市町村名称のsetメソッドです。
-     * 
+     *
      * @param motoShichosonMeisho 送信元市町村名称
      */
     public void setMotoShichosonMeisho(RString motoShichosonMeisho) {
@@ -225,7 +226,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 送信先市町村コードのgetメソッドです。
-     * 
+     *
      * @return 送信先市町村コード
      */
     public LasdecCode getSakiShichosonCode() {
@@ -234,7 +235,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 送信先市町村コードのsetメソッドです。
-     * 
+     *
      * @param sakiShichosonCode 送信先市町村コード
      */
     public void setSakiShichosonCode(LasdecCode sakiShichosonCode) {
@@ -243,7 +244,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 送信先市町村名称のgetメソッドです。
-     * 
+     *
      * @return 送信先市町村名称
      */
     public RString getSakiShichosonMeisho() {
@@ -252,7 +253,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 送信先市町村名称のsetメソッドです。
-     * 
+     *
      * @param sakiShichosonMeisho 送信先市町村名称
      */
     public void setSakiShichosonMeisho(RString sakiShichosonMeisho) {
@@ -261,7 +262,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 住基識別コードのgetメソッドです。
-     * 
+     *
      * @return 住基識別コード
      */
     public ShikibetsuCode getJukiShikibetsuCode() {
@@ -270,7 +271,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 住基識別コードのsetメソッドです。
-     * 
+     *
      * @param jukiShikibetsuCode 住基識別コード
      */
     public void setJukiShikibetsuCode(ShikibetsuCode jukiShikibetsuCode) {
@@ -279,7 +280,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 確認区分のgetメソッドです。
-     * 
+     *
      * @return 確認区分
      */
     public RString getKakuninKubun() {
@@ -288,7 +289,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 確認区分のsetメソッドです。
-     * 
+     *
      * @param kakuninKubun 確認区分
      */
     public void setKakuninKubun(RString kakuninKubun) {
@@ -297,7 +298,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 識別コードのgetメソッドです。
-     * 
+     *
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -306,7 +307,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 識別コードのsetメソッドです。
-     * 
+     *
      * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -315,25 +316,25 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * レコードＮｏのgetメソッドです。
-     * 
+     *
      * @return レコードＮｏ
      */
     public RString getRecoadNo() {
@@ -342,7 +343,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * レコードＮｏのsetメソッドです。
-     * 
+     *
      * @param recoadNo レコードＮｏ
      */
     public void setRecoadNo(RString recoadNo) {
@@ -351,7 +352,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 変換エラーフィールド名称のgetメソッドです。
-     * 
+     *
      * @return 変換エラーフィールド名称
      */
     public RString getErrorKomokuMeisho() {
@@ -360,7 +361,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 変換エラーフィールド名称のsetメソッドです。
-     * 
+     *
      * @param errorKomokuMeisho 変換エラーフィールド名称
      */
     public void setErrorKomokuMeisho(RString errorKomokuMeisho) {
@@ -369,7 +370,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 変換エラーフィールドＮｏのgetメソッドです。
-     * 
+     *
      * @return 変換エラーフィールドＮｏ
      */
     public RString getErrorKomokuNo() {
@@ -378,7 +379,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 変換エラーフィールドＮｏのsetメソッドです。
-     * 
+     *
      * @param errorKomokuNo 変換エラーフィールドＮｏ
      */
     public void setErrorKomokuNo(RString errorKomokuNo) {
@@ -387,7 +388,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 変換エラーコードのgetメソッドです。
-     * 
+     *
      * @return 変換エラーコード
      */
     public RString getErrorCode() {
@@ -396,7 +397,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * 変換エラーコードのsetメソッドです。
-     * 
+     *
      * @param errorCode 変換エラーコード
      */
     public void setErrorCode(RString errorCode) {
@@ -405,7 +406,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * エラー表示連番のgetメソッドです。
-     * 
+     *
      * @return エラー表示連番
      */
     public RString getErrorHyojiRenban() {
@@ -414,7 +415,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * エラー表示連番のsetメソッドです。
-     * 
+     *
      * @param errorHyojiRenban エラー表示連番
      */
     public void setErrorHyojiRenban(RString errorHyojiRenban) {
@@ -423,7 +424,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * エラー表示フィールド名称のgetメソッドです。
-     * 
+     *
      * @return エラー表示フィールド名称
      */
     public RString getErrorHyojiKomokuMeisho() {
@@ -432,7 +433,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * エラー表示フィールド名称のsetメソッドです。
-     * 
+     *
      * @param errorHyojiKomokuMeisho エラー表示フィールド名称
      */
     public void setErrorHyojiKomokuMeisho(RString errorHyojiKomokuMeisho) {
@@ -441,7 +442,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * エラー表示フィールドのgetメソッドです。
-     * 
+     *
      * @return エラー表示フィールド
      */
     public RString getErrorHyojiKomoku() {
@@ -450,7 +451,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * エラー表示フィールドのsetメソッドです。
-     * 
+     *
      * @param errorHyojiKomoku エラー表示フィールド
      */
     public void setErrorHyojiKomoku(RString errorHyojiKomoku) {
@@ -459,9 +460,9 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * このエンティティの主キーが他の{@literal DbT7034KoikiGaijiHenkanErrorLogEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7034KoikiGaijiHenkanErrorLogEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -510,6 +511,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

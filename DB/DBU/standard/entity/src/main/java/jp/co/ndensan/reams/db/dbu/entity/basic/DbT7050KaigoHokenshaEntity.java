@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 介護保険者テーブルのエンティティクラスです。
@@ -16,6 +17,7 @@ import java.util.Objects;
  */
 public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHokenshaEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7050KaigoHokensha");
 
@@ -29,11 +31,11 @@ public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHo
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
     private LasdecCode shichosonCode;
-    private DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -42,7 +44,7 @@ public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHo
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -51,7 +53,7 @@ public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHo
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -60,17 +62,16 @@ public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHo
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -79,7 +80,7 @@ public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHo
 
     /**
      * 市町村コードのgetメソッドです。
-     * 
+     *
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
@@ -88,7 +89,7 @@ public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHo
 
     /**
      * 市町村コードのsetメソッドです。
-     * 
+     *
      * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -97,27 +98,27 @@ public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHo
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD015ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * このエンティティの主キーが他の{@literal DbT7050KaigoHokenshaEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7050KaigoHokenshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -142,6 +143,7 @@ public class DbT7050KaigoHokenshaEntity extends DbTableEntityBase<DbT7050KaigoHo
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

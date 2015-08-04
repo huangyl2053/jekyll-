@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 
 /**
  * 証交付回収テーブルのエンティティクラスです。
@@ -19,6 +20,7 @@ import java.util.Objects;
  */
 public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofuKaishuEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7037ShoKofuKaishu");
 
@@ -31,7 +33,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private RString kofuShoShurui;
     @PrimaryKey
@@ -53,7 +55,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -62,7 +64,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -71,7 +73,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -80,17 +82,16 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -99,19 +100,19 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -119,7 +120,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
      * 交付証種類のgetメソッドです。
      * <br/>
      * <br/>コード定義
-     * 
+     *
      * @return 交付証種類
      */
     public RString getKofuShoShurui() {
@@ -130,7 +131,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
      * 交付証種類のsetメソッドです。
      * <br/>
      * <br/>コード定義
-     * 
+     *
      * @param kofuShoShurui 交付証種類
      */
     public void setKofuShoShurui(RString kofuShoShurui) {
@@ -139,7 +140,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -148,7 +149,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -157,7 +158,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 市町村コードのgetメソッドです。
-     * 
+     *
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
@@ -166,7 +167,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 市町村コードのsetメソッドです。
-     * 
+     *
      * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -175,7 +176,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 識別コードのgetメソッドです。
-     * 
+     *
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -184,7 +185,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 識別コードのsetメソッドです。
-     * 
+     *
      * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -193,7 +194,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 交付年月日のgetメソッドです。
-     * 
+     *
      * @return 交付年月日
      */
     public FlexibleDate getKofuYMD() {
@@ -202,7 +203,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 交付年月日のsetメソッドです。
-     * 
+     *
      * @param kofuYMD 交付年月日
      */
     public void setKofuYMD(FlexibleDate kofuYMD) {
@@ -211,7 +212,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 有効期限のgetメソッドです。
-     * 
+     *
      * @return 有効期限
      */
     public FlexibleDate getYukoKigenYMD() {
@@ -220,7 +221,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 有効期限のsetメソッドです。
-     * 
+     *
      * @param yukoKigenYMD 有効期限
      */
     public void setYukoKigenYMD(FlexibleDate yukoKigenYMD) {
@@ -231,7 +232,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
      * 交付事由のgetメソッドです。
      * <br/>
      * <br/>コード定義
-     * 
+     *
      * @return 交付事由
      */
     public RString getKofuJiyu() {
@@ -242,7 +243,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
      * 交付事由のsetメソッドです。
      * <br/>
      * <br/>コード定義
-     * 
+     *
      * @param kofuJiyu 交付事由
      */
     public void setKofuJiyu(RString kofuJiyu) {
@@ -251,7 +252,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 交付理由のgetメソッドです。
-     * 
+     *
      * @return 交付理由
      */
     public RString getKofuRiyu() {
@@ -260,7 +261,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 交付理由のsetメソッドです。
-     * 
+     *
      * @param kofuRiyu 交付理由
      */
     public void setKofuRiyu(RString kofuRiyu) {
@@ -269,7 +270,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 回収年月日のgetメソッドです。
-     * 
+     *
      * @return 回収年月日
      */
     public FlexibleDate getKaishuYMD() {
@@ -278,7 +279,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 回収年月日のsetメソッドです。
-     * 
+     *
      * @param kaishuYMD 回収年月日
      */
     public void setKaishuYMD(FlexibleDate kaishuYMD) {
@@ -289,7 +290,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
      * 回収事由のgetメソッドです。
      * <br/>
      * <br/>コード定義
-     * 
+     *
      * @return 回収事由
      */
     public RString getKaishuJiyu() {
@@ -300,7 +301,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
      * 回収事由のsetメソッドです。
      * <br/>
      * <br/>コード定義
-     * 
+     *
      * @param kaishuJiyu 回収事由
      */
     public void setKaishuJiyu(RString kaishuJiyu) {
@@ -309,7 +310,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 回収理由のgetメソッドです。
-     * 
+     *
      * @return 回収理由
      */
     public RString getKaishuRiyu() {
@@ -318,7 +319,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 回収理由のsetメソッドです。
-     * 
+     *
      * @param kaishuRiyu 回収理由
      */
     public void setKaishuRiyu(RString kaishuRiyu) {
@@ -329,7 +330,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
      * 単票発行有無フラグのgetメソッドです。
      * <br/>
      * <br/>True：単票発行した、False：単票発行していない
-     * 
+     *
      * @return 単票発行有無フラグ
      */
     public boolean getTanpyoHakkoUmuFlag() {
@@ -340,7 +341,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
      * 単票発行有無フラグのsetメソッドです。
      * <br/>
      * <br/>True：単票発行した、False：単票発行していない
-     * 
+     *
      * @param tanpyoHakkoUmuFlag 単票発行有無フラグ
      */
     public void setTanpyoHakkoUmuFlag(boolean tanpyoHakkoUmuFlag) {
@@ -349,7 +350,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 発行処理日時のgetメソッドです。
-     * 
+     *
      * @return 発行処理日時
      */
     public YMDHMS getHakkoShoriTimestamp() {
@@ -358,7 +359,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 発行処理日時のsetメソッドです。
-     * 
+     *
      * @param hakkoShoriTimestamp 発行処理日時
      */
     public void setHakkoShoriTimestamp(YMDHMS hakkoShoriTimestamp) {
@@ -369,7 +370,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
      * 新様式印書済区分コードのgetメソッドです。
      * <br/>
      * <br/>00：初期値、01：新様式印書済
-     * 
+     *
      * @return 新様式印書済区分コード
      */
     public RString getShinYoshikiSumiKubunCode() {
@@ -380,7 +381,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
      * 新様式印書済区分コードのsetメソッドです。
      * <br/>
      * <br/>00：初期値、01：新様式印書済
-     * 
+     *
      * @param shinYoshikiSumiKubunCode 新様式印書済区分コード
      */
     public void setShinYoshikiSumiKubunCode(RString shinYoshikiSumiKubunCode) {
@@ -391,7 +392,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
      * 証様式区分コードのgetメソッドです。
      * <br/>
      * <br/>00：旧様式、01：新様式、02：新様式２
-     * 
+     *
      * @return 証様式区分コード
      */
     public RString getShoYoshikiKubunCode() {
@@ -402,7 +403,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
      * 証様式区分コードのsetメソッドです。
      * <br/>
      * <br/>00：旧様式、01：新様式、02：新様式２
-     * 
+     *
      * @param shoYoshikiKubunCode 証様式区分コード
      */
     public void setShoYoshikiKubunCode(RString shoYoshikiKubunCode) {
@@ -411,7 +412,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 論理削除フラグのgetメソッドです。
-     * 
+     *
      * @return 論理削除フラグ
      */
     public boolean getLogicalDeletedFlag() {
@@ -420,7 +421,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * 論理削除フラグのsetメソッドです。
-     * 
+     *
      * @param logicalDeletedFlag 論理削除フラグ
      */
     public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
@@ -429,9 +430,9 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * このエンティティの主キーが他の{@literal DbT7037ShoKofuKaishuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7037ShoKofuKaishuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -477,6 +478,7 @@ public class DbT7037ShoKofuKaishuEntity extends DbTableEntityBase<DbT7037ShoKofu
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

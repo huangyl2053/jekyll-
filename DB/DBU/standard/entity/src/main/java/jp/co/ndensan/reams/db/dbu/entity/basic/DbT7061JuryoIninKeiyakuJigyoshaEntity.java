@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 
 /**
  * 受領委任契約事業者テーブルのエンティティクラスです。
@@ -19,6 +20,7 @@ import java.util.Objects;
  */
 public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT7061JuryoIninKeiyakuJigyoshaEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7061JuryoIninKeiyakuJigyosha");
 
@@ -31,7 +33,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private UDD060KaigoJigyoshaNo jigyoshaNo;
+    private KaigoJigyoshaNo jigyoshaNo;
     @PrimaryKey
     private FlexibleDate keiyakuKaishiYMD;
     private FlexibleDate keiyakuShuryoYMD;
@@ -44,7 +46,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -53,7 +55,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -62,7 +64,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -71,17 +73,16 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -90,25 +91,25 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 受領委任契約事業者番号のgetメソッドです。
-     * 
+     *
      * @return 受領委任契約事業者番号
      */
-    public UDD060KaigoJigyoshaNo getJigyoshaNo() {
+    public KaigoJigyoshaNo getJigyoshaNo() {
         return jigyoshaNo;
     }
 
     /**
      * 受領委任契約事業者番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshaNo 受領委任契約事業者番号
      */
-    public void setJigyoshaNo(UDD060KaigoJigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(KaigoJigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
     /**
      * 受領委任契約開始日のgetメソッドです。
-     * 
+     *
      * @return 受領委任契約開始日
      */
     public FlexibleDate getKeiyakuKaishiYMD() {
@@ -117,7 +118,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 受領委任契約開始日のsetメソッドです。
-     * 
+     *
      * @param keiyakuKaishiYMD 受領委任契約開始日
      */
     public void setKeiyakuKaishiYMD(FlexibleDate keiyakuKaishiYMD) {
@@ -126,7 +127,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 受領委任契約終了日のgetメソッドです。
-     * 
+     *
      * @return 受領委任契約終了日
      */
     public FlexibleDate getKeiyakuShuryoYMD() {
@@ -135,7 +136,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 受領委任契約終了日のsetメソッドです。
-     * 
+     *
      * @param keiyakuShuryoYMD 受領委任契約終了日
      */
     public void setKeiyakuShuryoYMD(FlexibleDate keiyakuShuryoYMD) {
@@ -144,7 +145,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 契約サービス種別のgetメソッドです。
-     * 
+     *
      * @return 契約サービス種別
      */
     public RString getServiceShubetsuCode() {
@@ -153,7 +154,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 契約サービス種別のsetメソッドです。
-     * 
+     *
      * @param serviceShubetsuCode 契約サービス種別
      */
     public void setServiceShubetsuCode(RString serviceShubetsuCode) {
@@ -162,7 +163,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 契約事業者郵便番号のgetメソッドです。
-     * 
+     *
      * @return 契約事業者郵便番号
      */
     public YubinNo getJigyoshaYubinNo() {
@@ -171,7 +172,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 契約事業者郵便番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshaYubinNo 契約事業者郵便番号
      */
     public void setJigyoshaYubinNo(YubinNo jigyoshaYubinNo) {
@@ -180,7 +181,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 契約事業者住所のgetメソッドです。
-     * 
+     *
      * @return 契約事業者住所
      */
     public AtenaJusho getJigyoshaJusho() {
@@ -189,7 +190,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 契約事業者住所のsetメソッドです。
-     * 
+     *
      * @param jigyoshaJusho 契約事業者住所
      */
     public void setJigyoshaJusho(AtenaJusho jigyoshaJusho) {
@@ -198,7 +199,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 契約事業者電話番号のgetメソッドです。
-     * 
+     *
      * @return 契約事業者電話番号
      */
     public TelNo getJigyoshaTelNo() {
@@ -207,7 +208,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 契約事業者電話番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshaTelNo 契約事業者電話番号
      */
     public void setJigyoshaTelNo(TelNo jigyoshaTelNo) {
@@ -216,7 +217,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 契約事業者FAX番号のgetメソッドです。
-     * 
+     *
      * @return 契約事業者FAX番号
      */
     public TelNo getJigyoshaFaxNo() {
@@ -225,7 +226,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 契約事業者FAX番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshaFaxNo 契約事業者FAX番号
      */
     public void setJigyoshaFaxNo(TelNo jigyoshaFaxNo) {
@@ -234,9 +235,9 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * このエンティティの主キーが他の{@literal DbT7061JuryoIninKeiyakuJigyoshaEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7061JuryoIninKeiyakuJigyoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -273,6 +274,7 @@ public class DbT7061JuryoIninKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

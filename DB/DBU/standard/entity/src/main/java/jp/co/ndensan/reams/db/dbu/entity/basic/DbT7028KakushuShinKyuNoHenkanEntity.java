@@ -8,12 +8,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 
 /**
  * 各種新旧番号変換テーブルテーブルのエンティティクラスです。
  */
 public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT7028KakushuShinKyuNoHenkanEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7028KakushuShinKyuNoHenkan");
 
@@ -26,7 +28,7 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private RString noKubun;
     private RString shinNo;
@@ -35,7 +37,7 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -44,7 +46,7 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -53,7 +55,7 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -62,17 +64,16 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -81,19 +82,19 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -101,7 +102,7 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
      * 番号区分のgetメソッドです。
      * <br/>
      * <br/>1：特別対策公費受給者番号（７桁）
-     * 
+     *
      * @return 番号区分
      */
     public RString getNoKubun() {
@@ -112,7 +113,7 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
      * 番号区分のsetメソッドです。
      * <br/>
      * <br/>1：特別対策公費受給者番号（７桁）
-     * 
+     *
      * @param noKubun 番号区分
      */
     public void setNoKubun(RString noKubun) {
@@ -121,7 +122,7 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
 
     /**
      * 新番号のgetメソッドです。
-     * 
+     *
      * @return 新番号
      */
     public RString getShinNo() {
@@ -130,7 +131,7 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
 
     /**
      * 新番号のsetメソッドです。
-     * 
+     *
      * @param shinNo 新番号
      */
     public void setShinNo(RString shinNo) {
@@ -139,7 +140,7 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
 
     /**
      * 旧番号のgetメソッドです。
-     * 
+     *
      * @return 旧番号
      */
     public RString getKyuNo() {
@@ -148,7 +149,7 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
 
     /**
      * 旧番号のsetメソッドです。
-     * 
+     *
      * @param kyuNo 旧番号
      */
     public void setKyuNo(RString kyuNo) {
@@ -157,9 +158,9 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
 
     /**
      * このエンティティの主キーが他の{@literal DbT7028KakushuShinKyuNoHenkanEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7028KakushuShinKyuNoHenkanEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -192,6 +193,7 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

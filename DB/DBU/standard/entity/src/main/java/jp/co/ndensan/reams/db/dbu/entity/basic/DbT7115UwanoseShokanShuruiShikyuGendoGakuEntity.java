@@ -10,12 +10,14 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 
 /**
  * 上乗せ償還払い給付種類支給限度額テーブルのエンティティクラスです。
  */
 public class DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity extends DbTableEntityBase<DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7115UwanoseShokanShuruiShikyuGendoGaku");
 
@@ -28,7 +30,7 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity extends DbTableEnti
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD005ServiceShuruiCode serviceShuruiCode;
+    private ServiceShuruiCode serviceShuruiCode;
     @PrimaryKey
     private FlexibleYearMonth tekiyoKaishiYM;
     @PrimaryKey
@@ -38,7 +40,7 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity extends DbTableEnti
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -47,7 +49,7 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity extends DbTableEnti
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -56,7 +58,7 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity extends DbTableEnti
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -65,17 +67,16 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity extends DbTableEnti
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -84,25 +85,25 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity extends DbTableEnti
 
     /**
      * サービス種類コードのgetメソッドです。
-     * 
+     *
      * @return サービス種類コード
      */
-    public DbUDD005ServiceShuruiCode getServiceShuruiCode() {
+    public ServiceShuruiCode getServiceShuruiCode() {
         return serviceShuruiCode;
     }
 
     /**
      * サービス種類コードのsetメソッドです。
-     * 
+     *
      * @param serviceShuruiCode サービス種類コード
      */
-    public void setServiceShuruiCode(DbUDD005ServiceShuruiCode serviceShuruiCode) {
+    public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
         this.serviceShuruiCode = serviceShuruiCode;
     }
 
     /**
      * 適用開始年月のgetメソッドです。
-     * 
+     *
      * @return 適用開始年月
      */
     public FlexibleYearMonth getTekiyoKaishiYM() {
@@ -111,7 +112,7 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity extends DbTableEnti
 
     /**
      * 適用開始年月のsetメソッドです。
-     * 
+     *
      * @param tekiyoKaishiYM 適用開始年月
      */
     public void setTekiyoKaishiYM(FlexibleYearMonth tekiyoKaishiYM) {
@@ -120,7 +121,7 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity extends DbTableEnti
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -129,7 +130,7 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity extends DbTableEnti
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -138,7 +139,7 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity extends DbTableEnti
 
     /**
      * 適用終了年月のgetメソッドです。
-     * 
+     *
      * @return 適用終了年月
      */
     public FlexibleYearMonth getTekiyoShuryoYM() {
@@ -147,7 +148,7 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity extends DbTableEnti
 
     /**
      * 適用終了年月のsetメソッドです。
-     * 
+     *
      * @param tekiyoShuryoYM 適用終了年月
      */
     public void setTekiyoShuryoYM(FlexibleYearMonth tekiyoShuryoYM) {
@@ -158,7 +159,7 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity extends DbTableEnti
      * 支給限度単位数のgetメソッドです。
      * <br/>
      * <br/>上乗せ後
-     * 
+     *
      * @return 支給限度単位数
      */
     public Decimal getShikyuGendoTaniSu() {
@@ -169,7 +170,7 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity extends DbTableEnti
      * 支給限度単位数のsetメソッドです。
      * <br/>
      * <br/>上乗せ後
-     * 
+     *
      * @param shikyuGendoTaniSu 支給限度単位数
      */
     public void setShikyuGendoTaniSu(Decimal shikyuGendoTaniSu) {
@@ -178,9 +179,9 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity extends DbTableEnti
 
     /**
      * このエンティティの主キーが他の{@literal DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -214,6 +215,7 @@ public class DbT7115UwanoseShokanShuruiShikyuGendoGakuEntity extends DbTableEnti
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

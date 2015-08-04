@@ -10,6 +10,8 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 弁明内容テーブルのエンティティクラスです。
@@ -17,6 +19,7 @@ import java.util.Objects;
  */
 public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNaiyoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7002BemmeiNaiyo");
 
@@ -29,11 +32,11 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
-    private DbUDD002HihokenshaNo genshobunHihokenshaNo;
+    private HihokenshaNo genshobunHihokenshaNo;
     @PrimaryKey
     private FlexibleDate shinsaseikyuTodokedeYMD;
     @PrimaryKey
@@ -44,7 +47,7 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -53,7 +56,7 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -62,7 +65,7 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -71,17 +74,16 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -90,25 +92,25 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD015ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * 識別コードのgetメソッドです。
-     * 
+     *
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -117,7 +119,7 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * 識別コードのsetメソッドです。
-     * 
+     *
      * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -126,25 +128,25 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * 原処分被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 原処分被保険者番号
      */
-    public DbUDD002HihokenshaNo getGenshobunHihokenshaNo() {
+    public HihokenshaNo getGenshobunHihokenshaNo() {
         return genshobunHihokenshaNo;
     }
 
     /**
      * 原処分被保険者番号のsetメソッドです。
-     * 
+     *
      * @param genshobunHihokenshaNo 原処分被保険者番号
      */
-    public void setGenshobunHihokenshaNo(DbUDD002HihokenshaNo genshobunHihokenshaNo) {
+    public void setGenshobunHihokenshaNo(HihokenshaNo genshobunHihokenshaNo) {
         this.genshobunHihokenshaNo = genshobunHihokenshaNo;
     }
 
     /**
      * 審査請求届出日のgetメソッドです。
-     * 
+     *
      * @return 審査請求届出日
      */
     public FlexibleDate getShinsaseikyuTodokedeYMD() {
@@ -153,7 +155,7 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * 審査請求届出日のsetメソッドです。
-     * 
+     *
      * @param shinsaseikyuTodokedeYMD 審査請求届出日
      */
     public void setShinsaseikyuTodokedeYMD(FlexibleDate shinsaseikyuTodokedeYMD) {
@@ -162,7 +164,7 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * 弁明書作成日のgetメソッドです。
-     * 
+     *
      * @return 弁明書作成日
      */
     public FlexibleDate getBemmeishoSakuseiYMD() {
@@ -171,7 +173,7 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * 弁明書作成日のsetメソッドです。
-     * 
+     *
      * @param bemmeishoSakuseiYMD 弁明書作成日
      */
     public void setBemmeishoSakuseiYMD(FlexibleDate bemmeishoSakuseiYMD) {
@@ -180,7 +182,7 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * 審査請求に係る処分内容のgetメソッドです。
-     * 
+     *
      * @return 審査請求に係る処分内容
      */
     public RString getShinsaseikyuKankeiShobunNaiyo() {
@@ -189,7 +191,7 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * 審査請求に係る処分内容のsetメソッドです。
-     * 
+     *
      * @param shinsaseikyuKankeiShobunNaiyo 審査請求に係る処分内容
      */
     public void setShinsaseikyuKankeiShobunNaiyo(RString shinsaseikyuKankeiShobunNaiyo) {
@@ -198,7 +200,7 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * 弁明内容のgetメソッドです。
-     * 
+     *
      * @return 弁明内容
      */
     public RString getBemmeiNaiyo() {
@@ -207,7 +209,7 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * 弁明内容のsetメソッドです。
-     * 
+     *
      * @param bemmeiNaiyo 弁明内容
      */
     public void setBemmeiNaiyo(RString bemmeiNaiyo) {
@@ -216,7 +218,7 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * 弁明書作成日提出日のgetメソッドです。
-     * 
+     *
      * @return 弁明書作成日提出日
      */
     public FlexibleDate getBemmeishoSakuseiTeishutsuYMD() {
@@ -225,7 +227,7 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * 弁明書作成日提出日のsetメソッドです。
-     * 
+     *
      * @param bemmeishoSakuseiTeishutsuYMD 弁明書作成日提出日
      */
     public void setBemmeishoSakuseiTeishutsuYMD(FlexibleDate bemmeishoSakuseiTeishutsuYMD) {
@@ -234,9 +236,9 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * このエンティティの主キーが他の{@literal DbT7002BemmeiNaiyoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7002BemmeiNaiyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -279,6 +281,7 @@ public class DbT7002BemmeiNaiyoEntity extends DbTableEntityBase<DbT7002BemmeiNai
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
