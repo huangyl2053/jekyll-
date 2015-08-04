@@ -44,7 +44,7 @@ public class DbT5602ShujiiIkenshoHoshuJissekiJohoEntity extends DbTableEntityBas
     private int ikenshoHoshu;
     private FlexibleDate hoshuShiharaiYMD;
     private RString hoshuShiharaiMemo;
-    private boolean isGinkoFurikomiShutsuryoku;
+    private boolean ginkoFurikomiShutsuryokuFlag;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -94,6 +94,8 @@ public class DbT5602ShujiiIkenshoHoshuJissekiJohoEntity extends DbTableEntityBas
 
     /**
      * 主治医医療機関コードのgetメソッドです。
+     * <br/>
+     * <br/>主治医医療機関情報
      * 
      * @return 主治医医療機関コード
      */
@@ -103,6 +105,8 @@ public class DbT5602ShujiiIkenshoHoshuJissekiJohoEntity extends DbTableEntityBas
 
     /**
      * 主治医医療機関コードのsetメソッドです。
+     * <br/>
+     * <br/>主治医医療機関情報
      * 
      * @param shujiiIryoKikanCode 主治医医療機関コード
      */
@@ -112,6 +116,8 @@ public class DbT5602ShujiiIkenshoHoshuJissekiJohoEntity extends DbTableEntityBas
 
     /**
      * 主治医コードのgetメソッドです。
+     * <br/>
+     * <br/>主治医情報
      * 
      * @return 主治医コード
      */
@@ -121,6 +127,8 @@ public class DbT5602ShujiiIkenshoHoshuJissekiJohoEntity extends DbTableEntityBas
 
     /**
      * 主治医コードのsetメソッドです。
+     * <br/>
+     * <br/>主治医情報
      * 
      * @param shujiiCode 主治医コード
      */
@@ -130,6 +138,8 @@ public class DbT5602ShujiiIkenshoHoshuJissekiJohoEntity extends DbTableEntityBas
 
     /**
      * 申請書管理番号のgetメソッドです。
+     * <br/>
+     * <br/>要介護認定申請情報
      * 
      * @return 申請書管理番号
      */
@@ -139,6 +149,8 @@ public class DbT5602ShujiiIkenshoHoshuJissekiJohoEntity extends DbTableEntityBas
 
     /**
      * 申請書管理番号のsetメソッドです。
+     * <br/>
+     * <br/>要介護認定申請情報
      * 
      * @param shinseishoKanriNo 申請書管理番号
      */
@@ -148,6 +160,8 @@ public class DbT5602ShujiiIkenshoHoshuJissekiJohoEntity extends DbTableEntityBas
 
     /**
      * 主治医意見書作成依頼履歴番号のgetメソッドです。
+     * <br/>
+     * <br/>主治医意見書作成依頼情報
      * 
      * @return 主治医意見書作成依頼履歴番号
      */
@@ -157,6 +171,8 @@ public class DbT5602ShujiiIkenshoHoshuJissekiJohoEntity extends DbTableEntityBas
 
     /**
      * 主治医意見書作成依頼履歴番号のsetメソッドです。
+     * <br/>
+     * <br/>主治医意見書作成依頼情報
      * 
      * @param ikenshoIraiRirekiNo 主治医意見書作成依頼履歴番号
      */
@@ -220,6 +236,8 @@ public class DbT5602ShujiiIkenshoHoshuJissekiJohoEntity extends DbTableEntityBas
 
     /**
      * 医師区分コードのgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：医師区分コード）
      * 
      * @return 医師区分コード
      */
@@ -229,6 +247,8 @@ public class DbT5602ShujiiIkenshoHoshuJissekiJohoEntity extends DbTableEntityBas
 
     /**
      * 医師区分コードのsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：医師区分コード）
      * 
      * @param ishiKubunCode 医師区分コード
      */
@@ -327,21 +347,25 @@ public class DbT5602ShujiiIkenshoHoshuJissekiJohoEntity extends DbTableEntityBas
     }
 
     /**
-     * 銀行振込出力済フラグのgetメソッドです。
+     * 銀行振込出力フラグのgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：銀行振込出力フラグ）
      * 
-     * @return 銀行振込出力済フラグ
+     * @return 銀行振込出力フラグ
      */
-    public boolean getIsGinkoFurikomiShutsuryoku() {
-        return isGinkoFurikomiShutsuryoku;
+    public boolean getGinkoFurikomiShutsuryokuFlag() {
+        return ginkoFurikomiShutsuryokuFlag;
     }
 
     /**
-     * 銀行振込出力済フラグのsetメソッドです。
+     * 銀行振込出力フラグのsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：銀行振込出力フラグ）
      * 
-     * @param isGinkoFurikomiShutsuryoku 銀行振込出力済フラグ
+     * @param ginkoFurikomiShutsuryokuFlag 銀行振込出力フラグ
      */
-    public void setIsGinkoFurikomiShutsuryoku(boolean isGinkoFurikomiShutsuryoku) {
-        this.isGinkoFurikomiShutsuryoku = isGinkoFurikomiShutsuryoku;
+    public void setGinkoFurikomiShutsuryokuFlag(boolean ginkoFurikomiShutsuryokuFlag) {
+        this.ginkoFurikomiShutsuryokuFlag = ginkoFurikomiShutsuryokuFlag;
     }
 
     /**
@@ -389,7 +413,7 @@ public class DbT5602ShujiiIkenshoHoshuJissekiJohoEntity extends DbTableEntityBas
         this.ikenshoHoshu = entity.ikenshoHoshu;
         this.hoshuShiharaiYMD = entity.hoshuShiharaiYMD;
         this.hoshuShiharaiMemo = entity.hoshuShiharaiMemo;
-        this.isGinkoFurikomiShutsuryoku = entity.isGinkoFurikomiShutsuryoku;
+        this.ginkoFurikomiShutsuryokuFlag = entity.ginkoFurikomiShutsuryokuFlag;
     }
 
     /**
@@ -398,8 +422,9 @@ public class DbT5602ShujiiIkenshoHoshuJissekiJohoEntity extends DbTableEntityBas
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shujiiIryoKikanCode, shujiiCode, shinseishoKanriNo, ikenshoIraiRirekiNo, iraishoSakuseiIraiYMD, ikenshoKinyuYMD, ikenshoJuryoYMD, ishiKubunCode, ikenshoSakuseiryo, ikenshoBettoShinryohi, ikenshoHoshu, hoshuShiharaiYMD, hoshuShiharaiMemo, isGinkoFurikomiShutsuryoku);
+        return super.toMd5(shujiiIryoKikanCode, shujiiCode, shinseishoKanriNo, ikenshoIraiRirekiNo, iraishoSakuseiIraiYMD, ikenshoKinyuYMD, ikenshoJuryoYMD, ishiKubunCode, ikenshoSakuseiryo, ikenshoBettoShinryohi, ikenshoHoshu, hoshuShiharaiYMD, hoshuShiharaiMemo, ginkoFurikomiShutsuryokuFlag);
     }
 
 // </editor-fold>
+
 }

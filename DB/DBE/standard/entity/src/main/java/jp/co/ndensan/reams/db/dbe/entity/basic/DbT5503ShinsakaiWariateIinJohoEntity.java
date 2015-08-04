@@ -298,4 +298,5 @@ public class DbT5503ShinsakaiWariateIinJohoEntity extends DbTableEntityBase<DbT5
     }
 
 // </editor-fold>
+
 }

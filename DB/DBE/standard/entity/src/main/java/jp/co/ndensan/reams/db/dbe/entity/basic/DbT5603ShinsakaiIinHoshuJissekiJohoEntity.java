@@ -406,4 +406,5 @@ public class DbT5603ShinsakaiIinHoshuJissekiJohoEntity extends DbTableEntityBase
     }
 
 // </editor-fold>
+
 }

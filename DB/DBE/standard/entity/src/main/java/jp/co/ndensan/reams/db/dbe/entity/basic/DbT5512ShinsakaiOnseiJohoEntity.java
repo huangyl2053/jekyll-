@@ -172,4 +172,5 @@ public class DbT5512ShinsakaiOnseiJohoEntity extends DbTableEntityBase<DbT5512Sh
     }
 
 // </editor-fold>
+
 }

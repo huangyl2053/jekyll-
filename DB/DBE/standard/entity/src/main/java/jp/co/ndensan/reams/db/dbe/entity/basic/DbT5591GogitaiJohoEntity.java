@@ -353,4 +353,5 @@ public class DbT5591GogitaiJohoEntity extends DbTableEntityBase<DbT5591GogitaiJo
     }
 
 // </editor-fold>
+
 }

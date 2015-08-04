@@ -1,23 +1,21 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import java.util.Objects;
 
 /**
  * DbT7052KoseiShichosonShishoMasterの項目定義クラスです
  *
  */
 public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<DbT7052KoseiShichosonShishoMasterEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7052KoseiShichosonShishoMaster");
 
@@ -30,14 +28,14 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private LasdecCode shichosonCode;
     @PrimaryKey
-    private ShishoCode shishoCode;
+    private DbUDD014ShishoCode shishoCode;
     private RString shishoMei;
 
     /**
-     * getInsertDantaiCd
-     *
+     * insertDantaiCdのgetメソッドです。
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -45,8 +43,8 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
     }
 
     /**
-     * setInsertDantaiCd
-     *
+     * insertDantaiCdのsetメソッドです。
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -54,8 +52,8 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
     }
 
     /**
-     * getIsDeleted
-     *
+     * isDeletedのgetメソッドです。
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -63,17 +61,18 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
     }
 
     /**
-     * setIsDeleted
-     *
+     * isDeletedのsetメソッドです。
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
-     * setLastUpdateReamsLoginId
-     *
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -81,54 +80,54 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
     }
 
     /**
-     * getShoKisaiHokenshaNo
-     *
-     * @return shoKisaiHokenshaNo
+     * 市町村コードのgetメソッドです。
+     * 
+     * @return 市町村コード
      */
-    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
-        return shoKisaiHokenshaNo;
+    public LasdecCode getShichosonCode() {
+        return shichosonCode;
     }
 
     /**
-     * setShoKisaiHokenshaNo
-     *
-     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
+     * 市町村コードのsetメソッドです。
+     * 
+     * @param shichosonCode 市町村コード
      */
-    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
-        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
+    public void setShichosonCode(LasdecCode shichosonCode) {
+        this.shichosonCode = shichosonCode;
     }
 
     /**
-     * getShishoCode
-     *
-     * @return shishoCode
+     * 支所コードのgetメソッドです。
+     * 
+     * @return 支所コード
      */
-    public ShishoCode getShishoCode() {
+    public DbUDD014ShishoCode getShishoCode() {
         return shishoCode;
     }
 
     /**
-     * setShishoCode
-     *
-     * @param shishoCode shishoCode
+     * 支所コードのsetメソッドです。
+     * 
+     * @param shishoCode 支所コード
      */
-    public void setShishoCode(ShishoCode shishoCode) {
+    public void setShishoCode(DbUDD014ShishoCode shishoCode) {
         this.shishoCode = shishoCode;
     }
 
     /**
-     * getShishoMei
-     *
-     * @return shishoMei
+     * 支所名のgetメソッドです。
+     * 
+     * @return 支所名
      */
     public RString getShishoMei() {
         return shishoMei;
     }
 
     /**
-     * setShishoMei
-     *
-     * @param shishoMei shishoMei
+     * 支所名のsetメソッドです。
+     * 
+     * @param shishoMei 支所名
      */
     public void setShishoMei(RString shishoMei) {
         this.shishoMei = shishoMei;
@@ -136,9 +135,9 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
 
     /**
      * このエンティティの主キーが他の{@literal DbT7052KoseiShichosonShishoMasterEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return
+     * @@return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7052KoseiShichosonShishoMasterEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -146,7 +145,7 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shoKisaiHokenshaNo, other.shoKisaiHokenshaNo)) {
+        if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
             return false;
         }
         if (!Objects.equals(this.shishoCode, other.shishoCode)) {
@@ -160,20 +159,20 @@ public class DbT7052KoseiShichosonShishoMasterEntity extends DbTableEntityBase<D
      */
     @Override
     public void shallowCopy(DbT7052KoseiShichosonShishoMasterEntity entity) {
-        this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
+        this.shichosonCode = entity.shichosonCode;
         this.shishoCode = entity.shishoCode;
         this.shishoMei = entity.shishoMei;
     }
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shoKisaiHokenshaNo, shishoCode, shishoMei);
+        return super.toMd5(shichosonCode, shishoCode, shishoMei);
     }
 
 // </editor-fold>
+
 }

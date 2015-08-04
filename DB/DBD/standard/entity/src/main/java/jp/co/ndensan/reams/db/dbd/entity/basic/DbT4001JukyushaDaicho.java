@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.entity.basic;
+package jp.co.ndensan.reams.db.dbd.entity.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
@@ -57,6 +57,7 @@ public enum DbT4001JukyushaDaicho implements IColumnDefinition {
     edaban(2, 0),
     /**
      * 申請書管理番号
+     * <br/>要介護認定申請情報
      */
     shinseishoKanriNo(2147483647, 0),
     /**
@@ -102,7 +103,7 @@ public enum DbT4001JukyushaDaicho implements IColumnDefinition {
     jukyuShinseiYMD(2147483647, 0),
     /**
      * ２号特定疾病コード
-     * <br/>Enum（DBD：特定疾病コード）
+     * <br/>Enum（DBZ：特定疾病コード）
      */
     nigoTokuteiShippeiCode(2147483647, 0),
     /**
@@ -111,7 +112,7 @@ public enum DbT4001JukyushaDaicho implements IColumnDefinition {
     shinsakaiIraiYMD(2147483647, 0),
     /**
      * 要介護認定状態区分コード
-     * <br/>Enum（DBD：要介護状態区分コード（認定ｿﾌﾄ2009））
+     * <br/>Enum（DBZ：要介護状態区分コード99）
      */
     yokaigoJotaiKubunCode(2147483647, 0),
     /**
@@ -127,6 +128,11 @@ public enum DbT4001JukyushaDaicho implements IColumnDefinition {
      * <br/>認定年月日、却下年月日
      */
     ninteiYMD(2147483647, 0),
+    /**
+     * みなし要介護区分コード
+     * <br/>Enum（DBD：みなし要介護区分コード）
+     */
+    minashiCode(2147483647, 0),
     /**
      * 指定サービス種類01
      * <br/>Code（DBD：0002）

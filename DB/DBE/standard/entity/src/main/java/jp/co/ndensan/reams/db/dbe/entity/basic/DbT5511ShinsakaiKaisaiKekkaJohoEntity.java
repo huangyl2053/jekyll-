@@ -269,4 +269,5 @@ public class DbT5511ShinsakaiKaisaiKekkaJohoEntity extends DbTableEntityBase<DbT
     }
 
 // </editor-fold>
+
 }

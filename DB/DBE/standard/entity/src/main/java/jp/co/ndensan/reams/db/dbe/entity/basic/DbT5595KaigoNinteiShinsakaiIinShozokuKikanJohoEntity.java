@@ -353,4 +353,5 @@ public class DbT5595KaigoNinteiShinsakaiIinShozokuKikanJohoEntity extends DbTabl
     }
 
 // </editor-fold>
+
 }

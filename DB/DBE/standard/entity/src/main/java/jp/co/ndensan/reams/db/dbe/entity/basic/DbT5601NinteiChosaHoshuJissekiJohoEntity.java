@@ -281,4 +281,5 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
     }
 
 // </editor-fold>
+
 }

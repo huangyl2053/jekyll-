@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.entity.basic;
+package jp.co.ndensan.reams.db.dbd.entity.basic;
 
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
@@ -33,13 +33,13 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
     @PrimaryKey
     private LasdecCode shichosonCode;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private RString rirekiNo;
     @PrimaryKey
     private RString edaban;
     @PrimaryKey
-    private DbUDD013ShinseishoKanriNo shinseishoKanriNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
     private RString shinseiJokyoKubun;
     private RString shishoCode;
     private boolean chokkinFlag;
@@ -56,36 +56,37 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
     private FlexibleDate ninteiYukoKikanKaishiYMD;
     private FlexibleDate ninteiYukoKikanShuryoYMD;
     private FlexibleDate ninteiYMD;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui01;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui02;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui03;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui04;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui05;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui06;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui07;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui08;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui09;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui10;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui11;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui12;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui13;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui14;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui15;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui16;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui17;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui18;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui19;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui20;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui21;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui22;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui23;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui24;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui25;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui26;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui27;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui28;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui29;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui30;
+    private Code minashiCode;
+    private ServiceShuruiCode shiteiServiceShurui01;
+    private ServiceShuruiCode shiteiServiceShurui02;
+    private ServiceShuruiCode shiteiServiceShurui03;
+    private ServiceShuruiCode shiteiServiceShurui04;
+    private ServiceShuruiCode shiteiServiceShurui05;
+    private ServiceShuruiCode shiteiServiceShurui06;
+    private ServiceShuruiCode shiteiServiceShurui07;
+    private ServiceShuruiCode shiteiServiceShurui08;
+    private ServiceShuruiCode shiteiServiceShurui09;
+    private ServiceShuruiCode shiteiServiceShurui10;
+    private ServiceShuruiCode shiteiServiceShurui11;
+    private ServiceShuruiCode shiteiServiceShurui12;
+    private ServiceShuruiCode shiteiServiceShurui13;
+    private ServiceShuruiCode shiteiServiceShurui14;
+    private ServiceShuruiCode shiteiServiceShurui15;
+    private ServiceShuruiCode shiteiServiceShurui16;
+    private ServiceShuruiCode shiteiServiceShurui17;
+    private ServiceShuruiCode shiteiServiceShurui18;
+    private ServiceShuruiCode shiteiServiceShurui19;
+    private ServiceShuruiCode shiteiServiceShurui20;
+    private ServiceShuruiCode shiteiServiceShurui21;
+    private ServiceShuruiCode shiteiServiceShurui22;
+    private ServiceShuruiCode shiteiServiceShurui23;
+    private ServiceShuruiCode shiteiServiceShurui24;
+    private ServiceShuruiCode shiteiServiceShurui25;
+    private ServiceShuruiCode shiteiServiceShurui26;
+    private ServiceShuruiCode shiteiServiceShurui27;
+    private ServiceShuruiCode shiteiServiceShurui28;
+    private ServiceShuruiCode shiteiServiceShurui29;
+    private ServiceShuruiCode shiteiServiceShurui30;
     private FlexibleDate soshitsuYMD;
     private FlexibleDate chokkinIdoYMD;
     private Code chokkinIdoJiyuCode;
@@ -186,7 +187,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
@@ -195,7 +196,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -237,19 +238,23 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 申請書管理番号のgetメソッドです。
+     * <br/>
+     * <br/>要介護認定申請情報
      * 
      * @return 申請書管理番号
      */
-    public DbUDD013ShinseishoKanriNo getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
     /**
      * 申請書管理番号のsetメソッドです。
+     * <br/>
+     * <br/>要介護認定申請情報
      * 
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(DbUDD013ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -438,7 +443,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
     /**
      * ２号特定疾病コードのgetメソッドです。
      * <br/>
-     * <br/>Enum（DBD：特定疾病コード）
+     * <br/>Enum（DBZ：特定疾病コード）
      * 
      * @return ２号特定疾病コード
      */
@@ -449,7 +454,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
     /**
      * ２号特定疾病コードのsetメソッドです。
      * <br/>
-     * <br/>Enum（DBD：特定疾病コード）
+     * <br/>Enum（DBZ：特定疾病コード）
      * 
      * @param nigoTokuteiShippeiCode ２号特定疾病コード
      */
@@ -478,7 +483,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
     /**
      * 要介護認定状態区分コードのgetメソッドです。
      * <br/>
-     * <br/>Enum（DBD：要介護状態区分コード（認定ｿﾌﾄ2009））
+     * <br/>Enum（DBZ：要介護状態区分コード99）
      * 
      * @return 要介護認定状態区分コード
      */
@@ -489,7 +494,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
     /**
      * 要介護認定状態区分コードのsetメソッドです。
      * <br/>
-     * <br/>Enum（DBD：要介護状態区分コード（認定ｿﾌﾄ2009））
+     * <br/>Enum（DBZ：要介護状態区分コード99）
      * 
      * @param yokaigoJotaiKubunCode 要介護認定状態区分コード
      */
@@ -556,13 +561,35 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
     }
 
     /**
+     * みなし要介護区分コードのgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBD：みなし要介護区分コード）
+     * 
+     * @return みなし要介護区分コード
+     */
+    public Code getMinashiCode() {
+        return minashiCode;
+    }
+
+    /**
+     * みなし要介護区分コードのsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBD：みなし要介護区分コード）
+     * 
+     * @param minashiCode みなし要介護区分コード
+     */
+    public void setMinashiCode(Code minashiCode) {
+        this.minashiCode = minashiCode;
+    }
+
+    /**
      * 指定サービス種類01のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
      * 
      * @return 指定サービス種類01
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui01() {
+    public ServiceShuruiCode getShiteiServiceShurui01() {
         return shiteiServiceShurui01;
     }
 
@@ -573,7 +600,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui01 指定サービス種類01
      */
-    public void setShiteiServiceShurui01(DbUDD005ServiceShuruiCode shiteiServiceShurui01) {
+    public void setShiteiServiceShurui01(ServiceShuruiCode shiteiServiceShurui01) {
         this.shiteiServiceShurui01 = shiteiServiceShurui01;
     }
 
@@ -584,7 +611,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類02
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui02() {
+    public ServiceShuruiCode getShiteiServiceShurui02() {
         return shiteiServiceShurui02;
     }
 
@@ -595,7 +622,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui02 指定サービス種類02
      */
-    public void setShiteiServiceShurui02(DbUDD005ServiceShuruiCode shiteiServiceShurui02) {
+    public void setShiteiServiceShurui02(ServiceShuruiCode shiteiServiceShurui02) {
         this.shiteiServiceShurui02 = shiteiServiceShurui02;
     }
 
@@ -606,7 +633,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類03
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui03() {
+    public ServiceShuruiCode getShiteiServiceShurui03() {
         return shiteiServiceShurui03;
     }
 
@@ -617,7 +644,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui03 指定サービス種類03
      */
-    public void setShiteiServiceShurui03(DbUDD005ServiceShuruiCode shiteiServiceShurui03) {
+    public void setShiteiServiceShurui03(ServiceShuruiCode shiteiServiceShurui03) {
         this.shiteiServiceShurui03 = shiteiServiceShurui03;
     }
 
@@ -628,7 +655,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類04
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui04() {
+    public ServiceShuruiCode getShiteiServiceShurui04() {
         return shiteiServiceShurui04;
     }
 
@@ -639,7 +666,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui04 指定サービス種類04
      */
-    public void setShiteiServiceShurui04(DbUDD005ServiceShuruiCode shiteiServiceShurui04) {
+    public void setShiteiServiceShurui04(ServiceShuruiCode shiteiServiceShurui04) {
         this.shiteiServiceShurui04 = shiteiServiceShurui04;
     }
 
@@ -650,7 +677,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類05
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui05() {
+    public ServiceShuruiCode getShiteiServiceShurui05() {
         return shiteiServiceShurui05;
     }
 
@@ -661,7 +688,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui05 指定サービス種類05
      */
-    public void setShiteiServiceShurui05(DbUDD005ServiceShuruiCode shiteiServiceShurui05) {
+    public void setShiteiServiceShurui05(ServiceShuruiCode shiteiServiceShurui05) {
         this.shiteiServiceShurui05 = shiteiServiceShurui05;
     }
 
@@ -672,7 +699,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類06
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui06() {
+    public ServiceShuruiCode getShiteiServiceShurui06() {
         return shiteiServiceShurui06;
     }
 
@@ -683,7 +710,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui06 指定サービス種類06
      */
-    public void setShiteiServiceShurui06(DbUDD005ServiceShuruiCode shiteiServiceShurui06) {
+    public void setShiteiServiceShurui06(ServiceShuruiCode shiteiServiceShurui06) {
         this.shiteiServiceShurui06 = shiteiServiceShurui06;
     }
 
@@ -694,7 +721,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類07
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui07() {
+    public ServiceShuruiCode getShiteiServiceShurui07() {
         return shiteiServiceShurui07;
     }
 
@@ -705,7 +732,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui07 指定サービス種類07
      */
-    public void setShiteiServiceShurui07(DbUDD005ServiceShuruiCode shiteiServiceShurui07) {
+    public void setShiteiServiceShurui07(ServiceShuruiCode shiteiServiceShurui07) {
         this.shiteiServiceShurui07 = shiteiServiceShurui07;
     }
 
@@ -716,7 +743,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類08
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui08() {
+    public ServiceShuruiCode getShiteiServiceShurui08() {
         return shiteiServiceShurui08;
     }
 
@@ -727,7 +754,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui08 指定サービス種類08
      */
-    public void setShiteiServiceShurui08(DbUDD005ServiceShuruiCode shiteiServiceShurui08) {
+    public void setShiteiServiceShurui08(ServiceShuruiCode shiteiServiceShurui08) {
         this.shiteiServiceShurui08 = shiteiServiceShurui08;
     }
 
@@ -738,7 +765,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類09
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui09() {
+    public ServiceShuruiCode getShiteiServiceShurui09() {
         return shiteiServiceShurui09;
     }
 
@@ -749,7 +776,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui09 指定サービス種類09
      */
-    public void setShiteiServiceShurui09(DbUDD005ServiceShuruiCode shiteiServiceShurui09) {
+    public void setShiteiServiceShurui09(ServiceShuruiCode shiteiServiceShurui09) {
         this.shiteiServiceShurui09 = shiteiServiceShurui09;
     }
 
@@ -760,7 +787,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類10
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui10() {
+    public ServiceShuruiCode getShiteiServiceShurui10() {
         return shiteiServiceShurui10;
     }
 
@@ -771,7 +798,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui10 指定サービス種類10
      */
-    public void setShiteiServiceShurui10(DbUDD005ServiceShuruiCode shiteiServiceShurui10) {
+    public void setShiteiServiceShurui10(ServiceShuruiCode shiteiServiceShurui10) {
         this.shiteiServiceShurui10 = shiteiServiceShurui10;
     }
 
@@ -782,7 +809,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類11
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui11() {
+    public ServiceShuruiCode getShiteiServiceShurui11() {
         return shiteiServiceShurui11;
     }
 
@@ -793,7 +820,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui11 指定サービス種類11
      */
-    public void setShiteiServiceShurui11(DbUDD005ServiceShuruiCode shiteiServiceShurui11) {
+    public void setShiteiServiceShurui11(ServiceShuruiCode shiteiServiceShurui11) {
         this.shiteiServiceShurui11 = shiteiServiceShurui11;
     }
 
@@ -804,7 +831,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類12
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui12() {
+    public ServiceShuruiCode getShiteiServiceShurui12() {
         return shiteiServiceShurui12;
     }
 
@@ -815,7 +842,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui12 指定サービス種類12
      */
-    public void setShiteiServiceShurui12(DbUDD005ServiceShuruiCode shiteiServiceShurui12) {
+    public void setShiteiServiceShurui12(ServiceShuruiCode shiteiServiceShurui12) {
         this.shiteiServiceShurui12 = shiteiServiceShurui12;
     }
 
@@ -826,7 +853,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類13
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui13() {
+    public ServiceShuruiCode getShiteiServiceShurui13() {
         return shiteiServiceShurui13;
     }
 
@@ -837,7 +864,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui13 指定サービス種類13
      */
-    public void setShiteiServiceShurui13(DbUDD005ServiceShuruiCode shiteiServiceShurui13) {
+    public void setShiteiServiceShurui13(ServiceShuruiCode shiteiServiceShurui13) {
         this.shiteiServiceShurui13 = shiteiServiceShurui13;
     }
 
@@ -848,7 +875,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類14
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui14() {
+    public ServiceShuruiCode getShiteiServiceShurui14() {
         return shiteiServiceShurui14;
     }
 
@@ -859,7 +886,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui14 指定サービス種類14
      */
-    public void setShiteiServiceShurui14(DbUDD005ServiceShuruiCode shiteiServiceShurui14) {
+    public void setShiteiServiceShurui14(ServiceShuruiCode shiteiServiceShurui14) {
         this.shiteiServiceShurui14 = shiteiServiceShurui14;
     }
 
@@ -870,7 +897,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類15
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui15() {
+    public ServiceShuruiCode getShiteiServiceShurui15() {
         return shiteiServiceShurui15;
     }
 
@@ -881,7 +908,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui15 指定サービス種類15
      */
-    public void setShiteiServiceShurui15(DbUDD005ServiceShuruiCode shiteiServiceShurui15) {
+    public void setShiteiServiceShurui15(ServiceShuruiCode shiteiServiceShurui15) {
         this.shiteiServiceShurui15 = shiteiServiceShurui15;
     }
 
@@ -892,7 +919,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類16
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui16() {
+    public ServiceShuruiCode getShiteiServiceShurui16() {
         return shiteiServiceShurui16;
     }
 
@@ -903,7 +930,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui16 指定サービス種類16
      */
-    public void setShiteiServiceShurui16(DbUDD005ServiceShuruiCode shiteiServiceShurui16) {
+    public void setShiteiServiceShurui16(ServiceShuruiCode shiteiServiceShurui16) {
         this.shiteiServiceShurui16 = shiteiServiceShurui16;
     }
 
@@ -914,7 +941,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類17
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui17() {
+    public ServiceShuruiCode getShiteiServiceShurui17() {
         return shiteiServiceShurui17;
     }
 
@@ -925,7 +952,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui17 指定サービス種類17
      */
-    public void setShiteiServiceShurui17(DbUDD005ServiceShuruiCode shiteiServiceShurui17) {
+    public void setShiteiServiceShurui17(ServiceShuruiCode shiteiServiceShurui17) {
         this.shiteiServiceShurui17 = shiteiServiceShurui17;
     }
 
@@ -936,7 +963,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類18
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui18() {
+    public ServiceShuruiCode getShiteiServiceShurui18() {
         return shiteiServiceShurui18;
     }
 
@@ -947,7 +974,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui18 指定サービス種類18
      */
-    public void setShiteiServiceShurui18(DbUDD005ServiceShuruiCode shiteiServiceShurui18) {
+    public void setShiteiServiceShurui18(ServiceShuruiCode shiteiServiceShurui18) {
         this.shiteiServiceShurui18 = shiteiServiceShurui18;
     }
 
@@ -958,7 +985,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類19
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui19() {
+    public ServiceShuruiCode getShiteiServiceShurui19() {
         return shiteiServiceShurui19;
     }
 
@@ -969,7 +996,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui19 指定サービス種類19
      */
-    public void setShiteiServiceShurui19(DbUDD005ServiceShuruiCode shiteiServiceShurui19) {
+    public void setShiteiServiceShurui19(ServiceShuruiCode shiteiServiceShurui19) {
         this.shiteiServiceShurui19 = shiteiServiceShurui19;
     }
 
@@ -980,7 +1007,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類20
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui20() {
+    public ServiceShuruiCode getShiteiServiceShurui20() {
         return shiteiServiceShurui20;
     }
 
@@ -991,7 +1018,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui20 指定サービス種類20
      */
-    public void setShiteiServiceShurui20(DbUDD005ServiceShuruiCode shiteiServiceShurui20) {
+    public void setShiteiServiceShurui20(ServiceShuruiCode shiteiServiceShurui20) {
         this.shiteiServiceShurui20 = shiteiServiceShurui20;
     }
 
@@ -1002,7 +1029,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類21
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui21() {
+    public ServiceShuruiCode getShiteiServiceShurui21() {
         return shiteiServiceShurui21;
     }
 
@@ -1013,7 +1040,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui21 指定サービス種類21
      */
-    public void setShiteiServiceShurui21(DbUDD005ServiceShuruiCode shiteiServiceShurui21) {
+    public void setShiteiServiceShurui21(ServiceShuruiCode shiteiServiceShurui21) {
         this.shiteiServiceShurui21 = shiteiServiceShurui21;
     }
 
@@ -1024,7 +1051,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類22
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui22() {
+    public ServiceShuruiCode getShiteiServiceShurui22() {
         return shiteiServiceShurui22;
     }
 
@@ -1035,7 +1062,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui22 指定サービス種類22
      */
-    public void setShiteiServiceShurui22(DbUDD005ServiceShuruiCode shiteiServiceShurui22) {
+    public void setShiteiServiceShurui22(ServiceShuruiCode shiteiServiceShurui22) {
         this.shiteiServiceShurui22 = shiteiServiceShurui22;
     }
 
@@ -1046,7 +1073,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類23
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui23() {
+    public ServiceShuruiCode getShiteiServiceShurui23() {
         return shiteiServiceShurui23;
     }
 
@@ -1057,7 +1084,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui23 指定サービス種類23
      */
-    public void setShiteiServiceShurui23(DbUDD005ServiceShuruiCode shiteiServiceShurui23) {
+    public void setShiteiServiceShurui23(ServiceShuruiCode shiteiServiceShurui23) {
         this.shiteiServiceShurui23 = shiteiServiceShurui23;
     }
 
@@ -1068,7 +1095,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類24
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui24() {
+    public ServiceShuruiCode getShiteiServiceShurui24() {
         return shiteiServiceShurui24;
     }
 
@@ -1079,7 +1106,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui24 指定サービス種類24
      */
-    public void setShiteiServiceShurui24(DbUDD005ServiceShuruiCode shiteiServiceShurui24) {
+    public void setShiteiServiceShurui24(ServiceShuruiCode shiteiServiceShurui24) {
         this.shiteiServiceShurui24 = shiteiServiceShurui24;
     }
 
@@ -1090,7 +1117,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類25
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui25() {
+    public ServiceShuruiCode getShiteiServiceShurui25() {
         return shiteiServiceShurui25;
     }
 
@@ -1101,7 +1128,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui25 指定サービス種類25
      */
-    public void setShiteiServiceShurui25(DbUDD005ServiceShuruiCode shiteiServiceShurui25) {
+    public void setShiteiServiceShurui25(ServiceShuruiCode shiteiServiceShurui25) {
         this.shiteiServiceShurui25 = shiteiServiceShurui25;
     }
 
@@ -1112,7 +1139,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類26
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui26() {
+    public ServiceShuruiCode getShiteiServiceShurui26() {
         return shiteiServiceShurui26;
     }
 
@@ -1123,7 +1150,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui26 指定サービス種類26
      */
-    public void setShiteiServiceShurui26(DbUDD005ServiceShuruiCode shiteiServiceShurui26) {
+    public void setShiteiServiceShurui26(ServiceShuruiCode shiteiServiceShurui26) {
         this.shiteiServiceShurui26 = shiteiServiceShurui26;
     }
 
@@ -1134,7 +1161,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類27
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui27() {
+    public ServiceShuruiCode getShiteiServiceShurui27() {
         return shiteiServiceShurui27;
     }
 
@@ -1145,7 +1172,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui27 指定サービス種類27
      */
-    public void setShiteiServiceShurui27(DbUDD005ServiceShuruiCode shiteiServiceShurui27) {
+    public void setShiteiServiceShurui27(ServiceShuruiCode shiteiServiceShurui27) {
         this.shiteiServiceShurui27 = shiteiServiceShurui27;
     }
 
@@ -1156,7 +1183,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類28
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui28() {
+    public ServiceShuruiCode getShiteiServiceShurui28() {
         return shiteiServiceShurui28;
     }
 
@@ -1167,7 +1194,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui28 指定サービス種類28
      */
-    public void setShiteiServiceShurui28(DbUDD005ServiceShuruiCode shiteiServiceShurui28) {
+    public void setShiteiServiceShurui28(ServiceShuruiCode shiteiServiceShurui28) {
         this.shiteiServiceShurui28 = shiteiServiceShurui28;
     }
 
@@ -1178,7 +1205,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類29
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui29() {
+    public ServiceShuruiCode getShiteiServiceShurui29() {
         return shiteiServiceShurui29;
     }
 
@@ -1189,7 +1216,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui29 指定サービス種類29
      */
-    public void setShiteiServiceShurui29(DbUDD005ServiceShuruiCode shiteiServiceShurui29) {
+    public void setShiteiServiceShurui29(ServiceShuruiCode shiteiServiceShurui29) {
         this.shiteiServiceShurui29 = shiteiServiceShurui29;
     }
 
@@ -1200,7 +1227,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @return 指定サービス種類30
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui30() {
+    public ServiceShuruiCode getShiteiServiceShurui30() {
         return shiteiServiceShurui30;
     }
 
@@ -1211,7 +1238,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 
      * @param shiteiServiceShurui30 指定サービス種類30
      */
-    public void setShiteiServiceShurui30(DbUDD005ServiceShuruiCode shiteiServiceShurui30) {
+    public void setShiteiServiceShurui30(ServiceShuruiCode shiteiServiceShurui30) {
         this.shiteiServiceShurui30 = shiteiServiceShurui30;
     }
 
@@ -1861,6 +1888,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
         this.ninteiYukoKikanKaishiYMD = entity.ninteiYukoKikanKaishiYMD;
         this.ninteiYukoKikanShuryoYMD = entity.ninteiYukoKikanShuryoYMD;
         this.ninteiYMD = entity.ninteiYMD;
+        this.minashiCode = entity.minashiCode;
         this.shiteiServiceShurui01 = entity.shiteiServiceShurui01;
         this.shiteiServiceShurui02 = entity.shiteiServiceShurui02;
         this.shiteiServiceShurui03 = entity.shiteiServiceShurui03;
@@ -1929,8 +1957,9 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shichosonCode, hihokenshaNo, rirekiNo, edaban, shinseishoKanriNo, shinseiJokyoKubun, shishoCode, chokkinFlag, shikibetsuCode, jukyuShinseiJiyu, shinseiRiyu, shinseishaKankeiCode, homninKankei, jukyuShinseiYMD, nigoTokuteiShippeiCode, shinsakaiIraiYMD, yokaigoJotaiKubunCode, ninteiYukoKikanKaishiYMD, ninteiYukoKikanShuryoYMD, ninteiYMD, shiteiServiceShurui01, shiteiServiceShurui02, shiteiServiceShurui03, shiteiServiceShurui04, shiteiServiceShurui05, shiteiServiceShurui06, shiteiServiceShurui07, shiteiServiceShurui08, shiteiServiceShurui09, shiteiServiceShurui10, shiteiServiceShurui11, shiteiServiceShurui12, shiteiServiceShurui13, shiteiServiceShurui14, shiteiServiceShurui15, shiteiServiceShurui16, shiteiServiceShurui17, shiteiServiceShurui18, shiteiServiceShurui19, shiteiServiceShurui20, shiteiServiceShurui21, shiteiServiceShurui22, shiteiServiceShurui23, shiteiServiceShurui24, shiteiServiceShurui25, shiteiServiceShurui26, shiteiServiceShurui27, shiteiServiceShurui28, shiteiServiceShurui29, shiteiServiceShurui30, soshitsuYMD, chokkinIdoYMD, chokkinIdoJiyuCode, yukoMukoKubun, dataKubun, remban, idoRiyu, shinseishoKubun, sakujoJiyuCode, yoshienshaNinteiShinseiFlag, shikyuGendoTanisu, shikyuGendoKaishiYMD, shikyuGendoShuryoYMD, tankiSikyuGendoNissu, tankiShikyuGendoKaishiYMD, tankiShikyuGendoShuryoYMD, toshoNinteiYukoKaishiYMD, toshoNinteiYukoShuryoYMD, jukyuShikakuShomeishoHakkoYMD1, jukyuShikakuShomeishoHakkoYMD2, shindanMeireishoHakkoYMD, nigoShinseiJuriTsuchishoHakkoYMD, ninteiKekkaTsuchishoHakkoYMD, kubunHenkoTsuchishoHakkoYMD, serviceHenkoTsuchishoHakkoYMD, ninteiKyakkaTsuchishoHakkoYMD, ninteiTorikeshiTsuchishoHakkoYMD, shikakuShutokuMaeShinseiFlag, kyuSochishaFlag, logicalDeletedFlag);
+        return super.toMd5(shichosonCode, hihokenshaNo, rirekiNo, edaban, shinseishoKanriNo, shinseiJokyoKubun, shishoCode, chokkinFlag, shikibetsuCode, jukyuShinseiJiyu, shinseiRiyu, shinseishaKankeiCode, homninKankei, jukyuShinseiYMD, nigoTokuteiShippeiCode, shinsakaiIraiYMD, yokaigoJotaiKubunCode, ninteiYukoKikanKaishiYMD, ninteiYukoKikanShuryoYMD, ninteiYMD, minashiCode, shiteiServiceShurui01, shiteiServiceShurui02, shiteiServiceShurui03, shiteiServiceShurui04, shiteiServiceShurui05, shiteiServiceShurui06, shiteiServiceShurui07, shiteiServiceShurui08, shiteiServiceShurui09, shiteiServiceShurui10, shiteiServiceShurui11, shiteiServiceShurui12, shiteiServiceShurui13, shiteiServiceShurui14, shiteiServiceShurui15, shiteiServiceShurui16, shiteiServiceShurui17, shiteiServiceShurui18, shiteiServiceShurui19, shiteiServiceShurui20, shiteiServiceShurui21, shiteiServiceShurui22, shiteiServiceShurui23, shiteiServiceShurui24, shiteiServiceShurui25, shiteiServiceShurui26, shiteiServiceShurui27, shiteiServiceShurui28, shiteiServiceShurui29, shiteiServiceShurui30, soshitsuYMD, chokkinIdoYMD, chokkinIdoJiyuCode, yukoMukoKubun, dataKubun, remban, idoRiyu, shinseishoKubun, sakujoJiyuCode, yoshienshaNinteiShinseiFlag, shikyuGendoTanisu, shikyuGendoKaishiYMD, shikyuGendoShuryoYMD, tankiSikyuGendoNissu, tankiShikyuGendoKaishiYMD, tankiShikyuGendoShuryoYMD, toshoNinteiYukoKaishiYMD, toshoNinteiYukoShuryoYMD, jukyuShikakuShomeishoHakkoYMD1, jukyuShikakuShomeishoHakkoYMD2, shindanMeireishoHakkoYMD, nigoShinseiJuriTsuchishoHakkoYMD, ninteiKekkaTsuchishoHakkoYMD, kubunHenkoTsuchishoHakkoYMD, serviceHenkoTsuchishoHakkoYMD, ninteiKyakkaTsuchishoHakkoYMD, ninteiTorikeshiTsuchishoHakkoYMD, shikakuShutokuMaeShinseiFlag, kyuSochishaFlag, logicalDeletedFlag);
     }
 
 // </editor-fold>
+
 }

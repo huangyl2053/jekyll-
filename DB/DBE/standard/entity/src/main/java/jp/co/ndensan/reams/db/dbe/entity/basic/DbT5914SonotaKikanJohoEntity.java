@@ -391,4 +391,5 @@ public class DbT5914SonotaKikanJohoEntity extends DbTableEntityBase<DbT5914Sonot
     }
 
 // </editor-fold>
+
 }
