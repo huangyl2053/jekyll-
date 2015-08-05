@@ -1,0 +1,5 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
+kariIchijiHanteiKubun,bool,boolean,,,,,仮一次判定区分,A
+ichijiHanteiYMD,UDD015YMD,FlexibleDate,,,,,要介護認定一次判定年月日,A
+ichijiHanteiKekkaCode,UDD035Code,Code,,,,,要介護認定一次判定結果コード,A
+ichijiHanteiKekkaNinchishoKasanCode,UDD035Code,Code,,,,,要介護認定一次判定結果コード（認知症加算）,A
