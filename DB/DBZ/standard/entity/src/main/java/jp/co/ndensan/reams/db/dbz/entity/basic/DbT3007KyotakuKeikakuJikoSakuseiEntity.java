@@ -1,27 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import java.util.Objects;
 
 /**
  * DbT3007KyotakuKeikakuJikoSakuseiの項目定義クラスです
  *
  */
 public class DbT3007KyotakuKeikakuJikoSakuseiEntity extends DbTableEntityBase<DbT3007KyotakuKeikakuJikoSakuseiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3007KyotakuKeikakuJikoSakusei");
 
@@ -36,23 +32,20 @@ public class DbT3007KyotakuKeikakuJikoSakuseiEntity extends DbTableEntityBase<Db
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private HokenshaNo shoKisaiHokenshaNo;
-    @PrimaryKey
-    private ShikibetsuCode shikibetsuCode;
-    @PrimaryKey
     private FlexibleYearMonth taishoYM;
     @PrimaryKey
-    private YMDHMS shoriTimestamp;
+    private int rirekiNo;
     private RString kyotaku_SogoJigyoKubun;
     private FlexibleDate tekiyoKaishiYMD;
     private FlexibleDate tekiyoShuryoYMD;
+    private RString sakuseiKubunCode;
     private FlexibleDate keikakuSakuseiYMD;
     private FlexibleDate keikakuHenkoYMD;
     private RString keikakuHenkoJiyu;
 
     /**
-     * getInsertDantaiCd
-     *
+     * insertDantaiCdのgetメソッドです。
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -60,8 +53,8 @@ public class DbT3007KyotakuKeikakuJikoSakuseiEntity extends DbTableEntityBase<Db
     }
 
     /**
-     * setInsertDantaiCd
-     *
+     * insertDantaiCdのsetメソッドです。
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -69,8 +62,8 @@ public class DbT3007KyotakuKeikakuJikoSakuseiEntity extends DbTableEntityBase<Db
     }
 
     /**
-     * getIsDeleted
-     *
+     * isDeletedのgetメソッドです。
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -78,17 +71,18 @@ public class DbT3007KyotakuKeikakuJikoSakuseiEntity extends DbTableEntityBase<Db
     }
 
     /**
-     * setIsDeleted
-     *
+     * isDeletedのsetメソッドです。
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
-     * setLastUpdateReamsLoginId
-     *
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -96,198 +90,188 @@ public class DbT3007KyotakuKeikakuJikoSakuseiEntity extends DbTableEntityBase<Db
     }
 
     /**
-     * getHihokenshaNo
-     *
-     * @return hihokenshaNo
+     * 被保険者番号のgetメソッドです。
+     * 
+     * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
-     * setHihokenshaNo
-     *
-     * @param hihokenshaNo hihokenshaNo
+     * 被保険者番号のsetメソッドです。
+     * 
+     * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
-     * getShoKisaiHokenshaNo
-     *
-     * @return shoKisaiHokenshaNo
-     */
-    public HokenshaNo getShoKisaiHokenshaNo() {
-        return shoKisaiHokenshaNo;
-    }
-
-    /**
-     * setShoKisaiHokenshaNo
-     *
-     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
-     */
-    public void setShoKisaiHokenshaNo(HokenshaNo shoKisaiHokenshaNo) {
-        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
-    }
-
-    /**
-     * getShikibetsuCode
-     *
-     * @return shikibetsuCode
-     */
-    public ShikibetsuCode getShikibetsuCode() {
-        return shikibetsuCode;
-    }
-
-    /**
-     * setShikibetsuCode
-     *
-     * @param shikibetsuCode shikibetsuCode
-     */
-    public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
-        this.shikibetsuCode = shikibetsuCode;
-    }
-
-    /**
-     * getTaishoYM
-     *
-     * @return taishoYM
+     * 対象年月のgetメソッドです。
+     * 
+     * @return 対象年月
      */
     public FlexibleYearMonth getTaishoYM() {
         return taishoYM;
     }
 
     /**
-     * setTaishoYM
-     *
-     * @param taishoYM taishoYM
+     * 対象年月のsetメソッドです。
+     * 
+     * @param taishoYM 対象年月
      */
     public void setTaishoYM(FlexibleYearMonth taishoYM) {
         this.taishoYM = taishoYM;
     }
 
     /**
-     * getShoriTimestamp
-     *
-     * @return shoriTimestamp
+     * 履歴番号のgetメソッドです。
+     * 
+     * @return 履歴番号
      */
-    public YMDHMS getShoriTimestamp() {
-        return shoriTimestamp;
+    public int getRirekiNo() {
+        return rirekiNo;
     }
 
     /**
-     * setShoriTimestamp
-     *
-     * @param shoriTimestamp shoriTimestamp
+     * 履歴番号のsetメソッドです。
+     * 
+     * @param rirekiNo 履歴番号
      */
-    public void setShoriTimestamp(YMDHMS shoriTimestamp) {
-        this.shoriTimestamp = shoriTimestamp;
+    public void setRirekiNo(int rirekiNo) {
+        this.rirekiNo = rirekiNo;
     }
 
     /**
-     * getKyotaku_SogoJigyoKubun
-     *
-     * @return kyotaku_SogoJigyoKubun
+     * 居宅・総合事業区分のgetメソッドです。
+     * <br/>
+     * <br/>1:居宅サービス計画,2:総合事業費計画
+     * 
+     * @return 居宅・総合事業区分
      */
     public RString getKyotaku_SogoJigyoKubun() {
         return kyotaku_SogoJigyoKubun;
     }
 
     /**
-     * setKyotaku_SogoJigyoKubun
-     *
-     * @param kyotaku_SogoJigyoKubun kyotaku_SogoJigyoKubun
+     * 居宅・総合事業区分のsetメソッドです。
+     * <br/>
+     * <br/>1:居宅サービス計画,2:総合事業費計画
+     * 
+     * @param kyotaku_SogoJigyoKubun 居宅・総合事業区分
      */
     public void setKyotaku_SogoJigyoKubun(RString kyotaku_SogoJigyoKubun) {
         this.kyotaku_SogoJigyoKubun = kyotaku_SogoJigyoKubun;
     }
 
     /**
-     * getTekiyoKaishiYMD
-     *
-     * @return tekiyoKaishiYMD
+     * 適用開始年月日のgetメソッドです。
+     * 
+     * @return 適用開始年月日
      */
     public FlexibleDate getTekiyoKaishiYMD() {
         return tekiyoKaishiYMD;
     }
 
     /**
-     * setTekiyoKaishiYMD
-     *
-     * @param tekiyoKaishiYMD tekiyoKaishiYMD
+     * 適用開始年月日のsetメソッドです。
+     * 
+     * @param tekiyoKaishiYMD 適用開始年月日
      */
     public void setTekiyoKaishiYMD(FlexibleDate tekiyoKaishiYMD) {
         this.tekiyoKaishiYMD = tekiyoKaishiYMD;
     }
 
     /**
-     * getTekiyoShuryoYMD
-     *
-     * @return tekiyoShuryoYMD
+     * 適用終了年月日のgetメソッドです。
+     * 
+     * @return 適用終了年月日
      */
     public FlexibleDate getTekiyoShuryoYMD() {
         return tekiyoShuryoYMD;
     }
 
     /**
-     * setTekiyoShuryoYMD
-     *
-     * @param tekiyoShuryoYMD tekiyoShuryoYMD
+     * 適用終了年月日のsetメソッドです。
+     * 
+     * @param tekiyoShuryoYMD 適用終了年月日
      */
     public void setTekiyoShuryoYMD(FlexibleDate tekiyoShuryoYMD) {
         this.tekiyoShuryoYMD = tekiyoShuryoYMD;
     }
 
     /**
-     * getKeikakuSakuseiYMD
-     *
-     * @return keikakuSakuseiYMD
+     * 作成区分コードのgetメソッドです。
+     * <br/>
+     * <br/>3：自己作成（固定）
+     * 
+     * @return 作成区分コード
+     */
+    public RString getSakuseiKubunCode() {
+        return sakuseiKubunCode;
+    }
+
+    /**
+     * 作成区分コードのsetメソッドです。
+     * <br/>
+     * <br/>3：自己作成（固定）
+     * 
+     * @param sakuseiKubunCode 作成区分コード
+     */
+    public void setSakuseiKubunCode(RString sakuseiKubunCode) {
+        this.sakuseiKubunCode = sakuseiKubunCode;
+    }
+
+    /**
+     * 計画作成年月日のgetメソッドです。
+     * 
+     * @return 計画作成年月日
      */
     public FlexibleDate getKeikakuSakuseiYMD() {
         return keikakuSakuseiYMD;
     }
 
     /**
-     * setKeikakuSakuseiYMD
-     *
-     * @param keikakuSakuseiYMD keikakuSakuseiYMD
+     * 計画作成年月日のsetメソッドです。
+     * 
+     * @param keikakuSakuseiYMD 計画作成年月日
      */
     public void setKeikakuSakuseiYMD(FlexibleDate keikakuSakuseiYMD) {
         this.keikakuSakuseiYMD = keikakuSakuseiYMD;
     }
 
     /**
-     * getKeikakuHenkoYMD
-     *
-     * @return keikakuHenkoYMD
+     * 計画変更年月日のgetメソッドです。
+     * 
+     * @return 計画変更年月日
      */
     public FlexibleDate getKeikakuHenkoYMD() {
         return keikakuHenkoYMD;
     }
 
     /**
-     * setKeikakuHenkoYMD
-     *
-     * @param keikakuHenkoYMD keikakuHenkoYMD
+     * 計画変更年月日のsetメソッドです。
+     * 
+     * @param keikakuHenkoYMD 計画変更年月日
      */
     public void setKeikakuHenkoYMD(FlexibleDate keikakuHenkoYMD) {
         this.keikakuHenkoYMD = keikakuHenkoYMD;
     }
 
     /**
-     * getKeikakuHenkoJiyu
-     *
-     * @return keikakuHenkoJiyu
+     * 計画変更事由のgetメソッドです。
+     * 
+     * @return 計画変更事由
      */
     public RString getKeikakuHenkoJiyu() {
         return keikakuHenkoJiyu;
     }
 
     /**
-     * setKeikakuHenkoJiyu
-     *
-     * @param keikakuHenkoJiyu keikakuHenkoJiyu
+     * 計画変更事由のsetメソッドです。
+     * 
+     * @param keikakuHenkoJiyu 計画変更事由
      */
     public void setKeikakuHenkoJiyu(RString keikakuHenkoJiyu) {
         this.keikakuHenkoJiyu = keikakuHenkoJiyu;
@@ -295,9 +279,9 @@ public class DbT3007KyotakuKeikakuJikoSakuseiEntity extends DbTableEntityBase<Db
 
     /**
      * このエンティティの主キーが他の{@literal DbT3007KyotakuKeikakuJikoSakuseiEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3007KyotakuKeikakuJikoSakuseiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -308,16 +292,10 @@ public class DbT3007KyotakuKeikakuJikoSakuseiEntity extends DbTableEntityBase<Db
         if (!Objects.equals(this.hihokenshaNo, other.hihokenshaNo)) {
             return false;
         }
-        if (!Objects.equals(this.shoKisaiHokenshaNo, other.shoKisaiHokenshaNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.shikibetsuCode, other.shikibetsuCode)) {
-            return false;
-        }
         if (!Objects.equals(this.taishoYM, other.taishoYM)) {
             return false;
         }
-        if (!Objects.equals(this.shoriTimestamp, other.shoriTimestamp)) {
+        if (this.rirekiNo != other.rirekiNo) {
             return false;
         }
         return true;
@@ -329,13 +307,12 @@ public class DbT3007KyotakuKeikakuJikoSakuseiEntity extends DbTableEntityBase<Db
     @Override
     public void shallowCopy(DbT3007KyotakuKeikakuJikoSakuseiEntity entity) {
         this.hihokenshaNo = entity.hihokenshaNo;
-        this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
-        this.shikibetsuCode = entity.shikibetsuCode;
         this.taishoYM = entity.taishoYM;
-        this.shoriTimestamp = entity.shoriTimestamp;
+        this.rirekiNo = entity.rirekiNo;
         this.kyotaku_SogoJigyoKubun = entity.kyotaku_SogoJigyoKubun;
         this.tekiyoKaishiYMD = entity.tekiyoKaishiYMD;
         this.tekiyoShuryoYMD = entity.tekiyoShuryoYMD;
+        this.sakuseiKubunCode = entity.sakuseiKubunCode;
         this.keikakuSakuseiYMD = entity.keikakuSakuseiYMD;
         this.keikakuHenkoYMD = entity.keikakuHenkoYMD;
         this.keikakuHenkoJiyu = entity.keikakuHenkoJiyu;
@@ -343,13 +320,13 @@ public class DbT3007KyotakuKeikakuJikoSakuseiEntity extends DbTableEntityBase<Db
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hihokenshaNo, shoKisaiHokenshaNo, shikibetsuCode, taishoYM, shoriTimestamp, kyotaku_SogoJigyoKubun, tekiyoKaishiYMD, tekiyoShuryoYMD, keikakuSakuseiYMD, keikakuHenkoYMD, keikakuHenkoJiyu);
+        return super.toMd5(hihokenshaNo, taishoYM, rirekiNo, kyotaku_SogoJigyoKubun, tekiyoKaishiYMD, tekiyoShuryoYMD, sakuseiKubunCode, keikakuSakuseiYMD, keikakuHenkoYMD, keikakuHenkoJiyu);
     }
 
 // </editor-fold>
+
 }

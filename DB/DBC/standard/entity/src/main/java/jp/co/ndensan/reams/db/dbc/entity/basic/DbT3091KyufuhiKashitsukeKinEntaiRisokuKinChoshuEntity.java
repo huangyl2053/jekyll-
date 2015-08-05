@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
@@ -15,7 +16,8 @@ import java.util.Objects;
  * 給付費貸付金延滞利息金徴収テーブルのエンティティクラスです。
  */
 public class DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity extends DbTableEntityBase<DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshu");
 
@@ -28,7 +30,7 @@ public class DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity extends DbTab
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private RString kashitsukeKanriNo;
     @PrimaryKey
@@ -38,7 +40,7 @@ public class DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity extends DbTab
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -47,7 +49,7 @@ public class DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity extends DbTab
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -56,7 +58,7 @@ public class DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity extends DbTab
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -65,17 +67,16 @@ public class DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity extends DbTab
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -84,25 +85,25 @@ public class DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity extends DbTab
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 貸付管理番号のgetメソッドです。
-     * 
+     *
      * @return 貸付管理番号
      */
     public RString getKashitsukeKanriNo() {
@@ -111,7 +112,7 @@ public class DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity extends DbTab
 
     /**
      * 貸付管理番号のsetメソッドです。
-     * 
+     *
      * @param kashitsukeKanriNo 貸付管理番号
      */
     public void setKashitsukeKanriNo(RString kashitsukeKanriNo) {
@@ -120,7 +121,7 @@ public class DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity extends DbTab
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -129,7 +130,7 @@ public class DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity extends DbTab
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -138,7 +139,7 @@ public class DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity extends DbTab
 
     /**
      * 延滞利息金徴収年月日のgetメソッドです。
-     * 
+     *
      * @return 延滞利息金徴収年月日
      */
     public FlexibleDate getEntaiRisokuKinChoshuYMD() {
@@ -147,7 +148,7 @@ public class DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity extends DbTab
 
     /**
      * 延滞利息金徴収年月日のsetメソッドです。
-     * 
+     *
      * @param entaiRisokuKinChoshuYMD 延滞利息金徴収年月日
      */
     public void setEntaiRisokuKinChoshuYMD(FlexibleDate entaiRisokuKinChoshuYMD) {
@@ -156,7 +157,7 @@ public class DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity extends DbTab
 
     /**
      * 延滞利息徴収金額のgetメソッドです。
-     * 
+     *
      * @return 延滞利息徴収金額
      */
     public Decimal getEntaiRisokuChoshuKingaku() {
@@ -165,7 +166,7 @@ public class DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity extends DbTab
 
     /**
      * 延滞利息徴収金額のsetメソッドです。
-     * 
+     *
      * @param entaiRisokuChoshuKingaku 延滞利息徴収金額
      */
     public void setEntaiRisokuChoshuKingaku(Decimal entaiRisokuChoshuKingaku) {
@@ -174,9 +175,9 @@ public class DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity extends DbTab
 
     /**
      * このエンティティの主キーが他の{@literal DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -210,6 +211,7 @@ public class DbT3091KyufuhiKashitsukeKinEntaiRisokuKinChoshuEntity extends DbTab
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
@@ -15,7 +16,8 @@ import java.util.Objects;
  * 給付費貸付金強制返還テーブルのエンティティクラスです。
  */
 public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntityBase<DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3093KyufuhiKashitsukeKinKyoseiHenkan");
 
@@ -28,7 +30,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private RString kashitsukeKanriNo;
     @PrimaryKey
@@ -40,7 +42,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -49,7 +51,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -58,7 +60,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -67,17 +69,16 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -86,25 +87,25 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 貸付管理番号のgetメソッドです。
-     * 
+     *
      * @return 貸付管理番号
      */
     public RString getKashitsukeKanriNo() {
@@ -113,7 +114,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * 貸付管理番号のsetメソッドです。
-     * 
+     *
      * @param kashitsukeKanriNo 貸付管理番号
      */
     public void setKashitsukeKanriNo(RString kashitsukeKanriNo) {
@@ -122,7 +123,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -131,7 +132,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -140,7 +141,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * 返還金区分のgetメソッドです。
-     * 
+     *
      * @return 返還金区分
      */
     public RString getHenkanKinKubun() {
@@ -149,7 +150,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * 返還金区分のsetメソッドです。
-     * 
+     *
      * @param henkanKinKubun 返還金区分
      */
     public void setHenkanKinKubun(RString henkanKinKubun) {
@@ -158,7 +159,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * 返還金額のgetメソッドです。
-     * 
+     *
      * @return 返還金額
      */
     public Decimal getHenkanKingaku() {
@@ -167,7 +168,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * 返還金額のsetメソッドです。
-     * 
+     *
      * @param henkanKingaku 返還金額
      */
     public void setHenkanKingaku(Decimal henkanKingaku) {
@@ -176,7 +177,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * 返還期限のgetメソッドです。
-     * 
+     *
      * @return 返還期限
      */
     public FlexibleDate getHenkanKigenYMD() {
@@ -185,7 +186,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * 返還期限のsetメソッドです。
-     * 
+     *
      * @param henkanKigenYMD 返還期限
      */
     public void setHenkanKigenYMD(FlexibleDate henkanKigenYMD) {
@@ -194,7 +195,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * 返還理由のgetメソッドです。
-     * 
+     *
      * @return 返還理由
      */
     public RString getHenkanRiyu() {
@@ -203,7 +204,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * 返還理由のsetメソッドです。
-     * 
+     *
      * @param henkanRiyu 返還理由
      */
     public void setHenkanRiyu(RString henkanRiyu) {
@@ -212,9 +213,9 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * このエンティティの主キーが他の{@literal DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -250,6 +251,7 @@ public class DbT3093KyufuhiKashitsukeKinKyoseiHenkanEntity extends DbTableEntity
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

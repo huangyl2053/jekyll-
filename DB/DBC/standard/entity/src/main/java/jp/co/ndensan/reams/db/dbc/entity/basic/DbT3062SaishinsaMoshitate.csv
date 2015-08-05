@@ -1,12 +1,12 @@
-﻿jigyoshoNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,事業所番号,A
-hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+﻿jigyoshoNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,事業所番号,A
+hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
-serviceTeikyoShuruiCode,DbUDD005ServiceShuruiCode,DbUDD005ServiceShuruiCode,,,,,サービス種類コード,A
-serviceKomokuCode,DbUDD006ServiceKomokuCode,DbUDD006ServiceKomokuCode,,,,,サービス項目コード,A
+serviceTeikyoShuruiCode,DbUDD005ServiceShuruiCode,ServiceShuruiCode,,,,,サービス種類コード,A
+serviceKomokuCode,DbUDD006ServiceKomokuCode,ServiceKomokuCode,,,,,サービス項目コード,A
 rirekiNo,int2,int,,,,,履歴番号,A
 moshitateYMD,UDD015YMD,FlexibleDate,,,,,申立年月日,A
 moshitateshaKubunCode,varchar,RString,,,,,申立者区分コード,A
-shokisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,証記載保険者番号,A
+shokisaiHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,証記載保険者番号,A
 moshitateTanisu,int4,int,,,,,申立単位数,A
 moshitateJiyuCode,varchar,RString,,,,,申立事由コード,A
 kokuhorenSofuYM,UDD014YM,FlexibleYearMonth,,,,,国保連送付年月,A

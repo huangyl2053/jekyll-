@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 高額介護サービス費給付対象者明細テーブルの項目定義クラスです。
  */
 public enum DbT3054KogakuKyufuTaishoshaMeisai implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     /**
      * insertDantaiCd
      */

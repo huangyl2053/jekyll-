@@ -41,10 +41,7 @@ public final class DbT3009KyotakuKeikakuJikoSakuseiGokeiEntityGenerator {
     public static DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity createDbT3009KyotakuKeikakuJikoSakuseiGokeiEntity() {
         DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity entity = new DbT3009KyotakuKeikakuJikoSakuseiGokeiEntity();
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
-        entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);
-        entity.setShikibetsuNo(DEFAULT_識別コード);
         entity.setTaishoYM(DEFAULT_対象年月);
-        entity.setShoriTimestamp(DEFAULT_処理日時);
         entity.setKyotakuServiceKubun(DEFAULT_居宅サービス区分);
         entity.setServiceTeikyoJigyoshaNo(DEFAULT_サービス提供事業者番号);
         entity.setServiceShuruiCode(DEFAULT_サービス種類コード);

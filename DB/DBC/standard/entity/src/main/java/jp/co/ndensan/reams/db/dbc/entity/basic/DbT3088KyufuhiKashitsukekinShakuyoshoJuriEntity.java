@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -18,7 +19,8 @@ import java.util.Objects;
  * 給付費貸付金借用書受理テーブルのエンティティクラスです。
  */
 public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEntityBase<DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3088KyufuhiKashitsukekinShakuyoshoJuri");
 
@@ -31,7 +33,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private FlexibleDate kariireShinseiYMD;
     @PrimaryKey
@@ -50,7 +52,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -59,7 +61,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -68,7 +70,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -77,17 +79,16 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -96,25 +97,25 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 借入申請年月日のgetメソッドです。
-     * 
+     *
      * @return 借入申請年月日
      */
     public FlexibleDate getKariireShinseiYMD() {
@@ -123,7 +124,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 借入申請年月日のsetメソッドです。
-     * 
+     *
      * @param kariireShinseiYMD 借入申請年月日
      */
     public void setKariireShinseiYMD(FlexibleDate kariireShinseiYMD) {
@@ -132,7 +133,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -141,7 +142,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -150,7 +151,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 借受年月日のgetメソッドです。
-     * 
+     *
      * @return 借受年月日
      */
     public FlexibleDate getKariukeYMD() {
@@ -159,7 +160,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 借受年月日のsetメソッドです。
-     * 
+     *
      * @param kariukeYMD 借受年月日
      */
     public void setKariukeYMD(FlexibleDate kariukeYMD) {
@@ -168,7 +169,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 借受人郵便番号のgetメソッドです。
-     * 
+     *
      * @return 借受人郵便番号
      */
     public YubinNo getKariukeninYubinNo() {
@@ -177,7 +178,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 借受人郵便番号のsetメソッドです。
-     * 
+     *
      * @param kariukeninYubinNo 借受人郵便番号
      */
     public void setKariukeninYubinNo(YubinNo kariukeninYubinNo) {
@@ -186,7 +187,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 借受人住所のgetメソッドです。
-     * 
+     *
      * @return 借受人住所
      */
     public RString getKariukeninJusho() {
@@ -195,7 +196,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 借受人住所のsetメソッドです。
-     * 
+     *
      * @param kariukeninJusho 借受人住所
      */
     public void setKariukeninJusho(RString kariukeninJusho) {
@@ -204,7 +205,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 借受人氏名カナのgetメソッドです。
-     * 
+     *
      * @return 借受人氏名カナ
      */
     public AtenaKanaMeisho getKariukeninShimeiKana() {
@@ -213,7 +214,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 借受人氏名カナのsetメソッドです。
-     * 
+     *
      * @param kariukeninShimeiKana 借受人氏名カナ
      */
     public void setKariukeninShimeiKana(AtenaKanaMeisho kariukeninShimeiKana) {
@@ -222,7 +223,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 借受人氏名のgetメソッドです。
-     * 
+     *
      * @return 借受人氏名
      */
     public AtenaMeisho getKariukeninShimei() {
@@ -231,7 +232,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 借受人氏名のsetメソッドです。
-     * 
+     *
      * @param kariukeninShimei 借受人氏名
      */
     public void setKariukeninShimei(AtenaMeisho kariukeninShimei) {
@@ -240,7 +241,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 借受人電話番号のgetメソッドです。
-     * 
+     *
      * @return 借受人電話番号
      */
     public TelNo getKariukeninTelNo() {
@@ -249,7 +250,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 借受人電話番号のsetメソッドです。
-     * 
+     *
      * @param kariukeninTelNo 借受人電話番号
      */
     public void setKariukeninTelNo(TelNo kariukeninTelNo) {
@@ -258,7 +259,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 保証人氏名カナのgetメソッドです。
-     * 
+     *
      * @return 保証人氏名カナ
      */
     public AtenaKanaMeisho getHoshoninShimeiKana() {
@@ -267,7 +268,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 保証人氏名カナのsetメソッドです。
-     * 
+     *
      * @param hoshoninShimeiKana 保証人氏名カナ
      */
     public void setHoshoninShimeiKana(AtenaKanaMeisho hoshoninShimeiKana) {
@@ -276,7 +277,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 保証人氏名のgetメソッドです。
-     * 
+     *
      * @return 保証人氏名
      */
     public AtenaKanaMeisho getHoshoninShimei() {
@@ -285,7 +286,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 保証人氏名のsetメソッドです。
-     * 
+     *
      * @param hoshoninShimei 保証人氏名
      */
     public void setHoshoninShimei(AtenaKanaMeisho hoshoninShimei) {
@@ -294,7 +295,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 保証人郵便番号のgetメソッドです。
-     * 
+     *
      * @return 保証人郵便番号
      */
     public YubinNo getHoshoninYubinNo() {
@@ -303,7 +304,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 保証人郵便番号のsetメソッドです。
-     * 
+     *
      * @param hoshoninYubinNo 保証人郵便番号
      */
     public void setHoshoninYubinNo(YubinNo hoshoninYubinNo) {
@@ -312,7 +313,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 保証人住所のgetメソッドです。
-     * 
+     *
      * @return 保証人住所
      */
     public RString getHoshoninJusho() {
@@ -321,7 +322,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 保証人住所のsetメソッドです。
-     * 
+     *
      * @param hoshoninJusho 保証人住所
      */
     public void setHoshoninJusho(RString hoshoninJusho) {
@@ -330,7 +331,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 保証人電話番号のgetメソッドです。
-     * 
+     *
      * @return 保証人電話番号
      */
     public TelNo getHoshoninTelNo() {
@@ -339,7 +340,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * 保証人電話番号のsetメソッドです。
-     * 
+     *
      * @param hoshoninTelNo 保証人電話番号
      */
     public void setHoshoninTelNo(TelNo hoshoninTelNo) {
@@ -348,9 +349,9 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * このエンティティの主キーが他の{@literal DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -393,6 +394,7 @@ public class DbT3088KyufuhiKashitsukekinShakuyoshoJuriEntity extends DbTableEnti
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

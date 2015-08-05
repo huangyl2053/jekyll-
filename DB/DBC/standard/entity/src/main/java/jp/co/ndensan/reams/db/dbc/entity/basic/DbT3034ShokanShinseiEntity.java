@@ -7,7 +7,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
@@ -16,7 +18,7 @@ import java.util.Objects;
  * 償還払支給申請テーブルのエンティティクラスです。
  */
 public class DbT3034ShokanShinseiEntity extends DbTableEntityBase<DbT3034ShokanShinseiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3034ShokanShinsei");
 
@@ -29,14 +31,14 @@ public class DbT3034ShokanShinseiEntity extends DbTableEntityBase<DbT3034ShokanS
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hiHokenshaNo;
+    private HihokenshaNo hiHokenshaNo;
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
     private RString seiriNo;
     @PrimaryKey
     private int rirekiNo;
-    private DbUDD003HokenshaNo shoKisaiHokenshaNo;
+    private HokenshaNo shoKisaiHokenshaNo;
     private FlexibleDate uketsukeYMD;
     private FlexibleDate shinseiYMD;
     private RString shinseiRiyu;
@@ -113,7 +115,7 @@ public class DbT3034ShokanShinseiEntity extends DbTableEntityBase<DbT3034ShokanS
      * 
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHiHokenshaNo() {
+    public HihokenshaNo getHiHokenshaNo() {
         return hiHokenshaNo;
     }
 
@@ -122,7 +124,7 @@ public class DbT3034ShokanShinseiEntity extends DbTableEntityBase<DbT3034ShokanS
      * 
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(DbUDD002HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
@@ -185,7 +187,7 @@ public class DbT3034ShokanShinseiEntity extends DbTableEntityBase<DbT3034ShokanS
      * 
      * @return 証記載保険者番号
      */
-    public DbUDD003HokenshaNo getShoKisaiHokenshaNo() {
+    public HokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
@@ -194,7 +196,7 @@ public class DbT3034ShokanShinseiEntity extends DbTableEntityBase<DbT3034ShokanS
      * 
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD003HokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(HokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
@@ -646,7 +648,7 @@ public class DbT3034ShokanShinseiEntity extends DbTableEntityBase<DbT3034ShokanS
      * このエンティティの主キーが他の{@literal DbT3034ShokanShinseiEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3034ShokanShinseiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -715,4 +717,5 @@ public class DbT3034ShokanShinseiEntity extends DbTableEntityBase<DbT3034ShokanS
     }
 
 // </editor-fold>
+
 }

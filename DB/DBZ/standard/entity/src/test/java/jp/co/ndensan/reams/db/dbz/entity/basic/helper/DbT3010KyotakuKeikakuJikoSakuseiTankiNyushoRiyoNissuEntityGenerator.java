@@ -37,10 +37,7 @@ public final class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntityGen
     public static DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity createDbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity() {
         DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity = new DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity();
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
-        entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);
-        entity.setShikibetsuCode(DEFAULT_識別コード);
         entity.setTaishoYM(DEFAULT_対象年月);
-        entity.setShoriTimestamp(DEFAULT_処理日時);
         entity.setZenkaiRiyoNissu(DEFAULT_前回迄利用日数);
         entity.setKonkaiKeikakuRiyoNissu(DEFAULT_今回計画利用日数);
         return entity;

@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 共同処理用受給者異動高額送付テーブルの項目定義クラスです。
  */
 public enum DbT3004KyodoShoriyoJukyushaIdoKogakuSofu implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     /**
      * insertDantaiCd
      */

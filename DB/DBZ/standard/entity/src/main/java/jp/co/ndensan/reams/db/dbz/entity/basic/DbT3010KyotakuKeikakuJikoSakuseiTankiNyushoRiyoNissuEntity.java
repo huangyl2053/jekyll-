@@ -1,27 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import java.util.Objects;
 
 /**
  * DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuの項目定義クラスです
  *
  */
 public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity extends DbTableEntityBase<DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissu");
 
@@ -36,19 +32,15 @@ public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity extends 
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private HokenshaNo shoKisaiHokenshaNo;
-    @PrimaryKey
-    private ShikibetsuCode shikibetsuCode;
-    @PrimaryKey
     private FlexibleYearMonth taishoYM;
     @PrimaryKey
-    private YMDHMS shoriTimestamp;
+    private int rirekiNo;
     private Decimal zenkaiRiyoNissu;
     private Decimal konkaiKeikakuRiyoNissu;
 
     /**
-     * getInsertDantaiCd
-     *
+     * insertDantaiCdのgetメソッドです。
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -56,8 +48,8 @@ public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity extends 
     }
 
     /**
-     * setInsertDantaiCd
-     *
+     * insertDantaiCdのsetメソッドです。
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -65,8 +57,8 @@ public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity extends 
     }
 
     /**
-     * getIsDeleted
-     *
+     * isDeletedのgetメソッドです。
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -74,17 +66,18 @@ public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity extends 
     }
 
     /**
-     * setIsDeleted
-     *
+     * isDeletedのsetメソッドです。
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
-     * setLastUpdateReamsLoginId
-     *
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -92,126 +85,90 @@ public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity extends 
     }
 
     /**
-     * getHihokenshaNo
-     *
-     * @return hihokenshaNo
+     * 被保険者番号のgetメソッドです。
+     * 
+     * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
-     * setHihokenshaNo
-     *
-     * @param hihokenshaNo hihokenshaNo
+     * 被保険者番号のsetメソッドです。
+     * 
+     * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
-     * getShoKisaiHokenshaNo
-     *
-     * @return shoKisaiHokenshaNo
-     */
-    public HokenshaNo getShoKisaiHokenshaNo() {
-        return shoKisaiHokenshaNo;
-    }
-
-    /**
-     * setShoKisaiHokenshaNo
-     *
-     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
-     */
-    public void setShoKisaiHokenshaNo(HokenshaNo shoKisaiHokenshaNo) {
-        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
-    }
-
-    /**
-     * getShikibetsuCode
-     *
-     * @return shikibetsuCode
-     */
-    public ShikibetsuCode getShikibetsuCode() {
-        return shikibetsuCode;
-    }
-
-    /**
-     * setShikibetsuCode
-     *
-     * @param shikibetsuCode shikibetsuCode
-     */
-    public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
-        this.shikibetsuCode = shikibetsuCode;
-    }
-
-    /**
-     * getTaishoYM
-     *
-     * @return taishoYM
+     * 対象年月のgetメソッドです。
+     * 
+     * @return 対象年月
      */
     public FlexibleYearMonth getTaishoYM() {
         return taishoYM;
     }
 
     /**
-     * setTaishoYM
-     *
-     * @param taishoYM taishoYM
+     * 対象年月のsetメソッドです。
+     * 
+     * @param taishoYM 対象年月
      */
     public void setTaishoYM(FlexibleYearMonth taishoYM) {
         this.taishoYM = taishoYM;
     }
 
     /**
-     * getShoriTimestamp
-     *
-     * @return shoriTimestamp
+     * 履歴番号のgetメソッドです。
+     * 
+     * @return 履歴番号
      */
-    public YMDHMS getShoriTimestamp() {
-        return shoriTimestamp;
+    public int getRirekiNo() {
+        return rirekiNo;
     }
 
     /**
-     * setShoriTimestamp
-     *
-     * @param shoriTimestamp shoriTimestamp
+     * 履歴番号のsetメソッドです。
+     * 
+     * @param rirekiNo 履歴番号
      */
-    public void setShoriTimestamp(YMDHMS shoriTimestamp) {
-        this.shoriTimestamp = shoriTimestamp;
+    public void setRirekiNo(int rirekiNo) {
+        this.rirekiNo = rirekiNo;
     }
 
     /**
-     * getZenkaiRiyoNissu
-     *
-     * @return zenkaiRiyoNissu
+     * 前回迄利用日数のgetメソッドです。
+     * 
+     * @return 前回迄利用日数
      */
     public Decimal getZenkaiRiyoNissu() {
         return zenkaiRiyoNissu;
     }
 
     /**
-     * setZenkaiRiyoNissu
-     *
-     * @param zenkaiRiyoNissu zenkaiRiyoNissu
+     * 前回迄利用日数のsetメソッドです。
+     * 
+     * @param zenkaiRiyoNissu 前回迄利用日数
      */
     public void setZenkaiRiyoNissu(Decimal zenkaiRiyoNissu) {
         this.zenkaiRiyoNissu = zenkaiRiyoNissu;
     }
 
     /**
-     * getKonkaiKeikakuRiyoNissu
-     *
-     * @return konkaiKeikakuRiyoNissu
+     * 今回計画利用日数のgetメソッドです。
+     * 
+     * @return 今回計画利用日数
      */
     public Decimal getKonkaiKeikakuRiyoNissu() {
         return konkaiKeikakuRiyoNissu;
     }
 
     /**
-     * setKonkaiKeikakuRiyoNissu
-     *
-     * @param konkaiKeikakuRiyoNissu konkaiKeikakuRiyoNissu
+     * 今回計画利用日数のsetメソッドです。
+     * 
+     * @param konkaiKeikakuRiyoNissu 今回計画利用日数
      */
     public void setKonkaiKeikakuRiyoNissu(Decimal konkaiKeikakuRiyoNissu) {
         this.konkaiKeikakuRiyoNissu = konkaiKeikakuRiyoNissu;
@@ -219,9 +176,9 @@ public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity extends 
 
     /**
      * このエンティティの主キーが他の{@literal DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @@return
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -232,16 +189,10 @@ public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity extends 
         if (!Objects.equals(this.hihokenshaNo, other.hihokenshaNo)) {
             return false;
         }
-        if (!Objects.equals(this.shoKisaiHokenshaNo, other.shoKisaiHokenshaNo)) {
-            return false;
-        }
-        if (!Objects.equals(this.shikibetsuCode, other.shikibetsuCode)) {
-            return false;
-        }
         if (!Objects.equals(this.taishoYM, other.taishoYM)) {
             return false;
         }
-        if (!Objects.equals(this.shoriTimestamp, other.shoriTimestamp)) {
+        if (this.rirekiNo != other.rirekiNo) {
             return false;
         }
         return true;
@@ -253,23 +204,21 @@ public class DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity extends 
     @Override
     public void shallowCopy(DbT3010KyotakuKeikakuJikoSakuseiTankiNyushoRiyoNissuEntity entity) {
         this.hihokenshaNo = entity.hihokenshaNo;
-        this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
-        this.shikibetsuCode = entity.shikibetsuCode;
         this.taishoYM = entity.taishoYM;
-        this.shoriTimestamp = entity.shoriTimestamp;
+        this.rirekiNo = entity.rirekiNo;
         this.zenkaiRiyoNissu = entity.zenkaiRiyoNissu;
         this.konkaiKeikakuRiyoNissu = entity.konkaiKeikakuRiyoNissu;
     }
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hihokenshaNo, shoKisaiHokenshaNo, shikibetsuCode, taishoYM, shoriTimestamp, zenkaiRiyoNissu, konkaiKeikakuRiyoNissu);
+        return super.toMd5(hihokenshaNo, taishoYM, rirekiNo, zenkaiRiyoNissu, konkaiKeikakuRiyoNissu);
     }
 
 // </editor-fold>
+
 }

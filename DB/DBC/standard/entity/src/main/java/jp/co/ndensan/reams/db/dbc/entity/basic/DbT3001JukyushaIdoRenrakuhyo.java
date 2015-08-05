@@ -6,7 +6,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 受給者異動送付テーブルの項目定義クラスです。
  */
 public enum DbT3001JukyushaIdoRenrakuhyo implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     /**
      * insertDantaiCd
      */
@@ -203,8 +204,8 @@ public enum DbT3001JukyushaIdoRenrakuhyo implements IColumnDefinition {
     kyufuritsuHikisageShuryoYMD(2147483647, 0),
     /**
      * 減免申請中区分コード
-     * <br/>1:申請無し 
-     * <br/>2:申請中 
+     * <br/>1:申請無し      *
+     * <br/>2:申請中      *
      * <br/>3:決定済み
      */
     gemmenShinseichuKubunCode(1, 0),
@@ -395,7 +396,7 @@ public enum DbT3001JukyushaIdoRenrakuhyo implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -404,7 +405,7 @@ public enum DbT3001JukyushaIdoRenrakuhyo implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

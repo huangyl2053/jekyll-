@@ -15,7 +15,8 @@ import java.util.Objects;
  * 市町村特別給付サービス内容テーブルのエンティティクラスです。
  */
 public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBase<DbT3066ShichosonTokubetuKyufuServiceEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3066ShichosonTokubetuKyufuService");
 
@@ -45,7 +46,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -54,7 +55,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -63,7 +64,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -72,17 +73,16 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -91,7 +91,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 市町村特別給付用サービスコードのgetメソッドです。
-     * 
+     *
      * @return 市町村特別給付用サービスコード
      */
     public RString getServiceCode() {
@@ -100,7 +100,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 市町村特別給付用サービスコードのsetメソッドです。
-     * 
+     *
      * @param serviceCode 市町村特別給付用サービスコード
      */
     public void setServiceCode(RString serviceCode) {
@@ -109,7 +109,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 市町村特別給付用サービス有効期間開始年月日のgetメソッドです。
-     * 
+     *
      * @return 市町村特別給付用サービス有効期間開始年月日
      */
     public FlexibleDate getServiceYukoKikanKaishiYMD() {
@@ -118,7 +118,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 市町村特別給付用サービス有効期間開始年月日のsetメソッドです。
-     * 
+     *
      * @param serviceYukoKikanKaishiYMD 市町村特別給付用サービス有効期間開始年月日
      */
     public void setServiceYukoKikanKaishiYMD(FlexibleDate serviceYukoKikanKaishiYMD) {
@@ -127,7 +127,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -136,7 +136,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -145,7 +145,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 市町村特別給付用サービス名（正式名称）のgetメソッドです。
-     * 
+     *
      * @return 市町村特別給付用サービス名（正式名称）
      */
     public RString getServiceSeishikiName() {
@@ -154,7 +154,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 市町村特別給付用サービス名（正式名称）のsetメソッドです。
-     * 
+     *
      * @param serviceSeishikiName 市町村特別給付用サービス名（正式名称）
      */
     public void setServiceSeishikiName(RString serviceSeishikiName) {
@@ -163,7 +163,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 市町村特別給付用サービス名（略称）のgetメソッドです。
-     * 
+     *
      * @return 市町村特別給付用サービス名（略称）
      */
     public RString getServiceRyakushoName() {
@@ -172,7 +172,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 市町村特別給付用サービス名（略称）のsetメソッドです。
-     * 
+     *
      * @param serviceRyakushoName 市町村特別給付用サービス名（略称）
      */
     public void setServiceRyakushoName(RString serviceRyakushoName) {
@@ -181,7 +181,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 市町村特別給付用サービス有効期間終了年月日のgetメソッドです。
-     * 
+     *
      * @return 市町村特別給付用サービス有効期間終了年月日
      */
     public FlexibleDate getServiceYukoKikanShuryoYMD() {
@@ -190,7 +190,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 市町村特別給付用サービス有効期間終了年月日のsetメソッドです。
-     * 
+     *
      * @param serviceYukoKikanShuryoYMD 市町村特別給付用サービス有効期間終了年月日
      */
     public void setServiceYukoKikanShuryoYMD(FlexibleDate serviceYukoKikanShuryoYMD) {
@@ -201,7 +201,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
      * 市町村特別給付用サービス区分のgetメソッドです。
      * <br/>
      * <br/>単位、日数
-     * 
+     *
      * @return 市町村特別給付用サービス区分
      */
     public RString getServiceKubun() {
@@ -212,7 +212,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
      * 市町村特別給付用サービス区分のsetメソッドです。
      * <br/>
      * <br/>単位、日数
-     * 
+     *
      * @param serviceKubun 市町村特別給付用サービス区分
      */
     public void setServiceKubun(RString serviceKubun) {
@@ -223,7 +223,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
      * 市町村特別給付用単位・日数のgetメソッドです。
      * <br/>
      * <br/>サービスの1回あたりの単位数
-     * 
+     *
      * @return 市町村特別給付用単位・日数
      */
     public Decimal getTanisuNissu() {
@@ -234,7 +234,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
      * 市町村特別給付用単位・日数のsetメソッドです。
      * <br/>
      * <br/>サービスの1回あたりの単位数
-     * 
+     *
      * @param tanisuNissu 市町村特別給付用単位・日数
      */
     public void setTanisuNissu(Decimal tanisuNissu) {
@@ -245,7 +245,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
      * 市町村特別給付用支給限度基準額のgetメソッドです。
      * <br/>
      * <br/>サービスの支給限度基準額（月あたり）
-     * 
+     *
      * @return 市町村特別給付用支給限度基準額
      */
     public Decimal getShikyuGendoKijungaku() {
@@ -256,7 +256,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
      * 市町村特別給付用支給限度基準額のsetメソッドです。
      * <br/>
      * <br/>サービスの支給限度基準額（月あたり）
-     * 
+     *
      * @param shikyuGendoKijungaku 市町村特別給付用支給限度基準額
      */
     public void setShikyuGendoKijungaku(Decimal shikyuGendoKijungaku) {
@@ -265,7 +265,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 市町村特別給付用給付率引下有フラグのgetメソッドです。
-     * 
+     *
      * @return 市町村特別給付用給付率引下有フラグ
      */
     public boolean getKyufuritsuHikisageAriFlag() {
@@ -274,7 +274,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 市町村特別給付用給付率引下有フラグのsetメソッドです。
-     * 
+     *
      * @param kyufuritsuHikisageAriFlag 市町村特別給付用給付率引下有フラグ
      */
     public void setKyufuritsuHikisageAriFlag(boolean kyufuritsuHikisageAriFlag) {
@@ -283,7 +283,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 登録年月日のgetメソッドです。
-     * 
+     *
      * @return 登録年月日
      */
     public FlexibleDate getTorokuYMD() {
@@ -292,7 +292,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 登録年月日のsetメソッドです。
-     * 
+     *
      * @param torokuYMD 登録年月日
      */
     public void setTorokuYMD(FlexibleDate torokuYMD) {
@@ -301,7 +301,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 変更年月日のgetメソッドです。
-     * 
+     *
      * @return 変更年月日
      */
     public FlexibleDate getHenkoYMD() {
@@ -310,7 +310,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * 変更年月日のsetメソッドです。
-     * 
+     *
      * @param henkoYMD 変更年月日
      */
     public void setHenkoYMD(FlexibleDate henkoYMD) {
@@ -319,9 +319,9 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * このエンティティの主キーが他の{@literal DbT3066ShichosonTokubetuKyufuServiceEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3066ShichosonTokubetuKyufuServiceEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -362,6 +362,7 @@ public class DbT3066ShichosonTokubetuKyufuServiceEntity extends DbTableEntityBas
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

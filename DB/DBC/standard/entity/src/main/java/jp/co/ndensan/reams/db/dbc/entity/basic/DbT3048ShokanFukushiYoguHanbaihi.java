@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 償還払請求福祉用具販売費テーブルの項目定義クラスです。
  */
 public enum DbT3048ShokanFukushiYoguHanbaihi implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     /**
      * insertDantaiCd
      */

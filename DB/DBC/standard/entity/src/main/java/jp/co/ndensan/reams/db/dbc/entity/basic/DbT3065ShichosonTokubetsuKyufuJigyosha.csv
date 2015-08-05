@@ -1,5 +1,5 @@
-﻿jigyoshaNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,市町村特別給付用事業者番号,A
-serviceCode,DbUDD007ServiceCode,DbUDD007ServiceCode,,,,,市町村特別給付用サービスコード,A
+﻿jigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,市町村特別給付用事業者番号,A
+serviceCode,DbUDD007ServiceCode,ServiceCode,,,,,市町村特別給付用サービスコード,A
 rirekiNo,int2,int,,,,,履歴番号,A
 idoKubun,varchar,RString,,,,,介護国保連ＩＦ異動区分,A
 idoYMD,UDD015YMD,FlexibleDate,,,,,介護国保連ＩＦ異動年月日,A
@@ -35,7 +35,7 @@ serviceJigyoshoJigyoKaisiYMD,UDD015YMD,FlexibleDate,,,,,サービス事業所事
 serviceJigyoshoJigyoKyushiYMD,UDD015YMD,FlexibleDate,,,,,サービス事業所事業休止年月日,A
 serviceJigyoshoJigyoHaishiYMD,UDD015YMD,FlexibleDate,,,,,サービス事業所事業廃止年月日,A
 serviceJigyoshoJigyoSaikaiYMD,UDD015YMD,FlexibleDate,,,,,サービス事業所事業再開年月日,A
-shokisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,介護保険証記載保険者番号,A
+shokisaiHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,介護保険証記載保険者番号,A
 juryoIninKubu,varchar,RString,,,,,受領委任区分,A
 torokuKaishiYMD,UDD015YMD,FlexibleDate,,,,,市町村特別給付登録開始年月日,A
 torokuShuryoYMD,UDD015YMD,FlexibleDate,,,,,市町村特別給付登録終了年月日,A

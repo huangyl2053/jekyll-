@@ -1,8 +1,8 @@
 ﻿idoYMD,UDD015YMD,FlexibleDate,,,,,異動年月日,A
 idoKubunCode,varchar,RString,,,,,異動区分コード,A
 jukyushaIdoJiyu,varchar,RString,,,,,受給者異動事由,A
-shoKisaiHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,証記載保険者番号,A
-hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+shoKisaiHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,証記載保険者番号,A
+hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 rirekiNo,int2,int,,,,,履歴番号,A
 hiHokenshaNameKana,varchar,RString,,,,,被保険者氏名カナ,A
 umareYMD,UDD015YMD,FlexibleDate,,,,,生年月日,A
@@ -12,7 +12,7 @@ shikakuSoshitsuYMD,UDD015YMD,FlexibleDate,,,,,資格喪失年月日,A
 rojinHokenShichosonNo,varchar,RString,,,,,老人保健市町村番号,A
 rojinHokenJukyushaNo,varchar,RString,,,,,老人保健受給者番号,A
 kohiFutanshaNo,varchar,RString,,,,,公費負担者番号,A
-koikiRengoHokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,広域連合（政令市）保険者番号,A
+koikiRengoHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,広域連合（政令市）保険者番号,A
 shinseiShubetsuCode,varchar,RString,,,,,申請種別コード,A
 henkoShinseichuKubunCode,varchar,RString,,,,,変更申請中区分コード,A
 shinseiYMD,UDD015YMD,FlexibleDate,,,,,申請年月日,A
@@ -21,7 +21,7 @@ yokaigoJotaiKubunCode,varchar,RString,,,,,要介護状態区分コード,A
 ninteiYukoKikankaishiYMD,UDD015YMD,FlexibleDate,,,,,認定有効期間開始年月日,A
 ninteiYukoKikanShuryoYMD,UDD015YMD,FlexibleDate,,,,,認定有効期間終了年月日,A
 kyotakuServiceSakuseiKubunCode,varchar,RString,,,,,居宅サービス計画作成区分コード,A
-kyotakuKaigoShienJigyoshoNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,居宅介護支援事業所番号,A
+kyotakuKaigoShienJigyoshoNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,居宅介護支援事業所番号,A
 kyotakuServiceTekiyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,居宅サービス計画適用開始年月日,A
 kyotakuServiceTekiyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,居宅サービス計画適用終了年月日,A
 homonTsushoServiceShikyuGendoKijungaku,int4,int,,,,,訪問通所サービス支給限度基準額,A
@@ -37,7 +37,7 @@ kyufuritsuHikisageKaishiYMD,UDD015YMD,FlexibleDate,,,,,給付率引下げ開始�
 kyufuritsuHikisageShuryoYMD,UDD015YMD,FlexibleDate,,,,,給付率引下げ終了年月日,A
 gemmenShinseichuKubunCode,varchar,RString,,,,,減免申請中区分コード,A
 riyoshaFutanKubunCode,varchar,RString,,,,,利用者負担区分コード,A
-kyufuritsu,DbUDD011HokenKyufuRitsu,DbUDD011HokenKyufuRitsu,,,,,給付率,A
+kyufuritsu,DbUDD011HokenKyufuRitsu,HokenKyufuRitsu,,,,,給付率,A
 tekiyoKaishiYMD,UDD015YMD,FlexibleDate,,,,,適用開始年月日,A
 tekiyoShuryoYMD,UDD015YMD,FlexibleDate,,,,,適用終了年月日,A
 hyojunFutanKubunCode,varchar,RString,,,,,標準負担区分コード,A

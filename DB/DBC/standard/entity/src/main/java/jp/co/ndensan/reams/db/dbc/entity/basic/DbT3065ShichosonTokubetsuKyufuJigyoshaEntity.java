@@ -7,8 +7,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import java.util.Objects;
 
@@ -16,7 +19,8 @@ import java.util.Objects;
  * 市町村特別給付サービス事業者テーブルのエンティティクラスです。
  */
 public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityBase<DbT3065ShichosonTokubetsuKyufuJigyoshaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3065ShichosonTokubetsuKyufuJigyosha");
 
@@ -29,9 +33,9 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD004JigyoshaNo jigyoshaNo;
+    private JigyoshaNo jigyoshaNo;
     @PrimaryKey
-    private DbUDD007ServiceCode serviceCode;
+    private ServiceCode serviceCode;
     @PrimaryKey
     private int rirekiNo;
     private RString idoKubun;
@@ -68,7 +72,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
     private FlexibleDate serviceJigyoshoJigyoKyushiYMD;
     private FlexibleDate serviceJigyoshoJigyoHaishiYMD;
     private FlexibleDate serviceJigyoshoJigyoSaikaiYMD;
-    private DbUDD003HokenshaNo shokisaiHokenshaNo;
+    private HokenshaNo shokisaiHokenshaNo;
     private RString juryoIninKubu;
     private FlexibleDate torokuKaishiYMD;
     private FlexibleDate torokuShuryoYMD;
@@ -78,7 +82,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -87,7 +91,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -96,7 +100,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -105,17 +109,16 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -124,43 +127,43 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 市町村特別給付用事業者番号のgetメソッドです。
-     * 
+     *
      * @return 市町村特別給付用事業者番号
      */
-    public DbUDD004JigyoshaNo getJigyoshaNo() {
+    public JigyoshaNo getJigyoshaNo() {
         return jigyoshaNo;
     }
 
     /**
      * 市町村特別給付用事業者番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshaNo 市町村特別給付用事業者番号
      */
-    public void setJigyoshaNo(DbUDD004JigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
     /**
      * 市町村特別給付用サービスコードのgetメソッドです。
-     * 
+     *
      * @return 市町村特別給付用サービスコード
      */
-    public DbUDD007ServiceCode getServiceCode() {
+    public ServiceCode getServiceCode() {
         return serviceCode;
     }
 
     /**
      * 市町村特別給付用サービスコードのsetメソッドです。
-     * 
+     *
      * @param serviceCode 市町村特別給付用サービスコード
      */
-    public void setServiceCode(DbUDD007ServiceCode serviceCode) {
+    public void setServiceCode(ServiceCode serviceCode) {
         this.serviceCode = serviceCode;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -169,7 +172,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -178,7 +181,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 介護国保連ＩＦ異動区分のgetメソッドです。
-     * 
+     *
      * @return 介護国保連ＩＦ異動区分
      */
     public RString getIdoKubun() {
@@ -187,7 +190,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 介護国保連ＩＦ異動区分のsetメソッドです。
-     * 
+     *
      * @param idoKubun 介護国保連ＩＦ異動区分
      */
     public void setIdoKubun(RString idoKubun) {
@@ -196,7 +199,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 介護国保連ＩＦ異動年月日のgetメソッドです。
-     * 
+     *
      * @return 介護国保連ＩＦ異動年月日
      */
     public FlexibleDate getIdoYMD() {
@@ -205,7 +208,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 介護国保連ＩＦ異動年月日のsetメソッドです。
-     * 
+     *
      * @param idoYMD 介護国保連ＩＦ異動年月日
      */
     public void setIdoYMD(FlexibleDate idoYMD) {
@@ -216,7 +219,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      * 介護国保連ＩＦ訂正区分のgetメソッドです。
      * <br/>
      * <br/>訂正の場合、必須
-     * 
+     *
      * @return 介護国保連ＩＦ訂正区分
      */
     public RString getTeiseiKubun() {
@@ -227,7 +230,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      * 介護国保連ＩＦ訂正区分のsetメソッドです。
      * <br/>
      * <br/>訂正の場合、必須
-     * 
+     *
      * @param teiseiKubun 介護国保連ＩＦ訂正区分
      */
     public void setTeiseiKubun(RString teiseiKubun) {
@@ -238,7 +241,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      * 介護国保連ＩＦ訂正年月日のgetメソッドです。
      * <br/>
      * <br/>訂正の場合、必須
-     * 
+     *
      * @return 介護国保連ＩＦ訂正年月日
      */
     public FlexibleDate getTeiseiYMD() {
@@ -249,7 +252,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
      * 介護国保連ＩＦ訂正年月日のsetメソッドです。
      * <br/>
      * <br/>訂正の場合、必須
-     * 
+     *
      * @param teiseiYMD 介護国保連ＩＦ訂正年月日
      */
     public void setTeiseiYMD(FlexibleDate teiseiYMD) {
@@ -258,7 +261,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 介護国保連ＩＦ法人種別のgetメソッドです。
-     * 
+     *
      * @return 介護国保連ＩＦ法人種別
      */
     public RString getHojinShubetsu() {
@@ -267,7 +270,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 介護国保連ＩＦ法人種別のsetメソッドです。
-     * 
+     *
      * @param hojinShubetsu 介護国保連ＩＦ法人種別
      */
     public void setHojinShubetsu(RString hojinShubetsu) {
@@ -276,7 +279,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 申請者氏名（漢字）のgetメソッドです。
-     * 
+     *
      * @return 申請者氏名（漢字）
      */
     public RString getShinseishaNameKanji() {
@@ -285,7 +288,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 申請者氏名（漢字）のsetメソッドです。
-     * 
+     *
      * @param shinseishaNameKanji 申請者氏名（漢字）
      */
     public void setShinseishaNameKanji(RString shinseishaNameKanji) {
@@ -294,7 +297,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 申請者氏名（カナ）のgetメソッドです。
-     * 
+     *
      * @return 申請者氏名（カナ）
      */
     public RString getShinseishaNameKana() {
@@ -303,7 +306,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 申請者氏名（カナ）のsetメソッドです。
-     * 
+     *
      * @param shinseishaNameKana 申請者氏名（カナ）
      */
     public void setShinseishaNameKana(RString shinseishaNameKana) {
@@ -312,7 +315,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 申請者郵便番号のgetメソッドです。
-     * 
+     *
      * @return 申請者郵便番号
      */
     public YubinNo getShinseishaYubinNo() {
@@ -321,7 +324,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 申請者郵便番号のsetメソッドです。
-     * 
+     *
      * @param shinseishaYubinNo 申請者郵便番号
      */
     public void setShinseishaYubinNo(YubinNo shinseishaYubinNo) {
@@ -330,7 +333,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 申請者住所のgetメソッドです。
-     * 
+     *
      * @return 申請者住所
      */
     public RString getShinseishaAddressKanji() {
@@ -339,7 +342,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 申請者住所のsetメソッドです。
-     * 
+     *
      * @param shinseishaAddressKanji 申請者住所
      */
     public void setShinseishaAddressKanji(RString shinseishaAddressKanji) {
@@ -348,7 +351,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 申請者住所（カナ）のgetメソッドです。
-     * 
+     *
      * @return 申請者住所（カナ）
      */
     public RString getShinseishaAddressKana() {
@@ -357,7 +360,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 申請者住所（カナ）のsetメソッドです。
-     * 
+     *
      * @param shinseishaAddressKana 申請者住所（カナ）
      */
     public void setShinseishaAddressKana(RString shinseishaAddressKana) {
@@ -366,7 +369,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 申請者電話番号のgetメソッドです。
-     * 
+     *
      * @return 申請者電話番号
      */
     public RString getShinseishaTelNo() {
@@ -375,7 +378,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 申請者電話番号のsetメソッドです。
-     * 
+     *
      * @param shinseishaTelNo 申請者電話番号
      */
     public void setShinseishaTelNo(RString shinseishaTelNo) {
@@ -384,7 +387,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 申請者FAX番号のgetメソッドです。
-     * 
+     *
      * @return 申請者FAX番号
      */
     public RString getShinseishaFaxNo() {
@@ -393,7 +396,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 申請者FAX番号のsetメソッドです。
-     * 
+     *
      * @param shinseishaFaxNo 申請者FAX番号
      */
     public void setShinseishaFaxNo(RString shinseishaFaxNo) {
@@ -402,7 +405,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所代表者役職のgetメソッドです。
-     * 
+     *
      * @return 事業所代表者役職
      */
     public RString getJigyoshoDaihyoshaYakushoku() {
@@ -411,7 +414,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所代表者役職のsetメソッドです。
-     * 
+     *
      * @param jigyoshoDaihyoshaYakushoku 事業所代表者役職
      */
     public void setJigyoshoDaihyoshaYakushoku(RString jigyoshoDaihyoshaYakushoku) {
@@ -420,7 +423,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所代表者氏名のgetメソッドです。
-     * 
+     *
      * @return 事業所代表者氏名
      */
     public RString getJigyoshoDaihyoshaNameKanji() {
@@ -429,7 +432,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所代表者氏名のsetメソッドです。
-     * 
+     *
      * @param jigyoshoDaihyoshaNameKanji 事業所代表者氏名
      */
     public void setJigyoshoDaihyoshaNameKanji(RString jigyoshoDaihyoshaNameKanji) {
@@ -438,7 +441,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所代表者氏名カナのgetメソッドです。
-     * 
+     *
      * @return 事業所代表者氏名カナ
      */
     public RString getJigyoshoDaihyoshaNameKana() {
@@ -447,7 +450,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所代表者氏名カナのsetメソッドです。
-     * 
+     *
      * @param jigyoshoDaihyoshaNameKana 事業所代表者氏名カナ
      */
     public void setJigyoshoDaihyoshaNameKana(RString jigyoshoDaihyoshaNameKana) {
@@ -456,7 +459,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所代表者郵便番号のgetメソッドです。
-     * 
+     *
      * @return 事業所代表者郵便番号
      */
     public YubinNo getJigyoshoDaihyoshaYubinNo() {
@@ -465,7 +468,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所代表者郵便番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshoDaihyoshaYubinNo 事業所代表者郵便番号
      */
     public void setJigyoshoDaihyoshaYubinNo(YubinNo jigyoshoDaihyoshaYubinNo) {
@@ -474,7 +477,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所代表者住所のgetメソッドです。
-     * 
+     *
      * @return 事業所代表者住所
      */
     public RString getJigyoshoDaihyoshaAddressKanji() {
@@ -483,7 +486,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所代表者住所のsetメソッドです。
-     * 
+     *
      * @param jigyoshoDaihyoshaAddressKanji 事業所代表者住所
      */
     public void setJigyoshoDaihyoshaAddressKanji(RString jigyoshoDaihyoshaAddressKanji) {
@@ -492,7 +495,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所代表者住所カナのgetメソッドです。
-     * 
+     *
      * @return 事業所代表者住所カナ
      */
     public RString getJigyoshoDaihyoshaAddressKana() {
@@ -501,7 +504,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所代表者住所カナのsetメソッドです。
-     * 
+     *
      * @param jigyoshoDaihyoshaAddressKana 事業所代表者住所カナ
      */
     public void setJigyoshoDaihyoshaAddressKana(RString jigyoshoDaihyoshaAddressKana) {
@@ -510,7 +513,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所管理者氏名のgetメソッドです。
-     * 
+     *
      * @return 事業所管理者氏名
      */
     public RString getJigyoshoKanrishaNameKanji() {
@@ -519,7 +522,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所管理者氏名のsetメソッドです。
-     * 
+     *
      * @param jigyoshoKanrishaNameKanji 事業所管理者氏名
      */
     public void setJigyoshoKanrishaNameKanji(RString jigyoshoKanrishaNameKanji) {
@@ -528,7 +531,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所管理者氏名カナのgetメソッドです。
-     * 
+     *
      * @return 事業所管理者氏名カナ
      */
     public RString getJigyoshoKanrishaNameKana() {
@@ -537,7 +540,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所管理者氏名カナのsetメソッドです。
-     * 
+     *
      * @param jigyoshoKanrishaNameKana 事業所管理者氏名カナ
      */
     public void setJigyoshoKanrishaNameKana(RString jigyoshoKanrishaNameKana) {
@@ -546,7 +549,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所管理者郵便番号のgetメソッドです。
-     * 
+     *
      * @return 事業所管理者郵便番号
      */
     public YubinNo getJigyoshoKanrishaYubinNo() {
@@ -555,7 +558,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所管理者郵便番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshoKanrishaYubinNo 事業所管理者郵便番号
      */
     public void setJigyoshoKanrishaYubinNo(YubinNo jigyoshoKanrishaYubinNo) {
@@ -564,7 +567,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所管理者住所のgetメソッドです。
-     * 
+     *
      * @return 事業所管理者住所
      */
     public RString getJigyoshoKanrishaAddressKanji() {
@@ -573,7 +576,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所管理者住所のsetメソッドです。
-     * 
+     *
      * @param jigyoshoKanrishaAddressKanji 事業所管理者住所
      */
     public void setJigyoshoKanrishaAddressKanji(RString jigyoshoKanrishaAddressKanji) {
@@ -582,7 +585,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所管理者住所カナのgetメソッドです。
-     * 
+     *
      * @return 事業所管理者住所カナ
      */
     public RString getJigyoshoKanrishaAddressKana() {
@@ -591,7 +594,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 事業所管理者住所カナのsetメソッドです。
-     * 
+     *
      * @param jigyoshoKanrishaAddressKana 事業所管理者住所カナ
      */
     public void setJigyoshoKanrishaAddressKana(RString jigyoshoKanrishaAddressKana) {
@@ -600,7 +603,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所名のgetメソッドです。
-     * 
+     *
      * @return サービス事業所名
      */
     public RString getServiceJigyoshoNameKanji() {
@@ -609,7 +612,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所名のsetメソッドです。
-     * 
+     *
      * @param serviceJigyoshoNameKanji サービス事業所名
      */
     public void setServiceJigyoshoNameKanji(RString serviceJigyoshoNameKanji) {
@@ -618,7 +621,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所名カナのgetメソッドです。
-     * 
+     *
      * @return サービス事業所名カナ
      */
     public RString getServiceJigyoshoNameKana() {
@@ -627,7 +630,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所名カナのsetメソッドです。
-     * 
+     *
      * @param serviceJigyoshoNameKana サービス事業所名カナ
      */
     public void setServiceJigyoshoNameKana(RString serviceJigyoshoNameKana) {
@@ -636,7 +639,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所郵便番号のgetメソッドです。
-     * 
+     *
      * @return サービス事業所郵便番号
      */
     public YubinNo getServiceJigyoshoYubinNo() {
@@ -645,7 +648,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所郵便番号のsetメソッドです。
-     * 
+     *
      * @param serviceJigyoshoYubinNo サービス事業所郵便番号
      */
     public void setServiceJigyoshoYubinNo(YubinNo serviceJigyoshoYubinNo) {
@@ -654,7 +657,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所住所のgetメソッドです。
-     * 
+     *
      * @return サービス事業所住所
      */
     public RString getServiceJigyoshoAddressKanji() {
@@ -663,7 +666,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所住所のsetメソッドです。
-     * 
+     *
      * @param serviceJigyoshoAddressKanji サービス事業所住所
      */
     public void setServiceJigyoshoAddressKanji(RString serviceJigyoshoAddressKanji) {
@@ -672,7 +675,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所住所カナのgetメソッドです。
-     * 
+     *
      * @return サービス事業所住所カナ
      */
     public RString getServiceJigyoshoAddressKana() {
@@ -681,7 +684,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所住所カナのsetメソッドです。
-     * 
+     *
      * @param serviceJigyoshoAddressKana サービス事業所住所カナ
      */
     public void setServiceJigyoshoAddressKana(RString serviceJigyoshoAddressKana) {
@@ -690,7 +693,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所電話番号のgetメソッドです。
-     * 
+     *
      * @return サービス事業所電話番号
      */
     public RString getServiceJigyoshoTelNo() {
@@ -699,7 +702,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所電話番号のsetメソッドです。
-     * 
+     *
      * @param serviceJigyoshoTelNo サービス事業所電話番号
      */
     public void setServiceJigyoshoTelNo(RString serviceJigyoshoTelNo) {
@@ -708,7 +711,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所FAX番号のgetメソッドです。
-     * 
+     *
      * @return サービス事業所FAX番号
      */
     public RString getServiceJigyoshoFaxNo() {
@@ -717,7 +720,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所FAX番号のsetメソッドです。
-     * 
+     *
      * @param serviceJigyoshoFaxNo サービス事業所FAX番号
      */
     public void setServiceJigyoshoFaxNo(RString serviceJigyoshoFaxNo) {
@@ -726,7 +729,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所事業開始年月日のgetメソッドです。
-     * 
+     *
      * @return サービス事業所事業開始年月日
      */
     public FlexibleDate getServiceJigyoshoJigyoKaisiYMD() {
@@ -735,7 +738,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所事業開始年月日のsetメソッドです。
-     * 
+     *
      * @param serviceJigyoshoJigyoKaisiYMD サービス事業所事業開始年月日
      */
     public void setServiceJigyoshoJigyoKaisiYMD(FlexibleDate serviceJigyoshoJigyoKaisiYMD) {
@@ -744,7 +747,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所事業休止年月日のgetメソッドです。
-     * 
+     *
      * @return サービス事業所事業休止年月日
      */
     public FlexibleDate getServiceJigyoshoJigyoKyushiYMD() {
@@ -753,7 +756,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所事業休止年月日のsetメソッドです。
-     * 
+     *
      * @param serviceJigyoshoJigyoKyushiYMD サービス事業所事業休止年月日
      */
     public void setServiceJigyoshoJigyoKyushiYMD(FlexibleDate serviceJigyoshoJigyoKyushiYMD) {
@@ -762,7 +765,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所事業廃止年月日のgetメソッドです。
-     * 
+     *
      * @return サービス事業所事業廃止年月日
      */
     public FlexibleDate getServiceJigyoshoJigyoHaishiYMD() {
@@ -771,7 +774,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所事業廃止年月日のsetメソッドです。
-     * 
+     *
      * @param serviceJigyoshoJigyoHaishiYMD サービス事業所事業廃止年月日
      */
     public void setServiceJigyoshoJigyoHaishiYMD(FlexibleDate serviceJigyoshoJigyoHaishiYMD) {
@@ -780,7 +783,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所事業再開年月日のgetメソッドです。
-     * 
+     *
      * @return サービス事業所事業再開年月日
      */
     public FlexibleDate getServiceJigyoshoJigyoSaikaiYMD() {
@@ -789,7 +792,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * サービス事業所事業再開年月日のsetメソッドです。
-     * 
+     *
      * @param serviceJigyoshoJigyoSaikaiYMD サービス事業所事業再開年月日
      */
     public void setServiceJigyoshoJigyoSaikaiYMD(FlexibleDate serviceJigyoshoJigyoSaikaiYMD) {
@@ -798,25 +801,25 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 介護保険証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 介護保険証記載保険者番号
      */
-    public DbUDD003HokenshaNo getShokisaiHokenshaNo() {
+    public HokenshaNo getShokisaiHokenshaNo() {
         return shokisaiHokenshaNo;
     }
 
     /**
      * 介護保険証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shokisaiHokenshaNo 介護保険証記載保険者番号
      */
-    public void setShokisaiHokenshaNo(DbUDD003HokenshaNo shokisaiHokenshaNo) {
+    public void setShokisaiHokenshaNo(HokenshaNo shokisaiHokenshaNo) {
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
     /**
      * 受領委任区分のgetメソッドです。
-     * 
+     *
      * @return 受領委任区分
      */
     public RString getJuryoIninKubu() {
@@ -825,7 +828,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 受領委任区分のsetメソッドです。
-     * 
+     *
      * @param juryoIninKubu 受領委任区分
      */
     public void setJuryoIninKubu(RString juryoIninKubu) {
@@ -834,7 +837,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 市町村特別給付登録開始年月日のgetメソッドです。
-     * 
+     *
      * @return 市町村特別給付登録開始年月日
      */
     public FlexibleDate getTorokuKaishiYMD() {
@@ -843,7 +846,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 市町村特別給付登録開始年月日のsetメソッドです。
-     * 
+     *
      * @param torokuKaishiYMD 市町村特別給付登録開始年月日
      */
     public void setTorokuKaishiYMD(FlexibleDate torokuKaishiYMD) {
@@ -852,7 +855,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 市町村特別給付登録終了年月日のgetメソッドです。
-     * 
+     *
      * @return 市町村特別給付登録終了年月日
      */
     public FlexibleDate getTorokuShuryoYMD() {
@@ -861,7 +864,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 市町村特別給付登録終了年月日のsetメソッドです。
-     * 
+     *
      * @param torokuShuryoYMD 市町村特別給付登録終了年月日
      */
     public void setTorokuShuryoYMD(FlexibleDate torokuShuryoYMD) {
@@ -870,7 +873,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 生活保護法による指定の有のgetメソッドです。
-     * 
+     *
      * @return 生活保護法による指定の有
      */
     public boolean getSeikatsuhogoShiteiFlag() {
@@ -879,7 +882,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 生活保護法による指定の有のsetメソッドです。
-     * 
+     *
      * @param seikatsuhogoShiteiFlag 生活保護法による指定の有
      */
     public void setSeikatsuhogoShiteiFlag(boolean seikatsuhogoShiteiFlag) {
@@ -888,7 +891,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 市町村コードのgetメソッドです。
-     * 
+     *
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
@@ -897,7 +900,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 市町村コードのsetメソッドです。
-     * 
+     *
      * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -906,7 +909,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 地域区分のgetメソッドです。
-     * 
+     *
      * @return 地域区分
      */
     public RString getChiikiKubun() {
@@ -915,7 +918,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * 地域区分のsetメソッドです。
-     * 
+     *
      * @param chiikiKubun 地域区分
      */
     public void setChiikiKubun(RString chiikiKubun) {
@@ -924,9 +927,9 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * このエンティティの主キーが他の{@literal DbT3065ShichosonTokubetsuKyufuJigyoshaEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3065ShichosonTokubetsuKyufuJigyoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -999,6 +1002,7 @@ public class DbT3065ShichosonTokubetsuKyufuJigyoshaEntity extends DbTableEntityB
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

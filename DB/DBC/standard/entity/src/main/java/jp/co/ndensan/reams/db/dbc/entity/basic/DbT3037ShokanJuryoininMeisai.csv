@@ -1,4 +1,4 @@
-﻿hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+﻿hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
 seiriNo,varchar,RString,,,,,整理番号,A
 rirekiNo,int2,int,,,,,履歴番号,A

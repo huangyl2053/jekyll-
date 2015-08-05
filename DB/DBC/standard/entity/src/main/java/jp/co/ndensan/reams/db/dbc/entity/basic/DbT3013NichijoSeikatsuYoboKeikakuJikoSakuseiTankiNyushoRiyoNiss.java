@@ -6,7 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 予防給付計画自己作成短期利用日数テーブルの項目定義クラスです。
  */
 public enum DbT3013NichijoSeikatsuYoboKeikakuJikoSakuseiTankiNyushoRiyoNiss implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     /**
      * insertDantaiCd
      */

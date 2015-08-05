@@ -6,7 +6,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 過誤決定明細テーブルの項目定義クラスです。
  */
 public enum DbT3061KagoKetteiMeisai implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     /**
      * insertDantaiCd
      */
@@ -46,10 +47,13 @@ public enum DbT3061KagoKetteiMeisai implements IColumnDefinition {
     toriatsukaiYM(2147483647, 0),
     /**
      * 保険者区分
-     * <br/>1：保険者
-     * <br/>2：公費負担者　
-     * <br/>3：総合事業費(経過措置)保険者
-     * <br/>4：総合事業費保険者
+     * <br/>1：保険者
+     *
+     * <br/>2：公費負担者　     *
+     * <br/>3：総合事業費(経過措置)保険者
+     *
+     * <br/>4：総合事業費保険者
+     *
      * <br/>5：総合事業費公費負担者
      */
     hokenshaKubun(1, 0),
@@ -118,7 +122,7 @@ public enum DbT3061KagoKetteiMeisai implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -127,7 +131,7 @@ public enum DbT3061KagoKetteiMeisai implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

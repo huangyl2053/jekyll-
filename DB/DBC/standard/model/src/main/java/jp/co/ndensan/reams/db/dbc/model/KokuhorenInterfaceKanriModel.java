@@ -66,7 +66,7 @@ public class KokuhorenInterfaceKanriModel implements Serializable {
      * @return 処理年月
      */
     public RYearMonth get処理年月() {
-        return entity.getShoriYM();
+        return new RYearMonth(entity.getShoriYM().getYearValue(), entity.getShoriYM().getMonthValue());
     }
 
     /**
@@ -255,7 +255,7 @@ public class KokuhorenInterfaceKanriModel implements Serializable {
      * @return コントロール上処理年月
      */
     public RYearMonth getコントロール上処理年月() {
-        return entity.getCtrlShoriYM();
+        return new RYearMonth(entity.getCtrlShoriYM().getYearValue(), entity.getCtrlShoriYM().getMonthValue());
     }
 
     /**
@@ -273,7 +273,7 @@ public class KokuhorenInterfaceKanriModel implements Serializable {
      * @return 過誤コントロール上処理年月
      */
     public RYearMonth get過誤コントロール上処理年月() {
-        return entity.getKagoCtrlShoriYM();
+        return new RYearMonth(entity.getKagoCtrlShoriYM().getYearValue(), entity.getKagoCtrlShoriYM().getMonthValue());
     }
 
     /**
@@ -282,7 +282,7 @@ public class KokuhorenInterfaceKanriModel implements Serializable {
      * @return 実績データ上審査年月
      */
     public RYearMonth get実績データ上審査年月() {
-        return entity.getJissekiDataShinsaYM();
+        return new RYearMonth(entity.getJissekiDataShinsaYM().getYearValue(), entity.getJissekiDataShinsaYM().getMonthValue());
     }
 
     /**
@@ -292,7 +292,7 @@ public class KokuhorenInterfaceKanriModel implements Serializable {
      */
     public void set処理年月(RYearMonth 処理年月) {
         requireNonNull(処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage("処理年月"));
-        entity.setShoriYM(処理年月);
+        entity.setShoriYM(new FlexibleYearMonth(処理年月.toDateString()));
     }
 
     /**
@@ -502,7 +502,7 @@ public class KokuhorenInterfaceKanriModel implements Serializable {
      */
     public void setコントロール上処理年月(RYearMonth コントロール上処理年月) {
         requireNonNull(コントロール上処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage("コントロール上処理年月"));
-        entity.setCtrlShoriYM(コントロール上処理年月);
+        entity.setCtrlShoriYM(new FlexibleYearMonth(コントロール上処理年月.toDateString()));
     }
 
     /**
@@ -522,7 +522,7 @@ public class KokuhorenInterfaceKanriModel implements Serializable {
      */
     public void set過誤コントロール上処理年月(RYearMonth 過誤コントロール上処理年月) {
         requireNonNull(過誤コントロール上処理年月, UrSystemErrorMessages.値がnull.getReplacedMessage("過誤コントロール上処理年月"));
-        entity.setKagoCtrlShoriYM(過誤コントロール上処理年月);
+        entity.setKagoCtrlShoriYM(new FlexibleYearMonth(過誤コントロール上処理年月.toDateString()));
     }
 
     /**
@@ -532,7 +532,7 @@ public class KokuhorenInterfaceKanriModel implements Serializable {
      */
     public void set実績データ上審査年月(RYearMonth 実績データ上審査年月) {
         requireNonNull(実績データ上審査年月, UrSystemErrorMessages.値がnull.getReplacedMessage("実績データ上審査年月"));
-        entity.setJissekiDataShinsaYM(実績データ上審査年月);
+        entity.setJissekiDataShinsaYM(new FlexibleYearMonth(実績データ上審査年月.toDateString()));
     }
 
     /**

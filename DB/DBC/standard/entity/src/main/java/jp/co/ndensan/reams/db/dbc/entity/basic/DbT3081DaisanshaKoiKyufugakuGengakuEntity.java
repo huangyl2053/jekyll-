@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
@@ -15,7 +16,8 @@ import java.util.Objects;
  * 介護第三者行為給付額減額テーブルのエンティティクラスです。
  */
 public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase<DbT3081DaisanshaKoiKyufugakuGengakuEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3081DaisanshaKoiKyufugakuGengaku");
 
@@ -28,7 +30,7 @@ public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private RString todokedeKanriNo;
     @PrimaryKey
@@ -39,7 +41,7 @@ public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -48,7 +50,7 @@ public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -57,7 +59,7 @@ public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -66,17 +68,16 @@ public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -85,25 +86,25 @@ public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 第三者行為届出管理番号のgetメソッドです。
-     * 
+     *
      * @return 第三者行為届出管理番号
      */
     public RString getTodokedeKanriNo() {
@@ -112,7 +113,7 @@ public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase
 
     /**
      * 第三者行為届出管理番号のsetメソッドです。
-     * 
+     *
      * @param todokedeKanriNo 第三者行為届出管理番号
      */
     public void setTodokedeKanriNo(RString todokedeKanriNo) {
@@ -121,7 +122,7 @@ public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -130,7 +131,7 @@ public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -139,7 +140,7 @@ public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase
 
     /**
      * 減額対象金額のgetメソッドです。
-     * 
+     *
      * @return 減額対象金額
      */
     public Decimal getGengakuTaishoKingaku() {
@@ -148,7 +149,7 @@ public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase
 
     /**
      * 減額対象金額のsetメソッドです。
-     * 
+     *
      * @param gengakuTaishoKingaku 減額対象金額
      */
     public void setGengakuTaishoKingaku(Decimal gengakuTaishoKingaku) {
@@ -157,7 +158,7 @@ public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase
 
     /**
      * 給付額減額期間開始年月日のgetメソッドです。
-     * 
+     *
      * @return 給付額減額期間開始年月日
      */
     public FlexibleDate getGengakuKaishiYMD() {
@@ -166,7 +167,7 @@ public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase
 
     /**
      * 給付額減額期間開始年月日のsetメソッドです。
-     * 
+     *
      * @param gengakuKaishiYMD 給付額減額期間開始年月日
      */
     public void setGengakuKaishiYMD(FlexibleDate gengakuKaishiYMD) {
@@ -175,7 +176,7 @@ public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase
 
     /**
      * 給付額減額期間終了年月日のgetメソッドです。
-     * 
+     *
      * @return 給付額減額期間終了年月日
      */
     public FlexibleDate getGengakuShuryoYMD() {
@@ -184,7 +185,7 @@ public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase
 
     /**
      * 給付額減額期間終了年月日のsetメソッドです。
-     * 
+     *
      * @param gengakuShuryoYMD 給付額減額期間終了年月日
      */
     public void setGengakuShuryoYMD(FlexibleDate gengakuShuryoYMD) {
@@ -193,9 +194,9 @@ public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase
 
     /**
      * このエンティティの主キーが他の{@literal DbT3081DaisanshaKoiKyufugakuGengakuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3081DaisanshaKoiKyufugakuGengakuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -230,6 +231,7 @@ public class DbT3081DaisanshaKoiKyufugakuGengakuEntity extends DbTableEntityBase
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

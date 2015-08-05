@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -18,7 +19,8 @@ import java.util.Objects;
  * 介護第三者行為求償テーブルのエンティティクラスです。
  */
 public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082DaisanshaKoiKyushoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3082DaisanshaKoiKyusho");
 
@@ -31,7 +33,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private RString todokedeKanriNo;
     @PrimaryKey
@@ -51,7 +53,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -60,7 +62,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -69,7 +71,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -78,17 +80,16 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -97,25 +98,25 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 第三者行為届出管理番号のgetメソッドです。
-     * 
+     *
      * @return 第三者行為届出管理番号
      */
     public RString getTodokedeKanriNo() {
@@ -124,7 +125,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 第三者行為届出管理番号のsetメソッドです。
-     * 
+     *
      * @param todokedeKanriNo 第三者行為届出管理番号
      */
     public void setTodokedeKanriNo(RString todokedeKanriNo) {
@@ -133,7 +134,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 第三者行為求償請求番号のgetメソッドです。
-     * 
+     *
      * @return 第三者行為求償請求番号
      */
     public RString getKyushoSeikyuNo() {
@@ -142,7 +143,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 第三者行為求償請求番号のsetメソッドです。
-     * 
+     *
      * @param kyushoSeikyuNo 第三者行為求償請求番号
      */
     public void setKyushoSeikyuNo(RString kyushoSeikyuNo) {
@@ -151,7 +152,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -160,7 +161,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -169,7 +170,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 給付額合計のgetメソッドです。
-     * 
+     *
      * @return 給付額合計
      */
     public Decimal getKyufuGakuGokei() {
@@ -178,7 +179,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 給付額合計のsetメソッドです。
-     * 
+     *
      * @param kyufuGakuGokei 給付額合計
      */
     public void setKyufuGakuGokei(Decimal kyufuGakuGokei) {
@@ -187,7 +188,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 過失相殺額のgetメソッドです。
-     * 
+     *
      * @return 過失相殺額
      */
     public Decimal getKashitsuSosatsuGaku() {
@@ -196,7 +197,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 過失相殺額のsetメソッドです。
-     * 
+     *
      * @param kashitsuSosatsuGaku 過失相殺額
      */
     public void setKashitsuSosatsuGaku(Decimal kashitsuSosatsuGaku) {
@@ -205,7 +206,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 保険給付請求額のgetメソッドです。
-     * 
+     *
      * @return 保険給付請求額
      */
     public Decimal getHokenKyufuSeikyuGaku() {
@@ -214,7 +215,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 保険給付請求額のsetメソッドです。
-     * 
+     *
      * @param hokenKyufuSeikyuGaku 保険給付請求額
      */
     public void setHokenKyufuSeikyuGaku(Decimal hokenKyufuSeikyuGaku) {
@@ -223,7 +224,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 損害賠償金納入期限のgetメソッドです。
-     * 
+     *
      * @return 損害賠償金納入期限
      */
     public FlexibleDate getSongaiBaishoKinNonyuYMD() {
@@ -232,7 +233,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 損害賠償金納入期限のsetメソッドです。
-     * 
+     *
      * @param songaiBaishoKinNonyuYMD 損害賠償金納入期限
      */
     public void setSongaiBaishoKinNonyuYMD(FlexibleDate songaiBaishoKinNonyuYMD) {
@@ -241,7 +242,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 請求先郵便番号のgetメソッドです。
-     * 
+     *
      * @return 請求先郵便番号
      */
     public YubinNo getSeikyusakiYubinNo() {
@@ -250,7 +251,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 請求先郵便番号のsetメソッドです。
-     * 
+     *
      * @param seikyusakiYubinNo 請求先郵便番号
      */
     public void setSeikyusakiYubinNo(YubinNo seikyusakiYubinNo) {
@@ -259,7 +260,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 請求先住所のgetメソッドです。
-     * 
+     *
      * @return 請求先住所
      */
     public RString getSeikyusakiJusho() {
@@ -268,7 +269,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 請求先住所のsetメソッドです。
-     * 
+     *
      * @param seikyusakiJusho 請求先住所
      */
     public void setSeikyusakiJusho(RString seikyusakiJusho) {
@@ -277,7 +278,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 請求先名称のgetメソッドです。
-     * 
+     *
      * @return 請求先名称
      */
     public AtenaMeisho getSeikyusakiMeisho() {
@@ -286,7 +287,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 請求先名称のsetメソッドです。
-     * 
+     *
      * @param seikyusakiMeisho 請求先名称
      */
     public void setSeikyusakiMeisho(AtenaMeisho seikyusakiMeisho) {
@@ -295,7 +296,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 請求先部署のgetメソッドです。
-     * 
+     *
      * @return 請求先部署
      */
     public RString getSeikyusakiBusho() {
@@ -304,7 +305,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 請求先部署のsetメソッドです。
-     * 
+     *
      * @param seikyusakiBusho 請求先部署
      */
     public void setSeikyusakiBusho(RString seikyusakiBusho) {
@@ -313,7 +314,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 請求先担当者のgetメソッドです。
-     * 
+     *
      * @return 請求先担当者
      */
     public AtenaMeisho getSeikyusakiTantosha() {
@@ -322,7 +323,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 請求先担当者のsetメソッドです。
-     * 
+     *
      * @param seikyusakiTantosha 請求先担当者
      */
     public void setSeikyusakiTantosha(AtenaMeisho seikyusakiTantosha) {
@@ -331,7 +332,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 請求先電話番号のgetメソッドです。
-     * 
+     *
      * @return 請求先電話番号
      */
     public TelNo getSeikyusakiTelNo() {
@@ -340,7 +341,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * 請求先電話番号のsetメソッドです。
-     * 
+     *
      * @param seikyusakiTelNo 請求先電話番号
      */
     public void setSeikyusakiTelNo(TelNo seikyusakiTelNo) {
@@ -349,9 +350,9 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * このエンティティの主キーが他の{@literal DbT3082DaisanshaKoiKyushoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3082DaisanshaKoiKyushoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -397,6 +398,7 @@ public class DbT3082DaisanshaKoiKyushoEntity extends DbTableEntityBase<DbT3082Da
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

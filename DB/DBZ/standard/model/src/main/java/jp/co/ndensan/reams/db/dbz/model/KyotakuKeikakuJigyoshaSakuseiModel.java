@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.model;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -65,25 +67,7 @@ public class KyotakuKeikakuJigyoshaSakuseiModel implements Serializable {
      * @return 被保険者番号
      */
     public RString get被保険者番号() {
-        return entity.getHihokenshano();
-    }
-
-    /**
-     * 証記載保険者番号を返します。
-     *
-     * @return 証記載保険者番号
-     */
-    public RString get証記載保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
-    }
-
-    /**
-     * 識別コードを返します。
-     *
-     * @return 識別コード
-     */
-    public ShikibetsuCode get識別コード() {
-        return entity.getShikibetsuCode();
+        return entity.getHihokenshano().getColumnValue();
     }
 
     /**
@@ -93,15 +77,6 @@ public class KyotakuKeikakuJigyoshaSakuseiModel implements Serializable {
      */
     public FlexibleYearMonth get対象年月() {
         return entity.getTaishoYM();
-    }
-
-    /**
-     * 処理日時を返します。
-     *
-     * @return 処理日時
-     */
-    public YMDHMS get処理日時() {
-        return entity.getShoriTimestamp();
     }
 
     /**
@@ -128,7 +103,7 @@ public class KyotakuKeikakuJigyoshaSakuseiModel implements Serializable {
      * @return 計画事業者番号
      */
     public RString get計画事業者番号() {
-        return entity.getKeikakuJigyoshaNo();
+        return entity.getKeikakuJigyoshaNo().getColumnValue();
     }
 
     /**
@@ -137,7 +112,7 @@ public class KyotakuKeikakuJigyoshaSakuseiModel implements Serializable {
      * @return 委託先事業者番号
      */
     public RString get委託先事業者番号() {
-        return entity.getItakusakiJigyoshaNo();
+        return entity.getItakusakiJigyoshaNo().getColumnValue();
     }
 
     /**
@@ -165,27 +140,7 @@ public class KyotakuKeikakuJigyoshaSakuseiModel implements Serializable {
      */
     public void set被保険者番号(RString 被保険者番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        entity.setHihokenshano(被保険者番号);
-    }
-
-    /**
-     * 証記載保険者番号を設定します。
-     *
-     * @param 証記載保険者番号 証記載保険者番号
-     */
-    public void set証記載保険者番号(RString 証記載保険者番号) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
-    }
-
-    /**
-     * 識別コードを設定します。
-     *
-     * @param 識別コード 識別コード
-     */
-    public void set識別コード(ShikibetsuCode 識別コード) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        entity.setShikibetsuCode(識別コード);
+        entity.setHihokenshano(new HihokenshaNo(被保険者番号));
     }
 
     /**
@@ -196,16 +151,6 @@ public class KyotakuKeikakuJigyoshaSakuseiModel implements Serializable {
     public void set対象年月(FlexibleYearMonth 対象年月) {
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         entity.setTaishoYM(対象年月);
-    }
-
-    /**
-     * 処理日時を設定します。
-     *
-     * @param 処理日時 処理日時
-     */
-    public void set処理日時(YMDHMS 処理日時) {
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
-        entity.setShoriTimestamp(処理日時);
     }
 
     /**
@@ -235,7 +180,7 @@ public class KyotakuKeikakuJigyoshaSakuseiModel implements Serializable {
      */
     public void set計画事業者番号(RString 計画事業者番号) {
         requireNonNull(計画事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("計画事業者番号"));
-        entity.setKeikakuJigyoshaNo(計画事業者番号);
+        entity.setKeikakuJigyoshaNo(new JigyoshaNo(計画事業者番号));
     }
 
     /**
@@ -245,7 +190,7 @@ public class KyotakuKeikakuJigyoshaSakuseiModel implements Serializable {
      */
     public void set委託先事業者番号(RString 委託先事業者番号) {
         requireNonNull(委託先事業者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("委託先事業者番号"));
-        entity.setItakusakiJigyoshaNo(委託先事業者番号);
+        entity.setItakusakiJigyoshaNo(new JigyoshaNo(委託先事業者番号));
     }
 
     /**

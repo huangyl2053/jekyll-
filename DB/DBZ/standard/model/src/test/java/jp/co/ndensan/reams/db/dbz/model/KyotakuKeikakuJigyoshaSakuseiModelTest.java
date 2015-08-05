@@ -38,27 +38,9 @@ public class KyotakuKeikakuJigyoshaSakuseiModelTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
-            sut.set証記載保険者番号(DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_証記載保険者番号);
-            assertThat(sut.get証記載保険者番号(), is(DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_証記載保険者番号));
-        }
-
-        @Test
-        public void 戻り値の識別コードは_設定した値と同じ識別コードを返す() {
-            sut.set識別コード(DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_識別コード);
-            assertThat(sut.get識別コード(), is(DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_識別コード));
-        }
-
-        @Test
         public void 戻り値の対象年月は_設定した値と同じ対象年月を返す() {
             sut.set対象年月(DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_対象年月);
             assertThat(sut.get対象年月(), is(DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_対象年月));
-        }
-
-        @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator.DEFAULT_処理日時));
         }
 
         @Test

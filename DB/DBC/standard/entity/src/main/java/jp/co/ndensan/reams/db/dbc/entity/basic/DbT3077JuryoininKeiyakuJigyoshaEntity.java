@@ -13,14 +13,15 @@ import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import java.util.Objects;
 
 /**
- * DbT3077JuryoininKeiyakuJigyoshaの項目定義クラスです
- *
+ * 受領委任契約事業者テーブルのエンティティクラスです。
  */
 public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT3077JuryoininKeiyakuJigyoshaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3077JuryoininKeiyakuJigyosha");
 
@@ -64,7 +65,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -73,7 +74,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -82,7 +83,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -91,17 +92,16 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -112,7 +112,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
      * 事業者契約番号のgetメソッドです。
      * <br/>
      * <br/>1からの連番付番
-     * 
+     *
      * @return 事業者契約番号
      */
     public RString getJigyoshaKeiyakuNo() {
@@ -123,7 +123,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
      * 事業者契約番号のsetメソッドです。
      * <br/>
      * <br/>1からの連番付番
-     * 
+     *
      * @param jigyoshaKeiyakuNo 事業者契約番号
      */
     public void setJigyoshaKeiyakuNo(RString jigyoshaKeiyakuNo) {
@@ -132,7 +132,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 開始年月日のgetメソッドです。
-     * 
+     *
      * @return 開始年月日
      */
     public FlexibleDate getKaishiYMD() {
@@ -141,7 +141,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 開始年月日のsetメソッドです。
-     * 
+     *
      * @param kaishiYMD 開始年月日
      */
     public void setKaishiYMD(FlexibleDate kaishiYMD) {
@@ -150,7 +150,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -159,7 +159,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -168,7 +168,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 終了年月日のgetメソッドです。
-     * 
+     *
      * @return 終了年月日
      */
     public FlexibleDate getShuryoYMD() {
@@ -177,7 +177,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 終了年月日のsetメソッドです。
-     * 
+     *
      * @param shuryoYMD 終了年月日
      */
     public void setShuryoYMD(FlexibleDate shuryoYMD) {
@@ -186,7 +186,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 届出年月日のgetメソッドです。
-     * 
+     *
      * @return 届出年月日
      */
     public FlexibleDate getTodokedeYMD() {
@@ -195,7 +195,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 届出年月日のsetメソッドです。
-     * 
+     *
      * @param todokedeYMD 届出年月日
      */
     public void setTodokedeYMD(FlexibleDate todokedeYMD) {
@@ -204,7 +204,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 届出者住所のgetメソッドです。
-     * 
+     *
      * @return 届出者住所
      */
     public RString getTodokedeAddress() {
@@ -213,7 +213,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 届出者住所のsetメソッドです。
-     * 
+     *
      * @param todokedeAddress 届出者住所
      */
     public void setTodokedeAddress(RString todokedeAddress) {
@@ -222,7 +222,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 届出者事業者名称のgetメソッドです。
-     * 
+     *
      * @return 届出者事業者名称
      */
     public RString getTodokedeJigyoshaName() {
@@ -231,7 +231,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 届出者事業者名称のsetメソッドです。
-     * 
+     *
      * @param todokedeJigyoshaName 届出者事業者名称
      */
     public void setTodokedeJigyoshaName(RString todokedeJigyoshaName) {
@@ -240,7 +240,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 届出者代表者氏名のgetメソッドです。
-     * 
+     *
      * @return 届出者代表者氏名
      */
     public RString getTodokedeDaihyoshaName() {
@@ -249,7 +249,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 届出者代表者氏名のsetメソッドです。
-     * 
+     *
      * @param todokedeDaihyoshaName 届出者代表者氏名
      */
     public void setTodokedeDaihyoshaName(RString todokedeDaihyoshaName) {
@@ -258,7 +258,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 金融機関コードのgetメソッドです。
-     * 
+     *
      * @return 金融機関コード
      */
     public KinyuKikanCode getKinyuKikanCode() {
@@ -267,7 +267,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 金融機関コードのsetメソッドです。
-     * 
+     *
      * @param kinyuKikanCode 金融機関コード
      */
     public void setKinyuKikanCode(KinyuKikanCode kinyuKikanCode) {
@@ -276,7 +276,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 支店コードのgetメソッドです。
-     * 
+     *
      * @return 支店コード
      */
     public KinyuKikanShitenCode getShitenCode() {
@@ -285,7 +285,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 支店コードのsetメソッドです。
-     * 
+     *
      * @param shitenCode 支店コード
      */
     public void setShitenCode(KinyuKikanShitenCode shitenCode) {
@@ -294,7 +294,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 口座種別のgetメソッドです。
-     * 
+     *
      * @return 口座種別
      */
     public RString getKozaShubetsu() {
@@ -303,7 +303,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 口座種別のsetメソッドです。
-     * 
+     *
      * @param kozaShubetsu 口座種別
      */
     public void setKozaShubetsu(RString kozaShubetsu) {
@@ -312,7 +312,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 口座番号のgetメソッドです。
-     * 
+     *
      * @return 口座番号
      */
     public RString getKozaNo() {
@@ -321,7 +321,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 口座番号のsetメソッドです。
-     * 
+     *
      * @param kozaNo 口座番号
      */
     public void setKozaNo(RString kozaNo) {
@@ -330,7 +330,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 通帳記号のgetメソッドです。
-     * 
+     *
      * @return 通帳記号
      */
     public RString getTsuchoKigo() {
@@ -339,7 +339,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 通帳記号のsetメソッドです。
-     * 
+     *
      * @param tsuchoKigo 通帳記号
      */
     public void setTsuchoKigo(RString tsuchoKigo) {
@@ -348,7 +348,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 通帳番号のgetメソッドです。
-     * 
+     *
      * @return 通帳番号
      */
     public RString getTsuchoNo() {
@@ -357,7 +357,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 通帳番号のsetメソッドです。
-     * 
+     *
      * @param tsuchoNo 通帳番号
      */
     public void setTsuchoNo(RString tsuchoNo) {
@@ -366,7 +366,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 口座名義人のgetメソッドです。
-     * 
+     *
      * @return 口座名義人
      */
     public AtenaKanaMeisho getKozaMeiginin() {
@@ -375,7 +375,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 口座名義人のsetメソッドです。
-     * 
+     *
      * @param kozaMeiginin 口座名義人
      */
     public void setKozaMeiginin(AtenaKanaMeisho kozaMeiginin) {
@@ -384,7 +384,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 口座名義人漢字のgetメソッドです。
-     * 
+     *
      * @return 口座名義人漢字
      */
     public AtenaMeisho getKozaMeigininKanji() {
@@ -393,7 +393,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 口座名義人漢字のsetメソッドです。
-     * 
+     *
      * @param kozaMeigininKanji 口座名義人漢字
      */
     public void setKozaMeigininKanji(AtenaMeisho kozaMeigininKanji) {
@@ -402,7 +402,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 事業者FAX番号のgetメソッドです。
-     * 
+     *
      * @return 事業者FAX番号
      */
     public TelNo getJigyoshaFaxNo() {
@@ -411,7 +411,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 事業者FAX番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshaFaxNo 事業者FAX番号
      */
     public void setJigyoshaFaxNo(TelNo jigyoshaFaxNo) {
@@ -420,7 +420,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 契約登録年月日のgetメソッドです。
-     * 
+     *
      * @return 契約登録年月日
      */
     public FlexibleDate getKeiyakuTorokuYMD() {
@@ -429,7 +429,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 契約登録年月日のsetメソッドです。
-     * 
+     *
      * @param keiyakuTorokuYMD 契約登録年月日
      */
     public void setKeiyakuTorokuYMD(FlexibleDate keiyakuTorokuYMD) {
@@ -438,7 +438,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 送付先部署のgetメソッドです。
-     * 
+     *
      * @return 送付先部署
      */
     public RString getSofusakiBusho() {
@@ -447,7 +447,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 送付先部署のsetメソッドです。
-     * 
+     *
      * @param sofusakiBusho 送付先部署
      */
     public void setSofusakiBusho(RString sofusakiBusho) {
@@ -458,7 +458,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
      * 営業形態のgetメソッドです。
      * <br/>
      * <br/>個人、法人の分け
-     * 
+     *
      * @return 営業形態
      */
     public RString getEigyoKeitai() {
@@ -469,7 +469,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
      * 営業形態のsetメソッドです。
      * <br/>
      * <br/>個人、法人の分け
-     * 
+     *
      * @param eigyoKeitai 営業形態
      */
     public void setEigyoKeitai(RString eigyoKeitai) {
@@ -480,7 +480,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
      * 住宅改修契約有無のgetメソッドです。
      * <br/>
      * <br/>0:契約無し,1:契約有り（償還払給付契約有無が「0」である場合に限る）
-     * 
+     *
      * @return 住宅改修契約有無
      */
     public boolean getJutakuKaishuKeiyakuUmu() {
@@ -491,7 +491,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
      * 住宅改修契約有無のsetメソッドです。
      * <br/>
      * <br/>0:契約無し,1:契約有り（償還払給付契約有無が「0」である場合に限る）
-     * 
+     *
      * @param jutakuKaishuKeiyakuUmu 住宅改修契約有無
      */
     public void setJutakuKaishuKeiyakuUmu(boolean jutakuKaishuKeiyakuUmu) {
@@ -502,7 +502,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
      * 特定福祉用具販売契約有無のgetメソッドです。
      * <br/>
      * <br/>0:契約無し,1:契約有り（償還払給付契約有無が「0」である場合に限る）
-     * 
+     *
      * @return 特定福祉用具販売契約有無
      */
     public boolean getTokuteiFukushiYoguHanbaiKeiyakuUmu() {
@@ -513,7 +513,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
      * 特定福祉用具販売契約有無のsetメソッドです。
      * <br/>
      * <br/>0:契約無し,1:契約有り（償還払給付契約有無が「0」である場合に限る）
-     * 
+     *
      * @param tokuteiFukushiYoguHanbaiKeiyakuUmu 特定福祉用具販売契約有無
      */
     public void setTokuteiFukushiYoguHanbaiKeiyakuUmu(boolean tokuteiFukushiYoguHanbaiKeiyakuUmu) {
@@ -524,7 +524,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
      * 償還払給付契約有無のgetメソッドです。
      * <br/>
      * <br/>0:契約無し,1:契約有り（住宅改修契約有無および特定福祉用具販売契約有無が「0」である場合に限る）
-     * 
+     *
      * @return 償還払給付契約有無
      */
     public boolean getShokanbaraiKyufuKeiyakuUmu() {
@@ -535,7 +535,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
      * 償還払給付契約有無のsetメソッドです。
      * <br/>
      * <br/>0:契約無し,1:契約有り（住宅改修契約有無および特定福祉用具販売契約有無が「0」である場合に限る）
-     * 
+     *
      * @param shokanbaraiKyufuKeiyakuUmu 償還払給付契約有無
      */
     public void setShokanbaraiKyufuKeiyakuUmu(boolean shokanbaraiKyufuKeiyakuUmu) {
@@ -546,7 +546,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
      * 高額給付契約有無のgetメソッドです。
      * <br/>
      * <br/>0:契約無し,1:契約有り
-     * 
+     *
      * @return 高額給付契約有無
      */
     public boolean getKogakuKyufuKeiyakuUmu() {
@@ -557,7 +557,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
      * 高額給付契約有無のsetメソッドです。
      * <br/>
      * <br/>0:契約無し,1:契約有り
-     * 
+     *
      * @param kogakuKyufuKeiyakuUmu 高額給付契約有無
      */
     public void setKogakuKyufuKeiyakuUmu(boolean kogakuKyufuKeiyakuUmu) {
@@ -566,7 +566,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 契約事業者番号のgetメソッドです。
-     * 
+     *
      * @return 契約事業者番号
      */
     public JigyoshaNo getKeiyakuJigyoshaNo() {
@@ -575,7 +575,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 契約事業者番号のsetメソッドです。
-     * 
+     *
      * @param keiyakuJigyoshaNo 契約事業者番号
      */
     public void setKeiyakuJigyoshaNo(JigyoshaNo keiyakuJigyoshaNo) {
@@ -584,7 +584,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 取扱確約書有無のgetメソッドです。
-     * 
+     *
      * @return 取扱確約書有無
      */
     public boolean getToriatsukaiKakuyakushoUmu() {
@@ -593,7 +593,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * 取扱確約書有無のsetメソッドです。
-     * 
+     *
      * @param toriatsukaiKakuyakushoUmu 取扱確約書有無
      */
     public void setToriatsukaiKakuyakushoUmu(boolean toriatsukaiKakuyakushoUmu) {
@@ -602,9 +602,9 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * このエンティティの主キーが他の{@literal DbT3077JuryoininKeiyakuJigyoshaEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3077JuryoininKeiyakuJigyoshaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -659,6 +659,7 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -667,9 +668,4 @@ public class DbT3077JuryoininKeiyakuJigyoshaEntity extends DbTableEntityBase<DbT
     }
 
 // </editor-fold>
-
-
-
-
-
 }

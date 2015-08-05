@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
@@ -15,7 +16,8 @@ import java.util.Objects;
  * 市町村単独助成種類テーブルのエンティティクラスです。
  */
 public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099TandokuJoseiShuruiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3099TandokuJoseiShurui");
 
@@ -30,7 +32,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
     @PrimaryKey
     private RString tandokuJoseiShuruiCode;
     @PrimaryKey
-    private DbUDD005ServiceShuruiCode joseiServiceShuruiCode;
+    private ServiceShuruiCode joseiServiceShuruiCode;
     @PrimaryKey
     private FlexibleYearMonth tekiyoKaishiYM;
     @PrimaryKey
@@ -42,7 +44,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -51,7 +53,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -60,7 +62,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -69,17 +71,16 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -88,7 +89,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * 市町村単独助成種類のgetメソッドです。
-     * 
+     *
      * @return 市町村単独助成種類
      */
     public RString getTandokuJoseiShuruiCode() {
@@ -97,7 +98,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * 市町村単独助成種類のsetメソッドです。
-     * 
+     *
      * @param tandokuJoseiShuruiCode 市町村単独助成種類
      */
     public void setTandokuJoseiShuruiCode(RString tandokuJoseiShuruiCode) {
@@ -106,25 +107,25 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * 助成サービス種類コードのgetメソッドです。
-     * 
+     *
      * @return 助成サービス種類コード
      */
-    public DbUDD005ServiceShuruiCode getJoseiServiceShuruiCode() {
+    public ServiceShuruiCode getJoseiServiceShuruiCode() {
         return joseiServiceShuruiCode;
     }
 
     /**
      * 助成サービス種類コードのsetメソッドです。
-     * 
+     *
      * @param joseiServiceShuruiCode 助成サービス種類コード
      */
-    public void setJoseiServiceShuruiCode(DbUDD005ServiceShuruiCode joseiServiceShuruiCode) {
+    public void setJoseiServiceShuruiCode(ServiceShuruiCode joseiServiceShuruiCode) {
         this.joseiServiceShuruiCode = joseiServiceShuruiCode;
     }
 
     /**
      * 適用開始年月のgetメソッドです。
-     * 
+     *
      * @return 適用開始年月
      */
     public FlexibleYearMonth getTekiyoKaishiYM() {
@@ -133,7 +134,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * 適用開始年月のsetメソッドです。
-     * 
+     *
      * @param tekiyoKaishiYM 適用開始年月
      */
     public void setTekiyoKaishiYM(FlexibleYearMonth tekiyoKaishiYM) {
@@ -142,7 +143,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -151,7 +152,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -160,7 +161,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * 適用終了年月のgetメソッドです。
-     * 
+     *
      * @return 適用終了年月
      */
     public FlexibleYearMonth getTekiyoShuryoYM() {
@@ -169,7 +170,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * 適用終了年月のsetメソッドです。
-     * 
+     *
      * @param tekiyoShuryoYM 適用終了年月
      */
     public void setTekiyoShuryoYM(FlexibleYearMonth tekiyoShuryoYM) {
@@ -178,7 +179,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * 助成サービス種類名称のgetメソッドです。
-     * 
+     *
      * @return 助成サービス種類名称
      */
     public RString getJoseiServiceShuriMeisho() {
@@ -187,7 +188,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * 助成サービス種類名称のsetメソッドです。
-     * 
+     *
      * @param joseiServiceShuriMeisho 助成サービス種類名称
      */
     public void setJoseiServiceShuriMeisho(RString joseiServiceShuriMeisho) {
@@ -196,7 +197,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * 市町村単独助成単位のgetメソッドです。
-     * 
+     *
      * @return 市町村単独助成単位
      */
     public Decimal getJoseiTani() {
@@ -205,7 +206,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * 市町村単独助成単位のsetメソッドです。
-     * 
+     *
      * @param joseiTani 市町村単独助成単位
      */
     public void setJoseiTani(Decimal joseiTani) {
@@ -214,7 +215,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * 市町村単独助成内容のgetメソッドです。
-     * 
+     *
      * @return 市町村単独助成内容
      */
     public RString getJoseiNaiyo() {
@@ -223,7 +224,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * 市町村単独助成内容のsetメソッドです。
-     * 
+     *
      * @param joseiNaiyo 市町村単独助成内容
      */
     public void setJoseiNaiyo(RString joseiNaiyo) {
@@ -232,9 +233,9 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * このエンティティの主キーが他の{@literal DbT3099TandokuJoseiShuruiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3099TandokuJoseiShuruiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -274,6 +275,7 @@ public class DbT3099TandokuJoseiShuruiEntity extends DbTableEntityBase<DbT3099Ta
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

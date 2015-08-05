@@ -4,12 +4,15 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
 
 /**
  * 給付費通知補正テーブルの項目定義クラスです。
- * <br/> 市町村独自減免等により介護サービス費に対する実際の利用者負担額が介護保険給付
-     * <br/>実績情報の利用者負担額と異なる場合があるため、減免後の介護保険利用者負担額で
-     * <br/>補正した上で介護保険給付費通知書を作成する。この補正のための情報。
+ * <br/> 市町村独自減免等により介護サービス費に対する実際の利用者負担額が介護保険給付
+ *
+ * <br/>実績情報の利用者負担額と異なる場合があるため、減免後の介護保険利用者負担額で
+ *
+ * <br/>補正した上で介護保険給付費通知書を作成する。この補正のための情報。
  */
 public enum DbT3067KyufuhiTuchiHosei implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     /**
      * insertDantaiCd
      */
@@ -85,7 +88,7 @@ public enum DbT3067KyufuhiTuchiHosei implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -94,7 +97,7 @@ public enum DbT3067KyufuhiTuchiHosei implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

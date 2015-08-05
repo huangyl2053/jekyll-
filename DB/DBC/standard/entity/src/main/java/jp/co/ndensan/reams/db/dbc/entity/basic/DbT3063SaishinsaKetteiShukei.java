@@ -6,7 +6,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 再審査決定集計テーブルの項目定義クラスです。
  */
 public enum DbT3063SaishinsaKetteiShukei implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     /**
      * insertDantaiCd
      */
@@ -46,8 +47,10 @@ public enum DbT3063SaishinsaKetteiShukei implements IColumnDefinition {
     toriatsukaiYM(2147483647, 0),
     /**
      * 保険者区分
-     * <br/>1：保険者　2：公費負担者
-     * <br/>3：総合事業費保険者
+     * <br/>1：保険者　2：公費負担者
+     *
+     * <br/>3：総合事業費保険者
+     *
      * <br/>4：総合事業費公費負担者
      */
     hokenshaKubun(1, 0),
@@ -141,9 +144,12 @@ public enum DbT3063SaishinsaKetteiShukei implements IColumnDefinition {
     kogakuKaigoServicehiChoseiFutangaku(13, 0),
     /**
      * 公費負担者番号
-     * <br/>保険者区分=1のとき：証記載保険者番号（上６桁）
-     * <br/>保険者区分=2のとき：公費負担者番号
-     * <br/>保険者区分=3のとき：証記載保険者番号（上６桁）
+     * <br/>保険者区分=1のとき：証記載保険者番号（上６桁）
+     *
+     * <br/>保険者区分=2のとき：公費負担者番号
+     *
+     * <br/>保険者区分=3のとき：証記載保険者番号（上６桁）
+     *
      * <br/>保険者区分=4のとき：公費負担者番号
      */
     kohiFutanshaNo(8, 0),
@@ -172,7 +178,7 @@ public enum DbT3063SaishinsaKetteiShukei implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -181,7 +187,7 @@ public enum DbT3063SaishinsaKetteiShukei implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {
