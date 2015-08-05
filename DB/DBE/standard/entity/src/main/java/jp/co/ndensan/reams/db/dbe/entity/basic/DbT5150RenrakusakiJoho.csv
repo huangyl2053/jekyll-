@@ -1,7 +1,7 @@
-﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,申請書管理番号,A
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
 renban,int2,int,,,,,連番,A
 renrakusakiKubun,UDD035Code,Code,,,,,連絡先区分,A
-shishoCode,DbUDD014ShishoCode,DbUDD014ShishoCode,,,,,支所コード,A
+shishoCode,DbUDD014ShishoCode,ShishoCode,,,,,支所コード,A
 renrakusakiShimei,UDD042AtenaMeisho,AtenaMeisho,,,,,連絡先氏名,A
 renrakusakiKanaSimei,UDD043AtenaKanaMeisho,AtenaKanaMeisho,,,,,連絡先氏名カナ,A
 renrakusakiTuzukigara,varchar,RString,,,,,連絡先続柄,A

@@ -250,4 +250,5 @@ public class DbT5031NinteiChosaHoshuTankaEntity extends DbTableEntityBase<DbT503
 // </editor-fold>
 
 
+
 }

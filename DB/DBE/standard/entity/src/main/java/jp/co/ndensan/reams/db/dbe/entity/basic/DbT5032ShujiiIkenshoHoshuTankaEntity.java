@@ -222,4 +222,5 @@ public class DbT5032ShujiiIkenshoHoshuTankaEntity extends DbTableEntityBase<DbT5
 // </editor-fold>
 
 
+
 }

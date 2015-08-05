@@ -1,4 +1,4 @@
-﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,申請書管理番号,A
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
 ninteiShinseiJohoTorokuKanryoYMD,UDD015YMD,FlexibleDate,,,,,認定申請情報登録完了年月日,A
 ninteichosaIraiKanryoYMD,UDD015YMD,FlexibleDate,,,,,認定調査依頼完了年月日,A
 ninteichosaKanryoYMD,UDD015YMD,FlexibleDate,,,,,認定調査完了年月日,A
