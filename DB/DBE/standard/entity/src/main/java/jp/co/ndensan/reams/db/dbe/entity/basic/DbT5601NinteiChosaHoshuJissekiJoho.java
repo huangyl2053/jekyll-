@@ -41,18 +41,22 @@ public enum DbT5601NinteiChosaHoshuJissekiJoho implements IColumnDefinition {
     lastUpdateReamsLoginId(2147483647, 0),
     /**
      * 認定調査委託先コード
+     * <br/>認定調査委託先情報
      */
-    ninteichosaItakusakiCode(2147483647, 0),
+    ninteichosaItakusakiCode(10, 0),
     /**
      * 認定調査員コード
+     * <br/>認定調査員情報
      */
     ninteichosainCode(8, 0),
     /**
      * 申請書管理番号
+     * <br/>要介護認定申請情報
      */
     shinseishoKanriNo(2147483647, 0),
     /**
      * 認定調査依頼履歴番号
+     * <br/>認定調査依頼情報
      */
     ninteichosaIraiRirekiNo(5, 0),
     /**
@@ -69,6 +73,7 @@ public enum DbT5601NinteiChosaHoshuJissekiJoho implements IColumnDefinition {
     chosaItakuryoShiharaiMemo(2147483647, 0),
     /**
      * 銀行振込出力フラグ
+     * <br/>Enum（DBE：銀行振込出力フラグ）
      */
     isGinkoFurikomiShutsuryoku(1, 0);
 

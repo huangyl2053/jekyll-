@@ -5,7 +5,6 @@ import java.util.UUID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  */
 public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008IryohokenKanyuJokyoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1008IryohokenKanyuJokyo");
@@ -33,11 +32,10 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private LasdecCode shichosonCode;
-    @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
-    private YMDHMS shoriTimeStamp;
+    private int rirekiNo;
+    private LasdecCode shichosonCode;
     private HihokenshaNo hihokenshaNo;
     private RString iryoHokenShubetsuCode;
     private RString iryoHokenshaNo;
@@ -47,7 +45,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
     private FlexibleDate iryoHokenDattaiYMD;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
      *
      * @return insertDantaiCd
      */
@@ -56,7 +54,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
      *
      * @param insertDantaiCd insertDantaiCd
      */
@@ -65,7 +63,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
      *
      * @return isDeleted
      */
@@ -74,7 +72,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
      *
      * @param isDeleted isDeleted
      */
@@ -83,7 +81,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
     }
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
      *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
@@ -92,180 +90,180 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
     }
 
     /**
-     * getShichosonCode
+     * 識別コードのgetメソッドです。
      *
-     * @return shichosonCode
-     */
-    public LasdecCode getShichosonCode() {
-        return shichosonCode;
-    }
-
-    /**
-     * setShichosonCode
-     *
-     * @param shichosonCode shichosonCode
-     */
-    public void setShichosonCode(LasdecCode shichosonCode) {
-        this.shichosonCode = shichosonCode;
-    }
-
-    /**
-     * getShikibetsuCode
-     *
-     * @return shikibetsuCode
+     * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
         return shikibetsuCode;
     }
 
     /**
-     * setShikibetsuCode
+     * 識別コードのsetメソッドです。
      *
-     * @param shikibetsuCode shikibetsuCode
+     * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
     }
 
     /**
-     * getShoriTimeStamp
+     * 履歴番号のgetメソッドです。
      *
-     * @return shoriTimeStamp
+     * @return 履歴番号
      */
-    public YMDHMS getShoriTimeStamp() {
-        return shoriTimeStamp;
+    public int getRirekiNo() {
+        return rirekiNo;
     }
 
     /**
-     * setShoriTimeStamp
+     * 履歴番号のsetメソッドです。
      *
-     * @param shoriTimeStamp shoriTimeStamp
+     * @param rirekiNo 履歴番号
      */
-    public void setShoriTimeStamp(YMDHMS shoriTimeStamp) {
-        this.shoriTimeStamp = shoriTimeStamp;
+    public void setRirekiNo(int rirekiNo) {
+        this.rirekiNo = rirekiNo;
     }
 
     /**
-     * getHihokenshaNo
+     * 市町村コードのgetメソッドです。
      *
-     * @return hihokenshaNo
+     * @return 市町村コード
+     */
+    public LasdecCode getShichosonCode() {
+        return shichosonCode;
+    }
+
+    /**
+     * 市町村コードのsetメソッドです。
+     *
+     * @param shichosonCode 市町村コード
+     */
+    public void setShichosonCode(LasdecCode shichosonCode) {
+        this.shichosonCode = shichosonCode;
+    }
+
+    /**
+     * 被保険者番号のgetメソッドです。
+     *
+     * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
-     * setHihokenshaNo
+     * 被保険者番号のsetメソッドです。
      *
-     * @param hihokenshaNo hihokenshaNo
+     * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
-     * getIryoHokenShubetsuCode
+     * 医療保険種別コードのgetメソッドです。
      *
-     * @return iryoHokenShubetsuCode
+     * @return 医療保険種別コード
      */
     public RString getIryoHokenShubetsuCode() {
         return iryoHokenShubetsuCode;
     }
 
     /**
-     * setIryoHokenShubetsuCode
+     * 医療保険種別コードのsetメソッドです。
      *
-     * @param iryoHokenShubetsuCode iryoHokenShubetsuCode
+     * @param iryoHokenShubetsuCode 医療保険種別コード
      */
     public void setIryoHokenShubetsuCode(RString iryoHokenShubetsuCode) {
         this.iryoHokenShubetsuCode = iryoHokenShubetsuCode;
     }
 
     /**
-     * getIryoHokenshaNo
+     * 医療保険者番号のgetメソッドです。
      *
-     * @return iryoHokenshaNo
+     * @return 医療保険者番号
      */
     public RString getIryoHokenshaNo() {
         return iryoHokenshaNo;
     }
 
     /**
-     * setIryoHokenshaNo
+     * 医療保険者番号のsetメソッドです。
      *
-     * @param iryoHokenshaNo iryoHokenshaNo
+     * @param iryoHokenshaNo 医療保険者番号
      */
     public void setIryoHokenshaNo(RString iryoHokenshaNo) {
         this.iryoHokenshaNo = iryoHokenshaNo;
     }
 
     /**
-     * getIryoHokenshaMeisho
+     * 医療保険者名称のgetメソッドです。
      *
-     * @return iryoHokenshaMeisho
+     * @return 医療保険者名称
      */
     public RString getIryoHokenshaMeisho() {
         return iryoHokenshaMeisho;
     }
 
     /**
-     * setIryoHokenshaMeisho
+     * 医療保険者名称のsetメソッドです。
      *
-     * @param iryoHokenshaMeisho iryoHokenshaMeisho
+     * @param iryoHokenshaMeisho 医療保険者名称
      */
     public void setIryoHokenshaMeisho(RString iryoHokenshaMeisho) {
         this.iryoHokenshaMeisho = iryoHokenshaMeisho;
     }
 
     /**
-     * getIryoHokenKigoNo
+     * 医療保険記号番号のgetメソッドです。
      *
-     * @return iryoHokenKigoNo
+     * @return 医療保険記号番号
      */
     public RString getIryoHokenKigoNo() {
         return iryoHokenKigoNo;
     }
 
     /**
-     * setIryoHokenKigoNo
+     * 医療保険記号番号のsetメソッドです。
      *
-     * @param iryoHokenKigoNo iryoHokenKigoNo
+     * @param iryoHokenKigoNo 医療保険記号番号
      */
     public void setIryoHokenKigoNo(RString iryoHokenKigoNo) {
         this.iryoHokenKigoNo = iryoHokenKigoNo;
     }
 
     /**
-     * getIryoHokenKanyuYMD
+     * 医療保険加入年月日のgetメソッドです。
      *
-     * @return iryoHokenKanyuYMD
+     * @return 医療保険加入年月日
      */
     public FlexibleDate getIryoHokenKanyuYMD() {
         return iryoHokenKanyuYMD;
     }
 
     /**
-     * setIryoHokenKanyuYMD
+     * 医療保険加入年月日のsetメソッドです。
      *
-     * @param iryoHokenKanyuYMD iryoHokenKanyuYMD
+     * @param iryoHokenKanyuYMD 医療保険加入年月日
      */
     public void setIryoHokenKanyuYMD(FlexibleDate iryoHokenKanyuYMD) {
         this.iryoHokenKanyuYMD = iryoHokenKanyuYMD;
     }
 
     /**
-     * getIryoHokenDattaiYMD
+     * 医療保険脱退年月日のgetメソッドです。
      *
-     * @return iryoHokenDattaiYMD
+     * @return 医療保険脱退年月日
      */
     public FlexibleDate getIryoHokenDattaiYMD() {
         return iryoHokenDattaiYMD;
     }
 
     /**
-     * setIryoHokenDattaiYMD
+     * 医療保険脱退年月日のsetメソッドです。
      *
-     * @param iryoHokenDattaiYMD iryoHokenDattaiYMD
+     * @param iryoHokenDattaiYMD 医療保険脱退年月日
      */
     public void setIryoHokenDattaiYMD(FlexibleDate iryoHokenDattaiYMD) {
         this.iryoHokenDattaiYMD = iryoHokenDattaiYMD;
@@ -283,13 +281,10 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
-            return false;
-        }
         if (!Objects.equals(this.shikibetsuCode, other.shikibetsuCode)) {
             return false;
         }
-        if (!Objects.equals(this.shoriTimeStamp, other.shoriTimeStamp)) {
+        if (this.rirekiNo != other.rirekiNo) {
             return false;
         }
         return true;
@@ -300,9 +295,9 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
      */
     @Override
     public void shallowCopy(DbT1008IryohokenKanyuJokyoEntity entity) {
-        this.shichosonCode = entity.shichosonCode;
         this.shikibetsuCode = entity.shikibetsuCode;
-        this.shoriTimeStamp = entity.shoriTimeStamp;
+        this.rirekiNo = entity.rirekiNo;
+        this.shichosonCode = entity.shichosonCode;
         this.hihokenshaNo = entity.hihokenshaNo;
         this.iryoHokenShubetsuCode = entity.iryoHokenShubetsuCode;
         this.iryoHokenshaNo = entity.iryoHokenshaNo;
@@ -319,7 +314,7 @@ public class DbT1008IryohokenKanyuJokyoEntity extends DbTableEntityBase<DbT1008I
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shichosonCode, shikibetsuCode, shoriTimeStamp, hihokenshaNo, iryoHokenShubetsuCode, iryoHokenshaNo, iryoHokenshaMeisho, iryoHokenKigoNo, iryoHokenKanyuYMD, iryoHokenDattaiYMD);
+        return super.toMd5(shikibetsuCode, rirekiNo, shichosonCode, hihokenshaNo, iryoHokenShubetsuCode, iryoHokenshaNo, iryoHokenshaMeisho, iryoHokenKigoNo, iryoHokenKanyuYMD, iryoHokenDattaiYMD);
     }
 
 // </editor-fold>

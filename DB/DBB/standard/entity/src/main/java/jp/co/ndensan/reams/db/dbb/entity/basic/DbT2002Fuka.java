@@ -209,9 +209,9 @@ public enum DbT2002Fuka implements IColumnDefinition {
      */
     hokenryoDankaiKarisanntei(3, 0),
     /**
-     * 徴収方法処理日時
+     * 徴収方法履歴番号
      */
-    choshuHouhouShoriTimestamp(2147483647, 0),
+    choshuHohoRirekiNo(5, 0),
     /**
      * 異動基準日時
      */

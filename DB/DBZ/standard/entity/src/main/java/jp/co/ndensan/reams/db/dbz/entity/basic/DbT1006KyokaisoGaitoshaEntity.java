@@ -3,8 +3,6 @@ package jp.co.ndensan.reams.db.dbz.entity.basic;
 import java.util.Objects;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  */
 public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006KyokaisoGaitoshaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1006KyokaisoGaitosha");
@@ -33,15 +31,12 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
-    @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private FlexibleDate kyokaisoSochiKetteiYMD;
-    @PrimaryKey
-    private YMDHMS shoriTimestamp;
+    private int rirekiNo;
     private FlexibleDate tekiyoKaishiYMD;
     private FlexibleDate tekiyoShuryoYMD;
+    private FlexibleDate kyokaisoSochiKetteiYMD;
     private RString kyuufugakuGengakuKisaiKiajoFlag;
     private RString hyojunFutanGengakuGaitoFlag;
     private Decimal hyojunFutanKeigengoFutangaku;
@@ -55,7 +50,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
     private RString hokenryoNofuGengakuFlag;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
      *
      * @return insertDantaiCd
      */
@@ -64,7 +59,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
      *
      * @param insertDantaiCd insertDantaiCd
      */
@@ -73,7 +68,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
      *
      * @return isDeleted
      */
@@ -82,7 +77,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
      *
      * @param isDeleted isDeleted
      */
@@ -91,7 +86,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
     }
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
      *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
@@ -100,306 +95,288 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
     }
 
     /**
-     * getShoKisaiHokenshaNo
+     * 被保険者番号のgetメソッドです。
      *
-     * @return shoKisaiHokenshaNo
-     */
-    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
-        return shoKisaiHokenshaNo;
-    }
-
-    /**
-     * setShoKisaiHokenshaNo
-     *
-     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
-     */
-    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
-        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
-    }
-
-    /**
-     * getHihokenshaNo
-     *
-     * @return hihokenshaNo
+     * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
-     * setHihokenshaNo
+     * 被保険者番号のsetメソッドです。
      *
-     * @param hihokenshaNo hihokenshaNo
+     * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
-     * getKyokaisoSochiKetteiYMD
+     * 履歴番号のgetメソッドです。
      *
-     * @return kyokaisoSochiKetteiYMD
+     * @return 履歴番号
      */
-    public FlexibleDate getKyokaisoSochiKetteiYMD() {
-        return kyokaisoSochiKetteiYMD;
+    public int getRirekiNo() {
+        return rirekiNo;
     }
 
     /**
-     * setKyokaisoSochiKetteiYMD
+     * 履歴番号のsetメソッドです。
      *
-     * @param kyokaisoSochiKetteiYMD kyokaisoSochiKetteiYMD
+     * @param rirekiNo 履歴番号
      */
-    public void setKyokaisoSochiKetteiYMD(FlexibleDate kyokaisoSochiKetteiYMD) {
-        this.kyokaisoSochiKetteiYMD = kyokaisoSochiKetteiYMD;
+    public void setRirekiNo(int rirekiNo) {
+        this.rirekiNo = rirekiNo;
     }
 
     /**
-     * getShoriTimestamp
+     * 適用開始年月日のgetメソッドです。
      *
-     * @return shoriTimestamp
-     */
-    public YMDHMS getShoriTimestamp() {
-        return shoriTimestamp;
-    }
-
-    /**
-     * setShoriTimestamp
-     *
-     * @param shoriTimestamp shoriTimestamp
-     */
-    public void setShoriTimestamp(YMDHMS shoriTimestamp) {
-        this.shoriTimestamp = shoriTimestamp;
-    }
-
-    /**
-     * getTekiyoKaishiYMD
-     *
-     * @return tekiyoKaishiYMD
+     * @return 適用開始年月日
      */
     public FlexibleDate getTekiyoKaishiYMD() {
         return tekiyoKaishiYMD;
     }
 
     /**
-     * setTekiyoKaishiYMD
+     * 適用開始年月日のsetメソッドです。
      *
-     * @param tekiyoKaishiYMD tekiyoKaishiYMD
+     * @param tekiyoKaishiYMD 適用開始年月日
      */
     public void setTekiyoKaishiYMD(FlexibleDate tekiyoKaishiYMD) {
         this.tekiyoKaishiYMD = tekiyoKaishiYMD;
     }
 
     /**
-     * getTekiyoShuryoYMD
+     * 適用終了年月日のgetメソッドです。
      *
-     * @return tekiyoShuryoYMD
+     * @return 適用終了年月日
      */
     public FlexibleDate getTekiyoShuryoYMD() {
         return tekiyoShuryoYMD;
     }
 
     /**
-     * setTekiyoShuryoYMD
+     * 適用終了年月日のsetメソッドです。
      *
-     * @param tekiyoShuryoYMD tekiyoShuryoYMD
+     * @param tekiyoShuryoYMD 適用終了年月日
      */
     public void setTekiyoShuryoYMD(FlexibleDate tekiyoShuryoYMD) {
         this.tekiyoShuryoYMD = tekiyoShuryoYMD;
     }
 
     /**
-     * getKyuufugakuGengakuKisaiKiajoFlag
+     * 境界層措置決定年月日のgetメソッドです。
      *
-     * @return kyuufugakuGengakuKisaiKiajoFlag
+     * @return 境界層措置決定年月日
+     */
+    public FlexibleDate getKyokaisoSochiKetteiYMD() {
+        return kyokaisoSochiKetteiYMD;
+    }
+
+    /**
+     * 境界層措置決定年月日のsetメソッドです。
+     *
+     * @param kyokaisoSochiKetteiYMD 境界層措置決定年月日
+     */
+    public void setKyokaisoSochiKetteiYMD(FlexibleDate kyokaisoSochiKetteiYMD) {
+        this.kyokaisoSochiKetteiYMD = kyokaisoSochiKetteiYMD;
+    }
+
+    /**
+     * 給付額減額記載解除フラグのgetメソッドです。
+     *
+     * @return 給付額減額記載解除フラグ
      */
     public RString getKyuufugakuGengakuKisaiKiajoFlag() {
         return kyuufugakuGengakuKisaiKiajoFlag;
     }
 
     /**
-     * setKyuufugakuGengakuKisaiKiajoFlag
+     * 給付額減額記載解除フラグのsetメソッドです。
      *
-     * @param kyuufugakuGengakuKisaiKiajoFlag kyuufugakuGengakuKisaiKiajoFlag
+     * @param kyuufugakuGengakuKisaiKiajoFlag 給付額減額記載解除フラグ
      */
     public void setKyuufugakuGengakuKisaiKiajoFlag(RString kyuufugakuGengakuKisaiKiajoFlag) {
         this.kyuufugakuGengakuKisaiKiajoFlag = kyuufugakuGengakuKisaiKiajoFlag;
     }
 
     /**
-     * getHyojunFutanGengakuGaitoFlag
+     * 標準負担額額該当フラグのgetメソッドです。
      *
-     * @return hyojunFutanGengakuGaitoFlag
+     * @return 標準負担額額該当フラグ
      */
     public RString getHyojunFutanGengakuGaitoFlag() {
         return hyojunFutanGengakuGaitoFlag;
     }
 
     /**
-     * setHyojunFutanGengakuGaitoFlag
+     * 標準負担額額該当フラグのsetメソッドです。
      *
-     * @param hyojunFutanGengakuGaitoFlag hyojunFutanGengakuGaitoFlag
+     * @param hyojunFutanGengakuGaitoFlag 標準負担額額該当フラグ
      */
     public void setHyojunFutanGengakuGaitoFlag(RString hyojunFutanGengakuGaitoFlag) {
         this.hyojunFutanGengakuGaitoFlag = hyojunFutanGengakuGaitoFlag;
     }
 
     /**
-     * getHyojunFutanKeigengoFutangaku
+     * 標準負担軽減後負担額のgetメソッドです。
      *
-     * @return hyojunFutanKeigengoFutangaku
+     * @return 標準負担軽減後負担額
      */
     public Decimal getHyojunFutanKeigengoFutangaku() {
         return hyojunFutanKeigengoFutangaku;
     }
 
     /**
-     * setHyojunFutanKeigengoFutangaku
+     * 標準負担軽減後負担額のsetメソッドです。
      *
-     * @param hyojunFutanKeigengoFutangaku hyojunFutanKeigengoFutangaku
+     * @param hyojunFutanKeigengoFutangaku 標準負担軽減後負担額
      */
     public void setHyojunFutanKeigengoFutangaku(Decimal hyojunFutanKeigengoFutangaku) {
         this.hyojunFutanKeigengoFutangaku = hyojunFutanKeigengoFutangaku;
     }
 
     /**
-     * getKyojuhinadoFutangakugengakuGaitoFlag
+     * 居住費等負担額減額該当フラグのgetメソッドです。
      *
-     * @return kyojuhinadoFutangakugengakuGaitoFlag
+     * @return 居住費等負担額減額該当フラグ
      */
     public RString getKyojuhinadoFutangakugengakuGaitoFlag() {
         return kyojuhinadoFutangakugengakuGaitoFlag;
     }
 
     /**
-     * setKyojuhinadoFutangakugengakuGaitoFlag
+     * 居住費等負担額減額該当フラグのsetメソッドです。
      *
-     * @param kyojuhinadoFutangakugengakuGaitoFlag kyojuhinadoFutangakugengakuGaitoFlag
+     * @param kyojuhinadoFutangakugengakuGaitoFlag 居住費等負担額減額該当フラグ
      */
     public void setKyojuhinadoFutangakugengakuGaitoFlag(RString kyojuhinadoFutangakugengakuGaitoFlag) {
         this.kyojuhinadoFutangakugengakuGaitoFlag = kyojuhinadoFutangakugengakuGaitoFlag;
     }
 
     /**
-     * getKyojuhiKeigengoKyoshitsuShuruiCode
+     * 居住費軽減後居室種類コードのgetメソッドです。
      *
-     * @return kyojuhiKeigengoKyoshitsuShuruiCode
+     * @return 居住費軽減後居室種類コード
      */
     public RString getKyojuhiKeigengoKyoshitsuShuruiCode() {
         return kyojuhiKeigengoKyoshitsuShuruiCode;
     }
 
     /**
-     * setKyojuhiKeigengoKyoshitsuShuruiCode
+     * 居住費軽減後居室種類コードのsetメソッドです。
      *
-     * @param kyojuhiKeigengoKyoshitsuShuruiCode kyojuhiKeigengoKyoshitsuShuruiCode
+     * @param kyojuhiKeigengoKyoshitsuShuruiCode 居住費軽減後居室種類コード
      */
     public void setKyojuhiKeigengoKyoshitsuShuruiCode(RString kyojuhiKeigengoKyoshitsuShuruiCode) {
         this.kyojuhiKeigengoKyoshitsuShuruiCode = kyojuhiKeigengoKyoshitsuShuruiCode;
     }
 
     /**
-     * getKyojuhiKeigengoHutangaku
+     * 居住費軽減後負担額のgetメソッドです。
      *
-     * @return kyojuhiKeigengoHutangaku
+     * @return 居住費軽減後負担額
      */
     public Decimal getKyojuhiKeigengoHutangaku() {
         return kyojuhiKeigengoHutangaku;
     }
 
     /**
-     * setKyojuhiKeigengoHutangaku
+     * 居住費軽減後負担額のsetメソッドです。
      *
-     * @param kyojuhiKeigengoHutangaku kyojuhiKeigengoHutangaku
+     * @param kyojuhiKeigengoHutangaku 居住費軽減後負担額
      */
     public void setKyojuhiKeigengoHutangaku(Decimal kyojuhiKeigengoHutangaku) {
         this.kyojuhiKeigengoHutangaku = kyojuhiKeigengoHutangaku;
     }
 
     /**
-     * getShokuhiKeigengoHutangakuGaitoFlag
+     * 食費負担額減額該当フラグのgetメソッドです。
      *
-     * @return shokuhiKeigengoHutangakuGaitoFlag
+     * @return 食費負担額減額該当フラグ
      */
     public RString getShokuhiKeigengoHutangakuGaitoFlag() {
         return shokuhiKeigengoHutangakuGaitoFlag;
     }
 
     /**
-     * setShokuhiKeigengoHutangakuGaitoFlag
+     * 食費負担額減額該当フラグのsetメソッドです。
      *
-     * @param shokuhiKeigengoHutangakuGaitoFlag shokuhiKeigengoHutangakuGaitoFlag
+     * @param shokuhiKeigengoHutangakuGaitoFlag 食費負担額減額該当フラグ
      */
     public void setShokuhiKeigengoHutangakuGaitoFlag(RString shokuhiKeigengoHutangakuGaitoFlag) {
         this.shokuhiKeigengoHutangakuGaitoFlag = shokuhiKeigengoHutangakuGaitoFlag;
     }
 
     /**
-     * getShokuhiKeigengoHutangaku
+     * 食費軽減後負担額のgetメソッドです。
      *
-     * @return shokuhiKeigengoHutangaku
+     * @return 食費軽減後負担額
      */
     public Decimal getShokuhiKeigengoHutangaku() {
         return shokuhiKeigengoHutangaku;
     }
 
     /**
-     * setShokuhiKeigengoHutangaku
+     * 食費軽減後負担額のsetメソッドです。
      *
-     * @param shokuhiKeigengoHutangaku shokuhiKeigengoHutangaku
+     * @param shokuhiKeigengoHutangaku 食費軽減後負担額
      */
     public void setShokuhiKeigengoHutangaku(Decimal shokuhiKeigengoHutangaku) {
         this.shokuhiKeigengoHutangaku = shokuhiKeigengoHutangaku;
     }
 
     /**
-     * getKogakuServicehiJogengakuGengakuGaitoFlag
+     * 高額ｻｰﾋﾞｽ費上限額減額該当フラグのgetメソッドです。
      *
-     * @return kogakuServicehiJogengakuGengakuGaitoFlag
+     * @return 高額ｻｰﾋﾞｽ費上限額減額該当フラグ
      */
     public RString getKogakuServicehiJogengakuGengakuGaitoFlag() {
         return kogakuServicehiJogengakuGengakuGaitoFlag;
     }
 
     /**
-     * setKogakuServicehiJogengakuGengakuGaitoFlag
+     * 高額ｻｰﾋﾞｽ費上限額減額該当フラグのsetメソッドです。
      *
-     * @param kogakuServicehiJogengakuGengakuGaitoFlag kogakuServicehiJogengakuGengakuGaitoFlag
+     * @param kogakuServicehiJogengakuGengakuGaitoFlag 高額ｻｰﾋﾞｽ費上限額減額該当フラグ
      */
     public void setKogakuServicehiJogengakuGengakuGaitoFlag(RString kogakuServicehiJogengakuGengakuGaitoFlag) {
         this.kogakuServicehiJogengakuGengakuGaitoFlag = kogakuServicehiJogengakuGengakuGaitoFlag;
     }
 
     /**
-     * getKogakuServicehiJogengakuGengakugoJogengaku
+     * 高額ｻｰﾋﾞｽ費減額後上限額のgetメソッドです。
      *
-     * @return kogakuServicehiJogengakuGengakugoJogengaku
+     * @return 高額ｻｰﾋﾞｽ費減額後上限額
      */
     public Decimal getKogakuServicehiJogengakuGengakugoJogengaku() {
         return kogakuServicehiJogengakuGengakugoJogengaku;
     }
 
     /**
-     * setKogakuServicehiJogengakuGengakugoJogengaku
+     * 高額ｻｰﾋﾞｽ費減額後上限額のsetメソッドです。
      *
-     * @param kogakuServicehiJogengakuGengakugoJogengaku kogakuServicehiJogengakuGengakugoJogengaku
+     * @param kogakuServicehiJogengakuGengakugoJogengaku 高額ｻｰﾋﾞｽ費減額後上限額
      */
     public void setKogakuServicehiJogengakuGengakugoJogengaku(Decimal kogakuServicehiJogengakuGengakugoJogengaku) {
         this.kogakuServicehiJogengakuGengakugoJogengaku = kogakuServicehiJogengakuGengakugoJogengaku;
     }
 
     /**
-     * getHokenryoNofuGengakuFlag
+     * 保険料納付減額フラグのgetメソッドです。
      *
-     * @return hokenryoNofuGengakuFlag
+     * @return 保険料納付減額フラグ
      */
     public RString getHokenryoNofuGengakuFlag() {
         return hokenryoNofuGengakuFlag;
     }
 
     /**
-     * setHokenryoNofuGengakuFlag
+     * 保険料納付減額フラグのsetメソッドです。
      *
-     * @param hokenryoNofuGengakuFlag hokenryoNofuGengakuFlag
+     * @param hokenryoNofuGengakuFlag 保険料納付減額フラグ
      */
     public void setHokenryoNofuGengakuFlag(RString hokenryoNofuGengakuFlag) {
         this.hokenryoNofuGengakuFlag = hokenryoNofuGengakuFlag;
@@ -416,16 +393,10 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shoKisaiHokenshaNo, other.shoKisaiHokenshaNo)) {
-            return false;
-        }
         if (!Objects.equals(this.hihokenshaNo, other.hihokenshaNo)) {
             return false;
         }
-        if (!Objects.equals(this.kyokaisoSochiKetteiYMD, other.kyokaisoSochiKetteiYMD)) {
-            return false;
-        }
-        if (!Objects.equals(this.shoriTimestamp, other.shoriTimestamp)) {
+        if (this.rirekiNo != other.rirekiNo) {
             return false;
         }
         return true;
@@ -436,12 +407,11 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      */
     @Override
     public void shallowCopy(DbT1006KyokaisoGaitoshaEntity entity) {
-        this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
         this.hihokenshaNo = entity.hihokenshaNo;
-        this.kyokaisoSochiKetteiYMD = entity.kyokaisoSochiKetteiYMD;
-        this.shoriTimestamp = entity.shoriTimestamp;
+        this.rirekiNo = entity.rirekiNo;
         this.tekiyoKaishiYMD = entity.tekiyoKaishiYMD;
         this.tekiyoShuryoYMD = entity.tekiyoShuryoYMD;
+        this.kyokaisoSochiKetteiYMD = entity.kyokaisoSochiKetteiYMD;
         this.kyuufugakuGengakuKisaiKiajoFlag = entity.kyuufugakuGengakuKisaiKiajoFlag;
         this.hyojunFutanGengakuGaitoFlag = entity.hyojunFutanGengakuGaitoFlag;
         this.hyojunFutanKeigengoFutangaku = entity.hyojunFutanKeigengoFutangaku;
@@ -462,7 +432,7 @@ public class DbT1006KyokaisoGaitoshaEntity extends DbTableEntityBase<DbT1006Kyok
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shoKisaiHokenshaNo, hihokenshaNo, kyokaisoSochiKetteiYMD, shoriTimestamp, tekiyoKaishiYMD, tekiyoShuryoYMD, kyuufugakuGengakuKisaiKiajoFlag, hyojunFutanGengakuGaitoFlag, hyojunFutanKeigengoFutangaku, kyojuhinadoFutangakugengakuGaitoFlag, kyojuhiKeigengoKyoshitsuShuruiCode, kyojuhiKeigengoHutangaku, shokuhiKeigengoHutangakuGaitoFlag, shokuhiKeigengoHutangaku, kogakuServicehiJogengakuGengakuGaitoFlag, kogakuServicehiJogengakuGengakugoJogengaku, hokenryoNofuGengakuFlag);
+        return super.toMd5(hihokenshaNo, rirekiNo, tekiyoKaishiYMD, tekiyoShuryoYMD, kyokaisoSochiKetteiYMD, kyuufugakuGengakuKisaiKiajoFlag, hyojunFutanGengakuGaitoFlag, hyojunFutanKeigengoFutangaku, kyojuhinadoFutangakugengakuGaitoFlag, kyojuhiKeigengoKyoshitsuShuruiCode, kyojuhiKeigengoHutangaku, shokuhiKeigengoHutangakuGaitoFlag, shokuhiKeigengoHutangaku, kogakuServicehiJogengakuGengakuGaitoFlag, kogakuServicehiJogengakuGengakugoJogengaku, hokenryoNofuGengakuFlag);
     }
 
 // </editor-fold>

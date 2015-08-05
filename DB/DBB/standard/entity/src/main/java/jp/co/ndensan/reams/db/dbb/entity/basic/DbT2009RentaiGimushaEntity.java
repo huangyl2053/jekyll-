@@ -1,21 +1,23 @@
 package jp.co.ndensan.reams.db.dbb.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.Objects;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 連帯納付義務者テーブルのエンティティクラスです。
  */
 public class DbT2009RentaiGimushaEntity extends DbTableEntityBase<DbT2009RentaiGimushaEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2009RentaiGimusha");
 
@@ -28,7 +30,7 @@ public class DbT2009RentaiGimushaEntity extends DbTableEntityBase<DbT2009RentaiG
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private int rirekiNo;
     private ShikibetsuCode shikibetuCode;
@@ -37,7 +39,7 @@ public class DbT2009RentaiGimushaEntity extends DbTableEntityBase<DbT2009RentaiG
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -46,7 +48,7 @@ public class DbT2009RentaiGimushaEntity extends DbTableEntityBase<DbT2009RentaiG
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -55,7 +57,7 @@ public class DbT2009RentaiGimushaEntity extends DbTableEntityBase<DbT2009RentaiG
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -64,17 +66,16 @@ public class DbT2009RentaiGimushaEntity extends DbTableEntityBase<DbT2009RentaiG
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -83,25 +84,25 @@ public class DbT2009RentaiGimushaEntity extends DbTableEntityBase<DbT2009RentaiG
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -110,7 +111,7 @@ public class DbT2009RentaiGimushaEntity extends DbTableEntityBase<DbT2009RentaiG
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -121,7 +122,7 @@ public class DbT2009RentaiGimushaEntity extends DbTableEntityBase<DbT2009RentaiG
      * 識別コードのgetメソッドです。
      * <br/>
      * <br/>連帯納付義務者の識別コード
-     * 
+     *
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetuCode() {
@@ -132,7 +133,7 @@ public class DbT2009RentaiGimushaEntity extends DbTableEntityBase<DbT2009RentaiG
      * 識別コードのsetメソッドです。
      * <br/>
      * <br/>連帯納付義務者の識別コード
-     * 
+     *
      * @param shikibetuCode 識別コード
      */
     public void setShikibetuCode(ShikibetsuCode shikibetuCode) {
@@ -141,7 +142,7 @@ public class DbT2009RentaiGimushaEntity extends DbTableEntityBase<DbT2009RentaiG
 
     /**
      * 開始年月日のgetメソッドです。
-     * 
+     *
      * @return 開始年月日
      */
     public FlexibleDate getStartYMD() {
@@ -150,7 +151,7 @@ public class DbT2009RentaiGimushaEntity extends DbTableEntityBase<DbT2009RentaiG
 
     /**
      * 開始年月日のsetメソッドです。
-     * 
+     *
      * @param startYMD 開始年月日
      */
     public void setStartYMD(FlexibleDate startYMD) {
@@ -159,7 +160,7 @@ public class DbT2009RentaiGimushaEntity extends DbTableEntityBase<DbT2009RentaiG
 
     /**
      * 終了年月日のgetメソッドです。
-     * 
+     *
      * @return 終了年月日
      */
     public FlexibleDate getEndYMD() {
@@ -168,7 +169,7 @@ public class DbT2009RentaiGimushaEntity extends DbTableEntityBase<DbT2009RentaiG
 
     /**
      * 終了年月日のsetメソッドです。
-     * 
+     *
      * @param endYMD 終了年月日
      */
     public void setEndYMD(FlexibleDate endYMD) {
@@ -177,10 +178,9 @@ public class DbT2009RentaiGimushaEntity extends DbTableEntityBase<DbT2009RentaiG
 
     /**
      * このエンティティの主キーが他の{@literal DbT2009RentaiGimushaEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT2009RentaiGimushaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2009RentaiGimushaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2009RentaiGimushaEntity other) {
@@ -210,6 +210,7 @@ public class DbT2009RentaiGimushaEntity extends DbTableEntityBase<DbT2009RentaiG
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

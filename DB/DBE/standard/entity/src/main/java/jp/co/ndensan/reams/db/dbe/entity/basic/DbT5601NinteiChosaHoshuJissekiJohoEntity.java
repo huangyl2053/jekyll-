@@ -2,7 +2,6 @@ package jp.co.ndensan.reams.db.dbe.entity.basic;
 
 import java.util.Objects;
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -30,7 +29,7 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private JigyoshaNo ninteichosaItakusakiCode;
+    private RString ninteichosaItakusakiCode;
     @PrimaryKey
     private RString ninteichosainCode;
     @PrimaryKey
@@ -89,24 +88,30 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 認定調査委託先コードのgetメソッドです。
+     * <br/>
+     * <br/>認定調査委託先情報
      *
      * @return 認定調査委託先コード
      */
-    public JigyoshaNo getNinteichosaItakusakiCode() {
+    public RString getNinteichosaItakusakiCode() {
         return ninteichosaItakusakiCode;
     }
 
     /**
      * 認定調査委託先コードのsetメソッドです。
+     * <br/>
+     * <br/>認定調査委託先情報
      *
      * @param ninteichosaItakusakiCode 認定調査委託先コード
      */
-    public void setNinteichosaItakusakiCode(JigyoshaNo ninteichosaItakusakiCode) {
+    public void setNinteichosaItakusakiCode(RString ninteichosaItakusakiCode) {
         this.ninteichosaItakusakiCode = ninteichosaItakusakiCode;
     }
 
     /**
      * 認定調査員コードのgetメソッドです。
+     * <br/>
+     * <br/>認定調査員情報
      *
      * @return 認定調査員コード
      */
@@ -116,6 +121,8 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 認定調査員コードのsetメソッドです。
+     * <br/>
+     * <br/>認定調査員情報
      *
      * @param ninteichosainCode 認定調査員コード
      */
@@ -125,6 +132,8 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 申請書管理番号のgetメソッドです。
+     * <br/>
+     * <br/>要介護認定申請情報
      *
      * @return 申請書管理番号
      */
@@ -134,6 +143,8 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 申請書管理番号のsetメソッドです。
+     * <br/>
+     * <br/>要介護認定申請情報
      *
      * @param shinseishoKanriNo 申請書管理番号
      */
@@ -143,6 +154,8 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 認定調査依頼履歴番号のgetメソッドです。
+     * <br/>
+     * <br/>認定調査依頼情報
      *
      * @return 認定調査依頼履歴番号
      */
@@ -152,6 +165,8 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 認定調査依頼履歴番号のsetメソッドです。
+     * <br/>
+     * <br/>認定調査依頼情報
      *
      * @param ninteichosaIraiRirekiNo 認定調査依頼履歴番号
      */
@@ -215,6 +230,8 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 銀行振込出力フラグのgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：銀行振込出力フラグ）
      *
      * @return 銀行振込出力フラグ
      */
@@ -224,6 +241,8 @@ public class DbT5601NinteiChosaHoshuJissekiJohoEntity extends DbTableEntityBase<
 
     /**
      * 銀行振込出力フラグのsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBE：銀行振込出力フラグ）
      *
      * @param isGinkoFurikomiShutsuryoku 銀行振込出力フラグ
      */

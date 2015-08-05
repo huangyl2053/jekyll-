@@ -1,6 +1,6 @@
 ﻿choteiNendo,UDD012YSeireki,FlexibleYear,,,,,調定年度,A
 fukaNendo,UDD012YSeireki,FlexibleYear,,,,,賦課年度,A
-tsuchishoNo,DbUDD008TsuchishoNo,DbUDD008TsuchishoNo,,,,,通知書番号,A
+tsuchishoNo,DbUDD008TsuchishoNo,TsuchishoNo,,,,,通知書番号,A
 rirekiNo,int2,int,,,,,履歴番号,A
 shinseiYMD,UDD015YMD,FlexibleDate,,,,,減免申請日,A
 ketteiYMD,UDD015YMD,FlexibleDate,,,,,減免決定日,A
