@@ -1,6 +1,0 @@
-﻿shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
-rirekiNo,int2,int,,,,,履歴番号,A
-shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
-shikakuShutokuJogaiRiyu,varchar,RString,,,,,資格取得除外理由,A
-shikakuShutokuJogaiYMD,UDD015YMD,FlexibleDate,,,,,資格取得除外年月日,A
-shikakuShutokuJogaiKaijoYMD,UDD015YMD,FlexibleDate,,,,,資格取得除外解除年月日,A

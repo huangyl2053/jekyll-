@@ -1,24 +1,23 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.Objects;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
- * DbT1004ShisetsuNyutaishoの項目定義クラスです
- *
+ * 介護保険施設入退所テーブルのエンティティクラスです。
  */
 public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004ShisetsuNyutaishoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1004ShisetsuNyutaisho");
@@ -32,21 +31,22 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private LasdecCode shichosonCode;
-    @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
-    private YMDHMS shoriTimestamp;
+    private int rirekiNo;
+    @PrimaryKey
+    private LasdecCode shichosonCode;
     private RString daichoShubetsu;
     private RString nyushoShisetsuShurui;
-    private RString nyushoShisetsuCode;
-    private FlexibleDate nyushoYMD;
-    private FlexibleDate taishoYMD;
+    private JigyoshaNo nyushoShisetsuCode;
     private FlexibleDate nyushoShoriYMD;
+    private FlexibleDate nyushoYMD;
     private FlexibleDate taishoShoriYMD;
+    private FlexibleDate taishoYMD;
+    private RString roomKigoNo;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
      *
      * @return insertDantaiCd
      */
@@ -55,7 +55,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
      *
      * @param insertDantaiCd insertDantaiCd
      */
@@ -64,7 +64,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
      *
      * @return isDeleted
      */
@@ -73,7 +73,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
      *
      * @param isDeleted isDeleted
      */
@@ -82,7 +82,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
     }
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
      *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
@@ -91,183 +91,213 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
     }
 
     /**
-     * getShichosonCode
+     * 識別コードのgetメソッドです。
      *
-     * @return shichosonCode
-     */
-    public LasdecCode getShichosonCode() {
-        return shichosonCode;
-    }
-
-    /**
-     * setShichosonCode
-     *
-     * @param shichosonCode shichosonCode
-     */
-    public void setShichosonCode(LasdecCode shichosonCode) {
-        this.shichosonCode = shichosonCode;
-    }
-
-    /**
-     * getShikibetsuCode
-     *
-     * @return shikibetsuCode
+     * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
         return shikibetsuCode;
     }
 
     /**
-     * setShikibetsuCode
+     * 識別コードのsetメソッドです。
      *
-     * @param shikibetsuCode shikibetsuCode
+     * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
     }
 
     /**
-     * getShoriTimestamp
+     * 履歴番号のgetメソッドです。
      *
-     * @return shoriTimestamp
+     * @return 履歴番号
      */
-    public YMDHMS getShoriTimestamp() {
-        return shoriTimestamp;
+    public int getRirekiNo() {
+        return rirekiNo;
     }
 
     /**
-     * setShoriTimestamp
+     * 履歴番号のsetメソッドです。
      *
-     * @param shoriTimestamp shoriTimestamp
+     * @param rirekiNo 履歴番号
      */
-    public void setShoriTimestamp(YMDHMS shoriTimestamp) {
-        this.shoriTimestamp = shoriTimestamp;
+    public void setRirekiNo(int rirekiNo) {
+        this.rirekiNo = rirekiNo;
     }
 
     /**
-     * getDaichoShubetsu
+     * 市町村コードのgetメソッドです。
      *
-     * @return daichoShubetsu
+     * @return 市町村コード
+     */
+    public LasdecCode getShichosonCode() {
+        return shichosonCode;
+    }
+
+    /**
+     * 市町村コードのsetメソッドです。
+     *
+     * @param shichosonCode 市町村コード
+     */
+    public void setShichosonCode(LasdecCode shichosonCode) {
+        this.shichosonCode = shichosonCode;
+    }
+
+    /**
+     * 台帳種別のgetメソッドです。
+     * <br/>
+     * <br/>1:被保険者台帳,2:他市町村住所地特例者台帳、3:適用除外者台帳
+     *
+     * @return 台帳種別
      */
     public RString getDaichoShubetsu() {
         return daichoShubetsu;
     }
 
     /**
-     * setDaichoShubetsu
+     * 台帳種別のsetメソッドです。
+     * <br/>
+     * <br/>1:被保険者台帳,2:他市町村住所地特例者台帳、3:適用除外者台帳
      *
-     * @param daichoShubetsu daichoShubetsu
+     * @param daichoShubetsu 台帳種別
      */
     public void setDaichoShubetsu(RString daichoShubetsu) {
         this.daichoShubetsu = daichoShubetsu;
     }
 
     /**
-     * getNyushoShisetsuShurui
+     * 入所施設種類のgetメソッドです。
+     * <br/>
+     * <br/>11:介護保険施設、12:住所地特例対象施設、21:適用除外施設
      *
-     * @return nyushoShisetsuShurui
+     * @return 入所施設種類
      */
     public RString getNyushoShisetsuShurui() {
         return nyushoShisetsuShurui;
     }
 
     /**
-     * setNyushoShisetsuShurui
+     * 入所施設種類のsetメソッドです。
+     * <br/>
+     * <br/>11:介護保険施設、12:住所地特例対象施設、21:適用除外施設
      *
-     * @param nyushoShisetsuShurui nyushoShisetsuShurui
+     * @param nyushoShisetsuShurui 入所施設種類
      */
     public void setNyushoShisetsuShurui(RString nyushoShisetsuShurui) {
         this.nyushoShisetsuShurui = nyushoShisetsuShurui;
     }
 
     /**
-     * getNyushoShisetsuCode
+     * 入所施設コードのgetメソッドです。
      *
-     * @return nyushoShisetsuCode
+     * @return 入所施設コード
      */
-    public RString getNyushoShisetsuCode() {
+    public JigyoshaNo getNyushoShisetsuCode() {
         return nyushoShisetsuCode;
     }
 
     /**
-     * setNyushoShisetsuCode
+     * 入所施設コードのsetメソッドです。
      *
-     * @param nyushoShisetsuCode nyushoShisetsuCode
+     * @param nyushoShisetsuCode 入所施設コード
      */
-    public void setNyushoShisetsuCode(RString nyushoShisetsuCode) {
+    public void setNyushoShisetsuCode(JigyoshaNo nyushoShisetsuCode) {
         this.nyushoShisetsuCode = nyushoShisetsuCode;
     }
 
     /**
-     * getNyushoYMD
+     * 入所処理年月日のgetメソッドです。
      *
-     * @return nyushoYMD
-     */
-    public FlexibleDate getNyushoYMD() {
-        return nyushoYMD;
-    }
-
-    /**
-     * setNyushoYMD
-     *
-     * @param nyushoYMD nyushoYMD
-     */
-    public void setNyushoYMD(FlexibleDate nyushoYMD) {
-        this.nyushoYMD = nyushoYMD;
-    }
-
-    /**
-     * getTaishoYMD
-     *
-     * @return taishoYMD
-     */
-    public FlexibleDate getTaishoYMD() {
-        return taishoYMD;
-    }
-
-    /**
-     * setTaishoYMD
-     *
-     * @param taishoYMD taishoYMD
-     */
-    public void setTaishoYMD(FlexibleDate taishoYMD) {
-        this.taishoYMD = taishoYMD;
-    }
-
-    /**
-     * getNyushoShoriYMD
-     *
-     * @return nyushoShoriYMD
+     * @return 入所処理年月日
      */
     public FlexibleDate getNyushoShoriYMD() {
         return nyushoShoriYMD;
     }
 
     /**
-     * setNyushoShoriYMD
+     * 入所処理年月日のsetメソッドです。
      *
-     * @param nyushoShoriYMD nyushoShoriYMD
+     * @param nyushoShoriYMD 入所処理年月日
      */
     public void setNyushoShoriYMD(FlexibleDate nyushoShoriYMD) {
         this.nyushoShoriYMD = nyushoShoriYMD;
     }
 
     /**
-     * getTaishoShoriYMD
+     * 入所年月日のgetメソッドです。
      *
-     * @return taishoShoriYMD
+     * @return 入所年月日
+     */
+    public FlexibleDate getNyushoYMD() {
+        return nyushoYMD;
+    }
+
+    /**
+     * 入所年月日のsetメソッドです。
+     *
+     * @param nyushoYMD 入所年月日
+     */
+    public void setNyushoYMD(FlexibleDate nyushoYMD) {
+        this.nyushoYMD = nyushoYMD;
+    }
+
+    /**
+     * 退所処理年月日のgetメソッドです。
+     *
+     * @return 退所処理年月日
      */
     public FlexibleDate getTaishoShoriYMD() {
         return taishoShoriYMD;
     }
 
     /**
-     * setTaishoShoriYMD
+     * 退所処理年月日のsetメソッドです。
      *
-     * @param taishoShoriYMD taishoShoriYMD
+     * @param taishoShoriYMD 退所処理年月日
      */
     public void setTaishoShoriYMD(FlexibleDate taishoShoriYMD) {
         this.taishoShoriYMD = taishoShoriYMD;
+    }
+
+    /**
+     * 退所年月日のgetメソッドです。
+     *
+     * @return 退所年月日
+     */
+    public FlexibleDate getTaishoYMD() {
+        return taishoYMD;
+    }
+
+    /**
+     * 退所年月日のsetメソッドです。
+     *
+     * @param taishoYMD 退所年月日
+     */
+    public void setTaishoYMD(FlexibleDate taishoYMD) {
+        this.taishoYMD = taishoYMD;
+    }
+
+    /**
+     * 部屋記号番号のgetメソッドです。
+     * <br/>
+     * <br/>部屋の記号番号
+     *
+     * @return 部屋記号番号
+     */
+    public RString getRoomKigoNo() {
+        return roomKigoNo;
+    }
+
+    /**
+     * 部屋記号番号のsetメソッドです。
+     * <br/>
+     * <br/>部屋の記号番号
+     *
+     * @param roomKigoNo 部屋記号番号
+     */
+    public void setRoomKigoNo(RString roomKigoNo) {
+        this.roomKigoNo = roomKigoNo;
     }
 
     /**
@@ -281,13 +311,13 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
-            return false;
-        }
         if (!Objects.equals(this.shikibetsuCode, other.shikibetsuCode)) {
             return false;
         }
-        if (!Objects.equals(this.shoriTimestamp, other.shoriTimestamp)) {
+        if (this.rirekiNo != other.rirekiNo) {
+            return false;
+        }
+        if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
             return false;
         }
         return true;
@@ -295,30 +325,31 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
 
     /**
      * {@inheritDoc}
-     *
-     * @param entity
      */
     @Override
     public void shallowCopy(DbT1004ShisetsuNyutaishoEntity entity) {
-        this.shichosonCode = entity.shichosonCode;
         this.shikibetsuCode = entity.shikibetsuCode;
-        this.shoriTimestamp = entity.shoriTimestamp;
+        this.rirekiNo = entity.rirekiNo;
+        this.shichosonCode = entity.shichosonCode;
         this.daichoShubetsu = entity.daichoShubetsu;
         this.nyushoShisetsuShurui = entity.nyushoShisetsuShurui;
         this.nyushoShisetsuCode = entity.nyushoShisetsuCode;
-        this.nyushoYMD = entity.nyushoYMD;
-        this.taishoYMD = entity.taishoYMD;
         this.nyushoShoriYMD = entity.nyushoShoriYMD;
+        this.nyushoYMD = entity.nyushoYMD;
         this.taishoShoriYMD = entity.taishoShoriYMD;
+        this.taishoYMD = entity.taishoYMD;
+        this.roomKigoNo = entity.roomKigoNo;
     }
 
     /**
+     * {@inheritDoc}
      *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shichosonCode, shikibetsuCode, shoriTimestamp, daichoShubetsu, nyushoShisetsuShurui, nyushoShisetsuCode, nyushoYMD, taishoYMD, nyushoShoriYMD, taishoShoriYMD);
+        return super.toMd5(shikibetsuCode, rirekiNo, shichosonCode, daichoShubetsu, nyushoShisetsuShurui, nyushoShisetsuCode, nyushoShoriYMD, nyushoYMD, taishoShoriYMD, taishoYMD, roomKigoNo);
     }
 
+// </editor-fold>
 }

@@ -3,8 +3,6 @@ package jp.co.ndensan.reams.db.dbz.entity.basic;
 import java.util.Objects;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -18,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  */
 public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT1007KyokaisoHokenryoDankaiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1007KyokaisoHokenryoDankai");
@@ -32,18 +30,16 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
-    @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private YMDHMS shoriTimeStamp;
+    private int rirekiNo;
     @PrimaryKey
     private FlexibleYearMonth tekiyoKaishiYM;
     private FlexibleYearMonth tekiyoShuryoYM;
     private RString gengakuGoHokenryoDankai;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
      *
      * @return insertDantaiCd
      */
@@ -52,7 +48,7 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
      *
      * @param insertDantaiCd insertDantaiCd
      */
@@ -61,7 +57,7 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
      *
      * @return isDeleted
      */
@@ -70,7 +66,7 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
      *
      * @param isDeleted isDeleted
      */
@@ -79,7 +75,7 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
     }
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
      *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
@@ -88,108 +84,90 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
     }
 
     /**
-     * getShoKisaiHokenshaNo
+     * 被保険者番号のgetメソッドです。
      *
-     * @return shoKisaiHokenshaNo
-     */
-    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
-        return shoKisaiHokenshaNo;
-    }
-
-    /**
-     * setShoKisaiHokenshaNo
-     *
-     * @param shoKisaiHokenshaNo shoKisaiHokenshaNo
-     */
-    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
-        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
-    }
-
-    /**
-     * getHihokenshaNo
-     *
-     * @return hihokenshaNo
+     * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
-     * setHihokenshaNo
+     * 被保険者番号のsetメソッドです。
      *
-     * @param hihokenshaNo hihokenshaNo
+     * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
-     * getShoriTimeStamp
+     * 履歴番号のgetメソッドです。
      *
-     * @return shoriTimeStamp
+     * @return 履歴番号
      */
-    public YMDHMS getShoriTimeStamp() {
-        return shoriTimeStamp;
+    public int getRirekiNo() {
+        return rirekiNo;
     }
 
     /**
-     * setShoriTimeStamp
+     * 履歴番号のsetメソッドです。
      *
-     * @param shoriTimeStamp shoriTimeStamp
+     * @param rirekiNo 履歴番号
      */
-    public void setShoriTimeStamp(YMDHMS shoriTimeStamp) {
-        this.shoriTimeStamp = shoriTimeStamp;
+    public void setRirekiNo(int rirekiNo) {
+        this.rirekiNo = rirekiNo;
     }
 
     /**
-     * getTekiyoKaishiYM
+     * 適用開始年月のgetメソッドです。
      *
-     * @return tekiyoKaishiYM
+     * @return 適用開始年月
      */
     public FlexibleYearMonth getTekiyoKaishiYM() {
         return tekiyoKaishiYM;
     }
 
     /**
-     * setTekiyoKaishiYM
+     * 適用開始年月のsetメソッドです。
      *
-     * @param tekiyoKaishiYM tekiyoKaishiYM
+     * @param tekiyoKaishiYM 適用開始年月
      */
     public void setTekiyoKaishiYM(FlexibleYearMonth tekiyoKaishiYM) {
         this.tekiyoKaishiYM = tekiyoKaishiYM;
     }
 
     /**
-     * getTekiyoShuryoYM
+     * 適用終了年月のgetメソッドです。
      *
-     * @return tekiyoShuryoYM
+     * @return 適用終了年月
      */
     public FlexibleYearMonth getTekiyoShuryoYM() {
         return tekiyoShuryoYM;
     }
 
     /**
-     * setTekiyoShuryoYM
+     * 適用終了年月のsetメソッドです。
      *
-     * @param tekiyoShuryoYM tekiyoShuryoYM
+     * @param tekiyoShuryoYM 適用終了年月
      */
     public void setTekiyoShuryoYM(FlexibleYearMonth tekiyoShuryoYM) {
         this.tekiyoShuryoYM = tekiyoShuryoYM;
     }
 
     /**
-     * getGengakuGoHokenryoDankai
+     * 保険料納付減額後保険料段階のgetメソッドです。
      *
-     * @return gengakuGoHokenryoDankai
+     * @return 保険料納付減額後保険料段階
      */
     public RString getGengakuGoHokenryoDankai() {
         return gengakuGoHokenryoDankai;
     }
 
     /**
-     * setGengakuGoHokenryoDankai
+     * 保険料納付減額後保険料段階のsetメソッドです。
      *
-     * @param gengakuGoHokenryoDankai gengakuGoHokenryoDankai
+     * @param gengakuGoHokenryoDankai 保険料納付減額後保険料段階
      */
     public void setGengakuGoHokenryoDankai(RString gengakuGoHokenryoDankai) {
         this.gengakuGoHokenryoDankai = gengakuGoHokenryoDankai;
@@ -207,13 +185,10 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shoKisaiHokenshaNo, other.shoKisaiHokenshaNo)) {
-            return false;
-        }
         if (!Objects.equals(this.hihokenshaNo, other.hihokenshaNo)) {
             return false;
         }
-        if (!Objects.equals(this.shoriTimeStamp, other.shoriTimeStamp)) {
+        if (this.rirekiNo != other.rirekiNo) {
             return false;
         }
         if (!Objects.equals(this.tekiyoKaishiYM, other.tekiyoKaishiYM)) {
@@ -227,9 +202,8 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
      */
     @Override
     public void shallowCopy(DbT1007KyokaisoHokenryoDankaiEntity entity) {
-        this.shoKisaiHokenshaNo = entity.shoKisaiHokenshaNo;
         this.hihokenshaNo = entity.hihokenshaNo;
-        this.shoriTimeStamp = entity.shoriTimeStamp;
+        this.rirekiNo = entity.rirekiNo;
         this.tekiyoKaishiYM = entity.tekiyoKaishiYM;
         this.tekiyoShuryoYM = entity.tekiyoShuryoYM;
         this.gengakuGoHokenryoDankai = entity.gengakuGoHokenryoDankai;
@@ -242,7 +216,7 @@ public class DbT1007KyokaisoHokenryoDankaiEntity extends DbTableEntityBase<DbT10
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shoKisaiHokenshaNo, hihokenshaNo, shoriTimeStamp, tekiyoKaishiYM, tekiyoShuryoYM, gengakuGoHokenryoDankai);
+        return super.toMd5(hihokenshaNo, rirekiNo, tekiyoKaishiYM, tekiyoShuryoYM, gengakuGoHokenryoDankai);
     }
 
 // </editor-fold>

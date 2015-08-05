@@ -54,9 +54,9 @@ public enum DbT5191RenkeiyoDataSofuKiroku implements IColumnDefinition {
      */
     hikiwatashiKubun(1, 0),
     /**
-     * 履歴番号
+     * 引渡日時
      */
-    rirekiNo(5, 0),
+    hikiwatashiTimeStamp(2147483647, 0),
     /**
      * 再送付区分
      * <br/>Enum（DBE：再送付区分）01：再送信、02：再送信済

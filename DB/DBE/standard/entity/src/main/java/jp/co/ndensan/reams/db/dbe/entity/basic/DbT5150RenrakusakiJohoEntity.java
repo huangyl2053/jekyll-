@@ -1,25 +1,28 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.TelNo;
-import java.util.Objects;
 
 /**
  * 介護連絡先情報テーブルのエンティティクラスです。
  */
 public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150RenrakusakiJohoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5150RenrakusakiJoho");
 
@@ -32,11 +35,11 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD013ShinseishoKanriNo shinseishoKanriNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
     private int renban;
     private Code renrakusakiKubun;
-    private DbUDD014ShishoCode shishoCode;
+    private ShishoCode shishoCode;
     private AtenaMeisho renrakusakiShimei;
     private AtenaKanaMeisho renrakusakiKanaSimei;
     private RString renrakusakiTuzukigara;
@@ -48,7 +51,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -57,7 +60,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -66,7 +69,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -75,17 +78,16 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -96,10 +98,10 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
      * 申請書管理番号のgetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @return 申請書管理番号
      */
-    public DbUDD013ShinseishoKanriNo getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
@@ -107,16 +109,16 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
      * 申請書管理番号のsetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(DbUDD013ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     /**
      * 連番のgetメソッドです。
-     * 
+     *
      * @return 連番
      */
     public int getRenban() {
@@ -125,7 +127,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * 連番のsetメソッドです。
-     * 
+     *
      * @param renban 連番
      */
     public void setRenban(int renban) {
@@ -134,7 +136,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * 連絡先区分のgetメソッドです。
-     * 
+     *
      * @return 連絡先区分
      */
     public Code getRenrakusakiKubun() {
@@ -143,7 +145,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * 連絡先区分のsetメソッドです。
-     * 
+     *
      * @param renrakusakiKubun 連絡先区分
      */
     public void setRenrakusakiKubun(Code renrakusakiKubun) {
@@ -152,25 +154,25 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * 支所コードのgetメソッドです。
-     * 
+     *
      * @return 支所コード
      */
-    public DbUDD014ShishoCode getShishoCode() {
+    public ShishoCode getShishoCode() {
         return shishoCode;
     }
 
     /**
      * 支所コードのsetメソッドです。
-     * 
+     *
      * @param shishoCode 支所コード
      */
-    public void setShishoCode(DbUDD014ShishoCode shishoCode) {
+    public void setShishoCode(ShishoCode shishoCode) {
         this.shishoCode = shishoCode;
     }
 
     /**
      * 連絡先氏名のgetメソッドです。
-     * 
+     *
      * @return 連絡先氏名
      */
     public AtenaMeisho getRenrakusakiShimei() {
@@ -179,7 +181,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * 連絡先氏名のsetメソッドです。
-     * 
+     *
      * @param renrakusakiShimei 連絡先氏名
      */
     public void setRenrakusakiShimei(AtenaMeisho renrakusakiShimei) {
@@ -188,7 +190,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * 連絡先氏名カナのgetメソッドです。
-     * 
+     *
      * @return 連絡先氏名カナ
      */
     public AtenaKanaMeisho getRenrakusakiKanaSimei() {
@@ -197,7 +199,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * 連絡先氏名カナのsetメソッドです。
-     * 
+     *
      * @param renrakusakiKanaSimei 連絡先氏名カナ
      */
     public void setRenrakusakiKanaSimei(AtenaKanaMeisho renrakusakiKanaSimei) {
@@ -208,7 +210,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
      * 連絡先続柄のgetメソッドです。
      * <br/>
      * <br/>Enum（DBD：連絡先続柄コード）
-     * 
+     *
      * @return 連絡先続柄
      */
     public RString getRenrakusakiTuzukigara() {
@@ -219,7 +221,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
      * 連絡先続柄のsetメソッドです。
      * <br/>
      * <br/>Enum（DBD：連絡先続柄コード）
-     * 
+     *
      * @param renrakusakiTuzukigara 連絡先続柄
      */
     public void setRenrakusakiTuzukigara(RString renrakusakiTuzukigara) {
@@ -228,7 +230,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * 連絡先郵便番号のgetメソッドです。
-     * 
+     *
      * @return 連絡先郵便番号
      */
     public YubinNo getRenrakusakiYubinNo() {
@@ -237,7 +239,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * 連絡先郵便番号のsetメソッドです。
-     * 
+     *
      * @param renrakusakiYubinNo 連絡先郵便番号
      */
     public void setRenrakusakiYubinNo(YubinNo renrakusakiYubinNo) {
@@ -246,7 +248,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * 連絡先住所のgetメソッドです。
-     * 
+     *
      * @return 連絡先住所
      */
     public AtenaJusho getRenrakusakiJusho() {
@@ -255,7 +257,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * 連絡先住所のsetメソッドです。
-     * 
+     *
      * @param renrakusakiJusho 連絡先住所
      */
     public void setRenrakusakiJusho(AtenaJusho renrakusakiJusho) {
@@ -264,7 +266,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * 連絡先電話番号のgetメソッドです。
-     * 
+     *
      * @return 連絡先電話番号
      */
     public TelNo getRenrakusakiTelNo() {
@@ -273,7 +275,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * 連絡先電話番号のsetメソッドです。
-     * 
+     *
      * @param renrakusakiTelNo 連絡先電話番号
      */
     public void setRenrakusakiTelNo(TelNo renrakusakiTelNo) {
@@ -282,7 +284,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * 連絡先携帯番号のgetメソッドです。
-     * 
+     *
      * @return 連絡先携帯番号
      */
     public TelNo getRenrakusakiKeitaiTelNo() {
@@ -291,7 +293,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * 連絡先携帯番号のsetメソッドです。
-     * 
+     *
      * @param renrakusakiKeitaiTelNo 連絡先携帯番号
      */
     public void setRenrakusakiKeitaiTelNo(TelNo renrakusakiKeitaiTelNo) {
@@ -300,7 +302,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * 優先順位のgetメソッドです。
-     * 
+     *
      * @return 優先順位
      */
     public int getPriority() {
@@ -309,7 +311,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * 優先順位のsetメソッドです。
-     * 
+     *
      * @param priority 優先順位
      */
     public void setPriority(int priority) {
@@ -318,10 +320,9 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * このエンティティの主キーが他の{@literal DbT5150RenrakusakiJohoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT5150RenrakusakiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT5150RenrakusakiJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5150RenrakusakiJohoEntity other) {
@@ -358,6 +359,7 @@ public class DbT5150RenrakusakiJohoEntity extends DbTableEntityBase<DbT5150Renra
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

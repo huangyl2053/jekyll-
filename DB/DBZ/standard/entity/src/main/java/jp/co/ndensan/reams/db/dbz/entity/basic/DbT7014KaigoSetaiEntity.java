@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  */
 public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetaiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7014KaigoSetai");
@@ -42,7 +42,7 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
     private ShikibetsuCode setaiInshikibetsuCode;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
      *
      * @return insertDantaiCd
      */
@@ -51,7 +51,7 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
      *
      * @param insertDantaiCd insertDantaiCd
      */
@@ -60,7 +60,7 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
      *
      * @return isDeleted
      */
@@ -69,7 +69,7 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
      *
      * @param isDeleted isDeleted
      */
@@ -78,7 +78,7 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
     }
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
      *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
@@ -87,90 +87,90 @@ public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetai
     }
 
     /**
-     * getHihokenshaNo
+     * 被保険者番号のgetメソッドです。
      *
-     * @return hihokenshaNo
+     * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
-     * setHihokenshaNo
+     * 被保険者番号のsetメソッドです。
      *
-     * @param hihokenshaNo hihokenshaNo
+     * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
-     * getSetaiKijunYMD
+     * 世帯基準年月日のgetメソッドです。
      *
-     * @return setaiKijunYMD
+     * @return 世帯基準年月日
      */
     public FlexibleDate getSetaiKijunYMD() {
         return setaiKijunYMD;
     }
 
     /**
-     * setSetaiKijunYMD
+     * 世帯基準年月日のsetメソッドです。
      *
-     * @param setaiKijunYMD setaiKijunYMD
+     * @param setaiKijunYMD 世帯基準年月日
      */
     public void setSetaiKijunYMD(FlexibleDate setaiKijunYMD) {
         this.setaiKijunYMD = setaiKijunYMD;
     }
 
     /**
-     * getRenban
+     * 連番のgetメソッドです。
      *
-     * @return renban
+     * @return 連番
      */
     public int getRenban() {
         return renban;
     }
 
     /**
-     * setRenban
+     * 連番のsetメソッドです。
      *
-     * @param renban renban
+     * @param renban 連番
      */
     public void setRenban(int renban) {
         this.renban = renban;
     }
 
     /**
-     * getShoriTimestamp
+     * 処理日時のgetメソッドです。
      *
-     * @return shoriTimestamp
+     * @return 処理日時
      */
     public RDateTime getShoriTimestamp() {
         return shoriTimestamp;
     }
 
     /**
-     * setShoriTimestamp
+     * 処理日時のsetメソッドです。
      *
-     * @param shoriTimestamp shoriTimestamp
+     * @param shoriTimestamp 処理日時
      */
     public void setShoriTimestamp(RDateTime shoriTimestamp) {
         this.shoriTimestamp = shoriTimestamp;
     }
 
     /**
-     * getSetaiInshikibetsuCode
+     * 世帯員識別コードのgetメソッドです。
      *
-     * @return setaiInshikibetsuCode
+     * @return 世帯員識別コード
      */
     public ShikibetsuCode getSetaiInshikibetsuCode() {
         return setaiInshikibetsuCode;
     }
 
     /**
-     * setSetaiInshikibetsuCode
+     * 世帯員識別コードのsetメソッドです。
      *
-     * @param setaiInshikibetsuCode setaiInshikibetsuCode
+     * @param setaiInshikibetsuCode 世帯員識別コード
      */
     public void setSetaiInshikibetsuCode(ShikibetsuCode setaiInshikibetsuCode) {
         this.setaiInshikibetsuCode = setaiInshikibetsuCode;

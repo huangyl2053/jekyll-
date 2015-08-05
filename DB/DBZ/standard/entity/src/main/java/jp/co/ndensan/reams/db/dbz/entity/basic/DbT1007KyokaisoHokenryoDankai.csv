@@ -1,6 +1,5 @@
-﻿shoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,DbUDD015ShoKisaiHokenshaNo,,,,,A
-hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
-shoriTimeStamp,UDD018YMDHMS,YMDHMS,,,,,A
-tekiyoKaishiYM,UDD014YM,FlexibleYearMonth,,,,,A
-tekiyoShuryoYM,UDD014YM,FlexibleYearMonth,,,,,A
-gengakuGoHokenryoDankai,varchar,RString,,,,,A
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+tekiyoKaishiYM,UDD014YM,FlexibleYearMonth,,,,,適用開始年月,A
+tekiyoShuryoYM,UDD014YM,FlexibleYearMonth,,,,,適用終了年月,A
+gengakuGoHokenryoDankai,varchar,RString,,,,,保険料納付減額後保険料段階,A

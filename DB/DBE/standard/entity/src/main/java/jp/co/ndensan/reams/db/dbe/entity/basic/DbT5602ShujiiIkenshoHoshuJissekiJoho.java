@@ -41,18 +41,22 @@ public enum DbT5602ShujiiIkenshoHoshuJissekiJoho implements IColumnDefinition {
     lastUpdateReamsLoginId(2147483647, 0),
     /**
      * 主治医医療機関コード
+     * <br/>主治医医療機関情報
      */
     shujiiIryoKikanCode(10, 0),
     /**
      * 主治医コード
+     * <br/>主治医情報
      */
     shujiiCode(8, 0),
     /**
      * 申請書管理番号
+     * <br/>要介護認定申請情報
      */
     shinseishoKanriNo(2147483647, 0),
     /**
      * 主治医意見書作成依頼履歴番号
+     * <br/>主治医意見書作成依頼情報
      */
     ikenshoIraiRirekiNo(5, 0),
     /**
@@ -69,6 +73,7 @@ public enum DbT5602ShujiiIkenshoHoshuJissekiJoho implements IColumnDefinition {
     ikenshoJuryoYMD(2147483647, 0),
     /**
      * 医師区分コード
+     * <br/>Enum（DBE：医師区分コード）
      */
     ishiKubunCode(2147483647, 0),
     /**
@@ -92,9 +97,10 @@ public enum DbT5602ShujiiIkenshoHoshuJissekiJoho implements IColumnDefinition {
      */
     hoshuShiharaiMemo(2147483647, 0),
     /**
-     * 銀行振込出力済フラグ
+     * 銀行振込出力フラグ
+     * <br/>Enum（DBE：銀行振込出力フラグ）
      */
-    isGinkoFurikomiShutsuryoku(1, 0);
+    ginkoFurikomiShutsuryokuFlag(1, 0);
 
     private final int maxLength;
     private final int scale;

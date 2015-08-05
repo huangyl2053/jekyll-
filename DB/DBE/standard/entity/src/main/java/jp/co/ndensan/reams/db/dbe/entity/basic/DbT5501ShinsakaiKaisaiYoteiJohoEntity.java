@@ -414,4 +414,5 @@ public class DbT5501ShinsakaiKaisaiYoteiJohoEntity extends DbTableEntityBase<DbT
     }
 
 // </editor-fold>
+
 }

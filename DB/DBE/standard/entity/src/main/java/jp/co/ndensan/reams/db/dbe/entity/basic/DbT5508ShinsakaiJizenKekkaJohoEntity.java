@@ -217,4 +217,5 @@ public class DbT5508ShinsakaiJizenKekkaJohoEntity extends DbTableEntityBase<DbT5
     }
 
 // </editor-fold>
+
 }

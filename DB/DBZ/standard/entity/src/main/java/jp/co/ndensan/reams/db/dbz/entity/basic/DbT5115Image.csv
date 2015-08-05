@@ -1,0 +1,4 @@
+﻿shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
+torikomiPageNo,int2,int,,,,,取込ページ番号,A
+genponMaskKubun,UDD035Code,Code,,,,,原本マスク分,A
+imageSharedFileId,timestamp,RDateTime,,,,,イメージ共有ファイルID,A

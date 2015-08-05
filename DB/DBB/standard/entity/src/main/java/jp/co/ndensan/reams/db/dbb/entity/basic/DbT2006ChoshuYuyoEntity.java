@@ -1,22 +1,24 @@
 package jp.co.ndensan.reams.db.dbb.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import java.util.Objects;
 
 /**
  * 介護賦課徴収猶予テーブルのエンティティクラスです。
  */
 public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2006ChoshuYuyo");
 
@@ -33,7 +35,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
     @PrimaryKey
     private FlexibleYear fukaNendo;
     @PrimaryKey
-    private DbUDD008TsuchishoNo tsuchishoNo;
+    private TsuchishoNo tsuchishoNo;
     @PrimaryKey
     private int rirekiNo;
     private FlexibleDate shinseiYMD;
@@ -49,7 +51,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -58,7 +60,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -67,7 +69,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -76,17 +78,16 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -95,7 +96,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 調定年度のgetメソッドです。
-     * 
+     *
      * @return 調定年度
      */
     public FlexibleYear getChoteiNendo() {
@@ -104,7 +105,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 調定年度のsetメソッドです。
-     * 
+     *
      * @param choteiNendo 調定年度
      */
     public void setChoteiNendo(FlexibleYear choteiNendo) {
@@ -113,7 +114,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 賦課年度のgetメソッドです。
-     * 
+     *
      * @return 賦課年度
      */
     public FlexibleYear getFukaNendo() {
@@ -122,7 +123,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 賦課年度のsetメソッドです。
-     * 
+     *
      * @param fukaNendo 賦課年度
      */
     public void setFukaNendo(FlexibleYear fukaNendo) {
@@ -131,25 +132,25 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 通知書番号のgetメソッドです。
-     * 
+     *
      * @return 通知書番号
      */
-    public DbUDD008TsuchishoNo getTsuchishoNo() {
+    public TsuchishoNo getTsuchishoNo() {
         return tsuchishoNo;
     }
 
     /**
      * 通知書番号のsetメソッドです。
-     * 
+     *
      * @param tsuchishoNo 通知書番号
      */
-    public void setTsuchishoNo(DbUDD008TsuchishoNo tsuchishoNo) {
+    public void setTsuchishoNo(TsuchishoNo tsuchishoNo) {
         this.tsuchishoNo = tsuchishoNo;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -158,7 +159,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -167,7 +168,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予申請年月日のgetメソッドです。
-     * 
+     *
      * @return 徴収猶予申請年月日
      */
     public FlexibleDate getShinseiYMD() {
@@ -176,7 +177,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予申請年月日のsetメソッドです。
-     * 
+     *
      * @param shinseiYMD 徴収猶予申請年月日
      */
     public void setShinseiYMD(FlexibleDate shinseiYMD) {
@@ -185,7 +186,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予決定年月日のgetメソッドです。
-     * 
+     *
      * @return 徴収猶予決定年月日
      */
     public FlexibleDate getKetteiYMD() {
@@ -194,7 +195,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予決定年月日のsetメソッドです。
-     * 
+     *
      * @param ketteiYMD 徴収猶予決定年月日
      */
     public void setKetteiYMD(FlexibleDate ketteiYMD) {
@@ -203,7 +204,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予取消年月日のgetメソッドです。
-     * 
+     *
      * @return 徴収猶予取消年月日
      */
     public FlexibleDate getTorikeshiYMD() {
@@ -212,7 +213,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予取消年月日のsetメソッドです。
-     * 
+     *
      * @param torikeshiYMD 徴収猶予取消年月日
      */
     public void setTorikeshiYMD(FlexibleDate torikeshiYMD) {
@@ -221,7 +222,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予状態区分のgetメソッドです。
-     * 
+     *
      * @return 徴収猶予状態区分
      */
     public RString getJotaiKubun() {
@@ -230,7 +231,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予状態区分のsetメソッドです。
-     * 
+     *
      * @param jotaiKubun 徴収猶予状態区分
      */
     public void setJotaiKubun(RString jotaiKubun) {
@@ -239,7 +240,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予作成区分のgetメソッドです。
-     * 
+     *
      * @return 徴収猶予作成区分
      */
     public RString getSakuseiKubun() {
@@ -248,7 +249,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予作成区分のsetメソッドです。
-     * 
+     *
      * @param sakuseiKubun 徴収猶予作成区分
      */
     public void setSakuseiKubun(RString sakuseiKubun) {
@@ -257,7 +258,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 申請事由のgetメソッドです。
-     * 
+     *
      * @return 申請事由
      */
     public RString getShinseiJiyu() {
@@ -266,7 +267,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 申請事由のsetメソッドです。
-     * 
+     *
      * @param shinseiJiyu 申請事由
      */
     public void setShinseiJiyu(RString shinseiJiyu) {
@@ -275,7 +276,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予種類コードのgetメソッドです。
-     * 
+     *
      * @return 徴収猶予種類コード
      */
     public Code getYuyoJiyuCode() {
@@ -284,7 +285,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予種類コードのsetメソッドです。
-     * 
+     *
      * @param yuyoJiyuCode 徴収猶予種類コード
      */
     public void setYuyoJiyuCode(Code yuyoJiyuCode) {
@@ -293,7 +294,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予事由のgetメソッドです。
-     * 
+     *
      * @return 徴収猶予事由
      */
     public RString getYuyoJiyu() {
@@ -302,7 +303,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予事由のsetメソッドです。
-     * 
+     *
      * @param yuyoJiyu 徴収猶予事由
      */
     public void setYuyoJiyu(RString yuyoJiyu) {
@@ -311,7 +312,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予取消種類コードのgetメソッドです。
-     * 
+     *
      * @return 徴収猶予取消種類コード
      */
     public Code getYuyoTorikeshiJiyuCode() {
@@ -320,7 +321,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予取消種類コードのsetメソッドです。
-     * 
+     *
      * @param yuyoTorikeshiJiyuCode 徴収猶予取消種類コード
      */
     public void setYuyoTorikeshiJiyuCode(Code yuyoTorikeshiJiyuCode) {
@@ -329,7 +330,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予取消事由のgetメソッドです。
-     * 
+     *
      * @return 徴収猶予取消事由
      */
     public RString getYuyoTorikeshiJiyu() {
@@ -338,7 +339,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * 徴収猶予取消事由のsetメソッドです。
-     * 
+     *
      * @param yuyoTorikeshiJiyu 徴収猶予取消事由
      */
     public void setYuyoTorikeshiJiyu(RString yuyoTorikeshiJiyu) {
@@ -347,10 +348,9 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * このエンティティの主キーが他の{@literal DbT2006ChoshuYuyoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT2006ChoshuYuyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2006ChoshuYuyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2006ChoshuYuyoEntity other) {
@@ -395,6 +395,7 @@ public class DbT2006ChoshuYuyoEntity extends DbTableEntityBase<DbT2006ChoshuYuyo
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

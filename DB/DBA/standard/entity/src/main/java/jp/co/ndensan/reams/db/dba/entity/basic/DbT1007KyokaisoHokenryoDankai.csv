@@ -1,5 +1,0 @@
-﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
-rirekiNo,int2,int,,,,,履歴番号,A
-tekiyoKaishiYM,UDD014YM,FlexibleYearMonth,,,,,適用開始年月,A
-tekiyoShuryoYM,UDD014YM,FlexibleYearMonth,,,,,適用終了年月,A
-gengakuGoHokenryoDankai,varchar,RString,,,,,保険料納付減額後保険料段階,A

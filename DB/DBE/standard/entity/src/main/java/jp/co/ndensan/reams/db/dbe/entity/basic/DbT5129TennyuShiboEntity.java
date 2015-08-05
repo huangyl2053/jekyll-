@@ -1,21 +1,23 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import java.util.Objects;
 
 /**
  * 転入・死亡情報テーブルのエンティティクラスです。
  */
 public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShiboEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5129TennyuShibo");
 
@@ -28,7 +30,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD013ShinseishoKanriNo shinseishoKanriNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
     private FlexibleDate nijiHanteiYMD;
     private Code nijiHanteiYokaigoJotaiKubunCode;
     private int nijiHanteiNinteiYukoKikan;
@@ -45,7 +47,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -54,7 +56,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -63,7 +65,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -72,17 +74,16 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -93,10 +94,10 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      * 申請書管理番号のgetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @return 申請書管理番号
      */
-    public DbUDD013ShinseishoKanriNo getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
@@ -104,16 +105,16 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      * 申請書管理番号のsetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(DbUDD013ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     /**
      * 二次判定年月日のgetメソッドです。
-     * 
+     *
      * @return 二次判定年月日
      */
     public FlexibleDate getNijiHanteiYMD() {
@@ -122,7 +123,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * 二次判定年月日のsetメソッドです。
-     * 
+     *
      * @param nijiHanteiYMD 二次判定年月日
      */
     public void setNijiHanteiYMD(FlexibleDate nijiHanteiYMD) {
@@ -133,7 +134,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      * 二次判定要介護状態区分コードのgetメソッドです。
      * <br/>
      * <br/>Enum（DBZ：要介護状態区分コード09）
-     * 
+     *
      * @return 二次判定要介護状態区分コード
      */
     public Code getNijiHanteiYokaigoJotaiKubunCode() {
@@ -144,7 +145,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      * 二次判定要介護状態区分コードのsetメソッドです。
      * <br/>
      * <br/>Enum（DBZ：要介護状態区分コード09）
-     * 
+     *
      * @param nijiHanteiYokaigoJotaiKubunCode 二次判定要介護状態区分コード
      */
     public void setNijiHanteiYokaigoJotaiKubunCode(Code nijiHanteiYokaigoJotaiKubunCode) {
@@ -153,7 +154,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * 二次判定認定有効期間のgetメソッドです。
-     * 
+     *
      * @return 二次判定認定有効期間
      */
     public int getNijiHanteiNinteiYukoKikan() {
@@ -162,7 +163,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * 二次判定認定有効期間のsetメソッドです。
-     * 
+     *
      * @param nijiHanteiNinteiYukoKikan 二次判定認定有効期間
      */
     public void setNijiHanteiNinteiYukoKikan(int nijiHanteiNinteiYukoKikan) {
@@ -171,7 +172,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * 二時判定認定有効開始年月日のgetメソッドです。
-     * 
+     *
      * @return 二時判定認定有効開始年月日
      */
     public FlexibleDate getNijiHanteiNinteiYukoKaishiYMD() {
@@ -180,7 +181,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * 二時判定認定有効開始年月日のsetメソッドです。
-     * 
+     *
      * @param nijiHanteiNinteiYukoKaishiYMD 二時判定認定有効開始年月日
      */
     public void setNijiHanteiNinteiYukoKaishiYMD(FlexibleDate nijiHanteiNinteiYukoKaishiYMD) {
@@ -189,7 +190,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * 二時判定認定有効終了年月日のgetメソッドです。
-     * 
+     *
      * @return 二時判定認定有効終了年月日
      */
     public FlexibleDate getNijiHanteiNinteiYukoShuryoYMD() {
@@ -198,7 +199,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * 二時判定認定有効終了年月日のsetメソッドです。
-     * 
+     *
      * @param nijiHanteiNinteiYukoShuryoYMD 二時判定認定有効終了年月日
      */
     public void setNijiHanteiNinteiYukoShuryoYMD(FlexibleDate nijiHanteiNinteiYukoShuryoYMD) {
@@ -209,7 +210,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      * 介護認定審査会開催番号のgetメソッドです。
      * <br/>
      * <br/>介護認定審査会開催予定情報
-     * 
+     *
      * @return 介護認定審査会開催番号
      */
     public int getShinsakaiKaisaiNo() {
@@ -220,7 +221,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      * 介護認定審査会開催番号のsetメソッドです。
      * <br/>
      * <br/>介護認定審査会開催予定情報
-     * 
+     *
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      */
     public void setShinsakaiKaisaiNo(int shinsakaiKaisaiNo) {
@@ -229,7 +230,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * 介護認定審査会意見のgetメソッドです。
-     * 
+     *
      * @return 介護認定審査会意見
      */
     public RString getShinsakaiIken() {
@@ -238,7 +239,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * 介護認定審査会意見のsetメソッドです。
-     * 
+     *
      * @param shinsakaiIken 介護認定審査会意見
      */
     public void setShinsakaiIken(RString shinsakaiIken) {
@@ -247,7 +248,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * 一次判定結果変更理由のgetメソッドです。
-     * 
+     *
      * @return 一次判定結果変更理由
      */
     public RString getIchijiHnateiKekkaHenkoRiyu() {
@@ -256,7 +257,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * 一次判定結果変更理由のsetメソッドです。
-     * 
+     *
      * @param ichijiHnateiKekkaHenkoRiyu 一次判定結果変更理由
      */
     public void setIchijiHnateiKekkaHenkoRiyu(RString ichijiHnateiKekkaHenkoRiyu) {
@@ -267,7 +268,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      * 要介護状態像例コードのgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：要介護状態像例コード）要介護１の場合の状態像
-     * 
+     *
      * @return 要介護状態像例コード
      */
     public Code getYokaigoJotaizoReiCode() {
@@ -278,7 +279,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      * 要介護状態像例コードのsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：要介護状態像例コード）要介護１の場合の状態像
-     * 
+     *
      * @param yokaigoJotaizoReiCode 要介護状態像例コード
      */
     public void setYokaigoJotaizoReiCode(Code yokaigoJotaizoReiCode) {
@@ -289,7 +290,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      * 認定審査会意見種類のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：認定審査会意見種類）
-     * 
+     *
      * @return 認定審査会意見種類
      */
     public RString getNinteishinsakaiIkenShurui() {
@@ -300,7 +301,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      * 認定審査会意見種類のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：認定審査会意見種類）
-     * 
+     *
      * @param ninteishinsakaiIkenShurui 認定審査会意見種類
      */
     public void setNinteishinsakaiIkenShurui(RString ninteishinsakaiIkenShurui) {
@@ -309,7 +310,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * 審査会メモのgetメソッドです。
-     * 
+     *
      * @return 審査会メモ
      */
     public RString getShinsakaiMemo() {
@@ -318,7 +319,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * 審査会メモのsetメソッドです。
-     * 
+     *
      * @param shinsakaiMemo 審査会メモ
      */
     public void setShinsakaiMemo(RString shinsakaiMemo) {
@@ -329,7 +330,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      * 二次判定結果入力方法のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：二次判定結果入力方法）1:画面入力、2:モバイル取込、3:ＯＣＲ取込
-     * 
+     *
      * @return 二次判定結果入力方法
      */
     public Code getNijiHanteiKekkaInputHoho() {
@@ -340,7 +341,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
      * 二次判定結果入力方法のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：二次判定結果入力方法）1:画面入力、2:モバイル取込、3:ＯＣＲ取込
-     * 
+     *
      * @param nijiHanteiKekkaInputHoho 二次判定結果入力方法
      */
     public void setNijiHanteiKekkaInputHoho(Code nijiHanteiKekkaInputHoho) {
@@ -349,7 +350,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * 二次判定結果入力年月日のgetメソッドです。
-     * 
+     *
      * @return 二次判定結果入力年月日
      */
     public FlexibleDate getNiniHanteiKekkaInputYMD() {
@@ -358,7 +359,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * 二次判定結果入力年月日のsetメソッドです。
-     * 
+     *
      * @param niniHanteiKekkaInputYMD 二次判定結果入力年月日
      */
     public void setNiniHanteiKekkaInputYMD(FlexibleDate niniHanteiKekkaInputYMD) {
@@ -367,10 +368,9 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * このエンティティの主キーが他の{@literal DbT5129TennyuShiboEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT5129TennyuShiboEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT5129TennyuShiboEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT5129TennyuShiboEntity other) {
@@ -406,6 +406,7 @@ public class DbT5129TennyuShiboEntity extends DbTableEntityBase<DbT5129TennyuShi
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

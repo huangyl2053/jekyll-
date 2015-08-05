@@ -476,4 +476,6 @@ public class DbT7021JigyoHokokuTokeiDataEntity extends DbTableEntityBase<DbT7021
     }
 
 // </editor-fold>
+
+
 }

@@ -1,6 +1,6 @@
-﻿ninteichosaItakusakiCode,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,認定調査委託先コード,A
+﻿ninteichosaItakusakiCode,varchar,RString,,,,,認定調査委託先コード,A
 ninteichosainCode,varchar,RString,,,,,認定調査員コード,A
-shinseishoKanriNo,DbUDD013ShinseishoKanriNo,DbUDD013ShinseishoKanriNo,,,,,申請書管理番号,A
+shinseishoKanriNo,DbUDD013ShinseishoKanriNo,ShinseishoKanriNo,,,,,申請書管理番号,A
 ninteichosaIraiRirekiNo,int2,int,,,,,認定調査依頼履歴番号,A
 chosaItakuryo,int4,int,,,,,認定調査委託料,A
 chosaItakuryoShiharaiYMD,UDD015YMD,FlexibleDate,,,,,認定調査委託料支払年月日,A

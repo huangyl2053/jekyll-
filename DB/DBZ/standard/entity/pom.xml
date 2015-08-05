@@ -28,6 +28,8 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzDefinition</artifactId>
+            <version>1.2-release-staging-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
 <!--        <dependency>
             <groupId>jp.co.ndensan.reams.aa.aax</groupId>

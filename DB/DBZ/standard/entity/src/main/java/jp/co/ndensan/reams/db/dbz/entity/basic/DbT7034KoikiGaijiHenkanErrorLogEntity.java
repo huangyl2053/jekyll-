@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  */
 public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT7034KoikiGaijiHenkanErrorLogEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7034KoikiGaijiHenkanErrorLog");
@@ -36,7 +36,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
     private RString renNo;
     private LasdecCode shichosonCode;
     private RString shubetsu;
-    private RDateTime shoriTimestamp;
+    private int rirekiNo;
     private LasdecCode motoShichosonCode;
     private RString motoShichosonMeisho;
     private LasdecCode sakiShichosonCode;
@@ -55,7 +55,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
     private RString errorHyojiKomoku;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
      *
      * @return insertDantaiCd
      */
@@ -64,7 +64,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
      *
      * @param insertDantaiCd insertDantaiCd
      */
@@ -73,7 +73,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
      *
      * @return isDeleted
      */
@@ -82,7 +82,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
      *
      * @param isDeleted isDeleted
      */
@@ -91,7 +91,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
     }
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
      *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
@@ -100,360 +100,360 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
     }
 
     /**
-     * getShoriNo
+     * 処理番号のgetメソッドです。
      *
-     * @return shoriNo
+     * @return 処理番号
      */
     public RString getShoriNo() {
         return shoriNo;
     }
 
     /**
-     * setShoriNo
+     * 処理番号のsetメソッドです。
      *
-     * @param shoriNo shoriNo
+     * @param shoriNo 処理番号
      */
     public void setShoriNo(RString shoriNo) {
         this.shoriNo = shoriNo;
     }
 
     /**
-     * getRenNo
+     * 連番のgetメソッドです。
      *
-     * @return renNo
+     * @return 連番
      */
     public RString getRenNo() {
         return renNo;
     }
 
     /**
-     * setRenNo
+     * 連番のsetメソッドです。
      *
-     * @param renNo renNo
+     * @param renNo 連番
      */
     public void setRenNo(RString renNo) {
         this.renNo = renNo;
     }
 
     /**
-     * getShichosonCode
+     * 市町村番号のgetメソッドです。
      *
-     * @return shichosonCode
+     * @return 市町村番号
      */
     public LasdecCode getShichosonCode() {
         return shichosonCode;
     }
 
     /**
-     * setShichosonCode
+     * 市町村番号のsetメソッドです。
      *
-     * @param shichosonCode shichosonCode
+     * @param shichosonCode 市町村番号
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
         this.shichosonCode = shichosonCode;
     }
 
     /**
-     * getShubetsu
+     * 種別のgetメソッドです。
      *
-     * @return shubetsu
+     * @return 種別
      */
     public RString getShubetsu() {
         return shubetsu;
     }
 
     /**
-     * setShubetsu
+     * 種別のsetメソッドです。
      *
-     * @param shubetsu shubetsu
+     * @param shubetsu 種別
      */
     public void setShubetsu(RString shubetsu) {
         this.shubetsu = shubetsu;
     }
 
     /**
-     * getShoriTimestamp
+     * 履歴番号のgetメソッドです。
      *
-     * @return shoriTimestamp
+     * @return 履歴番号
      */
-    public RDateTime getShoriTimestamp() {
-        return shoriTimestamp;
+    public int getRirekiNo() {
+        return rirekiNo;
     }
 
     /**
-     * setShoriTimestamp
+     * 履歴番号のsetメソッドです。
      *
-     * @param shoriTimestamp shoriTimestamp
+     * @param rirekiNo 履歴番号
      */
-    public void setShoriTimestamp(RDateTime shoriTimestamp) {
-        this.shoriTimestamp = shoriTimestamp;
+    public void setRirekiNo(int rirekiNo) {
+        this.rirekiNo = rirekiNo;
     }
 
     /**
-     * getMotoShichosonCode
+     * 送信元市町村コードのgetメソッドです。
      *
-     * @return motoShichosonCode
+     * @return 送信元市町村コード
      */
     public LasdecCode getMotoShichosonCode() {
         return motoShichosonCode;
     }
 
     /**
-     * setMotoShichosonCode
+     * 送信元市町村コードのsetメソッドです。
      *
-     * @param motoShichosonCode motoShichosonCode
+     * @param motoShichosonCode 送信元市町村コード
      */
     public void setMotoShichosonCode(LasdecCode motoShichosonCode) {
         this.motoShichosonCode = motoShichosonCode;
     }
 
     /**
-     * getMotoShichosonMeisho
+     * 送信元市町村名称のgetメソッドです。
      *
-     * @return motoShichosonMeisho
+     * @return 送信元市町村名称
      */
     public RString getMotoShichosonMeisho() {
         return motoShichosonMeisho;
     }
 
     /**
-     * setMotoShichosonMeisho
+     * 送信元市町村名称のsetメソッドです。
      *
-     * @param motoShichosonMeisho motoShichosonMeisho
+     * @param motoShichosonMeisho 送信元市町村名称
      */
     public void setMotoShichosonMeisho(RString motoShichosonMeisho) {
         this.motoShichosonMeisho = motoShichosonMeisho;
     }
 
     /**
-     * getSakiShichosonCode
+     * 送信先市町村コードのgetメソッドです。
      *
-     * @return sakiShichosonCode
+     * @return 送信先市町村コード
      */
     public LasdecCode getSakiShichosonCode() {
         return sakiShichosonCode;
     }
 
     /**
-     * setSakiShichosonCode
+     * 送信先市町村コードのsetメソッドです。
      *
-     * @param sakiShichosonCode sakiShichosonCode
+     * @param sakiShichosonCode 送信先市町村コード
      */
     public void setSakiShichosonCode(LasdecCode sakiShichosonCode) {
         this.sakiShichosonCode = sakiShichosonCode;
     }
 
     /**
-     * getSakiShichosonMeisho
+     * 送信先市町村名称のgetメソッドです。
      *
-     * @return sakiShichosonMeisho
+     * @return 送信先市町村名称
      */
     public RString getSakiShichosonMeisho() {
         return sakiShichosonMeisho;
     }
 
     /**
-     * setSakiShichosonMeisho
+     * 送信先市町村名称のsetメソッドです。
      *
-     * @param sakiShichosonMeisho sakiShichosonMeisho
+     * @param sakiShichosonMeisho 送信先市町村名称
      */
     public void setSakiShichosonMeisho(RString sakiShichosonMeisho) {
         this.sakiShichosonMeisho = sakiShichosonMeisho;
     }
 
     /**
-     * getJukiShikibetsuCode
+     * 住基識別コードのgetメソッドです。
      *
-     * @return jukiShikibetsuCode
+     * @return 住基識別コード
      */
     public ShikibetsuCode getJukiShikibetsuCode() {
         return jukiShikibetsuCode;
     }
 
     /**
-     * setJukiShikibetsuCode
+     * 住基識別コードのsetメソッドです。
      *
-     * @param jukiShikibetsuCode jukiShikibetsuCode
+     * @param jukiShikibetsuCode 住基識別コード
      */
     public void setJukiShikibetsuCode(ShikibetsuCode jukiShikibetsuCode) {
         this.jukiShikibetsuCode = jukiShikibetsuCode;
     }
 
     /**
-     * getKakuninKubun
+     * 確認区分のgetメソッドです。
      *
-     * @return kakuninKubun
+     * @return 確認区分
      */
     public RString getKakuninKubun() {
         return kakuninKubun;
     }
 
     /**
-     * setKakuninKubun
+     * 確認区分のsetメソッドです。
      *
-     * @param kakuninKubun kakuninKubun
+     * @param kakuninKubun 確認区分
      */
     public void setKakuninKubun(RString kakuninKubun) {
         this.kakuninKubun = kakuninKubun;
     }
 
     /**
-     * getShikibetsuCode
+     * 識別コードのgetメソッドです。
      *
-     * @return shikibetsuCode
+     * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
         return shikibetsuCode;
     }
 
     /**
-     * setShikibetsuCode
+     * 識別コードのsetメソッドです。
      *
-     * @param shikibetsuCode shikibetsuCode
+     * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
     }
 
     /**
-     * getHihokenshaNo
+     * 被保険者番号のgetメソッドです。
      *
-     * @return hihokenshaNo
+     * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
-     * setHihokenshaNo
+     * 被保険者番号のsetメソッドです。
      *
-     * @param hihokenshaNo hihokenshaNo
+     * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
-     * getRecoadNo
+     * レコードＮｏのgetメソッドです。
      *
-     * @return recoadNo
+     * @return レコードＮｏ
      */
     public RString getRecoadNo() {
         return recoadNo;
     }
 
     /**
-     * setRecoadNo
+     * レコードＮｏのsetメソッドです。
      *
-     * @param recoadNo recoadNo
+     * @param recoadNo レコードＮｏ
      */
     public void setRecoadNo(RString recoadNo) {
         this.recoadNo = recoadNo;
     }
 
     /**
-     * getErrorKomokuMeisho
+     * 変換エラーフィールド名称のgetメソッドです。
      *
-     * @return errorKomokuMeisho
+     * @return 変換エラーフィールド名称
      */
     public RString getErrorKomokuMeisho() {
         return errorKomokuMeisho;
     }
 
     /**
-     * setErrorKomokuMeisho
+     * 変換エラーフィールド名称のsetメソッドです。
      *
-     * @param errorKomokuMeisho errorKomokuMeisho
+     * @param errorKomokuMeisho 変換エラーフィールド名称
      */
     public void setErrorKomokuMeisho(RString errorKomokuMeisho) {
         this.errorKomokuMeisho = errorKomokuMeisho;
     }
 
     /**
-     * getErrorKomokuNo
+     * 変換エラーフィールドＮｏのgetメソッドです。
      *
-     * @return errorKomokuNo
+     * @return 変換エラーフィールドＮｏ
      */
     public RString getErrorKomokuNo() {
         return errorKomokuNo;
     }
 
     /**
-     * setErrorKomokuNo
+     * 変換エラーフィールドＮｏのsetメソッドです。
      *
-     * @param errorKomokuNo errorKomokuNo
+     * @param errorKomokuNo 変換エラーフィールドＮｏ
      */
     public void setErrorKomokuNo(RString errorKomokuNo) {
         this.errorKomokuNo = errorKomokuNo;
     }
 
     /**
-     * getErrorCode
+     * 変換エラーコードのgetメソッドです。
      *
-     * @return errorCode
+     * @return 変換エラーコード
      */
     public RString getErrorCode() {
         return errorCode;
     }
 
     /**
-     * setErrorCode
+     * 変換エラーコードのsetメソッドです。
      *
-     * @param errorCode errorCode
+     * @param errorCode 変換エラーコード
      */
     public void setErrorCode(RString errorCode) {
         this.errorCode = errorCode;
     }
 
     /**
-     * getErrorHyojiRenban
+     * エラー表示連番のgetメソッドです。
      *
-     * @return errorHyojiRenban
+     * @return エラー表示連番
      */
     public RString getErrorHyojiRenban() {
         return errorHyojiRenban;
     }
 
     /**
-     * setErrorHyojiRenban
+     * エラー表示連番のsetメソッドです。
      *
-     * @param errorHyojiRenban errorHyojiRenban
+     * @param errorHyojiRenban エラー表示連番
      */
     public void setErrorHyojiRenban(RString errorHyojiRenban) {
         this.errorHyojiRenban = errorHyojiRenban;
     }
 
     /**
-     * getErrorHyojiKomokuMeisho
+     * エラー表示フィールド名称のgetメソッドです。
      *
-     * @return errorHyojiKomokuMeisho
+     * @return エラー表示フィールド名称
      */
     public RString getErrorHyojiKomokuMeisho() {
         return errorHyojiKomokuMeisho;
     }
 
     /**
-     * setErrorHyojiKomokuMeisho
+     * エラー表示フィールド名称のsetメソッドです。
      *
-     * @param errorHyojiKomokuMeisho errorHyojiKomokuMeisho
+     * @param errorHyojiKomokuMeisho エラー表示フィールド名称
      */
     public void setErrorHyojiKomokuMeisho(RString errorHyojiKomokuMeisho) {
         this.errorHyojiKomokuMeisho = errorHyojiKomokuMeisho;
     }
 
     /**
-     * getErrorHyojiKomoku
+     * エラー表示フィールドのgetメソッドです。
      *
-     * @return errorHyojiKomoku
+     * @return エラー表示フィールド
      */
     public RString getErrorHyojiKomoku() {
         return errorHyojiKomoku;
     }
 
     /**
-     * setErrorHyojiKomoku
+     * エラー表示フィールドのsetメソッドです。
      *
-     * @param errorHyojiKomoku errorHyojiKomoku
+     * @param errorHyojiKomoku エラー表示フィールド
      */
     public void setErrorHyojiKomoku(RString errorHyojiKomoku) {
         this.errorHyojiKomoku = errorHyojiKomoku;
@@ -492,7 +492,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
         this.renNo = entity.renNo;
         this.shichosonCode = entity.shichosonCode;
         this.shubetsu = entity.shubetsu;
-        this.shoriTimestamp = entity.shoriTimestamp;
+        this.rirekiNo = entity.rirekiNo;
         this.motoShichosonCode = entity.motoShichosonCode;
         this.motoShichosonMeisho = entity.motoShichosonMeisho;
         this.sakiShichosonCode = entity.sakiShichosonCode;
@@ -517,7 +517,7 @@ public class DbT7034KoikiGaijiHenkanErrorLogEntity extends DbTableEntityBase<DbT
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shoriNo, renNo, shichosonCode, shubetsu, shoriTimestamp, motoShichosonCode, motoShichosonMeisho, sakiShichosonCode, sakiShichosonMeisho, jukiShikibetsuCode, kakuninKubun, shikibetsuCode, hihokenshaNo, recoadNo, errorKomokuMeisho, errorKomokuNo, errorCode, errorHyojiRenban, errorHyojiKomokuMeisho, errorHyojiKomoku);
+        return super.toMd5(shoriNo, renNo, shichosonCode, shubetsu, rirekiNo, motoShichosonCode, motoShichosonMeisho, sakiShichosonCode, sakiShichosonMeisho, jukiShikibetsuCode, kakuninKubun, shikibetsuCode, hihokenshaNo, recoadNo, errorKomokuMeisho, errorKomokuNo, errorCode, errorHyojiRenban, errorHyojiKomokuMeisho, errorHyojiKomoku);
     }
 
 // </editor-fold>

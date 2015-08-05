@@ -1,0 +1,11 @@
+﻿nendo,UDD012YSeireki,FlexibleYear,,,,,年度,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+rirekiNo,int2,int,,,,,履歴番号,A
+hakoFuyoFlag,bool,boolean,,,,,発行不要フラグ,A
+shokenFlag,bool,boolean,,,,,職権変更フラグ,A
+hanteiYMD,UDD015YMD,FlexibleDate,,,,,判定日,A
+hanteiKubun,varchar,RString,,,,,判定区分,A
+koseiJiyu,UDD035Code,Code,,,,,更正事由,A
+hakoKubun,varchar,RString,,,,,発行区分,A
+hakoYMD,UDD015YMD,FlexibleDate,,,,,発行日,A
+kofuYMD,UDD015YMD,FlexibleDate,,,,,交付日,A
