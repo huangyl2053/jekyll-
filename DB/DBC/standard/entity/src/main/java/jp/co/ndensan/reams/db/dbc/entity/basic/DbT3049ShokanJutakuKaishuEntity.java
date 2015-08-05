@@ -7,7 +7,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
 
@@ -15,7 +18,7 @@ import java.util.Objects;
  * 償還払請求住宅改修テーブルのエンティティクラスです。
  */
 public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049ShokanJutakuKaishuEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3049ShokanJutakuKaishu");
 
@@ -28,20 +31,20 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hiHokenshaNo;
+    private HihokenshaNo hiHokenshaNo;
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
     private RString seiriNo;
     @PrimaryKey
-    private DbUDD004JigyoshaNo jigyoshaNo;
+    private JigyoshaNo jigyoshaNo;
     @PrimaryKey
     private RString yoshikiNo;
     @PrimaryKey
     private RString junjiNo;
     @PrimaryKey
     private int rirekiNo;
-    private DbUDD007ServiceCode serviceCode;
+    private ServiceCode serviceCode;
     private FlexibleDate jutakuKaishuChakkoYMD;
     private RString jutakuKaishuJigyoshaName;
     private RString jutakuKaishuJutakuAddress;
@@ -101,7 +104,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      * 
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHiHokenshaNo() {
+    public HihokenshaNo getHiHokenshaNo() {
         return hiHokenshaNo;
     }
 
@@ -110,7 +113,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      * 
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(DbUDD002HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
@@ -155,7 +158,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      * 
      * @return 事業者番号
      */
-    public DbUDD004JigyoshaNo getJigyoshaNo() {
+    public JigyoshaNo getJigyoshaNo() {
         return jigyoshaNo;
     }
 
@@ -164,7 +167,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      * 
      * @param jigyoshaNo 事業者番号
      */
-    public void setJigyoshaNo(DbUDD004JigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
@@ -231,7 +234,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      * 
      * @return サービスコード
      */
-    public DbUDD007ServiceCode getServiceCode() {
+    public ServiceCode getServiceCode() {
         return serviceCode;
     }
 
@@ -240,7 +243,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      * 
      * @param serviceCode サービスコード
      */
-    public void setServiceCode(DbUDD007ServiceCode serviceCode) {
+    public void setServiceCode(ServiceCode serviceCode) {
         this.serviceCode = serviceCode;
     }
 
@@ -374,7 +377,7 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
      * このエンティティの主キーが他の{@literal DbT3049ShokanJutakuKaishuEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3049ShokanJutakuKaishuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -438,4 +441,5 @@ public class DbT3049ShokanJutakuKaishuEntity extends DbTableEntityBase<DbT3049Sh
     }
 
 // </editor-fold>
+
 }

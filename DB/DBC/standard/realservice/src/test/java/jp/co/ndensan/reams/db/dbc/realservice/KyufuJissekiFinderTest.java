@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3027KyufujissekiJutakuKaishuh
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyoEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3030KyufuJissekiShakaiFukushiHojinKeigengakuEntityMock;
 import jp.co.ndensan.reams.db.dbc.entity.helper.DbT3033KyufujissekiShukeiEntityMock;
-import jp.co.ndensan.reams.db.dbc.entity.helper.KyufujissekiShuruiDetailEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.KyufujissekiShuruiDetailEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiKihonDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiKyotakuServiceDac;
 import jp.co.ndensan.reams.db.dbc.persistence.basic.IKyufuJissekiMeisaiDac;

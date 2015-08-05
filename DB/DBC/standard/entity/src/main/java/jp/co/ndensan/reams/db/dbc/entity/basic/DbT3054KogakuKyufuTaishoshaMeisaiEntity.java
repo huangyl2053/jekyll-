@@ -7,7 +7,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
 
@@ -15,7 +18,7 @@ import java.util.Objects;
  * 高額介護サービス費給付対象者明細テーブルのエンティティクラスです。
  */
 public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<DbT3054KogakuKyufuTaishoshaMeisaiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3054KogakuKyufuTaishoshaMeisai");
 
@@ -28,13 +31,13 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
-    private DbUDD004JigyoshaNo jigyoshaNo;
+    private JigyoshaNo jigyoshaNo;
     @PrimaryKey
-    private DbUDD005ServiceShuruiCode serviceShuruiCode;
+    private ServiceShuruiCode serviceShuruiCode;
     @PrimaryKey
     private int rirekiNo;
     private Decimal serviceHiyoGokeiGaku;
@@ -92,7 +95,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
      * 
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
@@ -101,7 +104,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
      * 
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -128,7 +131,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
      * 
      * @return 事業者番号
      */
-    public DbUDD004JigyoshaNo getJigyoshaNo() {
+    public JigyoshaNo getJigyoshaNo() {
         return jigyoshaNo;
     }
 
@@ -137,7 +140,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
      * 
      * @param jigyoshaNo 事業者番号
      */
-    public void setJigyoshaNo(DbUDD004JigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
@@ -146,7 +149,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
      * 
      * @return サービス種類コード
      */
-    public DbUDD005ServiceShuruiCode getServiceShuruiCode() {
+    public ServiceShuruiCode getServiceShuruiCode() {
         return serviceShuruiCode;
     }
 
@@ -155,7 +158,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
      * 
      * @param serviceShuruiCode サービス種類コード
      */
-    public void setServiceShuruiCode(DbUDD005ServiceShuruiCode serviceShuruiCode) {
+    public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
         this.serviceShuruiCode = serviceShuruiCode;
     }
 
@@ -239,7 +242,7 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
      * このエンティティの主キーが他の{@literal DbT3054KogakuKyufuTaishoshaMeisaiEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3054KogakuKyufuTaishoshaMeisaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -290,4 +293,5 @@ public class DbT3054KogakuKyufuTaishoshaMeisaiEntity extends DbTableEntityBase<D
     }
 
 // </editor-fold>
+
 }

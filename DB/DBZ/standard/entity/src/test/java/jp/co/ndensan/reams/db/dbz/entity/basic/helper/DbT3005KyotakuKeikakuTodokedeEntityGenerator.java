@@ -48,10 +48,8 @@ public final class DbT3005KyotakuKeikakuTodokedeEntityGenerator {
     public static DbT3005KyotakuKeikakuTodokedeEntity createDbT3005KyotakuKeikakuTodokedeEntity() {
         DbT3005KyotakuKeikakuTodokedeEntity entity = new DbT3005KyotakuKeikakuTodokedeEntity();
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
-        entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);
-        entity.setShikibetsuCode(DEFAULT_識別コード);
+        entity.setRirekiNo(1);
         entity.setTaishoYM(DEFAULT_対象年月);
-        entity.setShoriTimestamp(DEFAULT_処理日時);
         entity.setTodokedeKubun(DEFAULT_届出区分);
         entity.setTodokedeYMD(DEFAULT_届出年月日);
         entity.setTodokedeshaShimei(DEFAULT_届出者氏名);

@@ -1,4 +1,4 @@
-﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
 rirekiNo,int2,int,,,,,履歴番号,A
 serviceHiyoGokeiGakuGokei,numeric,Decimal,,,,,サービス費用合計額合計,A

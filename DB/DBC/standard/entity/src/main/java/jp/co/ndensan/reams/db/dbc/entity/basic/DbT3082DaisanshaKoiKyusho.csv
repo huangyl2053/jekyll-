@@ -1,4 +1,4 @@
-﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 todokedeKanriNo,varchar,RString,,,,,第三者行為届出管理番号,A
 kyushoSeikyuNo,varchar,RString,,,,,第三者行為求償請求番号,A
 rirekiNo,int2,int,,,,,履歴番号,A

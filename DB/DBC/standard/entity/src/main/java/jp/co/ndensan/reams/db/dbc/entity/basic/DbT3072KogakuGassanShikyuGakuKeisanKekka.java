@@ -6,7 +6,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 高額合算支給額計算結果テーブルの項目定義クラスです。
  */
 public enum DbT3072KogakuGassanShikyuGakuKeisanKekka implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     /**
      * insertDantaiCd
      */
@@ -234,7 +235,7 @@ public enum DbT3072KogakuGassanShikyuGakuKeisanKekka implements IColumnDefinitio
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -243,7 +244,7 @@ public enum DbT3072KogakuGassanShikyuGakuKeisanKekka implements IColumnDefinitio
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

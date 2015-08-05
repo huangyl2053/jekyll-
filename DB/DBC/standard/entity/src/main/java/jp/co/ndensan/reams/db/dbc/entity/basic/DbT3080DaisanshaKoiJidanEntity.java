@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import java.util.Objects;
@@ -15,7 +16,8 @@ import java.util.Objects;
  * 介護第三者行為示談テーブルのエンティティクラスです。
  */
 public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080DaisanshaKoiJidanEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3080DaisanshaKoiJidan");
 
@@ -28,7 +30,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private RString todokedeKanriNo;
     @PrimaryKey
@@ -45,7 +47,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -54,7 +56,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -63,7 +65,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -72,17 +74,16 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -91,25 +92,25 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 第三者行為届出管理番号のgetメソッドです。
-     * 
+     *
      * @return 第三者行為届出管理番号
      */
     public RString getTodokedeKanriNo() {
@@ -118,7 +119,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 第三者行為届出管理番号のsetメソッドです。
-     * 
+     *
      * @param todokedeKanriNo 第三者行為届出管理番号
      */
     public void setTodokedeKanriNo(RString todokedeKanriNo) {
@@ -127,7 +128,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 示談報告書受付年月日のgetメソッドです。
-     * 
+     *
      * @return 示談報告書受付年月日
      */
     public FlexibleDate getJidanHokokushoUketukeYMD() {
@@ -136,7 +137,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 示談報告書受付年月日のsetメソッドです。
-     * 
+     *
      * @param jidanHokokushoUketukeYMD 示談報告書受付年月日
      */
     public void setJidanHokokushoUketukeYMD(FlexibleDate jidanHokokushoUketukeYMD) {
@@ -145,7 +146,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -154,7 +155,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -163,7 +164,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 第三者行為求償協議区分のgetメソッドです。
-     * 
+     *
      * @return 第三者行為求償協議区分
      */
     public RString getKyushoKyogiKubun() {
@@ -172,7 +173,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 第三者行為求償協議区分のsetメソッドです。
-     * 
+     *
      * @param kyushoKyogiKubun 第三者行為求償協議区分
      */
     public void setKyushoKyogiKubun(RString kyushoKyogiKubun) {
@@ -181,7 +182,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 示談報告書提出年月日のgetメソッドです。
-     * 
+     *
      * @return 示談報告書提出年月日
      */
     public FlexibleDate getJidanHokokushoTeishutsuYMD() {
@@ -190,7 +191,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 示談報告書提出年月日のsetメソッドです。
-     * 
+     *
      * @param jidanHokokushoTeishutsuYMD 示談報告書提出年月日
      */
     public void setJidanHokokushoTeishutsuYMD(FlexibleDate jidanHokokushoTeishutsuYMD) {
@@ -199,7 +200,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 示談成立年月日のgetメソッドです。
-     * 
+     *
      * @return 示談成立年月日
      */
     public FlexibleDate getJidanSeiritsuYMD() {
@@ -208,7 +209,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 示談成立年月日のsetメソッドです。
-     * 
+     *
      * @param jidanSeiritsuYMD 示談成立年月日
      */
     public void setJidanSeiritsuYMD(FlexibleDate jidanSeiritsuYMD) {
@@ -217,7 +218,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 給付期間開始年月のgetメソッドです。
-     * 
+     *
      * @return 給付期間開始年月
      */
     public FlexibleYearMonth getKyufuKaishiYMD() {
@@ -226,7 +227,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 給付期間開始年月のsetメソッドです。
-     * 
+     *
      * @param kyufuKaishiYMD 給付期間開始年月
      */
     public void setKyufuKaishiYMD(FlexibleYearMonth kyufuKaishiYMD) {
@@ -235,7 +236,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 給付期間終了年月のgetメソッドです。
-     * 
+     *
      * @return 給付期間終了年月
      */
     public FlexibleYearMonth getKyufuShuryoYMD() {
@@ -244,7 +245,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 給付期間終了年月のsetメソッドです。
-     * 
+     *
      * @param kyufuShuryoYMD 給付期間終了年月
      */
     public void setKyufuShuryoYMD(FlexibleYearMonth kyufuShuryoYMD) {
@@ -253,7 +254,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 過失割合・加害者のgetメソッドです。
-     * 
+     *
      * @return 過失割合・加害者
      */
     public RString getKashitsuWariai_Kagaisha() {
@@ -262,7 +263,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 過失割合・加害者のsetメソッドです。
-     * 
+     *
      * @param kashitsuWariai_Kagaisha 過失割合・加害者
      */
     public void setKashitsuWariai_Kagaisha(RString kashitsuWariai_Kagaisha) {
@@ -271,7 +272,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 過失割合・被害者のgetメソッドです。
-     * 
+     *
      * @return 過失割合・被害者
      */
     public RString getKashitsuWariai_Higaisha() {
@@ -280,7 +281,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * 過失割合・被害者のsetメソッドです。
-     * 
+     *
      * @param kashitsuWariai_Higaisha 過失割合・被害者
      */
     public void setKashitsuWariai_Higaisha(RString kashitsuWariai_Higaisha) {
@@ -289,9 +290,9 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * このエンティティの主キーが他の{@literal DbT3080DaisanshaKoiJidanEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3080DaisanshaKoiJidanEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -334,6 +335,7 @@ public class DbT3080DaisanshaKoiJidanEntity extends DbTableEntityBase<DbT3080Dai
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

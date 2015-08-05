@@ -1,7 +1,7 @@
-﻿hiHokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+﻿hiHokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
 seiriNp,varchar,RString,,,,,整理番号,A
-jigyoshaNo,DbUDD004JigyoshaNo,DbUDD004JigyoshaNo,,,,,事業者番号,A
+jigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,事業者番号,A
 yoshikiNo,varchar,RString,,,,,様式番号,A
 rirekiNo,int2,int,,,,,履歴番号,A
 kihonTeikyoNissu,int2,int,,,,,基本提供日数,A

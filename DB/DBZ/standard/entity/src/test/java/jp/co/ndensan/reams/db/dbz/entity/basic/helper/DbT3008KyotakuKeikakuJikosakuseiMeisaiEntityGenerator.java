@@ -54,10 +54,8 @@ public final class DbT3008KyotakuKeikakuJikosakuseiMeisaiEntityGenerator {
     public static DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity createDbT3008KyotakuKeikakuJikosakuseiMeisaiEntity() {
         DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity entity = new DbT3008KyotakuKeikakuJikosakuseiMeisaiEntity();
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
-        entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);
-        entity.setShikibetsuNo(DEFAULT_識別コード);
         entity.setTaishoYM(DEFAULT_対象年月);
-        entity.setShoriTimestamp(DEFAULT_処理日時);
+        entity.setRirekiNo(1);
         entity.setKyotakuServiceKubun(DEFAULT_居宅サービス区分);
         entity.setServiceTeikyoJigyoshaNo(DEFAULT_サービス提供事業者番号);
         entity.setServiceShuruiCode(DEFAULT_サービス種類コード);

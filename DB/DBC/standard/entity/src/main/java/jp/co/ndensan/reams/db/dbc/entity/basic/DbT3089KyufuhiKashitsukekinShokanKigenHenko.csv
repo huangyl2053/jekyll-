@@ -1,4 +1,4 @@
-﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 kashitsukeKanriNo,varchar,RString,,,,,貸付管理番号,A
 shokanKigenEnchoUketsukeYMD,UDD015YMD,FlexibleDate,,,,,償還期限延長受付年月日,A
 rirekiNo,int2,int,,,,,履歴番号,A

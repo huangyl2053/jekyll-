@@ -7,15 +7,20 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import java.util.Objects;
 
 /**
  * 再審査申立テーブルのエンティティクラスです。
  */
 public class DbT3062SaishinsaMoshitateEntity extends DbTableEntityBase<DbT3062SaishinsaMoshitateEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3062SaishinsaMoshitate");
 
@@ -28,20 +33,20 @@ public class DbT3062SaishinsaMoshitateEntity extends DbTableEntityBase<DbT3062Sa
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD004JigyoshaNo jigyoshoNo;
+    private JigyoshaNo jigyoshoNo;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hiHokenshaNo;
+    private HihokenshaNo hiHokenshaNo;
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
-    private DbUDD005ServiceShuruiCode serviceTeikyoShuruiCode;
+    private ServiceShuruiCode serviceTeikyoShuruiCode;
     @PrimaryKey
-    private DbUDD006ServiceKomokuCode serviceKomokuCode;
+    private ServiceKomokuCode serviceKomokuCode;
     @PrimaryKey
     private int rirekiNo;
     private FlexibleDate moshitateYMD;
     private RString moshitateshaKubunCode;
-    private DbUDD003HokenshaNo shokisaiHokenshaNo;
+    private HokenshaNo shokisaiHokenshaNo;
     private int moshitateTanisu;
     private RString moshitateJiyuCode;
     private FlexibleYearMonth kokuhorenSofuYM;
@@ -99,7 +104,7 @@ public class DbT3062SaishinsaMoshitateEntity extends DbTableEntityBase<DbT3062Sa
      * 
      * @return 事業所番号
      */
-    public DbUDD004JigyoshaNo getJigyoshoNo() {
+    public JigyoshaNo getJigyoshoNo() {
         return jigyoshoNo;
     }
 
@@ -108,7 +113,7 @@ public class DbT3062SaishinsaMoshitateEntity extends DbTableEntityBase<DbT3062Sa
      * 
      * @param jigyoshoNo 事業所番号
      */
-    public void setJigyoshoNo(DbUDD004JigyoshaNo jigyoshoNo) {
+    public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
         this.jigyoshoNo = jigyoshoNo;
     }
 
@@ -117,7 +122,7 @@ public class DbT3062SaishinsaMoshitateEntity extends DbTableEntityBase<DbT3062Sa
      * 
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHiHokenshaNo() {
+    public HihokenshaNo getHiHokenshaNo() {
         return hiHokenshaNo;
     }
 
@@ -126,7 +131,7 @@ public class DbT3062SaishinsaMoshitateEntity extends DbTableEntityBase<DbT3062Sa
      * 
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(DbUDD002HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
@@ -153,7 +158,7 @@ public class DbT3062SaishinsaMoshitateEntity extends DbTableEntityBase<DbT3062Sa
      * 
      * @return サービス種類コード
      */
-    public DbUDD005ServiceShuruiCode getServiceTeikyoShuruiCode() {
+    public ServiceShuruiCode getServiceTeikyoShuruiCode() {
         return serviceTeikyoShuruiCode;
     }
 
@@ -162,7 +167,7 @@ public class DbT3062SaishinsaMoshitateEntity extends DbTableEntityBase<DbT3062Sa
      * 
      * @param serviceTeikyoShuruiCode サービス種類コード
      */
-    public void setServiceTeikyoShuruiCode(DbUDD005ServiceShuruiCode serviceTeikyoShuruiCode) {
+    public void setServiceTeikyoShuruiCode(ServiceShuruiCode serviceTeikyoShuruiCode) {
         this.serviceTeikyoShuruiCode = serviceTeikyoShuruiCode;
     }
 
@@ -173,7 +178,7 @@ public class DbT3062SaishinsaMoshitateEntity extends DbTableEntityBase<DbT3062Sa
      * 
      * @return サービス項目コード
      */
-    public DbUDD006ServiceKomokuCode getServiceKomokuCode() {
+    public ServiceKomokuCode getServiceKomokuCode() {
         return serviceKomokuCode;
     }
 
@@ -184,7 +189,7 @@ public class DbT3062SaishinsaMoshitateEntity extends DbTableEntityBase<DbT3062Sa
      * 
      * @param serviceKomokuCode サービス項目コード
      */
-    public void setServiceKomokuCode(DbUDD006ServiceKomokuCode serviceKomokuCode) {
+    public void setServiceKomokuCode(ServiceKomokuCode serviceKomokuCode) {
         this.serviceKomokuCode = serviceKomokuCode;
     }
 
@@ -251,7 +256,7 @@ public class DbT3062SaishinsaMoshitateEntity extends DbTableEntityBase<DbT3062Sa
      * 
      * @return 証記載保険者番号
      */
-    public DbUDD003HokenshaNo getShokisaiHokenshaNo() {
+    public HokenshaNo getShokisaiHokenshaNo() {
         return shokisaiHokenshaNo;
     }
 
@@ -260,7 +265,7 @@ public class DbT3062SaishinsaMoshitateEntity extends DbTableEntityBase<DbT3062Sa
      * 
      * @param shokisaiHokenshaNo 証記載保険者番号
      */
-    public void setShokisaiHokenshaNo(DbUDD003HokenshaNo shokisaiHokenshaNo) {
+    public void setShokisaiHokenshaNo(HokenshaNo shokisaiHokenshaNo) {
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
@@ -362,7 +367,7 @@ public class DbT3062SaishinsaMoshitateEntity extends DbTableEntityBase<DbT3062Sa
      * このエンティティの主キーが他の{@literal DbT3062SaishinsaMoshitateEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3062SaishinsaMoshitateEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -422,4 +427,6 @@ public class DbT3062SaishinsaMoshitateEntity extends DbTableEntityBase<DbT3062Sa
     }
 
 // </editor-fold>
+
+
 }

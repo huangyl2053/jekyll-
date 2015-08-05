@@ -7,7 +7,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
@@ -16,7 +18,7 @@ import java.util.Objects;
  * 高額介護サービス費支給判定結果テーブルのエンティティクラスです。
  */
 public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3057KogakuShikyuHanteiKekkaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3057KogakuShikyuHanteiKekka");
 
@@ -29,11 +31,11 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
-    private DbUDD003HokenshaNo shoKisaiHokenshaNo;
+    private HokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
     private int rirekiNo;
     private FlexibleDate ketteiYMD;
@@ -100,7 +102,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      * 
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
@@ -109,7 +111,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      * 
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -136,7 +138,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      * 
      * @return 証記載保険者番号
      */
-    public DbUDD003HokenshaNo getShoKisaiHokenshaNo() {
+    public HokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
@@ -145,7 +147,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      * 
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD003HokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(HokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
@@ -403,7 +405,7 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
      * このエンティティの主キーが他の{@literal DbT3057KogakuShikyuHanteiKekkaEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3057KogakuShikyuHanteiKekkaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -459,4 +461,5 @@ public class DbT3057KogakuShikyuHanteiKekkaEntity extends DbTableEntityBase<DbT3
     }
 
 // </editor-fold>
+
 }

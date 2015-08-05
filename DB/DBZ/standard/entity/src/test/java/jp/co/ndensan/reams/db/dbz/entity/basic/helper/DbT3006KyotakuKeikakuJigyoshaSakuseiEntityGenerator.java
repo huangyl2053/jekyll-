@@ -4,6 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -29,6 +31,7 @@ public final class DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator {
     public static final RString DEFAULT_委託先事業者番号 = new RString("1");
     public static final FlexibleDate DEFAULT_事業者変更年月日 = new FlexibleDate("20140402");
     public static final RString DEFAULT_事業者変更事由 = new RString("1");
+    public static final RString DEFAULT_策定区分 = new RString("1");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -38,15 +41,14 @@ public final class DbT3006KyotakuKeikakuJigyoshaSakuseiEntityGenerator {
 
     public static DbT3006KyotakuKeikakuJigyoshaSakuseiEntity createDbT3006KyotakuKeikakuJigyoshaSakuseiEntity() {
         DbT3006KyotakuKeikakuJigyoshaSakuseiEntity entity = new DbT3006KyotakuKeikakuJigyoshaSakuseiEntity();
-        entity.setHihokenshano(DEFAULT_被保険者番号);
-        entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);
-        entity.setShikibetsuCode(DEFAULT_識別コード);
+        entity.setHihokenshano(new HihokenshaNo(DEFAULT_被保険者番号));
         entity.setTaishoYM(DEFAULT_対象年月);
-        entity.setShoriTimestamp(DEFAULT_処理日時);
+        entity.setRirekiNo(1);
         entity.setTekiyoKaishiYMD(DEFAULT_適用開始年月日);
         entity.setTekiyoShuryoYMD(DEFAULT_適用終了年月日);
-        entity.setKeikakuJigyoshaNo(DEFAULT_計画事業者番号);
-        entity.setItakusakiJigyoshaNo(DEFAULT_委託先事業者番号);
+        entity.setSakuseiKubunCode(DEFAULT_策定区分);
+        entity.setKeikakuJigyoshaNo(new JigyoshaNo(DEFAULT_計画事業者番号));
+        entity.setItakusakiJigyoshaNo(new JigyoshaNo(DEFAULT_委託先事業者番号));
         entity.setJigyoshaHenkoYMD(DEFAULT_事業者変更年月日);
         entity.setJigyoshaHenkoJiyu(DEFAULT_事業者変更事由);
         return entity;

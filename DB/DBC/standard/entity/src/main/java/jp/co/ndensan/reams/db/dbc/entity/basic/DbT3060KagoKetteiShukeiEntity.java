@@ -16,7 +16,8 @@ import java.util.Objects;
  * 過誤決定集計テーブルのエンティティクラスです。
  */
 public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060KagoKetteiShukeiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3060KagoKetteiShukei");
 
@@ -49,7 +50,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -58,7 +59,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -67,7 +68,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -76,17 +77,16 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -97,7 +97,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
      * 取扱年月のgetメソッドです。
      * <br/>
      * <br/>連合会が取扱った年月
-     * 
+     *
      * @return 取扱年月
      */
     public FlexibleYearMonth getToriatsukaiYM() {
@@ -108,7 +108,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
      * 取扱年月のsetメソッドです。
      * <br/>
      * <br/>連合会が取扱った年月
-     * 
+     *
      * @param toriatsukaiYM 取扱年月
      */
     public void setToriatsukaiYM(FlexibleYearMonth toriatsukaiYM) {
@@ -118,12 +118,15 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
     /**
      * 保険者区分のgetメソッドです。
      * <br/>
-     * <br/>1：保険者
-     * <br/>2：公費負担者　
-     * <br/>3：総合事業費(経過措置)保険者
-     * <br/>4：総合事業費保険者
+     * <br/>1：保険者
+     *
+     * <br/>2：公費負担者　     *
+     * <br/>3：総合事業費(経過措置)保険者
+     *
+     * <br/>4：総合事業費保険者
+     *
      * <br/>5：総合事業費公費負担者
-     * 
+     *
      * @return 保険者区分
      */
     public RString getHokenshaKubun() {
@@ -133,12 +136,15 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
     /**
      * 保険者区分のsetメソッドです。
      * <br/>
-     * <br/>1：保険者
-     * <br/>2：公費負担者　
-     * <br/>3：総合事業費(経過措置)保険者
-     * <br/>4：総合事業費保険者
+     * <br/>1：保険者
+     *
+     * <br/>2：公費負担者　     *
+     * <br/>3：総合事業費(経過措置)保険者
+     *
+     * <br/>4：総合事業費保険者
+     *
      * <br/>5：総合事業費公費負担者
-     * 
+     *
      * @param hokenshaKubun 保険者区分
      */
     public void setHokenshaKubun(RString hokenshaKubun) {
@@ -147,7 +153,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -156,7 +162,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -165,7 +171,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 介護給付費件数のgetメソッドです。
-     * 
+     *
      * @return 介護給付費件数
      */
     public int getKaigoKyufuhiKensu() {
@@ -174,7 +180,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 介護給付費件数のsetメソッドです。
-     * 
+     *
      * @param kaigoKyufuhiKensu 介護給付費件数
      */
     public void setKaigoKyufuhiKensu(int kaigoKyufuhiKensu) {
@@ -183,7 +189,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 介護給付費単位数のgetメソッドです。
-     * 
+     *
      * @return 介護給付費単位数
      */
     public Decimal getKaigoKyufuhiTanisu() {
@@ -192,7 +198,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 介護給付費単位数のsetメソッドです。
-     * 
+     *
      * @param kaigoKyufuhiTanisu 介護給付費単位数
      */
     public void setKaigoKyufuhiTanisu(Decimal kaigoKyufuhiTanisu) {
@@ -203,7 +209,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
      * 介護給付費保険者負担額のgetメソッドです。
      * <br/>
      * <br/>公費（保険者区分=2、5）の場合、'公費負担額
-     * 
+     *
      * @return 介護給付費保険者負担額
      */
     public Decimal getKaigoKyufuhiFutangaku() {
@@ -214,7 +220,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
      * 介護給付費保険者負担額のsetメソッドです。
      * <br/>
      * <br/>公費（保険者区分=2、5）の場合、'公費負担額
-     * 
+     *
      * @param kaigoKyufuhiFutangaku 介護給付費保険者負担額
      */
     public void setKaigoKyufuhiFutangaku(Decimal kaigoKyufuhiFutangaku) {
@@ -223,7 +229,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 高額介護サービス費件数のgetメソッドです。
-     * 
+     *
      * @return 高額介護サービス費件数
      */
     public int getKogakuServicehiKensu() {
@@ -232,7 +238,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 高額介護サービス費件数のsetメソッドです。
-     * 
+     *
      * @param kogakuServicehiKensu 高額介護サービス費件数
      */
     public void setKogakuServicehiKensu(int kogakuServicehiKensu) {
@@ -241,7 +247,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 高額介護サービス費単位数のgetメソッドです。
-     * 
+     *
      * @return 高額介護サービス費単位数
      */
     public Decimal getKogakuServicehiTanisu() {
@@ -250,7 +256,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 高額介護サービス費単位数のsetメソッドです。
-     * 
+     *
      * @param kogakuServicehiTanisu 高額介護サービス費単位数
      */
     public void setKogakuServicehiTanisu(Decimal kogakuServicehiTanisu) {
@@ -261,7 +267,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
      * 高額介護サービス費保険者負担額のgetメソッドです。
      * <br/>
      * <br/>公費（保険者区分=2、5）の場合、'公費負担額
-     * 
+     *
      * @return 高額介護サービス費保険者負担額
      */
     public Decimal getKogakuServicehiFutangaku() {
@@ -272,7 +278,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
      * 高額介護サービス費保険者負担額のsetメソッドです。
      * <br/>
      * <br/>公費（保険者区分=2、5）の場合、'公費負担額
-     * 
+     *
      * @param kogakuServicehiFutangaku 高額介護サービス費保険者負担額
      */
     public void setKogakuServicehiFutangaku(Decimal kogakuServicehiFutangaku) {
@@ -281,7 +287,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 特定入所者介護サービス費等件数のgetメソッドです。
-     * 
+     *
      * @return 特定入所者介護サービス費等件数
      */
     public int getTokuteiNyushoshaServicehiKensu() {
@@ -290,7 +296,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 特定入所者介護サービス費等件数のsetメソッドです。
-     * 
+     *
      * @param tokuteiNyushoshaServicehiKensu 特定入所者介護サービス費等件数
      */
     public void setTokuteiNyushoshaServicehiKensu(int tokuteiNyushoshaServicehiKensu) {
@@ -299,7 +305,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 特定入所者介護サービス費等費用額のgetメソッドです。
-     * 
+     *
      * @return 特定入所者介護サービス費等費用額
      */
     public Decimal getTokuteiNyushoshaServicehiTanisu() {
@@ -308,7 +314,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 特定入所者介護サービス費等費用額のsetメソッドです。
-     * 
+     *
      * @param tokuteiNyushoshaServicehiTanisu 特定入所者介護サービス費等費用額
      */
     public void setTokuteiNyushoshaServicehiTanisu(Decimal tokuteiNyushoshaServicehiTanisu) {
@@ -319,7 +325,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
      * 特定入所者介護サービス費等保険者負担額のgetメソッドです。
      * <br/>
      * <br/>公費（保険者区分=2、5）の場合、'公費負担額
-     * 
+     *
      * @return 特定入所者介護サービス費等保険者負担額
      */
     public Decimal getTokuteiNyushoshaServicehiFutangaku() {
@@ -330,7 +336,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
      * 特定入所者介護サービス費等保険者負担額のsetメソッドです。
      * <br/>
      * <br/>公費（保険者区分=2、5）の場合、'公費負担額
-     * 
+     *
      * @param tokuteiNyushoshaServicehiFutangaku 特定入所者介護サービス費等保険者負担額
      */
     public void setTokuteiNyushoshaServicehiFutangaku(Decimal tokuteiNyushoshaServicehiFutangaku) {
@@ -340,12 +346,16 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
     /**
      * 公費負担者番号のgetメソッドです。
      * <br/>
-     * <br/>保険者区分=1のとき：証記載保険者番号（上６桁）
-     * <br/>保険者区分=2のとき：公費負担者番号
-     * <br/>保険者区分=3のとき：証記載保険者番号（上６桁）
-     * <br/>保険者区分=4のとき：証記載保険者番号（上６桁）
+     * <br/>保険者区分=1のとき：証記載保険者番号（上６桁）
+     *
+     * <br/>保険者区分=2のとき：公費負担者番号
+     *
+     * <br/>保険者区分=3のとき：証記載保険者番号（上６桁）
+     *
+     * <br/>保険者区分=4のとき：証記載保険者番号（上６桁）
+     *
      * <br/>保険者区分=5のとき：公費負担者番号
-     * 
+     *
      * @return 公費負担者番号
      */
     public RString getKohiFutanshaNo() {
@@ -355,12 +365,16 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
     /**
      * 公費負担者番号のsetメソッドです。
      * <br/>
-     * <br/>保険者区分=1のとき：証記載保険者番号（上６桁）
-     * <br/>保険者区分=2のとき：公費負担者番号
-     * <br/>保険者区分=3のとき：証記載保険者番号（上６桁）
-     * <br/>保険者区分=4のとき：証記載保険者番号（上６桁）
+     * <br/>保険者区分=1のとき：証記載保険者番号（上６桁）
+     *
+     * <br/>保険者区分=2のとき：公費負担者番号
+     *
+     * <br/>保険者区分=3のとき：証記載保険者番号（上６桁）
+     *
+     * <br/>保険者区分=4のとき：証記載保険者番号（上６桁）
+     *
      * <br/>保険者区分=5のとき：公費負担者番号
-     * 
+     *
      * @param kohiFutanshaNo 公費負担者番号
      */
     public void setKohiFutanshaNo(RString kohiFutanshaNo) {
@@ -369,7 +383,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 作成年月日のgetメソッドです。
-     * 
+     *
      * @return 作成年月日
      */
     public FlexibleDate getSakuseiYMD() {
@@ -378,7 +392,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 作成年月日のsetメソッドです。
-     * 
+     *
      * @param sakuseiYMD 作成年月日
      */
     public void setSakuseiYMD(FlexibleDate sakuseiYMD) {
@@ -387,7 +401,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 取込年月のgetメソッドです。
-     * 
+     *
      * @return 取込年月
      */
     public FlexibleYearMonth getTorikomiYM() {
@@ -396,7 +410,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * 取込年月のsetメソッドです。
-     * 
+     *
      * @param torikomiYM 取込年月
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -405,9 +419,9 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * このエンティティの主キーが他の{@literal DbT3060KagoKetteiShukeiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3060KagoKetteiShukeiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -451,6 +465,7 @@ public class DbT3060KagoKetteiShukeiEntity extends DbTableEntityBase<DbT3060Kago
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

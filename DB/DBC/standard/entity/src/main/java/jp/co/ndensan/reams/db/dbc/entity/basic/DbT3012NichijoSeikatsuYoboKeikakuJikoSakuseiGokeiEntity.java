@@ -7,7 +7,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
 
@@ -15,7 +18,7 @@ import java.util.Objects;
  * 予防給付計画自己作成合計テーブルのエンティティクラスです。
  */
 public class DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity extends DbTableEntityBase<DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokei");
 
@@ -28,7 +31,7 @@ public class DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity extends DbT
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private FlexibleYearMonth taishoYM;
     @PrimaryKey
@@ -36,9 +39,9 @@ public class DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity extends DbT
     @PrimaryKey
     private RString kyotakuServiceKubun;
     @PrimaryKey
-    private DbUDD004JigyoshaNo serviceTeikyoJigyoshaNo;
+    private JigyoshaNo serviceTeikyoJigyoshaNo;
     @PrimaryKey
-    private DbUDD005ServiceShuruiCode serviceShuruiCode;
+    private ServiceShuruiCode serviceShuruiCode;
     private Decimal keikakuTaniSu;
 
     /**
@@ -92,7 +95,7 @@ public class DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity extends DbT
      * 
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
@@ -101,7 +104,7 @@ public class DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity extends DbT
      * 
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -168,7 +171,7 @@ public class DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity extends DbT
      * 
      * @return サービス提供事業者番号
      */
-    public DbUDD004JigyoshaNo getServiceTeikyoJigyoshaNo() {
+    public JigyoshaNo getServiceTeikyoJigyoshaNo() {
         return serviceTeikyoJigyoshaNo;
     }
 
@@ -177,7 +180,7 @@ public class DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity extends DbT
      * 
      * @param serviceTeikyoJigyoshaNo サービス提供事業者番号
      */
-    public void setServiceTeikyoJigyoshaNo(DbUDD004JigyoshaNo serviceTeikyoJigyoshaNo) {
+    public void setServiceTeikyoJigyoshaNo(JigyoshaNo serviceTeikyoJigyoshaNo) {
         this.serviceTeikyoJigyoshaNo = serviceTeikyoJigyoshaNo;
     }
 
@@ -186,7 +189,7 @@ public class DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity extends DbT
      * 
      * @return サービス種類コード
      */
-    public DbUDD005ServiceShuruiCode getServiceShuruiCode() {
+    public ServiceShuruiCode getServiceShuruiCode() {
         return serviceShuruiCode;
     }
 
@@ -195,7 +198,7 @@ public class DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity extends DbT
      * 
      * @param serviceShuruiCode サービス種類コード
      */
-    public void setServiceShuruiCode(DbUDD005ServiceShuruiCode serviceShuruiCode) {
+    public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
         this.serviceShuruiCode = serviceShuruiCode;
     }
 
@@ -225,7 +228,7 @@ public class DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity extends DbT
      * このエンティティの主キーが他の{@literal DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -278,4 +281,5 @@ public class DbT3012NichijoSeikatsuYoboKeikakuJikoSakuseiGokeiEntity extends DbT
     }
 
 // </editor-fold>
+
 }

@@ -10,29 +10,25 @@ import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 public class JigyoshaNoTypeHandler extends BaseTypeHandler<JigyoshaNo> {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, JigyoshaNo parameter, JdbcType jdbcType) throws SQLException {
         ps.setString(i, parameter == null ? null : parameter.getColumnValue().toString());
     }
 
     @Override
-    public JigyoshaNo getNullableResult(ResultSet rs, String columnName) throws SQLException {
-        return new JigyoshaNo(getResultRString(rs.getString(columnName)));
+    public JigyoshaNo getNullableResult(ResultSet r, String c) throws SQLException {
+        return r.getString(c) == null ? null : new JigyoshaNo(new RString(r.getString(c)));
     }
 
     @Override
-    public JigyoshaNo getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
-        return new JigyoshaNo(getResultRString(rs.getString(columnIndex)));
+    public JigyoshaNo getNullableResult(ResultSet r, int c) throws SQLException {
+        return r.getString(c) == null ? null : new JigyoshaNo(new RString(r.getString(c)));
     }
 
     @Override
-    public JigyoshaNo getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
-        return new JigyoshaNo(getResultRString(cs.getString(columnIndex)));
-    }
-
-    private RString getResultRString(String result) {
-        return result == null ? null : new RString(result);
+    public JigyoshaNo getNullableResult(CallableStatement r, int c) throws SQLException {
+        return r.getString(c) == null ? null : new JigyoshaNo(new RString(r.getString(c)));
     }
 
 // </editor-fold>

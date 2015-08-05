@@ -7,18 +7,21 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import java.util.Objects;
 
 /**
  * 高額介護サービス費支給申請テーブルのエンティティクラスです。
  */
 public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056KogakuShikyuShinseiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3056KogakuShikyuShinsei");
 
@@ -31,11 +34,11 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
-    private DbUDD003HokenshaNo shoKisaiHokenshaNo;
+    private HokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
     private int rirekiNo;
     private FlexibleDate uketsukeYMD;
@@ -46,7 +49,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
     private AtenaKanaMeisho shinseishaShimeiKana;
     private RString shinseishaJusho;
     private TelNo shinseishaTelNo;
-    private DbUDD004JigyoshaNo shinseiJigyoshaNo;
+    private JigyoshaNo shinseiJigyoshaNo;
     private RString shiharaiHohoKubunCode;
     private RString shiharaiBasho;
     private FlexibleDate shiharaiKaishiYMD;
@@ -108,7 +111,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
@@ -117,7 +120,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
@@ -144,7 +147,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 
      * @return 証記載保険者番号
      */
-    public DbUDD003HokenshaNo getShoKisaiHokenshaNo() {
+    public HokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
@@ -153,7 +156,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD003HokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(HokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
@@ -346,7 +349,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 
      * @return 申請事業者番号
      */
-    public DbUDD004JigyoshaNo getShinseiJigyoshaNo() {
+    public JigyoshaNo getShinseiJigyoshaNo() {
         return shinseiJigyoshaNo;
     }
 
@@ -357,7 +360,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * 
      * @param shinseiJigyoshaNo 申請事業者番号
      */
-    public void setShinseiJigyoshaNo(DbUDD004JigyoshaNo shinseiJigyoshaNo) {
+    public void setShinseiJigyoshaNo(JigyoshaNo shinseiJigyoshaNo) {
         this.shinseiJigyoshaNo = shinseiJigyoshaNo;
     }
 
@@ -531,7 +534,7 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
      * このエンティティの主キーが他の{@literal DbT3056KogakuShikyuShinseiEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3056KogakuShikyuShinseiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -593,4 +596,5 @@ public class DbT3056KogakuShikyuShinseiEntity extends DbTableEntityBase<DbT3056K
     }
 
 // </editor-fold>
+
 }

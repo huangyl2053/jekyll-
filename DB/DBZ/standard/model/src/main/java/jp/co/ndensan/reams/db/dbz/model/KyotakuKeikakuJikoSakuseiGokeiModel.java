@@ -73,39 +73,12 @@ public class KyotakuKeikakuJikoSakuseiGokeiModel implements Serializable {
     }
 
     /**
-     * 証記載保険者番号を返します。
-     *
-     * @return 証記載保険者番号
-     */
-    public HokenshaNo get証記載保険者番号() {
-        return entity.getShoKisaiHokenshaNo();
-    }
-
-    /**
-     * 識別コードを返します。
-     *
-     * @return 識別コード
-     */
-    public ShikibetsuCode get識別コード() {
-        return entity.getShikibetsuNo();
-    }
-
-    /**
      * 対象年月を返します。
      *
      * @return 対象年月
      */
     public FlexibleYearMonth get対象年月() {
         return entity.getTaishoYM();
-    }
-
-    /**
-     * 処理日時を返します。
-     *
-     * @return 処理日時
-     */
-    public YMDHMS get処理日時() {
-        return entity.getShoriTimestamp();
     }
 
     /**
@@ -155,26 +128,6 @@ public class KyotakuKeikakuJikoSakuseiGokeiModel implements Serializable {
     }
 
     /**
-     * 証記載保険者番号を設定します。
-     *
-     * @param 証記載保険者番号 証記載保険者番号
-     */
-    public void set証記載保険者番号(HokenshaNo 証記載保険者番号) {
-        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
-        entity.setShoKisaiHokenshaNo(証記載保険者番号);
-    }
-
-    /**
-     * 識別コードを設定します。
-     *
-     * @param 識別コード 識別コード
-     */
-    public void set識別コード(ShikibetsuCode 識別コード) {
-        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
-        entity.setShikibetsuNo(識別コード);
-    }
-
-    /**
      * 対象年月を設定します。
      *
      * @param 対象年月 対象年月
@@ -182,16 +135,6 @@ public class KyotakuKeikakuJikoSakuseiGokeiModel implements Serializable {
     public void set対象年月(FlexibleYearMonth 対象年月) {
         requireNonNull(対象年月, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年月"));
         entity.setTaishoYM(対象年月);
-    }
-
-    /**
-     * 処理日時を設定します。
-     *
-     * @param 処理日時 処理日時
-     */
-    public void set処理日時(YMDHMS 処理日時) {
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
-        entity.setShoriTimestamp(処理日時);
     }
 
     /**

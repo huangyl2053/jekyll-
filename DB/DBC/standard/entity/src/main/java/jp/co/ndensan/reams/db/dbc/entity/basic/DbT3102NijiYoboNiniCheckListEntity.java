@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
 
@@ -15,7 +16,8 @@ import java.util.Objects;
  * 二次予防任意チェックリストテーブルのエンティティクラスです。
  */
 public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT3102NijiYoboNiniCheckListEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3102NijiYoboNiniCheckList");
 
@@ -30,7 +32,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
     @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private FlexibleDate uketsukeYMD;
     @PrimaryKey
@@ -41,7 +43,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -50,7 +52,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -59,7 +61,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -68,17 +70,16 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -87,7 +88,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
 
     /**
      * 識別コードのgetメソッドです。
-     * 
+     *
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -96,7 +97,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
 
     /**
      * 識別コードのsetメソッドです。
-     * 
+     *
      * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -105,25 +106,25 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 受付年月日のgetメソッドです。
-     * 
+     *
      * @return 受付年月日
      */
     public FlexibleDate getUketsukeYMD() {
@@ -132,7 +133,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
 
     /**
      * 受付年月日のsetメソッドです。
-     * 
+     *
      * @param uketsukeYMD 受付年月日
      */
     public void setUketsukeYMD(FlexibleDate uketsukeYMD) {
@@ -141,7 +142,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
 
     /**
      * 任意質問番号のgetメソッドです。
-     * 
+     *
      * @return 任意質問番号
      */
     public int getNiniShitsumonNo() {
@@ -150,7 +151,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
 
     /**
      * 任意質問番号のsetメソッドです。
-     * 
+     *
      * @param niniShitsumonNo 任意質問番号
      */
     public void setNiniShitsumonNo(int niniShitsumonNo) {
@@ -159,7 +160,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -168,7 +169,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -177,7 +178,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
 
     /**
      * 任意質問事項のgetメソッドです。
-     * 
+     *
      * @return 任意質問事項
      */
     public int getNiniShitsumonJiko() {
@@ -186,7 +187,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
 
     /**
      * 任意質問事項のsetメソッドです。
-     * 
+     *
      * @param niniShitsumonJiko 任意質問事項
      */
     public void setNiniShitsumonJiko(int niniShitsumonJiko) {
@@ -195,9 +196,9 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
 
     /**
      * このエンティティの主キーが他の{@literal DbT3102NijiYoboNiniCheckListEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3102NijiYoboNiniCheckListEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -238,6 +239,7 @@ public class DbT3102NijiYoboNiniCheckListEntity extends DbTableEntityBase<DbT310
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

@@ -11,29 +11,25 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.math.BigDecimal;
 
 public class HokenKyufuRitsuTypeHandler extends BaseTypeHandler<HokenKyufuRitsu> {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, HokenKyufuRitsu parameter, JdbcType jdbcType) throws SQLException {
         ps.setBigDecimal(i, parameter == null ? null : parameter.getColumnValue().getBigDecimal());
     }
 
     @Override
-    public HokenKyufuRitsu getNullableResult(ResultSet rs, String columnName) throws SQLException {
-        return new HokenKyufuRitsu(getResultDecimal(rs.getBigDecimal(columnName)));
+    public HokenKyufuRitsu getNullableResult(ResultSet r, String c) throws SQLException {
+        return r.getBigDecimal(c) == null ? null : new HokenKyufuRitsu(new Decimal(r.getBigDecimal(c).toString()));
     }
 
     @Override
-    public HokenKyufuRitsu getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
-        return new HokenKyufuRitsu(getResultDecimal(rs.getBigDecimal(columnIndex)));
+    public HokenKyufuRitsu getNullableResult(ResultSet r, int c) throws SQLException {
+        return r.getBigDecimal(c) == null ? null : new HokenKyufuRitsu(new Decimal(r.getBigDecimal(c).toString()));
     }
 
     @Override
-    public HokenKyufuRitsu getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
-        return new HokenKyufuRitsu(getResultDecimal(cs.getBigDecimal(columnIndex)));
-    }
-
-    private Decimal getResultDecimal(BigDecimal result) {
-        return result == null ? null : new Decimal(result.toString());
+    public HokenKyufuRitsu getNullableResult(CallableStatement r, int c) throws SQLException {
+        return r.getBigDecimal(c) == null ? null : new HokenKyufuRitsu(new Decimal(r.getBigDecimal(c).toString()));
     }
 
 // </editor-fold>

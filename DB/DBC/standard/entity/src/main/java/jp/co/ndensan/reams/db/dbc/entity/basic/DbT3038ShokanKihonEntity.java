@@ -7,8 +7,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
 
@@ -16,7 +19,7 @@ import java.util.Objects;
  * 償還払請求基本テーブルのエンティティクラスです。
  */
 public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKihonEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3038ShokanKihon");
 
@@ -29,20 +32,20 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hiHokenshaNo;
+    private HihokenshaNo hiHokenshaNo;
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
     private RString seiriNp;
     @PrimaryKey
-    private DbUDD004JigyoshaNo jigyoshaNo;
+    private JigyoshaNo jigyoshaNo;
     @PrimaryKey
     private RString yoshikiNo;
     @PrimaryKey
     private int rirekiNo;
     private RString kyuSochiNyushoshaTokureiCode;
     private RString kyotakuServiceSakuseiKubunCode;
-    private DbUDD004JigyoshaNo kyotakuserviceJigyoshaNo;
+    private JigyoshaNo kyotakuserviceJigyoshaNo;
     private FlexibleDate kaishiYMD;
     private FlexibleDate chushiYMD;
     private RString chushiRiyuNyushomaeJyokyoCode;
@@ -51,7 +54,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
     private int nyushoJitsuNissu;
     private int gaihakuNissu;
     private RString taishogoJotaiCode;
-    private DbUDD011HokenKyufuRitsu hokenKyufuritsu;
+    private HokenKyufuRitsu hokenKyufuritsu;
     private int serviceTanisu;
     private Decimal hokenSeikyugaku;
     private int riyoshaFutangaku;
@@ -110,7 +113,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
      * 
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHiHokenshaNo() {
+    public HihokenshaNo getHiHokenshaNo() {
         return hiHokenshaNo;
     }
 
@@ -119,7 +122,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
      * 
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(DbUDD002HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
@@ -164,7 +167,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
      * 
      * @return 事業者番号
      */
-    public DbUDD004JigyoshaNo getJigyoshaNo() {
+    public JigyoshaNo getJigyoshaNo() {
         return jigyoshaNo;
     }
 
@@ -173,7 +176,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
      * 
      * @param jigyoshaNo 事業者番号
      */
-    public void setJigyoshaNo(DbUDD004JigyoshaNo jigyoshaNo) {
+    public void setJigyoshaNo(JigyoshaNo jigyoshaNo) {
         this.jigyoshaNo = jigyoshaNo;
     }
 
@@ -254,7 +257,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
      * 
      * @return 居宅サービス計画事業者番号
      */
-    public DbUDD004JigyoshaNo getKyotakuserviceJigyoshaNo() {
+    public JigyoshaNo getKyotakuserviceJigyoshaNo() {
         return kyotakuserviceJigyoshaNo;
     }
 
@@ -263,7 +266,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
      * 
      * @param kyotakuserviceJigyoshaNo 居宅サービス計画事業者番号
      */
-    public void setKyotakuserviceJigyoshaNo(DbUDD004JigyoshaNo kyotakuserviceJigyoshaNo) {
+    public void setKyotakuserviceJigyoshaNo(JigyoshaNo kyotakuserviceJigyoshaNo) {
         this.kyotakuserviceJigyoshaNo = kyotakuserviceJigyoshaNo;
     }
 
@@ -416,7 +419,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
      * 
      * @return 保険給付率
      */
-    public DbUDD011HokenKyufuRitsu getHokenKyufuritsu() {
+    public HokenKyufuRitsu getHokenKyufuritsu() {
         return hokenKyufuritsu;
     }
 
@@ -425,7 +428,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
      * 
      * @param hokenKyufuritsu 保険給付率
      */
-    public void setHokenKyufuritsu(DbUDD011HokenKyufuRitsu hokenKyufuritsu) {
+    public void setHokenKyufuritsu(HokenKyufuRitsu hokenKyufuritsu) {
         this.hokenKyufuritsu = hokenKyufuritsu;
     }
 
@@ -541,7 +544,7 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
      * このエンティティの主キーが他の{@literal DbT3038ShokanKihonEntity}と等しいか判定します。
      * 
      * @param other 比較するエンティティ
-     * @@return 
+     * @return 
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3038ShokanKihonEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -611,4 +614,5 @@ public class DbT3038ShokanKihonEntity extends DbTableEntityBase<DbT3038ShokanKih
     }
 
 // </editor-fold>
+
 }

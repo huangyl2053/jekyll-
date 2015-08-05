@@ -7,7 +7,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
 
@@ -15,7 +17,8 @@ import java.util.Objects;
  * 高額合算申請書加入歴テーブルのエンティティクラスです。
  */
 public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityBase<DbT3069KogakuGassanShinseishoKanyurekiEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3069KogakuGassanShinseishoKanyureki");
 
@@ -28,11 +31,11 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private FlexibleYear taishoNendo;
     @PrimaryKey
-    private DbUDD003HokenshaNo hokenshaNo;
+    private HokenshaNo hokenshaNo;
     @PrimaryKey
     private RString seiriNo;
     @PrimaryKey
@@ -46,7 +49,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -55,7 +58,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -64,7 +67,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -73,17 +76,16 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -92,25 +94,25 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 対象年度のgetメソッドです。
-     * 
+     *
      * @return 対象年度
      */
     public FlexibleYear getTaishoNendo() {
@@ -119,7 +121,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * 対象年度のsetメソッドです。
-     * 
+     *
      * @param taishoNendo 対象年度
      */
     public void setTaishoNendo(FlexibleYear taishoNendo) {
@@ -130,10 +132,10 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
      * 保険者番号のgetメソッドです。
      * <br/>
      * <br/>証記載保険者番号では無い
-     * 
+     *
      * @return 保険者番号
      */
-    public DbUDD003HokenshaNo getHokenshaNo() {
+    public HokenshaNo getHokenshaNo() {
         return hokenshaNo;
     }
 
@@ -141,10 +143,10 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
      * 保険者番号のsetメソッドです。
      * <br/>
      * <br/>証記載保険者番号では無い
-     * 
+     *
      * @param hokenshaNo 保険者番号
      */
-    public void setHokenshaNo(DbUDD003HokenshaNo hokenshaNo) {
+    public void setHokenshaNo(HokenshaNo hokenshaNo) {
         this.hokenshaNo = hokenshaNo;
     }
 
@@ -152,7 +154,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
      * 整理番号のgetメソッドです。
      * <br/>
      * <br/>年度単位で”000001”からの連番
-     * 
+     *
      * @return 整理番号
      */
     public RString getSeiriNo() {
@@ -163,7 +165,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
      * 整理番号のsetメソッドです。
      * <br/>
      * <br/>年度単位で”000001”からの連番
-     * 
+     *
      * @param seiriNo 整理番号
      */
     public void setSeiriNo(RString seiriNo) {
@@ -174,7 +176,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
      * 加入歴番号のgetメソッドです。
      * <br/>
      * <br/>”01”からの連番
-     * 
+     *
      * @return 加入歴番号
      */
     public RString getKanyurekiNo() {
@@ -185,7 +187,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
      * 加入歴番号のsetメソッドです。
      * <br/>
      * <br/>”01”からの連番
-     * 
+     *
      * @param kanyurekiNo 加入歴番号
      */
     public void setKanyurekiNo(RString kanyurekiNo) {
@@ -194,7 +196,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -203,7 +205,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -212,7 +214,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * 保険者名のgetメソッドです。
-     * 
+     *
      * @return 保険者名
      */
     public RString getHokenshaMei() {
@@ -221,7 +223,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * 保険者名のsetメソッドです。
-     * 
+     *
      * @param hokenshaMei 保険者名
      */
     public void setHokenshaMei(RString hokenshaMei) {
@@ -230,7 +232,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * 加入期間開始年月日のgetメソッドです。
-     * 
+     *
      * @return 加入期間開始年月日
      */
     public FlexibleDate getKanyuKaishiYMD() {
@@ -239,7 +241,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * 加入期間開始年月日のsetメソッドです。
-     * 
+     *
      * @param kanyuKaishiYMD 加入期間開始年月日
      */
     public void setKanyuKaishiYMD(FlexibleDate kanyuKaishiYMD) {
@@ -248,7 +250,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * 加入期間終了年月日のgetメソッドです。
-     * 
+     *
      * @return 加入期間終了年月日
      */
     public FlexibleDate getKanyuShuryoYMD() {
@@ -257,7 +259,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * 加入期間終了年月日のsetメソッドです。
-     * 
+     *
      * @param kanyuShuryoYMD 加入期間終了年月日
      */
     public void setKanyuShuryoYMD(FlexibleDate kanyuShuryoYMD) {
@@ -266,7 +268,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * 自己負担額証明書整理番号のgetメソッドです。
-     * 
+     *
      * @return 自己負担額証明書整理番号
      */
     public RString getJikoFutanShomeisho_SeiriNo() {
@@ -275,7 +277,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * 自己負担額証明書整理番号のsetメソッドです。
-     * 
+     *
      * @param jikoFutanShomeisho_SeiriNo 自己負担額証明書整理番号
      */
     public void setJikoFutanShomeisho_SeiriNo(RString jikoFutanShomeisho_SeiriNo) {
@@ -284,9 +286,9 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * このエンティティの主キーが他の{@literal DbT3069KogakuGassanShinseishoKanyurekiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3069KogakuGassanShinseishoKanyurekiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -334,6 +336,7 @@ public class DbT3069KogakuGassanShinseishoKanyurekiEntity extends DbTableEntityB
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

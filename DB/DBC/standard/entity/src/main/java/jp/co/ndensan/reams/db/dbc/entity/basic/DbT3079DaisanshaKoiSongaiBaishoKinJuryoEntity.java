@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
@@ -15,7 +16,8 @@ import java.util.Objects;
  * 介護第三者行為損害賠償金受領テーブルのエンティティクラスです。
  */
 public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntityBase<DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3079DaisanshaKoiSongaiBaishoKinJuryo");
 
@@ -28,7 +30,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private RString todokedeKanriNo;
     @PrimaryKey
@@ -43,7 +45,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -52,7 +54,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -61,7 +63,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -70,17 +72,16 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -89,25 +90,25 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 第三者行為届出管理番号のgetメソッドです。
-     * 
+     *
      * @return 第三者行為届出管理番号
      */
     public RString getTodokedeKanriNo() {
@@ -116,7 +117,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * 第三者行為届出管理番号のsetメソッドです。
-     * 
+     *
      * @param todokedeKanriNo 第三者行為届出管理番号
      */
     public void setTodokedeKanriNo(RString todokedeKanriNo) {
@@ -125,7 +126,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * 第三者行為求償請求番号のgetメソッドです。
-     * 
+     *
      * @return 第三者行為求償請求番号
      */
     public RString getKyushoSeikyuNo() {
@@ -134,7 +135,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * 第三者行為求償請求番号のsetメソッドです。
-     * 
+     *
      * @param kyushoSeikyuNo 第三者行為求償請求番号
      */
     public void setKyushoSeikyuNo(RString kyushoSeikyuNo) {
@@ -143,7 +144,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -152,7 +153,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -161,7 +162,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * 入金確認年月日のgetメソッドです。
-     * 
+     *
      * @return 入金確認年月日
      */
     public FlexibleDate getNyukinKakuninYMD() {
@@ -170,7 +171,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * 入金確認年月日のsetメソッドです。
-     * 
+     *
      * @param nyukinKakuninYMD 入金確認年月日
      */
     public void setNyukinKakuninYMD(FlexibleDate nyukinKakuninYMD) {
@@ -179,7 +180,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * 領収年月日のgetメソッドです。
-     * 
+     *
      * @return 領収年月日
      */
     public FlexibleDate getRyoshuYMD() {
@@ -188,7 +189,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * 領収年月日のsetメソッドです。
-     * 
+     *
      * @param ryoshuYMD 領収年月日
      */
     public void setRyoshuYMD(FlexibleDate ryoshuYMD) {
@@ -197,7 +198,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * 領収金額のgetメソッドです。
-     * 
+     *
      * @return 領収金額
      */
     public Decimal getRyoshuKingaku() {
@@ -206,7 +207,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * 領収金額のsetメソッドです。
-     * 
+     *
      * @param ryoshuKingaku 領収金額
      */
     public void setRyoshuKingaku(Decimal ryoshuKingaku) {
@@ -215,7 +216,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * 過不足金有無のgetメソッドです。
-     * 
+     *
      * @return 過不足金有無
      */
     public RString getMabusokuKinUMU() {
@@ -224,7 +225,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * 過不足金有無のsetメソッドです。
-     * 
+     *
      * @param mabusokuKinUMU 過不足金有無
      */
     public void setMabusokuKinUMU(RString mabusokuKinUMU) {
@@ -233,7 +234,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * 過不足額のgetメソッドです。
-     * 
+     *
      * @return 過不足額
      */
     public Decimal getKabusokuGaku() {
@@ -242,7 +243,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * 過不足額のsetメソッドです。
-     * 
+     *
      * @param kabusokuGaku 過不足額
      */
     public void setKabusokuGaku(Decimal kabusokuGaku) {
@@ -251,9 +252,9 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * このエンティティの主キーが他の{@literal DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -294,6 +295,7 @@ public class DbT3079DaisanshaKoiSongaiBaishoKinJuryoEntity extends DbTableEntity
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

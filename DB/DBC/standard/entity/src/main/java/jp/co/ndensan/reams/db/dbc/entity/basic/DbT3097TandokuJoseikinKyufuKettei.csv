@@ -1,4 +1,4 @@
-﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 uketsukeYMD,UDD015YMD,FlexibleDate,,,,,受付年月日,A
 rirekiNo,int2,int,,,,,履歴番号,A
 ketteiYMD,UDD015YMD,FlexibleDate,,,,,決定年月日,A
@@ -8,7 +8,7 @@ riyoshaFutan_KetteiKubun,varchar,RString,,,,,利用者負担・決定区分,A
 riyoshaFutan_FuShoninRiyu,varchar,RString,,,,,利用者負担・不承認理由,A
 kohi_JukyushaNo,varchar,RString,,,,,公費受給者番号,A
 kohi_FutanshaNo,varchar,RString,,,,,公費負担者番号,A
-kyufuRitsu,DbUDD011HokenKyufuRitsu,DbUDD011HokenKyufuRitsu,,,,,給付率,A
+kyufuRitsu,DbUDD011HokenKyufuRitsu,HokenKyufuRitsu,,,,,給付率,A
 jukyushaNo,varchar,RString,,,,,受給者番号,A
 keikaSochiKubun,varchar,RString,,,,,経過措置,A
 kuniKeigenKubun,varchar,RString,,,,,国軽減,A

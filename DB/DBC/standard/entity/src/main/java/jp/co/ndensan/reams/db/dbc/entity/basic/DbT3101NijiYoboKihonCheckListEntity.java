@@ -8,6 +8,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
@@ -16,7 +17,8 @@ import java.util.Objects;
  * 二次予防基本チェックリストテーブルのエンティティクラスです。
  */
 public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT3101NijiYoboKihonCheckListEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3101NijiYoboKihonCheckList");
 
@@ -31,7 +33,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
     @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private FlexibleDate uketsukeYMD;
     @PrimaryKey
@@ -66,7 +68,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -75,7 +77,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -84,7 +86,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -93,17 +95,16 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -112,7 +113,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 識別コードのgetメソッドです。
-     * 
+     *
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -121,7 +122,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 識別コードのsetメソッドです。
-     * 
+     *
      * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -130,25 +131,25 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 受付年月日のgetメソッドです。
-     * 
+     *
      * @return 受付年月日
      */
     public FlexibleDate getUketsukeYMD() {
@@ -157,7 +158,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 受付年月日のsetメソッドです。
-     * 
+     *
      * @param uketsukeYMD 受付年月日
      */
     public void setUketsukeYMD(FlexibleDate uketsukeYMD) {
@@ -166,7 +167,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -175,7 +176,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -184,7 +185,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 記入年月日のgetメソッドです。
-     * 
+     *
      * @return 記入年月日
      */
     public FlexibleDate getKinyuYMD() {
@@ -193,7 +194,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 記入年月日のsetメソッドです。
-     * 
+     *
      * @param kinyuYMD 記入年月日
      */
     public void setKinyuYMD(FlexibleDate kinyuYMD) {
@@ -202,7 +203,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１のgetメソッドです。
-     * 
+     *
      * @return 質問事項１
      */
     public int getShitsumonJiko01() {
@@ -211,7 +212,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko01 質問事項１
      */
     public void setShitsumonJiko01(int shitsumonJiko01) {
@@ -220,7 +221,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項２のgetメソッドです。
-     * 
+     *
      * @return 質問事項２
      */
     public int getShitsumonJiko02() {
@@ -229,7 +230,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項２のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko02 質問事項２
      */
     public void setShitsumonJiko02(int shitsumonJiko02) {
@@ -238,7 +239,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項３のgetメソッドです。
-     * 
+     *
      * @return 質問事項３
      */
     public int getShitsumonJiko03() {
@@ -247,7 +248,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項３のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko03 質問事項３
      */
     public void setShitsumonJiko03(int shitsumonJiko03) {
@@ -256,7 +257,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項４のgetメソッドです。
-     * 
+     *
      * @return 質問事項４
      */
     public int getShitsumonJiko04() {
@@ -265,7 +266,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項４のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko04 質問事項４
      */
     public void setShitsumonJiko04(int shitsumonJiko04) {
@@ -274,7 +275,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項５のgetメソッドです。
-     * 
+     *
      * @return 質問事項５
      */
     public int getShitsumonJiko05() {
@@ -283,7 +284,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項５のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko05 質問事項５
      */
     public void setShitsumonJiko05(int shitsumonJiko05) {
@@ -292,7 +293,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項６のgetメソッドです。
-     * 
+     *
      * @return 質問事項６
      */
     public int getShitsumonJiko06() {
@@ -301,7 +302,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項６のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko06 質問事項６
      */
     public void setShitsumonJiko06(int shitsumonJiko06) {
@@ -310,7 +311,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項７のgetメソッドです。
-     * 
+     *
      * @return 質問事項７
      */
     public int getShitsumonJiko07() {
@@ -319,7 +320,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項７のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko07 質問事項７
      */
     public void setShitsumonJiko07(int shitsumonJiko07) {
@@ -328,7 +329,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項８のgetメソッドです。
-     * 
+     *
      * @return 質問事項８
      */
     public int getShitsumonJiko08() {
@@ -337,7 +338,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項８のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko08 質問事項８
      */
     public void setShitsumonJiko08(int shitsumonJiko08) {
@@ -346,7 +347,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項９のgetメソッドです。
-     * 
+     *
      * @return 質問事項９
      */
     public int getShitsumonJiko09() {
@@ -355,7 +356,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項９のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko09 質問事項９
      */
     public void setShitsumonJiko09(int shitsumonJiko09) {
@@ -364,7 +365,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１０のgetメソッドです。
-     * 
+     *
      * @return 質問事項１０
      */
     public int getShitsumonJiko10() {
@@ -373,7 +374,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１０のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko10 質問事項１０
      */
     public void setShitsumonJiko10(int shitsumonJiko10) {
@@ -382,7 +383,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１１のgetメソッドです。
-     * 
+     *
      * @return 質問事項１１
      */
     public int getShitsumonJiko11() {
@@ -391,7 +392,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１１のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko11 質問事項１１
      */
     public void setShitsumonJiko11(int shitsumonJiko11) {
@@ -400,7 +401,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１２身長のgetメソッドです。
-     * 
+     *
      * @return 質問事項１２身長
      */
     public Decimal getShitsumonJiko12Shincho() {
@@ -409,7 +410,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１２身長のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko12Shincho 質問事項１２身長
      */
     public void setShitsumonJiko12Shincho(Decimal shitsumonJiko12Shincho) {
@@ -418,7 +419,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１２体重のgetメソッドです。
-     * 
+     *
      * @return 質問事項１２体重
      */
     public Decimal getShitsumonJiko12Taiju() {
@@ -427,7 +428,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１２体重のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko12Taiju 質問事項１２体重
      */
     public void setShitsumonJiko12Taiju(Decimal shitsumonJiko12Taiju) {
@@ -436,7 +437,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１３のgetメソッドです。
-     * 
+     *
      * @return 質問事項１３
      */
     public int getShitsumonJiko13() {
@@ -445,7 +446,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１３のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko13 質問事項１３
      */
     public void setShitsumonJiko13(int shitsumonJiko13) {
@@ -454,7 +455,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１４のgetメソッドです。
-     * 
+     *
      * @return 質問事項１４
      */
     public int getShitsumonJiko14() {
@@ -463,7 +464,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１４のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko14 質問事項１４
      */
     public void setShitsumonJiko14(int shitsumonJiko14) {
@@ -472,7 +473,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１５のgetメソッドです。
-     * 
+     *
      * @return 質問事項１５
      */
     public int getShitsumonJiko15() {
@@ -481,7 +482,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１５のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko15 質問事項１５
      */
     public void setShitsumonJiko15(int shitsumonJiko15) {
@@ -490,7 +491,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１６のgetメソッドです。
-     * 
+     *
      * @return 質問事項１６
      */
     public int getShitsumonJiko16() {
@@ -499,7 +500,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１６のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko16 質問事項１６
      */
     public void setShitsumonJiko16(int shitsumonJiko16) {
@@ -508,7 +509,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１７のgetメソッドです。
-     * 
+     *
      * @return 質問事項１７
      */
     public int getShitsumonJiko17() {
@@ -517,7 +518,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１７のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko17 質問事項１７
      */
     public void setShitsumonJiko17(int shitsumonJiko17) {
@@ -526,7 +527,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１８のgetメソッドです。
-     * 
+     *
      * @return 質問事項１８
      */
     public int getShitsumonJiko18() {
@@ -535,7 +536,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１８のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko18 質問事項１８
      */
     public void setShitsumonJiko18(int shitsumonJiko18) {
@@ -544,7 +545,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１９のgetメソッドです。
-     * 
+     *
      * @return 質問事項１９
      */
     public int getShitsumonJiko19() {
@@ -553,7 +554,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項１９のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko19 質問事項１９
      */
     public void setShitsumonJiko19(int shitsumonJiko19) {
@@ -562,7 +563,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項２０のgetメソッドです。
-     * 
+     *
      * @return 質問事項２０
      */
     public int getShitsumonJiko20() {
@@ -571,7 +572,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項２０のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko20 質問事項２０
      */
     public void setShitsumonJiko20(int shitsumonJiko20) {
@@ -580,7 +581,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項２１のgetメソッドです。
-     * 
+     *
      * @return 質問事項２１
      */
     public int getShitsumonJiko21() {
@@ -589,7 +590,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項２１のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko21 質問事項２１
      */
     public void setShitsumonJiko21(int shitsumonJiko21) {
@@ -598,7 +599,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項２２のgetメソッドです。
-     * 
+     *
      * @return 質問事項２２
      */
     public int getShitsumonJiko22() {
@@ -607,7 +608,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項２２のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko22 質問事項２２
      */
     public void setShitsumonJiko22(int shitsumonJiko22) {
@@ -616,7 +617,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項２３のgetメソッドです。
-     * 
+     *
      * @return 質問事項２３
      */
     public int getShitsumonJiko23() {
@@ -625,7 +626,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項２３のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko23 質問事項２３
      */
     public void setShitsumonJiko23(int shitsumonJiko23) {
@@ -634,7 +635,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項２４のgetメソッドです。
-     * 
+     *
      * @return 質問事項２４
      */
     public int getShitsumonJiko24() {
@@ -643,7 +644,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項２４のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko24 質問事項２４
      */
     public void setShitsumonJiko24(int shitsumonJiko24) {
@@ -652,7 +653,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項２５のgetメソッドです。
-     * 
+     *
      * @return 質問事項２５
      */
     public int getShitsumonJiko25() {
@@ -661,7 +662,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * 質問事項２５のsetメソッドです。
-     * 
+     *
      * @param shitsumonJiko25 質問事項２５
      */
     public void setShitsumonJiko25(int shitsumonJiko25) {
@@ -670,9 +671,9 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * このエンティティの主キーが他の{@literal DbT3101NijiYoboKihonCheckListEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3101NijiYoboKihonCheckListEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -735,6 +736,7 @@ public class DbT3101NijiYoboKihonCheckListEntity extends DbTableEntityBase<DbT31
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

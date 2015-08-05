@@ -31,6 +31,7 @@ public final class DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator {
     public static final FlexibleDate DEFAULT_計画作成年月日 = new FlexibleDate("20140402");
     public static final FlexibleDate DEFAULT_計画変更年月日 = new FlexibleDate("20140402");
     public static final RString DEFAULT_計画変更事由 = new RString("1");
+    public static final RString DEFAULT_策定区分 = new RString("1");
 
     /**
      * インスタンス化を防ぐためのプライベートコンストラクタです。
@@ -41,13 +42,12 @@ public final class DbT3007KyotakuKeikakuJikoSakuseiEntityGenerator {
     public static DbT3007KyotakuKeikakuJikoSakuseiEntity createDbT3007KyotakuKeikakuJikoSakuseiEntity() {
         DbT3007KyotakuKeikakuJikoSakuseiEntity entity = new DbT3007KyotakuKeikakuJikoSakuseiEntity();
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
-        entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);
-        entity.setShikibetsuCode(DEFAULT_識別コード);
         entity.setTaishoYM(DEFAULT_対象年月);
-        entity.setShoriTimestamp(DEFAULT_処理日時);
+        entity.setRirekiNo(1);
         entity.setKyotaku_SogoJigyoKubun(DEFAULT_居宅_総合事業区分);
         entity.setTekiyoKaishiYMD(DEFAULT_適用開始年月日);
         entity.setTekiyoShuryoYMD(DEFAULT_適用終了年月日);
+        entity.setSakuseiKubunCode(DEFAULT_策定区分);
         entity.setKeikakuSakuseiYMD(DEFAULT_計画作成年月日);
         entity.setKeikakuHenkoYMD(DEFAULT_計画変更年月日);
         entity.setKeikakuHenkoJiyu(DEFAULT_計画変更事由);

@@ -7,7 +7,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -21,7 +23,8 @@ import java.util.Objects;
  * 高額合算自己負担額テーブルのエンティティクラスです。
  */
 public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<DbT3070KogakuGassanJikoFutanGakuEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.1">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3070KogakuGassanJikoFutanGaku");
 
@@ -34,11 +37,11 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private FlexibleYear taishoNendo;
     @PrimaryKey
-    private DbUDD003HokenshaNo hokenshaNo;
+    private HokenshaNo hokenshaNo;
     @PrimaryKey
     private RString shikyuShinseishoSeiriNo;
     @PrimaryKey
@@ -96,7 +99,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -105,7 +108,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -114,7 +117,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -123,17 +126,16 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -142,25 +144,25 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 対象年度のgetメソッドです。
-     * 
+     *
      * @return 対象年度
      */
     public FlexibleYear getTaishoNendo() {
@@ -169,7 +171,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 対象年度のsetメソッドです。
-     * 
+     *
      * @param taishoNendo 対象年度
      */
     public void setTaishoNendo(FlexibleYear taishoNendo) {
@@ -180,10 +182,10 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
      * 保険者番号のgetメソッドです。
      * <br/>
      * <br/>証記載保険者番号
-     * 
+     *
      * @return 保険者番号
      */
-    public DbUDD003HokenshaNo getHokenshaNo() {
+    public HokenshaNo getHokenshaNo() {
         return hokenshaNo;
     }
 
@@ -191,16 +193,16 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
      * 保険者番号のsetメソッドです。
      * <br/>
      * <br/>証記載保険者番号
-     * 
+     *
      * @param hokenshaNo 保険者番号
      */
-    public void setHokenshaNo(DbUDD003HokenshaNo hokenshaNo) {
+    public void setHokenshaNo(HokenshaNo hokenshaNo) {
         this.hokenshaNo = hokenshaNo;
     }
 
     /**
      * 支給申請書整理番号のgetメソッドです。
-     * 
+     *
      * @return 支給申請書整理番号
      */
     public RString getShikyuShinseishoSeiriNo() {
@@ -209,7 +211,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 支給申請書整理番号のsetメソッドです。
-     * 
+     *
      * @param shikyuShinseishoSeiriNo 支給申請書整理番号
      */
     public void setShikyuShinseishoSeiriNo(RString shikyuShinseishoSeiriNo) {
@@ -218,7 +220,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -227,7 +229,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -236,7 +238,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 保険制度コードのgetメソッドです。
-     * 
+     *
      * @return 保険制度コード
      */
     public RString getHokenSeidoCode() {
@@ -245,7 +247,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 保険制度コードのsetメソッドです。
-     * 
+     *
      * @param hokenSeidoCode 保険制度コード
      */
     public void setHokenSeidoCode(RString hokenSeidoCode) {
@@ -254,7 +256,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 保険者名のgetメソッドです。
-     * 
+     *
      * @return 保険者名
      */
     public RString getHokenshaMei() {
@@ -263,7 +265,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 保険者名のsetメソッドです。
-     * 
+     *
      * @param hokenshaMei 保険者名
      */
     public void setHokenshaMei(RString hokenshaMei) {
@@ -272,7 +274,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 国保被保険者証記号のgetメソッドです。
-     * 
+     *
      * @return 国保被保険者証記号
      */
     public RString getKokuho_HihokenshaShoKigo() {
@@ -281,7 +283,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 国保被保険者証記号のsetメソッドです。
-     * 
+     *
      * @param kokuho_HihokenshaShoKigo 国保被保険者証記号
      */
     public void setKokuho_HihokenshaShoKigo(RString kokuho_HihokenshaShoKigo) {
@@ -290,7 +292,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 被保険者氏名カナのgetメソッドです。
-     * 
+     *
      * @return 被保険者氏名カナ
      */
     public AtenaKanaMeisho getHihokenshaShimeiKana() {
@@ -299,7 +301,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 被保険者氏名カナのsetメソッドです。
-     * 
+     *
      * @param hihokenshaShimeiKana 被保険者氏名カナ
      */
     public void setHihokenshaShimeiKana(AtenaKanaMeisho hihokenshaShimeiKana) {
@@ -308,7 +310,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 被保険者氏名のgetメソッドです。
-     * 
+     *
      * @return 被保険者氏名
      */
     public AtenaMeisho getHihokenshaShimei() {
@@ -317,7 +319,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 被保険者氏名のsetメソッドです。
-     * 
+     *
      * @param hihokenshaShimei 被保険者氏名
      */
     public void setHihokenshaShimei(AtenaMeisho hihokenshaShimei) {
@@ -326,7 +328,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 生年月日のgetメソッドです。
-     * 
+     *
      * @return 生年月日
      */
     public FlexibleDate getUmareYMD() {
@@ -335,7 +337,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 生年月日のsetメソッドです。
-     * 
+     *
      * @param umareYMD 生年月日
      */
     public void setUmareYMD(FlexibleDate umareYMD) {
@@ -344,7 +346,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 性別のgetメソッドです。
-     * 
+     *
      * @return 性別
      */
     public Code getSeibetsuCode() {
@@ -353,7 +355,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 性別のsetメソッドです。
-     * 
+     *
      * @param seibetsuCode 性別
      */
     public void setSeibetsuCode(Code seibetsuCode) {
@@ -362,7 +364,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 所得区分のgetメソッドです。
-     * 
+     *
      * @return 所得区分
      */
     public RString getShotokuKubun() {
@@ -371,7 +373,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 所得区分のsetメソッドです。
-     * 
+     *
      * @param shotokuKubun 所得区分
      */
     public void setShotokuKubun(RString shotokuKubun) {
@@ -380,7 +382,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 70歳以上の者に係る所得区分のgetメソッドです。
-     * 
+     *
      * @return 70歳以上の者に係る所得区分
      */
     public RString getOver70_ShotokuKubun() {
@@ -389,7 +391,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 70歳以上の者に係る所得区分のsetメソッドです。
-     * 
+     *
      * @param over70_ShotokuKubun 70歳以上の者に係る所得区分
      */
     public void setOver70_ShotokuKubun(RString over70_ShotokuKubun) {
@@ -398,7 +400,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 自己負担額証明書整理番号のgetメソッドです。
-     * 
+     *
      * @return 自己負担額証明書整理番号
      */
     public RString getJikoFutanSeiriNo() {
@@ -407,7 +409,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 自己負担額証明書整理番号のsetメソッドです。
-     * 
+     *
      * @param jikoFutanSeiriNo 自己負担額証明書整理番号
      */
     public void setJikoFutanSeiriNo(RString jikoFutanSeiriNo) {
@@ -416,7 +418,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 後期保険者番号のgetメソッドです。
-     * 
+     *
      * @return 後期保険者番号
      */
     public RString getKoki_HokenshaNo() {
@@ -425,7 +427,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 後期保険者番号のsetメソッドです。
-     * 
+     *
      * @param koki_HokenshaNo 後期保険者番号
      */
     public void setKoki_HokenshaNo(RString koki_HokenshaNo) {
@@ -434,7 +436,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 後期被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 後期被保険者番号
      */
     public RString getKoki_HihokenshaNo() {
@@ -443,7 +445,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 後期被保険者番号のsetメソッドです。
-     * 
+     *
      * @param koki_HihokenshaNo 後期被保険者番号
      */
     public void setKoki_HihokenshaNo(RString koki_HihokenshaNo) {
@@ -452,7 +454,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 国保保険者番号のgetメソッドです。
-     * 
+     *
      * @return 国保保険者番号
      */
     public RString getKokuho_HokenshaNo() {
@@ -461,7 +463,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 国保保険者番号のsetメソッドです。
-     * 
+     *
      * @param kokuho_HokenshaNo 国保保険者番号
      */
     public void setKokuho_HokenshaNo(RString kokuho_HokenshaNo) {
@@ -470,7 +472,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 国保被保険者証番号のgetメソッドです。
-     * 
+     *
      * @return 国保被保険者証番号
      */
     public RString getKokuho_HihokenshaShoNo() {
@@ -479,7 +481,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 国保被保険者証番号のsetメソッドです。
-     * 
+     *
      * @param kokuho_HihokenshaShoNo 国保被保険者証番号
      */
     public void setKokuho_HihokenshaShoNo(RString kokuho_HihokenshaShoNo) {
@@ -488,7 +490,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 国保個人番号のgetメソッドです。
-     * 
+     *
      * @return 国保個人番号
      */
     public RString getKokuho_KojinNo() {
@@ -497,7 +499,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 国保個人番号のsetメソッドです。
-     * 
+     *
      * @param kokuho_KojinNo 国保個人番号
      */
     public void setKokuho_KojinNo(RString kokuho_KojinNo) {
@@ -506,7 +508,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 異動区分のgetメソッドです。
-     * 
+     *
      * @return 異動区分
      */
     public RString getIdoKubun() {
@@ -515,7 +517,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 異動区分のsetメソッドです。
-     * 
+     *
      * @param idoKubun 異動区分
      */
     public void setIdoKubun(RString idoKubun) {
@@ -524,7 +526,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 補正済自己負担額送付区分のgetメソッドです。
-     * 
+     *
      * @return 補正済自己負担額送付区分
      */
     public RString getHoseiZumiSofuKubun() {
@@ -533,7 +535,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 補正済自己負担額送付区分のsetメソッドです。
-     * 
+     *
      * @param hoseiZumiSofuKubun 補正済自己負担額送付区分
      */
     public void setHoseiZumiSofuKubun(RString hoseiZumiSofuKubun) {
@@ -542,7 +544,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 対象計算期間開始年月日のgetメソッドです。
-     * 
+     *
      * @return 対象計算期間開始年月日
      */
     public FlexibleDate getTaishoKeisanKaishiYMD() {
@@ -551,7 +553,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 対象計算期間開始年月日のsetメソッドです。
-     * 
+     *
      * @param taishoKeisanKaishiYMD 対象計算期間開始年月日
      */
     public void setTaishoKeisanKaishiYMD(FlexibleDate taishoKeisanKaishiYMD) {
@@ -560,7 +562,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 対象計算期間終了年月日のgetメソッドです。
-     * 
+     *
      * @return 対象計算期間終了年月日
      */
     public FlexibleDate getTaishoKeisanShuryoYMD() {
@@ -569,7 +571,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 対象計算期間終了年月日のsetメソッドです。
-     * 
+     *
      * @param taishoKeisanShuryoYMD 対象計算期間終了年月日
      */
     public void setTaishoKeisanShuryoYMD(FlexibleDate taishoKeisanShuryoYMD) {
@@ -578,7 +580,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 被保険者期間開始年月日のgetメソッドです。
-     * 
+     *
      * @return 被保険者期間開始年月日
      */
     public FlexibleDate getHihokenshaKaishiYMD() {
@@ -587,7 +589,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 被保険者期間開始年月日のsetメソッドです。
-     * 
+     *
      * @param hihokenshaKaishiYMD 被保険者期間開始年月日
      */
     public void setHihokenshaKaishiYMD(FlexibleDate hihokenshaKaishiYMD) {
@@ -596,7 +598,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 被保険者期間終了年月日のgetメソッドです。
-     * 
+     *
      * @return 被保険者期間終了年月日
      */
     public FlexibleDate getHihokenshaShuryoYMD() {
@@ -605,7 +607,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 被保険者期間終了年月日のsetメソッドです。
-     * 
+     *
      * @param hihokenshaShuryoYMD 被保険者期間終了年月日
      */
     public void setHihokenshaShuryoYMD(FlexibleDate hihokenshaShuryoYMD) {
@@ -614,7 +616,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 申請年月日のgetメソッドです。
-     * 
+     *
      * @return 申請年月日
      */
     public FlexibleDate getShinseiYMD() {
@@ -623,7 +625,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 申請年月日のsetメソッドです。
-     * 
+     *
      * @param shinseiYMD 申請年月日
      */
     public void setShinseiYMD(FlexibleDate shinseiYMD) {
@@ -632,7 +634,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 合計・自己負担額のgetメソッドです。
-     * 
+     *
      * @return 合計・自己負担額
      */
     public Decimal getGokei_JikoFutanGaku() {
@@ -641,7 +643,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 合計・自己負担額のsetメソッドです。
-     * 
+     *
      * @param gokei_JikoFutanGaku 合計・自己負担額
      */
     public void setGokei_JikoFutanGaku(Decimal gokei_JikoFutanGaku) {
@@ -650,7 +652,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 合計・70-74自己負担額（内訳）のgetメソッドです。
-     * 
+     *
      * @return 合計・70-74自己負担額（内訳）
      */
     public Decimal getGokei_70_74JikoFutanGaku() {
@@ -659,7 +661,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 合計・70-74自己負担額（内訳）のsetメソッドです。
-     * 
+     *
      * @param gokei_70_74JikoFutanGaku 合計・70-74自己負担額（内訳）
      */
     public void setGokei_70_74JikoFutanGaku(Decimal gokei_70_74JikoFutanGaku) {
@@ -668,7 +670,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 合計・70未満高額支給額のgetメソッドです。
-     * 
+     *
      * @return 合計・70未満高額支給額
      */
     public Decimal getGokei_Under70KogakuShikyuGaku() {
@@ -677,7 +679,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 合計・70未満高額支給額のsetメソッドです。
-     * 
+     *
      * @param gokei_Under70KogakuShikyuGaku 合計・70未満高額支給額
      */
     public void setGokei_Under70KogakuShikyuGaku(Decimal gokei_Under70KogakuShikyuGaku) {
@@ -686,7 +688,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 合計・70-74高額支給額のgetメソッドです。
-     * 
+     *
      * @return 合計・70-74高額支給額
      */
     public Decimal getGokei_70_74KogakuShikyuGaku() {
@@ -695,7 +697,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 合計・70-74高額支給額のsetメソッドです。
-     * 
+     *
      * @param gokei_70_74KogakuShikyuGaku 合計・70-74高額支給額
      */
     public void setGokei_70_74KogakuShikyuGaku(Decimal gokei_70_74KogakuShikyuGaku) {
@@ -704,7 +706,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 補正済・合計・自己負担額のgetメソッドです。
-     * 
+     *
      * @return 補正済・合計・自己負担額
      */
     public Decimal getSumi_Gokei_JikoFutanGaku() {
@@ -713,7 +715,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 補正済・合計・自己負担額のsetメソッドです。
-     * 
+     *
      * @param sumi_Gokei_JikoFutanGaku 補正済・合計・自己負担額
      */
     public void setSumi_Gokei_JikoFutanGaku(Decimal sumi_Gokei_JikoFutanGaku) {
@@ -722,7 +724,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 補正済・合計・70-74自己負担額（内訳）のgetメソッドです。
-     * 
+     *
      * @return 補正済・合計・70-74自己負担額（内訳）
      */
     public Decimal getSumi_Gokei_70_74JikoFutanGaku() {
@@ -731,7 +733,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 補正済・合計・70-74自己負担額（内訳）のsetメソッドです。
-     * 
+     *
      * @param sumi_Gokei_70_74JikoFutanGaku 補正済・合計・70-74自己負担額（内訳）
      */
     public void setSumi_Gokei_70_74JikoFutanGaku(Decimal sumi_Gokei_70_74JikoFutanGaku) {
@@ -740,7 +742,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 補正済・合計・70未満高額支給額のgetメソッドです。
-     * 
+     *
      * @return 補正済・合計・70未満高額支給額
      */
     public Decimal getSumi_Gokei_Under70KogakuShikyuGaku() {
@@ -749,7 +751,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 補正済・合計・70未満高額支給額のsetメソッドです。
-     * 
+     *
      * @param sumi_Gokei_Under70KogakuShikyuGaku 補正済・合計・70未満高額支給額
      */
     public void setSumi_Gokei_Under70KogakuShikyuGaku(Decimal sumi_Gokei_Under70KogakuShikyuGaku) {
@@ -758,7 +760,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 補正済・合計・70-74高額支給額のgetメソッドです。
-     * 
+     *
      * @return 補正済・合計・70-74高額支給額
      */
     public Decimal getSumi_Gokei_70_74KogakuShikyuGaku() {
@@ -767,7 +769,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 補正済・合計・70-74高額支給額のsetメソッドです。
-     * 
+     *
      * @param sumi_Gokei_70_74KogakuShikyuGaku 補正済・合計・70-74高額支給額
      */
     public void setSumi_Gokei_70_74KogakuShikyuGaku(Decimal sumi_Gokei_70_74KogakuShikyuGaku) {
@@ -776,7 +778,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 宛先氏名のgetメソッドです。
-     * 
+     *
      * @return 宛先氏名
      */
     public AtenaMeisho getAtesakiShimei() {
@@ -785,7 +787,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 宛先氏名のsetメソッドです。
-     * 
+     *
      * @param atesakiShimei 宛先氏名
      */
     public void setAtesakiShimei(AtenaMeisho atesakiShimei) {
@@ -794,7 +796,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 宛先郵便番号のgetメソッドです。
-     * 
+     *
      * @return 宛先郵便番号
      */
     public YubinNo getAtesakiYubinNo() {
@@ -803,7 +805,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 宛先郵便番号のsetメソッドです。
-     * 
+     *
      * @param atesakiYubinNo 宛先郵便番号
      */
     public void setAtesakiYubinNo(YubinNo atesakiYubinNo) {
@@ -812,7 +814,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 宛先住所のgetメソッドです。
-     * 
+     *
      * @return 宛先住所
      */
     public RString getAtesakiJusho() {
@@ -821,7 +823,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 宛先住所のsetメソッドです。
-     * 
+     *
      * @param atesakiJusho 宛先住所
      */
     public void setAtesakiJusho(RString atesakiJusho) {
@@ -830,7 +832,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 窓口払対象者判定コードのgetメソッドです。
-     * 
+     *
      * @return 窓口払対象者判定コード
      */
     public RString getMadoguchi_TaishoshaHanteiCode() {
@@ -839,7 +841,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 窓口払対象者判定コードのsetメソッドです。
-     * 
+     *
      * @param madoguchi_TaishoshaHanteiCode 窓口払対象者判定コード
      */
     public void setMadoguchi_TaishoshaHanteiCode(RString madoguchi_TaishoshaHanteiCode) {
@@ -848,7 +850,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 支払場所のgetメソッドです。
-     * 
+     *
      * @return 支払場所
      */
     public RString getShiharaiBasho() {
@@ -857,7 +859,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 支払場所のsetメソッドです。
-     * 
+     *
      * @param shiharaiBasho 支払場所
      */
     public void setShiharaiBasho(RString shiharaiBasho) {
@@ -866,7 +868,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 支払期間開始年月日のgetメソッドです。
-     * 
+     *
      * @return 支払期間開始年月日
      */
     public FlexibleDate getShikaraiKaishiYMD() {
@@ -875,7 +877,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 支払期間開始年月日のsetメソッドです。
-     * 
+     *
      * @param shikaraiKaishiYMD 支払期間開始年月日
      */
     public void setShikaraiKaishiYMD(FlexibleDate shikaraiKaishiYMD) {
@@ -884,7 +886,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 支払期間終了年月日のgetメソッドです。
-     * 
+     *
      * @return 支払期間終了年月日
      */
     public FlexibleDate getShiharaiShuryoYMD() {
@@ -893,7 +895,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 支払期間終了年月日のsetメソッドです。
-     * 
+     *
      * @param shiharaiShuryoYMD 支払期間終了年月日
      */
     public void setShiharaiShuryoYMD(FlexibleDate shiharaiShuryoYMD) {
@@ -902,7 +904,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 閉庁内容のgetメソッドです。
-     * 
+     *
      * @return 閉庁内容
      */
     public RString getHeichoNaiyo() {
@@ -911,7 +913,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 閉庁内容のsetメソッドです。
-     * 
+     *
      * @param heichoNaiyo 閉庁内容
      */
     public void setHeichoNaiyo(RString heichoNaiyo) {
@@ -920,7 +922,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 支払期間開始時間のgetメソッドです。
-     * 
+     *
      * @return 支払期間開始時間
      */
     public RString getShiharaiKaishiTime() {
@@ -929,7 +931,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 支払期間開始時間のsetメソッドです。
-     * 
+     *
      * @param shiharaiKaishiTime 支払期間開始時間
      */
     public void setShiharaiKaishiTime(RString shiharaiKaishiTime) {
@@ -938,7 +940,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 支払期間終了時間のgetメソッドです。
-     * 
+     *
      * @return 支払期間終了時間
      */
     public RString getShiharaiShuryoTime() {
@@ -947,7 +949,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 支払期間終了時間のsetメソッドです。
-     * 
+     *
      * @param shiharaiShuryoTime 支払期間終了時間
      */
     public void setShiharaiShuryoTime(RString shiharaiShuryoTime) {
@@ -956,7 +958,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 備考のgetメソッドです。
-     * 
+     *
      * @return 備考
      */
     public RString getBiko() {
@@ -965,7 +967,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 備考のsetメソッドです。
-     * 
+     *
      * @param biko 備考
      */
     public void setBiko(RString biko) {
@@ -974,7 +976,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * データ作成区分のgetメソッドです。
-     * 
+     *
      * @return データ作成区分
      */
     public RString getDataSakuseiKubun() {
@@ -983,7 +985,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * データ作成区分のsetメソッドです。
-     * 
+     *
      * @param dataSakuseiKubun データ作成区分
      */
     public void setDataSakuseiKubun(RString dataSakuseiKubun) {
@@ -992,7 +994,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 自己負担額確認情報受取年月のgetメソッドです。
-     * 
+     *
      * @return 自己負担額確認情報受取年月
      */
     public FlexibleYearMonth getKakunin_UketoriYM() {
@@ -1001,7 +1003,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 自己負担額確認情報受取年月のsetメソッドです。
-     * 
+     *
      * @param kakunin_UketoriYM 自己負担額確認情報受取年月
      */
     public void setKakunin_UketoriYM(FlexibleYearMonth kakunin_UketoriYM) {
@@ -1010,7 +1012,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 補正済自己負担額情報送付年月のgetメソッドです。
-     * 
+     *
      * @return 補正済自己負担額情報送付年月
      */
     public FlexibleYearMonth getHoseiZumi_SofuYM() {
@@ -1019,7 +1021,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 補正済自己負担額情報送付年月のsetメソッドです。
-     * 
+     *
      * @param hoseiZumi_SofuYM 補正済自己負担額情報送付年月
      */
     public void setHoseiZumi_SofuYM(FlexibleYearMonth hoseiZumi_SofuYM) {
@@ -1028,7 +1030,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 自己負担額証明書情報受取年月のgetメソッドです。
-     * 
+     *
      * @return 自己負担額証明書情報受取年月
      */
     public FlexibleYearMonth getShomeisho_UketoriYM() {
@@ -1037,7 +1039,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 自己負担額証明書情報受取年月のsetメソッドです。
-     * 
+     *
      * @param shomeisho_UketoriYM 自己負担額証明書情報受取年月
      */
     public void setShomeisho_UketoriYM(FlexibleYearMonth shomeisho_UketoriYM) {
@@ -1046,7 +1048,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 再送フラグのgetメソッドです。
-     * 
+     *
      * @return 再送フラグ
      */
     public RString getSaisoFlag() {
@@ -1055,7 +1057,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 再送フラグのsetメソッドです。
-     * 
+     *
      * @param saisoFlag 再送フラグ
      */
     public void setSaisoFlag(RString saisoFlag) {
@@ -1064,7 +1066,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 送付対象外フラグのgetメソッドです。
-     * 
+     *
      * @return 送付対象外フラグ
      */
     public RString getSofuTaishoGaiFlag() {
@@ -1073,7 +1075,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 送付対象外フラグのsetメソッドです。
-     * 
+     *
      * @param sofuTaishoGaiFlag 送付対象外フラグ
      */
     public void setSofuTaishoGaiFlag(RString sofuTaishoGaiFlag) {
@@ -1082,7 +1084,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 自己負担額計算年月日のgetメソッドです。
-     * 
+     *
      * @return 自己負担額計算年月日
      */
     public FlexibleDate getJikoFutanKeisanYMD() {
@@ -1091,7 +1093,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 自己負担額計算年月日のsetメソッドです。
-     * 
+     *
      * @param jikoFutanKeisanYMD 自己負担額計算年月日
      */
     public void setJikoFutanKeisanYMD(FlexibleDate jikoFutanKeisanYMD) {
@@ -1100,7 +1102,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 自己負担額証明書作成年月日のgetメソッドです。
-     * 
+     *
      * @return 自己負担額証明書作成年月日
      */
     public FlexibleDate getShomeiShoSakuseiYMD() {
@@ -1109,7 +1111,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 自己負担額証明書作成年月日のsetメソッドです。
-     * 
+     *
      * @param shomeiShoSakuseiYMD 自己負担額証明書作成年月日
      */
     public void setShomeiShoSakuseiYMD(FlexibleDate shomeiShoSakuseiYMD) {
@@ -1118,7 +1120,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 後期・国保処理区分のgetメソッドです。
-     * 
+     *
      * @return 後期・国保処理区分
      */
     public RString getKoki_KokuhoShoriKubun() {
@@ -1127,7 +1129,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * 後期・国保処理区分のsetメソッドです。
-     * 
+     *
      * @param koki_KokuhoShoriKubun 後期・国保処理区分
      */
     public void setKoki_KokuhoShoriKubun(RString koki_KokuhoShoriKubun) {
@@ -1136,9 +1138,9 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * このエンティティの主キーが他の{@literal DbT3070KogakuGassanJikoFutanGakuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3070KogakuGassanJikoFutanGakuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -1228,6 +1230,7 @@ public class DbT3070KogakuGassanJikoFutanGakuEntity extends DbTableEntityBase<Db
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
