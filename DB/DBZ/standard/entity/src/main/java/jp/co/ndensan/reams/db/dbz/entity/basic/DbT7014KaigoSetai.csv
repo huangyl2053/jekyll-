@@ -1,5 +1,5 @@
-﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,A
-setaiKijunYMD,UDD015YMD,FlexibleDate,,,,,A
-renban,int4,int,,,,,A
-shoriTimestamp,timestamp,RDateTime,,,,,A
-setaiInshikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,A
+﻿hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+setaiKijunYMD,UDD015YMD,FlexibleDate,,,,,世帯基準年月日,A
+renban,int4,int,,,,,連番,A
+shoriTimestamp,timestamp,RDateTime,,,,,処理日時,A
+setaiInshikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,世帯員識別コード,A

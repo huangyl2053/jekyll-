@@ -7,9 +7,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
 
@@ -18,7 +17,7 @@ import java.util.Objects;
  *
  */
 public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT1009ShikakuShutokuJogaishaEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.1">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT1009ShikakuShutokuJogaisha");
 
@@ -31,17 +30,17 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private LasdecCode shichosonCode;
-    @PrimaryKey
     private ShikibetsuCode shikibetsuCode;
     @PrimaryKey
-    private YMDHMS shoriTimeStamp;
+    private int rirekiNo;
+    private LasdecCode shichosonCode;
     private RString shikakuShutokuJogaiRiyu;
     private FlexibleDate shikakuShutokuJogaiYMD;
     private FlexibleDate shikakuShutokuJogaiKaijoYMD;
 
     /**
-     * getInsertDantaiCd
+     * insertDantaiCdのgetメソッドです。
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -49,7 +48,8 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
     }
 
     /**
-     * setInsertDantaiCd
+     * insertDantaiCdのsetメソッドです。
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -57,7 +57,8 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
     }
 
     /**
-     * getIsDeleted
+     * isDeletedのgetメソッドです。
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -65,7 +66,8 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
     }
 
     /**
-     * setIsDeleted
+     * isDeletedのsetメソッドです。
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
@@ -74,7 +76,8 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
 
 
     /**
-     * setLastUpdateReamsLoginId
+     * lastUpdateReamsLoginIdのsetメソッドです。
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -82,96 +85,108 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
     }
 
     /**
-     * getShichosonCode
-     * @return shichosonCode
-     */
-    public LasdecCode getShichosonCode() {
-        return shichosonCode;
-    }
-
-    /**
-     * setShichosonCode
-     * @param shichosonCode shichosonCode
-     */
-    public void setShichosonCode(LasdecCode shichosonCode) {
-        this.shichosonCode = shichosonCode;
-    }
-
-    /**
-     * getShikibetsuCode
-     * @return shikibetsuCode
+     * 識別コードのgetメソッドです。
+     * 
+     * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
         return shikibetsuCode;
     }
 
     /**
-     * setShikibetsuCode
-     * @param shikibetsuCode shikibetsuCode
+     * 識別コードのsetメソッドです。
+     * 
+     * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
         this.shikibetsuCode = shikibetsuCode;
     }
 
     /**
-     * getShoriTimeStamp
-     * @return shoriTimeStamp
+     * 履歴番号のgetメソッドです。
+     * 
+     * @return 履歴番号
      */
-    public YMDHMS getShoriTimeStamp() {
-        return shoriTimeStamp;
+    public int getRirekiNo() {
+        return rirekiNo;
     }
 
     /**
-     * setShoriTimeStamp
-     * @param shoriTimeStamp shoriTimeStamp
+     * 履歴番号のsetメソッドです。
+     * 
+     * @param rirekiNo 履歴番号
      */
-    public void setShoriTimeStamp(YMDHMS shoriTimeStamp) {
-        this.shoriTimeStamp = shoriTimeStamp;
+    public void setRirekiNo(int rirekiNo) {
+        this.rirekiNo = rirekiNo;
     }
 
     /**
-     * getShikakuShutokuJogaiRiyu
-     * @return shikakuShutokuJogaiRiyu
+     * 市町村コードのgetメソッドです。
+     * 
+     * @return 市町村コード
+     */
+    public LasdecCode getShichosonCode() {
+        return shichosonCode;
+    }
+
+    /**
+     * 市町村コードのsetメソッドです。
+     * 
+     * @param shichosonCode 市町村コード
+     */
+    public void setShichosonCode(LasdecCode shichosonCode) {
+        this.shichosonCode = shichosonCode;
+    }
+
+    /**
+     * 資格取得除外理由のgetメソッドです。
+     * 
+     * @return 資格取得除外理由
      */
     public RString getShikakuShutokuJogaiRiyu() {
         return shikakuShutokuJogaiRiyu;
     }
 
     /**
-     * setShikakuShutokuJogaiRiyu
-     * @param shikakuShutokuJogaiRiyu shikakuShutokuJogaiRiyu
+     * 資格取得除外理由のsetメソッドです。
+     * 
+     * @param shikakuShutokuJogaiRiyu 資格取得除外理由
      */
     public void setShikakuShutokuJogaiRiyu(RString shikakuShutokuJogaiRiyu) {
         this.shikakuShutokuJogaiRiyu = shikakuShutokuJogaiRiyu;
     }
 
     /**
-     * getShikakuShutokuJogaiYMD
-     * @return shikakuShutokuJogaiYMD
+     * 資格取得除外年月日のgetメソッドです。
+     * 
+     * @return 資格取得除外年月日
      */
     public FlexibleDate getShikakuShutokuJogaiYMD() {
         return shikakuShutokuJogaiYMD;
     }
 
     /**
-     * setShikakuShutokuJogaiYMD
-     * @param shikakuShutokuJogaiYMD shikakuShutokuJogaiYMD
+     * 資格取得除外年月日のsetメソッドです。
+     * 
+     * @param shikakuShutokuJogaiYMD 資格取得除外年月日
      */
     public void setShikakuShutokuJogaiYMD(FlexibleDate shikakuShutokuJogaiYMD) {
         this.shikakuShutokuJogaiYMD = shikakuShutokuJogaiYMD;
     }
 
     /**
-     * getShikakuShutokuJogaiKaijoYMD
-     * @return shikakuShutokuJogaiKaijoYMD
+     * 資格取得除外解除年月日のgetメソッドです。
+     * 
+     * @return 資格取得除外解除年月日
      */
     public FlexibleDate getShikakuShutokuJogaiKaijoYMD() {
         return shikakuShutokuJogaiKaijoYMD;
     }
 
     /**
-     * setShikakuShutokuJogaiKaijoYMD
-     * @param shikakuShutokuJogaiKaijoYMD shikakuShutokuJogaiKaijoYMD
+     * 資格取得除外解除年月日のsetメソッドです。
+     * 
+     * @param shikakuShutokuJogaiKaijoYMD 資格取得除外解除年月日
      */
     public void setShikakuShutokuJogaiKaijoYMD(FlexibleDate shikakuShutokuJogaiKaijoYMD) {
         this.shikakuShutokuJogaiKaijoYMD = shikakuShutokuJogaiKaijoYMD;
@@ -189,13 +204,10 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
         if (other == null) {
             return false;
         }
-        if (!Objects.equals(this.shichosonCode, other.shichosonCode)) {
-            return false;
-        }
         if (!Objects.equals(this.shikibetsuCode, other.shikibetsuCode)) {
             return false;
         }
-        if (!Objects.equals(this.shoriTimeStamp, other.shoriTimeStamp)) {
+        if (this.rirekiNo != other.rirekiNo) {
             return false;
         }
         return true;
@@ -206,9 +218,9 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
      */
     @Override
     public void shallowCopy(DbT1009ShikakuShutokuJogaishaEntity entity) {
-        this.shichosonCode = entity.shichosonCode;
         this.shikibetsuCode = entity.shikibetsuCode;
-        this.shoriTimeStamp = entity.shoriTimeStamp;
+        this.rirekiNo = entity.rirekiNo;
+        this.shichosonCode = entity.shichosonCode;
         this.shikakuShutokuJogaiRiyu = entity.shikakuShutokuJogaiRiyu;
         this.shikakuShutokuJogaiYMD = entity.shikakuShutokuJogaiYMD;
         this.shikakuShutokuJogaiKaijoYMD = entity.shikakuShutokuJogaiKaijoYMD;
@@ -220,10 +232,11 @@ public class DbT1009ShikakuShutokuJogaishaEntity extends DbTableEntityBase<DbT10
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shichosonCode, shikibetsuCode, shoriTimeStamp, shikakuShutokuJogaiRiyu, shikakuShutokuJogaiYMD, shikakuShutokuJogaiKaijoYMD);
+        return super.toMd5(shikibetsuCode, rirekiNo, shichosonCode, shikakuShutokuJogaiRiyu, shikakuShutokuJogaiYMD, shikakuShutokuJogaiKaijoYMD);
     }
 
 // </editor-fold>
+
 
 
 

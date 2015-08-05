@@ -1,20 +1,23 @@
 package jp.co.ndensan.reams.db.dbe.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
 
 /**
  * 連携用データ送付記録テーブルのエンティティクラスです。
  */
 public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT5191RenkeiyoDataSofuKirokuEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5191RenkeiyoDataSofuKiroku");
 
@@ -27,11 +30,11 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD013ShinseishoKanriNo shinseishoKanriNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
     private FlexibleDate shiryoSakuseiYMD;
     private RString hikiwatashiKubun;
-    private int rirekiNo;
+    private YMDHMS hikiwatashiTimeStamp;
     private RString saiSoufuKubun;
     private RString saiChousaSofuKubun;
     private RString saiIkenshoSofuKubun;
@@ -40,7 +43,7 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -49,7 +52,7 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -58,7 +61,7 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -67,17 +70,16 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -88,10 +90,10 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
      * 申請書管理番号のgetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @return 申請書管理番号
      */
-    public DbUDD013ShinseishoKanriNo getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
@@ -99,16 +101,16 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
      * 申請書管理番号のsetメソッドです。
      * <br/>
      * <br/>要介護認定申請情報
-     * 
+     *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(DbUDD013ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     /**
      * 資料作成日のgetメソッドです。
-     * 
+     *
      * @return 資料作成日
      */
     public FlexibleDate getShiryoSakuseiYMD() {
@@ -117,7 +119,7 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
 
     /**
      * 資料作成日のsetメソッドです。
-     * 
+     *
      * @param shiryoSakuseiYMD 資料作成日
      */
     public void setShiryoSakuseiYMD(FlexibleDate shiryoSakuseiYMD) {
@@ -128,7 +130,7 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
      * 引渡し区分のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：引渡し区分）0：引渡し未済、1：引渡し済
-     * 
+     *
      * @return 引渡し区分
      */
     public RString getHikiwatashiKubun() {
@@ -139,7 +141,7 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
      * 引渡し区分のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：引渡し区分）0：引渡し未済、1：引渡し済
-     * 
+     *
      * @param hikiwatashiKubun 引渡し区分
      */
     public void setHikiwatashiKubun(RString hikiwatashiKubun) {
@@ -147,28 +149,28 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
     }
 
     /**
-     * 履歴番号のgetメソッドです。
-     * 
-     * @return 履歴番号
+     * 引渡日時のgetメソッドです。
+     *
+     * @return 引渡日時
      */
-    public int getRirekiNo() {
-        return rirekiNo;
+    public YMDHMS getHikiwatashiTimeStamp() {
+        return hikiwatashiTimeStamp;
     }
 
     /**
-     * 履歴番号のsetメソッドです。
-     * 
-     * @param rirekiNo 履歴番号
+     * 引渡日時のsetメソッドです。
+     *
+     * @param hikiwatashiTimeStamp 引渡日時
      */
-    public void setRirekiNo(int rirekiNo) {
-        this.rirekiNo = rirekiNo;
+    public void setHikiwatashiTimeStamp(YMDHMS hikiwatashiTimeStamp) {
+        this.hikiwatashiTimeStamp = hikiwatashiTimeStamp;
     }
 
     /**
      * 再送付区分のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：再送付区分）01：再送信、02：再送信済
-     * 
+     *
      * @return 再送付区分
      */
     public RString getSaiSoufuKubun() {
@@ -179,7 +181,7 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
      * 再送付区分のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：再送付区分）01：再送信、02：再送信済
-     * 
+     *
      * @param saiSoufuKubun 再送付区分
      */
     public void setSaiSoufuKubun(RString saiSoufuKubun) {
@@ -190,7 +192,7 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
      * 再調査送付区分のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：再調査送付区分）0：未使用、1：再送信、2：再調査、3：再調査送付済　[松本広域でのみ使用：現行]
-     * 
+     *
      * @return 再調査送付区分
      */
     public RString getSaiChousaSofuKubun() {
@@ -201,7 +203,7 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
      * 再調査送付区分のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：再調査送付区分）0：未使用、1：再送信、2：再調査、3：再調査送付済　[松本広域でのみ使用：現行]
-     * 
+     *
      * @param saiChousaSofuKubun 再調査送付区分
      */
     public void setSaiChousaSofuKubun(RString saiChousaSofuKubun) {
@@ -212,7 +214,7 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
      * 再意見書送付区分のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：再意見書送付区分）0：未使用、1：再送信、2：再意見書、3：再意見書送付済　[松本広域でのみ使用：Always]
-     * 
+     *
      * @return 再意見書送付区分
      */
     public RString getSaiIkenshoSofuKubun() {
@@ -223,7 +225,7 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
      * 再意見書送付区分のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：再意見書送付区分）0：未使用、1：再送信、2：再意見書、3：再意見書送付済　[松本広域でのみ使用：Always]
-     * 
+     *
      * @param saiIkenshoSofuKubun 再意見書送付区分
      */
     public void setSaiIkenshoSofuKubun(RString saiIkenshoSofuKubun) {
@@ -234,7 +236,7 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
      * 再イメージ送付区分のgetメソッドです。
      * <br/>
      * <br/>Enum（DBE：再イメージ送付区分）0：未使用、1：再送信、2：再イメージ、3：再イメージ送信済
-     * 
+     *
      * @return 再イメージ送付区分
      */
     public RString getSaiImageSofuKubun() {
@@ -245,7 +247,7 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
      * 再イメージ送付区分のsetメソッドです。
      * <br/>
      * <br/>Enum（DBE：再イメージ送付区分）0：未使用、1：再送信、2：再イメージ、3：再イメージ送信済
-     * 
+     *
      * @param saiImageSofuKubun 再イメージ送付区分
      */
     public void setSaiImageSofuKubun(RString saiImageSofuKubun) {
@@ -254,7 +256,7 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
 
     /**
      * 再送信年月日のgetメソッドです。
-     * 
+     *
      * @return 再送信年月日
      */
     public FlexibleDate getSaiSoshinYMD() {
@@ -263,7 +265,7 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
 
     /**
      * 再送信年月日のsetメソッドです。
-     * 
+     *
      * @param saiSoshinYMD 再送信年月日
      */
     public void setSaiSoshinYMD(FlexibleDate saiSoshinYMD) {
@@ -272,9 +274,9 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
 
     /**
      * このエンティティの主キーが他の{@literal DbT5191RenkeiyoDataSofuKirokuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5191RenkeiyoDataSofuKirokuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -299,7 +301,7 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
         this.shinseishoKanriNo = entity.shinseishoKanriNo;
         this.shiryoSakuseiYMD = entity.shiryoSakuseiYMD;
         this.hikiwatashiKubun = entity.hikiwatashiKubun;
-        this.rirekiNo = entity.rirekiNo;
+        this.hikiwatashiTimeStamp = entity.hikiwatashiTimeStamp;
         this.saiSoufuKubun = entity.saiSoufuKubun;
         this.saiChousaSofuKubun = entity.saiChousaSofuKubun;
         this.saiIkenshoSofuKubun = entity.saiIkenshoSofuKubun;
@@ -309,11 +311,12 @@ public class DbT5191RenkeiyoDataSofuKirokuEntity extends DbTableEntityBase<DbT51
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shinseishoKanriNo, shiryoSakuseiYMD, hikiwatashiKubun, rirekiNo, saiSoufuKubun, saiChousaSofuKubun, saiIkenshoSofuKubun, saiImageSofuKubun, saiSoshinYMD);
+        return super.toMd5(shinseishoKanriNo, shiryoSakuseiYMD, hikiwatashiKubun, hikiwatashiTimeStamp, saiSoufuKubun, saiChousaSofuKubun, saiIkenshoSofuKubun, saiImageSofuKubun, saiSoshinYMD);
     }
 
 // </editor-fold>

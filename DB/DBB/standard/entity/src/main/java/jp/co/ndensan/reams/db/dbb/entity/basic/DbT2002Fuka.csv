@@ -1,8 +1,8 @@
 ﻿choteiNendo,UDD012YSeireki,FlexibleYear,,,,,調定年度,A
 fukaNendo,UDD012YSeireki,FlexibleYear,,,,,賦課年度,A
-tsuchishoNo,DbUDD008TsuchishoNo,DbUDD008TsuchishoNo,,,,,通知書番号,A
+tsuchishoNo,DbUDD008TsuchishoNo,TsuchishoNo,,,,,通知書番号,A
 rirekiNo,int2,int,,,,,履歴番号,A
-hihokenshaNo,DbUDD002HihokenshaNo,DbUDD002HihokenshaNo,,,,,被保険者番号,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
 shikibetsuCode,UDD001ShikibetsuCode,ShikibetsuCode,,,,,識別コード,A
 setaiCode,UDD051SetaiCode,SetaiCode,,,,,世帯コード,A
 setaiInsu,int2,int,,,,,世帯員数,A
@@ -39,7 +39,7 @@ gemmenMaeHokenryo,numeric,Decimal,,,,,減免前介護保険料（年額）,A
 gemmenGaku,numeric,Decimal,,,,,減免額,A
 kakuteiHokenryo,numeric,Decimal,,,,,確定介護保険料（年額）,A
 hokenryoDankaiKarisanntei,varchar,RString,,,,,保険料段階（仮算定時）,A
-choshuHouhouShoriTimestamp,UDD019Timestamp,RDateTime,,,,,徴収方法処理日時,A
+choshuHohoRirekiNo,int2,int,,,,,徴収方法履歴番号,A
 idoKijunTimestamp,UDD019Timestamp,RDateTime,,,,,異動基準日時,A
 kozaKubun,varchar,RString,,,,,口座区分,A
 kyokaisoKubun,varchar,RString,,,,,境界層区分,A

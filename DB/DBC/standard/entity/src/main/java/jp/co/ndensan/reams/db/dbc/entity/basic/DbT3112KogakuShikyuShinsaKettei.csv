@@ -1,0 +1,9 @@
+﻿ketteishaUketoriYM,UDD014YM,FlexibleYearMonth,,,,,決定者受取年月,A
+shoKisaiHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,証記載保険者番号,A
+hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
+tsuchishoNo,varchar,RString,,,,,通知書番号,A
+riyoshaFutanGaku,numeric,Decimal,,,,,利用者負担額,A
+shikyuKubunCode,varchar,RString,,,,,支給区分コード,A
+ketteiYM,UDD014YM,FlexibleYearMonth,,,,,決定年月,A
+jigyoKogakuShikyuGaku,numeric,Decimal,,,,,事業高額支給額,A

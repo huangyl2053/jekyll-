@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
  *
  */
 public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901ShikakuSearchEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.7">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
     public static final RString TABLE_NAME = new RString("DbV7901ShikakuSearch");
@@ -45,9 +45,10 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     private FlexibleDate tatokureiTekiyoYMD;
     private RString tatokureiKaijoJiyuCode;
     private FlexibleDate tatokureiKaijoYMD;
+    private HihokenshaNo JukyushaDaichoHihokenshaNo;
 
     /**
-     * getShikibetsuCode
+     * shikibetsuCodeのgetメソッドです。
      *
      * @return shikibetsuCode
      */
@@ -56,7 +57,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setShikibetsuCode
+     * shikibetsuCodeのsetメソッドです。
      *
      * @param shikibetsuCode shikibetsuCode
      */
@@ -65,7 +66,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getShichosonCode
+     * shichosonCodeのgetメソッドです。
      *
      * @return shichosonCode
      */
@@ -74,7 +75,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setShichosonCode
+     * shichosonCodeのsetメソッドです。
      *
      * @param shichosonCode shichosonCode
      */
@@ -83,7 +84,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getHihokenshaNo
+     * hihokenshaNoのgetメソッドです。
      *
      * @return hihokenshaNo
      */
@@ -92,7 +93,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setHihokenshaNo
+     * hihokenshaNoのsetメソッドです。
      *
      * @param hihokenshaNo hihokenshaNo
      */
@@ -101,7 +102,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getShikakuShutokuJiyuCode
+     * shikakuShutokuJiyuCodeのgetメソッドです。
      *
      * @return shikakuShutokuJiyuCode
      */
@@ -110,7 +111,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setShikakuShutokuJiyuCode
+     * shikakuShutokuJiyuCodeのsetメソッドです。
      *
      * @param shikakuShutokuJiyuCode shikakuShutokuJiyuCode
      */
@@ -119,7 +120,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getShikakuShutokuYMD
+     * shikakuShutokuYMDのgetメソッドです。
      *
      * @return shikakuShutokuYMD
      */
@@ -128,7 +129,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setShikakuShutokuYMD
+     * shikakuShutokuYMDのsetメソッドです。
      *
      * @param shikakuShutokuYMD shikakuShutokuYMD
      */
@@ -137,7 +138,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getHihokennshaKubunCode
+     * hihokennshaKubunCodeのgetメソッドです。
      *
      * @return hihokennshaKubunCode
      */
@@ -146,7 +147,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setHihokennshaKubunCode
+     * hihokennshaKubunCodeのsetメソッドです。
      *
      * @param hihokennshaKubunCode hihokennshaKubunCode
      */
@@ -155,7 +156,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getShikakuSoshitsuJiyuCode
+     * shikakuSoshitsuJiyuCodeのgetメソッドです。
      *
      * @return shikakuSoshitsuJiyuCode
      */
@@ -164,7 +165,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setShikakuSoshitsuJiyuCode
+     * shikakuSoshitsuJiyuCodeのsetメソッドです。
      *
      * @param shikakuSoshitsuJiyuCode shikakuSoshitsuJiyuCode
      */
@@ -173,7 +174,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getShikakuSoshitsuYMD
+     * shikakuSoshitsuYMDのgetメソッドです。
      *
      * @return shikakuSoshitsuYMD
      */
@@ -182,7 +183,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setShikakuSoshitsuYMD
+     * shikakuSoshitsuYMDのsetメソッドです。
      *
      * @param shikakuSoshitsuYMD shikakuSoshitsuYMD
      */
@@ -191,7 +192,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getJushochiTokureiFlag
+     * jushochiTokureiFlagのgetメソッドです。
      *
      * @return jushochiTokureiFlag
      */
@@ -200,7 +201,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setJushochiTokureiFlag
+     * jushochiTokureiFlagのsetメソッドです。
      *
      * @param jushochiTokureiFlag jushochiTokureiFlag
      */
@@ -209,7 +210,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getShikakuHenkoJiyuCode
+     * shikakuHenkoJiyuCodeのgetメソッドです。
      *
      * @return shikakuHenkoJiyuCode
      */
@@ -218,7 +219,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setShikakuHenkoJiyuCode
+     * shikakuHenkoJiyuCodeのsetメソッドです。
      *
      * @param shikakuHenkoJiyuCode shikakuHenkoJiyuCode
      */
@@ -227,7 +228,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getShikakuHenkoYMD
+     * shikakuHenkoYMDのgetメソッドです。
      *
      * @return shikakuHenkoYMD
      */
@@ -236,7 +237,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setShikakuHenkoYMD
+     * shikakuHenkoYMDのsetメソッドです。
      *
      * @param shikakuHenkoYMD shikakuHenkoYMD
      */
@@ -245,7 +246,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getJushochitokureiTekiyoJiyuCode
+     * jushochitokureiTekiyoJiyuCodeのgetメソッドです。
      *
      * @return jushochitokureiTekiyoJiyuCode
      */
@@ -254,7 +255,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setJushochitokureiTekiyoJiyuCode
+     * jushochitokureiTekiyoJiyuCodeのsetメソッドです。
      *
      * @param jushochitokureiTekiyoJiyuCode jushochitokureiTekiyoJiyuCode
      */
@@ -263,7 +264,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getJushochitokureiTekiyoYMD
+     * jushochitokureiTekiyoYMDのgetメソッドです。
      *
      * @return jushochitokureiTekiyoYMD
      */
@@ -272,7 +273,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setJushochitokureiTekiyoYMD
+     * jushochitokureiTekiyoYMDのsetメソッドです。
      *
      * @param jushochitokureiTekiyoYMD jushochitokureiTekiyoYMD
      */
@@ -281,7 +282,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getJushochitokureiKaijoJiyuCode
+     * jushochitokureiKaijoJiyuCodeのgetメソッドです。
      *
      * @return jushochitokureiKaijoJiyuCode
      */
@@ -290,7 +291,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setJushochitokureiKaijoJiyuCode
+     * jushochitokureiKaijoJiyuCodeのsetメソッドです。
      *
      * @param jushochitokureiKaijoJiyuCode jushochitokureiKaijoJiyuCode
      */
@@ -299,7 +300,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getJushochitokureiKaijoYMD
+     * jushochitokureiKaijoYMDのgetメソッドです。
      *
      * @return jushochitokureiKaijoYMD
      */
@@ -308,7 +309,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setJushochitokureiKaijoYMD
+     * jushochitokureiKaijoYMDのsetメソッドです。
      *
      * @param jushochitokureiKaijoYMD jushochitokureiKaijoYMD
      */
@@ -317,7 +318,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getKoikinaiJushochiTokureiFlag
+     * koikinaiJushochiTokureiFlagのgetメソッドです。
      *
      * @return koikinaiJushochiTokureiFlag
      */
@@ -326,7 +327,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setKoikinaiJushochiTokureiFlag
+     * koikinaiJushochiTokureiFlagのsetメソッドです。
      *
      * @param koikinaiJushochiTokureiFlag koikinaiJushochiTokureiFlag
      */
@@ -335,7 +336,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getKoikinaiTokureiSochimotoShichosonCode
+     * koikinaiTokureiSochimotoShichosonCodeのgetメソッドです。
      *
      * @return koikinaiTokureiSochimotoShichosonCode
      */
@@ -344,7 +345,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setKoikinaiTokureiSochimotoShichosonCode
+     * koikinaiTokureiSochimotoShichosonCodeのsetメソッドです。
      *
      * @param koikinaiTokureiSochimotoShichosonCode koikinaiTokureiSochimotoShichosonCode
      */
@@ -353,7 +354,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getTekiyoJogaiTekiyoJiyuCode
+     * tekiyoJogaiTekiyoJiyuCodeのgetメソッドです。
      *
      * @return tekiyoJogaiTekiyoJiyuCode
      */
@@ -362,7 +363,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setTekiyoJogaiTekiyoJiyuCode
+     * tekiyoJogaiTekiyoJiyuCodeのsetメソッドです。
      *
      * @param tekiyoJogaiTekiyoJiyuCode tekiyoJogaiTekiyoJiyuCode
      */
@@ -371,7 +372,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getTekiyoJogaiTekiyoYMD
+     * tekiyoJogaiTekiyoYMDのgetメソッドです。
      *
      * @return tekiyoJogaiTekiyoYMD
      */
@@ -380,7 +381,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setTekiyoJogaiTekiyoYMD
+     * tekiyoJogaiTekiyoYMDのsetメソッドです。
      *
      * @param tekiyoJogaiTekiyoYMD tekiyoJogaiTekiyoYMD
      */
@@ -389,7 +390,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getTekiyoJogaikaijokaijoJiyuCode
+     * tekiyoJogaikaijokaijoJiyuCodeのgetメソッドです。
      *
      * @return tekiyoJogaikaijokaijoJiyuCode
      */
@@ -398,7 +399,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setTekiyoJogaikaijokaijoJiyuCode
+     * tekiyoJogaikaijokaijoJiyuCodeのsetメソッドです。
      *
      * @param tekiyoJogaikaijokaijoJiyuCode tekiyoJogaikaijokaijoJiyuCode
      */
@@ -407,7 +408,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getTekiyoJogaiKaijoYMD
+     * tekiyoJogaiKaijoYMDのgetメソッドです。
      *
      * @return tekiyoJogaiKaijoYMD
      */
@@ -416,7 +417,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setTekiyoJogaiKaijoYMD
+     * tekiyoJogaiKaijoYMDのsetメソッドです。
      *
      * @param tekiyoJogaiKaijoYMD tekiyoJogaiKaijoYMD
      */
@@ -425,7 +426,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getTatokureiTekiyoJiyuCode
+     * tatokureiTekiyoJiyuCodeのgetメソッドです。
      *
      * @return tatokureiTekiyoJiyuCode
      */
@@ -434,7 +435,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setTatokureiTekiyoJiyuCode
+     * tatokureiTekiyoJiyuCodeのsetメソッドです。
      *
      * @param tatokureiTekiyoJiyuCode tatokureiTekiyoJiyuCode
      */
@@ -443,7 +444,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getTatokureiTekiyoYMD
+     * tatokureiTekiyoYMDのgetメソッドです。
      *
      * @return tatokureiTekiyoYMD
      */
@@ -452,7 +453,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setTatokureiTekiyoYMD
+     * tatokureiTekiyoYMDのsetメソッドです。
      *
      * @param tatokureiTekiyoYMD tatokureiTekiyoYMD
      */
@@ -461,7 +462,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getTatokureiKaijoJiyuCode
+     * tatokureiKaijoJiyuCodeのgetメソッドです。
      *
      * @return tatokureiKaijoJiyuCode
      */
@@ -470,7 +471,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setTatokureiKaijoJiyuCode
+     * tatokureiKaijoJiyuCodeのsetメソッドです。
      *
      * @param tatokureiKaijoJiyuCode tatokureiKaijoJiyuCode
      */
@@ -479,7 +480,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * getTatokureiKaijoYMD
+     * tatokureiKaijoYMDのgetメソッドです。
      *
      * @return tatokureiKaijoYMD
      */
@@ -488,12 +489,30 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
     }
 
     /**
-     * setTatokureiKaijoYMD
+     * tatokureiKaijoYMDのsetメソッドです。
      *
      * @param tatokureiKaijoYMD tatokureiKaijoYMD
      */
     public void setTatokureiKaijoYMD(FlexibleDate tatokureiKaijoYMD) {
         this.tatokureiKaijoYMD = tatokureiKaijoYMD;
+    }
+
+    /**
+     * JukyushaDaichoHihokenshaNoのgetメソッドです。
+     *
+     * @return JukyushaDaichoHihokenshaNo
+     */
+    public HihokenshaNo getJukyushaDaichoHihokenshaNo() {
+        return JukyushaDaichoHihokenshaNo;
+    }
+
+    /**
+     * JukyushaDaichoHihokenshaNoのsetメソッドです。
+     *
+     * @param JukyushaDaichoHihokenshaNo JukyushaDaichoHihokenshaNo
+     */
+    public void setJukyushaDaichoHihokenshaNo(HihokenshaNo JukyushaDaichoHihokenshaNo) {
+        this.JukyushaDaichoHihokenshaNo = JukyushaDaichoHihokenshaNo;
     }
 
     /**
@@ -540,6 +559,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
         this.tatokureiTekiyoYMD = entity.tatokureiTekiyoYMD;
         this.tatokureiKaijoJiyuCode = entity.tatokureiKaijoJiyuCode;
         this.tatokureiKaijoYMD = entity.tatokureiKaijoYMD;
+        this.JukyushaDaichoHihokenshaNo = entity.JukyushaDaichoHihokenshaNo;
     }
 
     /**
@@ -549,7 +569,7 @@ public class DbV7901ShikakuSearchEntity extends DbTableEntityBase<DbV7901Shikaku
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shikibetsuCode, shichosonCode, hihokenshaNo, shikakuShutokuJiyuCode, shikakuShutokuYMD, hihokennshaKubunCode, shikakuSoshitsuJiyuCode, shikakuSoshitsuYMD, jushochiTokureiFlag, shikakuHenkoJiyuCode, shikakuHenkoYMD, jushochitokureiTekiyoJiyuCode, jushochitokureiTekiyoYMD, jushochitokureiKaijoJiyuCode, jushochitokureiKaijoYMD, koikinaiJushochiTokureiFlag, koikinaiTokureiSochimotoShichosonCode, tekiyoJogaiTekiyoJiyuCode, tekiyoJogaiTekiyoYMD, tekiyoJogaikaijokaijoJiyuCode, tekiyoJogaiKaijoYMD, tatokureiTekiyoJiyuCode, tatokureiTekiyoYMD, tatokureiKaijoJiyuCode, tatokureiKaijoYMD);
+        return super.toMd5(shikibetsuCode, shichosonCode, hihokenshaNo, shikakuShutokuJiyuCode, shikakuShutokuYMD, hihokennshaKubunCode, shikakuSoshitsuJiyuCode, shikakuSoshitsuYMD, jushochiTokureiFlag, shikakuHenkoJiyuCode, shikakuHenkoYMD, jushochitokureiTekiyoJiyuCode, jushochitokureiTekiyoYMD, jushochitokureiKaijoJiyuCode, jushochitokureiKaijoYMD, koikinaiJushochiTokureiFlag, koikinaiTokureiSochimotoShichosonCode, tekiyoJogaiTekiyoJiyuCode, tekiyoJogaiTekiyoYMD, tekiyoJogaikaijokaijoJiyuCode, tekiyoJogaiKaijoYMD, tatokureiTekiyoJiyuCode, tatokureiTekiyoYMD, tatokureiKaijoJiyuCode, tatokureiKaijoYMD, JukyushaDaichoHihokenshaNo);
     }
 
 // </editor-fold>

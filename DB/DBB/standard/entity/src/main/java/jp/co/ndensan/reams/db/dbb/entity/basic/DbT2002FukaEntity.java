@@ -1,26 +1,29 @@
 package jp.co.ndensan.reams.db.dbb.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import java.util.Objects;
 
 /**
  * 介護賦課テーブルのエンティティクラスです。
  */
 public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2002Fuka");
 
@@ -37,10 +40,10 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
     @PrimaryKey
     private FlexibleYear fukaNendo;
     @PrimaryKey
-    private DbUDD008TsuchishoNo tsuchishoNo;
+    private TsuchishoNo tsuchishoNo;
     @PrimaryKey
     private int rirekiNo;
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     private ShikibetsuCode shikibetsuCode;
     private SetaiCode setaiCode;
     private int setaiInsu;
@@ -77,7 +80,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
     private Decimal gemmenGaku;
     private Decimal kakuteiHokenryo;
     private RString hokenryoDankaiKarisanntei;
-    private RDateTime choshuHouhouShoriTimestamp;
+    private int choshuHohoRirekiNo;
     private RDateTime idoKijunTimestamp;
     private RString kozaKubun;
     private RString kyokaisoKubun;
@@ -86,7 +89,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -95,7 +98,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -104,7 +107,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -113,17 +116,16 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -132,7 +134,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 調定年度のgetメソッドです。
-     * 
+     *
      * @return 調定年度
      */
     public FlexibleYear getChoteiNendo() {
@@ -141,7 +143,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 調定年度のsetメソッドです。
-     * 
+     *
      * @param choteiNendo 調定年度
      */
     public void setChoteiNendo(FlexibleYear choteiNendo) {
@@ -150,7 +152,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 賦課年度のgetメソッドです。
-     * 
+     *
      * @return 賦課年度
      */
     public FlexibleYear getFukaNendo() {
@@ -159,7 +161,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 賦課年度のsetメソッドです。
-     * 
+     *
      * @param fukaNendo 賦課年度
      */
     public void setFukaNendo(FlexibleYear fukaNendo) {
@@ -168,25 +170,25 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 通知書番号のgetメソッドです。
-     * 
+     *
      * @return 通知書番号
      */
-    public DbUDD008TsuchishoNo getTsuchishoNo() {
+    public TsuchishoNo getTsuchishoNo() {
         return tsuchishoNo;
     }
 
     /**
      * 通知書番号のsetメソッドです。
-     * 
+     *
      * @param tsuchishoNo 通知書番号
      */
-    public void setTsuchishoNo(DbUDD008TsuchishoNo tsuchishoNo) {
+    public void setTsuchishoNo(TsuchishoNo tsuchishoNo) {
         this.tsuchishoNo = tsuchishoNo;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -195,7 +197,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -204,25 +206,25 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 識別コードのgetメソッドです。
-     * 
+     *
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -231,7 +233,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 識別コードのsetメソッドです。
-     * 
+     *
      * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -240,7 +242,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 世帯コードのgetメソッドです。
-     * 
+     *
      * @return 世帯コード
      */
     public SetaiCode getSetaiCode() {
@@ -249,7 +251,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 世帯コードのsetメソッドです。
-     * 
+     *
      * @param setaiCode 世帯コード
      */
     public void setSetaiCode(SetaiCode setaiCode) {
@@ -258,7 +260,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 世帯員数のgetメソッドです。
-     * 
+     *
      * @return 世帯員数
      */
     public int getSetaiInsu() {
@@ -267,7 +269,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 世帯員数のsetメソッドです。
-     * 
+     *
      * @param setaiInsu 世帯員数
      */
     public void setSetaiInsu(int setaiInsu) {
@@ -276,7 +278,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 資格取得日のgetメソッドです。
-     * 
+     *
      * @return 資格取得日
      */
     public FlexibleDate getShikakuShutokuYMD() {
@@ -285,7 +287,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 資格取得日のsetメソッドです。
-     * 
+     *
      * @param shikakuShutokuYMD 資格取得日
      */
     public void setShikakuShutokuYMD(FlexibleDate shikakuShutokuYMD) {
@@ -294,7 +296,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 資格取得事由のgetメソッドです。
-     * 
+     *
      * @return 資格取得事由
      */
     public RString getShikakuShutokuJiyu() {
@@ -303,7 +305,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 資格取得事由のsetメソッドです。
-     * 
+     *
      * @param shikakuShutokuJiyu 資格取得事由
      */
     public void setShikakuShutokuJiyu(RString shikakuShutokuJiyu) {
@@ -312,7 +314,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 資格喪失日のgetメソッドです。
-     * 
+     *
      * @return 資格喪失日
      */
     public FlexibleDate getShikakuSoshitsuYMD() {
@@ -321,7 +323,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 資格喪失日のsetメソッドです。
-     * 
+     *
      * @param shikakuSoshitsuYMD 資格喪失日
      */
     public void setShikakuSoshitsuYMD(FlexibleDate shikakuSoshitsuYMD) {
@@ -330,7 +332,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 資格喪失事由のgetメソッドです。
-     * 
+     *
      * @return 資格喪失事由
      */
     public RString getShikakuSoshitsuJiyu() {
@@ -339,7 +341,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 資格喪失事由のsetメソッドです。
-     * 
+     *
      * @param shikakuSoshitsuJiyu 資格喪失事由
      */
     public void setShikakuSoshitsuJiyu(RString shikakuSoshitsuJiyu) {
@@ -348,7 +350,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 生活保護扶助種類のgetメソッドです。
-     * 
+     *
      * @return 生活保護扶助種類
      */
     public RString getSeihofujoShurui() {
@@ -357,7 +359,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 生活保護扶助種類のsetメソッドです。
-     * 
+     *
      * @param seihofujoShurui 生活保護扶助種類
      */
     public void setSeihofujoShurui(RString seihofujoShurui) {
@@ -366,7 +368,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 生保開始日のgetメソッドです。
-     * 
+     *
      * @return 生保開始日
      */
     public FlexibleDate getSeihoKaishiYMD() {
@@ -375,7 +377,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 生保開始日のsetメソッドです。
-     * 
+     *
      * @param seihoKaishiYMD 生保開始日
      */
     public void setSeihoKaishiYMD(FlexibleDate seihoKaishiYMD) {
@@ -384,7 +386,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 生保廃止日のgetメソッドです。
-     * 
+     *
      * @return 生保廃止日
      */
     public FlexibleDate getSeihoHaishiYMD() {
@@ -393,7 +395,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 生保廃止日のsetメソッドです。
-     * 
+     *
      * @param seihoHaishiYMD 生保廃止日
      */
     public void setSeihoHaishiYMD(FlexibleDate seihoHaishiYMD) {
@@ -402,7 +404,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 老年開始日のgetメソッドです。
-     * 
+     *
      * @return 老年開始日
      */
     public FlexibleDate getRonenKaishiYMD() {
@@ -411,7 +413,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 老年開始日のsetメソッドです。
-     * 
+     *
      * @param ronenKaishiYMD 老年開始日
      */
     public void setRonenKaishiYMD(FlexibleDate ronenKaishiYMD) {
@@ -420,7 +422,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 老年廃止日のgetメソッドです。
-     * 
+     *
      * @return 老年廃止日
      */
     public FlexibleDate getRonenHaishiYMD() {
@@ -429,7 +431,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 老年廃止日のsetメソッドです。
-     * 
+     *
      * @param ronenHaishiYMD 老年廃止日
      */
     public void setRonenHaishiYMD(FlexibleDate ronenHaishiYMD) {
@@ -438,7 +440,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 賦課期日のgetメソッドです。
-     * 
+     *
      * @return 賦課期日
      */
     public FlexibleDate getFukaYMD() {
@@ -447,7 +449,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 賦課期日のsetメソッドです。
-     * 
+     *
      * @param fukaYMD 賦課期日
      */
     public void setFukaYMD(FlexibleDate fukaYMD) {
@@ -456,7 +458,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 課税区分のgetメソッドです。
-     * 
+     *
      * @return 課税区分
      */
     public RString getKazeiKubun() {
@@ -465,7 +467,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 課税区分のsetメソッドです。
-     * 
+     *
      * @param kazeiKubun 課税区分
      */
     public void setKazeiKubun(RString kazeiKubun) {
@@ -474,7 +476,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 世帯課税区分のgetメソッドです。
-     * 
+     *
      * @return 世帯課税区分
      */
     public RString getSetaikazeiKubun() {
@@ -483,7 +485,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 世帯課税区分のsetメソッドです。
-     * 
+     *
      * @param setaikazeiKubun 世帯課税区分
      */
     public void setSetaikazeiKubun(RString setaikazeiKubun) {
@@ -494,7 +496,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * 合計所得金額のgetメソッドです。
      * <br/>
      * <br/>マイナスの場合はゼロで管理
-     * 
+     *
      * @return 合計所得金額
      */
     public Decimal getGokeiShotokuGaku() {
@@ -505,7 +507,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * 合計所得金額のsetメソッドです。
      * <br/>
      * <br/>マイナスの場合はゼロで管理
-     * 
+     *
      * @param gokeiShotokuGaku 合計所得金額
      */
     public void setGokeiShotokuGaku(Decimal gokeiShotokuGaku) {
@@ -514,7 +516,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 公的年金収入額のgetメソッドです。
-     * 
+     *
      * @return 公的年金収入額
      */
     public Decimal getNenkinShunyuGaku() {
@@ -523,7 +525,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 公的年金収入額のsetメソッドです。
-     * 
+     *
      * @param nenkinShunyuGaku 公的年金収入額
      */
     public void setNenkinShunyuGaku(Decimal nenkinShunyuGaku) {
@@ -534,7 +536,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * 保険料段階のgetメソッドです。
      * <br/>
      * <br/>システムで管理する保険料段階
-     * 
+     *
      * @return 保険料段階
      */
     public RString getHokenryoDankai() {
@@ -545,7 +547,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * 保険料段階のsetメソッドです。
      * <br/>
      * <br/>システムで管理する保険料段階
-     * 
+     *
      * @param hokenryoDankai 保険料段階
      */
     public void setHokenryoDankai(RString hokenryoDankai) {
@@ -556,7 +558,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * 保険料算定段階1のgetメソッドです。
      * <br/>
      * <br/>内部コードで管理
-     * 
+     *
      * @return 保険料算定段階1
      */
     public RString getHokenryoDankai1() {
@@ -567,7 +569,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * 保険料算定段階1のsetメソッドです。
      * <br/>
      * <br/>内部コードで管理
-     * 
+     *
      * @param hokenryoDankai1 保険料算定段階1
      */
     public void setHokenryoDankai1(RString hokenryoDankai1) {
@@ -576,7 +578,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 算定年額保険料1のgetメソッドです。
-     * 
+     *
      * @return 算定年額保険料1
      */
     public Decimal getNengakuHokenryo1() {
@@ -585,7 +587,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 算定年額保険料1のsetメソッドです。
-     * 
+     *
      * @param nengakuHokenryo1 算定年額保険料1
      */
     public void setNengakuHokenryo1(Decimal nengakuHokenryo1) {
@@ -594,7 +596,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 月割開始年月1のgetメソッドです。
-     * 
+     *
      * @return 月割開始年月1
      */
     public FlexibleYearMonth getTsukiwariStartYM1() {
@@ -603,7 +605,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 月割開始年月1のsetメソッドです。
-     * 
+     *
      * @param tsukiwariStartYM1 月割開始年月1
      */
     public void setTsukiwariStartYM1(FlexibleYearMonth tsukiwariStartYM1) {
@@ -612,7 +614,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 月割終了年月1のgetメソッドです。
-     * 
+     *
      * @return 月割終了年月1
      */
     public FlexibleYearMonth getTsukiwariEndYM1() {
@@ -621,7 +623,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 月割終了年月1のsetメソッドです。
-     * 
+     *
      * @param tsukiwariEndYM1 月割終了年月1
      */
     public void setTsukiwariEndYM1(FlexibleYearMonth tsukiwariEndYM1) {
@@ -632,7 +634,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * 保険料算定段階2のgetメソッドです。
      * <br/>
      * <br/>内部コードで管理
-     * 
+     *
      * @return 保険料算定段階2
      */
     public RString getHokenryoDankai2() {
@@ -643,7 +645,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * 保険料算定段階2のsetメソッドです。
      * <br/>
      * <br/>内部コードで管理
-     * 
+     *
      * @param hokenryoDankai2 保険料算定段階2
      */
     public void setHokenryoDankai2(RString hokenryoDankai2) {
@@ -652,7 +654,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 算定年額保険料2のgetメソッドです。
-     * 
+     *
      * @return 算定年額保険料2
      */
     public Decimal getNengakuHokenryo2() {
@@ -661,7 +663,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 算定年額保険料2のsetメソッドです。
-     * 
+     *
      * @param nengakuHokenryo2 算定年額保険料2
      */
     public void setNengakuHokenryo2(Decimal nengakuHokenryo2) {
@@ -670,7 +672,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 月割開始年月2のgetメソッドです。
-     * 
+     *
      * @return 月割開始年月2
      */
     public FlexibleYearMonth getTsukiwariStartYM2() {
@@ -679,7 +681,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 月割開始年月2のsetメソッドです。
-     * 
+     *
      * @param tsukiwariStartYM2 月割開始年月2
      */
     public void setTsukiwariStartYM2(FlexibleYearMonth tsukiwariStartYM2) {
@@ -688,7 +690,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 月割終了年月2のgetメソッドです。
-     * 
+     *
      * @return 月割終了年月2
      */
     public FlexibleYearMonth getTsukiwariEndYM2() {
@@ -697,7 +699,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 月割終了年月2のsetメソッドです。
-     * 
+     *
      * @param tsukiwariEndYM2 月割終了年月2
      */
     public void setTsukiwariEndYM2(FlexibleYearMonth tsukiwariEndYM2) {
@@ -706,7 +708,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 調定日時のgetメソッドです。
-     * 
+     *
      * @return 調定日時
      */
     public RDateTime getChoteiTimestamp() {
@@ -715,7 +717,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 調定日時のsetメソッドです。
-     * 
+     *
      * @param choteiTimestamp 調定日時
      */
     public void setChoteiTimestamp(RDateTime choteiTimestamp) {
@@ -724,7 +726,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 調定事由1のgetメソッドです。
-     * 
+     *
      * @return 調定事由1
      */
     public RString getChoteiJiyu1() {
@@ -733,7 +735,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 調定事由1のsetメソッドです。
-     * 
+     *
      * @param choteiJiyu1 調定事由1
      */
     public void setChoteiJiyu1(RString choteiJiyu1) {
@@ -742,7 +744,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 調定事由2のgetメソッドです。
-     * 
+     *
      * @return 調定事由2
      */
     public RString getChoteiJiyu2() {
@@ -751,7 +753,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 調定事由2のsetメソッドです。
-     * 
+     *
      * @param choteiJiyu2 調定事由2
      */
     public void setChoteiJiyu2(RString choteiJiyu2) {
@@ -760,7 +762,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 調定事由3のgetメソッドです。
-     * 
+     *
      * @return 調定事由3
      */
     public RString getChoteiJiyu3() {
@@ -769,7 +771,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 調定事由3のsetメソッドです。
-     * 
+     *
      * @param choteiJiyu3 調定事由3
      */
     public void setChoteiJiyu3(RString choteiJiyu3) {
@@ -778,7 +780,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 調定事由4のgetメソッドです。
-     * 
+     *
      * @return 調定事由4
      */
     public RString getChoteiJiyu4() {
@@ -787,7 +789,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 調定事由4のsetメソッドです。
-     * 
+     *
      * @param choteiJiyu4 調定事由4
      */
     public void setChoteiJiyu4(RString choteiJiyu4) {
@@ -796,7 +798,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 更正月のgetメソッドです。
-     * 
+     *
      * @return 更正月
      */
     public RString getKoseiM() {
@@ -805,7 +807,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 更正月のsetメソッドです。
-     * 
+     *
      * @param koseiM 更正月
      */
     public void setKoseiM(RString koseiM) {
@@ -814,7 +816,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 減免前介護保険料（年額）のgetメソッドです。
-     * 
+     *
      * @return 減免前介護保険料（年額）
      */
     public Decimal getGemmenMaeHokenryo() {
@@ -823,7 +825,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 減免前介護保険料（年額）のsetメソッドです。
-     * 
+     *
      * @param gemmenMaeHokenryo 減免前介護保険料（年額）
      */
     public void setGemmenMaeHokenryo(Decimal gemmenMaeHokenryo) {
@@ -832,7 +834,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 減免額のgetメソッドです。
-     * 
+     *
      * @return 減免額
      */
     public Decimal getGemmenGaku() {
@@ -841,7 +843,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 減免額のsetメソッドです。
-     * 
+     *
      * @param gemmenGaku 減免額
      */
     public void setGemmenGaku(Decimal gemmenGaku) {
@@ -850,7 +852,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 確定介護保険料（年額）のgetメソッドです。
-     * 
+     *
      * @return 確定介護保険料（年額）
      */
     public Decimal getKakuteiHokenryo() {
@@ -859,7 +861,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 確定介護保険料（年額）のsetメソッドです。
-     * 
+     *
      * @param kakuteiHokenryo 確定介護保険料（年額）
      */
     public void setKakuteiHokenryo(Decimal kakuteiHokenryo) {
@@ -870,7 +872,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * 保険料段階（仮算定時）のgetメソッドです。
      * <br/>
      * <br/>内部コードで管理
-     * 
+     *
      * @return 保険料段階（仮算定時）
      */
     public RString getHokenryoDankaiKarisanntei() {
@@ -881,7 +883,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * 保険料段階（仮算定時）のsetメソッドです。
      * <br/>
      * <br/>内部コードで管理
-     * 
+     *
      * @param hokenryoDankaiKarisanntei 保険料段階（仮算定時）
      */
     public void setHokenryoDankaiKarisanntei(RString hokenryoDankaiKarisanntei) {
@@ -889,26 +891,26 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
     }
 
     /**
-     * 徴収方法処理日時のgetメソッドです。
-     * 
-     * @return 徴収方法処理日時
+     * 徴収方法履歴番号のgetメソッドです。
+     *
+     * @return 徴収方法履歴番号
      */
-    public RDateTime getChoshuHouhouShoriTimestamp() {
-        return choshuHouhouShoriTimestamp;
+    public int getChoshuHohoRirekiNo() {
+        return choshuHohoRirekiNo;
     }
 
     /**
-     * 徴収方法処理日時のsetメソッドです。
-     * 
-     * @param choshuHouhouShoriTimestamp 徴収方法処理日時
+     * 徴収方法履歴番号のsetメソッドです。
+     *
+     * @param choshuHohoRirekiNo 徴収方法履歴番号
      */
-    public void setChoshuHouhouShoriTimestamp(RDateTime choshuHouhouShoriTimestamp) {
-        this.choshuHouhouShoriTimestamp = choshuHouhouShoriTimestamp;
+    public void setChoshuHohoRirekiNo(int choshuHohoRirekiNo) {
+        this.choshuHohoRirekiNo = choshuHohoRirekiNo;
     }
 
     /**
      * 異動基準日時のgetメソッドです。
-     * 
+     *
      * @return 異動基準日時
      */
     public RDateTime getIdoKijunTimestamp() {
@@ -917,7 +919,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 異動基準日時のsetメソッドです。
-     * 
+     *
      * @param idoKijunTimestamp 異動基準日時
      */
     public void setIdoKijunTimestamp(RDateTime idoKijunTimestamp) {
@@ -928,7 +930,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * 口座区分のgetメソッドです。
      * <br/>
      * <br/>1：該当　0:非該当
-     * 
+     *
      * @return 口座区分
      */
     public RString getKozaKubun() {
@@ -939,7 +941,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * 口座区分のsetメソッドです。
      * <br/>
      * <br/>1：該当　0:非該当
-     * 
+     *
      * @param kozaKubun 口座区分
      */
     public void setKozaKubun(RString kozaKubun) {
@@ -950,7 +952,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * 境界層区分のgetメソッドです。
      * <br/>
      * <br/>1：該当　0:非該当
-     * 
+     *
      * @return 境界層区分
      */
     public RString getKyokaisoKubun() {
@@ -961,7 +963,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * 境界層区分のsetメソッドです。
      * <br/>
      * <br/>1：該当　0:非該当
-     * 
+     *
      * @param kyokaisoKubun 境界層区分
      */
     public void setKyokaisoKubun(RString kyokaisoKubun) {
@@ -972,7 +974,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * 職権区分のgetメソッドです。
      * <br/>
      * <br/>1：該当　0:非該当
-     * 
+     *
      * @return 職権区分
      */
     public RString getShokkenKubun() {
@@ -983,7 +985,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
      * 職権区分のsetメソッドです。
      * <br/>
      * <br/>1：該当　0:非該当
-     * 
+     *
      * @param shokkenKubun 職権区分
      */
     public void setShokkenKubun(RString shokkenKubun) {
@@ -992,7 +994,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 賦課市町村コードのgetメソッドです。
-     * 
+     *
      * @return 賦課市町村コード
      */
     public LasdecCode getFukaShichosonCode() {
@@ -1001,7 +1003,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * 賦課市町村コードのsetメソッドです。
-     * 
+     *
      * @param fukaShichosonCode 賦課市町村コード
      */
     public void setFukaShichosonCode(LasdecCode fukaShichosonCode) {
@@ -1010,10 +1012,9 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * このエンティティの主キーが他の{@literal DbT2002FukaEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT2002FukaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2002FukaEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2002FukaEntity other) {
@@ -1081,7 +1082,7 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
         this.gemmenGaku = entity.gemmenGaku;
         this.kakuteiHokenryo = entity.kakuteiHokenryo;
         this.hokenryoDankaiKarisanntei = entity.hokenryoDankaiKarisanntei;
-        this.choshuHouhouShoriTimestamp = entity.choshuHouhouShoriTimestamp;
+        this.choshuHohoRirekiNo = entity.choshuHohoRirekiNo;
         this.idoKijunTimestamp = entity.idoKijunTimestamp;
         this.kozaKubun = entity.kozaKubun;
         this.kyokaisoKubun = entity.kyokaisoKubun;
@@ -1091,11 +1092,12 @@ public class DbT2002FukaEntity extends DbTableEntityBase<DbT2002FukaEntity> impl
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(choteiNendo, fukaNendo, tsuchishoNo, rirekiNo, hihokenshaNo, shikibetsuCode, setaiCode, setaiInsu, shikakuShutokuYMD, shikakuShutokuJiyu, shikakuSoshitsuYMD, shikakuSoshitsuJiyu, seihofujoShurui, seihoKaishiYMD, seihoHaishiYMD, ronenKaishiYMD, ronenHaishiYMD, fukaYMD, kazeiKubun, setaikazeiKubun, gokeiShotokuGaku, nenkinShunyuGaku, hokenryoDankai, hokenryoDankai1, nengakuHokenryo1, tsukiwariStartYM1, tsukiwariEndYM1, hokenryoDankai2, nengakuHokenryo2, tsukiwariStartYM2, tsukiwariEndYM2, choteiTimestamp, choteiJiyu1, choteiJiyu2, choteiJiyu3, choteiJiyu4, koseiM, gemmenMaeHokenryo, gemmenGaku, kakuteiHokenryo, hokenryoDankaiKarisanntei, choshuHouhouShoriTimestamp, idoKijunTimestamp, kozaKubun, kyokaisoKubun, shokkenKubun, fukaShichosonCode);
+        return super.toMd5(choteiNendo, fukaNendo, tsuchishoNo, rirekiNo, hihokenshaNo, shikibetsuCode, setaiCode, setaiInsu, shikakuShutokuYMD, shikakuShutokuJiyu, shikakuSoshitsuYMD, shikakuSoshitsuJiyu, seihofujoShurui, seihoKaishiYMD, seihoHaishiYMD, ronenKaishiYMD, ronenHaishiYMD, fukaYMD, kazeiKubun, setaikazeiKubun, gokeiShotokuGaku, nenkinShunyuGaku, hokenryoDankai, hokenryoDankai1, nengakuHokenryo1, tsukiwariStartYM1, tsukiwariEndYM1, hokenryoDankai2, nengakuHokenryo2, tsukiwariStartYM2, tsukiwariEndYM2, choteiTimestamp, choteiJiyu1, choteiJiyu2, choteiJiyu3, choteiJiyu4, koseiM, gemmenMaeHokenryo, gemmenGaku, kakuteiHokenryo, hokenryoDankaiKarisanntei, choshuHohoRirekiNo, idoKijunTimestamp, kozaKubun, kyokaisoKubun, shokkenKubun, fukaShichosonCode);
     }
 
 // </editor-fold>

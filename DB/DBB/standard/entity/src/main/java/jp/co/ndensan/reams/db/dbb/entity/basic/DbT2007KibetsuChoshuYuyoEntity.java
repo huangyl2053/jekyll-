@@ -1,21 +1,23 @@
 package jp.co.ndensan.reams.db.dbb.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import java.util.Objects;
 
 /**
  * 介護期別徴収猶予テーブルのエンティティクラスです。
  */
 public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007KibetsuChoshuYuyoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2007KibetsuChoshuYuyo");
 
@@ -32,7 +34,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
     @PrimaryKey
     private FlexibleYear fukaNendo;
     @PrimaryKey
-    private DbUDD008TsuchishoNo tsuchishoNo;
+    private TsuchishoNo tsuchishoNo;
     @PrimaryKey
     private int rirekiNo;
     @PrimaryKey
@@ -44,7 +46,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -53,7 +55,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -62,7 +64,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -71,17 +73,16 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -90,7 +91,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * 調定年度のgetメソッドです。
-     * 
+     *
      * @return 調定年度
      */
     public FlexibleYear getChoteiNendo() {
@@ -99,7 +100,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * 調定年度のsetメソッドです。
-     * 
+     *
      * @param choteiNendo 調定年度
      */
     public void setChoteiNendo(FlexibleYear choteiNendo) {
@@ -108,7 +109,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * 賦課年度のgetメソッドです。
-     * 
+     *
      * @return 賦課年度
      */
     public FlexibleYear getFukaNendo() {
@@ -117,7 +118,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * 賦課年度のsetメソッドです。
-     * 
+     *
      * @param fukaNendo 賦課年度
      */
     public void setFukaNendo(FlexibleYear fukaNendo) {
@@ -126,25 +127,25 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * 通知書番号のgetメソッドです。
-     * 
+     *
      * @return 通知書番号
      */
-    public DbUDD008TsuchishoNo getTsuchishoNo() {
+    public TsuchishoNo getTsuchishoNo() {
         return tsuchishoNo;
     }
 
     /**
      * 通知書番号のsetメソッドです。
-     * 
+     *
      * @param tsuchishoNo 通知書番号
      */
-    public void setTsuchishoNo(DbUDD008TsuchishoNo tsuchishoNo) {
+    public void setTsuchishoNo(TsuchishoNo tsuchishoNo) {
         this.tsuchishoNo = tsuchishoNo;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -153,7 +154,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -162,7 +163,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * 徴収方法のgetメソッドです。
-     * 
+     *
      * @return 徴収方法
      */
     public RString getChoshuHoho() {
@@ -171,7 +172,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * 徴収方法のsetメソッドです。
-     * 
+     *
      * @param choshuHoho 徴収方法
      */
     public void setChoshuHoho(RString choshuHoho) {
@@ -180,7 +181,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * 期のgetメソッドです。
-     * 
+     *
      * @return 期
      */
     public int getKi() {
@@ -189,7 +190,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * 期のsetメソッドです。
-     * 
+     *
      * @param ki 期
      */
     public void setKi(int ki) {
@@ -198,7 +199,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * 徴収猶予開始日のgetメソッドです。
-     * 
+     *
      * @return 徴収猶予開始日
      */
     public FlexibleDate getYuyoStartYMD() {
@@ -207,7 +208,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * 徴収猶予開始日のsetメソッドです。
-     * 
+     *
      * @param yuyoStartYMD 徴収猶予開始日
      */
     public void setYuyoStartYMD(FlexibleDate yuyoStartYMD) {
@@ -216,7 +217,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * 徴収猶予終了日のgetメソッドです。
-     * 
+     *
      * @return 徴収猶予終了日
      */
     public FlexibleDate getYuyoEndYMD() {
@@ -225,7 +226,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * 徴収猶予終了日のsetメソッドです。
-     * 
+     *
      * @param yuyoEndYMD 徴収猶予終了日
      */
     public void setYuyoEndYMD(FlexibleDate yuyoEndYMD) {
@@ -234,10 +235,9 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * このエンティティの主キーが他の{@literal DbT2007KibetsuChoshuYuyoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT2007KibetsuChoshuYuyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2007KibetsuChoshuYuyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2007KibetsuChoshuYuyoEntity other) {
@@ -282,6 +282,7 @@ public class DbT2007KibetsuChoshuYuyoEntity extends DbTableEntityBase<DbT2007Kib
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

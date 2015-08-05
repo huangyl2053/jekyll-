@@ -1,21 +1,23 @@
 package jp.co.ndensan.reams.db.dbb.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.util.Objects;
 
 /**
  * 介護期別テーブルのエンティティクラスです。
  */
 public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2003Kibetsu");
 
@@ -32,7 +34,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
     @PrimaryKey
     private FlexibleYear fukaNendo;
     @PrimaryKey
-    private DbUDD008TsuchishoNo tsuchishoNo;
+    private TsuchishoNo tsuchishoNo;
     @PrimaryKey
     private int rirekiNo;
     @PrimaryKey
@@ -43,7 +45,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -52,7 +54,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -61,7 +63,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -70,17 +72,16 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -89,7 +90,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * 調定年度のgetメソッドです。
-     * 
+     *
      * @return 調定年度
      */
     public FlexibleYear getChoteiNendo() {
@@ -98,7 +99,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * 調定年度のsetメソッドです。
-     * 
+     *
      * @param choteiNendo 調定年度
      */
     public void setChoteiNendo(FlexibleYear choteiNendo) {
@@ -107,7 +108,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * 賦課年度のgetメソッドです。
-     * 
+     *
      * @return 賦課年度
      */
     public FlexibleYear getFukaNendo() {
@@ -116,7 +117,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * 賦課年度のsetメソッドです。
-     * 
+     *
      * @param fukaNendo 賦課年度
      */
     public void setFukaNendo(FlexibleYear fukaNendo) {
@@ -125,25 +126,25 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * 通知書番号のgetメソッドです。
-     * 
+     *
      * @return 通知書番号
      */
-    public DbUDD008TsuchishoNo getTsuchishoNo() {
+    public TsuchishoNo getTsuchishoNo() {
         return tsuchishoNo;
     }
 
     /**
      * 通知書番号のsetメソッドです。
-     * 
+     *
      * @param tsuchishoNo 通知書番号
      */
-    public void setTsuchishoNo(DbUDD008TsuchishoNo tsuchishoNo) {
+    public void setTsuchishoNo(TsuchishoNo tsuchishoNo) {
         this.tsuchishoNo = tsuchishoNo;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -152,7 +153,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -161,7 +162,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * 徴収方法のgetメソッドです。
-     * 
+     *
      * @return 徴収方法
      */
     public RString getChoshuHouhou() {
@@ -170,7 +171,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * 徴収方法のsetメソッドです。
-     * 
+     *
      * @param choshuHouhou 徴収方法
      */
     public void setChoshuHouhou(RString choshuHouhou) {
@@ -179,7 +180,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * 期のgetメソッドです。
-     * 
+     *
      * @return 期
      */
     public int getKi() {
@@ -188,7 +189,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * 期のsetメソッドです。
-     * 
+     *
      * @param ki 期
      */
     public void setKi(int ki) {
@@ -197,7 +198,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * 調定IDのgetメソッドです。
-     * 
+     *
      * @return 調定ID
      */
     public Decimal getChoteiId() {
@@ -206,7 +207,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * 調定IDのsetメソッドです。
-     * 
+     *
      * @param choteiId 調定ID
      */
     public void setChoteiId(Decimal choteiId) {
@@ -215,10 +216,9 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * このエンティティの主キーが他の{@literal DbT2003KibetsuEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT2003KibetsuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2003KibetsuEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2003KibetsuEntity other) {
@@ -262,6 +262,7 @@ public class DbT2003KibetsuEntity extends DbTableEntityBase<DbT2003KibetsuEntity
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

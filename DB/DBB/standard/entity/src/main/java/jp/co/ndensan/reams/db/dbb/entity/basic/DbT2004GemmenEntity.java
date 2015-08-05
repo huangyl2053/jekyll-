@@ -1,23 +1,25 @@
 package jp.co.ndensan.reams.db.dbb.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import java.util.Objects;
+import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.util.Objects;
 
 /**
  * 介護賦課減免テーブルのエンティティクラスです。
  */
 public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT2004Gemmen");
 
@@ -34,7 +36,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
     @PrimaryKey
     private FlexibleYear fukaNendo;
     @PrimaryKey
-    private DbUDD008TsuchishoNo tsuchishoNo;
+    private TsuchishoNo tsuchishoNo;
     @PrimaryKey
     private int rirekiNo;
     private FlexibleDate shinseiYMD;
@@ -53,7 +55,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -62,7 +64,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -71,7 +73,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -80,17 +82,16 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -99,7 +100,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 調定年度のgetメソッドです。
-     * 
+     *
      * @return 調定年度
      */
     public FlexibleYear getChoteiNendo() {
@@ -108,7 +109,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 調定年度のsetメソッドです。
-     * 
+     *
      * @param choteiNendo 調定年度
      */
     public void setChoteiNendo(FlexibleYear choteiNendo) {
@@ -117,7 +118,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 賦課年度のgetメソッドです。
-     * 
+     *
      * @return 賦課年度
      */
     public FlexibleYear getFukaNendo() {
@@ -126,7 +127,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 賦課年度のsetメソッドです。
-     * 
+     *
      * @param fukaNendo 賦課年度
      */
     public void setFukaNendo(FlexibleYear fukaNendo) {
@@ -135,25 +136,25 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 通知書番号のgetメソッドです。
-     * 
+     *
      * @return 通知書番号
      */
-    public DbUDD008TsuchishoNo getTsuchishoNo() {
+    public TsuchishoNo getTsuchishoNo() {
         return tsuchishoNo;
     }
 
     /**
      * 通知書番号のsetメソッドです。
-     * 
+     *
      * @param tsuchishoNo 通知書番号
      */
-    public void setTsuchishoNo(DbUDD008TsuchishoNo tsuchishoNo) {
+    public void setTsuchishoNo(TsuchishoNo tsuchishoNo) {
         this.tsuchishoNo = tsuchishoNo;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -162,7 +163,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -171,7 +172,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 減免申請日のgetメソッドです。
-     * 
+     *
      * @return 減免申請日
      */
     public FlexibleDate getShinseiYMD() {
@@ -180,7 +181,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 減免申請日のsetメソッドです。
-     * 
+     *
      * @param shinseiYMD 減免申請日
      */
     public void setShinseiYMD(FlexibleDate shinseiYMD) {
@@ -189,7 +190,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 減免決定日のgetメソッドです。
-     * 
+     *
      * @return 減免決定日
      */
     public FlexibleDate getKetteiYMD() {
@@ -198,7 +199,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 減免決定日のsetメソッドです。
-     * 
+     *
      * @param ketteiYMD 減免決定日
      */
     public void setKetteiYMD(FlexibleDate ketteiYMD) {
@@ -207,7 +208,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 減免取消日のgetメソッドです。
-     * 
+     *
      * @return 減免取消日
      */
     public FlexibleDate getTorikeshiYMD() {
@@ -216,7 +217,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 減免取消日のsetメソッドです。
-     * 
+     *
      * @param torikeshiYMD 減免取消日
      */
     public void setTorikeshiYMD(FlexibleDate torikeshiYMD) {
@@ -227,7 +228,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
      * 減免状態区分のgetメソッドです。
      * <br/>
      * <br/>0:申請　1:決定(承認)　2:決定(不承認)　3:取消　9:論理削除
-     * 
+     *
      * @return 減免状態区分
      */
     public RString getJotaiKubun() {
@@ -238,7 +239,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
      * 減免状態区分のsetメソッドです。
      * <br/>
      * <br/>0:申請　1:決定(承認)　2:決定(不承認)　3:取消　9:論理削除
-     * 
+     *
      * @param jotaiKubun 減免状態区分
      */
     public void setJotaiKubun(RString jotaiKubun) {
@@ -249,7 +250,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
      * 減免作成区分のgetメソッドです。
      * <br/>
      * <br/>0:申請　1:決定(承認)　2:決定(不承認)　3:取消　4:訂正　9:論理削除
-     * 
+     *
      * @return 減免作成区分
      */
     public RString getSakuseiKubun() {
@@ -260,7 +261,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
      * 減免作成区分のsetメソッドです。
      * <br/>
      * <br/>0:申請　1:決定(承認)　2:決定(不承認)　3:取消　4:訂正　9:論理削除
-     * 
+     *
      * @param sakuseiKubun 減免作成区分
      */
     public void setSakuseiKubun(RString sakuseiKubun) {
@@ -269,7 +270,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 申請事由のgetメソッドです。
-     * 
+     *
      * @return 申請事由
      */
     public RString getShinseiJiyu() {
@@ -278,7 +279,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 申請事由のsetメソッドです。
-     * 
+     *
      * @param shinseiJiyu 申請事由
      */
     public void setShinseiJiyu(RString shinseiJiyu) {
@@ -287,7 +288,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 減免種類コードのgetメソッドです。
-     * 
+     *
      * @return 減免種類コード
      */
     public Code getGemmenJiyuCode() {
@@ -296,7 +297,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 減免種類コードのsetメソッドです。
-     * 
+     *
      * @param gemmenJiyuCode 減免種類コード
      */
     public void setGemmenJiyuCode(Code gemmenJiyuCode) {
@@ -305,7 +306,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 減免事由のgetメソッドです。
-     * 
+     *
      * @return 減免事由
      */
     public RString getGemmenJiyu() {
@@ -314,7 +315,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 減免事由のsetメソッドです。
-     * 
+     *
      * @param gemmenJiyu 減免事由
      */
     public void setGemmenJiyu(RString gemmenJiyu) {
@@ -323,7 +324,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 減免取消種類コードのgetメソッドです。
-     * 
+     *
      * @return 減免取消種類コード
      */
     public Code getGemmenTorikeshiJiyuCode() {
@@ -332,7 +333,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 減免取消種類コードのsetメソッドです。
-     * 
+     *
      * @param gemmenTorikeshiJiyuCode 減免取消種類コード
      */
     public void setGemmenTorikeshiJiyuCode(Code gemmenTorikeshiJiyuCode) {
@@ -341,7 +342,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 減免取消事由のgetメソッドです。
-     * 
+     *
      * @return 減免取消事由
      */
     public RString getGemmenTorikeshiJiyu() {
@@ -350,7 +351,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 減免取消事由のsetメソッドです。
-     * 
+     *
      * @param gemmenTorikeshiJiyu 減免取消事由
      */
     public void setGemmenTorikeshiJiyu(RString gemmenTorikeshiJiyu) {
@@ -359,7 +360,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 申請減免額のgetメソッドです。
-     * 
+     *
      * @return 申請減免額
      */
     public Decimal getShinseiGemmenGaku() {
@@ -368,7 +369,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 申請減免額のsetメソッドです。
-     * 
+     *
      * @param shinseiGemmenGaku 申請減免額
      */
     public void setShinseiGemmenGaku(Decimal shinseiGemmenGaku) {
@@ -377,7 +378,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 決定減免額のgetメソッドです。
-     * 
+     *
      * @return 決定減免額
      */
     public Decimal getKetteiGemmenGaku() {
@@ -386,7 +387,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 決定減免額のsetメソッドです。
-     * 
+     *
      * @param ketteiGemmenGaku 決定減免額
      */
     public void setKetteiGemmenGaku(Decimal ketteiGemmenGaku) {
@@ -395,7 +396,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 取消減免額のgetメソッドです。
-     * 
+     *
      * @return 取消減免額
      */
     public Decimal getTorikeshiGemmenGaku() {
@@ -404,7 +405,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * 取消減免額のsetメソッドです。
-     * 
+     *
      * @param torikeshiGemmenGaku 取消減免額
      */
     public void setTorikeshiGemmenGaku(Decimal torikeshiGemmenGaku) {
@@ -413,10 +414,9 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * このエンティティの主キーが他の{@literal DbT2004GemmenEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT2004GemmenEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT2004GemmenEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT2004GemmenEntity other) {
@@ -464,6 +464,7 @@ public class DbT2004GemmenEntity extends DbTableEntityBase<DbT2004GemmenEntity> 
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

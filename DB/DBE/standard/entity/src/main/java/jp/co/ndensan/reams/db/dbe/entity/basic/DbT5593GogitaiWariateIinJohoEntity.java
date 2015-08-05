@@ -238,4 +238,5 @@ public class DbT5593GogitaiWariateIinJohoEntity extends DbTableEntityBase<DbT559
     }
 
 // </editor-fold>
+
 }

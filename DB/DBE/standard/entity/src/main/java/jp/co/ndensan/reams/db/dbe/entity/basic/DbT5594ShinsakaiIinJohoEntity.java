@@ -579,4 +579,5 @@ public class DbT5594ShinsakaiIinJohoEntity extends DbTableEntityBase<DbT5594Shin
     }
 
 // </editor-fold>
+
 }

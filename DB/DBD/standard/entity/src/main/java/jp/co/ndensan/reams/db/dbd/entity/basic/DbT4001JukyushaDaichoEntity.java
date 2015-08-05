@@ -1,24 +1,28 @@
-package jp.co.ndensan.reams.db.dbc.entity.basic;
+package jp.co.ndensan.reams.db.dbd.entity.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.Objects;
 import java.util.UUID;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 受給者台帳テーブルのエンティティクラスです。
  */
 public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001JukyushaDaichoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4001JukyushaDaicho");
 
@@ -33,13 +37,13 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
     @PrimaryKey
     private LasdecCode shichosonCode;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private RString rirekiNo;
     @PrimaryKey
     private RString edaban;
     @PrimaryKey
-    private DbUDD013ShinseishoKanriNo shinseishoKanriNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
     private RString shinseiJokyoKubun;
     private RString shishoCode;
     private boolean chokkinFlag;
@@ -56,36 +60,37 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
     private FlexibleDate ninteiYukoKikanKaishiYMD;
     private FlexibleDate ninteiYukoKikanShuryoYMD;
     private FlexibleDate ninteiYMD;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui01;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui02;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui03;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui04;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui05;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui06;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui07;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui08;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui09;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui10;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui11;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui12;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui13;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui14;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui15;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui16;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui17;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui18;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui19;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui20;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui21;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui22;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui23;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui24;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui25;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui26;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui27;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui28;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui29;
-    private DbUDD005ServiceShuruiCode shiteiServiceShurui30;
+    private Code minashiCode;
+    private ServiceShuruiCode shiteiServiceShurui01;
+    private ServiceShuruiCode shiteiServiceShurui02;
+    private ServiceShuruiCode shiteiServiceShurui03;
+    private ServiceShuruiCode shiteiServiceShurui04;
+    private ServiceShuruiCode shiteiServiceShurui05;
+    private ServiceShuruiCode shiteiServiceShurui06;
+    private ServiceShuruiCode shiteiServiceShurui07;
+    private ServiceShuruiCode shiteiServiceShurui08;
+    private ServiceShuruiCode shiteiServiceShurui09;
+    private ServiceShuruiCode shiteiServiceShurui10;
+    private ServiceShuruiCode shiteiServiceShurui11;
+    private ServiceShuruiCode shiteiServiceShurui12;
+    private ServiceShuruiCode shiteiServiceShurui13;
+    private ServiceShuruiCode shiteiServiceShurui14;
+    private ServiceShuruiCode shiteiServiceShurui15;
+    private ServiceShuruiCode shiteiServiceShurui16;
+    private ServiceShuruiCode shiteiServiceShurui17;
+    private ServiceShuruiCode shiteiServiceShurui18;
+    private ServiceShuruiCode shiteiServiceShurui19;
+    private ServiceShuruiCode shiteiServiceShurui20;
+    private ServiceShuruiCode shiteiServiceShurui21;
+    private ServiceShuruiCode shiteiServiceShurui22;
+    private ServiceShuruiCode shiteiServiceShurui23;
+    private ServiceShuruiCode shiteiServiceShurui24;
+    private ServiceShuruiCode shiteiServiceShurui25;
+    private ServiceShuruiCode shiteiServiceShurui26;
+    private ServiceShuruiCode shiteiServiceShurui27;
+    private ServiceShuruiCode shiteiServiceShurui28;
+    private ServiceShuruiCode shiteiServiceShurui29;
+    private ServiceShuruiCode shiteiServiceShurui30;
     private FlexibleDate soshitsuYMD;
     private FlexibleDate chokkinIdoYMD;
     private Code chokkinIdoJiyuCode;
@@ -119,7 +124,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -128,7 +133,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -137,7 +142,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -146,17 +151,16 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -165,7 +169,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 市町村コードのgetメソッドです。
-     * 
+     *
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
@@ -174,7 +178,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 市町村コードのsetメソッドです。
-     * 
+     *
      * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(LasdecCode shichosonCode) {
@@ -183,25 +187,25 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public RString getRirekiNo() {
@@ -210,7 +214,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(RString rirekiNo) {
@@ -219,7 +223,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 枝番のgetメソッドです。
-     * 
+     *
      * @return 枝番
      */
     public RString getEdaban() {
@@ -228,7 +232,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 枝番のsetメソッドです。
-     * 
+     *
      * @param edaban 枝番
      */
     public void setEdaban(RString edaban) {
@@ -237,19 +241,23 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 申請書管理番号のgetメソッドです。
-     * 
+     * <br/>
+     * <br/>要介護認定申請情報
+     *
      * @return 申請書管理番号
      */
-    public DbUDD013ShinseishoKanriNo getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
     /**
      * 申請書管理番号のsetメソッドです。
-     * 
+     * <br/>
+     * <br/>要介護認定申請情報
+     *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(DbUDD013ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
@@ -257,7 +265,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 申請状況区分のgetメソッドです。
      * <br/>
      * <br/>Enum（DBD：申請状況区分）0：申請中、１：認定完了
-     * 
+     *
      * @return 申請状況区分
      */
     public RString getShinseiJokyoKubun() {
@@ -268,7 +276,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 申請状況区分のsetメソッドです。
      * <br/>
      * <br/>Enum（DBD：申請状況区分）0：申請中、１：認定完了
-     * 
+     *
      * @param shinseiJokyoKubun 申請状況区分
      */
     public void setShinseiJokyoKubun(RString shinseiJokyoKubun) {
@@ -277,7 +285,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 支所コードのgetメソッドです。
-     * 
+     *
      * @return 支所コード
      */
     public RString getShishoCode() {
@@ -286,7 +294,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 支所コードのsetメソッドです。
-     * 
+     *
      * @param shishoCode 支所コード
      */
     public void setShishoCode(RString shishoCode) {
@@ -297,7 +305,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 直近フラグのgetメソッドです。
      * <br/>
      * <br/>True:直近情報、False:履歴情報
-     * 
+     *
      * @return 直近フラグ
      */
     public boolean getChokkinFlag() {
@@ -308,7 +316,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 直近フラグのsetメソッドです。
      * <br/>
      * <br/>True:直近情報、False:履歴情報
-     * 
+     *
      * @param chokkinFlag 直近フラグ
      */
     public void setChokkinFlag(boolean chokkinFlag) {
@@ -319,7 +327,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 識別コードのgetメソッドです。
      * <br/>
      * <br/>旧「住民コード」
-     * 
+     *
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -330,7 +338,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 識別コードのsetメソッドです。
      * <br/>
      * <br/>旧「住民コード」
-     * 
+     *
      * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -341,7 +349,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 受給申請事由のgetメソッドです。
      * <br/>
      * <br/>Enum（DBD：受給申請事由）1：初回申請、2：再申請（有効期限内）、3：再申請（有効期限外）、4：要介護度変更申請、5：指定サービス種類変更申請、6：申請（法施行前）、7：追加（申請なしの追加（転入））
-     * 
+     *
      * @return 受給申請事由
      */
     public Code getJukyuShinseiJiyu() {
@@ -352,7 +360,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 受給申請事由のsetメソッドです。
      * <br/>
      * <br/>Enum（DBD：受給申請事由）1：初回申請、2：再申請（有効期限内）、3：再申請（有効期限外）、4：要介護度変更申請、5：指定サービス種類変更申請、6：申請（法施行前）、7：追加（申請なしの追加（転入））
-     * 
+     *
      * @param jukyuShinseiJiyu 受給申請事由
      */
     public void setJukyuShinseiJiyu(Code jukyuShinseiJiyu) {
@@ -361,7 +369,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 申請理由のgetメソッドです。
-     * 
+     *
      * @return 申請理由
      */
     public RString getShinseiRiyu() {
@@ -370,7 +378,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 申請理由のsetメソッドです。
-     * 
+     *
      * @param shinseiRiyu 申請理由
      */
     public void setShinseiRiyu(RString shinseiRiyu) {
@@ -381,7 +389,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * （届出者）申請者関係コードのgetメソッドです。
      * <br/>
      * <br/>Enum（DBD：申請者関係コード）
-     * 
+     *
      * @return （届出者）申請者関係コード
      */
     public Code getShinseishaKankeiCode() {
@@ -392,7 +400,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * （届出者）申請者関係コードのsetメソッドです。
      * <br/>
      * <br/>Enum（DBD：申請者関係コード）
-     * 
+     *
      * @param shinseishaKankeiCode （届出者）申請者関係コード
      */
     public void setShinseishaKankeiCode(Code shinseishaKankeiCode) {
@@ -401,7 +409,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * （届出者）本人との関係のgetメソッドです。
-     * 
+     *
      * @return （届出者）本人との関係
      */
     public RString getHomninKankei() {
@@ -410,7 +418,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * （届出者）本人との関係のsetメソッドです。
-     * 
+     *
      * @param homninKankei （届出者）本人との関係
      */
     public void setHomninKankei(RString homninKankei) {
@@ -419,7 +427,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 受給申請年月日のgetメソッドです。
-     * 
+     *
      * @return 受給申請年月日
      */
     public FlexibleDate getJukyuShinseiYMD() {
@@ -428,7 +436,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 受給申請年月日のsetメソッドです。
-     * 
+     *
      * @param jukyuShinseiYMD 受給申請年月日
      */
     public void setJukyuShinseiYMD(FlexibleDate jukyuShinseiYMD) {
@@ -438,8 +446,8 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
     /**
      * ２号特定疾病コードのgetメソッドです。
      * <br/>
-     * <br/>Enum（DBD：特定疾病コード）
-     * 
+     * <br/>Enum（DBZ：特定疾病コード）
+     *
      * @return ２号特定疾病コード
      */
     public Code getNigoTokuteiShippeiCode() {
@@ -449,8 +457,8 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
     /**
      * ２号特定疾病コードのsetメソッドです。
      * <br/>
-     * <br/>Enum（DBD：特定疾病コード）
-     * 
+     * <br/>Enum（DBZ：特定疾病コード）
+     *
      * @param nigoTokuteiShippeiCode ２号特定疾病コード
      */
     public void setNigoTokuteiShippeiCode(Code nigoTokuteiShippeiCode) {
@@ -459,7 +467,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 審査会依頼年月日のgetメソッドです。
-     * 
+     *
      * @return 審査会依頼年月日
      */
     public FlexibleDate getShinsakaiIraiYMD() {
@@ -468,7 +476,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 審査会依頼年月日のsetメソッドです。
-     * 
+     *
      * @param shinsakaiIraiYMD 審査会依頼年月日
      */
     public void setShinsakaiIraiYMD(FlexibleDate shinsakaiIraiYMD) {
@@ -478,8 +486,8 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
     /**
      * 要介護認定状態区分コードのgetメソッドです。
      * <br/>
-     * <br/>Enum（DBD：要介護状態区分コード（認定ｿﾌﾄ2009））
-     * 
+     * <br/>Enum（DBZ：要介護状態区分コード99）
+     *
      * @return 要介護認定状態区分コード
      */
     public Code getYokaigoJotaiKubunCode() {
@@ -489,8 +497,8 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
     /**
      * 要介護認定状態区分コードのsetメソッドです。
      * <br/>
-     * <br/>Enum（DBD：要介護状態区分コード（認定ｿﾌﾄ2009））
-     * 
+     * <br/>Enum（DBZ：要介護状態区分コード99）
+     *
      * @param yokaigoJotaiKubunCode 要介護認定状態区分コード
      */
     public void setYokaigoJotaiKubunCode(Code yokaigoJotaiKubunCode) {
@@ -499,7 +507,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 認定有効期間開始年月日のgetメソッドです。
-     * 
+     *
      * @return 認定有効期間開始年月日
      */
     public FlexibleDate getNinteiYukoKikanKaishiYMD() {
@@ -508,7 +516,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 認定有効期間開始年月日のsetメソッドです。
-     * 
+     *
      * @param ninteiYukoKikanKaishiYMD 認定有効期間開始年月日
      */
     public void setNinteiYukoKikanKaishiYMD(FlexibleDate ninteiYukoKikanKaishiYMD) {
@@ -517,7 +525,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 認定有効期間終了年月日のgetメソッドです。
-     * 
+     *
      * @return 認定有効期間終了年月日
      */
     public FlexibleDate getNinteiYukoKikanShuryoYMD() {
@@ -526,7 +534,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 認定有効期間終了年月日のsetメソッドです。
-     * 
+     *
      * @param ninteiYukoKikanShuryoYMD 認定有効期間終了年月日
      */
     public void setNinteiYukoKikanShuryoYMD(FlexibleDate ninteiYukoKikanShuryoYMD) {
@@ -537,7 +545,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 認定年月日のgetメソッドです。
      * <br/>
      * <br/>認定年月日、却下年月日
-     * 
+     *
      * @return 認定年月日
      */
     public FlexibleDate getNinteiYMD() {
@@ -548,7 +556,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 認定年月日のsetメソッドです。
      * <br/>
      * <br/>認定年月日、却下年月日
-     * 
+     *
      * @param ninteiYMD 認定年月日
      */
     public void setNinteiYMD(FlexibleDate ninteiYMD) {
@@ -556,13 +564,35 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
     }
 
     /**
+     * みなし要介護区分コードのgetメソッドです。
+     * <br/>
+     * <br/>Enum（DBD：みなし要介護区分コード）
+     *
+     * @return みなし要介護区分コード
+     */
+    public Code getMinashiCode() {
+        return minashiCode;
+    }
+
+    /**
+     * みなし要介護区分コードのsetメソッドです。
+     * <br/>
+     * <br/>Enum（DBD：みなし要介護区分コード）
+     *
+     * @param minashiCode みなし要介護区分コード
+     */
+    public void setMinashiCode(Code minashiCode) {
+        this.minashiCode = minashiCode;
+    }
+
+    /**
      * 指定サービス種類01のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類01
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui01() {
+    public ServiceShuruiCode getShiteiServiceShurui01() {
         return shiteiServiceShurui01;
     }
 
@@ -570,10 +600,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類01のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui01 指定サービス種類01
      */
-    public void setShiteiServiceShurui01(DbUDD005ServiceShuruiCode shiteiServiceShurui01) {
+    public void setShiteiServiceShurui01(ServiceShuruiCode shiteiServiceShurui01) {
         this.shiteiServiceShurui01 = shiteiServiceShurui01;
     }
 
@@ -581,10 +611,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類02のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類02
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui02() {
+    public ServiceShuruiCode getShiteiServiceShurui02() {
         return shiteiServiceShurui02;
     }
 
@@ -592,10 +622,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類02のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui02 指定サービス種類02
      */
-    public void setShiteiServiceShurui02(DbUDD005ServiceShuruiCode shiteiServiceShurui02) {
+    public void setShiteiServiceShurui02(ServiceShuruiCode shiteiServiceShurui02) {
         this.shiteiServiceShurui02 = shiteiServiceShurui02;
     }
 
@@ -603,10 +633,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類03のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類03
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui03() {
+    public ServiceShuruiCode getShiteiServiceShurui03() {
         return shiteiServiceShurui03;
     }
 
@@ -614,10 +644,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類03のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui03 指定サービス種類03
      */
-    public void setShiteiServiceShurui03(DbUDD005ServiceShuruiCode shiteiServiceShurui03) {
+    public void setShiteiServiceShurui03(ServiceShuruiCode shiteiServiceShurui03) {
         this.shiteiServiceShurui03 = shiteiServiceShurui03;
     }
 
@@ -625,10 +655,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類04のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類04
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui04() {
+    public ServiceShuruiCode getShiteiServiceShurui04() {
         return shiteiServiceShurui04;
     }
 
@@ -636,10 +666,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類04のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui04 指定サービス種類04
      */
-    public void setShiteiServiceShurui04(DbUDD005ServiceShuruiCode shiteiServiceShurui04) {
+    public void setShiteiServiceShurui04(ServiceShuruiCode shiteiServiceShurui04) {
         this.shiteiServiceShurui04 = shiteiServiceShurui04;
     }
 
@@ -647,10 +677,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類05のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類05
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui05() {
+    public ServiceShuruiCode getShiteiServiceShurui05() {
         return shiteiServiceShurui05;
     }
 
@@ -658,10 +688,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類05のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui05 指定サービス種類05
      */
-    public void setShiteiServiceShurui05(DbUDD005ServiceShuruiCode shiteiServiceShurui05) {
+    public void setShiteiServiceShurui05(ServiceShuruiCode shiteiServiceShurui05) {
         this.shiteiServiceShurui05 = shiteiServiceShurui05;
     }
 
@@ -669,10 +699,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類06のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類06
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui06() {
+    public ServiceShuruiCode getShiteiServiceShurui06() {
         return shiteiServiceShurui06;
     }
 
@@ -680,10 +710,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類06のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui06 指定サービス種類06
      */
-    public void setShiteiServiceShurui06(DbUDD005ServiceShuruiCode shiteiServiceShurui06) {
+    public void setShiteiServiceShurui06(ServiceShuruiCode shiteiServiceShurui06) {
         this.shiteiServiceShurui06 = shiteiServiceShurui06;
     }
 
@@ -691,10 +721,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類07のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類07
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui07() {
+    public ServiceShuruiCode getShiteiServiceShurui07() {
         return shiteiServiceShurui07;
     }
 
@@ -702,10 +732,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類07のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui07 指定サービス種類07
      */
-    public void setShiteiServiceShurui07(DbUDD005ServiceShuruiCode shiteiServiceShurui07) {
+    public void setShiteiServiceShurui07(ServiceShuruiCode shiteiServiceShurui07) {
         this.shiteiServiceShurui07 = shiteiServiceShurui07;
     }
 
@@ -713,10 +743,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類08のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類08
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui08() {
+    public ServiceShuruiCode getShiteiServiceShurui08() {
         return shiteiServiceShurui08;
     }
 
@@ -724,10 +754,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類08のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui08 指定サービス種類08
      */
-    public void setShiteiServiceShurui08(DbUDD005ServiceShuruiCode shiteiServiceShurui08) {
+    public void setShiteiServiceShurui08(ServiceShuruiCode shiteiServiceShurui08) {
         this.shiteiServiceShurui08 = shiteiServiceShurui08;
     }
 
@@ -735,10 +765,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類09のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類09
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui09() {
+    public ServiceShuruiCode getShiteiServiceShurui09() {
         return shiteiServiceShurui09;
     }
 
@@ -746,10 +776,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類09のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui09 指定サービス種類09
      */
-    public void setShiteiServiceShurui09(DbUDD005ServiceShuruiCode shiteiServiceShurui09) {
+    public void setShiteiServiceShurui09(ServiceShuruiCode shiteiServiceShurui09) {
         this.shiteiServiceShurui09 = shiteiServiceShurui09;
     }
 
@@ -757,10 +787,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類10のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類10
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui10() {
+    public ServiceShuruiCode getShiteiServiceShurui10() {
         return shiteiServiceShurui10;
     }
 
@@ -768,10 +798,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類10のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui10 指定サービス種類10
      */
-    public void setShiteiServiceShurui10(DbUDD005ServiceShuruiCode shiteiServiceShurui10) {
+    public void setShiteiServiceShurui10(ServiceShuruiCode shiteiServiceShurui10) {
         this.shiteiServiceShurui10 = shiteiServiceShurui10;
     }
 
@@ -779,10 +809,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類11のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類11
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui11() {
+    public ServiceShuruiCode getShiteiServiceShurui11() {
         return shiteiServiceShurui11;
     }
 
@@ -790,10 +820,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類11のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui11 指定サービス種類11
      */
-    public void setShiteiServiceShurui11(DbUDD005ServiceShuruiCode shiteiServiceShurui11) {
+    public void setShiteiServiceShurui11(ServiceShuruiCode shiteiServiceShurui11) {
         this.shiteiServiceShurui11 = shiteiServiceShurui11;
     }
 
@@ -801,10 +831,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類12のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類12
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui12() {
+    public ServiceShuruiCode getShiteiServiceShurui12() {
         return shiteiServiceShurui12;
     }
 
@@ -812,10 +842,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類12のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui12 指定サービス種類12
      */
-    public void setShiteiServiceShurui12(DbUDD005ServiceShuruiCode shiteiServiceShurui12) {
+    public void setShiteiServiceShurui12(ServiceShuruiCode shiteiServiceShurui12) {
         this.shiteiServiceShurui12 = shiteiServiceShurui12;
     }
 
@@ -823,10 +853,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類13のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類13
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui13() {
+    public ServiceShuruiCode getShiteiServiceShurui13() {
         return shiteiServiceShurui13;
     }
 
@@ -834,10 +864,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類13のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui13 指定サービス種類13
      */
-    public void setShiteiServiceShurui13(DbUDD005ServiceShuruiCode shiteiServiceShurui13) {
+    public void setShiteiServiceShurui13(ServiceShuruiCode shiteiServiceShurui13) {
         this.shiteiServiceShurui13 = shiteiServiceShurui13;
     }
 
@@ -845,10 +875,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類14のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類14
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui14() {
+    public ServiceShuruiCode getShiteiServiceShurui14() {
         return shiteiServiceShurui14;
     }
 
@@ -856,10 +886,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類14のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui14 指定サービス種類14
      */
-    public void setShiteiServiceShurui14(DbUDD005ServiceShuruiCode shiteiServiceShurui14) {
+    public void setShiteiServiceShurui14(ServiceShuruiCode shiteiServiceShurui14) {
         this.shiteiServiceShurui14 = shiteiServiceShurui14;
     }
 
@@ -867,10 +897,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類15のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類15
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui15() {
+    public ServiceShuruiCode getShiteiServiceShurui15() {
         return shiteiServiceShurui15;
     }
 
@@ -878,10 +908,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類15のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui15 指定サービス種類15
      */
-    public void setShiteiServiceShurui15(DbUDD005ServiceShuruiCode shiteiServiceShurui15) {
+    public void setShiteiServiceShurui15(ServiceShuruiCode shiteiServiceShurui15) {
         this.shiteiServiceShurui15 = shiteiServiceShurui15;
     }
 
@@ -889,10 +919,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類16のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類16
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui16() {
+    public ServiceShuruiCode getShiteiServiceShurui16() {
         return shiteiServiceShurui16;
     }
 
@@ -900,10 +930,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類16のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui16 指定サービス種類16
      */
-    public void setShiteiServiceShurui16(DbUDD005ServiceShuruiCode shiteiServiceShurui16) {
+    public void setShiteiServiceShurui16(ServiceShuruiCode shiteiServiceShurui16) {
         this.shiteiServiceShurui16 = shiteiServiceShurui16;
     }
 
@@ -911,10 +941,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類17のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類17
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui17() {
+    public ServiceShuruiCode getShiteiServiceShurui17() {
         return shiteiServiceShurui17;
     }
 
@@ -922,10 +952,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類17のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui17 指定サービス種類17
      */
-    public void setShiteiServiceShurui17(DbUDD005ServiceShuruiCode shiteiServiceShurui17) {
+    public void setShiteiServiceShurui17(ServiceShuruiCode shiteiServiceShurui17) {
         this.shiteiServiceShurui17 = shiteiServiceShurui17;
     }
 
@@ -933,10 +963,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類18のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類18
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui18() {
+    public ServiceShuruiCode getShiteiServiceShurui18() {
         return shiteiServiceShurui18;
     }
 
@@ -944,10 +974,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類18のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui18 指定サービス種類18
      */
-    public void setShiteiServiceShurui18(DbUDD005ServiceShuruiCode shiteiServiceShurui18) {
+    public void setShiteiServiceShurui18(ServiceShuruiCode shiteiServiceShurui18) {
         this.shiteiServiceShurui18 = shiteiServiceShurui18;
     }
 
@@ -955,10 +985,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類19のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類19
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui19() {
+    public ServiceShuruiCode getShiteiServiceShurui19() {
         return shiteiServiceShurui19;
     }
 
@@ -966,10 +996,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類19のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui19 指定サービス種類19
      */
-    public void setShiteiServiceShurui19(DbUDD005ServiceShuruiCode shiteiServiceShurui19) {
+    public void setShiteiServiceShurui19(ServiceShuruiCode shiteiServiceShurui19) {
         this.shiteiServiceShurui19 = shiteiServiceShurui19;
     }
 
@@ -977,10 +1007,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類20のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類20
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui20() {
+    public ServiceShuruiCode getShiteiServiceShurui20() {
         return shiteiServiceShurui20;
     }
 
@@ -988,10 +1018,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類20のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui20 指定サービス種類20
      */
-    public void setShiteiServiceShurui20(DbUDD005ServiceShuruiCode shiteiServiceShurui20) {
+    public void setShiteiServiceShurui20(ServiceShuruiCode shiteiServiceShurui20) {
         this.shiteiServiceShurui20 = shiteiServiceShurui20;
     }
 
@@ -999,10 +1029,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類21のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類21
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui21() {
+    public ServiceShuruiCode getShiteiServiceShurui21() {
         return shiteiServiceShurui21;
     }
 
@@ -1010,10 +1040,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類21のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui21 指定サービス種類21
      */
-    public void setShiteiServiceShurui21(DbUDD005ServiceShuruiCode shiteiServiceShurui21) {
+    public void setShiteiServiceShurui21(ServiceShuruiCode shiteiServiceShurui21) {
         this.shiteiServiceShurui21 = shiteiServiceShurui21;
     }
 
@@ -1021,10 +1051,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類22のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類22
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui22() {
+    public ServiceShuruiCode getShiteiServiceShurui22() {
         return shiteiServiceShurui22;
     }
 
@@ -1032,10 +1062,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類22のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui22 指定サービス種類22
      */
-    public void setShiteiServiceShurui22(DbUDD005ServiceShuruiCode shiteiServiceShurui22) {
+    public void setShiteiServiceShurui22(ServiceShuruiCode shiteiServiceShurui22) {
         this.shiteiServiceShurui22 = shiteiServiceShurui22;
     }
 
@@ -1043,10 +1073,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類23のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類23
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui23() {
+    public ServiceShuruiCode getShiteiServiceShurui23() {
         return shiteiServiceShurui23;
     }
 
@@ -1054,10 +1084,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類23のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui23 指定サービス種類23
      */
-    public void setShiteiServiceShurui23(DbUDD005ServiceShuruiCode shiteiServiceShurui23) {
+    public void setShiteiServiceShurui23(ServiceShuruiCode shiteiServiceShurui23) {
         this.shiteiServiceShurui23 = shiteiServiceShurui23;
     }
 
@@ -1065,10 +1095,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類24のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類24
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui24() {
+    public ServiceShuruiCode getShiteiServiceShurui24() {
         return shiteiServiceShurui24;
     }
 
@@ -1076,10 +1106,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類24のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui24 指定サービス種類24
      */
-    public void setShiteiServiceShurui24(DbUDD005ServiceShuruiCode shiteiServiceShurui24) {
+    public void setShiteiServiceShurui24(ServiceShuruiCode shiteiServiceShurui24) {
         this.shiteiServiceShurui24 = shiteiServiceShurui24;
     }
 
@@ -1087,10 +1117,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類25のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類25
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui25() {
+    public ServiceShuruiCode getShiteiServiceShurui25() {
         return shiteiServiceShurui25;
     }
 
@@ -1098,10 +1128,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類25のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui25 指定サービス種類25
      */
-    public void setShiteiServiceShurui25(DbUDD005ServiceShuruiCode shiteiServiceShurui25) {
+    public void setShiteiServiceShurui25(ServiceShuruiCode shiteiServiceShurui25) {
         this.shiteiServiceShurui25 = shiteiServiceShurui25;
     }
 
@@ -1109,10 +1139,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類26のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類26
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui26() {
+    public ServiceShuruiCode getShiteiServiceShurui26() {
         return shiteiServiceShurui26;
     }
 
@@ -1120,10 +1150,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類26のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui26 指定サービス種類26
      */
-    public void setShiteiServiceShurui26(DbUDD005ServiceShuruiCode shiteiServiceShurui26) {
+    public void setShiteiServiceShurui26(ServiceShuruiCode shiteiServiceShurui26) {
         this.shiteiServiceShurui26 = shiteiServiceShurui26;
     }
 
@@ -1131,10 +1161,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類27のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類27
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui27() {
+    public ServiceShuruiCode getShiteiServiceShurui27() {
         return shiteiServiceShurui27;
     }
 
@@ -1142,10 +1172,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類27のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui27 指定サービス種類27
      */
-    public void setShiteiServiceShurui27(DbUDD005ServiceShuruiCode shiteiServiceShurui27) {
+    public void setShiteiServiceShurui27(ServiceShuruiCode shiteiServiceShurui27) {
         this.shiteiServiceShurui27 = shiteiServiceShurui27;
     }
 
@@ -1153,10 +1183,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類28のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類28
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui28() {
+    public ServiceShuruiCode getShiteiServiceShurui28() {
         return shiteiServiceShurui28;
     }
 
@@ -1164,10 +1194,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類28のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui28 指定サービス種類28
      */
-    public void setShiteiServiceShurui28(DbUDD005ServiceShuruiCode shiteiServiceShurui28) {
+    public void setShiteiServiceShurui28(ServiceShuruiCode shiteiServiceShurui28) {
         this.shiteiServiceShurui28 = shiteiServiceShurui28;
     }
 
@@ -1175,10 +1205,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類29のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類29
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui29() {
+    public ServiceShuruiCode getShiteiServiceShurui29() {
         return shiteiServiceShurui29;
     }
 
@@ -1186,10 +1216,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類29のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui29 指定サービス種類29
      */
-    public void setShiteiServiceShurui29(DbUDD005ServiceShuruiCode shiteiServiceShurui29) {
+    public void setShiteiServiceShurui29(ServiceShuruiCode shiteiServiceShurui29) {
         this.shiteiServiceShurui29 = shiteiServiceShurui29;
     }
 
@@ -1197,10 +1227,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類30のgetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @return 指定サービス種類30
      */
-    public DbUDD005ServiceShuruiCode getShiteiServiceShurui30() {
+    public ServiceShuruiCode getShiteiServiceShurui30() {
         return shiteiServiceShurui30;
     }
 
@@ -1208,10 +1238,10 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 指定サービス種類30のsetメソッドです。
      * <br/>
      * <br/>Code（DBD：0002）
-     * 
+     *
      * @param shiteiServiceShurui30 指定サービス種類30
      */
-    public void setShiteiServiceShurui30(DbUDD005ServiceShuruiCode shiteiServiceShurui30) {
+    public void setShiteiServiceShurui30(ServiceShuruiCode shiteiServiceShurui30) {
         this.shiteiServiceShurui30 = shiteiServiceShurui30;
     }
 
@@ -1219,7 +1249,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 喪失年月日のgetメソッドです。
      * <br/>
      * <br/>職権取消での喪失日
-     * 
+     *
      * @return 喪失年月日
      */
     public FlexibleDate getSoshitsuYMD() {
@@ -1230,7 +1260,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 喪失年月日のsetメソッドです。
      * <br/>
      * <br/>職権取消での喪失日
-     * 
+     *
      * @param soshitsuYMD 喪失年月日
      */
     public void setSoshitsuYMD(FlexibleDate soshitsuYMD) {
@@ -1241,7 +1271,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 直近異動年月日のgetメソッドです。
      * <br/>
      * <br/>直近の異動年月日
-     * 
+     *
      * @return 直近異動年月日
      */
     public FlexibleDate getChokkinIdoYMD() {
@@ -1252,7 +1282,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 直近異動年月日のsetメソッドです。
      * <br/>
      * <br/>直近の異動年月日
-     * 
+     *
      * @param chokkinIdoYMD 直近異動年月日
      */
     public void setChokkinIdoYMD(FlexibleDate chokkinIdoYMD) {
@@ -1263,7 +1293,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 直近異動事由コードのgetメソッドです。
      * <br/>
      * <br/>Enum（DBD：直近異動事由コード）
-     * 
+     *
      * @return 直近異動事由コード
      */
     public Code getChokkinIdoJiyuCode() {
@@ -1274,7 +1304,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 直近異動事由コードのsetメソッドです。
      * <br/>
      * <br/>Enum（DBD：直近異動事由コード）
-     * 
+     *
      * @param chokkinIdoJiyuCode 直近異動事由コード
      */
     public void setChokkinIdoJiyuCode(Code chokkinIdoJiyuCode) {
@@ -1285,7 +1315,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 有効無効区分のgetメソッドです。
      * <br/>
      * <br/>Enum（DBD：有効無効区分）0：申請中、1：有効、2：無効
-     * 
+     *
      * @return 有効無効区分
      */
     public Code getYukoMukoKubun() {
@@ -1296,7 +1326,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 有効無効区分のsetメソッドです。
      * <br/>
      * <br/>Enum（DBD：有効無効区分）0：申請中、1：有効、2：無効
-     * 
+     *
      * @param yukoMukoKubun 有効無効区分
      */
     public void setYukoMukoKubun(Code yukoMukoKubun) {
@@ -1307,7 +1337,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * データ区分のgetメソッドです。
      * <br/>
      * <br/>Enum（DBD：データ区分）
-     * 
+     *
      * @return データ区分
      */
     public Code getDataKubun() {
@@ -1318,7 +1348,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * データ区分のsetメソッドです。
      * <br/>
      * <br/>Enum（DBD：データ区分）
-     * 
+     *
      * @param dataKubun データ区分
      */
     public void setDataKubun(Code dataKubun) {
@@ -1327,7 +1357,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 同一連番のgetメソッドです。
-     * 
+     *
      * @return 同一連番
      */
     public RString getRemban() {
@@ -1336,7 +1366,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 同一連番のsetメソッドです。
-     * 
+     *
      * @param remban 同一連番
      */
     public void setRemban(RString remban) {
@@ -1347,7 +1377,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 異動理由のgetメソッドです。
      * <br/>
      * <br/>認定理由、却下理由、職権理由
-     * 
+     *
      * @return 異動理由
      */
     public RString getIdoRiyu() {
@@ -1358,7 +1388,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 異動理由のsetメソッドです。
      * <br/>
      * <br/>認定理由、却下理由、職権理由
-     * 
+     *
      * @param idoRiyu 異動理由
      */
     public void setIdoRiyu(RString idoRiyu) {
@@ -1369,7 +1399,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 申請書区分のgetメソッドです。
      * <br/>
      * <br/>Enum（DBD：認定支援申請区分）旧「認定支援申請区分」　0：要介護申請、1：要支援申請
-     * 
+     *
      * @return 申請書区分
      */
     public Code getShinseishoKubun() {
@@ -1380,7 +1410,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 申請書区分のsetメソッドです。
      * <br/>
      * <br/>Enum（DBD：認定支援申請区分）旧「認定支援申請区分」　0：要介護申請、1：要支援申請
-     * 
+     *
      * @param shinseishoKubun 申請書区分
      */
     public void setShinseishoKubun(Code shinseishoKubun) {
@@ -1391,7 +1421,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 削除事由コードのgetメソッドです。
      * <br/>
      * <br/>Enum（DBD：削除事由コード）
-     * 
+     *
      * @return 削除事由コード
      */
     public Code getSakujoJiyuCode() {
@@ -1402,7 +1432,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 削除事由コードのsetメソッドです。
      * <br/>
      * <br/>Enum（DBD：削除事由コード）
-     * 
+     *
      * @param sakujoJiyuCode 削除事由コード
      */
     public void setSakujoJiyuCode(Code sakujoJiyuCode) {
@@ -1413,7 +1443,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 要支援者認定申請区分のgetメソッドです。
      * <br/>
      * <br/>True:要支援者の要介護認定申請、False:それ以外
-     * 
+     *
      * @return 要支援者認定申請区分
      */
     public boolean getYoshienshaNinteiShinseiFlag() {
@@ -1424,7 +1454,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 要支援者認定申請区分のsetメソッドです。
      * <br/>
      * <br/>True:要支援者の要介護認定申請、False:それ以外
-     * 
+     *
      * @param yoshienshaNinteiShinseiFlag 要支援者認定申請区分
      */
     public void setYoshienshaNinteiShinseiFlag(boolean yoshienshaNinteiShinseiFlag) {
@@ -1433,7 +1463,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 支給限度単位数のgetメソッドです。
-     * 
+     *
      * @return 支給限度単位数
      */
     public Decimal getShikyuGendoTanisu() {
@@ -1442,7 +1472,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 支給限度単位数のsetメソッドです。
-     * 
+     *
      * @param shikyuGendoTanisu 支給限度単位数
      */
     public void setShikyuGendoTanisu(Decimal shikyuGendoTanisu) {
@@ -1451,7 +1481,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 支給限度有効開始年月日のgetメソッドです。
-     * 
+     *
      * @return 支給限度有効開始年月日
      */
     public FlexibleDate getShikyuGendoKaishiYMD() {
@@ -1460,7 +1490,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 支給限度有効開始年月日のsetメソッドです。
-     * 
+     *
      * @param shikyuGendoKaishiYMD 支給限度有効開始年月日
      */
     public void setShikyuGendoKaishiYMD(FlexibleDate shikyuGendoKaishiYMD) {
@@ -1469,7 +1499,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 支給限度有効終了年月日のgetメソッドです。
-     * 
+     *
      * @return 支給限度有効終了年月日
      */
     public FlexibleDate getShikyuGendoShuryoYMD() {
@@ -1478,7 +1508,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 支給限度有効終了年月日のsetメソッドです。
-     * 
+     *
      * @param shikyuGendoShuryoYMD 支給限度有効終了年月日
      */
     public void setShikyuGendoShuryoYMD(FlexibleDate shikyuGendoShuryoYMD) {
@@ -1487,7 +1517,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 短期入所支給限度日数のgetメソッドです。
-     * 
+     *
      * @return 短期入所支給限度日数
      */
     public int getTankiSikyuGendoNissu() {
@@ -1496,7 +1526,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 短期入所支給限度日数のsetメソッドです。
-     * 
+     *
      * @param tankiSikyuGendoNissu 短期入所支給限度日数
      */
     public void setTankiSikyuGendoNissu(int tankiSikyuGendoNissu) {
@@ -1505,7 +1535,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 短期入所支給限度開始年月日のgetメソッドです。
-     * 
+     *
      * @return 短期入所支給限度開始年月日
      */
     public FlexibleDate getTankiShikyuGendoKaishiYMD() {
@@ -1514,7 +1544,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 短期入所支給限度開始年月日のsetメソッドです。
-     * 
+     *
      * @param tankiShikyuGendoKaishiYMD 短期入所支給限度開始年月日
      */
     public void setTankiShikyuGendoKaishiYMD(FlexibleDate tankiShikyuGendoKaishiYMD) {
@@ -1523,7 +1553,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 短期入所支給限度終了年月日のgetメソッドです。
-     * 
+     *
      * @return 短期入所支給限度終了年月日
      */
     public FlexibleDate getTankiShikyuGendoShuryoYMD() {
@@ -1532,7 +1562,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 短期入所支給限度終了年月日のsetメソッドです。
-     * 
+     *
      * @param tankiShikyuGendoShuryoYMD 短期入所支給限度終了年月日
      */
     public void setTankiShikyuGendoShuryoYMD(FlexibleDate tankiShikyuGendoShuryoYMD) {
@@ -1541,7 +1571,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 当初認定有効開始年月日のgetメソッドです。
-     * 
+     *
      * @return 当初認定有効開始年月日
      */
     public FlexibleDate getToshoNinteiYukoKaishiYMD() {
@@ -1550,7 +1580,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 当初認定有効開始年月日のsetメソッドです。
-     * 
+     *
      * @param toshoNinteiYukoKaishiYMD 当初認定有効開始年月日
      */
     public void setToshoNinteiYukoKaishiYMD(FlexibleDate toshoNinteiYukoKaishiYMD) {
@@ -1559,7 +1589,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 当初認定有効終了年月日のgetメソッドです。
-     * 
+     *
      * @return 当初認定有効終了年月日
      */
     public FlexibleDate getToshoNinteiYukoShuryoYMD() {
@@ -1568,7 +1598,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 当初認定有効終了年月日のsetメソッドです。
-     * 
+     *
      * @param toshoNinteiYukoShuryoYMD 当初認定有効終了年月日
      */
     public void setToshoNinteiYukoShuryoYMD(FlexibleDate toshoNinteiYukoShuryoYMD) {
@@ -1577,7 +1607,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 受給資格証明書発行年月日１のgetメソッドです。
-     * 
+     *
      * @return 受給資格証明書発行年月日１
      */
     public FlexibleDate getJukyuShikakuShomeishoHakkoYMD1() {
@@ -1586,7 +1616,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 受給資格証明書発行年月日１のsetメソッドです。
-     * 
+     *
      * @param jukyuShikakuShomeishoHakkoYMD1 受給資格証明書発行年月日１
      */
     public void setJukyuShikakuShomeishoHakkoYMD1(FlexibleDate jukyuShikakuShomeishoHakkoYMD1) {
@@ -1595,7 +1625,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 受給資格証明書発行年月日２のgetメソッドです。
-     * 
+     *
      * @return 受給資格証明書発行年月日２
      */
     public FlexibleDate getJukyuShikakuShomeishoHakkoYMD2() {
@@ -1604,7 +1634,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 受給資格証明書発行年月日２のsetメソッドです。
-     * 
+     *
      * @param jukyuShikakuShomeishoHakkoYMD2 受給資格証明書発行年月日２
      */
     public void setJukyuShikakuShomeishoHakkoYMD2(FlexibleDate jukyuShikakuShomeishoHakkoYMD2) {
@@ -1613,7 +1643,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 診断命令書発行年月日のgetメソッドです。
-     * 
+     *
      * @return 診断命令書発行年月日
      */
     public FlexibleDate getShindanMeireishoHakkoYMD() {
@@ -1622,7 +1652,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 診断命令書発行年月日のsetメソッドです。
-     * 
+     *
      * @param shindanMeireishoHakkoYMD 診断命令書発行年月日
      */
     public void setShindanMeireishoHakkoYMD(FlexibleDate shindanMeireishoHakkoYMD) {
@@ -1631,7 +1661,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * ２号申請受理通知書発行年月日のgetメソッドです。
-     * 
+     *
      * @return ２号申請受理通知書発行年月日
      */
     public FlexibleDate getNigoShinseiJuriTsuchishoHakkoYMD() {
@@ -1640,7 +1670,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * ２号申請受理通知書発行年月日のsetメソッドです。
-     * 
+     *
      * @param nigoShinseiJuriTsuchishoHakkoYMD ２号申請受理通知書発行年月日
      */
     public void setNigoShinseiJuriTsuchishoHakkoYMD(FlexibleDate nigoShinseiJuriTsuchishoHakkoYMD) {
@@ -1649,7 +1679,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 認定結果通知書発行年月日のgetメソッドです。
-     * 
+     *
      * @return 認定結果通知書発行年月日
      */
     public FlexibleDate getNinteiKekkaTsuchishoHakkoYMD() {
@@ -1658,7 +1688,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 認定結果通知書発行年月日のsetメソッドです。
-     * 
+     *
      * @param ninteiKekkaTsuchishoHakkoYMD 認定結果通知書発行年月日
      */
     public void setNinteiKekkaTsuchishoHakkoYMD(FlexibleDate ninteiKekkaTsuchishoHakkoYMD) {
@@ -1667,7 +1697,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 区分変更通知書発行年月日のgetメソッドです。
-     * 
+     *
      * @return 区分変更通知書発行年月日
      */
     public FlexibleDate getKubunHenkoTsuchishoHakkoYMD() {
@@ -1676,7 +1706,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 区分変更通知書発行年月日のsetメソッドです。
-     * 
+     *
      * @param kubunHenkoTsuchishoHakkoYMD 区分変更通知書発行年月日
      */
     public void setKubunHenkoTsuchishoHakkoYMD(FlexibleDate kubunHenkoTsuchishoHakkoYMD) {
@@ -1685,7 +1715,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * サービス変更通知書発行年月日のgetメソッドです。
-     * 
+     *
      * @return サービス変更通知書発行年月日
      */
     public FlexibleDate getServiceHenkoTsuchishoHakkoYMD() {
@@ -1694,7 +1724,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * サービス変更通知書発行年月日のsetメソッドです。
-     * 
+     *
      * @param serviceHenkoTsuchishoHakkoYMD サービス変更通知書発行年月日
      */
     public void setServiceHenkoTsuchishoHakkoYMD(FlexibleDate serviceHenkoTsuchishoHakkoYMD) {
@@ -1703,7 +1733,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 認定却下通知書発行年月日のgetメソッドです。
-     * 
+     *
      * @return 認定却下通知書発行年月日
      */
     public FlexibleDate getNinteiKyakkaTsuchishoHakkoYMD() {
@@ -1712,7 +1742,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 認定却下通知書発行年月日のsetメソッドです。
-     * 
+     *
      * @param ninteiKyakkaTsuchishoHakkoYMD 認定却下通知書発行年月日
      */
     public void setNinteiKyakkaTsuchishoHakkoYMD(FlexibleDate ninteiKyakkaTsuchishoHakkoYMD) {
@@ -1721,7 +1751,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 認定取消通知書発行年月日のgetメソッドです。
-     * 
+     *
      * @return 認定取消通知書発行年月日
      */
     public FlexibleDate getNinteiTorikeshiTsuchishoHakkoYMD() {
@@ -1730,7 +1760,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * 認定取消通知書発行年月日のsetメソッドです。
-     * 
+     *
      * @param ninteiTorikeshiTsuchishoHakkoYMD 認定取消通知書発行年月日
      */
     public void setNinteiTorikeshiTsuchishoHakkoYMD(FlexibleDate ninteiTorikeshiTsuchishoHakkoYMD) {
@@ -1741,7 +1771,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 資格取得前申請フラグのgetメソッドです。
      * <br/>
      * <br/>Enum（DBD：資格取得前申請区分）
-     * 
+     *
      * @return 資格取得前申請フラグ
      */
     public boolean getShikakuShutokuMaeShinseiFlag() {
@@ -1752,7 +1782,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 資格取得前申請フラグのsetメソッドです。
      * <br/>
      * <br/>Enum（DBD：資格取得前申請区分）
-     * 
+     *
      * @param shikakuShutokuMaeShinseiFlag 資格取得前申請フラグ
      */
     public void setShikakuShutokuMaeShinseiFlag(boolean shikakuShutokuMaeShinseiFlag) {
@@ -1763,7 +1793,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 旧措置者フラグのgetメソッドです。
      * <br/>
      * <br/>Enum（DBD：旧措置適用フラグ）
-     * 
+     *
      * @return 旧措置者フラグ
      */
     public boolean getKyuSochishaFlag() {
@@ -1774,7 +1804,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 旧措置者フラグのsetメソッドです。
      * <br/>
      * <br/>Enum（DBD：旧措置適用フラグ）
-     * 
+     *
      * @param kyuSochishaFlag 旧措置者フラグ
      */
     public void setKyuSochishaFlag(boolean kyuSochishaFlag) {
@@ -1785,7 +1815,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 論理削除フラグのgetメソッドです。
      * <br/>
      * <br/>True：論理削除　False：未削除
-     * 
+     *
      * @return 論理削除フラグ
      */
     public boolean getLogicalDeletedFlag() {
@@ -1796,7 +1826,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
      * 論理削除フラグのsetメソッドです。
      * <br/>
      * <br/>True：論理削除　False：未削除
-     * 
+     *
      * @param logicalDeletedFlag 論理削除フラグ
      */
     public void setLogicalDeletedFlag(boolean logicalDeletedFlag) {
@@ -1805,10 +1835,9 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * このエンティティの主キーが他の{@literal DbT4001JukyushaDaichoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT4001JukyushaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT4001JukyushaDaichoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT4001JukyushaDaichoEntity other) {
@@ -1861,6 +1890,7 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
         this.ninteiYukoKikanKaishiYMD = entity.ninteiYukoKikanKaishiYMD;
         this.ninteiYukoKikanShuryoYMD = entity.ninteiYukoKikanShuryoYMD;
         this.ninteiYMD = entity.ninteiYMD;
+        this.minashiCode = entity.minashiCode;
         this.shiteiServiceShurui01 = entity.shiteiServiceShurui01;
         this.shiteiServiceShurui02 = entity.shiteiServiceShurui02;
         this.shiteiServiceShurui03 = entity.shiteiServiceShurui03;
@@ -1925,11 +1955,12 @@ public class DbT4001JukyushaDaichoEntity extends DbTableEntityBase<DbT4001Jukyus
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shichosonCode, hihokenshaNo, rirekiNo, edaban, shinseishoKanriNo, shinseiJokyoKubun, shishoCode, chokkinFlag, shikibetsuCode, jukyuShinseiJiyu, shinseiRiyu, shinseishaKankeiCode, homninKankei, jukyuShinseiYMD, nigoTokuteiShippeiCode, shinsakaiIraiYMD, yokaigoJotaiKubunCode, ninteiYukoKikanKaishiYMD, ninteiYukoKikanShuryoYMD, ninteiYMD, shiteiServiceShurui01, shiteiServiceShurui02, shiteiServiceShurui03, shiteiServiceShurui04, shiteiServiceShurui05, shiteiServiceShurui06, shiteiServiceShurui07, shiteiServiceShurui08, shiteiServiceShurui09, shiteiServiceShurui10, shiteiServiceShurui11, shiteiServiceShurui12, shiteiServiceShurui13, shiteiServiceShurui14, shiteiServiceShurui15, shiteiServiceShurui16, shiteiServiceShurui17, shiteiServiceShurui18, shiteiServiceShurui19, shiteiServiceShurui20, shiteiServiceShurui21, shiteiServiceShurui22, shiteiServiceShurui23, shiteiServiceShurui24, shiteiServiceShurui25, shiteiServiceShurui26, shiteiServiceShurui27, shiteiServiceShurui28, shiteiServiceShurui29, shiteiServiceShurui30, soshitsuYMD, chokkinIdoYMD, chokkinIdoJiyuCode, yukoMukoKubun, dataKubun, remban, idoRiyu, shinseishoKubun, sakujoJiyuCode, yoshienshaNinteiShinseiFlag, shikyuGendoTanisu, shikyuGendoKaishiYMD, shikyuGendoShuryoYMD, tankiSikyuGendoNissu, tankiShikyuGendoKaishiYMD, tankiShikyuGendoShuryoYMD, toshoNinteiYukoKaishiYMD, toshoNinteiYukoShuryoYMD, jukyuShikakuShomeishoHakkoYMD1, jukyuShikakuShomeishoHakkoYMD2, shindanMeireishoHakkoYMD, nigoShinseiJuriTsuchishoHakkoYMD, ninteiKekkaTsuchishoHakkoYMD, kubunHenkoTsuchishoHakkoYMD, serviceHenkoTsuchishoHakkoYMD, ninteiKyakkaTsuchishoHakkoYMD, ninteiTorikeshiTsuchishoHakkoYMD, shikakuShutokuMaeShinseiFlag, kyuSochishaFlag, logicalDeletedFlag);
+        return super.toMd5(shichosonCode, hihokenshaNo, rirekiNo, edaban, shinseishoKanriNo, shinseiJokyoKubun, shishoCode, chokkinFlag, shikibetsuCode, jukyuShinseiJiyu, shinseiRiyu, shinseishaKankeiCode, homninKankei, jukyuShinseiYMD, nigoTokuteiShippeiCode, shinsakaiIraiYMD, yokaigoJotaiKubunCode, ninteiYukoKikanKaishiYMD, ninteiYukoKikanShuryoYMD, ninteiYMD, minashiCode, shiteiServiceShurui01, shiteiServiceShurui02, shiteiServiceShurui03, shiteiServiceShurui04, shiteiServiceShurui05, shiteiServiceShurui06, shiteiServiceShurui07, shiteiServiceShurui08, shiteiServiceShurui09, shiteiServiceShurui10, shiteiServiceShurui11, shiteiServiceShurui12, shiteiServiceShurui13, shiteiServiceShurui14, shiteiServiceShurui15, shiteiServiceShurui16, shiteiServiceShurui17, shiteiServiceShurui18, shiteiServiceShurui19, shiteiServiceShurui20, shiteiServiceShurui21, shiteiServiceShurui22, shiteiServiceShurui23, shiteiServiceShurui24, shiteiServiceShurui25, shiteiServiceShurui26, shiteiServiceShurui27, shiteiServiceShurui28, shiteiServiceShurui29, shiteiServiceShurui30, soshitsuYMD, chokkinIdoYMD, chokkinIdoJiyuCode, yukoMukoKubun, dataKubun, remban, idoRiyu, shinseishoKubun, sakujoJiyuCode, yoshienshaNinteiShinseiFlag, shikyuGendoTanisu, shikyuGendoKaishiYMD, shikyuGendoShuryoYMD, tankiSikyuGendoNissu, tankiShikyuGendoKaishiYMD, tankiShikyuGendoShuryoYMD, toshoNinteiYukoKaishiYMD, toshoNinteiYukoShuryoYMD, jukyuShikakuShomeishoHakkoYMD1, jukyuShikakuShomeishoHakkoYMD2, shindanMeireishoHakkoYMD, nigoShinseiJuriTsuchishoHakkoYMD, ninteiKekkaTsuchishoHakkoYMD, kubunHenkoTsuchishoHakkoYMD, serviceHenkoTsuchishoHakkoYMD, ninteiKyakkaTsuchishoHakkoYMD, ninteiTorikeshiTsuchishoHakkoYMD, shikakuShutokuMaeShinseiFlag, kyuSochishaFlag, logicalDeletedFlag);
     }
 
 // </editor-fold>
