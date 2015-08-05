@@ -17,6 +17,7 @@ import java.util.Objects;
  */
 public class DbT7068ChohyoBunruiKanriEntity extends DbTableEntityBase<DbT7068ChohyoBunruiKanriEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7068ChohyoBunruiKanri");
 
@@ -36,7 +37,7 @@ public class DbT7068ChohyoBunruiKanriEntity extends DbTableEntityBase<DbT7068Cho
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -45,7 +46,7 @@ public class DbT7068ChohyoBunruiKanriEntity extends DbTableEntityBase<DbT7068Cho
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -54,7 +55,7 @@ public class DbT7068ChohyoBunruiKanriEntity extends DbTableEntityBase<DbT7068Cho
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -63,17 +64,16 @@ public class DbT7068ChohyoBunruiKanriEntity extends DbTableEntityBase<DbT7068Cho
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -82,7 +82,7 @@ public class DbT7068ChohyoBunruiKanriEntity extends DbTableEntityBase<DbT7068Cho
 
     /**
      * サブ業務コードのgetメソッドです。
-     * 
+     *
      * @return サブ業務コード
      */
     public SubGyomuCode getSubGyomuCode() {
@@ -91,7 +91,7 @@ public class DbT7068ChohyoBunruiKanriEntity extends DbTableEntityBase<DbT7068Cho
 
     /**
      * サブ業務コードのsetメソッドです。
-     * 
+     *
      * @param subGyomuCode サブ業務コード
      */
     public void setSubGyomuCode(SubGyomuCode subGyomuCode) {
@@ -100,7 +100,7 @@ public class DbT7068ChohyoBunruiKanriEntity extends DbTableEntityBase<DbT7068Cho
 
     /**
      * 帳票IDのgetメソッドです。
-     * 
+     *
      * @return 帳票ID
      */
     public ReportId getReportID() {
@@ -109,7 +109,7 @@ public class DbT7068ChohyoBunruiKanriEntity extends DbTableEntityBase<DbT7068Cho
 
     /**
      * 帳票IDのsetメソッドです。
-     * 
+     *
      * @param reportID 帳票ID
      */
     public void setReportID(ReportId reportID) {
@@ -118,7 +118,7 @@ public class DbT7068ChohyoBunruiKanriEntity extends DbTableEntityBase<DbT7068Cho
 
     /**
      * 帳票分類IDのgetメソッドです。
-     * 
+     *
      * @return 帳票分類ID
      */
     public ReportId getChohyoBunruiID() {
@@ -127,7 +127,7 @@ public class DbT7068ChohyoBunruiKanriEntity extends DbTableEntityBase<DbT7068Cho
 
     /**
      * 帳票分類IDのsetメソッドです。
-     * 
+     *
      * @param chohyoBunruiID 帳票分類ID
      */
     public void setChohyoBunruiID(ReportId chohyoBunruiID) {
@@ -136,9 +136,9 @@ public class DbT7068ChohyoBunruiKanriEntity extends DbTableEntityBase<DbT7068Cho
 
     /**
      * このエンティティの主キーが他の{@literal DbT7068ChohyoBunruiKanriEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7068ChohyoBunruiKanriEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -167,6 +167,7 @@ public class DbT7068ChohyoBunruiKanriEntity extends DbTableEntityBase<DbT7068Cho
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

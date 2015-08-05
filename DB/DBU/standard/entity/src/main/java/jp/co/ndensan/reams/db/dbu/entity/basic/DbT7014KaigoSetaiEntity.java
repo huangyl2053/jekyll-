@@ -7,19 +7,22 @@ import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 
 /**
- * 各種新旧番号変換テーブルテーブルのエンティティクラスです。
+ * 介護世帯テーブルのエンティティクラスです。
  */
-public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT7028KakushuShinKyuNoHenkanEntity> implements IDbAccessable {
+public class DbT7014KaigoSetaiEntity extends DbTableEntityBase<DbT7014KaigoSetaiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
 
     @TableName
-    public static final RString TABLE_NAME = new RString("DbT7028KakushuShinKyuNoHenkan");
+    public static final RString TABLE_NAME = new RString("DbT7014KaigoSetai");
 
     private RString insertDantaiCd;
+    @PrimaryKey
     private RDateTime insertTimestamp;
     private RString insertReamsLoginId;
     private UUID insertContextId;
@@ -30,10 +33,12 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
     @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @PrimaryKey
-    private RString noKubun;
-    private RString shinNo;
+    private FlexibleDate setaiKijunYMD;
     @PrimaryKey
-    private RString kyuNo;
+    private int renban;
+    @PrimaryKey
+    private RDateTime shoriTimestamp;
+    private ShikibetsuCode setaiInshikibetsuCode;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -99,82 +104,102 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
     }
 
     /**
-     * 番号区分のgetメソッドです。
-     * <br/>
-     * <br/>1：特別対策公費受給者番号（７桁）
+     * 世帯基準年月日のgetメソッドです。
      *
-     * @return 番号区分
+     * @return 世帯基準年月日
      */
-    public RString getNoKubun() {
-        return noKubun;
+    public FlexibleDate getSetaiKijunYMD() {
+        return setaiKijunYMD;
     }
 
     /**
-     * 番号区分のsetメソッドです。
-     * <br/>
-     * <br/>1：特別対策公費受給者番号（７桁）
+     * 世帯基準年月日のsetメソッドです。
      *
-     * @param noKubun 番号区分
+     * @param setaiKijunYMD 世帯基準年月日
      */
-    public void setNoKubun(RString noKubun) {
-        this.noKubun = noKubun;
+    public void setSetaiKijunYMD(FlexibleDate setaiKijunYMD) {
+        this.setaiKijunYMD = setaiKijunYMD;
     }
 
     /**
-     * 新番号のgetメソッドです。
+     * 連番のgetメソッドです。
      *
-     * @return 新番号
+     * @return 連番
      */
-    public RString getShinNo() {
-        return shinNo;
+    public int getRenban() {
+        return renban;
     }
 
     /**
-     * 新番号のsetメソッドです。
+     * 連番のsetメソッドです。
      *
-     * @param shinNo 新番号
+     * @param renban 連番
      */
-    public void setShinNo(RString shinNo) {
-        this.shinNo = shinNo;
+    public void setRenban(int renban) {
+        this.renban = renban;
     }
 
     /**
-     * 旧番号のgetメソッドです。
+     * 処理日時のgetメソッドです。
      *
-     * @return 旧番号
+     * @return 処理日時
      */
-    public RString getKyuNo() {
-        return kyuNo;
+    public RDateTime getShoriTimestamp() {
+        return shoriTimestamp;
     }
 
     /**
-     * 旧番号のsetメソッドです。
+     * 処理日時のsetメソッドです。
      *
-     * @param kyuNo 旧番号
+     * @param shoriTimestamp 処理日時
      */
-    public void setKyuNo(RString kyuNo) {
-        this.kyuNo = kyuNo;
+    public void setShoriTimestamp(RDateTime shoriTimestamp) {
+        this.shoriTimestamp = shoriTimestamp;
     }
 
     /**
-     * このエンティティの主キーが他の{@literal DbT7028KakushuShinKyuNoHenkanEntity}と等しいか判定します。
+     * 世帯員識別コードのgetメソッドです。
+     *
+     * @return 世帯員識別コード
+     */
+    public ShikibetsuCode getSetaiInshikibetsuCode() {
+        return setaiInshikibetsuCode;
+    }
+
+    /**
+     * 世帯員識別コードのsetメソッドです。
+     *
+     * @param setaiInshikibetsuCode 世帯員識別コード
+     */
+    public void setSetaiInshikibetsuCode(ShikibetsuCode setaiInshikibetsuCode) {
+        this.setaiInshikibetsuCode = setaiInshikibetsuCode;
+    }
+
+    /**
+     * このエンティティの主キーが他の{@literal DbT7014KaigoSetaiEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
      * @@return
-     * 比較するエンティティが同じ主キーを持つ{@literal DbT7028KakushuShinKyuNoHenkanEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT7014KaigoSetaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
-    public boolean equalsPrimaryKeys(DbT7028KakushuShinKyuNoHenkanEntity other) {
+    public boolean equalsPrimaryKeys(DbT7014KaigoSetaiEntity other) {
         if (other == null) {
+            return false;
+        }
+        if (!Objects.equals(this.insertTimestamp, other.insertTimestamp)) {
             return false;
         }
         if (!Objects.equals(this.hihokenshaNo, other.hihokenshaNo)) {
             return false;
         }
-        if (!Objects.equals(this.noKubun, other.noKubun)) {
+        if (!Objects.equals(this.setaiKijunYMD, other.setaiKijunYMD)) {
             return false;
         }
-        if (!Objects.equals(this.kyuNo, other.kyuNo)) {
+        if (this.renban != other.renban) {
+            return false;
+        }
+        if (!Objects.equals(this.shoriTimestamp, other.shoriTimestamp)) {
             return false;
         }
         return true;
@@ -184,11 +209,12 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
      * {@inheritDoc}
      */
     @Override
-    public void shallowCopy(DbT7028KakushuShinKyuNoHenkanEntity entity) {
+    public void shallowCopy(DbT7014KaigoSetaiEntity entity) {
         this.hihokenshaNo = entity.hihokenshaNo;
-        this.noKubun = entity.noKubun;
-        this.shinNo = entity.shinNo;
-        this.kyuNo = entity.kyuNo;
+        this.setaiKijunYMD = entity.setaiKijunYMD;
+        this.renban = entity.renban;
+        this.shoriTimestamp = entity.shoriTimestamp;
+        this.setaiInshikibetsuCode = entity.setaiInshikibetsuCode;
     }
 
     /**
@@ -198,7 +224,7 @@ public class DbT7028KakushuShinKyuNoHenkanEntity extends DbTableEntityBase<DbT70
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(hihokenshaNo, noKubun, shinNo, kyuNo);
+        return super.toMd5(hihokenshaNo, setaiKijunYMD, renban, shoriTimestamp, setaiInshikibetsuCode);
     }
 
 // </editor-fold>

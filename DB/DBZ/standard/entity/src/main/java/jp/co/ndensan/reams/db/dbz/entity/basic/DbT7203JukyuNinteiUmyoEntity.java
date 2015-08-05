@@ -1,16 +1,16 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic;
 
-import java.util.Objects;
-import java.util.UUID;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShichosonCode;
 
 /**
  * 受給認定運用管理テーブルのエンティティクラスです。
@@ -137,7 +137,8 @@ public class DbT7203JukyuNinteiUmyoEntity extends DbTableEntityBase<DbT7203Jukyu
      * このエンティティの主キーが他の{@literal DbT7203JukyuNinteiUmyoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
-     * @@return 比較するエンティティが同じ主キーを持つ{@literal DbT7203JukyuNinteiUmyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT7203JukyuNinteiUmyoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT7203JukyuNinteiUmyoEntity other) {
@@ -167,8 +168,7 @@ public class DbT7203JukyuNinteiUmyoEntity extends DbTableEntityBase<DbT7203Jukyu
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shichosonCode, koshinTaishoChushutsuYMD, koshinTaishoChushutsuYukoShuryoYM
-        );
+        return super.toMd5(shichosonCode, koshinTaishoChushutsuYMD, koshinTaishoChushutsuYukoShuryoYM);
     }
 
 // </editor-fold>

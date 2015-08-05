@@ -10,6 +10,7 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoServiceShuruiCode;
 
 /**
  * 介護サービス種類テーブルのエンティティクラスです。
@@ -17,6 +18,7 @@ import java.util.Objects;
  */
 public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130KaigoServiceShuruiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7130KaigoServiceShurui");
 
@@ -29,7 +31,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private UDD061KaigoServiceShuruiCode serviceShuruiCd;
+    private KaigoServiceShuruiCode serviceShuruiCd;
     @PrimaryKey
     private FlexibleYearMonth teikyoKaishiYM;
     private FlexibleYearMonth teikyoshuryoYM;
@@ -39,7 +41,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -48,7 +50,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -57,7 +59,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -66,17 +68,16 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -85,25 +86,25 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * サービス種類コードのgetメソッドです。
-     * 
+     *
      * @return サービス種類コード
      */
-    public UDD061KaigoServiceShuruiCode getServiceShuruiCd() {
+    public KaigoServiceShuruiCode getServiceShuruiCd() {
         return serviceShuruiCd;
     }
 
     /**
      * サービス種類コードのsetメソッドです。
-     * 
+     *
      * @param serviceShuruiCd サービス種類コード
      */
-    public void setServiceShuruiCd(UDD061KaigoServiceShuruiCode serviceShuruiCd) {
+    public void setServiceShuruiCd(KaigoServiceShuruiCode serviceShuruiCd) {
         this.serviceShuruiCd = serviceShuruiCd;
     }
 
     /**
      * 提供開始年月のgetメソッドです。
-     * 
+     *
      * @return 提供開始年月
      */
     public FlexibleYearMonth getTeikyoKaishiYM() {
@@ -112,7 +113,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * 提供開始年月のsetメソッドです。
-     * 
+     *
      * @param teikyoKaishiYM 提供開始年月
      */
     public void setTeikyoKaishiYM(FlexibleYearMonth teikyoKaishiYM) {
@@ -121,7 +122,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * 提供終了年月のgetメソッドです。
-     * 
+     *
      * @return 提供終了年月
      */
     public FlexibleYearMonth getTeikyoshuryoYM() {
@@ -130,7 +131,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * 提供終了年月のsetメソッドです。
-     * 
+     *
      * @param teikyoshuryoYM 提供終了年月
      */
     public void setTeikyoshuryoYM(FlexibleYearMonth teikyoshuryoYM) {
@@ -139,7 +140,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * サービス種類名称のgetメソッドです。
-     * 
+     *
      * @return サービス種類名称
      */
     public RString getServiceShuruiMeisho() {
@@ -148,7 +149,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * サービス種類名称のsetメソッドです。
-     * 
+     *
      * @param serviceShuruiMeisho サービス種類名称
      */
     public void setServiceShuruiMeisho(RString serviceShuruiMeisho) {
@@ -157,7 +158,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * サービス種類略称のgetメソッドです。
-     * 
+     *
      * @return サービス種類略称
      */
     public RString getServiceShuruiRyakusho() {
@@ -166,7 +167,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * サービス種類略称のsetメソッドです。
-     * 
+     *
      * @param serviceShuruiRyakusho サービス種類略称
      */
     public void setServiceShuruiRyakusho(RString serviceShuruiRyakusho) {
@@ -187,7 +188,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * <br/>09:その他
      * <br/>10:総合事業
      * <br/>11:ケアマネジメント
-     * 
+     *
      * @return サービス分類コード
      */
     public Code getServiceBunrruicode() {
@@ -208,7 +209,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
      * <br/>09:その他
      * <br/>10:総合事業
      * <br/>11:ケアマネジメント
-     * 
+     *
      * @param serviceBunrruicode サービス分類コード
      */
     public void setServiceBunrruicode(Code serviceBunrruicode) {
@@ -217,9 +218,9 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * このエンティティの主キーが他の{@literal DbT7130KaigoServiceShuruiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7130KaigoServiceShuruiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -251,6 +252,7 @@ public class DbT7130KaigoServiceShuruiEntity extends DbTableEntityBase<DbT7130Ka
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

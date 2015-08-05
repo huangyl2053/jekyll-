@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 関連被保険者番号テーブルのエンティティクラスです。
@@ -16,6 +18,7 @@ import java.util.Objects;
  */
 public class DbT7054KanrenHihokenshaNoEntity extends DbTableEntityBase<DbT7054KanrenHihokenshaNoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7054KanrenHihokenshaNo");
 
@@ -28,15 +31,15 @@ public class DbT7054KanrenHihokenshaNoEntity extends DbTableEntityBase<DbT7054Ka
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
-    private DbUDD002HihokenshaNo saishinHihokenshaNo;
-    private DbUDD002HihokenshaNo kyuuHihokenshaNo;
+    private HihokenshaNo saishinHihokenshaNo;
+    private HihokenshaNo kyuuHihokenshaNo;
     private ShikibetsuCode shikibetsuCode;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -45,7 +48,7 @@ public class DbT7054KanrenHihokenshaNoEntity extends DbTableEntityBase<DbT7054Ka
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -54,7 +57,7 @@ public class DbT7054KanrenHihokenshaNoEntity extends DbTableEntityBase<DbT7054Ka
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -63,17 +66,16 @@ public class DbT7054KanrenHihokenshaNoEntity extends DbTableEntityBase<DbT7054Ka
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -82,61 +84,61 @@ public class DbT7054KanrenHihokenshaNoEntity extends DbTableEntityBase<DbT7054Ka
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD015ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * 最新被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 最新被保険者番号
      */
-    public DbUDD002HihokenshaNo getSaishinHihokenshaNo() {
+    public HihokenshaNo getSaishinHihokenshaNo() {
         return saishinHihokenshaNo;
     }
 
     /**
      * 最新被保険者番号のsetメソッドです。
-     * 
+     *
      * @param saishinHihokenshaNo 最新被保険者番号
      */
-    public void setSaishinHihokenshaNo(DbUDD002HihokenshaNo saishinHihokenshaNo) {
+    public void setSaishinHihokenshaNo(HihokenshaNo saishinHihokenshaNo) {
         this.saishinHihokenshaNo = saishinHihokenshaNo;
     }
 
     /**
      * 旧被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 旧被保険者番号
      */
-    public DbUDD002HihokenshaNo getKyuuHihokenshaNo() {
+    public HihokenshaNo getKyuuHihokenshaNo() {
         return kyuuHihokenshaNo;
     }
 
     /**
      * 旧被保険者番号のsetメソッドです。
-     * 
+     *
      * @param kyuuHihokenshaNo 旧被保険者番号
      */
-    public void setKyuuHihokenshaNo(DbUDD002HihokenshaNo kyuuHihokenshaNo) {
+    public void setKyuuHihokenshaNo(HihokenshaNo kyuuHihokenshaNo) {
         this.kyuuHihokenshaNo = kyuuHihokenshaNo;
     }
 
     /**
      * 識別コードのgetメソッドです。
-     * 
+     *
      * @return 識別コード
      */
     public ShikibetsuCode getShikibetsuCode() {
@@ -145,7 +147,7 @@ public class DbT7054KanrenHihokenshaNoEntity extends DbTableEntityBase<DbT7054Ka
 
     /**
      * 識別コードのsetメソッドです。
-     * 
+     *
      * @param shikibetsuCode 識別コード
      */
     public void setShikibetsuCode(ShikibetsuCode shikibetsuCode) {
@@ -154,9 +156,9 @@ public class DbT7054KanrenHihokenshaNoEntity extends DbTableEntityBase<DbT7054Ka
 
     /**
      * このエンティティの主キーが他の{@literal DbT7054KanrenHihokenshaNoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7054KanrenHihokenshaNoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -186,6 +188,7 @@ public class DbT7054KanrenHihokenshaNoEntity extends DbTableEntityBase<DbT7054Ka
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

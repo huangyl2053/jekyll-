@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
+import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 
 /**
  * 介護支援専門員テーブルのエンティティクラスです。
@@ -18,6 +19,7 @@ import java.util.Objects;
  */
 public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManegerEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT7064CareManeger");
 
@@ -33,13 +35,13 @@ public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManeg
     private RString kaigoShienSenmoninNo;
     private AtenaMeisho kaigoShienSenmoninMei;
     private AtenaKanaMeisho kaigoShienSenmoninMeiKana;
-    private UDD060KaigoJigyoshaNo shozokuJigyoshaNo;
+    private KaigoJigyoshaNo shozokuJigyoshaNo;
     private FlexibleDate yukoKaishiDate;
     private FlexibleDate yukoShuryoDate;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -48,7 +50,7 @@ public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManeg
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -57,7 +59,7 @@ public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManeg
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -66,17 +68,16 @@ public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManeg
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -85,7 +86,7 @@ public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManeg
 
     /**
      * 介護支援専門員番号のgetメソッドです。
-     * 
+     *
      * @return 介護支援専門員番号
      */
     public RString getKaigoShienSenmoninNo() {
@@ -94,7 +95,7 @@ public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManeg
 
     /**
      * 介護支援専門員番号のsetメソッドです。
-     * 
+     *
      * @param kaigoShienSenmoninNo 介護支援専門員番号
      */
     public void setKaigoShienSenmoninNo(RString kaigoShienSenmoninNo) {
@@ -103,7 +104,7 @@ public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManeg
 
     /**
      * 介護支援専門員名のgetメソッドです。
-     * 
+     *
      * @return 介護支援専門員名
      */
     public AtenaMeisho getKaigoShienSenmoninMei() {
@@ -112,7 +113,7 @@ public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManeg
 
     /**
      * 介護支援専門員名のsetメソッドです。
-     * 
+     *
      * @param kaigoShienSenmoninMei 介護支援専門員名
      */
     public void setKaigoShienSenmoninMei(AtenaMeisho kaigoShienSenmoninMei) {
@@ -121,7 +122,7 @@ public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManeg
 
     /**
      * 介護支援専門員名カナのgetメソッドです。
-     * 
+     *
      * @return 介護支援専門員名カナ
      */
     public AtenaKanaMeisho getKaigoShienSenmoninMeiKana() {
@@ -130,7 +131,7 @@ public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManeg
 
     /**
      * 介護支援専門員名カナのsetメソッドです。
-     * 
+     *
      * @param kaigoShienSenmoninMeiKana 介護支援専門員名カナ
      */
     public void setKaigoShienSenmoninMeiKana(AtenaKanaMeisho kaigoShienSenmoninMeiKana) {
@@ -139,25 +140,25 @@ public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManeg
 
     /**
      * 所属事業者番号のgetメソッドです。
-     * 
+     *
      * @return 所属事業者番号
      */
-    public UDD060KaigoJigyoshaNo getShozokuJigyoshaNo() {
+    public KaigoJigyoshaNo getShozokuJigyoshaNo() {
         return shozokuJigyoshaNo;
     }
 
     /**
      * 所属事業者番号のsetメソッドです。
-     * 
+     *
      * @param shozokuJigyoshaNo 所属事業者番号
      */
-    public void setShozokuJigyoshaNo(UDD060KaigoJigyoshaNo shozokuJigyoshaNo) {
+    public void setShozokuJigyoshaNo(KaigoJigyoshaNo shozokuJigyoshaNo) {
         this.shozokuJigyoshaNo = shozokuJigyoshaNo;
     }
 
     /**
      * 有効開始年月日のgetメソッドです。
-     * 
+     *
      * @return 有効開始年月日
      */
     public FlexibleDate getYukoKaishiDate() {
@@ -166,7 +167,7 @@ public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManeg
 
     /**
      * 有効開始年月日のsetメソッドです。
-     * 
+     *
      * @param yukoKaishiDate 有効開始年月日
      */
     public void setYukoKaishiDate(FlexibleDate yukoKaishiDate) {
@@ -175,7 +176,7 @@ public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManeg
 
     /**
      * 有効終了年月日のgetメソッドです。
-     * 
+     *
      * @return 有効終了年月日
      */
     public FlexibleDate getYukoShuryoDate() {
@@ -184,7 +185,7 @@ public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManeg
 
     /**
      * 有効終了年月日のsetメソッドです。
-     * 
+     *
      * @param yukoShuryoDate 有効終了年月日
      */
     public void setYukoShuryoDate(FlexibleDate yukoShuryoDate) {
@@ -193,9 +194,9 @@ public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManeg
 
     /**
      * このエンティティの主キーが他の{@literal DbT7064CareManegerEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT7064CareManegerEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -224,6 +225,7 @@ public class DbT7064CareManegerEntity extends DbTableEntityBase<DbT7064CareManeg
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
