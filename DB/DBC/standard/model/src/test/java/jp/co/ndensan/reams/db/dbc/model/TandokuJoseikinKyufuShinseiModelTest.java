@@ -45,12 +45,6 @@ public class TandokuJoseikinKyufuShinseiModelTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT3098TandokuJoseikinKyufuShinseiEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT3098TandokuJoseikinKyufuShinseiEntityGenerator.DEFAULT_処理日時));
-        }
-
-        @Test
         public void 戻り値の申請年月日は_設定した値と同じ申請年月日を返す() {
             sut.set申請年月日(DbT3098TandokuJoseikinKyufuShinseiEntityGenerator.DEFAULT_申請年月日);
             assertThat(sut.get申請年月日(), is(DbT3098TandokuJoseikinKyufuShinseiEntityGenerator.DEFAULT_申請年月日));

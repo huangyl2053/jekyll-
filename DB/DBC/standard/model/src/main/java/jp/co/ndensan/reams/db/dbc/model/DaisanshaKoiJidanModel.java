@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.model;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.entity.basic.DbT3080DaisanshaKoiJidanEntity;
+import jp.co.ndensan.reams.db.dbc.entity.basic.DbT3080DaisanshaKoiJidanEntity;
 import jp.co.ndensan.reams.ur.urz.definition.enumeratedtype.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -84,15 +84,6 @@ public class DaisanshaKoiJidanModel implements Serializable {
      */
     public FlexibleDate get示談報告書受付年月日() {
         return entity.getJidanHokokushoUketukeYMD();
-    }
-
-    /**
-     * 処理日時を返します。
-     *
-     * @return 処理日時
-     */
-    public YMDHMS get処理日時() {
-        return entity.getShoriTimestamp();
     }
 
     /**
@@ -186,16 +177,6 @@ public class DaisanshaKoiJidanModel implements Serializable {
     public void set示談報告書受付年月日(FlexibleDate 示談報告書受付年月日) {
         requireNonNull(示談報告書受付年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("示談報告書受付年月日"));
         entity.setJidanHokokushoUketukeYMD(示談報告書受付年月日);
-    }
-
-    /**
-     * 処理日時を設定します。
-     *
-     * @param 処理日時 処理日時
-     */
-    public void set処理日時(YMDHMS 処理日時) {
-        requireNonNull(処理日時, UrSystemErrorMessages.値がnull.getReplacedMessage("処理日時"));
-        entity.setShoriTimestamp(処理日時);
     }
 
     /**

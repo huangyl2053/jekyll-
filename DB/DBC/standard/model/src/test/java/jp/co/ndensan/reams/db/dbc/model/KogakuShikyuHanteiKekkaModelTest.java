@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.model;
 
 import jp.co.ndensan.reams.db.dbc.model.KogakuShikyuHanteiKekkaModel;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3057KogakuShikyuHanteiKekkaEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3057KogakuShikyuHanteiKekkaEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -51,12 +51,6 @@ public class KogakuShikyuHanteiKekkaModelTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_処理日時));
-        }
-
-        @Test
         public void 戻り値の決定年月日は_設定した値と同じ決定年月日を返す() {
             sut.set決定年月日(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_決定年月日);
             assertThat(sut.get決定年月日(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_決定年月日));
@@ -84,54 +78,6 @@ public class KogakuShikyuHanteiKekkaModelTest extends DbzTestBase {
         public void 戻り値の不支給理由は_設定した値と同じ不支給理由を返す() {
             sut.set不支給理由(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_不支給理由);
             assertThat(sut.get不支給理由(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_不支給理由));
-        }
-
-        @Test
-        public void 戻り値の支払方法区分コードは_設定した値と同じ支払方法区分コードを返す() {
-            sut.set支払方法区分コード(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_支払方法区分コード);
-            assertThat(sut.get支払方法区分コード(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_支払方法区分コード));
-        }
-
-        @Test
-        public void 戻り値の支払場所は_設定した値と同じ支払場所を返す() {
-            sut.set支払場所(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_支払場所);
-            assertThat(sut.get支払場所(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_支払場所));
-        }
-
-        @Test
-        public void 戻り値の支払期間開始年月日は_設定した値と同じ支払期間開始年月日を返す() {
-            sut.set支払期間開始年月日(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_支払期間開始年月日);
-            assertThat(sut.get支払期間開始年月日(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_支払期間開始年月日));
-        }
-
-        @Test
-        public void 戻り値の支払期間終了年月日は_設定した値と同じ支払期間終了年月日を返す() {
-            sut.set支払期間終了年月日(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_支払期間終了年月日);
-            assertThat(sut.get支払期間終了年月日(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_支払期間終了年月日));
-        }
-
-        @Test
-        public void 戻り値の閉庁内容は_設定した値と同じ閉庁内容を返す() {
-            sut.set閉庁内容(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_閉庁内容);
-            assertThat(sut.get閉庁内容(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_閉庁内容));
-        }
-
-        @Test
-        public void 戻り値の支払窓口開始時間は_設定した値と同じ支払窓口開始時間を返す() {
-            sut.set支払窓口開始時間(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_支払窓口開始時間);
-            assertThat(sut.get支払窓口開始時間(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_支払窓口開始時間));
-        }
-
-        @Test
-        public void 戻り値の支払窓口終了時間は_設定した値と同じ支払窓口終了時間を返す() {
-            sut.set支払窓口終了時間(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_支払窓口終了時間);
-            assertThat(sut.get支払窓口終了時間(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_支払窓口終了時間));
-        }
-
-        @Test
-        public void 戻り値の受領委任契約番号は_設定した値と同じ受領委任契約番号を返す() {
-            sut.set受領委任契約番号(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_受領委任契約番号);
-            assertThat(sut.get受領委任契約番号(), is(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.DEFAULT_受領委任契約番号));
         }
 
         @Test
@@ -190,10 +136,10 @@ public class KogakuShikyuHanteiKekkaModelTest extends DbzTestBase {
         // public void 状態Modifinedの取得確認() {
         // KogakuShikyuHanteiKekkaModel sut = new KogakuShikyuHanteiKekkaModel();
         //sut.setEntity(DbT3057KogakuShikyuHanteiKekkaEntityGenerator.createDbT3057KogakuShikyuHanteiKekkaEntity());
-           // sut.getEntity().initializeMd5();
-            // TODO主キー以外の項目を変更してください
+        // sut.getEntity().initializeMd5();
+        // TODO主キー以外の項目を変更してください
         //sut.getEntity().setXXX(new XXX());
-            //assertThat(sut.getState(), is(EntityDataState.Modified));
+        //assertThat(sut.getState(), is(EntityDataState.Modified));
         //}
         @Test
         public void 状態Unchangedの取得確認() {

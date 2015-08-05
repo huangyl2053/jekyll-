@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.model;
 
 import jp.co.ndensan.reams.db.dbc.model.TandokuJoseiShuruiModel;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3099TandokuJoseiShuruiEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3099TandokuJoseiShuruiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -48,12 +48,6 @@ public class TandokuJoseiShuruiModelTest extends DbzTestBase {
         public void 戻り値の適用開始年月は_設定した値と同じ適用開始年月を返す() {
             sut.set適用開始年月(DbT3099TandokuJoseiShuruiEntityGenerator.DEFAULT_適用開始年月);
             assertThat(sut.get適用開始年月(), is(DbT3099TandokuJoseiShuruiEntityGenerator.DEFAULT_適用開始年月));
-        }
-
-        @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT3099TandokuJoseiShuruiEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT3099TandokuJoseiShuruiEntityGenerator.DEFAULT_処理日時));
         }
 
         @Test

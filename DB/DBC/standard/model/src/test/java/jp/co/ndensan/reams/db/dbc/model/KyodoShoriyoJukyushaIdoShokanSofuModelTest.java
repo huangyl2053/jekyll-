@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.model;
 
 import jp.co.ndensan.reams.db.dbc.model.KyodoShoriyoJukyushaIdoShokanSofuModel;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -60,12 +60,6 @@ public class KyodoShoriyoJukyushaIdoShokanSofuModelTest extends DbzTestBase {
         public void 戻り値の被保険者番号は_設定した値と同じ被保険者番号を返す() {
             sut.set被保険者番号(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityGenerator.DEFAULT_被保険者番号);
             assertThat(sut.get被保険者番号(), is(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityGenerator.DEFAULT_被保険者番号));
-        }
-
-        @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntityGenerator.DEFAULT_処理日時));
         }
 
         @Test

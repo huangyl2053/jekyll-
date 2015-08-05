@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.model;
 
 import jp.co.ndensan.reams.db.dbc.model.ShokanServicePlan200904Model;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3047ShokanServicePlan200904EntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3047ShokanServicePlan200904EntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -60,12 +60,6 @@ public class ShokanServicePlan200904ModelTest extends DbzTestBase {
         public void 戻り値の様式番号は_設定した値と同じ様式番号を返す() {
             sut.set様式番号(DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_様式番号);
             assertThat(sut.get様式番号(), is(DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_様式番号));
-        }
-
-        @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT3047ShokanServicePlan200904EntityGenerator.DEFAULT_処理日時));
         }
 
         @Test
@@ -210,7 +204,7 @@ public class ShokanServicePlan200904ModelTest extends DbzTestBase {
             assertThat(sut.getState(), is(EntityDataState.Added));
         }
 
-       // @Test
+        // @Test
         // public void 状態Modifinedの取得確認() {
         // ShokanServicePlan200904Model sut = new ShokanServicePlan200904Model();
         //sut.setEntity(DbT3047ShokanServicePlan200904EntityGenerator.createDbT3047ShokanServicePlan200904Entity());

@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.model;
 
 import jp.co.ndensan.reams.db.dbc.model.ShokanTokuteiShinryoTokubetsuRyoyoModel;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -69,12 +69,6 @@ public class ShokanTokuteiShinryoTokubetsuRyoyoModelTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator.DEFAULT_処理日時));
-        }
-
-        @Test
         public void 戻り値の傷病名は_設定した値と同じ傷病名を返す() {
             sut.set傷病名(DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator.DEFAULT_傷病名);
             assertThat(sut.get傷病名(), is(DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator.DEFAULT_傷病名));
@@ -126,14 +120,14 @@ public class ShokanTokuteiShinryoTokubetsuRyoyoModelTest extends DbzTestBase {
             assertThat(sut.getState(), is(EntityDataState.Added));
         }
 
-       // @Test
+        // @Test
         // public void 状態Modifinedの取得確認() {
         // ShokanTokuteiShinryoTokubetsuRyoyoModel sut = new ShokanTokuteiShinryoTokubetsuRyoyoModel();
         //sut.setEntity(DbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntityGenerator.createDbT3042ShokanTokuteiShinryoTokubetsuRyoyoEntity());
-           // sut.getEntity().initializeMd5();
-            // TODO主キー以外の項目を変更してください
+        // sut.getEntity().initializeMd5();
+        // TODO主キー以外の項目を変更してください
         //sut.getEntity().setXXX(new XXX());
-            //assertThat(sut.getState(), is(EntityDataState.Modified));
+        //assertThat(sut.getState(), is(EntityDataState.Modified));
         //}
         @Test
         public void 状態Unchangedの取得確認() {

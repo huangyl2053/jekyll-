@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.model;
 
 import jp.co.ndensan.reams.db.dbc.model.NijiYoboNiniCheckListModel;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3102NijiYoboNiniCheckListEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3102NijiYoboNiniCheckListEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -54,12 +54,6 @@ public class NijiYoboNiniCheckListModelTest extends DbzTestBase {
         public void 戻り値の任意質問番号は_設定した値と同じ任意質問番号を返す() {
             sut.set任意質問番号(DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_任意質問番号);
             assertThat(sut.get任意質問番号(), is(DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_任意質問番号));
-        }
-
-        @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT3102NijiYoboNiniCheckListEntityGenerator.DEFAULT_処理日時));
         }
 
         @Test

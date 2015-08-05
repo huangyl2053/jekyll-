@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.model;
 
 import jp.co.ndensan.reams.db.dbc.model.ShokanTokuteiNyushoshaKaigoServiceHiyoModel;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -66,12 +66,6 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoModelTest extends DbzTestBase
         public void 戻り値の順次番号は_設定した値と同じ順次番号を返す() {
             sut.set順次番号(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityGenerator.DEFAULT_順次番号);
             assertThat(sut.get順次番号(), is(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityGenerator.DEFAULT_順次番号));
-        }
-
-        @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityGenerator.DEFAULT_処理日時));
         }
 
         @Test
@@ -181,7 +175,7 @@ public class ShokanTokuteiNyushoshaKaigoServiceHiyoModelTest extends DbzTestBase
             assertThat(sut.getState(), is(EntityDataState.Added));
         }
 
-       // @Test
+        // @Test
         // public void 状態Modifinedの取得確認() {
         // ShokanTokuteiNyushoshaKaigoServiceHiyoModel sut = new ShokanTokuteiNyushoshaKaigoServiceHiyoModel();
         //sut.setEntity(DbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntityGenerator.createDbT3050ShokanTokuteiNyushoshaKaigoServiceHiyoEntity());

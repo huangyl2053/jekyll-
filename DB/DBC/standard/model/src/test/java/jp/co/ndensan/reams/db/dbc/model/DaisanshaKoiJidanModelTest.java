@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.model;
 
 import jp.co.ndensan.reams.db.dbc.model.DaisanshaKoiJidanModel;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3080DaisanshaKoiJidanEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3080DaisanshaKoiJidanEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -48,12 +48,6 @@ public class DaisanshaKoiJidanModelTest extends DbzTestBase {
         public void 戻り値の示談報告書受付年月日は_設定した値と同じ示談報告書受付年月日を返す() {
             sut.set示談報告書受付年月日(DbT3080DaisanshaKoiJidanEntityGenerator.DEFAULT_示談報告書受付年月日);
             assertThat(sut.get示談報告書受付年月日(), is(DbT3080DaisanshaKoiJidanEntityGenerator.DEFAULT_示談報告書受付年月日));
-        }
-
-        @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT3080DaisanshaKoiJidanEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT3080DaisanshaKoiJidanEntityGenerator.DEFAULT_処理日時));
         }
 
         @Test

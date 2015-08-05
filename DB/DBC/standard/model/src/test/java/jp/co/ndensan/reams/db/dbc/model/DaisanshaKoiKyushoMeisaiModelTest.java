@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.model;
 
 import jp.co.ndensan.reams.db.dbc.model.DaisanshaKoiKyushoMeisaiModel;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3083DaisanshaKoiKyushoMeisaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3083DaisanshaKoiKyushoMeisaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -66,12 +66,6 @@ public class DaisanshaKoiKyushoMeisaiModelTest extends DbzTestBase {
         public void 戻り値のサービス種類コードは_設定した値と同じサービス種類コードを返す() {
             sut.setサービス種類コード(DbT3083DaisanshaKoiKyushoMeisaiEntityGenerator.DEFAULT_サービス種類コード);
             assertThat(sut.getサービス種類コード(), is(DbT3083DaisanshaKoiKyushoMeisaiEntityGenerator.DEFAULT_サービス種類コード));
-        }
-
-        @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT3083DaisanshaKoiKyushoMeisaiEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT3083DaisanshaKoiKyushoMeisaiEntityGenerator.DEFAULT_処理日時));
         }
 
         @Test

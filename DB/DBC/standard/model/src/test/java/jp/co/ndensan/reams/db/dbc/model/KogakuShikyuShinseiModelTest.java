@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.model;
 
 import jp.co.ndensan.reams.db.dbc.model.KogakuShikyuShinseiModel;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3056KogakuShikyuShinseiEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3056KogakuShikyuShinseiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -48,12 +48,6 @@ public class KogakuShikyuShinseiModelTest extends DbzTestBase {
         public void 戻り値の証記載保険者番号は_設定した値と同じ証記載保険者番号を返す() {
             sut.set証記載保険者番号(DbT3056KogakuShikyuShinseiEntityGenerator.DEFAULT_証記載保険者番号);
             assertThat(sut.get証記載保険者番号(), is(DbT3056KogakuShikyuShinseiEntityGenerator.DEFAULT_証記載保険者番号));
-        }
-
-        @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT3056KogakuShikyuShinseiEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT3056KogakuShikyuShinseiEntityGenerator.DEFAULT_処理日時));
         }
 
         @Test
@@ -124,10 +118,10 @@ public class KogakuShikyuShinseiModelTest extends DbzTestBase {
         // public void 状態Modifinedの取得確認() {
         // KogakuShikyuShinseiModel sut = new KogakuShikyuShinseiModel();
         //sut.setEntity(DbT3056KogakuShikyuShinseiEntityGenerator.createDbT3056KogakuShikyuShinseiEntity());
-           // sut.getEntity().initializeMd5();
-            // TODO主キー以外の項目を変更してください
+        // sut.getEntity().initializeMd5();
+        // TODO主キー以外の項目を変更してください
         //sut.getEntity().setXXX(new XXX());
-            //assertThat(sut.getState(), is(EntityDataState.Modified));
+        //assertThat(sut.getState(), is(EntityDataState.Modified));
         //}
         @Test
         public void 状態Unchangedの取得確認() {

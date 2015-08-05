@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiService;
 import jp.co.ndensan.reams.db.dbc.business.KyufuJissekiServiceCollection;
 import jp.co.ndensan.reams.db.dbc.entity.basic.DbV3016KyufujissekiShuruiDetailEntity;
-import jp.co.ndensan.reams.db.dbc.entity.helper.KyufujissekiShuruiDetailEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.KyufujissekiShuruiDetailEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Range;

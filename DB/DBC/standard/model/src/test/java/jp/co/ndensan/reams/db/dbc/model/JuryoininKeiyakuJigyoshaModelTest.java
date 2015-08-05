@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.model;
 
 import jp.co.ndensan.reams.db.dbc.model.JuryoininKeiyakuJigyoshaModel;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3077JuryoininKeiyakuJigyoshaEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3077JuryoininKeiyakuJigyoshaEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -45,12 +45,6 @@ public class JuryoininKeiyakuJigyoshaModelTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_処理日時));
-        }
-
-        @Test
         public void 戻り値の終了年月日は_設定した値と同じ終了年月日を返す() {
             sut.set終了年月日(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_終了年月日);
             assertThat(sut.get終了年月日(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_終了年月日));
@@ -78,12 +72,6 @@ public class JuryoininKeiyakuJigyoshaModelTest extends DbzTestBase {
         public void 戻り値の届出者代表者氏名は_設定した値と同じ届出者代表者氏名を返す() {
             sut.set届出者代表者氏名(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_届出者代表者氏名);
             assertThat(sut.get届出者代表者氏名(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_届出者代表者氏名));
-        }
-
-        @Test
-        public void 戻り値の識別コードは_設定した値と同じ識別コードを返す() {
-            sut.set識別コード(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_識別コード);
-            assertThat(sut.get識別コード(), is(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.DEFAULT_識別コード));
         }
 
         @Test
@@ -160,10 +148,10 @@ public class JuryoininKeiyakuJigyoshaModelTest extends DbzTestBase {
         // public void 状態Modifinedの取得確認() {
         // JuryoininKeiyakuJigyoshaModel sut = new JuryoininKeiyakuJigyoshaModel();
         //sut.setEntity(DbT3077JuryoininKeiyakuJigyoshaEntityGenerator.createDbT3077JuryoininKeiyakuJigyoshaEntity());
-           // sut.getEntity().initializeMd5();
-            // TODO主キー以外の項目を変更してください
+        // sut.getEntity().initializeMd5();
+        // TODO主キー以外の項目を変更してください
         //sut.getEntity().setXXX(new XXX());
-            //assertThat(sut.getState(), is(EntityDataState.Modified));
+        //assertThat(sut.getState(), is(EntityDataState.Modified));
         //}
         @Test
         public void 状態Unchangedの取得確認() {

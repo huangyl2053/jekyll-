@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.model;
 
 import jp.co.ndensan.reams.db.dbc.model.ShokanShokujiHiyoSagakuShikyuModel;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -63,12 +63,6 @@ public class ShokanShokujiHiyoSagakuShikyuModelTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_処理日時));
-        }
-
-        @Test
         public void 戻り値の差額金額は_設定した値と同じ差額金額を返す() {
             sut.set差額金額(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_差額金額);
             assertThat(sut.get差額金額(), is(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.DEFAULT_差額金額));
@@ -108,7 +102,7 @@ public class ShokanShokujiHiyoSagakuShikyuModelTest extends DbzTestBase {
             assertThat(sut.getState(), is(EntityDataState.Added));
         }
 
-       // @Test
+        // @Test
         // public void 状態Modifinedの取得確認() {
         // ShokanShokujiHiyoSagakuShikyuModel sut = new ShokanShokujiHiyoSagakuShikyuModel();
         //sut.setEntity(DbT3044ShokanShokujiHiyoSagakuShikyuEntityGenerator.createDbT3044ShokanShokujiHiyoSagakuShikyuEntity());

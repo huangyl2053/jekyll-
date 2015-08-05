@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.model;
 
 import jp.co.ndensan.reams.db.dbc.model.ShokanJutakuKaishuJizenShinseiModel;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -48,12 +48,6 @@ public class ShokanJutakuKaishuJizenShinseiModelTest extends DbzTestBase {
         public void 戻り値の整理番号は_設定した値と同じ整理番号を返す() {
             sut.set整理番号(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_整理番号);
             assertThat(sut.get整理番号(), is(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_整理番号));
-        }
-
-        @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.DEFAULT_処理日時));
         }
 
         @Test
@@ -208,10 +202,10 @@ public class ShokanJutakuKaishuJizenShinseiModelTest extends DbzTestBase {
         // public void 状態Modifinedの取得確認() {
         // ShokanJutakuKaishuJizenShinseiModel sut = new ShokanJutakuKaishuJizenShinseiModel();
         //sut.setEntity(DbT3035ShokanJutakuKaishuJizenShinseiEntityGenerator.createDbT3035ShokanJutakuKaishuJizenShinseiEntity());
-           // sut.getEntity().initializeMd5();
-            // TODO主キー以外の項目を変更してください
+        // sut.getEntity().initializeMd5();
+        // TODO主キー以外の項目を変更してください
         //sut.getEntity().setXXX(new XXX());
-            //assertThat(sut.getState(), is(EntityDataState.Modified));
+        //assertThat(sut.getState(), is(EntityDataState.Modified));
         //}
         @Test
         public void 状態Unchangedの取得確認() {

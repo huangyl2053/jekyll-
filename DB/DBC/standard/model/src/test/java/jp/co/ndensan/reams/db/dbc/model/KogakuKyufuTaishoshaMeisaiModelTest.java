@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbc.model;
 
 import jp.co.ndensan.reams.db.dbc.model.KogakuKyufuTaishoshaMeisaiModel;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3054KogakuKyufuTaishoshaMeisaiEntityGenerator;
+import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3054KogakuKyufuTaishoshaMeisaiEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -57,12 +57,6 @@ public class KogakuKyufuTaishoshaMeisaiModelTest extends DbzTestBase {
         }
 
         @Test
-        public void 戻り値の処理日時は_設定した値と同じ処理日時を返す() {
-            sut.set処理日時(DbT3054KogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_処理日時);
-            assertThat(sut.get処理日時(), is(DbT3054KogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_処理日時));
-        }
-
-        @Test
         public void 戻り値のサービス費用合計額は_設定した値と同じサービス費用合計額を返す() {
             sut.setサービス費用合計額(DbT3054KogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス費用合計額);
             assertThat(sut.getサービス費用合計額(), is(DbT3054KogakuKyufuTaishoshaMeisaiEntityGenerator.DEFAULT_サービス費用合計額));
@@ -94,10 +88,10 @@ public class KogakuKyufuTaishoshaMeisaiModelTest extends DbzTestBase {
         // public void 状態Modifinedの取得確認() {
         // KogakuKyufuTaishoshaMeisaiModel sut = new KogakuKyufuTaishoshaMeisaiModel();
         //sut.setEntity(DbT3054KogakuKyufuTaishoshaMeisaiEntityGenerator.createDbT3054KogakuKyufuTaishoshaMeisaiEntity());
-           // sut.getEntity().initializeMd5();
-            // TODO主キー以外の項目を変更してください
+        // sut.getEntity().initializeMd5();
+        // TODO主キー以外の項目を変更してください
         //sut.getEntity().setXXX(new XXX());
-            //assertThat(sut.getState(), is(EntityDataState.Modified));
+        //assertThat(sut.getState(), is(EntityDataState.Modified));
         //}
         @Test
         public void 状態Unchangedの取得確認() {
