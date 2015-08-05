@@ -10,12 +10,15 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 
 /**
  * 支払方法変更減額明細テーブルのエンティティクラスです。
  */
 public class DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity extends DbTableEntityBase<DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4026ShiharaiHohoHenkoGengakuMeisai");
 
@@ -28,9 +31,9 @@ public class DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity extends DbTableEntityBa
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     @PrimaryKey
     private RString kanriKubun;
     @PrimaryKey
@@ -41,7 +44,7 @@ public class DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity extends DbTableEntityBa
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -50,7 +53,7 @@ public class DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity extends DbTableEntityBa
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -59,7 +62,7 @@ public class DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity extends DbTableEntityBa
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -68,17 +71,16 @@ public class DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity extends DbTableEntityBa
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -87,43 +89,43 @@ public class DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity extends DbTableEntityBa
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD015ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+    public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD015ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * 管理区分のgetメソッドです。
-     * 
+     *
      * @return 管理区分
      */
     public RString getKanriKubun() {
@@ -132,7 +134,7 @@ public class DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity extends DbTableEntityBa
 
     /**
      * 管理区分のsetメソッドです。
-     * 
+     *
      * @param kanriKubun 管理区分
      */
     public void setKanriKubun(RString kanriKubun) {
@@ -141,7 +143,7 @@ public class DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity extends DbTableEntityBa
 
     /**
      * 対象年度のgetメソッドです。
-     * 
+     *
      * @return 対象年度
      */
     public FlexibleYear getTaishoNendo() {
@@ -150,7 +152,7 @@ public class DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity extends DbTableEntityBa
 
     /**
      * 対象年度のsetメソッドです。
-     * 
+     *
      * @param taishoNendo 対象年度
      */
     public void setTaishoNendo(FlexibleYear taishoNendo) {
@@ -159,7 +161,7 @@ public class DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity extends DbTableEntityBa
 
     /**
      * 履歴番号のgetメソッドです。
-     * 
+     *
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -168,7 +170,7 @@ public class DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity extends DbTableEntityBa
 
     /**
      * 履歴番号のsetメソッドです。
-     * 
+     *
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(int rirekiNo) {
@@ -177,7 +179,7 @@ public class DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity extends DbTableEntityBa
 
     /**
      * 未納・時効消滅減額のgetメソッドです。
-     * 
+     *
      * @return 未納・時効消滅減額
      */
     public Decimal getMino_JikoShometsuGengaku() {
@@ -186,7 +188,7 @@ public class DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity extends DbTableEntityBa
 
     /**
      * 未納・時効消滅減額のsetメソッドです。
-     * 
+     *
      * @param mino_JikoShometsuGengaku 未納・時効消滅減額
      */
     public void setMino_JikoShometsuGengaku(Decimal mino_JikoShometsuGengaku) {
@@ -195,9 +197,9 @@ public class DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity extends DbTableEntityBa
 
     /**
      * このエンティティの主キーが他の{@literal DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -238,6 +240,7 @@ public class DbT4026ShiharaiHohoHenkoGengakuMeisaiEntity extends DbTableEntityBa
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

@@ -10,12 +10,17 @@ import java.util.UUID;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
 
 /**
  * 給付実績高額介護サービス費テーブルのエンティティクラスです。
  */
 public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntityBase<DbT3028KyufujissekiKogakuKaigoServicehiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3028KyufujissekiKogakuKaigoServicehi");
 
@@ -28,15 +33,15 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD009KokanShikibetsuNo kokanJohoShikibetsuNo;
+    private KokanShikibetsuNo kokanJohoShikibetsuNo;
     @PrimaryKey
-    private DbUDD010NyuryokuShikibetsuNo inputShikibetsuNo;
+    private NyuryokuShikibetsuNo inputShikibetsuNo;
     @PrimaryKey
     private RString recodeShubetsuCode;
     @PrimaryKey
-    private DbUDD003HokenshaNo shokisaiHokenshaNo;
+    private HokenshaNo shokisaiHokenshaNo;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hiHokenshaNo;
+    private HihokenshaNo hiHokenshaNo;
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
@@ -68,7 +73,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -77,7 +82,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -86,7 +91,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -95,17 +100,16 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -114,43 +118,43 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 交換情報識別番号のgetメソッドです。
-     * 
+     *
      * @return 交換情報識別番号
      */
-    public DbUDD009KokanShikibetsuNo getKokanJohoShikibetsuNo() {
+    public KokanShikibetsuNo getKokanJohoShikibetsuNo() {
         return kokanJohoShikibetsuNo;
     }
 
     /**
      * 交換情報識別番号のsetメソッドです。
-     * 
+     *
      * @param kokanJohoShikibetsuNo 交換情報識別番号
      */
-    public void setKokanJohoShikibetsuNo(DbUDD009KokanShikibetsuNo kokanJohoShikibetsuNo) {
+    public void setKokanJohoShikibetsuNo(KokanShikibetsuNo kokanJohoShikibetsuNo) {
         this.kokanJohoShikibetsuNo = kokanJohoShikibetsuNo;
     }
 
     /**
      * 入力識別番号のgetメソッドです。
-     * 
+     *
      * @return 入力識別番号
      */
-    public DbUDD010NyuryokuShikibetsuNo getInputShikibetsuNo() {
+    public NyuryokuShikibetsuNo getInputShikibetsuNo() {
         return inputShikibetsuNo;
     }
 
     /**
      * 入力識別番号のsetメソッドです。
-     * 
+     *
      * @param inputShikibetsuNo 入力識別番号
      */
-    public void setInputShikibetsuNo(DbUDD010NyuryokuShikibetsuNo inputShikibetsuNo) {
+    public void setInputShikibetsuNo(NyuryokuShikibetsuNo inputShikibetsuNo) {
         this.inputShikibetsuNo = inputShikibetsuNo;
     }
 
     /**
      * レコード種別コードのgetメソッドです。
-     * 
+     *
      * @return レコード種別コード
      */
     public RString getRecodeShubetsuCode() {
@@ -159,7 +163,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * レコード種別コードのsetメソッドです。
-     * 
+     *
      * @param recodeShubetsuCode レコード種別コード
      */
     public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
@@ -168,43 +172,43 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD003HokenshaNo getShokisaiHokenshaNo() {
+    public HokenshaNo getShokisaiHokenshaNo() {
         return shokisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shokisaiHokenshaNo 証記載保険者番号
      */
-    public void setShokisaiHokenshaNo(DbUDD003HokenshaNo shokisaiHokenshaNo) {
+    public void setShokisaiHokenshaNo(HokenshaNo shokisaiHokenshaNo) {
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHiHokenshaNo() {
+    public HihokenshaNo getHiHokenshaNo() {
         return hiHokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(DbUDD002HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
     /**
      * サービス提供年月のgetメソッドです。
-     * 
+     *
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -213,7 +217,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * サービス提供年月のsetメソッドです。
-     * 
+     *
      * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -222,7 +226,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 通し番号のgetメソッドです。
-     * 
+     *
      * @return 通し番号
      */
     public RString getToshiNo() {
@@ -231,7 +235,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 通し番号のsetメソッドです。
-     * 
+     *
      * @param toshiNo 通し番号
      */
     public void setToshiNo(RString toshiNo) {
@@ -240,7 +244,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 給付実績情報作成区分コードのgetメソッドです。
-     * 
+     *
      * @return 給付実績情報作成区分コード
      */
     public RString getKyufuSakuseiKubunCode() {
@@ -249,7 +253,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 給付実績情報作成区分コードのsetメソッドです。
-     * 
+     *
      * @param kyufuSakuseiKubunCode 給付実績情報作成区分コード
      */
     public void setKyufuSakuseiKubunCode(RString kyufuSakuseiKubunCode) {
@@ -258,7 +262,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 給付実績区分コードのgetメソッドです。
-     * 
+     *
      * @return 給付実績区分コード
      */
     public RString getKyufuJissekiKubunCode() {
@@ -267,7 +271,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 給付実績区分コードのsetメソッドです。
-     * 
+     *
      * @param kyufuJissekiKubunCode 給付実績区分コード
      */
     public void setKyufuJissekiKubunCode(RString kyufuJissekiKubunCode) {
@@ -276,7 +280,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 受付年月日のgetメソッドです。
-     * 
+     *
      * @return 受付年月日
      */
     public FlexibleDate getUketsukeYMD() {
@@ -285,7 +289,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 受付年月日のsetメソッドです。
-     * 
+     *
      * @param uketsukeYMD 受付年月日
      */
     public void setUketsukeYMD(FlexibleDate uketsukeYMD) {
@@ -294,7 +298,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 決定年月日のgetメソッドです。
-     * 
+     *
      * @return 決定年月日
      */
     public FlexibleDate getKetteiYMD() {
@@ -303,7 +307,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 決定年月日のsetメソッドです。
-     * 
+     *
      * @param ketteiYMD 決定年月日
      */
     public void setKetteiYMD(FlexibleDate ketteiYMD) {
@@ -312,7 +316,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費１負担番号のgetメソッドです。
-     * 
+     *
      * @return 公費１負担番号
      */
     public RString getKohi1FutanNo() {
@@ -321,7 +325,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費１負担番号のsetメソッドです。
-     * 
+     *
      * @param kohi1FutanNo 公費１負担番号
      */
     public void setKohi1FutanNo(RString kohi1FutanNo) {
@@ -330,7 +334,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費２負担番号のgetメソッドです。
-     * 
+     *
      * @return 公費２負担番号
      */
     public RString getKohi2FutanNo() {
@@ -339,7 +343,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費２負担番号のsetメソッドです。
-     * 
+     *
      * @param kohi2FutanNo 公費２負担番号
      */
     public void setKohi2FutanNo(RString kohi2FutanNo) {
@@ -348,7 +352,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費３負担番号のgetメソッドです。
-     * 
+     *
      * @return 公費３負担番号
      */
     public RString getKohi3FutanNo() {
@@ -357,7 +361,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費３負担番号のsetメソッドです。
-     * 
+     *
      * @param kohi3FutanNo 公費３負担番号
      */
     public void setKohi3FutanNo(RString kohi3FutanNo) {
@@ -366,7 +370,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 利用者負担額のgetメソッドです。
-     * 
+     *
      * @return 利用者負担額
      */
     public int getRiyoshaFutangaku() {
@@ -375,7 +379,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 利用者負担額のsetメソッドです。
-     * 
+     *
      * @param riyoshaFutangaku 利用者負担額
      */
     public void setRiyoshaFutangaku(int riyoshaFutangaku) {
@@ -384,7 +388,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費１負担額のgetメソッドです。
-     * 
+     *
      * @return 公費１負担額
      */
     public int getKohi1Futangaku() {
@@ -393,7 +397,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費１負担額のsetメソッドです。
-     * 
+     *
      * @param kohi1Futangaku 公費１負担額
      */
     public void setKohi1Futangaku(int kohi1Futangaku) {
@@ -402,7 +406,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費２負担額のgetメソッドです。
-     * 
+     *
      * @return 公費２負担額
      */
     public int getKohi2Futangaku() {
@@ -411,7 +415,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費２負担額のsetメソッドです。
-     * 
+     *
      * @param kohi2Futangaku 公費２負担額
      */
     public void setKohi2Futangaku(int kohi2Futangaku) {
@@ -420,7 +424,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費３負担額のgetメソッドです。
-     * 
+     *
      * @return 公費３負担額
      */
     public int getKohi3Futangaku() {
@@ -429,7 +433,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費３負担額のsetメソッドです。
-     * 
+     *
      * @param kohi3Futangaku 公費３負担額
      */
     public void setKohi3Futangaku(int kohi3Futangaku) {
@@ -438,7 +442,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 支給額のgetメソッドです。
-     * 
+     *
      * @return 支給額
      */
     public int getShikyugaku() {
@@ -447,7 +451,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 支給額のsetメソッドです。
-     * 
+     *
      * @param shikyugaku 支給額
      */
     public void setShikyugaku(int shikyugaku) {
@@ -456,7 +460,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費１支給額のgetメソッドです。
-     * 
+     *
      * @return 公費１支給額
      */
     public int getKohi1Shikyugaku() {
@@ -465,7 +469,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費１支給額のsetメソッドです。
-     * 
+     *
      * @param kohi1Shikyugaku 公費１支給額
      */
     public void setKohi1Shikyugaku(int kohi1Shikyugaku) {
@@ -474,7 +478,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費２支給額のgetメソッドです。
-     * 
+     *
      * @return 公費２支給額
      */
     public int getKohi2Shikyugaku() {
@@ -483,7 +487,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費２支給額のsetメソッドです。
-     * 
+     *
      * @param kohi2Shikyugaku 公費２支給額
      */
     public void setKohi2Shikyugaku(int kohi2Shikyugaku) {
@@ -492,7 +496,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費３支給額のgetメソッドです。
-     * 
+     *
      * @return 公費３支給額
      */
     public int getKohi3Shikyugaku() {
@@ -501,7 +505,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 公費３支給額のsetメソッドです。
-     * 
+     *
      * @param kohi3Shikyugaku 公費３支給額
      */
     public void setKohi3Shikyugaku(int kohi3Shikyugaku) {
@@ -510,7 +514,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 審査年月のgetメソッドです。
-     * 
+     *
      * @return 審査年月
      */
     public FlexibleYearMonth getShinsaYM() {
@@ -519,7 +523,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 審査年月のsetメソッドです。
-     * 
+     *
      * @param shinsaYM 審査年月
      */
     public void setShinsaYM(FlexibleYearMonth shinsaYM) {
@@ -528,7 +532,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 整理番号のgetメソッドです。
-     * 
+     *
      * @return 整理番号
      */
     public RString getSeiriNo() {
@@ -537,7 +541,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 整理番号のsetメソッドです。
-     * 
+     *
      * @param seiriNo 整理番号
      */
     public void setSeiriNo(RString seiriNo) {
@@ -546,7 +550,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 送付年月のgetメソッドです。
-     * 
+     *
      * @return 送付年月
      */
     public FlexibleYearMonth getSofuYM() {
@@ -555,7 +559,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 送付年月のsetメソッドです。
-     * 
+     *
      * @param sofuYM 送付年月
      */
     public void setSofuYM(FlexibleYearMonth sofuYM) {
@@ -564,7 +568,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 取込年月のgetメソッドです。
-     * 
+     *
      * @return 取込年月
      */
     public FlexibleYearMonth getTorikomiYM() {
@@ -573,7 +577,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 取込年月のsetメソッドです。
-     * 
+     *
      * @param torikomiYM 取込年月
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -584,7 +588,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
      * 作成区分のgetメソッドです。
      * <br/>
      * <br/>0：国保連受取　1：独自作成
-     * 
+     *
      * @return 作成区分
      */
     public RString getSakuseiKubun() {
@@ -595,7 +599,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
      * 作成区分のsetメソッドです。
      * <br/>
      * <br/>0：国保連受取　1：独自作成
-     * 
+     *
      * @param sakuseiKubun 作成区分
      */
     public void setSakuseiKubun(RString sakuseiKubun) {
@@ -607,7 +611,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
      * <br/>
      * <br/>高額申請管理ﾏｽﾀの"管理番号"とﾘﾝｸ
      * <br/>高額支給申請書更新時のみ設定される
-     * 
+     *
      * @return 管理番号
      */
     public RString getKanriNo() {
@@ -619,7 +623,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
      * <br/>
      * <br/>高額申請管理ﾏｽﾀの"管理番号"とﾘﾝｸ
      * <br/>高額支給申請書更新時のみ設定される
-     * 
+     *
      * @param kanriNo 管理番号
      */
     public void setKanriNo(RString kanriNo) {
@@ -628,7 +632,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 保険者保有給付実績情報削除済フラグのgetメソッドです。
-     * 
+     *
      * @return 保険者保有給付実績情報削除済フラグ
      */
     public boolean getHokenshaHoyuKyufujissekiJohoSakujoZumiFlag() {
@@ -637,7 +641,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * 保険者保有給付実績情報削除済フラグのsetメソッドです。
-     * 
+     *
      * @param hokenshaHoyuKyufujissekiJohoSakujoZumiFlag 保険者保有給付実績情報削除済フラグ
      */
     public void setHokenshaHoyuKyufujissekiJohoSakujoZumiFlag(boolean hokenshaHoyuKyufujissekiJohoSakujoZumiFlag) {
@@ -646,9 +650,9 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * このエンティティの主キーが他の{@literal DbT3028KyufujissekiKogakuKaigoServicehiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3028KyufujissekiKogakuKaigoServicehiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -724,6 +728,7 @@ public class DbT3028KyufujissekiKogakuKaigoServicehiEntity extends DbTableEntity
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

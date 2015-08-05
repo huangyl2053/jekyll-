@@ -11,12 +11,17 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShinseishoKanriNo;
 
 /**
  * 要介護認定調査スケジュールテーブルのエンティティクラスです。
  */
 public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107NinteichosaScheduleEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5107NinteichosaSchedule");
 
@@ -29,11 +34,11 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD013ShinseishoKanriNo shinseishoKanriNo;
+    private ShinseishoKanriNo shinseishoKanriNo;
     @PrimaryKey
     private int remban;
-    private DbUDD003HokenshaNo shoKisaiHokenshaNo;
-    private DbUDD004JigyoshaNo chosaItakusakiCode;
+    private HokenshaNo shoKisaiHokenshaNo;
+    private JigyoshaNo chosaItakusakiCode;
     private RString chosainCode;
     private FlexibleDate ninteichosaYoteiYMD;
     private RString ninteichosaYoteiKaishiTime;
@@ -43,12 +48,12 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
     private RString ninteichosaShuryoTime;
     private ChikuCode chosaBashoChikuCode;
     private Code visitShurui;
-    private DbUDD002HihokenshaNo hihokenshaNo;
+    private HihokenshaNo hihokenshaNo;
     private RString memo;
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -57,7 +62,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -66,7 +71,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -75,17 +80,16 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -94,25 +98,25 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 申請書管理番号のgetメソッドです。
-     * 
+     *
      * @return 申請書管理番号
      */
-    public DbUDD013ShinseishoKanriNo getShinseishoKanriNo() {
+    public ShinseishoKanriNo getShinseishoKanriNo() {
         return shinseishoKanriNo;
     }
 
     /**
      * 申請書管理番号のsetメソッドです。
-     * 
+     *
      * @param shinseishoKanriNo 申請書管理番号
      */
-    public void setShinseishoKanriNo(DbUDD013ShinseishoKanriNo shinseishoKanriNo) {
+    public void setShinseishoKanriNo(ShinseishoKanriNo shinseishoKanriNo) {
         this.shinseishoKanriNo = shinseishoKanriNo;
     }
 
     /**
      * 連番のgetメソッドです。
-     * 
+     *
      * @return 連番
      */
     public int getRemban() {
@@ -121,7 +125,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 連番のsetメソッドです。
-     * 
+     *
      * @param remban 連番
      */
     public void setRemban(int remban) {
@@ -130,43 +134,43 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD003HokenshaNo getShoKisaiHokenshaNo() {
+    public HokenshaNo getShoKisaiHokenshaNo() {
         return shoKisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shoKisaiHokenshaNo 証記載保険者番号
      */
-    public void setShoKisaiHokenshaNo(DbUDD003HokenshaNo shoKisaiHokenshaNo) {
+    public void setShoKisaiHokenshaNo(HokenshaNo shoKisaiHokenshaNo) {
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 
     /**
      * 認定調査委託先コードのgetメソッドです。
-     * 
+     *
      * @return 認定調査委託先コード
      */
-    public DbUDD004JigyoshaNo getChosaItakusakiCode() {
+    public JigyoshaNo getChosaItakusakiCode() {
         return chosaItakusakiCode;
     }
 
     /**
      * 認定調査委託先コードのsetメソッドです。
-     * 
+     *
      * @param chosaItakusakiCode 認定調査委託先コード
      */
-    public void setChosaItakusakiCode(DbUDD004JigyoshaNo chosaItakusakiCode) {
+    public void setChosaItakusakiCode(JigyoshaNo chosaItakusakiCode) {
         this.chosaItakusakiCode = chosaItakusakiCode;
     }
 
     /**
      * 認定調査員コードのgetメソッドです。
-     * 
+     *
      * @return 認定調査員コード
      */
     public RString getChosainCode() {
@@ -175,7 +179,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 認定調査員コードのsetメソッドです。
-     * 
+     *
      * @param chosainCode 認定調査員コード
      */
     public void setChosainCode(RString chosainCode) {
@@ -184,7 +188,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 認定調査予定年月日のgetメソッドです。
-     * 
+     *
      * @return 認定調査予定年月日
      */
     public FlexibleDate getNinteichosaYoteiYMD() {
@@ -193,7 +197,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 認定調査予定年月日のsetメソッドです。
-     * 
+     *
      * @param ninteichosaYoteiYMD 認定調査予定年月日
      */
     public void setNinteichosaYoteiYMD(FlexibleDate ninteichosaYoteiYMD) {
@@ -202,7 +206,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 認定調査予定開始時間のgetメソッドです。
-     * 
+     *
      * @return 認定調査予定開始時間
      */
     public RString getNinteichosaYoteiKaishiTime() {
@@ -211,7 +215,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 認定調査予定開始時間のsetメソッドです。
-     * 
+     *
      * @param ninteichosaYoteiKaishiTime 認定調査予定開始時間
      */
     public void setNinteichosaYoteiKaishiTime(RString ninteichosaYoteiKaishiTime) {
@@ -220,7 +224,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 認定調査予定終了時間のgetメソッドです。
-     * 
+     *
      * @return 認定調査予定終了時間
      */
     public RString getNinteichosaYoteiShuryoTime() {
@@ -229,7 +233,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 認定調査予定終了時間のsetメソッドです。
-     * 
+     *
      * @param ninteichosaYoteiShuryoTime 認定調査予定終了時間
      */
     public void setNinteichosaYoteiShuryoTime(RString ninteichosaYoteiShuryoTime) {
@@ -238,7 +242,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 一日最大調査件数のgetメソッドです。
-     * 
+     *
      * @return 一日最大調査件数
      */
     public int getIchinichiMaxKensu() {
@@ -247,7 +251,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 一日最大調査件数のsetメソッドです。
-     * 
+     *
      * @param ichinichiMaxKensu 一日最大調査件数
      */
     public void setIchinichiMaxKensu(int ichinichiMaxKensu) {
@@ -256,7 +260,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 認定調査開始時間のgetメソッドです。
-     * 
+     *
      * @return 認定調査開始時間
      */
     public RString getNinteichosaKaishiTime() {
@@ -265,7 +269,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 認定調査開始時間のsetメソッドです。
-     * 
+     *
      * @param ninteichosaKaishiTime 認定調査開始時間
      */
     public void setNinteichosaKaishiTime(RString ninteichosaKaishiTime) {
@@ -274,7 +278,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 認定調査終了時間のgetメソッドです。
-     * 
+     *
      * @return 認定調査終了時間
      */
     public RString getNinteichosaShuryoTime() {
@@ -283,7 +287,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 認定調査終了時間のsetメソッドです。
-     * 
+     *
      * @param ninteichosaShuryoTime 認定調査終了時間
      */
     public void setNinteichosaShuryoTime(RString ninteichosaShuryoTime) {
@@ -292,7 +296,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 調査場所コードのgetメソッドです。
-     * 
+     *
      * @return 調査場所コード
      */
     public ChikuCode getChosaBashoChikuCode() {
@@ -301,7 +305,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 調査場所コードのsetメソッドです。
-     * 
+     *
      * @param chosaBashoChikuCode 調査場所コード
      */
     public void setChosaBashoChikuCode(ChikuCode chosaBashoChikuCode) {
@@ -310,7 +314,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 訪問種類のgetメソッドです。
-     * 
+     *
      * @return 訪問種類
      */
     public Code getVisitShurui() {
@@ -319,7 +323,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 訪問種類のsetメソッドです。
-     * 
+     *
      * @param visitShurui 訪問種類
      */
     public void setVisitShurui(Code visitShurui) {
@@ -328,25 +332,25 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHihokenshaNo() {
+    public HihokenshaNo getHihokenshaNo() {
         return hihokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hihokenshaNo 被保険者番号
      */
-    public void setHihokenshaNo(DbUDD002HihokenshaNo hihokenshaNo) {
+    public void setHihokenshaNo(HihokenshaNo hihokenshaNo) {
         this.hihokenshaNo = hihokenshaNo;
     }
 
     /**
      * メモのgetメソッドです。
-     * 
+     *
      * @return メモ
      */
     public RString getMemo() {
@@ -355,7 +359,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * メモのsetメソッドです。
-     * 
+     *
      * @param memo メモ
      */
     public void setMemo(RString memo) {
@@ -364,9 +368,9 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * このエンティティの主キーが他の{@literal DbT5107NinteichosaScheduleEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5107NinteichosaScheduleEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -407,6 +411,7 @@ public class DbT5107NinteichosaScheduleEntity extends DbTableEntityBase<DbT5107N
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override

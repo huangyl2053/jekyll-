@@ -11,12 +11,19 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.KokanShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ServiceCode;
 
 /**
  * 給付実績ケアマネジメント費テーブルのエンティティクラスです。
  */
 public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase<DbT3031KyufuJissekiCareManagementHiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3031KyufuJissekiCareManagementHi");
 
@@ -29,19 +36,19 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
     @PrimaryKey
-    private DbUDD009KokanShikibetsuNo kokanJohoShikibetsuNo;
+    private KokanShikibetsuNo kokanJohoShikibetsuNo;
     @PrimaryKey
-    private DbUDD010NyuryokuShikibetsuNo inputShikibetsuNo;
+    private NyuryokuShikibetsuNo inputShikibetsuNo;
     @PrimaryKey
     private RString recodeShubetsuCode;
     @PrimaryKey
-    private DbUDD003HokenshaNo shokisaiHokenshaNo;
+    private HokenshaNo shokisaiHokenshaNo;
     @PrimaryKey
-    private DbUDD002HihokenshaNo hiHokenshaNo;
+    private HihokenshaNo hiHokenshaNo;
     @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @PrimaryKey
-    private DbUDD004JigyoshaNo jigyoshoNo;
+    private JigyoshaNo jigyoshoNo;
     @PrimaryKey
     private RString shiteiKijungaitoJigyoshoKubunCode;
     @PrimaryKey
@@ -51,7 +58,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
     @PrimaryKey
     private RString servicePlanhiMeisaiLineNo;
     private Decimal tanisuTanka;
-    private DbUDD007ServiceCode serviceCode;
+    private ServiceCode serviceCode;
     private int tanisu;
     private int kaisu;
     private int serviceTanisu;
@@ -74,7 +81,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -83,7 +90,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -92,7 +99,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -101,17 +108,16 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -120,43 +126,43 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 交換情報識別番号のgetメソッドです。
-     * 
+     *
      * @return 交換情報識別番号
      */
-    public DbUDD009KokanShikibetsuNo getKokanJohoShikibetsuNo() {
+    public KokanShikibetsuNo getKokanJohoShikibetsuNo() {
         return kokanJohoShikibetsuNo;
     }
 
     /**
      * 交換情報識別番号のsetメソッドです。
-     * 
+     *
      * @param kokanJohoShikibetsuNo 交換情報識別番号
      */
-    public void setKokanJohoShikibetsuNo(DbUDD009KokanShikibetsuNo kokanJohoShikibetsuNo) {
+    public void setKokanJohoShikibetsuNo(KokanShikibetsuNo kokanJohoShikibetsuNo) {
         this.kokanJohoShikibetsuNo = kokanJohoShikibetsuNo;
     }
 
     /**
      * 入力識別番号のgetメソッドです。
-     * 
+     *
      * @return 入力識別番号
      */
-    public DbUDD010NyuryokuShikibetsuNo getInputShikibetsuNo() {
+    public NyuryokuShikibetsuNo getInputShikibetsuNo() {
         return inputShikibetsuNo;
     }
 
     /**
      * 入力識別番号のsetメソッドです。
-     * 
+     *
      * @param inputShikibetsuNo 入力識別番号
      */
-    public void setInputShikibetsuNo(DbUDD010NyuryokuShikibetsuNo inputShikibetsuNo) {
+    public void setInputShikibetsuNo(NyuryokuShikibetsuNo inputShikibetsuNo) {
         this.inputShikibetsuNo = inputShikibetsuNo;
     }
 
     /**
      * レコード種別コードのgetメソッドです。
-     * 
+     *
      * @return レコード種別コード
      */
     public RString getRecodeShubetsuCode() {
@@ -165,7 +171,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * レコード種別コードのsetメソッドです。
-     * 
+     *
      * @param recodeShubetsuCode レコード種別コード
      */
     public void setRecodeShubetsuCode(RString recodeShubetsuCode) {
@@ -174,43 +180,43 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 証記載保険者番号のgetメソッドです。
-     * 
+     *
      * @return 証記載保険者番号
      */
-    public DbUDD003HokenshaNo getShokisaiHokenshaNo() {
+    public HokenshaNo getShokisaiHokenshaNo() {
         return shokisaiHokenshaNo;
     }
 
     /**
      * 証記載保険者番号のsetメソッドです。
-     * 
+     *
      * @param shokisaiHokenshaNo 証記載保険者番号
      */
-    public void setShokisaiHokenshaNo(DbUDD003HokenshaNo shokisaiHokenshaNo) {
+    public void setShokisaiHokenshaNo(HokenshaNo shokisaiHokenshaNo) {
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
     /**
      * 被保険者番号のgetメソッドです。
-     * 
+     *
      * @return 被保険者番号
      */
-    public DbUDD002HihokenshaNo getHiHokenshaNo() {
+    public HihokenshaNo getHiHokenshaNo() {
         return hiHokenshaNo;
     }
 
     /**
      * 被保険者番号のsetメソッドです。
-     * 
+     *
      * @param hiHokenshaNo 被保険者番号
      */
-    public void setHiHokenshaNo(DbUDD002HihokenshaNo hiHokenshaNo) {
+    public void setHiHokenshaNo(HihokenshaNo hiHokenshaNo) {
         this.hiHokenshaNo = hiHokenshaNo;
     }
 
     /**
      * サービス提供年月のgetメソッドです。
-     * 
+     *
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -219,7 +225,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * サービス提供年月のsetメソッドです。
-     * 
+     *
      * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(FlexibleYearMonth serviceTeikyoYM) {
@@ -228,25 +234,25 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 事業所番号のgetメソッドです。
-     * 
+     *
      * @return 事業所番号
      */
-    public DbUDD004JigyoshaNo getJigyoshoNo() {
+    public JigyoshaNo getJigyoshoNo() {
         return jigyoshoNo;
     }
 
     /**
      * 事業所番号のsetメソッドです。
-     * 
+     *
      * @param jigyoshoNo 事業所番号
      */
-    public void setJigyoshoNo(DbUDD004JigyoshaNo jigyoshoNo) {
+    public void setJigyoshoNo(JigyoshaNo jigyoshoNo) {
         this.jigyoshoNo = jigyoshoNo;
     }
 
     /**
      * 指定／基準該当事業所区分コードのgetメソッドです。
-     * 
+     *
      * @return 指定／基準該当事業所区分コード
      */
     public RString getShiteiKijungaitoJigyoshoKubunCode() {
@@ -255,7 +261,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 指定／基準該当事業所区分コードのsetメソッドです。
-     * 
+     *
      * @param shiteiKijungaitoJigyoshoKubunCode 指定／基準該当事業所区分コード
      */
     public void setShiteiKijungaitoJigyoshoKubunCode(RString shiteiKijungaitoJigyoshoKubunCode) {
@@ -264,7 +270,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 居宅サービス計画作成依頼届出年月日のgetメソッドです。
-     * 
+     *
      * @return 居宅サービス計画作成依頼届出年月日
      */
     public FlexibleDate getKyotakuServiceSakuseiIraiYMD() {
@@ -273,7 +279,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 居宅サービス計画作成依頼届出年月日のsetメソッドです。
-     * 
+     *
      * @param kyotakuServiceSakuseiIraiYMD 居宅サービス計画作成依頼届出年月日
      */
     public void setKyotakuServiceSakuseiIraiYMD(FlexibleDate kyotakuServiceSakuseiIraiYMD) {
@@ -282,7 +288,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 通し番号のgetメソッドです。
-     * 
+     *
      * @return 通し番号
      */
     public RString getToshiNo() {
@@ -291,7 +297,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 通し番号のsetメソッドです。
-     * 
+     *
      * @param toshiNo 通し番号
      */
     public void setToshiNo(RString toshiNo) {
@@ -300,7 +306,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * サービス計画費明細行番号のgetメソッドです。
-     * 
+     *
      * @return サービス計画費明細行番号
      */
     public RString getServicePlanhiMeisaiLineNo() {
@@ -309,7 +315,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * サービス計画費明細行番号のsetメソッドです。
-     * 
+     *
      * @param servicePlanhiMeisaiLineNo サービス計画費明細行番号
      */
     public void setServicePlanhiMeisaiLineNo(RString servicePlanhiMeisaiLineNo) {
@@ -318,7 +324,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 単位数単価のgetメソッドです。
-     * 
+     *
      * @return 単位数単価
      */
     public Decimal getTanisuTanka() {
@@ -327,7 +333,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 単位数単価のsetメソッドです。
-     * 
+     *
      * @param tanisuTanka 単位数単価
      */
     public void setTanisuTanka(Decimal tanisuTanka) {
@@ -336,25 +342,25 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * サービスコードのgetメソッドです。
-     * 
+     *
      * @return サービスコード
      */
-    public DbUDD007ServiceCode getServiceCode() {
+    public ServiceCode getServiceCode() {
         return serviceCode;
     }
 
     /**
      * サービスコードのsetメソッドです。
-     * 
+     *
      * @param serviceCode サービスコード
      */
-    public void setServiceCode(DbUDD007ServiceCode serviceCode) {
+    public void setServiceCode(ServiceCode serviceCode) {
         this.serviceCode = serviceCode;
     }
 
     /**
      * 単位数のgetメソッドです。
-     * 
+     *
      * @return 単位数
      */
     public int getTanisu() {
@@ -363,7 +369,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 単位数のsetメソッドです。
-     * 
+     *
      * @param tanisu 単位数
      */
     public void setTanisu(int tanisu) {
@@ -372,7 +378,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 回数のgetメソッドです。
-     * 
+     *
      * @return 回数
      */
     public int getKaisu() {
@@ -381,7 +387,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 回数のsetメソッドです。
-     * 
+     *
      * @param kaisu 回数
      */
     public void setKaisu(int kaisu) {
@@ -390,7 +396,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * サービス単位数のgetメソッドです。
-     * 
+     *
      * @return サービス単位数
      */
     public int getServiceTanisu() {
@@ -399,7 +405,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * サービス単位数のsetメソッドです。
-     * 
+     *
      * @param serviceTanisu サービス単位数
      */
     public void setServiceTanisu(int serviceTanisu) {
@@ -408,7 +414,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * サービス単位数合計のgetメソッドです。
-     * 
+     *
      * @return サービス単位数合計
      */
     public int getSerivceTanisuTotal() {
@@ -417,7 +423,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * サービス単位数合計のsetメソッドです。
-     * 
+     *
      * @param serivceTanisuTotal サービス単位数合計
      */
     public void setSerivceTanisuTotal(int serivceTanisuTotal) {
@@ -426,7 +432,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 請求金額のgetメソッドです。
-     * 
+     *
      * @return 請求金額
      */
     public int getSeikyuKingaku() {
@@ -435,7 +441,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 請求金額のsetメソッドです。
-     * 
+     *
      * @param seikyuKingaku 請求金額
      */
     public void setSeikyuKingaku(int seikyuKingaku) {
@@ -444,7 +450,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 担当介護支援専門員番号のgetメソッドです。
-     * 
+     *
      * @return 担当介護支援専門員番号
      */
     public RString getTantoKaigoShienSemmoninNo() {
@@ -453,7 +459,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 担当介護支援専門員番号のsetメソッドです。
-     * 
+     *
      * @param tantoKaigoShienSemmoninNo 担当介護支援専門員番号
      */
     public void setTantoKaigoShienSemmoninNo(RString tantoKaigoShienSemmoninNo) {
@@ -462,7 +468,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 摘要のgetメソッドです。
-     * 
+     *
      * @return 摘要
      */
     public RString getTekiyo() {
@@ -471,7 +477,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 摘要のsetメソッドです。
-     * 
+     *
      * @param tekiyo 摘要
      */
     public void setTekiyo(RString tekiyo) {
@@ -480,7 +486,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 利用者負担額のgetメソッドです。
-     * 
+     *
      * @return 利用者負担額
      */
     public int getRiyoushaFutangaku() {
@@ -489,7 +495,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 利用者負担額のsetメソッドです。
-     * 
+     *
      * @param riyoushaFutangaku 利用者負担額
      */
     public void setRiyoushaFutangaku(int riyoushaFutangaku) {
@@ -498,7 +504,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 後・単位数のgetメソッドです。
-     * 
+     *
      * @return 後・単位数
      */
     public int getAtoTanisu() {
@@ -507,7 +513,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 後・単位数のsetメソッドです。
-     * 
+     *
      * @param atoTanisu 後・単位数
      */
     public void setAtoTanisu(int atoTanisu) {
@@ -516,7 +522,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 後・回数のgetメソッドです。
-     * 
+     *
      * @return 後・回数
      */
     public int getAtoKaisu() {
@@ -525,7 +531,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 後・回数のsetメソッドです。
-     * 
+     *
      * @param atoKaisu 後・回数
      */
     public void setAtoKaisu(int atoKaisu) {
@@ -534,7 +540,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 後・サービス単位数のgetメソッドです。
-     * 
+     *
      * @return 後・サービス単位数
      */
     public int getAtoServiceTanisu() {
@@ -543,7 +549,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 後・サービス単位数のsetメソッドです。
-     * 
+     *
      * @param atoServiceTanisu 後・サービス単位数
      */
     public void setAtoServiceTanisu(int atoServiceTanisu) {
@@ -552,7 +558,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 後・サービス単位数合計のgetメソッドです。
-     * 
+     *
      * @return 後・サービス単位数合計
      */
     public int getAtoServiceTanisuTotal() {
@@ -561,7 +567,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 後・サービス単位数合計のsetメソッドです。
-     * 
+     *
      * @param atoServiceTanisuTotal 後・サービス単位数合計
      */
     public void setAtoServiceTanisuTotal(int atoServiceTanisuTotal) {
@@ -570,7 +576,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 後・請求金額のgetメソッドです。
-     * 
+     *
      * @return 後・請求金額
      */
     public int getAtoSeikyuKingaku() {
@@ -579,7 +585,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 後・請求金額のsetメソッドです。
-     * 
+     *
      * @param atoSeikyuKingaku 後・請求金額
      */
     public void setAtoSeikyuKingaku(int atoSeikyuKingaku) {
@@ -588,7 +594,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 後・利用者負担額のgetメソッドです。
-     * 
+     *
      * @return 後・利用者負担額
      */
     public int getAtoRiyoshaFutangaku() {
@@ -597,7 +603,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 後・利用者負担額のsetメソッドです。
-     * 
+     *
      * @param atoRiyoshaFutangaku 後・利用者負担額
      */
     public void setAtoRiyoshaFutangaku(int atoRiyoshaFutangaku) {
@@ -606,7 +612,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 再審査回数のgetメソッドです。
-     * 
+     *
      * @return 再審査回数
      */
     public int getSaishinsaKaisu() {
@@ -615,7 +621,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 再審査回数のsetメソッドです。
-     * 
+     *
      * @param saishinsaKaisu 再審査回数
      */
     public void setSaishinsaKaisu(int saishinsaKaisu) {
@@ -624,7 +630,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 過誤回数のgetメソッドです。
-     * 
+     *
      * @return 過誤回数
      */
     public int getKagoKaisu() {
@@ -633,7 +639,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 過誤回数のsetメソッドです。
-     * 
+     *
      * @param kagoKaisu 過誤回数
      */
     public void setKagoKaisu(int kagoKaisu) {
@@ -642,7 +648,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 審査年月のgetメソッドです。
-     * 
+     *
      * @return 審査年月
      */
     public FlexibleYearMonth getShinsaYM() {
@@ -651,7 +657,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 審査年月のsetメソッドです。
-     * 
+     *
      * @param shinsaYM 審査年月
      */
     public void setShinsaYM(FlexibleYearMonth shinsaYM) {
@@ -660,7 +666,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 整理番号のgetメソッドです。
-     * 
+     *
      * @return 整理番号
      */
     public RString getSeiriNo() {
@@ -669,7 +675,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 整理番号のsetメソッドです。
-     * 
+     *
      * @param seiriNo 整理番号
      */
     public void setSeiriNo(RString seiriNo) {
@@ -678,7 +684,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 取込年月のgetメソッドです。
-     * 
+     *
      * @return 取込年月
      */
     public FlexibleYearMonth getTorikomiYM() {
@@ -687,7 +693,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * 取込年月のsetメソッドです。
-     * 
+     *
      * @param torikomiYM 取込年月
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -696,9 +702,9 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * このエンティティの主キーが他の{@literal DbT3031KyufuJissekiCareManagementHiEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @@return 
+     * @@return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT3031KyufuJissekiCareManagementHiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -783,6 +789,7 @@ public class DbT3031KyufuJissekiCareManagementHiEntity extends DbTableEntityBase
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
