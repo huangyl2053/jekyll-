@@ -5,9 +5,7 @@
 package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1006KyokaisoGaitoshaEntity;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -19,10 +17,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public final class DbT1006KyokaisoGaitoshaEntityGenerator {
 
-    public static final ShoKisaiHokenshaNo DEFAULT_証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("2"));
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("2"));
     public static final FlexibleDate DEFAULT_境界層措置決定年月日 = new FlexibleDate("20140402");
-    public static final YMDHMS DEFAULT_処理日時 = new YMDHMS(new RString("20140415102030"));
+    public static final int DEFAULT_履歴番号 = 1;
     public static final FlexibleDate DEFAULT_適用開始年月日 = new FlexibleDate("20140402");
     public static final FlexibleDate DEFAULT_適用終了年月日 = new FlexibleDate("20140402");
     public static final RString DEFAULT_給付額減額記載解除フラグ = new RString("1");
@@ -45,10 +42,9 @@ public final class DbT1006KyokaisoGaitoshaEntityGenerator {
 
     public static DbT1006KyokaisoGaitoshaEntity createDbT1006KyokaisoGaitoshaEntity() {
         DbT1006KyokaisoGaitoshaEntity entity = new DbT1006KyokaisoGaitoshaEntity();
-        entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
         entity.setKyokaisoSochiKetteiYMD(DEFAULT_境界層措置決定年月日);
-        entity.setShoriTimestamp(DEFAULT_処理日時);
+        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setTekiyoKaishiYMD(DEFAULT_適用開始年月日);
         entity.setTekiyoShuryoYMD(DEFAULT_適用終了年月日);
         entity.setKyuufugakuGengakuKisaiKiajoFlag(DEFAULT_給付額減額記載解除フラグ);

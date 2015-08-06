@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbx.definition.valueobject.code.KaigoShikakuJutoku
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -31,7 +30,9 @@ public final class DbT1001HihokenshaDaichoEntityGenerator {
 
     public static final LasdecCode DEFAULT_市町村コード = new LasdecCode("202011");
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo("0000000001");
-    public static final ShoriTimestamp DEFAULT_処理日時 = ShoriTimestamp.of(new YMDHMS(new RString("20140415102030")));
+    public static final FlexibleDate DEFAULT_異動日 = new FlexibleDate("20140402");
+    public static final RString DEFAULT_枝番 = new RString("1");
+    public static final RString DEFAULT_異動事由コード = new RString("1");
     public static final ShikibetsuCode DEFAULT_識別コード = new ShikibetsuCode("000001234567890");
     public static final KaigoShikakuShutokuJiyu DEFAULT_資格取得事由コード = new KaigoShikakuShutokuJiyu(new Code("01"));
     public static final FlexibleDate DEFAULT_資格取得年月日 = new FlexibleDate("20140402");
@@ -68,7 +69,9 @@ public final class DbT1001HihokenshaDaichoEntityGenerator {
         DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
         entity.setShichosonCode(DEFAULT_市町村コード);
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
-        entity.setShoriTimestamp(DEFAULT_処理日時);
+        entity.setIdoYMD(DEFAULT_異動日);
+        entity.setEdaNo(DEFAULT_枝番);
+        entity.setIdoJiyuCode(DEFAULT_異動事由コード);
         entity.setShikibetsuCode(DEFAULT_識別コード);
         entity.setShikakuShutokuJiyuCode(DEFAULT_資格取得事由コード);
         entity.setShikakuShutokuYMD(DEFAULT_資格取得年月日);
@@ -91,9 +94,6 @@ public final class DbT1001HihokenshaDaichoEntityGenerator {
         entity.setKoikinaiJushochiTokureiFlag(DEFAULT_広域内住所地特例フラグ.getCode());
         entity.setKoikinaiTokureiSochimotoShichosonCode(DEFAULT_広住特措置元市町村コード);
         entity.setKyuShichosonCode(DEFAULT_旧市町村コード);
-        entity.setSaikofuKubun(DEFAULT_再交付区分.getCode());
-        entity.setSaikofuJiyuCode(DEFAULT_再交付事由コード);
-        entity.setChohyoKofuRirekiID(DEFAULT_帳票交付履歴ID);
         return entity;
     }
 }

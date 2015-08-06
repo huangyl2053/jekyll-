@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbz.entity.basic.helper;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.basic.DbT1013KyokaisoSochiShinseiEntity;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -22,7 +21,7 @@ public final class DbT1013KyokaisoSochiShinseiEntityGenerator {
     public static final ShoKisaiHokenshaNo DEFAULT_証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("2"));
     public static final HihokenshaNo DEFAULT_被保険者番号 = new HihokenshaNo(new RString("2"));
     public static final FlexibleDate DEFAULT_申請年月日 = new FlexibleDate("20140402");
-    public static final YMDHMS DEFAULT_処理日時 = new YMDHMS(new RString("20140415102030"));
+    public static final int DEFAULT_履歴番号 = 1;
     public static final FlexibleDate DEFAULT_受付年月日 = new FlexibleDate("20140402");
     public static final RString DEFAULT_申請_廃止区分 = new RString("1");
     public static final FlexibleDate DEFAULT_申請_廃止年月日 = new FlexibleDate("20140402");
@@ -47,10 +46,9 @@ public final class DbT1013KyokaisoSochiShinseiEntityGenerator {
 
     public static DbT1013KyokaisoSochiShinseiEntity createDbT1013KyokaisoSochiShinseiEntity() {
         DbT1013KyokaisoSochiShinseiEntity entity = new DbT1013KyokaisoSochiShinseiEntity();
-        entity.setShoKisaiHokenshaNo(DEFAULT_証記載保険者番号);
         entity.setHihokenshaNo(DEFAULT_被保険者番号);
         entity.setShinseiYMD(DEFAULT_申請年月日);
-        entity.setShoriTimeStamp(DEFAULT_処理日時);
+        entity.setRirekiNo(DEFAULT_履歴番号);
         entity.setUketsukeYMD(DEFAULT_受付年月日);
         entity.setShinsei_HaishiKubun(DEFAULT_申請_廃止区分);
         entity.setShinsei_HaishiYMD(DEFAULT_申請_廃止年月日);
