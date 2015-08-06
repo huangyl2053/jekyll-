@@ -1,5 +1,5 @@
 /// <reference path='NinteiInput_Design.ts' />
-module DBD
+module DBZ
 {
     export module NinteiInput
     {
@@ -249,7 +249,7 @@ module DBD
     }
 }
 
-module DBD
+module DBZ
 {
     export module NinteiInput
     {
